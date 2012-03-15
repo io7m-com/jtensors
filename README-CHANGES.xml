@@ -13,7 +13,7 @@
     <c:item>
       <c:date>2012-02-11</c:date>
       <c:type-code-fix/>
-      <c:summary>MatrixM3x3F allocated too many bytes (wasted space)</c:summary>
+      <c:summary>MatrixM3x3F allocated too many bytes (wasted memory)</c:summary>
     </c:item>
     <c:item>
       <c:date>2012-02-08</c:date>
