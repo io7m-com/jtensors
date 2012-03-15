@@ -6,7 +6,7 @@
   <property name="dir_xmldoc"  value="doc-out"/>
 
   <property name="project_name"       value="io7m-jtensors"/>
-  <property name="project_version"    value="0.6.0"/>
+  <property name="project_version"    value="1.0.0"/>
   <property name="project_jar"        value="${project_name}-${project_version}.jar"/>
   <property name="project_source_jar" value="${project_name}-source-${project_version}.jar"/>
 
