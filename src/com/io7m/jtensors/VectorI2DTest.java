@@ -115,8 +115,8 @@ public class VectorI2DTest
   {
     final VectorI2D v = new VectorI2D(3.0, 5.0);
 
-    Assert.assertTrue(v.x == v.getXd());
-    Assert.assertTrue(v.y == v.getYd());
+    Assert.assertTrue(v.x == v.getXD());
+    Assert.assertTrue(v.y == v.getYD());
   }
 
   @Test public void testClampByVectorMaximumOrdering()

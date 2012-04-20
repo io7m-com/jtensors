@@ -238,9 +238,9 @@ public class VectorM3ITest
   {
     final VectorM3I v = new VectorM3I(3, 5, 7);
 
-    Assert.assertTrue(v.x == v.getXi());
-    Assert.assertTrue(v.y == v.getYi());
-    Assert.assertTrue(v.z == v.getZi());
+    Assert.assertTrue(v.x == v.getXI());
+    Assert.assertTrue(v.y == v.getYI());
+    Assert.assertTrue(v.z == v.getZI());
   }
 
   @Test public void testClampByVectorMaximumOrdering()

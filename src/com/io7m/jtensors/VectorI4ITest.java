@@ -38,10 +38,10 @@ public class VectorI4ITest
   @Test public void testCheckInterface()
   {
     final VectorI4I v = new VectorI4I(1, 2, 3, 4);
-    Assert.assertEquals(1, v.getXi());
-    Assert.assertEquals(2, v.getYi());
-    Assert.assertEquals(3, v.getZi());
-    Assert.assertEquals(4, v.getWi());
+    Assert.assertEquals(1, v.getXI());
+    Assert.assertEquals(2, v.getYI());
+    Assert.assertEquals(3, v.getZI());
+    Assert.assertEquals(4, v.getWI());
   }
 
   @Test public void testInit()

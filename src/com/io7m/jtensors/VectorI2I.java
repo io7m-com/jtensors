@@ -74,12 +74,12 @@ public final class VectorI2I implements VectorReadable2I
     this.y = y;
   }
 
-  @Override public int getXi()
+  @Override public int getXI()
   {
     return this.x;
   }
 
-  @Override public int getYi()
+  @Override public int getYI()
   {
     return this.y;
   }

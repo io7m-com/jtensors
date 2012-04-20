@@ -263,10 +263,10 @@ public class VectorM4ITest
   {
     final VectorM4I v = new VectorM4I(3, 5, 7, 11);
 
-    Assert.assertTrue(v.x == v.getXi());
-    Assert.assertTrue(v.y == v.getYi());
-    Assert.assertTrue(v.z == v.getZi());
-    Assert.assertTrue(v.w == v.getWi());
+    Assert.assertTrue(v.x == v.getXI());
+    Assert.assertTrue(v.y == v.getYI());
+    Assert.assertTrue(v.z == v.getZI());
+    Assert.assertTrue(v.w == v.getWI());
   }
 
   @Test public void testClampByVectorMaximumOrdering()

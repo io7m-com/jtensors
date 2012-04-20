@@ -408,9 +408,9 @@ public final class VectorI3F implements VectorReadable3F
   public VectorI3F(
     final VectorReadable3F v)
   {
-    this.x = v.getXf();
-    this.y = v.getYf();
-    this.z = v.getZf();
+    this.x = v.getXF();
+    this.y = v.getYF();
+    this.z = v.getZF();
   }
 
   /*
@@ -443,17 +443,17 @@ public final class VectorI3F implements VectorReadable3F
     return true;
   }
 
-  @Override public float getXf()
+  @Override public float getXF()
   {
     return this.x;
   }
 
-  @Override public float getYf()
+  @Override public float getYF()
   {
     return this.y;
   }
 
-  @Override public float getZf()
+  @Override public float getZF()
   {
     return this.z;
   }

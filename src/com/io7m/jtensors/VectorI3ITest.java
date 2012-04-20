@@ -35,9 +35,9 @@ public class VectorI3ITest
   @Test public void testCheckInterface()
   {
     final VectorI3I v = new VectorI3I(1, 2, 3);
-    Assert.assertEquals(1, v.getXi());
-    Assert.assertEquals(2, v.getYi());
-    Assert.assertEquals(3, v.getZi());
+    Assert.assertEquals(1, v.getXI());
+    Assert.assertEquals(2, v.getYI());
+    Assert.assertEquals(3, v.getZI());
   }
 
   @Test public void testInit()

@@ -23,5 +23,5 @@ package com.io7m.jtensors;
 
 public interface VectorReadable4F extends VectorReadable3F
 {
-  float getWf();
+  float getWF();
 }

@@ -915,9 +915,9 @@ public final class MatrixM4x4D
     final VectorReadable3D axis,
     final MatrixM4x4D out)
   {
-    final double ax = axis.getXd();
-    final double ay = axis.getYd();
-    final double az = axis.getZd();
+    final double ax = axis.getXD();
+    final double ay = axis.getYD();
+    final double az = axis.getZD();
 
     final double c = Math.cos(angle);
     final double s = Math.sin(angle);
@@ -995,17 +995,17 @@ public final class MatrixM4x4D
     out.setUnsafe(0, 0, 1.0);
     out.setUnsafe(0, 1, 0.0);
     out.setUnsafe(0, 2, 0.0);
-    out.setUnsafe(0, 3, v.getXd());
+    out.setUnsafe(0, 3, v.getXD());
 
     out.setUnsafe(1, 0, 0.0);
     out.setUnsafe(1, 1, 1.0);
     out.setUnsafe(1, 2, 0.0);
-    out.setUnsafe(1, 3, v.getYd());
+    out.setUnsafe(1, 3, v.getYD());
 
     out.setUnsafe(2, 0, 0.0);
     out.setUnsafe(2, 1, 0.0);
     out.setUnsafe(2, 2, 1.0);
-    out.setUnsafe(2, 3, v.getZd());
+    out.setUnsafe(2, 3, v.getZD());
 
     out.setUnsafe(3, 0, 0.0);
     out.setUnsafe(3, 1, 0.0);
@@ -1182,10 +1182,10 @@ public final class MatrixM4x4D
     final VectorM4D vb,
     final VectorM4D out)
   {
-    vb.x = v.getXd();
-    vb.y = v.getYd();
-    vb.z = v.getZd();
-    vb.w = v.getWd();
+    vb.x = v.getXD();
+    vb.y = v.getYD();
+    vb.z = v.getZD();
+    vb.w = v.getWD();
 
     MatrixM4x4D.rowUnsafe(m, 0, va);
     out.x = VectorM4D.dotProduct(va, vb);
@@ -1622,10 +1622,10 @@ public final class MatrixM4x4D
     final int row,
     final VectorReadable4D v)
   {
-    m.setUnsafe(row, 0, v.getXd());
-    m.setUnsafe(row, 1, v.getYd());
-    m.setUnsafe(row, 2, v.getZd());
-    m.setUnsafe(row, 3, v.getWd());
+    m.setUnsafe(row, 0, v.getXD());
+    m.setUnsafe(row, 1, v.getYD());
+    m.setUnsafe(row, 2, v.getZD());
+    m.setUnsafe(row, 3, v.getWD());
   }
 
   /**
@@ -1663,8 +1663,8 @@ public final class MatrixM4x4D
     final VectorReadable2D v,
     final MatrixM4x4D out)
   {
-    final double vx = v.getXd();
-    final double vy = v.getYd();
+    final double vx = v.getXD();
+    final double vy = v.getYD();
 
     final double c3r0 = (m.getUnsafe(0, 0) * vx) + (m.getUnsafe(0, 1) * vy);
     final double c3r1 = (m.getUnsafe(1, 0) * vx) + (m.getUnsafe(1, 1) * vy);
@@ -1715,9 +1715,9 @@ public final class MatrixM4x4D
     final VectorReadable3D v,
     final MatrixM4x4D out)
   {
-    final double vx = v.getXd();
-    final double vy = v.getYd();
-    final double vz = v.getZd();
+    final double vx = v.getXD();
+    final double vy = v.getYD();
+    final double vz = v.getZD();
 
     final double c3r0 =
       (m.getUnsafe(0, 0) * vx)

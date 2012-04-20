@@ -525,7 +525,7 @@ public final class MatrixM3x3F
    * @return <code>out</code>
    */
 
-  public static VectorM3F multiplyByVector3(
+  public static VectorM3F multiplyByVector3F(
     final MatrixM3x3F m,
     final VectorReadable3F v,
     final VectorM3F out)
@@ -743,9 +743,9 @@ public final class MatrixM3x3F
     final int row,
     final VectorReadable3F v)
   {
-    m.setUnsafe(row, 0, v.getXf());
-    m.setUnsafe(row, 1, v.getYf());
-    m.setUnsafe(row, 2, v.getZf());
+    m.setUnsafe(row, 0, v.getXF());
+    m.setUnsafe(row, 1, v.getYF());
+    m.setUnsafe(row, 2, v.getZF());
   }
 
   /**

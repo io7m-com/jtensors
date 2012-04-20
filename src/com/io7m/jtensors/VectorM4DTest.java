@@ -336,10 +336,10 @@ public class VectorM4DTest
   {
     final VectorM4D v = new VectorM4D(3.0f, 5.0f, 7.0f, 11.0f);
 
-    Assert.assertTrue(v.x == v.getXd());
-    Assert.assertTrue(v.y == v.getYd());
-    Assert.assertTrue(v.z == v.getZd());
-    Assert.assertTrue(v.w == v.getWd());
+    Assert.assertTrue(v.x == v.getXD());
+    Assert.assertTrue(v.y == v.getYD());
+    Assert.assertTrue(v.z == v.getZD());
+    Assert.assertTrue(v.w == v.getWD());
   }
 
   @Test public void testClampByVectorMaximumOrdering()

@@ -919,9 +919,9 @@ public final class MatrixM4x4F
     final VectorReadable3F axis,
     final MatrixM4x4F out)
   {
-    final float ax = axis.getXf();
-    final float ay = axis.getYf();
-    final float az = axis.getZf();
+    final float ax = axis.getXF();
+    final float ay = axis.getYF();
+    final float az = axis.getZF();
 
     final float c = (float) Math.cos(angle);
     final float s = (float) Math.sin(angle);
@@ -999,17 +999,17 @@ public final class MatrixM4x4F
     out.setUnsafe(0, 0, 1.0f);
     out.setUnsafe(0, 1, 0.0f);
     out.setUnsafe(0, 2, 0.0f);
-    out.setUnsafe(0, 3, v.getXf());
+    out.setUnsafe(0, 3, v.getXF());
 
     out.setUnsafe(1, 0, 0.0f);
     out.setUnsafe(1, 1, 1.0f);
     out.setUnsafe(1, 2, 0.0f);
-    out.setUnsafe(1, 3, v.getYf());
+    out.setUnsafe(1, 3, v.getYF());
 
     out.setUnsafe(2, 0, 0.0f);
     out.setUnsafe(2, 1, 0.0f);
     out.setUnsafe(2, 2, 1.0f);
-    out.setUnsafe(2, 3, v.getZf());
+    out.setUnsafe(2, 3, v.getZF());
 
     out.setUnsafe(3, 0, 0.0f);
     out.setUnsafe(3, 1, 0.0f);
@@ -1163,10 +1163,10 @@ public final class MatrixM4x4F
     final VectorM4F vb,
     final VectorM4F out)
   {
-    vb.x = v.getXf();
-    vb.y = v.getYf();
-    vb.z = v.getZf();
-    vb.w = v.getWf();
+    vb.x = v.getXF();
+    vb.y = v.getYF();
+    vb.z = v.getZF();
+    vb.w = v.getWF();
 
     MatrixM4x4F.rowUnsafe(m, 0, va);
     out.x = VectorM4F.dotProduct(va, vb);
@@ -1211,7 +1211,7 @@ public final class MatrixM4x4F
    * @return <code>out</code>
    */
 
-  public static VectorM4F multiplyVector4(
+  public static VectorM4F multiplyVector4F(
     final MatrixM4x4F m,
     final VectorReadable4F v,
     final VectorM4F out)
@@ -1237,7 +1237,7 @@ public final class MatrixM4x4F
    * @return <code>out</code>
    */
 
-  public static VectorM4F multiplyVector4WithContext(
+  public static VectorM4F multiplyVector4FWithContext(
     final Context context,
     final MatrixM4x4F m,
     final VectorReadable4F v,
@@ -1631,10 +1631,10 @@ public final class MatrixM4x4F
     final int row,
     final VectorReadable4F v)
   {
-    m.setUnsafe(row, 0, v.getXf());
-    m.setUnsafe(row, 1, v.getYf());
-    m.setUnsafe(row, 2, v.getZf());
-    m.setUnsafe(row, 3, v.getWf());
+    m.setUnsafe(row, 0, v.getXF());
+    m.setUnsafe(row, 1, v.getYF());
+    m.setUnsafe(row, 2, v.getZF());
+    m.setUnsafe(row, 3, v.getWF());
   }
 
   /**
@@ -1667,13 +1667,13 @@ public final class MatrixM4x4F
    * @return <code>out</code>
    */
 
-  public static MatrixM4x4F translateByVector2(
+  public static MatrixM4x4F translateByVector2F(
     final MatrixM4x4F m,
     final VectorReadable2F v,
     final MatrixM4x4F out)
   {
-    final float vx = v.getXf();
-    final float vy = v.getYf();
+    final float vx = v.getXF();
+    final float vy = v.getYF();
 
     final float c3r0 = (m.getUnsafe(0, 0) * vx) + (m.getUnsafe(0, 1) * vy);
     final float c3r1 = (m.getUnsafe(1, 0) * vx) + (m.getUnsafe(1, 1) * vy);
@@ -1699,11 +1699,11 @@ public final class MatrixM4x4F
    * @return <code>m</code>
    */
 
-  public static MatrixM4x4F translateByVector2InPlace(
+  public static MatrixM4x4F translateByVector2FInPlace(
     final MatrixM4x4F m,
     final VectorReadable2F v)
   {
-    return MatrixM4x4F.translateByVector2(m, v, m);
+    return MatrixM4x4F.translateByVector2F(m, v, m);
   }
 
   /**
@@ -1719,14 +1719,14 @@ public final class MatrixM4x4F
    * @return <code>out</code>
    */
 
-  public static MatrixM4x4F translateByVector3(
+  public static MatrixM4x4F translateByVector3F(
     final MatrixM4x4F m,
     final VectorReadable3F v,
     final MatrixM4x4F out)
   {
-    final float vx = v.getXf();
-    final float vy = v.getYf();
-    final float vz = v.getZf();
+    final float vx = v.getXF();
+    final float vy = v.getYF();
+    final float vz = v.getZF();
 
     final float c3r0 =
       (m.getUnsafe(0, 0) * vx)
@@ -1764,11 +1764,11 @@ public final class MatrixM4x4F
    * @return <code>m</code>
    */
 
-  public static MatrixM4x4F translateByVector3InPlace(
+  public static MatrixM4x4F translateByVector3FInPlace(
     final MatrixM4x4F m,
     final VectorReadable3F v)
   {
-    return MatrixM4x4F.translateByVector3(m, v, m);
+    return MatrixM4x4F.translateByVector3F(m, v, m);
   }
 
   /**

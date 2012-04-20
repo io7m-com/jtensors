@@ -448,8 +448,8 @@ public final class VectorM2D implements VectorReadable2D
     final VectorReadable2D input,
     final VectorM2D output)
   {
-    output.x = input.getXd();
-    output.y = input.getYd();
+    output.x = input.getXD();
+    output.y = input.getYD();
     return output;
   }
 
@@ -697,16 +697,16 @@ public final class VectorM2D implements VectorReadable2D
   public VectorM2D(
     final VectorReadable2D v)
   {
-    this.x = v.getXd();
-    this.y = v.getYd();
+    this.x = v.getXD();
+    this.y = v.getYD();
   }
 
-  @Override public double getXd()
+  @Override public double getXD()
   {
     return this.x;
   }
 
-  @Override public double getYd()
+  @Override public double getYD()
   {
     return this.y;
   }

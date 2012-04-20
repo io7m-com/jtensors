@@ -79,17 +79,17 @@ public final class VectorI3I implements VectorReadable3I
     this.z = z;
   }
 
-  @Override public int getXi()
+  @Override public int getXI()
   {
     return this.x;
   }
 
-  @Override public int getYi()
+  @Override public int getYI()
   {
     return this.y;
   }
 
-  @Override public int getZi()
+  @Override public int getZI()
   {
     return this.z;
   }

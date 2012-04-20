@@ -128,9 +128,9 @@ public class VectorI3DTest
   {
     final VectorI3D v = new VectorI3D(3.0, 5.0, 7.0);
 
-    Assert.assertTrue(v.x == v.getXd());
-    Assert.assertTrue(v.y == v.getYd());
-    Assert.assertTrue(v.z == v.getZd());
+    Assert.assertTrue(v.x == v.getXD());
+    Assert.assertTrue(v.y == v.getYD());
+    Assert.assertTrue(v.z == v.getZD());
   }
 
   @Test public void testClampByVectorMaximumOrdering()

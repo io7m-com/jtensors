@@ -146,10 +146,10 @@ public class VectorI4DTest
   {
     final VectorI4D v = new VectorI4D(3.0, 5.0, 7.0, 11.0);
 
-    Assert.assertTrue(v.x == v.getXd());
-    Assert.assertTrue(v.y == v.getYd());
-    Assert.assertTrue(v.z == v.getZd());
-    Assert.assertTrue(v.w == v.getWd());
+    Assert.assertTrue(v.x == v.getXD());
+    Assert.assertTrue(v.y == v.getYD());
+    Assert.assertTrue(v.z == v.getZD());
+    Assert.assertTrue(v.w == v.getWD());
   }
 
   @Test public void testClampByVectorMaximumOrdering()

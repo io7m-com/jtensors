@@ -599,8 +599,8 @@ public final class MatrixM2x2F
     final int row,
     final VectorReadable2F v)
   {
-    m.setUnsafe(row, 0, v.getXf());
-    m.setUnsafe(row, 1, v.getYf());
+    m.setUnsafe(row, 0, v.getXF());
+    m.setUnsafe(row, 1, v.getYF());
   }
 
   /**

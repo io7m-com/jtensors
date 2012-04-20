@@ -3,6 +3,16 @@
   <c:project>io7m-jtensors</c:project>
 
   <c:release ticket-system="com.io7m.fossil.jtensors">
+    <c:date>2012-04-20</c:date>
+    <c:version>2.0.0</c:version>
+    <c:item>
+      <c:date>2012-04-20</c:date>
+      <c:type-code-fix/>
+      <c:summary>Rename methods to indicate the type of vectors used, removing ambiguity. All VectorReadable* interfaces are affected, as well as Matrix* methods that previously specified a type name.</c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release ticket-system="com.io7m.fossil.jtensors">
     <c:date>2012-03-15</c:date>
     <c:version>1.0.1</c:version>
     <c:item>

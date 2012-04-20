@@ -111,8 +111,8 @@ public class VectorI2FTest
   {
     final VectorI2F v = new VectorI2F(3.0f, 5.0f);
 
-    Assert.assertTrue(v.x == v.getXf());
-    Assert.assertTrue(v.y == v.getYf());
+    Assert.assertTrue(v.x == v.getXF());
+    Assert.assertTrue(v.y == v.getYF());
   }
 
   @Test public void testClampByVectorMaximumOrdering()

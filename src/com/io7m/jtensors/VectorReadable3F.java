@@ -23,5 +23,5 @@ package com.io7m.jtensors;
 
 public interface VectorReadable3F extends VectorReadable2F
 {
-  float getZf();
+  float getZF();
 }

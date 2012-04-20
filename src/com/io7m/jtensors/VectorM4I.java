@@ -460,10 +460,10 @@ public final class VectorM4I implements VectorReadable4I
     final VectorReadable4I input,
     final VectorM4I output)
   {
-    output.x = input.getXi();
-    output.y = input.getYi();
-    output.z = input.getZi();
-    output.w = input.getWi();
+    output.x = input.getXI();
+    output.y = input.getYI();
+    output.z = input.getZI();
+    output.w = input.getWI();
     return output;
   }
 
@@ -718,28 +718,28 @@ public final class VectorM4I implements VectorReadable4I
   public VectorM4I(
     final VectorReadable4I v)
   {
-    this.x = v.getXi();
-    this.y = v.getYi();
-    this.z = v.getZi();
-    this.w = v.getWi();
+    this.x = v.getXI();
+    this.y = v.getYI();
+    this.z = v.getZI();
+    this.w = v.getWI();
   }
 
-  @Override public int getWi()
+  @Override public int getWI()
   {
     return this.w;
   }
 
-  @Override public int getXi()
+  @Override public int getXI()
   {
     return this.x;
   }
 
-  @Override public int getYi()
+  @Override public int getYI()
   {
     return this.y;
   }
 
-  @Override public int getZi()
+  @Override public int getZI()
   {
     return this.z;
   }

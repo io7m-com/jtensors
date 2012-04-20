@@ -415,8 +415,8 @@ public final class VectorI2F implements VectorReadable2F
   public VectorI2F(
     final VectorReadable2F v)
   {
-    this.x = v.getXf();
-    this.y = v.getYf();
+    this.x = v.getXF();
+    this.y = v.getYF();
   }
 
   /*
@@ -446,12 +446,12 @@ public final class VectorI2F implements VectorReadable2F
     return true;
   }
 
-  @Override public float getXf()
+  @Override public float getXF()
   {
     return this.x;
   }
 
-  @Override public float getYf()
+  @Override public float getYF()
   {
     return this.y;
   }

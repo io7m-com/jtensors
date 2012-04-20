@@ -1193,7 +1193,7 @@ public class MatrixM4x4FTest
     final VectorI4F v = new VectorI4F(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorM4F out = new VectorM4F();
 
-    final VectorM4F r = MatrixM4x4F.multiplyVector4(m0, v, out);
+    final VectorM4F r = MatrixM4x4F.multiplyVector4F(m0, v, out);
     Assert.assertSame(out, r);
 
     Assert.assertTrue(out.x == 30.0);
@@ -1228,7 +1228,7 @@ public class MatrixM4x4FTest
     final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
 
     final VectorM4F r =
-      MatrixM4x4F.multiplyVector4WithContext(context, m0, v, out);
+      MatrixM4x4F.multiplyVector4FWithContext(context, m0, v, out);
     Assert.assertSame(out, r);
 
     Assert.assertTrue(out.x == 30.0);
@@ -2313,7 +2313,7 @@ public class MatrixM4x4FTest
     final VectorI2F v = new VectorI2F(1.0f, 2.0f);
 
     {
-      final MatrixM4x4F r = MatrixM4x4F.translateByVector2(m, v, out);
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector2F(m, v, out);
       Assert.assertSame(out, r);
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
@@ -2338,7 +2338,7 @@ public class MatrixM4x4FTest
     }
 
     {
-      final MatrixM4x4F r = MatrixM4x4F.translateByVector2(m, v, out);
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector2F(m, v, out);
       Assert.assertSame(out, r);
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
@@ -2369,7 +2369,7 @@ public class MatrixM4x4FTest
     final VectorI2F v = new VectorI2F(1.0f, 2.0f);
 
     {
-      final MatrixM4x4F r = MatrixM4x4F.translateByVector2InPlace(m, v);
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector2FInPlace(m, v);
       Assert.assertSame(m, r);
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
@@ -2394,7 +2394,7 @@ public class MatrixM4x4FTest
     }
 
     {
-      final MatrixM4x4F r = MatrixM4x4F.translateByVector2InPlace(m, v);
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector2FInPlace(m, v);
       Assert.assertSame(m, r);
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
@@ -2426,7 +2426,7 @@ public class MatrixM4x4FTest
     final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
 
     {
-      final MatrixM4x4F r = MatrixM4x4F.translateByVector3(m, v, out);
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector3F(m, v, out);
       Assert.assertSame(out, r);
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
@@ -2451,7 +2451,7 @@ public class MatrixM4x4FTest
     }
 
     {
-      final MatrixM4x4F r = MatrixM4x4F.translateByVector3(m, v, out);
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector3F(m, v, out);
       Assert.assertSame(out, r);
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
@@ -2482,7 +2482,7 @@ public class MatrixM4x4FTest
     final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
 
     {
-      final MatrixM4x4F r = MatrixM4x4F.translateByVector3InPlace(m, v);
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector3FInPlace(m, v);
       Assert.assertSame(m, r);
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
@@ -2507,7 +2507,7 @@ public class MatrixM4x4FTest
     }
 
     {
-      final MatrixM4x4F r = MatrixM4x4F.translateByVector3InPlace(m, v);
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector3FInPlace(m, v);
       Assert.assertSame(m, r);
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
@@ -2569,7 +2569,7 @@ public class MatrixM4x4FTest
     final MatrixM4x4F m = new MatrixM4x4F();
     final MatrixM4x4F out = new MatrixM4x4F();
 
-    MatrixM4x4F.translateByVector3(m, new VectorI3F(1.0f, 2.0f, 3.0f), out);
+    MatrixM4x4F.translateByVector3F(m, new VectorI3F(1.0f, 2.0f, 3.0f), out);
 
     {
       final FloatBuffer b = MatrixM4x4F.floatBuffer(out);

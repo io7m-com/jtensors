@@ -519,7 +519,7 @@ public final class MatrixM3x3D
    * @return <code>out</code>
    */
 
-  public static VectorM3D multiplyVector3(
+  public static VectorM3D multiplyVector3D(
     final MatrixM3x3D m,
     final VectorReadable3D v,
     final VectorM3D out)
@@ -719,9 +719,9 @@ public final class MatrixM3x3D
     final int row,
     final VectorReadable3D v)
   {
-    m.setUnsafe(row, 0, v.getXd());
-    m.setUnsafe(row, 1, v.getYd());
-    m.setUnsafe(row, 2, v.getZd());
+    m.setUnsafe(row, 0, v.getXD());
+    m.setUnsafe(row, 1, v.getYD());
+    m.setUnsafe(row, 2, v.getZD());
   }
 
   /**

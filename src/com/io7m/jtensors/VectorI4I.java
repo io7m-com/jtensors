@@ -84,22 +84,22 @@ public final class VectorI4I implements VectorReadable4I
     this.w = w;
   }
 
-  @Override public int getWi()
+  @Override public int getWI()
   {
     return this.w;
   }
 
-  @Override public int getXi()
+  @Override public int getXI()
   {
     return this.x;
   }
 
-  @Override public int getYi()
+  @Override public int getYI()
   {
     return this.y;
   }
 
-  @Override public int getZi()
+  @Override public int getZI()
   {
     return this.z;
   }

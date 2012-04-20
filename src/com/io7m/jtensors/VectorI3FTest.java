@@ -122,9 +122,9 @@ public class VectorI3FTest
   {
     final VectorI3F v = new VectorI3F(3.0f, 5.0f, 7.0f);
 
-    Assert.assertTrue(v.x == v.getXf());
-    Assert.assertTrue(v.y == v.getYf());
-    Assert.assertTrue(v.z == v.getZf());
+    Assert.assertTrue(v.x == v.getXF());
+    Assert.assertTrue(v.y == v.getYF());
+    Assert.assertTrue(v.z == v.getZF());
   }
 
   @Test public void testClampByVectorMaximumOrdering()

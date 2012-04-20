@@ -601,8 +601,8 @@ public final class MatrixM2x2D
     final int row,
     final VectorReadable2D v)
   {
-    m.setUnsafe(row, 0, v.getXd());
-    m.setUnsafe(row, 1, v.getYd());
+    m.setUnsafe(row, 0, v.getXD());
+    m.setUnsafe(row, 1, v.getYD());
   }
 
   /**

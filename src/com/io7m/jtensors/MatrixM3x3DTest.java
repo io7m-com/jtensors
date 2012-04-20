@@ -739,7 +739,7 @@ public class MatrixM3x3DTest
     final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
     final VectorM3D out = new VectorM3D();
 
-    final VectorM3D r = MatrixM3x3D.multiplyVector3(m0, v, out);
+    final VectorM3D r = MatrixM3x3D.multiplyVector3D(m0, v, out);
     Assert.assertSame(out, r);
 
     Assert.assertTrue(out.x == 14.0);

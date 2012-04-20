@@ -22,7 +22,7 @@ package com.io7m.jtensors;
 
 public interface VectorReadable2D
 {
-  double getXd();
+  double getXD();
 
-  double getYd();
+  double getYD();
 }
