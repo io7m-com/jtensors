@@ -247,8 +247,8 @@ public class VectorM2DTest
   {
     final VectorM2D v = new VectorM2D(3.0f, 5.0f);
 
-    Assert.assertTrue(v.x == v.getX());
-    Assert.assertTrue(v.y == v.getY());
+    Assert.assertTrue(v.x == v.getXd());
+    Assert.assertTrue(v.y == v.getYd());
   }
 
   @Test public void testClampByVectorMaximumOrdering()

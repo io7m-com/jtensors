@@ -441,9 +441,9 @@ public final class VectorM3I implements VectorReadable3I
     final VectorReadable3I input,
     final VectorM3I output)
   {
-    output.x = input.getX();
-    output.y = input.getY();
-    output.z = input.getZ();
+    output.x = input.getXi();
+    output.y = input.getYi();
+    output.z = input.getZi();
     return output;
   }
 
@@ -689,22 +689,22 @@ public final class VectorM3I implements VectorReadable3I
   public VectorM3I(
     final VectorReadable3I v)
   {
-    this.x = v.getX();
-    this.y = v.getY();
-    this.z = v.getZ();
+    this.x = v.getXi();
+    this.y = v.getYi();
+    this.z = v.getZi();
   }
 
-  @Override public int getX()
+  @Override public int getXi()
   {
     return this.x;
   }
 
-  @Override public int getY()
+  @Override public int getYi()
   {
     return this.y;
   }
 
-  @Override public int getZ()
+  @Override public int getZi()
   {
     return this.z;
   }

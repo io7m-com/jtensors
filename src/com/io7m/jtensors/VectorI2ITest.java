@@ -32,8 +32,8 @@ public class VectorI2ITest
   @Test public void testCheckInterface()
   {
     final VectorI2I v = new VectorI2I(1, 2);
-    Assert.assertEquals(1, v.getX());
-    Assert.assertEquals(2, v.getY());
+    Assert.assertEquals(1, v.getXi());
+    Assert.assertEquals(2, v.getYi());
   }
 
   @Test public void testInit()

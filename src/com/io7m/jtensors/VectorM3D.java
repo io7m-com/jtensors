@@ -436,9 +436,9 @@ public final class VectorM3D implements VectorReadable3D
     final VectorReadable3D input,
     final VectorM3D output)
   {
-    output.x = input.getX();
-    output.y = input.getY();
-    output.z = input.getZ();
+    output.x = input.getXd();
+    output.y = input.getYd();
+    output.z = input.getZd();
     return output;
   }
 
@@ -723,22 +723,22 @@ public final class VectorM3D implements VectorReadable3D
   public VectorM3D(
     final VectorReadable3D v)
   {
-    this.x = v.getX();
-    this.y = v.getY();
-    this.z = v.getZ();
+    this.x = v.getXd();
+    this.y = v.getYd();
+    this.z = v.getZd();
   }
 
-  @Override public double getX()
+  @Override public double getXd()
   {
     return this.x;
   }
 
-  @Override public double getY()
+  @Override public double getYd()
   {
     return this.y;
   }
 
-  @Override public double getZ()
+  @Override public double getZd()
   {
     return this.z;
   }

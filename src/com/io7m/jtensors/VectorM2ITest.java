@@ -207,8 +207,8 @@ public class VectorM2ITest
   {
     final VectorM2I v = new VectorM2I(3, 5);
 
-    Assert.assertTrue(v.x == v.getX());
-    Assert.assertTrue(v.y == v.getY());
+    Assert.assertTrue(v.x == v.getXi());
+    Assert.assertTrue(v.y == v.getYi());
   }
 
   @Test public void testClampByVectorMaximumOrdering()

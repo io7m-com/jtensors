@@ -286,9 +286,9 @@ public class VectorM3DTest
   {
     final VectorM3D v = new VectorM3D(3.0f, 5.0f, 7.0f);
 
-    Assert.assertTrue(v.x == v.getX());
-    Assert.assertTrue(v.y == v.getY());
-    Assert.assertTrue(v.z == v.getZ());
+    Assert.assertTrue(v.x == v.getXd());
+    Assert.assertTrue(v.y == v.getYd());
+    Assert.assertTrue(v.z == v.getZd());
   }
 
   @Test public void testClampByVectorMaximumOrdering()

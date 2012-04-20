@@ -407,8 +407,8 @@ public final class VectorI2D implements VectorReadable2D
   public VectorI2D(
     final VectorReadable2D v)
   {
-    this.x = v.getX();
-    this.y = v.getY();
+    this.x = v.getXd();
+    this.y = v.getYd();
   }
 
   /*
@@ -438,12 +438,12 @@ public final class VectorI2D implements VectorReadable2D
     return true;
   }
 
-  @Override public double getX()
+  @Override public double getXd()
   {
     return this.x;
   }
 
-  @Override public double getY()
+  @Override public double getYd()
   {
     return this.y;
   }

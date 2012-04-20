@@ -20,7 +20,7 @@ package com.io7m.jtensors;
  * A four-dimensional immutable vector type with integer elements.
  */
 
-public final class VectorI4I implements VectorReadable4I, VectorReadable3I
+public final class VectorI4I implements VectorReadable4I
 {
   /**
    * @param v0
@@ -84,22 +84,22 @@ public final class VectorI4I implements VectorReadable4I, VectorReadable3I
     this.w = w;
   }
 
-  @Override public int getW()
+  @Override public int getWi()
   {
     return this.w;
   }
 
-  @Override public int getX()
+  @Override public int getXi()
   {
     return this.x;
   }
 
-  @Override public int getY()
+  @Override public int getYi()
   {
     return this.y;
   }
 
-  @Override public int getZ()
+  @Override public int getZi()
   {
     return this.z;
   }

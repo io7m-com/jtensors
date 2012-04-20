@@ -22,7 +22,7 @@ package com.io7m.jtensors;
 
 public interface VectorReadable2F
 {
-  float getX();
+  float getXf();
 
-  float getY();
+  float getYf();
 }

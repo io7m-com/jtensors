@@ -22,5 +22,5 @@ package com.io7m.jtensors;
 
 public interface VectorReadable3I extends VectorReadable2I
 {
-  int getZ();
+  int getZi();
 }

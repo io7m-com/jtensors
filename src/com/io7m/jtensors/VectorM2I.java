@@ -422,8 +422,8 @@ public final class VectorM2I implements VectorReadable2I
     final VectorReadable2I input,
     final VectorM2I output)
   {
-    output.x = input.getX();
-    output.y = input.getY();
+    output.x = input.getXi();
+    output.y = input.getYi();
     return output;
   }
 
@@ -660,16 +660,16 @@ public final class VectorM2I implements VectorReadable2I
   public VectorM2I(
     final VectorReadable2I v)
   {
-    this.x = v.getX();
-    this.y = v.getY();
+    this.x = v.getXi();
+    this.y = v.getYi();
   }
 
-  @Override public int getX()
+  @Override public int getXi()
   {
     return this.x;
   }
 
-  @Override public int getY()
+  @Override public int getYi()
   {
     return this.y;
   }

@@ -20,13 +20,7 @@ package com.io7m.jtensors;
  * 'Read' interface to four-dimensional vectors with integer elements.
  */
 
-public interface VectorReadable4I
+public interface VectorReadable4I extends VectorReadable3I
 {
-  int getW();
-
-  int getX();
-
-  int getY();
-
-  int getZ();
+  int getWi();
 }

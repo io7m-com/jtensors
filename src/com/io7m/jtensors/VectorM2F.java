@@ -446,8 +446,8 @@ public final class VectorM2F implements VectorReadable2F
     final VectorReadable2F input,
     final VectorM2F output)
   {
-    output.x = input.getX();
-    output.y = input.getY();
+    output.x = input.getXf();
+    output.y = input.getYf();
     return output;
   }
 
@@ -695,16 +695,16 @@ public final class VectorM2F implements VectorReadable2F
   public VectorM2F(
     final VectorReadable2F v)
   {
-    this.x = v.getX();
-    this.y = v.getY();
+    this.x = v.getXf();
+    this.y = v.getYf();
   }
 
-  @Override public float getX()
+  @Override public float getXf()
   {
     return this.x;
   }
 
-  @Override public float getY()
+  @Override public float getYf()
   {
     return this.y;
   }

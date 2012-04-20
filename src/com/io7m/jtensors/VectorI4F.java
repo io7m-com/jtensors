@@ -407,10 +407,10 @@ public final class VectorI4F implements VectorReadable4F
   public VectorI4F(
     final VectorReadable4F v)
   {
-    this.x = v.getX();
-    this.y = v.getY();
-    this.z = v.getZ();
-    this.w = v.getW();
+    this.x = v.getXf();
+    this.y = v.getYf();
+    this.z = v.getZf();
+    this.w = v.getWf();
   }
 
   /*
@@ -446,22 +446,22 @@ public final class VectorI4F implements VectorReadable4F
     return true;
   }
 
-  @Override public float getW()
+  @Override public float getWf()
   {
     return this.w;
   }
 
-  @Override public float getX()
+  @Override public float getXf()
   {
     return this.x;
   }
 
-  @Override public float getY()
+  @Override public float getYf()
   {
     return this.y;
   }
 
-  @Override public float getZ()
+  @Override public float getZf()
   {
     return this.z;
   }

@@ -919,9 +919,9 @@ public final class MatrixM4x4F
     final VectorReadable3F axis,
     final MatrixM4x4F out)
   {
-    final float ax = axis.getX();
-    final float ay = axis.getY();
-    final float az = axis.getZ();
+    final float ax = axis.getXf();
+    final float ay = axis.getYf();
+    final float az = axis.getZf();
 
     final float c = (float) Math.cos(angle);
     final float s = (float) Math.sin(angle);
@@ -999,17 +999,17 @@ public final class MatrixM4x4F
     out.setUnsafe(0, 0, 1.0f);
     out.setUnsafe(0, 1, 0.0f);
     out.setUnsafe(0, 2, 0.0f);
-    out.setUnsafe(0, 3, v.getX());
+    out.setUnsafe(0, 3, v.getXf());
 
     out.setUnsafe(1, 0, 0.0f);
     out.setUnsafe(1, 1, 1.0f);
     out.setUnsafe(1, 2, 0.0f);
-    out.setUnsafe(1, 3, v.getY());
+    out.setUnsafe(1, 3, v.getYf());
 
     out.setUnsafe(2, 0, 0.0f);
     out.setUnsafe(2, 1, 0.0f);
     out.setUnsafe(2, 2, 1.0f);
-    out.setUnsafe(2, 3, v.getZ());
+    out.setUnsafe(2, 3, v.getZf());
 
     out.setUnsafe(3, 0, 0.0f);
     out.setUnsafe(3, 1, 0.0f);
@@ -1163,10 +1163,10 @@ public final class MatrixM4x4F
     final VectorM4F vb,
     final VectorM4F out)
   {
-    vb.x = v.getX();
-    vb.y = v.getY();
-    vb.z = v.getZ();
-    vb.w = v.getW();
+    vb.x = v.getXf();
+    vb.y = v.getYf();
+    vb.z = v.getZf();
+    vb.w = v.getWf();
 
     MatrixM4x4F.rowUnsafe(m, 0, va);
     out.x = VectorM4F.dotProduct(va, vb);
@@ -1631,10 +1631,10 @@ public final class MatrixM4x4F
     final int row,
     final VectorReadable4F v)
   {
-    m.setUnsafe(row, 0, v.getX());
-    m.setUnsafe(row, 1, v.getY());
-    m.setUnsafe(row, 2, v.getZ());
-    m.setUnsafe(row, 3, v.getW());
+    m.setUnsafe(row, 0, v.getXf());
+    m.setUnsafe(row, 1, v.getYf());
+    m.setUnsafe(row, 2, v.getZf());
+    m.setUnsafe(row, 3, v.getWf());
   }
 
   /**
@@ -1672,8 +1672,8 @@ public final class MatrixM4x4F
     final VectorReadable2F v,
     final MatrixM4x4F out)
   {
-    final float vx = v.getX();
-    final float vy = v.getY();
+    final float vx = v.getXf();
+    final float vy = v.getYf();
 
     final float c3r0 = (m.getUnsafe(0, 0) * vx) + (m.getUnsafe(0, 1) * vy);
     final float c3r1 = (m.getUnsafe(1, 0) * vx) + (m.getUnsafe(1, 1) * vy);
@@ -1724,9 +1724,9 @@ public final class MatrixM4x4F
     final VectorReadable3F v,
     final MatrixM4x4F out)
   {
-    final float vx = v.getX();
-    final float vy = v.getY();
-    final float vz = v.getZ();
+    final float vx = v.getXf();
+    final float vy = v.getYf();
+    final float vz = v.getZf();
 
     final float c3r0 =
       (m.getUnsafe(0, 0) * vx)

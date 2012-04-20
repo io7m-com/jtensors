@@ -23,5 +23,5 @@ package com.io7m.jtensors;
 
 public interface VectorReadable3D extends VectorReadable2D
 {
-  double getZ();
+  double getZd();
 }

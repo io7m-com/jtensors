@@ -408,9 +408,9 @@ public final class VectorI3D implements VectorReadable3D
   public VectorI3D(
     final VectorReadable3D v)
   {
-    this.x = v.getX();
-    this.y = v.getY();
-    this.z = v.getZ();
+    this.x = v.getXd();
+    this.y = v.getYd();
+    this.z = v.getZd();
   }
 
   /*
@@ -443,17 +443,17 @@ public final class VectorI3D implements VectorReadable3D
     return true;
   }
 
-  @Override public double getX()
+  @Override public double getXd()
   {
     return this.x;
   }
 
-  @Override public double getY()
+  @Override public double getYd()
   {
     return this.y;
   }
 
-  @Override public double getZ()
+  @Override public double getZd()
   {
     return this.z;
   }

@@ -407,10 +407,10 @@ public final class VectorI4D implements VectorReadable4D
   public VectorI4D(
     final VectorReadable4D v)
   {
-    this.x = v.getX();
-    this.y = v.getY();
-    this.z = v.getZ();
-    this.w = v.getW();
+    this.x = v.getXd();
+    this.y = v.getYd();
+    this.z = v.getZd();
+    this.w = v.getWd();
   }
 
   @Override public boolean equals(
@@ -441,22 +441,22 @@ public final class VectorI4D implements VectorReadable4D
     return true;
   }
 
-  @Override public double getW()
+  @Override public double getWd()
   {
     return this.w;
   }
 
-  @Override public double getX()
+  @Override public double getXd()
   {
     return this.x;
   }
 
-  @Override public double getY()
+  @Override public double getYd()
   {
     return this.y;
   }
 
-  @Override public double getZ()
+  @Override public double getZd()
   {
     return this.z;
   }

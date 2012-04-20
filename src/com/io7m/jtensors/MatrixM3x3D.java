@@ -719,9 +719,9 @@ public final class MatrixM3x3D
     final int row,
     final VectorReadable3D v)
   {
-    m.setUnsafe(row, 0, v.getX());
-    m.setUnsafe(row, 1, v.getY());
-    m.setUnsafe(row, 2, v.getZ());
+    m.setUnsafe(row, 0, v.getXd());
+    m.setUnsafe(row, 1, v.getYd());
+    m.setUnsafe(row, 2, v.getZd());
   }
 
   /**

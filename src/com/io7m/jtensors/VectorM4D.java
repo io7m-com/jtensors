@@ -456,10 +456,10 @@ public final class VectorM4D implements VectorReadable4D
     final VectorReadable4D input,
     final VectorM4D output)
   {
-    output.x = input.getX();
-    output.y = input.getY();
-    output.z = input.getZ();
-    output.w = input.getW();
+    output.x = input.getXd();
+    output.y = input.getYd();
+    output.z = input.getZd();
+    output.w = input.getWd();
     return output;
   }
 
@@ -727,28 +727,28 @@ public final class VectorM4D implements VectorReadable4D
   public VectorM4D(
     final VectorReadable4D v)
   {
-    this.x = v.getX();
-    this.y = v.getY();
-    this.z = v.getZ();
-    this.w = v.getW();
+    this.x = v.getXd();
+    this.y = v.getYd();
+    this.z = v.getZd();
+    this.w = v.getWd();
   }
 
-  @Override public double getW()
+  @Override public double getWd()
   {
     return this.w;
   }
 
-  @Override public double getX()
+  @Override public double getXd()
   {
     return this.x;
   }
 
-  @Override public double getY()
+  @Override public double getYd()
   {
     return this.y;
   }
 
-  @Override public double getZ()
+  @Override public double getZd()
   {
     return this.z;
   }

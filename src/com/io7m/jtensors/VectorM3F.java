@@ -436,9 +436,9 @@ public final class VectorM3F implements VectorReadable3F
     final VectorReadable3F input,
     final VectorM3F output)
   {
-    output.x = input.getX();
-    output.y = input.getY();
-    output.z = input.getZ();
+    output.x = input.getXf();
+    output.y = input.getYf();
+    output.z = input.getZf();
     return output;
   }
 
@@ -460,9 +460,9 @@ public final class VectorM3F implements VectorReadable3F
     final VectorReadable3F v1,
     final VectorM3F out)
   {
-    final float x = (v0.getY() * v1.getZ()) - (v0.getZ() * v1.getY());
-    final float y = (v0.getZ() * v1.getX()) - (v0.getX() * v1.getZ());
-    final float z = (v0.getX() * v1.getY()) - (v0.getY() * v1.getX());
+    final float x = (v0.getYf() * v1.getZf()) - (v0.getZf() * v1.getYf());
+    final float y = (v0.getZf() * v1.getXf()) - (v0.getXf() * v1.getZf());
+    final float z = (v0.getXf() * v1.getYf()) - (v0.getYf() * v1.getXf());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -723,22 +723,22 @@ public final class VectorM3F implements VectorReadable3F
   public VectorM3F(
     final VectorReadable3F v)
   {
-    this.x = v.getX();
-    this.y = v.getY();
-    this.z = v.getZ();
+    this.x = v.getXf();
+    this.y = v.getYf();
+    this.z = v.getZf();
   }
 
-  @Override public float getX()
+  @Override public float getXf()
   {
     return this.x;
   }
 
-  @Override public float getY()
+  @Override public float getYf()
   {
     return this.y;
   }
 
-  @Override public float getZ()
+  @Override public float getZf()
   {
     return this.z;
   }

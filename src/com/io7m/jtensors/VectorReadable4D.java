@@ -23,5 +23,5 @@ package com.io7m.jtensors;
 
 public interface VectorReadable4D extends VectorReadable3D
 {
-  double getW();
+  double getWd();
 }
