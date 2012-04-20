@@ -972,11 +972,11 @@ public final class MatrixM4x4F
    * @return <code>out</code>
    */
 
-  public static MatrixM4x4F makeTranslation(
+  public static MatrixM4x4F makeTranslation3F(
     final VectorReadable3F v)
   {
     final MatrixM4x4F out = new MatrixM4x4F();
-    MatrixM4x4F.makeTranslation(v, out);
+    MatrixM4x4F.makeTranslation3F(v, out);
     return out;
   }
 
@@ -992,7 +992,7 @@ public final class MatrixM4x4F
    * @return <code>out</code>
    */
 
-  public static MatrixM4x4F makeTranslation(
+  public static MatrixM4x4F makeTranslation3F(
     final VectorReadable3F v,
     final MatrixM4x4F out)
   {
@@ -1010,6 +1010,62 @@ public final class MatrixM4x4F
     out.setUnsafe(2, 1, 0.0f);
     out.setUnsafe(2, 2, 1.0f);
     out.setUnsafe(2, 3, v.getZF());
+
+    out.setUnsafe(3, 0, 0.0f);
+    out.setUnsafe(3, 1, 0.0f);
+    out.setUnsafe(3, 2, 0.0f);
+    out.setUnsafe(3, 3, 1.0f);
+
+    return out;
+  }
+
+  /**
+   * Generate and return a matrix that represents a translation of
+   * <code>(v.x, v.y, v.z)</code> from the origin.
+   * 
+   * @param v
+   *          The translation vector.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM4x4F makeTranslation3I(
+    final VectorReadable3I v)
+  {
+    final MatrixM4x4F out = new MatrixM4x4F();
+    MatrixM4x4F.makeTranslation3I(v, out);
+    return out;
+  }
+
+  /**
+   * Generate a matrix that represents a translation of
+   * <code>(v.x, v.y, v.z)</code> from the origin, and save to
+   * <code>out</code>.
+   * 
+   * @param v
+   *          The translation vector.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM4x4F makeTranslation3I(
+    final VectorReadable3I v,
+    final MatrixM4x4F out)
+  {
+    out.setUnsafe(0, 0, 1.0f);
+    out.setUnsafe(0, 1, 0.0f);
+    out.setUnsafe(0, 2, 0.0f);
+    out.setUnsafe(0, 3, v.getXI());
+
+    out.setUnsafe(1, 0, 0.0f);
+    out.setUnsafe(1, 1, 1.0f);
+    out.setUnsafe(1, 2, 0.0f);
+    out.setUnsafe(1, 3, v.getYI());
+
+    out.setUnsafe(2, 0, 0.0f);
+    out.setUnsafe(2, 1, 0.0f);
+    out.setUnsafe(2, 2, 1.0f);
+    out.setUnsafe(2, 3, v.getZI());
 
     out.setUnsafe(3, 0, 0.0f);
     out.setUnsafe(3, 1, 0.0f);
@@ -1719,6 +1775,58 @@ public final class MatrixM4x4F
    * @return <code>out</code>
    */
 
+  public static MatrixM4x4F translateByVector2I(
+    final MatrixM4x4F m,
+    final VectorReadable2I v,
+    final MatrixM4x4F out)
+  {
+    final float vx = v.getXI();
+    final float vy = v.getYI();
+
+    final float c3r0 = (m.getUnsafe(0, 0) * vx) + (m.getUnsafe(0, 1) * vy);
+    final float c3r1 = (m.getUnsafe(1, 0) * vx) + (m.getUnsafe(1, 1) * vy);
+    final float c3r2 = (m.getUnsafe(2, 0) * vx) + (m.getUnsafe(2, 1) * vy);
+    final float c3r3 = (m.getUnsafe(3, 0) * vx) + (m.getUnsafe(3, 1) * vy);
+
+    out.setUnsafe(0, 3, out.getUnsafe(0, 3) + c3r0);
+    out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
+    out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
+    out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
+
+    return out;
+  }
+
+  /**
+   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
+   * the resulting matrix in <code>m</code>.
+   * 
+   * @param m
+   *          The input matrix.
+   * @param v
+   *          The translation vector.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM4x4F translateByVector2IInPlace(
+    final MatrixM4x4F m,
+    final VectorReadable2I v)
+  {
+    return MatrixM4x4F.translateByVector2I(m, v, m);
+  }
+
+  /**
+   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
+   * the resulting matrix in <code>out</code>.
+   * 
+   * @param m
+   *          The input matrix.
+   * @param v
+   *          The translation vector.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
   public static MatrixM4x4F translateByVector3F(
     final MatrixM4x4F m,
     final VectorReadable3F v,
@@ -1769,6 +1877,71 @@ public final class MatrixM4x4F
     final VectorReadable3F v)
   {
     return MatrixM4x4F.translateByVector3F(m, v, m);
+  }
+
+  /**
+   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
+   * the resulting matrix in <code>out</code>.
+   * 
+   * @param m
+   *          The input matrix.
+   * @param v
+   *          The translation vector.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM4x4F translateByVector3I(
+    final MatrixM4x4F m,
+    final VectorReadable3I v,
+    final MatrixM4x4F out)
+  {
+    final float vx = v.getXI();
+    final float vy = v.getYI();
+    final float vz = v.getZI();
+
+    final float c3r0 =
+      (m.getUnsafe(0, 0) * vx)
+        + (m.getUnsafe(0, 1) * vy)
+        + (m.getUnsafe(0, 2) * vz);
+    final float c3r1 =
+      (m.getUnsafe(1, 0) * vx)
+        + (m.getUnsafe(1, 1) * vy)
+        + (m.getUnsafe(1, 2) * vz);
+    final float c3r2 =
+      (m.getUnsafe(2, 0) * vx)
+        + (m.getUnsafe(2, 1) * vy)
+        + (m.getUnsafe(2, 2) * vz);
+    final float c3r3 =
+      (m.getUnsafe(3, 0) * vx)
+        + (m.getUnsafe(3, 1) * vy)
+        + (m.getUnsafe(3, 2) * vz);
+
+    out.setUnsafe(0, 3, out.getUnsafe(0, 3) + c3r0);
+    out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
+    out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
+    out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
+
+    return out;
+  }
+
+  /**
+   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
+   * the resulting matrix in <code>m</code>.
+   * 
+   * @param m
+   *          The input matrix.
+   * @param v
+   *          The translation vector.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM4x4F translateByVector3IInPlace(
+    final MatrixM4x4F m,
+    final VectorReadable3I v)
+  {
+    return MatrixM4x4F.translateByVector3I(m, v, m);
   }
 
   /**

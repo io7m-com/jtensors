@@ -2306,7 +2306,7 @@ public class MatrixM4x4FTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
-  @Test public void testTranslateSimple2D()
+  @Test public void testTranslateSimple2F()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final MatrixM4x4F out = new MatrixM4x4F();
@@ -2363,7 +2363,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslateSimple2DAlt()
+  @Test public void testTranslateSimple2FAlt()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI2F v = new VectorI2F(1.0f, 2.0f);
@@ -2419,7 +2419,120 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslateSimple3D()
+  @Test public void testTranslateSimple2I()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final MatrixM4x4F out = new MatrixM4x4F();
+    final VectorI2I v = new VectorI2I(1, 2);
+
+    {
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector2I(m, v, out);
+      Assert.assertSame(out, r);
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 1.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 2.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 0.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+    }
+
+    {
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector2I(m, v, out);
+      Assert.assertSame(out, r);
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 2.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 4.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 0.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+    }
+  }
+
+  @Test public void testTranslateSimple2IAlt()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorI2I v = new VectorI2I(1, 2);
+
+    {
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector2IInPlace(m, v);
+      Assert.assertSame(m, r);
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 1.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 2.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 0.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+    }
+
+    {
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector2IInPlace(m, v);
+      Assert.assertSame(m, r);
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 2.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 4.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 0.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+    }
+  }
+
+  @Test public void testTranslateSimple3F()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final MatrixM4x4F out = new MatrixM4x4F();
@@ -2476,7 +2589,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslateSimple3DAlt()
+  @Test public void testTranslateSimple3FAlt()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
@@ -2532,14 +2645,159 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslationMakeEquivalent3D()
+  @Test public void testTranslateSimple3I()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final MatrixM4x4F out = new MatrixM4x4F();
+    final VectorI3I v = new VectorI3I(1, 2, 3);
+
+    {
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector3I(m, v, out);
+      Assert.assertSame(out, r);
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 1.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 2.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 3.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+    }
+
+    {
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector3I(m, v, out);
+      Assert.assertSame(out, r);
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 2.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 4.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 6.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+    }
+  }
+
+  @Test public void testTranslateSimple3IAlt()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorI3I v = new VectorI3I(1, 2, 3);
+
+    {
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector3IInPlace(m, v);
+      Assert.assertSame(m, r);
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 1.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 2.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 3.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+    }
+
+    {
+      final MatrixM4x4F r = MatrixM4x4F.translateByVector3IInPlace(m, v);
+      Assert.assertSame(m, r);
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 2.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 4.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 6.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+    }
+  }
+
+  @Test public void testTranslationMakeEquivalent3F()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
 
     {
       final MatrixM4x4F r = new MatrixM4x4F();
-      final MatrixM4x4F t = MatrixM4x4F.makeTranslation(v);
+      final MatrixM4x4F t = MatrixM4x4F.makeTranslation3F(v);
+      MatrixM4x4F.multiply(m, t, r);
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 1.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 2.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 3.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+    }
+  }
+
+  @Test public void testTranslationMakeEquivalent3I()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorI3I v = new VectorI3I(1, 2, 3);
+
+    {
+      final MatrixM4x4F r = new MatrixM4x4F();
+      final MatrixM4x4F t = MatrixM4x4F.makeTranslation3I(v);
       MatrixM4x4F.multiply(m, t, r);
 
       Assert.assertTrue(r.get(0, 0) == 1.0);

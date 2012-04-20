@@ -7,6 +7,12 @@
     <c:version>2.0.0</c:version>
     <c:item>
       <c:date>2012-04-20</c:date>
+      <c:type-code-new/>
+      <c:summary>Add integer vector methods for Matrix4x4*</c:summary>
+    </c:item>
+ 
+    <c:item>
+      <c:date>2012-04-20</c:date>
       <c:type-code-fix/>
       <c:summary>Rename methods to indicate the type of vectors used, removing ambiguity. All VectorReadable* interfaces are affected, as well as Matrix* methods that previously specified a type name.</c:summary>
     </c:item>
