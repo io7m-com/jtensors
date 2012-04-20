@@ -350,7 +350,7 @@ public final class MatrixM4x4F
   }
 
   /**
-   * Exchange two row <code>row_a</code> and row <code>row_b</code> of the
+   * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
    * This is one of the three "elementary" operations defined on matrices. The
    * function uses storage preallocated in <code>context</code> to avoid
