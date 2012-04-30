@@ -468,7 +468,7 @@ public final class VectorI2D implements VectorReadable2D
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorI2D [");
+    builder.append("[VectorI2D ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);

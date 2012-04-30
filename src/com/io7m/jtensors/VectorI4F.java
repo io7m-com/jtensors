@@ -485,7 +485,7 @@ public final class VectorI4F implements VectorReadable4F
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorI4F [");
+    builder.append("[VectorI4F ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);

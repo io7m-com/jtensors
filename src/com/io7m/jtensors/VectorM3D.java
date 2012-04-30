@@ -746,7 +746,7 @@ public final class VectorM3D implements VectorReadable3D
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorM3D [");
+    builder.append("[VectorM3D ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);

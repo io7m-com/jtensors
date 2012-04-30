@@ -756,7 +756,7 @@ public final class VectorM4D implements VectorReadable4D
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorM4D [");
+    builder.append("[VectorM4D ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);

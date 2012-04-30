@@ -677,7 +677,7 @@ public final class VectorM2I implements VectorReadable2I
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorM2I [");
+    builder.append("[VectorM2I ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);

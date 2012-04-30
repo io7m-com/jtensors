@@ -712,7 +712,7 @@ public final class VectorM3I implements VectorReadable3I
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorM3I [");
+    builder.append("[VectorM3I ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);

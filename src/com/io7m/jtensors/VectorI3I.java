@@ -54,7 +54,6 @@ public final class VectorI3I implements VectorReadable3I
 
   public final int x;
   public final int y;
-
   public final int z;
 
   /**
@@ -92,5 +91,53 @@ public final class VectorI3I implements VectorReadable3I
   @Override public int getZI()
   {
     return this.z;
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result) + this.x;
+    result = (prime * result) + this.y;
+    result = (prime * result) + this.z;
+    return result;
+  }
+
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final VectorI3I other = (VectorI3I) obj;
+    if (this.x != other.x) {
+      return false;
+    }
+    if (this.y != other.y) {
+      return false;
+    }
+    if (this.z != other.z) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override public String toString()
+  {
+    final StringBuilder builder = new StringBuilder();
+    builder.append("[VectorI3I ");
+    builder.append(this.x);
+    builder.append(" ");
+    builder.append(this.y);
+    builder.append(" ");
+    builder.append(this.z);
+    builder.append("]");
+    return builder.toString();
   }
 }

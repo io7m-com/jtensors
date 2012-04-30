@@ -747,7 +747,7 @@ public final class VectorM4I implements VectorReadable4I
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorM4I [");
+    builder.append("[VectorM4I ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);

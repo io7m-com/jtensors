@@ -476,7 +476,7 @@ public final class VectorI3F implements VectorReadable3F
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorI3F [");
+    builder.append("[VectorI3F ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);

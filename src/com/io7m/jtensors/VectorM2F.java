@@ -712,7 +712,7 @@ public final class VectorM2F implements VectorReadable2F
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorM2F [");
+    builder.append("[VectorM2F ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);

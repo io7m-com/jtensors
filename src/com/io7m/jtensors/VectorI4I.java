@@ -103,4 +103,58 @@ public final class VectorI4I implements VectorReadable4I
   {
     return this.z;
   }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result) + this.w;
+    result = (prime * result) + this.x;
+    result = (prime * result) + this.y;
+    result = (prime * result) + this.z;
+    return result;
+  }
+
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final VectorI4I other = (VectorI4I) obj;
+    if (this.w != other.w) {
+      return false;
+    }
+    if (this.x != other.x) {
+      return false;
+    }
+    if (this.y != other.y) {
+      return false;
+    }
+    if (this.z != other.z) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override public String toString()
+  {
+    final StringBuilder builder = new StringBuilder();
+    builder.append("[VectorI4I ");
+    builder.append(this.x);
+    builder.append(" ");
+    builder.append(this.y);
+    builder.append(" ");
+    builder.append(this.z);
+    builder.append(" ");
+    builder.append(this.w);
+    builder.append("]");
+    return builder.toString();
+  }
 }

@@ -478,7 +478,7 @@ public final class VectorI2F implements VectorReadable2F
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorI2F [");
+    builder.append("[VectorI2F ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);

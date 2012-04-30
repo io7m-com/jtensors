@@ -480,7 +480,7 @@ public final class VectorI4D implements VectorReadable4D
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorI4D [");
+    builder.append("[VectorI4D ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);

@@ -480,7 +480,7 @@ public final class VectorI3D implements VectorReadable3D
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("VectorI3D [");
+    builder.append("[VectorI3D ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);
