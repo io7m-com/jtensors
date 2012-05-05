@@ -14,175 +14,6 @@ import com.io7m.jaux.functional.Option.Type;
 
 public class MatrixM3x3FTest
 {
-  @Test public void determinantIdentity()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-    Assert.assertTrue(MatrixM3x3F.determinant(m) == 1.0);
-  }
-
-  @Test public void determinantOther()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-
-    m.set(0, 0, 2.0f);
-    m.set(1, 1, 2.0f);
-    m.set(2, 2, 2.0f);
-
-    Assert.assertTrue(MatrixM3x3F.determinant(m) == 8.0);
-  }
-
-  @Test public void determinantScale()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-
-    m.set(0, 0, 2.0f);
-
-    Assert.assertTrue(MatrixM3x3F.determinant(m) == 2.0);
-  }
-
-  @Test public void determinantScaleNegative()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-
-    m.set(0, 0, -2.0f);
-
-    Assert.assertTrue(MatrixM3x3F.determinant(m) == -2.0);
-  }
-
-  @Test public void determinantZero()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-    MatrixM3x3F.setZero(m);
-    Assert.assertTrue(MatrixM3x3F.determinant(m) == 0.0);
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    outOfRangeNegativeColumn()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-    m.get(0, -1);
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    outOfRangeNegativeRow()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-    m.get(-1, 0);
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    outOfRangeOverflowColumn()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-    m.get(0, 3);
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    outOfRangeOverflowRow()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-    m.get(3, 0);
-  }
-
-  @Test public void row()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-    final VectorM3F v = new VectorM3F();
-
-    MatrixM3x3F.row(m, 0, v);
-    Assert.assertTrue(v.x == 1.0);
-    Assert.assertTrue(v.y == 0.0);
-    Assert.assertTrue(v.z == 0.0);
-
-    MatrixM3x3F.row(m, 1, v);
-    Assert.assertTrue(v.x == 0.0);
-    Assert.assertTrue(v.y == 1.0);
-    Assert.assertTrue(v.z == 0.0);
-
-    MatrixM3x3F.row(m, 2, v);
-    Assert.assertTrue(v.x == 0.0);
-    Assert.assertTrue(v.y == 0.0);
-    Assert.assertTrue(v.z == 1.0);
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public void rowOverflow()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-    MatrixM3x3F.row(m, 3, new VectorM3F());
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    rowUnderflow()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-    MatrixM3x3F.row(m, -1, new VectorM3F());
-  }
-
-  @Test public void scale()
-  {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
-    final MatrixM3x3F mr = new MatrixM3x3F();
-
-    for (int row = 0; row < 3; ++row) {
-      for (int column = 0; column < 3; ++column) {
-        m0.set(row, column, 3.0f);
-      }
-    }
-
-    final MatrixM3x3F mk = MatrixM3x3F.scale(m0, 5.0f, mr);
-    Assert.assertSame(mr, mk);
-
-    for (int row = 0; row < 3; ++row) {
-      for (int column = 0; column < 3; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 3.0);
-        Assert.assertTrue(mr.get(row, column) == 15.0);
-      }
-    }
-  }
-
-  @Test public void scaleMutate()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-
-    for (int row = 0; row < 3; ++row) {
-      for (int column = 0; column < 3; ++column) {
-        m.set(row, column, 3.0f);
-      }
-    }
-
-    final MatrixM3x3F mr = MatrixM3x3F.scaleInPlace(m, 5.0f);
-    Assert.assertSame(mr, m);
-
-    for (int row = 0; row < 3; ++row) {
-      for (int column = 0; column < 3; ++column) {
-        Assert.assertTrue(m.get(row, column) == 15.0);
-        Assert.assertTrue(mr.get(row, column) == 15.0);
-      }
-    }
-  }
-
-  @Test public void setGetIdentity()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-
-    Assert.assertTrue(m.set(0, 0, 3.0f).get(0, 0) == 3.0);
-    Assert.assertTrue(m.set(0, 1, 5.0f).get(0, 1) == 5.0);
-    Assert.assertTrue(m.set(0, 2, 7.0f).get(0, 2) == 7.0);
-
-    Assert.assertTrue(m.set(1, 0, 13.0f).get(1, 0) == 13.0);
-    Assert.assertTrue(m.set(1, 1, 17.0f).get(1, 1) == 17.0);
-    Assert.assertTrue(m.set(1, 2, 19.0f).get(1, 2) == 19.0);
-
-    Assert.assertTrue(m.set(2, 0, 29.0f).get(2, 0) == 29.0);
-    Assert.assertTrue(m.set(2, 1, 31.0f).get(2, 1) == 31.0);
-    Assert.assertTrue(m.set(2, 2, 37.0f).get(2, 2) == 37.0);
-  }
-
   @Test public void testAdd()
   {
     final MatrixM3x3F m0 = new MatrixM3x3F();
@@ -369,6 +200,48 @@ public class MatrixM3x3FTest
     Assert.assertTrue(m1.get(2, 0) == 7.0);
     Assert.assertTrue(m1.get(2, 1) == 8.0);
     Assert.assertTrue(m1.get(2, 2) == 9.0);
+  }
+
+  @Test public void testDeterminantIdentity()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+    Assert.assertTrue(MatrixM3x3F.determinant(m) == 1.0);
+  }
+
+  @Test public void testDeterminantOther()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+
+    m.set(0, 0, 2.0f);
+    m.set(1, 1, 2.0f);
+    m.set(2, 2, 2.0f);
+
+    Assert.assertTrue(MatrixM3x3F.determinant(m) == 8.0);
+  }
+
+  @Test public void testDeterminantScale()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+
+    m.set(0, 0, 2.0f);
+
+    Assert.assertTrue(MatrixM3x3F.determinant(m) == 2.0);
+  }
+
+  @Test public void testDeterminantScaleNegative()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+
+    m.set(0, 0, -2.0f);
+
+    Assert.assertTrue(MatrixM3x3F.determinant(m) == -2.0);
+  }
+
+  @Test public void testDeterminantZero()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+    MatrixM3x3F.setZero(m);
+    Assert.assertTrue(MatrixM3x3F.determinant(m) == 0.0);
   }
 
   @Test public void testExchangeRows()
@@ -765,6 +638,118 @@ public class MatrixM3x3FTest
     }
   }
 
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testOutOfRangeNegativeColumn()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+    m.get(0, -1);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testOutOfRangeNegativeRow()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+    m.get(-1, 0);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testOutOfRangeOverflowColumn()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+    m.get(0, 3);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testOutOfRangeOverflowRow()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+    m.get(3, 0);
+  }
+
+  @Test public void testRow()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+    final VectorM3F v = new VectorM3F();
+
+    MatrixM3x3F.row(m, 0, v);
+    Assert.assertTrue(v.x == 1.0);
+    Assert.assertTrue(v.y == 0.0);
+    Assert.assertTrue(v.z == 0.0);
+
+    MatrixM3x3F.row(m, 1, v);
+    Assert.assertTrue(v.x == 0.0);
+    Assert.assertTrue(v.y == 1.0);
+    Assert.assertTrue(v.z == 0.0);
+
+    MatrixM3x3F.row(m, 2, v);
+    Assert.assertTrue(v.x == 0.0);
+    Assert.assertTrue(v.y == 0.0);
+    Assert.assertTrue(v.z == 1.0);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testRowOverflow()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+    MatrixM3x3F.row(m, 3, new VectorM3F());
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testRowUnderflow()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+    MatrixM3x3F.row(m, -1, new VectorM3F());
+  }
+
+  @Test public void testScale()
+  {
+    final MatrixM3x3F m0 = new MatrixM3x3F();
+    final MatrixM3x3F mr = new MatrixM3x3F();
+
+    for (int row = 0; row < 3; ++row) {
+      for (int column = 0; column < 3; ++column) {
+        m0.set(row, column, 3.0f);
+      }
+    }
+
+    final MatrixM3x3F mk = MatrixM3x3F.scale(m0, 5.0f, mr);
+    Assert.assertSame(mr, mk);
+
+    for (int row = 0; row < 3; ++row) {
+      for (int column = 0; column < 3; ++column) {
+        Assert.assertTrue(m0.get(row, column) == 3.0);
+        Assert.assertTrue(mr.get(row, column) == 15.0);
+      }
+    }
+  }
+
+  @Test public void testScaleMutate()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+
+    for (int row = 0; row < 3; ++row) {
+      for (int column = 0; column < 3; ++column) {
+        m.set(row, column, 3.0f);
+      }
+    }
+
+    final MatrixM3x3F mr = MatrixM3x3F.scaleInPlace(m, 5.0f);
+    Assert.assertSame(mr, m);
+
+    for (int row = 0; row < 3; ++row) {
+      for (int column = 0; column < 3; ++column) {
+        Assert.assertTrue(m.get(row, column) == 15.0);
+        Assert.assertTrue(mr.get(row, column) == 15.0);
+      }
+    }
+  }
+
   @Test public void testScaleRow()
   {
     final MatrixM3x3F m0 = new MatrixM3x3F();
@@ -849,6 +834,23 @@ public class MatrixM3x3FTest
     MatrixM3x3F.scaleRow(m, -1, 1.0f, r);
   }
 
+  @Test public void testSetGetIdentity()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+
+    Assert.assertTrue(m.set(0, 0, 3.0f).get(0, 0) == 3.0);
+    Assert.assertTrue(m.set(0, 1, 5.0f).get(0, 1) == 5.0);
+    Assert.assertTrue(m.set(0, 2, 7.0f).get(0, 2) == 7.0);
+
+    Assert.assertTrue(m.set(1, 0, 13.0f).get(1, 0) == 13.0);
+    Assert.assertTrue(m.set(1, 1, 17.0f).get(1, 1) == 17.0);
+    Assert.assertTrue(m.set(1, 2, 19.0f).get(1, 2) == 19.0);
+
+    Assert.assertTrue(m.set(2, 0, 29.0f).get(2, 0) == 29.0);
+    Assert.assertTrue(m.set(2, 1, 31.0f).get(2, 1) == 31.0);
+    Assert.assertTrue(m.set(2, 2, 37.0f).get(2, 2) == 37.0);
+  }
+
   @Test public void testStorage()
   {
     final MatrixM3x3F m = new MatrixM3x3F();
@@ -896,7 +898,7 @@ public class MatrixM3x3FTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
-  @Test public void transpose()
+  @Test public void testTranspose()
   {
     final MatrixM3x3F m = new MatrixM3x3F();
     final MatrixM3x3F r = new MatrixM3x3F();
@@ -939,7 +941,7 @@ public class MatrixM3x3FTest
     Assert.assertTrue(r.get(2, 2) == 10.0);
   }
 
-  @Test public void transposeMutate()
+  @Test public void testTransposeMutate()
   {
     final MatrixM3x3F m = new MatrixM3x3F();
 
@@ -971,7 +973,7 @@ public class MatrixM3x3FTest
     Assert.assertTrue(r.get(2, 2) == 10.0);
   }
 
-  @Test public void zero()
+  @Test public void testZero()
   {
     final MatrixM3x3F m = new MatrixM3x3F();
     MatrixM3x3F.setZero(m);

@@ -29,9 +29,7 @@ import com.io7m.jaux.functional.Option;
 public final class MatrixM3x3F
 {
   private static final float[] identity_row_1 = { 0.0f, 1.0f, 0.0f };
-
   private static final float[] identity_row_2 = { 0.0f, 0.0f, 1.0f };
-
   private static final float[] zero_row       = { 0.0f, 0.0f, 0.0f };
 
   /**

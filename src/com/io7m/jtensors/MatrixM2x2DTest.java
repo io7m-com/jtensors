@@ -14,161 +14,6 @@ import com.io7m.jaux.functional.Option.Type;
 
 public class MatrixM2x2DTest
 {
-  @Test public void determinantIdentity()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-    Assert.assertTrue(MatrixM2x2D.determinant(m) == 1.0);
-  }
-
-  @Test public void determinantOther()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-
-    m.set(0, 0, 2.0f);
-    m.set(1, 1, 2.0f);
-
-    Assert.assertTrue(MatrixM2x2D.determinant(m) == 4.0);
-  }
-
-  @Test public void determinantScale()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-
-    m.set(0, 0, 2.0f);
-
-    Assert.assertTrue(MatrixM2x2D.determinant(m) == 2.0);
-  }
-
-  @Test public void determinantScaleNegative()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-
-    m.set(0, 0, -2.0f);
-
-    Assert.assertTrue(MatrixM2x2D.determinant(m) == -2.0);
-  }
-
-  @Test public void determinantZero()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.setZero(m);
-    Assert.assertTrue(MatrixM2x2D.determinant(m) == 0.0);
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    outOfRangeNegativeColumn()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-    m.get(0, -1);
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    outOfRangeNegativeRow()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-    m.get(-1, 0);
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    outOfRangeOverflowColumn()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-    m.get(0, 2);
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    outOfRangeOverflowRow()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-    m.get(2, 0);
-  }
-
-  @Test public void row()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-    final VectorM2D v = new VectorM2D();
-
-    MatrixM2x2D.row(m, 0, v);
-    Assert.assertTrue(v.x == 1.0);
-    Assert.assertTrue(v.y == 0.0);
-
-    MatrixM2x2D.row(m, 1, v);
-    Assert.assertTrue(v.x == 0.0);
-    Assert.assertTrue(v.y == 1.0);
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public void rowOverflow()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.row(m, 3, new VectorM2D());
-  }
-
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    rowUnderflow()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.row(m, -1, new VectorM2D());
-  }
-
-  @Test public void scale()
-  {
-    final MatrixM2x2D m0 = new MatrixM2x2D();
-    final MatrixM2x2D mr = new MatrixM2x2D();
-
-    for (int row = 0; row < 2; ++row) {
-      for (int column = 0; column < 2; ++column) {
-        m0.set(row, column, 3.0);
-      }
-    }
-
-    final MatrixM2x2D mk = MatrixM2x2D.scale(m0, 5.0, mr);
-    Assert.assertSame(mr, mk);
-
-    for (int row = 0; row < 2; ++row) {
-      for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 3.0);
-        Assert.assertTrue(mr.get(row, column) == 15.0);
-      }
-    }
-  }
-
-  @Test public void scaleMutate()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-
-    for (int row = 0; row < 2; ++row) {
-      for (int column = 0; column < 2; ++column) {
-        m.set(row, column, 3.0);
-      }
-    }
-
-    final MatrixM2x2D mr = MatrixM2x2D.scale(m, 5.0);
-    Assert.assertSame(mr, m);
-
-    for (int row = 0; row < 2; ++row) {
-      for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m.get(row, column) == 15.0);
-        Assert.assertTrue(mr.get(row, column) == 15.0);
-      }
-    }
-  }
-
-  @Test public void setGetIdentity()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-
-    Assert.assertTrue(m.set(0, 0, 3.0).get(0, 0) == 3.0);
-    Assert.assertTrue(m.set(0, 1, 5.0).get(0, 1) == 5.0);
-
-    Assert.assertTrue(m.set(1, 0, 13.0).get(1, 0) == 13.0);
-    Assert.assertTrue(m.set(1, 1, 17.0).get(1, 1) == 17.0);
-  }
-
   @Test public void testAdd()
   {
     final MatrixM2x2D m0 = new MatrixM2x2D();
@@ -329,6 +174,47 @@ public class MatrixM2x2DTest
 
     Assert.assertTrue(m1.get(1, 0) == 4.0);
     Assert.assertTrue(m1.get(1, 1) == 5.0);
+  }
+
+  @Test public void testDeterminantIdentity()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+    Assert.assertTrue(MatrixM2x2D.determinant(m) == 1.0);
+  }
+
+  @Test public void testDeterminantOther()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+
+    m.set(0, 0, 2.0f);
+    m.set(1, 1, 2.0f);
+
+    Assert.assertTrue(MatrixM2x2D.determinant(m) == 4.0);
+  }
+
+  @Test public void testDeterminantScale()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+
+    m.set(0, 0, 2.0f);
+
+    Assert.assertTrue(MatrixM2x2D.determinant(m) == 2.0);
+  }
+
+  @Test public void testDeterminantScaleNegative()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+
+    m.set(0, 0, -2.0f);
+
+    Assert.assertTrue(MatrixM2x2D.determinant(m) == -2.0);
+  }
+
+  @Test public void testDeterminantZero()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+    MatrixM2x2D.setZero(m);
+    Assert.assertTrue(MatrixM2x2D.determinant(m) == 0.0);
   }
 
   @Test public void testExchangeRows()
@@ -622,6 +508,111 @@ public class MatrixM2x2DTest
     }
   }
 
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testOutOfRangeNegativeColumn()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+    m.get(0, -1);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testOutOfRangeNegativeRow()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+    m.get(-1, 0);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testOutOfRangeOverflowColumn()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+    m.get(0, 2);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testOutOfRangeOverflowRow()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+    m.get(2, 0);
+  }
+
+  @Test public void testRow()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+    final VectorM2D v = new VectorM2D();
+
+    MatrixM2x2D.row(m, 0, v);
+    Assert.assertTrue(v.x == 1.0);
+    Assert.assertTrue(v.y == 0.0);
+
+    MatrixM2x2D.row(m, 1, v);
+    Assert.assertTrue(v.x == 0.0);
+    Assert.assertTrue(v.y == 1.0);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testRowOverflow()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+    MatrixM2x2D.row(m, 3, new VectorM2D());
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testRowUnderflow()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+    MatrixM2x2D.row(m, -1, new VectorM2D());
+  }
+
+  @Test public void testScale()
+  {
+    final MatrixM2x2D m0 = new MatrixM2x2D();
+    final MatrixM2x2D mr = new MatrixM2x2D();
+
+    for (int row = 0; row < 2; ++row) {
+      for (int column = 0; column < 2; ++column) {
+        m0.set(row, column, 3.0);
+      }
+    }
+
+    final MatrixM2x2D mk = MatrixM2x2D.scale(m0, 5.0, mr);
+    Assert.assertSame(mr, mk);
+
+    for (int row = 0; row < 2; ++row) {
+      for (int column = 0; column < 2; ++column) {
+        Assert.assertTrue(m0.get(row, column) == 3.0);
+        Assert.assertTrue(mr.get(row, column) == 15.0);
+      }
+    }
+  }
+
+  @Test public void testScaleMutate()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+
+    for (int row = 0; row < 2; ++row) {
+      for (int column = 0; column < 2; ++column) {
+        m.set(row, column, 3.0);
+      }
+    }
+
+    final MatrixM2x2D mr = MatrixM2x2D.scale(m, 5.0);
+    Assert.assertSame(mr, m);
+
+    for (int row = 0; row < 2; ++row) {
+      for (int column = 0; column < 2; ++column) {
+        Assert.assertTrue(m.get(row, column) == 15.0);
+        Assert.assertTrue(mr.get(row, column) == 15.0);
+      }
+    }
+  }
+
   @Test public void testScaleRow()
   {
     final MatrixM2x2D m0 = new MatrixM2x2D();
@@ -686,6 +677,17 @@ public class MatrixM2x2DTest
     MatrixM2x2D.scaleRow(m, -1, 1.0, r);
   }
 
+  @Test public void testSetGetIdentity()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+
+    Assert.assertTrue(m.set(0, 0, 3.0).get(0, 0) == 3.0);
+    Assert.assertTrue(m.set(0, 1, 5.0).get(0, 1) == 5.0);
+
+    Assert.assertTrue(m.set(1, 0, 13.0).get(1, 0) == 13.0);
+    Assert.assertTrue(m.set(1, 1, 17.0).get(1, 1) == 17.0);
+  }
+
   @Test public void testStorage()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
@@ -721,7 +723,7 @@ public class MatrixM2x2DTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
-  @Test public void transpose()
+  @Test public void testTranspose()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
     final MatrixM2x2D r = new MatrixM2x2D();
@@ -748,7 +750,7 @@ public class MatrixM2x2DTest
     Assert.assertTrue(r.get(1, 1) == 5.0);
   }
 
-  @Test public void transposeMutate()
+  @Test public void testTransposeMutate()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
 
@@ -768,7 +770,7 @@ public class MatrixM2x2DTest
     Assert.assertTrue(r.get(1, 1) == 5.0);
   }
 
-  @Test public void zero()
+  @Test public void testZero()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
     MatrixM2x2D.setZero(m);

@@ -74,25 +74,6 @@ public final class VectorI2I implements VectorReadable2I
     this.y = y;
   }
 
-  @Override public int getXI()
-  {
-    return this.x;
-  }
-
-  @Override public int getYI()
-  {
-    return this.y;
-  }
-
-  @Override public int hashCode()
-  {
-    final int prime = 31;
-    int result = 1;
-    result = (prime * result) + this.x;
-    result = (prime * result) + this.y;
-    return result;
-  }
-
   @Override public boolean equals(
     final Object obj)
   {
@@ -113,6 +94,25 @@ public final class VectorI2I implements VectorReadable2I
       return false;
     }
     return true;
+  }
+
+  @Override public int getXI()
+  {
+    return this.x;
+  }
+
+  @Override public int getYI()
+  {
+    return this.y;
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result) + this.x;
+    result = (prime * result) + this.y;
+    return result;
   }
 
   @Override public String toString()

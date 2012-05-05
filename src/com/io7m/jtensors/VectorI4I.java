@@ -84,6 +84,34 @@ public final class VectorI4I implements VectorReadable4I
     this.w = w;
   }
 
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final VectorI4I other = (VectorI4I) obj;
+    if (this.w != other.w) {
+      return false;
+    }
+    if (this.x != other.x) {
+      return false;
+    }
+    if (this.y != other.y) {
+      return false;
+    }
+    if (this.z != other.z) {
+      return false;
+    }
+    return true;
+  }
+
   @Override public int getWI()
   {
     return this.w;
@@ -113,34 +141,6 @@ public final class VectorI4I implements VectorReadable4I
     result = (prime * result) + this.y;
     result = (prime * result) + this.z;
     return result;
-  }
-
-  @Override public boolean equals(
-    final Object obj)
-  {
-    if (this == obj) {
-      return true;
-    }
-    if (obj == null) {
-      return false;
-    }
-    if (this.getClass() != obj.getClass()) {
-      return false;
-    }
-    final VectorI4I other = (VectorI4I) obj;
-    if (this.w != other.w) {
-      return false;
-    }
-    if (this.x != other.x) {
-      return false;
-    }
-    if (this.y != other.y) {
-      return false;
-    }
-    if (this.z != other.z) {
-      return false;
-    }
-    return true;
   }
 
   @Override public String toString()

@@ -78,31 +78,6 @@ public final class VectorI3I implements VectorReadable3I
     this.z = z;
   }
 
-  @Override public int getXI()
-  {
-    return this.x;
-  }
-
-  @Override public int getYI()
-  {
-    return this.y;
-  }
-
-  @Override public int getZI()
-  {
-    return this.z;
-  }
-
-  @Override public int hashCode()
-  {
-    final int prime = 31;
-    int result = 1;
-    result = (prime * result) + this.x;
-    result = (prime * result) + this.y;
-    result = (prime * result) + this.z;
-    return result;
-  }
-
   @Override public boolean equals(
     final Object obj)
   {
@@ -126,6 +101,31 @@ public final class VectorI3I implements VectorReadable3I
       return false;
     }
     return true;
+  }
+
+  @Override public int getXI()
+  {
+    return this.x;
+  }
+
+  @Override public int getYI()
+  {
+    return this.y;
+  }
+
+  @Override public int getZI()
+  {
+    return this.z;
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result) + this.x;
+    result = (prime * result) + this.y;
+    result = (prime * result) + this.z;
+    return result;
   }
 
   @Override public String toString()
