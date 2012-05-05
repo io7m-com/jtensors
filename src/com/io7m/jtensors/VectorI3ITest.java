@@ -42,11 +42,11 @@ public class VectorI3ITest
 
   @Test public void testEqualsCorrect()
   {
-    final VectorI4I v0 = new VectorI4I(0, 0, 0, 0);
-    final VectorI4I v1 = new VectorI4I(0, 0, 0, 0);
-    final VectorI4I vz = new VectorI4I(0, 0, 1, 0);
-    final VectorI4I vy = new VectorI4I(0, 1, 0, 0);
-    final VectorI4I vx = new VectorI4I(1, 0, 0, 0);
+    final VectorI3I v0 = new VectorI3I(0, 0, 0);
+    final VectorI3I v1 = new VectorI3I(0, 0, 0);
+    final VectorI3I vz = new VectorI3I(0, 0, 1);
+    final VectorI3I vy = new VectorI3I(0, 1, 0);
+    final VectorI3I vx = new VectorI3I(1, 0, 0);
 
     Assert.assertTrue(v0.equals(v0));
     Assert.assertFalse(v0.equals(null));
@@ -59,11 +59,11 @@ public class VectorI3ITest
 
   @Test public void testHashCodeCorrect()
   {
-    final VectorI4I v0 = new VectorI4I(0, 0, 0, 0);
-    final VectorI4I v1 = new VectorI4I(0, 0, 0, 0);
-    final VectorI4I vz = new VectorI4I(0, 0, 1, 0);
-    final VectorI4I vy = new VectorI4I(0, 1, 0, 0);
-    final VectorI4I vx = new VectorI4I(1, 0, 0, 0);
+    final VectorI3I v0 = new VectorI3I(0, 0, 0);
+    final VectorI3I v1 = new VectorI3I(0, 0, 0);
+    final VectorI3I vz = new VectorI3I(0, 0, 1);
+    final VectorI3I vy = new VectorI3I(0, 1, 0);
+    final VectorI3I vx = new VectorI3I(1, 0, 0);
 
     Assert.assertTrue(v0.hashCode() == v0.hashCode());
     Assert.assertTrue(v0.hashCode() == v1.hashCode());
