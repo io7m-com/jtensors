@@ -898,6 +898,275 @@ public class MatrixM3x3DTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
+  @SuppressWarnings("boxing") @Test public void testTranslate2DMakeIdentity()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM2D v = new VectorM2D(0, 0);
+
+    MatrixM3x3D.makeTranslation2D(v, m);
+
+    Assert.assertEquals(1.0, m.get(0, 0));
+    Assert.assertEquals(0.0, m.get(0, 1));
+    Assert.assertEquals(0.0, m.get(0, 2));
+
+    Assert.assertEquals(0.0, m.get(1, 0));
+    Assert.assertEquals(1.0, m.get(1, 1));
+    Assert.assertEquals(0.0, m.get(1, 2));
+
+    Assert.assertEquals(0.0, m.get(2, 0));
+    Assert.assertEquals(0.0, m.get(2, 1));
+    Assert.assertEquals(1.0, m.get(2, 2));
+  }
+
+  @SuppressWarnings("boxing") @Test public void testTranslate2DMakeSimple()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM2D v = new VectorM2D(3, 7);
+
+    MatrixM3x3D.makeTranslation2D(v, m);
+
+    Assert.assertEquals(1.0, m.get(0, 0));
+    Assert.assertEquals(0.0, m.get(0, 1));
+    Assert.assertEquals(3.0, m.get(0, 2));
+
+    Assert.assertEquals(0.0, m.get(1, 0));
+    Assert.assertEquals(1.0, m.get(1, 1));
+    Assert.assertEquals(7.0, m.get(1, 2));
+
+    Assert.assertEquals(0.0, m.get(2, 0));
+    Assert.assertEquals(0.0, m.get(2, 1));
+    Assert.assertEquals(1.0, m.get(2, 2));
+  }
+
+  @SuppressWarnings("boxing") @Test public void testTranslate2IMakeIdentity()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM2I v = new VectorM2I(0, 0);
+
+    MatrixM3x3D.makeTranslation2I(v, m);
+
+    Assert.assertEquals(1.0, m.get(0, 0));
+    Assert.assertEquals(0.0, m.get(0, 1));
+    Assert.assertEquals(0.0, m.get(0, 2));
+
+    Assert.assertEquals(0.0, m.get(1, 0));
+    Assert.assertEquals(1.0, m.get(1, 1));
+    Assert.assertEquals(0.0, m.get(1, 2));
+
+    Assert.assertEquals(0.0, m.get(2, 0));
+    Assert.assertEquals(0.0, m.get(2, 1));
+    Assert.assertEquals(1.0, m.get(2, 2));
+  }
+
+  @SuppressWarnings("boxing") @Test public void testTranslate2IMakeSimple()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM2I v = new VectorM2I(3, 7);
+
+    MatrixM3x3D.makeTranslation2I(v, m);
+
+    Assert.assertEquals(1.0, m.get(0, 0));
+    Assert.assertEquals(0.0, m.get(0, 1));
+    Assert.assertEquals(3.0, m.get(0, 2));
+
+    Assert.assertEquals(0.0, m.get(1, 0));
+    Assert.assertEquals(1.0, m.get(1, 1));
+    Assert.assertEquals(7.0, m.get(1, 2));
+
+    Assert.assertEquals(0.0, m.get(2, 0));
+    Assert.assertEquals(0.0, m.get(2, 1));
+    Assert.assertEquals(1.0, m.get(2, 2));
+  }
+
+  @SuppressWarnings("boxing") @Test public void testTranslateSimple2D()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final MatrixM3x3D out = new MatrixM3x3D();
+    final VectorI2D v = new VectorI2D(1.0, 2.0);
+
+    {
+      final MatrixM3x3D r = MatrixM3x3D.translateByVector2D(m, v, out);
+      Assert.assertSame(out, r);
+
+      Assert.assertEquals(1.0, r.get(0, 0));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertEquals(1.0, r.get(0, 2));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertEquals(1.0, r.get(1, 1));
+      Assert.assertEquals(2.0, r.get(1, 2));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertEquals(1.0, r.get(2, 2));
+    }
+
+    {
+      final MatrixM3x3D r = MatrixM3x3D.translateByVector2D(m, v, out);
+      Assert.assertSame(out, r);
+
+      Assert.assertEquals(1.0, r.get(0, 0));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertEquals(2.0, r.get(0, 2));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertEquals(1.0, r.get(1, 1));
+      Assert.assertEquals(4.0, r.get(1, 2));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertEquals(1.0, r.get(2, 2));
+    }
+  }
+
+  @SuppressWarnings("boxing") @Test public void testTranslateSimple2DAlt()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorI2D v = new VectorI2D(1.0, 2.0);
+
+    {
+      final MatrixM3x3D r = MatrixM3x3D.translateByVector2DInPlace(m, v);
+      Assert.assertSame(m, r);
+
+      Assert.assertEquals(1.0, r.get(0, 0));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertEquals(1.0, r.get(0, 2));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertEquals(1.0, r.get(1, 1));
+      Assert.assertEquals(2.0, r.get(1, 2));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertEquals(1.0, r.get(2, 2));
+    }
+
+    {
+      final MatrixM3x3D r = MatrixM3x3D.translateByVector2DInPlace(m, v);
+      Assert.assertSame(m, r);
+
+      Assert.assertEquals(1.0, r.get(0, 0));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertEquals(2.0, r.get(0, 2));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertEquals(1.0, r.get(1, 1));
+      Assert.assertEquals(4.0, r.get(1, 2));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertEquals(1.0, r.get(2, 2));
+    }
+  }
+
+  @SuppressWarnings("boxing") @Test public void testTranslateSimple2I()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final MatrixM3x3D out = new MatrixM3x3D();
+    final VectorI2I v = new VectorI2I(1, 2);
+
+    {
+      final MatrixM3x3D r = MatrixM3x3D.translateByVector2I(m, v, out);
+      Assert.assertSame(out, r);
+
+      Assert.assertEquals(1.0, r.get(0, 0));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertEquals(1.0, r.get(0, 2));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertEquals(1.0, r.get(1, 1));
+      Assert.assertEquals(2.0, r.get(1, 2));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertEquals(1.0, r.get(2, 2));
+    }
+
+    {
+      final MatrixM3x3D r = MatrixM3x3D.translateByVector2I(m, v, out);
+      Assert.assertSame(out, r);
+
+      Assert.assertEquals(1.0, r.get(0, 0));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertEquals(2.0, r.get(0, 2));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertEquals(1.0, r.get(1, 1));
+      Assert.assertEquals(4.0, r.get(1, 2));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertEquals(1.0, r.get(2, 2));
+    }
+  }
+
+  @Test public void testTranslateSimple2IAlt()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorI2I v = new VectorI2I(1, 2);
+
+    {
+      final MatrixM3x3D r = MatrixM3x3D.translateByVector2IInPlace(m, v);
+      Assert.assertSame(m, r);
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 1.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 2.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+    }
+
+    {
+      final MatrixM3x3D r = MatrixM3x3D.translateByVector2IInPlace(m, v);
+      Assert.assertSame(m, r);
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 2.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 4.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+    }
+  }
+
+  @SuppressWarnings("boxing") @Test public void testTranslationStorage()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final MatrixM3x3D out = new MatrixM3x3D();
+
+    MatrixM3x3D.translateByVector2D(m, new VectorI2D(1.0, 2.0), out);
+
+    {
+      final DoubleBuffer b = MatrixM3x3D.doubleBuffer(out);
+
+      Assert.assertTrue(b.isReadOnly());
+      Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
+
+      Assert.assertEquals(1.0, b.get(0));
+      Assert.assertEquals(0.0, b.get(1));
+      Assert.assertEquals(0.0, b.get(2));
+
+      Assert.assertEquals(0.0, b.get(3));
+      Assert.assertEquals(1.0, b.get(4));
+      Assert.assertEquals(0.0, b.get(5));
+
+      Assert.assertEquals(1.0, b.get(6));
+      Assert.assertEquals(2.0, b.get(7));
+      Assert.assertEquals(1.0, b.get(8));
+    }
+  }
+
   @Test public void testTranspose()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
@@ -984,4 +1253,5 @@ public class MatrixM3x3DTest
       }
     }
   }
+
 }

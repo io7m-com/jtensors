@@ -411,6 +411,46 @@ public final class MatrixM3x3D
   }
 
   /**
+   * Create a translation matrix that represents a translation by the vector
+   * <code>v</code>, writing the resulting matrix to <code>out</code>.
+   * 
+   * @param v
+   *          The translation vector.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3D makeTranslation2D(
+    final VectorReadable2D v,
+    final MatrixM3x3D out)
+  {
+    out.setUnsafe(0, 2, v.getXD());
+    out.setUnsafe(1, 2, v.getYD());
+    return out;
+  }
+
+  /**
+   * Create a translation matrix that represents a translation by the vector
+   * <code>v</code>, writing the resulting matrix to <code>out</code>.
+   * 
+   * @param v
+   *          The translation vector.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3D makeTranslation2I(
+    final VectorReadable2I v,
+    final MatrixM3x3D out)
+  {
+    out.setUnsafe(0, 2, v.getXI());
+    out.setUnsafe(1, 2, v.getYI());
+    return out;
+  }
+
+  /**
    * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
    * writing the result to <code>out</code>.
    * 
@@ -738,6 +778,106 @@ public final class MatrixM3x3D
     m.view.put(MatrixM3x3D.zero_row);
     m.view.put(MatrixM3x3D.zero_row);
     return m;
+  }
+
+  /**
+   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
+   * the resulting matrix in <code>out</code>.
+   * 
+   * @param m
+   *          The input matrix.
+   * @param v
+   *          The translation vector.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3D translateByVector2D(
+    final MatrixM3x3D m,
+    final VectorReadable2D v,
+    final MatrixM3x3D out)
+  {
+    final double vx = v.getXD();
+    final double vy = v.getYD();
+
+    final double c2r0 = (m.getUnsafe(0, 0) * vx) + (m.getUnsafe(0, 1) * vy);
+    final double c2r1 = (m.getUnsafe(1, 0) * vx) + (m.getUnsafe(1, 1) * vy);
+    final double c2r2 = (m.getUnsafe(2, 0) * vx) + (m.getUnsafe(2, 1) * vy);
+
+    out.setUnsafe(0, 2, out.getUnsafe(0, 2) + c2r0);
+    out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
+    out.setUnsafe(2, 2, out.getUnsafe(2, 2) + c2r2);
+
+    return out;
+  }
+
+  /**
+   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
+   * the resulting matrix in <code>m</code>.
+   * 
+   * @param m
+   *          The input matrix.
+   * @param v
+   *          The translation vector.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM3x3D translateByVector2DInPlace(
+    final MatrixM3x3D m,
+    final VectorReadable2D v)
+  {
+    return MatrixM3x3D.translateByVector2D(m, v, m);
+  }
+
+  /**
+   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
+   * the resulting matrix in <code>out</code>.
+   * 
+   * @param m
+   *          The input matrix.
+   * @param v
+   *          The translation vector.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3D translateByVector2I(
+    final MatrixM3x3D m,
+    final VectorReadable2I v,
+    final MatrixM3x3D out)
+  {
+    final double vx = v.getXI();
+    final double vy = v.getYI();
+
+    final double c2r0 = (m.getUnsafe(0, 0) * vx) + (m.getUnsafe(0, 1) * vy);
+    final double c2r1 = (m.getUnsafe(1, 0) * vx) + (m.getUnsafe(1, 1) * vy);
+    final double c2r2 = (m.getUnsafe(2, 0) * vx) + (m.getUnsafe(2, 1) * vy);
+
+    out.setUnsafe(0, 2, out.getUnsafe(0, 2) + c2r0);
+    out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
+    out.setUnsafe(2, 2, out.getUnsafe(2, 2) + c2r2);
+
+    return out;
+  }
+
+  /**
+   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
+   * the resulting matrix in <code>m</code>.
+   * 
+   * @param m
+   *          The input matrix.
+   * @param v
+   *          The translation vector.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM3x3D translateByVector2IInPlace(
+    final MatrixM3x3D m,
+    final VectorReadable2I v)
+  {
+    return MatrixM3x3D.translateByVector2I(m, v, m);
   }
 
   /**
