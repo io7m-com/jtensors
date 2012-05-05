@@ -23,6 +23,12 @@ package com.io7m.jtensors;
 public final class VectorI4I implements VectorReadable4I
 {
   /**
+   * The zero vector.
+   */
+
+  public static final VectorI4I ZERO = new VectorI4I(0, 0, 0, 0);
+
+  /**
    * @param v0
    *          The left input vector.
    * @param v1
@@ -53,6 +59,7 @@ public final class VectorI4I implements VectorReadable4I
   }
 
   public final int x;
+
   public final int y;
 
   public final int z;

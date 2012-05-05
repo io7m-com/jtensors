@@ -421,7 +421,7 @@ public class VectorI3DTest
   @Test public void testNoargZero()
   {
     final VectorI3D v = new VectorI3D();
-    VectorI3D.approximatelyEqual(v, VectorI3D.zero);
+    VectorI3D.approximatelyEqual(v, VectorI3D.ZERO);
   }
 
   @Test public void testNormalizeSimple()

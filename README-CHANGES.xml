@@ -8,6 +8,12 @@
 
     <c:item>
       <c:date>2012-05-05</c:date>
+      <c:type-code-new/>
+      <c:summary>VectorI*.zero renamed to ZERO and implemented by all vector types</c:summary>
+    </c:item>
+ 
+    <c:item>
+      <c:date>2012-05-05</c:date>
       <c:type-code-fix/>
       <c:summary>MatrixM4x4D.multiply -> MatrixM4x4D.multiplyVector4DWithContext</c:summary>
     </c:item>

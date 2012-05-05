@@ -437,7 +437,7 @@ public class VectorI4FTest
   @Test public void testNoargZero()
   {
     final VectorI4F v = new VectorI4F();
-    VectorI4F.approximatelyEqual(v, VectorI4F.zero);
+    VectorI4F.approximatelyEqual(v, VectorI4F.ZERO);
   }
 
   @Test public void testNormalizeSimple()

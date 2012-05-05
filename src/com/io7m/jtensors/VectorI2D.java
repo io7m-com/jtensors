@@ -356,7 +356,7 @@ public final class VectorI2D implements VectorReadable2D
    * The zero vector.
    */
 
-  public static final VectorI2D zero = new VectorI2D(0.0, 0.0);
+  public static final VectorI2D ZERO = new VectorI2D(0.0, 0.0);
 
   /**
    * @param v

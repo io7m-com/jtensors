@@ -415,7 +415,7 @@ public class VectorI3FTest
   @Test public void testNoargZero()
   {
     final VectorI3F v = new VectorI3F();
-    VectorI3F.approximatelyEqual(v, VectorI3F.zero);
+    VectorI3F.approximatelyEqual(v, VectorI3F.ZERO);
   }
 
   @Test public void testNormalizeSimple()

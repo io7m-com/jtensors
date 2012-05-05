@@ -354,7 +354,7 @@ public final class VectorI3D implements VectorReadable3D
    * The zero vector.
    */
 
-  public static final VectorI3D zero = new VectorI3D(0.0, 0.0, 0.0);
+  public static final VectorI3D ZERO = new VectorI3D(0.0, 0.0, 0.0);
 
   /**
    * @param v

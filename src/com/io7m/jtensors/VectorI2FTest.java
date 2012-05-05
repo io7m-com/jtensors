@@ -316,7 +316,7 @@ public class VectorI2FTest
   @Test public void testNoargZero()
   {
     final VectorI2F v = new VectorI2F();
-    VectorI2F.approximatelyEqual(v, VectorI2F.zero);
+    VectorI2F.approximatelyEqual(v, VectorI2F.ZERO);
   }
 
   @Test public void testNormalizeZero()

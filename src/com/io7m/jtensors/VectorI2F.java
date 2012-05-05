@@ -371,7 +371,7 @@ public final class VectorI2F implements VectorReadable2F
    * The zero vector.
    */
 
-  public static final VectorI2F zero = new VectorI2F(0.0f, 0.0f);
+  public static final VectorI2F ZERO = new VectorI2F(0.0f, 0.0f);
 
   /**
    * @param v

@@ -23,6 +23,12 @@ package com.io7m.jtensors;
 public final class VectorI2I implements VectorReadable2I
 {
   /**
+   * The zero vector.
+   */
+
+  public static final VectorI2I ZERO = new VectorI2I(0, 0);
+
+  /**
    * @param v0
    *          The left input vector.
    * @param v1
@@ -53,6 +59,7 @@ public final class VectorI2I implements VectorReadable2I
   }
 
   public final int x;
+
   public final int y;
 
   /**

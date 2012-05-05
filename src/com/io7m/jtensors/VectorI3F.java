@@ -354,7 +354,7 @@ public final class VectorI3F implements VectorReadable3F
    * The zero vector.
    */
 
-  public static final VectorI3F zero = new VectorI3F(0.0f, 0.0f, 0.0f);
+  public static final VectorI3F ZERO = new VectorI3F(0.0f, 0.0f, 0.0f);
 
   /**
    * @param v

@@ -346,7 +346,7 @@ public final class VectorI4F implements VectorReadable4F
    * The zero vector.
    */
 
-  public static final VectorI4F zero = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
+  public static final VectorI4F ZERO = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
 
   /**
    * @param v

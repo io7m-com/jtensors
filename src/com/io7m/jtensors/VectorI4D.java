@@ -346,7 +346,7 @@ public final class VectorI4D implements VectorReadable4D
    * The zero vector.
    */
 
-  public static final VectorI4D zero = new VectorI4D(0.0, 0.0, 0.0, 0.0);
+  public static final VectorI4D ZERO = new VectorI4D(0.0, 0.0, 0.0, 0.0);
 
   /**
    * @param v

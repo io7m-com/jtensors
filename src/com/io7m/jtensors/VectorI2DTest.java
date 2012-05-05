@@ -320,7 +320,7 @@ public class VectorI2DTest
   @Test public void testNoargZero()
   {
     final VectorI2D v = new VectorI2D();
-    VectorI2D.approximatelyEqual(v, VectorI2D.zero);
+    VectorI2D.approximatelyEqual(v, VectorI2D.ZERO);
   }
 
   @Test public void testNormalizeSimple()
