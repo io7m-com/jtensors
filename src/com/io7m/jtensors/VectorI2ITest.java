@@ -36,6 +36,34 @@ public class VectorI2ITest
     Assert.assertEquals(2, v.getYI());
   }
 
+  @Test public void testEqualsCorrect()
+  {
+    final VectorI2I v0 = new VectorI2I(0, 0);
+    final VectorI2I v1 = new VectorI2I(0, 0);
+    final VectorI2I vy = new VectorI2I(0, 1);
+    final VectorI2I vx = new VectorI2I(1, 0);
+
+    Assert.assertTrue(v0.equals(v0));
+    Assert.assertFalse(v0.equals(null));
+    Assert.assertFalse(v0.equals(Integer.valueOf(0)));
+    Assert.assertFalse(v0.equals(vy));
+    Assert.assertFalse(v0.equals(vx));
+    Assert.assertTrue(v0.equals(v1));
+  }
+
+  @Test public void testHashCodeCorrect()
+  {
+    final VectorI2I v0 = new VectorI2I(0, 0);
+    final VectorI2I v1 = new VectorI2I(0, 0);
+    final VectorI2I vy = new VectorI2I(0, 1);
+    final VectorI2I vx = new VectorI2I(1, 0);
+
+    Assert.assertTrue(v0.hashCode() == v0.hashCode());
+    Assert.assertTrue(v0.hashCode() == v1.hashCode());
+    Assert.assertTrue(v0.hashCode() != vx.hashCode());
+    Assert.assertTrue(v0.hashCode() != vy.hashCode());
+  }
+
   @Test public void testInit()
   {
     final VectorI2I v = new VectorI2I(1, 2);
@@ -48,6 +76,12 @@ public class VectorI2ITest
     final VectorI2I v = new VectorI2I();
     Assert.assertEquals(0, v.x);
     Assert.assertEquals(0, v.y);
+  }
+
+  @Test public void testString()
+  {
+    final VectorI2I v = new VectorI2I(0, 1);
+    Assert.assertTrue(v.toString().equals("[VectorI2I 0 1]"));
   }
 
   @Test public void testSubtract()

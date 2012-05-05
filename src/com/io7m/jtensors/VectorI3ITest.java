@@ -40,6 +40,38 @@ public class VectorI3ITest
     Assert.assertEquals(3, v.getZI());
   }
 
+  @Test public void testEqualsCorrect()
+  {
+    final VectorI4I v0 = new VectorI4I(0, 0, 0, 0);
+    final VectorI4I v1 = new VectorI4I(0, 0, 0, 0);
+    final VectorI4I vz = new VectorI4I(0, 0, 1, 0);
+    final VectorI4I vy = new VectorI4I(0, 1, 0, 0);
+    final VectorI4I vx = new VectorI4I(1, 0, 0, 0);
+
+    Assert.assertTrue(v0.equals(v0));
+    Assert.assertFalse(v0.equals(null));
+    Assert.assertFalse(v0.equals(Integer.valueOf(0)));
+    Assert.assertFalse(v0.equals(vz));
+    Assert.assertFalse(v0.equals(vy));
+    Assert.assertFalse(v0.equals(vx));
+    Assert.assertTrue(v0.equals(v1));
+  }
+
+  @Test public void testHashCodeCorrect()
+  {
+    final VectorI4I v0 = new VectorI4I(0, 0, 0, 0);
+    final VectorI4I v1 = new VectorI4I(0, 0, 0, 0);
+    final VectorI4I vz = new VectorI4I(0, 0, 1, 0);
+    final VectorI4I vy = new VectorI4I(0, 1, 0, 0);
+    final VectorI4I vx = new VectorI4I(1, 0, 0, 0);
+
+    Assert.assertTrue(v0.hashCode() == v0.hashCode());
+    Assert.assertTrue(v0.hashCode() == v1.hashCode());
+    Assert.assertTrue(v0.hashCode() != vx.hashCode());
+    Assert.assertTrue(v0.hashCode() != vy.hashCode());
+    Assert.assertTrue(v0.hashCode() != vz.hashCode());
+  }
+
   @Test public void testInit()
   {
     final VectorI3I v = new VectorI3I(1, 2, 3);
@@ -54,6 +86,12 @@ public class VectorI3ITest
     Assert.assertEquals(0, v.x);
     Assert.assertEquals(0, v.y);
     Assert.assertEquals(0, v.z);
+  }
+
+  @Test public void testString()
+  {
+    final VectorI3I v = new VectorI3I(0, 1, 2);
+    Assert.assertTrue(v.toString().equals("[VectorI3I 0 1 2]"));
   }
 
   @Test public void testSubtract()
