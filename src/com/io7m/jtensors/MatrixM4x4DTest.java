@@ -1211,7 +1211,7 @@ public class MatrixM4x4DTest
     final VectorI4D v = new VectorI4D(1.0, 2.0, 3.0, 4.0);
     final VectorM4D out = new VectorM4D();
 
-    final VectorM4D r = MatrixM4x4D.multiply(m0, v, out);
+    final VectorM4D r = MatrixM4x4D.multiplyVector4D(m0, v, out);
     Assert.assertSame(out, r);
 
     Assert.assertTrue(out.x == 30.0);
@@ -1245,7 +1245,8 @@ public class MatrixM4x4DTest
     final VectorM4D out = new VectorM4D();
     final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
 
-    final VectorM4D r = MatrixM4x4D.multiplyWithContext(context, m0, v, out);
+    final VectorM4D r =
+      MatrixM4x4D.multiplyVector4DWithContext(context, m0, v, out);
     Assert.assertSame(out, r);
 
     Assert.assertTrue(out.x == 30.0);
@@ -2288,6 +2289,26 @@ public class MatrixM4x4DTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
+  @SuppressWarnings("boxing") @Test public void testTranslate3D4DEquivalent()
+  {
+    final MatrixM3x3D m3 = new MatrixM3x3D();
+    final MatrixM4x4D m4 = new MatrixM4x4D();
+    final VectorI3D v = new VectorI3D(3.0, 7.0, 0.0);
+    final VectorM3D v3i = new VectorM3D(1, 1, 1);
+    final VectorM3D v3o = new VectorM3D();
+    final VectorM4D w3i = new VectorM4D(1, 1, 1, 1);
+    final VectorM4D w3o = new VectorM4D();
+
+    MatrixM3x3D.makeTranslation2D(v, m3);
+    MatrixM4x4D.makeTranslation3D(v, m4);
+
+    MatrixM3x3D.multiplyVector3D(m3, v3i, v3o);
+    MatrixM4x4D.multiplyVector4D(m4, w3i, w3o);
+
+    Assert.assertEquals(v3o.x, w3o.x);
+    Assert.assertEquals(v3o.y, w3o.y);
+  }
+
   @Test public void testTranslateSimple2D()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
@@ -3072,5 +3093,4 @@ public class MatrixM4x4DTest
       }
     }
   }
-
 }
