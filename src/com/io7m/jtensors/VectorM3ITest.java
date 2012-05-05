@@ -730,7 +730,7 @@ public class VectorM3ITest
   @Test public void testString()
   {
     final VectorM3I v = new VectorM3I(1, 2, 3);
-    Assert.assertTrue(v.toString().equals("VectorM3I [1 2 3]"));
+    Assert.assertTrue(v.toString().equals("[VectorM3I 1 2 3]"));
   }
 
   @Test public void testSubtract()

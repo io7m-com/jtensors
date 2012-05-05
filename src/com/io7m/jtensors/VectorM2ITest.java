@@ -643,7 +643,7 @@ public class VectorM2ITest
   @Test public void testString()
   {
     final VectorM2I v = new VectorM2I(1, 2);
-    Assert.assertTrue(v.toString().equals("VectorM2I [1 2]"));
+    Assert.assertTrue(v.toString().equals("[VectorM2I 1 2]"));
   }
 
   @Test public void testSubtract()

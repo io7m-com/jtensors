@@ -883,7 +883,7 @@ public class VectorM3DTest
   @Test public void testString()
   {
     final VectorM3D v = new VectorM3D(0.0, 1.0, 2.0);
-    Assert.assertTrue(v.toString().equals("VectorM3D [0.0 1.0 2.0]"));
+    Assert.assertTrue(v.toString().equals("[VectorM3D 0.0 1.0 2.0]"));
   }
 
   @Test public void testSubtract()

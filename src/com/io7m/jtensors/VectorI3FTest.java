@@ -452,7 +452,7 @@ public class VectorI3FTest
   @Test public void testString()
   {
     final VectorI3F v = new VectorI3F(0.0f, 1.0f, 2.0f);
-    Assert.assertTrue(v.toString().equals("VectorI3F [0.0 1.0 2.0]"));
+    Assert.assertTrue(v.toString().equals("[VectorI3F 0.0 1.0 2.0]"));
   }
 
   @Test public void testSubtract()

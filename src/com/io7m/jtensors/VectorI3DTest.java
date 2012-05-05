@@ -458,7 +458,7 @@ public class VectorI3DTest
   @Test public void testString()
   {
     final VectorI3D v = new VectorI3D(0.0, 1.0, 2.0);
-    Assert.assertTrue(v.toString().equals("VectorI3D [0.0 1.0 2.0]"));
+    Assert.assertTrue(v.toString().equals("[VectorI3D 0.0 1.0 2.0]"));
   }
 
   @Test public void testSubtract()

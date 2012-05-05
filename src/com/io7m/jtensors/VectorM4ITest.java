@@ -811,7 +811,7 @@ public class VectorM4ITest
   @Test public void testString()
   {
     final VectorM4I v = new VectorM4I(1, 2, 3, 4);
-    Assert.assertTrue(v.toString().equals("VectorM4I [1 2 3 4]"));
+    Assert.assertTrue(v.toString().equals("[VectorM4I 1 2 3 4]"));
   }
 
   @Test public void testSubtract()

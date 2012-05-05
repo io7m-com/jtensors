@@ -968,7 +968,7 @@ public class VectorM4FTest
   @Test public void testString()
   {
     final VectorM4F v = new VectorM4F(1.0f, 2.0f, 3.0f, 4.0f);
-    Assert.assertTrue(v.toString().equals("VectorM4F [1.0 2.0 3.0 4.0]"));
+    Assert.assertTrue(v.toString().equals("[VectorM4F 1.0 2.0 3.0 4.0]"));
   }
 
   @Test public void testSubtract()

@@ -886,7 +886,7 @@ public class VectorM3FTest
   @Test public void testString()
   {
     final VectorM3F v = new VectorM3F(0.0f, 1.0f, 2.0f);
-    Assert.assertTrue(v.toString().equals("VectorM3F [0.0 1.0 2.0]"));
+    Assert.assertTrue(v.toString().equals("[VectorM3F 0.0 1.0 2.0]"));
   }
 
   @Test public void testSubtract()

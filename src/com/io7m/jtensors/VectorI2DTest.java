@@ -357,7 +357,7 @@ public class VectorI2DTest
   @Test public void testString()
   {
     final VectorI2D v = new VectorI2D(0.0, 1.0);
-    Assert.assertTrue(v.toString().equals("VectorI2D [0.0 1.0]"));
+    Assert.assertTrue(v.toString().equals("[VectorI2D 0.0 1.0]"));
   }
 
   @Test public void testSubtract()

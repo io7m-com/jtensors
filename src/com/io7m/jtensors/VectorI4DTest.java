@@ -482,7 +482,7 @@ public class VectorI4DTest
   @Test public void testString()
   {
     final VectorI4D v = new VectorI4D(0.0, 1.0, 2.0, 3.0);
-    Assert.assertTrue(v.toString().equals("VectorI4D [0.0 1.0 2.0 3.0]"));
+    Assert.assertTrue(v.toString().equals("[VectorI4D 0.0 1.0 2.0 3.0]"));
   }
 
   @Test public void testSubtract()

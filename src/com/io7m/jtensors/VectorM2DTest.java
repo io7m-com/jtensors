@@ -740,7 +740,7 @@ public class VectorM2DTest
   @Test public void testString()
   {
     final VectorM2D v = new VectorM2D(0.0, 1.0);
-    Assert.assertTrue(v.toString().equals("VectorM2D [0.0 1.0]"));
+    Assert.assertTrue(v.toString().equals("[VectorM2D 0.0 1.0]"));
   }
 
   @Test public void testSubtract()
