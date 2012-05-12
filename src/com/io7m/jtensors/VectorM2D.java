@@ -16,6 +16,8 @@
 
 package com.io7m.jtensors;
 
+import com.io7m.jaux.ApproximatelyEqualDouble;
+
 /**
  * A two-dimensional mutable vector type with double precision elements.
  */

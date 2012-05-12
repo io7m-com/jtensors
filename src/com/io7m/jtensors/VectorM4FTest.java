@@ -19,6 +19,8 @@ package com.io7m.jtensors;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.io7m.jaux.ApproximatelyEqualFloat;
+
 public class VectorM4FTest
 {
   @Test public void testAbsolute()
