@@ -3,9 +3,15 @@
   <c:project>io7m-jtensors</c:project>
 
   <c:release ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-05-12</c:date>
+    <c:date>2012-06-19</c:date>
     <c:version>2.0.0</c:version>
 
+    <c:item>
+      <c:date>2012-06-19</c:date>
+      <c:type-code-new/>
+      <c:summary>Switch to maven for builds</c:summary>
+    </c:item>
+ 
     <c:item>
       <c:date>2012-05-12</c:date>
       <c:type-code-new/>
