@@ -31,8 +31,8 @@
       <s:subsection>
         <s:subsection-title>Overview</s:subsection-title>
         <s:paragraph>
-          The <s:term type="package">jtensors</s:term> package implements
-          a set of efficient vector and matrix classes intended for use
+          The <s:term type="package">jtensors</s:term> package implements a
+          set of efficient vector and matrix classes intended for use
           in computer graphics applications.
         </s:paragraph>
       </s:subsection>
