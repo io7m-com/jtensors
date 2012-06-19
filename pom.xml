@@ -3,20 +3,10 @@
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors</artifactId>
   <version>2.0.0</version>
+  <packaging>jar</packaging>
   <name>io7m-jtensors</name>
   <description>Vector/matrix math package</description>
   <url>http://io7m.com/software/jtensors/</url>
-
-  <issueManagement>
-    <url>http://fossil.io7m.com/repo.cgi/io7m-jtensors</url>
-    <system>Fossil</system>
-  </issueManagement>
-
-  <scm>
-    <url>http://fossil.io7m.com/repo.cgi/io7m-jtensors</url>
-    <connection>scm:http://fossil.io7m.com/repo.cgi/io7m-jtensors</connection>
-    <developerConnection>scm:http://fossil.io7m.com/repo.cgi/io7m-jtensors</developerConnection>
-  </scm>
 
   <licenses>
     <license>
@@ -24,6 +14,26 @@
       <url>http://www.opensource.org/licenses/isc-license.txt</url>
     </license>
   </licenses>
+
+  <scm>
+    <url>http://fossil.io7m.com/repo.cgi/io7m-jtensors</url>
+    <connection>scm:http://fossil.io7m.com/repo.cgi/io7m-jtensors</connection>
+    <developerConnection>scm:http://fossil.io7m.com/repo.cgi/io7m-jtensors</developerConnection>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>io7m</id>
+      <name>io7m</name>
+      <email>code@io7m.com</email>
+      <url>http://io7m.com</url>
+    </developer>
+  </developers>
+
+  <issueManagement>
+    <url>http://fossil.io7m.com/repo.cgi/io7m-jtensors</url>
+    <system>Fossil</system>
+  </issueManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
