@@ -41,7 +41,7 @@
       <s:section-title>Installation</s:section-title>
       <s:paragraph>
         The project can be compiled and installed with
-        <s:link-external target="http://ant.apache.org">Maven</s:link-external>:
+        <s:link-external target="http://maven.apache.org">Maven</s:link-external>:
       </s:paragraph>
       <s:paragraph>
         <s:verbatim type="example"><![CDATA[$ mvn clean install]]></s:verbatim>     
