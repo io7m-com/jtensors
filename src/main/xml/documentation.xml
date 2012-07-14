@@ -76,6 +76,42 @@
                 <s:table-cell>OpenJDK 64-Bit Server VM</s:table-cell>
                 <s:table-cell>20.0-b12</s:table-cell>
               </s:table-row>
+              <s:table-row>
+                <s:table-cell>SunOS</s:table-cell>
+                <s:table-cell>5.11 snv_151a</s:table-cell>
+                <s:table-cell>x86</s:table-cell>
+                <s:table-cell>Sun Microsystems Inc.</s:table-cell>
+                <s:table-cell>1.6.0_21</s:table-cell>
+                <s:table-cell>Java HotSpot(TM) Client VM</s:table-cell>
+                <s:table-cell>17.0-b16</s:table-cell>
+              </s:table-row>
+              <s:table-row>
+                <s:table-cell>Windows XP</s:table-cell>
+                <s:table-cell>5.1</s:table-cell>
+                <s:table-cell>x86</s:table-cell>
+                <s:table-cell>Sun Microsystems Inc.</s:table-cell>
+                <s:table-cell>1.7.0_02-b13</s:table-cell>
+                <s:table-cell>Java HotSpot(TM) Client VM</s:table-cell>
+                <s:table-cell>22.0-b10</s:table-cell>
+              </s:table-row>
+              <s:table-row>
+                <s:table-cell>FreeBSD</s:table-cell>
+                <s:table-cell>8.2-RELEASE-p3</s:table-cell>
+                <s:table-cell>x86_64</s:table-cell>
+                <s:table-cell>Sun Microsystems Inc.</s:table-cell>
+                <s:table-cell>1.6.0_32</s:table-cell>
+                <s:table-cell>OpenJDK 64-Bit Server VM</s:table-cell>
+                <s:table-cell>20.0-b12</s:table-cell>
+              </s:table-row>
+              <s:table-row>
+                <s:table-cell>Mac OS X</s:table-cell>
+                <s:table-cell>10.6.8</s:table-cell>
+                <s:table-cell>x86_64</s:table-cell>
+                <s:table-cell>Apple Inc.</s:table-cell>
+                <s:table-cell>1.6.0_31</s:table-cell>
+                <s:table-cell>Java HotSpot(TM) 64-Bit Server VM</s:table-cell>
+                <s:table-cell>20.6-b01-413</s:table-cell>
+              </s:table-row>
             </s:table-body>
           </s:table>
         </s:formal-item>
