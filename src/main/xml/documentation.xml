@@ -19,7 +19,7 @@
 <s:document
   xmlns:s="http://www.io7m.com/schemas/structural/1.0.0"
   xmlns:xi="http://www.w3.org/2001/XInclude">
-  <s:document-title>io7m-jtensors 2.0.0 Documentation</s:document-title>
+  <s:document-title>io7m-jtensors 2.1.0 Documentation</s:document-title>
   <s:document-style>documentation.css</s:document-style>
   <s:document-contents/>
 
@@ -44,7 +44,7 @@
         <s:link-external target="http://maven.apache.org">Maven</s:link-external>:
       </s:paragraph>
       <s:paragraph>
-        <s:verbatim type="example"><![CDATA[$ mvn clean install]]></s:verbatim>     
+        <s:verbatim type="example"><![CDATA[$ mvn -C clean install]]></s:verbatim>     
       </s:paragraph>
     </s:section>
     <s:section>

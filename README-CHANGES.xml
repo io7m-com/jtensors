@@ -3,6 +3,23 @@
   <c:project>io7m-jtensors</c:project>
 
   <c:release ticket-system="com.io7m.fossil.jtensors">
+    <c:date>2012-07-14</c:date>
+    <c:version>2.1.0</c:version>
+
+    <c:item>
+      <c:date>2012-07-14</c:date>
+      <c:type-code-new/>
+      <c:summary>Produce documentation with Maven</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-07-14</c:date>
+      <c:type-code-fix/>
+      <c:summary>Make dependencies more honest: The package only depends on jsr305, not all of findbugs</c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release ticket-system="com.io7m.fossil.jtensors">
     <c:date>2012-06-19</c:date>
     <c:version>2.0.0</c:version>
 
