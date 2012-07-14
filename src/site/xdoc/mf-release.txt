@@ -1,0 +1,4 @@
+2012-07-14:io7m-jtensors-2.1.0-javadoc.jar:295541
+2012-07-14:io7m-jtensors-2.1.0-sources.jar:84829
+2012-07-14:io7m-jtensors-2.1.0.jar:93524
+2012-07-14:io7m-jtensors-2.1.0.zip:192444

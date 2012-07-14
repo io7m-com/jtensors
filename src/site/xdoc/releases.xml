@@ -7,14 +7,180 @@
     <title>Releases</title>
   </properties>
   <body>
+
     <section name="Releases">
-      No releases are currently available.
+      <table class="software_releases page_table" summary="Current project releases">
+        <thead class="page_table_head">
+          <tr>
+            <th class="page_table_column_name">Date</th>
+            <th class="page_table_column_name">Size</th>
+            <th class="page_table_column_name">PGP</th>
+            <th class="page_table_column_name">Package</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-07-14</td>
+            <td class="page_table_column">295541</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0-javadoc.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0-javadoc.jar">io7m-jtensors-2.1.0-javadoc.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-07-14</td>
+            <td class="page_table_column">84829</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0-sources.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0-sources.jar">io7m-jtensors-2.1.0-sources.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-07-14</td>
+            <td class="page_table_column">93524</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0.jar">io7m-jtensors-2.1.0.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-07-14</td>
+            <td class="page_table_column">192444</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0.zip">io7m-jtensors-2.1.0.zip</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </section>
+
     <section name="Documentation">
-      No documentation is currently available.
+      <table class="documentation_releases page_table" summary="Current project documentation releases">
+        <thead class="page_table_head">
+          <tr>
+            <th class="page_table_column_name">Date</th>
+            <th class="page_table_column_name">Size</th>
+            <th class="page_table_column_name">PGP</th>
+            <th class="page_table_column_name">Online</th>
+            <th class="page_table_column_name">Package</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-07-14</td>
+            <td class="page_table_column">312563</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0-documentation.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://io7m.com/software/jtensors/doc/2.1.0/d1.xhtml">io7m-jtensors 2.1.0</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0-documentation.zip">io7m-jtensors-2.1.0-documentation.zip</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </section>
+
     <section name="Changes">
-      No changelog is currently available.
+<table xmlns="http://www.w3.org/1999/xhtml" class="changelog page_table"
+       summary="Changes">
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-07-14</td>
+      <td class="page_table_column">Release: io7m-jtensors 2.1.0</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-07-14</td>
+      <td class="page_table_column">Code new: Produce documentation with Maven</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-07-14</td>
+      <td class="page_table_column">Code fix: Make dependencies more honest: The package only depends on jsr305, not all of findbugs</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-06-19</td>
+      <td class="page_table_column">Release: io7m-jtensors 2.0.0</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-06-19</td>
+      <td class="page_table_column">Code new: Switch to maven for builds</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-05-12</td>
+      <td class="page_table_column">Code new: ApproximatelyEqual* moved to io7m-jaux</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-05-05</td>
+      <td class="page_table_column">Code new: VectorI*.zero renamed to ZERO and implemented by all vector types</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-05-05</td>
+      <td class="page_table_column">Code fix: MatrixM4x4D.multiply -&gt; MatrixM4x4D.multiplyVector4DWithContext</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-05-05</td>
+      <td class="page_table_column">Code fix: MatrixM4x4D.multiply -&gt; MatrixM4x4D.multiplyVector4D</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-05-05</td>
+      <td class="page_table_column">Code new: Increase test coverage for integer vectors</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-05-05</td>
+      <td class="page_table_column">Code new: Add Matrix3x3* makeTranslation functions</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-04-20</td>
+      <td class="page_table_column">Code new: Add integer vector methods for Matrix4x4*</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-04-20</td>
+      <td class="page_table_column">Code fix: Rename methods to indicate the type of vectors used, removing ambiguity. All VectorReadable* interfaces are affected, as well as Matrix* methods that previously specified a type name.</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-03-15</td>
+      <td class="page_table_column">Release: io7m-jtensors 1.0.1</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-03-15</td>
+      <td class="page_table_column">Code fix: Correct build.xml to produce a jar file with the right version</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-03-15</td>
+      <td class="page_table_column">Release: io7m-jtensors 1.0.0</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-03-06</td>
+      <td class="page_table_column">Code fix: Depend on jexternals for eclipse users</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-02-11</td>
+      <td class="page_table_column">Code fix: MatrixM3x3F allocated too many bytes (wasted memory)</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-02-08</td>
+      <td class="page_table_column">Platform new: Add SunOS supported</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-02-06</td>
+      <td class="page_table_column">Release: io7m-jtensors 0.2.0</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-02-06</td>
+      <td class="page_table_column">Code new: Initial version</td>
+   </tr>
+</table>
     </section>
+
   </body>
 </document>
