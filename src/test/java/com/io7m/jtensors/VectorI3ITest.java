@@ -11,7 +11,7 @@ public class VectorI3ITest
     return (int) (Integer.MIN_VALUE + (Math.random() * (Integer.MAX_VALUE - Integer.MIN_VALUE)));
   }
 
-  @Test public void testAdd()
+  @SuppressWarnings("static-method") @Test public void testAdd()
   {
     for (int index = 0; index < 100; ++index) {
       final int x0 = VectorI3ITest.randomNumber();
@@ -32,7 +32,7 @@ public class VectorI3ITest
     }
   }
 
-  @Test public void testCheckInterface()
+  @SuppressWarnings("static-method") @Test public void testCheckInterface()
   {
     final VectorI3I v = new VectorI3I(1, 2, 3);
     Assert.assertEquals(1, v.getXI());
@@ -40,7 +40,7 @@ public class VectorI3ITest
     Assert.assertEquals(3, v.getZI());
   }
 
-  @Test public void testEqualsCorrect()
+  @SuppressWarnings("static-method") @Test public void testEqualsCorrect()
   {
     final VectorI3I v0 = new VectorI3I(0, 0, 0);
     final VectorI3I v1 = new VectorI3I(0, 0, 0);
@@ -57,7 +57,7 @@ public class VectorI3ITest
     Assert.assertTrue(v0.equals(v1));
   }
 
-  @Test public void testHashCodeCorrect()
+  @SuppressWarnings("static-method") @Test public void testHashCodeCorrect()
   {
     final VectorI3I v0 = new VectorI3I(0, 0, 0);
     final VectorI3I v1 = new VectorI3I(0, 0, 0);
@@ -72,7 +72,7 @@ public class VectorI3ITest
     Assert.assertTrue(v0.hashCode() != vz.hashCode());
   }
 
-  @Test public void testInit()
+  @SuppressWarnings("static-method") @Test public void testInit()
   {
     final VectorI3I v = new VectorI3I(1, 2, 3);
     Assert.assertEquals(1, v.x);
@@ -80,7 +80,7 @@ public class VectorI3ITest
     Assert.assertEquals(3, v.z);
   }
 
-  @Test public void testInitDefaultZero()
+  @SuppressWarnings("static-method") @Test public void testInitDefaultZero()
   {
     final VectorI3I v = new VectorI3I();
     Assert.assertEquals(0, v.x);
@@ -88,13 +88,13 @@ public class VectorI3ITest
     Assert.assertEquals(0, v.z);
   }
 
-  @Test public void testString()
+  @SuppressWarnings("static-method") @Test public void testString()
   {
     final VectorI3I v = new VectorI3I(0, 1, 2);
     Assert.assertTrue(v.toString().equals("[VectorI3I 0 1 2]"));
   }
 
-  @Test public void testSubtract()
+  @SuppressWarnings("static-method") @Test public void testSubtract()
   {
     for (int index = 0; index < 100; ++index) {
       final int x0 = VectorI3ITest.randomNumber();
