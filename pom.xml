@@ -6,7 +6,7 @@
   <packaging>jar</packaging>
   <name>io7m-jtensors</name>
   <description>Vector/matrix math package</description>
-  <url>http://io7m.com/software/jtensors/</url>
+  <url>http://mvn.io7m.com/jtensors/</url>
 
   <licenses>
     <license>
@@ -39,7 +39,7 @@
     <site>
       <id>io7m</id>
       <name>io7m.com</name>
-      <url>http://io7m.com/software/jtensors/</url>
+      <url>http://mvn.io7m.com/jtensors/</url>
     </site>
   </distributionManagement>
 
