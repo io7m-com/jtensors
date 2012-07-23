@@ -55,8 +55,8 @@
         <s:subsection-title>Maven</s:subsection-title>
         <s:paragraph>
           Regular releases are made to the
-          <s:link-external target="http://search.maven.org/#search|ga|1|io7m-jlog">Central Repository</s:link-external>,
-          so it's possible to use the <s:term type="package">jlog</s:term>
+          <s:link-external target="http://search.maven.org/#search|ga|1|io7m-jtensors">Central Repository</s:link-external>,
+          so it's possible to use the <s:term type="package">jtensors</s:term>
           package in your projects with the following Maven dependency:
         </s:paragraph>
         <s:paragraph>
