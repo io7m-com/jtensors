@@ -202,7 +202,7 @@
     <xt:choose>
       <xt:when test="count(preceding-sibling::s:part) > 0">
         <xt:apply-templates
-          select="(preceding-sibling::s:part[last()])/s:section[last()]"
+          select="(preceding-sibling::s:part[1])/s:section[last()]"
           mode="structural-1_0_0.make-title-numbered"/>
       </xt:when>
       <xt:otherwise>
