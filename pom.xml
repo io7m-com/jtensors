@@ -229,7 +229,7 @@
       <plugin>
         <groupId>com.io7m.saxon-plugin</groupId>
         <artifactId>io7m-saxon-plugin</artifactId>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
         <executions>
           <execution>
             <goals>
@@ -242,13 +242,8 @@
             <stylesheetFile>src/main/xsl/structural-1_0_0-standalone-x20.xsl</stylesheetFile>
             <documentFile>src/main/xml/documentation.xml</documentFile>
             <outputDirectory>${project.build.directory}/xhtml</outputDirectory>
+            <outputDirectoryParameterName>io7m.structural-1_0_0.output_directory</outputDirectoryParameterName>
             <outputFile>out.txt</outputFile>
-            <stylesheetParameters>
-              <property>
-                <name>io7m.structural-1_0_0.output_directory</name>
-                <value>${project.build.directory}/xhtml</value>
-              </property>
-            </stylesheetParameters>
           </transformation>
         </configuration>
       </plugin>
