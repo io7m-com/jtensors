@@ -248,6 +248,16 @@ public class MatrixM4x4FTest
     b.put(0, 0.0f);
   }
 
+  @SuppressWarnings("static-method") @Test(
+    expected = ReadOnlyBufferException.class) public
+    void
+    testBufferReadOnlyInterface()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final FloatBuffer b = m.getFloatBuffer();
+    b.put(0, 0.0f);
+  }
+
   @SuppressWarnings("static-method") @Test public void testCopy()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
@@ -2301,6 +2311,33 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m.set(3, 1, 47.0f).get(3, 1) == 47.0);
     Assert.assertTrue(m.set(3, 2, 53.0f).get(3, 2) == 53.0);
     Assert.assertTrue(m.set(3, 3, 59.0f).get(3, 3) == 59.0);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testSetGetInterfaceIdentity()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+
+    Assert.assertTrue(m.set(0, 0, 3.0f).getRowColumnF(0, 0) == 3.0);
+    Assert.assertTrue(m.set(0, 1, 5.0f).getRowColumnF(0, 1) == 5.0);
+    Assert.assertTrue(m.set(0, 2, 7.0f).getRowColumnF(0, 2) == 7.0);
+    Assert.assertTrue(m.set(0, 3, 11.0f).getRowColumnF(0, 3) == 11.0);
+
+    Assert.assertTrue(m.set(1, 0, 13.0f).getRowColumnF(1, 0) == 13.0);
+    Assert.assertTrue(m.set(1, 1, 17.0f).getRowColumnF(1, 1) == 17.0);
+    Assert.assertTrue(m.set(1, 2, 19.0f).getRowColumnF(1, 2) == 19.0);
+    Assert.assertTrue(m.set(1, 3, 23.0f).getRowColumnF(1, 3) == 23.0);
+
+    Assert.assertTrue(m.set(2, 0, 29.0f).getRowColumnF(2, 0) == 29.0);
+    Assert.assertTrue(m.set(2, 1, 31.0f).getRowColumnF(2, 1) == 31.0);
+    Assert.assertTrue(m.set(2, 2, 37.0f).getRowColumnF(2, 2) == 37.0);
+    Assert.assertTrue(m.set(2, 3, 41.0f).getRowColumnF(2, 3) == 41.0);
+
+    Assert.assertTrue(m.set(3, 0, 43.0f).getRowColumnF(3, 0) == 43.0);
+    Assert.assertTrue(m.set(3, 1, 47.0f).getRowColumnF(3, 1) == 47.0);
+    Assert.assertTrue(m.set(3, 2, 53.0f).getRowColumnF(3, 2) == 53.0);
+    Assert.assertTrue(m.set(3, 3, 59.0f).getRowColumnF(3, 3) == 59.0);
   }
 
   @SuppressWarnings("static-method") @Test public void testStorage()

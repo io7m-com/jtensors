@@ -26,7 +26,7 @@ import com.io7m.jaux.functional.Option;
  * A 2x2 mutable matrix type with double precision elements.
  */
 
-public final class MatrixM2x2D
+public final class MatrixM2x2D implements MatrixReadableD
 {
   private static final double[] identity_row_0 = { 1.0, 0.0 };
 
@@ -688,6 +688,20 @@ public final class MatrixM2x2D
   }
 
   public double get(
+    final int row,
+    final int column)
+  {
+    return MatrixM2x2D.get(this, row, column);
+  }
+
+  @Override public DoubleBuffer getDoubleBuffer()
+  {
+    final ByteBuffer b =
+      this.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
+    return b.asDoubleBuffer();
+  }
+
+  @Override public double getRowColumnD(
     final int row,
     final int column)
   {

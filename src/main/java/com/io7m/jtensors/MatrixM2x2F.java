@@ -26,7 +26,7 @@ import com.io7m.jaux.functional.Option;
  * A 2x2 mutable matrix type with single precision elements.
  */
 
-public final class MatrixM2x2F
+public final class MatrixM2x2F implements MatrixReadableF
 {
   private static final float[] identity_row_0 = { 1.0f, 0.0f };
 
@@ -686,6 +686,20 @@ public final class MatrixM2x2F
   }
 
   public float get(
+    final int row,
+    final int column)
+  {
+    return MatrixM2x2F.get(this, row, column);
+  }
+
+  @Override public FloatBuffer getFloatBuffer()
+  {
+    final ByteBuffer b =
+      this.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
+    return b.asFloatBuffer();
+  }
+
+  @Override public double getRowColumnF(
     final int row,
     final int column)
   {

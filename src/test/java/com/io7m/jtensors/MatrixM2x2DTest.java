@@ -163,6 +163,16 @@ public class MatrixM2x2DTest
     b.put(0, 0.0f);
   }
 
+  @SuppressWarnings("static-method") @Test(
+    expected = ReadOnlyBufferException.class) public
+    void
+    testBufferReadOnlyInterface()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+    final DoubleBuffer b = m.getDoubleBuffer();
+    b.put(0, 0.0f);
+  }
+
   @SuppressWarnings("static-method") @Test public void testCopy()
   {
     final MatrixM2x2D m0 = new MatrixM2x2D();
@@ -719,6 +729,19 @@ public class MatrixM2x2DTest
 
     Assert.assertTrue(m.set(1, 0, 13.0).get(1, 0) == 13.0);
     Assert.assertTrue(m.set(1, 1, 17.0).get(1, 1) == 17.0);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testSetGetInterfaceIdentity()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+
+    Assert.assertTrue(m.set(0, 0, 3.0).getRowColumnD(0, 0) == 3.0);
+    Assert.assertTrue(m.set(0, 1, 5.0).getRowColumnD(0, 1) == 5.0);
+
+    Assert.assertTrue(m.set(1, 0, 13.0).getRowColumnD(1, 0) == 13.0);
+    Assert.assertTrue(m.set(1, 1, 17.0).getRowColumnD(1, 1) == 17.0);
   }
 
   @SuppressWarnings("static-method") @Test public void testStorage()

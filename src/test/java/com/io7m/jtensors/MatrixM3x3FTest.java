@@ -177,6 +177,16 @@ public class MatrixM3x3FTest
     b.put(0, 0.0f);
   }
 
+  @SuppressWarnings("static-method") @Test(
+    expected = ReadOnlyBufferException.class) public
+    void
+    testBufferReadOnlyInterface()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+    final FloatBuffer b = m.getFloatBuffer();
+    b.put(0, 0.0f);
+  }
+
   @SuppressWarnings("static-method") @Test public void testCopy()
   {
     final MatrixM3x3F m0 = new MatrixM3x3F();
@@ -882,6 +892,25 @@ public class MatrixM3x3FTest
     Assert.assertTrue(m.set(2, 0, 29.0f).get(2, 0) == 29.0);
     Assert.assertTrue(m.set(2, 1, 31.0f).get(2, 1) == 31.0);
     Assert.assertTrue(m.set(2, 2, 37.0f).get(2, 2) == 37.0);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testSetGetInterfaceIdentity()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+
+    Assert.assertTrue(m.set(0, 0, 3.0f).getRowColumnF(0, 0) == 3.0);
+    Assert.assertTrue(m.set(0, 1, 5.0f).getRowColumnF(0, 1) == 5.0);
+    Assert.assertTrue(m.set(0, 2, 7.0f).getRowColumnF(0, 2) == 7.0);
+
+    Assert.assertTrue(m.set(1, 0, 13.0f).getRowColumnF(1, 0) == 13.0);
+    Assert.assertTrue(m.set(1, 1, 17.0f).getRowColumnF(1, 1) == 17.0);
+    Assert.assertTrue(m.set(1, 2, 19.0f).getRowColumnF(1, 2) == 19.0);
+
+    Assert.assertTrue(m.set(2, 0, 29.0f).getRowColumnF(2, 0) == 29.0);
+    Assert.assertTrue(m.set(2, 1, 31.0f).getRowColumnF(2, 1) == 31.0);
+    Assert.assertTrue(m.set(2, 2, 37.0f).getRowColumnF(2, 2) == 37.0);
   }
 
   @SuppressWarnings("static-method") @Test public void testStorage()

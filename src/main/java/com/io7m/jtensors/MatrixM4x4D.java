@@ -26,7 +26,7 @@ import com.io7m.jaux.functional.Option;
  * A 4x4 mutable matrix type with double precision elements.
  */
 
-public final class MatrixM4x4D
+public final class MatrixM4x4D implements MatrixReadableD
 {
   /**
    * The Context type contains the minimum storage required for all of the
@@ -2109,6 +2109,20 @@ public final class MatrixM4x4D
   }
 
   public double get(
+    final int row,
+    final int column)
+  {
+    return MatrixM4x4D.get(this, row, column);
+  }
+
+  @Override public DoubleBuffer getDoubleBuffer()
+  {
+    final ByteBuffer b =
+      this.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
+    return b.asDoubleBuffer();
+  }
+
+  @Override public double getRowColumnD(
     final int row,
     final int column)
   {

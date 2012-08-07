@@ -3,8 +3,14 @@
   <c:project>io7m-jtensors</c:project>
 
   <c:release ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-07-27</c:date>
-    <c:version>2.2.1</c:version>
+    <c:date>2012-08-07</c:date>
+    <c:version>2.3.0</c:version>
+
+    <c:item>
+      <c:date>2012-08-07</c:date>
+      <c:type-code-new/>
+      <c:summary>Add MatrixReadable* interfaces</c:summary>
+    </c:item>
 
     <c:item>
       <c:date>2012-07-27</c:date>

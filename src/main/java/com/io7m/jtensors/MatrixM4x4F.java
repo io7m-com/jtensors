@@ -26,7 +26,7 @@ import com.io7m.jaux.functional.Option;
  * A 4x4 mutable matrix type with single precision elements.
  */
 
-public final class MatrixM4x4F
+public final class MatrixM4x4F implements MatrixReadableF
 {
   /**
    * The Context type contains the minimum storage required for all of the
@@ -2113,6 +2113,20 @@ public final class MatrixM4x4F
   }
 
   public float get(
+    final int row,
+    final int column)
+  {
+    return MatrixM4x4F.get(this, row, column);
+  }
+
+  @Override public FloatBuffer getFloatBuffer()
+  {
+    final ByteBuffer b =
+      this.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
+    return b.asFloatBuffer();
+  }
+
+  @Override public double getRowColumnF(
     final int row,
     final int column)
   {

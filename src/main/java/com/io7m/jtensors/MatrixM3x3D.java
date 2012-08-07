@@ -26,7 +26,7 @@ import com.io7m.jaux.functional.Option;
  * A 3x3 mutable matrix type with double precision elements.
  */
 
-public final class MatrixM3x3D
+public final class MatrixM3x3D implements MatrixReadableD
 {
   private static final double[] identity_row_1 = { 0.0, 1.0, 0.0 };
 
@@ -995,5 +995,19 @@ public final class MatrixM3x3D
       builder.append("]\n");
     }
     return builder.toString();
+  }
+
+  @Override public double getRowColumnD(
+    final int row,
+    final int column)
+  {
+    return MatrixM3x3D.get(this, row, column);
+  }
+
+  @Override public DoubleBuffer getDoubleBuffer()
+  {
+    final ByteBuffer b =
+      this.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
+    return b.asDoubleBuffer();
   }
 }
