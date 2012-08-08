@@ -86,7 +86,9 @@ public class VectorI3FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive0()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testApproximatelyEqualTransitive0()
   {
     final float x0 = 0.0f;
     final float x1 = 0.0f;
@@ -103,7 +105,9 @@ public class VectorI3FTest
     Assert.assertTrue(VectorI3F.approximatelyEqual(v0, v1));
   }
 
-  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive1()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testApproximatelyEqualTransitive1()
   {
     final float x0 = 0.0f;
     final float x1 = 1.0f;
@@ -129,7 +133,9 @@ public class VectorI3FTest
     Assert.assertTrue(v.z == v.getZF());
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float max_x = (float) (Math.random() * Float.MIN_VALUE);
@@ -151,7 +157,9 @@ public class VectorI3FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float min_x = (float) (Math.random() * Float.MAX_VALUE);
@@ -173,7 +181,9 @@ public class VectorI3FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float min_x = (float) (Math.random() * Float.MIN_VALUE);
@@ -206,7 +216,9 @@ public class VectorI3FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float maximum = (float) (Math.random() * Float.MIN_VALUE);
@@ -222,7 +234,9 @@ public class VectorI3FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float minimum = (float) (Math.random() * Float.MAX_VALUE);
@@ -258,7 +272,9 @@ public class VectorI3FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testCrossProductPerpendicular()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testCrossProductPerpendicular()
   {
     final VectorI3F vy = new VectorI3F(0, 1, 0);
     final VectorI3F vx = new VectorI3F(1, 0, 0);
@@ -276,7 +292,9 @@ public class VectorI3FTest
     Assert.assertTrue(VectorI3F.dotProduct(vyz, vz) == 0.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testCrossProductSimple()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testCrossProductSimple()
   {
     final VectorI3F v0 = new VectorI3F(0, 1, 0);
     final VectorI3F v1 = new VectorI3F(1, 0, 0);
@@ -314,7 +332,9 @@ public class VectorI3FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductOrthonormal()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductOrthonormal()
   {
     final VectorI3F v = new VectorI3F(1.0f, 0.0f, 0.0f);
     Assert.assertTrue(VectorI3F.dotProduct(v, v) == 1.0);
@@ -368,7 +388,9 @@ public class VectorI3FTest
     Assert.assertTrue(v0.hashCode() != vz.hashCode());
   }
 
-  @SuppressWarnings("static-method") @Test public void testInitializeReadable()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInitializeReadable()
   {
     final VectorI3F v0 = new VectorI3F(1.0f, 2.0f, 3.0f);
     final VectorI3F v1 = new VectorI3F(v0);
@@ -378,7 +400,9 @@ public class VectorI3FTest
     Assert.assertTrue(v0.z == v1.z);
   }
 
-  @SuppressWarnings("static-method") @Test public void testInterpolateLinearLimits()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInterpolateLinearLimits()
   {
     for (int index = 0; index < 100; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -434,7 +458,9 @@ public class VectorI3FTest
     VectorI3F.approximatelyEqual(VectorI3F.normalize(v0), v0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testProjectionPerpendicularZero()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testProjectionPerpendicularZero()
   {
     {
       final VectorI3F p = new VectorI3F(1.0f, 0.0f, 0.0f);

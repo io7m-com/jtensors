@@ -217,7 +217,9 @@ public class VectorM2FTest
     Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(d, 90.0f));
   }
 
-  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive0()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testApproximatelyEqualTransitive0()
   {
     final float x0 = 0.0f;
     final float x1 = 0.0f;
@@ -231,7 +233,9 @@ public class VectorM2FTest
     Assert.assertTrue(VectorM2F.approximatelyEqual(v0, v1));
   }
 
-  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive1()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testApproximatelyEqualTransitive1()
   {
     final float x0 = 0.0f;
     final float x1 = 1.0f;
@@ -253,7 +257,9 @@ public class VectorM2FTest
     Assert.assertTrue(v.y == v.getYF());
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float max_x = (float) (Math.random() * Float.MIN_VALUE);
@@ -281,7 +287,9 @@ public class VectorM2FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float min_x = (float) (Math.random() * Float.MAX_VALUE);
@@ -309,7 +317,9 @@ public class VectorM2FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float min_x = (float) (Math.random() * Float.MIN_VALUE);
@@ -345,7 +355,9 @@ public class VectorM2FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float maximum = (float) (Math.random() * Float.MIN_VALUE);
@@ -368,7 +380,9 @@ public class VectorM2FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float minimum = (float) (Math.random() * Float.MAX_VALUE);
@@ -487,13 +501,17 @@ public class VectorM2FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductOrthonormal()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductOrthonormal()
   {
     final VectorM2F v = new VectorM2F(1.0f, 0.0f);
     Assert.assertTrue(VectorM2F.dotProduct(v, v) == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductSelfMagnitudeSquared()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductSelfMagnitudeSquared()
   {
     final VectorM2F v0 = new VectorM2F(10.0f, 10.0f);
 
@@ -512,7 +530,9 @@ public class VectorM2FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testInitializeReadable()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInitializeReadable()
   {
     final VectorM2F v0 = new VectorM2F(1.0f, 2.0f);
     final VectorM2F v1 = new VectorM2F(v0);
@@ -521,7 +541,9 @@ public class VectorM2FTest
     Assert.assertTrue(v0.y == v1.y);
   }
 
-  @SuppressWarnings("static-method") @Test public void testInterpolateLinearLimits()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInterpolateLinearLimits()
   {
     for (int index = 0; index < 100; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -582,7 +604,9 @@ public class VectorM2FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNormalizeZero()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMagnitudeNormalizeZero()
   {
     final VectorM2F v = new VectorM2F(0.0f, 0.0f);
     final VectorM2F vr = VectorM2F.normalizeInPlace(v);
@@ -630,7 +654,9 @@ public class VectorM2FTest
     Assert.assertTrue(m == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testProjectionPerpendicularZero()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testProjectionPerpendicularZero()
   {
     {
       final VectorM2F p = new VectorM2F(1.0f, 0.0f);

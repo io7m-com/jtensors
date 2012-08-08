@@ -294,7 +294,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive0()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testApproximatelyEqualTransitive0()
   {
     final double x0 = 0.0;
     final double x1 = 0.0;
@@ -314,7 +316,9 @@ public class VectorM4DTest
     Assert.assertTrue(VectorM4D.approximatelyEqual(v0, v1));
   }
 
-  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive1()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testApproximatelyEqualTransitive1()
   {
     final double x0 = 0.0;
     final double x1 = 1.0;
@@ -344,7 +348,9 @@ public class VectorM4DTest
     Assert.assertTrue(v.w == v.getWD());
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double max_x = Math.random() * Double.MIN_VALUE;
@@ -380,7 +386,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double min_x = Math.random() * Double.MAX_VALUE;
@@ -416,7 +424,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double min_x = Math.random() * Double.MIN_VALUE;
@@ -466,7 +476,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double maximum = Math.random() * Double.MIN_VALUE;
@@ -495,7 +507,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double minimum = Math.random() * Double.MAX_VALUE;
@@ -646,13 +660,17 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductOrthonormal()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductOrthonormal()
   {
     final VectorM4D v = new VectorM4D(1.0f, 0.0f, 0.0f, 0.0f);
     Assert.assertTrue(VectorM4D.dotProduct(v, v) == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductSelfMagnitudeSquared()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductSelfMagnitudeSquared()
   {
     final VectorM4D v0 = new VectorM4D(10.0, 10.0, 10.0, 10.0);
 
@@ -675,7 +693,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testInitializeReadable()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInitializeReadable()
   {
     final VectorM4D v0 = new VectorM4D(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorM4D v1 = new VectorM4D(v0);
@@ -686,7 +706,9 @@ public class VectorM4DTest
     Assert.assertTrue(v0.w == v1.w);
   }
 
-  @SuppressWarnings("static-method") @Test public void testInterpolateLinearLimits()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInterpolateLinearLimits()
   {
     for (int index = 0; index < 100; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -766,7 +788,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNormalizeZero()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMagnitudeNormalizeZero()
   {
     final VectorM4D v = new VectorM4D(0.0, 0.0, 0.0, 0.0);
     final VectorM4D vr = VectorM4D.normalizeInPlace(v);
@@ -814,7 +838,9 @@ public class VectorM4DTest
     Assert.assertTrue(m == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testProjectionPerpendicularZero()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testProjectionPerpendicularZero()
   {
     {
       final VectorM4D p = new VectorM4D(1.0f, 0.0f, 0.0f, 0.0f);

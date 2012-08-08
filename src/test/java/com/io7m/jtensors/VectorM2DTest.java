@@ -217,7 +217,9 @@ public class VectorM2DTest
     Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(d, 90.0));
   }
 
-  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive0()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testApproximatelyEqualTransitive0()
   {
     final double x0 = 0.0;
     final double x1 = 0.0;
@@ -231,7 +233,9 @@ public class VectorM2DTest
     Assert.assertTrue(VectorM2D.approximatelyEqual(v0, v1));
   }
 
-  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive1()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testApproximatelyEqualTransitive1()
   {
     final double x0 = 0.0;
     final double x1 = 1.0;
@@ -253,7 +257,9 @@ public class VectorM2DTest
     Assert.assertTrue(v.y == v.getYD());
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double max_x = Math.random() * Double.MIN_VALUE;
@@ -281,7 +287,9 @@ public class VectorM2DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double min_x = Math.random() * Double.MAX_VALUE;
@@ -309,7 +317,9 @@ public class VectorM2DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double min_x = Math.random() * Double.MIN_VALUE;
@@ -345,7 +355,9 @@ public class VectorM2DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double maximum = Math.random() * Double.MIN_VALUE;
@@ -368,7 +380,9 @@ public class VectorM2DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double minimum = Math.random() * Double.MAX_VALUE;
@@ -487,13 +501,17 @@ public class VectorM2DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductOrthonormal()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductOrthonormal()
   {
     final VectorM2D v = new VectorM2D(1.0f, 0.0f);
     Assert.assertTrue(VectorM2D.dotProduct(v, v) == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductSelfMagnitudeSquared()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductSelfMagnitudeSquared()
   {
     final VectorM2D v0 = new VectorM2D(10.0, 10.0);
 
@@ -512,7 +530,9 @@ public class VectorM2DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testInitializeReadable()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInitializeReadable()
   {
     final VectorM2D v0 = new VectorM2D(1.0f, 2.0f);
     final VectorM2D v1 = new VectorM2D(v0);
@@ -521,7 +541,9 @@ public class VectorM2DTest
     Assert.assertTrue(v0.y == v1.y);
   }
 
-  @SuppressWarnings("static-method") @Test public void testInterpolateLinearLimits()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInterpolateLinearLimits()
   {
     for (int index = 0; index < 100; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -580,7 +602,9 @@ public class VectorM2DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNormalizeZero()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMagnitudeNormalizeZero()
   {
     final VectorM2D v = new VectorM2D(0.0, 0.0);
     final VectorM2D vr = VectorM2D.normalizeInPlace(v);
@@ -628,7 +652,9 @@ public class VectorM2DTest
     Assert.assertTrue(m == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testProjectionPerpendicularZero()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testProjectionPerpendicularZero()
   {
     {
       final VectorM2D p = new VectorM2D(1.0, 0.0);

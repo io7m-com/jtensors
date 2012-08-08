@@ -243,7 +243,9 @@ public class VectorM3ITest
     Assert.assertTrue(v.z == v.getZI());
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int max_x = VectorM3ITest.randomNegativeNumber();
@@ -275,7 +277,9 @@ public class VectorM3ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int min_x = VectorM3ITest.randomPositiveNumber();
@@ -307,7 +311,9 @@ public class VectorM3ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int min_x = VectorM3ITest.randomNegativeNumber();
@@ -350,7 +356,9 @@ public class VectorM3ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int maximum = VectorM3ITest.randomNegativeNumber();
@@ -376,7 +384,9 @@ public class VectorM3ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int minimum = VectorM3ITest.randomPositiveNumber();
@@ -509,13 +519,17 @@ public class VectorM3ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductOrthonormal()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductOrthonormal()
   {
     final VectorM3I v = new VectorM3I(1, 0, 0);
     Assert.assertTrue(VectorM3I.dotProduct(v, v) == 1);
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductSelfMagnitudeSquared()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductSelfMagnitudeSquared()
   {
     final VectorM3I v0 = new VectorM3I(10, 10, 10);
 
@@ -536,7 +550,9 @@ public class VectorM3ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testInitializeReadable()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInitializeReadable()
   {
     final VectorM3I v0 = new VectorM3I(1, 2, 3);
     final VectorM3I v1 = new VectorM3I(v0);
@@ -546,7 +562,9 @@ public class VectorM3ITest
     Assert.assertTrue(v0.z == v1.z);
   }
 
-  @SuppressWarnings("static-method") @Test public void testInterpolateLinearLimits()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInterpolateLinearLimits()
   {
     for (int index = 0; index < 100; ++index) {
       final int x0 = VectorM3ITest.randomPositiveNumber();
@@ -615,7 +633,9 @@ public class VectorM3ITest
     Assert.assertTrue(m == 0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testProjectionPerpendicularZero()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testProjectionPerpendicularZero()
   {
     {
       final VectorM3I p = new VectorM3I(1, 0, 0);

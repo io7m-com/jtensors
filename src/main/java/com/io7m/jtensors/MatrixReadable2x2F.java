@@ -6,5 +6,16 @@ package com.io7m.jtensors;
 
 public interface MatrixReadable2x2F extends MatrixReadableF
 {
-  // Empty.
+  /**
+   * Retrieve row <code>row</code>, saving the result to <code>out</code>.
+   * 
+   * @param row
+   *          The index of the row, starting at <code>0</code>.
+   * @param out
+   *          The output vector.
+   */
+
+  void getRowF(
+    final int row,
+    final VectorM2F out);
 }

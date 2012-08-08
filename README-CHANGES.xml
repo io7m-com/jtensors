@@ -7,6 +7,12 @@
     <c:version>2.3.0</c:version>
 
     <c:item>
+      <c:date>2012-08-08</c:date>
+      <c:type-code-fix/>
+      <c:summary>Change method names for consistency, deprecate old names (does not break compatibility)</c:summary>
+    </c:item>
+
+    <c:item>
       <c:date>2012-08-07</c:date>
       <c:type-code-new/>
       <c:summary>Add MatrixReadable* interfaces</c:summary>
@@ -28,7 +34,7 @@
       <c:type-code-fix/>
       <c:summary>Update all POM plugins to the latest versions</c:summary>
     </c:item>
- 
+
     <c:item>
       <c:date>2012-07-23</c:date>
       <c:type-code-fix/>

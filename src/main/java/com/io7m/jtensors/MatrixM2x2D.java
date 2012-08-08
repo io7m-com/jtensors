@@ -29,9 +29,7 @@ import com.io7m.jaux.functional.Option;
 public final class MatrixM2x2D implements MatrixReadable2x2D
 {
   private static final double[] identity_row_0 = { 1.0, 0.0 };
-
   private static final double[] identity_row_1 = { 0.0, 1.0 };
-
   private static final double[] zero_row       = { 0.0, 0.0 };
 
   /**
@@ -45,11 +43,11 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    * @return <code>m0</code>
    */
 
-  public static MatrixM2x2D add(
+  @Deprecated public static MatrixM2x2D add(
     final MatrixM2x2D m0,
-    final MatrixM2x2D m1)
+    final MatrixReadable2x2D m1)
   {
-    return MatrixM2x2D.add(m0, m1, m0);
+    return MatrixM2x2D.addInPlace(m0, m1);
   }
 
   /**
@@ -65,14 +63,37 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static MatrixM2x2D add(
-    final MatrixM2x2D m0,
-    final MatrixM2x2D m1,
+    final MatrixReadable2x2D m0,
+    final MatrixReadable2x2D m1,
     final MatrixM2x2D out)
   {
-    for (int index = 0; index < 4; ++index) {
-      out.view.put(index, m0.view.get(index) + m1.view.get(index));
-    }
+    final DoubleBuffer m0_view = m0.getDoubleBuffer();
+    final DoubleBuffer m1_view = m1.getDoubleBuffer();
+
+    out.view.put(0, m0_view.get(0) + m1_view.get(0));
+    out.view.put(1, m0_view.get(1) + m1_view.get(1));
+    out.view.put(2, m0_view.get(2) + m1_view.get(2));
+    out.view.put(3, m0_view.get(3) + m1_view.get(3));
+
     return out;
+  }
+
+  /**
+   * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
+   * returning the result in <code>m0</code>.
+   * 
+   * @param m0
+   *          The left input matrix.
+   * @param m1
+   *          The right input matrix.
+   * @return <code>m0</code>
+   */
+
+  public static MatrixM2x2D addInPlace(
+    final MatrixM2x2D m0,
+    final MatrixReadable2x2D m1)
+  {
+    return MatrixM2x2D.add(m0, m1, m0);
   }
 
   public static MatrixM2x2D addRowScaled(
@@ -112,7 +133,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static MatrixM2x2D addRowScaled(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final int row_a,
     final int row_b,
     final int row_c,
@@ -129,7 +150,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
   }
 
   private static MatrixM2x2D addRowScaledUnsafe(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final int row_a,
     final int row_b,
     final int row_c,
@@ -168,12 +189,16 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static MatrixM2x2D copy(
-    final MatrixM2x2D input,
+    final MatrixReadable2x2D input,
     final MatrixM2x2D output)
   {
-    for (int index = 0; index < 4; ++index) {
-      output.view.put(index, input.view.get(index));
-    }
+    final DoubleBuffer source_view = input.getDoubleBuffer();
+
+    output.view.put(0, source_view.get(0));
+    output.view.put(1, source_view.get(1));
+    output.view.put(2, source_view.get(2));
+    output.view.put(3, source_view.get(3));
+
     return output;
   }
 
@@ -185,12 +210,12 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static double determinant(
-    final MatrixM2x2D m)
+    final MatrixReadable2x2D m)
   {
-    final double r0c0 = MatrixM2x2D.get(m, 0, 0);
-    final double r0c1 = MatrixM2x2D.get(m, 0, 1);
-    final double r1c0 = MatrixM2x2D.get(m, 1, 0);
-    final double r1c1 = MatrixM2x2D.get(m, 1, 1);
+    final double r0c0 = m.getRowColumnD(0, 0);
+    final double r0c1 = m.getRowColumnD(0, 1);
+    final double r1c0 = m.getRowColumnD(1, 0);
+    final double r1c1 = m.getRowColumnD(1, 1);
 
     return (r0c0 * r1c1) - (r0c1 * r1c0);
   }
@@ -241,7 +266,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static MatrixM2x2D exchangeRows(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final int row_a,
     final int row_b,
     final MatrixM2x2D out)
@@ -254,7 +279,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
   }
 
   private static MatrixM2x2D exchangeRowsUnsafe(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final int row_a,
     final int row_b,
     final MatrixM2x2D out)
@@ -276,11 +301,12 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static double get(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final int row,
     final int column)
   {
-    return m.view.get(MatrixM2x2D.indexChecked(row, column));
+    final DoubleBuffer source_view = m.getDoubleBuffer();
+    return source_view.get(MatrixM2x2D.indexChecked(row, column));
   }
 
   private final static int indexChecked(
@@ -330,7 +356,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static Option<MatrixM2x2D> invert(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final MatrixM2x2D out)
   {
     final double d = MatrixM2x2D.determinant(m);
@@ -341,10 +367,10 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
 
     final double d_inv = 1 / d;
 
-    final double r0c0 = m.getUnsafe(1, 1) * d_inv;
-    final double r0c1 = -m.getUnsafe(0, 1) * d_inv;
-    final double r1c0 = -m.getUnsafe(1, 0) * d_inv;
-    final double r1c1 = m.getUnsafe(0, 0) * d_inv;
+    final double r0c0 = m.getRowColumnD(1, 1) * d_inv;
+    final double r0c1 = -m.getRowColumnD(0, 1) * d_inv;
+    final double r1c0 = -m.getRowColumnD(1, 0) * d_inv;
+    final double r1c1 = m.getRowColumnD(0, 0) * d_inv;
 
     out.setUnsafe(0, 0, r0c0);
     out.setUnsafe(0, 1, r0c1);
@@ -367,7 +393,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
 
   public static MatrixM2x2D multiply(
     final MatrixM2x2D m0,
-    final MatrixM2x2D m1)
+    final MatrixReadable2x2D m1)
   {
     return MatrixM2x2D.multiply(m0, m1, m0);
   }
@@ -386,22 +412,22 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static MatrixM2x2D multiply(
-    final MatrixM2x2D m0,
-    final MatrixM2x2D m1,
+    final MatrixReadable2x2D m0,
+    final MatrixReadable2x2D m1,
     final MatrixM2x2D out)
   {
     final double r0c0 =
-      (m0.getUnsafe(0, 0) * m1.getUnsafe(0, 0))
-        + (m0.getUnsafe(1, 0) * m1.getUnsafe(0, 1));
+      (m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 0))
+        + (m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 1));
     final double r0c1 =
-      (m0.getUnsafe(0, 1) * m1.getUnsafe(0, 0))
-        + (m0.getUnsafe(1, 1) * m1.getUnsafe(0, 1));
+      (m0.getRowColumnD(0, 1) * m1.getRowColumnD(0, 0))
+        + (m0.getRowColumnD(1, 1) * m1.getRowColumnD(0, 1));
     final double r1c0 =
-      (m0.getUnsafe(0, 0) * m1.getUnsafe(1, 0))
-        + (m0.getUnsafe(1, 0) * m1.getUnsafe(1, 1));
+      (m0.getRowColumnD(0, 0) * m1.getRowColumnD(1, 0))
+        + (m0.getRowColumnD(1, 0) * m1.getRowColumnD(1, 1));
     final double r1c1 =
-      (m0.getUnsafe(0, 1) * m1.getUnsafe(1, 0))
-        + (m0.getUnsafe(1, 1) * m1.getUnsafe(1, 1));
+      (m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 0))
+        + (m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 1));
 
     out.setUnsafe(0, 0, r0c0);
     out.setUnsafe(0, 1, r0c1);
@@ -425,16 +451,16 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static VectorM2D multiply(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final VectorReadable2D v,
     final VectorM2D out)
   {
     final VectorM2D row = new VectorM2D();
     final VectorM2D vi = new VectorM2D(v);
 
-    MatrixM2x2D.rowUnsafe(m, 0, row);
+    m.getRowD(0, row);
     out.x = VectorM2D.dotProduct(row, vi);
-    MatrixM2x2D.rowUnsafe(m, 1, row);
+    m.getRowD(1, row);
     out.y = VectorM2D.dotProduct(row, vi);
 
     return out;
@@ -446,7 +472,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static VectorM2D row(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final int row,
     final VectorM2D out)
   {
@@ -464,12 +490,12 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
   }
 
   public static VectorM2D rowUnsafe(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final int row,
     final VectorM2D out)
   {
-    out.x = m.getUnsafe(row, 0);
-    out.y = m.getUnsafe(row, 1);
+    out.x = m.getRowColumnD(row, 0);
+    out.y = m.getRowColumnD(row, 1);
     return out;
   }
 
@@ -503,13 +529,14 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static MatrixM2x2D scale(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final double r,
     final MatrixM2x2D out)
   {
-    for (int index = 0; index < 4; ++index) {
-      out.view.put(index, m.view.get(index) * r);
-    }
+    out.setUnsafe(0, 0, m.getRowColumnD(0, 0) * r);
+    out.setUnsafe(1, 0, m.getRowColumnD(1, 0) * r);
+    out.setUnsafe(0, 1, m.getRowColumnD(0, 1) * r);
+    out.setUnsafe(1, 1, m.getRowColumnD(1, 1) * r);
     return out;
   }
 
@@ -543,7 +570,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static MatrixM2x2D scaleRow(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final int row,
     final double r,
     final MatrixM2x2D out)
@@ -552,7 +579,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
   }
 
   private static MatrixM2x2D scaleRowUnsafe(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final int row,
     final double r,
     final MatrixM2x2D out)
@@ -654,36 +681,49 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    */
 
   public static MatrixM2x2D transpose(
-    final MatrixM2x2D m,
+    final MatrixReadable2x2D m,
     final MatrixM2x2D out)
   {
-    for (int index = 0; index < 4; ++index) {
-      out.view.put(index, m.view.get(index));
-    }
+    MatrixM2x2D.copy(m, out);
     return MatrixM2x2D.transpose(out);
   }
 
   private final ByteBuffer   data;
-
   private final DoubleBuffer view;
+  private static final int   VIEW_ELEMENT_SIZE;
+  private static final int   VIEW_ELEMENTS;
+  private static final int   VIEW_BYTES;
+  private static final int   VIEW_COLS;
+  private static final int   VIEW_ROWS;
+
+  static {
+    VIEW_ROWS = 2;
+    VIEW_COLS = 2;
+    VIEW_ELEMENT_SIZE = 8;
+    VIEW_ELEMENTS = MatrixM2x2D.VIEW_ROWS * MatrixM2x2D.VIEW_COLS;
+    VIEW_BYTES = MatrixM2x2D.VIEW_ELEMENTS * MatrixM2x2D.VIEW_ELEMENT_SIZE;
+  }
 
   public MatrixM2x2D()
   {
     this.data =
-      ByteBuffer.allocateDirect(2 * 2 * 8).order(ByteOrder.nativeOrder());
+      ByteBuffer.allocateDirect(MatrixM2x2D.VIEW_BYTES).order(
+        ByteOrder.nativeOrder());
     this.view = this.data.asDoubleBuffer();
     MatrixM2x2D.setIdentity(this);
   }
 
   public MatrixM2x2D(
-    final MatrixM2x2D source)
+    final MatrixReadable2x2D source)
   {
     this.data =
-      ByteBuffer.allocateDirect(2 * 2 * 8).order(ByteOrder.nativeOrder());
+      ByteBuffer.allocateDirect(MatrixM2x2D.VIEW_BYTES).order(
+        ByteOrder.nativeOrder());
     this.view = this.data.asDoubleBuffer();
 
-    for (int index = 0; index < 4; ++index) {
-      this.view.put(index, source.view.get(index));
+    final DoubleBuffer source_view = source.getDoubleBuffer();
+    for (int index = 0; index < MatrixM2x2D.VIEW_ELEMENTS; ++index) {
+      this.view.put(index, source_view.get(index));
     }
   }
 
@@ -708,11 +748,11 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
     return MatrixM2x2D.get(this, row, column);
   }
 
-  private double getUnsafe(
+  @Override public void getRowD(
     final int row,
-    final int column)
+    final VectorM2D out)
   {
-    return this.view.get(MatrixM2x2D.indexUnsafe(row, column));
+    MatrixM2x2D.rowUnsafe(this, MatrixM2x2D.rowCheck(row), out);
   }
 
   public MatrixM2x2D set(
@@ -740,7 +780,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
       builder.append("[");
       for (int column = 0; column < 2; ++column) {
         builder.append(MatrixM2x2D.get(this, row, column));
-        if (column < 2) {
+        if (column < 1) {
           builder.append(" ");
         }
       }

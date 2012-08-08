@@ -269,7 +269,9 @@ public class VectorM4ITest
     Assert.assertTrue(v.w == v.getWI());
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int max_x = VectorM4ITest.randomNegativeNumber();
@@ -305,7 +307,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int min_x = VectorM4ITest.randomPositiveNumber();
@@ -341,7 +345,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int min_x = VectorM4ITest.randomNegativeNumber();
@@ -391,7 +397,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int maximum = VectorM4ITest.randomNegativeNumber();
@@ -420,7 +428,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int minimum = VectorM4ITest.randomPositiveNumber();
@@ -569,13 +579,17 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductOrthonormal()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductOrthonormal()
   {
     final VectorM4I v = new VectorM4I(1, 0, 0, 0);
     Assert.assertTrue(VectorM4I.dotProduct(v, v) == 1);
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductSelfMagnitudeSquared()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductSelfMagnitudeSquared()
   {
     final VectorM4I v0 = new VectorM4I(10, 10, 10, 10);
 
@@ -598,7 +612,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testInitializeReadable()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInitializeReadable()
   {
     final VectorM4I v0 = new VectorM4I(1, 2, 3, 4);
     final VectorM4I v1 = new VectorM4I(v0);
@@ -609,7 +625,9 @@ public class VectorM4ITest
     Assert.assertTrue(v0.w == v1.w);
   }
 
-  @SuppressWarnings("static-method") @Test public void testInterpolateLinearLimits()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInterpolateLinearLimits()
   {
     for (int index = 0; index < 100; ++index) {
       final int x0 = VectorM4ITest.randomPositiveNumber();
@@ -683,7 +701,9 @@ public class VectorM4ITest
     Assert.assertTrue(m == 0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testProjectionPerpendicularZero()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testProjectionPerpendicularZero()
   {
     {
       final VectorM4I p = new VectorM4I(1, 0, 0, 0);

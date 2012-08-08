@@ -9,6 +9,12 @@ import java.nio.DoubleBuffer;
 public interface MatrixReadableD
 {
   /**
+   * Return a read-only view of the buffer that backs this matrix.
+   */
+
+  public DoubleBuffer getDoubleBuffer();
+
+  /**
    * Retrieve the value from the matrix at row <code>row</code> , column
    * <code>column</code>.
    */
@@ -16,10 +22,4 @@ public interface MatrixReadableD
   public double getRowColumnD(
     int row,
     int column);
-
-  /**
-   * Return a read-only view of the buffer that backs this matrix.
-   */
-
-  public DoubleBuffer getDoubleBuffer();
 }
