@@ -948,7 +948,7 @@ public final class MatrixM3x3F implements MatrixReadable3x3F
   static {
     VIEW_ROWS = 3;
     VIEW_COLS = 3;
-    VIEW_ELEMENT_SIZE = 8;
+    VIEW_ELEMENT_SIZE = 4;
     VIEW_ELEMENTS = MatrixM3x3F.VIEW_ROWS * MatrixM3x3F.VIEW_COLS;
     VIEW_BYTES = MatrixM3x3F.VIEW_ELEMENTS * MatrixM3x3F.VIEW_ELEMENT_SIZE;
   }

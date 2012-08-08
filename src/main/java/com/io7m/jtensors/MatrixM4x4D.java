@@ -2235,12 +2235,11 @@ public final class MatrixM4x4D implements MatrixReadable4x4D
   private static final double[] zero_row       = { 0.0, 0.0, 0.0, 0.0 };
 
   private static final int      VIEW_ELEMENT_SIZE;
-
   private static final int      VIEW_ELEMENTS;
-
   private static final int      VIEW_BYTES;
   private static final int      VIEW_COLS;
   private static final int      VIEW_ROWS;
+
   static {
     VIEW_ROWS = 4;
     VIEW_COLS = 4;

@@ -2243,7 +2243,7 @@ public final class MatrixM4x4F implements MatrixReadable4x4F
   static {
     VIEW_ROWS = 4;
     VIEW_COLS = 4;
-    VIEW_ELEMENT_SIZE = 8;
+    VIEW_ELEMENT_SIZE = 4;
     VIEW_ELEMENTS = MatrixM4x4F.VIEW_ROWS * MatrixM4x4F.VIEW_COLS;
     VIEW_BYTES = MatrixM4x4F.VIEW_ELEMENTS * MatrixM4x4F.VIEW_ELEMENT_SIZE;
   }
