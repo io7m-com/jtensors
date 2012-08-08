@@ -26,7 +26,7 @@ import com.io7m.jaux.functional.Option;
  * A 3x3 mutable matrix type with double precision elements.
  */
 
-public final class MatrixM3x3D implements MatrixReadableD
+public final class MatrixM3x3D implements MatrixReadable3x3D
 {
   private static final double[] identity_row_1 = { 0.0, 1.0, 0.0 };
 

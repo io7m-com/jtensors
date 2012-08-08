@@ -26,7 +26,7 @@ import com.io7m.jaux.functional.Option;
  * A 3x3 mutable matrix type with single precision elements.
  */
 
-public final class MatrixM3x3F implements MatrixReadableF
+public final class MatrixM3x3F implements MatrixReadable3x3F
 {
   private static final float[] identity_row_1 = { 0.0f, 1.0f, 0.0f };
   private static final float[] identity_row_2 = { 0.0f, 0.0f, 1.0f };

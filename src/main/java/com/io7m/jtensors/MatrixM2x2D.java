@@ -26,7 +26,7 @@ import com.io7m.jaux.functional.Option;
  * A 2x2 mutable matrix type with double precision elements.
  */
 
-public final class MatrixM2x2D implements MatrixReadableD
+public final class MatrixM2x2D implements MatrixReadable2x2D
 {
   private static final double[] identity_row_0 = { 1.0, 0.0 };
 

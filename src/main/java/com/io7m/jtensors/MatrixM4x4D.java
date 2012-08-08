@@ -26,7 +26,7 @@ import com.io7m.jaux.functional.Option;
  * A 4x4 mutable matrix type with double precision elements.
  */
 
-public final class MatrixM4x4D implements MatrixReadableD
+public final class MatrixM4x4D implements MatrixReadable4x4D
 {
   /**
    * The Context type contains the minimum storage required for all of the
