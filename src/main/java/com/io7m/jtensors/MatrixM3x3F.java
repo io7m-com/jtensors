@@ -545,7 +545,7 @@ public final class MatrixM3x3F implements MatrixReadable3x3F
    * @return <code>out</code>
    */
 
-  public static VectorM3F multiplyByVector3F(
+  public static VectorM3F multiplyVector3F(
     final MatrixReadable3x3F m,
     final VectorReadable3F v,
     final VectorM3F out)

@@ -1316,7 +1316,7 @@ public final class MatrixM4x4D implements MatrixReadable4x4D
    * @return <code>out</code>
    */
 
-  public static VectorM4D multiplyByVector4D(
+  public static VectorM4D multiplyVector4D(
     final MatrixReadable4x4D m,
     final VectorReadable4D v,
     final VectorM4D out)
@@ -1342,7 +1342,7 @@ public final class MatrixM4x4D implements MatrixReadable4x4D
    * @return <code>out</code>
    */
 
-  public static VectorM4D multiplyByVector4DWithContext(
+  public static VectorM4D multiplyVector4DWithContext(
     final Context context,
     final MatrixReadable4x4D m,
     final VectorReadable4D v,
@@ -1369,27 +1369,6 @@ public final class MatrixM4x4D implements MatrixReadable4x4D
     return MatrixM4x4D.multiply(m0, m1, m0);
   }
 
-  /**
-   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
-   * writing the resulting vector to <code>out</code>.
-   * 
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
-   * @return <code>out</code>
-   */
-
-  @Deprecated public static VectorM4D multiplyVector4D(
-    final MatrixReadable4x4D m,
-    final VectorReadable4D v,
-    final VectorM4D out)
-  {
-    return MatrixM4x4D.multiplyByVector4D(m, v, out);
-  }
-
   private static VectorM4D multiplyVector4D(
     final MatrixReadable4x4D m,
     final VectorReadable4D v,
@@ -1412,31 +1391,6 @@ public final class MatrixM4x4D implements MatrixReadable4x4D
     out.w = VectorM4D.dotProduct(va, vb);
 
     return out;
-  }
-
-  /**
-   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
-   * writing the resulting vector to <code>out</code>. The function uses
-   * preallocated storage in <code>context</code> to avoid allocating memory.
-   * 
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
-   * @return <code>out</code>
-   */
-
-  @Deprecated public static VectorM4D multiplyVector4DWithContext(
-    final Context context,
-    final MatrixReadable4x4D m,
-    final VectorReadable4D v,
-    final VectorM4D out)
-  {
-    return MatrixM4x4D.multiplyVector4D(m, v, context.va, context.vb, out);
   }
 
   /**

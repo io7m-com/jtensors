@@ -1347,7 +1347,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(MatrixM4x4D.get(r, 3, 3) == 600.0);
   }
 
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testMultiplyVectorSimple()
   {
@@ -1382,7 +1382,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(out.w == 150.0);
   }
 
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testMultiplyVectorSimpleContextEquivalent()
   {
@@ -1411,78 +1411,6 @@ public class MatrixM4x4DTest
 
     final VectorM4D r =
       MatrixM4x4D.multiplyVector4DWithContext(context, m0, v, out);
-    Assert.assertSame(out, r);
-
-    Assert.assertTrue(out.x == 30.0);
-    Assert.assertTrue(out.y == 70.0);
-    Assert.assertTrue(out.z == 110.0);
-    Assert.assertTrue(out.w == 150.0);
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMultiplyVectorSimpleContextEquivalentND()
-  {
-    final MatrixM4x4D m0 = new MatrixM4x4D();
-
-    MatrixM4x4D.set(m0, 0, 0, 1.0);
-    MatrixM4x4D.set(m0, 0, 1, 2.0);
-    MatrixM4x4D.set(m0, 0, 2, 3.0);
-    MatrixM4x4D.set(m0, 0, 3, 4.0);
-    MatrixM4x4D.set(m0, 1, 0, 5.0);
-    MatrixM4x4D.set(m0, 1, 1, 6.0);
-    MatrixM4x4D.set(m0, 1, 2, 7.0);
-    MatrixM4x4D.set(m0, 1, 3, 8.0);
-    MatrixM4x4D.set(m0, 2, 0, 9.0);
-    MatrixM4x4D.set(m0, 2, 1, 10.0);
-    MatrixM4x4D.set(m0, 2, 2, 11.0);
-    MatrixM4x4D.set(m0, 2, 3, 12.0);
-    MatrixM4x4D.set(m0, 3, 0, 13.0);
-    MatrixM4x4D.set(m0, 3, 1, 14.0);
-    MatrixM4x4D.set(m0, 3, 2, 15.0);
-    MatrixM4x4D.set(m0, 3, 3, 16.0);
-
-    final VectorI4D v = new VectorI4D(1.0, 2.0, 3.0, 4.0);
-    final VectorM4D out = new VectorM4D();
-    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
-
-    final VectorM4D r =
-      MatrixM4x4D.multiplyByVector4DWithContext(context, m0, v, out);
-    Assert.assertSame(out, r);
-
-    Assert.assertTrue(out.x == 30.0);
-    Assert.assertTrue(out.y == 70.0);
-    Assert.assertTrue(out.z == 110.0);
-    Assert.assertTrue(out.w == 150.0);
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMultiplyVectorSimpleND()
-  {
-    final MatrixM4x4D m0 = new MatrixM4x4D();
-
-    MatrixM4x4D.set(m0, 0, 0, 1.0);
-    MatrixM4x4D.set(m0, 0, 1, 2.0);
-    MatrixM4x4D.set(m0, 0, 2, 3.0);
-    MatrixM4x4D.set(m0, 0, 3, 4.0);
-    MatrixM4x4D.set(m0, 1, 0, 5.0);
-    MatrixM4x4D.set(m0, 1, 1, 6.0);
-    MatrixM4x4D.set(m0, 1, 2, 7.0);
-    MatrixM4x4D.set(m0, 1, 3, 8.0);
-    MatrixM4x4D.set(m0, 2, 0, 9.0);
-    MatrixM4x4D.set(m0, 2, 1, 10.0);
-    MatrixM4x4D.set(m0, 2, 2, 11.0);
-    MatrixM4x4D.set(m0, 2, 3, 12.0);
-    MatrixM4x4D.set(m0, 3, 0, 13.0);
-    MatrixM4x4D.set(m0, 3, 1, 14.0);
-    MatrixM4x4D.set(m0, 3, 2, 15.0);
-    MatrixM4x4D.set(m0, 3, 3, 16.0);
-
-    final VectorI4D v = new VectorI4D(1.0, 2.0, 3.0, 4.0);
-    final VectorM4D out = new VectorM4D();
-
-    final VectorM4D r = MatrixM4x4D.multiplyByVector4D(m0, v, out);
     Assert.assertSame(out, r);
 
     Assert.assertTrue(out.x == 30.0);
@@ -3167,7 +3095,7 @@ public class MatrixM4x4DTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
-  @SuppressWarnings({ "boxing", "static-method", "deprecation" }) @Test public
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
     void
     testTranslate3D4DEquivalent()
   {
@@ -3184,28 +3112,6 @@ public class MatrixM4x4DTest
 
     MatrixM3x3D.multiplyVector3D(m3, v3i, v3o);
     MatrixM4x4D.multiplyVector4D(m4, w3i, w3o);
-
-    Assert.assertEquals(v3o.x, w3o.x);
-    Assert.assertEquals(v3o.y, w3o.y);
-  }
-
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
-    void
-    testTranslate3D4DEquivalentND()
-  {
-    final MatrixM3x3D m3 = new MatrixM3x3D();
-    final MatrixM4x4D m4 = new MatrixM4x4D();
-    final VectorI3D v = new VectorI3D(3.0, 7.0, 0.0);
-    final VectorM3D v3i = new VectorM3D(1, 1, 1);
-    final VectorM3D v3o = new VectorM3D();
-    final VectorM4D w3i = new VectorM4D(1, 1, 1, 1);
-    final VectorM4D w3o = new VectorM4D();
-
-    MatrixM3x3D.makeTranslation2D(v, m3);
-    MatrixM4x4D.makeTranslation3D(v, m4);
-
-    MatrixM3x3D.multiplyByVector3D(m3, v3i, v3o);
-    MatrixM4x4D.multiplyByVector4D(m4, w3i, w3o);
 
     Assert.assertEquals(v3o.x, w3o.x);
     Assert.assertEquals(v3o.y, w3o.y);

@@ -1254,7 +1254,7 @@ public class MatrixM4x4FTest
     Assert.assertTrue(MatrixM4x4F.get(r, 3, 3) == 600.0);
   }
 
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testMultiplyVectorSimple()
   {
@@ -1289,7 +1289,7 @@ public class MatrixM4x4FTest
     Assert.assertTrue(out.w == 150.0);
   }
 
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testMultiplyVectorSimpleContextEquivalent()
   {
@@ -1318,78 +1318,6 @@ public class MatrixM4x4FTest
 
     final VectorM4F r =
       MatrixM4x4F.multiplyVector4FWithContext(context, m0, v, out);
-    Assert.assertSame(out, r);
-
-    Assert.assertTrue(out.x == 30.0);
-    Assert.assertTrue(out.y == 70.0);
-    Assert.assertTrue(out.z == 110.0);
-    Assert.assertTrue(out.w == 150.0);
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMultiplyVectorSimpleContextEquivalentND()
-  {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
-
-    MatrixM4x4F.set(m0, 0, 0, 1.0f);
-    MatrixM4x4F.set(m0, 0, 1, 2.0f);
-    MatrixM4x4F.set(m0, 0, 2, 3.0f);
-    MatrixM4x4F.set(m0, 0, 3, 4.0f);
-    MatrixM4x4F.set(m0, 1, 0, 5.0f);
-    MatrixM4x4F.set(m0, 1, 1, 6.0f);
-    MatrixM4x4F.set(m0, 1, 2, 7.0f);
-    MatrixM4x4F.set(m0, 1, 3, 8.0f);
-    MatrixM4x4F.set(m0, 2, 0, 9.0f);
-    MatrixM4x4F.set(m0, 2, 1, 10.0f);
-    MatrixM4x4F.set(m0, 2, 2, 11.0f);
-    MatrixM4x4F.set(m0, 2, 3, 12.0f);
-    MatrixM4x4F.set(m0, 3, 0, 13.0f);
-    MatrixM4x4F.set(m0, 3, 1, 14.0f);
-    MatrixM4x4F.set(m0, 3, 2, 15.0f);
-    MatrixM4x4F.set(m0, 3, 3, 16.0f);
-
-    final VectorI4F v = new VectorI4F(1.0f, 2.0f, 3.0f, 4.0f);
-    final VectorM4F out = new VectorM4F();
-    final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
-
-    final VectorM4F r =
-      MatrixM4x4F.multiplyByVector4FWithContext(context, m0, v, out);
-    Assert.assertSame(out, r);
-
-    Assert.assertTrue(out.x == 30.0);
-    Assert.assertTrue(out.y == 70.0);
-    Assert.assertTrue(out.z == 110.0);
-    Assert.assertTrue(out.w == 150.0);
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMultiplyVectorSimpleND()
-  {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
-
-    MatrixM4x4F.set(m0, 0, 0, 1.0f);
-    MatrixM4x4F.set(m0, 0, 1, 2.0f);
-    MatrixM4x4F.set(m0, 0, 2, 3.0f);
-    MatrixM4x4F.set(m0, 0, 3, 4.0f);
-    MatrixM4x4F.set(m0, 1, 0, 5.0f);
-    MatrixM4x4F.set(m0, 1, 1, 6.0f);
-    MatrixM4x4F.set(m0, 1, 2, 7.0f);
-    MatrixM4x4F.set(m0, 1, 3, 8.0f);
-    MatrixM4x4F.set(m0, 2, 0, 9.0f);
-    MatrixM4x4F.set(m0, 2, 1, 10.0f);
-    MatrixM4x4F.set(m0, 2, 2, 11.0f);
-    MatrixM4x4F.set(m0, 2, 3, 12.0f);
-    MatrixM4x4F.set(m0, 3, 0, 13.0f);
-    MatrixM4x4F.set(m0, 3, 1, 14.0f);
-    MatrixM4x4F.set(m0, 3, 2, 15.0f);
-    MatrixM4x4F.set(m0, 3, 3, 16.0f);
-
-    final VectorI4F v = new VectorI4F(1.0f, 2.0f, 3.0f, 4.0f);
-    final VectorM4F out = new VectorM4F();
-
-    final VectorM4F r = MatrixM4x4F.multiplyByVector4F(m0, v, out);
     Assert.assertSame(out, r);
 
     Assert.assertTrue(out.x == 30.0);

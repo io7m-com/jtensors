@@ -563,7 +563,7 @@ public final class MatrixM3x3D implements MatrixReadable3x3D
    * @return <code>out</code>
    */
 
-  public static VectorM3D multiplyByVector3D(
+  public static VectorM3D multiplyVector3D(
     final MatrixReadable3x3D m,
     final VectorReadable3D v,
     final VectorM3D out)
@@ -597,27 +597,6 @@ public final class MatrixM3x3D implements MatrixReadable3x3D
     final MatrixReadable3x3D m1)
   {
     return MatrixM3x3D.multiply(m0, m1, m0);
-  }
-
-  /**
-   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
-   * writing the resulting vector to <code>out</code>.
-   * 
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
-   * @return <code>out</code>
-   */
-
-  @Deprecated public static VectorM3D multiplyVector3D(
-    final MatrixReadable3x3D m,
-    final VectorReadable3D v,
-    final VectorM3D out)
-  {
-    return MatrixM3x3D.multiplyByVector3D(m, v, out);
   }
 
   /**

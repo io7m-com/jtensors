@@ -647,7 +647,7 @@ public class MatrixM3x3FTest
     final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
     final VectorM3F out = new VectorM3F();
 
-    final VectorM3F r = MatrixM3x3F.multiplyByVector3F(m0, v, out);
+    final VectorM3F r = MatrixM3x3F.multiplyVector3F(m0, v, out);
     Assert.assertSame(out, r);
 
     Assert.assertTrue(out.x == 14.0);

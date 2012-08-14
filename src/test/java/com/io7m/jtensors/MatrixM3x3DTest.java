@@ -752,7 +752,7 @@ public class MatrixM3x3DTest
     Assert.assertTrue(MatrixM3x3D.get(r, 2, 2) == 150.0);
   }
 
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testMultiplyVectorSimple()
   {
@@ -774,35 +774,6 @@ public class MatrixM3x3DTest
     final VectorM3D out = new VectorM3D();
 
     final VectorM3D r = MatrixM3x3D.multiplyVector3D(m0, v, out);
-    Assert.assertSame(out, r);
-
-    Assert.assertTrue(out.x == 14.0);
-    Assert.assertTrue(out.y == 32.0);
-    Assert.assertTrue(out.z == 50.0);
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMultiplyVectorSimpleND()
-  {
-    final MatrixM3x3D m0 = new MatrixM3x3D();
-
-    MatrixM3x3D.set(m0, 0, 0, 1.0);
-    MatrixM3x3D.set(m0, 0, 1, 2.0);
-    MatrixM3x3D.set(m0, 0, 2, 3.0);
-
-    MatrixM3x3D.set(m0, 1, 0, 4.0);
-    MatrixM3x3D.set(m0, 1, 1, 5.0);
-    MatrixM3x3D.set(m0, 1, 2, 6.0);
-
-    MatrixM3x3D.set(m0, 2, 0, 7.0);
-    MatrixM3x3D.set(m0, 2, 1, 8.0);
-    MatrixM3x3D.set(m0, 2, 2, 9.0);
-
-    final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
-    final VectorM3D out = new VectorM3D();
-
-    final VectorM3D r = MatrixM3x3D.multiplyByVector3D(m0, v, out);
     Assert.assertSame(out, r);
 
     Assert.assertTrue(out.x == 14.0);
