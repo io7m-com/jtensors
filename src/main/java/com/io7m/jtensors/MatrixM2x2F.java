@@ -385,11 +385,11 @@ public final class MatrixM2x2F implements MatrixReadable2x2F
    * writing the result to <code>out</code>.
    * 
    * @param m0
-   *          The left input vector.
+   *          The left input matrix.
    * @param m1
-   *          The right input vector.
+   *          The right input matrix.
    * @param out
-   *          The output vector.
+   *          The output matrix.
    * @return <code>out</code>
    */
 
@@ -432,7 +432,36 @@ public final class MatrixM2x2F implements MatrixReadable2x2F
    * @return <code>out</code>
    */
 
-  public static VectorM2F multiply(
+  @Deprecated public static VectorM2F multiply(
+    final MatrixReadable2x2F m,
+    final VectorReadable2F v,
+    final VectorM2F out)
+  {
+    final VectorM2F row = new VectorM2F();
+    final VectorM2F vi = new VectorM2F(v);
+
+    m.getRowF(0, row);
+    out.x = VectorM2F.dotProduct(row, vi);
+    m.getRowF(1, row);
+    out.y = VectorM2F.dotProduct(row, vi);
+
+    return out;
+  }
+
+  /**
+   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
+   * writing the resulting vector to <code>out</code>.
+   * 
+   * @param m
+   *          The input matrix.
+   * @param v
+   *          The input vector.
+   * @param out
+   *          The output vector.
+   * @return <code>out</code>
+   */
+
+  public static VectorM2F multiplyVector2F(
     final MatrixReadable2x2F m,
     final VectorReadable2F v,
     final VectorM2F out)

@@ -385,9 +385,9 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    * writing the result to <code>m0</code>.
    * 
    * @param m0
-   *          The left input vector.
+   *          The left input matrix.
    * @param m1
-   *          The right input vector.
+   *          The right input matrix.
    * @return <code>out</code>
    */
 
@@ -403,11 +403,11 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    * writing the result to <code>out</code>.
    * 
    * @param m0
-   *          The left input vector.
+   *          The left input matrix.
    * @param m1
-   *          The right input vector.
+   *          The right input matrix.
    * @param out
-   *          The output vector.
+   *          The output matrix.
    * @return <code>out</code>
    */
 
@@ -450,7 +450,36 @@ public final class MatrixM2x2D implements MatrixReadable2x2D
    * @return <code>out</code>
    */
 
-  public static VectorM2D multiply(
+  @Deprecated public static VectorM2D multiply(
+    final MatrixReadable2x2D m,
+    final VectorReadable2D v,
+    final VectorM2D out)
+  {
+    final VectorM2D row = new VectorM2D();
+    final VectorM2D vi = new VectorM2D(v);
+
+    m.getRowD(0, row);
+    out.x = VectorM2D.dotProduct(row, vi);
+    m.getRowD(1, row);
+    out.y = VectorM2D.dotProduct(row, vi);
+
+    return out;
+  }
+
+  /**
+   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
+   * writing the resulting vector to <code>out</code>.
+   * 
+   * @param m
+   *          The input matrix.
+   * @param v
+   *          The input vector.
+   * @param out
+   *          The output vector.
+   * @return <code>out</code>
+   */
+
+  public static VectorM2D multiplyVector2D(
     final MatrixReadable2x2D m,
     final VectorReadable2D v,
     final VectorM2D out)

@@ -530,7 +530,7 @@ public class MatrixM2x2DTest
     Assert.assertTrue(MatrixM2x2D.get(r, 1, 1) == 22.0);
   }
 
-  @SuppressWarnings("static-method") @Test public
+  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
     void
     testMultiplyVectorSimple()
   {
@@ -545,6 +545,27 @@ public class MatrixM2x2DTest
     final VectorM2D out = new VectorM2D();
 
     final VectorM2D r = MatrixM2x2D.multiply(m0, v, out);
+    Assert.assertSame(out, r);
+
+    Assert.assertTrue(out.x == 5.0);
+    Assert.assertTrue(out.y == 11.0);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMultiplyVectorSimpleND()
+  {
+    final MatrixM2x2D m0 = new MatrixM2x2D();
+
+    MatrixM2x2D.set(m0, 0, 0, 1.0);
+    MatrixM2x2D.set(m0, 0, 1, 2.0);
+    MatrixM2x2D.set(m0, 1, 0, 3.0);
+    MatrixM2x2D.set(m0, 1, 1, 4.0);
+
+    final VectorI2D v = new VectorI2D(1.0, 2.0);
+    final VectorM2D out = new VectorM2D();
+
+    final VectorM2D r = MatrixM2x2D.multiplyVector2D(m0, v, out);
     Assert.assertSame(out, r);
 
     Assert.assertTrue(out.x == 5.0);
