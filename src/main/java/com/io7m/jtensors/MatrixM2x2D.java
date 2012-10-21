@@ -20,13 +20,18 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 import com.io7m.jaux.functional.Option;
 
 /**
  * A 2x2 mutable matrix type with double precision elements.
+ * 
+ * Values of this type cannot be accessed safely from multiple threads without
+ * explicit synchronization.
  */
 
-public final class MatrixM2x2D implements MatrixReadable2x2D
+@NotThreadSafe public final class MatrixM2x2D implements MatrixReadable2x2D
 {
   private static final double[] identity_row_0 = { 1.0, 0.0 };
   private static final double[] identity_row_1 = { 0.0, 1.0 };

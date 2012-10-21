@@ -20,13 +20,18 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 import com.io7m.jaux.functional.Option;
 
 /**
  * A 4x4 mutable matrix type with single precision elements.
+ * 
+ * Values of this type cannot be accessed safely from multiple threads without
+ * explicit synchronization.
  */
 
-public final class MatrixM4x4F implements MatrixReadable4x4F
+@NotThreadSafe public final class MatrixM4x4F implements MatrixReadable4x4F
 {
   /**
    * The Context type contains the minimum storage required for all of the
@@ -35,9 +40,12 @@ public final class MatrixM4x4F implements MatrixReadable4x4F
    * functions in the class to avoid allocating memory (not including stack
    * space) for intermediate calculations. This can reduce garbage collection
    * in speed critical code.
+   * 
+   * Values of this type cannot be accessed safely from multiple threads
+   * without explicit synchronization.
    */
 
-  public static final class Context
+  @NotThreadSafe public static final class Context
   {
     final MatrixM4x4F m4a = new MatrixM4x4F();
     final VectorM4F   va  = new VectorM4F();

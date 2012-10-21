@@ -20,13 +20,18 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 import com.io7m.jaux.functional.Option;
 
 /**
  * A 2x2 mutable matrix type with single precision elements.
+ * 
+ * Values of this type cannot be accessed safely from multiple threads without
+ * explicit synchronization.
  */
 
-public final class MatrixM2x2F implements MatrixReadable2x2F
+@NotThreadSafe public final class MatrixM2x2F implements MatrixReadable2x2F
 {
   private static final float[] identity_row_0 = { 1.0f, 0.0f };
   private static final float[] identity_row_1 = { 0.0f, 1.0f };

@@ -16,13 +16,18 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.concurrent.Immutable;
+
 import com.io7m.jaux.ApproximatelyEqualDouble;
 
 /**
  * A two-dimensional immutable vector type with double precision elements.
+ * 
+ * Values of this type are immutable and can therefore be safely accessed from
+ * multiple threads.
  */
 
-public final class VectorI2D implements VectorReadable2D
+@Immutable public final class VectorI2D implements VectorReadable2D
 {
   /**
    * @param v0

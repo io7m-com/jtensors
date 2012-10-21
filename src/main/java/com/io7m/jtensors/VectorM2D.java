@@ -16,13 +16,18 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 import com.io7m.jaux.ApproximatelyEqualDouble;
 
 /**
  * A two-dimensional mutable vector type with double precision elements.
+ * 
+ * Values of this type cannot be accessed safely from multiple threads without
+ * explicit synchronization.
  */
 
-public final class VectorM2D implements VectorReadable2D
+@NotThreadSafe public final class VectorM2D implements VectorReadable2D
 {
   /**
    * @param v

@@ -16,13 +16,18 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.concurrent.Immutable;
+
 import com.io7m.jaux.ApproximatelyEqualDouble;
 
 /**
  * A four-dimensional immutable vector type with double precision elements.
+ * 
+ * Values of this type are immutable and can therefore be safely accessed from
+ * multiple threads.
  */
 
-public final class VectorI4D implements VectorReadable4D
+@Immutable public final class VectorI4D implements VectorReadable4D
 {
   /**
    * @param v0

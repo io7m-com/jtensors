@@ -20,13 +20,18 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 import com.io7m.jaux.functional.Option;
 
 /**
  * A 4x4 mutable matrix type with double precision elements.
+ * 
+ * Values of this type cannot be accessed safely from multiple threads without
+ * explicit synchronization.
  */
 
-public final class MatrixM4x4D implements MatrixReadable4x4D
+@NotThreadSafe public final class MatrixM4x4D implements MatrixReadable4x4D
 {
   /**
    * The Context type contains the minimum storage required for all of the
