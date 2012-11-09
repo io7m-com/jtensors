@@ -1,1 +1,1 @@
-io7m-jtensors 2.2.0
+io7m-jtensors 2.3.0
