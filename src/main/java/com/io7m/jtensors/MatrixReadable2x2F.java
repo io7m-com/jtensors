@@ -1,4 +1,22 @@
+/*
+ * Copyright © 2012 http://io7m.com
+ * 
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+ * SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+ * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
 package com.io7m.jtensors;
+
+import javax.annotation.Nonnull;
 
 /**
  * 'Read' interface to 2x2 matrices with single precision elements.
@@ -17,5 +35,5 @@ public interface MatrixReadable2x2F extends MatrixReadableF
 
   void getRowF(
     final int row,
-    final VectorM2F out);
+    final @Nonnull VectorM2F out);
 }

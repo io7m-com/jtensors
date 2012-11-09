@@ -20,6 +20,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.io7m.jaux.functional.Option;
@@ -47,10 +48,10 @@ import com.io7m.jaux.functional.Option;
 
   @NotThreadSafe public static final class Context
   {
-    final MatrixM4x4F m4a = new MatrixM4x4F();
-    final VectorM4F   va  = new VectorM4F();
-    final VectorM4F   vb  = new VectorM4F();
-    final MatrixM3x3F m3a = new MatrixM3x3F();
+    final @Nonnull MatrixM4x4F m4a = new MatrixM4x4F();
+    final @Nonnull VectorM4F   va  = new VectorM4F();
+    final @Nonnull VectorM4F   vb  = new VectorM4F();
+    final @Nonnull MatrixM3x3F m3a = new MatrixM3x3F();
 
     public Context()
     {
@@ -71,9 +72,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F add(
-    final MatrixReadable4x4F m0,
-    final MatrixReadable4x4F m1,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m0,
+    final @Nonnull MatrixReadable4x4F m1,
+    final @Nonnull MatrixM4x4F out)
   {
     final FloatBuffer m0_view = m0.getFloatBuffer();
     final FloatBuffer m1_view = m1.getFloatBuffer();
@@ -96,8 +97,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F addInPlace(
-    final MatrixM4x4F m0,
-    final MatrixReadable4x4F m1)
+    final @Nonnull MatrixM4x4F m0,
+    final @Nonnull MatrixReadable4x4F m1)
   {
     return MatrixM4x4F.add(m0, m1, m0);
   }
@@ -134,12 +135,12 @@ import com.io7m.jaux.functional.Option;
 
   @Deprecated public static MatrixM4x4F addRowScaled(
     final Context context,
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
     final int row_c,
     final float r,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixM4x4F out)
   {
     return MatrixM4x4F.addRowScaledUnsafe(
       m,
@@ -179,15 +180,15 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F addRowScaled(
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
     final int row_c,
     final float r,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixM4x4F out)
   {
-    final VectorM4F va = new VectorM4F();
-    final VectorM4F vb = new VectorM4F();
+    final @Nonnull VectorM4F va = new VectorM4F();
+    final @Nonnull VectorM4F vb = new VectorM4F();
 
     return MatrixM4x4F.addRowScaledUnsafe(
       m,
@@ -225,7 +226,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F addRowScaledInPlace(
-    final MatrixM4x4F m,
+    final @Nonnull MatrixM4x4F m,
     final int row_a,
     final int row_b,
     final int row_c,
@@ -235,14 +236,14 @@ import com.io7m.jaux.functional.Option;
   }
 
   private static MatrixM4x4F addRowScaledUnsafe(
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
     final int row_c,
     final float r,
-    final VectorM4F va,
-    final VectorM4F vb,
-    final MatrixM4x4F out)
+    final @Nonnull VectorM4F va,
+    final @Nonnull VectorM4F vb,
+    final @Nonnull MatrixM4x4F out)
   {
     MatrixM4x4F.rowUnsafe(m, row_a, va);
     MatrixM4x4F.rowUnsafe(m, row_b, vb);
@@ -283,12 +284,12 @@ import com.io7m.jaux.functional.Option;
 
   public static MatrixM4x4F addRowScaledWithContext(
     final Context context,
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
     final int row_c,
     final float r,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixM4x4F out)
   {
     return MatrixM4x4F.addRowScaledUnsafe(
       m,
@@ -323,8 +324,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F copy(
-    final MatrixReadable4x4F input,
-    final MatrixM4x4F output)
+    final @Nonnull MatrixReadable4x4F input,
+    final @Nonnull MatrixM4x4F output)
   {
     final FloatBuffer input_view = input.getFloatBuffer();
     for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
@@ -359,10 +360,10 @@ import com.io7m.jaux.functional.Option;
 
   @Deprecated public static MatrixM4x4F exchangeRows(
     final Context context,
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixM4x4F out)
   {
     return MatrixM4x4F.exchangeRowsUnsafe(
       m,
@@ -394,13 +395,13 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F exchangeRows(
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixM4x4F out)
   {
-    final VectorM4F va = new VectorM4F();
-    final VectorM4F vb = new VectorM4F();
+    final @Nonnull VectorM4F va = new VectorM4F();
+    final @Nonnull VectorM4F vb = new VectorM4F();
     return MatrixM4x4F.exchangeRowsUnsafe(
       m,
       MatrixM4x4F.rowCheck(row_a),
@@ -429,7 +430,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F exchangeRowsInPlace(
-    final MatrixM4x4F m,
+    final @Nonnull MatrixM4x4F m,
     final int row_a,
     final int row_b)
   {
@@ -437,12 +438,12 @@ import com.io7m.jaux.functional.Option;
   }
 
   private static MatrixM4x4F exchangeRowsUnsafe(
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
-    final VectorM4F va,
-    final VectorM4F vb,
-    final MatrixM4x4F out)
+    final @Nonnull VectorM4F va,
+    final @Nonnull VectorM4F vb,
+    final @Nonnull MatrixM4x4F out)
   {
     MatrixM4x4F.rowUnsafe(m, row_a, va);
     MatrixM4x4F.rowUnsafe(m, row_b, vb);
@@ -477,10 +478,10 @@ import com.io7m.jaux.functional.Option;
 
   public static MatrixM4x4F exchangeRowsWithContext(
     final Context context,
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixM4x4F out)
   {
     return MatrixM4x4F.exchangeRowsUnsafe(
       m,
@@ -499,7 +500,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static FloatBuffer floatBuffer(
-    final MatrixM4x4F m)
+    final @Nonnull MatrixM4x4F m)
   {
     final ByteBuffer b =
       m.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
@@ -512,7 +513,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static float get(
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row,
     final int column)
   {
@@ -547,9 +548,9 @@ import com.io7m.jaux.functional.Option;
   }
 
   private static Option<MatrixM4x4F> invert(
-    final MatrixReadable4x4F m,
-    final MatrixM3x3F m3,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull MatrixM3x3F m3,
+    final @Nonnull MatrixM4x4F out)
   {
     final float d = MatrixM4x4F.determinant(m);
 
@@ -908,10 +909,10 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static Option<MatrixM4x4F> invert(
-    final MatrixReadable4x4F m,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull MatrixM4x4F out)
   {
-    final MatrixM3x3F m3 = new MatrixM3x3F();
+    final @Nonnull MatrixM3x3F m3 = new MatrixM3x3F();
     return MatrixM4x4F.invert(m, m3, out);
   }
 
@@ -929,7 +930,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static Option<MatrixM4x4F> invertInPlace(
-    final MatrixM4x4F m)
+    final @Nonnull MatrixM4x4F m)
   {
     return MatrixM4x4F.invert(m, m);
   }
@@ -952,7 +953,7 @@ import com.io7m.jaux.functional.Option;
 
   public static Option<MatrixM4x4F> invertInPlaceWithContext(
     final Context context,
-    final MatrixM4x4F m)
+    final @Nonnull MatrixM4x4F m)
   {
     return MatrixM4x4F.invertWithContext(context, m, m);
   }
@@ -977,8 +978,8 @@ import com.io7m.jaux.functional.Option;
 
   public static Option<MatrixM4x4F> invertWithContext(
     final Context context,
-    final MatrixReadable4x4F m,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull MatrixM4x4F out)
   {
     return MatrixM4x4F.invert(m, context.m3a, out);
   }
@@ -996,9 +997,9 @@ import com.io7m.jaux.functional.Option;
 
   public static MatrixM4x4F makeRotation(
     final float angle,
-    final VectorReadable3F axis)
+    final @Nonnull VectorReadable3F axis)
   {
-    final MatrixM4x4F out = new MatrixM4x4F();
+    final @Nonnull MatrixM4x4F out = new MatrixM4x4F();
     MatrixM4x4F.makeRotation(angle, axis, out);
     return out;
   }
@@ -1019,8 +1020,8 @@ import com.io7m.jaux.functional.Option;
 
   public static MatrixM4x4F makeRotation(
     final float angle,
-    final VectorReadable3F axis,
-    final MatrixM4x4F out)
+    final @Nonnull VectorReadable3F axis,
+    final @Nonnull MatrixM4x4F out)
   {
     final float ax = axis.getXF();
     final float ay = axis.getYF();
@@ -1076,9 +1077,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F makeTranslation3F(
-    final VectorReadable3F v)
+    final @Nonnull VectorReadable3F v)
   {
-    final MatrixM4x4F out = new MatrixM4x4F();
+    final @Nonnull MatrixM4x4F out = new MatrixM4x4F();
     MatrixM4x4F.makeTranslation3F(v, out);
     return out;
   }
@@ -1096,8 +1097,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F makeTranslation3F(
-    final VectorReadable3F v,
-    final MatrixM4x4F out)
+    final @Nonnull VectorReadable3F v,
+    final @Nonnull MatrixM4x4F out)
   {
     out.setUnsafe(0, 0, 1.0f);
     out.setUnsafe(0, 1, 0.0f);
@@ -1132,9 +1133,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F makeTranslation3I(
-    final VectorReadable3I v)
+    final @Nonnull VectorReadable3I v)
   {
-    final MatrixM4x4F out = new MatrixM4x4F();
+    final @Nonnull MatrixM4x4F out = new MatrixM4x4F();
     MatrixM4x4F.makeTranslation3I(v, out);
     return out;
   }
@@ -1152,8 +1153,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F makeTranslation3I(
-    final VectorReadable3I v,
-    final MatrixM4x4F out)
+    final @Nonnull VectorReadable3I v,
+    final @Nonnull MatrixM4x4F out)
   {
     out.setUnsafe(0, 0, 1.0f);
     out.setUnsafe(0, 1, 0.0f);
@@ -1192,9 +1193,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F multiply(
-    final MatrixReadable4x4F m0,
-    final MatrixReadable4x4F m1,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m0,
+    final @Nonnull MatrixReadable4x4F m1,
+    final @Nonnull MatrixM4x4F out)
   {
     float r0c0 = 0;
     r0c0 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 0);
@@ -1327,8 +1328,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F multiplyInPlace(
-    final MatrixM4x4F m0,
-    final MatrixReadable4x4F m1)
+    final @Nonnull MatrixM4x4F m0,
+    final @Nonnull MatrixReadable4x4F m1)
   {
     return MatrixM4x4F.multiply(m0, m1, m0);
   }
@@ -1347,21 +1348,21 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static VectorM4F multiplyVector4F(
-    final MatrixReadable4x4F m,
-    final VectorReadable4F v,
-    final VectorM4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull VectorReadable4F v,
+    final @Nonnull VectorM4F out)
   {
-    final VectorM4F va = new VectorM4F();
-    final VectorM4F vb = new VectorM4F();
+    final @Nonnull VectorM4F va = new VectorM4F();
+    final @Nonnull VectorM4F vb = new VectorM4F();
     return MatrixM4x4F.multiplyVector4F(m, v, va, vb, out);
   }
 
   private static VectorM4F multiplyVector4F(
-    final MatrixReadable4x4F m,
-    final VectorReadable4F v,
-    final VectorM4F va,
-    final VectorM4F vb,
-    final VectorM4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull VectorReadable4F v,
+    final @Nonnull VectorM4F va,
+    final @Nonnull VectorM4F vb,
+    final @Nonnull VectorM4F out)
   {
     vb.x = v.getXF();
     vb.y = v.getYF();
@@ -1398,9 +1399,9 @@ import com.io7m.jaux.functional.Option;
 
   public static VectorM4F multiplyVector4FWithContext(
     final Context context,
-    final MatrixReadable4x4F m,
-    final VectorReadable4F v,
-    final VectorM4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull VectorReadable4F v,
+    final @Nonnull VectorM4F out)
   {
     return MatrixM4x4F.multiplyVector4F(m, v, context.va, context.vb, out);
   }
@@ -1427,19 +1428,19 @@ import com.io7m.jaux.functional.Option;
   @Deprecated public static MatrixM4x4F rotate(
     final Context context,
     final float angle,
-    final MatrixReadable4x4F m,
-    final VectorReadable3F axis,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull VectorReadable3F axis,
+    final @Nonnull MatrixM4x4F out)
   {
     return MatrixM4x4F.rotate(angle, m, context.m4a, axis, out);
   }
 
   private static MatrixM4x4F rotate(
     final float angle,
-    final MatrixReadable4x4F m,
-    final MatrixM4x4F tmp,
-    final VectorReadable3F axis,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull MatrixM4x4F tmp,
+    final @Nonnull VectorReadable3F axis,
+    final @Nonnull MatrixM4x4F out)
   {
     MatrixM4x4F.makeRotation(angle, axis, tmp);
     MatrixM4x4F.multiply(m, tmp, out);
@@ -1463,11 +1464,11 @@ import com.io7m.jaux.functional.Option;
 
   public static MatrixM4x4F rotate(
     final float angle,
-    final MatrixReadable4x4F m,
-    final VectorReadable3F axis,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull VectorReadable3F axis,
+    final @Nonnull MatrixM4x4F out)
   {
-    final MatrixM4x4F tmp = new MatrixM4x4F();
+    final @Nonnull MatrixM4x4F tmp = new MatrixM4x4F();
     return MatrixM4x4F.rotate(angle, m, tmp, axis, out);
   }
 
@@ -1486,10 +1487,10 @@ import com.io7m.jaux.functional.Option;
 
   public static MatrixM4x4F rotateInPlace(
     final float angle,
-    final MatrixM4x4F m,
-    final VectorReadable3F axis)
+    final @Nonnull MatrixM4x4F m,
+    final @Nonnull VectorReadable3F axis)
   {
-    final MatrixM4x4F tmp = new MatrixM4x4F();
+    final @Nonnull MatrixM4x4F tmp = new MatrixM4x4F();
     return MatrixM4x4F.rotate(angle, m, tmp, axis, m);
   }
 
@@ -1513,8 +1514,8 @@ import com.io7m.jaux.functional.Option;
   public static MatrixM4x4F rotateInPlaceWithContext(
     final Context context,
     final float angle,
-    final MatrixM4x4F m,
-    final VectorReadable3F axis)
+    final @Nonnull MatrixM4x4F m,
+    final @Nonnull VectorReadable3F axis)
   {
     return MatrixM4x4F.rotate(angle, m, context.m4a, axis, m);
   }
@@ -1539,8 +1540,8 @@ import com.io7m.jaux.functional.Option;
   @Deprecated public static MatrixM4x4F rotateWithContext(
     final Context context,
     final float angle,
-    final MatrixM4x4F m,
-    final VectorReadable3F axis)
+    final @Nonnull MatrixM4x4F m,
+    final @Nonnull VectorReadable3F axis)
   {
     return MatrixM4x4F.rotate(angle, m, context.m4a, axis, m);
   }
@@ -1567,9 +1568,9 @@ import com.io7m.jaux.functional.Option;
   public static MatrixM4x4F rotateWithContext(
     final Context context,
     final float angle,
-    final MatrixReadable4x4F m,
-    final VectorReadable3F axis,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull VectorReadable3F axis,
+    final @Nonnull MatrixM4x4F out)
   {
     return MatrixM4x4F.rotate(angle, m, context.m4a, axis, out);
   }
@@ -1580,9 +1581,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static VectorM4F row(
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row,
-    final VectorM4F out)
+    final @Nonnull VectorM4F out)
   {
     return MatrixM4x4F.rowUnsafe(m, MatrixM4x4F.rowCheck(row), out);
   }
@@ -1598,9 +1599,9 @@ import com.io7m.jaux.functional.Option;
   }
 
   public static VectorM4F rowUnsafe(
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row,
-    final VectorM4F out)
+    final @Nonnull VectorM4F out)
   {
     out.x = m.getRowColumnF(row, 0);
     out.y = m.getRowColumnF(row, 1);
@@ -1621,9 +1622,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F scale(
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final float r,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixM4x4F out)
   {
     final FloatBuffer m_view = m.getFloatBuffer();
     for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
@@ -1644,7 +1645,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F scaleInPlace(
-    final MatrixM4x4F m,
+    final @Nonnull MatrixM4x4F m,
     final float r)
   {
     return MatrixM4x4F.scale(m, r, m);
@@ -1677,10 +1678,10 @@ import com.io7m.jaux.functional.Option;
 
   @Deprecated public static MatrixM4x4F scaleRow(
     final Context context,
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row,
     final float r,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixM4x4F out)
   {
     return MatrixM4x4F.scaleRowUnsafe(
       m,
@@ -1712,12 +1713,12 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F scaleRow(
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row,
     final float r,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixM4x4F out)
   {
-    final VectorM4F tmp = new VectorM4F();
+    final @Nonnull VectorM4F tmp = new VectorM4F();
     return MatrixM4x4F.scaleRowUnsafe(
       m,
       MatrixM4x4F.rowCheck(row),
@@ -1746,11 +1747,11 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F scaleRowInPlace(
-    final MatrixM4x4F m,
+    final @Nonnull MatrixM4x4F m,
     final int row,
     final float r)
   {
-    final VectorM4F tmp = new VectorM4F();
+    final @Nonnull VectorM4F tmp = new VectorM4F();
     return MatrixM4x4F.scaleRowUnsafe(m, row, r, tmp, m);
   }
 
@@ -1779,7 +1780,7 @@ import com.io7m.jaux.functional.Option;
 
   public static MatrixM4x4F scaleRowInPlaceWithContext(
     final Context context,
-    final MatrixM4x4F m,
+    final @Nonnull MatrixM4x4F m,
     final int row,
     final float r)
   {
@@ -1792,11 +1793,11 @@ import com.io7m.jaux.functional.Option;
   }
 
   private static MatrixM4x4F scaleRowUnsafe(
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row,
     final float r,
-    final VectorM4F tmp,
-    final MatrixM4x4F out)
+    final @Nonnull VectorM4F tmp,
+    final @Nonnull MatrixM4x4F out)
   {
     MatrixM4x4F.rowUnsafe(m, row, tmp);
     VectorM4F.scaleInPlace(tmp, r);
@@ -1831,10 +1832,10 @@ import com.io7m.jaux.functional.Option;
 
   public static MatrixM4x4F scaleRowWithContext(
     final Context context,
-    final MatrixReadable4x4F m,
+    final @Nonnull MatrixReadable4x4F m,
     final int row,
     final float r,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixM4x4F out)
   {
     return MatrixM4x4F.scaleRowUnsafe(
       m,
@@ -1850,7 +1851,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F set(
-    final MatrixM4x4F m,
+    final @Nonnull MatrixM4x4F m,
     final int row,
     final int column,
     final float value)
@@ -1866,7 +1867,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F setIdentity(
-    final MatrixM4x4F m)
+    final @Nonnull MatrixM4x4F m)
   {
     m.view.clear();
     m.view.put(MatrixM4x4F.identity_row_0);
@@ -1877,9 +1878,9 @@ import com.io7m.jaux.functional.Option;
   }
 
   private static void setRowUnsafe(
-    final MatrixM4x4F m,
+    final @Nonnull MatrixM4x4F m,
     final int row,
-    final VectorReadable4F v)
+    final @Nonnull VectorReadable4F v)
   {
     m.setUnsafe(row, 0, v.getXF());
     m.setUnsafe(row, 1, v.getYF());
@@ -1894,7 +1895,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F setZero(
-    final MatrixM4x4F m)
+    final @Nonnull MatrixM4x4F m)
   {
     m.view.clear();
     m.view.put(MatrixM4x4F.zero_row);
@@ -1918,9 +1919,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F translateByVector2F(
-    final MatrixReadable4x4F m,
-    final VectorReadable2F v,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull VectorReadable2F v,
+    final @Nonnull MatrixM4x4F out)
   {
     final float vx = v.getXF();
     final float vy = v.getYF();
@@ -1954,8 +1955,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F translateByVector2FInPlace(
-    final MatrixM4x4F m,
-    final VectorReadable2F v)
+    final @Nonnull MatrixM4x4F m,
+    final @Nonnull VectorReadable2F v)
   {
     return MatrixM4x4F.translateByVector2F(m, v, m);
   }
@@ -1974,9 +1975,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F translateByVector2I(
-    final MatrixReadable4x4F m,
-    final VectorReadable2I v,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull VectorReadable2I v,
+    final @Nonnull MatrixM4x4F out)
   {
     final float vx = v.getXI();
     final float vy = v.getYI();
@@ -2010,8 +2011,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F translateByVector2IInPlace(
-    final MatrixM4x4F m,
-    final VectorReadable2I v)
+    final @Nonnull MatrixM4x4F m,
+    final @Nonnull VectorReadable2I v)
   {
     return MatrixM4x4F.translateByVector2I(m, v, m);
   }
@@ -2030,9 +2031,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F translateByVector3F(
-    final MatrixReadable4x4F m,
-    final VectorReadable3F v,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull VectorReadable3F v,
+    final @Nonnull MatrixM4x4F out)
   {
     final float vx = v.getXF();
     final float vy = v.getYF();
@@ -2075,8 +2076,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F translateByVector3FInPlace(
-    final MatrixM4x4F m,
-    final VectorReadable3F v)
+    final @Nonnull MatrixM4x4F m,
+    final @Nonnull VectorReadable3F v)
   {
     return MatrixM4x4F.translateByVector3F(m, v, m);
   }
@@ -2095,9 +2096,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F translateByVector3I(
-    final MatrixReadable4x4F m,
-    final VectorReadable3I v,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull VectorReadable3I v,
+    final @Nonnull MatrixM4x4F out)
   {
     final float vx = v.getXI();
     final float vy = v.getYI();
@@ -2140,8 +2141,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F translateByVector3IInPlace(
-    final MatrixM4x4F m,
-    final VectorReadable3I v)
+    final @Nonnull MatrixM4x4F m,
+    final @Nonnull VectorReadable3I v)
   {
     return MatrixM4x4F.translateByVector3I(m, v, m);
   }
@@ -2158,8 +2159,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F transpose(
-    final MatrixReadable4x4F m,
-    final MatrixM4x4F out)
+    final @Nonnull MatrixReadable4x4F m,
+    final @Nonnull MatrixM4x4F out)
   {
     final FloatBuffer m_view = m.getFloatBuffer();
     for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
@@ -2178,7 +2179,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4F transposeInPlace(
-    final MatrixM4x4F m)
+    final @Nonnull MatrixM4x4F m)
   {
     for (int row = 0; row < (MatrixM4x4F.VIEW_ROWS - 1); row++) {
       for (int column = row + 1; column < MatrixM4x4F.VIEW_COLS; column++) {
@@ -2222,7 +2223,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static float determinant(
-    final MatrixReadable4x4F m)
+    final @Nonnull MatrixReadable4x4F m)
   {
     final float r0c0 = m.getRowColumnF(0, 0);
     final float r1c0 = m.getRowColumnF(1, 0);
@@ -2303,7 +2304,7 @@ import com.io7m.jaux.functional.Option;
 
   public static MatrixM4x4F exchangeRowsInPlaceWithContext(
     final Context context,
-    final MatrixM4x4F m,
+    final @Nonnull MatrixM4x4F m,
     final int row_a,
     final int row_b)
   {
@@ -2320,7 +2321,7 @@ import com.io7m.jaux.functional.Option;
   }
 
   public MatrixM4x4F(
-    final MatrixM4x4F source)
+    final @Nonnull MatrixM4x4F source)
   {
     this.data =
       ByteBuffer.allocateDirect(MatrixM4x4F.VIEW_BYTES).order(
@@ -2344,7 +2345,7 @@ import com.io7m.jaux.functional.Option;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final MatrixM4x4F other = (MatrixM4x4F) obj;
+    final @Nonnull MatrixM4x4F other = (MatrixM4x4F) obj;
 
     for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
       if (other.view.get(index) != this.view.get(index)) {
