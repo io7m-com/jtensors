@@ -245,6 +245,14 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
+   * amount <code>alpha</code>, such that:
+   * 
+   * <ul>
+   * <li><code>interpolateLinear(v0, v1, 0.0) = v0</code></li>
+   * <li><code>interpolateLinear(v0, v1, 1.0) = v1</code></li>
+   * </ul>
+   * 
    * @param v0
    *          The left input vector.
    * @param v1
@@ -252,6 +260,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @param alpha
    *          The interpolation value, between <code>0.0</code> and
    *          <code>1.0</code>.
+   * 
    * @return <code>(1 - alpha) * v0 + alpha * v1</code>
    */
 

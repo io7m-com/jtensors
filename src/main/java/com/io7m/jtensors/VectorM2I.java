@@ -472,6 +472,15 @@ import com.io7m.jaux.CheckedMath;
   }
 
   /**
+   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
+   * amount <code>alpha</code>, saving the result to <code>r</code>, such
+   * that:
+   * 
+   * <ul>
+   * <li><code>interpolateLinear(v0, v1, 0.0, r) -> r = v0</code></li>
+   * <li><code>interpolateLinear(v0, v1, 1.0, r) -> r = v1</code></li>
+   * </ul>
+   * 
    * @param v0
    *          The left input vector.
    * @param v1
@@ -479,7 +488,11 @@ import com.io7m.jaux.CheckedMath;
    * @param alpha
    *          The interpolation value, between <code>0.0</code> and
    *          <code>1.0</code>.
-   * @return <code>(1 - alpha) * v0 + alpha * v1</code>
+   * @param r
+   *          The result vector.
+   * 
+   * @return <code>r</code>
+   * 
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer
    *           overflow.
