@@ -354,7 +354,8 @@ import com.io7m.jaux.functional.Option;
    * is not possible to invert a matrix that has a determinant of
    * <code>0</code>.
    * 
-   * @see com.io7m.jtensors.MatrixM3x3D#determinant(MatrixM3x3D)
+   * @see MatrixM3x3D#determinant(MatrixReadable3x3D)
+   * 
    * @param m
    *          The input matrix.
    */
@@ -372,7 +373,8 @@ import com.io7m.jaux.functional.Option;
    * otherwise. It is not possible to invert a matrix that has a determinant
    * of <code>0</code>.
    * 
-   * @see com.io7m.jtensors.MatrixM3x3D#determinant(MatrixM3x3D)
+   * @see MatrixM3x3D#determinant(MatrixReadable3x3D)
+   * 
    * @param m
    *          The input matrix.
    * @param out
@@ -426,7 +428,8 @@ import com.io7m.jaux.functional.Option;
    * is not possible to invert a matrix that has a determinant of
    * <code>0</code>.
    * 
-   * @see com.io7m.jtensors.MatrixM3x3D#determinant(MatrixM3x3D)
+   * @see MatrixM3x3D#determinant(MatrixReadable3x3D)
+   * 
    * @param m
    *          The input matrix.
    */

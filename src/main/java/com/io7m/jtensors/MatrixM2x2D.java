@@ -353,7 +353,8 @@ import com.io7m.jaux.functional.Option;
    * otherwise. It is not possible to invert a matrix that has a determinant
    * of <code>0</code>.
    * 
-   * @see com.io7m.jtensors.MatrixM2x2D#determinant(MatrixM2x2D)
+   * @see MatrixM2x2D#determinant(MatrixReadable2x2D)
+   * 
    * @param m
    *          The input matrix.
    * @param out

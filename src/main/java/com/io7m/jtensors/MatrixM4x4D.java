@@ -896,7 +896,8 @@ import com.io7m.jaux.functional.Option;
    * otherwise. It is not possible to invert a matrix that has a determinant
    * of <code>0</code>.
    * 
-   * @see com.io7m.jtensors.MatrixM4x4D#determinant(MatrixM4x4D)
+   * @see MatrixM4x4D#determinant(MatrixReadable4x4D)
+   * 
    * @param m
    *          The input matrix.
    * @param out
@@ -918,7 +919,8 @@ import com.io7m.jaux.functional.Option;
    * is not possible to invert a matrix that has a determinant of
    * <code>0</code>.
    * 
-   * @see com.io7m.jtensors.MatrixM4x4D#determinant(MatrixM4x4D)
+   * @see MatrixM4x4D#determinant(MatrixReadable4x4D)
+   * 
    * @param m
    *          The input matrix.
    */
@@ -937,7 +939,8 @@ import com.io7m.jaux.functional.Option;
    * <code>0</code>. The function uses preallocated storage in
    * <code>context</code> to avoid allocating memory.
    * 
-   * @see com.io7m.jtensors.MatrixM4x4D#determinant(MatrixM4x4D)
+   * @see MatrixM4x4D#determinant(MatrixReadable4x4D)
+   * 
    * @param context
    *          Preallocated storage.
    * @param m
@@ -959,7 +962,8 @@ import com.io7m.jaux.functional.Option;
    * of <code>0</code>. The function uses preallocated storage in
    * <code>context</code> to avoid allocating memory.
    * 
-   * @see com.io7m.jtensors.MatrixM4x4D#determinant(MatrixM4x4D)
+   * @see MatrixM4x4D#determinant(MatrixReadable4x4D)
+   * 
    * @param context
    *          Preallocated storage.
    * @param m
