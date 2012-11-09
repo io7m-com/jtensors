@@ -743,6 +743,29 @@ import com.io7m.jaux.functional.Option;
     }
   }
 
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final MatrixM2x2F other = (MatrixM2x2F) obj;
+
+    for (int index = 0; index < MatrixM2x2F.VIEW_ELEMENTS; ++index) {
+      if (other.view.get(index) != this.view.get(index)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   public float get(
     final int row,
     final int column)
@@ -769,6 +792,18 @@ import com.io7m.jaux.functional.Option;
     final VectorM2F out)
   {
     MatrixM2x2F.rowUnsafe(this, MatrixM2x2F.rowCheck(row), out);
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result);
+
+    for (int index = 0; index < MatrixM2x2F.VIEW_ELEMENTS; ++index) {
+      result += Float.valueOf(this.view.get(index)).hashCode();
+    }
+    return result;
   }
 
   public MatrixM2x2F set(

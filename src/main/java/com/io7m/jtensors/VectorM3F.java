@@ -735,6 +735,31 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     this.z = v.getZF();
   }
 
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final VectorM3F other = (VectorM3F) obj;
+    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
+      return false;
+    }
+    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
+      return false;
+    }
+    if (Float.floatToIntBits(this.z) != Float.floatToIntBits(other.z)) {
+      return false;
+    }
+    return true;
+  }
+
   @Override public float getXF()
   {
     return this.x;
@@ -748,6 +773,16 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   @Override public float getZF()
   {
     return this.z;
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result) + Float.floatToIntBits(this.x);
+    result = (prime * result) + Float.floatToIntBits(this.y);
+    result = (prime * result) + Float.floatToIntBits(this.z);
+    return result;
   }
 
   @Override public String toString()

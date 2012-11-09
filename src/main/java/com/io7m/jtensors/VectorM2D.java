@@ -708,6 +708,28 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     this.y = v.getYD();
   }
 
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final VectorM2D other = (VectorM2D) obj;
+    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
+      return false;
+    }
+    if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
+      return false;
+    }
+    return true;
+  }
+
   @Override public double getXD()
   {
     return this.x;
@@ -716,6 +738,18 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   @Override public double getYD()
   {
     return this.y;
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    long temp;
+    temp = Double.doubleToLongBits(this.x);
+    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(this.y);
+    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    return result;
   }
 
   @Override public String toString()

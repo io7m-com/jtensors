@@ -267,6 +267,31 @@ public class VectorI2DTest
     Assert.assertTrue(VectorI2D.dotProduct(v, v) == 1.0);
   }
 
+  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  {
+    final VectorI2D m0 = new VectorI2D();
+    Assert.assertTrue(m0.equals(m0));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  {
+    final VectorI2D m0 = new VectorI2D();
+    Assert.assertFalse(m0.equals(null));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  {
+    final VectorI2D m0 = new VectorI2D();
+    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  {
+    final VectorI2D m0 = new VectorI2D();
+    final VectorI2D m1 = new VectorI2D();
+    Assert.assertTrue(m0.equals(m1));
+  }
+
   @SuppressWarnings("static-method") @Test public void testEqualsCorrect()
   {
     final VectorI2D v0 = new VectorI2D(0.0, 0.0);

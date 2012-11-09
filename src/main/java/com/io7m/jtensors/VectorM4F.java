@@ -740,6 +740,34 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     this.w = v.getWF();
   }
 
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final VectorM4F other = (VectorM4F) obj;
+    if (Float.floatToIntBits(this.w) != Float.floatToIntBits(other.w)) {
+      return false;
+    }
+    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
+      return false;
+    }
+    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
+      return false;
+    }
+    if (Float.floatToIntBits(this.z) != Float.floatToIntBits(other.z)) {
+      return false;
+    }
+    return true;
+  }
+
   @Override public float getWF()
   {
     return this.w;
@@ -758,6 +786,17 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   @Override public float getZF()
   {
     return this.z;
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result) + Float.floatToIntBits(this.w);
+    result = (prime * result) + Float.floatToIntBits(this.x);
+    result = (prime * result) + Float.floatToIntBits(this.y);
+    result = (prime * result) + Float.floatToIntBits(this.z);
+    return result;
   }
 
   @Override public String toString()

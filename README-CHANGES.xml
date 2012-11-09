@@ -4,6 +4,17 @@
 
   <c:release ticket-system="com.io7m.fossil.jtensors">
     <c:date>2012-11-09</c:date>
+    <c:version>3.0.0</c:version>
+
+    <c:item>
+      <c:date>2012-11-09</c:date>
+      <c:type-code-new/>
+      <c:summary>All classes now provide a hashCode() and equals() implementation. This may break code that assumes java.lang.Object()'s hashCode() or equals() method is used, but should give more consistent behaviour with regards to the contents of vectors and matrices.</c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release ticket-system="com.io7m.fossil.jtensors">
+    <c:date>2012-11-09</c:date>
     <c:version>2.3.0</c:version>
 
     <c:item>

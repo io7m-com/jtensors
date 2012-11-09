@@ -699,6 +699,31 @@ import com.io7m.jaux.CheckedMath;
     this.z = v.getZI();
   }
 
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final VectorM3I other = (VectorM3I) obj;
+    if (this.x != other.x) {
+      return false;
+    }
+    if (this.y != other.y) {
+      return false;
+    }
+    if (this.z != other.z) {
+      return false;
+    }
+    return true;
+  }
+
   @Override public int getXI()
   {
     return this.x;
@@ -712,6 +737,16 @@ import com.io7m.jaux.CheckedMath;
   @Override public int getZI()
   {
     return this.z;
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result) + this.x;
+    result = (prime * result) + this.y;
+    result = (prime * result) + this.z;
+    return result;
   }
 
   @Override public String toString()

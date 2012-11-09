@@ -265,6 +265,45 @@ public class MatrixM3x3DTest
     Assert.assertTrue(MatrixM3x3D.determinant(m) == 0.0);
   }
 
+  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  {
+    final MatrixM3x3D m0 = new MatrixM3x3D();
+    Assert.assertTrue(m0.equals(m0));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  {
+    final MatrixM3x3D m0 = new MatrixM3x3D();
+    Assert.assertFalse(m0.equals(null));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  {
+    final MatrixM3x3D m0 = new MatrixM3x3D();
+    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  {
+    final MatrixM3x3D m0 = new MatrixM3x3D();
+    final MatrixM3x3D m1 = new MatrixM3x3D();
+    Assert.assertTrue(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testEqualsNeqExhaustive()
+  {
+    for (int row = 0; row < 3; ++row) {
+      for (int col = 0; col < 3; ++col) {
+        final MatrixM3x3D m0 = new MatrixM3x3D();
+        final MatrixM3x3D m1 = new MatrixM3x3D();
+        m1.set(row, col, 256);
+        Assert.assertFalse(m0.equals(m1));
+      }
+    }
+  }
+
   @SuppressWarnings("static-method") @Test public void testExchangeRows()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
@@ -345,6 +384,21 @@ public class MatrixM3x3DTest
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     MatrixM3x3D.exchangeRowsInPlace(m, 0, -1);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testHashcodeNeqExhaustive()
+  {
+    for (int row = 0; row < 3; ++row) {
+      for (int col = 0; col < 3; ++col) {
+        final MatrixM3x3D m0 = new MatrixM3x3D();
+        final MatrixM3x3D m1 = new MatrixM3x3D();
+        Assert.assertTrue(m0.hashCode() == m1.hashCode());
+        m1.set(row, col, 256);
+        Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      }
+    }
   }
 
   @SuppressWarnings("static-method") @Test public

@@ -556,6 +556,24 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
+   * writing the result to <code>m0</code>.
+   * 
+   * @param m0
+   *          The left input vector.
+   * @param m1
+   *          The right input vector.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3D multiplyInPlace(
+    final MatrixM3x3D m0,
+    final MatrixReadable3x3D m1)
+  {
+    return MatrixM3x3D.multiply(m0, m1, m0);
+  }
+
+  /**
    * Multiply the matrix <code>m</code> with the vector <code>v</code>,
    * writing the resulting vector to <code>out</code>.
    * 
@@ -584,24 +602,6 @@ import com.io7m.jaux.functional.Option;
     out.z = VectorM3D.dotProduct(row, vi);
 
     return out;
-  }
-
-  /**
-   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
-   * writing the result to <code>m0</code>.
-   * 
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3D multiplyInPlace(
-    final MatrixM3x3D m0,
-    final MatrixReadable3x3D m1)
-  {
-    return MatrixM3x3D.multiply(m0, m1, m0);
   }
 
   /**
@@ -999,6 +999,29 @@ import com.io7m.jaux.functional.Option;
     }
   }
 
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final MatrixM3x3D other = (MatrixM3x3D) obj;
+
+    for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
+      if (other.view.get(index) != this.view.get(index)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   public double get(
     final int row,
     final int column)
@@ -1025,6 +1048,18 @@ import com.io7m.jaux.functional.Option;
     final int column)
   {
     return this.view.get(MatrixM3x3D.indexUnsafe(row, column));
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result);
+
+    for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
+      result += Double.valueOf(this.view.get(index)).hashCode();
+    }
+    return result;
   }
 
   public MatrixM3x3D set(

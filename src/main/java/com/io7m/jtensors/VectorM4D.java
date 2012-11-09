@@ -740,6 +740,34 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     this.w = v.getWD();
   }
 
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final VectorM4D other = (VectorM4D) obj;
+    if (Double.doubleToLongBits(this.w) != Double.doubleToLongBits(other.w)) {
+      return false;
+    }
+    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
+      return false;
+    }
+    if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
+      return false;
+    }
+    if (Double.doubleToLongBits(this.z) != Double.doubleToLongBits(other.z)) {
+      return false;
+    }
+    return true;
+  }
+
   @Override public double getWD()
   {
     return this.w;
@@ -758,6 +786,22 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   @Override public double getZD()
   {
     return this.z;
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    long temp;
+    temp = Double.doubleToLongBits(this.w);
+    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(this.x);
+    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(this.y);
+    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(this.z);
+    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    return result;
   }
 
   @Override public String toString()

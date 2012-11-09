@@ -646,6 +646,86 @@ public class VectorM3DTest
     }
   }
 
+  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  {
+    final VectorM3D m0 = new VectorM3D();
+    Assert.assertTrue(m0.equals(m0));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  {
+    final VectorM3D m0 = new VectorM3D();
+    Assert.assertFalse(m0.equals(null));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  {
+    final VectorM3D m0 = new VectorM3D();
+    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  {
+    final VectorM3D m0 = new VectorM3D();
+    final VectorM3D m1 = new VectorM3D();
+    Assert.assertTrue(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq0()
+  {
+    final VectorM3D m0 = new VectorM3D();
+    final VectorM3D m1 = new VectorM3D();
+    m1.x = 23.0;
+    Assert.assertFalse(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq1()
+  {
+    final VectorM3D m0 = new VectorM3D();
+    final VectorM3D m1 = new VectorM3D();
+    m1.y = 23.0;
+    Assert.assertFalse(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq2()
+  {
+    final VectorM3D m0 = new VectorM3D();
+    final VectorM3D m1 = new VectorM3D();
+    m1.z = 23.0;
+    Assert.assertFalse(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeEq()
+  {
+    final VectorM3D m0 = new VectorM3D();
+    final VectorM3D m1 = new VectorM3D();
+    Assert.assertEquals(m0.hashCode(), m1.hashCode());
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase0()
+  {
+    final VectorM3D m0 = new VectorM3D();
+    final VectorM3D m1 = new VectorM3D();
+    m1.x = 23;
+    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase1()
+  {
+    final VectorM3D m0 = new VectorM3D();
+    final VectorM3D m1 = new VectorM3D();
+    m1.y = 23;
+    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase2()
+  {
+    final VectorM3D m0 = new VectorM3D();
+    final VectorM3D m1 = new VectorM3D();
+    m1.z = 23;
+    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+  }
+
   @SuppressWarnings("static-method") @Test public
     void
     testInitializeReadable()

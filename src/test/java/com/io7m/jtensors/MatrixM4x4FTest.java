@@ -374,6 +374,45 @@ public class MatrixM4x4FTest
     Assert.assertTrue(MatrixM4x4F.determinant(m) == 0.0);
   }
 
+  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  {
+    final MatrixM4x4F m0 = new MatrixM4x4F();
+    Assert.assertTrue(m0.equals(m0));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  {
+    final MatrixM4x4F m0 = new MatrixM4x4F();
+    Assert.assertFalse(m0.equals(null));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  {
+    final MatrixM4x4F m0 = new MatrixM4x4F();
+    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  {
+    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final MatrixM4x4F m1 = new MatrixM4x4F();
+    Assert.assertTrue(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testEqualsNeqExhaustive()
+  {
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final MatrixM4x4F m0 = new MatrixM4x4F();
+        final MatrixM4x4F m1 = new MatrixM4x4F();
+        m1.set(row, col, 256);
+        Assert.assertFalse(m0.equals(m1));
+      }
+    }
+  }
+
   @SuppressWarnings("static-method") @Test public void testExchangeRows()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
@@ -551,6 +590,21 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 1) == 14.0);
     Assert.assertTrue(m1.get(3, 2) == 15.0);
     Assert.assertTrue(m1.get(3, 3) == 16.0);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testHashcodeNeqExhaustive()
+  {
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final MatrixM4x4F m0 = new MatrixM4x4F();
+        final MatrixM4x4F m1 = new MatrixM4x4F();
+        Assert.assertTrue(m0.hashCode() == m1.hashCode());
+        m1.set(row, col, 256);
+        Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      }
+    }
   }
 
   @SuppressWarnings("static-method") @Test public

@@ -693,6 +693,102 @@ public class VectorM4DTest
     }
   }
 
+  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    Assert.assertTrue(m0.equals(m0));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    Assert.assertFalse(m0.equals(null));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    final VectorM4D m1 = new VectorM4D();
+    Assert.assertTrue(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq0()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    final VectorM4D m1 = new VectorM4D();
+    m1.x = 23.0;
+    Assert.assertFalse(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq1()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    final VectorM4D m1 = new VectorM4D();
+    m1.y = 23.0;
+    Assert.assertFalse(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq2()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    final VectorM4D m1 = new VectorM4D();
+    m1.z = 23.0;
+    Assert.assertFalse(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq3()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    final VectorM4D m1 = new VectorM4D();
+    m1.w = 23.0;
+    Assert.assertFalse(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeEq()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    final VectorM4D m1 = new VectorM4D();
+    Assert.assertEquals(m0.hashCode(), m1.hashCode());
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase0()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    final VectorM4D m1 = new VectorM4D();
+    m1.x = 23;
+    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase1()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    final VectorM4D m1 = new VectorM4D();
+    m1.y = 23;
+    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase2()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    final VectorM4D m1 = new VectorM4D();
+    m1.z = 23;
+    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase3()
+  {
+    final VectorM4D m0 = new VectorM4D();
+    final VectorM4D m1 = new VectorM4D();
+    m1.w = 23;
+    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+  }
+
   @SuppressWarnings("static-method") @Test public
     void
     testInitializeReadable()

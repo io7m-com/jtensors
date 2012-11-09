@@ -238,6 +238,45 @@ public class MatrixM2x2FTest
     Assert.assertTrue(MatrixM2x2F.determinant(m) == 0.0);
   }
 
+  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  {
+    final MatrixM2x2F m0 = new MatrixM2x2F();
+    Assert.assertTrue(m0.equals(m0));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  {
+    final MatrixM2x2F m0 = new MatrixM2x2F();
+    Assert.assertFalse(m0.equals(null));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  {
+    final MatrixM2x2F m0 = new MatrixM2x2F();
+    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  {
+    final MatrixM2x2F m0 = new MatrixM2x2F();
+    final MatrixM2x2F m1 = new MatrixM2x2F();
+    Assert.assertTrue(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testEqualsNeqExhaustive()
+  {
+    for (int row = 0; row < 2; ++row) {
+      for (int col = 0; col < 2; ++col) {
+        final MatrixM2x2F m0 = new MatrixM2x2F();
+        final MatrixM2x2F m1 = new MatrixM2x2F();
+        m1.set(row, col, 256);
+        Assert.assertFalse(m0.equals(m1));
+      }
+    }
+  }
+
   @SuppressWarnings("static-method") @Test public void testExchangeRows()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
@@ -299,6 +338,21 @@ public class MatrixM2x2FTest
   {
     final MatrixM2x2F m = new MatrixM2x2F();
     MatrixM2x2F.exchangeRows(m, 0, -1);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testHashcodeNeqExhaustive()
+  {
+    for (int row = 0; row < 2; ++row) {
+      for (int col = 0; col < 2; ++col) {
+        final MatrixM2x2F m0 = new MatrixM2x2F();
+        final MatrixM2x2F m1 = new MatrixM2x2F();
+        Assert.assertTrue(m0.hashCode() == m1.hashCode());
+        m1.set(row, col, 256);
+        Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      }
+    }
   }
 
   @SuppressWarnings("static-method") @Test public

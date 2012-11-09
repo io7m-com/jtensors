@@ -1312,6 +1312,24 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
+   * writing the result to <code>m0</code>.
+   * 
+   * @param m0
+   *          The left input vector.
+   * @param m1
+   *          The right input vector.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM4x4F multiplyInPlace(
+    final MatrixM4x4F m0,
+    final MatrixReadable4x4F m1)
+  {
+    return MatrixM4x4F.multiply(m0, m1, m0);
+  }
+
+  /**
    * Multiply the matrix <code>m</code> with the vector <code>v</code>,
    * writing the resulting vector to <code>out</code>.
    * 
@@ -1332,6 +1350,30 @@ import com.io7m.jaux.functional.Option;
     final VectorM4F va = new VectorM4F();
     final VectorM4F vb = new VectorM4F();
     return MatrixM4x4F.multiplyVector4F(m, v, va, vb, out);
+  }
+
+  private static VectorM4F multiplyVector4F(
+    final MatrixReadable4x4F m,
+    final VectorReadable4F v,
+    final VectorM4F va,
+    final VectorM4F vb,
+    final VectorM4F out)
+  {
+    vb.x = v.getXF();
+    vb.y = v.getYF();
+    vb.z = v.getZF();
+    vb.w = v.getWF();
+
+    MatrixM4x4F.rowUnsafe(m, 0, va);
+    out.x = VectorM4F.dotProduct(va, vb);
+    MatrixM4x4F.rowUnsafe(m, 1, va);
+    out.y = VectorM4F.dotProduct(va, vb);
+    MatrixM4x4F.rowUnsafe(m, 2, va);
+    out.z = VectorM4F.dotProduct(va, vb);
+    MatrixM4x4F.rowUnsafe(m, 3, va);
+    out.w = VectorM4F.dotProduct(va, vb);
+
+    return out;
   }
 
   /**
@@ -1357,48 +1399,6 @@ import com.io7m.jaux.functional.Option;
     final VectorM4F out)
   {
     return MatrixM4x4F.multiplyVector4F(m, v, context.va, context.vb, out);
-  }
-
-  /**
-   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
-   * writing the result to <code>m0</code>.
-   * 
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM4x4F multiplyInPlace(
-    final MatrixM4x4F m0,
-    final MatrixReadable4x4F m1)
-  {
-    return MatrixM4x4F.multiply(m0, m1, m0);
-  }
-
-  private static VectorM4F multiplyVector4F(
-    final MatrixReadable4x4F m,
-    final VectorReadable4F v,
-    final VectorM4F va,
-    final VectorM4F vb,
-    final VectorM4F out)
-  {
-    vb.x = v.getXF();
-    vb.y = v.getYF();
-    vb.z = v.getZF();
-    vb.w = v.getWF();
-
-    MatrixM4x4F.rowUnsafe(m, 0, va);
-    out.x = VectorM4F.dotProduct(va, vb);
-    MatrixM4x4F.rowUnsafe(m, 1, va);
-    out.y = VectorM4F.dotProduct(va, vb);
-    MatrixM4x4F.rowUnsafe(m, 2, va);
-    out.z = VectorM4F.dotProduct(va, vb);
-    MatrixM4x4F.rowUnsafe(m, 3, va);
-    out.w = VectorM4F.dotProduct(va, vb);
-
-    return out;
   }
 
   /**
@@ -2328,6 +2328,29 @@ import com.io7m.jaux.functional.Option;
     }
   }
 
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final MatrixM4x4F other = (MatrixM4x4F) obj;
+
+    for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
+      if (other.view.get(index) != this.view.get(index)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   public float get(
     final int row,
     final int column)
@@ -2354,6 +2377,18 @@ import com.io7m.jaux.functional.Option;
     final int column)
   {
     return this.view.get(MatrixM4x4F.indexUnsafe(row, column));
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result);
+
+    for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
+      result += Float.valueOf(this.view.get(index)).hashCode();
+    }
+    return result;
   }
 
   public MatrixM4x4F set(

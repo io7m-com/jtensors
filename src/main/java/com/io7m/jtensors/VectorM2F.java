@@ -706,6 +706,28 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
     this.y = v.getYF();
   }
 
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final VectorM2F other = (VectorM2F) obj;
+    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
+      return false;
+    }
+    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
+      return false;
+    }
+    return true;
+  }
+
   @Override public float getXF()
   {
     return this.x;
@@ -714,6 +736,15 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   @Override public float getYF()
   {
     return this.y;
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result) + Float.floatToIntBits(this.x);
+    result = (prime * result) + Float.floatToIntBits(this.y);
+    return result;
   }
 
   @Override public String toString()
