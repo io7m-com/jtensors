@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import com.io7m.jaux.ApproximatelyEqualDouble;
@@ -30,37 +31,46 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 @Immutable public final class VectorI3D implements VectorReadable3D
 {
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and the
+   * element-wise product of <code>v1</code> and <code>r</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
    * @param r
-   *          The scaling value.
+   *          The scaling value
+   * 
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
    */
 
-  public static VectorI3D addScaled(
-    final VectorI3D v0,
-    final VectorI3D v1,
+  public static @Nonnull VectorI3D addScaled(
+    final @Nonnull VectorI3D v0,
+    final @Nonnull VectorI3D v1,
     final double r)
   {
     return VectorI3D.add(v0, VectorI3D.scale(v1, r));
   }
 
   /**
+   * Determine whether or not the elements of the two vectors <code>v0</code>
+   * and <code>v1</code> are approximately equal.
+   * 
    * @see ApproximatelyEqualDouble
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return true, iff <code>v0</code> is approximately equal to
    *         <code>v1</code> , within an appropriate degree of error for
-   *         double precision floating point values.
+   *         double precision floating point values
    */
 
   public static boolean approximatelyEqual(
-    final VectorI3D v0,
-    final VectorI3D v1)
+    final @Nonnull VectorI3D v0,
+    final @Nonnull VectorI3D v1)
   {
     final boolean ex =
       ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
@@ -72,18 +82,22 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. maximum]</code> inclusive.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         and at least <code>minimum</code>.
    */
 
-  public static VectorI3D clamp(
-    final VectorI3D v,
+  public static @Nonnull VectorI3D clamp(
+    final @Nonnull VectorI3D v,
     final double minimum,
     final double maximum)
   {
@@ -94,19 +108,24 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code> and
+   * <code>maximum</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
    *          the vector containing the minimum acceptable values
    * @param maximum
    *          the vector containing the maximum acceptable values
+   * 
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public static VectorI3D clampByVector(
-    final VectorI3D v,
-    final VectorI3D minimum,
-    final VectorI3D maximum)
+  public static @Nonnull VectorI3D clampByVector(
+    final @Nonnull VectorI3D v,
+    final @Nonnull VectorI3D minimum,
+    final @Nonnull VectorI3D maximum)
   {
     final double x = Math.min(Math.max(v.x, minimum.x), maximum.x);
     final double y = Math.min(Math.max(v.y, minimum.y), maximum.y);
@@ -115,16 +134,19 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[-Infinity .. maximum]</code> inclusive.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
-   *         .
    */
 
-  public static VectorI3D clampMaximum(
-    final VectorI3D v,
+  public static @Nonnull VectorI3D clampMaximum(
+    final @Nonnull VectorI3D v,
     final double maximum)
   {
     final double x = Math.min(v.x, maximum);
@@ -134,16 +156,20 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>maximum</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param maximum
-   *          The vector containing the maximum acceptable values.
+   *          The vector containing the maximum acceptable values
+   * 
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
 
-  public static VectorI3D clampMaximumByVector(
-    final VectorI3D v,
-    final VectorI3D maximum)
+  public static @Nonnull VectorI3D clampMaximumByVector(
+    final @Nonnull VectorI3D v,
+    final @Nonnull VectorI3D maximum)
   {
     final double x = Math.min(v.x, maximum.x);
     final double y = Math.min(v.y, maximum.y);
@@ -152,16 +178,20 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. Infinity]</code> inclusive.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
+   * 
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>.
+   *         <code>minimum</code>
    */
 
-  public static VectorI3D clampMinimum(
-    final VectorI3D v,
+  public static @Nonnull VectorI3D clampMinimum(
+    final @Nonnull VectorI3D v,
     final double minimum)
   {
     final double x = Math.max(v.x, minimum);
@@ -171,16 +201,20 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The vector containing the minimum acceptable values.
+   *          The vector containing the minimum acceptable values
+   * 
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
    */
 
-  public static VectorI3D clampMinimumByVector(
-    final VectorI3D v,
-    final VectorI3D minimum)
+  public static @Nonnull VectorI3D clampMinimumByVector(
+    final @Nonnull VectorI3D v,
+    final @Nonnull VectorI3D minimum)
   {
     final double x = Math.max(v.x, minimum.x);
     final double y = Math.max(v.y, minimum.y);
@@ -189,17 +223,21 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Calculate the cross product of the vectors <code>v0</code> and
+   * <code>v1</code>. The result is a vector perpendicular to both vectors.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return A vector perpendicular to both <code>v0</code> and
-   *         <code>v1</code>.
+   *         <code>v1</code>
    */
 
-  public static VectorI3D crossProduct(
-    final VectorI3D v0,
-    final VectorI3D v1)
+  public static @Nonnull VectorI3D crossProduct(
+    final @Nonnull VectorI3D v0,
+    final @Nonnull VectorI3D v1)
   {
     final double x = (v0.y * v1.z) - (v0.z * v1.y);
     final double y = (v0.z * v1.x) - (v0.x * v1.z);
@@ -208,31 +246,39 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Calculate the distance between the two vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
-   * @return The distance between the two vectors.
+   *          The right input vector
+   * 
+   * @return The distance between the two vectors
    */
 
   public static double distance(
-    final VectorI3D v0,
-    final VectorI3D v1)
+    final @Nonnull VectorI3D v0,
+    final @Nonnull VectorI3D v1)
   {
     return VectorI3D.magnitude(VectorI3D.subtract(v0, v1));
   }
 
   /**
+   * Calculate the scalar product of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
-   * @return The scalar product of the two vectors.
+   *          The right input vector
+   * 
+   * @return The scalar product of the two vectors
    */
 
   public static double dotProduct(
-    final VectorI3D v0,
-    final VectorI3D v1)
+    final @Nonnull VectorI3D v0,
+    final @Nonnull VectorI3D v1)
   {
     final double x = v0.x * v1.x;
     final double y = v0.y * v1.y;
@@ -263,50 +309,61 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return <code>(1 - alpha) * v0 + alpha * v1</code>
    */
 
-  public static VectorI3D interpolateLinear(
-    final VectorI3D v0,
-    final VectorI3D v1,
+  public static @Nonnull VectorI3D interpolateLinear(
+    final @Nonnull VectorI3D v0,
+    final @Nonnull VectorI3D v1,
     final double alpha)
   {
-    final VectorI3D w0 = VectorI3D.scale(v0, 1.0 - alpha);
-    final VectorI3D w1 = VectorI3D.scale(v1, alpha);
+    final @Nonnull VectorI3D w0 = VectorI3D.scale(v0, 1.0 - alpha);
+    final @Nonnull VectorI3D w1 = VectorI3D.scale(v1, alpha);
     return VectorI3D.add(w0, w1);
   }
 
   /**
+   * Calculate the magnitude of the vector <code>v</code>.
+   * 
+   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * 
    * @param v
-   *          The input vector.
-   * @return The magnitude of the input vector..
-   *         <code>magnitude(normalize(v)) == 1.0</code>.
+   *          The input vector
+   * 
+   * @return The magnitude of the input vector
    */
 
   public static double magnitude(
-    final VectorI3D v)
+    final @Nonnull VectorI3D v)
   {
     return Math.sqrt(VectorI3D.magnitudeSquared(v));
   }
 
   /**
+   * Calculate the squared magnitude of the vector <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
-   * @return The squared magnitude of the input vector..
+   *          The input vector
+   * 
+   * @return The squared magnitude of the input vector
    */
 
   public static double magnitudeSquared(
-    final VectorI3D v)
+    final @Nonnull VectorI3D v)
   {
     return VectorI3D.dotProduct(v, v);
   }
 
   /**
+   * Normalize the vector <code>v</code>, preserving its direction but
+   * reducing it to unit length.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
+   * 
    * @return A vector with the same orientation as <code>v</code> but with
-   *         magnitude equal to <code>1.0</code>.
+   *         magnitude equal to <code>1.0</code>
    */
 
-  public static VectorI3D normalize(
-    final VectorI3D v)
+  public static @Nonnull VectorI3D normalize(
+    final @Nonnull VectorI3D v)
   {
     final double m = VectorI3D.magnitudeSquared(v);
     if (m > 0) {
@@ -323,9 +380,9 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public static VectorI3D projection(
-    final VectorI3D p,
-    final VectorI3D q)
+  public static @Nonnull VectorI3D projection(
+    final @Nonnull VectorI3D p,
+    final @Nonnull VectorI3D q)
   {
     final double dot = VectorI3D.dotProduct(p, q);
     final double qms = VectorI3D.magnitudeSquared(q);
@@ -334,70 +391,83 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Scale the vector <code>v</code> by the scalar <code>r</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param r
-   *          The scaling value.
+   *          The scaling value
+   * 
    * @return <code>(v.x * r, v.y * r, v.z * r)</code>
    */
 
-  public static VectorI3D scale(
-    final VectorI3D v,
+  public static @Nonnull VectorI3D scale(
+    final @Nonnull VectorI3D v,
     final double r)
   {
     return new VectorI3D(v.x * r, v.y * r, v.z * r);
   }
 
   /**
+   * Subtract the vector <code>v0</code> from the vector <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
    */
 
-  public static VectorI3D subtract(
-    final VectorI3D v0,
-    final VectorI3D v1)
+  public static @Nonnull VectorI3D subtract(
+    final @Nonnull VectorI3D v0,
+    final @Nonnull VectorI3D v1)
   {
     return new VectorI3D(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z);
   }
 
-  public final double           x;
+  public final double                    x;
 
-  public final double           y;
+  public final double                    y;
 
-  public final double           z;
+  public final double                    z;
 
   /**
    * The zero vector.
    */
 
-  public static final VectorI3D ZERO = new VectorI3D(0.0, 0.0, 0.0);
+  public static final @Nonnull VectorI3D ZERO = new VectorI3D(0.0, 0.0, 0.0);
 
   /**
+   * Calculate the absolute value of the vector <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
+   * 
    * @return <code>(abs v.x, abs v.y, abs v.z)</code>
    */
 
-  public static VectorI3D absolute(
-    final VectorI3D v)
+  public static @Nonnull VectorI3D absolute(
+    final @Nonnull VectorI3D v)
   {
     return new VectorI3D(Math.abs(v.x), Math.abs(v.y), Math.abs(v.z));
   }
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
    */
 
-  public static VectorI3D add(
-    final VectorI3D v0,
-    final VectorI3D v1)
+  public static @Nonnull VectorI3D add(
+    final @Nonnull VectorI3D v0,
+    final @Nonnull VectorI3D v1)
   {
     return new VectorI3D(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z);
   }
@@ -449,7 +519,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final VectorI3D other = (VectorI3D) obj;
+    final @Nonnull VectorI3D other = (VectorI3D) obj;
     if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
       return false;
     }
