@@ -232,7 +232,10 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   /**
    * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
-   * amount <code>alpha</code>, such that:
+   * amount <code>alpha</code>.
+   * 
+   * The <code>alpha</code> parameter controls the degree of interpolation,
+   * such that:
    * 
    * <ul>
    * <li><code>interpolateLinear(v0, v1, 0.0) = v0</code></li>
