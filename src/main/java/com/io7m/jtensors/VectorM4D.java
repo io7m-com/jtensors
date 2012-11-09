@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.io7m.jaux.ApproximatelyEqualDouble;
@@ -30,16 +31,20 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 @NotThreadSafe public final class VectorM4D implements VectorReadable4D
 {
   /**
+   * Calculate the absolute values of the elements in vector <code>v</code>,
+   * saving the result to <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return <code>(abs v.x, abs v.y, abs v.z, abs.w)</code>
    */
 
-  public static VectorM4D absolute(
-    final VectorM4D v,
-    final VectorM4D out)
+  public static @Nonnull VectorM4D absolute(
+    final @Nonnull VectorM4D v,
+    final @Nonnull VectorM4D out)
   {
     final double x = Math.abs(v.x);
     final double y = Math.abs(v.y);
@@ -53,32 +58,39 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Calculate the absolute values of the elements in vector <code>v</code>,
+   * modifying the vector in-place.
+   * 
    * @param v
-   *          The input vector.
-   * @return <code>(abs v.x, abs v.y, abs v.z, abs v.w)</code>, saving the
-   *         result into <code>v</code>.
+   *          The input vector
+   * 
+   * @return <code>(abs v.x, abs v.y, abs v.z, abs v.w)</code>
    */
 
-  public static VectorM4D absoluteInPlace(
-    final VectorM4D v)
+  public static @Nonnull VectorM4D absoluteInPlace(
+    final @Nonnull VectorM4D v)
   {
     return VectorM4D.absolute(v, v);
   }
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>, saving the result to <code>out</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
    */
 
-  public static VectorM4D add(
-    final VectorM4D v0,
-    final VectorM4D v1,
-    final VectorM4D out)
+  public static @Nonnull VectorM4D add(
+    final @Nonnull VectorM4D v0,
+    final @Nonnull VectorM4D v1,
+    final @Nonnull VectorM4D out)
   {
     final double x = v0.x + v1.x;
     final double y = v0.y + v1.y;
@@ -92,38 +104,46 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>, saving the result to <code>v0</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
-   *         , saving the result in <code>v0</code>.
    */
 
-  public static VectorM4D addInPlace(
-    final VectorM4D v0,
-    final VectorM4D v1)
+  public static @Nonnull VectorM4D addInPlace(
+    final @Nonnull VectorM4D v0,
+    final @Nonnull VectorM4D v1)
   {
     return VectorM4D.add(v0, v1, v0);
   }
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and the
+   * element-wise product of <code>v1</code> and <code>r</code>, saving the
+   * result to <code>out</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
    * @param out
-   *          The output vector.
+   *          The output vector
    * @param r
-   *          The scaling value.
+   *          The scaling value
+   * 
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
    */
 
-  public static VectorM4D addScaled(
-    final VectorM4D v0,
-    final VectorM4D v1,
+  public static @Nonnull VectorM4D addScaled(
+    final @Nonnull VectorM4D v0,
+    final @Nonnull VectorM4D v1,
     final double r,
-    final VectorM4D out)
+    final @Nonnull VectorM4D out)
   {
     final double x = v0.x + (v1.x * r);
     final double y = v0.y + (v1.y * r);
@@ -137,38 +157,47 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and the
+   * element-wise product of <code>v1</code> and <code>r</code>, saving the
+   * result to <code>v0</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
    * @param r
-   *          The scaling value.
+   *          The scaling value
+   * 
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
-   *         , saving the result to <code>v0</code>.
    */
 
-  public static VectorM4D addScaledInPlace(
-    final VectorM4D v0,
-    final VectorM4D v1,
+  public static @Nonnull VectorM4D addScaledInPlace(
+    final @Nonnull VectorM4D v0,
+    final @Nonnull VectorM4D v1,
     final double r)
   {
     return VectorM4D.addScaled(v0, v1, r, v0);
   }
 
   /**
+   * Determine whether or not the elements of the two vectors <code>v0</code>
+   * and <code>v1</code> are approximately equal.
+   * 
    * @see ApproximatelyEqualDouble
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code> , within an appropriate degree of error for
-   *         double precision floating point values.
+   *         <code>v1</code>, within an appropriate degree of error for double
+   *         precision floating point values
    */
 
   public static boolean approximatelyEqual(
-    final VectorM4D v0,
-    final VectorM4D v1)
+    final @Nonnull VectorM4D v0,
+    final @Nonnull VectorM4D v1)
   {
     final boolean ex =
       ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
@@ -182,23 +211,28 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. maximum]</code> inclusive, saving the result to
+   * <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>.
+   *         and at least <code>minimum</code>
    */
 
-  public static VectorM4D clamp(
-    final VectorM4D v,
+  public static @Nonnull VectorM4D clamp(
+    final @Nonnull VectorM4D v,
     final double minimum,
     final double maximum,
-    final VectorM4D out)
+    final @Nonnull VectorM4D out)
   {
     final double x = Math.min(Math.max(v.x, minimum), maximum);
     final double y = Math.min(Math.max(v.y, minimum), maximum);
@@ -212,22 +246,27 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code> and
+   * <code>maximum</code>, saving the result to <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The vector containing the minimum acceptable values.
+   *          The vector containing the minimum acceptable values
    * @param maximum
-   *          The vector containing the maximum acceptable values.
+   *          The vector containing the maximum acceptable values
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
    */
 
-  public static VectorM4D clampByVector(
-    final VectorM4D v,
-    final VectorM4D minimum,
-    final VectorM4D maximum,
-    final VectorM4D out)
+  public static @Nonnull VectorM4D clampByVector(
+    final @Nonnull VectorM4D v,
+    final @Nonnull VectorM4D minimum,
+    final @Nonnull VectorM4D maximum,
+    final @Nonnull VectorM4D out)
   {
     final double x = Math.min(Math.max(v.x, minimum.x), maximum.x);
     final double y = Math.min(Math.max(v.y, minimum.y), maximum.y);
@@ -241,37 +280,46 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code> and
+   * <code>maximum</code>, saving the result to <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The vector containing the minimum acceptable values.
+   *          The vector containing the minimum acceptable values
    * @param maximum
-   *          The vector containing the maximum acceptable values.
+   *          The vector containing the maximum acceptable values
+   * 
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
-   *         , in <code>v</code>.
    */
 
-  public static VectorM4D clampByVectorInPlace(
-    final VectorM4D v,
-    final VectorM4D minimum,
-    final VectorM4D maximum)
+  public static @Nonnull VectorM4D clampByVectorInPlace(
+    final @Nonnull VectorM4D v,
+    final @Nonnull VectorM4D minimum,
+    final @Nonnull VectorM4D maximum)
   {
     return VectorM4D.clampByVector(v, minimum, maximum, v);
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. maximum]</code> inclusive, saving the result to
+   * <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>, in <code>v</code>.
+   *         and at least <code>minimum</code>, in <code>v</code>
    */
 
-  public static VectorM4D clampInPlace(
-    final VectorM4D v,
+  public static @Nonnull VectorM4D clampInPlace(
+    final @Nonnull VectorM4D v,
     final double minimum,
     final double maximum)
   {
@@ -279,20 +327,24 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
+   * <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param out
-   *          The output vector.
+   *          The output vector
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
-   *         .
    */
 
-  public static VectorM4D clampMaximum(
-    final VectorM4D v,
+  public static @Nonnull VectorM4D clampMaximum(
+    final @Nonnull VectorM4D v,
     final double maximum,
-    final VectorM4D out)
+    final @Nonnull VectorM4D out)
   {
     final double x = Math.min(v.x, maximum);
     final double y = Math.min(v.y, maximum);
@@ -306,19 +358,24 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>maximum</code>, saving the
+   * result to <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param maximum
-   *          The vector containing the maximum acceptable values.
+   *          The vector containing the maximum acceptable values
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
    */
 
-  public static VectorM4D clampMaximumByVector(
-    final VectorM4D v,
-    final VectorM4D maximum,
-    final VectorM4D out)
+  public static @Nonnull VectorM4D clampMaximumByVector(
+    final @Nonnull VectorM4D v,
+    final @Nonnull VectorM4D maximum,
+    final @Nonnull VectorM4D out)
   {
     final double x = Math.min(v.x, maximum.x);
     final double y = Math.min(v.y, maximum.y);
@@ -332,52 +389,66 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>maximum</code>, saving the
+   * result to <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param maximum
-   *          The vector containing the maximum acceptable values.
+   *          The vector containing the maximum acceptable values
+   * 
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
-   *         , in <code>v</code>.
    */
 
-  public static VectorM4D clampMaximumByVectorInPlace(
-    final VectorM4D v,
-    final VectorM4D maximum)
+  public static @Nonnull VectorM4D clampMaximumByVectorInPlace(
+    final @Nonnull VectorM4D v,
+    final @Nonnull VectorM4D maximum)
   {
     return VectorM4D.clampMaximumByVector(v, maximum, v);
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
+   * <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
-   *         , in <code>v</code>.
+   *         , in <code>v</code>
    */
 
-  public static VectorM4D clampMaximumInPlace(
-    final VectorM4D v,
+  public static @Nonnull VectorM4D clampMaximumInPlace(
+    final @Nonnull VectorM4D v,
     final double maximum)
   {
     return VectorM4D.clampMaximum(v, maximum, v);
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. Infinity]</code> inclusive, saving the result to
+   * <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param out
-   *          The output vector.
+   *          The output vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
+   * 
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>.
+   *         <code>minimum</code>
    */
 
-  public static VectorM4D clampMinimum(
-    final VectorM4D v,
+  public static @Nonnull VectorM4D clampMinimum(
+    final @Nonnull VectorM4D v,
     final double minimum,
-    final VectorM4D out)
+    final @Nonnull VectorM4D out)
   {
     final double x = Math.max(v.x, minimum);
     final double y = Math.max(v.y, minimum);
@@ -391,19 +462,24 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code>, saving the
+   * result to <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param out
-   *          The output vector.
+   *          The output vector
    * @param minimum
-   *          The vector containing the minimum acceptable values.
+   *          The vector containing the minimum acceptable values
+   * 
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))</code>
    */
 
-  public static VectorM4D clampMinimumByVector(
-    final VectorM4D v,
-    final VectorM4D minimum,
-    final VectorM4D out)
+  public static @Nonnull VectorM4D clampMinimumByVector(
+    final @Nonnull VectorM4D v,
+    final @Nonnull VectorM4D minimum,
+    final @Nonnull VectorM4D out)
   {
     final double x = Math.max(v.x, minimum.x);
     final double y = Math.max(v.y, minimum.y);
@@ -417,32 +493,42 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code>, saving the
+   * result to <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The vector containing the minimum acceptable values.
+   *          The vector containing the minimum acceptable values
+   * 
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))</code>
-   *         , in <code>v</code>.
+   *         , in <code>v</code>
    */
 
-  public static VectorM4D clampMinimumByVectorInPlace(
-    final VectorM4D v,
-    final VectorM4D minimum)
+  public static @Nonnull VectorM4D clampMinimumByVectorInPlace(
+    final @Nonnull VectorM4D v,
+    final @Nonnull VectorM4D minimum)
   {
     return VectorM4D.clampMinimumByVector(v, minimum, v);
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. Infinity]</code> inclusive, saving the result to
+   * <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
+   * 
    * @return A vector with both elements equal to at least
    *         <code>minimum</code>, in <code>v</code>.
    */
 
-  public static VectorM4D clampMinimumInPlace(
-    final VectorM4D v,
+  public static @Nonnull VectorM4D clampMinimumInPlace(
+    final @Nonnull VectorM4D v,
     final double minimum)
   {
     return VectorM4D.clampMinimum(v, minimum, v);
@@ -453,15 +539,16 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * <code>output</code>.
    * 
    * @param input
-   *          The input vector.
+   *          The input vector
    * @param output
-   *          The output vector.
+   *          The output vector
+   * 
    * @return output
    */
 
-  public static VectorM4D copy(
-    final VectorReadable4D input,
-    final VectorM4D output)
+  public static @Nonnull VectorM4D copy(
+    final @Nonnull VectorReadable4D input,
+    final @Nonnull VectorM4D output)
   {
     output.x = input.getXD();
     output.y = input.getYD();
@@ -471,32 +558,40 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Calculate the distance between the two vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return The distance between the two vectors.
    */
 
   public static double distance(
-    final VectorM4D v0,
-    final VectorM4D v1)
+    final @Nonnull VectorM4D v0,
+    final @Nonnull VectorM4D v1)
   {
-    final VectorM4D vr = new VectorM4D();
+    final @Nonnull VectorM4D vr = new VectorM4D();
     return VectorM4D.magnitude(VectorM4D.subtract(v0, v1, vr));
   }
 
   /**
+   * Calculate the scalar product of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
-   * @return The scalar product of the two vectors.
+   *          The right input vector
+   * 
+   * @return The scalar product of the two vectors
    */
 
   public static double dotProduct(
-    final VectorM4D v0,
-    final VectorM4D v1)
+    final @Nonnull VectorM4D v0,
+    final @Nonnull VectorM4D v1)
   {
     final double x = v0.x * v1.x;
     final double y = v0.y * v1.y;
@@ -530,14 +625,14 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return <code>r</code>
    */
 
-  public static VectorM4D interpolateLinear(
-    final VectorM4D v0,
-    final VectorM4D v1,
+  public static @Nonnull VectorM4D interpolateLinear(
+    final @Nonnull VectorM4D v0,
+    final @Nonnull VectorM4D v1,
     final double alpha,
-    final VectorM4D r)
+    final @Nonnull VectorM4D r)
   {
-    final VectorM4D w0 = new VectorM4D();
-    final VectorM4D w1 = new VectorM4D();
+    final @Nonnull VectorM4D w0 = new VectorM4D();
+    final @Nonnull VectorM4D w1 = new VectorM4D();
 
     VectorM4D.scale(v0, 1.0 - alpha, w0);
     VectorM4D.scale(v1, alpha, w1);
@@ -546,26 +641,33 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Calculate the magnitude of the vector <code>v</code>.
+   * 
+   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * 
    * @param v
-   *          The input vector.
-   * @return The magnitude of the input vector.
-   *         <code>magnitude(normalize(v)) == 1.0</code>.
+   *          The input vector
+   * 
+   * @return The magnitude of the input vector
    */
 
   public static double magnitude(
-    final VectorM4D v)
+    final @Nonnull VectorM4D v)
   {
     return Math.sqrt(VectorM4D.magnitudeSquared(v));
   }
 
   /**
+   * Calculate the squared magnitude of the vector <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
-   * @return The squared magnitude of the input vector.
+   *          The input vector
+   * 
+   * @return The squared magnitude of the input vector
    */
 
   public static double magnitudeSquared(
-    final VectorM4D v)
+    final @Nonnull VectorM4D v)
   {
     return VectorM4D.dotProduct(v, v);
   }
@@ -576,13 +678,16 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * returns the zero vector iff the input is the zero vector.
    * 
    * @param v
-   *          The input vector.
+   *          The input vector
+   * @param out
+   *          The output vector
+   * 
    * @return out
    */
 
-  public static VectorM4D normalize(
-    final VectorM4D v,
-    final VectorM4D out)
+  public static @Nonnull VectorM4D normalize(
+    final @Nonnull VectorM4D v,
+    final @Nonnull VectorM4D out)
   {
     final double m = VectorM4D.magnitudeSquared(v);
     if (m > 0.0) {
@@ -602,12 +707,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * returns the zero vector iff the input is the zero vector.
    * 
    * @param v
-   *          The input vector.
+   *          The input vector
+   * 
    * @return v
    */
 
-  public static VectorM4D normalizeInPlace(
-    final VectorM4D v)
+  public static @Nonnull VectorM4D normalizeInPlace(
+    final @Nonnull VectorM4D v)
   {
     return VectorM4D.normalize(v, v);
   }
@@ -619,10 +725,10 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public static VectorM4D projection(
-    final VectorM4D p,
-    final VectorM4D q,
-    final VectorM4D r)
+  public static @Nonnull VectorM4D projection(
+    final @Nonnull VectorM4D p,
+    final @Nonnull VectorM4D q,
+    final @Nonnull VectorM4D r)
   {
     final double dot = VectorM4D.dotProduct(p, q);
     final double qms = VectorM4D.magnitudeSquared(q);
@@ -632,19 +738,23 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
+   * result to <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
+   *          The input vector
    * @param r
-   *          The scaling value.
+   *          The scaling value
+   * @param out
+   *          The output vector
+   * 
    * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>
    */
 
-  public static VectorM4D scale(
-    final VectorM4D v,
+  public static @Nonnull VectorM4D scale(
+    final @Nonnull VectorM4D v,
     final double r,
-    final VectorM4D out)
+    final @Nonnull VectorM4D out)
   {
     final double x = v.x * r;
     final double y = v.y * r;
@@ -658,35 +768,42 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
+   * result to <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param r
-   *          The scaling value.
-   * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>, saving the
-   *         result into <code>v</code>.
+   *          The scaling value
+   * 
+   * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>
    */
 
-  public static VectorM4D scaleInPlace(
-    final VectorM4D v,
+  public static @Nonnull VectorM4D scaleInPlace(
+    final @Nonnull VectorM4D v,
     final double r)
   {
     return VectorM4D.scale(v, r, v);
   }
 
   /**
+   * Subtract the vector <code>v0</code> from the vector <code>v1</code>,
+   * saving the result to <code>out</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)</code>
    */
 
-  public static VectorM4D subtract(
-    final VectorM4D v0,
-    final VectorM4D v1,
-    final VectorM4D out)
+  public static @Nonnull VectorM4D subtract(
+    final @Nonnull VectorM4D v0,
+    final @Nonnull VectorM4D v1,
+    final @Nonnull VectorM4D out)
   {
     final double x = v0.x - v1.x;
     final double y = v0.y - v1.y;
@@ -700,17 +817,20 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Subtract the vector <code>v0</code> from the vector <code>v1</code>,
+   * saving the result to <code>v0</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)</code>
-   *         , saving the result into <code>out</code>.
    */
 
-  public static VectorM4D subtractInPlace(
-    final VectorM4D v0,
-    final VectorM4D v1)
+  public static @Nonnull VectorM4D subtractInPlace(
+    final @Nonnull VectorM4D v0,
+    final @Nonnull VectorM4D v1)
   {
     return VectorM4D.subtract(v0, v1, v0);
   }
@@ -733,6 +853,10 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   }
 
+  /**
+   * Construct a vector initialized with the given values.
+   */
+
   public VectorM4D(
     final double x,
     final double y,
@@ -745,8 +869,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     this.w = w;
   }
 
+  /**
+   * Construct a vector initialized with the values given in the vector
+   * <code>v</code>.
+   */
+
   public VectorM4D(
-    final VectorReadable4D v)
+    final @Nonnull VectorReadable4D v)
   {
     this.x = v.getXD();
     this.y = v.getYD();
@@ -766,7 +895,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final VectorM4D other = (VectorM4D) obj;
+    final @Nonnull VectorM4D other = (VectorM4D) obj;
     if (Double.doubleToLongBits(this.w) != Double.doubleToLongBits(other.w)) {
       return false;
     }

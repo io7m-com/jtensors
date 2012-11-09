@@ -88,6 +88,10 @@ import javax.annotation.concurrent.Immutable;
     this.z = 0;
   }
 
+  /**
+   * Construct a vector initialized with the given values.
+   */
+
   public VectorI3I(
     final int x,
     final int y,
@@ -96,6 +100,19 @@ import javax.annotation.concurrent.Immutable;
     this.x = x;
     this.y = y;
     this.z = z;
+  }
+
+  /**
+   * Construct a vector initialized with the values given in the vector
+   * <code>v</code>.
+   */
+
+  public VectorI3I(
+    final @Nonnull VectorReadable3I v)
+  {
+    this.x = v.getXI();
+    this.y = v.getYI();
+    this.z = v.getZI();
   }
 
   @Override public boolean equals(

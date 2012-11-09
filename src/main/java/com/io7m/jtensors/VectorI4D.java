@@ -64,8 +64,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    *          The right input vector
    * 
    * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code> , within an appropriate degree of error for
-   *         double precision floating point values
+   *         <code>v1</code>, within an appropriate degree of error for double
+   *         precision floating point values
    */
 
   public static boolean approximatelyEqual(
@@ -95,7 +95,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    *          The maximum allowed value
    * 
    * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>.
+   *         and at least <code>minimum</code>
    */
 
   public static @Nonnull VectorI4D clamp(
@@ -118,9 +118,9 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @param v
    *          The input vector
    * @param minimum
-   *          the vector containing the minimum acceptable values
+   *          The vector containing the minimum acceptable values
    * @param maximum
-   *          the vector containing the maximum acceptable values
+   *          The vector containing the maximum acceptable values
    * 
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
    */
@@ -478,6 +478,10 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     this.w = 1.0;
   }
 
+  /**
+   * Construct a vector initialized with the given values.
+   */
+
   public VectorI4D(
     final double x,
     final double y,
@@ -489,6 +493,11 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     this.z = z;
     this.w = w;
   }
+
+  /**
+   * Construct a vector initialized with the values given in the vector
+   * <code>v</code>.
+   */
 
   public VectorI4D(
     final VectorReadable4D v)

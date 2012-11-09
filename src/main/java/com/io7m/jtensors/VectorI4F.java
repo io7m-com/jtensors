@@ -119,9 +119,9 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param v
    *          The input vector
    * @param minimum
-   *          the vector containing the minimum acceptable values
+   *          The vector containing the minimum acceptable values
    * @param maximum
-   *          the vector containing the maximum acceptable values
+   *          The vector containing the maximum acceptable values
    * 
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
    */
@@ -479,6 +479,10 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
     this.w = 1.0f;
   }
 
+  /**
+   * Construct a vector initialized with the given values.
+   */
+
   public VectorI4F(
     final float x,
     final float y,
@@ -490,6 +494,11 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
     this.z = z;
     this.w = w;
   }
+
+  /**
+   * Construct a vector initialized with the values given in the vector
+   * <code>v</code>.
+   */
 
   public VectorI4F(
     final VectorReadable4F v)

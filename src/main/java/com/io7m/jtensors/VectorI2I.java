@@ -86,12 +86,28 @@ import javax.annotation.concurrent.Immutable;
     this.y = 0;
   }
 
+  /**
+   * Construct a vector initialized with the given values.
+   */
+
   public VectorI2I(
     final int x,
     final int y)
   {
     this.x = x;
     this.y = y;
+  }
+
+  /**
+   * Construct a vector initialized with the values given in the vector
+   * <code>v</code>.
+   */
+
+  public VectorI2I(
+    final @Nonnull VectorReadable2I v)
+  {
+    this.x = v.getXI();
+    this.y = v.getYI();
   }
 
   @Override public boolean equals(

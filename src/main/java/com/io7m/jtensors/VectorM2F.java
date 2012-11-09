@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.io7m.jaux.ApproximatelyEqualFloat;
@@ -30,16 +31,20 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
 @NotThreadSafe public final class VectorM2F implements VectorReadable2F
 {
   /**
+   * Calculate the absolute values of the elements in vector <code>v</code>,
+   * saving the result to <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return <code>(abs v.x, abs v.y)</code>
    */
 
-  public static VectorM2F absolute(
-    final VectorM2F v,
-    final VectorM2F out)
+  public static @Nonnull VectorM2F absolute(
+    final @Nonnull VectorM2F v,
+    final @Nonnull VectorM2F out)
   {
     final float x = Math.abs(v.x);
     final float y = Math.abs(v.y);
@@ -49,32 +54,39 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Calculate the absolute values of the elements in vector <code>v</code>,
+   * modifying the vector in-place.
+   * 
    * @param v
-   *          The input vector.
-   * @return <code>(abs v.x, abs v.y)</code>, saving the result into
-   *         <code>v</code>.
+   *          The input vector
+   * 
+   * @return <code>(abs v.x, abs v.y)</code>
    */
 
-  public static VectorM2F absoluteInPlace(
-    final VectorM2F v)
+  public static @Nonnull VectorM2F absoluteInPlace(
+    final @Nonnull VectorM2F v)
   {
     return VectorM2F.absolute(v, v);
   }
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>, saving the result to <code>out</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
    */
 
-  public static VectorM2F add(
-    final VectorM2F v0,
-    final VectorM2F v1,
-    final VectorM2F out)
+  public static @Nonnull VectorM2F add(
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1,
+    final @Nonnull VectorM2F out)
   {
     final float x = v0.x + v1.x;
     final float y = v0.y + v1.y;
@@ -84,38 +96,46 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>, saving the result to <code>v0</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
-   * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>, saving the result in
-   *         <code>v0</code>.
+   *          The right input vector
+   * 
+   * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
    */
 
-  public static VectorM2F addInPlace(
-    final VectorM2F v0,
-    final VectorM2F v1)
+  public static @Nonnull VectorM2F addInPlace(
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1)
   {
     return VectorM2F.add(v0, v1, v0);
   }
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and the
+   * element-wise product of <code>v1</code> and <code>r</code>, saving the
+   * result to <code>out</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
    * @param out
-   *          The output vector.
+   *          The output vector
    * @param r
-   *          The scaling value.
+   *          The scaling value
+   * 
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
    */
 
-  public static VectorM2F addScaled(
-    final VectorM2F v0,
-    final VectorM2F v1,
+  public static @Nonnull VectorM2F addScaled(
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1,
     final float r,
-    final VectorM2F out)
+    final @Nonnull VectorM2F out)
   {
     final float x = v0.x + (v1.x * r);
     final float y = v0.y + (v1.y * r);
@@ -125,35 +145,43 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and the
+   * element-wise product of <code>v1</code> and <code>r</code>, saving the
+   * result to <code>v0</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
    * @param r
-   *          The scaling value.
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>, saving the
-   *         result to <code>v0</code>.
+   *          The scaling value
+   * 
+   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
    */
 
-  public static VectorM2F addScaledInPlace(
-    final VectorM2F v0,
-    final VectorM2F v1,
+  public static @Nonnull VectorM2F addScaledInPlace(
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1,
     final float r)
   {
     return VectorM2F.addScaled(v0, v1, r, v0);
   }
 
   /**
+   * Calculate the angle between vectors <code>v0</code> and <code>v1</code>,
+   * in radians.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return The angle between the two vectors, in radians.
    */
 
   public static float angle(
-    final VectorM2F v0,
-    final VectorM2F v1)
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1)
   {
     final float m0 = VectorM2F.magnitude(v0);
     final float m1 = VectorM2F.magnitude(v1);
@@ -161,34 +189,43 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Calculate the angle between vectors <code>v0</code> and <code>v1</code>,
+   * in degrees.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return The angle between the two vectors, in degrees.
    */
 
   public static float angleDegrees(
-    final VectorM2F v0,
-    final VectorM2F v1)
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1)
   {
     return (float) (VectorM2F.angle(v0, v1) * (180.0f / Math.PI));
   }
 
   /**
+   * Determine whether or not the elements of the two vectors <code>v0</code>
+   * and <code>v1</code> are approximately equal.
+   * 
    * @see ApproximatelyEqualFloat
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code> , within an appropriate degree of error for float
-   *         precision floating point values.
+   *         <code>v1</code>, within an appropriate degree of error for single
+   *         precision floating point values
    */
 
   public static boolean approximatelyEqual(
-    final VectorM2F v0,
-    final VectorM2F v1)
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1)
   {
     final boolean ex = ApproximatelyEqualFloat.approximatelyEqual(v0.x, v1.x);
     final boolean ey = ApproximatelyEqualFloat.approximatelyEqual(v0.y, v1.y);
@@ -196,23 +233,28 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. maximum]</code> inclusive, saving the result to
+   * <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>.
+   *         and at least <code>minimum</code>
    */
 
-  public static VectorM2F clamp(
-    final VectorM2F v,
+  public static @Nonnull VectorM2F clamp(
+    final @Nonnull VectorM2F v,
     final float minimum,
     final float maximum,
-    final VectorM2F out)
+    final @Nonnull VectorM2F out)
   {
     final float x = Math.min(Math.max(v.x, minimum), maximum);
     final float y = Math.min(Math.max(v.y, minimum), maximum);
@@ -222,22 +264,27 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code> and
+   * <code>maximum</code>, saving the result to <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The vector containing the minimum acceptable values.
+   *          The vector containing the minimum acceptable values
    * @param maximum
-   *          The vector containing the maximum acceptable values.
+   *          The vector containing the maximum acceptable values
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))</code>
    */
 
-  public static VectorM2F clampByVector(
-    final VectorM2F v,
-    final VectorM2F minimum,
-    final VectorM2F maximum,
-    final VectorM2F out)
+  public static @Nonnull VectorM2F clampByVector(
+    final @Nonnull VectorM2F v,
+    final @Nonnull VectorM2F minimum,
+    final @Nonnull VectorM2F maximum,
+    final @Nonnull VectorM2F out)
   {
     final float x = Math.min(Math.max(v.x, minimum.x), maximum.x);
     final float y = Math.min(Math.max(v.y, minimum.y), maximum.y);
@@ -247,37 +294,46 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code> and
+   * <code>maximum</code>, saving the result to <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The vector containing the minimum acceptable values.
+   *          The vector containing the minimum acceptable values
    * @param maximum
-   *          The vector containing the maximum acceptable values.
+   *          The vector containing the maximum acceptable values
+   * 
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))</code>
-   *         , in <code>v</code>.
    */
 
-  public static VectorM2F clampByVectorInPlace(
-    final VectorM2F v,
-    final VectorM2F minimum,
-    final VectorM2F maximum)
+  public static @Nonnull VectorM2F clampByVectorInPlace(
+    final @Nonnull VectorM2F v,
+    final @Nonnull VectorM2F minimum,
+    final @Nonnull VectorM2F maximum)
   {
     return VectorM2F.clampByVector(v, minimum, maximum, v);
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. maximum]</code> inclusive, saving the result to
+   * <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>, in <code>v</code>.
+   *         and at least <code>minimum</code>, in <code>v</code>
    */
 
-  public static VectorM2F clampInPlace(
-    final VectorM2F v,
+  public static @Nonnull VectorM2F clampInPlace(
+    final @Nonnull VectorM2F v,
     final float minimum,
     final float maximum)
   {
@@ -285,20 +341,24 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
+   * <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param out
-   *          The output vector.
+   *          The output vector
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
-   *         .
    */
 
-  public static VectorM2F clampMaximum(
-    final VectorM2F v,
+  public static @Nonnull VectorM2F clampMaximum(
+    final @Nonnull VectorM2F v,
     final float maximum,
-    final VectorM2F out)
+    final @Nonnull VectorM2F out)
   {
     final float x = Math.min(v.x, maximum);
     final float y = Math.min(v.y, maximum);
@@ -308,19 +368,24 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>maximum</code>, saving the
+   * result to <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param maximum
-   *          The vector containing the maximum acceptable values.
+   *          The vector containing the maximum acceptable values
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
    */
 
-  public static VectorM2F clampMaximumByVector(
-    final VectorM2F v,
-    final VectorM2F maximum,
-    final VectorM2F out)
+  public static @Nonnull VectorM2F clampMaximumByVector(
+    final @Nonnull VectorM2F v,
+    final @Nonnull VectorM2F maximum,
+    final @Nonnull VectorM2F out)
   {
     final float x = Math.min(v.x, maximum.x);
     final float y = Math.min(v.y, maximum.y);
@@ -330,52 +395,66 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>maximum</code>, saving the
+   * result to <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param maximum
-   *          The vector containing the maximum acceptable values.
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>, in
-   *         <code>v</code>.
+   *          The vector containing the maximum acceptable values
+   * 
+   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
    */
 
-  public static VectorM2F clampMaximumByVectorInPlace(
-    final VectorM2F v,
-    final VectorM2F maximum)
+  public static @Nonnull VectorM2F clampMaximumByVectorInPlace(
+    final @Nonnull VectorM2F v,
+    final @Nonnull VectorM2F maximum)
   {
     return VectorM2F.clampMaximumByVector(v, maximum, v);
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
+   * <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
-   *         , in <code>v</code>.
+   *         , in <code>v</code>
    */
 
-  public static VectorM2F clampMaximumInPlace(
-    final VectorM2F v,
+  public static @Nonnull VectorM2F clampMaximumInPlace(
+    final @Nonnull VectorM2F v,
     final float maximum)
   {
     return VectorM2F.clampMaximum(v, maximum, v);
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. Infinity]</code> inclusive, saving the result to
+   * <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param out
-   *          The output vector.
+   *          The output vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
+   * 
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>.
+   *         <code>minimum</code>
    */
 
-  public static VectorM2F clampMinimum(
-    final VectorM2F v,
+  public static @Nonnull VectorM2F clampMinimum(
+    final @Nonnull VectorM2F v,
     final float minimum,
-    final VectorM2F out)
+    final @Nonnull VectorM2F out)
   {
     final float x = Math.max(v.x, minimum);
     final float y = Math.max(v.y, minimum);
@@ -385,19 +464,24 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code>, saving the
+   * result to <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param out
-   *          The output vector.
+   *          The output vector
    * @param minimum
-   *          The vector containing the minimum acceptable values.
+   *          The vector containing the minimum acceptable values
+   * 
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code>
    */
 
-  public static VectorM2F clampMinimumByVector(
-    final VectorM2F v,
-    final VectorM2F minimum,
-    final VectorM2F out)
+  public static @Nonnull VectorM2F clampMinimumByVector(
+    final @Nonnull VectorM2F v,
+    final @Nonnull VectorM2F minimum,
+    final @Nonnull VectorM2F out)
   {
     final float x = Math.max(v.x, minimum.x);
     final float y = Math.max(v.y, minimum.y);
@@ -407,32 +491,42 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code>, saving the
+   * result to <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The vector containing the minimum acceptable values.
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code>, in
-   *         <code>v</code>.
+   *          The vector containing the minimum acceptable values
+   * 
+   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code> , in
+   *         <code>v</code>
    */
 
-  public static VectorM2F clampMinimumByVectorInPlace(
-    final VectorM2F v,
-    final VectorM2F minimum)
+  public static @Nonnull VectorM2F clampMinimumByVectorInPlace(
+    final @Nonnull VectorM2F v,
+    final @Nonnull VectorM2F minimum)
   {
     return VectorM2F.clampMinimumByVector(v, minimum, v);
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. Infinity]</code> inclusive, saving the result to
+   * <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
+   * 
    * @return A vector with both elements equal to at least
    *         <code>minimum</code>, in <code>v</code>.
    */
 
-  public static VectorM2F clampMinimumInPlace(
-    final VectorM2F v,
+  public static @Nonnull VectorM2F clampMinimumInPlace(
+    final @Nonnull VectorM2F v,
     final float minimum)
   {
     return VectorM2F.clampMinimum(v, minimum, v);
@@ -443,15 +537,16 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * <code>output</code>.
    * 
    * @param input
-   *          The input vector.
+   *          The input vector
    * @param output
-   *          The output vector.
+   *          The output vector
+   * 
    * @return output
    */
 
-  public static VectorM2F copy(
-    final VectorReadable2F input,
-    final VectorM2F output)
+  public static @Nonnull VectorM2F copy(
+    final @Nonnull VectorReadable2F input,
+    final @Nonnull VectorM2F output)
   {
     output.x = input.getXF();
     output.y = input.getYF();
@@ -459,32 +554,40 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Calculate the distance between the two vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return The distance between the two vectors.
    */
 
   public static float distance(
-    final VectorM2F v0,
-    final VectorM2F v1)
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1)
   {
-    final VectorM2F vr = new VectorM2F();
+    final @Nonnull VectorM2F vr = new VectorM2F();
     return VectorM2F.magnitude(VectorM2F.subtract(v0, v1, vr));
   }
 
   /**
+   * Calculate the scalar product of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
-   * @return The scalar product of the two vectors.
+   *          The right input vector
+   * 
+   * @return The scalar product of the two vectors
    */
 
   public static float dotProduct(
-    final VectorM2F v0,
-    final VectorM2F v1)
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1)
   {
     final float x = v0.x * v1.x;
     final float y = v0.y * v1.y;
@@ -516,14 +619,14 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @return <code>r</code>
    */
 
-  public static VectorM2F interpolateLinear(
-    final VectorM2F v0,
-    final VectorM2F v1,
+  public static @Nonnull VectorM2F interpolateLinear(
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1,
     final float alpha,
-    final VectorM2F r)
+    final @Nonnull VectorM2F r)
   {
-    final VectorM2F w0 = new VectorM2F();
-    final VectorM2F w1 = new VectorM2F();
+    final @Nonnull VectorM2F w0 = new VectorM2F();
+    final @Nonnull VectorM2F w1 = new VectorM2F();
 
     VectorM2F.scale(v0, 1.0f - alpha, w0);
     VectorM2F.scale(v1, alpha, w1);
@@ -532,26 +635,33 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Calculate the magnitude of the vector <code>v</code>.
+   * 
+   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * 
    * @param v
-   *          The input vector.
-   * @return The magnitude of the input vector.
-   *         <code>magnitude(normalize(v)) == 1.0</code>.
+   *          The input vector
+   * 
+   * @return The magnitude of the input vector
    */
 
   public static float magnitude(
-    final VectorM2F v)
+    final @Nonnull VectorM2F v)
   {
     return (float) Math.sqrt(VectorM2F.magnitudeSquared(v));
   }
 
   /**
+   * Calculate the squared magnitude of the vector <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
-   * @return The squared magnitude of the input vector.
+   *          The input vector
+   * 
+   * @return The squared magnitude of the input vector
    */
 
   public static float magnitudeSquared(
-    final VectorM2F v)
+    final @Nonnull VectorM2F v)
   {
     return VectorM2F.dotProduct(v, v);
   }
@@ -562,13 +672,16 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * returns the zero vector iff the input is the zero vector.
    * 
    * @param v
-   *          The input vector.
+   *          The input vector
+   * @param out
+   *          The output vector
+   * 
    * @return out
    */
 
-  public static VectorM2F normalize(
-    final VectorM2F v,
-    final VectorM2F out)
+  public static @Nonnull VectorM2F normalize(
+    final @Nonnull VectorM2F v,
+    final @Nonnull VectorM2F out)
   {
     final float m = VectorM2F.magnitudeSquared(v);
     if (m > 0.0) {
@@ -586,12 +699,13 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * returns the zero vector iff the input is the zero vector.
    * 
    * @param v
-   *          The input vector.
+   *          The input vector
+   * 
    * @return v
    */
 
-  public static VectorM2F normalizeInPlace(
-    final VectorM2F v)
+  public static @Nonnull VectorM2F normalizeInPlace(
+    final @Nonnull VectorM2F v)
   {
     return VectorM2F.normalize(v, v);
   }
@@ -603,10 +717,10 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public static VectorM2F projection(
-    final VectorM2F p,
-    final VectorM2F q,
-    final VectorM2F r)
+  public static @Nonnull VectorM2F projection(
+    final @Nonnull VectorM2F p,
+    final @Nonnull VectorM2F q,
+    final @Nonnull VectorM2F r)
   {
     final float dot = VectorM2F.dotProduct(p, q);
     final float qms = VectorM2F.magnitudeSquared(q);
@@ -616,19 +730,23 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
+   * result to <code>out</code>.
+   * 
    * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
+   *          The input vector
    * @param r
-   *          The scaling value.
+   *          The scaling value
+   * @param out
+   *          The output vector
+   * 
    * @return <code>(v.x * r, v.y * r)</code>
    */
 
-  public static VectorM2F scale(
-    final VectorM2F v,
+  public static @Nonnull VectorM2F scale(
+    final @Nonnull VectorM2F v,
     final float r,
-    final VectorM2F out)
+    final @Nonnull VectorM2F out)
   {
     final float x = v.x * r;
     final float y = v.y * r;
@@ -638,35 +756,42 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
+   * result to <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param r
-   *          The scaling value.
-   * @return <code>(v.x * r, v.y * r)</code>, saving the result into
-   *         <code>v</code>.
+   *          The scaling value
+   * 
+   * @return <code>(v.x * r, v.y * r)</code>
    */
 
-  public static VectorM2F scaleInPlace(
-    final VectorM2F v,
+  public static @Nonnull VectorM2F scaleInPlace(
+    final @Nonnull VectorM2F v,
     final float r)
   {
     return VectorM2F.scale(v, r, v);
   }
 
   /**
+   * Subtract the vector <code>v0</code> from the vector <code>v1</code>,
+   * saving the result to <code>out</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
    * @param out
-   *          The output vector.
+   *          The output vector
+   * 
    * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
    */
 
-  public static VectorM2F subtract(
-    final VectorM2F v0,
-    final VectorM2F v1,
-    final VectorM2F out)
+  public static @Nonnull VectorM2F subtract(
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1,
+    final @Nonnull VectorM2F out)
   {
     final float x = v0.x - v1.x;
     final float y = v0.y - v1.y;
@@ -676,17 +801,20 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Subtract the vector <code>v0</code> from the vector <code>v1</code>,
+   * saving the result to <code>v0</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
-   * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>, saving the result into
-   *         <code>out</code>.
+   *          The right input vector
+   * 
+   * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
    */
 
-  public static VectorM2F subtractInPlace(
-    final VectorM2F v0,
-    final VectorM2F v1)
+  public static @Nonnull VectorM2F subtractInPlace(
+    final @Nonnull VectorM2F v0,
+    final @Nonnull VectorM2F v1)
   {
     return VectorM2F.subtract(v0, v1, v0);
   }
@@ -705,6 +833,10 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
 
   }
 
+  /**
+   * Construct a vector initialized with the given values.
+   */
+
   public VectorM2F(
     final float x,
     final float y)
@@ -713,8 +845,13 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
     this.y = y;
   }
 
+  /**
+   * Construct a vector initialized with the values given in the vector
+   * <code>v</code>.
+   */
+
   public VectorM2F(
-    final VectorReadable2F v)
+    final @Nonnull VectorReadable2F v)
   {
     this.x = v.getXF();
     this.y = v.getYF();
@@ -732,7 +869,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final VectorM2F other = (VectorM2F) obj;
+    final @Nonnull VectorM2F other = (VectorM2F) obj;
     if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
       return false;
     }
