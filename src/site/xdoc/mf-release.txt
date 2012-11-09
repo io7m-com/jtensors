@@ -9,3 +9,4 @@
 2012-11-09:io7m-jtensors-2.3.0.jar:100655
 2012-11-09:io7m-jtensors-2.3.0-sources.jar:92167
 2012-11-09:io7m-jtensors-2.3.0-javadoc.jar:343293
+2012-11-09:io7m-jtensors-2.3.0.zip:211735

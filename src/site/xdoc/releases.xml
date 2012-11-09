@@ -129,6 +129,16 @@
               <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.3.0-javadoc.jar">io7m-jtensors-2.3.0-javadoc.jar</a>
             </td>
           </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-11-09</td>
+            <td class="page_table_column">211735</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.3.0.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.3.0.zip">io7m-jtensors-2.3.0.zip</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
