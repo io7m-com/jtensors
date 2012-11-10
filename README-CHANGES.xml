@@ -8,6 +8,12 @@
 
     <c:item>
       <c:date>2012-11-10</c:date>
+      <c:type-code-new/>
+      <c:summary>Add Quaternion classes for 3D rotations</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-11-10</c:date>
       <c:type-code-fix/>
       <c:summary>Remove all @Deprecated methods from 2.3.0</c:summary>
     </c:item>
