@@ -63,32 +63,6 @@ public class MatrixM2x2DTest
     }
   }
 
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
-    void
-    testAddMutateDeprecated()
-  {
-    final MatrixM2x2D m0 = new MatrixM2x2D();
-    final MatrixM2x2D m1 = new MatrixM2x2D();
-
-    for (int row = 0; row < 2; ++row) {
-      for (int column = 0; column < 2; ++column) {
-        m0.set(row, column, 1.0);
-        m1.set(row, column, 3.0);
-      }
-    }
-
-    final MatrixM2x2D mr = MatrixM2x2D.add(m0, m1);
-    Assert.assertSame(mr, m0);
-
-    for (int row = 0; row < 2; ++row) {
-      for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 4.0);
-        Assert.assertTrue(mr.get(row, column) == 4.0);
-        Assert.assertTrue(m1.get(row, column) == 3.0);
-      }
-    }
-  }
-
   @SuppressWarnings("static-method") @Test public void testAddRowScaled()
   {
     final MatrixM2x2D m0 = new MatrixM2x2D();
@@ -582,27 +556,6 @@ public class MatrixM2x2DTest
     Assert.assertTrue(MatrixM2x2D.get(r, 0, 1) == 10.0);
     Assert.assertTrue(MatrixM2x2D.get(r, 1, 0) == 15.0);
     Assert.assertTrue(MatrixM2x2D.get(r, 1, 1) == 22.0);
-  }
-
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
-    void
-    testMultiplyVectorSimple()
-  {
-    final MatrixM2x2D m0 = new MatrixM2x2D();
-
-    MatrixM2x2D.set(m0, 0, 0, 1.0);
-    MatrixM2x2D.set(m0, 0, 1, 2.0);
-    MatrixM2x2D.set(m0, 1, 0, 3.0);
-    MatrixM2x2D.set(m0, 1, 1, 4.0);
-
-    final VectorI2D v = new VectorI2D(1.0, 2.0);
-    final VectorM2D out = new VectorM2D();
-
-    final VectorM2D r = MatrixM2x2D.multiply(m0, v, out);
-    Assert.assertSame(out, r);
-
-    Assert.assertTrue(out.x == 5.0);
-    Assert.assertTrue(out.y == 11.0);
   }
 
   @SuppressWarnings("static-method") @Test public

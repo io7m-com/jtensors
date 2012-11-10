@@ -39,24 +39,6 @@ import com.io7m.jaux.functional.Option;
   private static final double[] zero_row       = { 0.0, 0.0 };
 
   /**
-   * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
-   * returning the result in <code>m0</code>.
-   * 
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
-   * @return <code>m0</code>
-   */
-
-  @Deprecated public static MatrixM2x2D add(
-    final @Nonnull MatrixM2x2D m0,
-    final @Nonnull MatrixReadable2x2D m1)
-  {
-    return MatrixM2x2D.addInPlace(m0, m1);
-  }
-
-  /**
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>.
    * 
    * @param m0
@@ -440,35 +422,6 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(0, 1, r0c1);
     out.setUnsafe(1, 0, r1c0);
     out.setUnsafe(1, 1, r1c1);
-
-    return out;
-  }
-
-  /**
-   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
-   * writing the resulting vector to <code>out</code>.
-   * 
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
-   * @return <code>out</code>
-   */
-
-  @Deprecated public static VectorM2D multiply(
-    final @Nonnull MatrixReadable2x2D m,
-    final @Nonnull VectorReadable2D v,
-    final @Nonnull VectorM2D out)
-  {
-    final @Nonnull VectorM2D row = new VectorM2D();
-    final @Nonnull VectorM2D vi = new VectorM2D(v);
-
-    m.getRowD(0, row);
-    out.x = VectorM2D.dotProduct(row, vi);
-    m.getRowD(1, row);
-    out.y = VectorM2D.dotProduct(row, vi);
 
     return out;
   }

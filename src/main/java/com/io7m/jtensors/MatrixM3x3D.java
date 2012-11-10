@@ -350,25 +350,6 @@ import com.io7m.jaux.functional.Option;
 
   /**
    * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>m</code>. The function returns <code>Some(m)</code> iff
-   * it was possible to invert the matrix, and <code>None</code> otherwise. It
-   * is not possible to invert a matrix that has a determinant of
-   * <code>0</code>.
-   * 
-   * @see MatrixM3x3D#determinant(MatrixReadable3x3D)
-   * 
-   * @param m
-   *          The input matrix.
-   */
-
-  @Deprecated public static Option<MatrixM3x3D> invert(
-    final @Nonnull MatrixM3x3D m)
-  {
-    return MatrixM3x3D.invert(m, m);
-  }
-
-  /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
    * matrix to <code>out</code>. The function returns <code>Some(out)</code>
    * iff it was possible to invert the matrix, and <code>None</code>
    * otherwise. It is not possible to invert a matrix that has a determinant

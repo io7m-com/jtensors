@@ -453,52 +453,6 @@ public class MatrixM3x3DTest
     Assert.assertTrue(m.get(2, 2) == 1.0);
   }
 
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
-    void
-    testInvertIdentity()
-  {
-    final MatrixM3x3D m0 = new MatrixM3x3D();
-    final MatrixM3x3D m1 = new MatrixM3x3D();
-
-    {
-      final Option<MatrixM3x3D> r = MatrixM3x3D.invert(m0, m1);
-      Assert.assertEquals(Type.OPTION_SOME, r.type);
-      final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
-      final MatrixM3x3D rm = s.value;
-
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 0) == 1.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 1) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 2) == 0.0);
-
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 0) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 1) == 1.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 2) == 0.0);
-
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 0) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 1) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 2) == 1.0);
-    }
-
-    {
-      final Option<MatrixM3x3D> r = MatrixM3x3D.invert(m1);
-      Assert.assertEquals(Type.OPTION_SOME, r.type);
-      final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
-      final MatrixM3x3D rm = s.value;
-
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 0) == 1.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 1) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 2) == 0.0);
-
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 0) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 1) == 1.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 2) == 0.0);
-
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 0) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 1) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 2) == 1.0);
-    }
-  }
-
   @SuppressWarnings("static-method") @Test public
     void
     testInvertInPlaceIdentity()
@@ -542,64 +496,6 @@ public class MatrixM3x3DTest
       Assert.assertTrue(MatrixM3x3D.get(rm, 2, 0) == 0.0);
       Assert.assertTrue(MatrixM3x3D.get(rm, 2, 1) == 0.0);
       Assert.assertTrue(MatrixM3x3D.get(rm, 2, 2) == 1.0);
-    }
-  }
-
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
-    void
-    testInvertSimple()
-  {
-    final MatrixM3x3D m0 = new MatrixM3x3D();
-    final MatrixM3x3D m1 = new MatrixM3x3D();
-
-    m0.set(0, 0, 2.0);
-    m0.set(0, 1, 0.0);
-    m0.set(0, 2, 0.0);
-
-    m0.set(1, 0, 0.0);
-    m0.set(1, 1, 2.0);
-    m0.set(1, 2, 0.0);
-
-    m0.set(2, 0, 0.0);
-    m0.set(2, 1, 0.0);
-    m0.set(2, 2, 2.0);
-
-    {
-      final Option<MatrixM3x3D> r = MatrixM3x3D.invert(m0, m1);
-      Assert.assertEquals(Type.OPTION_SOME, r.type);
-      final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
-      final MatrixM3x3D rm = s.value;
-
-      Assert.assertTrue(rm.get(0, 0) == 0.5);
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(rm.get(0, 2) == 0);
-
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(rm.get(1, 1) == 0.5);
-      Assert.assertTrue(rm.get(1, 2) == 0);
-
-      Assert.assertTrue(rm.get(2, 0) == 0);
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(rm.get(2, 2) == 0.5);
-    }
-
-    {
-      final Option<MatrixM3x3D> r = MatrixM3x3D.invert(m1);
-      Assert.assertEquals(Type.OPTION_SOME, r.type);
-      final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
-      final MatrixM3x3D rm = s.value;
-
-      Assert.assertTrue(rm.get(0, 0) == 2);
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(rm.get(0, 2) == 0);
-
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(rm.get(1, 1) == 2);
-      Assert.assertTrue(rm.get(1, 2) == 0);
-
-      Assert.assertTrue(rm.get(2, 0) == 0);
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(rm.get(2, 2) == 2);
     }
   }
 
@@ -656,26 +552,6 @@ public class MatrixM3x3DTest
       Assert.assertTrue(rm.get(2, 0) == 0);
       Assert.assertTrue(rm.get(2, 1) == 0);
       Assert.assertTrue(rm.get(2, 2) == 2);
-    }
-  }
-
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
-    void
-    testInvertZero()
-  {
-    final MatrixM3x3D m0 = new MatrixM3x3D();
-    final MatrixM3x3D m1 = new MatrixM3x3D();
-
-    MatrixM3x3D.setZero(m0);
-
-    {
-      final Option<MatrixM3x3D> r = MatrixM3x3D.invert(m0, m1);
-      Assert.assertEquals(Type.OPTION_NONE, r.type);
-    }
-
-    {
-      final Option<MatrixM3x3D> r = MatrixM3x3D.invert(m0);
-      Assert.assertEquals(Type.OPTION_NONE, r.type);
     }
   }
 

@@ -439,35 +439,6 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  @Deprecated public static VectorM2F multiply(
-    final @Nonnull MatrixReadable2x2F m,
-    final @Nonnull VectorReadable2F v,
-    final @Nonnull VectorM2F out)
-  {
-    final @Nonnull VectorM2F row = new VectorM2F();
-    final @Nonnull VectorM2F vi = new VectorM2F(v);
-
-    m.getRowF(0, row);
-    out.x = VectorM2F.dotProduct(row, vi);
-    m.getRowF(1, row);
-    out.y = VectorM2F.dotProduct(row, vi);
-
-    return out;
-  }
-
-  /**
-   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
-   * writing the resulting vector to <code>out</code>.
-   * 
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
-   * @return <code>out</code>
-   */
-
   public static VectorM2F multiplyVector2F(
     final @Nonnull MatrixReadable2x2F m,
     final @Nonnull VectorReadable2F v,

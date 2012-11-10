@@ -558,27 +558,6 @@ public class MatrixM2x2FTest
     Assert.assertTrue(MatrixM2x2F.get(r, 1, 1) == 22.0);
   }
 
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
-    void
-    testMultiplyVectorSimple()
-  {
-    final MatrixM2x2F m0 = new MatrixM2x2F();
-
-    MatrixM2x2F.set(m0, 0, 0, 1.0f);
-    MatrixM2x2F.set(m0, 0, 1, 2.0f);
-    MatrixM2x2F.set(m0, 1, 0, 3.0f);
-    MatrixM2x2F.set(m0, 1, 1, 4.0f);
-
-    final VectorI2F v = new VectorI2F(1.0, 2.0);
-    final VectorM2F out = new VectorM2F();
-
-    final VectorM2F r = MatrixM2x2F.multiply(m0, v, out);
-    Assert.assertSame(out, r);
-
-    Assert.assertTrue(out.x == 5.0);
-    Assert.assertTrue(out.y == 11.0);
-  }
-
   @SuppressWarnings("static-method") @Test public
     void
     testMultiplyVectorSimpleND()

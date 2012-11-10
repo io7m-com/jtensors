@@ -103,56 +103,6 @@ import com.io7m.jaux.functional.Option;
   /**
    * Add the values in row <code>row_b</code> to the values in row
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
-   * row <code>row_c</code> of the matrix <code>out</code>. The function uses
-   * storage preallocated in <code>context</code> to avoid any new
-   * allocations.
-   * 
-   * This is one of the three "elementary" operations defined on matrices.
-   * 
-   * @see <a
-   *      href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary
-   *      operations</a>.
-   * 
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  @Deprecated public static MatrixM4x4D addRowScaled(
-    final Context context,
-    final @Nonnull MatrixReadable4x4D m,
-    final int row_a,
-    final int row_b,
-    final int row_c,
-    final double r,
-    final @Nonnull MatrixM4x4D out)
-  {
-    return MatrixM4x4D.addRowScaledUnsafe(
-      m,
-      MatrixM4x4D.rowCheck(row_a),
-      MatrixM4x4D.rowCheck(row_b),
-      MatrixM4x4D.rowCheck(row_c),
-      r,
-      context.va,
-      context.vb,
-      out);
-  }
-
-  /**
-   * Add the values in row <code>row_b</code> to the values in row
-   * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>out</code>.
    * 
    * This is one of the three "elementary" operations defined on matrices.
@@ -344,46 +294,6 @@ import com.io7m.jaux.functional.Option;
     final ByteBuffer b =
       m.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
     return b.asDoubleBuffer();
-  }
-
-  /**
-   * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
-   * This is one of the three "elementary" operations defined on matrices. The
-   * function uses storage preallocated in <code>context</code> to avoid
-   * allocating memory.
-   * 
-   * @see <a
-   *      href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary
-   *      operations</a>.
-   * 
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  @Deprecated public static MatrixM4x4D exchangeRows(
-    final Context context,
-    final @Nonnull MatrixReadable4x4D m,
-    final int row_a,
-    final int row_b,
-    final @Nonnull MatrixM4x4D out)
-  {
-    return MatrixM4x4D.exchangeRowsUnsafe(
-      m,
-      MatrixM4x4D.rowCheck(row_a),
-      MatrixM4x4D.rowCheck(row_b),
-      context.va,
-      context.vb,
-      out);
   }
 
   /**
@@ -1403,35 +1313,6 @@ import com.io7m.jaux.functional.Option;
     return MatrixM4x4D.multiplyVector4D(m, v, context.va, context.vb, out);
   }
 
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>out</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory. The function assumes a right-handed coordinate system.
-   * 
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  @Deprecated public static MatrixM4x4D rotate(
-    final Context context,
-    final double angle,
-    final @Nonnull MatrixReadable4x4D m,
-    final @Nonnull VectorReadable3D axis,
-    final @Nonnull MatrixM4x4D out)
-  {
-    return MatrixM4x4D.rotate(angle, m, context.m4a, axis, out);
-  }
-
   private static MatrixM4x4D rotate(
     final double angle,
     final @Nonnull MatrixReadable4x4D m,
@@ -1509,32 +1390,6 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM4x4D rotateInPlaceWithContext(
-    final Context context,
-    final double angle,
-    final @Nonnull MatrixM4x4D m,
-    final @Nonnull VectorReadable3D axis)
-  {
-    return MatrixM4x4D.rotate(angle, m, context.m4a, axis, m);
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>m</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory. The function assumes a right-handed coordinate system.
-   * 
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @return <code>m</code>
-   */
-
-  @Deprecated public static MatrixM4x4D rotateWithContext(
     final Context context,
     final double angle,
     final @Nonnull MatrixM4x4D m,
@@ -1646,46 +1501,6 @@ import com.io7m.jaux.functional.Option;
     final double r)
   {
     return MatrixM4x4D.scale(m, r, m);
-  }
-
-  /**
-   * Scale row <code>row</code> of the matrix <code>m</code> by <code>r</code>
-   * , saving the result to row <code>r</code> of <code>out</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory.
-   * 
-   * This is one of the three "elementary" operations defined on matrices.
-   * 
-   * @see <a
-   *      href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary
-   *      operations</a>.
-   * 
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row (0 <= row < 4).
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  @Deprecated public static MatrixM4x4D scaleRow(
-    final Context context,
-    final @Nonnull MatrixReadable4x4D m,
-    final int row,
-    final double r,
-    final @Nonnull MatrixM4x4D out)
-  {
-    return MatrixM4x4D.scaleRowUnsafe(
-      m,
-      MatrixM4x4D.rowCheck(row),
-      r,
-      context.va,
-      out);
   }
 
   /**
@@ -2305,7 +2120,7 @@ import com.io7m.jaux.functional.Option;
     final int row_a,
     final int row_b)
   {
-    return MatrixM4x4D.exchangeRows(context, m, row_a, row_b, m);
+    return MatrixM4x4D.exchangeRowsWithContext(context, m, row_a, row_b, m);
   }
 
   public MatrixM4x4D()
