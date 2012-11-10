@@ -19,6 +19,7 @@ package com.io7m.jtensors;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.io7m.jaux.ApproximatelyEqualDouble;
 import com.io7m.jaux.ApproximatelyEqualFloat;
 
 public class QuaternionM4FTest
@@ -748,6 +749,105 @@ public class QuaternionM4FTest
     Assert.assertTrue(0.0f == m.get(3, 1));
     Assert.assertTrue(0.0f == m.get(3, 2));
     Assert.assertTrue(1.0f == m.get(3, 3));
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMakeMatrixRotateX_90()
+  {
+    final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final QuaternionM4F qx = new QuaternionM4F();
+    QuaternionM4F.makeFromAxisAngle(axis_x, (float) Math.toRadians(90), qx);
+
+    final MatrixM4x4F mq = new MatrixM4x4F();
+    final MatrixM4x4F mr = new MatrixM4x4F();
+
+    QuaternionM4F.makeRotationMatrix(qx, mq);
+    MatrixM4x4F.rotateInPlace((float) Math.toRadians(90), mr, axis_x);
+
+    System.err.println("testMakeMatrixRotateX_90: mq: ");
+    System.err.println(mq);
+    System.err.println("testMakeMatrixRotateX_90: mr: ");
+    System.err.println(mr);
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final double x = mr.get(row, col);
+        final double y = mq.get(row, col);
+        final Double dx = Double.valueOf(x);
+        final Double dy = Double.valueOf(y);
+        System.err.println(String.format("%.16f\t%.16f", dx, dy));
+        ApproximatelyEqualDouble.approximatelyEqual(
+          dx.doubleValue(),
+          dy.doubleValue());
+      }
+    }
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMakeMatrixRotateY_90()
+  {
+    final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final QuaternionM4F qy = new QuaternionM4F();
+    QuaternionM4F.makeFromAxisAngle(axis_y, (float) Math.toRadians(90), qy);
+
+    final MatrixM4x4F mq = new MatrixM4x4F();
+    final MatrixM4x4F mr = new MatrixM4x4F();
+
+    QuaternionM4F.makeRotationMatrix(qy, mq);
+    MatrixM4x4F.rotateInPlace((float) Math.toRadians(90), mr, axis_y);
+
+    System.err.println("testMakeMatrixRotateY_90: mq: ");
+    System.err.println(mq);
+    System.err.println("testMakeMatrixRotateY_90: mr: ");
+    System.err.println(mr);
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final double x = mr.get(row, col);
+        final double y = mq.get(row, col);
+        final Double dx = Double.valueOf(x);
+        final Double dy = Double.valueOf(y);
+        System.err.println(String.format("%.16f\t%.16f", dx, dy));
+        ApproximatelyEqualDouble.approximatelyEqual(
+          dx.doubleValue(),
+          dy.doubleValue());
+      }
+    }
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMakeMatrixRotateZ_90()
+  {
+    final VectorI3F axis_z = new VectorI3F(0.0f, 0.0f, 1.0f);
+    final QuaternionM4F qz = new QuaternionM4F();
+    QuaternionM4F.makeFromAxisAngle(axis_z, (float) Math.toRadians(90), qz);
+
+    final MatrixM4x4F mq = new MatrixM4x4F();
+    final MatrixM4x4F mr = new MatrixM4x4F();
+
+    QuaternionM4F.makeRotationMatrix(qz, mq);
+    MatrixM4x4F.rotateInPlace((float) Math.toRadians(90), mr, axis_z);
+
+    System.err.println("testMakeMatrixRotateZ_90: mq: ");
+    System.err.println(mq);
+    System.err.println("testMakeMatrixRotateZ_90: mr: ");
+    System.err.println(mr);
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final double x = mr.get(row, col);
+        final double y = mq.get(row, col);
+        final Double dx = Double.valueOf(x);
+        final Double dy = Double.valueOf(y);
+        System.err.println(String.format("%.16f\t%.16f", dx, dy));
+        ApproximatelyEqualDouble.approximatelyEqual(
+          dx.doubleValue(),
+          dy.doubleValue());
+      }
+    }
   }
 
   @SuppressWarnings("static-method") @Test public void testMultiply()
