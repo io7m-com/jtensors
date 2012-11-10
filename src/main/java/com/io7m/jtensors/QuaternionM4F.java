@@ -423,6 +423,20 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Multiply the quaternion <code>q0</code> by the quaternion <code>q1</code>
+   * , saving the result to <code>q0</code>.
+   * 
+   * @see {@link QuaternionM4F#multiply(QuaternionM4F, QuaternionM4F, QuaternionM4F)}
+   */
+
+  public static @Nonnull QuaternionM4F multiplyInPlace(
+    final @Nonnull QuaternionM4F q0,
+    final @Nonnull QuaternionM4F q1)
+  {
+    return QuaternionM4F.multiply(q0, q1, q0);
+  }
+
+  /**
    * Returns a quaternion with the same orientation as <code>q</code> but with
    * magnitude equal to <code>1.0</code> in <code>out</code>. The function
    * returns the zero quaternion iff the input is the zero quaternion.

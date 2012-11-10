@@ -22,5 +22,9 @@ package com.io7m.jtensors;
 
 public interface VectorReadable4I extends VectorReadable3I
 {
+  /**
+   * Retrieve the W value of the given vector.
+   */
+
   int getWI();
 }

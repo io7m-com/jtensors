@@ -23,5 +23,9 @@ package com.io7m.jtensors;
 
 public interface VectorReadable3D extends VectorReadable2D
 {
+  /**
+   * Retrieve the Z value of the given vector.
+   */
+
   double getZD();
 }

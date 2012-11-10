@@ -23,5 +23,9 @@ package com.io7m.jtensors;
 
 public interface VectorReadable4F extends VectorReadable3F
 {
+  /**
+   * Retrieve the W value of the given vector.
+   */
+
   float getWF();
 }

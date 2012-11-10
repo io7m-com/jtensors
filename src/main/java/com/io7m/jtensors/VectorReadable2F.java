@@ -22,7 +22,15 @@ package com.io7m.jtensors;
 
 public interface VectorReadable2F
 {
+  /**
+   * Retrieve the X value of the given vector.
+   */
+
   float getXF();
+
+  /**
+   * Retrieve the Y value of the given vector.
+   */
 
   float getYF();
 }

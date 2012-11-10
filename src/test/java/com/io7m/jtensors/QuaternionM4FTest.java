@@ -793,6 +793,93 @@ public class QuaternionM4FTest
       0.8535533905932737f));
   }
 
+  @SuppressWarnings("static-method") @Test public void testMultiplyInPlace()
+  {
+    final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
+
+    final QuaternionM4F qx = new QuaternionM4F();
+    QuaternionM4F.makeFromAxisAngle(axis_x, (float) Math.toRadians(45), qx);
+    final QuaternionM4F qy = new QuaternionM4F();
+    QuaternionM4F.makeFromAxisAngle(axis_y, (float) Math.toRadians(45), qy);
+
+    /**
+     * The quaternion resulting from a 45 degree rotation around the global X
+     * axis, followed by a 45 degree rotation around the global Y axis.
+     */
+
+    final QuaternionM4F qr = new QuaternionM4F();
+    QuaternionM4F.multiplyInPlace(qr, qy);
+    QuaternionM4F.multiplyInPlace(qr, qx);
+    System.err.println("testMultiplyInPlace: " + qr);
+
+    /**
+     * Values obtained by checking against the results produced by Blender.
+     * 
+     * @see http://blender.org
+     */
+
+    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      qr.getXF(),
+      0.3535534f));
+    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      qr.getYF(),
+      0.3535534f));
+    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      qr.getZF(),
+      -0.14644663f));
+    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      qr.getWF(),
+      0.85355335f));
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMultiplyInPlaceOther()
+  {
+    final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorI3F axis_z = new VectorI3F(0.0f, 0.0f, 1.0f);
+
+    final QuaternionM4F qx = new QuaternionM4F();
+    QuaternionM4F.makeFromAxisAngle(axis_x, (float) Math.toRadians(45), qx);
+    final QuaternionM4F qy = new QuaternionM4F();
+    QuaternionM4F.makeFromAxisAngle(axis_y, (float) Math.toRadians(45), qy);
+    final QuaternionM4F qz = new QuaternionM4F();
+    QuaternionM4F.makeFromAxisAngle(axis_z, (float) Math.toRadians(45), qz);
+
+    /**
+     * The quaternion resulting from a 45 degree rotation around the global X
+     * axis, followed by a 45 degree rotation around the global Y axis,
+     * followed by a 45 degree rotation around the global Z axis.
+     */
+
+    final QuaternionM4F qr = new QuaternionM4F();
+    QuaternionM4F.multiplyInPlace(qr, qz);
+    QuaternionM4F.multiplyInPlace(qr, qy);
+    QuaternionM4F.multiplyInPlace(qr, qx);
+    System.err.println("testMultiplyInPlaceOther: " + qr);
+
+    /**
+     * Values obtained by checking against the results produced by Blender.
+     * 
+     * @see http://blender.org
+     */
+
+    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      qr.getXF(),
+      0.1913417153164435f));
+    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      qr.getYF(),
+      0.4619397784426109f));
+    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      qr.getZF(),
+      0.1913417153164436f));
+    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      qr.getWF(),
+      0.8446231923478736f));
+  }
+
   @SuppressWarnings("static-method") @Test public void testNormalizeSimple()
   {
     final QuaternionM4F v0 = new QuaternionM4F(8.0f, 0.0f, 0.0f, 0.0f);
