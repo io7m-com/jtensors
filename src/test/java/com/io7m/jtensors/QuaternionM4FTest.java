@@ -531,6 +531,32 @@ public class QuaternionM4FTest
 
   @SuppressWarnings("static-method") @Test public
     void
+    testMakeAxisAngleNormal()
+  {
+    for (int index = 0; index < 100; ++index) {
+      final VectorI3F axis_r =
+        new VectorI3F(
+          (float) Math.random(),
+          (float) Math.random(),
+          (float) Math.random());
+      final VectorI3F axis_n = VectorI3F.normalize(axis_r);
+
+      final QuaternionM4F q = new QuaternionM4F();
+      QuaternionM4F.makeFromAxisAngle(
+        axis_n,
+        (float) Math.toRadians(Math.random() * 360),
+        q);
+
+      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        QuaternionM4F.magnitude(q),
+        1.0f));
+
+      System.err.println("testMakeAxisAngleNormal: " + q);
+    }
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
     testMakeAxisAngleX_45()
   {
     final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
