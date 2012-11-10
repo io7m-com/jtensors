@@ -370,10 +370,14 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * Multiply the quaternion <code>q0</code> by the quaternion <code>q1</code>
    * , saving the result to <code>qr</code>.
    * 
+   * <p>
    * Note that this operation is not commutative.
+   * </p>
    * 
+   * <p>
    * The function is most often used to concatenate quaternions to combine
    * rotations. As an example, assuming that:
+   * </p>
    * 
    * <ul>
    * <li><code>qx</code> represents some rotation around the X axis</li>
@@ -381,9 +385,11 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * <li><code>qz</code> represents some rotation around the Z axis</li>
    * </ul>
    * 
+   * <p>
    * The following code produces a quaternion <code>qr</code> that represents
    * a rotation around the X axis, followed by a rotation around the Y axis,
    * followed by a rotation around the Z axis:
+   * </p>
    * 
    * <code>
    * QuaternionM4F qr = new QuaternionM4D();
@@ -426,7 +432,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * Multiply the quaternion <code>q0</code> by the quaternion <code>q1</code>
    * , saving the result to <code>q0</code>.
    * 
-   * @see {@link QuaternionM4F#multiply(QuaternionM4F, QuaternionM4F, QuaternionM4F)}
+   * @see QuaternionM4F#multiply(QuaternionM4F, QuaternionM4F, QuaternionM4F)
    */
 
   public static @Nonnull QuaternionM4F multiplyInPlace(

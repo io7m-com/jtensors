@@ -303,10 +303,14 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * Multiply the quaternion <code>q0</code> by the quaternion <code>q1</code>
    * .
    * 
+   * <p>
    * Note that this operation is not commutative.
+   * </p>
    * 
+   * <p>
    * The function is most often used to concatenate quaternions to combine
    * rotations. As an example, assuming that:
+   * </p>
    * 
    * <ul>
    * <li><code>qx</code> represents some rotation around the X axis</li>
@@ -314,9 +318,11 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * <li><code>qz</code> represents some rotation around the Z axis</li>
    * </ul>
    * 
+   * <p>
    * The following code produces a quaternion <code>qr1</code> that represents
    * a rotation around the X axis, followed by a rotation around the Y axis,
    * followed by a rotation around the Z axis:
+   * </p>
    * 
    * <code>
    * qr0 = QuaternionI4D.multiply(qy, qx);

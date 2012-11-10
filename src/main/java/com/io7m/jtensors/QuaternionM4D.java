@@ -369,10 +369,14 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * Multiply the quaternion <code>q0</code> by the quaternion <code>q1</code>
    * , saving the result to <code>qr</code>.
    * 
+   * <p>
    * Note that this operation is not commutative.
+   * </p>
    * 
+   * <p>
    * The function is most often used to concatenate quaternions to combine
    * rotations. As an example, assuming that:
+   * </p>
    * 
    * <ul>
    * <li><code>qx</code> represents some rotation around the X axis</li>
@@ -380,15 +384,17 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * <li><code>qz</code> represents some rotation around the Z axis</li>
    * </ul>
    * 
+   * <p>
    * The following code produces a quaternion <code>qr</code> that represents
    * a rotation around the X axis, followed by a rotation around the Y axis,
    * followed by a rotation around the Z axis:
+   * </p>
    * 
-   * <code>
+   * <pre>
    * QuaternionM4D qr = new QuaternionM4D();
    * QuaternionM4D.multiply(qy, qx, qr);
    * QuaternionM4D.multiply(qz, qr, qr);
-   * </code>
+   * </pre>
    * 
    * @param q0
    *          The left input quaternion
@@ -425,7 +431,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * Multiply the quaternion <code>q0</code> by the quaternion <code>q1</code>
    * , saving the result to <code>q0</code>.
    * 
-   * @see {@link QuaternionM4D#multiply(QuaternionM4D, QuaternionM4D, QuaternionM4D)}
+   * @see QuaternionM4D#multiply(QuaternionM4D, QuaternionM4D, QuaternionM4D)
    */
 
   public static @Nonnull QuaternionM4D multiplyInPlace(
