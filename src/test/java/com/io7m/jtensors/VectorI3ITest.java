@@ -113,6 +113,18 @@ public class VectorI3ITest
     Assert.assertEquals(0, v.z);
   }
 
+  @SuppressWarnings("static-method") @Test public void testInitVector()
+  {
+    final VectorI3I v = new VectorI3I(1, 2, 3);
+    Assert.assertEquals(1, v.x);
+    Assert.assertEquals(2, v.y);
+    Assert.assertEquals(3, v.z);
+    final VectorReadable3I w = new VectorI3I(v);
+    Assert.assertEquals(1, w.getXI());
+    Assert.assertEquals(2, w.getYI());
+    Assert.assertEquals(3, w.getZI());
+  }
+
   @SuppressWarnings("static-method") @Test public void testString()
   {
     final VectorI3I v = new VectorI3I(0, 1, 2);

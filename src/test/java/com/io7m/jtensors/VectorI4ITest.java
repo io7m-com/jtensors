@@ -123,6 +123,20 @@ public class VectorI4ITest
     Assert.assertEquals(1, v.w);
   }
 
+  @SuppressWarnings("static-method") @Test public void testInitVector()
+  {
+    final VectorI4I v = new VectorI4I(1, 2, 3, 4);
+    Assert.assertEquals(1, v.x);
+    Assert.assertEquals(2, v.y);
+    Assert.assertEquals(3, v.z);
+    Assert.assertEquals(4, v.w);
+    final VectorReadable4I w = new VectorI4I(v);
+    Assert.assertEquals(1, w.getXI());
+    Assert.assertEquals(2, w.getYI());
+    Assert.assertEquals(3, w.getZI());
+    Assert.assertEquals(4, w.getWI());
+  }
+
   @SuppressWarnings("static-method") @Test public void testString()
   {
     final VectorI4I v = new VectorI4I(0, 1, 2, 3);

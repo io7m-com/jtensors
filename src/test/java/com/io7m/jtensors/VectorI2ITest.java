@@ -103,6 +103,16 @@ public class VectorI2ITest
     Assert.assertEquals(0, v.y);
   }
 
+  @SuppressWarnings("static-method") @Test public void testInitVector()
+  {
+    final VectorI2I v = new VectorI2I(1, 2);
+    Assert.assertEquals(1, v.x);
+    Assert.assertEquals(2, v.y);
+    final VectorReadable2I w = new VectorI2I(v);
+    Assert.assertEquals(1, w.getXI());
+    Assert.assertEquals(2, w.getYI());
+  }
+
   @SuppressWarnings("static-method") @Test public void testString()
   {
     final VectorI2I v = new VectorI2I(0, 1);
