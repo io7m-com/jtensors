@@ -415,6 +415,36 @@ public class QuaternionI4DTest
       0.7071067811865475));
   }
 
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMakeMatrixIdentity()
+  {
+    final QuaternionI4D q = new QuaternionI4D();
+    final MatrixM4x4D m = new MatrixM4x4D();
+
+    QuaternionI4D.makeRotationMatrix(q, m);
+
+    Assert.assertTrue(1.0 == m.get(0, 0));
+    Assert.assertTrue(0.0 == m.get(0, 1));
+    Assert.assertTrue(0.0 == m.get(0, 2));
+    Assert.assertTrue(0.0 == m.get(0, 3));
+
+    Assert.assertTrue(0.0 == m.get(1, 0));
+    Assert.assertTrue(1.0 == m.get(1, 1));
+    Assert.assertTrue(0.0 == m.get(1, 2));
+    Assert.assertTrue(0.0 == m.get(1, 3));
+
+    Assert.assertTrue(0.0 == m.get(2, 0));
+    Assert.assertTrue(0.0 == m.get(2, 1));
+    Assert.assertTrue(1.0 == m.get(2, 2));
+    Assert.assertTrue(0.0 == m.get(2, 3));
+
+    Assert.assertTrue(0.0 == m.get(3, 0));
+    Assert.assertTrue(0.0 == m.get(3, 1));
+    Assert.assertTrue(0.0 == m.get(3, 2));
+    Assert.assertTrue(1.0 == m.get(3, 3));
+  }
+
   @SuppressWarnings("static-method") @Test public void testMultiply()
   {
     final VectorI3D axis_x = new VectorI3D(1.0, 0.0, 0.0);

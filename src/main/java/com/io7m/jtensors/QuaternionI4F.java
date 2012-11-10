@@ -22,23 +22,23 @@ import javax.annotation.concurrent.Immutable;
 import com.io7m.jaux.ApproximatelyEqualDouble;
 
 /**
- * A four-dimensional immutable quaternion type with double precision
+ * A four-dimensional immutable quaternion type with single precision
  * elements.
  * 
  * Values of this type are immutable and can therefore be safely accessed from
  * multiple threads.
  */
 
-@Immutable public final class QuaternionI4D implements QuaternionReadable4D
+@Immutable public final class QuaternionI4F implements QuaternionReadable4F
 {
   /**
    * The "identity" quaternion, [0.0 0.0 0.0 1.0]
    */
 
-  public final static @Nonnull QuaternionI4D IDENTITY;
+  public final static @Nonnull QuaternionI4F IDENTITY;
 
   static {
-    IDENTITY = new QuaternionI4D(0.0, 0.0, 0.0, 1.0);
+    IDENTITY = new QuaternionI4F(0.0f, 0.0f, 0.0f, 1.0f);
   }
 
   /**
@@ -53,15 +53,15 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return <code>(q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)</code>
    */
 
-  public static @Nonnull QuaternionI4D add(
-    final @Nonnull QuaternionI4D q0,
-    final @Nonnull QuaternionI4D q1)
+  public static @Nonnull QuaternionI4F add(
+    final @Nonnull QuaternionI4F q0,
+    final @Nonnull QuaternionI4F q1)
   {
-    final double x = q0.x + q1.x;
-    final double y = q0.y + q1.y;
-    final double z = q0.z + q1.z;
-    final double w = q0.w + q1.w;
-    return new QuaternionI4D(x, y, z, w);
+    final float x = q0.x + q1.x;
+    final float y = q0.y + q1.y;
+    final float z = q0.z + q1.z;
+    final float w = q0.w + q1.w;
+    return new QuaternionI4F(x, y, z, w);
   }
 
   /**
@@ -77,12 +77,12 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * 
    * @return true, iff <code>q0</code> is approximately equal to
    *         <code>q1</code> , within an appropriate degree of error for
-   *         double precision floating point values
+   *         single precision floating point values
    */
 
   public static boolean approximatelyEqual(
-    final @Nonnull QuaternionI4D q0,
-    final @Nonnull QuaternionI4D q1)
+    final @Nonnull QuaternionI4F q0,
+    final @Nonnull QuaternionI4F q1)
   {
     final boolean ex =
       ApproximatelyEqualDouble.approximatelyEqual(q0.x, q1.x);
@@ -104,14 +104,14 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return The conjugate of the input quaternion
    */
 
-  public static @Nonnull QuaternionI4D conjugate(
-    final @Nonnull QuaternionI4D q)
+  public static @Nonnull QuaternionI4F conjugate(
+    final @Nonnull QuaternionI4F q)
   {
-    final double x = -q.x;
-    final double y = -q.y;
-    final double z = -q.z;
-    final double w = q.w;
-    return new QuaternionI4D(x, y, z, w);
+    final float x = -q.x;
+    final float y = -q.y;
+    final float z = -q.z;
+    final float w = q.w;
+    return new QuaternionI4F(x, y, z, w);
   }
 
   /**
@@ -126,14 +126,14 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return The scalar product of the two quaternions
    */
 
-  public static double dotProduct(
-    final @Nonnull QuaternionI4D q0,
-    final @Nonnull QuaternionI4D q1)
+  public static float dotProduct(
+    final @Nonnull QuaternionI4F q0,
+    final @Nonnull QuaternionI4F q1)
   {
-    final double x = q0.x * q1.x;
-    final double y = q0.y * q1.y;
-    final double z = q0.z * q1.z;
-    final double w = q0.w * q1.w;
+    final float x = q0.x * q1.x;
+    final float y = q0.y * q1.y;
+    final float z = q0.z * q1.z;
+    final float w = q0.w * q1.w;
     return x + y + z + w;
   }
 
@@ -157,14 +157,14 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return <code>(1 - alpha) * q0 + alpha * q1</code>
    */
 
-  public static @Nonnull QuaternionI4D interpolateLinear(
-    final @Nonnull QuaternionI4D q0,
-    final @Nonnull QuaternionI4D q1,
-    final double alpha)
+  public static @Nonnull QuaternionI4F interpolateLinear(
+    final @Nonnull QuaternionI4F q0,
+    final @Nonnull QuaternionI4F q1,
+    final float alpha)
   {
-    final @Nonnull QuaternionI4D w0 = QuaternionI4D.scale(q0, 1.0 - alpha);
-    final @Nonnull QuaternionI4D w1 = QuaternionI4D.scale(q1, alpha);
-    return QuaternionI4D.add(w0, w1);
+    final @Nonnull QuaternionI4F w0 = QuaternionI4F.scale(q0, 1.0f - alpha);
+    final @Nonnull QuaternionI4F w1 = QuaternionI4F.scale(q1, alpha);
+    return QuaternionI4F.add(w0, w1);
   }
 
   /**
@@ -178,10 +178,10 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return The magnitude of the input quaternion
    */
 
-  public static double magnitude(
-    final @Nonnull QuaternionI4D q)
+  public static float magnitude(
+    final @Nonnull QuaternionI4F q)
   {
-    return Math.sqrt(QuaternionI4D.magnitudeSquared(q));
+    return (float) Math.sqrt(QuaternionI4F.magnitudeSquared(q));
   }
 
   /**
@@ -193,10 +193,10 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return The squared magnitude of the input quaternion
    */
 
-  public static double magnitudeSquared(
-    final @Nonnull QuaternionI4D q)
+  public static float magnitudeSquared(
+    final @Nonnull QuaternionI4F q)
   {
-    return QuaternionI4D.dotProduct(q, q);
+    return QuaternionI4F.dotProduct(q, q);
   }
 
   /**
@@ -217,17 +217,17 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return A quaternion representing the rotation
    */
 
-  public static @Nonnull QuaternionI4D makeFromAxisAngle(
-    final @Nonnull VectorReadable3D axis,
-    final double angle)
+  public static @Nonnull QuaternionI4F makeFromAxisAngle(
+    final @Nonnull VectorReadable3F axis,
+    final float angle)
   {
-    final double angle_r = angle * 0.5;
-    final double sa = Math.sin(angle_r);
-    final double x = axis.getXD() * sa;
-    final double y = axis.getYD() * sa;
-    final double z = axis.getZD() * sa;
-    final double w = Math.cos(angle_r);
-    return new QuaternionI4D(x, y, z, w);
+    final float angle_r = angle * 0.5f;
+    final float sa = (float) Math.sin(angle_r);
+    final float x = axis.getXF() * sa;
+    final float y = axis.getYF() * sa;
+    final float z = axis.getZF() * sa;
+    final float w = (float) Math.cos(angle_r);
+    return new QuaternionI4F(x, y, z, w);
   }
 
   /**
@@ -242,39 +242,39 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4D makeRotationMatrix(
-    final @Nonnull QuaternionI4D q,
-    final @Nonnull MatrixM4x4D m)
+  public static @Nonnull MatrixM4x4F makeRotationMatrix(
+    final @Nonnull QuaternionI4F q,
+    final @Nonnull MatrixM4x4F m)
   {
-    final double xx = q.x * q.x;
-    final double xy = q.x * q.y;
-    final double xz = q.x * q.z;
-    final double xw = q.x * q.w;
-    final double yy = q.y * q.y;
-    final double yz = q.y * q.z;
-    final double yw = q.y * q.w;
-    final double zz = q.z * q.z;
-    final double zw = q.z * q.w;
+    final float xx = q.x * q.x;
+    final float xy = q.x * q.y;
+    final float xz = q.x * q.z;
+    final float xw = q.x * q.w;
+    final float yy = q.y * q.y;
+    final float yz = q.y * q.z;
+    final float yw = q.y * q.w;
+    final float zz = q.z * q.z;
+    final float zw = q.z * q.w;
 
-    final double r0c0 = 1 - (2 * (yy + zz));
-    final double r1c0 = 2 * (xy - zw);
-    final double r2c0 = 2 * (xz + yw);
-    final double r3c0 = 0.0;
+    final float r0c0 = 1 - (2 * (yy + zz));
+    final float r1c0 = 2 * (xy - zw);
+    final float r2c0 = 2 * (xz + yw);
+    final float r3c0 = 0.0f;
 
-    final double r0c1 = 2 * (xy + zw);
-    final double r1c1 = 1 - (2 * (xx + zz));
-    final double r2c1 = 2 * (yz - xw);
-    final double r3c1 = 0.0;
+    final float r0c1 = 2 * (xy + zw);
+    final float r1c1 = 1 - (2 * (xx + zz));
+    final float r2c1 = 2 * (yz - xw);
+    final float r3c1 = 0.0f;
 
-    final double r0c2 = 2 * (xz - yw);
-    final double r1c2 = 2 * (yz + xw);
-    final double r2c2 = 1 - (2 * (xx + yy));
-    final double r3c2 = 0.0;
+    final float r0c2 = 2 * (xz - yw);
+    final float r1c2 = 2 * (yz + xw);
+    final float r2c2 = 1 - (2 * (xx + yy));
+    final float r3c2 = 0.0f;
 
-    final double r0c3 = 0.0;
-    final double r1c3 = 0.0;
-    final double r2c3 = 0.0;
-    final double r3c3 = 1.0;
+    final float r0c3 = 0.0f;
+    final float r1c3 = 0.0f;
+    final float r2c3 = 0.0f;
+    final float r3c3 = 1.0f;
 
     m.setUnsafe(0, 0, r0c0);
     m.setUnsafe(0, 1, r0c1);
@@ -319,8 +319,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * followed by a rotation around the Z axis:
    * 
    * <code>
-   * qr0 = QuaternionI4D.multiply(qy, qx);
-   * qr1 = QuaternionI4D.multiply(qz, qy);
+   * qr0 = QuaternionI4F.multiply(qy, qx);
+   * qr1 = QuaternionI4F.multiply(qz, qy);
    * </code>
    * 
    * @param q0
@@ -329,20 +329,20 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    *          The right input quaternion
    */
 
-  public static @Nonnull QuaternionI4D multiply(
-    final @Nonnull QuaternionI4D q0,
-    final @Nonnull QuaternionI4D q1)
+  public static @Nonnull QuaternionI4F multiply(
+    final @Nonnull QuaternionI4F q0,
+    final @Nonnull QuaternionI4F q1)
   {
-    final double rx =
+    final float rx =
       ((q0.w * q1.x) + (q0.x * q1.w) + (q0.y * q1.z)) - (q0.z * q1.y);
-    final double ry =
+    final float ry =
       ((q0.w * q1.y) - (q0.x * q1.z)) + (q0.y * q1.w) + (q0.z * q1.x);
-    final double rz =
+    final float rz =
       (((q0.w * q1.z) + (q0.x * q1.y)) - (q0.y * q1.x)) + (q0.z * q1.w);
-    final double rw =
+    final float rw =
       (q0.w * q1.w) - (q0.x * q1.x) - (q0.y * q1.y) - (q0.z * q1.z);
 
-    return new QuaternionI4D(rx, ry, rz, rw);
+    return new QuaternionI4F(rx, ry, rz, rw);
   }
 
   /**
@@ -356,13 +356,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    *         magnitude equal to <code>1.0</code>
    */
 
-  public static @Nonnull QuaternionI4D normalize(
-    final @Nonnull QuaternionI4D q)
+  public static @Nonnull QuaternionI4F normalize(
+    final @Nonnull QuaternionI4F q)
   {
-    final double m = QuaternionI4D.magnitudeSquared(q);
+    final float m = QuaternionI4F.magnitudeSquared(q);
     if (m > 0) {
-      final double reciprocal = 1.0 / Math.sqrt(m);
-      return QuaternionI4D.scale(q, reciprocal);
+      final float reciprocal = (float) (1.0f / Math.sqrt(m));
+      return QuaternionI4F.scale(q, reciprocal);
     }
     return q;
   }
@@ -378,11 +378,11 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return <code>(q.x * r, q.y * r, q.z * r, q.w * r)</code>
    */
 
-  public static @Nonnull QuaternionI4D scale(
-    final @Nonnull QuaternionI4D q,
-    final double r)
+  public static @Nonnull QuaternionI4F scale(
+    final @Nonnull QuaternionI4F q,
+    final float r)
   {
-    return new QuaternionI4D(q.x * r, q.y * r, q.z * r, q.w * r);
+    return new QuaternionI4F(q.x * r, q.y * r, q.z * r, q.w * r);
   }
 
   /**
@@ -397,41 +397,42 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return <code>(q0.x - q1.x, q0.y - q1.y, q0.z - q1.z)</code>
    */
 
-  public static @Nonnull QuaternionI4D subtract(
-    final @Nonnull QuaternionI4D q0,
-    final @Nonnull QuaternionI4D q1)
+  public static @Nonnull QuaternionI4F subtract(
+    final @Nonnull QuaternionI4F q0,
+    final @Nonnull QuaternionI4F q1)
   {
-    final double x = q0.x - q1.x;
-    final double y = q0.y - q1.y;
-    final double z = q0.z - q1.z;
-    final double w = q0.w - q1.w;
-    return new QuaternionI4D(x, y, z, w);
+    final float x = q0.x - q1.x;
+    final float y = q0.y - q1.y;
+    final float z = q0.z - q1.z;
+    final float w = q0.w - q1.w;
+    return new QuaternionI4F(x, y, z, w);
   }
 
-  private final double x;
-  private final double y;
-  private final double z;
-  private final double w;
+  private final float x;
+  private final float y;
+  private final float z;
+
+  private final float w;
 
   /**
    * Default constructor, initializing the quaternion with values
    * <code>[0.0, 0.0, 0.0, 1.0]</code>
    */
 
-  public QuaternionI4D()
+  public QuaternionI4F()
   {
-    this(0.0, 0.0, 0.0, 1.0);
+    this(0.0f, 0.0f, 0.0f, 1.0f);
   }
 
   /**
    * Construct a quaternion initialized with the given values.
    */
 
-  public QuaternionI4D(
-    final double x,
-    final double y,
-    final double z,
-    final double w)
+  public QuaternionI4F(
+    final float x,
+    final float y,
+    final float z,
+    final float w)
   {
     this.x = x;
     this.y = y;
@@ -444,10 +445,10 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * <code>q</code>.
    */
 
-  public QuaternionI4D(
-    final @Nonnull QuaternionReadable4D q)
+  public QuaternionI4F(
+    final @Nonnull QuaternionReadable4F q)
   {
-    this(q.getXD(), q.getYD(), q.getZD(), q.getWD());
+    this(q.getXF(), q.getYF(), q.getZF(), q.getWF());
   }
 
   @Override public boolean equals(
@@ -462,38 +463,38 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final @Nonnull QuaternionI4D other = (QuaternionI4D) obj;
-    if (Double.doubleToLongBits(this.w) != Double.doubleToLongBits(other.w)) {
+    final QuaternionI4F other = (QuaternionI4F) obj;
+    if (Float.floatToIntBits(this.w) != Float.floatToIntBits(other.w)) {
       return false;
     }
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
+    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
       return false;
     }
-    if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
+    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
       return false;
     }
-    if (Double.doubleToLongBits(this.z) != Double.doubleToLongBits(other.z)) {
+    if (Float.floatToIntBits(this.z) != Float.floatToIntBits(other.z)) {
       return false;
     }
     return true;
   }
 
-  @Override public double getWD()
+  @Override public float getWF()
   {
     return this.w;
   }
 
-  @Override public double getXD()
+  @Override public float getXF()
   {
     return this.x;
   }
 
-  @Override public double getYD()
+  @Override public float getYF()
   {
     return this.y;
   }
 
-  @Override public double getZD()
+  @Override public float getZF()
   {
     return this.z;
   }
@@ -502,22 +503,17 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   {
     final int prime = 31;
     int result = 1;
-    long temp;
-    temp = Double.doubleToLongBits(this.w);
-    result = (prime * result) + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(this.x);
-    result = (prime * result) + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(this.y);
-    result = (prime * result) + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(this.z);
-    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    result = (prime * result) + Float.floatToIntBits(this.w);
+    result = (prime * result) + Float.floatToIntBits(this.x);
+    result = (prime * result) + Float.floatToIntBits(this.y);
+    result = (prime * result) + Float.floatToIntBits(this.z);
     return result;
   }
 
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("[QuaternionI4D ");
+    builder.append("[QuaternionI4F ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);
@@ -528,4 +524,5 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     builder.append("]");
     return builder.toString();
   }
+
 }

@@ -2220,7 +2220,14 @@ import com.io7m.jaux.functional.Option;
     return this;
   }
 
-  private MatrixM4x4F setUnsafe(
+  /**
+   * Set the value at row <code>row</code> and <code>column</code> to
+   * <code>value</code> without bounds checking.
+   * 
+   * This function is only accessible by code in the same package as this.
+   */
+
+  MatrixM4x4F setUnsafe(
     final int row,
     final int column,
     final float value)
