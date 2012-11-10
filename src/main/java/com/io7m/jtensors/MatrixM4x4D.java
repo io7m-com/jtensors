@@ -36,14 +36,23 @@ import com.io7m.jaux.functional.Option;
 {
   /**
    * The Context type contains the minimum storage required for all of the
-   * functions of the MatrixM4x4D class. The purpose of the class is to allow
-   * applications to allocate all storage ahead of time in order to allow
-   * functions in the class to avoid allocating memory (not including stack
-   * space) for intermediate calculations. This can reduce garbage collection
-   * in speed critical code.
+   * functions of the <code>MatrixM4x4D</code> class.
+   * 
+   * <p>
+   * The purpose of the class is to allow applications to allocate all storage
+   * ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical code.
+   * </p>
+   * 
+   * <p>
+   * The user should allocate one <code>Context</code> value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes
+   * a <code>Context</code> value will not generate garbage.
+   * </p>
    */
 
-  public static final class Context
+  @NotThreadSafe public static final class Context
   {
     final @Nonnull MatrixM4x4D m4a = new MatrixM4x4D();
     final @Nonnull VectorM4D   va  = new VectorM4D();
