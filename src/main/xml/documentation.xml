@@ -37,6 +37,29 @@
           in computer graphics applications.
         </s:paragraph>
       </s:subsection>
+
+      <s:subsection>
+        <s:subsection-title>Efficiency</s:subsection-title>
+        <s:paragraph>
+          The package uses simple and efficient algorithms for all operations. The
+          package also provides matrices that are backed by direct memory, allowing
+          for zero-copy sharing of structures with native code.
+        </s:paragraph>
+        <s:paragraph>
+          Many of the matrix functions also provide interfaces that allow for
+          preallocation of all storage, reducing garbage collector pressure in
+          code with soft-realtime constraints.
+        </s:paragraph>
+      </s:subsection>
+
+      <s:subsection>
+        <s:subsection-title>Correctness</s:subsection-title>
+        <s:paragraph>
+          The package includes a large battery of automated tests that attempt to verify
+          the correctness of the included implementations. As of the time of writing,
+          the tests manage 100% coverage for all code.
+        </s:paragraph>
+      </s:subsection>
     </s:section>
 
     <s:section>
