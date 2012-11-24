@@ -19,7 +19,7 @@
 <s:document
   xmlns:s="http://www.io7m.com/schemas/structural/1.0.0"
   xmlns:xi="http://www.w3.org/2001/XInclude">
-  <s:document-title>io7m-jtensors 4.0.0 Documentation</s:document-title>
+  <s:document-title>io7m-jtensors 4.1.0 Documentation</s:document-title>
   <s:document-style>documentation.css</s:document-style>
   <s:document-contents/>
 
@@ -86,7 +86,7 @@
           <s:verbatim type="example"><![CDATA[<dependency>
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors</artifactId>
-  <version>4.0.0</version>
+  <version>4.1.0</version>
 </dependency>]]></s:verbatim>
         </s:paragraph>
       </s:subsection>
