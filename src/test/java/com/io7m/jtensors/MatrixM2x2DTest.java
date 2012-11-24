@@ -2,7 +2,6 @@ package com.io7m.jtensors;
 
 import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
-import java.nio.ReadOnlyBufferException;
 
 import junit.framework.Assert;
 
@@ -151,26 +150,6 @@ public class MatrixM2x2DTest
     final DoubleBuffer b = MatrixM2x2D.doubleBuffer(m);
 
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
-  }
-
-  @SuppressWarnings("static-method") @Test(
-    expected = ReadOnlyBufferException.class) public
-    void
-    testBufferReadOnly()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-    final DoubleBuffer b = MatrixM2x2D.doubleBuffer(m);
-    b.put(0, 0.0f);
-  }
-
-  @SuppressWarnings("static-method") @Test(
-    expected = ReadOnlyBufferException.class) public
-    void
-    testBufferReadOnlyInterface()
-  {
-    final MatrixM2x2D m = new MatrixM2x2D();
-    final DoubleBuffer b = m.getDoubleBuffer();
-    b.put(0, 0.0f);
   }
 
   @SuppressWarnings("static-method") @Test public void testCopy()
@@ -811,7 +790,6 @@ public class MatrixM2x2DTest
     {
       final DoubleBuffer b = MatrixM2x2D.doubleBuffer(m);
 
-      Assert.assertTrue(b.isReadOnly());
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
 
       Assert.assertTrue(b.get(0) == 0.0);

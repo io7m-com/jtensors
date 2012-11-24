@@ -409,7 +409,7 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
-   * Return a read-only view of the buffer that backs this matrix.
+   * Return a view of the buffer that backs this matrix.
    * 
    * @param m
    *          The input matrix.
@@ -418,9 +418,7 @@ import com.io7m.jaux.functional.Option;
   public static FloatBuffer floatBuffer(
     final @Nonnull MatrixM4x4F m)
   {
-    final ByteBuffer b =
-      m.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
-    return b.asFloatBuffer();
+    return m.view;
   }
 
   /**
@@ -2186,9 +2184,7 @@ import com.io7m.jaux.functional.Option;
 
   @Override public FloatBuffer getFloatBuffer()
   {
-    final ByteBuffer b =
-      this.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
-    return b.asFloatBuffer();
+    return this.view;
   }
 
   @Override public float getRowColumnF(

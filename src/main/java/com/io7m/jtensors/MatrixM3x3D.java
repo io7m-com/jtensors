@@ -218,7 +218,7 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
-   * Return a read-only view of the buffer that backs this matrix.
+   * Return a view of the buffer that backs this matrix.
    * 
    * @param m
    *          The input matrix.
@@ -227,9 +227,7 @@ import com.io7m.jaux.functional.Option;
   public static DoubleBuffer doubleBuffer(
     final @Nonnull MatrixM3x3D m)
   {
-    final ByteBuffer b =
-      m.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
-    return b.asDoubleBuffer();
+    return m.view;
   }
 
   /**
@@ -1016,9 +1014,7 @@ import com.io7m.jaux.functional.Option;
 
   @Override public DoubleBuffer getDoubleBuffer()
   {
-    final ByteBuffer b =
-      this.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
-    return b.asDoubleBuffer();
+    return this.view;
   }
 
   @Override public double getRowColumnD(
