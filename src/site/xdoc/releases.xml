@@ -179,6 +179,56 @@
               <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-3.0.0.zip">io7m-jtensors-3.0.0.zip</a>
             </td>
           </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-11-24</td>
+            <td class="page_table_column">122590</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0-sources.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0-sources.jar">io7m-jtensors-4.0.0-sources.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-11-24</td>
+            <td class="page_table_column">123921</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0.jar">io7m-jtensors-4.0.0.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-11-24</td>
+            <td class="page_table_column">423164</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0-javadoc.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0-javadoc.jar">io7m-jtensors-4.0.0-javadoc.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-11-24</td>
+            <td class="page_table_column">445443</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0-documentation.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0-documentation.zip">io7m-jtensors-4.0.0-documentation.zip</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-11-24</td>
+            <td class="page_table_column">260292</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0.zip">io7m-jtensors-4.0.0.zip</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -247,6 +297,19 @@
               <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-3.0.0-documentation.zip">io7m-jtensors-3.0.0-documentation.zip</a>
             </td>
           </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-11-24</td>
+            <td class="page_table_column">445443</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0-documentation.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://io7m.com/software/jtensors/doc/4.0.0/d1.xhtml">io7m-jtensors 4.0.0</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.0.0-documentation.zip">io7m-jtensors-4.0.0-documentation.zip</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -254,6 +317,14 @@
     <section name="Changes">
 <table xmlns="http://www.w3.org/1999/xhtml" class="changelog page_table"
        summary="Changes">
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-11-24</td>
+      <td class="page_table_column">Release: io7m-jtensors 4.0.0</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-11-24</td>
+      <td class="page_table_column">Code fix: Fix serious API mistake: The JRE will allocate new read-only buffers with asReadOnlyBuffer(). The floatBuffer() and doubleBuffer() methods of matrices no longer guarantee read-only semantics, as this requires expensive reallocations.</td>
+   </tr>
    <tr class="page_table_row">
       <td class="page_table_column">2012-11-10</td>
       <td class="page_table_column">Release: io7m-jtensors 3.0.0</td>
