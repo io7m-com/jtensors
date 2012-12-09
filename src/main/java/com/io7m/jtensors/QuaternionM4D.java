@@ -161,13 +161,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull QuaternionM4D copy(
-    final @Nonnull QuaternionM4D q,
+    final @Nonnull QuaternionReadable4D q,
     final @Nonnull QuaternionM4D out)
   {
-    out.x = q.x;
-    out.y = q.y;
-    out.z = q.z;
-    out.w = q.w;
+    out.x = q.getXD();
+    out.y = q.getYD();
+    out.z = q.getZD();
+    out.w = q.getWD();
     return out;
   }
 

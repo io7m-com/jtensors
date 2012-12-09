@@ -162,13 +162,13 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull QuaternionM4F copy(
-    final @Nonnull QuaternionM4F q,
+    final @Nonnull QuaternionReadable4F q,
     final @Nonnull QuaternionM4F out)
   {
-    out.x = q.x;
-    out.y = q.y;
-    out.z = q.z;
-    out.w = q.w;
+    out.x = q.getXF();
+    out.y = q.getYF();
+    out.z = q.getZF();
+    out.w = q.getWF();
     return out;
   }
 
