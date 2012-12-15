@@ -21,6 +21,7 @@ import javax.annotation.concurrent.Immutable;
 
 import com.io7m.jaux.ApproximatelyEqualDouble;
 import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.functional.Pair;
 
 /**
  * A three-dimensional immutable vector type with single precision elements.
@@ -375,6 +376,31 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * .
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * 
+   * @since 4.2.0
+   */
+
+  public static @Nonnull Pair<VectorI3F, VectorI3F> orthoNormalize(
+    final @Nonnull VectorI3F v0,
+    final @Nonnull VectorI3F v1)
+  {
+    final VectorI3F v0n = VectorI3F.normalize(v0);
+    final VectorI3F projection =
+      VectorI3F.scale(v0n, VectorI3F.dotProduct(v1, v0n));
+    final VectorI3F vr =
+      VectorI3F.normalize(VectorI3F.subtract(v1, projection));
+    return new Pair<VectorI3F, VectorI3F>(v0n, vr);
+  }
+
+  /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>.
    * 
@@ -429,6 +455,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
 
   public final float                     x;
   public final float                     y;
+
   public final float                     z;
 
   /**

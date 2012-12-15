@@ -719,6 +719,29 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Orthonormalize and the vectors <code>v0</code> and <code>v1</code>,
+   * modifying them in-place.
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @since 4.2.0
+   */
+
+  public static void orthoNormalizeInPlace(
+    final @Nonnull VectorM4D v0,
+    final @Nonnull VectorM4D v1)
+  {
+    final VectorM4D projection = new VectorM4D();
+
+    VectorM4D.normalizeInPlace(v0);
+    VectorM4D.scale(v0, VectorM4D.dotProduct(v1, v0), projection);
+    VectorM4D.subtractInPlace(v1, projection);
+    VectorM4D.normalizeInPlace(v1);
+  }
+
+  /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>, saving the result in <code>r</code>.
    * 

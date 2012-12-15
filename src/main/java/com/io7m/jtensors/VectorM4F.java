@@ -720,6 +720,29 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   }
 
   /**
+   * Orthonormalize and the vectors <code>v0</code> and <code>v1</code>,
+   * modifying them in-place.
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @since 4.2.0
+   */
+
+  public static void orthoNormalizeInPlace(
+    final @Nonnull VectorM4F v0,
+    final @Nonnull VectorM4F v1)
+  {
+    final VectorM4F projection = new VectorM4F();
+
+    VectorM4F.normalizeInPlace(v0);
+    VectorM4F.scale(v0, VectorM4F.dotProduct(v1, v0), projection);
+    VectorM4F.subtractInPlace(v1, projection);
+    VectorM4F.normalizeInPlace(v1);
+  }
+
+  /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>, saving the result in <code>r</code>.
    * 
@@ -839,6 +862,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   public float x = 0.0f;
   public float y = 0.0f;
   public float z = 0.0f;
+
   public float w = 1.0f;
 
   /**

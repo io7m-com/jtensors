@@ -20,6 +20,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.functional.Pair;
 
 public class VectorI4FTest
 {
@@ -499,6 +500,16 @@ public class VectorI4FTest
   {
     final VectorI4F v0 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
     VectorI4F.approximatelyEqual(VectorI4F.normalize(v0), v0);
+  }
+
+  @SuppressWarnings("static-method") @Test public void testOrthonormalize()
+  {
+    final VectorI4F v0 = new VectorI4F(0, 1, 0, 0);
+    final VectorI4F v1 = new VectorI4F(0.5f, 0.5f, 0, 0);
+    final Pair<VectorI4F, VectorI4F> on = VectorI4F.orthoNormalize(v0, v1);
+
+    Assert.assertEquals(v0, on.first);
+    Assert.assertEquals(new VectorI4F(1, 0, 0, 0), on.second);
   }
 
   @SuppressWarnings("static-method") @Test public

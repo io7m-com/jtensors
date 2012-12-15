@@ -20,6 +20,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.functional.Pair;
 
 /**
  * A three-dimensional immutable vector type with double precision elements.
@@ -41,7 +42,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
+   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z *
+   *         r))</code>
    */
 
   public static @Nonnull VectorI3D addScaled(
@@ -83,7 +85,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   /**
    * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive.
+   * <code>[minimum
+   * .. maximum]</code> inclusive.
    * 
    * @param v
    *          The input vector
@@ -119,7 +122,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
+   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y,
+   *         minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
   public static @Nonnull VectorI3D clampByVector(
@@ -164,7 +168,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
+   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z,
+   *         maximum.z))</code>
    */
 
   public static @Nonnull VectorI3D clampMaximumByVector(
@@ -179,7 +184,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   /**
    * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive.
+   * <code>[minimum
+   * .. Infinity]</code> inclusive.
    * 
    * @param v
    *          The input vector
@@ -209,7 +215,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @param minimum
    *          The vector containing the minimum acceptable values
    * 
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
+   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
+   *         minimum.z))</code>
    */
 
   public static @Nonnull VectorI3D clampMinimumByVector(
@@ -374,6 +381,31 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * .
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * 
+   * @since 4.2.0
+   */
+
+  public static @Nonnull Pair<VectorI3D, VectorI3D> orthoNormalize(
+    final @Nonnull VectorI3D v0,
+    final @Nonnull VectorI3D v1)
+  {
+    final VectorI3D v0n = VectorI3D.normalize(v0);
+    final VectorI3D projection =
+      VectorI3D.scale(v0n, VectorI3D.dotProduct(v1, v0n));
+    final VectorI3D vr =
+      VectorI3D.normalize(VectorI3D.subtract(v1, projection));
+    return new Pair<VectorI3D, VectorI3D>(v0n, vr);
+  }
+
+  /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>.
    * 
@@ -427,9 +459,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   public final double                    x;
-
   public final double                    y;
-
   public final double                    z;
 
   /**
@@ -473,8 +503,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
-   * Default constructor, initializing the vector with values
-   * <code>[0.0, 0.0, 0.0]</code>.
+   * Default constructor, initializing the vector with values <code>[0.0, 0.0,
+   * 0.0]</code>.
    */
 
   public VectorI3D()

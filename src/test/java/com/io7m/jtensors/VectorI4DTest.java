@@ -20,6 +20,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.functional.Pair;
 
 public class VectorI4DTest
 {
@@ -507,6 +508,16 @@ public class VectorI4DTest
   {
     final VectorI4D v0 = new VectorI4D(0.0, 0.0, 0.0, 0.0);
     VectorI4D.approximatelyEqual(VectorI4D.normalize(v0), v0);
+  }
+
+  @SuppressWarnings("static-method") @Test public void testOrthonormalize()
+  {
+    final VectorI4D v0 = new VectorI4D(0, 1, 0, 0);
+    final VectorI4D v1 = new VectorI4D(0.5, 0.5, 0, 0);
+    final Pair<VectorI4D, VectorI4D> on = VectorI4D.orthoNormalize(v0, v1);
+
+    Assert.assertEquals(v0, on.first);
+    Assert.assertEquals(new VectorI4D(1, 0, 0, 0), on.second);
   }
 
   @SuppressWarnings("static-method") @Test public

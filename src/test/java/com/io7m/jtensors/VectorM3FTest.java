@@ -863,6 +863,17 @@ public class VectorM3FTest
     Assert.assertTrue(m == 1.0);
   }
 
+  @SuppressWarnings("static-method") @Test public void testOrthonormalize()
+  {
+    final VectorM3F v0 = new VectorM3F(0, 1, 0);
+    final VectorM3F v1 = new VectorM3F(0.5f, 0.5f, 0);
+
+    VectorM3F.orthoNormalizeInPlace(v0, v1);
+
+    Assert.assertEquals(new VectorM3F(0, 1, 0), v0);
+    Assert.assertEquals(new VectorM3F(1, 0, 0), v1);
+  }
+
   @SuppressWarnings("static-method") @Test public
     void
     testProjectionPerpendicularZero()

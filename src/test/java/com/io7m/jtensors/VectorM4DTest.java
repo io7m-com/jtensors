@@ -934,6 +934,17 @@ public class VectorM4DTest
     Assert.assertTrue(m == 1.0);
   }
 
+  @SuppressWarnings("static-method") @Test public void testOrthonormalize()
+  {
+    final VectorM4D v0 = new VectorM4D(0, 1, 0, 0);
+    final VectorM4D v1 = new VectorM4D(0.5, 0.5, 0, 0);
+
+    VectorM4D.orthoNormalizeInPlace(v0, v1);
+
+    Assert.assertEquals(new VectorM4D(0, 1, 0, 0), v0);
+    Assert.assertEquals(new VectorM4D(1, 0, 0, 0), v1);
+  }
+
   @SuppressWarnings("static-method") @Test public
     void
     testProjectionPerpendicularZero()

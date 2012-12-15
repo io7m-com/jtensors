@@ -20,6 +20,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.functional.Pair;
 
 /**
  * A four-dimensional immutable vector type with double precision elements.
@@ -360,6 +361,31 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * .
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * 
+   * @since 4.2.0
+   */
+
+  public static @Nonnull Pair<VectorI4D, VectorI4D> orthoNormalize(
+    final @Nonnull VectorI4D v0,
+    final @Nonnull VectorI4D v1)
+  {
+    final VectorI4D v0n = VectorI4D.normalize(v0);
+    final VectorI4D projection =
+      VectorI4D.scale(v0n, VectorI4D.dotProduct(v1, v0n));
+    final VectorI4D vr =
+      VectorI4D.normalize(VectorI4D.subtract(v1, projection));
+    return new Pair<VectorI4D, VectorI4D>(v0n, vr);
+  }
+
+  /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>.
    * 
@@ -415,6 +441,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   public final double                    x;
   public final double                    y;
   public final double                    z;
+
   public final double                    w;
 
   /**
