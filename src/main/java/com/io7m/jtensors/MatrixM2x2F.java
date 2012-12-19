@@ -120,10 +120,6 @@ import com.io7m.jaux.functional.Option;
    * .
    * </p>
    * 
-   * @see <a
-   *      href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary
-   *      operations</a>.
-   * 
    * @param m
    *          The input matrix.
    * @param row_a
