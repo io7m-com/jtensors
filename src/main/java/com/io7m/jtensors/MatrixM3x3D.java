@@ -26,14 +26,57 @@ import javax.annotation.concurrent.NotThreadSafe;
 import com.io7m.jaux.functional.Option;
 
 /**
+ * <p>
  * A 3x3 mutable matrix type with double precision elements.
- * 
+ * </p>
+ * <p>
+ * Values of type <code>MatrixM3x3D</code> are backed by direct memory, with
+ * the rows and columns of the matrices being stored in column-major format.
+ * This allows the matrices to be passed to OpenGL directly, without requiring
+ * transposition.
+ * </p>
+ * <p>
  * Values of this type cannot be accessed safely from multiple threads without
  * explicit synchronization.
+ * </p>
+ * <p>
+ * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed for
+ * the derivations of most of the code in this class (ISBN: 1-58450-277-0).
+ * </p>
  */
 
 @NotThreadSafe public final class MatrixM3x3D implements MatrixReadable3x3D
 {
+  /**
+   * The Context type contains the minimum storage required for all of the
+   * functions of the <code>MatrixM3x3D</code> class.
+   * 
+   * <p>
+   * The purpose of the class is to allow applications to allocate all storage
+   * ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical code.
+   * </p>
+   * 
+   * <p>
+   * The user should allocate one <code>Context</code> value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes
+   * a <code>Context</code> value will not generate garbage.
+   * </p>
+   * 
+   * @since 5.0.0
+   */
+
+  @NotThreadSafe public static final class Context
+  {
+    final @Nonnull MatrixM3x3D m4a = new MatrixM3x3D();
+
+    public Context()
+    {
+
+    }
+  }
+
   private static final double[] identity_row_0 = { 1.0, 0.0, 0.0 };
   private static final double[] identity_row_1 = { 0.0, 1.0, 0.0 };
   private static final double[] identity_row_2 = { 0.0, 0.0, 1.0 };
@@ -381,29 +424,41 @@ import com.io7m.jaux.functional.Option;
 
     final double d_inv = 1 / d;
 
-    final double r0c0 = m.getRowColumnD(0, 0);
-    final double r0c1 = m.getRowColumnD(0, 1);
-    final double r0c2 = m.getRowColumnD(0, 2);
+    final double orig_r0c0 = m.getRowColumnD(0, 0);
+    final double orig_r0c1 = m.getRowColumnD(0, 1);
+    final double orig_r0c2 = m.getRowColumnD(0, 2);
 
-    final double r1c0 = m.getRowColumnD(1, 0);
-    final double r1c1 = m.getRowColumnD(1, 1);
-    final double r1c2 = m.getRowColumnD(1, 2);
+    final double orig_r1c0 = m.getRowColumnD(1, 0);
+    final double orig_r1c1 = m.getRowColumnD(1, 1);
+    final double orig_r1c2 = m.getRowColumnD(1, 2);
 
-    final double r2c0 = m.getRowColumnD(2, 0);
-    final double r2c1 = m.getRowColumnD(2, 1);
-    final double r2c2 = m.getRowColumnD(2, 2);
+    final double orig_r2c0 = m.getRowColumnD(2, 0);
+    final double orig_r2c1 = m.getRowColumnD(2, 1);
+    final double orig_r2c2 = m.getRowColumnD(2, 2);
 
-    MatrixM3x3D.set(out, 0, 0, (r1c1 * r2c2) - (r1c2 * r2c1));
-    MatrixM3x3D.set(out, 0, 1, (r0c2 * r2c1) - (r0c1 * r2c2));
-    MatrixM3x3D.set(out, 0, 2, (r0c1 * r1c2) - (r0c2 * r1c1));
+    final double r0c0 = (orig_r1c1 * orig_r2c2) - (orig_r1c2 * orig_r2c1);
+    final double r0c1 = (orig_r0c2 * orig_r2c1) - (orig_r0c1 * orig_r2c2);
+    final double r0c2 = (orig_r0c1 * orig_r1c2) - (orig_r0c2 * orig_r1c1);
 
-    MatrixM3x3D.set(out, 1, 0, (r1c2 * r2c0) - (r1c0 * r2c2));
-    MatrixM3x3D.set(out, 1, 1, (r0c0 * r2c2) - (r0c2 * r2c0));
-    MatrixM3x3D.set(out, 1, 2, (r0c2 * r1c0) - (r0c0 * r1c2));
+    final double r1c0 = (orig_r1c2 * orig_r2c0) - (orig_r1c0 * orig_r2c2);
+    final double r1c1 = (orig_r0c0 * orig_r2c2) - (orig_r0c2 * orig_r2c0);
+    final double r1c2 = (orig_r0c2 * orig_r1c0) - (orig_r0c0 * orig_r1c2);
 
-    MatrixM3x3D.set(out, 2, 0, (r1c0 * r2c1) - (r1c1 * r2c0));
-    MatrixM3x3D.set(out, 2, 1, (r0c1 * r2c0) - (r0c0 * r2c1));
-    MatrixM3x3D.set(out, 2, 2, (r0c0 * r1c1) - (r0c1 * r1c0));
+    final double r2c0 = (orig_r1c0 * orig_r2c1) - (orig_r1c1 * orig_r2c0);
+    final double r2c1 = (orig_r0c1 * orig_r2c0) - (orig_r0c0 * orig_r2c1);
+    final double r2c2 = (orig_r0c0 * orig_r1c1) - (orig_r0c1 * orig_r1c0);
+
+    MatrixM3x3D.set(out, 0, 0, r0c0);
+    MatrixM3x3D.set(out, 0, 1, r0c1);
+    MatrixM3x3D.set(out, 0, 2, r0c2);
+
+    MatrixM3x3D.set(out, 1, 0, r1c0);
+    MatrixM3x3D.set(out, 1, 1, r1c1);
+    MatrixM3x3D.set(out, 1, 2, r1c2);
+
+    MatrixM3x3D.set(out, 2, 0, r2c0);
+    MatrixM3x3D.set(out, 2, 1, r2c1);
+    MatrixM3x3D.set(out, 2, 2, r2c2);
 
     MatrixM3x3D.scaleInPlace(out, d_inv);
 
@@ -428,6 +483,108 @@ import com.io7m.jaux.functional.Option;
     final @Nonnull MatrixM3x3D m)
   {
     return MatrixM3x3D.invert(m, m);
+  }
+
+  /**
+   * <p>
+   * Generate and return a matrix that represents a rotation of
+   * <code>angle</code> radians around the axis <code>axis</code>.
+   * </p>
+   * <p>
+   * The function assumes a right-handed coordinate system and therefore a
+   * positive rotation around any axis represents a counter-clockwise rotation
+   * around that axis.
+   * </p>
+   * 
+   * @since 5.0.0
+   * @param angle
+   *          The angle in radians.
+   * @param axis
+   *          The axis.
+   */
+
+  public static MatrixM3x3D makeRotation(
+    final double angle,
+    final @Nonnull VectorReadable3D axis)
+  {
+    final @Nonnull MatrixM3x3D out = new MatrixM3x3D();
+    MatrixM3x3D.makeRotation(angle, axis, out);
+    out.view.rewind();
+    return out;
+  }
+
+  /**
+   * <p>
+   * Generate a matrix that represents a rotation of <code>angle</code>
+   * radians around the axis <code>axis</code> and save to <code>out</code>.
+   * </p>
+   * <p>
+   * The function assumes a right-handed coordinate system and therefore a
+   * positive rotation around any axis represents a counter-clockwise rotation
+   * around that axis.
+   * </p>
+   * 
+   * @since 5.0.0
+   * @param angle
+   *          The angle in radians.
+   * @param axis
+   *          The axis.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3D makeRotation(
+    final double angle,
+    final @Nonnull VectorReadable3D axis,
+    final @Nonnull MatrixM3x3D out)
+  {
+    final double axis_x = axis.getXD();
+    final double axis_y = axis.getYD();
+    final double axis_z = axis.getZD();
+
+    final double s = Math.sin(angle);
+    final double c = Math.cos(angle);
+    final double t = 1 - c;
+
+    final double tx_sq = t * (axis_x * axis_x);
+    final double ty_sq = t * (axis_y * axis_y);
+    final double tz_sq = t * (axis_z * axis_z);
+
+    final double txy = t * (axis_x * axis_y);
+    final double txz = t * (axis_x * axis_z);
+    final double tyz = t * (axis_y * axis_z);
+
+    final double sx = s * axis_x;
+    final double sy = s * axis_y;
+    final double sz = s * axis_z;
+
+    final double r0c0 = tx_sq + c;
+    final double r0c1 = txy - sz;
+    final double r0c2 = txz + sy;
+
+    final double r1c0 = txy + sz;
+    final double r1c1 = ty_sq + c;
+    final double r1c2 = tyz - sx;
+
+    final double r2c0 = txz - sy;
+    final double r2c1 = tyz + sx;
+    final double r2c2 = tz_sq + c;
+
+    out.setUnsafe(0, 0, r0c0);
+    out.setUnsafe(0, 1, r0c1);
+    out.setUnsafe(0, 2, r0c2);
+
+    out.setUnsafe(1, 0, r1c0);
+    out.setUnsafe(1, 1, r1c1);
+    out.setUnsafe(1, 2, r1c2);
+
+    out.setUnsafe(2, 0, r2c0);
+    out.setUnsafe(2, 1, r2c1);
+    out.setUnsafe(2, 2, r2c2);
+
+    out.view.rewind();
+    return out;
   }
 
   /**
@@ -601,6 +758,112 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
+   * axis <code>axis</code>, saving the result into <code>out</code>.
+   * 
+   * @since 5.0.0
+   * @param angle
+   *          The angle in radians.
+   * @param m
+   *          The input matrix.
+   * @param axis
+   *          A vector representing an axis.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3D rotate(
+    final double angle,
+    final @Nonnull MatrixReadable3x3D m,
+    final @Nonnull VectorReadable3D axis,
+    final @Nonnull MatrixM3x3D out)
+  {
+    final @Nonnull MatrixM3x3D tmp = new MatrixM3x3D();
+    return MatrixM3x3D.rotate(angle, m, tmp, axis, out);
+  }
+
+  /**
+   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
+   * axis <code>axis</code>, saving the result into <code>m</code>.
+   * 
+   * @since 5.0.0
+   * @param angle
+   *          The angle in radians.
+   * @param m
+   *          The input matrix.
+   * @param axis
+   *          A vector representing an axis.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM3x3D rotateInPlace(
+    final double angle,
+    final @Nonnull MatrixM3x3D m,
+    final @Nonnull VectorReadable3D axis)
+  {
+    final @Nonnull MatrixM3x3D tmp = new MatrixM3x3D();
+    return MatrixM3x3D.rotate(angle, m, tmp, axis, m);
+  }
+
+  /**
+   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
+   * axis <code>axis</code>, saving the result into <code>m</code>. The
+   * function uses preallocated storage in <code>context</code> to avoid
+   * allocating memory. The function assumes a right-handed coordinate system.
+   * 
+   * @since 5.0.0
+   * @param context
+   *          Preallocated storage.
+   * @param angle
+   *          The angle in radians.
+   * @param m
+   *          The input matrix.
+   * @param axis
+   *          A vector representing an axis.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM3x3D rotateInPlaceWithContext(
+    final @Nonnull Context context,
+    final double angle,
+    final @Nonnull MatrixM3x3D m,
+    final @Nonnull VectorReadable3D axis)
+  {
+    return MatrixM3x3D.rotate(angle, m, context.m4a, axis, m);
+  }
+
+  /**
+   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
+   * axis <code>axis</code>, saving the result into <code>out</code>. The
+   * function uses preallocated storage in <code>context</code> to avoid
+   * allocating memory. The function assumes a right-handed coordinate system.
+   * 
+   * @since 5.0.0
+   * @param context
+   *          Preallocated storage.
+   * @param angle
+   *          The angle in radians.
+   * @param m
+   *          The input matrix.
+   * @param axis
+   *          A vector representing an axis.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3D rotateWithContext(
+    final @Nonnull Context context,
+    final double angle,
+    final @Nonnull MatrixReadable3x3D m,
+    final @Nonnull VectorReadable3D axis,
+    final @Nonnull MatrixM3x3D out)
+  {
+    return MatrixM3x3D.rotate(angle, m, context.m4a, axis, out);
+  }
+
+  /**
    * Return row <code>row</code> of the matrix <code>m</code> in the vector
    * <code>out</code>.
    */
@@ -696,7 +959,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3D scaleRow(
+  public static @Nonnull MatrixM3x3D scaleRowInPlace(
     final @Nonnull MatrixM3x3D m,
     final int row,
     final double r)
@@ -809,6 +1072,24 @@ import com.io7m.jaux.functional.Option;
     m.view.put(MatrixM3x3D.zero_row);
     m.view.rewind();
     return m;
+  }
+
+  /**
+   * Return the trace of the matrix <code>m</code>. The trace is defined as
+   * the sum of the diagonal elements of the matrix.
+   * 
+   * @since 5.0.0
+   * @param m
+   *          The input matrix
+   * @return The trace of the matrix
+   */
+
+  public static double trace(
+    final @Nonnull MatrixReadable3x3D m)
+  {
+    return m.getRowColumnD(0, 0)
+      + m.getRowColumnD(1, 1)
+      + m.getRowColumnD(2, 2);
   }
 
   /**
@@ -970,11 +1251,17 @@ import com.io7m.jaux.functional.Option;
   }
 
   private final ByteBuffer   data;
+
   private final DoubleBuffer view;
+
   private static final int   VIEW_ELEMENT_SIZE;
+
   private static final int   VIEW_ELEMENTS;
+
   private static final int   VIEW_BYTES;
+
   private static final int   VIEW_COLS;
+
   private static final int   VIEW_ROWS;
 
   static {
@@ -983,6 +1270,19 @@ import com.io7m.jaux.functional.Option;
     VIEW_ELEMENT_SIZE = 8;
     VIEW_ELEMENTS = MatrixM3x3D.VIEW_ROWS * MatrixM3x3D.VIEW_COLS;
     VIEW_BYTES = MatrixM3x3D.VIEW_ELEMENTS * MatrixM3x3D.VIEW_ELEMENT_SIZE;
+  }
+
+  private static @Nonnull MatrixM3x3D rotate(
+    final double angle,
+    final @Nonnull MatrixReadable3x3D m,
+    final @Nonnull MatrixM3x3D tmp,
+    final @Nonnull VectorReadable3D axis,
+    final @Nonnull MatrixM3x3D out)
+  {
+    MatrixM3x3D.makeRotation(angle, axis, tmp);
+    MatrixM3x3D.multiply(m, tmp, out);
+    out.view.rewind();
+    return out;
   }
 
   public MatrixM3x3D()
@@ -1045,6 +1345,13 @@ import com.io7m.jaux.functional.Option;
     return this.view;
   }
 
+  @Override public void getRow3D(
+    final int row,
+    final @Nonnull VectorM3D out)
+  {
+    MatrixM3x3D.rowUnsafe(this, MatrixM3x3D.rowCheck(row), out);
+  }
+
   @Override public double getRowColumnD(
     final int row,
     final int column)
@@ -1081,7 +1388,7 @@ import com.io7m.jaux.functional.Option;
     return this;
   }
 
-  private MatrixM3x3D setUnsafe(
+  MatrixM3x3D setUnsafe(
     final int row,
     final int column,
     final double value)

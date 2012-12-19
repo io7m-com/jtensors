@@ -138,12 +138,12 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   public static @Nonnull VectorM3F addScaled(
     final @Nonnull VectorM3F v0,
     final @Nonnull VectorM3F v1,
-    final float r,
+    final double r,
     final @Nonnull VectorM3F out)
   {
-    final float x = v0.x + (v1.x * r);
-    final float y = v0.y + (v1.y * r);
-    final float z = v0.z + (v1.z * r);
+    final float x = (float) (v0.x + (v1.x * r));
+    final float y = (float) (v0.y + (v1.y * r));
+    final float z = (float) (v0.z + (v1.z * r));
     out.x = x;
     out.y = y;
     out.z = z;
@@ -168,7 +168,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   public static @Nonnull VectorM3F addScaledInPlace(
     final @Nonnull VectorM3F v0,
     final @Nonnull VectorM3F v1,
-    final float r)
+    final double r)
   {
     return VectorM3F.addScaled(v0, v1, r, v0);
   }
@@ -575,7 +575,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return The distance between the two vectors.
    */
 
-  public static float distance(
+  public static double distance(
     final @Nonnull VectorM3F v0,
     final @Nonnull VectorM3F v1)
   {
@@ -595,13 +595,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return The scalar product of the two vectors
    */
 
-  public static float dotProduct(
+  public static double dotProduct(
     final @Nonnull VectorM3F v0,
     final @Nonnull VectorM3F v1)
   {
-    final float x = v0.x * v1.x;
-    final float y = v0.y * v1.y;
-    final float z = v0.z * v1.z;
+    final double x = v0.x * v1.x;
+    final double y = v0.y * v1.y;
+    final double z = v0.z * v1.z;
     return x + y + z;
   }
 
@@ -633,7 +633,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   public static @Nonnull VectorM3F interpolateLinear(
     final @Nonnull VectorM3F v0,
     final @Nonnull VectorM3F v1,
-    final float alpha,
+    final double alpha,
     final @Nonnull VectorM3F r)
   {
     final @Nonnull VectorM3F w0 = new VectorM3F();
@@ -671,7 +671,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return The squared magnitude of the input vector
    */
 
-  public static float magnitudeSquared(
+  public static double magnitudeSquared(
     final @Nonnull VectorM3F v)
   {
     return VectorM3F.dotProduct(v, v);
@@ -694,9 +694,9 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     final @Nonnull VectorM3F v,
     final @Nonnull VectorM3F out)
   {
-    final float m = VectorM3F.magnitudeSquared(v);
+    final double m = VectorM3F.magnitudeSquared(v);
     if (m > 0.0) {
-      final float reciprocal = (float) (1.0f / Math.sqrt(m));
+      final double reciprocal = 1.0 / Math.sqrt(m);
       return VectorM3F.scale(v, reciprocal, out);
     }
     out.x = v.x;
@@ -730,7 +730,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
    *      process</a>
    * 
-   * @since 4.2.0
+   * @since 5.0.0
    */
 
   public static void orthoNormalizeInPlace(
@@ -757,9 +757,9 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     final @Nonnull VectorM3F q,
     final @Nonnull VectorM3F r)
   {
-    final float dot = VectorM3F.dotProduct(p, q);
-    final float qms = VectorM3F.magnitudeSquared(q);
-    final float s = dot / qms;
+    final double dot = VectorM3F.dotProduct(p, q);
+    final double qms = VectorM3F.magnitudeSquared(q);
+    final double s = dot / qms;
 
     return VectorM3F.scale(p, s, r);
   }
@@ -780,15 +780,15 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM3F scale(
     final @Nonnull VectorM3F v,
-    final float r,
+    final double r,
     final @Nonnull VectorM3F out)
   {
-    final float x = v.x * r;
-    final float y = v.y * r;
-    final float z = v.z * r;
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    final double x = v.x * r;
+    final double y = v.y * r;
+    final double z = v.z * r;
+    out.x = (float) x;
+    out.y = (float) y;
+    out.z = (float) z;
     return out;
   }
 
@@ -806,7 +806,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM3F scaleInPlace(
     final @Nonnull VectorM3F v,
-    final float r)
+    final double r)
   {
     return VectorM3F.scale(v, r, v);
   }

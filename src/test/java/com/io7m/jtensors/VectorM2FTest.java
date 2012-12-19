@@ -25,7 +25,7 @@ public class VectorM2FTest
 {
   @SuppressWarnings("static-method") @Test public void testAbsolute()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final VectorM2F v = new VectorM2F(x, y);
@@ -81,7 +81,7 @@ public class VectorM2FTest
 
   @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final VectorM2F v = new VectorM2F(x, y);
@@ -102,7 +102,7 @@ public class VectorM2FTest
 
   @SuppressWarnings("static-method") @Test public void testAdd()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM2F v0 = new VectorM2F(x0, y0);
@@ -172,7 +172,7 @@ public class VectorM2FTest
 
   @SuppressWarnings("static-method") @Test public void testAddScaled()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM2F v0 = new VectorM2F(x0, y0);
@@ -261,7 +261,7 @@ public class VectorM2FTest
     void
     testClampByVectorMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max_x = (float) (Math.random() * Float.MIN_VALUE);
       final float max_y = (float) (Math.random() * Float.MIN_VALUE);
       final VectorM2F maximum = new VectorM2F(max_x, max_y);
@@ -291,7 +291,7 @@ public class VectorM2FTest
     void
     testClampByVectorMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (Math.random() * Float.MAX_VALUE);
       final float min_y = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM2F minimum = new VectorM2F(min_x, min_y);
@@ -321,7 +321,7 @@ public class VectorM2FTest
     void
     testClampByVectorOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (Math.random() * Float.MIN_VALUE);
       final float min_y = (float) (Math.random() * Float.MIN_VALUE);
       final VectorM2F minimum = new VectorM2F(min_x, min_y);
@@ -359,7 +359,7 @@ public class VectorM2FTest
     void
     testClampMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float maximum = (float) (Math.random() * Float.MIN_VALUE);
 
       final float x = (float) (Math.random() * Float.MAX_VALUE);
@@ -384,7 +384,7 @@ public class VectorM2FTest
     void
     testClampMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = (float) (Math.random() * Float.MAX_VALUE);
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
@@ -407,7 +407,7 @@ public class VectorM2FTest
 
   @SuppressWarnings("static-method") @Test public void testClampOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = (float) (Math.random() * Float.MIN_VALUE);
       final float maximum = (float) (Math.random() * Float.MAX_VALUE);
 
@@ -459,7 +459,7 @@ public class VectorM2FTest
 
   @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM2F v0 = new VectorM2F(x0, y0);
@@ -609,7 +609,7 @@ public class VectorM2FTest
     void
     testInterpolateLinearLimits()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM2F v0 = new VectorM2F(x0, y0);
@@ -640,7 +640,7 @@ public class VectorM2FTest
 
   @SuppressWarnings("static-method") @Test public void testMagnitudeNonzero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM2F v = new VectorM2F(x, y);
@@ -652,7 +652,7 @@ public class VectorM2FTest
 
   @SuppressWarnings("static-method") @Test public void testMagnitudeNormal()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x =
         (float) (Math.random() * (Math.sqrt(Float.MAX_VALUE) / 2));
       final float y =
@@ -772,7 +772,7 @@ public class VectorM2FTest
 
   @SuppressWarnings("static-method") @Test public void testScaleOne()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM2F v = new VectorM2F(x, y);
@@ -804,7 +804,7 @@ public class VectorM2FTest
 
   @SuppressWarnings("static-method") @Test public void testScaleZero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM2F v = new VectorM2F(x, y);
@@ -839,7 +839,7 @@ public class VectorM2FTest
 
   @SuppressWarnings("static-method") @Test public void testSubtract()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM2F v0 = new VectorM2F(x0, y0);

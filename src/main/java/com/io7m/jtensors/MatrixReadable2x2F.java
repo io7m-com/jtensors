@@ -27,13 +27,14 @@ public interface MatrixReadable2x2F extends MatrixReadableF
   /**
    * Retrieve row <code>row</code>, saving the result to <code>out</code>.
    * 
+   * @since 5.0.0
    * @param row
    *          The index of the row, starting at <code>0</code>.
    * @param out
    *          The output vector.
    */
 
-  void getRowF(
+  void getRow2F(
     final int row,
     final @Nonnull VectorM2F out);
 }

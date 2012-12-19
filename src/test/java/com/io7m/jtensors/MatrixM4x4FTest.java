@@ -7,7 +7,8 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.AlmostEqualFloat;
 import com.io7m.jaux.functional.Option;
 import com.io7m.jaux.functional.Option.Some;
 import com.io7m.jaux.functional.Option.Type;
@@ -15,14 +16,137 @@ import com.io7m.jtensors.MatrixM4x4F.Context;
 
 public class MatrixM4x4FTest
 {
-  private static boolean closeTo2dp(
-    final float actual,
-    final float expected)
+  private static final VectorReadable3F AXIS_X = new VectorI3F(1, 0, 0);
+  private static final VectorReadable3F AXIS_Y = new VectorI3F(0, 1, 0);
+  private static final VectorReadable3F AXIS_Z = new VectorI3F(0, 0, 1);
+
+  private static void isRotationMatrixX(
+    final AlmostEqualFloat.ContextRelative context,
+    final MatrixM4x4F r)
   {
-    return ApproximatelyEqualFloat.approximatelyEqualExplicit(
-      actual,
-      expected,
-      0.01f);
+    boolean eq;
+
+    eq = AlmostEqualFloat.almostEqual(context, 1.0f, r.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(0, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(0, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.707106781187f, r.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, -0.707106781187f, r.get(1, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(1, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.707106781187f, r.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.707106781187f, r.get(2, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(2, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(3, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(3, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(3, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 1.0f, r.get(3, 3));
+    Assert.assertTrue(eq);
+  }
+
+  private static void isRotationMatrixY(
+    final AlmostEqualFloat.ContextRelative context,
+    final MatrixM4x4F r)
+  {
+    boolean eq;
+
+    eq = AlmostEqualFloat.almostEqual(context, 0.707106781187f, r.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.707106781187f, r.get(0, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(0, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 1.0f, r.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(1, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(1, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(context, -0.707106781187f, r.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.707106781187f, r.get(2, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(2, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(3, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(3, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(3, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 1.0f, r.get(3, 3));
+    Assert.assertTrue(eq);
+  }
+
+  private static void isRotationMatrixZ(
+    final AlmostEqualFloat.ContextRelative context,
+    final MatrixM4x4F r)
+  {
+    boolean eq;
+
+    eq = AlmostEqualFloat.almostEqual(context, 0.707106781187f, r.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, -0.707106781187f, r.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(0, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(0, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(context, 0.707106781187f, r.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.707106781187f, r.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(1, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(1, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 1.0f, r.get(2, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(2, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(3, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(3, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 0.0f, r.get(3, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, 1.0f, r.get(3, 3));
+    Assert.assertTrue(eq);
   }
 
   @SuppressWarnings("static-method") @Test public void testAdd()
@@ -1002,8 +1126,12 @@ public class MatrixM4x4FTest
 
   @SuppressWarnings("static-method") @Test public void testInvertSimple2()
   {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext3dp();
+
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
+    boolean eq = false;
 
     m0.set(0, 0, 1.0f);
     m0.set(0, 1, 0.0f);
@@ -1035,25 +1163,48 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
 
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 0), -0.09375f));
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 2), 0.15625f));
-      Assert.assertTrue(rm.get(0, 3) == 0);
+      System.out.println("m0 : ");
+      System.out.println(m0);
+      System.out.println("m1 : ");
+      System.out.println(m1);
+      System.out.println("rm : ");
+      System.out.println(rm);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(1, 1), -0.0296f));
-      Assert.assertTrue(rm.get(1, 2) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(1, 3), 0.0814f));
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 0), -0.09375f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 1), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 2), 0.15625f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 3), 0.0f);
+      Assert.assertTrue(eq);
 
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(2, 0), 0.21875f));
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(2, 2), -0.03125f));
-      Assert.assertTrue(rm.get(2, 3) == 0);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 0), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 1), -0.0296f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 2), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 3), 0.0814f);
+      Assert.assertTrue(eq);
 
-      Assert.assertTrue(rm.get(3, 0) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 1), 0.096f));
-      Assert.assertTrue(rm.get(3, 2) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 3), -0.01481f));
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 0), 0.21875f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 1), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 2), -0.03125f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 3), 0.0f);
+      Assert.assertTrue(eq);
+
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 0), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 1), 0.096f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 2), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 3), -0.01481f);
+      Assert.assertTrue(eq);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
@@ -1070,25 +1221,48 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
 
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 0), 1.0f));
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 2), 5.0f));
-      Assert.assertTrue(rm.get(0, 3) == 0);
+      System.out.println("m0 : ");
+      System.out.println(m0);
+      System.out.println("m1 : ");
+      System.out.println(m1);
+      System.out.println("rm : ");
+      System.out.println(rm);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(1, 1), 2.0f));
-      Assert.assertTrue(rm.get(1, 2) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(1, 3), 11.0f));
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 0), 1.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 1), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 2), 5.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 3), 0.0f);
+      Assert.assertTrue(eq);
 
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(2, 0), 7.0f));
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(2, 2), 3.0f));
-      Assert.assertTrue(rm.get(2, 3) == 0);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 0), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 1), 2.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 2), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 3), 11.0f);
+      Assert.assertTrue(eq);
 
-      Assert.assertTrue(rm.get(3, 0) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 1), 13.0f));
-      Assert.assertTrue(rm.get(3, 2) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 3), 4.0f));
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 0), 7.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 1), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 2), 3.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 3), 0.0f);
+      Assert.assertTrue(eq);
+
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 0), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 1), 13.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 2), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 3), 4.0f);
+      Assert.assertTrue(eq);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
@@ -1100,9 +1274,13 @@ public class MatrixM4x4FTest
     void
     testInvertSimple2ContextEquivalent()
   {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext3dp();
+
     final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
+    boolean eq = false;
 
     m0.set(0, 0, 1.0f);
     m0.set(0, 1, 0.0f);
@@ -1135,25 +1313,48 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
 
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 0), -0.09375f));
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 2), 0.15625f));
-      Assert.assertTrue(rm.get(0, 3) == 0);
+      System.out.println("m0 : ");
+      System.out.println(m0);
+      System.out.println("m1 : ");
+      System.out.println(m1);
+      System.out.println("rm : ");
+      System.out.println(rm);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(1, 1), -0.0296f));
-      Assert.assertTrue(rm.get(1, 2) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(1, 3), 0.0814f));
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 0), -0.09375f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 1), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 2), 0.15625f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 3), 0.0f);
+      Assert.assertTrue(eq);
 
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(2, 0), 0.21875f));
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(2, 2), -0.03125f));
-      Assert.assertTrue(rm.get(2, 3) == 0);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 0), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 1), -0.0296f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 2), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 3), 0.0814f);
+      Assert.assertTrue(eq);
 
-      Assert.assertTrue(rm.get(3, 0) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 1), 0.096f));
-      Assert.assertTrue(rm.get(3, 2) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 3), -0.01481f));
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 0), 0.21875f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 1), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 2), -0.03125f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 3), 0.0f);
+      Assert.assertTrue(eq);
+
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 0), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 1), 0.096f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 2), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 3), -0.01481f);
+      Assert.assertTrue(eq);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
@@ -1171,25 +1372,48 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
 
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 0), 1.0f));
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 2), 5.0f));
-      Assert.assertTrue(rm.get(0, 3) == 0);
+      System.out.println("m0 : ");
+      System.out.println(m0);
+      System.out.println("m1 : ");
+      System.out.println(m1);
+      System.out.println("rm : ");
+      System.out.println(rm);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(1, 1), 2.0f));
-      Assert.assertTrue(rm.get(1, 2) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(1, 3), 11.0f));
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 0), 1.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 1), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 2), 5.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(0, 3), 0.0f);
+      Assert.assertTrue(eq);
 
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(2, 0), 7.0f));
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(2, 2), 3.0f));
-      Assert.assertTrue(rm.get(2, 3) == 0);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 0), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 1), 2.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 2), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(1, 3), 11.0f);
+      Assert.assertTrue(eq);
 
-      Assert.assertTrue(rm.get(3, 0) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 1), 13.0f));
-      Assert.assertTrue(rm.get(3, 2) == 0);
-      Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 3), 4.0f));
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 0), 7.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 1), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 2), 3.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(2, 3), 0.0f);
+      Assert.assertTrue(eq);
+
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 0), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 1), 13.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 2), 0.0f);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context_f, rm.get(3, 3), 4.0f);
+      Assert.assertTrue(eq);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
@@ -1653,109 +1877,423 @@ public class MatrixM4x4FTest
     m.get(4, 0);
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  /**
+   * All rotation matrices have a determinant of 1.0 and are orthogonal.
+   */
+
+  @SuppressWarnings({ "static-method" }) @Test public
     void
-    testRotateX()
+    testRotateDeterminantOrthogonal()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final MatrixM4x4F mt = new MatrixM4x4F();
+    final MatrixM4x4F mi = new MatrixM4x4F();
+    final VectorM3F axis = new VectorM3F();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      float angle = (float) (Math.random() * (2 * Math.PI));
+      axis.x = (float) Math.random();
+      axis.y = (float) Math.random();
+      axis.z = (float) Math.random();
+
+      if (Math.random() > 0.5) {
+        angle = -angle;
+      }
+      if (Math.random() > 0.5) {
+        axis.x = -axis.x;
+      }
+      if (Math.random() > 0.5) {
+        axis.y = -axis.y;
+      }
+      if (Math.random() > 0.5) {
+        axis.z = -axis.z;
+      }
+      VectorM3F.normalizeInPlace(axis);
+
+      System.out.println("axis  : " + axis);
+      System.out.println("angle : " + angle);
+
+      MatrixM4x4F.makeRotation(angle, axis, m);
+
+      final double det = MatrixM4x4F.determinant(m);
+      System.out.println("det   : " + det);
+
+      AlmostEqualDouble.almostEqual(context, det, 1.0);
+
+      MatrixM4x4F.invert(m, mi);
+      MatrixM4x4F.transpose(m, mt);
+
+      for (int row = 0; row < 4; ++row) {
+        for (int col = 0; col < 4; ++col) {
+          final float mx = mi.get(row, col);
+          final float my = mt.get(row, col);
+          final boolean eq = AlmostEqualFloat.almostEqual(context_f, mx, my);
+
+          System.out.println("mi(" + row + ", " + col + ") == " + mx);
+          System.out.println("mt(" + row + ", " + col + ") == " + my);
+          System.out.println(eq);
+
+          Assert.assertTrue(eq);
+        }
+      }
+
+      System.out.println("--");
+    }
+  }
+
+  /**
+   * A rotation of 0 degrees around the X axis has no effect.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector0X()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
-    final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorM4F v_in = new VectorM4F(0, 0, -1, 1);
+    final VectorM4F v_got = new VectorM4F();
+    final VectorM4F v_exp = new VectorM4F(0, 0, -1, 1);
 
+    MatrixM4x4F.makeRotation(0, MatrixM4x4FTest.AXIS_X, m);
+    MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    Assert.assertTrue(VectorM4F.approximatelyEqual(v_exp, v_got));
+  }
+
+  /**
+   * A rotation of 0 degrees around the Y axis has no effect.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector0Y()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorM4F v_in = new VectorM4F(0, 0, -1, 1);
+    final VectorM4F v_got = new VectorM4F();
+    final VectorM4F v_exp = new VectorM4F(0, 0, -1, 1);
+
+    MatrixM4x4F.makeRotation(0, MatrixM4x4FTest.AXIS_Y, m);
+    MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    Assert.assertTrue(VectorM4F.approximatelyEqual(v_exp, v_got));
+  }
+
+  /**
+   * A rotation of 0 degrees around the Z axis has no effect.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector0Z()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorM4F v_in = new VectorM4F(0, 0, -1, 1);
+    final VectorM4F v_got = new VectorM4F();
+    final VectorM4F v_exp = new VectorM4F(0, 0, -1, 1);
+
+    MatrixM4x4F.makeRotation(0, MatrixM4x4FTest.AXIS_Z, m);
+    MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    Assert.assertTrue(VectorM4F.approximatelyEqual(v_exp, v_got));
+  }
+
+  /**
+   * A rotation of 90 degrees around the X axis gives the correct
+   * counter-clockwise rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector90X()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorM4F v_got = new VectorM4F();
+    final VectorM4F v_in = new VectorM4F(0, 1, 0, 1);
+
+    /**
+     * XXX: Strange Y value due to floating point imprecision, with no good
+     * way to compare it to 0 with an epsilon. The value of Z is the only
+     * significant element, anyway.
+     */
+
+    final VectorM4F v_exp = new VectorM4F(0, 6.1232339957367E-17f, 1, 1);
+
+    MatrixM4x4F.makeRotation(Math.toRadians(90), MatrixM4x4FTest.AXIS_X, m);
+    System.out.println(m);
+    MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  /**
+   * A rotation of 90 degrees around the Y axis gives the correct
+   * counter-clockwise rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector90Y()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorM4F v_got = new VectorM4F();
+    final VectorM4F v_in = new VectorM4F(0, 0, -1, 1);
+
+    /**
+     * XXX: Strange Z value due to floating point imprecision, with no good
+     * way to compare it to 0 with an epsilon. The value of X is the only
+     * significant element, anyway.
+     */
+
+    final VectorM4F v_exp = new VectorM4F(-1, 0, -6.1232339957367E-17f, 1);
+
+    MatrixM4x4F.makeRotation(Math.toRadians(90), MatrixM4x4FTest.AXIS_Y, m);
+    MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  /**
+   * A rotation of 90 degrees around the Z axis gives the correct
+   * counter-clockwise rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector90Z()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorM4F v_got = new VectorM4F();
+    final VectorM4F v_in = new VectorM4F(0, 1, 0, 1);
+    final VectorM4F v_exp = new VectorM4F(-1, 6.123233995736766E-17f, 0, 1);
+
+    MatrixM4x4F.makeRotation(Math.toRadians(90), MatrixM4x4FTest.AXIS_Z, m);
+    MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  /**
+   * A rotation of -90 degrees around the X axis gives the correct clockwise
+   * rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testRotateVectorMinus90X()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorM4F v_got = new VectorM4F();
+    final VectorM4F v_in = new VectorM4F(0, 1, 0, 1);
+
+    /**
+     * XXX: Strange Y value due to floating point imprecision, with no good
+     * way to compare it to 0 with an epsilon. The value of Z is the only
+     * significant element, anyway.
+     */
+
+    final VectorM4F v_exp = new VectorM4F(0, 6.1232339957367E-17f, -1, 1);
+
+    MatrixM4x4F.makeRotation(Math.toRadians(-90), MatrixM4x4FTest.AXIS_X, m);
+    System.out.println(m);
+    MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  /**
+   * A rotation of -90 degrees around the Y axis gives the correct clockwise
+   * rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testRotateVectorMinus90Y()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorM4F v_got = new VectorM4F();
+    final VectorM4F v_in = new VectorM4F(0, 0, -1, 1);
+
+    /**
+     * XXX: Strange Z value due to floating point imprecision, with no good
+     * way to compare it to 0 with an epsilon. The value of X is the only
+     * significant element, anyway.
+     */
+
+    final VectorM4F v_exp = new VectorM4F(1, 0, -6.1232339957367E-17f, 1);
+
+    MatrixM4x4F.makeRotation(Math.toRadians(-90), MatrixM4x4FTest.AXIS_Y, m);
+    MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  /**
+   * A rotation of -90 degrees around the Z axis gives the correct clockwise
+   * rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testRotateVectorMinus90Z()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorM4F v_got = new VectorM4F();
+    final VectorM4F v_in = new VectorM4F(0, 1, 0, 1);
+    final VectorM4F v_exp = new VectorM4F(1, 6.123233995736766E-17f, 0, 1);
+
+    MatrixM4x4F.makeRotation(Math.toRadians(-90), MatrixM4x4FTest.AXIS_Z, m);
+    MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  @SuppressWarnings({ "static-method" }) @Test public void testRotateX()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    final MatrixM4x4F m = new MatrixM4x4F();
     {
       final MatrixM4x4F out = new MatrixM4x4F();
       final MatrixM4x4F r =
-        MatrixM4x4F.rotate((float) Math.PI / 4, m, axis, out);
+        MatrixM4x4F
+          .rotate(Math.toRadians(45), m, MatrixM4x4FTest.AXIS_X, out);
       Assert.assertSame(r, out);
-
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(out).position());
 
-      Assert.assertEquals(1.0f, r.get(0, 0));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertEquals(0.0f, r.get(0, 2));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 1),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(1, 3));
+      MatrixM4x4FTest.isRotationMatrixX(context, r);
 
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(2, 1),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
-
-      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r =
-        MatrixM4x4F.rotateInPlace((float) (Math.PI / 4), m, axis);
-
+        MatrixM4x4F.rotateInPlace(
+          Math.toRadians(45),
+          m,
+          MatrixM4x4FTest.AXIS_X);
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertEquals(1.0f, r.get(0, 0));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertEquals(0.0f, r.get(0, 2));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 1),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(1, 3));
+      MatrixM4x4FTest.isRotationMatrixX(context, r);
 
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(2, 1),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
-
-      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
-    testRotateXContextEquivalent()
+    testRotateXContextEquivalentInPlace()
   {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
     final MatrixM4x4F m = new MatrixM4x4F();
     final Context context = new Context();
-    final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
 
     {
       final MatrixM4x4F out = new MatrixM4x4F();
@@ -1763,48 +2301,18 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r =
         MatrixM4x4F.rotateWithContext(
           context,
-          (float) (Math.PI / 4),
+          Math.toRadians(45),
           m,
-          axis,
+          MatrixM4x4FTest.AXIS_X,
           out);
       Assert.assertSame(r, out);
-
-      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(out).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertEquals(1.0f, r.get(0, 0));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertEquals(0.0f, r.get(0, 2));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 1),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(1, 3));
+      MatrixM4x4FTest.isRotationMatrixX(context_f, r);
 
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(2, 1),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
-
-      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
@@ -1812,244 +2320,99 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r =
         MatrixM4x4F.rotateInPlaceWithContext(
           context,
-          (float) (Math.PI / 4),
+          Math.toRadians(45),
           m,
-          axis);
+          MatrixM4x4FTest.AXIS_X);
 
-      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertEquals(1.0f, r.get(0, 0));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertEquals(0.0f, r.get(0, 2));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      MatrixM4x4FTest.isRotationMatrixX(context_f, r);
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 1),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(1, 3));
-
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(2, 1),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
-
-      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testRotateXMakeEquivalent()
   {
-    final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
 
     {
       final MatrixM4x4F r =
-        MatrixM4x4F.makeRotation((float) (Math.PI / 4), axis);
-
+        MatrixM4x4F.makeRotation(Math.toRadians(45), MatrixM4x4FTest.AXIS_X);
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertEquals(1.0f, r.get(0, 0));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertEquals(0.0f, r.get(0, 2));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 1),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(1, 3));
-
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(2, 1),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
+      MatrixM4x4FTest.isRotationMatrixX(context, r);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
-    void
-    testRotateY()
+  @SuppressWarnings({ "static-method" }) @Test public void testRotateY()
   {
-    final MatrixM4x4F m = new MatrixM4x4F();
-    final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
 
+    final MatrixM4x4F m = new MatrixM4x4F();
     {
       final MatrixM4x4F out = new MatrixM4x4F();
       final MatrixM4x4F r =
-        MatrixM4x4F.rotate((float) Math.PI / 4, m, axis, out);
+        MatrixM4x4F
+          .rotate(Math.toRadians(45), m, MatrixM4x4FTest.AXIS_Y, out);
       Assert.assertSame(r, out);
-
-      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 0),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(0, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertEquals(1.0f, r.get(1, 1));
-      Assert.assertEquals(0.0f, r.get(1, 2));
-      Assert.assertEquals(0.0f, r.get(1, 3));
+      MatrixM4x4FTest.isRotationMatrixY(context, r);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 0),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
-
-      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r =
-        MatrixM4x4F.rotateInPlace((float) Math.PI / 4, m, axis);
-
+        MatrixM4x4F.rotateInPlace(
+          Math.toRadians(45),
+          m,
+          MatrixM4x4FTest.AXIS_Y);
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 0),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(0, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertEquals(1.0f, r.get(1, 1));
-      Assert.assertEquals(0.0f, r.get(1, 2));
-      Assert.assertEquals(0.0f, r.get(1, 3));
-
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 0),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
+      MatrixM4x4FTest.isRotationMatrixY(context, r);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
-    testRotateYContextEquivalent()
+    testRotateYContextEquivalentInPlace()
   {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
     final Context context = new Context();
     final MatrixM4x4F m = new MatrixM4x4F();
-    final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
-
     {
       final MatrixM4x4F out = new MatrixM4x4F();
       final MatrixM4x4F r =
         MatrixM4x4F.rotateWithContext(
           context,
-          (float) (Math.PI / 4),
+          Math.toRadians(45),
           m,
-          axis,
+          MatrixM4x4FTest.AXIS_Y,
           out);
       Assert.assertSame(r, out);
-
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 0),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(0, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertEquals(1.0f, r.get(1, 1));
-      Assert.assertEquals(0.0f, r.get(1, 2));
-      Assert.assertEquals(0.0f, r.get(1, 3));
-
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 0),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
+      MatrixM4x4FTest.isRotationMatrixY(context_f, r);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
@@ -2058,240 +2421,100 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r =
         MatrixM4x4F.rotateInPlaceWithContext(
           context,
-          (float) (Math.PI / 4),
+          Math.toRadians(45),
           m,
-          axis);
-
+          MatrixM4x4FTest.AXIS_Y);
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 0),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(0, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertEquals(1.0f, r.get(1, 1));
-      Assert.assertEquals(0.0f, r.get(1, 2));
-      Assert.assertEquals(0.0f, r.get(1, 3));
-
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 0),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
+      MatrixM4x4FTest.isRotationMatrixY(context_f, r);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testRotateYMakeEquivalent()
   {
-    final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
 
     {
       final MatrixM4x4F r =
-        MatrixM4x4F.makeRotation((float) (Math.PI / 4), axis);
-
+        MatrixM4x4F.makeRotation(Math.toRadians(45), MatrixM4x4FTest.AXIS_Y);
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 0),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(0, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertEquals(1.0f, r.get(1, 1));
-      Assert.assertEquals(0.0f, r.get(1, 2));
-      Assert.assertEquals(0.0f, r.get(1, 3));
-
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 0),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(2, 2),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
+      MatrixM4x4FTest.isRotationMatrixY(context, r);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
-    void
-    testRotateZ()
+  @SuppressWarnings({ "static-method" }) @Test public void testRotateZ()
   {
-    final MatrixM4x4F m = new MatrixM4x4F();
-    final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
 
+    final MatrixM4x4F m = new MatrixM4x4F();
     {
       final MatrixM4x4F out = new MatrixM4x4F();
       final MatrixM4x4F r =
-        MatrixM4x4F.rotate((float) Math.PI / 4, m, axis, out);
+        MatrixM4x4F
+          .rotate(Math.toRadians(45), m, MatrixM4x4FTest.AXIS_Z, out);
       Assert.assertSame(r, out);
-
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 0),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 1),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 2));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(1, 0),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 1),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(1, 2));
-      Assert.assertEquals(0.0f, r.get(1, 3));
-
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertEquals(1.0f, r.get(2, 2));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
+      MatrixM4x4FTest.isRotationMatrixZ(context, r);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r =
-        MatrixM4x4F.rotateInPlace((float) (Math.PI / 4), m, axis);
-
+        MatrixM4x4F.rotateInPlace(
+          Math.toRadians(45),
+          m,
+          MatrixM4x4FTest.AXIS_Z);
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 0),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 1),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 2));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(1, 0),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 1),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(1, 2));
-      Assert.assertEquals(0.0f, r.get(1, 3));
-
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertEquals(1.0f, r.get(2, 2));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
+      MatrixM4x4FTest.isRotationMatrixZ(context, r);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
-    testRotateZContextEquivalent()
+    testRotateZContextEquivalentInPlace()
   {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
     final Context context = new Context();
     final MatrixM4x4F m = new MatrixM4x4F();
-    final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
-
     {
       final MatrixM4x4F out = new MatrixM4x4F();
       final MatrixM4x4F r =
         MatrixM4x4F.rotateWithContext(
           context,
-          (float) (Math.PI / 4),
+          Math.toRadians(45),
           m,
-          axis,
+          MatrixM4x4FTest.AXIS_Z,
           out);
       Assert.assertSame(r, out);
-
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 0),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 1),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 2));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(1, 0),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 1),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(1, 2));
-      Assert.assertEquals(0.0f, r.get(1, 3));
-
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertEquals(1.0f, r.get(2, 2));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
+      MatrixM4x4FTest.isRotationMatrixZ(context_f, r);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
@@ -2300,91 +2523,34 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r =
         MatrixM4x4F.rotateInPlaceWithContext(
           context,
-          (float) (Math.PI / 4),
+          Math.toRadians(45),
           m,
-          axis);
-
+          MatrixM4x4FTest.AXIS_Z);
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 0),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 1),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 2));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(1, 0),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 1),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(1, 2));
-      Assert.assertEquals(0.0f, r.get(1, 3));
-
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertEquals(1.0f, r.get(2, 2));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
+      MatrixM4x4FTest.isRotationMatrixZ(context_f, r);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testRotateZMakeEquivalent()
   {
-    final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
 
     {
       final MatrixM4x4F r =
-        MatrixM4x4F.makeRotation((float) (Math.PI / 4), axis);
-
+        MatrixM4x4F.makeRotation(Math.toRadians(45), MatrixM4x4FTest.AXIS_Z);
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 0),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(0, 1),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(0, 2));
-      Assert.assertEquals(0.0f, r.get(0, 3));
+      System.out.println(r);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        -0.707106769085f,
-        r.get(1, 0),
-        0.0000001f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
-        0.707106769085f,
-        r.get(1, 1),
-        0.0000001f));
-      Assert.assertEquals(0.0f, r.get(1, 2));
-      Assert.assertEquals(0.0f, r.get(1, 3));
-
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertEquals(1.0f, r.get(2, 2));
-      Assert.assertEquals(0.0f, r.get(2, 3));
-
-      Assert.assertEquals(0.0f, r.get(3, 0));
-      Assert.assertEquals(0.0f, r.get(3, 1));
-      Assert.assertEquals(0.0f, r.get(3, 2));
-      Assert.assertEquals(1.0f, r.get(3, 3));
+      MatrixM4x4FTest.isRotationMatrixZ(context, r);
 
       Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
@@ -2428,6 +2594,59 @@ public class MatrixM4x4FTest
     Assert.assertTrue(v.w == 1.0);
 
     Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+  }
+
+  @SuppressWarnings("static-method") @Test public void testRow4F()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final VectorM4F v = new VectorM4F();
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+
+    m.getRow4F(0, v);
+    Assert.assertTrue(v.x == 1.0);
+    Assert.assertTrue(v.y == 0.0);
+    Assert.assertTrue(v.z == 0.0);
+    Assert.assertTrue(v.w == 0.0);
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+
+    m.getRow4F(1, v);
+    Assert.assertTrue(v.x == 0.0);
+    Assert.assertTrue(v.y == 1.0);
+    Assert.assertTrue(v.z == 0.0);
+    Assert.assertTrue(v.w == 0.0);
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+
+    m.getRow4F(2, v);
+    Assert.assertTrue(v.x == 0.0);
+    Assert.assertTrue(v.y == 0.0);
+    Assert.assertTrue(v.z == 1.0);
+    Assert.assertTrue(v.w == 0.0);
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+
+    m.getRow4F(3, v);
+    Assert.assertTrue(v.x == 0.0);
+    Assert.assertTrue(v.y == 0.0);
+    Assert.assertTrue(v.z == 0.0);
+    Assert.assertTrue(v.w == 1.0);
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+  }
+
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
+    void
+    testRow4FOverflow()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    m.getRow4F(4, new VectorM4F());
+  }
+
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
+    void
+    testRow4FUnderflow()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    m.getRow4F(-1, new VectorM4F());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -2863,6 +3082,15 @@ public class MatrixM4x4FTest
     Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
     Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
     Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m2).position());
+  }
+
+  @SuppressWarnings({ "static-method", "boxing" }) @Test public
+    void
+    testTrace()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+    final double t = MatrixM4x4F.trace(m);
+    Assert.assertEquals(4.0, t);
   }
 
   @SuppressWarnings("static-method") @Test public

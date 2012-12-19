@@ -38,7 +38,7 @@ public class VectorM4ITest
 
   @SuppressWarnings("static-method") @Test public void testAbsolute()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM4ITest.randomNegativeNumber();
       final int y = VectorM4ITest.randomNegativeNumber();
       final int z = VectorM4ITest.randomNegativeNumber();
@@ -104,7 +104,7 @@ public class VectorM4ITest
 
   @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM4ITest.randomNegativeNumber();
       final int y = VectorM4ITest.randomNegativeNumber();
       final int z = VectorM4ITest.randomNegativeNumber();
@@ -131,7 +131,7 @@ public class VectorM4ITest
 
   @SuppressWarnings("static-method") @Test public void testAdd()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4ITest.randomPositiveSmallNumber();
       final int y0 = VectorM4ITest.randomPositiveSmallNumber();
       final int z0 = VectorM4ITest.randomPositiveSmallNumber();
@@ -221,7 +221,7 @@ public class VectorM4ITest
 
   @SuppressWarnings("static-method") @Test public void testAddScaled()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4ITest.randomPositiveSmallNumber();
       final int y0 = VectorM4ITest.randomPositiveSmallNumber();
       final int z0 = VectorM4ITest.randomPositiveSmallNumber();
@@ -273,7 +273,7 @@ public class VectorM4ITest
     void
     testClampByVectorMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max_x = VectorM4ITest.randomNegativeNumber();
       final int max_y = VectorM4ITest.randomNegativeNumber();
       final int max_z = VectorM4ITest.randomNegativeNumber();
@@ -311,7 +311,7 @@ public class VectorM4ITest
     void
     testClampByVectorMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = VectorM4ITest.randomPositiveNumber();
       final int min_y = VectorM4ITest.randomPositiveNumber();
       final int min_z = VectorM4ITest.randomPositiveNumber();
@@ -349,7 +349,7 @@ public class VectorM4ITest
     void
     testClampByVectorOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = VectorM4ITest.randomNegativeNumber();
       final int min_y = VectorM4ITest.randomNegativeNumber();
       final int min_z = VectorM4ITest.randomNegativeNumber();
@@ -401,7 +401,7 @@ public class VectorM4ITest
     void
     testClampMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int maximum = VectorM4ITest.randomNegativeNumber();
 
       final int x = VectorM4ITest.randomPositiveNumber();
@@ -432,7 +432,7 @@ public class VectorM4ITest
     void
     testClampMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = VectorM4ITest.randomPositiveNumber();
 
       final int x = VectorM4ITest.randomNegativeNumber();
@@ -461,7 +461,7 @@ public class VectorM4ITest
 
   @SuppressWarnings("static-method") @Test public void testClampOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = VectorM4ITest.randomNegativeNumber();
       final int maximum = VectorM4ITest.randomPositiveNumber();
 
@@ -525,7 +525,7 @@ public class VectorM4ITest
 
   @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4ITest.randomPositiveSmallNumber();
       final int y0 = VectorM4ITest.randomPositiveSmallNumber();
       final int z0 = VectorM4ITest.randomPositiveSmallNumber();
@@ -725,7 +725,7 @@ public class VectorM4ITest
     void
     testInterpolateLinearLimits()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4ITest.randomPositiveNumber();
       final int y0 = VectorM4ITest.randomPositiveNumber();
       final int z0 = VectorM4ITest.randomPositiveNumber();
@@ -757,7 +757,7 @@ public class VectorM4ITest
 
   @SuppressWarnings("static-method") @Test public void testMagnitudeNonzero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM4ITest.randomPositiveSmallNumber();
       final int y = VectorM4ITest.randomPositiveSmallNumber();
       final int z = VectorM4ITest.randomPositiveSmallNumber();
@@ -863,7 +863,7 @@ public class VectorM4ITest
 
   @SuppressWarnings("static-method") @Test public void testScaleOne()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM4ITest.randomPositiveNumber();
       final int y = VectorM4ITest.randomPositiveNumber();
       final int z = VectorM4ITest.randomPositiveNumber();
@@ -897,7 +897,7 @@ public class VectorM4ITest
 
   @SuppressWarnings("static-method") @Test public void testScaleZero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM4ITest.randomPositiveNumber();
       final int y = VectorM4ITest.randomPositiveNumber();
       final int z = VectorM4ITest.randomPositiveNumber();
@@ -932,7 +932,7 @@ public class VectorM4ITest
 
   @SuppressWarnings("static-method") @Test public void testSubtract()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4ITest.randomPositiveNumber();
       final int y0 = VectorM4ITest.randomPositiveNumber();
       final int z0 = VectorM4ITest.randomPositiveNumber();

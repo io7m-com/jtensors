@@ -19,13 +19,15 @@ package com.io7m.jtensors;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.ApproximatelyEqualDouble;
 import com.io7m.jaux.ApproximatelyEqualFloat;
 
 public class VectorM4FTest
 {
   @SuppressWarnings("static-method") @Test public void testAbsolute()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
@@ -107,7 +109,7 @@ public class VectorM4FTest
 
   @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
@@ -134,7 +136,7 @@ public class VectorM4FTest
 
   @SuppressWarnings("static-method") @Test public void testAdd()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -240,7 +242,7 @@ public class VectorM4FTest
 
   @SuppressWarnings("static-method") @Test public void testAddScaled()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -352,7 +354,7 @@ public class VectorM4FTest
     void
     testClampByVectorMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max_x = (float) (Math.random() * Float.MIN_VALUE);
       final float max_y = (float) (Math.random() * Float.MIN_VALUE);
       final float max_z = (float) (Math.random() * Float.MIN_VALUE);
@@ -390,7 +392,7 @@ public class VectorM4FTest
     void
     testClampByVectorMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (Math.random() * Float.MAX_VALUE);
       final float min_y = (float) (Math.random() * Float.MAX_VALUE);
       final float min_z = (float) (Math.random() * Float.MAX_VALUE);
@@ -428,7 +430,7 @@ public class VectorM4FTest
     void
     testClampByVectorOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (Math.random() * Float.MIN_VALUE);
       final float min_y = (float) (Math.random() * Float.MIN_VALUE);
       final float min_z = (float) (Math.random() * Float.MIN_VALUE);
@@ -480,7 +482,7 @@ public class VectorM4FTest
     void
     testClampMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float maximum = (float) (Math.random() * Float.MIN_VALUE);
 
       final float x = (float) (Math.random() * Float.MAX_VALUE);
@@ -511,7 +513,7 @@ public class VectorM4FTest
     void
     testClampMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = (float) (Math.random() * Float.MAX_VALUE);
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
@@ -540,7 +542,7 @@ public class VectorM4FTest
 
   @SuppressWarnings("static-method") @Test public void testClampOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = (float) (Math.random() * Float.MIN_VALUE);
       final float maximum = (float) (Math.random() * Float.MAX_VALUE);
 
@@ -599,14 +601,14 @@ public class VectorM4FTest
   {
     final VectorM4F v0 = new VectorM4F(0.0f, 1.0f, 0.0f, 0.0f);
     final VectorM4F v1 = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
       VectorM4F.distance(v0, v1),
       1.0f));
   }
 
   @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -629,7 +631,7 @@ public class VectorM4FTest
     final VectorM4F v1 = new VectorM4F(10.0f, 10.0f, 10.0f, 10.0f);
 
     {
-      final float p = VectorM4F.dotProduct(v0, v1);
+      final double p = VectorM4F.dotProduct(v0, v1);
       Assert.assertTrue(v0.x == 10.0);
       Assert.assertTrue(v0.y == 10.0);
       Assert.assertTrue(v0.z == 10.0);
@@ -642,7 +644,7 @@ public class VectorM4FTest
     }
 
     {
-      final float p = VectorM4F.dotProduct(v0, v0);
+      final double p = VectorM4F.dotProduct(v0, v0);
       Assert.assertTrue(v0.x == 10.0);
       Assert.assertTrue(v0.y == 10.0);
       Assert.assertTrue(v0.z == 10.0);
@@ -651,7 +653,7 @@ public class VectorM4FTest
     }
 
     {
-      final float p = VectorM4F.dotProduct(v1, v1);
+      final double p = VectorM4F.dotProduct(v1, v1);
       Assert.assertTrue(v1.x == 10.0);
       Assert.assertTrue(v1.y == 10.0);
       Assert.assertTrue(v1.z == 10.0);
@@ -675,7 +677,7 @@ public class VectorM4FTest
     final VectorM4F v0 = new VectorM4F(10.0f, 10.0f, 10.0f, 10.0f);
 
     {
-      final float p = VectorM4F.dotProduct(v0, v0);
+      final double p = VectorM4F.dotProduct(v0, v0);
       Assert.assertTrue(v0.x == 10.0);
       Assert.assertTrue(v0.y == 10.0);
       Assert.assertTrue(v0.z == 10.0);
@@ -684,7 +686,7 @@ public class VectorM4FTest
     }
 
     {
-      final float p = VectorM4F.magnitudeSquared(v0);
+      final double p = VectorM4F.magnitudeSquared(v0);
       Assert.assertTrue(v0.x == 10.0);
       Assert.assertTrue(v0.y == 10.0);
       Assert.assertTrue(v0.z == 10.0);
@@ -806,7 +808,7 @@ public class VectorM4FTest
     void
     testInterpolateLinearLimits()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -854,21 +856,24 @@ public class VectorM4FTest
 
   @SuppressWarnings("static-method") @Test public void testMagnitudeNonzero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
       final float w = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM4F v = new VectorM4F(x, y, z, w);
 
-      final float m = VectorM4F.magnitude(v);
+      final double m = VectorM4F.magnitude(v);
       Assert.assertTrue(m >= 1.0);
     }
   }
 
   @SuppressWarnings("static-method") @Test public void testMagnitudeNormal()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext6dp();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x =
         (float) (Math.random() * (Math.sqrt(Float.MAX_VALUE) / 2));
       final float y =
@@ -883,8 +888,14 @@ public class VectorM4FTest
       VectorM4F.normalize(v, vr);
       Assert.assertNotSame(v, vr);
 
-      final float m = VectorM4F.magnitude(vr);
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 1.0f));
+      final double m = VectorM4F.magnitude(vr);
+
+      System.out.println("v  : " + v);
+      System.out.println("vr : " + vr);
+      System.out.println("m  : " + m);
+      System.out.println("--");
+
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, m));
     }
   }
 
@@ -894,15 +905,15 @@ public class VectorM4FTest
   {
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final VectorM4F vr = VectorM4F.normalizeInPlace(v);
-    final float m = VectorM4F.magnitude(vr);
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 0.0f));
+    final double m = VectorM4F.magnitude(vr);
+    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0f));
   }
 
   @SuppressWarnings("static-method") @Test public void testMagnitudeOne()
   {
     final VectorM4F v = new VectorM4F(1.0f, 0.0f, 0.0f, 0.0f);
-    final float m = VectorM4F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 1.0f));
+    final double m = VectorM4F.magnitude(v);
+    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 1.0f));
   }
 
   @SuppressWarnings("static-method") @Test public void testMagnitudeSimple()
@@ -910,9 +921,9 @@ public class VectorM4FTest
     final VectorM4F v = new VectorM4F(8.0f, 0.0f, 0.0f, 0.0f);
 
     {
-      final float p = VectorM4F.dotProduct(v, v);
-      final float q = VectorM4F.magnitudeSquared(v);
-      final float r = VectorM4F.magnitude(v);
+      final double p = VectorM4F.dotProduct(v, v);
+      final double q = VectorM4F.magnitudeSquared(v);
+      final double r = VectorM4F.magnitude(v);
       Assert.assertTrue(p == 64.0);
       Assert.assertTrue(q == 64.0);
       Assert.assertTrue(r == 8.0);
@@ -922,8 +933,8 @@ public class VectorM4FTest
   @SuppressWarnings("static-method") @Test public void testMagnitudeZero()
   {
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
-    final float m = VectorM4F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 0.0f));
+    final double m = VectorM4F.magnitude(v);
+    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0f));
   }
 
   @SuppressWarnings("static-method") @Test public void testNormalizeSimple()
@@ -934,7 +945,7 @@ public class VectorM4FTest
 
     Assert.assertTrue(vr == out);
 
-    final float m = VectorM4F.magnitude(out);
+    final double m = VectorM4F.magnitude(out);
     Assert.assertTrue(m == 1.0);
   }
 
@@ -1015,7 +1026,7 @@ public class VectorM4FTest
 
   @SuppressWarnings("static-method") @Test public void testScaleOne()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
@@ -1061,7 +1072,7 @@ public class VectorM4FTest
 
   @SuppressWarnings("static-method") @Test public void testScaleZero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
@@ -1108,7 +1119,7 @@ public class VectorM4FTest
 
   @SuppressWarnings("static-method") @Test public void testSubtract()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);

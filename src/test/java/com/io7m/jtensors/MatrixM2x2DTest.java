@@ -849,6 +849,14 @@ public class MatrixM2x2DTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
+  @SuppressWarnings({ "static-method", "boxing" }) @Test public
+    void
+    testTrace()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+    Assert.assertEquals(2.0, MatrixM2x2D.trace(m));
+  }
+
   @SuppressWarnings("static-method") @Test public void testTranspose()
   {
     final MatrixM2x2D m = new MatrixM2x2D();

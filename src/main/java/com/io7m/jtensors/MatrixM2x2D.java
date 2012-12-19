@@ -26,10 +26,23 @@ import javax.annotation.concurrent.NotThreadSafe;
 import com.io7m.jaux.functional.Option;
 
 /**
+ * <p>
  * A 2x2 mutable matrix type with double precision elements.
- * 
+ * </p>
+ * <p>
+ * Values of type <code>MatrixM2x2D</code> are backed by direct memory, with
+ * the rows and columns of the matrices being stored in column-major format.
+ * This allows the matrices to be passed to OpenGL directly, without requiring
+ * transposition.
+ * </p>
+ * <p>
  * Values of this type cannot be accessed safely from multiple threads without
  * explicit synchronization.
+ * </p>
+ * <p>
+ * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed for
+ * the derivations of most of the code in this class (ISBN: 1-58450-277-0).
+ * </p>
  */
 
 @NotThreadSafe public final class MatrixM2x2D implements MatrixReadable2x2D
@@ -238,11 +251,9 @@ import com.io7m.jaux.functional.Option;
    * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
    * This is one of the three "elementary" operations defined on matrices.
    * 
-   * @formatter:off
    * @see <a
    *      href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary
    *      operations</a>.
-   * @formatter:on
    * 
    * @param m
    *          The input matrix.
@@ -453,9 +464,9 @@ import com.io7m.jaux.functional.Option;
     final @Nonnull VectorM2D row = new VectorM2D();
     final @Nonnull VectorM2D vi = new VectorM2D(v);
 
-    m.getRowD(0, row);
+    m.getRow2D(0, row);
     out.x = VectorM2D.dotProduct(row, vi);
-    m.getRowD(1, row);
+    m.getRow2D(1, row);
     out.y = VectorM2D.dotProduct(row, vi);
 
     return out;
@@ -706,6 +717,22 @@ import com.io7m.jaux.functional.Option;
     VIEW_BYTES = MatrixM2x2D.VIEW_ELEMENTS * MatrixM2x2D.VIEW_ELEMENT_SIZE;
   }
 
+  /**
+   * Return the trace of the matrix <code>m</code>. The trace is defined as
+   * the sum of the diagonal elements of the matrix.
+   * 
+   * @since 5.0.0
+   * @param m
+   *          The input matrix
+   * @return The trace of the matrix
+   */
+
+  public static double trace(
+    final @Nonnull MatrixReadable2x2D m)
+  {
+    return m.getRowColumnD(0, 0) + m.getRowColumnD(1, 1);
+  }
+
   public MatrixM2x2D()
   {
     this.data =
@@ -766,18 +793,18 @@ import com.io7m.jaux.functional.Option;
     return this.view;
   }
 
+  @Override public void getRow2D(
+    final int row,
+    final @Nonnull VectorM2D out)
+  {
+    MatrixM2x2D.rowUnsafe(this, MatrixM2x2D.rowCheck(row), out);
+  }
+
   @Override public double getRowColumnD(
     final int row,
     final int column)
   {
     return MatrixM2x2D.get(this, row, column);
-  }
-
-  @Override public void getRowD(
-    final int row,
-    final @Nonnull VectorM2D out)
-  {
-    MatrixM2x2D.rowUnsafe(this, MatrixM2x2D.rowCheck(row), out);
   }
 
   @Override public int hashCode()

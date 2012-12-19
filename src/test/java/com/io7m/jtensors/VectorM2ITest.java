@@ -38,7 +38,7 @@ public class VectorM2ITest
 
   @SuppressWarnings("static-method") @Test public void testAbsolute()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM2ITest.randomNegativeNumber();
       final int y = VectorM2ITest.randomNegativeNumber();
       final VectorM2I v = new VectorM2I(x, y);
@@ -86,7 +86,7 @@ public class VectorM2ITest
 
   @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM2ITest.randomNegativeNumber();
       final int y = VectorM2ITest.randomNegativeNumber();
       final VectorM2I v = new VectorM2I(x, y);
@@ -107,7 +107,7 @@ public class VectorM2ITest
 
   @SuppressWarnings("static-method") @Test public void testAdd()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM2ITest.randomPositiveSmallNumber();
       final int y0 = VectorM2ITest.randomPositiveSmallNumber();
       final VectorM2I v0 = new VectorM2I(x0, y0);
@@ -175,7 +175,7 @@ public class VectorM2ITest
 
   @SuppressWarnings("static-method") @Test public void testAddScaled()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM2ITest.randomPositiveSmallNumber();
       final int y0 = VectorM2ITest.randomPositiveSmallNumber();
       final VectorM2I v0 = new VectorM2I(x0, y0);
@@ -215,7 +215,7 @@ public class VectorM2ITest
     void
     testClampByVectorMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max_x = VectorM2ITest.randomNegativeNumber();
       final int max_y = VectorM2ITest.randomNegativeNumber();
       final VectorM2I maximum = new VectorM2I(max_x, max_y);
@@ -245,7 +245,7 @@ public class VectorM2ITest
     void
     testClampByVectorMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = VectorM2ITest.randomPositiveNumber();
       final int min_y = VectorM2ITest.randomPositiveNumber();
       final VectorM2I minimum = new VectorM2I(min_x, min_y);
@@ -275,7 +275,7 @@ public class VectorM2ITest
     void
     testClampByVectorOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = VectorM2ITest.randomNegativeNumber();
       final int min_y = VectorM2ITest.randomNegativeNumber();
       final VectorM2I minimum = new VectorM2I(min_x, min_y);
@@ -313,7 +313,7 @@ public class VectorM2ITest
     void
     testClampMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int maximum = VectorM2ITest.randomNegativeNumber();
 
       final int x = VectorM2ITest.randomPositiveNumber();
@@ -338,7 +338,7 @@ public class VectorM2ITest
     void
     testClampMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = VectorM2ITest.randomPositiveNumber();
 
       final int x = VectorM2ITest.randomNegativeNumber();
@@ -361,7 +361,7 @@ public class VectorM2ITest
 
   @SuppressWarnings("static-method") @Test public void testClampOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = VectorM2ITest.randomNegativeNumber();
       final int maximum = VectorM2ITest.randomPositiveNumber();
 
@@ -411,7 +411,7 @@ public class VectorM2ITest
 
   @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM2ITest.randomPositiveSmallNumber();
       final int y0 = VectorM2ITest.randomPositiveSmallNumber();
       final VectorM2I v0 = new VectorM2I(x0, y0);
@@ -561,7 +561,7 @@ public class VectorM2ITest
     void
     testInterpolateLinearLimits()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM2ITest.randomPositiveNumber();
       final int y0 = VectorM2ITest.randomPositiveNumber();
       final VectorM2I v0 = new VectorM2I(x0, y0);
@@ -585,7 +585,7 @@ public class VectorM2ITest
 
   @SuppressWarnings("static-method") @Test public void testMagnitudeNonzero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM2ITest.randomPositiveSmallNumber();
       final int y = VectorM2ITest.randomPositiveSmallNumber();
       final VectorM2I v = new VectorM2I(x, y);
@@ -677,7 +677,7 @@ public class VectorM2ITest
 
   @SuppressWarnings("static-method") @Test public void testScaleOne()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM2ITest.randomPositiveNumber();
       final int y = VectorM2ITest.randomPositiveNumber();
       final VectorM2I v = new VectorM2I(x, y);
@@ -703,7 +703,7 @@ public class VectorM2ITest
 
   @SuppressWarnings("static-method") @Test public void testScaleZero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM2ITest.randomPositiveNumber();
       final int y = VectorM2ITest.randomPositiveNumber();
       final VectorM2I v = new VectorM2I(x, y);
@@ -732,7 +732,7 @@ public class VectorM2ITest
 
   @SuppressWarnings("static-method") @Test public void testSubtract()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM2ITest.randomPositiveNumber();
       final int y0 = VectorM2ITest.randomPositiveNumber();
       final VectorM2I v0 = new VectorM2I(x0, y0);

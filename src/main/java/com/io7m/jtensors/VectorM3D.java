@@ -730,7 +730,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
    *      process</a>
    * 
-   * @since 4.2.0
+   * @since 5.0.0
    */
 
   public static void orthoNormalizeInPlace(

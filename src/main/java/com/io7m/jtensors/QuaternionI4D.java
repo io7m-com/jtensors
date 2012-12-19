@@ -19,7 +19,8 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 
 /**
  * A four-dimensional immutable quaternion type with double precision
@@ -65,34 +66,31 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
-   * Determine whether or not the elements of the two quaternions
-   * <code>q0</code> and <code>q1</code> are approximately equal.
+   * Determine whether or not the quaternions <code>qa</code> and
+   * <code>qb</code> are equal to within the degree of error given in
+   * <code>context</code>.
    * 
-   * @see ApproximatelyEqualDouble
+   * @see {@link AlmostEqualDouble#almostEqual(ContextRelative, double, double)}
    * 
-   * @param q0
+   * @param context
+   *          The equality context
+   * @param qa
    *          The left input quaternion
-   * @param q1
+   * @param qb
    *          The right input quaternion
-   * 
-   * @return true, iff <code>q0</code> is approximately equal to
-   *         <code>q1</code> , within an appropriate degree of error for
-   *         double precision floating point values
+   * @since 5.0.0
    */
 
-  public static boolean approximatelyEqual(
-    final @Nonnull QuaternionI4D q0,
-    final @Nonnull QuaternionI4D q1)
+  public static boolean almostEqual(
+    final @Nonnull ContextRelative context,
+    final @Nonnull QuaternionI4D qa,
+    final @Nonnull QuaternionI4D qb)
   {
-    final boolean ex =
-      ApproximatelyEqualDouble.approximatelyEqual(q0.x, q1.x);
-    final boolean ey =
-      ApproximatelyEqualDouble.approximatelyEqual(q0.y, q1.y);
-    final boolean ez =
-      ApproximatelyEqualDouble.approximatelyEqual(q0.z, q1.z);
-    final boolean ew =
-      ApproximatelyEqualDouble.approximatelyEqual(q0.w, q1.w);
-    return ex && ey && ez && ew;
+    final boolean xs = AlmostEqualDouble.almostEqual(context, qa.x, qb.x);
+    final boolean ys = AlmostEqualDouble.almostEqual(context, qa.y, qb.y);
+    final boolean zs = AlmostEqualDouble.almostEqual(context, qa.z, qb.z);
+    final boolean ws = AlmostEqualDouble.almostEqual(context, qa.w, qb.w);
+    return xs && ys && zs && ws;
   }
 
   /**
@@ -168,6 +166,42 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Return <code>true</code> iff <code>qa</code> is the negation of
+   * <code>qb</code>.
+   * 
+   * <p>
+   * Each element is compared with
+   * {@link AlmostEqualDouble#almostEqual(com.io7m.jaux.AlmostEqualDouble.ContextRelative, double, double)}
+   * .
+   * </p>
+   * 
+   * @since 5.0.0
+   */
+
+  public static boolean isNegationOf(
+    final @Nonnull AlmostEqualDouble.ContextRelative context,
+    final @Nonnull QuaternionReadable4D qa,
+    final @Nonnull QuaternionReadable4D qb)
+  {
+    final double xa = qa.getXD();
+    final double ya = qa.getYD();
+    final double za = qa.getZD();
+    final double wa = qa.getWD();
+
+    final double xb = -qb.getXD();
+    final double yb = -qb.getYD();
+    final double zb = -qb.getZD();
+    final double wb = -qb.getWD();
+
+    final boolean xs = AlmostEqualDouble.almostEqual(context, xa, xb);
+    final boolean ys = AlmostEqualDouble.almostEqual(context, ya, yb);
+    final boolean zs = AlmostEqualDouble.almostEqual(context, za, zb);
+    final boolean ws = AlmostEqualDouble.almostEqual(context, wa, wb);
+
+    return xs && ys && zs && ws;
+  }
+
+  /**
    * Calculate the magnitude of the quaternion <code>q</code>.
    * 
    * Correspondingly, <code>magnitude(normalize(q)) == 1.0</code>.
@@ -206,8 +240,6 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * 
    * @see VectorI3D#normalize(VectorI3D)
    * @see VectorI4D#normalize(VectorI4D)
-   * @see VectorM3D#normalize(VectorM3D, VectorM3D)
-   * @see VectorM4D#normalize(VectorM4D, VectorM4D)
    * 
    * @param axis
    *          The normalized vector representing the axis
@@ -231,9 +263,130 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Produce a quaternion equivalent to the rotation matrix <code>m</code>.
+   * 
+   * @since 5.0.0
+   * @param m
+   *          The rotation matrix
+   */
+
+  public static @Nonnull QuaternionI4D makeFromRotationMatrix3x3(
+    final @Nonnull MatrixReadable3x3D m)
+  {
+    final double m00 = MatrixM3x3D.get(m, 0, 0);
+    final double m01 = MatrixM3x3D.get(m, 0, 1);
+    final double m02 = MatrixM3x3D.get(m, 0, 2);
+    final double m10 = MatrixM3x3D.get(m, 1, 0);
+    final double m11 = MatrixM3x3D.get(m, 1, 1);
+    final double m12 = MatrixM3x3D.get(m, 1, 2);
+    final double m20 = MatrixM3x3D.get(m, 2, 0);
+    final double m21 = MatrixM3x3D.get(m, 2, 1);
+    final double m22 = MatrixM3x3D.get(m, 2, 2);
+
+    final double trace = MatrixM3x3D.trace(m);
+
+    double x;
+    double y;
+    double z;
+    double w;
+
+    if (trace > 0) {
+      final double S = Math.sqrt(trace + 1.0) * 2; // S = 4 * qw
+      w = 0.25 * S;
+      x = (m21 - m12) / S;
+      y = (m02 - m20) / S;
+      z = (m10 - m01) / S;
+    } else if ((m00 > m11) && (m00 > m22)) {
+      final double S = Math.sqrt((1.0 + m00) - m11 - m22) * 2; // S = 4 * qx
+      w = (m21 - m12) / S;
+      x = 0.25 * S;
+      y = (m01 + m10) / S;
+      z = (m02 + m20) / S;
+    } else if (m11 > m22) {
+      final double S = Math.sqrt((1.0 + m11) - m00 - m22) * 2; // S = 4 * qy
+      w = (m02 - m20) / S;
+      x = (m01 + m10) / S;
+      y = 0.25 * S;
+      z = (m12 + m21) / S;
+    } else {
+      final double S = Math.sqrt((1.0 + m22) - m00 - m11) * 2; // S = 4 * qz
+      w = (m10 - m01) / S;
+      x = (m02 + m20) / S;
+      y = (m12 + m21) / S;
+      z = 0.25 * S;
+    }
+
+    return new QuaternionI4D(x, y, z, w);
+  }
+
+  /**
+   * Produce a quaternion equivalent to the rotation matrix <code>m</code>,
+   * writing the result to <code>out</code>.
+   * 
+   * @since 5.0.0
+   * @param m
+   *          The rotation matrix
+   */
+
+  public static @Nonnull QuaternionI4D makeFromRotationMatrix4x4(
+    final @Nonnull MatrixReadable4x4D m)
+  {
+    final double m00 = MatrixM4x4D.get(m, 0, 0);
+    final double m01 = MatrixM4x4D.get(m, 0, 1);
+    final double m02 = MatrixM4x4D.get(m, 0, 2);
+    final double m10 = MatrixM4x4D.get(m, 1, 0);
+    final double m11 = MatrixM4x4D.get(m, 1, 1);
+    final double m12 = MatrixM4x4D.get(m, 1, 2);
+    final double m20 = MatrixM4x4D.get(m, 2, 0);
+    final double m21 = MatrixM4x4D.get(m, 2, 1);
+    final double m22 = MatrixM4x4D.get(m, 2, 2);
+
+    /**
+     * Explicitly ignore the bottom right element of the matrix, as this
+     * affects the magnitude of the created quaternion.
+     */
+
+    final double trace = m00 + m11 + m22;
+
+    double x;
+    double y;
+    double z;
+    double w;
+
+    if (trace > 0) {
+      final double S = Math.sqrt(trace + 1.0) * 2; // S = 4 * qw
+      w = 0.25 * S;
+      x = (m21 - m12) / S;
+      y = (m02 - m20) / S;
+      z = (m10 - m01) / S;
+    } else if ((m00 > m11) && (m00 > m22)) {
+      final double S = Math.sqrt((1.0 + m00) - m11 - m22) * 2; // S = 4 * qx
+      w = (m21 - m12) / S;
+      x = 0.25 * S;
+      y = (m01 + m10) / S;
+      z = (m02 + m20) / S;
+    } else if (m11 > m22) {
+      final double S = Math.sqrt((1.0 + m11) - m00 - m22) * 2; // S = 4 * qy
+      w = (m02 - m20) / S;
+      x = (m01 + m10) / S;
+      y = 0.25 * S;
+      z = (m12 + m21) / S;
+    } else {
+      final double S = Math.sqrt((1.0 + m22) - m00 - m11) * 2; // S = 4 * qz
+      w = (m10 - m01) / S;
+      x = (m02 + m20) / S;
+      y = (m12 + m21) / S;
+      z = 0.25 * S;
+    }
+
+    return new QuaternionI4D(x, y, z, w);
+  }
+
+  /**
    * Produce a rotation matrix from the quaternion <code>q</code>, saving the
    * result to <code>m</code>.
    * 
+   * @since 5.0.0
    * @param q
    *          The input quaternion
    * @param m
@@ -242,38 +395,92 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4D makeRotationMatrix(
+  public static @Nonnull MatrixM3x3D makeRotationMatrix3x3(
+    final @Nonnull QuaternionI4D q,
+    final @Nonnull MatrixM3x3D m)
+  {
+    final double xx = q.x * q.x;
+    final double xy = q.x * q.y;
+    final double xz = q.x * q.z;
+    final double yy = q.y * q.y;
+    final double yz = q.y * q.z;
+    final double zz = q.z * q.z;
+    final double wx = q.w * q.x;
+    final double wy = q.w * q.y;
+    final double wz = q.w * q.z;
+
+    final double r0c0 = 1.0 - (2 * yy) - (2 * zz);
+    final double r0c1 = (2 * xy) - (2 * wz);
+    final double r0c2 = (2 * xz) + (2 * wy);
+
+    final double r1c0 = (2 * xy) + (2 * wz);
+    final double r1c1 = 1.0 - (2 * xx) - (2 * zz);
+    final double r1c2 = (2 * yz) - (2 * wx);
+
+    final double r2c0 = (2 * xz) - (2 * wy);
+    final double r2c1 = (2 * yz) + (2 * wx);
+    final double r2c2 = 1.0 - (2 * xx) - (2 * yy);
+
+    m.setUnsafe(0, 0, r0c0);
+    m.setUnsafe(0, 1, r0c1);
+    m.setUnsafe(0, 2, r0c2);
+
+    m.setUnsafe(1, 0, r1c0);
+    m.setUnsafe(1, 1, r1c1);
+    m.setUnsafe(1, 2, r1c2);
+
+    m.setUnsafe(2, 0, r2c0);
+    m.setUnsafe(2, 1, r2c1);
+    m.setUnsafe(2, 2, r2c2);
+
+    return m;
+  }
+
+  /**
+   * Produce a rotation matrix from the quaternion <code>q</code>, saving the
+   * result to <code>m</code>.
+   * 
+   * @since 5.0.0
+   * @param q
+   *          The input quaternion
+   * @param m
+   *          The output matrix
+   * 
+   * @return <code>m</code>
+   */
+
+  public static @Nonnull MatrixM4x4D makeRotationMatrix4x4(
     final @Nonnull QuaternionI4D q,
     final @Nonnull MatrixM4x4D m)
   {
     final double xx = q.x * q.x;
     final double xy = q.x * q.y;
     final double xz = q.x * q.z;
-    final double xw = q.x * q.w;
     final double yy = q.y * q.y;
     final double yz = q.y * q.z;
-    final double yw = q.y * q.w;
     final double zz = q.z * q.z;
-    final double zw = q.z * q.w;
+    final double wx = q.w * q.x;
+    final double wy = q.w * q.y;
+    final double wz = q.w * q.z;
 
-    final double r0c0 = 1 - (2 * (yy + zz));
-    final double r1c0 = 2 * (xy - zw);
-    final double r2c0 = 2 * (xz + yw);
-    final double r3c0 = 0.0;
-
-    final double r0c1 = 2 * (xy + zw);
-    final double r1c1 = 1 - (2 * (xx + zz));
-    final double r2c1 = 2 * (yz - xw);
-    final double r3c1 = 0.0;
-
-    final double r0c2 = 2 * (xz - yw);
-    final double r1c2 = 2 * (yz + xw);
-    final double r2c2 = 1 - (2 * (xx + yy));
-    final double r3c2 = 0.0;
-
+    final double r0c0 = 1.0 - (2 * yy) - (2 * zz);
+    final double r0c1 = (2 * xy) - (2 * wz);
+    final double r0c2 = (2 * xz) + (2 * wy);
     final double r0c3 = 0.0;
+
+    final double r1c0 = (2 * xy) + (2 * wz);
+    final double r1c1 = 1.0 - (2 * xx) - (2 * zz);
+    final double r1c2 = (2 * yz) - (2 * wx);
     final double r1c3 = 0.0;
+
+    final double r2c0 = (2 * xz) - (2 * wy);
+    final double r2c1 = (2 * yz) + (2 * wx);
+    final double r2c2 = 1.0 - (2 * xx) - (2 * yy);
     final double r2c3 = 0.0;
+
+    final double r3c0 = 0.0;
+    final double r3c1 = 0.0;
+    final double r3c2 = 0.0;
     final double r3c3 = 1.0;
 
     m.setUnsafe(0, 0, r0c0);
@@ -352,6 +559,18 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Negate the elements of <code>q</code>.
+   * 
+   * @since 5.0.0
+   */
+
+  public static @Nonnull QuaternionI4D negate(
+    final @Nonnull QuaternionI4D q)
+  {
+    return new QuaternionI4D(-q.x, -q.y, -q.z, -q.w);
+  }
+
+  /**
    * Normalize the quaternion <code>q</code>, preserqing its direction but
    * reducing it to unit length.
    * 
@@ -415,8 +634,11 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   private final double x;
+
   private final double y;
+
   private final double z;
+
   private final double w;
 
   /**

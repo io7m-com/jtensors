@@ -51,15 +51,15 @@ public class MatrixM2x2FTest
       }
     }
 
-    final MatrixM2x2F mr = MatrixM2x2F.add(m0, m1);
+    final MatrixM2x2F mr = MatrixM2x2F.addInPlace(m0, m1);
     Assert.assertSame(mr, m0);
     Assert.assertEquals(0, MatrixM2x2F.floatBuffer(mr).position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 4.0);
-        Assert.assertTrue(mr.get(row, column) == 4.0);
-        Assert.assertTrue(m1.get(row, column) == 3.0);
+        Assert.assertTrue(m0.get(row, column) == 4.0f);
+        Assert.assertTrue(mr.get(row, column) == 4.0f);
+        Assert.assertTrue(m1.get(row, column) == 3.0f);
       }
     }
   }
@@ -844,6 +844,15 @@ public class MatrixM2x2FTest
 
     Assert.assertEquals(m0.toString(), m1.toString());
     Assert.assertFalse(m0.toString().equals(m2.toString()));
+  }
+
+  @SuppressWarnings({ "static-method", "boxing" }) @Test public
+    void
+    testTrace()
+  {
+    final MatrixM2x2F m = new MatrixM2x2F();
+    final float t = MatrixM2x2F.trace(m);
+    Assert.assertEquals(2.0f, t);
   }
 
   @SuppressWarnings("static-method") @Test public void testTranspose()

@@ -26,10 +26,23 @@ import javax.annotation.concurrent.NotThreadSafe;
 import com.io7m.jaux.functional.Option;
 
 /**
+ * <p>
  * A 2x2 mutable matrix type with single precision elements.
- * 
+ * </p>
+ * <p>
+ * Values of type <code>MatrixM2x2F</code> are backed by direct memory, with
+ * the rows and columns of the matrices being stored in column-major format.
+ * This allows the matrices to be passed to OpenGL directly, without requiring
+ * transposition.
+ * </p>
+ * <p>
  * Values of this type cannot be accessed safely from multiple threads without
  * explicit synchronization.
+ * </p>
+ * <p>
+ * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed for
+ * the derivations of most of the code in this class (ISBN: 1-58450-277-0).
+ * </p>
  */
 
 @NotThreadSafe public final class MatrixM2x2F implements MatrixReadable2x2F
@@ -37,24 +50,6 @@ import com.io7m.jaux.functional.Option;
   private static final float[] identity_row_0 = { 1.0f, 0.0f };
   private static final float[] identity_row_1 = { 0.0f, 1.0f };
   private static final float[] zero_row       = { 0.0f, 0.0f };
-
-  /**
-   * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
-   * returning the result in <code>m0</code>.
-   * 
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
-   * @return <code>m0</code>
-   */
-
-  public static MatrixM2x2F add(
-    final @Nonnull MatrixM2x2F m0,
-    final @Nonnull MatrixReadable2x2F m1)
-  {
-    return MatrixM2x2F.add(m0, m1, m0);
-  }
 
   /**
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>.
@@ -83,6 +78,25 @@ import com.io7m.jaux.functional.Option;
     out.view.rewind();
 
     return out;
+  }
+
+  /**
+   * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
+   * returning the result in <code>m0</code>.
+   * 
+   * @since 5.0.0
+   * @param m0
+   *          The left input matrix.
+   * @param m1
+   *          The right input matrix.
+   * @return <code>m0</code>
+   */
+
+  public static MatrixM2x2F addInPlace(
+    final @Nonnull MatrixM2x2F m0,
+    final @Nonnull MatrixReadable2x2F m1)
+  {
+    return MatrixM2x2F.add(m0, m1, m0);
   }
 
   public static MatrixM2x2F addRowScaled(
@@ -225,11 +239,9 @@ import com.io7m.jaux.functional.Option;
    * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
    * This is one of the three "elementary" operations defined on matrices.
    * 
-   * @formatter:off
    * @see <a
    *      href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary
    *      operations</a>.
-   * @formatter:on
    * 
    * @param m
    *          The input matrix.
@@ -453,9 +465,9 @@ import com.io7m.jaux.functional.Option;
     final @Nonnull VectorM2F row = new VectorM2F();
     final @Nonnull VectorM2F vi = new VectorM2F(v);
 
-    m.getRowF(0, row);
+    m.getRow2F(0, row);
     out.x = VectorM2F.dotProduct(row, vi);
-    m.getRowF(1, row);
+    m.getRow2F(1, row);
     out.y = VectorM2F.dotProduct(row, vi);
 
     return out;
@@ -706,6 +718,22 @@ import com.io7m.jaux.functional.Option;
     VIEW_BYTES = MatrixM2x2F.VIEW_ELEMENTS * MatrixM2x2F.VIEW_ELEMENT_SIZE;
   }
 
+  /**
+   * Return the trace of the matrix <code>m</code>. The trace is defined as
+   * the sum of the diagonal elements of the matrix.
+   * 
+   * @since 5.0.0
+   * @param m
+   *          The input matrix
+   * @return The trace of the matrix
+   */
+
+  public static float trace(
+    final @Nonnull MatrixReadable2x2F m)
+  {
+    return m.getRowColumnF(0, 0) + m.getRowColumnF(1, 1);
+  }
+
   public MatrixM2x2F()
   {
     this.data =
@@ -766,18 +794,18 @@ import com.io7m.jaux.functional.Option;
     return this.view;
   }
 
+  @Override public void getRow2F(
+    final int row,
+    final @Nonnull VectorM2F out)
+  {
+    MatrixM2x2F.rowUnsafe(this, MatrixM2x2F.rowCheck(row), out);
+  }
+
   @Override public float getRowColumnF(
     final int row,
     final int column)
   {
     return MatrixM2x2F.get(this, row, column);
-  }
-
-  @Override public void getRowF(
-    final int row,
-    final @Nonnull VectorM2F out)
-  {
-    MatrixM2x2F.rowUnsafe(this, MatrixM2x2F.rowCheck(row), out);
   }
 
   @Override public int hashCode()

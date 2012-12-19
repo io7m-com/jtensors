@@ -7,12 +7,103 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.functional.Option;
 import com.io7m.jaux.functional.Option.Some;
 import com.io7m.jaux.functional.Option.Type;
+import com.io7m.jtensors.MatrixM3x3D.Context;
 
 public class MatrixM3x3DTest
 {
+  private static final VectorReadable3D AXIS_X = new VectorI3D(1, 0, 0);
+  private static final VectorReadable3D AXIS_Y = new VectorI3D(0, 1, 0);
+  private static final VectorReadable3D AXIS_Z = new VectorI3D(0, 0, 1);
+
+  private static void isRotationMatrixX(
+    final AlmostEqualDouble.ContextRelative context,
+    final MatrixM3x3D r)
+  {
+    boolean eq;
+    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, -0.707106781187, r.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(2, 2));
+    Assert.assertTrue(eq);
+  }
+
+  private static void isRotationMatrixY(
+    final AlmostEqualDouble.ContextRelative context,
+    final MatrixM3x3D r)
+  {
+    boolean eq;
+    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(context, -0.707106781187, r.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(2, 2));
+    Assert.assertTrue(eq);
+  }
+
+  private static void isRotationMatrixZ(
+    final AlmostEqualDouble.ContextRelative context_d,
+    final MatrixM3x3D r)
+  {
+    boolean eq;
+    eq =
+      AlmostEqualDouble.almostEqual(context_d, 0.707106781187, r.get(0, 0));
+    Assert.assertTrue(eq);
+    eq =
+      AlmostEqualDouble.almostEqual(context_d, -0.707106781187, r.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq =
+      AlmostEqualDouble.almostEqual(context_d, 0.707106781187, r.get(1, 0));
+    Assert.assertTrue(eq);
+    eq =
+      AlmostEqualDouble.almostEqual(context_d, 0.707106781187, r.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context_d, 1.0, r.get(2, 2));
+    Assert.assertTrue(eq);
+  }
+
   @SuppressWarnings("static-method") @Test public void testAdd()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
@@ -910,6 +1001,700 @@ public class MatrixM3x3DTest
     m.get(3, 0);
   }
 
+  /**
+   * All rotation matrices have a determinant of 1.0 and are orthogonal.
+   */
+
+  @SuppressWarnings({ "static-method" }) @Test public
+    void
+    testRotateDeterminantOrthogonal()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final MatrixM3x3D mt = new MatrixM3x3D();
+    final MatrixM3x3D mi = new MatrixM3x3D();
+    final VectorM3D axis = new VectorM3D();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      double angle = Math.random() * (2 * Math.PI);
+      axis.x = Math.random();
+      axis.y = Math.random();
+      axis.z = Math.random();
+
+      if (Math.random() > 0.5) {
+        angle = -angle;
+      }
+      if (Math.random() > 0.5) {
+        axis.x = -axis.x;
+      }
+      if (Math.random() > 0.5) {
+        axis.y = -axis.y;
+      }
+      if (Math.random() > 0.5) {
+        axis.z = -axis.z;
+      }
+      VectorM3D.normalizeInPlace(axis);
+
+      System.out.println("axis  : " + axis);
+      System.out.println("angle : " + angle);
+
+      MatrixM3x3D.makeRotation(angle, axis, m);
+
+      final double det = MatrixM3x3D.determinant(m);
+      System.out.println("det   : " + det);
+
+      AlmostEqualDouble.almostEqual(context, det, 1.0);
+
+      MatrixM3x3D.invert(m, mi);
+      MatrixM3x3D.transpose(m, mt);
+
+      for (int row = 0; row < 3; ++row) {
+        for (int col = 0; col < 3; ++col) {
+          final double mx = mi.get(row, col);
+          final double my = mt.get(row, col);
+          final boolean eq = AlmostEqualDouble.almostEqual(context, mx, my);
+
+          System.out.println("mi(" + row + ", " + col + ") == " + mx);
+          System.out.println("mt(" + row + ", " + col + ") == " + my);
+          System.out.println(eq);
+
+          Assert.assertTrue(eq);
+        }
+      }
+
+      System.out.println("--");
+    }
+  }
+
+  /**
+   * A rotation of 0 degrees around the X axis has no effect.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector0X()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM3D v_in = new VectorM3D(0, 0, -1);
+    final VectorM3D v_got = new VectorM3D();
+    final VectorM3D v_exp = new VectorM3D(0, 0, -1);
+
+    MatrixM3x3D.makeRotation(0, MatrixM3x3DTest.AXIS_X, m);
+    MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    Assert.assertTrue(VectorM3D.approximatelyEqual(v_exp, v_got));
+  }
+
+  /**
+   * A rotation of 0 degrees around the Y axis has no effect.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector0Y()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM3D v_in = new VectorM3D(0, 0, -1);
+    final VectorM3D v_got = new VectorM3D();
+    final VectorM3D v_exp = new VectorM3D(0, 0, -1);
+
+    MatrixM3x3D.makeRotation(0, MatrixM3x3DTest.AXIS_Y, m);
+    MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    Assert.assertTrue(VectorM3D.approximatelyEqual(v_exp, v_got));
+  }
+
+  /**
+   * A rotation of 0 degrees around the Z axis has no effect.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector0Z()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM3D v_in = new VectorM3D(0, 0, -1);
+    final VectorM3D v_got = new VectorM3D();
+    final VectorM3D v_exp = new VectorM3D(0, 0, -1);
+
+    MatrixM3x3D.makeRotation(0, MatrixM3x3DTest.AXIS_Z, m);
+    MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    Assert.assertTrue(VectorM3D.approximatelyEqual(v_exp, v_got));
+  }
+
+  /**
+   * A rotation of 90 degrees around the X axis gives the correct
+   * counter-clockwise rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector90X()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM3D v_got = new VectorM3D();
+    final VectorM3D v_in = new VectorM3D(0, 1, 0);
+
+    /**
+     * XXX: Strange Y value due to floating point imprecision, with no good
+     * way to compare it to 0 with an epsilon. The value of Z is the only
+     * significant element, anyway.
+     */
+
+    final VectorM3D v_exp = new VectorM3D(0, 6.1232339957367E-17, 1);
+
+    MatrixM3x3D.makeRotation(Math.toRadians(90), MatrixM3x3DTest.AXIS_X, m);
+    System.out.println(m);
+    MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  /**
+   * A rotation of 90 degrees around the Y axis gives the correct
+   * counter-clockwise rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector90Y()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM3D v_got = new VectorM3D();
+    final VectorM3D v_in = new VectorM3D(0, 0, -1);
+
+    /**
+     * XXX: Strange Z value due to floating point imprecision, with no good
+     * way to compare it to 0 with an epsilon. The value of X is the only
+     * significant element, anyway.
+     */
+
+    final VectorM3D v_exp = new VectorM3D(-1, 0, -6.1232339957367E-17);
+
+    MatrixM3x3D.makeRotation(Math.toRadians(90), MatrixM3x3DTest.AXIS_Y, m);
+    MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  /**
+   * A rotation of 90 degrees around the Z axis gives the correct
+   * counter-clockwise rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public void testRotateVector90Z()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM3D v_got = new VectorM3D();
+    final VectorM3D v_in = new VectorM3D(0, 1, 0);
+    final VectorM3D v_exp = new VectorM3D(-1, 6.123233995736766E-17, 0);
+
+    MatrixM3x3D.makeRotation(Math.toRadians(90), MatrixM3x3DTest.AXIS_Z, m);
+    MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  /**
+   * A rotation of -90 degrees around the X axis gives the correct clockwise
+   * rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testRotateVectorMinus90X()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM3D v_got = new VectorM3D();
+    final VectorM3D v_in = new VectorM3D(0, 1, 0);
+
+    /**
+     * XXX: Strange Y value due to floating point imprecision, with no good
+     * way to compare it to 0 with an epsilon. The value of Z is the only
+     * significant element, anyway.
+     */
+
+    final VectorM3D v_exp = new VectorM3D(0, 6.1232339957367E-17, -1);
+
+    MatrixM3x3D.makeRotation(Math.toRadians(-90), MatrixM3x3DTest.AXIS_X, m);
+    System.out.println(m);
+    MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  /**
+   * A rotation of -90 degrees around the Y axis gives the correct clockwise
+   * rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testRotateVectorMinus90Y()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM3D v_got = new VectorM3D();
+    final VectorM3D v_in = new VectorM3D(0, 0, -1);
+
+    /**
+     * XXX: Strange Z value due to floating point imprecision, with no good
+     * way to compare it to 0 with an epsilon. The value of X is the only
+     * significant element, anyway.
+     */
+
+    final VectorM3D v_exp = new VectorM3D(1, 0, -6.1232339957367E-17);
+
+    MatrixM3x3D.makeRotation(Math.toRadians(-90), MatrixM3x3DTest.AXIS_Y, m);
+    MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  /**
+   * A rotation of -90 degrees around the Z axis gives the correct clockwise
+   * rotation of the vector.
+   */
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testRotateVectorMinus90Z()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    boolean eq = false;
+
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM3D v_got = new VectorM3D();
+    final VectorM3D v_in = new VectorM3D(0, 1, 0);
+    final VectorM3D v_exp = new VectorM3D(1, 6.123233995736766E-17, 0);
+
+    MatrixM3x3D.makeRotation(Math.toRadians(-90), MatrixM3x3DTest.AXIS_Z, m);
+    MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
+
+    System.out.println("in  : " + v_in);
+    System.out.println("exp : " + v_exp);
+    System.out.println("got : " + v_got);
+    System.out.println("--");
+
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.x, v_got.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.y, v_got.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, v_exp.z, v_got.z);
+    Assert.assertTrue(eq);
+  }
+
+  @SuppressWarnings({ "static-method", "boxing" }) @Test public
+    void
+    testRotateX()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    final MatrixM3x3D m = new MatrixM3x3D();
+    {
+      final MatrixM3x3D out = new MatrixM3x3D();
+      final MatrixM3x3D r =
+        MatrixM3x3D
+          .rotate(Math.toRadians(45), m, MatrixM3x3DTest.AXIS_X, out);
+      Assert.assertSame(r, out);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(out).position());
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixX(context, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+
+    {
+      final MatrixM3x3D r =
+        MatrixM3x3D.rotateInPlace(
+          Math.toRadians(45),
+          m,
+          MatrixM3x3DTest.AXIS_X);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixX(context, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+  }
+
+  @SuppressWarnings({ "static-method", "boxing" }) @Test public
+    void
+    testRotateXContextEquivalentInPlace()
+  {
+    final AlmostEqualDouble.ContextRelative context_d =
+      TestUtilities.getDoubleEqualityContext();
+
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final Context context = new Context();
+    {
+      final MatrixM3x3D out = new MatrixM3x3D();
+
+      final MatrixM3x3D r =
+        MatrixM3x3D.rotateWithContext(
+          context,
+          Math.toRadians(45),
+          m,
+          MatrixM3x3DTest.AXIS_X,
+          out);
+      Assert.assertSame(r, out);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(out).position());
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixX(context_d, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+
+    {
+      final MatrixM3x3D r =
+        MatrixM3x3D.rotateInPlaceWithContext(
+          context,
+          Math.toRadians(45),
+          m,
+          MatrixM3x3DTest.AXIS_X);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+
+      MatrixM3x3DTest.isRotationMatrixX(context_d, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+  }
+
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateXMakeEquivalent()
+  {
+    final AlmostEqualDouble.ContextRelative context_d =
+      TestUtilities.getDoubleEqualityContext();
+
+    {
+      final MatrixM3x3D r =
+        MatrixM3x3D.makeRotation(Math.toRadians(45), MatrixM3x3DTest.AXIS_X);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixX(context_d, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+  }
+
+  @SuppressWarnings({ "static-method", "boxing" }) @Test public
+    void
+    testRotateY()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    final MatrixM3x3D m = new MatrixM3x3D();
+    {
+      final MatrixM3x3D out = new MatrixM3x3D();
+      final MatrixM3x3D r =
+        MatrixM3x3D
+          .rotate(Math.toRadians(45), m, MatrixM3x3DTest.AXIS_Y, out);
+      Assert.assertSame(r, out);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixY(context, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+
+    {
+      final MatrixM3x3D r =
+        MatrixM3x3D.rotateInPlace(
+          Math.toRadians(45),
+          m,
+          MatrixM3x3DTest.AXIS_Y);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixY(context, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+  }
+
+  @SuppressWarnings({ "static-method", "boxing" }) @Test public
+    void
+    testRotateYContextEquivalentInPlace()
+  {
+    final AlmostEqualDouble.ContextRelative context_d =
+      TestUtilities.getDoubleEqualityContext();
+
+    final Context context = new Context();
+    final MatrixM3x3D m = new MatrixM3x3D();
+    {
+      final MatrixM3x3D out = new MatrixM3x3D();
+      final MatrixM3x3D r =
+        MatrixM3x3D.rotateWithContext(
+          context,
+          Math.toRadians(45),
+          m,
+          MatrixM3x3DTest.AXIS_Y,
+          out);
+      Assert.assertSame(r, out);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixY(context_d, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+
+    {
+      final MatrixM3x3D r =
+        MatrixM3x3D.rotateInPlaceWithContext(
+          context,
+          Math.toRadians(45),
+          m,
+          MatrixM3x3DTest.AXIS_Y);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixY(context_d, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+  }
+
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateYMakeEquivalent()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    {
+      final MatrixM3x3D r =
+        MatrixM3x3D.makeRotation(Math.toRadians(45), MatrixM3x3DTest.AXIS_Y);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixY(context, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+  }
+
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateZ()
+  {
+    final AlmostEqualDouble.ContextRelative context_d =
+      TestUtilities.getDoubleEqualityContext();
+
+    final MatrixM3x3D m = new MatrixM3x3D();
+    {
+      final MatrixM3x3D out = new MatrixM3x3D();
+      final MatrixM3x3D r =
+        MatrixM3x3D
+          .rotate(Math.toRadians(45), m, MatrixM3x3DTest.AXIS_Z, out);
+      Assert.assertSame(r, out);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixZ(context_d, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+
+    {
+      final MatrixM3x3D r =
+        MatrixM3x3D.rotateInPlace(
+          Math.toRadians(45),
+          m,
+          MatrixM3x3DTest.AXIS_Z);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixZ(context_d, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+  }
+
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateZContextEquivalentInPlace()
+  {
+    final AlmostEqualDouble.ContextRelative context_d =
+      TestUtilities.getDoubleEqualityContext();
+
+    final Context context = new Context();
+    final MatrixM3x3D m = new MatrixM3x3D();
+
+    {
+      final MatrixM3x3D out = new MatrixM3x3D();
+      final MatrixM3x3D r =
+        MatrixM3x3D.rotateWithContext(
+          context,
+          Math.toRadians(45),
+          m,
+          MatrixM3x3DTest.AXIS_Z,
+          out);
+      Assert.assertSame(r, out);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixZ(context_d, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+
+    {
+      final MatrixM3x3D r =
+        MatrixM3x3D.rotateInPlaceWithContext(
+          context,
+          Math.toRadians(45),
+          m,
+          MatrixM3x3DTest.AXIS_Z);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixZ(context_d, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+  }
+
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateZMakeEquivalent()
+  {
+    final AlmostEqualDouble.ContextRelative context_d =
+      TestUtilities.getDoubleEqualityContext();
+
+    {
+      final MatrixM3x3D r =
+        MatrixM3x3D.makeRotation(Math.toRadians(45), MatrixM3x3DTest.AXIS_Z);
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+
+      System.out.println(r);
+
+      MatrixM3x3DTest.isRotationMatrixZ(context_d, r);
+
+      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    }
+  }
+
   @SuppressWarnings("static-method") @Test public void testRow()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
@@ -935,6 +1720,49 @@ public class MatrixM3x3DTest
     Assert.assertTrue(v.z == 1.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+  }
+
+  @SuppressWarnings("static-method") @Test public void testRow3D()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final VectorM3D v = new VectorM3D();
+    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+
+    m.getRow3D(0, v);
+    Assert.assertTrue(v.x == 1.0);
+    Assert.assertTrue(v.y == 0.0);
+    Assert.assertTrue(v.z == 0.0);
+    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+
+    m.getRow3D(1, v);
+    Assert.assertTrue(v.x == 0.0);
+    Assert.assertTrue(v.y == 1.0);
+    Assert.assertTrue(v.z == 0.0);
+    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+
+    m.getRow3D(2, v);
+    Assert.assertTrue(v.x == 0.0);
+    Assert.assertTrue(v.y == 0.0);
+    Assert.assertTrue(v.z == 1.0);
+    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+  }
+
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
+    void
+    testRow3DOverflow()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    m.getRow3D(4, new VectorM3D());
+  }
+
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
+    void
+    testRow3DUnderflow()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    m.getRow3D(-1, new VectorM3D());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -1054,9 +1882,9 @@ public class MatrixM3x3DTest
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
 
-    MatrixM3x3D.scaleRow(m0, 0, 2.0);
-    MatrixM3x3D.scaleRow(m0, 1, 4.0);
-    MatrixM3x3D.scaleRow(m0, 2, 8.0);
+    MatrixM3x3D.scaleRowInPlace(m0, 0, 2.0);
+    MatrixM3x3D.scaleRowInPlace(m0, 1, 4.0);
+    MatrixM3x3D.scaleRowInPlace(m0, 2, 8.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
@@ -1083,7 +1911,7 @@ public class MatrixM3x3DTest
     testScaleRowMutateOverflow()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
-    MatrixM3x3D.scaleRow(m, 3, 1.0);
+    MatrixM3x3D.scaleRowInPlace(m, 3, 1.0);
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -1092,7 +1920,7 @@ public class MatrixM3x3DTest
     testScaleRowMutateUnderflow()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
-    MatrixM3x3D.scaleRow(m, -1, 1.0);
+    MatrixM3x3D.scaleRowInPlace(m, -1, 1.0);
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -1217,6 +2045,14 @@ public class MatrixM3x3DTest
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+  }
+
+  @SuppressWarnings({ "static-method", "boxing" }) @Test public
+    void
+    testTrace()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    Assert.assertEquals(3.0, MatrixM3x3D.trace(m));
   }
 
   @SuppressWarnings({ "boxing", "static-method" }) @Test public

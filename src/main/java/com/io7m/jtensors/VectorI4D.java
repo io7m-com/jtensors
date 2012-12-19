@@ -370,7 +370,7 @@ import com.io7m.jaux.functional.Pair;
    * 
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
    * 
-   * @since 4.2.0
+   * @since 5.0.0
    */
 
   public static @Nonnull Pair<VectorI4D, VectorI4D> orthoNormalize(

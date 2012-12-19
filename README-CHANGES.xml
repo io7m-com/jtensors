@@ -3,8 +3,86 @@
   <c:project>io7m-jtensors</c:project>
 
   <c:release ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-12-14</c:date>
-    <c:version>4.2.0</c:version>
+    <c:date>2012-12-18</c:date>
+    <c:version>5.0.0</c:version>
+
+    <c:item>
+      <c:date>2012-12-18</c:date>
+      <c:type-code-change/>
+      <c:summary>All approximatelyEqual* functions have been removed; use almostEqual instead as it gives far more accurate results</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-18</c:date>
+      <c:type-code-change/>
+      <c:summary>MatrixReadable* functions renamed to make the row types explicit</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-18</c:date>
+      <c:type-code-change/>
+      <c:summary>Most quaternion functions that took or returned single precision floats now take/return double precision values</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-18</c:date>
+      <c:type-code-change/>
+      <c:summary>Quaternion*.makeRotationMatrix() renamed to makeRotationMatrix4x4 and added 3x3 variant</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-17</c:date>
+      <c:type-code-change/>
+      <c:summary>All single precision matrix and vector types now use double precision calculations internally for increased accuracy. Most functions that took floats as arguments now take doubles. The vectors and matrices are still using single precision float storage, so this should not break any existing code.</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-17</c:date>
+      <c:type-code-new/>
+      <c:summary>Add row fetching methods to all MatrixReadable* interfaces</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-16</c:date>
+      <c:type-code-new/>
+      <c:summary>Vastly improve documentation. Document all notational, semantic, and storage conventions.</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-16</c:date>
+      <c:type-code-change/>
+      <c:summary>Switch to using a consistent right-handed coordinate system throughout the package. This is a non backwards-compatible change.</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-16</c:date>
+      <c:type-code-new/>
+      <c:summary>Add Matrix*.lookAt()</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-15</c:date>
+      <c:type-code-new/>
+      <c:summary>Add Matrix3x3*.rotate() and makeRotation()</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-15</c:date>
+      <c:type-code-new/>
+      <c:summary>Add Quaternion*.lookAt()</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-15</c:date>
+      <c:type-code-new/>
+      <c:summary>Add Quaternion*.makeFromMatrix()</c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2012-12-15</c:date>
+      <c:type-code-new/>
+      <c:summary>Add Matrix*.trace()</c:summary>
+    </c:item>
 
     <c:item>
       <c:date>2012-12-14</c:date>
@@ -14,7 +92,7 @@
 
     <c:item>
       <c:date>2012-12-09</c:date>
-      <c:type-code-fix/>
+      <c:type-code-change/>
       <c:summary>Modify the type of QuaternionM4{D,F}.copy() to allow any readable quaternion, as opposed to only QuaternionM4{F,D}. This change does not affect backwards-compatibility as it is simply a generalization of the type in question and cannot break existing programs.</c:summary>
     </c:item>
   </c:release>

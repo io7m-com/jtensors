@@ -143,13 +143,13 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   public static @Nonnull VectorM4F addScaled(
     final @Nonnull VectorM4F v0,
     final @Nonnull VectorM4F v1,
-    final float r,
+    final double r,
     final @Nonnull VectorM4F out)
   {
-    final float x = v0.x + (v1.x * r);
-    final float y = v0.y + (v1.y * r);
-    final float z = v0.z + (v1.z * r);
-    final float w = v0.w + (v1.w * r);
+    final float x = (float) (v0.x + (v1.x * r));
+    final float y = (float) (v0.y + (v1.y * r));
+    final float z = (float) (v0.z + (v1.z * r));
+    final float w = (float) (v0.w + (v1.w * r));
     out.x = x;
     out.y = y;
     out.z = z;
@@ -175,7 +175,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   public static @Nonnull VectorM4F addScaledInPlace(
     final @Nonnull VectorM4F v0,
     final @Nonnull VectorM4F v1,
-    final float r)
+    final double r)
   {
     return VectorM4F.addScaled(v0, v1, r, v0);
   }
@@ -231,14 +231,14 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
 
   public static @Nonnull VectorM4F clamp(
     final @Nonnull VectorM4F v,
-    final float minimum,
-    final float maximum,
+    final double minimum,
+    final double maximum,
     final @Nonnull VectorM4F out)
   {
-    final float x = Math.min(Math.max(v.x, minimum), maximum);
-    final float y = Math.min(Math.max(v.y, minimum), maximum);
-    final float z = Math.min(Math.max(v.z, minimum), maximum);
-    final float w = Math.min(Math.max(v.w, minimum), maximum);
+    final float x = (float) Math.min(Math.max(v.x, minimum), maximum);
+    final float y = (float) Math.min(Math.max(v.y, minimum), maximum);
+    final float z = (float) Math.min(Math.max(v.z, minimum), maximum);
+    final float w = (float) Math.min(Math.max(v.w, minimum), maximum);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -570,7 +570,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @return The distance between the two vectors.
    */
 
-  public static float distance(
+  public static double distance(
     final @Nonnull VectorM4F v0,
     final @Nonnull VectorM4F v1)
   {
@@ -590,14 +590,14 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @return The scalar product of the two vectors
    */
 
-  public static float dotProduct(
+  public static double dotProduct(
     final @Nonnull VectorM4F v0,
     final @Nonnull VectorM4F v1)
   {
-    final float x = v0.x * v1.x;
-    final float y = v0.y * v1.y;
-    final float z = v0.z * v1.z;
-    final float w = v0.w * v1.w;
+    final double x = v0.x * v1.x;
+    final double y = v0.y * v1.y;
+    final double z = v0.z * v1.z;
+    final double w = v0.w * v1.w;
     return x + y + z + w;
   }
 
@@ -629,7 +629,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   public static @Nonnull VectorM4F interpolateLinear(
     final @Nonnull VectorM4F v0,
     final @Nonnull VectorM4F v1,
-    final float alpha,
+    final double alpha,
     final @Nonnull VectorM4F r)
   {
     final @Nonnull VectorM4F w0 = new VectorM4F();
@@ -652,10 +652,10 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @return The magnitude of the input vector
    */
 
-  public static float magnitude(
+  public static double magnitude(
     final @Nonnull VectorM4F v)
   {
-    return (float) Math.sqrt(VectorM4F.magnitudeSquared(v));
+    return Math.sqrt(VectorM4F.magnitudeSquared(v));
   }
 
   /**
@@ -667,7 +667,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @return The squared magnitude of the input vector
    */
 
-  public static float magnitudeSquared(
+  public static double magnitudeSquared(
     final @Nonnull VectorM4F v)
   {
     return VectorM4F.dotProduct(v, v);
@@ -690,9 +690,9 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
     final @Nonnull VectorM4F v,
     final @Nonnull VectorM4F out)
   {
-    final float m = VectorM4F.magnitudeSquared(v);
+    final double m = VectorM4F.magnitudeSquared(v);
     if (m > 0.0) {
-      final float reciprocal = (float) (1.0f / Math.sqrt(m));
+      final double reciprocal = 1.0 / Math.sqrt(m);
       return VectorM4F.scale(v, reciprocal, out);
     }
     out.x = v.x;
@@ -727,7 +727,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
    *      process</a>
    * 
-   * @since 4.2.0
+   * @since 5.0.0
    */
 
   public static void orthoNormalizeInPlace(
@@ -754,9 +754,9 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
     final @Nonnull VectorM4F q,
     final @Nonnull VectorM4F r)
   {
-    final float dot = VectorM4F.dotProduct(p, q);
-    final float qms = VectorM4F.magnitudeSquared(q);
-    final float s = dot / qms;
+    final double dot = VectorM4F.dotProduct(p, q);
+    final double qms = VectorM4F.magnitudeSquared(q);
+    final double s = dot / qms;
 
     return VectorM4F.scale(p, s, r);
   }
@@ -777,13 +777,13 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
 
   public static @Nonnull VectorM4F scale(
     final @Nonnull VectorM4F v,
-    final float r,
+    final double r,
     final @Nonnull VectorM4F out)
   {
-    final float x = v.x * r;
-    final float y = v.y * r;
-    final float z = v.z * r;
-    final float w = v.w * r;
+    final float x = (float) (v.x * r);
+    final float y = (float) (v.y * r);
+    final float z = (float) (v.z * r);
+    final float w = (float) (v.w * r);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -805,7 +805,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
 
   public static @Nonnull VectorM4F scaleInPlace(
     final @Nonnull VectorM4F v,
-    final float r)
+    final double r)
   {
     return VectorM4F.scale(v, r, v);
   }
@@ -862,7 +862,6 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   public float x = 0.0f;
   public float y = 0.0f;
   public float z = 0.0f;
-
   public float w = 1.0f;
 
   /**

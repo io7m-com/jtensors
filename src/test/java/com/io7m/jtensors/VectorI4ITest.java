@@ -13,7 +13,7 @@ public class VectorI4ITest
 
   @SuppressWarnings("static-method") @Test public void testAdd()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorI4ITest.randomNumber();
       final int y0 = VectorI4ITest.randomNumber();
       final int z0 = VectorI4ITest.randomNumber();
@@ -145,7 +145,7 @@ public class VectorI4ITest
 
   @SuppressWarnings("static-method") @Test public void testSubtract()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorI4ITest.randomNumber();
       final int y0 = VectorI4ITest.randomNumber();
       final int z0 = VectorI4ITest.randomNumber();
