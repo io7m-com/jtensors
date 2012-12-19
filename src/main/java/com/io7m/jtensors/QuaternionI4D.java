@@ -70,7 +70,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * <code>qb</code> are equal to within the degree of error given in
    * <code>context</code>.
    * 
-   * @see {@link AlmostEqualDouble#almostEqual(ContextRelative, double, double)}
+   * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
    * 
    * @param context
    *          The equality context

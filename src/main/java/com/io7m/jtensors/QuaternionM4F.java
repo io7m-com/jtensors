@@ -87,7 +87,7 @@ import com.io7m.jaux.UnimplementedCodeException;
    * <code>qb</code> are equal to within the degree of error given in
    * <code>context</code>.
    * 
-   * @see {@link AlmostEqualFloat#almostEqual(ContextRelative, double, double)}
+   * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
    * 
    * @param context
    *          The equality context
@@ -234,7 +234,7 @@ import com.io7m.jaux.UnimplementedCodeException;
    * 
    * <p>
    * Each element is compared with
-   * {@link AlmostEqualFloat#almostEqual(com.io7m.jaux.AlmostEqualFloat.ContextRelative, double, double)}
+   * {@link AlmostEqualFloat#almostEqual(com.io7m.jaux.AlmostEqualFloat.ContextRelative, float, float)}
    * .
    * </p>
    * 
