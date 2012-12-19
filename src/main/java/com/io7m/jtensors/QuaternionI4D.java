@@ -26,8 +26,10 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
  * A four-dimensional immutable quaternion type with double precision
  * elements.
  * 
+ * <p>
  * Values of this type are immutable and can therefore be safely accessed from
  * multiple threads.
+ * </p>
  */
 
 @Immutable public final class QuaternionI4D implements QuaternionReadable4D

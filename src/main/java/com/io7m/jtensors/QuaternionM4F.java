@@ -26,8 +26,10 @@ import com.io7m.jaux.UnimplementedCodeException;
 /**
  * A four-dimensional mutable quaternion type with single precision elements.
  * 
- * Values of this type are immutable and can therefore be safely accessed from
- * multiple threads.
+ * <p>
+ * Values of this type cannot be accessed safely from multiple threads without
+ * explicit synchronization.
+ * </p>
  */
 
 @NotThreadSafe public final class QuaternionM4F implements
