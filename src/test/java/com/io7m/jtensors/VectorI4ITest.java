@@ -166,5 +166,4 @@ public class VectorI4ITest
       Assert.assertEquals(w0 - w1, vr.w);
     }
   }
-
 }

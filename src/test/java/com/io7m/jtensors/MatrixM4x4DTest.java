@@ -1583,6 +1583,351 @@ public class MatrixM4x4DTest
     }
   }
 
+  @SuppressWarnings("static-method") @Test public
+    void
+    testLookAt_NoTranslation_NegativeX_AroundY()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3D origin = new VectorI3D(0, 0, 0);
+    final VectorI3D target = new VectorI3D(-1, 0, 0);
+    final VectorI3D axis = new VectorI3D(0, 1, 0);
+    MatrixM4x4D.lookAtWithContext(mc, origin, target, axis, m);
+
+    System.out.println("m : ");
+    System.out.println(m);
+
+    boolean eq = false;
+
+    /**
+     * Rotation components
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 2));
+    Assert.assertTrue(eq);
+
+    /**
+     * Translation components
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 3));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 3));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 3));
+    Assert.assertTrue(eq);
+
+    /**
+     * Etc
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(3, 3));
+    Assert.assertTrue(eq);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testLookAt_NoTranslation_NegativeZ_AroundY()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3D origin = new VectorI3D(0, 0, 0);
+    final VectorI3D target = new VectorI3D(0, 0, -1);
+    final VectorI3D axis = new VectorI3D(0, 1, 0);
+    MatrixM4x4D.lookAtWithContext(mc, origin, target, axis, m);
+
+    System.out.println("m : ");
+    System.out.println(m);
+
+    boolean eq = false;
+
+    /**
+     * Rotation components
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(2, 2));
+    Assert.assertTrue(eq);
+
+    /**
+     * Translation components
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 3));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 3));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 3));
+    Assert.assertTrue(eq);
+
+    /**
+     * Etc
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(3, 3));
+    Assert.assertTrue(eq);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testLookAt_NoTranslation_PositiveX_AroundY()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3D origin = new VectorI3D(0, 0, 0);
+    final VectorI3D target = new VectorI3D(1, 0, 0);
+    final VectorI3D axis = new VectorI3D(0, 1, 0);
+    MatrixM4x4D.lookAtWithContext(mc, origin, target, axis, m);
+
+    System.out.println("m : ");
+    System.out.println(m);
+
+    boolean eq = false;
+
+    /**
+     * Rotation components
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 2));
+    Assert.assertTrue(eq);
+
+    /**
+     * Translation components
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 3));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 3));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 3));
+    Assert.assertTrue(eq);
+
+    /**
+     * Etc
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(3, 3));
+    Assert.assertTrue(eq);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testLookAt_NoTranslation_PositiveZ_AroundY()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3D origin = new VectorI3D(0, 0, 0);
+    final VectorI3D target = new VectorI3D(0, 0, 1);
+    final VectorI3D axis = new VectorI3D(0, 1, 0);
+    MatrixM4x4D.lookAtWithContext(mc, origin, target, axis, m);
+
+    System.out.println("m : ");
+    System.out.println(m);
+
+    boolean eq = false;
+
+    /**
+     * Rotation components
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(2, 2));
+    Assert.assertTrue(eq);
+
+    /**
+     * Translation components
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 3));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 3));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 3));
+    Assert.assertTrue(eq);
+
+    /**
+     * Etc
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(3, 3));
+    Assert.assertTrue(eq);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testLookAt_Translation102030_NegativeZ_AroundY()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3D origin = new VectorI3D(20 + 0, 30 + 0, 40 + 0);
+    final VectorI3D target = new VectorI3D(20 + 0, 30 + 0, 40 + -1);
+    final VectorI3D axis = new VectorI3D(0, 1, 0);
+    MatrixM4x4D.lookAtWithContext(mc, origin, target, axis, m);
+
+    System.out.println("m : ");
+    System.out.println(m);
+
+    boolean eq = false;
+
+    /**
+     * Rotation components
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(2, 2));
+    Assert.assertTrue(eq);
+
+    /**
+     * Translation components
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, -20.0, m.get(0, 3));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, -30.0, m.get(1, 3));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, -40.0, m.get(2, 3));
+    Assert.assertTrue(eq);
+
+    /**
+     * Etc
+     */
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(3, 3));
+    Assert.assertTrue(eq);
+  }
+
   @SuppressWarnings("static-method") @Test public void testMultiplyIdentity()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
@@ -1951,6 +2296,9 @@ public class MatrixM4x4DTest
 
   @SuppressWarnings("static-method") @Test public void testRotateVector0X()
   {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorM4D v_in = new VectorM4D(0, 0, -1, 1);
     final VectorM4D v_got = new VectorM4D();
@@ -1964,7 +2312,7 @@ public class MatrixM4x4DTest
     System.out.println("got : " + v_got);
     System.out.println("--");
 
-    Assert.assertTrue(VectorM4D.approximatelyEqual(v_exp, v_got));
+    Assert.assertTrue(VectorM4D.almostEqual(ec, v_exp, v_got));
   }
 
   /**
@@ -1973,6 +2321,9 @@ public class MatrixM4x4DTest
 
   @SuppressWarnings("static-method") @Test public void testRotateVector0Y()
   {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorM4D v_in = new VectorM4D(0, 0, -1, 1);
     final VectorM4D v_got = new VectorM4D();
@@ -1986,7 +2337,7 @@ public class MatrixM4x4DTest
     System.out.println("got : " + v_got);
     System.out.println("--");
 
-    Assert.assertTrue(VectorM4D.approximatelyEqual(v_exp, v_got));
+    Assert.assertTrue(VectorM4D.almostEqual(ec, v_exp, v_got));
   }
 
   /**
@@ -1995,6 +2346,9 @@ public class MatrixM4x4DTest
 
   @SuppressWarnings("static-method") @Test public void testRotateVector0Z()
   {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorM4D v_in = new VectorM4D(0, 0, -1, 1);
     final VectorM4D v_got = new VectorM4D();
@@ -2008,7 +2362,7 @@ public class MatrixM4x4DTest
     System.out.println("got : " + v_got);
     System.out.println("--");
 
-    Assert.assertTrue(VectorM4D.approximatelyEqual(v_exp, v_got));
+    Assert.assertTrue(VectorM4D.almostEqual(ec, v_exp, v_got));
   }
 
   /**
@@ -4077,4 +4431,5 @@ public class MatrixM4x4DTest
 
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
   }
+
 }

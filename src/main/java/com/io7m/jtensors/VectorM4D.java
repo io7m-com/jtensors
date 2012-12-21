@@ -19,7 +19,8 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 
 /**
  * A four-dimensional mutable vector type with double precision elements.
@@ -180,34 +181,34 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
-   * Determine whether or not the elements of the two vectors <code>v0</code>
-   * and <code>v1</code> are approximately equal.
+   * Determine whether or not the vectors <code>va</code> and <code>vb</code>
+   * are equal to within the degree of error given in <code>context</code>.
    * 
-   * @see ApproximatelyEqualDouble
+   * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
    * 
-   * @param v0
+   * @param context
+   *          The equality context
+   * @param va
    *          The left input vector
-   * @param v1
+   * @param vb
    *          The right input vector
-   * 
-   * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code>, within an appropriate degree of error for double
-   *         precision floating point values
+   * @since 5.0.0
    */
 
-  public static boolean approximatelyEqual(
-    final @Nonnull VectorM4D v0,
-    final @Nonnull VectorM4D v1)
+  public static boolean almostEqual(
+    final @Nonnull AlmostEqualDouble.ContextRelative context,
+    final @Nonnull VectorReadable4D va,
+    final @Nonnull VectorReadable4D vb)
   {
-    final boolean ex =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
-    final boolean ey =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.y, v1.y);
-    final boolean ez =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.z, v1.z);
-    final boolean ew =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.w, v1.w);
-    return ex && ey && ez && ew;
+    final boolean xs =
+      AlmostEqualDouble.almostEqual(context, va.getXD(), vb.getXD());
+    final boolean ys =
+      AlmostEqualDouble.almostEqual(context, va.getYD(), vb.getYD());
+    final boolean zs =
+      AlmostEqualDouble.almostEqual(context, va.getZD(), vb.getZD());
+    final boolean ws =
+      AlmostEqualDouble.almostEqual(context, va.getWD(), vb.getWD());
+    return xs && ys && zs && ws;
   }
 
   /**
@@ -859,11 +860,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   public double x = 0.0;
-
   public double y = 0.0;
-
   public double z = 0.0;
-
   public double w = 1.0;
 
   /**

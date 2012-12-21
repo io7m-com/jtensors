@@ -635,13 +635,10 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
     return new QuaternionI4D(x, y, z, w);
   }
 
-  private final double x;
-
-  private final double y;
-
-  private final double z;
-
-  private final double w;
+  final double x;
+  final double y;
+  final double z;
+  final double w;
 
   /**
    * Default constructor, initializing the quaternion with values

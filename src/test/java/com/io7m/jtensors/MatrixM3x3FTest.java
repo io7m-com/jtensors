@@ -755,6 +755,261 @@ public class MatrixM3x3FTest
     }
   }
 
+  @SuppressWarnings("static-method") @Test public
+    void
+    testLookAt_NoTranslation_NegativeX_AroundY()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    final MatrixM3x3F.Context mc = new MatrixM3x3F.Context();
+    final MatrixM3x3F m = new MatrixM3x3F();
+    final VectorM3F t = new VectorM3F();
+    final VectorI3F origin = new VectorI3F(0, 0, 0);
+    final VectorI3F target = new VectorI3F(-1, 0, 0);
+    final VectorI3F axis = new VectorI3F(0, 1, 0);
+    MatrixM3x3F.lookAtWithContext(mc, origin, target, axis, m, t);
+
+    System.out.println("m : ");
+    System.out.println(m);
+    System.out.println("t : ");
+    System.out.println(t);
+
+    boolean eq = false;
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, -1.0f, m.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(2, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.z);
+    Assert.assertTrue(eq);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testLookAt_NoTranslation_NegativeZ_AroundY()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    final MatrixM3x3F.Context mc = new MatrixM3x3F.Context();
+    final MatrixM3x3F m = new MatrixM3x3F();
+    final VectorM3F t = new VectorM3F();
+    final VectorI3F origin = new VectorI3F(0, 0, 0);
+    final VectorI3F target = new VectorI3F(0, 0, -1);
+    final VectorI3F axis = new VectorI3F(0, 1, 0);
+    MatrixM3x3F.lookAtWithContext(mc, origin, target, axis, m, t);
+
+    System.out.println("m : ");
+    System.out.println(m);
+    System.out.println("t : ");
+    System.out.println(t);
+
+    boolean eq = false;
+
+    eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.get(2, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.z);
+    Assert.assertTrue(eq);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testLookAt_NoTranslation_PositiveX_AroundY()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    final MatrixM3x3F.Context mc = new MatrixM3x3F.Context();
+    final MatrixM3x3F m = new MatrixM3x3F();
+    final VectorM3F t = new VectorM3F();
+    final VectorI3F origin = new VectorI3F(0, 0, 0);
+    final VectorI3F target = new VectorI3F(1, 0, 0);
+    final VectorI3F axis = new VectorI3F(0, 1, 0);
+    MatrixM3x3F.lookAtWithContext(mc, origin, target, axis, m, t);
+
+    System.out.println("m : ");
+    System.out.println(m);
+    System.out.println("t : ");
+    System.out.println(t);
+
+    boolean eq = false;
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, -1.0f, m.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(2, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.z);
+    Assert.assertTrue(eq);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testLookAt_NoTranslation_PositiveZ_AroundY()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    final MatrixM3x3F.Context mc = new MatrixM3x3F.Context();
+    final MatrixM3x3F m = new MatrixM3x3F();
+    final VectorM3F t = new VectorM3F();
+    final VectorI3F origin = new VectorI3F(0, 0, 0);
+    final VectorI3F target = new VectorI3F(0, 0, 1);
+    final VectorI3F axis = new VectorI3F(0, 1, 0);
+    MatrixM3x3F.lookAtWithContext(mc, origin, target, axis, m, t);
+
+    System.out.println("m : ");
+    System.out.println(m);
+    System.out.println("t : ");
+    System.out.println(t);
+
+    boolean eq = false;
+
+    eq = AlmostEqualFloat.almostEqual(ec, -1.0f, m.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, -1.0f, m.get(2, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, t.z);
+    Assert.assertTrue(eq);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testLookAt_Translation102030_NegativeZ_AroundY()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    final MatrixM3x3F.Context mc = new MatrixM3x3F.Context();
+    final MatrixM3x3F m = new MatrixM3x3F();
+    final VectorM3F t = new VectorM3F();
+    final VectorI3F origin = new VectorI3F(20 + 0, 30 + 0, 40 + 0);
+    final VectorI3F target = new VectorI3F(20 + 0, 30 + 0, 40 + -1);
+    final VectorI3F axis = new VectorI3F(0, 1, 0);
+    MatrixM3x3F.lookAtWithContext(mc, origin, target, axis, m, t);
+
+    System.out.println("m : ");
+    System.out.println(m);
+    System.out.println("t : ");
+    System.out.println(t);
+
+    boolean eq = false;
+
+    eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.get(0, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(0, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(0, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(1, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.get(1, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.get(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.get(2, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualFloat.almostEqual(ec, -20.0f, t.x);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, -30.0f, t.y);
+    Assert.assertTrue(eq);
+    eq = AlmostEqualFloat.almostEqual(ec, -40.0f, t.z);
+    Assert.assertTrue(eq);
+  }
+
   @SuppressWarnings("static-method") @Test public void testMultiplyIdentity()
   {
     final MatrixM3x3F m0 = new MatrixM3x3F();
@@ -2565,4 +2820,5 @@ public class MatrixM3x3FTest
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
+
 }

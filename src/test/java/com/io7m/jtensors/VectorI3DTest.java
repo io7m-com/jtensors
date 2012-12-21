@@ -347,6 +347,25 @@ public class VectorI3DTest
     Assert.assertTrue(VectorI3D.dotProduct(v, v) == 1.0);
   }
 
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductPerpendicular()
+  {
+    final VectorI3D vpx = new VectorI3D(1.0f, 0.0f, 0.0f);
+    final VectorI3D vmx = new VectorI3D(-1.0f, 0.0f, 0.0f);
+
+    final VectorI3D vpy = new VectorI3D(0.0f, 1.0f, 0.0f);
+    final VectorI3D vmy = new VectorI3D(0.0f, -1.0f, 0.0f);
+
+    final VectorI3D vpz = new VectorI3D(0.0f, 0.0f, 1.0f);
+    final VectorI3D vmz = new VectorI3D(0.0f, 0.0f, -1.0f);
+
+    Assert.assertTrue(VectorI3D.dotProduct(vpx, vpy) == 0.0);
+    Assert.assertTrue(VectorI3D.dotProduct(vpy, vpz) == 0.0);
+    Assert.assertTrue(VectorI3D.dotProduct(vmx, vmy) == 0.0);
+    Assert.assertTrue(VectorI3D.dotProduct(vmy, vmz) == 0.0);
+  }
+
   @SuppressWarnings("static-method") @Test public void testDotProductSimple()
   {
     final double x0 = 2.0;

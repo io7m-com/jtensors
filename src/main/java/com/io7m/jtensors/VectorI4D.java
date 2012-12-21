@@ -19,7 +19,8 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 import com.io7m.jaux.functional.Pair;
 
 /**
@@ -54,34 +55,30 @@ import com.io7m.jaux.functional.Pair;
   }
 
   /**
-   * Determine whether or not the elements of the two vectors <code>v0</code>
-   * and <code>v1</code> are approximately equal.
+   * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
+   * are equal to within the degree of error given in <code>context</code>.
    * 
-   * @see ApproximatelyEqualDouble
+   * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
    * 
-   * @param v0
+   * @param context
+   *          The equality context
+   * @param qa
    *          The left input vector
-   * @param v1
+   * @param qb
    *          The right input vector
-   * 
-   * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code>, within an appropriate degree of error for double
-   *         precision floating point values
+   * @since 5.0.0
    */
 
-  public static boolean approximatelyEqual(
-    final @Nonnull VectorI4D v0,
-    final @Nonnull VectorI4D v1)
+  public static boolean almostEqual(
+    final @Nonnull ContextRelative context,
+    final @Nonnull VectorI4D qa,
+    final @Nonnull VectorI4D qb)
   {
-    final boolean ex =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
-    final boolean ey =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.y, v1.y);
-    final boolean ez =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.z, v1.z);
-    final boolean ew =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.w, v1.w);
-    return ex && ey && ez && ew;
+    final boolean xs = AlmostEqualDouble.almostEqual(context, qa.x, qb.x);
+    final boolean ys = AlmostEqualDouble.almostEqual(context, qa.y, qb.y);
+    final boolean zs = AlmostEqualDouble.almostEqual(context, qa.z, qb.z);
+    final boolean ws = AlmostEqualDouble.almostEqual(context, qa.w, qb.w);
+    return xs && ys && zs && ws;
   }
 
   /**
@@ -362,11 +359,9 @@ import com.io7m.jaux.functional.Pair;
 
   /**
    * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
-   * .
-   * 
-   * @see <a
-   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
-   *      process</a>
+   * . See <a
+   * href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   * process</a>.
    * 
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
    * 
@@ -441,18 +436,17 @@ import com.io7m.jaux.functional.Pair;
   public final double                    x;
   public final double                    y;
   public final double                    z;
-
   public final double                    w;
 
   /**
    * The zero vector.
    */
 
-  public static final @Nonnull VectorI4D ZERO = new VectorI4D(
-                                                0.0,
-                                                0.0,
-                                                0.0,
-                                                0.0);
+  public static final @Nonnull VectorI4D ZERO;
+
+  static {
+    ZERO = new VectorI4D(0.0, 0.0, 0.0, 0.0);
+  }
 
   /**
    * Calculate the absolute value of the vector <code>v</code>.

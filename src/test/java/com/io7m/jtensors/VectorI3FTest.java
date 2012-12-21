@@ -341,6 +341,25 @@ public class VectorI3FTest
     Assert.assertTrue(VectorI3F.dotProduct(v, v) == 1.0);
   }
 
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductPerpendicular()
+  {
+    final VectorI3F vpx = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorI3F vmx = new VectorI3F(-1.0f, 0.0f, 0.0f);
+
+    final VectorI3F vpy = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorI3F vmy = new VectorI3F(0.0f, -1.0f, 0.0f);
+
+    final VectorI3F vpz = new VectorI3F(0.0f, 0.0f, 1.0f);
+    final VectorI3F vmz = new VectorI3F(0.0f, 0.0f, -1.0f);
+
+    Assert.assertTrue(VectorI3F.dotProduct(vpx, vpy) == 0.0);
+    Assert.assertTrue(VectorI3F.dotProduct(vpy, vpz) == 0.0);
+    Assert.assertTrue(VectorI3F.dotProduct(vmx, vmy) == 0.0);
+    Assert.assertTrue(VectorI3F.dotProduct(vmy, vmz) == 0.0);
+  }
+
   @SuppressWarnings("static-method") @Test public void testDotProductSimple()
   {
     final float x0 = 2.0f;

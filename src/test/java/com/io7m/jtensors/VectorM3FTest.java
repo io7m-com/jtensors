@@ -626,6 +626,25 @@ public class VectorM3FTest
 
   @SuppressWarnings("static-method") @Test public
     void
+    testDotProductPerpendicular()
+  {
+    final VectorM3F vpx = new VectorM3F(1.0f, 0.0f, 0.0f);
+    final VectorM3F vmx = new VectorM3F(-1.0f, 0.0f, 0.0f);
+
+    final VectorM3F vpy = new VectorM3F(0.0f, 1.0f, 0.0f);
+    final VectorM3F vmy = new VectorM3F(0.0f, -1.0f, 0.0f);
+
+    final VectorM3F vpz = new VectorM3F(0.0f, 0.0f, 1.0f);
+    final VectorM3F vmz = new VectorM3F(0.0f, 0.0f, -1.0f);
+
+    Assert.assertTrue(VectorM3F.dotProduct(vpx, vpy) == 0.0);
+    Assert.assertTrue(VectorM3F.dotProduct(vpy, vpz) == 0.0);
+    Assert.assertTrue(VectorM3F.dotProduct(vmx, vmy) == 0.0);
+    Assert.assertTrue(VectorM3F.dotProduct(vmy, vmz) == 0.0);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
     testDotProductSelfMagnitudeSquared()
   {
     final VectorM3F v0 = new VectorM3F(10.0f, 10.0f, 10.0f);

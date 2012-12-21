@@ -69,7 +69,10 @@ import com.io7m.jaux.functional.Option;
 
   @NotThreadSafe public static final class Context
   {
-    final @Nonnull MatrixM3x3D m4a = new MatrixM3x3D();
+    final @Nonnull MatrixM3x3D m3a = new MatrixM3x3D();
+    final @Nonnull VectorM3D   v3a = new VectorM3D();
+    final @Nonnull VectorM3D   v3b = new VectorM3D();
+    final @Nonnull VectorM3D   v3c = new VectorM3D();
 
     public Context()
     {
@@ -830,7 +833,7 @@ import com.io7m.jaux.functional.Option;
     final @Nonnull MatrixM3x3D m,
     final @Nonnull VectorReadable3D axis)
   {
-    return MatrixM3x3D.rotate(angle, m, context.m4a, axis, m);
+    return MatrixM3x3D.rotate(angle, m, context.m3a, axis, m);
   }
 
   /**
@@ -860,7 +863,7 @@ import com.io7m.jaux.functional.Option;
     final @Nonnull VectorReadable3D axis,
     final @Nonnull MatrixM3x3D out)
   {
-    return MatrixM3x3D.rotate(angle, m, context.m4a, axis, out);
+    return MatrixM3x3D.rotate(angle, m, context.m3a, axis, out);
   }
 
   /**
@@ -942,33 +945,6 @@ import com.io7m.jaux.functional.Option;
 
   /**
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
-   * saving the result to row <code>r</code> of <code>m</code>.
-   * 
-   * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
-   * </p>
-   * 
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row (0 <= row < 4).
-   * @param r
-   *          The scaling value.
-   * @return <code>m</code>
-   */
-
-  public static @Nonnull MatrixM3x3D scaleRowInPlace(
-    final @Nonnull MatrixM3x3D m,
-    final int row,
-    final double r)
-  {
-    return MatrixM3x3D.scaleRowUnsafe(m, MatrixM3x3D.rowCheck(row), r, m);
-  }
-
-  /**
-   * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>out</code>.
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -994,6 +970,33 @@ import com.io7m.jaux.functional.Option;
     final @Nonnull MatrixM3x3D out)
   {
     return MatrixM3x3D.scaleRowUnsafe(m, MatrixM3x3D.rowCheck(row), r, out);
+  }
+
+  /**
+   * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
+   * saving the result to row <code>r</code> of <code>m</code>.
+   * 
+   * <p>
+   * This is one of the three "elementary" operations defined on matrices. See
+   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
+   * .
+   * </p>
+   * 
+   * @param m
+   *          The input matrix.
+   * @param row
+   *          The index of the row (0 <= row < 4).
+   * @param r
+   *          The scaling value.
+   * @return <code>m</code>
+   */
+
+  public static @Nonnull MatrixM3x3D scaleRowInPlace(
+    final @Nonnull MatrixM3x3D m,
+    final int row,
+    final double r)
+  {
+    return MatrixM3x3D.scaleRowUnsafe(m, MatrixM3x3D.rowCheck(row), r, m);
   }
 
   private static MatrixM3x3D scaleRowUnsafe(
@@ -1250,17 +1253,11 @@ import com.io7m.jaux.functional.Option;
   }
 
   private final ByteBuffer   data;
-
   private final DoubleBuffer view;
-
   private static final int   VIEW_ELEMENT_SIZE;
-
   private static final int   VIEW_ELEMENTS;
-
   private static final int   VIEW_BYTES;
-
   private static final int   VIEW_COLS;
-
   private static final int   VIEW_ROWS;
 
   static {
@@ -1269,6 +1266,96 @@ import com.io7m.jaux.functional.Option;
     VIEW_ELEMENT_SIZE = 8;
     VIEW_ELEMENTS = MatrixM3x3D.VIEW_ROWS * MatrixM3x3D.VIEW_COLS;
     VIEW_BYTES = MatrixM3x3D.VIEW_ELEMENTS * MatrixM3x3D.VIEW_ELEMENT_SIZE;
+  }
+
+  /**
+   * <p>
+   * Calculate a rotation and translation representing a "camera" looking from
+   * the point <code>origin</code> to the point <code>target</code>.
+   * <code>target</code> must represent the "up" vector for the camera.
+   * Usually, this is simply a unit vector <code>(0, 1, 0)</code> representing
+   * the Y axis.
+   * </p>
+   * <p>
+   * The function uses preallocated storage from <code>context</code>.
+   * </p>
+   * <p>
+   * The view is expressed as a rotation matrix and a translation vector,
+   * written to <code>out_matrix</code> and <code>out_translation</code>,
+   * respectively.
+   * </p>
+   * 
+   * @param context
+   *          Preallocated storage
+   * @param out_matrix
+   *          The output matrix
+   * @param out_translation
+   *          The output translation
+   * @param origin
+   *          The position of the viewer
+   * @param target
+   *          The target being viewed
+   * @param up
+   *          The up vector
+   */
+
+  public static void lookAtWithContext(
+    final @Nonnull Context context,
+    final @Nonnull VectorReadable3D origin,
+    final @Nonnull VectorReadable3D target,
+    final @Nonnull VectorReadable3D up,
+    final @Nonnull MatrixM3x3D out_matrix,
+    final @Nonnull VectorM3D out_translation)
+  {
+    final VectorM3D forward = context.v3a;
+    final VectorM3D new_up = context.v3b;
+    final VectorM3D side = context.v3c;
+
+    MatrixM3x3D.setIdentity(out_matrix);
+
+    /**
+     * Calculate "forward" vector
+     */
+
+    forward.x = target.getXD() - origin.getXD();
+    forward.y = target.getYD() - origin.getYD();
+    forward.z = target.getZD() - origin.getZD();
+    VectorM3D.normalizeInPlace(forward);
+
+    /**
+     * Calculate "side" vector
+     */
+
+    VectorM3D.crossProduct(forward, up, side);
+    VectorM3D.normalizeInPlace(side);
+
+    /**
+     * Calculate new "up" vector
+     */
+
+    VectorM3D.crossProduct(side, forward, new_up);
+
+    /**
+     * Calculate rotation matrix
+     */
+
+    out_matrix.set(0, 0, side.x);
+    out_matrix.set(0, 1, side.y);
+    out_matrix.set(0, 2, side.z);
+    out_matrix.set(1, 0, new_up.x);
+    out_matrix.set(1, 1, new_up.y);
+    out_matrix.set(1, 2, new_up.z);
+    out_matrix.set(2, 0, -forward.x);
+    out_matrix.set(2, 1, -forward.y);
+    out_matrix.set(2, 2, -forward.z);
+
+    /**
+     * Calculate camera translation matrix
+     */
+
+    out_translation.x = -origin.getXD();
+    out_translation.y = -origin.getYD();
+    out_translation.z = -origin.getZD();
   }
 
   private static @Nonnull MatrixM3x3D rotate(

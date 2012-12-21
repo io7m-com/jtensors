@@ -68,9 +68,14 @@ import com.io7m.jaux.functional.Option;
   @NotThreadSafe public static final class Context
   {
     final @Nonnull MatrixM4x4F m4a = new MatrixM4x4F();
-    final @Nonnull VectorM4F   va  = new VectorM4F();
-    final @Nonnull VectorM4F   vb  = new VectorM4F();
+    final @Nonnull MatrixM4x4F m4b = new MatrixM4x4F();
+    final @Nonnull VectorM4F   v4a = new VectorM4F();
+    final @Nonnull VectorM4F   v4b = new VectorM4F();
     final @Nonnull MatrixM3x3F m3a = new MatrixM3x3F();
+    final @Nonnull VectorM3F   v3a = new VectorM3F();
+    final @Nonnull VectorM3F   v3b = new VectorM3F();
+    final @Nonnull VectorM3F   v3c = new VectorM3F();
+    final @Nonnull VectorM3F   v3d = new VectorM3F();
 
     public Context()
     {
@@ -270,8 +275,8 @@ import com.io7m.jaux.functional.Option;
       MatrixM4x4F.rowCheck(row_b),
       MatrixM4x4F.rowCheck(row_c),
       r,
-      context.va,
-      context.vb,
+      context.v4a,
+      context.v4b,
       out);
   }
 
@@ -427,8 +432,8 @@ import com.io7m.jaux.functional.Option;
       m,
       MatrixM4x4F.rowCheck(row_a),
       MatrixM4x4F.rowCheck(row_b),
-      context.va,
-      context.vb,
+      context.v4a,
+      context.v4b,
       out);
   }
 
@@ -1378,7 +1383,7 @@ import com.io7m.jaux.functional.Option;
     final @Nonnull VectorReadable4F v,
     final @Nonnull VectorM4F out)
   {
-    return MatrixM4x4F.multiplyVector4F(m, v, context.va, context.vb, out);
+    return MatrixM4x4F.multiplyVector4F(m, v, context.v4a, context.v4b, out);
   }
 
   private static @Nonnull MatrixM4x4F rotate(
@@ -1688,7 +1693,7 @@ import com.io7m.jaux.functional.Option;
       m,
       MatrixM4x4F.rowCheck(row),
       r,
-      context.va,
+      context.v4a,
       m);
   }
 
@@ -1743,7 +1748,7 @@ import com.io7m.jaux.functional.Option;
       m,
       MatrixM4x4F.rowCheck(row),
       r,
-      context.va,
+      context.v4a,
       out);
   }
 
@@ -2222,6 +2227,103 @@ import com.io7m.jaux.functional.Option;
     final int row_b)
   {
     return MatrixM4x4F.exchangeRowsWithContext(context, m, row_a, row_b, m);
+  }
+
+  /**
+   * <p>
+   * Calculate a matrix representing a "camera" looking from the point
+   * <code>origin</code> to the point <code>target</code>. <code>target</code>
+   * must represent the "up" vector for the camera. Usually, this is simply a
+   * unit vector <code>(0, 1, 0)</code> representing the Y axis.
+   * </p>
+   * <p>
+   * The function uses preallocated storage from <code>context</code>.
+   * </p>
+   * <p>
+   * The view is expressed as a rotation and translation matrix, written to
+   * <code>out_matrix</code>.
+   * </p>
+   * 
+   * @param context
+   *          Preallocated storage
+   * @param out_matrix
+   *          The output matrix
+   * @param origin
+   *          The position of the viewer
+   * @param target
+   *          The target being viewed
+   * @param up
+   *          The up vector
+   */
+
+  public static void lookAtWithContext(
+    final @Nonnull Context context,
+    final @Nonnull VectorReadable3F origin,
+    final @Nonnull VectorReadable3F target,
+    final @Nonnull VectorReadable3F up,
+    final @Nonnull MatrixM4x4F out_matrix)
+  {
+    final VectorM3F forward = context.v3a;
+    final VectorM3F new_up = context.v3b;
+    final VectorM3F side = context.v3c;
+    final VectorM3F move = context.v3d;
+    final MatrixM4x4F rotation = context.m4a;
+    final MatrixM4x4F translation = context.m4b;
+
+    MatrixM4x4F.setIdentity(rotation);
+    MatrixM4x4F.setIdentity(translation);
+    MatrixM4x4F.setIdentity(out_matrix);
+
+    /**
+     * Calculate "forward" vector
+     */
+
+    forward.x = target.getXF() - origin.getXF();
+    forward.y = target.getYF() - origin.getYF();
+    forward.z = target.getZF() - origin.getZF();
+    VectorM3F.normalizeInPlace(forward);
+
+    /**
+     * Calculate "side" vector
+     */
+
+    VectorM3F.crossProduct(forward, up, side);
+    VectorM3F.normalizeInPlace(side);
+
+    /**
+     * Calculate new "up" vector
+     */
+
+    VectorM3F.crossProduct(side, forward, new_up);
+
+    /**
+     * Calculate rotation matrix
+     */
+
+    rotation.set(0, 0, side.x);
+    rotation.set(0, 1, side.y);
+    rotation.set(0, 2, side.z);
+    rotation.set(1, 0, new_up.x);
+    rotation.set(1, 1, new_up.y);
+    rotation.set(1, 2, new_up.z);
+    rotation.set(2, 0, -forward.x);
+    rotation.set(2, 1, -forward.y);
+    rotation.set(2, 2, -forward.z);
+
+    /**
+     * Calculate camera translation matrix
+     */
+
+    move.x = -origin.getXF();
+    move.y = -origin.getYF();
+    move.z = -origin.getZF();
+    MatrixM4x4F.translateByVector3FInPlace(translation, move);
+
+    /**
+     * Produce output matrix
+     */
+
+    MatrixM4x4F.multiply(rotation, translation, out_matrix);
   }
 
   /**

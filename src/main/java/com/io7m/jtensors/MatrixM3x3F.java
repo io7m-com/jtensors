@@ -70,6 +70,9 @@ import com.io7m.jaux.functional.Option;
   @NotThreadSafe public static final class Context
   {
     final @Nonnull MatrixM3x3F m4a = new MatrixM3x3F();
+    final @Nonnull VectorM3F   v3a = new VectorM3F();
+    final @Nonnull VectorM3F   v3b = new VectorM3F();
+    final @Nonnull VectorM3F   v3c = new VectorM3F();
 
     public Context()
     {
@@ -487,6 +490,96 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
+   * Calculate a rotation and translation representing a "camera" looking from
+   * the point <code>origin</code> to the point <code>target</code>.
+   * <code>target</code> must represent the "up" vector for the camera.
+   * Usually, this is simply a unit vector <code>(0, 1, 0)</code> representing
+   * the Y axis.
+   * </p>
+   * <p>
+   * The function uses preallocated storage from <code>context</code>.
+   * </p>
+   * <p>
+   * The view is expressed as a rotation matrix and a translation vector,
+   * written to <code>out_matrix</code> and <code>out_translation</code>,
+   * respectively.
+   * </p>
+   * 
+   * @param context
+   *          Preallocated storage
+   * @param out_matrix
+   *          The output matrix
+   * @param out_translation
+   *          The output translation
+   * @param origin
+   *          The position of the viewer
+   * @param target
+   *          The target being viewed
+   * @param up
+   *          The up vector
+   */
+
+  public static void lookAtWithContext(
+    final @Nonnull Context context,
+    final @Nonnull VectorReadable3F origin,
+    final @Nonnull VectorReadable3F target,
+    final @Nonnull VectorReadable3F up,
+    final @Nonnull MatrixM3x3F out_matrix,
+    final @Nonnull VectorM3F out_translation)
+  {
+    final VectorM3F forward = context.v3a;
+    final VectorM3F new_up = context.v3b;
+    final VectorM3F side = context.v3c;
+
+    MatrixM3x3F.setIdentity(out_matrix);
+
+    /**
+     * Calculate "forward" vector
+     */
+
+    forward.x = target.getXF() - origin.getXF();
+    forward.y = target.getYF() - origin.getYF();
+    forward.z = target.getZF() - origin.getZF();
+    VectorM3F.normalizeInPlace(forward);
+
+    /**
+     * Calculate "side" vector
+     */
+
+    VectorM3F.crossProduct(forward, up, side);
+    VectorM3F.normalizeInPlace(side);
+
+    /**
+     * Calculate new "up" vector
+     */
+
+    VectorM3F.crossProduct(side, forward, new_up);
+
+    /**
+     * Calculate rotation matrix
+     */
+
+    out_matrix.set(0, 0, side.x);
+    out_matrix.set(0, 1, side.y);
+    out_matrix.set(0, 2, side.z);
+    out_matrix.set(1, 0, new_up.x);
+    out_matrix.set(1, 1, new_up.y);
+    out_matrix.set(1, 2, new_up.z);
+    out_matrix.set(2, 0, -forward.x);
+    out_matrix.set(2, 1, -forward.y);
+    out_matrix.set(2, 2, -forward.z);
+
+    /**
+     * Calculate camera translation matrix
+     */
+
+    out_translation.x = -origin.getXF();
+    out_translation.y = -origin.getYF();
+    out_translation.z = -origin.getZF();
+  }
+
+  /**
    * Create a translation matrix that represents a translation by the vector
    * <code>v</code>, writing the resulting matrix to <code>out</code>.
    * 
@@ -654,6 +747,125 @@ import com.io7m.jaux.functional.Option;
     out.z = (float) VectorM3F.dotProduct(row, vi);
 
     return out;
+  }
+
+  private static @Nonnull MatrixM3x3F rotate(
+    final double angle,
+    final @Nonnull MatrixReadable3x3F m,
+    final @Nonnull MatrixM3x3F tmp,
+    final @Nonnull VectorReadable3F axis,
+    final @Nonnull MatrixM3x3F out)
+  {
+    MatrixM3x3F.makeRotation(angle, axis, tmp);
+    MatrixM3x3F.multiply(m, tmp, out);
+    out.view.rewind();
+    return out;
+  }
+
+  /**
+   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
+   * axis <code>axis</code>, saving the result into <code>out</code>.
+   * 
+   * @since 5.0.0
+   * @param angle
+   *          The angle in radians.
+   * @param m
+   *          The input matrix.
+   * @param axis
+   *          A vector representing an axis.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3F rotate(
+    final double angle,
+    final @Nonnull MatrixReadable3x3F m,
+    final @Nonnull VectorReadable3F axis,
+    final @Nonnull MatrixM3x3F out)
+  {
+    final @Nonnull MatrixM3x3F tmp = new MatrixM3x3F();
+    return MatrixM3x3F.rotate(angle, m, tmp, axis, out);
+  }
+
+  /**
+   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
+   * axis <code>axis</code>, saving the result into <code>m</code>.
+   * 
+   * @since 5.0.0
+   * @param angle
+   *          The angle in radians.
+   * @param m
+   *          The input matrix.
+   * @param axis
+   *          A vector representing an axis.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM3x3F rotateInPlace(
+    final double angle,
+    final @Nonnull MatrixM3x3F m,
+    final @Nonnull VectorReadable3F axis)
+  {
+    final @Nonnull MatrixM3x3F tmp = new MatrixM3x3F();
+    return MatrixM3x3F.rotate(angle, m, tmp, axis, m);
+  }
+
+  /**
+   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
+   * axis <code>axis</code>, saving the result into <code>m</code>. The
+   * function uses preallocated storage in <code>context</code> to avoid
+   * allocating memory. The function assumes a right-handed coordinate system.
+   * 
+   * @since 5.0.0
+   * @param context
+   *          Preallocated storage.
+   * @param angle
+   *          The angle in radians.
+   * @param m
+   *          The input matrix.
+   * @param axis
+   *          A vector representing an axis.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM3x3F rotateInPlaceWithContext(
+    final @Nonnull Context context,
+    final double angle,
+    final @Nonnull MatrixM3x3F m,
+    final @Nonnull VectorReadable3F axis)
+  {
+    return MatrixM3x3F.rotate(angle, m, context.m4a, axis, m);
+  }
+
+  /**
+   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
+   * axis <code>axis</code>, saving the result into <code>out</code>. The
+   * function uses preallocated storage in <code>context</code> to avoid
+   * allocating memory. The function assumes a right-handed coordinate system.
+   * 
+   * @since 5.0.0
+   * @param context
+   *          Preallocated storage.
+   * @param angle
+   *          The angle in radians.
+   * @param m
+   *          The input matrix.
+   * @param axis
+   *          A vector representing an axis.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3F rotateWithContext(
+    final @Nonnull Context context,
+    final double angle,
+    final @Nonnull MatrixReadable3x3F m,
+    final @Nonnull VectorReadable3F axis,
+    final @Nonnull MatrixM3x3F out)
+  {
+    return MatrixM3x3F.rotate(angle, m, context.m4a, axis, out);
   }
 
   /**
@@ -866,6 +1078,24 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * Return the trace of the matrix <code>m</code>. The trace is defined as
+   * the sum of the diagonal elements of the matrix.
+   * 
+   * @since 5.0.0
+   * @param m
+   *          The input matrix
+   * @return The trace of the matrix
+   */
+
+  public static double trace(
+    final @Nonnull MatrixReadable3x3F m)
+  {
+    return m.getRowColumnF(0, 0)
+      + m.getRowColumnF(1, 1)
+      + m.getRowColumnF(2, 2);
+  }
+
+  /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>out</code>.
    * 
@@ -1022,11 +1252,17 @@ import com.io7m.jaux.functional.Option;
   }
 
   private final ByteBuffer  data;
+
   private final FloatBuffer view;
+
   private static final int  VIEW_ELEMENT_SIZE;
+
   private static final int  VIEW_ELEMENTS;
+
   private static final int  VIEW_BYTES;
+
   private static final int  VIEW_COLS;
+
   private static final int  VIEW_ROWS;
 
   static {
@@ -1137,143 +1373,6 @@ import com.io7m.jaux.functional.Option;
 
     out.view.rewind();
     return out;
-  }
-
-  private static @Nonnull MatrixM3x3F rotate(
-    final double angle,
-    final @Nonnull MatrixReadable3x3F m,
-    final @Nonnull MatrixM3x3F tmp,
-    final @Nonnull VectorReadable3F axis,
-    final @Nonnull MatrixM3x3F out)
-  {
-    MatrixM3x3F.makeRotation(angle, axis, tmp);
-    MatrixM3x3F.multiply(m, tmp, out);
-    out.view.rewind();
-    return out;
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>out</code>.
-   * 
-   * @since 5.0.0
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3F rotate(
-    final double angle,
-    final @Nonnull MatrixReadable3x3F m,
-    final @Nonnull VectorReadable3F axis,
-    final @Nonnull MatrixM3x3F out)
-  {
-    final @Nonnull MatrixM3x3F tmp = new MatrixM3x3F();
-    return MatrixM3x3F.rotate(angle, m, tmp, axis, out);
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>m</code>.
-   * 
-   * @since 5.0.0
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM3x3F rotateInPlace(
-    final double angle,
-    final @Nonnull MatrixM3x3F m,
-    final @Nonnull VectorReadable3F axis)
-  {
-    final @Nonnull MatrixM3x3F tmp = new MatrixM3x3F();
-    return MatrixM3x3F.rotate(angle, m, tmp, axis, m);
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>m</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory. The function assumes a right-handed coordinate system.
-   * 
-   * @since 5.0.0
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM3x3F rotateInPlaceWithContext(
-    final @Nonnull Context context,
-    final double angle,
-    final @Nonnull MatrixM3x3F m,
-    final @Nonnull VectorReadable3F axis)
-  {
-    return MatrixM3x3F.rotate(angle, m, context.m4a, axis, m);
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>out</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory. The function assumes a right-handed coordinate system.
-   * 
-   * @since 5.0.0
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3F rotateWithContext(
-    final @Nonnull Context context,
-    final double angle,
-    final @Nonnull MatrixReadable3x3F m,
-    final @Nonnull VectorReadable3F axis,
-    final @Nonnull MatrixM3x3F out)
-  {
-    return MatrixM3x3F.rotate(angle, m, context.m4a, axis, out);
-  }
-
-  /**
-   * Return the trace of the matrix <code>m</code>. The trace is defined as
-   * the sum of the diagonal elements of the matrix.
-   * 
-   * @since 5.0.0
-   * @param m
-   *          The input matrix
-   * @return The trace of the matrix
-   */
-
-  public static double trace(
-    final @Nonnull MatrixReadable3x3F m)
-  {
-    return m.getRowColumnF(0, 0)
-      + m.getRowColumnF(1, 1)
-      + m.getRowColumnF(2, 2);
   }
 
   public MatrixM3x3F()

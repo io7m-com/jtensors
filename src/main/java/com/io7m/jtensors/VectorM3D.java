@@ -550,13 +550,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D crossProduct(
-    final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1,
+    final @Nonnull VectorReadable3D v0,
+    final @Nonnull VectorReadable3D v1,
     final @Nonnull VectorM3D out)
   {
-    final double x = (v0.y * v1.z) - (v0.z * v1.y);
-    final double y = (v0.z * v1.x) - (v0.x * v1.z);
-    final double z = (v0.x * v1.y) - (v0.y * v1.x);
+    final double x = (v0.getYD() * v1.getZD()) - (v0.getZD() * v1.getYD());
+    final double y = (v0.getZD() * v1.getXD()) - (v0.getXD() * v1.getZD());
+    final double z = (v0.getXD() * v1.getYD()) - (v0.getYD() * v1.getXD());
     out.x = x;
     out.y = y;
     out.z = z;

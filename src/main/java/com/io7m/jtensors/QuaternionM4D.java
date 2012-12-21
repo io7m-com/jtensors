@@ -21,7 +21,6 @@ import javax.annotation.concurrent.NotThreadSafe;
 
 import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
-import com.io7m.jaux.UnimplementedCodeException;
 
 /**
  * A four-dimensional mutable quaternion type with double precision elements.
@@ -35,6 +34,38 @@ import com.io7m.jaux.UnimplementedCodeException;
 @NotThreadSafe public final class QuaternionM4D implements
   QuaternionReadable4D
 {
+  /**
+   * The Context type contains the minimum storage required for all of the
+   * functions of the <code>QuaternionM4D</code> class.
+   * 
+   * <p>
+   * The purpose of the class is to allow applications to allocate all storage
+   * ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical code.
+   * </p>
+   * 
+   * <p>
+   * The user should allocate one <code>Context</code> value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes
+   * a <code>Context</code> value will not generate garbage.
+   * </p>
+   * 
+   * @since 5.0.0
+   */
+
+  @NotThreadSafe public static final class Context
+  {
+    final @Nonnull MatrixM3x3D         m3a       = new MatrixM3x3D();
+    final @Nonnull VectorM3D           v3a       = new VectorM3D();
+    final @Nonnull MatrixM3x3D.Context m_context = new MatrixM3x3D.Context();
+
+    public Context()
+    {
+
+    }
+  }
+
   /**
    * Calculate the element-wise sum of the quaternions <code>q0</code> and
    * <code>q1</code>, saving the result to <code>qr</code>.
@@ -272,6 +303,13 @@ import com.io7m.jaux.UnimplementedCodeException;
    * using <code>up</code> as the "up" vector, saving the result to
    * <code>q</code>.
    * 
+   * <p>
+   * The function uses storage preallocated in <code>context</code> to avoid
+   * any new allocations.
+   * </p>
+   * 
+   * @param context
+   *          Preallocated storage
    * @param q
    *          The output quaternion
    * @param origin
@@ -285,13 +323,20 @@ import com.io7m.jaux.UnimplementedCodeException;
    * @since 5.0.0
    */
 
-  public static @Nonnull QuaternionM4D lookAt(
+  public static @Nonnull QuaternionM4D lookAtWithContext(
+    final @Nonnull Context context,
     final @Nonnull VectorReadable3D origin,
     final @Nonnull VectorReadable3D target,
     final @Nonnull VectorReadable3D up,
     final @Nonnull QuaternionM4D q)
   {
-    throw new UnimplementedCodeException();
+    final MatrixM3x3D m = context.m3a;
+    final VectorM3D t = context.v3a;
+    final MatrixM3x3D.Context mc = context.m_context;
+
+    MatrixM3x3D.lookAtWithContext(mc, origin, target, up, m, t);
+    QuaternionM4D.makeFromRotationMatrix3x3(m, q);
+    return q;
   }
 
   /**
@@ -865,7 +910,6 @@ import com.io7m.jaux.UnimplementedCodeException;
   public double x;
   public double y;
   public double z;
-
   public double w;
 
   /**
