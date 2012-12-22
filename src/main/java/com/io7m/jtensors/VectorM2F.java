@@ -214,7 +214,11 @@ import com.io7m.jaux.functional.Pair;
   {
     final double m0 = VectorM2F.magnitude(v0);
     final double m1 = VectorM2F.magnitude(v1);
-    return Math.acos(VectorM2F.dotProduct(v0, v1) / (m0 * m1));
+    final double dp =
+      Math.min(Math.max(-1.0, VectorM2F.dotProduct(v0, v1)), 1.0);
+    final double f = m0 * m1;
+    final double r = dp / f;
+    return Math.acos(r);
   }
 
   /**

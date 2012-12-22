@@ -99,7 +99,11 @@ import com.io7m.jaux.functional.Pair;
   {
     final double m0 = VectorI2D.magnitude(v0);
     final double m1 = VectorI2D.magnitude(v1);
-    return Math.acos(VectorI2D.dotProduct(v0, v1) / (m0 * m1));
+    final double dp =
+      Math.min(Math.max(-1.0, VectorI2D.dotProduct(v0, v1)), 1.0);
+    final double f = m0 * m1;
+    final double r = dp / f;
+    return Math.acos(r);
   }
 
   /**

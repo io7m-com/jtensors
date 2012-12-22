@@ -152,11 +152,11 @@ public class VectorI2DTest extends VectorI2Contract
   @Override @Test public void testAngle()
   {
     final AlmostEqualDouble.ContextRelative ec =
-      TestUtilities.getDoubleEqualityContext6dp();
+      TestUtilities.getDoubleEqualityContext3dp();
 
     {
-      final double x = Math.random();
-      final double y = Math.random();
+      final double x = 1.0 + Math.random();
+      final double y = 1.0 + Math.random();
       final VectorI2D v0 = VectorI2D.normalize(new VectorI2D(x, y));
       final VectorI2D v1 = VectorI2D.normalize(new VectorI2D(x, y));
       final double angle = VectorI2D.angle(v0, v1);
@@ -169,8 +169,8 @@ public class VectorI2DTest extends VectorI2Contract
     }
 
     {
-      final double x = Math.random();
-      final double y = Math.random();
+      final double x = 1.0 + Math.random();
+      final double y = 1.0 + Math.random();
       final VectorI2D v0 = VectorI2D.normalize(new VectorI2D(x, y));
       final VectorI2D v1 = VectorI2D.normalize(new VectorI2D(y, -x));
       final double angle = VectorI2D.angle(v0, v1);
@@ -186,8 +186,8 @@ public class VectorI2DTest extends VectorI2Contract
     }
 
     {
-      final double x = Math.random();
-      final double y = Math.random();
+      final double x = 1.0 + Math.random();
+      final double y = 1.0 + Math.random();
       final VectorI2D v0 = VectorI2D.normalize(new VectorI2D(x, y));
       final VectorI2D v1 = VectorI2D.normalize(new VectorI2D(-y, x));
       final double angle = VectorI2D.angle(v0, v1);
