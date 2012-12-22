@@ -22,7 +22,6 @@ import org.junit.Test;
 import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 import com.io7m.jaux.ApproximatelyEqualDouble;
-import com.io7m.jaux.UnimplementedCodeException;
 
 public class QuaternionI4DTest extends QuaternionI4Contract
 {
@@ -489,17 +488,128 @@ public class QuaternionI4DTest extends QuaternionI4Contract
 
   @Override @Test public void testLookAtConsistent_Origin_NegativeX()
   {
-    throw new UnimplementedCodeException();
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final QuaternionI4D.Context qc = new QuaternionI4D.Context();
+
+    final MatrixM4x4D mr = new MatrixM4x4D();
+    final MatrixM4x4D mqr = new MatrixM4x4D();
+
+    final VectorReadable3D origin = new VectorI3D(0, 0, 0);
+    final VectorReadable3D target = new VectorI3D(-1, 0, 0);
+    final VectorReadable3D axis = QuaternionI4DTest.AXIS_Y;
+
+    MatrixM4x4D.lookAtWithContext(mc, origin, target, axis, mr);
+    final QuaternionI4D q =
+      QuaternionI4D.lookAtWithContext(qc, origin, target, axis);
+    QuaternionI4D.makeRotationMatrix4x4(q, mqr);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mqr: ");
+    System.out.println(mqr);
+
+    boolean eq = false;
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final double x = mr.get(row, col);
+        final double y = mqr.get(row, col);
+        eq = AlmostEqualDouble.almostEqual(ec, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
   }
 
   @Override @Test public void testLookAtConsistent_Origin_PositiveX()
   {
-    throw new UnimplementedCodeException();
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final QuaternionI4D.Context qc = new QuaternionI4D.Context();
+
+    final MatrixM4x4D mr = new MatrixM4x4D();
+    final MatrixM4x4D mqr = new MatrixM4x4D();
+
+    final VectorReadable3D origin = new VectorI3D(0, 0, 0);
+    final VectorReadable3D target = new VectorI3D(1, 0, 0);
+    final VectorReadable3D axis = QuaternionI4DTest.AXIS_Y;
+
+    MatrixM4x4D.lookAtWithContext(mc, origin, target, axis, mr);
+    final QuaternionI4D q =
+      QuaternionI4D.lookAtWithContext(qc, origin, target, axis);
+    QuaternionI4D.makeRotationMatrix4x4(q, mqr);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mqr: ");
+    System.out.println(mqr);
+
+    boolean eq = false;
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final double x = mr.get(row, col);
+        final double y = mqr.get(row, col);
+        eq = AlmostEqualDouble.almostEqual(ec, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
   }
 
   @Override @Test public void testLookAtMatrixEquivalentAxisY()
   {
-    throw new UnimplementedCodeException();
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final QuaternionI4D.Context qc = new QuaternionI4D.Context();
+    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+
+    final MatrixM4x4D ml = new MatrixM4x4D();
+    final MatrixM4x4D mq = new MatrixM4x4D();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double origin_x = (Math.random() * 100) - (Math.random() * 100);
+      final double origin_y = (Math.random() * 100) - (Math.random() * 100);
+      final double origin_z = (Math.random() * 100) - (Math.random() * 100);
+
+      final double target_x = (Math.random() * 100) - (Math.random() * 100);
+      final double target_y = (Math.random() * 100) - (Math.random() * 100);
+      final double target_z = (Math.random() * 100) - (Math.random() * 100);
+
+      final VectorI3D origin = new VectorI3D(origin_x, origin_y, origin_z);
+      final VectorI3D target = new VectorI3D(target_x, target_y, target_z);
+
+      MatrixM4x4D.lookAtWithContext(
+        mc,
+        origin,
+        target,
+        QuaternionI4DTest.AXIS_Y,
+        ml);
+      final QuaternionI4D lq =
+        QuaternionI4D.lookAtWithContext(
+          qc,
+          origin,
+          target,
+          QuaternionI4DTest.AXIS_Y);
+      QuaternionI4D.makeRotationMatrix4x4(lq, mq);
+
+      System.out.println("ml : ");
+      System.out.println(ml);
+      System.out.println("mq : ");
+      System.out.println(mq);
+
+      for (int row = 0; row < 3; ++row) {
+        for (int col = 0; col < 3; ++col) {
+          final double x = ml.get(row, col);
+          final double y = mq.get(row, col);
+
+          final boolean eq = AlmostEqualDouble.almostEqual(ec, x, y);
+          Assert.assertTrue(eq);
+        }
+      }
+    }
   }
 
   @Override @Test public void testMagnitudeNonzero()

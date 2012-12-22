@@ -100,7 +100,7 @@ public class VectorI2ITest extends VectorI2Contract
     // Not supported by integer vectors
   }
 
-  @Override public void testAngle()
+  @Override @Test public void testAngle()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext3dp();

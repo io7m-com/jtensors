@@ -18,6 +18,7 @@ package com.io7m.jtensors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
@@ -34,6 +35,38 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 
 @Immutable public final class QuaternionI4D implements QuaternionReadable4D
 {
+  /**
+   * The Context type contains the minimum storage required for all of the
+   * functions of the <code>QuaternionI4D</code> class.
+   * 
+   * <p>
+   * The purpose of the class is to allow applications to allocate all storage
+   * ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical code.
+   * </p>
+   * 
+   * <p>
+   * The user should allocate one <code>Context</code> value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes
+   * a <code>Context</code> value will not generate garbage.
+   * </p>
+   * 
+   * @since 5.0.0
+   */
+
+  @NotThreadSafe public static final class Context
+  {
+    final @Nonnull MatrixM3x3D         m3a       = new MatrixM3x3D();
+    final @Nonnull VectorM3D           v3a       = new VectorM3D();
+    final @Nonnull MatrixM3x3D.Context m_context = new MatrixM3x3D.Context();
+
+    public Context()
+    {
+
+    }
+  }
+
   /**
    * The "identity" quaternion, [0.0 0.0 0.0 1.0]
    */
@@ -206,6 +239,42 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
     final boolean ws = AlmostEqualDouble.almostEqual(context, wa, wb);
 
     return xs && ys && zs && ws;
+  }
+
+  /**
+   * Produce a quaternion that represents a rotation that "looks at" the point
+   * at <code>target</code> assuming the viewer is at <code>origin</code>,
+   * using <code>up</code> as the "up" vector.
+   * 
+   * <p>
+   * The function uses storage preallocated in <code>context</code> to avoid
+   * any new allocations.
+   * </p>
+   * 
+   * @param context
+   *          Preallocated storage
+   * @param origin
+   *          The origin point
+   * @param target
+   *          The target point
+   * @param up
+   *          The up vector
+   * 
+   * @since 5.0.0
+   */
+
+  public static @Nonnull QuaternionI4D lookAtWithContext(
+    final @Nonnull Context context,
+    final @Nonnull VectorReadable3D origin,
+    final @Nonnull VectorReadable3D target,
+    final @Nonnull VectorReadable3D up)
+  {
+    final MatrixM3x3D m = context.m3a;
+    final VectorM3D t = context.v3a;
+    final MatrixM3x3D.Context mc = context.m_context;
+
+    MatrixM3x3D.lookAtWithContext(mc, origin, target, up, m, t);
+    return QuaternionI4D.makeFromRotationMatrix3x3(m);
   }
 
   /**
