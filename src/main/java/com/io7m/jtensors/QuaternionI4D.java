@@ -314,8 +314,8 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * degrees around the axis specified by <code>axis</code>. <code>axis</code>
    * is assumed to be of unit length.
    * 
-   * @see VectorI3D#normalize(VectorI3D)
-   * @see VectorI4D#normalize(VectorI4D)
+   * @see VectorI3D#normalize(VectorReadable3D)
+   * @see VectorI4D#normalize(VectorReadable4D)
    * 
    * @param axis
    *          The normalized vector representing the axis

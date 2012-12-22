@@ -313,10 +313,10 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    * degrees around the axis specified by <code>axis</code>. <code>axis</code>
    * is assumed to be of unit length.
    * 
-   * @see VectorI3F#normalize(VectorI3F)
-   * @see VectorI4F#normalize(VectorI4F)
-   * @see VectorM3F#normalize(VectorM3F, VectorM3F)
-   * @see VectorM4F#normalize(VectorM4F, VectorM4F)
+   * @see VectorI3F#normalize(VectorReadable3F)
+   * @see VectorI4F#normalize(VectorReadable4F)
+   * @see VectorM3F#normalize(VectorReadable3F, VectorM3F)
+   * @see VectorM4F#normalize(VectorReadable4F, VectorM4F)
    * 
    * @param axis
    *          The normalized vector representing the axis

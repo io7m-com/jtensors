@@ -85,15 +85,12 @@ import com.io7m.jaux.CheckedMath;
 
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>, saving the
-   * result to <code>out</code>.
+   * element-wise product of <code>v1</code> and <code>r</code>.
    * 
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * @param out
-   *          The output vector
    * @param r
    *          The scaling value
    * 
@@ -208,8 +205,6 @@ import com.io7m.jaux.CheckedMath;
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * @param out
-   *          The output vector
    * @since 5.0.0
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
@@ -423,8 +418,6 @@ import com.io7m.jaux.CheckedMath;
    *          The input vector
    * @param r
    *          The scaling value
-   * @param out
-   *          The output vector
    * 
    * @return <code>(v.x * r, v.y * r, v.z * r)</code>
    * 

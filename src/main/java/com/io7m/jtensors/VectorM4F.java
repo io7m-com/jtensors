@@ -184,7 +184,7 @@ import com.io7m.jaux.functional.Pair;
    * Determine whether or not the vectors <code>va</code> and <code>vb</code>
    * are equal to within the degree of error given in <code>context</code>.
    * 
-   * @see AlmostEqualFloat#almostEqual(ContextRelative, double, double)
+   * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
    * 
    * @param context
    *          The equality context

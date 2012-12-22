@@ -380,10 +380,10 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    * degrees around the axis specified by <code>axis</code>, saving the result
    * to <code>out</code>. <code>axis</code> is assumed to be of unit length.
    * 
-   * @see VectorI3F#normalize(VectorI3F)
-   * @see VectorI4F#normalize(VectorI4F)
-   * @see VectorM3F#normalize(VectorM3F, VectorM3F)
-   * @see VectorM4F#normalize(VectorM4F, VectorM4F)
+   * @see VectorI3F#normalize(VectorReadable3F)
+   * @see VectorI4F#normalize(VectorReadable4F)
+   * @see VectorM3F#normalize(VectorReadable3F, VectorM3F)
+   * @see VectorM4F#normalize(VectorReadable4F, VectorM4F)
    * 
    * @param axis
    *          The normalized vector representing the axis
@@ -742,7 +742,8 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    * Multiply the quaternion <code>q0</code> by the quaternion <code>q1</code>
    * , saving the result to <code>q0</code>.
    * 
-   * @see QuaternionM4F#multiply(QuaternionM4F, QuaternionM4F, QuaternionM4F)
+   * @see QuaternionM4F#multiply(QuaternionReadable4F, QuaternionReadable4F,
+   *      QuaternionM4F)
    */
 
   public static @Nonnull QuaternionM4F multiplyInPlace(

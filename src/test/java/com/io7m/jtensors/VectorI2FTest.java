@@ -147,20 +147,6 @@ public class VectorI2FTest extends VectorI2Contract
       final float x = (float) Math.random();
       final float y = (float) Math.random();
       final VectorI2F v0 = VectorI2F.normalize(new VectorI2F(x, y));
-      final VectorI2F v1 = VectorI2F.normalize(new VectorI2F(x, y));
-      final double angle = VectorI2F.angle(v0, v1);
-
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
-
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, angle, 0.0));
-    }
-
-    {
-      final float x = (float) Math.random();
-      final float y = (float) Math.random();
-      final VectorI2F v0 = VectorI2F.normalize(new VectorI2F(x, y));
       final VectorI2F v1 = VectorI2F.normalize(new VectorI2F(y, -x));
       final double angle = VectorI2F.angle(v0, v1);
 
