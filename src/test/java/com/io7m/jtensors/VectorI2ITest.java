@@ -21,7 +21,7 @@ import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
 
-public class VectorI2ITest extends VectorI4Contract
+public class VectorI2ITest extends VectorI2Contract
 {
   public static int randomNegativeNumber()
   {
@@ -98,6 +98,58 @@ public class VectorI2ITest extends VectorI4Contract
   @Override @Test public void testAlmostEqualTransitive()
   {
     // Not supported by integer vectors
+  }
+
+  @Override public void testAngle()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext3dp();
+
+    {
+      final VectorI2I v0 = new VectorI2I(1, 0);
+      final VectorI2I v1 = new VectorI2I(1, 0);
+      final double angle = VectorI2I.angle(v0, v1);
+
+      System.out.println("v0    : " + v0);
+      System.out.println("v1    : " + v1);
+      System.out.println("angle : " + angle);
+
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, angle, 0.0));
+    }
+
+    {
+      final int x = (int) (Math.random() * 200);
+      final int y = (int) (Math.random() * 200);
+      final VectorI2I v0 = new VectorI2I(x, y);
+      final VectorI2I v1 = new VectorI2I(y, -x);
+      final double angle = VectorI2I.angle(v0, v1);
+
+      System.out.println("v0    : " + v0);
+      System.out.println("v1    : " + v1);
+      System.out.println("angle : " + angle);
+
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        ec,
+        angle,
+        Math.toRadians(90)));
+    }
+
+    {
+      final int x = (int) (Math.random() * 200);
+      final int y = (int) (Math.random() * 200);
+      final VectorI2I v0 = new VectorI2I(x, y);
+      final VectorI2I v1 = new VectorI2I(-y, x);
+      final double angle = VectorI2I.angle(v0, v1);
+
+      System.out.println("v0    : " + v0);
+      System.out.println("v1    : " + v1);
+      System.out.println("angle : " + angle);
+
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        ec,
+        angle,
+        Math.toRadians(90)));
+    }
   }
 
   @Override @Test public void testCheckInterface()
@@ -236,7 +288,7 @@ public class VectorI2ITest extends VectorI4Contract
     Assert.assertFalse(vc.y == vb.y);
   }
 
-  @Override @Test public void testDefault0001()
+  @Override @Test public void testDefault00()
   {
     Assert.assertTrue(new VectorI2I().equals(new VectorI2I(0, 0)));
   }

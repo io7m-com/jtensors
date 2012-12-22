@@ -21,7 +21,7 @@ import com.io7m.jaux.AlmostEqualFloat;
 
 final class TestUtilities
 {
-  public static final int TEST_RANDOM_ITERATIONS = 1000;
+  public static final int TEST_RANDOM_ITERATIONS = 100;
 
   static AlmostEqualDouble.ContextRelative getDoubleEqualityContext()
   {

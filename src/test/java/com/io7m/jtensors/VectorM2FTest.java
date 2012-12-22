@@ -260,7 +260,7 @@ public class VectorM2FTest extends VectorM2Contract
   @Override @Test public void testAngle()
   {
     final AlmostEqualDouble.ContextRelative ec =
-      TestUtilities.getDoubleEqualityContext();
+      TestUtilities.getDoubleEqualityContext3dp();
 
     {
       final float x = (float) Math.random();

@@ -271,22 +271,6 @@ public class VectorM2DTest extends VectorM2Contract
       final double x = Math.random();
       final double y = Math.random();
       final VectorM2D v0 = new VectorM2D(x, y);
-      final VectorM2D v1 = new VectorM2D(x, y);
-      VectorM2D.normalizeInPlace(v0);
-      VectorM2D.normalizeInPlace(v1);
-      final double angle = VectorM2D.angle(v0, v1);
-
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
-
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, angle, 0.0));
-    }
-
-    {
-      final double x = Math.random();
-      final double y = Math.random();
-      final VectorM2D v0 = new VectorM2D(x, y);
       final VectorM2D v1 = new VectorM2D(y, -x);
       VectorM2D.normalizeInPlace(v0);
       VectorM2D.normalizeInPlace(v1);
