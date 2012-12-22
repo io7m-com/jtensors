@@ -17,13 +17,13 @@
 package com.io7m.jtensors;
 
 /**
- * Properties of 4D vectors.
+ * Properties of 3D vectors.
  */
 
-public abstract class VectorI4Contract
+public abstract class VectorI3Contract
 {
   /**
-   * <code>∀v. w = absolute(v) → w.x = abs(v.x) ∧ w.y = abs(v.y) ∧ w.z = abs(v.z) ∧ w.w = abs(v.w)</code>
+   * <code>∀v. w = absolute(v) → w.x = abs(v.x) ∧ w.y = abs(v.y) ∧ w.z = abs(v.z)</code>
    */
 
   public abstract void testAbsolute();
@@ -77,10 +77,18 @@ public abstract class VectorI4Contract
   public abstract void testCopy();
 
   /**
-   * The default value for 4D vectors is (0,0,0,1)
+   * <p>
+   * <code>∀v u. dotProduct(crossProduct(v, u), v) = 0 ∧ dotProduct(crossProduct(v, u), u) = 0</code>
+   * </p>
    */
 
-  public abstract void testDefault0001();
+  public abstract void testCrossProductPerpendicular();
+
+  /**
+   * The default value for D vectors is (0,0,0)
+   */
+
+  public abstract void testDefault000();
 
   public abstract void testDistance();
 
@@ -159,7 +167,7 @@ public abstract class VectorI4Contract
 
   /**
    * <p>
-   * <code>magnitude(normalize((0,0,0,0)) = 0</code>
+   * <code>magnitude(normalize((0,0,0)) = 0</code>
    * </p>
    */
 
@@ -167,7 +175,7 @@ public abstract class VectorI4Contract
 
   /**
    * <p>
-   * <code>magnitude((1,0,0,0)) = 1</code>
+   * <code>magnitude((1,0,0)) = 1</code>
    * </p>
    */
 
@@ -181,7 +189,7 @@ public abstract class VectorI4Contract
 
   /**
    * <p>
-   * <code>magnitude((0,0,0,0)) = 0</code>
+   * <code>magnitude((0,0,0)) = 0</code>
    * </p>
    */
 
@@ -218,7 +226,7 @@ public abstract class VectorI4Contract
 
   /**
    * <p>
-   * <code>∀v. scale(v, 0) = (0,0,0,0)</code>
+   * <code>∀v. scale(v, 0) = (0,0,0)</code>
    * </p>
    */
 

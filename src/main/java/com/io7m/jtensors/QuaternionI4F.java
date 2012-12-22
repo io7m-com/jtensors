@@ -57,13 +57,13 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static @Nonnull QuaternionI4F add(
-    final @Nonnull QuaternionI4F q0,
-    final @Nonnull QuaternionI4F q1)
+    final @Nonnull QuaternionReadable4F q0,
+    final @Nonnull QuaternionReadable4F q1)
   {
-    final float x = q0.x + q1.x;
-    final float y = q0.y + q1.y;
-    final float z = q0.z + q1.z;
-    final float w = q0.w + q1.w;
+    final float x = q0.getXF() + q1.getXF();
+    final float y = q0.getYF() + q1.getYF();
+    final float z = q0.getZF() + q1.getZF();
+    final float w = q0.getWF() + q1.getWF();
     return new QuaternionI4F(x, y, z, w);
   }
 
@@ -85,13 +85,17 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
 
   public static boolean almostEqual(
     final @Nonnull ContextRelative context,
-    final @Nonnull QuaternionI4F qa,
-    final @Nonnull QuaternionI4F qb)
+    final @Nonnull QuaternionReadable4F qa,
+    final @Nonnull QuaternionReadable4F qb)
   {
-    final boolean xs = AlmostEqualFloat.almostEqual(context, qa.x, qb.x);
-    final boolean ys = AlmostEqualFloat.almostEqual(context, qa.y, qb.y);
-    final boolean zs = AlmostEqualFloat.almostEqual(context, qa.z, qb.z);
-    final boolean ws = AlmostEqualFloat.almostEqual(context, qa.w, qb.w);
+    final boolean xs =
+      AlmostEqualFloat.almostEqual(context, qa.getXF(), qb.getXF());
+    final boolean ys =
+      AlmostEqualFloat.almostEqual(context, qa.getYF(), qb.getYF());
+    final boolean zs =
+      AlmostEqualFloat.almostEqual(context, qa.getZF(), qb.getZF());
+    final boolean ws =
+      AlmostEqualFloat.almostEqual(context, qa.getWF(), qb.getWF());
     return xs && ys && zs && ws;
   }
 
@@ -105,12 +109,12 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static @Nonnull QuaternionI4F conjugate(
-    final @Nonnull QuaternionI4F q)
+    final @Nonnull QuaternionReadable4F q)
   {
-    final float x = -q.x;
-    final float y = -q.y;
-    final float z = -q.z;
-    final float w = q.w;
+    final float x = -q.getXF();
+    final float y = -q.getYF();
+    final float z = -q.getZF();
+    final float w = q.getWF();
     return new QuaternionI4F(x, y, z, w);
   }
 
@@ -127,13 +131,13 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static float dotProduct(
-    final @Nonnull QuaternionI4F q0,
-    final @Nonnull QuaternionI4F q1)
+    final @Nonnull QuaternionReadable4F q0,
+    final @Nonnull QuaternionReadable4F q1)
   {
-    final float x = q0.x * q1.x;
-    final float y = q0.y * q1.y;
-    final float z = q0.z * q1.z;
-    final float w = q0.w * q1.w;
+    final float x = q0.getXF() * q1.getXF();
+    final float y = q0.getYF() * q1.getYF();
+    final float z = q0.getZF() * q1.getZF();
+    final float w = q0.getWF() * q1.getWF();
     return x + y + z + w;
   }
 
@@ -158,8 +162,8 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static @Nonnull QuaternionI4F interpolateLinear(
-    final @Nonnull QuaternionI4F q0,
-    final @Nonnull QuaternionI4F q1,
+    final @Nonnull QuaternionReadable4F q0,
+    final @Nonnull QuaternionReadable4F q1,
     final float alpha)
   {
     final @Nonnull QuaternionI4F w0 = QuaternionI4F.scale(q0, 1.0f - alpha);
@@ -215,7 +219,7 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static float magnitude(
-    final @Nonnull QuaternionI4F q)
+    final @Nonnull QuaternionReadable4F q)
   {
     return (float) Math.sqrt(QuaternionI4F.magnitudeSquared(q));
   }
@@ -230,7 +234,7 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static float magnitudeSquared(
-    final @Nonnull QuaternionI4F q)
+    final @Nonnull QuaternionReadable4F q)
   {
     return QuaternionI4F.dotProduct(q, q);
   }
@@ -400,18 +404,18 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static @Nonnull MatrixM3x3F makeRotationMatrix3x3(
-    final @Nonnull QuaternionI4F q,
+    final @Nonnull QuaternionReadable4F q,
     final @Nonnull MatrixM3x3F m)
   {
-    final double xx = q.x * q.x;
-    final double xy = q.x * q.y;
-    final double xz = q.x * q.z;
-    final double yy = q.y * q.y;
-    final double yz = q.y * q.z;
-    final double zz = q.z * q.z;
-    final double wx = q.w * q.x;
-    final double wy = q.w * q.y;
-    final double wz = q.w * q.z;
+    final double xx = q.getXF() * q.getXF();
+    final double xy = q.getXF() * q.getYF();
+    final double xz = q.getXF() * q.getZF();
+    final double yy = q.getYF() * q.getYF();
+    final double yz = q.getYF() * q.getZF();
+    final double zz = q.getZF() * q.getZF();
+    final double wx = q.getWF() * q.getXF();
+    final double wy = q.getWF() * q.getYF();
+    final double wz = q.getWF() * q.getZF();
 
     final double r0c0 = 1.0 - (2 * yy) - (2 * zz);
     final double r0c1 = (2 * xy) - (2 * wz);
@@ -454,18 +458,18 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static @Nonnull MatrixM4x4F makeRotationMatrix4x4(
-    final @Nonnull QuaternionI4F q,
+    final @Nonnull QuaternionReadable4F q,
     final @Nonnull MatrixM4x4F m)
   {
-    final double xx = q.x * q.x;
-    final double xy = q.x * q.y;
-    final double xz = q.x * q.z;
-    final double yy = q.y * q.y;
-    final double yz = q.y * q.z;
-    final double zz = q.z * q.z;
-    final double wx = q.w * q.x;
-    final double wy = q.w * q.y;
-    final double wz = q.w * q.z;
+    final double xx = q.getXF() * q.getXF();
+    final double xy = q.getXF() * q.getYF();
+    final double xz = q.getXF() * q.getZF();
+    final double yy = q.getYF() * q.getYF();
+    final double yz = q.getYF() * q.getZF();
+    final double zz = q.getZF() * q.getZF();
+    final double wx = q.getWF() * q.getXF();
+    final double wy = q.getWF() * q.getYF();
+    final double wz = q.getWF() * q.getZF();
 
     final double r0c0 = 1.0 - (2 * yy) - (2 * zz);
     final double r0c1 = (2 * xy) - (2 * wz);
@@ -547,17 +551,24 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static @Nonnull QuaternionI4F multiply(
-    final @Nonnull QuaternionI4F q0,
-    final @Nonnull QuaternionI4F q1)
+    final @Nonnull QuaternionReadable4F q0,
+    final @Nonnull QuaternionReadable4F q1)
   {
     final float rx =
-      ((q0.w * q1.x) + (q0.x * q1.w) + (q0.y * q1.z)) - (q0.z * q1.y);
+      ((q0.getWF() * q1.getXF()) + (q0.getXF() * q1.getWF()) + (q0.getYF() * q1
+        .getZF())) - (q0.getZF() * q1.getYF());
     final float ry =
-      ((q0.w * q1.y) - (q0.x * q1.z)) + (q0.y * q1.w) + (q0.z * q1.x);
+      ((q0.getWF() * q1.getYF()) - (q0.getXF() * q1.getZF()))
+        + (q0.getYF() * q1.getWF())
+        + (q0.getZF() * q1.getXF());
     final float rz =
-      (((q0.w * q1.z) + (q0.x * q1.y)) - (q0.y * q1.x)) + (q0.z * q1.w);
+      (((q0.getWF() * q1.getZF()) + (q0.getXF() * q1.getYF())) - (q0.getYF() * q1
+        .getXF())) + (q0.getZF() * q1.getWF());
     final float rw =
-      (q0.w * q1.w) - (q0.x * q1.x) - (q0.y * q1.y) - (q0.z * q1.z);
+      (q0.getWF() * q1.getWF())
+        - (q0.getXF() * q1.getXF())
+        - (q0.getYF() * q1.getYF())
+        - (q0.getZF() * q1.getZF());
 
     return new QuaternionI4F(rx, ry, rz, rw);
   }
@@ -569,9 +580,9 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static @Nonnull QuaternionI4F negate(
-    final @Nonnull QuaternionI4F q)
+    final @Nonnull QuaternionReadable4F q)
   {
-    return new QuaternionI4F(-q.x, -q.y, -q.z, -q.w);
+    return new QuaternionI4F(-q.getXF(), -q.getYF(), -q.getZF(), -q.getWF());
   }
 
   /**
@@ -586,14 +597,14 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static @Nonnull QuaternionI4F normalize(
-    final @Nonnull QuaternionI4F q)
+    final @Nonnull QuaternionReadable4F q)
   {
     final float m = QuaternionI4F.magnitudeSquared(q);
     if (m > 0) {
       final float reciprocal = (float) (1.0f / Math.sqrt(m));
       return QuaternionI4F.scale(q, reciprocal);
     }
-    return q;
+    return new QuaternionI4F(q);
   }
 
   /**
@@ -608,10 +619,14 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static @Nonnull QuaternionI4F scale(
-    final @Nonnull QuaternionI4F q,
+    final @Nonnull QuaternionReadable4F q,
     final float r)
   {
-    return new QuaternionI4F(q.x * r, q.y * r, q.z * r, q.w * r);
+    return new QuaternionI4F(
+      q.getXF() * r,
+      q.getYF() * r,
+      q.getZF() * r,
+      q.getWF() * r);
   }
 
   /**
@@ -627,13 +642,13 @@ import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
    */
 
   public static @Nonnull QuaternionI4F subtract(
-    final @Nonnull QuaternionI4F q0,
-    final @Nonnull QuaternionI4F q1)
+    final @Nonnull QuaternionReadable4F q0,
+    final @Nonnull QuaternionReadable4F q1)
   {
-    final float x = q0.x - q1.x;
-    final float y = q0.y - q1.y;
-    final float z = q0.z - q1.z;
-    final float w = q0.w - q1.w;
+    final float x = q0.getXF() - q1.getXF();
+    final float y = q0.getYF() - q1.getYF();
+    final float z = q0.getZF() - q1.getZF();
+    final float w = q0.getWF() - q1.getWF();
     return new QuaternionI4F(x, y, z, w);
   }
 

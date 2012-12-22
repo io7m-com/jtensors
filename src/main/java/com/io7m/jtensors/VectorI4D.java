@@ -55,29 +55,33 @@ import com.io7m.jaux.functional.Pair;
   }
 
   /**
-   * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
+   * Determine whether or not the vectors <code>va</code> and <code>vb</code>
    * are equal to within the degree of error given in <code>context</code>.
    * 
    * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
    * 
    * @param context
    *          The equality context
-   * @param qa
+   * @param va
    *          The left input vector
-   * @param qb
+   * @param vb
    *          The right input vector
    * @since 5.0.0
    */
 
   public static boolean almostEqual(
-    final @Nonnull ContextRelative context,
-    final @Nonnull VectorI4D qa,
-    final @Nonnull VectorI4D qb)
+    final @Nonnull AlmostEqualDouble.ContextRelative context,
+    final @Nonnull VectorReadable4D va,
+    final @Nonnull VectorReadable4D vb)
   {
-    final boolean xs = AlmostEqualDouble.almostEqual(context, qa.x, qb.x);
-    final boolean ys = AlmostEqualDouble.almostEqual(context, qa.y, qb.y);
-    final boolean zs = AlmostEqualDouble.almostEqual(context, qa.z, qb.z);
-    final boolean ws = AlmostEqualDouble.almostEqual(context, qa.w, qb.w);
+    final boolean xs =
+      AlmostEqualDouble.almostEqual(context, va.getXD(), vb.getXD());
+    final boolean ys =
+      AlmostEqualDouble.almostEqual(context, va.getYD(), vb.getYD());
+    final boolean zs =
+      AlmostEqualDouble.almostEqual(context, va.getZD(), vb.getZD());
+    final boolean ws =
+      AlmostEqualDouble.almostEqual(context, va.getWD(), vb.getWD());
     return xs && ys && zs && ws;
   }
 

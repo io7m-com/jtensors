@@ -861,6 +861,11 @@ public class VectorM4ITest extends VectorM4Contract
     // Not applicable to integer vectors
   }
 
+  @Override @Test public void testOrthonormalizeMutation()
+  {
+    // Not applicable to integer vectors
+  }
+
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
@@ -1081,5 +1086,4 @@ public class VectorM4ITest extends VectorM4Contract
     Assert.assertTrue(v1.z == 1);
     Assert.assertTrue(v1.w == 1);
   }
-
 }

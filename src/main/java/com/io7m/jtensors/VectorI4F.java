@@ -19,8 +19,8 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import com.io7m.jaux.ApproximatelyEqualDouble;
-import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
+import com.io7m.jaux.AlmostEqualFloat;
 import com.io7m.jaux.functional.Pair;
 
 /**
@@ -55,34 +55,34 @@ import com.io7m.jaux.functional.Pair;
   }
 
   /**
-   * Determine whether or not the elements of the two vectors <code>v0</code>
-   * and <code>v1</code> are approximately equal.
+   * Determine whether or not the vectors <code>va</code> and <code>vb</code>
+   * are equal to within the degree of error given in <code>context</code>.
    * 
-   * @see ApproximatelyEqualFloat
+   * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
    * 
-   * @param v0
+   * @param context
+   *          The equality context
+   * @param va
    *          The left input vector
-   * @param v1
+   * @param vb
    *          The right input vector
-   * 
-   * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code> , within an appropriate degree of error for
-   *         single precision floating point values
+   * @since 5.0.0
    */
 
-  public static boolean approximatelyEqual(
-    final @Nonnull VectorI4F v0,
-    final @Nonnull VectorI4F v1)
+  public static boolean almostEqual(
+    final @Nonnull AlmostEqualFloat.ContextRelative context,
+    final @Nonnull VectorReadable4F va,
+    final @Nonnull VectorReadable4F vb)
   {
-    final boolean ex =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
-    final boolean ey =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.y, v1.y);
-    final boolean ez =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.z, v1.z);
-    final boolean ew =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.w, v1.w);
-    return ex && ey && ez && ew;
+    final boolean xs =
+      AlmostEqualFloat.almostEqual(context, va.getXF(), vb.getXF());
+    final boolean ys =
+      AlmostEqualFloat.almostEqual(context, va.getYF(), vb.getYF());
+    final boolean zs =
+      AlmostEqualFloat.almostEqual(context, va.getZF(), vb.getZF());
+    final boolean ws =
+      AlmostEqualFloat.almostEqual(context, va.getWF(), vb.getWF());
+    return xs && ys && zs && ws;
   }
 
   /**

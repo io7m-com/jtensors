@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2012 http://io7m.com
+ * 
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+ * SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+ * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
 package com.io7m.jtensors;
 
 import java.nio.ByteOrder;
@@ -1317,6 +1333,9 @@ public class MatrixM3x3FTest
 
   @SuppressWarnings("static-method") @Test public void testRotateVector0X()
   {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
     final MatrixM3x3F m = new MatrixM3x3F();
     final VectorM3F v_in = new VectorM3F(0, 0, -1);
     final VectorM3F v_got = new VectorM3F();
@@ -1330,7 +1349,7 @@ public class MatrixM3x3FTest
     System.out.println("got : " + v_got);
     System.out.println("--");
 
-    Assert.assertTrue(VectorM3F.approximatelyEqual(v_exp, v_got));
+    Assert.assertTrue(VectorM3F.almostEqual(ec, v_exp, v_got));
   }
 
   /**
@@ -1339,6 +1358,9 @@ public class MatrixM3x3FTest
 
   @SuppressWarnings("static-method") @Test public void testRotateVector0Y()
   {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
     final MatrixM3x3F m = new MatrixM3x3F();
     final VectorM3F v_in = new VectorM3F(0, 0, -1);
     final VectorM3F v_got = new VectorM3F();
@@ -1352,7 +1374,7 @@ public class MatrixM3x3FTest
     System.out.println("got : " + v_got);
     System.out.println("--");
 
-    Assert.assertTrue(VectorM3F.approximatelyEqual(v_exp, v_got));
+    Assert.assertTrue(VectorM3F.almostEqual(ec, v_exp, v_got));
   }
 
   /**
@@ -1361,6 +1383,9 @@ public class MatrixM3x3FTest
 
   @SuppressWarnings("static-method") @Test public void testRotateVector0Z()
   {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
     final MatrixM3x3F m = new MatrixM3x3F();
     final VectorM3F v_in = new VectorM3F(0, 0, -1);
     final VectorM3F v_got = new VectorM3F();
@@ -1374,7 +1399,7 @@ public class MatrixM3x3FTest
     System.out.println("got : " + v_got);
     System.out.println("--");
 
-    Assert.assertTrue(VectorM3F.approximatelyEqual(v_exp, v_got));
+    Assert.assertTrue(VectorM3F.almostEqual(ec, v_exp, v_got));
   }
 
   /**
@@ -2404,7 +2429,7 @@ public class MatrixM3x3FTest
   {
     final MatrixM3x3F m = new MatrixM3x3F();
     final MatrixM3x3F out = new MatrixM3x3F();
-    final VectorI2F v = new VectorI2F(1.0, 2.0);
+    final VectorI2F v = new VectorI2F(1.0f, 2.0f);
 
     {
       final MatrixM3x3F r = MatrixM3x3F.translateByVector2F(m, v, out);
@@ -2470,7 +2495,7 @@ public class MatrixM3x3FTest
     testTranslateSimple2FAlt()
   {
     final MatrixM3x3F m = new MatrixM3x3F();
-    final VectorI2F v = new VectorI2F(1.0, 2.0);
+    final VectorI2F v = new VectorI2F(1.0f, 2.0f);
 
     {
       final MatrixM3x3F r = MatrixM3x3F.translateByVector2FInPlace(m, v);
@@ -2671,7 +2696,7 @@ public class MatrixM3x3FTest
     final MatrixM3x3F m = new MatrixM3x3F();
     final MatrixM3x3F out = new MatrixM3x3F();
 
-    MatrixM3x3F.translateByVector2F(m, new VectorI2F(1.0, 2.0), out);
+    MatrixM3x3F.translateByVector2F(m, new VectorI2F(1.0f, 2.0f), out);
 
     {
       final FloatBuffer b = MatrixM3x3F.floatBuffer(out);

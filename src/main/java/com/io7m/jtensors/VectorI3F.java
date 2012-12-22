@@ -19,8 +19,8 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import com.io7m.jaux.ApproximatelyEqualDouble;
-import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
+import com.io7m.jaux.AlmostEqualFloat;
 import com.io7m.jaux.functional.Pair;
 
 /**
@@ -55,32 +55,32 @@ import com.io7m.jaux.functional.Pair;
   }
 
   /**
-   * Determine whether or not the elements of the two vectors <code>v0</code>
-   * and <code>v1</code> are approximately equal.
+   * Determine whether or not the vectors <code>va</code> and <code>vb</code>
+   * are equal to within the degree of error given in <code>context</code>.
    * 
-   * @see ApproximatelyEqualFloat
+   * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
    * 
-   * @param v0
+   * @param context
+   *          The equality context
+   * @param va
    *          The left input vector
-   * @param v1
+   * @param vb
    *          The right input vector
-   * 
-   * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code> , within an appropriate degree of error for
-   *         single precision floating point values
+   * @since 5.0.0
    */
 
-  public static boolean approximatelyEqual(
-    final @Nonnull VectorI3F v0,
-    final @Nonnull VectorI3F v1)
+  public static boolean almostEqual(
+    final @Nonnull AlmostEqualFloat.ContextRelative context,
+    final @Nonnull VectorReadable3F va,
+    final @Nonnull VectorReadable3F vb)
   {
-    final boolean ex =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
-    final boolean ey =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.y, v1.y);
-    final boolean ez =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.z, v1.z);
-    return ex && ey && ez;
+    final boolean xs =
+      AlmostEqualFloat.almostEqual(context, va.getXF(), vb.getXF());
+    final boolean ys =
+      AlmostEqualFloat.almostEqual(context, va.getYF(), vb.getYF());
+    final boolean zs =
+      AlmostEqualFloat.almostEqual(context, va.getZF(), vb.getZF());
+    return xs && ys && zs;
   }
 
   /**
@@ -238,12 +238,12 @@ import com.io7m.jaux.functional.Pair;
    */
 
   public static @Nonnull VectorI3F crossProduct(
-    final @Nonnull VectorI3F v0,
-    final @Nonnull VectorI3F v1)
+    final @Nonnull VectorReadable3F v0,
+    final @Nonnull VectorReadable3F v1)
   {
-    final float x = (v0.y * v1.z) - (v0.z * v1.y);
-    final float y = (v0.z * v1.x) - (v0.x * v1.z);
-    final float z = (v0.x * v1.y) - (v0.y * v1.x);
+    final float x = (v0.getYF() * v1.getZF()) - (v0.getZF() * v1.getYF());
+    final float y = (v0.getZF() * v1.getXF()) - (v0.getXF() * v1.getZF());
+    final float z = (v0.getXF() * v1.getYF()) - (v0.getYF() * v1.getXF());
     return new VectorI3F(x, y, z);
   }
 

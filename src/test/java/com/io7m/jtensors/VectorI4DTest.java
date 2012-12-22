@@ -377,8 +377,19 @@ public class VectorI4DTest extends VectorI4Contract
 
   @Override @Test public void testCopy()
   {
-    // TODO Auto-generated method stub
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
 
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x = Math.random() * Double.MIN_VALUE;
+      final double y = Math.random() * Double.MAX_VALUE;
+      final double z = Math.random() * Double.MIN_VALUE;
+      final double w = Math.random() * Double.MIN_VALUE;
+      final VectorI4D v = new VectorI4D(x, y, z, w);
+      final VectorI4D vc = new VectorI4D(v);
+
+      Assert.assertTrue(VectorI4D.almostEqual(ec, v, vc));
+    }
   }
 
   @Override @Test public void testDefault0001()

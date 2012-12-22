@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.functional.Pair;
 
 public class VectorM4DTest extends VectorM4Contract
 {
@@ -1037,6 +1038,17 @@ public class VectorM4DTest extends VectorM4Contract
   }
 
   @Override @Test public void testOrthonormalize()
+  {
+    final VectorM4D v0 = new VectorM4D(0, 1, 0, 0);
+    final VectorM4D v1 = new VectorM4D(0.5, 0.5, 0, 0);
+
+    final Pair<VectorM4D, VectorM4D> r = VectorM4D.orthoNormalize(v0, v1);
+
+    Assert.assertEquals(new VectorM4D(0, 1, 0, 0), r.first);
+    Assert.assertEquals(new VectorM4D(1, 0, 0, 0), r.second);
+  }
+
+  @Override @Test public void testOrthonormalizeMutation()
   {
     final VectorM4D v0 = new VectorM4D(0, 1, 0, 0);
     final VectorM4D v1 = new VectorM4D(0.5, 0.5, 0, 0);

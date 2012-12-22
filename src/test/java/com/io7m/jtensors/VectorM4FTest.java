@@ -23,6 +23,7 @@ import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.AlmostEqualFloat;
 import com.io7m.jaux.ApproximatelyEqualDouble;
 import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.functional.Pair;
 
 public class VectorM4FTest extends VectorM4Contract
 {
@@ -1035,6 +1036,17 @@ public class VectorM4FTest extends VectorM4Contract
   {
     final VectorM4F v0 = new VectorM4F(0, 1, 0, 0);
     final VectorM4F v1 = new VectorM4F(0.5f, 0.5f, 0, 0);
+
+    final Pair<VectorM4F, VectorM4F> r = VectorM4F.orthoNormalize(v0, v1);
+
+    Assert.assertEquals(new VectorM4F(0, 1, 0, 0), r.first);
+    Assert.assertEquals(new VectorM4F(1, 0, 0, 0), r.second);
+  }
+
+  @Override @Test public void testOrthonormalizeMutation()
+  {
+    final VectorM4F v0 = new VectorM4F(0f, 1f, 0f, 0f);
+    final VectorM4F v1 = new VectorM4F(0.5f, 0.5f, 0f, 0f);
 
     VectorM4F.orthoNormalizeInPlace(v0, v1);
 

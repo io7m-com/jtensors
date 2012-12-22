@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2012 http://io7m.com
+ * 
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+ * SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+ * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
 package com.io7m.jtensors;
 
 import java.nio.ByteOrder;
@@ -13,7 +29,7 @@ import com.io7m.jaux.functional.Option.Some;
 import com.io7m.jaux.functional.Option.Type;
 import com.io7m.jtensors.MatrixM4x4D.Context;
 
-public class MatrixM4x4DTest
+public class MatrixM4x4DTest extends MatrixM4x4Contract
 {
   private static final VectorReadable3D AXIS_X = new VectorI3D(1, 0, 0);
   private static final VectorReadable3D AXIS_Y = new VectorI3D(0, 1, 0);
@@ -152,7 +168,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(eq);
   }
 
-  @SuppressWarnings("static-method") @Test public void testAdd()
+  @Override @Test public void testAdd()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -193,7 +209,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testAddMutate()
+  @Override @Test public void testAddMutate()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -228,7 +244,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testAddRowScaled()
+  @Override @Test public void testAddRowScaled()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -303,9 +319,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testAddRowScaledContextEquivalentND()
+  @Override @Test public void testAddRowScaledContextEquivalent()
   {
     final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
     final MatrixM4x4D m0 = new MatrixM4x4D();
@@ -353,8 +367,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowA()
   {
@@ -362,8 +375,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.addRowScaledInPlace(m, 4, 0, 0, 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowB()
   {
@@ -371,8 +383,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.addRowScaledInPlace(m, 0, 4, 0, 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowC()
   {
@@ -380,8 +391,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.addRowScaledInPlace(m, 0, 0, 4, 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowA()
   {
@@ -389,8 +399,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.addRowScaledInPlace(m, -1, 0, 0, 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowB()
   {
@@ -398,8 +407,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.addRowScaledInPlace(m, 0, -1, 0, 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowC()
   {
@@ -407,7 +415,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.addRowScaledInPlace(m, 0, 0, -1, 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testBufferEndianness()
+  @Override @Test public void testBufferEndianness()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final DoubleBuffer b = MatrixM4x4D.doubleBuffer(m);
@@ -415,7 +423,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
   }
 
-  @SuppressWarnings("static-method") @Test public void testCopy()
+  @Override @Test public void testCopy()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -475,16 +483,14 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testDeterminantIdentity()
+  @Override @Test public void testDeterminantIdentity()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     Assert.assertTrue(MatrixM4x4D.determinant(m) == 1.0);
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testDeterminantOther()
+  @Override @Test public void testDeterminantOther()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
@@ -497,7 +503,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testDeterminantScale()
+  @Override @Test public void testDeterminantScale()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
@@ -508,9 +514,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testDeterminantScaleNegative()
+  @Override @Test public void testDeterminantScaleNegative()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
@@ -521,7 +525,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testDeterminantZero()
+  @Override @Test public void testDeterminantZero()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     MatrixM4x4D.setZero(m);
@@ -530,42 +534,35 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  @Override @Test public void testEqualsCorrect()
   {
-    final MatrixM4x4D m0 = new MatrixM4x4D();
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertTrue(m0.equals(m0));
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+    {
+      final MatrixM4x4D m0 = new MatrixM4x4D();
+      Assert.assertTrue(m0.equals(m0));
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+    }
+
+    {
+      final MatrixM4x4D m0 = new MatrixM4x4D();
+      Assert.assertFalse(m0.equals(null));
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+    }
+
+    {
+      final MatrixM4x4D m0 = new MatrixM4x4D();
+      Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+    }
+
+    {
+      final MatrixM4x4D m0 = new MatrixM4x4D();
+      final MatrixM4x4D m1 = new MatrixM4x4D();
+      Assert.assertTrue(m0.equals(m1));
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
-  {
-    final MatrixM4x4D m0 = new MatrixM4x4D();
-    Assert.assertFalse(m0.equals(null));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
-  {
-    final MatrixM4x4D m0 = new MatrixM4x4D();
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
-  {
-    final MatrixM4x4D m0 = new MatrixM4x4D();
-    final MatrixM4x4D m1 = new MatrixM4x4D();
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-    Assert.assertTrue(m0.equals(m1));
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testEqualsNeqExhaustive()
+  @Override @Test public void testEqualsNotEqualsCorrect()
   {
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -583,7 +580,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testExchangeRows()
+  @Override @Test public void testExchangeRows()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -668,8 +665,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsAOverflow()
   {
@@ -677,8 +673,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.exchangeRowsInPlace(m, 4, 0);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsAUnderflow()
   {
@@ -686,8 +681,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.exchangeRowsInPlace(m, -1, 0);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsBOverflow()
   {
@@ -695,8 +689,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.exchangeRowsInPlace(m, 0, 4);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsBUnderflow()
   {
@@ -704,9 +697,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.exchangeRowsInPlace(m, 0, -1);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testExchangeRowsContextEquivalentND()
+  @Override @Test public void testExchangeRowsContextEquivalent()
   {
     final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
     final MatrixM4x4D m0 = new MatrixM4x4D();
@@ -792,9 +783,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testHashcodeNeqExhaustive()
+  @Override @Test public void testHashcodeNeqExhaustive()
   {
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -815,9 +804,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInitializationFrom()
+  @Override @Test public void testInitializationFrom()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
 
@@ -872,9 +859,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInitializationIdentity()
+  @Override @Test public void testInitializationIdentity()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
@@ -901,7 +886,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testInvertIdentity()
+  @Override @Test public void testInvertIdentity()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -977,9 +962,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInvertIdentityContextEquivalent()
+  @Override @Test public void testInvertIdentityContextEquivalent()
   {
     final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
     final MatrixM4x4D m0 = new MatrixM4x4D();
@@ -1058,7 +1041,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testInvertSimple()
+  @Override @Test public void testInvertSimple()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -1154,7 +1137,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testInvertSimple2()
+  @Override @Test public void testInvertSimple2()
   {
     final AlmostEqualDouble.ContextRelative context_d =
       TestUtilities.getDoubleEqualityContext3dp();
@@ -1300,9 +1283,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInvertSimple2ContextEquivalent()
+  @Override @Test public void testInvertSimple2ContextEquivalent()
   {
     final AlmostEqualDouble.ContextRelative context_d =
       TestUtilities.getDoubleEqualityContext3dp();
@@ -1437,9 +1418,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInvertSimpleContextEquivalent()
+  @Override @Test public void testInvertSimpleContextEquivalent()
   {
     final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
     final MatrixM4x4D m0 = new MatrixM4x4D();
@@ -1538,7 +1517,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testInvertZero()
+  @Override @Test public void testInvertZero()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -1556,9 +1535,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInvertZeroContextEquivalent()
+  @Override @Test public void testInvertZeroContextEquivalent()
   {
     final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
     final MatrixM4x4D m0 = new MatrixM4x4D();
@@ -1583,9 +1560,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testLookAt_NoTranslation_NegativeX_AroundY()
+  @Override @Test public void testLookAt_NoTranslation_NegativeX_AroundY()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -1652,9 +1627,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(eq);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testLookAt_NoTranslation_NegativeZ_AroundY()
+  @Override @Test public void testLookAt_NoTranslation_NegativeZ_AroundY()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -1721,9 +1694,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(eq);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testLookAt_NoTranslation_PositiveX_AroundY()
+  @Override @Test public void testLookAt_NoTranslation_PositiveX_AroundY()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -1790,9 +1761,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(eq);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testLookAt_NoTranslation_PositiveZ_AroundY()
+  @Override @Test public void testLookAt_NoTranslation_PositiveZ_AroundY()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -1859,7 +1828,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(eq);
   }
 
-  @SuppressWarnings("static-method") @Test public
+  @Override @Test public
     void
     testLookAt_Translation102030_NegativeZ_AroundY()
   {
@@ -1928,7 +1897,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(eq);
   }
 
-  @SuppressWarnings("static-method") @Test public void testMultiplyIdentity()
+  @Override @Test public void testMultiplyIdentity()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -1947,9 +1916,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMultiplyMutateIdentity()
+  @Override @Test public void testMultiplyMutateIdentity()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -1979,9 +1946,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMultiplyMutateSimple()
+  @Override @Test public void testMultiplyMutateSimple()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
 
@@ -2032,7 +1997,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testMultiplySimple()
+  @Override @Test public void testMultiplySimple()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
 
@@ -2085,9 +2050,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
   }
 
-  @SuppressWarnings({ "static-method" }) @Test public
-    void
-    testMultiplyVectorSimple()
+  @Override @Test public void testMultiplyVectorSimple()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
 
@@ -2122,9 +2085,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(out.w == 150.0);
   }
 
-  @SuppressWarnings({ "static-method" }) @Test public
-    void
-    testMultiplyVectorSimpleContextEquivalent()
+  @Override @Test public void testMultiplyVectorSimpleContextEquivalent()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
 
@@ -2161,7 +2122,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(out.w == 150.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testMultiplyZero()
+  @Override @Test public void testMultiplyZero()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -2187,8 +2148,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeNegativeColumn()
   {
@@ -2196,8 +2156,7 @@ public class MatrixM4x4DTest
     m.get(0, -1);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeNegativeRow()
   {
@@ -2205,8 +2164,7 @@ public class MatrixM4x4DTest
     m.get(-1, 0);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeOverflowColumn()
   {
@@ -2214,8 +2172,7 @@ public class MatrixM4x4DTest
     m.get(0, 4);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeOverflowRow()
   {
@@ -2227,9 +2184,7 @@ public class MatrixM4x4DTest
    * All rotation matrices have a determinant of 1.0 and are orthogonal.
    */
 
-  @SuppressWarnings({ "static-method" }) @Test public
-    void
-    testRotateDeterminantOrthogonal()
+  @Override @Test public void testRotateDeterminantOrthogonal()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2294,7 +2249,7 @@ public class MatrixM4x4DTest
    * A rotation of 0 degrees around the X axis has no effect.
    */
 
-  @SuppressWarnings("static-method") @Test public void testRotateVector0X()
+  @Override @Test public void testRotateVector0X()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -2319,7 +2274,7 @@ public class MatrixM4x4DTest
    * A rotation of 0 degrees around the Y axis has no effect.
    */
 
-  @SuppressWarnings("static-method") @Test public void testRotateVector0Y()
+  @Override @Test public void testRotateVector0Y()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -2344,7 +2299,7 @@ public class MatrixM4x4DTest
    * A rotation of 0 degrees around the Z axis has no effect.
    */
 
-  @SuppressWarnings("static-method") @Test public void testRotateVector0Z()
+  @Override @Test public void testRotateVector0Z()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -2370,7 +2325,7 @@ public class MatrixM4x4DTest
    * counter-clockwise rotation of the vector.
    */
 
-  @SuppressWarnings("static-method") @Test public void testRotateVector90X()
+  @Override @Test public void testRotateVector90X()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2411,7 +2366,7 @@ public class MatrixM4x4DTest
    * counter-clockwise rotation of the vector.
    */
 
-  @SuppressWarnings("static-method") @Test public void testRotateVector90Y()
+  @Override @Test public void testRotateVector90Y()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2451,7 +2406,7 @@ public class MatrixM4x4DTest
    * counter-clockwise rotation of the vector.
    */
 
-  @SuppressWarnings("static-method") @Test public void testRotateVector90Z()
+  @Override @Test public void testRotateVector90Z()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2484,9 +2439,7 @@ public class MatrixM4x4DTest
    * rotation of the vector.
    */
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testRotateVectorMinus90X()
+  @Override @Test public void testRotateVectorMinus90X()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2527,9 +2480,7 @@ public class MatrixM4x4DTest
    * rotation of the vector.
    */
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testRotateVectorMinus90Y()
+  @Override @Test public void testRotateVectorMinus90Y()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2569,9 +2520,7 @@ public class MatrixM4x4DTest
    * rotation of the vector.
    */
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testRotateVectorMinus90Z()
+  @Override @Test public void testRotateVectorMinus90Z()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2599,9 +2548,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(eq);
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
-    void
-    testRotateX()
+  @Override @Test public void testRotateX()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2615,7 +2562,9 @@ public class MatrixM4x4DTest
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(out).position());
-      Assert.assertEquals(1.0, MatrixM4x4D.determinant(r));
+
+      final double det = MatrixM4x4D.determinant(r);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
 
       System.out.println(r);
 
@@ -2641,9 +2590,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
-    void
-    testRotateXContextEquivalentInPlace()
+  @Override @Test public void testRotateXContextEquivalentInPlace()
   {
     final AlmostEqualDouble.ContextRelative context_d =
       TestUtilities.getDoubleEqualityContext();
@@ -2663,7 +2610,9 @@ public class MatrixM4x4DTest
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(out).position());
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM4x4D.determinant(r));
+
+      final double det = MatrixM4x4D.determinant(r);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, 1.0, det));
 
       System.out.println(r);
 
@@ -2688,9 +2637,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
-    void
-    testRotateXMakeEquivalent()
+  @Override @Test public void testRotateXMakeEquivalent()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2699,7 +2646,9 @@ public class MatrixM4x4DTest
       final MatrixM4x4D r =
         MatrixM4x4D.makeRotation(Math.toRadians(45), MatrixM4x4DTest.AXIS_X);
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM4x4D.determinant(r));
+
+      final double det = MatrixM4x4D.determinant(r);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
 
       System.out.println(r);
 
@@ -2709,9 +2658,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
-    void
-    testRotateY()
+  @Override @Test public void testRotateY()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2724,7 +2671,9 @@ public class MatrixM4x4DTest
           .rotate(Math.toRadians(45), m, MatrixM4x4DTest.AXIS_Y, out);
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM4x4D.determinant(r));
+
+      final double det = MatrixM4x4D.determinant(r);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
 
       System.out.println(r);
 
@@ -2749,9 +2698,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
-    void
-    testRotateYContextEquivalentInPlace()
+  @Override @Test public void testRotateYContextEquivalentInPlace()
   {
     final AlmostEqualDouble.ContextRelative context_d =
       TestUtilities.getDoubleEqualityContext();
@@ -2769,7 +2716,9 @@ public class MatrixM4x4DTest
           out);
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM4x4D.determinant(r));
+
+      final double det = MatrixM4x4D.determinant(r);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, 1.0, det));
 
       System.out.println(r);
 
@@ -2795,9 +2744,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
-    void
-    testRotateYMakeEquivalent()
+  @Override @Test public void testRotateYMakeEquivalent()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2806,7 +2753,9 @@ public class MatrixM4x4DTest
       final MatrixM4x4D r =
         MatrixM4x4D.makeRotation(Math.toRadians(45), MatrixM4x4DTest.AXIS_Y);
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM4x4D.determinant(r));
+
+      final double det = MatrixM4x4D.determinant(r);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
 
       System.out.println(r);
 
@@ -2816,9 +2765,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
-    void
-    testRotateZ()
+  @Override @Test public void testRotateZ()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2831,7 +2778,9 @@ public class MatrixM4x4DTest
           .rotate(Math.toRadians(45), m, MatrixM4x4DTest.AXIS_Z, out);
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM4x4D.determinant(r));
+
+      final double det = MatrixM4x4D.determinant(r);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
 
       System.out.println(r);
 
@@ -2847,7 +2796,9 @@ public class MatrixM4x4DTest
           m,
           MatrixM4x4DTest.AXIS_Z);
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM4x4D.determinant(r));
+
+      final double det = MatrixM4x4D.determinant(r);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
 
       System.out.println(r);
 
@@ -2857,9 +2808,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
-    void
-    testRotateZContextEquivalentInPlace()
+  @Override @Test public void testRotateZContextEquivalentInPlace()
   {
     final AlmostEqualDouble.ContextRelative context_d =
       TestUtilities.getDoubleEqualityContext();
@@ -2877,7 +2826,9 @@ public class MatrixM4x4DTest
           out);
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM4x4D.determinant(r));
+
+      final double det = MatrixM4x4D.determinant(r);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, 1.0, det));
 
       System.out.println(r);
 
@@ -2894,7 +2845,9 @@ public class MatrixM4x4DTest
           m,
           MatrixM4x4DTest.AXIS_Z);
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM4x4D.determinant(r));
+
+      final double det = MatrixM4x4D.determinant(r);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, 1.0, det));
 
       System.out.println(r);
 
@@ -2904,9 +2857,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
-    void
-    testRotateZMakeEquivalent()
+  @Override @Test public void testRotateZMakeEquivalent()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2915,7 +2866,9 @@ public class MatrixM4x4DTest
       final MatrixM4x4D r =
         MatrixM4x4D.makeRotation(Math.toRadians(45), MatrixM4x4DTest.AXIS_Z);
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM4x4D.determinant(r));
+
+      final double det = MatrixM4x4D.determinant(r);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
 
       System.out.println(r);
 
@@ -2925,7 +2878,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testRow()
+  @Override @Test public void testRow()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorM4D v = new VectorM4D();
@@ -2960,7 +2913,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testRow4D()
+  @Override @Test public void testRow4()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorM4D v = new VectorM4D();
@@ -2995,33 +2948,31 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
-    testRow4DOverflow()
+    testRow4Overflow()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     m.getRow4D(4, new VectorM4D());
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
-    testRow4DUnderflow()
+    testRow4Underflow()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     m.getRow4D(-1, new VectorM4D());
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public void testRowOverflow()
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
+    void
+    testRowOverflow()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     MatrixM4x4D.row(m, 4, new VectorM4D());
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testRowUnderflow()
   {
@@ -3029,7 +2980,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.row(m, -1, new VectorM4D());
   }
 
-  @SuppressWarnings("static-method") @Test public void testScale()
+  @Override @Test public void testScale()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D mr = new MatrixM4x4D();
@@ -3062,7 +3013,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mk).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleMutate()
+  @Override @Test public void testScaleMutate()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
@@ -3091,7 +3042,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleRow()
+  @Override @Test public void testScaleRow()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -3182,9 +3133,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testScaleRowContextEquivalentND()
+  @Override @Test public void testScaleRowContextEquivalent()
   {
     final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
     final MatrixM4x4D m0 = new MatrixM4x4D();
@@ -3279,8 +3228,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowMutateOverflow()
   {
@@ -3288,8 +3236,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.scaleRowInPlace(m, 4, 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowMutateUnderflow()
   {
@@ -3297,8 +3244,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.scaleRowInPlace(m, -1, 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowOverflow()
   {
@@ -3307,8 +3253,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.scaleRow(m, 4, 1.0, r);
   }
 
-  @SuppressWarnings("static-method") @Test(
-    expected = IndexOutOfBoundsException.class) public
+  @Override @Test(expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowUnderflow()
   {
@@ -3317,7 +3262,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.scaleRow(m, -1, 1.0, r);
   }
 
-  @SuppressWarnings("static-method") @Test public void testSetGetIdentity()
+  @Override @Test public void testSetGetIdentity()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
@@ -3346,9 +3291,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testSetGetInterfaceIdentity()
+  @Override @Test public void testSetGetInterfaceIdentity()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
@@ -3377,7 +3320,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testStorage()
+  @Override @Test public void testStorage()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
@@ -3429,7 +3372,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testString()
+  @Override @Test public void testString()
   {
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
@@ -3440,18 +3383,21 @@ public class MatrixM4x4DTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
-    void
-    testTrace()
+  @Override @Test public void testTrace()
   {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
     final MatrixM4x4D m = new MatrixM4x4D();
-    Assert.assertEquals(4.0, MatrixM4x4D.trace(m));
+    final double t = MatrixM4x4D.trace(m);
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 4.0, t));
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
-    void
-    testTranslate3D4DEquivalent()
+  @Override @Test public void testTranslate3_4_Equivalent()
   {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
     final MatrixM3x3D m3 = new MatrixM3x3D();
     final MatrixM4x4D m4 = new MatrixM4x4D();
     final VectorI3D v = new VectorI3D(3.0, 7.0, 0.0);
@@ -3466,154 +3412,11 @@ public class MatrixM4x4DTest
     MatrixM3x3D.multiplyVector3D(m3, v3i, v3o);
     MatrixM4x4D.multiplyVector4D(m4, w3i, w3o);
 
-    Assert.assertEquals(v3o.x, w3o.x);
-    Assert.assertEquals(v3o.y, w3o.y);
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, v3o.x, w3o.x));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, v3o.y, w3o.y));
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslateSimple2D()
-  {
-    final MatrixM4x4D m = new MatrixM4x4D();
-    final MatrixM4x4D out = new MatrixM4x4D();
-    final VectorI2D v = new VectorI2D(1.0, 2.0);
-
-    {
-      final MatrixM4x4D r = MatrixM4x4D.translateByVector2D(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
-
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
-
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
-
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-    }
-
-    {
-      final MatrixM4x4D r = MatrixM4x4D.translateByVector2D(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 2.0);
-
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 4.0);
-
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
-
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-    }
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslateSimple2DAlt()
-  {
-    final MatrixM4x4D m = new MatrixM4x4D();
-    final VectorI2D v = new VectorI2D(1.0, 2.0);
-
-    {
-      final MatrixM4x4D r = MatrixM4x4D.translateByVector2DInPlace(m, v);
-      Assert.assertSame(m, r);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
-
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
-
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
-
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-    }
-
-    {
-      final MatrixM4x4D r = MatrixM4x4D.translateByVector2DInPlace(m, v);
-      Assert.assertSame(m, r);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 2.0);
-
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 4.0);
-
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
-
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-    }
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslateSimple2I()
+  @Override @Test public void testTranslateSimple2Integer()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final MatrixM4x4D out = new MatrixM4x4D();
@@ -3682,9 +3485,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslateSimple2IAlt()
+  @Override @Test public void testTranslateSimple2IntegerAlt()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorI2I v = new VectorI2I(1, 2);
@@ -3752,16 +3553,14 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslateSimple3D()
+  @Override @Test public void testTranslateSimple2Real()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final MatrixM4x4D out = new MatrixM4x4D();
-    final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
+    final VectorI2D v = new VectorI2D(1.0, 2.0);
 
     {
-      final MatrixM4x4D r = MatrixM4x4D.translateByVector3D(m, v, out);
+      final MatrixM4x4D r = MatrixM4x4D.translateByVector2D(m, v, out);
       Assert.assertSame(out, r);
 
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
@@ -3780,7 +3579,7 @@ public class MatrixM4x4DTest
       Assert.assertTrue(r.get(2, 0) == 0.0);
       Assert.assertTrue(r.get(2, 1) == 0.0);
       Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.get(2, 3) == 0.0);
 
       Assert.assertTrue(r.get(3, 0) == 0.0);
       Assert.assertTrue(r.get(3, 1) == 0.0);
@@ -3792,7 +3591,7 @@ public class MatrixM4x4DTest
     }
 
     {
-      final MatrixM4x4D r = MatrixM4x4D.translateByVector3D(m, v, out);
+      final MatrixM4x4D r = MatrixM4x4D.translateByVector2D(m, v, out);
       Assert.assertSame(out, r);
 
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
@@ -3811,7 +3610,7 @@ public class MatrixM4x4DTest
       Assert.assertTrue(r.get(2, 0) == 0.0);
       Assert.assertTrue(r.get(2, 1) == 0.0);
       Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 6.0);
+      Assert.assertTrue(r.get(2, 3) == 0.0);
 
       Assert.assertTrue(r.get(3, 0) == 0.0);
       Assert.assertTrue(r.get(3, 1) == 0.0);
@@ -3823,15 +3622,13 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslateSimple3DAlt()
+  @Override @Test public void testTranslateSimple2RealAlt()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
-    final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
+    final VectorI2D v = new VectorI2D(1.0, 2.0);
 
     {
-      final MatrixM4x4D r = MatrixM4x4D.translateByVector3DInPlace(m, v);
+      final MatrixM4x4D r = MatrixM4x4D.translateByVector2DInPlace(m, v);
       Assert.assertSame(m, r);
 
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
@@ -3850,7 +3647,7 @@ public class MatrixM4x4DTest
       Assert.assertTrue(r.get(2, 0) == 0.0);
       Assert.assertTrue(r.get(2, 1) == 0.0);
       Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.get(2, 3) == 0.0);
 
       Assert.assertTrue(r.get(3, 0) == 0.0);
       Assert.assertTrue(r.get(3, 1) == 0.0);
@@ -3862,7 +3659,7 @@ public class MatrixM4x4DTest
     }
 
     {
-      final MatrixM4x4D r = MatrixM4x4D.translateByVector3DInPlace(m, v);
+      final MatrixM4x4D r = MatrixM4x4D.translateByVector2DInPlace(m, v);
       Assert.assertSame(m, r);
 
       Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
@@ -3881,7 +3678,7 @@ public class MatrixM4x4DTest
       Assert.assertTrue(r.get(2, 0) == 0.0);
       Assert.assertTrue(r.get(2, 1) == 0.0);
       Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 6.0);
+      Assert.assertTrue(r.get(2, 3) == 0.0);
 
       Assert.assertTrue(r.get(3, 0) == 0.0);
       Assert.assertTrue(r.get(3, 1) == 0.0);
@@ -3893,9 +3690,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslateSimple3I()
+  @Override @Test public void testTranslateSimple3Integer()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final MatrixM4x4D out = new MatrixM4x4D();
@@ -3964,9 +3759,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslateSimple3IAlt()
+  @Override @Test public void testTranslateSimple3IntegerAlt()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorI3I v = new VectorI3I(1, 2, 3);
@@ -4034,9 +3827,216 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslationEquivalent3D()
+  @Override @Test public void testTranslateSimple3Real()
+  {
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final MatrixM4x4D out = new MatrixM4x4D();
+    final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
+
+    {
+      final MatrixM4x4D r = MatrixM4x4D.translateByVector3D(m, v, out);
+      Assert.assertSame(out, r);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 1.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 2.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 3.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+    }
+
+    {
+      final MatrixM4x4D r = MatrixM4x4D.translateByVector3D(m, v, out);
+      Assert.assertSame(out, r);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 2.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 4.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 6.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+    }
+  }
+
+  @Override @Test public void testTranslateSimple3RealAlt()
+  {
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
+
+    {
+      final MatrixM4x4D r = MatrixM4x4D.translateByVector3DInPlace(m, v);
+      Assert.assertSame(m, r);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 1.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 2.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 3.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+    }
+
+    {
+      final MatrixM4x4D r = MatrixM4x4D.translateByVector3DInPlace(m, v);
+      Assert.assertSame(m, r);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 2.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 4.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 6.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+    }
+  }
+
+  @Override @Test public void testTranslationEquivalent3Integer()
+  {
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3I v = new VectorI3I(1, 2, 3);
+
+    {
+      final MatrixM4x4D out = new MatrixM4x4D();
+      final MatrixM4x4D r = MatrixM4x4D.translateByVector3I(m, v, out);
+      Assert.assertSame(out, r);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 1.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 2.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 3.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+    }
+
+    {
+      final MatrixM4x4D r = new MatrixM4x4D();
+      final MatrixM4x4D t = new MatrixM4x4D();
+
+      MatrixM4x4D.makeTranslation3I(v, t);
+      MatrixM4x4D.multiply(m, t, r);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 1.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 2.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 3.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+    }
+  }
+
+  @Override @Test public void testTranslationEquivalent3Real()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
@@ -4112,123 +4112,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslationEquivalent3I()
-  {
-    final MatrixM4x4D m = new MatrixM4x4D();
-    final VectorI3I v = new VectorI3I(1, 2, 3);
-
-    {
-      final MatrixM4x4D out = new MatrixM4x4D();
-      final MatrixM4x4D r = MatrixM4x4D.translateByVector3I(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
-
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
-
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
-
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-    }
-
-    {
-      final MatrixM4x4D r = new MatrixM4x4D();
-      final MatrixM4x4D t = new MatrixM4x4D();
-
-      MatrixM4x4D.makeTranslation3I(v, t);
-      MatrixM4x4D.multiply(m, t, r);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
-
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
-
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
-
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-    }
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslationMakeEquivalent3D()
-  {
-    final MatrixM4x4D m = new MatrixM4x4D();
-    final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
-
-    {
-      final MatrixM4x4D r = new MatrixM4x4D();
-      final MatrixM4x4D t = MatrixM4x4D.makeTranslation3D(v);
-      MatrixM4x4D.multiply(m, t, r);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
-
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
-
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
-
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
-
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
-    }
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslationMakeEquivalent3I()
+  @Override @Test public void testTranslationMakeEquivalent3Integer()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorI3I v = new VectorI3I(1, 2, 3);
@@ -4266,9 +4150,45 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testTranslationStorage()
+  @Override @Test public void testTranslationMakeEquivalent3Real()
+  {
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
+
+    {
+      final MatrixM4x4D r = new MatrixM4x4D();
+      final MatrixM4x4D t = MatrixM4x4D.makeTranslation3D(v);
+      MatrixM4x4D.multiply(m, t, r);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+
+      Assert.assertTrue(r.get(0, 0) == 1.0);
+      Assert.assertTrue(r.get(0, 1) == 0.0);
+      Assert.assertTrue(r.get(0, 2) == 0.0);
+      Assert.assertTrue(r.get(0, 3) == 1.0);
+
+      Assert.assertTrue(r.get(1, 0) == 0.0);
+      Assert.assertTrue(r.get(1, 1) == 1.0);
+      Assert.assertTrue(r.get(1, 2) == 0.0);
+      Assert.assertTrue(r.get(1, 3) == 2.0);
+
+      Assert.assertTrue(r.get(2, 0) == 0.0);
+      Assert.assertTrue(r.get(2, 1) == 0.0);
+      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.get(2, 3) == 3.0);
+
+      Assert.assertTrue(r.get(3, 0) == 0.0);
+      Assert.assertTrue(r.get(3, 1) == 0.0);
+      Assert.assertTrue(r.get(3, 2) == 0.0);
+      Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+    }
+  }
+
+  @Override @Test public void testTranslationStorage()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final MatrixM4x4D out = new MatrixM4x4D();
@@ -4303,7 +4223,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testTranspose()
+  @Override @Test public void testTranspose()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final MatrixM4x4D r = new MatrixM4x4D();
@@ -4369,7 +4289,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testTransposeMutate()
+  @Override @Test public void testTransposeMutate()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
@@ -4417,7 +4337,7 @@ public class MatrixM4x4DTest
     Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
   }
 
-  @SuppressWarnings("static-method") @Test public void testZero()
+  @Override @Test public void testZero()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     MatrixM4x4D.setZero(m);

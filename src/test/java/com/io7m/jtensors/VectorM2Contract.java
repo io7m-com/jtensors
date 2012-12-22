@@ -17,56 +17,39 @@
 package com.io7m.jtensors;
 
 /**
- * Mutable quaternion contracts.
+ * Properties of mutable 2D vectors.
  */
 
-public abstract class QuaternionM4Contract extends QuaternionI4Contract
+public abstract class VectorM2Contract extends VectorI2Contract
 {
   /**
-   * Quaternion addition via mutation is correct.
+   * <code>∀v. w = absolute(v) → w.x = abs(v.x) ∧ w.y = abs(v.y)</code> . The
+   * version using mutation works.
+   */
+
+  public abstract void testAbsoluteMutation();
+
+  /**
+   * Vector addition via mutation is correct.
    */
 
   public abstract void testAddMutation();
 
   /**
-   * The conjugate of a quaternion <code>q = (v, s)</code> is given by
-   * <code>(-v, s)</code>. The version using mutation works.
+   * Orthonormalization results in a pair of orthonormal vectors (via
+   * mutation).
    */
 
-  public abstract void testConjugateInPlace();
+  public abstract void testOrthonormalizeMutation();
 
   /**
-   * Copying quaternions works correctly.
-   */
-
-  public abstract void testCopy();
-
-  /**
-   * Quaternion multiplication via mutation is correct.
-   */
-
-  public abstract void testMultiplyInPlace();
-
-  /**
-   * Quaternion multiplication via mutation is correct.
-   */
-
-  public abstract void testMultiplyInPlaceOther();
-
-  /**
-   * Quaternion multiplication is correct.
-   */
-
-  public abstract void testMultiplyOther();
-
-  /**
-   * Quaternion scaling via mutation is correct.
+   * Vector scaling via mutation is correct.
    */
 
   public abstract void testScaleMutation();
 
   /**
-   * Quaternion subtraction via mutation is correct.
+   * Vector subtraction via mutation is correct.
    */
 
   public abstract void testSubtractMutation();

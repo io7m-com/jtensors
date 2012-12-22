@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2012 http://io7m.com
+ * 
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+ * SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+ * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
 package com.io7m.jtensors;
 
 import java.lang.reflect.Method;
@@ -13,6 +29,9 @@ public final class APICompleteness
     final Class<?> c_base,
     final Class<?> c)
   {
+    System.out.println("Checking " + c + " against " + c_base);
+    System.out.println();
+
     final HashMap<String, Method> methods = APICompleteness.getMethods(c);
     final HashMap<String, Method> baseline_methods =
       APICompleteness.getMethods(c_base);
@@ -88,6 +107,66 @@ public final class APICompleteness
     }
   }
 
+  private static void checkVector2()
+  {
+    final Class<?> classes[] =
+      {
+        VectorM2F.class,
+        VectorM2I.class,
+        VectorI2D.class,
+        VectorI2F.class,
+        VectorI2I.class };
+    for (final Class<?> c : classes) {
+      APICompleteness.checkAgainst(VectorM2D.class, c);
+    }
+  }
+
+  private static void checkVector3()
+  {
+    {
+      final Class<?> classes[] =
+        {
+          VectorM3F.class,
+          VectorM3I.class,
+          VectorI3D.class,
+          VectorI3F.class,
+          VectorI3I.class };
+      for (final Class<?> c : classes) {
+        APICompleteness.checkAgainst(VectorM3D.class, c);
+      }
+    }
+
+    {
+      final Class<?> classes[] = { VectorI3F.class, VectorI3I.class };
+      for (final Class<?> c : classes) {
+        APICompleteness.checkAgainst(VectorI3D.class, c);
+      }
+    }
+  }
+
+  private static void checkVector4()
+  {
+    {
+      final Class<?> classes[] =
+        {
+          VectorM4F.class,
+          VectorM4I.class,
+          VectorI4D.class,
+          VectorI4F.class,
+          VectorI4I.class };
+      for (final Class<?> c : classes) {
+        APICompleteness.checkAgainst(VectorM4D.class, c);
+      }
+    }
+
+    {
+      final Class<?> classes[] = { VectorI4F.class, VectorI4I.class };
+      for (final Class<?> c : classes) {
+        APICompleteness.checkAgainst(VectorI4D.class, c);
+      }
+    }
+  }
+
   private static String doubleVersion(
     final String name)
   {
@@ -127,5 +206,8 @@ public final class APICompleteness
     APICompleteness.checkMatrix4();
     APICompleteness.checkMatrix3();
     APICompleteness.checkMatrix2();
+    APICompleteness.checkVector4();
+    APICompleteness.checkVector3();
+    APICompleteness.checkVector2();
   }
 }

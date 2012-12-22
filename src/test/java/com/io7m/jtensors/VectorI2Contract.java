@@ -17,13 +17,13 @@
 package com.io7m.jtensors;
 
 /**
- * Properties of 4D vectors.
+ * Properties of 2D vectors.
  */
 
-public abstract class VectorI4Contract
+public abstract class VectorI2Contract
 {
   /**
-   * <code>∀v. w = absolute(v) → w.x = abs(v.x) ∧ w.y = abs(v.y) ∧ w.z = abs(v.z) ∧ w.w = abs(v.w)</code>
+   * <code>∀v. w = absolute(v) → w.x = abs(v.x) ∧ w.y = abs(v.y)</code>
    */
 
   public abstract void testAbsolute();
@@ -53,6 +53,12 @@ public abstract class VectorI4Contract
   public abstract void testAlmostEqualTransitive();
 
   /**
+   * The angle function is correct.
+   */
+
+  public abstract void testAngle();
+
+  /**
    * Interface functions work as expected.
    */
 
@@ -77,10 +83,10 @@ public abstract class VectorI4Contract
   public abstract void testCopy();
 
   /**
-   * The default value for 4D vectors is (0,0,0,1)
+   * The default value for 2D vectors is (0,0)
    */
 
-  public abstract void testDefault0001();
+  public abstract void testDefault00();
 
   public abstract void testDistance();
 
@@ -159,7 +165,7 @@ public abstract class VectorI4Contract
 
   /**
    * <p>
-   * <code>magnitude(normalize((0,0,0,0)) = 0</code>
+   * <code>magnitude(normalize((0,0)) = 0</code>
    * </p>
    */
 
@@ -167,7 +173,7 @@ public abstract class VectorI4Contract
 
   /**
    * <p>
-   * <code>magnitude((1,0,0,0)) = 1</code>
+   * <code>magnitude((1,0)) = 1</code>
    * </p>
    */
 
@@ -181,7 +187,7 @@ public abstract class VectorI4Contract
 
   /**
    * <p>
-   * <code>magnitude((0,0,0,0)) = 0</code>
+   * <code>magnitude((0,0)) = 0</code>
    * </p>
    */
 
@@ -218,7 +224,7 @@ public abstract class VectorI4Contract
 
   /**
    * <p>
-   * <code>∀v. scale(v, 0) = (0,0,0,0)</code>
+   * <code>∀v. scale(v, 0) = (0,0)</code>
    * </p>
    */
 

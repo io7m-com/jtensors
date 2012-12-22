@@ -21,6 +21,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 
 import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
+import com.io7m.jaux.functional.Pair;
 
 /**
  * A four-dimensional mutable vector type with double precision elements.
@@ -44,13 +45,13 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D absolute(
-    final @Nonnull VectorM4D v,
+    final @Nonnull VectorReadable4D v,
     final @Nonnull VectorM4D out)
   {
-    final double x = Math.abs(v.x);
-    final double y = Math.abs(v.y);
-    final double z = Math.abs(v.z);
-    final double w = Math.abs(v.w);
+    final double x = Math.abs(v.getXD());
+    final double y = Math.abs(v.getYD());
+    final double z = Math.abs(v.getZD());
+    final double w = Math.abs(v.getWD());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -89,14 +90,14 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D add(
-    final @Nonnull VectorM4D v0,
-    final @Nonnull VectorM4D v1,
+    final @Nonnull VectorReadable4D v0,
+    final @Nonnull VectorReadable4D v1,
     final @Nonnull VectorM4D out)
   {
-    final double x = v0.x + v1.x;
-    final double y = v0.y + v1.y;
-    final double z = v0.z + v1.z;
-    final double w = v0.w + v1.w;
+    final double x = v0.getXD() + v1.getXD();
+    final double y = v0.getYD() + v1.getYD();
+    final double z = v0.getZD() + v1.getZD();
+    final double w = v0.getWD() + v1.getWD();
     out.x = x;
     out.y = y;
     out.z = z;
@@ -118,7 +119,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 
   public static @Nonnull VectorM4D addInPlace(
     final @Nonnull VectorM4D v0,
-    final @Nonnull VectorM4D v1)
+    final @Nonnull VectorReadable4D v1)
   {
     return VectorM4D.add(v0, v1, v0);
   }
@@ -141,15 +142,15 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D addScaled(
-    final @Nonnull VectorM4D v0,
-    final @Nonnull VectorM4D v1,
+    final @Nonnull VectorReadable4D v0,
+    final @Nonnull VectorReadable4D v1,
     final double r,
     final @Nonnull VectorM4D out)
   {
-    final double x = v0.x + (v1.x * r);
-    final double y = v0.y + (v1.y * r);
-    final double z = v0.z + (v1.z * r);
-    final double w = v0.w + (v1.w * r);
+    final double x = v0.getXD() + (v1.getXD() * r);
+    final double y = v0.getYD() + (v1.getYD() * r);
+    final double z = v0.getZD() + (v1.getZD() * r);
+    final double w = v0.getWD() + (v1.getWD() * r);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -174,7 +175,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 
   public static @Nonnull VectorM4D addScaledInPlace(
     final @Nonnull VectorM4D v0,
-    final @Nonnull VectorM4D v1,
+    final @Nonnull VectorReadable4D v1,
     final double r)
   {
     return VectorM4D.addScaled(v0, v1, r, v0);
@@ -230,15 +231,15 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D clamp(
-    final @Nonnull VectorM4D v,
+    final @Nonnull VectorReadable4D v,
     final double minimum,
     final double maximum,
     final @Nonnull VectorM4D out)
   {
-    final double x = Math.min(Math.max(v.x, minimum), maximum);
-    final double y = Math.min(Math.max(v.y, minimum), maximum);
-    final double z = Math.min(Math.max(v.z, minimum), maximum);
-    final double w = Math.min(Math.max(v.w, minimum), maximum);
+    final double x = Math.min(Math.max(v.getXD(), minimum), maximum);
+    final double y = Math.min(Math.max(v.getYD(), minimum), maximum);
+    final double z = Math.min(Math.max(v.getZD(), minimum), maximum);
+    final double w = Math.min(Math.max(v.getWD(), minimum), maximum);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -264,15 +265,19 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D clampByVector(
-    final @Nonnull VectorM4D v,
-    final @Nonnull VectorM4D minimum,
-    final @Nonnull VectorM4D maximum,
+    final @Nonnull VectorReadable4D v,
+    final @Nonnull VectorReadable4D minimum,
+    final @Nonnull VectorReadable4D maximum,
     final @Nonnull VectorM4D out)
   {
-    final double x = Math.min(Math.max(v.x, minimum.x), maximum.x);
-    final double y = Math.min(Math.max(v.y, minimum.y), maximum.y);
-    final double z = Math.min(Math.max(v.z, minimum.z), maximum.z);
-    final double w = Math.min(Math.max(v.w, minimum.w), maximum.w);
+    final double x =
+      Math.min(Math.max(v.getXD(), minimum.getXD()), maximum.getXD());
+    final double y =
+      Math.min(Math.max(v.getYD(), minimum.getYD()), maximum.getYD());
+    final double z =
+      Math.min(Math.max(v.getZD(), minimum.getZD()), maximum.getZD());
+    final double w =
+      Math.min(Math.max(v.getWD(), minimum.getWD()), maximum.getWD());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -297,8 +302,8 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 
   public static @Nonnull VectorM4D clampByVectorInPlace(
     final @Nonnull VectorM4D v,
-    final @Nonnull VectorM4D minimum,
-    final @Nonnull VectorM4D maximum)
+    final @Nonnull VectorReadable4D minimum,
+    final @Nonnull VectorReadable4D maximum)
   {
     return VectorM4D.clampByVector(v, minimum, maximum, v);
   }
@@ -343,14 +348,14 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D clampMaximum(
-    final @Nonnull VectorM4D v,
+    final @Nonnull VectorReadable4D v,
     final double maximum,
     final @Nonnull VectorM4D out)
   {
-    final double x = Math.min(v.x, maximum);
-    final double y = Math.min(v.y, maximum);
-    final double z = Math.min(v.z, maximum);
-    final double w = Math.min(v.w, maximum);
+    final double x = Math.min(v.getXD(), maximum);
+    final double y = Math.min(v.getYD(), maximum);
+    final double z = Math.min(v.getZD(), maximum);
+    final double w = Math.min(v.getWD(), maximum);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -374,14 +379,14 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D clampMaximumByVector(
-    final @Nonnull VectorM4D v,
-    final @Nonnull VectorM4D maximum,
+    final @Nonnull VectorReadable4D v,
+    final @Nonnull VectorReadable4D maximum,
     final @Nonnull VectorM4D out)
   {
-    final double x = Math.min(v.x, maximum.x);
-    final double y = Math.min(v.y, maximum.y);
-    final double z = Math.min(v.z, maximum.z);
-    final double w = Math.min(v.w, maximum.w);
+    final double x = Math.min(v.getXD(), maximum.getXD());
+    final double y = Math.min(v.getYD(), maximum.getYD());
+    final double z = Math.min(v.getZD(), maximum.getZD());
+    final double w = Math.min(v.getWD(), maximum.getWD());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -404,7 +409,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 
   public static @Nonnull VectorM4D clampMaximumByVectorInPlace(
     final @Nonnull VectorM4D v,
-    final @Nonnull VectorM4D maximum)
+    final @Nonnull VectorReadable4D maximum)
   {
     return VectorM4D.clampMaximumByVector(v, maximum, v);
   }
@@ -447,14 +452,14 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D clampMinimum(
-    final @Nonnull VectorM4D v,
+    final @Nonnull VectorReadable4D v,
     final double minimum,
     final @Nonnull VectorM4D out)
   {
-    final double x = Math.max(v.x, minimum);
-    final double y = Math.max(v.y, minimum);
-    final double z = Math.max(v.z, minimum);
-    final double w = Math.max(v.w, minimum);
+    final double x = Math.max(v.getXD(), minimum);
+    final double y = Math.max(v.getYD(), minimum);
+    final double z = Math.max(v.getZD(), minimum);
+    final double w = Math.max(v.getWD(), minimum);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -478,14 +483,14 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D clampMinimumByVector(
-    final @Nonnull VectorM4D v,
-    final @Nonnull VectorM4D minimum,
+    final @Nonnull VectorReadable4D v,
+    final @Nonnull VectorReadable4D minimum,
     final @Nonnull VectorM4D out)
   {
-    final double x = Math.max(v.x, minimum.x);
-    final double y = Math.max(v.y, minimum.y);
-    final double z = Math.max(v.z, minimum.z);
-    final double w = Math.max(v.w, minimum.w);
+    final double x = Math.max(v.getXD(), minimum.getXD());
+    final double y = Math.max(v.getYD(), minimum.getYD());
+    final double z = Math.max(v.getZD(), minimum.getZD());
+    final double w = Math.max(v.getWD(), minimum.getWD());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -509,7 +514,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 
   public static @Nonnull VectorM4D clampMinimumByVectorInPlace(
     final @Nonnull VectorM4D v,
-    final @Nonnull VectorM4D minimum)
+    final @Nonnull VectorReadable4D minimum)
   {
     return VectorM4D.clampMinimumByVector(v, minimum, v);
   }
@@ -571,8 +576,8 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static double distance(
-    final @Nonnull VectorM4D v0,
-    final @Nonnull VectorM4D v1)
+    final @Nonnull VectorReadable4D v0,
+    final @Nonnull VectorReadable4D v1)
   {
     final @Nonnull VectorM4D vr = new VectorM4D();
     return VectorM4D.magnitude(VectorM4D.subtract(v0, v1, vr));
@@ -591,13 +596,13 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static double dotProduct(
-    final @Nonnull VectorM4D v0,
-    final @Nonnull VectorM4D v1)
+    final @Nonnull VectorReadable4D v0,
+    final @Nonnull VectorReadable4D v1)
   {
-    final double x = v0.x * v1.x;
-    final double y = v0.y * v1.y;
-    final double z = v0.z * v1.z;
-    final double w = v0.w * v1.w;
+    final double x = v0.getXD() * v1.getXD();
+    final double y = v0.getYD() * v1.getYD();
+    final double z = v0.getZD() * v1.getZD();
+    final double w = v0.getWD() * v1.getWD();
     return x + y + z + w;
   }
 
@@ -627,8 +632,8 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D interpolateLinear(
-    final @Nonnull VectorM4D v0,
-    final @Nonnull VectorM4D v1,
+    final @Nonnull VectorReadable4D v0,
+    final @Nonnull VectorReadable4D v1,
     final double alpha,
     final @Nonnull VectorM4D r)
   {
@@ -653,7 +658,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static double magnitude(
-    final @Nonnull VectorM4D v)
+    final @Nonnull VectorReadable4D v)
   {
     return Math.sqrt(VectorM4D.magnitudeSquared(v));
   }
@@ -668,7 +673,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static double magnitudeSquared(
-    final @Nonnull VectorM4D v)
+    final @Nonnull VectorReadable4D v)
   {
     return VectorM4D.dotProduct(v, v);
   }
@@ -687,7 +692,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D normalize(
-    final @Nonnull VectorM4D v,
+    final @Nonnull VectorReadable4D v,
     final @Nonnull VectorM4D out)
   {
     final double m = VectorM4D.magnitudeSquared(v);
@@ -695,10 +700,10 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
       final double reciprocal = 1.0 / Math.sqrt(m);
       return VectorM4D.scale(v, reciprocal, out);
     }
-    out.x = v.x;
-    out.y = v.y;
-    out.z = v.z;
-    out.w = v.w;
+    out.x = v.getXD();
+    out.y = v.getYD();
+    out.z = v.getZD();
+    out.w = v.getWD();
     return out;
   }
 
@@ -717,6 +722,33 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
     final @Nonnull VectorM4D v)
   {
     return VectorM4D.normalize(v, v);
+  }
+
+  /**
+   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * .
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * 
+   * @since 5.0.0
+   */
+
+  public static @Nonnull Pair<VectorM4D, VectorM4D> orthoNormalize(
+    final @Nonnull VectorReadable4D v0,
+    final @Nonnull VectorReadable4D v1)
+  {
+    final VectorM4D v0n = new VectorM4D();
+    final VectorM4D vr = new VectorM4D();
+    final VectorM4D vp = new VectorM4D();
+
+    VectorM4D.normalize(v0, v0n);
+    VectorM4D.scale(v0n, VectorM4D.dotProduct(v1, v0n), vp);
+    VectorM4D.normalizeInPlace(VectorM4D.subtract(v1, vp, vr));
+    return new Pair<VectorM4D, VectorM4D>(v0n, vr);
   }
 
   /**
@@ -750,8 +782,8 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D projection(
-    final @Nonnull VectorM4D p,
-    final @Nonnull VectorM4D q,
+    final @Nonnull VectorReadable4D p,
+    final @Nonnull VectorReadable4D q,
     final @Nonnull VectorM4D r)
   {
     final double dot = VectorM4D.dotProduct(p, q);
@@ -776,14 +808,14 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D scale(
-    final @Nonnull VectorM4D v,
+    final @Nonnull VectorReadable4D v,
     final double r,
     final @Nonnull VectorM4D out)
   {
-    final double x = v.x * r;
-    final double y = v.y * r;
-    final double z = v.z * r;
-    final double w = v.w * r;
+    final double x = v.getXD() * r;
+    final double y = v.getYD() * r;
+    final double z = v.getZD() * r;
+    final double w = v.getWD() * r;
     out.x = x;
     out.y = y;
     out.z = z;
@@ -825,14 +857,14 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    */
 
   public static @Nonnull VectorM4D subtract(
-    final @Nonnull VectorM4D v0,
-    final @Nonnull VectorM4D v1,
+    final @Nonnull VectorReadable4D v0,
+    final @Nonnull VectorReadable4D v1,
     final @Nonnull VectorM4D out)
   {
-    final double x = v0.x - v1.x;
-    final double y = v0.y - v1.y;
-    final double z = v0.z - v1.z;
-    final double w = v0.w - v1.w;
+    final double x = v0.getXD() - v1.getXD();
+    final double y = v0.getYD() - v1.getYD();
+    final double z = v0.getZD() - v1.getZD();
+    final double w = v0.getWD() - v1.getWD();
     out.x = x;
     out.y = y;
     out.z = z;
@@ -854,7 +886,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 
   public static @Nonnull VectorM4D subtractInPlace(
     final @Nonnull VectorM4D v0,
-    final @Nonnull VectorM4D v1)
+    final @Nonnull VectorReadable4D v1)
   {
     return VectorM4D.subtract(v0, v1, v0);
   }

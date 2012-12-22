@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2012 http://io7m.com
+ * 
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+ * SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+ * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
 package com.io7m.jtensors;
 
 import java.nio.ByteOrder;
@@ -1329,6 +1345,9 @@ public class MatrixM3x3DTest
 
   @SuppressWarnings("static-method") @Test public void testRotateVector0X()
   {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
     final MatrixM3x3D m = new MatrixM3x3D();
     final VectorM3D v_in = new VectorM3D(0, 0, -1);
     final VectorM3D v_got = new VectorM3D();
@@ -1342,7 +1361,7 @@ public class MatrixM3x3DTest
     System.out.println("got : " + v_got);
     System.out.println("--");
 
-    Assert.assertTrue(VectorM3D.approximatelyEqual(v_exp, v_got));
+    Assert.assertTrue(VectorM3D.almostEqual(ec, v_exp, v_got));
   }
 
   /**
@@ -1351,6 +1370,9 @@ public class MatrixM3x3DTest
 
   @SuppressWarnings("static-method") @Test public void testRotateVector0Y()
   {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
     final MatrixM3x3D m = new MatrixM3x3D();
     final VectorM3D v_in = new VectorM3D(0, 0, -1);
     final VectorM3D v_got = new VectorM3D();
@@ -1364,7 +1386,7 @@ public class MatrixM3x3DTest
     System.out.println("got : " + v_got);
     System.out.println("--");
 
-    Assert.assertTrue(VectorM3D.approximatelyEqual(v_exp, v_got));
+    Assert.assertTrue(VectorM3D.almostEqual(ec, v_exp, v_got));
   }
 
   /**
@@ -1373,6 +1395,9 @@ public class MatrixM3x3DTest
 
   @SuppressWarnings("static-method") @Test public void testRotateVector0Z()
   {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
     final MatrixM3x3D m = new MatrixM3x3D();
     final VectorM3D v_in = new VectorM3D(0, 0, -1);
     final VectorM3D v_got = new VectorM3D();
@@ -1386,7 +1411,7 @@ public class MatrixM3x3DTest
     System.out.println("got : " + v_got);
     System.out.println("--");
 
-    Assert.assertTrue(VectorM3D.approximatelyEqual(v_exp, v_got));
+    Assert.assertTrue(VectorM3D.almostEqual(ec, v_exp, v_got));
   }
 
   /**
