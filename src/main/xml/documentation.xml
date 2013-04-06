@@ -215,7 +215,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.]]>
           available in mutable or immutable versions. The package unambiguously identifies
           the vector types by using the following naming conventions for the types
           (given as a simple
-          <s:link-external type="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
+          <s:link-external target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
           grammar):
         </s:paragraph>
         <s:formal-item kind="convention">
@@ -303,7 +303,7 @@ type         = "Vector" , mutability , size , element_type ;]]>
           Matrices are currently only available in mutable form. The package unambiguously
           identifies the matrix types by using the following naming conventions for the types
           (given as a simple
-          <s:link-external type="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
+          <s:link-external target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
           grammar):
         </s:paragraph>
         <s:formal-item kind="convention">
@@ -510,7 +510,7 @@ MatrixM4x4D.invertWithContext(context, mo, mi);]]>
           immutable versions. The package unambiguously identifies
           the quaternion types by using the following naming
           conventions for the types (given as a simple <s:link-external
-          type="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
+          target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
           grammar):
         </s:paragraph>
         <s:formal-item kind="convention">
