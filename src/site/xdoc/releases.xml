@@ -279,6 +279,56 @@
               <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.1.0.zip">io7m-jtensors-4.1.0.zip</a>
             </td>
           </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-04-06</td>
+            <td class="page_table_column">509546</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-javadoc.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-javadoc.jar">io7m-jtensors-5.0.0-javadoc.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-04-06</td>
+            <td class="page_table_column">145011</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-sources.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-sources.jar">io7m-jtensors-5.0.0-sources.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-04-06</td>
+            <td class="page_table_column">153210</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0.jar">io7m-jtensors-5.0.0.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-04-06</td>
+            <td class="page_table_column">949226</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-documentation.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-documentation.zip">io7m-jtensors-5.0.0-documentation.zip</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-04-06</td>
+            <td class="page_table_column">744610</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0.zip">io7m-jtensors-5.0.0.zip</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
