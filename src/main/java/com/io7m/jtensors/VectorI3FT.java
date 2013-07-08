@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013 <code@io7m.com> http://io7m.com
+ * Copyright © 2012 http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -19,13 +19,13 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 import com.io7m.jaux.AlmostEqualFloat;
-import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
 import com.io7m.jaux.functional.Pair;
 
 /**
  * <p>
- * A two-dimensional immutable vector type with single precision elements.
+ * A three-dimensional immutable vector type with double precision elements.
  * </p>
  * <p>
  * The intention of the type parameter <code>A</code> is to be used as a
@@ -40,27 +40,8 @@ import com.io7m.jaux.functional.Pair;
  * @since 5.1.0
  */
 
-@Immutable public final class VectorI2FT<A> implements VectorReadable2FT<A>
+@Immutable public final class VectorI3FT<A> implements VectorReadable3FT<A>
 {
-  /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>.
-   * 
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * 
-   * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
-   */
-
-  public static @Nonnull <A> VectorI2FT<A> add(
-    final @Nonnull VectorReadable2FT<A> v0,
-    final @Nonnull VectorReadable2FT<A> v1)
-  {
-    return new VectorI2FT<A>(v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF());
-  }
-
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>.
@@ -72,66 +53,44 @@ import com.io7m.jaux.functional.Pair;
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
+   * @return <code>(v0.getXF() + (v1.getXF() * r), v0.getYF() + (v1.getYF() * r), v0.getZF() + (v1.getZF() * r))</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> addScaled(
-    final @Nonnull VectorReadable2FT<A> v0,
-    final @Nonnull VectorReadable2FT<A> v1,
-    final double r)
+  public static @Nonnull <A> VectorI3FT<A> addScaled(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1,
+    final float r)
   {
-    return VectorI2FT.add(v0, VectorI2FT.scale(v1, r));
+    return VectorI3FT.add(v0, VectorI3FT.scale(v1, r));
   }
 
   /**
-   * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
+   * Determine whether or not the vectors <code>va</code> and <code>vb</code>
    * are equal to within the degree of error given in <code>context</code>.
    * 
    * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
    * 
    * @param context
    *          The equality context
-   * @param qa
+   * @param va
    *          The left input vector
-   * @param qb
+   * @param vb
    *          The right input vector
+   * @since 5.0.0
    */
 
   public static <A> boolean almostEqual(
-    final @Nonnull ContextRelative context,
-    final @Nonnull VectorReadable2FT<A> qa,
-    final @Nonnull VectorReadable2FT<A> qb)
+    final @Nonnull AlmostEqualFloat.ContextRelative context,
+    final @Nonnull VectorReadable3FT<A> va,
+    final @Nonnull VectorReadable3FT<A> vb)
   {
     final boolean xs =
-      AlmostEqualFloat.almostEqual(context, qa.getXF(), qb.getXF());
+      AlmostEqualFloat.almostEqual(context, va.getXF(), vb.getXF());
     final boolean ys =
-      AlmostEqualFloat.almostEqual(context, qa.getYF(), qb.getYF());
-    return xs && ys;
-  }
-
-  /**
-   * Calculate the angle between the vectors <code>v0</code> and
-   * <code>v1</code> in radians.
-   * 
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * 
-   * @return The angle between the two vectors, in radians.
-   */
-
-  public static <A> double angle(
-    final @Nonnull VectorReadable2FT<A> v0,
-    final @Nonnull VectorReadable2FT<A> v1)
-  {
-    final double m0 = VectorI2FT.magnitude(v0);
-    final double m1 = VectorI2FT.magnitude(v1);
-    final double dp =
-      Math.min(Math.max(-1.0, VectorI2FT.dotProduct(v0, v1)), 1.0);
-    final double f = m0 * m1;
-    final double r = dp / f;
-    return Math.acos(r);
+      AlmostEqualFloat.almostEqual(context, va.getYF(), vb.getYF());
+    final boolean zs =
+      AlmostEqualFloat.almostEqual(context, va.getZF(), vb.getZF());
+    return xs && ys && zs;
   }
 
   /**
@@ -149,14 +108,15 @@ import com.io7m.jaux.functional.Pair;
    *         and at least <code>minimum</code>.
    */
 
-  public static @Nonnull <A> VectorI2FT<A> clamp(
-    final @Nonnull VectorReadable2FT<A> v,
+  public static @Nonnull <A> VectorI3FT<A> clamp(
+    final @Nonnull VectorReadable3FT<A> v,
     final float minimum,
     final float maximum)
   {
     final float x = Math.min(Math.max(v.getXF(), minimum), maximum);
     final float y = Math.min(Math.max(v.getYF(), minimum), maximum);
-    return new VectorI2FT<A>(x, y);
+    final float z = Math.min(Math.max(v.getZF(), minimum), maximum);
+    return new VectorI3FT<A>(x, y, z);
   }
 
   /**
@@ -171,19 +131,21 @@ import com.io7m.jaux.functional.Pair;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))</code>
+   * @return <code>(min(max(v.getXF(), minimum.getXF()), maximum.getXF()), min(max(v.getYF(), minimum.getYF()), maximum.getYF()), min(max(v.getZF(), minimum.getZF()), maximum.getZF()))</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> clampByVector(
-    final @Nonnull VectorReadable2FT<A> v,
-    final @Nonnull VectorReadable2FT<A> minimum,
-    final @Nonnull VectorReadable2FT<A> maximum)
+  public static @Nonnull <A> VectorI3FT<A> clampByVector(
+    final @Nonnull VectorReadable3FT<A> v,
+    final @Nonnull VectorReadable3FT<A> minimum,
+    final @Nonnull VectorReadable3FT<A> maximum)
   {
     final float x =
       Math.min(Math.max(v.getXF(), minimum.getXF()), maximum.getXF());
     final float y =
       Math.min(Math.max(v.getYF(), minimum.getYF()), maximum.getYF());
-    return new VectorI2FT<A>(x, y);
+    final float z =
+      Math.min(Math.max(v.getZF(), minimum.getZF()), maximum.getZF());
+    return new VectorI3FT<A>(x, y, z);
   }
 
   /**
@@ -198,13 +160,14 @@ import com.io7m.jaux.functional.Pair;
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> clampMaximum(
-    final @Nonnull VectorReadable2FT<A> v,
+  public static @Nonnull <A> VectorI3FT<A> clampMaximum(
+    final @Nonnull VectorReadable3FT<A> v,
     final float maximum)
   {
     final float x = Math.min(v.getXF(), maximum);
     final float y = Math.min(v.getYF(), maximum);
-    return new VectorI2FT<A>(x, y);
+    final float z = Math.min(v.getZF(), maximum);
+    return new VectorI3FT<A>(x, y, z);
   }
 
   /**
@@ -216,16 +179,17 @@ import com.io7m.jaux.functional.Pair;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
+   * @return <code>(min(v.getXF(), maximum.getXF()), min(v.getYF(), maximum.getYF()), min(v.getZF(), maximum.getZF()))</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> clampMaximumByVector(
-    final @Nonnull VectorReadable2FT<A> v,
-    final @Nonnull VectorReadable2FT<A> maximum)
+  public static @Nonnull <A> VectorI3FT<A> clampMaximumByVector(
+    final @Nonnull VectorReadable3FT<A> v,
+    final @Nonnull VectorReadable3FT<A> maximum)
   {
     final float x = Math.min(v.getXF(), maximum.getXF());
     final float y = Math.min(v.getYF(), maximum.getYF());
-    return new VectorI2FT<A>(x, y);
+    final float z = Math.min(v.getZF(), maximum.getZF());
+    return new VectorI3FT<A>(x, y, z);
   }
 
   /**
@@ -241,13 +205,14 @@ import com.io7m.jaux.functional.Pair;
    *         <code>minimum</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> clampMinimum(
-    final @Nonnull VectorReadable2FT<A> v,
+  public static @Nonnull <A> VectorI3FT<A> clampMinimum(
+    final @Nonnull VectorReadable3FT<A> v,
     final float minimum)
   {
     final float x = Math.max(v.getXF(), minimum);
     final float y = Math.max(v.getYF(), minimum);
-    return new VectorI2FT<A>(x, y);
+    final float z = Math.max(v.getZF(), minimum);
+    return new VectorI3FT<A>(x, y, z);
   }
 
   /**
@@ -259,16 +224,40 @@ import com.io7m.jaux.functional.Pair;
    * @param minimum
    *          The vector containing the minimum acceptable values
    * 
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code>
+   * @return <code>(max(v.getXF(), minimum.getXF()), max(v.getYF(), minimum.getYF()), max(v.getZF(), minimum.getZF()))</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> clampMinimumByVector(
-    final @Nonnull VectorReadable2FT<A> v,
-    final @Nonnull VectorReadable2FT<A> minimum)
+  public static @Nonnull <A> VectorI3FT<A> clampMinimumByVector(
+    final @Nonnull VectorReadable3FT<A> v,
+    final @Nonnull VectorReadable3FT<A> minimum)
   {
     final float x = Math.max(v.getXF(), minimum.getXF());
     final float y = Math.max(v.getYF(), minimum.getYF());
-    return new VectorI2FT<A>(x, y);
+    final float z = Math.max(v.getZF(), minimum.getZF());
+    return new VectorI3FT<A>(x, y, z);
+  }
+
+  /**
+   * Calculate the cross product of the vectors <code>v0</code> and
+   * <code>v1</code>. The result is a vector perpendicular to both vectors.
+   * 
+   * @param v0
+   *          The left input vector
+   * @param v1
+   *          The right input vector
+   * 
+   * @return A vector perpendicular to both <code>v0</code> and
+   *         <code>v1</code>
+   */
+
+  public static @Nonnull <A> VectorI3FT<A> crossProduct(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1)
+  {
+    final float x = (v0.getYF() * v1.getZF()) - (v0.getZF() * v1.getYF());
+    final float y = (v0.getZF() * v1.getXF()) - (v0.getXF() * v1.getZF());
+    final float z = (v0.getXF() * v1.getYF()) - (v0.getYF() * v1.getXF());
+    return new VectorI3FT<A>(x, y, z);
   }
 
   /**
@@ -283,11 +272,11 @@ import com.io7m.jaux.functional.Pair;
    * @return The distance between the two vectors
    */
 
-  public static <A> double distance(
-    final @Nonnull VectorReadable2FT<A> v0,
-    final @Nonnull VectorReadable2FT<A> v1)
+  public static <A> float distance(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1)
   {
-    return VectorI2FT.magnitude(VectorI2FT.subtract(v0, v1));
+    return VectorI3FT.magnitude(VectorI3FT.subtract(v0, v1));
   }
 
   /**
@@ -302,13 +291,14 @@ import com.io7m.jaux.functional.Pair;
    * @return The scalar product of the two vectors
    */
 
-  public static <A> double dotProduct(
-    final @Nonnull VectorReadable2FT<A> v0,
-    final @Nonnull VectorReadable2FT<A> v1)
+  public static <A> float dotProduct(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1)
   {
-    final double x = v0.getXF() * v1.getXF();
-    final double y = v0.getYF() * v1.getYF();
-    return x + y;
+    final float x = v0.getXF() * v1.getXF();
+    final float y = v0.getYF() * v1.getYF();
+    final float z = v0.getZF() * v1.getZF();
+    return x + y + z;
   }
 
   /**
@@ -334,15 +324,15 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(1 - alpha) * v0 + alpha * v1</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> interpolateLinear(
-    final @Nonnull VectorReadable2FT<A> v0,
-    final @Nonnull VectorReadable2FT<A> v1,
+  public static @Nonnull <A> VectorI3FT<A> interpolateLinear(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1,
     final float alpha)
   {
-    final @Nonnull VectorReadable2FT<A> w0 =
-      VectorI2FT.scale(v0, (float) (1.0 - alpha));
-    final @Nonnull VectorReadable2FT<A> w1 = VectorI2FT.scale(v1, alpha);
-    return VectorI2FT.add(w0, w1);
+    final @Nonnull VectorReadable3FT<A> w0 =
+      VectorI3FT.scale(v0, 1.0f - alpha);
+    final @Nonnull VectorReadable3FT<A> w1 = VectorI3FT.scale(v1, alpha);
+    return VectorI3FT.add(w0, w1);
   }
 
   /**
@@ -356,10 +346,10 @@ import com.io7m.jaux.functional.Pair;
    * @return The magnitude of the input vector
    */
 
-  public static <A> double magnitude(
-    final @Nonnull VectorReadable2FT<A> v)
+  public static <A> float magnitude(
+    final @Nonnull VectorReadable3FT<A> v)
   {
-    return Math.sqrt(VectorI2FT.magnitudeSquared(v));
+    return (float) Math.sqrt(VectorI3FT.magnitudeSquared(v));
   }
 
   /**
@@ -367,13 +357,14 @@ import com.io7m.jaux.functional.Pair;
    * 
    * @param v
    *          The input vector
+   * 
    * @return The squared magnitude of the input vector
    */
 
-  public static <A> double magnitudeSquared(
-    final @Nonnull VectorReadable2FT<A> v)
+  public static <A> float magnitudeSquared(
+    final @Nonnull VectorReadable3FT<A> v)
   {
-    return VectorI2FT.dotProduct(v, v);
+    return VectorI3FT.dotProduct(v, v);
   }
 
   /**
@@ -387,16 +378,15 @@ import com.io7m.jaux.functional.Pair;
    *         magnitude equal to <code>1.0</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> normalize(
-    final @Nonnull VectorReadable2FT<A> v)
+  public static @Nonnull <A> VectorI3FT<A> normalize(
+    final @Nonnull VectorReadable3FT<A> v)
   {
-    final double m = VectorI2FT.magnitudeSquared(v);
+    final float m = VectorI3FT.magnitudeSquared(v);
     if (m > 0) {
-      final double sq = Math.sqrt(m);
-      final double r = 1.0 / sq;
-      return VectorI2FT.scale(v, r);
+      final float reciprocal = (float) (1.0f / Math.sqrt(m));
+      return VectorI3FT.scale(v, reciprocal);
     }
-    return new VectorI2FT<A>(v);
+    return new VectorI3FT<A>(v);
   }
 
   /**
@@ -409,21 +399,22 @@ import com.io7m.jaux.functional.Pair;
    * 
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
    * 
+   * @since 5.0.0
    */
 
   public static @Nonnull
     <A>
-    Pair<VectorI2FT<A>, VectorI2FT<A>>
+    Pair<VectorI3FT<A>, VectorI3FT<A>>
     orthoNormalize(
-      final @Nonnull VectorReadable2FT<A> v0,
-      final @Nonnull VectorReadable2FT<A> v1)
+      final @Nonnull VectorReadable3FT<A> v0,
+      final @Nonnull VectorReadable3FT<A> v1)
   {
-    final VectorI2FT<A> v0n = VectorI2FT.normalize(v0);
-    final VectorI2FT<A> projection =
-      VectorI2FT.scale(v0n, VectorI2FT.dotProduct(v1, v0n));
-    final VectorI2FT<A> vr =
-      VectorI2FT.normalize(VectorI2FT.subtract(v1, projection));
-    return new Pair<VectorI2FT<A>, VectorI2FT<A>>(v0n, vr);
+    final VectorI3FT<A> v0n = VectorI3FT.normalize(v0);
+    final VectorI3FT<A> projection =
+      VectorI3FT.scale(v0n, VectorI3FT.dotProduct(v1, v0n));
+    final VectorI3FT<A> vr =
+      VectorI3FT.normalize(VectorI3FT.subtract(v1, projection));
+    return new Pair<VectorI3FT<A>, VectorI3FT<A>>(v0n, vr);
   }
 
   /**
@@ -433,14 +424,14 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> projection(
-    final @Nonnull VectorReadable2FT<A> p,
-    final @Nonnull VectorReadable2FT<A> q)
+  public static @Nonnull <A> VectorI3FT<A> projection(
+    final @Nonnull VectorReadable3FT<A> p,
+    final @Nonnull VectorReadable3FT<A> q)
   {
-    final double dot = VectorI2FT.dotProduct(p, q);
-    final double qms = VectorI2FT.magnitudeSquared(q);
-    final double s = dot / qms;
-    return VectorI2FT.scale(p, s);
+    final float dot = VectorI3FT.dotProduct(p, q);
+    final float qms = VectorI3FT.magnitudeSquared(q);
+    final float s = dot / qms;
+    return VectorI3FT.scale(p, s);
   }
 
   /**
@@ -451,16 +442,14 @@ import com.io7m.jaux.functional.Pair;
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v.x * r, v.y * r)</code>
+   * @return <code>(v.getXF() * r, v.getYF() * r, v.getZF() * r)</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> scale(
-    final @Nonnull VectorReadable2FT<A> v,
-    final double r)
+  public static @Nonnull <A> VectorI3FT<A> scale(
+    final @Nonnull VectorReadable3FT<A> v,
+    final float r)
   {
-    final double x = v.getXF() * r;
-    final double y = v.getYF() * r;
-    return new VectorI2FT<A>((float) x, (float) y);
+    return new VectorI3FT<A>(v.getXF() * r, v.getYF() * r, v.getZF() * r);
   }
 
   /**
@@ -471,18 +460,22 @@ import com.io7m.jaux.functional.Pair;
    * @param v1
    *          The right input vector
    * 
-   * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
+   * @return <code>(v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF(), v0.getZF() - v1.getZF())</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> subtract(
-    final @Nonnull VectorReadable2FT<A> v0,
-    final @Nonnull VectorReadable2FT<A> v1)
+  public static @Nonnull <A> VectorI3FT<A> subtract(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1)
   {
-    return new VectorI2FT<A>(v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF());
+    return new VectorI3FT<A>(
+      v0.getXF() - v1.getXF(),
+      v0.getYF() - v1.getYF(),
+      v0.getZF() - v1.getZF());
   }
 
   private final float x;
   private final float y;
+  private final float z;
 
   /**
    * Calculate the absolute value of the vector <code>v</code>.
@@ -490,36 +483,64 @@ import com.io7m.jaux.functional.Pair;
    * @param v
    *          The input vector
    * 
-   * @return <code>(abs v.x, abs v.y)</code>
+   * @return <code>(abs v.getXF(), abs v.getYF(), abs v.getZF())</code>
    */
 
-  public static @Nonnull <A> VectorI2FT<A> absolute(
-    final @Nonnull VectorReadable2FT<A> v)
+  public static @Nonnull <A> VectorI3FT<A> absolute(
+    final @Nonnull VectorReadable3FT<A> v)
   {
-    return new VectorI2FT<A>(Math.abs(v.getXF()), Math.abs(v.getYF()));
+    return new VectorI3FT<A>(
+      Math.abs(v.getXF()),
+      Math.abs(v.getYF()),
+      Math.abs(v.getZF()));
+  }
+
+  /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
+   * @param v0
+   *          The left input vector
+   * @param v1
+   *          The right input vector
+   * 
+   * @return <code>(v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF(), v0.getZF() + v1.getZF())</code>
+   */
+
+  public static @Nonnull <A> VectorI3FT<A> add(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1)
+  {
+    return new VectorI3FT<A>(
+      v0.getXF() + v1.getXF(),
+      v0.getYF() + v1.getYF(),
+      v0.getZF() + v1.getZF());
   }
 
   /**
    * Default constructor, initializing the vector with values
-   * <code>[0.0, 0.0]</code>.
+   * <code>[0.0, 0.0, 0.0]</code>.
    */
 
-  public VectorI2FT()
+  public VectorI3FT()
   {
     this.x = 0.0f;
     this.y = 0.0f;
+    this.z = 0.0f;
   }
 
   /**
    * Construct a vector initialized with the given values.
    */
 
-  public VectorI2FT(
+  public VectorI3FT(
     final float x,
-    final float y)
+    final float y,
+    final float z)
   {
     this.x = x;
     this.y = y;
+    this.z = z;
   }
 
   /**
@@ -527,13 +548,19 @@ import com.io7m.jaux.functional.Pair;
    * <code>v</code>.
    */
 
-  public VectorI2FT(
-    final @Nonnull VectorReadable2FT<A> v)
+  public VectorI3FT(
+    final VectorReadable3FT<A> v)
   {
     this.x = v.getXF();
     this.y = v.getYF();
+    this.z = v.getZF();
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override public boolean equals(
     final Object obj)
   {
@@ -546,12 +573,18 @@ import com.io7m.jaux.functional.Pair;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    @SuppressWarnings("unchecked") final @Nonnull VectorI2FT<A> other =
-      (VectorI2FT<A>) obj;
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
+    @SuppressWarnings("unchecked") final @Nonnull VectorI3FT<A> other =
+      (VectorI3FT<A>) obj;
+    if (Float.floatToIntBits(this.getXF()) != Float.floatToIntBits(other
+      .getXF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
+    if (Float.floatToIntBits(this.getYF()) != Float.floatToIntBits(other
+      .getYF())) {
+      return false;
+    }
+    if (Float.floatToIntBits(this.getZF()) != Float.floatToIntBits(other
+      .getZF())) {
       return false;
     }
     return true;
@@ -567,22 +600,35 @@ import com.io7m.jaux.functional.Pair;
     return this.y;
   }
 
+  @Override public float getZF()
+  {
+    return this.z;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#hashCode()
+   */
   @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
-    result = (prime * result) + Float.floatToIntBits(this.x);
-    result = (prime * result) + Float.floatToIntBits(this.y);
+    result = (prime * result) + Float.floatToIntBits(this.getXF());
+    result = (prime * result) + Float.floatToIntBits(this.getYF());
+    result = (prime * result) + Float.floatToIntBits(this.getZF());
     return result;
   }
 
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("[VectorI2FT ");
-    builder.append(this.x);
+    builder.append("[VectorI3FT ");
+    builder.append(this.getXF());
     builder.append(" ");
-    builder.append(this.y);
+    builder.append(this.getYF());
+    builder.append(" ");
+    builder.append(this.getZF());
     builder.append("]");
     return builder.toString();
   }

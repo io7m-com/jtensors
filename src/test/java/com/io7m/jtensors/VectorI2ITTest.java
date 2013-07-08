@@ -47,8 +47,8 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr = VectorI2IT.absolute(v);
 
-      Assert.assertEquals(Math.abs(v.x), vr.x);
-      Assert.assertEquals(Math.abs(v.y), vr.y);
+      Assert.assertEquals(Math.abs(v.getXI()), vr.getXI());
+      Assert.assertEquals(Math.abs(v.getYI()), vr.getYI());
     }
   }
 
@@ -65,8 +65,8 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr0 = VectorI2IT.add(v0, v1);
 
-      Assert.assertTrue(vr0.x == (v0.x + v1.x));
-      Assert.assertTrue(vr0.y == (v0.y + v1.y));
+      Assert.assertTrue(vr0.getXI() == (v0.getXI() + v1.getXI()));
+      Assert.assertTrue(vr0.getYI() == (v0.getYI() + v1.getYI()));
     }
   }
 
@@ -85,8 +85,8 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr0 = VectorI2IT.addScaled(v0, v1, r);
 
-      Assert.assertTrue(vr0.x == (v0.x + (v1.x * r)));
-      Assert.assertTrue(vr0.y == (v0.y + (v1.y * r)));
+      Assert.assertTrue(vr0.getXI() == (v0.getXI() + (v1.getXI() * r)));
+      Assert.assertTrue(vr0.getYI() == (v0.getYI() + (v1.getYI() * r)));
     }
   }
 
@@ -156,8 +156,8 @@ public class VectorI2ITTest extends VectorI2TContract
   {
     final VectorI2IT<A> v = new VectorI2IT<A>(3, 5);
 
-    Assert.assertTrue(v.x == v.getXI());
-    Assert.assertTrue(v.y == v.getYI());
+    Assert.assertTrue(v.getXI() == v.getXI());
+    Assert.assertTrue(v.getYI() == v.getYI());
   }
 
   @Override @Test public <A> void testClampByVectorMaximumOrdering()
@@ -173,8 +173,8 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr = VectorI2IT.clampMaximumByVector(v, maximum);
 
-      Assert.assertTrue(vr.x <= maximum.x);
-      Assert.assertTrue(vr.y <= maximum.y);
+      Assert.assertTrue(vr.getXI() <= maximum.getXI());
+      Assert.assertTrue(vr.getYI() <= maximum.getYI());
     }
   }
 
@@ -191,8 +191,8 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr = VectorI2IT.clampMinimumByVector(v, minimum);
 
-      Assert.assertTrue(vr.x >= minimum.x);
-      Assert.assertTrue(vr.y >= minimum.y);
+      Assert.assertTrue(vr.getXI() >= minimum.getXI());
+      Assert.assertTrue(vr.getYI() >= minimum.getYI());
     }
   }
 
@@ -213,10 +213,10 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr = VectorI2IT.clampByVector(v, minimum, maximum);
 
-      Assert.assertTrue(vr.x <= maximum.x);
-      Assert.assertTrue(vr.y <= maximum.y);
-      Assert.assertTrue(vr.x >= minimum.x);
-      Assert.assertTrue(vr.y >= minimum.y);
+      Assert.assertTrue(vr.getXI() <= maximum.getXI());
+      Assert.assertTrue(vr.getYI() <= maximum.getYI());
+      Assert.assertTrue(vr.getXI() >= minimum.getXI());
+      Assert.assertTrue(vr.getYI() >= minimum.getYI());
     }
   }
 
@@ -231,8 +231,8 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr = VectorI2IT.clampMaximum(v, maximum);
 
-      Assert.assertTrue(vr.x <= maximum);
-      Assert.assertTrue(vr.y <= maximum);
+      Assert.assertTrue(vr.getXI() <= maximum);
+      Assert.assertTrue(vr.getYI() <= maximum);
     }
   }
 
@@ -247,8 +247,8 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr = VectorI2IT.clampMinimum(v, minimum);
 
-      Assert.assertTrue(vr.x >= minimum);
-      Assert.assertTrue(vr.y >= minimum);
+      Assert.assertTrue(vr.getXI() >= minimum);
+      Assert.assertTrue(vr.getYI() >= minimum);
     }
   }
 
@@ -264,10 +264,10 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr = VectorI2IT.clamp(v, minimum, maximum);
 
-      Assert.assertTrue(vr.x <= maximum);
-      Assert.assertTrue(vr.x >= minimum);
-      Assert.assertTrue(vr.y <= maximum);
-      Assert.assertTrue(vr.y >= minimum);
+      Assert.assertTrue(vr.getXI() <= maximum);
+      Assert.assertTrue(vr.getXI() >= minimum);
+      Assert.assertTrue(vr.getYI() <= maximum);
+      Assert.assertTrue(vr.getYI() >= minimum);
     }
   }
 
@@ -276,16 +276,16 @@ public class VectorI2ITTest extends VectorI2TContract
     final VectorI2IT<A> vb = new VectorI2IT<A>(5, 6);
     final VectorI2IT<A> va = new VectorI2IT<A>(1, 2);
 
-    Assert.assertFalse(va.x == vb.x);
-    Assert.assertFalse(va.y == vb.y);
+    Assert.assertFalse(va.getXI() == vb.getXI());
+    Assert.assertFalse(va.getYI() == vb.getYI());
 
     final VectorI2IT<A> vc = new VectorI2IT<A>(va);
 
-    Assert.assertTrue(va.x == vc.x);
-    Assert.assertTrue(va.y == vc.y);
+    Assert.assertTrue(va.getXI() == vc.getXI());
+    Assert.assertTrue(va.getYI() == vc.getYI());
 
-    Assert.assertFalse(vc.x == vb.x);
-    Assert.assertFalse(vc.y == vb.y);
+    Assert.assertFalse(vc.getXI() == vb.getXI());
+    Assert.assertFalse(vc.getYI() == vb.getYI());
   }
 
   @Override @Test public <A> void testDefault00()
@@ -322,24 +322,24 @@ public class VectorI2ITTest extends VectorI2TContract
 
     {
       final int p = VectorI2IT.dotProduct(v0, v1);
-      Assert.assertTrue(v0.x == 10);
-      Assert.assertTrue(v0.y == 10);
-      Assert.assertTrue(v1.x == 10);
-      Assert.assertTrue(v1.y == 10);
+      Assert.assertTrue(v0.getXI() == 10);
+      Assert.assertTrue(v0.getYI() == 10);
+      Assert.assertTrue(v1.getXI() == 10);
+      Assert.assertTrue(v1.getYI() == 10);
       Assert.assertTrue(p == 200);
     }
 
     {
       final int p = VectorI2IT.dotProduct(v0, v0);
-      Assert.assertTrue(v0.x == 10);
-      Assert.assertTrue(v0.y == 10);
+      Assert.assertTrue(v0.getXI() == 10);
+      Assert.assertTrue(v0.getYI() == 10);
       Assert.assertTrue(p == 200);
     }
 
     {
       final int p = VectorI2IT.dotProduct(v1, v1);
-      Assert.assertTrue(v1.x == 10);
-      Assert.assertTrue(v1.y == 10);
+      Assert.assertTrue(v1.getXI() == 10);
+      Assert.assertTrue(v1.getYI() == 10);
       Assert.assertTrue(p == 200);
     }
   }
@@ -391,15 +391,15 @@ public class VectorI2ITTest extends VectorI2TContract
 
     {
       final int p = VectorI2IT.dotProduct(v0, v0);
-      Assert.assertTrue(v0.x == 10);
-      Assert.assertTrue(v0.y == 10);
+      Assert.assertTrue(v0.getXI() == 10);
+      Assert.assertTrue(v0.getYI() == 10);
       Assert.assertTrue(p == 200);
     }
 
     {
       final int p = VectorI2IT.magnitudeSquared(v0);
-      Assert.assertTrue(v0.x == 10);
-      Assert.assertTrue(v0.y == 10);
+      Assert.assertTrue(v0.getXI() == 10);
+      Assert.assertTrue(v0.getYI() == 10);
       Assert.assertTrue(p == 200);
     }
   }
@@ -492,8 +492,8 @@ public class VectorI2ITTest extends VectorI2TContract
     final VectorI2IT<A> v0 = new VectorI2IT<A>(1, 2);
     final VectorI2IT<A> v1 = new VectorI2IT<A>(v0);
 
-    Assert.assertTrue(v0.x == v1.x);
-    Assert.assertTrue(v0.y == v1.y);
+    Assert.assertTrue(v0.getXI() == v1.getXI());
+    Assert.assertTrue(v0.getYI() == v1.getYI());
   }
 
   @Override @Test public <A> void testInterpolateLinearLimits()
@@ -510,11 +510,11 @@ public class VectorI2ITTest extends VectorI2TContract
       final VectorI2IT<A> vr0 = VectorI2IT.interpolateLinear(v0, v1, 0);
       final VectorI2IT<A> vr1 = VectorI2IT.interpolateLinear(v0, v1, 1);
 
-      Assert.assertTrue(v0.x == vr0.x);
-      Assert.assertTrue(v0.y == vr0.y);
+      Assert.assertTrue(v0.getXI() == vr0.getXI());
+      Assert.assertTrue(v0.getYI() == vr0.getYI());
 
-      Assert.assertTrue(v1.x == vr1.x);
-      Assert.assertTrue(v1.y == vr1.y);
+      Assert.assertTrue(v1.getXI() == vr1.getXI());
+      Assert.assertTrue(v1.getYI() == vr1.getYI());
     }
   }
 
@@ -611,8 +611,8 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr = VectorI2IT.scale(v, 1);
 
-      Assert.assertTrue(v.x == vr.x);
-      Assert.assertTrue(v.y == vr.y);
+      Assert.assertTrue(v.getXI() == vr.getXI());
+      Assert.assertTrue(v.getYI() == vr.getYI());
     }
   }
 
@@ -625,8 +625,8 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr = VectorI2IT.scale(v, 0);
 
-      Assert.assertTrue(vr.x == 0);
-      Assert.assertTrue(vr.y == 0);
+      Assert.assertTrue(vr.getXI() == 0);
+      Assert.assertTrue(vr.getYI() == 0);
     }
   }
 
@@ -649,8 +649,8 @@ public class VectorI2ITTest extends VectorI2TContract
 
       final VectorI2IT<A> vr0 = VectorI2IT.subtract(v0, v1);
 
-      Assert.assertTrue(vr0.x == (v0.x - v1.x));
-      Assert.assertTrue(vr0.y == (v0.y - v1.y));
+      Assert.assertTrue(vr0.getXI() == (v0.getXI() - v1.getXI()));
+      Assert.assertTrue(vr0.getYI() == (v0.getYI() - v1.getYI()));
     }
   }
 }

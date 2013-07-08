@@ -21,7 +21,7 @@ import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
 
-public class VectorI3ITest extends VectorI4Contract
+public class VectorI3ITest extends VectorI3Contract
 {
   public static int randomNegativeNumber()
   {
@@ -264,11 +264,6 @@ public class VectorI3ITest extends VectorI4Contract
     Assert.assertFalse(vc.x == vb.x);
     Assert.assertFalse(vc.y == vb.y);
     Assert.assertFalse(vc.z == vb.z);
-  }
-
-  @Override @Test public void testDefault0001()
-  {
-    Assert.assertTrue(new VectorI3I().equals(new VectorI3I(0, 0, 0)));
   }
 
   @Override @Test public void testDistance()
@@ -707,5 +702,15 @@ public class VectorI3ITest extends VectorI4Contract
       Assert.assertTrue(vr0.y == (v0.y - v1.y));
       Assert.assertTrue(vr0.z == (v0.z - v1.z));
     }
+  }
+
+  @Override public void testCrossProductPerpendicular()
+  {
+    // Not applicable.
+  }
+
+  @Override public void testDefault000()
+  {
+    Assert.assertTrue(new VectorI3I().equals(new VectorI3I(0, 0, 0)));
   }
 }

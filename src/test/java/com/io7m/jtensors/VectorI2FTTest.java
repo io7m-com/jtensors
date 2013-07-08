@@ -37,10 +37,14 @@ public class VectorI2FTTest extends VectorI2TContract
 
       final VectorI2FT<A> vr = VectorI2FT.absolute(v);
 
-      Assert
-        .assertTrue(AlmostEqualFloat.almostEqual(ec, Math.abs(v.x), vr.x));
-      Assert
-        .assertTrue(AlmostEqualFloat.almostEqual(ec, Math.abs(v.y), vr.y));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        Math.abs(v.getXF()),
+        vr.getXF()));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        Math.abs(v.getYF()),
+        vr.getYF()));
     }
   }
 
@@ -61,8 +65,14 @@ public class VectorI2FTTest extends VectorI2TContract
 
       final VectorI2FT<A> vr = VectorI2FT.add(v0, v1);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.x, v0.x + v1.x));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.y, v0.y + v1.y));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        vr.getXF(),
+        v0.getXF() + v1.getXF()));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        vr.getYF(),
+        v0.getYF() + v1.getYF()));
     }
   }
 
@@ -84,10 +94,14 @@ public class VectorI2FTTest extends VectorI2TContract
       final float r = (float) (Math.random() * 100.0f);
       final VectorI2FT<A> vr = VectorI2FT.addScaled(v0, v1, r);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.x, v0.x
-        + (v1.x * r)));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.y, v0.y
-        + (v1.y * r)));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        vr.getXF(),
+        v0.getXF() + (v1.getXF() * r)));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        vr.getYF(),
+        v0.getYF() + (v1.getYF() * r)));
     }
   }
 
@@ -182,8 +196,8 @@ public class VectorI2FTTest extends VectorI2TContract
   {
     final VectorI2FT<A> v = new VectorI2FT<A>(3.0f, 5.0f);
 
-    Assert.assertTrue(v.x == v.getXF());
-    Assert.assertTrue(v.y == v.getYF());
+    Assert.assertTrue(v.getXF() == v.getXF());
+    Assert.assertTrue(v.getYF() == v.getYF());
   }
 
   @Override @Test public <A> void testClampByVectorMaximumOrdering()
@@ -198,9 +212,11 @@ public class VectorI2FTTest extends VectorI2TContract
       final VectorI2FT<A> v = new VectorI2FT<A>(x, y);
 
       Assert
-        .assertTrue(VectorI2FT.clampMaximumByVector(v, maximum).x <= maximum.x);
+        .assertTrue(VectorI2FT.clampMaximumByVector(v, maximum).getXF() <= maximum
+          .getXF());
       Assert
-        .assertTrue(VectorI2FT.clampMaximumByVector(v, maximum).y <= maximum.y);
+        .assertTrue(VectorI2FT.clampMaximumByVector(v, maximum).getYF() <= maximum
+          .getYF());
     }
   }
 
@@ -216,9 +232,11 @@ public class VectorI2FTTest extends VectorI2TContract
       final VectorI2FT<A> v = new VectorI2FT<A>(x, y);
 
       Assert
-        .assertTrue(VectorI2FT.clampMinimumByVector(v, minimum).x >= minimum.x);
+        .assertTrue(VectorI2FT.clampMinimumByVector(v, minimum).getXF() >= minimum
+          .getXF());
       Assert
-        .assertTrue(VectorI2FT.clampMinimumByVector(v, minimum).y >= minimum.y);
+        .assertTrue(VectorI2FT.clampMinimumByVector(v, minimum).getYF() >= minimum
+          .getYF());
     }
   }
 
@@ -238,13 +256,17 @@ public class VectorI2FTTest extends VectorI2TContract
       final VectorI2FT<A> v = new VectorI2FT<A>(x, y);
 
       Assert
-        .assertTrue(VectorI2FT.clampByVector(v, minimum, maximum).x <= maximum.x);
+        .assertTrue(VectorI2FT.clampByVector(v, minimum, maximum).getXF() <= maximum
+          .getXF());
       Assert
-        .assertTrue(VectorI2FT.clampByVector(v, minimum, maximum).x >= minimum.x);
+        .assertTrue(VectorI2FT.clampByVector(v, minimum, maximum).getXF() >= minimum
+          .getXF());
       Assert
-        .assertTrue(VectorI2FT.clampByVector(v, minimum, maximum).y <= maximum.y);
+        .assertTrue(VectorI2FT.clampByVector(v, minimum, maximum).getYF() <= maximum
+          .getYF());
       Assert
-        .assertTrue(VectorI2FT.clampByVector(v, minimum, maximum).y >= minimum.y);
+        .assertTrue(VectorI2FT.clampByVector(v, minimum, maximum).getYF() >= minimum
+          .getYF());
     }
   }
 
@@ -257,8 +279,10 @@ public class VectorI2FTTest extends VectorI2TContract
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final VectorI2FT<A> v = new VectorI2FT<A>(x, y);
 
-      Assert.assertTrue(VectorI2FT.clampMaximum(v, maximum).x <= maximum);
-      Assert.assertTrue(VectorI2FT.clampMaximum(v, maximum).y <= maximum);
+      Assert
+        .assertTrue(VectorI2FT.clampMaximum(v, maximum).getXF() <= maximum);
+      Assert
+        .assertTrue(VectorI2FT.clampMaximum(v, maximum).getYF() <= maximum);
     }
   }
 
@@ -271,8 +295,10 @@ public class VectorI2FTTest extends VectorI2TContract
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final VectorI2FT<A> v = new VectorI2FT<A>(x, y);
 
-      Assert.assertTrue(VectorI2FT.clampMinimum(v, minimum).x >= minimum);
-      Assert.assertTrue(VectorI2FT.clampMinimum(v, minimum).y >= minimum);
+      Assert
+        .assertTrue(VectorI2FT.clampMinimum(v, minimum).getXF() >= minimum);
+      Assert
+        .assertTrue(VectorI2FT.clampMinimum(v, minimum).getYF() >= minimum);
     }
   }
 
@@ -286,10 +312,14 @@ public class VectorI2FTTest extends VectorI2TContract
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final VectorI2FT<A> v = new VectorI2FT<A>(x, y);
 
-      Assert.assertTrue(VectorI2FT.clamp(v, minimum, maximum).x <= maximum);
-      Assert.assertTrue(VectorI2FT.clamp(v, minimum, maximum).x >= minimum);
-      Assert.assertTrue(VectorI2FT.clamp(v, minimum, maximum).y <= maximum);
-      Assert.assertTrue(VectorI2FT.clamp(v, minimum, maximum).y >= minimum);
+      Assert
+        .assertTrue(VectorI2FT.clamp(v, minimum, maximum).getXF() <= maximum);
+      Assert
+        .assertTrue(VectorI2FT.clamp(v, minimum, maximum).getXF() >= minimum);
+      Assert
+        .assertTrue(VectorI2FT.clamp(v, minimum, maximum).getYF() <= maximum);
+      Assert
+        .assertTrue(VectorI2FT.clamp(v, minimum, maximum).getYF() >= minimum);
     }
   }
 
@@ -305,8 +335,8 @@ public class VectorI2FTTest extends VectorI2TContract
       final VectorI2FT<A> v0 = new VectorI2FT<A>(x, y);
       final VectorI2FT<A> v1 = new VectorI2FT<A>(v0);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.x, x));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.y, y));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.getXF(), x));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.getYF(), y));
     }
   }
 
@@ -316,8 +346,8 @@ public class VectorI2FTTest extends VectorI2TContract
       TestUtilities.getSingleEqualityContext();
 
     final VectorI2FT<A> v = new VectorI2FT<A>();
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.x, 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.y, 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.getXF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.getYF(), 0.0f));
   }
 
   @Override @Test public <A> void testDistance()
@@ -553,8 +583,8 @@ public class VectorI2FTTest extends VectorI2TContract
     final VectorI2FT<A> v0 = new VectorI2FT<A>(1.0f, 2.0f);
     final VectorI2FT<A> v1 = new VectorI2FT<A>(v0);
 
-    Assert.assertTrue(v0.x == v1.x);
-    Assert.assertTrue(v0.y == v1.y);
+    Assert.assertTrue(v0.getXF() == v1.getXF());
+    Assert.assertTrue(v0.getYF() == v1.getYF());
   }
 
   @Override @Test public <A> void testInterpolateLinearLimits()
@@ -697,8 +727,8 @@ public class VectorI2FTTest extends VectorI2TContract
     final VectorI2FT<A> q = new VectorI2FT<A>(0, 0);
     final VectorI2FT<A> qr = VectorI2FT.normalize(q);
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.x));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.y));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.getXF()));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.getYF()));
   }
 
   @Override @Test public <A> void testOrthonormalize()
@@ -741,8 +771,14 @@ public class VectorI2FTTest extends VectorI2TContract
 
       final VectorI2FT<A> vr = VectorI2FT.scale(v, 1.0f);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.x, vr.x));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.y, vr.y));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        v.getXF(),
+        vr.getXF()));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        v.getYF(),
+        vr.getYF()));
     }
   }
 
@@ -758,8 +794,8 @@ public class VectorI2FTTest extends VectorI2TContract
 
       final VectorI2FT<A> vr = VectorI2FT.scale(v, 0.0f);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.x, 0.0f));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.y, 0.0f));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.getXF(), 0.0f));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.getYF(), 0.0f));
     }
   }
 
@@ -785,8 +821,14 @@ public class VectorI2FTTest extends VectorI2TContract
 
       final VectorI2FT<A> vr = VectorI2FT.subtract(v0, v1);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.x, v0.x - v1.x));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.y, v0.y - v1.y));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        vr.getXF(),
+        v0.getXF() - v1.getXF()));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        vr.getYF(),
+        v0.getYF() - v1.getYF()));
     }
   }
 }

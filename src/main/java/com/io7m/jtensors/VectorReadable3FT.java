@@ -18,8 +18,8 @@ package com.io7m.jtensors;
 
 /**
  * <p>
- * 'Read' interface to two-dimensional vectors with single precision elements,
- * indexed by the type <code>A</code>.
+ * 'Read' interface to three-dimensional vectors with single precision
+ * elements, indexed by the type <code>A</code>.
  * </p>
  * <p>
  * The intention of the type parameter <code>A</code> is to be used as a
@@ -30,7 +30,7 @@ package com.io7m.jtensors;
  * @since 5.1.0
  */
 
-public interface VectorReadable2IT<A> extends VectorReadable2I
+public interface VectorReadable3FT<A> extends VectorReadable3F
 {
-  // See superinterface.
+  // See superinterfaces.
 }

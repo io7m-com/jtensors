@@ -114,8 +114,11 @@ public final class APICompleteness
         VectorM2F.class,
         VectorM2I.class,
         VectorI2D.class,
+        VectorI2DT.class,
         VectorI2F.class,
-        VectorI2I.class };
+        VectorI2FT.class,
+        VectorI2I.class,
+        VectorI2IT.class };
     for (final Class<?> c : classes) {
       APICompleteness.checkAgainst(VectorM2D.class, c);
     }

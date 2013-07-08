@@ -21,7 +21,7 @@ import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.AlmostEqualFloat;
-import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
 import com.io7m.jaux.functional.Pair;
 
 public class VectorI4FTest extends VectorI4Contract
@@ -54,57 +54,107 @@ public class VectorI4FTest extends VectorI4Contract
   @Override @Test public void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float z0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float w0 = (float) (Math.random() * Float.MAX_VALUE);
+      final float x0 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float y0 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float z0 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float w0 = (float) (Math.random() * (Float.MAX_VALUE / 2));
       final VectorI4F v0 = new VectorI4F(x0, y0, z0, w0);
 
-      final float x1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float z1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float w1 = (float) (Math.random() * Float.MAX_VALUE);
+      final float x1 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float y1 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float z1 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float w1 = (float) (Math.random() * (Float.MAX_VALUE / 2));
       final VectorI4F v1 = new VectorI4F(x1, y1, z1, w1);
 
       final VectorI4F vr = VectorI4F.add(v0, v1);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.x, v0.x
-        + v1.x));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.y, v0.y
-        + v1.y));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.z, v0.z
-        + v1.z));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.w, v0.w
-        + v1.w));
+      final ContextRelative context = new AlmostEqualFloat.ContextRelative();
+
+      {
+        final float expected = v0.x + v1.x;
+        final float got = vr.x;
+        System.out.println("x: expected " + expected + " got " + got);
+        Assert.assertTrue(AlmostEqualFloat
+          .almostEqual(context, expected, got));
+      }
+
+      {
+        final float expected = v0.y + v1.y;
+        final float got = vr.y;
+        System.out.println("y: expected " + expected + " got " + got);
+        Assert.assertTrue(AlmostEqualFloat
+          .almostEqual(context, expected, got));
+      }
+
+      {
+        final float expected = v0.z + v1.z;
+        final float got = vr.z;
+        System.out.println("z: expected " + expected + " got " + got);
+        Assert.assertTrue(AlmostEqualFloat
+          .almostEqual(context, expected, got));
+      }
+
+      {
+        final float expected = v0.w + v1.w;
+        final float got = vr.w;
+        System.out.println("w: expected " + expected + " got " + got);
+        Assert.assertTrue(AlmostEqualFloat
+          .almostEqual(context, expected, got));
+      }
     }
   }
 
   @Override @Test public void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float z0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float w0 = (float) (Math.random() * Float.MAX_VALUE);
+      final float x0 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float y0 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float z0 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float w0 = (float) (Math.random() * (Float.MAX_VALUE / 2));
       final VectorI4F v0 = new VectorI4F(x0, y0, z0, w0);
 
-      final float x1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float z1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float w1 = (float) (Math.random() * Float.MAX_VALUE);
+      final float x1 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float y1 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float z1 = (float) (Math.random() * (Float.MAX_VALUE / 2));
+      final float w1 = (float) (Math.random() * (Float.MAX_VALUE / 2));
       final VectorI4F v1 = new VectorI4F(x1, y1, z1, w1);
 
-      final float r = (float) (Math.random() * Float.MAX_VALUE);
+      final float r = (float) (Math.random() * (Float.MAX_VALUE / 2));
       final VectorI4F vr = VectorI4F.addScaled(v0, v1, r);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.x, v0.x
-        + (v1.x * r)));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.y, v0.y
-        + (v1.y * r)));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.z, v0.z
-        + (v1.z * r)));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.w, v0.w
-        + (v1.w * r)));
+      final ContextRelative context = new AlmostEqualFloat.ContextRelative();
+
+      {
+        final float expected = v0.x + (v1.x * r);
+        final float got = vr.x;
+        System.out.println("x: expected " + expected + " got " + got);
+        Assert.assertTrue(AlmostEqualFloat
+          .almostEqual(context, expected, got));
+      }
+
+      {
+        final float expected = v0.y + (v1.y * r);
+        final float got = vr.y;
+        System.out.println("y: expected " + expected + " got " + got);
+        Assert.assertTrue(AlmostEqualFloat
+          .almostEqual(context, expected, got));
+      }
+
+      {
+        final float expected = v0.z + (v1.z * r);
+        final float got = vr.z;
+        System.out.println("z: expected " + expected + " got " + got);
+        Assert.assertTrue(AlmostEqualFloat
+          .almostEqual(context, expected, got));
+      }
+
+      {
+        final float expected = v0.w + (v1.w * r);
+        final float got = vr.w;
+        System.out.println("w: expected " + expected + " got " + got);
+        Assert.assertTrue(AlmostEqualFloat
+          .almostEqual(context, expected, got));
+      }
     }
   }
 
@@ -403,7 +453,9 @@ public class VectorI4FTest extends VectorI4Contract
     final VectorI4F v0 = new VectorI4F(0.0f, 1.0f, 0.0f, 0.0f);
     final VectorI4F v1 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    final ContextRelative context = new AlmostEqualFloat.ContextRelative();
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       VectorI4F.distance(v0, v1),
       1.0f));
   }
@@ -902,13 +954,14 @@ public class VectorI4FTest extends VectorI4Contract
 
       final VectorI4F vr = VectorI4F.subtract(v0, v1);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.x, v0.x
+      final ContextRelative context = new AlmostEqualFloat.ContextRelative();
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.x, v0.x
         - v1.x));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.y, v0.y
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.y, v0.y
         - v1.y));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.z, v0.z
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.z, v0.z
         - v1.z));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.w, v0.w
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.w, v0.w
         - v1.w));
     }
   }

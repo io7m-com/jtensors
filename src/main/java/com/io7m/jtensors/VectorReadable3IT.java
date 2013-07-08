@@ -18,7 +18,7 @@ package com.io7m.jtensors;
 
 /**
  * <p>
- * 'Read' interface to two-dimensional vectors with single precision elements,
+ * 'Read' interface to three-dimensional vectors with integer elements,
  * indexed by the type <code>A</code>.
  * </p>
  * <p>
@@ -30,7 +30,7 @@ package com.io7m.jtensors;
  * @since 5.1.0
  */
 
-public interface VectorReadable2IT<A> extends VectorReadable2I
+public interface VectorReadable3IT<A> extends VectorReadable3I
 {
-  // See superinterface.
+  // See superinterfaces.
 }
