@@ -132,67 +132,67 @@ public class VectorI3FTTest extends VectorI3TContract
     {
       final VectorI3FT<A> m0 = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> m1 = new VectorI3FT<A>(q, y, z);
-      Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
+      Assert.assertFalse(VectorI3FT.almostEqual(ec, m0, m1));
     }
 
     {
       final VectorI3FT<A> m0 = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> m1 = new VectorI3FT<A>(x, q, z);
-      Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
+      Assert.assertFalse(VectorI3FT.almostEqual(ec, m0, m1));
     }
 
     {
       final VectorI3FT<A> m0 = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> m1 = new VectorI3FT<A>(x, y, q);
-      Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
+      Assert.assertFalse(VectorI3FT.almostEqual(ec, m0, m1));
     }
 
     {
       final VectorI3FT<A> m0 = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> m1 = new VectorI3FT<A>(q, q, z);
-      Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
+      Assert.assertFalse(VectorI3FT.almostEqual(ec, m0, m1));
     }
 
     {
       final VectorI3FT<A> m0 = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> m1 = new VectorI3FT<A>(q, y, q);
-      Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
+      Assert.assertFalse(VectorI3FT.almostEqual(ec, m0, m1));
     }
 
     {
       final VectorI3FT<A> m0 = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> m1 = new VectorI3FT<A>(q, y, z);
-      Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
+      Assert.assertFalse(VectorI3FT.almostEqual(ec, m0, m1));
     }
 
     {
       final VectorI3FT<A> m0 = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> m1 = new VectorI3FT<A>(q, q, q);
-      Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
+      Assert.assertFalse(VectorI3FT.almostEqual(ec, m0, m1));
     }
 
     {
       final VectorI3FT<A> m0 = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> m1 = new VectorI3FT<A>(q, q, z);
-      Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
+      Assert.assertFalse(VectorI3FT.almostEqual(ec, m0, m1));
     }
 
     {
       final VectorI3FT<A> m0 = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> m1 = new VectorI3FT<A>(q, q, q);
-      Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
+      Assert.assertFalse(VectorI3FT.almostEqual(ec, m0, m1));
     }
 
     {
       final VectorI3FT<A> m0 = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> m1 = new VectorI3FT<A>(x, q, q);
-      Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
+      Assert.assertFalse(VectorI3FT.almostEqual(ec, m0, m1));
     }
 
     {
       final VectorI3FT<A> m0 = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> m1 = new VectorI3FT<A>(x, y, q);
-      Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
+      Assert.assertFalse(VectorI3FT.almostEqual(ec, m0, m1));
     }
   }
 
@@ -209,9 +209,9 @@ public class VectorI3FTTest extends VectorI3TContract
       final VectorI3FT<A> v1 = new VectorI3FT<A>(x0, y0, z0);
       final VectorI3FT<A> v2 = new VectorI3FT<A>(x0, y0, z0);
 
-      Assert.assertTrue(VectorI3F.almostEqual(ec, v0, v1));
-      Assert.assertTrue(VectorI3F.almostEqual(ec, v1, v2));
-      Assert.assertTrue(VectorI3F.almostEqual(ec, v0, v2));
+      Assert.assertTrue(VectorI3FT.almostEqual(ec, v0, v1));
+      Assert.assertTrue(VectorI3FT.almostEqual(ec, v1, v2));
+      Assert.assertTrue(VectorI3FT.almostEqual(ec, v0, v2));
     }
   }
 
@@ -238,13 +238,13 @@ public class VectorI3FTTest extends VectorI3TContract
       final VectorI3FT<A> v = new VectorI3FT<A>(x, y, z);
 
       Assert
-        .assertTrue(VectorI3F.clampMaximumByVector(v, maximum).getXF() <= maximum
+        .assertTrue(VectorI3FT.clampMaximumByVector(v, maximum).getXF() <= maximum
           .getXF());
       Assert
-        .assertTrue(VectorI3F.clampMaximumByVector(v, maximum).getYF() <= maximum
+        .assertTrue(VectorI3FT.clampMaximumByVector(v, maximum).getYF() <= maximum
           .getYF());
       Assert
-        .assertTrue(VectorI3F.clampMaximumByVector(v, maximum).getZF() <= maximum
+        .assertTrue(VectorI3FT.clampMaximumByVector(v, maximum).getZF() <= maximum
           .getZF());
     }
   }
@@ -263,13 +263,13 @@ public class VectorI3FTTest extends VectorI3TContract
       final VectorI3FT<A> v = new VectorI3FT<A>(x, y, z);
 
       Assert
-        .assertTrue(VectorI3F.clampMinimumByVector(v, minimum).getXF() >= minimum
+        .assertTrue(VectorI3FT.clampMinimumByVector(v, minimum).getXF() >= minimum
           .getXF());
       Assert
-        .assertTrue(VectorI3F.clampMinimumByVector(v, minimum).getYF() >= minimum
+        .assertTrue(VectorI3FT.clampMinimumByVector(v, minimum).getYF() >= minimum
           .getYF());
       Assert
-        .assertTrue(VectorI3F.clampMinimumByVector(v, minimum).getZF() >= minimum
+        .assertTrue(VectorI3FT.clampMinimumByVector(v, minimum).getZF() >= minimum
           .getZF());
     }
   }
@@ -293,22 +293,22 @@ public class VectorI3FTTest extends VectorI3TContract
       final VectorI3FT<A> v = new VectorI3FT<A>(x, y, z);
 
       Assert
-        .assertTrue(VectorI3F.clampByVector(v, minimum, maximum).getXF() <= maximum
+        .assertTrue(VectorI3FT.clampByVector(v, minimum, maximum).getXF() <= maximum
           .getXF());
       Assert
-        .assertTrue(VectorI3F.clampByVector(v, minimum, maximum).getXF() >= minimum
+        .assertTrue(VectorI3FT.clampByVector(v, minimum, maximum).getXF() >= minimum
           .getXF());
       Assert
-        .assertTrue(VectorI3F.clampByVector(v, minimum, maximum).getYF() <= maximum
+        .assertTrue(VectorI3FT.clampByVector(v, minimum, maximum).getYF() <= maximum
           .getYF());
       Assert
-        .assertTrue(VectorI3F.clampByVector(v, minimum, maximum).getYF() >= minimum
+        .assertTrue(VectorI3FT.clampByVector(v, minimum, maximum).getYF() >= minimum
           .getYF());
       Assert
-        .assertTrue(VectorI3F.clampByVector(v, minimum, maximum).getZF() <= maximum
+        .assertTrue(VectorI3FT.clampByVector(v, minimum, maximum).getZF() <= maximum
           .getZF());
       Assert
-        .assertTrue(VectorI3F.clampByVector(v, minimum, maximum).getZF() >= minimum
+        .assertTrue(VectorI3FT.clampByVector(v, minimum, maximum).getZF() >= minimum
           .getZF());
     }
   }
@@ -324,11 +324,11 @@ public class VectorI3FTTest extends VectorI3TContract
       final VectorI3FT<A> v = new VectorI3FT<A>(x, y, z);
 
       Assert
-        .assertTrue(VectorI3F.clampMaximum(v, maximum).getXF() <= maximum);
+        .assertTrue(VectorI3FT.clampMaximum(v, maximum).getXF() <= maximum);
       Assert
-        .assertTrue(VectorI3F.clampMaximum(v, maximum).getYF() <= maximum);
+        .assertTrue(VectorI3FT.clampMaximum(v, maximum).getYF() <= maximum);
       Assert
-        .assertTrue(VectorI3F.clampMaximum(v, maximum).getZF() <= maximum);
+        .assertTrue(VectorI3FT.clampMaximum(v, maximum).getZF() <= maximum);
     }
   }
 
@@ -343,11 +343,11 @@ public class VectorI3FTTest extends VectorI3TContract
       final VectorI3FT<A> v = new VectorI3FT<A>(x, y, z);
 
       Assert
-        .assertTrue(VectorI3F.clampMinimum(v, minimum).getXF() >= minimum);
+        .assertTrue(VectorI3FT.clampMinimum(v, minimum).getXF() >= minimum);
       Assert
-        .assertTrue(VectorI3F.clampMinimum(v, minimum).getYF() >= minimum);
+        .assertTrue(VectorI3FT.clampMinimum(v, minimum).getYF() >= minimum);
       Assert
-        .assertTrue(VectorI3F.clampMinimum(v, minimum).getZF() >= minimum);
+        .assertTrue(VectorI3FT.clampMinimum(v, minimum).getZF() >= minimum);
     }
   }
 
@@ -363,17 +363,17 @@ public class VectorI3FTTest extends VectorI3TContract
       final VectorI3FT<A> v = new VectorI3FT<A>(x, y, z);
 
       Assert
-        .assertTrue(VectorI3F.clamp(v, minimum, maximum).getXF() <= maximum);
+        .assertTrue(VectorI3FT.clamp(v, minimum, maximum).getXF() <= maximum);
       Assert
-        .assertTrue(VectorI3F.clamp(v, minimum, maximum).getXF() >= minimum);
+        .assertTrue(VectorI3FT.clamp(v, minimum, maximum).getXF() >= minimum);
       Assert
-        .assertTrue(VectorI3F.clamp(v, minimum, maximum).getYF() <= maximum);
+        .assertTrue(VectorI3FT.clamp(v, minimum, maximum).getYF() <= maximum);
       Assert
-        .assertTrue(VectorI3F.clamp(v, minimum, maximum).getYF() >= minimum);
+        .assertTrue(VectorI3FT.clamp(v, minimum, maximum).getYF() >= minimum);
       Assert
-        .assertTrue(VectorI3F.clamp(v, minimum, maximum).getZF() <= maximum);
+        .assertTrue(VectorI3FT.clamp(v, minimum, maximum).getZF() <= maximum);
       Assert
-        .assertTrue(VectorI3F.clamp(v, minimum, maximum).getZF() >= minimum);
+        .assertTrue(VectorI3FT.clamp(v, minimum, maximum).getZF() >= minimum);
     }
   }
 
@@ -389,7 +389,7 @@ public class VectorI3FTTest extends VectorI3TContract
       final VectorI3FT<A> v = new VectorI3FT<A>(x, y, z);
       final VectorI3FT<A> vc = new VectorI3FT<A>(v);
 
-      Assert.assertTrue(VectorI3F.almostEqual(ec, v, vc));
+      Assert.assertTrue(VectorI3FT.almostEqual(ec, v, vc));
     }
   }
 
@@ -414,15 +414,15 @@ public class VectorI3FTTest extends VectorI3TContract
       final VectorI3FT<A> vr =
         VectorI3FT.normalize(VectorI3FT.crossProduct(v0, v1));
 
-      final double dp0 = VectorI3F.dotProduct(v0, vr);
-      final double dp1 = VectorI3F.dotProduct(v1, vr);
+      final double dp0 = VectorI3FT.dotProduct(v0, vr);
+      final double dp1 = VectorI3FT.dotProduct(v1, vr);
 
       System.out.println("v0      : " + v0);
-      System.out.println("mag(v0) : " + VectorI3F.magnitude(v0));
+      System.out.println("mag(v0) : " + VectorI3FT.magnitude(v0));
       System.out.println("v1      : " + v1);
-      System.out.println("mag(v1) : " + VectorI3F.magnitude(v1));
+      System.out.println("mag(v1) : " + VectorI3FT.magnitude(v1));
       System.out.println("vr      : " + vr);
-      System.out.println("mag(vr) : " + VectorI3F.magnitude(vr));
+      System.out.println("mag(vr) : " + VectorI3FT.magnitude(vr));
       System.out.println("dp0     : " + dp0);
       System.out.println("dp1     : " + dp1);
 
@@ -436,7 +436,7 @@ public class VectorI3FTTest extends VectorI3TContract
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
     final VectorI3FT<A> v = new VectorI3FT<A>();
-    VectorI3F.almostEqual(context, v, new VectorI3FT<A>(0, 0, 0));
+    VectorI3FT.almostEqual(context, v, new VectorI3FT<A>(0, 0, 0));
   }
 
   @Override @Test public <A> void testDistance()
@@ -447,7 +447,7 @@ public class VectorI3FTTest extends VectorI3TContract
     final ContextRelative context = new AlmostEqualFloat.ContextRelative();
     Assert.assertTrue(AlmostEqualFloat.almostEqual(
       context,
-      VectorI3F.distance(v0, v1),
+      VectorI3FT.distance(v0, v1),
       1.0f));
   }
 
@@ -464,7 +464,7 @@ public class VectorI3FTTest extends VectorI3TContract
       final float z1 = (float) (Math.random() * Float.MAX_VALUE);
       final VectorI3FT<A> v1 = new VectorI3FT<A>(x1, y1, z1);
 
-      Assert.assertTrue(VectorI3F.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(VectorI3FT.distance(v0, v1) >= 0.0);
     }
   }
 
@@ -474,7 +474,7 @@ public class VectorI3FTTest extends VectorI3TContract
     final VectorI3FT<A> v1 = new VectorI3FT<A>(10.0f, 10.0f, 10.0f);
 
     {
-      final double p = VectorI3F.dotProduct(v0, v1);
+      final double p = VectorI3FT.dotProduct(v0, v1);
       Assert.assertTrue(v0.getXF() == 10.0f);
       Assert.assertTrue(v0.getYF() == 10.0f);
       Assert.assertTrue(v0.getZF() == 10.0f);
@@ -485,7 +485,7 @@ public class VectorI3FTTest extends VectorI3TContract
     }
 
     {
-      final double p = VectorI3F.dotProduct(v0, v0);
+      final double p = VectorI3FT.dotProduct(v0, v0);
       Assert.assertTrue(v0.getXF() == 10.0f);
       Assert.assertTrue(v0.getYF() == 10.0f);
       Assert.assertTrue(v0.getZF() == 10.0f);
@@ -493,7 +493,7 @@ public class VectorI3FTTest extends VectorI3TContract
     }
 
     {
-      final double p = VectorI3F.dotProduct(v1, v1);
+      final double p = VectorI3FT.dotProduct(v1, v1);
       Assert.assertTrue(v1.getXF() == 10.0f);
       Assert.assertTrue(v1.getYF() == 10.0f);
       Assert.assertTrue(v1.getZF() == 10.0f);
@@ -512,10 +512,10 @@ public class VectorI3FTTest extends VectorI3TContract
     final VectorI3FT<A> vpz = new VectorI3FT<A>(0.0f, 0.0f, 1.0f);
     final VectorI3FT<A> vmz = new VectorI3FT<A>(0.0f, 0.0f, -1.0f);
 
-    Assert.assertTrue(VectorI3F.dotProduct(vpx, vpy) == 0.0);
-    Assert.assertTrue(VectorI3F.dotProduct(vpy, vpz) == 0.0);
-    Assert.assertTrue(VectorI3F.dotProduct(vmx, vmy) == 0.0);
-    Assert.assertTrue(VectorI3F.dotProduct(vmy, vmz) == 0.0);
+    Assert.assertTrue(VectorI3FT.dotProduct(vpx, vpy) == 0.0);
+    Assert.assertTrue(VectorI3FT.dotProduct(vpy, vpz) == 0.0);
+    Assert.assertTrue(VectorI3FT.dotProduct(vmx, vmy) == 0.0);
+    Assert.assertTrue(VectorI3FT.dotProduct(vmy, vmz) == 0.0);
   }
 
   @Override @Test public <A> void testDotProductSelf()
@@ -528,7 +528,7 @@ public class VectorI3FTTest extends VectorI3TContract
       final float y = (float) Math.random();
       final float z = (float) Math.random();
       final VectorI3FT<A> q = new VectorI3FT<A>(x, y, z);
-      final double dp = VectorI3F.dotProduct(q, q);
+      final double dp = VectorI3FT.dotProduct(q, q);
 
       System.out.println("q  : " + q);
       System.out.println("dp : " + dp);
@@ -548,8 +548,8 @@ public class VectorI3FTTest extends VectorI3TContract
       final float z = (float) Math.random();
       final VectorI3FT<A> q = new VectorI3FT<A>(x, y, z);
 
-      final double ms = VectorI3F.magnitudeSquared(q);
-      final double dp = VectorI3F.dotProduct(q, q);
+      final double ms = VectorI3FT.magnitudeSquared(q);
+      final double dp = VectorI3FT.dotProduct(q, q);
 
       System.out.println("q  : " + q);
       System.out.println("ms : " + ms);
@@ -715,13 +715,13 @@ public class VectorI3FTTest extends VectorI3TContract
       final float z1 = (float) (Math.random() * Float.MAX_VALUE);
       final VectorI3FT<A> v1 = new VectorI3FT<A>(x1, y1, z1);
 
-      Assert.assertTrue(VectorI3F.almostEqual(
+      Assert.assertTrue(VectorI3FT.almostEqual(
         ec,
-        VectorI3F.interpolateLinear(v0, v1, 0.0f),
+        VectorI3FT.interpolateLinear(v0, v1, 0.0f),
         v0));
-      Assert.assertTrue(VectorI3F.almostEqual(
+      Assert.assertTrue(VectorI3FT.almostEqual(
         ec,
-        VectorI3F.interpolateLinear(v0, v1, 1.0f),
+        VectorI3FT.interpolateLinear(v0, v1, 1.0f),
         v1));
     }
   }
@@ -734,7 +734,7 @@ public class VectorI3FTTest extends VectorI3TContract
       final float z = (float) (1.0f + (Math.random() * Float.MAX_VALUE));
       final VectorI3FT<A> v = new VectorI3FT<A>(x, y, z);
 
-      final double m = VectorI3F.magnitude(v);
+      final double m = VectorI3FT.magnitude(v);
       Assert.assertTrue(m > 0.0f);
     }
   }
@@ -754,7 +754,7 @@ public class VectorI3FTTest extends VectorI3TContract
       final VectorI3FT<A> vr = VectorI3FT.normalize(v);
       Assert.assertNotSame(v, vr);
 
-      final double m = VectorI3F.magnitude(vr);
+      final double m = VectorI3FT.magnitude(vr);
 
       System.out.println("v  : " + v);
       System.out.println("vr : " + vr);
@@ -771,7 +771,7 @@ public class VectorI3FTTest extends VectorI3TContract
 
     final VectorI3FT<A> v = new VectorI3FT<A>(0.0f, 0.0f, 0.0f);
     final VectorI3FT<A> vr = VectorI3FT.normalize(v);
-    final double m = VectorI3F.magnitude(vr);
+    final double m = VectorI3FT.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
@@ -781,7 +781,7 @@ public class VectorI3FTTest extends VectorI3TContract
       TestUtilities.getDoubleEqualityContext();
 
     final VectorI3FT<A> v = new VectorI3FT<A>(1.0f, 0.0f, 0.0f);
-    final double m = VectorI3F.magnitude(v);
+    final double m = VectorI3FT.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
@@ -790,9 +790,9 @@ public class VectorI3FTTest extends VectorI3TContract
     final VectorI3FT<A> v = new VectorI3FT<A>(8.0f, 0.0f, 0.0f);
 
     {
-      final double p = VectorI3F.dotProduct(v, v);
-      final double q = VectorI3F.magnitudeSquared(v);
-      final double r = VectorI3F.magnitude(v);
+      final double p = VectorI3FT.dotProduct(v, v);
+      final double q = VectorI3FT.magnitudeSquared(v);
+      final double r = VectorI3FT.magnitude(v);
       Assert.assertTrue(p == 64.0f);
       Assert.assertTrue(q == 64.0f);
       Assert.assertTrue(r == 8.0f);
@@ -805,7 +805,7 @@ public class VectorI3FTTest extends VectorI3TContract
       TestUtilities.getDoubleEqualityContext();
 
     final VectorI3FT<A> v = new VectorI3FT<A>(0.0f, 0.0f, 0.0f);
-    final double m = VectorI3F.magnitude(v);
+    final double m = VectorI3FT.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
@@ -813,7 +813,7 @@ public class VectorI3FTTest extends VectorI3TContract
   {
     final VectorI3FT<A> v0 = new VectorI3FT<A>(8.0f, 0.0f, 0.0f);
     final VectorI3FT<A> vr = VectorI3FT.normalize(v0);
-    final float m = VectorI3F.magnitude(vr);
+    final float m = VectorI3FT.magnitude(vr);
     Assert.assertTrue(m == 1.0);
   }
 
@@ -823,7 +823,7 @@ public class VectorI3FTTest extends VectorI3TContract
       TestUtilities.getSingleEqualityContext();
 
     final VectorI3FT<A> v0 = new VectorI3FT<A>(0.0f, 0.0f, 0.0f);
-    VectorI3F.almostEqual(ec, VectorI3F.normalize(v0), v0);
+    VectorI3FT.almostEqual(ec, VectorI3FT.normalize(v0), v0);
   }
 
   @Override @Test public <A> void testOrthonormalize()
@@ -843,14 +843,14 @@ public class VectorI3FTTest extends VectorI3TContract
       final VectorI3FT<A> p = new VectorI3FT<A>(1.0f, 0.0f, 0.0f);
       final VectorI3FT<A> q = new VectorI3FT<A>(0.0f, 1.0f, 0.0f);
       final VectorI3FT<A> r = VectorI3FT.projection(p, q);
-      Assert.assertTrue(VectorI3F.magnitude(r) == 0.0);
+      Assert.assertTrue(VectorI3FT.magnitude(r) == 0.0);
     }
 
     {
       final VectorI3FT<A> p = new VectorI3FT<A>(-1.0f, 0.0f, 0.0f);
       final VectorI3FT<A> q = new VectorI3FT<A>(0.0f, 1.0f, 0.0f);
       final VectorI3FT<A> r = VectorI3FT.projection(p, q);
-      Assert.assertTrue(VectorI3F.magnitude(r) == 0.0);
+      Assert.assertTrue(VectorI3FT.magnitude(r) == 0.0);
     }
   }
 
