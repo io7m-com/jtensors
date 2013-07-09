@@ -19,22 +19,26 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import com.io7m.jaux.AlmostEqualDouble;
-import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
+import com.io7m.jaux.AlmostEqualFloat;
 import com.io7m.jaux.functional.Pair;
 
 /**
  * <p>
- * A two-dimensional mutable vector type with double precision elements.
+ * A three-dimensional mutable vector type with single precision elements.
  * </p>
- * 
+ * <p>
+ * The intention of the type parameter <code>A</code> is to be used as a
+ * "phantom type" or compile-time tag to statically distinguish between
+ * semantically distinct vectors.
+ * </p>
  * <p>
  * Values of this type cannot be accessed safely from multiple threads without
  * explicit synchronization.
  * </p>
  */
 
-@NotThreadSafe public final class VectorM2D implements VectorReadable2D
+@NotThreadSafe public final class VectorM3FT<A> implements
+  VectorReadable3FT<A>
 {
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>,
@@ -45,17 +49,19 @@ import com.io7m.jaux.functional.Pair;
    * @param out
    *          The output vector
    * 
-   * @return <code>(abs v.x, abs v.y)</code>
+   * @return <code>(abs v.x, abs v.y, abs v.z)</code>
    */
 
-  public static @Nonnull VectorM2D absolute(
-    final @Nonnull VectorReadable2D v,
-    final @Nonnull VectorM2D out)
+  public static @Nonnull <A> VectorM3FT<A> absolute(
+    final @Nonnull VectorReadable3FT<A> v,
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double x = Math.abs(v.getXD());
-    final double y = Math.abs(v.getYD());
+    final float x = Math.abs(v.getXF());
+    final float y = Math.abs(v.getYF());
+    final float z = Math.abs(v.getZF());
     out.x = x;
     out.y = y;
+    out.z = z;
     return out;
   }
 
@@ -66,13 +72,13 @@ import com.io7m.jaux.functional.Pair;
    * @param v
    *          The input vector
    * 
-   * @return <code>(abs v.x, abs v.y)</code>
+   * @return <code>(abs v.x, abs v.y, abs v.z)</code>
    */
 
-  public static @Nonnull VectorM2D absoluteInPlace(
-    final @Nonnull VectorM2D v)
+  public static @Nonnull <A> VectorM3FT<A> absoluteInPlace(
+    final @Nonnull VectorM3FT<A> v)
   {
-    return VectorM2D.absolute(v, v);
+    return VectorM3FT.absolute(v, v);
   }
 
   /**
@@ -86,18 +92,20 @@ import com.io7m.jaux.functional.Pair;
    * @param out
    *          The output vector
    * 
-   * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
+   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
    */
 
-  public static @Nonnull VectorM2D add(
-    final @Nonnull VectorReadable2D v0,
-    final @Nonnull VectorReadable2D v1,
-    final @Nonnull VectorM2D out)
+  public static @Nonnull <A> VectorM3FT<A> add(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1,
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double x = v0.getXD() + v1.getXD();
-    final double y = v0.getYD() + v1.getYD();
+    final float x = v0.getXF() + v1.getXF();
+    final float y = v0.getYF() + v1.getYF();
+    final float z = v0.getZF() + v1.getZF();
     out.x = x;
     out.y = y;
+    out.z = z;
     return out;
   }
 
@@ -110,14 +118,14 @@ import com.io7m.jaux.functional.Pair;
    * @param v1
    *          The right input vector
    * 
-   * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
+   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
    */
 
-  public static @Nonnull VectorM2D addInPlace(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorReadable2D v1)
+  public static @Nonnull <A> VectorM3FT<A> addInPlace(
+    final @Nonnull VectorM3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1)
   {
-    return VectorM2D.add(v0, v1, v0);
+    return VectorM3FT.add(v0, v1, v0);
   }
 
   /**
@@ -134,19 +142,21 @@ import com.io7m.jaux.functional.Pair;
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
+   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
    */
 
-  public static @Nonnull VectorM2D addScaled(
-    final @Nonnull VectorReadable2D v0,
-    final @Nonnull VectorReadable2D v1,
+  public static @Nonnull <A> VectorM3FT<A> addScaled(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1,
     final double r,
-    final @Nonnull VectorM2D out)
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double x = v0.getXD() + (v1.getXD() * r);
-    final double y = v0.getYD() + (v1.getYD() * r);
+    final float x = (float) (v0.getXF() + (v1.getXF() * r));
+    final float y = (float) (v0.getYF() + (v1.getYF() * r));
+    final float z = (float) (v0.getZF() + (v1.getZF() * r));
     out.x = x;
     out.y = y;
+    out.z = z;
     return out;
   }
 
@@ -162,67 +172,44 @@ import com.io7m.jaux.functional.Pair;
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
+   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
    */
 
-  public static @Nonnull VectorM2D addScaledInPlace(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorReadable2D v1,
+  public static @Nonnull <A> VectorM3FT<A> addScaledInPlace(
+    final @Nonnull VectorM3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1,
     final double r)
   {
-    return VectorM2D.addScaled(v0, v1, r, v0);
+    return VectorM3FT.addScaled(v0, v1, r, v0);
   }
 
   /**
-   * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
+   * Determine whether or not the vectors <code>va</code> and <code>vb</code>
    * are equal to within the degree of error given in <code>context</code>.
    * 
-   * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
+   * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
    * 
    * @param context
    *          The equality context
-   * @param qa
+   * @param va
    *          The left input vector
-   * @param qb
+   * @param vb
    *          The right input vector
-   * @since 5.0.0
+   * 
    */
 
-  public static boolean almostEqual(
-    final @Nonnull ContextRelative context,
-    final @Nonnull VectorReadable2D qa,
-    final @Nonnull VectorReadable2D qb)
+  public static <A> boolean almostEqual(
+    final @Nonnull AlmostEqualFloat.ContextRelative context,
+    final @Nonnull VectorReadable3FT<A> va,
+    final @Nonnull VectorReadable3FT<A> vb)
   {
     final boolean xs =
-      AlmostEqualDouble.almostEqual(context, qa.getXD(), qb.getXD());
+      AlmostEqualFloat.almostEqual(context, va.getXF(), vb.getXF());
     final boolean ys =
-      AlmostEqualDouble.almostEqual(context, qa.getYD(), qb.getYD());
-    return xs && ys;
-  }
-
-  /**
-   * Calculate the angle between vectors <code>v0</code> and <code>v1</code>,
-   * in radians.
-   * 
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * 
-   * @return The angle between the two vectors, in radians.
-   */
-
-  public static double angle(
-    final @Nonnull VectorReadable2D v0,
-    final @Nonnull VectorReadable2D v1)
-  {
-    final double m0 = VectorM2D.magnitude(v0);
-    final double m1 = VectorM2D.magnitude(v1);
-    final double dp =
-      Math.min(Math.max(-1.0, VectorM2D.dotProduct(v0, v1)), 1.0);
-    final double f = m0 * m1;
-    final double r = dp / f;
-    return Math.acos(r);
+      AlmostEqualFloat.almostEqual(context, va.getYF(), vb.getYF());
+    final boolean zs =
+      AlmostEqualFloat.almostEqual(context, va.getZF(), vb.getZF());
+    return xs && ys && zs;
   }
 
   /**
@@ -243,16 +230,18 @@ import com.io7m.jaux.functional.Pair;
    *         and at least <code>minimum</code>
    */
 
-  public static @Nonnull VectorM2D clamp(
-    final @Nonnull VectorReadable2D v,
-    final double minimum,
-    final double maximum,
-    final @Nonnull VectorM2D out)
+  public static @Nonnull <A> VectorM3FT<A> clamp(
+    final @Nonnull VectorReadable3FT<A> v,
+    final float minimum,
+    final float maximum,
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double x = Math.min(Math.max(v.getXD(), minimum), maximum);
-    final double y = Math.min(Math.max(v.getYD(), minimum), maximum);
+    final float x = Math.min(Math.max(v.getXF(), minimum), maximum);
+    final float y = Math.min(Math.max(v.getYF(), minimum), maximum);
+    final float z = Math.min(Math.max(v.getZF(), minimum), maximum);
     out.x = x;
     out.y = y;
+    out.z = z;
     return out;
   }
 
@@ -270,21 +259,24 @@ import com.io7m.jaux.functional.Pair;
    * @param out
    *          The output vector
    * 
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))</code>
+   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public static @Nonnull VectorM2D clampByVector(
-    final @Nonnull VectorReadable2D v,
-    final @Nonnull VectorReadable2D minimum,
-    final @Nonnull VectorReadable2D maximum,
-    final @Nonnull VectorM2D out)
+  public static @Nonnull <A> VectorM3FT<A> clampByVector(
+    final @Nonnull VectorReadable3FT<A> v,
+    final @Nonnull VectorReadable3FT<A> minimum,
+    final @Nonnull VectorReadable3FT<A> maximum,
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double x =
-      Math.min(Math.max(v.getXD(), minimum.getXD()), maximum.getXD());
-    final double y =
-      Math.min(Math.max(v.getYD(), minimum.getYD()), maximum.getYD());
+    final float x =
+      Math.min(Math.max(v.getXF(), minimum.getXF()), maximum.getXF());
+    final float y =
+      Math.min(Math.max(v.getYF(), minimum.getYF()), maximum.getYF());
+    final float z =
+      Math.min(Math.max(v.getZF(), minimum.getZF()), maximum.getZF());
     out.x = x;
     out.y = y;
+    out.z = z;
     return out;
   }
 
@@ -300,15 +292,15 @@ import com.io7m.jaux.functional.Pair;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))</code>
+   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public static @Nonnull VectorM2D clampByVectorInPlace(
-    final @Nonnull VectorM2D v,
-    final @Nonnull VectorReadable2D minimum,
-    final @Nonnull VectorReadable2D maximum)
+  public static @Nonnull <A> VectorM3FT<A> clampByVectorInPlace(
+    final @Nonnull VectorM3FT<A> v,
+    final @Nonnull VectorReadable3FT<A> minimum,
+    final @Nonnull VectorReadable3FT<A> maximum)
   {
-    return VectorM2D.clampByVector(v, minimum, maximum, v);
+    return VectorM3FT.clampByVector(v, minimum, maximum, v);
   }
 
   /**
@@ -327,12 +319,12 @@ import com.io7m.jaux.functional.Pair;
    *         and at least <code>minimum</code>, in <code>v</code>
    */
 
-  public static @Nonnull VectorM2D clampInPlace(
-    final @Nonnull VectorM2D v,
-    final double minimum,
-    final double maximum)
+  public static @Nonnull <A> VectorM3FT<A> clampInPlace(
+    final @Nonnull VectorM3FT<A> v,
+    final float minimum,
+    final float maximum)
   {
-    return VectorM2D.clamp(v, minimum, maximum, v);
+    return VectorM3FT.clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -350,15 +342,17 @@ import com.io7m.jaux.functional.Pair;
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public static @Nonnull VectorM2D clampMaximum(
-    final @Nonnull VectorReadable2D v,
-    final double maximum,
-    final @Nonnull VectorM2D out)
+  public static @Nonnull <A> VectorM3FT<A> clampMaximum(
+    final @Nonnull VectorReadable3FT<A> v,
+    final float maximum,
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double x = Math.min(v.getXD(), maximum);
-    final double y = Math.min(v.getYD(), maximum);
+    final float x = Math.min(v.getXF(), maximum);
+    final float y = Math.min(v.getYF(), maximum);
+    final float z = Math.min(v.getZF(), maximum);
     out.x = x;
     out.y = y;
+    out.z = z;
     return out;
   }
 
@@ -374,18 +368,20 @@ import com.io7m.jaux.functional.Pair;
    * @param out
    *          The output vector
    * 
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
+   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
 
-  public static @Nonnull VectorM2D clampMaximumByVector(
-    final @Nonnull VectorReadable2D v,
-    final @Nonnull VectorReadable2D maximum,
-    final @Nonnull VectorM2D out)
+  public static @Nonnull <A> VectorM3FT<A> clampMaximumByVector(
+    final @Nonnull VectorReadable3FT<A> v,
+    final @Nonnull VectorReadable3FT<A> maximum,
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double x = Math.min(v.getXD(), maximum.getXD());
-    final double y = Math.min(v.getYD(), maximum.getYD());
+    final float x = Math.min(v.getXF(), maximum.getXF());
+    final float y = Math.min(v.getYF(), maximum.getYF());
+    final float z = Math.min(v.getZF(), maximum.getZF());
     out.x = x;
     out.y = y;
+    out.z = z;
     return out;
   }
 
@@ -399,14 +395,14 @@ import com.io7m.jaux.functional.Pair;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
+   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
 
-  public static @Nonnull VectorM2D clampMaximumByVectorInPlace(
-    final @Nonnull VectorM2D v,
-    final @Nonnull VectorReadable2D maximum)
+  public static @Nonnull <A> VectorM3FT<A> clampMaximumByVectorInPlace(
+    final @Nonnull VectorM3FT<A> v,
+    final @Nonnull VectorReadable3FT<A> maximum)
   {
-    return VectorM2D.clampMaximumByVector(v, maximum, v);
+    return VectorM3FT.clampMaximumByVector(v, maximum, v);
   }
 
   /**
@@ -423,11 +419,11 @@ import com.io7m.jaux.functional.Pair;
    *         , in <code>v</code>
    */
 
-  public static @Nonnull VectorM2D clampMaximumInPlace(
-    final @Nonnull VectorM2D v,
-    final double maximum)
+  public static @Nonnull <A> VectorM3FT<A> clampMaximumInPlace(
+    final @Nonnull VectorM3FT<A> v,
+    final float maximum)
   {
-    return VectorM2D.clampMaximum(v, maximum, v);
+    return VectorM3FT.clampMaximum(v, maximum, v);
   }
 
   /**
@@ -446,15 +442,17 @@ import com.io7m.jaux.functional.Pair;
    *         <code>minimum</code>
    */
 
-  public static @Nonnull VectorM2D clampMinimum(
-    final @Nonnull VectorReadable2D v,
-    final double minimum,
-    final @Nonnull VectorM2D out)
+  public static @Nonnull <A> VectorM3FT<A> clampMinimum(
+    final @Nonnull VectorReadable3FT<A> v,
+    final float minimum,
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double x = Math.max(v.getXD(), minimum);
-    final double y = Math.max(v.getYD(), minimum);
+    final float x = Math.max(v.getXF(), minimum);
+    final float y = Math.max(v.getYF(), minimum);
+    final float z = Math.max(v.getZF(), minimum);
     out.x = x;
     out.y = y;
+    out.z = z;
     return out;
   }
 
@@ -470,18 +468,20 @@ import com.io7m.jaux.functional.Pair;
    * @param minimum
    *          The vector containing the minimum acceptable values
    * 
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code>
+   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
    */
 
-  public static @Nonnull VectorM2D clampMinimumByVector(
-    final @Nonnull VectorReadable2D v,
-    final @Nonnull VectorReadable2D minimum,
-    final @Nonnull VectorM2D out)
+  public static @Nonnull <A> VectorM3FT<A> clampMinimumByVector(
+    final @Nonnull VectorReadable3FT<A> v,
+    final @Nonnull VectorReadable3FT<A> minimum,
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double x = Math.max(v.getXD(), minimum.getXD());
-    final double y = Math.max(v.getYD(), minimum.getYD());
+    final float x = Math.max(v.getXF(), minimum.getXF());
+    final float y = Math.max(v.getYF(), minimum.getYF());
+    final float z = Math.max(v.getZF(), minimum.getZF());
     out.x = x;
     out.y = y;
+    out.z = z;
     return out;
   }
 
@@ -495,15 +495,15 @@ import com.io7m.jaux.functional.Pair;
    * @param minimum
    *          The vector containing the minimum acceptable values
    * 
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code> , in
-   *         <code>v</code>
+   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
+   *         , in <code>v</code>
    */
 
-  public static @Nonnull VectorM2D clampMinimumByVectorInPlace(
-    final @Nonnull VectorM2D v,
-    final @Nonnull VectorReadable2D minimum)
+  public static @Nonnull <A> VectorM3FT<A> clampMinimumByVectorInPlace(
+    final @Nonnull VectorM3FT<A> v,
+    final @Nonnull VectorReadable3FT<A> minimum)
   {
-    return VectorM2D.clampMinimumByVector(v, minimum, v);
+    return VectorM3FT.clampMinimumByVector(v, minimum, v);
   }
 
   /**
@@ -520,11 +520,11 @@ import com.io7m.jaux.functional.Pair;
    *         <code>minimum</code>, in <code>v</code>.
    */
 
-  public static @Nonnull VectorM2D clampMinimumInPlace(
-    final @Nonnull VectorM2D v,
-    final double minimum)
+  public static @Nonnull <A> VectorM3FT<A> clampMinimumInPlace(
+    final @Nonnull VectorM3FT<A> v,
+    final float minimum)
   {
-    return VectorM2D.clampMinimum(v, minimum, v);
+    return VectorM3FT.clampMinimum(v, minimum, v);
   }
 
   /**
@@ -539,13 +539,41 @@ import com.io7m.jaux.functional.Pair;
    * @return output
    */
 
-  public static @Nonnull VectorM2D copy(
-    final @Nonnull VectorReadable2D input,
-    final @Nonnull VectorM2D output)
+  public static @Nonnull <A> VectorM3FT<A> copy(
+    final @Nonnull VectorReadable3FT<A> input,
+    final @Nonnull VectorM3FT<A> output)
   {
-    output.x = input.getXD();
-    output.y = input.getYD();
+    output.x = input.getXF();
+    output.y = input.getYF();
+    output.z = input.getZF();
     return output;
+  }
+
+  /**
+   * Return a vector perpendicular to both <code>v0</code> and <code>v1</code>
+   * , saving the result in <code>out</code>.
+   * 
+   * @param v0
+   *          The left input vector.
+   * @param v1
+   *          The right input vector.
+   * @param out
+   *          The output vector.
+   * @return out
+   */
+
+  public static @Nonnull <A> VectorM3FT<A> crossProduct(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1,
+    final @Nonnull VectorM3FT<A> out)
+  {
+    final float x = (v0.getYF() * v1.getZF()) - (v0.getZF() * v1.getYF());
+    final float y = (v0.getZF() * v1.getXF()) - (v0.getXF() * v1.getZF());
+    final float z = (v0.getXF() * v1.getYF()) - (v0.getYF() * v1.getXF());
+    out.x = x;
+    out.y = y;
+    out.z = z;
+    return out;
   }
 
   /**
@@ -560,12 +588,12 @@ import com.io7m.jaux.functional.Pair;
    * @return The distance between the two vectors.
    */
 
-  public static double distance(
-    final @Nonnull VectorReadable2D v0,
-    final @Nonnull VectorReadable2D v1)
+  public static <A> double distance(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1)
   {
-    final @Nonnull VectorM2D vr = new VectorM2D();
-    return VectorM2D.magnitude(VectorM2D.subtract(v0, v1, vr));
+    final @Nonnull VectorM3FT<A> vr = new VectorM3FT<A>();
+    return VectorM3FT.magnitude(VectorM3FT.subtract(v0, v1, vr));
   }
 
   /**
@@ -580,13 +608,14 @@ import com.io7m.jaux.functional.Pair;
    * @return The scalar product of the two vectors
    */
 
-  public static double dotProduct(
-    final @Nonnull VectorReadable2D v0,
-    final @Nonnull VectorReadable2D v1)
+  public static <A> double dotProduct(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1)
   {
-    final double x = v0.getXD() * v1.getXD();
-    final double y = v0.getYD() * v1.getYD();
-    return x + y;
+    final double x = v0.getXF() * v1.getXF();
+    final double y = v0.getYF() * v1.getYF();
+    final double z = v0.getZF() * v1.getZF();
+    return x + y + z;
   }
 
   /**
@@ -614,19 +643,19 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>r</code>
    */
 
-  public static @Nonnull VectorM2D interpolateLinear(
-    final @Nonnull VectorReadable2D v0,
-    final @Nonnull VectorReadable2D v1,
+  public static @Nonnull <A> VectorM3FT<A> interpolateLinear(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1,
     final double alpha,
-    final @Nonnull VectorM2D r)
+    final @Nonnull VectorM3FT<A> r)
   {
-    final @Nonnull VectorM2D w0 = new VectorM2D();
-    final @Nonnull VectorM2D w1 = new VectorM2D();
+    final @Nonnull VectorM3FT<A> w0 = new VectorM3FT<A>();
+    final @Nonnull VectorM3FT<A> w1 = new VectorM3FT<A>();
 
-    VectorM2D.scale(v0, 1.0 - alpha, w0);
-    VectorM2D.scale(v1, alpha, w1);
+    VectorM3FT.scale(v0, 1.0f - alpha, w0);
+    VectorM3FT.scale(v1, alpha, w1);
 
-    return VectorM2D.add(w0, w1, r);
+    return VectorM3FT.add(w0, w1, r);
   }
 
   /**
@@ -640,10 +669,10 @@ import com.io7m.jaux.functional.Pair;
    * @return The magnitude of the input vector
    */
 
-  public static double magnitude(
-    final @Nonnull VectorReadable2D v)
+  public static <A> float magnitude(
+    final @Nonnull VectorReadable3FT<A> v)
   {
-    return Math.sqrt(VectorM2D.magnitudeSquared(v));
+    return (float) Math.sqrt(VectorM3FT.magnitudeSquared(v));
   }
 
   /**
@@ -655,10 +684,10 @@ import com.io7m.jaux.functional.Pair;
    * @return The squared magnitude of the input vector
    */
 
-  public static double magnitudeSquared(
-    final @Nonnull VectorReadable2D v)
+  public static <A> double magnitudeSquared(
+    final @Nonnull VectorReadable3FT<A> v)
   {
-    return VectorM2D.dotProduct(v, v);
+    return VectorM3FT.dotProduct(v, v);
   }
 
   /**
@@ -674,17 +703,18 @@ import com.io7m.jaux.functional.Pair;
    * @return out
    */
 
-  public static @Nonnull VectorM2D normalize(
-    final @Nonnull VectorReadable2D v,
-    final @Nonnull VectorM2D out)
+  public static @Nonnull <A> VectorM3FT<A> normalize(
+    final @Nonnull VectorReadable3FT<A> v,
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double m = VectorM2D.magnitudeSquared(v);
+    final double m = VectorM3FT.magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return VectorM2D.scale(v, reciprocal, out);
+      return VectorM3FT.scale(v, reciprocal, out);
     }
-    out.x = v.getXD();
-    out.y = v.getYD();
+    out.x = v.getXF();
+    out.y = v.getYF();
+    out.z = v.getZF();
     return out;
   }
 
@@ -699,10 +729,10 @@ import com.io7m.jaux.functional.Pair;
    * @return v
    */
 
-  public static @Nonnull VectorM2D normalizeInPlace(
-    final @Nonnull VectorM2D v)
+  public static @Nonnull <A> VectorM3FT<A> normalizeInPlace(
+    final @Nonnull VectorM3FT<A> v)
   {
-    return VectorM2D.normalize(v, v);
+    return VectorM3FT.normalize(v, v);
   }
 
   /**
@@ -716,21 +746,24 @@ import com.io7m.jaux.functional.Pair;
    * 
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
    * 
-   * @since 5.0.0
+   * 
    */
 
-  public static @Nonnull Pair<VectorM2D, VectorM2D> orthoNormalize(
-    final @Nonnull VectorReadable2D v0,
-    final @Nonnull VectorReadable2D v1)
+  public static @Nonnull
+    <A>
+    Pair<VectorM3FT<A>, VectorM3FT<A>>
+    orthoNormalize(
+      final @Nonnull VectorReadable3FT<A> v0,
+      final @Nonnull VectorReadable3FT<A> v1)
   {
-    final VectorM2D v0n = new VectorM2D();
-    final VectorM2D vr = new VectorM2D();
-    final VectorM2D vp = new VectorM2D();
+    final VectorM3FT<A> v0n = new VectorM3FT<A>();
+    final VectorM3FT<A> vr = new VectorM3FT<A>();
+    final VectorM3FT<A> vp = new VectorM3FT<A>();
 
-    VectorM2D.normalize(v0, v0n);
-    VectorM2D.scale(v0n, VectorM2D.dotProduct(v1, v0n), vp);
-    VectorM2D.normalizeInPlace(VectorM2D.subtract(v1, vp, vr));
-    return new Pair<VectorM2D, VectorM2D>(v0n, vr);
+    VectorM3FT.normalize(v0, v0n);
+    VectorM3FT.scale(v0n, VectorM3FT.dotProduct(v1, v0n), vp);
+    VectorM3FT.normalizeInPlace(VectorM3FT.subtract(v1, vp, vr));
+    return new Pair<VectorM3FT<A>, VectorM3FT<A>>(v0n, vr);
   }
 
   /**
@@ -741,19 +774,19 @@ import com.io7m.jaux.functional.Pair;
    * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
    * 
-   * @since 5.0.0
+   * 
    */
 
-  public static void orthoNormalizeInPlace(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1)
+  public static <A> void orthoNormalizeInPlace(
+    final @Nonnull VectorM3FT<A> v0,
+    final @Nonnull VectorM3FT<A> v1)
   {
-    final VectorM2D projection = new VectorM2D();
+    final VectorM3FT<A> projection = new VectorM3FT<A>();
 
-    VectorM2D.normalizeInPlace(v0);
-    VectorM2D.scale(v0, VectorM2D.dotProduct(v1, v0), projection);
-    VectorM2D.subtractInPlace(v1, projection);
-    VectorM2D.normalizeInPlace(v1);
+    VectorM3FT.normalizeInPlace(v0);
+    VectorM3FT.scale(v0, VectorM3FT.dotProduct(v1, v0), projection);
+    VectorM3FT.subtractInPlace(v1, projection);
+    VectorM3FT.normalizeInPlace(v1);
   }
 
   /**
@@ -763,16 +796,16 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public static @Nonnull VectorM2D projection(
-    final @Nonnull VectorReadable2D p,
-    final @Nonnull VectorReadable2D q,
-    final @Nonnull VectorM2D r)
+  public static @Nonnull <A> VectorM3FT<A> projection(
+    final @Nonnull VectorReadable3FT<A> p,
+    final @Nonnull VectorReadable3FT<A> q,
+    final @Nonnull VectorM3FT<A> r)
   {
-    final double dot = VectorM2D.dotProduct(p, q);
-    final double qms = VectorM2D.magnitudeSquared(q);
+    final double dot = VectorM3FT.dotProduct(p, q);
+    final double qms = VectorM3FT.magnitudeSquared(q);
     final double s = dot / qms;
 
-    return VectorM2D.scale(p, s, r);
+    return VectorM3FT.scale(p, s, r);
   }
 
   /**
@@ -786,18 +819,20 @@ import com.io7m.jaux.functional.Pair;
    * @param out
    *          The output vector
    * 
-   * @return <code>(v.x * r, v.y * r)</code>
+   * @return <code>(v.x * r, v.y * r, v.z * r)</code>
    */
 
-  public static @Nonnull VectorM2D scale(
-    final @Nonnull VectorReadable2D v,
+  public static @Nonnull <A> VectorM3FT<A> scale(
+    final @Nonnull VectorReadable3FT<A> v,
     final double r,
-    final @Nonnull VectorM2D out)
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double x = v.getXD() * r;
-    final double y = v.getYD() * r;
-    out.x = x;
-    out.y = y;
+    final double x = v.getXF() * r;
+    final double y = v.getYF() * r;
+    final double z = v.getZF() * r;
+    out.x = (float) x;
+    out.y = (float) y;
+    out.z = (float) z;
     return out;
   }
 
@@ -810,14 +845,14 @@ import com.io7m.jaux.functional.Pair;
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v.x * r, v.y * r)</code>
+   * @return <code>(v.x * r, v.y * r, v.z * r)</code>
    */
 
-  public static @Nonnull VectorM2D scaleInPlace(
-    final @Nonnull VectorM2D v,
+  public static @Nonnull <A> VectorM3FT<A> scaleInPlace(
+    final @Nonnull VectorM3FT<A> v,
     final double r)
   {
-    return VectorM2D.scale(v, r, v);
+    return VectorM3FT.scale(v, r, v);
   }
 
   /**
@@ -831,18 +866,20 @@ import com.io7m.jaux.functional.Pair;
    * @param out
    *          The output vector
    * 
-   * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
+   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
    */
 
-  public static @Nonnull VectorM2D subtract(
-    final @Nonnull VectorReadable2D v0,
-    final @Nonnull VectorReadable2D v1,
-    final @Nonnull VectorM2D out)
+  public static @Nonnull <A> VectorM3FT<A> subtract(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1,
+    final @Nonnull VectorM3FT<A> out)
   {
-    final double x = v0.getXD() - v1.getXD();
-    final double y = v0.getYD() - v1.getYD();
+    final float x = v0.getXF() - v1.getXF();
+    final float y = v0.getYF() - v1.getYF();
+    final float z = v0.getZF() - v1.getZF();
     out.x = x;
     out.y = y;
+    out.z = z;
     return out;
   }
 
@@ -855,25 +892,26 @@ import com.io7m.jaux.functional.Pair;
    * @param v1
    *          The right input vector
    * 
-   * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
+   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
    */
 
-  public static @Nonnull VectorM2D subtractInPlace(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorReadable2D v1)
+  public static @Nonnull <A> VectorM3FT<A> subtractInPlace(
+    final @Nonnull VectorM3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1)
   {
-    return VectorM2D.subtract(v0, v1, v0);
+    return VectorM3FT.subtract(v0, v1, v0);
   }
 
-  public double x = 0.0;
-  public double y = 0.0;
+  private float x = 0.0f;
+  private float y = 0.0f;
+  private float z = 0.0f;
 
   /**
    * Default constructor, initializing the vector with values
-   * <code>[0.0, 0.0]</code>.
+   * <code>[0.0, 0.0, 0.0]</code>.
    */
 
-  public VectorM2D()
+  public VectorM3FT()
   {
 
   }
@@ -882,12 +920,14 @@ import com.io7m.jaux.functional.Pair;
    * Construct a vector initialized with the given values.
    */
 
-  public VectorM2D(
-    final double x,
-    final double y)
+  public VectorM3FT(
+    final float x,
+    final float y,
+    final float z)
   {
     this.x = x;
     this.y = y;
+    this.z = z;
   }
 
   /**
@@ -895,11 +935,12 @@ import com.io7m.jaux.functional.Pair;
    * <code>v</code>.
    */
 
-  public VectorM2D(
-    final @Nonnull VectorReadable2D v)
+  public VectorM3FT(
+    final @Nonnull VectorReadable3FT<A> v)
   {
-    this.x = v.getXD();
-    this.y = v.getYD();
+    this.x = v.getXF();
+    this.y = v.getYF();
+    this.z = v.getZF();
   }
 
   @Override public boolean equals(
@@ -914,45 +955,85 @@ import com.io7m.jaux.functional.Pair;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final @Nonnull VectorM2D other = (VectorM2D) obj;
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
+
+    @SuppressWarnings("unchecked") final @Nonnull VectorM3FT<A> other =
+      (VectorM3FT<A>) obj;
+    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
       return false;
     }
-    if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
+    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
+      return false;
+    }
+    if (Float.floatToIntBits(this.z) != Float.floatToIntBits(other.z)) {
       return false;
     }
     return true;
   }
 
-  @Override public double getXD()
+  @Override public float getXF()
   {
     return this.x;
   }
 
-  @Override public double getYD()
+  @Override public float getYF()
   {
     return this.y;
+  }
+
+  @Override public float getZF()
+  {
+    return this.z;
   }
 
   @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
-    long temp;
-    temp = Double.doubleToLongBits(this.x);
-    result = (prime * result) + (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(this.y);
-    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    result = (prime * result) + Float.floatToIntBits(this.x);
+    result = (prime * result) + Float.floatToIntBits(this.y);
+    result = (prime * result) + Float.floatToIntBits(this.z);
     return result;
+  }
+
+  /**
+   * Set the value of the <code>x</code> component to the given value.
+   */
+
+  public void setXF(
+    final float x)
+  {
+    this.x = x;
+  }
+
+  /**
+   * Set the value of the <code>y</code> component to the given value.
+   */
+
+  public void setYF(
+    final float y)
+  {
+    this.y = y;
+  }
+
+  /**
+   * Set the value of the <code>z</code> component to the given value.
+   */
+
+  public void setZF(
+    final float z)
+  {
+    this.z = z;
   }
 
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("[VectorM2D ");
+    builder.append("[VectorM3FT ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);
+    builder.append(" ");
+    builder.append(this.z);
     builder.append("]");
     return builder.toString();
   }

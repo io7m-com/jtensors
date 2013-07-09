@@ -113,6 +113,9 @@ public final class APICompleteness
       {
         VectorM2F.class,
         VectorM2I.class,
+        VectorM2DT.class,
+        VectorM2FT.class,
+        VectorM2IT.class,
         VectorI2D.class,
         VectorI2DT.class,
         VectorI2F.class,
@@ -130,7 +133,10 @@ public final class APICompleteness
       final Class<?> classes[] =
         {
           VectorM3F.class,
+          VectorM3FT.class,
           VectorM3I.class,
+          VectorM3IT.class,
+          VectorM3DT.class,
           VectorI3D.class,
           VectorI3DT.class,
           VectorI3F.class,
@@ -156,7 +162,10 @@ public final class APICompleteness
       final Class<?> classes[] =
         {
           VectorM4F.class,
+          VectorM4FT.class,
           VectorM4I.class,
+          VectorM4IT.class,
+          VectorM4DT.class,
           VectorI4D.class,
           VectorI4F.class,
           VectorI4I.class,
