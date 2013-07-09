@@ -43,6 +43,40 @@ import com.io7m.jaux.functional.Pair;
 @Immutable public final class VectorI2DT<A> implements VectorReadable2DT<A>
 {
   /**
+   * Calculate the absolute value of the vector <code>v</code>.
+   * 
+   * @param v
+   *          The input vector
+   * 
+   * @return <code>(abs v.x, abs v.y)</code>
+   */
+
+  public static final @Nonnull <A> VectorI2DT<A> absolute(
+    final @Nonnull VectorReadable2DT<A> v)
+  {
+    return new VectorI2DT<A>(Math.abs(v.getXD()), Math.abs(v.getYD()));
+  }
+
+  /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
+   * @param v0
+   *          The left input vector
+   * @param v1
+   *          The right input vector
+   * 
+   * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
+   */
+
+  public static final @Nonnull <A> VectorI2DT<A> add(
+    final @Nonnull VectorReadable2DT<A> v0,
+    final @Nonnull VectorReadable2DT<A> v1)
+  {
+    return new VectorI2DT<A>(v0.getXD() + v1.getXD(), v0.getYD() + v1.getYD());
+  }
+
+  /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>.
    * 
@@ -465,41 +499,8 @@ import com.io7m.jaux.functional.Pair;
   }
 
   private final double x;
+
   private final double y;
-
-  /**
-   * Calculate the absolute value of the vector <code>v</code>.
-   * 
-   * @param v
-   *          The input vector
-   * 
-   * @return <code>(abs v.x, abs v.y)</code>
-   */
-
-  public static final @Nonnull <A> VectorI2DT<A> absolute(
-    final @Nonnull VectorReadable2DT<A> v)
-  {
-    return new VectorI2DT<A>(Math.abs(v.getXD()), Math.abs(v.getYD()));
-  }
-
-  /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>.
-   * 
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * 
-   * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
-   */
-
-  public static final @Nonnull <A> VectorI2DT<A> add(
-    final @Nonnull VectorReadable2DT<A> v0,
-    final @Nonnull VectorReadable2DT<A> v1)
-  {
-    return new VectorI2DT<A>(v0.getXD() + v1.getXD(), v0.getYD() + v1.getYD());
-  }
 
   /**
    * Default constructor, initializing the vector with values <code>[0.0, 0.0,

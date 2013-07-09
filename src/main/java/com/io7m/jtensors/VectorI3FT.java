@@ -43,6 +43,46 @@ import com.io7m.jaux.functional.Pair;
 @Immutable public final class VectorI3FT<A> implements VectorReadable3FT<A>
 {
   /**
+   * Calculate the absolute value of the vector <code>v</code>.
+   * 
+   * @param v
+   *          The input vector
+   * 
+   * @return <code>(abs v.getXF(), abs v.getYF(), abs v.getZF())</code>
+   */
+
+  public static @Nonnull <A> VectorI3FT<A> absolute(
+    final @Nonnull VectorReadable3FT<A> v)
+  {
+    return new VectorI3FT<A>(
+      Math.abs(v.getXF()),
+      Math.abs(v.getYF()),
+      Math.abs(v.getZF()));
+  }
+
+  /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
+   * @param v0
+   *          The left input vector
+   * @param v1
+   *          The right input vector
+   * 
+   * @return <code>(v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF(), v0.getZF() + v1.getZF())</code>
+   */
+
+  public static @Nonnull <A> VectorI3FT<A> add(
+    final @Nonnull VectorReadable3FT<A> v0,
+    final @Nonnull VectorReadable3FT<A> v1)
+  {
+    return new VectorI3FT<A>(
+      v0.getXF() + v1.getXF(),
+      v0.getYF() + v1.getYF(),
+      v0.getZF() + v1.getZF());
+  }
+
+  /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>.
    * 
@@ -474,48 +514,10 @@ import com.io7m.jaux.functional.Pair;
   }
 
   private final float x;
+
   private final float y;
+
   private final float z;
-
-  /**
-   * Calculate the absolute value of the vector <code>v</code>.
-   * 
-   * @param v
-   *          The input vector
-   * 
-   * @return <code>(abs v.getXF(), abs v.getYF(), abs v.getZF())</code>
-   */
-
-  public static @Nonnull <A> VectorI3FT<A> absolute(
-    final @Nonnull VectorReadable3FT<A> v)
-  {
-    return new VectorI3FT<A>(
-      Math.abs(v.getXF()),
-      Math.abs(v.getYF()),
-      Math.abs(v.getZF()));
-  }
-
-  /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>.
-   * 
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * 
-   * @return <code>(v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF(), v0.getZF() + v1.getZF())</code>
-   */
-
-  public static @Nonnull <A> VectorI3FT<A> add(
-    final @Nonnull VectorReadable3FT<A> v0,
-    final @Nonnull VectorReadable3FT<A> v1)
-  {
-    return new VectorI3FT<A>(
-      v0.getXF() + v1.getXF(),
-      v0.getYF() + v1.getYF(),
-      v0.getZF() + v1.getZF());
-  }
 
   /**
    * Default constructor, initializing the vector with values

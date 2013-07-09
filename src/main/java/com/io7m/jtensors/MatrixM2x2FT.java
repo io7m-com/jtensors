@@ -18,7 +18,7 @@ package com.io7m.jtensors;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -27,13 +27,18 @@ import com.io7m.jaux.functional.Option;
 
 /**
  * <p>
- * A 2x2 mutable matrix type with double precision elements.
+ * A 2x2 mutable matrix type with single precision elements.
  * </p>
  * <p>
- * Values of type <code>MatrixM2x2D</code> are backed by direct memory, with
+ * Values of type <code>MatrixM2x2F</code> are backed by direct memory, with
  * the rows and columns of the matrices being stored in column-major format.
  * This allows the matrices to be passed to OpenGL directly, without requiring
  * transposition.
+ * </p>
+ * <p>
+ * The intention of the type parameter <code>A</code> is to be used as a
+ * "phantom type" or compile-time tag to statically distinguish between
+ * semantically distinct matrices.
  * </p>
  * <p>
  * Values of this type cannot be accessed safely from multiple threads without
@@ -45,11 +50,12 @@ import com.io7m.jaux.functional.Option;
  * </p>
  */
 
-@NotThreadSafe public final class MatrixM2x2D implements MatrixReadable2x2D
+@NotThreadSafe public final class MatrixM2x2FT<A> implements
+  MatrixReadable2x2FT<A>
 {
-  private static final double[] identity_row_0 = { 1.0, 0.0 };
-  private static final double[] identity_row_1 = { 0.0, 1.0 };
-  private static final double[] zero_row       = { 0.0, 0.0 };
+  private static final float[] identity_row_0 = { 1.0f, 0.0f };
+  private static final float[] identity_row_1 = { 0.0f, 1.0f };
+  private static final float[] zero_row       = { 0.0f, 0.0f };
 
   /**
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>.
@@ -63,13 +69,13 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D add(
-    final @Nonnull MatrixReadable2x2D m0,
-    final @Nonnull MatrixReadable2x2D m1,
-    final @Nonnull MatrixM2x2D out)
+  public static @Nonnull <A> MatrixM2x2FT<A> add(
+    final @Nonnull MatrixReadable2x2FT<A> m0,
+    final @Nonnull MatrixReadable2x2FT<A> m1,
+    final @Nonnull MatrixM2x2FT<A> out)
   {
-    final DoubleBuffer m0_view = m0.getDoubleBuffer();
-    final DoubleBuffer m1_view = m1.getDoubleBuffer();
+    final FloatBuffer m0_view = m0.getFloatBuffer();
+    final FloatBuffer m1_view = m1.getFloatBuffer();
 
     out.view.put(0, m0_view.get(0) + m1_view.get(0));
     out.view.put(1, m0_view.get(1) + m1_view.get(1));
@@ -84,6 +90,7 @@ import com.io7m.jaux.functional.Option;
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
    * returning the result in <code>m0</code>.
    * 
+   * @since 5.0.0
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -91,21 +98,21 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m0</code>
    */
 
-  public static MatrixM2x2D addInPlace(
-    final @Nonnull MatrixM2x2D m0,
-    final @Nonnull MatrixReadable2x2D m1)
+  public static @Nonnull <A> MatrixM2x2FT<A> addInPlace(
+    final @Nonnull MatrixM2x2FT<A> m0,
+    final @Nonnull MatrixReadable2x2FT<A> m1)
   {
-    return MatrixM2x2D.add(m0, m1, m0);
+    return MatrixM2x2FT.add(m0, m1, m0);
   }
 
-  public static MatrixM2x2D addRowScaled(
-    final @Nonnull MatrixM2x2D m,
+  public static @Nonnull <A> MatrixM2x2FT<A> addRowScaled(
+    final @Nonnull MatrixM2x2FT<A> m,
     final int row_a,
     final int row_b,
     final int row_c,
-    final double r)
+    final float r)
   {
-    return MatrixM2x2D.addRowScaled(m, row_a, row_b, row_c, r, m);
+    return MatrixM2x2FT.addRowScaled(m, row_a, row_b, row_c, r, m);
   }
 
   /**
@@ -134,38 +141,38 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D addRowScaled(
-    final @Nonnull MatrixReadable2x2D m,
+  public static @Nonnull <A> MatrixM2x2FT<A> addRowScaled(
+    final @Nonnull MatrixReadable2x2FT<A> m,
     final int row_a,
     final int row_b,
     final int row_c,
-    final double r,
-    final @Nonnull MatrixM2x2D out)
+    final float r,
+    final @Nonnull MatrixM2x2FT<A> out)
   {
-    return MatrixM2x2D.addRowScaledUnsafe(
+    return MatrixM2x2FT.addRowScaledUnsafe(
       m,
-      MatrixM2x2D.rowCheck(row_a),
-      MatrixM2x2D.rowCheck(row_b),
-      MatrixM2x2D.rowCheck(row_c),
+      MatrixM2x2FT.rowCheck(row_a),
+      MatrixM2x2FT.rowCheck(row_b),
+      MatrixM2x2FT.rowCheck(row_c),
       r,
       out);
   }
 
-  private static MatrixM2x2D addRowScaledUnsafe(
-    final @Nonnull MatrixReadable2x2D m,
+  private static @Nonnull <A> MatrixM2x2FT<A> addRowScaledUnsafe(
+    final @Nonnull MatrixReadable2x2FT<A> m,
     final int row_a,
     final int row_b,
     final int row_c,
-    final double r,
-    final @Nonnull MatrixM2x2D out)
+    final float r,
+    final @Nonnull MatrixM2x2FT<A> out)
   {
-    final @Nonnull VectorM2D va = new VectorM2D();
-    final @Nonnull VectorM2D vb = new VectorM2D();
-    MatrixM2x2D.rowUnsafe(m, row_a, va);
-    MatrixM2x2D.rowUnsafe(m, row_b, vb);
+    final @Nonnull VectorM2F va = new VectorM2F();
+    final @Nonnull VectorM2F vb = new VectorM2F();
+    MatrixM2x2FT.rowUnsafe(m, row_a, va);
+    MatrixM2x2FT.rowUnsafe(m, row_b, vb);
 
-    VectorM2D.addScaledInPlace(va, vb, r);
-    MatrixM2x2D.setRowUnsafe(out, row_c, va);
+    VectorM2F.addScaledInPlace(va, vb, r);
+    MatrixM2x2FT.setRowUnsafe(out, row_c, va);
 
     out.view.rewind();
     return out;
@@ -174,9 +181,9 @@ import com.io7m.jaux.functional.Option;
   private static int columnCheck(
     final int column)
   {
-    if ((column < 0) || (column > 1)) {
+    if ((column < 0) || (column >= MatrixM2x2FT.VIEW_COLS)) {
       throw new IndexOutOfBoundsException(
-        "column must be in the range 0 <= column < 2");
+        "column must be in the range 0 <= column < " + MatrixM2x2FT.VIEW_COLS);
     }
     return column;
   }
@@ -192,11 +199,11 @@ import com.io7m.jaux.functional.Option;
    * @return <code>output</code>
    */
 
-  public static MatrixM2x2D copy(
-    final @Nonnull MatrixReadable2x2D input,
-    final @Nonnull MatrixM2x2D output)
+  public static @Nonnull <A> MatrixM2x2FT<A> copy(
+    final @Nonnull MatrixReadable2x2FT<A> input,
+    final @Nonnull MatrixM2x2FT<A> output)
   {
-    final DoubleBuffer source_view = input.getDoubleBuffer();
+    final FloatBuffer source_view = input.getFloatBuffer();
 
     output.view.put(0, source_view.get(0));
     output.view.put(1, source_view.get(1));
@@ -214,36 +221,23 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static double determinant(
-    final @Nonnull MatrixReadable2x2D m)
+  public static <A> float determinant(
+    final @Nonnull MatrixReadable2x2FT<A> m)
   {
-    final double r0c0 = m.getRowColumnD(0, 0);
-    final double r0c1 = m.getRowColumnD(0, 1);
-    final double r1c0 = m.getRowColumnD(1, 0);
-    final double r1c1 = m.getRowColumnD(1, 1);
+    final float r0c0 = m.getRowColumnF(0, 0);
+    final float r0c1 = m.getRowColumnF(0, 1);
+    final float r1c0 = m.getRowColumnF(1, 0);
+    final float r1c1 = m.getRowColumnF(1, 1);
 
     return (r0c0 * r1c1) - (r0c1 * r1c0);
   }
 
-  /**
-   * Return a view of the buffer that backs this matrix.
-   * 
-   * @param m
-   *          The input matrix.
-   */
-
-  public static DoubleBuffer doubleBuffer(
-    final @Nonnull MatrixM2x2D m)
-  {
-    return m.view;
-  }
-
-  public static MatrixM2x2D exchangeRows(
-    final @Nonnull MatrixM2x2D m,
+  public static @Nonnull <A> MatrixM2x2FT<A> exchangeRows(
+    final @Nonnull MatrixM2x2FT<A> m,
     final int row_a,
     final int row_b)
   {
-    return MatrixM2x2D.exchangeRows(m, row_a, row_b, m);
+    return MatrixM2x2FT.exchangeRows(m, row_a, row_b, m);
   }
 
   /**
@@ -266,36 +260,49 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D exchangeRows(
-    final @Nonnull MatrixReadable2x2D m,
+  public static @Nonnull <A> MatrixM2x2FT<A> exchangeRows(
+    final @Nonnull MatrixReadable2x2FT<A> m,
     final int row_a,
     final int row_b,
-    final @Nonnull MatrixM2x2D out)
+    final @Nonnull MatrixM2x2FT<A> out)
   {
-    return MatrixM2x2D.exchangeRowsUnsafe(
+    return MatrixM2x2FT.exchangeRowsUnsafe(
       m,
-      MatrixM2x2D.rowCheck(row_a),
-      MatrixM2x2D.rowCheck(row_b),
+      MatrixM2x2FT.rowCheck(row_a),
+      MatrixM2x2FT.rowCheck(row_b),
       out);
   }
 
-  private static MatrixM2x2D exchangeRowsUnsafe(
-    final @Nonnull MatrixReadable2x2D m,
+  private static @Nonnull <A> MatrixM2x2FT<A> exchangeRowsUnsafe(
+    final @Nonnull MatrixReadable2x2FT<A> m,
     final int row_a,
     final int row_b,
-    final @Nonnull MatrixM2x2D out)
+    final @Nonnull MatrixM2x2FT<A> out)
   {
-    final @Nonnull VectorM2D va = new VectorM2D();
-    final @Nonnull VectorM2D vb = new VectorM2D();
+    final @Nonnull VectorM2F va = new VectorM2F();
+    final @Nonnull VectorM2F vb = new VectorM2F();
 
-    MatrixM2x2D.rowUnsafe(m, row_a, va);
-    MatrixM2x2D.rowUnsafe(m, row_b, vb);
+    MatrixM2x2FT.rowUnsafe(m, row_a, va);
+    MatrixM2x2FT.rowUnsafe(m, row_b, vb);
 
-    MatrixM2x2D.setRowUnsafe(out, row_a, vb);
-    MatrixM2x2D.setRowUnsafe(out, row_b, va);
+    MatrixM2x2FT.setRowUnsafe(out, row_a, vb);
+    MatrixM2x2FT.setRowUnsafe(out, row_b, va);
 
     out.view.rewind();
     return out;
+  }
+
+  /**
+   * Return a view of the buffer that backs this matrix.
+   * 
+   * @param m
+   *          The input matrix.
+   */
+
+  public static @Nonnull <A> FloatBuffer floatBuffer(
+    final @Nonnull MatrixM2x2FT<A> m)
+  {
+    return m.view;
   }
 
   /**
@@ -303,22 +310,22 @@ import com.io7m.jaux.functional.Option;
    * , column <code>column</code>.
    */
 
-  public static double get(
-    final @Nonnull MatrixReadable2x2D m,
+  public static <A> float get(
+    final @Nonnull MatrixReadable2x2FT<A> m,
     final int row,
     final int column)
   {
-    final DoubleBuffer source_view = m.getDoubleBuffer();
-    return source_view.get(MatrixM2x2D.indexChecked(row, column));
+    final FloatBuffer source_view = m.getFloatBuffer();
+    return source_view.get(MatrixM2x2FT.indexChecked(row, column));
   }
 
   private final static int indexChecked(
     final int row,
     final int column)
   {
-    return MatrixM2x2D.indexUnsafe(
-      MatrixM2x2D.rowCheck(row),
-      MatrixM2x2D.columnCheck(column));
+    return MatrixM2x2FT.indexUnsafe(
+      MatrixM2x2FT.rowCheck(row),
+      MatrixM2x2FT.columnCheck(column));
   }
 
   /**
@@ -338,10 +345,10 @@ import com.io7m.jaux.functional.Option;
     return (column * 2) + row;
   }
 
-  public static Option<MatrixM2x2D> invert(
-    final @Nonnull MatrixM2x2D m)
+  public static @Nonnull <A> Option<MatrixM2x2FT<A>> invert(
+    final @Nonnull MatrixM2x2FT<A> m)
   {
-    return MatrixM2x2D.invert(m, m);
+    return MatrixM2x2FT.invert(m, m);
   }
 
   /**
@@ -351,7 +358,7 @@ import com.io7m.jaux.functional.Option;
    * otherwise. It is not possible to invert a matrix that has a determinant
    * of <code>0</code>.
    * 
-   * @see MatrixM2x2D#determinant(MatrixReadable2x2D)
+   * @see MatrixM2x2FT<A>#determinant(MatrixReadable2x2FT<A>)
    * 
    * @param m
    *          The input matrix.
@@ -359,22 +366,22 @@ import com.io7m.jaux.functional.Option;
    *          The output matrix.
    */
 
-  public static Option<MatrixM2x2D> invert(
-    final @Nonnull MatrixReadable2x2D m,
-    final @Nonnull MatrixM2x2D out)
+  public static @Nonnull <A> Option<MatrixM2x2FT<A>> invert(
+    final @Nonnull MatrixReadable2x2FT<A> m,
+    final @Nonnull MatrixM2x2FT<A> out)
   {
-    final double d = MatrixM2x2D.determinant(m);
+    final float d = MatrixM2x2FT.determinant(m);
 
     if (d == 0) {
-      return new Option.None<MatrixM2x2D>();
+      return new Option.None<MatrixM2x2FT<A>>();
     }
 
-    final double d_inv = 1 / d;
+    final float d_inv = 1 / d;
 
-    final double r0c0 = m.getRowColumnD(1, 1) * d_inv;
-    final double r0c1 = -m.getRowColumnD(0, 1) * d_inv;
-    final double r1c0 = -m.getRowColumnD(1, 0) * d_inv;
-    final double r1c1 = m.getRowColumnD(0, 0) * d_inv;
+    final float r0c0 = m.getRowColumnF(1, 1) * d_inv;
+    final float r0c1 = -m.getRowColumnF(0, 1) * d_inv;
+    final float r1c0 = -m.getRowColumnF(1, 0) * d_inv;
+    final float r1c1 = m.getRowColumnF(0, 0) * d_inv;
 
     out.setUnsafe(0, 0, r0c0);
     out.setUnsafe(0, 1, r0c1);
@@ -382,7 +389,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(1, 1, r1c1);
     out.view.rewind();
 
-    return new Option.Some<MatrixM2x2D>(out);
+    return new Option.Some<MatrixM2x2FT<A>>(out);
   }
 
   /**
@@ -390,17 +397,17 @@ import com.io7m.jaux.functional.Option;
    * writing the result to <code>m0</code>.
    * 
    * @param m0
-   *          The left input matrix.
+   *          The left input vector.
    * @param m1
-   *          The right input matrix.
+   *          The right input vector.
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D multiply(
-    final @Nonnull MatrixM2x2D m0,
-    final @Nonnull MatrixReadable2x2D m1)
+  public static @Nonnull <A> MatrixM2x2FT<A> multiply(
+    final @Nonnull MatrixM2x2FT<A> m0,
+    final @Nonnull MatrixReadable2x2FT<A> m1)
   {
-    return MatrixM2x2D.multiply(m0, m1, m0);
+    return MatrixM2x2FT.multiply(m0, m1, m0);
   }
 
   /**
@@ -416,23 +423,23 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D multiply(
-    final @Nonnull MatrixReadable2x2D m0,
-    final @Nonnull MatrixReadable2x2D m1,
-    final @Nonnull MatrixM2x2D out)
+  public static @Nonnull <A> MatrixM2x2FT<A> multiply(
+    final @Nonnull MatrixReadable2x2FT<A> m0,
+    final @Nonnull MatrixReadable2x2FT<A> m1,
+    final @Nonnull MatrixM2x2FT<A> out)
   {
-    final double r0c0 =
-      (m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 0))
-        + (m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 1));
-    final double r0c1 =
-      (m0.getRowColumnD(0, 1) * m1.getRowColumnD(0, 0))
-        + (m0.getRowColumnD(1, 1) * m1.getRowColumnD(0, 1));
-    final double r1c0 =
-      (m0.getRowColumnD(0, 0) * m1.getRowColumnD(1, 0))
-        + (m0.getRowColumnD(1, 0) * m1.getRowColumnD(1, 1));
-    final double r1c1 =
-      (m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 0))
-        + (m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 1));
+    final float r0c0 =
+      (m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 0))
+        + (m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 1));
+    final float r0c1 =
+      (m0.getRowColumnF(0, 1) * m1.getRowColumnF(0, 0))
+        + (m0.getRowColumnF(1, 1) * m1.getRowColumnF(0, 1));
+    final float r1c0 =
+      (m0.getRowColumnF(0, 0) * m1.getRowColumnF(1, 0))
+        + (m0.getRowColumnF(1, 0) * m1.getRowColumnF(1, 1));
+    final float r1c1 =
+      (m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 0))
+        + (m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 1));
 
     out.setUnsafe(0, 0, r0c0);
     out.setUnsafe(0, 1, r0c1);
@@ -456,18 +463,18 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static VectorM2D multiplyVector2D(
-    final @Nonnull MatrixReadable2x2D m,
-    final @Nonnull VectorReadable2D v,
-    final @Nonnull VectorM2D out)
+  public static @Nonnull <A> VectorM2F multiplyVector2F(
+    final @Nonnull MatrixReadable2x2FT<A> m,
+    final @Nonnull VectorReadable2F v,
+    final @Nonnull VectorM2F out)
   {
-    final @Nonnull VectorM2D row = new VectorM2D();
-    final @Nonnull VectorM2D vi = new VectorM2D(v);
+    final @Nonnull VectorM2F row = new VectorM2F();
+    final @Nonnull VectorM2F vi = new VectorM2F(v);
 
-    m.getRow2D(0, row);
-    out.x = VectorM2D.dotProduct(row, vi);
-    m.getRow2D(1, row);
-    out.y = VectorM2D.dotProduct(row, vi);
+    m.getRow2F(0, row);
+    out.x = VectorM2F.dotProduct(row, vi);
+    m.getRow2F(1, row);
+    out.y = VectorM2F.dotProduct(row, vi);
 
     return out;
   }
@@ -477,31 +484,31 @@ import com.io7m.jaux.functional.Option;
    * <code>out</code>.
    */
 
-  public static VectorM2D row(
-    final @Nonnull MatrixReadable2x2D m,
+  public static @Nonnull <A> VectorM2F row(
+    final @Nonnull MatrixReadable2x2FT<A> m,
     final int row,
-    final @Nonnull VectorM2D out)
+    final @Nonnull VectorM2F out)
   {
-    return MatrixM2x2D.rowUnsafe(m, MatrixM2x2D.rowCheck(row), out);
+    return MatrixM2x2FT.rowUnsafe(m, MatrixM2x2FT.rowCheck(row), out);
   }
 
   private static int rowCheck(
     final int row)
   {
-    if ((row < 0) || (row > 1)) {
+    if ((row < 0) || (row >= MatrixM2x2FT.VIEW_ROWS)) {
       throw new IndexOutOfBoundsException(
-        "row must be in the range 0 <= row < 2");
+        "row must be in the range 0 <= row < " + MatrixM2x2FT.VIEW_ROWS);
     }
     return row;
   }
 
-  public static VectorM2D rowUnsafe(
-    final @Nonnull MatrixReadable2x2D m,
+  public static @Nonnull <A> VectorM2F rowUnsafe(
+    final @Nonnull MatrixReadable2x2FT<A> m,
     final int row,
-    final @Nonnull VectorM2D out)
+    final @Nonnull VectorM2F out)
   {
-    out.x = m.getRowColumnD(row, 0);
-    out.y = m.getRowColumnD(row, 1);
+    out.x = m.getRowColumnF(row, 0);
+    out.y = m.getRowColumnF(row, 1);
     return out;
   }
 
@@ -516,11 +523,11 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM2x2D scale(
-    final @Nonnull MatrixM2x2D m,
-    final double r)
+  public static @Nonnull <A> MatrixM2x2FT<A> scale(
+    final @Nonnull MatrixM2x2FT<A> m,
+    final float r)
   {
-    return MatrixM2x2D.scale(m, r, m);
+    return MatrixM2x2FT.scale(m, r, m);
   }
 
   /**
@@ -534,25 +541,25 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM2x2D scale(
-    final @Nonnull MatrixReadable2x2D m,
-    final double r,
-    final @Nonnull MatrixM2x2D out)
+  public static @Nonnull <A> MatrixM2x2FT<A> scale(
+    final @Nonnull MatrixReadable2x2FT<A> m,
+    final float r,
+    final @Nonnull MatrixM2x2FT<A> out)
   {
-    out.setUnsafe(0, 0, m.getRowColumnD(0, 0) * r);
-    out.setUnsafe(1, 0, m.getRowColumnD(1, 0) * r);
-    out.setUnsafe(0, 1, m.getRowColumnD(0, 1) * r);
-    out.setUnsafe(1, 1, m.getRowColumnD(1, 1) * r);
+    out.setUnsafe(0, 0, m.getRowColumnF(0, 0) * r);
+    out.setUnsafe(1, 0, m.getRowColumnF(1, 0) * r);
+    out.setUnsafe(0, 1, m.getRowColumnF(0, 1) * r);
+    out.setUnsafe(1, 1, m.getRowColumnF(1, 1) * r);
     out.view.rewind();
     return out;
   }
 
-  public static MatrixM2x2D scaleRow(
-    final @Nonnull MatrixM2x2D m,
+  public static @Nonnull <A> MatrixM2x2FT<A> scaleRow(
+    final @Nonnull MatrixM2x2FT<A> m,
     final int row,
-    final double r)
+    final float r)
   {
-    return MatrixM2x2D.scaleRowUnsafe(m, MatrixM2x2D.rowCheck(row), r, m);
+    return MatrixM2x2FT.scaleRowUnsafe(m, MatrixM2x2FT.rowCheck(row), r, m);
   }
 
   /**
@@ -576,27 +583,27 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D scaleRow(
-    final @Nonnull MatrixReadable2x2D m,
+  public static @Nonnull <A> MatrixM2x2FT<A> scaleRow(
+    final @Nonnull MatrixReadable2x2FT<A> m,
     final int row,
-    final double r,
-    final @Nonnull MatrixM2x2D out)
+    final float r,
+    final @Nonnull MatrixM2x2FT<A> out)
   {
-    return MatrixM2x2D.scaleRowUnsafe(m, MatrixM2x2D.rowCheck(row), r, out);
+    return MatrixM2x2FT.scaleRowUnsafe(m, MatrixM2x2FT.rowCheck(row), r, out);
   }
 
-  private static MatrixM2x2D scaleRowUnsafe(
-    final @Nonnull MatrixReadable2x2D m,
+  private static @Nonnull <A> MatrixM2x2FT<A> scaleRowUnsafe(
+    final @Nonnull MatrixReadable2x2FT<A> m,
     final int row,
-    final double r,
-    final @Nonnull MatrixM2x2D out)
+    final float r,
+    final @Nonnull MatrixM2x2FT<A> out)
   {
-    final @Nonnull VectorM2D v = new VectorM2D();
+    final @Nonnull VectorM2F v = new VectorM2F();
 
-    MatrixM2x2D.rowUnsafe(m, row, v);
-    VectorM2D.scaleInPlace(v, r);
+    MatrixM2x2FT.rowUnsafe(m, row, v);
+    VectorM2F.scaleInPlace(v, r);
 
-    MatrixM2x2D.setRowUnsafe(out, row, v);
+    MatrixM2x2FT.setRowUnsafe(out, row, v);
     return out;
   }
 
@@ -605,13 +612,13 @@ import com.io7m.jaux.functional.Option;
    * column <code>column</code> to <code>value</code>.
    */
 
-  public static MatrixM2x2D set(
-    final @Nonnull MatrixM2x2D m,
+  public static @Nonnull <A> MatrixM2x2FT<A> set(
+    final @Nonnull MatrixM2x2FT<A> m,
     final int row,
     final int column,
-    final double value)
+    final float value)
   {
-    m.view.put(MatrixM2x2D.indexChecked(row, column), value);
+    m.view.put(MatrixM2x2FT.indexChecked(row, column), value);
     m.view.rewind();
     return m;
   }
@@ -622,23 +629,23 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM2x2D setIdentity(
-    final @Nonnull MatrixM2x2D m)
+  public static @Nonnull <A> MatrixM2x2FT<A> setIdentity(
+    final @Nonnull MatrixM2x2FT<A> m)
   {
     m.view.clear();
-    m.view.put(MatrixM2x2D.identity_row_0);
-    m.view.put(MatrixM2x2D.identity_row_1);
+    m.view.put(MatrixM2x2FT.identity_row_0);
+    m.view.put(MatrixM2x2FT.identity_row_1);
     m.view.rewind();
     return m;
   }
 
-  private static void setRowUnsafe(
-    final @Nonnull MatrixM2x2D m,
+  private static <A> void setRowUnsafe(
+    final @Nonnull MatrixM2x2FT<A> m,
     final int row,
-    final @Nonnull VectorReadable2D v)
+    final @Nonnull VectorReadable2F v)
   {
-    m.setUnsafe(row, 0, v.getXD());
-    m.setUnsafe(row, 1, v.getYD());
+    m.setUnsafe(row, 0, v.getXF());
+    m.setUnsafe(row, 1, v.getYF());
     m.view.rewind();
   }
 
@@ -648,12 +655,12 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM2x2D setZero(
-    final @Nonnull MatrixM2x2D m)
+  public static @Nonnull <A> MatrixM2x2FT<A> setZero(
+    final @Nonnull MatrixM2x2FT<A> m)
   {
     m.view.clear();
-    m.view.put(MatrixM2x2D.zero_row);
-    m.view.put(MatrixM2x2D.zero_row);
+    m.view.put(MatrixM2x2FT.zero_row);
+    m.view.put(MatrixM2x2FT.zero_row);
     m.view.rewind();
     return m;
   }
@@ -667,12 +674,12 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM2x2D transpose(
-    final @Nonnull MatrixM2x2D m)
+  public static @Nonnull <A> MatrixM2x2FT<A> transpose(
+    final @Nonnull MatrixM2x2FT<A> m)
   {
     for (int row = 0; row < (2 - 1); row++) {
       for (int column = row + 1; column < 2; column++) {
-        final double x = m.view.get((row * 2) + column);
+        final float x = m.view.get((row * 2) + column);
         m.view.put((row * 2) + column, m.view.get(row + (2 * column)));
         m.view.put(row + (2 * column), x);
       }
@@ -693,28 +700,28 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D transpose(
-    final @Nonnull MatrixReadable2x2D m,
-    final @Nonnull MatrixM2x2D out)
+  public static @Nonnull <A> MatrixM2x2FT<A> transpose(
+    final @Nonnull MatrixReadable2x2FT<A> m,
+    final @Nonnull MatrixM2x2FT<A> out)
   {
-    MatrixM2x2D.copy(m, out);
-    return MatrixM2x2D.transpose(out);
+    MatrixM2x2FT.copy(m, out);
+    return MatrixM2x2FT.transpose(out);
   }
 
-  private final ByteBuffer   data;
-  private final DoubleBuffer view;
-  private static final int   VIEW_ELEMENT_SIZE;
-  private static final int   VIEW_ELEMENTS;
-  private static final int   VIEW_BYTES;
-  private static final int   VIEW_COLS;
-  private static final int   VIEW_ROWS;
+  private final ByteBuffer  data;
+  private final FloatBuffer view;
+  private static final int  VIEW_ELEMENT_SIZE;
+  private static final int  VIEW_ELEMENTS;
+  private static final int  VIEW_BYTES;
+  private static final int  VIEW_COLS;
+  private static final int  VIEW_ROWS;
 
   static {
     VIEW_ROWS = 2;
     VIEW_COLS = 2;
-    VIEW_ELEMENT_SIZE = 8;
-    VIEW_ELEMENTS = MatrixM2x2D.VIEW_ROWS * MatrixM2x2D.VIEW_COLS;
-    VIEW_BYTES = MatrixM2x2D.VIEW_ELEMENTS * MatrixM2x2D.VIEW_ELEMENT_SIZE;
+    VIEW_ELEMENT_SIZE = 4;
+    VIEW_ELEMENTS = MatrixM2x2FT.VIEW_ROWS * MatrixM2x2FT.VIEW_COLS;
+    VIEW_BYTES = MatrixM2x2FT.VIEW_ELEMENTS * MatrixM2x2FT.VIEW_ELEMENT_SIZE;
   }
 
   /**
@@ -727,31 +734,31 @@ import com.io7m.jaux.functional.Option;
    * @return The trace of the matrix
    */
 
-  public static double trace(
-    final @Nonnull MatrixReadable2x2D m)
+  public static <A> float trace(
+    final @Nonnull MatrixReadable2x2FT<A> m)
   {
-    return m.getRowColumnD(0, 0) + m.getRowColumnD(1, 1);
+    return m.getRowColumnF(0, 0) + m.getRowColumnF(1, 1);
   }
 
-  public MatrixM2x2D()
+  public MatrixM2x2FT()
   {
     this.data =
-      ByteBuffer.allocateDirect(MatrixM2x2D.VIEW_BYTES).order(
+      ByteBuffer.allocateDirect(MatrixM2x2FT.VIEW_BYTES).order(
         ByteOrder.nativeOrder());
-    this.view = this.data.asDoubleBuffer();
-    MatrixM2x2D.setIdentity(this);
+    this.view = this.data.asFloatBuffer();
+    MatrixM2x2FT.setIdentity(this);
   }
 
-  public MatrixM2x2D(
-    final @Nonnull MatrixReadable2x2D source)
+  public MatrixM2x2FT(
+    final @Nonnull MatrixReadable2x2FT<A> source)
   {
     this.data =
-      ByteBuffer.allocateDirect(MatrixM2x2D.VIEW_BYTES).order(
+      ByteBuffer.allocateDirect(MatrixM2x2FT.VIEW_BYTES).order(
         ByteOrder.nativeOrder());
-    this.view = this.data.asDoubleBuffer();
+    this.view = this.data.asFloatBuffer();
 
-    final DoubleBuffer source_view = source.getDoubleBuffer();
-    for (int index = 0; index < MatrixM2x2D.VIEW_ELEMENTS; ++index) {
+    final FloatBuffer source_view = source.getFloatBuffer();
+    for (int index = 0; index < MatrixM2x2FT.VIEW_ELEMENTS; ++index) {
       this.view.put(index, source_view.get(index));
     }
 
@@ -770,9 +777,10 @@ import com.io7m.jaux.functional.Option;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final @Nonnull MatrixM2x2D other = (MatrixM2x2D) obj;
 
-    for (int index = 0; index < MatrixM2x2D.VIEW_ELEMENTS; ++index) {
+    @SuppressWarnings("unchecked") final @Nonnull MatrixM2x2FT<A> other =
+      (MatrixM2x2FT<A>) obj;
+    for (int index = 0; index < MatrixM2x2FT.VIEW_ELEMENTS; ++index) {
       if (other.view.get(index) != this.view.get(index)) {
         return false;
       }
@@ -781,30 +789,30 @@ import com.io7m.jaux.functional.Option;
     return true;
   }
 
-  public double get(
+  public float get(
     final int row,
     final int column)
   {
-    return MatrixM2x2D.get(this, row, column);
+    return MatrixM2x2FT.get(this, row, column);
   }
 
-  @Override public @Nonnull DoubleBuffer getDoubleBuffer()
+  @Override public FloatBuffer getFloatBuffer()
   {
     return this.view;
   }
 
-  @Override public void getRow2D(
+  @Override public void getRow2F(
     final int row,
-    final @Nonnull VectorM2D out)
+    final @Nonnull VectorM2F out)
   {
-    MatrixM2x2D.rowUnsafe(this, MatrixM2x2D.rowCheck(row), out);
+    MatrixM2x2FT.rowUnsafe(this, MatrixM2x2FT.rowCheck(row), out);
   }
 
-  @Override public double getRowColumnD(
+  @Override public float getRowColumnF(
     final int row,
     final int column)
   {
-    return MatrixM2x2D.get(this, row, column);
+    return MatrixM2x2FT.get(this, row, column);
   }
 
   @Override public int hashCode()
@@ -813,27 +821,27 @@ import com.io7m.jaux.functional.Option;
     int result = 1;
     result = (prime * result);
 
-    for (int index = 0; index < MatrixM2x2D.VIEW_ELEMENTS; ++index) {
-      result += Double.valueOf(this.view.get(index)).hashCode();
+    for (int index = 0; index < MatrixM2x2FT.VIEW_ELEMENTS; ++index) {
+      result += Float.valueOf(this.view.get(index)).hashCode();
     }
     return result;
   }
 
-  public MatrixM2x2D set(
+  public MatrixM2x2FT<A> set(
     final int row,
     final int column,
-    final double value)
+    final float value)
   {
-    MatrixM2x2D.set(this, row, column, value);
+    this.view.put(MatrixM2x2FT.indexChecked(row, column), value);
     return this;
   }
 
-  private MatrixM2x2D setUnsafe(
+  private MatrixM2x2FT<A> setUnsafe(
     final int row,
     final int column,
-    final double value)
+    final float value)
   {
-    this.view.put(MatrixM2x2D.indexUnsafe(row, column), value);
+    this.view.put(MatrixM2x2FT.indexUnsafe(row, column), value);
     this.view.rewind();
     return this;
   }
@@ -841,10 +849,10 @@ import com.io7m.jaux.functional.Option;
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    for (int row = 0; row < 2; ++row) {
+    for (int row = 0; row < MatrixM2x2FT.VIEW_ROWS; ++row) {
       builder.append("[");
-      for (int column = 0; column < 2; ++column) {
-        builder.append(MatrixM2x2D.get(this, row, column));
+      for (int column = 0; column < MatrixM2x2FT.VIEW_COLS; ++column) {
+        builder.append(MatrixM2x2FT.get(this, row, column));
         if (column < 1) {
           builder.append(" ");
         }

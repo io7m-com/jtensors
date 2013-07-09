@@ -43,6 +43,46 @@ import com.io7m.jaux.functional.Pair;
 @Immutable public final class VectorI3DT<A> implements VectorReadable3DT<A>
 {
   /**
+   * Calculate the absolute value of the vector <code>v</code>.
+   * 
+   * @param v
+   *          The input vector
+   * 
+   * @return <code>(abs v.x, abs v.y, abs v.z)</code>
+   */
+
+  public static @Nonnull <A> VectorI3DT<A> absolute(
+    final @Nonnull VectorReadable3DT<A> v)
+  {
+    return new VectorI3DT<A>(
+      Math.abs(v.getXD()),
+      Math.abs(v.getYD()),
+      Math.abs(v.getZD()));
+  }
+
+  /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
+   * @param v0
+   *          The left input vector
+   * @param v1
+   *          The right input vector
+   * 
+   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
+   */
+
+  public static @Nonnull <A> VectorI3DT<A> add(
+    final @Nonnull VectorReadable3DT<A> v0,
+    final @Nonnull VectorReadable3DT<A> v1)
+  {
+    return new VectorI3DT<A>(
+      v0.getXD() + v1.getXD(),
+      v0.getYD() + v1.getYD(),
+      v0.getZD() + v1.getZD());
+  }
+
+  /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>.
    * 
@@ -479,48 +519,10 @@ import com.io7m.jaux.functional.Pair;
   }
 
   private final double x;
+
   private final double y;
+
   private final double z;
-
-  /**
-   * Calculate the absolute value of the vector <code>v</code>.
-   * 
-   * @param v
-   *          The input vector
-   * 
-   * @return <code>(abs v.x, abs v.y, abs v.z)</code>
-   */
-
-  public static @Nonnull <A> VectorI3DT<A> absolute(
-    final @Nonnull VectorReadable3DT<A> v)
-  {
-    return new VectorI3DT<A>(
-      Math.abs(v.getXD()),
-      Math.abs(v.getYD()),
-      Math.abs(v.getZD()));
-  }
-
-  /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>.
-   * 
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * 
-   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
-   */
-
-  public static @Nonnull <A> VectorI3DT<A> add(
-    final @Nonnull VectorReadable3DT<A> v0,
-    final @Nonnull VectorReadable3DT<A> v1)
-  {
-    return new VectorI3DT<A>(
-      v0.getXD() + v1.getXD(),
-      v0.getYD() + v1.getYD(),
-      v0.getZD() + v1.getZD());
-  }
 
   /**
    * Default constructor, initializing the vector with values <code>[0.0, 0.0,

@@ -266,6 +266,16 @@ public class VectorI3ITTest extends VectorI3TContract
     Assert.assertFalse(vc.getZI() == vb.getZI());
   }
 
+  @Override public <A> void testCrossProductPerpendicular()
+  {
+    // Not applicable.
+  }
+
+  @Override public <A> void testDefault000()
+  {
+    Assert.assertTrue(new VectorI3IT<A>().equals(new VectorI3IT<A>(0, 0, 0)));
+  }
+
   @Override @Test public <A> void testDistance()
   {
     final VectorI3IT<A> v0 = new VectorI3IT<A>(0, 1, 0);
@@ -702,15 +712,5 @@ public class VectorI3ITTest extends VectorI3TContract
       Assert.assertTrue(vr0.getYI() == (v0.getYI() - v1.getYI()));
       Assert.assertTrue(vr0.getZI() == (v0.getZI() - v1.getZI()));
     }
-  }
-
-  @Override public <A> void testCrossProductPerpendicular()
-  {
-    // Not applicable.
-  }
-
-  @Override public <A> void testDefault000()
-  {
-    Assert.assertTrue(new VectorI3IT<A>().equals(new VectorI3IT<A>(0, 0, 0)));
   }
 }

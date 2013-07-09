@@ -43,6 +43,21 @@ import com.io7m.jaux.functional.Pair;
 @Immutable public final class VectorI2FT<A> implements VectorReadable2FT<A>
 {
   /**
+   * Calculate the absolute value of the vector <code>v</code>.
+   * 
+   * @param v
+   *          The input vector
+   * 
+   * @return <code>(abs v.x, abs v.y)</code>
+   */
+
+  public static @Nonnull <A> VectorI2FT<A> absolute(
+    final @Nonnull VectorReadable2FT<A> v)
+  {
+    return new VectorI2FT<A>(Math.abs(v.getXF()), Math.abs(v.getYF()));
+  }
+
+  /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>.
    * 
@@ -482,22 +497,8 @@ import com.io7m.jaux.functional.Pair;
   }
 
   private final float x;
+
   private final float y;
-
-  /**
-   * Calculate the absolute value of the vector <code>v</code>.
-   * 
-   * @param v
-   *          The input vector
-   * 
-   * @return <code>(abs v.x, abs v.y)</code>
-   */
-
-  public static @Nonnull <A> VectorI2FT<A> absolute(
-    final @Nonnull VectorReadable2FT<A> v)
-  {
-    return new VectorI2FT<A>(Math.abs(v.getXF()), Math.abs(v.getYF()));
-  }
 
   /**
    * Default constructor, initializing the vector with values
