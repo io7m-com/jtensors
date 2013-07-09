@@ -2348,7 +2348,7 @@ import com.io7m.jaux.functional.Option;
    * Return the trace of the matrix <code>m</code>. The trace is defined as
    * the sum of the diagonal elements of the matrix.
    * 
-   * @since 5.0.0
+   * 
    * @param m
    *          The input matrix
    * @return The trace of the matrix

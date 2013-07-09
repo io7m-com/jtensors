@@ -92,7 +92,7 @@ import com.io7m.jaux.functional.Option;
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
    * returning the result in <code>m0</code>.
    * 
-   * @since 5.0.0
+   * 
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -730,7 +730,7 @@ import com.io7m.jaux.functional.Option;
    * Return the trace of the matrix <code>m</code>. The trace is defined as
    * the sum of the diagonal elements of the matrix.
    * 
-   * @since 5.0.0
+   * 
    * @param m
    *          The input matrix
    * @return The trace of the matrix

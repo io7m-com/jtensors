@@ -116,7 +116,7 @@ import com.io7m.jaux.functional.Pair;
    *          The left input vector
    * @param vb
    *          The right input vector
-   * @since 5.0.0
+   * 
    */
 
   public static <A> boolean almostEqual(
@@ -439,7 +439,7 @@ import com.io7m.jaux.functional.Pair;
    * 
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
    * 
-   * @since 5.0.0
+   * 
    */
 
   public static @Nonnull
