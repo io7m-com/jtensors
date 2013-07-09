@@ -419,14 +419,15 @@ import com.io7m.jaux.functional.Pair;
   }
 
   /**
+   * <p>
    * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
-   * . See <a
-   * href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
-   * process</a>.
+   * .
+   * </p>
+   * <p>
+   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
+   * </p>
    * 
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
-   * 
-   * 
    */
 
   public static @Nonnull

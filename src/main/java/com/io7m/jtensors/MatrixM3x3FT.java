@@ -54,23 +54,21 @@ import com.io7m.jaux.functional.Option;
   MatrixReadable3x3FT<A>
 {
   /**
-   * The Context<A> type contains the minimum storage required for all of the
+   * <p>
+   * The Context type contains the minimum storage required for all of the
    * functions of the <code>MatrixM3x3F</code> class.
-   * 
+   * </p>
    * <p>
    * The purpose of the class is to allow applications to allocate all storage
    * ahead of time in order to allow functions in the class to avoid
    * allocating memory (not including stack space) for intermediate
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
-   * 
    * <p>
-   * The user should allocate one <code>Context<A></code> value per thread,
-   * and then pass this value to matrix functions. Any matrix function that
-   * takes a <code>Context<A></code> value will not generate garbage.
+   * The user should allocate one <code>Context</code> value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes
+   * a <code>Context</code> value will not generate garbage.
    * </p>
-   * 
-   * 
    */
 
   @NotThreadSafe public static final class Context<A>
@@ -138,10 +136,11 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Add the values in row <code>row_b</code> to the values in row
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>out</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -276,8 +275,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
+   * matrix <code>m</code>, saving the exchanged rows to <code>out</code>.
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -309,9 +310,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>m</code> .
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -391,13 +393,16 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * The main function that indexes into the buffer that backs the array. The
    * body of this function decides on how elements are stored. This
    * implementation chooses to store values in column-major format as this
    * allows matrices to be sent directly to OpenGL without conversion.
-   * 
+   * </p>
+   * <p>
    * (row * 3) + column, corresponds to row-major storage. (column * 3) + row,
    * corresponds to column-major (OpenGL) storage.
+   * </p>
    */
 
   private final static int indexUnsafe(
@@ -414,7 +419,7 @@ import com.io7m.jaux.functional.Option;
    * otherwise. It is not possible to invert a matrix that has a determinant
    * of <code>0</code>.
    * 
-   * @see MatrixM3x3FT<A>#determinant(MatrixReadable3x3FT<A>)
+   * @see MatrixM3x3FT#determinant(MatrixReadable3x3FT)
    * 
    * @param m
    *          The input matrix.
@@ -483,7 +488,7 @@ import com.io7m.jaux.functional.Option;
    * is not possible to invert a matrix that has a determinant of
    * <code>0</code>.
    * 
-   * @see MatrixM3x3FT<A>#determinant(MatrixReadable3x3FT<A>)
+   * @see MatrixM3x3FT#determinant(MatrixReadable3x3FT)
    * 
    * @param m
    *          The input matrix.
@@ -951,9 +956,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>out</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -981,9 +987,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>m</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -1258,17 +1265,11 @@ import com.io7m.jaux.functional.Option;
   }
 
   private final ByteBuffer  data;
-
   private final FloatBuffer view;
-
   private static final int  VIEW_ELEMENT_SIZE;
-
   private static final int  VIEW_ELEMENTS;
-
   private static final int  VIEW_BYTES;
-
   private static final int  VIEW_COLS;
-
   private static final int  VIEW_ROWS;
 
   static {
