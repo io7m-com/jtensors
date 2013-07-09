@@ -751,17 +751,6 @@ import com.io7m.jaux.functional.Option;
     MatrixM2x2D.setIdentity(this);
   }
 
-  /**
-   * Package-private constructor used to construct wrapped/shared matrices.
-   */
-
-  MatrixM2x2D(
-    final @Nonnull ByteBuffer shared)
-  {
-    this.data = shared;
-    this.view = shared.asDoubleBuffer();
-  }
-
   public MatrixM2x2D(
     final @Nonnull MatrixReadable2x2D source)
   {

@@ -2412,17 +2412,6 @@ import com.io7m.jaux.functional.Option;
     this.view.rewind();
   }
 
-  /**
-   * Package-private constructor used to construct wrapped/shared matrices.
-   */
-
-  MatrixM4x4D(
-    final @Nonnull ByteBuffer shared)
-  {
-    this.data = shared;
-    this.view = shared.asDoubleBuffer();
-  }
-
   @Override public boolean equals(
     final Object obj)
   {
