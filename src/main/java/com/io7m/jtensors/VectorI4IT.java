@@ -23,7 +23,7 @@ import com.io7m.jaux.CheckedMath;
 
 /**
  * <p>
- * A three-dimensional immutable vector type with integer elements.
+ * A four-dimensional immutable vector type with integer elements.
  * </p>
  * <p>
  * The intention of the type parameter <code>A</code> is to be used as a
@@ -38,7 +38,7 @@ import com.io7m.jaux.CheckedMath;
  * @since 5.1.0
  */
 
-@Immutable public final class VectorI3IT<A> implements VectorReadable3IT<A>
+@Immutable public final class VectorI4IT<A> implements VectorReadable4IT<A>
 {
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>.
@@ -46,20 +46,21 @@ import com.io7m.jaux.CheckedMath;
    * @param v
    *          The input vector
    * 
-   * @return <code>(abs v.x, abs v.y, abs v.z)</code>
+   * @return <code>(abs v.x, abs v.y, abs v.z, abs.w)</code>
    * 
    * 
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull <A> VectorI3IT<A> absolute(
-    final @Nonnull VectorReadable3I v)
+  public static @Nonnull <A> VectorI4IT<A> absolute(
+    final @Nonnull VectorReadable4IT<A> v)
   {
     final int x = CheckedMath.absolute(v.getXI());
     final int y = CheckedMath.absolute(v.getYI());
     final int z = CheckedMath.absolute(v.getZI());
-    return new VectorI3IT<A>(x, y, z);
+    final int w = CheckedMath.absolute(v.getWI());
+    return new VectorI4IT<A>(x, y, z, w);
   }
 
   /**
@@ -71,20 +72,21 @@ import com.io7m.jaux.CheckedMath;
    * @param v1
    *          The right input vector
    * 
-   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
+   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
    * 
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull <A> VectorI3IT<A> add(
-    final @Nonnull VectorReadable3I v0,
-    final @Nonnull VectorReadable3I v1)
+  public static @Nonnull <A> VectorI4IT<A> add(
+    final @Nonnull VectorReadable4IT<A> v0,
+    final @Nonnull VectorReadable4IT<A> v1)
   {
     final int x = CheckedMath.add(v0.getXI(), v1.getXI());
     final int y = CheckedMath.add(v0.getYI(), v1.getYI());
     final int z = CheckedMath.add(v0.getZI(), v1.getZI());
-    return new VectorI3IT<A>(x, y, z);
+    final int w = CheckedMath.add(v0.getWI(), v1.getWI());
+    return new VectorI4IT<A>(x, y, z, w);
   }
 
   /**
@@ -98,24 +100,26 @@ import com.io7m.jaux.CheckedMath;
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
+   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
    * 
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull <A> VectorI3IT<A> addScaled(
-    final @Nonnull VectorReadable3I v0,
-    final @Nonnull VectorReadable3I v1,
+  public static @Nonnull <A> VectorI4IT<A> addScaled(
+    final @Nonnull VectorReadable4IT<A> v0,
+    final @Nonnull VectorReadable4IT<A> v1,
     final double r)
   {
     final int mx = CheckedMath.multiply(v1.getXI(), r);
     final int my = CheckedMath.multiply(v1.getYI(), r);
     final int mz = CheckedMath.multiply(v1.getZI(), r);
+    final int mw = CheckedMath.multiply(v1.getWI(), r);
     final int x = CheckedMath.add(v0.getXI(), mx);
     final int y = CheckedMath.add(v0.getYI(), my);
     final int z = CheckedMath.add(v0.getZI(), mz);
-    return new VectorI3IT<A>(x, y, z);
+    final int w = CheckedMath.add(v0.getWI(), mw);
+    return new VectorI4IT<A>(x, y, z, w);
   }
 
   private static int cast(
@@ -139,15 +143,16 @@ import com.io7m.jaux.CheckedMath;
    *         and at least <code>minimum</code>
    */
 
-  public static @Nonnull <A> VectorI3IT<A> clamp(
-    final @Nonnull VectorReadable3I v,
+  public static @Nonnull <A> VectorI4IT<A> clamp(
+    final @Nonnull VectorReadable4IT<A> v,
     final int minimum,
     final int maximum)
   {
     final int x = Math.min(Math.max(v.getXI(), minimum), maximum);
     final int y = Math.min(Math.max(v.getYI(), minimum), maximum);
     final int z = Math.min(Math.max(v.getZI(), minimum), maximum);
-    return new VectorI3IT<A>(x, y, z);
+    final int w = Math.min(Math.max(v.getWI(), minimum), maximum);
+    return new VectorI4IT<A>(x, y, z, w);
   }
 
   /**
@@ -162,13 +167,17 @@ import com.io7m.jaux.CheckedMath;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
+   * @return <code>
+   *   (min(max(v.x, minimum.x), maximum.x),
+   *    min(max(v.y, minimum.y), maximum.y),
+   *    min(max(v.z, minimum.z), maximum.z),
+   *    min(max(v.w, minimum.w), maximum.w))</code>
    */
 
-  public static @Nonnull <A> VectorI3IT<A> clampByVector(
-    final @Nonnull VectorReadable3I v,
-    final @Nonnull VectorReadable3I minimum,
-    final @Nonnull VectorReadable3I maximum)
+  public static @Nonnull <A> VectorI4IT<A> clampByVector(
+    final @Nonnull VectorReadable4IT<A> v,
+    final @Nonnull VectorReadable4IT<A> minimum,
+    final @Nonnull VectorReadable4IT<A> maximum)
   {
     final int x =
       Math.min(Math.max(v.getXI(), minimum.getXI()), maximum.getXI());
@@ -176,7 +185,9 @@ import com.io7m.jaux.CheckedMath;
       Math.min(Math.max(v.getYI(), minimum.getYI()), maximum.getYI());
     final int z =
       Math.min(Math.max(v.getZI(), minimum.getZI()), maximum.getZI());
-    return new VectorI3IT<A>(x, y, z);
+    final int w =
+      Math.min(Math.max(v.getWI(), minimum.getWI()), maximum.getWI());
+    return new VectorI4IT<A>(x, y, z, w);
   }
 
   /**
@@ -191,14 +202,15 @@ import com.io7m.jaux.CheckedMath;
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public static @Nonnull <A> VectorI3IT<A> clampMaximum(
-    final @Nonnull VectorReadable3I v,
+  public static @Nonnull <A> VectorI4IT<A> clampMaximum(
+    final @Nonnull VectorReadable4IT<A> v,
     final int maximum)
   {
     final int x = Math.min(v.getXI(), maximum);
     final int y = Math.min(v.getYI(), maximum);
     final int z = Math.min(v.getZI(), maximum);
-    return new VectorI3IT<A>(x, y, z);
+    final int w = Math.min(v.getWI(), maximum);
+    return new VectorI4IT<A>(x, y, z, w);
   }
 
   /**
@@ -210,17 +222,18 @@ import com.io7m.jaux.CheckedMath;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
+   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
    */
 
-  public static @Nonnull <A> VectorI3IT<A> clampMaximumByVector(
-    final @Nonnull VectorReadable3I v,
-    final @Nonnull VectorReadable3I maximum)
+  public static @Nonnull <A> VectorI4IT<A> clampMaximumByVector(
+    final @Nonnull VectorReadable4IT<A> v,
+    final @Nonnull VectorReadable4IT<A> maximum)
   {
     final int x = Math.min(v.getXI(), maximum.getXI());
     final int y = Math.min(v.getYI(), maximum.getYI());
     final int z = Math.min(v.getZI(), maximum.getZI());
-    return new VectorI3IT<A>(x, y, z);
+    final int w = Math.min(v.getWI(), maximum.getWI());
+    return new VectorI4IT<A>(x, y, z, w);
   }
 
   /**
@@ -236,14 +249,15 @@ import com.io7m.jaux.CheckedMath;
    *         <code>minimum</code>
    */
 
-  public static @Nonnull <A> VectorI3IT<A> clampMinimum(
-    final @Nonnull VectorReadable3I v,
+  public static @Nonnull <A> VectorI4IT<A> clampMinimum(
+    final @Nonnull VectorReadable4IT<A> v,
     final int minimum)
   {
     final int x = Math.max(v.getXI(), minimum);
     final int y = Math.max(v.getYI(), minimum);
     final int z = Math.max(v.getZI(), minimum);
-    return new VectorI3IT<A>(x, y, z);
+    final int w = Math.max(v.getWI(), minimum);
+    return new VectorI4IT<A>(x, y, z, w);
   }
 
   /**
@@ -256,17 +270,18 @@ import com.io7m.jaux.CheckedMath;
    *          The vector containing the minimum acceptable values
    * 
    * 
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
+   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))</code>
    */
 
-  public static @Nonnull <A> VectorI3IT<A> clampMinimumByVector(
-    final @Nonnull VectorReadable3I v,
-    final @Nonnull VectorReadable3I minimum)
+  public static @Nonnull <A> VectorI4IT<A> clampMinimumByVector(
+    final @Nonnull VectorReadable4IT<A> v,
+    final @Nonnull VectorReadable4IT<A> minimum)
   {
     final int x = Math.max(v.getXI(), minimum.getXI());
     final int y = Math.max(v.getYI(), minimum.getYI());
     final int z = Math.max(v.getZI(), minimum.getZI());
-    return new VectorI3IT<A>(x, y, z);
+    final int w = Math.max(v.getWI(), minimum.getWI());
+    return new VectorI4IT<A>(x, y, z, w);
   }
 
   /**
@@ -285,11 +300,11 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int distance(
-    final @Nonnull VectorReadable3I v0,
-    final @Nonnull VectorReadable3I v1)
+  public static <A> int distance(
+    final @Nonnull VectorReadable4IT<A> v0,
+    final @Nonnull VectorReadable4IT<A> v1)
   {
-    return VectorI3IT.magnitude(VectorI3IT.subtract(v0, v1));
+    return VectorI4IT.magnitude(VectorI4IT.subtract(v0, v1));
   }
 
   /**
@@ -308,14 +323,20 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int dotProduct(
-    final @Nonnull VectorReadable3I v0,
-    final @Nonnull VectorReadable3I v1)
+  public static <A> int dotProduct(
+    final @Nonnull VectorReadable4IT<A> v0,
+    final @Nonnull VectorReadable4IT<A> v1)
   {
     final int mx = CheckedMath.multiply(v0.getXI(), v1.getXI());
     final int my = CheckedMath.multiply(v0.getYI(), v1.getYI());
     final int mz = CheckedMath.multiply(v0.getZI(), v1.getZI());
-    return CheckedMath.add(CheckedMath.add(mx, my), mz);
+    final int mw = CheckedMath.multiply(v0.getWI(), v1.getWI());
+
+    int k;
+    k = CheckedMath.add(mx, my);
+    k = CheckedMath.add(k, mz);
+    k = CheckedMath.add(k, mw);
+    return k;
   }
 
   /**
@@ -344,14 +365,14 @@ import com.io7m.jaux.CheckedMath;
    *           overflow.
    */
 
-  public static @Nonnull <A> VectorI3IT<A> interpolateLinear(
-    final @Nonnull VectorReadable3I v0,
-    final @Nonnull VectorReadable3I v1,
+  public static @Nonnull <A> VectorI4IT<A> interpolateLinear(
+    final @Nonnull VectorReadable4IT<A> v0,
+    final @Nonnull VectorReadable4IT<A> v1,
     final double alpha)
   {
-    final VectorI3IT<A> w0 = VectorI3IT.scale(v0, 1.0 - alpha);
-    final VectorI3IT<A> w1 = VectorI3IT.scale(v1, alpha);
-    return VectorI3IT.add(w0, w1);
+    final VectorI4IT<A> w0 = VectorI4IT.scale(v0, 1.0 - alpha);
+    final VectorI4IT<A> w1 = VectorI4IT.scale(v1, alpha);
+    return VectorI4IT.add(w0, w1);
   }
 
   /**
@@ -369,10 +390,10 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int magnitude(
-    final @Nonnull VectorReadable3I v)
+  public static <A> int magnitude(
+    final @Nonnull VectorReadable4IT<A> v)
   {
-    return VectorI3IT.cast(Math.sqrt(VectorI3IT.magnitudeSquared(v)));
+    return VectorI4IT.cast(Math.sqrt(VectorI4IT.magnitudeSquared(v)));
   }
 
   /**
@@ -388,10 +409,10 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int magnitudeSquared(
-    final @Nonnull VectorReadable3I v)
+  public static <A> int magnitudeSquared(
+    final @Nonnull VectorReadable4IT<A> v)
   {
-    return VectorI3IT.dotProduct(v, v);
+    return VectorI4IT.dotProduct(v, v);
   }
 
   /**
@@ -404,39 +425,39 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull <A> VectorI3IT<A> projection(
-    final @Nonnull VectorReadable3I p,
-    final @Nonnull VectorReadable3I q)
+  public static @Nonnull <A> VectorI4IT<A> projection(
+    final @Nonnull VectorReadable4IT<A> p,
+    final @Nonnull VectorReadable4IT<A> q)
   {
-    final int dot = VectorI3IT.dotProduct(p, q);
-    final int qms = VectorI3IT.magnitudeSquared(q);
+    final int dot = VectorI4IT.dotProduct(p, q);
+    final int qms = VectorI4IT.magnitudeSquared(q);
     final int s = dot / qms;
-    return VectorI3IT.scale(p, s);
+    return VectorI4IT.scale(p, s);
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
-   * result to <code>out</code>.
+   * Scale the vector <code>v</code> by the scalar <code>r</code>.
    * 
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v.x * r, v.y * r, v.z * r)</code>
+   * @return <code>(v.x * r, v.y * r, v.z * r, vw * r)</code>
    * 
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull <A> VectorI3IT<A> scale(
-    final @Nonnull VectorReadable3I v,
+  public static @Nonnull <A> VectorI4IT<A> scale(
+    final @Nonnull VectorReadable4IT<A> v,
     final double r)
   {
     final int mx = CheckedMath.multiply(v.getXI(), r);
     final int my = CheckedMath.multiply(v.getYI(), r);
     final int mz = CheckedMath.multiply(v.getZI(), r);
-    return new VectorI3IT<A>(mx, my, mz);
+    final int mw = CheckedMath.multiply(v.getWI(), r);
+    return new VectorI4IT<A>(mx, my, mz, mw);
   }
 
   /**
@@ -447,50 +468,55 @@ import com.io7m.jaux.CheckedMath;
    * @param v1
    *          The right input vector
    * 
-   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
+   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)</code>
    * 
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull <A> VectorI3IT<A> subtract(
-    final @Nonnull VectorReadable3I v0,
-    final @Nonnull VectorReadable3I v1)
+  public static @Nonnull <A> VectorI4IT<A> subtract(
+    final @Nonnull VectorReadable4IT<A> v0,
+    final @Nonnull VectorReadable4IT<A> v1)
   {
     final int x = CheckedMath.subtract(v0.getXI(), v1.getXI());
     final int y = CheckedMath.subtract(v0.getYI(), v1.getYI());
     final int z = CheckedMath.subtract(v0.getZI(), v1.getZI());
-    return new VectorI3IT<A>(x, y, z);
+    final int w = CheckedMath.subtract(v0.getWI(), v1.getWI());
+    return new VectorI4IT<A>(x, y, z, w);
   }
 
   private final int x;
   private final int y;
   private final int z;
+  private final int w;
 
   /**
    * Default constructor, initializing the vector with values
-   * <code>[0, 0, 0]</code>.
+   * <code>[0, 0, 0, 1]</code>.
    */
 
-  public VectorI3IT()
+  public VectorI4IT()
   {
     this.x = 0;
     this.y = 0;
     this.z = 0;
+    this.w = 1;
   }
 
   /**
    * Construct a vector initialized with the given values.
    */
 
-  public VectorI3IT(
+  public VectorI4IT(
     final int x,
     final int y,
-    final int z)
+    final int z,
+    final int w)
   {
     this.x = x;
     this.y = y;
     this.z = z;
+    this.w = w;
   }
 
   /**
@@ -498,12 +524,13 @@ import com.io7m.jaux.CheckedMath;
    * <code>v</code>.
    */
 
-  public VectorI3IT(
-    final @Nonnull VectorReadable3IT<A> v)
+  public VectorI4IT(
+    final @Nonnull VectorReadable4IT<A> v)
   {
     this.x = v.getXI();
     this.y = v.getYI();
     this.z = v.getZI();
+    this.w = v.getWI();
   }
 
   @Override public boolean equals(
@@ -518,8 +545,8 @@ import com.io7m.jaux.CheckedMath;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    @SuppressWarnings("unchecked") final @Nonnull VectorI3IT<A> other =
-      (VectorI3IT<A>) obj;
+    @SuppressWarnings("unchecked") final @Nonnull VectorI4IT<A> other =
+      (VectorI4IT<A>) obj;
     if (this.x != other.x) {
       return false;
     }
@@ -529,7 +556,15 @@ import com.io7m.jaux.CheckedMath;
     if (this.z != other.z) {
       return false;
     }
+    if (this.w != other.w) {
+      return false;
+    }
     return true;
+  }
+
+  @Override public int getWI()
+  {
+    return this.w;
   }
 
   @Override public int getXI()
@@ -554,18 +589,21 @@ import com.io7m.jaux.CheckedMath;
     result = (prime * result) + this.x;
     result = (prime * result) + this.y;
     result = (prime * result) + this.z;
+    result = (prime * result) + this.w;
     return result;
   }
 
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    builder.append("[VectorI3IT ");
+    builder.append("[VectorI4IT ");
     builder.append(this.x);
     builder.append(" ");
     builder.append(this.y);
     builder.append(" ");
     builder.append(this.z);
+    builder.append(" ");
+    builder.append(this.w);
     builder.append("]");
     return builder.toString();
   }

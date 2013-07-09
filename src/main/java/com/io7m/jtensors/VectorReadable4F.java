@@ -17,8 +17,10 @@
 package com.io7m.jtensors;
 
 /**
+ * <p>
  * 'Read' interface to four-dimensional vectors with single precision
  * elements.
+ * </p>
  */
 
 public interface VectorReadable4F extends VectorReadable3F

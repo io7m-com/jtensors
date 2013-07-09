@@ -22,10 +22,13 @@ import javax.annotation.concurrent.Immutable;
 import com.io7m.jaux.CheckedMath;
 
 /**
+ * <p>
  * A three-dimensional immutable vector type with integer elements.
- * 
+ * </p>
+ * <p>
  * Values of this type are immutable and can therefore be safely accessed from
  * multiple threads.
+ * </p>
  */
 
 @Immutable public final class VectorI3I implements VectorReadable3I

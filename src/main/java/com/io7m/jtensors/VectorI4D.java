@@ -24,10 +24,13 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 import com.io7m.jaux.functional.Pair;
 
 /**
+ * <p>
  * A four-dimensional immutable vector type with double precision elements.
- * 
+ * </p>
+ * <p>
  * Values of this type are immutable and can therefore be safely accessed from
  * multiple threads.
+ * </p>
  */
 
 @Immutable public final class VectorI4D implements VectorReadable4D

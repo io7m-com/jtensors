@@ -17,7 +17,9 @@
 package com.io7m.jtensors;
 
 /**
+ * <p>
  * 'Read' interface to three-dimensional vectors with integer elements.
+ * </p>
  */
 
 public interface VectorReadable3I extends VectorReadable2I

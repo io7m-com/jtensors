@@ -25,7 +25,7 @@ import com.io7m.jaux.functional.Pair;
 
 /**
  * <p>
- * A three-dimensional immutable vector type with double precision elements.
+ * A three-dimensional immutable vector type with single precision elements.
  * </p>
  * <p>
  * The intention of the type parameter <code>A</code> is to be used as a

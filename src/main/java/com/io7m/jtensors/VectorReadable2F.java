@@ -17,7 +17,9 @@
 package com.io7m.jtensors;
 
 /**
+ * <p>
  * 'Read' interface to two-dimensional vectors with single precision elements.
+ * </p>
  */
 
 public interface VectorReadable2F

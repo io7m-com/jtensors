@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,16 +18,19 @@ package com.io7m.jtensors;
 
 /**
  * <p>
- * 'Read' interface to three-dimensional vectors with single precision
- * elements.
+ * 'Read' interface to four-dimensional vectors with integer elements, indexed
+ * by the type <code>A</code>.
  * </p>
+ * <p>
+ * The intention of the type parameter <code>A</code> is to be used as a
+ * "phantom type" or compile-time tag to statically distinguish between
+ * semantically distinct vectors.
+ * </p>
+ * 
+ * @since 5.1.0
  */
 
-public interface VectorReadable3F extends VectorReadable2F
+public interface VectorReadable4IT<A> extends VectorReadable4I
 {
-  /**
-   * Retrieve the Z value of the given vector.
-   */
-
-  float getZF();
+  // See superinterfaces.
 }
