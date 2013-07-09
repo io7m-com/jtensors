@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -19,8 +19,7 @@ package com.io7m.jtensors;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.io7m.jaux.functional.Option;
@@ -862,13 +861,11 @@ public class MatrixM2x2FTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
-    void
-    testTrace()
+  @SuppressWarnings({ "static-method" }) @Test public void testTrace()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
     final float t = MatrixM2x2F.trace(m);
-    Assert.assertEquals(2.0f, t);
+    Assert.assertTrue(2.0f == t);
   }
 
   @SuppressWarnings("static-method") @Test public void testTranspose()

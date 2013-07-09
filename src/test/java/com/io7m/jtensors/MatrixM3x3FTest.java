@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -19,8 +19,7 @@ package com.io7m.jtensors;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
@@ -2297,17 +2296,15 @@ public class MatrixM3x3FTest
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m2).position());
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
-    void
-    testTrace()
+  @SuppressWarnings({ "static-method" }) @Test public void testTrace()
   {
     final MatrixM3x3F m = new MatrixM3x3F();
     final double t = MatrixM3x3F.trace(m);
 
-    Assert.assertEquals(3.0, t);
+    Assert.assertEquals(3.0, t, 0.0);
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslate2FMakeIdentity()
   {
@@ -2317,26 +2314,26 @@ public class MatrixM3x3FTest
     MatrixM3x3F.makeTranslation2F(v, m);
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(1.0f, m.get(0, 0));
-    Assert.assertEquals(0.0f, m.get(0, 1));
-    Assert.assertEquals(0.0f, m.get(0, 2));
+    Assert.assertEquals(1.0f, m.get(0, 0), 0.0);
+    Assert.assertEquals(0.0f, m.get(0, 1), 0.0);
+    Assert.assertEquals(0.0f, m.get(0, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(0.0f, m.get(1, 0));
-    Assert.assertEquals(1.0f, m.get(1, 1));
-    Assert.assertEquals(0.0f, m.get(1, 2));
+    Assert.assertEquals(0.0f, m.get(1, 0), 0.0);
+    Assert.assertEquals(1.0f, m.get(1, 1), 0.0);
+    Assert.assertEquals(0.0f, m.get(1, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(0.0f, m.get(2, 0));
-    Assert.assertEquals(0.0f, m.get(2, 1));
-    Assert.assertEquals(1.0f, m.get(2, 2));
+    Assert.assertEquals(0.0f, m.get(2, 0), 0.0);
+    Assert.assertEquals(0.0f, m.get(2, 1), 0.0);
+    Assert.assertEquals(1.0f, m.get(2, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslate2FMakeSimple()
   {
@@ -2346,26 +2343,26 @@ public class MatrixM3x3FTest
     MatrixM3x3F.makeTranslation2F(v, m);
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(1.0f, m.get(0, 0));
-    Assert.assertEquals(0.0f, m.get(0, 1));
-    Assert.assertEquals(3.0f, m.get(0, 2));
+    Assert.assertEquals(1.0f, m.get(0, 0), 0.0);
+    Assert.assertEquals(0.0f, m.get(0, 1), 0.0);
+    Assert.assertEquals(3.0f, m.get(0, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(0.0f, m.get(1, 0));
-    Assert.assertEquals(1.0f, m.get(1, 1));
-    Assert.assertEquals(7.0f, m.get(1, 2));
+    Assert.assertEquals(0.0f, m.get(1, 0), 0.0);
+    Assert.assertEquals(1.0f, m.get(1, 1), 0.0);
+    Assert.assertEquals(7.0f, m.get(1, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(0.0f, m.get(2, 0));
-    Assert.assertEquals(0.0f, m.get(2, 1));
-    Assert.assertEquals(1.0f, m.get(2, 2));
+    Assert.assertEquals(0.0f, m.get(2, 0), 0.0);
+    Assert.assertEquals(0.0f, m.get(2, 1), 0.0);
+    Assert.assertEquals(1.0f, m.get(2, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslate2IMakeIdentity()
   {
@@ -2375,26 +2372,26 @@ public class MatrixM3x3FTest
     MatrixM3x3F.makeTranslation2I(v, m);
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(1.0f, m.get(0, 0));
-    Assert.assertEquals(0.0f, m.get(0, 1));
-    Assert.assertEquals(0.0f, m.get(0, 2));
+    Assert.assertEquals(1.0f, m.get(0, 0), 0.0);
+    Assert.assertEquals(0.0f, m.get(0, 1), 0.0);
+    Assert.assertEquals(0.0f, m.get(0, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(0.0f, m.get(1, 0));
-    Assert.assertEquals(1.0f, m.get(1, 1));
-    Assert.assertEquals(0.0f, m.get(1, 2));
+    Assert.assertEquals(0.0f, m.get(1, 0), 0.0);
+    Assert.assertEquals(1.0f, m.get(1, 1), 0.0);
+    Assert.assertEquals(0.0f, m.get(1, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(0.0f, m.get(2, 0));
-    Assert.assertEquals(0.0f, m.get(2, 1));
-    Assert.assertEquals(1.0f, m.get(2, 2));
+    Assert.assertEquals(0.0f, m.get(2, 0), 0.0);
+    Assert.assertEquals(0.0f, m.get(2, 1), 0.0);
+    Assert.assertEquals(1.0f, m.get(2, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslate2IMakeSimple()
   {
@@ -2404,26 +2401,26 @@ public class MatrixM3x3FTest
     MatrixM3x3F.makeTranslation2I(v, m);
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(1.0f, m.get(0, 0));
-    Assert.assertEquals(0.0f, m.get(0, 1));
-    Assert.assertEquals(3.0f, m.get(0, 2));
+    Assert.assertEquals(1.0f, m.get(0, 0), 0.0);
+    Assert.assertEquals(0.0f, m.get(0, 1), 0.0);
+    Assert.assertEquals(3.0f, m.get(0, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(0.0f, m.get(1, 0));
-    Assert.assertEquals(1.0f, m.get(1, 1));
-    Assert.assertEquals(7.0f, m.get(1, 2));
+    Assert.assertEquals(0.0f, m.get(1, 0), 0.0);
+    Assert.assertEquals(1.0f, m.get(1, 1), 0.0);
+    Assert.assertEquals(7.0f, m.get(1, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
-    Assert.assertEquals(0.0f, m.get(2, 0));
-    Assert.assertEquals(0.0f, m.get(2, 1));
-    Assert.assertEquals(1.0f, m.get(2, 2));
+    Assert.assertEquals(0.0f, m.get(2, 0), 0.0);
+    Assert.assertEquals(0.0f, m.get(2, 1), 0.0);
+    Assert.assertEquals(1.0f, m.get(2, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslateSimple2F()
   {
@@ -2438,23 +2435,23 @@ public class MatrixM3x3FTest
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(1.0f, r.get(0, 0));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertEquals(1.0f, r.get(0, 2));
+      Assert.assertEquals(1.0f, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(0, 1), 0.0);
+      Assert.assertEquals(1.0f, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertEquals(1.0f, r.get(1, 1));
-      Assert.assertEquals(2.0f, r.get(1, 2));
+      Assert.assertEquals(0.0f, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0f, r.get(1, 1), 0.0);
+      Assert.assertEquals(2.0f, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertEquals(1.0f, r.get(2, 2));
+      Assert.assertEquals(0.0f, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0f, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
@@ -2467,30 +2464,30 @@ public class MatrixM3x3FTest
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(1.0f, r.get(0, 0));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertEquals(2.0f, r.get(0, 2));
+      Assert.assertEquals(1.0f, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(0, 1), 0.0);
+      Assert.assertEquals(2.0f, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertEquals(1.0f, r.get(1, 1));
-      Assert.assertEquals(4.0f, r.get(1, 2));
+      Assert.assertEquals(0.0f, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0f, r.get(1, 1), 0.0);
+      Assert.assertEquals(4.0f, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertEquals(1.0f, r.get(2, 2));
+      Assert.assertEquals(0.0f, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0f, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslateSimple2FAlt()
   {
@@ -2504,23 +2501,23 @@ public class MatrixM3x3FTest
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(1.0f, r.get(0, 0));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertEquals(1.0f, r.get(0, 2));
+      Assert.assertEquals(1.0f, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(0, 1), 0.0);
+      Assert.assertEquals(1.0f, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertEquals(1.0f, r.get(1, 1));
-      Assert.assertEquals(2.0f, r.get(1, 2));
+      Assert.assertEquals(0.0f, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0f, r.get(1, 1), 0.0);
+      Assert.assertEquals(2.0f, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertEquals(1.0f, r.get(2, 2));
+      Assert.assertEquals(0.0f, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0f, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
@@ -2533,30 +2530,30 @@ public class MatrixM3x3FTest
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(1.0f, r.get(0, 0));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertEquals(2.0f, r.get(0, 2));
+      Assert.assertEquals(1.0f, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(0, 1), 0.0);
+      Assert.assertEquals(2.0f, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertEquals(1.0f, r.get(1, 1));
-      Assert.assertEquals(4.0f, r.get(1, 2));
+      Assert.assertEquals(0.0f, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0f, r.get(1, 1), 0.0);
+      Assert.assertEquals(4.0f, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertEquals(1.0f, r.get(2, 2));
+      Assert.assertEquals(0.0f, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0f, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslateSimple2I()
   {
@@ -2571,23 +2568,23 @@ public class MatrixM3x3FTest
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(1.0f, r.get(0, 0));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertEquals(1.0f, r.get(0, 2));
+      Assert.assertEquals(1.0f, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(0, 1), 0.0);
+      Assert.assertEquals(1.0f, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertEquals(1.0f, r.get(1, 1));
-      Assert.assertEquals(2.0f, r.get(1, 2));
+      Assert.assertEquals(0.0f, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0f, r.get(1, 1), 0.0);
+      Assert.assertEquals(2.0f, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertEquals(1.0f, r.get(2, 2));
+      Assert.assertEquals(0.0f, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0f, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
@@ -2600,23 +2597,23 @@ public class MatrixM3x3FTest
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(1.0f, r.get(0, 0));
-      Assert.assertEquals(0.0f, r.get(0, 1));
-      Assert.assertEquals(2.0f, r.get(0, 2));
+      Assert.assertEquals(1.0f, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(0, 1), 0.0);
+      Assert.assertEquals(2.0f, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(1, 0));
-      Assert.assertEquals(1.0f, r.get(1, 1));
-      Assert.assertEquals(4.0f, r.get(1, 2));
+      Assert.assertEquals(0.0f, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0f, r.get(1, 1), 0.0);
+      Assert.assertEquals(4.0f, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
-      Assert.assertEquals(0.0f, r.get(2, 0));
-      Assert.assertEquals(0.0f, r.get(2, 1));
-      Assert.assertEquals(1.0f, r.get(2, 2));
+      Assert.assertEquals(0.0f, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0f, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0f, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
@@ -2689,7 +2686,7 @@ public class MatrixM3x3FTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslationStorage()
   {
@@ -2704,17 +2701,17 @@ public class MatrixM3x3FTest
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
       Assert.assertEquals(0, b.position());
 
-      Assert.assertEquals(1.0f, b.get(0));
-      Assert.assertEquals(0.0f, b.get(1));
-      Assert.assertEquals(0.0f, b.get(2));
+      Assert.assertEquals(1.0f, b.get(0), 0.0);
+      Assert.assertEquals(0.0f, b.get(1), 0.0);
+      Assert.assertEquals(0.0f, b.get(2), 0.0);
 
-      Assert.assertEquals(0.0f, b.get(3));
-      Assert.assertEquals(1.0f, b.get(4));
-      Assert.assertEquals(0.0f, b.get(5));
+      Assert.assertEquals(0.0f, b.get(3), 0.0);
+      Assert.assertEquals(1.0f, b.get(4), 0.0);
+      Assert.assertEquals(0.0f, b.get(5), 0.0);
 
-      Assert.assertEquals(1.0f, b.get(6));
-      Assert.assertEquals(2.0f, b.get(7));
-      Assert.assertEquals(1.0f, b.get(8));
+      Assert.assertEquals(1.0f, b.get(6), 0.0);
+      Assert.assertEquals(2.0f, b.get(7), 0.0);
+      Assert.assertEquals(1.0f, b.get(8), 0.0);
     }
   }
 

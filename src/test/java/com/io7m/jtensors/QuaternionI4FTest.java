@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -21,7 +21,6 @@ import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.AlmostEqualFloat;
-import com.io7m.jaux.ApproximatelyEqualFloat;
 
 public class QuaternionI4FTest extends QuaternionI4Contract
 {
@@ -31,6 +30,9 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public void testAdd()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -46,16 +48,20 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
       final QuaternionI4F vr = QuaternionI4F.add(v0, v1);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getXF(),
         v0.getXF() + v1.getXF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getYF(),
         v0.getYF() + v1.getYF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getZF(),
         v0.getZF() + v1.getZF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getWF(),
         v0.getWF() + v1.getWF()));
     }
@@ -709,6 +715,9 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public void testMakeAxisAngleNormal()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final VectorI3F axis_r =
         new VectorI3F(
@@ -722,7 +731,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
           axis_n,
           (float) Math.toRadians(Math.random() * 360));
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         QuaternionI4F.magnitude(q),
         1.0f));
 
@@ -732,6 +742,9 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public void testMakeAxisAngleX_45()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorReadable3F axis = QuaternionI4FTest.AXIS_X;
     final QuaternionI4F q =
       QuaternionI4F.makeFromAxisAngle(axis, (float) Math.toRadians(45));
@@ -744,22 +757,23 @@ public class QuaternionI4FTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getXF(),
       0.3826834323650898f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getYF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getZF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.9238795325112867f));
   }
 
   @Override @Test public void testMakeAxisAngleX_90()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorReadable3F axis = QuaternionI4FTest.AXIS_X;
     final QuaternionI4F q =
       QuaternionI4F.makeFromAxisAngle(axis, (float) Math.toRadians(90));
@@ -772,22 +786,23 @@ public class QuaternionI4FTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getXF(),
       0.7071067811865475f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getYF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getZF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.7071067811865475f));
   }
 
   @Override @Test public void testMakeAxisAngleY_45()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorReadable3F axis = QuaternionI4FTest.AXIS_Y;
     final QuaternionI4F q =
       QuaternionI4F.makeFromAxisAngle(axis, (float) Math.toRadians(45));
@@ -800,22 +815,23 @@ public class QuaternionI4FTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getXF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getYF(),
       0.3826834323650898f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getZF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.9238795325112867f));
   }
 
   @Override @Test public void testMakeAxisAngleY_90()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorReadable3F axis = QuaternionI4FTest.AXIS_Y;
     final QuaternionI4F q =
       QuaternionI4F.makeFromAxisAngle(axis, (float) Math.toRadians(90));
@@ -828,22 +844,23 @@ public class QuaternionI4FTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getXF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getYF(),
       0.7071067811865475f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getZF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.7071067811865475f));
   }
 
   @Override @Test public void testMakeAxisAngleZ_45()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorReadable3F axis = QuaternionI4FTest.AXIS_Z;
     final QuaternionI4F q =
       QuaternionI4F.makeFromAxisAngle(axis, (float) Math.toRadians(45));
@@ -856,22 +873,23 @@ public class QuaternionI4FTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getXF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getYF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getZF(),
       0.3826834323650898f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.9238795325112867f));
   }
 
   @Override @Test public void testMakeAxisAngleZ_90()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorReadable3F axis = QuaternionI4FTest.AXIS_Z;
     final QuaternionI4F q =
       QuaternionI4F.makeFromAxisAngle(axis, (float) Math.toRadians(90));
@@ -884,16 +902,14 @@ public class QuaternionI4FTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getXF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getYF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getZF(),
       0.7071067811865475f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.7071067811865475f));
   }
@@ -1474,6 +1490,9 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public void testMultiply()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorReadable3F axis_x = QuaternionI4FTest.AXIS_X;
     final VectorReadable3F axis_y = QuaternionI4FTest.AXIS_Y;
     final QuaternionI4F qx =
@@ -1495,16 +1514,20 @@ public class QuaternionI4FTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getXF(),
       0.3535533905932738f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getYF(),
       0.3535533905932738f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getZF(),
       -0.14644660940672624f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getWF(),
       0.8535533905932737f));
   }
@@ -1629,6 +1652,9 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public void testSubtract()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -1644,16 +1670,20 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
       final QuaternionI4F vr = QuaternionI4F.subtract(v0, v1);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getXF(),
         v0.getXF() - v1.getXF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getYF(),
         v0.getYF() - v1.getYF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getZF(),
         v0.getZF() - v1.getZF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getWF(),
         v0.getWF() - v1.getWF()));
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -113,9 +113,15 @@ public final class APICompleteness
       {
         VectorM2F.class,
         VectorM2I.class,
+        VectorM2DT.class,
+        VectorM2FT.class,
+        VectorM2IT.class,
         VectorI2D.class,
+        VectorI2DT.class,
         VectorI2F.class,
-        VectorI2I.class };
+        VectorI2FT.class,
+        VectorI2I.class,
+        VectorI2IT.class };
     for (final Class<?> c : classes) {
       APICompleteness.checkAgainst(VectorM2D.class, c);
     }
@@ -127,10 +133,16 @@ public final class APICompleteness
       final Class<?> classes[] =
         {
           VectorM3F.class,
+          VectorM3FT.class,
           VectorM3I.class,
+          VectorM3IT.class,
+          VectorM3DT.class,
           VectorI3D.class,
+          VectorI3DT.class,
           VectorI3F.class,
-          VectorI3I.class };
+          VectorI3FT.class,
+          VectorI3I.class,
+          VectorI3IT.class };
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(VectorM3D.class, c);
       }
@@ -150,10 +162,16 @@ public final class APICompleteness
       final Class<?> classes[] =
         {
           VectorM4F.class,
+          VectorM4FT.class,
           VectorM4I.class,
+          VectorM4IT.class,
+          VectorM4DT.class,
           VectorI4D.class,
           VectorI4F.class,
-          VectorI4I.class };
+          VectorI4I.class,
+          VectorI4DT.class,
+          VectorI4FT.class,
+          VectorI4IT.class };
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(VectorM4D.class, c);
       }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -24,10 +24,13 @@ import com.io7m.jaux.AlmostEqualFloat;
 import com.io7m.jaux.functional.Pair;
 
 /**
+ * <p>
  * A three-dimensional immutable vector type with single precision elements.
- * 
+ * </p>
+ * <p>
  * Values of this type are immutable and can therefore be safely accessed from
  * multiple threads.
+ * </p>
  */
 
 @Immutable public final class VectorI3F implements VectorReadable3F
@@ -379,12 +382,13 @@ import com.io7m.jaux.functional.Pair;
   }
 
   /**
+   * <p>
    * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
    * .
-   * 
-   * @see <a
-   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
-   *      process</a>
+   * </p>
+   * <p>
+   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
+   * </p>
    * 
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
    * 

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -22,10 +22,13 @@ import javax.annotation.concurrent.Immutable;
 import com.io7m.jaux.CheckedMath;
 
 /**
+ * <p>
  * A two-dimensional immutable vector type with integer elements.
- * 
+ * </p>
+ * <p>
  * Values of this type are immutable and can therefore be safely accessed from
  * multiple threads.
+ * </p>
  */
 
 @Immutable public final class VectorI2I implements VectorReadable2I

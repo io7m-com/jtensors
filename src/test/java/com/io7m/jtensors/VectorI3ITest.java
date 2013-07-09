@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -21,7 +21,7 @@ import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
 
-public class VectorI3ITest extends VectorI4Contract
+public class VectorI3ITest extends VectorI3Contract
 {
   public static int randomNegativeNumber()
   {
@@ -266,7 +266,12 @@ public class VectorI3ITest extends VectorI4Contract
     Assert.assertFalse(vc.z == vb.z);
   }
 
-  @Override @Test public void testDefault0001()
+  @Override public void testCrossProductPerpendicular()
+  {
+    // Not applicable.
+  }
+
+  @Override public void testDefault000()
   {
     Assert.assertTrue(new VectorI3I().equals(new VectorI3I(0, 0, 0)));
   }

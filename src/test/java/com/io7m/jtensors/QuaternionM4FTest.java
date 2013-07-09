@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -20,9 +20,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 import com.io7m.jaux.AlmostEqualFloat;
-import com.io7m.jaux.ApproximatelyEqualDouble;
-import com.io7m.jaux.ApproximatelyEqualFloat;
 
 public class QuaternionM4FTest extends QuaternionM4Contract
 {
@@ -32,6 +31,9 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
   @Override @Test public void testAdd()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -48,16 +50,20 @@ public class QuaternionM4FTest extends QuaternionM4Contract
       final QuaternionM4F vr0 = new QuaternionM4F();
       QuaternionM4F.add(v0, v1, vr0);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr0.getXF(),
         v0.getXF() + v1.getXF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr0.getYF(),
         v0.getYF() + v1.getYF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr0.getZF(),
         v0.getZF() + v1.getZF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr0.getWF(),
         v0.getWF() + v1.getWF()));
 
@@ -68,16 +74,20 @@ public class QuaternionM4FTest extends QuaternionM4Contract
         final float orig_w = v0.getWF();
         QuaternionM4F.addInPlace(v0, v1);
 
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v0.getXF(),
           orig_x + v1.getXF()));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v0.getYF(),
           orig_y + v1.getYF()));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v0.getZF(),
           orig_z + v1.getZF()));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v0.getWF(),
           orig_w + v1.getWF()));
       }
@@ -525,6 +535,9 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -543,29 +556,37 @@ public class QuaternionM4FTest extends QuaternionM4Contract
       QuaternionM4F.interpolateLinear(v0, v1, 0.0f, vr0);
       QuaternionM4F.interpolateLinear(v0, v1, 1.0f, vr1);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v0.getXF(),
         vr0.getXF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v0.getYF(),
         vr0.getYF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v0.getZF(),
         vr0.getZF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v0.getWF(),
         vr0.getWF()));
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v1.getXF(),
         vr1.getXF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v1.getYF(),
         vr1.getYF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v1.getZF(),
         vr1.getZF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v1.getWF(),
         vr1.getWF()));
     }
@@ -749,17 +770,19 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
   @Override @Test public void testMagnitudeNormalizeZero()
   {
+    final ContextRelative context = TestUtilities.getDoubleEqualityContext();
     final QuaternionM4F v = new QuaternionM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final QuaternionM4F vr = QuaternionM4F.normalizeInPlace(v);
     final double m = QuaternionM4F.magnitude(vr);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
   @Override @Test public void testMagnitudeOne()
   {
+    final ContextRelative context = TestUtilities.getDoubleEqualityContext();
     final QuaternionM4F v = new QuaternionM4F(1.0f, 0.0f, 0.0f, 0.0f);
     final double m = QuaternionM4F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 1.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
@@ -778,9 +801,10 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
   @Override @Test public void testMagnitudeZero()
   {
+    final ContextRelative context = TestUtilities.getDoubleEqualityContext();
     final QuaternionM4F v = new QuaternionM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final double m = QuaternionM4F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
   @Override @Test public void testMakeAxisAngleNormal()
@@ -816,6 +840,9 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
   @Override @Test public void testMakeAxisAngleX_45()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
     final QuaternionM4F q = new QuaternionM4F();
     final QuaternionM4F r =
@@ -830,22 +857,23 @@ public class QuaternionM4FTest extends QuaternionM4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getXF(),
       0.3826834323650898f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getYF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getZF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.9238795325112867f));
   }
 
   @Override @Test public void testMakeAxisAngleX_90()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
     final QuaternionM4F q = new QuaternionM4F();
     final QuaternionM4F r =
@@ -860,22 +888,23 @@ public class QuaternionM4FTest extends QuaternionM4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getXF(),
       0.7071067811865475f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getYF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getZF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.7071067811865475f));
   }
 
   @Override @Test public void testMakeAxisAngleY_45()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     final QuaternionM4F q = new QuaternionM4F();
     final QuaternionM4F r =
@@ -890,22 +919,23 @@ public class QuaternionM4FTest extends QuaternionM4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getXF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getYF(),
       0.3826834323650898f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getZF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.9238795325112867f));
   }
 
   @Override @Test public void testMakeAxisAngleY_90()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     final QuaternionM4F q = new QuaternionM4F();
     final QuaternionM4F r =
@@ -920,22 +950,23 @@ public class QuaternionM4FTest extends QuaternionM4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getXF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getYF(),
       0.7071067811865475f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getZF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.7071067811865475f));
   }
 
   @Override @Test public void testMakeAxisAngleZ_45()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
     final QuaternionM4F q = new QuaternionM4F();
     final QuaternionM4F r =
@@ -950,22 +981,23 @@ public class QuaternionM4FTest extends QuaternionM4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getXF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getYF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getZF(),
       0.3826834323650898f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.9238795325112867f));
   }
 
   @Override @Test public void testMakeAxisAngleZ_90()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
     final QuaternionM4F q = new QuaternionM4F();
     final QuaternionM4F r =
@@ -980,16 +1012,14 @@ public class QuaternionM4FTest extends QuaternionM4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getXF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-      q.getYF(),
-      0.0f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getZF(),
       0.7071067811865475f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       q.getWF(),
       0.7071067811865475f));
   }
@@ -1584,6 +1614,9 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
   @Override @Test public void testMultiply()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
     final QuaternionM4F qx = new QuaternionM4F();
@@ -1614,22 +1647,29 @@ public class QuaternionM4FTest extends QuaternionM4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getXF(),
       0.3535533905932738f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getYF(),
       0.3535533905932738f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getZF(),
       -0.14644660940672624f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getWF(),
       0.8535533905932737f));
   }
 
   @Override @Test public void testMultiplyInPlace()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
 
@@ -1657,22 +1697,29 @@ public class QuaternionM4FTest extends QuaternionM4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getXF(),
       0.3535533983204287f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getYF(),
       0.3535533983204287f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getZF(),
       -0.14644661713388138f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getWF(),
       0.8535533828661185f));
   }
 
   @Override @Test public void testMultiplyInPlaceOther()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
     final VectorI3F axis_z = new VectorI3F(0.0f, 0.0f, 1.0f);
@@ -1706,22 +1753,29 @@ public class QuaternionM4FTest extends QuaternionM4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getXF(),
       0.1913417153164435f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getYF(),
       0.4619397784426109f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getZF(),
       0.1913417153164436f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getWF(),
       0.8446231923478736f));
   }
 
   @Override @Test public void testMultiplyOther()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
     final VectorI3F axis_z = new VectorI3F(0.0f, 0.0f, 1.0f);
@@ -1754,16 +1808,20 @@ public class QuaternionM4FTest extends QuaternionM4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getXF(),
       0.1913417153164435f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getYF(),
       0.4619397784426109f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getZF(),
       0.1913417153164436f));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       qr.getWF(),
       0.8446231923478736f));
   }
@@ -1884,6 +1942,9 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
   @Override @Test public void testScaleOne()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
@@ -1895,16 +1956,20 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
       QuaternionM4F.scale(v, 1.0f, vr);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v.getXF(),
         vr.getXF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v.getYF(),
         vr.getYF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v.getZF(),
         vr.getZF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         v.getWF(),
         vr.getWF()));
 
@@ -1916,16 +1981,20 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
         QuaternionM4F.scaleInPlace(v, 1.0f);
 
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v.getXF(),
           orig_x));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v.getYF(),
           orig_y));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v.getZF(),
           orig_z));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v.getWF(),
           orig_w));
       }
@@ -1934,6 +2003,9 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
   @Override @Test public void testScaleZero()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
@@ -1945,32 +2017,40 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
       QuaternionM4F.scale(v, 0.0f, vr);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getXF(),
         0.0f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getYF(),
         0.0f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getZF(),
         0.0f));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr.getWF(),
         0.0f));
 
       {
         QuaternionM4F.scaleInPlace(v, 0.0f);
 
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v.getXF(),
           0.0f));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v.getYF(),
           0.0f));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v.getZF(),
           0.0f));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v.getWF(),
           0.0f));
       }
@@ -1986,6 +2066,9 @@ public class QuaternionM4FTest extends QuaternionM4Contract
 
   @Override @Test public void testSubtract()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -2002,16 +2085,20 @@ public class QuaternionM4FTest extends QuaternionM4Contract
       final QuaternionM4F vr0 = new QuaternionM4F();
       QuaternionM4F.subtract(v0, v1, vr0);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr0.getXF(),
         v0.getXF() - v1.getXF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr0.getYF(),
         v0.getYF() - v1.getYF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr0.getZF(),
         v0.getZF() - v1.getZF()));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        context,
         vr0.getWF(),
         v0.getWF() - v1.getWF()));
 
@@ -2022,16 +2109,20 @@ public class QuaternionM4FTest extends QuaternionM4Contract
         final float orig_w = v0.getWF();
         QuaternionM4F.subtractInPlace(v0, v1);
 
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v0.getXF(),
           orig_x - v1.getXF()));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v0.getYF(),
           orig_y - v1.getYF()));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v0.getZF(),
           orig_z - v1.getZF()));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(
+          context,
           v0.getWF(),
           orig_w - v1.getWF()));
       }

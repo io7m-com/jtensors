@@ -19,7 +19,7 @@
 <s:document
   xmlns:s="http://www.io7m.com/schemas/structural/1.0.0"
   xmlns:xi="http://www.w3.org/2001/XInclude">
-  <s:document-title>io7m-jtensors 5.0.0 Documentation</s:document-title>
+  <s:document-title>io7m-jtensors 5.1.0 Documentation</s:document-title>
   <s:document-style>documentation.css</s:document-style>
   <s:document-contents/>
 
@@ -86,7 +86,7 @@
           <s:verbatim type="example"><![CDATA[<dependency>
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors</artifactId>
-  <version>5.0.0</version>
+  <version>5.1.0</version>
 </dependency>]]></s:verbatim>
         </s:paragraph>
       </s:subsection>
@@ -178,7 +178,7 @@
       <s:paragraph>
         All files distributed with the <s:term type="package">jtensors</s:term>
         package are placed under the following license:
-        <s:verbatim type="license"><![CDATA[Copyright © 2013 http://io7m.com
+        <s:verbatim type="license"><![CDATA[Copyright © 2013 <code@io7m.com> http://io7m.com
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -212,7 +212,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.]]>
           double-precision (<s:term type="type">double</s:term>) elements,
           and integer (<s:term type="type">int</s:term>) elements. Each vector type
           is available in two, three, and four element versions. Each vector type is
-          available in mutable or immutable versions. The package unambiguously identifies
+          available in mutable or immutable versions. Each vector type is also available
+          in <s:link target="com.io7m.jtensors.vectors.types.phantoms">type-indexed</s:link>
+          versions. The package unambiguously identifies
           the vector types by using the following naming conventions for the types
           (given as a simple
           <s:link-external target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
@@ -224,7 +226,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.]]>
 mutability   = "M" | "I" ;
 size         = "2" | "3" | "4" ;
 element_type = "I" | "F" | "D" ;
-type         = "Vector" , mutability , size , element_type ;]]>
+indexed      = [ "T" ] ;
+type         = "Vector" , mutability , size , element_type , indexed ;]]>
           </s:verbatim>
         </s:formal-item>
         <s:paragraph>
@@ -236,26 +239,44 @@ type         = "Vector" , mutability , size , element_type ;]]>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM2D.html">VectorM2D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM2F.html">VectorM2F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM2I.html">VectorM2I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM2DT.html">VectorM2DT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM2FT.html">VectorM2FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM2IT.html">VectorM2IT</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM3D.html">VectorM3D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM3F.html">VectorM3F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM3I.html">VectorM3I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM3DT.html">VectorM3DT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM3FT.html">VectorM3FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM3IT.html">VectorM3IT</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM4D.html">VectorM4D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM4F.html">VectorM4F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM4I.html">VectorM4I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM4DT.html">VectorM4DT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM4FT.html">VectorM4FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM4IT.html">VectorM4IT</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI2D.html">VectorI2D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI2F.html">VectorI2F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI2I.html">VectorI2I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI2DT.html">VectorI2DT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI2FT.html">VectorI2FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI2IT.html">VectorI2IT</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI3D.html">VectorI3D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI3F.html">VectorI3F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI3I.html">VectorI3I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI3DT.html">VectorI3DT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI3FT.html">VectorI3FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI3IT.html">VectorI3IT</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI4D.html">VectorI4D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI4F.html">VectorI4F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI4I.html">VectorI4I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI4DT.html">VectorI4DT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI4FT.html">VectorI4FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI4IT.html">VectorI4IT</s:link-external></s:list-item>
           </s:list-unordered>
         </s:formal-item>
       </s:subsection>
@@ -277,16 +298,85 @@ type         = "Vector" , mutability , size , element_type ;]]>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable2I.html">VectorReadable2I</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable2F.html">VectorReadable2F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable2D.html">VectorReadable2D</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable2IT.html">VectorReadable2IT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable2FT.html">VectorReadable2FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable2DT.html">VectorReadable2DT</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable3I.html">VectorReadable3I</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable3F.html">VectorReadable3F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable3D.html">VectorReadable3D</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable3IT.html">VectorReadable3IT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable3FT.html">VectorReadable3FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable3DT.html">VectorReadable3DT</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable4I.html">VectorReadable4I</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable4F.html">VectorReadable4F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable4D.html">VectorReadable4D</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable4IT.html">VectorReadable4IT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable4F.html">VectorReadable4FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable4D.html">VectorReadable4DT</s:link-external></s:list-item>
           </s:list-unordered>
         </s:formal-item>
+      </s:subsection>
+      <s:subsection xml:id="com.io7m.jtensors.vectors.types.phantoms">
+        <s:subsection-title>Type indices</s:subsection-title>
+        <s:paragraph>
+	      Experience has shown that it is all too easy to mix up vectors
+	      of conceptually distinct types in programs, causing extremely
+	      difficult-to-locate bugs. As an example, in a program working
+	      with 3D meshes, axes may be specified in "world space", "object space",
+	      "tangent space" and a potentially infinite number of other spaces. If
+	      the programmer passes an axis in "world space" to a function that
+	      expects one in "tangent space", the result is usually incorrect
+	      visual output (or no visual output at all). This class of bug is
+	      something that the compiler should be able to detect! The
+	      <s:term type="package">jtensors</s:term> package therefore provides
+	      a set of vector types that can be parameterized by other types in
+	      order to "tag" the vectors at compile-time, allowing the compiler
+	      to prevent the class of bugs described previously. As an example:
+        </s:paragraph>
+        <s:formal-item kind="examples">
+          <s:formal-item-title>No type indices</s:formal-item-title>
+          <s:verbatim><![CDATA[
+void doSomethingWithTangentAxis(final VectorI3F axis)
+{
+  // ...
+}
+
+VectorI3F axis_tangent = new VectorI3F(1.0f, 0.0f, 0.0f);
+VectorI3F axis_world   = new VectorI3F(0.0f, 1.0f, 0.0f);
+
+doSomethingWithTangentAxis(axis_tangent);
+
+// Oops, passed an axis in world space, where one in tangent space was required.
+doSomethingWithTangentAxis(axis_world);
+]]></s:verbatim>
+        </s:formal-item>
+        <s:formal-item kind="examples">
+          <s:formal-item-title>Type indices</s:formal-item-title>
+          <s:verbatim><![CDATA[
+class World   { }
+class Tangent { }
+
+void doSomethingWithTangentAxis(final VectorI3FT<Tangent> axis)
+{
+  // ...
+}
+
+VectorI3FT<Tangent> axis_tangent = new VectorI3FT<Tangent>(1.0f, 0.0f, 0.0f);
+VectorI3FT<World> axis_world   = new VectorI3FT<World>(0.0f, 1.0f, 0.0f);
+
+doSomethingWithTangentAxis(axis_tangent);
+
+// The method doSomethingWithTangentAxis(VectorI3FT<Tangent>) is not applicable for the arguments (VectorI3FT<World>)
+doSomethingWithTangentAxis(axis_world);
+]]></s:verbatim>
+        </s:formal-item>
+        <s:paragraph>
+          The programmer is statically prevented from passing an axis
+          in world space to a function that requires one in tangent
+          space.
+        </s:paragraph>
       </s:subsection>
     </s:section>
 
@@ -300,7 +390,9 @@ type         = "Vector" , mutability , size , element_type ;]]>
           The <s:term type="package">jtensors</s:term> package provides only square
           matrix types with single-precision (<s:term type="type">float</s:term>) elements,
           and double-precision (<s:term type="type">double</s:term>) elements.
-          Matrices are currently only available in mutable form. The package unambiguously
+          Matrices are currently only available in mutable form. Each matrix type is also available
+          in <s:link target="com.io7m.jtensors.matrices.types.phantoms">type-indexed</s:link>
+          versions. The package unambiguously
           identifies the matrix types by using the following naming conventions for the types
           (given as a simple
           <s:link-external target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
@@ -312,7 +404,8 @@ type         = "Vector" , mutability , size , element_type ;]]>
 mutability   = "M" ;
 size         = "2x2" | "3x3" | "4x4" ;
 element_type = "F" | "D" ;
-type         = "Matrix" , mutability , size , element_type ;]]>
+indexed      = [ "T" ] ;
+type         = "Matrix" , mutability , size , element_type , indexed ;]]>
           </s:verbatim>
         </s:formal-item>
         <s:paragraph>
@@ -323,12 +416,18 @@ type         = "Matrix" , mutability , size , element_type ;]]>
           <s:list-unordered>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM2x2D.html">MatrixM2x2D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM2x2F.html">MatrixM2x2F</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM2x2DT.html">MatrixM2x2DT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM2x2FT.html">MatrixM2x2FT</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM3x3D.html">MatrixM3x3D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM3x3F.html">MatrixM3x3F</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM3x3DT.html">MatrixM3x3DT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM3x3FT.html">MatrixM3x3FT</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM4x4D.html">MatrixM4x4D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM4x4F.html">MatrixM4x4F</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM4x4DT.html">MatrixM4x4DT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixM4x4FT.html">MatrixM4x4FT</s:link-external></s:list-item>
           </s:list-unordered>
         </s:formal-item>
       </s:subsection>
@@ -484,14 +583,78 @@ MatrixM4x4D.invertWithContext(context, mo, mi);]]>
           <s:list-unordered>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable2x2F.html">MatrixReadable2x2F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable2x2D.html">MatrixReadable2x2D</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable2x2FT.html">MatrixReadable2x2FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable2x2DT.html">MatrixReadable2x2DT</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable3x3F.html">MatrixReadable3x3F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable3x3D.html">MatrixReadable3x3D</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable3x3FT.html">MatrixReadable3x3FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable3x3DT.html">MatrixReadable3x3DT</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable4x4F.html">MatrixReadable4x4F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable4x4D.html">MatrixReadable4x4D</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable4x4FT.html">MatrixReadable4x4FT</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/MatrixReadable4x4DT.html">MatrixReadable4x4DT</s:link-external></s:list-item>
           </s:list-unordered>
         </s:formal-item>
+      </s:subsection>
+      <s:subsection xml:id="com.io7m.jtensors.matrices.types.phantoms">
+        <s:subsection-title>Type indices</s:subsection-title>
+        <s:paragraph>
+	      Experience has shown that it is all too easy to mix up matrices
+	      of conceptually distinct types in programs, causing extremely
+	      difficult-to-locate bugs. As an example, in a 3D visualization
+	      program, the programmer is probably working with "Model/View" and
+	      "Projection" matrices. If the programmer manages to confuse the two,
+	      the result is usually incorrect visual output (or no visual output
+	      at all). This class of bug is something that the compiler should
+	      be able to detect! The
+	      <s:term type="package">jtensors</s:term> package therefore provides
+	      a set of matrix types that can be parameterized by other types in
+	      order to "tag" the matrices at compile-time, allowing the compiler
+	      to prevent the class of bugs described previously. As an example:
+        </s:paragraph>
+        <s:formal-item kind="examples">
+          <s:formal-item-title>No type indices</s:formal-item-title>
+          <s:verbatim><![CDATA[
+void uploadProjectionMatrix(final MatrixM4x4D m)
+{
+  // ...
+}
+
+MatrixM4x4D matrix_projection = new MatrixM4x4D();
+MatrixM4x4D matrix_modelview = new MatrixM4x4D();
+
+uploadProjectionMatrix(matrix_projection);
+
+// Oops, passed a modelview matrix where a projection matrix was required.
+uploadProjectionMatrix(matrix_modelview);
+]]></s:verbatim>
+        </s:formal-item>
+        <s:formal-item kind="examples">
+          <s:formal-item-title>Type indices</s:formal-item-title>
+          <s:verbatim><![CDATA[
+class ModelView   { }
+class Projection { }
+
+void uploadProjectionMatrix(final MatrixM4x4DT<Projection> m)
+{
+  // ...
+}
+
+MatrixM4x4DT<Projection> matrix_projection = new MatrixM4x4<Projection>();
+MatrixM4x4DT<Modelview> matrix_modelview = new MatrixM4x4<Modelview>();
+
+uploadProjectionMatrix(matrix_projection);
+
+// The method uploadProjectionMatrix(Matrix4x4DT<Projection>) is not applicable for the arguments (Matrix4x4DT<ModelView>)
+uploadProjectionMatrix(matrix_modelview);
+]]></s:verbatim>
+        </s:formal-item>
+        <s:paragraph>
+          The programmer is statically prevented from passing a ModelView
+          matrix to a function that expects a Projection matrix.
+        </s:paragraph>
       </s:subsection>
     </s:section>
 

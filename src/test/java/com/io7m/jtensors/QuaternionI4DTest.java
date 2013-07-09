@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -21,7 +21,6 @@ import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
-import com.io7m.jaux.ApproximatelyEqualDouble;
 
 public class QuaternionI4DTest extends QuaternionI4Contract
 {
@@ -31,6 +30,8 @@ public class QuaternionI4DTest extends QuaternionI4Contract
 
   @Override @Test public void testAdd()
   {
+    final ContextRelative context = new ContextRelative();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double max = 10000.0;
       final double x0 = Math.random() * max;
@@ -47,16 +48,20 @@ public class QuaternionI4DTest extends QuaternionI4Contract
 
       final QuaternionI4D vr = QuaternionI4D.add(v0, v1);
 
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        context,
         vr.getXD(),
         v0.getXD() + v1.getXD()));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        context,
         vr.getYD(),
         v0.getYD() + v1.getYD()));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        context,
         vr.getZD(),
         v0.getZD() + v1.getZD()));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        context,
         vr.getWD(),
         v0.getWD() + v1.getWD()));
     }
@@ -693,6 +698,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
 
   @Override @Test public void testMakeAxisAngleNormal()
   {
+    final ContextRelative context = new ContextRelative();
+    context.setMaxAbsoluteDifference(0.000000000000001);
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final VectorI3D axis_r =
         new VectorI3D(Math.random(), Math.random(), Math.random());
@@ -703,16 +711,20 @@ public class QuaternionI4DTest extends QuaternionI4Contract
           axis_n,
           Math.toRadians(Math.random() * 360));
 
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+      System.out.println("q            : " + q);
+      System.out.println("magnitude(q) : " + QuaternionI4D.magnitude(q));
+
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        context,
         QuaternionI4D.magnitude(q),
         1.0));
-
-      System.out.println("q : " + q);
     }
   }
 
   @Override @Test public void testMakeAxisAngleX_45()
   {
+    final ContextRelative context = new ContextRelative();
+
     final VectorI3D axis = new VectorI3D(1.0, 0.0, 0.0);
     final QuaternionI4D q =
       QuaternionI4D.makeFromAxisAngle(axis, Math.toRadians(45));
@@ -725,22 +737,23 @@ public class QuaternionI4DTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getXD(),
       0.3826834323650898));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getYD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getZD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getYD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getZD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getWD(),
       0.9238795325112867));
   }
 
   @Override @Test public void testMakeAxisAngleX_90()
   {
+    final ContextRelative context = new ContextRelative();
+    context.setMaxAbsoluteDifference(0.000000000000001);
+
     final VectorI3D axis = new VectorI3D(1.0, 0.0, 0.0);
     final QuaternionI4D q =
       QuaternionI4D.makeFromAxisAngle(axis, Math.toRadians(90));
@@ -753,22 +766,22 @@ public class QuaternionI4DTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getXD(),
       0.7071067811865475));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getYD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getZD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getYD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getZD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getWD(),
       0.7071067811865475));
   }
 
   @Override @Test public void testMakeAxisAngleY_45()
   {
+    final ContextRelative context = new ContextRelative();
+
     final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
     final QuaternionI4D q =
       QuaternionI4D.makeFromAxisAngle(axis, Math.toRadians(45));
@@ -781,22 +794,23 @@ public class QuaternionI4DTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getXD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getXD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getYD(),
       0.3826834323650898));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getZD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getZD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getWD(),
       0.9238795325112867));
   }
 
   @Override @Test public void testMakeAxisAngleY_90()
   {
+    final ContextRelative context = new ContextRelative();
+    context.setMaxAbsoluteDifference(0.000000000000001);
+
     final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
     final QuaternionI4D q =
       QuaternionI4D.makeFromAxisAngle(axis, Math.toRadians(90));
@@ -809,22 +823,22 @@ public class QuaternionI4DTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getXD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getXD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getYD(),
       0.7071067811865475));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getZD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getZD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getWD(),
       0.7071067811865475));
   }
 
   @Override @Test public void testMakeAxisAngleZ_45()
   {
+    final ContextRelative context = new ContextRelative();
+
     final VectorI3D axis = new VectorI3D(0.0, 0.0, 1.0);
     final QuaternionI4D q =
       QuaternionI4D.makeFromAxisAngle(axis, Math.toRadians(45));
@@ -837,22 +851,23 @@ public class QuaternionI4DTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getXD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getYD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getXD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getYD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getZD(),
       0.3826834323650898));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getWD(),
       0.9238795325112867));
   }
 
   @Override @Test public void testMakeAxisAngleZ_90()
   {
+    final ContextRelative context = new ContextRelative();
+    context.setMaxAbsoluteDifference(0.000000000000001);
+
     final VectorI3D axis = new VectorI3D(0.0, 0.0, 1.0);
     final QuaternionI4D q =
       QuaternionI4D.makeFromAxisAngle(axis, Math.toRadians(90));
@@ -865,16 +880,14 @@ public class QuaternionI4DTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getXD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-      q.getYD(),
-      0.0));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getXD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, q.getYD(), 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getZD(),
       0.7071067811865475));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       q.getWD(),
       0.7071067811865475));
   }
@@ -1451,6 +1464,8 @@ public class QuaternionI4DTest extends QuaternionI4Contract
 
   @Override @Test public void testMultiply()
   {
+    final ContextRelative context = new ContextRelative();
+
     final VectorI3D axis_x = new VectorI3D(1.0, 0.0, 0.0);
     final VectorI3D axis_y = new VectorI3D(0.0, 1.0, 0.0);
     final QuaternionI4D qx =
@@ -1472,16 +1487,20 @@ public class QuaternionI4DTest extends QuaternionI4Contract
      * @see http://blender.org
      */
 
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       qr.getXD(),
       0.3535533905932738));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       qr.getYD(),
       0.3535533905932738));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       qr.getZD(),
       -0.14644660940672624));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       qr.getWD(),
       0.8535533905932737));
   }
@@ -1602,6 +1621,8 @@ public class QuaternionI4DTest extends QuaternionI4Contract
 
   @Override @Test public void testSubtract()
   {
+    final ContextRelative context = new ContextRelative();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
@@ -1617,16 +1638,20 @@ public class QuaternionI4DTest extends QuaternionI4Contract
 
       final QuaternionI4D vr = QuaternionI4D.subtract(v0, v1);
 
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        context,
         vr.getXD(),
         v0.getXD() - v1.getXD()));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        context,
         vr.getYD(),
         v0.getYD() - v1.getYD()));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        context,
         vr.getZD(),
         v0.getZD() - v1.getZD()));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        context,
         vr.getWD(),
         v0.getWD() - v1.getWD()));
     }

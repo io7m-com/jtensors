@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -23,10 +23,14 @@ import com.io7m.jaux.AlmostEqualFloat;
 import com.io7m.jaux.functional.Pair;
 
 /**
+ * <p>
  * A four-dimensional mutable vector type with single precision elements.
+ * </p>
  * 
+ * <p>
  * Values of this type cannot be accessed safely from multiple threads without
  * explicit synchronization.
+ * </p>
  */
 
 @NotThreadSafe public final class VectorM4F implements VectorReadable4F
@@ -724,12 +728,13 @@ import com.io7m.jaux.functional.Pair;
   }
 
   /**
+   * <p>
    * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
    * .
-   * 
-   * @see <a
-   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
-   *      process</a>
+   * </p>
+   * <p>
+   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
+   * </p>
    * 
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
    * 
@@ -751,12 +756,12 @@ import com.io7m.jaux.functional.Pair;
   }
 
   /**
-   * Orthonormalize and the vectors <code>v0</code> and <code>v1</code>,
-   * modifying them in-place.
-   * 
-   * @see <a
-   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
-   *      process</a>
+   * <p>
+   * Orthonormalize and the vectors <code>v0</code> and <code>v1</code>.
+   * </p>
+   * <p>
+   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
+   * </p>
    * 
    * @since 5.0.0
    */
