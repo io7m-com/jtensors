@@ -766,6 +766,17 @@ import com.io7m.jaux.functional.Option;
     this.view.rewind();
   }
 
+  /**
+   * Package-private constructor used to construct wrapped/shared matrices.
+   */
+
+  MatrixM2x2F(
+    final @Nonnull ByteBuffer shared)
+  {
+    this.data = shared;
+    this.view = shared.asFloatBuffer();
+  }
+
   @Override public boolean equals(
     final Object obj)
   {

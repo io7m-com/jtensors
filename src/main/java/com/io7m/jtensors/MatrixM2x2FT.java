@@ -870,4 +870,18 @@ import com.io7m.jaux.functional.Option;
     }
     return builder.toString();
   }
+
+  /**
+   * <p>
+   * Cast away the extra type information to give an ordinary
+   * {@link MatrixM2x2F}. The resulting matrix instance shares the internal
+   * data of this matrix instance (and therefore extreme caution should be
+   * taken when mutating either instance).
+   * </p>
+   */
+
+  public @Nonnull MatrixM2x2F asMatrixM2x2F()
+  {
+    return new MatrixM2x2F(this.data);
+  }
 }

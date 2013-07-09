@@ -2535,4 +2535,18 @@ import com.io7m.jaux.functional.Option;
     }
     return builder.toString();
   }
+
+  /**
+   * <p>
+   * Cast away the extra type information to give an ordinary
+   * {@link MatrixM4x4D}. The resulting matrix instance shares the internal
+   * data of this matrix instance (and therefore extreme caution should be
+   * taken when mutating either instance).
+   * </p>
+   */
+
+  public @Nonnull MatrixM4x4D asMatrixM4x4D()
+  {
+    return new MatrixM4x4D(this.data);
+  }
 }

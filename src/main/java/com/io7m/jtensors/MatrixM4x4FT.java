@@ -2412,6 +2412,20 @@ import com.io7m.jaux.functional.Option;
     this.view.rewind();
   }
 
+  /**
+   * <p>
+   * Cast away the extra type information to give an ordinary
+   * {@link MatrixM4x4F}. The resulting matrix instance shares the internal
+   * data of this matrix instance (and therefore extreme caution should be
+   * taken when mutating either instance).
+   * </p>
+   */
+
+  public @Nonnull MatrixM4x4F asMatrixM4x4F()
+  {
+    return new MatrixM4x4F(this.data);
+  }
+
   @Override public boolean equals(
     final Object obj)
   {
