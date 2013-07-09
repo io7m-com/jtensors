@@ -132,8 +132,11 @@ public final class APICompleteness
           VectorM3F.class,
           VectorM3I.class,
           VectorI3D.class,
+          VectorI3DT.class,
           VectorI3F.class,
-          VectorI3I.class };
+          VectorI3FT.class,
+          VectorI3I.class,
+          VectorI3IT.class };
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(VectorM3D.class, c);
       }
@@ -156,7 +159,10 @@ public final class APICompleteness
           VectorM4I.class,
           VectorI4D.class,
           VectorI4F.class,
-          VectorI4I.class };
+          VectorI4I.class,
+          VectorI4DT.class,
+          VectorI4FT.class,
+          VectorI4IT.class };
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(VectorM4D.class, c);
       }
