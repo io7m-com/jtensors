@@ -29,8 +29,14 @@ import com.io7m.jaux.functional.Option.Type;
 
 public class MatrixM4x4DTTest extends MatrixM4x4TContract
 {
+  class World
+  {
+    // Nothing
+  }
+
   private static final VectorReadable3D AXIS_X = new VectorI3D(1, 0, 0);
   private static final VectorReadable3D AXIS_Y = new VectorI3D(0, 1, 0);
+
   private static final VectorReadable3D AXIS_Z = new VectorI3D(0, 0, 1);
 
   private static <A> void isRotationMatrixX(
@@ -1706,11 +1712,6 @@ public class MatrixM4x4DTTest extends MatrixM4x4TContract
     Assert.assertTrue(eq);
     eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(3, 3));
     Assert.assertTrue(eq);
-  }
-
-  class World
-  {
-    // Nothing
   }
 
   @Override @Test public

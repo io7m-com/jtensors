@@ -30,8 +30,14 @@ import com.io7m.jaux.functional.Option.Type;
 
 public class MatrixM4x4FTTest extends MatrixM4x4TContract
 {
+  class World
+  {
+    // Nothing
+  }
+
   private static final VectorReadable3F AXIS_X = new VectorI3F(1, 0, 0);
   private static final VectorReadable3F AXIS_Y = new VectorI3F(0, 1, 0);
+
   private static final VectorReadable3F AXIS_Z = new VectorI3F(0, 0, 1);
 
   private static <A> void isRotationMatrixX(
@@ -1582,11 +1588,6 @@ public class MatrixM4x4FTTest extends MatrixM4x4TContract
       Assert.assertEquals(0, MatrixM4x4FT.floatBuffer(m0).position());
       Assert.assertEquals(0, MatrixM4x4FT.floatBuffer(m1).position());
     }
-  }
-
-  class World
-  {
-    // Nothing
   }
 
   @Override @Test public

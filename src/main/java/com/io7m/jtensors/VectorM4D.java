@@ -763,6 +763,7 @@ import com.io7m.jaux.functional.Pair;
    * <p>
    * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
+   * 
    * @since 5.0.0
    */
 
