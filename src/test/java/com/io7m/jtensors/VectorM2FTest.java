@@ -21,7 +21,7 @@ import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.AlmostEqualFloat;
-import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
 import com.io7m.jaux.functional.Pair;
 
 public class VectorM2FTest extends VectorM2Contract
@@ -982,10 +982,9 @@ public class VectorM2FTest extends VectorM2Contract
 
       VectorM2F.scale(v, 0.0f, vr);
 
-      Assert.assertTrue(ApproximatelyEqualFloat
-        .approximatelyEqual(vr.x, 0.0f));
-      Assert.assertTrue(ApproximatelyEqualFloat
-        .approximatelyEqual(vr.y, 0.0f));
+      final ContextRelative context = new ContextRelative();
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.x, 0.0f));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.y, 0.0f));
 
       {
         VectorM2F.scaleInPlace(v, 0.0f);

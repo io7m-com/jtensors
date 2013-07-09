@@ -20,7 +20,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
-import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 import com.io7m.jaux.functional.Pair;
 
 public class VectorM2DTest extends VectorM2Contract
@@ -936,10 +936,9 @@ public class VectorM2DTest extends VectorM2Contract
 
       VectorM2D.scale(v, 1.0, vr);
 
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(v.x, vr.x));
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(v.y, vr.y));
+      final ContextRelative context = new ContextRelative();
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, v.x, vr.x));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, v.y, vr.y));
 
       {
         final double orig_x = v.x;
@@ -967,10 +966,9 @@ public class VectorM2DTest extends VectorM2Contract
 
       VectorM2D.scale(v, 0.0, vr);
 
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(vr.x, 0.0));
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(vr.y, 0.0));
+      final ContextRelative context = new ContextRelative();
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, vr.x, 0.0));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, vr.y, 0.0));
 
       {
         VectorM2D.scaleInPlace(v, 0.0);

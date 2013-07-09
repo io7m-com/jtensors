@@ -20,9 +20,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 import com.io7m.jaux.AlmostEqualFloat;
-import com.io7m.jaux.ApproximatelyEqualDouble;
-import com.io7m.jaux.ApproximatelyEqualFloat;
 import com.io7m.jaux.functional.Pair;
 
 public class VectorM4FTest extends VectorM4Contract
@@ -608,7 +607,9 @@ public class VectorM4FTest extends VectorM4Contract
   {
     final VectorM4F v0 = new VectorM4F(0.0f, 1.0f, 0.0f, 0.0f);
     final VectorM4F v1 = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    final ContextRelative context = new ContextRelative();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       VectorM4F.distance(v0, v1),
       1.0f));
   }
@@ -974,14 +975,16 @@ public class VectorM4FTest extends VectorM4Contract
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final VectorM4F vr = VectorM4F.normalizeInPlace(v);
     final double m = VectorM4F.magnitude(vr);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
+    final ContextRelative context = new ContextRelative();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
   @Override @Test public void testMagnitudeOne()
   {
     final VectorM4F v = new VectorM4F(1.0f, 0.0f, 0.0f, 0.0f);
     final double m = VectorM4F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 1.0));
+    final ContextRelative context = new ContextRelative();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
@@ -1002,7 +1005,8 @@ public class VectorM4FTest extends VectorM4Contract
   {
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final double m = VectorM4F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
+    final ContextRelative context = new ContextRelative();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
   @Override @Test public void testNormalizeSimple()
@@ -1169,14 +1173,10 @@ public class VectorM4FTest extends VectorM4Contract
 
       VectorM4F.scale(v, 0.0f, vr);
 
-      Assert.assertTrue(ApproximatelyEqualFloat
-        .approximatelyEqual(vr.x, 0.0f));
-      Assert.assertTrue(ApproximatelyEqualFloat
-        .approximatelyEqual(vr.y, 0.0f));
-      Assert.assertTrue(ApproximatelyEqualFloat
-        .approximatelyEqual(vr.z, 0.0f));
-      Assert.assertTrue(ApproximatelyEqualFloat
-        .approximatelyEqual(vr.w, 0.0f));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.x, 0.0f));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.y, 0.0f));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.z, 0.0f));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.w, 0.0f));
 
       {
         VectorM4F.scaleInPlace(v, 0.0f);

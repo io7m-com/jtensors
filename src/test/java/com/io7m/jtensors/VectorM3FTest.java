@@ -21,8 +21,7 @@ import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.AlmostEqualFloat;
-import com.io7m.jaux.ApproximatelyEqualDouble;
-import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
 import com.io7m.jaux.functional.Pair;
 
 public class VectorM3FTest extends VectorM3Contract
@@ -582,7 +581,10 @@ public class VectorM3FTest extends VectorM3Contract
   {
     final VectorM3F v0 = new VectorM3F(0.0f, 1.0f, 0.0f);
     final VectorM3F v1 = new VectorM3F(0.0f, 0.0f, 0.0f);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    final AlmostEqualDouble.ContextRelative context =
+      new AlmostEqualDouble.ContextRelative();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      context,
       VectorM3F.distance(v0, v1),
       1.0f));
   }
@@ -918,14 +920,18 @@ public class VectorM3FTest extends VectorM3Contract
     final VectorM3F v = new VectorM3F(0.0f, 0.0f, 0.0f);
     final VectorM3F vr = VectorM3F.normalizeInPlace(v);
     final double m = VectorM3F.magnitude(vr);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
+    final AlmostEqualDouble.ContextRelative context =
+      new AlmostEqualDouble.ContextRelative();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
   @Override @Test public void testMagnitudeOne()
   {
     final VectorM3F v = new VectorM3F(1.0f, 0.0f, 0.0f);
     final double m = VectorM3F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 1.0));
+    final AlmostEqualDouble.ContextRelative context =
+      new AlmostEqualDouble.ContextRelative();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
@@ -946,7 +952,9 @@ public class VectorM3FTest extends VectorM3Contract
   {
     final VectorM3F v = new VectorM3F(0.0f, 0.0f, 0.0f);
     final double m = VectorM3F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
+    final AlmostEqualDouble.ContextRelative context =
+      new AlmostEqualDouble.ContextRelative();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
   @Override @Test public void testNormalizeSimple()
@@ -1101,12 +1109,10 @@ public class VectorM3FTest extends VectorM3Contract
 
       VectorM3F.scale(v, 0.0f, vr);
 
-      Assert.assertTrue(ApproximatelyEqualFloat
-        .approximatelyEqual(vr.x, 0.0f));
-      Assert.assertTrue(ApproximatelyEqualFloat
-        .approximatelyEqual(vr.y, 0.0f));
-      Assert.assertTrue(ApproximatelyEqualFloat
-        .approximatelyEqual(vr.z, 0.0f));
+      final ContextRelative context = new ContextRelative();
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.x, 0.0f));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.y, 0.0f));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.z, 0.0f));
 
       {
         VectorM3F.scaleInPlace(v, 0.0f);
