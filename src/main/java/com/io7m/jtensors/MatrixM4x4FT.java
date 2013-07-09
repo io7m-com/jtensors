@@ -1197,10 +1197,10 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull <A> MatrixM4x4FT<A> multiply(
+  public static @Nonnull <A, B, C> MatrixM4x4FT<C> multiply(
     final @Nonnull MatrixReadable4x4FT<A> m0,
-    final @Nonnull MatrixReadable4x4FT<A> m1,
-    final @Nonnull MatrixM4x4FT<A> out)
+    final @Nonnull MatrixReadable4x4FT<B> m1,
+    final @Nonnull MatrixM4x4FT<C> out)
   {
     float r0c0 = 0;
     r0c0 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 0);
@@ -1333,9 +1333,9 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull <A> MatrixM4x4FT<A> multiplyInPlace(
+  public static @Nonnull <A, B> MatrixM4x4FT<A> multiplyInPlace(
     final @Nonnull MatrixM4x4FT<A> m0,
-    final @Nonnull MatrixReadable4x4FT<A> m1)
+    final @Nonnull MatrixReadable4x4FT<B> m1)
   {
     return MatrixM4x4FT.multiply(m0, m1, m0);
   }

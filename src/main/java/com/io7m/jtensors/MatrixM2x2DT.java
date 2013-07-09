@@ -410,9 +410,9 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull <A> MatrixM2x2DT<A> multiply(
+  public static @Nonnull <A, B> MatrixM2x2DT<A> multiply(
     final @Nonnull MatrixM2x2DT<A> m0,
-    final @Nonnull MatrixReadable2x2DT<A> m1)
+    final @Nonnull MatrixReadable2x2DT<B> m1)
   {
     return MatrixM2x2DT.multiply(m0, m1, m0);
   }
@@ -430,10 +430,10 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull <A> MatrixM2x2DT<A> multiply(
+  public static @Nonnull <A, B, C> MatrixM2x2DT<C> multiply(
     final @Nonnull MatrixReadable2x2DT<A> m0,
-    final @Nonnull MatrixReadable2x2DT<A> m1,
-    final @Nonnull MatrixM2x2DT<A> out)
+    final @Nonnull MatrixReadable2x2DT<B> m1,
+    final @Nonnull MatrixM2x2DT<C> out)
   {
     final double r0c0 =
       (m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 0))

@@ -659,10 +659,10 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull <A> MatrixM3x3DT<A> multiply(
+  public static @Nonnull <A, B, C> MatrixM3x3DT<C> multiply(
     final @Nonnull MatrixReadable3x3DT<A> m0,
-    final @Nonnull MatrixReadable3x3DT<A> m1,
-    final @Nonnull MatrixM3x3DT<A> out)
+    final @Nonnull MatrixReadable3x3DT<B> m1,
+    final @Nonnull MatrixM3x3DT<C> out)
   {
     double r0c0 = 0;
     r0c0 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 0);
@@ -736,9 +736,9 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull <A> MatrixM3x3DT<A> multiplyInPlace(
+  public static @Nonnull <A, B> MatrixM3x3DT<A> multiplyInPlace(
     final @Nonnull MatrixM3x3DT<A> m0,
-    final @Nonnull MatrixReadable3x3DT<A> m1)
+    final @Nonnull MatrixReadable3x3DT<B> m1)
   {
     return MatrixM3x3DT.multiply(m0, m1, m0);
   }
