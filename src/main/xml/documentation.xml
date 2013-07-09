@@ -374,7 +374,7 @@ doSomethingWithTangentAxis(axis_world);
         </s:formal-item>
         <s:paragraph>
           The programmer is statically prevented from passing an axis
-          in world space to the function that requires one in tangent
+          in world space to a function that requires one in tangent
           space.
         </s:paragraph>
       </s:subsection>
@@ -652,8 +652,8 @@ uploadProjectionMatrix(matrix_modelview);
 ]]></s:verbatim>
         </s:formal-item>
         <s:paragraph>
-          The programmer is statically prevented from a modelview matrix
-          to a function that expects a projection matrix.
+          The programmer is statically prevented from passing a ModelView
+          matrix to a function that expects a Projection matrix.
         </s:paragraph>
       </s:subsection>
     </s:section>
