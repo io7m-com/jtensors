@@ -48,6 +48,8 @@ import com.io7m.jaux.functional.Option;
  * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed for
  * the derivations of most of the code in this class (ISBN: 1-58450-277-0).
  * </p>
+ * 
+ * @since 5.1.0
  */
 
 @NotThreadSafe public final class MatrixM2x2FT<A> implements
@@ -796,7 +798,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM2x2FT.get(this, row, column);
   }
 
-  @Override public FloatBuffer getFloatBuffer()
+  @Override public @Nonnull FloatBuffer getFloatBuffer()
   {
     return this.view;
   }
