@@ -300,9 +300,7 @@ type         = "Vector" , mutability , size , element_type ;]]>
           The <s:term type="package">jtensors</s:term> package provides only square
           matrix types with single-precision (<s:term type="type">float</s:term>) elements,
           and double-precision (<s:term type="type">double</s:term>) elements.
-          Matrices are currently only available in mutable form. Each matrix type is also available
-          in <s:link target="com.io7m.jtensors.matrices.types.phantoms">type-indexed</s:link>
-          versions. The package unambiguously
+          Matrices are currently only available in mutable form. The package unambiguously
           identifies the matrix types by using the following naming conventions for the types
           (given as a simple
           <s:link-external target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
