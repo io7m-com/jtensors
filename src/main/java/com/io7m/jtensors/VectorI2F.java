@@ -33,7 +33,7 @@ import com.io7m.jaux.functional.Pair;
  * </p>
  */
 
-@Immutable public final class VectorI2F implements VectorReadable2F
+@Immutable public class VectorI2F implements VectorReadable2F
 {
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
@@ -47,7 +47,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
    */
 
-  public static @Nonnull VectorI2F add(
+  public final static @Nonnull VectorI2F add(
     final @Nonnull VectorReadable2F v0,
     final @Nonnull VectorReadable2F v1)
   {
@@ -68,7 +68,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
    */
 
-  public static @Nonnull VectorI2F addScaled(
+  public final static @Nonnull VectorI2F addScaled(
     final @Nonnull VectorReadable2F v0,
     final @Nonnull VectorReadable2F v1,
     final double r)
@@ -91,7 +91,7 @@ import com.io7m.jaux.functional.Pair;
    * @since 5.0.0
    */
 
-  public static boolean almostEqual(
+  public final static boolean almostEqual(
     final @Nonnull ContextRelative context,
     final @Nonnull VectorReadable2F qa,
     final @Nonnull VectorReadable2F qb)
@@ -115,7 +115,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The angle between the two vectors, in radians.
    */
 
-  public static double angle(
+  public final static double angle(
     final @Nonnull VectorReadable2F v0,
     final @Nonnull VectorReadable2F v1)
   {
@@ -143,7 +143,7 @@ import com.io7m.jaux.functional.Pair;
    *         and at least <code>minimum</code>.
    */
 
-  public static @Nonnull VectorI2F clamp(
+  public final static @Nonnull VectorI2F clamp(
     final @Nonnull VectorReadable2F v,
     final float minimum,
     final float maximum)
@@ -168,7 +168,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))</code>
    */
 
-  public static @Nonnull VectorI2F clampByVector(
+  public final static @Nonnull VectorI2F clampByVector(
     final @Nonnull VectorReadable2F v,
     final @Nonnull VectorReadable2F minimum,
     final @Nonnull VectorReadable2F maximum)
@@ -192,7 +192,7 @@ import com.io7m.jaux.functional.Pair;
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public static @Nonnull VectorI2F clampMaximum(
+  public final static @Nonnull VectorI2F clampMaximum(
     final @Nonnull VectorReadable2F v,
     final float maximum)
   {
@@ -213,7 +213,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
    */
 
-  public static @Nonnull VectorI2F clampMaximumByVector(
+  public final static @Nonnull VectorI2F clampMaximumByVector(
     final @Nonnull VectorReadable2F v,
     final @Nonnull VectorReadable2F maximum)
   {
@@ -235,7 +235,7 @@ import com.io7m.jaux.functional.Pair;
    *         <code>minimum</code>
    */
 
-  public static @Nonnull VectorI2F clampMinimum(
+  public final static @Nonnull VectorI2F clampMinimum(
     final @Nonnull VectorReadable2F v,
     final float minimum)
   {
@@ -256,7 +256,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code>
    */
 
-  public static @Nonnull VectorI2F clampMinimumByVector(
+  public final static @Nonnull VectorI2F clampMinimumByVector(
     final @Nonnull VectorReadable2F v,
     final @Nonnull VectorReadable2F minimum)
   {
@@ -277,7 +277,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The distance between the two vectors
    */
 
-  public static double distance(
+  public final static double distance(
     final @Nonnull VectorReadable2F v0,
     final @Nonnull VectorReadable2F v1)
   {
@@ -296,7 +296,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The scalar product of the two vectors
    */
 
-  public static double dotProduct(
+  public final static double dotProduct(
     final @Nonnull VectorReadable2F v0,
     final @Nonnull VectorReadable2F v1)
   {
@@ -328,7 +328,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(1 - alpha) * v0 + alpha * v1</code>
    */
 
-  public static @Nonnull VectorI2F interpolateLinear(
+  public final static @Nonnull VectorI2F interpolateLinear(
     final @Nonnull VectorReadable2F v0,
     final @Nonnull VectorReadable2F v1,
     final float alpha)
@@ -350,7 +350,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The magnitude of the input vector
    */
 
-  public static double magnitude(
+  public final static double magnitude(
     final @Nonnull VectorReadable2F v)
   {
     return Math.sqrt(VectorI2F.magnitudeSquared(v));
@@ -364,7 +364,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The squared magnitude of the input vector
    */
 
-  public static double magnitudeSquared(
+  public final static double magnitudeSquared(
     final @Nonnull VectorReadable2F v)
   {
     return VectorI2F.dotProduct(v, v);
@@ -381,7 +381,7 @@ import com.io7m.jaux.functional.Pair;
    *         magnitude equal to <code>1.0</code>
    */
 
-  public static @Nonnull VectorI2F normalize(
+  public final static @Nonnull VectorI2F normalize(
     final @Nonnull VectorReadable2F v)
   {
     final double m = VectorI2F.magnitudeSquared(v);
@@ -407,7 +407,7 @@ import com.io7m.jaux.functional.Pair;
    * @since 5.0.0
    */
 
-  public static @Nonnull Pair<VectorI2F, VectorI2F> orthoNormalize(
+  public final static @Nonnull Pair<VectorI2F, VectorI2F> orthoNormalize(
     final @Nonnull VectorReadable2F v0,
     final @Nonnull VectorReadable2F v1)
   {
@@ -426,7 +426,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public static @Nonnull VectorI2F projection(
+  public final static @Nonnull VectorI2F projection(
     final @Nonnull VectorReadable2F p,
     final @Nonnull VectorReadable2F q)
   {
@@ -447,7 +447,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v.x * r, v.y * r)</code>
    */
 
-  public static @Nonnull VectorI2F scale(
+  public final static @Nonnull VectorI2F scale(
     final @Nonnull VectorReadable2F v,
     final double r)
   {
@@ -467,7 +467,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
    */
 
-  public static @Nonnull VectorI2F subtract(
+  public final static @Nonnull VectorI2F subtract(
     final @Nonnull VectorReadable2F v0,
     final @Nonnull VectorReadable2F v1)
   {
@@ -475,7 +475,6 @@ import com.io7m.jaux.functional.Pair;
   }
 
   public final float                            x;
-
   public final float                            y;
 
   /**
@@ -495,7 +494,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(abs v.x, abs v.y)</code>
    */
 
-  public static @Nonnull VectorI2F absolute(
+  public final static @Nonnull VectorI2F absolute(
     final @Nonnull VectorReadable2F v)
   {
     return new VectorI2F(Math.abs(v.getXF()), Math.abs(v.getYF()));
@@ -541,7 +540,7 @@ import com.io7m.jaux.functional.Pair;
    * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
-  @Override public boolean equals(
+  @Override public final boolean equals(
     final Object obj)
   {
     if (this == obj) {
@@ -563,12 +562,12 @@ import com.io7m.jaux.functional.Pair;
     return true;
   }
 
-  @Override public float getXF()
+  @Override public final float getXF()
   {
     return this.x;
   }
 
-  @Override public float getYF()
+  @Override public final float getYF()
   {
     return this.y;
   }
@@ -578,7 +577,7 @@ import com.io7m.jaux.functional.Pair;
    * 
    * @see java.lang.Object#hashCode()
    */
-  @Override public int hashCode()
+  @Override public final int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -592,7 +591,7 @@ import com.io7m.jaux.functional.Pair;
    * 
    * @see java.lang.Object#toString()
    */
-  @Override public String toString()
+  @Override public final String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI2F ");

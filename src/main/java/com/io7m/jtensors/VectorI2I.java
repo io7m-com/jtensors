@@ -31,7 +31,7 @@ import com.io7m.jaux.CheckedMath;
  * </p>
  */
 
-@Immutable public final class VectorI2I implements VectorReadable2I
+@Immutable public class VectorI2I implements VectorReadable2I
 {
   /**
    * The zero vector.
@@ -52,7 +52,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorI2I absolute(
+  public final static @Nonnull VectorI2I absolute(
     final @Nonnull VectorReadable2I v)
   {
     final int x = CheckedMath.absolute(v.getXI());
@@ -74,7 +74,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorI2I add(
+  public final static @Nonnull VectorI2I add(
     final @Nonnull VectorReadable2I v0,
     final @Nonnull VectorReadable2I v1)
   {
@@ -100,7 +100,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorI2I addScaled(
+  public final static @Nonnull VectorI2I addScaled(
     final @Nonnull VectorReadable2I v0,
     final @Nonnull VectorReadable2I v1,
     final double r)
@@ -124,7 +124,7 @@ import com.io7m.jaux.CheckedMath;
    * @return The angle between the two vectors, in radians.
    */
 
-  public static double angle(
+  public final static double angle(
     final @Nonnull VectorReadable2I v0,
     final @Nonnull VectorReadable2I v1)
   {
@@ -133,7 +133,7 @@ import com.io7m.jaux.CheckedMath;
     return Math.acos(VectorI2I.dotProduct(v0, v1) / (m0 * m1));
   }
 
-  private static int cast(
+  private final static int cast(
     final double x)
   {
     return (int) Math.round(x);
@@ -154,7 +154,7 @@ import com.io7m.jaux.CheckedMath;
    *         and at least <code>minimum</code>
    */
 
-  public static @Nonnull VectorI2I clamp(
+  public final static @Nonnull VectorI2I clamp(
     final @Nonnull VectorReadable2I v,
     final int minimum,
     final int maximum)
@@ -179,7 +179,7 @@ import com.io7m.jaux.CheckedMath;
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))</code>
    */
 
-  public static @Nonnull VectorI2I clampByVector(
+  public final static @Nonnull VectorI2I clampByVector(
     final @Nonnull VectorReadable2I v,
     final @Nonnull VectorReadable2I minimum,
     final @Nonnull VectorReadable2I maximum)
@@ -203,7 +203,7 @@ import com.io7m.jaux.CheckedMath;
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public static @Nonnull VectorI2I clampMaximum(
+  public final static @Nonnull VectorI2I clampMaximum(
     final @Nonnull VectorReadable2I v,
     final int maximum)
   {
@@ -224,7 +224,7 @@ import com.io7m.jaux.CheckedMath;
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
    */
 
-  public static @Nonnull VectorI2I clampMaximumByVector(
+  public final static @Nonnull VectorI2I clampMaximumByVector(
     final @Nonnull VectorReadable2I v,
     final @Nonnull VectorReadable2I maximum)
   {
@@ -246,7 +246,7 @@ import com.io7m.jaux.CheckedMath;
    *         <code>minimum</code>
    */
 
-  public static @Nonnull VectorI2I clampMinimum(
+  public final static @Nonnull VectorI2I clampMinimum(
     final @Nonnull VectorReadable2I v,
     final int minimum)
   {
@@ -268,7 +268,7 @@ import com.io7m.jaux.CheckedMath;
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code>
    */
 
-  public static @Nonnull VectorI2I clampMinimumByVector(
+  public final static @Nonnull VectorI2I clampMinimumByVector(
     final @Nonnull VectorReadable2I v,
     final @Nonnull VectorReadable2I minimum)
   {
@@ -293,7 +293,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int distance(
+  public final static int distance(
     final @Nonnull VectorReadable2I v0,
     final @Nonnull VectorReadable2I v1)
   {
@@ -316,7 +316,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int dotProduct(
+  public final static int dotProduct(
     final @Nonnull VectorReadable2I v0,
     final @Nonnull VectorReadable2I v1)
   {
@@ -351,7 +351,7 @@ import com.io7m.jaux.CheckedMath;
    *           overflow.
    */
 
-  public static @Nonnull VectorI2I interpolateLinear(
+  public final static @Nonnull VectorI2I interpolateLinear(
     final @Nonnull VectorReadable2I v0,
     final @Nonnull VectorReadable2I v1,
     final double alpha)
@@ -376,7 +376,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int magnitude(
+  public final static int magnitude(
     final @Nonnull VectorReadable2I v)
   {
     return VectorI2I.cast(Math.sqrt(VectorI2I.magnitudeSquared(v)));
@@ -395,7 +395,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int magnitudeSquared(
+  public final static int magnitudeSquared(
     final @Nonnull VectorReadable2I v)
   {
     return VectorI2I.dotProduct(v, v);
@@ -411,7 +411,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorI2I projection(
+  public final static @Nonnull VectorI2I projection(
     final @Nonnull VectorReadable2I p,
     final @Nonnull VectorReadable2I q)
   {
@@ -435,7 +435,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorI2I scale(
+  public final static @Nonnull VectorI2I scale(
     final @Nonnull VectorReadable2I v,
     final double r)
   {
@@ -458,7 +458,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorI2I subtract(
+  public final static @Nonnull VectorI2I subtract(
     final @Nonnull VectorReadable2I v0,
     final @Nonnull VectorReadable2I v1)
   {
@@ -505,7 +505,7 @@ import com.io7m.jaux.CheckedMath;
     this.y = v.getYI();
   }
 
-  @Override public boolean equals(
+  @Override public final boolean equals(
     final Object obj)
   {
     if (this == obj) {
@@ -527,17 +527,17 @@ import com.io7m.jaux.CheckedMath;
     return true;
   }
 
-  @Override public int getXI()
+  @Override public final int getXI()
   {
     return this.x;
   }
 
-  @Override public int getYI()
+  @Override public final int getYI()
   {
     return this.y;
   }
 
-  @Override public int hashCode()
+  @Override public final int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -546,7 +546,7 @@ import com.io7m.jaux.CheckedMath;
     return result;
   }
 
-  @Override public String toString()
+  @Override public final String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI2I ");

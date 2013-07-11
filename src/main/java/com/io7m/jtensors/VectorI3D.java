@@ -33,7 +33,7 @@ import com.io7m.jaux.functional.Pair;
  * </p>
  */
 
-@Immutable public final class VectorI3D implements VectorReadable3D
+@Immutable public class VectorI3D implements VectorReadable3D
 {
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
@@ -50,7 +50,7 @@ import com.io7m.jaux.functional.Pair;
    *         r))</code>
    */
 
-  public static @Nonnull VectorI3D addScaled(
+  public final static @Nonnull VectorI3D addScaled(
     final @Nonnull VectorReadable3D v0,
     final @Nonnull VectorReadable3D v1,
     final double r)
@@ -73,7 +73,7 @@ import com.io7m.jaux.functional.Pair;
    * @since 5.0.0
    */
 
-  public static boolean almostEqual(
+  public final static boolean almostEqual(
     final @Nonnull ContextRelative context,
     final @Nonnull VectorReadable3D qa,
     final @Nonnull VectorReadable3D qb)
@@ -103,7 +103,7 @@ import com.io7m.jaux.functional.Pair;
    *         and at least <code>minimum</code>.
    */
 
-  public static @Nonnull VectorI3D clamp(
+  public final static @Nonnull VectorI3D clamp(
     final @Nonnull VectorReadable3D v,
     final double minimum,
     final double maximum)
@@ -130,7 +130,7 @@ import com.io7m.jaux.functional.Pair;
    *         minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public static @Nonnull VectorI3D clampByVector(
+  public final static @Nonnull VectorI3D clampByVector(
     final @Nonnull VectorReadable3D v,
     final @Nonnull VectorReadable3D minimum,
     final @Nonnull VectorReadable3D maximum)
@@ -156,7 +156,7 @@ import com.io7m.jaux.functional.Pair;
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public static @Nonnull VectorI3D clampMaximum(
+  public final static @Nonnull VectorI3D clampMaximum(
     final @Nonnull VectorReadable3D v,
     final double maximum)
   {
@@ -179,7 +179,7 @@ import com.io7m.jaux.functional.Pair;
    *         maximum.z))</code>
    */
 
-  public static @Nonnull VectorI3D clampMaximumByVector(
+  public final static @Nonnull VectorI3D clampMaximumByVector(
     final @Nonnull VectorReadable3D v,
     final @Nonnull VectorReadable3D maximum)
   {
@@ -203,7 +203,7 @@ import com.io7m.jaux.functional.Pair;
    *         <code>minimum</code>
    */
 
-  public static @Nonnull VectorI3D clampMinimum(
+  public final static @Nonnull VectorI3D clampMinimum(
     final @Nonnull VectorReadable3D v,
     final double minimum)
   {
@@ -226,7 +226,7 @@ import com.io7m.jaux.functional.Pair;
    *         minimum.z))</code>
    */
 
-  public static @Nonnull VectorI3D clampMinimumByVector(
+  public final static @Nonnull VectorI3D clampMinimumByVector(
     final @Nonnull VectorReadable3D v,
     final @Nonnull VectorReadable3D minimum)
   {
@@ -249,7 +249,7 @@ import com.io7m.jaux.functional.Pair;
    *         <code>v1</code>
    */
 
-  public static @Nonnull VectorI3D crossProduct(
+  public final static @Nonnull VectorI3D crossProduct(
     final @Nonnull VectorReadable3D v0,
     final @Nonnull VectorReadable3D v1)
   {
@@ -271,7 +271,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The distance between the two vectors
    */
 
-  public static double distance(
+  public final static double distance(
     final @Nonnull VectorReadable3D v0,
     final @Nonnull VectorReadable3D v1)
   {
@@ -290,7 +290,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The scalar product of the two vectors
    */
 
-  public static double dotProduct(
+  public final static double dotProduct(
     final @Nonnull VectorReadable3D v0,
     final @Nonnull VectorReadable3D v1)
   {
@@ -323,7 +323,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(1 - alpha) * v0 + alpha * v1</code>
    */
 
-  public static @Nonnull VectorI3D interpolateLinear(
+  public final static @Nonnull VectorI3D interpolateLinear(
     final @Nonnull VectorReadable3D v0,
     final @Nonnull VectorReadable3D v1,
     final double alpha)
@@ -344,7 +344,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The magnitude of the input vector
    */
 
-  public static double magnitude(
+  public final static double magnitude(
     final @Nonnull VectorReadable3D v)
   {
     return Math.sqrt(VectorI3D.magnitudeSquared(v));
@@ -359,7 +359,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The squared magnitude of the input vector
    */
 
-  public static double magnitudeSquared(
+  public final static double magnitudeSquared(
     final @Nonnull VectorReadable3D v)
   {
     return VectorI3D.dotProduct(v, v);
@@ -376,7 +376,7 @@ import com.io7m.jaux.functional.Pair;
    *         magnitude equal to <code>1.0</code>
    */
 
-  public static @Nonnull VectorI3D normalize(
+  public final static @Nonnull VectorI3D normalize(
     final @Nonnull VectorReadable3D v)
   {
     final double m = VectorI3D.magnitudeSquared(v);
@@ -401,7 +401,7 @@ import com.io7m.jaux.functional.Pair;
    * @since 5.0.0
    */
 
-  public static @Nonnull Pair<VectorI3D, VectorI3D> orthoNormalize(
+  public final static @Nonnull Pair<VectorI3D, VectorI3D> orthoNormalize(
     final @Nonnull VectorReadable3D v0,
     final @Nonnull VectorReadable3D v1)
   {
@@ -420,7 +420,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public static @Nonnull VectorI3D projection(
+  public final static @Nonnull VectorI3D projection(
     final @Nonnull VectorReadable3D p,
     final @Nonnull VectorReadable3D q)
   {
@@ -441,7 +441,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v.x * r, v.y * r, v.z * r)</code>
    */
 
-  public static @Nonnull VectorI3D scale(
+  public final static @Nonnull VectorI3D scale(
     final @Nonnull VectorReadable3D v,
     final double r)
   {
@@ -459,7 +459,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
    */
 
-  public static @Nonnull VectorI3D subtract(
+  public final static @Nonnull VectorI3D subtract(
     final @Nonnull VectorReadable3D v0,
     final @Nonnull VectorReadable3D v1)
   {
@@ -488,7 +488,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(abs v.x, abs v.y, abs v.z)</code>
    */
 
-  public static @Nonnull VectorI3D absolute(
+  public final static @Nonnull VectorI3D absolute(
     final @Nonnull VectorReadable3D v)
   {
     return new VectorI3D(Math.abs(v.getXD()), Math.abs(v.getYD()), Math.abs(v
@@ -507,7 +507,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
    */
 
-  public static @Nonnull VectorI3D add(
+  public final static @Nonnull VectorI3D add(
     final @Nonnull VectorReadable3D v0,
     final @Nonnull VectorReadable3D v1)
   {
@@ -561,7 +561,7 @@ import com.io7m.jaux.functional.Pair;
    * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
-  @Override public boolean equals(
+  @Override public final boolean equals(
     final Object obj)
   {
     if (this == obj) {
@@ -586,17 +586,17 @@ import com.io7m.jaux.functional.Pair;
     return true;
   }
 
-  @Override public double getXD()
+  @Override public final double getXD()
   {
     return this.x;
   }
 
-  @Override public double getYD()
+  @Override public final double getYD()
   {
     return this.y;
   }
 
-  @Override public double getZD()
+  @Override public final double getZD()
   {
     return this.z;
   }
@@ -606,7 +606,7 @@ import com.io7m.jaux.functional.Pair;
    * 
    * @see java.lang.Object#hashCode()
    */
-  @Override public int hashCode()
+  @Override public final int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -620,7 +620,7 @@ import com.io7m.jaux.functional.Pair;
     return result;
   }
 
-  @Override public String toString()
+  @Override public final String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI3D ");

@@ -31,8 +31,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
  * </p>
  */
 
-@NotThreadSafe public final class QuaternionM4D implements
-  QuaternionReadable4D
+@NotThreadSafe public class QuaternionM4D implements QuaternionReadable4D
 {
   /**
    * The Context type contains the minimum storage required for all of the
@@ -54,7 +53,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @since 5.0.0
    */
 
-  @NotThreadSafe public static final class Context
+  @NotThreadSafe public static class Context
   {
     final @Nonnull MatrixM3x3D         m3a       = new MatrixM3x3D();
     final @Nonnull VectorM3D           v3a       = new VectorM3D();
@@ -80,7 +79,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>(q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)</code>
    */
 
-  public static @Nonnull QuaternionM4D add(
+  public final static @Nonnull QuaternionM4D add(
     final @Nonnull QuaternionReadable4D q0,
     final @Nonnull QuaternionReadable4D q1,
     final @Nonnull QuaternionM4D out)
@@ -108,7 +107,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>(q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)</code>
    */
 
-  public static @Nonnull QuaternionM4D addInPlace(
+  public final static @Nonnull QuaternionM4D addInPlace(
     final @Nonnull QuaternionM4D q0,
     final @Nonnull QuaternionReadable4D q1)
   {
@@ -131,7 +130,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @since 5.0.0
    */
 
-  public static boolean almostEqual(
+  public final static boolean almostEqual(
     final @Nonnull ContextRelative context,
     final @Nonnull QuaternionReadable4D qa,
     final @Nonnull QuaternionReadable4D qb)
@@ -159,7 +158,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>out</code>
    */
 
-  public static @Nonnull QuaternionM4D conjugate(
+  public final static @Nonnull QuaternionM4D conjugate(
     final @Nonnull QuaternionReadable4D q,
     final @Nonnull QuaternionM4D out)
   {
@@ -180,7 +179,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>q</code>
    */
 
-  public static @Nonnull QuaternionM4D conjugateInPlace(
+  public final static @Nonnull QuaternionM4D conjugateInPlace(
     final @Nonnull QuaternionM4D q)
   {
     return QuaternionM4D.conjugate(q, q);
@@ -196,7 +195,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>out</code>
    */
 
-  public static @Nonnull QuaternionM4D copy(
+  public final static @Nonnull QuaternionM4D copy(
     final @Nonnull QuaternionReadable4D q,
     final @Nonnull QuaternionM4D out)
   {
@@ -219,7 +218,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return The scalar product of the two quaternions
    */
 
-  public static double dotProduct(
+  public final static double dotProduct(
     final @Nonnull QuaternionReadable4D q0,
     final @Nonnull QuaternionReadable4D q1)
   {
@@ -250,7 +249,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>(1 - alpha) * q0 + alpha * q1</code>
    */
 
-  public static @Nonnull QuaternionM4D interpolateLinear(
+  public final static @Nonnull QuaternionM4D interpolateLinear(
     final @Nonnull QuaternionReadable4D q0,
     final @Nonnull QuaternionReadable4D q1,
     final double alpha,
@@ -278,7 +277,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @since 5.0.0
    */
 
-  public static boolean isNegationOf(
+  public final static boolean isNegationOf(
     final @Nonnull AlmostEqualDouble.ContextRelative context,
     final @Nonnull QuaternionReadable4D qa,
     final @Nonnull QuaternionReadable4D qb)
@@ -327,7 +326,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @since 5.0.0
    */
 
-  public static @Nonnull QuaternionM4D lookAtWithContext(
+  public final static @Nonnull QuaternionM4D lookAtWithContext(
     final @Nonnull Context context,
     final @Nonnull VectorReadable3D origin,
     final @Nonnull VectorReadable3D target,
@@ -354,7 +353,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return The magnitude of the input quaternion
    */
 
-  public static double magnitude(
+  public final static double magnitude(
     final @Nonnull QuaternionReadable4D q)
   {
     return Math.sqrt(QuaternionM4D.magnitudeSquared(q));
@@ -369,7 +368,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return The squared magnitude of the input quaternion
    */
 
-  public static double magnitudeSquared(
+  public final static double magnitudeSquared(
     final @Nonnull QuaternionReadable4D q)
   {
     return QuaternionM4D.dotProduct(q, q);
@@ -395,7 +394,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return A quaternion representing the rotation
    */
 
-  public static @Nonnull QuaternionM4D makeFromAxisAngle(
+  public final static @Nonnull QuaternionM4D makeFromAxisAngle(
     final @Nonnull VectorReadable3D axis,
     final double angle,
     final @Nonnull QuaternionM4D out)
@@ -424,7 +423,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>out</code>
    */
 
-  public static @Nonnull QuaternionM4D makeFromRotationMatrix3x3(
+  public final static @Nonnull QuaternionM4D makeFromRotationMatrix3x3(
     final @Nonnull MatrixReadable3x3D m,
     final @Nonnull QuaternionM4D out)
   {
@@ -481,7 +480,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>out</code>
    */
 
-  public static @Nonnull QuaternionM4D makeFromRotationMatrix4x4(
+  public final static @Nonnull QuaternionM4D makeFromRotationMatrix4x4(
     final @Nonnull MatrixReadable4x4D m,
     final @Nonnull QuaternionM4D out)
   {
@@ -544,7 +543,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM3x3D makeRotationMatrix3x3(
+  public final static @Nonnull MatrixM3x3D makeRotationMatrix3x3(
     final @Nonnull QuaternionReadable4D q,
     final @Nonnull MatrixM3x3D m)
   {
@@ -598,7 +597,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4D makeRotationMatrix4x4(
+  public final static @Nonnull MatrixM4x4D makeRotationMatrix4x4(
     final @Nonnull QuaternionReadable4D q,
     final @Nonnull MatrixM4x4D m)
   {
@@ -696,7 +695,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>qr</code>
    */
 
-  public static @Nonnull QuaternionM4D multiply(
+  public final static @Nonnull QuaternionM4D multiply(
     final @Nonnull QuaternionReadable4D q0,
     final @Nonnull QuaternionReadable4D q1,
     final @Nonnull QuaternionM4D qr)
@@ -732,7 +731,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    *      QuaternionM4D)
    */
 
-  public static @Nonnull QuaternionM4D multiplyInPlace(
+  public final static @Nonnull QuaternionM4D multiplyInPlace(
     final @Nonnull QuaternionM4D q0,
     final @Nonnull QuaternionReadable4D q1)
   {
@@ -748,7 +747,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @since 5.0.0
    */
 
-  public static @Nonnull QuaternionM4D negate(
+  public final static @Nonnull QuaternionM4D negate(
     final @Nonnull QuaternionReadable4D qa,
     final @Nonnull QuaternionM4D out)
   {
@@ -771,7 +770,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @since 5.0.0
    */
 
-  public static @Nonnull QuaternionM4D negateInPlace(
+  public final static @Nonnull QuaternionM4D negateInPlace(
     final @Nonnull QuaternionM4D q)
   {
     return QuaternionM4D.negate(q, q);
@@ -788,7 +787,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return out
    */
 
-  public static @Nonnull QuaternionM4D normalize(
+  public final static @Nonnull QuaternionM4D normalize(
     final @Nonnull QuaternionReadable4D q,
     final @Nonnull QuaternionM4D out)
   {
@@ -815,7 +814,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return q
    */
 
-  public static @Nonnull QuaternionM4D normalizeInPlace(
+  public final static @Nonnull QuaternionM4D normalizeInPlace(
     final @Nonnull QuaternionM4D q)
   {
     return QuaternionM4D.normalize(q, q);
@@ -835,7 +834,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>(q.x * r, q.y * r, q.z * r, q.w * r)</code>
    */
 
-  public static @Nonnull QuaternionM4D scale(
+  public final static @Nonnull QuaternionM4D scale(
     final @Nonnull QuaternionReadable4D q,
     final double r,
     final @Nonnull QuaternionM4D out)
@@ -863,7 +862,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>(q.x * r, q.y * r, q.z * r, q.w * r)</code>
    */
 
-  public static @Nonnull QuaternionM4D scaleInPlace(
+  public final static @Nonnull QuaternionM4D scaleInPlace(
     final @Nonnull QuaternionM4D q,
     final double r)
   {
@@ -884,7 +883,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>(q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)</code>
    */
 
-  public static @Nonnull QuaternionM4D subtract(
+  public final static @Nonnull QuaternionM4D subtract(
     final @Nonnull QuaternionReadable4D q0,
     final @Nonnull QuaternionReadable4D q1,
     final @Nonnull QuaternionM4D out)
@@ -912,7 +911,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
    * @return <code>(q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)</code>
    */
 
-  public static @Nonnull QuaternionM4D subtractInPlace(
+  public final static @Nonnull QuaternionM4D subtractInPlace(
     final @Nonnull QuaternionM4D q0,
     final @Nonnull QuaternionReadable4D q1)
   {
@@ -961,7 +960,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
     this(q.getXD(), q.getYD(), q.getZD(), q.getWD());
   }
 
-  @Override public boolean equals(
+  @Override public final boolean equals(
     final Object obj)
   {
     if (this == obj) {
@@ -989,27 +988,27 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
     return true;
   }
 
-  @Override public double getWD()
+  @Override public final double getWD()
   {
     return this.w;
   }
 
-  @Override public double getXD()
+  @Override public final double getXD()
   {
     return this.x;
   }
 
-  @Override public double getYD()
+  @Override public final double getYD()
   {
     return this.y;
   }
 
-  @Override public double getZD()
+  @Override public final double getZD()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override public final int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1025,7 +1024,7 @@ import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
     return result;
   }
 
-  @Override public String toString()
+  @Override public final String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[QuaternionM4D ");

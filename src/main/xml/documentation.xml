@@ -570,7 +570,25 @@ type         = "Quaternion" , mutability , size , element_type ;]]>
         </s:formal-item>
       </s:subsection>
     </s:section>
+    
+    <s:section>
+      <s:section-title>Subclassing</s:section-title>
+      <s:paragraph>
+        The types in the <s:term type="package">jtensors</s:term> package
+        are not marked as <s:term type="constant">final</s:term>, despite
+        all of their methods being <s:term type="constant">final</s:term>. The
+        intention is to allow users of the types to subclass them with the
+        intention of adding "phantom" type parameters
+        <s:footnote>
+          <s:link-external target="http://io7m.com/documents/java/tt1-pt/">http://io7m.com/documents/java/tt1-pt/</s:link-external>
+        </s:footnote>
+        in order to distinguish between semantically distinct (but structurally
+        identical) values at compile time.
+      </s:paragraph>
+    </s:section>
   </s:part>
+
+
 
   <s:part>
     <s:part-title>API Reference</s:part-title>

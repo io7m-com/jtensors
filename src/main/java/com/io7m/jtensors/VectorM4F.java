@@ -33,7 +33,7 @@ import com.io7m.jaux.functional.Pair;
  * </p>
  */
 
-@NotThreadSafe public final class VectorM4F implements VectorReadable4F
+@NotThreadSafe public class VectorM4F implements VectorReadable4F
 {
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>,
@@ -47,7 +47,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(abs v.x, abs v.y, abs v.z, abs.w)</code>
    */
 
-  public static @Nonnull VectorM4F absolute(
+  public final static @Nonnull VectorM4F absolute(
     final @Nonnull VectorReadable4F v,
     final @Nonnull VectorM4F out)
   {
@@ -72,7 +72,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(abs v.x, abs v.y, abs v.z, abs v.w)</code>
    */
 
-  public static @Nonnull VectorM4F absoluteInPlace(
+  public final static @Nonnull VectorM4F absoluteInPlace(
     final @Nonnull VectorM4F v)
   {
     return VectorM4F.absolute(v, v);
@@ -92,7 +92,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
    */
 
-  public static @Nonnull VectorM4F add(
+  public final static @Nonnull VectorM4F add(
     final @Nonnull VectorReadable4F v0,
     final @Nonnull VectorReadable4F v1,
     final @Nonnull VectorM4F out)
@@ -120,7 +120,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
    */
 
-  public static @Nonnull VectorM4F addInPlace(
+  public final static @Nonnull VectorM4F addInPlace(
     final @Nonnull VectorM4F v0,
     final @Nonnull VectorReadable4F v1)
   {
@@ -144,7 +144,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
    */
 
-  public static @Nonnull VectorM4F addScaled(
+  public final static @Nonnull VectorM4F addScaled(
     final @Nonnull VectorReadable4F v0,
     final @Nonnull VectorReadable4F v1,
     final double r,
@@ -176,7 +176,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
    */
 
-  public static @Nonnull VectorM4F addScaledInPlace(
+  public final static @Nonnull VectorM4F addScaledInPlace(
     final @Nonnull VectorM4F v0,
     final @Nonnull VectorReadable4F v1,
     final double r)
@@ -199,7 +199,7 @@ import com.io7m.jaux.functional.Pair;
    * @since 5.0.0
    */
 
-  public static boolean almostEqual(
+  public final static boolean almostEqual(
     final @Nonnull AlmostEqualFloat.ContextRelative context,
     final @Nonnull VectorReadable4F va,
     final @Nonnull VectorReadable4F vb)
@@ -233,7 +233,7 @@ import com.io7m.jaux.functional.Pair;
    *         and at least <code>minimum</code>
    */
 
-  public static @Nonnull VectorM4F clamp(
+  public final static @Nonnull VectorM4F clamp(
     final @Nonnull VectorReadable4F v,
     final double minimum,
     final double maximum,
@@ -267,7 +267,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
    */
 
-  public static @Nonnull VectorM4F clampByVector(
+  public final static @Nonnull VectorM4F clampByVector(
     final @Nonnull VectorReadable4F v,
     final @Nonnull VectorReadable4F minimum,
     final @Nonnull VectorReadable4F maximum,
@@ -303,7 +303,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
    */
 
-  public static @Nonnull VectorM4F clampByVectorInPlace(
+  public final static @Nonnull VectorM4F clampByVectorInPlace(
     final @Nonnull VectorM4F v,
     final @Nonnull VectorReadable4F minimum,
     final @Nonnull VectorReadable4F maximum)
@@ -327,7 +327,7 @@ import com.io7m.jaux.functional.Pair;
    *         and at least <code>minimum</code>, in <code>v</code>
    */
 
-  public static @Nonnull VectorM4F clampInPlace(
+  public final static @Nonnull VectorM4F clampInPlace(
     final @Nonnull VectorM4F v,
     final float minimum,
     final float maximum)
@@ -350,7 +350,7 @@ import com.io7m.jaux.functional.Pair;
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public static @Nonnull VectorM4F clampMaximum(
+  public final static @Nonnull VectorM4F clampMaximum(
     final @Nonnull VectorReadable4F v,
     final float maximum,
     final @Nonnull VectorM4F out)
@@ -381,7 +381,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
    */
 
-  public static @Nonnull VectorM4F clampMaximumByVector(
+  public final static @Nonnull VectorM4F clampMaximumByVector(
     final @Nonnull VectorReadable4F v,
     final @Nonnull VectorReadable4F maximum,
     final @Nonnull VectorM4F out)
@@ -410,7 +410,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
    */
 
-  public static @Nonnull VectorM4F clampMaximumByVectorInPlace(
+  public final static @Nonnull VectorM4F clampMaximumByVectorInPlace(
     final @Nonnull VectorM4F v,
     final @Nonnull VectorReadable4F maximum)
   {
@@ -431,7 +431,7 @@ import com.io7m.jaux.functional.Pair;
    *         , in <code>v</code>
    */
 
-  public static @Nonnull VectorM4F clampMaximumInPlace(
+  public final static @Nonnull VectorM4F clampMaximumInPlace(
     final @Nonnull VectorM4F v,
     final float maximum)
   {
@@ -454,7 +454,7 @@ import com.io7m.jaux.functional.Pair;
    *         <code>minimum</code>
    */
 
-  public static @Nonnull VectorM4F clampMinimum(
+  public final static @Nonnull VectorM4F clampMinimum(
     final @Nonnull VectorReadable4F v,
     final float minimum,
     final @Nonnull VectorM4F out)
@@ -485,7 +485,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))</code>
    */
 
-  public static @Nonnull VectorM4F clampMinimumByVector(
+  public final static @Nonnull VectorM4F clampMinimumByVector(
     final @Nonnull VectorReadable4F v,
     final @Nonnull VectorReadable4F minimum,
     final @Nonnull VectorM4F out)
@@ -515,7 +515,7 @@ import com.io7m.jaux.functional.Pair;
    *         , in <code>v</code>
    */
 
-  public static @Nonnull VectorM4F clampMinimumByVectorInPlace(
+  public final static @Nonnull VectorM4F clampMinimumByVectorInPlace(
     final @Nonnull VectorM4F v,
     final @Nonnull VectorReadable4F minimum)
   {
@@ -536,7 +536,7 @@ import com.io7m.jaux.functional.Pair;
    *         <code>minimum</code>, in <code>v</code>.
    */
 
-  public static @Nonnull VectorM4F clampMinimumInPlace(
+  public final static @Nonnull VectorM4F clampMinimumInPlace(
     final @Nonnull VectorM4F v,
     final float minimum)
   {
@@ -555,7 +555,7 @@ import com.io7m.jaux.functional.Pair;
    * @return output
    */
 
-  public static @Nonnull VectorM4F copy(
+  public final static @Nonnull VectorM4F copy(
     final @Nonnull VectorReadable4F input,
     final @Nonnull VectorM4F output)
   {
@@ -578,7 +578,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The distance between the two vectors.
    */
 
-  public static double distance(
+  public final static double distance(
     final @Nonnull VectorReadable4F v0,
     final @Nonnull VectorReadable4F v1)
   {
@@ -598,7 +598,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The scalar product of the two vectors
    */
 
-  public static double dotProduct(
+  public final static double dotProduct(
     final @Nonnull VectorReadable4F v0,
     final @Nonnull VectorReadable4F v1)
   {
@@ -634,7 +634,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>r</code>
    */
 
-  public static @Nonnull VectorM4F interpolateLinear(
+  public final static @Nonnull VectorM4F interpolateLinear(
     final @Nonnull VectorReadable4F v0,
     final @Nonnull VectorReadable4F v1,
     final double alpha,
@@ -660,7 +660,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The magnitude of the input vector
    */
 
-  public static double magnitude(
+  public final static double magnitude(
     final @Nonnull VectorReadable4F v)
   {
     return Math.sqrt(VectorM4F.magnitudeSquared(v));
@@ -675,7 +675,7 @@ import com.io7m.jaux.functional.Pair;
    * @return The squared magnitude of the input vector
    */
 
-  public static double magnitudeSquared(
+  public final static double magnitudeSquared(
     final @Nonnull VectorReadable4F v)
   {
     return VectorM4F.dotProduct(v, v);
@@ -694,7 +694,7 @@ import com.io7m.jaux.functional.Pair;
    * @return out
    */
 
-  public static @Nonnull VectorM4F normalize(
+  public final static @Nonnull VectorM4F normalize(
     final @Nonnull VectorReadable4F v,
     final @Nonnull VectorM4F out)
   {
@@ -721,7 +721,7 @@ import com.io7m.jaux.functional.Pair;
    * @return v
    */
 
-  public static @Nonnull VectorM4F normalizeInPlace(
+  public final static @Nonnull VectorM4F normalizeInPlace(
     final @Nonnull VectorM4F v)
   {
     return VectorM4F.normalize(v, v);
@@ -741,7 +741,7 @@ import com.io7m.jaux.functional.Pair;
    * @since 5.0.0
    */
 
-  public static @Nonnull Pair<VectorM4F, VectorM4F> orthoNormalize(
+  public final static @Nonnull Pair<VectorM4F, VectorM4F> orthoNormalize(
     final @Nonnull VectorReadable4F v0,
     final @Nonnull VectorReadable4F v1)
   {
@@ -766,7 +766,7 @@ import com.io7m.jaux.functional.Pair;
    * @since 5.0.0
    */
 
-  public static void orthoNormalizeInPlace(
+  public final static void orthoNormalizeInPlace(
     final @Nonnull VectorM4F v0,
     final @Nonnull VectorM4F v1)
   {
@@ -785,7 +785,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public static @Nonnull VectorM4F projection(
+  public final static @Nonnull VectorM4F projection(
     final @Nonnull VectorReadable4F p,
     final @Nonnull VectorReadable4F q,
     final @Nonnull VectorM4F r)
@@ -811,7 +811,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>
    */
 
-  public static @Nonnull VectorM4F scale(
+  public final static @Nonnull VectorM4F scale(
     final @Nonnull VectorReadable4F v,
     final double r,
     final @Nonnull VectorM4F out)
@@ -839,7 +839,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>
    */
 
-  public static @Nonnull VectorM4F scaleInPlace(
+  public final static @Nonnull VectorM4F scaleInPlace(
     final @Nonnull VectorM4F v,
     final double r)
   {
@@ -860,7 +860,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)</code>
    */
 
-  public static @Nonnull VectorM4F subtract(
+  public final static @Nonnull VectorM4F subtract(
     final @Nonnull VectorReadable4F v0,
     final @Nonnull VectorReadable4F v1,
     final @Nonnull VectorM4F out)
@@ -888,7 +888,7 @@ import com.io7m.jaux.functional.Pair;
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)</code>
    */
 
-  public static @Nonnull VectorM4F subtractInPlace(
+  public final static @Nonnull VectorM4F subtractInPlace(
     final @Nonnull VectorM4F v0,
     final @Nonnull VectorReadable4F v1)
   {
@@ -940,7 +940,7 @@ import com.io7m.jaux.functional.Pair;
     this.w = v.getWF();
   }
 
-  @Override public boolean equals(
+  @Override public final boolean equals(
     final Object obj)
   {
     if (this == obj) {
@@ -968,27 +968,27 @@ import com.io7m.jaux.functional.Pair;
     return true;
   }
 
-  @Override public float getWF()
+  @Override public final float getWF()
   {
     return this.w;
   }
 
-  @Override public float getXF()
+  @Override public final float getXF()
   {
     return this.x;
   }
 
-  @Override public float getYF()
+  @Override public final float getYF()
   {
     return this.y;
   }
 
-  @Override public float getZF()
+  @Override public final float getZF()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override public final int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -999,7 +999,7 @@ import com.io7m.jaux.functional.Pair;
     return result;
   }
 
-  @Override public String toString()
+  @Override public final String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM4F ");
