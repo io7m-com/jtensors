@@ -402,7 +402,7 @@ MatrixM4x4D.invertWithContext(context, mo, mi);]]>
         </s:paragraph>
       </s:subsection>
 
-      <s:subsection xml:id="com.io7m.jtensors.matrices.handedness">
+      <s:subsection xml:id="com.io7m.jtensors_5_1_0.matrices.handedness">
         <s:subsection-title>Rotations &amp; Handedness</s:subsection-title>
         <s:paragraph>
           Any of the matrix functions that deal with rotations
@@ -537,12 +537,12 @@ type         = "Quaternion" , mutability , size , element_type ;]]>
         </s:formal-item>
       </s:subsection>
 
-      <s:subsection xml:id="com.io7m.jtensors.quaternions.handedness">
+      <s:subsection xml:id="com.io7m.jtensors_5_1_0.quaternions.handedness">
         <s:subsection-title>Rotations &amp; Handedness</s:subsection-title>
         <s:paragraph>
           The included quaternion types and functions have consistent semantics and
           assumptions with regards to rotation and coordinate systems as the
-          <s:link target="com.io7m.jtensors.matrices.handedness">Matrix</s:link>
+          <s:link target="com.io7m.jtensors_5_1_0.matrices.handedness">Matrix</s:link>
           types, and functions are provided to convert between matrices and
           quaternions.
         </s:paragraph>
