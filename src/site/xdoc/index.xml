@@ -23,6 +23,8 @@
       <ul>
         <li>2D, 3D, and 4D immutable vector types in single and double precision versions.</li>
         <li>2D, 3D, and 4D mutable vector types in single and double precision versions.</li>
+        <li>4D immutable quaternion types in single and double precision versions.</li>
+        <li>4D mutable quaternion types in single and double precision versions.</li>
         <li>2x2, 3x3, and 4x4 mutable matrix types in single and double precision versions.</li>
         <li>Matrix types are backed by direct ByteBuffers in column-major order for efficient interfacing with OpenGL.</li>
         <li>Fully documented (Javadoc).</li>
