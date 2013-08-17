@@ -4,6 +4,19 @@
 
   <c:release ticket-system="com.io7m.fossil.jtensors">
     <c:date>2013-08-17</c:date>
+    <c:version>5.2.1</c:version>
+
+    <c:item>
+      <c:date>2013-08-17</c:date>
+      <c:type-code-fix/>
+      <c:summary>
+        Make the Orthonormalized structures take readable vectors.
+      </c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release ticket-system="com.io7m.fossil.jtensors">
+    <c:date>2013-08-17</c:date>
     <c:version>5.2.0</c:version>
 
     <c:item>
