@@ -9,7 +9,7 @@
     <c:item>
       <c:date>2013-08-17</c:date>
       <c:type-code-fix/>
-      <c:ticket>3b145b9693f9a88c256595b912286a57067bf5fe</c:ticket>
+      <c:ticket>3b145b9693</c:ticket>
       <c:summary>
         Correct documentation for vector subtraction.
       </c:summary>
