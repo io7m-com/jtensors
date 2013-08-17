@@ -59,21 +59,21 @@ final class TestUtilities
     return context;
   }
 
-  static AlmostEqualFloat.ContextRelative getSingleEqualityContext5dp()
-  {
-    final AlmostEqualFloat.ContextRelative context =
-      new AlmostEqualFloat.ContextRelative();
-    context.setMaxAbsoluteDifference(0.00001f);
-    context.setMaxRelativeDifference(0.00001f);
-    return context;
-  }
-
   static AlmostEqualFloat.ContextRelative getSingleEqualityContext3dp()
   {
     final AlmostEqualFloat.ContextRelative context =
       new AlmostEqualFloat.ContextRelative();
     context.setMaxAbsoluteDifference(0.001f);
     context.setMaxRelativeDifference(0.001f);
+    return context;
+  }
+
+  static AlmostEqualFloat.ContextRelative getSingleEqualityContext5dp()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      new AlmostEqualFloat.ContextRelative();
+    context.setMaxAbsoluteDifference(0.00001f);
+    context.setMaxRelativeDifference(0.00001f);
     return context;
   }
 }
