@@ -21,7 +21,7 @@ import com.io7m.jaux.AlmostEqualFloat;
 
 final class TestUtilities
 {
-  public static final int TEST_RANDOM_ITERATIONS = 100;
+  public static final int TEST_RANDOM_ITERATIONS = 1000;
 
   static AlmostEqualDouble.ContextRelative getDoubleEqualityContext()
   {
@@ -56,6 +56,15 @@ final class TestUtilities
       new AlmostEqualFloat.ContextRelative();
     context.setMaxAbsoluteDifference(0.000001f);
     context.setMaxRelativeDifference(0.000001f);
+    return context;
+  }
+
+  static AlmostEqualFloat.ContextRelative getSingleEqualityContext5dp()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      new AlmostEqualFloat.ContextRelative();
+    context.setMaxAbsoluteDifference(0.00001f);
+    context.setMaxRelativeDifference(0.00001f);
     return context;
   }
 
