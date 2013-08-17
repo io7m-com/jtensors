@@ -23,6 +23,34 @@ import com.io7m.jaux.AlmostEqualDouble;
 
 public class OrthonormalizedI3DTest
 {
+  @SuppressWarnings("static-method") @Test public
+    void
+    testAlreadyOrthonormal0()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    {
+      final VectorI3D v0 = new VectorI3D(1.0, 0.0, 0.0);
+      final VectorI3D v1 = new VectorI3D(0.0, 1.0, 0.0);
+      final VectorI3D v2 = new VectorI3D(0.0, 0.0, 1.0);
+      final OrthonormalizedI3D o = new OrthonormalizedI3D(v0, v1, v2);
+      Assert.assertTrue(VectorI3D.almostEqual(ec, v0, o.getV0()));
+      Assert.assertTrue(VectorI3D.almostEqual(ec, v1, o.getV1()));
+      Assert.assertTrue(VectorI3D.almostEqual(ec, v2, o.getV2()));
+    }
+
+    {
+      final VectorI3D v0 = new VectorI3D(1.0, 0.0, 0.0);
+      final VectorI3D v1 = new VectorI3D(0.0, 1.0, 0.0);
+      final VectorI3D v2 = new VectorI3D(0.0, 0.0, -1.0);
+      final OrthonormalizedI3D o = new OrthonormalizedI3D(v0, v1, v2);
+      Assert.assertTrue(VectorI3D.almostEqual(ec, v0, o.getV0()));
+      Assert.assertTrue(VectorI3D.almostEqual(ec, v1, o.getV1()));
+      Assert.assertTrue(VectorI3D.almostEqual(ec, v2, o.getV2()));
+    }
+  }
+
   @SuppressWarnings("static-method") @Test public void testAlwaysOrthnormal()
   {
     final AlmostEqualDouble.ContextRelative ec =

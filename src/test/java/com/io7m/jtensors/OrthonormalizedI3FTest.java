@@ -23,6 +23,34 @@ import com.io7m.jaux.AlmostEqualFloat;
 
 public class OrthonormalizedI3FTest
 {
+  @SuppressWarnings("static-method") @Test public
+    void
+    testAlreadyOrthonormal0()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    {
+      final VectorI3F v0 = new VectorI3F(1.0f, 0.0f, 0.0f);
+      final VectorI3F v1 = new VectorI3F(0.0f, 1.0f, 0.0f);
+      final VectorI3F v2 = new VectorI3F(0.0f, 0.0f, 1.0f);
+      final OrthonormalizedI3F o = new OrthonormalizedI3F(v0, v1, v2);
+      Assert.assertTrue(VectorI3F.almostEqual(ec, v0, o.getV0()));
+      Assert.assertTrue(VectorI3F.almostEqual(ec, v1, o.getV1()));
+      Assert.assertTrue(VectorI3F.almostEqual(ec, v2, o.getV2()));
+    }
+
+    {
+      final VectorI3F v0 = new VectorI3F(1.0f, 0.0f, 0.0f);
+      final VectorI3F v1 = new VectorI3F(0.0f, 1.0f, 0.0f);
+      final VectorI3F v2 = new VectorI3F(0.0f, 0.0f, -1.0f);
+      final OrthonormalizedI3F o = new OrthonormalizedI3F(v0, v1, v2);
+      Assert.assertTrue(VectorI3F.almostEqual(ec, v0, o.getV0()));
+      Assert.assertTrue(VectorI3F.almostEqual(ec, v1, o.getV1()));
+      Assert.assertTrue(VectorI3F.almostEqual(ec, v2, o.getV2()));
+    }
+  }
+
   @SuppressWarnings("static-method") @Test public void testAlwaysOrthnormal()
   {
     final AlmostEqualFloat.ContextRelative ec =
