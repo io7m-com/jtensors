@@ -742,7 +742,7 @@ import com.io7m.jaux.CheckedMath;
   }
 
   /**
-   * Subtract the vector <code>v0</code> from the vector <code>v1</code>,
+   * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
    * saving the result to <code>out</code>.
    * 
    * @param v0
@@ -771,7 +771,7 @@ import com.io7m.jaux.CheckedMath;
   }
 
   /**
-   * Subtract the vector <code>v0</code> from the vector <code>v1</code>,
+   * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
    * saving the result to <code>v0</code>.
    * 
    * @param v0

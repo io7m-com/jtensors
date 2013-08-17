@@ -434,7 +434,7 @@ import com.io7m.jaux.functional.Pair;
   }
 
   /**
-   * Subtract the vector <code>v0</code> from the vector <code>v1</code>.
+   * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
    * 
    * @param v0
    *          The left input vector
