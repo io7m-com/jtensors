@@ -474,16 +474,14 @@ import com.io7m.jaux.functional.Pair;
     return new VectorI2F(v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF());
   }
 
-  public final float                            x;
-  public final float                            y;
+  public final float                     x;
+  public final float                     y;
 
   /**
    * The zero vector.
    */
 
-  public static final @Nonnull VectorReadable2F ZERO = new VectorI2F(
-                                                       0.0f,
-                                                       0.0f);
+  public static final @Nonnull VectorI2F ZERO = new VectorI2F(0.0f, 0.0f);
 
   /**
    * Calculate the absolute value of the vector <code>v</code>.

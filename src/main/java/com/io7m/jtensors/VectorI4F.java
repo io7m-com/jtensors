@@ -455,20 +455,20 @@ import com.io7m.jaux.functional.Pair;
       v0.getWF() - v1.getWF());
   }
 
-  public final float                            x;
-  public final float                            y;
-  public final float                            z;
-  public final float                            w;
+  public final float                     x;
+  public final float                     y;
+  public final float                     z;
+  public final float                     w;
 
   /**
    * The zero vector.
    */
 
-  public static final @Nonnull VectorReadable4F ZERO = new VectorI4F(
-                                                       0.0f,
-                                                       0.0f,
-                                                       0.0f,
-                                                       0.0f);
+  public static final @Nonnull VectorI4F ZERO = new VectorI4F(
+                                                0.0f,
+                                                0.0f,
+                                                0.0f,
+                                                0.0f);
 
   /**
    * Calculate the absolute value of the vector <code>v</code>.

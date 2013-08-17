@@ -9,6 +9,14 @@
     <c:item>
       <c:date>2013-08-17</c:date>
       <c:type-code-fix/>
+      <c:summary>
+        Correct the type of VectorI*.ZERO - do not use the less-specific "Readable" type.
+      </c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2013-08-17</c:date>
+      <c:type-code-fix/>
       <c:ticket>3b145b9693</c:ticket>
       <c:summary>
         Correct documentation for vector subtraction.
