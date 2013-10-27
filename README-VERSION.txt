@@ -1,1 +1,1 @@
-io7m-jtensors 5.2.1
+io7m-jtensors 5.3.0
