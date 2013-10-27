@@ -3,6 +3,19 @@
   <c:project>io7m-jtensors</c:project>
 
   <c:release ticket-system="com.io7m.fossil.jtensors">
+    <c:date>2013-10-27</c:date>
+    <c:version>5.3.0</c:version>
+
+    <c:item>
+      <c:date>2013-10-27</c:date>
+      <c:type-code-new/>
+      <c:summary>
+        Add long integer vectors.
+      </c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release ticket-system="com.io7m.fossil.jtensors">
     <c:date>2013-08-17</c:date>
     <c:version>5.2.1</c:version>
 
