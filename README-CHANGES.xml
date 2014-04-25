@@ -10,6 +10,14 @@
       <c:date>2014-04-24</c:date>
       <c:type-code-change/>
       <c:summary>
+        Break dependency on jaux. Now depends on jnull, jfunctional, jequality, jintegers.
+      </c:summary>
+    </c:item>
+
+    <c:item>
+      <c:date>2014-04-24</c:date>
+      <c:type-code-change/>
+      <c:summary>
         Make *Unsafe vector functions that were accidentally public, private.
       </c:summary>
     </c:item>
