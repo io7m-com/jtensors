@@ -44,7 +44,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public class MatrixM2x2D implements MatrixReadable2x2DType
+public final class MatrixM2x2D implements MatrixReadable2x2DType
 {
   private static final double[] IDENTITY_ROW_0;
   private static final double[] IDENTITY_ROW_1;
@@ -77,7 +77,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
 
   /**
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>.
-   * 
+   *
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -87,7 +87,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM2x2D add(
+  public static MatrixM2x2D add(
     final MatrixReadable2x2DType m0,
     final MatrixReadable2x2DType m1,
     final MatrixM2x2D out)
@@ -107,7 +107,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
    * returning the result in <code>m0</code>.
-   * 
+   *
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -115,7 +115,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>m0</code>
    */
 
-  public final static MatrixM2x2D addInPlace(
+  public static MatrixM2x2D addInPlace(
     final MatrixM2x2D m0,
     final MatrixReadable2x2DType m1)
   {
@@ -128,13 +128,13 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>m</code>.
    * </p>
-   * 
+   *
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -148,7 +148,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM2x2D addRowScaled(
+  public static MatrixM2x2D addRowScaled(
     final MatrixM2x2D m,
     final int row_a,
     final int row_b,
@@ -164,13 +164,13 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>out</code>.
    * </p>
-   * 
+   *
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -186,7 +186,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM2x2D addRowScaled(
+  public static MatrixM2x2D addRowScaled(
     final MatrixReadable2x2DType m,
     final int row_a,
     final int row_b,
@@ -236,7 +236,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Copy the contents of the matrix <code>input</code> to the matrix
    * <code>output</code>, completely replacing all elements.
-   * 
+   *
    * @param input
    *          The input vector.
    * @param output
@@ -244,7 +244,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>output</code>
    */
 
-  public final static MatrixM2x2D copy(
+  public static MatrixM2x2D copy(
     final MatrixReadable2x2DType input,
     final MatrixM2x2D output)
   {
@@ -261,13 +261,13 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
 
   /**
    * Calculate the determinant of the matrix <code>m</code>.
-   * 
+   *
    * @return The determinant.
    * @param m
    *          The input matrix.
    */
 
-  public final static double determinant(
+  public static double determinant(
     final MatrixReadable2x2DType m)
   {
     final double r0c0 = m.getRowColumnD(0, 0);
@@ -280,13 +280,13 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
 
   /**
    * Return a view of the buffer that backs this matrix.
-   * 
+   *
    * @return The buffer that backs the matrix.
    * @param m
    *          The input matrix.
    */
 
-  public final static DoubleBuffer doubleBuffer(
+  public static DoubleBuffer doubleBuffer(
     final MatrixM2x2D m)
   {
     return m.view;
@@ -302,7 +302,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -312,7 +312,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM2x2D exchangeRows(
+  public static MatrixM2x2D exchangeRows(
     final MatrixM2x2D m,
     final int row_a,
     final int row_b)
@@ -330,7 +330,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -342,7 +342,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM2x2D exchangeRows(
+  public static MatrixM2x2D exchangeRows(
     final MatrixReadable2x2DType m,
     final int row_a,
     final int row_b,
@@ -377,7 +377,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Retrieve the value from the matrix <code>m</code> at row <code>row</code>
    * , column <code>column</code>.
-   * 
+   *
    * @param row
    *          The row.
    * @param column
@@ -387,7 +387,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return The value at the given row and column.
    */
 
-  public final static double get(
+  public static double get(
     final MatrixReadable2x2DType m,
     final int row,
     final int column)
@@ -432,9 +432,9 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * otherwise. It is not possible to invert a matrix that has a determinant
    * of <code>0</code>. If the function returns <code>None</code>,
    * <code>m</code> is untouched.
-   * 
+   *
    * @see MatrixM2x2D#determinant(MatrixReadable2x2DType)
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param out
@@ -442,7 +442,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return The inverion of <code>m</code>, if any.
    */
 
-  public final static OptionType<MatrixM2x2D> invert(
+  public static OptionType<MatrixM2x2D> invert(
     final MatrixReadable2x2DType m,
     final MatrixM2x2D out)
   {
@@ -475,15 +475,15 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * is not possible to invert a matrix that has a determinant of
    * <code>0</code>. If the function returns <code>None</code>, <code>m</code>
    * is untouched.
-   * 
+   *
    * @see MatrixM2x2D#determinant(MatrixReadable2x2DType)
-   * 
+   *
    * @param m
    *          The input matrix.
    * @return The inverion of <code>m</code>, if any.
    */
 
-  public final static OptionType<MatrixM2x2D> invertInPlace(
+  public static OptionType<MatrixM2x2D> invertInPlace(
     final MatrixM2x2D m)
   {
     return MatrixM2x2D.invert(m, m);
@@ -492,7 +492,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
    * writing the result to <code>m0</code>.
-   * 
+   *
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -500,7 +500,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM2x2D multiply(
+  public static MatrixM2x2D multiply(
     final MatrixM2x2D m0,
     final MatrixReadable2x2DType m1)
   {
@@ -510,7 +510,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
    * writing the result to <code>out</code>.
-   * 
+   *
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -520,7 +520,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM2x2D multiply(
+  public static MatrixM2x2D multiply(
     final MatrixReadable2x2DType m0,
     final MatrixReadable2x2DType m1,
     final MatrixM2x2D out)
@@ -550,7 +550,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Multiply the matrix <code>m</code> with the vector <code>v</code>,
    * writing the resulting vector to <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -560,7 +560,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>out</code>
    */
 
-  public final static VectorM2D multiplyVector2D(
+  public static VectorM2D multiplyVector2D(
     final MatrixReadable2x2DType m,
     final VectorReadable2DType v,
     final VectorM2D out)
@@ -578,7 +578,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Return row <code>row</code> of the matrix <code>m</code> in the vector
    * <code>out</code>.
-   * 
+   *
    * @param row
    *          The row.
    * @param out
@@ -588,7 +588,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return The row.
    */
 
-  public final static VectorM2D row(
+  public static VectorM2D row(
     final MatrixReadable2x2DType m,
     final int row,
     final VectorM2D out)
@@ -618,7 +618,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Scale all elements of the matrix <code>m</code> by the scaling value
    * <code>r</code>, saving the result in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param r
@@ -626,7 +626,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM2x2D scale(
+  public static MatrixM2x2D scale(
     final MatrixM2x2D m,
     final double r)
   {
@@ -636,7 +636,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Scale all elements of the matrix <code>m</code> by the scaling value
    * <code>r</code>, saving the result in <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param r
@@ -646,7 +646,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM2x2D scale(
+  public static MatrixM2x2D scale(
     final MatrixReadable2x2DType m,
     final double r,
     final MatrixM2x2D out)
@@ -664,13 +664,13 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>m</code>.
    * </p>
-   * 
+   *
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row
@@ -680,7 +680,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM2x2D scaleRow(
+  public static MatrixM2x2D scaleRow(
     final MatrixM2x2D m,
     final int row,
     final double r)
@@ -693,13 +693,13 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>out</code>.
    * </p>
-   * 
+   *
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row
@@ -711,7 +711,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM2x2D scaleRow(
+  public static MatrixM2x2D scaleRow(
     final MatrixReadable2x2DType m,
     final int row,
     final double r,
@@ -738,7 +738,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Set the value in the matrix <code>m</code> at row <code>row</code>,
    * column <code>column</code> to <code>value</code>.
-   * 
+   *
    * @param m
    *          The input matrix
    * @param row
@@ -750,7 +750,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return m
    */
 
-  public final static MatrixM2x2D set(
+  public static MatrixM2x2D set(
     final MatrixM2x2D m,
     final int row,
     final int column,
@@ -763,13 +763,13 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
 
   /**
    * Set the given matrix <code>m</code> to the identity matrix.
-   * 
+   *
    * @param m
    *          The matrix
    * @return <code>m</code>
    */
 
-  public final static MatrixM2x2D setIdentity(
+  public static MatrixM2x2D setIdentity(
     final MatrixM2x2D m)
   {
     m.view.clear();
@@ -791,13 +791,13 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
 
   /**
    * Set the given matrix <code>m</code> to the zero matrix.
-   * 
+   *
    * @param m
    *          The matrix
    * @return <code>m</code>
    */
 
-  public final static MatrixM2x2D setZero(
+  public static MatrixM2x2D setZero(
     final MatrixM2x2D m)
   {
     m.view.clear();
@@ -810,14 +810,14 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Return the trace of the matrix <code>m</code>. The trace is defined as
    * the sum of the diagonal elements of the matrix.
-   * 
+   *
    * @since 5.0.0
    * @param m
    *          The input matrix
    * @return The trace of the matrix
    */
 
-  public final static double trace(
+  public static double trace(
     final MatrixReadable2x2DType m)
   {
     return m.getRowColumnD(0, 0) + m.getRowColumnD(1, 1);
@@ -826,13 +826,13 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @return <code>m</code>
    */
 
-  public final static MatrixM2x2D transpose(
+  public static MatrixM2x2D transpose(
     final MatrixM2x2D m)
   {
     for (int row = 0; row < (2 - 1); ++row) {
@@ -850,7 +850,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
   /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param out
@@ -858,7 +858,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM2x2D transpose(
+  public static MatrixM2x2D transpose(
     final MatrixReadable2x2DType m,
     final MatrixM2x2D out)
   {
@@ -892,7 +892,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
 
   /**
    * Construct a new copy of the given matrix.
-   * 
+   *
    * @param source
    *          The source matrix.
    */
@@ -921,7 +921,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
     this.view.rewind();
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -952,33 +952,33 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    *          The column.
    */
 
-  public final double get(
+  public double get(
     final int row,
     final int column)
   {
     return MatrixM2x2D.get(this, row, column);
   }
 
-  @Override public final DoubleBuffer getDoubleBuffer()
+  @Override public DoubleBuffer getDoubleBuffer()
   {
     return this.view;
   }
 
-  @Override public final void getRow2D(
+  @Override public void getRow2D(
     final int row,
     final VectorM2D out)
   {
     MatrixM2x2D.rowUnsafe(this, MatrixM2x2D.rowCheck(row), out);
   }
 
-  @Override public final double getRowColumnD(
+  @Override public double getRowColumnD(
     final int row,
     final int column)
   {
     return MatrixM2x2D.get(this, row, column);
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1000,7 +1000,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
    *          The value.
    */
 
-  public final MatrixM2x2D set(
+  public MatrixM2x2D set(
     final int row,
     final int column,
     final double value)
@@ -1019,7 +1019,7 @@ public class MatrixM2x2D implements MatrixReadable2x2DType
     return this;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     for (int row = 0; row < 2; ++row) {

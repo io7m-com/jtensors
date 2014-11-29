@@ -14,67 +14,67 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests;
+package com.io7m.jtensors.tests.parameterized;
 
 /**
  * Properties of 3D vectors.
  */
 
-public abstract class VectorI3TContract
+public abstract class PVectorI3Contract
 {
   /**
    * <code>∀v. w = absolute(v) → w.x = abs(v.x) ∧ w.y = abs(v.y) ∧ w.z = abs(v.z)</code>
    */
 
-  public abstract <A> void testAbsolute();
+  public abstract void testAbsolute();
 
   /**
-   * Vector addition is correct.
+   * PVector addition is correct.
    */
 
-  public abstract <A> void testAdd();
+  public abstract void testAdd();
 
   /**
    * Addition of scaled vectors is correct.
    */
 
-  public abstract <A> void testAddScaled();
+  public abstract void testAddScaled();
 
   /**
    * Differing vectors are not almost equal.
    */
 
-  public abstract <A> void testAlmostEqualNot();
+  public abstract void testAlmostEqualNot();
 
   /**
    * <code>∀v r s. v ≃ r ∧ r ≃ s → v ≃ s</code>
    */
 
-  public abstract <A> void testAlmostEqualTransitive();
+  public abstract void testAlmostEqualTransitive();
 
   /**
    * Interface functions work as expected.
    */
 
-  public abstract <A> void testCheckInterface();
+  public abstract void testCheckInterface();
 
-  public abstract <A> void testClampByVectorMaximumOrdering();
+  public abstract void testClampByPVectorMaximumOrdering();
 
-  public abstract <A> void testClampByVectorMinimumOrdering();
+  public abstract void testClampByPVectorMinimumOrdering();
 
-  public abstract <A> void testClampByVectorOrdering();
+  public abstract void testClampByPVectorOrdering();
 
-  public abstract <A> void testClampMaximumOrdering();
+  public abstract void testClampMaximumOrdering();
 
-  public abstract <A> void testClampMinimumOrdering();
+  public abstract void testClampMinimumOrdering();
 
-  public abstract <A> void testClampOrdering();
+  public abstract void testClampOrdering();
 
   /**
    * Copying vectors works correctly.
    */
 
-  public abstract <A> void testCopy();
+  public abstract void testCopy();
 
   /**
    * <p>
@@ -82,63 +82,63 @@ public abstract class VectorI3TContract
    * </p>
    */
 
-  public abstract <A> void testCrossProductPerpendicular();
+  public abstract void testCrossProductPerpendicular();
 
   /**
    * The default value for D vectors is (0,0,0)
    */
 
-  public abstract <A> void testDefault000();
+  public abstract void testDefault000();
 
-  public abstract <A> void testDistance();
+  public abstract void testDistance();
 
-  public abstract <A> void testDistanceOrdering();
+  public abstract void testDistanceOrdering();
 
   /**
    * The <code>dotProduct</code> function gives expected results.
    */
 
-  public abstract <A> void testDotProduct();
+  public abstract void testDotProduct();
 
-  public abstract <A> void testDotProductPerpendicular();
+  public abstract void testDotProductPerpendicular();
 
   /**
    * <code>∀v. dotProduct(v, v) = 1</code>
    */
 
-  public abstract <A> void testDotProductSelf();
+  public abstract void testDotProductSelf();
 
   /**
    * <code>∀v. dotProduct(v, v) = magnitude(v)²</code>
    */
 
-  public abstract <A> void testDotProductSelfMagnitudeSquared();
+  public abstract void testDotProductSelfMagnitudeSquared();
 
   /**
    * Equality is correct.
    */
 
-  public abstract <A> void testEqualsCorrect();
+  public abstract void testEqualsCorrect();
 
   /**
    * Inequality is correct.
    */
 
-  public abstract <A> void testEqualsNotEqualCorrect();
+  public abstract void testEqualsNotEqualCorrect();
 
   /**
    * Two equal vectors have the same hashcode.
    */
 
-  public abstract <A> void testHashCodeEqualsCorrect();
+  public abstract void testHashCodeEqualsCorrect();
 
   /**
    * All parts of a vector affect the hashcode.
    */
 
-  public abstract <A> void testHashCodeNotEqualCorrect();
+  public abstract void testHashCodeNotEqualCorrect();
 
-  public abstract <A> void testInitializeReadable();
+  public abstract void testInitializeReadable();
 
   /**
    * <p>
@@ -149,13 +149,13 @@ public abstract class VectorI3TContract
    * </p>
    */
 
-  public abstract <A> void testInterpolateLinearLimits();
+  public abstract void testInterpolateLinearLimits();
 
   /**
    * The magnitude of any large random vector is greater than zero.
    */
 
-  public abstract <A> void testMagnitudeNonzero();
+  public abstract void testMagnitudeNonzero();
 
   /**
    * <p>
@@ -163,7 +163,7 @@ public abstract class VectorI3TContract
    * </p>
    */
 
-  public abstract <A> void testMagnitudeNormal();
+  public abstract void testMagnitudeNormal();
 
   /**
    * <p>
@@ -171,7 +171,7 @@ public abstract class VectorI3TContract
    * </p>
    */
 
-  public abstract <A> void testMagnitudeNormalizeZero();
+  public abstract void testMagnitudeNormalizeZero();
 
   /**
    * <p>
@@ -179,13 +179,13 @@ public abstract class VectorI3TContract
    * </p>
    */
 
-  public abstract <A> void testMagnitudeOne();
+  public abstract void testMagnitudeOne();
 
   /**
    * Simple magnitude tests.
    */
 
-  public abstract <A> void testMagnitudeSimple();
+  public abstract void testMagnitudeSimple();
 
   /**
    * <p>
@@ -193,28 +193,28 @@ public abstract class VectorI3TContract
    * </p>
    */
 
-  public abstract <A> void testMagnitudeZero();
+  public abstract void testMagnitudeZero();
 
-  public abstract <A> void testNormalizeSimple();
+  public abstract void testNormalizeSimple();
 
   /**
    * Normalizing a zero vector results in a zero vector.
    */
 
-  public abstract <A> void testNormalizeZero();
+  public abstract void testNormalizeZero();
 
   /**
    * Orthonormalization results in a pair of orthonormal vectors.
    */
 
-  public abstract <A> void testOrthonormalize();
+  public abstract void testOrthonormalize();
 
   /**
    * Projecting a vector onto a perpendicular vector results in a vector with
    * zero magnitude.
    */
 
-  public abstract <A> void testProjectionPerpendicularZero();
+  public abstract void testProjectionPerpendicularZero();
 
   /**
    * <p>
@@ -222,7 +222,7 @@ public abstract class VectorI3TContract
    * </p>
    */
 
-  public abstract <A> void testScaleOne();
+  public abstract void testScaleOne();
 
   /**
    * <p>
@@ -230,17 +230,17 @@ public abstract class VectorI3TContract
    * </p>
    */
 
-  public abstract <A> void testScaleZero();
+  public abstract void testScaleZero();
 
   /**
    * toString() gives useful results.
    */
 
-  public abstract <A> void testString();
+  public abstract void testString();
 
   /**
-   * Vector subtraction is correct.
+   * PVector subtraction is correct.
    */
 
-  public abstract <A> void testSubtract();
+  public abstract void testSubtract();
 }

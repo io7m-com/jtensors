@@ -18,6 +18,7 @@ package com.io7m.jtensors;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jfunctional.Pair;
+import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 
 /**
@@ -30,7 +31,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
- public class VectorI4D implements VectorReadable4DType
+public final class VectorI4D implements VectorReadable4DType
 {
   /**
    * The zero vector.
@@ -44,14 +45,14 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the absolute value of the vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return <code>(abs v.x, abs v.y, abs v.z, abs v.w)</code>
    */
 
-  public final static VectorI4D absolute(
+  public static VectorI4D absolute(
     final VectorReadable4DType v)
   {
     return new VectorI4D(Math.abs(v.getXD()), Math.abs(v.getYD()), Math.abs(v
@@ -61,16 +62,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
    */
 
-  public final static VectorI4D add(
+  public static VectorI4D add(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
@@ -84,18 +85,18 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
    */
 
-  public final static VectorI4D addScaled(
+  public static VectorI4D addScaled(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1,
     final double r)
@@ -106,9 +107,9 @@ import com.io7m.jnull.Nullable;
   /**
    * Determine whether or not the vectors <code>va</code> and <code>vb</code>
    * are equal to within the degree of error given in <code>context</code>.
-   * 
+   *
    * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
-   * 
+   *
    * @param context
    *          The equality context
    * @param va
@@ -119,7 +120,7 @@ import com.io7m.jnull.Nullable;
    * @return <code>true</code> iff the vectors are almost equal.
    */
 
-  public final static boolean almostEqual(
+  public static boolean almostEqual(
     final AlmostEqualDouble.ContextRelative context,
     final VectorReadable4DType va,
     final VectorReadable4DType vb)
@@ -138,19 +139,19 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. maximum]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         and at least <code>minimum</code>
    */
 
-  public final static VectorI4D clamp(
+  public static VectorI4D clamp(
     final VectorReadable4DType v,
     final double minimum,
     final double maximum)
@@ -166,18 +167,18 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code> and
    * <code>maximum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
    */
 
-  public final static VectorI4D clampByVector(
+  public static VectorI4D clampByVector(
     final VectorReadable4DType v,
     final VectorReadable4DType minimum,
     final VectorReadable4DType maximum)
@@ -196,16 +197,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[-Infinity .. maximum]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public final static VectorI4D clampMaximum(
+  public static VectorI4D clampMaximum(
     final VectorReadable4DType v,
     final double maximum)
   {
@@ -219,16 +220,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>maximum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
    */
 
-  public final static VectorI4D clampMaximumByVector(
+  public static VectorI4D clampMaximumByVector(
     final VectorReadable4DType v,
     final VectorReadable4DType maximum)
   {
@@ -242,17 +243,17 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. Infinity]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at least
    *         <code>minimum</code>.
    */
 
-  public final static VectorI4D clampMinimum(
+  public static VectorI4D clampMinimum(
     final VectorReadable4DType v,
     final double minimum)
   {
@@ -266,16 +267,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
-   * 
+   *
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))</code>
    */
 
-  public final static VectorI4D clampMinimumByVector(
+  public static VectorI4D clampMinimumByVector(
     final VectorReadable4DType v,
     final VectorReadable4DType minimum)
   {
@@ -289,16 +290,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the distance between the two vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The distance between the two vectors.
    */
 
-  public final static double distance(
+  public static double distance(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
@@ -308,16 +309,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the scalar product of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The scalar product of the two vectors
    */
 
-  public final static double dotProduct(
+  public static double dotProduct(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
@@ -331,15 +332,15 @@ import com.io7m.jnull.Nullable;
   /**
    * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
    * amount <code>alpha</code>.
-   * 
+   *
    * The <code>alpha</code> parameter controls the degree of interpolation,
    * such that:
-   * 
+   *
    * <ul>
    * <li><code>interpolateLinear(v0, v1, 0.0) = v0</code></li>
    * <li><code>interpolateLinear(v0, v1, 1.0) = v1</code></li>
    * </ul>
-   * 
+   *
    * @param v0
    *          The left input vector.
    * @param v1
@@ -347,11 +348,11 @@ import com.io7m.jnull.Nullable;
    * @param alpha
    *          The interpolation value, between <code>0.0</code> and
    *          <code>1.0</code>.
-   * 
+   *
    * @return <code>(1 - alpha) * v0 + alpha * v1</code>
    */
 
-  public final static VectorI4D interpolateLinear(
+  public static VectorI4D interpolateLinear(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1,
     final double alpha)
@@ -363,16 +364,16 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the magnitude of the vector <code>v</code>.
-   * 
+   *
    * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The magnitude of the input vector
    */
 
-  public final static double magnitude(
+  public static double magnitude(
     final VectorReadable4DType v)
   {
     return Math.sqrt(VectorI4D.magnitudeSquared(v));
@@ -380,14 +381,14 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the squared magnitude of the vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The squared magnitude of the input vector
    */
 
-  public final static double magnitudeSquared(
+  public static double magnitudeSquared(
     final VectorReadable4DType v)
   {
     return VectorI4D.dotProduct(v, v);
@@ -396,15 +397,15 @@ import com.io7m.jnull.Nullable;
   /**
    * Normalize the vector <code>v</code>, preserving its direction but
    * reducing it to unit length.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return A vector with the same orientation as <code>v</code> but with
    *         magnitude equal to <code>1.0</code>
    */
 
-  public final static VectorI4D normalize(
+  public static VectorI4D normalize(
     final VectorReadable4DType v)
   {
     final double m = VectorI4D.magnitudeSquared(v);
@@ -423,7 +424,7 @@ import com.io7m.jnull.Nullable;
    * <p>
    * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
-   * 
+   *
    * @param v0
    *          The left vector
    * @param v1
@@ -432,7 +433,7 @@ import com.io7m.jnull.Nullable;
    * @since 5.0.0
    */
 
-  public final static Pair<VectorI4D, VectorI4D> orthoNormalize(
+  public static Pair<VectorI4D, VectorI4D> orthoNormalize(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
@@ -447,7 +448,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>.
-   * 
+   *
    * @param p
    *          The left vector
    * @param q
@@ -455,7 +456,7 @@ import com.io7m.jnull.Nullable;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public final static VectorI4D projection(
+  public static VectorI4D projection(
     final VectorReadable4DType p,
     final VectorReadable4DType q)
   {
@@ -467,16 +468,16 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Scale the vector <code>v</code> by the scalar <code>r</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>
    */
 
-  public final static VectorI4D scale(
+  public static VectorI4D scale(
     final VectorReadable4DType v,
     final double r)
   {
@@ -489,16 +490,16 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
    */
 
-  public final static VectorI4D subtract(
+  public static VectorI4D subtract(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
@@ -529,7 +530,7 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Construct a vector initialized with the given values.
-   * 
+   *
    * @param in_x
    *          The <code>x</code> value
    * @param in_y
@@ -555,7 +556,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Construct a vector initialized with the values given in the vector
    * <code>in_v</code>.
-   * 
+   *
    * @param in_v
    *          The input vector.
    */
@@ -569,7 +570,7 @@ import com.io7m.jnull.Nullable;
     this.w = in_v.getWD();
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -597,27 +598,27 @@ import com.io7m.jnull.Nullable;
     return true;
   }
 
-  @Override public final double getWD()
+  @Override public double getWD()
   {
     return this.w;
   }
 
-  @Override public final double getXD()
+  @Override public double getXD()
   {
     return this.x;
   }
 
-  @Override public final double getYD()
+  @Override public double getYD()
   {
     return this.y;
   }
 
-  @Override public final double getZD()
+  @Override public double getZD()
   {
     return this.z;
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -633,7 +634,7 @@ import com.io7m.jnull.Nullable;
     return result;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI4D ");
@@ -646,7 +647,6 @@ import com.io7m.jnull.Nullable;
     builder.append(this.w);
     builder.append("]");
     final String r = builder.toString();
-    assert r != null;
-    return r;
+    return NullCheck.notNull(r);
   }
 }

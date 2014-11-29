@@ -44,7 +44,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public class MatrixM4x4F implements MatrixReadable4x4FType
+public final class MatrixM4x4F implements MatrixReadable4x4FType
 {
   /**
    * <p>
@@ -182,7 +182,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
 
   /**
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>.
-   * 
+   *
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -192,7 +192,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F add(
+  public static MatrixM4x4F add(
     final MatrixReadable4x4FType m0,
     final MatrixReadable4x4FType m1,
     final MatrixM4x4F out)
@@ -211,7 +211,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
    * returning the result in <code>m0</code>.
-   * 
+   *
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -219,7 +219,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return m0
    */
 
-  public final static MatrixM4x4F addInPlace(
+  public static MatrixM4x4F addInPlace(
     final MatrixM4x4F m0,
     final MatrixReadable4x4FType m1)
   {
@@ -237,7 +237,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -253,7 +253,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F addRowScaled(
+  public static MatrixM4x4F addRowScaled(
     final MatrixReadable4x4FType m,
     final int row_a,
     final int row_b,
@@ -286,7 +286,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -300,7 +300,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F addRowScaledInPlace(
+  public static MatrixM4x4F addRowScaledInPlace(
     final MatrixM4x4F m,
     final int row_a,
     final int row_b,
@@ -342,7 +342,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage.
    * @param m
@@ -360,7 +360,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F addRowScaledWithContext(
+  public static MatrixM4x4F addRowScaledWithContext(
     final Context context,
     final MatrixReadable4x4FType m,
     final int row_a,
@@ -393,7 +393,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Copy the contents of the matrix <code>input</code> to the matrix
    * <code>output</code>, completely replacing all elements.
-   * 
+   *
    * @param input
    *          The input vector.
    * @param output
@@ -401,7 +401,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>output</code>
    */
 
-  public final static MatrixM4x4F copy(
+  public static MatrixM4x4F copy(
     final MatrixReadable4x4FType input,
     final MatrixM4x4F output)
   {
@@ -416,13 +416,13 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
 
   /**
    * Calculate the determinant of the matrix <code>m</code>.
-   * 
+   *
    * @return The determinant.
    * @param m
    *          The input matrix.
    */
 
-  public final static double determinant(
+  public static double determinant(
     final MatrixReadable4x4FType m)
   {
     final double r0c0 = m.getRowColumnF(0, 0);
@@ -490,7 +490,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -502,7 +502,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F exchangeRows(
+  public static MatrixM4x4F exchangeRows(
     final MatrixReadable4x4FType m,
     final int row_a,
     final int row_b,
@@ -529,7 +529,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -539,7 +539,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F exchangeRowsInPlace(
+  public static MatrixM4x4F exchangeRowsInPlace(
     final MatrixM4x4F m,
     final int row_a,
     final int row_b)
@@ -559,7 +559,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage.
    * @param m
@@ -571,7 +571,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F exchangeRowsInPlaceWithContext(
+  public static MatrixM4x4F exchangeRowsInPlaceWithContext(
     final Context context,
     final MatrixM4x4F m,
     final int row_a,
@@ -611,7 +611,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage.
    * @param m
@@ -625,7 +625,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F exchangeRowsWithContext(
+  public static MatrixM4x4F exchangeRowsWithContext(
     final Context context,
     final MatrixReadable4x4FType m,
     final int row_a,
@@ -647,7 +647,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    *          The input matrix.
    */
 
-  public final static FloatBuffer floatBuffer(
+  public static FloatBuffer floatBuffer(
     final MatrixM4x4F m)
   {
     return m.view;
@@ -664,7 +664,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    *          The column
    */
 
-  public final static float get(
+  public static float get(
     final MatrixReadable4x4FType m,
     final int row,
     final int column)
@@ -721,7 +721,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
      * sub-matrices of the original matrix. The sub-matrices are created by
      * removing a specific row and column to leave 9 (possibly non-adjacent)
      * cells, which are then placed in a 3x3 matrix.
-     * 
+     *
      * This implementation was derived from the paper "The Laplace Expansion
      * Theorem: Computing the Determinants and Inverses of Matrices" by David
      * Eberly.
@@ -1057,9 +1057,9 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * otherwise. It is not possible to invert a matrix that has a determinant
    * of <code>0</code>. If the function returns <code>None</code>,
    * <code>m</code> is untouched.
-   * 
+   *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param out
@@ -1067,7 +1067,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>.
    */
 
-  public final static OptionType<MatrixM4x4F> invert(
+  public static OptionType<MatrixM4x4F> invert(
     final MatrixReadable4x4FType m,
     final MatrixM4x4F out)
   {
@@ -1082,15 +1082,15 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * is not possible to invert a matrix that has a determinant of
    * <code>0</code>. If the function returns <code>None</code>, <code>m</code>
    * is untouched.
-   * 
+   *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   * 
+   *
    * @param m
    *          The input matrix.
    * @return <code>m</code>.
    */
 
-  public final static OptionType<MatrixM4x4F> invertInPlace(
+  public static OptionType<MatrixM4x4F> invertInPlace(
     final MatrixM4x4F m)
   {
     return MatrixM4x4F.invert(m, m);
@@ -1104,9 +1104,9 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * <code>0</code>. The function uses preallocated storage in
    * <code>context</code> to avoid allocating memory. If the function returns
    * <code>None</code>, <code>m</code> is untouched.
-   * 
+   *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   * 
+   *
    * @param context
    *          Preallocated storage.
    * @param m
@@ -1114,7 +1114,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static OptionType<MatrixM4x4F> invertInPlaceWithContext(
+  public static OptionType<MatrixM4x4F> invertInPlaceWithContext(
     final Context context,
     final MatrixM4x4F m)
   {
@@ -1129,9 +1129,9 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * of <code>0</code>. The function uses preallocated storage in
    * <code>context</code> to avoid allocating memory. If the function returns
    * <code>None</code>, <code>m</code> is untouched.
-   * 
+   *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   * 
+   *
    * @param context
    *          Preallocated storage.
    * @param m
@@ -1141,7 +1141,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static OptionType<MatrixM4x4F> invertWithContext(
+  public static OptionType<MatrixM4x4F> invertWithContext(
     final Context context,
     final MatrixReadable4x4FType m,
     final MatrixM4x4F out)
@@ -1163,7 +1163,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * The view is expressed as a rotation and translation matrix, written to
    * <code>out_matrix</code>.
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage
    * @param out_matrix
@@ -1176,7 +1176,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    *          The up vector
    */
 
-  public final static void lookAtWithContext(
+  public static void lookAtWithContext(
     final Context context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
@@ -1255,7 +1255,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
    * </p>
-   * 
+   *
    * @return A rotation matrix.
    * @param angle
    *          The angle in radians.
@@ -1263,7 +1263,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    *          The axis.
    */
 
-  public final static MatrixM4x4F makeRotation(
+  public static MatrixM4x4F makeRotation(
     final double angle,
     final VectorReadable3FType axis)
   {
@@ -1284,7 +1284,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
    * </p>
-   * 
+   *
    * @param angle
    *          The angle in radians.
    * @param axis
@@ -1294,7 +1294,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F makeRotation(
+  public static MatrixM4x4F makeRotation(
     final double angle,
     final VectorReadable3FType axis,
     final MatrixM4x4F out)
@@ -1366,13 +1366,13 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Generate and return a matrix that represents a translation of
    * <code>(v.x, v.y, v.z)</code> from the origin.
-   * 
+   *
    * @param v
    *          The translation vector.
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F makeTranslation3F(
+  public static MatrixM4x4F makeTranslation3F(
     final VectorReadable3FType v)
   {
     final MatrixM4x4F out = new MatrixM4x4F();
@@ -1386,7 +1386,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * Generate a matrix that represents a translation of
    * <code>(v.x, v.y, v.z)</code> from the origin, and save to
    * <code>out</code>.
-   * 
+   *
    * @param v
    *          The translation vector.
    * @param out
@@ -1394,7 +1394,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F makeTranslation3F(
+  public static MatrixM4x4F makeTranslation3F(
     final VectorReadable3FType v,
     final MatrixM4x4F out)
   {
@@ -1425,13 +1425,13 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Generate and return a matrix that represents a translation of
    * <code>(v.x, v.y, v.z)</code> from the origin.
-   * 
+   *
    * @param v
    *          The translation vector.
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F makeTranslation3I(
+  public static MatrixM4x4F makeTranslation3I(
     final VectorReadable3IType v)
   {
     final MatrixM4x4F out = new MatrixM4x4F();
@@ -1445,7 +1445,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * Generate a matrix that represents a translation of
    * <code>(v.x, v.y, v.z)</code> from the origin, and save to
    * <code>out</code>.
-   * 
+   *
    * @param v
    *          The translation vector.
    * @param out
@@ -1453,7 +1453,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F makeTranslation3I(
+  public static MatrixM4x4F makeTranslation3I(
     final VectorReadable3IType v,
     final MatrixM4x4F out)
   {
@@ -1484,7 +1484,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
    * writing the result to <code>out</code>.
-   * 
+   *
    * @param m0
    *          The left input vector.
    * @param m1
@@ -1494,7 +1494,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F multiply(
+  public static MatrixM4x4F multiply(
     final MatrixReadable4x4FType m0,
     final MatrixReadable4x4FType m1,
     final MatrixM4x4F out)
@@ -1622,7 +1622,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
    * writing the result to <code>m0</code>.
-   * 
+   *
    * @param m0
    *          The left input vector.
    * @param m1
@@ -1630,7 +1630,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F multiplyInPlace(
+  public static MatrixM4x4F multiplyInPlace(
     final MatrixM4x4F m0,
     final MatrixReadable4x4FType m1)
   {
@@ -1640,7 +1640,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Multiply the matrix <code>m</code> with the vector <code>v</code>,
    * writing the resulting vector to <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -1650,7 +1650,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static VectorM4F multiplyVector4F(
+  public static VectorM4F multiplyVector4F(
     final MatrixReadable4x4FType m,
     final VectorReadable4FType v,
     final VectorM4F out)
@@ -1685,7 +1685,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * Multiply the matrix <code>m</code> with the vector <code>v</code>,
    * writing the resulting vector to <code>out</code>. The function uses
    * preallocated storage in <code>context</code> to avoid allocating memory.
-   * 
+   *
    * @param context
    *          Preallocated storage.
    * @param m
@@ -1697,7 +1697,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static VectorM4F multiplyVector4FWithContext(
+  public static VectorM4F multiplyVector4FWithContext(
     final Context context,
     final MatrixReadable4x4FType m,
     final VectorReadable4FType v,
@@ -1735,7 +1735,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
    * </p>
-   * 
+   *
    * @param angle
    *          The angle in radians.
    * @param m
@@ -1747,7 +1747,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F rotate(
+  public static MatrixM4x4F rotate(
     final double angle,
     final MatrixReadable4x4FType m,
     final VectorReadable3FType axis,
@@ -1767,7 +1767,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
    * </p>
-   * 
+   *
    * @param angle
    *          The angle in radians.
    * @param m
@@ -1777,7 +1777,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F rotateInPlace(
+  public static MatrixM4x4F rotateInPlace(
     final double angle,
     final MatrixM4x4F m,
     final VectorReadable3FType axis)
@@ -1798,7 +1798,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage.
    * @param angle
@@ -1810,7 +1810,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F rotateInPlaceWithContext(
+  public static MatrixM4x4F rotateInPlaceWithContext(
     final Context context,
     final double angle,
     final MatrixM4x4F m,
@@ -1831,7 +1831,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage.
    * @param angle
@@ -1845,7 +1845,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F rotateWithContext(
+  public static MatrixM4x4F rotateWithContext(
     final Context context,
     final double angle,
     final MatrixReadable4x4FType m,
@@ -1858,7 +1858,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Return row <code>row</code> of the matrix <code>m</code> in the vector
    * <code>out</code>.
-   * 
+   *
    * @param row
    *          The row
    * @param m
@@ -1868,7 +1868,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return out
    */
 
-  public final static VectorM4F row(
+  public static VectorM4F row(
     final MatrixReadable4x4FType m,
     final int row,
     final VectorM4F out)
@@ -1902,7 +1902,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Scale all elements of the matrix <code>m</code> by the scaling value
    * <code>r</code>, saving the result in <code>out</code>.
-   * 
+   *
    * @param out
    *          The output matrix.
    * @param m
@@ -1912,7 +1912,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F scale(
+  public static MatrixM4x4F scale(
     final MatrixReadable4x4FType m,
     final double r,
     final MatrixM4x4F out)
@@ -1929,7 +1929,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Scale all elements of the matrix <code>m</code> by the scaling value
    * <code>r</code>, saving the result in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param r
@@ -1937,7 +1937,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F scaleInPlace(
+  public static MatrixM4x4F scaleInPlace(
     final MatrixM4x4F m,
     final double r)
   {
@@ -1954,7 +1954,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row
@@ -1966,7 +1966,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F scaleRow(
+  public static MatrixM4x4F scaleRow(
     final MatrixReadable4x4FType m,
     final int row,
     final double r,
@@ -1991,7 +1991,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row
@@ -2001,7 +2001,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F scaleRowInPlace(
+  public static MatrixM4x4F scaleRowInPlace(
     final MatrixM4x4F m,
     final int row,
     final double r)
@@ -2022,7 +2022,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage.
    * @param m
@@ -2034,7 +2034,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F scaleRowInPlaceWithContext(
+  public static MatrixM4x4F scaleRowInPlaceWithContext(
     final Context context,
     final MatrixM4x4F m,
     final int row,
@@ -2075,7 +2075,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage.
    * @param m
@@ -2089,7 +2089,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F scaleRowWithContext(
+  public static MatrixM4x4F scaleRowWithContext(
     final Context context,
     final MatrixReadable4x4FType m,
     final int row,
@@ -2107,7 +2107,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Set the value in the matrix <code>m</code> at row <code>row</code>,
    * column <code>column</code> to <code>value</code>.
-   * 
+   *
    * @return <code>m</code>
    * @param m
    *          The input matrix
@@ -2119,7 +2119,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    *          The value
    */
 
-  public final static MatrixM4x4F set(
+  public static MatrixM4x4F set(
     final MatrixM4x4F m,
     final int row,
     final int column,
@@ -2132,13 +2132,13 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
 
   /**
    * Set the given matrix <code>m</code> to the identity matrix.
-   * 
+   *
    * @param m
    *          The input matrix
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F setIdentity(
+  public static MatrixM4x4F setIdentity(
     final MatrixM4x4F m)
   {
     m.view.clear();
@@ -2164,13 +2164,13 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
 
   /**
    * Set the given matrix <code>m</code> to the zero matrix.
-   * 
+   *
    * @param m
    *          The matrix
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F setZero(
+  public static MatrixM4x4F setZero(
     final MatrixM4x4F m)
   {
     m.view.clear();
@@ -2185,14 +2185,14 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Return the trace of the matrix <code>m</code>. The trace is defined as
    * the sum of the diagonal elements of the matrix.
-   * 
+   *
    * @since 5.0.0
    * @param m
    *          The input matrix
    * @return The trace of the matrix
    */
 
-  public final static double trace(
+  public static double trace(
     final MatrixReadable4x4FType m)
   {
     return m.getRowColumnF(0, 0)
@@ -2204,7 +2204,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -2214,7 +2214,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F translateByVector2F(
+  public static MatrixM4x4F translateByVector2F(
     final MatrixReadable4x4FType m,
     final VectorReadable2FType v,
     final MatrixM4x4F out)
@@ -2243,7 +2243,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -2251,7 +2251,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F translateByVector2FInPlace(
+  public static MatrixM4x4F translateByVector2FInPlace(
     final MatrixM4x4F m,
     final VectorReadable2FType v)
   {
@@ -2261,7 +2261,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -2271,7 +2271,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F translateByVector2I(
+  public static MatrixM4x4F translateByVector2I(
     final MatrixReadable4x4FType m,
     final VectorReadable2IType v,
     final MatrixM4x4F out)
@@ -2300,7 +2300,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -2308,7 +2308,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F translateByVector2IInPlace(
+  public static MatrixM4x4F translateByVector2IInPlace(
     final MatrixM4x4F m,
     final VectorReadable2IType v)
   {
@@ -2318,7 +2318,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -2328,7 +2328,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F translateByVector3F(
+  public static MatrixM4x4F translateByVector3F(
     final MatrixReadable4x4FType m,
     final VectorReadable3FType v,
     final MatrixM4x4F out)
@@ -2366,7 +2366,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -2374,7 +2374,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F translateByVector3FInPlace(
+  public static MatrixM4x4F translateByVector3FInPlace(
     final MatrixM4x4F m,
     final VectorReadable3FType v)
   {
@@ -2384,7 +2384,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -2394,7 +2394,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F translateByVector3I(
+  public static MatrixM4x4F translateByVector3I(
     final MatrixReadable4x4FType m,
     final VectorReadable3IType v,
     final MatrixM4x4F out)
@@ -2432,7 +2432,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -2440,7 +2440,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F translateByVector3IInPlace(
+  public static MatrixM4x4F translateByVector3IInPlace(
     final MatrixM4x4F m,
     final VectorReadable3IType v)
   {
@@ -2450,7 +2450,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param out
@@ -2458,7 +2458,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>out</code>
    */
 
-  public final static MatrixM4x4F transpose(
+  public static MatrixM4x4F transpose(
     final MatrixReadable4x4FType m,
     final MatrixM4x4F out)
   {
@@ -2472,13 +2472,13 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F transposeInPlace(
+  public static MatrixM4x4F transposeInPlace(
     final MatrixM4x4F m)
   {
     for (int row = 0; row < (MatrixM4x4F.VIEW_ROWS - 1); ++row) {
@@ -2523,7 +2523,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
 
   /**
    * Construct a new copy of the given matrix.
-   * 
+   *
    * @param source
    *          The source matrix.
    */
@@ -2552,7 +2552,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
     this.view.rewind();
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -2583,26 +2583,26 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    *          The column
    */
 
-  public final float get(
+  public float get(
     final int row,
     final int column)
   {
     return MatrixM4x4F.get(this, row, column);
   }
 
-  @Override public final FloatBuffer getFloatBuffer()
+  @Override public FloatBuffer getFloatBuffer()
   {
     return this.view;
   }
 
-  @Override public final void getRow4F(
+  @Override public void getRow4F(
     final int row,
     final VectorM4F out)
   {
     MatrixM4x4F.rowUnsafe(this, MatrixM4x4F.rowCheck(row), out);
   }
 
-  @Override public final float getRowColumnF(
+  @Override public float getRowColumnF(
     final int row,
     final int column)
   {
@@ -2616,7 +2616,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
     return this.view.get(MatrixM4x4F.indexUnsafe(row, column));
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -2630,7 +2630,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
 
   /**
    * Set the value at the given row and column.
-   * 
+   *
    * @param row
    *          The row
    * @param column
@@ -2640,7 +2640,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
    * @return <code>this</code>
    */
 
-  public final MatrixM4x4F set(
+  public MatrixM4x4F set(
     final int row,
     final int column,
     final float value)
@@ -2653,11 +2653,11 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
   /**
    * Set the value at row <code>row</code> and <code>column</code> to
    * <code>value</code> without bounds checking.
-   * 
+   *
    * This function is only accessible by code in the same package as this.
    */
 
-  final MatrixM4x4F setUnsafe(
+  MatrixM4x4F setUnsafe(
     final int row,
     final int column,
     final float value)
@@ -2667,7 +2667,7 @@ public class MatrixM4x4F implements MatrixReadable4x4FType
     return this;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {

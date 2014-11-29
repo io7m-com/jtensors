@@ -44,7 +44,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public class MatrixM3x3D implements MatrixReadable3x3DType
+public final class MatrixM3x3D implements MatrixReadable3x3DType
 {
   /**
    * <p>
@@ -62,7 +62,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * then pass this value to matrix functions. Any matrix function that takes
    * a <code>Context</code> value will not generate garbage.
    * </p>
-   * 
+   *
    * @since 5.0.0
    */
 
@@ -143,7 +143,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
 
   /**
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>.
-   * 
+   *
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -153,7 +153,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D add(
+  public static MatrixM3x3D add(
     final MatrixReadable3x3DType m0,
     final MatrixReadable3x3DType m1,
     final MatrixM3x3D out)
@@ -172,7 +172,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
    * returning the result in <code>m0</code>.
-   * 
+   *
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -180,7 +180,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>m0</code>
    */
 
-  public final static MatrixM3x3D addInPlace(
+  public static MatrixM3x3D addInPlace(
     final MatrixM3x3D m0,
     final MatrixM3x3D m1)
   {
@@ -198,7 +198,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -214,7 +214,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D addRowScaled(
+  public static MatrixM3x3D addRowScaled(
     final MatrixReadable3x3DType m,
     final int row_a,
     final int row_b,
@@ -242,7 +242,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -256,7 +256,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D addRowScaledInPlace(
+  public static MatrixM3x3D addRowScaledInPlace(
     final MatrixM3x3D m,
     final int row_a,
     final int row_b,
@@ -299,7 +299,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Copy the contents of the matrix <code>input</code> to the matrix
    * <code>output</code>, completely replacing all elements.
-   * 
+   *
    * @param input
    *          The input vector.
    * @param output
@@ -307,7 +307,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>output</code>
    */
 
-  public final static MatrixM3x3D copy(
+  public static MatrixM3x3D copy(
     final MatrixReadable3x3DType input,
     final MatrixM3x3D output)
   {
@@ -322,13 +322,13 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
 
   /**
    * Calculate the determinant of the matrix <code>m</code>.
-   * 
+   *
    * @return The determinant
    * @param m
    *          The input matrix.
    */
 
-  public final static double determinant(
+  public static double determinant(
     final MatrixReadable3x3DType m)
   {
     final double r0c0 = m.getRowColumnD(0, 0);
@@ -358,7 +358,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    *          The input matrix.
    */
 
-  public final static DoubleBuffer doubleBuffer(
+  public static DoubleBuffer doubleBuffer(
     final MatrixM3x3D m)
   {
     return m.view;
@@ -374,7 +374,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -386,7 +386,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D exchangeRows(
+  public static MatrixM3x3D exchangeRows(
     final MatrixReadable3x3DType m,
     final int row_a,
     final int row_b,
@@ -409,7 +409,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -419,7 +419,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D exchangeRowsInPlace(
+  public static MatrixM3x3D exchangeRowsInPlace(
     final MatrixM3x3D m,
     final int row_a,
     final int row_b)
@@ -457,7 +457,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    *          The column
    */
 
-  public final static double get(
+  public static double get(
     final MatrixReadable3x3DType m,
     final int row,
     final int column)
@@ -502,9 +502,9 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * otherwise. It is not possible to invert a matrix that has a determinant
    * of <code>0</code>. If the function returns <code>None</code>,
    * <code>m</code> is untouched.
-   * 
+   *
    * @see MatrixM3x3D#determinant(MatrixReadable3x3DType)
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param out
@@ -512,7 +512,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static OptionType<MatrixM3x3D> invert(
+  public static OptionType<MatrixM3x3D> invert(
     final MatrixReadable3x3DType m,
     final MatrixM3x3D out)
   {
@@ -573,15 +573,15 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * is not possible to invert a matrix that has a determinant of
    * <code>0</code>. If the function returns <code>None</code>, <code>m</code>
    * is untouched.
-   * 
+   *
    * @see MatrixM3x3D#determinant(MatrixReadable3x3DType)
-   * 
+   *
    * @param m
    *          The input matrix.
    * @return <code>m</code>
    */
 
-  public final static OptionType<MatrixM3x3D> invertInPlace(
+  public static OptionType<MatrixM3x3D> invertInPlace(
     final MatrixM3x3D m)
   {
     return MatrixM3x3D.invert(m, m);
@@ -603,7 +603,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * written to <code>out_matrix</code> and <code>out_translation</code>,
    * respectively.
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage
    * @param out_matrix
@@ -618,7 +618,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    *          The up vector
    */
 
-  public final static void lookAtWithContext(
+  public static void lookAtWithContext(
     final Context context,
     final VectorReadable3DType origin,
     final VectorReadable3DType target,
@@ -686,7 +686,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
    * </p>
-   * 
+   *
    * @since 5.0.0
    * @param angle
    *          The angle in radians.
@@ -695,7 +695,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return A rotation matrix.
    */
 
-  public final static MatrixM3x3D makeRotation(
+  public static MatrixM3x3D makeRotation(
     final double angle,
     final VectorReadable3DType axis)
   {
@@ -715,7 +715,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
    * </p>
-   * 
+   *
    * @since 5.0.0
    * @param angle
    *          The angle in radians.
@@ -726,7 +726,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D makeRotation(
+  public static MatrixM3x3D makeRotation(
     final double angle,
     final VectorReadable3DType axis,
     final MatrixM3x3D out)
@@ -782,7 +782,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Create a translation matrix that represents a translation by the vector
    * <code>v</code>, writing the resulting matrix to <code>out</code>.
-   * 
+   *
    * @param v
    *          The translation vector.
    * @param out
@@ -790,7 +790,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D makeTranslation2D(
+  public static MatrixM3x3D makeTranslation2D(
     final VectorReadable2DType v,
     final MatrixM3x3D out)
   {
@@ -803,7 +803,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Create a translation matrix that represents a translation by the vector
    * <code>v</code>, writing the resulting matrix to <code>out</code>.
-   * 
+   *
    * @param v
    *          The translation vector.
    * @param out
@@ -811,7 +811,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D makeTranslation2I(
+  public static MatrixM3x3D makeTranslation2I(
     final VectorReadable2IType v,
     final MatrixM3x3D out)
   {
@@ -824,7 +824,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
    * writing the result to <code>out</code>.
-   * 
+   *
    * @param m0
    *          The left input vector.
    * @param m1
@@ -834,7 +834,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D multiply(
+  public static MatrixM3x3D multiply(
     final MatrixReadable3x3DType m0,
     final MatrixReadable3x3DType m1,
     final MatrixM3x3D out)
@@ -903,7 +903,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
    * writing the result to <code>m0</code>.
-   * 
+   *
    * @param m0
    *          The left input vector.
    * @param m1
@@ -911,7 +911,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D multiplyInPlace(
+  public static MatrixM3x3D multiplyInPlace(
     final MatrixM3x3D m0,
     final MatrixReadable3x3DType m1)
   {
@@ -921,7 +921,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Multiply the matrix <code>m</code> with the vector <code>v</code>,
    * writing the resulting vector to <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -931,7 +931,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static VectorM3D multiplyVector3D(
+  public static VectorM3D multiplyVector3D(
     final MatrixReadable3x3DType m,
     final VectorReadable3DType v,
     final VectorM3D out)
@@ -965,7 +965,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
    * axis <code>axis</code>, saving the result into <code>out</code>.
-   * 
+   *
    * @since 5.0.0
    * @param angle
    *          The angle in radians.
@@ -978,7 +978,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D rotate(
+  public static MatrixM3x3D rotate(
     final double angle,
     final MatrixReadable3x3DType m,
     final VectorReadable3DType axis,
@@ -991,7 +991,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
    * axis <code>axis</code>, saving the result into <code>m</code>.
-   * 
+   *
    * @since 5.0.0
    * @param angle
    *          The angle in radians.
@@ -1002,7 +1002,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D rotateInPlace(
+  public static MatrixM3x3D rotateInPlace(
     final double angle,
     final MatrixM3x3D m,
     final VectorReadable3DType axis)
@@ -1016,7 +1016,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * axis <code>axis</code>, saving the result into <code>m</code>. The
    * function uses preallocated storage in <code>context</code> to avoid
    * allocating memory. The function assumes a right-handed coordinate system.
-   * 
+   *
    * @since 5.0.0
    * @param context
    *          Preallocated storage.
@@ -1029,7 +1029,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D rotateInPlaceWithContext(
+  public static MatrixM3x3D rotateInPlaceWithContext(
     final Context context,
     final double angle,
     final MatrixM3x3D m,
@@ -1043,7 +1043,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * axis <code>axis</code>, saving the result into <code>out</code>. The
    * function uses preallocated storage in <code>context</code> to avoid
    * allocating memory. The function assumes a right-handed coordinate system.
-   * 
+   *
    * @since 5.0.0
    * @param context
    *          Preallocated storage.
@@ -1058,7 +1058,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D rotateWithContext(
+  public static MatrixM3x3D rotateWithContext(
     final Context context,
     final double angle,
     final MatrixReadable3x3DType m,
@@ -1079,7 +1079,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    *          The output matrix
    */
 
-  public final static VectorM3D row(
+  public static VectorM3D row(
     final MatrixReadable3x3DType m,
     final int row,
     final VectorM3D out)
@@ -1112,7 +1112,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Scale all elements of the matrix <code>m</code> by the scaling value
    * <code>r</code>, saving the result in <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param r
@@ -1122,7 +1122,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D scale(
+  public static MatrixM3x3D scale(
     final MatrixReadable3x3DType m,
     final double r,
     final MatrixM3x3D out)
@@ -1139,7 +1139,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Scale all elements of the matrix <code>m</code> by the scaling value
    * <code>r</code>, saving the result in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param r
@@ -1147,7 +1147,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D scaleInPlace(
+  public static MatrixM3x3D scaleInPlace(
     final MatrixM3x3D m,
     final double r)
   {
@@ -1164,7 +1164,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row
@@ -1176,7 +1176,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D scaleRow(
+  public static MatrixM3x3D scaleRow(
     final MatrixReadable3x3DType m,
     final int row,
     final double r,
@@ -1195,7 +1195,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
    * .
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row
@@ -1205,7 +1205,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D scaleRowInPlace(
+  public static MatrixM3x3D scaleRowInPlace(
     final MatrixM3x3D m,
     final int row,
     final double r)
@@ -1233,7 +1233,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Set the value in the matrix <code>m</code> at row <code>row</code>,
    * column <code>column</code> to <code>value</code>.
-   * 
+   *
    * @param m
    *          The matrix
    * @param row
@@ -1245,7 +1245,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D set(
+  public static MatrixM3x3D set(
     final MatrixM3x3D m,
     final int row,
     final int column,
@@ -1258,13 +1258,13 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
 
   /**
    * Set the given matrix <code>m</code> to the identity matrix.
-   * 
+   *
    * @param m
    *          The input matrix
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D setIdentity(
+  public static MatrixM3x3D setIdentity(
     final MatrixM3x3D m)
   {
     m.view.clear();
@@ -1287,13 +1287,13 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
 
   /**
    * Set the given matrix <code>m</code> to the zero matrix.
-   * 
+   *
    * @param m
    *          The input matrix
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D setZero(
+  public static MatrixM3x3D setZero(
     final MatrixM3x3D m)
   {
     m.view.clear();
@@ -1307,14 +1307,14 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Return the trace of the matrix <code>m</code>. The trace is defined as
    * the sum of the diagonal elements of the matrix.
-   * 
+   *
    * @since 5.0.0
    * @param m
    *          The input matrix
    * @return The trace of the matrix
    */
 
-  public final static double trace(
+  public static double trace(
     final MatrixReadable3x3DType m)
   {
     return m.getRowColumnD(0, 0)
@@ -1325,7 +1325,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -1335,7 +1335,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D translateByVector2D(
+  public static MatrixM3x3D translateByVector2D(
     final MatrixReadable3x3DType m,
     final VectorReadable2DType v,
     final MatrixM3x3D out)
@@ -1361,7 +1361,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -1369,7 +1369,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D translateByVector2DInPlace(
+  public static MatrixM3x3D translateByVector2DInPlace(
     final MatrixM3x3D m,
     final VectorReadable2DType v)
   {
@@ -1379,7 +1379,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -1389,7 +1389,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D translateByVector2I(
+  public static MatrixM3x3D translateByVector2I(
     final MatrixReadable3x3DType m,
     final VectorReadable2IType v,
     final MatrixM3x3D out)
@@ -1415,7 +1415,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -1423,7 +1423,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D translateByVector2IInPlace(
+  public static MatrixM3x3D translateByVector2IInPlace(
     final MatrixM3x3D m,
     final VectorReadable2IType v)
   {
@@ -1433,7 +1433,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param out
@@ -1441,7 +1441,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>out</code>
    */
 
-  public final static MatrixM3x3D transpose(
+  public static MatrixM3x3D transpose(
     final MatrixReadable3x3DType m,
     final MatrixM3x3D out)
   {
@@ -1457,13 +1457,13 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
   /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D transposeInPlace(
+  public static MatrixM3x3D transposeInPlace(
     final MatrixM3x3D m)
   {
     for (int row = 0; row < (MatrixM3x3D.VIEW_ROWS - 1); ++row) {
@@ -1505,7 +1505,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
 
   /**
    * Construct a new copy of the given matrix.
-   * 
+   *
    * @param source
    *          The source matrix.
    */
@@ -1532,7 +1532,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
     this.view.rewind();
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -1563,26 +1563,26 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    *          The column
    */
 
-  public final double get(
+  public double get(
     final int row,
     final int column)
   {
     return MatrixM3x3D.get(this, row, column);
   }
 
-  @Override public final DoubleBuffer getDoubleBuffer()
+  @Override public DoubleBuffer getDoubleBuffer()
   {
     return this.view;
   }
 
-  @Override public final void getRow3D(
+  @Override public void getRow3D(
     final int row,
     final VectorM3D out)
   {
     MatrixM3x3D.rowUnsafe(this, MatrixM3x3D.rowCheck(row), out);
   }
 
-  @Override public final double getRowColumnD(
+  @Override public double getRowColumnD(
     final int row,
     final int column)
   {
@@ -1596,7 +1596,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
     return this.view.get(MatrixM3x3D.indexUnsafe(row, column));
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1610,7 +1610,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
 
   /**
    * Set the value at the given row and column.
-   * 
+   *
    * @param row
    *          The row
    * @param column
@@ -1620,7 +1620,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
    * @return <code>this</code>
    */
 
-  public final MatrixM3x3D set(
+  public MatrixM3x3D set(
     final int row,
     final int column,
     final double value)
@@ -1630,7 +1630,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
     return this;
   }
 
-  final MatrixM3x3D setUnsafe(
+  MatrixM3x3D setUnsafe(
     final int row,
     final int column,
     final double value)
@@ -1640,7 +1640,7 @@ public class MatrixM3x3D implements MatrixReadable3x3DType
     return this;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     for (int row = 0; row < MatrixM3x3D.VIEW_ROWS; ++row) {

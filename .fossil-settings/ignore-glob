@@ -4,3 +4,4 @@ doc-out
 ext
 javadoc
 target
+io7m-*/target

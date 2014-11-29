@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -32,25 +32,25 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
- public class VectorI2D implements VectorReadable2DType
+public final class VectorI2D implements VectorReadable2DType
 {
   /**
    * The zero vector.
    */
 
-  public final static  VectorI2D ZERO = new VectorI2D(0.0, 0.0);
+  public static final VectorI2D ZERO = new VectorI2D(0.0, 0.0);
 
   /**
    * Calculate the absolute value of the vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return <code>(abs v.x, abs v.y)</code>
    */
 
-  public final static  VectorI2D absolute(
-    final  VectorReadable2DType v)
+  public static VectorI2D absolute(
+    final VectorReadable2DType v)
   {
     return new VectorI2D(Math.abs(v.getXD()), Math.abs(v.getYD()));
   }
@@ -58,18 +58,18 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
    */
 
-  public final static  VectorI2D add(
-    final  VectorReadable2DType v0,
-    final  VectorReadable2DType v1)
+  public static VectorI2D add(
+    final VectorReadable2DType v0,
+    final VectorReadable2DType v1)
   {
     return new VectorI2D(v0.getXD() + v1.getXD(), v0.getYD() + v1.getYD());
   }
@@ -77,20 +77,20 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
    */
 
-  public final static  VectorI2D addScaled(
-    final  VectorReadable2DType v0,
-    final  VectorReadable2DType v1,
+  public static VectorI2D addScaled(
+    final VectorReadable2DType v0,
+    final VectorReadable2DType v1,
     final double r)
   {
     return VectorI2D.add(v0, VectorI2D.scale(v1, r));
@@ -99,9 +99,9 @@ import com.io7m.jnull.Nullable;
   /**
    * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
    * are equal to within the degree of error given in <code>context</code>.
-   * 
+   *
    * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
-   * 
+   *
    * @param context
    *          The equality context
    * @param qa
@@ -112,10 +112,10 @@ import com.io7m.jnull.Nullable;
    * @return <code>true</code> iff the vectors are almost equal.
    */
 
-  public final static boolean almostEqual(
-    final  ContextRelative context,
-    final  VectorReadable2DType qa,
-    final  VectorReadable2DType qb)
+  public static boolean almostEqual(
+    final ContextRelative context,
+    final VectorReadable2DType qa,
+    final VectorReadable2DType qb)
   {
     final boolean xs =
       AlmostEqualDouble.almostEqual(context, qa.getXD(), qb.getXD());
@@ -127,18 +127,18 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the angle between the vectors <code>v0</code> and
    * <code>v1</code> in radians.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The angle between the two vectors, in radians.
    */
 
-  public final static double angle(
-    final  VectorReadable2DType v0,
-    final  VectorReadable2DType v1)
+  public static double angle(
+    final VectorReadable2DType v0,
+    final VectorReadable2DType v1)
   {
     final double m0 = VectorI2D.magnitude(v0);
     final double m1 = VectorI2D.magnitude(v1);
@@ -153,20 +153,20 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum
    * .. maximum]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         and at least <code>minimum</code>.
    */
 
-  public final static  VectorI2D clamp(
-    final  VectorReadable2DType v,
+  public static VectorI2D clamp(
+    final VectorReadable2DType v,
     final double minimum,
     final double maximum)
   {
@@ -179,22 +179,22 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code> and
    * <code>maximum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y,
    *         minimum.y), maximum.y))</code>
    */
 
-  public final static  VectorI2D clampByVector(
-    final  VectorReadable2DType v,
-    final  VectorReadable2DType minimum,
-    final  VectorReadable2DType maximum)
+  public static VectorI2D clampByVector(
+    final VectorReadable2DType v,
+    final VectorReadable2DType minimum,
+    final VectorReadable2DType maximum)
   {
     final double x =
       Math.min(Math.max(v.getXD(), minimum.getXD()), maximum.getXD());
@@ -206,17 +206,17 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[-Infinity .. maximum]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public final static  VectorI2D clampMaximum(
-    final  VectorReadable2DType v,
+  public static VectorI2D clampMaximum(
+    final VectorReadable2DType v,
     final double maximum)
   {
     final double x = Math.min(v.getXD(), maximum);
@@ -227,18 +227,18 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>maximum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
    */
 
-  public final static  VectorI2D clampMaximumByVector(
-    final  VectorReadable2DType v,
-    final  VectorReadable2DType maximum)
+  public static VectorI2D clampMaximumByVector(
+    final VectorReadable2DType v,
+    final VectorReadable2DType maximum)
   {
     final double x = Math.min(v.getXD(), maximum.getXD());
     final double y = Math.min(v.getYD(), maximum.getYD());
@@ -249,18 +249,18 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum
    * .. Infinity]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at least
    *         <code>minimum</code>
    */
 
-  public final static  VectorI2D clampMinimum(
-    final  VectorReadable2DType v,
+  public static VectorI2D clampMinimum(
+    final VectorReadable2DType v,
     final double minimum)
   {
     final double x = Math.max(v.getXD(), minimum);
@@ -271,19 +271,19 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
-   * 
+   *
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
    *         minimum.z))</code>
    */
 
-  public final static  VectorI2D clampMinimumByVector(
-    final  VectorReadable2DType v,
-    final  VectorReadable2DType minimum)
+  public static VectorI2D clampMinimumByVector(
+    final VectorReadable2DType v,
+    final VectorReadable2DType minimum)
   {
     final double x = Math.max(v.getXD(), minimum.getXD());
     final double y = Math.max(v.getYD(), minimum.getYD());
@@ -293,18 +293,18 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the distance between the two vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The distance between the two vectors
    */
 
-  public final static double distance(
-    final  VectorReadable2DType v0,
-    final  VectorReadable2DType v1)
+  public static double distance(
+    final VectorReadable2DType v0,
+    final VectorReadable2DType v1)
   {
     return VectorI2D.magnitude(VectorI2D.subtract(v0, v1));
   }
@@ -312,18 +312,18 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the scalar product of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The scalar product of the two vectors
    */
 
-  public final static double dotProduct(
-    final  VectorReadable2DType v0,
-    final  VectorReadable2DType v1)
+  public static double dotProduct(
+    final VectorReadable2DType v0,
+    final VectorReadable2DType v1)
   {
     final double x = v0.getXD() * v1.getXD();
     final double y = v0.getYD() * v1.getYD();
@@ -333,15 +333,15 @@ import com.io7m.jnull.Nullable;
   /**
    * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
    * amount <code>alpha</code>.
-   * 
+   *
    * The <code>alpha</code> parameter controls the degree of interpolation,
    * such that:
-   * 
+   *
    * <ul>
    * <li><code>interpolateLinear(v0, v1, 0.0) = v0</code></li>
    * <li><code>interpolateLinear(v0, v1, 1.0) = v1</code></li>
    * </ul>
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
@@ -349,48 +349,48 @@ import com.io7m.jnull.Nullable;
    * @param alpha
    *          The interpolation value, between <code>0.0</code> and
    *          <code>1.0</code>
-   * 
+   *
    * @return <code>(1 - alpha) * v0 + alpha * v1</code>
    */
 
-  public final static  VectorI2D interpolateLinear(
-    final  VectorReadable2DType v0,
-    final  VectorReadable2DType v1,
+  public static VectorI2D interpolateLinear(
+    final VectorReadable2DType v0,
+    final VectorReadable2DType v1,
     final double alpha)
   {
-    final  VectorI2D w0 = VectorI2D.scale(v0, 1.0 - alpha);
-    final  VectorI2D w1 = VectorI2D.scale(v1, alpha);
+    final VectorI2D w0 = VectorI2D.scale(v0, 1.0 - alpha);
+    final VectorI2D w1 = VectorI2D.scale(v1, alpha);
     return VectorI2D.add(w0, w1);
   }
 
   /**
    * Calculate the magnitude of the vector <code>v</code>.
-   * 
+   *
    * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The magnitude of the input vector
    */
 
-  public final static double magnitude(
-    final  VectorReadable2DType v)
+  public static double magnitude(
+    final VectorReadable2DType v)
   {
     return Math.sqrt(VectorI2D.magnitudeSquared(v));
   }
 
   /**
    * Calculate the squared magnitude of the vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The squared magnitude of the input vector
    */
 
-  public final static double magnitudeSquared(
-    final  VectorReadable2DType v)
+  public static double magnitudeSquared(
+    final VectorReadable2DType v)
   {
     return VectorI2D.dotProduct(v, v);
   }
@@ -398,16 +398,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Normalize the vector <code>v</code>, preserving its direction but
    * reducing it to unit length.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return A vector with the same orientation as <code>v</code> but with
    *         magnitude equal to <code>1.0</code>
    */
 
-  public final static  VectorI2D normalize(
-    final  VectorReadable2DType v)
+  public static VectorI2D normalize(
+    final VectorReadable2DType v)
   {
     final double m = VectorI2D.magnitudeSquared(v);
     if (m > 0) {
@@ -426,19 +426,19 @@ import com.io7m.jnull.Nullable;
    * <p>
    * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
-   * 
+   *
    * @param v0
    *          The left vector
    * @param v1
    *          The right vector
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
-   * 
+   *
    * @since 5.0.0
    */
 
-  public final static  Pair<VectorI2D, VectorI2D> orthoNormalize(
-    final  VectorReadable2DType v0,
-    final  VectorReadable2DType v1)
+  public static Pair<VectorI2D, VectorI2D> orthoNormalize(
+    final VectorReadable2DType v0,
+    final VectorReadable2DType v1)
   {
     final VectorI2D v0n = VectorI2D.normalize(v0);
     final VectorI2D projection =
@@ -451,7 +451,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>.
-   * 
+   *
    * @param p
    *          The left vector
    * @param q
@@ -459,9 +459,9 @@ import com.io7m.jnull.Nullable;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public final static  VectorI2D projection(
-    final  VectorReadable2DType p,
-    final  VectorReadable2DType q)
+  public static VectorI2D projection(
+    final VectorReadable2DType p,
+    final VectorReadable2DType q)
   {
     final double dot = VectorI2D.dotProduct(p, q);
     final double qms = VectorI2D.magnitudeSquared(q);
@@ -471,17 +471,17 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Scale the vector <code>v</code> by the scalar <code>r</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v.x * r, v.y * r)</code>
    */
 
-  public final static  VectorI2D scale(
-    final  VectorReadable2DType v,
+  public static VectorI2D scale(
+    final VectorReadable2DType v,
     final double r)
   {
     return new VectorI2D(v.getXD() * r, v.getYD() * r);
@@ -489,18 +489,18 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
    */
 
-  public final static  VectorI2D subtract(
-    final  VectorReadable2DType v0,
-    final  VectorReadable2DType v1)
+  public static VectorI2D subtract(
+    final VectorReadable2DType v0,
+    final VectorReadable2DType v1)
   {
     return new VectorI2D(v0.getXD() - v1.getXD(), v0.getYD() - v1.getYD());
   }
@@ -509,13 +509,13 @@ import com.io7m.jnull.Nullable;
    * The <code>x</code> value.
    */
 
-  private final double                   x;
+  private final double x;
 
   /**
    * The <code>y</code> value.
    */
 
-  private final double                   y;
+  private final double y;
 
   /**
    * Default constructor, initializing the vector with values <code>[0.0, 0.0,
@@ -530,7 +530,7 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Construct a vector initialized with the given values.
-   * 
+   *
    * @param in_x
    *          The <code>x</code> value
    * @param in_y
@@ -548,7 +548,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Construct a vector initialized with the values given in the vector
    * <code>v</code>.
-   * 
+   *
    * @param in_v
    *          The input vector
    */
@@ -561,7 +561,7 @@ import com.io7m.jnull.Nullable;
     this.y = in_v.getYD();
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -573,7 +573,7 @@ import com.io7m.jnull.Nullable;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final  VectorI2D other = (VectorI2D) obj;
+    final VectorI2D other = (VectorI2D) obj;
     if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
       return false;
     }
@@ -583,17 +583,17 @@ import com.io7m.jnull.Nullable;
     return true;
   }
 
-  @Override public final double getXD()
+  @Override public double getXD()
   {
     return this.x;
   }
 
-  @Override public final double getYD()
+  @Override public double getYD()
   {
     return this.y;
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -605,7 +605,7 @@ import com.io7m.jnull.Nullable;
     return result;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI2D ");
@@ -614,7 +614,6 @@ import com.io7m.jnull.Nullable;
     builder.append(this.y);
     builder.append("]");
     final String r = builder.toString();
-    assert r != null;
-    return r;
+    return NullCheck.notNull(r);
   }
 }

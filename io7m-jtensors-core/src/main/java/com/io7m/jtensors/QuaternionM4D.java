@@ -29,7 +29,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public class QuaternionM4D implements
+public final class QuaternionM4D implements
   QuaternionReadable4DType,
   QuaternionWritable4DType
 {
@@ -98,7 +98,7 @@ public class QuaternionM4D implements
    * @return <code>(q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)</code>
    */
 
-  public final static QuaternionM4D add(
+  public static QuaternionM4D add(
     final QuaternionReadable4DType q0,
     final QuaternionReadable4DType q1,
     final QuaternionM4D out)
@@ -126,7 +126,7 @@ public class QuaternionM4D implements
    * @return <code>(q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)</code>
    */
 
-  public final static QuaternionM4D addInPlace(
+  public static QuaternionM4D addInPlace(
     final QuaternionM4D q0,
     final QuaternionReadable4DType q1)
   {
@@ -150,7 +150,7 @@ public class QuaternionM4D implements
    * @return <code>true</code> if the quaternions are almost equal
    */
 
-  public final static boolean almostEqual(
+  public static boolean almostEqual(
     final ContextRelative context,
     final QuaternionReadable4DType qa,
     final QuaternionReadable4DType qb)
@@ -178,7 +178,7 @@ public class QuaternionM4D implements
    * @return <code>out</code>
    */
 
-  public final static QuaternionM4D conjugate(
+  public static QuaternionM4D conjugate(
     final QuaternionReadable4DType q,
     final QuaternionM4D out)
   {
@@ -199,7 +199,7 @@ public class QuaternionM4D implements
    * @return <code>q</code>
    */
 
-  public final static QuaternionM4D conjugateInPlace(
+  public static QuaternionM4D conjugateInPlace(
     final QuaternionM4D q)
   {
     return QuaternionM4D.conjugate(q, q);
@@ -215,7 +215,7 @@ public class QuaternionM4D implements
    * @return <code>out</code>
    */
 
-  public final static QuaternionM4D copy(
+  public static QuaternionM4D copy(
     final QuaternionReadable4DType q,
     final QuaternionM4D out)
   {
@@ -238,7 +238,7 @@ public class QuaternionM4D implements
    * @return The scalar product of the two quaternions
    */
 
-  public final static double dotProduct(
+  public static double dotProduct(
     final QuaternionReadable4DType q0,
     final QuaternionReadable4DType q1)
   {
@@ -271,7 +271,7 @@ public class QuaternionM4D implements
    * @return <code>(1 - alpha) * q0 + alpha * q1</code>
    */
 
-  public final static QuaternionM4D interpolateLinear(
+  public static QuaternionM4D interpolateLinear(
     final QuaternionReadable4DType q0,
     final QuaternionReadable4DType q1,
     final double alpha,
@@ -306,7 +306,7 @@ public class QuaternionM4D implements
    *         <code>qb</code>
    */
 
-  public final static boolean isNegationOf(
+  public static boolean isNegationOf(
     final AlmostEqualDouble.ContextRelative context,
     final QuaternionReadable4DType qa,
     final QuaternionReadable4DType qb)
@@ -355,7 +355,7 @@ public class QuaternionM4D implements
    * @since 5.0.0
    */
 
-  public final static QuaternionM4D lookAtWithContext(
+  public static QuaternionM4D lookAtWithContext(
     final Context context,
     final VectorReadable3DType origin,
     final VectorReadable3DType target,
@@ -382,7 +382,7 @@ public class QuaternionM4D implements
    * @return The magnitude of the input quaternion
    */
 
-  public final static double magnitude(
+  public static double magnitude(
     final QuaternionReadable4DType q)
   {
     return Math.sqrt(QuaternionM4D.magnitudeSquared(q));
@@ -397,7 +397,7 @@ public class QuaternionM4D implements
    * @return The squared magnitude of the input quaternion
    */
 
-  public final static double magnitudeSquared(
+  public static double magnitudeSquared(
     final QuaternionReadable4DType q)
   {
     return QuaternionM4D.dotProduct(q, q);
@@ -423,7 +423,7 @@ public class QuaternionM4D implements
    * @return A quaternion representing the rotation
    */
 
-  public final static QuaternionM4D makeFromAxisAngle(
+  public static QuaternionM4D makeFromAxisAngle(
     final VectorReadable3DType axis,
     final double angle,
     final QuaternionM4D out)
@@ -452,7 +452,7 @@ public class QuaternionM4D implements
    * @return <code>out</code>
    */
 
-  public final static QuaternionM4D makeFromRotationMatrix3x3(
+  public static QuaternionM4D makeFromRotationMatrix3x3(
     final MatrixReadable3x3DType m,
     final QuaternionM4D out)
   {
@@ -513,7 +513,7 @@ public class QuaternionM4D implements
    * @return <code>out</code>
    */
 
-  public final static QuaternionM4D makeFromRotationMatrix4x4(
+  public static QuaternionM4D makeFromRotationMatrix4x4(
     final MatrixReadable4x4DType m,
     final QuaternionM4D out)
   {
@@ -580,7 +580,7 @@ public class QuaternionM4D implements
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3D makeRotationMatrix3x3(
+  public static MatrixM3x3D makeRotationMatrix3x3(
     final QuaternionReadable4DType q,
     final MatrixM3x3D m)
   {
@@ -634,7 +634,7 @@ public class QuaternionM4D implements
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4D makeRotationMatrix4x4(
+  public static MatrixM4x4D makeRotationMatrix4x4(
     final QuaternionReadable4DType q,
     final MatrixM4x4D m)
   {
@@ -732,7 +732,7 @@ public class QuaternionM4D implements
    * @return <code>qr</code>
    */
 
-  public final static QuaternionM4D multiply(
+  public static QuaternionM4D multiply(
     final QuaternionReadable4DType q0,
     final QuaternionReadable4DType q1,
     final QuaternionM4D qr)
@@ -774,7 +774,7 @@ public class QuaternionM4D implements
    * @return q0
    */
 
-  public final static QuaternionM4D multiplyInPlace(
+  public static QuaternionM4D multiplyInPlace(
     final QuaternionM4D q0,
     final QuaternionReadable4DType q1)
   {
@@ -794,7 +794,7 @@ public class QuaternionM4D implements
    * @since 5.0.0
    */
 
-  public final static QuaternionM4D negate(
+  public static QuaternionM4D negate(
     final QuaternionReadable4DType qa,
     final QuaternionM4D out)
   {
@@ -819,7 +819,7 @@ public class QuaternionM4D implements
    * @since 5.0.0
    */
 
-  public final static QuaternionM4D negateInPlace(
+  public static QuaternionM4D negateInPlace(
     final QuaternionM4D q)
   {
     return QuaternionM4D.negate(q, q);
@@ -838,7 +838,7 @@ public class QuaternionM4D implements
    * @return out
    */
 
-  public final static QuaternionM4D normalize(
+  public static QuaternionM4D normalize(
     final QuaternionReadable4DType q,
     final QuaternionM4D out)
   {
@@ -865,7 +865,7 @@ public class QuaternionM4D implements
    * @return q
    */
 
-  public final static QuaternionM4D normalizeInPlace(
+  public static QuaternionM4D normalizeInPlace(
     final QuaternionM4D q)
   {
     return QuaternionM4D.normalize(q, q);
@@ -885,7 +885,7 @@ public class QuaternionM4D implements
    * @return <code>(q.x * r, q.y * r, q.z * r, q.w * r)</code>
    */
 
-  public final static QuaternionM4D scale(
+  public static QuaternionM4D scale(
     final QuaternionReadable4DType q,
     final double r,
     final QuaternionM4D out)
@@ -913,7 +913,7 @@ public class QuaternionM4D implements
    * @return <code>(q.x * r, q.y * r, q.z * r, q.w * r)</code>
    */
 
-  public final static QuaternionM4D scaleInPlace(
+  public static QuaternionM4D scaleInPlace(
     final QuaternionM4D q,
     final double r)
   {
@@ -934,7 +934,7 @@ public class QuaternionM4D implements
    * @return <code>(q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)</code>
    */
 
-  public final static QuaternionM4D subtract(
+  public static QuaternionM4D subtract(
     final QuaternionReadable4DType q0,
     final QuaternionReadable4DType q1,
     final QuaternionM4D out)
@@ -962,7 +962,7 @@ public class QuaternionM4D implements
    * @return <code>(q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)</code>
    */
 
-  public final static QuaternionM4D subtractInPlace(
+  public static QuaternionM4D subtractInPlace(
     final QuaternionM4D q0,
     final QuaternionReadable4DType q1)
   {
@@ -1023,25 +1023,25 @@ public class QuaternionM4D implements
     this(q.getXD(), q.getYD(), q.getZD(), q.getWD());
   }
 
-  @Override public final void copyFrom2D(
+  @Override public void copyFrom2D(
     final VectorReadable2DType in_v)
   {
     VectorM2D.copy(in_v, this);
   }
 
-  @Override public final void copyFrom3D(
+  @Override public void copyFrom3D(
     final VectorReadable3DType in_v)
   {
     VectorM3D.copy(in_v, this);
   }
 
-  @Override public final void copyFrom4D(
+  @Override public void copyFrom4D(
     final VectorReadable4DType in_v)
   {
     VectorM4D.copy(in_v, this);
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -1069,27 +1069,27 @@ public class QuaternionM4D implements
     return true;
   }
 
-  @Override public final double getWD()
+  @Override public double getWD()
   {
     return this.w;
   }
 
-  @Override public final double getXD()
+  @Override public double getXD()
   {
     return this.x;
   }
 
-  @Override public final double getYD()
+  @Override public double getYD()
   {
     return this.y;
   }
 
-  @Override public final double getZD()
+  @Override public double getZD()
   {
     return this.z;
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1105,7 +1105,7 @@ public class QuaternionM4D implements
     return result;
   }
 
-  @Override public final void set2D(
+  @Override public void set2D(
     final double in_x,
     final double in_y)
   {
@@ -1113,7 +1113,7 @@ public class QuaternionM4D implements
     this.y = in_y;
   }
 
-  @Override public final void set3D(
+  @Override public void set3D(
     final double in_x,
     final double in_y,
     final double in_z)
@@ -1123,7 +1123,7 @@ public class QuaternionM4D implements
     this.z = in_z;
   }
 
-  @Override public final void set4D(
+  @Override public void set4D(
     final double in_x,
     final double in_y,
     final double in_z,
@@ -1135,31 +1135,31 @@ public class QuaternionM4D implements
     this.w = in_w;
   }
 
-  @Override public final void setWD(
+  @Override public void setWD(
     final double in_w)
   {
     this.w = in_w;
   }
 
-  @Override public final void setXD(
+  @Override public void setXD(
     final double in_x)
   {
     this.x = in_x;
   }
 
-  @Override public final void setYD(
+  @Override public void setYD(
     final double in_y)
   {
     this.y = in_y;
   }
 
-  @Override public final void setZD(
+  @Override public void setZD(
     final double in_z)
   {
     this.z = in_z;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[QuaternionM4D ");

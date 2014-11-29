@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -23,32 +23,32 @@ import com.io7m.jnull.Nullable;
 /**
  * A four-dimensional immutable quaternion type with single precision
  * elements.
- * 
+ *
  * <p>
  * Values of this type are immutable and can therefore be safely accessed from
  * multiple threads.
  * </p>
  */
 
-public class QuaternionI4F implements QuaternionReadable4FType
+public final class QuaternionI4F implements QuaternionReadable4FType
 {
   /**
    * The Context type contains the minimum storage required for all of the
    * functions of the <code>QuaternionM4F</code> class.
-   * 
+   *
    * <p>
    * The purpose of the class is to allow applications to allocate all storage
    * ahead of time in order to allow functions in the class to avoid
    * allocating memory (not including stack space) for intermediate
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
-   * 
+   *
    * <p>
    * The user should allocate one <code>Context</code> value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes
    * a <code>Context</code> value will not generate garbage.
    * </p>
-   * 
+   *
    * @since 5.0.0
    */
 
@@ -87,7 +87,7 @@ public class QuaternionI4F implements QuaternionReadable4FType
    * The "identity" quaternion, [0.0 0.0 0.0 1.0]
    */
 
-  public final static QuaternionI4F IDENTITY;
+  public static final QuaternionI4F IDENTITY;
 
   static {
     IDENTITY = new QuaternionI4F(0.0f, 0.0f, 0.0f, 1.0f);
@@ -96,16 +96,16 @@ public class QuaternionI4F implements QuaternionReadable4FType
   /**
    * Calculate the element-wise sum of the quaternions <code>q0</code> and
    * <code>q1</code>.
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
    *          The right input quaternion
-   * 
+   *
    * @return <code>(q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)</code>
    */
 
-  public final static QuaternionI4F add(
+  public static QuaternionI4F add(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1)
   {
@@ -120,9 +120,9 @@ public class QuaternionI4F implements QuaternionReadable4FType
    * Determine whether or not the quaternions <code>qa</code> and
    * <code>qb</code> are equal to within the degree of error given in
    * <code>context</code>.
-   * 
+   *
    * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
-   * 
+   *
    * @param context
    *          The equality context
    * @param qa
@@ -133,7 +133,7 @@ public class QuaternionI4F implements QuaternionReadable4FType
    * @return <code>true</code> if the quaternions are almost equal
    */
 
-  public final static boolean almostEqual(
+  public static boolean almostEqual(
     final ContextRelative context,
     final QuaternionReadable4FType qa,
     final QuaternionReadable4FType qb)
@@ -151,14 +151,14 @@ public class QuaternionI4F implements QuaternionReadable4FType
 
   /**
    * Calculate the conjugate of the input quaternion <code>q</code>.
-   * 
+   *
    * @param q
    *          The input quaternion
-   * 
+   *
    * @return The conjugate of the input quaternion
    */
 
-  public final static QuaternionI4F conjugate(
+  public static QuaternionI4F conjugate(
     final QuaternionReadable4FType q)
   {
     final float x = -q.getXF();
@@ -171,16 +171,16 @@ public class QuaternionI4F implements QuaternionReadable4FType
   /**
    * Calculate the scalar product of the quaternions <code>q0</code> and
    * <code>q1</code>.
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
    *          The right input quaternion
-   * 
+   *
    * @return The scalar product of the two quaternions
    */
 
-  public final static float dotProduct(
+  public static float dotProduct(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1)
   {
@@ -194,12 +194,12 @@ public class QuaternionI4F implements QuaternionReadable4FType
   /**
    * Linearly interpolate between <code>q0</code> and <code>q1</code> by the
    * amount <code>alpha</code>, such that:
-   * 
+   *
    * <ul>
    * <li><code>interpolateLinear(q0, q1, 0.0) = q0</code></li>
    * <li><code>interpolateLinear(q0, q1, 1.0) = q1</code></li>
    * </ul>
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
@@ -207,11 +207,11 @@ public class QuaternionI4F implements QuaternionReadable4FType
    * @param alpha
    *          The interpolation value, between <code>0.0</code> and
    *          <code>1.0</code>
-   * 
+   *
    * @return <code>(1 - alpha) * q0 + alpha * q1</code>
    */
 
-  public final static QuaternionI4F interpolateLinear(
+  public static QuaternionI4F interpolateLinear(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1,
     final float alpha)
@@ -224,12 +224,12 @@ public class QuaternionI4F implements QuaternionReadable4FType
   /**
    * Return <code>true</code> iff <code>qa</code> is the negation of
    * <code>qb</code>.
-   * 
+   *
    * <p>
    * Each element is compared with
    * {@link AlmostEqualFloat#almostEqual(ContextRelative, float, float)}.
    * </p>
-   * 
+   *
    * @param context
    *          The equality context
    * @param qa
@@ -241,7 +241,7 @@ public class QuaternionI4F implements QuaternionReadable4FType
    *         <code>qb</code>
    */
 
-  public final static boolean isNegationOf(
+  public static boolean isNegationOf(
     final AlmostEqualFloat.ContextRelative context,
     final QuaternionReadable4FType qa,
     final QuaternionReadable4FType qb)
@@ -268,12 +268,12 @@ public class QuaternionI4F implements QuaternionReadable4FType
    * Produce a quaternion that represents a rotation that "looks at" the point
    * at <code>target</code> assuming the viewer is at <code>origin</code>,
    * using <code>up</code> as the "up" vector.
-   * 
+   *
    * <p>
    * The function uses storage preallocated in <code>context</code> to avoid
    * any new allocations.
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage
    * @param origin
@@ -282,12 +282,12 @@ public class QuaternionI4F implements QuaternionReadable4FType
    *          The target point
    * @param up
    *          The up vector
-   * 
+   *
    * @since 5.0.0
    * @return A quaternion looking at the target
    */
 
-  public final static QuaternionI4F lookAtWithContext(
+  public static QuaternionI4F lookAtWithContext(
     final Context context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
@@ -303,16 +303,16 @@ public class QuaternionI4F implements QuaternionReadable4FType
 
   /**
    * Calculate the magnitude of the quaternion <code>q</code>.
-   * 
+   *
    * Correspondingly, <code>magnitude(normalize(q)) == 1.0</code>.
-   * 
+   *
    * @param q
    *          The input quaternion
-   * 
+   *
    * @return The magnitude of the input quaternion
    */
 
-  public final static float magnitude(
+  public static float magnitude(
     final QuaternionReadable4FType q)
   {
     return (float) Math.sqrt(QuaternionI4F.magnitudeSquared(q));
@@ -320,14 +320,14 @@ public class QuaternionI4F implements QuaternionReadable4FType
 
   /**
    * Calculate the squared magnitude of the quaternion <code>q</code>.
-   * 
+   *
    * @param q
    *          The input quaternion
-   * 
+   *
    * @return The squared magnitude of the input quaternion
    */
 
-  public final static float magnitudeSquared(
+  public static float magnitudeSquared(
     final QuaternionReadable4FType q)
   {
     return QuaternionI4F.dotProduct(q, q);
@@ -337,21 +337,21 @@ public class QuaternionI4F implements QuaternionReadable4FType
    * Produce a quaternion that represents a rotation of <code>angle</code>
    * degrees around the axis specified by <code>axis</code>. <code>axis</code>
    * is assumed to be of unit length.
-   * 
+   *
    * @see VectorI3F#normalize(VectorReadable3FType)
    * @see VectorI4F#normalize(VectorReadable4FType)
    * @see VectorM3F#normalize(VectorReadable3FType, VectorM3F)
    * @see VectorM4F#normalize(VectorReadable4FType, VectorM4F)
-   * 
+   *
    * @param axis
    *          The normalized vector representing the axis
    * @param angle
    *          The angle to rotate, in radians
-   * 
+   *
    * @return A quaternion representing the rotation
    */
 
-  public final static QuaternionI4F makeFromAxisAngle(
+  public static QuaternionI4F makeFromAxisAngle(
     final VectorReadable3FType axis,
     final double angle)
   {
@@ -366,14 +366,14 @@ public class QuaternionI4F implements QuaternionReadable4FType
 
   /**
    * Produce a quaternion equivalent to the rotation matrix <code>m</code>.
-   * 
+   *
    * @since 5.0.0
    * @param m
    *          The rotation matrix
    * @return A quaternion representing the rotation matrix
    */
 
-  public final static QuaternionI4F makeFromRotationMatrix3x3(
+  public static QuaternionI4F makeFromRotationMatrix3x3(
     final MatrixReadable3x3FType m)
   {
     final double m00 = MatrixM3x3F.get(m, 0, 0);
@@ -429,14 +429,14 @@ public class QuaternionI4F implements QuaternionReadable4FType
   /**
    * Produce a quaternion equivalent to the rotation matrix <code>m</code>,
    * writing the result to <code>out</code>.
-   * 
+   *
    * @since 5.0.0
    * @param m
    *          The rotation matrix
    * @return A quaternion representing the rotation matrix
    */
 
-  public final static QuaternionI4F makeFromRotationMatrix4x4(
+  public static QuaternionI4F makeFromRotationMatrix4x4(
     final MatrixReadable4x4FType m)
   {
     final double m00 = MatrixM4x4F.get(m, 0, 0);
@@ -497,17 +497,17 @@ public class QuaternionI4F implements QuaternionReadable4FType
   /**
    * Produce a rotation matrix from the quaternion <code>q</code>, saving the
    * result to <code>m</code>.
-   * 
+   *
    * @since 5.0.0
    * @param q
    *          The input quaternion
    * @param m
    *          The output matrix
-   * 
+   *
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3F makeRotationMatrix3x3(
+  public static MatrixM3x3F makeRotationMatrix3x3(
     final QuaternionReadable4FType q,
     final MatrixM3x3F m)
   {
@@ -551,17 +551,17 @@ public class QuaternionI4F implements QuaternionReadable4FType
   /**
    * Produce a rotation matrix from the quaternion <code>q</code>, saving the
    * result to <code>m</code>.
-   * 
+   *
    * @since 5.0.0
    * @param q
    *          The input quaternion
    * @param m
    *          The output matrix
-   * 
+   *
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F makeRotationMatrix4x4(
+  public static MatrixM4x4F makeRotationMatrix4x4(
     final QuaternionReadable4FType q,
     final MatrixM4x4F m)
   {
@@ -621,33 +621,33 @@ public class QuaternionI4F implements QuaternionReadable4FType
   /**
    * Multiply the quaternion <code>q0</code> by the quaternion <code>q1</code>
    * .
-   * 
+   *
    * <p>
    * Note that this operation is not commutative.
    * </p>
-   * 
+   *
    * <p>
    * The function is most often used to concatenate quaternions to combine
    * rotations. As an example, assuming that:
    * </p>
-   * 
+   *
    * <ul>
    * <li><code>qx</code> represents some rotation around the X axis</li>
    * <li><code>qy</code> represents some rotation around the Y axis</li>
    * <li><code>qz</code> represents some rotation around the Z axis</li>
    * </ul>
-   * 
+   *
    * <p>
    * The following code produces a quaternion <code>qr1</code> that represents
    * a rotation around the X axis, followed by a rotation around the Y axis,
    * followed by a rotation around the Z axis:
    * </p>
-   * 
+   *
    * <code>
    * qr0 = QuaternionI4F.multiply(qy, qx);
    * qr1 = QuaternionI4F.multiply(qz, qy);
    * </code>
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
@@ -655,7 +655,7 @@ public class QuaternionI4F implements QuaternionReadable4FType
    * @return The multiplication of the input quaternions
    */
 
-  public final static QuaternionI4F multiply(
+  public static QuaternionI4F multiply(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1)
   {
@@ -680,15 +680,15 @@ public class QuaternionI4F implements QuaternionReadable4FType
 
   /**
    * Negate the elements of <code>q</code>.
-   * 
+   *
    * @since 5.0.0
-   * 
+   *
    * @param q
    *          The source quaternion
    * @return The negation of <code>q</code>
    */
 
-  public final static QuaternionI4F negate(
+  public static QuaternionI4F negate(
     final QuaternionReadable4FType q)
   {
     return new QuaternionI4F(-q.getXF(), -q.getYF(), -q.getZF(), -q.getWF());
@@ -697,15 +697,15 @@ public class QuaternionI4F implements QuaternionReadable4FType
   /**
    * Normalize the quaternion <code>q</code>, preserqing its direction but
    * reducing it to unit length.
-   * 
+   *
    * @param q
    *          The input quaternion
-   * 
+   *
    * @return A quaternion with the same orientation as <code>q</code> but with
    *         magnitude equal to <code>1.0</code>
    */
 
-  public final static QuaternionI4F normalize(
+  public static QuaternionI4F normalize(
     final QuaternionReadable4FType q)
   {
     final float m = QuaternionI4F.magnitudeSquared(q);
@@ -718,16 +718,16 @@ public class QuaternionI4F implements QuaternionReadable4FType
 
   /**
    * Scale the quaternion <code>q</code> by the scalar <code>r</code>.
-   * 
+   *
    * @param q
    *          The input quaternion
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(q.x * r, q.y * r, q.z * r, q.w * r)</code>
    */
 
-  public final static QuaternionI4F scale(
+  public static QuaternionI4F scale(
     final QuaternionReadable4FType q,
     final float r)
   {
@@ -741,16 +741,16 @@ public class QuaternionI4F implements QuaternionReadable4FType
   /**
    * Subtract the quaternion <code>q0</code> from the quaternion
    * <code>q1</code>.
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
    *          The right input quaternion
-   * 
+   *
    * @return <code>(q0.x - q1.x, q0.y - q1.y, q0.z - q1.z)</code>
    */
 
-  public final static QuaternionI4F subtract(
+  public static QuaternionI4F subtract(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1)
   {
@@ -778,7 +778,7 @@ public class QuaternionI4F implements QuaternionReadable4FType
 
   /**
    * Construct a quaternion initialized with the given values.
-   * 
+   *
    * @param in_x
    *          The <code>x</code> value
    * @param in_y
@@ -804,7 +804,7 @@ public class QuaternionI4F implements QuaternionReadable4FType
   /**
    * Construct a quaternion initialized with the values contained in
    * <code>q</code>.
-   * 
+   *
    * @param q
    *          The source quaternion
    */
@@ -815,7 +815,7 @@ public class QuaternionI4F implements QuaternionReadable4FType
     this(q.getXF(), q.getYF(), q.getZF(), q.getWF());
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -843,27 +843,27 @@ public class QuaternionI4F implements QuaternionReadable4FType
     return true;
   }
 
-  @Override public final float getWF()
+  @Override public float getWF()
   {
     return this.w;
   }
 
-  @Override public final float getXF()
+  @Override public float getXF()
   {
     return this.x;
   }
 
-  @Override public final float getYF()
+  @Override public float getYF()
   {
     return this.y;
   }
 
-  @Override public final float getZF()
+  @Override public float getZF()
   {
     return this.z;
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -874,7 +874,7 @@ public class QuaternionI4F implements QuaternionReadable4FType
     return result;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[QuaternionI4F ");

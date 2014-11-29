@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -19,6 +19,7 @@ package com.io7m.jtensors;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
 import com.io7m.jfunctional.Pair;
+import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 
 /**
@@ -31,7 +32,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
- public class VectorI2F implements VectorReadable2FType
+public final class VectorI2F implements VectorReadable2FType
 {
   /**
    * The zero vector.
@@ -41,14 +42,14 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the absolute value of the vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return <code>(abs v.x, abs v.y)</code>
    */
 
-  public final static VectorI2F absolute(
+  public static VectorI2F absolute(
     final VectorReadable2FType v)
   {
     return new VectorI2F(Math.abs(v.getXF()), Math.abs(v.getYF()));
@@ -57,16 +58,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
    */
 
-  public final static VectorI2F add(
+  public static VectorI2F add(
     final VectorReadable2FType v0,
     final VectorReadable2FType v1)
   {
@@ -76,18 +77,18 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
    */
 
-  public final static VectorI2F addScaled(
+  public static VectorI2F addScaled(
     final VectorReadable2FType v0,
     final VectorReadable2FType v1,
     final double r)
@@ -98,9 +99,9 @@ import com.io7m.jnull.Nullable;
   /**
    * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
    * are equal to within the degree of error given in <code>context</code>.
-   * 
+   *
    * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
-   * 
+   *
    * @param context
    *          The equality context
    * @param qa
@@ -111,7 +112,7 @@ import com.io7m.jnull.Nullable;
    * @return <code>true</code> iff the vectors are almost equal.
    */
 
-  public final static boolean almostEqual(
+  public static boolean almostEqual(
     final ContextRelative context,
     final VectorReadable2FType qa,
     final VectorReadable2FType qb)
@@ -126,16 +127,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the angle between the vectors <code>v0</code> and
    * <code>v1</code> in radians.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The angle between the two vectors, in radians.
    */
 
-  public final static double angle(
+  public static double angle(
     final VectorReadable2FType v0,
     final VectorReadable2FType v1)
   {
@@ -151,19 +152,19 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. maximum]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         and at least <code>minimum</code>.
    */
 
-  public final static VectorI2F clamp(
+  public static VectorI2F clamp(
     final VectorReadable2FType v,
     final float minimum,
     final float maximum)
@@ -177,18 +178,18 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code> and
    * <code>maximum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))</code>
    */
 
-  public final static VectorI2F clampByVector(
+  public static VectorI2F clampByVector(
     final VectorReadable2FType v,
     final VectorReadable2FType minimum,
     final VectorReadable2FType maximum)
@@ -203,16 +204,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[-Infinity .. maximum]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public final static VectorI2F clampMaximum(
+  public static VectorI2F clampMaximum(
     final VectorReadable2FType v,
     final float maximum)
   {
@@ -224,16 +225,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>maximum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
    */
 
-  public final static VectorI2F clampMaximumByVector(
+  public static VectorI2F clampMaximumByVector(
     final VectorReadable2FType v,
     final VectorReadable2FType maximum)
   {
@@ -245,17 +246,17 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. Infinity]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at least
    *         <code>minimum</code>
    */
 
-  public final static VectorI2F clampMinimum(
+  public static VectorI2F clampMinimum(
     final VectorReadable2FType v,
     final float minimum)
   {
@@ -267,16 +268,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
-   * 
+   *
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code>
    */
 
-  public final static VectorI2F clampMinimumByVector(
+  public static VectorI2F clampMinimumByVector(
     final VectorReadable2FType v,
     final VectorReadable2FType minimum)
   {
@@ -288,16 +289,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the distance between the two vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The distance between the two vectors
    */
 
-  public final static double distance(
+  public static double distance(
     final VectorReadable2FType v0,
     final VectorReadable2FType v1)
   {
@@ -307,16 +308,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the scalar product of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The scalar product of the two vectors
    */
 
-  public final static double dotProduct(
+  public static double dotProduct(
     final VectorReadable2FType v0,
     final VectorReadable2FType v1)
   {
@@ -328,15 +329,15 @@ import com.io7m.jnull.Nullable;
   /**
    * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
    * amount <code>alpha</code>.
-   * 
+   *
    * The <code>alpha</code> parameter controls the degree of interpolation,
    * such that:
-   * 
+   *
    * <ul>
    * <li><code>interpolateLinear(v0, v1, 0.0) = v0</code></li>
    * <li><code>interpolateLinear(v0, v1, 1.0) = v1</code></li>
    * </ul>
-   * 
+   *
    * @param v0
    *          The left input vector.
    * @param v1
@@ -344,11 +345,11 @@ import com.io7m.jnull.Nullable;
    * @param alpha
    *          The interpolation value, between <code>0.0</code> and
    *          <code>1.0</code>.
-   * 
+   *
    * @return <code>(1 - alpha) * v0 + alpha * v1</code>
    */
 
-  public final static VectorI2F interpolateLinear(
+  public static VectorI2F interpolateLinear(
     final VectorReadable2FType v0,
     final VectorReadable2FType v1,
     final float alpha)
@@ -361,16 +362,16 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the magnitude of the vector <code>v</code>.
-   * 
+   *
    * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The magnitude of the input vector
    */
 
-  public final static double magnitude(
+  public static double magnitude(
     final VectorReadable2FType v)
   {
     return Math.sqrt(VectorI2F.magnitudeSquared(v));
@@ -378,13 +379,13 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the squared magnitude of the vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @return The squared magnitude of the input vector
    */
 
-  public final static double magnitudeSquared(
+  public static double magnitudeSquared(
     final VectorReadable2FType v)
   {
     return VectorI2F.dotProduct(v, v);
@@ -393,15 +394,15 @@ import com.io7m.jnull.Nullable;
   /**
    * Normalize the vector <code>v</code>, preserving its direction but
    * reducing it to unit length.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return A vector with the same orientation as <code>v</code> but with
    *         magnitude equal to <code>1.0</code>
    */
 
-  public final static VectorI2F normalize(
+  public static VectorI2F normalize(
     final VectorReadable2FType v)
   {
     final double m = VectorI2F.magnitudeSquared(v);
@@ -421,17 +422,17 @@ import com.io7m.jnull.Nullable;
    * <p>
    * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
-   * 
+   *
    * @param v0
    *          The left vector
    * @param v1
    *          The right vector
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
-   * 
+   *
    * @since 5.0.0
    */
 
-  public final static Pair<VectorI2F, VectorI2F> orthoNormalize(
+  public static Pair<VectorI2F, VectorI2F> orthoNormalize(
     final VectorReadable2FType v0,
     final VectorReadable2FType v1)
   {
@@ -446,7 +447,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>.
-   * 
+   *
    * @param p
    *          The left vector
    * @param q
@@ -454,7 +455,7 @@ import com.io7m.jnull.Nullable;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public final static VectorI2F projection(
+  public static VectorI2F projection(
     final VectorReadable2FType p,
     final VectorReadable2FType q)
   {
@@ -466,16 +467,16 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Scale the vector <code>v</code> by the scalar <code>r</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v.x * r, v.y * r)</code>
    */
 
-  public final static VectorI2F scale(
+  public static VectorI2F scale(
     final VectorReadable2FType v,
     final double r)
   {
@@ -483,27 +484,28 @@ import com.io7m.jnull.Nullable;
     final double y = v.getYF() * r;
     return new VectorI2F((float) x, (float) y);
   }
+
   /**
    * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
    */
 
-  public final static VectorI2F subtract(
+  public static VectorI2F subtract(
     final VectorReadable2FType v0,
     final VectorReadable2FType v1)
   {
     return new VectorI2F(v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF());
   }
 
-  private final float           x;
+  private final float x;
 
-  private final float           y;
+  private final float y;
 
   /**
    * Default constructor, initializing the vector with values
@@ -518,7 +520,7 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Construct a vector initialized with the given values.
-   * 
+   *
    * @param in_x
    *          The <code>x</code> value
    * @param in_y
@@ -536,7 +538,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Construct a vector initialized with the values given in the vector
    * <code>v</code>.
-   * 
+   *
    * @param in_v
    *          The input vector
    */
@@ -548,7 +550,7 @@ import com.io7m.jnull.Nullable;
     this.y = in_v.getYF();
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -570,17 +572,17 @@ import com.io7m.jnull.Nullable;
     return true;
   }
 
-  @Override public final float getXF()
+  @Override public float getXF()
   {
     return this.x;
   }
 
-  @Override public final float getYF()
+  @Override public float getYF()
   {
     return this.y;
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -589,7 +591,7 @@ import com.io7m.jnull.Nullable;
     return result;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI2F ");
@@ -598,7 +600,6 @@ import com.io7m.jnull.Nullable;
     builder.append(this.y);
     builder.append("]");
     final String r = builder.toString();
-    assert r != null;
-    return r;
+    return NullCheck.notNull(r);
   }
 }

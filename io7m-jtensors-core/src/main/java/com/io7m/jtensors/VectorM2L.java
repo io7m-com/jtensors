@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -17,41 +17,40 @@
 package com.io7m.jtensors;
 
 import com.io7m.jintegers.CheckedMath;
+import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 
 /**
  * <p>
  * A two-dimensional mutable vector type with integer elements.
  * </p>
- * 
+ *
  * <p>
  * Values of this type cannot be accessed safely from multiple threads without
  * explicit synchronization.
  * </p>
- * 
+ *
  * @since 5.3.0
  */
 
- public class VectorM2L implements
-  VectorReadable2LType,
-  VectorWritable2LType
+public final class VectorM2L implements VectorReadable2LType, VectorWritable2LType
 {
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>,
    * saving the result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(abs v.x, abs v.y, abs v.z)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorM2L absolute(
+  public static VectorM2L absolute(
     final VectorReadable2LType v,
     final VectorM2L out)
     throws ArithmeticException
@@ -66,17 +65,17 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>,
    * saving the result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return <code>(abs v.x, abs v.y, abs v.z)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorM2L absoluteInPlace(
+  public static VectorM2L absoluteInPlace(
     final VectorM2L v)
     throws ArithmeticException
   {
@@ -86,21 +85,21 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>, saving the result to <code>out</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorM2L add(
+  public static VectorM2L add(
     final VectorReadable2LType v0,
     final VectorReadable2LType v1,
     final VectorM2L out)
@@ -116,19 +115,19 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>, saving the result to <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorM2L addInPlace(
+  public static VectorM2L addInPlace(
     final VectorM2L v0,
     final VectorReadable2LType v1)
     throws ArithmeticException
@@ -140,7 +139,7 @@ import com.io7m.jnull.Nullable;
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
@@ -149,14 +148,14 @@ import com.io7m.jnull.Nullable;
    *          The output vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorM2L addScaled(
+  public static VectorM2L addScaled(
     final VectorReadable2LType v0,
     final VectorReadable2LType v1,
     final double r,
@@ -176,21 +175,21 @@ import com.io7m.jnull.Nullable;
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>, saving the
    * result to <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorM2L addScaledInPlace(
+  public static VectorM2L addScaledInPlace(
     final VectorM2L v0,
     final VectorReadable2LType v1,
     final double r)
@@ -202,16 +201,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the angle between vectors <code>v0</code> and <code>v1</code>,
    * in radians.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The angle between the two vectors, in radians.
    */
 
-  public final static double angle(
+  public static double angle(
     final VectorReadable2LType v0,
     final VectorReadable2LType v1)
   {
@@ -224,7 +223,7 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. maximum]</code> inclusive, saving the result to
    * <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -233,12 +232,12 @@ import com.io7m.jnull.Nullable;
    *          The maximum allowed value
    * @param out
    *          The output vector
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         and at least <code>minimum</code>
    */
 
-  public final static VectorM2L clamp(
+  public static VectorM2L clamp(
     final VectorReadable2LType v,
     final long minimum,
     final long maximum,
@@ -255,7 +254,7 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code> and
    * <code>maximum</code>, saving the result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -264,11 +263,11 @@ import com.io7m.jnull.Nullable;
    *          The vector containing the maximum acceptable values
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public final static VectorM2L clampByVector(
+  public static VectorM2L clampByVector(
     final VectorReadable2LType v,
     final VectorReadable2LType minimum,
     final VectorReadable2LType maximum,
@@ -287,18 +286,18 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code> and
    * <code>maximum</code>, saving the result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public final static VectorM2L clampByVectorInPlace(
+  public static VectorM2L clampByVectorInPlace(
     final VectorM2L v,
     final VectorReadable2LType minimum,
     final VectorReadable2LType maximum)
@@ -310,19 +309,19 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. maximum]</code> inclusive, saving the result to
    * <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         and at least <code>minimum</code>, in <code>v</code>
    */
 
-  public final static VectorM2L clampInPlace(
+  public static VectorM2L clampInPlace(
     final VectorM2L v,
     final long minimum,
     final long maximum)
@@ -334,18 +333,18 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
    * <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public final static VectorM2L clampMaximum(
+  public static VectorM2L clampMaximum(
     final VectorReadable2LType v,
     final long maximum,
     final VectorM2L out)
@@ -361,18 +360,18 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>maximum</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
 
-  public final static VectorM2L clampMaximumByVector(
+  public static VectorM2L clampMaximumByVector(
     final VectorReadable2LType v,
     final VectorReadable2LType maximum,
     final VectorM2L out)
@@ -388,16 +387,16 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>maximum</code>, saving the
    * result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
 
-  public final static VectorM2L clampMaximumByVectorInPlace(
+  public static VectorM2L clampMaximumByVectorInPlace(
     final VectorM2L v,
     final VectorReadable2LType maximum)
   {
@@ -408,17 +407,17 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
    * <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         , in <code>v</code>
    */
 
-  public final static VectorM2L clampMaximumInPlace(
+  public static VectorM2L clampMaximumInPlace(
     final VectorM2L v,
     final long maximum)
   {
@@ -429,19 +428,19 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. Infinity]</code> inclusive, saving the result to
    * <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    * @param minimum
    *          The minimum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at least
    *         <code>minimum</code>
    */
 
-  public final static VectorM2L clampMinimum(
+  public static VectorM2L clampMinimum(
     final VectorReadable2LType v,
     final long minimum,
     final VectorM2L out)
@@ -457,18 +456,18 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    * @param minimum
    *          The vector containing the minimum acceptable values
-   * 
+   *
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
    */
 
-  public final static VectorM2L clampMinimumByVector(
+  public static VectorM2L clampMinimumByVector(
     final VectorReadable2LType v,
     final VectorReadable2LType minimum,
     final VectorM2L out)
@@ -484,17 +483,17 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code>, saving the
    * result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
-   * 
+   *
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
    *         , in <code>v</code>
    */
 
-  public final static VectorM2L clampMinimumByVectorInPlace(
+  public static VectorM2L clampMinimumByVectorInPlace(
     final VectorM2L v,
     final VectorReadable2LType minimum)
   {
@@ -505,17 +504,17 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. Infinity]</code> inclusive, saving the result to
    * <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at least
    *         <code>minimum</code>, in <code>v</code>.
    */
 
-  public final static VectorM2L clampMinimumInPlace(
+  public static VectorM2L clampMinimumInPlace(
     final VectorM2L v,
     final long minimum)
   {
@@ -525,7 +524,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Copy all elements of the vector <code>input</code> to the vector
    * <code>output</code>.
-   * 
+   *
    * @param <T>
    *          The specific vector type
    * @param input
@@ -535,7 +534,7 @@ import com.io7m.jnull.Nullable;
    * @return output
    */
 
-  public final static <T extends VectorWritable2LType> T copy(
+  public static <T extends VectorWritable2LType> T copy(
     final VectorReadable2LType input,
     final T output)
   {
@@ -546,19 +545,19 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the distance between the two vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The distance between the two vectors.
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static long distance(
+  public static long distance(
     final VectorReadable2LType v0,
     final VectorReadable2LType v1)
     throws ArithmeticException
@@ -570,19 +569,19 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the scalar product of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The scalar product of the two vectors
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static long dotProduct(
+  public static long dotProduct(
     final VectorReadable2LType v0,
     final VectorReadable2LType v1)
     throws ArithmeticException
@@ -595,15 +594,15 @@ import com.io7m.jnull.Nullable;
   /**
    * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
    * amount <code>alpha</code>, saving the result to <code>r</code>.
-   * 
+   *
    * The <code>alpha</code> parameter controls the degree of interpolation,
    * such that:
-   * 
+   *
    * <ul>
    * <li><code>interpolateLinear(v0, v1, 0.0, r) -> r = v0</code></li>
    * <li><code>interpolateLinear(v0, v1, 1.0, r) -> r = v1</code></li>
    * </ul>
-   * 
+   *
    * @param v0
    *          The left input vector.
    * @param v1
@@ -613,15 +612,15 @@ import com.io7m.jnull.Nullable;
    *          <code>1.0</code>.
    * @param r
    *          The result vector.
-   * 
+   *
    * @return <code>r</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer
    *           overflow.
    */
 
-  public final static VectorM2L interpolateLinear(
+  public static VectorM2L interpolateLinear(
     final VectorReadable2LType v0,
     final VectorReadable2LType v1,
     final double alpha,
@@ -639,19 +638,19 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the magnitude of the vector <code>v</code>.
-   * 
+   *
    * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The magnitude of the input vector
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static long magnitude(
+  public static long magnitude(
     final VectorReadable2LType v)
     throws ArithmeticException
   {
@@ -660,17 +659,17 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the squared magnitude of the vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The squared magnitude of the input vector
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static long magnitudeSquared(
+  public static long magnitudeSquared(
     final VectorReadable2LType v)
     throws ArithmeticException
   {
@@ -680,10 +679,10 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>, saving the result in <code>r</code>.
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
-   * 
+   *
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    * @param p
    *          The left vector
@@ -693,7 +692,7 @@ import com.io7m.jnull.Nullable;
    *          The output vector
    */
 
-  public final static VectorM2L projection(
+  public static VectorM2L projection(
     final VectorReadable2LType p,
     final VectorReadable2LType q,
     final VectorM2L r)
@@ -709,21 +708,21 @@ import com.io7m.jnull.Nullable;
   /**
    * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(v.x * r, v.y * r, v.z * r)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorM2L scale(
+  public static VectorM2L scale(
     final VectorReadable2LType v,
     final double r,
     final VectorM2L out)
@@ -739,19 +738,19 @@ import com.io7m.jnull.Nullable;
   /**
    * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
    * result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v.x * r, v.y * r, v.z * r)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorM2L scaleInPlace(
+  public static VectorM2L scaleInPlace(
     final VectorM2L v,
     final long r)
     throws ArithmeticException
@@ -762,21 +761,21 @@ import com.io7m.jnull.Nullable;
   /**
    * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
    * saving the result to <code>out</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorM2L subtract(
+  public static VectorM2L subtract(
     final VectorReadable2LType v0,
     final VectorReadable2LType v1,
     final VectorM2L out)
@@ -792,19 +791,19 @@ import com.io7m.jnull.Nullable;
   /**
    * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
    * saving the result to <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorM2L subtractInPlace(
+  public static VectorM2L subtractInPlace(
     final VectorM2L v0,
     final VectorReadable2LType v1)
     throws ArithmeticException
@@ -827,7 +826,7 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Construct a vector initialized with the given values.
-   * 
+   *
    * @param in_x
    *          The <code>x</code> value
    * @param in_y
@@ -845,7 +844,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Construct a vector initialized with the values given in the vector
    * <code>in_v</code>.
-   * 
+   *
    * @param in_v
    *          The source vector
    */
@@ -857,13 +856,13 @@ import com.io7m.jnull.Nullable;
     this.y = in_v.getYL();
   }
 
-  @Override public final void copyFrom2L(
+  @Override public void copyFrom2L(
     final VectorReadable2LType in_v)
   {
     VectorM2L.copy(in_v, this);
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -885,17 +884,17 @@ import com.io7m.jnull.Nullable;
     return true;
   }
 
-  @Override public final long getXL()
+  @Override public long getXL()
   {
     return this.x;
   }
 
-  @Override public final long getYL()
+  @Override public long getYL()
   {
     return this.y;
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final long prime = 31;
     long result = 1;
@@ -904,7 +903,7 @@ import com.io7m.jnull.Nullable;
     return (int) result;
   }
 
-  @Override public final void set2L(
+  @Override public void set2L(
     final long in_x,
     final long in_y)
   {
@@ -912,19 +911,19 @@ import com.io7m.jnull.Nullable;
     this.y = in_y;
   }
 
-  @Override public final void setXL(
+  @Override public void setXL(
     final long in_x)
   {
     this.x = in_x;
   }
 
-  @Override public final void setYL(
+  @Override public void setYL(
     final long in_y)
   {
     this.y = in_y;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM2L ");
@@ -933,7 +932,6 @@ import com.io7m.jnull.Nullable;
     builder.append(this.y);
     builder.append("]");
     final String r = builder.toString();
-    assert r != null;
-    return r;
+    return NullCheck.notNull(r);
   }
 }

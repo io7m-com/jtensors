@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -19,36 +19,35 @@ package com.io7m.jtensors;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
 import com.io7m.jfunctional.Pair;
+import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 
 /**
  * <p>
  * A three-dimensional mutable vector type with double precision elements.
  * </p>
- * 
+ *
  * <p>
  * Values of this type cannot be accessed safely from multiple threads without
  * explicit synchronization.
  * </p>
  */
 
- public class VectorM3D implements
-  VectorReadable3DType,
-  VectorWritable3DType
+public final class VectorM3D implements VectorReadable3DType, VectorWritable3DType
 {
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>,
    * saving the result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(abs v.x, abs v.y, abs v.z)</code>
    */
 
-  public final static VectorM3D absolute(
+  public static VectorM3D absolute(
     final VectorReadable3DType v,
     final VectorM3D out)
   {
@@ -64,14 +63,14 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>,
    * modifying the vector in-place.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return <code>(abs v.x, abs v.y, abs v.z)</code>
    */
 
-  public final static VectorM3D absoluteInPlace(
+  public static VectorM3D absoluteInPlace(
     final VectorM3D v)
   {
     return VectorM3D.absolute(v, v);
@@ -80,18 +79,18 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>, saving the result to <code>out</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
    */
 
-  public final static VectorM3D add(
+  public static VectorM3D add(
     final VectorReadable3DType v0,
     final VectorReadable3DType v1,
     final VectorM3D out)
@@ -108,16 +107,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>, saving the result to <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
    */
 
-  public final static VectorM3D addInPlace(
+  public static VectorM3D addInPlace(
     final VectorM3D v0,
     final VectorReadable3DType v1)
   {
@@ -128,7 +127,7 @@ import com.io7m.jnull.Nullable;
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
@@ -137,11 +136,11 @@ import com.io7m.jnull.Nullable;
    *          The output vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
    */
 
-  public final static VectorM3D addScaled(
+  public static VectorM3D addScaled(
     final VectorReadable3DType v0,
     final VectorReadable3DType v1,
     final double r,
@@ -160,18 +159,18 @@ import com.io7m.jnull.Nullable;
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>, saving the
    * result to <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
    */
 
-  public final static VectorM3D addScaledInPlace(
+  public static VectorM3D addScaledInPlace(
     final VectorM3D v0,
     final VectorReadable3DType v1,
     final double r)
@@ -182,9 +181,9 @@ import com.io7m.jnull.Nullable;
   /**
    * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
    * are equal to within the degree of error given in <code>context</code>.
-   * 
+   *
    * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
-   * 
+   *
    * @param context
    *          The equality context
    * @param qa
@@ -195,7 +194,7 @@ import com.io7m.jnull.Nullable;
    * @return <code>true</code> if the vectors are almost equal
    */
 
-  public final static boolean almostEqual(
+  public static boolean almostEqual(
     final ContextRelative context,
     final VectorReadable3DType qa,
     final VectorReadable3DType qb)
@@ -213,7 +212,7 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. maximum]</code> inclusive, saving the result to
    * <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -222,12 +221,12 @@ import com.io7m.jnull.Nullable;
    *          The maximum allowed value
    * @param out
    *          The output vector
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         and at least <code>minimum</code>
    */
 
-  public final static VectorM3D clamp(
+  public static VectorM3D clamp(
     final VectorReadable3DType v,
     final double minimum,
     final double maximum,
@@ -246,7 +245,7 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code> and
    * <code>maximum</code>, saving the result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -255,11 +254,11 @@ import com.io7m.jnull.Nullable;
    *          The vector containing the maximum acceptable values
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public final static VectorM3D clampByVector(
+  public static VectorM3D clampByVector(
     final VectorReadable3DType v,
     final VectorReadable3DType minimum,
     final VectorReadable3DType maximum,
@@ -281,18 +280,18 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code> and
    * <code>maximum</code>, saving the result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public final static VectorM3D clampByVectorInPlace(
+  public static VectorM3D clampByVectorInPlace(
     final VectorM3D v,
     final VectorReadable3DType minimum,
     final VectorReadable3DType maximum)
@@ -304,19 +303,19 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. maximum]</code> inclusive, saving the result to
    * <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         and at least <code>minimum</code>, in <code>v</code>
    */
 
-  public final static VectorM3D clampInPlace(
+  public static VectorM3D clampInPlace(
     final VectorM3D v,
     final double minimum,
     final double maximum)
@@ -328,18 +327,18 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
    * <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public final static VectorM3D clampMaximum(
+  public static VectorM3D clampMaximum(
     final VectorReadable3DType v,
     final double maximum,
     final VectorM3D out)
@@ -357,18 +356,18 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>maximum</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
 
-  public final static VectorM3D clampMaximumByVector(
+  public static VectorM3D clampMaximumByVector(
     final VectorReadable3DType v,
     final VectorReadable3DType maximum,
     final VectorM3D out)
@@ -386,16 +385,16 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>maximum</code>, saving the
    * result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
 
-  public final static VectorM3D clampMaximumByVectorInPlace(
+  public static VectorM3D clampMaximumByVectorInPlace(
     final VectorM3D v,
     final VectorReadable3DType maximum)
   {
@@ -406,17 +405,17 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
    * <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         , in <code>v</code>
    */
 
-  public final static VectorM3D clampMaximumInPlace(
+  public static VectorM3D clampMaximumInPlace(
     final VectorM3D v,
     final double maximum)
   {
@@ -427,19 +426,19 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. Infinity]</code> inclusive, saving the result to
    * <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    * @param minimum
    *          The minimum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at least
    *         <code>minimum</code>
    */
 
-  public final static VectorM3D clampMinimum(
+  public static VectorM3D clampMinimum(
     final VectorReadable3DType v,
     final double minimum,
     final VectorM3D out)
@@ -457,18 +456,18 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    * @param minimum
    *          The vector containing the minimum acceptable values
-   * 
+   *
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
    */
 
-  public final static VectorM3D clampMinimumByVector(
+  public static VectorM3D clampMinimumByVector(
     final VectorReadable3DType v,
     final VectorReadable3DType minimum,
     final VectorM3D out)
@@ -486,17 +485,17 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code>, saving the
    * result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
-   * 
+   *
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
    *         , in <code>v</code>
    */
 
-  public final static VectorM3D clampMinimumByVectorInPlace(
+  public static VectorM3D clampMinimumByVectorInPlace(
     final VectorM3D v,
     final VectorReadable3DType minimum)
   {
@@ -507,17 +506,17 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. Infinity]</code> inclusive, saving the result to
    * <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at least
    *         <code>minimum</code>, in <code>v</code>.
    */
 
-  public final static VectorM3D clampMinimumInPlace(
+  public static VectorM3D clampMinimumInPlace(
     final VectorM3D v,
     final double minimum)
   {
@@ -527,16 +526,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Copy all elements of the vector <code>input</code> to the vector
    * <code>output</code>.
-   * 
+   *
    * @param input
    *          The input vector
    * @param output
    *          The output vector
-   * 
+   *
    * @return output
    */
 
-  public final static VectorWritable3DType copy(
+  public static VectorWritable3DType copy(
     final VectorReadable3DType input,
     final VectorWritable3DType output)
   {
@@ -547,7 +546,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Return a vector perpendicular to both <code>v0</code> and <code>v1</code>
    * , saving the result in <code>out</code>.
-   * 
+   *
    * @param v0
    *          The left input vector.
    * @param v1
@@ -557,7 +556,7 @@ import com.io7m.jnull.Nullable;
    * @return out
    */
 
-  public final static VectorM3D crossProduct(
+  public static VectorM3D crossProduct(
     final VectorReadable3DType v0,
     final VectorReadable3DType v1,
     final VectorM3D out)
@@ -574,16 +573,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the distance between the two vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The distance between the two vectors.
    */
 
-  public final static double distance(
+  public static double distance(
     final VectorReadable3DType v0,
     final VectorReadable3DType v1)
   {
@@ -594,16 +593,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the scalar product of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The scalar product of the two vectors
    */
 
-  public final static double dotProduct(
+  public static double dotProduct(
     final VectorReadable3DType v0,
     final VectorReadable3DType v1)
   {
@@ -616,15 +615,15 @@ import com.io7m.jnull.Nullable;
   /**
    * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
    * amount <code>alpha</code>, saving the result to <code>r</code>.
-   * 
+   *
    * The <code>alpha</code> parameter controls the degree of interpolation,
    * such that:
-   * 
+   *
    * <ul>
    * <li><code>interpolateLinear(v0, v1, 0.0, r) -> r = v0</code></li>
    * <li><code>interpolateLinear(v0, v1, 1.0, r) -> r = v1</code></li>
    * </ul>
-   * 
+   *
    * @param v0
    *          The left input vector.
    * @param v1
@@ -634,11 +633,11 @@ import com.io7m.jnull.Nullable;
    *          <code>1.0</code>.
    * @param r
    *          The result vector.
-   * 
+   *
    * @return <code>r</code>
    */
 
-  public final static VectorM3D interpolateLinear(
+  public static VectorM3D interpolateLinear(
     final VectorReadable3DType v0,
     final VectorReadable3DType v1,
     final double alpha,
@@ -655,16 +654,16 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the magnitude of the vector <code>v</code>.
-   * 
+   *
    * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The magnitude of the input vector
    */
 
-  public final static double magnitude(
+  public static double magnitude(
     final VectorReadable3DType v)
   {
     return Math.sqrt(VectorM3D.magnitudeSquared(v));
@@ -672,14 +671,14 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the squared magnitude of the vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The squared magnitude of the input vector
    */
 
-  public final static double magnitudeSquared(
+  public static double magnitudeSquared(
     final VectorReadable3DType v)
   {
     return VectorM3D.dotProduct(v, v);
@@ -689,16 +688,16 @@ import com.io7m.jnull.Nullable;
    * Returns a vector with the same orientation as <code>v</code> but with
    * magnitude equal to <code>1.0</code> in <code>out</code>. The function
    * returns the zero vector iff the input is the zero vector.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
-   * 
+   *
    * @return out
    */
 
-  public final static VectorM3D normalize(
+  public static VectorM3D normalize(
     final VectorReadable3DType v,
     final VectorM3D out)
   {
@@ -717,14 +716,14 @@ import com.io7m.jnull.Nullable;
    * Returns a vector with the same orientation as <code>v</code> but with
    * magnitude equal to <code>1.0</code> in <code>v</code>. The function
    * returns the zero vector iff the input is the zero vector.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return v
    */
 
-  public final static VectorM3D normalizeInPlace(
+  public static VectorM3D normalizeInPlace(
     final VectorM3D v)
   {
     return VectorM3D.normalize(v, v);
@@ -738,7 +737,7 @@ import com.io7m.jnull.Nullable;
    * <p>
    * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
-   * 
+   *
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
    * @since 5.0.0
    * @param v0
@@ -747,7 +746,7 @@ import com.io7m.jnull.Nullable;
    *          The right vector
    */
 
-  public final static Pair<VectorM3D, VectorM3D> orthoNormalize(
+  public static Pair<VectorM3D, VectorM3D> orthoNormalize(
     final VectorReadable3DType v0,
     final VectorReadable3DType v1)
   {
@@ -768,7 +767,7 @@ import com.io7m.jnull.Nullable;
    * <p>
    * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
-   * 
+   *
    * @since 5.0.0
    * @param v0
    *          The left vector
@@ -776,7 +775,7 @@ import com.io7m.jnull.Nullable;
    *          The right vector
    */
 
-  public final static void orthoNormalizeInPlace(
+  public static void orthoNormalizeInPlace(
     final VectorM3D v0,
     final VectorM3D v1)
   {
@@ -791,7 +790,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>, saving the result in <code>r</code>.
-   * 
+   *
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    * @param p
    *          The left vector
@@ -801,7 +800,7 @@ import com.io7m.jnull.Nullable;
    *          The output vector
    */
 
-  public final static VectorM3D projection(
+  public static VectorM3D projection(
     final VectorReadable3DType p,
     final VectorReadable3DType q,
     final VectorM3D r)
@@ -816,18 +815,18 @@ import com.io7m.jnull.Nullable;
   /**
    * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(v.x * r, v.y * r, v.z * r)</code>
    */
 
-  public final static VectorM3D scale(
+  public static VectorM3D scale(
     final VectorReadable3DType v,
     final double r,
     final VectorM3D out)
@@ -844,16 +843,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
    * result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v.x * r, v.y * r, v.z * r)</code>
    */
 
-  public final static VectorM3D scaleInPlace(
+  public static VectorM3D scaleInPlace(
     final VectorM3D v,
     final double r)
   {
@@ -863,18 +862,18 @@ import com.io7m.jnull.Nullable;
   /**
    * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
    * saving the result to <code>out</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
    */
 
-  public final static VectorM3D subtract(
+  public static VectorM3D subtract(
     final VectorReadable3DType v0,
     final VectorReadable3DType v1,
     final VectorM3D out)
@@ -891,16 +890,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
    * saving the result to <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
    */
 
-  public final static VectorM3D subtractInPlace(
+  public static VectorM3D subtractInPlace(
     final VectorM3D v0,
     final VectorReadable3DType v1)
   {
@@ -923,7 +922,7 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Construct a vector initialized with the given values.
-   * 
+   *
    * @param in_x
    *          The <code>x</code> value
    * @param in_y
@@ -945,7 +944,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Construct a vector initialized with the values given in the vector
    * <code>v</code>.
-   * 
+   *
    * @param in_v
    *          The source vector
    */
@@ -958,19 +957,19 @@ import com.io7m.jnull.Nullable;
     this.z = in_v.getZD();
   }
 
-  @Override public final void copyFrom2D(
+  @Override public void copyFrom2D(
     final VectorReadable2DType in_v)
   {
     VectorM2D.copy(in_v, this);
   }
 
-  @Override public final void copyFrom3D(
+  @Override public void copyFrom3D(
     final VectorReadable3DType in_v)
   {
     VectorM3D.copy(in_v, this);
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -995,22 +994,22 @@ import com.io7m.jnull.Nullable;
     return true;
   }
 
-  @Override public final double getXD()
+  @Override public double getXD()
   {
     return this.x;
   }
 
-  @Override public final double getYD()
+  @Override public double getYD()
   {
     return this.y;
   }
 
-  @Override public final double getZD()
+  @Override public double getZD()
   {
     return this.z;
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1024,7 +1023,7 @@ import com.io7m.jnull.Nullable;
     return result;
   }
 
-  @Override public final void set2D(
+  @Override public void set2D(
     final double in_x,
     final double in_y)
   {
@@ -1032,7 +1031,7 @@ import com.io7m.jnull.Nullable;
     this.y = in_y;
   }
 
-  @Override public final void set3D(
+  @Override public void set3D(
     final double in_x,
     final double in_y,
     final double in_z)
@@ -1042,25 +1041,25 @@ import com.io7m.jnull.Nullable;
     this.z = in_z;
   }
 
-  @Override public final void setXD(
+  @Override public void setXD(
     final double in_x)
   {
     this.x = in_x;
   }
 
-  @Override public final void setYD(
+  @Override public void setYD(
     final double in_y)
   {
     this.y = in_y;
   }
 
-  @Override public final void setZD(
+  @Override public void setZD(
     final double in_z)
   {
     this.z = in_z;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM3D ");
@@ -1071,7 +1070,6 @@ import com.io7m.jnull.Nullable;
     builder.append(this.z);
     builder.append("]");
     final String r = builder.toString();
-    assert r != null;
-    return r;
+    return NullCheck.notNull(r);
   }
 }

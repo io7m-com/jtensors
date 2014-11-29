@@ -29,7 +29,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public class QuaternionM4F implements
+public final class QuaternionM4F implements
   QuaternionReadable4FType,
   QuaternionWritable4FType
 {
@@ -98,7 +98,7 @@ public class QuaternionM4F implements
    * @return <code>(q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)</code>
    */
 
-  public final static QuaternionM4F add(
+  public static QuaternionM4F add(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1,
     final QuaternionM4F out)
@@ -126,7 +126,7 @@ public class QuaternionM4F implements
    * @return <code>(q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)</code>
    */
 
-  public final static QuaternionM4F addInPlace(
+  public static QuaternionM4F addInPlace(
     final QuaternionM4F q0,
     final QuaternionReadable4FType q1)
   {
@@ -150,7 +150,7 @@ public class QuaternionM4F implements
    * @return <code>true</code> if the quaternions are almost equal
    */
 
-  public final static boolean almostEqual(
+  public static boolean almostEqual(
     final ContextRelative context,
     final QuaternionReadable4FType qa,
     final QuaternionReadable4FType qb)
@@ -178,7 +178,7 @@ public class QuaternionM4F implements
    * @return <code>out</code>
    */
 
-  public final static QuaternionM4F conjugate(
+  public static QuaternionM4F conjugate(
     final QuaternionReadable4FType q,
     final QuaternionM4F out)
   {
@@ -199,7 +199,7 @@ public class QuaternionM4F implements
    * @return <code>q</code>
    */
 
-  public final static QuaternionM4F conjugateInPlace(
+  public static QuaternionM4F conjugateInPlace(
     final QuaternionM4F q)
   {
     return QuaternionM4F.conjugate(q, q);
@@ -215,7 +215,7 @@ public class QuaternionM4F implements
    * @return <code>out</code>
    */
 
-  public final static QuaternionM4F copy(
+  public static QuaternionM4F copy(
     final QuaternionReadable4FType q,
     final QuaternionM4F out)
   {
@@ -238,7 +238,7 @@ public class QuaternionM4F implements
    * @return The scalar product of the two quaternions
    */
 
-  public final static double dotProduct(
+  public static double dotProduct(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1)
   {
@@ -271,7 +271,7 @@ public class QuaternionM4F implements
    * @return <code>(1 - alpha) * q0 + alpha * q1</code>
    */
 
-  public final static QuaternionM4F interpolateLinear(
+  public static QuaternionM4F interpolateLinear(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1,
     final double alpha,
@@ -306,7 +306,7 @@ public class QuaternionM4F implements
    *         <code>qb</code>
    */
 
-  public final static boolean isNegationOf(
+  public static boolean isNegationOf(
     final AlmostEqualFloat.ContextRelative context,
     final QuaternionReadable4FType qa,
     final QuaternionReadable4FType qb)
@@ -355,7 +355,7 @@ public class QuaternionM4F implements
    * @since 5.0.0
    */
 
-  public final static QuaternionM4F lookAtWithContext(
+  public static QuaternionM4F lookAtWithContext(
     final Context context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
@@ -382,7 +382,7 @@ public class QuaternionM4F implements
    * @return The magnitude of the input quaternion
    */
 
-  public final static double magnitude(
+  public static double magnitude(
     final QuaternionReadable4FType q)
   {
     return Math.sqrt(QuaternionM4F.magnitudeSquared(q));
@@ -397,7 +397,7 @@ public class QuaternionM4F implements
    * @return The squared magnitude of the input quaternion
    */
 
-  public final static double magnitudeSquared(
+  public static double magnitudeSquared(
     final QuaternionReadable4FType q)
   {
     return QuaternionM4F.dotProduct(q, q);
@@ -423,7 +423,7 @@ public class QuaternionM4F implements
    * @return A quaternion representing the rotation
    */
 
-  public final static QuaternionM4F makeFromAxisAngle(
+  public static QuaternionM4F makeFromAxisAngle(
     final VectorReadable3FType axis,
     final double angle,
     final QuaternionM4F out)
@@ -450,7 +450,7 @@ public class QuaternionM4F implements
    * @return <code>out</code>
    */
 
-  public final static QuaternionM4F makeFromRotationMatrix3x3(
+  public static QuaternionM4F makeFromRotationMatrix3x3(
     final MatrixReadable3x3FType m,
     final QuaternionM4F out)
   {
@@ -519,7 +519,7 @@ public class QuaternionM4F implements
    * @return <code>out</code>
    */
 
-  public final static QuaternionM4F makeFromRotationMatrix4x4(
+  public static QuaternionM4F makeFromRotationMatrix4x4(
     final MatrixReadable4x4FType m,
     final QuaternionM4F out)
   {
@@ -595,7 +595,7 @@ public class QuaternionM4F implements
    * @return <code>m</code>
    */
 
-  public final static MatrixM3x3F makeRotationMatrix3x3(
+  public static MatrixM3x3F makeRotationMatrix3x3(
     final QuaternionM4F q,
     final MatrixM3x3F m)
   {
@@ -649,7 +649,7 @@ public class QuaternionM4F implements
    * @return <code>m</code>
    */
 
-  public final static MatrixM4x4F makeRotationMatrix4x4(
+  public static MatrixM4x4F makeRotationMatrix4x4(
     final QuaternionReadable4FType q,
     final MatrixM4x4F m)
   {
@@ -747,7 +747,7 @@ public class QuaternionM4F implements
    * @return <code>qr</code>
    */
 
-  public final static QuaternionM4F multiply(
+  public static QuaternionM4F multiply(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1,
     final QuaternionM4F qr)
@@ -788,7 +788,7 @@ public class QuaternionM4F implements
    * @return q0
    */
 
-  public final static QuaternionM4F multiplyInPlace(
+  public static QuaternionM4F multiplyInPlace(
     final QuaternionM4F q0,
     final QuaternionReadable4FType q1)
   {
@@ -808,7 +808,7 @@ public class QuaternionM4F implements
    * @since 5.0.0
    */
 
-  public final static QuaternionM4F negate(
+  public static QuaternionM4F negate(
     final QuaternionReadable4FType qa,
     final QuaternionM4F out)
   {
@@ -833,7 +833,7 @@ public class QuaternionM4F implements
    * @since 5.0.0
    */
 
-  public final static QuaternionM4F negateInPlace(
+  public static QuaternionM4F negateInPlace(
     final QuaternionM4F q)
   {
     return QuaternionM4F.negate(q, q);
@@ -852,7 +852,7 @@ public class QuaternionM4F implements
    * @return out
    */
 
-  public final static QuaternionM4F normalize(
+  public static QuaternionM4F normalize(
     final QuaternionReadable4FType q,
     final QuaternionM4F out)
   {
@@ -879,7 +879,7 @@ public class QuaternionM4F implements
    * @return q
    */
 
-  public final static QuaternionM4F normalizeInPlace(
+  public static QuaternionM4F normalizeInPlace(
     final QuaternionM4F q)
   {
     return QuaternionM4F.normalize(q, q);
@@ -899,7 +899,7 @@ public class QuaternionM4F implements
    * @return <code>(q.x * r, q.y * r, q.z * r, q.w * r)</code>
    */
 
-  public final static QuaternionM4F scale(
+  public static QuaternionM4F scale(
     final QuaternionReadable4FType q,
     final double r,
     final QuaternionM4F out)
@@ -927,7 +927,7 @@ public class QuaternionM4F implements
    * @return <code>(q.x * r, q.y * r, q.z * r, q.w * r)</code>
    */
 
-  public final static QuaternionM4F scaleInPlace(
+  public static QuaternionM4F scaleInPlace(
     final QuaternionM4F q,
     final double r)
   {
@@ -948,7 +948,7 @@ public class QuaternionM4F implements
    * @return <code>(q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)</code>
    */
 
-  public final static QuaternionM4F subtract(
+  public static QuaternionM4F subtract(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1,
     final QuaternionM4F out)
@@ -976,7 +976,7 @@ public class QuaternionM4F implements
    * @return <code>(q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)</code>
    */
 
-  public final static QuaternionM4F subtractInPlace(
+  public static QuaternionM4F subtractInPlace(
     final QuaternionM4F q0,
     final QuaternionReadable4FType q1)
   {
@@ -1037,25 +1037,25 @@ public class QuaternionM4F implements
     this(q.getXF(), q.getYF(), q.getZF(), q.getWF());
   }
 
-  @Override public final void copyFrom2F(
+  @Override public void copyFrom2F(
     final VectorReadable2FType in_v)
   {
     VectorM2F.copy(in_v, this);
   }
 
-  @Override public final void copyFrom3F(
+  @Override public void copyFrom3F(
     final VectorReadable3FType in_v)
   {
     VectorM3F.copy(in_v, this);
   }
 
-  @Override public final void copyFrom4F(
+  @Override public void copyFrom4F(
     final VectorReadable4FType in_v)
   {
     VectorM4F.copy(in_v, this);
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -1083,27 +1083,27 @@ public class QuaternionM4F implements
     return true;
   }
 
-  @Override public final float getWF()
+  @Override public float getWF()
   {
     return this.w;
   }
 
-  @Override public final float getXF()
+  @Override public float getXF()
   {
     return this.x;
   }
 
-  @Override public final float getYF()
+  @Override public float getYF()
   {
     return this.y;
   }
 
-  @Override public final float getZF()
+  @Override public float getZF()
   {
     return this.z;
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1114,7 +1114,7 @@ public class QuaternionM4F implements
     return result;
   }
 
-  @Override public final void set2F(
+  @Override public void set2F(
     final float in_x,
     final float in_y)
   {
@@ -1122,7 +1122,7 @@ public class QuaternionM4F implements
     this.y = in_y;
   }
 
-  @Override public final void set3F(
+  @Override public void set3F(
     final float in_x,
     final float in_y,
     final float in_z)
@@ -1132,7 +1132,7 @@ public class QuaternionM4F implements
     this.z = in_z;
   }
 
-  @Override public final void set4F(
+  @Override public void set4F(
     final float in_x,
     final float in_y,
     final float in_z,
@@ -1144,31 +1144,31 @@ public class QuaternionM4F implements
     this.w = in_w;
   }
 
-  @Override public final void setWF(
+  @Override public void setWF(
     final float in_w)
   {
     this.w = in_w;
   }
 
-  @Override public final void setXF(
+  @Override public void setXF(
     final float in_x)
   {
     this.x = in_x;
   }
 
-  @Override public final void setYF(
+  @Override public void setYF(
     final float in_y)
   {
     this.y = in_y;
   }
 
-  @Override public final void setZF(
+  @Override public void setZF(
     final float in_z)
   {
     this.z = in_z;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[QuaternionM4F ");

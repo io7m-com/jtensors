@@ -31,7 +31,7 @@
       <s:subsection>
         <s:subsection-title>Overview</s:subsection-title>
         <s:paragraph>
-          The <s:term s:type="package">jtensors</s:term> package implements a
+          The <s:term s:type="package">${project.parent.name}</s:term> package implements a
           set of efficient vector, matrix, and quaternion classes intended for use
           in computer graphics applications.
         </s:paragraph>
@@ -143,7 +143,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.]]>
       <s:subsection>
         <s:subsection-title>Types</s:subsection-title>
         <s:paragraph>
-          The <s:term s:type="package">jtensors</s:term> package provides vectors with
+          The <s:term s:type="package">${project.parent.name}</s:term> package provides vectors with
           single-precision (<s:term s:type="type">float</s:term>) elements,
           double-precision (<s:term s:type="type">double</s:term>) elements,
           integer (<s:term s:type="type">int</s:term>), and
@@ -234,6 +234,57 @@ type         = "Vector" , mutability , size , element_type ;]]>
           </s:list-unordered>
         </s:formal-item>
       </s:subsection>
+
+      <s:subsection>
+        <s:subsection-title>Phantom types</s:subsection-title>
+        <s:paragraph>
+          The <s:term s:type="package">${project.parent.name}</s:term> package also provides
+          copies of the existing vector types indexed by a
+          <s:term s:type="term">phantom type parameter</s:term> in order to
+          allow the programmer to make semantically distinct values
+          <s:term s:type="term">type-incompatible</s:term>
+          <s:footnote>
+            See <s:link-external s:target="http://io7m.com/documents/java/tt1-pt/">http://io7m.com/documents/java/tt1-pt/</s:link-external>.
+          </s:footnote>.
+        </s:paragraph>
+        <s:paragraph>
+          A comprehensive list of the available vector types is as follows:
+        </s:paragraph>
+        <s:formal-item s:kind="listing">
+          <s:formal-item-title>Available vector types</s:formal-item-title>
+          <s:list-unordered>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM2D.html">PVectorM2D</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM2F.html">PVectorM2F</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM2I.html">PVectorM2I</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM2L.html">PVectorM2L</s:link-external></s:list-item>
+
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM3D.html">PVectorM3D</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM3F.html">PVectorM3F</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM3I.html">PVectorM3I</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM3L.html">PVectorM3L</s:link-external></s:list-item>
+
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM4D.html">PVectorM4D</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM4F.html">PVectorM4F</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM4I.html">PVectorM4I</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorM4L.html">PVectorM4L</s:link-external></s:list-item>
+
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI2D.html">PVectorI2D</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI2F.html">PVectorI2F</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI2I.html">PVectorI2I</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI2L.html">PVectorI2L</s:link-external></s:list-item>
+
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI3D.html">PVectorI3D</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI3F.html">PVectorI3F</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI3I.html">PVectorI3I</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI3L.html">PVectorI3L</s:link-external></s:list-item>
+
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI4D.html">PVectorI4D</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI4F.html">PVectorI4F</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI4I.html">PVectorI4I</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PVectorI4L.html">PVectorI4L</s:link-external></s:list-item>
+          </s:list-unordered>
+        </s:formal-item>
+      </s:subsection>
     </s:section>
 
     <s:section>
@@ -243,7 +294,7 @@ type         = "Vector" , mutability , size , element_type ;]]>
       <s:subsection>
         <s:subsection-title>Types</s:subsection-title>
         <s:paragraph>
-          The <s:term s:type="package">jtensors</s:term> package provides only square
+          The <s:term s:type="package">${project.parent.name}</s:term> package provides only square
           matrix types with single-precision (<s:term s:type="type">float</s:term>) elements,
           and double-precision (<s:term s:type="type">double</s:term>) elements.
           Matrices are currently only available in mutable form. The package unambiguously
@@ -369,7 +420,7 @@ MatrixM4x4D.invertWithContext(context, mo, mi);]]>
           <s:image s:source="images/axes2.png">Right-handed coordinate system</s:image>
         </s:formal-item>
         <s:paragraph>
-          The <s:term s:type="package">jtensors</s:term> package adheres
+          The <s:term s:type="package">${project.parent.name}</s:term> package adheres
           to the convention that a positive rotation around an axis
           represents a counter-clockwise rotation when viewing the
           system along the negative direction of the axis in question.
@@ -447,7 +498,7 @@ MatrixM4x4D.invertWithContext(context, mo, mi);]]>
       <s:subsection>
         <s:subsection-title>Types</s:subsection-title>
         <s:paragraph>
-          The <s:term s:type="package">jtensors</s:term>
+          The <s:term s:type="package">${project.parent.name}</s:term>
           package provides quaternions with single-precision
           (<s:term s:type="type">float</s:term>) elements, and
           double-precision (<s:term s:type="type">double</s:term>)
@@ -512,22 +563,6 @@ type         = "Quaternion" , mutability , size , element_type ;]]>
           </s:list-unordered>
         </s:formal-item>
       </s:subsection>
-    </s:section>
-
-    <s:section>
-      <s:section-title>Subclassing</s:section-title>
-      <s:paragraph>
-        The types in the <s:term s:type="package">jtensors</s:term> package
-        are not marked as <s:term s:type="constant">final</s:term>, despite
-        all of their methods being <s:term s:type="constant">final</s:term>. The
-        intention is to allow users of the types to subclass them with the
-        intention of adding "phantom" type parameters
-        <s:footnote>
-          <s:link-external s:target="http://io7m.com/documents/java/tt1-pt/">http://io7m.com/documents/java/tt1-pt/</s:link-external>
-        </s:footnote>
-        in order to distinguish between semantically distinct (but structurally
-        identical) values at compile time.
-      </s:paragraph>
     </s:section>
   </s:part>
 

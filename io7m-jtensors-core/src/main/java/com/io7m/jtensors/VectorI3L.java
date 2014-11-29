@@ -17,6 +17,7 @@
 package com.io7m.jtensors;
 
 import com.io7m.jintegers.CheckedMath;
+import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 
 /**
@@ -27,11 +28,11 @@ import com.io7m.jnull.Nullable;
  * Values of this type are immutable and can therefore be safely accessed from
  * multiple threads.
  * </p>
- * 
+ *
  * @since 5.3.0
  */
 
- public class VectorI3L implements VectorReadable3LType
+public final class VectorI3L implements VectorReadable3LType
 {
   /**
    * The zero vector.
@@ -41,18 +42,18 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return <code>(abs v.x, abs v.y, abs v.z)</code>
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorI3L absolute(
+  public static VectorI3L absolute(
     final VectorReadable3LType v)
     throws ArithmeticException
   {
@@ -65,19 +66,19 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorI3L add(
+  public static VectorI3L add(
     final VectorReadable3LType v0,
     final VectorReadable3LType v1)
     throws ArithmeticException
@@ -91,21 +92,21 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorI3L addScaled(
+  public static VectorI3L addScaled(
     final VectorReadable3LType v0,
     final VectorReadable3LType v1,
     final double r)
@@ -123,7 +124,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. maximum]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -135,7 +136,7 @@ import com.io7m.jnull.Nullable;
    *         and at least <code>minimum</code>
    */
 
-  public final static VectorI3L clamp(
+  public static VectorI3L clamp(
     final VectorReadable3LType v,
     final long minimum,
     final long maximum)
@@ -150,7 +151,7 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code> and
    * <code>maximum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -161,7 +162,7 @@ import com.io7m.jnull.Nullable;
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public final static VectorI3L clampByVector(
+  public static VectorI3L clampByVector(
     final VectorReadable3LType v,
     final VectorReadable3LType minimum,
     final VectorReadable3LType maximum)
@@ -178,7 +179,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[-Infinity .. maximum]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
@@ -187,7 +188,7 @@ import com.io7m.jnull.Nullable;
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public final static VectorI3L clampMaximum(
+  public static VectorI3L clampMaximum(
     final VectorReadable3LType v,
     final long maximum)
   {
@@ -200,7 +201,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>maximum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
@@ -209,7 +210,7 @@ import com.io7m.jnull.Nullable;
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
 
-  public final static VectorI3L clampMaximumByVector(
+  public static VectorI3L clampMaximumByVector(
     final VectorReadable3LType v,
     final VectorReadable3LType maximum)
   {
@@ -222,7 +223,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. Infinity]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -232,7 +233,7 @@ import com.io7m.jnull.Nullable;
    *         <code>minimum</code>
    */
 
-  public final static VectorI3L clampMinimum(
+  public static VectorI3L clampMinimum(
     final VectorReadable3LType v,
     final long minimum)
   {
@@ -245,17 +246,17 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    * @since 5.0.0
-   * 
+   *
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
    */
 
-  public final static VectorI3L clampMinimumByVector(
+  public static VectorI3L clampMinimumByVector(
     final VectorReadable3LType v,
     final VectorReadable3LType minimum)
   {
@@ -268,20 +269,20 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the distance between the two vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The distance between the two vectors.
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static long distance(
+  public static long distance(
     final VectorReadable3LType v0,
     final VectorReadable3LType v1)
     throws ArithmeticException
@@ -292,20 +293,20 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the scalar product of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The scalar product of the two vectors
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static long dotProduct(
+  public static long dotProduct(
     final VectorReadable3LType v0,
     final VectorReadable3LType v1)
     throws ArithmeticException
@@ -319,15 +320,15 @@ import com.io7m.jnull.Nullable;
   /**
    * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
    * amount <code>alpha</code>.
-   * 
+   *
    * The <code>alpha</code> parameter controls the degree of interpolation,
    * such that:
-   * 
+   *
    * <ul>
    * <li><code>interpolateLinear(v0, v1, 0.0, r) -> r = v0</code></li>
    * <li><code>interpolateLinear(v0, v1, 1.0, r) -> r = v1</code></li>
    * </ul>
-   * 
+   *
    * @param v0
    *          The left input vector.
    * @param v1
@@ -335,16 +336,16 @@ import com.io7m.jnull.Nullable;
    * @param alpha
    *          The interpolation value, between <code>0.0</code> and
    *          <code>1.0</code>.
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer
    *           overflow.
-   * 
+   *
    * @return <code>(1 - alpha) * v0 + alpha * v1</code>
    */
 
-  public final static VectorI3L interpolateLinear(
+  public static VectorI3L interpolateLinear(
     final VectorReadable3LType v0,
     final VectorReadable3LType v1,
     final double alpha)
@@ -357,20 +358,20 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the magnitude of the vector <code>v</code>.
-   * 
+   *
    * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The magnitude of the input vector
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static long magnitude(
+  public static long magnitude(
     final VectorReadable3LType v)
     throws ArithmeticException
   {
@@ -379,18 +380,18 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the squared magnitude of the vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The squared magnitude of the input vector
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static long magnitudeSquared(
+  public static long magnitudeSquared(
     final VectorReadable3LType v)
     throws ArithmeticException
   {
@@ -400,11 +401,11 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>.
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
-   * 
+   *
    * @param p
    *          The left vector
    * @param q
@@ -412,7 +413,7 @@ import com.io7m.jnull.Nullable;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public final static VectorI3L projection(
+  public static VectorI3L projection(
     final VectorReadable3LType p,
     final VectorReadable3LType q)
     throws ArithmeticException
@@ -426,19 +427,19 @@ import com.io7m.jnull.Nullable;
   /**
    * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v.x * r, v.y * r, v.z * r)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorI3L scale(
+  public static VectorI3L scale(
     final VectorReadable3LType v,
     final double r)
     throws ArithmeticException
@@ -451,19 +452,19 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public final static VectorI3L subtract(
+  public static VectorI3L subtract(
     final VectorReadable3LType v0,
     final VectorReadable3LType v1)
     throws ArithmeticException
@@ -492,7 +493,7 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Construct a vector initialized with the given values.
-   * 
+   *
    * @param in_x
    *          The <code>x</code> value
    * @param in_y
@@ -514,7 +515,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Construct a vector initialized with the values given in the vector
    * <code>in_v</code>.
-   * 
+   *
    * @param in_v
    *          The input vector.
    */
@@ -527,7 +528,7 @@ import com.io7m.jnull.Nullable;
     this.z = in_v.getZL();
   }
 
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -552,22 +553,22 @@ import com.io7m.jnull.Nullable;
     return true;
   }
 
-  @Override public final long getXL()
+  @Override public long getXL()
   {
     return this.x;
   }
 
-  @Override public final long getYL()
+  @Override public long getYL()
   {
     return this.y;
   }
 
-  @Override public final long getZL()
+  @Override public long getZL()
   {
     return this.z;
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final long prime = 31;
     long result = 1;
@@ -577,7 +578,7 @@ import com.io7m.jnull.Nullable;
     return (int) result;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI3L ");
@@ -588,8 +589,7 @@ import com.io7m.jnull.Nullable;
     builder.append(this.z);
     builder.append("]");
     final String r = builder.toString();
-    assert r != null;
-    return r;
+    return NullCheck.notNull(r);
   }
 
 }
