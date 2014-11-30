@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -16,19 +16,16 @@
 
 package com.io7m.jtensors;
 
-import java.nio.FloatBuffer;
-
 /**
- * The type of direct-memory backed matrices with single-precision elements.
+ * 'Read' interface to 2x2 direct-memory matrices with single precision
+ * elements.
  *
  * @since 7.0.0
  */
 
-public interface MatrixDirectBufferedFType extends MatrixReadableFType
+public interface MatrixDirectReadable2x2FType extends
+  MatrixReadable2x2FType,
+  MatrixDirectBufferedFType
 {
-  /**
-   * @return The direct-memory float buffer that backs the matrix.
-   */
-
-  FloatBuffer getDirectFloatBuffer();
+  // No extra functions.
 }

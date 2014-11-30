@@ -44,9 +44,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class MatrixM2x2D implements
-  MatrixReadable2x2DType,
-  MatrixDirectBufferedDType
+public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
 {
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;

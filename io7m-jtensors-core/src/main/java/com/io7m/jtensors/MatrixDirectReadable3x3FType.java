@@ -16,19 +16,16 @@
 
 package com.io7m.jtensors;
 
-import java.nio.FloatBuffer;
-
 /**
- * The type of direct-memory backed matrices with single-precision elements.
+ * 'Read' interface to 3x3 direct-memory matrices with single precision
+ * elements.
  *
  * @since 7.0.0
  */
 
-public interface MatrixDirectBufferedFType extends MatrixReadableFType
+public interface MatrixDirectReadable3x3FType extends
+  MatrixReadable3x3FType,
+  MatrixDirectBufferedFType
 {
-  /**
-   * @return The direct-memory float buffer that backs the matrix.
-   */
-
-  FloatBuffer getDirectFloatBuffer();
+  // No extra functions.
 }
