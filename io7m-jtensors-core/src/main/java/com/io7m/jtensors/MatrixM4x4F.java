@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -44,7 +44,9 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class MatrixM4x4F implements MatrixReadable4x4FType
+public final class MatrixM4x4F implements
+  MatrixReadable4x4FType,
+  MatrixDirectBufferedFType
 {
   /**
    * <p>
@@ -131,16 +133,11 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     }
   }
 
-  private static final float[] IDENTITY_ROW_0;
-  private static final float[] IDENTITY_ROW_1;
-  private static final float[] IDENTITY_ROW_2;
-  private static final float[] IDENTITY_ROW_3;
-  private static final int     VIEW_BYTES;
-  private static final int     VIEW_COLS;
-  private static final int     VIEW_ELEMENT_SIZE;
-  private static final int     VIEW_ELEMENTS;
-  private static final int     VIEW_ROWS;
-  private static final float[] ZERO_ROW;
+  private static final int VIEW_BYTES;
+  private static final int VIEW_COLS;
+  private static final int VIEW_ELEMENT_SIZE;
+  private static final int VIEW_ELEMENTS;
+  private static final int VIEW_ROWS;
 
   static {
     VIEW_ROWS = 4;
@@ -148,36 +145,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     VIEW_ELEMENT_SIZE = 4;
     VIEW_ELEMENTS = MatrixM4x4F.VIEW_ROWS * MatrixM4x4F.VIEW_COLS;
     VIEW_BYTES = MatrixM4x4F.VIEW_ELEMENTS * MatrixM4x4F.VIEW_ELEMENT_SIZE;
-
-    IDENTITY_ROW_0 = new float[4];
-    MatrixM4x4F.IDENTITY_ROW_0[0] = 1.0f;
-    MatrixM4x4F.IDENTITY_ROW_0[1] = 0.0f;
-    MatrixM4x4F.IDENTITY_ROW_0[2] = 0.0f;
-    MatrixM4x4F.IDENTITY_ROW_0[3] = 0.0f;
-
-    IDENTITY_ROW_1 = new float[4];
-    MatrixM4x4F.IDENTITY_ROW_1[0] = 0.0f;
-    MatrixM4x4F.IDENTITY_ROW_1[1] = 1.0f;
-    MatrixM4x4F.IDENTITY_ROW_1[2] = 0.0f;
-    MatrixM4x4F.IDENTITY_ROW_1[3] = 0.0f;
-
-    IDENTITY_ROW_2 = new float[4];
-    MatrixM4x4F.IDENTITY_ROW_2[0] = 0.0f;
-    MatrixM4x4F.IDENTITY_ROW_2[1] = 0.0f;
-    MatrixM4x4F.IDENTITY_ROW_2[2] = 1.0f;
-    MatrixM4x4F.IDENTITY_ROW_2[3] = 0.0f;
-
-    IDENTITY_ROW_3 = new float[4];
-    MatrixM4x4F.IDENTITY_ROW_3[0] = 0.0f;
-    MatrixM4x4F.IDENTITY_ROW_3[1] = 0.0f;
-    MatrixM4x4F.IDENTITY_ROW_3[2] = 0.0f;
-    MatrixM4x4F.IDENTITY_ROW_3[3] = 1.0f;
-
-    ZERO_ROW = new float[4];
-    MatrixM4x4F.ZERO_ROW[0] = 0.0f;
-    MatrixM4x4F.ZERO_ROW[1] = 0.0f;
-    MatrixM4x4F.ZERO_ROW[2] = 0.0f;
-    MatrixM4x4F.ZERO_ROW[3] = 0.0f;
   }
 
   /**
@@ -197,14 +164,45 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     final MatrixReadable4x4FType m1,
     final MatrixM4x4F out)
   {
-    final FloatBuffer m0_view = m0.getFloatBuffer();
-    final FloatBuffer m1_view = m1.getFloatBuffer();
+    final float r0c0 = m0.getRowColumnF(0, 0) + m1.getRowColumnF(0, 0);
+    final float r1c0 = m0.getRowColumnF(1, 0) + m1.getRowColumnF(1, 0);
+    final float r2c0 = m0.getRowColumnF(2, 0) + m1.getRowColumnF(2, 0);
+    final float r3c0 = m0.getRowColumnF(3, 0) + m1.getRowColumnF(3, 0);
 
-    for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
-      out.view.put(index, m0_view.get(index) + m1_view.get(index));
-    }
+    final float r0c1 = m0.getRowColumnF(0, 1) + m1.getRowColumnF(0, 1);
+    final float r1c1 = m0.getRowColumnF(1, 1) + m1.getRowColumnF(1, 1);
+    final float r2c1 = m0.getRowColumnF(2, 1) + m1.getRowColumnF(2, 1);
+    final float r3c1 = m0.getRowColumnF(3, 1) + m1.getRowColumnF(3, 1);
 
-    out.view.rewind();
+    final float r0c2 = m0.getRowColumnF(0, 2) + m1.getRowColumnF(0, 2);
+    final float r1c2 = m0.getRowColumnF(1, 2) + m1.getRowColumnF(1, 2);
+    final float r2c2 = m0.getRowColumnF(2, 2) + m1.getRowColumnF(2, 2);
+    final float r3c2 = m0.getRowColumnF(3, 2) + m1.getRowColumnF(3, 2);
+
+    final float r0c3 = m0.getRowColumnF(0, 3) + m1.getRowColumnF(0, 3);
+    final float r1c3 = m0.getRowColumnF(1, 3) + m1.getRowColumnF(1, 3);
+    final float r2c3 = m0.getRowColumnF(2, 3) + m1.getRowColumnF(2, 3);
+    final float r3c3 = m0.getRowColumnF(3, 3) + m1.getRowColumnF(3, 3);
+
+    out.setUnsafe(0, 0, r0c0);
+    out.setUnsafe(1, 0, r1c0);
+    out.setUnsafe(2, 0, r2c0);
+    out.setUnsafe(3, 0, r3c0);
+
+    out.setUnsafe(0, 1, r0c1);
+    out.setUnsafe(1, 1, r1c1);
+    out.setUnsafe(2, 1, r2c1);
+    out.setUnsafe(3, 1, r3c1);
+
+    out.setUnsafe(0, 2, r0c2);
+    out.setUnsafe(1, 2, r1c2);
+    out.setUnsafe(2, 2, r2c2);
+    out.setUnsafe(3, 2, r3c2);
+
+    out.setUnsafe(0, 3, r0c3);
+    out.setUnsafe(1, 3, r1c3);
+    out.setUnsafe(2, 3, r2c3);
+    out.setUnsafe(3, 3, r3c3);
     return out;
   }
 
@@ -324,8 +322,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     MatrixM4x4F.rowUnsafe(m, row_b, vb);
     VectorM4F.addScaledInPlace(va, vb, r);
     MatrixM4x4F.setRowUnsafe(out, row_c, va);
-
-    out.view.rewind();
     return out;
   }
 
@@ -405,12 +401,11 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     final MatrixReadable4x4FType input,
     final MatrixM4x4F output)
   {
-    final FloatBuffer input_view = input.getFloatBuffer();
-    for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
-      output.view.put(index, input_view.get(index));
+    for (int col = 0; col < MatrixM4x4F.VIEW_COLS; ++col) {
+      for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {
+        output.setUnsafe(row, col, input.getRowColumnF(row, col));
+      }
     }
-
-    output.view.rewind();
     return output;
   }
 
@@ -592,8 +587,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     MatrixM4x4F.rowUnsafe(m, row_b, vb);
     MatrixM4x4F.setRowUnsafe(out, row_a, vb);
     MatrixM4x4F.setRowUnsafe(out, row_b, va);
-
-    out.view.rewind();
     return out;
   }
 
@@ -639,38 +632,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       context.getV4a(),
       context.getV4b(),
       out);
-  }
-
-  /**
-   * @return A view of the buffer that backs this matrix.
-   * @param m
-   *          The input matrix.
-   */
-
-  public static FloatBuffer floatBuffer(
-    final MatrixM4x4F m)
-  {
-    return m.view;
-  }
-
-  /**
-   * @return The value from the matrix <code>m</code> at row <code>row</code>,
-   *         column <code>column</code>.
-   * @param m
-   *          The input matrix
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   */
-
-  public static float get(
-    final MatrixReadable4x4FType m,
-    final int row,
-    final int column)
-  {
-    final FloatBuffer m_view = m.getFloatBuffer();
-    return m_view.get(MatrixM4x4F.indexChecked(row, column));
   }
 
   private static int indexChecked(
@@ -751,15 +712,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[0, 0]
       // 1 = (-1) ^ (0 + 0)
 
-      m3.set(0, 0, m.getRowColumnF(1, 1));
-      m3.set(0, 1, m.getRowColumnF(1, 2));
-      m3.set(0, 2, m.getRowColumnF(1, 3));
-      m3.set(1, 0, m.getRowColumnF(2, 1));
-      m3.set(1, 1, m.getRowColumnF(2, 2));
-      m3.set(1, 2, m.getRowColumnF(2, 3));
-      m3.set(2, 0, m.getRowColumnF(3, 1));
-      m3.set(2, 1, m.getRowColumnF(3, 2));
-      m3.set(2, 2, m.getRowColumnF(3, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(1, 1));
+      m3.setUnsafe(0, 1, m.getRowColumnF(1, 2));
+      m3.setUnsafe(0, 2, m.getRowColumnF(1, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(2, 1));
+      m3.setUnsafe(1, 1, m.getRowColumnF(2, 2));
+      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 1));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
 
       r0c0 = MatrixM3x3F.determinant(m3);
     }
@@ -768,15 +729,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[0, 1]
       // -1 = (-1) ^ (0 + 1)
 
-      m3.set(0, 0, m.getRowColumnF(1, 0));
-      m3.set(0, 1, m.getRowColumnF(1, 2));
-      m3.set(0, 2, m.getRowColumnF(1, 3));
-      m3.set(1, 0, m.getRowColumnF(2, 0));
-      m3.set(1, 1, m.getRowColumnF(2, 2));
-      m3.set(1, 2, m.getRowColumnF(2, 3));
-      m3.set(2, 0, m.getRowColumnF(3, 0));
-      m3.set(2, 1, m.getRowColumnF(3, 2));
-      m3.set(2, 2, m.getRowColumnF(3, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(1, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(1, 2));
+      m3.setUnsafe(0, 2, m.getRowColumnF(1, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(2, 2));
+      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
 
       r0c1 = -MatrixM3x3F.determinant(m3);
     }
@@ -785,15 +746,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[0, 2]
       // 1 = (-1) ^ (0 + 2)
 
-      m3.set(0, 0, m.getRowColumnF(1, 0));
-      m3.set(0, 1, m.getRowColumnF(1, 1));
-      m3.set(0, 2, m.getRowColumnF(1, 3));
-      m3.set(1, 0, m.getRowColumnF(2, 0));
-      m3.set(1, 1, m.getRowColumnF(2, 1));
-      m3.set(1, 2, m.getRowColumnF(2, 3));
-      m3.set(2, 0, m.getRowColumnF(3, 0));
-      m3.set(2, 1, m.getRowColumnF(3, 1));
-      m3.set(2, 2, m.getRowColumnF(3, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(1, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(1, 1));
+      m3.setUnsafe(0, 2, m.getRowColumnF(1, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(2, 1));
+      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
 
       r0c2 = MatrixM3x3F.determinant(m3);
     }
@@ -802,15 +763,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[0, 3]
       // -1 = (-1) ^ (0 + 3)
 
-      m3.set(0, 0, m.getRowColumnF(1, 0));
-      m3.set(0, 1, m.getRowColumnF(1, 1));
-      m3.set(0, 2, m.getRowColumnF(1, 2));
-      m3.set(1, 0, m.getRowColumnF(2, 0));
-      m3.set(1, 1, m.getRowColumnF(2, 1));
-      m3.set(1, 2, m.getRowColumnF(2, 2));
-      m3.set(2, 0, m.getRowColumnF(3, 0));
-      m3.set(2, 1, m.getRowColumnF(3, 1));
-      m3.set(2, 2, m.getRowColumnF(3, 2));
+      m3.setUnsafe(0, 0, m.getRowColumnF(1, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(1, 1));
+      m3.setUnsafe(0, 2, m.getRowColumnF(1, 2));
+      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(2, 1));
+      m3.setUnsafe(1, 2, m.getRowColumnF(2, 2));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 2));
 
       r0c3 = -MatrixM3x3F.determinant(m3);
     }
@@ -819,15 +780,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[1, 0]
       // -1 = (-1) ^ (1 + 0)
 
-      m3.set(0, 0, m.getRowColumnF(0, 1));
-      m3.set(0, 1, m.getRowColumnF(0, 2));
-      m3.set(0, 2, m.getRowColumnF(0, 3));
-      m3.set(1, 0, m.getRowColumnF(2, 1));
-      m3.set(1, 1, m.getRowColumnF(2, 2));
-      m3.set(1, 2, m.getRowColumnF(2, 3));
-      m3.set(2, 0, m.getRowColumnF(3, 1));
-      m3.set(2, 1, m.getRowColumnF(3, 2));
-      m3.set(2, 2, m.getRowColumnF(3, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 1));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(2, 1));
+      m3.setUnsafe(1, 1, m.getRowColumnF(2, 2));
+      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 1));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
 
       r1c0 = -MatrixM3x3F.determinant(m3);
     }
@@ -836,15 +797,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[1, 1]
       // 1 = (-1) ^ (1 + 1)
 
-      m3.set(0, 0, m.getRowColumnF(0, 0));
-      m3.set(0, 1, m.getRowColumnF(0, 2));
-      m3.set(0, 2, m.getRowColumnF(0, 3));
-      m3.set(1, 0, m.getRowColumnF(2, 0));
-      m3.set(1, 1, m.getRowColumnF(2, 2));
-      m3.set(1, 2, m.getRowColumnF(2, 3));
-      m3.set(2, 0, m.getRowColumnF(3, 0));
-      m3.set(2, 1, m.getRowColumnF(3, 2));
-      m3.set(2, 2, m.getRowColumnF(3, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(2, 2));
+      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
 
       r1c1 = MatrixM3x3F.determinant(m3);
     }
@@ -853,15 +814,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[1, 2]
       // -1 = (-1) ^ (1 + 2)
 
-      m3.set(0, 0, m.getRowColumnF(0, 0));
-      m3.set(0, 1, m.getRowColumnF(0, 1));
-      m3.set(0, 2, m.getRowColumnF(0, 3));
-      m3.set(1, 0, m.getRowColumnF(2, 0));
-      m3.set(1, 1, m.getRowColumnF(2, 1));
-      m3.set(1, 2, m.getRowColumnF(2, 3));
-      m3.set(2, 0, m.getRowColumnF(3, 0));
-      m3.set(2, 1, m.getRowColumnF(3, 1));
-      m3.set(2, 2, m.getRowColumnF(3, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(2, 1));
+      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
 
       r1c2 = -MatrixM3x3F.determinant(m3);
     }
@@ -870,15 +831,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[1, 3]
       // 1 = (-1) ^ (1 + 3)
 
-      m3.set(0, 0, m.getRowColumnF(0, 0));
-      m3.set(0, 1, m.getRowColumnF(0, 1));
-      m3.set(0, 2, m.getRowColumnF(0, 2));
-      m3.set(1, 0, m.getRowColumnF(2, 0));
-      m3.set(1, 1, m.getRowColumnF(2, 1));
-      m3.set(1, 2, m.getRowColumnF(2, 2));
-      m3.set(2, 0, m.getRowColumnF(3, 0));
-      m3.set(2, 1, m.getRowColumnF(3, 1));
-      m3.set(2, 2, m.getRowColumnF(3, 2));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 2));
+      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(2, 1));
+      m3.setUnsafe(1, 2, m.getRowColumnF(2, 2));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 2));
 
       r1c3 = MatrixM3x3F.determinant(m3);
     }
@@ -887,15 +848,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[2, 0]
       // 1 = (-1) ^ (2 + 0)
 
-      m3.set(0, 0, m.getRowColumnF(0, 1));
-      m3.set(0, 1, m.getRowColumnF(0, 2));
-      m3.set(0, 2, m.getRowColumnF(0, 3));
-      m3.set(1, 0, m.getRowColumnF(1, 1));
-      m3.set(1, 1, m.getRowColumnF(1, 2));
-      m3.set(1, 2, m.getRowColumnF(1, 3));
-      m3.set(2, 0, m.getRowColumnF(3, 1));
-      m3.set(2, 1, m.getRowColumnF(3, 2));
-      m3.set(2, 2, m.getRowColumnF(3, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 1));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(1, 1));
+      m3.setUnsafe(1, 1, m.getRowColumnF(1, 2));
+      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 1));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
 
       r2c0 = MatrixM3x3F.determinant(m3);
     }
@@ -904,15 +865,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[2, 1]
       // -1 = (-1) ^ (2 + 1)
 
-      m3.set(0, 0, m.getRowColumnF(0, 0));
-      m3.set(0, 1, m.getRowColumnF(0, 2));
-      m3.set(0, 2, m.getRowColumnF(0, 3));
-      m3.set(1, 0, m.getRowColumnF(1, 0));
-      m3.set(1, 1, m.getRowColumnF(1, 2));
-      m3.set(1, 2, m.getRowColumnF(1, 3));
-      m3.set(2, 0, m.getRowColumnF(3, 0));
-      m3.set(2, 1, m.getRowColumnF(3, 2));
-      m3.set(2, 2, m.getRowColumnF(3, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(1, 2));
+      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
 
       r2c1 = -MatrixM3x3F.determinant(m3);
     }
@@ -921,15 +882,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[2, 2]
       // 1 = (-1) ^ (2 + 2)
 
-      m3.set(0, 0, m.getRowColumnF(0, 0));
-      m3.set(0, 1, m.getRowColumnF(0, 1));
-      m3.set(0, 2, m.getRowColumnF(0, 3));
-      m3.set(1, 0, m.getRowColumnF(1, 0));
-      m3.set(1, 1, m.getRowColumnF(1, 1));
-      m3.set(1, 2, m.getRowColumnF(1, 3));
-      m3.set(2, 0, m.getRowColumnF(3, 0));
-      m3.set(2, 1, m.getRowColumnF(3, 1));
-      m3.set(2, 2, m.getRowColumnF(3, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(1, 1));
+      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
 
       r2c2 = MatrixM3x3F.determinant(m3);
     }
@@ -938,15 +899,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[2, 3]
       // -1 = (-1) ^ (2 + 3)
 
-      m3.set(0, 0, m.getRowColumnF(0, 0));
-      m3.set(0, 1, m.getRowColumnF(0, 1));
-      m3.set(0, 2, m.getRowColumnF(0, 2));
-      m3.set(1, 0, m.getRowColumnF(1, 0));
-      m3.set(1, 1, m.getRowColumnF(1, 1));
-      m3.set(1, 2, m.getRowColumnF(1, 2));
-      m3.set(2, 0, m.getRowColumnF(3, 0));
-      m3.set(2, 1, m.getRowColumnF(3, 1));
-      m3.set(2, 2, m.getRowColumnF(3, 2));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 2));
+      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(1, 1));
+      m3.setUnsafe(1, 2, m.getRowColumnF(1, 2));
+      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
+      m3.setUnsafe(2, 2, m.getRowColumnF(3, 2));
 
       r2c3 = -MatrixM3x3F.determinant(m3);
     }
@@ -955,15 +916,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[3, 0]
       // -1 = (-1) ^ (3 + 0)
 
-      m3.set(0, 0, m.getRowColumnF(0, 1));
-      m3.set(0, 1, m.getRowColumnF(0, 2));
-      m3.set(0, 2, m.getRowColumnF(0, 3));
-      m3.set(1, 0, m.getRowColumnF(1, 1));
-      m3.set(1, 1, m.getRowColumnF(1, 2));
-      m3.set(1, 2, m.getRowColumnF(1, 3));
-      m3.set(2, 0, m.getRowColumnF(2, 1));
-      m3.set(2, 1, m.getRowColumnF(2, 2));
-      m3.set(2, 2, m.getRowColumnF(2, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 1));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(1, 1));
+      m3.setUnsafe(1, 1, m.getRowColumnF(1, 2));
+      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(2, 1));
+      m3.setUnsafe(2, 1, m.getRowColumnF(2, 2));
+      m3.setUnsafe(2, 2, m.getRowColumnF(2, 3));
 
       r3c0 = -MatrixM3x3F.determinant(m3);
     }
@@ -972,15 +933,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[3, 1]
       // 1 = (-1) ^ (3 + 1)
 
-      m3.set(0, 0, m.getRowColumnF(0, 0));
-      m3.set(0, 1, m.getRowColumnF(0, 2));
-      m3.set(0, 2, m.getRowColumnF(0, 3));
-      m3.set(1, 0, m.getRowColumnF(1, 0));
-      m3.set(1, 1, m.getRowColumnF(1, 2));
-      m3.set(1, 2, m.getRowColumnF(1, 3));
-      m3.set(2, 0, m.getRowColumnF(2, 0));
-      m3.set(2, 1, m.getRowColumnF(2, 2));
-      m3.set(2, 2, m.getRowColumnF(2, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(1, 2));
+      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(2, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(2, 2));
+      m3.setUnsafe(2, 2, m.getRowColumnF(2, 3));
 
       r3c1 = MatrixM3x3F.determinant(m3);
     }
@@ -989,15 +950,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[3, 2]
       // -1 = (-1) ^ (3 + 2)
 
-      m3.set(0, 0, m.getRowColumnF(0, 0));
-      m3.set(0, 1, m.getRowColumnF(0, 1));
-      m3.set(0, 2, m.getRowColumnF(0, 3));
-      m3.set(1, 0, m.getRowColumnF(1, 0));
-      m3.set(1, 1, m.getRowColumnF(1, 1));
-      m3.set(1, 2, m.getRowColumnF(1, 3));
-      m3.set(2, 0, m.getRowColumnF(2, 0));
-      m3.set(2, 1, m.getRowColumnF(2, 1));
-      m3.set(2, 2, m.getRowColumnF(2, 3));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
+      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(1, 1));
+      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
+      m3.setUnsafe(2, 0, m.getRowColumnF(2, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(2, 1));
+      m3.setUnsafe(2, 2, m.getRowColumnF(2, 3));
 
       r3c2 = -MatrixM3x3F.determinant(m3);
     }
@@ -1006,15 +967,15 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       // Sub-matrix obtained by removing m[3, 3]
       // 1 = (-1) ^ (3 + 3)
 
-      m3.set(0, 0, m.getRowColumnF(0, 0));
-      m3.set(0, 1, m.getRowColumnF(0, 1));
-      m3.set(0, 2, m.getRowColumnF(0, 2));
-      m3.set(1, 0, m.getRowColumnF(1, 0));
-      m3.set(1, 1, m.getRowColumnF(1, 1));
-      m3.set(1, 2, m.getRowColumnF(1, 2));
-      m3.set(2, 0, m.getRowColumnF(2, 0));
-      m3.set(2, 1, m.getRowColumnF(2, 1));
-      m3.set(2, 2, m.getRowColumnF(2, 2));
+      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
+      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
+      m3.setUnsafe(0, 2, m.getRowColumnF(0, 2));
+      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
+      m3.setUnsafe(1, 1, m.getRowColumnF(1, 1));
+      m3.setUnsafe(1, 2, m.getRowColumnF(1, 2));
+      m3.setUnsafe(2, 0, m.getRowColumnF(2, 0));
+      m3.setUnsafe(2, 1, m.getRowColumnF(2, 1));
+      m3.setUnsafe(2, 2, m.getRowColumnF(2, 2));
 
       r3c3 = MatrixM3x3F.determinant(m3);
     }
@@ -1045,8 +1006,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     out.setUnsafe(3, 3, (float) (r3c3 * d_inv));
 
     MatrixM4x4F.transposeInPlace(out);
-
-    out.view.rewind();
     return Option.some(out);
   }
 
@@ -1269,8 +1228,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
   {
     final MatrixM4x4F out = new MatrixM4x4F();
     MatrixM4x4F.makeRotation(angle, axis, out);
-
-    out.view.rewind();
     return out;
   }
 
@@ -1358,8 +1315,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     out.setUnsafe(3, 1, (float) r3c1);
     out.setUnsafe(3, 2, (float) r3c2);
     out.setUnsafe(3, 3, (float) r3c3);
-
-    out.view.rewind();
     return out;
   }
 
@@ -1377,8 +1332,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
   {
     final MatrixM4x4F out = new MatrixM4x4F();
     MatrixM4x4F.makeTranslation3F(v, out);
-
-    out.view.rewind();
     return out;
   }
 
@@ -1417,8 +1370,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     out.setUnsafe(3, 1, 0.0f);
     out.setUnsafe(3, 2, 0.0f);
     out.setUnsafe(3, 3, 1.0f);
-
-    out.view.rewind();
     return out;
   }
 
@@ -1436,8 +1387,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
   {
     final MatrixM4x4F out = new MatrixM4x4F();
     MatrixM4x4F.makeTranslation3I(v, out);
-
-    out.view.rewind();
     return out;
   }
 
@@ -1476,8 +1425,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     out.setUnsafe(3, 1, 0.0f);
     out.setUnsafe(3, 2, 0.0f);
     out.setUnsafe(3, 3, 1.0f);
-
-    out.view.rewind();
     return out;
   }
 
@@ -1614,8 +1561,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     out.setUnsafe(3, 1, r3c1);
     out.setUnsafe(3, 2, r3c2);
     out.setUnsafe(3, 3, r3c3);
-
-    out.view.rewind();
     return out;
   }
 
@@ -1720,8 +1665,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
   {
     MatrixM4x4F.makeRotation(angle, axis, tmp);
     MatrixM4x4F.multiply(m, tmp, out);
-
-    out.view.rewind();
     return out;
   }
 
@@ -1917,12 +1860,46 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     final double r,
     final MatrixM4x4F out)
   {
-    final FloatBuffer m_view = m.getFloatBuffer();
-    for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
-      out.view.put(index, (float) (m_view.get(index) * r));
-    }
+    final float r0c0 = (float) (m.getRowColumnF(0, 0) * r);
+    final float r1c0 = (float) (m.getRowColumnF(1, 0) * r);
+    final float r2c0 = (float) (m.getRowColumnF(2, 0) * r);
+    final float r3c0 = (float) (m.getRowColumnF(3, 0) * r);
 
-    out.view.rewind();
+    final float r0c1 = (float) (m.getRowColumnF(0, 1) * r);
+    final float r1c1 = (float) (m.getRowColumnF(1, 1) * r);
+    final float r2c1 = (float) (m.getRowColumnF(2, 1) * r);
+    final float r3c1 = (float) (m.getRowColumnF(3, 1) * r);
+
+    final float r0c2 = (float) (m.getRowColumnF(0, 2) * r);
+    final float r1c2 = (float) (m.getRowColumnF(1, 2) * r);
+    final float r2c2 = (float) (m.getRowColumnF(2, 2) * r);
+    final float r3c2 = (float) (m.getRowColumnF(3, 2) * r);
+
+    final float r0c3 = (float) (m.getRowColumnF(0, 3) * r);
+    final float r1c3 = (float) (m.getRowColumnF(1, 3) * r);
+    final float r2c3 = (float) (m.getRowColumnF(2, 3) * r);
+    final float r3c3 = (float) (m.getRowColumnF(3, 3) * r);
+
+    out.setUnsafe(0, 0, r0c0);
+    out.setUnsafe(1, 0, r1c0);
+    out.setUnsafe(2, 0, r2c0);
+    out.setUnsafe(3, 0, r3c0);
+
+    out.setUnsafe(0, 1, r0c1);
+    out.setUnsafe(1, 1, r1c1);
+    out.setUnsafe(2, 1, r2c1);
+    out.setUnsafe(3, 1, r3c1);
+
+    out.setUnsafe(0, 2, r0c2);
+    out.setUnsafe(1, 2, r1c2);
+    out.setUnsafe(2, 2, r2c2);
+    out.setUnsafe(3, 2, r3c2);
+
+    out.setUnsafe(0, 3, r0c3);
+    out.setUnsafe(1, 3, r1c3);
+    out.setUnsafe(2, 3, r2c3);
+    out.setUnsafe(3, 3, r3c3);
+
     return out;
   }
 
@@ -2058,8 +2035,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     MatrixM4x4F.rowUnsafe(m, row, tmp);
     VectorM4F.scaleInPlace(tmp, r);
     MatrixM4x4F.setRowUnsafe(out, row, tmp);
-
-    out.view.rewind();
     return out;
   }
 
@@ -2126,7 +2101,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     final float value)
   {
     m.view.put(MatrixM4x4F.indexChecked(row, column), value);
-    m.view.rewind();
     return m;
   }
 
@@ -2142,11 +2116,17 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     final MatrixM4x4F m)
   {
     m.view.clear();
-    m.view.put(MatrixM4x4F.IDENTITY_ROW_0);
-    m.view.put(MatrixM4x4F.IDENTITY_ROW_1);
-    m.view.put(MatrixM4x4F.IDENTITY_ROW_2);
-    m.view.put(MatrixM4x4F.IDENTITY_ROW_3);
-    m.view.rewind();
+
+    for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {
+      for (int col = 0; col < MatrixM4x4F.VIEW_COLS; ++col) {
+        if (row == col) {
+          m.setUnsafe(row, col, 1.0f);
+        } else {
+          m.setUnsafe(row, col, 0.0f);
+        }
+      }
+    }
+
     return m;
   }
 
@@ -2159,7 +2139,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     m.setUnsafe(row, 1, v.getYF());
     m.setUnsafe(row, 2, v.getZF());
     m.setUnsafe(row, 3, v.getWF());
-    m.view.rewind();
   }
 
   /**
@@ -2174,11 +2153,9 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     final MatrixM4x4F m)
   {
     m.view.clear();
-    m.view.put(MatrixM4x4F.ZERO_ROW);
-    m.view.put(MatrixM4x4F.ZERO_ROW);
-    m.view.put(MatrixM4x4F.ZERO_ROW);
-    m.view.put(MatrixM4x4F.ZERO_ROW);
-    m.view.rewind();
+    for (int index = 0; index < (MatrixM4x4F.VIEW_ROWS * MatrixM4x4F.VIEW_COLS); ++index) {
+      m.view.put(index, 0.0f);
+    }
     return m;
   }
 
@@ -2235,8 +2212,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
     out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
     out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-
-    out.view.rewind();
     return out;
   }
 
@@ -2292,8 +2267,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
     out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
     out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-
-    out.view.rewind();
     return out;
   }
 
@@ -2358,8 +2331,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
     out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
     out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-
-    out.view.rewind();
     return out;
   }
 
@@ -2424,8 +2395,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
     out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
     out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-
-    out.view.rewind();
     return out;
   }
 
@@ -2462,10 +2431,7 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     final MatrixReadable4x4FType m,
     final MatrixM4x4F out)
   {
-    final FloatBuffer m_view = m.getFloatBuffer();
-    for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
-      out.view.put(index, m_view.get(index));
-    }
+    MatrixM4x4F.copy(m, out);
     return MatrixM4x4F.transposeInPlace(out);
   }
 
@@ -2491,7 +2457,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
       }
     }
 
-    m.view.rewind();
     return m;
   }
 
@@ -2517,8 +2482,8 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     assert v != null;
 
     this.view = v;
-
     MatrixM4x4F.setIdentity(this);
+    this.view.rewind();
   }
 
   /**
@@ -2529,7 +2494,7 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
    */
 
   public MatrixM4x4F(
-    final MatrixM4x4F source)
+    final MatrixReadable4x4FType source)
   {
     final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM4x4F.VIEW_BYTES);
     assert b != null;
@@ -2544,12 +2509,13 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     assert v != null;
 
     this.view = v;
-
-    for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
-      this.view.put(index, source.view.get(index));
-    }
-
     this.view.rewind();
+
+    for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {
+      for (int col = 0; col < MatrixM4x4F.VIEW_COLS; ++col) {
+        this.setUnsafe(row, col, source.getRowColumnF(row, col));
+      }
+    }
   }
 
   @Override public boolean equals(
@@ -2575,22 +2541,7 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     return true;
   }
 
-  /**
-   * @return The value at the given row and column
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   */
-
-  public float get(
-    final int row,
-    final int column)
-  {
-    return MatrixM4x4F.get(this, row, column);
-  }
-
-  @Override public FloatBuffer getFloatBuffer()
+  @Override public FloatBuffer getDirectFloatBuffer()
   {
     return this.view;
   }
@@ -2606,7 +2557,7 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     final int row,
     final int column)
   {
-    return MatrixM4x4F.get(this, row, column);
+    return this.view.get(MatrixM4x4F.indexChecked(row, column));
   }
 
   private float getUnsafe(
@@ -2646,7 +2597,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     final float value)
   {
     this.view.put(MatrixM4x4F.indexChecked(row, column), value);
-    this.view.rewind();
     return this;
   }
 
@@ -2663,7 +2613,6 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
     final float value)
   {
     this.view.put(MatrixM4x4F.indexUnsafe(row, column), value);
-    this.view.rewind();
     return this;
   }
 
@@ -2671,14 +2620,13 @@ public final class MatrixM4x4F implements MatrixReadable4x4FType
   {
     final StringBuilder builder = new StringBuilder();
     for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {
-      final String text =
-        String.format(
-          "[%.15f\t%.15f\t%.15f\t%.15f]\n",
-          Double.valueOf(MatrixM4x4F.get(this, row, 0)),
-          Double.valueOf(MatrixM4x4F.get(this, row, 1)),
-          Double.valueOf(MatrixM4x4F.get(this, row, 2)),
-          Double.valueOf(MatrixM4x4F.get(this, row, 3)));
-      builder.append(text);
+      final float c0 = this.view.get(MatrixM4x4F.indexUnsafe(row, 0));
+      final float c1 = this.view.get(MatrixM4x4F.indexUnsafe(row, 1));
+      final float c2 = this.view.get(MatrixM4x4F.indexUnsafe(row, 2));
+      final float c3 = this.view.get(MatrixM4x4F.indexUnsafe(row, 3));
+      final String s =
+        String.format("[%+.6f %+.6f %+.6f %+.6f]\n", c0, c1, c2, c3);
+      builder.append(s);
     }
     final String r = builder.toString();
     assert r != null;

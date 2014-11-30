@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -22,7 +22,7 @@ import com.io7m.jnull.Nullable;
 
 /**
  * A four-dimensional mutable quaternion type with double precision elements.
- * 
+ *
  * <p>
  * Values of this type cannot be accessed safely from multiple threads without
  * explicit synchronization.
@@ -36,20 +36,20 @@ public final class QuaternionM4D implements
   /**
    * The Context type contains the minimum storage required for all of the
    * functions of the <code>QuaternionM4D</code> class.
-   * 
+   *
    * <p>
    * The purpose of the class is to allow applications to allocate all storage
    * ahead of time in order to allow functions in the class to avoid
    * allocating memory (not including stack space) for intermediate
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
-   * 
+   *
    * <p>
    * The user should allocate one <code>Context</code> value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes
    * a <code>Context</code> value will not generate garbage.
    * </p>
-   * 
+   *
    * @since 5.0.0
    */
 
@@ -87,14 +87,14 @@ public final class QuaternionM4D implements
   /**
    * Calculate the element-wise sum of the quaternions <code>q0</code> and
    * <code>q1</code>, saving the result to <code>qr</code>.
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
    *          The right input quaternion
    * @param out
    *          The output quaternion
-   * 
+   *
    * @return <code>(q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)</code>
    */
 
@@ -117,12 +117,12 @@ public final class QuaternionM4D implements
   /**
    * Calculate the element-wise sum of the quaternions <code>q0</code> and
    * <code>q1</code>, saving the result to <code>q0</code>.
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
    *          The right input quaternion
-   * 
+   *
    * @return <code>(q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)</code>
    */
 
@@ -137,9 +137,9 @@ public final class QuaternionM4D implements
    * Determine whether or not the quaternions <code>qa</code> and
    * <code>qb</code> are equal to within the degree of error given in
    * <code>context</code>.
-   * 
+   *
    * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
-   * 
+   *
    * @param context
    *          The equality context
    * @param qa
@@ -169,12 +169,12 @@ public final class QuaternionM4D implements
   /**
    * Calculate the conjugate of the input quaternion <code>q</code>, saving
    * the result to <code>out</code>.
-   * 
+   *
    * @param q
    *          The input quaternion
    * @param out
    *          The output quaternion
-   * 
+   *
    * @return <code>out</code>
    */
 
@@ -192,10 +192,10 @@ public final class QuaternionM4D implements
   /**
    * Calculate the conjugate of the input quaternion <code>q</code>, modifying
    * <code>q</code> in place.
-   * 
+   *
    * @param q
    *          The input quaternion
-   * 
+   *
    * @return <code>q</code>
    */
 
@@ -207,7 +207,7 @@ public final class QuaternionM4D implements
 
   /**
    * Copy the contents of the quaternion <code>q</code> to <code>out</code>.
-   * 
+   *
    * @param q
    *          The input quaternion
    * @param out
@@ -229,12 +229,12 @@ public final class QuaternionM4D implements
   /**
    * Calculate the scalar product of the quaternions <code>q0</code> and
    * <code>q1</code>.
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
    *          The right input quaternion
-   * 
+   *
    * @return The scalar product of the two quaternions
    */
 
@@ -252,12 +252,12 @@ public final class QuaternionM4D implements
   /**
    * Linearly interpolate between <code>q0</code> and <code>q1</code> by the
    * amount <code>alpha</code>, such that:
-   * 
+   *
    * <ul>
    * <li><code>interpolateLinear(q0, q1, 0.0, r) -> r = q0</code></li>
    * <li><code>interpolateLinear(q0, q1, 1.0, r) -> r = q1</code></li>
    * </ul>
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
@@ -267,7 +267,7 @@ public final class QuaternionM4D implements
    *          <code>1.0</code>
    * @param r
    *          The output quaternion
-   * 
+   *
    * @return <code>(1 - alpha) * q0 + alpha * q1</code>
    */
 
@@ -289,12 +289,12 @@ public final class QuaternionM4D implements
   /**
    * Return <code>true</code> iff <code>qa</code> is the negation of
    * <code>qb</code>.
-   * 
+   *
    * <p>
    * Each element is compared with
    * {@link AlmostEqualDouble#almostEqual(ContextRelative, double, double)}.
    * </p>
-   * 
+   *
    * @param context
    *          The equality context
    * @param qa
@@ -334,12 +334,12 @@ public final class QuaternionM4D implements
    * at <code>target</code> assuming the viewer is at <code>origin</code>,
    * using <code>up</code> as the "up" vector, saving the result to
    * <code>q</code>.
-   * 
+   *
    * <p>
    * The function uses storage preallocated in <code>context</code> to avoid
    * any new allocations.
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage
    * @param q
@@ -351,7 +351,7 @@ public final class QuaternionM4D implements
    * @param up
    *          The up vector
    * @return <code>q</code>
-   * 
+   *
    * @since 5.0.0
    */
 
@@ -373,12 +373,12 @@ public final class QuaternionM4D implements
 
   /**
    * Calculate the magnitude of the quaternion <code>q</code>.
-   * 
+   *
    * Correspondingly, <code>magnitude(normalize(q)) == 1.0</code>.
-   * 
+   *
    * @param q
    *          The input quaternion
-   * 
+   *
    * @return The magnitude of the input quaternion
    */
 
@@ -390,10 +390,10 @@ public final class QuaternionM4D implements
 
   /**
    * Calculate the squared magnitude of the quaternion <code>q</code>.
-   * 
+   *
    * @param q
    *          The input quaternion
-   * 
+   *
    * @return The squared magnitude of the input quaternion
    */
 
@@ -407,19 +407,19 @@ public final class QuaternionM4D implements
    * Produce a quaternion that represents a rotation of <code>angle</code>
    * degrees around the axis specified by <code>axis</code>, saving the result
    * to <code>out</code>. <code>axis</code> is assumed to be of unit length.
-   * 
+   *
    * @see VectorI3D#normalize(VectorReadable3DType)
    * @see VectorI4D#normalize(VectorReadable4DType)
    * @see VectorM3D#normalize(VectorReadable3DType, VectorM3D)
    * @see VectorM4D#normalize(VectorReadable4DType, VectorM4D)
-   * 
+   *
    * @param axis
    *          The normalized quaternion representing the axis
    * @param angle
    *          The angle to rotate, in radians
    * @param out
    *          The output quaternion
-   * 
+   *
    * @return A quaternion representing the rotation
    */
 
@@ -443,7 +443,7 @@ public final class QuaternionM4D implements
   /**
    * Produce a quaternion equivalent to the rotation matrix <code>m</code>,
    * writing the result to <code>out</code>.
-   * 
+   *
    * @since 5.0.0
    * @param m
    *          The rotation matrix
@@ -456,15 +456,15 @@ public final class QuaternionM4D implements
     final MatrixReadable3x3DType m,
     final QuaternionM4D out)
   {
-    final double m00 = MatrixM3x3D.get(m, 0, 0);
-    final double m01 = MatrixM3x3D.get(m, 0, 1);
-    final double m02 = MatrixM3x3D.get(m, 0, 2);
-    final double m10 = MatrixM3x3D.get(m, 1, 0);
-    final double m11 = MatrixM3x3D.get(m, 1, 1);
-    final double m12 = MatrixM3x3D.get(m, 1, 2);
-    final double m20 = MatrixM3x3D.get(m, 2, 0);
-    final double m21 = MatrixM3x3D.get(m, 2, 1);
-    final double m22 = MatrixM3x3D.get(m, 2, 2);
+    final double m00 = m.getRowColumnD(0, 0);
+    final double m01 = m.getRowColumnD(0, 1);
+    final double m02 = m.getRowColumnD(0, 2);
+    final double m10 = m.getRowColumnD(1, 0);
+    final double m11 = m.getRowColumnD(1, 1);
+    final double m12 = m.getRowColumnD(1, 2);
+    final double m20 = m.getRowColumnD(2, 0);
+    final double m21 = m.getRowColumnD(2, 1);
+    final double m22 = m.getRowColumnD(2, 2);
 
     final double trace = MatrixM3x3D.trace(m);
 
@@ -504,7 +504,7 @@ public final class QuaternionM4D implements
   /**
    * Produce a quaternion equivalent to the rotation matrix <code>m</code>,
    * writing the result to <code>out</code>.
-   * 
+   *
    * @since 5.0.0
    * @param m
    *          The rotation matrix
@@ -517,15 +517,15 @@ public final class QuaternionM4D implements
     final MatrixReadable4x4DType m,
     final QuaternionM4D out)
   {
-    final double m00 = MatrixM4x4D.get(m, 0, 0);
-    final double m01 = MatrixM4x4D.get(m, 0, 1);
-    final double m02 = MatrixM4x4D.get(m, 0, 2);
-    final double m10 = MatrixM4x4D.get(m, 1, 0);
-    final double m11 = MatrixM4x4D.get(m, 1, 1);
-    final double m12 = MatrixM4x4D.get(m, 1, 2);
-    final double m20 = MatrixM4x4D.get(m, 2, 0);
-    final double m21 = MatrixM4x4D.get(m, 2, 1);
-    final double m22 = MatrixM4x4D.get(m, 2, 2);
+    final double m00 = m.getRowColumnD(0, 0);
+    final double m01 = m.getRowColumnD(0, 1);
+    final double m02 = m.getRowColumnD(0, 2);
+    final double m10 = m.getRowColumnD(1, 0);
+    final double m11 = m.getRowColumnD(1, 1);
+    final double m12 = m.getRowColumnD(1, 2);
+    final double m20 = m.getRowColumnD(2, 0);
+    final double m21 = m.getRowColumnD(2, 1);
+    final double m22 = m.getRowColumnD(2, 2);
 
     /**
      * Explicitly ignore the bottom right element of the matrix, as this
@@ -570,13 +570,13 @@ public final class QuaternionM4D implements
   /**
    * Produce a rotation matrix from the quaternion <code>q</code>, saving the
    * result to <code>m</code>.
-   * 
+   *
    * @since 5.0.0
    * @param q
    *          The input quaternion
    * @param m
    *          The output matrix
-   * 
+   *
    * @return <code>m</code>
    */
 
@@ -624,13 +624,13 @@ public final class QuaternionM4D implements
   /**
    * Produce a rotation matrix from the quaternion <code>q</code>, saving the
    * result to <code>m</code>.
-   * 
+   *
    * @since 5.0.0
    * @param q
    *          The input quaternion
    * @param m
    *          The output matrix
-   * 
+   *
    * @return <code>m</code>
    */
 
@@ -694,41 +694,41 @@ public final class QuaternionM4D implements
   /**
    * Multiply the quaternion <code>q0</code> by the quaternion <code>q1</code>
    * , saving the result to <code>qr</code>.
-   * 
+   *
    * <p>
    * Note that this operation is not commutative.
    * </p>
-   * 
+   *
    * <p>
    * The function is most often used to concatenate quaternions to combine
    * rotations. As an example, assuming that:
    * </p>
-   * 
+   *
    * <ul>
    * <li><code>qx</code> represents some rotation around the X axis</li>
    * <li><code>qy</code> represents some rotation around the Y axis</li>
    * <li><code>qz</code> represents some rotation around the Z axis</li>
    * </ul>
-   * 
+   *
    * <p>
    * The following code produces a quaternion <code>qr</code> that represents
    * a rotation around the X axis, followed by a rotation around the Y axis,
    * followed by a rotation around the Z axis:
    * </p>
-   * 
+   *
    * <pre>
    * QuaternionM4D qr = new QuaternionM4D();
    * QuaternionM4D.multiply(qy, qx, qr);
    * QuaternionM4D.multiply(qz, qr, qr);
    * </pre>
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
    *          The right input quaternion
    * @param qr
    *          The output quaternion
-   * 
+   *
    * @return <code>qr</code>
    */
 
@@ -763,10 +763,10 @@ public final class QuaternionM4D implements
   /**
    * Multiply the quaternion <code>q0</code> by the quaternion <code>q1</code>
    * , saving the result to <code>q0</code>.
-   * 
+   *
    * @see QuaternionM4D#multiply(QuaternionReadable4DType,
    *      QuaternionReadable4DType, QuaternionM4D)
-   * 
+   *
    * @param q0
    *          The left quaternion
    * @param q1
@@ -784,13 +784,13 @@ public final class QuaternionM4D implements
   /**
    * Negate the elements of <code>qa</code>, writing the resulting quaternion
    * to <code>out</code>.
-   * 
+   *
    * @param qa
    *          The input quaternion
    * @param out
    *          The output quaternion
    * @return out
-   * 
+   *
    * @since 5.0.0
    */
 
@@ -811,11 +811,11 @@ public final class QuaternionM4D implements
 
   /**
    * Negate the elements of <code>q</code>, modifying the quaternion in-place.
-   * 
+   *
    * @param q
    *          The input quaternion
    * @return q
-   * 
+   *
    * @since 5.0.0
    */
 
@@ -829,12 +829,12 @@ public final class QuaternionM4D implements
    * Returns a quaternion with the same orientation as <code>q</code> but with
    * magnitude equal to <code>1.0</code> in <code>out</code>. The function
    * returns the zero quaternion iff the input is the zero quaternion.
-   * 
+   *
    * @param out
    *          The output quaternion
    * @param q
    *          The input quaternion
-   * 
+   *
    * @return out
    */
 
@@ -858,10 +858,10 @@ public final class QuaternionM4D implements
    * Returns a quaternion with the same orientation as <code>q</code> but with
    * magnitude equal to <code>1.0</code> in <code>q</code>. The function
    * returns the zero quaternion iff the input is the zero quaternion.
-   * 
+   *
    * @param q
    *          The input quaternion
-   * 
+   *
    * @return q
    */
 
@@ -874,14 +874,14 @@ public final class QuaternionM4D implements
   /**
    * Scale the quaternion <code>q</code> by the scalar <code>r</code>, saving
    * the result to <code>out</code>.
-   * 
+   *
    * @param q
    *          The input quaternion
    * @param r
    *          The scaling value
    * @param out
    *          The output quaternion
-   * 
+   *
    * @return <code>(q.x * r, q.y * r, q.z * r, q.w * r)</code>
    */
 
@@ -904,12 +904,12 @@ public final class QuaternionM4D implements
   /**
    * Scale the quaternion <code>q</code> by the scalar <code>r</code>, saving
    * the result to <code>q</code>.
-   * 
+   *
    * @param q
    *          The input quaternion
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(q.x * r, q.y * r, q.z * r, q.w * r)</code>
    */
 
@@ -923,14 +923,14 @@ public final class QuaternionM4D implements
   /**
    * Subtract the quaternion <code>q0</code> from the quaternion
    * <code>q1</code>, saving the result to <code>out</code>.
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
    *          The right input quaternion
    * @param out
    *          The output quaternion
-   * 
+   *
    * @return <code>(q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)</code>
    */
 
@@ -953,12 +953,12 @@ public final class QuaternionM4D implements
   /**
    * Subtract the quaternion <code>q0</code> from the quaternion
    * <code>q1</code>, saving the result to <code>q0</code>.
-   * 
+   *
    * @param q0
    *          The left input quaternion
    * @param q1
    *          The right input quaternion
-   * 
+   *
    * @return <code>(q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)</code>
    */
 
@@ -986,7 +986,7 @@ public final class QuaternionM4D implements
 
   /**
    * Construct a quaternion initialized with the given values.
-   * 
+   *
    * @param in_x
    *          The <code>x</code> value
    * @param in_y
@@ -1012,7 +1012,7 @@ public final class QuaternionM4D implements
   /**
    * Construct a quaternion initialized with the values given in
    * <code>q</code>.
-   * 
+   *
    * @param q
    *          The source quaternion
    */

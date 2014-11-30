@@ -46,25 +46,41 @@ import com.io7m.jtensors.VectorReadable3DType;
     final MatrixM3x3D r)
   {
     boolean eq;
-    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(0, 2));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, -0.707106781187, r.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(2, 1));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(2, 2));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        -0.707106781187,
+        r.getRowColumnD(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
   }
 
@@ -73,25 +89,41 @@ import com.io7m.jtensors.VectorReadable3DType;
     final MatrixM3x3D r)
   {
     boolean eq;
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(0, 0));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(0, 2));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(1, 0));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.get(1, 1));
+    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(1, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(context, -0.707106781187, r.get(2, 0));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        -0.707106781187,
+        r.getRowColumnD(2, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(2, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(2, 2));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
   }
 
@@ -101,28 +133,40 @@ import com.io7m.jtensors.VectorReadable3DType;
   {
     boolean eq;
     eq =
-      AlmostEqualDouble.almostEqual(context_d, 0.707106781187, r.get(0, 0));
+      AlmostEqualDouble.almostEqual(
+        context_d,
+        0.707106781187,
+        r.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
     eq =
-      AlmostEqualDouble.almostEqual(context_d, -0.707106781187, r.get(0, 1));
+      AlmostEqualDouble.almostEqual(
+        context_d,
+        -0.707106781187,
+        r.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(0, 2));
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
     eq =
-      AlmostEqualDouble.almostEqual(context_d, 0.707106781187, r.get(1, 0));
+      AlmostEqualDouble.almostEqual(
+        context_d,
+        0.707106781187,
+        r.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
     eq =
-      AlmostEqualDouble.almostEqual(context_d, 0.707106781187, r.get(1, 1));
+      AlmostEqualDouble.almostEqual(
+        context_d,
+        0.707106781187,
+        r.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(1, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(2, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(2, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 1.0, r.get(2, 2));
+    eq = AlmostEqualDouble.almostEqual(context_d, 1.0, r.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
   }
 
@@ -141,13 +185,13 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     final MatrixM3x3D mk = MatrixM3x3D.add(m0, m1, mr);
     Assert.assertSame(mr, mk);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mk).position());
+    Assert.assertEquals(0, mk.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 1.0);
-        Assert.assertTrue(m1.get(row, column) == 3.0);
-        Assert.assertTrue(mr.get(row, column) == 4.0);
+        Assert.assertTrue(m0.getRowColumnD(row, column) == 1.0);
+        Assert.assertTrue(m1.getRowColumnD(row, column) == 3.0);
+        Assert.assertTrue(mr.getRowColumnD(row, column) == 4.0);
       }
     }
   }
@@ -164,26 +208,26 @@ import com.io7m.jtensors.VectorReadable3DType;
       }
     }
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     final MatrixM3x3D mr = MatrixM3x3D.addInPlace(m0, m1);
     Assert.assertSame(mr, m0);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 4.0);
-        Assert.assertTrue(mr.get(row, column) == 4.0);
-        Assert.assertTrue(m1.get(row, column) == 3.0);
+        Assert.assertTrue(m0.getRowColumnD(row, column) == 4.0);
+        Assert.assertTrue(mr.getRowColumnD(row, column) == 4.0);
+        Assert.assertTrue(m1.getRowColumnD(row, column) == 3.0);
       }
     }
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
   }
 
   @Test public void testAddRowScaled()
@@ -199,48 +243,48 @@ import com.io7m.jtensors.VectorReadable3DType;
     m0.set(1, 1, 5.0);
     m0.set(1, 2, 5.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM3x3D.addRowScaled(m0, 0, 1, 2, 2.0, m1);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 1.0);
-    Assert.assertTrue(m1.get(0, 1) == 0.0);
-    Assert.assertTrue(m1.get(0, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 0.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 0.0);
-    Assert.assertTrue(m1.get(1, 1) == 1.0);
-    Assert.assertTrue(m1.get(1, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 0.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 13.0);
-    Assert.assertTrue(m1.get(2, 1) == 13.0);
-    Assert.assertTrue(m1.get(2, 2) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 13.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM3x3D.addRowScaledInPlace(m0, 0, 1, 2, 2.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m0.get(0, 0) == 3.0);
-    Assert.assertTrue(m0.get(0, 1) == 3.0);
-    Assert.assertTrue(m0.get(0, 2) == 3.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 0) == 3.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 1) == 3.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 2) == 3.0);
 
-    Assert.assertTrue(m0.get(1, 0) == 5.0);
-    Assert.assertTrue(m0.get(1, 1) == 5.0);
-    Assert.assertTrue(m0.get(1, 2) == 5.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 0) == 5.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 1) == 5.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 2) == 5.0);
 
-    Assert.assertTrue(m0.get(2, 0) == 13.0);
-    Assert.assertTrue(m0.get(2, 1) == 13.0);
-    Assert.assertTrue(m0.get(2, 2) == 13.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 0) == 13.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 1) == 13.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 2) == 13.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -294,7 +338,7 @@ import com.io7m.jtensors.VectorReadable3DType;
   @Test public void testBufferEndianness()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
-    final DoubleBuffer b = MatrixM3x3D.doubleBuffer(m);
+    final DoubleBuffer b = m.getDirectDoubleBuffer();
 
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
   }
@@ -316,35 +360,35 @@ import com.io7m.jtensors.VectorReadable3DType;
     m0.set(2, 1, 8.0);
     m0.set(2, 2, 9.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM3x3D.copy(m0, m1);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 1.0);
-    Assert.assertTrue(m1.get(0, 1) == 2.0);
-    Assert.assertTrue(m1.get(0, 2) == 3.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 2.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 3.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 4.0);
-    Assert.assertTrue(m1.get(1, 1) == 5.0);
-    Assert.assertTrue(m1.get(1, 2) == 6.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 4.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 5.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 6.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 7.0);
-    Assert.assertTrue(m1.get(2, 1) == 8.0);
-    Assert.assertTrue(m1.get(2, 2) == 9.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 7.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 8.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 9.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Test public void testDeterminantIdentity()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     Assert.assertTrue(MatrixM3x3D.determinant(m) == 1.0);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testDeterminantOther()
@@ -354,10 +398,10 @@ import com.io7m.jtensors.VectorReadable3DType;
     m.set(0, 0, 2.0f);
     m.set(1, 1, 2.0f);
     m.set(2, 2, 2.0f);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     Assert.assertTrue(MatrixM3x3D.determinant(m) == 8.0);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testDeterminantScale()
@@ -366,9 +410,9 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     m.set(0, 0, 2.0f);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
     Assert.assertTrue(MatrixM3x3D.determinant(m) == 2.0);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testDeterminantScaleNegative()
@@ -376,18 +420,18 @@ import com.io7m.jtensors.VectorReadable3DType;
     final MatrixM3x3D m = new MatrixM3x3D();
 
     m.set(0, 0, -2.0f);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
     Assert.assertTrue(MatrixM3x3D.determinant(m) == -2.0);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testDeterminantZero()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     MatrixM3x3D.setZero(m);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
     Assert.assertTrue(MatrixM3x3D.determinant(m) == 0.0);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testEqualsCase0()
@@ -399,17 +443,17 @@ import com.io7m.jtensors.VectorReadable3DType;
   @Test public void testEqualsCase1()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
     Assert.assertFalse(m0.equals(null));
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
   }
 
   @Test public void testEqualsCase2()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
     Assert.assertFalse(m0.equals(Integer.valueOf(23)));
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
   }
 
   @Test public void testEqualsCase3()
@@ -417,8 +461,8 @@ import com.io7m.jtensors.VectorReadable3DType;
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
     Assert.assertTrue(m0.equals(m1));
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Test public void testEqualsNeqExhaustive()
@@ -429,8 +473,8 @@ import com.io7m.jtensors.VectorReadable3DType;
         final MatrixM3x3D m1 = new MatrixM3x3D();
         m1.set(row, col, 256);
         Assert.assertFalse(m0.equals(m1));
-        Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
       }
     }
   }
@@ -452,48 +496,48 @@ import com.io7m.jtensors.VectorReadable3DType;
     m0.set(2, 1, 10.0);
     m0.set(2, 2, 11.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM3x3D.exchangeRows(m0, 0, 2, m1);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 9.0);
-    Assert.assertTrue(m1.get(0, 1) == 10.0);
-    Assert.assertTrue(m1.get(0, 2) == 11.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 9.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 10.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 11.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 0.0);
-    Assert.assertTrue(m1.get(1, 1) == 1.0);
-    Assert.assertTrue(m1.get(1, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 0.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 1.0);
-    Assert.assertTrue(m1.get(2, 1) == 2.0);
-    Assert.assertTrue(m1.get(2, 2) == 3.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 2.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 3.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM3x3D.exchangeRowsInPlace(m1, 0, 2);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 1.0);
-    Assert.assertTrue(m1.get(0, 1) == 2.0);
-    Assert.assertTrue(m1.get(0, 2) == 3.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 2.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 3.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 0.0);
-    Assert.assertTrue(m1.get(1, 1) == 1.0);
-    Assert.assertTrue(m1.get(1, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 0.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 9.0);
-    Assert.assertTrue(m1.get(2, 1) == 10.0);
-    Assert.assertTrue(m1.get(2, 2) == 11.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 9.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 10.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 11.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -535,14 +579,14 @@ import com.io7m.jtensors.VectorReadable3DType;
         final MatrixM3x3D m0 = new MatrixM3x3D();
         final MatrixM3x3D m1 = new MatrixM3x3D();
         Assert.assertTrue(m0.hashCode() == m1.hashCode());
-        Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
         m1.set(row, col, 256);
-        Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
         Assert.assertFalse(m0.hashCode() == m1.hashCode());
-        Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
       }
     }
   }
@@ -563,46 +607,46 @@ import com.io7m.jtensors.VectorReadable3DType;
     m0.set(2, 1, 23.0);
     m0.set(2, 2, 29.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
 
     final MatrixM3x3D m1 = new MatrixM3x3D(m0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 3.0);
-    Assert.assertTrue(m1.get(0, 1) == 5.0);
-    Assert.assertTrue(m1.get(0, 2) == 7.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 3.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 5.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 7.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 11.0);
-    Assert.assertTrue(m1.get(1, 1) == 13.0);
-    Assert.assertTrue(m1.get(1, 2) == 17.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 11.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 17.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 19.0);
-    Assert.assertTrue(m1.get(2, 1) == 23.0);
-    Assert.assertTrue(m1.get(2, 2) == 29.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 19.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 23.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 29.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Test public void testInitializationIdentity()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
 
-    Assert.assertTrue(m.get(0, 0) == 1.0);
-    Assert.assertTrue(m.get(0, 1) == 0.0);
-    Assert.assertTrue(m.get(0, 2) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(0, 0) == 1.0);
+    Assert.assertTrue(m.getRowColumnD(0, 1) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(0, 2) == 0.0);
 
-    Assert.assertTrue(m.get(1, 0) == 0.0);
-    Assert.assertTrue(m.get(1, 1) == 1.0);
-    Assert.assertTrue(m.get(1, 2) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(1, 0) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(1, 1) == 1.0);
+    Assert.assertTrue(m.getRowColumnD(1, 2) == 0.0);
 
-    Assert.assertTrue(m.get(2, 0) == 0.0);
-    Assert.assertTrue(m.get(2, 1) == 0.0);
-    Assert.assertTrue(m.get(2, 2) == 1.0);
+    Assert.assertTrue(m.getRowColumnD(2, 0) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(2, 1) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(2, 2) == 1.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testInvertInPlaceIdentity()
@@ -616,25 +660,25 @@ import com.io7m.jtensors.VectorReadable3DType;
       final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
       final MatrixM3x3D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 0) == 1.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 1) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0.0);
 
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 0) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 1) == 1.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0.0);
 
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 0) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 1) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 2) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 1.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
 
     {
@@ -643,25 +687,25 @@ import com.io7m.jtensors.VectorReadable3DType;
       final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
       final MatrixM3x3D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 0) == 1.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 1) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0.0);
 
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 0) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 1) == 1.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0.0);
 
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 0) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 1) == 0.0);
-      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 2) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 1.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
   }
 
@@ -688,25 +732,25 @@ import com.io7m.jtensors.VectorReadable3DType;
       final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
       final MatrixM3x3D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(rm.get(0, 0) == 0.5);
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(rm.get(0, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 0.5);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(rm.get(1, 1) == 0.5);
-      Assert.assertTrue(rm.get(1, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 0.5);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0);
 
-      Assert.assertTrue(rm.get(2, 0) == 0);
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(rm.get(2, 2) == 0.5);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 0.5);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
 
     {
@@ -715,25 +759,25 @@ import com.io7m.jtensors.VectorReadable3DType;
       final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
       final MatrixM3x3D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(rm.get(0, 0) == 2);
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(rm.get(0, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 2);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(rm.get(1, 1) == 2);
-      Assert.assertTrue(rm.get(1, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 2);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0);
 
-      Assert.assertTrue(rm.get(2, 0) == 0);
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(rm.get(2, 2) == 2);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 2);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
   }
 
@@ -775,25 +819,25 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     boolean eq = false;
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(0, 2));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, t.getXD());
@@ -824,25 +868,25 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     boolean eq = false;
 
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 2));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(2, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, t.getXD());
@@ -873,25 +917,25 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     boolean eq = false;
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(0, 2));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, t.getXD());
@@ -922,25 +966,25 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     boolean eq = false;
 
-    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 2));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(2, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, t.getXD());
@@ -971,25 +1015,25 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     boolean eq = false;
 
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 2));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(2, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
     eq = AlmostEqualDouble.almostEqual(ec, -20.0, t.getXD());
@@ -1010,14 +1054,18 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
-        Assert.assertTrue(m0.get(row, column) == mr.get(row, column));
-        Assert.assertTrue(m1.get(row, column) == mr.get(row, column));
+        Assert.assertTrue(m0.getRowColumnD(row, column) == mr.getRowColumnD(
+          row,
+          column));
+        Assert.assertTrue(m1.getRowColumnD(row, column) == mr.getRowColumnD(
+          row,
+          column));
       }
     }
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
   }
 
   @Test public void testMultiplyMutateIdentity()
@@ -1027,29 +1075,33 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
-        Assert.assertTrue(m0.get(row, column) == m1.get(row, column));
+        Assert.assertTrue(m0.getRowColumnD(row, column) == m1.getRowColumnD(
+          row,
+          column));
       }
     }
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     final MatrixM3x3D r = MatrixM3x3D.multiplyInPlace(m0, m1);
     Assert.assertSame(m0, r);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
-        Assert.assertTrue(m0.get(row, column) == m1.get(row, column));
+        Assert.assertTrue(m0.getRowColumnD(row, column) == m1.getRowColumnD(
+          row,
+          column));
       }
     }
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
   }
 
   @Test public void testMultiplyMutateSimple()
@@ -1068,31 +1120,31 @@ import com.io7m.jtensors.VectorReadable3DType;
     MatrixM3x3D.set(m0, 2, 1, 8.0);
     MatrixM3x3D.set(m0, 2, 2, 9.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
 
     final MatrixM3x3D m1 = new MatrixM3x3D(m0);
     final MatrixM3x3D r = MatrixM3x3D.multiplyInPlace(m0, m1);
     Assert.assertSame(r, m0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(MatrixM3x3D.get(r, 0, 0) == 30.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 0, 1) == 36.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 0, 2) == 42.0);
+    Assert.assertTrue(r.getRowColumnD(0, 0) == 30.0);
+    Assert.assertTrue(r.getRowColumnD(0, 1) == 36.0);
+    Assert.assertTrue(r.getRowColumnD(0, 2) == 42.0);
 
-    Assert.assertTrue(MatrixM3x3D.get(r, 1, 0) == 66.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 1, 1) == 81.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 1, 2) == 96.0);
+    Assert.assertTrue(r.getRowColumnD(1, 0) == 66.0);
+    Assert.assertTrue(r.getRowColumnD(1, 1) == 81.0);
+    Assert.assertTrue(r.getRowColumnD(1, 2) == 96.0);
 
-    Assert.assertTrue(MatrixM3x3D.get(r, 2, 0) == 102.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 2, 1) == 126.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 2, 2) == 150.0);
+    Assert.assertTrue(r.getRowColumnD(2, 0) == 102.0);
+    Assert.assertTrue(r.getRowColumnD(2, 1) == 126.0);
+    Assert.assertTrue(r.getRowColumnD(2, 2) == 150.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
   }
 
   @Test public void testMultiplySimple()
@@ -1114,31 +1166,31 @@ import com.io7m.jtensors.VectorReadable3DType;
     final MatrixM3x3D m1 = new MatrixM3x3D(m0);
     final MatrixM3x3D mr = new MatrixM3x3D();
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     final MatrixM3x3D r = MatrixM3x3D.multiply(m0, m1, mr);
     Assert.assertSame(r, mr);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(MatrixM3x3D.get(r, 0, 0) == 30.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 0, 1) == 36.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 0, 2) == 42.0);
+    Assert.assertTrue(r.getRowColumnD(0, 0) == 30.0);
+    Assert.assertTrue(r.getRowColumnD(0, 1) == 36.0);
+    Assert.assertTrue(r.getRowColumnD(0, 2) == 42.0);
 
-    Assert.assertTrue(MatrixM3x3D.get(r, 1, 0) == 66.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 1, 1) == 81.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 1, 2) == 96.0);
+    Assert.assertTrue(r.getRowColumnD(1, 0) == 66.0);
+    Assert.assertTrue(r.getRowColumnD(1, 1) == 81.0);
+    Assert.assertTrue(r.getRowColumnD(1, 2) == 96.0);
 
-    Assert.assertTrue(MatrixM3x3D.get(r, 2, 0) == 102.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 2, 1) == 126.0);
-    Assert.assertTrue(MatrixM3x3D.get(r, 2, 2) == 150.0);
+    Assert.assertTrue(r.getRowColumnD(2, 0) == 102.0);
+    Assert.assertTrue(r.getRowColumnD(2, 1) == 126.0);
+    Assert.assertTrue(r.getRowColumnD(2, 2) == 150.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
   }
 
   @Test public void testMultiplyVectorSimple()
@@ -1157,7 +1209,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     MatrixM3x3D.set(m0, 2, 1, 8.0);
     MatrixM3x3D.set(m0, 2, 2, 9.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
 
     final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
     final VectorM3D out = new VectorM3D();
@@ -1169,7 +1221,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     Assert.assertTrue(out.getYD() == 32.0);
     Assert.assertTrue(out.getZD() == 50.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
   }
 
   @Test public void testMultiplyZero()
@@ -1180,26 +1232,26 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     MatrixM3x3D.setZero(m1);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     final MatrixM3x3D r = MatrixM3x3D.multiply(m0, m1, mr);
     Assert.assertSame(mr, r);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
-        Assert.assertTrue(mr.get(row, column) == 0.0);
+        Assert.assertTrue(mr.getRowColumnD(row, column) == 0.0);
       }
     }
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -1207,7 +1259,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     testOutOfRangeNegativeColumn()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
-    m.get(0, -1);
+    m.getRowColumnD(0, -1);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -1215,7 +1267,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     testOutOfRangeNegativeRow()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
-    m.get(-1, 0);
+    m.getRowColumnD(-1, 0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -1223,7 +1275,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     testOutOfRangeOverflowColumn()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
-    m.get(0, 3);
+    m.getRowColumnD(0, 3);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -1231,7 +1283,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     testOutOfRangeOverflowRow()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
-    m.get(3, 0);
+    m.getRowColumnD(3, 0);
   }
 
   /**
@@ -1281,8 +1333,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
       for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 3; ++col) {
-          final double mx = mi.get(row, col);
-          final double my = mt.get(row, col);
+          final double mx = mi.getRowColumnD(row, col);
+          final double my = mt.getRowColumnD(row, col);
           final boolean eq = AlmostEqualDouble.almostEqual(context, mx, my);
 
           System.out.println("mi(" + row + ", " + col + ") == " + mx);
@@ -1612,15 +1664,15 @@ import com.io7m.jtensors.VectorReadable3DType;
         MatrixM3x3D
           .rotate(Math.toRadians(45), m, MatrixM3x3DTest.AXIS_X, out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(out).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, out.getDirectDoubleBuffer().position());
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixX(context, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -1629,14 +1681,14 @@ import com.io7m.jtensors.VectorReadable3DType;
           Math.toRadians(45),
           m,
           MatrixM3x3DTest.AXIS_X);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixX(context, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1658,15 +1710,15 @@ import com.io7m.jtensors.VectorReadable3DType;
           MatrixM3x3DTest.AXIS_X,
           out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(out).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, out.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixX(context_d, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -1677,11 +1729,11 @@ import com.io7m.jtensors.VectorReadable3DType;
           m,
           MatrixM3x3DTest.AXIS_X);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       MatrixM3x3DTest.isRotationMatrixX(context_d, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1693,14 +1745,14 @@ import com.io7m.jtensors.VectorReadable3DType;
     {
       final MatrixM3x3D r =
         MatrixM3x3D.makeRotation(Math.toRadians(45), MatrixM3x3DTest.AXIS_X);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixX(context_d, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1716,14 +1768,14 @@ import com.io7m.jtensors.VectorReadable3DType;
         MatrixM3x3D
           .rotate(Math.toRadians(45), m, MatrixM3x3DTest.AXIS_Y, out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixY(context, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -1732,13 +1784,13 @@ import com.io7m.jtensors.VectorReadable3DType;
           Math.toRadians(45),
           m,
           MatrixM3x3DTest.AXIS_Y);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixY(context, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1759,14 +1811,14 @@ import com.io7m.jtensors.VectorReadable3DType;
           MatrixM3x3DTest.AXIS_Y,
           out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixY(context_d, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -1776,13 +1828,13 @@ import com.io7m.jtensors.VectorReadable3DType;
           Math.toRadians(45),
           m,
           MatrixM3x3DTest.AXIS_Y);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixY(context_d, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1794,14 +1846,14 @@ import com.io7m.jtensors.VectorReadable3DType;
     {
       final MatrixM3x3D r =
         MatrixM3x3D.makeRotation(Math.toRadians(45), MatrixM3x3DTest.AXIS_Y);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixY(context, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1817,14 +1869,14 @@ import com.io7m.jtensors.VectorReadable3DType;
         MatrixM3x3D
           .rotate(Math.toRadians(45), m, MatrixM3x3DTest.AXIS_Z, out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixZ(context_d, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -1833,14 +1885,14 @@ import com.io7m.jtensors.VectorReadable3DType;
           Math.toRadians(45),
           m,
           MatrixM3x3DTest.AXIS_Z);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixZ(context_d, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1862,14 +1914,14 @@ import com.io7m.jtensors.VectorReadable3DType;
           MatrixM3x3DTest.AXIS_Z,
           out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixZ(context_d, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -1879,14 +1931,14 @@ import com.io7m.jtensors.VectorReadable3DType;
           Math.toRadians(45),
           m,
           MatrixM3x3DTest.AXIS_Z);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixZ(context_d, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1898,14 +1950,14 @@ import com.io7m.jtensors.VectorReadable3DType;
     {
       final MatrixM3x3D r =
         MatrixM3x3D.makeRotation(Math.toRadians(45), MatrixM3x3DTest.AXIS_Z);
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
       MatrixM3x3DTest.isRotationMatrixZ(context_d, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1919,46 +1971,46 @@ import com.io7m.jtensors.VectorReadable3DType;
     Assert.assertTrue(v.getYD() == 0.0);
     Assert.assertTrue(v.getZD() == 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     MatrixM3x3D.row(m, 1, v);
     Assert.assertTrue(v.getXD() == 0.0);
     Assert.assertTrue(v.getYD() == 1.0);
     Assert.assertTrue(v.getZD() == 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     MatrixM3x3D.row(m, 2, v);
     Assert.assertTrue(v.getXD() == 0.0);
     Assert.assertTrue(v.getYD() == 0.0);
     Assert.assertTrue(v.getZD() == 1.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testRow3D()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final VectorM3D v = new VectorM3D();
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     m.getRow3D(0, v);
     Assert.assertTrue(v.getXD() == 1.0);
     Assert.assertTrue(v.getYD() == 0.0);
     Assert.assertTrue(v.getZD() == 0.0);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     m.getRow3D(1, v);
     Assert.assertTrue(v.getXD() == 0.0);
     Assert.assertTrue(v.getYD() == 1.0);
     Assert.assertTrue(v.getZD() == 0.0);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     m.getRow3D(2, v);
     Assert.assertTrue(v.getXD() == 0.0);
     Assert.assertTrue(v.getYD() == 0.0);
     Assert.assertTrue(v.getZD() == 1.0);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -2004,24 +2056,24 @@ import com.io7m.jtensors.VectorReadable3DType;
       }
     }
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     final MatrixM3x3D mk = MatrixM3x3D.scale(m0, 5.0, mr);
     Assert.assertSame(mr, mk);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 3.0);
-        Assert.assertTrue(mr.get(row, column) == 15.0);
+        Assert.assertTrue(m0.getRowColumnD(row, column) == 3.0);
+        Assert.assertTrue(mr.getRowColumnD(row, column) == 15.0);
       }
     }
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
   }
 
   @Test public void testScaleMutate()
@@ -2034,23 +2086,23 @@ import com.io7m.jtensors.VectorReadable3DType;
       }
     }
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     final MatrixM3x3D mr = MatrixM3x3D.scaleInPlace(m, 5.0);
     Assert.assertSame(mr, m);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
-        Assert.assertTrue(m.get(row, column) == 15.0);
-        Assert.assertTrue(mr.get(row, column) == 15.0);
+        Assert.assertTrue(m.getRowColumnD(row, column) == 15.0);
+        Assert.assertTrue(mr.getRowColumnD(row, column) == 15.0);
       }
     }
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
   }
 
   @Test public void testScaleRow()
@@ -2070,51 +2122,51 @@ import com.io7m.jtensors.VectorReadable3DType;
     m0.set(2, 1, 10.0);
     m0.set(2, 2, 11.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
 
     MatrixM3x3D.scaleRow(m0, 0, 2.0, m1);
     MatrixM3x3D.scaleRow(m0, 1, 4.0, m1);
     MatrixM3x3D.scaleRow(m0, 2, 8.0, m1);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 2.0);
-    Assert.assertTrue(m1.get(0, 1) == 4.0);
-    Assert.assertTrue(m1.get(0, 2) == 6.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 2.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 4.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 6.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 20.0);
-    Assert.assertTrue(m1.get(1, 1) == 24.0);
-    Assert.assertTrue(m1.get(1, 2) == 28.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 20.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 24.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 28.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 72.0);
-    Assert.assertTrue(m1.get(2, 1) == 80.0);
-    Assert.assertTrue(m1.get(2, 2) == 88.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 72.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 80.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 88.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM3x3D.scaleRowInPlace(m0, 0, 2.0);
     MatrixM3x3D.scaleRowInPlace(m0, 1, 4.0);
     MatrixM3x3D.scaleRowInPlace(m0, 2, 8.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m0.get(0, 0) == 2.0);
-    Assert.assertTrue(m0.get(0, 1) == 4.0);
-    Assert.assertTrue(m0.get(0, 2) == 6.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 0) == 2.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 1) == 4.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 2) == 6.0);
 
-    Assert.assertTrue(m0.get(1, 0) == 20.0);
-    Assert.assertTrue(m0.get(1, 1) == 24.0);
-    Assert.assertTrue(m0.get(1, 2) == 28.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 0) == 20.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 1) == 24.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 2) == 28.0);
 
-    Assert.assertTrue(m0.get(2, 0) == 72.0);
-    Assert.assertTrue(m0.get(2, 1) == 80.0);
-    Assert.assertTrue(m0.get(2, 2) == 88.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 0) == 72.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 1) == 80.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 2) == 88.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -2155,50 +2207,50 @@ import com.io7m.jtensors.VectorReadable3DType;
   {
     final MatrixM3x3D m = new MatrixM3x3D();
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m.set(0, 0, 3.0).get(0, 0) == 3.0);
-    Assert.assertTrue(m.set(0, 1, 5.0).get(0, 1) == 5.0);
-    Assert.assertTrue(m.set(0, 2, 7.0).get(0, 2) == 7.0);
+    Assert.assertTrue(m.set(0, 0, 3.0).getRowColumnD(0, 0) == 3.0);
+    Assert.assertTrue(m.set(0, 1, 5.0).getRowColumnD(0, 1) == 5.0);
+    Assert.assertTrue(m.set(0, 2, 7.0).getRowColumnD(0, 2) == 7.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m.set(1, 0, 13.0).get(1, 0) == 13.0);
-    Assert.assertTrue(m.set(1, 1, 17.0).get(1, 1) == 17.0);
-    Assert.assertTrue(m.set(1, 2, 19.0).get(1, 2) == 19.0);
+    Assert.assertTrue(m.set(1, 0, 13.0).getRowColumnD(1, 0) == 13.0);
+    Assert.assertTrue(m.set(1, 1, 17.0).getRowColumnD(1, 1) == 17.0);
+    Assert.assertTrue(m.set(1, 2, 19.0).getRowColumnD(1, 2) == 19.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m.set(2, 0, 29.0).get(2, 0) == 29.0);
-    Assert.assertTrue(m.set(2, 1, 31.0).get(2, 1) == 31.0);
-    Assert.assertTrue(m.set(2, 2, 37.0).get(2, 2) == 37.0);
+    Assert.assertTrue(m.set(2, 0, 29.0).getRowColumnD(2, 0) == 29.0);
+    Assert.assertTrue(m.set(2, 1, 31.0).getRowColumnD(2, 1) == 31.0);
+    Assert.assertTrue(m.set(2, 2, 37.0).getRowColumnD(2, 2) == 37.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testSetGetInterfaceIdentity()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     Assert.assertTrue(m.set(0, 0, 3.0).getRowColumnD(0, 0) == 3.0);
     Assert.assertTrue(m.set(0, 1, 5.0).getRowColumnD(0, 1) == 5.0);
     Assert.assertTrue(m.set(0, 2, 7.0).getRowColumnD(0, 2) == 7.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     Assert.assertTrue(m.set(1, 0, 13.0).getRowColumnD(1, 0) == 13.0);
     Assert.assertTrue(m.set(1, 1, 17.0).getRowColumnD(1, 1) == 17.0);
     Assert.assertTrue(m.set(1, 2, 19.0).getRowColumnD(1, 2) == 19.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     Assert.assertTrue(m.set(2, 0, 29.0).getRowColumnD(2, 0) == 29.0);
     Assert.assertTrue(m.set(2, 1, 31.0).getRowColumnD(2, 1) == 31.0);
     Assert.assertTrue(m.set(2, 2, 37.0).getRowColumnD(2, 2) == 37.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testStorage()
@@ -2217,10 +2269,10 @@ import com.io7m.jtensors.VectorReadable3DType;
     m.set(2, 1, 201);
     m.set(2, 2, 202);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     {
-      final DoubleBuffer b = MatrixM3x3D.doubleBuffer(m);
+      final DoubleBuffer b = m.getDirectDoubleBuffer();
 
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
       Assert.assertEquals(0, b.position());
@@ -2249,8 +2301,8 @@ import com.io7m.jtensors.VectorReadable3DType;
     Assert.assertEquals(m0.toString(), m1.toString());
     Assert.assertFalse(m0.toString().equals(m2.toString()));
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Test public void testTrace()
@@ -2265,25 +2317,25 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorM2D v = new VectorM2D(0, 0);
 
     MatrixM3x3D.makeTranslation2D(v, m);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(1.0, m.get(0, 0), 0.0);
-    Assert.assertEquals(0.0, m.get(0, 1), 0.0);
-    Assert.assertEquals(0.0, m.get(0, 2), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(0, 0), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(0, 1), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(0, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(0.0, m.get(1, 0), 0.0);
-    Assert.assertEquals(1.0, m.get(1, 1), 0.0);
-    Assert.assertEquals(0.0, m.get(1, 2), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(1, 0), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(1, 1), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(1, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(0.0, m.get(2, 0), 0.0);
-    Assert.assertEquals(0.0, m.get(2, 1), 0.0);
-    Assert.assertEquals(1.0, m.get(2, 2), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(2, 0), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(2, 1), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(2, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testTranslate2DMakeSimple()
@@ -2292,25 +2344,25 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorM2D v = new VectorM2D(3, 7);
 
     MatrixM3x3D.makeTranslation2D(v, m);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(1.0, m.get(0, 0), 0.0);
-    Assert.assertEquals(0.0, m.get(0, 1), 0.0);
-    Assert.assertEquals(3.0, m.get(0, 2), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(0, 0), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(0, 1), 0.0);
+    Assert.assertEquals(3.0, m.getRowColumnD(0, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(0.0, m.get(1, 0), 0.0);
-    Assert.assertEquals(1.0, m.get(1, 1), 0.0);
-    Assert.assertEquals(7.0, m.get(1, 2), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(1, 0), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(1, 1), 0.0);
+    Assert.assertEquals(7.0, m.getRowColumnD(1, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(0.0, m.get(2, 0), 0.0);
-    Assert.assertEquals(0.0, m.get(2, 1), 0.0);
-    Assert.assertEquals(1.0, m.get(2, 2), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(2, 0), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(2, 1), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(2, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testTranslate2IMakeIdentity()
@@ -2319,25 +2371,25 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorM2I v = new VectorM2I(0, 0);
 
     MatrixM3x3D.makeTranslation2I(v, m);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(1.0, m.get(0, 0), 0.0);
-    Assert.assertEquals(0.0, m.get(0, 1), 0.0);
-    Assert.assertEquals(0.0, m.get(0, 2), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(0, 0), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(0, 1), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(0, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(0.0, m.get(1, 0), 0.0);
-    Assert.assertEquals(1.0, m.get(1, 1), 0.0);
-    Assert.assertEquals(0.0, m.get(1, 2), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(1, 0), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(1, 1), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(1, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(0.0, m.get(2, 0), 0.0);
-    Assert.assertEquals(0.0, m.get(2, 1), 0.0);
-    Assert.assertEquals(1.0, m.get(2, 2), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(2, 0), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(2, 1), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(2, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testTranslate2IMakeSimple()
@@ -2346,25 +2398,25 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorM2I v = new VectorM2I(3, 7);
 
     MatrixM3x3D.makeTranslation2I(v, m);
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(1.0, m.get(0, 0), 0.0);
-    Assert.assertEquals(0.0, m.get(0, 1), 0.0);
-    Assert.assertEquals(3.0, m.get(0, 2), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(0, 0), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(0, 1), 0.0);
+    Assert.assertEquals(3.0, m.getRowColumnD(0, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(0.0, m.get(1, 0), 0.0);
-    Assert.assertEquals(1.0, m.get(1, 1), 0.0);
-    Assert.assertEquals(7.0, m.get(1, 2), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(1, 0), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(1, 1), 0.0);
+    Assert.assertEquals(7.0, m.getRowColumnD(1, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertEquals(0.0, m.get(2, 0), 0.0);
-    Assert.assertEquals(0.0, m.get(2, 1), 0.0);
-    Assert.assertEquals(1.0, m.get(2, 2), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(2, 0), 0.0);
+    Assert.assertEquals(0.0, m.getRowColumnD(2, 1), 0.0);
+    Assert.assertEquals(1.0, m.getRowColumnD(2, 2), 0.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Test public void testTranslateSimple2D()
@@ -2377,58 +2429,58 @@ import com.io7m.jtensors.VectorReadable3DType;
       final MatrixM3x3D r = MatrixM3x3D.translateByVector2D(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
-      Assert.assertEquals(1.0, r.get(0, 2), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(0, 1), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(0, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
-      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
-      Assert.assertEquals(2.0, r.get(1, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(1, 1), 0.0);
+      Assert.assertEquals(2.0, r.getRowColumnD(1, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
-      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(2, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM3x3D r = MatrixM3x3D.translateByVector2D(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
-      Assert.assertEquals(2.0, r.get(0, 2), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(0, 1), 0.0);
+      Assert.assertEquals(2.0, r.getRowColumnD(0, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
-      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
-      Assert.assertEquals(4.0, r.get(1, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(1, 1), 0.0);
+      Assert.assertEquals(4.0, r.getRowColumnD(1, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
-      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(2, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2441,58 +2493,58 @@ import com.io7m.jtensors.VectorReadable3DType;
       final MatrixM3x3D r = MatrixM3x3D.translateByVector2DInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
-      Assert.assertEquals(1.0, r.get(0, 2), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(0, 1), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(0, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
-      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
-      Assert.assertEquals(2.0, r.get(1, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(1, 1), 0.0);
+      Assert.assertEquals(2.0, r.getRowColumnD(1, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
-      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(2, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM3x3D r = MatrixM3x3D.translateByVector2DInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
-      Assert.assertEquals(2.0, r.get(0, 2), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(0, 1), 0.0);
+      Assert.assertEquals(2.0, r.getRowColumnD(0, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
-      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
-      Assert.assertEquals(4.0, r.get(1, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(1, 1), 0.0);
+      Assert.assertEquals(4.0, r.getRowColumnD(1, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
-      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(2, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2506,58 +2558,58 @@ import com.io7m.jtensors.VectorReadable3DType;
       final MatrixM3x3D r = MatrixM3x3D.translateByVector2I(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
-      Assert.assertEquals(1.0, r.get(0, 2), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(0, 1), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(0, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
-      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
-      Assert.assertEquals(2.0, r.get(1, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(1, 1), 0.0);
+      Assert.assertEquals(2.0, r.getRowColumnD(1, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
-      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(2, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM3x3D r = MatrixM3x3D.translateByVector2I(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
-      Assert.assertEquals(2.0, r.get(0, 2), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(0, 1), 0.0);
+      Assert.assertEquals(2.0, r.getRowColumnD(0, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
-      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
-      Assert.assertEquals(4.0, r.get(1, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(1, 1), 0.0);
+      Assert.assertEquals(4.0, r.getRowColumnD(1, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
-      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
-      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.getRowColumnD(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.getRowColumnD(2, 2), 0.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2570,55 +2622,55 @@ import com.io7m.jtensors.VectorReadable3DType;
       final MatrixM3x3D r = MatrixM3x3D.translateByVector2IInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 1.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 2.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM3x3D r = MatrixM3x3D.translateByVector2IInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 2.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 4.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 4.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
 
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2630,7 +2682,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     MatrixM3x3D.translateByVector2D(m, new VectorI2D(1.0, 2.0), out);
 
     {
-      final DoubleBuffer b = MatrixM3x3D.doubleBuffer(out);
+      final DoubleBuffer b = out.getDirectDoubleBuffer();
 
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
       Assert.assertEquals(0, b.position());
@@ -2664,56 +2716,56 @@ import com.io7m.jtensors.VectorReadable3DType;
     m.set(2, 1, 9.0);
     m.set(2, 2, 10.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
     final MatrixM3x3D k = MatrixM3x3D.transpose(m, r);
     Assert.assertSame(k, r);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m.get(0, 0) == 0.0);
-    Assert.assertTrue(m.get(0, 1) == 1.0);
-    Assert.assertTrue(m.get(0, 2) == 2.0);
+    Assert.assertTrue(m.getRowColumnD(0, 0) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(0, 1) == 1.0);
+    Assert.assertTrue(m.getRowColumnD(0, 2) == 2.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m.get(1, 0) == 4.0);
-    Assert.assertTrue(m.get(1, 1) == 5.0);
-    Assert.assertTrue(m.get(1, 2) == 6.0);
+    Assert.assertTrue(m.getRowColumnD(1, 0) == 4.0);
+    Assert.assertTrue(m.getRowColumnD(1, 1) == 5.0);
+    Assert.assertTrue(m.getRowColumnD(1, 2) == 6.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m.get(2, 0) == 8.0);
-    Assert.assertTrue(m.get(2, 1) == 9.0);
-    Assert.assertTrue(m.get(2, 2) == 10.0);
+    Assert.assertTrue(m.getRowColumnD(2, 0) == 8.0);
+    Assert.assertTrue(m.getRowColumnD(2, 1) == 9.0);
+    Assert.assertTrue(m.getRowColumnD(2, 2) == 10.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(r.get(0, 0) == 0.0);
-    Assert.assertTrue(r.get(0, 1) == 4.0);
-    Assert.assertTrue(r.get(0, 2) == 8.0);
+    Assert.assertTrue(r.getRowColumnD(0, 0) == 0.0);
+    Assert.assertTrue(r.getRowColumnD(0, 1) == 4.0);
+    Assert.assertTrue(r.getRowColumnD(0, 2) == 8.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(r.get(1, 0) == 1.0);
-    Assert.assertTrue(r.get(1, 1) == 5.0);
-    Assert.assertTrue(r.get(1, 2) == 9.0);
+    Assert.assertTrue(r.getRowColumnD(1, 0) == 1.0);
+    Assert.assertTrue(r.getRowColumnD(1, 1) == 5.0);
+    Assert.assertTrue(r.getRowColumnD(1, 2) == 9.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(r.get(2, 0) == 2.0);
-    Assert.assertTrue(r.get(2, 1) == 6.0);
-    Assert.assertTrue(r.get(2, 2) == 10.0);
+    Assert.assertTrue(r.getRowColumnD(2, 0) == 2.0);
+    Assert.assertTrue(r.getRowColumnD(2, 1) == 6.0);
+    Assert.assertTrue(r.getRowColumnD(2, 2) == 10.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
   }
 
   @Test public void testTransposeMutate()
@@ -2732,25 +2784,25 @@ import com.io7m.jtensors.VectorReadable3DType;
     m.set(2, 1, 9.0);
     m.set(2, 2, 10.0);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     final MatrixM3x3D r = MatrixM3x3D.transposeInPlace(m);
     Assert.assertSame(m, r);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(r.get(0, 0) == 0.0);
-    Assert.assertTrue(r.get(0, 1) == 4.0);
-    Assert.assertTrue(r.get(0, 2) == 8.0);
+    Assert.assertTrue(r.getRowColumnD(0, 0) == 0.0);
+    Assert.assertTrue(r.getRowColumnD(0, 1) == 4.0);
+    Assert.assertTrue(r.getRowColumnD(0, 2) == 8.0);
 
-    Assert.assertTrue(r.get(1, 0) == 1.0);
-    Assert.assertTrue(r.get(1, 1) == 5.0);
-    Assert.assertTrue(r.get(1, 2) == 9.0);
+    Assert.assertTrue(r.getRowColumnD(1, 0) == 1.0);
+    Assert.assertTrue(r.getRowColumnD(1, 1) == 5.0);
+    Assert.assertTrue(r.getRowColumnD(1, 2) == 9.0);
 
-    Assert.assertTrue(r.get(2, 0) == 2.0);
-    Assert.assertTrue(r.get(2, 1) == 6.0);
-    Assert.assertTrue(r.get(2, 2) == 10.0);
+    Assert.assertTrue(r.getRowColumnD(2, 0) == 2.0);
+    Assert.assertTrue(r.getRowColumnD(2, 1) == 6.0);
+    Assert.assertTrue(r.getRowColumnD(2, 2) == 10.0);
   }
 
   @Test public void testZero()
@@ -2758,14 +2810,14 @@ import com.io7m.jtensors.VectorReadable3DType;
     final MatrixM3x3D m = new MatrixM3x3D();
     MatrixM3x3D.setZero(m);
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
-        Assert.assertTrue(m.get(row, column) == 0.0);
+        Assert.assertTrue(m.getRowColumnD(row, column) == 0.0);
       }
     }
 
-    Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 }

@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -685,8 +685,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mqr.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mqr.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(ec, x, y);
         Assert.assertTrue(eq);
       }
@@ -721,8 +721,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mqr.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mqr.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(ec, x, y);
         Assert.assertTrue(eq);
       }
@@ -774,8 +774,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
       for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 3; ++col) {
-          final double x = ml.get(row, col);
-          final double y = mq.get(row, col);
+          final double x = ml.getRowColumnD(row, col);
+          final double y = mq.getRowColumnD(row, col);
 
           final boolean eq = AlmostEqualDouble.almostEqual(ec, x, y);
           Assert.assertTrue(eq);
@@ -909,7 +909,7 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -940,7 +940,7 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -971,7 +971,7 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -1002,7 +1002,7 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -1033,7 +1033,7 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -1064,7 +1064,7 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -1258,8 +1258,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1290,8 +1290,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1322,8 +1322,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1337,17 +1337,17 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     QuaternionM4D.makeRotationMatrix3x3(q, m);
 
-    Assert.assertTrue(1.0 == m.get(0, 0));
-    Assert.assertTrue(0.0 == m.get(0, 1));
-    Assert.assertTrue(0.0 == m.get(0, 2));
+    Assert.assertTrue(1.0 == m.getRowColumnD(0, 0));
+    Assert.assertTrue(0.0 == m.getRowColumnD(0, 1));
+    Assert.assertTrue(0.0 == m.getRowColumnD(0, 2));
 
-    Assert.assertTrue(0.0 == m.get(1, 0));
-    Assert.assertTrue(1.0 == m.get(1, 1));
-    Assert.assertTrue(0.0 == m.get(1, 2));
+    Assert.assertTrue(0.0 == m.getRowColumnD(1, 0));
+    Assert.assertTrue(1.0 == m.getRowColumnD(1, 1));
+    Assert.assertTrue(0.0 == m.getRowColumnD(1, 2));
 
-    Assert.assertTrue(0.0 == m.get(2, 0));
-    Assert.assertTrue(0.0 == m.get(2, 1));
-    Assert.assertTrue(1.0 == m.get(2, 2));
+    Assert.assertTrue(0.0 == m.getRowColumnD(2, 0));
+    Assert.assertTrue(0.0 == m.getRowColumnD(2, 1));
+    Assert.assertTrue(1.0 == m.getRowColumnD(2, 2));
   }
 
   @Override @Test public void testMakeMatrix3x3_Minus45X()
@@ -1374,8 +1374,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1406,8 +1406,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1438,8 +1438,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1470,8 +1470,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1502,8 +1502,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1534,8 +1534,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1549,25 +1549,25 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     QuaternionM4D.makeRotationMatrix4x4(q, m);
 
-    Assert.assertTrue(1.0 == m.get(0, 0));
-    Assert.assertTrue(0.0 == m.get(0, 1));
-    Assert.assertTrue(0.0 == m.get(0, 2));
-    Assert.assertTrue(0.0 == m.get(0, 3));
+    Assert.assertTrue(1.0 == m.getRowColumnD(0, 0));
+    Assert.assertTrue(0.0 == m.getRowColumnD(0, 1));
+    Assert.assertTrue(0.0 == m.getRowColumnD(0, 2));
+    Assert.assertTrue(0.0 == m.getRowColumnD(0, 3));
 
-    Assert.assertTrue(0.0 == m.get(1, 0));
-    Assert.assertTrue(1.0 == m.get(1, 1));
-    Assert.assertTrue(0.0 == m.get(1, 2));
-    Assert.assertTrue(0.0 == m.get(1, 3));
+    Assert.assertTrue(0.0 == m.getRowColumnD(1, 0));
+    Assert.assertTrue(1.0 == m.getRowColumnD(1, 1));
+    Assert.assertTrue(0.0 == m.getRowColumnD(1, 2));
+    Assert.assertTrue(0.0 == m.getRowColumnD(1, 3));
 
-    Assert.assertTrue(0.0 == m.get(2, 0));
-    Assert.assertTrue(0.0 == m.get(2, 1));
-    Assert.assertTrue(1.0 == m.get(2, 2));
-    Assert.assertTrue(0.0 == m.get(2, 3));
+    Assert.assertTrue(0.0 == m.getRowColumnD(2, 0));
+    Assert.assertTrue(0.0 == m.getRowColumnD(2, 1));
+    Assert.assertTrue(1.0 == m.getRowColumnD(2, 2));
+    Assert.assertTrue(0.0 == m.getRowColumnD(2, 3));
 
-    Assert.assertTrue(0.0 == m.get(3, 0));
-    Assert.assertTrue(0.0 == m.get(3, 1));
-    Assert.assertTrue(0.0 == m.get(3, 2));
-    Assert.assertTrue(1.0 == m.get(3, 3));
+    Assert.assertTrue(0.0 == m.getRowColumnD(3, 0));
+    Assert.assertTrue(0.0 == m.getRowColumnD(3, 1));
+    Assert.assertTrue(0.0 == m.getRowColumnD(3, 2));
+    Assert.assertTrue(1.0 == m.getRowColumnD(3, 3));
   }
 
   @Override @Test public void testMakeMatrix4x4_Minus45X()
@@ -1594,8 +1594,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1626,8 +1626,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1658,8 +1658,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
+        final double x = mr.getRowColumnD(row, col);
+        final double y = mq.getRowColumnD(row, col);
         eq = AlmostEqualDouble.almostEqual(context_d, x, y);
         Assert.assertTrue(eq);
       }
@@ -1697,7 +1697,7 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -1747,7 +1747,7 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -1803,7 +1803,7 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -1858,7 +1858,7 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 

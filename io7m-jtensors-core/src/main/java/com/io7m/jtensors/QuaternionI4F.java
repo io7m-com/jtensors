@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -376,15 +376,15 @@ public final class QuaternionI4F implements QuaternionReadable4FType
   public static QuaternionI4F makeFromRotationMatrix3x3(
     final MatrixReadable3x3FType m)
   {
-    final double m00 = MatrixM3x3F.get(m, 0, 0);
-    final double m01 = MatrixM3x3F.get(m, 0, 1);
-    final double m02 = MatrixM3x3F.get(m, 0, 2);
-    final double m10 = MatrixM3x3F.get(m, 1, 0);
-    final double m11 = MatrixM3x3F.get(m, 1, 1);
-    final double m12 = MatrixM3x3F.get(m, 1, 2);
-    final double m20 = MatrixM3x3F.get(m, 2, 0);
-    final double m21 = MatrixM3x3F.get(m, 2, 1);
-    final double m22 = MatrixM3x3F.get(m, 2, 2);
+    final double m00 = m.getRowColumnF(0, 0);
+    final double m01 = m.getRowColumnF(0, 1);
+    final double m02 = m.getRowColumnF(0, 2);
+    final double m10 = m.getRowColumnF(1, 0);
+    final double m11 = m.getRowColumnF(1, 1);
+    final double m12 = m.getRowColumnF(1, 2);
+    final double m20 = m.getRowColumnF(2, 0);
+    final double m21 = m.getRowColumnF(2, 1);
+    final double m22 = m.getRowColumnF(2, 2);
 
     final double trace = MatrixM3x3F.trace(m);
 
@@ -439,15 +439,15 @@ public final class QuaternionI4F implements QuaternionReadable4FType
   public static QuaternionI4F makeFromRotationMatrix4x4(
     final MatrixReadable4x4FType m)
   {
-    final double m00 = MatrixM4x4F.get(m, 0, 0);
-    final double m01 = MatrixM4x4F.get(m, 0, 1);
-    final double m02 = MatrixM4x4F.get(m, 0, 2);
-    final double m10 = MatrixM4x4F.get(m, 1, 0);
-    final double m11 = MatrixM4x4F.get(m, 1, 1);
-    final double m12 = MatrixM4x4F.get(m, 1, 2);
-    final double m20 = MatrixM4x4F.get(m, 2, 0);
-    final double m21 = MatrixM4x4F.get(m, 2, 1);
-    final double m22 = MatrixM4x4F.get(m, 2, 2);
+    final double m00 = m.getRowColumnF(0, 0);
+    final double m01 = m.getRowColumnF(0, 1);
+    final double m02 = m.getRowColumnF(0, 2);
+    final double m10 = m.getRowColumnF(1, 0);
+    final double m11 = m.getRowColumnF(1, 1);
+    final double m12 = m.getRowColumnF(1, 2);
+    final double m20 = m.getRowColumnF(2, 0);
+    final double m21 = m.getRowColumnF(2, 1);
+    final double m22 = m.getRowColumnF(2, 2);
 
     /**
      * Explicitly ignore the bottom right element of the matrix, as this

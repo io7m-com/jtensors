@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -45,13 +45,13 @@ import com.io7m.jtensors.VectorM2F;
 
     final MatrixM2x2F mk = MatrixM2x2F.add(m0, m1, mr);
     Assert.assertSame(mr, mk);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(mk).position());
+    Assert.assertEquals(0, mk.getDirectFloatBuffer().position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 1.0);
-        Assert.assertTrue(m1.get(row, column) == 3.0);
-        Assert.assertTrue(mr.get(row, column) == 4.0);
+        Assert.assertTrue(m0.getRowColumnF(row, column) == 1.0);
+        Assert.assertTrue(m1.getRowColumnF(row, column) == 3.0);
+        Assert.assertTrue(mr.getRowColumnF(row, column) == 4.0);
       }
     }
   }
@@ -70,13 +70,13 @@ import com.io7m.jtensors.VectorM2F;
 
     final MatrixM2x2F mr = MatrixM2x2F.addInPlace(m0, m1);
     Assert.assertSame(mr, m0);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(mr).position());
+    Assert.assertEquals(0, mr.getDirectFloatBuffer().position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 4.0f);
-        Assert.assertTrue(mr.get(row, column) == 4.0f);
-        Assert.assertTrue(m1.get(row, column) == 3.0f);
+        Assert.assertTrue(m0.getRowColumnF(row, column) == 4.0f);
+        Assert.assertTrue(mr.getRowColumnF(row, column) == 4.0f);
+        Assert.assertTrue(m1.getRowColumnF(row, column) == 3.0f);
       }
     }
   }
@@ -93,22 +93,22 @@ import com.io7m.jtensors.VectorM2F;
     m0.set(1, 1, 5.0f);
 
     MatrixM2x2F.addRowScaled(m0, 0, 1, 1, 2.0f, m1);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m1).position());
+    Assert.assertEquals(0, m1.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 1.0);
-    Assert.assertTrue(m1.get(0, 1) == 0.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 1) == 0.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 13.0);
-    Assert.assertTrue(m1.get(1, 1) == 13.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 0) == 13.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 1) == 13.0);
 
     MatrixM2x2F.addRowScaledInPlace(m0, 0, 1, 1, 2.0f);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m0.get(0, 0) == 3.0);
-    Assert.assertTrue(m0.get(0, 1) == 3.0);
+    Assert.assertTrue(m0.getRowColumnF(0, 0) == 3.0);
+    Assert.assertTrue(m0.getRowColumnF(0, 1) == 3.0);
 
-    Assert.assertTrue(m0.get(1, 0) == 13.0);
-    Assert.assertTrue(m0.get(1, 1) == 13.0);
+    Assert.assertTrue(m0.getRowColumnF(1, 0) == 13.0);
+    Assert.assertTrue(m0.getRowColumnF(1, 1) == 13.0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -162,7 +162,7 @@ import com.io7m.jtensors.VectorM2F;
   @Test public void testBufferEndianness()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
-    final FloatBuffer b = MatrixM2x2F.floatBuffer(m);
+    final FloatBuffer b = m.getDirectFloatBuffer();
 
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
   }
@@ -179,13 +179,13 @@ import com.io7m.jtensors.VectorM2F;
     m0.set(1, 1, 5.0f);
 
     MatrixM2x2F.copy(m0, m1);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m1).position());
+    Assert.assertEquals(0, m1.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 1.0);
-    Assert.assertTrue(m1.get(0, 1) == 2.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 1) == 2.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 4.0);
-    Assert.assertTrue(m1.get(1, 1) == 5.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 0) == 4.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 1) == 5.0);
   }
 
   @Test public void testDeterminantIdentity()
@@ -262,7 +262,7 @@ import com.io7m.jtensors.VectorM2F;
         final MatrixM2x2F m1 = new MatrixM2x2F();
         m1.set(row, col, 256);
         Assert.assertFalse(m0.equals(m1));
-        Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m1).position());
+        Assert.assertEquals(0, m1.getDirectFloatBuffer().position());
       }
     }
   }
@@ -278,24 +278,24 @@ import com.io7m.jtensors.VectorM2F;
     m0.set(1, 1, 4.0f);
 
     MatrixM2x2F.exchangeRows(m0, 0, 1, m1);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectFloatBuffer().position());
+    Assert.assertEquals(0, m1.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 3.0);
-    Assert.assertTrue(m1.get(0, 1) == 4.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 0) == 3.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 1) == 4.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 1.0);
-    Assert.assertTrue(m1.get(1, 1) == 2.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 1) == 2.0);
 
     MatrixM2x2F.exchangeRowsInPlace(m1, 0, 1);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectFloatBuffer().position());
+    Assert.assertEquals(0, m1.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 1.0);
-    Assert.assertTrue(m1.get(0, 1) == 2.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 1) == 2.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 3.0);
-    Assert.assertTrue(m1.get(1, 1) == 4.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 0) == 3.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 1) == 4.0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -354,25 +354,25 @@ import com.io7m.jtensors.VectorM2F;
     m0.set(1, 1, 13.0f);
 
     final MatrixM2x2F m1 = new MatrixM2x2F(m0);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectFloatBuffer().position());
+    Assert.assertEquals(0, m1.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 3.0);
-    Assert.assertTrue(m1.get(0, 1) == 5.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 0) == 3.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 1) == 5.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 11.0);
-    Assert.assertTrue(m1.get(1, 1) == 13.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 0) == 11.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 1) == 13.0);
   }
 
   @Test public void testInitializationIdentity()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
 
-    Assert.assertTrue(m.get(0, 0) == 1.0);
-    Assert.assertTrue(m.get(0, 1) == 0.0);
+    Assert.assertTrue(m.getRowColumnF(0, 0) == 1.0);
+    Assert.assertTrue(m.getRowColumnF(0, 1) == 0.0);
 
-    Assert.assertTrue(m.get(1, 0) == 0.0);
-    Assert.assertTrue(m.get(1, 1) == 1.0);
+    Assert.assertTrue(m.getRowColumnF(1, 0) == 0.0);
+    Assert.assertTrue(m.getRowColumnF(1, 1) == 1.0);
   }
 
   @Test public void testInvertIdentity()
@@ -385,13 +385,13 @@ import com.io7m.jtensors.VectorM2F;
       Assert.assertTrue(r.isSome());
       final Some<MatrixM2x2F> s = (Some<MatrixM2x2F>) r;
       final MatrixM2x2F rm = s.get();
-      Assert.assertEquals(0, MatrixM2x2F.floatBuffer(rm).position());
+      Assert.assertEquals(0, rm.getDirectFloatBuffer().position());
 
-      Assert.assertTrue(MatrixM2x2F.get(rm, 0, 0) == 1.0);
-      Assert.assertTrue(MatrixM2x2F.get(rm, 0, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnF(0, 0) == 1.0);
+      Assert.assertTrue(rm.getRowColumnF(0, 1) == 0.0);
 
-      Assert.assertTrue(MatrixM2x2F.get(rm, 1, 0) == 0.0);
-      Assert.assertTrue(MatrixM2x2F.get(rm, 1, 1) == 1.0);
+      Assert.assertTrue(rm.getRowColumnF(1, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnF(1, 1) == 1.0);
     }
 
     {
@@ -399,13 +399,13 @@ import com.io7m.jtensors.VectorM2F;
       Assert.assertTrue(r.isSome());
       final Some<MatrixM2x2F> s = (Some<MatrixM2x2F>) r;
       final MatrixM2x2F rm = s.get();
-      Assert.assertEquals(0, MatrixM2x2F.floatBuffer(rm).position());
+      Assert.assertEquals(0, rm.getDirectFloatBuffer().position());
 
-      Assert.assertTrue(MatrixM2x2F.get(rm, 0, 0) == 1.0);
-      Assert.assertTrue(MatrixM2x2F.get(rm, 0, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnF(0, 0) == 1.0);
+      Assert.assertTrue(rm.getRowColumnF(0, 1) == 0.0);
 
-      Assert.assertTrue(MatrixM2x2F.get(rm, 1, 0) == 0.0);
-      Assert.assertTrue(MatrixM2x2F.get(rm, 1, 1) == 1.0);
+      Assert.assertTrue(rm.getRowColumnF(1, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnF(1, 1) == 1.0);
     }
   }
 
@@ -425,13 +425,13 @@ import com.io7m.jtensors.VectorM2F;
       Assert.assertTrue(r.isSome());
       final Some<MatrixM2x2F> s = (Some<MatrixM2x2F>) r;
       final MatrixM2x2F rm = s.get();
-      Assert.assertEquals(0, MatrixM2x2F.floatBuffer(rm).position());
+      Assert.assertEquals(0, rm.getDirectFloatBuffer().position());
 
-      Assert.assertTrue(rm.get(0, 0) == 0.5);
-      Assert.assertTrue(rm.get(0, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnF(0, 0) == 0.5);
+      Assert.assertTrue(rm.getRowColumnF(0, 1) == 0);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(rm.get(1, 1) == 0.5);
+      Assert.assertTrue(rm.getRowColumnF(1, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnF(1, 1) == 0.5);
     }
 
     {
@@ -439,13 +439,13 @@ import com.io7m.jtensors.VectorM2F;
       Assert.assertTrue(r.isSome());
       final Some<MatrixM2x2F> s = (Some<MatrixM2x2F>) r;
       final MatrixM2x2F rm = s.get();
-      Assert.assertEquals(0, MatrixM2x2F.floatBuffer(rm).position());
+      Assert.assertEquals(0, rm.getDirectFloatBuffer().position());
 
-      Assert.assertTrue(rm.get(0, 0) == 2);
-      Assert.assertTrue(rm.get(0, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnF(0, 0) == 2);
+      Assert.assertTrue(rm.getRowColumnF(0, 1) == 0);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(rm.get(1, 1) == 2);
+      Assert.assertTrue(rm.getRowColumnF(1, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnF(1, 1) == 2);
     }
   }
 
@@ -455,7 +455,7 @@ import com.io7m.jtensors.VectorM2F;
     final MatrixM2x2F m1 = new MatrixM2x2F();
 
     MatrixM2x2F.setZero(m0);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectFloatBuffer().position());
 
     {
       final OptionType<MatrixM2x2F> r = MatrixM2x2F.invert(m0, m1);
@@ -475,12 +475,16 @@ import com.io7m.jtensors.VectorM2F;
     final MatrixM2x2F mr = new MatrixM2x2F();
     final MatrixM2x2F r = MatrixM2x2F.multiply(m0, m1, mr);
     Assert.assertSame(mr, r);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(mr).position());
+    Assert.assertEquals(0, mr.getDirectFloatBuffer().position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m0.get(row, column) == mr.get(row, column));
-        Assert.assertTrue(m1.get(row, column) == mr.get(row, column));
+        Assert.assertTrue(m0.getRowColumnF(row, column) == mr.getRowColumnF(
+          row,
+          column));
+        Assert.assertTrue(m1.getRowColumnF(row, column) == mr.getRowColumnF(
+          row,
+          column));
       }
     }
   }
@@ -492,17 +496,21 @@ import com.io7m.jtensors.VectorM2F;
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m0.get(row, column) == m1.get(row, column));
+        Assert.assertTrue(m0.getRowColumnF(row, column) == m1.getRowColumnF(
+          row,
+          column));
       }
     }
 
     final MatrixM2x2F r = MatrixM2x2F.multiply(m0, m1);
     Assert.assertSame(m0, r);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(r).position());
+    Assert.assertEquals(0, r.getDirectFloatBuffer().position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m0.get(row, column) == m1.get(row, column));
+        Assert.assertTrue(m0.getRowColumnF(row, column) == m1.getRowColumnF(
+          row,
+          column));
       }
     }
   }
@@ -519,14 +527,14 @@ import com.io7m.jtensors.VectorM2F;
     final MatrixM2x2F m1 = new MatrixM2x2F(m0);
     final MatrixM2x2F r = MatrixM2x2F.multiply(m0, m1);
     Assert.assertSame(r, m0);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(r).position());
+    Assert.assertEquals(0, r.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(MatrixM2x2F.get(r, 0, 0) == 7.0);
-    Assert.assertTrue(MatrixM2x2F.get(r, 0, 1) == 10.0);
-    Assert.assertTrue(MatrixM2x2F.get(r, 1, 0) == 15.0);
-    Assert.assertTrue(MatrixM2x2F.get(r, 1, 1) == 22.0);
+    Assert.assertTrue(r.getRowColumnF(0, 0) == 7.0);
+    Assert.assertTrue(r.getRowColumnF(0, 1) == 10.0);
+    Assert.assertTrue(r.getRowColumnF(1, 0) == 15.0);
+    Assert.assertTrue(r.getRowColumnF(1, 1) == 22.0);
 
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(r).position());
+    Assert.assertEquals(0, r.getDirectFloatBuffer().position());
   }
 
   @Test public void testMultiplySimple()
@@ -543,14 +551,14 @@ import com.io7m.jtensors.VectorM2F;
 
     final MatrixM2x2F r = MatrixM2x2F.multiply(m0, m1, mr);
     Assert.assertSame(r, mr);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(r).position());
+    Assert.assertEquals(0, r.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(MatrixM2x2F.get(r, 0, 0) == 7.0);
-    Assert.assertTrue(MatrixM2x2F.get(r, 0, 1) == 10.0);
-    Assert.assertTrue(MatrixM2x2F.get(r, 1, 0) == 15.0);
-    Assert.assertTrue(MatrixM2x2F.get(r, 1, 1) == 22.0);
+    Assert.assertTrue(r.getRowColumnF(0, 0) == 7.0);
+    Assert.assertTrue(r.getRowColumnF(0, 1) == 10.0);
+    Assert.assertTrue(r.getRowColumnF(1, 0) == 15.0);
+    Assert.assertTrue(r.getRowColumnF(1, 1) == 22.0);
 
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(r).position());
+    Assert.assertEquals(0, r.getDirectFloatBuffer().position());
   }
 
   @Test public void testMultiplyVectorSimpleND()
@@ -582,11 +590,11 @@ import com.io7m.jtensors.VectorM2F;
 
     final MatrixM2x2F r = MatrixM2x2F.multiply(m0, m1, mr);
     Assert.assertSame(mr, r);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(r).position());
+    Assert.assertEquals(0, r.getDirectFloatBuffer().position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(mr.get(row, column) == 0.0);
+        Assert.assertTrue(mr.getRowColumnF(row, column) == 0.0);
       }
     }
   }
@@ -596,7 +604,7 @@ import com.io7m.jtensors.VectorM2F;
     testOutOfRangeNegativeColumn()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
-    m.get(0, -1);
+    m.getRowColumnF(0, -1);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -604,7 +612,7 @@ import com.io7m.jtensors.VectorM2F;
     testOutOfRangeNegativeRow()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
-    m.get(-1, 0);
+    m.getRowColumnF(-1, 0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -612,7 +620,7 @@ import com.io7m.jtensors.VectorM2F;
     testOutOfRangeOverflowColumn()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
-    m.get(0, 2);
+    m.getRowColumnF(0, 2);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -620,7 +628,7 @@ import com.io7m.jtensors.VectorM2F;
     testOutOfRangeOverflowRow()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
-    m.get(2, 0);
+    m.getRowColumnF(2, 0);
   }
 
   @Test public void testRow()
@@ -666,12 +674,12 @@ import com.io7m.jtensors.VectorM2F;
 
     final MatrixM2x2F mk = MatrixM2x2F.scale(m0, 5.0f, mr);
     Assert.assertSame(mr, mk);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(mr).position());
+    Assert.assertEquals(0, mr.getDirectFloatBuffer().position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 3.0);
-        Assert.assertTrue(mr.get(row, column) == 15.0);
+        Assert.assertTrue(m0.getRowColumnF(row, column) == 3.0);
+        Assert.assertTrue(mr.getRowColumnF(row, column) == 15.0);
       }
     }
   }
@@ -688,12 +696,12 @@ import com.io7m.jtensors.VectorM2F;
 
     final MatrixM2x2F mr = MatrixM2x2F.scale(m, 5.0f);
     Assert.assertSame(mr, m);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(mr).position());
+    Assert.assertEquals(0, mr.getDirectFloatBuffer().position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m.get(row, column) == 15.0);
-        Assert.assertTrue(mr.get(row, column) == 15.0);
+        Assert.assertTrue(m.getRowColumnF(row, column) == 15.0);
+        Assert.assertTrue(mr.getRowColumnF(row, column) == 15.0);
       }
     }
   }
@@ -711,23 +719,23 @@ import com.io7m.jtensors.VectorM2F;
 
     MatrixM2x2F.scaleRow(m0, 0, 2.0f, m1);
     MatrixM2x2F.scaleRow(m0, 1, 4.0f, m1);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m1).position());
+    Assert.assertEquals(0, m1.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 2.0);
-    Assert.assertTrue(m1.get(0, 1) == 4.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 0) == 2.0);
+    Assert.assertTrue(m1.getRowColumnF(0, 1) == 4.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 20.0);
-    Assert.assertTrue(m1.get(1, 1) == 24.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 0) == 20.0);
+    Assert.assertTrue(m1.getRowColumnF(1, 1) == 24.0);
 
     MatrixM2x2F.scaleRow(m0, 0, 2.0f);
     MatrixM2x2F.scaleRow(m0, 1, 4.0f);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m1).position());
+    Assert.assertEquals(0, m1.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m0.get(0, 0) == 2.0);
-    Assert.assertTrue(m0.get(0, 1) == 4.0);
+    Assert.assertTrue(m0.getRowColumnF(0, 0) == 2.0);
+    Assert.assertTrue(m0.getRowColumnF(0, 1) == 4.0);
 
-    Assert.assertTrue(m0.get(1, 0) == 20.0);
-    Assert.assertTrue(m0.get(1, 1) == 24.0);
+    Assert.assertTrue(m0.getRowColumnF(1, 0) == 20.0);
+    Assert.assertTrue(m0.getRowColumnF(1, 1) == 24.0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -764,17 +772,31 @@ import com.io7m.jtensors.VectorM2F;
     MatrixM2x2F.scaleRow(m, -1, 1.0f, r);
   }
 
+  @Test public void testSetIdentity()
+  {
+    final MatrixM2x2F m = new MatrixM2x2F();
+
+    for (int row = 0; row < 2; ++row) {
+      for (int col = 0; col < 2; ++col) {
+        m.set(row, col, (float) Math.random());
+      }
+    }
+
+    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+    MatrixM2x2F.setIdentity(m);
+    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+  }
+
   @Test public void testSetGetIdentity()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
 
-    Assert.assertTrue(m.set(0, 0, 3.0f).get(0, 0) == 3.0);
-    Assert.assertTrue(m.set(0, 1, 5.0f).get(0, 1) == 5.0);
+    Assert.assertTrue(m.set(0, 0, 3.0f).getRowColumnF(0, 0) == 3.0);
+    Assert.assertTrue(m.set(0, 1, 5.0f).getRowColumnF(0, 1) == 5.0);
 
-    Assert.assertTrue(m.set(1, 0, 13.0f).get(1, 0) == 13.0);
-    Assert.assertTrue(m.set(1, 1, 17.0f).get(1, 1) == 17.0);
-
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m).position());
+    Assert.assertTrue(m.set(1, 0, 13.0f).getRowColumnF(1, 0) == 13.0);
+    Assert.assertTrue(m.set(1, 1, 17.0f).getRowColumnF(1, 1) == 17.0);
+    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
   }
 
   @Test public void testSetGetInterfaceIdentity()
@@ -787,7 +809,7 @@ import com.io7m.jtensors.VectorM2F;
     Assert.assertTrue(m.set(1, 0, 13.0f).getRowColumnF(1, 0) == 13.0);
     Assert.assertTrue(m.set(1, 1, 17.0f).getRowColumnF(1, 1) == 17.0);
 
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
   }
 
   @Test public void testStorage()
@@ -801,7 +823,7 @@ import com.io7m.jtensors.VectorM2F;
     m.set(1, 1, 101);
 
     {
-      final FloatBuffer b = MatrixM2x2F.floatBuffer(m);
+      final FloatBuffer b = m.getDirectFloatBuffer();
 
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
       Assert.assertEquals(0, b.position());
@@ -845,21 +867,21 @@ import com.io7m.jtensors.VectorM2F;
 
     final MatrixM2x2F k = MatrixM2x2F.transpose(m, r);
     Assert.assertSame(k, r);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(r).position());
+    Assert.assertEquals(0, r.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m.get(0, 0) == 0.0);
-    Assert.assertTrue(m.get(0, 1) == 1.0);
+    Assert.assertTrue(m.getRowColumnF(0, 0) == 0.0);
+    Assert.assertTrue(m.getRowColumnF(0, 1) == 1.0);
 
-    Assert.assertTrue(m.get(1, 0) == 4.0);
-    Assert.assertTrue(m.get(1, 1) == 5.0);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(m).position());
+    Assert.assertTrue(m.getRowColumnF(1, 0) == 4.0);
+    Assert.assertTrue(m.getRowColumnF(1, 1) == 5.0);
+    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(r.get(0, 0) == 0.0);
-    Assert.assertTrue(r.get(0, 1) == 4.0);
+    Assert.assertTrue(r.getRowColumnF(0, 0) == 0.0);
+    Assert.assertTrue(r.getRowColumnF(0, 1) == 4.0);
 
-    Assert.assertTrue(r.get(1, 0) == 1.0);
-    Assert.assertTrue(r.get(1, 1) == 5.0);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(r).position());
+    Assert.assertTrue(r.getRowColumnF(1, 0) == 1.0);
+    Assert.assertTrue(r.getRowColumnF(1, 1) == 5.0);
+    Assert.assertEquals(0, r.getDirectFloatBuffer().position());
   }
 
   @Test public void testTransposeMutate()
@@ -874,13 +896,13 @@ import com.io7m.jtensors.VectorM2F;
 
     final MatrixM2x2F r = MatrixM2x2F.transpose(m);
     Assert.assertSame(m, r);
-    Assert.assertEquals(0, MatrixM2x2F.floatBuffer(r).position());
+    Assert.assertEquals(0, r.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(r.get(0, 0) == 0.0);
-    Assert.assertTrue(r.get(0, 1) == 4.0);
+    Assert.assertTrue(r.getRowColumnF(0, 0) == 0.0);
+    Assert.assertTrue(r.getRowColumnF(0, 1) == 4.0);
 
-    Assert.assertTrue(r.get(1, 0) == 1.0);
-    Assert.assertTrue(r.get(1, 1) == 5.0);
+    Assert.assertTrue(r.getRowColumnF(1, 0) == 1.0);
+    Assert.assertTrue(r.getRowColumnF(1, 1) == 5.0);
   }
 
   @Test public void testZero()
@@ -890,7 +912,7 @@ import com.io7m.jtensors.VectorM2F;
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m.get(row, column) == 0.0);
+        Assert.assertTrue(m.getRowColumnF(row, column) == 0.0);
       }
     }
   }

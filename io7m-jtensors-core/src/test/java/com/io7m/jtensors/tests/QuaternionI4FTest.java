@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -529,8 +529,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mqr.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mqr.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(ec, x, y);
         Assert.assertTrue(eq);
       }
@@ -566,8 +566,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mqr.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mqr.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(ec, x, y);
         Assert.assertTrue(eq);
       }
@@ -624,8 +624,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
       for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 3; ++col) {
-          final float x = ml.get(row, col);
-          final float y = mq.get(row, col);
+          final float x = ml.getRowColumnF(row, col);
+          final float y = mq.getRowColumnF(row, col);
 
           final boolean eq = AlmostEqualFloat.almostEqual(ec, x, y);
           Assert.assertTrue(eq);
@@ -759,7 +759,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -788,7 +788,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -817,7 +817,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -846,7 +846,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -875,7 +875,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -904,7 +904,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 
@@ -1097,8 +1097,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1128,8 +1128,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1159,8 +1159,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1174,17 +1174,17 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     QuaternionI4F.makeRotationMatrix3x3(q, m);
 
-    Assert.assertTrue(1.0 == m.get(0, 0));
-    Assert.assertTrue(0.0 == m.get(0, 1));
-    Assert.assertTrue(0.0 == m.get(0, 2));
+    Assert.assertTrue(1.0 == m.getRowColumnF(0, 0));
+    Assert.assertTrue(0.0 == m.getRowColumnF(0, 1));
+    Assert.assertTrue(0.0 == m.getRowColumnF(0, 2));
 
-    Assert.assertTrue(0.0 == m.get(1, 0));
-    Assert.assertTrue(1.0 == m.get(1, 1));
-    Assert.assertTrue(0.0 == m.get(1, 2));
+    Assert.assertTrue(0.0 == m.getRowColumnF(1, 0));
+    Assert.assertTrue(1.0 == m.getRowColumnF(1, 1));
+    Assert.assertTrue(0.0 == m.getRowColumnF(1, 2));
 
-    Assert.assertTrue(0.0 == m.get(2, 0));
-    Assert.assertTrue(0.0 == m.get(2, 1));
-    Assert.assertTrue(1.0 == m.get(2, 2));
+    Assert.assertTrue(0.0 == m.getRowColumnF(2, 0));
+    Assert.assertTrue(0.0 == m.getRowColumnF(2, 1));
+    Assert.assertTrue(1.0 == m.getRowColumnF(2, 2));
   }
 
   @Override @Test public void testMakeMatrix3x3_Minus45X()
@@ -1210,8 +1210,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1241,8 +1241,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1272,8 +1272,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1303,8 +1303,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1334,8 +1334,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1365,8 +1365,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1380,25 +1380,25 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     QuaternionI4F.makeRotationMatrix4x4(q, m);
 
-    Assert.assertTrue(1.0 == m.get(0, 0));
-    Assert.assertTrue(0.0 == m.get(0, 1));
-    Assert.assertTrue(0.0 == m.get(0, 2));
-    Assert.assertTrue(0.0 == m.get(0, 3));
+    Assert.assertTrue(1.0 == m.getRowColumnF(0, 0));
+    Assert.assertTrue(0.0 == m.getRowColumnF(0, 1));
+    Assert.assertTrue(0.0 == m.getRowColumnF(0, 2));
+    Assert.assertTrue(0.0 == m.getRowColumnF(0, 3));
 
-    Assert.assertTrue(0.0 == m.get(1, 0));
-    Assert.assertTrue(1.0 == m.get(1, 1));
-    Assert.assertTrue(0.0 == m.get(1, 2));
-    Assert.assertTrue(0.0 == m.get(1, 3));
+    Assert.assertTrue(0.0 == m.getRowColumnF(1, 0));
+    Assert.assertTrue(1.0 == m.getRowColumnF(1, 1));
+    Assert.assertTrue(0.0 == m.getRowColumnF(1, 2));
+    Assert.assertTrue(0.0 == m.getRowColumnF(1, 3));
 
-    Assert.assertTrue(0.0 == m.get(2, 0));
-    Assert.assertTrue(0.0 == m.get(2, 1));
-    Assert.assertTrue(1.0 == m.get(2, 2));
-    Assert.assertTrue(0.0 == m.get(2, 3));
+    Assert.assertTrue(0.0 == m.getRowColumnF(2, 0));
+    Assert.assertTrue(0.0 == m.getRowColumnF(2, 1));
+    Assert.assertTrue(1.0 == m.getRowColumnF(2, 2));
+    Assert.assertTrue(0.0 == m.getRowColumnF(2, 3));
 
-    Assert.assertTrue(0.0 == m.get(3, 0));
-    Assert.assertTrue(0.0 == m.get(3, 1));
-    Assert.assertTrue(0.0 == m.get(3, 2));
-    Assert.assertTrue(1.0 == m.get(3, 3));
+    Assert.assertTrue(0.0 == m.getRowColumnF(3, 0));
+    Assert.assertTrue(0.0 == m.getRowColumnF(3, 1));
+    Assert.assertTrue(0.0 == m.getRowColumnF(3, 2));
+    Assert.assertTrue(1.0 == m.getRowColumnF(3, 3));
   }
 
   @Override @Test public void testMakeMatrix4x4_Minus45X()
@@ -1424,8 +1424,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1455,8 +1455,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1486,8 +1486,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final float x = mr.get(row, col);
-        final float y = mq.get(row, col);
+        final float x = mr.getRowColumnF(row, col);
+        final float y = mq.getRowColumnF(row, col);
         eq = AlmostEqualFloat.almostEqual(context_f, x, y);
         Assert.assertTrue(eq);
       }
@@ -1516,7 +1516,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     /**
      * Values obtained by checking against the results produced by Blender.
-     * 
+     *
      * @see http://blender.org
      */
 

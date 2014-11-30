@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -49,40 +49,56 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
   {
     boolean eq;
 
-    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(0, 2));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(0, 3));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, -0.707106781187, r.get(1, 2));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(1, 3));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(0, 3));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(2, 1));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(2, 2));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        -0.707106781187,
+        r.getRowColumnD(1, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(2, 3));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(1, 3));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(3, 0));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(2, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(3, 1));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(2, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(3, 2));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.get(3, 3));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(2, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(3, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(3, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(3, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.getRowColumnD(3, 3));
     Assert.assertTrue(eq);
   }
 
@@ -92,40 +108,56 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
   {
     boolean eq;
 
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(0, 0));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(0, 2));
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(0, 3));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(1, 2));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(1, 3));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(context, -0.707106781187, r.get(2, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(2, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.707106781187, r.get(2, 2));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(2, 3));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(0, 3));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(3, 0));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(3, 1));
+    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.get(3, 2));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(1, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.get(3, 3));
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(1, 3));
+    Assert.assertTrue(eq);
+
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        -0.707106781187,
+        r.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq =
+      AlmostEqualDouble.almostEqual(
+        context,
+        0.707106781187,
+        r.getRowColumnD(2, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(2, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(3, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(3, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 0.0, r.getRowColumnD(3, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context, 1.0, r.getRowColumnD(3, 3));
     Assert.assertTrue(eq);
   }
 
@@ -136,43 +168,55 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     boolean eq;
 
     eq =
-      AlmostEqualDouble.almostEqual(context_d, 0.707106781187, r.get(0, 0));
+      AlmostEqualDouble.almostEqual(
+        context_d,
+        0.707106781187,
+        r.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
     eq =
-      AlmostEqualDouble.almostEqual(context_d, -0.707106781187, r.get(0, 1));
+      AlmostEqualDouble.almostEqual(
+        context_d,
+        -0.707106781187,
+        r.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(0, 2));
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(0, 3));
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(0, 3));
     Assert.assertTrue(eq);
 
     eq =
-      AlmostEqualDouble.almostEqual(context_d, 0.707106781187, r.get(1, 0));
+      AlmostEqualDouble.almostEqual(
+        context_d,
+        0.707106781187,
+        r.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
     eq =
-      AlmostEqualDouble.almostEqual(context_d, 0.707106781187, r.get(1, 1));
+      AlmostEqualDouble.almostEqual(
+        context_d,
+        0.707106781187,
+        r.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(1, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(1, 3));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(2, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(2, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 1.0, r.get(2, 2));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(2, 3));
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(1, 3));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(3, 0));
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(2, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(3, 1));
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(2, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.get(3, 2));
+    eq = AlmostEqualDouble.almostEqual(context_d, 1.0, r.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 1.0, r.get(3, 3));
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(2, 3));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(3, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(3, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context_d, 0.0, r.getRowColumnD(3, 2));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(context_d, 1.0, r.getRowColumnD(3, 3));
     Assert.assertTrue(eq);
   }
 
@@ -182,9 +226,9 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final MatrixM4x4D m1 = new MatrixM4x4D();
     final MatrixM4x4D mr = new MatrixM4x4D();
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
@@ -193,28 +237,28 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       }
     }
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     final MatrixM4x4D mk = MatrixM4x4D.add(m0, m1, mr);
     Assert.assertSame(mr, mk);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 1.0);
-        Assert.assertTrue(m1.get(row, column) == 3.0);
-        Assert.assertTrue(mr.get(row, column) == 4.0);
+        Assert.assertTrue(m0.getRowColumnD(row, column) == 1.0);
+        Assert.assertTrue(m1.getRowColumnD(row, column) == 3.0);
+        Assert.assertTrue(mr.getRowColumnD(row, column) == 4.0);
       }
     }
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testAddMutate()
@@ -229,27 +273,27 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       }
     }
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     final MatrixM4x4D mr = MatrixM4x4D.addInPlace(m0, m1);
     Assert.assertSame(mr, m0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 4.0);
-        Assert.assertTrue(mr.get(row, column) == 4.0);
-        Assert.assertTrue(m1.get(row, column) == 3.0);
+        Assert.assertTrue(m0.getRowColumnD(row, column) == 4.0);
+        Assert.assertTrue(mr.getRowColumnD(row, column) == 4.0);
+        Assert.assertTrue(m1.getRowColumnD(row, column) == 3.0);
       }
     }
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testAddRowScaled()
@@ -267,64 +311,64 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     m0.set(1, 2, 5.0);
     m0.set(1, 3, 5.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.addRowScaled(m0, 0, 1, 2, 2.0, m1);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 1.0);
-    Assert.assertTrue(m1.get(0, 1) == 0.0);
-    Assert.assertTrue(m1.get(0, 2) == 0.0);
-    Assert.assertTrue(m1.get(0, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 0.0);
-    Assert.assertTrue(m1.get(1, 1) == 1.0);
-    Assert.assertTrue(m1.get(1, 2) == 0.0);
-    Assert.assertTrue(m1.get(1, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 13.0);
-    Assert.assertTrue(m1.get(2, 1) == 13.0);
-    Assert.assertTrue(m1.get(2, 2) == 13.0);
-    Assert.assertTrue(m1.get(2, 3) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 3) == 13.0);
 
-    Assert.assertTrue(m1.get(3, 0) == 0.0);
-    Assert.assertTrue(m1.get(3, 1) == 0.0);
-    Assert.assertTrue(m1.get(3, 2) == 0.0);
-    Assert.assertTrue(m1.get(3, 3) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 1) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 3) == 1.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.addRowScaledInPlace(m0, 0, 1, 2, 2.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m0.get(0, 0) == 3.0);
-    Assert.assertTrue(m0.get(0, 1) == 3.0);
-    Assert.assertTrue(m0.get(0, 2) == 3.0);
-    Assert.assertTrue(m0.get(0, 3) == 3.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 0) == 3.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 1) == 3.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 2) == 3.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 3) == 3.0);
 
-    Assert.assertTrue(m0.get(1, 0) == 5.0);
-    Assert.assertTrue(m0.get(1, 1) == 5.0);
-    Assert.assertTrue(m0.get(1, 2) == 5.0);
-    Assert.assertTrue(m0.get(1, 3) == 5.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 0) == 5.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 1) == 5.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 2) == 5.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 3) == 5.0);
 
-    Assert.assertTrue(m0.get(2, 0) == 13.0);
-    Assert.assertTrue(m0.get(2, 1) == 13.0);
-    Assert.assertTrue(m0.get(2, 2) == 13.0);
-    Assert.assertTrue(m0.get(2, 3) == 13.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 0) == 13.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 1) == 13.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 2) == 13.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 3) == 13.0);
 
-    Assert.assertTrue(m0.get(3, 0) == 0.0);
-    Assert.assertTrue(m0.get(3, 1) == 0.0);
-    Assert.assertTrue(m0.get(3, 2) == 0.0);
-    Assert.assertTrue(m0.get(3, 3) == 1.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 0) == 0.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 1) == 0.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 2) == 0.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 3) == 1.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testAddRowScaledContextEquivalent()
@@ -343,36 +387,36 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     m0.set(1, 2, 5.0);
     m0.set(1, 3, 5.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.addRowScaledWithContext(context, m0, 0, 1, 2, 2.0, m1);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 1.0);
-    Assert.assertTrue(m1.get(0, 1) == 0.0);
-    Assert.assertTrue(m1.get(0, 2) == 0.0);
-    Assert.assertTrue(m1.get(0, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 0.0);
-    Assert.assertTrue(m1.get(1, 1) == 1.0);
-    Assert.assertTrue(m1.get(1, 2) == 0.0);
-    Assert.assertTrue(m1.get(1, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 13.0);
-    Assert.assertTrue(m1.get(2, 1) == 13.0);
-    Assert.assertTrue(m1.get(2, 2) == 13.0);
-    Assert.assertTrue(m1.get(2, 3) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 3) == 13.0);
 
-    Assert.assertTrue(m1.get(3, 0) == 0.0);
-    Assert.assertTrue(m1.get(3, 1) == 0.0);
-    Assert.assertTrue(m1.get(3, 2) == 0.0);
-    Assert.assertTrue(m1.get(3, 3) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 1) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 3) == 1.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Override @Test(expected = IndexOutOfBoundsException.class) public
@@ -426,7 +470,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
   @Override @Test public void testBufferEndianness()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
-    final DoubleBuffer b = MatrixM4x4D.doubleBuffer(m);
+    final DoubleBuffer b = m.getDirectDoubleBuffer();
 
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
   }
@@ -436,8 +480,8 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     m0.set(0, 0, 1.0);
     m0.set(0, 1, 2.0);
@@ -459,43 +503,43 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     m0.set(3, 2, 15.0);
     m0.set(3, 3, 16.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.copy(m0, m1);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 1.0);
-    Assert.assertTrue(m1.get(0, 1) == 2.0);
-    Assert.assertTrue(m1.get(0, 2) == 3.0);
-    Assert.assertTrue(m1.get(0, 3) == 4.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 2.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 3.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 3) == 4.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 5.0);
-    Assert.assertTrue(m1.get(1, 1) == 6.0);
-    Assert.assertTrue(m1.get(1, 2) == 7.0);
-    Assert.assertTrue(m1.get(1, 3) == 8.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 5.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 6.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 7.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 3) == 8.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 9.0);
-    Assert.assertTrue(m1.get(2, 1) == 10.0);
-    Assert.assertTrue(m1.get(2, 2) == 11.0);
-    Assert.assertTrue(m1.get(2, 3) == 12.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 9.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 10.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 11.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 3) == 12.0);
 
-    Assert.assertTrue(m1.get(3, 0) == 13.0);
-    Assert.assertTrue(m1.get(3, 1) == 14.0);
-    Assert.assertTrue(m1.get(3, 2) == 15.0);
-    Assert.assertTrue(m1.get(3, 3) == 16.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 0) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 1) == 14.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 2) == 15.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 3) == 16.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testDeterminantIdentity()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     Assert.assertTrue(MatrixM4x4D.determinant(m) == 1.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testDeterminantOther()
@@ -508,7 +552,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     m.set(3, 3, 2.0f);
 
     Assert.assertTrue(MatrixM4x4D.determinant(m) == 16.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testDeterminantScale()
@@ -517,9 +561,9 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
     m.set(0, 0, 2.0f);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
     Assert.assertTrue(MatrixM4x4D.determinant(m) == 2.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testDeterminantScaleNegative()
@@ -528,18 +572,18 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
     m.set(0, 0, -2.0f);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
     Assert.assertTrue(MatrixM4x4D.determinant(m) == -2.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testDeterminantZero()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     MatrixM4x4D.setZero(m);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
     Assert.assertTrue(MatrixM4x4D.determinant(m) == 0.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testEqualsCorrect()
@@ -547,26 +591,26 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     {
       final MatrixM4x4D m0 = new MatrixM4x4D();
       Assert.assertTrue(m0.equals(m0));
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM4x4D m0 = new MatrixM4x4D();
       Assert.assertFalse(m0.equals(null));
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM4x4D m0 = new MatrixM4x4D();
       Assert.assertFalse(m0.equals(Integer.valueOf(23)));
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM4x4D m0 = new MatrixM4x4D();
       final MatrixM4x4D m1 = new MatrixM4x4D();
       Assert.assertTrue(m0.equals(m1));
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
     }
   }
 
@@ -576,14 +620,14 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       for (int col = 0; col < 4; ++col) {
         final MatrixM4x4D m0 = new MatrixM4x4D();
         final MatrixM4x4D m1 = new MatrixM4x4D();
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
         m1.set(row, col, 256);
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
         Assert.assertFalse(m0.equals(m1));
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
       }
     }
   }
@@ -613,64 +657,64 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     m0.set(3, 2, 15.0);
     m0.set(3, 3, 16.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.exchangeRows(m0, 0, 3, m1);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 13.0);
-    Assert.assertTrue(m1.get(0, 1) == 14.0);
-    Assert.assertTrue(m1.get(0, 2) == 15.0);
-    Assert.assertTrue(m1.get(0, 3) == 16.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 14.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 15.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 3) == 16.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 0.0);
-    Assert.assertTrue(m1.get(1, 1) == 1.0);
-    Assert.assertTrue(m1.get(1, 2) == 0.0);
-    Assert.assertTrue(m1.get(1, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 0.0);
-    Assert.assertTrue(m1.get(2, 1) == 0.0);
-    Assert.assertTrue(m1.get(2, 2) == 1.0);
-    Assert.assertTrue(m1.get(2, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(3, 0) == 1.0);
-    Assert.assertTrue(m1.get(3, 1) == 2.0);
-    Assert.assertTrue(m1.get(3, 2) == 3.0);
-    Assert.assertTrue(m1.get(3, 3) == 4.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 1) == 2.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 2) == 3.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 3) == 4.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.exchangeRowsInPlace(m1, 0, 3);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 1.0);
-    Assert.assertTrue(m1.get(0, 1) == 2.0);
-    Assert.assertTrue(m1.get(0, 2) == 3.0);
-    Assert.assertTrue(m1.get(0, 3) == 4.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 2.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 3.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 3) == 4.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 0.0);
-    Assert.assertTrue(m1.get(1, 1) == 1.0);
-    Assert.assertTrue(m1.get(1, 2) == 0.0);
-    Assert.assertTrue(m1.get(1, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 0.0);
-    Assert.assertTrue(m1.get(2, 1) == 0.0);
-    Assert.assertTrue(m1.get(2, 2) == 1.0);
-    Assert.assertTrue(m1.get(2, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(3, 0) == 13.0);
-    Assert.assertTrue(m1.get(3, 1) == 14.0);
-    Assert.assertTrue(m1.get(3, 2) == 15.0);
-    Assert.assertTrue(m1.get(3, 3) == 16.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 0) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 1) == 14.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 2) == 15.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 3) == 16.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Override @Test(expected = IndexOutOfBoundsException.class) public
@@ -731,64 +775,64 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     m0.set(3, 2, 15.0);
     m0.set(3, 3, 16.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.exchangeRowsWithContext(context, m0, 0, 3, m1);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 13.0);
-    Assert.assertTrue(m1.get(0, 1) == 14.0);
-    Assert.assertTrue(m1.get(0, 2) == 15.0);
-    Assert.assertTrue(m1.get(0, 3) == 16.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 14.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 15.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 3) == 16.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 0.0);
-    Assert.assertTrue(m1.get(1, 1) == 1.0);
-    Assert.assertTrue(m1.get(1, 2) == 0.0);
-    Assert.assertTrue(m1.get(1, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 0.0);
-    Assert.assertTrue(m1.get(2, 1) == 0.0);
-    Assert.assertTrue(m1.get(2, 2) == 1.0);
-    Assert.assertTrue(m1.get(2, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(3, 0) == 1.0);
-    Assert.assertTrue(m1.get(3, 1) == 2.0);
-    Assert.assertTrue(m1.get(3, 2) == 3.0);
-    Assert.assertTrue(m1.get(3, 3) == 4.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 1) == 2.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 2) == 3.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 3) == 4.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.exchangeRowsInPlaceWithContext(context, m1, 0, 3);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 1.0);
-    Assert.assertTrue(m1.get(0, 1) == 2.0);
-    Assert.assertTrue(m1.get(0, 2) == 3.0);
-    Assert.assertTrue(m1.get(0, 3) == 4.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 2.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 3.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 3) == 4.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 0.0);
-    Assert.assertTrue(m1.get(1, 1) == 1.0);
-    Assert.assertTrue(m1.get(1, 2) == 0.0);
-    Assert.assertTrue(m1.get(1, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 0.0);
-    Assert.assertTrue(m1.get(2, 1) == 0.0);
-    Assert.assertTrue(m1.get(2, 2) == 1.0);
-    Assert.assertTrue(m1.get(2, 3) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 0.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 1.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 3) == 0.0);
 
-    Assert.assertTrue(m1.get(3, 0) == 13.0);
-    Assert.assertTrue(m1.get(3, 1) == 14.0);
-    Assert.assertTrue(m1.get(3, 2) == 15.0);
-    Assert.assertTrue(m1.get(3, 3) == 16.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 0) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 1) == 14.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 2) == 15.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 3) == 16.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testHashcodeNeqExhaustive()
@@ -797,17 +841,17 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       for (int col = 0; col < 4; ++col) {
         final MatrixM4x4D m0 = new MatrixM4x4D();
         final MatrixM4x4D m1 = new MatrixM4x4D();
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
         Assert.assertTrue(m0.hashCode() == m1.hashCode());
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
         m1.set(row, col, 256);
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
         Assert.assertFalse(m0.hashCode() == m1.hashCode());
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
       }
     }
   }
@@ -836,62 +880,62 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     m0.set(3, 2, 53.0);
     m0.set(3, 3, 59.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
 
     final MatrixM4x4D m1 = new MatrixM4x4D(m0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 3.0);
-    Assert.assertTrue(m1.get(0, 1) == 5.0);
-    Assert.assertTrue(m1.get(0, 2) == 7.0);
-    Assert.assertTrue(m1.get(0, 3) == 11.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 3.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 5.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 7.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 3) == 11.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 13.0);
-    Assert.assertTrue(m1.get(1, 1) == 17.0);
-    Assert.assertTrue(m1.get(1, 2) == 19.0);
-    Assert.assertTrue(m1.get(1, 3) == 23.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 13.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 17.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 19.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 3) == 23.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 29.0);
-    Assert.assertTrue(m1.get(2, 1) == 31.0);
-    Assert.assertTrue(m1.get(2, 2) == 37.0);
-    Assert.assertTrue(m1.get(2, 3) == 41.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 29.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 31.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 37.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 3) == 41.0);
 
-    Assert.assertTrue(m1.get(3, 0) == 43.0);
-    Assert.assertTrue(m1.get(3, 1) == 47.0);
-    Assert.assertTrue(m1.get(3, 2) == 53.0);
-    Assert.assertTrue(m1.get(3, 3) == 59.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 0) == 43.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 1) == 47.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 2) == 53.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 3) == 59.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testInitializationIdentity()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
-    Assert.assertTrue(m.get(0, 0) == 1.0);
-    Assert.assertTrue(m.get(0, 1) == 0.0);
-    Assert.assertTrue(m.get(0, 2) == 0.0);
-    Assert.assertTrue(m.get(0, 3) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(0, 0) == 1.0);
+    Assert.assertTrue(m.getRowColumnD(0, 1) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(0, 2) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(0, 3) == 0.0);
 
-    Assert.assertTrue(m.get(1, 0) == 0.0);
-    Assert.assertTrue(m.get(1, 1) == 1.0);
-    Assert.assertTrue(m.get(1, 2) == 0.0);
-    Assert.assertTrue(m.get(1, 3) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(1, 0) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(1, 1) == 1.0);
+    Assert.assertTrue(m.getRowColumnD(1, 2) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(1, 3) == 0.0);
 
-    Assert.assertTrue(m.get(2, 0) == 0.0);
-    Assert.assertTrue(m.get(2, 1) == 0.0);
-    Assert.assertTrue(m.get(2, 2) == 1.0);
-    Assert.assertTrue(m.get(2, 3) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(2, 0) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(2, 1) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(2, 2) == 1.0);
+    Assert.assertTrue(m.getRowColumnD(2, 3) == 0.0);
 
-    Assert.assertTrue(m.get(3, 0) == 0.0);
-    Assert.assertTrue(m.get(3, 1) == 0.0);
-    Assert.assertTrue(m.get(3, 2) == 0.0);
-    Assert.assertTrue(m.get(3, 3) == 1.0);
+    Assert.assertTrue(m.getRowColumnD(3, 0) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(3, 1) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(3, 2) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(3, 3) == 1.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testInvertIdentity()
@@ -905,33 +949,33 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 0) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 1) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 2) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 3) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
 
     {
@@ -940,33 +984,33 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 0) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 1) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 2) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 3) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
   }
 
@@ -983,33 +1027,33 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 0) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 1) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 2) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 3) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
 
     {
@@ -1019,33 +1063,33 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 0) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 0, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(0, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 1) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 1, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(1, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 2) == 1.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 2, 3) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 0) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 1) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 2) == 0.0);
-      Assert.assertTrue(MatrixM4x4D.get(rm, 3, 3) == 1.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(rm.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1080,33 +1124,33 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(rm.get(0, 0) == 0.5);
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(rm.get(0, 2) == 0);
-      Assert.assertTrue(rm.get(0, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 0.5);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 3) == 0);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(rm.get(1, 1) == 0.5);
-      Assert.assertTrue(rm.get(1, 2) == 0);
-      Assert.assertTrue(rm.get(1, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 0.5);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 3) == 0);
 
-      Assert.assertTrue(rm.get(2, 0) == 0);
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(rm.get(2, 2) == 0.5);
-      Assert.assertTrue(rm.get(2, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 0.5);
+      Assert.assertTrue(rm.getRowColumnD(2, 3) == 0);
 
-      Assert.assertTrue(rm.get(3, 0) == 0);
-      Assert.assertTrue(rm.get(3, 1) == 0);
-      Assert.assertTrue(rm.get(3, 2) == 0);
-      Assert.assertTrue(rm.get(3, 3) == 0.5);
+      Assert.assertTrue(rm.getRowColumnD(3, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 3) == 0.5);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
 
     {
@@ -1115,33 +1159,33 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(rm.get(0, 0) == 2);
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(rm.get(0, 2) == 0);
-      Assert.assertTrue(rm.get(0, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 2);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 3) == 0);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(rm.get(1, 1) == 2);
-      Assert.assertTrue(rm.get(1, 2) == 0);
-      Assert.assertTrue(rm.get(1, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 2);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 3) == 0);
 
-      Assert.assertTrue(rm.get(2, 0) == 0);
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(rm.get(2, 2) == 2);
-      Assert.assertTrue(rm.get(2, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 2);
+      Assert.assertTrue(rm.getRowColumnD(2, 3) == 0);
 
-      Assert.assertTrue(rm.get(3, 0) == 0);
-      Assert.assertTrue(rm.get(3, 1) == 0);
-      Assert.assertTrue(rm.get(3, 2) == 0);
-      Assert.assertTrue(rm.get(3, 3) == 2);
+      Assert.assertTrue(rm.getRowColumnD(3, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 3) == 2);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1180,9 +1224,9 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
       System.out.println("m0 : ");
       System.out.println(m0);
@@ -1191,45 +1235,85 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       System.out.println("rm : ");
       System.out.println(rm);
 
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 0), -0.09375);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(0, 0),
+          -0.09375);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 1), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 1), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 2), 0.15625);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(0, 2),
+          0.15625);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 3), 0.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 0), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 1), -0.0296);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 2), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 3), 0.0814);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 0), 0.21875);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 1), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 2), -0.03125);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 3), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 3), 0.0);
       Assert.assertTrue(eq);
 
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 0), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(1, 0), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 1), 0.096);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(1, 1),
+          -0.0296);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 2), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(1, 2), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 3), -0.01481);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(1, 3),
+          0.0814);
       Assert.assertTrue(eq);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(2, 0),
+          0.21875);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 1), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(2, 2),
+          -0.03125);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 3), 0.0);
+      Assert.assertTrue(eq);
+
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(3, 0), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(3, 1),
+          0.096);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(3, 2), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(3, 3),
+          -0.01481);
+      Assert.assertTrue(eq);
+
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
 
     {
@@ -1238,9 +1322,9 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
       System.out.println("m0 : ");
       System.out.println(m0);
@@ -1249,45 +1333,63 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       System.out.println("rm : ");
       System.out.println(rm);
 
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 0), 1.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 0), 1.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 1), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 1), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 2), 5.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 2), 5.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 3), 0.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 0), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 1), 2.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 2), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 3), 11.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 3), 0.0);
       Assert.assertTrue(eq);
 
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 0), 7.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(1, 0), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 1), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(1, 1), 2.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 2), 3.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(1, 2), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 3), 0.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 0), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 1), 13.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 2), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 3), 4.0);
+      eq =
+        AlmostEqualDouble
+          .almostEqual(context_d, rm.getRowColumnD(1, 3), 11.0);
       Assert.assertTrue(eq);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 0), 7.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 1), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 2), 3.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 3), 0.0);
+      Assert.assertTrue(eq);
+
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(3, 0), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble
+          .almostEqual(context_d, rm.getRowColumnD(3, 1), 13.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(3, 2), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(3, 3), 4.0);
+      Assert.assertTrue(eq);
+
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1328,49 +1430,89 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 0), -0.09375);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(0, 0),
+          -0.09375);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 1), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 1), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 2), 0.15625);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(0, 2),
+          0.15625);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 3), 0.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 0), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 1), -0.0296);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 2), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 3), 0.0814);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 0), 0.21875);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 1), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 2), -0.03125);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 3), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 3), 0.0);
       Assert.assertTrue(eq);
 
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 0), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(1, 0), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 1), 0.096);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(1, 1),
+          -0.0296);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 2), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(1, 2), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 3), -0.01481);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(1, 3),
+          0.0814);
       Assert.assertTrue(eq);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(2, 0),
+          0.21875);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 1), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(2, 2),
+          -0.03125);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 3), 0.0);
+      Assert.assertTrue(eq);
+
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(3, 0), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(3, 1),
+          0.096);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(3, 2), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(
+          context_d,
+          rm.getRowColumnD(3, 3),
+          -0.01481);
+      Assert.assertTrue(eq);
+
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
 
     {
@@ -1380,49 +1522,67 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 0), 1.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 0), 1.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 1), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 1), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 2), 5.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 2), 5.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(0, 3), 0.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 0), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 1), 2.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 2), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(1, 3), 11.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(0, 3), 0.0);
       Assert.assertTrue(eq);
 
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 0), 7.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(1, 0), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 1), 0.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(1, 1), 2.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 2), 3.0);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(1, 2), 0.0);
       Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(2, 3), 0.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 0), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 1), 13.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 2), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, rm.get(3, 3), 4.0);
+      eq =
+        AlmostEqualDouble
+          .almostEqual(context_d, rm.getRowColumnD(1, 3), 11.0);
       Assert.assertTrue(eq);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 0), 7.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 1), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 2), 3.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(2, 3), 0.0);
+      Assert.assertTrue(eq);
+
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(3, 0), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble
+          .almostEqual(context_d, rm.getRowColumnD(3, 1), 13.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(3, 2), 0.0);
+      Assert.assertTrue(eq);
+      eq =
+        AlmostEqualDouble.almostEqual(context_d, rm.getRowColumnD(3, 3), 4.0);
+      Assert.assertTrue(eq);
+
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1459,33 +1619,33 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(rm.get(0, 0) == 0.5);
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(rm.get(0, 2) == 0);
-      Assert.assertTrue(rm.get(0, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 0.5);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 3) == 0);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(rm.get(1, 1) == 0.5);
-      Assert.assertTrue(rm.get(1, 2) == 0);
-      Assert.assertTrue(rm.get(1, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 0.5);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 3) == 0);
 
-      Assert.assertTrue(rm.get(2, 0) == 0);
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(rm.get(2, 2) == 0.5);
-      Assert.assertTrue(rm.get(2, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 0.5);
+      Assert.assertTrue(rm.getRowColumnD(2, 3) == 0);
 
-      Assert.assertTrue(rm.get(3, 0) == 0);
-      Assert.assertTrue(rm.get(3, 1) == 0);
-      Assert.assertTrue(rm.get(3, 2) == 0);
-      Assert.assertTrue(rm.get(3, 3) == 0.5);
+      Assert.assertTrue(rm.getRowColumnD(3, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 3) == 0.5);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
 
     {
@@ -1495,33 +1655,33 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final Some<MatrixM4x4D> s = (Some<MatrixM4x4D>) r;
       final MatrixM4x4D rm = s.get();
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(rm.get(0, 0) == 2);
-      Assert.assertTrue(rm.get(0, 1) == 0);
-      Assert.assertTrue(rm.get(0, 2) == 0);
-      Assert.assertTrue(rm.get(0, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 0) == 2);
+      Assert.assertTrue(rm.getRowColumnD(0, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(0, 3) == 0);
 
-      Assert.assertTrue(rm.get(1, 0) == 0);
-      Assert.assertTrue(rm.get(1, 1) == 2);
-      Assert.assertTrue(rm.get(1, 2) == 0);
-      Assert.assertTrue(rm.get(1, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 1) == 2);
+      Assert.assertTrue(rm.getRowColumnD(1, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(1, 3) == 0);
 
-      Assert.assertTrue(rm.get(2, 0) == 0);
-      Assert.assertTrue(rm.get(2, 1) == 0);
-      Assert.assertTrue(rm.get(2, 2) == 2);
-      Assert.assertTrue(rm.get(2, 3) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(2, 2) == 2);
+      Assert.assertTrue(rm.getRowColumnD(2, 3) == 0);
 
-      Assert.assertTrue(rm.get(3, 0) == 0);
-      Assert.assertTrue(rm.get(3, 1) == 0);
-      Assert.assertTrue(rm.get(3, 2) == 0);
-      Assert.assertTrue(rm.get(3, 3) == 2);
+      Assert.assertTrue(rm.getRowColumnD(3, 0) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 1) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 2) == 0);
+      Assert.assertTrue(rm.getRowColumnD(3, 3) == 2);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(rm).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, rm.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1555,16 +1715,16 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final OptionType<MatrixM4x4D> r =
         MatrixM4x4D.invertWithContext(context, m0, m1);
       Assert.assertTrue(r.isNone());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
     }
 
     {
       final OptionType<MatrixM4x4D> r =
         MatrixM4x4D.invertInPlaceWithContext(context, m0);
       Assert.assertTrue(r.isNone());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+      Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
     }
   }
 
@@ -1589,49 +1749,49 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
      * Rotation components
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(0, 2));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
     /**
      * Translation components
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 3));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 3));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 3));
     Assert.assertTrue(eq);
 
     /**
      * Etc
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(3, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(3, 3));
     Assert.assertTrue(eq);
   }
 
@@ -1656,49 +1816,49 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
      * Rotation components
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 2));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(2, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
     /**
      * Translation components
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 3));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 3));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 3));
     Assert.assertTrue(eq);
 
     /**
      * Etc
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(3, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(3, 3));
     Assert.assertTrue(eq);
   }
 
@@ -1723,49 +1883,49 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
      * Rotation components
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(0, 2));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
     /**
      * Translation components
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 3));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 3));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 3));
     Assert.assertTrue(eq);
 
     /**
      * Etc
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(3, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(3, 3));
     Assert.assertTrue(eq);
   }
 
@@ -1790,49 +1950,49 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
      * Rotation components
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 2));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.get(2, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
     /**
      * Translation components
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 3));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 3));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 3));
     Assert.assertTrue(eq);
 
     /**
      * Etc
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(3, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(3, 3));
     Assert.assertTrue(eq);
   }
 
@@ -1859,49 +2019,49 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
      * Rotation components
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(0, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(0, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(0, 2));
-    Assert.assertTrue(eq);
-
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 0));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(1, 1));
-    Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(1, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(2, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(2, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(1, 2));
+    Assert.assertTrue(eq);
+
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 0));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 1));
+    Assert.assertTrue(eq);
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
     /**
      * Translation components
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, -20.0, m.get(0, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, -20.0, m.getRowColumnD(0, 3));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, -30.0, m.get(1, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, -30.0, m.getRowColumnD(1, 3));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, -40.0, m.get(2, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, -40.0, m.getRowColumnD(2, 3));
     Assert.assertTrue(eq);
 
     /**
      * Etc
      */
 
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 0));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 1));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.get(3, 2));
+    eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 2));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.get(3, 3));
+    eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(3, 3));
     Assert.assertTrue(eq);
   }
 
@@ -1915,11 +2075,15 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
-        Assert.assertTrue(m0.get(row, column) == mr.get(row, column));
-        Assert.assertTrue(m1.get(row, column) == mr.get(row, column));
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-        Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+        Assert.assertTrue(m0.getRowColumnD(row, column) == mr.getRowColumnD(
+          row,
+          column));
+        Assert.assertTrue(m1.getRowColumnD(row, column) == mr.getRowColumnD(
+          row,
+          column));
+        Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+        Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
       }
     }
   }
@@ -1931,27 +2095,31 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
-        Assert.assertTrue(m0.get(row, column) == m1.get(row, column));
+        Assert.assertTrue(m0.getRowColumnD(row, column) == m1.getRowColumnD(
+          row,
+          column));
       }
     }
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     final MatrixM4x4D r = MatrixM4x4D.multiplyInPlace(m0, m1);
     Assert.assertSame(m0, r);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
-        Assert.assertTrue(m0.get(row, column) == m1.get(row, column));
+        Assert.assertTrue(m0.getRowColumnD(row, column) == m1.getRowColumnD(
+          row,
+          column));
       }
     }
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testMultiplyMutateSimple()
@@ -1975,34 +2143,34 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     MatrixM4x4D.set(m0, 3, 2, 15.0);
     MatrixM4x4D.set(m0, 3, 3, 16.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
 
     final MatrixM4x4D m1 = new MatrixM4x4D(m0);
     final MatrixM4x4D r = MatrixM4x4D.multiplyInPlace(m0, m1);
     Assert.assertSame(r, m0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(MatrixM4x4D.get(r, 0, 0) == 90.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 0, 1) == 100.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 0, 2) == 110.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 0, 3) == 120.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 1, 0) == 202.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 1, 1) == 228.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 1, 2) == 254.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 1, 3) == 280.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 2, 0) == 314.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 2, 1) == 356.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 2, 2) == 398.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 2, 3) == 440.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 3, 0) == 426.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 3, 1) == 484.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 3, 2) == 542.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 3, 3) == 600.0);
+    Assert.assertTrue(r.getRowColumnD(0, 0) == 90.0);
+    Assert.assertTrue(r.getRowColumnD(0, 1) == 100.0);
+    Assert.assertTrue(r.getRowColumnD(0, 2) == 110.0);
+    Assert.assertTrue(r.getRowColumnD(0, 3) == 120.0);
+    Assert.assertTrue(r.getRowColumnD(1, 0) == 202.0);
+    Assert.assertTrue(r.getRowColumnD(1, 1) == 228.0);
+    Assert.assertTrue(r.getRowColumnD(1, 2) == 254.0);
+    Assert.assertTrue(r.getRowColumnD(1, 3) == 280.0);
+    Assert.assertTrue(r.getRowColumnD(2, 0) == 314.0);
+    Assert.assertTrue(r.getRowColumnD(2, 1) == 356.0);
+    Assert.assertTrue(r.getRowColumnD(2, 2) == 398.0);
+    Assert.assertTrue(r.getRowColumnD(2, 3) == 440.0);
+    Assert.assertTrue(r.getRowColumnD(3, 0) == 426.0);
+    Assert.assertTrue(r.getRowColumnD(3, 1) == 484.0);
+    Assert.assertTrue(r.getRowColumnD(3, 2) == 542.0);
+    Assert.assertTrue(r.getRowColumnD(3, 3) == 600.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testMultiplySimple()
@@ -2032,30 +2200,30 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final MatrixM4x4D r = MatrixM4x4D.multiply(m0, m1, mr);
     Assert.assertSame(r, mr);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(MatrixM4x4D.get(r, 0, 0) == 90.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 0, 1) == 100.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 0, 2) == 110.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 0, 3) == 120.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 1, 0) == 202.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 1, 1) == 228.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 1, 2) == 254.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 1, 3) == 280.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 2, 0) == 314.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 2, 1) == 356.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 2, 2) == 398.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 2, 3) == 440.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 3, 0) == 426.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 3, 1) == 484.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 3, 2) == 542.0);
-    Assert.assertTrue(MatrixM4x4D.get(r, 3, 3) == 600.0);
+    Assert.assertTrue(r.getRowColumnD(0, 0) == 90.0);
+    Assert.assertTrue(r.getRowColumnD(0, 1) == 100.0);
+    Assert.assertTrue(r.getRowColumnD(0, 2) == 110.0);
+    Assert.assertTrue(r.getRowColumnD(0, 3) == 120.0);
+    Assert.assertTrue(r.getRowColumnD(1, 0) == 202.0);
+    Assert.assertTrue(r.getRowColumnD(1, 1) == 228.0);
+    Assert.assertTrue(r.getRowColumnD(1, 2) == 254.0);
+    Assert.assertTrue(r.getRowColumnD(1, 3) == 280.0);
+    Assert.assertTrue(r.getRowColumnD(2, 0) == 314.0);
+    Assert.assertTrue(r.getRowColumnD(2, 1) == 356.0);
+    Assert.assertTrue(r.getRowColumnD(2, 2) == 398.0);
+    Assert.assertTrue(r.getRowColumnD(2, 3) == 440.0);
+    Assert.assertTrue(r.getRowColumnD(3, 0) == 426.0);
+    Assert.assertTrue(r.getRowColumnD(3, 1) == 484.0);
+    Assert.assertTrue(r.getRowColumnD(3, 2) == 542.0);
+    Assert.assertTrue(r.getRowColumnD(3, 3) == 600.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testMultiplyVectorSimple()
@@ -2085,7 +2253,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final VectorM4D r = MatrixM4x4D.multiplyVector4D(m0, v, out);
     Assert.assertSame(out, r);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
 
     Assert.assertTrue(out.getXD() == 30.0);
     Assert.assertTrue(out.getYD() == 70.0);
@@ -2122,7 +2290,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       MatrixM4x4D.multiplyVector4DWithContext(context, m0, v, out);
     Assert.assertSame(out, r);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
 
     Assert.assertTrue(out.getXD() == 30.0);
     Assert.assertTrue(out.getYD() == 70.0);
@@ -2141,19 +2309,19 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final MatrixM4x4D r = MatrixM4x4D.multiply(m0, m1, mr);
     Assert.assertSame(mr, r);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
-        Assert.assertTrue(mr.get(row, column) == 0.0);
+        Assert.assertTrue(mr.getRowColumnD(row, column) == 0.0);
       }
     }
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
   }
 
   @Override @Test(expected = IndexOutOfBoundsException.class) public
@@ -2161,7 +2329,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     testOutOfRangeNegativeColumn()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
-    m.get(0, -1);
+    m.getRowColumnD(0, -1);
   }
 
   @Override @Test(expected = IndexOutOfBoundsException.class) public
@@ -2169,7 +2337,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     testOutOfRangeNegativeRow()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
-    m.get(-1, 0);
+    m.getRowColumnD(-1, 0);
   }
 
   @Override @Test(expected = IndexOutOfBoundsException.class) public
@@ -2177,7 +2345,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     testOutOfRangeOverflowColumn()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
-    m.get(0, 4);
+    m.getRowColumnD(0, 4);
   }
 
   @Override @Test(expected = IndexOutOfBoundsException.class) public
@@ -2185,7 +2353,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     testOutOfRangeOverflowRow()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
-    m.get(4, 0);
+    m.getRowColumnD(4, 0);
   }
 
   /**
@@ -2235,8 +2403,8 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       for (int row = 0; row < 4; ++row) {
         for (int col = 0; col < 4; ++col) {
-          final double mx = mi.get(row, col);
-          final double my = mt.get(row, col);
+          final double mx = mi.getRowColumnD(row, col);
+          final double my = mt.getRowColumnD(row, col);
           final boolean eq = AlmostEqualDouble.almostEqual(context, mx, my);
 
           System.out.println("mi(" + row + ", " + col + ") == " + mx);
@@ -2566,8 +2734,8 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
         MatrixM4x4D
           .rotate(Math.toRadians(45), m, MatrixM4x4DTest.AXIS_X, out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(out).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, out.getDirectDoubleBuffer().position());
 
       final double det = MatrixM4x4D.determinant(r);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
@@ -2576,7 +2744,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4DTest.isRotationMatrixX(context, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -2585,14 +2753,14 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
           Math.toRadians(45),
           m,
           MatrixM4x4DTest.AXIS_X);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       System.out.println(r);
 
       MatrixM4x4DTest.isRotationMatrixX(context, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2614,8 +2782,8 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
           MatrixM4x4DTest.AXIS_X,
           out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(out).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, out.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       final double det = MatrixM4x4D.determinant(r);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, 1.0, det));
@@ -2624,7 +2792,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4DTest.isRotationMatrixX(context_d, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -2635,11 +2803,11 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
           m,
           MatrixM4x4DTest.AXIS_X);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       MatrixM4x4DTest.isRotationMatrixX(context_d, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2651,7 +2819,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     {
       final MatrixM4x4D r =
         MatrixM4x4D.makeRotation(Math.toRadians(45), MatrixM4x4DTest.AXIS_X);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       final double det = MatrixM4x4D.determinant(r);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
@@ -2660,7 +2828,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4DTest.isRotationMatrixX(context, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2676,7 +2844,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
         MatrixM4x4D
           .rotate(Math.toRadians(45), m, MatrixM4x4DTest.AXIS_Y, out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       final double det = MatrixM4x4D.determinant(r);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
@@ -2685,7 +2853,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4DTest.isRotationMatrixY(context, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -2694,13 +2862,13 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
           Math.toRadians(45),
           m,
           MatrixM4x4DTest.AXIS_Y);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       System.out.println(r);
 
       MatrixM4x4DTest.isRotationMatrixY(context, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2721,7 +2889,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
           MatrixM4x4DTest.AXIS_Y,
           out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       final double det = MatrixM4x4D.determinant(r);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, 1.0, det));
@@ -2730,7 +2898,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4DTest.isRotationMatrixY(context_d, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -2740,13 +2908,13 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
           Math.toRadians(45),
           m,
           MatrixM4x4DTest.AXIS_Y);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       System.out.println(r);
 
       MatrixM4x4DTest.isRotationMatrixY(context_d, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2758,7 +2926,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     {
       final MatrixM4x4D r =
         MatrixM4x4D.makeRotation(Math.toRadians(45), MatrixM4x4DTest.AXIS_Y);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       final double det = MatrixM4x4D.determinant(r);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
@@ -2767,7 +2935,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4DTest.isRotationMatrixY(context, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2783,7 +2951,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
         MatrixM4x4D
           .rotate(Math.toRadians(45), m, MatrixM4x4DTest.AXIS_Z, out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       final double det = MatrixM4x4D.determinant(r);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
@@ -2792,7 +2960,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4DTest.isRotationMatrixZ(context, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -2801,7 +2969,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
           Math.toRadians(45),
           m,
           MatrixM4x4DTest.AXIS_Z);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       final double det = MatrixM4x4D.determinant(r);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
@@ -2810,7 +2978,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4DTest.isRotationMatrixZ(context, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2831,7 +2999,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
           MatrixM4x4DTest.AXIS_Z,
           out);
       Assert.assertSame(r, out);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       final double det = MatrixM4x4D.determinant(r);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, 1.0, det));
@@ -2840,7 +3008,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4DTest.isRotationMatrixZ(context_d, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -2850,7 +3018,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
           Math.toRadians(45),
           m,
           MatrixM4x4DTest.AXIS_Z);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       final double det = MatrixM4x4D.determinant(r);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, 1.0, det));
@@ -2859,7 +3027,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4DTest.isRotationMatrixZ(context_d, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2871,7 +3039,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     {
       final MatrixM4x4D r =
         MatrixM4x4D.makeRotation(Math.toRadians(45), MatrixM4x4DTest.AXIS_Z);
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       final double det = MatrixM4x4D.determinant(r);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context, 1.0, det));
@@ -2880,7 +3048,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4DTest.isRotationMatrixZ(context, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -2888,70 +3056,70 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorM4D v = new VectorM4D();
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.row(m, 0, v);
     Assert.assertTrue(v.getXD() == 1.0);
     Assert.assertTrue(v.getYD() == 0.0);
     Assert.assertTrue(v.getZD() == 0.0);
     Assert.assertTrue(v.getWD() == 0.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.row(m, 1, v);
     Assert.assertTrue(v.getXD() == 0.0);
     Assert.assertTrue(v.getYD() == 1.0);
     Assert.assertTrue(v.getZD() == 0.0);
     Assert.assertTrue(v.getWD() == 0.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.row(m, 2, v);
     Assert.assertTrue(v.getXD() == 0.0);
     Assert.assertTrue(v.getYD() == 0.0);
     Assert.assertTrue(v.getZD() == 1.0);
     Assert.assertTrue(v.getWD() == 0.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.row(m, 3, v);
     Assert.assertTrue(v.getXD() == 0.0);
     Assert.assertTrue(v.getYD() == 0.0);
     Assert.assertTrue(v.getZD() == 0.0);
     Assert.assertTrue(v.getWD() == 1.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testRow4()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorM4D v = new VectorM4D();
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     m.getRow4D(0, v);
     Assert.assertTrue(v.getXD() == 1.0);
     Assert.assertTrue(v.getYD() == 0.0);
     Assert.assertTrue(v.getZD() == 0.0);
     Assert.assertTrue(v.getWD() == 0.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     m.getRow4D(1, v);
     Assert.assertTrue(v.getXD() == 0.0);
     Assert.assertTrue(v.getYD() == 1.0);
     Assert.assertTrue(v.getZD() == 0.0);
     Assert.assertTrue(v.getWD() == 0.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     m.getRow4D(2, v);
     Assert.assertTrue(v.getXD() == 0.0);
     Assert.assertTrue(v.getYD() == 0.0);
     Assert.assertTrue(v.getZD() == 1.0);
     Assert.assertTrue(v.getWD() == 0.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     m.getRow4D(3, v);
     Assert.assertTrue(v.getXD() == 0.0);
     Assert.assertTrue(v.getYD() == 0.0);
     Assert.assertTrue(v.getZD() == 0.0);
     Assert.assertTrue(v.getWD() == 1.0);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Override @Test(expected = IndexOutOfBoundsException.class) public
@@ -2997,33 +3165,33 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       }
     }
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     final MatrixM4x4D mk = MatrixM4x4D.scale(m0, 5.0, mr);
     Assert.assertSame(mr, mk);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mk).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mk.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 3.0);
-        Assert.assertTrue(mr.get(row, column) == 15.0);
+        Assert.assertTrue(m0.getRowColumnD(row, column) == 3.0);
+        Assert.assertTrue(mr.getRowColumnD(row, column) == 15.0);
       }
     }
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mk).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mk.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testScaleMutate()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
@@ -3034,18 +3202,18 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final MatrixM4x4D mr = MatrixM4x4D.scaleInPlace(m, 5.0);
     Assert.assertSame(mr, m);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
-        Assert.assertTrue(m.get(row, column) == 15.0);
-        Assert.assertTrue(mr.get(row, column) == 15.0);
+        Assert.assertTrue(m.getRowColumnD(row, column) == 15.0);
+        Assert.assertTrue(mr.getRowColumnD(row, column) == 15.0);
       }
     }
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(mr).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testScaleRow()
@@ -3053,8 +3221,8 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     m0.set(0, 0, 1.0);
     m0.set(0, 1, 2.0);
@@ -3081,62 +3249,62 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     MatrixM4x4D.scaleRow(m0, 2, 8.0, m1);
     MatrixM4x4D.scaleRow(m0, 3, 16.0, m1);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 2.0);
-    Assert.assertTrue(m1.get(0, 1) == 4.0);
-    Assert.assertTrue(m1.get(0, 2) == 6.0);
-    Assert.assertTrue(m1.get(0, 3) == 8.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 2.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 4.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 6.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 3) == 8.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 20.0);
-    Assert.assertTrue(m1.get(1, 1) == 24.0);
-    Assert.assertTrue(m1.get(1, 2) == 28.0);
-    Assert.assertTrue(m1.get(1, 3) == 32.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 20.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 24.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 28.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 3) == 32.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 72.0);
-    Assert.assertTrue(m1.get(2, 1) == 80.0);
-    Assert.assertTrue(m1.get(2, 2) == 88.0);
-    Assert.assertTrue(m1.get(2, 3) == 96.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 72.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 80.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 88.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 3) == 96.0);
 
-    Assert.assertTrue(m1.get(3, 0) == 208.0);
-    Assert.assertTrue(m1.get(3, 1) == 224.0);
-    Assert.assertTrue(m1.get(3, 2) == 240.0);
-    Assert.assertTrue(m1.get(3, 3) == 256.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 0) == 208.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 1) == 224.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 2) == 240.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 3) == 256.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.scaleRowInPlace(m0, 0, 2.0);
     MatrixM4x4D.scaleRowInPlace(m0, 1, 4.0);
     MatrixM4x4D.scaleRowInPlace(m0, 2, 8.0);
     MatrixM4x4D.scaleRowInPlace(m0, 3, 16.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m0.get(0, 0) == 2.0);
-    Assert.assertTrue(m0.get(0, 1) == 4.0);
-    Assert.assertTrue(m0.get(0, 2) == 6.0);
-    Assert.assertTrue(m0.get(0, 3) == 8.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 0) == 2.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 1) == 4.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 2) == 6.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 3) == 8.0);
 
-    Assert.assertTrue(m0.get(1, 0) == 20.0);
-    Assert.assertTrue(m0.get(1, 1) == 24.0);
-    Assert.assertTrue(m0.get(1, 2) == 28.0);
-    Assert.assertTrue(m0.get(1, 3) == 32.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 0) == 20.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 1) == 24.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 2) == 28.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 3) == 32.0);
 
-    Assert.assertTrue(m0.get(2, 0) == 72.0);
-    Assert.assertTrue(m0.get(2, 1) == 80.0);
-    Assert.assertTrue(m0.get(2, 2) == 88.0);
-    Assert.assertTrue(m0.get(2, 3) == 96.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 0) == 72.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 1) == 80.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 2) == 88.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 3) == 96.0);
 
-    Assert.assertTrue(m0.get(3, 0) == 208.0);
-    Assert.assertTrue(m0.get(3, 1) == 224.0);
-    Assert.assertTrue(m0.get(3, 2) == 240.0);
-    Assert.assertTrue(m0.get(3, 3) == 256.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 0) == 208.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 1) == 224.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 2) == 240.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 3) == 256.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testScaleRowContextEquivalent()
@@ -3145,8 +3313,8 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     m0.set(0, 0, 1.0);
     m0.set(0, 1, 2.0);
@@ -3168,70 +3336,70 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     m0.set(3, 2, 15.0);
     m0.set(3, 3, 16.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.scaleRowWithContext(context, m0, 0, 2.0, m1);
     MatrixM4x4D.scaleRowWithContext(context, m0, 1, 4.0, m1);
     MatrixM4x4D.scaleRowWithContext(context, m0, 2, 8.0, m1);
     MatrixM4x4D.scaleRowWithContext(context, m0, 3, 16.0, m1);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m1.get(0, 0) == 2.0);
-    Assert.assertTrue(m1.get(0, 1) == 4.0);
-    Assert.assertTrue(m1.get(0, 2) == 6.0);
-    Assert.assertTrue(m1.get(0, 3) == 8.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 0) == 2.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 1) == 4.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 2) == 6.0);
+    Assert.assertTrue(m1.getRowColumnD(0, 3) == 8.0);
 
-    Assert.assertTrue(m1.get(1, 0) == 20.0);
-    Assert.assertTrue(m1.get(1, 1) == 24.0);
-    Assert.assertTrue(m1.get(1, 2) == 28.0);
-    Assert.assertTrue(m1.get(1, 3) == 32.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 0) == 20.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 1) == 24.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 2) == 28.0);
+    Assert.assertTrue(m1.getRowColumnD(1, 3) == 32.0);
 
-    Assert.assertTrue(m1.get(2, 0) == 72.0);
-    Assert.assertTrue(m1.get(2, 1) == 80.0);
-    Assert.assertTrue(m1.get(2, 2) == 88.0);
-    Assert.assertTrue(m1.get(2, 3) == 96.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 0) == 72.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 1) == 80.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 2) == 88.0);
+    Assert.assertTrue(m1.getRowColumnD(2, 3) == 96.0);
 
-    Assert.assertTrue(m1.get(3, 0) == 208.0);
-    Assert.assertTrue(m1.get(3, 1) == 224.0);
-    Assert.assertTrue(m1.get(3, 2) == 240.0);
-    Assert.assertTrue(m1.get(3, 3) == 256.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 0) == 208.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 1) == 224.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 2) == 240.0);
+    Assert.assertTrue(m1.getRowColumnD(3, 3) == 256.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
     MatrixM4x4D.scaleRowInPlaceWithContext(context, m0, 0, 2.0);
     MatrixM4x4D.scaleRowInPlaceWithContext(context, m0, 1, 4.0);
     MatrixM4x4D.scaleRowInPlaceWithContext(context, m0, 2, 8.0);
     MatrixM4x4D.scaleRowInPlaceWithContext(context, m0, 3, 16.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m0.get(0, 0) == 2.0);
-    Assert.assertTrue(m0.get(0, 1) == 4.0);
-    Assert.assertTrue(m0.get(0, 2) == 6.0);
-    Assert.assertTrue(m0.get(0, 3) == 8.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 0) == 2.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 1) == 4.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 2) == 6.0);
+    Assert.assertTrue(m0.getRowColumnD(0, 3) == 8.0);
 
-    Assert.assertTrue(m0.get(1, 0) == 20.0);
-    Assert.assertTrue(m0.get(1, 1) == 24.0);
-    Assert.assertTrue(m0.get(1, 2) == 28.0);
-    Assert.assertTrue(m0.get(1, 3) == 32.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 0) == 20.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 1) == 24.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 2) == 28.0);
+    Assert.assertTrue(m0.getRowColumnD(1, 3) == 32.0);
 
-    Assert.assertTrue(m0.get(2, 0) == 72.0);
-    Assert.assertTrue(m0.get(2, 1) == 80.0);
-    Assert.assertTrue(m0.get(2, 2) == 88.0);
-    Assert.assertTrue(m0.get(2, 3) == 96.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 0) == 72.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 1) == 80.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 2) == 88.0);
+    Assert.assertTrue(m0.getRowColumnD(2, 3) == 96.0);
 
-    Assert.assertTrue(m0.get(3, 0) == 208.0);
-    Assert.assertTrue(m0.get(3, 1) == 224.0);
-    Assert.assertTrue(m0.get(3, 2) == 240.0);
-    Assert.assertTrue(m0.get(3, 3) == 256.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 0) == 208.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 1) == 224.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 2) == 240.0);
+    Assert.assertTrue(m0.getRowColumnD(3, 3) == 256.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m0).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m1).position());
+    Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
   }
 
   @Override @Test(expected = IndexOutOfBoundsException.class) public
@@ -3268,40 +3436,26 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     MatrixM4x4D.scaleRow(m, -1, 1.0, r);
   }
 
+  @Override @Test public void testSetIdentity()
+  {
+    final MatrixM4x4D m = new MatrixM4x4D();
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        m.set(row, col, (float) Math.random());
+      }
+    }
+
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    MatrixM4x4D.setIdentity(m);
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+  }
+
   @Override @Test public void testSetGetIdentity()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-
-    Assert.assertTrue(m.set(0, 0, 3.0).get(0, 0) == 3.0);
-    Assert.assertTrue(m.set(0, 1, 5.0).get(0, 1) == 5.0);
-    Assert.assertTrue(m.set(0, 2, 7.0).get(0, 2) == 7.0);
-    Assert.assertTrue(m.set(0, 3, 11.0).get(0, 3) == 11.0);
-
-    Assert.assertTrue(m.set(1, 0, 13.0).get(1, 0) == 13.0);
-    Assert.assertTrue(m.set(1, 1, 17.0).get(1, 1) == 17.0);
-    Assert.assertTrue(m.set(1, 2, 19.0).get(1, 2) == 19.0);
-    Assert.assertTrue(m.set(1, 3, 23.0).get(1, 3) == 23.0);
-
-    Assert.assertTrue(m.set(2, 0, 29.0).get(2, 0) == 29.0);
-    Assert.assertTrue(m.set(2, 1, 31.0).get(2, 1) == 31.0);
-    Assert.assertTrue(m.set(2, 2, 37.0).get(2, 2) == 37.0);
-    Assert.assertTrue(m.set(2, 3, 41.0).get(2, 3) == 41.0);
-
-    Assert.assertTrue(m.set(3, 0, 43.0).get(3, 0) == 43.0);
-    Assert.assertTrue(m.set(3, 1, 47.0).get(3, 1) == 47.0);
-    Assert.assertTrue(m.set(3, 2, 53.0).get(3, 2) == 53.0);
-    Assert.assertTrue(m.set(3, 3, 59.0).get(3, 3) == 59.0);
-
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-  }
-
-  @Override @Test public void testSetGetInterfaceIdentity()
-  {
-    final MatrixM4x4D m = new MatrixM4x4D();
-
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     Assert.assertTrue(m.set(0, 0, 3.0).getRowColumnD(0, 0) == 3.0);
     Assert.assertTrue(m.set(0, 1, 5.0).getRowColumnD(0, 1) == 5.0);
@@ -3323,7 +3477,36 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     Assert.assertTrue(m.set(3, 2, 53.0).getRowColumnD(3, 2) == 53.0);
     Assert.assertTrue(m.set(3, 3, 59.0).getRowColumnD(3, 3) == 59.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+  }
+
+  @Override @Test public void testSetGetInterfaceIdentity()
+  {
+    final MatrixM4x4D m = new MatrixM4x4D();
+
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+
+    Assert.assertTrue(m.set(0, 0, 3.0).getRowColumnD(0, 0) == 3.0);
+    Assert.assertTrue(m.set(0, 1, 5.0).getRowColumnD(0, 1) == 5.0);
+    Assert.assertTrue(m.set(0, 2, 7.0).getRowColumnD(0, 2) == 7.0);
+    Assert.assertTrue(m.set(0, 3, 11.0).getRowColumnD(0, 3) == 11.0);
+
+    Assert.assertTrue(m.set(1, 0, 13.0).getRowColumnD(1, 0) == 13.0);
+    Assert.assertTrue(m.set(1, 1, 17.0).getRowColumnD(1, 1) == 17.0);
+    Assert.assertTrue(m.set(1, 2, 19.0).getRowColumnD(1, 2) == 19.0);
+    Assert.assertTrue(m.set(1, 3, 23.0).getRowColumnD(1, 3) == 23.0);
+
+    Assert.assertTrue(m.set(2, 0, 29.0).getRowColumnD(2, 0) == 29.0);
+    Assert.assertTrue(m.set(2, 1, 31.0).getRowColumnD(2, 1) == 31.0);
+    Assert.assertTrue(m.set(2, 2, 37.0).getRowColumnD(2, 2) == 37.0);
+    Assert.assertTrue(m.set(2, 3, 41.0).getRowColumnD(2, 3) == 41.0);
+
+    Assert.assertTrue(m.set(3, 0, 43.0).getRowColumnD(3, 0) == 43.0);
+    Assert.assertTrue(m.set(3, 1, 47.0).getRowColumnD(3, 1) == 47.0);
+    Assert.assertTrue(m.set(3, 2, 53.0).getRowColumnD(3, 2) == 53.0);
+    Assert.assertTrue(m.set(3, 3, 59.0).getRowColumnD(3, 3) == 59.0);
+
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testStorage()
@@ -3351,7 +3534,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     m.set(3, 3, 303);
 
     {
-      final DoubleBuffer b = MatrixM4x4D.doubleBuffer(m);
+      final DoubleBuffer b = m.getDirectDoubleBuffer();
 
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
       Assert.assertEquals(0, b.position());
@@ -3438,62 +3621,62 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = MatrixM4x4D.translateByVector2I(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM4x4D r = MatrixM4x4D.translateByVector2I(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 2.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 4.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 4.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -3506,62 +3689,62 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = MatrixM4x4D.translateByVector2IInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM4x4D r = MatrixM4x4D.translateByVector2IInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 2.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 4.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 4.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -3575,62 +3758,62 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = MatrixM4x4D.translateByVector2D(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM4x4D r = MatrixM4x4D.translateByVector2D(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 2.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 4.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 4.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -3643,62 +3826,62 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = MatrixM4x4D.translateByVector2DInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM4x4D r = MatrixM4x4D.translateByVector2DInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 2.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 4.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 4.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 0.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -3712,62 +3895,62 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = MatrixM4x4D.translateByVector3I(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 3.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM4x4D r = MatrixM4x4D.translateByVector3I(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 2.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 4.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 4.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 6.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 6.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -3780,62 +3963,62 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = MatrixM4x4D.translateByVector3IInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 3.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM4x4D r = MatrixM4x4D.translateByVector3IInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 2.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 4.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 4.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 6.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 6.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -3849,62 +4032,62 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = MatrixM4x4D.translateByVector3D(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 3.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM4x4D r = MatrixM4x4D.translateByVector3D(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 2.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 4.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 4.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 6.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 6.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -3917,62 +4100,62 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = MatrixM4x4D.translateByVector3DInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 3.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
       final MatrixM4x4D r = MatrixM4x4D.translateByVector3DInPlace(m, v);
       Assert.assertSame(m, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 2.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 4.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 4.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 6.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 6.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -3986,31 +4169,31 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = MatrixM4x4D.translateByVector3I(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 3.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -4020,31 +4203,31 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       MatrixM4x4D.makeTranslation3I(v, t);
       MatrixM4x4D.multiply(m, t, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 3.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -4058,31 +4241,31 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = MatrixM4x4D.translateByVector3D(m, v, out);
       Assert.assertSame(out, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 3.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
 
     {
@@ -4091,36 +4274,36 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
       MatrixM4x4D.makeTranslation3D(v, t);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
       MatrixM4x4D.multiply(m, t, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 3.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -4134,31 +4317,31 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D t = MatrixM4x4D.makeTranslation3I(v);
       MatrixM4x4D.multiply(m, t, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 3.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -4172,31 +4355,31 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D t = MatrixM4x4D.makeTranslation3D(v);
       MatrixM4x4D.multiply(m, t, r);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-      Assert.assertTrue(r.get(0, 0) == 1.0);
-      Assert.assertTrue(r.get(0, 1) == 0.0);
-      Assert.assertTrue(r.get(0, 2) == 0.0);
-      Assert.assertTrue(r.get(0, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(0, 3) == 1.0);
 
-      Assert.assertTrue(r.get(1, 0) == 0.0);
-      Assert.assertTrue(r.get(1, 1) == 1.0);
-      Assert.assertTrue(r.get(1, 2) == 0.0);
-      Assert.assertTrue(r.get(1, 3) == 2.0);
+      Assert.assertTrue(r.getRowColumnD(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(1, 3) == 2.0);
 
-      Assert.assertTrue(r.get(2, 0) == 0.0);
-      Assert.assertTrue(r.get(2, 1) == 0.0);
-      Assert.assertTrue(r.get(2, 2) == 1.0);
-      Assert.assertTrue(r.get(2, 3) == 3.0);
+      Assert.assertTrue(r.getRowColumnD(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(2, 3) == 3.0);
 
-      Assert.assertTrue(r.get(3, 0) == 0.0);
-      Assert.assertTrue(r.get(3, 1) == 0.0);
-      Assert.assertTrue(r.get(3, 2) == 0.0);
-      Assert.assertTrue(r.get(3, 3) == 1.0);
+      Assert.assertTrue(r.getRowColumnD(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnD(3, 3) == 1.0);
 
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-      Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+      Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+      Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
     }
   }
 
@@ -4208,7 +4391,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     MatrixM4x4D.translateByVector3D(m, new VectorI3D(1.0, 2.0, 3.0), out);
 
     {
-      final DoubleBuffer b = MatrixM4x4D.doubleBuffer(out);
+      final DoubleBuffer b = out.getDirectDoubleBuffer();
 
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
       Assert.assertEquals(0, b.position());
@@ -4260,45 +4443,45 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final MatrixM4x4D k = MatrixM4x4D.transpose(m, r);
     Assert.assertSame(k, r);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m.get(0, 0) == 0.0);
-    Assert.assertTrue(m.get(0, 1) == 1.0);
-    Assert.assertTrue(m.get(0, 2) == 2.0);
-    Assert.assertTrue(m.get(0, 3) == 3.0);
-    Assert.assertTrue(m.get(1, 0) == 4.0);
-    Assert.assertTrue(m.get(1, 1) == 5.0);
-    Assert.assertTrue(m.get(1, 2) == 6.0);
-    Assert.assertTrue(m.get(1, 3) == 7.0);
-    Assert.assertTrue(m.get(2, 0) == 8.0);
-    Assert.assertTrue(m.get(2, 1) == 9.0);
-    Assert.assertTrue(m.get(2, 2) == 10.0);
-    Assert.assertTrue(m.get(2, 3) == 11.0);
-    Assert.assertTrue(m.get(3, 0) == 12.0);
-    Assert.assertTrue(m.get(3, 1) == 13.0);
-    Assert.assertTrue(m.get(3, 2) == 14.0);
-    Assert.assertTrue(m.get(3, 3) == 15.0);
+    Assert.assertTrue(m.getRowColumnD(0, 0) == 0.0);
+    Assert.assertTrue(m.getRowColumnD(0, 1) == 1.0);
+    Assert.assertTrue(m.getRowColumnD(0, 2) == 2.0);
+    Assert.assertTrue(m.getRowColumnD(0, 3) == 3.0);
+    Assert.assertTrue(m.getRowColumnD(1, 0) == 4.0);
+    Assert.assertTrue(m.getRowColumnD(1, 1) == 5.0);
+    Assert.assertTrue(m.getRowColumnD(1, 2) == 6.0);
+    Assert.assertTrue(m.getRowColumnD(1, 3) == 7.0);
+    Assert.assertTrue(m.getRowColumnD(2, 0) == 8.0);
+    Assert.assertTrue(m.getRowColumnD(2, 1) == 9.0);
+    Assert.assertTrue(m.getRowColumnD(2, 2) == 10.0);
+    Assert.assertTrue(m.getRowColumnD(2, 3) == 11.0);
+    Assert.assertTrue(m.getRowColumnD(3, 0) == 12.0);
+    Assert.assertTrue(m.getRowColumnD(3, 1) == 13.0);
+    Assert.assertTrue(m.getRowColumnD(3, 2) == 14.0);
+    Assert.assertTrue(m.getRowColumnD(3, 3) == 15.0);
 
-    Assert.assertTrue(r.get(0, 0) == 0.0);
-    Assert.assertTrue(r.get(0, 1) == 4.0);
-    Assert.assertTrue(r.get(0, 2) == 8.0);
-    Assert.assertTrue(r.get(0, 3) == 12.0);
-    Assert.assertTrue(r.get(1, 0) == 1.0);
-    Assert.assertTrue(r.get(1, 1) == 5.0);
-    Assert.assertTrue(r.get(1, 2) == 9.0);
-    Assert.assertTrue(r.get(1, 3) == 13.0);
-    Assert.assertTrue(r.get(2, 0) == 2.0);
-    Assert.assertTrue(r.get(2, 1) == 6.0);
-    Assert.assertTrue(r.get(2, 2) == 10.0);
-    Assert.assertTrue(r.get(2, 3) == 14.0);
-    Assert.assertTrue(r.get(3, 0) == 3.0);
-    Assert.assertTrue(r.get(3, 1) == 7.0);
-    Assert.assertTrue(r.get(3, 2) == 11.0);
-    Assert.assertTrue(r.get(3, 3) == 15.0);
+    Assert.assertTrue(r.getRowColumnD(0, 0) == 0.0);
+    Assert.assertTrue(r.getRowColumnD(0, 1) == 4.0);
+    Assert.assertTrue(r.getRowColumnD(0, 2) == 8.0);
+    Assert.assertTrue(r.getRowColumnD(0, 3) == 12.0);
+    Assert.assertTrue(r.getRowColumnD(1, 0) == 1.0);
+    Assert.assertTrue(r.getRowColumnD(1, 1) == 5.0);
+    Assert.assertTrue(r.getRowColumnD(1, 2) == 9.0);
+    Assert.assertTrue(r.getRowColumnD(1, 3) == 13.0);
+    Assert.assertTrue(r.getRowColumnD(2, 0) == 2.0);
+    Assert.assertTrue(r.getRowColumnD(2, 1) == 6.0);
+    Assert.assertTrue(r.getRowColumnD(2, 2) == 10.0);
+    Assert.assertTrue(r.getRowColumnD(2, 3) == 14.0);
+    Assert.assertTrue(r.getRowColumnD(3, 0) == 3.0);
+    Assert.assertTrue(r.getRowColumnD(3, 1) == 7.0);
+    Assert.assertTrue(r.getRowColumnD(3, 2) == 11.0);
+    Assert.assertTrue(r.getRowColumnD(3, 3) == 15.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testTransposeMutate()
@@ -4325,43 +4508,42 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final MatrixM4x4D r = MatrixM4x4D.transposeInPlace(m);
     Assert.assertSame(m, r);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(r.get(0, 0) == 0.0);
-    Assert.assertTrue(r.get(0, 1) == 4.0);
-    Assert.assertTrue(r.get(0, 2) == 8.0);
-    Assert.assertTrue(r.get(0, 3) == 12.0);
-    Assert.assertTrue(r.get(1, 0) == 1.0);
-    Assert.assertTrue(r.get(1, 1) == 5.0);
-    Assert.assertTrue(r.get(1, 2) == 9.0);
-    Assert.assertTrue(r.get(1, 3) == 13.0);
-    Assert.assertTrue(r.get(2, 0) == 2.0);
-    Assert.assertTrue(r.get(2, 1) == 6.0);
-    Assert.assertTrue(r.get(2, 2) == 10.0);
-    Assert.assertTrue(r.get(2, 3) == 14.0);
-    Assert.assertTrue(r.get(3, 0) == 3.0);
-    Assert.assertTrue(r.get(3, 1) == 7.0);
-    Assert.assertTrue(r.get(3, 2) == 11.0);
-    Assert.assertTrue(r.get(3, 3) == 15.0);
+    Assert.assertTrue(r.getRowColumnD(0, 0) == 0.0);
+    Assert.assertTrue(r.getRowColumnD(0, 1) == 4.0);
+    Assert.assertTrue(r.getRowColumnD(0, 2) == 8.0);
+    Assert.assertTrue(r.getRowColumnD(0, 3) == 12.0);
+    Assert.assertTrue(r.getRowColumnD(1, 0) == 1.0);
+    Assert.assertTrue(r.getRowColumnD(1, 1) == 5.0);
+    Assert.assertTrue(r.getRowColumnD(1, 2) == 9.0);
+    Assert.assertTrue(r.getRowColumnD(1, 3) == 13.0);
+    Assert.assertTrue(r.getRowColumnD(2, 0) == 2.0);
+    Assert.assertTrue(r.getRowColumnD(2, 1) == 6.0);
+    Assert.assertTrue(r.getRowColumnD(2, 2) == 10.0);
+    Assert.assertTrue(r.getRowColumnD(2, 3) == 14.0);
+    Assert.assertTrue(r.getRowColumnD(3, 0) == 3.0);
+    Assert.assertTrue(r.getRowColumnD(3, 1) == 7.0);
+    Assert.assertTrue(r.getRowColumnD(3, 2) == 11.0);
+    Assert.assertTrue(r.getRowColumnD(3, 3) == 15.0);
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(r).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
   }
 
   @Override @Test public void testZero()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     MatrixM4x4D.setZero(m);
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
-        Assert.assertTrue(m.get(row, column) == 0.0);
+        Assert.assertTrue(m.getRowColumnD(row, column) == 0.0);
       }
     }
 
-    Assert.assertEquals(0, MatrixM4x4D.doubleBuffer(m).position());
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
-
 }

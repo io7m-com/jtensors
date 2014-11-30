@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -44,7 +44,9 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class MatrixM4x4D implements MatrixReadable4x4DType
+public final class MatrixM4x4D implements
+  MatrixReadable4x4DType,
+  MatrixDirectBufferedDType
 {
   /**
    * <p>
@@ -131,16 +133,11 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     }
   }
 
-  private static final double[] IDENTITY_ROW_0;
-  private static final double[] IDENTITY_ROW_1;
-  private static final double[] IDENTITY_ROW_2;
-  private static final double[] IDENTITY_ROW_3;
-  private static final int      VIEW_BYTES;
-  private static final int      VIEW_COLS;
-  private static final int      VIEW_ELEMENT_SIZE;
-  private static final int      VIEW_ELEMENTS;
-  private static final int      VIEW_ROWS;
-  private static final double[] ZERO_ROW;
+  private static final int VIEW_BYTES;
+  private static final int VIEW_COLS;
+  private static final int VIEW_ELEMENT_SIZE;
+  private static final int VIEW_ELEMENTS;
+  private static final int VIEW_ROWS;
 
   static {
     VIEW_ROWS = 4;
@@ -148,36 +145,6 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     VIEW_ELEMENT_SIZE = 8;
     VIEW_ELEMENTS = MatrixM4x4D.VIEW_ROWS * MatrixM4x4D.VIEW_COLS;
     VIEW_BYTES = MatrixM4x4D.VIEW_ELEMENTS * MatrixM4x4D.VIEW_ELEMENT_SIZE;
-
-    IDENTITY_ROW_0 = new double[4];
-    MatrixM4x4D.IDENTITY_ROW_0[0] = 1.0;
-    MatrixM4x4D.IDENTITY_ROW_0[1] = 0.0;
-    MatrixM4x4D.IDENTITY_ROW_0[2] = 0.0;
-    MatrixM4x4D.IDENTITY_ROW_0[3] = 0.0;
-
-    IDENTITY_ROW_1 = new double[4];
-    MatrixM4x4D.IDENTITY_ROW_1[0] = 0.0;
-    MatrixM4x4D.IDENTITY_ROW_1[1] = 1.0;
-    MatrixM4x4D.IDENTITY_ROW_1[2] = 0.0;
-    MatrixM4x4D.IDENTITY_ROW_1[3] = 0.0;
-
-    IDENTITY_ROW_2 = new double[4];
-    MatrixM4x4D.IDENTITY_ROW_2[0] = 0.0;
-    MatrixM4x4D.IDENTITY_ROW_2[1] = 0.0;
-    MatrixM4x4D.IDENTITY_ROW_2[2] = 1.0;
-    MatrixM4x4D.IDENTITY_ROW_2[3] = 0.0;
-
-    IDENTITY_ROW_3 = new double[4];
-    MatrixM4x4D.IDENTITY_ROW_3[0] = 0.0;
-    MatrixM4x4D.IDENTITY_ROW_3[1] = 0.0;
-    MatrixM4x4D.IDENTITY_ROW_3[2] = 0.0;
-    MatrixM4x4D.IDENTITY_ROW_3[3] = 1.0;
-
-    ZERO_ROW = new double[4];
-    MatrixM4x4D.ZERO_ROW[0] = 0.0;
-    MatrixM4x4D.ZERO_ROW[1] = 0.0;
-    MatrixM4x4D.ZERO_ROW[2] = 0.0;
-    MatrixM4x4D.ZERO_ROW[3] = 0.0;
   }
 
   /**
@@ -197,14 +164,45 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     final MatrixReadable4x4DType m1,
     final MatrixM4x4D out)
   {
-    final DoubleBuffer m0_view = m0.getDoubleBuffer();
-    final DoubleBuffer m1_view = m1.getDoubleBuffer();
+    final double r0c0 = m0.getRowColumnD(0, 0) + m1.getRowColumnD(0, 0);
+    final double r1c0 = m0.getRowColumnD(1, 0) + m1.getRowColumnD(1, 0);
+    final double r2c0 = m0.getRowColumnD(2, 0) + m1.getRowColumnD(2, 0);
+    final double r3c0 = m0.getRowColumnD(3, 0) + m1.getRowColumnD(3, 0);
 
-    for (int index = 0; index < MatrixM4x4D.VIEW_ELEMENTS; ++index) {
-      out.view.put(index, m0_view.get(index) + m1_view.get(index));
-    }
+    final double r0c1 = m0.getRowColumnD(0, 1) + m1.getRowColumnD(0, 1);
+    final double r1c1 = m0.getRowColumnD(1, 1) + m1.getRowColumnD(1, 1);
+    final double r2c1 = m0.getRowColumnD(2, 1) + m1.getRowColumnD(2, 1);
+    final double r3c1 = m0.getRowColumnD(3, 1) + m1.getRowColumnD(3, 1);
 
-    out.view.rewind();
+    final double r0c2 = m0.getRowColumnD(0, 2) + m1.getRowColumnD(0, 2);
+    final double r1c2 = m0.getRowColumnD(1, 2) + m1.getRowColumnD(1, 2);
+    final double r2c2 = m0.getRowColumnD(2, 2) + m1.getRowColumnD(2, 2);
+    final double r3c2 = m0.getRowColumnD(3, 2) + m1.getRowColumnD(3, 2);
+
+    final double r0c3 = m0.getRowColumnD(0, 3) + m1.getRowColumnD(0, 3);
+    final double r1c3 = m0.getRowColumnD(1, 3) + m1.getRowColumnD(1, 3);
+    final double r2c3 = m0.getRowColumnD(2, 3) + m1.getRowColumnD(2, 3);
+    final double r3c3 = m0.getRowColumnD(3, 3) + m1.getRowColumnD(3, 3);
+
+    out.setUnsafe(0, 0, r0c0);
+    out.setUnsafe(1, 0, r1c0);
+    out.setUnsafe(2, 0, r2c0);
+    out.setUnsafe(3, 0, r3c0);
+
+    out.setUnsafe(0, 1, r0c1);
+    out.setUnsafe(1, 1, r1c1);
+    out.setUnsafe(2, 1, r2c1);
+    out.setUnsafe(3, 1, r3c1);
+
+    out.setUnsafe(0, 2, r0c2);
+    out.setUnsafe(1, 2, r1c2);
+    out.setUnsafe(2, 2, r2c2);
+    out.setUnsafe(3, 2, r3c2);
+
+    out.setUnsafe(0, 3, r0c3);
+    out.setUnsafe(1, 3, r1c3);
+    out.setUnsafe(2, 3, r2c3);
+    out.setUnsafe(3, 3, r3c3);
     return out;
   }
 
@@ -404,12 +402,11 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     final MatrixReadable4x4DType input,
     final MatrixM4x4D output)
   {
-    final DoubleBuffer input_view = input.getDoubleBuffer();
-    for (int index = 0; index < MatrixM4x4D.VIEW_ELEMENTS; ++index) {
-      output.view.put(index, input_view.get(index));
+    for (int col = 0; col < MatrixM4x4D.VIEW_COLS; ++col) {
+      for (int row = 0; row < MatrixM4x4D.VIEW_ROWS; ++row) {
+        output.setUnsafe(row, col, input.getRowColumnD(row, col));
+      }
     }
-
-    output.view.rewind();
     return output;
   }
 
@@ -477,18 +474,6 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     sum += r0c3 * r1c2 * r2c1 * r3c0;
 
     return sum;
-  }
-
-  /**
-   * @return A view of the buffer that backs this matrix.
-   * @param m
-   *          The input matrix.
-   */
-
-  public static DoubleBuffer doubleBuffer(
-    final MatrixM4x4D m)
-  {
-    return m.view;
   }
 
   /**
@@ -650,26 +635,6 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
       context.getV4a(),
       context.getV4b(),
       out);
-  }
-
-  /**
-   * @return The value from the matrix <code>m</code> at row <code>row</code>,
-   *         column <code>column</code>.
-   * @param m
-   *          The input matrix
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   */
-
-  public static double get(
-    final MatrixReadable4x4DType m,
-    final int row,
-    final int column)
-  {
-    final DoubleBuffer m_view = m.getDoubleBuffer();
-    return m_view.get(MatrixM4x4D.indexChecked(row, column));
   }
 
   private static int indexChecked(
@@ -1925,12 +1890,46 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     final double r,
     final MatrixM4x4D out)
   {
-    final DoubleBuffer m_view = m.getDoubleBuffer();
-    for (int index = 0; index < MatrixM4x4D.VIEW_ELEMENTS; ++index) {
-      out.view.put(index, m_view.get(index) * r);
-    }
+    final double r0c0 = m.getRowColumnD(0, 0) * r;
+    final double r1c0 = m.getRowColumnD(1, 0) * r;
+    final double r2c0 = m.getRowColumnD(2, 0) * r;
+    final double r3c0 = m.getRowColumnD(3, 0) * r;
 
-    out.view.rewind();
+    final double r0c1 = m.getRowColumnD(0, 1) * r;
+    final double r1c1 = m.getRowColumnD(1, 1) * r;
+    final double r2c1 = m.getRowColumnD(2, 1) * r;
+    final double r3c1 = m.getRowColumnD(3, 1) * r;
+
+    final double r0c2 = m.getRowColumnD(0, 2) * r;
+    final double r1c2 = m.getRowColumnD(1, 2) * r;
+    final double r2c2 = m.getRowColumnD(2, 2) * r;
+    final double r3c2 = m.getRowColumnD(3, 2) * r;
+
+    final double r0c3 = m.getRowColumnD(0, 3) * r;
+    final double r1c3 = m.getRowColumnD(1, 3) * r;
+    final double r2c3 = m.getRowColumnD(2, 3) * r;
+    final double r3c3 = m.getRowColumnD(3, 3) * r;
+
+    out.setUnsafe(0, 0, r0c0);
+    out.setUnsafe(1, 0, r1c0);
+    out.setUnsafe(2, 0, r2c0);
+    out.setUnsafe(3, 0, r3c0);
+
+    out.setUnsafe(0, 1, r0c1);
+    out.setUnsafe(1, 1, r1c1);
+    out.setUnsafe(2, 1, r2c1);
+    out.setUnsafe(3, 1, r3c1);
+
+    out.setUnsafe(0, 2, r0c2);
+    out.setUnsafe(1, 2, r1c2);
+    out.setUnsafe(2, 2, r2c2);
+    out.setUnsafe(3, 2, r3c2);
+
+    out.setUnsafe(0, 3, r0c3);
+    out.setUnsafe(1, 3, r1c3);
+    out.setUnsafe(2, 3, r2c3);
+    out.setUnsafe(3, 3, r3c3);
+
     return out;
   }
 
@@ -2150,11 +2149,17 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     final MatrixM4x4D m)
   {
     m.view.clear();
-    m.view.put(MatrixM4x4D.IDENTITY_ROW_0);
-    m.view.put(MatrixM4x4D.IDENTITY_ROW_1);
-    m.view.put(MatrixM4x4D.IDENTITY_ROW_2);
-    m.view.put(MatrixM4x4D.IDENTITY_ROW_3);
-    m.view.rewind();
+
+    for (int row = 0; row < MatrixM4x4D.VIEW_ROWS; ++row) {
+      for (int col = 0; col < MatrixM4x4D.VIEW_COLS; ++col) {
+        if (row == col) {
+          m.setUnsafe(row, col, 1.0f);
+        } else {
+          m.setUnsafe(row, col, 0.0f);
+        }
+      }
+    }
+
     return m;
   }
 
@@ -2181,11 +2186,9 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     final MatrixM4x4D m)
   {
     m.view.clear();
-    m.view.put(MatrixM4x4D.ZERO_ROW);
-    m.view.put(MatrixM4x4D.ZERO_ROW);
-    m.view.put(MatrixM4x4D.ZERO_ROW);
-    m.view.put(MatrixM4x4D.ZERO_ROW);
-    m.view.rewind();
+    for (int index = 0; index < (MatrixM4x4D.VIEW_ROWS * MatrixM4x4D.VIEW_COLS); ++index) {
+      m.view.put(index, 0.0);
+    }
     return m;
   }
 
@@ -2469,10 +2472,7 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     final MatrixReadable4x4DType m,
     final MatrixM4x4D out)
   {
-    final DoubleBuffer m_view = m.getDoubleBuffer();
-    for (int index = 0; index < MatrixM4x4D.VIEW_ELEMENTS; ++index) {
-      out.view.put(index, m_view.get(index));
-    }
+    MatrixM4x4D.copy(m, out);
     return MatrixM4x4D.transposeInPlace(out);
   }
 
@@ -2524,7 +2524,7 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     assert v != null;
 
     this.view = v;
-
+    this.view.rewind();
     MatrixM4x4D.setIdentity(this);
   }
 
@@ -2551,12 +2551,11 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     assert v != null;
 
     this.view = v;
+    this.view.rewind();
 
     for (int index = 0; index < MatrixM4x4D.VIEW_ELEMENTS; ++index) {
       this.view.put(index, source.view.get(index));
     }
-
-    this.view.rewind();
   }
 
   @Override public boolean equals(
@@ -2582,22 +2581,7 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     return true;
   }
 
-  /**
-   * @return The value at the given row and column
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   */
-
-  public double get(
-    final int row,
-    final int column)
-  {
-    return MatrixM4x4D.get(this, row, column);
-  }
-
-  @Override public DoubleBuffer getDoubleBuffer()
+  @Override public DoubleBuffer getDirectDoubleBuffer()
   {
     return this.view;
   }
@@ -2613,7 +2597,7 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     final int row,
     final int column)
   {
-    return MatrixM4x4D.get(this, row, column);
+    return this.view.get(MatrixM4x4D.indexChecked(row, column));
   }
 
   private double getUnsafe(
@@ -2677,18 +2661,17 @@ public final class MatrixM4x4D implements MatrixReadable4x4DType
     return this;
   }
 
-  @Override public String toString()
+  @SuppressWarnings("boxing") @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     for (int row = 0; row < MatrixM4x4D.VIEW_ROWS; ++row) {
-      final String text =
-        String.format(
-          "[%.15f\t%.15f\t%.15f\t%.15f]\n",
-          Double.valueOf(MatrixM4x4D.get(this, row, 0)),
-          Double.valueOf(MatrixM4x4D.get(this, row, 1)),
-          Double.valueOf(MatrixM4x4D.get(this, row, 2)),
-          Double.valueOf(MatrixM4x4D.get(this, row, 3)));
-      builder.append(text);
+      final double c0 = this.view.get(MatrixM4x4D.indexUnsafe(row, 0));
+      final double c1 = this.view.get(MatrixM4x4D.indexUnsafe(row, 1));
+      final double c2 = this.view.get(MatrixM4x4D.indexUnsafe(row, 2));
+      final double c3 = this.view.get(MatrixM4x4D.indexUnsafe(row, 3));
+      final String s =
+        String.format("[%+.15f %+.15f %+.15f %+.15f]\n", c0, c1, c2, c3);
+      builder.append(s);
     }
     final String r = builder.toString();
     assert r != null;

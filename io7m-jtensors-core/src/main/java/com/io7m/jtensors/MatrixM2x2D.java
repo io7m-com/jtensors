@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -44,16 +44,15 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class MatrixM2x2D implements MatrixReadable2x2DType
+public final class MatrixM2x2D implements
+  MatrixReadable2x2DType,
+  MatrixDirectBufferedDType
 {
-  private static final double[] IDENTITY_ROW_0;
-  private static final double[] IDENTITY_ROW_1;
-  private static final int      VIEW_BYTES;
-  private static final int      VIEW_COLS;
-  private static final int      VIEW_ELEMENT_SIZE;
-  private static final int      VIEW_ELEMENTS;
-  private static final int      VIEW_ROWS;
-  private static final double[] ZERO_ROW;
+  private static final int VIEW_BYTES;
+  private static final int VIEW_COLS;
+  private static final int VIEW_ELEMENT_SIZE;
+  private static final int VIEW_ELEMENTS;
+  private static final int VIEW_ROWS;
 
   static {
     VIEW_ROWS = 2;
@@ -61,18 +60,6 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     VIEW_ELEMENT_SIZE = 8;
     VIEW_ELEMENTS = MatrixM2x2D.VIEW_ROWS * MatrixM2x2D.VIEW_COLS;
     VIEW_BYTES = MatrixM2x2D.VIEW_ELEMENTS * MatrixM2x2D.VIEW_ELEMENT_SIZE;
-
-    IDENTITY_ROW_0 = new double[2];
-    MatrixM2x2D.IDENTITY_ROW_0[0] = 1.0;
-    MatrixM2x2D.IDENTITY_ROW_0[1] = 0.0;
-
-    IDENTITY_ROW_1 = new double[2];
-    MatrixM2x2D.IDENTITY_ROW_1[0] = 0.0;
-    MatrixM2x2D.IDENTITY_ROW_1[1] = 1.0;
-
-    ZERO_ROW = new double[2];
-    MatrixM2x2D.ZERO_ROW[0] = 0.0f;
-    MatrixM2x2D.ZERO_ROW[1] = 0.0f;
   }
 
   /**
@@ -92,15 +79,17 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     final MatrixReadable2x2DType m1,
     final MatrixM2x2D out)
   {
-    final DoubleBuffer m0_view = m0.getDoubleBuffer();
-    final DoubleBuffer m1_view = m1.getDoubleBuffer();
+    final double r0c0 = m0.getRowColumnD(0, 0) + m1.getRowColumnD(0, 0);
+    final double r1c0 = m0.getRowColumnD(1, 0) + m1.getRowColumnD(1, 0);
 
-    out.view.put(0, m0_view.get(0) + m1_view.get(0));
-    out.view.put(1, m0_view.get(1) + m1_view.get(1));
-    out.view.put(2, m0_view.get(2) + m1_view.get(2));
-    out.view.put(3, m0_view.get(3) + m1_view.get(3));
-    out.view.rewind();
+    final double r0c1 = m0.getRowColumnD(0, 1) + m1.getRowColumnD(0, 1);
+    final double r1c1 = m0.getRowColumnD(1, 1) + m1.getRowColumnD(1, 1);
 
+    out.setUnsafe(0, 0, r0c0);
+    out.setUnsafe(1, 0, r1c0);
+
+    out.setUnsafe(0, 1, r0c1);
+    out.setUnsafe(1, 1, r1c1);
     return out;
   }
 
@@ -219,7 +208,6 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     VectorM2D.addScaledInPlace(va, vb, r);
     MatrixM2x2D.setRowUnsafe(out, row_c, va);
 
-    out.view.rewind();
     return out;
   }
 
@@ -248,14 +236,11 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     final MatrixReadable2x2DType input,
     final MatrixM2x2D output)
   {
-    final DoubleBuffer source_view = input.getDoubleBuffer();
-
-    output.view.put(0, source_view.get(0));
-    output.view.put(1, source_view.get(1));
-    output.view.put(2, source_view.get(2));
-    output.view.put(3, source_view.get(3));
-    output.view.rewind();
-
+    for (int col = 0; col < MatrixM2x2D.VIEW_COLS; ++col) {
+      for (int row = 0; row < MatrixM2x2D.VIEW_ROWS; ++row) {
+        output.setUnsafe(row, col, input.getRowColumnD(row, col));
+      }
+    }
     return output;
   }
 
@@ -276,20 +261,6 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     final double r1c1 = m.getRowColumnD(1, 1);
 
     return (r0c0 * r1c1) - (r0c1 * r1c0);
-  }
-
-  /**
-   * Return a view of the buffer that backs this matrix.
-   *
-   * @return The buffer that backs the matrix.
-   * @param m
-   *          The input matrix.
-   */
-
-  public static DoubleBuffer doubleBuffer(
-    final MatrixM2x2D m)
-  {
-    return m.view;
   }
 
   /**
@@ -370,30 +341,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     MatrixM2x2D.setRowUnsafe(out, row_a, vb);
     MatrixM2x2D.setRowUnsafe(out, row_b, va);
 
-    out.view.rewind();
     return out;
-  }
-
-  /**
-   * Retrieve the value from the matrix <code>m</code> at row <code>row</code>
-   * , column <code>column</code>.
-   *
-   * @param row
-   *          The row.
-   * @param column
-   *          The column.
-   * @param m
-   *          The matrix.
-   * @return The value at the given row and column.
-   */
-
-  public static double get(
-    final MatrixReadable2x2DType m,
-    final int row,
-    final int column)
-  {
-    final DoubleBuffer source_view = m.getDoubleBuffer();
-    return source_view.get(MatrixM2x2D.indexChecked(row, column));
   }
 
   private static int indexChecked(
@@ -463,7 +411,6 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     out.setUnsafe(0, 1, r0c1);
     out.setUnsafe(1, 0, r1c0);
     out.setUnsafe(1, 1, r1c1);
-    out.view.rewind();
 
     return Option.some(out);
   }
@@ -542,7 +489,6 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     out.setUnsafe(0, 1, r0c1);
     out.setUnsafe(1, 0, r1c0);
     out.setUnsafe(1, 1, r1c1);
-    out.view.rewind();
 
     return out;
   }
@@ -655,7 +601,6 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     out.setUnsafe(1, 0, m.getRowColumnD(1, 0) * r);
     out.setUnsafe(0, 1, m.getRowColumnD(0, 1) * r);
     out.setUnsafe(1, 1, m.getRowColumnD(1, 1) * r);
-    out.view.rewind();
     return out;
   }
 
@@ -757,7 +702,6 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     final double value)
   {
     m.view.put(MatrixM2x2D.indexChecked(row, column), value);
-    m.view.rewind();
     return m;
   }
 
@@ -773,9 +717,15 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     final MatrixM2x2D m)
   {
     m.view.clear();
-    m.view.put(MatrixM2x2D.IDENTITY_ROW_0);
-    m.view.put(MatrixM2x2D.IDENTITY_ROW_1);
-    m.view.rewind();
+    for (int row = 0; row < MatrixM2x2D.VIEW_ROWS; ++row) {
+      for (int col = 0; col < MatrixM2x2D.VIEW_COLS; ++col) {
+        if (row == col) {
+          m.setUnsafe(row, col, 1.0);
+        } else {
+          m.setUnsafe(row, col, 0.0);
+        }
+      }
+    }
     return m;
   }
 
@@ -786,7 +736,6 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
   {
     m.setUnsafe(row, 0, v.getXD());
     m.setUnsafe(row, 1, v.getYD());
-    m.view.rewind();
   }
 
   /**
@@ -801,9 +750,9 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     final MatrixM2x2D m)
   {
     m.view.clear();
-    m.view.put(MatrixM2x2D.ZERO_ROW);
-    m.view.put(MatrixM2x2D.ZERO_ROW);
-    m.view.rewind();
+    for (int index = 0; index < (MatrixM2x2D.VIEW_ROWS * MatrixM2x2D.VIEW_COLS); ++index) {
+      m.view.put(index, 0.0);
+    }
     return m;
   }
 
@@ -843,7 +792,6 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
       }
     }
 
-    m.view.rewind();
     return m;
   }
 
@@ -887,6 +835,8 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
 
     this.data = b;
     this.view = v;
+    this.view.clear();
+
     MatrixM2x2D.setIdentity(this);
   }
 
@@ -912,13 +862,13 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
 
     this.data = b;
     this.view = d;
+    this.view.clear();
 
-    final DoubleBuffer source_view = source.getDoubleBuffer();
-    for (int index = 0; index < MatrixM2x2D.VIEW_ELEMENTS; ++index) {
-      this.view.put(index, source_view.get(index));
+    for (int row = 0; row < MatrixM2x2D.VIEW_ROWS; ++row) {
+      for (int col = 0; col < MatrixM2x2D.VIEW_COLS; ++col) {
+        this.setUnsafe(row, col, source.getRowColumnD(row, col));
+      }
     }
-
-    this.view.rewind();
   }
 
   @Override public boolean equals(
@@ -944,22 +894,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     return true;
   }
 
-  /**
-   * @return The value at the given row and column.
-   * @param row
-   *          The row.
-   * @param column
-   *          The column.
-   */
-
-  public double get(
-    final int row,
-    final int column)
-  {
-    return MatrixM2x2D.get(this, row, column);
-  }
-
-  @Override public DoubleBuffer getDoubleBuffer()
+  @Override public DoubleBuffer getDirectDoubleBuffer()
   {
     return this.view;
   }
@@ -975,7 +910,7 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     final int row,
     final int column)
   {
-    return MatrixM2x2D.get(this, row, column);
+    return this.view.get(MatrixM2x2D.indexChecked(row, column));
   }
 
   @Override public int hashCode()
@@ -1015,22 +950,17 @@ public final class MatrixM2x2D implements MatrixReadable2x2DType
     final double value)
   {
     this.view.put(MatrixM2x2D.indexUnsafe(row, column), value);
-    this.view.rewind();
     return this;
   }
 
-  @Override public String toString()
+  @SuppressWarnings("boxing") @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    for (int row = 0; row < 2; ++row) {
-      builder.append("[");
-      for (int column = 0; column < 2; ++column) {
-        builder.append(MatrixM2x2D.get(this, row, column));
-        if (column < 1) {
-          builder.append(" ");
-        }
-      }
-      builder.append("]\n");
+    for (int row = 0; row < MatrixM2x2D.VIEW_ROWS; ++row) {
+      final double c0 = this.view.get(MatrixM2x2D.indexUnsafe(row, 0));
+      final double c1 = this.view.get(MatrixM2x2D.indexUnsafe(row, 1));
+      final String s = String.format("[%+.15f %+.15f]\n", c0, c1);
+      builder.append(s);
     }
     final String r = builder.toString();
     assert r != null;

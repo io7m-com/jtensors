@@ -16,22 +16,17 @@
 
 package com.io7m.jtensors;
 
+import java.nio.FloatBuffer;
+
 /**
- * 'Read' interface to matrices with single precision elements.
+ * The type of direct-memory backed matrices with single-precision elements.
  */
 
-public interface MatrixReadableFType
+public interface MatrixDirectBufferedFType extends MatrixReadableFType
 {
   /**
-   * @return The value from the matrix at row <code>row</code> , column
-   *         <code>column</code>.
-   * @param row
-   *          The row
-   * @param column
-   *          The column
+   * @return The direct-memory float buffer that backs the matrix.
    */
 
-  float getRowColumnF(
-    int row,
-    int column);
+  FloatBuffer getDirectFloatBuffer();
 }
