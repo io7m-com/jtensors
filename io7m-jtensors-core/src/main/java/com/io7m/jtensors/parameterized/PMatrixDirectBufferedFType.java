@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013 <code@io7m.com> http://io7m.com
+ * Copyright © 2014 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,5 +14,22 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-@com.io7m.jnull.NullableByDefault package com.io7m.jtensors.tests;
+package com.io7m.jtensors.parameterized;
 
+import com.io7m.jtensors.MatrixDirectBufferedFType;
+
+/**
+ * The type of direct-memory backed matrices with single-precision elements.
+ *
+ * @param <T>
+ *          A phantom type parameter.
+ * @param <U>
+ *          A phantom type parameter.
+ * @since 7.0.0
+ */
+
+public interface PMatrixDirectBufferedFType<T, U> extends
+  MatrixDirectBufferedFType
+{
+  // No extra functions.
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2013 <code@io7m.com> http://io7m.com
+ * Copyright © 2014 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,5 +14,22 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-@com.io7m.jnull.NullableByDefault package com.io7m.jtensors.tests;
+package com.io7m.jtensors.parameterized;
 
+/**
+ * 'Read' interface to 4x4 direct-memory matrices with double precision
+ * elements.
+ *
+ * @param <T>
+ *          A phantom type parameter.
+ * @param <U>
+ *          A phantom type parameter.
+ * @since 7.0.0
+ */
+
+public interface PMatrixDirectReadable4x4DType<T, U> extends
+  PMatrixReadable4x4DType<T, U>,
+  PMatrixDirectBufferedDType<T, U>
+{
+  // No extra functions.
+}
