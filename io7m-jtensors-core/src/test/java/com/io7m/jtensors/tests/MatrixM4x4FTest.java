@@ -2429,7 +2429,7 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
       System.out.println("axis  : " + axis);
       System.out.println("angle : " + angle);
 
-      MatrixM4x4F.makeRotation(angle, axis, m);
+      MatrixM4x4F.makeRotationInto(angle, axis, m);
 
       final double det = MatrixM4x4F.determinant(m);
       System.out.println("det   : " + det);
@@ -2471,7 +2471,7 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
     final VectorM4F v_got = new VectorM4F();
     final VectorM4F v_exp = new VectorM4F(0, 0, -1, 1);
 
-    MatrixM4x4F.makeRotation(0, MatrixM4x4FTest.AXIS_X, m);
+    MatrixM4x4F.makeRotationInto(0, MatrixM4x4FTest.AXIS_X, m);
     MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2496,7 +2496,7 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
     final VectorM4F v_got = new VectorM4F();
     final VectorM4F v_exp = new VectorM4F(0, 0, -1, 1);
 
-    MatrixM4x4F.makeRotation(0, MatrixM4x4FTest.AXIS_Y, m);
+    MatrixM4x4F.makeRotationInto(0, MatrixM4x4FTest.AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2521,7 +2521,7 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
     final VectorM4F v_got = new VectorM4F();
     final VectorM4F v_exp = new VectorM4F(0, 0, -1, 1);
 
-    MatrixM4x4F.makeRotation(0, MatrixM4x4FTest.AXIS_Z, m);
+    MatrixM4x4F.makeRotationInto(0, MatrixM4x4FTest.AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2556,7 +2556,7 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
 
     final VectorM4F v_exp = new VectorM4F(0, 6.1232339957367E-17f, 1, 1);
 
-    MatrixM4x4F.makeRotation(Math.toRadians(90), MatrixM4x4FTest.AXIS_X, m);
+    MatrixM4x4F.makeRotationInto(Math.toRadians(90), MatrixM4x4FTest.AXIS_X, m);
     System.out.println(m);
     MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
 
@@ -2597,7 +2597,7 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
 
     final VectorM4F v_exp = new VectorM4F(-1, 0, -6.1232339957367E-17f, 1);
 
-    MatrixM4x4F.makeRotation(Math.toRadians(90), MatrixM4x4FTest.AXIS_Y, m);
+    MatrixM4x4F.makeRotationInto(Math.toRadians(90), MatrixM4x4FTest.AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2630,7 +2630,7 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
     final VectorM4F v_in = new VectorM4F(0, 1, 0, 1);
     final VectorM4F v_exp = new VectorM4F(-1, 6.123233995736766E-17f, 0, 1);
 
-    MatrixM4x4F.makeRotation(Math.toRadians(90), MatrixM4x4FTest.AXIS_Z, m);
+    MatrixM4x4F.makeRotationInto(Math.toRadians(90), MatrixM4x4FTest.AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2670,7 +2670,7 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
 
     final VectorM4F v_exp = new VectorM4F(0, 6.1232339957367E-17f, -1, 1);
 
-    MatrixM4x4F.makeRotation(Math.toRadians(-90), MatrixM4x4FTest.AXIS_X, m);
+    MatrixM4x4F.makeRotationInto(Math.toRadians(-90), MatrixM4x4FTest.AXIS_X, m);
     System.out.println(m);
     MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
 
@@ -2711,7 +2711,7 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
 
     final VectorM4F v_exp = new VectorM4F(1, 0, -6.1232339957367E-17f, 1);
 
-    MatrixM4x4F.makeRotation(Math.toRadians(-90), MatrixM4x4FTest.AXIS_Y, m);
+    MatrixM4x4F.makeRotationInto(Math.toRadians(-90), MatrixM4x4FTest.AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2744,7 +2744,7 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
     final VectorM4F v_in = new VectorM4F(0, 1, 0, 1);
     final VectorM4F v_exp = new VectorM4F(1, 6.123233995736766E-17f, 0, 1);
 
-    MatrixM4x4F.makeRotation(Math.toRadians(-90), MatrixM4x4FTest.AXIS_Z, m);
+    MatrixM4x4F.makeRotationInto(Math.toRadians(-90), MatrixM4x4FTest.AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);

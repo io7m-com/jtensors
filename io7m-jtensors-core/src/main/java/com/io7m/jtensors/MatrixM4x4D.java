@@ -664,7 +664,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     return (column * MatrixM4x4D.VIEW_COLS) + row;
   }
 
-  private static OptionType<MatrixM4x4D> invert(
+  private static OptionType<MatrixM4x4D> invertActual(
     final MatrixReadable4x4DType m,
     final MatrixM3x3D m3,
     final MatrixM4x4D out)
@@ -1034,7 +1034,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     final MatrixM4x4D out)
   {
     final MatrixM3x3D m3 = new MatrixM3x3D();
-    return MatrixM4x4D.invert(m, m3, out);
+    return MatrixM4x4D.invertActual(m, m3, out);
   }
 
   /**
@@ -1108,7 +1108,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     final MatrixReadable4x4DType m,
     final MatrixM4x4D out)
   {
-    return MatrixM4x4D.invert(m, context.getM3a(), out);
+    return MatrixM4x4D.invertActual(m, context.getM3a(), out);
   }
 
   /**
@@ -1230,7 +1230,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     final VectorReadable3DType axis)
   {
     final MatrixM4x4D out = new MatrixM4x4D();
-    MatrixM4x4D.makeRotation(angle, axis, out);
+    MatrixM4x4D.makeRotationInto(angle, axis, out);
     out.view.rewind();
     return out;
   }
@@ -1255,7 +1255,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
    * @return <code>out</code>
    */
 
-  public static MatrixM4x4D makeRotation(
+  public static MatrixM4x4D makeRotationInto(
     final double angle,
     final VectorReadable3DType axis,
     final MatrixM4x4D out)
@@ -1337,7 +1337,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     final VectorReadable3DType v)
   {
     final MatrixM4x4D out = new MatrixM4x4D();
-    MatrixM4x4D.makeTranslation3D(v, out);
+    MatrixM4x4D.makeTranslation3DInto(v, out);
     out.view.rewind();
     return out;
   }
@@ -1354,7 +1354,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
    * @return <code>out</code>
    */
 
-  public static MatrixM4x4D makeTranslation3D(
+  public static MatrixM4x4D makeTranslation3DInto(
     final VectorReadable3DType v,
     final MatrixM4x4D out)
   {
@@ -1395,7 +1395,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     final VectorReadable3IType v)
   {
     final MatrixM4x4D out = new MatrixM4x4D();
-    MatrixM4x4D.makeTranslation3I(v, out);
+    MatrixM4x4D.makeTranslation3IInto(v, out);
     out.view.rewind();
     return out;
   }
@@ -1412,7 +1412,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
    * @return <code>out</code>
    */
 
-  public static MatrixM4x4D makeTranslation3I(
+  public static MatrixM4x4D makeTranslation3IInto(
     final VectorReadable3IType v,
     final MatrixM4x4D out)
   {
@@ -1622,10 +1622,10 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
   {
     final VectorM4D va = new VectorM4D();
     final VectorM4D vb = new VectorM4D();
-    return MatrixM4x4D.multiplyVector4D(m, v, va, vb, out);
+    return MatrixM4x4D.multiplyVector4DActual(m, v, va, vb, out);
   }
 
-  private static VectorM4D multiplyVector4D(
+  private static VectorM4D multiplyVector4DActual(
     final MatrixReadable4x4DType m,
     final VectorReadable4DType v,
     final VectorM4D va,
@@ -1677,7 +1677,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     final VectorReadable4DType v,
     final VectorM4D out)
   {
-    return MatrixM4x4D.multiplyVector4D(
+    return MatrixM4x4D.multiplyVector4DActual(
       m,
       v,
       context.getV4a(),
@@ -1685,14 +1685,14 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
       out);
   }
 
-  private static MatrixM4x4D rotate(
+  private static MatrixM4x4D rotateActual(
     final double angle,
     final MatrixReadable4x4DType m,
     final MatrixM4x4D tmp,
     final VectorReadable3DType axis,
     final MatrixM4x4D out)
   {
-    MatrixM4x4D.makeRotation(angle, axis, tmp);
+    MatrixM4x4D.makeRotationInto(angle, axis, tmp);
     MatrixM4x4D.multiply(m, tmp, out);
     out.view.rewind();
     return out;
@@ -1727,7 +1727,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     final MatrixM4x4D out)
   {
     final MatrixM4x4D tmp = new MatrixM4x4D();
-    return MatrixM4x4D.rotate(angle, m, tmp, axis, out);
+    return MatrixM4x4D.rotateActual(angle, m, tmp, axis, out);
   }
 
   /**
@@ -1756,7 +1756,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     final VectorReadable3DType axis)
   {
     final MatrixM4x4D tmp = new MatrixM4x4D();
-    return MatrixM4x4D.rotate(angle, m, tmp, axis, m);
+    return MatrixM4x4D.rotateActual(angle, m, tmp, axis, m);
   }
 
   /**
@@ -1789,7 +1789,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     final MatrixM4x4D m,
     final VectorReadable3DType axis)
   {
-    return MatrixM4x4D.rotate(angle, m, context.getM4a(), axis, m);
+    return MatrixM4x4D.rotateActual(angle, m, context.getM4a(), axis, m);
   }
 
   /**
@@ -1825,7 +1825,7 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     final VectorReadable3DType axis,
     final MatrixM4x4D out)
   {
-    return MatrixM4x4D.rotate(angle, m, context.getM4a(), axis, out);
+    return MatrixM4x4D.rotateActual(angle, m, context.getM4a(), axis, out);
   }
 
   /**

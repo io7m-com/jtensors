@@ -23,6 +23,8 @@ import java.util.Map.Entry;
 
 import org.junit.Test;
 
+import com.io7m.jtensors.MatrixM4x4D;
+import com.io7m.jtensors.MatrixM4x4F;
 import com.io7m.jtensors.VectorI2D;
 import com.io7m.jtensors.VectorI2F;
 import com.io7m.jtensors.VectorI2I;
@@ -38,6 +40,8 @@ import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorM3I;
 import com.io7m.jtensors.VectorM4F;
 import com.io7m.jtensors.VectorM4I;
+import com.io7m.jtensors.parameterized.PMatrixM4x4D;
+import com.io7m.jtensors.parameterized.PMatrixM4x4F;
 import com.io7m.jtensors.parameterized.PVectorI2D;
 import com.io7m.jtensors.parameterized.PVectorI2F;
 import com.io7m.jtensors.parameterized.PVectorI2I;
@@ -57,7 +61,7 @@ import com.io7m.jtensors.parameterized.PVectorM4D;
 import com.io7m.jtensors.parameterized.PVectorM4F;
 import com.io7m.jtensors.parameterized.PVectorM4I;
 
-public final class APICompleteness
+@SuppressWarnings("static-method") public final class APICompleteness
 {
   private static void checkAgainst(
     final Class<?> c_base,
@@ -220,9 +224,29 @@ public final class APICompleteness
     return methods;
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testQuaternionCompleteness()
+  private static void checkPMatrix4F()
+  {
+    final Class<?> classes[] = { MatrixM4x4F.class };
+    for (final Class<?> c : classes) {
+      APICompleteness.checkAgainst(PMatrixM4x4F.class, c);
+    }
+  }
+
+  private static void checkPMatrix4D()
+  {
+    final Class<?> classes[] = { MatrixM4x4D.class };
+    for (final Class<?> c : classes) {
+      APICompleteness.checkAgainst(PMatrixM4x4D.class, c);
+    }
+  }
+
+  @Test public void testMatrixCompleteness()
+  {
+    APICompleteness.checkPMatrix4F();
+    APICompleteness.checkPMatrix4D();
+  }
+
+  @Test public void testVectorCompleteness()
   {
     APICompleteness.checkPVector4();
     APICompleteness.checkPVector3();

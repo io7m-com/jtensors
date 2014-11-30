@@ -2391,7 +2391,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       System.out.println("axis  : " + axis);
       System.out.println("angle : " + angle);
 
-      MatrixM4x4D.makeRotation(angle, axis, m);
+      MatrixM4x4D.makeRotationInto(angle, axis, m);
 
       final double det = MatrixM4x4D.determinant(m);
       System.out.println("det   : " + det);
@@ -2433,7 +2433,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final VectorM4D v_got = new VectorM4D();
     final VectorM4D v_exp = new VectorM4D(0, 0, -1, 1);
 
-    MatrixM4x4D.makeRotation(0, MatrixM4x4DTest.AXIS_X, m);
+    MatrixM4x4D.makeRotationInto(0, MatrixM4x4DTest.AXIS_X, m);
     MatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2458,7 +2458,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final VectorM4D v_got = new VectorM4D();
     final VectorM4D v_exp = new VectorM4D(0, 0, -1, 1);
 
-    MatrixM4x4D.makeRotation(0, MatrixM4x4DTest.AXIS_Y, m);
+    MatrixM4x4D.makeRotationInto(0, MatrixM4x4DTest.AXIS_Y, m);
     MatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2483,7 +2483,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final VectorM4D v_got = new VectorM4D();
     final VectorM4D v_exp = new VectorM4D(0, 0, -1, 1);
 
-    MatrixM4x4D.makeRotation(0, MatrixM4x4DTest.AXIS_Z, m);
+    MatrixM4x4D.makeRotationInto(0, MatrixM4x4DTest.AXIS_Z, m);
     MatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2518,7 +2518,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
     final VectorM4D v_exp = new VectorM4D(0, 6.1232339957367E-17, 1, 1);
 
-    MatrixM4x4D.makeRotation(Math.toRadians(90), MatrixM4x4DTest.AXIS_X, m);
+    MatrixM4x4D.makeRotationInto(Math.toRadians(90), MatrixM4x4DTest.AXIS_X, m);
     System.out.println(m);
     MatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
@@ -2559,7 +2559,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
     final VectorM4D v_exp = new VectorM4D(-1, 0, -6.1232339957367E-17, 1);
 
-    MatrixM4x4D.makeRotation(Math.toRadians(90), MatrixM4x4DTest.AXIS_Y, m);
+    MatrixM4x4D.makeRotationInto(Math.toRadians(90), MatrixM4x4DTest.AXIS_Y, m);
     MatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2592,7 +2592,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final VectorM4D v_in = new VectorM4D(0, 1, 0, 1);
     final VectorM4D v_exp = new VectorM4D(-1, 6.123233995736766E-17, 0, 1);
 
-    MatrixM4x4D.makeRotation(Math.toRadians(90), MatrixM4x4DTest.AXIS_Z, m);
+    MatrixM4x4D.makeRotationInto(Math.toRadians(90), MatrixM4x4DTest.AXIS_Z, m);
     MatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2632,7 +2632,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
     final VectorM4D v_exp = new VectorM4D(0, 6.1232339957367E-17, -1, 1);
 
-    MatrixM4x4D.makeRotation(Math.toRadians(-90), MatrixM4x4DTest.AXIS_X, m);
+    MatrixM4x4D.makeRotationInto(Math.toRadians(-90), MatrixM4x4DTest.AXIS_X, m);
     System.out.println(m);
     MatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
@@ -2673,7 +2673,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
     final VectorM4D v_exp = new VectorM4D(1, 0, -6.1232339957367E-17, 1);
 
-    MatrixM4x4D.makeRotation(Math.toRadians(-90), MatrixM4x4DTest.AXIS_Y, m);
+    MatrixM4x4D.makeRotationInto(Math.toRadians(-90), MatrixM4x4DTest.AXIS_Y, m);
     MatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2706,7 +2706,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final VectorM4D v_in = new VectorM4D(0, 1, 0, 1);
     final VectorM4D v_exp = new VectorM4D(1, 6.123233995736766E-17, 0, 1);
 
-    MatrixM4x4D.makeRotation(Math.toRadians(-90), MatrixM4x4DTest.AXIS_Z, m);
+    MatrixM4x4D.makeRotationInto(Math.toRadians(-90), MatrixM4x4DTest.AXIS_Z, m);
     MatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -3596,7 +3596,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final VectorM4D w3o = new VectorM4D();
 
     MatrixM3x3D.makeTranslation2D(v, m3);
-    MatrixM4x4D.makeTranslation3D(v, m4);
+    MatrixM4x4D.makeTranslation3DInto(v, m4);
 
     MatrixM3x3D.multiplyVector3D(m3, v3i, v3o);
     MatrixM4x4D.multiplyVector4D(m4, w3i, w3o);
@@ -4200,7 +4200,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = new MatrixM4x4D();
       final MatrixM4x4D t = new MatrixM4x4D();
 
-      MatrixM4x4D.makeTranslation3I(v, t);
+      MatrixM4x4D.makeTranslation3IInto(v, t);
       MatrixM4x4D.multiply(m, t, r);
 
       Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
@@ -4272,7 +4272,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
       final MatrixM4x4D r = new MatrixM4x4D();
       final MatrixM4x4D t = new MatrixM4x4D();
 
-      MatrixM4x4D.makeTranslation3D(v, t);
+      MatrixM4x4D.makeTranslation3DInto(v, t);
 
       Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
       Assert.assertEquals(0, r.getDirectDoubleBuffer().position());

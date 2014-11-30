@@ -433,24 +433,6 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
 
   /**
    * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
-   * writing the result to <code>m0</code>.
-   *
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM2x2F multiply(
-    final MatrixM2x2F m0,
-    final MatrixReadable2x2FType m1)
-  {
-    return MatrixM2x2F.multiply(m0, m1, m0);
-  }
-
-  /**
-   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
    * writing the result to <code>out</code>.
    *
    * @param m0
@@ -486,6 +468,24 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
     out.setUnsafe(1, 1, r1c1);
 
     return out;
+  }
+
+  /**
+   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
+   * writing the result to <code>m0</code>.
+   *
+   * @param m0
+   *          The left input vector.
+   * @param m1
+   *          The right input vector.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM2x2F multiplyInPlace(
+    final MatrixM2x2F m0,
+    final MatrixReadable2x2FType m1)
+  {
+    return MatrixM2x2F.multiply(m0, m1, m0);
   }
 
   /**
@@ -556,24 +556,6 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
 
   /**
    * Scale all elements of the matrix <code>m</code> by the scaling value
-   * <code>r</code>, saving the result in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM2x2F scale(
-    final MatrixM2x2F m,
-    final float r)
-  {
-    return MatrixM2x2F.scale(m, r, m);
-  }
-
-  /**
-   * Scale all elements of the matrix <code>m</code> by the scaling value
    * <code>r</code>, saving the result in <code>out</code>.
    *
    * @param m
@@ -598,31 +580,21 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
   }
 
   /**
-   * <p>
-   * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
-   * saving the result to row <code>r</code> of <code>m</code>.
-   * </p>
-   * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
-   * </p>
+   * Scale all elements of the matrix <code>m</code> by the scaling value
+   * <code>r</code>, saving the result in <code>m</code>.
    *
    * @param m
    *          The input matrix.
-   * @param row
-   *          The index of the row (0 <= row < 4).
    * @param r
    *          The scaling value.
    * @return <code>m</code>
    */
 
-  public static MatrixM2x2F scaleRow(
+  public static MatrixM2x2F scaleInPlace(
     final MatrixM2x2F m,
-    final int row,
     final float r)
   {
-    return MatrixM2x2F.scaleRowUnsafe(m, MatrixM2x2F.rowCheck(row), r, m);
+    return MatrixM2x2F.scale(m, r, m);
   }
 
   /**
@@ -654,6 +626,34 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
     final MatrixM2x2F out)
   {
     return MatrixM2x2F.scaleRowUnsafe(m, MatrixM2x2F.rowCheck(row), r, out);
+  }
+
+  /**
+   * <p>
+   * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
+   * saving the result to row <code>r</code> of <code>m</code>.
+   * </p>
+   * <p>
+   * This is one of the three "elementary" operations defined on matrices. See
+   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
+   * .
+   * </p>
+   *
+   * @param m
+   *          The input matrix.
+   * @param row
+   *          The index of the row (0 <= row < 4).
+   * @param r
+   *          The scaling value.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM2x2F scaleRowInPlace(
+    final MatrixM2x2F m,
+    final int row,
+    final float r)
+  {
+    return MatrixM2x2F.scaleRowUnsafe(m, MatrixM2x2F.rowCheck(row), r, m);
   }
 
   private static MatrixM2x2F scaleRowUnsafe(
@@ -766,29 +766,6 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
 
   /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
-   * to <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM2x2F transpose(
-    final MatrixM2x2F m)
-  {
-    for (int row = 0; row < (2 - 1); ++row) {
-      for (int column = row + 1; column < 2; ++column) {
-        final float x = m.view.get((row * 2) + column);
-        m.view.put((row * 2) + column, m.view.get(row + (2 * column)));
-        m.view.put(row + (2 * column), x);
-      }
-    }
-
-    return m;
-  }
-
-  /**
-   * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>out</code>.
    *
    * @param m
@@ -803,7 +780,30 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
     final MatrixM2x2F out)
   {
     MatrixM2x2F.copy(m, out);
-    return MatrixM2x2F.transpose(out);
+    return MatrixM2x2F.transposeInPlace(out);
+  }
+
+  /**
+   * Transpose the given matrix <code>m</code>, writing the resulting matrix
+   * to <code>m</code>.
+   *
+   * @param m
+   *          The input matrix.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM2x2F transposeInPlace(
+    final MatrixM2x2F m)
+  {
+    for (int row = 0; row < (2 - 1); ++row) {
+      for (int column = row + 1; column < 2; ++column) {
+        final float x = m.view.get((row * 2) + column);
+        m.view.put((row * 2) + column, m.view.get(row + (2 * column)));
+        m.view.put(row + (2 * column), x);
+      }
+    }
+
+    return m;
   }
 
   @SuppressWarnings("unused") private final ByteBuffer data;

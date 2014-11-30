@@ -502,7 +502,7 @@ import com.io7m.jtensors.VectorM2F;
       }
     }
 
-    final MatrixM2x2F r = MatrixM2x2F.multiply(m0, m1);
+    final MatrixM2x2F r = MatrixM2x2F.multiplyInPlace(m0, m1);
     Assert.assertSame(m0, r);
     Assert.assertEquals(0, r.getDirectFloatBuffer().position());
 
@@ -525,7 +525,7 @@ import com.io7m.jtensors.VectorM2F;
     MatrixM2x2F.set(m0, 1, 1, 4.0f);
 
     final MatrixM2x2F m1 = new MatrixM2x2F(m0);
-    final MatrixM2x2F r = MatrixM2x2F.multiply(m0, m1);
+    final MatrixM2x2F r = MatrixM2x2F.multiplyInPlace(m0, m1);
     Assert.assertSame(r, m0);
     Assert.assertEquals(0, r.getDirectFloatBuffer().position());
 
@@ -694,7 +694,7 @@ import com.io7m.jtensors.VectorM2F;
       }
     }
 
-    final MatrixM2x2F mr = MatrixM2x2F.scale(m, 5.0f);
+    final MatrixM2x2F mr = MatrixM2x2F.scaleInPlace(m, 5.0f);
     Assert.assertSame(mr, m);
     Assert.assertEquals(0, mr.getDirectFloatBuffer().position());
 
@@ -727,8 +727,8 @@ import com.io7m.jtensors.VectorM2F;
     Assert.assertTrue(m1.getRowColumnF(1, 0) == 20.0);
     Assert.assertTrue(m1.getRowColumnF(1, 1) == 24.0);
 
-    MatrixM2x2F.scaleRow(m0, 0, 2.0f);
-    MatrixM2x2F.scaleRow(m0, 1, 4.0f);
+    MatrixM2x2F.scaleRowInPlace(m0, 0, 2.0f);
+    MatrixM2x2F.scaleRowInPlace(m0, 1, 4.0f);
     Assert.assertEquals(0, m1.getDirectFloatBuffer().position());
 
     Assert.assertTrue(m0.getRowColumnF(0, 0) == 2.0);
@@ -743,7 +743,7 @@ import com.io7m.jtensors.VectorM2F;
     testScaleRowMutateOverflow()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
-    MatrixM2x2F.scaleRow(m, 2, 1.0f);
+    MatrixM2x2F.scaleRowInPlace(m, 2, 1.0f);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -751,7 +751,7 @@ import com.io7m.jtensors.VectorM2F;
     testScaleRowMutateUnderflow()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
-    MatrixM2x2F.scaleRow(m, -1, 1.0f);
+    MatrixM2x2F.scaleRowInPlace(m, -1, 1.0f);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -894,7 +894,7 @@ import com.io7m.jtensors.VectorM2F;
     m.set(1, 0, 4.0f);
     m.set(1, 1, 5.0f);
 
-    final MatrixM2x2F r = MatrixM2x2F.transpose(m);
+    final MatrixM2x2F r = MatrixM2x2F.transposeInPlace(m);
     Assert.assertSame(m, r);
     Assert.assertEquals(0, r.getDirectFloatBuffer().position());
 

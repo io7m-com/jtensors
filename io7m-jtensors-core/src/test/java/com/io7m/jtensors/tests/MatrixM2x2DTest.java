@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -101,7 +101,7 @@ import com.io7m.jtensors.VectorM2D;
     Assert.assertTrue(m1.getRowColumnD(1, 0) == 13.0);
     Assert.assertTrue(m1.getRowColumnD(1, 1) == 13.0);
 
-    MatrixM2x2D.addRowScaled(m0, 0, 1, 1, 2.0);
+    MatrixM2x2D.addRowScaledInPlace(m0, 0, 1, 1, 2.0);
     Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
 
     Assert.assertTrue(m0.getRowColumnD(0, 0) == 3.0);
@@ -116,7 +116,7 @@ import com.io7m.jtensors.VectorM2D;
     testAddRowScaledOverflowA()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.addRowScaled(m, 2, 0, 0, 1.0);
+    MatrixM2x2D.addRowScaledInPlace(m, 2, 0, 0, 1.0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -124,7 +124,7 @@ import com.io7m.jtensors.VectorM2D;
     testAddRowScaledOverflowB()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.addRowScaled(m, 0, 2, 0, 1.0);
+    MatrixM2x2D.addRowScaledInPlace(m, 0, 2, 0, 1.0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -132,7 +132,7 @@ import com.io7m.jtensors.VectorM2D;
     testAddRowScaledOverflowC()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.addRowScaled(m, 0, 0, 2, 1.0);
+    MatrixM2x2D.addRowScaledInPlace(m, 0, 0, 2, 1.0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -140,7 +140,7 @@ import com.io7m.jtensors.VectorM2D;
     testAddRowScaledUnderflowA()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.addRowScaled(m, -1, 0, 0, 1.0);
+    MatrixM2x2D.addRowScaledInPlace(m, -1, 0, 0, 1.0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -148,7 +148,7 @@ import com.io7m.jtensors.VectorM2D;
     testAddRowScaledUnderflowB()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.addRowScaled(m, 0, -1, 0, 1.0);
+    MatrixM2x2D.addRowScaledInPlace(m, 0, -1, 0, 1.0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -156,7 +156,7 @@ import com.io7m.jtensors.VectorM2D;
     testAddRowScaledUnderflowC()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.addRowScaled(m, 0, 0, -1, 1.0);
+    MatrixM2x2D.addRowScaledInPlace(m, 0, 0, -1, 1.0);
   }
 
   @Test public void testBufferEndianness()
@@ -288,7 +288,7 @@ import com.io7m.jtensors.VectorM2D;
     Assert.assertTrue(m1.getRowColumnD(1, 0) == 1.0);
     Assert.assertTrue(m1.getRowColumnD(1, 1) == 2.0);
 
-    MatrixM2x2D.exchangeRows(m1, 0, 1);
+    MatrixM2x2D.exchangeRowsInPlace(m1, 0, 1);
     Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
     Assert.assertEquals(0, m1.getDirectDoubleBuffer().position());
 
@@ -304,7 +304,7 @@ import com.io7m.jtensors.VectorM2D;
     testExchangeRowsAOverflow()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.exchangeRows(m, 2, 0);
+    MatrixM2x2D.exchangeRowsInPlace(m, 2, 0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -312,7 +312,7 @@ import com.io7m.jtensors.VectorM2D;
     testExchangeRowsAUnderflow()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.exchangeRows(m, -1, 0);
+    MatrixM2x2D.exchangeRowsInPlace(m, -1, 0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -320,7 +320,7 @@ import com.io7m.jtensors.VectorM2D;
     testExchangeRowsBOverflow()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.exchangeRows(m, 0, 2);
+    MatrixM2x2D.exchangeRowsInPlace(m, 0, 2);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -328,7 +328,7 @@ import com.io7m.jtensors.VectorM2D;
     testExchangeRowsBUnderflow()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.exchangeRows(m, 0, -1);
+    MatrixM2x2D.exchangeRowsInPlace(m, 0, -1);
   }
 
   @Test public void testHashcodeNeqExhaustive()
@@ -503,7 +503,7 @@ import com.io7m.jtensors.VectorM2D;
       }
     }
 
-    final MatrixM2x2D r = MatrixM2x2D.multiply(m0, m1);
+    final MatrixM2x2D r = MatrixM2x2D.multiplyInPlace(m0, m1);
     Assert.assertSame(m0, r);
     Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
@@ -526,7 +526,7 @@ import com.io7m.jtensors.VectorM2D;
     MatrixM2x2D.set(m0, 1, 1, 4.0);
 
     final MatrixM2x2D m1 = new MatrixM2x2D(m0);
-    final MatrixM2x2D r = MatrixM2x2D.multiply(m0, m1);
+    final MatrixM2x2D r = MatrixM2x2D.multiplyInPlace(m0, m1);
     Assert.assertSame(r, m0);
     Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 
@@ -695,7 +695,7 @@ import com.io7m.jtensors.VectorM2D;
       }
     }
 
-    final MatrixM2x2D mr = MatrixM2x2D.scale(m, 5.0);
+    final MatrixM2x2D mr = MatrixM2x2D.scaleInPlace(m, 5.0);
     Assert.assertSame(mr, m);
     Assert.assertEquals(0, mr.getDirectDoubleBuffer().position());
 
@@ -730,8 +730,8 @@ import com.io7m.jtensors.VectorM2D;
     Assert.assertTrue(m1.getRowColumnD(1, 0) == 20.0);
     Assert.assertTrue(m1.getRowColumnD(1, 1) == 24.0);
 
-    MatrixM2x2D.scaleRow(m0, 0, 2.0);
-    MatrixM2x2D.scaleRow(m0, 1, 4.0);
+    MatrixM2x2D.scaleRowInPlace(m0, 0, 2.0);
+    MatrixM2x2D.scaleRowInPlace(m0, 1, 4.0);
     Assert.assertEquals(0, m0.getDirectDoubleBuffer().position());
 
     Assert.assertTrue(m0.getRowColumnD(0, 0) == 2.0);
@@ -746,7 +746,7 @@ import com.io7m.jtensors.VectorM2D;
     testScaleRowMutateOverflow()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.scaleRow(m, 2, 1.0);
+    MatrixM2x2D.scaleRowInPlace(m, 2, 1.0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -754,7 +754,7 @@ import com.io7m.jtensors.VectorM2D;
     testScaleRowMutateUnderflow()
   {
     final MatrixM2x2D m = new MatrixM2x2D();
-    MatrixM2x2D.scaleRow(m, -1, 1.0);
+    MatrixM2x2D.scaleRowInPlace(m, -1, 1.0);
   }
 
   @Test(expected = IndexOutOfBoundsException.class) public
@@ -884,7 +884,7 @@ import com.io7m.jtensors.VectorM2D;
     m.set(1, 0, 4.0);
     m.set(1, 1, 5.0);
 
-    final MatrixM2x2D r = MatrixM2x2D.transpose(m);
+    final MatrixM2x2D r = MatrixM2x2D.transposeInPlace(m);
     Assert.assertSame(m, r);
     Assert.assertEquals(0, r.getDirectDoubleBuffer().position());
 

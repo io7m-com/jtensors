@@ -1318,7 +1318,7 @@ import com.io7m.jtensors.VectorReadable3FType;
       System.out.println("axis  : " + axis);
       System.out.println("angle : " + angle);
 
-      MatrixM3x3F.makeRotation(angle, axis, m);
+      MatrixM3x3F.makeRotationInto(angle, axis, m);
 
       final double det = MatrixM3x3F.determinant(m);
       System.out.println("det   : " + det);
@@ -1360,7 +1360,7 @@ import com.io7m.jtensors.VectorReadable3FType;
     final VectorM3F v_got = new VectorM3F();
     final VectorM3F v_exp = new VectorM3F(0, 0, -1);
 
-    MatrixM3x3F.makeRotation(0, MatrixM3x3FTest.AXIS_X, m);
+    MatrixM3x3F.makeRotationInto(0, MatrixM3x3FTest.AXIS_X, m);
     MatrixM3x3F.multiplyVector3F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -1385,7 +1385,7 @@ import com.io7m.jtensors.VectorReadable3FType;
     final VectorM3F v_got = new VectorM3F();
     final VectorM3F v_exp = new VectorM3F(0, 0, -1);
 
-    MatrixM3x3F.makeRotation(0, MatrixM3x3FTest.AXIS_Y, m);
+    MatrixM3x3F.makeRotationInto(0, MatrixM3x3FTest.AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -1410,7 +1410,7 @@ import com.io7m.jtensors.VectorReadable3FType;
     final VectorM3F v_got = new VectorM3F();
     final VectorM3F v_exp = new VectorM3F(0, 0, -1);
 
-    MatrixM3x3F.makeRotation(0, MatrixM3x3FTest.AXIS_Z, m);
+    MatrixM3x3F.makeRotationInto(0, MatrixM3x3FTest.AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -1445,7 +1445,7 @@ import com.io7m.jtensors.VectorReadable3FType;
 
     final VectorM3F v_exp = new VectorM3F(0, 6.1232339957367E-17f, 1);
 
-    MatrixM3x3F.makeRotation(Math.toRadians(90), MatrixM3x3FTest.AXIS_X, m);
+    MatrixM3x3F.makeRotationInto(Math.toRadians(90), MatrixM3x3FTest.AXIS_X, m);
     System.out.println(m);
     MatrixM3x3F.multiplyVector3F(m, v_in, v_got);
 
@@ -1486,7 +1486,7 @@ import com.io7m.jtensors.VectorReadable3FType;
 
     final VectorM3F v_exp = new VectorM3F(-1, 0, -6.1232339957367E-17f);
 
-    MatrixM3x3F.makeRotation(Math.toRadians(90), MatrixM3x3FTest.AXIS_Y, m);
+    MatrixM3x3F.makeRotationInto(Math.toRadians(90), MatrixM3x3FTest.AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -1519,7 +1519,7 @@ import com.io7m.jtensors.VectorReadable3FType;
     final VectorM3F v_in = new VectorM3F(0, 1, 0);
     final VectorM3F v_exp = new VectorM3F(-1, 6.123233995736766E-17f, 0);
 
-    MatrixM3x3F.makeRotation(Math.toRadians(90), MatrixM3x3FTest.AXIS_Z, m);
+    MatrixM3x3F.makeRotationInto(Math.toRadians(90), MatrixM3x3FTest.AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -1559,7 +1559,7 @@ import com.io7m.jtensors.VectorReadable3FType;
 
     final VectorM3F v_exp = new VectorM3F(0, 6.1232339957367E-17f, -1);
 
-    MatrixM3x3F.makeRotation(Math.toRadians(-90), MatrixM3x3FTest.AXIS_X, m);
+    MatrixM3x3F.makeRotationInto(Math.toRadians(-90), MatrixM3x3FTest.AXIS_X, m);
     System.out.println(m);
     MatrixM3x3F.multiplyVector3F(m, v_in, v_got);
 
@@ -1600,7 +1600,7 @@ import com.io7m.jtensors.VectorReadable3FType;
 
     final VectorM3F v_exp = new VectorM3F(1, 0, -6.1232339957367E-17f);
 
-    MatrixM3x3F.makeRotation(Math.toRadians(-90), MatrixM3x3FTest.AXIS_Y, m);
+    MatrixM3x3F.makeRotationInto(Math.toRadians(-90), MatrixM3x3FTest.AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -1633,7 +1633,7 @@ import com.io7m.jtensors.VectorReadable3FType;
     final VectorM3F v_in = new VectorM3F(0, 1, 0);
     final VectorM3F v_exp = new VectorM3F(1, 6.123233995736766E-17f, 0);
 
-    MatrixM3x3F.makeRotation(Math.toRadians(-90), MatrixM3x3FTest.AXIS_Z, m);
+    MatrixM3x3F.makeRotationInto(Math.toRadians(-90), MatrixM3x3FTest.AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);

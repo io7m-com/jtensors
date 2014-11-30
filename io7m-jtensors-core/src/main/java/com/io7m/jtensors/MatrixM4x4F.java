@@ -661,7 +661,7 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
     return (column * MatrixM4x4F.VIEW_COLS) + row;
   }
 
-  private static OptionType<MatrixM4x4F> invert(
+  private static OptionType<MatrixM4x4F> invertActual(
     final MatrixReadable4x4FType m,
     final MatrixM3x3F m3,
     final MatrixM4x4F out)
@@ -1029,7 +1029,7 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
     final MatrixM4x4F out)
   {
     final MatrixM3x3F m3 = new MatrixM3x3F();
-    return MatrixM4x4F.invert(m, m3, out);
+    return MatrixM4x4F.invertActual(m, m3, out);
   }
 
   /**
@@ -1103,7 +1103,7 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
     final MatrixReadable4x4FType m,
     final MatrixM4x4F out)
   {
-    return MatrixM4x4F.invert(m, context.getM3a(), out);
+    return MatrixM4x4F.invertActual(m, context.getM3a(), out);
   }
 
   /**
@@ -1225,7 +1225,7 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
     final VectorReadable3FType axis)
   {
     final MatrixM4x4F out = new MatrixM4x4F();
-    MatrixM4x4F.makeRotation(angle, axis, out);
+    MatrixM4x4F.makeRotationInto(angle, axis, out);
     return out;
   }
 
@@ -1249,7 +1249,7 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
    * @return <code>out</code>
    */
 
-  public static MatrixM4x4F makeRotation(
+  public static MatrixM4x4F makeRotationInto(
     final double angle,
     final VectorReadable3FType axis,
     final MatrixM4x4F out)
@@ -1600,10 +1600,10 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
   {
     final VectorM4F va = new VectorM4F();
     final VectorM4F vb = new VectorM4F();
-    return MatrixM4x4F.multiplyVector4F(m, v, va, vb, out);
+    return MatrixM4x4F.multiplyVector4FActual(m, v, va, vb, out);
   }
 
-  private static VectorM4F multiplyVector4F(
+  private static VectorM4F multiplyVector4FActual(
     final MatrixReadable4x4FType m,
     final VectorReadable4FType v,
     final VectorM4F va,
@@ -1646,7 +1646,7 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
     final VectorReadable4FType v,
     final VectorM4F out)
   {
-    return MatrixM4x4F.multiplyVector4F(
+    return MatrixM4x4F.multiplyVector4FActual(
       m,
       v,
       context.getV4a(),
@@ -1654,14 +1654,14 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
       out);
   }
 
-  private static MatrixM4x4F rotate(
+  private static MatrixM4x4F rotateActual(
     final double angle,
     final MatrixReadable4x4FType m,
     final MatrixM4x4F tmp,
     final VectorReadable3FType axis,
     final MatrixM4x4F out)
   {
-    MatrixM4x4F.makeRotation(angle, axis, tmp);
+    MatrixM4x4F.makeRotationInto(angle, axis, tmp);
     MatrixM4x4F.multiply(m, tmp, out);
     return out;
   }
@@ -1695,7 +1695,7 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
     final MatrixM4x4F out)
   {
     final MatrixM4x4F tmp = new MatrixM4x4F();
-    return MatrixM4x4F.rotate(angle, m, tmp, axis, out);
+    return MatrixM4x4F.rotateActual(angle, m, tmp, axis, out);
   }
 
   /**
@@ -1724,7 +1724,7 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
     final VectorReadable3FType axis)
   {
     final MatrixM4x4F tmp = new MatrixM4x4F();
-    return MatrixM4x4F.rotate(angle, m, tmp, axis, m);
+    return MatrixM4x4F.rotateActual(angle, m, tmp, axis, m);
   }
 
   /**
@@ -1757,7 +1757,7 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
     final MatrixM4x4F m,
     final VectorReadable3FType axis)
   {
-    return MatrixM4x4F.rotate(angle, m, context.getM4a(), axis, m);
+    return MatrixM4x4F.rotateActual(angle, m, context.getM4a(), axis, m);
   }
 
   /**
@@ -1793,7 +1793,7 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
     final VectorReadable3FType axis,
     final MatrixM4x4F out)
   {
-    return MatrixM4x4F.rotate(angle, m, context.getM4a(), axis, out);
+    return MatrixM4x4F.rotateActual(angle, m, context.getM4a(), axis, out);
   }
 
   /**

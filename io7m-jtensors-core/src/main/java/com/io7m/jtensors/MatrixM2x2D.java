@@ -113,42 +113,6 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
    * <p>
    * Add the values in row <code>row_b</code> to the values in row
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
-   * row <code>row_c</code> of the matrix <code>m</code>.
-   * </p>
-   *
-   * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
-   * </p>
-   *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM2x2D addRowScaled(
-    final MatrixM2x2D m,
-    final int row_a,
-    final int row_b,
-    final int row_c,
-    final double r)
-  {
-    return MatrixM2x2D.addRowScaled(m, row_a, row_b, row_c, r, m);
-  }
-
-  /**
-   * <p>
-   * Add the values in row <code>row_b</code> to the values in row
-   * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>out</code>.
    * </p>
    *
@@ -188,6 +152,42 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
       MatrixM2x2D.rowCheck(row_c),
       r,
       out);
+  }
+
+  /**
+   * <p>
+   * Add the values in row <code>row_b</code> to the values in row
+   * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
+   * row <code>row_c</code> of the matrix <code>m</code>.
+   * </p>
+   *
+   * <p>
+   * This is one of the three "elementary" operations defined on matrices. See
+   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
+   * .
+   * </p>
+   *
+   * @param m
+   *          The input matrix.
+   * @param row_a
+   *          The row on the lefthand side of the addition.
+   * @param row_b
+   *          The row on the righthand side of the addition.
+   * @param row_c
+   *          The destination row.
+   * @param r
+   *          The scaling value.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM2x2D addRowScaledInPlace(
+    final MatrixM2x2D m,
+    final int row_a,
+    final int row_b,
+    final int row_c,
+    final double r)
+  {
+    return MatrixM2x2D.addRowScaled(m, row_a, row_b, row_c, r, m);
   }
 
   private static MatrixM2x2D addRowScaledUnsafe(
@@ -264,34 +264,6 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
   /**
    * <p>
    * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>m</code> .
-   * </p>
-   * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
-   * </p>
-   *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM2x2D exchangeRows(
-    final MatrixM2x2D m,
-    final int row_a,
-    final int row_b)
-  {
-    return MatrixM2x2D.exchangeRows(m, row_a, row_b, m);
-  }
-
-  /**
-   * <p>
-   * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
    * </p>
    * <p>
@@ -322,6 +294,34 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
       MatrixM2x2D.rowCheck(row_a),
       MatrixM2x2D.rowCheck(row_b),
       out);
+  }
+
+  /**
+   * <p>
+   * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
+   * matrix <code>m</code>, saving the exchanged rows to <code>m</code> .
+   * </p>
+   * <p>
+   * This is one of the three "elementary" operations defined on matrices. See
+   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
+   * .
+   * </p>
+   *
+   * @param m
+   *          The input matrix.
+   * @param row_a
+   *          The first row.
+   * @param row_b
+   *          The second row.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM2x2D exchangeRowsInPlace(
+    final MatrixM2x2D m,
+    final int row_a,
+    final int row_b)
+  {
+    return MatrixM2x2D.exchangeRows(m, row_a, row_b, m);
   }
 
   private static MatrixM2x2D exchangeRowsUnsafe(
@@ -436,24 +436,6 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
 
   /**
    * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
-   * writing the result to <code>m0</code>.
-   *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM2x2D multiply(
-    final MatrixM2x2D m0,
-    final MatrixReadable2x2DType m1)
-  {
-    return MatrixM2x2D.multiply(m0, m1, m0);
-  }
-
-  /**
-   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
    * writing the result to <code>out</code>.
    *
    * @param m0
@@ -489,6 +471,24 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
     out.setUnsafe(1, 1, r1c1);
 
     return out;
+  }
+
+  /**
+   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
+   * writing the result to <code>m0</code>.
+   *
+   * @param m0
+   *          The left input matrix.
+   * @param m1
+   *          The right input matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM2x2D multiplyInPlace(
+    final MatrixM2x2D m0,
+    final MatrixReadable2x2DType m1)
+  {
+    return MatrixM2x2D.multiply(m0, m1, m0);
   }
 
   /**
@@ -561,24 +561,6 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
 
   /**
    * Scale all elements of the matrix <code>m</code> by the scaling value
-   * <code>r</code>, saving the result in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM2x2D scale(
-    final MatrixM2x2D m,
-    final double r)
-  {
-    return MatrixM2x2D.scale(m, r, m);
-  }
-
-  /**
-   * Scale all elements of the matrix <code>m</code> by the scaling value
    * <code>r</code>, saving the result in <code>out</code>.
    *
    * @param m
@@ -603,32 +585,21 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
   }
 
   /**
-   * <p>
-   * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
-   * saving the result to row <code>r</code> of <code>m</code>.
-   * </p>
-   *
-   * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
-   * </p>
+   * Scale all elements of the matrix <code>m</code> by the scaling value
+   * <code>r</code>, saving the result in <code>m</code>.
    *
    * @param m
    *          The input matrix.
-   * @param row
-   *          The index of the row (0 <= row < 4).
    * @param r
    *          The scaling value.
-   * @return <code>out</code>
+   * @return <code>m</code>
    */
 
-  public static MatrixM2x2D scaleRow(
+  public static MatrixM2x2D scaleInPlace(
     final MatrixM2x2D m,
-    final int row,
     final double r)
   {
-    return MatrixM2x2D.scaleRowUnsafe(m, MatrixM2x2D.rowCheck(row), r, m);
+    return MatrixM2x2D.scale(m, r, m);
   }
 
   /**
@@ -661,6 +632,35 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
     final MatrixM2x2D out)
   {
     return MatrixM2x2D.scaleRowUnsafe(m, MatrixM2x2D.rowCheck(row), r, out);
+  }
+
+  /**
+   * <p>
+   * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
+   * saving the result to row <code>r</code> of <code>m</code>.
+   * </p>
+   *
+   * <p>
+   * This is one of the three "elementary" operations defined on matrices. See
+   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
+   * .
+   * </p>
+   *
+   * @param m
+   *          The input matrix.
+   * @param row
+   *          The index of the row (0 <= row < 4).
+   * @param r
+   *          The scaling value.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM2x2D scaleRowInPlace(
+    final MatrixM2x2D m,
+    final int row,
+    final double r)
+  {
+    return MatrixM2x2D.scaleRowUnsafe(m, MatrixM2x2D.rowCheck(row), r, m);
   }
 
   private static MatrixM2x2D scaleRowUnsafe(
@@ -772,29 +772,6 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
 
   /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
-   * to <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM2x2D transpose(
-    final MatrixM2x2D m)
-  {
-    for (int row = 0; row < (2 - 1); ++row) {
-      for (int column = row + 1; column < 2; ++column) {
-        final double x = m.view.get((row * 2) + column);
-        m.view.put((row * 2) + column, m.view.get(row + (2 * column)));
-        m.view.put(row + (2 * column), x);
-      }
-    }
-
-    return m;
-  }
-
-  /**
-   * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>out</code>.
    *
    * @param m
@@ -809,7 +786,30 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
     final MatrixM2x2D out)
   {
     MatrixM2x2D.copy(m, out);
-    return MatrixM2x2D.transpose(out);
+    return MatrixM2x2D.transposeInPlace(out);
+  }
+
+  /**
+   * Transpose the given matrix <code>m</code>, writing the resulting matrix
+   * to <code>m</code>.
+   *
+   * @param m
+   *          The input matrix.
+   * @return <code>m</code>
+   */
+
+  public static MatrixM2x2D transposeInPlace(
+    final MatrixM2x2D m)
+  {
+    for (int row = 0; row < (2 - 1); ++row) {
+      for (int column = row + 1; column < 2; ++column) {
+        final double x = m.view.get((row * 2) + column);
+        m.view.put((row * 2) + column, m.view.get(row + (2 * column)));
+        m.view.put(row + (2 * column), x);
+      }
+    }
+
+    return m;
   }
 
   private final ByteBuffer   data;

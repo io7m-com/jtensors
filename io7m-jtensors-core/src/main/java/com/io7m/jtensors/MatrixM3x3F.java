@@ -650,7 +650,7 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
     final VectorReadable3FType axis)
   {
     final MatrixM3x3F out = new MatrixM3x3F();
-    MatrixM3x3F.makeRotation(angle, axis, out);
+    MatrixM3x3F.makeRotationInto(angle, axis, out);
     return out;
   }
 
@@ -675,7 +675,7 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3F makeRotation(
+  public static MatrixM3x3F makeRotationInto(
     final double angle,
     final VectorReadable3FType axis,
     final MatrixM3x3F out)
@@ -892,14 +892,14 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
     return out;
   }
 
-  private static MatrixM3x3F rotate(
+  private static MatrixM3x3F rotateActual(
     final double angle,
     final MatrixReadable3x3FType m,
     final MatrixM3x3F tmp,
     final VectorReadable3FType axis,
     final MatrixM3x3F out)
   {
-    MatrixM3x3F.makeRotation(angle, axis, tmp);
+    MatrixM3x3F.makeRotationInto(angle, axis, tmp);
     MatrixM3x3F.multiply(m, tmp, out);
     return out;
   }
@@ -927,7 +927,7 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
     final MatrixM3x3F out)
   {
     final MatrixM3x3F tmp = new MatrixM3x3F();
-    return MatrixM3x3F.rotate(angle, m, tmp, axis, out);
+    return MatrixM3x3F.rotateActual(angle, m, tmp, axis, out);
   }
 
   /**
@@ -950,7 +950,7 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
     final VectorReadable3FType axis)
   {
     final MatrixM3x3F tmp = new MatrixM3x3F();
-    return MatrixM3x3F.rotate(angle, m, tmp, axis, m);
+    return MatrixM3x3F.rotateActual(angle, m, tmp, axis, m);
   }
 
   /**
@@ -977,7 +977,7 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
     final MatrixM3x3F m,
     final VectorReadable3FType axis)
   {
-    return MatrixM3x3F.rotate(angle, m, context.getM4A(), axis, m);
+    return MatrixM3x3F.rotateActual(angle, m, context.getM4A(), axis, m);
   }
 
   /**
@@ -1007,7 +1007,7 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
     final VectorReadable3FType axis,
     final MatrixM3x3F out)
   {
-    return MatrixM3x3F.rotate(angle, m, context.getM4A(), axis, out);
+    return MatrixM3x3F.rotateActual(angle, m, context.getM4A(), axis, out);
   }
 
   /**
