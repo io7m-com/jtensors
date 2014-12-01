@@ -14,21 +14,15 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.parameterized;
-
-import com.io7m.jtensors.MatrixWritableFType;
+package com.io7m.jtensors;
 
 /**
- * 'Write' interface to matrices with single precision elements.
+ * 'Write' interface to 2x2 matrices with single precision elements.
  *
  * @since 7.0.0
- * @param <T0>
- *          A phantom type parameter.
- * @param <T1>
- *          A phantom type parameter.
  */
 
-public interface PMatrixWritableFType<T0, T1> extends MatrixWritableFType
+public interface MatrixWritable2x2FType extends MatrixWritableFType
 {
   // No extra functions.
 }

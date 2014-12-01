@@ -16,19 +16,21 @@
 
 package com.io7m.jtensors.parameterized;
 
-import com.io7m.jtensors.MatrixWritableFType;
+import com.io7m.jtensors.MatrixWritable3x3FType;
 
 /**
- * 'Write' interface to matrices with single precision elements.
+ * 'Write' interface to 3x3 matrices with single precision elements.
  *
  * @since 7.0.0
- * @param <T0>
+ * @param <T>
  *          A phantom type parameter.
- * @param <T1>
+ * @param <U>
  *          A phantom type parameter.
  */
 
-public interface PMatrixWritableFType<T0, T1> extends MatrixWritableFType
+public interface PMatrixWritable3x3FType<T, U> extends
+  MatrixWritable3x3FType,
+  PMatrixWritableFType<T, U>
 {
   // No extra functions.
 }

@@ -45,7 +45,7 @@ import com.io7m.jtensors.VectorWritable3DType;
 
 @SuppressWarnings("unchecked") public final class PMatrixM3x3D<T0, T1> implements
   PMatrixDirectReadable3x3DType<T0, T1>,
-  PMatrixWritableDType<T0, T1>
+  PMatrixWritable3x3DType<T0, T1>
 {
   /**
    * <p>

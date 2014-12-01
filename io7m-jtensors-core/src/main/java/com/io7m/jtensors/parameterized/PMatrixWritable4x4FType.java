@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -16,19 +16,21 @@
 
 package com.io7m.jtensors.parameterized;
 
-import com.io7m.jtensors.MatrixWritableFType;
+import com.io7m.jtensors.MatrixWritable4x4FType;
 
 /**
- * 'Write' interface to matrices with single precision elements.
+ * 'Write' interface to 4x4 matrices with single precision elements.
  *
  * @since 7.0.0
- * @param <T0>
+ * @param <T>
  *          A phantom type parameter.
- * @param <T1>
+ * @param <U>
  *          A phantom type parameter.
  */
 
-public interface PMatrixWritableFType<T0, T1> extends MatrixWritableFType
+public interface PMatrixWritable4x4FType<T, U> extends
+  MatrixWritable4x4FType,
+  PMatrixWritableFType<T, U>
 {
   // No extra functions.
 }
