@@ -32,6 +32,7 @@ import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.VectorReadable3IType;
 import com.io7m.jtensors.VectorReadable4DType;
+import com.io7m.jtensors.VectorWritable4DType;
 
 /**
  * <p>
@@ -1136,7 +1137,7 @@ import com.io7m.jtensors.VectorReadable4DType;
    * of <code>0</code>. If the function returns <code>None</code>,
    * <code>m</code> is untouched.
    *
-   * @see PMatrixM4x4D#determinant(MatrixReadable4x4DType)
+   * @see PMatrixM4x4D#determinant(PMatrixReadable4x4DType)
    *
    * @param m
    *          The input matrix.
@@ -1166,7 +1167,7 @@ import com.io7m.jtensors.VectorReadable4DType;
    * <code>0</code>. If the function returns <code>None</code>, <code>m</code>
    * is untouched.
    *
-   * @see PMatrixM4x4D#determinant(MatrixReadable4x4DType)
+   * @see PMatrixM4x4D#determinant(PMatrixReadable4x4DType)
    *
    * @param m
    *          The input matrix.
@@ -1195,7 +1196,7 @@ import com.io7m.jtensors.VectorReadable4DType;
    * <code>context</code> to avoid allocating memory. If the function returns
    * <code>None</code>, <code>m</code> is untouched.
    *
-   * @see PMatrixM4x4D#determinant(MatrixReadable4x4DType)
+   * @see PMatrixM4x4D#determinant(PMatrixReadable4x4DType)
    *
    * @param context
    *          Preallocated storage.
@@ -1229,7 +1230,7 @@ import com.io7m.jtensors.VectorReadable4DType;
    * <code>context</code> to avoid allocating memory. If the function returns
    * <code>None</code>, <code>m</code> is untouched.
    *
-   * @see PMatrixM4x4D#determinant(MatrixReadable4x4DType)
+   * @see PMatrixM4x4D#determinant(PMatrixReadable4x4DType)
    *
    * @param context
    *          Preallocated storage.
@@ -1775,24 +1776,32 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static <T0, T1> PVectorM4D<T1> multiplyVector4D(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final PVectorReadable4DType<T0> v,
-    final PVectorM4D<T1> out)
+  public static
+    <T0, T1, V extends PVectorWritable4DType<T1>>
+    V
+    multiplyVector4D(
+      final PMatrixReadable4x4DType<T0, T1> m,
+      final PVectorReadable4DType<T0> v,
+      final V out)
   {
     final VectorM4D va = new VectorM4D();
     final VectorM4D vb = new VectorM4D();
     return PMatrixM4x4D.multiplyVector4DActual(m, v, va, vb, out);
   }
 
-  private static <T0, T1> PVectorM4D<T1> multiplyVector4DActual(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final PVectorReadable4DType<T0> v,
-    final VectorM4D va,
-    final VectorM4D vb,
-    final PVectorM4D<T1> out)
+  private static
+    <T0, T1, V extends PVectorWritable4DType<T1>>
+    V
+    multiplyVector4DActual(
+      final PMatrixReadable4x4DType<T0, T1> m,
+      final PVectorReadable4DType<T0> v,
+      final VectorM4D va,
+      final VectorM4D vb,
+      final V out)
   {
     vb.copyFrom4D(v);
 
@@ -1836,13 +1845,18 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static <T0, T1> PVectorM4D<T1> multiplyVector4DWithContext(
-    final Context context,
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final PVectorReadable4DType<T0> v,
-    final PVectorM4D<T1> out)
+  public static
+    <T0, T1, V extends PVectorWritable4DType<T1>>
+    V
+    multiplyVector4DWithContext(
+      final Context context,
+      final PMatrixReadable4x4DType<T0, T1> m,
+      final PVectorReadable4DType<T0> v,
+      final V out)
   {
     return PMatrixM4x4D.multiplyVector4DActual(
       m,
@@ -2056,12 +2070,14 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static <T0, T1> VectorM4D row(
+  public static <T0, T1, V extends VectorWritable4DType> V row(
     final PMatrixReadable4x4DType<T0, T1> m,
     final int row,
-    final VectorM4D out)
+    final V out)
   {
     return PMatrixM4x4D.rowUnsafe(m, PMatrixM4x4D.rowCheck(row), out);
   }
@@ -2076,10 +2092,10 @@ import com.io7m.jtensors.VectorReadable4DType;
     return row;
   }
 
-  private static VectorM4D rowUnsafe(
+  private static <V extends VectorWritable4DType> V rowUnsafe(
     final MatrixReadable4x4DType m,
     final int row,
-    final VectorM4D out)
+    final V out)
   {
     out.set4D(
       m.getRowColumnD(row, 0),
@@ -2966,9 +2982,9 @@ import com.io7m.jtensors.VectorReadable4DType;
     return this.view;
   }
 
-  @Override public void getRow4D(
+  @Override public <V extends VectorWritable4DType> void getRow4D(
     final int row,
-    final VectorM4D out)
+    final V out)
   {
     PMatrixM4x4D.rowUnsafe(this, PMatrixM4x4D.rowCheck(row), out);
   }

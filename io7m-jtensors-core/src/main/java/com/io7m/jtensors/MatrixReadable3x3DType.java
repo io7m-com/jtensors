@@ -24,15 +24,16 @@ public interface MatrixReadable3x3DType extends MatrixReadableDType
 {
   /**
    * Retrieve row <code>row</code>, saving the result to <code>out</code>.
-   * 
-   * @since 5.0.0
+   *
    * @param row
    *          The index of the row, starting at <code>0</code>.
    * @param out
    *          The output vector.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  void getRow3D(
+  <V extends VectorWritable3DType> void getRow3D(
     final int row,
-    final VectorM3D out);
+    final V out);
 }

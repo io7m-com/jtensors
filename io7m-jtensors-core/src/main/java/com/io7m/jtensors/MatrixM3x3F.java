@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -566,15 +566,17 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
    *          The target being viewed
    * @param up
    *          The up vector
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static void lookAtWithContext(
+  public static <V extends VectorWritable3FType> void lookAtWithContext(
     final Context context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
     final VectorReadable3FType up,
     final MatrixM3x3F out_matrix,
-    final VectorM3F out_translation)
+    final V out_translation)
   {
     final VectorM3F forward = context.getV3A();
     final VectorM3F new_up = context.getV3B();
@@ -872,12 +874,14 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
    * @param out
    *          The output vector.
    * @return <code>out</code>
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static VectorM3F multiplyVector3F(
+  public static <V extends VectorWritable3FType> V multiplyVector3F(
     final MatrixReadable3x3FType m,
     final VectorReadable3FType v,
-    final VectorM3F out)
+    final V out)
   {
     final VectorM3F row = new VectorM3F();
     final VectorM3F vi = new VectorM3F(v);
@@ -1019,12 +1023,14 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
    *          The row
    * @param out
    *          The output vector
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static VectorM3F row(
+  public static <V extends VectorWritable3FType> V row(
     final MatrixReadable3x3FType m,
     final int row,
-    final VectorM3F out)
+    final V out)
   {
     return MatrixM3x3F.rowUnsafe(m, MatrixM3x3F.rowCheck(row), out);
   }
@@ -1039,10 +1045,10 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
     return row;
   }
 
-  private static VectorM3F rowUnsafe(
+  private static <V extends VectorWritable3FType> V rowUnsafe(
     final MatrixReadable3x3FType m,
     final int row,
-    final VectorM3F out)
+    final V out)
   {
     out.set3F(
       m.getRowColumnF(row, 0),
@@ -1517,9 +1523,9 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
     return this.view;
   }
 
-  @Override public void getRow3F(
+  @Override public <V extends VectorWritable3FType> void getRow3F(
     final int row,
-    final VectorM3F out)
+    final V out)
   {
     MatrixM3x3F.rowUnsafe(this, MatrixM3x3F.rowCheck(row), out);
   }

@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -25,14 +25,15 @@ public interface MatrixReadable3x3FType extends MatrixReadableFType
   /**
    * Retrieve row <code>row</code>, saving the result to <code>out</code>.
    * 
-   * @since 5.0.0
    * @param row
    *          The index of the row, starting at <code>0</code>.
    * @param out
    *          The output vector.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  void getRow3F(
+  <V extends VectorWritable3FType> void getRow3F(
     final int row,
-    final VectorM3F out);
+    final V out);
 }

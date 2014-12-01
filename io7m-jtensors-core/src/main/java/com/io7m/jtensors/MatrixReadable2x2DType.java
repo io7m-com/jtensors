@@ -16,7 +16,6 @@
 
 package com.io7m.jtensors;
 
-
 /**
  * 'Read' interface to 2x2 matrices with double precision elements.
  */
@@ -25,15 +24,16 @@ public interface MatrixReadable2x2DType extends MatrixReadableDType
 {
   /**
    * Retrieve row <code>row</code>, saving the result to <code>out</code>.
-   * 
-   * @since 5.0.0
+   *
    * @param row
    *          The index of the row, starting at <code>0</code>.
    * @param out
    *          The output vector.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  void getRow2D(
+  <V extends VectorWritable2DType> void getRow2D(
     final int row,
-    final  VectorM2D out);
+    final V out);
 }

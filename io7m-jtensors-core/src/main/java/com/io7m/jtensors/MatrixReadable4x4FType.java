@@ -24,15 +24,16 @@ public interface MatrixReadable4x4FType extends MatrixReadableFType
 {
   /**
    * Retrieve row <code>row</code>, saving the result to <code>out</code>.
-   * 
-   * @since 5.0.0
+   *
    * @param row
    *          The index of the row, starting at <code>0</code>.
    * @param out
    *          The output vector.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  void getRow4F(
+  <V extends VectorWritable4FType> void getRow4F(
     final int row,
-    final VectorM4F out);
+    final V out);
 }

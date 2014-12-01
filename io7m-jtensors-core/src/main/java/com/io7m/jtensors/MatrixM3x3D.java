@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -912,12 +912,14 @@ public final class MatrixM3x3D implements MatrixDirectReadable3x3DType
    * @param out
    *          The output vector.
    * @return <code>out</code>
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static VectorM3D multiplyVector3D(
+  public static <V extends VectorWritable3DType> V multiplyVector3D(
     final MatrixReadable3x3DType m,
     final VectorReadable3DType v,
-    final VectorM3D out)
+    final V out)
   {
     final VectorM3D row = new VectorM3D();
     final VectorM3D vi = new VectorM3D(v);
@@ -1060,12 +1062,14 @@ public final class MatrixM3x3D implements MatrixDirectReadable3x3DType
    *          The row
    * @param out
    *          The output matrix
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static VectorM3D row(
+  public static <V extends VectorWritable3DType> V row(
     final MatrixReadable3x3DType m,
     final int row,
-    final VectorM3D out)
+    final V out)
   {
     return MatrixM3x3D.rowUnsafe(m, MatrixM3x3D.rowCheck(row), out);
   }
@@ -1080,10 +1084,10 @@ public final class MatrixM3x3D implements MatrixDirectReadable3x3DType
     return row;
   }
 
-  private static VectorM3D rowUnsafe(
+  private static <V extends VectorWritable3DType> V rowUnsafe(
     final MatrixReadable3x3DType m,
     final int row,
-    final VectorM3D out)
+    final V out)
   {
     out.set3D(
       m.getRowColumnD(row, 0),
@@ -1557,9 +1561,9 @@ public final class MatrixM3x3D implements MatrixDirectReadable3x3DType
     return this.view;
   }
 
-  @Override public void getRow3D(
+  @Override public <V extends VectorWritable3DType> void getRow3D(
     final int row,
-    final VectorM3D out)
+    final V out)
   {
     MatrixM3x3D.rowUnsafe(this, MatrixM3x3D.rowCheck(row), out);
   }

@@ -32,6 +32,7 @@ import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorReadable3IType;
 import com.io7m.jtensors.VectorReadable4FType;
+import com.io7m.jtensors.VectorWritable4FType;
 
 /**
  * <p>
@@ -1135,7 +1136,7 @@ import com.io7m.jtensors.VectorReadable4FType;
    * of <code>0</code>. If the function returns <code>None</code>,
    * <code>m</code> is untouched.
    *
-   * @see PMatrixM4x4F#determinant(MatrixReadable4x4FType)
+   * @see PMatrixM4x4F#determinant(PMatrixReadable4x4FType)
    *
    * @param m
    *          The input matrix.
@@ -1165,7 +1166,7 @@ import com.io7m.jtensors.VectorReadable4FType;
    * <code>0</code>. If the function returns <code>None</code>, <code>m</code>
    * is untouched.
    *
-   * @see PMatrixM4x4F#determinant(MatrixReadable4x4FType)
+   * @see PMatrixM4x4F#determinant(PMatrixReadable4x4FType)
    *
    * @param m
    *          The input matrix.
@@ -1194,7 +1195,7 @@ import com.io7m.jtensors.VectorReadable4FType;
    * <code>context</code> to avoid allocating memory. If the function returns
    * <code>None</code>, <code>m</code> is untouched.
    *
-   * @see PMatrixM4x4F#determinant(MatrixReadable4x4FType)
+   * @see PMatrixM4x4F#determinant(PMatrixReadable4x4FType)
    *
    * @param context
    *          Preallocated storage.
@@ -1228,7 +1229,7 @@ import com.io7m.jtensors.VectorReadable4FType;
    * <code>context</code> to avoid allocating memory. If the function returns
    * <code>None</code>, <code>m</code> is untouched.
    *
-   * @see PMatrixM4x4F#determinant(MatrixReadable4x4FType)
+   * @see PMatrixM4x4F#determinant(PMatrixReadable4x4FType)
    *
    * @param context
    *          Preallocated storage.
@@ -1769,24 +1770,32 @@ import com.io7m.jtensors.VectorReadable4FType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static <T0, T1> PVectorM4F<T1> multiplyVector4F(
-    final PMatrixReadable4x4FType<T0, T1> m,
-    final PVectorReadable4FType<T0> v,
-    final PVectorM4F<T1> out)
+  public static
+    <T0, T1, V extends PVectorWritable4FType<T1>>
+    V
+    multiplyVector4F(
+      final PMatrixReadable4x4FType<T0, T1> m,
+      final PVectorReadable4FType<T0> v,
+      final V out)
   {
     final VectorM4F va = new VectorM4F();
     final VectorM4F vb = new VectorM4F();
     return PMatrixM4x4F.multiplyVector4FActual(m, v, va, vb, out);
   }
 
-  private static <T0, T1> PVectorM4F<T1> multiplyVector4FActual(
-    final PMatrixReadable4x4FType<T0, T1> m,
-    final PVectorReadable4FType<T0> v,
-    final VectorM4F va,
-    final VectorM4F vb,
-    final PVectorM4F<T1> out)
+  private static
+    <T0, T1, V extends PVectorWritable4FType<T1>>
+    V
+    multiplyVector4FActual(
+      final PMatrixReadable4x4FType<T0, T1> m,
+      final PVectorReadable4FType<T0> v,
+      final VectorM4F va,
+      final VectorM4F vb,
+      final V out)
   {
     VectorM4F.copy(v, vb);
 
@@ -1821,13 +1830,18 @@ import com.io7m.jtensors.VectorReadable4FType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static <T0, T1> PVectorM4F<T1> multiplyVector4FWithContext(
-    final Context context,
-    final PMatrixReadable4x4FType<T0, T1> m,
-    final PVectorReadable4FType<T0> v,
-    final PVectorM4F<T1> out)
+  public static
+    <T0, T1, V extends PVectorWritable4FType<T1>>
+    V
+    multiplyVector4FWithContext(
+      final Context context,
+      final PMatrixReadable4x4FType<T0, T1> m,
+      final PVectorReadable4FType<T0> v,
+      final V out)
   {
     return PMatrixM4x4F.multiplyVector4FActual(
       m,
@@ -2043,12 +2057,14 @@ import com.io7m.jtensors.VectorReadable4FType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static <T0, T1> VectorM4F row(
+  public static <T0, T1, V extends VectorWritable4FType> V row(
     final PMatrixReadable4x4FType<T0, T1> m,
     final int row,
-    final VectorM4F out)
+    final V out)
   {
     return PMatrixM4x4F.rowUnsafe(m, PMatrixM4x4F.rowCheck(row), out);
   }
@@ -2063,10 +2079,10 @@ import com.io7m.jtensors.VectorReadable4FType;
     return row;
   }
 
-  private static VectorM4F rowUnsafe(
+  private static <V extends VectorWritable4FType> V rowUnsafe(
     final MatrixReadable4x4FType m,
     final int row,
-    final VectorM4F out)
+    final V out)
   {
     out.set4F(
       m.getRowColumnF(row, 0),
@@ -2951,9 +2967,9 @@ import com.io7m.jtensors.VectorReadable4FType;
     return this.view;
   }
 
-  @Override public void getRow4F(
+  @Override public <V extends VectorWritable4FType> void getRow4F(
     final int row,
-    final VectorM4F out)
+    final V out)
   {
     PMatrixM4x4F.rowUnsafe(this, PMatrixM4x4F.rowCheck(row), out);
   }

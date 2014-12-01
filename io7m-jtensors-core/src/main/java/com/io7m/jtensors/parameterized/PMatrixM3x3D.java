@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -28,6 +28,7 @@ import com.io7m.jtensors.VectorM3D;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3DType;
+import com.io7m.jtensors.VectorWritable3DType;
 
 /**
  * <p>
@@ -532,7 +533,7 @@ import com.io7m.jtensors.VectorReadable3DType;
    * of <code>0</code>. If the function returns <code>None</code>,
    * <code>m</code> is untouched.
    *
-   * @see PMatrixM3x3D#determinant(MatrixReadable3x3DType)
+   * @see PMatrixM3x3D#determinant(PMatrixReadable3x3DType)
    *
    * @param m
    *          The input matrix.
@@ -605,7 +606,7 @@ import com.io7m.jtensors.VectorReadable3DType;
    * <code>0</code>. If the function returns <code>None</code>, <code>m</code>
    * is untouched.
    *
-   * @see PMatrixM3x3D#determinant(MatrixReadable3x3DType)
+   * @see PMatrixM3x3D#determinant(PMatrixReadable3x3DType)
    *
    * @param m
    *          The input matrix.
@@ -973,12 +974,17 @@ import com.io7m.jtensors.VectorReadable3DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static <T0, T1> PVectorM3D<T1> multiplyVector3D(
-    final PMatrixReadable3x3DType<T0, T1> m,
-    final PVectorReadable3DType<T0> v,
-    final PVectorM3D<T1> out)
+  public static
+    <T0, T1, V extends PVectorWritable3DType<T1>>
+    V
+    multiplyVector3D(
+      final PMatrixReadable3x3DType<T0, T1> m,
+      final PVectorReadable3DType<T0> v,
+      final V out)
   {
     final VectorM3D row = new VectorM3D();
     final VectorM3D vi = new VectorM3D(v);
@@ -1173,12 +1179,14 @@ import com.io7m.jtensors.VectorReadable3DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static <T0, T1> VectorM3D row(
+  public static <T0, T1, V extends VectorWritable3DType> V row(
     final PMatrixReadable3x3DType<T0, T1> m,
     final int row,
-    final VectorM3D out)
+    final V out)
   {
     return PMatrixM3x3D.rowUnsafe(m, PMatrixM3x3D.rowCheck(row), out);
   }
@@ -1193,10 +1201,10 @@ import com.io7m.jtensors.VectorReadable3DType;
     return row;
   }
 
-  private static VectorM3D rowUnsafe(
+  private static <V extends VectorWritable3DType> V rowUnsafe(
     final MatrixReadable3x3DType m,
     final int row,
-    final VectorM3D out)
+    final V out)
   {
     out.set3D(
       m.getRowColumnD(row, 0),
@@ -1786,9 +1794,9 @@ import com.io7m.jtensors.VectorReadable3DType;
     return this.view;
   }
 
-  @Override public void getRow3D(
+  @Override public <V extends VectorWritable3DType> void getRow3D(
     final int row,
-    final VectorM3D out)
+    final V out)
   {
     PMatrixM3x3D.rowUnsafe(this, PMatrixM3x3D.rowCheck(row), out);
   }

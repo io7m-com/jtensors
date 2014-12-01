@@ -502,12 +502,14 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
    * @param out
    *          The output vector.
    * @return <code>out</code>
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static VectorM2D multiplyVector2D(
+  public static <V extends VectorWritable2DType> V multiplyVector2D(
     final MatrixReadable2x2DType m,
     final VectorReadable2DType v,
-    final VectorM2D out)
+    final V out)
   {
     final VectorM2D row = new VectorM2D();
     final VectorM2D vi = new VectorM2D(v);
@@ -530,12 +532,14 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
    * @param m
    *          The matrix.
    * @return The row.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static VectorM2D row(
+  public static <V extends VectorWritable2DType> V row(
     final MatrixReadable2x2DType m,
     final int row,
-    final VectorM2D out)
+    final V out)
   {
     return MatrixM2x2D.rowUnsafe(m, MatrixM2x2D.rowCheck(row), out);
   }
@@ -550,10 +554,10 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
     return row;
   }
 
-  private static VectorM2D rowUnsafe(
+  private static <V extends VectorWritable2DType> V rowUnsafe(
     final MatrixReadable2x2DType m,
     final int row,
-    final VectorM2D out)
+    final V out)
   {
     out.set2D(m.getRowColumnD(row, 0), m.getRowColumnD(row, 1));
     return out;
@@ -897,9 +901,9 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
     return this.view;
   }
 
-  @Override public void getRow2D(
+  @Override public <V extends VectorWritable2DType> void getRow2D(
     final int row,
-    final VectorM2D out)
+    final V out)
   {
     MatrixM2x2D.rowUnsafe(this, MatrixM2x2D.rowCheck(row), out);
   }

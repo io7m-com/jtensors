@@ -1613,24 +1613,26 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
    * @param out
    *          The output vector.
    * @return <code>out</code>
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static VectorM4D multiplyVector4D(
+  public static <V extends VectorWritable4DType> V multiplyVector4D(
     final MatrixReadable4x4DType m,
     final VectorReadable4DType v,
-    final VectorM4D out)
+    final V out)
   {
     final VectorM4D va = new VectorM4D();
     final VectorM4D vb = new VectorM4D();
     return MatrixM4x4D.multiplyVector4DActual(m, v, va, vb, out);
   }
 
-  private static VectorM4D multiplyVector4DActual(
+  private static <V extends VectorWritable4DType> V multiplyVector4DActual(
     final MatrixReadable4x4DType m,
     final VectorReadable4DType v,
     final VectorM4D va,
     final VectorM4D vb,
-    final VectorM4D out)
+    final V out)
   {
     vb.copyFrom4D(v);
 
@@ -1669,13 +1671,18 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
    * @param out
    *          The output vector.
    * @return <code>out</code>
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static VectorM4D multiplyVector4DWithContext(
-    final Context context,
-    final MatrixReadable4x4DType m,
-    final VectorReadable4DType v,
-    final VectorM4D out)
+  public static
+    <V extends VectorWritable4DType>
+    V
+    multiplyVector4DWithContext(
+      final Context context,
+      final MatrixReadable4x4DType m,
+      final VectorReadable4DType v,
+      final V out)
   {
     return MatrixM4x4D.multiplyVector4DActual(
       m,
@@ -1837,12 +1844,14 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
    *          The row
    * @param out
    *          The output vector
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static VectorM4D row(
+  public static <V extends VectorWritable4DType> V row(
     final MatrixReadable4x4DType m,
     final int row,
-    final VectorM4D out)
+    final V out)
   {
     return MatrixM4x4D.rowUnsafe(m, MatrixM4x4D.rowCheck(row), out);
   }
@@ -1857,10 +1866,10 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     return row;
   }
 
-  private static VectorM4D rowUnsafe(
+  private static <V extends VectorWritable4DType> V rowUnsafe(
     final MatrixReadable4x4DType m,
     final int row,
-    final VectorM4D out)
+    final V out)
   {
     out.set4D(
       m.getRowColumnD(row, 0),
@@ -2586,9 +2595,9 @@ public final class MatrixM4x4D implements MatrixDirectReadable4x4DType
     return this.view;
   }
 
-  @Override public void getRow4D(
+  @Override public <V extends VectorWritable4DType> void getRow4D(
     final int row,
-    final VectorM4D out)
+    final V out)
   {
     MatrixM4x4D.rowUnsafe(this, MatrixM4x4D.rowCheck(row), out);
   }

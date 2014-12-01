@@ -499,12 +499,14 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
    * @param out
    *          The output vector.
    * @return <code>out</code>
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static VectorM2F multiplyVector2F(
+  public static <V extends VectorWritable2FType> V multiplyVector2F(
     final MatrixReadable2x2FType m,
     final VectorReadable2FType v,
-    final VectorM2F out)
+    final V out)
   {
     final VectorM2F row = new VectorM2F();
     final VectorM2F vi = new VectorM2F(v);
@@ -525,12 +527,14 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
    *          The row
    * @param out
    *          The output vector
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static VectorM2F row(
+  public static <V extends VectorWritable2FType> V row(
     final MatrixReadable2x2FType m,
     final int row,
-    final VectorM2F out)
+    final V out)
   {
     return MatrixM2x2F.rowUnsafe(m, MatrixM2x2F.rowCheck(row), out);
   }
@@ -545,10 +549,10 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
     return row;
   }
 
-  private static VectorM2F rowUnsafe(
+  private static <V extends VectorWritable2FType> V rowUnsafe(
     final MatrixReadable2x2FType m,
     final int row,
-    final VectorM2F out)
+    final V out)
   {
     out.set2F(m.getRowColumnF(row, 0), m.getRowColumnF(row, 1));
     return out;
@@ -895,9 +899,9 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
     return this.view;
   }
 
-  @Override public void getRow2F(
+  @Override public <V extends VectorWritable2FType> void getRow2F(
     final int row,
-    final VectorM2F out)
+    final V out)
   {
     MatrixM2x2F.rowUnsafe(this, MatrixM2x2F.rowCheck(row), out);
   }

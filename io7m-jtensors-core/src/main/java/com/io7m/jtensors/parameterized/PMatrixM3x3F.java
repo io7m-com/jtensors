@@ -27,6 +27,7 @@ import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3FType;
+import com.io7m.jtensors.VectorWritable3FType;
 
 /**
  * <p>
@@ -652,15 +653,20 @@ import com.io7m.jtensors.VectorReadable3FType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static <T0, T1> void lookAtWithContext(
-    final Context context,
-    final VectorReadable3FType origin,
-    final VectorReadable3FType target,
-    final VectorReadable3FType up,
-    final PMatrixM3x3F<T0, T1> out_matrix,
-    final VectorM3F out_translation)
+  public static
+    <T0, T1, V extends VectorWritable3FType>
+    void
+    lookAtWithContext(
+      final Context context,
+      final VectorReadable3FType origin,
+      final VectorReadable3FType target,
+      final VectorReadable3FType up,
+      final PMatrixM3x3F<T0, T1> out_matrix,
+      final V out_translation)
   {
     final VectorM3F forward = context.getV3A();
     final VectorM3F new_up = context.getV3B();
@@ -966,12 +972,17 @@ import com.io7m.jtensors.VectorReadable3FType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static <T0, T1> PVectorM3F<T1> multiplyVector3F(
-    final PMatrixReadable3x3FType<T0, T1> m,
-    final PVectorReadable3FType<T0> v,
-    final PVectorM3F<T1> out)
+  public static
+    <T0, T1, V extends PVectorWritable3FType<T1>>
+    V
+    multiplyVector3F(
+      final PMatrixReadable3x3FType<T0, T1> m,
+      final PVectorReadable3FType<T0> v,
+      final V out)
   {
     final VectorM3F row = new VectorM3F();
     final VectorM3F vi = new VectorM3F(v);
@@ -1166,12 +1177,14 @@ import com.io7m.jtensors.VectorReadable3FType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <V>
+   *          The precise type of writable vector.
    */
 
-  public static <T0, T1> VectorM3F row(
+  public static <T0, T1, V extends VectorWritable3FType> V row(
     final PMatrixReadable3x3FType<T0, T1> m,
     final int row,
-    final VectorM3F out)
+    final V out)
   {
     return PMatrixM3x3F.rowUnsafe(m, PMatrixM3x3F.rowCheck(row), out);
   }
@@ -1186,10 +1199,10 @@ import com.io7m.jtensors.VectorReadable3FType;
     return row;
   }
 
-  private static <T0, T1> VectorM3F rowUnsafe(
+  private static <T0, T1, V extends VectorWritable3FType> V rowUnsafe(
     final PMatrixReadable3x3FType<T0, T1> m,
     final int row,
-    final VectorM3F out)
+    final V out)
   {
     out.set3F(
       m.getRowColumnF(row, 0),
@@ -1778,9 +1791,9 @@ import com.io7m.jtensors.VectorReadable3FType;
     return this.view;
   }
 
-  @Override public void getRow3F(
+  @Override public <V extends VectorWritable3FType> void getRow3F(
     final int row,
-    final VectorM3F out)
+    final V out)
   {
     PMatrixM3x3F.rowUnsafe(this, PMatrixM3x3F.rowCheck(row), out);
   }
