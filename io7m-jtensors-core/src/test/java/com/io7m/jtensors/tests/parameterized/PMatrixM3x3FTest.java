@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -2269,21 +2269,30 @@ import com.io7m.jtensors.tests.TestUtilities;
 
     Assert.assertEquals(0, m.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m.set(0, 0, 3.0f).getRowColumnF(0, 0) == 3.0);
-    Assert.assertTrue(m.set(0, 1, 5.0f).getRowColumnF(0, 1) == 5.0);
-    Assert.assertTrue(m.set(0, 2, 7.0f).getRowColumnF(0, 2) == 7.0);
+    m.setRowColumnF(0, 0, 3.0f);
+    Assert.assertTrue(m.getRowColumnF(0, 0) == 3.0f);
+    m.setRowColumnF(0, 1, 5.0f);
+    Assert.assertTrue(m.getRowColumnF(0, 1) == 5.0f);
+    m.setRowColumnF(0, 2, 7.0f);
+    Assert.assertTrue(m.getRowColumnF(0, 2) == 7.0f);
 
     Assert.assertEquals(0, m.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m.set(1, 0, 13.0f).getRowColumnF(1, 0) == 13.0);
-    Assert.assertTrue(m.set(1, 1, 17.0f).getRowColumnF(1, 1) == 17.0);
-    Assert.assertTrue(m.set(1, 2, 19.0f).getRowColumnF(1, 2) == 19.0);
+    m.setRowColumnF(1, 0, 13.0f);
+    Assert.assertTrue(m.getRowColumnF(1, 0) == 13.0f);
+    m.setRowColumnF(1, 1, 17.0f);
+    Assert.assertTrue(m.getRowColumnF(1, 1) == 17.0f);
+    m.setRowColumnF(1, 2, 19.0f);
+    Assert.assertTrue(m.getRowColumnF(1, 2) == 19.0f);
 
     Assert.assertEquals(0, m.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m.set(2, 0, 29.0f).getRowColumnF(2, 0) == 29.0);
-    Assert.assertTrue(m.set(2, 1, 31.0f).getRowColumnF(2, 1) == 31.0);
-    Assert.assertTrue(m.set(2, 2, 37.0f).getRowColumnF(2, 2) == 37.0);
+    m.setRowColumnF(2, 0, 29.0f);
+    Assert.assertTrue(m.getRowColumnF(2, 0) == 29.0f);
+    m.setRowColumnF(2, 1, 31.0f);
+    Assert.assertTrue(m.getRowColumnF(2, 1) == 31.0f);
+    m.setRowColumnF(2, 2, 37.0f);
+    Assert.assertTrue(m.getRowColumnF(2, 2) == 37.0f);
 
     Assert.assertEquals(0, m.getDirectFloatBuffer().position());
   }

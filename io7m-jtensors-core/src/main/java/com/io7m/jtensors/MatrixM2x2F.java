@@ -44,7 +44,9 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
+public final class MatrixM2x2F implements
+  MatrixDirectReadable2x2FType,
+  MatrixWritableFType
 {
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
@@ -942,6 +944,14 @@ public final class MatrixM2x2F implements MatrixDirectReadable2x2FType
   {
     this.view.put(MatrixM2x2F.indexChecked(row, column), value);
     return this;
+  }
+
+  @Override public void setRowColumnF(
+    final int row,
+    final int column,
+    final float value)
+  {
+    this.view.put(MatrixM2x2F.indexChecked(row, column), value);
   }
 
   private MatrixM2x2F setUnsafe(

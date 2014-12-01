@@ -44,7 +44,9 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
+public final class MatrixM3x3F implements
+  MatrixDirectReadable3x3FType,
+  MatrixWritableFType
 {
   /**
    * <p>
@@ -896,18 +898,6 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
     return out;
   }
 
-  private static MatrixM3x3F rotateActual(
-    final double angle,
-    final MatrixReadable3x3FType m,
-    final MatrixM3x3F tmp,
-    final VectorReadable3FType axis,
-    final MatrixM3x3F out)
-  {
-    MatrixM3x3F.makeRotationInto(angle, axis, tmp);
-    MatrixM3x3F.multiply(m, tmp, out);
-    return out;
-  }
-
   /**
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
    * axis <code>axis</code>, saving the result into <code>out</code>.
@@ -932,6 +922,18 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
   {
     final MatrixM3x3F tmp = new MatrixM3x3F();
     return MatrixM3x3F.rotateActual(angle, m, tmp, axis, out);
+  }
+
+  private static MatrixM3x3F rotateActual(
+    final double angle,
+    final MatrixReadable3x3FType m,
+    final MatrixM3x3F tmp,
+    final VectorReadable3FType axis,
+    final MatrixM3x3F out)
+  {
+    MatrixM3x3F.makeRotationInto(angle, axis, tmp);
+    MatrixM3x3F.multiply(m, tmp, out);
+    return out;
   }
 
   /**
@@ -1575,6 +1577,14 @@ public final class MatrixM3x3F implements MatrixDirectReadable3x3FType
   {
     this.view.put(MatrixM3x3F.indexChecked(row, column), value);
     return this;
+  }
+
+  @Override public void setRowColumnF(
+    final int row,
+    final int column,
+    final float value)
+  {
+    this.view.put(MatrixM3x3F.indexChecked(row, column), value);
   }
 
   MatrixM3x3F setUnsafe(

@@ -44,7 +44,8 @@ import com.io7m.jtensors.VectorWritable3DType;
  */
 
 @SuppressWarnings("unchecked") public final class PMatrixM3x3D<T0, T1> implements
-  PMatrixDirectReadable3x3DType<T0, T1>
+  PMatrixDirectReadable3x3DType<T0, T1>,
+  PMatrixWritableDType<T0, T1>
 {
   /**
    * <p>
@@ -1846,6 +1847,14 @@ import com.io7m.jtensors.VectorWritable3DType;
   {
     this.view.put(PMatrixM3x3D.indexChecked(row, column), value);
     return this;
+  }
+
+  @Override public void setRowColumnD(
+    final int row,
+    final int column,
+    final double value)
+  {
+    this.view.put(PMatrixM3x3D.indexChecked(row, column), value);
   }
 
   PMatrixM3x3D<T0, T1> setUnsafe(

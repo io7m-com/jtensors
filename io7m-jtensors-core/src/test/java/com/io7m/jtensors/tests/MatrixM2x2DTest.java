@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -784,6 +784,23 @@ import com.io7m.jtensors.VectorM2D;
 
     Assert.assertTrue(m.set(1, 0, 13.0).getRowColumnD(1, 0) == 13.0);
     Assert.assertTrue(m.set(1, 1, 17.0).getRowColumnD(1, 1) == 17.0);
+
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+  }
+
+  @Test public void testSetInterfaceGetIdentity()
+  {
+    final MatrixM2x2D m = new MatrixM2x2D();
+
+    m.setRowColumnD(0, 0, 3.0);
+    Assert.assertTrue(m.getRowColumnD(0, 0) == 3.0);
+    m.setRowColumnD(0, 1, 5.0);
+    Assert.assertTrue(m.getRowColumnD(0, 1) == 5.0);
+
+    m.setRowColumnD(1, 0, 13.0);
+    Assert.assertTrue(m.getRowColumnD(1, 0) == 13.0);
+    m.setRowColumnD(1, 1, 17.0);
+    Assert.assertTrue(m.getRowColumnD(1, 1) == 17.0);
 
     Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }

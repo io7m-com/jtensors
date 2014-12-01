@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -3537,25 +3537,41 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
 
     Assert.assertEquals(0, m.getDirectFloatBuffer().position());
 
-    Assert.assertTrue(m.set(0, 0, 3.0f).getRowColumnF(0, 0) == 3.0);
-    Assert.assertTrue(m.set(0, 1, 5.0f).getRowColumnF(0, 1) == 5.0);
-    Assert.assertTrue(m.set(0, 2, 7.0f).getRowColumnF(0, 2) == 7.0);
-    Assert.assertTrue(m.set(0, 3, 11.0f).getRowColumnF(0, 3) == 11.0);
+    m.setRowColumnF(0, 0, 3.0f);
+    Assert.assertTrue(m.getRowColumnF(0, 0) == 3.0f);
+    m.setRowColumnF(0, 1, 5.0f);
+    Assert.assertTrue(m.getRowColumnF(0, 1) == 5.0f);
+    m.setRowColumnF(0, 2, 7.0f);
+    Assert.assertTrue(m.getRowColumnF(0, 2) == 7.0f);
+    m.setRowColumnF(0, 3, 11.0f);
+    Assert.assertTrue(m.getRowColumnF(0, 3) == 11.0f);
 
-    Assert.assertTrue(m.set(1, 0, 13.0f).getRowColumnF(1, 0) == 13.0);
-    Assert.assertTrue(m.set(1, 1, 17.0f).getRowColumnF(1, 1) == 17.0);
-    Assert.assertTrue(m.set(1, 2, 19.0f).getRowColumnF(1, 2) == 19.0);
-    Assert.assertTrue(m.set(1, 3, 23.0f).getRowColumnF(1, 3) == 23.0);
+    m.setRowColumnF(1, 0, 13.0f);
+    Assert.assertTrue(m.getRowColumnF(1, 0) == 13.0f);
+    m.setRowColumnF(1, 1, 17.0f);
+    Assert.assertTrue(m.getRowColumnF(1, 1) == 17.0f);
+    m.setRowColumnF(1, 2, 19.0f);
+    Assert.assertTrue(m.getRowColumnF(1, 2) == 19.0f);
+    m.setRowColumnF(1, 3, 23.0f);
+    Assert.assertTrue(m.getRowColumnF(1, 3) == 23.0f);
 
-    Assert.assertTrue(m.set(2, 0, 29.0f).getRowColumnF(2, 0) == 29.0);
-    Assert.assertTrue(m.set(2, 1, 31.0f).getRowColumnF(2, 1) == 31.0);
-    Assert.assertTrue(m.set(2, 2, 37.0f).getRowColumnF(2, 2) == 37.0);
-    Assert.assertTrue(m.set(2, 3, 41.0f).getRowColumnF(2, 3) == 41.0);
+    m.setRowColumnF(2, 0, 29.0f);
+    Assert.assertTrue(m.getRowColumnF(2, 0) == 29.0f);
+    m.setRowColumnF(2, 1, 31.0f);
+    Assert.assertTrue(m.getRowColumnF(2, 1) == 31.0f);
+    m.setRowColumnF(2, 2, 37.0f);
+    Assert.assertTrue(m.getRowColumnF(2, 2) == 37.0f);
+    m.setRowColumnF(2, 3, 41.0f);
+    Assert.assertTrue(m.getRowColumnF(2, 3) == 41.0f);
 
-    Assert.assertTrue(m.set(3, 0, 43.0f).getRowColumnF(3, 0) == 43.0);
-    Assert.assertTrue(m.set(3, 1, 47.0f).getRowColumnF(3, 1) == 47.0);
-    Assert.assertTrue(m.set(3, 2, 53.0f).getRowColumnF(3, 2) == 53.0);
-    Assert.assertTrue(m.set(3, 3, 59.0f).getRowColumnF(3, 3) == 59.0);
+    m.setRowColumnF(3, 0, 43.0f);
+    Assert.assertTrue(m.getRowColumnF(3, 0) == 43.0);
+    m.setRowColumnF(3, 1, 47.0f);
+    Assert.assertTrue(m.getRowColumnF(3, 1) == 47.0);
+    m.setRowColumnF(3, 2, 53.0f);
+    Assert.assertTrue(m.getRowColumnF(3, 2) == 53.0);
+    m.setRowColumnF(3, 3, 59.0f);
+    Assert.assertTrue(m.getRowColumnF(3, 3) == 59.0);
 
     Assert.assertEquals(0, m.getDirectFloatBuffer().position());
   }

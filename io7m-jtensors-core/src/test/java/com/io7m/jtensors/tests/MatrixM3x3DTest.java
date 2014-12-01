@@ -1448,7 +1448,10 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     final VectorM3D v_exp = new VectorM3D(0, 6.1232339957367E-17, 1);
 
-    MatrixM3x3D.makeRotationInto(Math.toRadians(90), MatrixM3x3DTest.AXIS_X, m);
+    MatrixM3x3D.makeRotationInto(
+      Math.toRadians(90),
+      MatrixM3x3DTest.AXIS_X,
+      m);
     System.out.println(m);
     MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
 
@@ -1489,7 +1492,10 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     final VectorM3D v_exp = new VectorM3D(-1, 0, -6.1232339957367E-17);
 
-    MatrixM3x3D.makeRotationInto(Math.toRadians(90), MatrixM3x3DTest.AXIS_Y, m);
+    MatrixM3x3D.makeRotationInto(
+      Math.toRadians(90),
+      MatrixM3x3DTest.AXIS_Y,
+      m);
     MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -1522,7 +1528,10 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorM3D v_in = new VectorM3D(0, 1, 0);
     final VectorM3D v_exp = new VectorM3D(-1, 6.123233995736766E-17, 0);
 
-    MatrixM3x3D.makeRotationInto(Math.toRadians(90), MatrixM3x3DTest.AXIS_Z, m);
+    MatrixM3x3D.makeRotationInto(
+      Math.toRadians(90),
+      MatrixM3x3DTest.AXIS_Z,
+      m);
     MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -1562,7 +1571,10 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     final VectorM3D v_exp = new VectorM3D(0, 6.1232339957367E-17, -1);
 
-    MatrixM3x3D.makeRotationInto(Math.toRadians(-90), MatrixM3x3DTest.AXIS_X, m);
+    MatrixM3x3D.makeRotationInto(
+      Math.toRadians(-90),
+      MatrixM3x3DTest.AXIS_X,
+      m);
     System.out.println(m);
     MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
 
@@ -1603,7 +1615,10 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     final VectorM3D v_exp = new VectorM3D(1, 0, -6.1232339957367E-17);
 
-    MatrixM3x3D.makeRotationInto(Math.toRadians(-90), MatrixM3x3DTest.AXIS_Y, m);
+    MatrixM3x3D.makeRotationInto(
+      Math.toRadians(-90),
+      MatrixM3x3DTest.AXIS_Y,
+      m);
     MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -1636,7 +1651,10 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorM3D v_in = new VectorM3D(0, 1, 0);
     final VectorM3D v_exp = new VectorM3D(1, 6.123233995736766E-17, 0);
 
-    MatrixM3x3D.makeRotationInto(Math.toRadians(-90), MatrixM3x3DTest.AXIS_Z, m);
+    MatrixM3x3D.makeRotationInto(
+      Math.toRadians(-90),
+      MatrixM3x3DTest.AXIS_Z,
+      m);
     MatrixM3x3D.multiplyVector3D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2234,21 +2252,30 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m.set(0, 0, 3.0).getRowColumnD(0, 0) == 3.0);
-    Assert.assertTrue(m.set(0, 1, 5.0).getRowColumnD(0, 1) == 5.0);
-    Assert.assertTrue(m.set(0, 2, 7.0).getRowColumnD(0, 2) == 7.0);
+    m.setRowColumnD(0, 0, 3.0);
+    Assert.assertTrue(m.getRowColumnD(0, 0) == 3.0);
+    m.setRowColumnD(0, 1, 5.0);
+    Assert.assertTrue(m.getRowColumnD(0, 1) == 5.0);
+    m.setRowColumnD(0, 2, 7.0);
+    Assert.assertTrue(m.getRowColumnD(0, 2) == 7.0);
 
     Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m.set(1, 0, 13.0).getRowColumnD(1, 0) == 13.0);
-    Assert.assertTrue(m.set(1, 1, 17.0).getRowColumnD(1, 1) == 17.0);
-    Assert.assertTrue(m.set(1, 2, 19.0).getRowColumnD(1, 2) == 19.0);
+    m.setRowColumnD(1, 0, 13.0);
+    Assert.assertTrue(m.getRowColumnD(1, 0) == 13.0);
+    m.setRowColumnD(1, 1, 17.0);
+    Assert.assertTrue(m.getRowColumnD(1, 1) == 17.0);
+    m.setRowColumnD(1, 2, 19.0);
+    Assert.assertTrue(m.getRowColumnD(1, 2) == 19.0);
 
     Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m.set(2, 0, 29.0).getRowColumnD(2, 0) == 29.0);
-    Assert.assertTrue(m.set(2, 1, 31.0).getRowColumnD(2, 1) == 31.0);
-    Assert.assertTrue(m.set(2, 2, 37.0).getRowColumnD(2, 2) == 37.0);
+    m.setRowColumnD(2, 0, 29.0);
+    Assert.assertTrue(m.getRowColumnD(2, 0) == 29.0);
+    m.setRowColumnD(2, 1, 31.0);
+    Assert.assertTrue(m.getRowColumnD(2, 1) == 31.0);
+    m.setRowColumnD(2, 2, 37.0);
+    Assert.assertTrue(m.getRowColumnD(2, 2) == 37.0);
 
     Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }

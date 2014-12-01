@@ -48,7 +48,8 @@ import com.io7m.jtensors.VectorWritable4DType;
  */
 
 @SuppressWarnings("unchecked") public final class PMatrixM4x4D<T0, T1> implements
-  PMatrixDirectReadable4x4DType<T0, T1>
+  PMatrixDirectReadable4x4DType<T0, T1>,
+  PMatrixWritableDType<T0, T1>
 {
   /**
    * <p>
@@ -139,6 +140,7 @@ import com.io7m.jtensors.VectorWritable4DType;
   {
     // Type-level only.
   }
+
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
   private static final int VIEW_ELEMENT_SIZE;
@@ -3035,6 +3037,14 @@ import com.io7m.jtensors.VectorWritable4DType;
     this.view.put(PMatrixM4x4D.indexChecked(row, column), value);
     this.view.clear();
     return this;
+  }
+
+  @Override public void setRowColumnD(
+    final int row,
+    final int column,
+    final double value)
+  {
+    this.view.put(PMatrixM4x4D.indexChecked(row, column), value);
   }
 
   /**

@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -44,7 +44,9 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
+public final class MatrixM2x2D implements
+  MatrixDirectReadable2x2DType,
+  MatrixWritableDType
 {
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
@@ -944,6 +946,14 @@ public final class MatrixM2x2D implements MatrixDirectReadable2x2DType
   {
     MatrixM2x2D.set(this, row, column, value);
     return this;
+  }
+
+  @Override public void setRowColumnD(
+    final int row,
+    final int column,
+    final double value)
+  {
+    this.view.put(MatrixM2x2D.indexChecked(row, column), value);
   }
 
   private MatrixM2x2D setUnsafe(

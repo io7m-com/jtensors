@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -2520,7 +2520,10 @@ public class PMatrixM4x4DTest<T> extends MatrixM4x4Contract
 
     final VectorM4D v_exp = new VectorM4D(0, 6.1232339957367E-17, 1, 1);
 
-    PMatrixM4x4D.makeRotationInto(Math.toRadians(90), PMatrixM4x4DTest.AXIS_X, m);
+    PMatrixM4x4D.makeRotationInto(
+      Math.toRadians(90),
+      PMatrixM4x4DTest.AXIS_X,
+      m);
     System.out.println(m);
     PMatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
@@ -2562,7 +2565,10 @@ public class PMatrixM4x4DTest<T> extends MatrixM4x4Contract
     final PVectorM4D<T> v_exp =
       new PVectorM4D<T>(-1, 0, -6.1232339957367E-17, 1);
 
-    PMatrixM4x4D.makeRotationInto(Math.toRadians(90), PMatrixM4x4DTest.AXIS_Y, m);
+    PMatrixM4x4D.makeRotationInto(
+      Math.toRadians(90),
+      PMatrixM4x4DTest.AXIS_Y,
+      m);
     PMatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2596,7 +2602,10 @@ public class PMatrixM4x4DTest<T> extends MatrixM4x4Contract
     final PVectorM4D<T> v_exp =
       new PVectorM4D<T>(-1, 6.123233995736766E-17, 0, 1);
 
-    PMatrixM4x4D.makeRotationInto(Math.toRadians(90), PMatrixM4x4DTest.AXIS_Z, m);
+    PMatrixM4x4D.makeRotationInto(
+      Math.toRadians(90),
+      PMatrixM4x4DTest.AXIS_Z,
+      m);
     PMatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2637,8 +2646,10 @@ public class PMatrixM4x4DTest<T> extends MatrixM4x4Contract
     final PVectorM4D<T> v_exp =
       new PVectorM4D<T>(0, 6.1232339957367E-17, -1, 1);
 
-    PMatrixM4x4D
-      .makeRotationInto(Math.toRadians(-90), PMatrixM4x4DTest.AXIS_X, m);
+    PMatrixM4x4D.makeRotationInto(
+      Math.toRadians(-90),
+      PMatrixM4x4DTest.AXIS_X,
+      m);
     System.out.println(m);
     PMatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
@@ -2680,8 +2691,10 @@ public class PMatrixM4x4DTest<T> extends MatrixM4x4Contract
     final PVectorM4D<T> v_exp =
       new PVectorM4D<T>(1, 0, -6.1232339957367E-17, 1);
 
-    PMatrixM4x4D
-      .makeRotationInto(Math.toRadians(-90), PMatrixM4x4DTest.AXIS_Y, m);
+    PMatrixM4x4D.makeRotationInto(
+      Math.toRadians(-90),
+      PMatrixM4x4DTest.AXIS_Y,
+      m);
     PMatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -2715,8 +2728,10 @@ public class PMatrixM4x4DTest<T> extends MatrixM4x4Contract
     final PVectorM4D<T> v_exp =
       new PVectorM4D<T>(1, 6.123233995736766E-17, 0, 1);
 
-    PMatrixM4x4D
-      .makeRotationInto(Math.toRadians(-90), PMatrixM4x4DTest.AXIS_Z, m);
+    PMatrixM4x4D.makeRotationInto(
+      Math.toRadians(-90),
+      PMatrixM4x4DTest.AXIS_Z,
+      m);
     PMatrixM4x4D.multiplyVector4D(m, v_in, v_got);
 
     System.out.println("in  : " + v_in);
@@ -3493,25 +3508,41 @@ public class PMatrixM4x4DTest<T> extends MatrixM4x4Contract
 
     Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
 
-    Assert.assertTrue(m.set(0, 0, 3.0).getRowColumnD(0, 0) == 3.0);
-    Assert.assertTrue(m.set(0, 1, 5.0).getRowColumnD(0, 1) == 5.0);
-    Assert.assertTrue(m.set(0, 2, 7.0).getRowColumnD(0, 2) == 7.0);
-    Assert.assertTrue(m.set(0, 3, 11.0).getRowColumnD(0, 3) == 11.0);
+    m.setRowColumnD(0, 0, 3.0);
+    Assert.assertTrue(m.getRowColumnD(0, 0) == 3.0);
+    m.setRowColumnD(0, 1, 5.0);
+    Assert.assertTrue(m.getRowColumnD(0, 1) == 5.0);
+    m.setRowColumnD(0, 2, 7.0);
+    Assert.assertTrue(m.getRowColumnD(0, 2) == 7.0);
+    m.setRowColumnD(0, 3, 11.0);
+    Assert.assertTrue(m.getRowColumnD(0, 3) == 11.0);
 
-    Assert.assertTrue(m.set(1, 0, 13.0).getRowColumnD(1, 0) == 13.0);
-    Assert.assertTrue(m.set(1, 1, 17.0).getRowColumnD(1, 1) == 17.0);
-    Assert.assertTrue(m.set(1, 2, 19.0).getRowColumnD(1, 2) == 19.0);
-    Assert.assertTrue(m.set(1, 3, 23.0).getRowColumnD(1, 3) == 23.0);
+    m.setRowColumnD(1, 0, 13.0);
+    Assert.assertTrue(m.getRowColumnD(1, 0) == 13.0);
+    m.setRowColumnD(1, 1, 17.0);
+    Assert.assertTrue(m.getRowColumnD(1, 1) == 17.0);
+    m.setRowColumnD(1, 2, 19.0);
+    Assert.assertTrue(m.getRowColumnD(1, 2) == 19.0);
+    m.setRowColumnD(1, 3, 23.0);
+    Assert.assertTrue(m.getRowColumnD(1, 3) == 23.0);
 
-    Assert.assertTrue(m.set(2, 0, 29.0).getRowColumnD(2, 0) == 29.0);
-    Assert.assertTrue(m.set(2, 1, 31.0).getRowColumnD(2, 1) == 31.0);
-    Assert.assertTrue(m.set(2, 2, 37.0).getRowColumnD(2, 2) == 37.0);
-    Assert.assertTrue(m.set(2, 3, 41.0).getRowColumnD(2, 3) == 41.0);
+    m.setRowColumnD(2, 0, 29.0);
+    Assert.assertTrue(m.getRowColumnD(2, 0) == 29.0);
+    m.setRowColumnD(2, 1, 31.0);
+    Assert.assertTrue(m.getRowColumnD(2, 1) == 31.0);
+    m.setRowColumnD(2, 2, 37.0);
+    Assert.assertTrue(m.getRowColumnD(2, 2) == 37.0);
+    m.setRowColumnD(2, 3, 41.0);
+    Assert.assertTrue(m.getRowColumnD(2, 3) == 41.0);
 
-    Assert.assertTrue(m.set(3, 0, 43.0).getRowColumnD(3, 0) == 43.0);
-    Assert.assertTrue(m.set(3, 1, 47.0).getRowColumnD(3, 1) == 47.0);
-    Assert.assertTrue(m.set(3, 2, 53.0).getRowColumnD(3, 2) == 53.0);
-    Assert.assertTrue(m.set(3, 3, 59.0).getRowColumnD(3, 3) == 59.0);
+    m.setRowColumnD(3, 0, 43.0);
+    Assert.assertTrue(m.getRowColumnD(3, 0) == 43.0);
+    m.setRowColumnD(3, 1, 47.0);
+    Assert.assertTrue(m.getRowColumnD(3, 1) == 47.0);
+    m.setRowColumnD(3, 2, 53.0);
+    Assert.assertTrue(m.getRowColumnD(3, 2) == 53.0);
+    m.setRowColumnD(3, 3, 59.0);
+    Assert.assertTrue(m.getRowColumnD(3, 3) == 59.0);
 
     Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }

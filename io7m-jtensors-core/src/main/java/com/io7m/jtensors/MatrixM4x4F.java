@@ -44,7 +44,9 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
+public final class MatrixM4x4F implements
+  MatrixDirectReadable4x4FType,
+  MatrixWritableFType
 {
   /**
    * <p>
@@ -661,6 +663,31 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
     return (column * MatrixM4x4F.VIEW_COLS) + row;
   }
 
+  /**
+   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
+   * matrix to <code>out</code>. The function returns <code>Some(out)</code>
+   * iff it was possible to invert the matrix, and <code>None</code>
+   * otherwise. It is not possible to invert a matrix that has a determinant
+   * of <code>0</code>. If the function returns <code>None</code>,
+   * <code>m</code> is untouched.
+   *
+   * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
+   *
+   * @param m
+   *          The input matrix.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>.
+   */
+
+  public static OptionType<MatrixM4x4F> invert(
+    final MatrixReadable4x4FType m,
+    final MatrixM4x4F out)
+  {
+    final MatrixM3x3F m3 = new MatrixM3x3F();
+    return MatrixM4x4F.invertActual(m, m3, out);
+  }
+
   private static OptionType<MatrixM4x4F> invertActual(
     final MatrixReadable4x4FType m,
     final MatrixM3x3F m3,
@@ -1005,31 +1032,6 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
 
     MatrixM4x4F.transposeInPlace(out);
     return Option.some(out);
-  }
-
-  /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>out</code>. The function returns <code>Some(out)</code>
-   * iff it was possible to invert the matrix, and <code>None</code>
-   * otherwise. It is not possible to invert a matrix that has a determinant
-   * of <code>0</code>. If the function returns <code>None</code>,
-   * <code>m</code> is untouched.
-   *
-   * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>.
-   */
-
-  public static OptionType<MatrixM4x4F> invert(
-    final MatrixReadable4x4FType m,
-    final MatrixM4x4F out)
-  {
-    final MatrixM3x3F m3 = new MatrixM3x3F();
-    return MatrixM4x4F.invertActual(m, m3, out);
   }
 
   /**
@@ -1661,18 +1663,6 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
       out);
   }
 
-  private static MatrixM4x4F rotateActual(
-    final double angle,
-    final MatrixReadable4x4FType m,
-    final MatrixM4x4F tmp,
-    final VectorReadable3FType axis,
-    final MatrixM4x4F out)
-  {
-    MatrixM4x4F.makeRotationInto(angle, axis, tmp);
-    MatrixM4x4F.multiply(m, tmp, out);
-    return out;
-  }
-
   /**
    * <p>
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
@@ -1703,6 +1693,18 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
   {
     final MatrixM4x4F tmp = new MatrixM4x4F();
     return MatrixM4x4F.rotateActual(angle, m, tmp, axis, out);
+  }
+
+  private static MatrixM4x4F rotateActual(
+    final double angle,
+    final MatrixReadable4x4FType m,
+    final MatrixM4x4F tmp,
+    final VectorReadable3FType axis,
+    final MatrixM4x4F out)
+  {
+    MatrixM4x4F.makeRotationInto(angle, axis, tmp);
+    MatrixM4x4F.multiply(m, tmp, out);
+    return out;
   }
 
   /**
@@ -2605,6 +2607,14 @@ public final class MatrixM4x4F implements MatrixDirectReadable4x4FType
   {
     this.view.put(MatrixM4x4F.indexChecked(row, column), value);
     return this;
+  }
+
+  @Override public void setRowColumnF(
+    final int row,
+    final int column,
+    final float value)
+  {
+    this.view.put(MatrixM4x4F.indexChecked(row, column), value);
   }
 
   /**
