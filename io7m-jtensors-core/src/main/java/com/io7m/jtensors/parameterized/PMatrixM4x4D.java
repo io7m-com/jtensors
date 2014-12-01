@@ -135,10 +135,15 @@ import com.io7m.jtensors.VectorWritable4DType;
     }
   }
 
+  private interface Phantom2Type
+  {
+    // Type-level only.
+  }
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
   private static final int VIEW_ELEMENT_SIZE;
   private static final int VIEW_ELEMENTS;
+
   private static final int VIEW_ROWS;
 
   static {
@@ -783,6 +788,36 @@ import com.io7m.jtensors.VectorWritable4DType;
     return (column * PMatrixM4x4D.VIEW_COLS) + row;
   }
 
+  /**
+   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
+   * matrix to <code>out</code>. The function returns <code>Some(out)</code>
+   * iff it was possible to invert the matrix, and <code>None</code>
+   * otherwise. It is not possible to invert a matrix that has a determinant
+   * of <code>0</code>. If the function returns <code>None</code>,
+   * <code>m</code> is untouched.
+   *
+   * @see PMatrixM4x4D#determinant(PMatrixReadable4x4DType)
+   *
+   * @param m
+   *          The input matrix.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   *
+   * @param <T0>
+   *          A phantom type parameter.
+   * @param <T1>
+   *          A phantom type parameter.
+   */
+
+  public static <T0, T1> OptionType<PMatrixM4x4D<T1, T0>> invert(
+    final PMatrixReadable4x4DType<T0, T1> m,
+    final PMatrixM4x4D<T1, T0> out)
+  {
+    final MatrixM3x3D m3 = new MatrixM3x3D();
+    return PMatrixM4x4D.invertActual(m, m3, out);
+  }
+
   private static <T0, T1> OptionType<PMatrixM4x4D<T1, T0>> invertActual(
     final PMatrixReadable4x4DType<T0, T1> m,
     final MatrixM3x3D m3,
@@ -1131,36 +1166,6 @@ import com.io7m.jtensors.VectorWritable4DType;
 
   /**
    * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>out</code>. The function returns <code>Some(out)</code>
-   * iff it was possible to invert the matrix, and <code>None</code>
-   * otherwise. It is not possible to invert a matrix that has a determinant
-   * of <code>0</code>. If the function returns <code>None</code>,
-   * <code>m</code> is untouched.
-   *
-   * @see PMatrixM4x4D#determinant(PMatrixReadable4x4DType)
-   *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   *
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   */
-
-  public static <T0, T1> OptionType<PMatrixM4x4D<T1, T0>> invert(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final PMatrixM4x4D<T1, T0> out)
-  {
-    final MatrixM3x3D m3 = new MatrixM3x3D();
-    return PMatrixM4x4D.invertActual(m, m3, out);
-  }
-
-  /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
    * matrix to <code>m</code>. The function returns <code>Some(m)</code> iff
    * it was possible to invert the matrix, and <code>None</code> otherwise. It
    * is not possible to invert a matrix that has a determinant of
@@ -1251,11 +1256,6 @@ import com.io7m.jtensors.VectorWritable4DType;
     final PMatrixM4x4D<T1, T0> out)
   {
     return PMatrixM4x4D.invertActual(m, context.getM3a(), out);
-  }
-
-  private interface Phantom2Type
-  {
-    // Type-level only.
   }
 
   /**
@@ -1866,22 +1866,6 @@ import com.io7m.jtensors.VectorWritable4DType;
       out);
   }
 
-  private static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> rotateActual(
-    final double angle,
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final PMatrixM4x4D<?, ?> tmp,
-    final VectorReadable3DType axis,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    PMatrixM4x4D.makeRotationInto(angle, axis, tmp);
-    final PMatrixReadable4x4DType<T1, T2> m12 =
-      (PMatrixReadable4x4DType<T1, T2>) m;
-    final PMatrixM4x4D<T0, T1> m01 = (PMatrixM4x4D<T0, T1>) tmp;
-    final PMatrixM4x4D<T0, T2> m02 = (PMatrixM4x4D<T0, T2>) out;
-    PMatrixM4x4D.multiply(m12, m01, m02);
-    return out;
-  }
-
   /**
    * <p>
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
@@ -1920,6 +1904,22 @@ import com.io7m.jtensors.VectorWritable4DType;
   {
     final PMatrixM4x4D<T2, T3> tmp = new PMatrixM4x4D<T2, T3>();
     return PMatrixM4x4D.rotateActual(angle, m, tmp, axis, out);
+  }
+
+  private static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> rotateActual(
+    final double angle,
+    final PMatrixReadable4x4DType<T0, T1> m,
+    final PMatrixM4x4D<?, ?> tmp,
+    final VectorReadable3DType axis,
+    final PMatrixM4x4D<T2, T3> out)
+  {
+    PMatrixM4x4D.makeRotationInto(angle, axis, tmp);
+    final PMatrixReadable4x4DType<T1, T2> m12 =
+      (PMatrixReadable4x4DType<T1, T2>) m;
+    final PMatrixM4x4D<T0, T1> m01 = (PMatrixM4x4D<T0, T1>) tmp;
+    final PMatrixM4x4D<T0, T2> m02 = (PMatrixM4x4D<T0, T2>) out;
+    PMatrixM4x4D.multiply(m12, m01, m02);
+    return out;
   }
 
   /**

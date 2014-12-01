@@ -98,6 +98,42 @@ import com.io7m.jtensors.parameterized.PVectorM4I;
     }
   }
 
+  @Test public void testMatrixM2x2D()
+    throws NotFinal
+  {
+    FinalityChecker.checkClassFinal(MatrixM2x2D.class);
+  }
+
+  @Test public void testMatrixM2x2F()
+    throws NotFinal
+  {
+    FinalityChecker.checkClassFinal(MatrixM2x2F.class);
+  }
+
+  @Test public void testMatrixM3x3D()
+    throws NotFinal
+  {
+    FinalityChecker.checkClassFinal(MatrixM3x3D.class);
+  }
+
+  @Test public void testMatrixM3x3F()
+    throws NotFinal
+  {
+    FinalityChecker.checkClassFinal(MatrixM3x3F.class);
+  }
+
+  @Test public void testMatrixM4x4D()
+    throws NotFinal
+  {
+    FinalityChecker.checkClassFinal(MatrixM4x4D.class);
+  }
+
+  @Test public void testMatrixM4x4F()
+    throws NotFinal
+  {
+    FinalityChecker.checkClassFinal(MatrixM4x4F.class);
+  }
+
   @Test public void testPVectorI2D()
     throws NotFinal
   {
@@ -206,6 +242,30 @@ import com.io7m.jtensors.parameterized.PVectorM4I;
     FinalityChecker.checkClassFinal(PVectorM4I.class);
   }
 
+  @Test public void testQuaternionI4D()
+    throws NotFinal
+  {
+    FinalityChecker.checkClassFinal(QuaternionI4D.class);
+  }
+
+  @Test public void testQuaternionI4F()
+    throws NotFinal
+  {
+    FinalityChecker.checkClassFinal(QuaternionI4F.class);
+  }
+
+  @Test public void testQuaternionM4D()
+    throws NotFinal
+  {
+    FinalityChecker.checkClassFinal(QuaternionM4D.class);
+  }
+
+  @Test public void testQuaternionM4F()
+    throws NotFinal
+  {
+    FinalityChecker.checkClassFinal(QuaternionM4F.class);
+  }
+
   @Test public void testVectorI2D()
     throws NotFinal
   {
@@ -312,65 +372,5 @@ import com.io7m.jtensors.parameterized.PVectorM4I;
     throws NotFinal
   {
     FinalityChecker.checkClassFinal(VectorM4I.class);
-  }
-
-  @Test public void testMatrixM2x2D()
-    throws NotFinal
-  {
-    FinalityChecker.checkClassFinal(MatrixM2x2D.class);
-  }
-
-  @Test public void testMatrixM2x2F()
-    throws NotFinal
-  {
-    FinalityChecker.checkClassFinal(MatrixM2x2F.class);
-  }
-
-  @Test public void testMatrixM3x3D()
-    throws NotFinal
-  {
-    FinalityChecker.checkClassFinal(MatrixM3x3D.class);
-  }
-
-  @Test public void testMatrixM3x3F()
-    throws NotFinal
-  {
-    FinalityChecker.checkClassFinal(MatrixM3x3F.class);
-  }
-
-  @Test public void testMatrixM4x4D()
-    throws NotFinal
-  {
-    FinalityChecker.checkClassFinal(MatrixM4x4D.class);
-  }
-
-  @Test public void testMatrixM4x4F()
-    throws NotFinal
-  {
-    FinalityChecker.checkClassFinal(MatrixM4x4F.class);
-  }
-
-  @Test public void testQuaternionI4D()
-    throws NotFinal
-  {
-    FinalityChecker.checkClassFinal(QuaternionI4D.class);
-  }
-
-  @Test public void testQuaternionI4F()
-    throws NotFinal
-  {
-    FinalityChecker.checkClassFinal(QuaternionI4F.class);
-  }
-
-  @Test public void testQuaternionM4D()
-    throws NotFinal
-  {
-    FinalityChecker.checkClassFinal(QuaternionM4D.class);
-  }
-
-  @Test public void testQuaternionM4F()
-    throws NotFinal
-  {
-    FinalityChecker.checkClassFinal(QuaternionM4F.class);
   }
 }

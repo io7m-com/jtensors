@@ -346,6 +346,60 @@ import com.io7m.jtensors.VectorReadable3FType;
     Assert.assertTrue(va.getWF() == vb.getWF());
   }
 
+  @Test public void testCopy2Correct()
+  {
+    final QuaternionM4F v0 =
+      new QuaternionM4F(
+        (float) Math.random() * Float.MAX_VALUE,
+        (float) Math.random() * Float.MAX_VALUE,
+        (float) Math.random() * Float.MAX_VALUE,
+        (float) Math.random() * Float.MAX_VALUE);
+    final QuaternionM4F v1 = new QuaternionM4F();
+
+    v1.copyFrom2F(v0);
+
+    Assert.assertEquals(v0.getXF(), v1.getXF(), 0.0f);
+    Assert.assertEquals(v0.getYF(), v1.getYF(), 0.0f);
+    Assert.assertEquals(0, v1.getZF(), 0.0f);
+    Assert.assertEquals(1, v1.getWF(), 0.0f);
+  }
+
+  @Test public void testCopy3Correct()
+  {
+    final QuaternionM4F v0 =
+      new QuaternionM4F(
+        (float) Math.random() * Float.MAX_VALUE,
+        (float) Math.random() * Float.MAX_VALUE,
+        (float) Math.random() * Float.MAX_VALUE,
+        (float) Math.random() * Float.MAX_VALUE);
+    final QuaternionM4F v1 = new QuaternionM4F();
+
+    v1.copyFrom4F(v0);
+
+    Assert.assertEquals(v0.getXF(), v1.getXF(), 0.0f);
+    Assert.assertEquals(v0.getYF(), v1.getYF(), 0.0f);
+    Assert.assertEquals(v0.getZF(), v1.getZF(), 0.0f);
+    Assert.assertEquals(v0.getWF(), v1.getWF(), 0.0f);
+  }
+
+  @Test public void testCopy4Correct()
+  {
+    final QuaternionM4F v0 =
+      new QuaternionM4F(
+        (float) Math.random() * Float.MAX_VALUE,
+        (float) Math.random() * Float.MAX_VALUE,
+        (float) Math.random() * Float.MAX_VALUE,
+        (float) Math.random() * Float.MAX_VALUE);
+    final QuaternionM4F v1 = new QuaternionM4F();
+
+    v1.copyFrom3F(v0);
+
+    Assert.assertEquals(v0.getXF(), v1.getXF(), 0.0f);
+    Assert.assertEquals(v0.getYF(), v1.getYF(), 0.0f);
+    Assert.assertEquals(v0.getZF(), v1.getZF(), 0.0f);
+    Assert.assertEquals(1.0f, v1.getWF(), 0.0f);
+  }
+
   @Override @Test public void testDefault0001()
   {
     final AlmostEqualFloat.ContextRelative ec =
@@ -2187,59 +2241,5 @@ import com.io7m.jtensors.VectorReadable3FType;
     Assert.assertTrue(v1.getYF() == 1.0f);
     Assert.assertTrue(v1.getZF() == 1.0f);
     Assert.assertTrue(v1.getWF() == 1.0f);
-  }
-
-  @Test public void testCopy2Correct()
-  {
-    final QuaternionM4F v0 =
-      new QuaternionM4F(
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE);
-    final QuaternionM4F v1 = new QuaternionM4F();
-
-    v1.copyFrom2F(v0);
-
-    Assert.assertEquals(v0.getXF(), v1.getXF(), 0.0f);
-    Assert.assertEquals(v0.getYF(), v1.getYF(), 0.0f);
-    Assert.assertEquals(0, v1.getZF(), 0.0f);
-    Assert.assertEquals(1, v1.getWF(), 0.0f);
-  }
-
-  @Test public void testCopy3Correct()
-  {
-    final QuaternionM4F v0 =
-      new QuaternionM4F(
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE);
-    final QuaternionM4F v1 = new QuaternionM4F();
-
-    v1.copyFrom4F(v0);
-
-    Assert.assertEquals(v0.getXF(), v1.getXF(), 0.0f);
-    Assert.assertEquals(v0.getYF(), v1.getYF(), 0.0f);
-    Assert.assertEquals(v0.getZF(), v1.getZF(), 0.0f);
-    Assert.assertEquals(v0.getWF(), v1.getWF(), 0.0f);
-  }
-
-  @Test public void testCopy4Correct()
-  {
-    final QuaternionM4F v0 =
-      new QuaternionM4F(
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE);
-    final QuaternionM4F v1 = new QuaternionM4F();
-
-    v1.copyFrom3F(v0);
-
-    Assert.assertEquals(v0.getXF(), v1.getXF(), 0.0f);
-    Assert.assertEquals(v0.getYF(), v1.getYF(), 0.0f);
-    Assert.assertEquals(v0.getZF(), v1.getZF(), 0.0f);
-    Assert.assertEquals(1.0f, v1.getWF(), 0.0f);
   }
 }

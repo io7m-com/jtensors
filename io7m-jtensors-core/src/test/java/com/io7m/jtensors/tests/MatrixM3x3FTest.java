@@ -2187,21 +2187,6 @@ import com.io7m.jtensors.VectorReadable3FType;
     MatrixM3x3F.scaleRow(m, -1, 1.0f, r);
   }
 
-  @Test public void testSetIdentity()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-
-    for (int row = 0; row < 3; ++row) {
-      for (int col = 0; col < 3; ++col) {
-        m.set(row, col, (float) Math.random());
-      }
-    }
-
-    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-    MatrixM3x3F.setIdentity(m);
-    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-  }
-
   @Test public void testSetGetIdentity()
   {
     final MatrixM3x3F m = new MatrixM3x3F();
@@ -2249,6 +2234,21 @@ import com.io7m.jtensors.VectorReadable3FType;
     Assert.assertTrue(m.set(2, 1, 31.0f).getRowColumnF(2, 1) == 31.0);
     Assert.assertTrue(m.set(2, 2, 37.0f).getRowColumnF(2, 2) == 37.0);
 
+    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+  }
+
+  @Test public void testSetIdentity()
+  {
+    final MatrixM3x3F m = new MatrixM3x3F();
+
+    for (int row = 0; row < 3; ++row) {
+      for (int col = 0; col < 3; ++col) {
+        m.set(row, col, (float) Math.random());
+      }
+    }
+
+    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+    MatrixM3x3F.setIdentity(m);
     Assert.assertEquals(0, m.getDirectFloatBuffer().position());
   }
 

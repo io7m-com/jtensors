@@ -343,6 +343,54 @@ import com.io7m.jtensors.VectorReadable3DType;
     Assert.assertTrue(va.getWD() == vb.getWD());
   }
 
+  @Test public void testCopy2Correct()
+  {
+    final QuaternionM4D v0 =
+      new QuaternionM4D(Math.random() * Double.MAX_VALUE, Math.random()
+        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
+        * Double.MAX_VALUE);
+    final QuaternionM4D v1 = new QuaternionM4D();
+
+    v1.copyFrom2D(v0);
+
+    Assert.assertEquals(v0.getXD(), v1.getXD(), 0.0f);
+    Assert.assertEquals(v0.getYD(), v1.getYD(), 0.0f);
+    Assert.assertEquals(0, v1.getZD(), 0.0f);
+    Assert.assertEquals(1, v1.getWD(), 0.0f);
+  }
+
+  @Test public void testCopy3Correct()
+  {
+    final QuaternionM4D v0 =
+      new QuaternionM4D(Math.random() * Double.MAX_VALUE, Math.random()
+        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
+        * Double.MAX_VALUE);
+    final QuaternionM4D v1 = new QuaternionM4D();
+
+    v1.copyFrom4D(v0);
+
+    Assert.assertEquals(v0.getXD(), v1.getXD(), 0.0f);
+    Assert.assertEquals(v0.getYD(), v1.getYD(), 0.0f);
+    Assert.assertEquals(v0.getZD(), v1.getZD(), 0.0f);
+    Assert.assertEquals(v0.getWD(), v1.getWD(), 0.0f);
+  }
+
+  @Test public void testCopy4Correct()
+  {
+    final QuaternionM4D v0 =
+      new QuaternionM4D(Math.random() * Double.MAX_VALUE, Math.random()
+        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
+        * Double.MAX_VALUE);
+    final QuaternionM4D v1 = new QuaternionM4D();
+
+    v1.copyFrom3D(v0);
+
+    Assert.assertEquals(v0.getXD(), v1.getXD(), 0.0f);
+    Assert.assertEquals(v0.getYD(), v1.getYD(), 0.0f);
+    Assert.assertEquals(v0.getZD(), v1.getZD(), 0.0f);
+    Assert.assertEquals(1.0, v1.getWD(), 0.0f);
+  }
+
   @Override @Test public void testDefault0001()
   {
     final AlmostEqualDouble.ContextRelative ec =
@@ -2198,53 +2246,5 @@ import com.io7m.jtensors.VectorReadable3DType;
     Assert.assertTrue(v1.getYD() == 1.0);
     Assert.assertTrue(v1.getZD() == 1.0);
     Assert.assertTrue(v1.getWD() == 1.0);
-  }
-
-  @Test public void testCopy2Correct()
-  {
-    final QuaternionM4D v0 =
-      new QuaternionM4D(Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE);
-    final QuaternionM4D v1 = new QuaternionM4D();
-
-    v1.copyFrom2D(v0);
-
-    Assert.assertEquals(v0.getXD(), v1.getXD(), 0.0f);
-    Assert.assertEquals(v0.getYD(), v1.getYD(), 0.0f);
-    Assert.assertEquals(0, v1.getZD(), 0.0f);
-    Assert.assertEquals(1, v1.getWD(), 0.0f);
-  }
-
-  @Test public void testCopy3Correct()
-  {
-    final QuaternionM4D v0 =
-      new QuaternionM4D(Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE);
-    final QuaternionM4D v1 = new QuaternionM4D();
-
-    v1.copyFrom4D(v0);
-
-    Assert.assertEquals(v0.getXD(), v1.getXD(), 0.0f);
-    Assert.assertEquals(v0.getYD(), v1.getYD(), 0.0f);
-    Assert.assertEquals(v0.getZD(), v1.getZD(), 0.0f);
-    Assert.assertEquals(v0.getWD(), v1.getWD(), 0.0f);
-  }
-
-  @Test public void testCopy4Correct()
-  {
-    final QuaternionM4D v0 =
-      new QuaternionM4D(Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE);
-    final QuaternionM4D v1 = new QuaternionM4D();
-
-    v1.copyFrom3D(v0);
-
-    Assert.assertEquals(v0.getXD(), v1.getXD(), 0.0f);
-    Assert.assertEquals(v0.getYD(), v1.getYD(), 0.0f);
-    Assert.assertEquals(v0.getZD(), v1.getZD(), 0.0f);
-    Assert.assertEquals(1.0, v1.getWD(), 0.0f);
   }
 }

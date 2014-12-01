@@ -997,22 +997,6 @@ import com.io7m.jtensors.VectorWritable3FType;
     return out;
   }
 
-  private static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> rotateActual(
-    final double angle,
-    final PMatrixReadable3x3FType<T0, T1> m,
-    final PMatrixM3x3F<?, ?> tmp,
-    final VectorReadable3FType axis,
-    final PMatrixM3x3F<T2, T3> out)
-  {
-    PMatrixM3x3F.makeRotationInto(angle, axis, tmp);
-    final PMatrixReadable3x3FType<T1, T2> m12 =
-      (PMatrixReadable3x3FType<T1, T2>) m;
-    final PMatrixM3x3F<T0, T1> m01 = (PMatrixM3x3F<T0, T1>) tmp;
-    final PMatrixM3x3F<T0, T2> m02 = (PMatrixM3x3F<T0, T2>) out;
-    PMatrixM3x3F.multiply(m12, m01, m02);
-    return out;
-  }
-
   /**
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
    * axis <code>axis</code>, saving the result into <code>out</code>.
@@ -1045,6 +1029,22 @@ import com.io7m.jtensors.VectorWritable3FType;
   {
     final PMatrixM3x3F<T2, T3> tmp = new PMatrixM3x3F<T2, T3>();
     return PMatrixM3x3F.rotateActual(angle, m, tmp, axis, out);
+  }
+
+  private static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> rotateActual(
+    final double angle,
+    final PMatrixReadable3x3FType<T0, T1> m,
+    final PMatrixM3x3F<?, ?> tmp,
+    final VectorReadable3FType axis,
+    final PMatrixM3x3F<T2, T3> out)
+  {
+    PMatrixM3x3F.makeRotationInto(angle, axis, tmp);
+    final PMatrixReadable3x3FType<T1, T2> m12 =
+      (PMatrixReadable3x3FType<T1, T2>) m;
+    final PMatrixM3x3F<T0, T1> m01 = (PMatrixM3x3F<T0, T1>) tmp;
+    final PMatrixM3x3F<T0, T2> m02 = (PMatrixM3x3F<T0, T2>) out;
+    PMatrixM3x3F.multiply(m12, m01, m02);
+    return out;
   }
 
   /**

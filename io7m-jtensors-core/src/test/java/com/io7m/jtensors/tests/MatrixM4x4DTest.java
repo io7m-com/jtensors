@@ -3436,21 +3436,6 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     MatrixM4x4D.scaleRow(m, -1, 1.0, r);
   }
 
-  @Override @Test public void testSetIdentity()
-  {
-    final MatrixM4x4D m = new MatrixM4x4D();
-
-    for (int row = 0; row < 4; ++row) {
-      for (int col = 0; col < 4; ++col) {
-        m.set(row, col, (float) Math.random());
-      }
-    }
-
-    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
-    MatrixM4x4D.setIdentity(m);
-    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
-  }
-
   @Override @Test public void testSetGetIdentity()
   {
     final MatrixM4x4D m = new MatrixM4x4D();
@@ -3506,6 +3491,21 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     Assert.assertTrue(m.set(3, 2, 53.0).getRowColumnD(3, 2) == 53.0);
     Assert.assertTrue(m.set(3, 3, 59.0).getRowColumnD(3, 3) == 59.0);
 
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+  }
+
+  @Override @Test public void testSetIdentity()
+  {
+    final MatrixM4x4D m = new MatrixM4x4D();
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        m.set(row, col, (float) Math.random());
+      }
+    }
+
+    Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
+    MatrixM4x4D.setIdentity(m);
     Assert.assertEquals(0, m.getDirectDoubleBuffer().position());
   }
 

@@ -3480,21 +3480,6 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
     Assert.assertEquals(0, m.getDirectFloatBuffer().position());
   }
 
-  @Override @Test public void testSetIdentity()
-  {
-    final MatrixM4x4F m = new MatrixM4x4F();
-
-    for (int row = 0; row < 4; ++row) {
-      for (int col = 0; col < 4; ++col) {
-        m.set(row, col, (float) Math.random());
-      }
-    }
-
-    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-    MatrixM4x4F.setIdentity(m);
-    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-  }
-
   @Override @Test public void testSetGetInterfaceIdentity()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
@@ -3521,6 +3506,21 @@ public class MatrixM4x4FTest extends MatrixM4x4Contract
     Assert.assertTrue(m.set(3, 2, 53.0f).getRowColumnF(3, 2) == 53.0);
     Assert.assertTrue(m.set(3, 3, 59.0f).getRowColumnF(3, 3) == 59.0);
 
+    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+  }
+
+  @Override @Test public void testSetIdentity()
+  {
+    final MatrixM4x4F m = new MatrixM4x4F();
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        m.set(row, col, (float) Math.random());
+      }
+    }
+
+    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+    MatrixM4x4F.setIdentity(m);
     Assert.assertEquals(0, m.getDirectFloatBuffer().position());
   }
 

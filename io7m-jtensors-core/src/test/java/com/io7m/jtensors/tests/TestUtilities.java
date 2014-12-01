@@ -65,23 +65,23 @@ public final class TestUtilities
 
   public static
     AlmostEqualFloat.ContextRelative
-    getSingleEqualityContext3dp()
-  {
-    final AlmostEqualFloat.ContextRelative context =
-      new AlmostEqualFloat.ContextRelative();
-    context.setMaxAbsoluteDifference(0.001f);
-    context.setMaxRelativeDifference(0.001f);
-    return context;
-  }
-
-  public static
-    AlmostEqualFloat.ContextRelative
     getSingleEqualityContext2dp()
   {
     final AlmostEqualFloat.ContextRelative context =
       new AlmostEqualFloat.ContextRelative();
     context.setMaxAbsoluteDifference(0.01f);
     context.setMaxRelativeDifference(0.01f);
+    return context;
+  }
+
+  public static
+    AlmostEqualFloat.ContextRelative
+    getSingleEqualityContext3dp()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      new AlmostEqualFloat.ContextRelative();
+    context.setMaxAbsoluteDifference(0.001f);
+    context.setMaxRelativeDifference(0.001f);
     return context;
   }
 

@@ -772,21 +772,6 @@ import com.io7m.jtensors.VectorM2F;
     MatrixM2x2F.scaleRow(m, -1, 1.0f, r);
   }
 
-  @Test public void testSetIdentity()
-  {
-    final MatrixM2x2F m = new MatrixM2x2F();
-
-    for (int row = 0; row < 2; ++row) {
-      for (int col = 0; col < 2; ++col) {
-        m.set(row, col, (float) Math.random());
-      }
-    }
-
-    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-    MatrixM2x2F.setIdentity(m);
-    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-  }
-
   @Test public void testSetGetIdentity()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
@@ -809,6 +794,21 @@ import com.io7m.jtensors.VectorM2F;
     Assert.assertTrue(m.set(1, 0, 13.0f).getRowColumnF(1, 0) == 13.0);
     Assert.assertTrue(m.set(1, 1, 17.0f).getRowColumnF(1, 1) == 17.0);
 
+    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+  }
+
+  @Test public void testSetIdentity()
+  {
+    final MatrixM2x2F m = new MatrixM2x2F();
+
+    for (int row = 0; row < 2; ++row) {
+      for (int col = 0; col < 2; ++col) {
+        m.set(row, col, (float) Math.random());
+      }
+    }
+
+    Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+    MatrixM2x2F.setIdentity(m);
     Assert.assertEquals(0, m.getDirectFloatBuffer().position());
   }
 
