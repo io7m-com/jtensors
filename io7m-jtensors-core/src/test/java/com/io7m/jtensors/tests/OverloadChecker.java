@@ -51,6 +51,8 @@ import com.io7m.jtensors.VectorM4D;
 import com.io7m.jtensors.VectorM4F;
 import com.io7m.jtensors.VectorM4I;
 import com.io7m.jtensors.VectorM4L;
+import com.io7m.jtensors.parameterized.PMatrixM3x3D;
+import com.io7m.jtensors.parameterized.PMatrixM3x3F;
 import com.io7m.jtensors.parameterized.PMatrixM4x4D;
 import com.io7m.jtensors.parameterized.PMatrixM4x4F;
 import com.io7m.jtensors.parameterized.PVectorI2D;
@@ -111,22 +113,16 @@ import com.io7m.jtensors.parameterized.PVectorM4L;
     OverloadChecker.checkOverloading(MatrixM2x2D.class);
   }
 
-  @Test public void testMatrixM3x3D()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(MatrixM3x3D.class);
-  }
-
-  @Test public void testMatrixM4x4D()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(MatrixM4x4D.class);
-  }
-
   @Test public void testMatrixM2x2F()
     throws Exception
   {
     OverloadChecker.checkOverloading(MatrixM2x2F.class);
+  }
+
+  @Test public void testMatrixM3x3D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(MatrixM3x3D.class);
   }
 
   @Test public void testMatrixM3x3F()
@@ -135,154 +131,28 @@ import com.io7m.jtensors.parameterized.PVectorM4L;
     OverloadChecker.checkOverloading(MatrixM3x3F.class);
   }
 
+  @Test public void testMatrixM4x4D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(MatrixM4x4D.class);
+  }
+
   @Test public void testMatrixM4x4F()
     throws Exception
   {
     OverloadChecker.checkOverloading(MatrixM4x4F.class);
   }
 
-  @Test public void testVectorI2D()
+  @Test public void testPMatrixM3x3D()
     throws Exception
   {
-    OverloadChecker.checkOverloading(VectorI2D.class);
+    OverloadChecker.checkOverloading(PMatrixM3x3D.class);
   }
 
-  @Test public void testVectorI3D()
+  @Test public void testPMatrixM3x3F()
     throws Exception
   {
-    OverloadChecker.checkOverloading(VectorI3D.class);
-  }
-
-  @Test public void testVectorI4D()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorI4D.class);
-  }
-
-  @Test public void testVectorI2F()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorI2F.class);
-  }
-
-  @Test public void testVectorI3F()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorI3F.class);
-  }
-
-  @Test public void testVectorI4F()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorI4F.class);
-  }
-
-  @Test public void testVectorI2I()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorI2I.class);
-  }
-
-  @Test public void testVectorI3I()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorI3I.class);
-  }
-
-  @Test public void testVectorI4I()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorI4I.class);
-  }
-
-  @Test public void testVectorI2L()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorI2L.class);
-  }
-
-  @Test public void testVectorI3L()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorI3L.class);
-  }
-
-  @Test public void testVectorI4L()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorI4L.class);
-  }
-
-  @Test public void testVectorM2D()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM2D.class);
-  }
-
-  @Test public void testVectorM3D()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM3D.class);
-  }
-
-  @Test public void testVectorM4D()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM4D.class);
-  }
-
-  @Test public void testVectorM2F()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM2F.class);
-  }
-
-  @Test public void testVectorM3F()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM3F.class);
-  }
-
-  @Test public void testVectorM4F()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM4F.class);
-  }
-
-  @Test public void testVectorM2I()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM2I.class);
-  }
-
-  @Test public void testVectorM3I()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM3I.class);
-  }
-
-  @Test public void testVectorM4I()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM4I.class);
-  }
-
-  @Test public void testVectorM2L()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM2L.class);
-  }
-
-  @Test public void testVectorM3L()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM3L.class);
-  }
-
-  @Test public void testVectorM4L()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(VectorM4L.class);
+    OverloadChecker.checkOverloading(PMatrixM3x3F.class);
   }
 
   @Test public void testPMatrixM4x4D()
@@ -303,34 +173,10 @@ import com.io7m.jtensors.parameterized.PVectorM4L;
     OverloadChecker.checkOverloading(PVectorI2D.class);
   }
 
-  @Test public void testPVectorI3D()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorI3D.class);
-  }
-
-  @Test public void testPVectorI4D()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorI4D.class);
-  }
-
   @Test public void testPVectorI2F()
     throws Exception
   {
     OverloadChecker.checkOverloading(PVectorI2F.class);
-  }
-
-  @Test public void testPVectorI3F()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorI3F.class);
-  }
-
-  @Test public void testPVectorI4F()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorI4F.class);
   }
 
   @Test public void testPVectorI2I()
@@ -339,28 +185,52 @@ import com.io7m.jtensors.parameterized.PVectorM4L;
     OverloadChecker.checkOverloading(PVectorI2I.class);
   }
 
-  @Test public void testPVectorI3I()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorI3I.class);
-  }
-
-  @Test public void testPVectorI4I()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorI4I.class);
-  }
-
   @Test public void testPVectorI2L()
     throws Exception
   {
     OverloadChecker.checkOverloading(PVectorI2L.class);
   }
 
+  @Test public void testPVectorI3D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorI3D.class);
+  }
+
+  @Test public void testPVectorI3F()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorI3F.class);
+  }
+
+  @Test public void testPVectorI3I()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorI3I.class);
+  }
+
   @Test public void testPVectorI3L()
     throws Exception
   {
     OverloadChecker.checkOverloading(PVectorI3L.class);
+  }
+
+  @Test public void testPVectorI4D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorI4D.class);
+  }
+
+  @Test public void testPVectorI4F()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorI4F.class);
+  }
+
+  @Test public void testPVectorI4I()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorI4I.class);
   }
 
   @Test public void testPVectorI4L()
@@ -375,34 +245,10 @@ import com.io7m.jtensors.parameterized.PVectorM4L;
     OverloadChecker.checkOverloading(PVectorM2D.class);
   }
 
-  @Test public void testPVectorM3D()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorM3D.class);
-  }
-
-  @Test public void testPVectorM4D()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorM4D.class);
-  }
-
   @Test public void testPVectorM2F()
     throws Exception
   {
     OverloadChecker.checkOverloading(PVectorM2F.class);
-  }
-
-  @Test public void testPVectorM3F()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorM3F.class);
-  }
-
-  @Test public void testPVectorM4F()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorM4F.class);
   }
 
   @Test public void testPVectorM2I()
@@ -411,22 +257,28 @@ import com.io7m.jtensors.parameterized.PVectorM4L;
     OverloadChecker.checkOverloading(PVectorM2I.class);
   }
 
-  @Test public void testPVectorM3I()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorM3I.class);
-  }
-
-  @Test public void testPVectorM4I()
-    throws Exception
-  {
-    OverloadChecker.checkOverloading(PVectorM4I.class);
-  }
-
   @Test public void testPVectorM2L()
     throws Exception
   {
     OverloadChecker.checkOverloading(PVectorM2L.class);
+  }
+
+  @Test public void testPVectorM3D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorM3D.class);
+  }
+
+  @Test public void testPVectorM3F()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorM3F.class);
+  }
+
+  @Test public void testPVectorM3I()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorM3I.class);
   }
 
   @Test public void testPVectorM3L()
@@ -435,9 +287,171 @@ import com.io7m.jtensors.parameterized.PVectorM4L;
     OverloadChecker.checkOverloading(PVectorM3L.class);
   }
 
+  @Test public void testPVectorM4D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorM4D.class);
+  }
+
+  @Test public void testPVectorM4F()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorM4F.class);
+  }
+
+  @Test public void testPVectorM4I()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(PVectorM4I.class);
+  }
+
   @Test public void testPVectorM4L()
     throws Exception
   {
     OverloadChecker.checkOverloading(PVectorM4L.class);
+  }
+
+  @Test public void testVectorI2D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI2D.class);
+  }
+
+  @Test public void testVectorI2F()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI2F.class);
+  }
+
+  @Test public void testVectorI2I()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI2I.class);
+  }
+
+  @Test public void testVectorI2L()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI2L.class);
+  }
+
+  @Test public void testVectorI3D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI3D.class);
+  }
+
+  @Test public void testVectorI3F()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI3F.class);
+  }
+
+  @Test public void testVectorI3I()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI3I.class);
+  }
+
+  @Test public void testVectorI3L()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI3L.class);
+  }
+
+  @Test public void testVectorI4D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI4D.class);
+  }
+
+  @Test public void testVectorI4F()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI4F.class);
+  }
+
+  @Test public void testVectorI4I()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI4I.class);
+  }
+
+  @Test public void testVectorI4L()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorI4L.class);
+  }
+
+  @Test public void testVectorM2D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM2D.class);
+  }
+
+  @Test public void testVectorM2F()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM2F.class);
+  }
+
+  @Test public void testVectorM2I()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM2I.class);
+  }
+
+  @Test public void testVectorM2L()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM2L.class);
+  }
+
+  @Test public void testVectorM3D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM3D.class);
+  }
+
+  @Test public void testVectorM3F()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM3F.class);
+  }
+
+  @Test public void testVectorM3I()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM3I.class);
+  }
+
+  @Test public void testVectorM3L()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM3L.class);
+  }
+
+  @Test public void testVectorM4D()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM4D.class);
+  }
+
+  @Test public void testVectorM4F()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM4F.class);
+  }
+
+  @Test public void testVectorM4I()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM4I.class);
+  }
+
+  @Test public void testVectorM4L()
+    throws Exception
+  {
+    OverloadChecker.checkOverloading(VectorM4L.class);
   }
 }

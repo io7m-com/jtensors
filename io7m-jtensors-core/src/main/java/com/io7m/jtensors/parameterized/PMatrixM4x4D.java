@@ -336,16 +336,26 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <T2>
+   *          A phantom type parameter.
+   * @param <T3>
+   *          A phantom type parameter.
    */
 
-  public static <T0, T1> PMatrixM4x4D<T0, T1> addRowScaledInPlace(
+  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> addRowScaledInPlace(
     final PMatrixM4x4D<T0, T1> m,
     final int row_a,
     final int row_b,
     final int row_c,
     final double r)
   {
-    return PMatrixM4x4D.addRowScaled(m, row_a, row_b, row_c, r, m);
+    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.addRowScaled(
+      m,
+      row_a,
+      row_b,
+      row_c,
+      r,
+      m);
   }
 
   private static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> addRowScaledUnsafe(
@@ -603,14 +613,22 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <T2>
+   *          A phantom type parameter.
+   * @param <T3>
+   *          A phantom type parameter.
    */
 
-  public static <T0, T1> PMatrixM4x4D<T0, T1> exchangeRowsInPlace(
+  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> exchangeRowsInPlace(
     final PMatrixM4x4D<T0, T1> m,
     final int row_a,
     final int row_b)
   {
-    return PMatrixM4x4D.exchangeRows(m, row_a, row_b, m);
+    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.exchangeRows(
+      m,
+      row_a,
+      row_b,
+      m);
   }
 
   /**
@@ -639,15 +657,27 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <T2>
+   *          A phantom type parameter.
+   * @param <T3>
+   *          A phantom type parameter.
    */
 
-  public static <T0, T1> PMatrixM4x4D<T0, T1> exchangeRowsInPlaceWithContext(
-    final Context context,
-    final PMatrixM4x4D<T0, T1> m,
-    final int row_a,
-    final int row_b)
+  public static
+    <T0, T1, T2, T3>
+    PMatrixM4x4D<T2, T3>
+    exchangeRowsInPlaceWithContext(
+      final Context context,
+      final PMatrixM4x4D<T0, T1> m,
+      final int row_a,
+      final int row_b)
   {
-    return PMatrixM4x4D.exchangeRowsWithContext(context, m, row_a, row_b, m);
+    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.exchangeRowsWithContext(
+      context,
+      m,
+      row_a,
+      row_b,
+      m);
   }
 
   private static <T0, T1> PMatrixM4x4D<T0, T1> exchangeRowsUnsafe(
@@ -1900,15 +1930,24 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <T2>
+   *          A phantom type parameter.
+   * @param <T3>
+   *          A phantom type parameter.
    */
 
-  public static <T0, T1> PMatrixM4x4D<T0, T1> rotateInPlace(
+  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> rotateInPlace(
     final double angle,
     final PMatrixM4x4D<T0, T1> m,
     final VectorReadable3DType axis)
   {
     final PMatrixM4x4D<T0, T1> tmp = new PMatrixM4x4D<T0, T1>();
-    return PMatrixM4x4D.rotateActual(angle, m, tmp, axis, m);
+    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.rotateActual(
+      angle,
+      m,
+      tmp,
+      axis,
+      m);
   }
 
   /**
@@ -1937,15 +1976,27 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <T2>
+   *          A phantom type parameter.
+   * @param <T3>
+   *          A phantom type parameter.
    */
 
-  public static <T0, T1> PMatrixM4x4D<T0, T1> rotateInPlaceWithContext(
-    final Context context,
-    final double angle,
-    final PMatrixM4x4D<T0, T1> m,
-    final VectorReadable3DType axis)
+  public static
+    <T0, T1, T2, T3>
+    PMatrixM4x4D<T2, T3>
+    rotateInPlaceWithContext(
+      final Context context,
+      final double angle,
+      final PMatrixM4x4D<T0, T1> m,
+      final VectorReadable3DType axis)
   {
-    return PMatrixM4x4D.rotateActual(angle, m, context.getM4a(), axis, m);
+    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.rotateActual(
+      angle,
+      m,
+      context.getM4a(),
+      axis,
+      m);
   }
 
   /**
@@ -2001,10 +2052,14 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          The row
    * @param out
    *          The output vector
+   * @param <T0>
+   *          A phantom type parameter.
+   * @param <T1>
+   *          A phantom type parameter.
    */
 
-  public static VectorM4D row(
-    final MatrixReadable4x4DType m,
+  public static <T0, T1> VectorM4D row(
+    final PMatrixReadable4x4DType<T0, T1> m,
     final int row,
     final VectorM4D out)
   {
@@ -2116,13 +2171,17 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <T2>
+   *          A phantom type parameter.
+   * @param <T3>
+   *          A phantom type parameter.
    */
 
-  public static <T0, T1> PMatrixM4x4D<T0, T1> scaleInPlace(
+  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> scaleInPlace(
     final PMatrixM4x4D<T0, T1> m,
     final double r)
   {
-    return PMatrixM4x4D.scale(m, r, m);
+    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.scale(m, r, m);
   }
 
   /**
@@ -2362,9 +2421,13 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <T2>
+   *          A phantom type parameter.
+   * @param <T3>
+   *          A phantom type parameter.
    */
 
-  public static <T0, T1> PMatrixM4x4D<T0, T1> setIdentity(
+  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> setIdentity(
     final PMatrixM4x4D<T0, T1> m)
   {
     m.view.clear();
@@ -2379,7 +2442,7 @@ import com.io7m.jtensors.VectorReadable4DType;
       }
     }
 
-    return m;
+    return (PMatrixM4x4D<T2, T3>) m;
   }
 
   private static <T0, T1> void setRowUnsafe(
@@ -2403,16 +2466,20 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <T2>
+   *          A phantom type parameter.
+   * @param <T3>
+   *          A phantom type parameter.
    */
 
-  public static <T0, T1> PMatrixM4x4D<T0, T1> setZero(
+  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> setZero(
     final PMatrixM4x4D<T0, T1> m)
   {
     m.view.clear();
     for (int index = 0; index < (PMatrixM4x4D.VIEW_ROWS * PMatrixM4x4D.VIEW_COLS); ++index) {
       m.view.put(index, 0.0);
     }
-    return m;
+    return (PMatrixM4x4D<T2, T3>) m;
   }
 
   /**
@@ -2767,14 +2834,18 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <T2>
+   *          A phantom type parameter.
+   * @param <T3>
+   *          A phantom type parameter.
    */
 
-  public static <T0, T1> PMatrixM4x4D<T0, T1> transpose(
+  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> transpose(
     final PMatrixReadable4x4DType<T0, T1> m,
     final PMatrixM4x4D<T0, T1> out)
   {
     PMatrixM4x4D.copy(m, out);
-    return PMatrixM4x4D.transposeInPlace(out);
+    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.transposeInPlace(out);
   }
 
   /**
@@ -2788,9 +2859,13 @@ import com.io7m.jtensors.VectorReadable4DType;
    *          A phantom type parameter.
    * @param <T1>
    *          A phantom type parameter.
+   * @param <T2>
+   *          A phantom type parameter.
+   * @param <T3>
+   *          A phantom type parameter.
    */
 
-  public static <T0, T1> PMatrixM4x4D<T0, T1> transposeInPlace(
+  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> transposeInPlace(
     final PMatrixM4x4D<T0, T1> m)
   {
     for (int row = 0; row < (PMatrixM4x4D.VIEW_ROWS - 1); ++row) {
@@ -2803,7 +2878,7 @@ import com.io7m.jtensors.VectorReadable4DType;
       }
     }
 
-    return m;
+    return (PMatrixM4x4D<T2, T3>) m;
   }
 
   private final ByteBuffer   data;
@@ -2840,7 +2915,7 @@ import com.io7m.jtensors.VectorReadable4DType;
    */
 
   public PMatrixM4x4D(
-    final PMatrixM4x4D<T0, T1> source)
+    final PMatrixReadable4x4DType<T0, T1> source)
   {
     final ByteBuffer b = ByteBuffer.allocateDirect(PMatrixM4x4D.VIEW_BYTES);
     assert b != null;
@@ -2857,8 +2932,10 @@ import com.io7m.jtensors.VectorReadable4DType;
     this.view = v;
     this.view.clear();
 
-    for (int index = 0; index < PMatrixM4x4D.VIEW_ELEMENTS; ++index) {
-      this.view.put(index, source.view.get(index));
+    for (int row = 0; row < PMatrixM4x4D.VIEW_ROWS; ++row) {
+      for (int col = 0; col < PMatrixM4x4D.VIEW_COLS; ++col) {
+        this.setUnsafe(row, col, source.getRowColumnD(row, col));
+      }
     }
   }
 
