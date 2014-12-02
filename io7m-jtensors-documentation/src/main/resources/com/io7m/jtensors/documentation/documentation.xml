@@ -631,6 +631,23 @@ PMatrixM4x4F.invertWithContext(context, matrix_view, matrix_view_inverse);
           to provide a means to prevent accidental errors, and doesn't attempt to
           address deliberate sabotage.
         </s:paragraph>
+        <s:paragraph>
+          The complete list of matrix types (excluding the interfaces) augmented
+          with phantom types is as follows:
+        </s:paragraph>
+        <s:formal-item s:kind="listing">
+          <s:formal-item-title>Available matrix types</s:formal-item-title>
+          <s:list-unordered>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PMatrixM3x3D.html">PMatrixM3x3D</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PMatrixM3x3F.html">PMatrixM3x3F</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PMatrixM4x4D.html">PMatrixM4x4D</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PMatrixM4x4F.html">PMatrixM4x4F</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PMatrixI3x3D.html">PMatrixI3x3D</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PMatrixI3x3F.html">PMatrixI3x3F</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PMatrixI4x4D.html">PMatrixI4x4D</s:link-external></s:list-item>
+            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/PMatrixI4x4F.html">PMatrixI4x4F</s:link-external></s:list-item>
+          </s:list-unordered>
+        </s:formal-item>
       </s:subsection>
     </s:section>
 
