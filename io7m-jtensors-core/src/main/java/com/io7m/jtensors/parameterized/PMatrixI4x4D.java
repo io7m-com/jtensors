@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
+import com.io7m.jtensors.MatrixReadable4x4DType;
 import com.io7m.jtensors.VectorReadable4DType;
 import com.io7m.jtensors.VectorWritable4DType;
 
@@ -140,6 +141,33 @@ import com.io7m.jtensors.VectorWritable4DType;
 
   public static <T0, T1> PMatrixI4x4D<T0, T1> newFromReadable(
     final PMatrixReadable4x4DType<T0, T1> m)
+  {
+    final double[][] e = new double[4][4];
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        e[row][col] = m.getRowColumnD(row, col);
+      }
+    }
+
+    return new PMatrixI4x4D<T0, T1>(e);
+  }
+
+  /**
+   * Construct a new immutable 4x4 matrix from the given readable 4x4 matrix.
+   *
+   * @param m
+   *          The original matrix
+   * @param <T0>
+   *          A phantom type parameter.
+   * @param <T1>
+   *          A phantom type parameter.
+   *
+   * @return A new 4x4 matrix
+   */
+
+  public static <T0, T1> PMatrixI4x4D<T0, T1> newFromReadableUntyped(
+    final MatrixReadable4x4DType m)
   {
     final double[][] e = new double[4][4];
 

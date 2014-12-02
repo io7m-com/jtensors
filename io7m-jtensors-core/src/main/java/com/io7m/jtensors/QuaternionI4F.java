@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -505,11 +505,13 @@ public final class QuaternionI4F implements QuaternionReadable4FType
    *          The output matrix
    *
    * @return <code>m</code>
+   * @param <M>
+   *          The precise type of writable matrix.
    */
 
-  public static MatrixM3x3F makeRotationMatrix3x3(
+  public static <M extends MatrixWritable3x3FType> M makeRotationMatrix3x3(
     final QuaternionReadable4FType q,
-    final MatrixM3x3F m)
+    final M m)
   {
     final double xx = q.getXF() * q.getXF();
     final double xy = q.getXF() * q.getYF();
@@ -533,17 +535,17 @@ public final class QuaternionI4F implements QuaternionReadable4FType
     final double r2c1 = (2 * yz) + (2 * wx);
     final double r2c2 = 1.0 - (2 * xx) - (2 * yy);
 
-    m.setUnsafe(0, 0, (float) r0c0);
-    m.setUnsafe(0, 1, (float) r0c1);
-    m.setUnsafe(0, 2, (float) r0c2);
+    m.setRowColumnF(0, 0, (float) r0c0);
+    m.setRowColumnF(0, 1, (float) r0c1);
+    m.setRowColumnF(0, 2, (float) r0c2);
 
-    m.setUnsafe(1, 0, (float) r1c0);
-    m.setUnsafe(1, 1, (float) r1c1);
-    m.setUnsafe(1, 2, (float) r1c2);
+    m.setRowColumnF(1, 0, (float) r1c0);
+    m.setRowColumnF(1, 1, (float) r1c1);
+    m.setRowColumnF(1, 2, (float) r1c2);
 
-    m.setUnsafe(2, 0, (float) r2c0);
-    m.setUnsafe(2, 1, (float) r2c1);
-    m.setUnsafe(2, 2, (float) r2c2);
+    m.setRowColumnF(2, 0, (float) r2c0);
+    m.setRowColumnF(2, 1, (float) r2c1);
+    m.setRowColumnF(2, 2, (float) r2c2);
 
     return m;
   }

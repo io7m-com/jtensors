@@ -647,11 +647,13 @@ public final class QuaternionM4F implements
    *          The output matrix
    *
    * @return <code>m</code>
+   * @param <M>
+   *          The precise type of matrix.
    */
 
-  public static MatrixM4x4F makeRotationMatrix4x4(
+  public static <M extends MatrixWritable4x4FType> M makeRotationMatrix4x4(
     final QuaternionReadable4FType q,
-    final MatrixM4x4F m)
+    final M m)
   {
     final double xx = q.getXF() * q.getXF();
     final double xy = q.getXF() * q.getYF();
@@ -683,25 +685,25 @@ public final class QuaternionM4F implements
     final double r3c2 = 0.0;
     final double r3c3 = 1.0;
 
-    m.setUnsafe(0, 0, (float) r0c0);
-    m.setUnsafe(0, 1, (float) r0c1);
-    m.setUnsafe(0, 2, (float) r0c2);
-    m.setUnsafe(0, 3, (float) r0c3);
+    m.setRowColumnF(0, 0, (float) r0c0);
+    m.setRowColumnF(0, 1, (float) r0c1);
+    m.setRowColumnF(0, 2, (float) r0c2);
+    m.setRowColumnF(0, 3, (float) r0c3);
 
-    m.setUnsafe(1, 0, (float) r1c0);
-    m.setUnsafe(1, 1, (float) r1c1);
-    m.setUnsafe(1, 2, (float) r1c2);
-    m.setUnsafe(1, 3, (float) r1c3);
+    m.setRowColumnF(1, 0, (float) r1c0);
+    m.setRowColumnF(1, 1, (float) r1c1);
+    m.setRowColumnF(1, 2, (float) r1c2);
+    m.setRowColumnF(1, 3, (float) r1c3);
 
-    m.setUnsafe(2, 0, (float) r2c0);
-    m.setUnsafe(2, 1, (float) r2c1);
-    m.setUnsafe(2, 2, (float) r2c2);
-    m.setUnsafe(2, 3, (float) r2c3);
+    m.setRowColumnF(2, 0, (float) r2c0);
+    m.setRowColumnF(2, 1, (float) r2c1);
+    m.setRowColumnF(2, 2, (float) r2c2);
+    m.setRowColumnF(2, 3, (float) r2c3);
 
-    m.setUnsafe(3, 0, (float) r3c0);
-    m.setUnsafe(3, 1, (float) r3c1);
-    m.setUnsafe(3, 2, (float) r3c2);
-    m.setUnsafe(3, 3, (float) r3c3);
+    m.setRowColumnF(3, 0, (float) r3c0);
+    m.setRowColumnF(3, 1, (float) r3c1);
+    m.setRowColumnF(3, 2, (float) r3c2);
+    m.setRowColumnF(3, 3, (float) r3c3);
 
     return m;
   }

@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
+import com.io7m.jtensors.MatrixReadable4x4FType;
 import com.io7m.jtensors.VectorReadable4FType;
 import com.io7m.jtensors.VectorWritable4FType;
 
@@ -142,6 +143,33 @@ import com.io7m.jtensors.VectorWritable4FType;
 
   public static <T0, T1> PMatrixI4x4F<T0, T1> newFromReadable(
     final PMatrixReadable4x4FType<T0, T1> m)
+  {
+    final float[][] e = new float[4][4];
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        e[row][col] = m.getRowColumnF(row, col);
+      }
+    }
+
+    return new PMatrixI4x4F<T0, T1>(e);
+  }
+
+  /**
+   * Construct a new immutable 4x4 matrix from the given readable 4x4 matrix.
+   *
+   * @param m
+   *          The original matrix
+   * @param <T0>
+   *          A phantom type parameter.
+   * @param <T1>
+   *          A phantom type parameter.
+   *
+   * @return A new 4x4 matrix
+   */
+
+  public static <T0, T1> PMatrixI4x4F<T0, T1> newFromReadableUntyped(
+    final MatrixReadable4x4FType m)
   {
     final float[][] e = new float[4][4];
 

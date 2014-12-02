@@ -16,6 +16,8 @@
 
 package com.io7m.jtensors.parameterized;
 
+import com.io7m.jtensors.MatrixDirectReadable3x3FType;
+
 /**
  * 'Read' interface to 3x3 direct-memory matrices with single precision
  * elements.
@@ -29,7 +31,8 @@ package com.io7m.jtensors.parameterized;
 
 public interface PMatrixDirectReadable3x3FType<T, U> extends
   PMatrixReadable3x3FType<T, U>,
-  PMatrixDirectBufferedFType<T, U>
+  PMatrixDirectBufferedFType<T, U>,
+  MatrixDirectReadable3x3FType
 {
   // No extra functions.
 }

@@ -462,9 +462,9 @@ import com.io7m.jtensors.VectorWritable4FType;
    * <code>output</code>, completely replacing all elements.
    *
    * @param input
-   *          The input vector.
+   *          The input matrix.
    * @param output
-   *          The output vector.
+   *          The output matrix.
    * @return <code>output</code>
    * @param <T0>
    *          A phantom type parameter.
@@ -1618,11 +1618,11 @@ import com.io7m.jtensors.VectorWritable4FType;
    * writing the result to <code>out</code>.
    *
    * @param m0
-   *          The left input vector.
+   *          The left input matrix.
    * @param m1
-   *          The right input vector.
+   *          The right input matrix.
    * @param out
-   *          The output vector.
+   *          The output matrix.
    * @return <code>out</code>
    *
    * @param <T0>

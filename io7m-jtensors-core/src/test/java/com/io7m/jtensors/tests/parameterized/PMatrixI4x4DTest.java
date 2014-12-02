@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -159,6 +159,25 @@ import com.io7m.jtensors.parameterized.PMatrixM4x4D;
     Assert.assertEquals(10.3f, row.getYD(), 0.0);
     Assert.assertEquals(20.3f, row.getZD(), 0.0);
     Assert.assertEquals(30.3f, row.getWD(), 0.0);
+  }
+
+  @Test public void testFromUntyped()
+  {
+    final PMatrixM4x4D<Object, Object> m0 =
+      new PMatrixM4x4D<Object, Object>();
+
+    int index = 0;
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        m0.set(row, col, index);
+        ++index;
+      }
+    }
+
+    final PMatrixI4x4D<Object, Object> im0 = PMatrixI4x4D.newFromReadable(m0);
+    final PMatrixI4x4D<Object, Object> im1 =
+      PMatrixI4x4D.newFromReadableUntyped(m0);
+    Assert.assertEquals(im0, im1);
   }
 
   @Test public void testIdentity()
