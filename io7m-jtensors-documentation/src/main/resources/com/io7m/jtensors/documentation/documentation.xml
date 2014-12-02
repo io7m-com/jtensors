@@ -578,15 +578,27 @@ MatrixM4x4D.invertWithContext(context, mo, mi);]]>
           <s:term s:type="type">PMatrixM4x4F&lt;T1,T0></s:term>.
         </s:paragraph>
         <s:paragraph>
+          Type parameters are also translated across multiplications by
+          vectors. A multiplication of a vector of type
+          <s:term s:type="type">PVectorI4F&lt;T0></s:term> by a matrix of
+          type
+          <s:term s:type="type">PMatrixM4x4F&lt;T0,T1></s:term> results in
+          a vector of type
+          <s:term s:type="type">PVectorI4F&lt;T1></s:term>.
+        </s:paragraph>
+        <s:paragraph>
           Being able to track the types of transforms at this level of detail
           is invaluable when using systems such as OpenGL, where accidentally
           mixing up matrices tends to result in visual anomalies that can be
           extremely hard to track down. By explicitly denoting coordinate spaces
           with empty types, it's possible to statically prevent all bugs involving
           accidentally mixing up matrices. It's also possible to prevent the
-          incorrect construction of matrices (it is common for people to make
-          mistakes with matrix multiplication: the order of matrices is effectively
-          the reverse of the order in which the transforms will be applied). Additionally,
+          incorrect construction of matrices
+          <s:footnote>
+            It is common for people to make mistakes with matrix multiplication:
+            The order of matrices is effectively the reverse of the order in which 
+            the transforms will be applied.
+          </s:footnote>. Additionally,
           with each matrix labelled by the type of transform it represents, code becomes
           self-documenting.
         </s:paragraph>
