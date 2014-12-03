@@ -597,8 +597,8 @@ public final class VectorM2F implements VectorReadable2FType, VectorWritable2FTy
    * such that:
    *
    * <ul>
-   * <li><code>interpolateLinear(v0, v1, 0.0, r) -> r = v0</code></li>
-   * <li><code>interpolateLinear(v0, v1, 1.0, r) -> r = v1</code></li>
+   * <li><code>interpolateLinear(v0, v1, 0.0, r) -&gt; r = v0</code></li>
+   * <li><code>interpolateLinear(v0, v1, 1.0, r) -&gt; r = v1</code></li>
    * </ul>
    *
    * @param v0

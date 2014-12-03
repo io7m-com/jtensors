@@ -40,6 +40,13 @@
         Remove floatBuffer() and doubleBuffer() methods and only allow access to buffers via the new MatrixDirectBuffered* interfaces.
       </c:summary>
     </c:item>
+    <c:item>
+      <c:date>2014-12-03</c:date>
+      <c:type-code-fix/>
+      <c:summary>
+        Correct javadoc comments to pass Java 8's new Javadoc doclint.
+      </c:summary>
+    </c:item>
   </c:release>
 
   <c:release c:ticket-system="com.io7m.fossil.jtensors">

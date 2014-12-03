@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -267,8 +267,9 @@ import com.io7m.jtensors.VectorWritable4FType;
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
@@ -325,8 +326,9 @@ import com.io7m.jtensors.VectorWritable4FType;
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
@@ -394,8 +396,9 @@ import com.io7m.jtensors.VectorWritable4FType;
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param context
@@ -561,8 +564,9 @@ import com.io7m.jtensors.VectorWritable4FType;
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
@@ -608,8 +612,9 @@ import com.io7m.jtensors.VectorWritable4FType;
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
@@ -650,8 +655,9 @@ import com.io7m.jtensors.VectorWritable4FType;
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param context
@@ -716,8 +722,9 @@ import com.io7m.jtensors.VectorWritable4FType;
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param context
@@ -2196,14 +2203,15 @@ import com.io7m.jtensors.VectorWritable4FType;
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 <= row < 4).
+   *          The index of the row (0 &lt;= row &lt; 4).
    * @param r
    *          The scaling value.
    * @param out
@@ -2241,14 +2249,15 @@ import com.io7m.jtensors.VectorWritable4FType;
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 <= row < 4).
+   *          The index of the row (0 &lt;= row &lt; 4).
    * @param r
    *          The scaling value.
    * @return <code>out</code>
@@ -2285,8 +2294,9 @@ import com.io7m.jtensors.VectorWritable4FType;
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param context
@@ -2294,7 +2304,7 @@ import com.io7m.jtensors.VectorWritable4FType;
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 <= row < 4).
+   *          The index of the row (0 &lt;= row &lt; 4).
    * @param r
    *          The scaling value.
    * @return <code>m</code>
@@ -2347,8 +2357,9 @@ import com.io7m.jtensors.VectorWritable4FType;
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param context
@@ -2356,7 +2367,7 @@ import com.io7m.jtensors.VectorWritable4FType;
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 <= row < 4).
+   *          The index of the row (0 &lt;= row &lt; 4).
    * @param r
    *          The scaling value.
    * @param out

@@ -232,8 +232,9 @@ public final class MatrixM4x4F implements
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
@@ -281,8 +282,9 @@ public final class MatrixM4x4F implements
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
@@ -335,8 +337,9 @@ public final class MatrixM4x4F implements
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param context
@@ -482,8 +485,9 @@ public final class MatrixM4x4F implements
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
@@ -521,8 +525,9 @@ public final class MatrixM4x4F implements
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
@@ -551,8 +556,9 @@ public final class MatrixM4x4F implements
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param context
@@ -601,8 +607,9 @@ public final class MatrixM4x4F implements
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param context
@@ -1937,14 +1944,15 @@ public final class MatrixM4x4F implements
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 <= row < 4).
+   *          The index of the row (0 &lt;= row &lt; 4).
    * @param r
    *          The scaling value.
    * @param out
@@ -1974,14 +1982,15 @@ public final class MatrixM4x4F implements
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 <= row < 4).
+   *          The index of the row (0 &lt;= row &lt; 4).
    * @param r
    *          The scaling value.
    * @return <code>out</code>
@@ -2005,8 +2014,9 @@ public final class MatrixM4x4F implements
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param context
@@ -2014,7 +2024,7 @@ public final class MatrixM4x4F implements
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 <= row < 4).
+   *          The index of the row (0 &lt;= row &lt; 4).
    * @param r
    *          The scaling value.
    * @return <code>m</code>
@@ -2056,8 +2066,9 @@ public final class MatrixM4x4F implements
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * <a href=
+   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> .
    * </p>
    *
    * @param context
@@ -2065,7 +2076,7 @@ public final class MatrixM4x4F implements
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 <= row < 4).
+   *          The index of the row (0 &lt;= row &lt; 4).
    * @param r
    *          The scaling value.
    * @param out
