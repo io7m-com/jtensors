@@ -54,6 +54,13 @@
         Remove Matrix*.translate* functions due to questions of correctness. Use r = Matrix*.makeTranslation* and multiply m * r instead.
       </c:summary>
     </c:item>
+    <c:item>
+      <c:date>2014-12-04</c:date>
+      <c:type-code-change/>
+      <c:summary>
+        Remove imperative Matrix*.rotate* functions to reduce the size of the API. Use r = Matrix*.makeRotation* and multiply m * r instead.
+      </c:summary>
+    </c:item>
   </c:release>
 
   <c:release c:ticket-system="com.io7m.fossil.jtensors">
