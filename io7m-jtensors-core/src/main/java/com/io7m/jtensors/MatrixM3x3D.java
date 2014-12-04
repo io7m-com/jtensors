@@ -105,15 +105,11 @@ public final class MatrixM3x3D implements
     }
   }
 
-  private static final double[] IDENTITY_ROW_0;
-  private static final double[] IDENTITY_ROW_1;
-  private static final double[] IDENTITY_ROW_2;
-  private static final int      VIEW_BYTES;
-  private static final int      VIEW_COLS;
-  private static final int      VIEW_ELEMENT_SIZE;
-  private static final int      VIEW_ELEMENTS;
-  private static final int      VIEW_ROWS;
-  private static final double[] ZERO_ROW;
+  private static final int VIEW_BYTES;
+  private static final int VIEW_COLS;
+  private static final int VIEW_ELEMENT_SIZE;
+  private static final int VIEW_ELEMENTS;
+  private static final int VIEW_ROWS;
 
   static {
     VIEW_ROWS = 3;
@@ -121,26 +117,6 @@ public final class MatrixM3x3D implements
     VIEW_ELEMENT_SIZE = 8;
     VIEW_ELEMENTS = MatrixM3x3D.VIEW_ROWS * MatrixM3x3D.VIEW_COLS;
     VIEW_BYTES = MatrixM3x3D.VIEW_ELEMENTS * MatrixM3x3D.VIEW_ELEMENT_SIZE;
-
-    IDENTITY_ROW_0 = new double[3];
-    MatrixM3x3D.IDENTITY_ROW_0[0] = 1.0;
-    MatrixM3x3D.IDENTITY_ROW_0[1] = 0.0;
-    MatrixM3x3D.IDENTITY_ROW_0[2] = 0.0;
-
-    IDENTITY_ROW_1 = new double[3];
-    MatrixM3x3D.IDENTITY_ROW_1[0] = 0.0;
-    MatrixM3x3D.IDENTITY_ROW_1[1] = 1.0;
-    MatrixM3x3D.IDENTITY_ROW_1[2] = 0.0;
-
-    IDENTITY_ROW_2 = new double[3];
-    MatrixM3x3D.IDENTITY_ROW_2[0] = 0.0;
-    MatrixM3x3D.IDENTITY_ROW_2[1] = 0.0;
-    MatrixM3x3D.IDENTITY_ROW_2[2] = 1.0;
-
-    ZERO_ROW = new double[3];
-    MatrixM3x3D.ZERO_ROW[0] = 0.0;
-    MatrixM3x3D.ZERO_ROW[1] = 0.0;
-    MatrixM3x3D.ZERO_ROW[2] = 0.0;
   }
 
   /**
@@ -301,8 +277,6 @@ public final class MatrixM3x3D implements
 
     VectorM3D.addScaledInPlace(va, vb, r);
     MatrixM3x3D.setRowUnsafe(out, row_c, va);
-
-    out.view.rewind();
     return out;
   }
 
@@ -450,8 +424,6 @@ public final class MatrixM3x3D implements
 
     MatrixM3x3D.setRowUnsafe(out, row_a, vb);
     MatrixM3x3D.setRowUnsafe(out, row_b, va);
-
-    out.view.rewind();
     return out;
   }
 
@@ -550,8 +522,6 @@ public final class MatrixM3x3D implements
     MatrixM3x3D.set(out, 2, 2, r2c2);
 
     MatrixM3x3D.scaleInPlace(out, d_inv);
-
-    out.view.rewind();
     return Option.some(out);
   }
 
@@ -690,7 +660,6 @@ public final class MatrixM3x3D implements
   {
     final MatrixM3x3D out = new MatrixM3x3D();
     MatrixM3x3D.makeRotationInto(angle, axis, out);
-    out.view.rewind();
     return out;
   }
 
@@ -764,7 +733,6 @@ public final class MatrixM3x3D implements
     out.setUnsafe(2, 1, r2c1);
     out.setUnsafe(2, 2, r2c2);
 
-    out.view.rewind();
     return out;
   }
 
@@ -783,9 +751,15 @@ public final class MatrixM3x3D implements
     final VectorReadable2DType v,
     final MatrixM3x3D out)
   {
+    out.setUnsafe(0, 0, 1.0);
+    out.setUnsafe(0, 1, 0.0);
     out.setUnsafe(0, 2, v.getXD());
+    out.setUnsafe(1, 0, 0.0);
+    out.setUnsafe(1, 1, 1.0);
     out.setUnsafe(1, 2, v.getYD());
-    out.view.rewind();
+    out.setUnsafe(2, 0, 0.0);
+    out.setUnsafe(2, 1, 0.0);
+    out.setUnsafe(2, 2, 1.0);
     return out;
   }
 
@@ -804,9 +778,15 @@ public final class MatrixM3x3D implements
     final VectorReadable2IType v,
     final MatrixM3x3D out)
   {
+    out.setUnsafe(0, 0, 1.0);
+    out.setUnsafe(0, 1, 0.0);
     out.setUnsafe(0, 2, v.getXI());
+    out.setUnsafe(1, 0, 0.0);
+    out.setUnsafe(1, 1, 1.0);
     out.setUnsafe(1, 2, v.getYI());
-    out.view.rewind();
+    out.setUnsafe(2, 0, 0.0);
+    out.setUnsafe(2, 1, 0.0);
+    out.setUnsafe(2, 2, 1.0);
     return out;
   }
 
@@ -884,8 +864,6 @@ public final class MatrixM3x3D implements
     out.setUnsafe(2, 0, r2c0);
     out.setUnsafe(2, 1, r2c1);
     out.setUnsafe(2, 2, r2c2);
-
-    out.view.rewind();
     return out;
   }
 
@@ -938,125 +916,6 @@ public final class MatrixM3x3D implements
     out.setZD(VectorM3D.dotProduct(row, vi));
 
     return out;
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>out</code>.
-   *
-   * @since 5.0.0
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3D rotate(
-    final double angle,
-    final MatrixReadable3x3DType m,
-    final VectorReadable3DType axis,
-    final MatrixM3x3D out)
-  {
-    final MatrixM3x3D tmp = new MatrixM3x3D();
-    return MatrixM3x3D.rotateActual(angle, m, tmp, axis, out);
-  }
-
-  private static MatrixM3x3D rotateActual(
-    final double angle,
-    final MatrixReadable3x3DType m,
-    final MatrixM3x3D tmp,
-    final VectorReadable3DType axis,
-    final MatrixM3x3D out)
-  {
-    MatrixM3x3D.makeRotationInto(angle, axis, tmp);
-    MatrixM3x3D.multiply(m, tmp, out);
-    out.view.rewind();
-    return out;
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>m</code>.
-   *
-   * @since 5.0.0
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM3x3D rotateInPlace(
-    final double angle,
-    final MatrixM3x3D m,
-    final VectorReadable3DType axis)
-  {
-    final MatrixM3x3D tmp = new MatrixM3x3D();
-    return MatrixM3x3D.rotateActual(angle, m, tmp, axis, m);
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>m</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory. The function assumes a right-handed coordinate system.
-   *
-   * @since 5.0.0
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM3x3D rotateInPlaceWithContext(
-    final Context context,
-    final double angle,
-    final MatrixM3x3D m,
-    final VectorReadable3DType axis)
-  {
-    return MatrixM3x3D.rotateActual(angle, m, context.getM3A(), axis, m);
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>out</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory. The function assumes a right-handed coordinate system.
-   *
-   * @since 5.0.0
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3D rotateWithContext(
-    final Context context,
-    final double angle,
-    final MatrixReadable3x3DType m,
-    final VectorReadable3DType axis,
-    final MatrixM3x3D out)
-  {
-    return MatrixM3x3D.rotateActual(angle, m, context.getM3A(), axis, out);
   }
 
   /**
@@ -1238,8 +1097,6 @@ public final class MatrixM3x3D implements
     VectorM3D.scaleInPlace(v, r);
 
     MatrixM3x3D.setRowUnsafe(out, row, v);
-
-    out.view.rewind();
     return out;
   }
 
@@ -1265,7 +1122,6 @@ public final class MatrixM3x3D implements
     final double value)
   {
     m.view.put(MatrixM3x3D.indexChecked(row, column), value);
-    m.view.rewind();
     return m;
   }
 
@@ -1281,10 +1137,17 @@ public final class MatrixM3x3D implements
     final MatrixM3x3D m)
   {
     m.view.clear();
-    m.view.put(MatrixM3x3D.IDENTITY_ROW_0);
-    m.view.put(MatrixM3x3D.IDENTITY_ROW_1);
-    m.view.put(MatrixM3x3D.IDENTITY_ROW_2);
-    m.view.rewind();
+
+    for (int row = 0; row < MatrixM3x3D.VIEW_ROWS; ++row) {
+      for (int col = 0; col < MatrixM3x3D.VIEW_COLS; ++col) {
+        if (row == col) {
+          m.setUnsafe(row, col, 1.0f);
+        } else {
+          m.setUnsafe(row, col, 0.0f);
+        }
+      }
+    }
+
     return m;
   }
 
@@ -1310,10 +1173,10 @@ public final class MatrixM3x3D implements
     final MatrixM3x3D m)
   {
     m.view.clear();
-    m.view.put(MatrixM3x3D.ZERO_ROW);
-    m.view.put(MatrixM3x3D.ZERO_ROW);
-    m.view.put(MatrixM3x3D.ZERO_ROW);
-    m.view.rewind();
+
+    for (int index = 0; index < (MatrixM3x3D.VIEW_ROWS * MatrixM3x3D.VIEW_COLS); ++index) {
+      m.view.put(index, 0.0);
+    }
     return m;
   }
 
@@ -1333,114 +1196,6 @@ public final class MatrixM3x3D implements
     return m.getRowColumnD(0, 0)
       + m.getRowColumnD(1, 1)
       + m.getRowColumnD(2, 2);
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3D translateByVector2D(
-    final MatrixReadable3x3DType m,
-    final VectorReadable2DType v,
-    final MatrixM3x3D out)
-  {
-    final double vx = v.getXD();
-    final double vy = v.getYD();
-
-    final double c2r0 =
-      (m.getRowColumnD(0, 0) * vx) + (m.getRowColumnD(0, 1) * vy);
-    final double c2r1 =
-      (m.getRowColumnD(1, 0) * vx) + (m.getRowColumnD(1, 1) * vy);
-    final double c2r2 =
-      (m.getRowColumnD(2, 0) * vx) + (m.getRowColumnD(2, 1) * vy);
-
-    out.setUnsafe(0, 2, out.getUnsafe(0, 2) + c2r0);
-    out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
-    out.setUnsafe(2, 2, out.getUnsafe(2, 2) + c2r2);
-
-    out.view.rewind();
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM3x3D translateByVector2DInPlace(
-    final MatrixM3x3D m,
-    final VectorReadable2DType v)
-  {
-    return MatrixM3x3D.translateByVector2D(m, v, m);
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3D translateByVector2I(
-    final MatrixReadable3x3DType m,
-    final VectorReadable2IType v,
-    final MatrixM3x3D out)
-  {
-    final double vx = v.getXI();
-    final double vy = v.getYI();
-
-    final double c2r0 =
-      (m.getRowColumnD(0, 0) * vx) + (m.getRowColumnD(0, 1) * vy);
-    final double c2r1 =
-      (m.getRowColumnD(1, 0) * vx) + (m.getRowColumnD(1, 1) * vy);
-    final double c2r2 =
-      (m.getRowColumnD(2, 0) * vx) + (m.getRowColumnD(2, 1) * vy);
-
-    out.setUnsafe(0, 2, out.getUnsafe(0, 2) + c2r0);
-    out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
-    out.setUnsafe(2, 2, out.getUnsafe(2, 2) + c2r2);
-
-    out.view.rewind();
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM3x3D translateByVector2IInPlace(
-    final MatrixM3x3D m,
-    final VectorReadable2IType v)
-  {
-    return MatrixM3x3D.translateByVector2I(m, v, m);
   }
 
   /**
@@ -1484,7 +1239,6 @@ public final class MatrixM3x3D implements
       }
     }
 
-    m.view.rewind();
     return m;
   }
 
@@ -1532,7 +1286,7 @@ public final class MatrixM3x3D implements
     assert v != null;
 
     this.view = v;
-    this.view.rewind();
+    this.view.clear();
 
     for (int row = 0; row < MatrixM3x3D.VIEW_ROWS; ++row) {
       for (int col = 0; col < MatrixM3x3D.VIEW_COLS; ++col) {
@@ -1583,13 +1337,6 @@ public final class MatrixM3x3D implements
     return this.view.get(MatrixM3x3D.indexChecked(row, column));
   }
 
-  private double getUnsafe(
-    final int row,
-    final int column)
-  {
-    return this.view.get(MatrixM3x3D.indexUnsafe(row, column));
-  }
-
   @Override public int hashCode()
   {
     final int prime = 31;
@@ -1620,7 +1367,6 @@ public final class MatrixM3x3D implements
     final double value)
   {
     this.view.put(MatrixM3x3D.indexChecked(row, column), value);
-    this.view.rewind();
     return this;
   }
 
@@ -1638,7 +1384,6 @@ public final class MatrixM3x3D implements
     final double value)
   {
     this.view.put(MatrixM3x3D.indexUnsafe(row, column), value);
-    this.view.rewind();
     return this;
   }
 

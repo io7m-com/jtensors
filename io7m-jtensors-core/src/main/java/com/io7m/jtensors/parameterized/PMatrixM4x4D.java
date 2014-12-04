@@ -145,7 +145,6 @@ import com.io7m.jtensors.VectorWritable4DType;
   private static final int VIEW_COLS;
   private static final int VIEW_ELEMENT_SIZE;
   private static final int VIEW_ELEMENTS;
-
   private static final int VIEW_ROWS;
 
   static {
@@ -1360,7 +1359,7 @@ import com.io7m.jtensors.VectorWritable4DType;
      */
 
     move.set3D(-origin.getXD(), -origin.getYD(), -origin.getZD());
-    PMatrixM4x4D.translateByVector3DInPlace(translation, move);
+    PMatrixM4x4D.makeTranslation3DInto(move, translation);
 
     /**
      * Produce output matrix
@@ -1491,6 +1490,130 @@ import com.io7m.jtensors.VectorWritable4DType;
     out.setUnsafe(3, 1, r3c1);
     out.setUnsafe(3, 2, r3c2);
     out.setUnsafe(3, 3, r3c3);
+    return out;
+  }
+
+  /**
+   * Generate and return a matrix that represents a translation of
+   * <code>(v.x, v.y)</code> from the origin.
+   *
+   * @param v
+   *          The translation vector.
+   * @return <code>out</code>
+   * @param <T0>
+   *          A phantom type parameter.
+   * @param <T1>
+   *          A phantom type parameter.
+   */
+
+  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation2D(
+    final VectorReadable2DType v)
+  {
+    final PMatrixM4x4D<T0, T1> out = new PMatrixM4x4D<T0, T1>();
+    PMatrixM4x4D.makeTranslation2DInto(v, out);
+    return out;
+  }
+
+  /**
+   * Generate a matrix that represents a translation of
+   * <code>(v.x, v.y)</code> from the origin, and save to <code>out</code>.
+   *
+   * @param v
+   *          The translation vector.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   * @param <T0>
+   *          A phantom type parameter.
+   * @param <T1>
+   *          A phantom type parameter.
+   */
+
+  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation2DInto(
+    final VectorReadable2DType v,
+    final PMatrixM4x4D<T0, T1> out)
+  {
+    out.setUnsafe(0, 0, 1.0);
+    out.setUnsafe(0, 1, 0.0);
+    out.setUnsafe(0, 2, 0.0);
+    out.setUnsafe(0, 3, v.getXD());
+
+    out.setUnsafe(1, 0, 0.0);
+    out.setUnsafe(1, 1, 1.0);
+    out.setUnsafe(1, 2, 0.0);
+    out.setUnsafe(1, 3, v.getYD());
+
+    out.setUnsafe(2, 0, 0.0);
+    out.setUnsafe(2, 1, 0.0);
+    out.setUnsafe(2, 2, 1.0);
+    out.setUnsafe(2, 3, 0.0);
+
+    out.setUnsafe(3, 0, 0.0);
+    out.setUnsafe(3, 1, 0.0);
+    out.setUnsafe(3, 2, 0.0);
+    out.setUnsafe(3, 3, 1.0);
+    return out;
+  }
+
+  /**
+   * Generate and return a matrix that represents a translation of
+   * <code>(v.x, v.y)</code> from the origin.
+   *
+   * @param v
+   *          The translation vector.
+   * @return <code>out</code>
+   * @param <T0>
+   *          A phantom type parameter.
+   * @param <T1>
+   *          A phantom type parameter.
+   */
+
+  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation2I(
+    final VectorReadable2IType v)
+  {
+    final PMatrixM4x4D<T0, T1> out = new PMatrixM4x4D<T0, T1>();
+    PMatrixM4x4D.makeTranslation2IInto(v, out);
+    return out;
+  }
+
+  /**
+   * Generate a matrix that represents a translation of
+   * <code>(v.x, v.y)</code> from the origin, and save to <code>out</code>.
+   *
+   * @param v
+   *          The translation vector.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   * @param <T0>
+   *          A phantom type parameter.
+   * @param <T1>
+   *          A phantom type parameter.
+   */
+
+  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation2IInto(
+    final VectorReadable2IType v,
+    final PMatrixM4x4D<T0, T1> out)
+  {
+    out.setUnsafe(0, 0, 1.0);
+    out.setUnsafe(0, 1, 0.0);
+    out.setUnsafe(0, 2, 0.0);
+    out.setUnsafe(0, 3, v.getXI());
+
+    out.setUnsafe(1, 0, 0.0);
+    out.setUnsafe(1, 1, 1.0);
+    out.setUnsafe(1, 2, 0.0);
+    out.setUnsafe(1, 3, v.getYI());
+
+    out.setUnsafe(2, 0, 0.0);
+    out.setUnsafe(2, 1, 0.0);
+    out.setUnsafe(2, 2, 1.0);
+    out.setUnsafe(2, 3, 0.0);
+
+    out.setUnsafe(3, 0, 0.0);
+    out.setUnsafe(3, 1, 0.0);
+    out.setUnsafe(3, 2, 0.0);
+    out.setUnsafe(3, 3, 1.0);
     return out;
   }
 
@@ -1873,197 +1996,6 @@ import com.io7m.jtensors.VectorWritable4DType;
       context.getV4a(),
       context.getV4b(),
       out);
-  }
-
-  /**
-   * <p>
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>out</code>.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
-   *
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> rotate(
-    final double angle,
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final VectorReadable3DType axis,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    final PMatrixM4x4D<T2, T3> tmp = new PMatrixM4x4D<T2, T3>();
-    return PMatrixM4x4D.rotateActual(angle, m, tmp, axis, out);
-  }
-
-  private static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> rotateActual(
-    final double angle,
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final PMatrixM4x4D<?, ?> tmp,
-    final VectorReadable3DType axis,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    PMatrixM4x4D.makeRotationInto(angle, axis, tmp);
-    final PMatrixReadable4x4DType<T1, T2> m12 =
-      (PMatrixReadable4x4DType<T1, T2>) m;
-    final PMatrixM4x4D<T0, T1> m01 = (PMatrixM4x4D<T0, T1>) tmp;
-    final PMatrixM4x4D<T0, T2> m02 = (PMatrixM4x4D<T0, T2>) out;
-    PMatrixM4x4D.multiply(m12, m01, m02);
-    return out;
-  }
-
-  /**
-   * <p>
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>m</code>.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
-   *
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @return <code>m</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> rotateInPlace(
-    final double angle,
-    final PMatrixM4x4D<T0, T1> m,
-    final VectorReadable3DType axis)
-  {
-    final PMatrixM4x4D<T0, T1> tmp = new PMatrixM4x4D<T0, T1>();
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.rotateActual(
-      angle,
-      m,
-      tmp,
-      axis,
-      m);
-  }
-
-  /**
-   * <p>
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>m</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
-   *
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @return <code>m</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static
-    <T0, T1, T2, T3>
-    PMatrixM4x4D<T2, T3>
-    rotateInPlaceWithContext(
-      final Context context,
-      final double angle,
-      final PMatrixM4x4D<T0, T1> m,
-      final VectorReadable3DType axis)
-  {
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.rotateActual(
-      angle,
-      m,
-      context.getM4a(),
-      axis,
-      m);
-  }
-
-  /**
-   * <p>
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>out</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
-   *
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> rotateWithContext(
-    final Context context,
-    final double angle,
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final VectorReadable3DType axis,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    return PMatrixM4x4D.rotateActual(angle, m, context.getM4a(), axis, out);
   }
 
   /**
@@ -2531,323 +2463,6 @@ import com.io7m.jtensors.VectorWritable4DType;
       + m.getRowColumnD(1, 1)
       + m.getRowColumnD(2, 2)
       + m.getRowColumnD(3, 3);
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> translateByVector2D(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final VectorReadable2DType v,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    final double vx = v.getXD();
-    final double vy = v.getYD();
-
-    final double c3r0 =
-      (m.getRowColumnD(0, 0) * vx) + (m.getRowColumnD(0, 1) * vy);
-    final double c3r1 =
-      (m.getRowColumnD(1, 0) * vx) + (m.getRowColumnD(1, 1) * vy);
-    final double c3r2 =
-      (m.getRowColumnD(2, 0) * vx) + (m.getRowColumnD(2, 1) * vy);
-    final double c3r3 =
-      (m.getRowColumnD(3, 0) * vx) + (m.getRowColumnD(3, 1) * vy);
-
-    out.setUnsafe(0, 3, out.getUnsafe(0, 3) + c3r0);
-    out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
-    out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
-    out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static
-    <T0, T1, T2, T3>
-    PMatrixM4x4D<T2, T3>
-    translateByVector2DInPlace(
-      final PMatrixM4x4D<T0, T1> m,
-      final VectorReadable2DType v)
-  {
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.translateByVector2D(m, v, m);
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> translateByVector2I(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final VectorReadable2IType v,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    final double vx = v.getXI();
-    final double vy = v.getYI();
-
-    final double c3r0 =
-      (m.getRowColumnD(0, 0) * vx) + (m.getRowColumnD(0, 1) * vy);
-    final double c3r1 =
-      (m.getRowColumnD(1, 0) * vx) + (m.getRowColumnD(1, 1) * vy);
-    final double c3r2 =
-      (m.getRowColumnD(2, 0) * vx) + (m.getRowColumnD(2, 1) * vy);
-    final double c3r3 =
-      (m.getRowColumnD(3, 0) * vx) + (m.getRowColumnD(3, 1) * vy);
-
-    out.setUnsafe(0, 3, out.getUnsafe(0, 3) + c3r0);
-    out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
-    out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
-    out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static
-    <T0, T1, T2, T3>
-    PMatrixM4x4D<T2, T3>
-    translateByVector2IInPlace(
-      final PMatrixM4x4D<T0, T1> m,
-      final VectorReadable2IType v)
-  {
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.translateByVector2I(m, v, m);
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> translateByVector3D(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final VectorReadable3DType v,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    final double vx = v.getXD();
-    final double vy = v.getYD();
-    final double vz = v.getZD();
-
-    final double c3r0 =
-      (m.getRowColumnD(0, 0) * vx)
-        + (m.getRowColumnD(0, 1) * vy)
-        + (m.getRowColumnD(0, 2) * vz);
-    final double c3r1 =
-      (m.getRowColumnD(1, 0) * vx)
-        + (m.getRowColumnD(1, 1) * vy)
-        + (m.getRowColumnD(1, 2) * vz);
-    final double c3r2 =
-      (m.getRowColumnD(2, 0) * vx)
-        + (m.getRowColumnD(2, 1) * vy)
-        + (m.getRowColumnD(2, 2) * vz);
-    final double c3r3 =
-      (m.getRowColumnD(3, 0) * vx)
-        + (m.getRowColumnD(3, 1) * vy)
-        + (m.getRowColumnD(3, 2) * vz);
-
-    out.setUnsafe(0, 3, out.getUnsafe(0, 3) + c3r0);
-    out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
-    out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
-    out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static
-    <T0, T1, T2, T3>
-    PMatrixM4x4D<T2, T3>
-    translateByVector3DInPlace(
-      final PMatrixM4x4D<T0, T1> m,
-      final VectorReadable3DType v)
-  {
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.translateByVector3D(m, v, m);
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> translateByVector3I(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final VectorReadable3IType v,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    final double vx = v.getXI();
-    final double vy = v.getYI();
-    final double vz = v.getZI();
-
-    final double c3r0 =
-      (m.getRowColumnD(0, 0) * vx)
-        + (m.getRowColumnD(0, 1) * vy)
-        + (m.getRowColumnD(0, 2) * vz);
-    final double c3r1 =
-      (m.getRowColumnD(1, 0) * vx)
-        + (m.getRowColumnD(1, 1) * vy)
-        + (m.getRowColumnD(1, 2) * vz);
-    final double c3r2 =
-      (m.getRowColumnD(2, 0) * vx)
-        + (m.getRowColumnD(2, 1) * vy)
-        + (m.getRowColumnD(2, 2) * vz);
-    final double c3r3 =
-      (m.getRowColumnD(3, 0) * vx)
-        + (m.getRowColumnD(3, 1) * vy)
-        + (m.getRowColumnD(3, 2) * vz);
-
-    out.setUnsafe(0, 3, out.getUnsafe(0, 3) + c3r0);
-    out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
-    out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
-    out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   */
-
-  public static
-    <T0, T1, T2, T3>
-    PMatrixM4x4D<T2, T3>
-    translateByVector3IInPlace(
-      final PMatrixM4x4D<T0, T1> m,
-      final VectorReadable3IType v)
-  {
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.translateByVector3I(m, v, m);
   }
 
   /**

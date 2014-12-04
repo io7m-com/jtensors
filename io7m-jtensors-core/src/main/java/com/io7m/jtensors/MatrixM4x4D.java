@@ -324,7 +324,7 @@ public final class MatrixM4x4D implements
     MatrixM4x4D.rowUnsafe(m, row_b, vb);
     VectorM4D.addScaledInPlace(va, vb, r);
     MatrixM4x4D.setRowUnsafe(out, row_c, va);
-    out.view.rewind();
+
     return out;
   }
 
@@ -595,7 +595,6 @@ public final class MatrixM4x4D implements
     MatrixM4x4D.setRowUnsafe(out, row_a, vb);
     MatrixM4x4D.setRowUnsafe(out, row_b, va);
 
-    out.view.rewind();
     return out;
   }
 
@@ -1042,7 +1041,6 @@ public final class MatrixM4x4D implements
 
     MatrixM4x4D.transposeInPlace(out);
 
-    out.view.rewind();
     return Option.some(out);
   }
 
@@ -1207,7 +1205,7 @@ public final class MatrixM4x4D implements
      */
 
     move.set3D(-origin.getXD(), -origin.getYD(), -origin.getZD());
-    MatrixM4x4D.translateByVector3DInPlace(translation, move);
+    MatrixM4x4D.makeTranslation3DInto(move, translation);
 
     /**
      * Produce output matrix
@@ -1240,7 +1238,7 @@ public final class MatrixM4x4D implements
   {
     final MatrixM4x4D out = new MatrixM4x4D();
     MatrixM4x4D.makeRotationInto(angle, axis, out);
-    out.view.rewind();
+
     return out;
   }
 
@@ -1329,7 +1327,115 @@ public final class MatrixM4x4D implements
     out.setUnsafe(3, 2, r3c2);
     out.setUnsafe(3, 3, r3c3);
 
-    out.view.rewind();
+    return out;
+  }
+
+  /**
+   * Generate and return a matrix that represents a translation of
+   * <code>(v.x, v.y)</code> from the origin.
+   *
+   * @param v
+   *          The translation vector.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM4x4D makeTranslation2D(
+    final VectorReadable2DType v)
+  {
+    final MatrixM4x4D out = new MatrixM4x4D();
+    MatrixM4x4D.makeTranslation2DInto(v, out);
+    return out;
+  }
+
+  /**
+   * Generate a matrix that represents a translation of
+   * <code>(v.x, v.y)</code> from the origin, and save to <code>out</code>.
+   *
+   * @param v
+   *          The translation vector.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM4x4D makeTranslation2DInto(
+    final VectorReadable2DType v,
+    final MatrixM4x4D out)
+  {
+    out.setUnsafe(0, 0, 1.0);
+    out.setUnsafe(0, 1, 0.0);
+    out.setUnsafe(0, 2, 0.0);
+    out.setUnsafe(0, 3, v.getXD());
+
+    out.setUnsafe(1, 0, 0.0);
+    out.setUnsafe(1, 1, 1.0);
+    out.setUnsafe(1, 2, 0.0);
+    out.setUnsafe(1, 3, v.getYD());
+
+    out.setUnsafe(2, 0, 0.0);
+    out.setUnsafe(2, 1, 0.0);
+    out.setUnsafe(2, 2, 1.0);
+    out.setUnsafe(2, 3, 0.0);
+
+    out.setUnsafe(3, 0, 0.0);
+    out.setUnsafe(3, 1, 0.0);
+    out.setUnsafe(3, 2, 0.0);
+    out.setUnsafe(3, 3, 1.0);
+    return out;
+  }
+
+  /**
+   * Generate and return a matrix that represents a translation of
+   * <code>(v.x, v.y)</code> from the origin.
+   *
+   * @param v
+   *          The translation vector.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM4x4D makeTranslation2I(
+    final VectorReadable2IType v)
+  {
+    final MatrixM4x4D out = new MatrixM4x4D();
+    MatrixM4x4D.makeTranslation2IInto(v, out);
+    return out;
+  }
+
+  /**
+   * Generate a matrix that represents a translation of
+   * <code>(v.x, v.y)</code> from the origin, and save to <code>out</code>.
+   *
+   * @param v
+   *          The translation vector.
+   * @param out
+   *          The output matrix.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM4x4D makeTranslation2IInto(
+    final VectorReadable2IType v,
+    final MatrixM4x4D out)
+  {
+    out.setUnsafe(0, 0, 1.0);
+    out.setUnsafe(0, 1, 0.0);
+    out.setUnsafe(0, 2, 0.0);
+    out.setUnsafe(0, 3, v.getXI());
+
+    out.setUnsafe(1, 0, 0.0);
+    out.setUnsafe(1, 1, 1.0);
+    out.setUnsafe(1, 2, 0.0);
+    out.setUnsafe(1, 3, v.getYI());
+
+    out.setUnsafe(2, 0, 0.0);
+    out.setUnsafe(2, 1, 0.0);
+    out.setUnsafe(2, 2, 1.0);
+    out.setUnsafe(2, 3, 0.0);
+
+    out.setUnsafe(3, 0, 0.0);
+    out.setUnsafe(3, 1, 0.0);
+    out.setUnsafe(3, 2, 0.0);
+    out.setUnsafe(3, 3, 1.0);
+
     return out;
   }
 
@@ -1347,7 +1453,6 @@ public final class MatrixM4x4D implements
   {
     final MatrixM4x4D out = new MatrixM4x4D();
     MatrixM4x4D.makeTranslation3DInto(v, out);
-    out.view.rewind();
     return out;
   }
 
@@ -1387,7 +1492,6 @@ public final class MatrixM4x4D implements
     out.setUnsafe(3, 2, 0.0);
     out.setUnsafe(3, 3, 1.0);
 
-    out.view.rewind();
     return out;
   }
 
@@ -1405,7 +1509,6 @@ public final class MatrixM4x4D implements
   {
     final MatrixM4x4D out = new MatrixM4x4D();
     MatrixM4x4D.makeTranslation3IInto(v, out);
-    out.view.rewind();
     return out;
   }
 
@@ -1445,7 +1548,6 @@ public final class MatrixM4x4D implements
     out.setUnsafe(3, 2, 0.0);
     out.setUnsafe(3, 3, 1.0);
 
-    out.view.rewind();
     return out;
   }
 
@@ -1583,7 +1685,6 @@ public final class MatrixM4x4D implements
     out.setUnsafe(3, 2, r3c2);
     out.setUnsafe(3, 3, r3c3);
 
-    out.view.rewind();
     return out;
   }
 
@@ -1699,149 +1800,6 @@ public final class MatrixM4x4D implements
       context.getV4a(),
       context.getV4b(),
       out);
-  }
-
-  /**
-   * <p>
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>out</code>.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
-   *
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM4x4D rotate(
-    final double angle,
-    final MatrixReadable4x4DType m,
-    final VectorReadable3DType axis,
-    final MatrixM4x4D out)
-  {
-    final MatrixM4x4D tmp = new MatrixM4x4D();
-    return MatrixM4x4D.rotateActual(angle, m, tmp, axis, out);
-  }
-
-  private static MatrixM4x4D rotateActual(
-    final double angle,
-    final MatrixReadable4x4DType m,
-    final MatrixM4x4D tmp,
-    final VectorReadable3DType axis,
-    final MatrixM4x4D out)
-  {
-    MatrixM4x4D.makeRotationInto(angle, axis, tmp);
-    MatrixM4x4D.multiply(m, tmp, out);
-    out.view.rewind();
-    return out;
-  }
-
-  /**
-   * <p>
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>m</code>.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
-   *
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM4x4D rotateInPlace(
-    final double angle,
-    final MatrixM4x4D m,
-    final VectorReadable3DType axis)
-  {
-    final MatrixM4x4D tmp = new MatrixM4x4D();
-    return MatrixM4x4D.rotateActual(angle, m, tmp, axis, m);
-  }
-
-  /**
-   * <p>
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>m</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
-   *
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM4x4D rotateInPlaceWithContext(
-    final Context context,
-    final double angle,
-    final MatrixM4x4D m,
-    final VectorReadable3DType axis)
-  {
-    return MatrixM4x4D.rotateActual(angle, m, context.getM4a(), axis, m);
-  }
-
-  /**
-   * <p>
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>out</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
-   *
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM4x4D rotateWithContext(
-    final Context context,
-    final double angle,
-    final MatrixReadable4x4DType m,
-    final VectorReadable3DType axis,
-    final MatrixM4x4D out)
-  {
-    return MatrixM4x4D.rotateActual(angle, m, context.getM4a(), axis, out);
   }
 
   /**
@@ -2085,7 +2043,6 @@ public final class MatrixM4x4D implements
     VectorM4D.scaleInPlace(tmp, r);
     MatrixM4x4D.setRowUnsafe(out, row, tmp);
 
-    out.view.rewind();
     return out;
   }
 
@@ -2153,7 +2110,6 @@ public final class MatrixM4x4D implements
     final double value)
   {
     m.view.put(MatrixM4x4D.indexChecked(row, column), value);
-    m.view.rewind();
     return m;
   }
 
@@ -2232,252 +2188,6 @@ public final class MatrixM4x4D implements
   }
 
   /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM4x4D translateByVector2D(
-    final MatrixReadable4x4DType m,
-    final VectorReadable2DType v,
-    final MatrixM4x4D out)
-  {
-    final double vx = v.getXD();
-    final double vy = v.getYD();
-
-    final double c3r0 =
-      (m.getRowColumnD(0, 0) * vx) + (m.getRowColumnD(0, 1) * vy);
-    final double c3r1 =
-      (m.getRowColumnD(1, 0) * vx) + (m.getRowColumnD(1, 1) * vy);
-    final double c3r2 =
-      (m.getRowColumnD(2, 0) * vx) + (m.getRowColumnD(2, 1) * vy);
-    final double c3r3 =
-      (m.getRowColumnD(3, 0) * vx) + (m.getRowColumnD(3, 1) * vy);
-
-    out.setUnsafe(0, 3, out.getUnsafe(0, 3) + c3r0);
-    out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
-    out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
-    out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-
-    out.view.rewind();
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM4x4D translateByVector2DInPlace(
-    final MatrixM4x4D m,
-    final VectorReadable2DType v)
-  {
-    return MatrixM4x4D.translateByVector2D(m, v, m);
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM4x4D translateByVector2I(
-    final MatrixReadable4x4DType m,
-    final VectorReadable2IType v,
-    final MatrixM4x4D out)
-  {
-    final double vx = v.getXI();
-    final double vy = v.getYI();
-
-    final double c3r0 =
-      (m.getRowColumnD(0, 0) * vx) + (m.getRowColumnD(0, 1) * vy);
-    final double c3r1 =
-      (m.getRowColumnD(1, 0) * vx) + (m.getRowColumnD(1, 1) * vy);
-    final double c3r2 =
-      (m.getRowColumnD(2, 0) * vx) + (m.getRowColumnD(2, 1) * vy);
-    final double c3r3 =
-      (m.getRowColumnD(3, 0) * vx) + (m.getRowColumnD(3, 1) * vy);
-
-    out.setUnsafe(0, 3, out.getUnsafe(0, 3) + c3r0);
-    out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
-    out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
-    out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-
-    out.view.rewind();
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM4x4D translateByVector2IInPlace(
-    final MatrixM4x4D m,
-    final VectorReadable2IType v)
-  {
-    return MatrixM4x4D.translateByVector2I(m, v, m);
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM4x4D translateByVector3D(
-    final MatrixReadable4x4DType m,
-    final VectorReadable3DType v,
-    final MatrixM4x4D out)
-  {
-    final double vx = v.getXD();
-    final double vy = v.getYD();
-    final double vz = v.getZD();
-
-    final double c3r0 =
-      (m.getRowColumnD(0, 0) * vx)
-        + (m.getRowColumnD(0, 1) * vy)
-        + (m.getRowColumnD(0, 2) * vz);
-    final double c3r1 =
-      (m.getRowColumnD(1, 0) * vx)
-        + (m.getRowColumnD(1, 1) * vy)
-        + (m.getRowColumnD(1, 2) * vz);
-    final double c3r2 =
-      (m.getRowColumnD(2, 0) * vx)
-        + (m.getRowColumnD(2, 1) * vy)
-        + (m.getRowColumnD(2, 2) * vz);
-    final double c3r3 =
-      (m.getRowColumnD(3, 0) * vx)
-        + (m.getRowColumnD(3, 1) * vy)
-        + (m.getRowColumnD(3, 2) * vz);
-
-    out.setUnsafe(0, 3, out.getUnsafe(0, 3) + c3r0);
-    out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
-    out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
-    out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-
-    out.view.rewind();
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM4x4D translateByVector3DInPlace(
-    final MatrixM4x4D m,
-    final VectorReadable3DType v)
-  {
-    return MatrixM4x4D.translateByVector3D(m, v, m);
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM4x4D translateByVector3I(
-    final MatrixReadable4x4DType m,
-    final VectorReadable3IType v,
-    final MatrixM4x4D out)
-  {
-    final double vx = v.getXI();
-    final double vy = v.getYI();
-    final double vz = v.getZI();
-
-    final double c3r0 =
-      (m.getRowColumnD(0, 0) * vx)
-        + (m.getRowColumnD(0, 1) * vy)
-        + (m.getRowColumnD(0, 2) * vz);
-    final double c3r1 =
-      (m.getRowColumnD(1, 0) * vx)
-        + (m.getRowColumnD(1, 1) * vy)
-        + (m.getRowColumnD(1, 2) * vz);
-    final double c3r2 =
-      (m.getRowColumnD(2, 0) * vx)
-        + (m.getRowColumnD(2, 1) * vy)
-        + (m.getRowColumnD(2, 2) * vz);
-    final double c3r3 =
-      (m.getRowColumnD(3, 0) * vx)
-        + (m.getRowColumnD(3, 1) * vy)
-        + (m.getRowColumnD(3, 2) * vz);
-
-    out.setUnsafe(0, 3, out.getUnsafe(0, 3) + c3r0);
-    out.setUnsafe(1, 3, out.getUnsafe(1, 3) + c3r1);
-    out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
-    out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
-
-    out.view.rewind();
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM4x4D translateByVector3IInPlace(
-    final MatrixM4x4D m,
-    final VectorReadable3IType v)
-  {
-    return MatrixM4x4D.translateByVector3I(m, v, m);
-  }
-
-  /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>out</code>.
    *
@@ -2518,7 +2228,6 @@ public final class MatrixM4x4D implements
       }
     }
 
-    m.view.rewind();
     return m;
   }
 
@@ -2544,7 +2253,7 @@ public final class MatrixM4x4D implements
     assert v != null;
 
     this.view = v;
-    this.view.rewind();
+    this.view.clear();
     MatrixM4x4D.setIdentity(this);
   }
 
@@ -2571,7 +2280,7 @@ public final class MatrixM4x4D implements
     assert v != null;
 
     this.view = v;
-    this.view.rewind();
+    this.view.clear();
 
     for (int row = 0; row < MatrixM4x4D.VIEW_ROWS; ++row) {
       for (int col = 0; col < MatrixM4x4D.VIEW_COLS; ++col) {
@@ -2622,13 +2331,6 @@ public final class MatrixM4x4D implements
     return this.view.get(MatrixM4x4D.indexChecked(row, column));
   }
 
-  private double getUnsafe(
-    final int row,
-    final int column)
-  {
-    return this.view.get(MatrixM4x4D.indexUnsafe(row, column));
-  }
-
   @Override public int hashCode()
   {
     final int prime = 31;
@@ -2659,7 +2361,6 @@ public final class MatrixM4x4D implements
     final double value)
   {
     this.view.put(MatrixM4x4D.indexChecked(row, column), value);
-    this.view.rewind();
     return this;
   }
 
@@ -2687,7 +2388,6 @@ public final class MatrixM4x4D implements
     final double value)
   {
     this.view.put(MatrixM4x4D.indexUnsafe(row, column), value);
-    this.view.rewind();
     return this;
   }
 

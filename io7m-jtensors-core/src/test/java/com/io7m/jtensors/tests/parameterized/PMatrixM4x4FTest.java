@@ -48,6 +48,82 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
   private static final VectorReadable3FType AXIS_Y = new VectorI3F(0, 1, 0);
   private static final VectorReadable3FType AXIS_Z = new VectorI3F(0, 0, 1);
 
+  @Override @Test public void testTranslationMakeEquivalent2Integer()
+  {
+    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
+    final VectorI2I v = new VectorI2I(1, 2);
+
+    {
+      final PMatrixM4x4F<T, T> r = new PMatrixM4x4F<T, T>();
+      final PMatrixM4x4F<T, T> t = PMatrixM4x4F.makeTranslation2I(v);
+      PMatrixM4x4F.multiply(m, t, r);
+
+      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
+
+      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
+      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
+
+      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
+      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
+
+      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
+      Assert.assertTrue(r.getRowColumnF(2, 3) == 0.0);
+
+      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
+      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
+      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
+      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
+
+      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
+    }
+  }
+
+  @Override @Test public void testTranslationMakeEquivalent2Real()
+  {
+    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
+    final VectorI2F v = new VectorI2F(1.0f, 2.0f);
+
+    {
+      final PMatrixM4x4F<T, T> r = new PMatrixM4x4F<T, T>();
+      final PMatrixM4x4F<T, T> t = PMatrixM4x4F.makeTranslation2F(v);
+      PMatrixM4x4F.multiply(m, t, r);
+
+      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
+
+      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0f);
+      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0f);
+      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0f);
+      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0f);
+
+      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0f);
+      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0f);
+      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0f);
+      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0f);
+
+      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0f);
+      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0f);
+      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0f);
+      Assert.assertTrue(r.getRowColumnF(2, 3) == 0.0f);
+
+      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0f);
+      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0f);
+      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0f);
+      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0f);
+
+      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
+      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
+    }
+  }
+
   private static <T> void isRotationMatrixX(
     final AlmostEqualFloat.ContextRelative context,
     final PMatrixM4x4F<T, T> r)
@@ -2784,93 +2860,6 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
     Assert.assertTrue(eq);
   }
 
-  @Override @Test public void testRotateX()
-  {
-    final AlmostEqualFloat.ContextRelative context =
-      TestUtilities.getSingleEqualityContext();
-
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    {
-      final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotate(
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_X,
-          out);
-      Assert.assertSame(r, out);
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, out.getDirectFloatBuffer().position());
-
-      System.out.println(r);
-
-      PMatrixM4x4FTest.isRotationMatrixX(context, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotateInPlace(
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_X);
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      System.out.println(r);
-
-      PMatrixM4x4FTest.isRotationMatrixX(context, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testRotateXContextEquivalentInPlace()
-  {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final PMatrixM4x4F.Context context = new PMatrixM4x4F.Context();
-
-    {
-      final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotateWithContext(
-          context,
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_X,
-          out);
-      Assert.assertSame(r, out);
-      Assert.assertEquals(0, out.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      System.out.println(r);
-
-      PMatrixM4x4FTest.isRotationMatrixX(context_f, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotateInPlaceWithContext(
-          context,
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_X);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      PMatrixM4x4FTest.isRotationMatrixX(context_f, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
   @Override @Test public void testRotateXMakeEquivalent()
   {
     final AlmostEqualFloat.ContextRelative context =
@@ -2890,89 +2879,6 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
     }
   }
 
-  @Override @Test public void testRotateY()
-  {
-    final AlmostEqualFloat.ContextRelative context =
-      TestUtilities.getSingleEqualityContext();
-
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    {
-      final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotate(
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_Y,
-          out);
-      Assert.assertSame(r, out);
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      System.out.println(r);
-
-      PMatrixM4x4FTest.isRotationMatrixY(context, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotateInPlace(
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_Y);
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      System.out.println(r);
-
-      PMatrixM4x4FTest.isRotationMatrixY(context, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testRotateYContextEquivalentInPlace()
-  {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
-    final PMatrixM4x4F.Context context = new PMatrixM4x4F.Context();
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    {
-      final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotateWithContext(
-          context,
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_Y,
-          out);
-      Assert.assertSame(r, out);
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      System.out.println(r);
-
-      PMatrixM4x4FTest.isRotationMatrixY(context_f, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotateInPlaceWithContext(
-          context,
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_Y);
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      System.out.println(r);
-
-      PMatrixM4x4FTest.isRotationMatrixY(context_f, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
   @Override @Test public void testRotateYMakeEquivalent()
   {
     final AlmostEqualFloat.ContextRelative context =
@@ -2987,89 +2893,6 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
       System.out.println(r);
 
       PMatrixM4x4FTest.isRotationMatrixY(context, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testRotateZ()
-  {
-    final AlmostEqualFloat.ContextRelative context =
-      TestUtilities.getSingleEqualityContext();
-
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    {
-      final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotate(
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_Z,
-          out);
-      Assert.assertSame(r, out);
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      System.out.println(r);
-
-      PMatrixM4x4FTest.isRotationMatrixZ(context, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotateInPlace(
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_Z);
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      System.out.println(r);
-
-      PMatrixM4x4FTest.isRotationMatrixZ(context, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testRotateZContextEquivalentInPlace()
-  {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
-    final PMatrixM4x4F.Context context = new PMatrixM4x4F.Context();
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    {
-      final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotateWithContext(
-          context,
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_Z,
-          out);
-      Assert.assertSame(r, out);
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      System.out.println(r);
-
-      PMatrixM4x4FTest.isRotationMatrixZ(context_f, r);
-
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.rotateInPlaceWithContext(
-          context,
-          Math.toRadians(45),
-          m,
-          PMatrixM4x4FTest.AXIS_Z);
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      System.out.println(r);
-
-      PMatrixM4x4FTest.isRotationMatrixZ(context_f, r);
 
       Assert.assertEquals(0, r.getDirectFloatBuffer().position());
     }
@@ -3670,681 +3493,6 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
     Assert.assertTrue(v3o.getYF() == w3o.getYF());
   }
 
-  @Override @Test public void testTranslateSimple2Integer()
-  {
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-    final VectorI2I v = new VectorI2I(1, 2);
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector2I(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 0.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector2I(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 4.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 0.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testTranslateSimple2IntegerAlt()
-  {
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final VectorI2I v = new VectorI2I(1, 2);
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector2IInPlace(m, v);
-      Assert.assertSame(m, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 0.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector2IInPlace(m, v);
-      Assert.assertSame(m, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 4.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 0.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testTranslateSimple2Real()
-  {
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-    final VectorI2F v = new VectorI2F(1.0f, 2.0f);
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector2F(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 0.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector2F(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 4.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 0.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testTranslateSimple2RealAlt()
-  {
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final VectorI2F v = new VectorI2F(1.0f, 2.0f);
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector2FInPlace(m, v);
-      Assert.assertSame(m, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 0.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector2FInPlace(m, v);
-      Assert.assertSame(m, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 4.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 0.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testTranslateSimple3Integer()
-  {
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-    final VectorI3I v = new VectorI3I(1, 2, 3);
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector3I(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 3.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector3I(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 4.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 6.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testTranslateSimple3IntegerAlt()
-  {
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final VectorI3I v = new VectorI3I(1, 2, 3);
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector3IInPlace(m, v);
-      Assert.assertSame(m, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 3.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector3IInPlace(m, v);
-      Assert.assertSame(m, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 4.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 6.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testTranslateSimple3Real()
-  {
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-    final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector3F(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 3.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector3F(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 4.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 6.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testTranslateSimple3RealAlt()
-  {
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector3FInPlace(m, v);
-      Assert.assertSame(m, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 3.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector3FInPlace(m, v);
-      Assert.assertSame(m, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 4.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 6.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testTranslationEquivalent3Integer()
-  {
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final VectorI3I v = new VectorI3I(1, 2, 3);
-
-    {
-      final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-      final PMatrixM4x4F<T, T> r =
-        PMatrixM4x4F.translateByVector3I(m, v, out);
-      Assert.assertSame(out, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 3.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-
-    {
-      final PMatrixM4x4F<T, T> r = new PMatrixM4x4F<T, T>();
-      final PMatrixM4x4F<T, T> t = new PMatrixM4x4F<T, T>();
-
-      PMatrixM4x4F.makeTranslation3IInto(v, t);
-      PMatrixM4x4F.multiply(m, t, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 3.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testTranslationEquivalent3Real()
-  {
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
-
-    {
-      final PMatrixM4x4F<T, T> r = new PMatrixM4x4F<T, T>();
-      final PMatrixM4x4F<T, T> t = PMatrixM4x4F.makeTranslation3F(v);
-      PMatrixM4x4F.multiply(m, t, r);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-
-      Assert.assertTrue(r.getRowColumnF(0, 0) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(0, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(0, 3) == 1.0);
-
-      Assert.assertTrue(r.getRowColumnF(1, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 1) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(1, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(1, 3) == 2.0);
-
-      Assert.assertTrue(r.getRowColumnF(2, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(2, 2) == 1.0);
-      Assert.assertTrue(r.getRowColumnF(2, 3) == 3.0);
-
-      Assert.assertTrue(r.getRowColumnF(3, 0) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 1) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 2) == 0.0);
-      Assert.assertTrue(r.getRowColumnF(3, 3) == 1.0);
-
-      Assert.assertEquals(0, m.getDirectFloatBuffer().position());
-      Assert.assertEquals(0, r.getDirectFloatBuffer().position());
-    }
-  }
-
   @Override @Test public void testTranslationMakeEquivalent3Integer()
   {
     final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
@@ -4422,41 +3570,6 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
       Assert.assertEquals(0, m.getDirectFloatBuffer().position());
       Assert.assertEquals(0, r.getDirectFloatBuffer().position());
       Assert.assertEquals(0, t.getDirectFloatBuffer().position());
-    }
-  }
-
-  @Override @Test public void testTranslationStorage()
-  {
-    final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
-    final PMatrixM4x4F<T, T> out = new PMatrixM4x4F<T, T>();
-
-    PMatrixM4x4F.translateByVector3F(m, new VectorI3F(1.0f, 2.0f, 3.0f), out);
-
-    {
-      final FloatBuffer b = out.getDirectFloatBuffer();
-
-      Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
-      Assert.assertEquals(0, b.position());
-
-      Assert.assertTrue(b.get(0) == 1.0);
-      Assert.assertTrue(b.get(1) == 0.0);
-      Assert.assertTrue(b.get(2) == 0.0);
-      Assert.assertTrue(b.get(3) == 0.0);
-
-      Assert.assertTrue(b.get(4) == 0.0);
-      Assert.assertTrue(b.get(5) == 1.0);
-      Assert.assertTrue(b.get(6) == 0.0);
-      Assert.assertTrue(b.get(7) == 0.0);
-
-      Assert.assertTrue(b.get(8) == 0.0);
-      Assert.assertTrue(b.get(9) == 0.0);
-      Assert.assertTrue(b.get(10) == 1.0);
-      Assert.assertTrue(b.get(11) == 0.0);
-
-      Assert.assertTrue(b.get(12) == 1.0);
-      Assert.assertTrue(b.get(13) == 2.0);
-      Assert.assertTrue(b.get(14) == 3.0);
-      Assert.assertTrue(b.get(15) == 1.0);
     }
   }
 

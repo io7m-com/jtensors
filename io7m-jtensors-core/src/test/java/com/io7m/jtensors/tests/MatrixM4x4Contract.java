@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -146,21 +146,9 @@ public abstract class MatrixM4x4Contract
 
   public abstract void testRotateVectorMinus90Z();
 
-  public abstract void testRotateX();
-
-  public abstract void testRotateXContextEquivalentInPlace();
-
   public abstract void testRotateXMakeEquivalent();
 
-  public abstract void testRotateY();
-
-  public abstract void testRotateYContextEquivalentInPlace();
-
   public abstract void testRotateYMakeEquivalent();
-
-  public abstract void testRotateZ();
-
-  public abstract void testRotateZContextEquivalentInPlace();
 
   public abstract void testRotateZMakeEquivalent();
 
@@ -206,35 +194,17 @@ public abstract class MatrixM4x4Contract
 
   public abstract void testTranslate3_4_Equivalent();
 
-  public abstract void testTranslateSimple2Integer();
-
-  public abstract void testTranslateSimple2IntegerAlt();
-
-  public abstract void testTranslateSimple2Real();
-
-  public abstract void testTranslateSimple2RealAlt();
-
-  public abstract void testTranslateSimple3Integer();
-
-  public abstract void testTranslateSimple3IntegerAlt();
-
-  public abstract void testTranslateSimple3Real();
-
-  public abstract void testTranslateSimple3RealAlt();
-
-  public abstract void testTranslationEquivalent3Integer();
-
-  public abstract void testTranslationEquivalent3Real();
-
-  public abstract void testTranslationMakeEquivalent3Integer();
-
-  public abstract void testTranslationMakeEquivalent3Real();
-
-  public abstract void testTranslationStorage();
-
   public abstract void testTranspose();
 
   public abstract void testTransposeMutate();
 
   public abstract void testZero();
+
+  public abstract void testTranslationMakeEquivalent3Integer();
+
+  public abstract void testTranslationMakeEquivalent3Real();
+
+  public abstract void testTranslationMakeEquivalent2Real();
+
+  public abstract void testTranslationMakeEquivalent2Integer();
 }

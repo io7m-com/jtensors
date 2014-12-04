@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -70,10 +70,9 @@ public final class MatrixM3x3F implements
 
   public static class Context
   {
-    private final MatrixM3x3F m4a = new MatrixM3x3F();
-    private final VectorM3F   v3a = new VectorM3F();
-    private final VectorM3F   v3b = new VectorM3F();
-    private final VectorM3F   v3c = new VectorM3F();
+    private final VectorM3F v3a = new VectorM3F();
+    private final VectorM3F v3b = new VectorM3F();
+    private final VectorM3F v3c = new VectorM3F();
 
     /**
      * Construct a new context.
@@ -82,11 +81,6 @@ public final class MatrixM3x3F implements
     public Context()
     {
 
-    }
-
-    final MatrixM3x3F getM4A()
-    {
-      return this.m4a;
     }
 
     final VectorM3F getV3A()
@@ -749,8 +743,15 @@ public final class MatrixM3x3F implements
     final VectorReadable2FType v,
     final MatrixM3x3F out)
   {
+    out.setUnsafe(0, 0, 1.0f);
+    out.setUnsafe(0, 1, 0.0f);
     out.setUnsafe(0, 2, v.getXF());
+    out.setUnsafe(1, 0, 0.0f);
+    out.setUnsafe(1, 1, 1.0f);
     out.setUnsafe(1, 2, v.getYF());
+    out.setUnsafe(2, 0, 0.0f);
+    out.setUnsafe(2, 1, 0.0f);
+    out.setUnsafe(2, 2, 1.0f);
     return out;
   }
 
@@ -769,8 +770,15 @@ public final class MatrixM3x3F implements
     final VectorReadable2IType v,
     final MatrixM3x3F out)
   {
+    out.setUnsafe(0, 0, 1.0f);
+    out.setUnsafe(0, 1, 0.0f);
     out.setUnsafe(0, 2, v.getXI());
+    out.setUnsafe(1, 0, 0.0f);
+    out.setUnsafe(1, 1, 1.0f);
     out.setUnsafe(1, 2, v.getYI());
+    out.setUnsafe(2, 0, 0.0f);
+    out.setUnsafe(2, 1, 0.0f);
+    out.setUnsafe(2, 2, 1.0f);
     return out;
   }
 
@@ -900,124 +908,6 @@ public final class MatrixM3x3F implements
     out.setZF((float) VectorM3F.dotProduct(row, vi));
 
     return out;
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>out</code>.
-   *
-   * @since 5.0.0
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3F rotate(
-    final double angle,
-    final MatrixReadable3x3FType m,
-    final VectorReadable3FType axis,
-    final MatrixM3x3F out)
-  {
-    final MatrixM3x3F tmp = new MatrixM3x3F();
-    return MatrixM3x3F.rotateActual(angle, m, tmp, axis, out);
-  }
-
-  private static MatrixM3x3F rotateActual(
-    final double angle,
-    final MatrixReadable3x3FType m,
-    final MatrixM3x3F tmp,
-    final VectorReadable3FType axis,
-    final MatrixM3x3F out)
-  {
-    MatrixM3x3F.makeRotationInto(angle, axis, tmp);
-    MatrixM3x3F.multiply(m, tmp, out);
-    return out;
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>m</code>.
-   *
-   * @since 5.0.0
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM3x3F rotateInPlace(
-    final double angle,
-    final MatrixM3x3F m,
-    final VectorReadable3FType axis)
-  {
-    final MatrixM3x3F tmp = new MatrixM3x3F();
-    return MatrixM3x3F.rotateActual(angle, m, tmp, axis, m);
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>m</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory. The function assumes a right-handed coordinate system.
-   *
-   * @since 5.0.0
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM3x3F rotateInPlaceWithContext(
-    final Context context,
-    final double angle,
-    final MatrixM3x3F m,
-    final VectorReadable3FType axis)
-  {
-    return MatrixM3x3F.rotateActual(angle, m, context.getM4A(), axis, m);
-  }
-
-  /**
-   * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
-   * axis <code>axis</code>, saving the result into <code>out</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
-   * allocating memory. The function assumes a right-handed coordinate system.
-   *
-   * @since 5.0.0
-   * @param context
-   *          Preallocated storage.
-   * @param angle
-   *          The angle in radians.
-   * @param m
-   *          The input matrix.
-   * @param axis
-   *          A vector representing an axis.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3F rotateWithContext(
-    final Context context,
-    final double angle,
-    final MatrixReadable3x3FType m,
-    final VectorReadable3FType axis,
-    final MatrixM3x3F out)
-  {
-    return MatrixM3x3F.rotateActual(angle, m, context.getM4A(), axis, out);
   }
 
   /**
@@ -1300,110 +1190,6 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3F translateByVector2F(
-    final MatrixReadable3x3FType m,
-    final VectorReadable2FType v,
-    final MatrixM3x3F out)
-  {
-    final float vx = v.getXF();
-    final float vy = v.getYF();
-
-    final float c2r0 =
-      (m.getRowColumnF(0, 0) * vx) + (m.getRowColumnF(0, 1) * vy);
-    final float c2r1 =
-      (m.getRowColumnF(1, 0) * vx) + (m.getRowColumnF(1, 1) * vy);
-    final float c2r2 =
-      (m.getRowColumnF(2, 0) * vx) + (m.getRowColumnF(2, 1) * vy);
-
-    out.setUnsafe(0, 2, out.getUnsafe(0, 2) + c2r0);
-    out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
-    out.setUnsafe(2, 2, out.getUnsafe(2, 2) + c2r2);
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM3x3F translateByVector2FInPlace(
-    final MatrixM3x3F m,
-    final VectorReadable2FType v)
-  {
-    return MatrixM3x3F.translateByVector2F(m, v, m);
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3F translateByVector2I(
-    final MatrixReadable3x3FType m,
-    final VectorReadable2IType v,
-    final MatrixM3x3F out)
-  {
-    final float vx = v.getXI();
-    final float vy = v.getYI();
-
-    final float c2r0 =
-      (m.getRowColumnF(0, 0) * vx) + (m.getRowColumnF(0, 1) * vy);
-    final float c2r1 =
-      (m.getRowColumnF(1, 0) * vx) + (m.getRowColumnF(1, 1) * vy);
-    final float c2r2 =
-      (m.getRowColumnF(2, 0) * vx) + (m.getRowColumnF(2, 1) * vy);
-
-    out.setUnsafe(0, 2, out.getUnsafe(0, 2) + c2r0);
-    out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
-    out.setUnsafe(2, 2, out.getUnsafe(2, 2) + c2r2);
-    return out;
-  }
-
-  /**
-   * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
-   * the resulting matrix in <code>m</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The translation vector.
-   * @return <code>m</code>
-   */
-
-  public static MatrixM3x3F translateByVector2IInPlace(
-    final MatrixM3x3F m,
-    final VectorReadable2IType v)
-  {
-    return MatrixM3x3F.translateByVector2I(m, v, m);
-  }
-
-  /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>out</code>.
    *
@@ -1543,13 +1329,6 @@ public final class MatrixM3x3F implements
     final int column)
   {
     return this.view.get(MatrixM3x3F.indexChecked(row, column));
-  }
-
-  private float getUnsafe(
-    final int row,
-    final int column)
-  {
-    return this.view.get(MatrixM3x3F.indexUnsafe(row, column));
   }
 
   @Override public int hashCode()
