@@ -19,7 +19,7 @@
 <s:document
   xmlns:s="http://www.io7m.com/schemas/structural/1.0.0"
   xmlns:xi="http://www.w3.org/2001/XInclude">
-  <s:document-title>io7m-jtensors 5.3.0 Documentation</s:document-title>
+  <s:document-title>io7m-jtensors 5.3.1 Documentation</s:document-title>
   <s:document-style>documentation.css</s:document-style>
   <s:document-contents/>
 
@@ -74,6 +74,7 @@
           <s:verbatim type="example"><![CDATA[$ mvn -C clean install]]></s:verbatim>
         </s:paragraph>
       </s:subsection>
+      
       <s:subsection>
         <s:subsection-title>Maven</s:subsection-title>
         <s:paragraph>
@@ -86,8 +87,18 @@
           <s:verbatim type="example"><![CDATA[<dependency>
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors</artifactId>
-  <version>5.3.0</version>
+  <version>[5.3.1, 6.0.0)</version>
 </dependency>]]></s:verbatim>
+        </s:paragraph>
+        <s:paragraph>
+          All <s:link-external target="http://io7m.com">io7m.com</s:link-external>
+          packages use Semantic Versioning
+          <s:footnote>
+            <s:link-external target="http://semver.org">http://semver.org</s:link-external>
+          </s:footnote>, which implies that it is always safe to use version ranges
+          with an exclusive upper bound equal to the next major version - the API of
+          the package will not change in a backwards-incompatible manner before the
+          next major version.
         </s:paragraph>
       </s:subsection>
     </s:section>
@@ -373,7 +384,7 @@ MatrixM4x4D.invertWithContext(context, mo, mi);]]>
         </s:paragraph>
       </s:subsection>
 
-      <s:subsection xml:id="com.io7m.jtensors_5.3.0.matrices.handedness">
+      <s:subsection xml:id="com.io7m.jtensors_5.3.1.matrices.handedness">
         <s:subsection-title>Rotations &amp; Handedness</s:subsection-title>
         <s:paragraph>
           Any of the matrix functions that deal with rotations
@@ -508,12 +519,12 @@ type         = "Quaternion" , mutability , size , element_type ;]]>
         </s:formal-item>
       </s:subsection>
 
-      <s:subsection xml:id="com.io7m.jtensors_5.3.0.quaternions.handedness">
+      <s:subsection xml:id="com.io7m.jtensors_5.3.1.quaternions.handedness">
         <s:subsection-title>Rotations &amp; Handedness</s:subsection-title>
         <s:paragraph>
           The included quaternion types and functions have consistent semantics and
           assumptions with regards to rotation and coordinate systems as the
-          <s:link target="com.io7m.jtensors_5.3.0.matrices.handedness">Matrix</s:link>
+          <s:link target="com.io7m.jtensors_5.3.1.matrices.handedness">Matrix</s:link>
           types, and functions are provided to convert between matrices and
           quaternions.
         </s:paragraph>
