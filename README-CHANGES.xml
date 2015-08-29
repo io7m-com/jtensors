@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c:changelog xmlns:c="http://www.io7m.com/schemas/changelog/1.0.0">
+  <c:project>io7m-jtensors</c:project>
+
+  <c:release ticket-system="com.io7m.fossil.jtensors">
+    <c:date>2012-03-15</c:date>
+    <c:version>1.0.0</c:version>
+    <c:item>
+      <c:date>2012-03-06</c:date>
+      <c:type-code-fix/>
+      <c:summary>Depend on jexternals for eclipse users</c:summary>
+    </c:item>
+    <c:item>
+      <c:date>2012-02-11</c:date>
+      <c:type-code-fix/>
+      <c:summary>MatrixM3x3F allocated too many bytes (wasted memory)</c:summary>
+    </c:item>
+    <c:item>
+      <c:date>2012-02-08</c:date>
+      <c:type-platform-new/>
+      <c:summary>Add SunOS supported</c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release ticket-system="com.io7m.fossil.jtensors">
+    <c:date>2012-02-06</c:date>
+    <c:version>0.2.0</c:version>
+    <c:item>
+      <c:date>2012-02-06</c:date>
+      <c:type-code-new/>
+      <c:summary>Initial version</c:summary>
+    </c:item>
+  </c:release>
+
+  <c:ticket-system xml:id="com.io7m.fossil.jtensors">
+    <c:ticket-url>http://fossil.io7m.com/repo.cgi/io7m-jtensors/tktview?name=</c:ticket-url>
+  </c:ticket-system>
+</c:changelog>
