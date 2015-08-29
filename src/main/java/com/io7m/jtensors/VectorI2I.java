@@ -16,11 +16,16 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * A two-dimensional immutable vector type with integer elements.
+ * 
+ * Values of this type are immutable and can therefore be safely accessed from
+ * multiple threads.
  */
 
-public final class VectorI2I implements VectorReadable2I
+@Immutable public final class VectorI2I implements VectorReadable2I
 {
   /**
    * The zero vector.

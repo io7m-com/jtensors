@@ -135,7 +135,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(m0.get(3, 3) == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public
+  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
     void
     testAddRowScaledContextEquivalent()
   {
@@ -154,6 +154,47 @@ public class MatrixM4x4DTest
     m0.set(1, 3, 5.0);
 
     MatrixM4x4D.addRowScaled(context, m0, 0, 1, 2, 2.0, m1);
+
+    Assert.assertTrue(m1.get(0, 0) == 1.0);
+    Assert.assertTrue(m1.get(0, 1) == 0.0);
+    Assert.assertTrue(m1.get(0, 2) == 0.0);
+    Assert.assertTrue(m1.get(0, 3) == 0.0);
+
+    Assert.assertTrue(m1.get(1, 0) == 0.0);
+    Assert.assertTrue(m1.get(1, 1) == 1.0);
+    Assert.assertTrue(m1.get(1, 2) == 0.0);
+    Assert.assertTrue(m1.get(1, 3) == 0.0);
+
+    Assert.assertTrue(m1.get(2, 0) == 13.0);
+    Assert.assertTrue(m1.get(2, 1) == 13.0);
+    Assert.assertTrue(m1.get(2, 2) == 13.0);
+    Assert.assertTrue(m1.get(2, 3) == 13.0);
+
+    Assert.assertTrue(m1.get(3, 0) == 0.0);
+    Assert.assertTrue(m1.get(3, 1) == 0.0);
+    Assert.assertTrue(m1.get(3, 2) == 0.0);
+    Assert.assertTrue(m1.get(3, 3) == 1.0);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testAddRowScaledContextEquivalentND()
+  {
+    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+    final MatrixM4x4D m0 = new MatrixM4x4D();
+    final MatrixM4x4D m1 = new MatrixM4x4D();
+
+    m0.set(0, 0, 3.0);
+    m0.set(0, 1, 3.0);
+    m0.set(0, 2, 3.0);
+    m0.set(0, 3, 3.0);
+
+    m0.set(1, 0, 5.0);
+    m0.set(1, 1, 5.0);
+    m0.set(1, 2, 5.0);
+    m0.set(1, 3, 5.0);
+
+    MatrixM4x4D.addRowScaledWithContext(context, m0, 0, 1, 2, 2.0, m1);
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 0.0);
@@ -245,6 +286,16 @@ public class MatrixM4x4DTest
   {
     final MatrixM4x4D m = new MatrixM4x4D();
     final DoubleBuffer b = MatrixM4x4D.doubleBuffer(m);
+    b.put(0, 0.0f);
+  }
+
+  @SuppressWarnings("static-method") @Test(
+    expected = ReadOnlyBufferException.class) public
+    void
+    testBufferReadOnlyInterface()
+  {
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final DoubleBuffer b = m.getDoubleBuffer();
     b.put(0, 0.0f);
   }
 
@@ -449,7 +500,7 @@ public class MatrixM4x4DTest
     MatrixM4x4D.exchangeRowsInPlace(m, 0, -1);
   }
 
-  @SuppressWarnings("static-method") @Test public
+  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
     void
     testExchangeRowsContextEquivalent()
   {
@@ -478,6 +529,79 @@ public class MatrixM4x4DTest
     m0.set(3, 3, 16.0);
 
     MatrixM4x4D.exchangeRows(context, m0, 0, 3, m1);
+
+    Assert.assertTrue(m1.get(0, 0) == 13.0);
+    Assert.assertTrue(m1.get(0, 1) == 14.0);
+    Assert.assertTrue(m1.get(0, 2) == 15.0);
+    Assert.assertTrue(m1.get(0, 3) == 16.0);
+
+    Assert.assertTrue(m1.get(1, 0) == 0.0);
+    Assert.assertTrue(m1.get(1, 1) == 1.0);
+    Assert.assertTrue(m1.get(1, 2) == 0.0);
+    Assert.assertTrue(m1.get(1, 3) == 0.0);
+
+    Assert.assertTrue(m1.get(2, 0) == 0.0);
+    Assert.assertTrue(m1.get(2, 1) == 0.0);
+    Assert.assertTrue(m1.get(2, 2) == 1.0);
+    Assert.assertTrue(m1.get(2, 3) == 0.0);
+
+    Assert.assertTrue(m1.get(3, 0) == 1.0);
+    Assert.assertTrue(m1.get(3, 1) == 2.0);
+    Assert.assertTrue(m1.get(3, 2) == 3.0);
+    Assert.assertTrue(m1.get(3, 3) == 4.0);
+
+    MatrixM4x4D.exchangeRowsInPlaceWithContext(context, m1, 0, 3);
+
+    Assert.assertTrue(m1.get(0, 0) == 1.0);
+    Assert.assertTrue(m1.get(0, 1) == 2.0);
+    Assert.assertTrue(m1.get(0, 2) == 3.0);
+    Assert.assertTrue(m1.get(0, 3) == 4.0);
+
+    Assert.assertTrue(m1.get(1, 0) == 0.0);
+    Assert.assertTrue(m1.get(1, 1) == 1.0);
+    Assert.assertTrue(m1.get(1, 2) == 0.0);
+    Assert.assertTrue(m1.get(1, 3) == 0.0);
+
+    Assert.assertTrue(m1.get(2, 0) == 0.0);
+    Assert.assertTrue(m1.get(2, 1) == 0.0);
+    Assert.assertTrue(m1.get(2, 2) == 1.0);
+    Assert.assertTrue(m1.get(2, 3) == 0.0);
+
+    Assert.assertTrue(m1.get(3, 0) == 13.0);
+    Assert.assertTrue(m1.get(3, 1) == 14.0);
+    Assert.assertTrue(m1.get(3, 2) == 15.0);
+    Assert.assertTrue(m1.get(3, 3) == 16.0);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testExchangeRowsContextEquivalentND()
+  {
+    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+    final MatrixM4x4D m0 = new MatrixM4x4D();
+    final MatrixM4x4D m1 = new MatrixM4x4D();
+
+    m0.set(0, 0, 1.0);
+    m0.set(0, 1, 2.0);
+    m0.set(0, 2, 3.0);
+    m0.set(0, 3, 4.0);
+
+    m0.set(1, 0, 5.0);
+    m0.set(1, 1, 6.0);
+    m0.set(1, 2, 7.0);
+    m0.set(1, 3, 8.0);
+
+    m0.set(2, 0, 9.0);
+    m0.set(2, 1, 10.0);
+    m0.set(2, 2, 11.0);
+    m0.set(2, 3, 12.0);
+
+    m0.set(3, 0, 13.0);
+    m0.set(3, 1, 14.0);
+    m0.set(3, 2, 15.0);
+    m0.set(3, 3, 16.0);
+
+    MatrixM4x4D.exchangeRowsWithContext(context, m0, 0, 3, m1);
 
     Assert.assertTrue(m1.get(0, 0) == 13.0);
     Assert.assertTrue(m1.get(0, 1) == 14.0);
@@ -1223,7 +1347,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(MatrixM4x4D.get(r, 3, 3) == 600.0);
   }
 
-  @SuppressWarnings("static-method") @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testMultiplyVectorSimple()
   {
@@ -1258,7 +1382,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(out.w == 150.0);
   }
 
-  @SuppressWarnings("static-method") @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testMultiplyVectorSimpleContextEquivalent()
   {
@@ -1431,7 +1555,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "boxing", "static-method", "deprecation" }) @Test public
     void
     testRotateXContextEquivalent()
   {
@@ -1483,6 +1607,180 @@ public class MatrixM4x4DTest
       final VectorI3D axis = new VectorI3D(1.0, 0.0, 0.0);
       final MatrixM4x4D r =
         MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis);
+
+      Assert.assertEquals(1.0, r.get(0, 0));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertEquals(0.0, r.get(0, 2));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 1),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(2, 1),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+  }
+
+  @SuppressWarnings({ "boxing", "static-method", "deprecation" }) @Test public
+    void
+    testRotateXContextEquivalentDeprecated()
+  {
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final Context context = new Context();
+
+    {
+      final MatrixM4x4D out = new MatrixM4x4D();
+      final VectorI3D axis = new VectorI3D(1.0, 0.0, 0.0);
+
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis, out);
+      Assert.assertSame(r, out);
+
+      Assert.assertEquals(1.0, r.get(0, 0));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertEquals(0.0, r.get(0, 2));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 1),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(2, 1),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+
+    {
+      final VectorI3D axis = new VectorI3D(1.0, 0.0, 0.0);
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis);
+
+      Assert.assertEquals(1.0, r.get(0, 0));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertEquals(0.0, r.get(0, 2));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 1),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(2, 1),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+  }
+
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateXContextEquivalentInPlace()
+  {
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final Context context = new Context();
+
+    {
+      final MatrixM4x4D out = new MatrixM4x4D();
+      final VectorI3D axis = new VectorI3D(1.0, 0.0, 0.0);
+
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis, out);
+      Assert.assertSame(r, out);
+
+      Assert.assertEquals(1.0, r.get(0, 0));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertEquals(0.0, r.get(0, 2));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 1),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(2, 1),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+
+    {
+      final VectorI3D axis = new VectorI3D(1.0, 0.0, 0.0);
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateInPlaceWithContext(context, Math.PI / 4, m, axis);
 
       Assert.assertEquals(1.0, r.get(0, 0));
       Assert.assertEquals(0.0, r.get(0, 1));
@@ -1643,7 +1941,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "boxing", "static-method", "deprecation" }) @Test public
     void
     testRotateYContextEquivalent()
   {
@@ -1693,6 +1991,176 @@ public class MatrixM4x4DTest
     {
       final MatrixM4x4D r =
         MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis);
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 0),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(0, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertEquals(1.0, r.get(1, 1));
+      Assert.assertEquals(0.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 0),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+  }
+
+  @SuppressWarnings({ "boxing", "static-method", "deprecation" }) @Test public
+    void
+    testRotateYContextEquivalentDeprecated()
+  {
+    final Context context = new Context();
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+
+    {
+      final MatrixM4x4D out = new MatrixM4x4D();
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis, out);
+      Assert.assertSame(r, out);
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 0),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(0, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertEquals(1.0, r.get(1, 1));
+      Assert.assertEquals(0.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 0),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+
+    {
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis);
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 0),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(0, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertEquals(1.0, r.get(1, 1));
+      Assert.assertEquals(0.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 0),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+  }
+
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateYContextEquivalentInPlace()
+  {
+    final Context context = new Context();
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+
+    {
+      final MatrixM4x4D out = new MatrixM4x4D();
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis, out);
+      Assert.assertSame(r, out);
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 0),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 1));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(0, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertEquals(0.0, r.get(1, 0));
+      Assert.assertEquals(1.0, r.get(1, 1));
+      Assert.assertEquals(0.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 0),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(2, 2),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+
+    {
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateInPlaceWithContext(context, Math.PI / 4, m, axis);
 
       Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
         0.707106769085,
@@ -1853,7 +2321,7 @@ public class MatrixM4x4DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "boxing", "static-method", "deprecation" }) @Test public
     void
     testRotateZContextEquivalent()
   {
@@ -1903,6 +2371,176 @@ public class MatrixM4x4DTest
     {
       final MatrixM4x4D r =
         MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis);
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 0),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 1),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 2));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(1, 0),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 1),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertEquals(1.0, r.get(2, 2));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+  }
+
+  @SuppressWarnings({ "boxing", "static-method", "deprecation" }) @Test public
+    void
+    testRotateZContextEquivalentDeprecated()
+  {
+    final Context context = new Context();
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3D axis = new VectorI3D(0.0, 0.0, 1.0);
+
+    {
+      final MatrixM4x4D out = new MatrixM4x4D();
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis, out);
+      Assert.assertSame(r, out);
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 0),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 1),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 2));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(1, 0),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 1),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertEquals(1.0, r.get(2, 2));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+
+    {
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis);
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 0),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 1),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 2));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(1, 0),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 1),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertEquals(1.0, r.get(2, 2));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+  }
+
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateZContextEquivalentInPlace()
+  {
+    final Context context = new Context();
+    final MatrixM4x4D m = new MatrixM4x4D();
+    final VectorI3D axis = new VectorI3D(0.0, 0.0, 1.0);
+
+    {
+      final MatrixM4x4D out = new MatrixM4x4D();
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateWithContext(context, Math.PI / 4, m, axis, out);
+      Assert.assertSame(r, out);
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 0),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(0, 1),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(0, 2));
+      Assert.assertEquals(0.0, r.get(0, 3));
+
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        -0.707106769085,
+        r.get(1, 0),
+        0.0000001));
+      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
+        0.707106769085,
+        r.get(1, 1),
+        0.0000001));
+      Assert.assertEquals(0.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 3));
+
+      Assert.assertEquals(0.0, r.get(2, 0));
+      Assert.assertEquals(0.0, r.get(2, 1));
+      Assert.assertEquals(1.0, r.get(2, 2));
+      Assert.assertEquals(0.0, r.get(2, 3));
+
+      Assert.assertEquals(0.0, r.get(3, 0));
+      Assert.assertEquals(0.0, r.get(3, 1));
+      Assert.assertEquals(0.0, r.get(3, 2));
+      Assert.assertEquals(1.0, r.get(3, 3));
+    }
+
+    {
+      final MatrixM4x4D r =
+        MatrixM4x4D.rotateInPlaceWithContext(context, Math.PI / 4, m, axis);
 
       Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqualExplicit(
         0.707106769085,
@@ -2146,7 +2784,7 @@ public class MatrixM4x4DTest
     Assert.assertTrue(m0.get(3, 3) == 256.0);
   }
 
-  @SuppressWarnings("static-method") @Test public
+  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
     void
     testScaleRowContextEquivalent()
   {
@@ -2178,6 +2816,85 @@ public class MatrixM4x4DTest
     MatrixM4x4D.scaleRow(context, m0, 1, 4.0, m1);
     MatrixM4x4D.scaleRow(context, m0, 2, 8.0, m1);
     MatrixM4x4D.scaleRow(context, m0, 3, 16.0, m1);
+
+    Assert.assertTrue(m1.get(0, 0) == 2.0);
+    Assert.assertTrue(m1.get(0, 1) == 4.0);
+    Assert.assertTrue(m1.get(0, 2) == 6.0);
+    Assert.assertTrue(m1.get(0, 3) == 8.0);
+
+    Assert.assertTrue(m1.get(1, 0) == 20.0);
+    Assert.assertTrue(m1.get(1, 1) == 24.0);
+    Assert.assertTrue(m1.get(1, 2) == 28.0);
+    Assert.assertTrue(m1.get(1, 3) == 32.0);
+
+    Assert.assertTrue(m1.get(2, 0) == 72.0);
+    Assert.assertTrue(m1.get(2, 1) == 80.0);
+    Assert.assertTrue(m1.get(2, 2) == 88.0);
+    Assert.assertTrue(m1.get(2, 3) == 96.0);
+
+    Assert.assertTrue(m1.get(3, 0) == 208.0);
+    Assert.assertTrue(m1.get(3, 1) == 224.0);
+    Assert.assertTrue(m1.get(3, 2) == 240.0);
+    Assert.assertTrue(m1.get(3, 3) == 256.0);
+
+    MatrixM4x4D.scaleRowInPlaceWithContext(context, m0, 0, 2.0);
+    MatrixM4x4D.scaleRowInPlaceWithContext(context, m0, 1, 4.0);
+    MatrixM4x4D.scaleRowInPlaceWithContext(context, m0, 2, 8.0);
+    MatrixM4x4D.scaleRowInPlaceWithContext(context, m0, 3, 16.0);
+
+    Assert.assertTrue(m0.get(0, 0) == 2.0);
+    Assert.assertTrue(m0.get(0, 1) == 4.0);
+    Assert.assertTrue(m0.get(0, 2) == 6.0);
+    Assert.assertTrue(m0.get(0, 3) == 8.0);
+
+    Assert.assertTrue(m0.get(1, 0) == 20.0);
+    Assert.assertTrue(m0.get(1, 1) == 24.0);
+    Assert.assertTrue(m0.get(1, 2) == 28.0);
+    Assert.assertTrue(m0.get(1, 3) == 32.0);
+
+    Assert.assertTrue(m0.get(2, 0) == 72.0);
+    Assert.assertTrue(m0.get(2, 1) == 80.0);
+    Assert.assertTrue(m0.get(2, 2) == 88.0);
+    Assert.assertTrue(m0.get(2, 3) == 96.0);
+
+    Assert.assertTrue(m0.get(3, 0) == 208.0);
+    Assert.assertTrue(m0.get(3, 1) == 224.0);
+    Assert.assertTrue(m0.get(3, 2) == 240.0);
+    Assert.assertTrue(m0.get(3, 3) == 256.0);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testScaleRowContextEquivalentND()
+  {
+    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+    final MatrixM4x4D m0 = new MatrixM4x4D();
+    final MatrixM4x4D m1 = new MatrixM4x4D();
+
+    m0.set(0, 0, 1.0);
+    m0.set(0, 1, 2.0);
+    m0.set(0, 2, 3.0);
+    m0.set(0, 3, 4.0);
+
+    m0.set(1, 0, 5.0);
+    m0.set(1, 1, 6.0);
+    m0.set(1, 2, 7.0);
+    m0.set(1, 3, 8.0);
+
+    m0.set(2, 0, 9.0);
+    m0.set(2, 1, 10.0);
+    m0.set(2, 2, 11.0);
+    m0.set(2, 3, 12.0);
+
+    m0.set(3, 0, 13.0);
+    m0.set(3, 1, 14.0);
+    m0.set(3, 2, 15.0);
+    m0.set(3, 3, 16.0);
+
+    MatrixM4x4D.scaleRowWithContext(context, m0, 0, 2.0, m1);
+    MatrixM4x4D.scaleRowWithContext(context, m0, 1, 4.0, m1);
+    MatrixM4x4D.scaleRowWithContext(context, m0, 2, 8.0, m1);
+    MatrixM4x4D.scaleRowWithContext(context, m0, 3, 16.0, m1);
 
     Assert.assertTrue(m1.get(0, 0) == 2.0);
     Assert.assertTrue(m1.get(0, 1) == 4.0);
@@ -2286,6 +3003,33 @@ public class MatrixM4x4DTest
     Assert.assertTrue(m.set(3, 1, 47.0).get(3, 1) == 47.0);
     Assert.assertTrue(m.set(3, 2, 53.0).get(3, 2) == 53.0);
     Assert.assertTrue(m.set(3, 3, 59.0).get(3, 3) == 59.0);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testSetGetInterfaceIdentity()
+  {
+    final MatrixM4x4D m = new MatrixM4x4D();
+
+    Assert.assertTrue(m.set(0, 0, 3.0).getRowColumnD(0, 0) == 3.0);
+    Assert.assertTrue(m.set(0, 1, 5.0).getRowColumnD(0, 1) == 5.0);
+    Assert.assertTrue(m.set(0, 2, 7.0).getRowColumnD(0, 2) == 7.0);
+    Assert.assertTrue(m.set(0, 3, 11.0).getRowColumnD(0, 3) == 11.0);
+
+    Assert.assertTrue(m.set(1, 0, 13.0).getRowColumnD(1, 0) == 13.0);
+    Assert.assertTrue(m.set(1, 1, 17.0).getRowColumnD(1, 1) == 17.0);
+    Assert.assertTrue(m.set(1, 2, 19.0).getRowColumnD(1, 2) == 19.0);
+    Assert.assertTrue(m.set(1, 3, 23.0).getRowColumnD(1, 3) == 23.0);
+
+    Assert.assertTrue(m.set(2, 0, 29.0).getRowColumnD(2, 0) == 29.0);
+    Assert.assertTrue(m.set(2, 1, 31.0).getRowColumnD(2, 1) == 31.0);
+    Assert.assertTrue(m.set(2, 2, 37.0).getRowColumnD(2, 2) == 37.0);
+    Assert.assertTrue(m.set(2, 3, 41.0).getRowColumnD(2, 3) == 41.0);
+
+    Assert.assertTrue(m.set(3, 0, 43.0).getRowColumnD(3, 0) == 43.0);
+    Assert.assertTrue(m.set(3, 1, 47.0).getRowColumnD(3, 1) == 47.0);
+    Assert.assertTrue(m.set(3, 2, 53.0).getRowColumnD(3, 2) == 53.0);
+    Assert.assertTrue(m.set(3, 3, 59.0).getRowColumnD(3, 3) == 59.0);
   }
 
   @SuppressWarnings("static-method") @Test public void testStorage()

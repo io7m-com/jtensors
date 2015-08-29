@@ -20,18 +20,22 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 import com.io7m.jaux.functional.Option;
 
 /**
  * A 3x3 mutable matrix type with double precision elements.
+ * 
+ * Values of this type cannot be accessed safely from multiple threads without
+ * explicit synchronization.
  */
 
-public final class MatrixM3x3D
+@NotThreadSafe public final class MatrixM3x3D implements MatrixReadable3x3D
 {
+  private static final double[] identity_row_0 = { 1.0, 0.0, 0.0 };
   private static final double[] identity_row_1 = { 0.0, 1.0, 0.0 };
-
   private static final double[] identity_row_2 = { 0.0, 0.0, 1.0 };
-
   private static final double[] zero_row       = { 0.0, 0.0, 0.0 };
 
   /**
@@ -47,12 +51,15 @@ public final class MatrixM3x3D
    */
 
   public static MatrixM3x3D add(
-    final MatrixM3x3D m0,
-    final MatrixM3x3D m1,
+    final MatrixReadable3x3D m0,
+    final MatrixReadable3x3D m1,
     final MatrixM3x3D out)
   {
-    for (int index = 0; index < 9; ++index) {
-      out.view.put(index, m0.view.get(index) + m1.view.get(index));
+    final DoubleBuffer m0_view = m0.getDoubleBuffer();
+    final DoubleBuffer m1_view = m1.getDoubleBuffer();
+
+    for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
+      out.view.put(index, m0_view.get(index) + m1_view.get(index));
     }
     return out;
   }
@@ -102,7 +109,7 @@ public final class MatrixM3x3D
    */
 
   public static MatrixM3x3D addRowScaled(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
     final int row_c,
@@ -129,7 +136,7 @@ public final class MatrixM3x3D
   }
 
   private static MatrixM3x3D addRowScaledUnsafe(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
     final int row_c,
@@ -149,9 +156,9 @@ public final class MatrixM3x3D
   private static int columnCheck(
     final int column)
   {
-    if ((column < 0) || (column > 2)) {
+    if ((column < 0) || (column >= MatrixM3x3D.VIEW_COLS)) {
       throw new IndexOutOfBoundsException(
-        "column must be in the range 0 <= column < 3");
+        "column must be in the range 0 <= column < " + MatrixM3x3D.VIEW_COLS);
     }
     return column;
   }
@@ -168,11 +175,12 @@ public final class MatrixM3x3D
    */
 
   public static MatrixM3x3D copy(
-    final MatrixM3x3D input,
+    final MatrixReadable3x3D input,
     final MatrixM3x3D output)
   {
-    for (int index = 0; index < 9; ++index) {
-      output.view.put(index, input.view.get(index));
+    final DoubleBuffer source_view = input.getDoubleBuffer();
+    for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
+      output.view.put(index, source_view.get(index));
     }
     return output;
   }
@@ -185,19 +193,19 @@ public final class MatrixM3x3D
    */
 
   public static double determinant(
-    final MatrixM3x3D m)
+    final MatrixReadable3x3D m)
   {
-    final double r0c0 = m.getUnsafe(0, 0);
-    final double r0c1 = m.getUnsafe(0, 1);
-    final double r0c2 = m.getUnsafe(0, 2);
+    final double r0c0 = m.getRowColumnD(0, 0);
+    final double r0c1 = m.getRowColumnD(0, 1);
+    final double r0c2 = m.getRowColumnD(0, 2);
 
-    final double r1c0 = m.getUnsafe(1, 0);
-    final double r1c1 = m.getUnsafe(1, 1);
-    final double r1c2 = m.getUnsafe(1, 2);
+    final double r1c0 = m.getRowColumnD(1, 0);
+    final double r1c1 = m.getRowColumnD(1, 1);
+    final double r1c2 = m.getRowColumnD(1, 2);
 
-    final double r2c0 = m.getUnsafe(2, 0);
-    final double r2c1 = m.getUnsafe(2, 1);
-    final double r2c2 = m.getUnsafe(2, 2);
+    final double r2c0 = m.getRowColumnD(2, 0);
+    final double r2c1 = m.getRowColumnD(2, 1);
+    final double r2c2 = m.getRowColumnD(2, 2);
 
     double sum = 0;
 
@@ -244,7 +252,7 @@ public final class MatrixM3x3D
    */
 
   public static MatrixM3x3D exchangeRows(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
     final MatrixM3x3D out)
@@ -283,7 +291,7 @@ public final class MatrixM3x3D
   }
 
   private static MatrixM3x3D exchangeRowsUnsafe(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
     final MatrixM3x3D out)
@@ -305,11 +313,12 @@ public final class MatrixM3x3D
    */
 
   public static double get(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final int row,
     final int column)
   {
-    return m.view.get(MatrixM3x3D.indexChecked(row, column));
+    final DoubleBuffer source_view = m.getDoubleBuffer();
+    return source_view.get(MatrixM3x3D.indexChecked(row, column));
   }
 
   private final static int indexChecked(
@@ -350,7 +359,7 @@ public final class MatrixM3x3D
    *          The input matrix.
    */
 
-  public static Option<MatrixM3x3D> invert(
+  @Deprecated public static Option<MatrixM3x3D> invert(
     final MatrixM3x3D m)
   {
     return MatrixM3x3D.invert(m, m);
@@ -371,7 +380,7 @@ public final class MatrixM3x3D
    */
 
   public static Option<MatrixM3x3D> invert(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final MatrixM3x3D out)
   {
     final double d = MatrixM3x3D.determinant(m);
@@ -382,17 +391,17 @@ public final class MatrixM3x3D
 
     final double d_inv = 1 / d;
 
-    final double r0c0 = m.getUnsafe(0, 0);
-    final double r0c1 = m.getUnsafe(0, 1);
-    final double r0c2 = m.getUnsafe(0, 2);
+    final double r0c0 = m.getRowColumnD(0, 0);
+    final double r0c1 = m.getRowColumnD(0, 1);
+    final double r0c2 = m.getRowColumnD(0, 2);
 
-    final double r1c0 = m.getUnsafe(1, 0);
-    final double r1c1 = m.getUnsafe(1, 1);
-    final double r1c2 = m.getUnsafe(1, 2);
+    final double r1c0 = m.getRowColumnD(1, 0);
+    final double r1c1 = m.getRowColumnD(1, 1);
+    final double r1c2 = m.getRowColumnD(1, 2);
 
-    final double r2c0 = m.getUnsafe(2, 0);
-    final double r2c1 = m.getUnsafe(2, 1);
-    final double r2c2 = m.getUnsafe(2, 2);
+    final double r2c0 = m.getRowColumnD(2, 0);
+    final double r2c1 = m.getRowColumnD(2, 1);
+    final double r2c2 = m.getRowColumnD(2, 2);
 
     MatrixM3x3D.set(out, 0, 0, (r1c1 * r2c2) - (r1c2 * r2c1));
     MatrixM3x3D.set(out, 0, 1, (r0c2 * r2c1) - (r0c1 * r2c2));
@@ -408,6 +417,24 @@ public final class MatrixM3x3D
 
     MatrixM3x3D.scaleInPlace(out, d_inv);
     return new Option.Some<MatrixM3x3D>(out);
+  }
+
+  /**
+   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
+   * matrix to <code>m</code>. The function returns <code>Some(m)</code> iff
+   * it was possible to invert the matrix, and <code>None</code> otherwise. It
+   * is not possible to invert a matrix that has a determinant of
+   * <code>0</code>.
+   * 
+   * @see com.io7m.jtensors.MatrixM3x3D#determinant(MatrixM3x3D)
+   * @param m
+   *          The input matrix.
+   */
+
+  public static Option<MatrixM3x3D> invertInPlace(
+    final MatrixM3x3D m)
+  {
+    return MatrixM3x3D.invert(m, m);
   }
 
   /**
@@ -464,54 +491,54 @@ public final class MatrixM3x3D
    */
 
   public static MatrixM3x3D multiply(
-    final MatrixM3x3D m0,
-    final MatrixM3x3D m1,
+    final MatrixReadable3x3D m0,
+    final MatrixReadable3x3D m1,
     final MatrixM3x3D out)
   {
     double r0c0 = 0;
-    r0c0 += m0.getUnsafe(0, 0) * m1.getUnsafe(0, 0);
-    r0c0 += m0.getUnsafe(0, 1) * m1.getUnsafe(1, 0);
-    r0c0 += m0.getUnsafe(0, 2) * m1.getUnsafe(2, 0);
+    r0c0 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 0);
+    r0c0 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 0);
+    r0c0 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 0);
 
     double r1c0 = 0;
-    r1c0 += m0.getUnsafe(1, 0) * m1.getUnsafe(0, 0);
-    r1c0 += m0.getUnsafe(1, 1) * m1.getUnsafe(1, 0);
-    r1c0 += m0.getUnsafe(1, 2) * m1.getUnsafe(2, 0);
+    r1c0 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 0);
+    r1c0 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 0);
+    r1c0 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 0);
 
     double r2c0 = 0;
-    r2c0 += m0.getUnsafe(2, 0) * m1.getUnsafe(0, 0);
-    r2c0 += m0.getUnsafe(2, 1) * m1.getUnsafe(1, 0);
-    r2c0 += m0.getUnsafe(2, 2) * m1.getUnsafe(2, 0);
+    r2c0 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 0);
+    r2c0 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 0);
+    r2c0 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 0);
 
     double r0c1 = 0;
-    r0c1 += m0.getUnsafe(0, 0) * m1.getUnsafe(0, 1);
-    r0c1 += m0.getUnsafe(0, 1) * m1.getUnsafe(1, 1);
-    r0c1 += m0.getUnsafe(0, 2) * m1.getUnsafe(2, 1);
+    r0c1 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 1);
+    r0c1 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 1);
+    r0c1 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 1);
 
     double r1c1 = 0;
-    r1c1 += m0.getUnsafe(1, 0) * m1.getUnsafe(0, 1);
-    r1c1 += m0.getUnsafe(1, 1) * m1.getUnsafe(1, 1);
-    r1c1 += m0.getUnsafe(1, 2) * m1.getUnsafe(2, 1);
+    r1c1 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 1);
+    r1c1 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 1);
+    r1c1 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 1);
 
     double r2c1 = 0;
-    r2c1 += m0.getUnsafe(2, 0) * m1.getUnsafe(0, 1);
-    r2c1 += m0.getUnsafe(2, 1) * m1.getUnsafe(1, 1);
-    r2c1 += m0.getUnsafe(2, 2) * m1.getUnsafe(2, 1);
+    r2c1 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 1);
+    r2c1 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 1);
+    r2c1 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 1);
 
     double r0c2 = 0;
-    r0c2 += m0.getUnsafe(0, 0) * m1.getUnsafe(0, 2);
-    r0c2 += m0.getUnsafe(0, 1) * m1.getUnsafe(1, 2);
-    r0c2 += m0.getUnsafe(0, 2) * m1.getUnsafe(2, 2);
+    r0c2 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 2);
+    r0c2 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 2);
+    r0c2 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 2);
 
     double r1c2 = 0;
-    r1c2 += m0.getUnsafe(1, 0) * m1.getUnsafe(0, 2);
-    r1c2 += m0.getUnsafe(1, 1) * m1.getUnsafe(1, 2);
-    r1c2 += m0.getUnsafe(1, 2) * m1.getUnsafe(2, 2);
+    r1c2 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 2);
+    r1c2 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 2);
+    r1c2 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 2);
 
     double r2c2 = 0;
-    r2c2 += m0.getUnsafe(2, 0) * m1.getUnsafe(0, 2);
-    r2c2 += m0.getUnsafe(2, 1) * m1.getUnsafe(1, 2);
-    r2c2 += m0.getUnsafe(2, 2) * m1.getUnsafe(2, 2);
+    r2c2 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 2);
+    r2c2 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 2);
+    r2c2 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 2);
 
     out.setUnsafe(0, 0, r0c0);
     out.setUnsafe(0, 1, r0c1);
@@ -529,24 +556,6 @@ public final class MatrixM3x3D
   }
 
   /**
-   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
-   * writing the result to <code>m0</code>.
-   * 
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3D multiplyInPlace(
-    final MatrixM3x3D m0,
-    final MatrixM3x3D m1)
-  {
-    return MatrixM3x3D.multiply(m0, m1, m0);
-  }
-
-  /**
    * Multiply the matrix <code>m</code> with the vector <code>v</code>,
    * writing the resulting vector to <code>out</code>.
    * 
@@ -560,7 +569,7 @@ public final class MatrixM3x3D
    */
 
   public static VectorM3D multiplyVector3D(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final VectorReadable3D v,
     final VectorM3D out)
   {
@@ -578,12 +587,30 @@ public final class MatrixM3x3D
   }
 
   /**
+   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
+   * writing the result to <code>m0</code>.
+   * 
+   * @param m0
+   *          The left input vector.
+   * @param m1
+   *          The right input vector.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3D multiplyInPlace(
+    final MatrixM3x3D m0,
+    final MatrixReadable3x3D m1)
+  {
+    return MatrixM3x3D.multiply(m0, m1, m0);
+  }
+
+  /**
    * Return row <code>row</code> of the matrix <code>m</code> in the vector
    * <code>out</code>.
    */
 
   public static VectorM3D row(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final int row,
     final VectorM3D out)
   {
@@ -593,21 +620,21 @@ public final class MatrixM3x3D
   private static int rowCheck(
     final int row)
   {
-    if ((row < 0) || (row > 2)) {
+    if ((row < 0) || (row >= MatrixM3x3D.VIEW_ROWS)) {
       throw new IndexOutOfBoundsException(
-        "row must be in the range 0 <= row < 3");
+        "row must be in the range 0 <= row < " + MatrixM3x3D.VIEW_ROWS);
     }
     return row;
   }
 
   public static VectorM3D rowUnsafe(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final int row,
     final VectorM3D out)
   {
-    out.x = m.getUnsafe(row, 0);
-    out.y = m.getUnsafe(row, 1);
-    out.z = m.getUnsafe(row, 2);
+    out.x = m.getRowColumnD(row, 0);
+    out.y = m.getRowColumnD(row, 1);
+    out.z = m.getRowColumnD(row, 2);
     return out;
   }
 
@@ -623,12 +650,13 @@ public final class MatrixM3x3D
    */
 
   public static MatrixM3x3D scale(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final double r,
     final MatrixM3x3D out)
   {
-    for (int index = 0; index < 9; ++index) {
-      out.view.put(index, m.view.get(index) * r);
+    final DoubleBuffer source_view = m.getDoubleBuffer();
+    for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
+      out.view.put(index, source_view.get(index) * r);
     }
     return out;
   }
@@ -700,7 +728,7 @@ public final class MatrixM3x3D
    */
 
   public static MatrixM3x3D scaleRow(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final int row,
     final double r,
     final MatrixM3x3D out)
@@ -709,7 +737,7 @@ public final class MatrixM3x3D
   }
 
   private static MatrixM3x3D scaleRowUnsafe(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final int row,
     final double r,
     final MatrixM3x3D out)
@@ -794,16 +822,19 @@ public final class MatrixM3x3D
    */
 
   public static MatrixM3x3D translateByVector2D(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final VectorReadable2D v,
     final MatrixM3x3D out)
   {
     final double vx = v.getXD();
     final double vy = v.getYD();
 
-    final double c2r0 = (m.getUnsafe(0, 0) * vx) + (m.getUnsafe(0, 1) * vy);
-    final double c2r1 = (m.getUnsafe(1, 0) * vx) + (m.getUnsafe(1, 1) * vy);
-    final double c2r2 = (m.getUnsafe(2, 0) * vx) + (m.getUnsafe(2, 1) * vy);
+    final double c2r0 =
+      (m.getRowColumnD(0, 0) * vx) + (m.getRowColumnD(0, 1) * vy);
+    final double c2r1 =
+      (m.getRowColumnD(1, 0) * vx) + (m.getRowColumnD(1, 1) * vy);
+    final double c2r2 =
+      (m.getRowColumnD(2, 0) * vx) + (m.getRowColumnD(2, 1) * vy);
 
     out.setUnsafe(0, 2, out.getUnsafe(0, 2) + c2r0);
     out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
@@ -844,16 +875,19 @@ public final class MatrixM3x3D
    */
 
   public static MatrixM3x3D translateByVector2I(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final VectorReadable2I v,
     final MatrixM3x3D out)
   {
     final double vx = v.getXI();
     final double vy = v.getYI();
 
-    final double c2r0 = (m.getUnsafe(0, 0) * vx) + (m.getUnsafe(0, 1) * vy);
-    final double c2r1 = (m.getUnsafe(1, 0) * vx) + (m.getUnsafe(1, 1) * vy);
-    final double c2r2 = (m.getUnsafe(2, 0) * vx) + (m.getUnsafe(2, 1) * vy);
+    final double c2r0 =
+      (m.getRowColumnD(0, 0) * vx) + (m.getRowColumnD(0, 1) * vy);
+    final double c2r1 =
+      (m.getRowColumnD(1, 0) * vx) + (m.getRowColumnD(1, 1) * vy);
+    final double c2r2 =
+      (m.getRowColumnD(2, 0) * vx) + (m.getRowColumnD(2, 1) * vy);
 
     out.setUnsafe(0, 2, out.getUnsafe(0, 2) + c2r0);
     out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
@@ -892,11 +926,12 @@ public final class MatrixM3x3D
    */
 
   public static MatrixM3x3D transpose(
-    final MatrixM3x3D m,
+    final MatrixReadable3x3D m,
     final MatrixM3x3D out)
   {
-    for (int index = 0; index < 9; ++index) {
-      out.view.put(index, m.view.get(index));
+    final DoubleBuffer source_view = m.getDoubleBuffer();
+    for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
+      out.view.put(index, source_view.get(index));
     }
     return MatrixM3x3D.transposeInPlace(out);
   }
@@ -913,43 +948,72 @@ public final class MatrixM3x3D
   public static MatrixM3x3D transposeInPlace(
     final MatrixM3x3D m)
   {
-    for (int row = 0; row < (3 - 1); row++) {
-      for (int column = row + 1; column < 3; column++) {
-        final double x = m.view.get((row * 3) + column);
-        m.view.put((row * 3) + column, m.view.get(row + (3 * column)));
-        m.view.put(row + (3 * column), x);
+    for (int row = 0; row < (MatrixM3x3D.VIEW_ROWS - 1); row++) {
+      for (int column = row + 1; column < MatrixM3x3D.VIEW_COLS; column++) {
+        final double x = m.view.get((row * MatrixM3x3D.VIEW_ROWS) + column);
+        m.view.put(
+          (row * MatrixM3x3D.VIEW_ROWS) + column,
+          m.view.get(row + (MatrixM3x3D.VIEW_COLS * column)));
+        m.view.put(row + (MatrixM3x3D.VIEW_COLS * column), x);
       }
     }
     return m;
   }
 
-  private final ByteBuffer      data;
+  private final ByteBuffer   data;
+  private final DoubleBuffer view;
+  private static final int   VIEW_ELEMENT_SIZE;
+  private static final int   VIEW_ELEMENTS;
+  private static final int   VIEW_BYTES;
+  private static final int   VIEW_COLS;
+  private static final int   VIEW_ROWS;
 
-  private final DoubleBuffer    view;
-
-  private static final double[] identity_row_0 = { 1.0, 0.0, 0.0 };
+  static {
+    VIEW_ROWS = 3;
+    VIEW_COLS = 3;
+    VIEW_ELEMENT_SIZE = 8;
+    VIEW_ELEMENTS = MatrixM3x3D.VIEW_ROWS * MatrixM3x3D.VIEW_COLS;
+    VIEW_BYTES = MatrixM3x3D.VIEW_ELEMENTS * MatrixM3x3D.VIEW_ELEMENT_SIZE;
+  }
 
   public MatrixM3x3D()
   {
     this.data =
-      ByteBuffer.allocateDirect(3 * 3 * 8).order(ByteOrder.nativeOrder());
+      ByteBuffer.allocateDirect(MatrixM3x3D.VIEW_BYTES).order(
+        ByteOrder.nativeOrder());
     this.view = this.data.asDoubleBuffer();
     MatrixM3x3D.setIdentity(this);
   }
 
   public MatrixM3x3D(
-    final MatrixM3x3D source)
+    final MatrixReadable3x3D source)
   {
     this.data =
-      ByteBuffer.allocateDirect(3 * 3 * 8).order(ByteOrder.nativeOrder());
+      ByteBuffer.allocateDirect(MatrixM3x3D.VIEW_BYTES).order(
+        ByteOrder.nativeOrder());
     this.view = this.data.asDoubleBuffer();
 
-    for (int index = 0; index < 9; ++index) {
-      this.view.put(index, source.view.get(index));
+    final DoubleBuffer source_view = source.getDoubleBuffer();
+    for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
+      this.view.put(index, source_view.get(index));
     }
   }
 
   public double get(
+    final int row,
+    final int column)
+  {
+    return MatrixM3x3D.get(this, row, column);
+  }
+
+  @Override public DoubleBuffer getDoubleBuffer()
+  {
+    final ByteBuffer b =
+      this.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
+    return b.asDoubleBuffer();
+  }
+
+  @Override public double getRowColumnD(
     final int row,
     final int column)
   {
@@ -984,11 +1048,11 @@ public final class MatrixM3x3D
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    for (int row = 0; row < 3; ++row) {
+    for (int row = 0; row < MatrixM3x3D.VIEW_ROWS; ++row) {
       builder.append("[");
-      for (int column = 0; column < 3; ++column) {
+      for (int column = 0; column < MatrixM3x3D.VIEW_COLS; ++column) {
         builder.append(MatrixM3x3D.get(this, row, column));
-        if (column < 2) {
+        if (column < (MatrixM3x3D.VIEW_COLS - 1)) {
           builder.append(" ");
         }
       }

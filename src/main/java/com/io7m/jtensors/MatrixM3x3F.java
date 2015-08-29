@@ -20,14 +20,20 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 import com.io7m.jaux.functional.Option;
 
 /**
  * A 3x3 mutable matrix type with single precision elements.
+ * 
+ * Values of this type cannot be accessed safely from multiple threads without
+ * explicit synchronization.
  */
 
-public final class MatrixM3x3F
+@NotThreadSafe public final class MatrixM3x3F implements MatrixReadable3x3F
 {
+  private static final float[] identity_row_0 = { 1.0f, 0.0f, 0.0f };
   private static final float[] identity_row_1 = { 0.0f, 1.0f, 0.0f };
   private static final float[] identity_row_2 = { 0.0f, 0.0f, 1.0f };
   private static final float[] zero_row       = { 0.0f, 0.0f, 0.0f };
@@ -45,12 +51,15 @@ public final class MatrixM3x3F
    */
 
   public static MatrixM3x3F add(
-    final MatrixM3x3F m0,
-    final MatrixM3x3F m1,
+    final MatrixReadable3x3F m0,
+    final MatrixReadable3x3F m1,
     final MatrixM3x3F out)
   {
-    for (int index = 0; index < 9; ++index) {
-      out.view.put(index, m0.view.get(index) + m1.view.get(index));
+    final FloatBuffer m0_view = m0.getFloatBuffer();
+    final FloatBuffer m1_view = m1.getFloatBuffer();
+
+    for (int index = 0; index < MatrixM3x3F.VIEW_ELEMENTS; ++index) {
+      out.view.put(index, m0_view.get(index) + m1_view.get(index));
     }
     return out;
   }
@@ -100,7 +109,7 @@ public final class MatrixM3x3F
    */
 
   public static MatrixM3x3F addRowScaled(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final int row_a,
     final int row_b,
     final int row_c,
@@ -116,30 +125,6 @@ public final class MatrixM3x3F
       out);
   }
 
-  /**
-   * Add the values in row <code>row_b</code> to the values in row
-   * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
-   * row <code>row_c</code> of the matrix <code>m</code>.
-   * 
-   * This is one of the three "elementary" operations defined on matrices.
-   * 
-   * @see <a
-   *      href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary
-   *      operations</a>.
-   * 
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
-   * @return <code>m</code>
-   */
-
   public static MatrixM3x3F addRowScaledInPlace(
     final MatrixM3x3F m,
     final int row_a,
@@ -151,7 +136,7 @@ public final class MatrixM3x3F
   }
 
   private static MatrixM3x3F addRowScaledUnsafe(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final int row_a,
     final int row_b,
     final int row_c,
@@ -171,9 +156,9 @@ public final class MatrixM3x3F
   private static int columnCheck(
     final int column)
   {
-    if ((column < 0) || (column > 2)) {
+    if ((column < 0) || (column >= MatrixM3x3F.VIEW_COLS)) {
       throw new IndexOutOfBoundsException(
-        "column must be in the range 0 <= column < 3");
+        "column must be in the range 0 <= column < " + MatrixM3x3F.VIEW_COLS);
     }
     return column;
   }
@@ -190,11 +175,12 @@ public final class MatrixM3x3F
    */
 
   public static MatrixM3x3F copy(
-    final MatrixM3x3F input,
+    final MatrixReadable3x3F input,
     final MatrixM3x3F output)
   {
-    for (int index = 0; index < 9; ++index) {
-      output.view.put(index, input.view.get(index));
+    final FloatBuffer source_view = input.getFloatBuffer();
+    for (int index = 0; index < MatrixM3x3F.VIEW_ELEMENTS; ++index) {
+      output.view.put(index, source_view.get(index));
     }
     return output;
   }
@@ -207,19 +193,19 @@ public final class MatrixM3x3F
    */
 
   public static float determinant(
-    final MatrixM3x3F m)
+    final MatrixReadable3x3F m)
   {
-    final float r0c0 = m.getUnsafe(0, 0);
-    final float r0c1 = m.getUnsafe(0, 1);
-    final float r0c2 = m.getUnsafe(0, 2);
+    final float r0c0 = m.getRowColumnF(0, 0);
+    final float r0c1 = m.getRowColumnF(0, 1);
+    final float r0c2 = m.getRowColumnF(0, 2);
 
-    final float r1c0 = m.getUnsafe(1, 0);
-    final float r1c1 = m.getUnsafe(1, 1);
-    final float r1c2 = m.getUnsafe(1, 2);
+    final float r1c0 = m.getRowColumnF(1, 0);
+    final float r1c1 = m.getRowColumnF(1, 1);
+    final float r1c2 = m.getRowColumnF(1, 2);
 
-    final float r2c0 = m.getUnsafe(2, 0);
-    final float r2c1 = m.getUnsafe(2, 1);
-    final float r2c2 = m.getUnsafe(2, 2);
+    final float r2c0 = m.getRowColumnF(2, 0);
+    final float r2c1 = m.getRowColumnF(2, 1);
+    final float r2c2 = m.getRowColumnF(2, 2);
 
     float sum = 0;
 
@@ -231,7 +217,7 @@ public final class MatrixM3x3F
   }
 
   /**
-   * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
+   * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
    * This is one of the three "elementary" operations defined on matrices.
    * 
@@ -251,7 +237,7 @@ public final class MatrixM3x3F
    */
 
   public static MatrixM3x3F exchangeRows(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final int row_a,
     final int row_b,
     final MatrixM3x3F out)
@@ -264,7 +250,7 @@ public final class MatrixM3x3F
   }
 
   /**
-   * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
+   * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>m</code> . This
    * is one of the three "elementary" operations defined on matrices.
    * 
@@ -290,7 +276,7 @@ public final class MatrixM3x3F
   }
 
   private static MatrixM3x3F exchangeRowsUnsafe(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final int row_a,
     final int row_b,
     final MatrixM3x3F out)
@@ -327,11 +313,12 @@ public final class MatrixM3x3F
    */
 
   public static float get(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final int row,
     final int column)
   {
-    return m.view.get(MatrixM3x3F.indexChecked(row, column));
+    final FloatBuffer source_view = m.getFloatBuffer();
+    return source_view.get(MatrixM3x3F.indexChecked(row, column));
   }
 
   private final static int indexChecked(
@@ -375,7 +362,7 @@ public final class MatrixM3x3F
    */
 
   public static Option<MatrixM3x3F> invert(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final MatrixM3x3F out)
   {
     final float d = MatrixM3x3F.determinant(m);
@@ -386,29 +373,29 @@ public final class MatrixM3x3F
 
     final float d_inv = 1 / d;
 
-    final float r0c0 = m.getUnsafe(0, 0);
-    final float r0c1 = m.getUnsafe(0, 1);
-    final float r0c2 = m.getUnsafe(0, 2);
+    final float r0c0 = m.getRowColumnF(0, 0);
+    final float r0c1 = m.getRowColumnF(0, 1);
+    final float r0c2 = m.getRowColumnF(0, 2);
 
-    final float r1c0 = m.getUnsafe(1, 0);
-    final float r1c1 = m.getUnsafe(1, 1);
-    final float r1c2 = m.getUnsafe(1, 2);
+    final float r1c0 = m.getRowColumnF(1, 0);
+    final float r1c1 = m.getRowColumnF(1, 1);
+    final float r1c2 = m.getRowColumnF(1, 2);
 
-    final float r2c0 = m.getUnsafe(2, 0);
-    final float r2c1 = m.getUnsafe(2, 1);
-    final float r2c2 = m.getUnsafe(2, 2);
+    final float r2c0 = m.getRowColumnF(2, 0);
+    final float r2c1 = m.getRowColumnF(2, 1);
+    final float r2c2 = m.getRowColumnF(2, 2);
 
-    out.setUnsafe(0, 0, (r1c1 * r2c2) - (r1c2 * r2c1));
-    out.setUnsafe(0, 1, (r0c2 * r2c1) - (r0c1 * r2c2));
-    out.setUnsafe(0, 2, (r0c1 * r1c2) - (r0c2 * r1c1));
+    MatrixM3x3F.set(out, 0, 0, (r1c1 * r2c2) - (r1c2 * r2c1));
+    MatrixM3x3F.set(out, 0, 1, (r0c2 * r2c1) - (r0c1 * r2c2));
+    MatrixM3x3F.set(out, 0, 2, (r0c1 * r1c2) - (r0c2 * r1c1));
 
-    out.setUnsafe(1, 0, (r1c2 * r2c0) - (r1c0 * r2c2));
-    out.setUnsafe(1, 1, (r0c0 * r2c2) - (r0c2 * r2c0));
-    out.setUnsafe(1, 2, (r0c2 * r1c0) - (r0c0 * r1c2));
+    MatrixM3x3F.set(out, 1, 0, (r1c2 * r2c0) - (r1c0 * r2c2));
+    MatrixM3x3F.set(out, 1, 1, (r0c0 * r2c2) - (r0c2 * r2c0));
+    MatrixM3x3F.set(out, 1, 2, (r0c2 * r1c0) - (r0c0 * r1c2));
 
-    out.setUnsafe(2, 0, (r1c0 * r2c1) - (r1c1 * r2c0));
-    out.setUnsafe(2, 1, (r0c1 * r2c0) - (r0c0 * r2c1));
-    out.setUnsafe(2, 2, (r0c0 * r1c1) - (r0c1 * r1c0));
+    MatrixM3x3F.set(out, 2, 0, (r1c0 * r2c1) - (r1c1 * r2c0));
+    MatrixM3x3F.set(out, 2, 1, (r0c1 * r2c0) - (r0c0 * r2c1));
+    MatrixM3x3F.set(out, 2, 2, (r0c0 * r1c1) - (r0c1 * r1c0));
 
     MatrixM3x3F.scaleInPlace(out, d_inv);
     return new Option.Some<MatrixM3x3F>(out);
@@ -486,54 +473,54 @@ public final class MatrixM3x3F
    */
 
   public static MatrixM3x3F multiply(
-    final MatrixM3x3F m0,
-    final MatrixM3x3F m1,
+    final MatrixReadable3x3F m0,
+    final MatrixReadable3x3F m1,
     final MatrixM3x3F out)
   {
     float r0c0 = 0;
-    r0c0 += m0.getUnsafe(0, 0) * m1.getUnsafe(0, 0);
-    r0c0 += m0.getUnsafe(0, 1) * m1.getUnsafe(1, 0);
-    r0c0 += m0.getUnsafe(0, 2) * m1.getUnsafe(2, 0);
+    r0c0 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 0);
+    r0c0 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 0);
+    r0c0 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 0);
 
     float r1c0 = 0;
-    r1c0 += m0.getUnsafe(1, 0) * m1.getUnsafe(0, 0);
-    r1c0 += m0.getUnsafe(1, 1) * m1.getUnsafe(1, 0);
-    r1c0 += m0.getUnsafe(1, 2) * m1.getUnsafe(2, 0);
+    r1c0 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 0);
+    r1c0 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 0);
+    r1c0 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 0);
 
     float r2c0 = 0;
-    r2c0 += m0.getUnsafe(2, 0) * m1.getUnsafe(0, 0);
-    r2c0 += m0.getUnsafe(2, 1) * m1.getUnsafe(1, 0);
-    r2c0 += m0.getUnsafe(2, 2) * m1.getUnsafe(2, 0);
+    r2c0 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 0);
+    r2c0 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 0);
+    r2c0 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 0);
 
     float r0c1 = 0;
-    r0c1 += m0.getUnsafe(0, 0) * m1.getUnsafe(0, 1);
-    r0c1 += m0.getUnsafe(0, 1) * m1.getUnsafe(1, 1);
-    r0c1 += m0.getUnsafe(0, 2) * m1.getUnsafe(2, 1);
+    r0c1 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 1);
+    r0c1 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 1);
+    r0c1 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 1);
 
     float r1c1 = 0;
-    r1c1 += m0.getUnsafe(1, 0) * m1.getUnsafe(0, 1);
-    r1c1 += m0.getUnsafe(1, 1) * m1.getUnsafe(1, 1);
-    r1c1 += m0.getUnsafe(1, 2) * m1.getUnsafe(2, 1);
+    r1c1 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 1);
+    r1c1 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 1);
+    r1c1 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 1);
 
     float r2c1 = 0;
-    r2c1 += m0.getUnsafe(2, 0) * m1.getUnsafe(0, 1);
-    r2c1 += m0.getUnsafe(2, 1) * m1.getUnsafe(1, 1);
-    r2c1 += m0.getUnsafe(2, 2) * m1.getUnsafe(2, 1);
+    r2c1 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 1);
+    r2c1 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 1);
+    r2c1 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 1);
 
     float r0c2 = 0;
-    r0c2 += m0.getUnsafe(0, 0) * m1.getUnsafe(0, 2);
-    r0c2 += m0.getUnsafe(0, 1) * m1.getUnsafe(1, 2);
-    r0c2 += m0.getUnsafe(0, 2) * m1.getUnsafe(2, 2);
+    r0c2 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 2);
+    r0c2 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 2);
+    r0c2 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 2);
 
     float r1c2 = 0;
-    r1c2 += m0.getUnsafe(1, 0) * m1.getUnsafe(0, 2);
-    r1c2 += m0.getUnsafe(1, 1) * m1.getUnsafe(1, 2);
-    r1c2 += m0.getUnsafe(1, 2) * m1.getUnsafe(2, 2);
+    r1c2 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 2);
+    r1c2 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 2);
+    r1c2 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 2);
 
     float r2c2 = 0;
-    r2c2 += m0.getUnsafe(2, 0) * m1.getUnsafe(0, 2);
-    r2c2 += m0.getUnsafe(2, 1) * m1.getUnsafe(1, 2);
-    r2c2 += m0.getUnsafe(2, 2) * m1.getUnsafe(2, 2);
+    r2c2 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 2);
+    r2c2 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 2);
+    r2c2 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 2);
 
     out.setUnsafe(0, 0, r0c0);
     out.setUnsafe(0, 1, r0c1);
@@ -563,8 +550,8 @@ public final class MatrixM3x3F
    * @return <code>out</code>
    */
 
-  public static VectorM3F multiplyByVector3F(
-    final MatrixM3x3F m,
+  public static VectorM3F multiplyVector3F(
+    final MatrixReadable3x3F m,
     final VectorReadable3F v,
     final VectorM3F out)
   {
@@ -594,7 +581,7 @@ public final class MatrixM3x3F
 
   public static MatrixM3x3F multiplyInPlace(
     final MatrixM3x3F m0,
-    final MatrixM3x3F m1)
+    final MatrixReadable3x3F m1)
   {
     return MatrixM3x3F.multiply(m0, m1, m0);
   }
@@ -605,7 +592,7 @@ public final class MatrixM3x3F
    */
 
   public static VectorM3F row(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final int row,
     final VectorM3F out)
   {
@@ -615,21 +602,21 @@ public final class MatrixM3x3F
   private static int rowCheck(
     final int row)
   {
-    if ((row < 0) || (row > 2)) {
+    if ((row < 0) || (row >= MatrixM3x3F.VIEW_ROWS)) {
       throw new IndexOutOfBoundsException(
-        "row must be in the range 0 <= row < 3");
+        "row must be in the range 0 <= row < " + MatrixM3x3F.VIEW_ROWS);
     }
     return row;
   }
 
   public static VectorM3F rowUnsafe(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final int row,
     final VectorM3F out)
   {
-    out.x = m.getUnsafe(row, 0);
-    out.y = m.getUnsafe(row, 1);
-    out.z = m.getUnsafe(row, 2);
+    out.x = m.getRowColumnF(row, 0);
+    out.y = m.getRowColumnF(row, 1);
+    out.z = m.getRowColumnF(row, 2);
     return out;
   }
 
@@ -645,12 +632,13 @@ public final class MatrixM3x3F
    */
 
   public static MatrixM3x3F scale(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final float r,
     final MatrixM3x3F out)
   {
-    for (int index = 0; index < 9; ++index) {
-      out.view.put(index, m.view.get(index) * r);
+    final FloatBuffer source_view = m.getFloatBuffer();
+    for (int index = 0; index < MatrixM3x3F.VIEW_ELEMENTS; ++index) {
+      out.view.put(index, source_view.get(index) * r);
     }
     return out;
   }
@@ -695,7 +683,7 @@ public final class MatrixM3x3F
    */
 
   public static MatrixM3x3F scaleRow(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final int row,
     final float r,
     final MatrixM3x3F out)
@@ -731,7 +719,7 @@ public final class MatrixM3x3F
   }
 
   private static MatrixM3x3F scaleRowUnsafe(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final int row,
     final float r,
     final MatrixM3x3F out)
@@ -816,16 +804,19 @@ public final class MatrixM3x3F
    */
 
   public static MatrixM3x3F translateByVector2F(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final VectorReadable2F v,
     final MatrixM3x3F out)
   {
     final float vx = v.getXF();
     final float vy = v.getYF();
 
-    final float c2r0 = (m.getUnsafe(0, 0) * vx) + (m.getUnsafe(0, 1) * vy);
-    final float c2r1 = (m.getUnsafe(1, 0) * vx) + (m.getUnsafe(1, 1) * vy);
-    final float c2r2 = (m.getUnsafe(2, 0) * vx) + (m.getUnsafe(2, 1) * vy);
+    final float c2r0 =
+      (m.getRowColumnF(0, 0) * vx) + (m.getRowColumnF(0, 1) * vy);
+    final float c2r1 =
+      (m.getRowColumnF(1, 0) * vx) + (m.getRowColumnF(1, 1) * vy);
+    final float c2r2 =
+      (m.getRowColumnF(2, 0) * vx) + (m.getRowColumnF(2, 1) * vy);
 
     out.setUnsafe(0, 2, out.getUnsafe(0, 2) + c2r0);
     out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
@@ -866,16 +857,19 @@ public final class MatrixM3x3F
    */
 
   public static MatrixM3x3F translateByVector2I(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final VectorReadable2I v,
     final MatrixM3x3F out)
   {
-    final int vx = v.getXI();
-    final int vy = v.getYI();
+    final float vx = v.getXI();
+    final float vy = v.getYI();
 
-    final float c2r0 = (m.getUnsafe(0, 0) * vx) + (m.getUnsafe(0, 1) * vy);
-    final float c2r1 = (m.getUnsafe(1, 0) * vx) + (m.getUnsafe(1, 1) * vy);
-    final float c2r2 = (m.getUnsafe(2, 0) * vx) + (m.getUnsafe(2, 1) * vy);
+    final float c2r0 =
+      (m.getRowColumnF(0, 0) * vx) + (m.getRowColumnF(0, 1) * vy);
+    final float c2r1 =
+      (m.getRowColumnF(1, 0) * vx) + (m.getRowColumnF(1, 1) * vy);
+    final float c2r2 =
+      (m.getRowColumnF(2, 0) * vx) + (m.getRowColumnF(2, 1) * vy);
 
     out.setUnsafe(0, 2, out.getUnsafe(0, 2) + c2r0);
     out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
@@ -914,11 +908,12 @@ public final class MatrixM3x3F
    */
 
   public static MatrixM3x3F transpose(
-    final MatrixM3x3F m,
+    final MatrixReadable3x3F m,
     final MatrixM3x3F out)
   {
-    for (int index = 0; index < 9; ++index) {
-      out.view.put(index, m.view.get(index));
+    final FloatBuffer source_view = m.getFloatBuffer();
+    for (int index = 0; index < MatrixM3x3F.VIEW_ELEMENTS; ++index) {
+      out.view.put(index, source_view.get(index));
     }
     return MatrixM3x3F.transposeInPlace(out);
   }
@@ -935,43 +930,72 @@ public final class MatrixM3x3F
   public static MatrixM3x3F transposeInPlace(
     final MatrixM3x3F m)
   {
-    for (int row = 0; row < (3 - 1); row++) {
-      for (int column = row + 1; column < 3; column++) {
-        final float x = m.view.get((row * 3) + column);
-        m.view.put((row * 3) + column, m.view.get(row + (3 * column)));
-        m.view.put(row + (3 * column), x);
+    for (int row = 0; row < (MatrixM3x3F.VIEW_ROWS - 1); row++) {
+      for (int column = row + 1; column < MatrixM3x3F.VIEW_COLS; column++) {
+        final float x = m.view.get((row * MatrixM3x3F.VIEW_ROWS) + column);
+        m.view.put(
+          (row * MatrixM3x3F.VIEW_ROWS) + column,
+          m.view.get(row + (MatrixM3x3F.VIEW_COLS * column)));
+        m.view.put(row + (MatrixM3x3F.VIEW_COLS * column), x);
       }
     }
     return m;
   }
 
-  private final ByteBuffer     data;
+  private final ByteBuffer  data;
+  private final FloatBuffer view;
+  private static final int  VIEW_ELEMENT_SIZE;
+  private static final int  VIEW_ELEMENTS;
+  private static final int  VIEW_BYTES;
+  private static final int  VIEW_COLS;
+  private static final int  VIEW_ROWS;
 
-  private final FloatBuffer    view;
-
-  private static final float[] identity_row_0 = { 1.0f, 0.0f, 0.0f };
+  static {
+    VIEW_ROWS = 3;
+    VIEW_COLS = 3;
+    VIEW_ELEMENT_SIZE = 4;
+    VIEW_ELEMENTS = MatrixM3x3F.VIEW_ROWS * MatrixM3x3F.VIEW_COLS;
+    VIEW_BYTES = MatrixM3x3F.VIEW_ELEMENTS * MatrixM3x3F.VIEW_ELEMENT_SIZE;
+  }
 
   public MatrixM3x3F()
   {
     this.data =
-      ByteBuffer.allocateDirect(3 * 3 * 4).order(ByteOrder.nativeOrder());
+      ByteBuffer.allocateDirect(MatrixM3x3F.VIEW_BYTES).order(
+        ByteOrder.nativeOrder());
     this.view = this.data.asFloatBuffer();
     MatrixM3x3F.setIdentity(this);
   }
 
   public MatrixM3x3F(
-    final MatrixM3x3F source)
+    final MatrixReadable3x3F source)
   {
     this.data =
-      ByteBuffer.allocateDirect(3 * 3 * 4).order(ByteOrder.nativeOrder());
+      ByteBuffer.allocateDirect(MatrixM3x3F.VIEW_BYTES).order(
+        ByteOrder.nativeOrder());
     this.view = this.data.asFloatBuffer();
 
-    for (int index = 0; index < 9; ++index) {
-      this.view.put(index, source.view.get(index));
+    final FloatBuffer source_view = source.getFloatBuffer();
+    for (int index = 0; index < MatrixM3x3F.VIEW_ELEMENTS; ++index) {
+      this.view.put(index, source_view.get(index));
     }
   }
 
   public float get(
+    final int row,
+    final int column)
+  {
+    return MatrixM3x3F.get(this, row, column);
+  }
+
+  @Override public FloatBuffer getFloatBuffer()
+  {
+    final ByteBuffer b =
+      this.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
+    return b.asFloatBuffer();
+  }
+
+  @Override public float getRowColumnF(
     final int row,
     final int column)
   {
@@ -1006,11 +1030,11 @@ public final class MatrixM3x3F
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    for (int row = 0; row < 3; ++row) {
+    for (int row = 0; row < MatrixM3x3F.VIEW_ROWS; ++row) {
       builder.append("[");
-      for (int column = 0; column < 3; ++column) {
+      for (int column = 0; column < MatrixM3x3F.VIEW_COLS; ++column) {
         builder.append(MatrixM3x3F.get(this, row, column));
-        if (column < 2) {
+        if (column < (MatrixM3x3F.VIEW_COLS - 1)) {
           builder.append(" ");
         }
       }

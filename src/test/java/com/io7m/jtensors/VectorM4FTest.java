@@ -294,7 +294,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive0()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testApproximatelyEqualTransitive0()
   {
     final float x0 = 0.0f;
     final float x1 = 0.0f;
@@ -314,7 +316,9 @@ public class VectorM4FTest
     Assert.assertTrue(VectorM4F.approximatelyEqual(v0, v1));
   }
 
-  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive1()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testApproximatelyEqualTransitive1()
   {
     final float x0 = 0.0f;
     final float x1 = 1.0f;
@@ -344,7 +348,9 @@ public class VectorM4FTest
     Assert.assertTrue(v.w == v.getWF());
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float max_x = (float) (Math.random() * Float.MIN_VALUE);
@@ -380,7 +386,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float min_x = (float) (Math.random() * Float.MAX_VALUE);
@@ -416,7 +424,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampByVectorOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampByVectorOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float min_x = (float) (Math.random() * Float.MIN_VALUE);
@@ -466,7 +476,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float maximum = (float) (Math.random() * Float.MIN_VALUE);
@@ -495,7 +507,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testClampMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float minimum = (float) (Math.random() * Float.MAX_VALUE);
@@ -646,13 +660,17 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductOrthonormal()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductOrthonormal()
   {
     final VectorM4F v = new VectorM4F(1.0f, 0.0f, 0.0f, 0.0f);
     Assert.assertTrue(VectorM4F.dotProduct(v, v) == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductSelfMagnitudeSquared()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDotProductSelfMagnitudeSquared()
   {
     final VectorM4F v0 = new VectorM4F(10.0f, 10.0f, 10.0f, 10.0f);
 
@@ -675,7 +693,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testInitializeReadable()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInitializeReadable()
   {
     final VectorM4F v0 = new VectorM4F(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorM4F v1 = new VectorM4F(v0);
@@ -686,7 +706,9 @@ public class VectorM4FTest
     Assert.assertTrue(v0.w == v1.w);
   }
 
-  @SuppressWarnings("static-method") @Test public void testInterpolateLinearLimits()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInterpolateLinearLimits()
   {
     for (int index = 0; index < 100; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -770,7 +792,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNormalizeZero()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMagnitudeNormalizeZero()
   {
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final VectorM4F vr = VectorM4F.normalizeInPlace(v);
@@ -818,7 +842,9 @@ public class VectorM4FTest
     Assert.assertTrue(m == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testProjectionPerpendicularZero()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testProjectionPerpendicularZero()
   {
     {
       final VectorM4F p = new VectorM4F(1.0f, 0.0f, 0.0f, 0.0f);

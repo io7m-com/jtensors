@@ -16,11 +16,16 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * A four-dimensional immutable vector type with integer elements.
+ * 
+ * Values of this type are immutable and can therefore be safely accessed from
+ * multiple threads.
  */
 
-public final class VectorI4I implements VectorReadable4I
+@Immutable public final class VectorI4I implements VectorReadable4I
 {
   /**
    * The zero vector.

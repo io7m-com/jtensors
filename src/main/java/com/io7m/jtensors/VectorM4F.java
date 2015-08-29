@@ -16,13 +16,18 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 import com.io7m.jaux.ApproximatelyEqualDouble;
 
 /**
  * A four-dimensional mutable vector type with single precision elements.
+ * 
+ * Values of this type cannot be accessed safely from multiple threads without
+ * explicit synchronization.
  */
 
-public final class VectorM4F implements VectorReadable4F
+@NotThreadSafe public final class VectorM4F implements VectorReadable4F
 {
   /**
    * @param v

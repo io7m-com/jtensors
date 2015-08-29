@@ -177,6 +177,16 @@ public class MatrixM3x3DTest
     b.put(0, 0.0f);
   }
 
+  @SuppressWarnings("static-method") @Test(
+    expected = ReadOnlyBufferException.class) public
+    void
+    testBufferReadOnlyInterface()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+    final DoubleBuffer b = m.getDoubleBuffer();
+    b.put(0, 0.0f);
+  }
+
   @SuppressWarnings("static-method") @Test public void testCopy()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
@@ -389,7 +399,9 @@ public class MatrixM3x3DTest
     Assert.assertTrue(m.get(2, 2) == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testInvertIdentity()
+  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
+    void
+    testInvertIdentity()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -433,7 +445,55 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testInvertSimple()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInvertInPlaceIdentity()
+  {
+    final MatrixM3x3D m0 = new MatrixM3x3D();
+    final MatrixM3x3D m1 = new MatrixM3x3D();
+
+    {
+      final Option<MatrixM3x3D> r = MatrixM3x3D.invert(m0, m1);
+      Assert.assertEquals(Type.OPTION_SOME, r.type);
+      final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
+      final MatrixM3x3D rm = s.value;
+
+      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 0) == 1.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 1) == 0.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 2) == 0.0);
+
+      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 0) == 0.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 1) == 1.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 2) == 0.0);
+
+      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 0) == 0.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 1) == 0.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 2) == 1.0);
+    }
+
+    {
+      final Option<MatrixM3x3D> r = MatrixM3x3D.invertInPlace(m1);
+      Assert.assertEquals(Type.OPTION_SOME, r.type);
+      final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
+      final MatrixM3x3D rm = s.value;
+
+      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 0) == 1.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 1) == 0.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 0, 2) == 0.0);
+
+      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 0) == 0.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 1) == 1.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 1, 2) == 0.0);
+
+      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 0) == 0.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 1) == 0.0);
+      Assert.assertTrue(MatrixM3x3D.get(rm, 2, 2) == 1.0);
+    }
+  }
+
+  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
+    void
+    testInvertSimple()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -489,7 +549,65 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testInvertZero()
+  @SuppressWarnings("static-method") @Test public void testInvertSimpleND()
+  {
+    final MatrixM3x3D m0 = new MatrixM3x3D();
+    final MatrixM3x3D m1 = new MatrixM3x3D();
+
+    m0.set(0, 0, 2.0);
+    m0.set(0, 1, 0.0);
+    m0.set(0, 2, 0.0);
+
+    m0.set(1, 0, 0.0);
+    m0.set(1, 1, 2.0);
+    m0.set(1, 2, 0.0);
+
+    m0.set(2, 0, 0.0);
+    m0.set(2, 1, 0.0);
+    m0.set(2, 2, 2.0);
+
+    {
+      final Option<MatrixM3x3D> r = MatrixM3x3D.invert(m0, m1);
+      Assert.assertEquals(Type.OPTION_SOME, r.type);
+      final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
+      final MatrixM3x3D rm = s.value;
+
+      Assert.assertTrue(rm.get(0, 0) == 0.5);
+      Assert.assertTrue(rm.get(0, 1) == 0);
+      Assert.assertTrue(rm.get(0, 2) == 0);
+
+      Assert.assertTrue(rm.get(1, 0) == 0);
+      Assert.assertTrue(rm.get(1, 1) == 0.5);
+      Assert.assertTrue(rm.get(1, 2) == 0);
+
+      Assert.assertTrue(rm.get(2, 0) == 0);
+      Assert.assertTrue(rm.get(2, 1) == 0);
+      Assert.assertTrue(rm.get(2, 2) == 0.5);
+    }
+
+    {
+      final Option<MatrixM3x3D> r = MatrixM3x3D.invertInPlace(m1);
+      Assert.assertEquals(Type.OPTION_SOME, r.type);
+      final Some<MatrixM3x3D> s = (Some<MatrixM3x3D>) r;
+      final MatrixM3x3D rm = s.value;
+
+      Assert.assertTrue(rm.get(0, 0) == 2);
+      Assert.assertTrue(rm.get(0, 1) == 0);
+      Assert.assertTrue(rm.get(0, 2) == 0);
+
+      Assert.assertTrue(rm.get(1, 0) == 0);
+      Assert.assertTrue(rm.get(1, 1) == 2);
+      Assert.assertTrue(rm.get(1, 2) == 0);
+
+      Assert.assertTrue(rm.get(2, 0) == 0);
+      Assert.assertTrue(rm.get(2, 1) == 0);
+      Assert.assertTrue(rm.get(2, 2) == 2);
+    }
+  }
+
+  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
+    void
+    testInvertZero()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -503,6 +621,24 @@ public class MatrixM3x3DTest
 
     {
       final Option<MatrixM3x3D> r = MatrixM3x3D.invert(m0);
+      Assert.assertEquals(Type.OPTION_NONE, r.type);
+    }
+  }
+
+  @SuppressWarnings("static-method") @Test public void testInvertZeroND()
+  {
+    final MatrixM3x3D m0 = new MatrixM3x3D();
+    final MatrixM3x3D m1 = new MatrixM3x3D();
+
+    MatrixM3x3D.setZero(m0);
+
+    {
+      final Option<MatrixM3x3D> r = MatrixM3x3D.invert(m0, m1);
+      Assert.assertEquals(Type.OPTION_NONE, r.type);
+    }
+
+    {
+      final Option<MatrixM3x3D> r = MatrixM3x3D.invertInPlace(m0);
       Assert.assertEquals(Type.OPTION_NONE, r.type);
     }
   }
@@ -616,7 +752,7 @@ public class MatrixM3x3DTest
     Assert.assertTrue(MatrixM3x3D.get(r, 2, 2) == 150.0);
   }
 
-  @SuppressWarnings("static-method") @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testMultiplyVectorSimple()
   {
@@ -882,6 +1018,25 @@ public class MatrixM3x3DTest
     Assert.assertTrue(m.set(2, 0, 29.0).get(2, 0) == 29.0);
     Assert.assertTrue(m.set(2, 1, 31.0).get(2, 1) == 31.0);
     Assert.assertTrue(m.set(2, 2, 37.0).get(2, 2) == 37.0);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testSetGetInterfaceIdentity()
+  {
+    final MatrixM3x3D m = new MatrixM3x3D();
+
+    Assert.assertTrue(m.set(0, 0, 3.0).getRowColumnD(0, 0) == 3.0);
+    Assert.assertTrue(m.set(0, 1, 5.0).getRowColumnD(0, 1) == 5.0);
+    Assert.assertTrue(m.set(0, 2, 7.0).getRowColumnD(0, 2) == 7.0);
+
+    Assert.assertTrue(m.set(1, 0, 13.0).getRowColumnD(1, 0) == 13.0);
+    Assert.assertTrue(m.set(1, 1, 17.0).getRowColumnD(1, 1) == 17.0);
+    Assert.assertTrue(m.set(1, 2, 19.0).getRowColumnD(1, 2) == 19.0);
+
+    Assert.assertTrue(m.set(2, 0, 29.0).getRowColumnD(2, 0) == 29.0);
+    Assert.assertTrue(m.set(2, 1, 31.0).getRowColumnD(2, 1) == 31.0);
+    Assert.assertTrue(m.set(2, 2, 37.0).getRowColumnD(2, 2) == 37.0);
   }
 
   @SuppressWarnings("static-method") @Test public void testStorage()

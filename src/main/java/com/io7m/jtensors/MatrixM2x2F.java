@@ -20,18 +20,21 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 import com.io7m.jaux.functional.Option;
 
 /**
  * A 2x2 mutable matrix type with single precision elements.
+ * 
+ * Values of this type cannot be accessed safely from multiple threads without
+ * explicit synchronization.
  */
 
-public final class MatrixM2x2F
+@NotThreadSafe public final class MatrixM2x2F implements MatrixReadable2x2F
 {
   private static final float[] identity_row_0 = { 1.0f, 0.0f };
-
   private static final float[] identity_row_1 = { 0.0f, 1.0f };
-
   private static final float[] zero_row       = { 0.0f, 0.0f };
 
   /**
@@ -47,7 +50,7 @@ public final class MatrixM2x2F
 
   public static MatrixM2x2F add(
     final MatrixM2x2F m0,
-    final MatrixM2x2F m1)
+    final MatrixReadable2x2F m1)
   {
     return MatrixM2x2F.add(m0, m1, m0);
   }
@@ -65,13 +68,18 @@ public final class MatrixM2x2F
    */
 
   public static MatrixM2x2F add(
-    final MatrixM2x2F m0,
-    final MatrixM2x2F m1,
+    final MatrixReadable2x2F m0,
+    final MatrixReadable2x2F m1,
     final MatrixM2x2F out)
   {
-    for (int index = 0; index < 4; ++index) {
-      out.view.put(index, m0.view.get(index) + m1.view.get(index));
-    }
+    final FloatBuffer m0_view = m0.getFloatBuffer();
+    final FloatBuffer m1_view = m1.getFloatBuffer();
+
+    out.view.put(0, m0_view.get(0) + m1_view.get(0));
+    out.view.put(1, m0_view.get(1) + m1_view.get(1));
+    out.view.put(2, m0_view.get(2) + m1_view.get(2));
+    out.view.put(3, m0_view.get(3) + m1_view.get(3));
+
     return out;
   }
 
@@ -112,7 +120,7 @@ public final class MatrixM2x2F
    */
 
   public static MatrixM2x2F addRowScaled(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final int row_a,
     final int row_b,
     final int row_c,
@@ -129,7 +137,7 @@ public final class MatrixM2x2F
   }
 
   private static MatrixM2x2F addRowScaledUnsafe(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final int row_a,
     final int row_b,
     final int row_c,
@@ -149,9 +157,9 @@ public final class MatrixM2x2F
   private static int columnCheck(
     final int column)
   {
-    if ((column < 0) || (column > 1)) {
+    if ((column < 0) || (column >= MatrixM2x2F.VIEW_COLS)) {
       throw new IndexOutOfBoundsException(
-        "column must be in the range 0 <= column < 2");
+        "column must be in the range 0 <= column < " + MatrixM2x2F.VIEW_COLS);
     }
     return column;
   }
@@ -168,12 +176,16 @@ public final class MatrixM2x2F
    */
 
   public static MatrixM2x2F copy(
-    final MatrixM2x2F input,
+    final MatrixReadable2x2F input,
     final MatrixM2x2F output)
   {
-    for (int index = 0; index < 4; ++index) {
-      output.view.put(index, input.view.get(index));
-    }
+    final FloatBuffer source_view = input.getFloatBuffer();
+
+    output.view.put(0, source_view.get(0));
+    output.view.put(1, source_view.get(1));
+    output.view.put(2, source_view.get(2));
+    output.view.put(3, source_view.get(3));
+
     return output;
   }
 
@@ -185,12 +197,12 @@ public final class MatrixM2x2F
    */
 
   public static float determinant(
-    final MatrixM2x2F m)
+    final MatrixReadable2x2F m)
   {
-    final float r0c0 = MatrixM2x2F.get(m, 0, 0);
-    final float r0c1 = MatrixM2x2F.get(m, 0, 1);
-    final float r1c0 = MatrixM2x2F.get(m, 1, 0);
-    final float r1c1 = MatrixM2x2F.get(m, 1, 1);
+    final float r0c0 = m.getRowColumnF(0, 0);
+    final float r0c1 = m.getRowColumnF(0, 1);
+    final float r1c0 = m.getRowColumnF(1, 0);
+    final float r1c1 = m.getRowColumnF(1, 1);
 
     return (r0c0 * r1c1) - (r0c1 * r1c0);
   }
@@ -208,9 +220,11 @@ public final class MatrixM2x2F
    * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
    * This is one of the three "elementary" operations defined on matrices.
    * 
+   * @formatter:off
    * @see <a
    *      href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary
    *      operations</a>.
+   * @formatter:on
    * 
    * @param m
    *          The input matrix.
@@ -224,7 +238,7 @@ public final class MatrixM2x2F
    */
 
   public static MatrixM2x2F exchangeRows(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final int row_a,
     final int row_b,
     final MatrixM2x2F out)
@@ -237,7 +251,7 @@ public final class MatrixM2x2F
   }
 
   private static MatrixM2x2F exchangeRowsUnsafe(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final int row_a,
     final int row_b,
     final MatrixM2x2F out)
@@ -274,11 +288,12 @@ public final class MatrixM2x2F
    */
 
   public static float get(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final int row,
     final int column)
   {
-    return m.view.get(MatrixM2x2F.indexChecked(row, column));
+    final FloatBuffer source_view = m.getFloatBuffer();
+    return source_view.get(MatrixM2x2F.indexChecked(row, column));
   }
 
   private final static int indexChecked(
@@ -328,7 +343,7 @@ public final class MatrixM2x2F
    */
 
   public static Option<MatrixM2x2F> invert(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final MatrixM2x2F out)
   {
     final float d = MatrixM2x2F.determinant(m);
@@ -339,10 +354,10 @@ public final class MatrixM2x2F
 
     final float d_inv = 1 / d;
 
-    final float r0c0 = m.getUnsafe(1, 1) * d_inv;
-    final float r0c1 = -m.getUnsafe(0, 1) * d_inv;
-    final float r1c0 = -m.getUnsafe(1, 0) * d_inv;
-    final float r1c1 = m.getUnsafe(0, 0) * d_inv;
+    final float r0c0 = m.getRowColumnF(1, 1) * d_inv;
+    final float r0c1 = -m.getRowColumnF(0, 1) * d_inv;
+    final float r1c0 = -m.getRowColumnF(1, 0) * d_inv;
+    final float r1c1 = m.getRowColumnF(0, 0) * d_inv;
 
     out.setUnsafe(0, 0, r0c0);
     out.setUnsafe(0, 1, r0c1);
@@ -365,7 +380,7 @@ public final class MatrixM2x2F
 
   public static MatrixM2x2F multiply(
     final MatrixM2x2F m0,
-    final MatrixM2x2F m1)
+    final MatrixReadable2x2F m1)
   {
     return MatrixM2x2F.multiply(m0, m1, m0);
   }
@@ -375,31 +390,31 @@ public final class MatrixM2x2F
    * writing the result to <code>out</code>.
    * 
    * @param m0
-   *          The left input vector.
+   *          The left input matrix.
    * @param m1
-   *          The right input vector.
+   *          The right input matrix.
    * @param out
-   *          The output vector.
+   *          The output matrix.
    * @return <code>out</code>
    */
 
   public static MatrixM2x2F multiply(
-    final MatrixM2x2F m0,
-    final MatrixM2x2F m1,
+    final MatrixReadable2x2F m0,
+    final MatrixReadable2x2F m1,
     final MatrixM2x2F out)
   {
     final float r0c0 =
-      (m0.getUnsafe(0, 0) * m1.getUnsafe(0, 0))
-        + (m0.getUnsafe(1, 0) * m1.getUnsafe(0, 1));
+      (m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 0))
+        + (m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 1));
     final float r0c1 =
-      (m0.getUnsafe(0, 1) * m1.getUnsafe(0, 0))
-        + (m0.getUnsafe(1, 1) * m1.getUnsafe(0, 1));
+      (m0.getRowColumnF(0, 1) * m1.getRowColumnF(0, 0))
+        + (m0.getRowColumnF(1, 1) * m1.getRowColumnF(0, 1));
     final float r1c0 =
-      (m0.getUnsafe(0, 0) * m1.getUnsafe(1, 0))
-        + (m0.getUnsafe(1, 0) * m1.getUnsafe(1, 1));
+      (m0.getRowColumnF(0, 0) * m1.getRowColumnF(1, 0))
+        + (m0.getRowColumnF(1, 0) * m1.getRowColumnF(1, 1));
     final float r1c1 =
-      (m0.getUnsafe(0, 1) * m1.getUnsafe(1, 0))
-        + (m0.getUnsafe(1, 1) * m1.getUnsafe(1, 1));
+      (m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 0))
+        + (m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 1));
 
     out.setUnsafe(0, 0, r0c0);
     out.setUnsafe(0, 1, r0c1);
@@ -422,17 +437,46 @@ public final class MatrixM2x2F
    * @return <code>out</code>
    */
 
-  public static VectorM2F multiply(
-    final MatrixM2x2F m,
+  @Deprecated public static VectorM2F multiply(
+    final MatrixReadable2x2F m,
     final VectorReadable2F v,
     final VectorM2F out)
   {
     final VectorM2F row = new VectorM2F();
     final VectorM2F vi = new VectorM2F(v);
 
-    MatrixM2x2F.rowUnsafe(m, 0, row);
+    m.getRowF(0, row);
     out.x = VectorM2F.dotProduct(row, vi);
-    MatrixM2x2F.rowUnsafe(m, 1, row);
+    m.getRowF(1, row);
+    out.y = VectorM2F.dotProduct(row, vi);
+
+    return out;
+  }
+
+  /**
+   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
+   * writing the resulting vector to <code>out</code>.
+   * 
+   * @param m
+   *          The input matrix.
+   * @param v
+   *          The input vector.
+   * @param out
+   *          The output vector.
+   * @return <code>out</code>
+   */
+
+  public static VectorM2F multiplyVector2F(
+    final MatrixReadable2x2F m,
+    final VectorReadable2F v,
+    final VectorM2F out)
+  {
+    final VectorM2F row = new VectorM2F();
+    final VectorM2F vi = new VectorM2F(v);
+
+    m.getRowF(0, row);
+    out.x = VectorM2F.dotProduct(row, vi);
+    m.getRowF(1, row);
     out.y = VectorM2F.dotProduct(row, vi);
 
     return out;
@@ -444,7 +488,7 @@ public final class MatrixM2x2F
    */
 
   public static VectorM2F row(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final int row,
     final VectorM2F out)
   {
@@ -454,20 +498,20 @@ public final class MatrixM2x2F
   private static int rowCheck(
     final int row)
   {
-    if ((row < 0) || (row > 1)) {
+    if ((row < 0) || (row >= MatrixM2x2F.VIEW_ROWS)) {
       throw new IndexOutOfBoundsException(
-        "row must be in the range 0 <= row < 2");
+        "row must be in the range 0 <= row < " + MatrixM2x2F.VIEW_ROWS);
     }
     return row;
   }
 
   public static VectorM2F rowUnsafe(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final int row,
     final VectorM2F out)
   {
-    out.x = m.getUnsafe(row, 0);
-    out.y = m.getUnsafe(row, 1);
+    out.x = m.getRowColumnF(row, 0);
+    out.y = m.getRowColumnF(row, 1);
     return out;
   }
 
@@ -501,13 +545,14 @@ public final class MatrixM2x2F
    */
 
   public static MatrixM2x2F scale(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final float r,
     final MatrixM2x2F out)
   {
-    for (int index = 0; index < 4; ++index) {
-      out.view.put(index, m.view.get(index) * r);
-    }
+    out.setUnsafe(0, 0, m.getRowColumnF(0, 0) * r);
+    out.setUnsafe(1, 0, m.getRowColumnF(1, 0) * r);
+    out.setUnsafe(0, 1, m.getRowColumnF(0, 1) * r);
+    out.setUnsafe(1, 1, m.getRowColumnF(1, 1) * r);
     return out;
   }
 
@@ -537,11 +582,11 @@ public final class MatrixM2x2F
    *          The scaling value.
    * @param out
    *          The output matrix.
-   * @return <code>m</code>
+   * @return <code>out</code>
    */
 
   public static MatrixM2x2F scaleRow(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final int row,
     final float r,
     final MatrixM2x2F out)
@@ -550,7 +595,7 @@ public final class MatrixM2x2F
   }
 
   private static MatrixM2x2F scaleRowUnsafe(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final int row,
     final float r,
     final MatrixM2x2F out)
@@ -652,36 +697,49 @@ public final class MatrixM2x2F
    */
 
   public static MatrixM2x2F transpose(
-    final MatrixM2x2F m,
+    final MatrixReadable2x2F m,
     final MatrixM2x2F out)
   {
-    for (int index = 0; index < 4; ++index) {
-      out.view.put(index, m.view.get(index));
-    }
+    MatrixM2x2F.copy(m, out);
     return MatrixM2x2F.transpose(out);
   }
 
   private final ByteBuffer  data;
-
   private final FloatBuffer view;
+  private static final int  VIEW_ELEMENT_SIZE;
+  private static final int  VIEW_ELEMENTS;
+  private static final int  VIEW_BYTES;
+  private static final int  VIEW_COLS;
+  private static final int  VIEW_ROWS;
+
+  static {
+    VIEW_ROWS = 2;
+    VIEW_COLS = 2;
+    VIEW_ELEMENT_SIZE = 4;
+    VIEW_ELEMENTS = MatrixM2x2F.VIEW_ROWS * MatrixM2x2F.VIEW_COLS;
+    VIEW_BYTES = MatrixM2x2F.VIEW_ELEMENTS * MatrixM2x2F.VIEW_ELEMENT_SIZE;
+  }
 
   public MatrixM2x2F()
   {
     this.data =
-      ByteBuffer.allocateDirect(2 * 2 * 4).order(ByteOrder.nativeOrder());
+      ByteBuffer.allocateDirect(MatrixM2x2F.VIEW_BYTES).order(
+        ByteOrder.nativeOrder());
     this.view = this.data.asFloatBuffer();
     MatrixM2x2F.setIdentity(this);
   }
 
   public MatrixM2x2F(
-    final MatrixM2x2F source)
+    final MatrixReadable2x2F source)
   {
     this.data =
-      ByteBuffer.allocateDirect(2 * 2 * 4).order(ByteOrder.nativeOrder());
+      ByteBuffer.allocateDirect(MatrixM2x2F.VIEW_BYTES).order(
+        ByteOrder.nativeOrder());
     this.view = this.data.asFloatBuffer();
 
-    for (int index = 0; index < 4; ++index) {
-      this.view.put(index, source.view.get(index));
+    final FloatBuffer source_view = source.getFloatBuffer();
+    for (int index = 0; index < MatrixM2x2F.VIEW_ELEMENTS; ++index) {
+      this.view.put(index, source_view.get(index));
     }
   }
 
@@ -692,11 +750,25 @@ public final class MatrixM2x2F
     return MatrixM2x2F.get(this, row, column);
   }
 
-  private float getUnsafe(
+  @Override public FloatBuffer getFloatBuffer()
+  {
+    final ByteBuffer b =
+      this.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
+    return b.asFloatBuffer();
+  }
+
+  @Override public float getRowColumnF(
     final int row,
     final int column)
   {
-    return this.view.get(MatrixM2x2F.indexUnsafe(row, column));
+    return MatrixM2x2F.get(this, row, column);
+  }
+
+  @Override public void getRowF(
+    final int row,
+    final VectorM2F out)
+  {
+    MatrixM2x2F.rowUnsafe(this, MatrixM2x2F.rowCheck(row), out);
   }
 
   public MatrixM2x2F set(
@@ -720,11 +792,11 @@ public final class MatrixM2x2F
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
-    for (int row = 0; row < 2; ++row) {
+    for (int row = 0; row < MatrixM2x2F.VIEW_ROWS; ++row) {
       builder.append("[");
-      for (int column = 0; column < 2; ++column) {
+      for (int column = 0; column < MatrixM2x2F.VIEW_COLS; ++column) {
         builder.append(MatrixM2x2F.get(this, row, column));
-        if (column < 2) {
+        if (column < 1) {
           builder.append(" ");
         }
       }

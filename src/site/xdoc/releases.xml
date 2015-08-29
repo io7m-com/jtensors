@@ -59,6 +59,46 @@
               <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0.zip">io7m-jtensors-2.1.0.zip</a>
             </td>
           </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-07-23</td>
+            <td class="page_table_column">93635</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.2.0.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.2.0.jar">io7m-jtensors-2.2.0.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-07-23</td>
+            <td class="page_table_column">84829</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.2.0-sources.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.2.0-sources.jar">io7m-jtensors-2.2.0-sources.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-07-23</td>
+            <td class="page_table_column">295456</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.2.0-javadoc.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.2.0-javadoc.jar">io7m-jtensors-2.2.0-javadoc.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-07-23</td>
+            <td class="page_table_column">201284</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.2.0.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.2.0.zip">io7m-jtensors-2.2.0.zip</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -88,6 +128,19 @@
               <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.1.0-documentation.zip">io7m-jtensors-2.1.0-documentation.zip</a>
             </td>
           </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2012-07-23</td>
+            <td class="page_table_column">314934</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.2.0-documentation.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://io7m.com/software/jtensors/doc/2.2.0/d1.xhtml">io7m-jtensors 2.2.0</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-2.2.0-documentation.zip">io7m-jtensors-2.2.0-documentation.zip</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -95,6 +148,22 @@
     <section name="Changes">
 <table xmlns="http://www.w3.org/1999/xhtml" class="changelog page_table"
        summary="Changes">
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-07-23</td>
+      <td class="page_table_column">Release: io7m-jtensors 2.2.0</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-07-23</td>
+      <td class="page_table_column">Code fix: Update all POM plugins to the latest versions</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-07-23</td>
+      <td class="page_table_column">Code fix: Improve documentation</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-07-15</td>
+      <td class="page_table_column">Code fix: Add missing documentation CSS</td>
+   </tr>
    <tr class="page_table_row">
       <td class="page_table_column">2012-07-14</td>
       <td class="page_table_column">Release: io7m-jtensors 2.1.0</td>
