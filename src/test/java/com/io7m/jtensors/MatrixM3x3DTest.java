@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -19,8 +19,7 @@ package com.io7m.jtensors;
 import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
@@ -1648,9 +1647,7 @@ public class MatrixM3x3DTest
     Assert.assertTrue(eq);
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
-    void
-    testRotateX()
+  @SuppressWarnings({ "static-method" }) @Test public void testRotateX()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -1664,7 +1661,7 @@ public class MatrixM3x3DTest
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(out).position());
-      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
@@ -1690,7 +1687,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testRotateXContextEquivalentInPlace()
   {
@@ -1712,7 +1709,7 @@ public class MatrixM3x3DTest
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(out).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
@@ -1737,7 +1734,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testRotateXMakeEquivalent()
   {
@@ -1748,7 +1745,7 @@ public class MatrixM3x3DTest
       final MatrixM3x3D r =
         MatrixM3x3D.makeRotation(Math.toRadians(45), MatrixM3x3DTest.AXIS_X);
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
@@ -1758,9 +1755,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
-    void
-    testRotateY()
+  @SuppressWarnings({ "static-method" }) @Test public void testRotateY()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -1773,7 +1768,7 @@ public class MatrixM3x3DTest
           .rotate(Math.toRadians(45), m, MatrixM3x3DTest.AXIS_Y, out);
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
@@ -1798,7 +1793,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testRotateYContextEquivalentInPlace()
   {
@@ -1818,7 +1813,7 @@ public class MatrixM3x3DTest
           out);
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
@@ -1844,7 +1839,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testRotateYMakeEquivalent()
   {
@@ -1855,7 +1850,7 @@ public class MatrixM3x3DTest
       final MatrixM3x3D r =
         MatrixM3x3D.makeRotation(Math.toRadians(45), MatrixM3x3DTest.AXIS_Y);
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
@@ -1865,9 +1860,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
-    void
-    testRotateZ()
+  @SuppressWarnings({ "static-method" }) @Test public void testRotateZ()
   {
     final AlmostEqualDouble.ContextRelative context_d =
       TestUtilities.getDoubleEqualityContext();
@@ -1880,7 +1873,7 @@ public class MatrixM3x3DTest
           .rotate(Math.toRadians(45), m, MatrixM3x3DTest.AXIS_Z, out);
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
@@ -1896,7 +1889,7 @@ public class MatrixM3x3DTest
           m,
           MatrixM3x3DTest.AXIS_Z);
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
@@ -1906,7 +1899,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testRotateZContextEquivalentInPlace()
   {
@@ -1927,7 +1920,7 @@ public class MatrixM3x3DTest
           out);
       Assert.assertSame(r, out);
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
@@ -1944,7 +1937,7 @@ public class MatrixM3x3DTest
           m,
           MatrixM3x3DTest.AXIS_Z);
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
@@ -1954,7 +1947,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testRotateZMakeEquivalent()
   {
@@ -1965,7 +1958,7 @@ public class MatrixM3x3DTest
       final MatrixM3x3D r =
         MatrixM3x3D.makeRotation(Math.toRadians(45), MatrixM3x3DTest.AXIS_Z);
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
-      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r));
+      Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
       System.out.println(r);
 
@@ -2327,15 +2320,13 @@ public class MatrixM3x3DTest
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m1).position());
   }
 
-  @SuppressWarnings({ "static-method", "boxing" }) @Test public
-    void
-    testTrace()
+  @SuppressWarnings({ "static-method" }) @Test public void testTrace()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
-    Assert.assertEquals(3.0, MatrixM3x3D.trace(m));
+    Assert.assertEquals(3.0, MatrixM3x3D.trace(m), 0.0);
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslate2DMakeIdentity()
   {
@@ -2345,26 +2336,26 @@ public class MatrixM3x3DTest
     MatrixM3x3D.makeTranslation2D(v, m);
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(1.0, m.get(0, 0));
-    Assert.assertEquals(0.0, m.get(0, 1));
-    Assert.assertEquals(0.0, m.get(0, 2));
+    Assert.assertEquals(1.0, m.get(0, 0), 0.0);
+    Assert.assertEquals(0.0, m.get(0, 1), 0.0);
+    Assert.assertEquals(0.0, m.get(0, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(0.0, m.get(1, 0));
-    Assert.assertEquals(1.0, m.get(1, 1));
-    Assert.assertEquals(0.0, m.get(1, 2));
+    Assert.assertEquals(0.0, m.get(1, 0), 0.0);
+    Assert.assertEquals(1.0, m.get(1, 1), 0.0);
+    Assert.assertEquals(0.0, m.get(1, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(0.0, m.get(2, 0));
-    Assert.assertEquals(0.0, m.get(2, 1));
-    Assert.assertEquals(1.0, m.get(2, 2));
+    Assert.assertEquals(0.0, m.get(2, 0), 0.0);
+    Assert.assertEquals(0.0, m.get(2, 1), 0.0);
+    Assert.assertEquals(1.0, m.get(2, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslate2DMakeSimple()
   {
@@ -2374,26 +2365,26 @@ public class MatrixM3x3DTest
     MatrixM3x3D.makeTranslation2D(v, m);
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(1.0, m.get(0, 0));
-    Assert.assertEquals(0.0, m.get(0, 1));
-    Assert.assertEquals(3.0, m.get(0, 2));
+    Assert.assertEquals(1.0, m.get(0, 0), 0.0);
+    Assert.assertEquals(0.0, m.get(0, 1), 0.0);
+    Assert.assertEquals(3.0, m.get(0, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(0.0, m.get(1, 0));
-    Assert.assertEquals(1.0, m.get(1, 1));
-    Assert.assertEquals(7.0, m.get(1, 2));
+    Assert.assertEquals(0.0, m.get(1, 0), 0.0);
+    Assert.assertEquals(1.0, m.get(1, 1), 0.0);
+    Assert.assertEquals(7.0, m.get(1, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(0.0, m.get(2, 0));
-    Assert.assertEquals(0.0, m.get(2, 1));
-    Assert.assertEquals(1.0, m.get(2, 2));
+    Assert.assertEquals(0.0, m.get(2, 0), 0.0);
+    Assert.assertEquals(0.0, m.get(2, 1), 0.0);
+    Assert.assertEquals(1.0, m.get(2, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslate2IMakeIdentity()
   {
@@ -2403,26 +2394,26 @@ public class MatrixM3x3DTest
     MatrixM3x3D.makeTranslation2I(v, m);
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(1.0, m.get(0, 0));
-    Assert.assertEquals(0.0, m.get(0, 1));
-    Assert.assertEquals(0.0, m.get(0, 2));
+    Assert.assertEquals(1.0, m.get(0, 0), 0.0);
+    Assert.assertEquals(0.0, m.get(0, 1), 0.0);
+    Assert.assertEquals(0.0, m.get(0, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(0.0, m.get(1, 0));
-    Assert.assertEquals(1.0, m.get(1, 1));
-    Assert.assertEquals(0.0, m.get(1, 2));
+    Assert.assertEquals(0.0, m.get(1, 0), 0.0);
+    Assert.assertEquals(1.0, m.get(1, 1), 0.0);
+    Assert.assertEquals(0.0, m.get(1, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(0.0, m.get(2, 0));
-    Assert.assertEquals(0.0, m.get(2, 1));
-    Assert.assertEquals(1.0, m.get(2, 2));
+    Assert.assertEquals(0.0, m.get(2, 0), 0.0);
+    Assert.assertEquals(0.0, m.get(2, 1), 0.0);
+    Assert.assertEquals(1.0, m.get(2, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslate2IMakeSimple()
   {
@@ -2432,26 +2423,26 @@ public class MatrixM3x3DTest
     MatrixM3x3D.makeTranslation2I(v, m);
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(1.0, m.get(0, 0));
-    Assert.assertEquals(0.0, m.get(0, 1));
-    Assert.assertEquals(3.0, m.get(0, 2));
+    Assert.assertEquals(1.0, m.get(0, 0), 0.0);
+    Assert.assertEquals(0.0, m.get(0, 1), 0.0);
+    Assert.assertEquals(3.0, m.get(0, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(0.0, m.get(1, 0));
-    Assert.assertEquals(1.0, m.get(1, 1));
-    Assert.assertEquals(7.0, m.get(1, 2));
+    Assert.assertEquals(0.0, m.get(1, 0), 0.0);
+    Assert.assertEquals(1.0, m.get(1, 1), 0.0);
+    Assert.assertEquals(7.0, m.get(1, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
 
-    Assert.assertEquals(0.0, m.get(2, 0));
-    Assert.assertEquals(0.0, m.get(2, 1));
-    Assert.assertEquals(1.0, m.get(2, 2));
+    Assert.assertEquals(0.0, m.get(2, 0), 0.0);
+    Assert.assertEquals(0.0, m.get(2, 1), 0.0);
+    Assert.assertEquals(1.0, m.get(2, 2), 0.0);
 
     Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslateSimple2D()
   {
@@ -2466,23 +2457,23 @@ public class MatrixM3x3DTest
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(1.0, r.get(0, 0));
-      Assert.assertEquals(0.0, r.get(0, 1));
-      Assert.assertEquals(1.0, r.get(0, 2));
+      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
+      Assert.assertEquals(1.0, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(1, 0));
-      Assert.assertEquals(1.0, r.get(1, 1));
-      Assert.assertEquals(2.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
+      Assert.assertEquals(2.0, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(2, 0));
-      Assert.assertEquals(0.0, r.get(2, 1));
-      Assert.assertEquals(1.0, r.get(2, 2));
+      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
@@ -2495,30 +2486,30 @@ public class MatrixM3x3DTest
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(1.0, r.get(0, 0));
-      Assert.assertEquals(0.0, r.get(0, 1));
-      Assert.assertEquals(2.0, r.get(0, 2));
+      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
+      Assert.assertEquals(2.0, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(1, 0));
-      Assert.assertEquals(1.0, r.get(1, 1));
-      Assert.assertEquals(4.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
+      Assert.assertEquals(4.0, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(2, 0));
-      Assert.assertEquals(0.0, r.get(2, 1));
-      Assert.assertEquals(1.0, r.get(2, 2));
+      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslateSimple2DAlt()
   {
@@ -2532,23 +2523,23 @@ public class MatrixM3x3DTest
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(1.0, r.get(0, 0));
-      Assert.assertEquals(0.0, r.get(0, 1));
-      Assert.assertEquals(1.0, r.get(0, 2));
+      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
+      Assert.assertEquals(1.0, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(1, 0));
-      Assert.assertEquals(1.0, r.get(1, 1));
-      Assert.assertEquals(2.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
+      Assert.assertEquals(2.0, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(2, 0));
-      Assert.assertEquals(0.0, r.get(2, 1));
-      Assert.assertEquals(1.0, r.get(2, 2));
+      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
@@ -2561,30 +2552,30 @@ public class MatrixM3x3DTest
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(1.0, r.get(0, 0));
-      Assert.assertEquals(0.0, r.get(0, 1));
-      Assert.assertEquals(2.0, r.get(0, 2));
+      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
+      Assert.assertEquals(2.0, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(1, 0));
-      Assert.assertEquals(1.0, r.get(1, 1));
-      Assert.assertEquals(4.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
+      Assert.assertEquals(4.0, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(2, 0));
-      Assert.assertEquals(0.0, r.get(2, 1));
-      Assert.assertEquals(1.0, r.get(2, 2));
+      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslateSimple2I()
   {
@@ -2599,23 +2590,23 @@ public class MatrixM3x3DTest
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(1.0, r.get(0, 0));
-      Assert.assertEquals(0.0, r.get(0, 1));
-      Assert.assertEquals(1.0, r.get(0, 2));
+      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
+      Assert.assertEquals(1.0, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(1, 0));
-      Assert.assertEquals(1.0, r.get(1, 1));
-      Assert.assertEquals(2.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
+      Assert.assertEquals(2.0, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(2, 0));
-      Assert.assertEquals(0.0, r.get(2, 1));
-      Assert.assertEquals(1.0, r.get(2, 2));
+      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
@@ -2628,23 +2619,23 @@ public class MatrixM3x3DTest
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(1.0, r.get(0, 0));
-      Assert.assertEquals(0.0, r.get(0, 1));
-      Assert.assertEquals(2.0, r.get(0, 2));
+      Assert.assertEquals(1.0, r.get(0, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(0, 1), 0.0);
+      Assert.assertEquals(2.0, r.get(0, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(1, 0));
-      Assert.assertEquals(1.0, r.get(1, 1));
-      Assert.assertEquals(4.0, r.get(1, 2));
+      Assert.assertEquals(0.0, r.get(1, 0), 0.0);
+      Assert.assertEquals(1.0, r.get(1, 1), 0.0);
+      Assert.assertEquals(4.0, r.get(1, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
 
-      Assert.assertEquals(0.0, r.get(2, 0));
-      Assert.assertEquals(0.0, r.get(2, 1));
-      Assert.assertEquals(1.0, r.get(2, 2));
+      Assert.assertEquals(0.0, r.get(2, 0), 0.0);
+      Assert.assertEquals(0.0, r.get(2, 1), 0.0);
+      Assert.assertEquals(1.0, r.get(2, 2), 0.0);
 
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(m).position());
       Assert.assertEquals(0, MatrixM3x3D.doubleBuffer(r).position());
@@ -2714,7 +2705,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+  @SuppressWarnings({ "static-method" }) @Test public
     void
     testTranslationStorage()
   {
@@ -2729,17 +2720,17 @@ public class MatrixM3x3DTest
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
       Assert.assertEquals(0, b.position());
 
-      Assert.assertEquals(1.0, b.get(0));
-      Assert.assertEquals(0.0, b.get(1));
-      Assert.assertEquals(0.0, b.get(2));
+      Assert.assertEquals(1.0, b.get(0), 0.0);
+      Assert.assertEquals(0.0, b.get(1), 0.0);
+      Assert.assertEquals(0.0, b.get(2), 0.0);
 
-      Assert.assertEquals(0.0, b.get(3));
-      Assert.assertEquals(1.0, b.get(4));
-      Assert.assertEquals(0.0, b.get(5));
+      Assert.assertEquals(0.0, b.get(3), 0.0);
+      Assert.assertEquals(1.0, b.get(4), 0.0);
+      Assert.assertEquals(0.0, b.get(5), 0.0);
 
-      Assert.assertEquals(1.0, b.get(6));
-      Assert.assertEquals(2.0, b.get(7));
-      Assert.assertEquals(1.0, b.get(8));
+      Assert.assertEquals(1.0, b.get(6), 0.0);
+      Assert.assertEquals(2.0, b.get(7), 0.0);
+      Assert.assertEquals(1.0, b.get(8), 0.0);
     }
   }
 

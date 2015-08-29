@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -45,19 +45,19 @@ import com.io7m.jaux.functional.Option;
  * </p>
  */
 
-@NotThreadSafe public final class MatrixM3x3D implements MatrixReadable3x3D
+@NotThreadSafe public class MatrixM3x3D implements MatrixReadable3x3D
 {
   /**
+   * <p>
    * The Context type contains the minimum storage required for all of the
    * functions of the <code>MatrixM3x3D</code> class.
-   * 
+   * </p>
    * <p>
    * The purpose of the class is to allow applications to allocate all storage
    * ahead of time in order to allow functions in the class to avoid
    * allocating memory (not including stack space) for intermediate
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
-   * 
    * <p>
    * The user should allocate one <code>Context</code> value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes
@@ -67,7 +67,7 @@ import com.io7m.jaux.functional.Option;
    * @since 5.0.0
    */
 
-  @NotThreadSafe public static final class Context
+  @NotThreadSafe public static class Context
   {
     final @Nonnull MatrixM3x3D m3a = new MatrixM3x3D();
     final @Nonnull VectorM3D   v3a = new VectorM3D();
@@ -97,7 +97,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D add(
+  public final static MatrixM3x3D add(
     final @Nonnull MatrixReadable3x3D m0,
     final @Nonnull MatrixReadable3x3D m1,
     final @Nonnull MatrixM3x3D out)
@@ -124,7 +124,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m0</code>
    */
 
-  public static MatrixM3x3D addInPlace(
+  public final static MatrixM3x3D addInPlace(
     final @Nonnull MatrixM3x3D m0,
     final @Nonnull MatrixM3x3D m1)
   {
@@ -132,10 +132,11 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Add the values in row <code>row_b</code> to the values in row
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>out</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -157,7 +158,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D addRowScaled(
+  public final static MatrixM3x3D addRowScaled(
     final @Nonnull MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
@@ -174,7 +175,7 @@ import com.io7m.jaux.functional.Option;
       out);
   }
 
-  public static MatrixM3x3D addRowScaledInPlace(
+  public final static MatrixM3x3D addRowScaledInPlace(
     final @Nonnull MatrixM3x3D m,
     final int row_a,
     final int row_b,
@@ -184,7 +185,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM3x3D.addRowScaled(m, row_a, row_b, row_c, r, m);
   }
 
-  private static MatrixM3x3D addRowScaledUnsafe(
+  private final static MatrixM3x3D addRowScaledUnsafe(
     final @Nonnull MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
@@ -204,7 +205,7 @@ import com.io7m.jaux.functional.Option;
     return out;
   }
 
-  private static int columnCheck(
+  private final static int columnCheck(
     final int column)
   {
     if ((column < 0) || (column >= MatrixM3x3D.VIEW_COLS)) {
@@ -225,7 +226,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>output</code>
    */
 
-  public static MatrixM3x3D copy(
+  public final static MatrixM3x3D copy(
     final @Nonnull MatrixReadable3x3D input,
     final @Nonnull MatrixM3x3D output)
   {
@@ -245,7 +246,7 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static double determinant(
+  public final static double determinant(
     final @Nonnull MatrixReadable3x3D m)
   {
     final double r0c0 = m.getRowColumnD(0, 0);
@@ -276,15 +277,17 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static DoubleBuffer doubleBuffer(
+  public final static DoubleBuffer doubleBuffer(
     final @Nonnull MatrixM3x3D m)
   {
     return m.view;
   }
 
   /**
+   * <p>
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
+   * matrix <code>m</code>, saving the exchanged rows to <code>out</code>.
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -302,7 +305,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D exchangeRows(
+  public final static MatrixM3x3D exchangeRows(
     final @Nonnull MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
@@ -316,8 +319,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>m</code> .
+   * matrix <code>m</code>, saving the exchanged rows to <code>m</code>.
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -333,7 +338,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3D exchangeRowsInPlace(
+  public final static MatrixM3x3D exchangeRowsInPlace(
     final @Nonnull MatrixM3x3D m,
     final int row_a,
     final int row_b)
@@ -341,7 +346,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM3x3D.exchangeRows(m, row_a, row_b, m);
   }
 
-  private static MatrixM3x3D exchangeRowsUnsafe(
+  private final static MatrixM3x3D exchangeRowsUnsafe(
     final @Nonnull MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
@@ -365,7 +370,7 @@ import com.io7m.jaux.functional.Option;
    * , column <code>column</code>.
    */
 
-  public static double get(
+  public final static double get(
     final @Nonnull MatrixReadable3x3D m,
     final int row,
     final int column)
@@ -384,13 +389,16 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * The main function that indexes into the buffer that backs the array. The
    * body of this function decides on how elements are stored. This
    * implementation chooses to store values in column-major format as this
    * allows matrices to be sent directly to OpenGL without conversion.
-   * 
+   * </p>
+   * <p>
    * (row * 3) + column, corresponds to row-major storage. (column * 3) + row,
    * corresponds to column-major (OpenGL) storage.
+   * </p>
    */
 
   private final static int indexUnsafe(
@@ -415,7 +423,7 @@ import com.io7m.jaux.functional.Option;
    *          The output matrix.
    */
 
-  public static Option<MatrixM3x3D> invert(
+  public final static Option<MatrixM3x3D> invert(
     final @Nonnull MatrixReadable3x3D m,
     final @Nonnull MatrixM3x3D out)
   {
@@ -482,7 +490,7 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static Option<MatrixM3x3D> invertInPlace(
+  public final static Option<MatrixM3x3D> invertInPlace(
     final @Nonnull MatrixM3x3D m)
   {
     return MatrixM3x3D.invert(m, m);
@@ -506,7 +514,7 @@ import com.io7m.jaux.functional.Option;
    *          The axis.
    */
 
-  public static MatrixM3x3D makeRotation(
+  public final static MatrixM3x3D makeRotation(
     final double angle,
     final @Nonnull VectorReadable3D axis)
   {
@@ -537,7 +545,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D makeRotation(
+  public final static MatrixM3x3D makeRotation(
     final double angle,
     final @Nonnull VectorReadable3D axis,
     final @Nonnull MatrixM3x3D out)
@@ -601,7 +609,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D makeTranslation2D(
+  public final static MatrixM3x3D makeTranslation2D(
     final @Nonnull VectorReadable2D v,
     final @Nonnull MatrixM3x3D out)
   {
@@ -622,7 +630,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D makeTranslation2I(
+  public final static MatrixM3x3D makeTranslation2I(
     final @Nonnull VectorReadable2I v,
     final @Nonnull MatrixM3x3D out)
   {
@@ -645,7 +653,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D multiply(
+  public final static MatrixM3x3D multiply(
     final @Nonnull MatrixReadable3x3D m0,
     final @Nonnull MatrixReadable3x3D m1,
     final @Nonnull MatrixM3x3D out)
@@ -722,7 +730,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D multiplyInPlace(
+  public final static MatrixM3x3D multiplyInPlace(
     final @Nonnull MatrixM3x3D m0,
     final @Nonnull MatrixReadable3x3D m1)
   {
@@ -742,7 +750,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static VectorM3D multiplyVector3D(
+  public final static VectorM3D multiplyVector3D(
     final @Nonnull MatrixReadable3x3D m,
     final @Nonnull VectorReadable3D v,
     final @Nonnull VectorM3D out)
@@ -776,7 +784,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D rotate(
+  public final static MatrixM3x3D rotate(
     final double angle,
     final @Nonnull MatrixReadable3x3D m,
     final @Nonnull VectorReadable3D axis,
@@ -800,7 +808,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3D rotateInPlace(
+  public final static MatrixM3x3D rotateInPlace(
     final double angle,
     final @Nonnull MatrixM3x3D m,
     final @Nonnull VectorReadable3D axis)
@@ -827,7 +835,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3D rotateInPlaceWithContext(
+  public final static MatrixM3x3D rotateInPlaceWithContext(
     final @Nonnull Context context,
     final double angle,
     final @Nonnull MatrixM3x3D m,
@@ -856,7 +864,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D rotateWithContext(
+  public final static MatrixM3x3D rotateWithContext(
     final @Nonnull Context context,
     final double angle,
     final @Nonnull MatrixReadable3x3D m,
@@ -871,7 +879,7 @@ import com.io7m.jaux.functional.Option;
    * <code>out</code>.
    */
 
-  public static VectorM3D row(
+  public final static VectorM3D row(
     final @Nonnull MatrixReadable3x3D m,
     final int row,
     final @Nonnull VectorM3D out)
@@ -879,7 +887,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM3x3D.rowUnsafe(m, MatrixM3x3D.rowCheck(row), out);
   }
 
-  private static int rowCheck(
+  private final static int rowCheck(
     final int row)
   {
     if ((row < 0) || (row >= MatrixM3x3D.VIEW_ROWS)) {
@@ -889,7 +897,7 @@ import com.io7m.jaux.functional.Option;
     return row;
   }
 
-  public static VectorM3D rowUnsafe(
+  public final static VectorM3D rowUnsafe(
     final @Nonnull MatrixReadable3x3D m,
     final int row,
     final @Nonnull VectorM3D out)
@@ -911,7 +919,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3D scale(
+  public final static MatrixM3x3D scale(
     final @Nonnull MatrixReadable3x3D m,
     final double r,
     final @Nonnull MatrixM3x3D out)
@@ -936,7 +944,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3D scaleInPlace(
+  public final static MatrixM3x3D scaleInPlace(
     final @Nonnull MatrixM3x3D m,
     final double r)
   {
@@ -944,8 +952,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>out</code>.
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -963,7 +973,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D scaleRow(
+  public final static MatrixM3x3D scaleRow(
     final @Nonnull MatrixReadable3x3D m,
     final int row,
     final double r,
@@ -973,9 +983,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>m</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -991,7 +1002,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM3x3D scaleRowInPlace(
+  public final static @Nonnull MatrixM3x3D scaleRowInPlace(
     final @Nonnull MatrixM3x3D m,
     final int row,
     final double r)
@@ -999,7 +1010,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM3x3D.scaleRowUnsafe(m, MatrixM3x3D.rowCheck(row), r, m);
   }
 
-  private static MatrixM3x3D scaleRowUnsafe(
+  private final static MatrixM3x3D scaleRowUnsafe(
     final @Nonnull MatrixReadable3x3D m,
     final int row,
     final double r,
@@ -1021,7 +1032,7 @@ import com.io7m.jaux.functional.Option;
    * column <code>column</code> to <code>value</code>.
    */
 
-  public static MatrixM3x3D set(
+  public final static MatrixM3x3D set(
     final @Nonnull MatrixM3x3D m,
     final int row,
     final int column,
@@ -1038,7 +1049,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3D setIdentity(
+  public final static MatrixM3x3D setIdentity(
     final @Nonnull MatrixM3x3D m)
   {
     m.view.clear();
@@ -1049,7 +1060,7 @@ import com.io7m.jaux.functional.Option;
     return m;
   }
 
-  private static void setRowUnsafe(
+  private final static void setRowUnsafe(
     final @Nonnull MatrixM3x3D m,
     final int row,
     final @Nonnull VectorReadable3D v)
@@ -1065,7 +1076,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3D setZero(
+  public final static MatrixM3x3D setZero(
     final @Nonnull MatrixM3x3D m)
   {
     m.view.clear();
@@ -1086,7 +1097,7 @@ import com.io7m.jaux.functional.Option;
    * @return The trace of the matrix
    */
 
-  public static double trace(
+  public final static double trace(
     final @Nonnull MatrixReadable3x3D m)
   {
     return m.getRowColumnD(0, 0)
@@ -1107,7 +1118,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D translateByVector2D(
+  public final static MatrixM3x3D translateByVector2D(
     final @Nonnull MatrixReadable3x3D m,
     final @Nonnull VectorReadable2D v,
     final @Nonnull MatrixM3x3D out)
@@ -1141,7 +1152,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3D translateByVector2DInPlace(
+  public final static MatrixM3x3D translateByVector2DInPlace(
     final @Nonnull MatrixM3x3D m,
     final @Nonnull VectorReadable2D v)
   {
@@ -1161,7 +1172,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D translateByVector2I(
+  public final static MatrixM3x3D translateByVector2I(
     final @Nonnull MatrixReadable3x3D m,
     final @Nonnull VectorReadable2I v,
     final @Nonnull MatrixM3x3D out)
@@ -1195,7 +1206,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3D translateByVector2IInPlace(
+  public final static MatrixM3x3D translateByVector2IInPlace(
     final @Nonnull MatrixM3x3D m,
     final @Nonnull VectorReadable2I v)
   {
@@ -1213,7 +1224,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3D transpose(
+  public final static MatrixM3x3D transpose(
     final @Nonnull MatrixReadable3x3D m,
     final @Nonnull MatrixM3x3D out)
   {
@@ -1235,7 +1246,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3D transposeInPlace(
+  public final static MatrixM3x3D transposeInPlace(
     final @Nonnull MatrixM3x3D m)
   {
     for (int row = 0; row < (MatrixM3x3D.VIEW_ROWS - 1); row++) {
@@ -1299,7 +1310,7 @@ import com.io7m.jaux.functional.Option;
    *          The up vector
    */
 
-  public static void lookAtWithContext(
+  public final static void lookAtWithContext(
     final @Nonnull Context context,
     final @Nonnull VectorReadable3D origin,
     final @Nonnull VectorReadable3D target,
@@ -1358,7 +1369,7 @@ import com.io7m.jaux.functional.Option;
     out_translation.z = -origin.getZD();
   }
 
-  private static @Nonnull MatrixM3x3D rotate(
+  private final static @Nonnull MatrixM3x3D rotate(
     final double angle,
     final @Nonnull MatrixReadable3x3D m,
     final @Nonnull MatrixM3x3D tmp,
@@ -1396,7 +1407,7 @@ import com.io7m.jaux.functional.Option;
     this.view.rewind();
   }
 
-  @Override public boolean equals(
+  @Override public final boolean equals(
     final Object obj)
   {
     if (this == obj) {
@@ -1419,40 +1430,40 @@ import com.io7m.jaux.functional.Option;
     return true;
   }
 
-  public double get(
+  public final double get(
     final int row,
     final int column)
   {
     return MatrixM3x3D.get(this, row, column);
   }
 
-  @Override public DoubleBuffer getDoubleBuffer()
+  @Override public final DoubleBuffer getDoubleBuffer()
   {
     return this.view;
   }
 
-  @Override public void getRow3D(
+  @Override public final void getRow3D(
     final int row,
     final @Nonnull VectorM3D out)
   {
     MatrixM3x3D.rowUnsafe(this, MatrixM3x3D.rowCheck(row), out);
   }
 
-  @Override public double getRowColumnD(
+  @Override public final double getRowColumnD(
     final int row,
     final int column)
   {
     return MatrixM3x3D.get(this, row, column);
   }
 
-  private double getUnsafe(
+  private final double getUnsafe(
     final int row,
     final int column)
   {
     return this.view.get(MatrixM3x3D.indexUnsafe(row, column));
   }
 
-  @Override public int hashCode()
+  @Override public final int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1464,7 +1475,7 @@ import com.io7m.jaux.functional.Option;
     return result;
   }
 
-  public MatrixM3x3D set(
+  public final @Nonnull MatrixM3x3D set(
     final int row,
     final int column,
     final double value)
@@ -1474,7 +1485,7 @@ import com.io7m.jaux.functional.Option;
     return this;
   }
 
-  MatrixM3x3D setUnsafe(
+  final @Nonnull MatrixM3x3D setUnsafe(
     final int row,
     final int column,
     final double value)
@@ -1484,7 +1495,7 @@ import com.io7m.jaux.functional.Option;
     return this;
   }
 
-  @Override public String toString()
+  @Override public final String toString()
   {
     final StringBuilder builder = new StringBuilder();
     for (int row = 0; row < MatrixM3x3D.VIEW_ROWS; ++row) {

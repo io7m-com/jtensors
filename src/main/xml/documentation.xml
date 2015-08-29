@@ -19,7 +19,7 @@
 <s:document
   xmlns:s="http://www.io7m.com/schemas/structural/1.0.0"
   xmlns:xi="http://www.w3.org/2001/XInclude">
-  <s:document-title>io7m-jtensors 5.0.0 Documentation</s:document-title>
+  <s:document-title>io7m-jtensors 5.1.0 Documentation</s:document-title>
   <s:document-style>documentation.css</s:document-style>
   <s:document-contents/>
 
@@ -86,7 +86,7 @@
           <s:verbatim type="example"><![CDATA[<dependency>
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors</artifactId>
-  <version>5.0.0</version>
+  <version>5.1.0</version>
 </dependency>]]></s:verbatim>
         </s:paragraph>
       </s:subsection>
@@ -178,7 +178,7 @@
       <s:paragraph>
         All files distributed with the <s:term type="package">jtensors</s:term>
         package are placed under the following license:
-        <s:verbatim type="license"><![CDATA[Copyright © 2013 http://io7m.com
+        <s:verbatim type="license"><![CDATA[Copyright © 2013 <code@io7m.com> http://io7m.com
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -215,7 +215,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.]]>
           available in mutable or immutable versions. The package unambiguously identifies
           the vector types by using the following naming conventions for the types
           (given as a simple
-          <s:link-external type="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
+          <s:link-external target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
           grammar):
         </s:paragraph>
         <s:formal-item kind="convention">
@@ -300,10 +300,12 @@ type         = "Vector" , mutability , size , element_type ;]]>
           The <s:term type="package">jtensors</s:term> package provides only square
           matrix types with single-precision (<s:term type="type">float</s:term>) elements,
           and double-precision (<s:term type="type">double</s:term>) elements.
-          Matrices are currently only available in mutable form. The package unambiguously
+          Matrices are currently only available in mutable form. Each matrix type is also available
+          in <s:link target="com.io7m.jtensors.matrices.types.phantoms">type-indexed</s:link>
+          versions. The package unambiguously
           identifies the matrix types by using the following naming conventions for the types
           (given as a simple
-          <s:link-external type="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
+          <s:link-external target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
           grammar):
         </s:paragraph>
         <s:formal-item kind="convention">
@@ -510,7 +512,7 @@ MatrixM4x4D.invertWithContext(context, mo, mi);]]>
           immutable versions. The package unambiguously identifies
           the quaternion types by using the following naming
           conventions for the types (given as a simple <s:link-external
-          type="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
+          target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
           grammar):
         </s:paragraph>
         <s:formal-item kind="convention">
@@ -568,7 +570,25 @@ type         = "Quaternion" , mutability , size , element_type ;]]>
         </s:formal-item>
       </s:subsection>
     </s:section>
+    
+    <s:section>
+      <s:section-title>Subclassing</s:section-title>
+      <s:paragraph>
+        The types in the <s:term type="package">jtensors</s:term> package
+        are not marked as <s:term type="constant">final</s:term>, despite
+        all of their methods being <s:term type="constant">final</s:term>. The
+        intention is to allow users of the types to subclass them with the
+        intention of adding "phantom" type parameters
+        <s:footnote>
+          <s:link-external target="http://io7m.com/documents/java/tt1-pt/">http://io7m.com/documents/java/tt1-pt/</s:link-external>
+        </s:footnote>
+        in order to distinguish between semantically distinct (but structurally
+        identical) values at compile time.
+      </s:paragraph>
+    </s:section>
   </s:part>
+
+
 
   <s:part>
     <s:part-title>API Reference</s:part-title>

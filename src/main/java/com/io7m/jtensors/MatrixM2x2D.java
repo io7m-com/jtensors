@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -45,7 +45,7 @@ import com.io7m.jaux.functional.Option;
  * </p>
  */
 
-@NotThreadSafe public final class MatrixM2x2D implements MatrixReadable2x2D
+@NotThreadSafe public class MatrixM2x2D implements MatrixReadable2x2D
 {
   private static final double[] identity_row_0 = { 1.0, 0.0 };
   private static final double[] identity_row_1 = { 0.0, 1.0 };
@@ -63,7 +63,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D add(
+  public final static MatrixM2x2D add(
     final @Nonnull MatrixReadable2x2D m0,
     final @Nonnull MatrixReadable2x2D m1,
     final @Nonnull MatrixM2x2D out)
@@ -91,14 +91,14 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m0</code>
    */
 
-  public static MatrixM2x2D addInPlace(
+  public final static MatrixM2x2D addInPlace(
     final @Nonnull MatrixM2x2D m0,
     final @Nonnull MatrixReadable2x2D m1)
   {
     return MatrixM2x2D.add(m0, m1, m0);
   }
 
-  public static MatrixM2x2D addRowScaled(
+  public final static MatrixM2x2D addRowScaled(
     final @Nonnull MatrixM2x2D m,
     final int row_a,
     final int row_b,
@@ -109,9 +109,11 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Add the values in row <code>row_b</code> to the values in row
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>out</code>.
+   * </p>
    * 
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -134,7 +136,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D addRowScaled(
+  public final static MatrixM2x2D addRowScaled(
     final @Nonnull MatrixReadable2x2D m,
     final int row_a,
     final int row_b,
@@ -151,7 +153,7 @@ import com.io7m.jaux.functional.Option;
       out);
   }
 
-  private static MatrixM2x2D addRowScaledUnsafe(
+  private final static MatrixM2x2D addRowScaledUnsafe(
     final @Nonnull MatrixReadable2x2D m,
     final int row_a,
     final int row_b,
@@ -171,7 +173,7 @@ import com.io7m.jaux.functional.Option;
     return out;
   }
 
-  private static int columnCheck(
+  private final static int columnCheck(
     final int column)
   {
     if ((column < 0) || (column > 1)) {
@@ -192,7 +194,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>output</code>
    */
 
-  public static MatrixM2x2D copy(
+  public final static MatrixM2x2D copy(
     final @Nonnull MatrixReadable2x2D input,
     final @Nonnull MatrixM2x2D output)
   {
@@ -214,7 +216,7 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static double determinant(
+  public final static double determinant(
     final @Nonnull MatrixReadable2x2D m)
   {
     final double r0c0 = m.getRowColumnD(0, 0);
@@ -232,13 +234,13 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static DoubleBuffer doubleBuffer(
+  public final static DoubleBuffer doubleBuffer(
     final @Nonnull MatrixM2x2D m)
   {
     return m.view;
   }
 
-  public static MatrixM2x2D exchangeRows(
+  public final static MatrixM2x2D exchangeRows(
     final @Nonnull MatrixM2x2D m,
     final int row_a,
     final int row_b)
@@ -247,8 +249,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -266,7 +270,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D exchangeRows(
+  public final static MatrixM2x2D exchangeRows(
     final @Nonnull MatrixReadable2x2D m,
     final int row_a,
     final int row_b,
@@ -279,7 +283,7 @@ import com.io7m.jaux.functional.Option;
       out);
   }
 
-  private static MatrixM2x2D exchangeRowsUnsafe(
+  private final static MatrixM2x2D exchangeRowsUnsafe(
     final @Nonnull MatrixReadable2x2D m,
     final int row_a,
     final int row_b,
@@ -303,7 +307,7 @@ import com.io7m.jaux.functional.Option;
    * , column <code>column</code>.
    */
 
-  public static double get(
+  public final static double get(
     final @Nonnull MatrixReadable2x2D m,
     final int row,
     final int column)
@@ -322,13 +326,16 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * The main function that indexes into the buffer that backs the array. The
    * body of this function decides on how elements are stored. This
    * implementation chooses to store values in column-major format as this
    * allows matrices to be sent directly to OpenGL without conversion.
-   * 
+   * </p>
+   * <p>
    * (row * 2) + column, corresponds to row-major storage. (column * 2) + row,
    * corresponds to column-major (OpenGL) storage.
+   * </p>
    */
 
   private final static int indexUnsafe(
@@ -338,7 +345,7 @@ import com.io7m.jaux.functional.Option;
     return (column * 2) + row;
   }
 
-  public static Option<MatrixM2x2D> invert(
+  public final static Option<MatrixM2x2D> invert(
     final @Nonnull MatrixM2x2D m)
   {
     return MatrixM2x2D.invert(m, m);
@@ -359,7 +366,7 @@ import com.io7m.jaux.functional.Option;
    *          The output matrix.
    */
 
-  public static Option<MatrixM2x2D> invert(
+  public final static Option<MatrixM2x2D> invert(
     final @Nonnull MatrixReadable2x2D m,
     final @Nonnull MatrixM2x2D out)
   {
@@ -396,7 +403,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D multiply(
+  public final static MatrixM2x2D multiply(
     final @Nonnull MatrixM2x2D m0,
     final @Nonnull MatrixReadable2x2D m1)
   {
@@ -416,7 +423,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D multiply(
+  public final static MatrixM2x2D multiply(
     final @Nonnull MatrixReadable2x2D m0,
     final @Nonnull MatrixReadable2x2D m1,
     final @Nonnull MatrixM2x2D out)
@@ -456,7 +463,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static VectorM2D multiplyVector2D(
+  public final static VectorM2D multiplyVector2D(
     final @Nonnull MatrixReadable2x2D m,
     final @Nonnull VectorReadable2D v,
     final @Nonnull VectorM2D out)
@@ -477,7 +484,7 @@ import com.io7m.jaux.functional.Option;
    * <code>out</code>.
    */
 
-  public static VectorM2D row(
+  public final static VectorM2D row(
     final @Nonnull MatrixReadable2x2D m,
     final int row,
     final @Nonnull VectorM2D out)
@@ -485,7 +492,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM2x2D.rowUnsafe(m, MatrixM2x2D.rowCheck(row), out);
   }
 
-  private static int rowCheck(
+  private final static int rowCheck(
     final int row)
   {
     if ((row < 0) || (row > 1)) {
@@ -495,7 +502,7 @@ import com.io7m.jaux.functional.Option;
     return row;
   }
 
-  public static VectorM2D rowUnsafe(
+  public final static VectorM2D rowUnsafe(
     final @Nonnull MatrixReadable2x2D m,
     final int row,
     final @Nonnull VectorM2D out)
@@ -516,7 +523,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM2x2D scale(
+  public final static MatrixM2x2D scale(
     final @Nonnull MatrixM2x2D m,
     final double r)
   {
@@ -534,7 +541,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM2x2D scale(
+  public final static MatrixM2x2D scale(
     final @Nonnull MatrixReadable2x2D m,
     final double r,
     final @Nonnull MatrixM2x2D out)
@@ -547,7 +554,7 @@ import com.io7m.jaux.functional.Option;
     return out;
   }
 
-  public static MatrixM2x2D scaleRow(
+  public final static MatrixM2x2D scaleRow(
     final @Nonnull MatrixM2x2D m,
     final int row,
     final double r)
@@ -556,8 +563,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>out</code>.
+   * </p>
    * 
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -576,7 +585,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D scaleRow(
+  public final static MatrixM2x2D scaleRow(
     final @Nonnull MatrixReadable2x2D m,
     final int row,
     final double r,
@@ -585,7 +594,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM2x2D.scaleRowUnsafe(m, MatrixM2x2D.rowCheck(row), r, out);
   }
 
-  private static MatrixM2x2D scaleRowUnsafe(
+  private final static MatrixM2x2D scaleRowUnsafe(
     final @Nonnull MatrixReadable2x2D m,
     final int row,
     final double r,
@@ -605,7 +614,7 @@ import com.io7m.jaux.functional.Option;
    * column <code>column</code> to <code>value</code>.
    */
 
-  public static MatrixM2x2D set(
+  public final static MatrixM2x2D set(
     final @Nonnull MatrixM2x2D m,
     final int row,
     final int column,
@@ -622,7 +631,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM2x2D setIdentity(
+  public final static MatrixM2x2D setIdentity(
     final @Nonnull MatrixM2x2D m)
   {
     m.view.clear();
@@ -632,7 +641,7 @@ import com.io7m.jaux.functional.Option;
     return m;
   }
 
-  private static void setRowUnsafe(
+  private final static void setRowUnsafe(
     final @Nonnull MatrixM2x2D m,
     final int row,
     final @Nonnull VectorReadable2D v)
@@ -648,7 +657,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM2x2D setZero(
+  public final static MatrixM2x2D setZero(
     final @Nonnull MatrixM2x2D m)
   {
     m.view.clear();
@@ -667,7 +676,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM2x2D transpose(
+  public final static MatrixM2x2D transpose(
     final @Nonnull MatrixM2x2D m)
   {
     for (int row = 0; row < (2 - 1); row++) {
@@ -693,7 +702,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM2x2D transpose(
+  public final static MatrixM2x2D transpose(
     final @Nonnull MatrixReadable2x2D m,
     final @Nonnull MatrixM2x2D out)
   {
@@ -727,7 +736,7 @@ import com.io7m.jaux.functional.Option;
    * @return The trace of the matrix
    */
 
-  public static double trace(
+  public final static double trace(
     final @Nonnull MatrixReadable2x2D m)
   {
     return m.getRowColumnD(0, 0) + m.getRowColumnD(1, 1);
@@ -758,7 +767,7 @@ import com.io7m.jaux.functional.Option;
     this.view.rewind();
   }
 
-  @Override public boolean equals(
+  @Override public final boolean equals(
     final Object obj)
   {
     if (this == obj) {
@@ -781,33 +790,33 @@ import com.io7m.jaux.functional.Option;
     return true;
   }
 
-  public double get(
+  public final double get(
     final int row,
     final int column)
   {
     return MatrixM2x2D.get(this, row, column);
   }
 
-  @Override public @Nonnull DoubleBuffer getDoubleBuffer()
+  @Override public final @Nonnull DoubleBuffer getDoubleBuffer()
   {
     return this.view;
   }
 
-  @Override public void getRow2D(
+  @Override public final void getRow2D(
     final int row,
     final @Nonnull VectorM2D out)
   {
     MatrixM2x2D.rowUnsafe(this, MatrixM2x2D.rowCheck(row), out);
   }
 
-  @Override public double getRowColumnD(
+  @Override public final double getRowColumnD(
     final int row,
     final int column)
   {
     return MatrixM2x2D.get(this, row, column);
   }
 
-  @Override public int hashCode()
+  @Override public final int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -819,7 +828,7 @@ import com.io7m.jaux.functional.Option;
     return result;
   }
 
-  public MatrixM2x2D set(
+  public final MatrixM2x2D set(
     final int row,
     final int column,
     final double value)
@@ -828,7 +837,7 @@ import com.io7m.jaux.functional.Option;
     return this;
   }
 
-  private MatrixM2x2D setUnsafe(
+  private final MatrixM2x2D setUnsafe(
     final int row,
     final int column,
     final double value)
@@ -838,7 +847,7 @@ import com.io7m.jaux.functional.Option;
     return this;
   }
 
-  @Override public String toString()
+  @Override public final String toString()
   {
     final StringBuilder builder = new StringBuilder();
     for (int row = 0; row < 2; ++row) {

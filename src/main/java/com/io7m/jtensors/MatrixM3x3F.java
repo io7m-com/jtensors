@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -45,19 +45,19 @@ import com.io7m.jaux.functional.Option;
  * </p>
  */
 
-@NotThreadSafe public final class MatrixM3x3F implements MatrixReadable3x3F
+@NotThreadSafe public class MatrixM3x3F implements MatrixReadable3x3F
 {
   /**
+   * <p>
    * The Context type contains the minimum storage required for all of the
    * functions of the <code>MatrixM3x3F</code> class.
-   * 
+   * </p>
    * <p>
    * The purpose of the class is to allow applications to allocate all storage
    * ahead of time in order to allow functions in the class to avoid
    * allocating memory (not including stack space) for intermediate
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
-   * 
    * <p>
    * The user should allocate one <code>Context</code> value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes
@@ -67,7 +67,7 @@ import com.io7m.jaux.functional.Option;
    * @since 5.0.0
    */
 
-  @NotThreadSafe public static final class Context
+  @NotThreadSafe public static class Context
   {
     final @Nonnull MatrixM3x3F m4a = new MatrixM3x3F();
     final @Nonnull VectorM3F   v3a = new VectorM3F();
@@ -97,7 +97,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F add(
+  public final static @Nonnull MatrixM3x3F add(
     final @Nonnull MatrixReadable3x3F m0,
     final @Nonnull MatrixReadable3x3F m1,
     final @Nonnull MatrixM3x3F out)
@@ -124,7 +124,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m0</code>
    */
 
-  public static @Nonnull MatrixM3x3F addInPlace(
+  public final static @Nonnull MatrixM3x3F addInPlace(
     final @Nonnull MatrixM3x3F m0,
     final @Nonnull MatrixM3x3F m1)
   {
@@ -132,10 +132,11 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Add the values in row <code>row_b</code> to the values in row
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>out</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -157,7 +158,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F addRowScaled(
+  public final static @Nonnull MatrixM3x3F addRowScaled(
     final @Nonnull MatrixReadable3x3F m,
     final int row_a,
     final int row_b,
@@ -174,7 +175,7 @@ import com.io7m.jaux.functional.Option;
       out);
   }
 
-  public static @Nonnull MatrixM3x3F addRowScaledInPlace(
+  public final static @Nonnull MatrixM3x3F addRowScaledInPlace(
     final @Nonnull MatrixM3x3F m,
     final int row_a,
     final int row_b,
@@ -184,7 +185,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM3x3F.addRowScaled(m, row_a, row_b, row_c, r, m);
   }
 
-  private static @Nonnull MatrixM3x3F addRowScaledUnsafe(
+  private final static @Nonnull MatrixM3x3F addRowScaledUnsafe(
     final @Nonnull MatrixReadable3x3F m,
     final int row_a,
     final int row_b,
@@ -204,7 +205,7 @@ import com.io7m.jaux.functional.Option;
     return out;
   }
 
-  private static int columnCheck(
+  private final static int columnCheck(
     final int column)
   {
     if ((column < 0) || (column >= MatrixM3x3F.VIEW_COLS)) {
@@ -225,7 +226,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>output</code>
    */
 
-  public static @Nonnull MatrixM3x3F copy(
+  public final static @Nonnull MatrixM3x3F copy(
     final @Nonnull MatrixReadable3x3F input,
     final @Nonnull MatrixM3x3F output)
   {
@@ -245,7 +246,7 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static double determinant(
+  public final static double determinant(
     final @Nonnull MatrixReadable3x3F m)
   {
     final double r0c0 = m.getRowColumnF(0, 0);
@@ -270,8 +271,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -289,7 +292,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F exchangeRows(
+  public final static @Nonnull MatrixM3x3F exchangeRows(
     final @Nonnull MatrixReadable3x3F m,
     final int row_a,
     final int row_b,
@@ -303,9 +306,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>m</code> .
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -321,7 +325,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM3x3F exchangeRowsInPlace(
+  public final static @Nonnull MatrixM3x3F exchangeRowsInPlace(
     final @Nonnull MatrixM3x3F m,
     final int row_a,
     final int row_b)
@@ -329,7 +333,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM3x3F.exchangeRows(m, row_a, row_b, m);
   }
 
-  private static @Nonnull MatrixM3x3F exchangeRowsUnsafe(
+  private final static @Nonnull MatrixM3x3F exchangeRowsUnsafe(
     final @Nonnull MatrixReadable3x3F m,
     final int row_a,
     final int row_b,
@@ -355,7 +359,7 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static FloatBuffer floatBuffer(
+  public final static FloatBuffer floatBuffer(
     final @Nonnull MatrixM3x3F m)
   {
     return m.view;
@@ -366,7 +370,7 @@ import com.io7m.jaux.functional.Option;
    * , column <code>column</code>.
    */
 
-  public static float get(
+  public final static float get(
     final @Nonnull MatrixReadable3x3F m,
     final int row,
     final int column)
@@ -385,13 +389,16 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * The main function that indexes into the buffer that backs the array. The
    * body of this function decides on how elements are stored. This
    * implementation chooses to store values in column-major format as this
    * allows matrices to be sent directly to OpenGL without conversion.
-   * 
+   * </p>
+   * <p>
    * (row * 3) + column, corresponds to row-major storage. (column * 3) + row,
    * corresponds to column-major (OpenGL) storage.
+   * </p>
    */
 
   private final static int indexUnsafe(
@@ -416,7 +423,7 @@ import com.io7m.jaux.functional.Option;
    *          The output matrix.
    */
 
-  public static @Nonnull Option<MatrixM3x3F> invert(
+  public final static @Nonnull Option<MatrixM3x3F> invert(
     final @Nonnull MatrixReadable3x3F m,
     final @Nonnull MatrixM3x3F out)
   {
@@ -483,7 +490,7 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static @Nonnull Option<MatrixM3x3F> invertInPlace(
+  public final static @Nonnull Option<MatrixM3x3F> invertInPlace(
     final @Nonnull MatrixM3x3F m)
   {
     return MatrixM3x3F.invert(m, m);
@@ -520,7 +527,7 @@ import com.io7m.jaux.functional.Option;
    *          The up vector
    */
 
-  public static void lookAtWithContext(
+  public final static void lookAtWithContext(
     final @Nonnull Context context,
     final @Nonnull VectorReadable3F origin,
     final @Nonnull VectorReadable3F target,
@@ -590,7 +597,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F makeTranslation2F(
+  public final static @Nonnull MatrixM3x3F makeTranslation2F(
     final @Nonnull VectorReadable2F v,
     final @Nonnull MatrixM3x3F out)
   {
@@ -611,7 +618,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F makeTranslation2I(
+  public final static @Nonnull MatrixM3x3F makeTranslation2I(
     final @Nonnull VectorReadable2I v,
     final @Nonnull MatrixM3x3F out)
   {
@@ -634,7 +641,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F multiply(
+  public final static @Nonnull MatrixM3x3F multiply(
     final @Nonnull MatrixReadable3x3F m0,
     final @Nonnull MatrixReadable3x3F m1,
     final @Nonnull MatrixM3x3F out)
@@ -711,7 +718,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F multiplyInPlace(
+  public final static @Nonnull MatrixM3x3F multiplyInPlace(
     final @Nonnull MatrixM3x3F m0,
     final @Nonnull MatrixReadable3x3F m1)
   {
@@ -731,7 +738,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static VectorM3F multiplyVector3F(
+  public final static VectorM3F multiplyVector3F(
     final @Nonnull MatrixReadable3x3F m,
     final @Nonnull VectorReadable3F v,
     final @Nonnull VectorM3F out)
@@ -749,7 +756,7 @@ import com.io7m.jaux.functional.Option;
     return out;
   }
 
-  private static @Nonnull MatrixM3x3F rotate(
+  private final static @Nonnull MatrixM3x3F rotate(
     final double angle,
     final @Nonnull MatrixReadable3x3F m,
     final @Nonnull MatrixM3x3F tmp,
@@ -778,7 +785,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3F rotate(
+  public final static MatrixM3x3F rotate(
     final double angle,
     final @Nonnull MatrixReadable3x3F m,
     final @Nonnull VectorReadable3F axis,
@@ -802,7 +809,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3F rotateInPlace(
+  public final static MatrixM3x3F rotateInPlace(
     final double angle,
     final @Nonnull MatrixM3x3F m,
     final @Nonnull VectorReadable3F axis)
@@ -829,7 +836,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static MatrixM3x3F rotateInPlaceWithContext(
+  public final static MatrixM3x3F rotateInPlaceWithContext(
     final @Nonnull Context context,
     final double angle,
     final @Nonnull MatrixM3x3F m,
@@ -858,7 +865,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static MatrixM3x3F rotateWithContext(
+  public final static MatrixM3x3F rotateWithContext(
     final @Nonnull Context context,
     final double angle,
     final @Nonnull MatrixReadable3x3F m,
@@ -873,7 +880,7 @@ import com.io7m.jaux.functional.Option;
    * <code>out</code>.
    */
 
-  public static VectorM3F row(
+  public final static VectorM3F row(
     final @Nonnull MatrixReadable3x3F m,
     final int row,
     final @Nonnull VectorM3F out)
@@ -881,7 +888,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM3x3F.rowUnsafe(m, MatrixM3x3F.rowCheck(row), out);
   }
 
-  private static int rowCheck(
+  private final static int rowCheck(
     final int row)
   {
     if ((row < 0) || (row >= MatrixM3x3F.VIEW_ROWS)) {
@@ -891,7 +898,7 @@ import com.io7m.jaux.functional.Option;
     return row;
   }
 
-  public static VectorM3F rowUnsafe(
+  public final static VectorM3F rowUnsafe(
     final @Nonnull MatrixReadable3x3F m,
     final int row,
     final @Nonnull VectorM3F out)
@@ -913,7 +920,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM3x3F scale(
+  public final static @Nonnull MatrixM3x3F scale(
     final @Nonnull MatrixReadable3x3F m,
     final double r,
     final @Nonnull MatrixM3x3F out)
@@ -937,7 +944,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM3x3F scaleInPlace(
+  public final static @Nonnull MatrixM3x3F scaleInPlace(
     final @Nonnull MatrixM3x3F m,
     final double r)
   {
@@ -945,9 +952,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>out</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -965,7 +973,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F scaleRow(
+  public final static @Nonnull MatrixM3x3F scaleRow(
     final @Nonnull MatrixReadable3x3F m,
     final int row,
     final double r,
@@ -975,9 +983,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>m</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -993,7 +1002,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM3x3F scaleRowInPlace(
+  public final static @Nonnull MatrixM3x3F scaleRowInPlace(
     final @Nonnull MatrixM3x3F m,
     final int row,
     final double r)
@@ -1001,7 +1010,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM3x3F.scaleRowUnsafe(m, MatrixM3x3F.rowCheck(row), r, m);
   }
 
-  private static @Nonnull MatrixM3x3F scaleRowUnsafe(
+  private final static @Nonnull MatrixM3x3F scaleRowUnsafe(
     final @Nonnull MatrixReadable3x3F m,
     final int row,
     final double r,
@@ -1022,7 +1031,7 @@ import com.io7m.jaux.functional.Option;
    * column <code>column</code> to <code>value</code>.
    */
 
-  public static @Nonnull MatrixM3x3F set(
+  public final static @Nonnull MatrixM3x3F set(
     final @Nonnull MatrixM3x3F m,
     final int row,
     final int column,
@@ -1039,7 +1048,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM3x3F setIdentity(
+  public final static @Nonnull MatrixM3x3F setIdentity(
     final @Nonnull MatrixM3x3F m)
   {
     m.view.clear();
@@ -1050,7 +1059,7 @@ import com.io7m.jaux.functional.Option;
     return m;
   }
 
-  private static void setRowUnsafe(
+  private final static void setRowUnsafe(
     final @Nonnull MatrixM3x3F m,
     final int row,
     final @Nonnull VectorReadable3F v)
@@ -1066,7 +1075,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM3x3F setZero(
+  public final static @Nonnull MatrixM3x3F setZero(
     final @Nonnull MatrixM3x3F m)
   {
     m.view.clear();
@@ -1087,7 +1096,7 @@ import com.io7m.jaux.functional.Option;
    * @return The trace of the matrix
    */
 
-  public static double trace(
+  public final static double trace(
     final @Nonnull MatrixReadable3x3F m)
   {
     return m.getRowColumnF(0, 0)
@@ -1108,7 +1117,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F translateByVector2F(
+  public final static @Nonnull MatrixM3x3F translateByVector2F(
     final @Nonnull MatrixReadable3x3F m,
     final @Nonnull VectorReadable2F v,
     final @Nonnull MatrixM3x3F out)
@@ -1142,7 +1151,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM3x3F translateByVector2FInPlace(
+  public final static @Nonnull MatrixM3x3F translateByVector2FInPlace(
     final @Nonnull MatrixM3x3F m,
     final @Nonnull VectorReadable2F v)
   {
@@ -1162,7 +1171,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F translateByVector2I(
+  public final static @Nonnull MatrixM3x3F translateByVector2I(
     final @Nonnull MatrixReadable3x3F m,
     final @Nonnull VectorReadable2I v,
     final @Nonnull MatrixM3x3F out)
@@ -1196,7 +1205,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM3x3F translateByVector2IInPlace(
+  public final static @Nonnull MatrixM3x3F translateByVector2IInPlace(
     final @Nonnull MatrixM3x3F m,
     final @Nonnull VectorReadable2I v)
   {
@@ -1214,7 +1223,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F transpose(
+  public final static @Nonnull MatrixM3x3F transpose(
     final @Nonnull MatrixReadable3x3F m,
     final @Nonnull MatrixM3x3F out)
   {
@@ -1234,7 +1243,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM3x3F transposeInPlace(
+  public final static @Nonnull MatrixM3x3F transposeInPlace(
     final @Nonnull MatrixM3x3F m)
   {
     for (int row = 0; row < (MatrixM3x3F.VIEW_ROWS - 1); row++) {
@@ -1252,17 +1261,11 @@ import com.io7m.jaux.functional.Option;
   }
 
   private final ByteBuffer  data;
-
   private final FloatBuffer view;
-
   private static final int  VIEW_ELEMENT_SIZE;
-
   private static final int  VIEW_ELEMENTS;
-
   private static final int  VIEW_BYTES;
-
   private static final int  VIEW_COLS;
-
   private static final int  VIEW_ROWS;
 
   static {
@@ -1291,7 +1294,7 @@ import com.io7m.jaux.functional.Option;
    *          The axis.
    */
 
-  public static @Nonnull MatrixM3x3F makeRotation(
+  public final static @Nonnull MatrixM3x3F makeRotation(
     final double angle,
     final @Nonnull VectorReadable3F axis)
   {
@@ -1322,7 +1325,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM3x3F makeRotation(
+  public final static @Nonnull MatrixM3x3F makeRotation(
     final double angle,
     final @Nonnull VectorReadable3F axis,
     final @Nonnull MatrixM3x3F out)
@@ -1400,7 +1403,7 @@ import com.io7m.jaux.functional.Option;
     this.view.rewind();
   }
 
-  @Override public boolean equals(
+  @Override public final boolean equals(
     final Object obj)
   {
     if (this == obj) {
@@ -1423,40 +1426,40 @@ import com.io7m.jaux.functional.Option;
     return true;
   }
 
-  public float get(
+  public final float get(
     final int row,
     final int column)
   {
     return MatrixM3x3F.get(this, row, column);
   }
 
-  @Override public FloatBuffer getFloatBuffer()
+  @Override public final FloatBuffer getFloatBuffer()
   {
     return this.view;
   }
 
-  @Override public void getRow3F(
+  @Override public final void getRow3F(
     final int row,
     final @Nonnull VectorM3F out)
   {
     MatrixM3x3F.rowUnsafe(this, MatrixM3x3F.rowCheck(row), out);
   }
 
-  @Override public float getRowColumnF(
+  @Override public final float getRowColumnF(
     final int row,
     final int column)
   {
     return MatrixM3x3F.get(this, row, column);
   }
 
-  private float getUnsafe(
+  private final float getUnsafe(
     final int row,
     final int column)
   {
     return this.view.get(MatrixM3x3F.indexUnsafe(row, column));
   }
 
-  @Override public int hashCode()
+  @Override public final int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1468,7 +1471,7 @@ import com.io7m.jaux.functional.Option;
     return result;
   }
 
-  public MatrixM3x3F set(
+  public final @Nonnull MatrixM3x3F set(
     final int row,
     final int column,
     final float value)
@@ -1478,7 +1481,7 @@ import com.io7m.jaux.functional.Option;
     return this;
   }
 
-  MatrixM3x3F setUnsafe(
+  final @Nonnull MatrixM3x3F setUnsafe(
     final int row,
     final int column,
     final float value)
@@ -1488,7 +1491,7 @@ import com.io7m.jaux.functional.Option;
     return this;
   }
 
-  @Override public String toString()
+  @Override public final String toString()
   {
     final StringBuilder builder = new StringBuilder();
     for (int row = 0; row < MatrixM3x3F.VIEW_ROWS; ++row) {

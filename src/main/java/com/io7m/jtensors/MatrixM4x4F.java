@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -45,19 +45,19 @@ import com.io7m.jaux.functional.Option;
  * </p>
  */
 
-@NotThreadSafe public final class MatrixM4x4F implements MatrixReadable4x4F
+@NotThreadSafe public class MatrixM4x4F implements MatrixReadable4x4F
 {
   /**
+   * <p>
    * The Context type contains the minimum storage required for all of the
    * functions of the <code>MatrixM4x4F</code> class.
-   * 
+   * </p>
    * <p>
    * The purpose of the class is to allow applications to allocate all storage
    * ahead of time in order to allow functions in the class to avoid
    * allocating memory (not including stack space) for intermediate
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
-   * 
    * <p>
    * The user should allocate one <code>Context</code> value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes
@@ -65,7 +65,7 @@ import com.io7m.jaux.functional.Option;
    * </p>
    */
 
-  @NotThreadSafe public static final class Context
+  @NotThreadSafe public static class Context
   {
     final @Nonnull MatrixM4x4F m4a = new MatrixM4x4F();
     final @Nonnull MatrixM4x4F m4b = new MatrixM4x4F();
@@ -95,7 +95,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F add(
+  public final static @Nonnull MatrixM4x4F add(
     final @Nonnull MatrixReadable4x4F m0,
     final @Nonnull MatrixReadable4x4F m1,
     final @Nonnull MatrixM4x4F out)
@@ -122,7 +122,7 @@ import com.io7m.jaux.functional.Option;
    * @return m0
    */
 
-  public static @Nonnull MatrixM4x4F addInPlace(
+  public final static @Nonnull MatrixM4x4F addInPlace(
     final @Nonnull MatrixM4x4F m0,
     final @Nonnull MatrixReadable4x4F m1)
   {
@@ -130,10 +130,11 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Add the values in row <code>row_b</code> to the values in row
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>out</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -155,7 +156,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F addRowScaled(
+  public final static @Nonnull MatrixM4x4F addRowScaled(
     final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
@@ -178,10 +179,11 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Add the values in row <code>row_b</code> to the values in row
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>m</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -201,7 +203,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F addRowScaledInPlace(
+  public final static @Nonnull MatrixM4x4F addRowScaledInPlace(
     final @Nonnull MatrixM4x4F m,
     final int row_a,
     final int row_b,
@@ -211,7 +213,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM4x4F.addRowScaled(m, row_a, row_b, row_c, r, m);
   }
 
-  private static @Nonnull MatrixM4x4F addRowScaledUnsafe(
+  private final static @Nonnull MatrixM4x4F addRowScaledUnsafe(
     final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
@@ -231,12 +233,13 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Add the values in row <code>row_b</code> to the values in row
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>out</code>. The function uses
    * storage preallocated in <code>context</code> to avoid any new
    * allocations.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -260,7 +263,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F addRowScaledWithContext(
+  public final static @Nonnull MatrixM4x4F addRowScaledWithContext(
     final Context context,
     final @Nonnull MatrixReadable4x4F m,
     final int row_a,
@@ -280,7 +283,7 @@ import com.io7m.jaux.functional.Option;
       out);
   }
 
-  private static int columnCheck(
+  private final static int columnCheck(
     final int column)
   {
     if ((column < 0) || (column >= MatrixM4x4F.VIEW_COLS)) {
@@ -301,7 +304,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>output</code>
    */
 
-  public static @Nonnull MatrixM4x4F copy(
+  public final static @Nonnull MatrixM4x4F copy(
     final @Nonnull MatrixReadable4x4F input,
     final @Nonnull MatrixM4x4F output)
   {
@@ -315,8 +318,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
+   * matrix <code>m</code>, saving the exchanged rows to <code>out</code>.
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -334,7 +339,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F exchangeRows(
+  public final static @Nonnull MatrixM4x4F exchangeRows(
     final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
@@ -352,9 +357,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>m</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -370,7 +376,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F exchangeRowsInPlace(
+  public final static @Nonnull MatrixM4x4F exchangeRowsInPlace(
     final @Nonnull MatrixM4x4F m,
     final int row_a,
     final int row_b)
@@ -378,7 +384,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM4x4F.exchangeRows(m, row_a, row_b, m);
   }
 
-  private static @Nonnull MatrixM4x4F exchangeRowsUnsafe(
+  private final static @Nonnull MatrixM4x4F exchangeRowsUnsafe(
     final @Nonnull MatrixReadable4x4F m,
     final int row_a,
     final int row_b,
@@ -396,12 +402,14 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
-   * 
+   * </p>
+   * <p>
    * The function uses storage preallocated in <code>context</code> to avoid
    * allocating memory.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -421,7 +429,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F exchangeRowsWithContext(
+  public final static @Nonnull MatrixM4x4F exchangeRowsWithContext(
     final Context context,
     final @Nonnull MatrixReadable4x4F m,
     final int row_a,
@@ -444,7 +452,7 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static @Nonnull FloatBuffer floatBuffer(
+  public final static @Nonnull FloatBuffer floatBuffer(
     final @Nonnull MatrixM4x4F m)
   {
     return m.view;
@@ -455,7 +463,7 @@ import com.io7m.jaux.functional.Option;
    * , column <code>column</code>.
    */
 
-  public static float get(
+  public final static float get(
     final @Nonnull MatrixReadable4x4F m,
     final int row,
     final int column)
@@ -474,13 +482,16 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * The main function that indexes into the buffer that backs the array. The
    * body of this function decides on how elements are stored. This
    * implementation chooses to store values in column-major format as this
    * allows matrices to be sent directly to OpenGL without conversion.
-   * 
+   * </p>
+   * <p>
    * (row * 4) + column, corresponds to row-major storage. (column * 4) + row,
    * corresponds to column-major (OpenGL) storage.
+   * </p>
    */
 
   private final static int indexUnsafe(
@@ -490,7 +501,7 @@ import com.io7m.jaux.functional.Option;
     return (column * MatrixM4x4F.VIEW_COLS) + row;
   }
 
-  private static @Nonnull Option<MatrixM4x4F> invert(
+  private final static @Nonnull Option<MatrixM4x4F> invert(
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull MatrixM3x3F m3,
     final @Nonnull MatrixM4x4F out)
@@ -853,7 +864,7 @@ import com.io7m.jaux.functional.Option;
    *          The output matrix.
    */
 
-  public static @Nonnull Option<MatrixM4x4F> invert(
+  public final static @Nonnull Option<MatrixM4x4F> invert(
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull MatrixM4x4F out)
   {
@@ -874,7 +885,7 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static @Nonnull Option<MatrixM4x4F> invertInPlace(
+  public final static @Nonnull Option<MatrixM4x4F> invertInPlace(
     final @Nonnull MatrixM4x4F m)
   {
     return MatrixM4x4F.invert(m, m);
@@ -896,7 +907,7 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static @Nonnull Option<MatrixM4x4F> invertInPlaceWithContext(
+  public final static @Nonnull Option<MatrixM4x4F> invertInPlaceWithContext(
     final Context context,
     final @Nonnull MatrixM4x4F m)
   {
@@ -921,7 +932,7 @@ import com.io7m.jaux.functional.Option;
    *          The output matrix.
    */
 
-  public static @Nonnull Option<MatrixM4x4F> invertWithContext(
+  public final static @Nonnull Option<MatrixM4x4F> invertWithContext(
     final Context context,
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull MatrixM4x4F out)
@@ -930,12 +941,15 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Generate and return a matrix that represents a rotation of
    * <code>angle</code> radians around the axis <code>axis</code>.
-   * 
+   * </p>
+   * <p>
    * The function assumes a right-handed coordinate system and therefore a
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
+   * </p>
    * 
    * @param angle
    *          The angle in radians.
@@ -943,7 +957,7 @@ import com.io7m.jaux.functional.Option;
    *          The axis.
    */
 
-  public static @Nonnull MatrixM4x4F makeRotation(
+  public final static @Nonnull MatrixM4x4F makeRotation(
     final double angle,
     final @Nonnull VectorReadable3F axis)
   {
@@ -955,12 +969,15 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Generate a matrix that represents a rotation of <code>angle</code>
    * radians around the axis <code>axis</code> and save to <code>out</code>.
-   * 
+   * </p>
+   * <p>
    * The function assumes a right-handed coordinate system and therefore a
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
+   * </p>
    * 
    * @param angle
    *          The angle in radians.
@@ -971,7 +988,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F makeRotation(
+  public final static @Nonnull MatrixM4x4F makeRotation(
     final double angle,
     final @Nonnull VectorReadable3F axis,
     final @Nonnull MatrixM4x4F out)
@@ -1049,7 +1066,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F makeTranslation3F(
+  public final static @Nonnull MatrixM4x4F makeTranslation3F(
     final @Nonnull VectorReadable3F v)
   {
     final @Nonnull MatrixM4x4F out = new MatrixM4x4F();
@@ -1071,7 +1088,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F makeTranslation3F(
+  public final static @Nonnull MatrixM4x4F makeTranslation3F(
     final @Nonnull VectorReadable3F v,
     final @Nonnull MatrixM4x4F out)
   {
@@ -1108,7 +1125,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F makeTranslation3I(
+  public final static @Nonnull MatrixM4x4F makeTranslation3I(
     final @Nonnull VectorReadable3I v)
   {
     final @Nonnull MatrixM4x4F out = new MatrixM4x4F();
@@ -1130,7 +1147,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F makeTranslation3I(
+  public final static @Nonnull MatrixM4x4F makeTranslation3I(
     final @Nonnull VectorReadable3I v,
     final @Nonnull MatrixM4x4F out)
   {
@@ -1171,7 +1188,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F multiply(
+  public final static @Nonnull MatrixM4x4F multiply(
     final @Nonnull MatrixReadable4x4F m0,
     final @Nonnull MatrixReadable4x4F m1,
     final @Nonnull MatrixM4x4F out)
@@ -1307,7 +1324,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F multiplyInPlace(
+  public final static @Nonnull MatrixM4x4F multiplyInPlace(
     final @Nonnull MatrixM4x4F m0,
     final @Nonnull MatrixReadable4x4F m1)
   {
@@ -1327,7 +1344,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static VectorM4F multiplyVector4F(
+  public final static VectorM4F multiplyVector4F(
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull VectorReadable4F v,
     final @Nonnull VectorM4F out)
@@ -1337,7 +1354,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM4x4F.multiplyVector4F(m, v, va, vb, out);
   }
 
-  private static VectorM4F multiplyVector4F(
+  private final static VectorM4F multiplyVector4F(
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull VectorReadable4F v,
     final @Nonnull VectorM4F va,
@@ -1377,7 +1394,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static VectorM4F multiplyVector4FWithContext(
+  public final static VectorM4F multiplyVector4FWithContext(
     final Context context,
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull VectorReadable4F v,
@@ -1386,7 +1403,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM4x4F.multiplyVector4F(m, v, context.v4a, context.v4b, out);
   }
 
-  private static @Nonnull MatrixM4x4F rotate(
+  private final static @Nonnull MatrixM4x4F rotate(
     final double angle,
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull MatrixM4x4F tmp,
@@ -1401,12 +1418,15 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
    * axis <code>axis</code>, saving the result into <code>out</code>.
-   * 
+   * </p>
+   * <p>
    * The function assumes a right-handed coordinate system and therefore a
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
+   * </p>
    * 
    * @param angle
    *          The angle in radians.
@@ -1419,7 +1439,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F rotate(
+  public final static @Nonnull MatrixM4x4F rotate(
     final double angle,
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull VectorReadable3F axis,
@@ -1430,12 +1450,15 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
    * axis <code>axis</code>, saving the result into <code>m</code>.
-   * 
+   * </p>
+   * <p>
    * The function assumes a right-handed coordinate system and therefore a
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
+   * </p>
    * 
    * @param angle
    *          The angle in radians.
@@ -1446,7 +1469,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F rotateInPlace(
+  public final static @Nonnull MatrixM4x4F rotateInPlace(
     final double angle,
     final @Nonnull MatrixM4x4F m,
     final @Nonnull VectorReadable3F axis)
@@ -1456,14 +1479,17 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
    * axis <code>axis</code>, saving the result into <code>m</code>. The
    * function uses preallocated storage in <code>context</code> to avoid
    * allocating memory.
-   * 
+   * </p>
+   * <p>
    * The function assumes a right-handed coordinate system and therefore a
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
+   * </p>
    * 
    * @param context
    *          Preallocated storage.
@@ -1476,7 +1502,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F rotateInPlaceWithContext(
+  public final static @Nonnull MatrixM4x4F rotateInPlaceWithContext(
     final Context context,
     final double angle,
     final @Nonnull MatrixM4x4F m,
@@ -1486,14 +1512,17 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
    * axis <code>axis</code>, saving the result into <code>out</code>. The
    * function uses preallocated storage in <code>context</code> to avoid
    * allocating memory.
-   * 
+   * </p>
+   * <p>
    * The function assumes a right-handed coordinate system and therefore a
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
+   * </p>
    * 
    * @param context
    *          Preallocated storage.
@@ -1508,7 +1537,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F rotateWithContext(
+  public final static @Nonnull MatrixM4x4F rotateWithContext(
     final Context context,
     final double angle,
     final @Nonnull MatrixReadable4x4F m,
@@ -1523,7 +1552,7 @@ import com.io7m.jaux.functional.Option;
    * <code>out</code>.
    */
 
-  public static VectorM4F row(
+  public final static VectorM4F row(
     final @Nonnull MatrixReadable4x4F m,
     final int row,
     final @Nonnull VectorM4F out)
@@ -1531,7 +1560,7 @@ import com.io7m.jaux.functional.Option;
     return MatrixM4x4F.rowUnsafe(m, MatrixM4x4F.rowCheck(row), out);
   }
 
-  private static int rowCheck(
+  private final static int rowCheck(
     final int row)
   {
     if ((row < 0) || (row >= MatrixM4x4F.VIEW_COLS)) {
@@ -1541,7 +1570,7 @@ import com.io7m.jaux.functional.Option;
     return row;
   }
 
-  public static VectorM4F rowUnsafe(
+  public final static VectorM4F rowUnsafe(
     final @Nonnull MatrixReadable4x4F m,
     final int row,
     final @Nonnull VectorM4F out)
@@ -1564,7 +1593,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F scale(
+  public final static @Nonnull MatrixM4x4F scale(
     final @Nonnull MatrixReadable4x4F m,
     final double r,
     final @Nonnull MatrixM4x4F out)
@@ -1589,7 +1618,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F scaleInPlace(
+  public final static @Nonnull MatrixM4x4F scaleInPlace(
     final @Nonnull MatrixM4x4F m,
     final double r)
   {
@@ -1597,9 +1626,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>out</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -1617,7 +1647,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F scaleRow(
+  public final static @Nonnull MatrixM4x4F scaleRow(
     final @Nonnull MatrixReadable4x4F m,
     final int row,
     final double r,
@@ -1633,9 +1663,10 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Scale row <code>row</code> of the matrix <code>m</code> by <code>r</code>
    * , saving the result to row <code>r</code> of <code>m</code>.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -1651,7 +1682,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F scaleRowInPlace(
+  public final static @Nonnull MatrixM4x4F scaleRowInPlace(
     final @Nonnull MatrixM4x4F m,
     final int row,
     final double r)
@@ -1661,11 +1692,12 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Scale row <code>row</code> of the matrix <code>m</code> by <code>r</code>
    * , saving the result to row <code>r</code> of <code>m</code>. The function
    * uses preallocated storage in <code>context</code> to avoid allocating
    * memory.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -1683,7 +1715,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F scaleRowInPlaceWithContext(
+  public final static @Nonnull MatrixM4x4F scaleRowInPlaceWithContext(
     final Context context,
     final @Nonnull MatrixM4x4F m,
     final int row,
@@ -1697,7 +1729,7 @@ import com.io7m.jaux.functional.Option;
       m);
   }
 
-  private static @Nonnull MatrixM4x4F scaleRowUnsafe(
+  private final static @Nonnull MatrixM4x4F scaleRowUnsafe(
     final @Nonnull MatrixReadable4x4F m,
     final int row,
     final double r,
@@ -1713,11 +1745,12 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Scale row <code>row</code> of the matrix <code>m</code> by <code>r</code>
    * , saving the result to row <code>r</code> of <code>out</code>. The
    * function uses preallocated storage in <code>context</code> to avoid
    * allocating memory.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -1737,7 +1770,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F scaleRowWithContext(
+  public final static @Nonnull MatrixM4x4F scaleRowWithContext(
     final Context context,
     final @Nonnull MatrixReadable4x4F m,
     final int row,
@@ -1757,7 +1790,7 @@ import com.io7m.jaux.functional.Option;
    * column <code>column</code> to <code>value</code>.
    */
 
-  public static @Nonnull MatrixM4x4F set(
+  public final static @Nonnull MatrixM4x4F set(
     final @Nonnull MatrixM4x4F m,
     final int row,
     final int column,
@@ -1774,7 +1807,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F setIdentity(
+  public final static @Nonnull MatrixM4x4F setIdentity(
     final @Nonnull MatrixM4x4F m)
   {
     m.view.clear();
@@ -1786,7 +1819,7 @@ import com.io7m.jaux.functional.Option;
     return m;
   }
 
-  private static void setRowUnsafe(
+  private final static void setRowUnsafe(
     final @Nonnull MatrixM4x4F m,
     final int row,
     final @Nonnull VectorReadable4F v)
@@ -1804,7 +1837,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F setZero(
+  public final static @Nonnull MatrixM4x4F setZero(
     final @Nonnull MatrixM4x4F m)
   {
     m.view.clear();
@@ -1829,7 +1862,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F translateByVector2F(
+  public final static @Nonnull MatrixM4x4F translateByVector2F(
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull VectorReadable2F v,
     final @Nonnull MatrixM4x4F out)
@@ -1866,7 +1899,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F translateByVector2FInPlace(
+  public final static @Nonnull MatrixM4x4F translateByVector2FInPlace(
     final @Nonnull MatrixM4x4F m,
     final @Nonnull VectorReadable2F v)
   {
@@ -1886,7 +1919,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F translateByVector2I(
+  public final static @Nonnull MatrixM4x4F translateByVector2I(
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull VectorReadable2I v,
     final @Nonnull MatrixM4x4F out)
@@ -1923,7 +1956,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F translateByVector2IInPlace(
+  public final static @Nonnull MatrixM4x4F translateByVector2IInPlace(
     final @Nonnull MatrixM4x4F m,
     final @Nonnull VectorReadable2I v)
   {
@@ -1943,7 +1976,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F translateByVector3F(
+  public final static @Nonnull MatrixM4x4F translateByVector3F(
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull VectorReadable3F v,
     final @Nonnull MatrixM4x4F out)
@@ -1989,7 +2022,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F translateByVector3FInPlace(
+  public final static @Nonnull MatrixM4x4F translateByVector3FInPlace(
     final @Nonnull MatrixM4x4F m,
     final @Nonnull VectorReadable3F v)
   {
@@ -2009,7 +2042,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F translateByVector3I(
+  public final static @Nonnull MatrixM4x4F translateByVector3I(
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull VectorReadable3I v,
     final @Nonnull MatrixM4x4F out)
@@ -2055,7 +2088,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F translateByVector3IInPlace(
+  public final static @Nonnull MatrixM4x4F translateByVector3IInPlace(
     final @Nonnull MatrixM4x4F m,
     final @Nonnull VectorReadable3I v)
   {
@@ -2073,7 +2106,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>out</code>
    */
 
-  public static @Nonnull MatrixM4x4F transpose(
+  public final static @Nonnull MatrixM4x4F transpose(
     final @Nonnull MatrixReadable4x4F m,
     final @Nonnull MatrixM4x4F out)
   {
@@ -2093,7 +2126,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F transposeInPlace(
+  public final static @Nonnull MatrixM4x4F transposeInPlace(
     final @Nonnull MatrixM4x4F m)
   {
     for (int row = 0; row < (MatrixM4x4F.VIEW_ROWS - 1); row++) {
@@ -2139,7 +2172,7 @@ import com.io7m.jaux.functional.Option;
    *          The input matrix.
    */
 
-  public static double determinant(
+  public final static double determinant(
     final @Nonnull MatrixReadable4x4F m)
   {
     final double r0c0 = m.getRowColumnF(0, 0);
@@ -2198,11 +2231,12 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * <p>
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>m</code>. The
    * function uses storage preallocated in <code>context</code> to avoid
    * allocating memory.
-   * 
+   * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
    * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
@@ -2220,7 +2254,7 @@ import com.io7m.jaux.functional.Option;
    * @return <code>m</code>
    */
 
-  public static @Nonnull MatrixM4x4F exchangeRowsInPlaceWithContext(
+  public final static @Nonnull MatrixM4x4F exchangeRowsInPlaceWithContext(
     final Context context,
     final @Nonnull MatrixM4x4F m,
     final int row_a,
@@ -2256,7 +2290,7 @@ import com.io7m.jaux.functional.Option;
    *          The up vector
    */
 
-  public static void lookAtWithContext(
+  public final static void lookAtWithContext(
     final @Nonnull Context context,
     final @Nonnull VectorReadable3F origin,
     final @Nonnull VectorReadable3F target,
@@ -2336,7 +2370,7 @@ import com.io7m.jaux.functional.Option;
    * @return The trace of the matrix
    */
 
-  public static double trace(
+  public final static double trace(
     final @Nonnull MatrixReadable4x4F m)
   {
     return m.getRowColumnF(0, 0)
@@ -2369,7 +2403,7 @@ import com.io7m.jaux.functional.Option;
     this.view.rewind();
   }
 
-  @Override public boolean equals(
+  @Override public final boolean equals(
     final Object obj)
   {
     if (this == obj) {
@@ -2392,40 +2426,40 @@ import com.io7m.jaux.functional.Option;
     return true;
   }
 
-  public float get(
+  public final float get(
     final int row,
     final int column)
   {
     return MatrixM4x4F.get(this, row, column);
   }
 
-  @Override public @Nonnull FloatBuffer getFloatBuffer()
+  @Override public final @Nonnull FloatBuffer getFloatBuffer()
   {
     return this.view;
   }
 
-  @Override public void getRow4F(
+  @Override public final void getRow4F(
     final int row,
     final @Nonnull VectorM4F out)
   {
     MatrixM4x4F.rowUnsafe(this, MatrixM4x4F.rowCheck(row), out);
   }
 
-  @Override public float getRowColumnF(
+  @Override public final float getRowColumnF(
     final int row,
     final int column)
   {
     return MatrixM4x4F.get(this, row, column);
   }
 
-  private float getUnsafe(
+  private final float getUnsafe(
     final int row,
     final int column)
   {
     return this.view.get(MatrixM4x4F.indexUnsafe(row, column));
   }
 
-  @Override public int hashCode()
+  @Override public final int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -2437,7 +2471,7 @@ import com.io7m.jaux.functional.Option;
     return result;
   }
 
-  public MatrixM4x4F set(
+  public final @Nonnull MatrixM4x4F set(
     final int row,
     final int column,
     final float value)
@@ -2454,7 +2488,7 @@ import com.io7m.jaux.functional.Option;
    * This function is only accessible by code in the same package as this.
    */
 
-  MatrixM4x4F setUnsafe(
+  final @Nonnull MatrixM4x4F setUnsafe(
     final int row,
     final int column,
     final float value)
@@ -2464,7 +2498,7 @@ import com.io7m.jaux.functional.Option;
     return this;
   }
 
-  @Override public String toString()
+  @Override public final String toString()
   {
     final StringBuilder builder = new StringBuilder();
     for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {

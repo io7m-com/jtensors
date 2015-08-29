@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -22,13 +22,17 @@ import javax.annotation.concurrent.NotThreadSafe;
 import com.io7m.jaux.CheckedMath;
 
 /**
+ * <p>
  * A three-dimensional mutable vector type with integer elements.
+ * </p>
  * 
+ * <p>
  * Values of this type cannot be accessed safely from multiple threads without
  * explicit synchronization.
+ * </p>
  */
 
-@NotThreadSafe public final class VectorM3I implements VectorReadable3I
+@NotThreadSafe public class VectorM3I implements VectorReadable3I
 {
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>,
@@ -45,7 +49,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorM3I absolute(
+  public final static @Nonnull VectorM3I absolute(
     final @Nonnull VectorReadable3I v,
     final @Nonnull VectorM3I out)
   {
@@ -71,7 +75,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorM3I absoluteInPlace(
+  public final static @Nonnull VectorM3I absoluteInPlace(
     final @Nonnull VectorM3I v)
   {
     return VectorM3I.absolute(v, v);
@@ -94,7 +98,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorM3I add(
+  public final static @Nonnull VectorM3I add(
     final @Nonnull VectorReadable3I v0,
     final @Nonnull VectorReadable3I v1,
     final @Nonnull VectorM3I out)
@@ -123,7 +127,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorM3I addInPlace(
+  public final static @Nonnull VectorM3I addInPlace(
     final @Nonnull VectorM3I v0,
     final @Nonnull VectorReadable3I v1)
   {
@@ -150,7 +154,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorM3I addScaled(
+  public final static @Nonnull VectorM3I addScaled(
     final @Nonnull VectorReadable3I v0,
     final @Nonnull VectorReadable3I v1,
     final double r,
@@ -186,7 +190,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorM3I addScaledInPlace(
+  public final static @Nonnull VectorM3I addScaledInPlace(
     final @Nonnull VectorM3I v0,
     final @Nonnull VectorReadable3I v1,
     final double r)
@@ -194,7 +198,7 @@ import com.io7m.jaux.CheckedMath;
     return VectorM3I.addScaled(v0, v1, r, v0);
   }
 
-  private static int cast(
+  private final static int cast(
     final double x)
   {
     return (int) Math.round(x);
@@ -218,7 +222,7 @@ import com.io7m.jaux.CheckedMath;
    *         and at least <code>minimum</code>
    */
 
-  public static @Nonnull VectorM3I clamp(
+  public final static @Nonnull VectorM3I clamp(
     final @Nonnull VectorReadable3I v,
     final int minimum,
     final int maximum,
@@ -250,7 +254,7 @@ import com.io7m.jaux.CheckedMath;
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public static @Nonnull VectorM3I clampByVector(
+  public final static @Nonnull VectorM3I clampByVector(
     final @Nonnull VectorReadable3I v,
     final @Nonnull VectorReadable3I minimum,
     final @Nonnull VectorReadable3I maximum,
@@ -283,7 +287,7 @@ import com.io7m.jaux.CheckedMath;
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public static @Nonnull VectorM3I clampByVectorInPlace(
+  public final static @Nonnull VectorM3I clampByVectorInPlace(
     final @Nonnull VectorM3I v,
     final @Nonnull VectorReadable3I minimum,
     final @Nonnull VectorReadable3I maximum)
@@ -307,7 +311,7 @@ import com.io7m.jaux.CheckedMath;
    *         and at least <code>minimum</code>, in <code>v</code>
    */
 
-  public static @Nonnull VectorM3I clampInPlace(
+  public final static @Nonnull VectorM3I clampInPlace(
     final @Nonnull VectorM3I v,
     final int minimum,
     final int maximum)
@@ -330,7 +334,7 @@ import com.io7m.jaux.CheckedMath;
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
-  public static @Nonnull VectorM3I clampMaximum(
+  public final static @Nonnull VectorM3I clampMaximum(
     final @Nonnull VectorReadable3I v,
     final int maximum,
     final @Nonnull VectorM3I out)
@@ -359,7 +363,7 @@ import com.io7m.jaux.CheckedMath;
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
 
-  public static @Nonnull VectorM3I clampMaximumByVector(
+  public final static @Nonnull VectorM3I clampMaximumByVector(
     final @Nonnull VectorReadable3I v,
     final @Nonnull VectorReadable3I maximum,
     final @Nonnull VectorM3I out)
@@ -386,7 +390,7 @@ import com.io7m.jaux.CheckedMath;
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
 
-  public static @Nonnull VectorM3I clampMaximumByVectorInPlace(
+  public final static @Nonnull VectorM3I clampMaximumByVectorInPlace(
     final @Nonnull VectorM3I v,
     final @Nonnull VectorReadable3I maximum)
   {
@@ -407,7 +411,7 @@ import com.io7m.jaux.CheckedMath;
    *         , in <code>v</code>
    */
 
-  public static @Nonnull VectorM3I clampMaximumInPlace(
+  public final static @Nonnull VectorM3I clampMaximumInPlace(
     final @Nonnull VectorM3I v,
     final int maximum)
   {
@@ -430,7 +434,7 @@ import com.io7m.jaux.CheckedMath;
    *         <code>minimum</code>
    */
 
-  public static @Nonnull VectorM3I clampMinimum(
+  public final static @Nonnull VectorM3I clampMinimum(
     final @Nonnull VectorReadable3I v,
     final int minimum,
     final @Nonnull VectorM3I out)
@@ -459,7 +463,7 @@ import com.io7m.jaux.CheckedMath;
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
    */
 
-  public static @Nonnull VectorM3I clampMinimumByVector(
+  public final static @Nonnull VectorM3I clampMinimumByVector(
     final @Nonnull VectorReadable3I v,
     final @Nonnull VectorReadable3I minimum,
     final @Nonnull VectorM3I out)
@@ -487,7 +491,7 @@ import com.io7m.jaux.CheckedMath;
    *         , in <code>v</code>
    */
 
-  public static @Nonnull VectorM3I clampMinimumByVectorInPlace(
+  public final static @Nonnull VectorM3I clampMinimumByVectorInPlace(
     final @Nonnull VectorM3I v,
     final @Nonnull VectorReadable3I minimum)
   {
@@ -508,7 +512,7 @@ import com.io7m.jaux.CheckedMath;
    *         <code>minimum</code>, in <code>v</code>.
    */
 
-  public static @Nonnull VectorM3I clampMinimumInPlace(
+  public final static @Nonnull VectorM3I clampMinimumInPlace(
     final @Nonnull VectorM3I v,
     final int minimum)
   {
@@ -526,7 +530,7 @@ import com.io7m.jaux.CheckedMath;
    * @return output
    */
 
-  public static @Nonnull VectorM3I copy(
+  public final static @Nonnull VectorM3I copy(
     final @Nonnull VectorReadable3I input,
     final @Nonnull VectorM3I output)
   {
@@ -551,7 +555,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int distance(
+  public final static int distance(
     final @Nonnull VectorReadable3I v0,
     final @Nonnull VectorReadable3I v1)
   {
@@ -574,7 +578,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int dotProduct(
+  public final static int dotProduct(
     final @Nonnull VectorReadable3I v0,
     final @Nonnull VectorReadable3I v1)
   {
@@ -613,7 +617,7 @@ import com.io7m.jaux.CheckedMath;
    *           overflow.
    */
 
-  public static @Nonnull VectorM3I interpolateLinear(
+  public final static @Nonnull VectorM3I interpolateLinear(
     final @Nonnull VectorReadable3I v0,
     final @Nonnull VectorReadable3I v1,
     final double alpha,
@@ -642,7 +646,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int magnitude(
+  public final static int magnitude(
     final @Nonnull VectorReadable3I v)
   {
     return VectorM3I.cast(Math.sqrt(VectorM3I.magnitudeSquared(v)));
@@ -660,7 +664,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static int magnitudeSquared(
+  public final static int magnitudeSquared(
     final @Nonnull VectorReadable3I v)
   {
     return VectorM3I.dotProduct(v, v);
@@ -676,7 +680,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorM3I projection(
+  public final static @Nonnull VectorM3I projection(
     final @Nonnull VectorReadable3I p,
     final @Nonnull VectorReadable3I q,
     final @Nonnull VectorM3I r)
@@ -705,7 +709,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorM3I scale(
+  public final static @Nonnull VectorM3I scale(
     final @Nonnull VectorReadable3I v,
     final double r,
     final @Nonnull VectorM3I out)
@@ -734,7 +738,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorM3I scaleInPlace(
+  public final static @Nonnull VectorM3I scaleInPlace(
     final @Nonnull VectorM3I v,
     final int r)
   {
@@ -758,7 +762,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorM3I subtract(
+  public final static @Nonnull VectorM3I subtract(
     final @Nonnull VectorReadable3I v0,
     final @Nonnull VectorReadable3I v1,
     final @Nonnull VectorM3I out)
@@ -787,7 +791,7 @@ import com.io7m.jaux.CheckedMath;
    *           Iff an internal arithmetic operation causes an integer overflow
    */
 
-  public static @Nonnull VectorM3I subtractInPlace(
+  public final static @Nonnull VectorM3I subtractInPlace(
     final @Nonnull VectorM3I v0,
     final @Nonnull VectorReadable3I v1)
   {
@@ -835,7 +839,7 @@ import com.io7m.jaux.CheckedMath;
     this.z = v.getZI();
   }
 
-  @Override public boolean equals(
+  @Override public final boolean equals(
     final Object obj)
   {
     if (this == obj) {
@@ -860,22 +864,22 @@ import com.io7m.jaux.CheckedMath;
     return true;
   }
 
-  @Override public int getXI()
+  @Override public final int getXI()
   {
     return this.x;
   }
 
-  @Override public int getYI()
+  @Override public final int getYI()
   {
     return this.y;
   }
 
-  @Override public int getZI()
+  @Override public final int getZI()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override public final int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -885,7 +889,7 @@ import com.io7m.jaux.CheckedMath;
     return result;
   }
 
-  @Override public String toString()
+  @Override public final String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM3I ");

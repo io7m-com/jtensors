@@ -279,6 +279,56 @@
               <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.1.0.zip">io7m-jtensors-4.1.0.zip</a>
             </td>
           </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-04-06</td>
+            <td class="page_table_column">509546</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-javadoc.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-javadoc.jar">io7m-jtensors-5.0.0-javadoc.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-04-06</td>
+            <td class="page_table_column">145011</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-sources.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-sources.jar">io7m-jtensors-5.0.0-sources.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-04-06</td>
+            <td class="page_table_column">153210</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0.jar">io7m-jtensors-5.0.0.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-04-06</td>
+            <td class="page_table_column">949226</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-documentation.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-documentation.zip">io7m-jtensors-5.0.0-documentation.zip</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-04-06</td>
+            <td class="page_table_column">744610</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0.zip">io7m-jtensors-5.0.0.zip</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -373,6 +423,19 @@
               <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-4.1.0-documentation.zip">io7m-jtensors-4.1.0-documentation.zip</a>
             </td>
           </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-04-06</td>
+            <td class="page_table_column">949226</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-documentation.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://io7m.com/software/jtensors/doc/5.0.0/d1.xhtml">io7m-jtensors 5.0.0</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.0.0-documentation.zip">io7m-jtensors-5.0.0-documentation.zip</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -380,6 +443,78 @@
     <section name="Changes">
 <table xmlns="http://www.w3.org/1999/xhtml" class="changelog page_table"
        summary="Changes">
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-22</td>
+      <td class="page_table_column">Release: io7m-jtensors 5.0.0</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-22</td>
+      <td class="page_table_column">Code new: Add all missing Vector* functions - VectorM* and VectorI* now have feature parity</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-21</td>
+      <td class="page_table_column">Code change: Massive overhaul of test suite</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-18</td>
+      <td class="page_table_column">Code change: All approximatelyEqual* functions have been removed; use almostEqual instead as it gives far more accurate results</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-18</td>
+      <td class="page_table_column">Code change: MatrixReadable* functions renamed to make the row types explicit</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-18</td>
+      <td class="page_table_column">Code change: Most quaternion functions that took or returned single precision floats now take/return double precision values</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-18</td>
+      <td class="page_table_column">Code change: Quaternion*.makeRotationMatrix() renamed to makeRotationMatrix4x4 and added 3x3 variant</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-17</td>
+      <td class="page_table_column">Code change: All single precision matrix and vector types now use double precision calculations internally for increased accuracy. Most functions that took floats as arguments now take doubles. The vectors and matrices are still using single precision float storage, so this should not break any existing code.</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-17</td>
+      <td class="page_table_column">Code new: Add row fetching methods to all MatrixReadable* interfaces</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-16</td>
+      <td class="page_table_column">Code new: Vastly improve documentation. Document all notational, semantic, and storage conventions.</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-16</td>
+      <td class="page_table_column">Code change: Switch to using a consistent right-handed coordinate system throughout the package. This is a non backwards-compatible change.</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-16</td>
+      <td class="page_table_column">Code new: Add Matrix*.lookAt()</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-15</td>
+      <td class="page_table_column">Code new: Add Matrix3x3*.rotate() and makeRotation()</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-15</td>
+      <td class="page_table_column">Code new: Add Quaternion*.lookAt()</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-15</td>
+      <td class="page_table_column">Code new: Add Quaternion*.makeFromMatrix()</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-15</td>
+      <td class="page_table_column">Code new: Add Matrix*.trace()</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-14</td>
+      <td class="page_table_column">Code new: Add Vector*.orthoNormalize()</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2012-12-09</td>
+      <td class="page_table_column">Code change: Modify the type of QuaternionM4{D,F}.copy() to allow any readable quaternion, as opposed to only QuaternionM4{F,D}. This change does not affect backwards-compatibility as it is simply a generalization of the type in question and cannot break existing programs.</td>
+   </tr>
    <tr class="page_table_row">
       <td class="page_table_column">2012-11-24</td>
       <td class="page_table_column">Release: io7m-jtensors 4.1.0</td>

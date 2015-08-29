@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -21,7 +21,7 @@ import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.AlmostEqualFloat;
-import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
 import com.io7m.jaux.functional.Pair;
 
 public class VectorI3FTest extends VectorI3Contract
@@ -64,11 +64,12 @@ public class VectorI3FTest extends VectorI3Contract
 
       final VectorI3F vr = VectorI3F.add(v0, v1);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.x, v0.x
+      final ContextRelative context = new AlmostEqualFloat.ContextRelative();
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.x, v0.x
         + v1.x));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.y, v0.y
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.y, v0.y
         + v1.y));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.z, v0.z
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.z, v0.z
         + v1.z));
     }
   }
@@ -89,11 +90,12 @@ public class VectorI3FTest extends VectorI3Contract
       final float r = (float) (Math.random() * Float.MAX_VALUE);
       final VectorI3F vr = VectorI3F.addScaled(v0, v1, r);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.x, v0.x
+      final ContextRelative context = new AlmostEqualFloat.ContextRelative();
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.x, v0.x
         + (v1.x * r)));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.y, v0.y
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.y, v0.y
         + (v1.y * r)));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.z, v0.z
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.z, v0.z
         + (v1.z * r)));
     }
   }
@@ -398,7 +400,9 @@ public class VectorI3FTest extends VectorI3Contract
     final VectorI3F v0 = new VectorI3F(0.0f, 1.0f, 0.0f);
     final VectorI3F v1 = new VectorI3F(0.0f, 0.0f, 0.0f);
 
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    final ContextRelative context = new AlmostEqualFloat.ContextRelative();
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(
+      context,
       VectorI3F.distance(v0, v1),
       1.0f));
   }
@@ -864,11 +868,12 @@ public class VectorI3FTest extends VectorI3Contract
 
       final VectorI3F vr = VectorI3F.subtract(v0, v1);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.x, v0.x
+      final ContextRelative context = new AlmostEqualFloat.ContextRelative();
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.x, v0.x
         - v1.x));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.y, v0.y
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.y, v0.y
         - v1.y));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(vr.z, v0.z
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(context, vr.z, v0.z
         - v1.z));
     }
   }

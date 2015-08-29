@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012 http://io7m.com
+ * Copyright © 2013 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -20,7 +20,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.io7m.jaux.AlmostEqualDouble;
-import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
 import com.io7m.jaux.functional.Pair;
 
 public class VectorM4DTest extends VectorM4Contract
@@ -958,6 +958,9 @@ public class VectorM4DTest extends VectorM4Contract
 
   @Override @Test public void testMagnitudeNormal()
   {
+    final ContextRelative context = new ContextRelative();
+    context.setMaxAbsoluteDifference(0.000000000000001);
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
       final double y = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
@@ -970,7 +973,8 @@ public class VectorM4DTest extends VectorM4Contract
       Assert.assertNotSame(v, vr);
 
       final double m = VectorM4D.magnitude(vr);
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 1.0));
+      System.out.println(m);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 1.0));
     }
   }
 
@@ -979,14 +983,16 @@ public class VectorM4DTest extends VectorM4Contract
     final VectorM4D v = new VectorM4D(0.0, 0.0, 0.0, 0.0);
     final VectorM4D vr = VectorM4D.normalizeInPlace(v);
     final double m = VectorM4D.magnitude(vr);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
+    final ContextRelative context = new ContextRelative();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
   @Override @Test public void testMagnitudeOne()
   {
     final VectorM4D v = new VectorM4D(1.0, 0.0, 0.0, 0.0);
     final double m = VectorM4D.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 1.0));
+    final ContextRelative context = new ContextRelative();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
@@ -1007,7 +1013,8 @@ public class VectorM4DTest extends VectorM4Contract
   {
     final VectorM4D v = new VectorM4D(0.0, 0.0, 0.0, 0.0);
     final double m = VectorM4D.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
+    final ContextRelative context = new ContextRelative();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
   @Override @Test public void testNormalizeSimple()
@@ -1137,14 +1144,11 @@ public class VectorM4DTest extends VectorM4Contract
 
       VectorM4D.scale(v, 1.0, vr);
 
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(v.x, vr.x));
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(v.y, vr.y));
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(v.z, vr.z));
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(v.w, vr.w));
+      final ContextRelative context = new ContextRelative();
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, v.x, vr.x));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, v.y, vr.y));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, v.z, vr.z));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, v.w, vr.w));
 
       {
         final double orig_x = v.x;
@@ -1178,14 +1182,11 @@ public class VectorM4DTest extends VectorM4Contract
 
       VectorM4D.scale(v, 0.0, vr);
 
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(vr.x, 0.0));
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(vr.y, 0.0));
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(vr.z, 0.0));
-      Assert.assertTrue(ApproximatelyEqualDouble
-        .approximatelyEqual(vr.w, 0.0));
+      final ContextRelative context = new ContextRelative();
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, vr.x, 0.0));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, vr.y, 0.0));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, vr.z, 0.0));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context, vr.w, 0.0));
 
       {
         VectorM4D.scaleInPlace(v, 0.0);
