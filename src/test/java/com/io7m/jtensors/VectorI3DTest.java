@@ -19,118 +19,190 @@ package com.io7m.jtensors;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.functional.Pair;
 
-public class VectorI3DTest
+public class VectorI3DTest extends VectorI3Contract
 {
-  @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
+  @Override @Test public void testAbsolute()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
       final VectorI3D v = new VectorI3D(x, y, z);
 
-      Assert.assertTrue(VectorI3D.absolute(v).x >= 0.0);
-      Assert.assertTrue(VectorI3D.absolute(v).y >= 0.0);
-      Assert.assertTrue(VectorI3D.absolute(v).z >= 0.0);
+      final VectorI3D vr = VectorI3D.absolute(v);
+
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, Math.abs(v.x), vr.x));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, Math.abs(v.y), vr.y));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, Math.abs(v.z), vr.z));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAdd()
+  @Override @Test public void testAdd()
   {
-    for (int index = 0; index < 100; ++index) {
-      final double x0 = Math.random() * Double.MAX_VALUE;
-      final double y0 = Math.random() * Double.MAX_VALUE;
-      final double z0 = Math.random() * Double.MAX_VALUE;
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double max = 10000.0;
+      final double x0 = Math.random() * max;
+      final double y0 = Math.random() * max;
+      final double z0 = Math.random() * max;
       final VectorI3D v0 = new VectorI3D(x0, y0, z0);
 
-      final double x1 = Math.random() * Double.MAX_VALUE;
-      final double y1 = Math.random() * Double.MAX_VALUE;
-      final double z1 = Math.random() * Double.MAX_VALUE;
+      final double x1 = Math.random() * max;
+      final double y1 = Math.random() * max;
+      final double z1 = Math.random() * max;
       final VectorI3D v1 = new VectorI3D(x1, y1, z1);
 
       final VectorI3D vr = VectorI3D.add(v0, v1);
 
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr.x,
-        v0.x + v1.x));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr.y,
-        v0.y + v1.y));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr.z,
-        v0.z + v1.z));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.x, v0.x + v1.x));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.y, v0.y + v1.y));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.z, v0.z + v1.z));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAddScaled()
+  @Override @Test public void testAddScaled()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double max = 10000.0;
+      final double x0 = Math.random() * max;
+      final double y0 = Math.random() * max;
+      final double z0 = Math.random() * max;
+      final VectorI3D v0 = new VectorI3D(x0, y0, z0);
+
+      final double x1 = Math.random() * max;
+      final double y1 = Math.random() * max;
+      final double z1 = Math.random() * max;
+      final VectorI3D v1 = new VectorI3D(x1, y1, z1);
+
+      final double r = Math.random() * 100.0;
+      final VectorI3D vr = VectorI3D.addScaled(v0, v1, r);
+
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.x, v0.x
+        + (v1.x * r)));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.y, v0.y
+        + (v1.y * r)));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.z, v0.z
+        + (v1.z * r)));
+    }
+  }
+
+  @Override @Test public void testAlmostEqualNot()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final double x = Math.random();
+    final double y = x + 1.0;
+    final double z = y + 1.0;
+    final double q = z + 1.0;
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, y, z);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(x, q, z);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(x, y, q);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(x, y, q);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, q, z);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, y, q);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, y, z);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, q, q);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, q, z);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, q, q);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(x, q, q);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(x, y, q);
+      Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
+    }
+  }
+
+  @Override @Test public void testAlmostEqualTransitive()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
       final VectorI3D v0 = new VectorI3D(x0, y0, z0);
+      final VectorI3D v1 = new VectorI3D(x0, y0, z0);
+      final VectorI3D v2 = new VectorI3D(x0, y0, z0);
 
-      final double x1 = Math.random() * Double.MAX_VALUE;
-      final double y1 = Math.random() * Double.MAX_VALUE;
-      final double z1 = Math.random() * Double.MAX_VALUE;
-      final VectorI3D v1 = new VectorI3D(x1, y1, z1);
-
-      final double r = Math.random() * Double.MAX_VALUE;
-      final VectorI3D vr = VectorI3D.addScaled(v0, v1, r);
-
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr.x,
-        v0.x + (v1.x * r)));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr.y,
-        v0.y + (v1.y * r)));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr.z,
-        v0.z + (v1.z * r)));
+      Assert.assertTrue(VectorI3D.almostEqual(ec, v0, v1));
+      Assert.assertTrue(VectorI3D.almostEqual(ec, v1, v2));
+      Assert.assertTrue(VectorI3D.almostEqual(ec, v0, v2));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testApproximatelyEqualTransitive0()
-  {
-    final double x0 = 0.0;
-    final double x1 = 0.0;
-    final double y0 = 0.0;
-    final double y1 = 0.0;
-    final double z0 = 0.0;
-    final double z1 = 0.0;
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(x0, x1));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(y0, y1));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(z0, z1));
-
-    final VectorI3D v0 = new VectorI3D(x0, y0, z0);
-    final VectorI3D v1 = new VectorI3D(x1, y1, z1);
-    Assert.assertTrue(VectorI3D.approximatelyEqual(v0, v1));
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testApproximatelyEqualTransitive1()
-  {
-    final double x0 = 0.0;
-    final double x1 = 1.0;
-    final double y0 = 0.0;
-    final double y1 = 1.0;
-    final double z0 = 0.0;
-    final double z1 = 1.0;
-    Assert.assertFalse(ApproximatelyEqualDouble.approximatelyEqual(x0, x1));
-    Assert.assertFalse(ApproximatelyEqualDouble.approximatelyEqual(y0, y1));
-    Assert.assertFalse(ApproximatelyEqualDouble.approximatelyEqual(z0, z1));
-
-    final VectorI3D v0 = new VectorI3D(x0, y0, z0);
-    final VectorI3D v1 = new VectorI3D(x1, y1, z1);
-    Assert.assertFalse(VectorI3D.approximatelyEqual(v0, v1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testCheckInterface()
+  @Override @Test public void testCheckInterface()
   {
     final VectorI3D v = new VectorI3D(3.0, 5.0, 7.0);
 
@@ -139,11 +211,9 @@ public class VectorI3DTest
     Assert.assertTrue(v.z == v.getZD());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorMaximumOrdering()
+  @Override @Test public void testClampByVectorMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double max_x = Math.random() * Double.MIN_VALUE;
       final double max_y = Math.random() * Double.MIN_VALUE;
       final double max_z = Math.random() * Double.MIN_VALUE;
@@ -163,11 +233,9 @@ public class VectorI3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorMinimumOrdering()
+  @Override @Test public void testClampByVectorMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MAX_VALUE;
       final double min_y = Math.random() * Double.MAX_VALUE;
       final double min_z = Math.random() * Double.MAX_VALUE;
@@ -187,11 +255,9 @@ public class VectorI3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorOrdering()
+  @Override @Test public void testClampByVectorOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MIN_VALUE;
       final double min_y = Math.random() * Double.MIN_VALUE;
       final double min_z = Math.random() * Double.MIN_VALUE;
@@ -222,11 +288,9 @@ public class VectorI3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampMaximumOrdering()
+  @Override @Test public void testClampMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double maximum = Math.random() * Double.MIN_VALUE;
 
       final double x = Math.random() * Double.MAX_VALUE;
@@ -240,11 +304,9 @@ public class VectorI3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampMinimumOrdering()
+  @Override @Test public void testClampMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double minimum = Math.random() * Double.MAX_VALUE;
 
       final double x = Math.random() * Double.MIN_VALUE;
@@ -258,9 +320,9 @@ public class VectorI3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampOrdering()
+  @Override @Test public void testClampOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double minimum = Math.random() * Double.MIN_VALUE;
       final double maximum = Math.random() * Double.MAX_VALUE;
 
@@ -278,52 +340,85 @@ public class VectorI3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testCrossProductPerpendicular()
+  @Override @Test public void testCopy()
   {
-    final VectorI3D vy = new VectorI3D(0, 1, 0);
-    final VectorI3D vx = new VectorI3D(1, 0, 0);
-    final VectorI3D vz = new VectorI3D(0, 0, 1);
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
 
-    final VectorI3D vxy = VectorI3D.crossProduct(vx, vy);
-    final VectorI3D vxz = VectorI3D.crossProduct(vx, vz);
-    final VectorI3D vyz = VectorI3D.crossProduct(vy, vz);
-
-    Assert.assertTrue(VectorI3D.dotProduct(vxy, vx) == 0.0);
-    Assert.assertTrue(VectorI3D.dotProduct(vxy, vy) == 0.0);
-    Assert.assertTrue(VectorI3D.dotProduct(vxz, vx) == 0.0);
-    Assert.assertTrue(VectorI3D.dotProduct(vxz, vz) == 0.0);
-    Assert.assertTrue(VectorI3D.dotProduct(vyz, vy) == 0.0);
-    Assert.assertTrue(VectorI3D.dotProduct(vyz, vz) == 0.0);
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x = Math.random();
+      final double y = Math.random();
+      final double z = Math.random();
+      final VectorI3D v0 = new VectorI3D(x, y, z);
+      final VectorI3D v1 = new VectorI3D(v0);
+      Assert.assertTrue(VectorI3D.almostEqual(ec, v0, v1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testCrossProductSimple()
+  @Override @Test public void testCrossProductPerpendicular()
   {
-    final VectorI3D v0 = new VectorI3D(0, 1, 0);
-    final VectorI3D v1 = new VectorI3D(1, 0, 0);
-    final VectorI3D vr = VectorI3D.crossProduct(v0, v1);
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext3dp();
 
-    Assert.assertTrue(vr.x == 0.0);
-    Assert.assertTrue(vr.y == 0.0);
-    Assert.assertTrue(vr.z == -1.0);
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x0 = Math.random();
+      final double y0 = Math.random();
+      final double z0 = Math.random();
+      final VectorI3D v0 = VectorI3D.normalize(new VectorI3D(x0, y0, z0));
+
+      final double x1 = Math.random();
+      final double y1 = Math.random();
+      final double z1 = Math.random();
+      final VectorI3D v1 = VectorI3D.normalize(new VectorI3D(x1, y1, z1));
+
+      final VectorI3D vr =
+        VectorI3D.normalize(VectorI3D.crossProduct(v0, v1));
+
+      final double dp0 = VectorI3D.dotProduct(v0, vr);
+      final double dp1 = VectorI3D.dotProduct(v1, vr);
+
+      System.out.println("v0      : " + v0);
+      System.out.println("mag(v0) : " + VectorI3D.magnitude(v0));
+      System.out.println("v1      : " + v1);
+      System.out.println("mag(v1) : " + VectorI3D.magnitude(v1));
+      System.out.println("vr      : " + vr);
+      System.out.println("mag(vr) : " + VectorI3D.magnitude(vr));
+      System.out.println("dp0     : " + dp0);
+      System.out.println("dp1     : " + dp1);
+
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp0, 0.0));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp1, 0.0));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDistance()
+  @Override @Test public void testDefault000()
   {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final VectorI3D v = new VectorI3D();
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.x, 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.y, 0.0));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.z, 0.0));
+  }
+
+  @Override @Test public void testDistance()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
     final VectorI3D v0 = new VectorI3D(0.0, 1.0, 0.0);
     final VectorI3D v1 = new VectorI3D(0.0, 0.0, 0.0);
 
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      ec,
       VectorI3D.distance(v0, v1),
       1.0));
   }
 
-  @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
+  @Override @Test public void testDistanceOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
@@ -338,90 +433,235 @@ public class VectorI3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testDotProductOrthonormal()
+  @Override @Test public void testDotProduct()
   {
-    final VectorI3D v = new VectorI3D(1.0, 0.0, 0.0);
-    Assert.assertTrue(VectorI3D.dotProduct(v, v) == 1.0);
+    final VectorI3D v0 = new VectorI3D(10.0, 10.0, 10.0);
+    final VectorI3D v1 = new VectorI3D(10.0, 10.0, 10.0);
+
+    {
+      final double p = VectorI3D.dotProduct(v0, v1);
+      Assert.assertTrue(v0.getXD() == 10.0);
+      Assert.assertTrue(v0.getYD() == 10.0);
+      Assert.assertTrue(v0.getZD() == 10.0);
+      Assert.assertTrue(v1.getXD() == 10.0);
+      Assert.assertTrue(v1.getYD() == 10.0);
+      Assert.assertTrue(v1.getZD() == 10.0);
+      Assert.assertTrue(p == 300.0);
+    }
+
+    {
+      final double p = VectorI3D.dotProduct(v0, v0);
+      Assert.assertTrue(v0.getXD() == 10.0);
+      Assert.assertTrue(v0.getYD() == 10.0);
+      Assert.assertTrue(v0.getZD() == 10.0);
+      Assert.assertTrue(p == 300.0);
+    }
+
+    {
+      final double p = VectorI3D.dotProduct(v1, v1);
+      Assert.assertTrue(v1.getXD() == 10.0);
+      Assert.assertTrue(v1.getYD() == 10.0);
+      Assert.assertTrue(v1.getZD() == 10.0);
+      Assert.assertTrue(p == 300.0);
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProductSimple()
+  @Override @Test public void testDotProductPerpendicular()
   {
-    final double x0 = 2.0;
-    final double y0 = 2.0;
-    final double z0 = 2.0;
-    final VectorI3D v0 = new VectorI3D(x0, y0, z0);
+    final VectorI3D vpx = new VectorI3D(1.0f, 0.0f, 0.0f);
+    final VectorI3D vmx = new VectorI3D(-1.0f, 0.0f, 0.0f);
 
-    final double x1 = 2.0;
-    final double y1 = 2.0;
-    final double z1 = 2.0;
-    final VectorI3D v1 = new VectorI3D(x1, y1, z1);
+    final VectorI3D vpy = new VectorI3D(0.0f, 1.0f, 0.0f);
+    final VectorI3D vmy = new VectorI3D(0.0f, -1.0f, 0.0f);
 
-    final double p = VectorI3D.dotProduct(v0, v1);
-    Assert.assertTrue(p == 12.0);
+    final VectorI3D vpz = new VectorI3D(0.0f, 0.0f, 1.0f);
+    final VectorI3D vmz = new VectorI3D(0.0f, 0.0f, -1.0f);
+
+    Assert.assertTrue(VectorI3D.dotProduct(vpx, vpy) == 0.0);
+    Assert.assertTrue(VectorI3D.dotProduct(vpy, vpz) == 0.0);
+    Assert.assertTrue(VectorI3D.dotProduct(vmx, vmy) == 0.0);
+    Assert.assertTrue(VectorI3D.dotProduct(vmy, vmz) == 0.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  @Override @Test public void testDotProductSelf()
   {
-    final VectorI3D m0 = new VectorI3D();
-    Assert.assertTrue(m0.equals(m0));
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x = Math.random();
+      final double y = Math.random();
+      final double z = Math.random();
+      final VectorI3D q = new VectorI3D(x, y, z);
+      final double dp = VectorI3D.dotProduct(q, q);
+
+      System.out.println("q  : " + q);
+      System.out.println("dp : " + dp);
+
+      AlmostEqualDouble.almostEqual(ec, 1.0, dp);
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  @Override @Test public void testDotProductSelfMagnitudeSquared()
   {
-    final VectorI3D m0 = new VectorI3D();
-    Assert.assertFalse(m0.equals(null));
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x = Math.random();
+      final double y = Math.random();
+      final double z = Math.random();
+      final VectorI3D q = new VectorI3D(x, y, z);
+
+      final double ms = VectorI3D.magnitudeSquared(q);
+      final double dp = VectorI3D.dotProduct(q, q);
+
+      System.out.println("q  : " + q);
+      System.out.println("ms : " + ms);
+      System.out.println("dp : " + dp);
+
+      AlmostEqualDouble.almostEqual(ec, ms, dp);
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  @Override @Test public void testEqualsCorrect()
   {
-    final VectorI3D m0 = new VectorI3D();
-    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    {
+      final VectorI3D m0 = new VectorI3D();
+      Assert.assertTrue(m0.equals(m0));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D();
+      Assert.assertFalse(m0.equals(null));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D();
+      Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D();
+      final VectorI3D m1 = new VectorI3D();
+      Assert.assertTrue(m0.equals(m1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  @Override @Test public void testEqualsNotEqualCorrect()
+  {
+    final double x = Math.random();
+    final double y = x + 1.0;
+    final double z = y + 1.0;
+    final double w = z + 1.0;
+    final double q = w + 1.0;
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      Assert.assertFalse(m0.equals(null));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, y, z);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(x, q, z);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(x, y, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, q, z);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, y, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, y, z);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, q, z);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(q, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(x, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(x, y, z);
+      final VectorI3D m1 = new VectorI3D(x, y, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+  }
+
+  @Override @Test public void testHashCodeEqualsCorrect()
   {
     final VectorI3D m0 = new VectorI3D();
     final VectorI3D m1 = new VectorI3D();
-    Assert.assertTrue(m0.equals(m1));
+    Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCorrect()
+  @Override @Test public void testHashCodeNotEqualCorrect()
   {
-    final VectorI3D v0 = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D v1 = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D vz = new VectorI3D(0.0, 0.0, 1.0);
-    final VectorI3D vy = new VectorI3D(0.0, 1.0, 0.0);
-    final VectorI3D vx = new VectorI3D(1.0, 0.0, 0.0);
+    {
+      final VectorI3D m0 = new VectorI3D(23, 0, 0);
+      final VectorI3D m1 = new VectorI3D();
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
 
-    Assert.assertTrue(v0.equals(v0));
-    Assert.assertFalse(v0.equals(null));
-    Assert.assertFalse(v0.equals(Integer.valueOf(0)));
-    Assert.assertFalse(v0.equals(vz));
-    Assert.assertFalse(v0.equals(vy));
-    Assert.assertFalse(v0.equals(vx));
-    Assert.assertTrue(v0.equals(v1));
+    {
+      final VectorI3D m0 = new VectorI3D(0, 23, 0);
+      final VectorI3D m1 = new VectorI3D();
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final VectorI3D m0 = new VectorI3D(0, 0, 23);
+      final VectorI3D m1 = new VectorI3D();
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testHashCodeCorrect()
-  {
-    final VectorI3D v0 = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D v1 = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D vz = new VectorI3D(0.0, 0.0, 1.0);
-    final VectorI3D vy = new VectorI3D(0.0, 1.0, 0.0);
-    final VectorI3D vx = new VectorI3D(1.0, 0.0, 0.0);
-
-    Assert.assertTrue(v0.hashCode() == v0.hashCode());
-    Assert.assertTrue(v0.hashCode() == v1.hashCode());
-    Assert.assertTrue(v0.hashCode() != vx.hashCode());
-    Assert.assertTrue(v0.hashCode() != vy.hashCode());
-    Assert.assertTrue(v0.hashCode() != vz.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInitializeReadable()
+  @Override @Test public void testInitializeReadable()
   {
     final VectorI3D v0 = new VectorI3D(1.0f, 2.0f, 3.0f);
     final VectorI3D v1 = new VectorI3D(v0);
@@ -431,11 +671,12 @@ public class VectorI3DTest
     Assert.assertTrue(v0.z == v1.z);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInterpolateLinearLimits()
+  @Override @Test public void testInterpolateLinearLimits()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
@@ -446,36 +687,95 @@ public class VectorI3DTest
       final double z1 = Math.random() * Double.MAX_VALUE;
       final VectorI3D v1 = new VectorI3D(x1, y1, z1);
 
-      Assert.assertTrue(VectorI3D.approximatelyEqual(
+      Assert.assertTrue(VectorI3D.almostEqual(
+        ec,
         VectorI3D.interpolateLinear(v0, v1, 0.0),
         v0));
-      Assert.assertTrue(VectorI3D.approximatelyEqual(
+      Assert.assertTrue(VectorI3D.almostEqual(
+        ec,
         VectorI3D.interpolateLinear(v0, v1, 1.0),
         v1));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNormal()
+  @Override @Test public void testMagnitudeNonzero()
   {
-    for (int index = 0; index < 100; ++index) {
-      final double x = Math.random() * Double.MAX_VALUE;
-      final double y = Math.random() * Double.MAX_VALUE;
-      final double z = Math.random() * Double.MAX_VALUE;
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x = 1.0 + (Math.random() * Double.MAX_VALUE);
+      final double y = 1.0 + (Math.random() * Double.MAX_VALUE);
+      final double z = 1.0 + (Math.random() * Double.MAX_VALUE);
       final VectorI3D v = new VectorI3D(x, y, z);
 
-      ApproximatelyEqualDouble.approximatelyEqual(
-        VectorI3D.magnitude(VectorI3D.normalize(v)),
-        1.0);
+      final double m = VectorI3D.magnitude(v);
+      Assert.assertTrue(m > 0.0);
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testNoargZero()
+  @Override @Test public void testMagnitudeNormal()
   {
-    final VectorI3D v = new VectorI3D();
-    VectorI3D.approximatelyEqual(v, VectorI3D.ZERO);
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
+      final double y = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
+      final double z = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
+      final VectorI3D v = new VectorI3D(x, y, z);
+
+      final VectorI3D vr = VectorI3D.normalize(v);
+      Assert.assertNotSame(v, vr);
+
+      final double m = VectorI3D.magnitude(vr);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testNormalizeSimple()
+  @Override @Test public void testMagnitudeNormalizeZero()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final VectorI3D v = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorI3D vr = VectorI3D.normalize(v);
+    final double m = VectorI3D.magnitude(vr);
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
+  }
+
+  @Override @Test public void testMagnitudeOne()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final VectorI3D v = new VectorI3D(1.0, 0.0, 0.0);
+    final double m = VectorI3D.magnitude(v);
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
+  }
+
+  @Override @Test public void testMagnitudeSimple()
+  {
+    final VectorI3D v = new VectorI3D(8.0, 0.0, 0.0);
+
+    {
+      final double p = VectorI3D.dotProduct(v, v);
+      final double q = VectorI3D.magnitudeSquared(v);
+      final double r = VectorI3D.magnitude(v);
+      Assert.assertTrue(p == 64.0);
+      Assert.assertTrue(q == 64.0);
+      Assert.assertTrue(r == 8.0);
+    }
+  }
+
+  @Override @Test public void testMagnitudeZero()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final VectorI3D v = new VectorI3D(0.0, 0.0, 0.0);
+    final double m = VectorI3D.magnitude(v);
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
+  }
+
+  @Override @Test public void testNormalizeSimple()
   {
     final VectorI3D v0 = new VectorI3D(8.0, 0.0, 0.0);
     final VectorI3D vr = VectorI3D.normalize(v0);
@@ -483,15 +783,30 @@ public class VectorI3DTest
     Assert.assertTrue(m == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testNormalizeZero()
+  @Override @Test public void testNormalizeZero()
   {
-    final VectorI3D v0 = new VectorI3D(0.0, 0.0, 0.0);
-    VectorI3D.approximatelyEqual(VectorI3D.normalize(v0), v0);
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final VectorI3D q = new VectorI3D(0, 0, 0);
+    final VectorI3D qr = VectorI3D.normalize(q);
+
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.x));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.y));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.z));
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testProjectionPerpendicularZero()
+  @Override @Test public void testOrthonormalize()
+  {
+    final VectorI3D v0 = new VectorI3D(0, 1, 0);
+    final VectorI3D v1 = new VectorI3D(0.5, 0.5, 0);
+    final Pair<VectorI3D, VectorI3D> on = VectorI3D.orthoNormalize(v0, v1);
+
+    Assert.assertEquals(v0, on.first);
+    Assert.assertEquals(new VectorI3D(1, 0, 0), on.second);
+  }
+
+  @Override @Test public void testProjectionPerpendicularZero()
   {
     {
       final VectorI3D p = new VectorI3D(1.0, 0.0, 0.0);
@@ -508,15 +823,56 @@ public class VectorI3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testString()
+  @Override @Test public void testScaleOne()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x = Math.random() * Double.MAX_VALUE;
+      final double y = Math.random() * Double.MAX_VALUE;
+      final double z = Math.random() * Double.MAX_VALUE;
+      final VectorI3D v = new VectorI3D(x, y, z);
+
+      final VectorI3D vr = VectorI3D.scale(v, 1.0);
+
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.x, vr.x));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.y, vr.y));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.z, vr.z));
+    }
+  }
+
+  @Override @Test public void testScaleZero()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x = Math.random() * Double.MAX_VALUE;
+      final double y = Math.random() * Double.MAX_VALUE;
+      final double z = Math.random() * Double.MAX_VALUE;
+      final VectorI3D v = new VectorI3D(x, y, z);
+
+      final VectorI3D vr = VectorI3D.scale(v, 0.0);
+
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.x, 0.0));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.y, 0.0));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.z, 0.0));
+    }
+  }
+
+  @Override @Test public void testString()
   {
     final VectorI3D v = new VectorI3D(0.0, 1.0, 2.0);
     Assert.assertTrue(v.toString().equals("[VectorI3D 0.0 1.0 2.0]"));
   }
 
-  @SuppressWarnings("static-method") @Test public void testSubtract()
+  @Override @Test public void testSubtract()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
@@ -529,15 +885,9 @@ public class VectorI3DTest
 
       final VectorI3D vr = VectorI3D.subtract(v0, v1);
 
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr.x,
-        v0.x - v1.x));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr.y,
-        v0.y - v1.y));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr.z,
-        v0.z - v1.z));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.x, v0.x - v1.x));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.y, v0.y - v1.y));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.z, v0.z - v1.z));
     }
   }
 }

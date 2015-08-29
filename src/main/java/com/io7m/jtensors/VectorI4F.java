@@ -19,8 +19,9 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import com.io7m.jaux.ApproximatelyEqualDouble;
-import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
+import com.io7m.jaux.AlmostEqualFloat;
+import com.io7m.jaux.functional.Pair;
 
 /**
  * A four-dimensional immutable vector type with single precision elements.
@@ -42,46 +43,46 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
+   * @return <code>(v0.getXF() + (v1.getXF() * r), v0.getYF() + (v1.getYF() * r), v0.getZF() + (v1.getZF() * r), v0.getWF() + (v1.getWF() * r))</code>
    */
 
   public static @Nonnull VectorI4F addScaled(
-    final @Nonnull VectorI4F v0,
-    final @Nonnull VectorI4F v1,
+    final @Nonnull VectorReadable4F v0,
+    final @Nonnull VectorReadable4F v1,
     final float r)
   {
     return VectorI4F.add(v0, VectorI4F.scale(v1, r));
   }
 
   /**
-   * Determine whether or not the elements of the two vectors <code>v0</code>
-   * and <code>v1</code> are approximately equal.
+   * Determine whether or not the vectors <code>va</code> and <code>vb</code>
+   * are equal to within the degree of error given in <code>context</code>.
    * 
-   * @see ApproximatelyEqualFloat
+   * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
    * 
-   * @param v0
+   * @param context
+   *          The equality context
+   * @param va
    *          The left input vector
-   * @param v1
+   * @param vb
    *          The right input vector
-   * 
-   * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code> , within an appropriate degree of error for
-   *         single precision floating point values
+   * @since 5.0.0
    */
 
-  public static boolean approximatelyEqual(
-    final @Nonnull VectorI4F v0,
-    final @Nonnull VectorI4F v1)
+  public static boolean almostEqual(
+    final @Nonnull AlmostEqualFloat.ContextRelative context,
+    final @Nonnull VectorReadable4F va,
+    final @Nonnull VectorReadable4F vb)
   {
-    final boolean ex =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
-    final boolean ey =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.y, v1.y);
-    final boolean ez =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.z, v1.z);
-    final boolean ew =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.w, v1.w);
-    return ex && ey && ez && ew;
+    final boolean xs =
+      AlmostEqualFloat.almostEqual(context, va.getXF(), vb.getXF());
+    final boolean ys =
+      AlmostEqualFloat.almostEqual(context, va.getYF(), vb.getYF());
+    final boolean zs =
+      AlmostEqualFloat.almostEqual(context, va.getZF(), vb.getZF());
+    final boolean ws =
+      AlmostEqualFloat.almostEqual(context, va.getWF(), vb.getWF());
+    return xs && ys && zs && ws;
   }
 
   /**
@@ -100,14 +101,14 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI4F clamp(
-    final @Nonnull VectorI4F v,
+    final @Nonnull VectorReadable4F v,
     final float minimum,
     final float maximum)
   {
-    final float x = Math.min(Math.max(v.x, minimum), maximum);
-    final float y = Math.min(Math.max(v.y, minimum), maximum);
-    final float z = Math.min(Math.max(v.z, minimum), maximum);
-    final float w = Math.min(Math.max(v.w, minimum), maximum);
+    final float x = Math.min(Math.max(v.getXF(), minimum), maximum);
+    final float y = Math.min(Math.max(v.getYF(), minimum), maximum);
+    final float z = Math.min(Math.max(v.getZF(), minimum), maximum);
+    final float w = Math.min(Math.max(v.getWF(), minimum), maximum);
     return new VectorI4F(x, y, z, w);
   }
 
@@ -123,18 +124,22 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
+   * @return <code>(min(max(v.getXF(), minimum.getXF()), maximum.getXF()), min(max(v.getYF(), minimum.getYF()), maximum.getYF()), min(max(v.getZF(), minimum.getZF()), maximum.getZF()), min(max(v.getWF(), minimum.getWF()), maximum.getWF()))</code>
    */
 
   public static @Nonnull VectorI4F clampByVector(
-    final @Nonnull VectorI4F v,
-    final @Nonnull VectorI4F minimum,
-    final @Nonnull VectorI4F maximum)
+    final @Nonnull VectorReadable4F v,
+    final @Nonnull VectorReadable4F minimum,
+    final @Nonnull VectorReadable4F maximum)
   {
-    final float x = Math.min(Math.max(v.x, minimum.x), maximum.x);
-    final float y = Math.min(Math.max(v.y, minimum.y), maximum.y);
-    final float z = Math.min(Math.max(v.z, minimum.z), maximum.z);
-    final float w = Math.min(Math.max(v.w, minimum.w), maximum.w);
+    final float x =
+      Math.min(Math.max(v.getXF(), minimum.getXF()), maximum.getXF());
+    final float y =
+      Math.min(Math.max(v.getYF(), minimum.getYF()), maximum.getYF());
+    final float z =
+      Math.min(Math.max(v.getZF(), minimum.getZF()), maximum.getZF());
+    final float w =
+      Math.min(Math.max(v.getWF(), minimum.getWF()), maximum.getWF());
     return new VectorI4F(x, y, z, w);
   }
 
@@ -151,13 +156,13 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI4F clampMaximum(
-    final @Nonnull VectorI4F v,
+    final @Nonnull VectorReadable4F v,
     final float maximum)
   {
-    final float x = Math.min(v.x, maximum);
-    final float y = Math.min(v.y, maximum);
-    final float z = Math.min(v.z, maximum);
-    final float w = Math.min(v.w, maximum);
+    final float x = Math.min(v.getXF(), maximum);
+    final float y = Math.min(v.getYF(), maximum);
+    final float z = Math.min(v.getZF(), maximum);
+    final float w = Math.min(v.getWF(), maximum);
     return new VectorI4F(x, y, z, w);
   }
 
@@ -170,17 +175,17 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
+   * @return <code>(min(v.getXF(), maximum.getXF()), min(v.getYF(), maximum.getYF()), min(v.getZF(), maximum.getZF()), min(v.getWF(), maximum.getWF()))</code>
    */
 
   public static @Nonnull VectorI4F clampMaximumByVector(
-    final @Nonnull VectorI4F v,
-    final @Nonnull VectorI4F maximum)
+    final @Nonnull VectorReadable4F v,
+    final @Nonnull VectorReadable4F maximum)
   {
-    final float x = Math.min(v.x, maximum.x);
-    final float y = Math.min(v.y, maximum.y);
-    final float z = Math.min(v.z, maximum.z);
-    final float w = Math.min(v.w, maximum.w);
+    final float x = Math.min(v.getXF(), maximum.getXF());
+    final float y = Math.min(v.getYF(), maximum.getYF());
+    final float z = Math.min(v.getZF(), maximum.getZF());
+    final float w = Math.min(v.getWF(), maximum.getWF());
     return new VectorI4F(x, y, z, w);
   }
 
@@ -198,13 +203,13 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI4F clampMinimum(
-    final @Nonnull VectorI4F v,
+    final @Nonnull VectorReadable4F v,
     final float minimum)
   {
-    final float x = Math.max(v.x, minimum);
-    final float y = Math.max(v.y, minimum);
-    final float z = Math.max(v.z, minimum);
-    final float w = Math.max(v.w, minimum);
+    final float x = Math.max(v.getXF(), minimum);
+    final float y = Math.max(v.getYF(), minimum);
+    final float z = Math.max(v.getZF(), minimum);
+    final float w = Math.max(v.getWF(), minimum);
     return new VectorI4F(x, y, z, w);
   }
 
@@ -217,17 +222,17 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param minimum
    *          The vector containing the minimum acceptable values
    * 
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))</code>
+   * @return <code>(max(v.getXF(), minimum.getXF()), max(v.getYF(), minimum.getYF()), max(v.getZF(), minimum.getZF()), max(v.getWF(), minimum.getWF()))</code>
    */
 
   public static @Nonnull VectorI4F clampMinimumByVector(
-    final @Nonnull VectorI4F v,
-    final @Nonnull VectorI4F minimum)
+    final @Nonnull VectorReadable4F v,
+    final @Nonnull VectorReadable4F minimum)
   {
-    final float x = Math.max(v.x, minimum.x);
-    final float y = Math.max(v.y, minimum.y);
-    final float z = Math.max(v.z, minimum.z);
-    final float w = Math.max(v.w, minimum.w);
+    final float x = Math.max(v.getXF(), minimum.getXF());
+    final float y = Math.max(v.getYF(), minimum.getYF());
+    final float z = Math.max(v.getZF(), minimum.getZF());
+    final float w = Math.max(v.getWF(), minimum.getWF());
     return new VectorI4F(x, y, z, w);
   }
 
@@ -244,8 +249,8 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static float distance(
-    final @Nonnull VectorI4F v0,
-    final @Nonnull VectorI4F v1)
+    final @Nonnull VectorReadable4F v0,
+    final @Nonnull VectorReadable4F v1)
   {
     return VectorI4F.magnitude(VectorI4F.subtract(v0, v1));
   }
@@ -263,13 +268,13 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static float dotProduct(
-    final @Nonnull VectorI4F v0,
-    final @Nonnull VectorI4F v1)
+    final @Nonnull VectorReadable4F v0,
+    final @Nonnull VectorReadable4F v1)
   {
-    final float x = v0.x * v1.x;
-    final float y = v0.y * v1.y;
-    final float z = v0.z * v1.z;
-    final float w = v0.w * v1.w;
+    final float x = v0.getXF() * v1.getXF();
+    final float y = v0.getYF() * v1.getYF();
+    final float z = v0.getZF() * v1.getZF();
+    final float w = v0.getWF() * v1.getWF();
     return x + y + z + w;
   }
 
@@ -297,12 +302,12 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI4F interpolateLinear(
-    final @Nonnull VectorI4F v0,
-    final @Nonnull VectorI4F v1,
+    final @Nonnull VectorReadable4F v0,
+    final @Nonnull VectorReadable4F v1,
     final float alpha)
   {
-    final @Nonnull VectorI4F w0 = VectorI4F.scale(v0, 1.0f - alpha);
-    final @Nonnull VectorI4F w1 = VectorI4F.scale(v1, alpha);
+    final @Nonnull VectorReadable4F w0 = VectorI4F.scale(v0, 1.0f - alpha);
+    final @Nonnull VectorReadable4F w1 = VectorI4F.scale(v1, alpha);
     return VectorI4F.add(w0, w1);
   }
 
@@ -318,7 +323,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static float magnitude(
-    final @Nonnull VectorI4F v)
+    final @Nonnull VectorReadable4F v)
   {
     return (float) Math.sqrt(VectorI4F.magnitudeSquared(v));
   }
@@ -333,7 +338,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static float magnitudeSquared(
-    final @Nonnull VectorI4F v)
+    final @Nonnull VectorReadable4F v)
   {
     return VectorI4F.dotProduct(v, v);
   }
@@ -350,14 +355,39 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI4F normalize(
-    final @Nonnull VectorI4F v)
+    final @Nonnull VectorReadable4F v)
   {
     final float m = VectorI4F.magnitudeSquared(v);
     if (m > 0) {
       final float reciprocal = (float) (1.0f / Math.sqrt(m));
       return VectorI4F.scale(v, reciprocal);
     }
-    return v;
+    return new VectorI4F(v);
+  }
+
+  /**
+   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * .
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * 
+   * @since 5.0.0
+   */
+
+  public static @Nonnull Pair<VectorI4F, VectorI4F> orthoNormalize(
+    final @Nonnull VectorReadable4F v0,
+    final @Nonnull VectorReadable4F v1)
+  {
+    final VectorI4F v0n = VectorI4F.normalize(v0);
+    final VectorI4F projection =
+      VectorI4F.scale(v0n, VectorI4F.dotProduct(v1, v0n));
+    final VectorI4F vr =
+      VectorI4F.normalize(VectorI4F.subtract(v1, projection));
+    return new Pair<VectorI4F, VectorI4F>(v0n, vr);
   }
 
   /**
@@ -368,8 +398,8 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI4F projection(
-    final @Nonnull VectorI4F p,
-    final @Nonnull VectorI4F q)
+    final @Nonnull VectorReadable4F p,
+    final @Nonnull VectorReadable4F q)
   {
     final float dot = VectorI4F.dotProduct(p, q);
     final float qms = VectorI4F.magnitudeSquared(q);
@@ -385,14 +415,18 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>
+   * @return <code>(v.getXF() * r, v.getYF() * r, v.getZF() * r, v.getWF() * r)</code>
    */
 
   public static @Nonnull VectorI4F scale(
-    final @Nonnull VectorI4F v,
+    final @Nonnull VectorReadable4F v,
     final float r)
   {
-    return new VectorI4F(v.x * r, v.y * r, v.z * r, v.w * r);
+    return new VectorI4F(
+      v.getXF() * r,
+      v.getYF() * r,
+      v.getZF() * r,
+      v.getWF() * r);
   }
 
   /**
@@ -403,30 +437,35 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param v1
    *          The right input vector
    * 
-   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
+   * @return <code>(v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF(), v0.getZF() - v1.getZF())</code>
    */
 
   public static @Nonnull VectorI4F subtract(
-    final @Nonnull VectorI4F v0,
-    final @Nonnull VectorI4F v1)
+    final @Nonnull VectorReadable4F v0,
+    final @Nonnull VectorReadable4F v1)
   {
-    return new VectorI4F(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w);
+    return new VectorI4F(
+      v0.getXF() - v1.getXF(),
+      v0.getYF() - v1.getYF(),
+      v0.getZF() - v1.getZF(),
+      v0.getWF() - v1.getWF());
   }
 
-  public final float                     x;
-  public final float                     y;
-  public final float                     z;
-  public final float                     w;
+  public final float                            x;
+  public final float                            y;
+  public final float                            z;
+
+  public final float                            w;
 
   /**
    * The zero vector.
    */
 
-  public static final @Nonnull VectorI4F ZERO = new VectorI4F(
-                                                0.0f,
-                                                0.0f,
-                                                0.0f,
-                                                0.0f);
+  public static final @Nonnull VectorReadable4F ZERO = new VectorI4F(
+                                                       0.0f,
+                                                       0.0f,
+                                                       0.0f,
+                                                       0.0f);
 
   /**
    * Calculate the absolute value of the vector <code>v</code>.
@@ -434,17 +473,14 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param v
    *          The input vector
    * 
-   * @return <code>(abs v.x, abs v.y, abs v.z, abs v.w)</code>
+   * @return <code>(abs v.getXF(), abs v.getYF(), abs v.getZF(), abs v.getWF())</code>
    */
 
   public static @Nonnull VectorI4F absolute(
-    final @Nonnull VectorI4F v)
+    final @Nonnull VectorReadable4F v)
   {
-    return new VectorI4F(
-      Math.abs(v.x),
-      Math.abs(v.y),
-      Math.abs(v.z),
-      Math.abs(v.w));
+    return new VectorI4F(Math.abs(v.getXF()), Math.abs(v.getYF()), Math.abs(v
+      .getZF()), Math.abs(v.getWF()));
   }
 
   /**
@@ -456,14 +492,18 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param v1
    *          The right input vector
    * 
-   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
+   * @return <code>(v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF(), v0.getZF() + v1.getZF(), v0.getWF() + v1.getWF())</code>
    */
 
   public static @Nonnull VectorI4F add(
-    final @Nonnull VectorI4F v0,
-    final @Nonnull VectorI4F v1)
+    final @Nonnull VectorReadable4F v0,
+    final @Nonnull VectorReadable4F v1)
   {
-    return new VectorI4F(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w);
+    return new VectorI4F(
+      v0.getXF() + v1.getXF(),
+      v0.getYF() + v1.getYF(),
+      v0.getZF() + v1.getZF(),
+      v0.getWF() + v1.getWF());
   }
 
   /**
@@ -526,17 +566,21 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final @Nonnull VectorI4F other = (VectorI4F) obj;
-    if (Float.floatToIntBits(this.w) != Float.floatToIntBits(other.w)) {
+    final @Nonnull VectorReadable4F other = (VectorI4F) obj;
+    if (Float.floatToIntBits(this.getWF()) != Float.floatToIntBits(other
+      .getWF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
+    if (Float.floatToIntBits(this.getXF()) != Float.floatToIntBits(other
+      .getXF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
+    if (Float.floatToIntBits(this.getYF()) != Float.floatToIntBits(other
+      .getYF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.z) != Float.floatToIntBits(other.z)) {
+    if (Float.floatToIntBits(this.getZF()) != Float.floatToIntBits(other
+      .getZF())) {
       return false;
     }
     return true;
@@ -571,10 +615,10 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   {
     final int prime = 31;
     int result = 1;
-    result = (prime * result) + Float.floatToIntBits(this.w);
-    result = (prime * result) + Float.floatToIntBits(this.x);
-    result = (prime * result) + Float.floatToIntBits(this.y);
-    result = (prime * result) + Float.floatToIntBits(this.z);
+    result = (prime * result) + Float.floatToIntBits(this.getWF());
+    result = (prime * result) + Float.floatToIntBits(this.getXF());
+    result = (prime * result) + Float.floatToIntBits(this.getYF());
+    result = (prime * result) + Float.floatToIntBits(this.getZF());
     return result;
   }
 
@@ -582,13 +626,13 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI4F ");
-    builder.append(this.x);
+    builder.append(this.getXF());
     builder.append(" ");
-    builder.append(this.y);
+    builder.append(this.getYF());
     builder.append(" ");
-    builder.append(this.z);
+    builder.append(this.getZF());
     builder.append(" ");
-    builder.append(this.w);
+    builder.append(this.getWF());
     builder.append("]");
     return builder.toString();
   }

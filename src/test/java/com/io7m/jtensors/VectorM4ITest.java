@@ -19,7 +19,9 @@ package com.io7m.jtensors;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class VectorM4ITest
+import com.io7m.jaux.AlmostEqualDouble;
+
+public class VectorM4ITest extends VectorM4Contract
 {
   public static int randomNegativeNumber()
   {
@@ -36,102 +38,46 @@ public class VectorM4ITest
     return (int) (Math.random() * (1 << 14));
   }
 
-  @SuppressWarnings("static-method") @Test public void testAbsolute()
+  @Override @Test public void testAbsolute()
   {
-    for (int index = 0; index < 100; ++index) {
-      final int x = VectorM4ITest.randomNegativeNumber();
-      final int y = VectorM4ITest.randomNegativeNumber();
-      final int z = VectorM4ITest.randomNegativeNumber();
-      final int w = VectorM4ITest.randomNegativeNumber();
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final int x = (int) (Math.random() * Integer.MIN_VALUE);
+      final int y = (int) (Math.random() * Integer.MIN_VALUE);
+      final int z = (int) (Math.random() * Integer.MIN_VALUE);
+      final int w = (int) (Math.random() * Integer.MIN_VALUE);
       final VectorM4I v = new VectorM4I(x, y, z, w);
 
       final VectorM4I vr = new VectorM4I();
       VectorM4I.absolute(v, vr);
 
-      Assert.assertTrue(Math.abs(v.x) == vr.x);
-      Assert.assertTrue(Math.abs(v.y) == vr.y);
-      Assert.assertTrue(Math.abs(v.z) == vr.z);
-      Assert.assertTrue(Math.abs(v.w) == vr.w);
-
-      {
-        final int orig_x = v.x;
-        final int orig_y = v.y;
-        final int orig_z = v.z;
-        final int orig_w = v.w;
-
-        VectorM4I.absoluteInPlace(v);
-
-        Assert.assertTrue(Math.abs(orig_x) == v.x);
-        Assert.assertTrue(Math.abs(orig_y) == v.y);
-        Assert.assertTrue(Math.abs(orig_z) == v.z);
-        Assert.assertTrue(Math.abs(orig_w) == v.w);
-      }
+      Assert.assertEquals(Math.abs(v.x), vr.x);
+      Assert.assertEquals(Math.abs(v.y), vr.y);
+      Assert.assertEquals(Math.abs(v.z), vr.z);
+      Assert.assertEquals(Math.abs(v.w), vr.w);
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAbsoluteMutation()
+  @Override @Test public void testAbsoluteMutation()
   {
-    final VectorM4I out = new VectorM4I();
-    final VectorM4I v = new VectorM4I(-1, -1, -1, -1);
-
-    Assert.assertTrue(v.x == -1);
-    Assert.assertTrue(v.y == -1);
-    Assert.assertTrue(v.z == -1);
-    Assert.assertTrue(v.w == -1);
-
-    final int vx = v.x;
-    final int vy = v.y;
-    final int vz = v.z;
-    final int vw = v.w;
-
-    final VectorM4I ov = VectorM4I.absolute(v, out);
-
-    Assert.assertTrue(vx == v.x);
-    Assert.assertTrue(vy == v.y);
-    Assert.assertTrue(vz == v.z);
-    Assert.assertTrue(vw == v.w);
-    Assert.assertTrue(vx == -1);
-    Assert.assertTrue(vy == -1);
-    Assert.assertTrue(vz == -1);
-    Assert.assertTrue(vw == -1);
-
-    Assert.assertTrue(out == ov);
-    Assert.assertTrue(out.x == 1);
-    Assert.assertTrue(out.y == 1);
-    Assert.assertTrue(out.z == 1);
-    Assert.assertTrue(out.w == 1);
-  }
-
-  @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
-  {
-    for (int index = 0; index < 100; ++index) {
-      final int x = VectorM4ITest.randomNegativeNumber();
-      final int y = VectorM4ITest.randomNegativeNumber();
-      final int z = VectorM4ITest.randomNegativeNumber();
-      final int w = VectorM4ITest.randomNegativeNumber();
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final int x = (int) (Math.random() * Integer.MIN_VALUE);
+      final int y = (int) (Math.random() * Integer.MIN_VALUE);
+      final int z = (int) (Math.random() * Integer.MIN_VALUE);
+      final int w = (int) (Math.random() * Integer.MIN_VALUE);
       final VectorM4I v = new VectorM4I(x, y, z, w);
 
-      final VectorM4I vr = new VectorM4I();
-      VectorM4I.absolute(v, vr);
+      VectorM4I.absoluteInPlace(v);
 
-      Assert.assertTrue(vr.x >= 0);
-      Assert.assertTrue(vr.y >= 0);
-      Assert.assertTrue(vr.z >= 0);
-      Assert.assertTrue(vr.w >= 0);
-
-      {
-        VectorM4I.absoluteInPlace(v);
-        Assert.assertTrue(v.x >= 0);
-        Assert.assertTrue(v.y >= 0);
-        Assert.assertTrue(v.z >= 0);
-        Assert.assertTrue(v.w >= 0);
-      }
+      Assert.assertEquals(v.x, Math.abs(x));
+      Assert.assertEquals(v.y, Math.abs(y));
+      Assert.assertEquals(v.z, Math.abs(z));
+      Assert.assertEquals(v.w, Math.abs(w));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAdd()
+  @Override @Test public void testAdd()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4ITest.randomPositiveSmallNumber();
       final int y0 = VectorM4ITest.randomPositiveSmallNumber();
       final int z0 = VectorM4ITest.randomPositiveSmallNumber();
@@ -167,7 +113,7 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAddMutation()
+  @Override @Test public void testAddMutation()
   {
     final VectorM4I out = new VectorM4I();
     final VectorM4I v0 = new VectorM4I(1, 1, 1, 1);
@@ -219,9 +165,9 @@ public class VectorM4ITest
     Assert.assertTrue(v1.w == 1);
   }
 
-  @SuppressWarnings("static-method") @Test public void testAddScaled()
+  @Override @Test public void testAddScaled()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4ITest.randomPositiveSmallNumber();
       final int y0 = VectorM4ITest.randomPositiveSmallNumber();
       final int z0 = VectorM4ITest.randomPositiveSmallNumber();
@@ -259,7 +205,17 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testCheckInterface()
+  @Override @Test public void testAlmostEqualNot()
+  {
+    // Not supported by integer vectors
+  }
+
+  @Override @Test public void testAlmostEqualTransitive()
+  {
+    // Not supported by integer vectors
+  }
+
+  @Override @Test public void testCheckInterface()
   {
     final VectorM4I v = new VectorM4I(3, 5, 7, 11);
 
@@ -269,11 +225,9 @@ public class VectorM4ITest
     Assert.assertTrue(v.w == v.getWI());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorMaximumOrdering()
+  @Override @Test public void testClampByVectorMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max_x = VectorM4ITest.randomNegativeNumber();
       final int max_y = VectorM4ITest.randomNegativeNumber();
       final int max_z = VectorM4ITest.randomNegativeNumber();
@@ -307,11 +261,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorMinimumOrdering()
+  @Override @Test public void testClampByVectorMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = VectorM4ITest.randomPositiveNumber();
       final int min_y = VectorM4ITest.randomPositiveNumber();
       final int min_z = VectorM4ITest.randomPositiveNumber();
@@ -345,11 +297,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorOrdering()
+  @Override @Test public void testClampByVectorOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = VectorM4ITest.randomNegativeNumber();
       final int min_y = VectorM4ITest.randomNegativeNumber();
       final int min_z = VectorM4ITest.randomNegativeNumber();
@@ -397,11 +347,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampMaximumOrdering()
+  @Override @Test public void testClampMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int maximum = VectorM4ITest.randomNegativeNumber();
 
       final int x = VectorM4ITest.randomPositiveNumber();
@@ -428,11 +376,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampMinimumOrdering()
+  @Override @Test public void testClampMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = VectorM4ITest.randomPositiveNumber();
 
       final int x = VectorM4ITest.randomNegativeNumber();
@@ -459,9 +405,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampOrdering()
+  @Override @Test public void testClampOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = VectorM4ITest.randomNegativeNumber();
       final int maximum = VectorM4ITest.randomPositiveNumber();
 
@@ -498,7 +444,7 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testCopy()
+  @Override @Test public void testCopy()
   {
     final VectorM4I vb = new VectorM4I(5, 6, 7, 8);
     final VectorM4I va = new VectorM4I(1, 2, 3, 4);
@@ -516,16 +462,21 @@ public class VectorM4ITest
     Assert.assertTrue(va.w == vb.w);
   }
 
-  @SuppressWarnings("static-method") @Test public void testDistance()
+  @Override @Test public void testDefault0001()
+  {
+    Assert.assertTrue(new VectorM4I().equals(new VectorM4I(0, 0, 0, 1)));
+  }
+
+  @Override @Test public void testDistance()
   {
     final VectorM4I v0 = new VectorM4I(0, 1, 0, 0);
     final VectorM4I v1 = new VectorM4I(0, 0, 0, 0);
     Assert.assertTrue(VectorM4I.distance(v0, v1) == 1);
   }
 
-  @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
+  @Override @Test public void testDistanceOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4ITest.randomPositiveSmallNumber();
       final int y0 = VectorM4ITest.randomPositiveSmallNumber();
       final int z0 = VectorM4ITest.randomPositiveSmallNumber();
@@ -542,7 +493,7 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProduct()
+  @Override @Test public void testDotProduct()
   {
     final VectorM4I v0 = new VectorM4I(10, 10, 10, 10);
     final VectorM4I v1 = new VectorM4I(10, 10, 10, 10);
@@ -579,17 +530,52 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testDotProductOrthonormal()
+  @Override @Test public void testDotProductPerpendicular()
   {
-    final VectorM4I v = new VectorM4I(1, 0, 0, 0);
-    Assert.assertTrue(VectorM4I.dotProduct(v, v) == 1);
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final int max = 1000;
+      final int x = (int) (Math.random() * max);
+      final int y = (int) (Math.random() * max);
+      final int z = (int) (Math.random() * max);
+      final int w = (int) (Math.random() * max);
+      final VectorM4I q = new VectorM4I(x, y, z, w);
+
+      final double ms = VectorM4I.magnitudeSquared(q);
+      final double dp = VectorM4I.dotProduct(q, q);
+
+      System.out.println("q  : " + q);
+      System.out.println("ms : " + ms);
+      System.out.println("dp : " + dp);
+
+      AlmostEqualDouble.almostEqual(ec, ms, dp);
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testDotProductSelfMagnitudeSquared()
+  @Override @Test public void testDotProductSelf()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final int max = 1000;
+      final int x = (int) (Math.random() * max);
+      final int y = (int) (Math.random() * max);
+      final int z = (int) (Math.random() * max);
+      final int w = (int) (Math.random() * max);
+      final VectorM4I q = new VectorM4I(x, y, z, w);
+      final double dp = VectorM4I.dotProduct(q, q);
+
+      System.out.println("q  : " + q);
+      System.out.println("dp : " + dp);
+
+      AlmostEqualDouble.almostEqual(ec, 1.0, dp);
+    }
+  }
+
+  @Override @Test public void testDotProductSelfMagnitudeSquared()
   {
     final VectorM4I v0 = new VectorM4I(10, 10, 10, 10);
 
@@ -612,105 +598,160 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  @Override @Test public void testEqualsCorrect()
   {
-    final VectorM4I m0 = new VectorM4I();
-    Assert.assertTrue(m0.equals(m0));
+    {
+      final VectorM4I m0 = new VectorM4I();
+      Assert.assertTrue(m0.equals(m0));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I();
+      Assert.assertFalse(m0.equals(null));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I();
+      Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I();
+      final VectorM4I m1 = new VectorM4I();
+      Assert.assertTrue(m0.equals(m1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  @Override @Test public void testEqualsNotEqualCorrect()
   {
-    final VectorM4I m0 = new VectorM4I();
-    Assert.assertFalse(m0.equals(null));
+    final int x = (int) (Math.random() * 1000);
+    final int y = x + 1;
+    final int z = y + 1;
+    final int w = z + 1;
+    final int q = w + 1;
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      Assert.assertFalse(m0.equals(null));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(q, y, z, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(x, q, z, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(x, y, q, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(x, y, z, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(q, q, z, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(q, y, q, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(q, y, z, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(q, q, q, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(q, q, z, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(q, q, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(x, q, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I(x, y, z, w);
+      final VectorM4I m1 = new VectorM4I(x, y, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
-  {
-    final VectorM4I m0 = new VectorM4I();
-    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
-  {
-    final VectorM4I m0 = new VectorM4I();
-    final VectorM4I m1 = new VectorM4I();
-    Assert.assertTrue(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq0()
-  {
-    final VectorM4I m0 = new VectorM4I();
-    final VectorM4I m1 = new VectorM4I();
-    m1.x = 23;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq1()
-  {
-    final VectorM4I m0 = new VectorM4I();
-    final VectorM4I m1 = new VectorM4I();
-    m1.y = 23;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq2()
-  {
-    final VectorM4I m0 = new VectorM4I();
-    final VectorM4I m1 = new VectorM4I();
-    m1.z = 23;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq3()
-  {
-    final VectorM4I m0 = new VectorM4I();
-    final VectorM4I m1 = new VectorM4I();
-    m1.w = 23;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeEq()
+  @Override @Test public void testHashCodeEqualsCorrect()
   {
     final VectorM4I m0 = new VectorM4I();
     final VectorM4I m1 = new VectorM4I();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase0()
+  @Override @Test public void testHashCodeNotEqualCorrect()
   {
-    final VectorM4I m0 = new VectorM4I();
-    final VectorM4I m1 = new VectorM4I();
-    m1.x = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    {
+      final VectorM4I m0 = new VectorM4I();
+      final VectorM4I m1 = new VectorM4I();
+      m1.x = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I();
+      final VectorM4I m1 = new VectorM4I();
+      m1.y = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I();
+      final VectorM4I m1 = new VectorM4I();
+      m1.z = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final VectorM4I m0 = new VectorM4I();
+      final VectorM4I m1 = new VectorM4I();
+      m1.w = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase1()
-  {
-    final VectorM4I m0 = new VectorM4I();
-    final VectorM4I m1 = new VectorM4I();
-    m1.y = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase2()
-  {
-    final VectorM4I m0 = new VectorM4I();
-    final VectorM4I m1 = new VectorM4I();
-    m1.z = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase3()
-  {
-    final VectorM4I m0 = new VectorM4I();
-    final VectorM4I m1 = new VectorM4I();
-    m1.w = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInitializeReadable()
+  @Override @Test public void testInitializeReadable()
   {
     final VectorM4I v0 = new VectorM4I(1, 2, 3, 4);
     final VectorM4I v1 = new VectorM4I(v0);
@@ -721,11 +762,9 @@ public class VectorM4ITest
     Assert.assertTrue(v0.w == v1.w);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInterpolateLinearLimits()
+  @Override @Test public void testInterpolateLinearLimits()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4ITest.randomPositiveNumber();
       final int y0 = VectorM4ITest.randomPositiveNumber();
       final int z0 = VectorM4ITest.randomPositiveNumber();
@@ -755,9 +794,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNonzero()
+  @Override @Test public void testMagnitudeNonzero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM4ITest.randomPositiveSmallNumber();
       final int y = VectorM4ITest.randomPositiveSmallNumber();
       final int z = VectorM4ITest.randomPositiveSmallNumber();
@@ -769,14 +808,24 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeOne()
+  @Override @Test public void testMagnitudeNormal()
+  {
+    // Not applicable to integer vectors
+  }
+
+  @Override @Test public void testMagnitudeNormalizeZero()
+  {
+    // Not applicable to integer vectors
+  }
+
+  @Override @Test public void testMagnitudeOne()
   {
     final VectorM4I v = new VectorM4I(1, 0, 0, 0);
     final int m = VectorM4I.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeSimple()
+  @Override @Test public void testMagnitudeSimple()
   {
     final VectorM4I v = new VectorM4I(8, 0, 0, 0);
 
@@ -790,16 +839,34 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeZero()
+  @Override @Test public void testMagnitudeZero()
   {
     final VectorM4I v = new VectorM4I(0, 0, 0, 0);
     final int m = VectorM4I.magnitude(v);
     Assert.assertTrue(m == 0);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testProjectionPerpendicularZero()
+  @Override @Test public void testNormalizeSimple()
+  {
+    // Not applicable to integer vectors
+  }
+
+  @Override @Test public void testNormalizeZero()
+  {
+    // Not supported by integer vectors
+  }
+
+  @Override @Test public void testOrthonormalize()
+  {
+    // Not applicable to integer vectors
+  }
+
+  @Override @Test public void testOrthonormalizeMutation()
+  {
+    // Not applicable to integer vectors
+  }
+
+  @Override @Test public void testProjectionPerpendicularZero()
   {
     {
       final VectorM4I p = new VectorM4I(1, 0, 0, 0);
@@ -822,7 +889,7 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleMutation()
+  @Override @Test public void testScaleMutation()
   {
     final VectorM4I out = new VectorM4I();
     final VectorM4I v0 = new VectorM4I(1, 1, 1, 1);
@@ -861,9 +928,9 @@ public class VectorM4ITest
     Assert.assertTrue(v0.w == 2);
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleOne()
+  @Override @Test public void testScaleOne()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM4ITest.randomPositiveNumber();
       final int y = VectorM4ITest.randomPositiveNumber();
       final int z = VectorM4ITest.randomPositiveNumber();
@@ -895,9 +962,9 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleZero()
+  @Override @Test public void testScaleZero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = VectorM4ITest.randomPositiveNumber();
       final int y = VectorM4ITest.randomPositiveNumber();
       final int z = VectorM4ITest.randomPositiveNumber();
@@ -924,15 +991,15 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testString()
+  @Override @Test public void testString()
   {
     final VectorM4I v = new VectorM4I(1, 2, 3, 4);
     Assert.assertTrue(v.toString().equals("[VectorM4I 1 2 3 4]"));
   }
 
-  @SuppressWarnings("static-method") @Test public void testSubtract()
+  @Override @Test public void testSubtract()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4ITest.randomPositiveNumber();
       final int y0 = VectorM4ITest.randomPositiveNumber();
       final int z0 = VectorM4ITest.randomPositiveNumber();
@@ -968,7 +1035,7 @@ public class VectorM4ITest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testSubtractMutation()
+  @Override @Test public void testSubtractMutation()
   {
     final VectorM4I out = new VectorM4I();
     final VectorM4I v0 = new VectorM4I(1, 1, 1, 1);

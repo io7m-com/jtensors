@@ -19,14 +19,20 @@ package com.io7m.jtensors;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.AlmostEqualFloat;
 import com.io7m.jaux.ApproximatelyEqualDouble;
 import com.io7m.jaux.ApproximatelyEqualFloat;
 
-public class QuaternionM4FTest
+public class QuaternionM4FTest extends QuaternionM4Contract
 {
-  @SuppressWarnings("static-method") @Test public void testAdd()
+  private static final VectorReadable3F AXIS_X = new VectorI3F(1, 0, 0);
+  private static final VectorReadable3F AXIS_Y = new VectorI3F(0, 1, 0);
+  private static final VectorReadable3F AXIS_Z = new VectorI3F(0, 0, 1);
+
+  @Override @Test public void testAdd()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -78,7 +84,7 @@ public class QuaternionM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAddMutation()
+  @Override @Test public void testAddMutation()
   {
     final QuaternionM4F out = new QuaternionM4F();
     final QuaternionM4F v0 = new QuaternionM4F(1.0f, 1.0f, 1.0f, 1.0f);
@@ -100,10 +106,10 @@ public class QuaternionM4FTest
     final QuaternionM4F ov0 = QuaternionM4F.add(v0, v1, out);
 
     Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXF() == 2.0f);
-    Assert.assertTrue(out.getYF() == 2.0f);
-    Assert.assertTrue(out.getZF() == 2.0f);
-    Assert.assertTrue(out.getWF() == 2.0f);
+    Assert.assertTrue(out.getXF() == 2.0);
+    Assert.assertTrue(out.getYF() == 2.0);
+    Assert.assertTrue(out.getZF() == 2.0);
+    Assert.assertTrue(out.getWF() == 2.0);
     Assert.assertTrue(v0.getXF() == 1.0f);
     Assert.assertTrue(v0.getYF() == 1.0f);
     Assert.assertTrue(v0.getZF() == 1.0f);
@@ -116,65 +122,125 @@ public class QuaternionM4FTest
     final QuaternionM4F ov1 = QuaternionM4F.addInPlace(v0, v1);
 
     Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXF() == 2.0f);
-    Assert.assertTrue(ov1.getYF() == 2.0f);
-    Assert.assertTrue(ov1.getZF() == 2.0f);
-    Assert.assertTrue(ov1.getWF() == 2.0f);
-    Assert.assertTrue(v0.getXF() == 2.0f);
-    Assert.assertTrue(v0.getYF() == 2.0f);
-    Assert.assertTrue(v0.getZF() == 2.0f);
-    Assert.assertTrue(v0.getWF() == 2.0f);
+    Assert.assertTrue(ov1.getXF() == 2.0);
+    Assert.assertTrue(ov1.getYF() == 2.0);
+    Assert.assertTrue(ov1.getZF() == 2.0);
+    Assert.assertTrue(ov1.getWF() == 2.0);
+    Assert.assertTrue(v0.getXF() == 2.0);
+    Assert.assertTrue(v0.getYF() == 2.0);
+    Assert.assertTrue(v0.getZF() == 2.0);
+    Assert.assertTrue(v0.getWF() == 2.0);
     Assert.assertTrue(v1.getXF() == 1.0f);
     Assert.assertTrue(v1.getYF() == 1.0f);
     Assert.assertTrue(v1.getZF() == 1.0f);
     Assert.assertTrue(v1.getWF() == 1.0f);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testApproximatelyEqualTransitive0()
+  @Override @Test public void testAlmostEqualNot()
   {
-    final float x0 = 0.0f;
-    final float x1 = 0.0f;
-    final float y0 = 0.0f;
-    final float y1 = 0.0f;
-    final float z0 = 0.0f;
-    final float z1 = 0.0f;
-    final float w0 = 0.0f;
-    final float w1 = 0.0f;
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(x0, x1));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(y0, y1));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(z0, z1));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(w0, w1));
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
 
-    final QuaternionM4F v0 = new QuaternionM4F(x0, y0, z0, w0);
-    final QuaternionM4F v1 = new QuaternionM4F(x1, y1, z1, w1);
-    Assert.assertTrue(QuaternionM4F.approximatelyEqual(v0, v1));
+    final float x = (float) Math.random();
+    final float y = x + 1.0f;
+    final float z = y + 1.0f;
+    final float w = z + 1.0f;
+    final float q = w + 1.0f;
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(q, y, z, w);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(x, q, z, w);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(x, y, q, w);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(x, y, z, q);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(q, q, z, w);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(q, y, q, w);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(q, y, z, q);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(q, q, q, w);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(q, q, z, q);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(q, q, q, q);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(x, q, q, q);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F m1 = new QuaternionM4F(x, y, q, q);
+      Assert.assertFalse(QuaternionM4F.almostEqual(ec, m0, m1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testApproximatelyEqualTransitive1()
+  @Override @Test public void testAlmostEqualTransitive()
   {
-    final float x0 = 0.0f;
-    final float x1 = 1.0f;
-    final float y0 = 0.0f;
-    final float y1 = 1.0f;
-    final float z0 = 0.0f;
-    final float z1 = 1.0f;
-    final float w0 = 0.0f;
-    final float w1 = 1.0f;
-    Assert.assertFalse(ApproximatelyEqualFloat.approximatelyEqual(x0, x1));
-    Assert.assertFalse(ApproximatelyEqualFloat.approximatelyEqual(y0, y1));
-    Assert.assertFalse(ApproximatelyEqualFloat.approximatelyEqual(z0, z1));
-    Assert.assertFalse(ApproximatelyEqualFloat.approximatelyEqual(w0, w1));
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
 
-    final QuaternionM4F v0 = new QuaternionM4F(x0, y0, z0, w0);
-    final QuaternionM4F v1 = new QuaternionM4F(x1, y1, z1, w1);
-    Assert.assertFalse(QuaternionM4F.approximatelyEqual(v0, v1));
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float x0 = (float) (Math.random() * Float.MAX_VALUE);
+      final float y0 = (float) (Math.random() * Float.MAX_VALUE);
+      final float z0 = (float) (Math.random() * Float.MAX_VALUE);
+      final float w0 = (float) (Math.random() * Float.MAX_VALUE);
+      final QuaternionM4F v0 = new QuaternionM4F(x0, y0, z0, w0);
+      final QuaternionM4F v1 = new QuaternionM4F(x0, y0, z0, w0);
+      final QuaternionM4F v2 = new QuaternionM4F(x0, y0, z0, w0);
+
+      Assert.assertTrue(QuaternionM4F.almostEqual(ec, v0, v1));
+      Assert.assertTrue(QuaternionM4F.almostEqual(ec, v1, v2));
+      Assert.assertTrue(QuaternionM4F.almostEqual(ec, v0, v2));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testCheckInterface()
+  @Override @Test public void testCheckInterface()
   {
     final QuaternionM4F v = new QuaternionM4F(3.0f, 5.0f, 7.0f, 11.0f);
 
@@ -184,31 +250,67 @@ public class QuaternionM4FTest
     Assert.assertTrue(v.getWF() == v.getWF());
   }
 
-  @SuppressWarnings("static-method") @Test public void testConjugate()
+  @Override @Test public void testConjugate()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final QuaternionM4F e = new QuaternionM4F(-1.0f, -2.0f, -3.0f, 4.0f);
     final QuaternionM4F q = new QuaternionM4F(1.0f, 2.0f, 3.0f, 4.0f);
     final QuaternionM4F r = new QuaternionM4F();
     final QuaternionM4F u = QuaternionM4F.conjugate(q, r);
-    final boolean t = QuaternionM4F.approximatelyEqual(e, r);
+    final boolean t = QuaternionM4F.almostEqual(context, e, r);
 
     Assert.assertTrue(t);
     Assert.assertSame(r, u);
   }
 
-  @SuppressWarnings("static-method") @Test public void testConjugateInPlace()
+  @Override @Test public void testConjugateInPlace()
   {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
     final QuaternionM4F e = new QuaternionM4F(-1.0f, -2.0f, -3.0f, 4.0f);
     final QuaternionM4F q = new QuaternionM4F(1.0f, 2.0f, 3.0f, 4.0f);
     final QuaternionM4F r = new QuaternionM4F(q);
     final QuaternionM4F u = QuaternionM4F.conjugateInPlace(r);
-    final boolean t = QuaternionM4F.approximatelyEqual(e, r);
+    final boolean t = QuaternionM4F.almostEqual(context, e, r);
 
     Assert.assertTrue(t);
     Assert.assertSame(r, u);
   }
 
-  @SuppressWarnings("static-method") @Test public void testCopy()
+  @Override @Test public void testConjugateInvertible()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    boolean eq = false;
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float x = (float) ((Math.random() * 200) - 100);
+      final float y = (float) ((Math.random() * 200) - 100);
+      final float z = (float) ((Math.random() * 200) - 100);
+      final float w = (float) ((Math.random() * 200) - 100);
+
+      final QuaternionM4F q = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F qc0 = new QuaternionM4F();
+      final QuaternionM4F qc1 = new QuaternionM4F();
+      QuaternionM4F.conjugate(q, qc0);
+      QuaternionM4F.conjugate(qc0, qc1);
+
+      eq = AlmostEqualFloat.almostEqual(context, q.getXF(), qc1.getXF());
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context, q.getYF(), qc1.getYF());
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context, q.getZF(), qc1.getZF());
+      Assert.assertTrue(eq);
+      eq = AlmostEqualFloat.almostEqual(context, q.getWF(), qc1.getWF());
+      Assert.assertTrue(eq);
+    }
+  }
+
+  @Override @Test public void testCopy()
   {
     final QuaternionM4F vb = new QuaternionM4F(5, 6, 7, 8);
     final QuaternionM4F va = new QuaternionM4F(1, 2, 3, 4);
@@ -226,13 +328,24 @@ public class QuaternionM4FTest
     Assert.assertTrue(va.getWF() == vb.getWF());
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProduct()
+  @Override @Test public void testDefault0001()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    Assert.assertTrue(QuaternionM4F.almostEqual(
+      ec,
+      new QuaternionM4F(),
+      new QuaternionM4F(0, 0, 0, 1)));
+  }
+
+  @Override @Test public void testDotProduct()
   {
     final QuaternionM4F v0 = new QuaternionM4F(10.0f, 10.0f, 10.0f, 10.0f);
     final QuaternionM4F v1 = new QuaternionM4F(10.0f, 10.0f, 10.0f, 10.0f);
 
     {
-      final float p = QuaternionM4F.dotProduct(v0, v1);
+      final double p = QuaternionM4F.dotProduct(v0, v1);
       Assert.assertTrue(v0.getXF() == 10.0f);
       Assert.assertTrue(v0.getYF() == 10.0f);
       Assert.assertTrue(v0.getZF() == 10.0f);
@@ -245,7 +358,7 @@ public class QuaternionM4FTest
     }
 
     {
-      final float p = QuaternionM4F.dotProduct(v0, v0);
+      final double p = QuaternionM4F.dotProduct(v0, v0);
       Assert.assertTrue(v0.getXF() == 10.0f);
       Assert.assertTrue(v0.getYF() == 10.0f);
       Assert.assertTrue(v0.getZF() == 10.0f);
@@ -254,7 +367,7 @@ public class QuaternionM4FTest
     }
 
     {
-      final float p = QuaternionM4F.dotProduct(v1, v1);
+      final double p = QuaternionM4F.dotProduct(v1, v1);
       Assert.assertTrue(v1.getXF() == 10.0f);
       Assert.assertTrue(v1.getYF() == 10.0f);
       Assert.assertTrue(v1.getZF() == 10.0f);
@@ -263,22 +376,32 @@ public class QuaternionM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testDotProductOrthonormal()
+  @Override @Test public void testDotProductSelf()
   {
-    final QuaternionM4F v = new QuaternionM4F(1.0f, 0.0f, 0.0f, 0.0f);
-    Assert.assertTrue(QuaternionM4F.dotProduct(v, v) == 1.0);
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float x = (float) Math.random();
+      final float y = (float) Math.random();
+      final float z = (float) Math.random();
+      final float w = (float) Math.random();
+      final QuaternionM4D q = new QuaternionM4D(x, y, z, w);
+      final double dp = QuaternionM4D.dotProduct(q, q);
+
+      System.out.println("q  : " + q);
+      System.out.println("dp : " + dp);
+
+      AlmostEqualDouble.almostEqual(ec, 1.0, dp);
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testDotProductSelfMagnitudeSquared()
+  @Override @Test public void testDotProductSelfMagnitudeSquared()
   {
     final QuaternionM4F v0 = new QuaternionM4F(10.0f, 10.0f, 10.0f, 10.0f);
 
     {
-      final float p = QuaternionM4F.dotProduct(v0, v0);
+      final double p = QuaternionM4F.dotProduct(v0, v0);
       Assert.assertTrue(v0.getXF() == 10.0f);
       Assert.assertTrue(v0.getYF() == 10.0f);
       Assert.assertTrue(v0.getZF() == 10.0f);
@@ -287,7 +410,7 @@ public class QuaternionM4FTest
     }
 
     {
-      final float p = QuaternionM4F.magnitudeSquared(v0);
+      final double p = QuaternionM4F.magnitudeSquared(v0);
       Assert.assertTrue(v0.getXF() == 10.0f);
       Assert.assertTrue(v0.getYF() == 10.0f);
       Assert.assertTrue(v0.getZF() == 10.0f);
@@ -296,105 +419,100 @@ public class QuaternionM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  @Override @Test public void testEqualsCorrect()
   {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    Assert.assertTrue(m0.equals(m0));
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      Assert.assertTrue(m0.equals(m0));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      Assert.assertFalse(m0.equals(null));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      final QuaternionM4F m1 = new QuaternionM4F();
+      Assert.assertTrue(m0.equals(m1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  @Override @Test public void testEqualsNotEqualCorrect()
   {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    Assert.assertFalse(m0.equals(null));
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      final QuaternionM4F m1 = new QuaternionM4F();
+      m1.x = 23.0f;
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      final QuaternionM4F m1 = new QuaternionM4F();
+      m1.y = 23.0f;
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      final QuaternionM4F m1 = new QuaternionM4F();
+      m1.z = 23.0f;
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      final QuaternionM4F m1 = new QuaternionM4F();
+      m1.w = 23.0f;
+      Assert.assertFalse(m0.equals(m1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  @Override @Test public void testHashCodeEqualsCorrect()
   {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
-  {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    final QuaternionM4F m1 = new QuaternionM4F();
-    Assert.assertTrue(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq0()
-  {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    final QuaternionM4F m1 = new QuaternionM4F();
-    m1.x = 23.0f;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq1()
-  {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    final QuaternionM4F m1 = new QuaternionM4F();
-    m1.y = 23.0f;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq2()
-  {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    final QuaternionM4F m1 = new QuaternionM4F();
-    m1.z = 23.0f;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq3()
-  {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    final QuaternionM4F m1 = new QuaternionM4F();
-    m1.w = 23.0f;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeEq()
-  {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    final QuaternionM4F m1 = new QuaternionM4F();
+    final QuaternionM4D m0 = new QuaternionM4D();
+    final QuaternionM4D m1 = new QuaternionM4D();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase0()
+  @Override @Test public void testHashCodeNotEqualCorrect()
   {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    final QuaternionM4F m1 = new QuaternionM4F();
-    m1.x = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      final QuaternionM4F m1 = new QuaternionM4F();
+      m1.x = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      final QuaternionM4F m1 = new QuaternionM4F();
+      m1.y = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      final QuaternionM4F m1 = new QuaternionM4F();
+      m1.z = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final QuaternionM4F m0 = new QuaternionM4F();
+      final QuaternionM4F m1 = new QuaternionM4F();
+      m1.w = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase1()
-  {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    final QuaternionM4F m1 = new QuaternionM4F();
-    m1.y = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase2()
-  {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    final QuaternionM4F m1 = new QuaternionM4F();
-    m1.z = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase3()
-  {
-    final QuaternionM4F m0 = new QuaternionM4F();
-    final QuaternionM4F m1 = new QuaternionM4F();
-    m1.w = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInitializeReadable()
+  @Override @Test public void testInitializeReadable()
   {
     final QuaternionM4F v0 = new QuaternionM4F(1.0f, 2.0f, 3.0f, 4.0f);
     final QuaternionM4F v1 = new QuaternionM4F(v0);
@@ -405,11 +523,9 @@ public class QuaternionM4FTest
     Assert.assertTrue(v0.getWF() == v1.getWF());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInterpolateLinearLimits()
+  @Override @Test public void testInterpolateLinearLimits()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -455,23 +571,161 @@ public class QuaternionM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNonzero()
+  @Override @Test public void testLookAtConsistent_Origin_NegativeX()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    final MatrixM4x4F.Context mc = new MatrixM4x4F.Context();
+    final QuaternionM4F.Context qc = new QuaternionM4F.Context();
+
+    final MatrixM4x4F mr = new MatrixM4x4F();
+    final MatrixM4x4F mqr = new MatrixM4x4F();
+    final QuaternionM4F qr = new QuaternionM4F();
+
+    final VectorReadable3F origin = new VectorI3F(0, 0, 0);
+    final VectorReadable3F target = new VectorI3F(-1, 0, 0);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_Y;
+
+    MatrixM4x4F.lookAtWithContext(mc, origin, target, axis, mr);
+    QuaternionM4F.lookAtWithContext(qc, origin, target, axis, qr);
+    QuaternionM4F.makeRotationMatrix4x4(qr, mqr);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mqr: ");
+    System.out.println(mqr);
+
+    boolean eq = false;
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final float x = mr.get(row, col);
+        final float y = mqr.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(ec, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
+  }
+
+  @Override @Test public void testLookAtConsistent_Origin_PositiveX()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    final MatrixM4x4F.Context mc = new MatrixM4x4F.Context();
+    final QuaternionM4F.Context qc = new QuaternionM4F.Context();
+
+    final MatrixM4x4F mr = new MatrixM4x4F();
+    final MatrixM4x4F mqr = new MatrixM4x4F();
+    final QuaternionM4F qr = new QuaternionM4F();
+
+    final VectorReadable3F origin = new VectorI3F(0, 0, 0);
+    final VectorReadable3F target = new VectorI3F(1, 0, 0);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_Y;
+
+    MatrixM4x4F.lookAtWithContext(mc, origin, target, axis, mr);
+    QuaternionM4F.lookAtWithContext(qc, origin, target, axis, qr);
+    QuaternionM4F.makeRotationMatrix4x4(qr, mqr);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mqr: ");
+    System.out.println(mqr);
+
+    boolean eq = false;
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final float x = mr.get(row, col);
+        final float y = mqr.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(ec, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
+  }
+
+  @Override @Test public void testLookAtMatrixEquivalentAxisY()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F.Context qc = new QuaternionM4F.Context();
+    final MatrixM4x4F.Context mc = new MatrixM4x4F.Context();
+
+    final MatrixM4x4F ml = new MatrixM4x4F();
+    final QuaternionM4F lq = new QuaternionM4F();
+    final MatrixM4x4F mq = new MatrixM4x4F();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float origin_x =
+        (float) ((Math.random() * 100) - (Math.random() * 100));
+      final float origin_y =
+        (float) ((Math.random() * 100) - (Math.random() * 100));
+      final float origin_z =
+        (float) ((Math.random() * 100) - (Math.random() * 100));
+
+      final float target_x =
+        (float) ((Math.random() * 100) - (Math.random() * 100));
+      final float target_y =
+        (float) ((Math.random() * 100) - (Math.random() * 100));
+      final float target_z =
+        (float) ((Math.random() * 100) - (Math.random() * 100));
+
+      final VectorI3F origin = new VectorI3F(origin_x, origin_y, origin_z);
+      final VectorI3F target = new VectorI3F(target_x, target_y, target_z);
+
+      MatrixM4x4F.lookAtWithContext(
+        mc,
+        origin,
+        target,
+        QuaternionM4FTest.AXIS_Y,
+        ml);
+      QuaternionM4F.lookAtWithContext(
+        qc,
+        origin,
+        target,
+        QuaternionM4FTest.AXIS_Y,
+        lq);
+      QuaternionM4F.makeRotationMatrix4x4(lq, mq);
+
+      System.out.println("ml : ");
+      System.out.println(ml);
+      System.out.println("mq : ");
+      System.out.println(mq);
+
+      for (int row = 0; row < 3; ++row) {
+        for (int col = 0; col < 3; ++col) {
+          final float x = ml.get(row, col);
+          final float y = mq.get(row, col);
+
+          final boolean eq = AlmostEqualFloat.almostEqual(ec, x, y);
+          Assert.assertTrue(eq);
+        }
+      }
+    }
+  }
+
+  @Override @Test public void testMagnitudeNonzero()
+  {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
       final float w = (float) (Math.random() * Float.MAX_VALUE);
       final QuaternionM4F v = new QuaternionM4F(x, y, z, w);
 
-      final float m = QuaternionM4F.magnitude(v);
-      Assert.assertTrue(m >= 1.0f);
+      final double m = QuaternionM4F.magnitude(v);
+      Assert.assertTrue(m >= 1.0);
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNormal()
+  @Override @Test public void testMagnitudeNormal()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative context_d =
+      TestUtilities.getDoubleEqualityContext6dp();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x =
         (float) (Math.random() * (Math.sqrt(Float.MAX_VALUE) / 2));
       final float y =
@@ -486,54 +740,55 @@ public class QuaternionM4FTest
       QuaternionM4F.normalize(v, vr);
       Assert.assertNotSame(v, vr);
 
-      final float m = QuaternionM4F.magnitude(vr);
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 1.0f));
+      final double m = QuaternionM4F.magnitude(vr);
+
+      System.out.println("m : " + m);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, m, 1.0));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMagnitudeNormalizeZero()
+  @Override @Test public void testMagnitudeNormalizeZero()
   {
     final QuaternionM4F v = new QuaternionM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final QuaternionM4F vr = QuaternionM4F.normalizeInPlace(v);
-    final float m = QuaternionM4F.magnitude(vr);
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 0.0f));
+    final double m = QuaternionM4F.magnitude(vr);
+    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeOne()
+  @Override @Test public void testMagnitudeOne()
   {
     final QuaternionM4F v = new QuaternionM4F(1.0f, 0.0f, 0.0f, 0.0f);
-    final float m = QuaternionM4F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 1.0f));
+    final double m = QuaternionM4F.magnitude(v);
+    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 1.0));
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeSimple()
+  @Override @Test public void testMagnitudeSimple()
   {
     final QuaternionM4F v = new QuaternionM4F(8.0f, 0.0f, 0.0f, 0.0f);
 
     {
-      final float p = QuaternionM4F.dotProduct(v, v);
-      final float q = QuaternionM4F.magnitudeSquared(v);
-      final float r = QuaternionM4F.magnitude(v);
-      Assert.assertTrue(p == 64.0f);
-      Assert.assertTrue(q == 64.0f);
-      Assert.assertTrue(r == 8.0f);
+      final double p = QuaternionM4F.dotProduct(v, v);
+      final double q = QuaternionM4F.magnitudeSquared(v);
+      final double r = QuaternionM4F.magnitude(v);
+      Assert.assertTrue(p == 64.0);
+      Assert.assertTrue(q == 64.0);
+      Assert.assertTrue(r == 8.0);
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeZero()
+  @Override @Test public void testMagnitudeZero()
   {
     final QuaternionM4F v = new QuaternionM4F(0.0f, 0.0f, 0.0f, 0.0f);
-    final float m = QuaternionM4F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 0.0f));
+    final double m = QuaternionM4F.magnitude(v);
+    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMakeAxisAngleNormal()
+  @Override @Test public void testMakeAxisAngleNormal()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative context_d =
+      TestUtilities.getDoubleEqualityContext6dp();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final VectorI3F axis_r =
         new VectorI3F(
           (float) Math.random(),
@@ -544,20 +799,22 @@ public class QuaternionM4FTest
       final QuaternionM4F q = new QuaternionM4F();
       QuaternionM4F.makeFromAxisAngle(
         axis_n,
-        (float) Math.toRadians(Math.random() * 360),
+        Math.toRadians(Math.random() * 360),
         q);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        QuaternionM4F.magnitude(q),
-        1.0f));
+      final double m = QuaternionM4F.magnitude(q);
 
-      System.err.println("testMakeAxisAngleNormal: " + q);
+      System.out.println("axis_r : " + axis_r);
+      System.out.println("axis_n : " + axis_n);
+      System.out.println("m      : " + m);
+      System.out.println("q      : " + q);
+      System.out.println("--");
+
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, m, 1.0));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMakeAxisAngleX_45()
+  @Override @Test public void testMakeAxisAngleX_45()
   {
     final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
     final QuaternionM4F q = new QuaternionM4F();
@@ -565,7 +822,7 @@ public class QuaternionM4FTest
       QuaternionM4F.makeFromAxisAngle(axis, (float) Math.toRadians(45), q);
     Assert.assertSame(r, q);
 
-    System.err.println("testMakeAxisAngleX: " + q);
+    System.out.println("r : " + r);
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -587,9 +844,7 @@ public class QuaternionM4FTest
       0.9238795325112867f));
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMakeAxisAngleX_90()
+  @Override @Test public void testMakeAxisAngleX_90()
   {
     final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
     final QuaternionM4F q = new QuaternionM4F();
@@ -597,7 +852,7 @@ public class QuaternionM4FTest
       QuaternionM4F.makeFromAxisAngle(axis, (float) Math.toRadians(90), q);
     Assert.assertSame(r, q);
 
-    System.err.println("testMakeAxisAngleX: " + q);
+    System.out.println("r : " + r);
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -619,9 +874,7 @@ public class QuaternionM4FTest
       0.7071067811865475f));
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMakeAxisAngleY_45()
+  @Override @Test public void testMakeAxisAngleY_45()
   {
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     final QuaternionM4F q = new QuaternionM4F();
@@ -629,7 +882,7 @@ public class QuaternionM4FTest
       QuaternionM4F.makeFromAxisAngle(axis, (float) Math.toRadians(45), q);
     Assert.assertSame(r, q);
 
-    System.err.println("testMakeAxisAngleY: " + q);
+    System.out.println("r : " + r);
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -651,9 +904,7 @@ public class QuaternionM4FTest
       0.9238795325112867f));
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMakeAxisAngleY_90()
+  @Override @Test public void testMakeAxisAngleY_90()
   {
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     final QuaternionM4F q = new QuaternionM4F();
@@ -661,7 +912,7 @@ public class QuaternionM4FTest
       QuaternionM4F.makeFromAxisAngle(axis, (float) Math.toRadians(90), q);
     Assert.assertSame(r, q);
 
-    System.err.println("testMakeAxisAngleY: " + q);
+    System.out.println("r : " + r);
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -683,9 +934,7 @@ public class QuaternionM4FTest
       0.7071067811865475f));
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMakeAxisAngleZ_45()
+  @Override @Test public void testMakeAxisAngleZ_45()
   {
     final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
     final QuaternionM4F q = new QuaternionM4F();
@@ -693,7 +942,7 @@ public class QuaternionM4FTest
       QuaternionM4F.makeFromAxisAngle(axis, (float) Math.toRadians(45), q);
     Assert.assertSame(r, q);
 
-    System.err.println("testMakeAxisAngleZ: " + q);
+    System.out.println("r : " + r);
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -715,9 +964,7 @@ public class QuaternionM4FTest
       0.9238795325112867f));
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMakeAxisAngleZ_90()
+  @Override @Test public void testMakeAxisAngleZ_90()
   {
     final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
     final QuaternionM4F q = new QuaternionM4F();
@@ -725,7 +972,7 @@ public class QuaternionM4FTest
       QuaternionM4F.makeFromAxisAngle(axis, (float) Math.toRadians(90), q);
     Assert.assertSame(r, q);
 
-    System.err.println("testMakeAxisAngleZ: " + q);
+    System.out.println("r : " + r);
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -747,14 +994,476 @@ public class QuaternionM4FTest
       0.7071067811865475f));
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMakeMatrixIdentity()
+  @Override @Test public void testMakeFromMatrix3x3Exhaustive()
+  {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+    final AlmostEqualDouble.ContextRelative context_d =
+      TestUtilities.getDoubleEqualityContext6dp();
+
+    final QuaternionM4F qfm = new QuaternionM4F();
+    final QuaternionM4F qaa = new QuaternionM4F();
+    final MatrixM3x3F m = new MatrixM3x3F();
+    boolean eq = false;
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float degrees = (float) ((2 * Math.random() * 360.0f) - 360.0f);
+      final float angle = (float) Math.toRadians(degrees);
+      final float axis_x = (float) Math.random();
+      final float axis_y = (float) Math.random();
+      final float axis_z = (float) Math.random();
+      final VectorM3F axis = new VectorM3F(axis_x, axis_y, axis_z);
+      VectorM3F.normalizeInPlace(axis);
+
+      /**
+       * Produce a quaternion from an axis and angle.
+       */
+
+      QuaternionM4F.makeFromAxisAngle(axis, angle, qaa);
+
+      /**
+       * Produce a rotation matrix from an axis and angle, and then a
+       * quaternion from that matrix.
+       */
+
+      MatrixM3x3F.makeRotation(angle, axis, m);
+      QuaternionM4F.makeFromRotationMatrix3x3(m, qfm);
+
+      final double mag_qfm = QuaternionM4F.magnitude(qfm);
+      final double mag_qaa = QuaternionM4F.magnitude(qaa);
+
+      System.out.println("mag_qfm : " + mag_qfm);
+      System.out.println("mag_qaa : " + mag_qaa);
+      System.out.println("axis    : " + axis);
+      System.out.println("angle   : " + angle);
+      System.out.println("m       : ");
+      System.out.println(m);
+      System.out.println("qfm     : " + qfm);
+      System.out.println("qaa     : " + qaa);
+      System.out.println("--");
+
+      /**
+       * The resulting quaternions are unit quaternions.
+       */
+
+      eq = AlmostEqualDouble.almostEqual(context_d, mag_qfm, 1.0);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualDouble.almostEqual(context_d, mag_qaa, 1.0);
+      Assert.assertTrue(eq);
+
+      /**
+       * The resulting quaternions match.
+       */
+
+      if (QuaternionM4F.almostEqual(context_f, qfm, qaa)) {
+        continue;
+      }
+
+      /**
+       * The sign of quaternions may flip when created from matrices.
+       */
+
+      if (QuaternionM4F.isNegationOf(context_f, qfm, qaa)) {
+        continue;
+      }
+
+      Assert.fail(qfm + " != " + qaa);
+    }
+  }
+
+  @Override @Test public void testMakeFromMatrix4x4Exhaustive()
+  {
+    final AlmostEqualDouble.ContextRelative context_d =
+      TestUtilities.getDoubleEqualityContext6dp();
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F qfm = new QuaternionM4F();
+    final QuaternionM4F qaa = new QuaternionM4F();
+    final MatrixM4x4F m = new MatrixM4x4F();
+    boolean eq = false;
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float degrees = (float) ((2 * Math.random() * 360.0f) - 360.0f);
+      final float angle = (float) Math.toRadians(degrees);
+      final float axis_x = (float) Math.random();
+      final float axis_y = (float) Math.random();
+      final float axis_z = (float) Math.random();
+      final VectorM3F axis = new VectorM3F(axis_x, axis_y, axis_z);
+      VectorM3F.normalizeInPlace(axis);
+
+      /**
+       * Produce a quaternion from an axis and angle.
+       */
+
+      QuaternionM4F.makeFromAxisAngle(axis, angle, qaa);
+
+      /**
+       * Produce a rotation matrix from an axis and angle, and then a
+       * quaternion from that matrix.
+       */
+
+      MatrixM4x4F.makeRotation(angle, axis, m);
+      QuaternionM4F.makeFromRotationMatrix4x4(m, qfm);
+
+      final double mag_qfm = QuaternionM4F.magnitude(qfm);
+      final double mag_qaa = QuaternionM4F.magnitude(qaa);
+
+      System.out.println("mag_qfm : " + mag_qfm);
+      System.out.println("mag_qaa : " + mag_qaa);
+      System.out.println("axis    : " + axis);
+      System.out.println("angle   : " + angle);
+      System.out.println("m       : ");
+      System.out.println(m);
+      System.out.println("qfm     : " + qfm);
+      System.out.println("qaa     : " + qaa);
+      System.out.println("--");
+
+      /**
+       * The resulting quaternions are unit quaternions.
+       */
+
+      eq = AlmostEqualDouble.almostEqual(context_d, mag_qfm, 1.0);
+      Assert.assertTrue(eq);
+      eq = AlmostEqualDouble.almostEqual(context_d, mag_qaa, 1.0);
+      Assert.assertTrue(eq);
+
+      /**
+       * The resulting quaternions match.
+       */
+
+      if (QuaternionM4F.almostEqual(context, qfm, qaa)) {
+        Assert.assertTrue(true);
+        continue;
+      }
+
+      /**
+       * The sign of quaternions may flip when created from matrices.
+       */
+
+      if (QuaternionM4F.isNegationOf(context, qfm, qaa)) {
+        Assert.assertTrue(true);
+        continue;
+      }
+
+      Assert.fail(qfm + " != " + qaa);
+    }
+  }
+
+  @Override @Test public void testMakeMatrix3x3_45X()
+  {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F q = new QuaternionM4F();
+    final MatrixM3x3F mq = new MatrixM3x3F();
+    final MatrixM3x3F mr = new MatrixM3x3F();
+    boolean eq = false;
+
+    final double radians = Math.toRadians(45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_X;
+
+    MatrixM3x3F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix3x3(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
+
+    for (int row = 0; row < 3; ++row) {
+      for (int col = 0; col < 3; ++col) {
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
+  }
+
+  @Override @Test public void testMakeMatrix3x3_45Y()
+  {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F q = new QuaternionM4F();
+    final MatrixM3x3F mq = new MatrixM3x3F();
+    final MatrixM3x3F mr = new MatrixM3x3F();
+    boolean eq = false;
+
+    final double radians = Math.toRadians(45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_Y;
+
+    MatrixM3x3F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix3x3(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
+
+    for (int row = 0; row < 3; ++row) {
+      for (int col = 0; col < 3; ++col) {
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
+  }
+
+  @Override @Test public void testMakeMatrix3x3_45Z()
+  {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F q = new QuaternionM4F();
+    final MatrixM3x3F mq = new MatrixM3x3F();
+    final MatrixM3x3F mr = new MatrixM3x3F();
+    boolean eq = false;
+
+    final double radians = Math.toRadians(45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_Z;
+
+    MatrixM3x3F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix3x3(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
+
+    for (int row = 0; row < 3; ++row) {
+      for (int col = 0; col < 3; ++col) {
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
+  }
+
+  @Override @Test public void testMakeMatrix3x3_Identity()
+  {
+    final QuaternionM4F q = new QuaternionM4F();
+    final MatrixM3x3F m = new MatrixM3x3F();
+
+    QuaternionM4F.makeRotationMatrix3x3(q, m);
+
+    Assert.assertTrue(1.0f == m.get(0, 0));
+    Assert.assertTrue(0.0f == m.get(0, 1));
+    Assert.assertTrue(0.0f == m.get(0, 2));
+
+    Assert.assertTrue(0.0f == m.get(1, 0));
+    Assert.assertTrue(1.0f == m.get(1, 1));
+    Assert.assertTrue(0.0f == m.get(1, 2));
+
+    Assert.assertTrue(0.0f == m.get(2, 0));
+    Assert.assertTrue(0.0f == m.get(2, 1));
+    Assert.assertTrue(1.0f == m.get(2, 2));
+  }
+
+  @Override @Test public void testMakeMatrix3x3_Minus45X()
+  {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F q = new QuaternionM4F();
+    final MatrixM3x3F mq = new MatrixM3x3F();
+    final MatrixM3x3F mr = new MatrixM3x3F();
+    boolean eq = false;
+
+    final double radians = Math.toRadians(-45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_X;
+
+    MatrixM3x3F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix3x3(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
+
+    for (int row = 0; row < 3; ++row) {
+      for (int col = 0; col < 3; ++col) {
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
+  }
+
+  @Override @Test public void testMakeMatrix3x3_Minus45Y()
+  {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F q = new QuaternionM4F();
+    final MatrixM3x3F mq = new MatrixM3x3F();
+    final MatrixM3x3F mr = new MatrixM3x3F();
+    boolean eq = false;
+
+    final double radians = Math.toRadians(-45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_Y;
+
+    MatrixM3x3F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix3x3(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
+
+    for (int row = 0; row < 3; ++row) {
+      for (int col = 0; col < 3; ++col) {
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
+  }
+
+  @Override @Test public void testMakeMatrix3x3_Minus45Z()
+  {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F q = new QuaternionM4F();
+    final MatrixM3x3F mq = new MatrixM3x3F();
+    final MatrixM3x3F mr = new MatrixM3x3F();
+    boolean eq = false;
+
+    final double radians = Math.toRadians(-45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_Z;
+
+    MatrixM3x3F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix3x3(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
+
+    for (int row = 0; row < 3; ++row) {
+      for (int col = 0; col < 3; ++col) {
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
+  }
+
+  @Override @Test public void testMakeMatrix4x4_45X()
+  {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F q = new QuaternionM4F();
+    final MatrixM4x4F mq = new MatrixM4x4F();
+    final MatrixM4x4F mr = new MatrixM4x4F();
+    boolean eq = false;
+
+    final double radians = Math.toRadians(45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_X;
+
+    MatrixM4x4F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix4x4(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
+  }
+
+  @Override @Test public void testMakeMatrix4x4_45Y()
+  {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F q = new QuaternionM4F();
+    final MatrixM4x4F mq = new MatrixM4x4F();
+    final MatrixM4x4F mr = new MatrixM4x4F();
+    boolean eq = false;
+
+    final double radians = Math.toRadians(45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_Y;
+
+    MatrixM4x4F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix4x4(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
+  }
+
+  @Override @Test public void testMakeMatrix4x4_45Z()
+  {
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F q = new QuaternionM4F();
+    final MatrixM4x4F mq = new MatrixM4x4F();
+    final MatrixM4x4F mr = new MatrixM4x4F();
+    boolean eq = false;
+
+    final double radians = Math.toRadians(45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_Z;
+
+    MatrixM4x4F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix4x4(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
+
+    for (int row = 0; row < 4; ++row) {
+      for (int col = 0; col < 4; ++col) {
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
+      }
+    }
+  }
+
+  @Override @Test public void testMakeMatrix4x4_Identity()
   {
     final QuaternionM4F q = new QuaternionM4F();
     final MatrixM4x4F m = new MatrixM4x4F();
 
-    QuaternionM4F.makeRotationMatrix(q, m);
+    QuaternionM4F.makeRotationMatrix4x4(q, m);
 
     Assert.assertTrue(1.0f == m.get(0, 0));
     Assert.assertTrue(0.0f == m.get(0, 1));
@@ -777,115 +1486,112 @@ public class QuaternionM4FTest
     Assert.assertTrue(1.0f == m.get(3, 3));
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMakeMatrixRotateX_90()
+  @Override @Test public void testMakeMatrix4x4_Minus45X()
   {
-    final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
-    final QuaternionM4F qx = new QuaternionM4F();
-    QuaternionM4F.makeFromAxisAngle(axis_x, (float) Math.toRadians(90), qx);
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
 
+    final QuaternionM4F q = new QuaternionM4F();
     final MatrixM4x4F mq = new MatrixM4x4F();
     final MatrixM4x4F mr = new MatrixM4x4F();
+    boolean eq = false;
 
-    QuaternionM4F.makeRotationMatrix(qx, mq);
-    MatrixM4x4F.rotateInPlace((float) Math.toRadians(90), mr, axis_x);
+    final double radians = Math.toRadians(-45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_X;
 
-    System.err.println("testMakeMatrixRotateX_90: mq: ");
-    System.err.println(mq);
-    System.err.println("testMakeMatrixRotateX_90: mr: ");
-    System.err.println(mr);
+    MatrixM4x4F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix4x4(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
-        final Double dx = Double.valueOf(x);
-        final Double dy = Double.valueOf(y);
-        System.err.println(String.format("%.16f\t%.16f", dx, dy));
-        ApproximatelyEqualDouble.approximatelyEqual(
-          dx.doubleValue(),
-          dy.doubleValue());
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMakeMatrixRotateY_90()
+  @Override @Test public void testMakeMatrix4x4_Minus45Y()
   {
-    final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
-    final QuaternionM4F qy = new QuaternionM4F();
-    QuaternionM4F.makeFromAxisAngle(axis_y, (float) Math.toRadians(90), qy);
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
 
+    final QuaternionM4F q = new QuaternionM4F();
     final MatrixM4x4F mq = new MatrixM4x4F();
     final MatrixM4x4F mr = new MatrixM4x4F();
+    boolean eq = false;
 
-    QuaternionM4F.makeRotationMatrix(qy, mq);
-    MatrixM4x4F.rotateInPlace((float) Math.toRadians(90), mr, axis_y);
+    final double radians = Math.toRadians(-45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_Y;
 
-    System.err.println("testMakeMatrixRotateY_90: mq: ");
-    System.err.println(mq);
-    System.err.println("testMakeMatrixRotateY_90: mr: ");
-    System.err.println(mr);
+    MatrixM4x4F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix4x4(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
-        final Double dx = Double.valueOf(x);
-        final Double dy = Double.valueOf(y);
-        System.err.println(String.format("%.16f\t%.16f", dx, dy));
-        ApproximatelyEqualDouble.approximatelyEqual(
-          dx.doubleValue(),
-          dy.doubleValue());
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMakeMatrixRotateZ_90()
+  @Override @Test public void testMakeMatrix4x4_Minus45Z()
   {
-    final VectorI3F axis_z = new VectorI3F(0.0f, 0.0f, 1.0f);
-    final QuaternionM4F qz = new QuaternionM4F();
-    QuaternionM4F.makeFromAxisAngle(axis_z, (float) Math.toRadians(90), qz);
+    final AlmostEqualFloat.ContextRelative context_f =
+      TestUtilities.getSingleEqualityContext();
 
+    final QuaternionM4F q = new QuaternionM4F();
     final MatrixM4x4F mq = new MatrixM4x4F();
     final MatrixM4x4F mr = new MatrixM4x4F();
+    boolean eq = false;
 
-    QuaternionM4F.makeRotationMatrix(qz, mq);
-    MatrixM4x4F.rotateInPlace((float) Math.toRadians(90), mr, axis_z);
+    final double radians = Math.toRadians(-45);
+    final VectorReadable3F axis = QuaternionM4FTest.AXIS_Z;
 
-    System.err.println("testMakeMatrixRotateZ_90: mq: ");
-    System.err.println(mq);
-    System.err.println("testMakeMatrixRotateZ_90: mr: ");
-    System.err.println(mr);
+    MatrixM4x4F.makeRotation(radians, axis, mr);
+    QuaternionM4F.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4F.makeRotationMatrix4x4(q, mq);
+
+    System.out.println("mr: ");
+    System.out.println(mr);
+    System.out.println("mq: ");
+    System.out.println(mq);
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        final double x = mr.get(row, col);
-        final double y = mq.get(row, col);
-        final Double dx = Double.valueOf(x);
-        final Double dy = Double.valueOf(y);
-        System.err.println(String.format("%.16f\t%.16f", dx, dy));
-        ApproximatelyEqualDouble.approximatelyEqual(
-          dx.doubleValue(),
-          dy.doubleValue());
+        final float x = mr.get(row, col);
+        final float y = mq.get(row, col);
+        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
+        Assert.assertTrue(eq);
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMultiply()
+  @Override @Test public void testMultiply()
   {
     final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
     final QuaternionM4F qx = new QuaternionM4F();
     final QuaternionM4F qxr =
-      QuaternionM4F.makeFromAxisAngle(axis_x, (float) Math.toRadians(45), qx);
+      QuaternionM4F.makeFromAxisAngle(axis_x, Math.toRadians(45), qx);
     final QuaternionM4F qy = new QuaternionM4F();
     final QuaternionM4F qyr =
-      QuaternionM4F.makeFromAxisAngle(axis_y, (float) Math.toRadians(45), qy);
+      QuaternionM4F.makeFromAxisAngle(axis_y, Math.toRadians(45), qy);
 
     Assert.assertSame(qx, qxr);
     Assert.assertSame(qy, qyr);
@@ -897,7 +1603,10 @@ public class QuaternionM4FTest
 
     final QuaternionM4F qr = new QuaternionM4F();
     QuaternionM4F.multiply(qy, qx, qr);
-    System.err.println("testMultiply: " + qr);
+
+    System.out.println("qx : " + qx);
+    System.out.println("qy : " + qy);
+    System.out.println("qr : " + qr);
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -919,7 +1628,7 @@ public class QuaternionM4FTest
       0.8535533905932737f));
   }
 
-  @SuppressWarnings("static-method") @Test public void testMultiplyInPlace()
+  @Override @Test public void testMultiplyInPlace()
   {
     final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
@@ -937,7 +1646,10 @@ public class QuaternionM4FTest
     final QuaternionM4F qr = new QuaternionM4F();
     QuaternionM4F.multiplyInPlace(qr, qy);
     QuaternionM4F.multiplyInPlace(qr, qx);
-    System.err.println("testMultiplyInPlace: " + qr);
+
+    System.out.println("qx : " + qx);
+    System.out.println("qy : " + qy);
+    System.out.println("qr : " + qr);
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -947,21 +1659,19 @@ public class QuaternionM4FTest
 
     Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
       qr.getXF(),
-      0.3535534f));
+      0.3535533983204287f));
     Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
       qr.getYF(),
-      0.3535534f));
+      0.3535533983204287f));
     Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
       qr.getZF(),
-      -0.14644663f));
+      -0.14644661713388138f));
     Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
       qr.getWF(),
-      0.85355335f));
+      0.8535533828661185f));
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMultiplyInPlaceOther()
+  @Override @Test public void testMultiplyInPlaceOther()
   {
     final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
@@ -984,7 +1694,11 @@ public class QuaternionM4FTest
     QuaternionM4F.multiplyInPlace(qr, qz);
     QuaternionM4F.multiplyInPlace(qr, qy);
     QuaternionM4F.multiplyInPlace(qr, qx);
-    System.err.println("testMultiplyInPlaceOther: " + qr);
+
+    System.out.println("qx : " + qx);
+    System.out.println("qy : " + qy);
+    System.out.println("qz : " + qz);
+    System.out.println("qr : " + qr);
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1006,7 +1720,7 @@ public class QuaternionM4FTest
       0.8446231923478736f));
   }
 
-  @SuppressWarnings("static-method") @Test public void testMultiplyOther()
+  @Override @Test public void testMultiplyOther()
   {
     final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
@@ -1028,7 +1742,11 @@ public class QuaternionM4FTest
     final QuaternionM4F qr = new QuaternionM4F();
     QuaternionM4F.multiply(qy, qx, qr);
     QuaternionM4F.multiply(qz, qr, qr);
-    System.err.println("testMultiplyInPlaceOther: " + qr);
+
+    System.out.println("qx : " + qx);
+    System.out.println("qy : " + qy);
+    System.out.println("qz : " + qz);
+    System.out.println("qr : " + qr);
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1050,7 +1768,55 @@ public class QuaternionM4FTest
       0.8446231923478736f));
   }
 
-  @SuppressWarnings("static-method") @Test public void testNormalizeSimple()
+  @Override @Test public void testNegation()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float x = (float) ((Math.random() * 2) - Math.random());
+      final float y = (float) ((Math.random() * 2) - Math.random());
+      final float z = (float) ((Math.random() * 2) - Math.random());
+      final float w = (float) ((Math.random() * 2) - Math.random());
+      final QuaternionM4F qi = new QuaternionM4F(x, y, z, w);
+      final QuaternionM4F qn = new QuaternionM4F(-x, -y, -z, -w);
+      final QuaternionM4F qr = new QuaternionM4F();
+
+      QuaternionM4F.negate(qi, qr);
+
+      System.out.println("qi : " + qi);
+      System.out.println("qn : " + qn);
+      System.out.println("qr : " + qr);
+      System.out.println("--");
+
+      Assert.assertTrue(QuaternionM4F.isNegationOf(context, qi, qr));
+      Assert.assertTrue(QuaternionM4F.almostEqual(context, qn, qr));
+    }
+  }
+
+  @Override @Test public void testNegationCases()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F qi = new QuaternionM4F(1, 2, 3, 4);
+    final QuaternionM4F qnx = new QuaternionM4F(-1, 2, 3, 4);
+    final QuaternionM4F qny = new QuaternionM4F(-1, -2, 3, 4);
+    final QuaternionM4F qnz = new QuaternionM4F(-1, -2, -3, 4);
+    final QuaternionM4F qnw = new QuaternionM4F(-1, -2, -3, -4);
+
+    Assert.assertTrue(QuaternionM4F.isNegationOf(context, qi, qi) == false);
+    Assert.assertTrue(QuaternionM4F.isNegationOf(context, qi, qnx) == false);
+    Assert.assertTrue(QuaternionM4F.isNegationOf(context, qi, qny) == false);
+    Assert.assertTrue(QuaternionM4F.isNegationOf(context, qi, qnz) == false);
+    Assert.assertTrue(QuaternionM4F.isNegationOf(context, qi, qnw) == true);
+
+    QuaternionM4F.negateInPlace(qnw);
+    Assert.assertTrue(QuaternionM4F.isNegationOf(context, qi, qnw) == false);
+    Assert.assertTrue(QuaternionM4F.almostEqual(context, qi, qnw));
+  }
+
+  @Override @Test public void testNormalizeSimple()
   {
     final QuaternionM4F v0 = new QuaternionM4F(8.0f, 0.0f, 0.0f, 0.0f);
     final QuaternionM4F out = new QuaternionM4F();
@@ -1058,37 +1824,52 @@ public class QuaternionM4FTest
 
     Assert.assertTrue(vr == out);
 
-    final float m = QuaternionM4F.magnitude(out);
+    final double m = QuaternionM4F.magnitude(out);
     Assert.assertTrue(m == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleMutation()
+  @Override @Test public void testNormalizeZero()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    final QuaternionM4F qr = new QuaternionM4F();
+    final QuaternionM4F q = new QuaternionM4F(0, 0, 0, 0);
+    QuaternionM4F.normalize(q, qr);
+
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.x));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.y));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.z));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.w));
+  }
+
+  @Override @Test public void testScaleMutation()
   {
     final QuaternionM4F out = new QuaternionM4F();
     final QuaternionM4F v0 = new QuaternionM4F(1.0f, 1.0f, 1.0f, 1.0f);
 
-    Assert.assertTrue(out.getXF() == 0.0);
-    Assert.assertTrue(out.getYF() == 0.0);
-    Assert.assertTrue(out.getZF() == 0.0);
-    Assert.assertTrue(out.getWF() == 1.0);
-    Assert.assertTrue(v0.getXF() == 1.0);
-    Assert.assertTrue(v0.getYF() == 1.0);
-    Assert.assertTrue(v0.getZF() == 1.0);
-    Assert.assertTrue(v0.getWF() == 1.0);
+    Assert.assertTrue(out.getXF() == 0.0f);
+    Assert.assertTrue(out.getYF() == 0.0f);
+    Assert.assertTrue(out.getZF() == 0.0f);
+    Assert.assertTrue(out.getWF() == 1.0f);
+    Assert.assertTrue(v0.getXF() == 1.0f);
+    Assert.assertTrue(v0.getYF() == 1.0f);
+    Assert.assertTrue(v0.getZF() == 1.0f);
+    Assert.assertTrue(v0.getWF() == 1.0f);
 
-    final QuaternionM4F ov0 = QuaternionM4F.scale(v0, 2.0f, out);
+    final QuaternionM4F ov0 = QuaternionM4F.scale(v0, 2.0, out);
 
     Assert.assertTrue(out == ov0);
     Assert.assertTrue(out.getXF() == 2.0);
     Assert.assertTrue(out.getYF() == 2.0);
     Assert.assertTrue(out.getZF() == 2.0);
     Assert.assertTrue(out.getWF() == 2.0);
-    Assert.assertTrue(v0.getXF() == 1.0);
-    Assert.assertTrue(v0.getYF() == 1.0);
-    Assert.assertTrue(v0.getZF() == 1.0);
-    Assert.assertTrue(v0.getWF() == 1.0);
+    Assert.assertTrue(v0.getXF() == 1.0f);
+    Assert.assertTrue(v0.getYF() == 1.0f);
+    Assert.assertTrue(v0.getZF() == 1.0f);
+    Assert.assertTrue(v0.getWF() == 1.0f);
 
-    final QuaternionM4F ov1 = QuaternionM4F.scaleInPlace(v0, 2.0f);
+    final QuaternionM4F ov1 = QuaternionM4F.scaleInPlace(v0, 2.0);
 
     Assert.assertTrue(ov1 == v0);
     Assert.assertTrue(ov1.getXF() == 2.0);
@@ -1101,9 +1882,9 @@ public class QuaternionM4FTest
     Assert.assertTrue(v0.getWF() == 2.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleOne()
+  @Override @Test public void testScaleOne()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
@@ -1151,9 +1932,9 @@ public class QuaternionM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleZero()
+  @Override @Test public void testScaleZero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
@@ -1196,15 +1977,16 @@ public class QuaternionM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testString()
+  @Override @Test public void testString()
   {
     final QuaternionM4F v = new QuaternionM4F(1.0f, 2.0f, 3.0f, 4.0f);
+    System.out.println(v);
     Assert.assertTrue(v.toString().equals("[QuaternionM4F 1.0 2.0 3.0 4.0]"));
   }
 
-  @SuppressWarnings("static-method") @Test public void testSubtract()
+  @Override @Test public void testSubtract()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -1256,55 +2038,55 @@ public class QuaternionM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testSubtractMutation()
+  @Override @Test public void testSubtractMutation()
   {
     final QuaternionM4F out = new QuaternionM4F();
     final QuaternionM4F v0 = new QuaternionM4F(1.0f, 1.0f, 1.0f, 1.0f);
     final QuaternionM4F v1 = new QuaternionM4F(1.0f, 1.0f, 1.0f, 1.0f);
 
-    Assert.assertTrue(out.getXF() == 0.0);
-    Assert.assertTrue(out.getYF() == 0.0);
-    Assert.assertTrue(out.getZF() == 0.0);
-    Assert.assertTrue(out.getWF() == 1.0);
-    Assert.assertTrue(v0.getXF() == 1.0);
-    Assert.assertTrue(v0.getYF() == 1.0);
-    Assert.assertTrue(v0.getZF() == 1.0);
-    Assert.assertTrue(v0.getWF() == 1.0);
-    Assert.assertTrue(v1.getXF() == 1.0);
-    Assert.assertTrue(v1.getYF() == 1.0);
-    Assert.assertTrue(v1.getZF() == 1.0);
-    Assert.assertTrue(v1.getWF() == 1.0);
+    Assert.assertTrue(out.getXF() == 0.0f);
+    Assert.assertTrue(out.getYF() == 0.0f);
+    Assert.assertTrue(out.getZF() == 0.0f);
+    Assert.assertTrue(out.getWF() == 1.0f);
+    Assert.assertTrue(v0.getXF() == 1.0f);
+    Assert.assertTrue(v0.getYF() == 1.0f);
+    Assert.assertTrue(v0.getZF() == 1.0f);
+    Assert.assertTrue(v0.getWF() == 1.0f);
+    Assert.assertTrue(v1.getXF() == 1.0f);
+    Assert.assertTrue(v1.getYF() == 1.0f);
+    Assert.assertTrue(v1.getZF() == 1.0f);
+    Assert.assertTrue(v1.getWF() == 1.0f);
 
     final QuaternionM4F ov0 = QuaternionM4F.subtract(v0, v1, out);
 
     Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXF() == 0.0);
-    Assert.assertTrue(out.getYF() == 0.0);
-    Assert.assertTrue(out.getZF() == 0.0);
-    Assert.assertTrue(out.getWF() == 0.0);
-    Assert.assertTrue(v0.getXF() == 1.0);
-    Assert.assertTrue(v0.getYF() == 1.0);
-    Assert.assertTrue(v0.getZF() == 1.0);
-    Assert.assertTrue(v0.getWF() == 1.0);
-    Assert.assertTrue(v1.getXF() == 1.0);
-    Assert.assertTrue(v1.getYF() == 1.0);
-    Assert.assertTrue(v1.getZF() == 1.0);
-    Assert.assertTrue(v1.getWF() == 1.0);
+    Assert.assertTrue(out.getXF() == 0.0f);
+    Assert.assertTrue(out.getYF() == 0.0f);
+    Assert.assertTrue(out.getZF() == 0.0f);
+    Assert.assertTrue(out.getWF() == 0.0f);
+    Assert.assertTrue(v0.getXF() == 1.0f);
+    Assert.assertTrue(v0.getYF() == 1.0f);
+    Assert.assertTrue(v0.getZF() == 1.0f);
+    Assert.assertTrue(v0.getWF() == 1.0f);
+    Assert.assertTrue(v1.getXF() == 1.0f);
+    Assert.assertTrue(v1.getYF() == 1.0f);
+    Assert.assertTrue(v1.getZF() == 1.0f);
+    Assert.assertTrue(v1.getWF() == 1.0f);
 
     final QuaternionM4F ov1 = QuaternionM4F.subtractInPlace(v0, v1);
 
     Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXF() == 0.0);
-    Assert.assertTrue(ov1.getYF() == 0.0);
-    Assert.assertTrue(ov1.getZF() == 0.0);
-    Assert.assertTrue(ov1.getWF() == 0.0);
-    Assert.assertTrue(v0.getXF() == 0.0);
-    Assert.assertTrue(v0.getYF() == 0.0);
-    Assert.assertTrue(v0.getZF() == 0.0);
-    Assert.assertTrue(v0.getWF() == 0.0);
-    Assert.assertTrue(v1.getXF() == 1.0);
-    Assert.assertTrue(v1.getYF() == 1.0);
-    Assert.assertTrue(v1.getZF() == 1.0);
-    Assert.assertTrue(v1.getWF() == 1.0);
+    Assert.assertTrue(ov1.getXF() == 0.0f);
+    Assert.assertTrue(ov1.getYF() == 0.0f);
+    Assert.assertTrue(ov1.getZF() == 0.0f);
+    Assert.assertTrue(ov1.getWF() == 0.0f);
+    Assert.assertTrue(v0.getXF() == 0.0f);
+    Assert.assertTrue(v0.getYF() == 0.0f);
+    Assert.assertTrue(v0.getZF() == 0.0f);
+    Assert.assertTrue(v0.getWF() == 0.0f);
+    Assert.assertTrue(v1.getXF() == 1.0f);
+    Assert.assertTrue(v1.getYF() == 1.0f);
+    Assert.assertTrue(v1.getZF() == 1.0f);
+    Assert.assertTrue(v1.getWF() == 1.0f);
   }
 }

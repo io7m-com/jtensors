@@ -19,8 +19,9 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import com.io7m.jaux.ApproximatelyEqualDouble;
-import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
+import com.io7m.jaux.AlmostEqualFloat;
+import com.io7m.jaux.functional.Pair;
 
 /**
  * A three-dimensional immutable vector type with single precision elements.
@@ -42,44 +43,44 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
+   * @return <code>(v0.getXF() + (v1.getXF() * r), v0.getYF() + (v1.getYF() * r), v0.getZF() + (v1.getZF() * r))</code>
    */
 
   public static @Nonnull VectorI3F addScaled(
-    final @Nonnull VectorI3F v0,
-    final @Nonnull VectorI3F v1,
+    final @Nonnull VectorReadable3F v0,
+    final @Nonnull VectorReadable3F v1,
     final float r)
   {
     return VectorI3F.add(v0, VectorI3F.scale(v1, r));
   }
 
   /**
-   * Determine whether or not the elements of the two vectors <code>v0</code>
-   * and <code>v1</code> are approximately equal.
+   * Determine whether or not the vectors <code>va</code> and <code>vb</code>
+   * are equal to within the degree of error given in <code>context</code>.
    * 
-   * @see ApproximatelyEqualFloat
+   * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
    * 
-   * @param v0
+   * @param context
+   *          The equality context
+   * @param va
    *          The left input vector
-   * @param v1
+   * @param vb
    *          The right input vector
-   * 
-   * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code> , within an appropriate degree of error for
-   *         single precision floating point values
+   * @since 5.0.0
    */
 
-  public static boolean approximatelyEqual(
-    final @Nonnull VectorI3F v0,
-    final @Nonnull VectorI3F v1)
+  public static boolean almostEqual(
+    final @Nonnull AlmostEqualFloat.ContextRelative context,
+    final @Nonnull VectorReadable3F va,
+    final @Nonnull VectorReadable3F vb)
   {
-    final boolean ex =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
-    final boolean ey =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.y, v1.y);
-    final boolean ez =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.z, v1.z);
-    return ex && ey && ez;
+    final boolean xs =
+      AlmostEqualFloat.almostEqual(context, va.getXF(), vb.getXF());
+    final boolean ys =
+      AlmostEqualFloat.almostEqual(context, va.getYF(), vb.getYF());
+    final boolean zs =
+      AlmostEqualFloat.almostEqual(context, va.getZF(), vb.getZF());
+    return xs && ys && zs;
   }
 
   /**
@@ -98,13 +99,13 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI3F clamp(
-    final @Nonnull VectorI3F v,
+    final @Nonnull VectorReadable3F v,
     final float minimum,
     final float maximum)
   {
-    final float x = Math.min(Math.max(v.x, minimum), maximum);
-    final float y = Math.min(Math.max(v.y, minimum), maximum);
-    final float z = Math.min(Math.max(v.z, minimum), maximum);
+    final float x = Math.min(Math.max(v.getXF(), minimum), maximum);
+    final float y = Math.min(Math.max(v.getYF(), minimum), maximum);
+    final float z = Math.min(Math.max(v.getZF(), minimum), maximum);
     return new VectorI3F(x, y, z);
   }
 
@@ -120,17 +121,20 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
+   * @return <code>(min(max(v.getXF(), minimum.getXF()), maximum.getXF()), min(max(v.getYF(), minimum.getYF()), maximum.getYF()), min(max(v.getZF(), minimum.getZF()), maximum.getZF()))</code>
    */
 
   public static @Nonnull VectorI3F clampByVector(
-    final @Nonnull VectorI3F v,
-    final @Nonnull VectorI3F minimum,
-    final @Nonnull VectorI3F maximum)
+    final @Nonnull VectorReadable3F v,
+    final @Nonnull VectorReadable3F minimum,
+    final @Nonnull VectorReadable3F maximum)
   {
-    final float x = Math.min(Math.max(v.x, minimum.x), maximum.x);
-    final float y = Math.min(Math.max(v.y, minimum.y), maximum.y);
-    final float z = Math.min(Math.max(v.z, minimum.z), maximum.z);
+    final float x =
+      Math.min(Math.max(v.getXF(), minimum.getXF()), maximum.getXF());
+    final float y =
+      Math.min(Math.max(v.getYF(), minimum.getYF()), maximum.getYF());
+    final float z =
+      Math.min(Math.max(v.getZF(), minimum.getZF()), maximum.getZF());
     return new VectorI3F(x, y, z);
   }
 
@@ -147,12 +151,12 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI3F clampMaximum(
-    final @Nonnull VectorI3F v,
+    final @Nonnull VectorReadable3F v,
     final float maximum)
   {
-    final float x = Math.min(v.x, maximum);
-    final float y = Math.min(v.y, maximum);
-    final float z = Math.min(v.z, maximum);
+    final float x = Math.min(v.getXF(), maximum);
+    final float y = Math.min(v.getYF(), maximum);
+    final float z = Math.min(v.getZF(), maximum);
     return new VectorI3F(x, y, z);
   }
 
@@ -165,16 +169,16 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param maximum
    *          The vector containing the maximum acceptable values
    * 
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
+   * @return <code>(min(v.getXF(), maximum.getXF()), min(v.getYF(), maximum.getYF()), min(v.getZF(), maximum.getZF()))</code>
    */
 
   public static @Nonnull VectorI3F clampMaximumByVector(
-    final @Nonnull VectorI3F v,
-    final @Nonnull VectorI3F maximum)
+    final @Nonnull VectorReadable3F v,
+    final @Nonnull VectorReadable3F maximum)
   {
-    final float x = Math.min(v.x, maximum.x);
-    final float y = Math.min(v.y, maximum.y);
-    final float z = Math.min(v.z, maximum.z);
+    final float x = Math.min(v.getXF(), maximum.getXF());
+    final float y = Math.min(v.getYF(), maximum.getYF());
+    final float z = Math.min(v.getZF(), maximum.getZF());
     return new VectorI3F(x, y, z);
   }
 
@@ -192,12 +196,12 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI3F clampMinimum(
-    final @Nonnull VectorI3F v,
+    final @Nonnull VectorReadable3F v,
     final float minimum)
   {
-    final float x = Math.max(v.x, minimum);
-    final float y = Math.max(v.y, minimum);
-    final float z = Math.max(v.z, minimum);
+    final float x = Math.max(v.getXF(), minimum);
+    final float y = Math.max(v.getYF(), minimum);
+    final float z = Math.max(v.getZF(), minimum);
     return new VectorI3F(x, y, z);
   }
 
@@ -210,16 +214,16 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param minimum
    *          The vector containing the minimum acceptable values
    * 
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
+   * @return <code>(max(v.getXF(), minimum.getXF()), max(v.getYF(), minimum.getYF()), max(v.getZF(), minimum.getZF()))</code>
    */
 
   public static @Nonnull VectorI3F clampMinimumByVector(
-    final @Nonnull VectorI3F v,
-    final @Nonnull VectorI3F minimum)
+    final @Nonnull VectorReadable3F v,
+    final @Nonnull VectorReadable3F minimum)
   {
-    final float x = Math.max(v.x, minimum.x);
-    final float y = Math.max(v.y, minimum.y);
-    final float z = Math.max(v.z, minimum.z);
+    final float x = Math.max(v.getXF(), minimum.getXF());
+    final float y = Math.max(v.getYF(), minimum.getYF());
+    final float z = Math.max(v.getZF(), minimum.getZF());
     return new VectorI3F(x, y, z);
   }
 
@@ -237,12 +241,12 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI3F crossProduct(
-    final @Nonnull VectorI3F v0,
-    final @Nonnull VectorI3F v1)
+    final @Nonnull VectorReadable3F v0,
+    final @Nonnull VectorReadable3F v1)
   {
-    final float x = (v0.y * v1.z) - (v0.z * v1.y);
-    final float y = (v0.z * v1.x) - (v0.x * v1.z);
-    final float z = (v0.x * v1.y) - (v0.y * v1.x);
+    final float x = (v0.getYF() * v1.getZF()) - (v0.getZF() * v1.getYF());
+    final float y = (v0.getZF() * v1.getXF()) - (v0.getXF() * v1.getZF());
+    final float z = (v0.getXF() * v1.getYF()) - (v0.getYF() * v1.getXF());
     return new VectorI3F(x, y, z);
   }
 
@@ -259,8 +263,8 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static float distance(
-    final @Nonnull VectorI3F v0,
-    final @Nonnull VectorI3F v1)
+    final @Nonnull VectorReadable3F v0,
+    final @Nonnull VectorReadable3F v1)
   {
     return VectorI3F.magnitude(VectorI3F.subtract(v0, v1));
   }
@@ -278,12 +282,12 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static float dotProduct(
-    final @Nonnull VectorI3F v0,
-    final @Nonnull VectorI3F v1)
+    final @Nonnull VectorReadable3F v0,
+    final @Nonnull VectorReadable3F v1)
   {
-    final float x = v0.x * v1.x;
-    final float y = v0.y * v1.y;
-    final float z = v0.z * v1.z;
+    final float x = v0.getXF() * v1.getXF();
+    final float y = v0.getYF() * v1.getYF();
+    final float z = v0.getZF() * v1.getZF();
     return x + y + z;
   }
 
@@ -311,12 +315,12 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI3F interpolateLinear(
-    final @Nonnull VectorI3F v0,
-    final @Nonnull VectorI3F v1,
+    final @Nonnull VectorReadable3F v0,
+    final @Nonnull VectorReadable3F v1,
     final float alpha)
   {
-    final @Nonnull VectorI3F w0 = VectorI3F.scale(v0, 1.0f - alpha);
-    final @Nonnull VectorI3F w1 = VectorI3F.scale(v1, alpha);
+    final @Nonnull VectorReadable3F w0 = VectorI3F.scale(v0, 1.0f - alpha);
+    final @Nonnull VectorReadable3F w1 = VectorI3F.scale(v1, alpha);
     return VectorI3F.add(w0, w1);
   }
 
@@ -332,7 +336,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static float magnitude(
-    final @Nonnull VectorI3F v)
+    final @Nonnull VectorReadable3F v)
   {
     return (float) Math.sqrt(VectorI3F.magnitudeSquared(v));
   }
@@ -347,7 +351,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static float magnitudeSquared(
-    final @Nonnull VectorI3F v)
+    final @Nonnull VectorReadable3F v)
   {
     return VectorI3F.dotProduct(v, v);
   }
@@ -364,14 +368,39 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI3F normalize(
-    final @Nonnull VectorI3F v)
+    final @Nonnull VectorReadable3F v)
   {
     final float m = VectorI3F.magnitudeSquared(v);
     if (m > 0) {
       final float reciprocal = (float) (1.0f / Math.sqrt(m));
       return VectorI3F.scale(v, reciprocal);
     }
-    return v;
+    return new VectorI3F(v);
+  }
+
+  /**
+   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * .
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * 
+   * @since 5.0.0
+   */
+
+  public static @Nonnull Pair<VectorI3F, VectorI3F> orthoNormalize(
+    final @Nonnull VectorReadable3F v0,
+    final @Nonnull VectorReadable3F v1)
+  {
+    final VectorI3F v0n = VectorI3F.normalize(v0);
+    final VectorI3F projection =
+      VectorI3F.scale(v0n, VectorI3F.dotProduct(v1, v0n));
+    final VectorI3F vr =
+      VectorI3F.normalize(VectorI3F.subtract(v1, projection));
+    return new Pair<VectorI3F, VectorI3F>(v0n, vr);
   }
 
   /**
@@ -382,8 +411,8 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI3F projection(
-    final @Nonnull VectorI3F p,
-    final @Nonnull VectorI3F q)
+    final @Nonnull VectorReadable3F p,
+    final @Nonnull VectorReadable3F q)
   {
     final float dot = VectorI3F.dotProduct(p, q);
     final float qms = VectorI3F.magnitudeSquared(q);
@@ -399,14 +428,14 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param r
    *          The scaling value
    * 
-   * @return <code>(v.x * r, v.y * r, v.z * r)</code>
+   * @return <code>(v.getXF() * r, v.getYF() * r, v.getZF() * r)</code>
    */
 
   public static @Nonnull VectorI3F scale(
-    final @Nonnull VectorI3F v,
+    final @Nonnull VectorReadable3F v,
     final float r)
   {
-    return new VectorI3F(v.x * r, v.y * r, v.z * r);
+    return new VectorI3F(v.getXF() * r, v.getYF() * r, v.getZF() * r);
   }
 
   /**
@@ -417,28 +446,32 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param v1
    *          The right input vector
    * 
-   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
+   * @return <code>(v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF(), v0.getZF() - v1.getZF())</code>
    */
 
   public static @Nonnull VectorI3F subtract(
-    final @Nonnull VectorI3F v0,
-    final @Nonnull VectorI3F v1)
+    final @Nonnull VectorReadable3F v0,
+    final @Nonnull VectorReadable3F v1)
   {
-    return new VectorI3F(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z);
+    return new VectorI3F(
+      v0.getXF() - v1.getXF(),
+      v0.getYF() - v1.getYF(),
+      v0.getZF() - v1.getZF());
   }
 
-  public final float                     x;
-  public final float                     y;
-  public final float                     z;
+  public final float                            x;
+  public final float                            y;
+
+  public final float                            z;
 
   /**
    * The zero vector.
    */
 
-  public static final @Nonnull VectorI3F ZERO = new VectorI3F(
-                                                0.0f,
-                                                0.0f,
-                                                0.0f);
+  public static final @Nonnull VectorReadable3F ZERO = new VectorI3F(
+                                                       0.0f,
+                                                       0.0f,
+                                                       0.0f);
 
   /**
    * Calculate the absolute value of the vector <code>v</code>.
@@ -446,13 +479,14 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param v
    *          The input vector
    * 
-   * @return <code>(abs v.x, abs v.y, abs v.z)</code>
+   * @return <code>(abs v.getXF(), abs v.getYF(), abs v.getZF())</code>
    */
 
   public static @Nonnull VectorI3F absolute(
-    final @Nonnull VectorI3F v)
+    final @Nonnull VectorReadable3F v)
   {
-    return new VectorI3F(Math.abs(v.x), Math.abs(v.y), Math.abs(v.z));
+    return new VectorI3F(Math.abs(v.getXF()), Math.abs(v.getYF()), Math.abs(v
+      .getZF()));
   }
 
   /**
@@ -464,14 +498,17 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @param v1
    *          The right input vector
    * 
-   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
+   * @return <code>(v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF(), v0.getZF() + v1.getZF())</code>
    */
 
   public static @Nonnull VectorI3F add(
-    final @Nonnull VectorI3F v0,
-    final @Nonnull VectorI3F v1)
+    final @Nonnull VectorReadable3F v0,
+    final @Nonnull VectorReadable3F v1)
   {
-    return new VectorI3F(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z);
+    return new VectorI3F(
+      v0.getXF() + v1.getXF(),
+      v0.getYF() + v1.getYF(),
+      v0.getZF() + v1.getZF());
   }
 
   /**
@@ -531,13 +568,16 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
       return false;
     }
     final @Nonnull VectorI3F other = (VectorI3F) obj;
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
+    if (Float.floatToIntBits(this.getXF()) != Float.floatToIntBits(other
+      .getXF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
+    if (Float.floatToIntBits(this.getYF()) != Float.floatToIntBits(other
+      .getYF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.z) != Float.floatToIntBits(other.z)) {
+    if (Float.floatToIntBits(this.getZF()) != Float.floatToIntBits(other
+      .getZF())) {
       return false;
     }
     return true;
@@ -567,9 +607,9 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   {
     final int prime = 31;
     int result = 1;
-    result = (prime * result) + Float.floatToIntBits(this.x);
-    result = (prime * result) + Float.floatToIntBits(this.y);
-    result = (prime * result) + Float.floatToIntBits(this.z);
+    result = (prime * result) + Float.floatToIntBits(this.getXF());
+    result = (prime * result) + Float.floatToIntBits(this.getYF());
+    result = (prime * result) + Float.floatToIntBits(this.getZF());
     return result;
   }
 
@@ -577,11 +617,11 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI3F ");
-    builder.append(this.x);
+    builder.append(this.getXF());
     builder.append(" ");
-    builder.append(this.y);
+    builder.append(this.getYF());
     builder.append(" ");
-    builder.append(this.z);
+    builder.append(this.getZF());
     builder.append("]");
     return builder.toString();
   }

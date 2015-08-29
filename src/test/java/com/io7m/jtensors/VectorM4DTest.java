@@ -19,13 +19,18 @@ package com.io7m.jtensors;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.io7m.jaux.AlmostEqualDouble;
 import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.functional.Pair;
 
-public class VectorM4DTest
+public class VectorM4DTest extends VectorM4Contract
 {
-  @SuppressWarnings("static-method") @Test public void testAbsolute()
+  @Override @Test public void testAbsolute()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
@@ -35,133 +40,90 @@ public class VectorM4DTest
       final VectorM4D vr = new VectorM4D();
       VectorM4D.absolute(v, vr);
 
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        Math.abs(v.x),
-        vr.x));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        Math.abs(v.y),
-        vr.y));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        Math.abs(v.z),
-        vr.z));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        Math.abs(v.w),
-        vr.w));
-
-      {
-        final double orig_x = v.x;
-        final double orig_y = v.y;
-        final double orig_z = v.z;
-        final double orig_w = v.w;
-
-        VectorM4D.absoluteInPlace(v);
-
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          Math.abs(orig_x),
-          v.x));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          Math.abs(orig_y),
-          v.y));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          Math.abs(orig_z),
-          v.z));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          Math.abs(orig_w),
-          v.w));
-      }
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, Math.abs(v.x), vr.x));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, Math.abs(v.y), vr.y));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, Math.abs(v.z), vr.z));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, Math.abs(v.w), vr.w));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAbsoluteMutation()
+  @Override @Test public void testAbsoluteMutation()
   {
-    final VectorM4D out = new VectorM4D();
-    final VectorM4D v = new VectorM4D(-1.0, -1.0, -1.0, -1.0);
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
 
-    Assert.assertTrue(v.x == -1.0);
-    Assert.assertTrue(v.y == -1.0);
-    Assert.assertTrue(v.z == -1.0);
-    Assert.assertTrue(v.w == -1.0);
-
-    final double vx = v.x;
-    final double vy = v.y;
-    final double vz = v.z;
-    final double vw = v.w;
-
-    final VectorM4D ov = VectorM4D.absolute(v, out);
-
-    Assert.assertTrue(vx == v.x);
-    Assert.assertTrue(vy == v.y);
-    Assert.assertTrue(vz == v.z);
-    Assert.assertTrue(vw == v.w);
-    Assert.assertTrue(vx == -1.0);
-    Assert.assertTrue(vy == -1.0);
-    Assert.assertTrue(vz == -1.0);
-    Assert.assertTrue(vw == -1.0);
-
-    Assert.assertTrue(out == ov);
-    Assert.assertTrue(out.x == 1.0);
-    Assert.assertTrue(out.y == 1.0);
-    Assert.assertTrue(out.z == 1.0);
-    Assert.assertTrue(out.w == 1.0);
-  }
-
-  @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
-  {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
       final double w = Math.random() * Double.MIN_VALUE;
       final VectorM4D v = new VectorM4D(x, y, z, w);
 
-      final VectorM4D vr = new VectorM4D();
-      VectorM4D.absolute(v, vr);
+      final double orig_x = v.x;
+      final double orig_y = v.y;
+      final double orig_z = v.z;
+      final double orig_w = v.w;
 
-      Assert.assertTrue(vr.x >= 0.0);
-      Assert.assertTrue(vr.y >= 0.0);
-      Assert.assertTrue(vr.z >= 0.0);
-      Assert.assertTrue(vr.w >= 0.0);
+      VectorM4D.absoluteInPlace(v);
 
-      {
-        VectorM4D.absoluteInPlace(v);
-        Assert.assertTrue(v.x >= 0.0);
-        Assert.assertTrue(v.y >= 0.0);
-        Assert.assertTrue(v.z >= 0.0);
-        Assert.assertTrue(v.w >= 0.0);
-      }
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        ec,
+        Math.abs(orig_x),
+        v.x));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        ec,
+        Math.abs(orig_y),
+        v.y));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        ec,
+        Math.abs(orig_z),
+        v.z));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(
+        ec,
+        Math.abs(orig_w),
+        v.w));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAdd()
+  @Override @Test public void testAdd()
   {
-    for (int index = 0; index < 100; ++index) {
-      final double x0 = Math.random() * Double.MAX_VALUE;
-      final double y0 = Math.random() * Double.MAX_VALUE;
-      final double z0 = Math.random() * Double.MAX_VALUE;
-      final double w0 = Math.random() * Double.MAX_VALUE;
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double max = 1000;
+
+      final double x0 = Math.random() * max;
+      final double y0 = Math.random() * max;
+      final double z0 = Math.random() * max;
+      final double w0 = Math.random() * max;
       final VectorM4D v0 = new VectorM4D(x0, y0, z0, w0);
 
-      final double x1 = Math.random() * Double.MAX_VALUE;
-      final double y1 = Math.random() * Double.MAX_VALUE;
-      final double z1 = Math.random() * Double.MAX_VALUE;
-      final double w1 = Math.random() * Double.MAX_VALUE;
+      final double x1 = Math.random() * max;
+      final double y1 = Math.random() * max;
+      final double z1 = Math.random() * max;
+      final double w1 = Math.random() * max;
       final VectorM4D v1 = new VectorM4D(x1, y1, z1, w1);
 
       final VectorM4D vr0 = new VectorM4D();
       VectorM4D.add(v0, v1, vr0);
 
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.x,
-        v0.x + v1.x));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.y,
-        v0.y + v1.y));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.z,
-        v0.z + v1.z));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.w,
-        v0.w + v1.w));
+      System.out.println("v0  : " + v0);
+      System.out.println("v1  : " + v1);
+      System.out.println("vr0 : " + vr0);
+
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.x, v0.x + v1.x));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.y, v0.y + v1.y));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.z, v0.z + v1.z));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.w, v0.w + v1.w));
 
       {
         final double orig_x = v0.x;
@@ -170,23 +132,19 @@ public class VectorM4DTest
         final double orig_w = v0.w;
         VectorM4D.addInPlace(v0, v1);
 
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.x,
-          orig_x + v1.x));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.y,
-          orig_y + v1.y));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.z,
-          orig_z + v1.z));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.w,
-          orig_w + v1.w));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.x, orig_x
+          + v1.x));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.y, orig_y
+          + v1.y));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.z, orig_z
+          + v1.z));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.w, orig_w
+          + v1.w));
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAddMutation()
+  @Override @Test public void testAddMutation()
   {
     final VectorM4D out = new VectorM4D();
     final VectorM4D v0 = new VectorM4D(1.0, 1.0, 1.0, 1.0);
@@ -238,38 +196,43 @@ public class VectorM4DTest
     Assert.assertTrue(v1.w == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testAddScaled()
+  @Override @Test public void testAddScaled()
   {
-    for (int index = 0; index < 100; ++index) {
-      final double x0 = Math.random() * Double.MAX_VALUE;
-      final double y0 = Math.random() * Double.MAX_VALUE;
-      final double z0 = Math.random() * Double.MAX_VALUE;
-      final double w0 = Math.random() * Double.MAX_VALUE;
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double max = 1000;
+
+      final double x0 = Math.random() * max;
+      final double y0 = Math.random() * max;
+      final double z0 = Math.random() * max;
+      final double w0 = Math.random() * max;
       final VectorM4D v0 = new VectorM4D(x0, y0, z0, w0);
 
-      final double x1 = Math.random() * Double.MAX_VALUE;
-      final double y1 = Math.random() * Double.MAX_VALUE;
-      final double z1 = Math.random() * Double.MAX_VALUE;
-      final double w1 = Math.random() * Double.MAX_VALUE;
+      final double x1 = Math.random() * max;
+      final double y1 = Math.random() * max;
+      final double z1 = Math.random() * max;
+      final double w1 = Math.random() * max;
       final VectorM4D v1 = new VectorM4D(x1, y1, z1, w1);
 
-      final double r = Math.random() * Double.MAX_VALUE;
+      final double r = Math.random() * max;
 
       final VectorM4D vr0 = new VectorM4D();
       VectorM4D.addScaled(v0, v1, r, vr0);
 
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.x,
-        v0.x + (v1.x * r)));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.y,
-        v0.y + (v1.y * r)));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.z,
-        v0.z + (v1.z * r)));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.w,
-        v0.w + (v1.w * r)));
+      System.out.println("v0  : " + v0);
+      System.out.println("v1  : " + v1);
+      System.out.println("vr0 : " + vr0);
+
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.x, v0.x
+        + (v1.x * r)));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.y, v0.y
+        + (v1.y * r)));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.z, v0.z
+        + (v1.z * r)));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.w, v0.w
+        + (v1.w * r)));
 
       {
         final double orig_x = v0.x;
@@ -278,67 +241,123 @@ public class VectorM4DTest
         final double orig_w = v0.w;
         VectorM4D.addScaledInPlace(v0, v1, r);
 
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.x,
-          orig_x + (v1.x * r)));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.y,
-          orig_y + (v1.y * r)));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.z,
-          orig_z + (v1.z * r)));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.w,
-          orig_w + (v1.w * r)));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.x, orig_x
+          + (v1.x * r)));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.y, orig_y
+          + (v1.y * r)));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.z, orig_z
+          + (v1.z * r)));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.w, orig_w
+          + (v1.w * r)));
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testApproximatelyEqualTransitive0()
+  @Override @Test public void testAlmostEqualNot()
   {
-    final double x0 = 0.0;
-    final double x1 = 0.0;
-    final double y0 = 0.0;
-    final double y1 = 0.0;
-    final double z0 = 0.0;
-    final double z1 = 0.0;
-    final double w0 = 0.0;
-    final double w1 = 0.0;
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(x0, x1));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(y0, y1));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(z0, z1));
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(w0, w1));
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
 
-    final VectorM4D v0 = new VectorM4D(x0, y0, z0, w0);
-    final VectorM4D v1 = new VectorM4D(x1, y1, z1, w1);
-    Assert.assertTrue(VectorM4D.approximatelyEqual(v0, v1));
+    final double x = Math.random();
+    final double y = x + 1.0;
+    final double z = y + 1.0;
+    final double w = z + 1.0;
+    final double q = w + 1.0;
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, y, z, w);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(x, q, z, w);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(x, y, q, w);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(x, y, z, q);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, q, z, w);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, y, q, w);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, y, z, q);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, q, q, w);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, q, z, q);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, q, q, q);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(x, q, q, q);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(x, y, q, q);
+      Assert.assertFalse(VectorM4D.almostEqual(ec, m0, m1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testApproximatelyEqualTransitive1()
+  @Override @Test public void testAlmostEqualTransitive()
   {
-    final double x0 = 0.0;
-    final double x1 = 1.0;
-    final double y0 = 0.0;
-    final double y1 = 1.0;
-    final double z0 = 0.0;
-    final double z1 = 1.0;
-    final double w0 = 0.0;
-    final double w1 = 1.0;
-    Assert.assertFalse(ApproximatelyEqualDouble.approximatelyEqual(x0, x1));
-    Assert.assertFalse(ApproximatelyEqualDouble.approximatelyEqual(y0, y1));
-    Assert.assertFalse(ApproximatelyEqualDouble.approximatelyEqual(z0, z1));
-    Assert.assertFalse(ApproximatelyEqualDouble.approximatelyEqual(w0, w1));
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
 
-    final VectorM4D v0 = new VectorM4D(x0, y0, z0, w0);
-    final VectorM4D v1 = new VectorM4D(x1, y1, z1, w1);
-    Assert.assertFalse(VectorM4D.approximatelyEqual(v0, v1));
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x0 = Math.random() * Double.MAX_VALUE;
+      final double y0 = Math.random() * Double.MAX_VALUE;
+      final double z0 = Math.random() * Double.MAX_VALUE;
+      final double w0 = Math.random() * Double.MAX_VALUE;
+      final VectorM4D v0 = new VectorM4D(x0, y0, z0, w0);
+      final VectorM4D v1 = new VectorM4D(x0, y0, z0, w0);
+      final VectorM4D v2 = new VectorM4D(x0, y0, z0, w0);
+
+      Assert.assertTrue(VectorM4D.almostEqual(ec, v0, v1));
+      Assert.assertTrue(VectorM4D.almostEqual(ec, v1, v2));
+      Assert.assertTrue(VectorM4D.almostEqual(ec, v0, v2));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testCheckInterface()
+  @Override @Test public void testCheckInterface()
   {
     final VectorM4D v = new VectorM4D(3.0f, 5.0f, 7.0f, 11.0f);
 
@@ -348,11 +367,9 @@ public class VectorM4DTest
     Assert.assertTrue(v.w == v.getWD());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorMaximumOrdering()
+  @Override @Test public void testClampByVectorMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double max_x = Math.random() * Double.MIN_VALUE;
       final double max_y = Math.random() * Double.MIN_VALUE;
       final double max_z = Math.random() * Double.MIN_VALUE;
@@ -386,11 +403,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorMinimumOrdering()
+  @Override @Test public void testClampByVectorMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MAX_VALUE;
       final double min_y = Math.random() * Double.MAX_VALUE;
       final double min_z = Math.random() * Double.MAX_VALUE;
@@ -424,11 +439,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorOrdering()
+  @Override @Test public void testClampByVectorOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MIN_VALUE;
       final double min_y = Math.random() * Double.MIN_VALUE;
       final double min_z = Math.random() * Double.MIN_VALUE;
@@ -476,11 +489,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampMaximumOrdering()
+  @Override @Test public void testClampMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double maximum = Math.random() * Double.MIN_VALUE;
 
       final double x = Math.random() * Double.MAX_VALUE;
@@ -507,11 +518,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampMinimumOrdering()
+  @Override @Test public void testClampMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double minimum = Math.random() * Double.MAX_VALUE;
 
       final double x = Math.random() * Double.MIN_VALUE;
@@ -538,9 +547,9 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampOrdering()
+  @Override @Test public void testClampOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double minimum = Math.random() * Double.MIN_VALUE;
       final double maximum = Math.random() * Double.MAX_VALUE;
 
@@ -577,7 +586,7 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testCopy()
+  @Override @Test public void testCopy()
   {
     final VectorM4D vb = new VectorM4D(5, 6, 7, 8);
     final VectorM4D va = new VectorM4D(1, 2, 3, 4);
@@ -595,18 +604,32 @@ public class VectorM4DTest
     Assert.assertTrue(va.w == vb.w);
   }
 
-  @SuppressWarnings("static-method") @Test public void testDistance()
+  @Override @Test public void testDefault0001()
   {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+    Assert.assertTrue(VectorM4D.almostEqual(
+      ec,
+      new VectorM4D(),
+      new VectorM4D(0, 0, 0, 1)));
+  }
+
+  @Override @Test public void testDistance()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
     final VectorM4D v0 = new VectorM4D(0.0, 1.0, 0.0, 0.0);
     final VectorM4D v1 = new VectorM4D(0.0, 0.0, 0.0, 0.0);
-    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(
+      ec,
       VectorM4D.distance(v0, v1),
       1.0));
   }
 
-  @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
+  @Override @Test public void testDistanceOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
@@ -623,175 +646,257 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProduct()
+  @Override @Test public void testDotProduct()
   {
     final VectorM4D v0 = new VectorM4D(10.0, 10.0, 10.0, 10.0);
     final VectorM4D v1 = new VectorM4D(10.0, 10.0, 10.0, 10.0);
 
     {
       final double p = VectorM4D.dotProduct(v0, v1);
-      Assert.assertTrue(v0.x == 10.0);
-      Assert.assertTrue(v0.y == 10.0);
-      Assert.assertTrue(v0.z == 10.0);
-      Assert.assertTrue(v0.w == 10.0);
-      Assert.assertTrue(v1.x == 10.0);
-      Assert.assertTrue(v1.y == 10.0);
-      Assert.assertTrue(v1.z == 10.0);
-      Assert.assertTrue(v1.w == 10.0);
+      Assert.assertTrue(v0.getXD() == 10.0);
+      Assert.assertTrue(v0.getYD() == 10.0);
+      Assert.assertTrue(v0.getZD() == 10.0);
+      Assert.assertTrue(v0.getWD() == 10.0);
+      Assert.assertTrue(v1.getXD() == 10.0);
+      Assert.assertTrue(v1.getYD() == 10.0);
+      Assert.assertTrue(v1.getZD() == 10.0);
+      Assert.assertTrue(v1.getWD() == 10.0);
       Assert.assertTrue(p == 400.0);
     }
 
     {
       final double p = VectorM4D.dotProduct(v0, v0);
-      Assert.assertTrue(v0.x == 10.0);
-      Assert.assertTrue(v0.y == 10.0);
-      Assert.assertTrue(v0.z == 10.0);
-      Assert.assertTrue(v0.w == 10.0);
+      Assert.assertTrue(v0.getXD() == 10.0);
+      Assert.assertTrue(v0.getYD() == 10.0);
+      Assert.assertTrue(v0.getZD() == 10.0);
+      Assert.assertTrue(v0.getWD() == 10.0);
       Assert.assertTrue(p == 400.0);
     }
 
     {
       final double p = VectorM4D.dotProduct(v1, v1);
-      Assert.assertTrue(v1.x == 10.0);
-      Assert.assertTrue(v1.y == 10.0);
-      Assert.assertTrue(v1.z == 10.0);
-      Assert.assertTrue(v1.w == 10.0);
+      Assert.assertTrue(v1.getXD() == 10.0);
+      Assert.assertTrue(v1.getYD() == 10.0);
+      Assert.assertTrue(v1.getZD() == 10.0);
+      Assert.assertTrue(v1.getWD() == 10.0);
       Assert.assertTrue(p == 400.0);
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testDotProductOrthonormal()
+  @Override @Test public void testDotProductPerpendicular()
   {
-    final VectorM4D v = new VectorM4D(1.0f, 0.0f, 0.0f, 0.0f);
-    Assert.assertTrue(VectorM4D.dotProduct(v, v) == 1.0);
+    final VectorM4D vpx = new VectorM4D(1.0f, 0.0f, 0.0f, 0.0f);
+    final VectorM4D vmx = new VectorM4D(-1.0f, 0.0f, 0.0f, 0.0f);
+
+    final VectorM4D vpy = new VectorM4D(0.0f, 1.0f, 0.0f, 0.0f);
+    final VectorM4D vmy = new VectorM4D(0.0f, -1.0f, 0.0f, 0.0f);
+
+    final VectorM4D vpz = new VectorM4D(0.0f, 0.0f, 1.0f, 0.0f);
+    final VectorM4D vmz = new VectorM4D(0.0f, 0.0f, -1.0f, 0.0f);
+
+    Assert.assertTrue(VectorM4D.dotProduct(vpx, vpy) == 0.0);
+    Assert.assertTrue(VectorM4D.dotProduct(vpy, vpz) == 0.0);
+    Assert.assertTrue(VectorM4D.dotProduct(vmx, vmy) == 0.0);
+    Assert.assertTrue(VectorM4D.dotProduct(vmy, vmz) == 0.0);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testDotProductSelfMagnitudeSquared()
+  @Override @Test public void testDotProductSelf()
   {
-    final VectorM4D v0 = new VectorM4D(10.0, 10.0, 10.0, 10.0);
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x = Math.random();
+      final double y = Math.random();
+      final double z = Math.random();
+      final double w = Math.random();
+      final VectorM4D q = new VectorM4D(x, y, z, w);
+      final double dp = VectorM4D.dotProduct(q, q);
+
+      System.out.println("q  : " + q);
+      System.out.println("dp : " + dp);
+
+      AlmostEqualDouble.almostEqual(ec, 1.0, dp);
+    }
+  }
+
+  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x = Math.random();
+      final double y = Math.random();
+      final double z = Math.random();
+      final double w = Math.random();
+      final VectorM4D q = new VectorM4D(x, y, z, w);
+
+      final double ms = VectorM4D.magnitudeSquared(q);
+      final double dp = VectorM4D.dotProduct(q, q);
+
+      System.out.println("q  : " + q);
+      System.out.println("ms : " + ms);
+      System.out.println("dp : " + dp);
+
+      AlmostEqualDouble.almostEqual(ec, ms, dp);
+    }
+  }
+
+  @Override @Test public void testEqualsCorrect()
+  {
+    {
+      final VectorM4D m0 = new VectorM4D();
+      Assert.assertTrue(m0.equals(m0));
+    }
 
     {
-      final double p = VectorM4D.dotProduct(v0, v0);
-      Assert.assertTrue(v0.x == 10.0);
-      Assert.assertTrue(v0.y == 10.0);
-      Assert.assertTrue(v0.z == 10.0);
-      Assert.assertTrue(v0.w == 10.0);
-      Assert.assertTrue(p == 400.0);
+      final VectorM4D m0 = new VectorM4D();
+      Assert.assertFalse(m0.equals(null));
     }
 
     {
-      final double p = VectorM4D.magnitudeSquared(v0);
-      Assert.assertTrue(v0.x == 10.0);
-      Assert.assertTrue(v0.y == 10.0);
-      Assert.assertTrue(v0.z == 10.0);
-      Assert.assertTrue(v0.w == 10.0);
-      Assert.assertTrue(p == 400.0);
+      final VectorM4D m0 = new VectorM4D();
+      Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D();
+      final VectorM4D m1 = new VectorM4D();
+      Assert.assertTrue(m0.equals(m1));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  @Override @Test public void testEqualsNotEqualCorrect()
   {
-    final VectorM4D m0 = new VectorM4D();
-    Assert.assertTrue(m0.equals(m0));
+    final double x = Math.random();
+    final double y = x + 1.0;
+    final double z = y + 1.0;
+    final double w = z + 1.0;
+    final double q = w + 1.0;
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      Assert.assertFalse(m0.equals(null));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, y, z, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(x, q, z, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(x, y, q, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(x, y, z, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, q, z, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, y, q, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, y, z, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, q, q, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, q, z, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(q, q, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(x, q, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D(x, y, z, w);
+      final VectorM4D m1 = new VectorM4D(x, y, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
-  {
-    final VectorM4D m0 = new VectorM4D();
-    Assert.assertFalse(m0.equals(null));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
-  {
-    final VectorM4D m0 = new VectorM4D();
-    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
-  {
-    final VectorM4D m0 = new VectorM4D();
-    final VectorM4D m1 = new VectorM4D();
-    Assert.assertTrue(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq0()
-  {
-    final VectorM4D m0 = new VectorM4D();
-    final VectorM4D m1 = new VectorM4D();
-    m1.x = 23.0;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq1()
-  {
-    final VectorM4D m0 = new VectorM4D();
-    final VectorM4D m1 = new VectorM4D();
-    m1.y = 23.0;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq2()
-  {
-    final VectorM4D m0 = new VectorM4D();
-    final VectorM4D m1 = new VectorM4D();
-    m1.z = 23.0;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq3()
-  {
-    final VectorM4D m0 = new VectorM4D();
-    final VectorM4D m1 = new VectorM4D();
-    m1.w = 23.0;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeEq()
+  @Override @Test public void testHashCodeEqualsCorrect()
   {
     final VectorM4D m0 = new VectorM4D();
     final VectorM4D m1 = new VectorM4D();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase0()
+  @Override @Test public void testHashCodeNotEqualCorrect()
   {
-    final VectorM4D m0 = new VectorM4D();
-    final VectorM4D m1 = new VectorM4D();
-    m1.x = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    {
+      final VectorM4D m0 = new VectorM4D();
+      final VectorM4D m1 = new VectorM4D();
+      m1.x = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D();
+      final VectorM4D m1 = new VectorM4D();
+      m1.y = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D();
+      final VectorM4D m1 = new VectorM4D();
+      m1.z = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final VectorM4D m0 = new VectorM4D();
+      final VectorM4D m1 = new VectorM4D();
+      m1.w = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase1()
-  {
-    final VectorM4D m0 = new VectorM4D();
-    final VectorM4D m1 = new VectorM4D();
-    m1.y = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase2()
-  {
-    final VectorM4D m0 = new VectorM4D();
-    final VectorM4D m1 = new VectorM4D();
-    m1.z = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase3()
-  {
-    final VectorM4D m0 = new VectorM4D();
-    final VectorM4D m1 = new VectorM4D();
-    m1.w = 23;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInitializeReadable()
+  @Override @Test public void testInitializeReadable()
   {
     final VectorM4D v0 = new VectorM4D(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorM4D v1 = new VectorM4D(v0);
@@ -802,11 +907,12 @@ public class VectorM4DTest
     Assert.assertTrue(v0.w == v1.w);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInterpolateLinearLimits()
+  @Override @Test public void testInterpolateLinearLimits()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
@@ -824,51 +930,35 @@ public class VectorM4DTest
       VectorM4D.interpolateLinear(v0, v1, 0.0, vr0);
       VectorM4D.interpolateLinear(v0, v1, 1.0, vr1);
 
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        v0.x,
-        vr0.x));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        v0.y,
-        vr0.y));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        v0.z,
-        vr0.z));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        v0.w,
-        vr0.w));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.x, vr0.x));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.y, vr0.y));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.z, vr0.z));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.w, vr0.w));
 
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        v1.x,
-        vr1.x));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        v1.y,
-        vr1.y));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        v1.z,
-        vr1.z));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        v1.w,
-        vr1.w));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.x, vr1.x));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.y, vr1.y));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.z, vr1.z));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.w, vr1.w));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNonzero()
+  @Override @Test public void testMagnitudeNonzero()
   {
-    for (int index = 0; index < 100; ++index) {
-      final double x = Math.random() * Double.MAX_VALUE;
-      final double y = Math.random() * Double.MAX_VALUE;
-      final double z = Math.random() * Double.MAX_VALUE;
-      final double w = Math.random() * Double.MAX_VALUE;
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x = 1.0 + (Math.random() * Double.MAX_VALUE);
+      final double y = 1.0 + (Math.random() * Double.MAX_VALUE);
+      final double z = 1.0 + (Math.random() * Double.MAX_VALUE);
+      final double w = 1.0 + (Math.random() * Double.MAX_VALUE);
       final VectorM4D v = new VectorM4D(x, y, z, w);
 
       final double m = VectorM4D.magnitude(v);
-      Assert.assertTrue(m >= 1.0);
+      Assert.assertTrue(m > 0.0);
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNormal()
+  @Override @Test public void testMagnitudeNormal()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
       final double y = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
       final double z = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
@@ -884,9 +974,7 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMagnitudeNormalizeZero()
+  @Override @Test public void testMagnitudeNormalizeZero()
   {
     final VectorM4D v = new VectorM4D(0.0, 0.0, 0.0, 0.0);
     final VectorM4D vr = VectorM4D.normalizeInPlace(v);
@@ -894,14 +982,14 @@ public class VectorM4DTest
     Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeOne()
+  @Override @Test public void testMagnitudeOne()
   {
     final VectorM4D v = new VectorM4D(1.0, 0.0, 0.0, 0.0);
     final double m = VectorM4D.magnitude(v);
     Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 1.0));
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeSimple()
+  @Override @Test public void testMagnitudeSimple()
   {
     final VectorM4D v = new VectorM4D(8.0, 0.0, 0.0, 0.0);
 
@@ -915,14 +1003,14 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeZero()
+  @Override @Test public void testMagnitudeZero()
   {
     final VectorM4D v = new VectorM4D(0.0, 0.0, 0.0, 0.0);
     final double m = VectorM4D.magnitude(v);
     Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
   }
 
-  @SuppressWarnings("static-method") @Test public void testNormalizeSimple()
+  @Override @Test public void testNormalizeSimple()
   {
     final VectorM4D v0 = new VectorM4D(8.0, 0.0, 0.0, 0.0);
     final VectorM4D out = new VectorM4D();
@@ -934,9 +1022,44 @@ public class VectorM4DTest
     Assert.assertTrue(m == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testProjectionPerpendicularZero()
+  @Override @Test public void testNormalizeZero()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    final VectorM4D qr = new VectorM4D();
+    final VectorM4D q = new VectorM4D(0, 0, 0, 0);
+    VectorM4D.normalize(q, qr);
+
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.x));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.y));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.z));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.w));
+  }
+
+  @Override @Test public void testOrthonormalize()
+  {
+    final VectorM4D v0 = new VectorM4D(0, 1, 0, 0);
+    final VectorM4D v1 = new VectorM4D(0.5, 0.5, 0, 0);
+
+    final Pair<VectorM4D, VectorM4D> r = VectorM4D.orthoNormalize(v0, v1);
+
+    Assert.assertEquals(new VectorM4D(0, 1, 0, 0), r.first);
+    Assert.assertEquals(new VectorM4D(1, 0, 0, 0), r.second);
+  }
+
+  @Override @Test public void testOrthonormalizeMutation()
+  {
+    final VectorM4D v0 = new VectorM4D(0, 1, 0, 0);
+    final VectorM4D v1 = new VectorM4D(0.5, 0.5, 0, 0);
+
+    VectorM4D.orthoNormalizeInPlace(v0, v1);
+
+    Assert.assertEquals(new VectorM4D(0, 1, 0, 0), v0);
+    Assert.assertEquals(new VectorM4D(1, 0, 0, 0), v1);
+  }
+
+  @Override @Test public void testProjectionPerpendicularZero()
   {
     {
       final VectorM4D p = new VectorM4D(1.0f, 0.0f, 0.0f, 0.0f);
@@ -959,7 +1082,7 @@ public class VectorM4DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleMutation()
+  @Override @Test public void testScaleMutation()
   {
     final VectorM4D out = new VectorM4D();
     final VectorM4D v0 = new VectorM4D(1.0, 1.0, 1.0, 1.0);
@@ -998,9 +1121,12 @@ public class VectorM4DTest
     Assert.assertTrue(v0.w == 2.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleOne()
+  @Override @Test public void testScaleOne()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * Double.MAX_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MAX_VALUE;
@@ -1028,25 +1154,20 @@ public class VectorM4DTest
 
         VectorM4D.scaleInPlace(v, 1.0);
 
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v.x,
-          orig_x));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v.y,
-          orig_y));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v.z,
-          orig_z));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v.w,
-          orig_w));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.x, orig_x));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.y, orig_y));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.z, orig_z));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.w, orig_w));
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleZero()
+  @Override @Test public void testScaleZero()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * Double.MAX_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MAX_VALUE;
@@ -1069,31 +1190,26 @@ public class VectorM4DTest
       {
         VectorM4D.scaleInPlace(v, 0.0);
 
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v.x,
-          0.0));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v.y,
-          0.0));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v.z,
-          0.0));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v.w,
-          0.0));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.x, 0.0));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.y, 0.0));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.z, 0.0));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.w, 0.0));
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testString()
+  @Override @Test public void testString()
   {
     final VectorM4D v = new VectorM4D(1.0, 2.0, 3.0, 4.0);
     Assert.assertTrue(v.toString().equals("[VectorM4D 1.0 2.0 3.0 4.0]"));
   }
 
-  @SuppressWarnings("static-method") @Test public void testSubtract()
+  @Override @Test public void testSubtract()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
@@ -1109,18 +1225,14 @@ public class VectorM4DTest
       final VectorM4D vr0 = new VectorM4D();
       VectorM4D.subtract(v0, v1, vr0);
 
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.x,
-        v0.x - v1.x));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.y,
-        v0.y - v1.y));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.z,
-        v0.z - v1.z));
-      Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-        vr0.w,
-        v0.w - v1.w));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.x, v0.x - v1.x));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.y, v0.y - v1.y));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.z, v0.z - v1.z));
+      Assert
+        .assertTrue(AlmostEqualDouble.almostEqual(ec, vr0.w, v0.w - v1.w));
 
       {
         final double orig_x = v0.x;
@@ -1129,23 +1241,19 @@ public class VectorM4DTest
         final double orig_w = v0.w;
         VectorM4D.subtractInPlace(v0, v1);
 
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.x,
-          orig_x - v1.x));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.y,
-          orig_y - v1.y));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.z,
-          orig_z - v1.z));
-        Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
-          v0.w,
-          orig_w - v1.w));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.x, orig_x
+          - v1.x));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.y, orig_y
+          - v1.y));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.z, orig_z
+          - v1.z));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0.w, orig_w
+          - v1.w));
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testSubtractMutation()
+  @Override @Test public void testSubtractMutation()
   {
     final VectorM4D out = new VectorM4D();
     final VectorM4D v0 = new VectorM4D(1.0, 1.0, 1.0, 1.0);

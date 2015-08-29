@@ -19,13 +19,20 @@ package com.io7m.jtensors;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.AlmostEqualFloat;
+import com.io7m.jaux.ApproximatelyEqualDouble;
 import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.functional.Pair;
 
-public class VectorM4FTest
+public class VectorM4FTest extends VectorM4Contract
 {
-  @SuppressWarnings("static-method") @Test public void testAbsolute()
+  @Override @Test public void testAbsolute()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
@@ -35,133 +42,82 @@ public class VectorM4FTest
       final VectorM4F vr = new VectorM4F();
       VectorM4F.absolute(v, vr);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        Math.abs(v.x),
-        vr.x));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        Math.abs(v.y),
-        vr.y));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        Math.abs(v.z),
-        vr.z));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        Math.abs(v.w),
-        vr.w));
-
-      {
-        final float orig_x = v.x;
-        final float orig_y = v.y;
-        final float orig_z = v.z;
-        final float orig_w = v.w;
-
-        VectorM4F.absoluteInPlace(v);
-
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          Math.abs(orig_x),
-          v.x));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          Math.abs(orig_y),
-          v.y));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          Math.abs(orig_z),
-          v.z));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          Math.abs(orig_w),
-          v.w));
-      }
+      Assert
+        .assertTrue(AlmostEqualFloat.almostEqual(ec, Math.abs(v.x), vr.x));
+      Assert
+        .assertTrue(AlmostEqualFloat.almostEqual(ec, Math.abs(v.y), vr.y));
+      Assert
+        .assertTrue(AlmostEqualFloat.almostEqual(ec, Math.abs(v.z), vr.z));
+      Assert
+        .assertTrue(AlmostEqualFloat.almostEqual(ec, Math.abs(v.w), vr.w));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAbsoluteMutation()
+  @Override @Test public void testAbsoluteMutation()
   {
-    final VectorM4F out = new VectorM4F();
-    final VectorM4F v = new VectorM4F(-1.0f, -1.0f, -1.0f, -1.0f);
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
 
-    Assert.assertTrue(v.x == -1.0);
-    Assert.assertTrue(v.y == -1.0);
-    Assert.assertTrue(v.z == -1.0);
-    Assert.assertTrue(v.w == -1.0);
-
-    final float vx = v.x;
-    final float vy = v.y;
-    final float vz = v.z;
-    final float vw = v.w;
-
-    final VectorM4F ov = VectorM4F.absolute(v, out);
-
-    Assert.assertTrue(vx == v.x);
-    Assert.assertTrue(vy == v.y);
-    Assert.assertTrue(vz == v.z);
-    Assert.assertTrue(vw == v.w);
-    Assert.assertTrue(vx == -1.0);
-    Assert.assertTrue(vy == -1.0);
-    Assert.assertTrue(vz == -1.0);
-    Assert.assertTrue(vw == -1.0);
-
-    Assert.assertTrue(out == ov);
-    Assert.assertTrue(out.x == 1.0);
-    Assert.assertTrue(out.y == 1.0);
-    Assert.assertTrue(out.z == 1.0);
-    Assert.assertTrue(out.w == 1.0);
-  }
-
-  @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
-  {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final float w = (float) (Math.random() * Float.MIN_VALUE);
       final VectorM4F v = new VectorM4F(x, y, z, w);
 
-      final VectorM4F vr = new VectorM4F();
-      VectorM4F.absolute(v, vr);
+      final float orig_x = v.x;
+      final float orig_y = v.y;
+      final float orig_z = v.z;
+      final float orig_w = v.w;
 
-      Assert.assertTrue(vr.x >= 0.0);
-      Assert.assertTrue(vr.y >= 0.0);
-      Assert.assertTrue(vr.z >= 0.0);
-      Assert.assertTrue(vr.w >= 0.0);
+      VectorM4F.absoluteInPlace(v);
 
-      {
-        VectorM4F.absoluteInPlace(v);
-        Assert.assertTrue(v.x >= 0.0);
-        Assert.assertTrue(v.y >= 0.0);
-        Assert.assertTrue(v.z >= 0.0);
-        Assert.assertTrue(v.w >= 0.0);
-      }
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        Math.abs(orig_x),
+        v.x));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        Math.abs(orig_y),
+        v.y));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        Math.abs(orig_z),
+        v.z));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(
+        ec,
+        Math.abs(orig_w),
+        v.w));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAdd()
+  @Override @Test public void testAdd()
   {
-    for (int index = 0; index < 100; ++index) {
-      final float x0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float z0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float w0 = (float) (Math.random() * Float.MAX_VALUE);
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float max = 1000.0f;
+
+      final float x0 = (float) (Math.random() * max);
+      final float y0 = (float) (Math.random() * max);
+      final float z0 = (float) (Math.random() * max);
+      final float w0 = (float) (Math.random() * max);
       final VectorM4F v0 = new VectorM4F(x0, y0, z0, w0);
 
-      final float x1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float z1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float w1 = (float) (Math.random() * Float.MAX_VALUE);
+      final float x1 = (float) (Math.random() * max);
+      final float y1 = (float) (Math.random() * max);
+      final float z1 = (float) (Math.random() * max);
+      final float w1 = (float) (Math.random() * max);
       final VectorM4F v1 = new VectorM4F(x1, y1, z1, w1);
 
       final VectorM4F vr0 = new VectorM4F();
       VectorM4F.add(v0, v1, vr0);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.x,
-        v0.x + v1.x));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.y,
-        v0.y + v1.y));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.z,
-        v0.z + v1.z));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.w,
-        v0.w + v1.w));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.x, v0.x + v1.x));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.y, v0.y + v1.y));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.z, v0.z + v1.z));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.w, v0.w + v1.w));
 
       {
         final float orig_x = v0.x;
@@ -170,23 +126,19 @@ public class VectorM4FTest
         final float orig_w = v0.w;
         VectorM4F.addInPlace(v0, v1);
 
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.x,
-          orig_x + v1.x));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.y,
-          orig_y + v1.y));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.z,
-          orig_z + v1.z));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.w,
-          orig_w + v1.w));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.x, orig_x
+          + v1.x));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.y, orig_y
+          + v1.y));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.z, orig_z
+          + v1.z));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.w, orig_w
+          + v1.w));
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAddMutation()
+  @Override @Test public void testAddMutation()
   {
     final VectorM4F out = new VectorM4F();
     final VectorM4F v0 = new VectorM4F(1.0f, 1.0f, 1.0f, 1.0f);
@@ -238,38 +190,39 @@ public class VectorM4FTest
     Assert.assertTrue(v1.w == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testAddScaled()
+  @Override @Test public void testAddScaled()
   {
-    for (int index = 0; index < 100; ++index) {
-      final float x0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float z0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float w0 = (float) (Math.random() * Float.MAX_VALUE);
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float max = 1000.0f;
+
+      final float x0 = (float) (Math.random() * max);
+      final float y0 = (float) (Math.random() * max);
+      final float z0 = (float) (Math.random() * max);
+      final float w0 = (float) (Math.random() * max);
       final VectorM4F v0 = new VectorM4F(x0, y0, z0, w0);
 
-      final float x1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float z1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float w1 = (float) (Math.random() * Float.MAX_VALUE);
+      final float x1 = (float) (Math.random() * max);
+      final float y1 = (float) (Math.random() * max);
+      final float z1 = (float) (Math.random() * max);
+      final float w1 = (float) (Math.random() * max);
       final VectorM4F v1 = new VectorM4F(x1, y1, z1, w1);
 
-      final float r = (float) (Math.random() * Float.MAX_VALUE);
+      final float r = (float) (Math.random() * max);
 
       final VectorM4F vr0 = new VectorM4F();
       VectorM4F.addScaled(v0, v1, r, vr0);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.x,
-        v0.x + (v1.x * r)));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.y,
-        v0.y + (v1.y * r)));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.z,
-        v0.z + (v1.z * r)));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.w,
-        v0.w + (v1.w * r)));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.x, v0.x
+        + (v1.x * r)));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.y, v0.y
+        + (v1.y * r)));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.z, v0.z
+        + (v1.z * r)));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.w, v0.w
+        + (v1.w * r)));
 
       {
         final float orig_x = v0.x;
@@ -278,67 +231,123 @@ public class VectorM4FTest
         final float orig_w = v0.w;
         VectorM4F.addScaledInPlace(v0, v1, r);
 
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.x,
-          orig_x + (v1.x * r)));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.y,
-          orig_y + (v1.y * r)));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.z,
-          orig_z + (v1.z * r)));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.w,
-          orig_w + (v1.w * r)));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.x, orig_x
+          + (v1.x * r)));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.y, orig_y
+          + (v1.y * r)));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.z, orig_z
+          + (v1.z * r)));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.w, orig_w
+          + (v1.w * r)));
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testApproximatelyEqualTransitive0()
+  @Override @Test public void testAlmostEqualNot()
   {
-    final float x0 = 0.0f;
-    final float x1 = 0.0f;
-    final float y0 = 0.0f;
-    final float y1 = 0.0f;
-    final float z0 = 0.0f;
-    final float z1 = 0.0f;
-    final float w0 = 0.0f;
-    final float w1 = 0.0f;
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(x0, x1));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(y0, y1));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(z0, z1));
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(w0, w1));
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
 
-    final VectorM4F v0 = new VectorM4F(x0, y0, z0, w0);
-    final VectorM4F v1 = new VectorM4F(x1, y1, z1, w1);
-    Assert.assertTrue(VectorM4F.approximatelyEqual(v0, v1));
+    final float x = (float) Math.random();
+    final float y = x + 1.0f;
+    final float z = y + 1.0f;
+    final float w = z + 1.0f;
+    final float q = w + 1.0f;
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, y, z, w);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(x, q, z, w);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(x, y, q, w);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(x, y, z, q);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, q, z, w);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, y, q, w);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, y, z, q);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, q, q, w);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, q, z, q);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, q, q, q);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(x, q, q, q);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(x, y, q, q);
+      Assert.assertFalse(VectorM4F.almostEqual(ec, m0, m1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testApproximatelyEqualTransitive1()
+  @Override @Test public void testAlmostEqualTransitive()
   {
-    final float x0 = 0.0f;
-    final float x1 = 1.0f;
-    final float y0 = 0.0f;
-    final float y1 = 1.0f;
-    final float z0 = 0.0f;
-    final float z1 = 1.0f;
-    final float w0 = 0.0f;
-    final float w1 = 1.0f;
-    Assert.assertFalse(ApproximatelyEqualFloat.approximatelyEqual(x0, x1));
-    Assert.assertFalse(ApproximatelyEqualFloat.approximatelyEqual(y0, y1));
-    Assert.assertFalse(ApproximatelyEqualFloat.approximatelyEqual(z0, z1));
-    Assert.assertFalse(ApproximatelyEqualFloat.approximatelyEqual(w0, w1));
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
 
-    final VectorM4F v0 = new VectorM4F(x0, y0, z0, w0);
-    final VectorM4F v1 = new VectorM4F(x1, y1, z1, w1);
-    Assert.assertFalse(VectorM4F.approximatelyEqual(v0, v1));
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float x0 = (float) (Math.random() * Float.MAX_VALUE);
+      final float y0 = (float) (Math.random() * Float.MAX_VALUE);
+      final float z0 = (float) (Math.random() * Float.MAX_VALUE);
+      final float w0 = (float) (Math.random() * Float.MAX_VALUE);
+      final VectorM4F v0 = new VectorM4F(x0, y0, z0, w0);
+      final VectorM4F v1 = new VectorM4F(x0, y0, z0, w0);
+      final VectorM4F v2 = new VectorM4F(x0, y0, z0, w0);
+
+      Assert.assertTrue(VectorM4F.almostEqual(ec, v0, v1));
+      Assert.assertTrue(VectorM4F.almostEqual(ec, v1, v2));
+      Assert.assertTrue(VectorM4F.almostEqual(ec, v0, v2));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testCheckInterface()
+  @Override @Test public void testCheckInterface()
   {
     final VectorM4F v = new VectorM4F(3.0f, 5.0f, 7.0f, 11.0f);
 
@@ -348,11 +357,9 @@ public class VectorM4FTest
     Assert.assertTrue(v.w == v.getWF());
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorMaximumOrdering()
+  @Override @Test public void testClampByVectorMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max_x = (float) (Math.random() * Float.MIN_VALUE);
       final float max_y = (float) (Math.random() * Float.MIN_VALUE);
       final float max_z = (float) (Math.random() * Float.MIN_VALUE);
@@ -386,11 +393,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorMinimumOrdering()
+  @Override @Test public void testClampByVectorMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (Math.random() * Float.MAX_VALUE);
       final float min_y = (float) (Math.random() * Float.MAX_VALUE);
       final float min_z = (float) (Math.random() * Float.MAX_VALUE);
@@ -424,11 +429,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampByVectorOrdering()
+  @Override @Test public void testClampByVectorOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (Math.random() * Float.MIN_VALUE);
       final float min_y = (float) (Math.random() * Float.MIN_VALUE);
       final float min_z = (float) (Math.random() * Float.MIN_VALUE);
@@ -476,11 +479,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampMaximumOrdering()
+  @Override @Test public void testClampMaximumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float maximum = (float) (Math.random() * Float.MIN_VALUE);
 
       final float x = (float) (Math.random() * Float.MAX_VALUE);
@@ -507,11 +508,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testClampMinimumOrdering()
+  @Override @Test public void testClampMinimumOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = (float) (Math.random() * Float.MAX_VALUE);
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
@@ -538,9 +537,9 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testClampOrdering()
+  @Override @Test public void testClampOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = (float) (Math.random() * Float.MIN_VALUE);
       final float maximum = (float) (Math.random() * Float.MAX_VALUE);
 
@@ -577,7 +576,7 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testCopy()
+  @Override @Test public void testCopy()
   {
     final VectorM4F vb = new VectorM4F(5, 6, 7, 8);
     final VectorM4F va = new VectorM4F(1, 2, 3, 4);
@@ -595,18 +594,28 @@ public class VectorM4FTest
     Assert.assertTrue(va.w == vb.w);
   }
 
-  @SuppressWarnings("static-method") @Test public void testDistance()
+  @Override @Test public void testDefault0001()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+    Assert.assertTrue(VectorM4F.almostEqual(
+      ec,
+      new VectorM4F(),
+      new VectorM4F(0, 0, 0, 1)));
+  }
+
+  @Override @Test public void testDistance()
   {
     final VectorM4F v0 = new VectorM4F(0.0f, 1.0f, 0.0f, 0.0f);
     final VectorM4F v1 = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
+    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(
       VectorM4F.distance(v0, v1),
       1.0f));
   }
 
-  @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
+  @Override @Test public void testDistanceOrdering()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -623,13 +632,13 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testDotProduct()
+  @Override @Test public void testDotProduct()
   {
     final VectorM4F v0 = new VectorM4F(10.0f, 10.0f, 10.0f, 10.0f);
     final VectorM4F v1 = new VectorM4F(10.0f, 10.0f, 10.0f, 10.0f);
 
     {
-      final float p = VectorM4F.dotProduct(v0, v1);
+      final double p = VectorM4F.dotProduct(v0, v1);
       Assert.assertTrue(v0.x == 10.0);
       Assert.assertTrue(v0.y == 10.0);
       Assert.assertTrue(v0.z == 10.0);
@@ -642,7 +651,7 @@ public class VectorM4FTest
     }
 
     {
-      final float p = VectorM4F.dotProduct(v0, v0);
+      final double p = VectorM4F.dotProduct(v0, v0);
       Assert.assertTrue(v0.x == 10.0);
       Assert.assertTrue(v0.y == 10.0);
       Assert.assertTrue(v0.z == 10.0);
@@ -651,7 +660,7 @@ public class VectorM4FTest
     }
 
     {
-      final float p = VectorM4F.dotProduct(v1, v1);
+      final double p = VectorM4F.dotProduct(v1, v1);
       Assert.assertTrue(v1.x == 10.0);
       Assert.assertTrue(v1.y == 10.0);
       Assert.assertTrue(v1.z == 10.0);
@@ -660,22 +669,49 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testDotProductOrthonormal()
+  @Override @Test public void testDotProductPerpendicular()
   {
-    final VectorM4F v = new VectorM4F(1.0f, 0.0f, 0.0f, 0.0f);
-    Assert.assertTrue(VectorM4F.dotProduct(v, v) == 1.0);
+    final VectorM4F vpx = new VectorM4F(1.0f, 0.0f, 0.0f, 0.0f);
+    final VectorM4F vmx = new VectorM4F(-1.0f, 0.0f, 0.0f, 0.0f);
+
+    final VectorM4F vpy = new VectorM4F(0.0f, 1.0f, 0.0f, 0.0f);
+    final VectorM4F vmy = new VectorM4F(0.0f, -1.0f, 0.0f, 0.0f);
+
+    final VectorM4F vpz = new VectorM4F(0.0f, 0.0f, 1.0f, 0.0f);
+    final VectorM4F vmz = new VectorM4F(0.0f, 0.0f, -1.0f, 0.0f);
+
+    Assert.assertTrue(VectorM4F.dotProduct(vpx, vpy) == 0.0);
+    Assert.assertTrue(VectorM4F.dotProduct(vpy, vpz) == 0.0);
+    Assert.assertTrue(VectorM4F.dotProduct(vmx, vmy) == 0.0);
+    Assert.assertTrue(VectorM4F.dotProduct(vmy, vmz) == 0.0);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testDotProductSelfMagnitudeSquared()
+  @Override @Test public void testDotProductSelf()
+  {
+    final AlmostEqualDouble.ContextRelative ec =
+      TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float x = (float) Math.random();
+      final float y = (float) Math.random();
+      final float z = (float) Math.random();
+      final float w = (float) Math.random();
+      final VectorM4F q = new VectorM4F(x, y, z, w);
+      final double dp = VectorM4F.dotProduct(q, q);
+
+      System.out.println("q  : " + q);
+      System.out.println("dp : " + dp);
+
+      AlmostEqualDouble.almostEqual(ec, 1.0, dp);
+    }
+  }
+
+  @Override @Test public void testDotProductSelfMagnitudeSquared()
   {
     final VectorM4F v0 = new VectorM4F(10.0f, 10.0f, 10.0f, 10.0f);
 
     {
-      final float p = VectorM4F.dotProduct(v0, v0);
+      final double p = VectorM4F.dotProduct(v0, v0);
       Assert.assertTrue(v0.x == 10.0);
       Assert.assertTrue(v0.y == 10.0);
       Assert.assertTrue(v0.z == 10.0);
@@ -684,7 +720,7 @@ public class VectorM4FTest
     }
 
     {
-      final float p = VectorM4F.magnitudeSquared(v0);
+      final double p = VectorM4F.magnitudeSquared(v0);
       Assert.assertTrue(v0.x == 10.0);
       Assert.assertTrue(v0.y == 10.0);
       Assert.assertTrue(v0.z == 10.0);
@@ -693,105 +729,160 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  @Override @Test public void testEqualsCorrect()
   {
-    final VectorM4F m0 = new VectorM4F();
-    Assert.assertTrue(m0.equals(m0));
+    {
+      final VectorM4F m0 = new VectorM4F();
+      Assert.assertTrue(m0.equals(m0));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F();
+      Assert.assertFalse(m0.equals(null));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F();
+      Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F();
+      final VectorM4F m1 = new VectorM4F();
+      Assert.assertTrue(m0.equals(m1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  @Override @Test public void testEqualsNotEqualCorrect()
   {
-    final VectorM4F m0 = new VectorM4F();
-    Assert.assertFalse(m0.equals(null));
+    final float x = (float) Math.random();
+    final float y = x + 1.0f;
+    final float z = y + 1.0f;
+    final float w = z + 1.0f;
+    final float q = w + 1.0f;
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      Assert.assertFalse(m0.equals(null));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, y, z, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(x, q, z, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(x, y, q, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(x, y, z, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, q, z, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, y, q, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, y, z, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, q, q, w);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, q, z, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(q, q, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(x, q, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F(x, y, z, w);
+      final VectorM4F m1 = new VectorM4F(x, y, q, q);
+      Assert.assertFalse(m0.equals(m1));
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
-  {
-    final VectorM4F m0 = new VectorM4F();
-    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
-  {
-    final VectorM4F m0 = new VectorM4F();
-    final VectorM4F m1 = new VectorM4F();
-    Assert.assertTrue(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq0()
-  {
-    final VectorM4F m0 = new VectorM4F();
-    final VectorM4F m1 = new VectorM4F();
-    m1.x = 23.0f;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq1()
-  {
-    final VectorM4F m0 = new VectorM4F();
-    final VectorM4F m1 = new VectorM4F();
-    m1.y = 23.0f;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq2()
-  {
-    final VectorM4F m0 = new VectorM4F();
-    final VectorM4F m1 = new VectorM4F();
-    m1.z = 23.0f;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq3()
-  {
-    final VectorM4F m0 = new VectorM4F();
-    final VectorM4F m1 = new VectorM4F();
-    m1.w = 23.0f;
-    Assert.assertFalse(m0.equals(m1));
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeEq()
+  @Override @Test public void testHashCodeEqualsCorrect()
   {
     final VectorM4F m0 = new VectorM4F();
     final VectorM4F m1 = new VectorM4F();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase0()
+  @Override @Test public void testHashCodeNotEqualCorrect()
   {
-    final VectorM4F m0 = new VectorM4F();
-    final VectorM4F m1 = new VectorM4F();
-    m1.x = 23f;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    {
+      final VectorM4F m0 = new VectorM4F();
+      final VectorM4F m1 = new VectorM4F();
+      m1.x = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F();
+      final VectorM4F m1 = new VectorM4F();
+      m1.y = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F();
+      final VectorM4F m1 = new VectorM4F();
+      m1.z = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
+
+    {
+      final VectorM4F m0 = new VectorM4F();
+      final VectorM4F m1 = new VectorM4F();
+      m1.w = 23;
+      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+    }
   }
 
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase1()
-  {
-    final VectorM4F m0 = new VectorM4F();
-    final VectorM4F m1 = new VectorM4F();
-    m1.y = 23f;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase2()
-  {
-    final VectorM4F m0 = new VectorM4F();
-    final VectorM4F m1 = new VectorM4F();
-    m1.z = 23f;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase3()
-  {
-    final VectorM4F m0 = new VectorM4F();
-    final VectorM4F m1 = new VectorM4F();
-    m1.w = 23f;
-    Assert.assertFalse(m0.hashCode() == m1.hashCode());
-  }
-
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInitializeReadable()
+  @Override @Test public void testInitializeReadable()
   {
     final VectorM4F v0 = new VectorM4F(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorM4F v1 = new VectorM4F(v0);
@@ -802,11 +893,12 @@ public class VectorM4FTest
     Assert.assertTrue(v0.w == v1.w);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testInterpolateLinearLimits()
+  @Override @Test public void testInterpolateLinearLimits()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -824,51 +916,38 @@ public class VectorM4FTest
       VectorM4F.interpolateLinear(v0, v1, 0.0f, vr0);
       VectorM4F.interpolateLinear(v0, v1, 1.0f, vr1);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        v0.x,
-        vr0.x));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        v0.y,
-        vr0.y));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        v0.z,
-        vr0.z));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        v0.w,
-        vr0.w));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.x, vr0.x));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.y, vr0.y));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.z, vr0.z));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.w, vr0.w));
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        v1.x,
-        vr1.x));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        v1.y,
-        vr1.y));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        v1.z,
-        vr1.z));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        v1.w,
-        vr1.w));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v1.x, vr1.x));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v1.y, vr1.y));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v1.z, vr1.z));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v1.w, vr1.w));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNonzero()
+  @Override @Test public void testMagnitudeNonzero()
   {
-    for (int index = 0; index < 100; ++index) {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
       final float w = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM4F v = new VectorM4F(x, y, z, w);
 
-      final float m = VectorM4F.magnitude(v);
+      final double m = VectorM4F.magnitude(v);
       Assert.assertTrue(m >= 1.0);
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeNormal()
+  @Override @Test public void testMagnitudeNormal()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualDouble.ContextRelative context_d =
+      TestUtilities.getDoubleEqualityContext6dp();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x =
         (float) (Math.random() * (Math.sqrt(Float.MAX_VALUE) / 2));
       final float y =
@@ -883,50 +962,50 @@ public class VectorM4FTest
       VectorM4F.normalize(v, vr);
       Assert.assertNotSame(v, vr);
 
-      final float m = VectorM4F.magnitude(vr);
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 1.0f));
+      final double m = VectorM4F.magnitude(vr);
+
+      System.out.println("m : " + m);
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, m, 1.0));
     }
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testMagnitudeNormalizeZero()
+  @Override @Test public void testMagnitudeNormalizeZero()
   {
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final VectorM4F vr = VectorM4F.normalizeInPlace(v);
-    final float m = VectorM4F.magnitude(vr);
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 0.0f));
+    final double m = VectorM4F.magnitude(vr);
+    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeOne()
+  @Override @Test public void testMagnitudeOne()
   {
     final VectorM4F v = new VectorM4F(1.0f, 0.0f, 0.0f, 0.0f);
-    final float m = VectorM4F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 1.0f));
+    final double m = VectorM4F.magnitude(v);
+    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 1.0));
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeSimple()
+  @Override @Test public void testMagnitudeSimple()
   {
     final VectorM4F v = new VectorM4F(8.0f, 0.0f, 0.0f, 0.0f);
 
     {
-      final float p = VectorM4F.dotProduct(v, v);
-      final float q = VectorM4F.magnitudeSquared(v);
-      final float r = VectorM4F.magnitude(v);
+      final double p = VectorM4F.dotProduct(v, v);
+      final double q = VectorM4F.magnitudeSquared(v);
+      final double r = VectorM4F.magnitude(v);
       Assert.assertTrue(p == 64.0);
       Assert.assertTrue(q == 64.0);
       Assert.assertTrue(r == 8.0);
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testMagnitudeZero()
+  @Override @Test public void testMagnitudeZero()
   {
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
-    final float m = VectorM4F.magnitude(v);
-    Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(m, 0.0f));
+    final double m = VectorM4F.magnitude(v);
+    Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
   }
 
-  @SuppressWarnings("static-method") @Test public void testNormalizeSimple()
+  @Override @Test public void testNormalizeSimple()
   {
     final VectorM4F v0 = new VectorM4F(8.0f, 0.0f, 0.0f, 0.0f);
     final VectorM4F out = new VectorM4F();
@@ -934,13 +1013,48 @@ public class VectorM4FTest
 
     Assert.assertTrue(vr == out);
 
-    final float m = VectorM4F.magnitude(out);
+    final double m = VectorM4F.magnitude(out);
     Assert.assertTrue(m == 1.0);
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testProjectionPerpendicularZero()
+  @Override @Test public void testNormalizeZero()
+  {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    final VectorM4F qr = new VectorM4F();
+    final VectorM4F q = new VectorM4F(0, 0, 0, 0);
+    VectorM4F.normalize(q, qr);
+
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.x));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.y));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.z));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.w));
+  }
+
+  @Override @Test public void testOrthonormalize()
+  {
+    final VectorM4F v0 = new VectorM4F(0, 1, 0, 0);
+    final VectorM4F v1 = new VectorM4F(0.5f, 0.5f, 0, 0);
+
+    final Pair<VectorM4F, VectorM4F> r = VectorM4F.orthoNormalize(v0, v1);
+
+    Assert.assertEquals(new VectorM4F(0, 1, 0, 0), r.first);
+    Assert.assertEquals(new VectorM4F(1, 0, 0, 0), r.second);
+  }
+
+  @Override @Test public void testOrthonormalizeMutation()
+  {
+    final VectorM4F v0 = new VectorM4F(0f, 1f, 0f, 0f);
+    final VectorM4F v1 = new VectorM4F(0.5f, 0.5f, 0f, 0f);
+
+    VectorM4F.orthoNormalizeInPlace(v0, v1);
+
+    Assert.assertEquals(new VectorM4F(0, 1, 0, 0), v0);
+    Assert.assertEquals(new VectorM4F(1, 0, 0, 0), v1);
+  }
+
+  @Override @Test public void testProjectionPerpendicularZero()
   {
     {
       final VectorM4F p = new VectorM4F(1.0f, 0.0f, 0.0f, 0.0f);
@@ -963,7 +1077,7 @@ public class VectorM4FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleMutation()
+  @Override @Test public void testScaleMutation()
   {
     final VectorM4F out = new VectorM4F();
     final VectorM4F v0 = new VectorM4F(1.0f, 1.0f, 1.0f, 1.0f);
@@ -1002,9 +1116,12 @@ public class VectorM4FTest
     Assert.assertTrue(v0.w == 2.0);
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleOne()
+  @Override @Test public void testScaleOne()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
@@ -1015,14 +1132,10 @@ public class VectorM4FTest
 
       VectorM4F.scale(v, 1.0f, vr);
 
-      Assert
-        .assertTrue(ApproximatelyEqualFloat.approximatelyEqual(v.x, vr.x));
-      Assert
-        .assertTrue(ApproximatelyEqualFloat.approximatelyEqual(v.y, vr.y));
-      Assert
-        .assertTrue(ApproximatelyEqualFloat.approximatelyEqual(v.z, vr.z));
-      Assert
-        .assertTrue(ApproximatelyEqualFloat.approximatelyEqual(v.w, vr.w));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.x, vr.x));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.y, vr.y));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.z, vr.z));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.w, vr.w));
 
       {
         final float orig_x = v.x;
@@ -1032,25 +1145,20 @@ public class VectorM4FTest
 
         VectorM4F.scaleInPlace(v, 1.0f);
 
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v.x,
-          orig_x));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v.y,
-          orig_y));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v.z,
-          orig_z));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v.w,
-          orig_w));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.x, orig_x));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.y, orig_y));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.z, orig_z));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.w, orig_w));
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testScaleZero()
+  @Override @Test public void testScaleZero()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
@@ -1073,31 +1181,26 @@ public class VectorM4FTest
       {
         VectorM4F.scaleInPlace(v, 0.0f);
 
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v.x,
-          0.0f));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v.y,
-          0.0f));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v.z,
-          0.0f));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v.w,
-          0.0f));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.x, 0.0f));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.y, 0.0f));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.z, 0.0f));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.w, 0.0f));
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testString()
+  @Override @Test public void testString()
   {
     final VectorM4F v = new VectorM4F(1.0f, 2.0f, 3.0f, 4.0f);
     Assert.assertTrue(v.toString().equals("[VectorM4F 1.0 2.0 3.0 4.0]"));
   }
 
-  @SuppressWarnings("static-method") @Test public void testSubtract()
+  @Override @Test public void testSubtract()
   {
-    for (int index = 0; index < 100; ++index) {
+    final AlmostEqualFloat.ContextRelative ec =
+      TestUtilities.getSingleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -1113,18 +1216,10 @@ public class VectorM4FTest
       final VectorM4F vr0 = new VectorM4F();
       VectorM4F.subtract(v0, v1, vr0);
 
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.x,
-        v0.x - v1.x));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.y,
-        v0.y - v1.y));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.z,
-        v0.z - v1.z));
-      Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-        vr0.w,
-        v0.w - v1.w));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.x, v0.x - v1.x));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.y, v0.y - v1.y));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.z, v0.z - v1.z));
+      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr0.w, v0.w - v1.w));
 
       {
         final float orig_x = v0.x;
@@ -1133,23 +1228,19 @@ public class VectorM4FTest
         final float orig_w = v0.w;
         VectorM4F.subtractInPlace(v0, v1);
 
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.x,
-          orig_x - v1.x));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.y,
-          orig_y - v1.y));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.z,
-          orig_z - v1.z));
-        Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqual(
-          v0.w,
-          orig_w - v1.w));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.x, orig_x
+          - v1.x));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.y, orig_y
+          - v1.y));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.z, orig_z
+          - v1.z));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0.w, orig_w
+          - v1.w));
       }
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testSubtractMutation()
+  @Override @Test public void testSubtractMutation()
   {
     final VectorM4F out = new VectorM4F();
     final VectorM4F v0 = new VectorM4F(1.0f, 1.0f, 1.0f, 1.0f);
@@ -1200,4 +1291,5 @@ public class VectorM4FTest
     Assert.assertTrue(v1.z == 1.0);
     Assert.assertTrue(v1.w == 1.0);
   }
+
 }

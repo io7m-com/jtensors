@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2012 http://io7m.com
+ * 
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+ * SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR
+ * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
 package com.io7m.jtensors;
 
 import java.nio.ByteOrder;
@@ -51,15 +67,15 @@ public class MatrixM2x2FTest
       }
     }
 
-    final MatrixM2x2F mr = MatrixM2x2F.add(m0, m1);
+    final MatrixM2x2F mr = MatrixM2x2F.addInPlace(m0, m1);
     Assert.assertSame(mr, m0);
     Assert.assertEquals(0, MatrixM2x2F.floatBuffer(mr).position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
-        Assert.assertTrue(m0.get(row, column) == 4.0);
-        Assert.assertTrue(mr.get(row, column) == 4.0);
-        Assert.assertTrue(m1.get(row, column) == 3.0);
+        Assert.assertTrue(m0.get(row, column) == 4.0f);
+        Assert.assertTrue(mr.get(row, column) == 4.0f);
+        Assert.assertTrue(m1.get(row, column) == 3.0f);
       }
     }
   }
@@ -573,7 +589,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.set(m0, 1, 0, 3.0f);
     MatrixM2x2F.set(m0, 1, 1, 4.0f);
 
-    final VectorI2F v = new VectorI2F(1.0, 2.0);
+    final VectorI2F v = new VectorI2F(1.0f, 2.0f);
     final VectorM2F out = new VectorM2F();
 
     final VectorM2F r = MatrixM2x2F.multiplyVector2F(m0, v, out);
@@ -844,6 +860,15 @@ public class MatrixM2x2FTest
 
     Assert.assertEquals(m0.toString(), m1.toString());
     Assert.assertFalse(m0.toString().equals(m2.toString()));
+  }
+
+  @SuppressWarnings({ "static-method", "boxing" }) @Test public
+    void
+    testTrace()
+  {
+    final MatrixM2x2F m = new MatrixM2x2F();
+    final float t = MatrixM2x2F.trace(m);
+    Assert.assertEquals(2.0f, t);
   }
 
   @SuppressWarnings("static-method") @Test public void testTranspose()

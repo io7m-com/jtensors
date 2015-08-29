@@ -10,7 +10,9 @@
 .constant,
 .element,
 .file,
-.type
+.function,
+.type,
+.variable
 {
   font-family: monospace;
 }

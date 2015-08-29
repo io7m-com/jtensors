@@ -46,13 +46,13 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I absolute(
-    final @Nonnull VectorM4I v,
+    final @Nonnull VectorReadable4I v,
     final @Nonnull VectorM4I out)
   {
-    final int x = CheckedMath.absolute(v.x);
-    final int y = CheckedMath.absolute(v.y);
-    final int z = CheckedMath.absolute(v.z);
-    final int w = CheckedMath.absolute(v.w);
+    final int x = CheckedMath.absolute(v.getXI());
+    final int y = CheckedMath.absolute(v.getYI());
+    final int z = CheckedMath.absolute(v.getZI());
+    final int w = CheckedMath.absolute(v.getWI());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -97,14 +97,14 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I add(
-    final @Nonnull VectorM4I v0,
-    final @Nonnull VectorM4I v1,
+    final @Nonnull VectorReadable4I v0,
+    final @Nonnull VectorReadable4I v1,
     final @Nonnull VectorM4I out)
   {
-    final int x = CheckedMath.add(v0.x, v1.x);
-    final int y = CheckedMath.add(v0.y, v1.y);
-    final int z = CheckedMath.add(v0.z, v1.z);
-    final int w = CheckedMath.add(v0.w, v1.w);
+    final int x = CheckedMath.add(v0.getXI(), v1.getXI());
+    final int y = CheckedMath.add(v0.getYI(), v1.getYI());
+    final int z = CheckedMath.add(v0.getZI(), v1.getZI());
+    final int w = CheckedMath.add(v0.getWI(), v1.getWI());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -129,7 +129,7 @@ import com.io7m.jaux.CheckedMath;
 
   public static @Nonnull VectorM4I addInPlace(
     final @Nonnull VectorM4I v0,
-    final @Nonnull VectorM4I v1)
+    final @Nonnull VectorReadable4I v1)
   {
     return VectorM4I.add(v0, v1, v0);
   }
@@ -155,19 +155,19 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I addScaled(
-    final @Nonnull VectorM4I v0,
-    final @Nonnull VectorM4I v1,
+    final @Nonnull VectorReadable4I v0,
+    final @Nonnull VectorReadable4I v1,
     final double r,
     final @Nonnull VectorM4I out)
   {
-    final int mx = CheckedMath.multiply(v1.x, r);
-    final int my = CheckedMath.multiply(v1.y, r);
-    final int mz = CheckedMath.multiply(v1.z, r);
-    final int mw = CheckedMath.multiply(v1.w, r);
-    final int x = CheckedMath.add(v0.x, mx);
-    final int y = CheckedMath.add(v0.y, my);
-    final int z = CheckedMath.add(v0.z, mz);
-    final int w = CheckedMath.add(v0.w, mw);
+    final int mx = CheckedMath.multiply(v1.getXI(), r);
+    final int my = CheckedMath.multiply(v1.getYI(), r);
+    final int mz = CheckedMath.multiply(v1.getZI(), r);
+    final int mw = CheckedMath.multiply(v1.getWI(), r);
+    final int x = CheckedMath.add(v0.getXI(), mx);
+    final int y = CheckedMath.add(v0.getYI(), my);
+    final int z = CheckedMath.add(v0.getZI(), mz);
+    final int w = CheckedMath.add(v0.getWI(), mw);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -195,7 +195,7 @@ import com.io7m.jaux.CheckedMath;
 
   public static @Nonnull VectorM4I addScaledInPlace(
     final @Nonnull VectorM4I v0,
-    final @Nonnull VectorM4I v1,
+    final @Nonnull VectorReadable4I v1,
     final double r)
   {
     return VectorM4I.addScaled(v0, v1, r, v0);
@@ -226,15 +226,15 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I clamp(
-    final @Nonnull VectorM4I v,
+    final @Nonnull VectorReadable4I v,
     final int minimum,
     final int maximum,
     final @Nonnull VectorM4I out)
   {
-    final int x = Math.min(Math.max(v.x, minimum), maximum);
-    final int y = Math.min(Math.max(v.y, minimum), maximum);
-    final int z = Math.min(Math.max(v.z, minimum), maximum);
-    final int w = Math.min(Math.max(v.w, minimum), maximum);
+    final int x = Math.min(Math.max(v.getXI(), minimum), maximum);
+    final int y = Math.min(Math.max(v.getYI(), minimum), maximum);
+    final int z = Math.min(Math.max(v.getZI(), minimum), maximum);
+    final int w = Math.min(Math.max(v.getWI(), minimum), maximum);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -260,15 +260,19 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I clampByVector(
-    final @Nonnull VectorM4I v,
-    final @Nonnull VectorM4I minimum,
-    final @Nonnull VectorM4I maximum,
+    final @Nonnull VectorReadable4I v,
+    final @Nonnull VectorReadable4I minimum,
+    final @Nonnull VectorReadable4I maximum,
     final @Nonnull VectorM4I out)
   {
-    final int x = Math.min(Math.max(v.x, minimum.x), maximum.x);
-    final int y = Math.min(Math.max(v.y, minimum.y), maximum.y);
-    final int z = Math.min(Math.max(v.z, minimum.z), maximum.z);
-    final int w = Math.min(Math.max(v.w, minimum.w), maximum.w);
+    final int x =
+      Math.min(Math.max(v.getXI(), minimum.getXI()), maximum.getXI());
+    final int y =
+      Math.min(Math.max(v.getYI(), minimum.getYI()), maximum.getYI());
+    final int z =
+      Math.min(Math.max(v.getZI(), minimum.getZI()), maximum.getZI());
+    final int w =
+      Math.min(Math.max(v.getWI(), minimum.getWI()), maximum.getWI());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -293,8 +297,8 @@ import com.io7m.jaux.CheckedMath;
 
   public static @Nonnull VectorM4I clampByVectorInPlace(
     final @Nonnull VectorM4I v,
-    final @Nonnull VectorM4I minimum,
-    final @Nonnull VectorM4I maximum)
+    final @Nonnull VectorReadable4I minimum,
+    final @Nonnull VectorReadable4I maximum)
   {
     return VectorM4I.clampByVector(v, minimum, maximum, v);
   }
@@ -339,14 +343,14 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I clampMaximum(
-    final @Nonnull VectorM4I v,
+    final @Nonnull VectorReadable4I v,
     final int maximum,
     final @Nonnull VectorM4I out)
   {
-    final int x = Math.min(v.x, maximum);
-    final int y = Math.min(v.y, maximum);
-    final int z = Math.min(v.z, maximum);
-    final int w = Math.min(v.w, maximum);
+    final int x = Math.min(v.getXI(), maximum);
+    final int y = Math.min(v.getYI(), maximum);
+    final int z = Math.min(v.getZI(), maximum);
+    final int w = Math.min(v.getWI(), maximum);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -370,14 +374,14 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I clampMaximumByVector(
-    final @Nonnull VectorM4I v,
-    final @Nonnull VectorM4I maximum,
+    final @Nonnull VectorReadable4I v,
+    final @Nonnull VectorReadable4I maximum,
     final @Nonnull VectorM4I out)
   {
-    final int x = Math.min(v.x, maximum.x);
-    final int y = Math.min(v.y, maximum.y);
-    final int z = Math.min(v.z, maximum.z);
-    final int w = Math.min(v.w, maximum.w);
+    final int x = Math.min(v.getXI(), maximum.getXI());
+    final int y = Math.min(v.getYI(), maximum.getYI());
+    final int z = Math.min(v.getZI(), maximum.getZI());
+    final int w = Math.min(v.getWI(), maximum.getWI());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -400,7 +404,7 @@ import com.io7m.jaux.CheckedMath;
 
   public static @Nonnull VectorM4I clampMaximumByVectorInPlace(
     final @Nonnull VectorM4I v,
-    final @Nonnull VectorM4I maximum)
+    final @Nonnull VectorReadable4I maximum)
   {
     return VectorM4I.clampMaximumByVector(v, maximum, v);
   }
@@ -443,14 +447,14 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I clampMinimum(
-    final @Nonnull VectorM4I v,
+    final @Nonnull VectorReadable4I v,
     final int minimum,
     final @Nonnull VectorM4I out)
   {
-    final int x = Math.max(v.x, minimum);
-    final int y = Math.max(v.y, minimum);
-    final int z = Math.max(v.z, minimum);
-    final int w = Math.max(v.w, minimum);
+    final int x = Math.max(v.getXI(), minimum);
+    final int y = Math.max(v.getYI(), minimum);
+    final int z = Math.max(v.getZI(), minimum);
+    final int w = Math.max(v.getWI(), minimum);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -474,14 +478,14 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I clampMinimumByVector(
-    final @Nonnull VectorM4I v,
-    final @Nonnull VectorM4I minimum,
+    final @Nonnull VectorReadable4I v,
+    final @Nonnull VectorReadable4I minimum,
     final @Nonnull VectorM4I out)
   {
-    final int x = Math.max(v.x, minimum.x);
-    final int y = Math.max(v.y, minimum.y);
-    final int z = Math.max(v.z, minimum.z);
-    final int w = Math.max(v.w, minimum.w);
+    final int x = Math.max(v.getXI(), minimum.getXI());
+    final int y = Math.max(v.getYI(), minimum.getYI());
+    final int z = Math.max(v.getZI(), minimum.getZI());
+    final int w = Math.max(v.getWI(), minimum.getWI());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -505,7 +509,7 @@ import com.io7m.jaux.CheckedMath;
 
   public static @Nonnull VectorM4I clampMinimumByVectorInPlace(
     final @Nonnull VectorM4I v,
-    final @Nonnull VectorM4I minimum)
+    final @Nonnull VectorReadable4I minimum)
   {
     return VectorM4I.clampMinimumByVector(v, minimum, v);
   }
@@ -570,8 +574,8 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static int distance(
-    final @Nonnull VectorM4I v0,
-    final @Nonnull VectorM4I v1)
+    final @Nonnull VectorReadable4I v0,
+    final @Nonnull VectorReadable4I v1)
   {
     final @Nonnull VectorM4I vr = new VectorM4I();
     return VectorM4I.magnitude(VectorM4I.subtract(v0, v1, vr));
@@ -593,13 +597,13 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static int dotProduct(
-    final @Nonnull VectorM4I v0,
-    final @Nonnull VectorM4I v1)
+    final @Nonnull VectorReadable4I v0,
+    final @Nonnull VectorReadable4I v1)
   {
-    final int mx = CheckedMath.multiply(v0.x, v1.x);
-    final int my = CheckedMath.multiply(v0.y, v1.y);
-    final int mz = CheckedMath.multiply(v0.z, v1.z);
-    final int mw = CheckedMath.multiply(v0.w, v1.w);
+    final int mx = CheckedMath.multiply(v0.getXI(), v1.getXI());
+    final int my = CheckedMath.multiply(v0.getYI(), v1.getYI());
+    final int mz = CheckedMath.multiply(v0.getZI(), v1.getZI());
+    final int mw = CheckedMath.multiply(v0.getWI(), v1.getWI());
     return CheckedMath.add(CheckedMath.add(CheckedMath.add(mx, my), mz), mw);
   }
 
@@ -632,8 +636,8 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I interpolateLinear(
-    final @Nonnull VectorM4I v0,
-    final @Nonnull VectorM4I v1,
+    final @Nonnull VectorReadable4I v0,
+    final @Nonnull VectorReadable4I v1,
     final double alpha,
     final @Nonnull VectorM4I r)
   {
@@ -661,7 +665,7 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static int magnitude(
-    final @Nonnull VectorM4I v)
+    final @Nonnull VectorReadable4I v)
   {
     return VectorM4I.cast(Math.sqrt(VectorM4I.magnitudeSquared(v)));
   }
@@ -679,7 +683,7 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static int magnitudeSquared(
-    final @Nonnull VectorM4I v)
+    final @Nonnull VectorReadable4I v)
   {
     return VectorM4I.dotProduct(v, v);
   }
@@ -695,8 +699,8 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I projection(
-    final @Nonnull VectorM4I p,
-    final @Nonnull VectorM4I q,
+    final @Nonnull VectorReadable4I p,
+    final @Nonnull VectorReadable4I q,
     final @Nonnull VectorM4I r)
   {
     final int dot = VectorM4I.dotProduct(p, q);
@@ -724,14 +728,14 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I scale(
-    final @Nonnull VectorM4I v,
+    final @Nonnull VectorReadable4I v,
     final double r,
     final @Nonnull VectorM4I out)
   {
-    final int mx = CheckedMath.multiply(v.x, r);
-    final int my = CheckedMath.multiply(v.y, r);
-    final int mz = CheckedMath.multiply(v.z, r);
-    final int mw = CheckedMath.multiply(v.w, r);
+    final int mx = CheckedMath.multiply(v.getXI(), r);
+    final int my = CheckedMath.multiply(v.getYI(), r);
+    final int mz = CheckedMath.multiply(v.getZI(), r);
+    final int mw = CheckedMath.multiply(v.getWI(), r);
     out.x = mx;
     out.y = my;
     out.z = mz;
@@ -779,14 +783,14 @@ import com.io7m.jaux.CheckedMath;
    */
 
   public static @Nonnull VectorM4I subtract(
-    final @Nonnull VectorM4I v0,
-    final @Nonnull VectorM4I v1,
+    final @Nonnull VectorReadable4I v0,
+    final @Nonnull VectorReadable4I v1,
     final @Nonnull VectorM4I out)
   {
-    final int mx = CheckedMath.subtract(v0.x, v1.x);
-    final int my = CheckedMath.subtract(v0.y, v1.y);
-    final int mz = CheckedMath.subtract(v0.z, v1.z);
-    final int mw = CheckedMath.subtract(v0.w, v1.w);
+    final int mx = CheckedMath.subtract(v0.getXI(), v1.getXI());
+    final int my = CheckedMath.subtract(v0.getYI(), v1.getYI());
+    final int mz = CheckedMath.subtract(v0.getZI(), v1.getZI());
+    final int mw = CheckedMath.subtract(v0.getWI(), v1.getWI());
     out.x = mx;
     out.y = my;
     out.z = mz;
@@ -811,7 +815,7 @@ import com.io7m.jaux.CheckedMath;
 
   public static @Nonnull VectorM4I subtractInPlace(
     final @Nonnull VectorM4I v0,
-    final @Nonnull VectorM4I v1)
+    final @Nonnull VectorReadable4I v1)
   {
     return VectorM4I.subtract(v0, v1, v0);
   }

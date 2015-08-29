@@ -19,7 +19,9 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
+import com.io7m.jaux.functional.Pair;
 
 /**
  * A two-dimensional mutable vector type with double precision elements.
@@ -43,11 +45,11 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D absolute(
-    final @Nonnull VectorM2D v,
+    final @Nonnull VectorReadable2D v,
     final @Nonnull VectorM2D out)
   {
-    final double x = Math.abs(v.x);
-    final double y = Math.abs(v.y);
+    final double x = Math.abs(v.getXD());
+    final double y = Math.abs(v.getYD());
     out.x = x;
     out.y = y;
     return out;
@@ -84,12 +86,12 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D add(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1,
+    final @Nonnull VectorReadable2D v0,
+    final @Nonnull VectorReadable2D v1,
     final @Nonnull VectorM2D out)
   {
-    final double x = v0.x + v1.x;
-    final double y = v0.y + v1.y;
+    final double x = v0.getXD() + v1.getXD();
+    final double y = v0.getYD() + v1.getYD();
     out.x = x;
     out.y = y;
     return out;
@@ -109,7 +111,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM2D addInPlace(
     final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1)
+    final @Nonnull VectorReadable2D v1)
   {
     return VectorM2D.add(v0, v1, v0);
   }
@@ -132,13 +134,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D addScaled(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1,
+    final @Nonnull VectorReadable2D v0,
+    final @Nonnull VectorReadable2D v1,
     final double r,
     final @Nonnull VectorM2D out)
   {
-    final double x = v0.x + (v1.x * r);
-    final double y = v0.y + (v1.y * r);
+    final double x = v0.getXD() + (v1.getXD() * r);
+    final double y = v0.getYD() + (v1.getYD() * r);
     out.x = x;
     out.y = y;
     return out;
@@ -161,10 +163,37 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM2D addScaledInPlace(
     final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1,
+    final @Nonnull VectorReadable2D v1,
     final double r)
   {
     return VectorM2D.addScaled(v0, v1, r, v0);
+  }
+
+  /**
+   * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
+   * are equal to within the degree of error given in <code>context</code>.
+   * 
+   * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
+   * 
+   * @param context
+   *          The equality context
+   * @param qa
+   *          The left input vector
+   * @param qb
+   *          The right input vector
+   * @since 5.0.0
+   */
+
+  public static boolean almostEqual(
+    final @Nonnull ContextRelative context,
+    final @Nonnull VectorReadable2D qa,
+    final @Nonnull VectorReadable2D qb)
+  {
+    final boolean xs =
+      AlmostEqualDouble.almostEqual(context, qa.getXD(), qb.getXD());
+    final boolean ys =
+      AlmostEqualDouble.almostEqual(context, qa.getYD(), qb.getYD());
+    return xs && ys;
   }
 
   /**
@@ -180,58 +209,16 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static double angle(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1)
+    final @Nonnull VectorReadable2D v0,
+    final @Nonnull VectorReadable2D v1)
   {
     final double m0 = VectorM2D.magnitude(v0);
     final double m1 = VectorM2D.magnitude(v1);
-    return Math.acos(VectorM2D.dotProduct(v0, v1) / (m0 * m1));
-  }
-
-  /**
-   * Calculate the angle between vectors <code>v0</code> and <code>v1</code>,
-   * in degrees.
-   * 
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * 
-   * @return The angle between the two vectors, in degrees.
-   */
-
-  public static double angleDegrees(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1)
-  {
-    return Math.toDegrees(VectorM2D.angle(v0, v1));
-  }
-
-  /**
-   * Determine whether or not the elements of the two vectors <code>v0</code>
-   * and <code>v1</code> are approximately equal.
-   * 
-   * @see ApproximatelyEqualDouble
-   * 
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * 
-   * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code>, within an appropriate degree of error for double
-   *         precision floating point values
-   */
-
-  public static boolean approximatelyEqual(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1)
-  {
-    final boolean ex =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
-    final boolean ey =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.y, v1.y);
-    return ex && ey;
+    final double dp =
+      Math.min(Math.max(-1.0, VectorM2D.dotProduct(v0, v1)), 1.0);
+    final double f = m0 * m1;
+    final double r = dp / f;
+    return Math.acos(r);
   }
 
   /**
@@ -253,13 +240,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D clamp(
-    final @Nonnull VectorM2D v,
+    final @Nonnull VectorReadable2D v,
     final double minimum,
     final double maximum,
     final @Nonnull VectorM2D out)
   {
-    final double x = Math.min(Math.max(v.x, minimum), maximum);
-    final double y = Math.min(Math.max(v.y, minimum), maximum);
+    final double x = Math.min(Math.max(v.getXD(), minimum), maximum);
+    final double y = Math.min(Math.max(v.getYD(), minimum), maximum);
     out.x = x;
     out.y = y;
     return out;
@@ -283,13 +270,15 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D clampByVector(
-    final @Nonnull VectorM2D v,
-    final @Nonnull VectorM2D minimum,
-    final @Nonnull VectorM2D maximum,
+    final @Nonnull VectorReadable2D v,
+    final @Nonnull VectorReadable2D minimum,
+    final @Nonnull VectorReadable2D maximum,
     final @Nonnull VectorM2D out)
   {
-    final double x = Math.min(Math.max(v.x, minimum.x), maximum.x);
-    final double y = Math.min(Math.max(v.y, minimum.y), maximum.y);
+    final double x =
+      Math.min(Math.max(v.getXD(), minimum.getXD()), maximum.getXD());
+    final double y =
+      Math.min(Math.max(v.getYD(), minimum.getYD()), maximum.getYD());
     out.x = x;
     out.y = y;
     return out;
@@ -312,8 +301,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM2D clampByVectorInPlace(
     final @Nonnull VectorM2D v,
-    final @Nonnull VectorM2D minimum,
-    final @Nonnull VectorM2D maximum)
+    final @Nonnull VectorReadable2D minimum,
+    final @Nonnull VectorReadable2D maximum)
   {
     return VectorM2D.clampByVector(v, minimum, maximum, v);
   }
@@ -358,12 +347,12 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D clampMaximum(
-    final @Nonnull VectorM2D v,
+    final @Nonnull VectorReadable2D v,
     final double maximum,
     final @Nonnull VectorM2D out)
   {
-    final double x = Math.min(v.x, maximum);
-    final double y = Math.min(v.y, maximum);
+    final double x = Math.min(v.getXD(), maximum);
+    final double y = Math.min(v.getYD(), maximum);
     out.x = x;
     out.y = y;
     return out;
@@ -385,12 +374,12 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D clampMaximumByVector(
-    final @Nonnull VectorM2D v,
-    final @Nonnull VectorM2D maximum,
+    final @Nonnull VectorReadable2D v,
+    final @Nonnull VectorReadable2D maximum,
     final @Nonnull VectorM2D out)
   {
-    final double x = Math.min(v.x, maximum.x);
-    final double y = Math.min(v.y, maximum.y);
+    final double x = Math.min(v.getXD(), maximum.getXD());
+    final double y = Math.min(v.getYD(), maximum.getYD());
     out.x = x;
     out.y = y;
     return out;
@@ -411,7 +400,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM2D clampMaximumByVectorInPlace(
     final @Nonnull VectorM2D v,
-    final @Nonnull VectorM2D maximum)
+    final @Nonnull VectorReadable2D maximum)
   {
     return VectorM2D.clampMaximumByVector(v, maximum, v);
   }
@@ -454,12 +443,12 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D clampMinimum(
-    final @Nonnull VectorM2D v,
+    final @Nonnull VectorReadable2D v,
     final double minimum,
     final @Nonnull VectorM2D out)
   {
-    final double x = Math.max(v.x, minimum);
-    final double y = Math.max(v.y, minimum);
+    final double x = Math.max(v.getXD(), minimum);
+    final double y = Math.max(v.getYD(), minimum);
     out.x = x;
     out.y = y;
     return out;
@@ -481,12 +470,12 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D clampMinimumByVector(
-    final @Nonnull VectorM2D v,
-    final @Nonnull VectorM2D minimum,
+    final @Nonnull VectorReadable2D v,
+    final @Nonnull VectorReadable2D minimum,
     final @Nonnull VectorM2D out)
   {
-    final double x = Math.max(v.x, minimum.x);
-    final double y = Math.max(v.y, minimum.y);
+    final double x = Math.max(v.getXD(), minimum.getXD());
+    final double y = Math.max(v.getYD(), minimum.getYD());
     out.x = x;
     out.y = y;
     return out;
@@ -508,7 +497,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM2D clampMinimumByVectorInPlace(
     final @Nonnull VectorM2D v,
-    final @Nonnull VectorM2D minimum)
+    final @Nonnull VectorReadable2D minimum)
   {
     return VectorM2D.clampMinimumByVector(v, minimum, v);
   }
@@ -568,8 +557,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static double distance(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1)
+    final @Nonnull VectorReadable2D v0,
+    final @Nonnull VectorReadable2D v1)
   {
     final @Nonnull VectorM2D vr = new VectorM2D();
     return VectorM2D.magnitude(VectorM2D.subtract(v0, v1, vr));
@@ -588,11 +577,11 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static double dotProduct(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1)
+    final @Nonnull VectorReadable2D v0,
+    final @Nonnull VectorReadable2D v1)
   {
-    final double x = v0.x * v1.x;
-    final double y = v0.y * v1.y;
+    final double x = v0.getXD() * v1.getXD();
+    final double y = v0.getYD() * v1.getYD();
     return x + y;
   }
 
@@ -622,8 +611,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D interpolateLinear(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1,
+    final @Nonnull VectorReadable2D v0,
+    final @Nonnull VectorReadable2D v1,
     final double alpha,
     final @Nonnull VectorM2D r)
   {
@@ -648,7 +637,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static double magnitude(
-    final @Nonnull VectorM2D v)
+    final @Nonnull VectorReadable2D v)
   {
     return Math.sqrt(VectorM2D.magnitudeSquared(v));
   }
@@ -663,7 +652,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static double magnitudeSquared(
-    final @Nonnull VectorM2D v)
+    final @Nonnull VectorReadable2D v)
   {
     return VectorM2D.dotProduct(v, v);
   }
@@ -682,7 +671,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D normalize(
-    final @Nonnull VectorM2D v,
+    final @Nonnull VectorReadable2D v,
     final @Nonnull VectorM2D out)
   {
     final double m = VectorM2D.magnitudeSquared(v);
@@ -690,8 +679,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
       final double reciprocal = 1.0 / Math.sqrt(m);
       return VectorM2D.scale(v, reciprocal, out);
     }
-    out.x = v.x;
-    out.y = v.y;
+    out.x = v.getXD();
+    out.y = v.getYD();
     return out;
   }
 
@@ -713,6 +702,56 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * .
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * 
+   * @since 5.0.0
+   */
+
+  public static @Nonnull Pair<VectorM2D, VectorM2D> orthoNormalize(
+    final @Nonnull VectorReadable2D v0,
+    final @Nonnull VectorReadable2D v1)
+  {
+    final VectorM2D v0n = new VectorM2D();
+    final VectorM2D vr = new VectorM2D();
+    final VectorM2D vp = new VectorM2D();
+
+    VectorM2D.normalize(v0, v0n);
+    VectorM2D.scale(v0n, VectorM2D.dotProduct(v1, v0n), vp);
+    VectorM2D.normalizeInPlace(VectorM2D.subtract(v1, vp, vr));
+    return new Pair<VectorM2D, VectorM2D>(v0n, vr);
+  }
+
+  /**
+   * Orthonormalize and the vectors <code>v0</code> and <code>v1</code>,
+   * modifying them in-place.
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @since 5.0.0
+   */
+
+  public static void orthoNormalizeInPlace(
+    final @Nonnull VectorM2D v0,
+    final @Nonnull VectorM2D v1)
+  {
+    final VectorM2D projection = new VectorM2D();
+
+    VectorM2D.normalizeInPlace(v0);
+    VectorM2D.scale(v0, VectorM2D.dotProduct(v1, v0), projection);
+    VectorM2D.subtractInPlace(v1, projection);
+    VectorM2D.normalizeInPlace(v1);
+  }
+
+  /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>, saving the result in <code>r</code>.
    * 
@@ -720,8 +759,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D projection(
-    final @Nonnull VectorM2D p,
-    final @Nonnull VectorM2D q,
+    final @Nonnull VectorReadable2D p,
+    final @Nonnull VectorReadable2D q,
     final @Nonnull VectorM2D r)
   {
     final double dot = VectorM2D.dotProduct(p, q);
@@ -746,12 +785,12 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D scale(
-    final @Nonnull VectorM2D v,
+    final @Nonnull VectorReadable2D v,
     final double r,
     final @Nonnull VectorM2D out)
   {
-    final double x = v.x * r;
-    final double y = v.y * r;
+    final double x = v.getXD() * r;
+    final double y = v.getYD() * r;
     out.x = x;
     out.y = y;
     return out;
@@ -791,12 +830,12 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM2D subtract(
-    final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1,
+    final @Nonnull VectorReadable2D v0,
+    final @Nonnull VectorReadable2D v1,
     final @Nonnull VectorM2D out)
   {
-    final double x = v0.x - v1.x;
-    final double y = v0.y - v1.y;
+    final double x = v0.getXD() - v1.getXD();
+    final double y = v0.getYD() - v1.getYD();
     out.x = x;
     out.y = y;
     return out;
@@ -816,7 +855,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM2D subtractInPlace(
     final @Nonnull VectorM2D v0,
-    final @Nonnull VectorM2D v1)
+    final @Nonnull VectorReadable2D v1)
   {
     return VectorM2D.subtract(v0, v1, v0);
   }

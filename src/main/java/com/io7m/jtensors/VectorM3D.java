@@ -19,7 +19,9 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
-import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble;
+import com.io7m.jaux.AlmostEqualDouble.ContextRelative;
+import com.io7m.jaux.functional.Pair;
 
 /**
  * A three-dimensional mutable vector type with double precision elements.
@@ -43,12 +45,12 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D absolute(
-    final @Nonnull VectorM3D v,
+    final @Nonnull VectorReadable3D v,
     final @Nonnull VectorM3D out)
   {
-    final double x = Math.abs(v.x);
-    final double y = Math.abs(v.y);
-    final double z = Math.abs(v.z);
+    final double x = Math.abs(v.getXD());
+    final double y = Math.abs(v.getYD());
+    final double z = Math.abs(v.getZD());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -86,13 +88,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D add(
-    final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1,
+    final @Nonnull VectorReadable3D v0,
+    final @Nonnull VectorReadable3D v1,
     final @Nonnull VectorM3D out)
   {
-    final double x = v0.x + v1.x;
-    final double y = v0.y + v1.y;
-    final double z = v0.z + v1.z;
+    final double x = v0.getXD() + v1.getXD();
+    final double y = v0.getYD() + v1.getYD();
+    final double z = v0.getZD() + v1.getZD();
     out.x = x;
     out.y = y;
     out.z = z;
@@ -113,7 +115,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM3D addInPlace(
     final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1)
+    final @Nonnull VectorReadable3D v1)
   {
     return VectorM3D.add(v0, v1, v0);
   }
@@ -136,14 +138,14 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D addScaled(
-    final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1,
+    final @Nonnull VectorReadable3D v0,
+    final @Nonnull VectorReadable3D v1,
     final double r,
     final @Nonnull VectorM3D out)
   {
-    final double x = v0.x + (v1.x * r);
-    final double y = v0.y + (v1.y * r);
-    final double z = v0.z + (v1.z * r);
+    final double x = v0.getXD() + (v1.getXD() * r);
+    final double y = v0.getYD() + (v1.getYD() * r);
+    final double z = v0.getZD() + (v1.getZD() * r);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -167,39 +169,39 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM3D addScaledInPlace(
     final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1,
+    final @Nonnull VectorReadable3D v1,
     final double r)
   {
     return VectorM3D.addScaled(v0, v1, r, v0);
   }
 
   /**
-   * Determine whether or not the elements of the two vectors <code>v0</code>
-   * and <code>v1</code> are approximately equal.
+   * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
+   * are equal to within the degree of error given in <code>context</code>.
    * 
-   * @see ApproximatelyEqualDouble
+   * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
    * 
-   * @param v0
+   * @param context
+   *          The equality context
+   * @param qa
    *          The left input vector
-   * @param v1
+   * @param qb
    *          The right input vector
-   * 
-   * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code>, within an appropriate degree of error for double
-   *         precision floating point values
+   * @since 5.0.0
    */
 
-  public static boolean approximatelyEqual(
-    final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1)
+  public static boolean almostEqual(
+    final @Nonnull ContextRelative context,
+    final @Nonnull VectorReadable3D qa,
+    final @Nonnull VectorReadable3D qb)
   {
-    final boolean ex =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
-    final boolean ey =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.y, v1.y);
-    final boolean ez =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.z, v1.z);
-    return ex && ey && ez;
+    final boolean xs =
+      AlmostEqualDouble.almostEqual(context, qa.getXD(), qb.getXD());
+    final boolean ys =
+      AlmostEqualDouble.almostEqual(context, qa.getYD(), qb.getYD());
+    final boolean zs =
+      AlmostEqualDouble.almostEqual(context, qa.getZD(), qb.getZD());
+    return xs && ys && zs;
   }
 
   /**
@@ -221,14 +223,14 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D clamp(
-    final @Nonnull VectorM3D v,
+    final @Nonnull VectorReadable3D v,
     final double minimum,
     final double maximum,
     final @Nonnull VectorM3D out)
   {
-    final double x = Math.min(Math.max(v.x, minimum), maximum);
-    final double y = Math.min(Math.max(v.y, minimum), maximum);
-    final double z = Math.min(Math.max(v.z, minimum), maximum);
+    final double x = Math.min(Math.max(v.getXD(), minimum), maximum);
+    final double y = Math.min(Math.max(v.getYD(), minimum), maximum);
+    final double z = Math.min(Math.max(v.getZD(), minimum), maximum);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -253,14 +255,17 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D clampByVector(
-    final @Nonnull VectorM3D v,
-    final @Nonnull VectorM3D minimum,
-    final @Nonnull VectorM3D maximum,
+    final @Nonnull VectorReadable3D v,
+    final @Nonnull VectorReadable3D minimum,
+    final @Nonnull VectorReadable3D maximum,
     final @Nonnull VectorM3D out)
   {
-    final double x = Math.min(Math.max(v.x, minimum.x), maximum.x);
-    final double y = Math.min(Math.max(v.y, minimum.y), maximum.y);
-    final double z = Math.min(Math.max(v.z, minimum.z), maximum.z);
+    final double x =
+      Math.min(Math.max(v.getXD(), minimum.getXD()), maximum.getXD());
+    final double y =
+      Math.min(Math.max(v.getYD(), minimum.getYD()), maximum.getYD());
+    final double z =
+      Math.min(Math.max(v.getZD(), minimum.getZD()), maximum.getZD());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -284,8 +289,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM3D clampByVectorInPlace(
     final @Nonnull VectorM3D v,
-    final @Nonnull VectorM3D minimum,
-    final @Nonnull VectorM3D maximum)
+    final @Nonnull VectorReadable3D minimum,
+    final @Nonnull VectorReadable3D maximum)
   {
     return VectorM3D.clampByVector(v, minimum, maximum, v);
   }
@@ -330,13 +335,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D clampMaximum(
-    final @Nonnull VectorM3D v,
+    final @Nonnull VectorReadable3D v,
     final double maximum,
     final @Nonnull VectorM3D out)
   {
-    final double x = Math.min(v.x, maximum);
-    final double y = Math.min(v.y, maximum);
-    final double z = Math.min(v.z, maximum);
+    final double x = Math.min(v.getXD(), maximum);
+    final double y = Math.min(v.getYD(), maximum);
+    final double z = Math.min(v.getZD(), maximum);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -359,13 +364,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D clampMaximumByVector(
-    final @Nonnull VectorM3D v,
-    final @Nonnull VectorM3D maximum,
+    final @Nonnull VectorReadable3D v,
+    final @Nonnull VectorReadable3D maximum,
     final @Nonnull VectorM3D out)
   {
-    final double x = Math.min(v.x, maximum.x);
-    final double y = Math.min(v.y, maximum.y);
-    final double z = Math.min(v.z, maximum.z);
+    final double x = Math.min(v.getXD(), maximum.getXD());
+    final double y = Math.min(v.getYD(), maximum.getYD());
+    final double z = Math.min(v.getZD(), maximum.getZD());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -387,7 +392,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM3D clampMaximumByVectorInPlace(
     final @Nonnull VectorM3D v,
-    final @Nonnull VectorM3D maximum)
+    final @Nonnull VectorReadable3D maximum)
   {
     return VectorM3D.clampMaximumByVector(v, maximum, v);
   }
@@ -430,13 +435,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D clampMinimum(
-    final @Nonnull VectorM3D v,
+    final @Nonnull VectorReadable3D v,
     final double minimum,
     final @Nonnull VectorM3D out)
   {
-    final double x = Math.max(v.x, minimum);
-    final double y = Math.max(v.y, minimum);
-    final double z = Math.max(v.z, minimum);
+    final double x = Math.max(v.getXD(), minimum);
+    final double y = Math.max(v.getYD(), minimum);
+    final double z = Math.max(v.getZD(), minimum);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -459,13 +464,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D clampMinimumByVector(
-    final @Nonnull VectorM3D v,
-    final @Nonnull VectorM3D minimum,
+    final @Nonnull VectorReadable3D v,
+    final @Nonnull VectorReadable3D minimum,
     final @Nonnull VectorM3D out)
   {
-    final double x = Math.max(v.x, minimum.x);
-    final double y = Math.max(v.y, minimum.y);
-    final double z = Math.max(v.z, minimum.z);
+    final double x = Math.max(v.getXD(), minimum.getXD());
+    final double y = Math.max(v.getYD(), minimum.getYD());
+    final double z = Math.max(v.getZD(), minimum.getZD());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -488,7 +493,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM3D clampMinimumByVectorInPlace(
     final @Nonnull VectorM3D v,
-    final @Nonnull VectorM3D minimum)
+    final @Nonnull VectorReadable3D minimum)
   {
     return VectorM3D.clampMinimumByVector(v, minimum, v);
   }
@@ -550,13 +555,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D crossProduct(
-    final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1,
+    final @Nonnull VectorReadable3D v0,
+    final @Nonnull VectorReadable3D v1,
     final @Nonnull VectorM3D out)
   {
-    final double x = (v0.y * v1.z) - (v0.z * v1.y);
-    final double y = (v0.z * v1.x) - (v0.x * v1.z);
-    final double z = (v0.x * v1.y) - (v0.y * v1.x);
+    final double x = (v0.getYD() * v1.getZD()) - (v0.getZD() * v1.getYD());
+    final double y = (v0.getZD() * v1.getXD()) - (v0.getXD() * v1.getZD());
+    final double z = (v0.getXD() * v1.getYD()) - (v0.getYD() * v1.getXD());
     out.x = x;
     out.y = y;
     out.z = z;
@@ -576,8 +581,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static double distance(
-    final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1)
+    final @Nonnull VectorReadable3D v0,
+    final @Nonnull VectorReadable3D v1)
   {
     final @Nonnull VectorM3D vr = new VectorM3D();
     return VectorM3D.magnitude(VectorM3D.subtract(v0, v1, vr));
@@ -596,12 +601,12 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static double dotProduct(
-    final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1)
+    final @Nonnull VectorReadable3D v0,
+    final @Nonnull VectorReadable3D v1)
   {
-    final double x = v0.x * v1.x;
-    final double y = v0.y * v1.y;
-    final double z = v0.z * v1.z;
+    final double x = v0.getXD() * v1.getXD();
+    final double y = v0.getYD() * v1.getYD();
+    final double z = v0.getZD() * v1.getZD();
     return x + y + z;
   }
 
@@ -631,8 +636,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D interpolateLinear(
-    final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1,
+    final @Nonnull VectorReadable3D v0,
+    final @Nonnull VectorReadable3D v1,
     final double alpha,
     final @Nonnull VectorM3D r)
   {
@@ -657,7 +662,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static double magnitude(
-    final @Nonnull VectorM3D v)
+    final @Nonnull VectorReadable3D v)
   {
     return Math.sqrt(VectorM3D.magnitudeSquared(v));
   }
@@ -672,7 +677,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static double magnitudeSquared(
-    final @Nonnull VectorM3D v)
+    final @Nonnull VectorReadable3D v)
   {
     return VectorM3D.dotProduct(v, v);
   }
@@ -691,7 +696,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D normalize(
-    final @Nonnull VectorM3D v,
+    final @Nonnull VectorReadable3D v,
     final @Nonnull VectorM3D out)
   {
     final double m = VectorM3D.magnitudeSquared(v);
@@ -699,9 +704,9 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
       final double reciprocal = 1.0 / Math.sqrt(m);
       return VectorM3D.scale(v, reciprocal, out);
     }
-    out.x = v.x;
-    out.y = v.y;
-    out.z = v.z;
+    out.x = v.getXD();
+    out.y = v.getYD();
+    out.z = v.getZD();
     return out;
   }
 
@@ -723,6 +728,56 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * .
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * 
+   * @since 5.0.0
+   */
+
+  public static @Nonnull Pair<VectorM3D, VectorM3D> orthoNormalize(
+    final @Nonnull VectorReadable3D v0,
+    final @Nonnull VectorReadable3D v1)
+  {
+    final VectorM3D v0n = new VectorM3D();
+    final VectorM3D vr = new VectorM3D();
+    final VectorM3D vp = new VectorM3D();
+
+    VectorM3D.normalize(v0, v0n);
+    VectorM3D.scale(v0n, VectorM3D.dotProduct(v1, v0n), vp);
+    VectorM3D.normalizeInPlace(VectorM3D.subtract(v1, vp, vr));
+    return new Pair<VectorM3D, VectorM3D>(v0n, vr);
+  }
+
+  /**
+   * Orthonormalize and the vectors <code>v0</code> and <code>v1</code>,
+   * modifying them in-place.
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @since 5.0.0
+   */
+
+  public static void orthoNormalizeInPlace(
+    final @Nonnull VectorM3D v0,
+    final @Nonnull VectorM3D v1)
+  {
+    final VectorM3D projection = new VectorM3D();
+
+    VectorM3D.normalizeInPlace(v0);
+    VectorM3D.scale(v0, VectorM3D.dotProduct(v1, v0), projection);
+    VectorM3D.subtractInPlace(v1, projection);
+    VectorM3D.normalizeInPlace(v1);
+  }
+
+  /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>, saving the result in <code>r</code>.
    * 
@@ -730,8 +785,8 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D projection(
-    final @Nonnull VectorM3D p,
-    final @Nonnull VectorM3D q,
+    final @Nonnull VectorReadable3D p,
+    final @Nonnull VectorReadable3D q,
     final @Nonnull VectorM3D r)
   {
     final double dot = VectorM3D.dotProduct(p, q);
@@ -756,13 +811,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D scale(
-    final @Nonnull VectorM3D v,
+    final @Nonnull VectorReadable3D v,
     final double r,
     final @Nonnull VectorM3D out)
   {
-    final double x = v.x * r;
-    final double y = v.y * r;
-    final double z = v.z * r;
+    final double x = v.getXD() * r;
+    final double y = v.getYD() * r;
+    final double z = v.getZD() * r;
     out.x = x;
     out.y = y;
     out.z = z;
@@ -803,13 +858,13 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    */
 
   public static @Nonnull VectorM3D subtract(
-    final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1,
+    final @Nonnull VectorReadable3D v0,
+    final @Nonnull VectorReadable3D v1,
     final @Nonnull VectorM3D out)
   {
-    final double x = v0.x - v1.x;
-    final double y = v0.y - v1.y;
-    final double z = v0.z - v1.z;
+    final double x = v0.getXD() - v1.getXD();
+    final double y = v0.getYD() - v1.getYD();
+    final double z = v0.getZD() - v1.getZD();
     out.x = x;
     out.y = y;
     out.z = z;
@@ -830,7 +885,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
   public static @Nonnull VectorM3D subtractInPlace(
     final @Nonnull VectorM3D v0,
-    final @Nonnull VectorM3D v1)
+    final @Nonnull VectorReadable3D v1)
   {
     return VectorM3D.subtract(v0, v1, v0);
   }

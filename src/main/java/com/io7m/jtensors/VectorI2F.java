@@ -19,8 +19,9 @@ package com.io7m.jtensors;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
-import com.io7m.jaux.ApproximatelyEqualDouble;
-import com.io7m.jaux.ApproximatelyEqualFloat;
+import com.io7m.jaux.AlmostEqualFloat;
+import com.io7m.jaux.AlmostEqualFloat.ContextRelative;
+import com.io7m.jaux.functional.Pair;
 
 /**
  * A two-dimensional immutable vector type with single precision elements.
@@ -44,10 +45,10 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F add(
-    final @Nonnull VectorI2F v0,
-    final @Nonnull VectorI2F v1)
+    final @Nonnull VectorReadable2F v0,
+    final @Nonnull VectorReadable2F v1)
   {
-    return new VectorI2F(v0.x + v1.x, v0.y + v1.y);
+    return new VectorI2F(v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF());
   }
 
   /**
@@ -65,11 +66,38 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F addScaled(
-    final @Nonnull VectorI2F v0,
-    final @Nonnull VectorI2F v1,
-    final float r)
+    final @Nonnull VectorReadable2F v0,
+    final @Nonnull VectorReadable2F v1,
+    final double r)
   {
     return VectorI2F.add(v0, VectorI2F.scale(v1, r));
+  }
+
+  /**
+   * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
+   * are equal to within the degree of error given in <code>context</code>.
+   * 
+   * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
+   * 
+   * @param context
+   *          The equality context
+   * @param qa
+   *          The left input vector
+   * @param qb
+   *          The right input vector
+   * @since 5.0.0
+   */
+
+  public static boolean almostEqual(
+    final @Nonnull ContextRelative context,
+    final @Nonnull VectorReadable2F qa,
+    final @Nonnull VectorReadable2F qb)
+  {
+    final boolean xs =
+      AlmostEqualFloat.almostEqual(context, qa.getXF(), qb.getXF());
+    final boolean ys =
+      AlmostEqualFloat.almostEqual(context, qa.getYF(), qb.getYF());
+    return xs && ys;
   }
 
   /**
@@ -84,59 +112,17 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @return The angle between the two vectors, in radians.
    */
 
-  public static float angle(
-    final @Nonnull VectorI2F v0,
-    final @Nonnull VectorI2F v1)
+  public static double angle(
+    final @Nonnull VectorReadable2F v0,
+    final @Nonnull VectorReadable2F v1)
   {
-    final float m0 = VectorI2F.magnitude(v0);
-    final float m1 = VectorI2F.magnitude(v1);
-    return (float) Math.acos(VectorI2F.dotProduct(v0, v1) / (m0 * m1));
-  }
-
-  /**
-   * Calculate the angle between the vectors <code>v0</code> and
-   * <code>v1</code> in degrees.
-   * 
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * 
-   * @return The angle between the two vectors, in degrees.
-   */
-
-  public static float angleDegrees(
-    final @Nonnull VectorI2F v0,
-    final @Nonnull VectorI2F v1)
-  {
-    return (float) Math.toDegrees(VectorI2F.angle(v0, v1));
-  }
-
-  /**
-   * Determine whether or not the elements of the two vectors <code>v0</code>
-   * and <code>v1</code> are approximately equal.
-   * 
-   * @see ApproximatelyEqualFloat
-   * 
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * 
-   * @return true, iff <code>v0</code> is approximately equal to
-   *         <code>v1</code> , within an appropriate degree of error for
-   *         single precision floating point values.
-   */
-
-  public static boolean approximatelyEqual(
-    final @Nonnull VectorI2F v0,
-    final @Nonnull VectorI2F v1)
-  {
-    final boolean ex =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
-    final boolean ey =
-      ApproximatelyEqualDouble.approximatelyEqual(v0.y, v1.y);
-    return ex && ey;
+    final double m0 = VectorI2F.magnitude(v0);
+    final double m1 = VectorI2F.magnitude(v1);
+    final double dp =
+      Math.min(Math.max(-1.0, VectorI2F.dotProduct(v0, v1)), 1.0);
+    final double f = m0 * m1;
+    final double r = dp / f;
+    return Math.acos(r);
   }
 
   /**
@@ -155,12 +141,12 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F clamp(
-    final @Nonnull VectorI2F v,
+    final @Nonnull VectorReadable2F v,
     final float minimum,
     final float maximum)
   {
-    final float x = Math.min(Math.max(v.x, minimum), maximum);
-    final float y = Math.min(Math.max(v.y, minimum), maximum);
+    final float x = Math.min(Math.max(v.getXF(), minimum), maximum);
+    final float y = Math.min(Math.max(v.getYF(), minimum), maximum);
     return new VectorI2F(x, y);
   }
 
@@ -180,12 +166,14 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F clampByVector(
-    final @Nonnull VectorI2F v,
-    final @Nonnull VectorI2F minimum,
-    final @Nonnull VectorI2F maximum)
+    final @Nonnull VectorReadable2F v,
+    final @Nonnull VectorReadable2F minimum,
+    final @Nonnull VectorReadable2F maximum)
   {
-    final float x = Math.min(Math.max(v.x, minimum.x), maximum.x);
-    final float y = Math.min(Math.max(v.y, minimum.y), maximum.y);
+    final float x =
+      Math.min(Math.max(v.getXF(), minimum.getXF()), maximum.getXF());
+    final float y =
+      Math.min(Math.max(v.getYF(), minimum.getYF()), maximum.getYF());
     return new VectorI2F(x, y);
   }
 
@@ -202,11 +190,11 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F clampMaximum(
-    final @Nonnull VectorI2F v,
+    final @Nonnull VectorReadable2F v,
     final float maximum)
   {
-    final float x = Math.min(v.x, maximum);
-    final float y = Math.min(v.y, maximum);
+    final float x = Math.min(v.getXF(), maximum);
+    final float y = Math.min(v.getYF(), maximum);
     return new VectorI2F(x, y);
   }
 
@@ -223,11 +211,11 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F clampMaximumByVector(
-    final @Nonnull VectorI2F v,
-    final @Nonnull VectorI2F maximum)
+    final @Nonnull VectorReadable2F v,
+    final @Nonnull VectorReadable2F maximum)
   {
-    final float x = Math.min(v.x, maximum.x);
-    final float y = Math.min(v.y, maximum.y);
+    final float x = Math.min(v.getXF(), maximum.getXF());
+    final float y = Math.min(v.getYF(), maximum.getYF());
     return new VectorI2F(x, y);
   }
 
@@ -245,11 +233,11 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F clampMinimum(
-    final @Nonnull VectorI2F v,
+    final @Nonnull VectorReadable2F v,
     final float minimum)
   {
-    final float x = Math.max(v.x, minimum);
-    final float y = Math.max(v.y, minimum);
+    final float x = Math.max(v.getXF(), minimum);
+    final float y = Math.max(v.getYF(), minimum);
     return new VectorI2F(x, y);
   }
 
@@ -266,11 +254,11 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F clampMinimumByVector(
-    final @Nonnull VectorI2F v,
-    final @Nonnull VectorI2F minimum)
+    final @Nonnull VectorReadable2F v,
+    final @Nonnull VectorReadable2F minimum)
   {
-    final float x = Math.max(v.x, minimum.x);
-    final float y = Math.max(v.y, minimum.y);
+    final float x = Math.max(v.getXF(), minimum.getXF());
+    final float y = Math.max(v.getYF(), minimum.getYF());
     return new VectorI2F(x, y);
   }
 
@@ -286,9 +274,9 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @return The distance between the two vectors
    */
 
-  public static float distance(
-    final @Nonnull VectorI2F v0,
-    final @Nonnull VectorI2F v1)
+  public static double distance(
+    final @Nonnull VectorReadable2F v0,
+    final @Nonnull VectorReadable2F v1)
   {
     return VectorI2F.magnitude(VectorI2F.subtract(v0, v1));
   }
@@ -305,12 +293,12 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @return The scalar product of the two vectors
    */
 
-  public static float dotProduct(
-    final @Nonnull VectorI2F v0,
-    final @Nonnull VectorI2F v1)
+  public static double dotProduct(
+    final @Nonnull VectorReadable2F v0,
+    final @Nonnull VectorReadable2F v1)
   {
-    final float x = v0.x * v1.x;
-    final float y = v0.y * v1.y;
+    final double x = v0.getXF() * v1.getXF();
+    final double y = v0.getYF() * v1.getYF();
     return x + y;
   }
 
@@ -338,12 +326,13 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F interpolateLinear(
-    final @Nonnull VectorI2F v0,
-    final @Nonnull VectorI2F v1,
+    final @Nonnull VectorReadable2F v0,
+    final @Nonnull VectorReadable2F v1,
     final float alpha)
   {
-    final @Nonnull VectorI2F w0 = VectorI2F.scale(v0, (float) (1.0 - alpha));
-    final @Nonnull VectorI2F w1 = VectorI2F.scale(v1, alpha);
+    final @Nonnull VectorReadable2F w0 =
+      VectorI2F.scale(v0, (float) (1.0 - alpha));
+    final @Nonnull VectorReadable2F w1 = VectorI2F.scale(v1, alpha);
     return VectorI2F.add(w0, w1);
   }
 
@@ -358,10 +347,10 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @return The magnitude of the input vector
    */
 
-  public static float magnitude(
-    final @Nonnull VectorI2F v)
+  public static double magnitude(
+    final @Nonnull VectorReadable2F v)
   {
-    return (float) Math.sqrt(VectorI2F.magnitudeSquared(v));
+    return Math.sqrt(VectorI2F.magnitudeSquared(v));
   }
 
   /**
@@ -372,8 +361,8 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    * @return The squared magnitude of the input vector
    */
 
-  public static float magnitudeSquared(
-    final @Nonnull VectorI2F v)
+  public static double magnitudeSquared(
+    final @Nonnull VectorReadable2F v)
   {
     return VectorI2F.dotProduct(v, v);
   }
@@ -390,14 +379,40 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F normalize(
-    final @Nonnull VectorI2F v)
+    final @Nonnull VectorReadable2F v)
   {
-    final float m = VectorI2F.magnitude(v);
+    final double m = VectorI2F.magnitudeSquared(v);
     if (m > 0) {
-      final double reciprocal = 1.0 / Math.sqrt(m);
-      return VectorI2F.scale(v, (float) reciprocal);
+      final double sq = Math.sqrt(m);
+      final double r = 1.0 / sq;
+      return VectorI2F.scale(v, r);
     }
-    return v;
+    return new VectorI2F(v);
+  }
+
+  /**
+   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * .
+   * 
+   * @see <a
+   *      href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">Gram-Schmidt
+   *      process</a>
+   * 
+   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * 
+   * @since 5.0.0
+   */
+
+  public static @Nonnull Pair<VectorI2F, VectorI2F> orthoNormalize(
+    final @Nonnull VectorReadable2F v0,
+    final @Nonnull VectorReadable2F v1)
+  {
+    final VectorI2F v0n = VectorI2F.normalize(v0);
+    final VectorI2F projection =
+      VectorI2F.scale(v0n, VectorI2F.dotProduct(v1, v0n));
+    final VectorI2F vr =
+      VectorI2F.normalize(VectorI2F.subtract(v1, projection));
+    return new Pair<VectorI2F, VectorI2F>(v0n, vr);
   }
 
   /**
@@ -408,12 +423,12 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F projection(
-    final @Nonnull VectorI2F p,
-    final @Nonnull VectorI2F q)
+    final @Nonnull VectorReadable2F p,
+    final @Nonnull VectorReadable2F q)
   {
-    final float dot = VectorI2F.dotProduct(p, q);
-    final float qms = VectorI2F.magnitudeSquared(q);
-    final float s = dot / qms;
+    final double dot = VectorI2F.dotProduct(p, q);
+    final double qms = VectorI2F.magnitudeSquared(q);
+    final double s = dot / qms;
     return VectorI2F.scale(p, s);
   }
 
@@ -429,10 +444,12 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F scale(
-    final @Nonnull VectorI2F v,
-    final float r)
+    final @Nonnull VectorReadable2F v,
+    final double r)
   {
-    return new VectorI2F(v.x * r, v.y * r);
+    final double x = v.getXF() * r;
+    final double y = v.getYF() * r;
+    return new VectorI2F((float) x, (float) y);
   }
 
   /**
@@ -447,20 +464,23 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F subtract(
-    final @Nonnull VectorI2F v0,
-    final @Nonnull VectorI2F v1)
+    final @Nonnull VectorReadable2F v0,
+    final @Nonnull VectorReadable2F v1)
   {
-    return new VectorI2F(v0.x - v1.x, v0.y - v1.y);
+    return new VectorI2F(v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF());
   }
 
-  public final float                     x;
-  public final float                     y;
+  public final float                            x;
+
+  public final float                            y;
 
   /**
    * The zero vector.
    */
 
-  public static final @Nonnull VectorI2F ZERO = new VectorI2F(0.0f, 0.0f);
+  public static final @Nonnull VectorReadable2F ZERO = new VectorI2F(
+                                                       0.0f,
+                                                       0.0f);
 
   /**
    * Calculate the absolute value of the vector <code>v</code>.
@@ -472,9 +492,9 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
    */
 
   public static @Nonnull VectorI2F absolute(
-    final @Nonnull VectorI2F v)
+    final @Nonnull VectorReadable2F v)
   {
-    return new VectorI2F(Math.abs(v.x), Math.abs(v.y));
+    return new VectorI2F(Math.abs(v.getXF()), Math.abs(v.getYF()));
   }
 
   /**
@@ -486,18 +506,6 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
   {
     this.x = 0.0f;
     this.y = 0.0f;
-  }
-
-  /**
-   * Construct a vector initialized with the given values.
-   */
-
-  public VectorI2F(
-    final double x,
-    final double y)
-  {
-    this.x = (float) x;
-    this.y = (float) y;
   }
 
   /**
