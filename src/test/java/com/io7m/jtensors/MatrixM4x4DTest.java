@@ -2,7 +2,6 @@ package com.io7m.jtensors;
 
 import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
-import java.nio.ReadOnlyBufferException;
 
 import junit.framework.Assert;
 
@@ -236,26 +235,6 @@ public class MatrixM4x4DTest
     final DoubleBuffer b = MatrixM4x4D.doubleBuffer(m);
 
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
-  }
-
-  @SuppressWarnings("static-method") @Test(
-    expected = ReadOnlyBufferException.class) public
-    void
-    testBufferReadOnly()
-  {
-    final MatrixM4x4D m = new MatrixM4x4D();
-    final DoubleBuffer b = MatrixM4x4D.doubleBuffer(m);
-    b.put(0, 0.0f);
-  }
-
-  @SuppressWarnings("static-method") @Test(
-    expected = ReadOnlyBufferException.class) public
-    void
-    testBufferReadOnlyInterface()
-  {
-    final MatrixM4x4D m = new MatrixM4x4D();
-    final DoubleBuffer b = m.getDoubleBuffer();
-    b.put(0, 0.0f);
   }
 
   @SuppressWarnings("static-method") @Test public void testCopy()
@@ -2406,7 +2385,6 @@ public class MatrixM4x4DTest
     {
       final DoubleBuffer b = MatrixM4x4D.doubleBuffer(m);
 
-      Assert.assertTrue(b.isReadOnly());
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
 
       Assert.assertTrue(b.get(0) == 0.0);
@@ -3136,7 +3114,6 @@ public class MatrixM4x4DTest
     {
       final DoubleBuffer b = MatrixM4x4D.doubleBuffer(out);
 
-      Assert.assertTrue(b.isReadOnly());
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
 
       Assert.assertTrue(b.get(0) == 1.0);

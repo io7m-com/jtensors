@@ -27,7 +27,7 @@ import javax.annotation.Nonnull;
 public interface MatrixReadableF
 {
   /**
-   * Return a read-only view of the buffer that backs this matrix.
+   * Return a view of the buffer that backs this matrix.
    */
 
   public @Nonnull FloatBuffer getFloatBuffer();

@@ -2,7 +2,6 @@ package com.io7m.jtensors;
 
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-import java.nio.ReadOnlyBufferException;
 
 import junit.framework.Assert;
 
@@ -165,26 +164,6 @@ public class MatrixM3x3FTest
     final FloatBuffer b = MatrixM3x3F.floatBuffer(m);
 
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
-  }
-
-  @SuppressWarnings("static-method") @Test(
-    expected = ReadOnlyBufferException.class) public
-    void
-    testBufferReadOnly()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-    final FloatBuffer b = MatrixM3x3F.floatBuffer(m);
-    b.put(0, 0.0f);
-  }
-
-  @SuppressWarnings("static-method") @Test(
-    expected = ReadOnlyBufferException.class) public
-    void
-    testBufferReadOnlyInterface()
-  {
-    final MatrixM3x3F m = new MatrixM3x3F();
-    final FloatBuffer b = m.getFloatBuffer();
-    b.put(0, 0.0f);
   }
 
   @SuppressWarnings("static-method") @Test public void testCopy()
@@ -986,7 +965,6 @@ public class MatrixM3x3FTest
     {
       final FloatBuffer b = MatrixM3x3F.floatBuffer(m);
 
-      Assert.assertTrue(b.isReadOnly());
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
 
       Assert.assertTrue(b.get(0) == 0.0);
@@ -1284,7 +1262,6 @@ public class MatrixM3x3FTest
     {
       final FloatBuffer b = MatrixM3x3F.floatBuffer(out);
 
-      Assert.assertTrue(b.isReadOnly());
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
 
       Assert.assertEquals(1.0f, b.get(0));
