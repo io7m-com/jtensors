@@ -29,3 +29,8 @@
 2013-04-06:io7m-jtensors-5.0.0.jar:153210
 2013-04-06:io7m-jtensors-5.0.0-documentation.zip:949226
 2013-04-06:io7m-jtensors-5.0.0.zip:744610
+2013-07-11:io7m-jtensors-5.1.0.jar:153343
+2013-07-11:io7m-jtensors-5.1.0-sources.jar:145879
+2013-07-11:io7m-jtensors-5.1.0-javadoc.jar:510094
+2013-07-11:io7m-jtensors-5.1.0.zip:752577
+2013-07-11:io7m-jtensors-5.1.0-documentation.zip:951011

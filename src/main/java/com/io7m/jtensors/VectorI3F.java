@@ -443,7 +443,7 @@ import com.io7m.jaux.functional.Pair;
   }
 
   /**
-   * Subtract the vector <code>v0</code> from the vector <code>v1</code>.
+   * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
    * 
    * @param v0
    *          The left input vector
@@ -463,18 +463,18 @@ import com.io7m.jaux.functional.Pair;
       v0.getZF() - v1.getZF());
   }
 
-  public final float                            x;
-  public final float                            y;
-  public final float                            z;
+  public final float                     x;
+  public final float                     y;
+  public final float                     z;
 
   /**
    * The zero vector.
    */
 
-  public static final @Nonnull VectorReadable3F ZERO = new VectorI3F(
-                                                       0.0f,
-                                                       0.0f,
-                                                       0.0f);
+  public static final @Nonnull VectorI3F ZERO = new VectorI3F(
+                                                0.0f,
+                                                0.0f,
+                                                0.0f);
 
   /**
    * Calculate the absolute value of the vector <code>v</code>.

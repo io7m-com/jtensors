@@ -434,7 +434,7 @@ import com.io7m.jaux.functional.Pair;
   }
 
   /**
-   * Subtract the vector <code>v0</code> from the vector <code>v1</code>.
+   * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
    * 
    * @param v0
    *          The left input vector
@@ -455,16 +455,16 @@ import com.io7m.jaux.functional.Pair;
       v0.getWD() - v1.getWD());
   }
 
-  public final double                           x;
-  public final double                           y;
-  public final double                           z;
-  public final double                           w;
+  public final double                    x;
+  public final double                    y;
+  public final double                    z;
+  public final double                    w;
 
   /**
    * The zero vector.
    */
 
-  public static final @Nonnull VectorReadable4D ZERO;
+  public static final @Nonnull VectorI4D ZERO;
 
   static {
     ZERO = new VectorI4D(0.0, 0.0, 0.0, 0.0);
