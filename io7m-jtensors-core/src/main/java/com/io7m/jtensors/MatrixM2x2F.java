@@ -810,25 +810,6 @@ public final class MatrixM2x2F implements
     return m;
   }
 
-  /**
-   * Transpose the given matrix <code>m</code>, writing the resulting matrix
-   * to <code>out</code>.
-   *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
-   * @return <code>out</code>
-   */
-
-  public final static MatrixM2x2F transpose(
-    final  MatrixReadable2x2FType m,
-    final  MatrixM2x2F out)
-  {
-    MatrixM2x2F.copy(m, out);
-    return MatrixM2x2F.transpose(out);
-  }
-
   @SuppressWarnings("unused") private final ByteBuffer data;
   private final FloatBuffer                            view;
 
