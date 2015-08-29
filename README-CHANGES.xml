@@ -3,6 +3,65 @@
   <c:project>io7m-jtensors</c:project>
 
   <c:release ticket-system="com.io7m.fossil.jtensors">
+    <c:date>2012-06-19</c:date>
+    <c:version>2.0.0</c:version>
+
+    <c:item>
+      <c:date>2012-06-19</c:date>
+      <c:type-code-new/>
+      <c:summary>Switch to maven for builds</c:summary>
+    </c:item>
+ 
+    <c:item>
+      <c:date>2012-05-12</c:date>
+      <c:type-code-new/>
+      <c:summary>ApproximatelyEqual* moved to io7m-jaux</c:summary>
+    </c:item>
+ 
+    <c:item>
+      <c:date>2012-05-05</c:date>
+      <c:type-code-new/>
+      <c:summary>VectorI*.zero renamed to ZERO and implemented by all vector types</c:summary>
+    </c:item>
+ 
+    <c:item>
+      <c:date>2012-05-05</c:date>
+      <c:type-code-fix/>
+      <c:summary>MatrixM4x4D.multiply -> MatrixM4x4D.multiplyVector4DWithContext</c:summary>
+    </c:item>
+ 
+    <c:item>
+      <c:date>2012-05-05</c:date>
+      <c:type-code-fix/>
+      <c:summary>MatrixM4x4D.multiply -> MatrixM4x4D.multiplyVector4D</c:summary>
+    </c:item>
+ 
+    <c:item>
+      <c:date>2012-05-05</c:date>
+      <c:type-code-new/>
+      <c:summary>Increase test coverage for integer vectors</c:summary>
+    </c:item>
+ 
+    <c:item>
+      <c:date>2012-05-05</c:date>
+      <c:type-code-new/>
+      <c:summary>Add Matrix3x3* makeTranslation functions</c:summary>
+    </c:item>
+ 
+    <c:item>
+      <c:date>2012-04-20</c:date>
+      <c:type-code-new/>
+      <c:summary>Add integer vector methods for Matrix4x4*</c:summary>
+    </c:item>
+ 
+    <c:item>
+      <c:date>2012-04-20</c:date>
+      <c:type-code-fix/>
+      <c:summary>Rename methods to indicate the type of vectors used, removing ambiguity. All VectorReadable* interfaces are affected, as well as Matrix* methods that previously specified a type name.</c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release ticket-system="com.io7m.fossil.jtensors">
     <c:date>2012-03-15</c:date>
     <c:version>1.0.1</c:version>
     <c:item>
