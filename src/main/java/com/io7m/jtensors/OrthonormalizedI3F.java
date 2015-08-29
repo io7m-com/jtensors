@@ -37,9 +37,9 @@ import javax.annotation.concurrent.Immutable;
    */
 
   public OrthonormalizedI3F(
-    final @Nonnull VectorI3F v0,
-    final @Nonnull VectorI3F v1,
-    final @Nonnull VectorI3F v2)
+    final @Nonnull VectorReadable3F v0,
+    final @Nonnull VectorReadable3F v1,
+    final @Nonnull VectorReadable3F v2)
   {
     this.rv0 = VectorI3F.normalize(v0);
 
@@ -87,8 +87,8 @@ import javax.annotation.concurrent.Immutable;
 
   /**
    * Retrieve the first vector passed to
-   * {@link #OrthonormalizedI3F(VectorI3F, VectorI3F, VectorI3F)},
-   * orthonormalized with respect to the other two vectors.
+   * {@link #OrthonormalizedI3F(VectorReadable3F, VectorReadable3F, VectorReadable3F)}
+   * , orthonormalized with respect to the other two vectors.
    */
 
   public @Nonnull VectorI3F getV0()
@@ -98,8 +98,8 @@ import javax.annotation.concurrent.Immutable;
 
   /**
    * Retrieve the second vector passed to
-   * {@link #OrthonormalizedI3F(VectorI3F, VectorI3F, VectorI3F)},
-   * orthonormalized with respect to the other two vectors.
+   * {@link #OrthonormalizedI3F(VectorReadable3F, VectorReadable3F, VectorReadable3F)}
+   * , orthonormalized with respect to the other two vectors.
    */
 
   public @Nonnull VectorI3F getV1()
@@ -109,8 +109,8 @@ import javax.annotation.concurrent.Immutable;
 
   /**
    * Retrieve the third vector passed to
-   * {@link #OrthonormalizedI3F(VectorI3F, VectorI3F, VectorI3F)},
-   * orthonormalized with respect to the other two vectors.
+   * {@link #OrthonormalizedI3F(VectorReadable3F, VectorReadable3F, VectorReadable3F)}
+   * , orthonormalized with respect to the other two vectors.
    */
 
   public @Nonnull VectorI3F getV2()
