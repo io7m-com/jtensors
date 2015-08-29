@@ -621,8 +621,8 @@ public final class VectorM3F implements VectorReadable3FType, VectorWritable3FTy
    * such that:
    *
    * <ul>
-   * <li><code>interpolateLinear(v0, v1, 0.0, r) -&gt; r = v0</code></li>
-   * <li><code>interpolateLinear(v0, v1, 1.0, r) -&gt; r = v1</code></li>
+   * <li>{@code interpolateLinear(v0, v1, 0.0, r) -> r = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -> r = v1}</li>
    * </ul>
    *
    * @param v0

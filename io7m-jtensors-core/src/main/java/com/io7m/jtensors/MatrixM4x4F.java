@@ -42,6 +42,10 @@ import com.io7m.jnull.Nullable;
  * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed for
  * the derivations of most of the code in this class (ISBN: 1-58450-277-0).
  * </p>
+ * <p>
+ * See <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>
+ * for the three <i>elementary</i> operations defined on matrices.
+ * </p>
  */
 
 public final class MatrixM4x4F implements
@@ -230,11 +234,9 @@ public final class MatrixM4x4F implements
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>out</code>.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
    *
    * @param m
@@ -280,11 +282,9 @@ public final class MatrixM4x4F implements
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>m</code>.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
    *
    * @param m
@@ -335,11 +335,9 @@ public final class MatrixM4x4F implements
    * storage preallocated in <code>context</code> to avoid any new
    * allocations.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
    *
    * @param context
@@ -483,11 +481,9 @@ public final class MatrixM4x4F implements
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>out</code>.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
    *
    * @param m
@@ -523,11 +519,9 @@ public final class MatrixM4x4F implements
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>m</code>.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
    *
    * @param m
@@ -554,11 +548,9 @@ public final class MatrixM4x4F implements
    * function uses storage preallocated in <code>context</code> to avoid
    * allocating memory.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
    *
    * @param context
@@ -605,11 +597,9 @@ public final class MatrixM4x4F implements
    * The function uses storage preallocated in <code>context</code> to avoid
    * allocating memory.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
    *
    * @param context
@@ -1908,17 +1898,15 @@ public final class MatrixM4x4F implements
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>out</code>.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
    *
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 &lt;= row &lt; 4).
+   *          The index of the row {@code (0 <= row < 4)}.
    * @param r
    *          The scaling value.
    * @param out
@@ -1946,17 +1934,15 @@ public final class MatrixM4x4F implements
    * Scale row <code>row</code> of the matrix <code>m</code> by <code>r</code>
    * , saving the result to row <code>r</code> of <code>m</code>.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
    *
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 &lt;= row &lt; 4).
+   *          The index of the row {@code (0 <= row < 4)}.
    * @param r
    *          The scaling value.
    * @return <code>out</code>
@@ -1978,11 +1964,9 @@ public final class MatrixM4x4F implements
    * uses preallocated storage in <code>context</code> to avoid allocating
    * memory.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
    *
    * @param context
@@ -1990,7 +1974,7 @@ public final class MatrixM4x4F implements
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 &lt;= row &lt; 4).
+   *          The index of the row {@code (0 <= row < 4)}.
    * @param r
    *          The scaling value.
    * @return <code>m</code>
@@ -2030,11 +2014,9 @@ public final class MatrixM4x4F implements
    * function uses preallocated storage in <code>context</code> to avoid
    * allocating memory.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
    *
    * @param context
@@ -2042,7 +2024,7 @@ public final class MatrixM4x4F implements
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 &lt;= row &lt; 4).
+   *          The index of the row {@code (0 <= row < 4)}.
    * @param r
    *          The scaling value.
    * @param out

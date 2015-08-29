@@ -254,8 +254,8 @@ public final class QuaternionM4F implements
    * amount <code>alpha</code>, such that:
    *
    * <ul>
-   * <li><code>interpolateLinear(q0, q1, 0.0, r) -&gt; r = q0</code></li>
-   * <li><code>interpolateLinear(q0, q1, 1.0, r) -&gt; r = q1</code></li>
+   * <li>{@code interpolateLinear(q0, q1, 0.0, r) -> r = q0}</li>
+   * <li>{@code interpolateLinear(q0, q1, 1.0, r) -> r = q1}</li>
    * </ul>
    *
    * @param q0

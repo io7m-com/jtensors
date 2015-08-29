@@ -2,8 +2,8 @@
 <c:changelog xmlns:c="http://schemas.io7m.com/changelog/2.0.0">
   <c:project>io7m-jtensors</c:project>
 
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2014-11-30</c:date>
+  <c:release c:ticket-system="com.github.io7m.jtensors">
+    <c:date>2015-08-29</c:date>
     <c:version>7.0.0</c:version>
     <c:item>
       <c:date>2014-11-29</c:date>
@@ -59,6 +59,26 @@
       <c:type-code-change/>
       <c:summary>
         Remove imperative Matrix*.rotate* functions to reduce the size of the API. Use r = Matrix*.makeRotation* and multiply m * r instead.
+      </c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release c:ticket-system="com.github.io7m.jtensors">
+    <c:date>2015-08-29</c:date>
+    <c:version>6.0.2</c:version>
+
+    <c:item>
+      <c:date>2015-08-29</c:date>
+      <c:type-code-fix/>
+      <c:summary>
+        Migrate to GitHub.
+      </c:summary>
+    </c:item>
+    <c:item>
+      <c:date>2015-08-29</c:date>
+      <c:type-code-fix/>
+      <c:summary>
+        Fix JavaDoc to cope with Java 8's doclint.
       </c:summary>
     </c:item>
   </c:release>
@@ -538,6 +558,10 @@
       <c:summary>Initial version</c:summary>
     </c:item>
   </c:release>
+
+  <c:ticket-system xml:id="com.github.io7m.jtensors">
+    <c:ticket-url>http://github.com/io7m/jtensors/issues/</c:ticket-url>
+  </c:ticket-system>
 
   <c:ticket-system xml:id="com.io7m.fossil.jtensors">
     <c:ticket-url>http://fossil.io7m.com/repo.cgi/io7m-jtensors/tktview?name=</c:ticket-url>
