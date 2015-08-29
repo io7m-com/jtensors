@@ -62,6 +62,8 @@ import com.io7m.jaux.functional.Option;
     for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
       out.view.put(index, m0_view.get(index) + m1_view.get(index));
     }
+
+    out.view.rewind();
     return out;
   }
 
@@ -151,6 +153,8 @@ import com.io7m.jaux.functional.Option;
 
     VectorM3D.addScaledInPlace(va, vb, r);
     MatrixM3x3D.setRowUnsafe(out, row_c, va);
+
+    out.view.rewind();
     return out;
   }
 
@@ -183,6 +187,8 @@ import com.io7m.jaux.functional.Option;
     for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
       output.view.put(index, source_view.get(index));
     }
+
+    output.view.rewind();
     return output;
   }
 
@@ -303,6 +309,8 @@ import com.io7m.jaux.functional.Option;
 
     MatrixM3x3D.setRowUnsafe(out, row_a, vb);
     MatrixM3x3D.setRowUnsafe(out, row_b, va);
+
+    out.view.rewind();
     return out;
   }
 
@@ -398,6 +406,8 @@ import com.io7m.jaux.functional.Option;
     MatrixM3x3D.set(out, 2, 2, (r0c0 * r1c1) - (r0c1 * r1c0));
 
     MatrixM3x3D.scaleInPlace(out, d_inv);
+
+    out.view.rewind();
     return new Option.Some<MatrixM3x3D>(out);
   }
 
@@ -437,6 +447,7 @@ import com.io7m.jaux.functional.Option;
   {
     out.setUnsafe(0, 2, v.getXD());
     out.setUnsafe(1, 2, v.getYD());
+    out.view.rewind();
     return out;
   }
 
@@ -457,6 +468,7 @@ import com.io7m.jaux.functional.Option;
   {
     out.setUnsafe(0, 2, v.getXI());
     out.setUnsafe(1, 2, v.getYI());
+    out.view.rewind();
     return out;
   }
 
@@ -535,6 +547,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(2, 1, r2c1);
     out.setUnsafe(2, 2, r2c2);
 
+    out.view.rewind();
     return out;
   }
 
@@ -641,6 +654,8 @@ import com.io7m.jaux.functional.Option;
     for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
       out.view.put(index, source_view.get(index) * r);
     }
+
+    out.view.rewind();
     return out;
   }
 
@@ -731,6 +746,8 @@ import com.io7m.jaux.functional.Option;
     VectorM3D.scaleInPlace(v, r);
 
     MatrixM3x3D.setRowUnsafe(out, row, v);
+
+    out.view.rewind();
     return out;
   }
 
@@ -746,6 +763,7 @@ import com.io7m.jaux.functional.Option;
     final double value)
   {
     m.view.put(MatrixM3x3D.indexChecked(row, column), value);
+    m.view.rewind();
     return m;
   }
 
@@ -762,6 +780,7 @@ import com.io7m.jaux.functional.Option;
     m.view.put(MatrixM3x3D.identity_row_0);
     m.view.put(MatrixM3x3D.identity_row_1);
     m.view.put(MatrixM3x3D.identity_row_2);
+    m.view.rewind();
     return m;
   }
 
@@ -788,6 +807,7 @@ import com.io7m.jaux.functional.Option;
     m.view.put(MatrixM3x3D.zero_row);
     m.view.put(MatrixM3x3D.zero_row);
     m.view.put(MatrixM3x3D.zero_row);
+    m.view.rewind();
     return m;
   }
 
@@ -823,6 +843,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
     out.setUnsafe(2, 2, out.getUnsafe(2, 2) + c2r2);
 
+    out.view.rewind();
     return out;
   }
 
@@ -876,6 +897,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(1, 2, out.getUnsafe(1, 2) + c2r1);
     out.setUnsafe(2, 2, out.getUnsafe(2, 2) + c2r2);
 
+    out.view.rewind();
     return out;
   }
 
@@ -916,6 +938,8 @@ import com.io7m.jaux.functional.Option;
     for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
       out.view.put(index, source_view.get(index));
     }
+
+    out.view.rewind();
     return MatrixM3x3D.transposeInPlace(out);
   }
 
@@ -940,6 +964,8 @@ import com.io7m.jaux.functional.Option;
         m.view.put(row + (MatrixM3x3D.VIEW_COLS * column), x);
       }
     }
+
+    m.view.rewind();
     return m;
   }
 
@@ -980,6 +1006,8 @@ import com.io7m.jaux.functional.Option;
     for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
       this.view.put(index, source_view.get(index));
     }
+
+    this.view.rewind();
   }
 
   @Override public boolean equals(
@@ -1049,6 +1077,7 @@ import com.io7m.jaux.functional.Option;
     final double value)
   {
     this.view.put(MatrixM3x3D.indexChecked(row, column), value);
+    this.view.rewind();
     return this;
   }
 
@@ -1058,6 +1087,7 @@ import com.io7m.jaux.functional.Option;
     final double value)
   {
     this.view.put(MatrixM3x3D.indexUnsafe(row, column), value);
+    this.view.rewind();
     return this;
   }
 

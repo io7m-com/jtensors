@@ -28,6 +28,7 @@ public class MatrixM2x2DTest
 
     final MatrixM2x2D mk = MatrixM2x2D.add(m0, m1, mr);
     Assert.assertSame(mr, mk);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(mk).position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
@@ -52,6 +53,7 @@ public class MatrixM2x2DTest
 
     final MatrixM2x2D mr = MatrixM2x2D.addInPlace(m0, m1);
     Assert.assertSame(mr, m0);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(mr).position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
@@ -74,6 +76,7 @@ public class MatrixM2x2DTest
     m0.set(1, 1, 5.0);
 
     MatrixM2x2D.addRowScaled(m0, 0, 1, 1, 2.0, m1);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 0.0);
@@ -82,6 +85,7 @@ public class MatrixM2x2DTest
     Assert.assertTrue(m1.get(1, 1) == 13.0);
 
     MatrixM2x2D.addRowScaled(m0, 0, 1, 1, 2.0);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m0).position());
 
     Assert.assertTrue(m0.get(0, 0) == 3.0);
     Assert.assertTrue(m0.get(0, 1) == 3.0);
@@ -164,6 +168,7 @@ public class MatrixM2x2DTest
     m0.set(1, 1, 5.0);
 
     MatrixM2x2D.copy(m0, m1);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 2.0);
@@ -252,6 +257,7 @@ public class MatrixM2x2DTest
         final MatrixM2x2D m1 = new MatrixM2x2D();
         m1.set(row, col, 256);
         Assert.assertFalse(m0.equals(m1));
+        Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m1).position());
       }
     }
   }
@@ -265,8 +271,11 @@ public class MatrixM2x2DTest
     m0.set(0, 1, 2.0);
     m0.set(1, 0, 3.0);
     m0.set(1, 1, 4.0);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m0).position());
 
     MatrixM2x2D.exchangeRows(m0, 0, 1, m1);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 3.0);
     Assert.assertTrue(m1.get(0, 1) == 4.0);
@@ -275,6 +284,8 @@ public class MatrixM2x2DTest
     Assert.assertTrue(m1.get(1, 1) == 2.0);
 
     MatrixM2x2D.exchangeRows(m1, 0, 1);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 2.0);
@@ -347,6 +358,8 @@ public class MatrixM2x2DTest
     m0.set(1, 1, 13.0);
 
     final MatrixM2x2D m1 = new MatrixM2x2D(m0);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 3.0);
     Assert.assertTrue(m1.get(0, 1) == 5.0);
@@ -378,6 +391,7 @@ public class MatrixM2x2DTest
       Assert.assertEquals(Type.OPTION_SOME, r.type);
       final Some<MatrixM2x2D> s = (Some<MatrixM2x2D>) r;
       final MatrixM2x2D rm = s.value;
+      Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(rm).position());
 
       Assert.assertTrue(MatrixM2x2D.get(rm, 0, 0) == 1.0);
       Assert.assertTrue(MatrixM2x2D.get(rm, 0, 1) == 0.0);
@@ -391,6 +405,7 @@ public class MatrixM2x2DTest
       Assert.assertEquals(Type.OPTION_SOME, r.type);
       final Some<MatrixM2x2D> s = (Some<MatrixM2x2D>) r;
       final MatrixM2x2D rm = s.value;
+      Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(rm).position());
 
       Assert.assertTrue(MatrixM2x2D.get(rm, 0, 0) == 1.0);
       Assert.assertTrue(MatrixM2x2D.get(rm, 0, 1) == 0.0);
@@ -416,6 +431,7 @@ public class MatrixM2x2DTest
       Assert.assertEquals(Type.OPTION_SOME, r.type);
       final Some<MatrixM2x2D> s = (Some<MatrixM2x2D>) r;
       final MatrixM2x2D rm = s.value;
+      Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(rm).position());
 
       Assert.assertTrue(rm.get(0, 0) == 0.5);
       Assert.assertTrue(rm.get(0, 1) == 0);
@@ -429,6 +445,7 @@ public class MatrixM2x2DTest
       Assert.assertEquals(Type.OPTION_SOME, r.type);
       final Some<MatrixM2x2D> s = (Some<MatrixM2x2D>) r;
       final MatrixM2x2D rm = s.value;
+      Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(rm).position());
 
       Assert.assertTrue(rm.get(0, 0) == 2);
       Assert.assertTrue(rm.get(0, 1) == 0);
@@ -444,6 +461,7 @@ public class MatrixM2x2DTest
     final MatrixM2x2D m1 = new MatrixM2x2D();
 
     MatrixM2x2D.setZero(m0);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m0).position());
 
     {
       final Option<MatrixM2x2D> r = MatrixM2x2D.invert(m0, m1);
@@ -463,6 +481,7 @@ public class MatrixM2x2DTest
     final MatrixM2x2D mr = new MatrixM2x2D();
     final MatrixM2x2D r = MatrixM2x2D.multiply(m0, m1, mr);
     Assert.assertSame(mr, r);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(mr).position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
@@ -487,6 +506,7 @@ public class MatrixM2x2DTest
 
     final MatrixM2x2D r = MatrixM2x2D.multiply(m0, m1);
     Assert.assertSame(m0, r);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(r).position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
@@ -509,11 +529,14 @@ public class MatrixM2x2DTest
     final MatrixM2x2D m1 = new MatrixM2x2D(m0);
     final MatrixM2x2D r = MatrixM2x2D.multiply(m0, m1);
     Assert.assertSame(r, m0);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(r).position());
 
     Assert.assertTrue(MatrixM2x2D.get(r, 0, 0) == 7.0);
     Assert.assertTrue(MatrixM2x2D.get(r, 0, 1) == 10.0);
     Assert.assertTrue(MatrixM2x2D.get(r, 1, 0) == 15.0);
     Assert.assertTrue(MatrixM2x2D.get(r, 1, 1) == 22.0);
+
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(r).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testMultiplySimple()
@@ -530,11 +553,14 @@ public class MatrixM2x2DTest
 
     final MatrixM2x2D r = MatrixM2x2D.multiply(m0, m1, mr);
     Assert.assertSame(r, mr);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(r).position());
 
     Assert.assertTrue(MatrixM2x2D.get(r, 0, 0) == 7.0);
     Assert.assertTrue(MatrixM2x2D.get(r, 0, 1) == 10.0);
     Assert.assertTrue(MatrixM2x2D.get(r, 1, 0) == 15.0);
     Assert.assertTrue(MatrixM2x2D.get(r, 1, 1) == 22.0);
+
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(r).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -568,6 +594,7 @@ public class MatrixM2x2DTest
 
     final MatrixM2x2D r = MatrixM2x2D.multiply(m0, m1, mr);
     Assert.assertSame(mr, r);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(r).position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
@@ -655,6 +682,7 @@ public class MatrixM2x2DTest
 
     final MatrixM2x2D mk = MatrixM2x2D.scale(m0, 5.0, mr);
     Assert.assertSame(mr, mk);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(mr).position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
@@ -676,6 +704,7 @@ public class MatrixM2x2DTest
 
     final MatrixM2x2D mr = MatrixM2x2D.scale(m, 5.0);
     Assert.assertSame(mr, m);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(mr).position());
 
     for (int row = 0; row < 2; ++row) {
       for (int column = 0; column < 2; ++column) {
@@ -683,6 +712,8 @@ public class MatrixM2x2DTest
         Assert.assertTrue(mr.get(row, column) == 15.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(mr).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testScaleRow()
@@ -698,6 +729,7 @@ public class MatrixM2x2DTest
 
     MatrixM2x2D.scaleRow(m0, 0, 2.0, m1);
     MatrixM2x2D.scaleRow(m0, 1, 4.0, m1);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 2.0);
     Assert.assertTrue(m1.get(0, 1) == 4.0);
@@ -707,6 +739,7 @@ public class MatrixM2x2DTest
 
     MatrixM2x2D.scaleRow(m0, 0, 2.0);
     MatrixM2x2D.scaleRow(m0, 1, 4.0);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m0).position());
 
     Assert.assertTrue(m0.get(0, 0) == 2.0);
     Assert.assertTrue(m0.get(0, 1) == 4.0);
@@ -762,6 +795,8 @@ public class MatrixM2x2DTest
 
     Assert.assertTrue(m.set(1, 0, 13.0).get(1, 0) == 13.0);
     Assert.assertTrue(m.set(1, 1, 17.0).get(1, 1) == 17.0);
+
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -775,6 +810,8 @@ public class MatrixM2x2DTest
 
     Assert.assertTrue(m.set(1, 0, 13.0).getRowColumnD(1, 0) == 13.0);
     Assert.assertTrue(m.set(1, 1, 17.0).getRowColumnD(1, 1) == 17.0);
+
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testStorage()
@@ -791,6 +828,7 @@ public class MatrixM2x2DTest
       final DoubleBuffer b = MatrixM2x2D.doubleBuffer(m);
 
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
+      Assert.assertEquals(0, b.position());
 
       Assert.assertTrue(b.get(0) == 0.0);
       Assert.assertTrue(b.get(1) == 100.0);
@@ -824,18 +862,21 @@ public class MatrixM2x2DTest
 
     final MatrixM2x2D k = MatrixM2x2D.transpose(m, r);
     Assert.assertSame(k, r);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(r).position());
 
     Assert.assertTrue(m.get(0, 0) == 0.0);
     Assert.assertTrue(m.get(0, 1) == 1.0);
 
     Assert.assertTrue(m.get(1, 0) == 4.0);
     Assert.assertTrue(m.get(1, 1) == 5.0);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m).position());
 
     Assert.assertTrue(r.get(0, 0) == 0.0);
     Assert.assertTrue(r.get(0, 1) == 4.0);
 
     Assert.assertTrue(r.get(1, 0) == 1.0);
     Assert.assertTrue(r.get(1, 1) == 5.0);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(r).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testTransposeMutate()
@@ -850,6 +891,7 @@ public class MatrixM2x2DTest
 
     final MatrixM2x2D r = MatrixM2x2D.transpose(m);
     Assert.assertSame(m, r);
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(r).position());
 
     Assert.assertTrue(r.get(0, 0) == 0.0);
     Assert.assertTrue(r.get(0, 1) == 4.0);
@@ -868,5 +910,7 @@ public class MatrixM2x2DTest
         Assert.assertTrue(m.get(row, column) == 0.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM2x2D.doubleBuffer(m).position());
   }
 }

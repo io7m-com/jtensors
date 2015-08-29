@@ -4,6 +4,17 @@
 
   <c:release ticket-system="com.io7m.fossil.jtensors">
     <c:date>2012-11-24</c:date>
+    <c:version>4.1.0</c:version>
+
+    <c:item>
+      <c:date>2012-11-24</c:date>
+      <c:type-code-fix/>
+      <c:summary>Make every matrix operation rewind the buffer that backs the matrix. This was a problem revealed by the API change in 4.0.0</c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release ticket-system="com.io7m.fossil.jtensors">
+    <c:date>2012-11-24</c:date>
     <c:version>4.0.0</c:version>
 
     <c:item>

@@ -88,6 +88,8 @@ import com.io7m.jaux.functional.Option;
     for (int index = 0; index < MatrixM4x4D.VIEW_ELEMENTS; ++index) {
       out.view.put(index, m0_view.get(index) + m1_view.get(index));
     }
+
+    out.view.rewind();
     return out;
   }
 
@@ -205,6 +207,7 @@ import com.io7m.jaux.functional.Option;
     MatrixM4x4D.rowUnsafe(m, row_b, vb);
     VectorM4D.addScaledInPlace(va, vb, r);
     MatrixM4x4D.setRowUnsafe(out, row_c, va);
+    out.view.rewind();
     return out;
   }
 
@@ -287,6 +290,8 @@ import com.io7m.jaux.functional.Option;
     for (int index = 0; index < MatrixM4x4D.VIEW_ELEMENTS; ++index) {
       output.view.put(index, input_view.get(index));
     }
+
+    output.view.rewind();
     return output;
   }
 
@@ -378,6 +383,8 @@ import com.io7m.jaux.functional.Option;
     MatrixM4x4D.rowUnsafe(m, row_b, vb);
     MatrixM4x4D.setRowUnsafe(out, row_a, vb);
     MatrixM4x4D.setRowUnsafe(out, row_b, va);
+
+    out.view.rewind();
     return out;
   }
 
@@ -804,6 +811,8 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(3, 3, r3c3 * d_inv);
 
     MatrixM4x4D.transposeInPlace(out);
+
+    out.view.rewind();
     return new Option.Some<MatrixM4x4D>(out);
   }
 
@@ -915,6 +924,7 @@ import com.io7m.jaux.functional.Option;
   {
     final @Nonnull MatrixM4x4D out = new MatrixM4x4D();
     MatrixM4x4D.makeRotation(angle, axis, out);
+    out.view.rewind();
     return out;
   }
 
@@ -978,6 +988,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(3, 2, 0.0);
     out.setUnsafe(3, 3, 1.0);
 
+    out.view.rewind();
     return out;
   }
 
@@ -995,6 +1006,7 @@ import com.io7m.jaux.functional.Option;
   {
     final @Nonnull MatrixM4x4D out = new MatrixM4x4D();
     MatrixM4x4D.makeTranslation3D(v, out);
+    out.view.rewind();
     return out;
   }
 
@@ -1034,6 +1046,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(3, 2, 0.0);
     out.setUnsafe(3, 3, 1.0);
 
+    out.view.rewind();
     return out;
   }
 
@@ -1051,6 +1064,7 @@ import com.io7m.jaux.functional.Option;
   {
     final @Nonnull MatrixM4x4D out = new MatrixM4x4D();
     MatrixM4x4D.makeTranslation3I(v, out);
+    out.view.rewind();
     return out;
   }
 
@@ -1090,6 +1104,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(3, 2, 0.0);
     out.setUnsafe(3, 3, 1.0);
 
+    out.view.rewind();
     return out;
   }
 
@@ -1227,6 +1242,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(3, 2, r3c2);
     out.setUnsafe(3, 3, r3c3);
 
+    out.view.rewind();
     return out;
   }
 
@@ -1329,6 +1345,7 @@ import com.io7m.jaux.functional.Option;
   {
     MatrixM4x4D.makeRotation(angle, axis, tmp);
     MatrixM4x4D.multiply(m, tmp, out);
+    out.view.rewind();
     return out;
   }
 
@@ -1489,6 +1506,8 @@ import com.io7m.jaux.functional.Option;
     for (int index = 0; index < MatrixM4x4D.VIEW_ELEMENTS; ++index) {
       out.view.put(index, m_view.get(index) * r);
     }
+
+    out.view.rewind();
     return out;
   }
 
@@ -1621,6 +1640,8 @@ import com.io7m.jaux.functional.Option;
     MatrixM4x4D.rowUnsafe(m, row, tmp);
     VectorM4D.scaleInPlace(tmp, r);
     MatrixM4x4D.setRowUnsafe(out, row, tmp);
+
+    out.view.rewind();
     return out;
   }
 
@@ -1676,6 +1697,7 @@ import com.io7m.jaux.functional.Option;
     final double value)
   {
     m.view.put(MatrixM4x4D.indexChecked(row, column), value);
+    m.view.rewind();
     return m;
   }
 
@@ -1693,6 +1715,7 @@ import com.io7m.jaux.functional.Option;
     m.view.put(MatrixM4x4D.identity_row_1);
     m.view.put(MatrixM4x4D.identity_row_2);
     m.view.put(MatrixM4x4D.identity_row_3);
+    m.view.rewind();
     return m;
   }
 
@@ -1721,6 +1744,7 @@ import com.io7m.jaux.functional.Option;
     m.view.put(MatrixM4x4D.zero_row);
     m.view.put(MatrixM4x4D.zero_row);
     m.view.put(MatrixM4x4D.zero_row);
+    m.view.rewind();
     return m;
   }
 
@@ -1759,6 +1783,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
     out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
 
+    out.view.rewind();
     return out;
   }
 
@@ -1815,6 +1840,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
     out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
 
+    out.view.rewind();
     return out;
   }
 
@@ -1880,6 +1906,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
     out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
 
+    out.view.rewind();
     return out;
   }
 
@@ -1945,6 +1972,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(2, 3, out.getUnsafe(2, 3) + c3r2);
     out.setUnsafe(3, 3, out.getUnsafe(3, 3) + c3r3);
 
+    out.view.rewind();
     return out;
   }
 
@@ -2009,6 +2037,8 @@ import com.io7m.jaux.functional.Option;
         m.view.put(row + (MatrixM4x4D.VIEW_COLS * column), x);
       }
     }
+
+    m.view.rewind();
     return m;
   }
 
@@ -2150,6 +2180,8 @@ import com.io7m.jaux.functional.Option;
     for (int index = 0; index < MatrixM4x4D.VIEW_ELEMENTS; ++index) {
       this.view.put(index, source.view.get(index));
     }
+
+    this.view.rewind();
   }
 
   @Override public boolean equals(
@@ -2219,6 +2251,7 @@ import com.io7m.jaux.functional.Option;
     final double value)
   {
     this.view.put(MatrixM4x4D.indexChecked(row, column), value);
+    this.view.rewind();
     return this;
   }
 
@@ -2235,6 +2268,7 @@ import com.io7m.jaux.functional.Option;
     final double value)
   {
     this.view.put(MatrixM4x4D.indexUnsafe(row, column), value);
+    this.view.rewind();
     return this;
   }
 

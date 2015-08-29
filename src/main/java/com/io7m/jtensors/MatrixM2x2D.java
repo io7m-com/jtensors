@@ -62,6 +62,7 @@ import com.io7m.jaux.functional.Option;
     out.view.put(1, m0_view.get(1) + m1_view.get(1));
     out.view.put(2, m0_view.get(2) + m1_view.get(2));
     out.view.put(3, m0_view.get(3) + m1_view.get(3));
+    out.view.rewind();
 
     return out;
   }
@@ -152,6 +153,8 @@ import com.io7m.jaux.functional.Option;
 
     VectorM2D.addScaledInPlace(va, vb, r);
     MatrixM2x2D.setRowUnsafe(out, row_c, va);
+
+    out.view.rewind();
     return out;
   }
 
@@ -186,6 +189,7 @@ import com.io7m.jaux.functional.Option;
     output.view.put(1, source_view.get(1));
     output.view.put(2, source_view.get(2));
     output.view.put(3, source_view.get(3));
+    output.view.rewind();
 
     return output;
   }
@@ -278,6 +282,8 @@ import com.io7m.jaux.functional.Option;
 
     MatrixM2x2D.setRowUnsafe(out, row_a, vb);
     MatrixM2x2D.setRowUnsafe(out, row_b, va);
+
+    out.view.rewind();
     return out;
   }
 
@@ -363,6 +369,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(0, 1, r0c1);
     out.setUnsafe(1, 0, r1c0);
     out.setUnsafe(1, 1, r1c1);
+    out.view.rewind();
 
     return new Option.Some<MatrixM2x2D>(out);
   }
@@ -420,6 +427,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(0, 1, r0c1);
     out.setUnsafe(1, 0, r1c0);
     out.setUnsafe(1, 1, r1c1);
+    out.view.rewind();
 
     return out;
   }
@@ -524,6 +532,7 @@ import com.io7m.jaux.functional.Option;
     out.setUnsafe(1, 0, m.getRowColumnD(1, 0) * r);
     out.setUnsafe(0, 1, m.getRowColumnD(0, 1) * r);
     out.setUnsafe(1, 1, m.getRowColumnD(1, 1) * r);
+    out.view.rewind();
     return out;
   }
 
@@ -592,6 +601,7 @@ import com.io7m.jaux.functional.Option;
     final double value)
   {
     m.view.put(MatrixM2x2D.indexChecked(row, column), value);
+    m.view.rewind();
     return m;
   }
 
@@ -607,6 +617,7 @@ import com.io7m.jaux.functional.Option;
     m.view.clear();
     m.view.put(MatrixM2x2D.identity_row_0);
     m.view.put(MatrixM2x2D.identity_row_1);
+    m.view.rewind();
     return m;
   }
 
@@ -617,6 +628,7 @@ import com.io7m.jaux.functional.Option;
   {
     m.setUnsafe(row, 0, v.getXD());
     m.setUnsafe(row, 1, v.getYD());
+    m.view.rewind();
   }
 
   /**
@@ -631,6 +643,7 @@ import com.io7m.jaux.functional.Option;
     m.view.clear();
     m.view.put(MatrixM2x2D.zero_row);
     m.view.put(MatrixM2x2D.zero_row);
+    m.view.rewind();
     return m;
   }
 
@@ -653,6 +666,8 @@ import com.io7m.jaux.functional.Option;
         m.view.put(row + (2 * column), x);
       }
     }
+
+    m.view.rewind();
     return m;
   }
 
@@ -712,6 +727,8 @@ import com.io7m.jaux.functional.Option;
     for (int index = 0; index < MatrixM2x2D.VIEW_ELEMENTS; ++index) {
       this.view.put(index, source_view.get(index));
     }
+
+    this.view.rewind();
   }
 
   @Override public boolean equals(
@@ -780,7 +797,7 @@ import com.io7m.jaux.functional.Option;
     final int column,
     final double value)
   {
-    this.view.put(MatrixM2x2D.indexChecked(row, column), value);
+    MatrixM2x2D.set(this, row, column, value);
     return this;
   }
 
@@ -790,6 +807,7 @@ import com.io7m.jaux.functional.Option;
     final double value)
   {
     this.view.put(MatrixM2x2D.indexUnsafe(row, column), value);
+    this.view.rewind();
     return this;
   }
 

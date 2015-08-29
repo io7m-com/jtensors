@@ -31,6 +31,10 @@ public class MatrixM4x4FTest
     final MatrixM4x4F m1 = new MatrixM4x4F();
     final MatrixM4x4F mr = new MatrixM4x4F();
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
+
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
         m0.set(row, column, 1.0f);
@@ -38,8 +42,16 @@ public class MatrixM4x4FTest
       }
     }
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
+
     final MatrixM4x4F mk = MatrixM4x4F.add(m0, m1, mr);
     Assert.assertSame(mr, mk);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
@@ -48,6 +60,10 @@ public class MatrixM4x4FTest
         Assert.assertTrue(mr.get(row, column) == 4.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testAddMutate()
@@ -62,8 +78,15 @@ public class MatrixM4x4FTest
       }
     }
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     final MatrixM4x4F mr = MatrixM4x4F.addInPlace(m0, m1);
     Assert.assertSame(mr, m0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
@@ -72,6 +95,10 @@ public class MatrixM4x4FTest
         Assert.assertTrue(m1.get(row, column) == 3.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testAddRowScaled()
@@ -89,7 +116,13 @@ public class MatrixM4x4FTest
     m0.set(1, 2, 5.0f);
     m0.set(1, 3, 5.0f);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.addRowScaled(m0, 0, 1, 2, 2.0f, m1);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 0.0);
@@ -111,7 +144,13 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 2) == 0.0);
     Assert.assertTrue(m1.get(3, 3) == 1.0);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.addRowScaledInPlace(m0, 0, 1, 2, 2.0f);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m0.get(0, 0) == 3.0);
     Assert.assertTrue(m0.get(0, 1) == 3.0);
@@ -132,6 +171,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m0.get(3, 1) == 0.0);
     Assert.assertTrue(m0.get(3, 2) == 0.0);
     Assert.assertTrue(m0.get(3, 3) == 1.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -152,7 +194,13 @@ public class MatrixM4x4FTest
     m0.set(1, 2, 5.0f);
     m0.set(1, 3, 5.0f);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.addRowScaledWithContext(context, m0, 0, 1, 2, 2.0f, m1);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 0.0);
@@ -173,6 +221,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 1) == 0.0);
     Assert.assertTrue(m1.get(3, 2) == 0.0);
     Assert.assertTrue(m1.get(3, 3) == 1.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -242,6 +293,9 @@ public class MatrixM4x4FTest
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     m0.set(0, 0, 1.0f);
     m0.set(0, 1, 2.0f);
     m0.set(0, 2, 3.0f);
@@ -262,7 +316,13 @@ public class MatrixM4x4FTest
     m0.set(3, 2, 15.0f);
     m0.set(3, 3, 16.0f);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.copy(m0, m1);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 2.0);
@@ -283,6 +343,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 1) == 14.0);
     Assert.assertTrue(m1.get(3, 2) == 15.0);
     Assert.assertTrue(m1.get(3, 3) == 16.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -291,6 +354,7 @@ public class MatrixM4x4FTest
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     Assert.assertTrue(MatrixM4x4F.determinant(m) == 1.0);
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testDeterminantOther()
@@ -303,31 +367,38 @@ public class MatrixM4x4FTest
     m.set(3, 3, 2.0f);
 
     Assert.assertTrue(MatrixM4x4F.determinant(m) == 16.0);
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testDeterminantZero()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
     MatrixM4x4F.setZero(m);
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
     Assert.assertTrue(MatrixM4x4F.determinant(m) == 0.0);
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testEqualsCase0()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     Assert.assertTrue(m0.equals(m0));
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testEqualsCase1()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     Assert.assertFalse(m0.equals(null));
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testEqualsCase2()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testEqualsCase3()
@@ -335,6 +406,7 @@ public class MatrixM4x4FTest
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
     Assert.assertTrue(m0.equals(m1));
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -345,8 +417,14 @@ public class MatrixM4x4FTest
       for (int col = 0; col < 4; ++col) {
         final MatrixM4x4F m0 = new MatrixM4x4F();
         final MatrixM4x4F m1 = new MatrixM4x4F();
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
         m1.set(row, col, 256);
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
         Assert.assertFalse(m0.equals(m1));
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
       }
     }
   }
@@ -376,7 +454,13 @@ public class MatrixM4x4FTest
     m0.set(3, 2, 15.0f);
     m0.set(3, 3, 16.0f);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.exchangeRows(m0, 0, 3, m1);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 13.0);
     Assert.assertTrue(m1.get(0, 1) == 14.0);
@@ -398,7 +482,13 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 2) == 3.0);
     Assert.assertTrue(m1.get(3, 3) == 4.0);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.exchangeRowsInPlace(m1, 0, 3);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 2.0);
@@ -419,6 +509,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 1) == 14.0);
     Assert.assertTrue(m1.get(3, 2) == 15.0);
     Assert.assertTrue(m1.get(3, 3) == 16.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -485,7 +578,13 @@ public class MatrixM4x4FTest
     m0.set(3, 2, 15.0f);
     m0.set(3, 3, 16.0f);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.exchangeRowsWithContext(context, m0, 0, 3, m1);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 13.0);
     Assert.assertTrue(m1.get(0, 1) == 14.0);
@@ -507,7 +606,13 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 2) == 3.0);
     Assert.assertTrue(m1.get(3, 3) == 4.0);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.exchangeRowsInPlaceWithContext(context, m1, 0, 3);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 2.0);
@@ -528,6 +633,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 1) == 14.0);
     Assert.assertTrue(m1.get(3, 2) == 15.0);
     Assert.assertTrue(m1.get(3, 3) == 16.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -538,9 +646,17 @@ public class MatrixM4x4FTest
       for (int col = 0; col < 4; ++col) {
         final MatrixM4x4F m0 = new MatrixM4x4F();
         final MatrixM4x4F m1 = new MatrixM4x4F();
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
         Assert.assertTrue(m0.hashCode() == m1.hashCode());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
         m1.set(row, col, 256);
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
         Assert.assertFalse(m0.hashCode() == m1.hashCode());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
       }
     }
   }
@@ -571,7 +687,12 @@ public class MatrixM4x4FTest
     m0.set(3, 2, 53.0f);
     m0.set(3, 3, 59.0f);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+
     final MatrixM4x4F m1 = new MatrixM4x4F(m0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 3.0);
     Assert.assertTrue(m1.get(0, 1) == 5.0);
@@ -592,6 +713,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 1) == 47.0);
     Assert.assertTrue(m1.get(3, 2) == 53.0);
     Assert.assertTrue(m1.get(3, 3) == 59.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -619,6 +743,8 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m.get(3, 1) == 0.0);
     Assert.assertTrue(m.get(3, 2) == 0.0);
     Assert.assertTrue(m.get(3, 3) == 1.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testInvertIdentity()
@@ -632,6 +758,10 @@ public class MatrixM4x4FTest
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
+
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 0) == 1.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 1) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 2) == 0.0);
@@ -651,6 +781,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 1) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 2) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
 
     {
@@ -659,6 +793,10 @@ public class MatrixM4x4FTest
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
+
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 0) == 1.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 1) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 2) == 0.0);
@@ -678,6 +816,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 1) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 2) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
   }
 
@@ -696,6 +838,10 @@ public class MatrixM4x4FTest
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
+
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 0) == 1.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 1) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 2) == 0.0);
@@ -715,6 +861,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 1) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 2) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
 
     {
@@ -724,6 +874,10 @@ public class MatrixM4x4FTest
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
+
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 0) == 1.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 1) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 0, 2) == 0.0);
@@ -743,6 +897,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 1) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 2) == 0.0);
       Assert.assertTrue(MatrixM4x4F.get(rm, 3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
   }
 
@@ -777,6 +935,10 @@ public class MatrixM4x4FTest
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
+
       Assert.assertTrue(rm.get(0, 0) == 0.5);
       Assert.assertTrue(rm.get(0, 1) == 0);
       Assert.assertTrue(rm.get(0, 2) == 0);
@@ -796,6 +958,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(rm.get(3, 1) == 0);
       Assert.assertTrue(rm.get(3, 2) == 0);
       Assert.assertTrue(rm.get(3, 3) == 0.5);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
 
     {
@@ -803,6 +969,10 @@ public class MatrixM4x4FTest
       Assert.assertEquals(Type.OPTION_SOME, r.type);
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
 
       Assert.assertTrue(rm.get(0, 0) == 2);
       Assert.assertTrue(rm.get(0, 1) == 0);
@@ -823,6 +993,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(rm.get(3, 1) == 0);
       Assert.assertTrue(rm.get(3, 2) == 0);
       Assert.assertTrue(rm.get(3, 3) == 2);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
   }
 
@@ -857,6 +1031,10 @@ public class MatrixM4x4FTest
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
+
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 0), -0.09375f));
       Assert.assertTrue(rm.get(0, 1) == 0);
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 2), 0.15625f));
@@ -876,6 +1054,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 1), 0.096f));
       Assert.assertTrue(rm.get(3, 2) == 0);
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 3), -0.01481f));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
 
     {
@@ -883,6 +1065,10 @@ public class MatrixM4x4FTest
       Assert.assertEquals(Type.OPTION_SOME, r.type);
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
 
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 0), 1.0f));
       Assert.assertTrue(rm.get(0, 1) == 0);
@@ -903,6 +1089,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 1), 13.0f));
       Assert.assertTrue(rm.get(3, 2) == 0);
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 3), 4.0f));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
   }
 
@@ -941,6 +1131,10 @@ public class MatrixM4x4FTest
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
+
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 0), -0.09375f));
       Assert.assertTrue(rm.get(0, 1) == 0);
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 2), 0.15625f));
@@ -960,6 +1154,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 1), 0.096f));
       Assert.assertTrue(rm.get(3, 2) == 0);
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 3), -0.01481f));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
 
     {
@@ -968,6 +1166,10 @@ public class MatrixM4x4FTest
       Assert.assertEquals(Type.OPTION_SOME, r.type);
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
 
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(0, 0), 1.0f));
       Assert.assertTrue(rm.get(0, 1) == 0);
@@ -988,6 +1190,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 1), 13.0f));
       Assert.assertTrue(rm.get(3, 2) == 0);
       Assert.assertTrue(MatrixM4x4FTest.closeTo2dp(rm.get(3, 3), 4.0f));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
   }
 
@@ -1026,6 +1232,10 @@ public class MatrixM4x4FTest
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
+
       Assert.assertTrue(rm.get(0, 0) == 0.5);
       Assert.assertTrue(rm.get(0, 1) == 0);
       Assert.assertTrue(rm.get(0, 2) == 0);
@@ -1045,6 +1255,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(rm.get(3, 1) == 0);
       Assert.assertTrue(rm.get(3, 2) == 0);
       Assert.assertTrue(rm.get(3, 3) == 0.5);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
 
     {
@@ -1053,6 +1267,10 @@ public class MatrixM4x4FTest
       Assert.assertEquals(Type.OPTION_SOME, r.type);
       final Some<MatrixM4x4F> s = (Some<MatrixM4x4F>) r;
       final MatrixM4x4F rm = s.value;
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
 
       Assert.assertTrue(rm.get(0, 0) == 2);
       Assert.assertTrue(rm.get(0, 1) == 0);
@@ -1073,6 +1291,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(rm.get(3, 1) == 0);
       Assert.assertTrue(rm.get(3, 2) == 0);
       Assert.assertTrue(rm.get(3, 3) == 2);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(rm).position());
     }
   }
 
@@ -1086,11 +1308,15 @@ public class MatrixM4x4FTest
     {
       final Option<MatrixM4x4F> r = MatrixM4x4F.invert(m0, m1);
       Assert.assertEquals(Type.OPTION_NONE, r.type);
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
     }
 
     {
       final Option<MatrixM4x4F> r = MatrixM4x4F.invertInPlace(m0);
       Assert.assertEquals(Type.OPTION_NONE, r.type);
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
     }
   }
 
@@ -1108,12 +1334,16 @@ public class MatrixM4x4FTest
       final Option<MatrixM4x4F> r =
         MatrixM4x4F.invertWithContext(context, m0, m1);
       Assert.assertEquals(Type.OPTION_NONE, r.type);
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
     }
 
     {
       final Option<MatrixM4x4F> r =
         MatrixM4x4F.invertInPlaceWithContext(context, m0);
       Assert.assertEquals(Type.OPTION_NONE, r.type);
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
     }
   }
 
@@ -1129,6 +1359,9 @@ public class MatrixM4x4FTest
       for (int column = 0; column < 4; ++column) {
         Assert.assertTrue(m0.get(row, column) == mr.get(row, column));
         Assert.assertTrue(m1.get(row, column) == mr.get(row, column));
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
       }
     }
   }
@@ -1143,6 +1376,8 @@ public class MatrixM4x4FTest
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
         Assert.assertTrue(m0.get(row, column) == m1.get(row, column));
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
       }
     }
 
@@ -1152,6 +1387,8 @@ public class MatrixM4x4FTest
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
         Assert.assertTrue(m0.get(row, column) == m1.get(row, column));
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
       }
     }
   }
@@ -1183,6 +1420,10 @@ public class MatrixM4x4FTest
     final MatrixM4x4F r = MatrixM4x4F.multiplyInPlace(m0, m1);
     Assert.assertSame(r, m0);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
     Assert.assertTrue(MatrixM4x4F.get(r, 0, 0) == 90.0);
     Assert.assertTrue(MatrixM4x4F.get(r, 0, 1) == 100.0);
     Assert.assertTrue(MatrixM4x4F.get(r, 0, 2) == 110.0);
@@ -1199,6 +1440,10 @@ public class MatrixM4x4FTest
     Assert.assertTrue(MatrixM4x4F.get(r, 3, 1) == 484.0);
     Assert.assertTrue(MatrixM4x4F.get(r, 3, 2) == 542.0);
     Assert.assertTrue(MatrixM4x4F.get(r, 3, 3) == 600.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testMultiplySimple()
@@ -1225,8 +1470,16 @@ public class MatrixM4x4FTest
     final MatrixM4x4F m1 = new MatrixM4x4F(m0);
     final MatrixM4x4F mr = new MatrixM4x4F();
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
+
     final MatrixM4x4F r = MatrixM4x4F.multiply(m0, m1, mr);
     Assert.assertSame(r, mr);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
 
     Assert.assertTrue(MatrixM4x4F.get(r, 0, 0) == 90.0);
     Assert.assertTrue(MatrixM4x4F.get(r, 0, 1) == 100.0);
@@ -1244,6 +1497,10 @@ public class MatrixM4x4FTest
     Assert.assertTrue(MatrixM4x4F.get(r, 3, 1) == 484.0);
     Assert.assertTrue(MatrixM4x4F.get(r, 3, 2) == 542.0);
     Assert.assertTrue(MatrixM4x4F.get(r, 3, 3) == 600.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
   }
 
   @SuppressWarnings({ "static-method" }) @Test public
@@ -1272,13 +1529,19 @@ public class MatrixM4x4FTest
     final VectorI4F v = new VectorI4F(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorM4F out = new VectorM4F();
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+
     final VectorM4F r = MatrixM4x4F.multiplyVector4F(m0, v, out);
     Assert.assertSame(out, r);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
 
     Assert.assertTrue(out.x == 30.0);
     Assert.assertTrue(out.y == 70.0);
     Assert.assertTrue(out.z == 110.0);
     Assert.assertTrue(out.w == 150.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
   }
 
   @SuppressWarnings({ "static-method" }) @Test public
@@ -1304,9 +1567,13 @@ public class MatrixM4x4FTest
     MatrixM4x4F.set(m0, 3, 2, 15.0f);
     MatrixM4x4F.set(m0, 3, 3, 16.0f);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+
     final VectorI4F v = new VectorI4F(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorM4F out = new VectorM4F();
     final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
 
     final VectorM4F r =
       MatrixM4x4F.multiplyVector4FWithContext(context, m0, v, out);
@@ -1316,6 +1583,8 @@ public class MatrixM4x4FTest
     Assert.assertTrue(out.y == 70.0);
     Assert.assertTrue(out.z == 110.0);
     Assert.assertTrue(out.w == 150.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testMultiplyZero()
@@ -1326,14 +1595,26 @@ public class MatrixM4x4FTest
 
     MatrixM4x4F.setZero(m1);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
+
     final MatrixM4x4F r = MatrixM4x4F.multiply(m0, m1, mr);
     Assert.assertSame(mr, r);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
         Assert.assertTrue(mr.get(row, column) == 0.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -1385,6 +1666,9 @@ public class MatrixM4x4FTest
         MatrixM4x4F.rotate((float) Math.PI / 4, m, axis, out);
       Assert.assertSame(r, out);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertEquals(1.0f, r.get(0, 0));
       Assert.assertEquals(0.0f, r.get(0, 1));
       Assert.assertEquals(0.0f, r.get(0, 2));
@@ -1416,12 +1700,18 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r =
         MatrixM4x4F.rotateInPlace((float) (Math.PI / 4), m, axis);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertEquals(1.0f, r.get(0, 0));
       Assert.assertEquals(0.0f, r.get(0, 1));
       Assert.assertEquals(0.0f, r.get(0, 2));
@@ -1453,6 +1743,9 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -1476,6 +1769,9 @@ public class MatrixM4x4FTest
           out);
       Assert.assertSame(r, out);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertEquals(1.0f, r.get(0, 0));
       Assert.assertEquals(0.0f, r.get(0, 1));
       Assert.assertEquals(0.0f, r.get(0, 2));
@@ -1507,6 +1803,9 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
@@ -1517,6 +1816,9 @@ public class MatrixM4x4FTest
           m,
           axis);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertEquals(1.0f, r.get(0, 0));
       Assert.assertEquals(0.0f, r.get(0, 1));
       Assert.assertEquals(0.0f, r.get(0, 2));
@@ -1548,6 +1850,9 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -1561,6 +1866,8 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r =
         MatrixM4x4F.makeRotation((float) (Math.PI / 4), axis);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertEquals(1.0f, r.get(0, 0));
       Assert.assertEquals(0.0f, r.get(0, 1));
       Assert.assertEquals(0.0f, r.get(0, 2));
@@ -1592,6 +1899,8 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -1608,6 +1917,9 @@ public class MatrixM4x4FTest
         MatrixM4x4F.rotate((float) Math.PI / 4, m, axis, out);
       Assert.assertSame(r, out);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
         0.707106769085f,
         r.get(0, 0),
@@ -1639,12 +1951,17 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r =
         MatrixM4x4F.rotateInPlace((float) Math.PI / 4, m, axis);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
         0.707106769085f,
         r.get(0, 0),
@@ -1676,6 +1993,8 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -1698,6 +2017,8 @@ public class MatrixM4x4FTest
           out);
       Assert.assertSame(r, out);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
         0.707106769085f,
         r.get(0, 0),
@@ -1729,6 +2050,8 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
@@ -1739,6 +2062,8 @@ public class MatrixM4x4FTest
           m,
           axis);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
         0.707106769085f,
         r.get(0, 0),
@@ -1770,6 +2095,8 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -1783,6 +2110,8 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r =
         MatrixM4x4F.makeRotation((float) (Math.PI / 4), axis);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
         0.707106769085f,
         r.get(0, 0),
@@ -1814,6 +2143,8 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -1830,6 +2161,8 @@ public class MatrixM4x4FTest
         MatrixM4x4F.rotate((float) Math.PI / 4, m, axis, out);
       Assert.assertSame(r, out);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
         0.707106769085f,
         r.get(0, 0),
@@ -1861,12 +2194,16 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r =
         MatrixM4x4F.rotateInPlace((float) (Math.PI / 4), m, axis);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
         0.707106769085f,
         r.get(0, 0),
@@ -1898,6 +2235,8 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -1920,6 +2259,8 @@ public class MatrixM4x4FTest
           out);
       Assert.assertSame(r, out);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
         0.707106769085f,
         r.get(0, 0),
@@ -1951,6 +2292,8 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
@@ -1961,6 +2304,8 @@ public class MatrixM4x4FTest
           m,
           axis);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
         0.707106769085f,
         r.get(0, 0),
@@ -1992,6 +2337,8 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -2005,6 +2352,8 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r =
         MatrixM4x4F.makeRotation((float) (Math.PI / 4), axis);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(ApproximatelyEqualFloat.approximatelyEqualExplicit(
         0.707106769085f,
         r.get(0, 0),
@@ -2036,6 +2385,8 @@ public class MatrixM4x4FTest
       Assert.assertEquals(0.0f, r.get(3, 1));
       Assert.assertEquals(0.0f, r.get(3, 2));
       Assert.assertEquals(1.0f, r.get(3, 3));
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -2044,11 +2395,15 @@ public class MatrixM4x4FTest
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorM4F v = new VectorM4F();
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+
     MatrixM4x4F.row(m, 0, v);
     Assert.assertTrue(v.x == 1.0);
     Assert.assertTrue(v.y == 0.0);
     Assert.assertTrue(v.z == 0.0);
     Assert.assertTrue(v.w == 0.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
 
     MatrixM4x4F.row(m, 1, v);
     Assert.assertTrue(v.x == 0.0);
@@ -2056,17 +2411,23 @@ public class MatrixM4x4FTest
     Assert.assertTrue(v.z == 0.0);
     Assert.assertTrue(v.w == 0.0);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+
     MatrixM4x4F.row(m, 2, v);
     Assert.assertTrue(v.x == 0.0);
     Assert.assertTrue(v.y == 0.0);
     Assert.assertTrue(v.z == 1.0);
     Assert.assertTrue(v.w == 0.0);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+
     MatrixM4x4F.row(m, 3, v);
     Assert.assertTrue(v.x == 0.0);
     Assert.assertTrue(v.y == 0.0);
     Assert.assertTrue(v.z == 0.0);
     Assert.assertTrue(v.w == 1.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -2090,14 +2451,23 @@ public class MatrixM4x4FTest
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F mr = new MatrixM4x4F();
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
+
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
         m0.set(row, column, 3.0f);
       }
     }
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
+
     final MatrixM4x4F mk = MatrixM4x4F.scale(m0, 5.0f, mr);
     Assert.assertSame(mr, mk);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
@@ -2105,6 +2475,9 @@ public class MatrixM4x4FTest
         Assert.assertTrue(mr.get(row, column) == 15.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testScaleMutate()
@@ -2117,8 +2490,13 @@ public class MatrixM4x4FTest
       }
     }
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+
     final MatrixM4x4F mr = MatrixM4x4F.scaleInPlace(m, 5.0f);
     Assert.assertSame(mr, m);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
@@ -2126,12 +2504,18 @@ public class MatrixM4x4FTest
         Assert.assertTrue(mr.get(row, column) == 15.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(mr).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testScaleRow()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     m0.set(0, 0, 1.0f);
     m0.set(0, 1, 2.0f);
@@ -2153,10 +2537,16 @@ public class MatrixM4x4FTest
     m0.set(3, 2, 15.0f);
     m0.set(3, 3, 16.0f);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.scaleRow(m0, 0, 2.0f, m1);
     MatrixM4x4F.scaleRow(m0, 1, 4.0f, m1);
     MatrixM4x4F.scaleRow(m0, 2, 8.0f, m1);
     MatrixM4x4F.scaleRow(m0, 3, 16.0f, m1);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 2.0);
     Assert.assertTrue(m1.get(0, 1) == 4.0);
@@ -2178,10 +2568,16 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 2) == 240.0);
     Assert.assertTrue(m1.get(3, 3) == 256.0);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.scaleRowInPlace(m0, 0, 2.0f);
     MatrixM4x4F.scaleRowInPlace(m0, 1, 4.0f);
     MatrixM4x4F.scaleRowInPlace(m0, 2, 8.0f);
     MatrixM4x4F.scaleRowInPlace(m0, 3, 16.0f);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m0.get(0, 0) == 2.0);
     Assert.assertTrue(m0.get(0, 1) == 4.0);
@@ -2202,6 +2598,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m0.get(3, 1) == 224.0);
     Assert.assertTrue(m0.get(3, 2) == 240.0);
     Assert.assertTrue(m0.get(3, 3) == 256.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -2211,6 +2610,9 @@ public class MatrixM4x4FTest
     final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     m0.set(0, 0, 1.0f);
     m0.set(0, 1, 2.0f);
@@ -2232,10 +2634,16 @@ public class MatrixM4x4FTest
     m0.set(3, 2, 15.0f);
     m0.set(3, 3, 16.0f);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.scaleRowWithContext(context, m0, 0, 2.0f, m1);
     MatrixM4x4F.scaleRowWithContext(context, m0, 1, 4.0f, m1);
     MatrixM4x4F.scaleRowWithContext(context, m0, 2, 8.0f, m1);
     MatrixM4x4F.scaleRowWithContext(context, m0, 3, 16.0f, m1);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 2.0f);
     Assert.assertTrue(m1.get(0, 1) == 4.0f);
@@ -2257,10 +2665,16 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 2) == 240.0f);
     Assert.assertTrue(m1.get(3, 3) == 256.0f);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+
     MatrixM4x4F.scaleRowInPlaceWithContext(context, m0, 0, 2.0f);
     MatrixM4x4F.scaleRowInPlaceWithContext(context, m0, 1, 4.0f);
     MatrixM4x4F.scaleRowInPlaceWithContext(context, m0, 2, 8.0f);
     MatrixM4x4F.scaleRowInPlaceWithContext(context, m0, 3, 16.0f);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
 
     Assert.assertTrue(m0.get(0, 0) == 2.0f);
     Assert.assertTrue(m0.get(0, 1) == 4.0f);
@@ -2281,6 +2695,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m0.get(3, 1) == 224.0f);
     Assert.assertTrue(m0.get(3, 2) == 240.0f);
     Assert.assertTrue(m0.get(3, 3) == 256.0f);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -2325,6 +2742,8 @@ public class MatrixM4x4FTest
   {
     final MatrixM4x4F m = new MatrixM4x4F();
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+
     Assert.assertTrue(m.set(0, 0, 3.0f).get(0, 0) == 3.0);
     Assert.assertTrue(m.set(0, 1, 5.0f).get(0, 1) == 5.0);
     Assert.assertTrue(m.set(0, 2, 7.0f).get(0, 2) == 7.0);
@@ -2344,6 +2763,8 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m.set(3, 1, 47.0f).get(3, 1) == 47.0);
     Assert.assertTrue(m.set(3, 2, 53.0f).get(3, 2) == 53.0);
     Assert.assertTrue(m.set(3, 3, 59.0f).get(3, 3) == 59.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -2351,6 +2772,8 @@ public class MatrixM4x4FTest
     testSetGetInterfaceIdentity()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
 
     Assert.assertTrue(m.set(0, 0, 3.0f).getRowColumnF(0, 0) == 3.0);
     Assert.assertTrue(m.set(0, 1, 5.0f).getRowColumnF(0, 1) == 5.0);
@@ -2371,6 +2794,8 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m.set(3, 1, 47.0f).getRowColumnF(3, 1) == 47.0);
     Assert.assertTrue(m.set(3, 2, 53.0f).getRowColumnF(3, 2) == 53.0);
     Assert.assertTrue(m.set(3, 3, 59.0f).getRowColumnF(3, 3) == 59.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testStorage()
@@ -2401,6 +2826,7 @@ public class MatrixM4x4FTest
       final FloatBuffer b = MatrixM4x4F.floatBuffer(m);
 
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
+      Assert.assertEquals(0, b.position());
 
       Assert.assertTrue(b.get(0) == 0.0);
       Assert.assertTrue(b.get(1) == 100.0);
@@ -2433,6 +2859,10 @@ public class MatrixM4x4FTest
 
     Assert.assertEquals(m0.toString(), m1.toString());
     Assert.assertFalse(m0.toString().equals(m2.toString()));
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m2).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -2447,6 +2877,9 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r = MatrixM4x4F.translateByVector2F(m, v, out);
       Assert.assertSame(out, r);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 0.0);
@@ -2466,11 +2899,17 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r = MatrixM4x4F.translateByVector2F(m, v, out);
       Assert.assertSame(out, r);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
@@ -2491,6 +2930,9 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -2505,6 +2947,9 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r = MatrixM4x4F.translateByVector2FInPlace(m, v);
       Assert.assertSame(m, r);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 0.0);
@@ -2524,11 +2969,17 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r = MatrixM4x4F.translateByVector2FInPlace(m, v);
       Assert.assertSame(m, r);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
@@ -2549,6 +3000,9 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -2564,6 +3018,9 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r = MatrixM4x4F.translateByVector2I(m, v, out);
       Assert.assertSame(out, r);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 0.0);
@@ -2583,11 +3040,17 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r = MatrixM4x4F.translateByVector2I(m, v, out);
       Assert.assertSame(out, r);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
@@ -2608,6 +3071,9 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -2622,6 +3088,9 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r = MatrixM4x4F.translateByVector2IInPlace(m, v);
       Assert.assertSame(m, r);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 0.0);
@@ -2641,11 +3110,17 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r = MatrixM4x4F.translateByVector2IInPlace(m, v);
       Assert.assertSame(m, r);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
@@ -2666,6 +3141,9 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -2681,6 +3159,9 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r = MatrixM4x4F.translateByVector3F(m, v, out);
       Assert.assertSame(out, r);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 0.0);
@@ -2700,11 +3181,17 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r = MatrixM4x4F.translateByVector3F(m, v, out);
       Assert.assertSame(out, r);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
@@ -2725,6 +3212,9 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -2739,6 +3229,9 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r = MatrixM4x4F.translateByVector3FInPlace(m, v);
       Assert.assertSame(m, r);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 0.0);
@@ -2758,11 +3251,17 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r = MatrixM4x4F.translateByVector3FInPlace(m, v);
       Assert.assertSame(m, r);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
@@ -2783,6 +3282,9 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -2798,6 +3300,9 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r = MatrixM4x4F.translateByVector3I(m, v, out);
       Assert.assertSame(out, r);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 0.0);
@@ -2817,11 +3322,17 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r = MatrixM4x4F.translateByVector3I(m, v, out);
       Assert.assertSame(out, r);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
@@ -2842,6 +3353,9 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -2856,6 +3370,9 @@ public class MatrixM4x4FTest
       final MatrixM4x4F r = MatrixM4x4F.translateByVector3IInPlace(m, v);
       Assert.assertSame(m, r);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 0.0);
@@ -2875,11 +3392,17 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
 
     {
       final MatrixM4x4F r = MatrixM4x4F.translateByVector3IInPlace(m, v);
       Assert.assertSame(m, r);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
 
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
@@ -2900,6 +3423,9 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
     }
   }
 
@@ -2915,6 +3441,10 @@ public class MatrixM4x4FTest
       final MatrixM4x4F t = MatrixM4x4F.makeTranslation3F(v);
       MatrixM4x4F.multiply(m, t, r);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(t).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 0.0);
@@ -2934,6 +3464,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(t).position());
     }
   }
 
@@ -2949,6 +3483,10 @@ public class MatrixM4x4FTest
       final MatrixM4x4F t = MatrixM4x4F.makeTranslation3I(v);
       MatrixM4x4F.multiply(m, t, r);
 
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(t).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 0.0);
@@ -2968,6 +3506,10 @@ public class MatrixM4x4FTest
       Assert.assertTrue(r.get(3, 1) == 0.0);
       Assert.assertTrue(r.get(3, 2) == 0.0);
       Assert.assertTrue(r.get(3, 3) == 1.0);
+
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+      Assert.assertEquals(0, MatrixM4x4F.floatBuffer(t).position());
     }
   }
 
@@ -2984,6 +3526,7 @@ public class MatrixM4x4FTest
       final FloatBuffer b = MatrixM4x4F.floatBuffer(out);
 
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
+      Assert.assertEquals(0, b.position());
 
       Assert.assertTrue(b.get(0) == 1.0);
       Assert.assertTrue(b.get(1) == 0.0);
@@ -3032,6 +3575,9 @@ public class MatrixM4x4FTest
     final MatrixM4x4F k = MatrixM4x4F.transpose(m, r);
     Assert.assertSame(k, r);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
     Assert.assertTrue(m.get(0, 0) == 0.0);
     Assert.assertTrue(m.get(0, 1) == 1.0);
     Assert.assertTrue(m.get(0, 2) == 2.0);
@@ -3065,6 +3611,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(r.get(3, 1) == 7.0);
     Assert.assertTrue(r.get(3, 2) == 11.0);
     Assert.assertTrue(r.get(3, 3) == 15.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testTransposeMutate()
@@ -3091,6 +3640,9 @@ public class MatrixM4x4FTest
     final MatrixM4x4F r = MatrixM4x4F.transposeInPlace(m);
     Assert.assertSame(m, r);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
+
     Assert.assertTrue(r.get(0, 0) == 0.0);
     Assert.assertTrue(r.get(0, 1) == 4.0);
     Assert.assertTrue(r.get(0, 2) == 8.0);
@@ -3107,6 +3659,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(r.get(3, 1) == 7.0);
     Assert.assertTrue(r.get(3, 2) == 11.0);
     Assert.assertTrue(r.get(3, 3) == 15.0);
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(r).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testZero()
@@ -3114,10 +3669,14 @@ public class MatrixM4x4FTest
     final MatrixM4x4F m = new MatrixM4x4F();
     MatrixM4x4F.setZero(m);
 
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
+
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
         Assert.assertTrue(m.get(row, column) == 0.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM4x4F.floatBuffer(m).position());
   }
 }

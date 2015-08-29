@@ -28,6 +28,7 @@ public class MatrixM3x3FTest
 
     final MatrixM3x3F mk = MatrixM3x3F.add(m0, m1, mr);
     Assert.assertSame(mr, mk);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(mk).position());
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
@@ -50,8 +51,14 @@ public class MatrixM3x3FTest
       }
     }
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+
     final MatrixM3x3F mr = MatrixM3x3F.addInPlace(m0, m1);
     Assert.assertSame(mr, m0);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(mr).position());
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
@@ -60,6 +67,10 @@ public class MatrixM3x3FTest
         Assert.assertTrue(m1.get(row, column) == 3.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(mr).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testAddRowScaled()
@@ -75,7 +86,13 @@ public class MatrixM3x3FTest
     m0.set(1, 1, 5.0f);
     m0.set(1, 2, 5.0f);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+
     MatrixM3x3F.addRowScaled(m0, 0, 1, 2, 2.0f, m1);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 0.0);
@@ -89,7 +106,13 @@ public class MatrixM3x3FTest
     Assert.assertTrue(m1.get(2, 1) == 13.0);
     Assert.assertTrue(m1.get(2, 2) == 13.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+
     MatrixM3x3F.addRowScaledInPlace(m0, 0, 1, 2, 2.0f);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
 
     Assert.assertTrue(m0.get(0, 0) == 3.0);
     Assert.assertTrue(m0.get(0, 1) == 3.0);
@@ -102,6 +125,9 @@ public class MatrixM3x3FTest
     Assert.assertTrue(m0.get(2, 0) == 13.0);
     Assert.assertTrue(m0.get(2, 1) == 13.0);
     Assert.assertTrue(m0.get(2, 2) == 13.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -183,7 +209,13 @@ public class MatrixM3x3FTest
     m0.set(2, 1, 8.0f);
     m0.set(2, 2, 9.0f);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+
     MatrixM3x3F.copy(m0, m1);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 2.0);
@@ -196,6 +228,9 @@ public class MatrixM3x3FTest
     Assert.assertTrue(m1.get(2, 0) == 7.0);
     Assert.assertTrue(m1.get(2, 1) == 8.0);
     Assert.assertTrue(m1.get(2, 2) == 9.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -204,6 +239,7 @@ public class MatrixM3x3FTest
   {
     final MatrixM3x3F m = new MatrixM3x3F();
     Assert.assertTrue(MatrixM3x3F.determinant(m) == 1.0);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testDeterminantOther()
@@ -213,15 +249,19 @@ public class MatrixM3x3FTest
     m.set(0, 0, 2.0f);
     m.set(1, 1, 2.0f);
     m.set(2, 2, 2.0f);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
     Assert.assertTrue(MatrixM3x3F.determinant(m) == 8.0);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testDeterminantScale()
   {
     final MatrixM3x3F m = new MatrixM3x3F();
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
     m.set(0, 0, 2.0f);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
     Assert.assertTrue(MatrixM3x3F.determinant(m) == 2.0);
   }
@@ -233,15 +273,18 @@ public class MatrixM3x3FTest
     final MatrixM3x3F m = new MatrixM3x3F();
 
     m.set(0, 0, -2.0f);
-
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
     Assert.assertTrue(MatrixM3x3F.determinant(m) == -2.0);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testDeterminantZero()
   {
     final MatrixM3x3F m = new MatrixM3x3F();
     MatrixM3x3F.setZero(m);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
     Assert.assertTrue(MatrixM3x3F.determinant(m) == 0.0);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testEqualsCase0()
@@ -253,13 +296,17 @@ public class MatrixM3x3FTest
   @SuppressWarnings("static-method") @Test public void testEqualsCase1()
   {
     final MatrixM3x3F m0 = new MatrixM3x3F();
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
     Assert.assertFalse(m0.equals(null));
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testEqualsCase2()
   {
     final MatrixM3x3F m0 = new MatrixM3x3F();
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
     Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testEqualsCase3()
@@ -267,6 +314,8 @@ public class MatrixM3x3FTest
     final MatrixM3x3F m0 = new MatrixM3x3F();
     final MatrixM3x3F m1 = new MatrixM3x3F();
     Assert.assertTrue(m0.equals(m1));
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -279,6 +328,8 @@ public class MatrixM3x3FTest
         final MatrixM3x3F m1 = new MatrixM3x3F();
         m1.set(row, col, 256);
         Assert.assertFalse(m0.equals(m1));
+        Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
       }
     }
   }
@@ -300,7 +351,13 @@ public class MatrixM3x3FTest
     m0.set(2, 1, 10.0f);
     m0.set(2, 2, 11.0f);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+
     MatrixM3x3F.exchangeRows(m0, 0, 2, m1);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 9.0);
     Assert.assertTrue(m1.get(0, 1) == 10.0);
@@ -314,7 +371,13 @@ public class MatrixM3x3FTest
     Assert.assertTrue(m1.get(2, 1) == 2.0);
     Assert.assertTrue(m1.get(2, 2) == 3.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+
     MatrixM3x3F.exchangeRowsInPlace(m1, 0, 2);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 1.0);
     Assert.assertTrue(m1.get(0, 1) == 2.0);
@@ -327,6 +390,9 @@ public class MatrixM3x3FTest
     Assert.assertTrue(m1.get(2, 0) == 9.0);
     Assert.assertTrue(m1.get(2, 1) == 10.0);
     Assert.assertTrue(m1.get(2, 2) == 11.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -374,8 +440,14 @@ public class MatrixM3x3FTest
         final MatrixM3x3F m0 = new MatrixM3x3F();
         final MatrixM3x3F m1 = new MatrixM3x3F();
         Assert.assertTrue(m0.hashCode() == m1.hashCode());
+        Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
         m1.set(row, col, 256);
+        Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
         Assert.assertFalse(m0.hashCode() == m1.hashCode());
+        Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+        Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
       }
     }
   }
@@ -398,7 +470,12 @@ public class MatrixM3x3FTest
     m0.set(2, 1, 23.0f);
     m0.set(2, 2, 29.0f);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+
     final MatrixM3x3F m1 = new MatrixM3x3F(m0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 3.0);
     Assert.assertTrue(m1.get(0, 1) == 5.0);
@@ -411,6 +488,9 @@ public class MatrixM3x3FTest
     Assert.assertTrue(m1.get(2, 0) == 19.0);
     Assert.assertTrue(m1.get(2, 1) == 23.0);
     Assert.assertTrue(m1.get(2, 2) == 29.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -430,6 +510,8 @@ public class MatrixM3x3FTest
     Assert.assertTrue(m.get(2, 0) == 0.0);
     Assert.assertTrue(m.get(2, 1) == 0.0);
     Assert.assertTrue(m.get(2, 2) == 1.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testInvertIdentity()
@@ -443,6 +525,10 @@ public class MatrixM3x3FTest
       final Some<MatrixM3x3F> s = (Some<MatrixM3x3F>) r;
       final MatrixM3x3F rm = s.value;
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(rm).position());
+
       Assert.assertTrue(MatrixM3x3F.get(rm, 0, 0) == 1.0);
       Assert.assertTrue(MatrixM3x3F.get(rm, 0, 1) == 0.0);
       Assert.assertTrue(MatrixM3x3F.get(rm, 0, 2) == 0.0);
@@ -454,6 +540,10 @@ public class MatrixM3x3FTest
       Assert.assertTrue(MatrixM3x3F.get(rm, 2, 0) == 0.0);
       Assert.assertTrue(MatrixM3x3F.get(rm, 2, 1) == 0.0);
       Assert.assertTrue(MatrixM3x3F.get(rm, 2, 2) == 1.0);
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(rm).position());
     }
 
     {
@@ -462,6 +552,10 @@ public class MatrixM3x3FTest
       final Some<MatrixM3x3F> s = (Some<MatrixM3x3F>) r;
       final MatrixM3x3F rm = s.value;
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(rm).position());
+
       Assert.assertTrue(MatrixM3x3F.get(rm, 0, 0) == 1.0);
       Assert.assertTrue(MatrixM3x3F.get(rm, 0, 1) == 0.0);
       Assert.assertTrue(MatrixM3x3F.get(rm, 0, 2) == 0.0);
@@ -473,6 +567,10 @@ public class MatrixM3x3FTest
       Assert.assertTrue(MatrixM3x3F.get(rm, 2, 0) == 0.0);
       Assert.assertTrue(MatrixM3x3F.get(rm, 2, 1) == 0.0);
       Assert.assertTrue(MatrixM3x3F.get(rm, 2, 2) == 1.0);
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(rm).position());
     }
   }
 
@@ -499,6 +597,10 @@ public class MatrixM3x3FTest
       final Some<MatrixM3x3F> s = (Some<MatrixM3x3F>) r;
       final MatrixM3x3F rm = s.value;
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(rm).position());
+
       Assert.assertTrue(rm.get(0, 0) == 0.5);
       Assert.assertTrue(rm.get(0, 1) == 0);
       Assert.assertTrue(rm.get(0, 2) == 0);
@@ -510,6 +612,10 @@ public class MatrixM3x3FTest
       Assert.assertTrue(rm.get(2, 0) == 0);
       Assert.assertTrue(rm.get(2, 1) == 0);
       Assert.assertTrue(rm.get(2, 2) == 0.5);
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(rm).position());
     }
 
     {
@@ -517,6 +623,10 @@ public class MatrixM3x3FTest
       Assert.assertEquals(Type.OPTION_SOME, r.type);
       final Some<MatrixM3x3F> s = (Some<MatrixM3x3F>) r;
       final MatrixM3x3F rm = s.value;
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(rm).position());
 
       Assert.assertTrue(rm.get(0, 0) == 2);
       Assert.assertTrue(rm.get(0, 1) == 0);
@@ -529,6 +639,10 @@ public class MatrixM3x3FTest
       Assert.assertTrue(rm.get(2, 0) == 0);
       Assert.assertTrue(rm.get(2, 1) == 0);
       Assert.assertTrue(rm.get(2, 2) == 2);
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(rm).position());
     }
   }
 
@@ -564,6 +678,10 @@ public class MatrixM3x3FTest
         Assert.assertTrue(m1.get(row, column) == mr.get(row, column));
       }
     }
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(mr).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -607,9 +725,15 @@ public class MatrixM3x3FTest
     MatrixM3x3F.set(m0, 2, 1, 8.0f);
     MatrixM3x3F.set(m0, 2, 2, 9.0f);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+
     final MatrixM3x3F m1 = new MatrixM3x3F(m0);
     final MatrixM3x3F r = MatrixM3x3F.multiplyInPlace(m0, m1);
     Assert.assertSame(r, m0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
     Assert.assertTrue(MatrixM3x3F.get(r, 0, 0) == 30.0);
     Assert.assertTrue(MatrixM3x3F.get(r, 0, 1) == 36.0);
@@ -622,6 +746,10 @@ public class MatrixM3x3FTest
     Assert.assertTrue(MatrixM3x3F.get(r, 2, 0) == 102.0);
     Assert.assertTrue(MatrixM3x3F.get(r, 2, 1) == 126.0);
     Assert.assertTrue(MatrixM3x3F.get(r, 2, 2) == 150.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testMultiplySimple()
@@ -640,11 +768,17 @@ public class MatrixM3x3FTest
     MatrixM3x3F.set(m0, 2, 1, 8.0f);
     MatrixM3x3F.set(m0, 2, 2, 9.0f);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+
     final MatrixM3x3F m1 = new MatrixM3x3F(m0);
     final MatrixM3x3F mr = new MatrixM3x3F();
 
     final MatrixM3x3F r = MatrixM3x3F.multiply(m0, m1, mr);
     Assert.assertSame(r, mr);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
     Assert.assertTrue(MatrixM3x3F.get(r, 0, 0) == 30.0);
     Assert.assertTrue(MatrixM3x3F.get(r, 0, 1) == 36.0);
@@ -657,6 +791,10 @@ public class MatrixM3x3FTest
     Assert.assertTrue(MatrixM3x3F.get(r, 2, 0) == 102.0);
     Assert.assertTrue(MatrixM3x3F.get(r, 2, 1) == 126.0);
     Assert.assertTrue(MatrixM3x3F.get(r, 2, 2) == 150.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -677,6 +815,8 @@ public class MatrixM3x3FTest
     MatrixM3x3F.set(m0, 2, 1, 8.0f);
     MatrixM3x3F.set(m0, 2, 2, 9.0f);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+
     final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
     final VectorM3F out = new VectorM3F();
 
@@ -686,6 +826,8 @@ public class MatrixM3x3FTest
     Assert.assertTrue(out.x == 14.0);
     Assert.assertTrue(out.y == 32.0);
     Assert.assertTrue(out.z == 50.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testMultiplyZero()
@@ -694,7 +836,15 @@ public class MatrixM3x3FTest
     final MatrixM3x3F m1 = new MatrixM3x3F();
     final MatrixM3x3F mr = new MatrixM3x3F();
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(mr).position());
+
     MatrixM3x3F.setZero(m1);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(mr).position());
 
     final MatrixM3x3F r = MatrixM3x3F.multiply(m0, m1, mr);
     Assert.assertSame(mr, r);
@@ -704,6 +854,10 @@ public class MatrixM3x3FTest
         Assert.assertTrue(mr.get(row, column) == 0.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(mr).position());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -752,15 +906,21 @@ public class MatrixM3x3FTest
     Assert.assertTrue(v.y == 0.0);
     Assert.assertTrue(v.z == 0.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     MatrixM3x3F.row(m, 1, v);
     Assert.assertTrue(v.x == 0.0);
     Assert.assertTrue(v.y == 1.0);
     Assert.assertTrue(v.z == 0.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     MatrixM3x3F.row(m, 2, v);
     Assert.assertTrue(v.x == 0.0);
     Assert.assertTrue(v.y == 0.0);
     Assert.assertTrue(v.z == 1.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -790,8 +950,13 @@ public class MatrixM3x3FTest
       }
     }
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+
     final MatrixM3x3F mk = MatrixM3x3F.scale(m0, 5.0f, mr);
     Assert.assertSame(mr, mk);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(mr).position());
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
@@ -799,6 +964,9 @@ public class MatrixM3x3FTest
         Assert.assertTrue(mr.get(row, column) == 15.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(mr).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testScaleMutate()
@@ -811,8 +979,13 @@ public class MatrixM3x3FTest
       }
     }
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     final MatrixM3x3F mr = MatrixM3x3F.scaleInPlace(m, 5.0f);
     Assert.assertSame(mr, m);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(mr).position());
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
@@ -820,6 +993,9 @@ public class MatrixM3x3FTest
         Assert.assertTrue(mr.get(row, column) == 15.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(mr).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testScaleRow()
@@ -839,9 +1015,14 @@ public class MatrixM3x3FTest
     m0.set(2, 1, 10.0f);
     m0.set(2, 2, 11.0f);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+
     MatrixM3x3F.scaleRow(m0, 0, 2.0f, m1);
     MatrixM3x3F.scaleRow(m0, 1, 4.0f, m1);
     MatrixM3x3F.scaleRow(m0, 2, 8.0f, m1);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
 
     Assert.assertTrue(m1.get(0, 0) == 2.0);
     Assert.assertTrue(m1.get(0, 1) == 4.0);
@@ -855,9 +1036,15 @@ public class MatrixM3x3FTest
     Assert.assertTrue(m1.get(2, 1) == 80.0);
     Assert.assertTrue(m1.get(2, 2) == 88.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+
     MatrixM3x3F.scaleRowInPlace(m0, 0, 2.0f);
     MatrixM3x3F.scaleRowInPlace(m0, 1, 4.0f);
     MatrixM3x3F.scaleRowInPlace(m0, 2, 8.0f);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
 
     Assert.assertTrue(m0.get(0, 0) == 2.0);
     Assert.assertTrue(m0.get(0, 1) == 4.0);
@@ -870,6 +1057,9 @@ public class MatrixM3x3FTest
     Assert.assertTrue(m0.get(2, 0) == 72.0);
     Assert.assertTrue(m0.get(2, 1) == 80.0);
     Assert.assertTrue(m0.get(2, 2) == 88.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
   }
 
   @SuppressWarnings("static-method") @Test(
@@ -914,17 +1104,25 @@ public class MatrixM3x3FTest
   {
     final MatrixM3x3F m = new MatrixM3x3F();
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertTrue(m.set(0, 0, 3.0f).get(0, 0) == 3.0);
     Assert.assertTrue(m.set(0, 1, 5.0f).get(0, 1) == 5.0);
     Assert.assertTrue(m.set(0, 2, 7.0f).get(0, 2) == 7.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
     Assert.assertTrue(m.set(1, 0, 13.0f).get(1, 0) == 13.0);
     Assert.assertTrue(m.set(1, 1, 17.0f).get(1, 1) == 17.0);
     Assert.assertTrue(m.set(1, 2, 19.0f).get(1, 2) == 19.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertTrue(m.set(2, 0, 29.0f).get(2, 0) == 29.0);
     Assert.assertTrue(m.set(2, 1, 31.0f).get(2, 1) == 31.0);
     Assert.assertTrue(m.set(2, 2, 37.0f).get(2, 2) == 37.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -933,17 +1131,25 @@ public class MatrixM3x3FTest
   {
     final MatrixM3x3F m = new MatrixM3x3F();
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertTrue(m.set(0, 0, 3.0f).getRowColumnF(0, 0) == 3.0);
     Assert.assertTrue(m.set(0, 1, 5.0f).getRowColumnF(0, 1) == 5.0);
     Assert.assertTrue(m.set(0, 2, 7.0f).getRowColumnF(0, 2) == 7.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
     Assert.assertTrue(m.set(1, 0, 13.0f).getRowColumnF(1, 0) == 13.0);
     Assert.assertTrue(m.set(1, 1, 17.0f).getRowColumnF(1, 1) == 17.0);
     Assert.assertTrue(m.set(1, 2, 19.0f).getRowColumnF(1, 2) == 19.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertTrue(m.set(2, 0, 29.0f).getRowColumnF(2, 0) == 29.0);
     Assert.assertTrue(m.set(2, 1, 31.0f).getRowColumnF(2, 1) == 31.0);
     Assert.assertTrue(m.set(2, 2, 37.0f).getRowColumnF(2, 2) == 37.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testStorage()
@@ -962,10 +1168,13 @@ public class MatrixM3x3FTest
     m.set(2, 1, 201);
     m.set(2, 2, 202);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     {
       final FloatBuffer b = MatrixM3x3F.floatBuffer(m);
 
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
+      Assert.assertEquals(0, b.position());
 
       Assert.assertTrue(b.get(0) == 0.0);
       Assert.assertTrue(b.get(1) == 100.0);
@@ -990,6 +1199,10 @@ public class MatrixM3x3FTest
 
     Assert.assertEquals(m0.toString(), m1.toString());
     Assert.assertFalse(m0.toString().equals(m2.toString()));
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m0).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m1).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m2).position());
   }
 
   @SuppressWarnings({ "boxing", "static-method" }) @Test public
@@ -1000,18 +1213,25 @@ public class MatrixM3x3FTest
     final VectorM2F v = new VectorM2F(0, 0);
 
     MatrixM3x3F.makeTranslation2F(v, m);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
     Assert.assertEquals(1.0f, m.get(0, 0));
     Assert.assertEquals(0.0f, m.get(0, 1));
     Assert.assertEquals(0.0f, m.get(0, 2));
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertEquals(0.0f, m.get(1, 0));
     Assert.assertEquals(1.0f, m.get(1, 1));
     Assert.assertEquals(0.0f, m.get(1, 2));
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertEquals(0.0f, m.get(2, 0));
     Assert.assertEquals(0.0f, m.get(2, 1));
     Assert.assertEquals(1.0f, m.get(2, 2));
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings({ "boxing", "static-method" }) @Test public
@@ -1022,18 +1242,25 @@ public class MatrixM3x3FTest
     final VectorM2F v = new VectorM2F(3, 7);
 
     MatrixM3x3F.makeTranslation2F(v, m);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
     Assert.assertEquals(1.0f, m.get(0, 0));
     Assert.assertEquals(0.0f, m.get(0, 1));
     Assert.assertEquals(3.0f, m.get(0, 2));
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertEquals(0.0f, m.get(1, 0));
     Assert.assertEquals(1.0f, m.get(1, 1));
     Assert.assertEquals(7.0f, m.get(1, 2));
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertEquals(0.0f, m.get(2, 0));
     Assert.assertEquals(0.0f, m.get(2, 1));
     Assert.assertEquals(1.0f, m.get(2, 2));
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings({ "boxing", "static-method" }) @Test public
@@ -1044,18 +1271,25 @@ public class MatrixM3x3FTest
     final VectorM2I v = new VectorM2I(0, 0);
 
     MatrixM3x3F.makeTranslation2I(v, m);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
     Assert.assertEquals(1.0f, m.get(0, 0));
     Assert.assertEquals(0.0f, m.get(0, 1));
     Assert.assertEquals(0.0f, m.get(0, 2));
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertEquals(0.0f, m.get(1, 0));
     Assert.assertEquals(1.0f, m.get(1, 1));
     Assert.assertEquals(0.0f, m.get(1, 2));
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertEquals(0.0f, m.get(2, 0));
     Assert.assertEquals(0.0f, m.get(2, 1));
     Assert.assertEquals(1.0f, m.get(2, 2));
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings({ "boxing", "static-method" }) @Test public
@@ -1066,18 +1300,25 @@ public class MatrixM3x3FTest
     final VectorM2I v = new VectorM2I(3, 7);
 
     MatrixM3x3F.makeTranslation2I(v, m);
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
 
     Assert.assertEquals(1.0f, m.get(0, 0));
     Assert.assertEquals(0.0f, m.get(0, 1));
     Assert.assertEquals(3.0f, m.get(0, 2));
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertEquals(0.0f, m.get(1, 0));
     Assert.assertEquals(1.0f, m.get(1, 1));
     Assert.assertEquals(7.0f, m.get(1, 2));
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     Assert.assertEquals(0.0f, m.get(2, 0));
     Assert.assertEquals(0.0f, m.get(2, 1));
     Assert.assertEquals(1.0f, m.get(2, 2));
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 
   @SuppressWarnings({ "boxing", "static-method" }) @Test public
@@ -1092,34 +1333,58 @@ public class MatrixM3x3FTest
       final MatrixM3x3F r = MatrixM3x3F.translateByVector2F(m, v, out);
       Assert.assertSame(out, r);
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(1.0f, r.get(0, 0));
       Assert.assertEquals(0.0f, r.get(0, 1));
       Assert.assertEquals(1.0f, r.get(0, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
       Assert.assertEquals(0.0f, r.get(1, 0));
       Assert.assertEquals(1.0f, r.get(1, 1));
       Assert.assertEquals(2.0f, r.get(1, 2));
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(0.0f, r.get(2, 0));
       Assert.assertEquals(0.0f, r.get(2, 1));
       Assert.assertEquals(1.0f, r.get(2, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
     }
 
     {
       final MatrixM3x3F r = MatrixM3x3F.translateByVector2F(m, v, out);
       Assert.assertSame(out, r);
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(1.0f, r.get(0, 0));
       Assert.assertEquals(0.0f, r.get(0, 1));
       Assert.assertEquals(2.0f, r.get(0, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
       Assert.assertEquals(0.0f, r.get(1, 0));
       Assert.assertEquals(1.0f, r.get(1, 1));
       Assert.assertEquals(4.0f, r.get(1, 2));
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(0.0f, r.get(2, 0));
       Assert.assertEquals(0.0f, r.get(2, 1));
       Assert.assertEquals(1.0f, r.get(2, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
     }
   }
 
@@ -1134,34 +1399,58 @@ public class MatrixM3x3FTest
       final MatrixM3x3F r = MatrixM3x3F.translateByVector2FInPlace(m, v);
       Assert.assertSame(m, r);
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(1.0f, r.get(0, 0));
       Assert.assertEquals(0.0f, r.get(0, 1));
       Assert.assertEquals(1.0f, r.get(0, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
       Assert.assertEquals(0.0f, r.get(1, 0));
       Assert.assertEquals(1.0f, r.get(1, 1));
       Assert.assertEquals(2.0f, r.get(1, 2));
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(0.0f, r.get(2, 0));
       Assert.assertEquals(0.0f, r.get(2, 1));
       Assert.assertEquals(1.0f, r.get(2, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
     }
 
     {
       final MatrixM3x3F r = MatrixM3x3F.translateByVector2FInPlace(m, v);
       Assert.assertSame(m, r);
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(1.0f, r.get(0, 0));
       Assert.assertEquals(0.0f, r.get(0, 1));
       Assert.assertEquals(2.0f, r.get(0, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
       Assert.assertEquals(0.0f, r.get(1, 0));
       Assert.assertEquals(1.0f, r.get(1, 1));
       Assert.assertEquals(4.0f, r.get(1, 2));
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(0.0f, r.get(2, 0));
       Assert.assertEquals(0.0f, r.get(2, 1));
       Assert.assertEquals(1.0f, r.get(2, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
     }
   }
 
@@ -1177,34 +1466,58 @@ public class MatrixM3x3FTest
       final MatrixM3x3F r = MatrixM3x3F.translateByVector2I(m, v, out);
       Assert.assertSame(out, r);
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(1.0f, r.get(0, 0));
       Assert.assertEquals(0.0f, r.get(0, 1));
       Assert.assertEquals(1.0f, r.get(0, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
       Assert.assertEquals(0.0f, r.get(1, 0));
       Assert.assertEquals(1.0f, r.get(1, 1));
       Assert.assertEquals(2.0f, r.get(1, 2));
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(0.0f, r.get(2, 0));
       Assert.assertEquals(0.0f, r.get(2, 1));
       Assert.assertEquals(1.0f, r.get(2, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
     }
 
     {
       final MatrixM3x3F r = MatrixM3x3F.translateByVector2I(m, v, out);
       Assert.assertSame(out, r);
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(1.0f, r.get(0, 0));
       Assert.assertEquals(0.0f, r.get(0, 1));
       Assert.assertEquals(2.0f, r.get(0, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
       Assert.assertEquals(0.0f, r.get(1, 0));
       Assert.assertEquals(1.0f, r.get(1, 1));
       Assert.assertEquals(4.0f, r.get(1, 2));
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertEquals(0.0f, r.get(2, 0));
       Assert.assertEquals(0.0f, r.get(2, 1));
       Assert.assertEquals(1.0f, r.get(2, 2));
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
     }
   }
 
@@ -1219,34 +1532,58 @@ public class MatrixM3x3FTest
       final MatrixM3x3F r = MatrixM3x3F.translateByVector2IInPlace(m, v);
       Assert.assertSame(m, r);
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 1.0);
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
       Assert.assertTrue(r.get(1, 0) == 0.0);
       Assert.assertTrue(r.get(1, 1) == 1.0);
       Assert.assertTrue(r.get(1, 2) == 2.0);
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(2, 0) == 0.0);
       Assert.assertTrue(r.get(2, 1) == 0.0);
       Assert.assertTrue(r.get(2, 2) == 1.0);
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
     }
 
     {
       final MatrixM3x3F r = MatrixM3x3F.translateByVector2IInPlace(m, v);
       Assert.assertSame(m, r);
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(0, 0) == 1.0);
       Assert.assertTrue(r.get(0, 1) == 0.0);
       Assert.assertTrue(r.get(0, 2) == 2.0);
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
       Assert.assertTrue(r.get(1, 0) == 0.0);
       Assert.assertTrue(r.get(1, 1) == 1.0);
       Assert.assertTrue(r.get(1, 2) == 4.0);
 
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
       Assert.assertTrue(r.get(2, 0) == 0.0);
       Assert.assertTrue(r.get(2, 1) == 0.0);
       Assert.assertTrue(r.get(2, 2) == 1.0);
+
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+      Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
     }
   }
 
@@ -1263,6 +1600,7 @@ public class MatrixM3x3FTest
       final FloatBuffer b = MatrixM3x3F.floatBuffer(out);
 
       Assert.assertTrue(b.order() == ByteOrder.nativeOrder());
+      Assert.assertEquals(0, b.position());
 
       Assert.assertEquals(1.0f, b.get(0));
       Assert.assertEquals(0.0f, b.get(1));
@@ -1293,32 +1631,55 @@ public class MatrixM3x3FTest
     m.set(2, 1, 9.0f);
     m.set(2, 2, 10.0f);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     final MatrixM3x3F k = MatrixM3x3F.transpose(m, r);
     Assert.assertSame(k, r);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
     Assert.assertTrue(m.get(0, 0) == 0.0);
     Assert.assertTrue(m.get(0, 1) == 1.0);
     Assert.assertTrue(m.get(0, 2) == 2.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
     Assert.assertTrue(m.get(1, 0) == 4.0);
     Assert.assertTrue(m.get(1, 1) == 5.0);
     Assert.assertTrue(m.get(1, 2) == 6.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
     Assert.assertTrue(m.get(2, 0) == 8.0);
     Assert.assertTrue(m.get(2, 1) == 9.0);
     Assert.assertTrue(m.get(2, 2) == 10.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
     Assert.assertTrue(r.get(0, 0) == 0.0);
     Assert.assertTrue(r.get(0, 1) == 4.0);
     Assert.assertTrue(r.get(0, 2) == 8.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
     Assert.assertTrue(r.get(1, 0) == 1.0);
     Assert.assertTrue(r.get(1, 1) == 5.0);
     Assert.assertTrue(r.get(1, 2) == 9.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
     Assert.assertTrue(r.get(2, 0) == 2.0);
     Assert.assertTrue(r.get(2, 1) == 6.0);
     Assert.assertTrue(r.get(2, 2) == 10.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testTransposeMutate()
@@ -1337,20 +1698,34 @@ public class MatrixM3x3FTest
     m.set(2, 1, 9.0f);
     m.set(2, 2, 10.0f);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     final MatrixM3x3F r = MatrixM3x3F.transposeInPlace(m);
     Assert.assertSame(m, r);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
 
     Assert.assertTrue(r.get(0, 0) == 0.0);
     Assert.assertTrue(r.get(0, 1) == 4.0);
     Assert.assertTrue(r.get(0, 2) == 8.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
     Assert.assertTrue(r.get(1, 0) == 1.0);
     Assert.assertTrue(r.get(1, 1) == 5.0);
     Assert.assertTrue(r.get(1, 2) == 9.0);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
+
     Assert.assertTrue(r.get(2, 0) == 2.0);
     Assert.assertTrue(r.get(2, 1) == 6.0);
     Assert.assertTrue(r.get(2, 2) == 10.0);
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(r).position());
   }
 
   @SuppressWarnings("static-method") @Test public void testZero()
@@ -1358,10 +1733,14 @@ public class MatrixM3x3FTest
     final MatrixM3x3F m = new MatrixM3x3F();
     MatrixM3x3F.setZero(m);
 
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
+
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
         Assert.assertTrue(m.get(row, column) == 0.0);
       }
     }
+
+    Assert.assertEquals(0, MatrixM3x3F.floatBuffer(m).position());
   }
 }
