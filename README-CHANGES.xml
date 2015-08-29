@@ -4,6 +4,16 @@
 
   <c:release ticket-system="com.io7m.fossil.jtensors">
     <c:date>2012-03-15</c:date>
+    <c:version>1.0.1</c:version>
+    <c:item>
+      <c:date>2012-03-15</c:date>
+      <c:type-code-fix/>
+      <c:summary>Correct build.xml to produce a jar file with the right version</c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release ticket-system="com.io7m.fossil.jtensors">
+    <c:date>2012-03-15</c:date>
     <c:version>1.0.0</c:version>
     <c:item>
       <c:date>2012-03-06</c:date>

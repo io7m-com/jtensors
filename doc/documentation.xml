@@ -19,7 +19,7 @@
 <s:document
   xmlns:s="http://www.io7m.com/schemas/structural/0.1.0"
   xmlns:xi="http://www.w3.org/2001/XInclude">
-  <s:document-title>io7m-jtensors 1.0.0 Documentation</s:document-title>
+  <s:document-title>io7m-jtensors 1.0.1 Documentation</s:document-title>
   <s:document-style>documentation.css</s:document-style>
   <s:document-contents/>
 
@@ -85,9 +85,9 @@
       <s:subsection>
         <s:subsection-title>Installation</s:subsection-title>
         <s:paragraph>
-          Include <s:term type="file">io7m-jtensors-1.0.0.jar</s:term>
+          Include <s:term type="file">io7m-jtensors-1.0.1.jar</s:term>
           in your projects. The build process also produces a "source" jar
-          file, <s:term type="file">io7m-jtensors-source-1.0.0.jar</s:term>,
+          file, <s:term type="file">io7m-jtensors-source-1.0.1.jar</s:term>,
           that can be used for debugging in any IDE. The jar files do not
           contain any of the dependencies of the project, so these should
           be included separately.
