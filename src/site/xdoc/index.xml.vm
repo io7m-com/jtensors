@@ -21,14 +21,14 @@
     </subsection>
     <subsection name="features">
       <ul>
-        <li>2D, 3D, and 4D immutable vector types in single and double precision float versions.</li>
+        <li>2D, 3D, and 4D immutable vector types in <tt>float</tt> and <tt>double</tt> versions.</li>
         <li>2D, 3D, and 4D immutable vector types in <tt>int</tt> and <tt>long</tt> versions.</li>
-        <li>2D, 3D, and 4D mutable vector types in single and double precision versions.</li>
+        <li>2D, 3D, and 4D mutable vector types in <tt>float</tt> and <tt>double</tt> versions.</li>
         <li>2D, 3D, and 4D mutable vector types in <tt>int</tt> and <tt>long</tt> versions.</li>
-        <li>4D immutable quaternion types in single and double precision float versions.</li>
-        <li>4D mutable quaternion types in single and double precision float versions.</li>
-        <li>2x2, 3x3, and 4x4 mutable matrix types in single and double precision float versions.</li>
-        <li>Mutable matrix types are backed by direct ByteBuffers in column-major order for efficient interfacing with OpenGL and native code.</li>
+        <li>4D immutable quaternion types in <tt>float</tt> and <tt>double</tt> versions.</li>
+        <li>4D mutable quaternion types in <tt>float</tt> and <tt>double</tt> versions.</li>
+        <li>2x2, 3x3, and 4x4 mutable matrix types in <tt>float</tt> and <tt>double</tt> versions.</li>
+        <li>Mutable matrix types are backed by direct <tt>ByteBuffers</tt> in column-major order for efficient interfacing with OpenGL and native code.</li>
         <li>Memory efficient: All functions that require extra memory have variants that allow for the use of programmer-provided constant-sized temporary storage.</li>
         <li>Phantom-typed variants of all types for statically distinguishing between semantically different but otherwise type-compatible vectors and matrices.</li>
         <li>Fully documented (Javadoc).</li>
