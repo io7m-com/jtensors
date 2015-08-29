@@ -16,9 +16,11 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import com.io7m.jaux.ApproximatelyEqualDouble;
+import com.io7m.jaux.ApproximatelyEqualFloat;
 
 /**
  * A three-dimensional immutable vector type with single precision elements.
@@ -30,37 +32,46 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 @Immutable public final class VectorI3F implements VectorReadable3F
 {
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and the
+   * element-wise product of <code>v1</code> and <code>r</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
    * @param r
-   *          The scaling value.
+   *          The scaling value
+   * 
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
    */
 
-  public static VectorI3F addScaled(
-    final VectorI3F v0,
-    final VectorI3F v1,
+  public static @Nonnull VectorI3F addScaled(
+    final @Nonnull VectorI3F v0,
+    final @Nonnull VectorI3F v1,
     final float r)
   {
     return VectorI3F.add(v0, VectorI3F.scale(v1, r));
   }
 
   /**
-   * @see ApproximatelyEqualDouble
+   * Determine whether or not the elements of the two vectors <code>v0</code>
+   * and <code>v1</code> are approximately equal.
+   * 
+   * @see ApproximatelyEqualFloat
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return true, iff <code>v0</code> is approximately equal to
    *         <code>v1</code> , within an appropriate degree of error for
-   *         single precision floating point values.
+   *         single precision floating point values
    */
 
   public static boolean approximatelyEqual(
-    final VectorI3F v0,
-    final VectorI3F v1)
+    final @Nonnull VectorI3F v0,
+    final @Nonnull VectorI3F v1)
   {
     final boolean ex =
       ApproximatelyEqualDouble.approximatelyEqual(v0.x, v1.x);
@@ -72,18 +83,22 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. maximum]</code> inclusive.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         and at least <code>minimum</code>.
    */
 
-  public static VectorI3F clamp(
-    final VectorI3F v,
+  public static @Nonnull VectorI3F clamp(
+    final @Nonnull VectorI3F v,
     final float minimum,
     final float maximum)
   {
@@ -94,19 +109,24 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code> and
+   * <code>maximum</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          the vector containing the minimum acceptable values
+   *          The vector containing the minimum acceptable values
    * @param maximum
-   *          the vector containing the maximum acceptable values
+   *          The vector containing the maximum acceptable values
+   * 
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
    */
 
-  public static VectorI3F clampByVector(
-    final VectorI3F v,
-    final VectorI3F minimum,
-    final VectorI3F maximum)
+  public static @Nonnull VectorI3F clampByVector(
+    final @Nonnull VectorI3F v,
+    final @Nonnull VectorI3F minimum,
+    final @Nonnull VectorI3F maximum)
   {
     final float x = Math.min(Math.max(v.x, minimum.x), maximum.x);
     final float y = Math.min(Math.max(v.y, minimum.y), maximum.y);
@@ -115,16 +135,19 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[-Infinity .. maximum]</code> inclusive.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param maximum
-   *          The maximum allowed value.
+   *          The maximum allowed value
+   * 
    * @return A vector with both elements equal to at most <code>maximum</code>
-   *         .
    */
 
-  public static VectorI3F clampMaximum(
-    final VectorI3F v,
+  public static @Nonnull VectorI3F clampMaximum(
+    final @Nonnull VectorI3F v,
     final float maximum)
   {
     final float x = Math.min(v.x, maximum);
@@ -134,16 +157,20 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>maximum</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param maximum
-   *          The vector containing the maximum acceptable values.
+   *          The vector containing the maximum acceptable values
+   * 
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
    */
 
-  public static VectorI3F clampMaximumByVector(
-    final VectorI3F v,
-    final VectorI3F maximum)
+  public static @Nonnull VectorI3F clampMaximumByVector(
+    final @Nonnull VectorI3F v,
+    final @Nonnull VectorI3F maximum)
   {
     final float x = Math.min(v.x, maximum.x);
     final float y = Math.min(v.y, maximum.y);
@@ -152,16 +179,20 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the range
+   * <code>[minimum .. Infinity]</code> inclusive.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The minimum allowed value.
+   *          The minimum allowed value
+   * 
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>.
+   *         <code>minimum</code>
    */
 
-  public static VectorI3F clampMinimum(
-    final VectorI3F v,
+  public static @Nonnull VectorI3F clampMinimum(
+    final @Nonnull VectorI3F v,
     final float minimum)
   {
     final float x = Math.max(v.x, minimum);
@@ -171,16 +202,20 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Clamp the elements of the vector <code>v</code> to the inclusive range
+   * given by the corresponding elements in <code>minimum</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param minimum
-   *          The vector containing the minimum acceptable values.
+   *          The vector containing the minimum acceptable values
+   * 
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
    */
 
-  public static VectorI3F clampMinimumByVector(
-    final VectorI3F v,
-    final VectorI3F minimum)
+  public static @Nonnull VectorI3F clampMinimumByVector(
+    final @Nonnull VectorI3F v,
+    final @Nonnull VectorI3F minimum)
   {
     final float x = Math.max(v.x, minimum.x);
     final float y = Math.max(v.y, minimum.y);
@@ -189,17 +224,21 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Calculate the cross product of the vectors <code>v0</code> and
+   * <code>v1</code>. The result is a vector perpendicular to both vectors.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return A vector perpendicular to both <code>v0</code> and
-   *         <code>v1</code>.
+   *         <code>v1</code>
    */
 
-  public static VectorI3F crossProduct(
-    final VectorI3F v0,
-    final VectorI3F v1)
+  public static @Nonnull VectorI3F crossProduct(
+    final @Nonnull VectorI3F v0,
+    final @Nonnull VectorI3F v1)
   {
     final float x = (v0.y * v1.z) - (v0.z * v1.y);
     final float y = (v0.z * v1.x) - (v0.x * v1.z);
@@ -208,31 +247,39 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Calculate the distance between the two vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
-   * @return The distance between the two vectors.
+   *          The right input vector
+   * 
+   * @return The distance between the two vectors
    */
 
   public static float distance(
-    final VectorI3F v0,
-    final VectorI3F v1)
+    final @Nonnull VectorI3F v0,
+    final @Nonnull VectorI3F v1)
   {
     return VectorI3F.magnitude(VectorI3F.subtract(v0, v1));
   }
 
   /**
+   * Calculate the scalar product of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
-   * @return The scalar product of the two vectors.
+   *          The right input vector
+   * 
+   * @return The scalar product of the two vectors
    */
 
   public static float dotProduct(
-    final VectorI3F v0,
-    final VectorI3F v1)
+    final @Nonnull VectorI3F v0,
+    final @Nonnull VectorI3F v1)
   {
     final float x = v0.x * v1.x;
     final float y = v0.y * v1.y;
@@ -241,6 +288,17 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
+   * amount <code>alpha</code>.
+   * 
+   * The <code>alpha</code> parameter controls the degree of interpolation,
+   * such that:
+   * 
+   * <ul>
+   * <li><code>interpolateLinear(v0, v1, 0.0) = v0</code></li>
+   * <li><code>interpolateLinear(v0, v1, 1.0) = v1</code></li>
+   * </ul>
+   * 
    * @param v0
    *          The left input vector.
    * @param v1
@@ -248,53 +306,65 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @param alpha
    *          The interpolation value, between <code>0.0</code> and
    *          <code>1.0</code>.
+   * 
    * @return <code>(1 - alpha) * v0 + alpha * v1</code>
    */
 
-  public static VectorI3F interpolateLinear(
-    final VectorI3F v0,
-    final VectorI3F v1,
+  public static @Nonnull VectorI3F interpolateLinear(
+    final @Nonnull VectorI3F v0,
+    final @Nonnull VectorI3F v1,
     final float alpha)
   {
-    final VectorI3F w0 = VectorI3F.scale(v0, 1.0f - alpha);
-    final VectorI3F w1 = VectorI3F.scale(v1, alpha);
+    final @Nonnull VectorI3F w0 = VectorI3F.scale(v0, 1.0f - alpha);
+    final @Nonnull VectorI3F w1 = VectorI3F.scale(v1, alpha);
     return VectorI3F.add(w0, w1);
   }
 
   /**
+   * Calculate the magnitude of the vector <code>v</code>.
+   * 
+   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * 
    * @param v
-   *          The input vector.
-   * @return The magnitude of the input vector..
-   *         <code>magnitude(normalize(v)) == 1.0</code>.
+   *          The input vector
+   * 
+   * @return The magnitude of the input vector
    */
 
   public static float magnitude(
-    final VectorI3F v)
+    final @Nonnull VectorI3F v)
   {
     return (float) Math.sqrt(VectorI3F.magnitudeSquared(v));
   }
 
   /**
+   * Calculate the squared magnitude of the vector <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
-   * @return The squared magnitude of the input vector..
+   *          The input vector
+   * 
+   * @return The squared magnitude of the input vector
    */
 
   public static float magnitudeSquared(
-    final VectorI3F v)
+    final @Nonnull VectorI3F v)
   {
     return VectorI3F.dotProduct(v, v);
   }
 
   /**
+   * Normalize the vector <code>v</code>, preserving its direction but
+   * reducing it to unit length.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
+   * 
    * @return A vector with the same orientation as <code>v</code> but with
-   *         magnitude equal to <code>1.0</code>.
+   *         magnitude equal to <code>1.0</code>
    */
 
-  public static VectorI3F normalize(
-    final VectorI3F v)
+  public static @Nonnull VectorI3F normalize(
+    final @Nonnull VectorI3F v)
   {
     final float m = VectorI3F.magnitudeSquared(v);
     if (m > 0) {
@@ -311,9 +381,9 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    */
 
-  public static VectorI3F projection(
-    final VectorI3F p,
-    final VectorI3F q)
+  public static @Nonnull VectorI3F projection(
+    final @Nonnull VectorI3F p,
+    final @Nonnull VectorI3F q)
   {
     final float dot = VectorI3F.dotProduct(p, q);
     final float qms = VectorI3F.magnitudeSquared(q);
@@ -322,70 +392,84 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
   }
 
   /**
+   * Scale the vector <code>v</code> by the scalar <code>r</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
    * @param r
-   *          The scaling value.
+   *          The scaling value
+   * 
    * @return <code>(v.x * r, v.y * r, v.z * r)</code>
    */
 
-  public static VectorI3F scale(
-    final VectorI3F v,
+  public static @Nonnull VectorI3F scale(
+    final @Nonnull VectorI3F v,
     final float r)
   {
     return new VectorI3F(v.x * r, v.y * r, v.z * r);
   }
 
   /**
+   * Subtract the vector <code>v0</code> from the vector <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
    */
 
-  public static VectorI3F subtract(
-    final VectorI3F v0,
-    final VectorI3F v1)
+  public static @Nonnull VectorI3F subtract(
+    final @Nonnull VectorI3F v0,
+    final @Nonnull VectorI3F v1)
   {
     return new VectorI3F(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z);
   }
 
-  public final float            x;
-
-  public final float            y;
-
-  public final float            z;
+  public final float                     x;
+  public final float                     y;
+  public final float                     z;
 
   /**
    * The zero vector.
    */
 
-  public static final VectorI3F ZERO = new VectorI3F(0.0f, 0.0f, 0.0f);
+  public static final @Nonnull VectorI3F ZERO = new VectorI3F(
+                                                0.0f,
+                                                0.0f,
+                                                0.0f);
 
   /**
+   * Calculate the absolute value of the vector <code>v</code>.
+   * 
    * @param v
-   *          The input vector.
+   *          The input vector
+   * 
    * @return <code>(abs v.x, abs v.y, abs v.z)</code>
    */
 
-  public static VectorI3F absolute(
-    final VectorI3F v)
+  public static @Nonnull VectorI3F absolute(
+    final @Nonnull VectorI3F v)
   {
     return new VectorI3F(Math.abs(v.x), Math.abs(v.y), Math.abs(v.z));
   }
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
    */
 
-  public static VectorI3F add(
-    final VectorI3F v0,
-    final VectorI3F v1)
+  public static @Nonnull VectorI3F add(
+    final @Nonnull VectorI3F v0,
+    final @Nonnull VectorI3F v1)
   {
     return new VectorI3F(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z);
   }
@@ -402,6 +486,10 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     this.z = 0.0f;
   }
 
+  /**
+   * Construct a vector initialized with the given values.
+   */
+
   public VectorI3F(
     final float x,
     final float y,
@@ -411,6 +499,11 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     this.y = y;
     this.z = z;
   }
+
+  /**
+   * Construct a vector initialized with the values given in the vector
+   * <code>v</code>.
+   */
 
   public VectorI3F(
     final VectorReadable3F v)
@@ -437,7 +530,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final VectorI3F other = (VectorI3F) obj;
+    final @Nonnull VectorI3F other = (VectorI3F) obj;
     if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
       return false;
     }

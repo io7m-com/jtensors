@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 /**
@@ -31,44 +32,48 @@ import javax.annotation.concurrent.Immutable;
    * The zero vector.
    */
 
-  public static final VectorI4I ZERO = new VectorI4I(0, 0, 0, 0);
+  public static final @Nonnull VectorI4I ZERO = new VectorI4I(0, 0, 0, 0);
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
    */
 
-  public static VectorI4I add(
-    final VectorI4I v0,
-    final VectorI4I v1)
+  public static @Nonnull VectorI4I add(
+    final @Nonnull VectorI4I v0,
+    final @Nonnull VectorI4I v1)
   {
     return new VectorI4I(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w);
   }
 
   /**
+   * Subtract the vector <code>v0</code> from the vector <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)</code>
    */
 
-  public static VectorI4I subtract(
-    final VectorI4I v0,
-    final VectorI4I v1)
+  public static @Nonnull VectorI4I subtract(
+    final @Nonnull VectorI4I v0,
+    final @Nonnull VectorI4I v1)
   {
     return new VectorI4I(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w);
   }
 
   public final int x;
-
   public final int y;
-
   public final int z;
-
   public final int w;
 
   /**
@@ -84,6 +89,10 @@ import javax.annotation.concurrent.Immutable;
     this.w = 1;
   }
 
+  /**
+   * Construct a vector initialized with the given values.
+   */
+
   public VectorI4I(
     final int x,
     final int y,
@@ -94,6 +103,20 @@ import javax.annotation.concurrent.Immutable;
     this.y = y;
     this.z = z;
     this.w = w;
+  }
+
+  /**
+   * Construct a vector initialized with the values given in the vector
+   * <code>v</code>.
+   */
+
+  public VectorI4I(
+    final @Nonnull VectorReadable4I v)
+  {
+    this.x = v.getXI();
+    this.y = v.getYI();
+    this.z = v.getZI();
+    this.w = v.getWI();
   }
 
   @Override public boolean equals(
@@ -108,7 +131,7 @@ import javax.annotation.concurrent.Immutable;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final VectorI4I other = (VectorI4I) obj;
+    final @Nonnull VectorI4I other = (VectorI4I) obj;
     if (this.w != other.w) {
       return false;
     }

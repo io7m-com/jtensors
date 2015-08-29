@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 /**
@@ -31,34 +32,41 @@ import javax.annotation.concurrent.Immutable;
    * The zero vector.
    */
 
-  public static final VectorI3I ZERO = new VectorI3I(0, 0, 0);
+  public static final @Nonnull VectorI3I ZERO = new VectorI3I(0, 0, 0);
 
   /**
+   * Calculate the element-wise sum of the vectors <code>v0</code> and
+   * <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
    */
 
-  public static VectorI3I add(
-    final VectorI3I v0,
-    final VectorI3I v1)
+  public static @Nonnull VectorI3I add(
+    final @Nonnull VectorI3I v0,
+    final @Nonnull VectorI3I v1)
   {
     return new VectorI3I(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z);
   }
 
   /**
+   * Subtract the vector <code>v0</code> from the vector <code>v1</code>.
+   * 
    * @param v0
-   *          The left input vector.
+   *          The left input vector
    * @param v1
-   *          The right input vector.
+   *          The right input vector
+   * 
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
    */
 
-  public static VectorI3I subtract(
-    final VectorI3I v0,
-    final VectorI3I v1)
+  public static @Nonnull VectorI3I subtract(
+    final @Nonnull VectorI3I v0,
+    final @Nonnull VectorI3I v1)
   {
     return new VectorI3I(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z);
   }
@@ -80,6 +88,10 @@ import javax.annotation.concurrent.Immutable;
     this.z = 0;
   }
 
+  /**
+   * Construct a vector initialized with the given values.
+   */
+
   public VectorI3I(
     final int x,
     final int y,
@@ -88,6 +100,19 @@ import javax.annotation.concurrent.Immutable;
     this.x = x;
     this.y = y;
     this.z = z;
+  }
+
+  /**
+   * Construct a vector initialized with the values given in the vector
+   * <code>v</code>.
+   */
+
+  public VectorI3I(
+    final @Nonnull VectorReadable3I v)
+  {
+    this.x = v.getXI();
+    this.y = v.getYI();
+    this.z = v.getZI();
   }
 
   @Override public boolean equals(
@@ -102,7 +127,7 @@ import javax.annotation.concurrent.Immutable;
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final VectorI3I other = (VectorI3I) obj;
+    final @Nonnull VectorI3I other = (VectorI3I) obj;
     if (this.x != other.x) {
       return false;
     }

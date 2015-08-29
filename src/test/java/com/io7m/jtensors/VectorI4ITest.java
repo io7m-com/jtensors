@@ -44,6 +44,31 @@ public class VectorI4ITest
     Assert.assertEquals(4, v.getWI());
   }
 
+  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  {
+    final VectorI4I m0 = new VectorI4I();
+    Assert.assertTrue(m0.equals(m0));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  {
+    final VectorI4I m0 = new VectorI4I();
+    Assert.assertFalse(m0.equals(null));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  {
+    final VectorI4I m0 = new VectorI4I();
+    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  {
+    final VectorI4I m0 = new VectorI4I();
+    final VectorI4I m1 = new VectorI4I();
+    Assert.assertTrue(m0.equals(m1));
+  }
+
   @SuppressWarnings("static-method") @Test public void testEqualsCorrect()
   {
     final VectorI4I v0 = new VectorI4I(0, 0, 0, 0);
@@ -96,6 +121,20 @@ public class VectorI4ITest
     Assert.assertEquals(0, v.y);
     Assert.assertEquals(0, v.z);
     Assert.assertEquals(1, v.w);
+  }
+
+  @SuppressWarnings("static-method") @Test public void testInitVector()
+  {
+    final VectorI4I v = new VectorI4I(1, 2, 3, 4);
+    Assert.assertEquals(1, v.x);
+    Assert.assertEquals(2, v.y);
+    Assert.assertEquals(3, v.z);
+    Assert.assertEquals(4, v.w);
+    final VectorReadable4I w = new VectorI4I(v);
+    Assert.assertEquals(1, w.getXI());
+    Assert.assertEquals(2, w.getYI());
+    Assert.assertEquals(3, w.getZI());
+    Assert.assertEquals(4, w.getWI());
   }
 
   @SuppressWarnings("static-method") @Test public void testString()

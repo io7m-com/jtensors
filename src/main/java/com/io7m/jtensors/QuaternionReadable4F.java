@@ -17,15 +17,11 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to three-dimensional vectors with single precision
+ * 'Read' interface to four-dimensional quaternions with single precision
  * elements.
  */
 
-public interface VectorReadable3F extends VectorReadable2F
+public interface QuaternionReadable4F extends VectorReadable4F
 {
-  /**
-   * Retrieve the Z value of the given vector.
-   */
-
-  float getZF();
+  // No extra fields
 }

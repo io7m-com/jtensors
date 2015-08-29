@@ -22,5 +22,9 @@ package com.io7m.jtensors;
 
 public interface VectorReadable3I extends VectorReadable2I
 {
+  /**
+   * Retrieve the Z value of the given vector.
+   */
+
   int getZI();
 }

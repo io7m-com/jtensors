@@ -20,6 +20,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import com.io7m.jaux.functional.Option;
@@ -51,9 +52,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D add(
-    final MatrixReadable3x3D m0,
-    final MatrixReadable3x3D m1,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixReadable3x3D m0,
+    final @Nonnull MatrixReadable3x3D m1,
+    final @Nonnull MatrixM3x3D out)
   {
     final DoubleBuffer m0_view = m0.getDoubleBuffer();
     final DoubleBuffer m1_view = m1.getDoubleBuffer();
@@ -76,8 +77,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D addInPlace(
-    final MatrixM3x3D m0,
-    final MatrixM3x3D m1)
+    final @Nonnull MatrixM3x3D m0,
+    final @Nonnull MatrixM3x3D m1)
   {
     return MatrixM3x3D.add(m0, m1, m0);
   }
@@ -109,12 +110,12 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D addRowScaled(
-    final MatrixReadable3x3D m,
+    final @Nonnull MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
     final int row_c,
     final double r,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixM3x3D out)
   {
     return MatrixM3x3D.addRowScaledUnsafe(
       m,
@@ -126,7 +127,7 @@ import com.io7m.jaux.functional.Option;
   }
 
   public static MatrixM3x3D addRowScaledInPlace(
-    final MatrixM3x3D m,
+    final @Nonnull MatrixM3x3D m,
     final int row_a,
     final int row_b,
     final int row_c,
@@ -136,15 +137,15 @@ import com.io7m.jaux.functional.Option;
   }
 
   private static MatrixM3x3D addRowScaledUnsafe(
-    final MatrixReadable3x3D m,
+    final @Nonnull MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
     final int row_c,
     final double r,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixM3x3D out)
   {
-    final VectorM3D va = new VectorM3D();
-    final VectorM3D vb = new VectorM3D();
+    final @Nonnull VectorM3D va = new VectorM3D();
+    final @Nonnull VectorM3D vb = new VectorM3D();
     MatrixM3x3D.rowUnsafe(m, row_a, va);
     MatrixM3x3D.rowUnsafe(m, row_b, vb);
 
@@ -175,8 +176,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D copy(
-    final MatrixReadable3x3D input,
-    final MatrixM3x3D output)
+    final @Nonnull MatrixReadable3x3D input,
+    final @Nonnull MatrixM3x3D output)
   {
     final DoubleBuffer source_view = input.getDoubleBuffer();
     for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
@@ -193,7 +194,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static double determinant(
-    final MatrixReadable3x3D m)
+    final @Nonnull MatrixReadable3x3D m)
   {
     final double r0c0 = m.getRowColumnD(0, 0);
     final double r0c1 = m.getRowColumnD(0, 1);
@@ -224,7 +225,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static DoubleBuffer doubleBuffer(
-    final MatrixM3x3D m)
+    final @Nonnull MatrixM3x3D m)
   {
     final ByteBuffer b =
       m.data.asReadOnlyBuffer().order(ByteOrder.nativeOrder());
@@ -252,10 +253,10 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D exchangeRows(
-    final MatrixReadable3x3D m,
+    final @Nonnull MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixM3x3D out)
   {
     return MatrixM3x3D.exchangeRowsUnsafe(
       m,
@@ -283,7 +284,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D exchangeRowsInPlace(
-    final MatrixM3x3D m,
+    final @Nonnull MatrixM3x3D m,
     final int row_a,
     final int row_b)
   {
@@ -291,13 +292,13 @@ import com.io7m.jaux.functional.Option;
   }
 
   private static MatrixM3x3D exchangeRowsUnsafe(
-    final MatrixReadable3x3D m,
+    final @Nonnull MatrixReadable3x3D m,
     final int row_a,
     final int row_b,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixM3x3D out)
   {
-    final VectorM3D va = new VectorM3D();
-    final VectorM3D vb = new VectorM3D();
+    final @Nonnull VectorM3D va = new VectorM3D();
+    final @Nonnull VectorM3D vb = new VectorM3D();
 
     MatrixM3x3D.rowUnsafe(m, row_a, va);
     MatrixM3x3D.rowUnsafe(m, row_b, vb);
@@ -313,7 +314,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static double get(
-    final MatrixReadable3x3D m,
+    final @Nonnull MatrixReadable3x3D m,
     final int row,
     final int column)
   {
@@ -349,30 +350,13 @@ import com.io7m.jaux.functional.Option;
 
   /**
    * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>m</code>. The function returns <code>Some(m)</code> iff
-   * it was possible to invert the matrix, and <code>None</code> otherwise. It
-   * is not possible to invert a matrix that has a determinant of
-   * <code>0</code>.
-   * 
-   * @see com.io7m.jtensors.MatrixM3x3D#determinant(MatrixM3x3D)
-   * @param m
-   *          The input matrix.
-   */
-
-  @Deprecated public static Option<MatrixM3x3D> invert(
-    final MatrixM3x3D m)
-  {
-    return MatrixM3x3D.invert(m, m);
-  }
-
-  /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
    * matrix to <code>out</code>. The function returns <code>Some(out)</code>
    * iff it was possible to invert the matrix, and <code>None</code>
    * otherwise. It is not possible to invert a matrix that has a determinant
    * of <code>0</code>.
    * 
-   * @see com.io7m.jtensors.MatrixM3x3D#determinant(MatrixM3x3D)
+   * @see MatrixM3x3D#determinant(MatrixReadable3x3D)
+   * 
    * @param m
    *          The input matrix.
    * @param out
@@ -380,8 +364,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static Option<MatrixM3x3D> invert(
-    final MatrixReadable3x3D m,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixReadable3x3D m,
+    final @Nonnull MatrixM3x3D out)
   {
     final double d = MatrixM3x3D.determinant(m);
 
@@ -426,13 +410,14 @@ import com.io7m.jaux.functional.Option;
    * is not possible to invert a matrix that has a determinant of
    * <code>0</code>.
    * 
-   * @see com.io7m.jtensors.MatrixM3x3D#determinant(MatrixM3x3D)
+   * @see MatrixM3x3D#determinant(MatrixReadable3x3D)
+   * 
    * @param m
    *          The input matrix.
    */
 
   public static Option<MatrixM3x3D> invertInPlace(
-    final MatrixM3x3D m)
+    final @Nonnull MatrixM3x3D m)
   {
     return MatrixM3x3D.invert(m, m);
   }
@@ -449,8 +434,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D makeTranslation2D(
-    final VectorReadable2D v,
-    final MatrixM3x3D out)
+    final @Nonnull VectorReadable2D v,
+    final @Nonnull MatrixM3x3D out)
   {
     out.setUnsafe(0, 2, v.getXD());
     out.setUnsafe(1, 2, v.getYD());
@@ -469,8 +454,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D makeTranslation2I(
-    final VectorReadable2I v,
-    final MatrixM3x3D out)
+    final @Nonnull VectorReadable2I v,
+    final @Nonnull MatrixM3x3D out)
   {
     out.setUnsafe(0, 2, v.getXI());
     out.setUnsafe(1, 2, v.getYI());
@@ -491,9 +476,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D multiply(
-    final MatrixReadable3x3D m0,
-    final MatrixReadable3x3D m1,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixReadable3x3D m0,
+    final @Nonnull MatrixReadable3x3D m1,
+    final @Nonnull MatrixM3x3D out)
   {
     double r0c0 = 0;
     r0c0 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 0);
@@ -556,6 +541,24 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
+   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
+   * writing the result to <code>m0</code>.
+   * 
+   * @param m0
+   *          The left input vector.
+   * @param m1
+   *          The right input vector.
+   * @return <code>out</code>
+   */
+
+  public static MatrixM3x3D multiplyInPlace(
+    final @Nonnull MatrixM3x3D m0,
+    final @Nonnull MatrixReadable3x3D m1)
+  {
+    return MatrixM3x3D.multiply(m0, m1, m0);
+  }
+
+  /**
    * Multiply the matrix <code>m</code> with the vector <code>v</code>,
    * writing the resulting vector to <code>out</code>.
    * 
@@ -569,12 +572,12 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static VectorM3D multiplyVector3D(
-    final MatrixReadable3x3D m,
-    final VectorReadable3D v,
-    final VectorM3D out)
+    final @Nonnull MatrixReadable3x3D m,
+    final @Nonnull VectorReadable3D v,
+    final @Nonnull VectorM3D out)
   {
-    final VectorM3D row = new VectorM3D();
-    final VectorM3D vi = new VectorM3D(v);
+    final @Nonnull VectorM3D row = new VectorM3D();
+    final @Nonnull VectorM3D vi = new VectorM3D(v);
 
     MatrixM3x3D.rowUnsafe(m, 0, row);
     out.x = VectorM3D.dotProduct(row, vi);
@@ -587,32 +590,14 @@ import com.io7m.jaux.functional.Option;
   }
 
   /**
-   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
-   * writing the result to <code>m0</code>.
-   * 
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
-   * @return <code>out</code>
-   */
-
-  public static MatrixM3x3D multiplyInPlace(
-    final MatrixM3x3D m0,
-    final MatrixReadable3x3D m1)
-  {
-    return MatrixM3x3D.multiply(m0, m1, m0);
-  }
-
-  /**
    * Return row <code>row</code> of the matrix <code>m</code> in the vector
    * <code>out</code>.
    */
 
   public static VectorM3D row(
-    final MatrixReadable3x3D m,
+    final @Nonnull MatrixReadable3x3D m,
     final int row,
-    final VectorM3D out)
+    final @Nonnull VectorM3D out)
   {
     return MatrixM3x3D.rowUnsafe(m, MatrixM3x3D.rowCheck(row), out);
   }
@@ -628,9 +613,9 @@ import com.io7m.jaux.functional.Option;
   }
 
   public static VectorM3D rowUnsafe(
-    final MatrixReadable3x3D m,
+    final @Nonnull MatrixReadable3x3D m,
     final int row,
-    final VectorM3D out)
+    final @Nonnull VectorM3D out)
   {
     out.x = m.getRowColumnD(row, 0);
     out.y = m.getRowColumnD(row, 1);
@@ -650,9 +635,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D scale(
-    final MatrixReadable3x3D m,
+    final @Nonnull MatrixReadable3x3D m,
     final double r,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixM3x3D out)
   {
     final DoubleBuffer source_view = m.getDoubleBuffer();
     for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
@@ -673,7 +658,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D scaleInPlace(
-    final MatrixM3x3D m,
+    final @Nonnull MatrixM3x3D m,
     final double r)
   {
     return MatrixM3x3D.scale(m, r, m);
@@ -699,7 +684,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D scaleRow(
-    final MatrixM3x3D m,
+    final @Nonnull MatrixM3x3D m,
     final int row,
     final double r)
   {
@@ -728,21 +713,21 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D scaleRow(
-    final MatrixReadable3x3D m,
+    final @Nonnull MatrixReadable3x3D m,
     final int row,
     final double r,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixM3x3D out)
   {
     return MatrixM3x3D.scaleRowUnsafe(m, MatrixM3x3D.rowCheck(row), r, out);
   }
 
   private static MatrixM3x3D scaleRowUnsafe(
-    final MatrixReadable3x3D m,
+    final @Nonnull MatrixReadable3x3D m,
     final int row,
     final double r,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixM3x3D out)
   {
-    final VectorM3D v = new VectorM3D();
+    final @Nonnull VectorM3D v = new VectorM3D();
 
     MatrixM3x3D.rowUnsafe(m, row, v);
     VectorM3D.scaleInPlace(v, r);
@@ -757,7 +742,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D set(
-    final MatrixM3x3D m,
+    final @Nonnull MatrixM3x3D m,
     final int row,
     final int column,
     final double value)
@@ -773,7 +758,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D setIdentity(
-    final MatrixM3x3D m)
+    final @Nonnull MatrixM3x3D m)
   {
     m.view.clear();
     m.view.put(MatrixM3x3D.identity_row_0);
@@ -783,9 +768,9 @@ import com.io7m.jaux.functional.Option;
   }
 
   private static void setRowUnsafe(
-    final MatrixM3x3D m,
+    final @Nonnull MatrixM3x3D m,
     final int row,
-    final VectorReadable3D v)
+    final @Nonnull VectorReadable3D v)
   {
     m.setUnsafe(row, 0, v.getXD());
     m.setUnsafe(row, 1, v.getYD());
@@ -799,7 +784,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D setZero(
-    final MatrixM3x3D m)
+    final @Nonnull MatrixM3x3D m)
   {
     m.view.clear();
     m.view.put(MatrixM3x3D.zero_row);
@@ -822,9 +807,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D translateByVector2D(
-    final MatrixReadable3x3D m,
-    final VectorReadable2D v,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixReadable3x3D m,
+    final @Nonnull VectorReadable2D v,
+    final @Nonnull MatrixM3x3D out)
   {
     final double vx = v.getXD();
     final double vy = v.getYD();
@@ -855,8 +840,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D translateByVector2DInPlace(
-    final MatrixM3x3D m,
-    final VectorReadable2D v)
+    final @Nonnull MatrixM3x3D m,
+    final @Nonnull VectorReadable2D v)
   {
     return MatrixM3x3D.translateByVector2D(m, v, m);
   }
@@ -875,9 +860,9 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D translateByVector2I(
-    final MatrixReadable3x3D m,
-    final VectorReadable2I v,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixReadable3x3D m,
+    final @Nonnull VectorReadable2I v,
+    final @Nonnull MatrixM3x3D out)
   {
     final double vx = v.getXI();
     final double vy = v.getYI();
@@ -908,8 +893,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D translateByVector2IInPlace(
-    final MatrixM3x3D m,
-    final VectorReadable2I v)
+    final @Nonnull MatrixM3x3D m,
+    final @Nonnull VectorReadable2I v)
   {
     return MatrixM3x3D.translateByVector2I(m, v, m);
   }
@@ -926,8 +911,8 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D transpose(
-    final MatrixReadable3x3D m,
-    final MatrixM3x3D out)
+    final @Nonnull MatrixReadable3x3D m,
+    final @Nonnull MatrixM3x3D out)
   {
     final DoubleBuffer source_view = m.getDoubleBuffer();
     for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
@@ -946,7 +931,7 @@ import com.io7m.jaux.functional.Option;
    */
 
   public static MatrixM3x3D transposeInPlace(
-    final MatrixM3x3D m)
+    final @Nonnull MatrixM3x3D m)
   {
     for (int row = 0; row < (MatrixM3x3D.VIEW_ROWS - 1); row++) {
       for (int column = row + 1; column < MatrixM3x3D.VIEW_COLS; column++) {
@@ -986,7 +971,7 @@ import com.io7m.jaux.functional.Option;
   }
 
   public MatrixM3x3D(
-    final MatrixReadable3x3D source)
+    final @Nonnull MatrixReadable3x3D source)
   {
     this.data =
       ByteBuffer.allocateDirect(MatrixM3x3D.VIEW_BYTES).order(
@@ -997,6 +982,29 @@ import com.io7m.jaux.functional.Option;
     for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
       this.view.put(index, source_view.get(index));
     }
+  }
+
+  @Override public boolean equals(
+    final Object obj)
+  {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    final @Nonnull MatrixM3x3D other = (MatrixM3x3D) obj;
+
+    for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
+      if (other.view.get(index) != this.view.get(index)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   public double get(
@@ -1025,6 +1033,18 @@ import com.io7m.jaux.functional.Option;
     final int column)
   {
     return this.view.get(MatrixM3x3D.indexUnsafe(row, column));
+  }
+
+  @Override public int hashCode()
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result);
+
+    for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
+      result += Double.valueOf(this.view.get(index)).hashCode();
+    }
+    return result;
   }
 
   public MatrixM3x3D set(

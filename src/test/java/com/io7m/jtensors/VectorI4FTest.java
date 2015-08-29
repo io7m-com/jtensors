@@ -366,6 +366,31 @@ public class VectorI4FTest
     Assert.assertTrue(p == 16.0);
   }
 
+  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  {
+    final VectorI4F m0 = new VectorI4F();
+    Assert.assertTrue(m0.equals(m0));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  {
+    final VectorI4F m0 = new VectorI4F();
+    Assert.assertFalse(m0.equals(null));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  {
+    final VectorI4F m0 = new VectorI4F();
+    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  {
+    final VectorI4F m0 = new VectorI4F();
+    final VectorI4F m1 = new VectorI4F();
+    Assert.assertTrue(m0.equals(m1));
+  }
+
   @SuppressWarnings("static-method") @Test public void testEqualsCorrect()
   {
     final VectorI4F v0 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);

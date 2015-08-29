@@ -22,7 +22,15 @@ package com.io7m.jtensors;
 
 public interface VectorReadable2I
 {
+  /**
+   * Retrieve the X value of the given vector.
+   */
+
   int getXI();
+
+  /**
+   * Retrieve the Y value of the given vector.
+   */
 
   int getYI();
 }

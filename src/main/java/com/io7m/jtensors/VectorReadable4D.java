@@ -23,5 +23,9 @@ package com.io7m.jtensors;
 
 public interface VectorReadable4D extends VectorReadable3D
 {
+  /**
+   * Retrieve the W value of the given vector.
+   */
+
   double getWD();
 }

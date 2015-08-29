@@ -530,6 +530,70 @@ public class VectorM2FTest
     }
   }
 
+  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  {
+    final VectorM2F m0 = new VectorM2F();
+    Assert.assertTrue(m0.equals(m0));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  {
+    final VectorM2F m0 = new VectorM2F();
+    Assert.assertFalse(m0.equals(null));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  {
+    final VectorM2F m0 = new VectorM2F();
+    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  {
+    final VectorM2F m0 = new VectorM2F();
+    final VectorM2F m1 = new VectorM2F();
+    Assert.assertTrue(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq0()
+  {
+    final VectorM2F m0 = new VectorM2F();
+    final VectorM2F m1 = new VectorM2F();
+    m1.x = 23.0f;
+    Assert.assertFalse(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCaseNeq1()
+  {
+    final VectorM2F m0 = new VectorM2F();
+    final VectorM2F m1 = new VectorM2F();
+    m1.y = 23.0f;
+    Assert.assertFalse(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeEq()
+  {
+    final VectorM2F m0 = new VectorM2F();
+    final VectorM2F m1 = new VectorM2F();
+    Assert.assertEquals(m0.hashCode(), m1.hashCode());
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase0()
+  {
+    final VectorM2F m0 = new VectorM2F();
+    final VectorM2F m1 = new VectorM2F();
+    m1.x = 23f;
+    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+  }
+
+  @SuppressWarnings("static-method") @Test public void testHashCodeNeqCase1()
+  {
+    final VectorM2F m0 = new VectorM2F();
+    final VectorM2F m1 = new VectorM2F();
+    m1.y = 23f;
+    Assert.assertFalse(m0.hashCode() == m1.hashCode());
+  }
+
   @SuppressWarnings("static-method") @Test public
     void
     testInitializeReadable()

@@ -238,6 +238,45 @@ public class MatrixM2x2FTest
     Assert.assertTrue(MatrixM2x2F.determinant(m) == 0.0);
   }
 
+  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  {
+    final MatrixM2x2F m0 = new MatrixM2x2F();
+    Assert.assertTrue(m0.equals(m0));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  {
+    final MatrixM2x2F m0 = new MatrixM2x2F();
+    Assert.assertFalse(m0.equals(null));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  {
+    final MatrixM2x2F m0 = new MatrixM2x2F();
+    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  {
+    final MatrixM2x2F m0 = new MatrixM2x2F();
+    final MatrixM2x2F m1 = new MatrixM2x2F();
+    Assert.assertTrue(m0.equals(m1));
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testEqualsNeqExhaustive()
+  {
+    for (int row = 0; row < 2; ++row) {
+      for (int col = 0; col < 2; ++col) {
+        final MatrixM2x2F m0 = new MatrixM2x2F();
+        final MatrixM2x2F m1 = new MatrixM2x2F();
+        m1.set(row, col, 256);
+        Assert.assertFalse(m0.equals(m1));
+      }
+    }
+  }
+
   @SuppressWarnings("static-method") @Test public void testExchangeRows()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
@@ -299,6 +338,21 @@ public class MatrixM2x2FTest
   {
     final MatrixM2x2F m = new MatrixM2x2F();
     MatrixM2x2F.exchangeRows(m, 0, -1);
+  }
+
+  @SuppressWarnings("static-method") @Test public
+    void
+    testHashcodeNeqExhaustive()
+  {
+    for (int row = 0; row < 2; ++row) {
+      for (int col = 0; col < 2; ++col) {
+        final MatrixM2x2F m0 = new MatrixM2x2F();
+        final MatrixM2x2F m1 = new MatrixM2x2F();
+        Assert.assertTrue(m0.hashCode() == m1.hashCode());
+        m1.set(row, col, 256);
+        Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      }
+    }
   }
 
   @SuppressWarnings("static-method") @Test public
@@ -502,27 +556,6 @@ public class MatrixM2x2FTest
     Assert.assertTrue(MatrixM2x2F.get(r, 0, 1) == 10.0);
     Assert.assertTrue(MatrixM2x2F.get(r, 1, 0) == 15.0);
     Assert.assertTrue(MatrixM2x2F.get(r, 1, 1) == 22.0);
-  }
-
-  @SuppressWarnings({ "static-method", "deprecation" }) @Test public
-    void
-    testMultiplyVectorSimple()
-  {
-    final MatrixM2x2F m0 = new MatrixM2x2F();
-
-    MatrixM2x2F.set(m0, 0, 0, 1.0f);
-    MatrixM2x2F.set(m0, 0, 1, 2.0f);
-    MatrixM2x2F.set(m0, 1, 0, 3.0f);
-    MatrixM2x2F.set(m0, 1, 1, 4.0f);
-
-    final VectorI2F v = new VectorI2F(1.0, 2.0);
-    final VectorM2F out = new VectorM2F();
-
-    final VectorM2F r = MatrixM2x2F.multiply(m0, v, out);
-    Assert.assertSame(out, r);
-
-    Assert.assertTrue(out.x == 5.0);
-    Assert.assertTrue(out.y == 11.0);
   }
 
   @SuppressWarnings("static-method") @Test public

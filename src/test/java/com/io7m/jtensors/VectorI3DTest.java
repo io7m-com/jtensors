@@ -362,6 +362,31 @@ public class VectorI3DTest
     Assert.assertTrue(p == 12.0);
   }
 
+  @SuppressWarnings("static-method") @Test public void testEqualsCase0()
+  {
+    final VectorI3D m0 = new VectorI3D();
+    Assert.assertTrue(m0.equals(m0));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase1()
+  {
+    final VectorI3D m0 = new VectorI3D();
+    Assert.assertFalse(m0.equals(null));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase2()
+  {
+    final VectorI3D m0 = new VectorI3D();
+    Assert.assertFalse(m0.equals(Integer.valueOf(23)));
+  }
+
+  @SuppressWarnings("static-method") @Test public void testEqualsCase3()
+  {
+    final VectorI3D m0 = new VectorI3D();
+    final VectorI3D m1 = new VectorI3D();
+    Assert.assertTrue(m0.equals(m1));
+  }
+
   @SuppressWarnings("static-method") @Test public void testEqualsCorrect()
   {
     final VectorI3D v0 = new VectorI3D(0.0, 0.0, 0.0);
