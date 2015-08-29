@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -6,11 +7,24 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors</artifactId>
-  <version>5.3.1</version>
-  <packaging>jar</packaging>
+  <version>6.0.0</version>
+
+  <packaging>pom</packaging>
   <name>io7m-jtensors</name>
   <description>Vector/matrix math package</description>
-  <url>http://mvn.io7m.com/jtensors/</url>
+  <url>http://mvn.io7m.com/${project.artifactId}/</url>
+
+  <modules>
+    <module>io7m-jtensors-core</module>
+    <module>io7m-jtensors-documentation</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <siteReposDirectory>/com/io7m/jtensors</siteReposDirectory>
+    <siteDocumentationDirectory>/com/io7m/jtensors/io7m-jtensors-documentation</siteDocumentationDirectory>
+  </properties>
 
   <licenses>
     <license>
@@ -43,7 +57,7 @@
     <site>
       <id>io7m</id>
       <name>io7m.com</name>
-      <url>http://mvn.io7m.com/jtensors/</url>
+      <url>http://mvn.io7m.com/${project.artifactId}/</url>
     </site>
   </distributionManagement>
 
@@ -57,33 +71,9 @@
     </mailingList>
   </mailingLists>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
-
   <prerequisites>
     <maven>2.2.1</maven>
   </prerequisites>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.io7m.jaux</groupId>
-      <artifactId>io7m-jaux</artifactId>
-      <version>[3.0.0, 4.0.0)</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-      <version>4.11</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.code.findbugs</groupId>
-      <artifactId>jsr305</artifactId>
-      <version>2.0.2</version>
-    </dependency>
-  </dependencies>
 
   <reporting>
     <plugins>
@@ -101,9 +91,15 @@
         <version>3.3</version>
       </plugin>
       <plugin>
-        <groupId>org.sonatype.maven.plugin</groupId>
-        <artifactId>emma-maven-plugin</artifactId>
-        <version>1.2</version>
+        <groupId>com.io7m.changelog</groupId>
+        <artifactId>io7m-changelog-plugin</artifactId>
+        <version>2.1.0</version>
+        <inherited>false</inherited>
+        <configuration>
+          <file>README-CHANGES.xml</file>
+          <feedAuthorEmail>contact@io7m.com</feedAuthorEmail>
+          <feedAuthorName>io7m release robot</feedAuthorName>
+        </configuration>
       </plugin>
     </plugins>
   </reporting>
@@ -131,164 +127,6 @@
         <artifactId>maven-resources-plugin</artifactId>
         <version>2.6</version>
       </plugin>
-
-      <!-- Require JDK >= 1.6 -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-
-      <!-- Redirect test output -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.15</version>
-        <configuration>
-          <redirectTestOutputToFile>true</redirectTestOutputToFile>
-        </configuration>
-      </plugin>
-
-      <!-- Produce custom manifest in jar files -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <archive>
-            <manifestEntries>
-              <Specification-Title>${project.name}</Specification-Title>
-              <Specification-Version>${project.version}</Specification-Version>
-              <Specification-Vendor>io7m.com</Specification-Vendor>
-              <Implementation-Title>${project.name}</Implementation-Title>
-              <Implementation-Version>${project.version}</Implementation-Version>
-              <Implementation-Vendor>io7m.com</Implementation-Vendor>
-              <Implementation-Vendor-Id>${project.groupId}</Implementation-Vendor-Id>
-              <Built-By>io7m</Built-By>
-            </manifestEntries>
-            <manifestSection>
-              <name>com/io7m/jtensors</name>
-              <manifestEntries>
-                <Sealed>true</Sealed>
-              </manifestEntries>
-            </manifestSection>
-          </archive>
-        </configuration>
-      </plugin>
-
-      <!-- Create source jar -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>2.2.1</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-               <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- Create javadoc jar -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <phase>package</phase>
-            <goals>
-               <goal>jar</goal>
-            </goals>
-         </execution>
-        </executions>
-      </plugin>
-
-      <!-- Enable code coverage for unit tests -->
-      <plugin>
-        <groupId>org.sonatype.maven.plugin</groupId>
-        <artifactId>emma-maven-plugin</artifactId>
-        <version>1.2</version>
-        <executions>
-          <execution>
-            <phase>process-classes</phase>
-            <goals>
-              <goal>instrument</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- Validate XML documentation -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>xml-maven-plugin</artifactId>
-        <version>1.0</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>validate</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <validationSets>
-            <validationSet>
-              <dir>src/main/xml</dir>
-            </validationSet>
-          </validationSets>
-        </configuration>
-      </plugin>
-
-      <!-- Transform XML documentation with Saxon -->
-      <plugin>
-        <groupId>com.io7m.saxon-plugin</groupId>
-        <artifactId>io7m-saxon-plugin</artifactId>
-        <version>1.1.0</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>transform</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <transformation>
-            <stylesheetFile>src/main/xsl/structural-1_0_0-standalone-x20.xsl</stylesheetFile>
-            <documentFile>src/main/xml/documentation.xml</documentFile>
-            <outputDirectory>${project.build.directory}/xhtml</outputDirectory>
-            <outputDirectoryParameterName>io7m.structural-1_0_0.output_directory</outputDirectoryParameterName>
-            <outputFile>out.txt</outputFile>
-          </transformation>
-        </configuration>
-      </plugin>
-
-      <!-- Produce documentation archive -->
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <descriptors>
-            <descriptor>assembly-doc.xml</descriptor>
-          </descriptors>
-        </configuration>
-        <executions>
-          <execution>
-            <id>make-assembly</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
 
     <!-- Allow deployment over ssh -->
@@ -300,7 +138,7 @@
       </extension>
     </extensions>
 
-    <!-- Mark certain plugins as ignored in Eclipse. Does not affect the build. -->
+    <!-- Mark plugins as ignored in Eclipse, does not affect the build. -->
     <pluginManagement>
       <plugins>
         <plugin>
@@ -317,32 +155,6 @@
                     <versionRange>[1.2,)</versionRange>
                     <goals>
                       <goal>instrument</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore></ignore>
-                  </action>
-                </pluginExecution>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>xml-maven-plugin</artifactId>
-                    <versionRange>[1.0,)</versionRange>
-                    <goals>
-                      <goal>transform</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore></ignore>
-                  </action>
-                </pluginExecution>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>com.io7m.saxon-plugin</groupId>
-                    <artifactId>io7m-saxon-plugin</artifactId>
-                    <versionRange>[1.0.0,)</versionRange>
-                    <goals>
-                      <goal>transform</goal>
                     </goals>
                   </pluginExecutionFilter>
                   <action>
