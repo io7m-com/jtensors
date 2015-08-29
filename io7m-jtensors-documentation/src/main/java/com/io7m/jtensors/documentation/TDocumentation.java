@@ -31,7 +31,7 @@ public final class TDocumentation
     try {
       final URL url =
         TDocumentation.class
-          .getResource("/com/io7m/jfunctional/documentation/documentation.xml");
+          .getResource("/com/io7m/jtensors/documentation/documentation.xml");
       assert url != null;
       final URI uri = url.toURI();
       assert uri != null;

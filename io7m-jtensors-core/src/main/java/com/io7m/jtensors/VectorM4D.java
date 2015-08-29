@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -24,7 +24,7 @@ import com.io7m.jnull.Nullable;
  * <p>
  * A four-dimensional mutable vector type with double precision elements.
  * </p>
- * 
+ *
  * <p>
  * Values of this type cannot be accessed safely from multiple threads without
  * explicit synchronization.
@@ -38,12 +38,12 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>,
    * saving the result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(abs v.x, abs v.y, abs v.z, abs.w)</code>
    */
 
@@ -65,10 +65,10 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>,
    * modifying the vector in-place.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return <code>(abs v.x, abs v.y, abs v.z, abs v.w)</code>
    */
 
@@ -81,14 +81,14 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>, saving the result to <code>out</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
    */
 
@@ -111,12 +111,12 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>, saving the result to <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
    */
 
@@ -131,7 +131,7 @@ import com.io7m.jnull.Nullable;
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
@@ -140,7 +140,7 @@ import com.io7m.jnull.Nullable;
    *          The output vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
    */
 
@@ -165,14 +165,14 @@ import com.io7m.jnull.Nullable;
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>, saving the
    * result to <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
    */
 
@@ -187,9 +187,9 @@ import com.io7m.jnull.Nullable;
   /**
    * Determine whether or not the vectors <code>va</code> and <code>vb</code>
    * are equal to within the degree of error given in <code>context</code>.
-   * 
+   *
    * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
-   * 
+   *
    * @param context
    *          The equality context
    * @param va
@@ -220,7 +220,7 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. maximum]</code> inclusive, saving the result to
    * <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -229,7 +229,7 @@ import com.io7m.jnull.Nullable;
    *          The maximum allowed value
    * @param out
    *          The output vector
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         and at least <code>minimum</code>
    */
@@ -255,7 +255,7 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code> and
    * <code>maximum</code>, saving the result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -264,7 +264,7 @@ import com.io7m.jnull.Nullable;
    *          The vector containing the maximum acceptable values
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
    */
 
@@ -293,14 +293,14 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code> and
    * <code>maximum</code>, saving the result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
    */
 
@@ -316,14 +316,14 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. maximum]</code> inclusive, saving the result to
    * <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         and at least <code>minimum</code>, in <code>v</code>
    */
@@ -340,14 +340,14 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
    * <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    */
 
@@ -371,14 +371,14 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>maximum</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
    */
 
@@ -402,12 +402,12 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>maximum</code>, saving the
    * result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
-   * 
+   *
    * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
    */
 
@@ -422,12 +422,12 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
    * <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at most <code>maximum</code>
    *         , in <code>v</code>
    */
@@ -443,14 +443,14 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. Infinity]</code> inclusive, saving the result to
    * <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    * @param minimum
    *          The minimum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at least
    *         <code>minimum</code>
    */
@@ -475,14 +475,14 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    * @param minimum
    *          The vector containing the minimum acceptable values
-   * 
+   *
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))</code>
    */
 
@@ -506,12 +506,12 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code>, saving the
    * result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
-   * 
+   *
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))</code>
    *         , in <code>v</code>
    */
@@ -527,12 +527,12 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. Infinity]</code> inclusive, saving the result to
    * <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The minimum allowed value
-   * 
+   *
    * @return A vector with both elements equal to at least
    *         <code>minimum</code>, in <code>v</code>.
    */
@@ -547,12 +547,12 @@ import com.io7m.jnull.Nullable;
   /**
    * Copy all elements of the vector <code>input</code> to the vector
    * <code>output</code>.
-   * 
+   *
    * @param input
    *          The input vector
    * @param output
    *          The output vector
-   * 
+   *
    * @return output
    */
 
@@ -567,12 +567,12 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the distance between the two vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The distance between the two vectors.
    */
 
@@ -587,12 +587,12 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the scalar product of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The scalar product of the two vectors
    */
 
@@ -610,15 +610,15 @@ import com.io7m.jnull.Nullable;
   /**
    * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
    * amount <code>alpha</code>, saving the result to <code>r</code>.
-   * 
+   *
    * The <code>alpha</code> parameter controls the degree of interpolation,
    * such that:
-   * 
+   *
    * <ul>
-   * <li><code>interpolateLinear(v0, v1, 0.0, r) -> r = v0</code></li>
-   * <li><code>interpolateLinear(v0, v1, 1.0, r) -> r = v1</code></li>
+   * <li>{@code interpolateLinear(v0, v1, 0.0, r) -> r = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -> r = v1}</li>
    * </ul>
-   * 
+   *
    * @param v0
    *          The left input vector.
    * @param v1
@@ -628,7 +628,7 @@ import com.io7m.jnull.Nullable;
    *          <code>1.0</code>.
    * @param r
    *          The result vector.
-   * 
+   *
    * @return <code>r</code>
    */
 
@@ -649,12 +649,12 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the magnitude of the vector <code>v</code>.
-   * 
+   *
    * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The magnitude of the input vector
    */
 
@@ -666,10 +666,10 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the squared magnitude of the vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The squared magnitude of the input vector
    */
 
@@ -683,12 +683,12 @@ import com.io7m.jnull.Nullable;
    * Returns a vector with the same orientation as <code>v</code> but with
    * magnitude equal to <code>1.0</code> in <code>out</code>. The function
    * returns the zero vector iff the input is the zero vector.
-   * 
+   *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
-   * 
+   *
    * @return out
    */
 
@@ -712,10 +712,10 @@ import com.io7m.jnull.Nullable;
    * Returns a vector with the same orientation as <code>v</code> but with
    * magnitude equal to <code>1.0</code> in <code>v</code>. The function
    * returns the zero vector iff the input is the zero vector.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return v
    */
 
@@ -733,7 +733,7 @@ import com.io7m.jnull.Nullable;
    * <p>
    * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
-   * 
+   *
    * @return A pair <code>(v0, v1)</code>, orthonormalized.
    * @since 5.0.0
    * @param v0
@@ -763,7 +763,7 @@ import com.io7m.jnull.Nullable;
    * <p>
    * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
-   * 
+   *
    * @since 5.0.0
    * @param v0
    *          The left vector
@@ -786,7 +786,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>, saving the result in <code>r</code>.
-   * 
+   *
    * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
    * @param p
    *          The left vector
@@ -811,14 +811,14 @@ import com.io7m.jnull.Nullable;
   /**
    * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
    * result to <code>out</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>
    */
 
@@ -841,12 +841,12 @@ import com.io7m.jnull.Nullable;
   /**
    * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
    * result to <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>
    */
 
@@ -860,14 +860,14 @@ import com.io7m.jnull.Nullable;
   /**
    * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
    * saving the result to <code>out</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param out
    *          The output vector
-   * 
+   *
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)</code>
    */
 
@@ -890,12 +890,12 @@ import com.io7m.jnull.Nullable;
   /**
    * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
    * saving the result to <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)</code>
    */
 
@@ -923,7 +923,7 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Construct a vector initialized with the given values.
-   * 
+   *
    * @param in_x
    *          The <code>x</code> value
    * @param in_y
@@ -949,7 +949,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Construct a vector initialized with the values given in the vector
    * <code>v</code>.
-   * 
+   *
    * @param in_v
    *          The source vector
    */

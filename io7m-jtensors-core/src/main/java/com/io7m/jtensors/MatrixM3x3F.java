@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -42,6 +42,10 @@ import com.io7m.jnull.Nullable;
  * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed for
  * the derivations of most of the code in this class (ISBN: 1-58450-277-0).
  * </p>
+ * <p>
+ * See <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>
+ * for the three <i>elementary</i> operations defined on matrices.
+ * </p>
  */
 
 public class MatrixM3x3F implements MatrixReadable3x3FType
@@ -62,7 +66,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * then pass this value to matrix functions. Any matrix function that takes
    * a <code>Context</code> value will not generate garbage.
    * </p>
-   * 
+   *
    * @since 5.0.0
    */
 
@@ -143,7 +147,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
 
   /**
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>.
-   * 
+   *
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -172,7 +176,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
    * returning the result in <code>m0</code>.
-   * 
+   *
    * @param m0
    *          The left input matrix.
    * @param m1
@@ -193,12 +197,11 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>out</code>.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -237,12 +240,11 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
    * row <code>row_c</code> of the matrix <code>m</code>.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -299,7 +301,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Copy the contents of the matrix <code>input</code> to the matrix
    * <code>output</code>, completely replacing all elements.
-   * 
+   *
    * @param input
    *          The input vector.
    * @param output
@@ -322,7 +324,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
 
   /**
    * Calculate the determinant of the matrix <code>m</code>.
-   * 
+   *
    * @return The determinant.
    * @param m
    *          The input matrix.
@@ -357,12 +359,11 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -392,12 +393,11 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
    * matrix <code>m</code>, saving the exchanged rows to <code>m</code> .
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row_a
@@ -436,7 +436,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
 
   /**
    * @return A view of the buffer that backs this matrix.
-   * 
+   *
    * @param m
    *          The input matrix.
    */
@@ -502,9 +502,9 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * iff it was possible to invert the matrix, and <code>None</code>
    * otherwise. It is not possible to invert a matrix that has a determinant
    * of <code>0</code>.
-   * 
+   *
    * @see MatrixM3x3F#determinant(MatrixReadable3x3FType)
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param out
@@ -572,9 +572,9 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * it was possible to invert the matrix, and <code>None</code> otherwise. It
    * is not possible to invert a matrix that has a determinant of
    * <code>0</code>.
-   * 
+   *
    * @see MatrixM3x3F#determinant(MatrixReadable3x3FType)
-   * 
+   *
    * @param m
    *          The input matrix.
    * @return <code>m</code>
@@ -602,7 +602,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * written to <code>out_matrix</code> and <code>out_translation</code>,
    * respectively.
    * </p>
-   * 
+   *
    * @param context
    *          Preallocated storage
    * @param out_matrix
@@ -685,7 +685,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
    * </p>
-   * 
+   *
    * @since 5.0.0
    * @param angle
    *          The angle in radians.
@@ -714,7 +714,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * positive rotation around any axis represents a counter-clockwise rotation
    * around that axis.
    * </p>
-   * 
+   *
    * @since 5.0.0
    * @param angle
    *          The angle in radians.
@@ -781,7 +781,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Create a translation matrix that represents a translation by the vector
    * <code>v</code>, writing the resulting matrix to <code>out</code>.
-   * 
+   *
    * @param v
    *          The translation vector.
    * @param out
@@ -802,7 +802,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Create a translation matrix that represents a translation by the vector
    * <code>v</code>, writing the resulting matrix to <code>out</code>.
-   * 
+   *
    * @param v
    *          The translation vector.
    * @param out
@@ -823,7 +823,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
    * writing the result to <code>out</code>.
-   * 
+   *
    * @param m0
    *          The left input vector.
    * @param m1
@@ -902,7 +902,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
    * writing the result to <code>m0</code>.
-   * 
+   *
    * @param m0
    *          The left input vector.
    * @param m1
@@ -920,7 +920,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Multiply the matrix <code>m</code> with the vector <code>v</code>,
    * writing the resulting vector to <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -964,7 +964,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
    * axis <code>axis</code>, saving the result into <code>out</code>.
-   * 
+   *
    * @since 5.0.0
    * @param angle
    *          The angle in radians.
@@ -990,7 +990,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Rotate the matrix <code>m</code> by <code>angle</code> radians around the
    * axis <code>axis</code>, saving the result into <code>m</code>.
-   * 
+   *
    * @since 5.0.0
    * @param angle
    *          The angle in radians.
@@ -1015,7 +1015,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * axis <code>axis</code>, saving the result into <code>m</code>. The
    * function uses preallocated storage in <code>context</code> to avoid
    * allocating memory. The function assumes a right-handed coordinate system.
-   * 
+   *
    * @since 5.0.0
    * @param context
    *          Preallocated storage.
@@ -1042,7 +1042,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * axis <code>axis</code>, saving the result into <code>out</code>. The
    * function uses preallocated storage in <code>context</code> to avoid
    * allocating memory. The function assumes a right-handed coordinate system.
-   * 
+   *
    * @since 5.0.0
    * @param context
    *          Preallocated storage.
@@ -1111,7 +1111,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Scale all elements of the matrix <code>m</code> by the scaling value
    * <code>r</code>, saving the result in <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param r
@@ -1137,7 +1137,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Scale all elements of the matrix <code>m</code> by the scaling value
    * <code>r</code>, saving the result in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param r
@@ -1157,16 +1157,15 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>out</code>.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 <= row < 4).
+   *          The index of the row {@code (0 <= row < 4)}.
    * @param r
    *          The scaling value.
    * @param out
@@ -1188,16 +1187,15 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
    * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
    * saving the result to row <code>r</code> of <code>m</code>.
    * </p>
+   *
    * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * {@link <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>}
-   * .
+   * This is one of the three <i>elementary</i> operations defined on matrices.
    * </p>
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 <= row < 4).
+   *          The index of the row {@code (0 <= row < 4)}.
    * @param r
    *          The scaling value.
    * @return <code>m</code>
@@ -1230,7 +1228,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Set the value in the matrix <code>m</code> at row <code>row</code>,
    * column <code>column</code> to <code>value</code>.
-   * 
+   *
    * @param m
    *          The input matrix
    * @param row
@@ -1255,7 +1253,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
 
   /**
    * Set the given matrix <code>m</code> to the identity matrix.
-   * 
+   *
    * @param m
    *          The matrix
    * @return <code>m</code>
@@ -1284,7 +1282,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
 
   /**
    * Set the given matrix <code>m</code> to the zero matrix.
-   * 
+   *
    * @param m
    *          The matrix
    * @return <code>m</code>
@@ -1304,7 +1302,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Return the trace of the matrix <code>m</code>. The trace is defined as
    * the sum of the diagonal elements of the matrix.
-   * 
+   *
    * @since 5.0.0
    * @param m
    *          The input matrix
@@ -1322,7 +1320,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -1358,7 +1356,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -1376,7 +1374,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -1412,7 +1410,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Translate the matrix <code>m</code> by the vector <code>v</code>, storing
    * the resulting matrix in <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param v
@@ -1430,7 +1428,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>out</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @param out
@@ -1452,7 +1450,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
   /**
    * Transpose the given matrix <code>m</code>, writing the resulting matrix
    * to <code>m</code>.
-   * 
+   *
    * @param m
    *          The input matrix.
    * @return <code>m</code>
@@ -1501,7 +1499,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
 
   /**
    * Construct a new copy of the given matrix.
-   * 
+   *
    * @param source
    *          The source matrix.
    */
@@ -1608,7 +1606,7 @@ public class MatrixM3x3F implements MatrixReadable3x3FType
 
   /**
    * Set the value at the given row and column.
-   * 
+   *
    * @param row
    *          The row
    * @param column
