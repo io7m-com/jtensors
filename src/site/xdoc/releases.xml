@@ -429,6 +429,56 @@
               <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.0-documentation.zip">io7m-jtensors-5.2.0-documentation.zip</a>
             </td>
           </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-08-17</td>
+            <td class="page_table_column">519419</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1-javadoc.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1-javadoc.jar">io7m-jtensors-5.2.1-javadoc.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-08-17</td>
+            <td class="page_table_column">148838</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1-sources.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1-sources.jar">io7m-jtensors-5.2.1-sources.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-08-17</td>
+            <td class="page_table_column">156322</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1.jar.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1.jar">io7m-jtensors-5.2.1.jar</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-08-17</td>
+            <td class="page_table_column">960446</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1-documentation.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1-documentation.zip">io7m-jtensors-5.2.1-documentation.zip</a>
+            </td>
+          </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-08-17</td>
+            <td class="page_table_column">761363</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1.zip">io7m-jtensors-5.2.1.zip</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -562,6 +612,19 @@
               <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.0-documentation.zip">io7m-jtensors-5.2.0-documentation.zip</a>
             </td>
           </tr>
+          <tr class="page_table_row">
+            <td class="page_table_column">2013-08-17</td>
+            <td class="page_table_column">960446</td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1-documentation.zip.asc">asc</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://io7m.com/software/jtensors/doc/5.2.1/d1.xhtml">io7m-jtensors 5.2.1</a>
+            </td>
+            <td class="page_table_column">
+              <a class="page_link_file" href="http://distribution.io7m.com/jtensors/io7m-jtensors-5.2.1-documentation.zip">io7m-jtensors-5.2.1-documentation.zip</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -570,6 +633,14 @@
 <table xmlns="http://www.w3.org/1999/xhtml"
        class="changelog page_table"
        summary="Changes">
+   <tr class="page_table_row">
+      <td class="page_table_column">2013-08-17</td>
+      <td class="page_table_column">Release: io7m-jtensors 5.2.1</td>
+   </tr>
+   <tr class="page_table_row">
+      <td class="page_table_column">2013-08-17</td>
+      <td class="page_table_column">Code fix: Make the Orthonormalized structures take readable vectors.</td>
+   </tr>
    <tr class="page_table_row">
       <td class="page_table_column">2013-08-17</td>
       <td class="page_table_column">Release: io7m-jtensors 5.2.0</td>

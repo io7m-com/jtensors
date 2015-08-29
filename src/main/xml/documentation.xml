@@ -19,7 +19,7 @@
 <s:document
   xmlns:s="http://www.io7m.com/schemas/structural/1.0.0"
   xmlns:xi="http://www.w3.org/2001/XInclude">
-  <s:document-title>io7m-jtensors 5.2.1 Documentation</s:document-title>
+  <s:document-title>io7m-jtensors 5.3.0 Documentation</s:document-title>
   <s:document-style>documentation.css</s:document-style>
   <s:document-contents/>
 
@@ -86,7 +86,7 @@
           <s:verbatim type="example"><![CDATA[<dependency>
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors</artifactId>
-  <version>5.2.1</version>
+  <version>5.3.0</version>
 </dependency>]]></s:verbatim>
         </s:paragraph>
       </s:subsection>
@@ -171,7 +171,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.]]>
           The <s:term type="package">jtensors</s:term> package provides vectors with
           single-precision (<s:term type="type">float</s:term>) elements,
           double-precision (<s:term type="type">double</s:term>) elements,
-          and integer (<s:term type="type">int</s:term>) elements. Each vector type
+          integer (<s:term type="type">int</s:term>), and
+          long integer (<s:term type="type">long</s:term>) elements. Each vector type
           is available in two, three, and four element versions. Each vector type is
           available in mutable or immutable versions. The package unambiguously identifies
           the vector types by using the following naming conventions for the types
@@ -184,7 +185,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.]]>
           <s:verbatim><![CDATA[
 mutability   = "M" | "I" ;
 size         = "2" | "3" | "4" ;
-element_type = "I" | "F" | "D" ;
+element_type = "I" | "L" | "F" | "D" ;
 type         = "Vector" , mutability , size , element_type ;]]>
           </s:verbatim>
         </s:formal-item>
@@ -197,26 +198,32 @@ type         = "Vector" , mutability , size , element_type ;]]>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM2D.html">VectorM2D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM2F.html">VectorM2F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM2I.html">VectorM2I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM2L.html">VectorM2L</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM3D.html">VectorM3D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM3F.html">VectorM3F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM3I.html">VectorM3I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM3L.html">VectorM3L</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM4D.html">VectorM4D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM4F.html">VectorM4F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM4I.html">VectorM4I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorM4L.html">VectorM4L</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI2D.html">VectorI2D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI2F.html">VectorI2F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI2I.html">VectorI2I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI2L.html">VectorI2L</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI3D.html">VectorI3D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI3F.html">VectorI3F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI3I.html">VectorI3I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI3L.html">VectorI3L</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI4D.html">VectorI4D</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI4F.html">VectorI4F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI4I.html">VectorI4I</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorI4L.html">VectorI4L</s:link-external></s:list-item>
           </s:list-unordered>
         </s:formal-item>
       </s:subsection>
@@ -238,14 +245,17 @@ type         = "Vector" , mutability , size , element_type ;]]>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable2I.html">VectorReadable2I</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable2F.html">VectorReadable2F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable2D.html">VectorReadable2D</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable2L.html">VectorReadable2L</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable3I.html">VectorReadable3I</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable3F.html">VectorReadable3F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable3D.html">VectorReadable3D</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable3L.html">VectorReadable3L</s:link-external></s:list-item>
 
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable4I.html">VectorReadable4I</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable4F.html">VectorReadable4F</s:link-external></s:list-item>
             <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable4D.html">VectorReadable4D</s:link-external></s:list-item>
+            <s:list-item><s:link-external target="javadoc/com/io7m/jtensors/VectorReadable4L.html">VectorReadable4L</s:link-external></s:list-item>
           </s:list-unordered>
         </s:formal-item>
       </s:subsection>
@@ -363,7 +373,7 @@ MatrixM4x4D.invertWithContext(context, mo, mi);]]>
         </s:paragraph>
       </s:subsection>
 
-      <s:subsection xml:id="com.io7m.jtensors_5.2.1.matrices.handedness">
+      <s:subsection xml:id="com.io7m.jtensors_5.3.0.matrices.handedness">
         <s:subsection-title>Rotations &amp; Handedness</s:subsection-title>
         <s:paragraph>
           Any of the matrix functions that deal with rotations
@@ -498,12 +508,12 @@ type         = "Quaternion" , mutability , size , element_type ;]]>
         </s:formal-item>
       </s:subsection>
 
-      <s:subsection xml:id="com.io7m.jtensors_5.2.1.quaternions.handedness">
+      <s:subsection xml:id="com.io7m.jtensors_5.3.0.quaternions.handedness">
         <s:subsection-title>Rotations &amp; Handedness</s:subsection-title>
         <s:paragraph>
           The included quaternion types and functions have consistent semantics and
           assumptions with regards to rotation and coordinate systems as the
-          <s:link target="com.io7m.jtensors_5.2.1.matrices.handedness">Matrix</s:link>
+          <s:link target="com.io7m.jtensors_5.3.0.matrices.handedness">Matrix</s:link>
           types, and functions are provided to convert between matrices and
           quaternions.
         </s:paragraph>
