@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document
+  xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+  <properties>
+    <title>io7m-jtensors</title>
+  </properties>
+
+  <body>
+    <subsection name="jtensors">
+      <p>
+        The <var>jtensors</var> package package implements a set of vector and matrix types,
+        intended for use in computer graphics software.
+      </p>
+      <p>
+        See <a href="http://mathfor3dgameprogramming.com">Mathematics for 3D Game
+        Programming and Computer Graphics</a>.
+      </p>
+    </subsection>
+    <subsection name="features">
+      <ul>
+        <li>2D, 3D, and 4D immutable vector types in single and double precision versions.</li>
+        <li>2D, 3D, and 4D mutable vector types in single and double precision versions.</li>
+        <li>2x2, 3x3, and 4x4 mutable matrix types in single and double precision versions.</li>
+        <li>Matrix types are backed by direct ByteBuffers in column-major order for efficient interfacing with OpenGL.</li>
+        <li>Fully documented (Javadoc).</li>
+        <li>100% automated unit test coverage.</li>
+        <li>ISC license.</li>
+      </ul>
+    </subsection>
+  </body>
+
+</document>
