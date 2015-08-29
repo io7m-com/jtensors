@@ -19,13 +19,14 @@
 <s:document
   xmlns:s="http://www.io7m.com/schemas/structural/1.0.0"
   xmlns:xi="http://www.w3.org/2001/XInclude">
-  <s:document-title>io7m-jtensors 2.1.0 Documentation</s:document-title>
+  <s:document-title>io7m-jtensors 2.2.0 Documentation</s:document-title>
   <s:document-style>documentation.css</s:document-style>
   <s:document-contents/>
 
   <s:part>
     <s:part-title>Package Information</s:part-title>
     <s:part-contents />
+
     <s:section>
       <s:section-title>Orientation</s:section-title>
       <s:subsection>
@@ -37,91 +38,114 @@
         </s:paragraph>
       </s:subsection>
     </s:section>
+
     <s:section>
       <s:section-title>Installation</s:section-title>
-      <s:paragraph>
-        The project can be compiled and installed with
-        <s:link-external target="http://maven.apache.org">Maven</s:link-external>:
-      </s:paragraph>
-      <s:paragraph>
-        <s:verbatim type="example"><![CDATA[$ mvn -C clean install]]></s:verbatim>     
-      </s:paragraph>
+      <s:subsection>
+        <s:subsection-title>Source compilation</s:subsection-title>
+        <s:paragraph>
+          The project can be compiled and installed with
+          <s:link-external target="http://maven.apache.org">Maven</s:link-external>:
+        </s:paragraph>
+        <s:paragraph>
+          <s:verbatim type="example"><![CDATA[$ mvn -C clean install]]></s:verbatim>
+        </s:paragraph>
+      </s:subsection>
+      <s:subsection>
+        <s:subsection-title>Maven</s:subsection-title>
+        <s:paragraph>
+          Regular releases are made to the
+          <s:link-external target="http://search.maven.org/#search|ga|1|io7m-jtensors">Central Repository</s:link-external>,
+          so it's possible to use the <s:term type="package">jtensors</s:term>
+          package in your projects with the following Maven dependency:
+        </s:paragraph>
+        <s:paragraph>
+          <s:verbatim type="example"><![CDATA[<dependency>
+  <groupId>com.io7m.jtensors</groupId>
+  <artifactId>io7m-jtensors</artifactId>
+  <version>2.2.0</version>
+</dependency>]]></s:verbatim>
+        </s:paragraph>
+      </s:subsection>
     </s:section>
+
     <s:section>
       <s:section-title>Supported Systems</s:section-title>
       <s:paragraph>
         The software is known to pass 100% of the included unit tests on the
         following platforms:
       </s:paragraph>
-        <s:formal-item kind="platform_table" type="platforms">
-          <s:formal-item-title>Supported systems</s:formal-item-title>
-          <s:table>
-            <s:table-summary>Supported systems</s:table-summary>
-            <s:table-head>
-              <s:table-column-name>OS</s:table-column-name>
-              <s:table-column-name>OS-Version</s:table-column-name>
-              <s:table-column-name>OS-Arch</s:table-column-name>
-              <s:table-column-name>JDK-Vendor</s:table-column-name>
-              <s:table-column-name>JDK-Version</s:table-column-name>
-              <s:table-column-name>VM</s:table-column-name>
-              <s:table-column-name>VM-Version</s:table-column-name>
-            </s:table-head>
-            <s:table-body>
-              <s:table-row>
-                <s:table-cell>Linux</s:table-cell>
-                <s:table-cell>3.4.2-2-ARCH</s:table-cell>
-                <s:table-cell>x86_64</s:table-cell>
-                <s:table-cell>Sun Microsystems Inc.</s:table-cell>
-                <s:table-cell>1.6.0_24</s:table-cell>
-                <s:table-cell>OpenJDK 64-Bit Server VM</s:table-cell>
-                <s:table-cell>20.0-b12</s:table-cell>
-              </s:table-row>
-              <s:table-row>
-                <s:table-cell>SunOS</s:table-cell>
-                <s:table-cell>5.11 snv_151a</s:table-cell>
-                <s:table-cell>x86</s:table-cell>
-                <s:table-cell>Sun Microsystems Inc.</s:table-cell>
-                <s:table-cell>1.6.0_21</s:table-cell>
-                <s:table-cell>Java HotSpot(TM) Client VM</s:table-cell>
-                <s:table-cell>17.0-b16</s:table-cell>
-              </s:table-row>
-              <s:table-row>
-                <s:table-cell>Windows XP</s:table-cell>
-                <s:table-cell>5.1</s:table-cell>
-                <s:table-cell>x86</s:table-cell>
-                <s:table-cell>Sun Microsystems Inc.</s:table-cell>
-                <s:table-cell>1.7.0_02-b13</s:table-cell>
-                <s:table-cell>Java HotSpot(TM) Client VM</s:table-cell>
-                <s:table-cell>22.0-b10</s:table-cell>
-              </s:table-row>
-              <s:table-row>
-                <s:table-cell>FreeBSD</s:table-cell>
-                <s:table-cell>8.2-RELEASE-p3</s:table-cell>
-                <s:table-cell>x86_64</s:table-cell>
-                <s:table-cell>Sun Microsystems Inc.</s:table-cell>
-                <s:table-cell>1.6.0_32</s:table-cell>
-                <s:table-cell>OpenJDK 64-Bit Server VM</s:table-cell>
-                <s:table-cell>20.0-b12</s:table-cell>
-              </s:table-row>
-              <s:table-row>
-                <s:table-cell>Mac OS X</s:table-cell>
-                <s:table-cell>10.6.8</s:table-cell>
-                <s:table-cell>x86_64</s:table-cell>
-                <s:table-cell>Apple Inc.</s:table-cell>
-                <s:table-cell>1.6.0_31</s:table-cell>
-                <s:table-cell>Java HotSpot(TM) 64-Bit Server VM</s:table-cell>
-                <s:table-cell>20.6-b01-413</s:table-cell>
-              </s:table-row>
-            </s:table-body>
-          </s:table>
-        </s:formal-item>
+      <s:formal-item kind="platform_table" type="platforms">
+        <s:formal-item-title>Supported systems</s:formal-item-title>
+        <s:table>
+          <s:table-summary>Supported systems</s:table-summary>
+          <s:table-head>
+            <s:table-column-name>OS</s:table-column-name>
+            <s:table-column-name>OS-Version</s:table-column-name>
+            <s:table-column-name>OS-Arch</s:table-column-name>
+            <s:table-column-name>JDK-Vendor</s:table-column-name>
+            <s:table-column-name>JDK-Version</s:table-column-name>
+            <s:table-column-name>VM</s:table-column-name>
+            <s:table-column-name>VM-Version</s:table-column-name>
+          </s:table-head>
+          <s:table-body>
+            <s:table-row>
+              <s:table-cell>Linux</s:table-cell>
+              <s:table-cell>3.4.2-2-ARCH</s:table-cell>
+              <s:table-cell>x86_64</s:table-cell>
+              <s:table-cell>Sun Microsystems Inc.</s:table-cell>
+              <s:table-cell>1.6.0_24</s:table-cell>
+              <s:table-cell>OpenJDK 64-Bit Server VM</s:table-cell>
+              <s:table-cell>20.0-b12</s:table-cell>
+            </s:table-row>
+            <s:table-row>
+              <s:table-cell>SunOS</s:table-cell>
+              <s:table-cell>5.11 snv_151a</s:table-cell>
+              <s:table-cell>x86</s:table-cell>
+              <s:table-cell>Sun Microsystems Inc.</s:table-cell>
+              <s:table-cell>1.6.0_21</s:table-cell>
+              <s:table-cell>Java HotSpot(TM) Client VM</s:table-cell>
+              <s:table-cell>17.0-b16</s:table-cell>
+            </s:table-row>
+            <s:table-row>
+              <s:table-cell>Windows XP</s:table-cell>
+              <s:table-cell>5.1</s:table-cell>
+              <s:table-cell>x86</s:table-cell>
+              <s:table-cell>Sun Microsystems Inc.</s:table-cell>
+              <s:table-cell>1.7.0_02-b13</s:table-cell>
+              <s:table-cell>Java HotSpot(TM) Client VM</s:table-cell>
+              <s:table-cell>22.0-b10</s:table-cell>
+            </s:table-row>
+            <s:table-row>
+              <s:table-cell>FreeBSD</s:table-cell>
+              <s:table-cell>8.2-RELEASE-p3</s:table-cell>
+              <s:table-cell>x86_64</s:table-cell>
+              <s:table-cell>Sun Microsystems Inc.</s:table-cell>
+              <s:table-cell>1.6.0_32</s:table-cell>
+              <s:table-cell>OpenJDK 64-Bit Server VM</s:table-cell>
+              <s:table-cell>20.0-b12</s:table-cell>
+            </s:table-row>
+            <s:table-row>
+              <s:table-cell>Mac OS X</s:table-cell>
+              <s:table-cell>10.6.8</s:table-cell>
+              <s:table-cell>x86_64</s:table-cell>
+              <s:table-cell>Apple Inc.</s:table-cell>
+              <s:table-cell>1.6.0_31</s:table-cell>
+              <s:table-cell>Java HotSpot(TM) 64-Bit Server VM</s:table-cell>
+              <s:table-cell>20.6-b01-413</s:table-cell>
+            </s:table-row>
+          </s:table-body>
+        </s:table>
+      </s:formal-item>
     </s:section>
+
     <s:section>
       <s:section-title>Platform Specific Issues</s:section-title>
       <s:paragraph>
         There are currently no known platform-specific issues.
       </s:paragraph>
     </s:section>
+
     <s:section>
       <s:section-title>License</s:section-title>
       <s:paragraph>

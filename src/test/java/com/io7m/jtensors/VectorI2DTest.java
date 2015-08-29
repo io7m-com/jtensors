@@ -23,7 +23,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
 public class VectorI2DTest
 {
-  @Test public void testAbsoluteOrdering()
+  @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final VectorI2D v =
@@ -35,7 +35,7 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testAdd()
+  @SuppressWarnings("static-method") @Test public void testAdd()
   {
     for (int index = 0; index < 100; ++index) {
       final VectorI2D v0 =
@@ -55,7 +55,7 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testAddScaled()
+  @SuppressWarnings("static-method") @Test public void testAddScaled()
   {
     for (int index = 0; index < 100; ++index) {
       final VectorI2D v0 =
@@ -76,7 +76,7 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testAngleDegrees0()
+  @SuppressWarnings("static-method") @Test public void testAngleDegrees0()
   {
     final VectorI2D v0 = new VectorI2D(0.0, 1.0);
     final VectorI2D v1 = new VectorI2D(1.0, 0.0);
@@ -85,7 +85,7 @@ public class VectorI2DTest
     Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(d, 90.0));
   }
 
-  @Test public void testApproximatelyEqualTransitive0()
+  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive0()
   {
     final double x0 = 0.0;
     final double x1 = 0.0;
@@ -99,7 +99,7 @@ public class VectorI2DTest
     Assert.assertTrue(VectorI2D.approximatelyEqual(v0, v1));
   }
 
-  @Test public void testApproximatelyEqualTransitive1()
+  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive1()
   {
     final double x0 = 0.0;
     final double x1 = 1.0;
@@ -113,7 +113,7 @@ public class VectorI2DTest
     Assert.assertFalse(VectorI2D.approximatelyEqual(v0, v1));
   }
 
-  @Test public void testCheckInterface()
+  @SuppressWarnings("static-method") @Test public void testCheckInterface()
   {
     final VectorI2D v = new VectorI2D(3.0, 5.0);
 
@@ -121,7 +121,7 @@ public class VectorI2DTest
     Assert.assertTrue(v.y == v.getYD());
   }
 
-  @Test public void testClampByVectorMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double max_x = Math.random() * Double.MIN_VALUE;
@@ -138,7 +138,7 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testClampByVectorMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double min_x = Math.random() * Double.MAX_VALUE;
@@ -155,7 +155,7 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testClampByVectorOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final VectorI2D minimum =
@@ -179,7 +179,7 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testClampMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double maximum = Math.random() * Double.MIN_VALUE;
@@ -192,7 +192,7 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testClampMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double minimum = Math.random() * Double.MAX_VALUE;
@@ -205,7 +205,7 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testClampOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double minimum = Math.random() * Double.MIN_VALUE;
@@ -221,7 +221,7 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testDistance()
+  @SuppressWarnings("static-method") @Test public void testDistance()
   {
     final VectorI2D v0 = new VectorI2D(0.0, 1.0);
     final VectorI2D v1 = new VectorI2D(0.0, 0.0);
@@ -231,7 +231,7 @@ public class VectorI2DTest
       1.0));
   }
 
-  @Test public void testDistanceOrdering()
+  @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final VectorI2D v0 =
@@ -245,13 +245,13 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testDotProductOrthonormal()
+  @SuppressWarnings("static-method") @Test public void testDotProductOrthonormal()
   {
     final VectorI2D v = new VectorI2D(1.0, 0.0);
     Assert.assertTrue(VectorI2D.dotProduct(v, v) == 1.0);
   }
 
-  @Test public void testEqualsCorrect()
+  @SuppressWarnings("static-method") @Test public void testEqualsCorrect()
   {
     final VectorI2D v0 = new VectorI2D(0.0, 0.0);
     final VectorI2D v1 = new VectorI2D(0.0, 0.0);
@@ -266,7 +266,7 @@ public class VectorI2DTest
     Assert.assertTrue(v0.equals(v1));
   }
 
-  @Test public void testHashCodeCorrect()
+  @SuppressWarnings("static-method") @Test public void testHashCodeCorrect()
   {
     final VectorI2D v0 = new VectorI2D(0.0, 0.0);
     final VectorI2D v1 = new VectorI2D(0.0, 0.0);
@@ -279,7 +279,7 @@ public class VectorI2DTest
     Assert.assertTrue(v0.hashCode() != vy.hashCode());
   }
 
-  @Test public void testInitializeReadable()
+  @SuppressWarnings("static-method") @Test public void testInitializeReadable()
   {
     final VectorI2D v0 = new VectorI2D(1.0f, 2.0f);
     final VectorI2D v1 = new VectorI2D(v0);
@@ -288,7 +288,7 @@ public class VectorI2DTest
     Assert.assertTrue(v0.y == v1.y);
   }
 
-  @Test public void testInterpolateLinearLimits()
+  @SuppressWarnings("static-method") @Test public void testInterpolateLinearLimits()
   {
     for (int index = 0; index < 100; ++index) {
       final VectorI2D v0 =
@@ -307,7 +307,7 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testMagnitudeNormal()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeNormal()
   {
     for (int index = 0; index < 100; ++index) {
       final VectorI2D v =
@@ -319,13 +319,13 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testNoargZero()
+  @SuppressWarnings("static-method") @Test public void testNoargZero()
   {
     final VectorI2D v = new VectorI2D();
     VectorI2D.approximatelyEqual(v, VectorI2D.ZERO);
   }
 
-  @Test public void testNormalizeSimple()
+  @SuppressWarnings("static-method") @Test public void testNormalizeSimple()
   {
     final VectorI2D v0 = new VectorI2D(8.0, 0.0);
     final VectorI2D vr = VectorI2D.normalize(v0);
@@ -333,13 +333,13 @@ public class VectorI2DTest
     Assert.assertTrue(m == 1.0);
   }
 
-  @Test public void testNormalizeZero()
+  @SuppressWarnings("static-method") @Test public void testNormalizeZero()
   {
     final VectorI2D v0 = new VectorI2D(0.0, 0.0);
     VectorI2D.approximatelyEqual(VectorI2D.normalize(v0), v0);
   }
 
-  @Test public void testProjectionPerpendicularZero()
+  @SuppressWarnings("static-method") @Test public void testProjectionPerpendicularZero()
   {
     {
       final VectorI2D p = new VectorI2D(1.0, 0.0);
@@ -356,13 +356,13 @@ public class VectorI2DTest
     }
   }
 
-  @Test public void testString()
+  @SuppressWarnings("static-method") @Test public void testString()
   {
     final VectorI2D v = new VectorI2D(0.0, 1.0);
     Assert.assertTrue(v.toString().equals("[VectorI2D 0.0 1.0]"));
   }
 
-  @Test public void testSubtract()
+  @SuppressWarnings("static-method") @Test public void testSubtract()
   {
     for (int index = 0; index < 100; ++index) {
       final VectorI2D v0 =

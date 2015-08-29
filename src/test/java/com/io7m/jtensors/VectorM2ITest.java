@@ -36,7 +36,7 @@ public class VectorM2ITest
     return (int) (Math.random() * (1 << 14));
   }
 
-  @Test public void testAbsolute()
+  @SuppressWarnings("static-method") @Test public void testAbsolute()
   {
     for (int index = 0; index < 100; ++index) {
       final int x = VectorM2ITest.randomNegativeNumber();
@@ -61,7 +61,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testAbsoluteMutation()
+  @SuppressWarnings("static-method") @Test public void testAbsoluteMutation()
   {
     final VectorM2I out = new VectorM2I();
     final VectorM2I v = new VectorM2I(-1, -1);
@@ -84,7 +84,7 @@ public class VectorM2ITest
     Assert.assertTrue(out.y == 1);
   }
 
-  @Test public void testAbsoluteOrdering()
+  @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int x = VectorM2ITest.randomNegativeNumber();
@@ -105,7 +105,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testAdd()
+  @SuppressWarnings("static-method") @Test public void testAdd()
   {
     for (int index = 0; index < 100; ++index) {
       final int x0 = VectorM2ITest.randomPositiveSmallNumber();
@@ -133,7 +133,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testAddMutation()
+  @SuppressWarnings("static-method") @Test public void testAddMutation()
   {
     final VectorM2I out = new VectorM2I();
     final VectorM2I v0 = new VectorM2I(1, 1);
@@ -173,7 +173,7 @@ public class VectorM2ITest
     Assert.assertTrue(v1.y == 1);
   }
 
-  @Test public void testAddScaled()
+  @SuppressWarnings("static-method") @Test public void testAddScaled()
   {
     for (int index = 0; index < 100; ++index) {
       final int x0 = VectorM2ITest.randomPositiveSmallNumber();
@@ -203,7 +203,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testCheckInterface()
+  @SuppressWarnings("static-method") @Test public void testCheckInterface()
   {
     final VectorM2I v = new VectorM2I(3, 5);
 
@@ -211,7 +211,7 @@ public class VectorM2ITest
     Assert.assertTrue(v.y == v.getYI());
   }
 
-  @Test public void testClampByVectorMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int max_x = VectorM2ITest.randomNegativeNumber();
@@ -239,7 +239,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testClampByVectorMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int min_x = VectorM2ITest.randomPositiveNumber();
@@ -267,7 +267,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testClampByVectorOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int min_x = VectorM2ITest.randomNegativeNumber();
@@ -303,7 +303,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testClampMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int maximum = VectorM2ITest.randomNegativeNumber();
@@ -326,7 +326,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testClampMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int minimum = VectorM2ITest.randomPositiveNumber();
@@ -349,7 +349,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testClampOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int minimum = VectorM2ITest.randomNegativeNumber();
@@ -378,7 +378,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testCopy()
+  @SuppressWarnings("static-method") @Test public void testCopy()
   {
     final VectorM2I vb = new VectorM2I(5, 6);
     final VectorM2I va = new VectorM2I(1, 2);
@@ -392,14 +392,14 @@ public class VectorM2ITest
     Assert.assertTrue(va.y == vb.y);
   }
 
-  @Test public void testDistance()
+  @SuppressWarnings("static-method") @Test public void testDistance()
   {
     final VectorM2I v0 = new VectorM2I(0, 1);
     final VectorM2I v1 = new VectorM2I(0, 0);
     Assert.assertTrue(VectorM2I.distance(v0, v1) == 1);
   }
 
-  @Test public void testDistanceOrdering()
+  @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final int x0 = VectorM2ITest.randomPositiveSmallNumber();
@@ -414,7 +414,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testDotProduct()
+  @SuppressWarnings("static-method") @Test public void testDotProduct()
   {
     final VectorM2I v0 = new VectorM2I(10, 10);
     final VectorM2I v1 = new VectorM2I(10, 10);
@@ -443,13 +443,13 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testDotProductOrthonormal()
+  @SuppressWarnings("static-method") @Test public void testDotProductOrthonormal()
   {
     final VectorM2I v = new VectorM2I(1, 0);
     Assert.assertTrue(VectorM2I.dotProduct(v, v) == 1);
   }
 
-  @Test public void testDotProductSelfMagnitudeSquared()
+  @SuppressWarnings("static-method") @Test public void testDotProductSelfMagnitudeSquared()
   {
     final VectorM2I v0 = new VectorM2I(10, 10);
 
@@ -468,7 +468,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testInitializeReadable()
+  @SuppressWarnings("static-method") @Test public void testInitializeReadable()
   {
     final VectorM2I v0 = new VectorM2I(1, 2);
     final VectorM2I v1 = new VectorM2I(v0);
@@ -477,7 +477,7 @@ public class VectorM2ITest
     Assert.assertTrue(v0.y == v1.y);
   }
 
-  @Test public void testInterpolateLinearLimits()
+  @SuppressWarnings("static-method") @Test public void testInterpolateLinearLimits()
   {
     for (int index = 0; index < 100; ++index) {
       final int x0 = VectorM2ITest.randomPositiveNumber();
@@ -501,7 +501,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testMagnitudeNonzero()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeNonzero()
   {
     for (int index = 0; index < 100; ++index) {
       final int x = VectorM2ITest.randomPositiveSmallNumber();
@@ -513,14 +513,14 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testMagnitudeOne()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeOne()
   {
     final VectorM2I v = new VectorM2I(1, 0);
     final int m = VectorM2I.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
-  @Test public void testMagnitudeSimple()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeSimple()
   {
     final VectorM2I v = new VectorM2I(8, 0);
 
@@ -534,14 +534,14 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testMagnitudeZero()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeZero()
   {
     final VectorM2I v = new VectorM2I(0, 0);
     final int m = VectorM2I.magnitude(v);
     Assert.assertTrue(m == 0);
   }
 
-  @Test public void testProjectionPerpendicularZero()
+  @SuppressWarnings("static-method") @Test public void testProjectionPerpendicularZero()
   {
     {
       final VectorM2I p = new VectorM2I(1, 0);
@@ -564,7 +564,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testScaleMutation()
+  @SuppressWarnings("static-method") @Test public void testScaleMutation()
   {
     final VectorM2I out = new VectorM2I();
     final VectorM2I v0 = new VectorM2I(1, 1);
@@ -591,7 +591,7 @@ public class VectorM2ITest
     Assert.assertTrue(v0.y == 2);
   }
 
-  @Test public void testScaleOne()
+  @SuppressWarnings("static-method") @Test public void testScaleOne()
   {
     for (int index = 0; index < 100; ++index) {
       final int x = VectorM2ITest.randomPositiveNumber();
@@ -617,7 +617,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testScaleZero()
+  @SuppressWarnings("static-method") @Test public void testScaleZero()
   {
     for (int index = 0; index < 100; ++index) {
       final int x = VectorM2ITest.randomPositiveNumber();
@@ -640,13 +640,13 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testString()
+  @SuppressWarnings("static-method") @Test public void testString()
   {
     final VectorM2I v = new VectorM2I(1, 2);
     Assert.assertTrue(v.toString().equals("[VectorM2I 1 2]"));
   }
 
-  @Test public void testSubtract()
+  @SuppressWarnings("static-method") @Test public void testSubtract()
   {
     for (int index = 0; index < 100; ++index) {
       final int x0 = VectorM2ITest.randomPositiveNumber();
@@ -674,7 +674,7 @@ public class VectorM2ITest
     }
   }
 
-  @Test public void testSubtractMutation()
+  @SuppressWarnings("static-method") @Test public void testSubtractMutation()
   {
     final VectorM2I out = new VectorM2I();
     final VectorM2I v0 = new VectorM2I(1, 1);

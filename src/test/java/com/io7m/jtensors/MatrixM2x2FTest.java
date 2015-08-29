@@ -14,7 +14,7 @@ import com.io7m.jaux.functional.Option.Type;
 
 public class MatrixM2x2FTest
 {
-  @Test public void testAdd()
+  @SuppressWarnings("static-method") @Test public void testAdd()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -39,7 +39,7 @@ public class MatrixM2x2FTest
     }
   }
 
-  @Test public void testAddMutate()
+  @SuppressWarnings("static-method") @Test public void testAddMutate()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -63,7 +63,7 @@ public class MatrixM2x2FTest
     }
   }
 
-  @Test public void testAddRowScaled()
+  @SuppressWarnings("static-method") @Test public void testAddRowScaled()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -91,7 +91,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(m0.get(1, 1) == 13.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowA()
   {
@@ -99,7 +99,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.addRowScaled(m, 2, 0, 0, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowB()
   {
@@ -107,7 +107,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.addRowScaled(m, 0, 2, 0, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowC()
   {
@@ -115,7 +115,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.addRowScaled(m, 0, 0, 2, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowA()
   {
@@ -123,7 +123,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.addRowScaled(m, -1, 0, 0, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowB()
   {
@@ -131,7 +131,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.addRowScaled(m, 0, -1, 0, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowC()
   {
@@ -139,7 +139,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.addRowScaled(m, 0, 0, -1, 1.0f);
   }
 
-  @Test public void testBufferEndianness()
+  @SuppressWarnings("static-method") @Test public void testBufferEndianness()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
     final FloatBuffer b = MatrixM2x2F.floatBuffer(m);
@@ -147,7 +147,7 @@ public class MatrixM2x2FTest
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
   }
 
-  @Test(expected = ReadOnlyBufferException.class) public
+  @SuppressWarnings("static-method") @Test(expected = ReadOnlyBufferException.class) public
     void
     testBufferReadOnly()
   {
@@ -156,7 +156,7 @@ public class MatrixM2x2FTest
     b.put(0, 0.0f);
   }
 
-  @Test public void testCopy()
+  @SuppressWarnings("static-method") @Test public void testCopy()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -176,13 +176,13 @@ public class MatrixM2x2FTest
     Assert.assertTrue(m1.get(1, 1) == 5.0);
   }
 
-  @Test public void testDeterminantIdentity()
+  @SuppressWarnings("static-method") @Test public void testDeterminantIdentity()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
     Assert.assertTrue(MatrixM2x2F.determinant(m) == 1.0);
   }
 
-  @Test public void testDeterminantOther()
+  @SuppressWarnings("static-method") @Test public void testDeterminantOther()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
 
@@ -192,7 +192,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(MatrixM2x2F.determinant(m) == 4.0);
   }
 
-  @Test public void testDeterminantScale()
+  @SuppressWarnings("static-method") @Test public void testDeterminantScale()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
 
@@ -201,7 +201,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(MatrixM2x2F.determinant(m) == 2.0);
   }
 
-  @Test public void testDeterminantScaleNegative()
+  @SuppressWarnings("static-method") @Test public void testDeterminantScaleNegative()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
 
@@ -210,14 +210,14 @@ public class MatrixM2x2FTest
     Assert.assertTrue(MatrixM2x2F.determinant(m) == -2.0);
   }
 
-  @Test public void testDeterminantZero()
+  @SuppressWarnings("static-method") @Test public void testDeterminantZero()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
     MatrixM2x2F.setZero(m);
     Assert.assertTrue(MatrixM2x2F.determinant(m) == 0.0);
   }
 
-  @Test public void testExchangeRows()
+  @SuppressWarnings("static-method") @Test public void testExchangeRows()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -244,7 +244,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(m1.get(1, 1) == 4.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsAOverflow()
   {
@@ -252,7 +252,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.exchangeRows(m, 2, 0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsAUnderflow()
   {
@@ -260,7 +260,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.exchangeRows(m, -1, 0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsBOverflow()
   {
@@ -268,7 +268,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.exchangeRows(m, 0, 2);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsBUnderflow()
   {
@@ -276,7 +276,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.exchangeRows(m, 0, -1);
   }
 
-  @Test public void testInitializationFrom()
+  @SuppressWarnings("static-method") @Test public void testInitializationFrom()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
 
@@ -295,7 +295,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(m1.get(1, 1) == 13.0);
   }
 
-  @Test public void testInitializationIdentity()
+  @SuppressWarnings("static-method") @Test public void testInitializationIdentity()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
 
@@ -306,7 +306,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(m.get(1, 1) == 1.0);
   }
 
-  @Test public void testInvertIdentity()
+  @SuppressWarnings("static-method") @Test public void testInvertIdentity()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -338,7 +338,7 @@ public class MatrixM2x2FTest
     }
   }
 
-  @Test public void testInvertSimple()
+  @SuppressWarnings("static-method") @Test public void testInvertSimple()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -376,7 +376,7 @@ public class MatrixM2x2FTest
     }
   }
 
-  @Test public void testInvertZero()
+  @SuppressWarnings("static-method") @Test public void testInvertZero()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -394,7 +394,7 @@ public class MatrixM2x2FTest
     }
   }
 
-  @Test public void testMultiplyIdentity()
+  @SuppressWarnings("static-method") @Test public void testMultiplyIdentity()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -410,7 +410,7 @@ public class MatrixM2x2FTest
     }
   }
 
-  @Test public void testMultiplyMutateIdentity()
+  @SuppressWarnings("static-method") @Test public void testMultiplyMutateIdentity()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -431,7 +431,7 @@ public class MatrixM2x2FTest
     }
   }
 
-  @Test public void testMultiplyMutateSimple()
+  @SuppressWarnings("static-method") @Test public void testMultiplyMutateSimple()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
 
@@ -450,7 +450,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(MatrixM2x2F.get(r, 1, 1) == 22.0);
   }
 
-  @Test public void testMultiplySimple()
+  @SuppressWarnings("static-method") @Test public void testMultiplySimple()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
 
@@ -471,7 +471,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(MatrixM2x2F.get(r, 1, 1) == 22.0);
   }
 
-  @Test public void testMultiplyVectorSimple()
+  @SuppressWarnings("static-method") @Test public void testMultiplyVectorSimple()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
 
@@ -490,7 +490,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(out.y == 11.0);
   }
 
-  @Test public void testMultiplyZero()
+  @SuppressWarnings("static-method") @Test public void testMultiplyZero()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -508,7 +508,7 @@ public class MatrixM2x2FTest
     }
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeNegativeColumn()
   {
@@ -516,7 +516,7 @@ public class MatrixM2x2FTest
     m.get(0, -1);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeNegativeRow()
   {
@@ -524,7 +524,7 @@ public class MatrixM2x2FTest
     m.get(-1, 0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeOverflowColumn()
   {
@@ -532,7 +532,7 @@ public class MatrixM2x2FTest
     m.get(0, 2);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeOverflowRow()
   {
@@ -540,7 +540,7 @@ public class MatrixM2x2FTest
     m.get(2, 0);
   }
 
-  @Test public void testRow()
+  @SuppressWarnings("static-method") @Test public void testRow()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
     final VectorM2F v = new VectorM2F();
@@ -554,7 +554,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(v.y == 1.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testRowOverflow()
   {
@@ -562,7 +562,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.row(m, 3, new VectorM2F());
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testRowUnderflow()
   {
@@ -570,7 +570,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.row(m, -1, new VectorM2F());
   }
 
-  @Test public void testScale()
+  @SuppressWarnings("static-method") @Test public void testScale()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F mr = new MatrixM2x2F();
@@ -592,7 +592,7 @@ public class MatrixM2x2FTest
     }
   }
 
-  @Test public void testScaleMutate()
+  @SuppressWarnings("static-method") @Test public void testScaleMutate()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
 
@@ -613,7 +613,7 @@ public class MatrixM2x2FTest
     }
   }
 
-  @Test public void testScaleRow()
+  @SuppressWarnings("static-method") @Test public void testScaleRow()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -643,7 +643,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(m0.get(1, 1) == 24.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowMutateOverflow()
   {
@@ -651,7 +651,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.scaleRow(m, 2, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowMutateUnderflow()
   {
@@ -659,7 +659,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.scaleRow(m, -1, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowOverflow()
   {
@@ -668,7 +668,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.scaleRow(m, 2, 1.0f, r);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowUnderflow()
   {
@@ -677,7 +677,7 @@ public class MatrixM2x2FTest
     MatrixM2x2F.scaleRow(m, -1, 1.0f, r);
   }
 
-  @Test public void testSetGetIdentity()
+  @SuppressWarnings("static-method") @Test public void testSetGetIdentity()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
 
@@ -688,7 +688,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(m.set(1, 1, 17.0f).get(1, 1) == 17.0);
   }
 
-  @Test public void testStorage()
+  @SuppressWarnings("static-method") @Test public void testStorage()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
 
@@ -712,7 +712,7 @@ public class MatrixM2x2FTest
     }
   }
 
-  @Test public void testString()
+  @SuppressWarnings("static-method") @Test public void testString()
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
     final MatrixM2x2F m1 = new MatrixM2x2F();
@@ -723,7 +723,7 @@ public class MatrixM2x2FTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
-  @Test public void testTranspose()
+  @SuppressWarnings("static-method") @Test public void testTranspose()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
     final MatrixM2x2F r = new MatrixM2x2F();
@@ -750,7 +750,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(r.get(1, 1) == 5.0);
   }
 
-  @Test public void testTransposeMutate()
+  @SuppressWarnings("static-method") @Test public void testTransposeMutate()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
 
@@ -770,7 +770,7 @@ public class MatrixM2x2FTest
     Assert.assertTrue(r.get(1, 1) == 5.0);
   }
 
-  @Test public void testZero()
+  @SuppressWarnings("static-method") @Test public void testZero()
   {
     final MatrixM2x2F m = new MatrixM2x2F();
     MatrixM2x2F.setZero(m);

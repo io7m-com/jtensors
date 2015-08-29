@@ -26,7 +26,7 @@ public class MatrixM4x4FTest
       0.01f);
   }
 
-  @Test public void testAdd()
+  @SuppressWarnings("static-method") @Test public void testAdd()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -51,7 +51,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testAddMutate()
+  @SuppressWarnings("static-method") @Test public void testAddMutate()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -75,7 +75,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testAddRowScaled()
+  @SuppressWarnings("static-method") @Test public void testAddRowScaled()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -135,7 +135,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m0.get(3, 3) == 1.0);
   }
 
-  @Test public void testAddRowScaledContextEquivalent()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testAddRowScaledContextEquivalent()
   {
     final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
     final MatrixM4x4F m0 = new MatrixM4x4F();
@@ -174,7 +176,8 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 3) == 1.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowA()
   {
@@ -182,7 +185,8 @@ public class MatrixM4x4FTest
     MatrixM4x4F.addRowScaledInPlace(m, 4, 0, 0, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowB()
   {
@@ -190,7 +194,8 @@ public class MatrixM4x4FTest
     MatrixM4x4F.addRowScaledInPlace(m, 0, 4, 0, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowC()
   {
@@ -198,7 +203,8 @@ public class MatrixM4x4FTest
     MatrixM4x4F.addRowScaledInPlace(m, 0, 0, 4, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowA()
   {
@@ -206,7 +212,8 @@ public class MatrixM4x4FTest
     MatrixM4x4F.addRowScaledInPlace(m, -1, 0, 0, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowB()
   {
@@ -214,7 +221,8 @@ public class MatrixM4x4FTest
     MatrixM4x4F.addRowScaledInPlace(m, 0, -1, 0, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowC()
   {
@@ -222,7 +230,7 @@ public class MatrixM4x4FTest
     MatrixM4x4F.addRowScaledInPlace(m, 0, 0, -1, 1.0f);
   }
 
-  @Test public void testBufferEndianness()
+  @SuppressWarnings("static-method") @Test public void testBufferEndianness()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final FloatBuffer b = MatrixM4x4F.floatBuffer(m);
@@ -230,7 +238,8 @@ public class MatrixM4x4FTest
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
   }
 
-  @Test(expected = ReadOnlyBufferException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = ReadOnlyBufferException.class) public
     void
     testBufferReadOnly()
   {
@@ -239,7 +248,7 @@ public class MatrixM4x4FTest
     b.put(0, 0.0f);
   }
 
-  @Test public void testCopy()
+  @SuppressWarnings("static-method") @Test public void testCopy()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -287,13 +296,15 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 3) == 16.0);
   }
 
-  @Test public void testDeterminantIdentity()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDeterminantIdentity()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     Assert.assertTrue(MatrixM4x4F.determinant(m) == 1.0);
   }
 
-  @Test public void testDeterminantOther()
+  @SuppressWarnings("static-method") @Test public void testDeterminantOther()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
 
@@ -305,14 +316,14 @@ public class MatrixM4x4FTest
     Assert.assertTrue(MatrixM4x4F.determinant(m) == 16.0);
   }
 
-  @Test public void testDeterminantZero()
+  @SuppressWarnings("static-method") @Test public void testDeterminantZero()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     MatrixM4x4F.setZero(m);
     Assert.assertTrue(MatrixM4x4F.determinant(m) == 0.0);
   }
 
-  @Test public void testExchangeRows()
+  @SuppressWarnings("static-method") @Test public void testExchangeRows()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -382,7 +393,8 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 3) == 16.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsAOverflow()
   {
@@ -390,7 +402,8 @@ public class MatrixM4x4FTest
     MatrixM4x4F.exchangeRowsInPlace(m, 4, 0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsAUnderflow()
   {
@@ -398,7 +411,8 @@ public class MatrixM4x4FTest
     MatrixM4x4F.exchangeRowsInPlace(m, -1, 0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsBOverflow()
   {
@@ -406,7 +420,8 @@ public class MatrixM4x4FTest
     MatrixM4x4F.exchangeRowsInPlace(m, 0, 4);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsBUnderflow()
   {
@@ -414,7 +429,9 @@ public class MatrixM4x4FTest
     MatrixM4x4F.exchangeRowsInPlace(m, 0, -1);
   }
 
-  @Test public void testExchangeRowsContextEquivalent()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testExchangeRowsContextEquivalent()
   {
     final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
     final MatrixM4x4F m0 = new MatrixM4x4F();
@@ -485,7 +502,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 3) == 16.0);
   }
 
-  @Test public void testInitializationFrom()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInitializationFrom()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
 
@@ -532,7 +551,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m1.get(3, 3) == 59.0);
   }
 
-  @Test public void testInitializationIdentity()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInitializationIdentity()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
 
@@ -557,7 +578,7 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m.get(3, 3) == 1.0);
   }
 
-  @Test public void testInvertIdentity()
+  @SuppressWarnings("static-method") @Test public void testInvertIdentity()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -617,7 +638,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testInvertIdentityContextEquivalent()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInvertIdentityContextEquivalent()
   {
     final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
     final MatrixM4x4F m0 = new MatrixM4x4F();
@@ -680,7 +703,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testInvertSimple()
+  @SuppressWarnings("static-method") @Test public void testInvertSimple()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -760,7 +783,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testInvertSimple2()
+  @SuppressWarnings("static-method") @Test public void testInvertSimple2()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -840,7 +863,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testInvertSimple2ContextEquivalent()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInvertSimple2ContextEquivalent()
   {
     final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
     final MatrixM4x4F m0 = new MatrixM4x4F();
@@ -923,7 +948,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testInvertSimpleContextEquivalent()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInvertSimpleContextEquivalent()
   {
     final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
     final MatrixM4x4F m0 = new MatrixM4x4F();
@@ -1006,7 +1033,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testInvertZero()
+  @SuppressWarnings("static-method") @Test public void testInvertZero()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -1024,7 +1051,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testInvertZeroContextEquivalent()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInvertZeroContextEquivalent()
   {
     final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
     final MatrixM4x4F m0 = new MatrixM4x4F();
@@ -1045,7 +1074,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testMultiplyIdentity()
+  @SuppressWarnings("static-method") @Test public void testMultiplyIdentity()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -1061,7 +1090,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testMultiplyMutateIdentity()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMultiplyMutateIdentity()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -1082,7 +1113,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testMultiplyMutateSimple()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMultiplyMutateSimple()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
 
@@ -1125,7 +1158,7 @@ public class MatrixM4x4FTest
     Assert.assertTrue(MatrixM4x4F.get(r, 3, 3) == 600.0);
   }
 
-  @Test public void testMultiplySimple()
+  @SuppressWarnings("static-method") @Test public void testMultiplySimple()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
 
@@ -1170,7 +1203,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(MatrixM4x4F.get(r, 3, 3) == 600.0);
   }
 
-  @Test public void testMultiplyVectorSimple()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMultiplyVectorSimple()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
 
@@ -1203,7 +1238,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(out.w == 150.0);
   }
 
-  @Test public void testMultiplyVectorSimpleContextEquivalent()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMultiplyVectorSimpleContextEquivalent()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
 
@@ -1238,7 +1275,7 @@ public class MatrixM4x4FTest
     Assert.assertTrue(out.w == 150.0);
   }
 
-  @Test public void testMultiplyZero()
+  @SuppressWarnings("static-method") @Test public void testMultiplyZero()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -1256,7 +1293,8 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeNegativeColumn()
   {
@@ -1264,7 +1302,8 @@ public class MatrixM4x4FTest
     m.get(0, -1);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeNegativeRow()
   {
@@ -1272,7 +1311,8 @@ public class MatrixM4x4FTest
     m.get(-1, 0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeOverflowColumn()
   {
@@ -1280,7 +1320,8 @@ public class MatrixM4x4FTest
     m.get(0, 4);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeOverflowRow()
   {
@@ -1288,7 +1329,9 @@ public class MatrixM4x4FTest
     m.get(4, 0);
   }
 
-  @SuppressWarnings("boxing") @Test public void testRotateX()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateX()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
@@ -1370,7 +1413,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @SuppressWarnings("boxing") @Test public
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
     void
     testRotateXContextEquivalent()
   {
@@ -1465,7 +1508,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @SuppressWarnings("boxing") @Test public void testRotateXMakeEquivalent()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateXMakeEquivalent()
   {
     final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
 
@@ -1507,7 +1552,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @SuppressWarnings("boxing") @Test public void testRotateY()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateY()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
@@ -1589,7 +1636,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @SuppressWarnings("boxing") @Test public
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
     void
     testRotateYContextEquivalent()
   {
@@ -1683,7 +1730,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @SuppressWarnings("boxing") @Test public void testRotateYMakeEquivalent()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateYMakeEquivalent()
   {
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
 
@@ -1725,7 +1774,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @SuppressWarnings("boxing") @Test public void testRotateZ()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateZ()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
@@ -1807,7 +1858,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @SuppressWarnings("boxing") @Test public
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
     void
     testRotateZContextEquivalent()
   {
@@ -1901,7 +1952,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @SuppressWarnings("boxing") @Test public void testRotateZMakeEquivalent()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testRotateZMakeEquivalent()
   {
     final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
 
@@ -1943,7 +1996,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testRow()
+  @SuppressWarnings("static-method") @Test public void testRow()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorM4F v = new VectorM4F();
@@ -1973,15 +2026,15 @@ public class MatrixM4x4FTest
     Assert.assertTrue(v.w == 1.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    testRowOverflow()
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public void testRowOverflow()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     MatrixM4x4F.row(m, 4, new VectorM4F());
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testRowUnderflow()
   {
@@ -1989,7 +2042,7 @@ public class MatrixM4x4FTest
     MatrixM4x4F.row(m, -1, new VectorM4F());
   }
 
-  @Test public void testScale()
+  @SuppressWarnings("static-method") @Test public void testScale()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F mr = new MatrixM4x4F();
@@ -2011,7 +2064,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testScaleMutate()
+  @SuppressWarnings("static-method") @Test public void testScaleMutate()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
 
@@ -2032,7 +2085,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testScaleRow()
+  @SuppressWarnings("static-method") @Test public void testScaleRow()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -2108,7 +2161,9 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m0.get(3, 3) == 256.0);
   }
 
-  @Test public void testScaleRowContextEquivalent()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testScaleRowContextEquivalent()
   {
     final MatrixM4x4F.Context context = new MatrixM4x4F.Context();
     final MatrixM4x4F m0 = new MatrixM4x4F();
@@ -2185,7 +2240,8 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m0.get(3, 3) == 256.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowMutateOverflow()
   {
@@ -2193,7 +2249,8 @@ public class MatrixM4x4FTest
     MatrixM4x4F.scaleRowInPlace(m, 4, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowMutateUnderflow()
   {
@@ -2201,7 +2258,8 @@ public class MatrixM4x4FTest
     MatrixM4x4F.scaleRowInPlace(m, -1, 1.0f);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowOverflow()
   {
@@ -2210,7 +2268,8 @@ public class MatrixM4x4FTest
     MatrixM4x4F.scaleRow(m, 4, 1.0f, r);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowUnderflow()
   {
@@ -2219,7 +2278,7 @@ public class MatrixM4x4FTest
     MatrixM4x4F.scaleRow(m, -1, 1.0f, r);
   }
 
-  @Test public void testSetGetIdentity()
+  @SuppressWarnings("static-method") @Test public void testSetGetIdentity()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
 
@@ -2244,7 +2303,7 @@ public class MatrixM4x4FTest
     Assert.assertTrue(m.set(3, 3, 59.0f).get(3, 3) == 59.0);
   }
 
-  @Test public void testStorage()
+  @SuppressWarnings("static-method") @Test public void testStorage()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
 
@@ -2296,7 +2355,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testString()
+  @SuppressWarnings("static-method") @Test public void testString()
   {
     final MatrixM4x4F m0 = new MatrixM4x4F();
     final MatrixM4x4F m1 = new MatrixM4x4F();
@@ -2307,7 +2366,9 @@ public class MatrixM4x4FTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
-  @Test public void testTranslateSimple2F()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslateSimple2F()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final MatrixM4x4F out = new MatrixM4x4F();
@@ -2364,7 +2425,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslateSimple2FAlt()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslateSimple2FAlt()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI2F v = new VectorI2F(1.0f, 2.0f);
@@ -2420,7 +2483,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslateSimple2I()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslateSimple2I()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final MatrixM4x4F out = new MatrixM4x4F();
@@ -2477,7 +2542,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslateSimple2IAlt()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslateSimple2IAlt()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI2I v = new VectorI2I(1, 2);
@@ -2533,7 +2600,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslateSimple3F()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslateSimple3F()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final MatrixM4x4F out = new MatrixM4x4F();
@@ -2590,7 +2659,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslateSimple3FAlt()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslateSimple3FAlt()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
@@ -2646,7 +2717,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslateSimple3I()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslateSimple3I()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final MatrixM4x4F out = new MatrixM4x4F();
@@ -2703,7 +2776,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslateSimple3IAlt()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslateSimple3IAlt()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI3I v = new VectorI3I(1, 2, 3);
@@ -2759,7 +2834,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslationMakeEquivalent3F()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslationMakeEquivalent3F()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
@@ -2791,7 +2868,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslationMakeEquivalent3I()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslationMakeEquivalent3I()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final VectorI3I v = new VectorI3I(1, 2, 3);
@@ -2823,7 +2902,9 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranslationStorage()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslationStorage()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final MatrixM4x4F out = new MatrixM4x4F();
@@ -2858,7 +2939,7 @@ public class MatrixM4x4FTest
     }
   }
 
-  @Test public void testTranspose()
+  @SuppressWarnings("static-method") @Test public void testTranspose()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     final MatrixM4x4F r = new MatrixM4x4F();
@@ -2918,7 +2999,7 @@ public class MatrixM4x4FTest
     Assert.assertTrue(r.get(3, 3) == 15.0);
   }
 
-  @Test public void testTransposeMutate()
+  @SuppressWarnings("static-method") @Test public void testTransposeMutate()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
 
@@ -2960,7 +3041,7 @@ public class MatrixM4x4FTest
     Assert.assertTrue(r.get(3, 3) == 15.0);
   }
 
-  @Test public void testZero()
+  @SuppressWarnings("static-method") @Test public void testZero()
   {
     final MatrixM4x4F m = new MatrixM4x4F();
     MatrixM4x4F.setZero(m);

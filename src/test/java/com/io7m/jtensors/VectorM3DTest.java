@@ -23,7 +23,7 @@ import com.io7m.jaux.ApproximatelyEqualDouble;
 
 public class VectorM3DTest
 {
-  @Test public void testAbsolute()
+  @SuppressWarnings("static-method") @Test public void testAbsolute()
   {
     for (int index = 0; index < 100; ++index) {
       final double x = Math.random() * Double.MIN_VALUE;
@@ -64,7 +64,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testAbsoluteMutation()
+  @SuppressWarnings("static-method") @Test public void testAbsoluteMutation()
   {
     final VectorM3D out = new VectorM3D();
     final VectorM3D v = new VectorM3D(-1.0, -1.0, -1.0);
@@ -92,7 +92,7 @@ public class VectorM3DTest
     Assert.assertTrue(out.z == 1.0);
   }
 
-  @Test public void testAbsoluteOrdering()
+  @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double x = Math.random() * Double.MIN_VALUE;
@@ -116,7 +116,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testAdd()
+  @SuppressWarnings("static-method") @Test public void testAdd()
   {
     for (int index = 0; index < 100; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -161,7 +161,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testAddMutation()
+  @SuppressWarnings("static-method") @Test public void testAddMutation()
   {
     final VectorM3D out = new VectorM3D();
     final VectorM3D v0 = new VectorM3D(1.0, 1.0, 1.0);
@@ -204,7 +204,7 @@ public class VectorM3DTest
     Assert.assertTrue(v1.z == 1.0);
   }
 
-  @Test public void testAddScaled()
+  @SuppressWarnings("static-method") @Test public void testAddScaled()
   {
     for (int index = 0; index < 100; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -251,7 +251,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testApproximatelyEqualTransitive0()
+  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive0()
   {
     final double x0 = 0.0;
     final double x1 = 0.0;
@@ -268,7 +268,7 @@ public class VectorM3DTest
     Assert.assertTrue(VectorM3D.approximatelyEqual(v0, v1));
   }
 
-  @Test public void testApproximatelyEqualTransitive1()
+  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive1()
   {
     final double x0 = 0.0;
     final double x1 = 1.0;
@@ -284,7 +284,7 @@ public class VectorM3DTest
     Assert.assertFalse(VectorM3D.approximatelyEqual(v0, v1));
   }
 
-  @Test public void testCheckInterface()
+  @SuppressWarnings("static-method") @Test public void testCheckInterface()
   {
     final VectorM3D v = new VectorM3D(3.0f, 5.0f, 7.0f);
 
@@ -293,7 +293,7 @@ public class VectorM3DTest
     Assert.assertTrue(v.z == v.getZD());
   }
 
-  @Test public void testClampByVectorMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double max_x = Math.random() * Double.MIN_VALUE;
@@ -325,7 +325,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testClampByVectorMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double min_x = Math.random() * Double.MAX_VALUE;
@@ -357,7 +357,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testClampByVectorOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double min_x = Math.random() * Double.MIN_VALUE;
@@ -400,7 +400,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testClampMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double maximum = Math.random() * Double.MIN_VALUE;
@@ -426,7 +426,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testClampMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double minimum = Math.random() * Double.MAX_VALUE;
@@ -452,7 +452,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testClampOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double minimum = Math.random() * Double.MIN_VALUE;
@@ -486,7 +486,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testCopy()
+  @SuppressWarnings("static-method") @Test public void testCopy()
   {
     final VectorM3D vb = new VectorM3D(5, 6, 7);
     final VectorM3D va = new VectorM3D(1, 2, 3);
@@ -502,7 +502,7 @@ public class VectorM3DTest
     Assert.assertTrue(va.z == vb.z);
   }
 
-  @Test public void testCrossProductPerpendicular()
+  @SuppressWarnings("static-method") @Test public void testCrossProductPerpendicular()
   {
     final VectorM3D vy = new VectorM3D(0, 1, 0);
     final VectorM3D vx = new VectorM3D(1, 0, 0);
@@ -525,7 +525,7 @@ public class VectorM3DTest
     Assert.assertTrue(VectorM3D.dotProduct(vyz, vz) == 0.0);
   }
 
-  @Test public void testCrossProductSimple()
+  @SuppressWarnings("static-method") @Test public void testCrossProductSimple()
   {
     final VectorM3D v0 = new VectorM3D(0, 1, 0);
     final VectorM3D v1 = new VectorM3D(1, 0, 0);
@@ -538,7 +538,7 @@ public class VectorM3DTest
     Assert.assertTrue(vr.z == -1.0);
   }
 
-  @Test public void testDistance()
+  @SuppressWarnings("static-method") @Test public void testDistance()
   {
     final VectorM3D v0 = new VectorM3D(0.0, 1.0, 0.0);
     final VectorM3D v1 = new VectorM3D(0.0, 0.0, 0.0);
@@ -547,7 +547,7 @@ public class VectorM3DTest
       1.0));
   }
 
-  @Test public void testDistanceOrdering()
+  @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -564,7 +564,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testDotProduct()
+  @SuppressWarnings("static-method") @Test public void testDotProduct()
   {
     final VectorM3D v0 = new VectorM3D(10.0, 10.0, 10.0);
     final VectorM3D v1 = new VectorM3D(10.0, 10.0, 10.0);
@@ -597,13 +597,13 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testDotProductOrthonormal()
+  @SuppressWarnings("static-method") @Test public void testDotProductOrthonormal()
   {
     final VectorM3D v = new VectorM3D(1.0f, 0.0f, 0.0f);
     Assert.assertTrue(VectorM3D.dotProduct(v, v) == 1.0);
   }
 
-  @Test public void testDotProductSelfMagnitudeSquared()
+  @SuppressWarnings("static-method") @Test public void testDotProductSelfMagnitudeSquared()
   {
     final VectorM3D v0 = new VectorM3D(10.0, 10.0, 10.0);
 
@@ -624,7 +624,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testInitializeReadable()
+  @SuppressWarnings("static-method") @Test public void testInitializeReadable()
   {
     final VectorM3D v0 = new VectorM3D(1.0f, 2.0f, 3.0f);
     final VectorM3D v1 = new VectorM3D(v0);
@@ -634,7 +634,7 @@ public class VectorM3DTest
     Assert.assertTrue(v0.z == v1.z);
   }
 
-  @Test public void testInterpolateLinearLimits()
+  @SuppressWarnings("static-method") @Test public void testInterpolateLinearLimits()
   {
     for (int index = 0; index < 100; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -674,7 +674,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testMagnitudeNonzero()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeNonzero()
   {
     for (int index = 0; index < 100; ++index) {
       final double x = Math.random() * Double.MAX_VALUE;
@@ -687,7 +687,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testMagnitudeNormal()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeNormal()
   {
     for (int index = 0; index < 100; ++index) {
       final double x = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
@@ -704,7 +704,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testMagnitudeNormalizeZero()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeNormalizeZero()
   {
     final VectorM3D v = new VectorM3D(0.0, 0.0, 0.0);
     final VectorM3D vr = VectorM3D.normalizeInPlace(v);
@@ -712,14 +712,14 @@ public class VectorM3DTest
     Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
   }
 
-  @Test public void testMagnitudeOne()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeOne()
   {
     final VectorM3D v = new VectorM3D(1.0, 0.0, 0.0);
     final double m = VectorM3D.magnitude(v);
     Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 1.0));
   }
 
-  @Test public void testMagnitudeSimple()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeSimple()
   {
     final VectorM3D v = new VectorM3D(8.0, 0.0, 0.0);
 
@@ -733,14 +733,14 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testMagnitudeZero()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeZero()
   {
     final VectorM3D v = new VectorM3D(0.0, 0.0, 0.0);
     final double m = VectorM3D.magnitude(v);
     Assert.assertTrue(ApproximatelyEqualDouble.approximatelyEqual(m, 0.0));
   }
 
-  @Test public void testNormalizeSimple()
+  @SuppressWarnings("static-method") @Test public void testNormalizeSimple()
   {
     final VectorM3D v0 = new VectorM3D(8.0, 0.0, 0.0);
     final VectorM3D out = new VectorM3D();
@@ -752,7 +752,7 @@ public class VectorM3DTest
     Assert.assertTrue(m == 1.0);
   }
 
-  @Test public void testProjectionPerpendicularZero()
+  @SuppressWarnings("static-method") @Test public void testProjectionPerpendicularZero()
   {
     {
       final VectorM3D p = new VectorM3D(1.0, 0.0, 0.0);
@@ -775,7 +775,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testScaleMutation()
+  @SuppressWarnings("static-method") @Test public void testScaleMutation()
   {
     final VectorM3D out = new VectorM3D();
     final VectorM3D v0 = new VectorM3D(1.0, 1.0, 1.0);
@@ -808,7 +808,7 @@ public class VectorM3DTest
     Assert.assertTrue(v0.z == 2.0);
   }
 
-  @Test public void testScaleOne()
+  @SuppressWarnings("static-method") @Test public void testScaleOne()
   {
     for (int index = 0; index < 100; ++index) {
       final double x = Math.random() * Double.MAX_VALUE;
@@ -847,7 +847,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testScaleZero()
+  @SuppressWarnings("static-method") @Test public void testScaleZero()
   {
     for (int index = 0; index < 100; ++index) {
       final double x = Math.random() * Double.MAX_VALUE;
@@ -882,13 +882,13 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testString()
+  @SuppressWarnings("static-method") @Test public void testString()
   {
     final VectorM3D v = new VectorM3D(0.0, 1.0, 2.0);
     Assert.assertTrue(v.toString().equals("[VectorM3D 0.0 1.0 2.0]"));
   }
 
-  @Test public void testSubtract()
+  @SuppressWarnings("static-method") @Test public void testSubtract()
   {
     for (int index = 0; index < 100; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -933,7 +933,7 @@ public class VectorM3DTest
     }
   }
 
-  @Test public void testSubtractMutation()
+  @SuppressWarnings("static-method") @Test public void testSubtractMutation()
   {
     final VectorM3D out = new VectorM3D();
     final VectorM3D v0 = new VectorM3D(1.0, 1.0, 1.0);

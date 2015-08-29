@@ -14,7 +14,7 @@ import com.io7m.jaux.functional.Option.Type;
 
 public class MatrixM3x3DTest
 {
-  @Test public void testAdd()
+  @SuppressWarnings("static-method") @Test public void testAdd()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -39,7 +39,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testAddMutate()
+  @SuppressWarnings("static-method") @Test public void testAddMutate()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -63,7 +63,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testAddRowScaled()
+  @SuppressWarnings("static-method") @Test public void testAddRowScaled()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -105,7 +105,8 @@ public class MatrixM3x3DTest
     Assert.assertTrue(m0.get(2, 2) == 13.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowA()
   {
@@ -113,7 +114,8 @@ public class MatrixM3x3DTest
     MatrixM3x3D.addRowScaledInPlace(m, 3, 0, 0, 1.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowB()
   {
@@ -121,7 +123,8 @@ public class MatrixM3x3DTest
     MatrixM3x3D.addRowScaledInPlace(m, 0, 3, 0, 1.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledOverflowC()
   {
@@ -129,7 +132,8 @@ public class MatrixM3x3DTest
     MatrixM3x3D.addRowScaledInPlace(m, 0, 0, 3, 1.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowA()
   {
@@ -137,7 +141,8 @@ public class MatrixM3x3DTest
     MatrixM3x3D.addRowScaledInPlace(m, -1, 0, 0, 1.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowB()
   {
@@ -145,7 +150,8 @@ public class MatrixM3x3DTest
     MatrixM3x3D.addRowScaledInPlace(m, 0, -1, 0, 1.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testAddRowScaledUnderflowC()
   {
@@ -153,7 +159,7 @@ public class MatrixM3x3DTest
     MatrixM3x3D.addRowScaledInPlace(m, 0, 0, -1, 1.0);
   }
 
-  @Test public void testBufferEndianness()
+  @SuppressWarnings("static-method") @Test public void testBufferEndianness()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final DoubleBuffer b = MatrixM3x3D.doubleBuffer(m);
@@ -161,7 +167,8 @@ public class MatrixM3x3DTest
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
   }
 
-  @Test(expected = ReadOnlyBufferException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = ReadOnlyBufferException.class) public
     void
     testBufferReadOnly()
   {
@@ -170,7 +177,7 @@ public class MatrixM3x3DTest
     b.put(0, 0.0f);
   }
 
-  @Test public void testCopy()
+  @SuppressWarnings("static-method") @Test public void testCopy()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -202,13 +209,15 @@ public class MatrixM3x3DTest
     Assert.assertTrue(m1.get(2, 2) == 9.0);
   }
 
-  @Test public void testDeterminantIdentity()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDeterminantIdentity()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     Assert.assertTrue(MatrixM3x3D.determinant(m) == 1.0);
   }
 
-  @Test public void testDeterminantOther()
+  @SuppressWarnings("static-method") @Test public void testDeterminantOther()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
 
@@ -219,7 +228,7 @@ public class MatrixM3x3DTest
     Assert.assertTrue(MatrixM3x3D.determinant(m) == 8.0);
   }
 
-  @Test public void testDeterminantScale()
+  @SuppressWarnings("static-method") @Test public void testDeterminantScale()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
 
@@ -228,7 +237,9 @@ public class MatrixM3x3DTest
     Assert.assertTrue(MatrixM3x3D.determinant(m) == 2.0);
   }
 
-  @Test public void testDeterminantScaleNegative()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testDeterminantScaleNegative()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
 
@@ -237,14 +248,14 @@ public class MatrixM3x3DTest
     Assert.assertTrue(MatrixM3x3D.determinant(m) == -2.0);
   }
 
-  @Test public void testDeterminantZero()
+  @SuppressWarnings("static-method") @Test public void testDeterminantZero()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     MatrixM3x3D.setZero(m);
     Assert.assertTrue(MatrixM3x3D.determinant(m) == 0.0);
   }
 
-  @Test public void testExchangeRows()
+  @SuppressWarnings("static-method") @Test public void testExchangeRows()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -290,7 +301,8 @@ public class MatrixM3x3DTest
     Assert.assertTrue(m1.get(2, 2) == 11.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsAOverflow()
   {
@@ -298,7 +310,8 @@ public class MatrixM3x3DTest
     MatrixM3x3D.exchangeRowsInPlace(m, 3, 0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsAUnderflow()
   {
@@ -306,7 +319,8 @@ public class MatrixM3x3DTest
     MatrixM3x3D.exchangeRowsInPlace(m, -1, 0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsBOverflow()
   {
@@ -314,7 +328,8 @@ public class MatrixM3x3DTest
     MatrixM3x3D.exchangeRowsInPlace(m, 0, 3);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testExchangeRowsBUnderflow()
   {
@@ -322,7 +337,9 @@ public class MatrixM3x3DTest
     MatrixM3x3D.exchangeRowsInPlace(m, 0, -1);
   }
 
-  @Test public void testInitializationFrom()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInitializationFrom()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
 
@@ -353,7 +370,9 @@ public class MatrixM3x3DTest
     Assert.assertTrue(m1.get(2, 2) == 29.0);
   }
 
-  @Test public void testInitializationIdentity()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testInitializationIdentity()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
 
@@ -370,7 +389,7 @@ public class MatrixM3x3DTest
     Assert.assertTrue(m.get(2, 2) == 1.0);
   }
 
-  @Test public void testInvertIdentity()
+  @SuppressWarnings("static-method") @Test public void testInvertIdentity()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -414,7 +433,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testInvertSimple()
+  @SuppressWarnings("static-method") @Test public void testInvertSimple()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -470,7 +489,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testInvertZero()
+  @SuppressWarnings("static-method") @Test public void testInvertZero()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -488,7 +507,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testMultiplyIdentity()
+  @SuppressWarnings("static-method") @Test public void testMultiplyIdentity()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -504,7 +523,9 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testMultiplyMutateIdentity()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMultiplyMutateIdentity()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -525,7 +546,9 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testMultiplyMutateSimple()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMultiplyMutateSimple()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
 
@@ -558,7 +581,7 @@ public class MatrixM3x3DTest
     Assert.assertTrue(MatrixM3x3D.get(r, 2, 2) == 150.0);
   }
 
-  @Test public void testMultiplySimple()
+  @SuppressWarnings("static-method") @Test public void testMultiplySimple()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
 
@@ -593,7 +616,9 @@ public class MatrixM3x3DTest
     Assert.assertTrue(MatrixM3x3D.get(r, 2, 2) == 150.0);
   }
 
-  @Test public void testMultiplyVectorSimple()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testMultiplyVectorSimple()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
 
@@ -620,7 +645,7 @@ public class MatrixM3x3DTest
     Assert.assertTrue(out.z == 50.0);
   }
 
-  @Test public void testMultiplyZero()
+  @SuppressWarnings("static-method") @Test public void testMultiplyZero()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -638,7 +663,8 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeNegativeColumn()
   {
@@ -646,7 +672,8 @@ public class MatrixM3x3DTest
     m.get(0, -1);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeNegativeRow()
   {
@@ -654,7 +681,8 @@ public class MatrixM3x3DTest
     m.get(-1, 0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeOverflowColumn()
   {
@@ -662,7 +690,8 @@ public class MatrixM3x3DTest
     m.get(0, 3);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testOutOfRangeOverflowRow()
   {
@@ -670,7 +699,7 @@ public class MatrixM3x3DTest
     m.get(3, 0);
   }
 
-  @Test public void testRow()
+  @SuppressWarnings("static-method") @Test public void testRow()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final VectorM3D v = new VectorM3D();
@@ -691,15 +720,15 @@ public class MatrixM3x3DTest
     Assert.assertTrue(v.z == 1.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
-    void
-    testRowOverflow()
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public void testRowOverflow()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     MatrixM3x3D.row(m, 3, new VectorM3D());
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testRowUnderflow()
   {
@@ -707,7 +736,7 @@ public class MatrixM3x3DTest
     MatrixM3x3D.row(m, -1, new VectorM3D());
   }
 
-  @Test public void testScale()
+  @SuppressWarnings("static-method") @Test public void testScale()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D mr = new MatrixM3x3D();
@@ -729,7 +758,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testScaleMutate()
+  @SuppressWarnings("static-method") @Test public void testScaleMutate()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
 
@@ -750,7 +779,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testScaleRow()
+  @SuppressWarnings("static-method") @Test public void testScaleRow()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -800,7 +829,8 @@ public class MatrixM3x3DTest
     Assert.assertTrue(m0.get(2, 2) == 88.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowMutateOverflow()
   {
@@ -808,7 +838,8 @@ public class MatrixM3x3DTest
     MatrixM3x3D.scaleRow(m, 3, 1.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowMutateUnderflow()
   {
@@ -816,7 +847,8 @@ public class MatrixM3x3DTest
     MatrixM3x3D.scaleRow(m, -1, 1.0);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowOverflow()
   {
@@ -825,7 +857,8 @@ public class MatrixM3x3DTest
     MatrixM3x3D.scaleRow(m, 3, 1.0, r);
   }
 
-  @Test(expected = IndexOutOfBoundsException.class) public
+  @SuppressWarnings("static-method") @Test(
+    expected = IndexOutOfBoundsException.class) public
     void
     testScaleRowUnderflow()
   {
@@ -834,7 +867,7 @@ public class MatrixM3x3DTest
     MatrixM3x3D.scaleRow(m, -1, 1.0, r);
   }
 
-  @Test public void testSetGetIdentity()
+  @SuppressWarnings("static-method") @Test public void testSetGetIdentity()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
 
@@ -851,7 +884,7 @@ public class MatrixM3x3DTest
     Assert.assertTrue(m.set(2, 2, 37.0).get(2, 2) == 37.0);
   }
 
-  @Test public void testStorage()
+  @SuppressWarnings("static-method") @Test public void testStorage()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
 
@@ -887,7 +920,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testString()
+  @SuppressWarnings("static-method") @Test public void testString()
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
     final MatrixM3x3D m1 = new MatrixM3x3D();
@@ -898,7 +931,9 @@ public class MatrixM3x3DTest
     Assert.assertFalse(m0.toString().equals(m2.toString()));
   }
 
-  @SuppressWarnings("boxing") @Test public void testTranslate2DMakeIdentity()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testTranslate2DMakeIdentity()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final VectorM2D v = new VectorM2D(0, 0);
@@ -918,7 +953,9 @@ public class MatrixM3x3DTest
     Assert.assertEquals(1.0, m.get(2, 2));
   }
 
-  @SuppressWarnings("boxing") @Test public void testTranslate2DMakeSimple()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testTranslate2DMakeSimple()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final VectorM2D v = new VectorM2D(3, 7);
@@ -938,7 +975,9 @@ public class MatrixM3x3DTest
     Assert.assertEquals(1.0, m.get(2, 2));
   }
 
-  @SuppressWarnings("boxing") @Test public void testTranslate2IMakeIdentity()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testTranslate2IMakeIdentity()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final VectorM2I v = new VectorM2I(0, 0);
@@ -958,7 +997,9 @@ public class MatrixM3x3DTest
     Assert.assertEquals(1.0, m.get(2, 2));
   }
 
-  @SuppressWarnings("boxing") @Test public void testTranslate2IMakeSimple()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testTranslate2IMakeSimple()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final VectorM2I v = new VectorM2I(3, 7);
@@ -978,7 +1019,9 @@ public class MatrixM3x3DTest
     Assert.assertEquals(1.0, m.get(2, 2));
   }
 
-  @SuppressWarnings("boxing") @Test public void testTranslateSimple2D()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testTranslateSimple2D()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final MatrixM3x3D out = new MatrixM3x3D();
@@ -1019,7 +1062,9 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings("boxing") @Test public void testTranslateSimple2DAlt()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testTranslateSimple2DAlt()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final VectorI2D v = new VectorI2D(1.0, 2.0);
@@ -1059,7 +1104,9 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings("boxing") @Test public void testTranslateSimple2I()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testTranslateSimple2I()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final MatrixM3x3D out = new MatrixM3x3D();
@@ -1100,7 +1147,9 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testTranslateSimple2IAlt()
+  @SuppressWarnings("static-method") @Test public
+    void
+    testTranslateSimple2IAlt()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final VectorI2I v = new VectorI2I(1, 2);
@@ -1140,7 +1189,9 @@ public class MatrixM3x3DTest
     }
   }
 
-  @SuppressWarnings("boxing") @Test public void testTranslationStorage()
+  @SuppressWarnings({ "boxing", "static-method" }) @Test public
+    void
+    testTranslationStorage()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final MatrixM3x3D out = new MatrixM3x3D();
@@ -1167,7 +1218,7 @@ public class MatrixM3x3DTest
     }
   }
 
-  @Test public void testTranspose()
+  @SuppressWarnings("static-method") @Test public void testTranspose()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     final MatrixM3x3D r = new MatrixM3x3D();
@@ -1210,7 +1261,7 @@ public class MatrixM3x3DTest
     Assert.assertTrue(r.get(2, 2) == 10.0);
   }
 
-  @Test public void testTransposeMutate()
+  @SuppressWarnings("static-method") @Test public void testTransposeMutate()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
 
@@ -1242,7 +1293,7 @@ public class MatrixM3x3DTest
     Assert.assertTrue(r.get(2, 2) == 10.0);
   }
 
-  @Test public void testZero()
+  @SuppressWarnings("static-method") @Test public void testZero()
   {
     final MatrixM3x3D m = new MatrixM3x3D();
     MatrixM3x3D.setZero(m);

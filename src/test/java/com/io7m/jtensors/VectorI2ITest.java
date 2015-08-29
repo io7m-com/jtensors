@@ -11,7 +11,7 @@ public class VectorI2ITest
     return (int) (Integer.MIN_VALUE + (Math.random() * (Integer.MAX_VALUE - Integer.MIN_VALUE)));
   }
 
-  @Test public void testAdd()
+  @SuppressWarnings("static-method") @Test public void testAdd()
   {
     for (int index = 0; index < 100; ++index) {
       final int x0 = VectorI2ITest.randomNumber();
@@ -29,14 +29,14 @@ public class VectorI2ITest
     }
   }
 
-  @Test public void testCheckInterface()
+  @SuppressWarnings("static-method") @Test public void testCheckInterface()
   {
     final VectorI2I v = new VectorI2I(1, 2);
     Assert.assertEquals(1, v.getXI());
     Assert.assertEquals(2, v.getYI());
   }
 
-  @Test public void testEqualsCorrect()
+  @SuppressWarnings("static-method") @Test public void testEqualsCorrect()
   {
     final VectorI2I v0 = new VectorI2I(0, 0);
     final VectorI2I v1 = new VectorI2I(0, 0);
@@ -51,7 +51,7 @@ public class VectorI2ITest
     Assert.assertTrue(v0.equals(v1));
   }
 
-  @Test public void testHashCodeCorrect()
+  @SuppressWarnings("static-method") @Test public void testHashCodeCorrect()
   {
     final VectorI2I v0 = new VectorI2I(0, 0);
     final VectorI2I v1 = new VectorI2I(0, 0);
@@ -64,27 +64,27 @@ public class VectorI2ITest
     Assert.assertTrue(v0.hashCode() != vy.hashCode());
   }
 
-  @Test public void testInit()
+  @SuppressWarnings("static-method") @Test public void testInit()
   {
     final VectorI2I v = new VectorI2I(1, 2);
     Assert.assertEquals(1, v.x);
     Assert.assertEquals(2, v.y);
   }
 
-  @Test public void testInitDefaultZero()
+  @SuppressWarnings("static-method") @Test public void testInitDefaultZero()
   {
     final VectorI2I v = new VectorI2I();
     Assert.assertEquals(0, v.x);
     Assert.assertEquals(0, v.y);
   }
 
-  @Test public void testString()
+  @SuppressWarnings("static-method") @Test public void testString()
   {
     final VectorI2I v = new VectorI2I(0, 1);
     Assert.assertTrue(v.toString().equals("[VectorI2I 0 1]"));
   }
 
-  @Test public void testSubtract()
+  @SuppressWarnings("static-method") @Test public void testSubtract()
   {
     for (int index = 0; index < 100; ++index) {
       final int x0 = VectorI2ITest.randomNumber();

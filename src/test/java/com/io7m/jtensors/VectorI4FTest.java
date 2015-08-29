@@ -23,7 +23,7 @@ import com.io7m.jaux.ApproximatelyEqualFloat;
 
 public class VectorI4FTest
 {
-  @Test public void testAbsoluteOrdering()
+  @SuppressWarnings("static-method") @Test public void testAbsoluteOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float x = (float) (Math.random() * Float.MIN_VALUE);
@@ -39,7 +39,7 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testAdd()
+  @SuppressWarnings("static-method") @Test public void testAdd()
   {
     for (int index = 0; index < 100; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -67,7 +67,7 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testAddScaled()
+  @SuppressWarnings("static-method") @Test public void testAddScaled()
   {
     for (int index = 0; index < 100; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -96,7 +96,7 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testApproximatelyEqualTransitive0()
+  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive0()
   {
     final float x0 = 0.0f;
     final float x1 = 0.0f;
@@ -116,7 +116,7 @@ public class VectorI4FTest
     Assert.assertTrue(VectorI4F.approximatelyEqual(v0, v1));
   }
 
-  @Test public void testApproximatelyEqualTransitive1()
+  @SuppressWarnings("static-method") @Test public void testApproximatelyEqualTransitive1()
   {
     final float x0 = 0.0f;
     final float x1 = 1.0f;
@@ -136,7 +136,7 @@ public class VectorI4FTest
     Assert.assertFalse(VectorI4F.approximatelyEqual(v0, v1));
   }
 
-  @Test public void testCheckInterface()
+  @SuppressWarnings("static-method") @Test public void testCheckInterface()
   {
     final VectorI4F v = new VectorI4F(3.0f, 5.0f, 7.0f, 11.0f);
 
@@ -146,7 +146,7 @@ public class VectorI4FTest
     Assert.assertTrue(v.w == v.getWF());
   }
 
-  @Test public void testClampByVectorMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float max_x = (float) (Math.random() * Float.MIN_VALUE);
@@ -172,7 +172,7 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testClampByVectorMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float min_x = (float) (Math.random() * Float.MAX_VALUE);
@@ -198,7 +198,7 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testClampByVectorOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampByVectorOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float min_x = (float) (Math.random() * Float.MIN_VALUE);
@@ -238,7 +238,7 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testClampMaximumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampMaximumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float maximum = (float) (Math.random() * Float.MIN_VALUE);
@@ -256,7 +256,7 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testClampMinimumOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampMinimumOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float minimum = (float) (Math.random() * Float.MAX_VALUE);
@@ -274,7 +274,7 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testClampOrdering()
+  @SuppressWarnings("static-method") @Test public void testClampOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float minimum = (float) (Math.random() * Float.MIN_VALUE);
@@ -297,7 +297,7 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testDistance()
+  @SuppressWarnings("static-method") @Test public void testDistance()
   {
     final VectorI4F v0 = new VectorI4F(0.0f, 1.0f, 0.0f, 0.0f);
     final VectorI4F v1 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
@@ -307,7 +307,7 @@ public class VectorI4FTest
       1.0f));
   }
 
-  @Test public void testDistanceOrdering()
+  @SuppressWarnings("static-method") @Test public void testDistanceOrdering()
   {
     for (int index = 0; index < 100; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -326,13 +326,13 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testDotProductOrthonormal()
+  @SuppressWarnings("static-method") @Test public void testDotProductOrthonormal()
   {
     final VectorI4F v = new VectorI4F(1.0f, 0.0f, 0.0f, 0.0f);
     Assert.assertTrue(VectorI4F.dotProduct(v, v) == 1.0);
   }
 
-  @Test public void testDotProductSimple()
+  @SuppressWarnings("static-method") @Test public void testDotProductSimple()
   {
     final float x0 = 2.0f;
     final float y0 = 2.0f;
@@ -350,7 +350,7 @@ public class VectorI4FTest
     Assert.assertTrue(p == 16.0);
   }
 
-  @Test public void testEqualsCorrect()
+  @SuppressWarnings("static-method") @Test public void testEqualsCorrect()
   {
     final VectorI4F v0 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
     final VectorI4F v1 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
@@ -369,7 +369,7 @@ public class VectorI4FTest
     Assert.assertTrue(v0.equals(v1));
   }
 
-  @Test public void testHashCodeCorrect()
+  @SuppressWarnings("static-method") @Test public void testHashCodeCorrect()
   {
     final VectorI4F v0 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
     final VectorI4F v1 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
@@ -386,7 +386,7 @@ public class VectorI4FTest
     Assert.assertTrue(v0.hashCode() != vw.hashCode());
   }
 
-  @Test public void testInitializeReadable()
+  @SuppressWarnings("static-method") @Test public void testInitializeReadable()
   {
     final VectorI4F v0 = new VectorI4F(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorI4F v1 = new VectorI4F(v0);
@@ -397,7 +397,7 @@ public class VectorI4FTest
     Assert.assertTrue(v0.w == v1.w);
   }
 
-  @Test public void testInterpolateLinearLimits()
+  @SuppressWarnings("static-method") @Test public void testInterpolateLinearLimits()
   {
     for (int index = 0; index < 100; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -421,7 +421,7 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testMagnitudeNormal()
+  @SuppressWarnings("static-method") @Test public void testMagnitudeNormal()
   {
     for (int index = 0; index < 100; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
@@ -436,13 +436,13 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testNoargZero()
+  @SuppressWarnings("static-method") @Test public void testNoargZero()
   {
     final VectorI4F v = new VectorI4F();
     VectorI4F.approximatelyEqual(v, VectorI4F.ZERO);
   }
 
-  @Test public void testNormalizeSimple()
+  @SuppressWarnings("static-method") @Test public void testNormalizeSimple()
   {
     final VectorI4F v0 = new VectorI4F(8.0f, 0.0f, 0.0f, 0.0f);
     final VectorI4F vr = VectorI4F.normalize(v0);
@@ -450,13 +450,13 @@ public class VectorI4FTest
     Assert.assertTrue(m == 1.0);
   }
 
-  @Test public void testNormalizeZero()
+  @SuppressWarnings("static-method") @Test public void testNormalizeZero()
   {
     final VectorI4F v0 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
     VectorI4F.approximatelyEqual(VectorI4F.normalize(v0), v0);
   }
 
-  @Test public void testProjectionPerpendicularZero()
+  @SuppressWarnings("static-method") @Test public void testProjectionPerpendicularZero()
   {
     {
       final VectorI4F p = new VectorI4F(1.0f, 0.0f, 0.0f, 0.0f);
@@ -473,13 +473,13 @@ public class VectorI4FTest
     }
   }
 
-  @Test public void testString()
+  @SuppressWarnings("static-method") @Test public void testString()
   {
     final VectorI4F v = new VectorI4F(0.0f, 1.0f, 2.0f, 3.0f);
     Assert.assertTrue(v.toString().equals("[VectorI4F 0.0 1.0 2.0 3.0]"));
   }
 
-  @Test public void testSubtract()
+  @SuppressWarnings("static-method") @Test public void testSubtract()
   {
     for (int index = 0; index < 100; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
