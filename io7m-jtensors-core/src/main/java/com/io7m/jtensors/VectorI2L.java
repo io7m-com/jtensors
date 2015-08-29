@@ -1,10 +1,10 @@
 /*
  * Copyright © 2014 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -27,7 +27,7 @@ import com.io7m.jnull.Nullable;
  * Values of this type are immutable and can therefore be safely accessed from
  * multiple threads.
  * </p>
- * 
+ *
  * @since 5.3.0
  */
 
@@ -41,12 +41,12 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the absolute values of the elements in vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return <code>(abs v.x, abs v.y, abs v.z)</code>
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -64,12 +64,12 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -88,16 +88,16 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the element-wise sum of the vectors <code>v0</code> and the
    * element-wise product of <code>v1</code> and <code>r</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
@@ -118,12 +118,12 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the angle between the vectors <code>v0</code> and
    * <code>v1</code> in radians.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The angle between the two vectors, in radians.
    */
 
@@ -139,7 +139,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. maximum]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -165,7 +165,7 @@ import com.io7m.jnull.Nullable;
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code> and
    * <code>maximum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -191,7 +191,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[-Infinity .. maximum]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
@@ -212,7 +212,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>maximum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param maximum
@@ -233,7 +233,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the range
    * <code>[minimum .. Infinity]</code> inclusive.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
@@ -255,13 +255,13 @@ import com.io7m.jnull.Nullable;
   /**
    * Clamp the elements of the vector <code>v</code> to the inclusive range
    * given by the corresponding elements in <code>minimum</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    * @since 5.0.0
-   * 
+   *
    * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code>
    */
 
@@ -277,14 +277,14 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the distance between the two vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The distance between the two vectors.
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -301,14 +301,14 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the scalar product of the vectors <code>v0</code> and
    * <code>v1</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return The scalar product of the two vectors
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -327,15 +327,15 @@ import com.io7m.jnull.Nullable;
   /**
    * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
    * amount <code>alpha</code>.
-   * 
+   *
    * The <code>alpha</code> parameter controls the degree of interpolation,
    * such that:
-   * 
+   *
    * <ul>
-   * <li><code>interpolateLinear(v0, v1, 0.0, r) -> r = v0</code></li>
-   * <li><code>interpolateLinear(v0, v1, 1.0, r) -> r = v1</code></li>
+   * <li>{@code interpolateLinear(v0, v1, 0.0, r) -> r = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -> r = v1}</li>
    * </ul>
-   * 
+   *
    * @param v0
    *          The left input vector.
    * @param v1
@@ -343,12 +343,12 @@ import com.io7m.jnull.Nullable;
    * @param alpha
    *          The interpolation value, between <code>0.0</code> and
    *          <code>1.0</code>.
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer
    *           overflow.
-   * 
+   *
    * @return <code>(1 - alpha) * v0 + alpha * v1</code>
    */
 
@@ -365,14 +365,14 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the magnitude of the vector <code>v</code>.
-   * 
+   *
    * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The magnitude of the input vector
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -387,12 +387,12 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Calculate the squared magnitude of the vector <code>v</code>.
-   * 
+   *
    * @param v
    *          The input vector
-   * 
+   *
    * @return The squared magnitude of the input vector
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -408,11 +408,11 @@ import com.io7m.jnull.Nullable;
   /**
    * Calculate the projection of the vector <code>p</code> onto the vector
    * <code>q</code>.
-   * 
+   *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
-   * 
+   *
    * @param p
    *          The left vector
    * @param q
@@ -433,14 +433,14 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Scale the vector <code>v</code> by the scalar <code>r</code>.
-   * 
+   *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
-   * 
+   *
    * @return <code>(v.x * r, v.y * r)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
@@ -457,14 +457,14 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
-   * 
+   *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
-   * 
+   *
    * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
-   * 
+   *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    */
@@ -495,7 +495,7 @@ import com.io7m.jnull.Nullable;
 
   /**
    * Construct a vector initialized with the given values.
-   * 
+   *
    * @param in_x
    *          The <code>x</code> value
    * @param in_y
@@ -513,7 +513,7 @@ import com.io7m.jnull.Nullable;
   /**
    * Construct a vector initialized with the values given in the vector
    * <code>in_v</code>.
-   * 
+   *
    * @param in_v
    *          The input vector
    */
