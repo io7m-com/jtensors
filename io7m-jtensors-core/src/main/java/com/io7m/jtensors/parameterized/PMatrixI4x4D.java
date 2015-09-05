@@ -61,9 +61,9 @@ import com.io7m.jtensors.VectorWritable4DType;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         if (row == col) {
-          m[row][col] = 1.0f;
+          m[row][col] = 1.0;
         } else {
-          m[row][col] = 0.0f;
+          m[row][col] = 0.0;
         }
       }
     }

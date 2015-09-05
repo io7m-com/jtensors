@@ -141,8 +141,8 @@ public final class VectorM2F implements VectorReadable2FType, VectorWritable2FTy
     final double r,
     final VectorM2F out)
   {
-    final double x = v0.getXF() + (v1.getXF() * r);
-    final double y = v0.getYF() + (v1.getYF() * r);
+    final double x = (double) v0.getXF() + ((double) v1.getXF() * r);
+    final double y = (double) v0.getYF() + ((double) v1.getYF() * r);
     out.x = (float) x;
     out.y = (float) y;
     return out;
@@ -218,7 +218,7 @@ public final class VectorM2F implements VectorReadable2FType, VectorWritable2FTy
     final double m0 = VectorM2F.magnitude(v0);
     final double m1 = VectorM2F.magnitude(v1);
     final double dp =
-      Math.min(Math.max(-1.0, VectorM2F.dotProduct(v0, v1)), 1.0);
+      Math.min(Math.max(-1.0, (double) VectorM2F.dotProduct(v0, v1)), 1.0);
     final double f = m0 * m1;
     final double r = dp / f;
     return Math.acos(r);
@@ -623,7 +623,7 @@ public final class VectorM2F implements VectorReadable2FType, VectorWritable2FTy
     final VectorM2F w0 = new VectorM2F();
     final VectorM2F w1 = new VectorM2F();
 
-    VectorM2F.scale(v0, 1.0f - alpha, w0);
+    VectorM2F.scale(v0, 1.0 - alpha, w0);
     VectorM2F.scale(v1, alpha, w1);
 
     return VectorM2F.add(w0, w1, r);
@@ -658,7 +658,7 @@ public final class VectorM2F implements VectorReadable2FType, VectorWritable2FTy
   public static double magnitudeSquared(
     final VectorReadable2FType v)
   {
-    return VectorM2F.dotProduct(v, v);
+    return (double) VectorM2F.dotProduct(v, v);
   }
 
   /**
@@ -731,7 +731,7 @@ public final class VectorM2F implements VectorReadable2FType, VectorWritable2FTy
     final VectorM2F vp = new VectorM2F();
 
     VectorM2F.normalize(v0, v0n);
-    VectorM2F.scale(v0n, VectorM2F.dotProduct(v1, v0n), vp);
+    VectorM2F.scale(v0n, (double) VectorM2F.dotProduct(v1, v0n), vp);
     VectorM2F.normalizeInPlace(VectorM2F.subtract(v1, vp, vr));
     return Pair.pair(v0n, vr);
   }
@@ -758,7 +758,7 @@ public final class VectorM2F implements VectorReadable2FType, VectorWritable2FTy
     final VectorM2F projection = new VectorM2F();
 
     VectorM2F.normalizeInPlace(v0);
-    VectorM2F.scale(v0, VectorM2F.dotProduct(v1, v0), projection);
+    VectorM2F.scale(v0, (double) VectorM2F.dotProduct(v1, v0), projection);
     VectorM2F.subtractInPlace(v1, projection);
     VectorM2F.normalizeInPlace(v1);
   }
@@ -781,7 +781,7 @@ public final class VectorM2F implements VectorReadable2FType, VectorWritable2FTy
     final VectorReadable2FType q,
     final VectorM2F r)
   {
-    final double dot = VectorM2F.dotProduct(p, q);
+    final double dot = (double) VectorM2F.dotProduct(p, q);
     final double qms = VectorM2F.magnitudeSquared(q);
     final double s = dot / qms;
 
@@ -807,8 +807,8 @@ public final class VectorM2F implements VectorReadable2FType, VectorWritable2FTy
     final double r,
     final VectorM2F out)
   {
-    final double x = v.getXF() * r;
-    final double y = v.getYF() * r;
+    final double x = (double) v.getXF() * r;
+    final double y = (double) v.getYF() * r;
     out.x = (float) x;
     out.y = (float) y;
     return out;

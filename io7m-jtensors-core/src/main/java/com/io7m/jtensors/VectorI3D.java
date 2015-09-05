@@ -424,7 +424,7 @@ public final class VectorI3D implements VectorReadable3DType
     final VectorReadable3DType v)
   {
     final double m = VectorI3D.magnitudeSquared(v);
-    if (m > 0) {
+    if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
       return VectorI3D.scale(v, reciprocal);
     }

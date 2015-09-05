@@ -48,9 +48,9 @@ import java.util.Arrays;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
         if (row == col) {
-          m[row][col] = 1.0f;
+          m[row][col] = (double) 1.0;
         } else {
-          m[row][col] = 0.0f;
+          m[row][col] = (double) 0.0;
         }
       }
     }

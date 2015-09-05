@@ -145,9 +145,9 @@ public final class VectorM3F implements VectorReadable3FType, VectorWritable3FTy
     final double r,
     final VectorM3F out)
   {
-    final float x = (float) (v0.getXF() + (v1.getXF() * r));
-    final float y = (float) (v0.getYF() + (v1.getYF() * r));
-    final float z = (float) (v0.getZF() + (v1.getZF() * r));
+    final float x = (float) ((double) v0.getXF() + ((double) v1.getXF() * r));
+    final float y = (float) ((double) v0.getYF() + ((double) v1.getYF() * r));
+    final float z = (float) ((double) v0.getZF() + ((double) v1.getZF() * r));
     out.x = x;
     out.y = y;
     out.z = z;
@@ -588,7 +588,7 @@ public final class VectorM3F implements VectorReadable3FType, VectorWritable3FTy
     final VectorReadable3FType v1)
   {
     final VectorM3F vr = new VectorM3F();
-    return VectorM3F.magnitude(VectorM3F.subtract(v0, v1, vr));
+    return (double) VectorM3F.magnitude(VectorM3F.subtract(v0, v1, vr));
   }
 
   /**
@@ -607,9 +607,9 @@ public final class VectorM3F implements VectorReadable3FType, VectorWritable3FTy
     final VectorReadable3FType v0,
     final VectorReadable3FType v1)
   {
-    final double x = v0.getXF() * v1.getXF();
-    final double y = v0.getYF() * v1.getYF();
-    final double z = v0.getZF() * v1.getZF();
+    final double x = (double) (v0.getXF() * v1.getXF());
+    final double y = (double) (v0.getYF() * v1.getYF());
+    final double z = (double) (v0.getZF() * v1.getZF());
     return x + y + z;
   }
 
@@ -647,7 +647,7 @@ public final class VectorM3F implements VectorReadable3FType, VectorWritable3FTy
     final VectorM3F w0 = new VectorM3F();
     final VectorM3F w1 = new VectorM3F();
 
-    VectorM3F.scale(v0, 1.0f - alpha, w0);
+    VectorM3F.scale(v0, 1.0 - alpha, w0);
     VectorM3F.scale(v1, alpha, w1);
 
     return VectorM3F.add(w0, w1, r);
@@ -832,9 +832,9 @@ public final class VectorM3F implements VectorReadable3FType, VectorWritable3FTy
     final double r,
     final VectorM3F out)
   {
-    final double x = v.getXF() * r;
-    final double y = v.getYF() * r;
-    final double z = v.getZF() * r;
+    final double x = (double) v.getXF() * r;
+    final double y = (double) v.getYF() * r;
+    final double z = (double) v.getZF() * r;
     out.x = (float) x;
     out.y = (float) y;
     out.z = (float) z;

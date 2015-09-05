@@ -394,30 +394,30 @@ public final class QuaternionI4D implements QuaternionReadable4DType
     final double z;
     final double w;
 
-    if (trace > 0) {
+    if (trace > 0.0) {
       // S = 4 * qw
-      final double s = Math.sqrt(trace + 1.0) * 2;
+      final double s = Math.sqrt(trace + 1.0) * 2.0;
       w = 0.25 * s;
       x = (m21 - m12) / s;
       y = (m02 - m20) / s;
       z = (m10 - m01) / s;
     } else if ((m00 > m11) && (m00 > m22)) {
       // S = 4 * qx
-      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2.0;
       w = (m21 - m12) / s;
       x = 0.25 * s;
       y = (m01 + m10) / s;
       z = (m02 + m20) / s;
     } else if (m11 > m22) {
       // S = 4 * qy
-      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2.0;
       w = (m02 - m20) / s;
       x = (m01 + m10) / s;
       y = 0.25 * s;
       z = (m12 + m21) / s;
     } else {
       // S = 4 * qz
-      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2;
+      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2.0;
       w = (m10 - m01) / s;
       x = (m02 + m20) / s;
       y = (m12 + m21) / s;
@@ -462,30 +462,30 @@ public final class QuaternionI4D implements QuaternionReadable4DType
     final double z;
     final double w;
 
-    if (trace > 0) {
+    if (trace > 0.0) {
       // S = 4 * qw
-      final double s = Math.sqrt(trace + 1.0) * 2;
+      final double s = Math.sqrt(trace + 1.0) * 2.0;
       w = 0.25 * s;
       x = (m21 - m12) / s;
       y = (m02 - m20) / s;
       z = (m10 - m01) / s;
     } else if ((m00 > m11) && (m00 > m22)) {
       // S = 4 * qx
-      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2.0;
       w = (m21 - m12) / s;
       x = 0.25 * s;
       y = (m01 + m10) / s;
       z = (m02 + m20) / s;
     } else if (m11 > m22) {
       // S = 4 * qy
-      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2.0;
       w = (m02 - m20) / s;
       x = (m01 + m10) / s;
       y = 0.25 * s;
       z = (m12 + m21) / s;
     } else {
       // S = 4 * qz
-      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2;
+      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2.0;
       w = (m10 - m01) / s;
       x = (m02 + m20) / s;
       y = (m12 + m21) / s;
@@ -522,17 +522,17 @@ public final class QuaternionI4D implements QuaternionReadable4DType
     final double wy = q.getWD() * q.getYD();
     final double wz = q.getWD() * q.getZD();
 
-    final double r0c0 = 1.0 - (2 * yy) - (2 * zz);
-    final double r0c1 = (2 * xy) - (2 * wz);
-    final double r0c2 = (2 * xz) + (2 * wy);
+    final double r0c0 = 1.0 - (2.0 * yy) - (2.0 * zz);
+    final double r0c1 = (2.0 * xy) - (2.0 * wz);
+    final double r0c2 = (2.0 * xz) + (2.0 * wy);
 
-    final double r1c0 = (2 * xy) + (2 * wz);
-    final double r1c1 = 1.0 - (2 * xx) - (2 * zz);
-    final double r1c2 = (2 * yz) - (2 * wx);
+    final double r1c0 = (2.0 * xy) + (2.0 * wz);
+    final double r1c1 = 1.0 - (2.0 * xx) - (2.0 * zz);
+    final double r1c2 = (2.0 * yz) - (2.0 * wx);
 
-    final double r2c0 = (2 * xz) - (2 * wy);
-    final double r2c1 = (2 * yz) + (2 * wx);
-    final double r2c2 = 1.0 - (2 * xx) - (2 * yy);
+    final double r2c0 = (2.0 * xz) - (2.0 * wy);
+    final double r2c1 = (2.0 * yz) + (2.0 * wx);
+    final double r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
 
     m.setUnsafe(0, 0, r0c0);
     m.setUnsafe(0, 1, r0c1);
@@ -576,19 +576,19 @@ public final class QuaternionI4D implements QuaternionReadable4DType
     final double wy = q.getWD() * q.getYD();
     final double wz = q.getWD() * q.getZD();
 
-    final double r0c0 = 1.0 - (2 * yy) - (2 * zz);
-    final double r0c1 = (2 * xy) - (2 * wz);
-    final double r0c2 = (2 * xz) + (2 * wy);
+    final double r0c0 = 1.0 - (2.0 * yy) - (2.0 * zz);
+    final double r0c1 = (2.0 * xy) - (2.0 * wz);
+    final double r0c2 = (2.0 * xz) + (2.0 * wy);
     final double r0c3 = 0.0;
 
-    final double r1c0 = (2 * xy) + (2 * wz);
-    final double r1c1 = 1.0 - (2 * xx) - (2 * zz);
-    final double r1c2 = (2 * yz) - (2 * wx);
+    final double r1c0 = (2.0 * xy) + (2.0 * wz);
+    final double r1c1 = 1.0 - (2.0 * xx) - (2.0 * zz);
+    final double r1c2 = (2.0 * yz) - (2.0 * wx);
     final double r1c3 = 0.0;
 
-    final double r2c0 = (2 * xz) - (2 * wy);
-    final double r2c1 = (2 * yz) + (2 * wx);
-    final double r2c2 = 1.0 - (2 * xx) - (2 * yy);
+    final double r2c0 = (2.0 * xz) - (2.0 * wy);
+    final double r2c1 = (2.0 * yz) + (2.0 * wx);
+    final double r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
     final double r2c3 = 0.0;
 
     final double r3c0 = 0.0;
@@ -710,7 +710,7 @@ public final class QuaternionI4D implements QuaternionReadable4DType
     final QuaternionReadable4DType q)
   {
     final double m = QuaternionI4D.magnitudeSquared(q);
-    if (m > 0) {
+    if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
       return QuaternionI4D.scale(q, reciprocal);
     }

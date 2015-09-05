@@ -708,7 +708,7 @@ public final class PVectorM3I<T> implements
     final PVectorReadable3IType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt(PVectorM3I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) PVectorM3I.magnitudeSquared(v)));
   }
 
   /**
@@ -760,7 +760,7 @@ public final class PVectorM3I<T> implements
     final int qms = PVectorM3I.magnitudeSquared(q);
     final int s = dot / qms;
 
-    return PVectorM3I.scale(p, s, r);
+    return PVectorM3I.scale(p, (double) s, r);
   }
 
   /**
@@ -819,7 +819,7 @@ public final class PVectorM3I<T> implements
     final int r)
     throws ArithmeticException
   {
-    return PVectorM3I.scale(v, r, v);
+    return PVectorM3I.scale(v, (double) r, v);
   }
 
   /**

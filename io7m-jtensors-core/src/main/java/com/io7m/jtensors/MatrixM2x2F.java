@@ -16,13 +16,13 @@
 
 package com.io7m.jtensors;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-
 import com.io7m.jfunctional.Option;
 import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 
 /**
  * <p>
@@ -206,7 +206,7 @@ public final class MatrixM2x2F implements
     MatrixM2x2F.rowUnsafe(m, row_a, va);
     MatrixM2x2F.rowUnsafe(m, row_b, vb);
 
-    VectorM2F.addScaledInPlace(va, vb, r);
+    VectorM2F.addScaledInPlace(va, vb, (double) r);
     MatrixM2x2F.setRowUnsafe(out, row_c, va);
     return out;
   }
@@ -393,11 +393,11 @@ public final class MatrixM2x2F implements
   {
     final float d = MatrixM2x2F.determinant(m);
 
-    if (d == 0) {
+    if (d == 0.0F) {
       return Option.none();
     }
 
-    final float d_inv = 1 / d;
+    final float d_inv = 1.0F / d;
 
     final float r0c0 = m.getRowColumnF(1, 1) * d_inv;
     final float r0c1 = -m.getRowColumnF(0, 1) * d_inv;
@@ -669,7 +669,7 @@ public final class MatrixM2x2F implements
     final VectorM2F v = new VectorM2F();
 
     MatrixM2x2F.rowUnsafe(m, row, v);
-    VectorM2F.scaleInPlace(v, r);
+    VectorM2F.scaleInPlace(v, (double) r);
 
     MatrixM2x2F.setRowUnsafe(out, row, v);
     return out;

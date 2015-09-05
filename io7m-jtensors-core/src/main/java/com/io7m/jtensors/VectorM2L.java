@@ -214,9 +214,9 @@ public final class VectorM2L implements VectorReadable2LType, VectorWritable2LTy
     final VectorReadable2LType v0,
     final VectorReadable2LType v1)
   {
-    final double m0 = VectorM2L.magnitude(v0);
-    final double m1 = VectorM2L.magnitude(v1);
-    return Math.acos(VectorM2L.dotProduct(v0, v1) / (m0 * m1));
+    final double m0 = (double) VectorM2L.magnitude(v0);
+    final double m1 = (double) VectorM2L.magnitude(v1);
+    return Math.acos((double) VectorM2L.dotProduct(v0, v1) / (m0 * m1));
   }
 
   /**
@@ -654,7 +654,7 @@ public final class VectorM2L implements VectorReadable2LType, VectorWritable2LTy
     final VectorReadable2LType v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt(VectorM2L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) VectorM2L.magnitudeSquared(v)));
   }
 
   /**
@@ -702,7 +702,7 @@ public final class VectorM2L implements VectorReadable2LType, VectorWritable2LTy
     final long qms = VectorM2L.magnitudeSquared(q);
     final long s = dot / qms;
 
-    return VectorM2L.scale(p, s, r);
+    return VectorM2L.scale(p, (double) s, r);
   }
 
   /**
@@ -755,7 +755,7 @@ public final class VectorM2L implements VectorReadable2LType, VectorWritable2LTy
     final long r)
     throws ArithmeticException
   {
-    return VectorM2L.scale(v, r, v);
+    return VectorM2L.scale(v, (double) r, v);
   }
 
   /**
@@ -896,8 +896,8 @@ public final class VectorM2L implements VectorReadable2LType, VectorWritable2LTy
 
   @Override public int hashCode()
   {
-    final long prime = 31;
-    long result = 1;
+    final long prime = 31L;
+    long result = 1L;
     result = (prime * result) + this.x;
     result = (prime * result) + this.y;
     return (int) result;

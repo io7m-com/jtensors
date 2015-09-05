@@ -321,8 +321,8 @@ public final class VectorI2F implements VectorReadable2FType
     final VectorReadable2FType v0,
     final VectorReadable2FType v1)
   {
-    final double x = v0.getXF() * v1.getXF();
-    final double y = v0.getYF() * v1.getYF();
+    final double x = (double) (v0.getXF() * v1.getXF());
+    final double y = (double) (v0.getYF() * v1.getYF());
     return x + y;
   }
 
@@ -355,8 +355,8 @@ public final class VectorI2F implements VectorReadable2FType
     final float alpha)
   {
     final VectorReadable2FType w0 =
-      VectorI2F.scale(v0, (float) (1.0 - alpha));
-    final VectorReadable2FType w1 = VectorI2F.scale(v1, alpha);
+      VectorI2F.scale(v0, (double) (float) (1.0 - (double) alpha));
+    final VectorReadable2FType w1 = VectorI2F.scale(v1, (double) alpha);
     return VectorI2F.add(w0, w1);
   }
 
@@ -406,7 +406,7 @@ public final class VectorI2F implements VectorReadable2FType
     final VectorReadable2FType v)
   {
     final double m = VectorI2F.magnitudeSquared(v);
-    if (m > 0) {
+    if (m > 0.0) {
       final double sq = Math.sqrt(m);
       final double r = 1.0 / sq;
       return VectorI2F.scale(v, r);
@@ -480,8 +480,8 @@ public final class VectorI2F implements VectorReadable2FType
     final VectorReadable2FType v,
     final double r)
   {
-    final double x = v.getXF() * r;
-    final double y = v.getYF() * r;
+    final double x = (double) v.getXF() * r;
+    final double y = (double) v.getYF() * r;
     return new VectorI2F((float) x, (float) y);
   }
 

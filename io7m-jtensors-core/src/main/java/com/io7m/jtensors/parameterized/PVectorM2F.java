@@ -158,8 +158,8 @@ public final class PVectorM2F<T> implements
     final double r,
     final PVectorM2F<T> out)
   {
-    final double x = v0.getXF() + (v1.getXF() * r);
-    final double y = v0.getYF() + (v1.getYF() * r);
+    final double x = (double) v0.getXF() + ((double) v1.getXF() * r);
+    final double y = (double) v0.getYF() + ((double) v1.getYF() * r);
     out.x = (float) x;
     out.y = (float) y;
     return out;
@@ -241,7 +241,7 @@ public final class PVectorM2F<T> implements
     final double m0 = PVectorM2F.magnitude(v0);
     final double m1 = PVectorM2F.magnitude(v1);
     final double dp =
-      Math.min(Math.max(-1.0, PVectorM2F.dotProduct(v0, v1)), 1.0);
+      Math.min(Math.max(-1.0, (double) PVectorM2F.dotProduct(v0, v1)), 1.0);
     final double f = m0 * m1;
     final double r = dp / f;
     return Math.acos(r);
@@ -678,7 +678,7 @@ public final class PVectorM2F<T> implements
     final PVectorM2F<T> w0 = new PVectorM2F<T>();
     final PVectorM2F<T> w1 = new PVectorM2F<T>();
 
-    PVectorM2F.scale(v0, 1.0f - alpha, w0);
+    PVectorM2F.scale(v0, 1.0 - alpha, w0);
     PVectorM2F.scale(v1, alpha, w1);
 
     return PVectorM2F.add(w0, w1, r);
@@ -717,7 +717,7 @@ public final class PVectorM2F<T> implements
   public static <T> double magnitudeSquared(
     final PVectorReadable2FType<T> v)
   {
-    return PVectorM2F.dotProduct(v, v);
+    return (double) PVectorM2F.dotProduct(v, v);
   }
 
   /**
@@ -796,7 +796,7 @@ public final class PVectorM2F<T> implements
     final PVectorM2F<T> vp = new PVectorM2F<T>();
 
     PVectorM2F.normalize(v0, v0n);
-    PVectorM2F.scale(v0n, PVectorM2F.dotProduct(v1, v0n), vp);
+    PVectorM2F.scale(v0n, (double) PVectorM2F.dotProduct(v1, v0n), vp);
     PVectorM2F.normalizeInPlace(PVectorM2F.subtract(v1, vp, vr));
     return Pair.pair(v0n, vr);
   }
@@ -825,7 +825,7 @@ public final class PVectorM2F<T> implements
     final PVectorM2F<T> projection = new PVectorM2F<T>();
 
     PVectorM2F.normalizeInPlace(v0);
-    PVectorM2F.scale(v0, PVectorM2F.dotProduct(v1, v0), projection);
+    PVectorM2F.scale(v0, (double) PVectorM2F.dotProduct(v1, v0), projection);
     PVectorM2F.subtractInPlace(v1, projection);
     PVectorM2F.normalizeInPlace(v1);
   }
@@ -850,7 +850,7 @@ public final class PVectorM2F<T> implements
     final PVectorReadable2FType<T> q,
     final PVectorM2F<T> r)
   {
-    final double dot = PVectorM2F.dotProduct(p, q);
+    final double dot = (double) PVectorM2F.dotProduct(p, q);
     final double qms = PVectorM2F.magnitudeSquared(q);
     final double s = dot / qms;
 
@@ -878,8 +878,8 @@ public final class PVectorM2F<T> implements
     final double r,
     final PVectorM2F<T> out)
   {
-    final double x = v.getXF() * r;
-    final double y = v.getYF() * r;
+    final double x = (double) v.getXF() * r;
+    final double y = (double) v.getYF() * r;
     out.x = (float) x;
     out.y = (float) y;
     return out;

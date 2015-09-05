@@ -388,7 +388,7 @@ import java.nio.DoubleBuffer;
     final double r2c1 = m.getRowColumnD(2, 1);
     final double r2c2 = m.getRowColumnD(2, 2);
 
-    double sum = 0;
+    double sum = 0.0;
 
     sum += r0c0 * ((r1c1 * r2c2) - (r1c2 * r2c1));
     sum -= r0c1 * ((r1c0 * r2c2) - (r1c2 * r2c0));
@@ -553,7 +553,7 @@ import java.nio.DoubleBuffer;
       return Option.none();
     }
 
-    final double d_inv = 1 / d;
+    final double d_inv = 1.0 / d;
 
     final double orig_r0c0 = m.getRowColumnD(0, 0);
     final double orig_r0c1 = m.getRowColumnD(0, 1);
@@ -782,7 +782,7 @@ import java.nio.DoubleBuffer;
 
     final double s = Math.sin(angle);
     final double c = Math.cos(angle);
-    final double t = 1 - c;
+    final double t = 1.0 - c;
 
     final double tx_sq = t * (axis_x * axis_x);
     final double ty_sq = t * (axis_y * axis_y);
@@ -866,8 +866,8 @@ import java.nio.DoubleBuffer;
     final VectorReadable2IType v,
     final PMatrixM3x3D<T0, T1> out)
   {
-    out.setUnsafe(0, 2, v.getXI());
-    out.setUnsafe(1, 2, v.getYI());
+    out.setUnsafe(0, 2, (double) v.getXI());
+    out.setUnsafe(1, 2, (double) v.getYI());
     return out;
   }
 
@@ -895,47 +895,47 @@ import java.nio.DoubleBuffer;
     final PMatrixReadable3x3DType<T0, T1> m1,
     final PMatrixM3x3D<T0, T2> out)
   {
-    double r0c0 = 0;
+    double r0c0 = 0.0;
     r0c0 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 0);
     r0c0 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 0);
     r0c0 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 0);
 
-    double r1c0 = 0;
+    double r1c0 = 0.0;
     r1c0 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 0);
     r1c0 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 0);
     r1c0 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 0);
 
-    double r2c0 = 0;
+    double r2c0 = 0.0;
     r2c0 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 0);
     r2c0 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 0);
     r2c0 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 0);
 
-    double r0c1 = 0;
+    double r0c1 = 0.0;
     r0c1 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 1);
     r0c1 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 1);
     r0c1 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 1);
 
-    double r1c1 = 0;
+    double r1c1 = 0.0;
     r1c1 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 1);
     r1c1 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 1);
     r1c1 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 1);
 
-    double r2c1 = 0;
+    double r2c1 = 0.0;
     r2c1 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 1);
     r2c1 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 1);
     r2c1 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 1);
 
-    double r0c2 = 0;
+    double r0c2 = 0.0;
     r0c2 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 2);
     r0c2 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 2);
     r0c2 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 2);
 
-    double r1c2 = 0;
+    double r1c2 = 0.0;
     r1c2 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 2);
     r1c2 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 2);
     r1c2 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 2);
 
-    double r2c2 = 0;
+    double r2c2 = 0.0;
     r2c2 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 2);
     r2c2 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 2);
     r2c2 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 2);
@@ -1268,9 +1268,9 @@ import java.nio.DoubleBuffer;
     for (int row = 0; row < PMatrixM3x3D.VIEW_ROWS; ++row) {
       for (int col = 0; col < PMatrixM3x3D.VIEW_COLS; ++col) {
         if (row == col) {
-          m.setUnsafe(row, col, 1.0f);
+          m.setUnsafe(row, col, 1.0);
         } else {
-          m.setUnsafe(row, col, 0.0f);
+          m.setUnsafe(row, col, 0.0);
         }
       }
     }

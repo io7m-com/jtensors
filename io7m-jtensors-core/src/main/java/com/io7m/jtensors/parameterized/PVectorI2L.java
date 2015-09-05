@@ -36,7 +36,7 @@ import com.io7m.jnull.Nullable;
 
 public final class PVectorI2L<T> implements PVectorReadable2LType<T>
 {
-  private static final PVectorI2L<?> ZERO = new PVectorI2L<Integer>(0, 0);
+  private static final PVectorI2L<?> ZERO = new PVectorI2L<Integer>(0L, 0L);
 
   /**
    * Calculate the absolute values of the elements in vector {@code v}.
@@ -138,9 +138,9 @@ public final class PVectorI2L<T> implements PVectorReadable2LType<T>
     final PVectorReadable2LType<T> v0,
     final PVectorReadable2LType<T> v1)
   {
-    final double m0 = PVectorI2L.magnitude(v0);
-    final double m1 = PVectorI2L.magnitude(v1);
-    return Math.acos(PVectorI2L.dotProduct(v0, v1) / (m0 * m1));
+    final double m0 = (double) PVectorI2L.magnitude(v0);
+    final double m1 = (double) PVectorI2L.magnitude(v1);
+    return Math.acos((double) PVectorI2L.dotProduct(v0, v1) / (m0 * m1));
   }
 
   /**
@@ -409,7 +409,7 @@ public final class PVectorI2L<T> implements PVectorReadable2LType<T>
     final PVectorReadable2LType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt(PVectorI2L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) PVectorI2L.magnitudeSquared(v)));
   }
 
   /**
@@ -459,7 +459,7 @@ public final class PVectorI2L<T> implements PVectorReadable2LType<T>
     final long dot = PVectorI2L.dotProduct(p, q);
     final long qms = PVectorI2L.magnitudeSquared(q);
     final long s = dot / qms;
-    return PVectorI2L.scale(p, s);
+    return PVectorI2L.scale(p, (double) s);
   }
 
   /**
@@ -536,8 +536,8 @@ public final class PVectorI2L<T> implements PVectorReadable2LType<T>
 
   public PVectorI2L()
   {
-    this.x = 0;
-    this.y = 0;
+    this.x = 0L;
+    this.y = 0L;
   }
 
   /**
@@ -606,8 +606,8 @@ public final class PVectorI2L<T> implements PVectorReadable2LType<T>
 
   @Override public int hashCode()
   {
-    final long prime = 31;
-    long result = 1;
+    final long prime = 31L;
+    long result = 1L;
     result = (prime * result) + this.x;
     result = (prime * result) + this.y;
     return (int) result;

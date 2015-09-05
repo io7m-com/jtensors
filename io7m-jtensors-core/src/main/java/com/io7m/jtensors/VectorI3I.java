@@ -372,7 +372,7 @@ public final class VectorI3I implements VectorReadable3IType
     final VectorReadable3IType v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt(VectorI3I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) VectorI3I.magnitudeSquared(v)));
   }
 
   /**
@@ -417,7 +417,7 @@ public final class VectorI3I implements VectorReadable3IType
     final int dot = VectorI3I.dotProduct(p, q);
     final int qms = VectorI3I.magnitudeSquared(q);
     final int s = dot / qms;
-    return VectorI3I.scale(p, s);
+    return VectorI3I.scale(p, (double) s);
   }
 
   /**

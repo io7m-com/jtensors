@@ -708,7 +708,7 @@ public final class PVectorM3L<T> implements
     final PVectorReadable3LType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt(PVectorM3L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) PVectorM3L.magnitudeSquared(v)));
   }
 
   /**
@@ -760,7 +760,7 @@ public final class PVectorM3L<T> implements
     final long qms = PVectorM3L.magnitudeSquared(q);
     final long s = dot / qms;
 
-    return PVectorM3L.scale(p, s, r);
+    return PVectorM3L.scale(p, (double) s, r);
   }
 
   /**
@@ -819,7 +819,7 @@ public final class PVectorM3L<T> implements
     final long r)
     throws ArithmeticException
   {
-    return PVectorM3L.scale(v, r, v);
+    return PVectorM3L.scale(v, (double) r, v);
   }
 
   /**
@@ -998,8 +998,8 @@ public final class PVectorM3L<T> implements
 
   @Override public int hashCode()
   {
-    final long prime = 31;
-    long result = 1;
+    final long prime = 31L;
+    long result = 1L;
     result = (prime * result) + this.x;
     result = (prime * result) + this.y;
     result = (prime * result) + this.z;

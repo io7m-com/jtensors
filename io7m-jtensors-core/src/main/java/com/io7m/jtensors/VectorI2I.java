@@ -130,9 +130,9 @@ public final class VectorI2I implements VectorReadable2IType
     final VectorReadable2IType v0,
     final VectorReadable2IType v1)
   {
-    final double m0 = VectorI2I.magnitude(v0);
-    final double m1 = VectorI2I.magnitude(v1);
-    return Math.acos(VectorI2I.dotProduct(v0, v1) / (m0 * m1));
+    final double m0 = (double) VectorI2I.magnitude(v0);
+    final double m1 = (double) VectorI2I.magnitude(v1);
+    return Math.acos((double) VectorI2I.dotProduct(v0, v1) / (m0 * m1));
   }
 
   /**
@@ -381,7 +381,7 @@ public final class VectorI2I implements VectorReadable2IType
     final VectorReadable2IType v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt(VectorI2I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) VectorI2I.magnitudeSquared(v)));
   }
 
   /**
@@ -427,7 +427,7 @@ public final class VectorI2I implements VectorReadable2IType
     final int dot = VectorI2I.dotProduct(p, q);
     final int qms = VectorI2I.magnitudeSquared(q);
     final int s = dot / qms;
-    return VectorI2I.scale(p, s);
+    return VectorI2I.scale(p, (double) s);
   }
 
   /**

@@ -409,7 +409,7 @@ public final class VectorI4D implements VectorReadable4DType
     final VectorReadable4DType v)
   {
     final double m = VectorI4D.magnitudeSquared(v);
-    if (m > 0) {
+    if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
       return VectorI4D.scale(v, reciprocal);
     }

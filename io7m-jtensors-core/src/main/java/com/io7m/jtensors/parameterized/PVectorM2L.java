@@ -234,9 +234,9 @@ public final class PVectorM2L<T> implements
     final PVectorReadable2LType<T> v0,
     final PVectorReadable2LType<T> v1)
   {
-    final double m0 = PVectorM2L.magnitude(v0);
-    final double m1 = PVectorM2L.magnitude(v1);
-    return Math.acos(PVectorM2L.dotProduct(v0, v1) / (m0 * m1));
+    final double m0 = (double) PVectorM2L.magnitude(v0);
+    final double m1 = (double) PVectorM2L.magnitude(v1);
+    return Math.acos((double) PVectorM2L.dotProduct(v0, v1) / (m0 * m1));
   }
 
   /**
@@ -708,7 +708,7 @@ public final class PVectorM2L<T> implements
     final PVectorReadable2LType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt(PVectorM2L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) PVectorM2L.magnitudeSquared(v)));
   }
 
   /**
@@ -760,7 +760,7 @@ public final class PVectorM2L<T> implements
     final long qms = PVectorM2L.magnitudeSquared(q);
     final long s = dot / qms;
 
-    return PVectorM2L.scale(p, s, r);
+    return PVectorM2L.scale(p, (double) s, r);
   }
 
   /**
@@ -817,7 +817,7 @@ public final class PVectorM2L<T> implements
     final long r)
     throws ArithmeticException
   {
-    return PVectorM2L.scale(v, r, v);
+    return PVectorM2L.scale(v, (double) r, v);
   }
 
   /**
@@ -968,8 +968,8 @@ public final class PVectorM2L<T> implements
 
   @Override public int hashCode()
   {
-    final long prime = 31;
-    long result = 1;
+    final long prime = 31L;
+    long result = 1L;
     result = (prime * result) + this.x;
     result = (prime * result) + this.y;
     return (int) result;

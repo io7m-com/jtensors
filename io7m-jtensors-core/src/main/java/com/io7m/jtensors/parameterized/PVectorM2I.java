@@ -233,9 +233,9 @@ public final class PVectorM2I<T> implements
     final PVectorReadable2IType<T> v0,
     final PVectorReadable2IType<T> v1)
   {
-    final double m0 = PVectorM2I.magnitude(v0);
-    final double m1 = PVectorM2I.magnitude(v1);
-    return Math.acos(PVectorM2I.dotProduct(v0, v1) / (m0 * m1));
+    final double m0 = (double) PVectorM2I.magnitude(v0);
+    final double m1 = (double) PVectorM2I.magnitude(v1);
+    return Math.acos((double) PVectorM2I.dotProduct(v0, v1) / (m0 * m1));
   }
 
   /**
@@ -709,7 +709,7 @@ public final class PVectorM2I<T> implements
     final PVectorReadable2IType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt(PVectorM2I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) PVectorM2I.magnitudeSquared(v)));
   }
 
   /**
@@ -761,7 +761,7 @@ public final class PVectorM2I<T> implements
     final int qms = PVectorM2I.magnitudeSquared(q);
     final int s = dot / qms;
 
-    return PVectorM2I.scale(p, s, r);
+    return PVectorM2I.scale(p, (double) s, r);
   }
 
   /**
@@ -818,7 +818,7 @@ public final class PVectorM2I<T> implements
     final int r)
     throws ArithmeticException
   {
-    return PVectorM2I.scale(v, r, v);
+    return PVectorM2I.scale(v, (double) r, v);
   }
 
   /**

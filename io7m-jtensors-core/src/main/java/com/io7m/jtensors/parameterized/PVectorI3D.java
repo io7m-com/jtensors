@@ -466,7 +466,7 @@ public final class PVectorI3D<T> implements PVectorReadable3DType<T>
     final PVectorReadable3DType<T> v)
   {
     final double m = PVectorI3D.magnitudeSquared(v);
-    if (m > 0) {
+    if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
       return PVectorI3D.scale(v, reciprocal);
     }

@@ -502,27 +502,27 @@ import java.nio.FloatBuffer;
   public static <T0, T1> double determinant(
     final PMatrixReadable4x4FType<T0, T1> m)
   {
-    final double r0c0 = m.getRowColumnF(0, 0);
-    final double r1c0 = m.getRowColumnF(1, 0);
-    final double r2c0 = m.getRowColumnF(2, 0);
-    final double r3c0 = m.getRowColumnF(3, 0);
+    final double r0c0 = (double) m.getRowColumnF(0, 0);
+    final double r1c0 = (double) m.getRowColumnF(1, 0);
+    final double r2c0 = (double) m.getRowColumnF(2, 0);
+    final double r3c0 = (double) m.getRowColumnF(3, 0);
 
-    final double r0c1 = m.getRowColumnF(0, 1);
-    final double r1c1 = m.getRowColumnF(1, 1);
-    final double r2c1 = m.getRowColumnF(2, 1);
-    final double r3c1 = m.getRowColumnF(3, 1);
+    final double r0c1 = (double) m.getRowColumnF(0, 1);
+    final double r1c1 = (double) m.getRowColumnF(1, 1);
+    final double r2c1 = (double) m.getRowColumnF(2, 1);
+    final double r3c1 = (double) m.getRowColumnF(3, 1);
 
-    final double r0c2 = m.getRowColumnF(0, 2);
-    final double r1c2 = m.getRowColumnF(1, 2);
-    final double r2c2 = m.getRowColumnF(2, 2);
-    final double r3c2 = m.getRowColumnF(3, 2);
+    final double r0c2 = (double) m.getRowColumnF(0, 2);
+    final double r1c2 = (double) m.getRowColumnF(1, 2);
+    final double r2c2 = (double) m.getRowColumnF(2, 2);
+    final double r3c2 = (double) m.getRowColumnF(3, 2);
 
-    final double r0c3 = m.getRowColumnF(0, 3);
-    final double r1c3 = m.getRowColumnF(1, 3);
-    final double r2c3 = m.getRowColumnF(2, 3);
-    final double r3c3 = m.getRowColumnF(3, 3);
+    final double r0c3 = (double) m.getRowColumnF(0, 3);
+    final double r1c3 = (double) m.getRowColumnF(1, 3);
+    final double r2c3 = (double) m.getRowColumnF(2, 3);
+    final double r3c3 = (double) m.getRowColumnF(3, 3);
 
-    double sum = 0;
+    double sum = 0.0;
 
     sum += r0c0 * r1c1 * r2c2 * r3c3;
     sum -= r0c0 * r1c1 * r2c3 * r3c2;
@@ -837,7 +837,7 @@ import java.nio.FloatBuffer;
       return Option.none();
     }
 
-    final double d_inv = 1 / d;
+    final double d_inv = 1.0 / d;
 
     /**
      * This code is based on the Laplace Expansion theorem. Essentially, the
@@ -1430,13 +1430,13 @@ import java.nio.FloatBuffer;
     final VectorReadable3FType axis,
     final PMatrixM4x4F<T0, T1> out)
   {
-    final double axis_x = axis.getXF();
-    final double axis_y = axis.getYF();
-    final double axis_z = axis.getZF();
+    final double axis_x = (double) axis.getXF();
+    final double axis_y = (double) axis.getYF();
+    final double axis_z = (double) axis.getZF();
 
     final double s = Math.sin(angle);
     final double c = Math.cos(angle);
-    final double t = 1 - c;
+    final double t = 1.0 - c;
 
     final double tx_sq = t * (axis_x * axis_x);
     final double ty_sq = t * (axis_y * axis_y);
@@ -1453,22 +1453,22 @@ import java.nio.FloatBuffer;
     final double r0c0 = tx_sq + c;
     final double r0c1 = txy - sz;
     final double r0c2 = txz + sy;
-    final double r0c3 = 0;
+    final double r0c3 = 0.0;
 
     final double r1c0 = txy + sz;
     final double r1c1 = ty_sq + c;
     final double r1c2 = tyz - sx;
-    final double r1c3 = 0;
+    final double r1c3 = 0.0;
 
     final double r2c0 = txz - sy;
     final double r2c1 = tyz + sx;
     final double r2c2 = tz_sq + c;
-    final double r2c3 = 0;
+    final double r2c3 = 0.0;
 
-    final double r3c0 = 0;
-    final double r3c1 = 0;
-    final double r3c2 = 0;
-    final double r3c3 = 1;
+    final double r3c0 = 0.0;
+    final double r3c1 = 0.0;
+    final double r3c2 = 0.0;
+    final double r3c3 = 1.0;
 
     out.setUnsafe(0, 0, (float) r0c0);
     out.setUnsafe(0, 1, (float) r0c1);
@@ -1597,12 +1597,12 @@ import java.nio.FloatBuffer;
     out.setUnsafe(0, 0, 1.0f);
     out.setUnsafe(0, 1, 0.0f);
     out.setUnsafe(0, 2, 0.0f);
-    out.setUnsafe(0, 3, v.getXI());
+    out.setUnsafe(0, 3, (float) v.getXI());
 
     out.setUnsafe(1, 0, 0.0f);
     out.setUnsafe(1, 1, 1.0f);
     out.setUnsafe(1, 2, 0.0f);
-    out.setUnsafe(1, 3, v.getYI());
+    out.setUnsafe(1, 3, (float) v.getYI());
 
     out.setUnsafe(2, 0, 0.0f);
     out.setUnsafe(2, 1, 0.0f);
@@ -1723,17 +1723,17 @@ import java.nio.FloatBuffer;
     out.setUnsafe(0, 0, 1.0f);
     out.setUnsafe(0, 1, 0.0f);
     out.setUnsafe(0, 2, 0.0f);
-    out.setUnsafe(0, 3, v.getXI());
+    out.setUnsafe(0, 3, (float) v.getXI());
 
     out.setUnsafe(1, 0, 0.0f);
     out.setUnsafe(1, 1, 1.0f);
     out.setUnsafe(1, 2, 0.0f);
-    out.setUnsafe(1, 3, v.getYI());
+    out.setUnsafe(1, 3, (float) v.getYI());
 
     out.setUnsafe(2, 0, 0.0f);
     out.setUnsafe(2, 1, 0.0f);
     out.setUnsafe(2, 2, 1.0f);
-    out.setUnsafe(2, 3, v.getZI());
+    out.setUnsafe(2, 3, (float) v.getZI());
 
     out.setUnsafe(3, 0, 0.0f);
     out.setUnsafe(3, 1, 0.0f);
@@ -1767,97 +1767,97 @@ import java.nio.FloatBuffer;
     final PMatrixReadable4x4FType<T0, T1> m1,
     final PMatrixM4x4F<T0, T2> out)
   {
-    float r0c0 = 0;
+    float r0c0 = 0.0F;
     r0c0 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 0);
     r0c0 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 0);
     r0c0 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 0);
     r0c0 += m0.getRowColumnF(0, 3) * m1.getRowColumnF(3, 0);
 
-    float r1c0 = 0;
+    float r1c0 = 0.0F;
     r1c0 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 0);
     r1c0 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 0);
     r1c0 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 0);
     r1c0 += m0.getRowColumnF(1, 3) * m1.getRowColumnF(3, 0);
 
-    float r2c0 = 0;
+    float r2c0 = 0.0F;
     r2c0 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 0);
     r2c0 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 0);
     r2c0 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 0);
     r2c0 += m0.getRowColumnF(2, 3) * m1.getRowColumnF(3, 0);
 
-    float r3c0 = 0;
+    float r3c0 = 0.0F;
     r3c0 += m0.getRowColumnF(3, 0) * m1.getRowColumnF(0, 0);
     r3c0 += m0.getRowColumnF(3, 1) * m1.getRowColumnF(1, 0);
     r3c0 += m0.getRowColumnF(3, 2) * m1.getRowColumnF(2, 0);
     r3c0 += m0.getRowColumnF(3, 3) * m1.getRowColumnF(3, 0);
 
-    float r0c1 = 0;
+    float r0c1 = 0.0F;
     r0c1 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 1);
     r0c1 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 1);
     r0c1 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 1);
     r0c1 += m0.getRowColumnF(0, 3) * m1.getRowColumnF(3, 1);
 
-    float r1c1 = 0;
+    float r1c1 = 0.0F;
     r1c1 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 1);
     r1c1 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 1);
     r1c1 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 1);
     r1c1 += m0.getRowColumnF(1, 3) * m1.getRowColumnF(3, 1);
 
-    float r2c1 = 0;
+    float r2c1 = 0.0F;
     r2c1 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 1);
     r2c1 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 1);
     r2c1 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 1);
     r2c1 += m0.getRowColumnF(2, 3) * m1.getRowColumnF(3, 1);
 
-    float r3c1 = 0;
+    float r3c1 = 0.0F;
     r3c1 += m0.getRowColumnF(3, 0) * m1.getRowColumnF(0, 1);
     r3c1 += m0.getRowColumnF(3, 1) * m1.getRowColumnF(1, 1);
     r3c1 += m0.getRowColumnF(3, 2) * m1.getRowColumnF(2, 1);
     r3c1 += m0.getRowColumnF(3, 3) * m1.getRowColumnF(3, 1);
 
-    float r0c2 = 0;
+    float r0c2 = 0.0F;
     r0c2 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 2);
     r0c2 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 2);
     r0c2 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 2);
     r0c2 += m0.getRowColumnF(0, 3) * m1.getRowColumnF(3, 2);
 
-    float r1c2 = 0;
+    float r1c2 = 0.0F;
     r1c2 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 2);
     r1c2 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 2);
     r1c2 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 2);
     r1c2 += m0.getRowColumnF(1, 3) * m1.getRowColumnF(3, 2);
 
-    float r2c2 = 0;
+    float r2c2 = 0.0F;
     r2c2 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 2);
     r2c2 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 2);
     r2c2 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 2);
     r2c2 += m0.getRowColumnF(2, 3) * m1.getRowColumnF(3, 2);
 
-    float r3c2 = 0;
+    float r3c2 = 0.0F;
     r3c2 += m0.getRowColumnF(3, 0) * m1.getRowColumnF(0, 2);
     r3c2 += m0.getRowColumnF(3, 1) * m1.getRowColumnF(1, 2);
     r3c2 += m0.getRowColumnF(3, 2) * m1.getRowColumnF(2, 2);
     r3c2 += m0.getRowColumnF(3, 3) * m1.getRowColumnF(3, 2);
 
-    float r0c3 = 0;
+    float r0c3 = 0.0F;
     r0c3 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 3);
     r0c3 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 3);
     r0c3 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 3);
     r0c3 += m0.getRowColumnF(0, 3) * m1.getRowColumnF(3, 3);
 
-    float r1c3 = 0;
+    float r1c3 = 0.0F;
     r1c3 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 3);
     r1c3 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 3);
     r1c3 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 3);
     r1c3 += m0.getRowColumnF(1, 3) * m1.getRowColumnF(3, 3);
 
-    float r2c3 = 0;
+    float r2c3 = 0.0F;
     r2c3 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 3);
     r2c3 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 3);
     r2c3 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 3);
     r2c3 += m0.getRowColumnF(2, 3) * m1.getRowColumnF(3, 3);
 
-    float r3c3 = 0;
+    float r3c3 = 0.0F;
     r3c3 += m0.getRowColumnF(3, 0) * m1.getRowColumnF(0, 3);
     r3c3 += m0.getRowColumnF(3, 1) * m1.getRowColumnF(1, 3);
     r3c3 += m0.getRowColumnF(3, 2) * m1.getRowColumnF(2, 3);
@@ -2058,25 +2058,25 @@ import java.nio.FloatBuffer;
     final double r,
     final PMatrixM4x4F<T2, T3> out)
   {
-    final float r0c0 = (float) (m.getRowColumnF(0, 0) * r);
-    final float r1c0 = (float) (m.getRowColumnF(1, 0) * r);
-    final float r2c0 = (float) (m.getRowColumnF(2, 0) * r);
-    final float r3c0 = (float) (m.getRowColumnF(3, 0) * r);
+    final float r0c0 = (float) ((double) m.getRowColumnF(0, 0) * r);
+    final float r1c0 = (float) ((double) m.getRowColumnF(1, 0) * r);
+    final float r2c0 = (float) ((double) m.getRowColumnF(2, 0) * r);
+    final float r3c0 = (float) ((double) m.getRowColumnF(3, 0) * r);
 
-    final float r0c1 = (float) (m.getRowColumnF(0, 1) * r);
-    final float r1c1 = (float) (m.getRowColumnF(1, 1) * r);
-    final float r2c1 = (float) (m.getRowColumnF(2, 1) * r);
-    final float r3c1 = (float) (m.getRowColumnF(3, 1) * r);
+    final float r0c1 = (float) ((double) m.getRowColumnF(0, 1) * r);
+    final float r1c1 = (float) ((double) m.getRowColumnF(1, 1) * r);
+    final float r2c1 = (float) ((double) m.getRowColumnF(2, 1) * r);
+    final float r3c1 = (float) ((double) m.getRowColumnF(3, 1) * r);
 
-    final float r0c2 = (float) (m.getRowColumnF(0, 2) * r);
-    final float r1c2 = (float) (m.getRowColumnF(1, 2) * r);
-    final float r2c2 = (float) (m.getRowColumnF(2, 2) * r);
-    final float r3c2 = (float) (m.getRowColumnF(3, 2) * r);
+    final float r0c2 = (float) ((double) m.getRowColumnF(0, 2) * r);
+    final float r1c2 = (float) ((double) m.getRowColumnF(1, 2) * r);
+    final float r2c2 = (float) ((double) m.getRowColumnF(2, 2) * r);
+    final float r3c2 = (float) ((double) m.getRowColumnF(3, 2) * r);
 
-    final float r0c3 = (float) (m.getRowColumnF(0, 3) * r);
-    final float r1c3 = (float) (m.getRowColumnF(1, 3) * r);
-    final float r2c3 = (float) (m.getRowColumnF(2, 3) * r);
-    final float r3c3 = (float) (m.getRowColumnF(3, 3) * r);
+    final float r0c3 = (float) ((double) m.getRowColumnF(0, 3) * r);
+    final float r1c3 = (float) ((double) m.getRowColumnF(1, 3) * r);
+    final float r2c3 = (float) ((double) m.getRowColumnF(2, 3) * r);
+    final float r3c3 = (float) ((double) m.getRowColumnF(3, 3) * r);
 
     out.setUnsafe(0, 0, r0c0);
     out.setUnsafe(1, 0, r1c0);
@@ -2445,10 +2445,10 @@ import java.nio.FloatBuffer;
   public static <T0, T1> double trace(
     final PMatrixReadable4x4FType<T0, T1> m)
   {
-    return m.getRowColumnF(0, 0)
-      + m.getRowColumnF(1, 1)
-      + m.getRowColumnF(2, 2)
-      + m.getRowColumnF(3, 3);
+    return (double) (m.getRowColumnF(0, 0)
+                     + m.getRowColumnF(1, 1)
+                     + m.getRowColumnF(2, 2)
+                     + m.getRowColumnF(3, 3));
   }
 
   /**

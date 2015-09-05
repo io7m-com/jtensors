@@ -394,11 +394,11 @@ public final class MatrixM2x2D implements
   {
     final double d = MatrixM2x2D.determinant(m);
 
-    if (d == 0) {
+    if (d == 0.0) {
       return Option.none();
     }
 
-    final double d_inv = 1 / d;
+    final double d_inv = 1.0 / d;
 
     final double r0c0 = m.getRowColumnD(1, 1) * d_inv;
     final double r0c1 = -m.getRowColumnD(0, 1) * d_inv;

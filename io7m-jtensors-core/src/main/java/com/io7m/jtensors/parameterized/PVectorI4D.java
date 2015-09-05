@@ -447,7 +447,7 @@ public final class PVectorI4D<T> implements PVectorReadable4DType<T>
     final PVectorReadable4DType<T> v)
   {
     final double m = PVectorI4D.magnitudeSquared(v);
-    if (m > 0) {
+    if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
       return PVectorI4D.scale(v, reciprocal);
     }

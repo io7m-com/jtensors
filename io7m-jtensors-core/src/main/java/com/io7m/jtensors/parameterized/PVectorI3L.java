@@ -40,7 +40,7 @@ public final class PVectorI3L<T> implements PVectorReadable3LType<T>
    * The zero vector.
    */
 
-  private static final PVectorI3L<?> ZERO = new PVectorI3L<Long>(0, 0, 0);
+  private static final PVectorI3L<?> ZERO = new PVectorI3L<Long>(0L, 0L, 0L);
 
   /**
    * Calculate the absolute values of the elements in vector {@code v}.
@@ -403,7 +403,7 @@ public final class PVectorI3L<T> implements PVectorReadable3LType<T>
     final PVectorReadable3LType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt(PVectorI3L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) PVectorI3L.magnitudeSquared(v)));
   }
 
   /**
@@ -453,7 +453,7 @@ public final class PVectorI3L<T> implements PVectorReadable3LType<T>
     final long dot = PVectorI3L.dotProduct(p, q);
     final long qms = PVectorI3L.magnitudeSquared(q);
     final long s = dot / qms;
-    return PVectorI3L.scale(p, s);
+    return PVectorI3L.scale(p, (double) s);
   }
 
   /**
@@ -534,9 +534,9 @@ public final class PVectorI3L<T> implements PVectorReadable3LType<T>
 
   public PVectorI3L()
   {
-    this.x = 0;
-    this.y = 0;
-    this.z = 0;
+    this.x = 0L;
+    this.y = 0L;
+    this.z = 0L;
   }
 
   /**
@@ -618,8 +618,8 @@ public final class PVectorI3L<T> implements PVectorReadable3LType<T>
 
   @Override public int hashCode()
   {
-    final long prime = 31;
-    long result = 1;
+    final long prime = 31L;
+    long result = 1L;
     result = (prime * result) + this.x;
     result = (prime * result) + this.y;
     result = (prime * result) + this.z;

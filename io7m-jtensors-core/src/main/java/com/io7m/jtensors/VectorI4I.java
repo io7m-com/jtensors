@@ -394,7 +394,7 @@ public final class VectorI4I implements VectorReadable4IType
     final VectorReadable4IType v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt(VectorI4I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) VectorI4I.magnitudeSquared(v)));
   }
 
   /**
@@ -440,7 +440,7 @@ public final class VectorI4I implements VectorReadable4IType
     final int dot = VectorI4I.dotProduct(p, q);
     final int qms = VectorI4I.magnitudeSquared(q);
     final int s = dot / qms;
-    return VectorI4I.scale(p, s);
+    return VectorI4I.scale(p, (double) s);
   }
 
   /**

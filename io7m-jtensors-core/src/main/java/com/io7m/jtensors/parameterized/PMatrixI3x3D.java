@@ -60,9 +60,9 @@ import com.io7m.jtensors.VectorWritable3DType;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         if (row == col) {
-          m[row][col] = 1.0f;
+          m[row][col] = 1.0;
         } else {
-          m[row][col] = 0.0f;
+          m[row][col] = 0.0;
         }
       }
     }

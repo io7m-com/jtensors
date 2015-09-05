@@ -38,7 +38,7 @@ public final class VectorI4L implements VectorReadable4LType
    * The zero vector.
    */
 
-  public static final VectorI4L ZERO = new VectorI4L(0, 0, 0, 0);
+  public static final VectorI4L ZERO = new VectorI4L(0L, 0L, 0L, 0L);
 
   /**
    * Calculate the absolute values of the elements in vector {@code v}.
@@ -396,7 +396,7 @@ public final class VectorI4L implements VectorReadable4LType
     final VectorReadable4LType v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt(VectorI4L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) VectorI4L.magnitudeSquared(v)));
   }
 
   /**
@@ -442,7 +442,7 @@ public final class VectorI4L implements VectorReadable4LType
     final long dot = VectorI4L.dotProduct(p, q);
     final long qms = VectorI4L.magnitudeSquared(q);
     final long s = dot / qms;
-    return VectorI4L.scale(p, s);
+    return VectorI4L.scale(p, (double) s);
   }
 
   /**
@@ -509,10 +509,10 @@ public final class VectorI4L implements VectorReadable4LType
 
   public VectorI4L()
   {
-    this.x = 0;
-    this.y = 0;
-    this.z = 0;
-    this.w = 1;
+    this.x = 0L;
+    this.y = 0L;
+    this.z = 0L;
+    this.w = 1L;
   }
 
   /**
@@ -607,8 +607,8 @@ public final class VectorI4L implements VectorReadable4LType
 
   @Override public int hashCode()
   {
-    final long prime = 31;
-    long result = 1;
+    final long prime = 31L;
+    long result = 1L;
     result = (prime * result) + this.x;
     result = (prime * result) + this.y;
     result = (prime * result) + this.z;

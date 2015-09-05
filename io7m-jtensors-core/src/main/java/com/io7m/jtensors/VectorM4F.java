@@ -149,10 +149,10 @@ public final class VectorM4F implements VectorReadable4FType, VectorWritable4FTy
     final double r,
     final VectorM4F out)
   {
-    final float x = (float) (v0.getXF() + (v1.getXF() * r));
-    final float y = (float) (v0.getYF() + (v1.getYF() * r));
-    final float z = (float) (v0.getZF() + (v1.getZF() * r));
-    final float w = (float) (v0.getWF() + (v1.getWF() * r));
+    final float x = (float) ((double) v0.getXF() + ((double) v1.getXF() * r));
+    final float y = (float) ((double) v0.getYF() + ((double) v1.getYF() * r));
+    final float z = (float) ((double) v0.getZF() + ((double) v1.getZF() * r));
+    final float w = (float) ((double) v0.getWF() + ((double) v1.getWF() * r));
     out.x = x;
     out.y = y;
     out.z = z;
@@ -239,10 +239,10 @@ public final class VectorM4F implements VectorReadable4FType, VectorWritable4FTy
     final double maximum,
     final VectorM4F out)
   {
-    final float x = (float) Math.min(Math.max(v.getXF(), minimum), maximum);
-    final float y = (float) Math.min(Math.max(v.getYF(), minimum), maximum);
-    final float z = (float) Math.min(Math.max(v.getZF(), minimum), maximum);
-    final float w = (float) Math.min(Math.max(v.getWF(), minimum), maximum);
+    final float x = (float) Math.min(Math.max((double) v.getXF(), minimum), maximum);
+    final float y = (float) Math.min(Math.max((double) v.getYF(), minimum), maximum);
+    final float z = (float) Math.min(Math.max((double) v.getZF(), minimum), maximum);
+    final float w = (float) Math.min(Math.max((double) v.getWF(), minimum), maximum);
     out.x = x;
     out.y = y;
     out.z = z;
@@ -332,7 +332,7 @@ public final class VectorM4F implements VectorReadable4FType, VectorWritable4FTy
     final float minimum,
     final float maximum)
   {
-    return VectorM4F.clamp(v, minimum, maximum, v);
+    return VectorM4F.clamp(v, (double) minimum, (double) maximum, v);
   }
 
   /**
@@ -601,10 +601,10 @@ public final class VectorM4F implements VectorReadable4FType, VectorWritable4FTy
     final VectorReadable4FType v0,
     final VectorReadable4FType v1)
   {
-    final double x = v0.getXF() * v1.getXF();
-    final double y = v0.getYF() * v1.getYF();
-    final double z = v0.getZF() * v1.getZF();
-    final double w = v0.getWF() * v1.getWF();
+    final double x = (double) (v0.getXF() * v1.getXF());
+    final double y = (double) (v0.getYF() * v1.getYF());
+    final double z = (double) (v0.getZF() * v1.getZF());
+    final double w = (double) (v0.getWF() * v1.getWF());
     return x + y + z + w;
   }
 
@@ -642,7 +642,7 @@ public final class VectorM4F implements VectorReadable4FType, VectorWritable4FTy
     final VectorM4F w0 = new VectorM4F();
     final VectorM4F w1 = new VectorM4F();
 
-    VectorM4F.scale(v0, 1.0f - alpha, w0);
+    VectorM4F.scale(v0, 1.0 - alpha, w0);
     VectorM4F.scale(v1, alpha, w1);
 
     return VectorM4F.add(w0, w1, r);
@@ -828,10 +828,10 @@ public final class VectorM4F implements VectorReadable4FType, VectorWritable4FTy
     final double r,
     final VectorM4F out)
   {
-    final float x = (float) (v.getXF() * r);
-    final float y = (float) (v.getYF() * r);
-    final float z = (float) (v.getZF() * r);
-    final float w = (float) (v.getWF() * r);
+    final float x = (float) ((double) v.getXF() * r);
+    final float y = (float) ((double) v.getYF() * r);
+    final float z = (float) ((double) v.getZF() * r);
+    final float w = (float) ((double) v.getWF() * r);
     out.x = x;
     out.y = y;
     out.z = z;

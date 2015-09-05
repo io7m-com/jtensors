@@ -673,7 +673,7 @@ public final class VectorM4L implements VectorReadable4LType, VectorWritable4LTy
     final VectorReadable4LType v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt(VectorM4L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) VectorM4L.magnitudeSquared(v)));
   }
 
   /**
@@ -721,7 +721,7 @@ public final class VectorM4L implements VectorReadable4LType, VectorWritable4LTy
     final long qms = VectorM4L.magnitudeSquared(q);
     final long s = dot / qms;
 
-    return VectorM4L.scale(p, s, r);
+    return VectorM4L.scale(p, (double) s, r);
   }
 
   /**
@@ -778,7 +778,7 @@ public final class VectorM4L implements VectorReadable4LType, VectorWritable4LTy
     final long r)
     throws ArithmeticException
   {
-    return VectorM4L.scale(v, r, v);
+    return VectorM4L.scale(v, (double) r, v);
   }
 
   /**
@@ -838,7 +838,7 @@ public final class VectorM4L implements VectorReadable4LType, VectorWritable4LTy
     return VectorM4L.subtract(v0, v1, v0);
   }
 
-  private long w = 1;
+  private long w = 1L;
   private long x;
   private long y;
   private long z;
@@ -963,8 +963,8 @@ public final class VectorM4L implements VectorReadable4LType, VectorWritable4LTy
 
   @Override public int hashCode()
   {
-    final long prime = 31;
-    long result = 1;
+    final long prime = 31L;
+    long result = 1L;
     result = (prime * result) + this.w;
     result = (prime * result) + this.x;
     result = (prime * result) + this.y;

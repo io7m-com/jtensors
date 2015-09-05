@@ -443,7 +443,7 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
     final PVectorReadable2DType<T> v)
   {
     final double m = PVectorI2D.magnitudeSquared(v);
-    if (m > 0) {
+    if (m > 0.0) {
       final double sq = Math.sqrt(m);
       final double r = 1.0 / sq;
       return PVectorI2D.scale(v, r);

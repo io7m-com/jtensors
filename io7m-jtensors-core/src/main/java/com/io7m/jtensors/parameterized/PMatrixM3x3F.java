@@ -375,19 +375,19 @@ import com.io7m.jtensors.VectorWritable3FType;
   public static <T0, T1> double determinant(
     final PMatrixReadable3x3FType<T0, T1> m)
   {
-    final double r0c0 = m.getRowColumnF(0, 0);
-    final double r0c1 = m.getRowColumnF(0, 1);
-    final double r0c2 = m.getRowColumnF(0, 2);
+    final double r0c0 = (double) m.getRowColumnF(0, 0);
+    final double r0c1 = (double) m.getRowColumnF(0, 1);
+    final double r0c2 = (double) m.getRowColumnF(0, 2);
 
-    final double r1c0 = m.getRowColumnF(1, 0);
-    final double r1c1 = m.getRowColumnF(1, 1);
-    final double r1c2 = m.getRowColumnF(1, 2);
+    final double r1c0 = (double) m.getRowColumnF(1, 0);
+    final double r1c1 = (double) m.getRowColumnF(1, 1);
+    final double r1c2 = (double) m.getRowColumnF(1, 2);
 
-    final double r2c0 = m.getRowColumnF(2, 0);
-    final double r2c1 = m.getRowColumnF(2, 1);
-    final double r2c2 = m.getRowColumnF(2, 2);
+    final double r2c0 = (double) m.getRowColumnF(2, 0);
+    final double r2c1 = (double) m.getRowColumnF(2, 1);
+    final double r2c2 = (double) m.getRowColumnF(2, 2);
 
-    double sum = 0;
+    double sum = 0.0;
 
     sum += r0c0 * ((r1c1 * r2c2) - (r1c2 * r2c1));
     sum -= r0c1 * ((r1c0 * r2c2) - (r1c2 * r2c0));
@@ -557,19 +557,19 @@ import com.io7m.jtensors.VectorWritable3FType;
       return Option.none();
     }
 
-    final double d_inv = 1 / d;
+    final double d_inv = 1.0 / d;
 
-    final double orig_r0c0 = m.getRowColumnF(0, 0);
-    final double orig_r0c1 = m.getRowColumnF(0, 1);
-    final double orig_r0c2 = m.getRowColumnF(0, 2);
+    final double orig_r0c0 = (double) m.getRowColumnF(0, 0);
+    final double orig_r0c1 = (double) m.getRowColumnF(0, 1);
+    final double orig_r0c2 = (double) m.getRowColumnF(0, 2);
 
-    final double orig_r1c0 = m.getRowColumnF(1, 0);
-    final double orig_r1c1 = m.getRowColumnF(1, 1);
-    final double orig_r1c2 = m.getRowColumnF(1, 2);
+    final double orig_r1c0 = (double) m.getRowColumnF(1, 0);
+    final double orig_r1c1 = (double) m.getRowColumnF(1, 1);
+    final double orig_r1c2 = (double) m.getRowColumnF(1, 2);
 
-    final double orig_r2c0 = m.getRowColumnF(2, 0);
-    final double orig_r2c1 = m.getRowColumnF(2, 1);
-    final double orig_r2c2 = m.getRowColumnF(2, 2);
+    final double orig_r2c0 = (double) m.getRowColumnF(2, 0);
+    final double orig_r2c1 = (double) m.getRowColumnF(2, 1);
+    final double orig_r2c2 = (double) m.getRowColumnF(2, 2);
 
     final double r0c0 = (orig_r1c1 * orig_r2c2) - (orig_r1c2 * orig_r2c1);
     final double r0c1 = (orig_r0c2 * orig_r2c1) - (orig_r0c1 * orig_r2c2);
@@ -784,13 +784,13 @@ import com.io7m.jtensors.VectorWritable3FType;
     final VectorReadable3FType axis,
     final PMatrixM3x3F<T0, T1> out)
   {
-    final double axis_x = axis.getXF();
-    final double axis_y = axis.getYF();
-    final double axis_z = axis.getZF();
+    final double axis_x = (double) axis.getXF();
+    final double axis_y = (double) axis.getYF();
+    final double axis_z = (double) axis.getZF();
 
     final double s = Math.sin(angle);
     final double c = Math.cos(angle);
-    final double t = 1 - c;
+    final double t = 1.0 - c;
 
     final double tx_sq = t * (axis_x * axis_x);
     final double ty_sq = t * (axis_y * axis_y);
@@ -873,8 +873,8 @@ import com.io7m.jtensors.VectorWritable3FType;
     final VectorReadable2IType v,
     final PMatrixM3x3F<T0, T1> out)
   {
-    out.setUnsafe(0, 2, v.getXI());
-    out.setUnsafe(1, 2, v.getYI());
+    out.setUnsafe(0, 2, (float) v.getXI());
+    out.setUnsafe(1, 2, (float) v.getYI());
     return out;
   }
 
@@ -902,50 +902,50 @@ import com.io7m.jtensors.VectorWritable3FType;
     final PMatrixReadable3x3FType<T0, T1> m1,
     final PMatrixM3x3F<T0, T2> out)
   {
-    double r0c0 = 0;
-    r0c0 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 0);
-    r0c0 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 0);
-    r0c0 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 0);
+    double r0c0 = 0.0;
+    r0c0 += (double) (m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 0));
+    r0c0 += (double) (m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 0));
+    r0c0 += (double) (m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 0));
 
-    double r1c0 = 0;
-    r1c0 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 0);
-    r1c0 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 0);
-    r1c0 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 0);
+    double r1c0 = 0.0;
+    r1c0 += (double) (m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 0));
+    r1c0 += (double) (m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 0));
+    r1c0 += (double) (m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 0));
 
-    double r2c0 = 0;
-    r2c0 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 0);
-    r2c0 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 0);
-    r2c0 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 0);
+    double r2c0 = 0.0;
+    r2c0 += (double) (m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 0));
+    r2c0 += (double) (m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 0));
+    r2c0 += (double) (m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 0));
 
-    double r0c1 = 0;
-    r0c1 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 1);
-    r0c1 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 1);
-    r0c1 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 1);
+    double r0c1 = 0.0;
+    r0c1 += (double) (m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 1));
+    r0c1 += (double) (m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 1));
+    r0c1 += (double) (m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 1));
 
-    double r1c1 = 0;
-    r1c1 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 1);
-    r1c1 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 1);
-    r1c1 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 1);
+    double r1c1 = 0.0;
+    r1c1 += (double) (m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 1));
+    r1c1 += (double) (m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 1));
+    r1c1 += (double) (m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 1));
 
-    double r2c1 = 0;
-    r2c1 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 1);
-    r2c1 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 1);
-    r2c1 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 1);
+    double r2c1 = 0.0;
+    r2c1 += (double) (m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 1));
+    r2c1 += (double) (m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 1));
+    r2c1 += (double) (m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 1));
 
-    double r0c2 = 0;
-    r0c2 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 2);
-    r0c2 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 2);
-    r0c2 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 2);
+    double r0c2 = 0.0;
+    r0c2 += (double) (m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 2));
+    r0c2 += (double) (m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 2));
+    r0c2 += (double) (m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 2));
 
-    double r1c2 = 0;
-    r1c2 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 2);
-    r1c2 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 2);
-    r1c2 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 2);
+    double r1c2 = 0.0;
+    r1c2 += (double) (m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 2));
+    r1c2 += (double) (m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 2));
+    r1c2 += (double) (m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 2));
 
-    double r2c2 = 0;
-    r2c2 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 2);
-    r2c2 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 2);
-    r2c2 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 2);
+    double r2c2 = 0.0;
+    r2c2 += (double) (m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 2));
+    r2c2 += (double) (m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 2));
+    r2c2 += (double) (m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 2));
 
     out.setUnsafe(0, 0, (float) r0c0);
     out.setUnsafe(0, 1, (float) r0c1);
@@ -1074,17 +1074,17 @@ import com.io7m.jtensors.VectorWritable3FType;
     final double r,
     final PMatrixM3x3F<T2, T3> out)
   {
-    final float r0c0 = (float) (m.getRowColumnF(0, 0) * r);
-    final float r1c0 = (float) (m.getRowColumnF(1, 0) * r);
-    final float r2c0 = (float) (m.getRowColumnF(2, 0) * r);
+    final float r0c0 = (float) ((double) m.getRowColumnF(0, 0) * r);
+    final float r1c0 = (float) ((double) m.getRowColumnF(1, 0) * r);
+    final float r2c0 = (float) ((double) m.getRowColumnF(2, 0) * r);
 
-    final float r0c1 = (float) (m.getRowColumnF(0, 1) * r);
-    final float r1c1 = (float) (m.getRowColumnF(1, 1) * r);
-    final float r2c1 = (float) (m.getRowColumnF(2, 1) * r);
+    final float r0c1 = (float) ((double) m.getRowColumnF(0, 1) * r);
+    final float r1c1 = (float) ((double) m.getRowColumnF(1, 1) * r);
+    final float r2c1 = (float) ((double) m.getRowColumnF(2, 1) * r);
 
-    final float r0c2 = (float) (m.getRowColumnF(0, 2) * r);
-    final float r1c2 = (float) (m.getRowColumnF(1, 2) * r);
-    final float r2c2 = (float) (m.getRowColumnF(2, 2) * r);
+    final float r0c2 = (float) ((double) m.getRowColumnF(0, 2) * r);
+    final float r1c2 = (float) ((double) m.getRowColumnF(1, 2) * r);
+    final float r2c2 = (float) ((double) m.getRowColumnF(2, 2) * r);
 
     out.setUnsafe(0, 0, r0c0);
     out.setUnsafe(1, 0, r1c0);
@@ -1339,9 +1339,9 @@ import com.io7m.jtensors.VectorWritable3FType;
   public static <T0, T1> double trace(
     final PMatrixReadable3x3FType<T0, T1> m)
   {
-    return m.getRowColumnF(0, 0)
-      + m.getRowColumnF(1, 1)
-      + m.getRowColumnF(2, 2);
+    return (double) (m.getRowColumnF(0, 0)
+                     + m.getRowColumnF(1, 1)
+                     + m.getRowColumnF(2, 2));
   }
 
   /**

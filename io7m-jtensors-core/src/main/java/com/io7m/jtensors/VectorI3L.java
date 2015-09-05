@@ -38,7 +38,7 @@ public final class VectorI3L implements VectorReadable3LType
    * The zero vector.
    */
 
-  public static final VectorI3L ZERO = new VectorI3L(0, 0, 0);
+  public static final VectorI3L ZERO = new VectorI3L(0L, 0L, 0L);
 
   /**
    * Calculate the absolute values of the elements in vector {@code v}.
@@ -375,7 +375,7 @@ public final class VectorI3L implements VectorReadable3LType
     final VectorReadable3LType v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt(VectorI3L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) VectorI3L.magnitudeSquared(v)));
   }
 
   /**
@@ -421,7 +421,7 @@ public final class VectorI3L implements VectorReadable3LType
     final long dot = VectorI3L.dotProduct(p, q);
     final long qms = VectorI3L.magnitudeSquared(q);
     final long s = dot / qms;
-    return VectorI3L.scale(p, s);
+    return VectorI3L.scale(p, (double) s);
   }
 
   /**
@@ -486,9 +486,9 @@ public final class VectorI3L implements VectorReadable3LType
 
   public VectorI3L()
   {
-    this.x = 0;
-    this.y = 0;
-    this.z = 0;
+    this.x = 0L;
+    this.y = 0L;
+    this.z = 0L;
   }
 
   /**
@@ -570,8 +570,8 @@ public final class VectorI3L implements VectorReadable3LType
 
   @Override public int hashCode()
   {
-    final long prime = 31;
-    long result = 1;
+    final long prime = 31L;
+    long result = 1L;
     result = (prime * result) + this.x;
     result = (prime * result) + this.y;
     result = (prime * result) + this.z;

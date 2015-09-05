@@ -388,7 +388,7 @@ public final class VectorI3F implements VectorReadable3FType
   public static float magnitude(
     final VectorReadable3FType v)
   {
-    return (float) Math.sqrt(VectorI3F.magnitudeSquared(v));
+    return (float) Math.sqrt((double) VectorI3F.magnitudeSquared(v));
   }
 
   /**
@@ -421,8 +421,8 @@ public final class VectorI3F implements VectorReadable3FType
     final VectorReadable3FType v)
   {
     final float m = VectorI3F.magnitudeSquared(v);
-    if (m > 0) {
-      final float reciprocal = (float) (1.0f / Math.sqrt(m));
+    if (m > 0.0F) {
+      final float reciprocal = (float) (1.0 / Math.sqrt((double) m));
       return VectorI3F.scale(v, reciprocal);
     }
     return new VectorI3F(v);

@@ -415,7 +415,7 @@ public final class PVectorI4F<T> implements PVectorReadable4FType<T>
   public static <T> float magnitude(
     final PVectorReadable4FType<T> v)
   {
-    return (float) Math.sqrt(PVectorI4F.magnitudeSquared(v));
+    return (float) Math.sqrt((double) PVectorI4F.magnitudeSquared(v));
   }
 
   /**
@@ -452,8 +452,8 @@ public final class PVectorI4F<T> implements PVectorReadable4FType<T>
     final PVectorReadable4FType<T> v)
   {
     final float m = PVectorI4F.magnitudeSquared(v);
-    if (m > 0) {
-      final float reciprocal = (float) (1.0f / Math.sqrt(m));
+    if (m > 0.0F) {
+      final float reciprocal = (float) (1.0 / Math.sqrt((double) m));
       return PVectorI4F.scale(v, reciprocal);
     }
     return new PVectorI4F<T>(v);

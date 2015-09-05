@@ -426,7 +426,7 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   public static <T> float magnitude(
     final PVectorReadable3FType<T> v)
   {
-    return (float) Math.sqrt(PVectorI3F.magnitudeSquared(v));
+    return (float) Math.sqrt((double) PVectorI3F.magnitudeSquared(v));
   }
 
   /**
@@ -463,8 +463,8 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
     final PVectorReadable3FType<T> v)
   {
     final float m = PVectorI3F.magnitudeSquared(v);
-    if (m > 0) {
-      final float reciprocal = (float) (1.0f / Math.sqrt(m));
+    if (m > 0.0F) {
+      final float reciprocal = (float) (1.0 / Math.sqrt((double) m));
       return PVectorI3F.scale(v, reciprocal);
     }
     return new PVectorI3F<T>(v);

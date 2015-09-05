@@ -377,7 +377,7 @@ public final class VectorI4F implements VectorReadable4FType
   public static float magnitude(
     final VectorReadable4FType v)
   {
-    return (float) Math.sqrt(VectorI4F.magnitudeSquared(v));
+    return (float) Math.sqrt((double) VectorI4F.magnitudeSquared(v));
   }
 
   /**
@@ -410,8 +410,8 @@ public final class VectorI4F implements VectorReadable4FType
     final VectorReadable4FType v)
   {
     final float m = VectorI4F.magnitudeSquared(v);
-    if (m > 0) {
-      final float reciprocal = (float) (1.0f / Math.sqrt(m));
+    if (m > 0.0F) {
+      final float reciprocal = (float) (1.0 / Math.sqrt((double) m));
       return VectorI4F.scale(v, reciprocal);
     }
     return new VectorI4F(v);

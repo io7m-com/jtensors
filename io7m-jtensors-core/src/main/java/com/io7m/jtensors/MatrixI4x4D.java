@@ -16,10 +16,10 @@
 
 package com.io7m.jtensors;
 
-import java.util.Arrays;
-
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
+
+import java.util.Arrays;
 
 /**
  * An immutable 4x4 matrix type.
@@ -48,9 +48,9 @@ import com.io7m.jnull.Nullable;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         if (row == col) {
-          m[row][col] = 1.0f;
+          m[row][col] = (double) 1.0;
         } else {
-          m[row][col] = 0.0f;
+          m[row][col] = (double) 0.0;
         }
       }
     }

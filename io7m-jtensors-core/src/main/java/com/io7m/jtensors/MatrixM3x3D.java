@@ -336,7 +336,7 @@ public final class MatrixM3x3D implements
     final double r2c1 = m.getRowColumnD(2, 1);
     final double r2c2 = m.getRowColumnD(2, 2);
 
-    double sum = 0;
+    double sum = 0.0;
 
     sum += r0c0 * ((r1c1 * r2c2) - (r1c2 * r2c1));
     sum -= r0c1 * ((r1c0 * r2c2) - (r1c2 * r2c0));
@@ -479,7 +479,7 @@ public final class MatrixM3x3D implements
       return Option.none();
     }
 
-    final double d_inv = 1 / d;
+    final double d_inv = 1.0 / d;
 
     final double orig_r0c0 = m.getRowColumnD(0, 0);
     final double orig_r0c1 = m.getRowColumnD(0, 1);
@@ -691,7 +691,7 @@ public final class MatrixM3x3D implements
 
     final double s = Math.sin(angle);
     final double c = Math.cos(angle);
-    final double t = 1 - c;
+    final double t = 1.0 - c;
 
     final double tx_sq = t * (axis_x * axis_x);
     final double ty_sq = t * (axis_y * axis_y);
@@ -776,10 +776,10 @@ public final class MatrixM3x3D implements
   {
     out.setUnsafe(0, 0, 1.0);
     out.setUnsafe(0, 1, 0.0);
-    out.setUnsafe(0, 2, v.getXI());
+    out.setUnsafe(0, 2, (double) v.getXI());
     out.setUnsafe(1, 0, 0.0);
     out.setUnsafe(1, 1, 1.0);
-    out.setUnsafe(1, 2, v.getYI());
+    out.setUnsafe(1, 2, (double) v.getYI());
     out.setUnsafe(2, 0, 0.0);
     out.setUnsafe(2, 1, 0.0);
     out.setUnsafe(2, 2, 1.0);
@@ -804,47 +804,47 @@ public final class MatrixM3x3D implements
     final MatrixReadable3x3DType m1,
     final MatrixM3x3D out)
   {
-    double r0c0 = 0;
+    double r0c0 = 0.0;
     r0c0 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 0);
     r0c0 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 0);
     r0c0 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 0);
 
-    double r1c0 = 0;
+    double r1c0 = 0.0;
     r1c0 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 0);
     r1c0 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 0);
     r1c0 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 0);
 
-    double r2c0 = 0;
+    double r2c0 = 0.0;
     r2c0 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 0);
     r2c0 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 0);
     r2c0 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 0);
 
-    double r0c1 = 0;
+    double r0c1 = 0.0;
     r0c1 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 1);
     r0c1 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 1);
     r0c1 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 1);
 
-    double r1c1 = 0;
+    double r1c1 = 0.0;
     r1c1 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 1);
     r1c1 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 1);
     r1c1 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 1);
 
-    double r2c1 = 0;
+    double r2c1 = 0.0;
     r2c1 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 1);
     r2c1 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 1);
     r2c1 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 1);
 
-    double r0c2 = 0;
+    double r0c2 = 0.0;
     r0c2 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 2);
     r0c2 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 2);
     r0c2 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 2);
 
-    double r1c2 = 0;
+    double r1c2 = 0.0;
     r1c2 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 2);
     r1c2 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 2);
     r1c2 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 2);
 
-    double r2c2 = 0;
+    double r2c2 = 0.0;
     r2c2 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 2);
     r2c2 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 2);
     r2c2 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 2);
@@ -1133,9 +1133,9 @@ public final class MatrixM3x3D implements
     for (int row = 0; row < MatrixM3x3D.VIEW_ROWS; ++row) {
       for (int col = 0; col < MatrixM3x3D.VIEW_COLS; ++col) {
         if (row == col) {
-          m.setUnsafe(row, col, 1.0f);
+          m.setUnsafe(row, col, (double) 1.0);
         } else {
-          m.setUnsafe(row, col, 0.0f);
+          m.setUnsafe(row, col, (double) 0.0);
         }
       }
     }

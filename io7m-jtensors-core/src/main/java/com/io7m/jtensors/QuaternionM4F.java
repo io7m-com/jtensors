@@ -242,10 +242,10 @@ public final class QuaternionM4F implements
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1)
   {
-    final double x = q0.getXF() * q1.getXF();
-    final double y = q0.getYF() * q1.getYF();
-    final double z = q0.getZF() * q1.getZF();
-    final double w = q0.getWF() * q1.getWF();
+    final double x = (double) (q0.getXF() * q1.getXF());
+    final double y = (double) (q0.getYF() * q1.getYF());
+    final double z = (double) (q0.getZF() * q1.getZF());
+    final double w = (double) (q0.getWF() * q1.getWF());
     return x + y + z + w;
   }
 
@@ -280,7 +280,7 @@ public final class QuaternionM4F implements
     final QuaternionM4F w0 = new QuaternionM4F();
     final QuaternionM4F w1 = new QuaternionM4F();
 
-    QuaternionM4F.scale(q0, 1.0f - alpha, w0);
+    QuaternionM4F.scale(q0, 1.0 - alpha, w0);
     QuaternionM4F.scale(q1, alpha, w1);
 
     return QuaternionM4F.add(w0, w1, r);
@@ -431,9 +431,9 @@ public final class QuaternionM4F implements
     final double angle_r = angle * 0.5;
     final double sa = Math.sin(angle_r);
 
-    out.x = (float) (axis.getXF() * sa);
-    out.y = (float) (axis.getYF() * sa);
-    out.z = (float) (axis.getZF() * sa);
+    out.x = (float) ((double) axis.getXF() * sa);
+    out.y = (float) ((double) axis.getYF() * sa);
+    out.z = (float) ((double) axis.getZF() * sa);
     out.w = (float) Math.cos(angle_r);
     return out;
   }
@@ -454,15 +454,15 @@ public final class QuaternionM4F implements
     final MatrixReadable3x3FType m,
     final QuaternionM4F out)
   {
-    final double m00 = m.getRowColumnF(0, 0);
-    final double m01 = m.getRowColumnF(0, 1);
-    final double m02 = m.getRowColumnF(0, 2);
-    final double m10 = m.getRowColumnF(1, 0);
-    final double m11 = m.getRowColumnF(1, 1);
-    final double m12 = m.getRowColumnF(1, 2);
-    final double m20 = m.getRowColumnF(2, 0);
-    final double m21 = m.getRowColumnF(2, 1);
-    final double m22 = m.getRowColumnF(2, 2);
+    final double m00 = (double) m.getRowColumnF(0, 0);
+    final double m01 = (double) m.getRowColumnF(0, 1);
+    final double m02 = (double) m.getRowColumnF(0, 2);
+    final double m10 = (double) m.getRowColumnF(1, 0);
+    final double m11 = (double) m.getRowColumnF(1, 1);
+    final double m12 = (double) m.getRowColumnF(1, 2);
+    final double m20 = (double) m.getRowColumnF(2, 0);
+    final double m21 = (double) m.getRowColumnF(2, 1);
+    final double m22 = (double) m.getRowColumnF(2, 2);
     final double trace = MatrixM3x3F.trace(m);
 
     final double x;
@@ -470,30 +470,30 @@ public final class QuaternionM4F implements
     final double z;
     final double w;
 
-    if (trace > 0) {
+    if (trace > 0.0) {
       // S = 4 * qw
-      final double s = Math.sqrt(trace + 1.0) * 2;
+      final double s = Math.sqrt(trace + 1.0) * 2.0;
       w = 0.25 * s;
       x = (m21 - m12) / s;
       y = (m02 - m20) / s;
       z = (m10 - m01) / s;
     } else if ((m00 > m11) && (m00 > m22)) {
       // S = 4 * qx
-      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2.0;
       w = (m21 - m12) / s;
       x = 0.25 * s;
       y = (m01 + m10) / s;
       z = (m02 + m20) / s;
     } else if (m11 > m22) {
       // S = 4 * qy
-      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2.0;
       w = (m02 - m20) / s;
       x = (m01 + m10) / s;
       y = 0.25 * s;
       z = (m12 + m21) / s;
     } else {
       // S = 4 * qz
-      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2;
+      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2.0;
       w = (m10 - m01) / s;
       x = (m02 + m20) / s;
       y = (m12 + m21) / s;
@@ -523,15 +523,15 @@ public final class QuaternionM4F implements
     final MatrixReadable4x4FType m,
     final QuaternionM4F out)
   {
-    final double m00 = m.getRowColumnF(0, 0);
-    final double m01 = m.getRowColumnF(0, 1);
-    final double m02 = m.getRowColumnF(0, 2);
-    final double m10 = m.getRowColumnF(1, 0);
-    final double m11 = m.getRowColumnF(1, 1);
-    final double m12 = m.getRowColumnF(1, 2);
-    final double m20 = m.getRowColumnF(2, 0);
-    final double m21 = m.getRowColumnF(2, 1);
-    final double m22 = m.getRowColumnF(2, 2);
+    final double m00 = (double) m.getRowColumnF(0, 0);
+    final double m01 = (double) m.getRowColumnF(0, 1);
+    final double m02 = (double) m.getRowColumnF(0, 2);
+    final double m10 = (double) m.getRowColumnF(1, 0);
+    final double m11 = (double) m.getRowColumnF(1, 1);
+    final double m12 = (double) m.getRowColumnF(1, 2);
+    final double m20 = (double) m.getRowColumnF(2, 0);
+    final double m21 = (double) m.getRowColumnF(2, 1);
+    final double m22 = (double) m.getRowColumnF(2, 2);
 
     /**
      * Explicitly ignore the bottom right element of the matrix, as this
@@ -545,30 +545,30 @@ public final class QuaternionM4F implements
     final double z;
     final double w;
 
-    if (trace > 0) {
+    if (trace > 0.0) {
       // S = 4 * qw
-      final double s = Math.sqrt(trace + 1.0) * 2;
+      final double s = Math.sqrt(trace + 1.0) * 2.0;
       w = 0.25 * s;
       x = (m21 - m12) / s;
       y = (m02 - m20) / s;
       z = (m10 - m01) / s;
     } else if ((m00 > m11) && (m00 > m22)) {
       // S = 4 * qx
-      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2.0;
       w = (m21 - m12) / s;
       x = 0.25 * s;
       y = (m01 + m10) / s;
       z = (m02 + m20) / s;
     } else if (m11 > m22) {
       // S = 4 * qy
-      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2.0;
       w = (m02 - m20) / s;
       x = (m01 + m10) / s;
       y = 0.25 * s;
       z = (m12 + m21) / s;
     } else {
       // S = 4 * qz
-      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2;
+      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2.0;
       w = (m10 - m01) / s;
       x = (m02 + m20) / s;
       y = (m12 + m21) / s;
@@ -599,27 +599,27 @@ public final class QuaternionM4F implements
     final QuaternionM4F q,
     final MatrixM3x3F m)
   {
-    final double xx = q.getXF() * q.getXF();
-    final double xy = q.getXF() * q.getYF();
-    final double xz = q.getXF() * q.getZF();
-    final double yy = q.getYF() * q.getYF();
-    final double yz = q.getYF() * q.getZF();
-    final double zz = q.getZF() * q.getZF();
-    final double wx = q.getWF() * q.getXF();
-    final double wy = q.getWF() * q.getYF();
-    final double wz = q.getWF() * q.getZF();
+    final double xx = (double) (q.getXF() * q.getXF());
+    final double xy = (double) (q.getXF() * q.getYF());
+    final double xz = (double) (q.getXF() * q.getZF());
+    final double yy = (double) (q.getYF() * q.getYF());
+    final double yz = (double) (q.getYF() * q.getZF());
+    final double zz = (double) (q.getZF() * q.getZF());
+    final double wx = (double) (q.getWF() * q.getXF());
+    final double wy = (double) (q.getWF() * q.getYF());
+    final double wz = (double) (q.getWF() * q.getZF());
 
-    final double r0c0 = 1.0 - (2 * yy) - (2 * zz);
-    final double r0c1 = (2 * xy) - (2 * wz);
-    final double r0c2 = (2 * xz) + (2 * wy);
+    final double r0c0 = 1.0 - (2.0 * yy) - (2.0 * zz);
+    final double r0c1 = (2.0 * xy) - (2.0 * wz);
+    final double r0c2 = (2.0 * xz) + (2.0 * wy);
 
-    final double r1c0 = (2 * xy) + (2 * wz);
-    final double r1c1 = 1.0 - (2 * xx) - (2 * zz);
-    final double r1c2 = (2 * yz) - (2 * wx);
+    final double r1c0 = (2.0 * xy) + (2.0 * wz);
+    final double r1c1 = 1.0 - (2.0 * xx) - (2.0 * zz);
+    final double r1c2 = (2.0 * yz) - (2.0 * wx);
 
-    final double r2c0 = (2 * xz) - (2 * wy);
-    final double r2c1 = (2 * yz) + (2 * wx);
-    final double r2c2 = 1.0 - (2 * xx) - (2 * yy);
+    final double r2c0 = (2.0 * xz) - (2.0 * wy);
+    final double r2c1 = (2.0 * yz) + (2.0 * wx);
+    final double r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
 
     m.setUnsafe(0, 0, (float) r0c0);
     m.setUnsafe(0, 1, (float) r0c1);
@@ -655,29 +655,29 @@ public final class QuaternionM4F implements
     final QuaternionReadable4FType q,
     final M m)
   {
-    final double xx = q.getXF() * q.getXF();
-    final double xy = q.getXF() * q.getYF();
-    final double xz = q.getXF() * q.getZF();
-    final double yy = q.getYF() * q.getYF();
-    final double yz = q.getYF() * q.getZF();
-    final double zz = q.getZF() * q.getZF();
-    final double wx = q.getWF() * q.getXF();
-    final double wy = q.getWF() * q.getYF();
-    final double wz = q.getWF() * q.getZF();
+    final double xx = (double) (q.getXF() * q.getXF());
+    final double xy = (double) (q.getXF() * q.getYF());
+    final double xz = (double) (q.getXF() * q.getZF());
+    final double yy = (double) (q.getYF() * q.getYF());
+    final double yz = (double) (q.getYF() * q.getZF());
+    final double zz = (double) (q.getZF() * q.getZF());
+    final double wx = (double) (q.getWF() * q.getXF());
+    final double wy = (double) (q.getWF() * q.getYF());
+    final double wz = (double) (q.getWF() * q.getZF());
 
-    final double r0c0 = 1.0 - (2 * yy) - (2 * zz);
-    final double r0c1 = (2 * xy) - (2 * wz);
-    final double r0c2 = (2 * xz) + (2 * wy);
+    final double r0c0 = 1.0 - (2.0 * yy) - (2.0 * zz);
+    final double r0c1 = (2.0 * xy) - (2.0 * wz);
+    final double r0c2 = (2.0 * xz) + (2.0 * wy);
     final double r0c3 = 0.0;
 
-    final double r1c0 = (2 * xy) + (2 * wz);
-    final double r1c1 = 1.0 - (2 * xx) - (2 * zz);
-    final double r1c2 = (2 * yz) - (2 * wx);
+    final double r1c0 = (2.0 * xy) + (2.0 * wz);
+    final double r1c1 = 1.0 - (2.0 * xx) - (2.0 * zz);
+    final double r1c2 = (2.0 * yz) - (2.0 * wx);
     final double r1c3 = 0.0;
 
-    final double r2c0 = (2 * xz) - (2 * wy);
-    final double r2c1 = (2 * yz) + (2 * wx);
-    final double r2c2 = 1.0 - (2 * xx) - (2 * yy);
+    final double r2c0 = (2.0 * xz) - (2.0 * wy);
+    final double r2c1 = (2.0 * yz) + (2.0 * wx);
+    final double r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
     final double r2c3 = 0.0;
 
     final double r3c0 = 0.0;
@@ -906,10 +906,10 @@ public final class QuaternionM4F implements
     final double r,
     final QuaternionM4F out)
   {
-    final double x = q.getXF() * r;
-    final double y = q.getYF() * r;
-    final double z = q.getZF() * r;
-    final double w = q.getWF() * r;
+    final double x = (double) q.getXF() * r;
+    final double y = (double) q.getYF() * r;
+    final double z = (double) q.getZF() * r;
+    final double w = (double) q.getWF() * r;
     out.x = (float) x;
     out.y = (float) y;
     out.z = (float) z;

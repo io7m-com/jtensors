@@ -347,8 +347,8 @@ public final class PVectorI2F<T> implements PVectorReadable2FType<T>
     final PVectorReadable2FType<T> v0,
     final PVectorReadable2FType<T> v1)
   {
-    final double x = v0.getXF() * v1.getXF();
-    final double y = v0.getYF() * v1.getYF();
+    final double x = (double) (v0.getXF() * v1.getXF());
+    final double y = (double) (v0.getYF() * v1.getYF());
     return x + y;
   }
 
@@ -383,8 +383,8 @@ public final class PVectorI2F<T> implements PVectorReadable2FType<T>
     final float alpha)
   {
     final PVectorReadable2FType<T> w0 =
-      PVectorI2F.scale(v0, (float) (1.0 - alpha));
-    final PVectorReadable2FType<T> w1 = PVectorI2F.scale(v1, alpha);
+      PVectorI2F.scale(v0, (double) (float) (1.0 - (double) alpha));
+    final PVectorReadable2FType<T> w1 = PVectorI2F.scale(v1, (double) alpha);
     return PVectorI2F.add(w0, w1);
   }
 
@@ -440,7 +440,7 @@ public final class PVectorI2F<T> implements PVectorReadable2FType<T>
     final PVectorReadable2FType<T> v)
   {
     final double m = PVectorI2F.magnitudeSquared(v);
-    if (m > 0) {
+    if (m > 0.0) {
       final double sq = Math.sqrt(m);
       final double r = 1.0 / sq;
       return PVectorI2F.scale(v, r);
@@ -520,8 +520,8 @@ public final class PVectorI2F<T> implements PVectorReadable2FType<T>
     final PVectorReadable2FType<T> v,
     final double r)
   {
-    final double x = v.getXF() * r;
-    final double y = v.getYF() * r;
+    final double x = (double) v.getXF() * r;
+    final double y = (double) v.getYF() * r;
     return new PVectorI2F<T>((float) x, (float) y);
   }
 

@@ -468,30 +468,30 @@ public final class QuaternionM4D implements
 
     final double trace = MatrixM3x3D.trace(m);
 
-    if (trace > 0) {
+    if (trace > 0.0) {
       // S = 4 * qw
-      final double s = Math.sqrt(trace + 1.0) * 2;
+      final double s = Math.sqrt(trace + 1.0) * 2.0;
       out.w = 0.25 * s;
       out.x = (m21 - m12) / s;
       out.y = (m02 - m20) / s;
       out.z = (m10 - m01) / s;
     } else if ((m00 > m11) && (m00 > m22)) {
       // S = 4 * qx
-      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2.0;
       out.w = (m21 - m12) / s;
       out.x = 0.25 * s;
       out.y = (m01 + m10) / s;
       out.z = (m02 + m20) / s;
     } else if (m11 > m22) {
       // S = 4 * qy
-      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2.0;
       out.w = (m02 - m20) / s;
       out.x = (m01 + m10) / s;
       out.y = 0.25 * s;
       out.z = (m12 + m21) / s;
     } else {
       // S = 4 * qz
-      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2;
+      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2.0;
       out.w = (m10 - m01) / s;
       out.x = (m02 + m20) / s;
       out.y = (m12 + m21) / s;
@@ -534,30 +534,30 @@ public final class QuaternionM4D implements
 
     final double trace = m00 + m11 + m22;
 
-    if (trace > 0) {
+    if (trace > 0.0) {
       // S = 4 * qw
-      final double s = Math.sqrt(trace + 1.0) * 2;
+      final double s = Math.sqrt(trace + 1.0) * 2.0;
       out.w = 0.25 * s;
       out.x = (m21 - m12) / s;
       out.y = (m02 - m20) / s;
       out.z = (m10 - m01) / s;
     } else if ((m00 > m11) && (m00 > m22)) {
       // S = 4 * qx
-      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m00) - m11 - m22) * 2.0;
       out.w = (m21 - m12) / s;
       out.x = 0.25 * s;
       out.y = (m01 + m10) / s;
       out.z = (m02 + m20) / s;
     } else if (m11 > m22) {
       // S = 4 * qy
-      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2;
+      final double s = Math.sqrt((1.0 + m11) - m00 - m22) * 2.0;
       out.w = (m02 - m20) / s;
       out.x = (m01 + m10) / s;
       out.y = 0.25 * s;
       out.z = (m12 + m21) / s;
     } else {
       // S = 4 * qz
-      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2;
+      final double s = Math.sqrt((1.0 + m22) - m00 - m11) * 2.0;
       out.w = (m10 - m01) / s;
       out.x = (m02 + m20) / s;
       out.y = (m12 + m21) / s;
@@ -594,17 +594,17 @@ public final class QuaternionM4D implements
     final double wy = q.getWD() * q.getYD();
     final double wz = q.getWD() * q.getZD();
 
-    final double r0c0 = 1.0 - (2 * yy) - (2 * zz);
-    final double r0c1 = (2 * xy) - (2 * wz);
-    final double r0c2 = (2 * xz) + (2 * wy);
+    final double r0c0 = 1.0 - (2.0 * yy) - (2.0 * zz);
+    final double r0c1 = (2.0 * xy) - (2.0 * wz);
+    final double r0c2 = (2.0 * xz) + (2.0 * wy);
 
-    final double r1c0 = (2 * xy) + (2 * wz);
-    final double r1c1 = 1.0 - (2 * xx) - (2 * zz);
-    final double r1c2 = (2 * yz) - (2 * wx);
+    final double r1c0 = (2.0 * xy) + (2.0 * wz);
+    final double r1c1 = 1.0 - (2.0 * xx) - (2.0 * zz);
+    final double r1c2 = (2.0 * yz) - (2.0 * wx);
 
-    final double r2c0 = (2 * xz) - (2 * wy);
-    final double r2c1 = (2 * yz) + (2 * wx);
-    final double r2c2 = 1.0 - (2 * xx) - (2 * yy);
+    final double r2c0 = (2.0 * xz) - (2.0 * wy);
+    final double r2c1 = (2.0 * yz) + (2.0 * wx);
+    final double r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
 
     m.setUnsafe(0, 0, r0c0);
     m.setUnsafe(0, 1, r0c1);
@@ -648,19 +648,19 @@ public final class QuaternionM4D implements
     final double wy = q.getWD() * q.getYD();
     final double wz = q.getWD() * q.getZD();
 
-    final double r0c0 = 1.0 - (2 * yy) - (2 * zz);
-    final double r0c1 = (2 * xy) - (2 * wz);
-    final double r0c2 = (2 * xz) + (2 * wy);
+    final double r0c0 = 1.0 - (2.0 * yy) - (2.0 * zz);
+    final double r0c1 = (2.0 * xy) - (2.0 * wz);
+    final double r0c2 = (2.0 * xz) + (2.0 * wy);
     final double r0c3 = 0.0;
 
-    final double r1c0 = (2 * xy) + (2 * wz);
-    final double r1c1 = 1.0 - (2 * xx) - (2 * zz);
-    final double r1c2 = (2 * yz) - (2 * wx);
+    final double r1c0 = (2.0 * xy) + (2.0 * wz);
+    final double r1c1 = 1.0 - (2.0 * xx) - (2.0 * zz);
+    final double r1c2 = (2.0 * yz) - (2.0 * wx);
     final double r1c3 = 0.0;
 
-    final double r2c0 = (2 * xz) - (2 * wy);
-    final double r2c1 = (2 * yz) + (2 * wx);
-    final double r2c2 = 1.0 - (2 * xx) - (2 * yy);
+    final double r2c0 = (2.0 * xz) - (2.0 * wy);
+    final double r2c1 = (2.0 * yz) + (2.0 * wx);
+    final double r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
     final double r2c3 = 0.0;
 
     final double r3c0 = 0.0;

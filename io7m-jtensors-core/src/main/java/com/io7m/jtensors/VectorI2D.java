@@ -410,7 +410,7 @@ public final class VectorI2D implements VectorReadable2DType
     final VectorReadable2DType v)
   {
     final double m = VectorI2D.magnitudeSquared(v);
-    if (m > 0) {
+    if (m > 0.0) {
       final double sq = Math.sqrt(m);
       final double r = 1.0 / sq;
       return VectorI2D.scale(v, r);
