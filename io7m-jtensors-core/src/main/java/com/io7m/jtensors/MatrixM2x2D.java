@@ -16,20 +16,20 @@
 
 package com.io7m.jtensors;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
-
 import com.io7m.jfunctional.Option;
 import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.DoubleBuffer;
 
 /**
  * <p>
  * A 2x2 mutable matrix type with double precision elements.
  * </p>
  * <p>
- * Values of type <code>MatrixM2x2D</code> are backed by direct memory, with
+ * Values of type {@code MatrixM2x2D} are backed by direct memory, with
  * the rows and columns of the matrices being stored in column-major format.
  * This allows the matrices to be passed to OpenGL directly, without requiring
  * transposition.
@@ -67,7 +67,7 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Elementwise add of matrices <code>m0</code> and <code>m1</code>.
+   * Elementwise add of matrices {@code m0} and {@code m1}.
    *
    * @param m0
    *          The left input matrix.
@@ -75,7 +75,7 @@ public final class MatrixM2x2D implements
    *          The right input matrix.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static MatrixM2x2D add(
@@ -98,14 +98,14 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
-   * returning the result in <code>m0</code>.
+   * Elementwise add of matrices {@code m0} and {@code m1},
+   * returning the result in {@code m0}.
    *
    * @param m0
    *          The left input matrix.
    * @param m1
    *          The right input matrix.
-   * @return <code>m0</code>
+   * @return {@code m0}
    */
 
   public static MatrixM2x2D addInPlace(
@@ -117,9 +117,9 @@ public final class MatrixM2x2D implements
 
   /**
    * <p>
-   * Add the values in row <code>row_b</code> to the values in row
-   * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
-   * row <code>row_c</code> of the matrix <code>out</code>.
+   * Add the values in row {@code row_b} to the values in row
+   * {@code row_a} scaled by {@code r}, saving the resulting row in
+   * row {@code row_c} of the matrix {@code out}.
    * </p>
    *
    * <p>
@@ -138,7 +138,7 @@ public final class MatrixM2x2D implements
    *          The scaling value.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static MatrixM2x2D addRowScaled(
@@ -160,9 +160,9 @@ public final class MatrixM2x2D implements
 
   /**
    * <p>
-   * Add the values in row <code>row_b</code> to the values in row
-   * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
-   * row <code>row_c</code> of the matrix <code>m</code>.
+   * Add the values in row {@code row_b} to the values in row
+   * {@code row_a} scaled by {@code r}, saving the resulting row in
+   * row {@code row_c} of the matrix {@code m}.
    * </p>
    *
    * <p>
@@ -179,7 +179,7 @@ public final class MatrixM2x2D implements
    *          The destination row.
    * @param r
    *          The scaling value.
-   * @return <code>m</code>
+   * @return {@code m}
    */
 
   public static MatrixM2x2D addRowScaledInPlace(
@@ -222,14 +222,14 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Copy the contents of the matrix <code>input</code> to the matrix
-   * <code>output</code>, completely replacing all elements.
+   * Copy the contents of the matrix {@code input} to the matrix
+   * {@code output}, completely replacing all elements.
    *
    * @param input
    *          The input vector.
    * @param output
    *          The output vector.
-   * @return <code>output</code>
+   * @return {@code output}
    */
 
   public static MatrixM2x2D copy(
@@ -245,7 +245,7 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Calculate the determinant of the matrix <code>m</code>.
+   * Calculate the determinant of the matrix {@code m}.
    *
    * @return The determinant.
    * @param m
@@ -265,8 +265,8 @@ public final class MatrixM2x2D implements
 
   /**
    * <p>
-   * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
+   * Exchange two rows {@code row_a} and row {@code row_b} of the
+   * matrix {@code m}, saving the exchanged rows to {@code out} .
    * </p>
    *
    * <p>
@@ -281,7 +281,7 @@ public final class MatrixM2x2D implements
    *          The second row.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static MatrixM2x2D exchangeRows(
@@ -299,8 +299,8 @@ public final class MatrixM2x2D implements
 
   /**
    * <p>
-   * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>m</code> .
+   * Exchange two rows {@code row_a} and row {@code row_b} of the
+   * matrix {@code m}, saving the exchanged rows to {@code m} .
    * </p>
    *
    * <p>
@@ -313,7 +313,7 @@ public final class MatrixM2x2D implements
    *          The first row.
    * @param row_b
    *          The second row.
-   * @return <code>m</code>
+   * @return {@code m}
    */
 
   public static MatrixM2x2D exchangeRowsInPlace(
@@ -372,12 +372,12 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>out</code>. The function returns <code>Some(out)</code>
-   * iff it was possible to invert the matrix, and <code>None</code>
+   * Calculate the inverse of the matrix {@code m}, saving the resulting
+   * matrix to {@code out}. The function returns {@code Some(out)}
+   * iff it was possible to invert the matrix, and {@code None}
    * otherwise. It is not possible to invert a matrix that has a determinant
-   * of <code>0</code>. If the function returns <code>None</code>,
-   * <code>m</code> is untouched.
+   * of {@code 0}. If the function returns {@code None},
+   * {@code m} is untouched.
    *
    * @see MatrixM2x2D#determinant(MatrixReadable2x2DType)
    *
@@ -385,7 +385,7 @@ public final class MatrixM2x2D implements
    *          The input matrix.
    * @param out
    *          The output matrix.
-   * @return The inverion of <code>m</code>, if any.
+   * @return The inverion of {@code m}, if any.
    */
 
   public static OptionType<MatrixM2x2D> invert(
@@ -414,18 +414,18 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>m</code>. The function returns <code>Some(m)</code> iff
-   * it was possible to invert the matrix, and <code>None</code> otherwise. It
+   * Calculate the inverse of the matrix {@code m}, saving the resulting
+   * matrix to {@code m}. The function returns {@code Some(m)} iff
+   * it was possible to invert the matrix, and {@code None} otherwise. It
    * is not possible to invert a matrix that has a determinant of
-   * <code>0</code>. If the function returns <code>None</code>, <code>m</code>
+   * {@code 0}. If the function returns {@code None}, {@code m}
    * is untouched.
    *
    * @see MatrixM2x2D#determinant(MatrixReadable2x2DType)
    *
    * @param m
    *          The input matrix.
-   * @return The inverion of <code>m</code>, if any.
+   * @return The inverion of {@code m}, if any.
    */
 
   public static OptionType<MatrixM2x2D> invertInPlace(
@@ -435,8 +435,8 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
-   * writing the result to <code>out</code>.
+   * Multiply the matrix {@code m0} with the matrix {@code m1},
+   * writing the result to {@code out}.
    *
    * @param m0
    *          The left input matrix.
@@ -444,7 +444,7 @@ public final class MatrixM2x2D implements
    *          The right input matrix.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static MatrixM2x2D multiply(
@@ -474,14 +474,14 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
-   * writing the result to <code>m0</code>.
+   * Multiply the matrix {@code m0} with the matrix {@code m1},
+   * writing the result to {@code m0}.
    *
    * @param m0
    *          The left input matrix.
    * @param m1
    *          The right input matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static MatrixM2x2D multiplyInPlace(
@@ -492,8 +492,8 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
-   * writing the resulting vector to <code>out</code>.
+   * Multiply the matrix {@code m} with the vector {@code v},
+   * writing the resulting vector to {@code out}.
    *
    * @param m
    *          The input matrix.
@@ -501,7 +501,7 @@ public final class MatrixM2x2D implements
    *          The input vector.
    * @param out
    *          The output vector.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <V>
    *          The precise type of writable vector.
    */
@@ -522,8 +522,8 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Return row <code>row</code> of the matrix <code>m</code> in the vector
-   * <code>out</code>.
+   * Return row {@code row} of the matrix {@code m} in the vector
+   * {@code out}.
    *
    * @param row
    *          The row.
@@ -564,8 +564,8 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Scale all elements of the matrix <code>m</code> by the scaling value
-   * <code>r</code>, saving the result in <code>out</code>.
+   * Scale all elements of the matrix {@code m} by the scaling value
+   * {@code r}, saving the result in {@code out}.
    *
    * @param m
    *          The input matrix.
@@ -573,7 +573,7 @@ public final class MatrixM2x2D implements
    *          The scaling value.
    * @param out
    *          The output row.
-   * @return <code>m</code>
+   * @return {@code m}
    */
 
   public static MatrixM2x2D scale(
@@ -589,14 +589,14 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Scale all elements of the matrix <code>m</code> by the scaling value
-   * <code>r</code>, saving the result in <code>m</code>.
+   * Scale all elements of the matrix {@code m} by the scaling value
+   * {@code r}, saving the result in {@code m}.
    *
    * @param m
    *          The input matrix.
    * @param r
    *          The scaling value.
-   * @return <code>m</code>
+   * @return {@code m}
    */
 
   public static MatrixM2x2D scaleInPlace(
@@ -608,8 +608,8 @@ public final class MatrixM2x2D implements
 
   /**
    * <p>
-   * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
-   * saving the result to row <code>r</code> of <code>out</code>.
+   * Scale row {@code r} of the matrix {@code m} by {@code r},
+   * saving the result to row {@code r} of {@code out}.
    * </p>
    *
    * <p>
@@ -624,7 +624,7 @@ public final class MatrixM2x2D implements
    *          The scaling value.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static MatrixM2x2D scaleRow(
@@ -638,8 +638,8 @@ public final class MatrixM2x2D implements
 
   /**
    * <p>
-   * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
-   * saving the result to row <code>r</code> of <code>m</code>.
+   * Scale row {@code r} of the matrix {@code m} by {@code r},
+   * saving the result to row {@code r} of {@code m}.
    * </p>
    *
    * <p>
@@ -652,7 +652,7 @@ public final class MatrixM2x2D implements
    *          The index of the row {@code (0 <= row < 4)}.
    * @param r
    *          The scaling value.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static MatrixM2x2D scaleRowInPlace(
@@ -679,8 +679,8 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Set the value in the matrix <code>m</code> at row <code>row</code>,
-   * column <code>column</code> to <code>value</code>.
+   * Set the value in the matrix {@code m} at row {@code row},
+   * column {@code column} to {@code value}.
    *
    * @param m
    *          The input matrix
@@ -704,11 +704,11 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Set the given matrix <code>m</code> to the identity matrix.
+   * Set the given matrix {@code m} to the identity matrix.
    *
    * @param m
    *          The matrix
-   * @return <code>m</code>
+   * @return {@code m}
    */
 
   public static MatrixM2x2D setIdentity(
@@ -737,11 +737,11 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Set the given matrix <code>m</code> to the zero matrix.
+   * Set the given matrix {@code m} to the zero matrix.
    *
    * @param m
    *          The matrix
-   * @return <code>m</code>
+   * @return {@code m}
    */
 
   public static MatrixM2x2D setZero(
@@ -755,7 +755,7 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Return the trace of the matrix <code>m</code>. The trace is defined as
+   * Return the trace of the matrix {@code m}. The trace is defined as
    * the sum of the diagonal elements of the matrix.
    *
    * @since 5.0.0
@@ -771,14 +771,14 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Transpose the given matrix <code>m</code>, writing the resulting matrix
-   * to <code>out</code>.
+   * Transpose the given matrix {@code m}, writing the resulting matrix
+   * to {@code out}.
    *
    * @param m
    *          The input matrix.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static MatrixM2x2D transpose(
@@ -790,12 +790,12 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Transpose the given matrix <code>m</code>, writing the resulting matrix
-   * to <code>m</code>.
+   * Transpose the given matrix {@code m}, writing the resulting matrix
+   * to {@code m}.
    *
    * @param m
    *          The input matrix.
-   * @return <code>m</code>
+   * @return {@code m}
    */
 
   public static MatrixM2x2D transposeInPlace(

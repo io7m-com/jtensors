@@ -41,12 +41,12 @@ public final class VectorI2F implements VectorReadable2FType
   public static final VectorI2F ZERO = new VectorI2F(0.0f, 0.0f);
 
   /**
-   * Calculate the absolute value of the vector <code>v</code>.
+   * Calculate the absolute value of the vector {@code v}.
    *
    * @param v
    *          The input vector
    *
-   * @return <code>(abs v.x, abs v.y)</code>
+   * @return {@code (abs v.x, abs v.y)}
    */
 
   public static VectorI2F absolute(
@@ -56,15 +56,15 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
+   * @return {@code (v0.x + v1.x, v0.y + v1.y)}
    */
 
   public static VectorI2F add(
@@ -75,8 +75,8 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}.
    *
    * @param v0
    *          The left input vector
@@ -85,7 +85,7 @@ public final class VectorI2F implements VectorReadable2FType
    * @param r
    *          The scaling value
    *
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r))}
    */
 
   public static VectorI2F addScaled(
@@ -97,8 +97,8 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
-   * are equal to within the degree of error given in <code>context</code>.
+   * Determine whether or not the vectors {@code qa} and {@code qb}
+   * are equal to within the degree of error given in {@code context}.
    *
    * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
    *
@@ -109,7 +109,7 @@ public final class VectorI2F implements VectorReadable2FType
    * @param qb
    *          The right input vector
    * @since 5.0.0
-   * @return <code>true</code> iff the vectors are almost equal.
+   * @return {@code true} iff the vectors are almost equal.
    */
 
   public static boolean almostEqual(
@@ -125,8 +125,8 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Calculate the angle between the vectors <code>v0</code> and
-   * <code>v1</code> in radians.
+   * Calculate the angle between the vectors {@code v0} and
+   * {@code v1} in radians.
    *
    * @param v0
    *          The left input vector
@@ -150,8 +150,8 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. maximum]} inclusive.
    *
    * @param v
    *          The input vector
@@ -160,8 +160,8 @@ public final class VectorI2F implements VectorReadable2FType
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>.
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         and at least {@code minimum}.
    */
 
   public static VectorI2F clamp(
@@ -175,9 +175,9 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum} and
+   * {@code maximum}.
    *
    * @param v
    *          The input vector
@@ -186,7 +186,7 @@ public final class VectorI2F implements VectorReadable2FType
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))</code>
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))}
    */
 
   public static VectorI2F clampByVector(
@@ -202,15 +202,15 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [-Infinity .. maximum]} inclusive.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
    */
 
   public static VectorI2F clampMaximum(
@@ -223,15 +223,15 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code maximum}.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y))}
    */
 
   public static VectorI2F clampMaximumByVector(
@@ -244,8 +244,8 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. Infinity]} inclusive.
    *
    * @param v
    *          The input vector
@@ -253,7 +253,7 @@ public final class VectorI2F implements VectorReadable2FType
    *          The minimum allowed value
    *
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>
+   *         {@code minimum}
    */
 
   public static VectorI2F clampMinimum(
@@ -266,15 +266,15 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum}.
    *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code>
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y))}
    */
 
   public static VectorI2F clampMinimumByVector(
@@ -287,8 +287,8 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Calculate the distance between the two vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the distance between the two vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -306,8 +306,8 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Calculate the scalar product of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the scalar product of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -327,15 +327,15 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
-   * amount <code>alpha</code>.
+   * Linearly interpolate between {@code v0} and {@code v1} by the
+   * amount {@code alpha}.
    *
-   * The <code>alpha</code> parameter controls the degree of interpolation,
+   * The {@code alpha} parameter controls the degree of interpolation,
    * such that:
    *
    * <ul>
-   * <li><code>interpolateLinear(v0, v1, 0.0) = v0</code></li>
-   * <li><code>interpolateLinear(v0, v1, 1.0) = v1</code></li>
+   * <li>{@code interpolateLinear(v0, v1, 0.0) = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0) = v1}</li>
    * </ul>
    *
    * @param v0
@@ -343,10 +343,10 @@ public final class VectorI2F implements VectorReadable2FType
    * @param v1
    *          The right input vector.
    * @param alpha
-   *          The interpolation value, between <code>0.0</code> and
-   *          <code>1.0</code>.
+   *          The interpolation value, between {@code 0.0} and
+   *          {@code 1.0}.
    *
-   * @return <code>(1 - alpha) * v0 + alpha * v1</code>
+   * @return {@code (1 - alpha) * v0 + alpha * v1}
    */
 
   public static VectorI2F interpolateLinear(
@@ -361,9 +361,9 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Calculate the magnitude of the vector <code>v</code>.
+   * Calculate the magnitude of the vector {@code v}.
    *
-   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
    * @param v
    *          The input vector
@@ -378,7 +378,7 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Calculate the squared magnitude of the vector <code>v</code>.
+   * Calculate the squared magnitude of the vector {@code v}.
    *
    * @param v
    *          The input vector
@@ -392,14 +392,14 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Normalize the vector <code>v</code>, preserving its direction but
+   * Normalize the vector {@code v}, preserving its direction but
    * reducing it to unit length.
    *
    * @param v
    *          The input vector
    *
-   * @return A vector with the same orientation as <code>v</code> but with
-   *         magnitude equal to <code>1.0</code>
+   * @return A vector with the same orientation as {@code v} but with
+   *         magnitude equal to {@code 1.0}
    */
 
   public static VectorI2F normalize(
@@ -416,7 +416,7 @@ public final class VectorI2F implements VectorReadable2FType
 
   /**
    * <p>
-   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * Orthonormalize and return the vectors {@code v0} and {@code v1}
    * .
    * </p>
    * <p>
@@ -427,7 +427,7 @@ public final class VectorI2F implements VectorReadable2FType
    *          The left vector
    * @param v1
    *          The right vector
-   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * @return A pair {@code (v0, v1)}, orthonormalized.
    *
    * @since 5.0.0
    */
@@ -445,14 +445,14 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Calculate the projection of the vector <code>p</code> onto the vector
-   * <code>q</code>.
+   * Calculate the projection of the vector {@code p} onto the vector
+   * {@code q}.
    *
    * @param p
    *          The left vector
    * @param q
    *          The right vector
-   * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
+   * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    */
 
   public static VectorI2F projection(
@@ -466,14 +466,14 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>.
+   * Scale the vector {@code v} by the scalar {@code r}.
    *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    *
-   * @return <code>(v.x * r, v.y * r)</code>
+   * @return {@code (v.x * r, v.y * r)}
    */
 
   public static VectorI2F scale(
@@ -486,14 +486,14 @@ public final class VectorI2F implements VectorReadable2FType
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
+   * @return {@code (v0.x - v1.x, v0.y - v1.y)}
    */
 
   public static VectorI2F subtract(
@@ -509,7 +509,7 @@ public final class VectorI2F implements VectorReadable2FType
 
   /**
    * Default constructor, initializing the vector with values
-   * <code>[0.0, 0.0]</code>.
+   * {@code [0.0, 0.0]}.
    */
 
   public VectorI2F()
@@ -522,9 +522,9 @@ public final class VectorI2F implements VectorReadable2FType
    * Construct a vector initialized with the given values.
    *
    * @param in_x
-   *          The <code>x</code> value
+   *          The {@code x} value
    * @param in_y
-   *          The <code>y</code> value
+   *          The {@code y} value
    */
 
   public VectorI2F(
@@ -537,7 +537,7 @@ public final class VectorI2F implements VectorReadable2FType
 
   /**
    * Construct a vector initialized with the values given in the vector
-   * <code>v</code>.
+   * {@code v}.
    *
    * @param in_v
    *          The input vector

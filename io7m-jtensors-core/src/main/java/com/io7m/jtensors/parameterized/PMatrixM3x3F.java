@@ -49,7 +49,7 @@ import com.io7m.jtensors.VectorWritable3FType;
   /**
    * <p>
    * The Context type contains the minimum storage required for all of the
-   * functions of the <code>MatrixM3x3F</code> class.
+   * functions of the {@code MatrixM3x3F} class.
    * </p>
    * <p>
    * The purpose of the class is to allow applications to allocate all storage
@@ -58,9 +58,9 @@ import com.io7m.jtensors.VectorWritable3FType;
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
    * <p>
-   * The user should allocate one <code>Context</code> value per thread, and
+   * The user should allocate one {@code Context} value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes
-   * a <code>Context</code> value will not generate garbage.
+   * a {@code Context} value will not generate garbage.
    * </p>
    *
    *
@@ -118,7 +118,7 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Elementwise add of matrices <code>m0</code> and <code>m1</code>.
+   * Elementwise add of matrices {@code m0} and {@code m1}.
    *
    * @param m0
    *          The left input matrix.
@@ -126,7 +126,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The right input matrix.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -173,14 +173,14 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
-   * returning the result in <code>m0</code>.
+   * Elementwise add of matrices {@code m0} and {@code m1},
+   * returning the result in {@code m0}.
    *
    * @param m0
    *          The left input matrix.
    * @param m1
    *          The right input matrix.
-   * @return <code>m0</code>
+   * @return {@code m0}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -204,9 +204,9 @@ import com.io7m.jtensors.VectorWritable3FType;
 
   /**
    * <p>
-   * Add the values in row <code>row_b</code> to the values in row
-   * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
-   * row <code>row_c</code> of the matrix <code>out</code>.
+   * Add the values in row {@code row_b} to the values in row
+   * {@code row_a} scaled by {@code r}, saving the resulting row in
+   * row {@code row_c} of the matrix {@code out}.
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -227,7 +227,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The scaling value.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -257,9 +257,9 @@ import com.io7m.jtensors.VectorWritable3FType;
 
   /**
    * <p>
-   * Add the values in row <code>row_b</code> to the values in row
-   * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
-   * row <code>row_c</code> of the matrix <code>m</code>.
+   * Add the values in row {@code row_b} to the values in row
+   * {@code row_a} scaled by {@code r}, saving the resulting row in
+   * row {@code row_c} of the matrix {@code m}.
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -278,7 +278,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The destination row.
    * @param r
    *          The scaling value.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -334,14 +334,14 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Copy the contents of the matrix <code>input</code> to the matrix
-   * <code>output</code>, completely replacing all elements.
+   * Copy the contents of the matrix {@code input} to the matrix
+   * {@code output}, completely replacing all elements.
    *
    * @param input
    *          The input vector.
    * @param output
    *          The output vector.
-   * @return <code>output</code>
+   * @return {@code output}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -361,7 +361,7 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Calculate the determinant of the matrix <code>m</code>.
+   * Calculate the determinant of the matrix {@code m}.
    *
    * @return The determinant.
    * @param m
@@ -398,8 +398,8 @@ import com.io7m.jtensors.VectorWritable3FType;
 
   /**
    * <p>
-   * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
+   * Exchange the row {@code row_a} and row {@code row_b} of the
+   * matrix {@code m}, saving the exchanged rows to {@code out} .
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -416,7 +416,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The second row.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -442,8 +442,8 @@ import com.io7m.jtensors.VectorWritable3FType;
 
   /**
    * <p>
-   * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>m</code> .
+   * Exchange the row {@code row_a} and row {@code row_b} of the
+   * matrix {@code m}, saving the exchanged rows to {@code m} .
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -458,7 +458,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The first row.
    * @param row_b
    *          The second row.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -528,11 +528,11 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>out</code>. The function returns <code>Some(out)</code>
-   * iff it was possible to invert the matrix, and <code>None</code>
+   * Calculate the inverse of the matrix {@code m}, saving the resulting
+   * matrix to {@code out}. The function returns {@code Some(out)}
+   * iff it was possible to invert the matrix, and {@code None}
    * otherwise. It is not possible to invert a matrix that has a determinant
-   * of <code>0</code>.
+   * of {@code 0}.
    *
    * @see PMatrixM3x3F#determinant(PMatrixReadable3x3FType)
    *
@@ -540,7 +540,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The input matrix.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -600,17 +600,17 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>m</code>. The function returns <code>Some(m)</code> iff
-   * it was possible to invert the matrix, and <code>None</code> otherwise. It
+   * Calculate the inverse of the matrix {@code m}, saving the resulting
+   * matrix to {@code m}. The function returns {@code Some(m)} iff
+   * it was possible to invert the matrix, and {@code None} otherwise. It
    * is not possible to invert a matrix that has a determinant of
-   * <code>0</code>.
+   * {@code 0}.
    *
    * @see PMatrixM3x3F#determinant(PMatrixReadable3x3FType)
    *
    * @param m
    *          The input matrix.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -627,17 +627,17 @@ import com.io7m.jtensors.VectorWritable3FType;
   /**
    * <p>
    * Calculate a rotation and translation representing a "camera" looking from
-   * the point <code>origin</code> to the point <code>target</code>.
-   * <code>target</code> must represent the "up" vector for the camera.
-   * Usually, this is simply a unit vector <code>(0, 1, 0)</code> representing
+   * the point {@code origin} to the point {@code target}.
+   * {@code target} must represent the "up" vector for the camera.
+   * Usually, this is simply a unit vector {@code (0, 1, 0)} representing
    * the Y axis.
    * </p>
    * <p>
-   * The function uses preallocated storage from <code>context</code>.
+   * The function uses preallocated storage from {@code context}.
    * </p>
    * <p>
    * The view is expressed as a rotation matrix and a translation vector,
-   * written to <code>out_matrix</code> and <code>out_translation</code>,
+   * written to {@code out_matrix} and {@code out_translation},
    * respectively.
    * </p>
    *
@@ -725,7 +725,7 @@ import com.io7m.jtensors.VectorWritable3FType;
   /**
    * <p>
    * Generate and return a matrix that represents a rotation of
-   * <code>angle</code> radians around the axis <code>axis</code>.
+   * {@code angle} radians around the axis {@code axis}.
    * </p>
    * <p>
    * The function assumes a right-handed coordinate system and therefore a
@@ -738,7 +738,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The angle in radians.
    * @param axis
    *          The axis.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -756,8 +756,8 @@ import com.io7m.jtensors.VectorWritable3FType;
 
   /**
    * <p>
-   * Generate a matrix that represents a rotation of <code>angle</code>
-   * radians around the axis <code>axis</code> and save to <code>out</code>.
+   * Generate a matrix that represents a rotation of {@code angle}
+   * radians around the axis {@code axis} and save to {@code out}.
    * </p>
    * <p>
    * The function assumes a right-handed coordinate system and therefore a
@@ -772,7 +772,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The axis.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -832,13 +832,13 @@ import com.io7m.jtensors.VectorWritable3FType;
 
   /**
    * Create a translation matrix that represents a translation by the vector
-   * <code>v</code>, writing the resulting matrix to <code>out</code>.
+   * {@code v}, writing the resulting matrix to {@code out}.
    *
    * @param v
    *          The translation vector.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -856,13 +856,13 @@ import com.io7m.jtensors.VectorWritable3FType;
 
   /**
    * Create a translation matrix that represents a translation by the vector
-   * <code>v</code>, writing the resulting matrix to <code>out</code>.
+   * {@code v}, writing the resulting matrix to {@code out}.
    *
    * @param v
    *          The translation vector.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -879,8 +879,8 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
-   * writing the result to <code>out</code>.
+   * Multiply the matrix {@code m0} with the matrix {@code m1},
+   * writing the result to {@code out}.
    *
    * @param m0
    *          The left input vector.
@@ -888,7 +888,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The right input vector.
    * @param out
    *          The output vector.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -962,8 +962,8 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
-   * writing the resulting vector to <code>out</code>.
+   * Multiply the matrix {@code m} with the vector {@code v},
+   * writing the resulting vector to {@code out}.
    *
    * @param m
    *          The input matrix.
@@ -971,7 +971,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The input vector.
    * @param out
    *          The output vector.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1002,8 +1002,8 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * @return Row <code>row</code> of the matrix <code>m</code> in the vector
-   *         <code>out</code>.
+   * @return Row {@code row} of the matrix {@code m} in the vector
+   *         {@code out}.
    * @param m
    *          The input matrix
    * @param row
@@ -1049,8 +1049,8 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Scale all elements of the matrix <code>m</code> by the scaling value
-   * <code>r</code>, saving the result in <code>out</code>.
+   * Scale all elements of the matrix {@code m} by the scaling value
+   * {@code r}, saving the result in {@code out}.
    *
    * @param m
    *          The input matrix.
@@ -1058,7 +1058,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The scaling value.
    * @param out
    *          The output matrix
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1102,14 +1102,14 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Scale all elements of the matrix <code>m</code> by the scaling value
-   * <code>r</code>, saving the result in <code>m</code>.
+   * Scale all elements of the matrix {@code m} by the scaling value
+   * {@code r}, saving the result in {@code m}.
    *
    * @param m
    *          The input matrix.
    * @param r
    *          The scaling value.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1129,8 +1129,8 @@ import com.io7m.jtensors.VectorWritable3FType;
 
   /**
    * <p>
-   * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
-   * saving the result to row <code>r</code> of <code>out</code>.
+   * Scale row {@code r} of the matrix {@code m} by {@code r},
+   * saving the result to row {@code r} of {@code out}.
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -1142,12 +1142,12 @@ import com.io7m.jtensors.VectorWritable3FType;
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 &lt;= row &lt; 3).
+   *          The index of the row {@code 0 <= row < 3}.
    * @param r
    *          The scaling value.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1169,8 +1169,8 @@ import com.io7m.jtensors.VectorWritable3FType;
 
   /**
    * <p>
-   * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
-   * saving the result to row <code>r</code> of <code>m</code>.
+   * Scale row {@code r} of the matrix {@code m} by {@code r},
+   * saving the result to row {@code r} of {@code m}.
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -1182,10 +1182,10 @@ import com.io7m.jtensors.VectorWritable3FType;
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 &lt;= row &lt; 3).
+   *          The index of the row {@code 0 <= row < 3}.
    * @param r
    *          The scaling value.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1224,8 +1224,8 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Set the value in the matrix <code>m</code> at row <code>row</code>,
-   * column <code>column</code> to <code>value</code>.
+   * Set the value in the matrix {@code m} at row {@code row},
+   * column {@code column} to {@code value}.
    *
    * @param m
    *          The input matrix
@@ -1235,7 +1235,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The column
    * @param value
    *          The value
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1253,11 +1253,11 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Set the given matrix <code>m</code> to the identity matrix.
+   * Set the given matrix {@code m} to the identity matrix.
    *
    * @param m
    *          The matrix
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1297,11 +1297,11 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Set the given matrix <code>m</code> to the zero matrix.
+   * Set the given matrix {@code m} to the zero matrix.
    *
    * @param m
    *          The matrix
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1323,7 +1323,7 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Return the trace of the matrix <code>m</code>. The trace is defined as
+   * Return the trace of the matrix {@code m}. The trace is defined as
    * the sum of the diagonal elements of the matrix.
    *
    *
@@ -1345,14 +1345,14 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Transpose the given matrix <code>m</code>, writing the resulting matrix
-   * to <code>out</code>.
+   * Transpose the given matrix {@code m}, writing the resulting matrix
+   * to {@code out}.
    *
    * @param m
    *          The input matrix.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1372,12 +1372,12 @@ import com.io7m.jtensors.VectorWritable3FType;
   }
 
   /**
-   * Transpose the given matrix <code>m</code>, writing the resulting matrix
-   * to <code>m</code>.
+   * Transpose the given matrix {@code m}, writing the resulting matrix
+   * to {@code m}.
    *
    * @param m
    *          The input matrix.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1530,7 +1530,7 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          The column
    * @param value
    *          The value
-   * @return <code>this</code>
+   * @return {@code this}
    */
 
   public PMatrixM3x3F<T0, T1> set(

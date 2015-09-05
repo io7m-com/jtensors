@@ -36,17 +36,17 @@ public interface VectorWritable4FType extends VectorWritable3FType
     VectorReadable4FType in_v);
 
   /**
-   * Set the current <code>x</code>, <code>y</code>, <code>z</code> and
-   * <code>w</code> values of the current vector.
+   * Set the current {@code x}, {@code y}, {@code z} and
+   * {@code w} values of the current vector.
    *
    * @param x
-   *          The new <code>x</code> value.
+   *          The new {@code x} value.
    * @param y
-   *          The new <code>y</code> value.
+   *          The new {@code y} value.
    * @param z
-   *          The new <code>z</code> value.
+   *          The new {@code z} value.
    * @param w
-   *          The new <code>w</code> value.
+   *          The new {@code w} value.
    */
 
   void set4F(
@@ -56,10 +56,10 @@ public interface VectorWritable4FType extends VectorWritable3FType
     float w);
 
   /**
-   * Set the current <code>w</code> value of the current vector.
+   * Set the current {@code w} value of the current vector.
    *
    * @param w
-   *          The new <code>w</code> value.
+   *          The new {@code w} value.
    */
 
   void setWF(

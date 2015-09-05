@@ -23,10 +23,10 @@ package com.io7m.jtensors;
 public interface MatrixReadable4x4DType extends MatrixReadableDType
 {
   /**
-   * Retrieve row <code>row</code>, saving the result to <code>out</code>.
+   * Retrieve row {@code row}, saving the result to {@code out}.
    * 
    * @param row
-   *          The index of the row, starting at <code>0</code>.
+   *          The index of the row, starting at {@code 0}.
    * @param out
    *          The output vector.
    * @param <V>

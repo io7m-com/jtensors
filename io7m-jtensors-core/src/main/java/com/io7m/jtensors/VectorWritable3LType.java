@@ -35,15 +35,15 @@ public interface VectorWritable3LType extends VectorWritable2LType
     VectorReadable3LType in_v);
 
   /**
-   * Set the current <code>x</code>, <code>y</code> and <code>z</code> values
+   * Set the current {@code x}, {@code y} and {@code z} values
    * of the current vector.
    *
    * @param x
-   *          The new <code>x</code> value.
+   *          The new {@code x} value.
    * @param y
-   *          The new <code>y</code> value.
+   *          The new {@code y} value.
    * @param z
-   *          The new <code>z</code> value.
+   *          The new {@code z} value.
    */
 
   void set3L(
@@ -52,10 +52,10 @@ public interface VectorWritable3LType extends VectorWritable2LType
     long z);
 
   /**
-   * Set the current <code>z</code> value of the current vector.
+   * Set the current {@code z} value of the current vector.
    *
    * @param z
-   *          The new <code>z</code> value.
+   *          The new {@code z} value.
    */
 
   void setZL(

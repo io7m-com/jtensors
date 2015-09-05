@@ -31,8 +31,8 @@ public final class OrthonormalizedI3F
   private final VectorI3F rv2;
 
   /**
-   * Orthonormalize and store the vectors <code>v0</code>, <code>v1</code>,
-   * and <code>v2</code>.
+   * Orthonormalize and store the vectors {@code v0}, {@code v1},
+   * and {@code v2}.
    * 
    * @param v0
    *          The first vector

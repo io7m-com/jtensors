@@ -54,7 +54,7 @@ import java.nio.FloatBuffer;
   /**
    * <p>
    * The Context type contains the minimum storage required for all of the
-   * functions of the <code>MatrixM4x4F</code> class.
+   * functions of the {@code MatrixM4x4F} class.
    * </p>
    * <p>
    * The purpose of the class is to allow applications to allocate all storage
@@ -63,9 +63,9 @@ import java.nio.FloatBuffer;
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
    * <p>
-   * The user should allocate one <code>Context</code> value per thread, and
+   * The user should allocate one {@code Context} value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes
-   * a <code>Context</code> value will not generate garbage.
+   * a {@code Context} value will not generate garbage.
    * </p>
    */
 
@@ -157,7 +157,7 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Elementwise add of matrices <code>m0</code> and <code>m1</code>.
+   * Elementwise add of matrices {@code m0} and {@code m1}.
    *
    * @param m0
    *          The left input matrix.
@@ -165,7 +165,7 @@ import java.nio.FloatBuffer;
    *          The right input matrix.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -229,8 +229,8 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Elementwise add of matrices <code>m0</code> and <code>m1</code>,
-   * returning the result in <code>m0</code>.
+   * Elementwise add of matrices {@code m0} and {@code m1},
+   * returning the result in {@code m0}.
    *
    * @param m0
    *          The left input matrix.
@@ -261,9 +261,9 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Add the values in row <code>row_b</code> to the values in row
-   * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
-   * row <code>row_c</code> of the matrix <code>out</code>.
+   * Add the values in row {@code row_b} to the values in row
+   * {@code row_a} scaled by {@code r}, saving the resulting row in
+   * row {@code row_c} of the matrix {@code out}.
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -284,7 +284,7 @@ import java.nio.FloatBuffer;
    *          The scaling value.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -320,9 +320,9 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Add the values in row <code>row_b</code> to the values in row
-   * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
-   * row <code>row_c</code> of the matrix <code>m</code>.
+   * Add the values in row {@code row_b} to the values in row
+   * {@code row_a} scaled by {@code r}, saving the resulting row in
+   * row {@code row_c} of the matrix {@code m}.
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -341,7 +341,7 @@ import java.nio.FloatBuffer;
    *          The destination row.
    * @param r
    *          The scaling value.
-   * @return <code>m</code>
+   * @return {@code m}
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -388,10 +388,10 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Add the values in row <code>row_b</code> to the values in row
-   * <code>row_a</code> scaled by <code>r</code>, saving the resulting row in
-   * row <code>row_c</code> of the matrix <code>out</code>. The function uses
-   * storage preallocated in <code>context</code> to avoid any new
+   * Add the values in row {@code row_b} to the values in row
+   * {@code row_a} scaled by {@code r}, saving the resulting row in
+   * row {@code row_c} of the matrix {@code out}. The function uses
+   * storage preallocated in {@code context} to avoid any new
    * allocations.
    * </p>
    * <p>
@@ -415,7 +415,7 @@ import java.nio.FloatBuffer;
    *          The scaling value.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -461,14 +461,14 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Copy the contents of the matrix <code>input</code> to the matrix
-   * <code>output</code>, completely replacing all elements.
+   * Copy the contents of the matrix {@code input} to the matrix
+   * {@code output}, completely replacing all elements.
    *
    * @param input
    *          The input matrix.
    * @param output
    *          The output matrix.
-   * @return <code>output</code>
+   * @return {@code output}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -488,7 +488,7 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Calculate the determinant of the matrix <code>m</code>.
+   * Calculate the determinant of the matrix {@code m}.
    *
    * @return The determinant.
    * @param m
@@ -559,8 +559,8 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>out</code>.
+   * Exchange the row {@code row_a} and row {@code row_b} of the
+   * matrix {@code m}, saving the exchanged rows to {@code out}.
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -577,7 +577,7 @@ import java.nio.FloatBuffer;
    *          The second row.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -607,8 +607,8 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>m</code>.
+   * Exchange the row {@code row_a} and row {@code row_b} of the
+   * matrix {@code m}, saving the exchanged rows to {@code m}.
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -623,7 +623,7 @@ import java.nio.FloatBuffer;
    *          The first row.
    * @param row_b
    *          The second row.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -648,9 +648,9 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Exchange the row <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>m</code>. The
-   * function uses storage preallocated in <code>context</code> to avoid
+   * Exchange the row {@code row_a} and row {@code row_b} of the
+   * matrix {@code m}, saving the exchanged rows to {@code m}. The
+   * function uses storage preallocated in {@code context} to avoid
    * allocating memory.
    * </p>
    * <p>
@@ -668,7 +668,7 @@ import java.nio.FloatBuffer;
    *          The first row.
    * @param row_b
    *          The second row.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -713,11 +713,11 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Exchange two rows <code>row_a</code> and row <code>row_b</code> of the
-   * matrix <code>m</code>, saving the exchanged rows to <code>out</code> .
+   * Exchange two rows {@code row_a} and row {@code row_b} of the
+   * matrix {@code m}, saving the exchanged rows to {@code out} .
    * </p>
    * <p>
-   * The function uses storage preallocated in <code>context</code> to avoid
+   * The function uses storage preallocated in {@code context} to avoid
    * allocating memory.
    * </p>
    * <p>
@@ -737,7 +737,7 @@ import java.nio.FloatBuffer;
    *          The second row.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -797,12 +797,12 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>out</code>. The function returns <code>Some(out)</code>
-   * iff it was possible to invert the matrix, and <code>None</code>
+   * Calculate the inverse of the matrix {@code m}, saving the resulting
+   * matrix to {@code out}. The function returns {@code Some(out)}
+   * iff it was possible to invert the matrix, and {@code None}
    * otherwise. It is not possible to invert a matrix that has a determinant
-   * of <code>0</code>. If the function returns <code>None</code>,
-   * <code>m</code> is untouched.
+   * of {@code 0}. If the function returns {@code None},
+   * {@code m} is untouched.
    *
    * @see PMatrixM4x4F#determinant(PMatrixReadable4x4FType)
    *
@@ -810,7 +810,7 @@ import java.nio.FloatBuffer;
    *          The input matrix.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>.
+   * @return {@code out}.
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -1173,18 +1173,18 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>m</code>. The function returns <code>Some(m)</code> iff
-   * it was possible to invert the matrix, and <code>None</code> otherwise. It
+   * Calculate the inverse of the matrix {@code m}, saving the resulting
+   * matrix to {@code m}. The function returns {@code Some(m)} iff
+   * it was possible to invert the matrix, and {@code None} otherwise. It
    * is not possible to invert a matrix that has a determinant of
-   * <code>0</code>. If the function returns <code>None</code>, <code>m</code>
+   * {@code 0}. If the function returns {@code None}, {@code m}
    * is untouched.
    *
    * @see PMatrixM4x4F#determinant(PMatrixReadable4x4FType)
    *
    * @param m
    *          The input matrix.
-   * @return <code>m</code>.
+   * @return {@code m}.
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -1200,13 +1200,13 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>m</code>. The function returns <code>Some(out)</code> iff
-   * it was possible to invert the matrix, and <code>None</code> otherwise. It
+   * Calculate the inverse of the matrix {@code m}, saving the resulting
+   * matrix to {@code m}. The function returns {@code Some(out)} iff
+   * it was possible to invert the matrix, and {@code None} otherwise. It
    * is not possible to invert a matrix that has a determinant of
-   * <code>0</code>. The function uses preallocated storage in
-   * <code>context</code> to avoid allocating memory. If the function returns
-   * <code>None</code>, <code>m</code> is untouched.
+   * {@code 0}. The function uses preallocated storage in
+   * {@code context} to avoid allocating memory. If the function returns
+   * {@code None}, {@code m} is untouched.
    *
    * @see PMatrixM4x4F#determinant(PMatrixReadable4x4FType)
    *
@@ -1214,7 +1214,7 @@ import java.nio.FloatBuffer;
    *          Preallocated storage.
    * @param m
    *          The input matrix.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1233,13 +1233,13 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Calculate the inverse of the matrix <code>m</code>, saving the resulting
-   * matrix to <code>out</code>. The function returns <code>Some(out)</code>
-   * iff it was possible to invert the matrix, and <code>None</code>
+   * Calculate the inverse of the matrix {@code m}, saving the resulting
+   * matrix to {@code out}. The function returns {@code Some(out)}
+   * iff it was possible to invert the matrix, and {@code None}
    * otherwise. It is not possible to invert a matrix that has a determinant
-   * of <code>0</code>. The function uses preallocated storage in
-   * <code>context</code> to avoid allocating memory. If the function returns
-   * <code>None</code>, <code>m</code> is untouched.
+   * of {@code 0}. The function uses preallocated storage in
+   * {@code context} to avoid allocating memory. If the function returns
+   * {@code None}, {@code m} is untouched.
    *
    * @see PMatrixM4x4F#determinant(PMatrixReadable4x4FType)
    *
@@ -1249,7 +1249,7 @@ import java.nio.FloatBuffer;
    *          The input matrix.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1267,16 +1267,16 @@ import java.nio.FloatBuffer;
   /**
    * <p>
    * Calculate a matrix representing a "camera" looking from the point
-   * <code>origin</code> to the point <code>target</code>. <code>target</code>
+   * {@code origin} to the point {@code target}. {@code target}
    * must represent the "up" vector for the camera. Usually, this is simply a
-   * unit vector <code>(0, 1, 0)</code> representing the Y axis.
+   * unit vector {@code (0, 1, 0)} representing the Y axis.
    * </p>
    * <p>
-   * The function uses preallocated storage from <code>context</code>.
+   * The function uses preallocated storage from {@code context}.
    * </p>
    * <p>
    * The view is expressed as a rotation and translation matrix, written to
-   * <code>out_matrix</code>.
+   * {@code out_matrix}.
    * </p>
    *
    * @param context
@@ -1373,7 +1373,7 @@ import java.nio.FloatBuffer;
   /**
    * <p>
    * Generate and return a matrix that represents a rotation of
-   * <code>angle</code> radians around the axis <code>axis</code>.
+   * {@code angle} radians around the axis {@code axis}.
    * </p>
    * <p>
    * The function assumes a right-handed coordinate system and therefore a
@@ -1403,8 +1403,8 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Generate a matrix that represents a rotation of <code>angle</code>
-   * radians around the axis <code>axis</code> and save to <code>out</code>.
+   * Generate a matrix that represents a rotation of {@code angle}
+   * radians around the axis {@code axis} and save to {@code out}.
    * </p>
    * <p>
    * The function assumes a right-handed coordinate system and therefore a
@@ -1418,7 +1418,7 @@ import java.nio.FloatBuffer;
    *          The axis.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1494,7 +1494,7 @@ import java.nio.FloatBuffer;
 
   /**
    * Generate and return a matrix that represents a translation of
-   * <code>(v.x, v.y)</code> from the origin.
+   * {@code (v.x, v.y)} from the origin.
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -1502,7 +1502,7 @@ import java.nio.FloatBuffer;
    *          A phantom type parameter.
    * @param v
    *          The translation vector.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static <T0, T1> PMatrixM4x4F<T0, T1> makeTranslation2F(
@@ -1515,7 +1515,7 @@ import java.nio.FloatBuffer;
 
   /**
    * Generate a matrix that represents a translation of
-   * <code>(v.x, v.y)</code> from the origin, and save to <code>out</code>.
+   * {@code (v.x, v.y)} from the origin, and save to {@code out}.
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -1525,7 +1525,7 @@ import java.nio.FloatBuffer;
    *          The translation vector.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static <T0, T1> PMatrixM4x4F<T0, T1> makeTranslation2FInto(
@@ -1556,7 +1556,7 @@ import java.nio.FloatBuffer;
 
   /**
    * Generate and return a matrix that represents a translation of
-   * <code>(v.x, v.y)</code> from the origin.
+   * {@code (v.x, v.y)} from the origin.
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -1564,7 +1564,7 @@ import java.nio.FloatBuffer;
    *          A phantom type parameter.
    * @param v
    *          The translation vector.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static <T0, T1> PMatrixM4x4F<T0, T1> makeTranslation2I(
@@ -1577,7 +1577,7 @@ import java.nio.FloatBuffer;
 
   /**
    * Generate a matrix that represents a translation of
-   * <code>(v.x, v.y)</code> from the origin, and save to <code>out</code>.
+   * {@code (v.x, v.y)} from the origin, and save to {@code out}.
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -1587,7 +1587,7 @@ import java.nio.FloatBuffer;
    *          The translation vector.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    */
 
   public static <T0, T1> PMatrixM4x4F<T0, T1> makeTranslation2IInto(
@@ -1618,11 +1618,11 @@ import java.nio.FloatBuffer;
 
   /**
    * Generate and return a matrix that represents a translation of
-   * <code>(v.x, v.y, v.z)</code> from the origin.
+   * {@code (v.x, v.y, v.z)} from the origin.
    *
    * @param v
    *          The translation vector.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1639,14 +1639,14 @@ import java.nio.FloatBuffer;
 
   /**
    * Generate a matrix that represents a translation of
-   * <code>(v.x, v.y, v.z)</code> from the origin, and save to
-   * <code>out</code>.
+   * {@code (v.x, v.y, v.z)} from the origin, and save to
+   * {@code out}.
    *
    * @param v
    *          The translation vector.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1681,11 +1681,11 @@ import java.nio.FloatBuffer;
 
   /**
    * Generate and return a matrix that represents a translation of
-   * <code>(v.x, v.y, v.z)</code> from the origin.
+   * {@code (v.x, v.y, v.z)} from the origin.
    *
    * @param v
    *          The translation vector.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1702,14 +1702,14 @@ import java.nio.FloatBuffer;
 
   /**
    * Generate a matrix that represents a translation of
-   * <code>(v.x, v.y, v.z)</code> from the origin, and save to
-   * <code>out</code>.
+   * {@code (v.x, v.y, v.z)} from the origin, and save to
+   * {@code out}.
    *
    * @param v
    *          The translation vector.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -1743,8 +1743,8 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Multiply the matrix <code>m0</code> with the matrix <code>m1</code>,
-   * writing the result to <code>out</code>.
+   * Multiply the matrix {@code m0} with the matrix {@code m1},
+   * writing the result to {@code out}.
    *
    * @param m0
    *          The left input matrix.
@@ -1752,7 +1752,7 @@ import java.nio.FloatBuffer;
    *          The right input matrix.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -1886,8 +1886,8 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
-   * writing the resulting vector to <code>out</code>.
+   * Multiply the matrix {@code m} with the vector {@code v},
+   * writing the resulting vector to {@code out}.
    *
    * @param m
    *          The input matrix.
@@ -1895,7 +1895,7 @@ import java.nio.FloatBuffer;
    *          The input vector.
    * @param out
    *          The output vector.
-   * @return <code>out</code>
+   * @return {@code out}
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -1943,9 +1943,9 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Multiply the matrix <code>m</code> with the vector <code>v</code>,
-   * writing the resulting vector to <code>out</code>. The function uses
-   * preallocated storage in <code>context</code> to avoid allocating memory.
+   * Multiply the matrix {@code m} with the vector {@code v},
+   * writing the resulting vector to {@code out}. The function uses
+   * preallocated storage in {@code context} to avoid allocating memory.
    *
    * @param context
    *          Preallocated storage.
@@ -1955,7 +1955,7 @@ import java.nio.FloatBuffer;
    *          The input vector.
    * @param out
    *          The output vector.
-   * @return <code>out</code>
+   * @return {@code out}
    *
    * @param <T0>
    *          A phantom type parameter.
@@ -1983,8 +1983,8 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Return row <code>row</code> of the matrix <code>m</code> in the vector
-   * <code>out</code>.
+   * Return row {@code row} of the matrix {@code m} in the vector
+   * {@code out}.
    *
    * @param row
    *          The row
@@ -2033,8 +2033,8 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Scale all elements of the matrix <code>m</code> by the scaling value
-   * <code>r</code>, saving the result in <code>out</code>.
+   * Scale all elements of the matrix {@code m} by the scaling value
+   * {@code r}, saving the result in {@code out}.
    *
    * @param out
    *          The output matrix.
@@ -2042,7 +2042,7 @@ import java.nio.FloatBuffer;
    *          The input matrix.
    * @param r
    *          The scaling value.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -2102,14 +2102,14 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Scale all elements of the matrix <code>m</code> by the scaling value
-   * <code>r</code>, saving the result in <code>m</code>.
+   * Scale all elements of the matrix {@code m} by the scaling value
+   * {@code r}, saving the result in {@code m}.
    *
    * @param m
    *          The input matrix.
    * @param r
    *          The scaling value.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -2129,8 +2129,8 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Scale row <code>r</code> of the matrix <code>m</code> by <code>r</code>,
-   * saving the result to row <code>r</code> of <code>out</code>.
+   * Scale row {@code r} of the matrix {@code m} by {@code r},
+   * saving the result to row {@code r} of {@code out}.
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -2142,12 +2142,12 @@ import java.nio.FloatBuffer;
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 &lt;= row &lt; 4).
+   *          The index of the row {@code 0 <= row < 4}.
    * @param r
    *          The scaling value.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -2175,8 +2175,8 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Scale row <code>row</code> of the matrix <code>m</code> by <code>r</code>
-   * , saving the result to row <code>r</code> of <code>m</code>.
+   * Scale row {@code row} of the matrix {@code m} by {@code r}
+   * , saving the result to row {@code r} of {@code m}.
    * </p>
    * <p>
    * This is one of the three "elementary" operations defined on matrices. See
@@ -2188,10 +2188,10 @@ import java.nio.FloatBuffer;
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 &lt;= row &lt; 4).
+   *          The index of the row {@code 0 <= row < 4}.
    * @param r
    *          The scaling value.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -2218,9 +2218,9 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Scale row <code>row</code> of the matrix <code>m</code> by <code>r</code>
-   * , saving the result to row <code>r</code> of <code>m</code>. The function
-   * uses preallocated storage in <code>context</code> to avoid allocating
+   * Scale row {@code row} of the matrix {@code m} by {@code r}
+   * , saving the result to row {@code r} of {@code m}. The function
+   * uses preallocated storage in {@code context} to avoid allocating
    * memory.
    * </p>
    * <p>
@@ -2235,10 +2235,10 @@ import java.nio.FloatBuffer;
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 &lt;= row &lt; 4).
+   *          The index of the row {@code 0 <= row < 4}.
    * @param r
    *          The scaling value.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -2281,9 +2281,9 @@ import java.nio.FloatBuffer;
 
   /**
    * <p>
-   * Scale row <code>row</code> of the matrix <code>m</code> by <code>r</code>
-   * , saving the result to row <code>r</code> of <code>out</code>. The
-   * function uses preallocated storage in <code>context</code> to avoid
+   * Scale row {@code row} of the matrix {@code m} by {@code r}
+   * , saving the result to row {@code r} of {@code out}. The
+   * function uses preallocated storage in {@code context} to avoid
    * allocating memory.
    * </p>
    * <p>
@@ -2298,12 +2298,12 @@ import java.nio.FloatBuffer;
    * @param m
    *          The input matrix.
    * @param row
-   *          The index of the row (0 &lt;= row &lt; 4).
+   *          The index of the row {@code 0 <= row < 4}.
    * @param r
    *          The scaling value.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -2330,10 +2330,10 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Set the value in the matrix <code>m</code> at row <code>row</code>,
-   * column <code>column</code> to <code>value</code>.
+   * Set the value in the matrix {@code m} at row {@code row},
+   * column {@code column} to {@code value}.
    *
-   * @return <code>m</code>
+   * @return {@code m}
    * @param m
    *          The input matrix
    * @param row
@@ -2359,11 +2359,11 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Set the given matrix <code>m</code> to the identity matrix.
+   * Set the given matrix {@code m} to the identity matrix.
    *
    * @param m
    *          The input matrix
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -2404,11 +2404,11 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Set the given matrix <code>m</code> to the zero matrix.
+   * Set the given matrix {@code m} to the zero matrix.
    *
    * @param m
    *          The matrix
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -2430,7 +2430,7 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Return the trace of the matrix <code>m</code>. The trace is defined as
+   * Return the trace of the matrix {@code m}. The trace is defined as
    * the sum of the diagonal elements of the matrix.
    *
    * @param m
@@ -2452,14 +2452,14 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Transpose the given matrix <code>m</code>, writing the resulting matrix
-   * to <code>out</code>.
+   * Transpose the given matrix {@code m}, writing the resulting matrix
+   * to {@code out}.
    *
    * @param m
    *          The input matrix.
    * @param out
    *          The output matrix.
-   * @return <code>out</code>
+   * @return {@code out}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -2479,12 +2479,12 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Transpose the given matrix <code>m</code>, writing the resulting matrix
-   * to <code>m</code>.
+   * Transpose the given matrix {@code m}, writing the resulting matrix
+   * to {@code m}.
    *
    * @param m
    *          The input matrix.
-   * @return <code>m</code>
+   * @return {@code m}
    * @param <T0>
    *          A phantom type parameter.
    * @param <T1>
@@ -2639,7 +2639,7 @@ import java.nio.FloatBuffer;
    *          The column
    * @param value
    *          The value
-   * @return <code>this</code>
+   * @return {@code this}
    */
 
   public PMatrixM4x4F<T0, T1> set(
@@ -2660,8 +2660,8 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Set the value at row <code>row</code> and <code>column</code> to
-   * <code>value</code> without bounds checking.
+   * Set the value at row {@code row} and {@code column} to
+   * {@code value} without bounds checking.
    *
    * This function is only accessible by code in the same package as this.
    */

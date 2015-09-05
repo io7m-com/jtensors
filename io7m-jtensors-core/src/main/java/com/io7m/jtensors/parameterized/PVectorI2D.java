@@ -40,12 +40,12 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   private final static PVectorI2D<?> ZERO = new PVectorI2D<Float>(0.0, 0.0);
 
   /**
-   * Calculate the absolute value of the vector <code>v</code>.
+   * Calculate the absolute value of the vector {@code v}.
    *
    * @param v
    *          The input vector
    *
-   * @return <code>(abs v.x, abs v.y)</code>
+   * @return {@code (abs v.x, abs v.y)}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -57,15 +57,15 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
+   * @return {@code (v0.x + v1.x, v0.y + v1.y)}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -78,8 +78,8 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}.
    *
    * @param v0
    *          The left input vector
@@ -88,7 +88,7 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
    * @param r
    *          The scaling value
    *
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -102,8 +102,8 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
-   * are equal to within the degree of error given in <code>context</code>.
+   * Determine whether or not the vectors {@code qa} and {@code qb}
+   * are equal to within the degree of error given in {@code context}.
    *
    * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
    *
@@ -114,7 +114,7 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
    * @param qb
    *          The right input vector
    * @since 7.0.0
-   * @return <code>true</code> iff the vectors are almost equal.
+   * @return {@code true} iff the vectors are almost equal.
    * @param <T>
    *          A phantom type parameter.
    */
@@ -132,8 +132,8 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Calculate the angle between the vectors <code>v0</code> and
-   * <code>v1</code> in radians.
+   * Calculate the angle between the vectors {@code v0} and
+   * {@code v1} in radians.
    *
    * @param v0
    *          The left input vector
@@ -159,9 +159,9 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum
-   * .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum
+   * .. maximum]} inclusive.
    *
    * @param v
    *          The input vector
@@ -170,8 +170,8 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>.
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         and at least {@code minimum}.
    * @param <T>
    *          A phantom type parameter.
    */
@@ -187,9 +187,9 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum} and
+   * {@code maximum}.
    *
    * @param v
    *          The input vector
@@ -198,8 +198,8 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y,
-   *         minimum.y), maximum.y))</code>
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y,
+   *         minimum.y), maximum.y))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -217,15 +217,15 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [-Infinity .. maximum]} inclusive.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -240,15 +240,15 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code maximum}.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -263,9 +263,9 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum
-   * .. Infinity]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum
+   * .. Infinity]} inclusive.
    *
    * @param v
    *          The input vector
@@ -273,7 +273,7 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
    *          The minimum allowed value
    *
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>
+   *         {@code minimum}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -288,16 +288,16 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum}.
    *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
-   *         minimum.z))</code>
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
+   *         minimum.z))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -312,8 +312,8 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Calculate the distance between the two vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the distance between the two vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -333,8 +333,8 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Calculate the scalar product of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the scalar product of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -356,15 +356,15 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
-   * amount <code>alpha</code>.
+   * Linearly interpolate between {@code v0} and {@code v1} by the
+   * amount {@code alpha}.
    *
-   * The <code>alpha</code> parameter controls the degree of interpolation,
+   * The {@code alpha} parameter controls the degree of interpolation,
    * such that:
    *
    * <ul>
-   * <li><code>interpolateLinear(v0, v1, 0.0) = v0</code></li>
-   * <li><code>interpolateLinear(v0, v1, 1.0) = v1</code></li>
+   * <li>{@code interpolateLinear(v0, v1, 0.0) = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0) = v1}</li>
    * </ul>
    *
    * @param v0
@@ -372,10 +372,10 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
    * @param v1
    *          The right input vector
    * @param alpha
-   *          The interpolation value, between <code>0.0</code> and
-   *          <code>1.0</code>
+   *          The interpolation value, between {@code 0.0} and
+   *          {@code 1.0}
    *
-   * @return <code>(1 - alpha) * v0 + alpha * v1</code>
+   * @return {@code (1 - alpha) * v0 + alpha * v1}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -391,9 +391,9 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Calculate the magnitude of the vector <code>v</code>.
+   * Calculate the magnitude of the vector {@code v}.
    *
-   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
    * @param v
    *          The input vector
@@ -410,7 +410,7 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Calculate the squared magnitude of the vector <code>v</code>.
+   * Calculate the squared magnitude of the vector {@code v}.
    *
    * @param v
    *          The input vector
@@ -427,14 +427,14 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Normalize the vector <code>v</code>, preserving its direction but
+   * Normalize the vector {@code v}, preserving its direction but
    * reducing it to unit length.
    *
    * @param v
    *          The input vector
    *
-   * @return A vector with the same orientation as <code>v</code> but with
-   *         magnitude equal to <code>1.0</code>
+   * @return A vector with the same orientation as {@code v} but with
+   *         magnitude equal to {@code 1.0}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -453,7 +453,7 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
 
   /**
    * <p>
-   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * Orthonormalize and return the vectors {@code v0} and {@code v1}
    * .
    * </p>
    * <p>
@@ -464,7 +464,7 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
    *          The left vector
    * @param v1
    *          The right vector
-   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * @return A pair {@code (v0, v1)}, orthonormalized.
    *
    * @since 7.0.0
    * @param <T>
@@ -484,14 +484,14 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Calculate the projection of the vector <code>p</code> onto the vector
-   * <code>q</code>.
+   * Calculate the projection of the vector {@code p} onto the vector
+   * {@code q}.
    *
    * @param p
    *          The left vector
    * @param q
    *          The right vector
-   * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
+   * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -507,14 +507,14 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>.
+   * Scale the vector {@code v} by the scalar {@code r}.
    *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    *
-   * @return <code>(v.x * r, v.y * r)</code>
+   * @return {@code (v.x * r, v.y * r)}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -527,14 +527,14 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
+   * @return {@code (v0.x - v1.x, v0.y - v1.y)}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -559,20 +559,20 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
   }
 
   /**
-   * The <code>x</code> value.
+   * The {@code x} value.
    */
 
   private final double x;
 
   /**
-   * The <code>y</code> value.
+   * The {@code y} value.
    */
 
   private final double y;
 
   /**
-   * Default constructor, initializing the vector with values <code>[0.0, 0.0,
-   * 0.0]</code>.
+   * Default constructor, initializing the vector with values {@code [0.0, 0.0,
+   * 0.0]}.
    */
 
   public PVectorI2D()
@@ -585,9 +585,9 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
    * Construct a vector initialized with the given values.
    *
    * @param in_x
-   *          The <code>x</code> value
+   *          The {@code x} value
    * @param in_y
-   *          The <code>y</code> value
+   *          The {@code y} value
    */
 
   public PVectorI2D(
@@ -600,7 +600,7 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
 
   /**
    * Construct a vector initialized with the values given in the vector
-   * <code>v</code>.
+   * {@code v}.
    *
    * @param in_v
    *          The input vector

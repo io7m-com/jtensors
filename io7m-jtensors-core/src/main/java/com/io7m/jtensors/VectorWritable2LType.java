@@ -35,13 +35,13 @@ public interface VectorWritable2LType
     VectorReadable2LType in_v);
 
   /**
-   * Set the current <code>x</code> and <code>y</code> values of the current
+   * Set the current {@code x} and {@code y} values of the current
    * vector.
    *
    * @param x
-   *          The new <code>x</code> value.
+   *          The new {@code x} value.
    * @param y
-   *          The new <code>y</code> value.
+   *          The new {@code y} value.
    */
 
   void set2L(
@@ -49,20 +49,20 @@ public interface VectorWritable2LType
     long y);
 
   /**
-   * Set the current <code>x</code> value of the current vector.
+   * Set the current {@code x} value of the current vector.
    *
    * @param x
-   *          The new <code>x</code> value.
+   *          The new {@code x} value.
    */
 
   void setXL(
     long x);
 
   /**
-   * Set the current <code>y</code> value of the current vector.
+   * Set the current {@code y} value of the current vector.
    *
    * @param y
-   *          The new <code>y</code> value.
+   *          The new {@code y} value.
    */
 
   void setYL(

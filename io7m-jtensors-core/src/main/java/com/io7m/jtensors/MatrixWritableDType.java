@@ -23,8 +23,8 @@ package com.io7m.jtensors;
 public interface MatrixWritableDType
 {
   /**
-   * Set the value from the matrix at row <code>row</code>, column
-   * <code>column</code> to <code>value</code>.
+   * Set the value from the matrix at row {@code row}, column
+   * {@code column} to {@code value}.
    *
    * @param row
    *          The row

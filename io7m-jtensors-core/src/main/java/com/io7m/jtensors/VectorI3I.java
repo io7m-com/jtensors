@@ -39,12 +39,12 @@ public final class VectorI3I implements VectorReadable3IType
   public static final VectorI3I ZERO = new VectorI3I(0, 0, 0);
 
   /**
-   * Calculate the absolute values of the elements in vector <code>v</code>.
+   * Calculate the absolute values of the elements in vector {@code v}.
    *
    * @param v
    *          The input vector
    *
-   * @return <code>(abs v.x, abs v.y, abs v.z)</code>
+   * @return {@code (abs v.x, abs v.y, abs v.z)}
    *
    * @since 5.0.0
    * @throws ArithmeticException
@@ -62,15 +62,15 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
+   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -88,8 +88,8 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}.
    *
    * @param v0
    *          The left input vector
@@ -98,7 +98,7 @@ public final class VectorI3I implements VectorReadable3IType
    * @param r
    *          The scaling value
    *
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -120,8 +120,8 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. maximum]} inclusive.
    *
    * @param v
    *          The input vector
@@ -130,8 +130,8 @@ public final class VectorI3I implements VectorReadable3IType
    * @param maximum
    *          The maximum allowed value
    * @since 5.0.0
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         and at least {@code minimum}
    */
 
   public static VectorI3I clamp(
@@ -146,9 +146,9 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum} and
+   * {@code maximum}.
    *
    * @param v
    *          The input vector
@@ -157,7 +157,7 @@ public final class VectorI3I implements VectorReadable3IType
    * @param maximum
    *          The vector containing the maximum acceptable values
    * @since 5.0.0
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))}
    */
 
   public static VectorI3I clampByVector(
@@ -175,15 +175,15 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [-Infinity .. maximum]} inclusive.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
    * @since 5.0.0
-   * @return A vector with both elements equal to at most <code>maximum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
    */
 
   public static VectorI3I clampMaximum(
@@ -197,15 +197,15 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code maximum}.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
    * @since 5.0.0
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))}
    */
 
   public static VectorI3I clampMaximumByVector(
@@ -219,8 +219,8 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. Infinity]} inclusive.
    *
    * @param v
    *          The input vector
@@ -228,7 +228,7 @@ public final class VectorI3I implements VectorReadable3IType
    *          The minimum allowed value
    * @since 5.0.0
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>
+   *         {@code minimum}
    */
 
   public static VectorI3I clampMinimum(
@@ -242,8 +242,8 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum}.
    *
    * @param v
    *          The input vector
@@ -251,7 +251,7 @@ public final class VectorI3I implements VectorReadable3IType
    *          The vector containing the minimum acceptable values
    * @since 5.0.0
    *
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))}
    */
 
   public static VectorI3I clampMinimumByVector(
@@ -265,8 +265,8 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Calculate the distance between the two vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the distance between the two vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -289,8 +289,8 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Calculate the scalar product of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the scalar product of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -316,10 +316,10 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
-   * amount <code>alpha</code>.
+   * Linearly interpolate between {@code v0} and {@code v1} by the
+   * amount {@code alpha}.
    *
-   * The <code>alpha</code> parameter controls the degree of interpolation,
+   * The {@code alpha} parameter controls the degree of interpolation,
    * such that:
    *
    * <ul>
@@ -332,14 +332,14 @@ public final class VectorI3I implements VectorReadable3IType
    * @param v1
    *          The right input vector.
    * @param alpha
-   *          The interpolation value, between <code>0.0</code> and
-   *          <code>1.0</code>.
+   *          The interpolation value, between {@code 0.0} and
+   *          {@code 1.0}.
    *
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer
    *           overflow.
-   * @return <code>(1 - alpha) * v0 + alpha * v1</code>
+   * @return {@code (1 - alpha) * v0 + alpha * v1}
    */
 
   public static VectorI3I interpolateLinear(
@@ -354,9 +354,9 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Calculate the magnitude of the vector <code>v</code>.
+   * Calculate the magnitude of the vector {@code v}.
    *
-   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
    * @param v
    *          The input vector
@@ -376,7 +376,7 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Calculate the squared magnitude of the vector <code>v</code>.
+   * Calculate the squared magnitude of the vector {@code v}.
    *
    * @param v
    *          The input vector
@@ -396,10 +396,10 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Calculate the projection of the vector <code>p</code> onto the vector
-   * <code>q</code>.
+   * Calculate the projection of the vector {@code p} onto the vector
+   * {@code q}.
    *
-   * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
+   * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    * @since 5.0.0
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -421,15 +421,15 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
-   * result to <code>out</code>.
+   * Scale the vector {@code v} by the scalar {@code r}, saving the
+   * result to {@code out}.
    *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    *
-   * @return <code>(v.x * r, v.y * r, v.z * r)</code>
+   * @return {@code (v.x * r, v.y * r, v.z * r)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -447,14 +447,14 @@ public final class VectorI3I implements VectorReadable3IType
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
+   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -477,7 +477,7 @@ public final class VectorI3I implements VectorReadable3IType
 
   /**
    * Default constructor, initializing the vector with values
-   * <code>[0, 0, 0]</code>.
+   * {@code [0, 0, 0]}.
    */
 
   public VectorI3I()
@@ -491,11 +491,11 @@ public final class VectorI3I implements VectorReadable3IType
    * Construct a vector initialized with the given values.
    *
    * @param in_x
-   *          The <code>x</code> value
+   *          The {@code x} value
    * @param in_y
-   *          The <code>y</code> value
+   *          The {@code y} value
    * @param in_z
-   *          The <code>z</code> value
+   *          The {@code z} value
    */
 
   public VectorI3I(
@@ -510,7 +510,7 @@ public final class VectorI3I implements VectorReadable3IType
 
   /**
    * Construct a vector initialized with the values given in the vector
-   * <code>in_v</code>.
+   * {@code in_v}.
    *
    * @param in_v
    *          The source vector

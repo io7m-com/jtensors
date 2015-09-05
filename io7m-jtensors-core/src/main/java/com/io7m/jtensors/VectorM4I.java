@@ -33,15 +33,15 @@ import com.io7m.jnull.Nullable;
 public final class VectorM4I implements VectorReadable4IType, VectorWritable4IType
 {
   /**
-   * Calculate the absolute values of the elements in vector <code>v</code>,
-   * saving the result to <code>out</code>.
+   * Calculate the absolute values of the elements in vector {@code v},
+   * saving the result to {@code out}.
    *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    *
-   * @return <code>(abs v.x, abs v.y, abs v.z, abs.w)</code>
+   * @return {@code (abs v.x, abs v.y, abs v.z, abs.w)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -64,13 +64,13 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Calculate the absolute values of the elements in vector <code>v</code>,
-   * saving the result to <code>v</code>.
+   * Calculate the absolute values of the elements in vector {@code v},
+   * saving the result to {@code v}.
    *
    * @param v
    *          The input vector
    *
-   * @return <code>(abs v.x, abs v.y, abs v.z, abs.w)</code>
+   * @return {@code (abs v.x, abs v.y, abs v.z, abs.w)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -84,8 +84,8 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>, saving the result to <code>out</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and
+   * {@code v1}, saving the result to {@code out}.
    *
    * @param v0
    *          The left input vector
@@ -94,7 +94,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param out
    *          The output vector
    *
-   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
+   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -118,15 +118,15 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>, saving the result to <code>v0</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and
+   * {@code v1}, saving the result to {@code v0}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
+   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -141,9 +141,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>, saving the
-   * result to <code>out</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}, saving the
+   * result to {@code out}.
    *
    * @param v0
    *          The left input vector
@@ -154,7 +154,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param r
    *          The scaling value
    *
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -183,9 +183,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>, saving the
-   * result to <code>v0</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}, saving the
+   * result to {@code v0}.
    *
    * @param v0
    *          The left input vector
@@ -194,7 +194,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param r
    *          The scaling value
    *
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -210,9 +210,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive, saving the result to
-   * <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. maximum]} inclusive, saving the result to
+   * {@code out}.
    *
    * @param v
    *          The input vector
@@ -223,8 +223,8 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param out
    *          The output vector
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         and at least {@code minimum}
    */
 
   public static VectorM4I clamp(
@@ -245,9 +245,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>, saving the result to <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum} and
+   * {@code maximum}, saving the result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -258,7 +258,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param out
    *          The output vector
    *
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))}
    */
 
   public static VectorM4I clampByVector(
@@ -283,9 +283,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>, saving the result to <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum} and
+   * {@code maximum}, saving the result to {@code v}.
    *
    * @param v
    *          The input vector
@@ -294,7 +294,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))}
    */
 
   public static VectorM4I clampByVectorInPlace(
@@ -306,9 +306,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive, saving the result to
-   * <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. maximum]} inclusive, saving the result to
+   * {@code v}.
    *
    * @param v
    *          The input vector
@@ -317,8 +317,8 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>, in <code>v</code>
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         and at least {@code minimum}, in {@code v}
    */
 
   public static VectorM4I clampInPlace(
@@ -330,9 +330,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
-   * <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [-Infinity .. maximum]} inclusive, saving the result to
+   * {@code out}.
    *
    * @param v
    *          The input vector
@@ -341,7 +341,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
    */
 
   public static VectorM4I clampMaximum(
@@ -361,9 +361,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>, saving the
-   * result to <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code maximum}, saving the
+   * result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -372,7 +372,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param out
    *          The output vector
    *
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))}
    */
 
   public static VectorM4I clampMaximumByVector(
@@ -392,16 +392,16 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>, saving the
-   * result to <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code maximum}, saving the
+   * result to {@code v}.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))}
    */
 
   public static VectorM4I clampMaximumByVectorInPlace(
@@ -412,17 +412,17 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
-   * <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [-Infinity .. maximum]} inclusive, saving the result to
+   * {@code v}.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         , in <code>v</code>
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         , in {@code v}
    */
 
   public static VectorM4I clampMaximumInPlace(
@@ -433,9 +433,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive, saving the result to
-   * <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. Infinity]} inclusive, saving the result to
+   * {@code out}.
    *
    * @param v
    *          The input vector
@@ -445,7 +445,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    *          The minimum allowed value
    *
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>
+   *         {@code minimum}
    */
 
   public static VectorM4I clampMinimum(
@@ -465,9 +465,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>, saving the
-   * result to <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum}, saving the
+   * result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -476,7 +476,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param minimum
    *          The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))</code>
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))}
    */
 
   public static VectorM4I clampMinimumByVector(
@@ -496,17 +496,17 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>, saving the
-   * result to <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum}, saving the
+   * result to {@code v}.
    *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))</code>
-   *         , in <code>v</code>
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))}
+   *         , in {@code v}
    */
 
   public static VectorM4I clampMinimumByVectorInPlace(
@@ -517,9 +517,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive, saving the result to
-   * <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. Infinity]} inclusive, saving the result to
+   * {@code v}.
    *
    * @param v
    *          The input vector
@@ -527,7 +527,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    *          The minimum allowed value
    *
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>, in <code>v</code>.
+   *         {@code minimum}, in {@code v}.
    */
 
   public static VectorM4I clampMinimumInPlace(
@@ -538,8 +538,8 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Copy all elements of the vector <code>input</code> to the vector
-   * <code>output</code>.
+   * Copy all elements of the vector {@code input} to the vector
+   * {@code output}.
    *
    * @param <T>
    *          The specific type of vector
@@ -560,8 +560,8 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Calculate the distance between the two vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the distance between the two vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -584,8 +584,8 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Calculate the scalar product of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the scalar product of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -611,10 +611,10 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
-   * amount <code>alpha</code>, saving the result to <code>r</code>.
+   * Linearly interpolate between {@code v0} and {@code v1} by the
+   * amount {@code alpha}, saving the result to {@code r}.
    *
-   * The <code>alpha</code> parameter controls the degree of interpolation,
+   * The {@code alpha} parameter controls the degree of interpolation,
    * such that:
    *
    * <ul>
@@ -627,12 +627,12 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param v1
    *          The right input vector.
    * @param alpha
-   *          The interpolation value, between <code>0.0</code> and
-   *          <code>1.0</code>.
+   *          The interpolation value, between {@code 0.0} and
+   *          {@code 1.0}.
    * @param r
    *          The result vector.
    *
-   * @return <code>r</code>
+   * @return {@code r}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -655,9 +655,9 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Calculate the magnitude of the vector <code>v</code>.
+   * Calculate the magnitude of the vector {@code v}.
    *
-   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
    * @param v
    *          The input vector
@@ -676,7 +676,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Calculate the squared magnitude of the vector <code>v</code>.
+   * Calculate the squared magnitude of the vector {@code v}.
    *
    * @param v
    *          The input vector
@@ -695,13 +695,13 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Calculate the projection of the vector <code>p</code> onto the vector
-   * <code>q</code>, saving the result in <code>r</code>.
+   * Calculate the projection of the vector {@code p} onto the vector
+   * {@code q}, saving the result in {@code r}.
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    *
-   * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
+   * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    * @param p
    *          The left vector
    * @param q
@@ -724,8 +724,8 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
-   * result to <code>out</code>.
+   * Scale the vector {@code v} by the scalar {@code r}, saving the
+   * result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -734,7 +734,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param out
    *          The output vector
    *
-   * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>
+   * @return {@code (v.x * r, v.y * r, v.z * r, v.w * r)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -758,15 +758,15 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
-   * result to <code>v</code>.
+   * Scale the vector {@code v} by the scalar {@code r}, saving the
+   * result to {@code v}.
    *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    *
-   * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>
+   * @return {@code (v.x * r, v.y * r, v.z * r, v.w * r)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -781,8 +781,8 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
-   * saving the result to <code>out</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0},
+   * saving the result to {@code out}.
    *
    * @param v0
    *          The left input vector
@@ -791,7 +791,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * @param out
    *          The output vector
    *
-   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)</code>
+   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -815,15 +815,15 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
-   * saving the result to <code>v0</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0},
+   * saving the result to {@code v0}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)</code>
+   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -844,7 +844,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
 
   /**
    * Default constructor, initializing the vector with values
-   * <code>[0, 0, 0, 1]</code>.
+   * {@code [0, 0, 0, 1]}.
    */
 
   public VectorM4I()
@@ -856,13 +856,13 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
    * Construct a vector initialized with the given values.
    *
    * @param in_x
-   *          The <code>x</code> value
+   *          The {@code x} value
    * @param in_y
-   *          The <code>y</code> value
+   *          The {@code y} value
    * @param in_z
-   *          The <code>z</code> value
+   *          The {@code z} value
    * @param in_w
-   *          The <code>w</code> value
+   *          The {@code w} value
    */
 
   public VectorM4I(
@@ -879,7 +879,7 @@ public final class VectorM4I implements VectorReadable4IType, VectorWritable4ITy
 
   /**
    * Construct a vector initialized with the values given in the vector
-   * <code>v</code>.
+   * {@code v}.
    *
    * @param in_v
    *          The source vector

@@ -41,12 +41,12 @@ public final class VectorI3D implements VectorReadable3DType
   public static final VectorI3D ZERO = new VectorI3D(0.0, 0.0, 0.0);
 
   /**
-   * Calculate the absolute value of the vector <code>v</code>.
+   * Calculate the absolute value of the vector {@code v}.
    *
    * @param v
    *          The input vector
    *
-   * @return <code>(abs v.x, abs v.y, abs v.z)</code>
+   * @return {@code (abs v.x, abs v.y, abs v.z)}
    */
 
   public static VectorI3D absolute(
@@ -57,15 +57,15 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
+   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)}
    */
 
   public static VectorI3D add(
@@ -79,8 +79,8 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}.
    *
    * @param v0
    *          The left input vector
@@ -89,8 +89,8 @@ public final class VectorI3D implements VectorReadable3DType
    * @param r
    *          The scaling value
    *
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z *
-   *         r))</code>
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z *
+   *         r))}
    */
 
   public static VectorI3D addScaled(
@@ -102,8 +102,8 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
-   * are equal to within the degree of error given in <code>context</code>.
+   * Determine whether or not the vectors {@code qa} and {@code qb}
+   * are equal to within the degree of error given in {@code context}.
    *
    * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
    *
@@ -114,7 +114,7 @@ public final class VectorI3D implements VectorReadable3DType
    * @param qb
    *          The right input vector
    * @since 5.0.0
-   * @return <code>true</code> iff the vectors are almost equal.
+   * @return {@code true} iff the vectors are almost equal.
    */
 
   public static boolean almostEqual(
@@ -132,9 +132,9 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum
-   * .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum
+   * .. maximum]} inclusive.
    *
    * @param v
    *          The input vector
@@ -143,8 +143,8 @@ public final class VectorI3D implements VectorReadable3DType
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>.
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         and at least {@code minimum}.
    */
 
   public static VectorI3D clamp(
@@ -159,9 +159,9 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum} and
+   * {@code maximum}.
    *
    * @param v
    *          The input vector
@@ -170,8 +170,8 @@ public final class VectorI3D implements VectorReadable3DType
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y,
-   *         minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y,
+   *         minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))}
    */
 
   public static VectorI3D clampByVector(
@@ -189,15 +189,15 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [-Infinity .. maximum]} inclusive.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
    */
 
   public static VectorI3D clampMaximum(
@@ -211,16 +211,16 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code maximum}.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z,
-   *         maximum.z))</code>
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z,
+   *         maximum.z))}
    */
 
   public static VectorI3D clampMaximumByVector(
@@ -234,9 +234,9 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum
-   * .. Infinity]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum
+   * .. Infinity]} inclusive.
    *
    * @param v
    *          The input vector
@@ -244,7 +244,7 @@ public final class VectorI3D implements VectorReadable3DType
    *          The minimum allowed value
    *
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>
+   *         {@code minimum}
    */
 
   public static VectorI3D clampMinimum(
@@ -258,16 +258,16 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum}.
    *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
-   *         minimum.z))</code>
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
+   *         minimum.z))}
    */
 
   public static VectorI3D clampMinimumByVector(
@@ -281,16 +281,16 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Calculate the cross product of the vectors <code>v0</code> and
-   * <code>v1</code>. The result is a vector perpendicular to both vectors.
+   * Calculate the cross product of the vectors {@code v0} and
+   * {@code v1}. The result is a vector perpendicular to both vectors.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return A vector perpendicular to both <code>v0</code> and
-   *         <code>v1</code>
+   * @return A vector perpendicular to both {@code v0} and
+   *         {@code v1}
    */
 
   public static VectorI3D crossProduct(
@@ -304,8 +304,8 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Calculate the distance between the two vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the distance between the two vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -323,8 +323,8 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Calculate the scalar product of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the scalar product of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -345,10 +345,10 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
-   * amount <code>alpha</code>.
+   * Linearly interpolate between {@code v0} and {@code v1} by the
+   * amount {@code alpha}.
    *
-   * The <code>alpha</code> parameter controls the degree of interpolation,
+   * The {@code alpha} parameter controls the degree of interpolation,
    * such that:
    *
    * <ul>
@@ -361,10 +361,10 @@ public final class VectorI3D implements VectorReadable3DType
    * @param v1
    *          The right input vector.
    * @param alpha
-   *          The interpolation value, between <code>0.0</code> and
-   *          <code>1.0</code>.
+   *          The interpolation value, between {@code 0.0} and
+   *          {@code 1.0}.
    *
-   * @return <code>(1 - alpha) * v0 + alpha * v1</code>
+   * @return {@code (1 - alpha) * v0 + alpha * v1}
    */
 
   public static VectorI3D interpolateLinear(
@@ -378,9 +378,9 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Calculate the magnitude of the vector <code>v</code>.
+   * Calculate the magnitude of the vector {@code v}.
    *
-   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
    * @param v
    *          The input vector
@@ -395,7 +395,7 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Calculate the squared magnitude of the vector <code>v</code>.
+   * Calculate the squared magnitude of the vector {@code v}.
    *
    * @param v
    *          The input vector
@@ -410,14 +410,14 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Normalize the vector <code>v</code>, preserving its direction but
+   * Normalize the vector {@code v}, preserving its direction but
    * reducing it to unit length.
    *
    * @param v
    *          The input vector
    *
-   * @return A vector with the same orientation as <code>v</code> but with
-   *         magnitude equal to <code>1.0</code>
+   * @return A vector with the same orientation as {@code v} but with
+   *         magnitude equal to {@code 1.0}
    */
 
   public static VectorI3D normalize(
@@ -433,7 +433,7 @@ public final class VectorI3D implements VectorReadable3DType
 
   /**
    * <p>
-   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * Orthonormalize and return the vectors {@code v0} and {@code v1}
    * .
    * </p>
    * <p>
@@ -444,7 +444,7 @@ public final class VectorI3D implements VectorReadable3DType
    *          The left vector
    * @param v1
    *          The right vector
-   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * @return A pair {@code (v0, v1)}, orthonormalized.
    * @since 5.0.0
    */
 
@@ -461,14 +461,14 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Calculate the projection of the vector <code>p</code> onto the vector
-   * <code>q</code>.
+   * Calculate the projection of the vector {@code p} onto the vector
+   * {@code q}.
    *
    * @param p
    *          The left vector
    * @param q
    *          The right vector
-   * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
+   * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    */
 
   public static VectorI3D projection(
@@ -482,14 +482,14 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>.
+   * Scale the vector {@code v} by the scalar {@code r}.
    *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    *
-   * @return <code>(v.x * r, v.y * r, v.z * r)</code>
+   * @return {@code (v.x * r, v.y * r, v.z * r)}
    */
 
   public static VectorI3D scale(
@@ -500,14 +500,14 @@ public final class VectorI3D implements VectorReadable3DType
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
+   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)}
    */
 
   public static VectorI3D subtract(
@@ -525,8 +525,8 @@ public final class VectorI3D implements VectorReadable3DType
   private final double z;
 
   /**
-   * Default constructor, initializing the vector with values <code>[0.0, 0.0,
-   * 0.0]</code>.
+   * Default constructor, initializing the vector with values {@code [0.0, 0.0,
+   * 0.0]}.
    */
 
   public VectorI3D()
@@ -540,11 +540,11 @@ public final class VectorI3D implements VectorReadable3DType
    * Construct a vector initialized with the given values.
    *
    * @param in_x
-   *          The <code>x</code> value
+   *          The {@code x} value
    * @param in_y
-   *          The <code>y</code> value
+   *          The {@code y} value
    * @param in_z
-   *          The <code>z</code> value
+   *          The {@code z} value
    */
 
   public VectorI3D(
@@ -559,7 +559,7 @@ public final class VectorI3D implements VectorReadable3DType
 
   /**
    * Construct a vector initialized with the values given in the vector
-   * <code>in_v</code>.
+   * {@code in_v}.
    *
    * @param in_v
    *          The input vector.

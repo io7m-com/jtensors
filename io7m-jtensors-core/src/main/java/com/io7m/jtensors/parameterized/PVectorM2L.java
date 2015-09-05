@@ -42,15 +42,15 @@ public final class PVectorM2L<T> implements
   PVectorWritable2LType<T>
 {
   /**
-   * Calculate the absolute values of the elements in vector <code>v</code>,
-   * saving the result to <code>out</code>.
+   * Calculate the absolute values of the elements in vector {@code v},
+   * saving the result to {@code out}.
    *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    *
-   * @return <code>(abs v.x, abs v.y, abs v.z)</code>
+   * @return {@code (abs v.x, abs v.y, abs v.z)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -71,13 +71,13 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Calculate the absolute values of the elements in vector <code>v</code>,
-   * saving the result to <code>v</code>.
+   * Calculate the absolute values of the elements in vector {@code v},
+   * saving the result to {@code v}.
    *
    * @param v
    *          The input vector
    *
-   * @return <code>(abs v.x, abs v.y, abs v.z)</code>
+   * @return {@code (abs v.x, abs v.y, abs v.z)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -93,8 +93,8 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>, saving the result to <code>out</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and
+   * {@code v1}, saving the result to {@code out}.
    *
    * @param v0
    *          The left input vector
@@ -103,7 +103,7 @@ public final class PVectorM2L<T> implements
    * @param out
    *          The output vector
    *
-   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
+   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -125,15 +125,15 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>, saving the result to <code>v0</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and
+   * {@code v1}, saving the result to {@code v0}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)</code>
+   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -150,9 +150,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>, saving the
-   * result to <code>out</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}, saving the
+   * result to {@code out}.
    *
    * @param v0
    *          The left input vector
@@ -163,7 +163,7 @@ public final class PVectorM2L<T> implements
    * @param r
    *          The scaling value
    *
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -188,9 +188,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>, saving the
-   * result to <code>v0</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}, saving the
+   * result to {@code v0}.
    *
    * @param v0
    *          The left input vector
@@ -199,7 +199,7 @@ public final class PVectorM2L<T> implements
    * @param r
    *          The scaling value
    *
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))</code>
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -217,7 +217,7 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Calculate the angle between vectors <code>v0</code> and <code>v1</code>,
+   * Calculate the angle between vectors {@code v0} and {@code v1},
    * in radians.
    *
    * @param v0
@@ -240,9 +240,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive, saving the result to
-   * <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. maximum]} inclusive, saving the result to
+   * {@code out}.
    *
    * @param v
    *          The input vector
@@ -253,8 +253,8 @@ public final class PVectorM2L<T> implements
    * @param out
    *          The output vector
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         and at least {@code minimum}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -273,9 +273,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>, saving the result to <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum} and
+   * {@code maximum}, saving the result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -286,7 +286,7 @@ public final class PVectorM2L<T> implements
    * @param out
    *          The output vector
    *
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -307,9 +307,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>, saving the result to <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum} and
+   * {@code maximum}, saving the result to {@code v}.
    *
    * @param v
    *          The input vector
@@ -318,7 +318,7 @@ public final class PVectorM2L<T> implements
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))</code>
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -332,9 +332,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive, saving the result to
-   * <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. maximum]} inclusive, saving the result to
+   * {@code v}.
    *
    * @param v
    *          The input vector
@@ -343,8 +343,8 @@ public final class PVectorM2L<T> implements
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>, in <code>v</code>
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         and at least {@code minimum}, in {@code v}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -358,9 +358,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
-   * <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [-Infinity .. maximum]} inclusive, saving the result to
+   * {@code out}.
    *
    * @param v
    *          The input vector
@@ -369,7 +369,7 @@ public final class PVectorM2L<T> implements
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -387,9 +387,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>, saving the
-   * result to <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code maximum}, saving the
+   * result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -398,7 +398,7 @@ public final class PVectorM2L<T> implements
    * @param out
    *          The output vector
    *
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -416,16 +416,16 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>, saving the
-   * result to <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code maximum}, saving the
+   * result to {@code v}.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))</code>
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -438,17 +438,17 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
-   * <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [-Infinity .. maximum]} inclusive, saving the result to
+   * {@code v}.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         , in <code>v</code>
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         , in {@code v}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -461,9 +461,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive, saving the result to
-   * <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. Infinity]} inclusive, saving the result to
+   * {@code out}.
    *
    * @param v
    *          The input vector
@@ -473,7 +473,7 @@ public final class PVectorM2L<T> implements
    *          The minimum allowed value
    *
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>
+   *         {@code minimum}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -491,9 +491,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>, saving the
-   * result to <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum}, saving the
+   * result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -502,7 +502,7 @@ public final class PVectorM2L<T> implements
    * @param minimum
    *          The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -520,17 +520,17 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>, saving the
-   * result to <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum}, saving the
+   * result to {@code v}.
    *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))</code>
-   *         , in <code>v</code>
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))}
+   *         , in {@code v}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -543,9 +543,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive, saving the result to
-   * <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. Infinity]} inclusive, saving the result to
+   * {@code v}.
    *
    * @param v
    *          The input vector
@@ -553,7 +553,7 @@ public final class PVectorM2L<T> implements
    *          The minimum allowed value
    *
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>, in <code>v</code>.
+   *         {@code minimum}, in {@code v}.
    * @param <T>
    *          A phantom type parameter.
    */
@@ -566,8 +566,8 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Copy all elements of the vector <code>input</code> to the vector
-   * <code>output</code>.
+   * Copy all elements of the vector {@code input} to the vector
+   * {@code output}.
    *
    * @param <U>
    *          The specific vector type
@@ -589,8 +589,8 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Calculate the distance between the two vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the distance between the two vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -615,8 +615,8 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Calculate the scalar product of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the scalar product of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -642,15 +642,15 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
-   * amount <code>alpha</code>, saving the result to <code>r</code>.
+   * Linearly interpolate between {@code v0} and {@code v1} by the
+   * amount {@code alpha}, saving the result to {@code r}.
    *
-   * The <code>alpha</code> parameter controls the degree of interpolation,
+   * The {@code alpha} parameter controls the degree of interpolation,
    * such that:
    *
    * <ul>
-   * <li><code>interpolateLinear(v0, v1, 0.0, r) -&gt; r = v0</code></li>
-   * <li><code>interpolateLinear(v0, v1, 1.0, r) -&gt; r = v1</code></li>
+   * <li>{@code interpolateLinear(v0, v1, 0.0, r) -&gt; r = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -&gt; r = v1}</li>
    * </ul>
    *
    * @param v0
@@ -658,12 +658,12 @@ public final class PVectorM2L<T> implements
    * @param v1
    *          The right input vector.
    * @param alpha
-   *          The interpolation value, between <code>0.0</code> and
-   *          <code>1.0</code>.
+   *          The interpolation value, between {@code 0.0} and
+   *          {@code 1.0}.
    * @param r
    *          The result vector.
    *
-   * @return <code>r</code>
+   * @return {@code r}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer
@@ -689,9 +689,9 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Calculate the magnitude of the vector <code>v</code>.
+   * Calculate the magnitude of the vector {@code v}.
    *
-   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
    * @param v
    *          The input vector
@@ -712,7 +712,7 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Calculate the squared magnitude of the vector <code>v</code>.
+   * Calculate the squared magnitude of the vector {@code v}.
    *
    * @param v
    *          The input vector
@@ -733,13 +733,13 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Calculate the projection of the vector <code>p</code> onto the vector
-   * <code>q</code>, saving the result in <code>r</code>.
+   * Calculate the projection of the vector {@code p} onto the vector
+   * {@code q}, saving the result in {@code r}.
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
    *
-   * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
+   * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    * @param p
    *          The left vector
    * @param q
@@ -764,8 +764,8 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
-   * result to <code>out</code>.
+   * Scale the vector {@code v} by the scalar {@code r}, saving the
+   * result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -774,7 +774,7 @@ public final class PVectorM2L<T> implements
    * @param out
    *          The output vector
    *
-   * @return <code>(v.x * r, v.y * r, v.z * r)</code>
+   * @return {@code (v.x * r, v.y * r, v.z * r)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -796,15 +796,15 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
-   * result to <code>v</code>.
+   * Scale the vector {@code v} by the scalar {@code r}, saving the
+   * result to {@code v}.
    *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    *
-   * @return <code>(v.x * r, v.y * r, v.z * r)</code>
+   * @return {@code (v.x * r, v.y * r, v.z * r)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -821,8 +821,8 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
-   * saving the result to <code>out</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0},
+   * saving the result to {@code out}.
    *
    * @param v0
    *          The left input vector
@@ -831,7 +831,7 @@ public final class PVectorM2L<T> implements
    * @param out
    *          The output vector
    *
-   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
+   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -853,15 +853,15 @@ public final class PVectorM2L<T> implements
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
-   * saving the result to <code>v0</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0},
+   * saving the result to {@code v0}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
+   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)}
    *
    * @throws ArithmeticException
    *           Iff an internal arithmetic operation causes an integer overflow
@@ -882,7 +882,7 @@ public final class PVectorM2L<T> implements
 
   /**
    * Default constructor, initializing the vector with values
-   * <code>[0, 0, 0]</code>.
+   * {@code [0, 0, 0]}.
    */
 
   public PVectorM2L()
@@ -894,9 +894,9 @@ public final class PVectorM2L<T> implements
    * Construct a vector initialized with the given values.
    *
    * @param in_x
-   *          The <code>x</code> value
+   *          The {@code x} value
    * @param in_y
-   *          The <code>y</code> value
+   *          The {@code y} value
    */
 
   public PVectorM2L(
@@ -909,7 +909,7 @@ public final class PVectorM2L<T> implements
 
   /**
    * Construct a vector initialized with the values given in the vector
-   * <code>in_v</code>.
+   * {@code in_v}.
    *
    * @param in_v
    *          The source vector

@@ -23,8 +23,8 @@ package com.io7m.jtensors;
 public interface MatrixReadableFType
 {
   /**
-   * @return The value from the matrix at row <code>row</code> , column
-   *         <code>column</code>.
+   * @return The value from the matrix at row {@code row} , column
+   *         {@code column}.
    * @param row
    *          The row
    * @param column

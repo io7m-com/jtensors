@@ -36,13 +36,13 @@ public interface VectorWritable2DType
     VectorReadable2DType in_v);
 
   /**
-   * Set the current <code>x</code> and <code>y</code> values of the current
+   * Set the current {@code x} and {@code y} values of the current
    * vector.
    *
    * @param x
-   *          The new <code>x</code> value.
+   *          The new {@code x} value.
    * @param y
-   *          The new <code>y</code> value.
+   *          The new {@code y} value.
    */
 
   void set2D(
@@ -50,20 +50,20 @@ public interface VectorWritable2DType
     double y);
 
   /**
-   * Set the current <code>x</code> value of the current vector.
+   * Set the current {@code x} value of the current vector.
    *
    * @param x
-   *          The new <code>x</code> value.
+   *          The new {@code x} value.
    */
 
   void setXD(
     double x);
 
   /**
-   * Set the current <code>y</code> value of the current vector.
+   * Set the current {@code y} value of the current vector.
    *
    * @param y
-   *          The new <code>y</code> value.
+   *          The new {@code y} value.
    */
 
   void setYD(

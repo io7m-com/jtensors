@@ -34,7 +34,7 @@ public final class QuaternionI4D implements QuaternionReadable4DType
 {
   /**
    * The Context type contains the minimum storage required for all of the
-   * functions of the <code>QuaternionI4D</code> class.
+   * functions of the {@code QuaternionI4D} class.
    *
    * <p>
    * The purpose of the class is to allow applications to allocate all storage
@@ -44,9 +44,9 @@ public final class QuaternionI4D implements QuaternionReadable4DType
    * </p>
    *
    * <p>
-   * The user should allocate one <code>Context</code> value per thread, and
+   * The user should allocate one {@code Context} value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes
-   * a <code>Context</code> value will not generate garbage.
+   * a {@code Context} value will not generate garbage.
    * </p>
    *
    * @since 5.0.0
@@ -94,15 +94,15 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Calculate the element-wise sum of the quaternions <code>q0</code> and
-   * <code>q1</code>.
+   * Calculate the element-wise sum of the quaternions {@code q0} and
+   * {@code q1}.
    *
    * @param q0
    *          The left input quaternion
    * @param q1
    *          The right input quaternion
    *
-   * @return <code>(q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)</code>
+   * @return {@code (q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)}
    */
 
   public static QuaternionI4D add(
@@ -117,9 +117,9 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Determine whether or not the quaternions <code>qa</code> and
-   * <code>qb</code> are equal to within the degree of error given in
-   * <code>context</code>.
+   * Determine whether or not the quaternions {@code qa} and
+   * {@code qb} are equal to within the degree of error given in
+   * {@code context}.
    *
    * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
    *
@@ -130,7 +130,7 @@ public final class QuaternionI4D implements QuaternionReadable4DType
    * @param qb
    *          The right input quaternion
    * @since 5.0.0
-   * @return <code>true</code> if the quaternions are almost equal
+   * @return {@code true} if the quaternions are almost equal
    */
 
   public static boolean almostEqual(
@@ -150,7 +150,7 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Calculate the conjugate of the input quaternion <code>q</code>.
+   * Calculate the conjugate of the input quaternion {@code q}.
    *
    * @param q
    *          The input quaternion
@@ -169,8 +169,8 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Calculate the scalar product of the quaternions <code>q0</code> and
-   * <code>q1</code>.
+   * Calculate the scalar product of the quaternions {@code q0} and
+   * {@code q1}.
    *
    * @param q0
    *          The left input quaternion
@@ -192,12 +192,12 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Linearly interpolate between <code>q0</code> and <code>q1</code> by the
-   * amount <code>alpha</code>, such that:
+   * Linearly interpolate between {@code q0} and {@code q1} by the
+   * amount {@code alpha}, such that:
    *
    * <ul>
-   * <li><code>interpolateLinear(q0, q1, 0.0) = q0</code></li>
-   * <li><code>interpolateLinear(q0, q1, 1.0) = q1</code></li>
+   * <li>{@code interpolateLinear(q0, q1, 0.0) = q0}</li>
+   * <li>{@code interpolateLinear(q0, q1, 1.0) = q1}</li>
    * </ul>
    *
    * @param q0
@@ -205,10 +205,10 @@ public final class QuaternionI4D implements QuaternionReadable4DType
    * @param q1
    *          The right input quaternion
    * @param alpha
-   *          The interpolation value, between <code>0.0</code> and
-   *          <code>1.0</code>
+   *          The interpolation value, between {@code 0.0} and
+   *          {@code 1.0}
    *
-   * @return <code>(1 - alpha) * q0 + alpha * q1</code>
+   * @return {@code (1 - alpha) * q0 + alpha * q1}
    */
 
   public static QuaternionI4D interpolateLinear(
@@ -223,8 +223,8 @@ public final class QuaternionI4D implements QuaternionReadable4DType
 
   /**
    * <p>
-   * Return <code>true</code> iff <code>qa</code> is the negation of
-   * <code>qb</code>.
+   * Return {@code true} iff {@code qa} is the negation of
+   * {@code qb}.
    * </p>
    *
    * <p>
@@ -239,8 +239,8 @@ public final class QuaternionI4D implements QuaternionReadable4DType
    * @param qb
    *          The right quaternion
    * @since 5.0.0
-   * @return <code>true</code> iff <code>qa</code> is the negation of
-   *         <code>qb</code>
+   * @return {@code true} iff {@code qa} is the negation of
+   *         {@code qb}
    */
 
   public static boolean isNegationOf(
@@ -269,11 +269,11 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   /**
    * <p>
    * Produce a quaternion that represents a rotation that "looks at" the point
-   * at <code>target</code> assuming the viewer is at <code>origin</code>,
-   * using <code>up</code> as the "up" vector.
+   * at {@code target} assuming the viewer is at {@code origin},
+   * using {@code up} as the "up" vector.
    * </p>
    * <p>
-   * The function uses storage preallocated in <code>context</code> to avoid
+   * The function uses storage preallocated in {@code context} to avoid
    * any new allocations.
    * </p>
    *
@@ -305,9 +305,9 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Calculate the magnitude of the quaternion <code>q</code>.
+   * Calculate the magnitude of the quaternion {@code q}.
    *
-   * Correspondingly, <code>magnitude(normalize(q)) == 1.0</code>.
+   * Correspondingly, {@code magnitude(normalize(q)) == 1.0}.
    *
    * @param q
    *          The input quaternion
@@ -322,7 +322,7 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Calculate the squared magnitude of the quaternion <code>q</code>.
+   * Calculate the squared magnitude of the quaternion {@code q}.
    *
    * @param q
    *          The input quaternion
@@ -337,8 +337,8 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Produce a quaternion that represents a rotation of <code>angle</code>
-   * degrees around the axis specified by <code>axis</code>. <code>axis</code>
+   * Produce a quaternion that represents a rotation of {@code angle}
+   * degrees around the axis specified by {@code axis}. {@code axis}
    * is assumed to be of unit length.
    *
    * @see VectorI3D#normalize(VectorReadable3DType)
@@ -366,7 +366,7 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Produce a quaternion equivalent to the rotation matrix <code>m</code>.
+   * Produce a quaternion equivalent to the rotation matrix {@code m}.
    *
    * @since 5.0.0
    * @param m
@@ -428,8 +428,8 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Produce a quaternion equivalent to the rotation matrix <code>m</code>,
-   * writing the result to <code>out</code>.
+   * Produce a quaternion equivalent to the rotation matrix {@code m},
+   * writing the result to {@code out}.
    *
    * @since 5.0.0
    * @param m
@@ -496,8 +496,8 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Produce a rotation matrix from the quaternion <code>q</code>, saving the
-   * result to <code>m</code>.
+   * Produce a rotation matrix from the quaternion {@code q}, saving the
+   * result to {@code m}.
    *
    * @since 5.0.0
    * @param q
@@ -505,7 +505,7 @@ public final class QuaternionI4D implements QuaternionReadable4DType
    * @param m
    *          The output matrix
    *
-   * @return <code>m</code>
+   * @return {@code m}
    */
 
   public static MatrixM3x3D makeRotationMatrix3x3(
@@ -550,8 +550,8 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Produce a rotation matrix from the quaternion <code>q</code>, saving the
-   * result to <code>m</code>.
+   * Produce a rotation matrix from the quaternion {@code q}, saving the
+   * result to {@code m}.
    *
    * @since 5.0.0
    * @param q
@@ -559,7 +559,7 @@ public final class QuaternionI4D implements QuaternionReadable4DType
    * @param m
    *          The output matrix
    *
-   * @return <code>m</code>
+   * @return {@code m}
    */
 
   public static MatrixM4x4D makeRotationMatrix4x4(
@@ -620,7 +620,7 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Multiply the quaternion <code>q0</code> by the quaternion <code>q1</code>
+   * Multiply the quaternion {@code q0} by the quaternion {@code q1}
    * .
    *
    * <p>
@@ -633,21 +633,21 @@ public final class QuaternionI4D implements QuaternionReadable4DType
    * </p>
    *
    * <ul>
-   * <li><code>qx</code> represents some rotation around the X axis</li>
-   * <li><code>qy</code> represents some rotation around the Y axis</li>
-   * <li><code>qz</code> represents some rotation around the Z axis</li>
+   * <li>{@code qx} represents some rotation around the X axis</li>
+   * <li>{@code qy} represents some rotation around the Y axis</li>
+   * <li>{@code qz} represents some rotation around the Z axis</li>
    * </ul>
    *
    * <p>
-   * The following code produces a quaternion <code>qr1</code> that represents
+   * The following code produces a quaternion {@code qr1} that represents
    * a rotation around the X axis, followed by a rotation around the Y axis,
    * followed by a rotation around the Z axis:
    * </p>
    *
-   * <code>
+   * {@code
    * qr0 = QuaternionI4D.multiply(qy, qx);
    * qr1 = QuaternionI4D.multiply(qz, qy);
-   * </code>
+   * }
    *
    * @param q0
    *          The left input quaternion
@@ -680,13 +680,13 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Negate the elements of <code>q</code>.
+   * Negate the elements of {@code q}.
    *
    * @since 5.0.0
    *
    * @param q
    *          The source quaternion
-   * @return The negation of <code>q</code>
+   * @return The negation of {@code q}
    */
 
   public static QuaternionI4D negate(
@@ -696,14 +696,14 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Normalize the quaternion <code>q</code>, preserqing its direction but
+   * Normalize the quaternion {@code q}, preserqing its direction but
    * reducing it to unit length.
    *
    * @param q
    *          The input quaternion
    *
-   * @return A quaternion with the same orientation as <code>q</code> but with
-   *         magnitude equal to <code>1.0</code>
+   * @return A quaternion with the same orientation as {@code q} but with
+   *         magnitude equal to {@code 1.0}
    */
 
   public static QuaternionI4D normalize(
@@ -718,14 +718,14 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Scale the quaternion <code>q</code> by the scalar <code>r</code>.
+   * Scale the quaternion {@code q} by the scalar {@code r}.
    *
    * @param q
    *          The input quaternion
    * @param r
    *          The scaling value
    *
-   * @return <code>(q.x * r, q.y * r, q.z * r, q.w * r)</code>
+   * @return {@code (q.x * r, q.y * r, q.z * r, q.w * r)}
    */
 
   public static QuaternionI4D scale(
@@ -740,15 +740,15 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
-   * Subtract the quaternion <code>q0</code> from the quaternion
-   * <code>q1</code>.
+   * Subtract the quaternion {@code q0} from the quaternion
+   * {@code q1}.
    *
    * @param q0
    *          The left input quaternion
    * @param q1
    *          The right input quaternion
    *
-   * @return <code>(q0.x - q1.x, q0.y - q1.y, q0.z - q1.z)</code>
+   * @return {@code (q0.x - q1.x, q0.y - q1.y, q0.z - q1.z)}
    */
 
   public static QuaternionI4D subtract(
@@ -769,7 +769,7 @@ public final class QuaternionI4D implements QuaternionReadable4DType
 
   /**
    * Default constructor, initializing the quaternion with values
-   * <code>[0.0, 0.0, 0.0, 1.0]</code>
+   * {@code [0.0, 0.0, 0.0, 1.0]}
    */
 
   public QuaternionI4D()
@@ -781,13 +781,13 @@ public final class QuaternionI4D implements QuaternionReadable4DType
    * Construct a quaternion initialized with the given values.
    *
    * @param in_x
-   *          The <code>x</code> value
+   *          The {@code x} value
    * @param in_y
-   *          The <code>y</code> value
+   *          The {@code y} value
    * @param in_z
-   *          The <code>z</code> value
+   *          The {@code z} value
    * @param in_w
-   *          The <code>w</code> value
+   *          The {@code w} value
    */
 
   public QuaternionI4D(
@@ -804,7 +804,7 @@ public final class QuaternionI4D implements QuaternionReadable4DType
 
   /**
    * Construct a quaternion initialized with the values contained in
-   * <code>q</code>.
+   * {@code q}.
    *
    * @param q
    *          The source quaternion

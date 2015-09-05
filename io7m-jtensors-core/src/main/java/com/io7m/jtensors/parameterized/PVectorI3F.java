@@ -46,12 +46,12 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
                                             0.0f);
 
   /**
-   * Calculate the absolute value of the vector <code>v</code>.
+   * Calculate the absolute value of the vector {@code v}.
    *
    * @param v
    *          The input vector
    *
-   * @return <code>(abs v.getXF(), abs v.getYF(), abs v.getZF())</code>
+   * @return {@code (abs v.getXF(), abs v.getYF(), abs v.getZF())}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -66,15 +66,15 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF(), v0.getZF() + v1.getZF())</code>
+   * @return {@code (v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF(), v0.getZF() + v1.getZF())}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -90,8 +90,8 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}.
    *
    * @param v0
    *          The left input vector
@@ -100,7 +100,7 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
    * @param r
    *          The scaling value
    *
-   * @return <code>(v0.getXF() + (v1.getXF() * r), v0.getYF() + (v1.getYF() * r), v0.getZF() + (v1.getZF() * r))</code>
+   * @return {@code (v0.getXF() + (v1.getXF() * r), v0.getYF() + (v1.getYF() * r), v0.getZF() + (v1.getZF() * r))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -114,10 +114,10 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Determine whether or not the vectors <code>va</code> and <code>vb</code>
-   * are equal to within the degree of error given in <code>context</code>.
+   * Determine whether or not the vectors {@code va} and {@code vb}
+   * are equal to within the degree of error given in {@code context}.
    *
-   * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
+   * @see AlmostEqualFloat#almostEqual(AlmostEqualFloat.ContextRelative, float, float)
    *
    * @param context
    *          The equality context
@@ -126,7 +126,7 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
    * @param vb
    *          The right input vector
    * @since 7.0.0
-   * @return <code>true</code> iff the vectors are almost equal.
+   * @return {@code true} iff the vectors are almost equal.
    * @param <T>
    *          A phantom type parameter.
    */
@@ -146,8 +146,8 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. maximum]} inclusive.
    *
    * @param v
    *          The input vector
@@ -156,8 +156,8 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>.
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         and at least {@code minimum}.
    * @param <T>
    *          A phantom type parameter.
    */
@@ -174,9 +174,9 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum} and
+   * {@code maximum}.
    *
    * @param v
    *          The input vector
@@ -185,11 +185,11 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(
+   * @return {@code (
    *   min(max(v.getXF(), minimum.getXF()), maximum.getXF()),
    *   min(max(v.getYF(), minimum.getYF()), maximum.getYF()),
    *   min(max(v.getZF(), minimum.getZF()), maximum.getZF())
-   * )</code>
+   * )}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -209,15 +209,15 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [-Infinity .. maximum]} inclusive.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -233,15 +233,15 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code maximum}.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(v.getXF(), maximum.getXF()), min(v.getYF(), maximum.getYF()), min(v.getZF(), maximum.getZF()))</code>
+   * @return {@code (min(v.getXF(), maximum.getXF()), min(v.getYF(), maximum.getYF()), min(v.getZF(), maximum.getZF()))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -257,8 +257,8 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. Infinity]} inclusive.
    *
    * @param v
    *          The input vector
@@ -266,7 +266,7 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
    *          The minimum allowed value
    *
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>
+   *         {@code minimum}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -282,15 +282,15 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum}.
    *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.getXF(), minimum.getXF()), max(v.getYF(), minimum.getYF()), max(v.getZF(), minimum.getZF()))</code>
+   * @return {@code (max(v.getXF(), minimum.getXF()), max(v.getYF(), minimum.getYF()), max(v.getZF(), minimum.getZF()))}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -306,16 +306,16 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Calculate the cross product of the vectors <code>v0</code> and
-   * <code>v1</code>. The result is a vector perpendicular to both vectors.
+   * Calculate the cross product of the vectors {@code v0} and
+   * {@code v1}. The result is a vector perpendicular to both vectors.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return A vector perpendicular to both <code>v0</code> and
-   *         <code>v1</code>
+   * @return A vector perpendicular to both {@code v0} and
+   *         {@code v1}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -331,8 +331,8 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Calculate the distance between the two vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the distance between the two vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -352,8 +352,8 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Calculate the scalar product of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the scalar product of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -376,15 +376,15 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
-   * amount <code>alpha</code>.
+   * Linearly interpolate between {@code v0} and {@code v1} by the
+   * amount {@code alpha}.
    *
-   * The <code>alpha</code> parameter controls the degree of interpolation,
+   * The {@code alpha} parameter controls the degree of interpolation,
    * such that:
    *
    * <ul>
-   * <li><code>interpolateLinear(v0, v1, 0.0) = v0</code></li>
-   * <li><code>interpolateLinear(v0, v1, 1.0) = v1</code></li>
+   * <li>{@code interpolateLinear(v0, v1, 0.0) = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0) = v1}</li>
    * </ul>
    *
    * @param v0
@@ -392,10 +392,10 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
    * @param v1
    *          The right input vector.
    * @param alpha
-   *          The interpolation value, between <code>0.0</code> and
-   *          <code>1.0</code>.
+   *          The interpolation value, between {@code 0.0} and
+   *          {@code 1.0}.
    *
-   * @return <code>(1 - alpha) * v0 + alpha * v1</code>
+   * @return {@code (1 - alpha) * v0 + alpha * v1}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -411,9 +411,9 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Calculate the magnitude of the vector <code>v</code>.
+   * Calculate the magnitude of the vector {@code v}.
    *
-   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
    * @param v
    *          The input vector
@@ -430,7 +430,7 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Calculate the squared magnitude of the vector <code>v</code>.
+   * Calculate the squared magnitude of the vector {@code v}.
    *
    * @param v
    *          The input vector
@@ -447,14 +447,14 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Normalize the vector <code>v</code>, preserving its direction but
+   * Normalize the vector {@code v}, preserving its direction but
    * reducing it to unit length.
    *
    * @param v
    *          The input vector
    *
-   * @return A vector with the same orientation as <code>v</code> but with
-   *         magnitude equal to <code>1.0</code>
+   * @return A vector with the same orientation as {@code v} but with
+   *         magnitude equal to {@code 1.0}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -472,7 +472,7 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
 
   /**
    * <p>
-   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * Orthonormalize and return the vectors {@code v0} and {@code v1}
    * .
    * </p>
    * <p>
@@ -483,7 +483,7 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
    *          The left vector
    * @param v1
    *          The right vector
-   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * @return A pair {@code (v0, v1)}, orthonormalized.
    * @since 7.0.0
    * @param <T>
    *          A phantom type parameter.
@@ -502,14 +502,14 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Calculate the projection of the vector <code>p</code> onto the vector
-   * <code>q</code>.
+   * Calculate the projection of the vector {@code p} onto the vector
+   * {@code q}.
    *
    * @param p
    *          The left vector
    * @param q
    *          The right vector
-   * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
+   * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -525,14 +525,14 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>.
+   * Scale the vector {@code v} by the scalar {@code r}.
    *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    *
-   * @return <code>(v.getXF() * r, v.getYF() * r, v.getZF() * r)</code>
+   * @return {@code (v.getXF() * r, v.getYF() * r, v.getZF() * r)}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -545,14 +545,14 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF(), v0.getZF() - v1.getZF())</code>
+   * @return {@code (v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF(), v0.getZF() - v1.getZF())}
    * @param <T>
    *          A phantom type parameter.
    */
@@ -585,7 +585,7 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
 
   /**
    * Default constructor, initializing the vector with values
-   * <code>[0.0, 0.0, 0.0]</code>.
+   * {@code [0.0, 0.0, 0.0]}.
    */
 
   public PVectorI3F()
@@ -599,11 +599,11 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
    * Construct a vector initialized with the given values.
    *
    * @param in_x
-   *          The <code>x</code> value
+   *          The {@code x} value
    * @param in_y
-   *          The <code>y</code> value
+   *          The {@code y} value
    * @param in_z
-   *          The <code>z</code> value
+   *          The {@code z} value
    */
 
   public PVectorI3F(
@@ -618,7 +618,7 @@ public final class PVectorI3F<T> implements PVectorReadable3FType<T>
 
   /**
    * Construct a vector initialized with the values given in the vector
-   * <code>in_v</code>.
+   * {@code in_v}.
    *
    * @param in_v
    *          The input vector.

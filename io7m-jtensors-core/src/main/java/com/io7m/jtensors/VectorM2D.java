@@ -36,15 +36,15 @@ import com.io7m.jnull.Nullable;
 public final class VectorM2D implements VectorReadable2DType, VectorWritable2DType
 {
   /**
-   * Calculate the absolute values of the elements in vector <code>v</code>,
-   * saving the result to <code>out</code>.
+   * Calculate the absolute values of the elements in vector {@code v},
+   * saving the result to {@code out}.
    *
    * @param v
    *          The input vector
    * @param out
    *          The output vector
    *
-   * @return <code>(abs v.x, abs v.y)</code>
+   * @return {@code (abs v.x, abs v.y)}
    */
 
   public static VectorM2D absolute(
@@ -59,13 +59,13 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Calculate the absolute values of the elements in vector <code>v</code>,
+   * Calculate the absolute values of the elements in vector {@code v},
    * modifying the vector in-place.
    *
    * @param v
    *          The input vector
    *
-   * @return <code>(abs v.x, abs v.y)</code>
+   * @return {@code (abs v.x, abs v.y)}
    */
 
   public static VectorM2D absoluteInPlace(
@@ -75,8 +75,8 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>, saving the result to <code>out</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and
+   * {@code v1}, saving the result to {@code out}.
    *
    * @param v0
    *          The left input vector
@@ -85,7 +85,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param out
    *          The output vector
    *
-   * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
+   * @return {@code (v0.x + v1.x, v0.y + v1.y)}
    */
 
   public static VectorM2D add(
@@ -101,15 +101,15 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>, saving the result to <code>v0</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and
+   * {@code v1}, saving the result to {@code v0}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x + v1.x, v0.y + v1.y)</code>
+   * @return {@code (v0.x + v1.x, v0.y + v1.y)}
    */
 
   public static VectorM2D addInPlace(
@@ -120,9 +120,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>, saving the
-   * result to <code>out</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}, saving the
+   * result to {@code out}.
    *
    * @param v0
    *          The left input vector
@@ -133,7 +133,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param r
    *          The scaling value
    *
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r))}
    */
 
   public static VectorM2D addScaled(
@@ -150,9 +150,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>, saving the
-   * result to <code>v0</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}, saving the
+   * result to {@code v0}.
    *
    * @param v0
    *          The left input vector
@@ -161,7 +161,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param r
    *          The scaling value
    *
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r))</code>
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r))}
    */
 
   public static VectorM2D addScaledInPlace(
@@ -173,8 +173,8 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Determine whether or not the vectors <code>qa</code> and <code>qb</code>
-   * are equal to within the degree of error given in <code>context</code>.
+   * Determine whether or not the vectors {@code qa} and {@code qb}
+   * are equal to within the degree of error given in {@code context}.
    *
    * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
    *
@@ -185,7 +185,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param qb
    *          The right input vector
    * @since 5.0.0
-   * @return <code>true</code> if the vectors are almost equal
+   * @return {@code true} if the vectors are almost equal
    */
 
   public static boolean almostEqual(
@@ -201,7 +201,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Calculate the angle between vectors <code>v0</code> and <code>v1</code>,
+   * Calculate the angle between vectors {@code v0} and {@code v1},
    * in radians.
    *
    * @param v0
@@ -226,9 +226,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive, saving the result to
-   * <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. maximum]} inclusive, saving the result to
+   * {@code out}.
    *
    * @param v
    *          The input vector
@@ -239,8 +239,8 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param out
    *          The output vector
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         and at least {@code minimum}
    */
 
   public static VectorM2D clamp(
@@ -257,9 +257,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>, saving the result to <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum} and
+   * {@code maximum}, saving the result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -270,7 +270,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param out
    *          The output vector
    *
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))</code>
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))}
    */
 
   public static VectorM2D clampByVector(
@@ -289,9 +289,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>, saving the result to <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum} and
+   * {@code maximum}, saving the result to {@code v}.
    *
    * @param v
    *          The input vector
@@ -300,7 +300,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))</code>
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y))}
    */
 
   public static VectorM2D clampByVectorInPlace(
@@ -312,9 +312,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive, saving the result to
-   * <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. maximum]} inclusive, saving the result to
+   * {@code v}.
    *
    * @param v
    *          The input vector
@@ -323,8 +323,8 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>, in <code>v</code>
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         and at least {@code minimum}, in {@code v}
    */
 
   public static VectorM2D clampInPlace(
@@ -336,9 +336,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
-   * <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [-Infinity .. maximum]} inclusive, saving the result to
+   * {@code out}.
    *
    * @param v
    *          The input vector
@@ -347,7 +347,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
    */
 
   public static VectorM2D clampMaximum(
@@ -363,9 +363,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>, saving the
-   * result to <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code maximum}, saving the
+   * result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -374,7 +374,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param out
    *          The output vector
    *
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y))}
    */
 
   public static VectorM2D clampMaximumByVector(
@@ -390,16 +390,16 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>, saving the
-   * result to <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code maximum}, saving the
+   * result to {@code v}.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The vector containing the maximum acceptable values
    *
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y))</code>
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y))}
    */
 
   public static VectorM2D clampMaximumByVectorInPlace(
@@ -410,17 +410,17 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive, saving the result to
-   * <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [-Infinity .. maximum]} inclusive, saving the result to
+   * {@code v}.
    *
    * @param v
    *          The input vector
    * @param maximum
    *          The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         , in <code>v</code>
+   * @return A vector with both elements equal to at most {@code maximum}
+   *         , in {@code v}
    */
 
   public static VectorM2D clampMaximumInPlace(
@@ -431,9 +431,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive, saving the result to
-   * <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. Infinity]} inclusive, saving the result to
+   * {@code out}.
    *
    * @param v
    *          The input vector
@@ -443,7 +443,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    *          The minimum allowed value
    *
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>
+   *         {@code minimum}
    */
 
   public static VectorM2D clampMinimum(
@@ -459,9 +459,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>, saving the
-   * result to <code>out</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum}, saving the
+   * result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -470,7 +470,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param minimum
    *          The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code>
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y))}
    */
 
   public static VectorM2D clampMinimumByVector(
@@ -486,17 +486,17 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>, saving the
-   * result to <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range
+   * given by the corresponding elements in {@code minimum}, saving the
+   * result to {@code v}.
    *
    * @param v
    *          The input vector
    * @param minimum
    *          The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y))</code> , in
-   *         <code>v</code>
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y))} , in
+   *         {@code v}
    */
 
   public static VectorM2D clampMinimumByVectorInPlace(
@@ -507,9 +507,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive, saving the result to
-   * <code>v</code>.
+   * Clamp the elements of the vector {@code v} to the range
+   * {@code [minimum .. Infinity]} inclusive, saving the result to
+   * {@code v}.
    *
    * @param v
    *          The input vector
@@ -517,7 +517,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    *          The minimum allowed value
    *
    * @return A vector with both elements equal to at least
-   *         <code>minimum</code>, in <code>v</code>.
+   *         {@code minimum}, in {@code v}.
    */
 
   public static VectorM2D clampMinimumInPlace(
@@ -528,8 +528,8 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Copy all elements of the vector <code>input</code> to the vector
-   * <code>output</code>.
+   * Copy all elements of the vector {@code input} to the vector
+   * {@code output}.
    *
    * @param input
    *          The input vector
@@ -548,8 +548,8 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Calculate the distance between the two vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the distance between the two vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -568,8 +568,8 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Calculate the scalar product of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the scalar product of the vectors {@code v0} and
+   * {@code v1}.
    *
    * @param v0
    *          The left input vector
@@ -589,10 +589,10 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
-   * amount <code>alpha</code>, saving the result to <code>r</code>.
+   * Linearly interpolate between {@code v0} and {@code v1} by the
+   * amount {@code alpha}, saving the result to {@code r}.
    *
-   * The <code>alpha</code> parameter controls the degree of interpolation,
+   * The {@code alpha} parameter controls the degree of interpolation,
    * such that:
    *
    * <ul>
@@ -605,12 +605,12 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param v1
    *          The right input vector.
    * @param alpha
-   *          The interpolation value, between <code>0.0</code> and
-   *          <code>1.0</code>.
+   *          The interpolation value, between {@code 0.0} and
+   *          {@code 1.0}.
    * @param r
    *          The result vector.
    *
-   * @return <code>r</code>
+   * @return {@code r}
    */
 
   public static VectorM2D interpolateLinear(
@@ -629,9 +629,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Calculate the magnitude of the vector <code>v</code>.
+   * Calculate the magnitude of the vector {@code v}.
    *
-   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
    * @param v
    *          The input vector
@@ -646,7 +646,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Calculate the squared magnitude of the vector <code>v</code>.
+   * Calculate the squared magnitude of the vector {@code v}.
    *
    * @param v
    *          The input vector
@@ -661,8 +661,8 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Returns a vector with the same orientation as <code>v</code> but with
-   * magnitude equal to <code>1.0</code> in <code>out</code>. The function
+   * Returns a vector with the same orientation as {@code v} but with
+   * magnitude equal to {@code 1.0} in {@code out}. The function
    * returns the zero vector iff the input is the zero vector.
    *
    * @param v
@@ -688,8 +688,8 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Returns a vector with the same orientation as <code>v</code> but with
-   * magnitude equal to <code>1.0</code> in <code>v</code>. The function
+   * Returns a vector with the same orientation as {@code v} but with
+   * magnitude equal to {@code 1.0} in {@code v}. The function
    * returns the zero vector iff the input is the zero vector.
    *
    * @param v
@@ -706,14 +706,14 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
 
   /**
    * <p>
-   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
+   * Orthonormalize and return the vectors {@code v0} and {@code v1}
    * .
    * </p>
    * <p>
    * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
    *
-   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * @return A pair {@code (v0, v1)}, orthonormalized.
    *
    * @since 5.0.0
    *
@@ -739,7 +739,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
 
   /**
    * <p>
-   * Orthonormalize and the vectors <code>v0</code> and <code>v1</code>.
+   * Orthonormalize and the vectors {@code v0} and {@code v1}.
    * </p>
    * <p>
    * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
@@ -766,10 +766,10 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Calculate the projection of the vector <code>p</code> onto the vector
-   * <code>q</code>, saving the result in <code>r</code>.
+   * Calculate the projection of the vector {@code p} onto the vector
+   * {@code q}, saving the result in {@code r}.
    *
-   * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
+   * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    * @param p
    *          The left vector
    * @param q
@@ -791,8 +791,8 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
-   * result to <code>out</code>.
+   * Scale the vector {@code v} by the scalar {@code r}, saving the
+   * result to {@code out}.
    *
    * @param v
    *          The input vector
@@ -801,7 +801,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param out
    *          The output vector
    *
-   * @return <code>(v.x * r, v.y * r)</code>
+   * @return {@code (v.x * r, v.y * r)}
    */
 
   public static VectorM2D scale(
@@ -817,15 +817,15 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>, saving the
-   * result to <code>v</code>.
+   * Scale the vector {@code v} by the scalar {@code r}, saving the
+   * result to {@code v}.
    *
    * @param v
    *          The input vector
    * @param r
    *          The scaling value
    *
-   * @return <code>(v.x * r, v.y * r)</code>
+   * @return {@code (v.x * r, v.y * r)}
    */
 
   public static VectorM2D scaleInPlace(
@@ -836,8 +836,8 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
-   * saving the result to <code>out</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0},
+   * saving the result to {@code out}.
    *
    * @param v0
    *          The left input vector
@@ -846,7 +846,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * @param out
    *          The output vector
    *
-   * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
+   * @return {@code (v0.x - v1.x, v0.y - v1.y)}
    */
 
   public static VectorM2D subtract(
@@ -862,15 +862,15 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>,
-   * saving the result to <code>v0</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0},
+   * saving the result to {@code v0}.
    *
    * @param v0
    *          The left input vector
    * @param v1
    *          The right input vector
    *
-   * @return <code>(v0.x - v1.x, v0.y - v1.y)</code>
+   * @return {@code (v0.x - v1.x, v0.y - v1.y)}
    */
 
   public static VectorM2D subtractInPlace(
@@ -885,7 +885,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
 
   /**
    * Default constructor, initializing the vector with values
-   * <code>[0.0, 0.0]</code>.
+   * {@code [0.0, 0.0]}.
    */
 
   public VectorM2D()
@@ -897,9 +897,9 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
    * Construct a vector initialized with the given values.
    *
    * @param in_x
-   *          The <code>x</code> value
+   *          The {@code x} value
    * @param in_y
-   *          The <code>y</code> value
+   *          The {@code y} value
    */
 
   public VectorM2D(
@@ -912,7 +912,7 @@ public final class VectorM2D implements VectorReadable2DType, VectorWritable2DTy
 
   /**
    * Construct a vector initialized with the values given in the vector
-   * <code>in_x</code>.
+   * {@code in_x}.
    *
    * @param in_x
    *          The source vector
