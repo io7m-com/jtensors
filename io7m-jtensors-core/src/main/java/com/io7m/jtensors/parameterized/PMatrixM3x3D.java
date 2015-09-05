@@ -16,10 +16,6 @@
 
 package com.io7m.jtensors.parameterized;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
-
 import com.io7m.jfunctional.Option;
 import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
@@ -29,6 +25,10 @@ import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.VectorWritable3DType;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.DoubleBuffer;
 
 /**
  * <p>
@@ -625,9 +625,8 @@ import com.io7m.jtensors.VectorWritable3DType;
   public static <T0, T1> OptionType<PMatrixM3x3D<T1, T0>> invertInPlace(
     final PMatrixM3x3D<T0, T1> m)
   {
-    final PMatrixM3x3D<T0, T1> mf = m;
     final PMatrixM3x3D<T1, T0> mt = (PMatrixM3x3D<T1, T0>) m;
-    return PMatrixM3x3D.invert(mf, mt);
+    return PMatrixM3x3D.invert(m, mt);
   }
 
   /**

@@ -1195,9 +1195,8 @@ import java.nio.DoubleBuffer;
   public static <T0, T1> OptionType<PMatrixM4x4D<T1, T0>> invertInPlace(
     final PMatrixM4x4D<T0, T1> m)
   {
-    final PMatrixM4x4D<T0, T1> mf = m;
     final PMatrixM4x4D<T1, T0> mt = (PMatrixM4x4D<T1, T0>) m;
-    return PMatrixM4x4D.invert(mf, mt);
+    return PMatrixM4x4D.invert(m, mt);
   }
 
   /**
@@ -1229,9 +1228,8 @@ import java.nio.DoubleBuffer;
       final Context context,
       final PMatrixM4x4D<T0, T1> m)
   {
-    final PMatrixM4x4D<T0, T1> mf = m;
     final PMatrixM4x4D<T1, T0> mt = (PMatrixM4x4D<T1, T0>) m;
-    return PMatrixM4x4D.invertWithContext(context, mf, mt);
+    return PMatrixM4x4D.invertWithContext(context, m, mt);
   }
 
   /**

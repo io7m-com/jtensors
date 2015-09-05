@@ -16,10 +16,10 @@
 
 package com.io7m.jtensors;
 
-import java.util.Arrays;
-
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
+
+import java.util.Arrays;
 
 /**
  * An immutable 2x2 matrix type.

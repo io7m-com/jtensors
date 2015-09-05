@@ -620,9 +620,8 @@ import com.io7m.jtensors.VectorWritable3FType;
   public static <T0, T1> OptionType<PMatrixM3x3F<T1, T0>> invertInPlace(
     final PMatrixM3x3F<T0, T1> m)
   {
-    final PMatrixM3x3F<T0, T1> mf = m;
     final PMatrixM3x3F<T1, T0> mt = (PMatrixM3x3F<T1, T0>) m;
-    return PMatrixM3x3F.invert(mf, mt);
+    return PMatrixM3x3F.invert(m, mt);
   }
 
   /**
