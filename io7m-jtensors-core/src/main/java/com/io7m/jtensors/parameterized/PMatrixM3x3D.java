@@ -87,11 +87,6 @@ import java.nio.DoubleBuffer;
 
     }
 
-    final PMatrixM3x3D<?, ?> getM3A()
-    {
-      return this.m3a;
-    }
-
     final VectorM3D getV3A()
     {
       return this.v3a;
@@ -1489,13 +1484,6 @@ import java.nio.DoubleBuffer;
     final int column)
   {
     return this.view.get(PMatrixM3x3D.indexChecked(row, column));
-  }
-
-  private double getUnsafe(
-    final int row,
-    final int column)
-  {
-    return this.view.get(PMatrixM3x3D.indexUnsafe(row, column));
   }
 
   @Override public int hashCode()

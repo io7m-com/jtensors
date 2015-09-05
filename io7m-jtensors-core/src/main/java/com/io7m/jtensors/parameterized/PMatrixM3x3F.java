@@ -16,10 +16,6 @@
 
 package com.io7m.jtensors.parameterized;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-
 import com.io7m.jfunctional.Option;
 import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
@@ -28,6 +24,10 @@ import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorWritable3FType;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 
 /**
  * <p>
@@ -80,11 +80,6 @@ import com.io7m.jtensors.VectorWritable3FType;
     public Context()
     {
 
-    }
-
-    final PMatrixM3x3F<?, ?> getM4A()
-    {
-      return this.m4a;
     }
 
     final VectorM3F getV3A()
@@ -1500,13 +1495,6 @@ import com.io7m.jtensors.VectorWritable3FType;
     final int column)
   {
     return this.view.get(PMatrixM3x3F.indexChecked(row, column));
-  }
-
-  private float getUnsafe(
-    final int row,
-    final int column)
-  {
-    return this.view.get(PMatrixM3x3F.indexUnsafe(row, column));
   }
 
   @Override public int hashCode()

@@ -2620,13 +2620,6 @@ import java.nio.DoubleBuffer;
     return this.view.get(PMatrixM4x4D.indexChecked(row, column));
   }
 
-  private double getUnsafe(
-    final int row,
-    final int column)
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(row, column));
-  }
-
   @Override public int hashCode()
   {
     final int prime = 31;

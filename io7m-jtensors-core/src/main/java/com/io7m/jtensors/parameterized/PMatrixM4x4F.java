@@ -2611,13 +2611,6 @@ import java.nio.FloatBuffer;
     return this.view.get(PMatrixM4x4F.indexChecked(row, column));
   }
 
-  private float getUnsafe(
-    final int row,
-    final int column)
-  {
-    return this.view.get(PMatrixM4x4F.indexUnsafe(row, column));
-  }
-
   @Override public int hashCode()
   {
     final int prime = 31;

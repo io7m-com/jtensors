@@ -88,11 +88,6 @@ public final class MatrixM3x3D implements
 
     }
 
-    final MatrixM3x3D getM3A()
-    {
-      return this.m3a;
-    }
-
     final VectorM3D getV3A()
     {
       return this.v3a;
