@@ -19,6 +19,7 @@ package com.io7m.jtensors;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
  * A four-dimensional immutable quaternion type with single precision
@@ -30,7 +31,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class QuaternionI4F implements QuaternionReadable4FType
+@Immutable public final class QuaternionI4F implements QuaternionReadable4FType
 {
   /**
    * The Context type contains the minimum storage required for all of the

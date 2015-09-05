@@ -16,13 +16,14 @@
 
 package com.io7m.jtensors.parameterized;
 
-import java.util.Arrays;
-
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.MatrixReadable3x3FType;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorWritable3FType;
+import net.jcip.annotations.Immutable;
+
+import java.util.Arrays;
 
 /**
  * An immutable 3x3 matrix type.
@@ -33,7 +34,7 @@ import com.io7m.jtensors.VectorWritable3FType;
  *          A phantom type parameter.
  */
 
-@EqualityStructural public final class PMatrixI3x3F<T0, T1> implements
+@EqualityStructural @Immutable public final class PMatrixI3x3F<T0, T1> implements
   PMatrixReadable3x3FType<T0, T1>
 {
   private static final float[][]    IDENTITY  = PMatrixI3x3F.makeIdentity();

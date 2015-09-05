@@ -20,6 +20,7 @@ import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
  * <p>
@@ -31,7 +32,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class VectorI3F implements VectorReadable3FType
+@Immutable public final class VectorI3F implements VectorReadable3FType
 {
   /**
    * The zero vector.

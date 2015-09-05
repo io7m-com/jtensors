@@ -20,6 +20,7 @@ import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
  * <p>
@@ -34,7 +35,7 @@ import com.io7m.jnull.Nullable;
  *          A phantom type parameter.
  */
 
-public final class PVectorI4F<T> implements PVectorReadable4FType<T>
+@Immutable public final class PVectorI4F<T> implements PVectorReadable4FType<T>
 {
   /**
    * The zero vector.

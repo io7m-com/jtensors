@@ -17,6 +17,7 @@
 package com.io7m.jtensors;
 
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
  * Three immutable orthonormal vectors.
@@ -24,7 +25,7 @@ import com.io7m.jnull.Nullable;
  * @since 5.2.0
  */
 
-public final class OrthonormalizedI3F
+@Immutable public final class OrthonormalizedI3F
 {
   private final VectorI3F rv0;
   private final VectorI3F rv1;

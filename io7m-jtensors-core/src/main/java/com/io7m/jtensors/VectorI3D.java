@@ -21,6 +21,7 @@ import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
  * <p>
@@ -32,7 +33,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class VectorI3D implements VectorReadable3DType
+@Immutable public final class VectorI3D implements VectorReadable3DType
 {
   /**
    * The zero vector.

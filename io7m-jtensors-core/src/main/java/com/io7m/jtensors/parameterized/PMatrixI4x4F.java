@@ -16,13 +16,14 @@
 
 package com.io7m.jtensors.parameterized;
 
-import java.util.Arrays;
-
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.MatrixReadable4x4FType;
 import com.io7m.jtensors.VectorReadable4FType;
 import com.io7m.jtensors.VectorWritable4FType;
+import net.jcip.annotations.Immutable;
+
+import java.util.Arrays;
 
 /**
  * An immutable 4x4 matrix type.
@@ -33,7 +34,7 @@ import com.io7m.jtensors.VectorWritable4FType;
  *          A phantom type parameter.
  */
 
-@EqualityStructural public final class PMatrixI4x4F<T0, T1> implements
+@EqualityStructural @Immutable public final class PMatrixI4x4F<T0, T1> implements
   PMatrixReadable4x4FType<T0, T1>
 {
   private static final float[][]              IDENTITY  = PMatrixI4x4F

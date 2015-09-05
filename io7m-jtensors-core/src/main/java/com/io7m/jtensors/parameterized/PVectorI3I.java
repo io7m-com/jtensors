@@ -19,6 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
  * <p>
@@ -33,7 +34,7 @@ import com.io7m.jnull.Nullable;
  *          A phantom type parameter.
  */
 
-public final class PVectorI3I<T> implements PVectorReadable3IType<T>
+@Immutable public final class PVectorI3I<T> implements PVectorReadable3IType<T>
 {
   /**
    * The zero vector.

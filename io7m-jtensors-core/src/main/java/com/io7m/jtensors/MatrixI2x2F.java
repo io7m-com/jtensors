@@ -16,10 +16,11 @@
 
 package com.io7m.jtensors;
 
-import java.util.Arrays;
-
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
+
+import java.util.Arrays;
 
 /**
  * An immutable 2x2 matrix type.
@@ -27,7 +28,7 @@ import com.io7m.jnull.Nullable;
  * @since 7.0.0
  */
 
-@EqualityStructural public final class MatrixI2x2F implements
+@EqualityStructural @Immutable public final class MatrixI2x2F implements
   MatrixReadable2x2FType
 {
   private static final float[][] IDENTITY  = MatrixI2x2F.makeIdentity();

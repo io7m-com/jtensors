@@ -16,10 +16,11 @@
 
 package com.io7m.jtensors;
 
-import java.util.Arrays;
-
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
+
+import java.util.Arrays;
 
 /**
  * An immutable 3x3 matrix type.
@@ -27,7 +28,7 @@ import com.io7m.jnull.Nullable;
  * @since 7.0.0
  */
 
-@EqualityStructural public final class MatrixI3x3F implements
+@EqualityStructural @Immutable public final class MatrixI3x3F implements
   MatrixReadable3x3FType
 {
   private static final float[][] IDENTITY  = MatrixI3x3F.makeIdentity();

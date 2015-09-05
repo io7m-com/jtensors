@@ -16,10 +16,11 @@
 
 package com.io7m.jtensors;
 
-import java.util.Arrays;
-
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
+
+import java.util.Arrays;
 
 /**
  * An immutable 4x4 matrix type.
@@ -27,7 +28,7 @@ import com.io7m.jnull.Nullable;
  * @since 7.0.0
  */
 
-@EqualityStructural public final class MatrixI4x4F implements
+@EqualityStructural @Immutable public final class MatrixI4x4F implements
   MatrixReadable4x4FType
 {
   private static final float[][] IDENTITY  = MatrixI4x4F.makeIdentity();

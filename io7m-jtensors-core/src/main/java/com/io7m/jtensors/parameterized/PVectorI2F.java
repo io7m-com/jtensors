@@ -21,6 +21,7 @@ import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
  * <p>
@@ -35,7 +36,7 @@ import com.io7m.jnull.Nullable;
  *          A phantom type parameter.
  */
 
-public final class PVectorI2F<T> implements PVectorReadable2FType<T>
+@Immutable public final class PVectorI2F<T> implements PVectorReadable2FType<T>
 {
 
   private static final PVectorI2F<?> ZERO = new PVectorI2F<Float>(0.0f, 0.0f);

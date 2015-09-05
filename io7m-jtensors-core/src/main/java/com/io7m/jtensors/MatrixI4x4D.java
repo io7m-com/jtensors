@@ -18,6 +18,7 @@ package com.io7m.jtensors;
 
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 import java.util.Arrays;
 
@@ -27,7 +28,7 @@ import java.util.Arrays;
  * @since 7.0.0
  */
 
-@EqualityStructural public final class MatrixI4x4D implements
+@EqualityStructural @Immutable public final class MatrixI4x4D implements
   MatrixReadable4x4DType
 {
   private static final double[][] IDENTITY  = MatrixI4x4D.makeIdentity();

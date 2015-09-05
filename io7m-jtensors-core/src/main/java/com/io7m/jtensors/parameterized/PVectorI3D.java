@@ -21,6 +21,7 @@ import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
  * <p>
@@ -35,7 +36,7 @@ import com.io7m.jnull.Nullable;
  *          A phantom type parameter.
  */
 
-public final class PVectorI3D<T> implements PVectorReadable3DType<T>
+@Immutable public final class PVectorI3D<T> implements PVectorReadable3DType<T>
 {
   /**
    * The zero vector.

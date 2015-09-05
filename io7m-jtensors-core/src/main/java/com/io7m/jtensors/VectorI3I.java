@@ -19,6 +19,7 @@ package com.io7m.jtensors;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
  * <p>
@@ -30,7 +31,7 @@ import com.io7m.jnull.Nullable;
  * </p>
  */
 
-public final class VectorI3I implements VectorReadable3IType
+@Immutable public final class VectorI3I implements VectorReadable3IType
 {
   /**
    * The zero vector.
