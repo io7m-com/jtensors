@@ -465,10 +465,10 @@ public final class QuaternionM4F implements
     final double m22 = m.getRowColumnF(2, 2);
     final double trace = MatrixM3x3F.trace(m);
 
-    double x;
-    double y;
-    double z;
-    double w;
+    final double x;
+    final double y;
+    final double z;
+    final double w;
 
     if (trace > 0) {
       // S = 4 * qw
@@ -540,10 +540,10 @@ public final class QuaternionM4F implements
 
     final double trace = m00 + m11 + m22;
 
-    double x;
-    double y;
-    double z;
-    double w;
+    final double x;
+    final double y;
+    final double z;
+    final double w;
 
     if (trace > 0) {
       // S = 4 * qw

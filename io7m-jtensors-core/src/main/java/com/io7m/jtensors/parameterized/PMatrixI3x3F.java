@@ -37,7 +37,8 @@ import com.io7m.jtensors.VectorWritable3FType;
   PMatrixReadable3x3FType<T0, T1>
 {
   private static final float[][]    IDENTITY  = PMatrixI3x3F.makeIdentity();
-  private static PMatrixI3x3F<?, ?> IDENTITYM = PMatrixI3x3F.makeIdentityM();
+  private static final PMatrixI3x3F<?, ?> IDENTITYM =
+    PMatrixI3x3F.makeIdentityM();
 
   /**
    * @return The identity matrix
@@ -47,10 +48,8 @@ import com.io7m.jtensors.VectorWritable3FType;
    *          A phantom type parameter.
    */
 
-  @SuppressWarnings("unchecked") public static
-    <T0, T1>
-    PMatrixI3x3F<T0, T1>
-    identity()
+  @SuppressWarnings("unchecked")
+  public static <T0, T1> PMatrixI3x3F<T0, T1> identity()
   {
     return (PMatrixI3x3F<T0, T1>) PMatrixI3x3F.IDENTITYM;
   }

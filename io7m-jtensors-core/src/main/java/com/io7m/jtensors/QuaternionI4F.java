@@ -388,10 +388,10 @@ public final class QuaternionI4F implements QuaternionReadable4FType
 
     final double trace = MatrixM3x3F.trace(m);
 
-    double x;
-    double y;
-    double z;
-    double w;
+    final double x;
+    final double y;
+    final double z;
+    final double w;
 
     if (trace > 0) {
       // S = 4 * qw
@@ -456,10 +456,10 @@ public final class QuaternionI4F implements QuaternionReadable4FType
 
     final double trace = m00 + m11 + m22;
 
-    double x;
-    double y;
-    double z;
-    double w;
+    final double x;
+    final double y;
+    final double z;
+    final double w;
 
     if (trace > 0) {
       // S = 4 * qw

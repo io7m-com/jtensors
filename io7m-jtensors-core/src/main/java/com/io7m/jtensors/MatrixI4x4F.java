@@ -31,7 +31,7 @@ import com.io7m.jnull.Nullable;
   MatrixReadable4x4FType
 {
   private static final float[][] IDENTITY  = MatrixI4x4F.makeIdentity();
-  private static MatrixI4x4F     IDENTITYM = MatrixI4x4F.makeIdentityM();
+  private static final MatrixI4x4F IDENTITYM = MatrixI4x4F.makeIdentityM();
 
   /**
    * @return The identity matrix

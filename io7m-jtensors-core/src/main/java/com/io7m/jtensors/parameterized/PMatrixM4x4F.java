@@ -16,10 +16,6 @@
 
 package com.io7m.jtensors.parameterized;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-
 import com.io7m.jfunctional.Option;
 import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
@@ -33,6 +29,10 @@ import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorReadable3IType;
 import com.io7m.jtensors.VectorReadable4FType;
 import com.io7m.jtensors.VectorWritable4FType;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 
 /**
  * <p>
@@ -851,25 +851,25 @@ import com.io7m.jtensors.VectorWritable4FType;
      * Eberly.
      */
 
-    double r0c0;
-    double r0c1;
-    double r0c2;
-    double r0c3;
+    final double r0c0;
+    final double r0c1;
+    final double r0c2;
+    final double r0c3;
 
-    double r1c0;
-    double r1c1;
-    double r1c2;
-    double r1c3;
+    final double r1c0;
+    final double r1c1;
+    final double r1c2;
+    final double r1c3;
 
-    double r2c0;
-    double r2c1;
-    double r2c2;
-    double r2c3;
+    final double r2c0;
+    final double r2c1;
+    final double r2c2;
+    final double r2c3;
 
-    double r3c0;
-    double r3c1;
-    double r3c2;
-    double r3c3;
+    final double r3c0;
+    final double r3c1;
+    final double r3c2;
+    final double r3c3;
 
     {
       // Sub-matrix obtained by removing m[0, 0]

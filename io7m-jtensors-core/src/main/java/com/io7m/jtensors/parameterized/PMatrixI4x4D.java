@@ -37,7 +37,8 @@ import com.io7m.jtensors.VectorWritable4DType;
   PMatrixReadable4x4DType<T0, T1>
 {
   private static final double[][]   IDENTITY  = PMatrixI4x4D.makeIdentity();
-  private static PMatrixI4x4D<?, ?> IDENTITYM = PMatrixI4x4D.makeIdentityM();
+  private static final PMatrixI4x4D<?, ?> IDENTITYM =
+    PMatrixI4x4D.makeIdentityM();
 
   /**
    * @return The identity matrix
@@ -48,10 +49,8 @@ import com.io7m.jtensors.VectorWritable4DType;
    *          A phantom type parameter.
    */
 
-  @SuppressWarnings("unchecked") public static
-    <T0, T1>
-    PMatrixI4x4D<T0, T1>
-    identity()
+  @SuppressWarnings("unchecked")
+  public static <T0, T1> PMatrixI4x4D<T0, T1> identity()
   {
     return (PMatrixI4x4D<T0, T1>) PMatrixI4x4D.IDENTITYM;
   }

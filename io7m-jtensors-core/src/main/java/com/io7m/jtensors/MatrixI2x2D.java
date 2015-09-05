@@ -31,7 +31,7 @@ import com.io7m.jnull.Nullable;
   MatrixReadable2x2DType
 {
   private static final double[][] IDENTITY  = MatrixI2x2D.makeIdentity();
-  private static MatrixI2x2D      IDENTITYM = MatrixI2x2D.makeIdentityM();
+  private static final MatrixI2x2D IDENTITYM = MatrixI2x2D.makeIdentityM();
 
   /**
    * @return The identity matrix
