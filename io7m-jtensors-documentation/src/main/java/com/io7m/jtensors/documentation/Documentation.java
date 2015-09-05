@@ -16,28 +16,16 @@
 
 package com.io7m.jtensors.documentation;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+import com.io7m.junreachable.UnreachableCodeException;
 
 /**
- * Functions for retrieving the documentation.
+ * Marker class for finding resources by class.
  */
 
-public final class TDocumentation
+public final class Documentation
 {
-  public static URI getDocumentationXMLLocation()
+  private Documentation()
   {
-    try {
-      final URL url =
-        TDocumentation.class
-          .getResource("/com/io7m/jtensors/documentation/documentation.xml");
-      assert url != null;
-      final URI uri = url.toURI();
-      assert uri != null;
-      return uri;
-    } catch (final URISyntaxException e) {
-      throw new AssertionError(e);
-    }
+    throw new UnreachableCodeException();
   }
 }
