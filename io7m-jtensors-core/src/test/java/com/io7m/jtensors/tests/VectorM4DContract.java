@@ -689,15 +689,17 @@ public abstract class VectorM4DContract extends VectorM4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
+    final VectorM4D.Context4D c = new VectorM4D.Context4D();
     final VectorM4D v0 = this.newVectorM4D(0.0, 1.0, 0.0, 0.0);
     final VectorM4D v1 = this.newVectorM4D(0.0, 0.0, 0.0, 0.0);
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
-        ec, VectorM4D.distance(v0, v1), 1.0));
+        ec, VectorM4D.distance(c, v0, v1), 1.0));
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final VectorM4D.Context4D c = new VectorM4D.Context4D();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
@@ -711,7 +713,7 @@ public abstract class VectorM4DContract extends VectorM4Contract
       final double w1 = Math.random() * Double.MAX_VALUE;
       final VectorM4D v1 = this.newVectorM4D(x1, y1, z1, w1);
 
-      Assert.assertTrue(VectorM4D.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(VectorM4D.distance(c, v0, v1) >= 0.0);
     }
   }
 
@@ -980,6 +982,7 @@ public abstract class VectorM4DContract extends VectorM4Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final VectorM4D.Context4D c = new VectorM4D.Context4D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -996,8 +999,8 @@ public abstract class VectorM4DContract extends VectorM4Contract
 
       final VectorM4D vr0 = this.newVectorM4D();
       final VectorM4D vr1 = this.newVectorM4D();
-      VectorM4D.interpolateLinear(v0, v1, 0.0, vr0);
-      VectorM4D.interpolateLinear(v0, v1, 1.0, vr1);
+      VectorM4D.interpolateLinear(c, v0, v1, 0.0, vr0);
+      VectorM4D.interpolateLinear(c, v0, v1, 1.0, vr1);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -1131,21 +1134,25 @@ public abstract class VectorM4DContract extends VectorM4Contract
 
   @Override @Test public void testOrthonormalize()
   {
+    final VectorM4D.Context4D c = new VectorM4D.Context4D();
     final VectorM4D v0 = this.newVectorM4D(0, 1, 0, 0);
     final VectorM4D v1 = this.newVectorM4D(0.5, 0.5, 0, 0);
+    final VectorM4D v0_out = new VectorM4D();
+    final VectorM4D v1_out = new VectorM4D();
 
-    final Pair<VectorM4D, VectorM4D> r = VectorM4D.orthoNormalize(v0, v1);
+    VectorM4D.orthoNormalize(c, v0, v0_out, v1, v1_out);
 
-    Assert.assertEquals(this.newVectorM4D(0, 1, 0, 0), r.getLeft());
-    Assert.assertEquals(this.newVectorM4D(1, 0, 0, 0), r.getRight());
+    Assert.assertEquals(this.newVectorM4D(0, 1, 0, 0), v0_out);
+    Assert.assertEquals(this.newVectorM4D(1, 0, 0, 0), v1_out);
   }
 
   @Override @Test public void testOrthonormalizeMutation()
   {
+    final VectorM4D.Context4D c = new VectorM4D.Context4D();
     final VectorM4D v0 = this.newVectorM4D(0, 1, 0, 0);
     final VectorM4D v1 = this.newVectorM4D(0.5, 0.5, 0, 0);
 
-    VectorM4D.orthoNormalizeInPlace(v0, v1);
+    VectorM4D.orthoNormalizeInPlace(c, v0, v1);
 
     Assert.assertEquals(this.newVectorM4D(0, 1, 0, 0), v0);
     Assert.assertEquals(this.newVectorM4D(1, 0, 0, 0), v1);

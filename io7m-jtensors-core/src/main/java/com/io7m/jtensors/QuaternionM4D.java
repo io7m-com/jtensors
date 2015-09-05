@@ -410,8 +410,8 @@ public final class QuaternionM4D implements
    *
    * @see VectorI3D#normalize(VectorReadable3DType)
    * @see VectorI4D#normalize(VectorReadable4DType)
-   * @see VectorM3D#normalize(VectorReadable3DType, VectorM3D)
-   * @see VectorM4D#normalize(VectorReadable4DType, VectorM4D)
+   * @see VectorM3D#normalize(VectorReadable3DType, VectorWritable3DType)
+   * @see VectorM4D#normalize(VectorReadable4DType, VectorWritable4DType)
    *
    * @param axis
    *          The normalized quaternion representing the axis

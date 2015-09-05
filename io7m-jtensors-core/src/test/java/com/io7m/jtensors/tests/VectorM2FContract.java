@@ -19,7 +19,6 @@ package com.io7m.jtensors.tests;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorM2F;
 import org.junit.Assert;
 import org.junit.Test;
@@ -538,16 +537,19 @@ public abstract class VectorM2FContract extends VectorM2Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final VectorM2F.Context2F c = new VectorM2F.Context2F();
 
     final VectorM2F v0 = this.newVectorM2F(0.0f, 1.0f);
     final VectorM2F v1 = this.newVectorM2F(0.0f, 0.0f);
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
-        ec, VectorM2F.distance(v0, v1), 1.0f));
+        ec, VectorM2F.distance(c, v0, v1), 1.0f));
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final VectorM2F.Context2F c = new VectorM2F.Context2F();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -557,7 +559,7 @@ public abstract class VectorM2FContract extends VectorM2Contract
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM2F v1 = this.newVectorM2F(x1, y1);
 
-      Assert.assertTrue(VectorM2F.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(VectorM2F.distance(c, v0, v1) >= 0.0);
     }
   }
 
@@ -755,6 +757,7 @@ public abstract class VectorM2FContract extends VectorM2Contract
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
+    final VectorM2F.Context2F c = new VectorM2F.Context2F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -767,8 +770,8 @@ public abstract class VectorM2FContract extends VectorM2Contract
 
       final VectorM2F vr0 = this.newVectorM2F();
       final VectorM2F vr1 = this.newVectorM2F();
-      VectorM2F.interpolateLinear(v0, v1, 0.0f, vr0);
-      VectorM2F.interpolateLinear(v0, v1, 1.0f, vr1);
+      VectorM2F.interpolateLinear(c, v0, v1, 0.0f, vr0);
+      VectorM2F.interpolateLinear(c, v0, v1, 1.0f, vr1);
 
       Assert.assertTrue(
         AlmostEqualFloat.almostEqual(
@@ -894,21 +897,26 @@ public abstract class VectorM2FContract extends VectorM2Contract
 
   @Override @Test public void testOrthonormalize()
   {
+    final VectorM2F.Context2F c = new VectorM2F.Context2F();
     final VectorM2F v0 = this.newVectorM2F(0, 1);
     final VectorM2F v1 = this.newVectorM2F(0.5f, 0.5f);
 
-    final Pair<VectorM2F, VectorM2F> r = VectorM2F.orthoNormalize(v0, v1);
+    final VectorM2F v0_out = new VectorM2F();
+    final VectorM2F v1_out = new VectorM2F();
 
-    Assert.assertEquals(this.newVectorM2F(0, 1), r.getLeft());
-    Assert.assertEquals(this.newVectorM2F(1, 0), r.getRight());
+    VectorM2F.orthoNormalize(c, v0, v0_out, v1, v1_out);
+
+    Assert.assertEquals(this.newVectorM2F(0, 1), v0_out);
+    Assert.assertEquals(this.newVectorM2F(1, 0), v1_out);
   }
 
   @Override @Test public void testOrthonormalizeMutation()
   {
+    final VectorM2F.Context2F c = new VectorM2F.Context2F();
     final VectorM2F v0 = this.newVectorM2F(0f, 1f);
     final VectorM2F v1 = this.newVectorM2F(0.5f, 0.5f);
 
-    VectorM2F.orthoNormalizeInPlace(v0, v1);
+    VectorM2F.orthoNormalizeInPlace(c, v0, v1);
 
     Assert.assertEquals(this.newVectorM2F(0, 1), v0);
     Assert.assertEquals(this.newVectorM2F(1, 0), v1);

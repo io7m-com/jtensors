@@ -23,77 +23,68 @@ import com.io7m.jnull.Nullable;
 /**
  * A four-dimensional mutable quaternion type with single precision elements.
  *
- * <p>
- * Values of this type cannot be accessed safely from multiple threads without
- * explicit synchronization.
- * </p>
+ * <p> Values of this type cannot be accessed safely from multiple threads
+ * without explicit synchronization. </p>
  */
 
-public final class QuaternionM4F implements
-  QuaternionReadable4FType,
-  QuaternionWritable4FType
+public final class QuaternionM4F
+  implements QuaternionReadable4FType, QuaternionWritable4FType
 {
+  private float w;
+  private float x;
+  private float y;
+  private float z;
+
   /**
-   * The Context type contains the minimum storage required for all of the
-   * functions of the {@code QuaternionM4D} class.
-   *
-   * <p>
-   * The purpose of the class is to allow applications to allocate all storage
-   * ahead of time in order to allow functions in the class to avoid
-   * allocating memory (not including stack space) for intermediate
-   * calculations. This can reduce garbage collection in speed critical code.
-   * </p>
-   *
-   * <p>
-   * The user should allocate one {@code Context} value per thread, and
-   * then pass this value to matrix functions. Any matrix function that takes
-   * a {@code Context} value will not generate garbage.
-   * </p>
-   *
-   * @since 5.0.0
+   * Default constructor, initializing the quaternion with values {@code [0.0,
+   * 0.0, 0.0, 1.0]}
    */
 
-  public static class Context
+  public QuaternionM4F()
   {
-    private final MatrixM3x3F.Context m_context = new MatrixM3x3F.Context();
-    private final MatrixM3x3F         m3a       = new MatrixM3x3F();
-    private final VectorM3F           v3a       = new VectorM3F();
-
-    /**
-     * Construct a new context.
-     */
-
-    public Context()
-    {
-
-    }
-
-    final MatrixM3x3F.Context getContext()
-    {
-      return this.m_context;
-    }
-
-    final MatrixM3x3F getM3A()
-    {
-      return this.m3a;
-    }
-
-    final VectorM3F getV3A()
-    {
-      return this.v3a;
-    }
+    this(0.0f, 0.0f, 0.0f, 1.0f);
   }
 
   /**
-   * Calculate the element-wise sum of the quaternions {@code q0} and
-   * {@code q1}, saving the result to {@code qr}.
+   * Construct a quaternion initialized with the given values.
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
-   * @param out
-   *          The output quaternion
+   * @param in_x The {@code x} value
+   * @param in_y The {@code y} value
+   * @param in_z The {@code z} value
+   * @param in_w The {@code w} value
+   */
+
+  public QuaternionM4F(
+    final float in_x,
+    final float in_y,
+    final float in_z,
+    final float in_w)
+  {
+    this.x = in_x;
+    this.y = in_y;
+    this.z = in_z;
+    this.w = in_w;
+  }
+
+  /**
+   * Construct a quaternion initialized with the values given in {@code q}.
+   *
+   * @param q The source quaternion
+   */
+
+  public QuaternionM4F(
+    final QuaternionReadable4FType q)
+  {
+    this(q.getXF(), q.getYF(), q.getZF(), q.getWF());
+  }
+
+  /**
+   * Calculate the element-wise sum of the quaternions {@code q0} and {@code
+   * q1}, saving the result to {@code qr}.
+   *
+   * @param q0  The left input quaternion
+   * @param q1  The right input quaternion
+   * @param out The output quaternion
    *
    * @return {@code (q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)}
    */
@@ -115,13 +106,11 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Calculate the element-wise sum of the quaternions {@code q0} and
-   * {@code q1}, saving the result to {@code q0}.
+   * Calculate the element-wise sum of the quaternions {@code q0} and {@code
+   * q1}, saving the result to {@code q0}.
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
+   * @param q0 The left input quaternion
+   * @param q1 The right input quaternion
    *
    * @return {@code (q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)}
    */
@@ -134,20 +123,17 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Determine whether or not the quaternions {@code qa} and
-   * {@code qb} are equal to within the degree of error given in
-   * {@code context}.
+   * Determine whether or not the quaternions {@code qa} and {@code qb} are
+   * equal to within the degree of error given in {@code context}.
+   *
+   * @param context The equality context
+   * @param qa      The left input quaternion
+   * @param qb      The right input quaternion
+   *
+   * @return {@code true} if the quaternions are almost equal
    *
    * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
-   *
-   * @param context
-   *          The equality context
-   * @param qa
-   *          The left input quaternion
-   * @param qb
-   *          The right input quaternion
    * @since 5.0.0
-   * @return {@code true} if the quaternions are almost equal
    */
 
   public static boolean almostEqual(
@@ -167,13 +153,11 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Calculate the conjugate of the input quaternion {@code q}, saving
-   * the result to {@code out}.
+   * Calculate the conjugate of the input quaternion {@code q}, saving the
+   * result to {@code out}.
    *
-   * @param q
-   *          The input quaternion
-   * @param out
-   *          The output quaternion
+   * @param q   The input quaternion
+   * @param out The output quaternion
    *
    * @return {@code out}
    */
@@ -190,11 +174,10 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Calculate the conjugate of the input quaternion {@code q}, modifying
-   * {@code q} in place.
+   * Calculate the conjugate of the input quaternion {@code q}, modifying {@code
+   * q} in place.
    *
-   * @param q
-   *          The input quaternion
+   * @param q The input quaternion
    *
    * @return {@code q}
    */
@@ -208,10 +191,9 @@ public final class QuaternionM4F implements
   /**
    * Copy the contents of the quaternion {@code q} to {@code out}.
    *
-   * @param q
-   *          The input quaternion
-   * @param out
-   *          The output quaternion
+   * @param q   The input quaternion
+   * @param out The output quaternion
+   *
    * @return {@code out}
    */
 
@@ -227,13 +209,10 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Calculate the scalar product of the quaternions {@code q0} and
-   * {@code q1}.
+   * Calculate the scalar product of the quaternions {@code q0} and {@code q1}.
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
+   * @param q0 The left input quaternion
+   * @param q1 The right input quaternion
    *
    * @return The scalar product of the two quaternions
    */
@@ -250,23 +229,16 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Linearly interpolate between {@code q0} and {@code q1} by the
-   * amount {@code alpha}, such that:
+   * Linearly interpolate between {@code q0} and {@code q1} by the amount {@code
+   * alpha}, such that:
    *
-   * <ul>
-   * <li>{@code interpolateLinear(q0, q1, 0.0, r) -> r = q0}</li>
-   * <li>{@code interpolateLinear(q0, q1, 1.0, r) -> r = q1}</li>
-   * </ul>
+   * <ul> <li>{@code interpolateLinear(q0, q1, 0.0, r) -> r = q0}</li>
+   * <li>{@code interpolateLinear(q0, q1, 1.0, r) -> r = q1}</li> </ul>
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
-   * @param alpha
-   *          The interpolation value, between {@code 0.0} and
-   *          {@code 1.0}
-   * @param r
-   *          The output quaternion
+   * @param q0    The left input quaternion
+   * @param q1    The right input quaternion
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}
+   * @param r     The output quaternion
    *
    * @return {@code (1 - alpha) * q0 + alpha * q1}
    */
@@ -287,23 +259,18 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Return {@code true} iff {@code qa} is the negation of
-   * {@code qb}.
+   * Return {@code true} iff {@code qa} is the negation of {@code qb}.
    *
-   * <p>
-   * Each element is compared with
-   * {@link AlmostEqualFloat#almostEqual(ContextRelative, float, float)}.
-   * </p>
+   * <p> Each element is compared with {@link AlmostEqualFloat#almostEqual
+   * (ContextRelative, float, float)}. </p>
    *
-   * @param context
-   *          The equality context
-   * @param qa
-   *          The left quaternion
-   * @param qb
-   *          The right quaternion
+   * @param context The equality context
+   * @param qa      The left quaternion
+   * @param qb      The right quaternion
+   *
+   * @return {@code true} iff {@code qa} is the negation of {@code qb}
+   *
    * @since 5.0.0
-   * @return {@code true} iff {@code qa} is the negation of
-   *         {@code qb}
    */
 
   public static boolean isNegationOf(
@@ -331,25 +298,18 @@ public final class QuaternionM4F implements
 
   /**
    * Produce a quaternion that represents a rotation that "looks at" the point
-   * at {@code target} assuming the viewer is at {@code origin},
-   * using {@code up} as the "up" vector, saving the result to
-   * {@code q}.
+   * at {@code target} assuming the viewer is at {@code origin}, using {@code
+   * up} as the "up" vector, saving the result to {@code q}.
    *
-   * <p>
-   * The function uses storage preallocated in {@code context} to avoid
-   * any new allocations.
-   * </p>
+   * <p> The function uses storage preallocated in {@code context} to avoid any
+   * new allocations. </p>
    *
-   * @param context
-   *          Preallocated storage
-   * @param q
-   *          The output quaternion
-   * @param origin
-   *          The origin point
-   * @param target
-   *          The target point
-   * @param up
-   *          The up vector
+   * @param context Preallocated storage
+   * @param q       The output quaternion
+   * @param origin  The origin point
+   * @param target  The target point
+   * @param up      The up vector
+   *
    * @return {@code q}
    *
    * @since 5.0.0
@@ -376,8 +336,7 @@ public final class QuaternionM4F implements
    *
    * Correspondingly, {@code magnitude(normalize(q)) == 1.0}.
    *
-   * @param q
-   *          The input quaternion
+   * @param q The input quaternion
    *
    * @return The magnitude of the input quaternion
    */
@@ -391,8 +350,7 @@ public final class QuaternionM4F implements
   /**
    * Calculate the squared magnitude of the quaternion {@code q}.
    *
-   * @param q
-   *          The input quaternion
+   * @param q The input quaternion
    *
    * @return The squared magnitude of the input quaternion
    */
@@ -404,23 +362,20 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Produce a quaternion that represents a rotation of {@code angle}
-   * degrees around the axis specified by {@code axis}, saving the result
-   * to {@code out}. {@code axis} is assumed to be of unit length.
+   * Produce a quaternion that represents a rotation of {@code angle} degrees
+   * around the axis specified by {@code axis}, saving the result to {@code
+   * out}. {@code axis} is assumed to be of unit length.
+   *
+   * @param axis  The normalized vector representing the axis
+   * @param angle The angle to rotate, in radians
+   * @param out   The output quaternion
+   *
+   * @return A quaternion representing the rotation
    *
    * @see VectorI3F#normalize(VectorReadable3FType)
    * @see VectorI4F#normalize(VectorReadable4FType)
-   * @see VectorM3F#normalize(VectorReadable3FType, VectorM3F)
-   * @see VectorM4F#normalize(VectorReadable4FType, VectorM4F)
-   *
-   * @param axis
-   *          The normalized vector representing the axis
-   * @param angle
-   *          The angle to rotate, in radians
-   * @param out
-   *          The output quaternion
-   *
-   * @return A quaternion representing the rotation
+   * @see VectorM3F#normalize(VectorReadable3FType, VectorWritable3FType)
+   * @see VectorM4F#normalize(VectorReadable4FType, VectorWritable4FType)
    */
 
   public static QuaternionM4F makeFromAxisAngle(
@@ -439,15 +394,15 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Produce a quaternion equivalent to the rotation matrix {@code m},
-   * writing the result to {@code out}.
+   * Produce a quaternion equivalent to the rotation matrix {@code m}, writing
+   * the result to {@code out}.
+   *
+   * @param m   The rotation matrix
+   * @param out The output quaternion
+   *
+   * @return {@code out}
    *
    * @since 5.0.0
-   * @param m
-   *          The rotation matrix
-   * @param out
-   *          The output quaternion
-   * @return {@code out}
    */
 
   public static QuaternionM4F makeFromRotationMatrix3x3(
@@ -508,15 +463,15 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Produce a quaternion equivalent to the rotation matrix {@code m},
-   * writing the result to {@code out}.
+   * Produce a quaternion equivalent to the rotation matrix {@code m}, writing
+   * the result to {@code out}.
+   *
+   * @param m   The rotation matrix
+   * @param out The output quaternion
+   *
+   * @return {@code out}
    *
    * @since 5.0.0
-   * @param m
-   *          The rotation matrix
-   * @param out
-   *          The output quaternion
-   * @return {@code out}
    */
 
   public static QuaternionM4F makeFromRotationMatrix4x4(
@@ -583,16 +538,15 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Produce a rotation matrix from the quaternion {@code q}, saving the
-   * result to {@code m}.
+   * Produce a rotation matrix from the quaternion {@code q}, saving the result
+   * to {@code m}.
    *
-   * @since 5.0.0
-   * @param q
-   *          The input quaternion
-   * @param m
-   *          The output matrix
+   * @param q The input quaternion
+   * @param m The output matrix
    *
    * @return {@code m}
+   *
+   * @since 5.0.0
    */
 
   public static MatrixM3x3F makeRotationMatrix3x3(
@@ -637,18 +591,16 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Produce a rotation matrix from the quaternion {@code q}, saving the
-   * result to {@code m}.
+   * Produce a rotation matrix from the quaternion {@code q}, saving the result
+   * to {@code m}.
    *
-   * @since 5.0.0
-   * @param q
-   *          The input quaternion
-   * @param m
-   *          The output matrix
+   * @param q   The input quaternion
+   * @param m   The output matrix
+   * @param <M> The precise type of matrix.
    *
    * @return {@code m}
-   * @param <M>
-   *          The precise type of matrix.
+   *
+   * @since 5.0.0
    */
 
   public static <M extends MatrixWritable4x4FType> M makeRotationMatrix4x4(
@@ -709,42 +661,28 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Multiply the quaternion {@code q0} by the quaternion {@code q1}
-   * , saving the result to {@code qr}.
+   * Multiply the quaternion {@code q0} by the quaternion {@code q1} , saving
+   * the result to {@code qr}.
    *
-   * <p>
-   * Note that this operation is not commutative.
-   * </p>
+   * <p> Note that this operation is not commutative. </p>
    *
-   * <p>
-   * The function is most often used to concatenate quaternions to combine
-   * rotations. As an example, assuming that:
-   * </p>
+   * <p> The function is most often used to concatenate quaternions to combine
+   * rotations. As an example, assuming that: </p>
    *
-   * <ul>
-   * <li>{@code qx} represents some rotation around the X axis</li>
-   * <li>{@code qy} represents some rotation around the Y axis</li>
-   * <li>{@code qz} represents some rotation around the Z axis</li>
-   * </ul>
+   * <ul> <li>{@code qx} represents some rotation around the X axis</li>
+   * <li>{@code qy} represents some rotation around the Y axis</li> <li>{@code
+   * qz} represents some rotation around the Z axis</li> </ul>
    *
-   * <p>
-   * The following code produces a quaternion {@code qr} that represents
-   * a rotation around the X axis, followed by a rotation around the Y axis,
-   * followed by a rotation around the Z axis:
-   * </p>
+   * <p> The following code produces a quaternion {@code qr} that represents a
+   * rotation around the X axis, followed by a rotation around the Y axis,
+   * followed by a rotation around the Z axis: </p>
    *
-   * {@code
-   * QuaternionM4F qr = new QuaternionM4F();
-   * QuaternionM4F.multiply(qy, qx, qr);
-   * QuaternionM4F.multiply(qz, qr, qr);
-   * }
+   * {@code QuaternionM4F qr = new QuaternionM4F(); QuaternionM4F.multiply(qy,
+   * qx, qr); QuaternionM4F.multiply(qz, qr, qr); }
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
-   * @param qr
-   *          The output quaternion
+   * @param q0 The left input quaternion
+   * @param q1 The right input quaternion
+   * @param qr The output quaternion
    *
    * @return {@code qr}
    */
@@ -765,8 +703,7 @@ public final class QuaternionM4F implements
 
     final float rx = ((q0w * q1x) + (q0x * q1w) + (q0y * q1z)) - (q0z * q1y);
     final float ry = ((q0w * q1y) - (q0x * q1z)) + (q0y * q1w) + (q0z * q1x);
-    final float rz =
-      (((q0w * q1z) + (q0x * q1y)) - (q0y * q1x)) + (q0z * q1w);
+    final float rz = (((q0w * q1z) + (q0x * q1y)) - (q0y * q1x)) + (q0z * q1w);
     final float rw = (q0w * q1w) - (q0x * q1x) - (q0y * q1y) - (q0z * q1z);
 
     qr.x = rx;
@@ -777,17 +714,16 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Multiply the quaternion {@code q0} by the quaternion {@code q1}
-   * , saving the result to {@code q0}.
+   * Multiply the quaternion {@code q0} by the quaternion {@code q1} , saving
+   * the result to {@code q0}.
+   *
+   * @param q0 The left quaternion
+   * @param q1 The right quaternion
+   *
+   * @return q0
    *
    * @see QuaternionM4F#multiply(QuaternionReadable4FType,
-   *      QuaternionReadable4FType, QuaternionM4F)
-   *
-   * @param q0
-   *          The left quaternion
-   * @param q1
-   *          The right quaternion
-   * @return q0
+   * QuaternionReadable4FType, QuaternionM4F)
    */
 
   public static QuaternionM4F multiplyInPlace(
@@ -798,13 +734,12 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Negate the elements of {@code qa}, writing the resulting quaternion
-   * to {@code out}.
+   * Negate the elements of {@code qa}, writing the resulting quaternion to
+   * {@code out}.
    *
-   * @param qa
-   *          The input quaternion
-   * @param out
-   *          The output quaternion
+   * @param qa  The input quaternion
+   * @param out The output quaternion
+   *
    * @return out
    *
    * @since 5.0.0
@@ -828,8 +763,8 @@ public final class QuaternionM4F implements
   /**
    * Negate the elements of {@code q}, modifying the quaternion in-place.
    *
-   * @param q
-   *          The input quaternion
+   * @param q The input quaternion
+   *
    * @return q
    *
    * @since 5.0.0
@@ -843,13 +778,11 @@ public final class QuaternionM4F implements
 
   /**
    * Returns a quaternion with the same orientation as {@code q} but with
-   * magnitude equal to {@code 1.0} in {@code out}. The function
-   * returns the zero quaternion iff the input is the zero quaternion.
+   * magnitude equal to {@code 1.0} in {@code out}. The function returns the
+   * zero quaternion iff the input is the zero quaternion.
    *
-   * @param out
-   *          The output quaternion
-   * @param q
-   *          The input quaternion
+   * @param out The output quaternion
+   * @param q   The input quaternion
    *
    * @return out
    */
@@ -872,11 +805,10 @@ public final class QuaternionM4F implements
 
   /**
    * Returns a quaternion with the same orientation as {@code q} but with
-   * magnitude equal to {@code 1.0} in {@code q}. The function
-   * returns the zero quaternion iff the input is the zero quaternion.
+   * magnitude equal to {@code 1.0} in {@code q}. The function returns the zero
+   * quaternion iff the input is the zero quaternion.
    *
-   * @param q
-   *          The input quaternion
+   * @param q The input quaternion
    *
    * @return q
    */
@@ -888,15 +820,12 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Scale the quaternion {@code q} by the scalar {@code r}, saving
-   * the result to {@code out}.
+   * Scale the quaternion {@code q} by the scalar {@code r}, saving the result
+   * to {@code out}.
    *
-   * @param q
-   *          The input quaternion
-   * @param r
-   *          The scaling value
-   * @param out
-   *          The output quaternion
+   * @param q   The input quaternion
+   * @param r   The scaling value
+   * @param out The output quaternion
    *
    * @return {@code (q.x * r, q.y * r, q.z * r, q.w * r)}
    */
@@ -918,13 +847,11 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Scale the quaternion {@code q} by the scalar {@code r}, saving
-   * the result to {@code q}.
+   * Scale the quaternion {@code q} by the scalar {@code r}, saving the result
+   * to {@code q}.
    *
-   * @param q
-   *          The input quaternion
-   * @param r
-   *          The scaling value
+   * @param q The input quaternion
+   * @param r The scaling value
    *
    * @return {@code (q.x * r, q.y * r, q.z * r, q.w * r)}
    */
@@ -937,15 +864,12 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Subtract the quaternion {@code q0} from the quaternion
-   * {@code q1}, saving the result to {@code out}.
+   * Subtract the quaternion {@code q0} from the quaternion {@code q1}, saving
+   * the result to {@code out}.
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
-   * @param out
-   *          The output quaternion
+   * @param q0  The left input quaternion
+   * @param q1  The right input quaternion
+   * @param out The output quaternion
    *
    * @return {@code (q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)}
    */
@@ -967,13 +891,11 @@ public final class QuaternionM4F implements
   }
 
   /**
-   * Subtract the quaternion {@code q0} from the quaternion
-   * {@code q1}, saving the result to {@code q0}.
+   * Subtract the quaternion {@code q0} from the quaternion {@code q1}, saving
+   * the result to {@code q0}.
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
+   * @param q0 The left input quaternion
+   * @param q1 The right input quaternion
    *
    * @return {@code (q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)}
    */
@@ -983,60 +905,6 @@ public final class QuaternionM4F implements
     final QuaternionReadable4FType q1)
   {
     return QuaternionM4F.subtract(q0, q1, q0);
-  }
-
-  private float w;
-  private float x;
-  private float y;
-  private float z;
-
-  /**
-   * Default constructor, initializing the quaternion with values
-   * {@code [0.0, 0.0, 0.0, 1.0]}
-   */
-
-  public QuaternionM4F()
-  {
-    this(0.0f, 0.0f, 0.0f, 1.0f);
-  }
-
-  /**
-   * Construct a quaternion initialized with the given values.
-   *
-   * @param in_x
-   *          The {@code x} value
-   * @param in_y
-   *          The {@code y} value
-   * @param in_z
-   *          The {@code z} value
-   * @param in_w
-   *          The {@code w} value
-   */
-
-  public QuaternionM4F(
-    final float in_x,
-    final float in_y,
-    final float in_z,
-    final float in_w)
-  {
-    this.x = in_x;
-    this.y = in_y;
-    this.z = in_z;
-    this.w = in_w;
-  }
-
-  /**
-   * Construct a quaternion initialized with the values given in
-   * {@code q}.
-   *
-   * @param q
-   *          The source quaternion
-   */
-
-  public QuaternionM4F(
-    final QuaternionReadable4FType q)
-  {
-    this(q.getXF(), q.getYF(), q.getZF(), q.getWF());
   }
 
   @Override public void copyFrom2F(
@@ -1079,10 +947,7 @@ public final class QuaternionM4F implements
     if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
       return false;
     }
-    if (Float.floatToIntBits(this.z) != Float.floatToIntBits(other.z)) {
-      return false;
-    }
-    return true;
+    return Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
   }
 
   @Override public float getWF()
@@ -1090,9 +955,21 @@ public final class QuaternionM4F implements
     return this.w;
   }
 
+  @Override public void setWF(
+    final float in_w)
+  {
+    this.w = in_w;
+  }
+
   @Override public float getXF()
   {
     return this.x;
+  }
+
+  @Override public void setXF(
+    final float in_x)
+  {
+    this.x = in_x;
   }
 
   @Override public float getYF()
@@ -1100,9 +977,21 @@ public final class QuaternionM4F implements
     return this.y;
   }
 
+  @Override public void setYF(
+    final float in_y)
+  {
+    this.y = in_y;
+  }
+
   @Override public float getZF()
   {
     return this.z;
+  }
+
+  @Override public void setZF(
+    final float in_z)
+  {
+    this.z = in_z;
   }
 
   @Override public int hashCode()
@@ -1146,30 +1035,6 @@ public final class QuaternionM4F implements
     this.w = in_w;
   }
 
-  @Override public void setWF(
-    final float in_w)
-  {
-    this.w = in_w;
-  }
-
-  @Override public void setXF(
-    final float in_x)
-  {
-    this.x = in_x;
-  }
-
-  @Override public void setYF(
-    final float in_y)
-  {
-    this.y = in_y;
-  }
-
-  @Override public void setZF(
-    final float in_z)
-  {
-    this.z = in_z;
-  }
-
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
@@ -1185,6 +1050,54 @@ public final class QuaternionM4F implements
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  /**
+   * The Context type contains the minimum storage required for all of the
+   * functions of the {@code QuaternionM4D} class.
+   *
+   * <p> The purpose of the class is to allow applications to allocate all
+   * storage ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical code.
+   * </p>
+   *
+   * <p> The user should allocate one {@code Context} value per thread, and then
+   * pass this value to matrix functions. Any matrix function that takes a
+   * {@code Context} value will not generate garbage. </p>
+   *
+   * @since 5.0.0
+   */
+
+  public static class Context
+  {
+    private final MatrixM3x3F.Context m_context = new MatrixM3x3F.Context();
+    private final MatrixM3x3F         m3a       = new MatrixM3x3F();
+    private final VectorM3F           v3a       = new VectorM3F();
+
+    /**
+     * Construct a new context.
+     */
+
+    public Context()
+    {
+
+    }
+
+    final MatrixM3x3F.Context getContext()
+    {
+      return this.m_context;
+    }
+
+    final MatrixM3x3F getM3A()
+    {
+      return this.m3a;
+    }
+
+    final VectorM3F getV3A()
+    {
+      return this.v3a;
+    }
   }
 
 }

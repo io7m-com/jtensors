@@ -341,8 +341,8 @@ import net.jcip.annotations.Immutable;
    *
    * @see VectorI3F#normalize(VectorReadable3FType)
    * @see VectorI4F#normalize(VectorReadable4FType)
-   * @see VectorM3F#normalize(VectorReadable3FType, VectorM3F)
-   * @see VectorM4F#normalize(VectorReadable4FType, VectorM4F)
+   * @see VectorM3F#normalize(VectorReadable3FType, VectorWritable3FType)
+   * @see VectorM4F#normalize(VectorReadable4FType, VectorWritable4FType)
    *
    * @param axis
    *          The normalized vector representing the axis

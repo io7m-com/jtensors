@@ -676,8 +676,8 @@ public final class PVectorM3F<T> implements
    * such that:
    *
    * <ul>
-   * <li>{@code interpolateLinear(v0, v1, 0.0, r) -&gt; r = v0}</li>
-   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -&gt; r = v1}</li>
+   * <li>{@code interpolateLinear(v0, v1, 0.0, r) → r = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0, r) → r = v1}</li>
    * </ul>
    *
    * @param v0

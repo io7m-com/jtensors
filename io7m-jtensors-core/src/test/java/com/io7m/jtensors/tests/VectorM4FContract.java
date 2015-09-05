@@ -679,16 +679,18 @@ public abstract class VectorM4FContract extends VectorM4Contract
 
   @Override @Test public void testDistance()
   {
+    final VectorM4F.Context4F c = new VectorM4F.Context4F();
     final VectorM4F v0 = this.newVectorM4F(0.0f, 1.0f, 0.0f, 0.0f);
     final VectorM4F v1 = this.newVectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final ContextRelative context = new ContextRelative();
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
-        context, VectorM4F.distance(v0, v1), 1.0f));
+        context, VectorM4F.distance(c, v0, v1), 1.0f));
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final VectorM4F.Context4F c = new VectorM4F.Context4F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -702,7 +704,7 @@ public abstract class VectorM4FContract extends VectorM4Contract
       final float w1 = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM4F v1 = this.newVectorM4F(x1, y1, z1, w1);
 
-      Assert.assertTrue(VectorM4F.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(VectorM4F.distance(c, v0, v1) >= 0.0);
     }
   }
 
@@ -971,6 +973,7 @@ public abstract class VectorM4FContract extends VectorM4Contract
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
+    final VectorM4F.Context4F c = new VectorM4F.Context4F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -987,8 +990,8 @@ public abstract class VectorM4FContract extends VectorM4Contract
 
       final VectorM4F vr0 = this.newVectorM4F();
       final VectorM4F vr1 = this.newVectorM4F();
-      VectorM4F.interpolateLinear(v0, v1, 0.0f, vr0);
-      VectorM4F.interpolateLinear(v0, v1, 1.0f, vr1);
+      VectorM4F.interpolateLinear(c, v0, v1, 0.0f, vr0);
+      VectorM4F.interpolateLinear(c, v0, v1, 1.0f, vr1);
 
       Assert.assertTrue(
         AlmostEqualFloat.almostEqual(
@@ -1127,21 +1130,25 @@ public abstract class VectorM4FContract extends VectorM4Contract
 
   @Override @Test public void testOrthonormalize()
   {
+    final VectorM4F.Context4F c = new VectorM4F.Context4F();
     final VectorM4F v0 = this.newVectorM4F(0, 1, 0, 0);
     final VectorM4F v1 = this.newVectorM4F(0.5f, 0.5f, 0, 0);
+    final VectorM4F v0_out = new VectorM4F();
+    final VectorM4F v1_out = new VectorM4F();
 
-    final Pair<VectorM4F, VectorM4F> r = VectorM4F.orthoNormalize(v0, v1);
+    VectorM4F.orthoNormalize(c, v0, v0_out, v1, v1_out);
 
-    Assert.assertEquals(this.newVectorM4F(0, 1, 0, 0), r.getLeft());
-    Assert.assertEquals(this.newVectorM4F(1, 0, 0, 0), r.getRight());
+    Assert.assertEquals(this.newVectorM4F(0, 1, 0, 0), v0_out);
+    Assert.assertEquals(this.newVectorM4F(1, 0, 0, 0), v1_out);
   }
 
   @Override @Test public void testOrthonormalizeMutation()
   {
+    final VectorM4F.Context4F c = new VectorM4F.Context4F();
     final VectorM4F v0 = this.newVectorM4F(0f, 1f, 0f, 0f);
     final VectorM4F v1 = this.newVectorM4F(0.5f, 0.5f, 0f, 0f);
 
-    VectorM4F.orthoNormalizeInPlace(v0, v1);
+    VectorM4F.orthoNormalizeInPlace(c,v0, v1);
 
     Assert.assertEquals(this.newVectorM4F(0, 1, 0, 0), v0);
     Assert.assertEquals(this.newVectorM4F(1, 0, 0, 0), v1);

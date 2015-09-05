@@ -529,15 +529,18 @@ public abstract class VectorM2DContract extends VectorM2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
+    final VectorM2D.Context2D c = new VectorM2D.Context2D();
     final VectorM2D v0 = this.newVectorM2D(0.0, 1.0);
     final VectorM2D v1 = this.newVectorM2D(0.0, 0.0);
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
-        ec, VectorM2D.distance(v0, v1), 1.0));
+        ec, VectorM2D.distance(c, v0, v1), 1.0));
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final VectorM2D.Context2D c = new VectorM2D.Context2D();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
@@ -547,7 +550,7 @@ public abstract class VectorM2DContract extends VectorM2Contract
       final double y1 = Math.random() * Double.MAX_VALUE;
       final VectorM2D v1 = this.newVectorM2D(x1, y1);
 
-      Assert.assertTrue(VectorM2D.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(VectorM2D.distance(c, v0, v1) >= 0.0);
     }
   }
 
@@ -745,6 +748,7 @@ public abstract class VectorM2DContract extends VectorM2Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final VectorM2D.Context2D c = new VectorM2D.Context2D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -757,8 +761,8 @@ public abstract class VectorM2DContract extends VectorM2Contract
 
       final VectorM2D vr0 = this.newVectorM2D();
       final VectorM2D vr1 = this.newVectorM2D();
-      VectorM2D.interpolateLinear(v0, v1, 0.0, vr0);
-      VectorM2D.interpolateLinear(v0, v1, 1.0, vr1);
+      VectorM2D.interpolateLinear(c, v0, v1, 0.0, vr0);
+      VectorM2D.interpolateLinear(c, v0, v1, 1.0, vr1);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -880,19 +884,25 @@ public abstract class VectorM2DContract extends VectorM2Contract
   {
     final VectorM2D v0 = this.newVectorM2D(0, 1);
     final VectorM2D v1 = this.newVectorM2D(0.5f, 0.5f);
+    final VectorM2D v0_out = this.newVectorM2D();
+    final VectorM2D v1_out = this.newVectorM2D();
 
-    final Pair<VectorM2D, VectorM2D> r = VectorM2D.orthoNormalize(v0, v1);
+    final VectorM2D.Context2D c = new VectorM2D.Context2D();
+    VectorM2D.orthoNormalize(c, v0, v0_out, v1, v1_out);
 
-    Assert.assertEquals(this.newVectorM2D(0, 1), r.getLeft());
-    Assert.assertEquals(this.newVectorM2D(1, 0), r.getRight());
+    Assert.assertEquals(this.newVectorM2D(0, 1), v0_out);
+    Assert.assertEquals(this.newVectorM2D(1, 0), v1_out);
   }
 
   @Override @Test public void testOrthonormalizeMutation()
   {
     final VectorM2D v0 = this.newVectorM2D(0f, 1f);
     final VectorM2D v1 = this.newVectorM2D(0.5f, 0.5f);
+    final VectorM2D v0_out = this.newVectorM2D();
+    final VectorM2D v1_out = this.newVectorM2D();
 
-    VectorM2D.orthoNormalizeInPlace(v0, v1);
+    final VectorM2D.Context2D c = new VectorM2D.Context2D();
+    VectorM2D.orthoNormalizeInPlace(c, v0, v1);
 
     Assert.assertEquals(this.newVectorM2D(0, 1), v0);
     Assert.assertEquals(this.newVectorM2D(1, 0), v1);

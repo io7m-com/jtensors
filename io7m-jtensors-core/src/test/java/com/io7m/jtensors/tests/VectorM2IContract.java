@@ -451,13 +451,15 @@ public abstract class VectorM2IContract extends VectorM2Contract
 
   @Override @Test public void testDistance()
   {
+    final VectorM2I.Context2I c = new VectorM2I.Context2I();
     final VectorM2I v0 = this.newVectorM2I(0, 1);
     final VectorM2I v1 = this.newVectorM2I(0, 0);
-    Assert.assertTrue(VectorM2I.distance(v0, v1) == 1);
+    Assert.assertTrue(VectorM2I.distance(c, v0, v1) == 1);
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final VectorM2I.Context2I c = new VectorM2I.Context2I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM2IContract.randomPositiveSmallNumber();
       final int y0 = VectorM2IContract.randomPositiveSmallNumber();
@@ -467,7 +469,7 @@ public abstract class VectorM2IContract extends VectorM2Contract
       final int y1 = VectorM2IContract.randomPositiveSmallNumber();
       final VectorM2I v1 = this.newVectorM2I(x1, y1);
 
-      Assert.assertTrue(VectorM2I.distance(v0, v1) >= 0);
+      Assert.assertTrue(VectorM2I.distance(c, v0, v1) >= 0);
     }
   }
 
@@ -652,6 +654,7 @@ public abstract class VectorM2IContract extends VectorM2Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
+    final VectorM2I.Context2I c = new VectorM2I.Context2I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM2IContract.randomPositiveNumber();
       final int y0 = VectorM2IContract.randomPositiveNumber();
@@ -663,8 +666,8 @@ public abstract class VectorM2IContract extends VectorM2Contract
 
       final VectorM2I vr0 = this.newVectorM2I();
       final VectorM2I vr1 = this.newVectorM2I();
-      VectorM2I.interpolateLinear(v0, v1, 0, vr0);
-      VectorM2I.interpolateLinear(v0, v1, 1, vr1);
+      VectorM2I.interpolateLinear(c, v0, v1, 0, vr0);
+      VectorM2I.interpolateLinear(c, v0, v1, 1, vr1);
 
       Assert.assertTrue(v0.getXI() == vr0.getXI());
       Assert.assertTrue(v0.getYI() == vr0.getYI());

@@ -455,13 +455,15 @@ public abstract class VectorM3IContract extends VectorM3Contract
 
   @Override @Test public void testDistance()
   {
+    final VectorM3I.Context3I c = new VectorM3I.Context3I();
     final VectorM3I v0 = this.newVectorM3I(0, 1, 0);
     final VectorM3I v1 = this.newVectorM3I(0, 0, 0);
-    Assert.assertTrue(VectorM3I.distance(v0, v1) == 1);
+    Assert.assertTrue(VectorM3I.distance(c, v0, v1) == 1);
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final VectorM3I.Context3I c = new VectorM3I.Context3I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM3IContract.randomPositiveSmallNumber();
       final int y0 = VectorM3IContract.randomPositiveSmallNumber();
@@ -473,7 +475,7 @@ public abstract class VectorM3IContract extends VectorM3Contract
       final int z1 = VectorM3IContract.randomPositiveSmallNumber();
       final VectorM3I v1 = this.newVectorM3I(x1, y1, z1);
 
-      Assert.assertTrue(VectorM3I.distance(v0, v1) >= 0);
+      Assert.assertTrue(VectorM3I.distance(c, v0, v1) >= 0);
     }
   }
 
@@ -726,6 +728,7 @@ public abstract class VectorM3IContract extends VectorM3Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
+    final VectorM3I.Context3I c = new VectorM3I.Context3I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM3IContract.randomPositiveNumber();
       final int y0 = VectorM3IContract.randomPositiveNumber();
@@ -739,8 +742,8 @@ public abstract class VectorM3IContract extends VectorM3Contract
 
       final VectorM3I vr0 = this.newVectorM3I();
       final VectorM3I vr1 = this.newVectorM3I();
-      VectorM3I.interpolateLinear(v0, v1, 0, vr0);
-      VectorM3I.interpolateLinear(v0, v1, 1, vr1);
+      VectorM3I.interpolateLinear(c, v0, v1, 0, vr0);
+      VectorM3I.interpolateLinear(c, v0, v1, 1, vr1);
 
       Assert.assertTrue(v0.getXI() == vr0.getXI());
       Assert.assertTrue(v0.getYI() == vr0.getYI());

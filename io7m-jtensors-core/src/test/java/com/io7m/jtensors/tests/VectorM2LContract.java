@@ -17,6 +17,7 @@
 package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
+import com.io7m.jtensors.VectorM2I;
 import com.io7m.jtensors.VectorM2L;
 import org.junit.Assert;
 import org.junit.Test;
@@ -460,13 +461,15 @@ public abstract class VectorM2LContract extends VectorM2Contract
 
   @Override @Test public void testDistance()
   {
+    final VectorM2L.Context2L c = new VectorM2L.Context2L();
     final VectorM2L v0 = this.newVectorM2L(0, 1);
     final VectorM2L v1 = this.newVectorM2L(0, 0);
-    Assert.assertTrue(VectorM2L.distance(v0, v1) == 1);
+    Assert.assertTrue(VectorM2L.distance(c, v0, v1) == 1);
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final VectorM2L.Context2L c = new VectorM2L.Context2L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorM2LContract.randomPositiveSmallNumber();
@@ -477,7 +480,7 @@ public abstract class VectorM2LContract extends VectorM2Contract
       final long y1 = VectorM2LContract.randomPositiveSmallNumber();
       final VectorM2L v1 = this.newVectorM2L(x1, y1);
 
-      Assert.assertTrue(VectorM2L.distance(v0, v1) >= 0);
+      Assert.assertTrue(VectorM2L.distance(c, v0, v1) >= 0);
     }
   }
 
@@ -664,6 +667,7 @@ public abstract class VectorM2LContract extends VectorM2Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
+    final VectorM2L.Context2L c = new VectorM2L.Context2L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorM2LContract.randomPositiveNumber();
@@ -676,8 +680,8 @@ public abstract class VectorM2LContract extends VectorM2Contract
 
       final VectorM2L vr0 = this.newVectorM2L();
       final VectorM2L vr1 = this.newVectorM2L();
-      VectorM2L.interpolateLinear(v0, v1, 0, vr0);
-      VectorM2L.interpolateLinear(v0, v1, 1, vr1);
+      VectorM2L.interpolateLinear(c, v0, v1, 0, vr0);
+      VectorM2L.interpolateLinear(c, v0, v1, 1, vr1);
 
       Assert.assertTrue(v0.getXL() == vr0.getXL());
       Assert.assertTrue(v0.getYL() == vr0.getYL());

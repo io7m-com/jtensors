@@ -19,7 +19,6 @@ package com.io7m.jtensors.tests;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorM3F;
 import org.junit.Assert;
 import org.junit.Test;
@@ -626,17 +625,19 @@ public abstract class VectorM3FContract extends VectorM3Contract
 
   @Override @Test public void testDistance()
   {
+    final VectorM3F.Context3F c = new VectorM3F.Context3F();
     final VectorM3F v0 = this.newVectorM3F(0.0f, 1.0f, 0.0f);
     final VectorM3F v1 = this.newVectorM3F(0.0f, 0.0f, 0.0f);
     final AlmostEqualDouble.ContextRelative context =
       new AlmostEqualDouble.ContextRelative();
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
-        context, VectorM3F.distance(v0, v1), 1.0f));
+        context, VectorM3F.distance(c, v0, v1), 1.0f));
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final VectorM3F.Context3F c = new VectorM3F.Context3F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -648,7 +649,7 @@ public abstract class VectorM3FContract extends VectorM3Contract
       final float z1 = (float) (Math.random() * Float.MAX_VALUE);
       final VectorM3F v1 = this.newVectorM3F(x1, y1, z1);
 
-      Assert.assertTrue(VectorM3F.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(VectorM3F.distance(c, v0, v1) >= 0.0);
     }
   }
 
@@ -896,6 +897,7 @@ public abstract class VectorM3FContract extends VectorM3Contract
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
+    final VectorM3F.Context3F c = new VectorM3F.Context3F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -910,8 +912,8 @@ public abstract class VectorM3FContract extends VectorM3Contract
 
       final VectorM3F vr0 = this.newVectorM3F();
       final VectorM3F vr1 = this.newVectorM3F();
-      VectorM3F.interpolateLinear(v0, v1, 0.0f, vr0);
-      VectorM3F.interpolateLinear(v0, v1, 1.0f, vr1);
+      VectorM3F.interpolateLinear(c, v0, v1, 0.0f, vr0);
+      VectorM3F.interpolateLinear(c, v0, v1, 1.0f, vr1);
 
       Assert.assertTrue(
         AlmostEqualFloat.almostEqual(
@@ -1043,21 +1045,25 @@ public abstract class VectorM3FContract extends VectorM3Contract
 
   @Override @Test public void testOrthonormalize()
   {
+    final VectorM3F.Context3F c = new VectorM3F.Context3F();
     final VectorM3F v0 = this.newVectorM3F(0, 1, 0);
     final VectorM3F v1 = this.newVectorM3F(0.5f, 0.5f, 0);
+    final VectorM3F v0_out = new VectorM3F();
+    final VectorM3F v1_out = new VectorM3F();
 
-    final Pair<VectorM3F, VectorM3F> r = VectorM3F.orthoNormalize(v0, v1);
+    VectorM3F.orthoNormalize(c, v0, v0_out, v1, v1_out);
 
-    Assert.assertEquals(this.newVectorM3F(0, 1, 0), r.getLeft());
-    Assert.assertEquals(this.newVectorM3F(1, 0, 0), r.getRight());
+    Assert.assertEquals(this.newVectorM3F(0, 1, 0), v0_out);
+    Assert.assertEquals(this.newVectorM3F(1, 0, 0), v1_out);
   }
 
   @Override @Test public void testOrthonormalizeMutation()
   {
+    final VectorM3F.Context3F c = new VectorM3F.Context3F();
     final VectorM3F v0 = this.newVectorM3F(0f, 1f, 0f);
     final VectorM3F v1 = this.newVectorM3F(0.5f, 0.5f, 0f);
 
-    VectorM3F.orthoNormalizeInPlace(v0, v1);
+    VectorM3F.orthoNormalizeInPlace(c, v0, v1);
 
     Assert.assertEquals(this.newVectorM3F(0, 1, 0), v0);
     Assert.assertEquals(this.newVectorM3F(1, 0, 0), v1);
