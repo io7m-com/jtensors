@@ -526,13 +526,15 @@ public abstract class VectorM4IContract extends VectorM4Contract
 
   @Override @Test public void testDistance()
   {
+    final VectorM4I.Context4I c = new VectorM4I.Context4I();
     final VectorM4I v0 = this.newVectorM4I(0, 1, 0, 0);
     final VectorM4I v1 = this.newVectorM4I(0, 0, 0, 0);
-    Assert.assertTrue(VectorM4I.distance(v0, v1) == 1);
+    Assert.assertTrue(VectorM4I.distance(c, v0, v1) == 1);
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final VectorM4I.Context4I c = new VectorM4I.Context4I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4IContract.randomPositiveSmallNumber();
       final int y0 = VectorM4IContract.randomPositiveSmallNumber();
@@ -546,7 +548,7 @@ public abstract class VectorM4IContract extends VectorM4Contract
       final int w1 = VectorM4IContract.randomPositiveSmallNumber();
       final VectorM4I v1 = this.newVectorM4I(x1, y1, z1, w1);
 
-      Assert.assertTrue(VectorM4I.distance(v0, v1) >= 0);
+      Assert.assertTrue(VectorM4I.distance(c, v0, v1) >= 0);
     }
   }
 
@@ -821,6 +823,7 @@ public abstract class VectorM4IContract extends VectorM4Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
+    final VectorM4I.Context4I c = new VectorM4I.Context4I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4IContract.randomPositiveNumber();
       final int y0 = VectorM4IContract.randomPositiveNumber();
@@ -836,8 +839,8 @@ public abstract class VectorM4IContract extends VectorM4Contract
 
       final VectorM4I vr0 = this.newVectorM4I();
       final VectorM4I vr1 = this.newVectorM4I();
-      VectorM4I.interpolateLinear(v0, v1, 0, vr0);
-      VectorM4I.interpolateLinear(v0, v1, 1, vr1);
+      VectorM4I.interpolateLinear(c, v0, v1, 0, vr0);
+      VectorM4I.interpolateLinear(c, v0, v1, 1, vr1);
 
       Assert.assertTrue(v0.getXI() == vr0.getXI());
       Assert.assertTrue(v0.getYI() == vr0.getYI());

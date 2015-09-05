@@ -529,18 +529,22 @@ public abstract class VectorM4LContract extends VectorM4Contract
 
   @Override @Test public void testDefault0001()
   {
-    Assert.assertTrue(this.newVectorM4L().equals(this.newVectorM4L(0, 0, 0, 1)));
+    Assert.assertTrue(
+      this.newVectorM4L()
+        .equals(this.newVectorM4L(0, 0, 0, 1)));
   }
 
   @Override @Test public void testDistance()
   {
+    final VectorM4L.Context4L c = new VectorM4L.Context4L();
     final VectorM4L v0 = this.newVectorM4L(0, 1, 0, 0);
     final VectorM4L v1 = this.newVectorM4L(0, 0, 0, 0);
-    Assert.assertTrue(VectorM4L.distance(v0, v1) == 1);
+    Assert.assertTrue(VectorM4L.distance(c, v0, v1) == 1);
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final VectorM4L.Context4L c = new VectorM4L.Context4L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorM4LContract.randomPositiveSmallNumber();
@@ -555,7 +559,7 @@ public abstract class VectorM4LContract extends VectorM4Contract
       final long w1 = VectorM4LContract.randomPositiveSmallNumber();
       final VectorM4L v1 = this.newVectorM4L(x1, y1, z1, w1);
 
-      Assert.assertTrue(VectorM4L.distance(v0, v1) >= 0);
+      Assert.assertTrue(VectorM4L.distance(c, v0, v1) >= 0);
     }
   }
 
@@ -832,6 +836,7 @@ public abstract class VectorM4LContract extends VectorM4Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
+    final VectorM4L.Context4L c = new VectorM4L.Context4L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorM4LContract.randomPositiveNumber();
@@ -848,8 +853,8 @@ public abstract class VectorM4LContract extends VectorM4Contract
 
       final VectorM4L vr0 = this.newVectorM4L();
       final VectorM4L vr1 = this.newVectorM4L();
-      VectorM4L.interpolateLinear(v0, v1, 0, vr0);
-      VectorM4L.interpolateLinear(v0, v1, 1, vr1);
+      VectorM4L.interpolateLinear(c, v0, v1, 0, vr0);
+      VectorM4L.interpolateLinear(c, v0, v1, 1, vr1);
 
       Assert.assertTrue(v0.getXL() == vr0.getXL());
       Assert.assertTrue(v0.getYL() == vr0.getYL());
