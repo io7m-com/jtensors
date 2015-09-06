@@ -25,84 +25,23 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 /**
- * <p>
- * A 3x3 mutable matrix type with single precision elements.
- * </p>
- * <p>
- * Values of type {@code MatrixM3x3F} are backed by direct memory, with
- * the rows and columns of the matrices being stored in column-major format.
- * This allows the matrices to be passed to OpenGL directly, without requiring
- * transposition.
- * </p>
- * <p>
- * Values of this type cannot be accessed safely from multiple threads without
- * explicit synchronization.
- * </p>
- * <p>
- * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed for
- * the derivations of most of the code in this class (ISBN: 1-58450-277-0).
- * </p>
- * <p>
- * See <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>
- * for the three <i>elementary</i> operations defined on matrices.
- * </p>
+ * <p> A 3x3 mutable matrix type with single precision elements. </p> <p> Values
+ * of type {@code MatrixM3x3F} are backed by direct memory, with the rows and
+ * columns of the matrices being stored in column-major format. This allows the
+ * matrices to be passed to OpenGL directly, without requiring transposition.
+ * </p> <p> Values of this type cannot be accessed safely from multiple threads
+ * without explicit synchronization. </p> <p> See "Mathematics for 3D Game
+ * Programming and Computer Graphics" 2nd Ed for the derivations of most of the
+ * code in this class (ISBN: 1-58450-277-0). </p> <p> See <a
+ * href="http://en.wikipedia
+ * .org/wiki/Row_equivalence#Elementary_row_operations">Elementary
+ * operations</a> for the three <i>elementary</i> operations defined on
+ * matrices. </p>
  */
 
-public final class MatrixM3x3F implements
-  MatrixDirectReadable3x3FType,
-  MatrixWritable3x3FType
+public final class MatrixM3x3F
+  implements MatrixDirectReadable3x3FType, MatrixWritable3x3FType
 {
-  /**
-   * <p>
-   * The Context type contains the minimum storage required for all of the
-   * functions of the {@code MatrixM3x3F} class.
-   * </p>
-   * <p>
-   * The purpose of the class is to allow applications to allocate all storage
-   * ahead of time in order to allow functions in the class to avoid
-   * allocating memory (not including stack space) for intermediate
-   * calculations. This can reduce garbage collection in speed critical code.
-   * </p>
-   * <p>
-   * The user should allocate one {@code Context} value per thread, and
-   * then pass this value to matrix functions. Any matrix function that takes
-   * a {@code Context} value will not generate garbage.
-   * </p>
-   *
-   * @since 5.0.0
-   */
-
-  public static class Context
-  {
-    private final VectorM3F v3a = new VectorM3F();
-    private final VectorM3F v3b = new VectorM3F();
-    private final VectorM3F v3c = new VectorM3F();
-
-    /**
-     * Construct a new context.
-     */
-
-    public Context()
-    {
-
-    }
-
-    final VectorM3F getV3A()
-    {
-      return this.v3a;
-    }
-
-    final VectorM3F getV3B()
-    {
-      return this.v3b;
-    }
-
-    final VectorM3F getV3C()
-    {
-      return this.v3c;
-    }
-  }
-
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
   private static final int VIEW_ELEMENT_SIZE;
@@ -117,15 +56,68 @@ public final class MatrixM3x3F implements
     VIEW_BYTES = MatrixM3x3F.VIEW_ELEMENTS * MatrixM3x3F.VIEW_ELEMENT_SIZE;
   }
 
+  private final ByteBuffer  data;
+  private final FloatBuffer view;
+
+  /**
+   * Construct a new identity matrix.
+   */
+
+  public MatrixM3x3F()
+  {
+    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3F.VIEW_BYTES);
+    assert b != null;
+
+    final ByteOrder order = ByteOrder.nativeOrder();
+    assert order != null;
+    b.order(order);
+
+    final FloatBuffer v = b.asFloatBuffer();
+    assert v != null;
+
+    this.data = b;
+    this.view = v;
+    MatrixM3x3F.setIdentity(this);
+  }
+
+  /**
+   * Construct a new copy of the given matrix.
+   *
+   * @param source The source matrix.
+   */
+
+  public MatrixM3x3F(
+    final MatrixReadable3x3FType source)
+  {
+    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3F.VIEW_BYTES);
+    assert b != null;
+
+    final ByteOrder order = ByteOrder.nativeOrder();
+    assert order != null;
+    b.order(order);
+
+    this.data = b;
+
+    final FloatBuffer v = this.data.asFloatBuffer();
+    assert v != null;
+
+    this.view = v;
+    this.view.rewind();
+
+    for (int row = 0; row < MatrixM3x3F.VIEW_ROWS; ++row) {
+      for (int col = 0; col < MatrixM3x3F.VIEW_COLS; ++col) {
+        this.setUnsafe(row, col, source.getRowColumnF(row, col));
+      }
+    }
+  }
+
   /**
    * Elementwise add of matrices {@code m0} and {@code m1}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m0  The left input matrix.
+   * @param m1  The right input matrix.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -161,13 +153,12 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Elementwise add of matrices {@code m0} and {@code m1},
-   * returning the result in {@code m0}.
+   * Elementwise add of matrices {@code m0} and {@code m1}, returning the result
+   * in {@code m0}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
+   * @param m0 The left input matrix.
+   * @param m1 The right input matrix.
+   *
    * @return {@code m0}
    */
 
@@ -179,28 +170,20 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code out}.
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code out}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param m     The input matrix.
+   * @param row_a The row on the lefthand side of the addition.
+   * @param row_b The row on the righthand side of the addition.
+   * @param row_c The destination row.
+   * @param r     The scaling value.
+   * @param out   The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -222,26 +205,19 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code m}.
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code m}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
+   * @param m     The input matrix.
+   * @param row_a The row on the lefthand side of the addition.
+   * @param row_b The row on the righthand side of the addition.
+   * @param row_c The destination row.
+   * @param r     The scaling value.
+   *
    * @return {@code m}
    */
 
@@ -284,13 +260,12 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Copy the contents of the matrix {@code input} to the matrix
-   * {@code output}, completely replacing all elements.
+   * Copy the contents of the matrix {@code input} to the matrix {@code output},
+   * completely replacing all elements.
    *
-   * @param input
-   *          The input vector.
-   * @param output
-   *          The output vector.
+   * @param input  The input vector.
+   * @param output The output vector.
+   *
    * @return {@code output}
    */
 
@@ -309,9 +284,9 @@ public final class MatrixM3x3F implements
   /**
    * Calculate the determinant of the matrix {@code m}.
    *
+   * @param m The input matrix.
+   *
    * @return The determinant.
-   * @param m
-   *          The input matrix.
    */
 
   public static double determinant(
@@ -339,23 +314,17 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code out} .
-   * </p>
+   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code out} . </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
-   * @param out
-   *          The output matrix.
+   * @param m     The input matrix.
+   * @param row_a The first row.
+   * @param row_b The second row.
+   * @param out   The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -366,28 +335,20 @@ public final class MatrixM3x3F implements
     final MatrixM3x3F out)
   {
     return MatrixM3x3F.exchangeRowsUnsafe(
-      m,
-      MatrixM3x3F.rowCheck(row_a),
-      MatrixM3x3F.rowCheck(row_b),
-      out);
+      m, MatrixM3x3F.rowCheck(row_a), MatrixM3x3F.rowCheck(row_b), out);
   }
 
   /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code m} .
-   * </p>
+   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code m} . </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
+   * @param m     The input matrix.
+   * @param row_a The first row.
+   * @param row_b The second row.
+   *
    * @return {@code m}
    */
 
@@ -421,21 +382,16 @@ public final class MatrixM3x3F implements
     final int column)
   {
     return MatrixM3x3F.indexUnsafe(
-      MatrixM3x3F.rowCheck(row),
-      MatrixM3x3F.columnCheck(column));
+      MatrixM3x3F.rowCheck(row), MatrixM3x3F.columnCheck(column));
   }
 
   /**
-   * <p>
-   * The main function that indexes into the buffer that backs the array. The
-   * body of this function decides on how elements are stored. This
+   * <p> The main function that indexes into the buffer that backs the array.
+   * The body of this function decides on how elements are stored. This
    * implementation chooses to store values in column-major format as this
-   * allows matrices to be sent directly to OpenGL without conversion.
-   * </p>
-   * <p>
+   * allows matrices to be sent directly to OpenGL without conversion. </p> <p>
    * (row * 3) + column, corresponds to row-major storage. (column * 3) + row,
-   * corresponds to column-major (OpenGL) storage.
-   * </p>
+   * corresponds to column-major (OpenGL) storage. </p>
    */
 
   private static int indexUnsafe(
@@ -446,19 +402,17 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code out}. The function returns {@code Some(out)}
-   * iff it was possible to invert the matrix, and {@code None}
-   * otherwise. It is not possible to invert a matrix that has a determinant
-   * of {@code 0}.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code out}. The function returns {@code Some(out)} iff it was possible
+   * to invert the matrix, and {@code None} otherwise. It is not possible to
+   * invert a matrix that has a determinant of {@code 0}.
+   *
+   * @param m   The input matrix.
+   * @param out The output matrix.
+   *
+   * @return {@code out}
    *
    * @see MatrixM3x3F#determinant(MatrixReadable3x3FType)
-   *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
    */
 
   public static OptionType<MatrixM3x3F> invert(
@@ -514,17 +468,16 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code m}. The function returns {@code Some(m)} iff
-   * it was possible to invert the matrix, and {@code None} otherwise. It
-   * is not possible to invert a matrix that has a determinant of
-   * {@code 0}.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code m}. The function returns {@code Some(m)} iff it was possible to
+   * invert the matrix, and {@code None} otherwise. It is not possible to invert
+   * a matrix that has a determinant of {@code 0}.
+   *
+   * @param m The input matrix.
+   *
+   * @return {@code m}
    *
    * @see MatrixM3x3F#determinant(MatrixReadable3x3FType)
-   *
-   * @param m
-   *          The input matrix.
-   * @return {@code m}
    */
 
   public static OptionType<MatrixM3x3F> invertInPlace(
@@ -534,40 +487,25 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * <p>
-   * Calculate a rotation and translation representing a "camera" looking from
-   * the point {@code origin} to the point {@code target}.
-   * {@code target} must represent the "up" vector for the camera.
-   * Usually, this is simply a unit vector {@code (0, 1, 0)} representing
-   * the Y axis.
-   * </p>
-   * <p>
-   * The function uses preallocated storage from {@code context}.
-   * </p>
-   * <p>
-   * The view is expressed as a rotation matrix and a translation vector,
-   * written to {@code out_matrix} and {@code out_translation},
-   * respectively.
-   * </p>
+   * <p> Calculate a rotation and translation representing a "camera" looking
+   * from the point {@code origin} to the point {@code target}. {@code target}
+   * must represent the "up" vector for the camera. Usually, this is simply a
+   * unit vector {@code (0, 1, 0)} representing the Y axis. </p> <p> The
+   * function uses preallocated storage from {@code context}. </p> <p> The view
+   * is expressed as a rotation matrix and a translation vector, written to
+   * {@code out_matrix} and {@code out_translation}, respectively. </p>
    *
-   * @param context
-   *          Preallocated storage
-   * @param out_matrix
-   *          The output matrix
-   * @param out_translation
-   *          The output translation
-   * @param origin
-   *          The position of the viewer
-   * @param target
-   *          The target being viewed
-   * @param up
-   *          The up vector
-   * @param <V>
-   *          The precise type of writable vector.
+   * @param context         Preallocated storage
+   * @param out_matrix      The output matrix
+   * @param out_translation The output translation
+   * @param origin          The position of the viewer
+   * @param target          The target being viewed
+   * @param up              The up vector
+   * @param <V>             The precise type of writable vector.
    */
 
   public static <V extends VectorWritable3FType> void lookAtWithContext(
-    final Context context,
+    final ContextM3F context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
     final VectorReadable3FType up,
@@ -625,22 +563,17 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * <p>
-   * Generate and return a matrix that represents a rotation of
-   * {@code angle} radians around the axis {@code axis}.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
+   * <p> Generate and return a matrix that represents a rotation of {@code
+   * angle} radians around the axis {@code axis}. </p> <p> The function assumes
+   * a right-handed coordinate system and therefore a positive rotation around
+   * any axis represents a counter-clockwise rotation around that axis. </p>
+   *
+   * @param angle The angle in radians.
+   * @param axis  The axis.
+   *
+   * @return {@code out}
    *
    * @since 5.0.0
-   * @param angle
-   *          The angle in radians.
-   * @param axis
-   *          The axis.
-   * @return {@code out}
    */
 
   public static MatrixM3x3F makeRotation(
@@ -653,24 +586,19 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * <p>
-   * Generate a matrix that represents a rotation of {@code angle}
-   * radians around the axis {@code axis} and save to {@code out}.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
+   * <p> Generate a matrix that represents a rotation of {@code angle} radians
+   * around the axis {@code axis} and save to {@code out}. </p> <p> The function
+   * assumes a right-handed coordinate system and therefore a positive rotation
+   * around any axis represents a counter-clockwise rotation around that axis.
    * </p>
    *
-   * @since 5.0.0
-   * @param angle
-   *          The angle in radians.
-   * @param axis
-   *          The axis.
-   * @param out
-   *          The output matrix.
+   * @param angle The angle in radians.
+   * @param axis  The axis.
+   * @param out   The output matrix.
+   *
    * @return {@code out}
+   *
+   * @since 5.0.0
    */
 
   public static MatrixM3x3F makeRotationInto(
@@ -728,10 +656,9 @@ public final class MatrixM3x3F implements
    * Create a translation matrix that represents a translation by the vector
    * {@code v}, writing the resulting matrix to {@code out}.
    *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
+   * @param v   The translation vector.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -755,10 +682,9 @@ public final class MatrixM3x3F implements
    * Create a translation matrix that represents a translation by the vector
    * {@code v}, writing the resulting matrix to {@code out}.
    *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
+   * @param v   The translation vector.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -779,15 +705,13 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Multiply the matrix {@code m0} with the matrix {@code m1},
-   * writing the result to {@code out}.
+   * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
+   * result to {@code out}.
    *
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
-   * @param out
-   *          The output vector.
+   * @param m0  The left input vector.
+   * @param m1  The right input vector.
+   * @param out The output vector.
+   *
    * @return {@code out}
    */
 
@@ -856,13 +780,12 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Multiply the matrix {@code m0} with the matrix {@code m1},
-   * writing the result to {@code m0}.
+   * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
+   * result to {@code m0}.
    *
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
+   * @param m0 The left input vector.
+   * @param m1 The right input vector.
+   *
    * @return {@code out}
    */
 
@@ -874,18 +797,15 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Multiply the matrix {@code m} with the vector {@code v},
-   * writing the resulting vector to {@code out}.
+   * Multiply the matrix {@code m} with the vector {@code v}, writing the
+   * resulting vector to {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
+   * @param m   The input matrix.
+   * @param v   The input vector.
+   * @param out The output vector.
+   * @param <V> The precise type of writable vector.
+   *
    * @return {@code out}
-   * @param <V>
-   *          The precise type of writable vector.
    */
 
   public static <V extends VectorWritable3FType> V multiplyVector3F(
@@ -907,16 +827,12 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * @return Row {@code row} of the matrix {@code m} in the vector
-   *         {@code out}.
-   * @param m
-   *          The input matrix
-   * @param row
-   *          The row
-   * @param out
-   *          The output vector
-   * @param <V>
-   *          The precise type of writable vector.
+   * @param m   The input matrix
+   * @param row The row
+   * @param out The output vector
+   * @param <V> The precise type of writable vector.
+   *
+   * @return Row {@code row} of the matrix {@code m} in the vector {@code out}.
    */
 
   public static <V extends VectorWritable3FType> V row(
@@ -950,15 +866,13 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code out}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix
+   * @param m   The input matrix.
+   * @param r   The scaling value.
+   * @param out The output matrix
+   *
    * @return {@code out}
    */
 
@@ -995,13 +909,12 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code m}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code m}.
    *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
+   * @param m The input matrix.
+   * @param r The scaling value.
+   *
    * @return {@code m}
    */
 
@@ -1013,23 +926,17 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * <p>
-   * Scale row {@code r} of the matrix {@code m} by {@code r},
-   * saving the result to row {@code r} of {@code out}.
-   * </p>
+   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code out}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 3)}.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param m   The input matrix.
+   * @param row The index of the row {@code (0 <= row < 3)}.
+   * @param r   The scaling value.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -1043,21 +950,16 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * <p>
-   * Scale row {@code r} of the matrix {@code m} by {@code r},
-   * saving the result to row {@code r} of {@code m}.
-   * </p>
+   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code m}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 3)}.
-   * @param r
-   *          The scaling value.
+   * @param m   The input matrix.
+   * @param row The index of the row {@code (0 <= row < 3)}.
+   * @param r   The scaling value.
+   *
    * @return {@code m}
    */
 
@@ -1085,17 +987,14 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Set the value in the matrix {@code m} at row {@code row},
-   * column {@code column} to {@code value}.
+   * Set the value in the matrix {@code m} at row {@code row}, column {@code
+   * column} to {@code value}.
    *
-   * @param m
-   *          The input matrix
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
+   * @param m      The input matrix
+   * @param row    The row
+   * @param column The column
+   * @param value  The value
+   *
    * @return {@code m}
    */
 
@@ -1112,8 +1011,8 @@ public final class MatrixM3x3F implements
   /**
    * Set the given matrix {@code m} to the identity matrix.
    *
-   * @param m
-   *          The matrix
+   * @param m The matrix
+   *
    * @return {@code m}
    */
 
@@ -1148,8 +1047,8 @@ public final class MatrixM3x3F implements
   /**
    * Set the given matrix {@code m} to the zero matrix.
    *
-   * @param m
-   *          The matrix
+   * @param m The matrix
+   *
    * @return {@code m}
    */
 
@@ -1157,20 +1056,22 @@ public final class MatrixM3x3F implements
     final MatrixM3x3F m)
   {
     m.view.clear();
-    for (int index = 0; index < (MatrixM3x3F.VIEW_ROWS * MatrixM3x3F.VIEW_COLS); ++index) {
+    for (int index = 0; index < (MatrixM3x3F.VIEW_ROWS
+                                 * MatrixM3x3F.VIEW_COLS); ++index) {
       m.view.put(index, 0.0f);
     }
     return m;
   }
 
   /**
-   * Return the trace of the matrix {@code m}. The trace is defined as
-   * the sum of the diagonal elements of the matrix.
+   * Return the trace of the matrix {@code m}. The trace is defined as the sum
+   * of the diagonal elements of the matrix.
+   *
+   * @param m The input matrix
+   *
+   * @return The trace of the matrix
    *
    * @since 5.0.0
-   * @param m
-   *          The input matrix
-   * @return The trace of the matrix
    */
 
   public static double trace(
@@ -1182,13 +1083,12 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code out}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m   The input matrix.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -1201,11 +1101,11 @@ public final class MatrixM3x3F implements
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code m}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code m}.
    *
-   * @param m
-   *          The input matrix.
+   * @param m The input matrix.
+   *
    * @return {@code m}
    */
 
@@ -1223,62 +1123,6 @@ public final class MatrixM3x3F implements
     }
 
     return m;
-  }
-
-  private final ByteBuffer  data;
-  private final FloatBuffer view;
-
-  /**
-   * Construct a new identity matrix.
-   */
-
-  public MatrixM3x3F()
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3F.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    final FloatBuffer v = b.asFloatBuffer();
-    assert v != null;
-
-    this.data = b;
-    this.view = v;
-    MatrixM3x3F.setIdentity(this);
-  }
-
-  /**
-   * Construct a new copy of the given matrix.
-   *
-   * @param source
-   *          The source matrix.
-   */
-
-  public MatrixM3x3F(
-    final MatrixReadable3x3FType source)
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3F.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    this.data = b;
-
-    final FloatBuffer v = this.data.asFloatBuffer();
-    assert v != null;
-
-    this.view = v;
-    this.view.rewind();
-
-    for (int row = 0; row < MatrixM3x3F.VIEW_ROWS; ++row) {
-      for (int col = 0; col < MatrixM3x3F.VIEW_COLS; ++col) {
-        this.setUnsafe(row, col, source.getRowColumnF(row, col));
-      }
-    }
   }
 
   @Override public boolean equals(
@@ -1338,12 +1182,10 @@ public final class MatrixM3x3F implements
   /**
    * Set the value at the given row and column.
    *
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
+   * @param row    The row
+   * @param column The column
+   * @param value  The value
+   *
    * @return {@code this}
    */
 
@@ -1386,5 +1228,50 @@ public final class MatrixM3x3F implements
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  /**
+   * <p> The {@code ContextM3F} type contains the minimum storage required for
+   * all of the functions of the {@code MatrixM3x3F} class. </p> <p> The purpose
+   * of the class is to allow applications to allocate all storage ahead of time
+   * in order to allow functions in the class to avoid allocating memory (not
+   * including stack space) for intermediate calculations. This can reduce
+   * garbage collection in speed critical code. </p> <p> The user should
+   * allocate one {@code ContextM3F} value per thread, and then pass this value
+   * to matrix functions. Any matrix function that takes a {@code ContextM3F}
+   * value will not generate garbage. </p>
+   *
+   * @since 7.0.0
+   */
+
+  public static class ContextM3F
+  {
+    private final VectorM3F v3a = new VectorM3F();
+    private final VectorM3F v3b = new VectorM3F();
+    private final VectorM3F v3c = new VectorM3F();
+
+    /**
+     * Construct a new context.
+     */
+
+    public ContextM3F()
+    {
+
+    }
+
+    final VectorM3F getV3A()
+    {
+      return this.v3a;
+    }
+
+    final VectorM3F getV3B()
+    {
+      return this.v3b;
+    }
+
+    final VectorM3F getV3C()
+    {
+      return this.v3c;
+    }
   }
 }

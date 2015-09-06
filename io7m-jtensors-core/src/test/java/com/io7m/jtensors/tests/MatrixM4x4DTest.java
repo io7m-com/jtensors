@@ -372,7 +372,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
   @Override @Test public void testAddRowScaledContextEquivalent()
   {
-    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D context = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
 
@@ -750,7 +750,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
   @Override @Test public void testExchangeRowsContextEquivalent()
   {
-    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D context = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
 
@@ -1015,7 +1015,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
   @Override @Test public void testInvertIdentityContextEquivalent()
   {
-    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D context = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
 
@@ -1397,7 +1397,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final AlmostEqualDouble.ContextRelative context_d =
       TestUtilities.getDoubleEqualityContext3dp();
 
-    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D context = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
     boolean eq = false;
@@ -1587,7 +1587,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
   @Override @Test public void testInvertSimpleContextEquivalent()
   {
-    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D context = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
 
@@ -1704,7 +1704,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
   @Override @Test public void testInvertZeroContextEquivalent()
   {
-    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D context = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
 
@@ -1732,7 +1732,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorI3D origin = new VectorI3D(0, 0, 0);
     final VectorI3D target = new VectorI3D(-1, 0, 0);
@@ -1799,7 +1799,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorI3D origin = new VectorI3D(0, 0, 0);
     final VectorI3D target = new VectorI3D(0, 0, -1);
@@ -1866,7 +1866,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorI3D origin = new VectorI3D(0, 0, 0);
     final VectorI3D target = new VectorI3D(1, 0, 0);
@@ -1933,7 +1933,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorI3D origin = new VectorI3D(0, 0, 0);
     final VectorI3D target = new VectorI3D(0, 0, 1);
@@ -2002,7 +2002,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m = new MatrixM4x4D();
     final VectorI3D origin = new VectorI3D(20 + 0, 30 + 0, 40 + 0);
     final VectorI3D target = new VectorI3D(20 + 0, 30 + 0, 40 + -1);
@@ -2283,7 +2283,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
     final VectorI4D v = new VectorI4D(1.0, 2.0, 3.0, 4.0);
     final VectorM4D out = new VectorM4D();
-    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D context = new MatrixM4x4D.ContextM4D();
 
     final VectorM4D r =
       MatrixM4x4D.multiplyVector4DWithContext(context, m0, v, out);
@@ -3059,7 +3059,7 @@ public class MatrixM4x4DTest extends MatrixM4x4Contract
 
   @Override @Test public void testScaleRowContextEquivalent()
   {
-    final MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+    final MatrixM4x4D.ContextM4D context = new MatrixM4x4D.ContextM4D();
     final MatrixM4x4D m0 = new MatrixM4x4D();
     final MatrixM4x4D m1 = new MatrixM4x4D();
 

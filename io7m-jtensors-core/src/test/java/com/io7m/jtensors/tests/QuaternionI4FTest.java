@@ -505,7 +505,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final MatrixM4x4F.Context mc = new MatrixM4x4F.Context();
+    final MatrixM4x4F.ContextM4F mc = new MatrixM4x4F.ContextM4F();
     final QuaternionI4F.Context qc = new QuaternionI4F.Context();
 
     final MatrixM4x4F mr = new MatrixM4x4F();
@@ -542,7 +542,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final MatrixM4x4F.Context mc = new MatrixM4x4F.Context();
+    final MatrixM4x4F.ContextM4F mc = new MatrixM4x4F.ContextM4F();
     final QuaternionI4F.Context qc = new QuaternionI4F.Context();
 
     final MatrixM4x4F mr = new MatrixM4x4F();
@@ -580,7 +580,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       TestUtilities.getSingleEqualityContext();
 
     final QuaternionI4F.Context qc = new QuaternionI4F.Context();
-    final MatrixM4x4F.Context mc = new MatrixM4x4F.Context();
+    final MatrixM4x4F.ContextM4F mc = new MatrixM4x4F.ContextM4F();
 
     final MatrixM4x4F ml = new MatrixM4x4F();
     final MatrixM4x4F mq = new MatrixM4x4F();

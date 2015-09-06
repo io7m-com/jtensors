@@ -6,6 +6,13 @@
     <c:date>2015-08-29</c:date>
     <c:version>7.0.0</c:version>
     <c:item>
+      <c:date>2015-09-06</c:date>
+      <c:type-code-change/>
+      <c:summary>
+        Rename all Context* types to behave more pleasantly with unqualified imports.
+      </c:summary>
+    </c:item>
+    <c:item>
       <c:date>2015-09-05</c:date>
       <c:type-code-change/>
       <c:summary>

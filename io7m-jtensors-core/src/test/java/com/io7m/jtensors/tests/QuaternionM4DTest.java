@@ -16,9 +16,6 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
 import com.io7m.jtensors.MatrixM3x3D;
@@ -27,9 +24,11 @@ import com.io7m.jtensors.QuaternionM4D;
 import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorM3D;
 import com.io7m.jtensors.VectorReadable3DType;
+import org.junit.Assert;
+import org.junit.Test;
 
-@SuppressWarnings("static-method") public class QuaternionM4DTest extends
-  QuaternionM4Contract
+@SuppressWarnings("static-method") public class QuaternionM4DTest
+  extends QuaternionM4Contract
 {
   private static final VectorReadable3DType AXIS_X = new VectorI3D(1, 0, 0);
   private static final VectorReadable3DType AXIS_Y = new VectorI3D(0, 1, 0);
@@ -57,22 +56,18 @@ import com.io7m.jtensors.VectorReadable3DType;
       final QuaternionM4D vr0 = new QuaternionM4D();
       QuaternionM4D.add(v0, v1, vr0);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getXD(),
-        v0.getXD() + v1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getYD(),
-        v0.getYD() + v1.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getZD(),
-        v0.getZD() + v1.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getWD(),
-        v0.getWD() + v1.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getXD(), v0.getXD() + v1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getYD(), v0.getYD() + v1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getZD(), v0.getZD() + v1.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getWD(), v0.getWD() + v1.getWD()));
 
       {
         final double orig_x = v0.getXD();
@@ -81,22 +76,18 @@ import com.io7m.jtensors.VectorReadable3DType;
         final double orig_w = v0.getWD();
         QuaternionM4D.addInPlace(v0, v1);
 
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getXD(),
-          orig_x + v1.getXD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getYD(),
-          orig_y + v1.getYD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getZD(),
-          orig_z + v1.getZD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getWD(),
-          orig_w + v1.getWD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getXD(), orig_x + v1.getXD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getYD(), orig_y + v1.getYD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getZD(), orig_z + v1.getZD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getWD(), orig_w + v1.getWD()));
       }
     }
   }
@@ -345,10 +336,11 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Test public void testCopy2Correct()
   {
-    final QuaternionM4D v0 =
-      new QuaternionM4D(Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE);
+    final QuaternionM4D v0 = new QuaternionM4D(
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE);
     final QuaternionM4D v1 = new QuaternionM4D();
 
     v1.copyFrom2D(v0);
@@ -361,10 +353,11 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Test public void testCopy3Correct()
   {
-    final QuaternionM4D v0 =
-      new QuaternionM4D(Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE);
+    final QuaternionM4D v0 = new QuaternionM4D(
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE);
     final QuaternionM4D v1 = new QuaternionM4D();
 
     v1.copyFrom4D(v0);
@@ -377,10 +370,11 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Test public void testCopy4Correct()
   {
-    final QuaternionM4D v0 =
-      new QuaternionM4D(Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE);
+    final QuaternionM4D v0 = new QuaternionM4D(
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE);
     final QuaternionM4D v1 = new QuaternionM4D();
 
     v1.copyFrom3D(v0);
@@ -396,10 +390,9 @@ import com.io7m.jtensors.VectorReadable3DType;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    Assert.assertTrue(QuaternionM4D.almostEqual(
-      ec,
-      new QuaternionM4D(),
-      new QuaternionM4D(0, 0, 0, 1)));
+    Assert.assertTrue(
+      QuaternionM4D.almostEqual(
+        ec, new QuaternionM4D(), new QuaternionM4D(0, 0, 0, 1)));
   }
 
   @Override @Test public void testDotProduct()
@@ -650,6 +643,7 @@ import com.io7m.jtensors.VectorReadable3DType;
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -666,42 +660,34 @@ import com.io7m.jtensors.VectorReadable3DType;
 
       final QuaternionM4D vr0 = new QuaternionM4D();
       final QuaternionM4D vr1 = new QuaternionM4D();
-      QuaternionM4D.interpolateLinear(v0, v1, 0.0, vr0);
-      QuaternionM4D.interpolateLinear(v0, v1, 1.0, vr1);
+      QuaternionM4D.interpolateLinear(c, v0, v1, 0.0, vr0);
+      QuaternionM4D.interpolateLinear(c, v0, v1, 1.0, vr1);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v0.getXD(),
-        vr0.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v0.getYD(),
-        vr0.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v0.getZD(),
-        vr0.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v0.getWD(),
-        vr0.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v0.getXD(), vr0.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v0.getYD(), vr0.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v0.getZD(), vr0.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v0.getWD(), vr0.getWD()));
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v1.getXD(),
-        vr1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v1.getYD(),
-        vr1.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v1.getZD(),
-        vr1.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v1.getWD(),
-        vr1.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v1.getXD(), vr1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v1.getYD(), vr1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v1.getZD(), vr1.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v1.getWD(), vr1.getWD()));
     }
   }
 
@@ -709,8 +695,8 @@ import com.io7m.jtensors.VectorReadable3DType;
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
-    final QuaternionM4D.Context qc = new QuaternionM4D.Context();
+    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
+    final QuaternionM4D.ContextQM4D qc = new QuaternionM4D.ContextQM4D();
 
     final MatrixM4x4D mr = new MatrixM4x4D();
     final MatrixM4x4D mqr = new MatrixM4x4D();
@@ -745,8 +731,8 @@ import com.io7m.jtensors.VectorReadable3DType;
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
-    final QuaternionM4D.Context qc = new QuaternionM4D.Context();
+    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
+    final QuaternionM4D.ContextQM4D qc = new QuaternionM4D.ContextQM4D();
 
     final MatrixM4x4D mr = new MatrixM4x4D();
     final MatrixM4x4D mqr = new MatrixM4x4D();
@@ -782,8 +768,8 @@ import com.io7m.jtensors.VectorReadable3DType;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final QuaternionM4D.Context qc = new QuaternionM4D.Context();
-    final MatrixM4x4D.Context mc = new MatrixM4x4D.Context();
+    final QuaternionM4D.ContextQM4D qc = new QuaternionM4D.ContextQM4D();
+    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
 
     final MatrixM4x4D ml = new MatrixM4x4D();
     final QuaternionM4D lq = new QuaternionM4D();
@@ -802,17 +788,9 @@ import com.io7m.jtensors.VectorReadable3DType;
       final VectorI3D target = new VectorI3D(target_x, target_y, target_z);
 
       MatrixM4x4D.lookAtWithContext(
-        mc,
-        origin,
-        target,
-        QuaternionM4DTest.AXIS_Y,
-        ml);
+        mc, origin, target, QuaternionM4DTest.AXIS_Y, ml);
       QuaternionM4D.lookAtWithContext(
-        qc,
-        origin,
-        target,
-        QuaternionM4DTest.AXIS_Y,
-        lq);
+        qc, origin, target, QuaternionM4DTest.AXIS_Y, lq);
       QuaternionM4D.makeRotationMatrix4x4(lq, mq);
 
       System.out.println("ml : ");
@@ -916,20 +894,16 @@ import com.io7m.jtensors.VectorReadable3DType;
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final VectorI3D axis_r =
-        new VectorI3D(
-          (float) Math.random(),
-          (float) Math.random(),
-          (float) Math.random());
+      final VectorI3D axis_r = new VectorI3D(
+        (float) Math.random(), (float) Math.random(), (float) Math.random());
       final VectorI3D axis_n = VectorI3D.normalize(axis_r);
 
       final QuaternionM4D q = new QuaternionM4D();
       QuaternionM4D.makeFromAxisAngle(
-        axis_n,
-        (float) Math.toRadians(Math.random() * 360),
-        q);
+        c, axis_n, (float) Math.toRadians(Math.random() * 360), q);
 
       final double m = QuaternionM4D.magnitude(q);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
@@ -946,11 +920,12 @@ import com.io7m.jtensors.VectorReadable3DType;
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final VectorI3D axis = new VectorI3D(1.0, 0.0, 0.0);
     final QuaternionM4D q = new QuaternionM4D();
     final QuaternionM4D r =
-      QuaternionM4D.makeFromAxisAngle(axis, Math.toRadians(45), q);
+      QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(45), q);
     Assert.assertSame(r, q);
 
     System.out.println("r : " + r);
@@ -961,27 +936,26 @@ import com.io7m.jtensors.VectorReadable3DType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getXD(),
-      0.3826834323650898));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getXD(), 0.3826834323650898));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getYD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getZD(), 0.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getWD(),
-      0.9238795325112867));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getWD(), 0.9238795325112867));
   }
 
   @Override @Test public void testMakeAxisAngleX_90()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final VectorI3D axis = new VectorI3D(1.0, 0.0, 0.0);
     final QuaternionM4D q = new QuaternionM4D();
     final QuaternionM4D r =
-      QuaternionM4D.makeFromAxisAngle(axis, Math.toRadians(90), q);
+      QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(90), q);
     Assert.assertSame(r, q);
 
     System.out.println("r : " + r);
@@ -992,27 +966,26 @@ import com.io7m.jtensors.VectorReadable3DType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getXD(),
-      0.7071067811865475));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getXD(), 0.7071067811865475));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getYD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getZD(), 0.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getWD(),
-      0.7071067811865475));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getWD(), 0.7071067811865475));
   }
 
   @Override @Test public void testMakeAxisAngleY_45()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
     final QuaternionM4D q = new QuaternionM4D();
     final QuaternionM4D r =
-      QuaternionM4D.makeFromAxisAngle(axis, Math.toRadians(45), q);
+      QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(45), q);
     Assert.assertSame(r, q);
 
     System.out.println("r : " + r);
@@ -1024,26 +997,25 @@ import com.io7m.jtensors.VectorReadable3DType;
      */
 
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getXD(), 0.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getYD(),
-      0.3826834323650898));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getYD(), 0.3826834323650898));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getZD(), 0.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getWD(),
-      0.9238795325112867));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getWD(), 0.9238795325112867));
   }
 
   @Override @Test public void testMakeAxisAngleY_90()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
     final QuaternionM4D q = new QuaternionM4D();
     final QuaternionM4D r =
-      QuaternionM4D.makeFromAxisAngle(axis, Math.toRadians(90), q);
+      QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(90), q);
     Assert.assertSame(r, q);
 
     System.out.println("r : " + r);
@@ -1055,26 +1027,25 @@ import com.io7m.jtensors.VectorReadable3DType;
      */
 
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getXD(), 0.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getYD(),
-      0.7071067811865475));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getYD(), 0.7071067811865475));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getZD(), 0.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getWD(),
-      0.7071067811865475));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getWD(), 0.7071067811865475));
   }
 
   @Override @Test public void testMakeAxisAngleZ_45()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final VectorI3D axis = new VectorI3D(0.0, 0.0, 1.0);
     final QuaternionM4D q = new QuaternionM4D();
     final QuaternionM4D r =
-      QuaternionM4D.makeFromAxisAngle(axis, Math.toRadians(45), q);
+      QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(45), q);
     Assert.assertSame(r, q);
 
     System.out.println("r : " + r);
@@ -1087,25 +1058,24 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getXD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getYD(), 0.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getZD(),
-      0.3826834323650898));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getWD(),
-      0.9238795325112867));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getZD(), 0.3826834323650898));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getWD(), 0.9238795325112867));
   }
 
   @Override @Test public void testMakeAxisAngleZ_90()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final VectorI3D axis = new VectorI3D(0.0, 0.0, 1.0);
     final QuaternionM4D q = new QuaternionM4D();
     final QuaternionM4D r =
-      QuaternionM4D.makeFromAxisAngle(axis, Math.toRadians(90), q);
+      QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(90), q);
     Assert.assertSame(r, q);
 
     System.out.println("r : " + r);
@@ -1118,21 +1088,18 @@ import com.io7m.jtensors.VectorReadable3DType;
 
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getXD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, q.getYD(), 0.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getZD(),
-      0.7071067811865475));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      q.getWD(),
-      0.7071067811865475));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getZD(), 0.7071067811865475));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, q.getWD(), 0.7071067811865475));
   }
 
   @Override @Test public void testMakeFromMatrix3x3Exhaustive()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
-
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
     final QuaternionM4D qfm = new QuaternionM4D();
     final QuaternionM4D qaa = new QuaternionM4D();
     final MatrixM3x3D m = new MatrixM3x3D();
@@ -1151,7 +1118,7 @@ import com.io7m.jtensors.VectorReadable3DType;
        * Produce a quaternion from an axis and angle.
        */
 
-      QuaternionM4D.makeFromAxisAngle(axis, angle, qaa);
+      QuaternionM4D.makeFromAxisAngle(c, axis, angle, qaa);
 
       /**
        * Produce a rotation matrix from an axis and angle, and then a
@@ -1207,8 +1174,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeFromMatrix4x4Exhaustive()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D qfm = new QuaternionM4D();
     final QuaternionM4D qaa = new QuaternionM4D();
@@ -1228,7 +1195,7 @@ import com.io7m.jtensors.VectorReadable3DType;
        * Produce a quaternion from an axis and angle.
        */
 
-      QuaternionM4D.makeFromAxisAngle(axis, angle, qaa);
+      QuaternionM4D.makeFromAxisAngle(c, axis, angle, qaa);
 
       /**
        * Produce a rotation matrix from an axis and angle, and then a
@@ -1284,8 +1251,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix3x3_45X()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM3x3D mq = new MatrixM3x3D();
@@ -1296,7 +1263,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_X;
 
     MatrixM3x3D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
     System.out.println("mr: ");
@@ -1316,8 +1283,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix3x3_45Y()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM3x3D mq = new MatrixM3x3D();
@@ -1328,7 +1295,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_Y;
 
     MatrixM3x3D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
     System.out.println("mr: ");
@@ -1348,8 +1315,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix3x3_45Z()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM3x3D mq = new MatrixM3x3D();
@@ -1360,7 +1327,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_Z;
 
     MatrixM3x3D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
     System.out.println("mr: ");
@@ -1400,8 +1367,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix3x3_Minus45X()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM3x3D mq = new MatrixM3x3D();
@@ -1412,7 +1379,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_X;
 
     MatrixM3x3D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
     System.out.println("mr: ");
@@ -1432,8 +1399,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix3x3_Minus45Y()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM3x3D mq = new MatrixM3x3D();
@@ -1444,7 +1411,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_Y;
 
     MatrixM3x3D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
     System.out.println("mr: ");
@@ -1464,8 +1431,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix3x3_Minus45Z()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM3x3D mq = new MatrixM3x3D();
@@ -1476,7 +1443,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_Z;
 
     MatrixM3x3D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
     System.out.println("mr: ");
@@ -1496,8 +1463,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix4x4_45X()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM4x4D mq = new MatrixM4x4D();
@@ -1508,7 +1475,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_X;
 
     MatrixM4x4D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
     System.out.println("mr: ");
@@ -1528,8 +1495,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix4x4_45Y()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM4x4D mq = new MatrixM4x4D();
@@ -1540,7 +1507,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_Y;
 
     MatrixM4x4D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
     System.out.println("mr: ");
@@ -1560,8 +1527,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix4x4_45Z()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM4x4D mq = new MatrixM4x4D();
@@ -1572,7 +1539,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_Z;
 
     MatrixM4x4D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
     System.out.println("mr: ");
@@ -1620,8 +1587,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix4x4_Minus45X()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM4x4D mq = new MatrixM4x4D();
@@ -1632,7 +1599,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_X;
 
     MatrixM4x4D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
     System.out.println("mr: ");
@@ -1652,8 +1619,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix4x4_Minus45Y()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM4x4D mq = new MatrixM4x4D();
@@ -1664,7 +1631,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_Y;
 
     MatrixM4x4D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
     System.out.println("mr: ");
@@ -1684,8 +1651,8 @@ import com.io7m.jtensors.VectorReadable3DType;
 
   @Override @Test public void testMakeMatrix4x4_Minus45Z()
   {
-    final ContextRelative context_d =
-      TestUtilities.getDoubleEqualityContext();
+    final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final QuaternionM4D q = new QuaternionM4D();
     final MatrixM4x4D mq = new MatrixM4x4D();
@@ -1696,7 +1663,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final VectorReadable3DType axis = QuaternionM4DTest.AXIS_Z;
 
     MatrixM4x4D.makeRotationInto(radians, axis, mr);
-    QuaternionM4D.makeFromAxisAngle(axis, radians, q);
+    QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
     System.out.println("mr: ");
@@ -1719,14 +1686,15 @@ import com.io7m.jtensors.VectorReadable3DType;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
     final VectorI3D axis_x = new VectorI3D(1.0, 0.0, 0.0);
     final VectorI3D axis_y = new VectorI3D(0.0, 1.0, 0.0);
     final QuaternionM4D qx = new QuaternionM4D();
     final QuaternionM4D qxr =
-      QuaternionM4D.makeFromAxisAngle(axis_x, Math.toRadians(45), qx);
+      QuaternionM4D.makeFromAxisAngle(c, axis_x, Math.toRadians(45), qx);
     final QuaternionM4D qy = new QuaternionM4D();
     final QuaternionM4D qyr =
-      QuaternionM4D.makeFromAxisAngle(axis_y, Math.toRadians(45), qy);
+      QuaternionM4D.makeFromAxisAngle(c, axis_y, Math.toRadians(45), qy);
 
     Assert.assertSame(qx, qxr);
     Assert.assertSame(qy, qyr);
@@ -1749,36 +1717,33 @@ import com.io7m.jtensors.VectorReadable3DType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getXD(),
-      0.3535533905932738));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getYD(),
-      0.3535533905932738));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getZD(),
-      -0.14644660940672624));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getWD(),
-      0.8535533905932737));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getXD(), 0.3535533905932738));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getYD(), 0.3535533905932738));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getZD(), -0.14644660940672624));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getWD(), 0.8535533905932737));
   }
 
   @Override @Test public void testMultiplyInPlace()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final VectorI3D axis_x = new VectorI3D(1.0, 0.0, 0.0);
     final VectorI3D axis_y = new VectorI3D(0.0, 1.0, 0.0);
 
     final QuaternionM4D qx = new QuaternionM4D();
-    QuaternionM4D.makeFromAxisAngle(axis_x, (float) Math.toRadians(45), qx);
+    QuaternionM4D.makeFromAxisAngle(c, axis_x, (float) Math.toRadians(45), qx);
     final QuaternionM4D qy = new QuaternionM4D();
-    QuaternionM4D.makeFromAxisAngle(axis_y, (float) Math.toRadians(45), qy);
+    QuaternionM4D.makeFromAxisAngle(c, axis_y, (float) Math.toRadians(45), qy);
 
     /**
      * The quaternion resulting from a 45 degree rotation around the global X
@@ -1799,39 +1764,36 @@ import com.io7m.jtensors.VectorReadable3DType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getXD(),
-      0.3535533983204287));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getYD(),
-      0.3535533983204287));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getZD(),
-      -0.14644661713388138));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getWD(),
-      0.8535533828661185));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getXD(), 0.3535533983204287));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getYD(), 0.3535533983204287));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getZD(), -0.14644661713388138));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getWD(), 0.8535533828661185));
   }
 
   @Override @Test public void testMultiplyInPlaceOther()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final VectorI3D axis_x = new VectorI3D(1.0, 0.0, 0.0);
     final VectorI3D axis_y = new VectorI3D(0.0, 1.0, 0.0);
     final VectorI3D axis_z = new VectorI3D(0.0, 0.0, 1.0);
 
     final QuaternionM4D qx = new QuaternionM4D();
-    QuaternionM4D.makeFromAxisAngle(axis_x, (float) Math.toRadians(45), qx);
+    QuaternionM4D.makeFromAxisAngle(c, axis_x, (float) Math.toRadians(45), qx);
     final QuaternionM4D qy = new QuaternionM4D();
-    QuaternionM4D.makeFromAxisAngle(axis_y, (float) Math.toRadians(45), qy);
+    QuaternionM4D.makeFromAxisAngle(c, axis_y, (float) Math.toRadians(45), qy);
     final QuaternionM4D qz = new QuaternionM4D();
-    QuaternionM4D.makeFromAxisAngle(axis_z, (float) Math.toRadians(45), qz);
+    QuaternionM4D.makeFromAxisAngle(c, axis_z, (float) Math.toRadians(45), qz);
 
     /**
      * The quaternion resulting from a 45 degree rotation around the global X
@@ -1855,39 +1817,36 @@ import com.io7m.jtensors.VectorReadable3DType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getXD(),
-      0.1913417153164435));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getYD(),
-      0.4619397784426109));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getZD(),
-      0.1913417153164436));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getWD(),
-      0.8446231923478736));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getXD(), 0.1913417153164435));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getYD(), 0.4619397784426109));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getZD(), 0.1913417153164436));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getWD(), 0.8446231923478736));
   }
 
   @Override @Test public void testMultiplyOther()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     final VectorI3D axis_x = new VectorI3D(1.0, 0.0, 0.0);
     final VectorI3D axis_y = new VectorI3D(0.0, 1.0, 0.0);
     final VectorI3D axis_z = new VectorI3D(0.0, 0.0, 1.0);
 
     final QuaternionM4D qx = new QuaternionM4D();
-    QuaternionM4D.makeFromAxisAngle(axis_x, (float) Math.toRadians(45), qx);
+    QuaternionM4D.makeFromAxisAngle(c, axis_x, (float) Math.toRadians(45), qx);
     final QuaternionM4D qy = new QuaternionM4D();
-    QuaternionM4D.makeFromAxisAngle(axis_y, (float) Math.toRadians(45), qy);
+    QuaternionM4D.makeFromAxisAngle(c, axis_y, (float) Math.toRadians(45), qy);
     final QuaternionM4D qz = new QuaternionM4D();
-    QuaternionM4D.makeFromAxisAngle(axis_z, (float) Math.toRadians(45), qz);
+    QuaternionM4D.makeFromAxisAngle(c, axis_z, (float) Math.toRadians(45), qz);
 
     /**
      * The quaternion resulting from a 45 degree rotation around the global X
@@ -1910,22 +1869,18 @@ import com.io7m.jtensors.VectorReadable3DType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getXD(),
-      0.1913417153164435));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getYD(),
-      0.4619397784426109));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getZD(),
-      0.1913417153164436));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      qr.getWD(),
-      0.8446231923478736));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getXD(), 0.1913417153164435));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getYD(), 0.4619397784426109));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getZD(), 0.1913417153164436));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, qr.getWD(), 0.8446231923478736));
   }
 
   @Override @Test public void testNegation()
@@ -2056,22 +2011,18 @@ import com.io7m.jtensors.VectorReadable3DType;
 
       QuaternionM4D.scale(v, 1.0, vr);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getXD(),
-        vr.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getYD(),
-        vr.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getZD(),
-        vr.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getWD(),
-        vr.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getXD(), vr.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getYD(), vr.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getZD(), vr.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getWD(), vr.getWD()));
 
       {
         final double orig_x = v.getXD();
@@ -2081,14 +2032,10 @@ import com.io7m.jtensors.VectorReadable3DType;
 
         QuaternionM4D.scaleInPlace(v, 1.0);
 
-        Assert
-          .assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), orig_x));
-        Assert
-          .assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), orig_y));
-        Assert
-          .assertTrue(AlmostEqualDouble.almostEqual(ec, v.getZD(), orig_z));
-        Assert
-          .assertTrue(AlmostEqualDouble.almostEqual(ec, v.getWD(), orig_w));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), orig_x));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), orig_y));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getZD(), orig_z));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getWD(), orig_w));
       }
     }
   }
@@ -2152,22 +2099,18 @@ import com.io7m.jtensors.VectorReadable3DType;
       final QuaternionM4D vr0 = new QuaternionM4D();
       QuaternionM4D.subtract(v0, v1, vr0);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getXD(),
-        v0.getXD() - v1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getYD(),
-        v0.getYD() - v1.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getZD(),
-        v0.getZD() - v1.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getWD(),
-        v0.getWD() - v1.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getXD(), v0.getXD() - v1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getYD(), v0.getYD() - v1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getZD(), v0.getZD() - v1.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getWD(), v0.getWD() - v1.getWD()));
 
       {
         final double orig_x = v0.getXD();
@@ -2176,22 +2119,18 @@ import com.io7m.jtensors.VectorReadable3DType;
         final double orig_w = v0.getWD();
         QuaternionM4D.subtractInPlace(v0, v1);
 
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getXD(),
-          orig_x - v1.getXD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getYD(),
-          orig_y - v1.getYD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getZD(),
-          orig_z - v1.getZD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getWD(),
-          orig_w - v1.getWD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getXD(), orig_x - v1.getXD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getYD(), orig_y - v1.getYD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getZD(), orig_z - v1.getZD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getWD(), orig_w - v1.getWD()));
       }
     }
   }

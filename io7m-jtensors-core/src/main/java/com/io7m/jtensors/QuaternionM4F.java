@@ -85,23 +85,21 @@ public final class QuaternionM4F
    * @param q0  The left input quaternion
    * @param q1  The right input quaternion
    * @param out The output quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code (q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)}
    */
 
-  public static QuaternionM4F add(
+  public static <Q extends QuaternionWritable4FType> Q add(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1,
-    final QuaternionM4F out)
+    final Q out)
   {
     final float x = q0.getXF() + q1.getXF();
     final float y = q0.getYF() + q1.getYF();
     final float z = q0.getZF() + q1.getZF();
     final float w = q0.getWF() + q1.getWF();
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
@@ -109,14 +107,16 @@ public final class QuaternionM4F
    * Calculate the element-wise sum of the quaternions {@code q0} and {@code
    * q1}, saving the result to {@code q0}.
    *
-   * @param q0 The left input quaternion
-   * @param q1 The right input quaternion
+   * @param q0  The left input quaternion
+   * @param q1  The right input quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code (q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)}
    */
 
-  public static QuaternionM4F addInPlace(
-    final QuaternionM4F q0,
+  public static <Q extends QuaternionWritable4FType &
+    QuaternionReadable4FType> Q addInPlace(
+    final Q q0,
     final QuaternionReadable4FType q1)
   {
     return QuaternionM4F.add(q0, q1, q0);
@@ -158,18 +158,17 @@ public final class QuaternionM4F
    *
    * @param q   The input quaternion
    * @param out The output quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code out}
    */
 
-  public static QuaternionM4F conjugate(
+  public static <Q extends QuaternionWritable4FType &
+    QuaternionReadable4FType> Q conjugate(
     final QuaternionReadable4FType q,
-    final QuaternionM4F out)
+    final Q out)
   {
-    out.x = -q.getXF();
-    out.y = -q.getYF();
-    out.z = -q.getZF();
-    out.w = q.getWF();
+    out.set4F(-q.getXF(), -q.getYF(), -q.getZF(), q.getWF());
     return out;
   }
 
@@ -177,13 +176,15 @@ public final class QuaternionM4F
    * Calculate the conjugate of the input quaternion {@code q}, modifying {@code
    * q} in place.
    *
-   * @param q The input quaternion
+   * @param q   The input quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code q}
    */
 
-  public static QuaternionM4F conjugateInPlace(
-    final QuaternionM4F q)
+  public static <Q extends QuaternionWritable4FType &
+    QuaternionReadable4FType> Q conjugateInPlace(
+    final Q q)
   {
     return QuaternionM4F.conjugate(q, q);
   }
@@ -193,18 +194,16 @@ public final class QuaternionM4F
    *
    * @param q   The input quaternion
    * @param out The output quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code out}
    */
 
-  public static QuaternionM4F copy(
+  public static <Q extends QuaternionWritable4FType> Q copy(
     final QuaternionReadable4FType q,
-    final QuaternionM4F out)
+    final Q out)
   {
-    out.x = q.getXF();
-    out.y = q.getYF();
-    out.z = q.getZF();
-    out.w = q.getWF();
+    out.set4F(q.getXF(), q.getYF(), q.getZF(), q.getWF());
     return out;
   }
 
@@ -235,27 +234,28 @@ public final class QuaternionM4F
    * <ul> <li>{@code interpolateLinear(q0, q1, 0.0, r) -> r = q0}</li>
    * <li>{@code interpolateLinear(q0, q1, 1.0, r) -> r = q1}</li> </ul>
    *
+   * @param c     Preallocated storage
    * @param q0    The left input quaternion
    * @param q1    The right input quaternion
    * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}
    * @param r     The output quaternion
+   * @param <Q>   The precise type of quaternion
    *
    * @return {@code (1 - alpha) * q0 + alpha * q1}
+   *
+   * @since 7.0.0
    */
 
-  public static QuaternionM4F interpolateLinear(
+  public static <Q extends QuaternionWritable4FType> Q interpolateLinear(
+    final ContextQM4F c,
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1,
     final double alpha,
-    final QuaternionM4F r)
+    final Q r)
   {
-    final QuaternionM4F w0 = new QuaternionM4F();
-    final QuaternionM4F w1 = new QuaternionM4F();
-
-    QuaternionM4F.scale(q0, 1.0 - alpha, w0);
-    QuaternionM4F.scale(q1, alpha, w1);
-
-    return QuaternionM4F.add(w0, w1, r);
+    QuaternionM4F.scale(q0, 1.0 - alpha, c.qa);
+    QuaternionM4F.scale(q1, alpha, c.qb);
+    return QuaternionM4F.add(c.qa, c.qb, r);
   }
 
   /**
@@ -309,22 +309,23 @@ public final class QuaternionM4F
    * @param origin  The origin point
    * @param target  The target point
    * @param up      The up vector
+   * @param <Q>     The precise type of quaternion
    *
    * @return {@code q}
    *
    * @since 5.0.0
    */
 
-  public static QuaternionM4F lookAtWithContext(
-    final Context context,
+  public static <Q extends QuaternionWritable4FType> Q lookAtWithContext(
+    final ContextQM4F context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
     final VectorReadable3FType up,
-    final QuaternionM4F q)
+    final Q q)
   {
     final MatrixM3x3F m = context.getM3A();
     final VectorM3F t = context.getV3A();
-    final MatrixM3x3F.Context mc = context.getContext();
+    final MatrixM3x3F.ContextM3F mc = context.getContext();
 
     MatrixM3x3F.lookAtWithContext(mc, origin, target, up, m, t);
     QuaternionM4F.makeFromRotationMatrix3x3(m, q);
@@ -369,6 +370,7 @@ public final class QuaternionM4F
    * @param axis  The normalized vector representing the axis
    * @param angle The angle to rotate, in radians
    * @param out   The output quaternion
+   * @param <Q>   The precise type of quaternion
    *
    * @return A quaternion representing the rotation
    *
@@ -378,18 +380,19 @@ public final class QuaternionM4F
    * @see VectorM4F#normalize(VectorReadable4FType, VectorWritable4FType)
    */
 
-  public static QuaternionM4F makeFromAxisAngle(
+  public static <Q extends QuaternionWritable4FType> Q makeFromAxisAngle(
     final VectorReadable3FType axis,
     final double angle,
-    final QuaternionM4F out)
+    final Q out)
   {
     final double angle_r = angle * 0.5;
     final double sa = Math.sin(angle_r);
 
-    out.x = (float) ((double) axis.getXF() * sa);
-    out.y = (float) ((double) axis.getYF() * sa);
-    out.z = (float) ((double) axis.getZF() * sa);
-    out.w = (float) Math.cos(angle_r);
+    final float x = (float) ((double) axis.getXF() * sa);
+    final float y = (float) ((double) axis.getYF() * sa);
+    final float z = (float) ((double) axis.getZF() * sa);
+    final float w = (float) Math.cos(angle_r);
+    out.set4F(x, y, z, w);
     return out;
   }
 
@@ -399,15 +402,17 @@ public final class QuaternionM4F
    *
    * @param m   The rotation matrix
    * @param out The output quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code out}
    *
    * @since 5.0.0
    */
 
-  public static QuaternionM4F makeFromRotationMatrix3x3(
+  public static <Q extends QuaternionWritable4FType> Q
+  makeFromRotationMatrix3x3(
     final MatrixReadable3x3FType m,
-    final QuaternionM4F out)
+    final Q out)
   {
     final double m00 = (double) m.getRowColumnF(0, 0);
     final double m01 = (double) m.getRowColumnF(0, 1);
@@ -455,10 +460,7 @@ public final class QuaternionM4F
       z = 0.25 * s;
     }
 
-    out.x = (float) x;
-    out.y = (float) y;
-    out.z = (float) z;
-    out.w = (float) w;
+    out.set4F((float) x, (float) y, (float) z, (float) w);
     return out;
   }
 
@@ -468,15 +470,17 @@ public final class QuaternionM4F
    *
    * @param m   The rotation matrix
    * @param out The output quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code out}
    *
    * @since 5.0.0
    */
 
-  public static QuaternionM4F makeFromRotationMatrix4x4(
+  public static <Q extends QuaternionWritable4FType> Q
+  makeFromRotationMatrix4x4(
     final MatrixReadable4x4FType m,
-    final QuaternionM4F out)
+    final Q out)
   {
     final double m00 = (double) m.getRowColumnF(0, 0);
     final double m01 = (double) m.getRowColumnF(0, 1);
@@ -530,10 +534,7 @@ public final class QuaternionM4F
       z = 0.25 * s;
     }
 
-    out.x = (float) x;
-    out.y = (float) y;
-    out.z = (float) z;
-    out.w = (float) w;
+    out.set4F((float) x, (float) y, (float) z, (float) w);
     return out;
   }
 
@@ -541,17 +542,18 @@ public final class QuaternionM4F
    * Produce a rotation matrix from the quaternion {@code q}, saving the result
    * to {@code m}.
    *
-   * @param q The input quaternion
-   * @param m The output matrix
+   * @param q   The input quaternion
+   * @param m   The output matrix
+   * @param <M> The precise type of matrix
    *
    * @return {@code m}
    *
-   * @since 5.0.0
+   * @since 7.0.0
    */
 
-  public static MatrixM3x3F makeRotationMatrix3x3(
-    final QuaternionM4F q,
-    final MatrixM3x3F m)
+  public static <M extends MatrixWritable3x3FType> M makeRotationMatrix3x3(
+    final QuaternionReadable4FType q,
+    final M m)
   {
     final double xx = (double) (q.getXF() * q.getXF());
     final double xy = (double) (q.getXF() * q.getYF());
@@ -575,17 +577,17 @@ public final class QuaternionM4F
     final double r2c1 = (2.0 * yz) + (2.0 * wx);
     final double r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
 
-    m.setUnsafe(0, 0, (float) r0c0);
-    m.setUnsafe(0, 1, (float) r0c1);
-    m.setUnsafe(0, 2, (float) r0c2);
+    m.setRowColumnF(0, 0, (float) r0c0);
+    m.setRowColumnF(0, 1, (float) r0c1);
+    m.setRowColumnF(0, 2, (float) r0c2);
 
-    m.setUnsafe(1, 0, (float) r1c0);
-    m.setUnsafe(1, 1, (float) r1c1);
-    m.setUnsafe(1, 2, (float) r1c2);
+    m.setRowColumnF(1, 0, (float) r1c0);
+    m.setRowColumnF(1, 1, (float) r1c1);
+    m.setRowColumnF(1, 2, (float) r1c2);
 
-    m.setUnsafe(2, 0, (float) r2c0);
-    m.setUnsafe(2, 1, (float) r2c1);
-    m.setUnsafe(2, 2, (float) r2c2);
+    m.setRowColumnF(2, 0, (float) r2c0);
+    m.setRowColumnF(2, 1, (float) r2c1);
+    m.setRowColumnF(2, 2, (float) r2c2);
 
     return m;
   }
@@ -680,17 +682,18 @@ public final class QuaternionM4F
    * {@code QuaternionM4F qr = new QuaternionM4F(); QuaternionM4F.multiply(qy,
    * qx, qr); QuaternionM4F.multiply(qz, qr, qr); }
    *
-   * @param q0 The left input quaternion
-   * @param q1 The right input quaternion
-   * @param qr The output quaternion
+   * @param q0  The left input quaternion
+   * @param q1  The right input quaternion
+   * @param qr  The output quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code qr}
    */
 
-  public static QuaternionM4F multiply(
+  public static <Q extends QuaternionWritable4FType> Q multiply(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1,
-    final QuaternionM4F qr)
+    final Q qr)
   {
     final float q0x = q0.getXF();
     final float q0y = q0.getYF();
@@ -706,10 +709,7 @@ public final class QuaternionM4F
     final float rz = (((q0w * q1z) + (q0x * q1y)) - (q0y * q1x)) + (q0z * q1w);
     final float rw = (q0w * q1w) - (q0x * q1x) - (q0y * q1y) - (q0z * q1z);
 
-    qr.x = rx;
-    qr.y = ry;
-    qr.z = rz;
-    qr.w = rw;
+    qr.set4F(rx, ry, rz, rw);
     return qr;
   }
 
@@ -717,17 +717,19 @@ public final class QuaternionM4F
    * Multiply the quaternion {@code q0} by the quaternion {@code q1} , saving
    * the result to {@code q0}.
    *
-   * @param q0 The left quaternion
-   * @param q1 The right quaternion
+   * @param q0  The left quaternion
+   * @param q1  The right quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return q0
    *
    * @see QuaternionM4F#multiply(QuaternionReadable4FType,
-   * QuaternionReadable4FType, QuaternionM4F)
+   * QuaternionReadable4FType, QuaternionWritable4FType)
    */
 
-  public static QuaternionM4F multiplyInPlace(
-    final QuaternionM4F q0,
+  public static <Q extends QuaternionWritable4FType &
+    QuaternionReadable4FType> Q multiplyInPlace(
+    final Q q0,
     final QuaternionReadable4FType q1)
   {
     return QuaternionM4F.multiply(q0, q1, q0);
@@ -739,39 +741,39 @@ public final class QuaternionM4F
    *
    * @param qa  The input quaternion
    * @param out The output quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return out
    *
    * @since 5.0.0
    */
 
-  public static QuaternionM4F negate(
+  public static <Q extends QuaternionWritable4FType> Q negate(
     final QuaternionReadable4FType qa,
-    final QuaternionM4F out)
+    final Q out)
   {
     final float x = -qa.getXF();
     final float y = -qa.getYF();
     final float z = -qa.getZF();
     final float w = -qa.getWF();
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
   /**
    * Negate the elements of {@code q}, modifying the quaternion in-place.
    *
-   * @param q The input quaternion
+   * @param q   The input quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return q
    *
    * @since 5.0.0
    */
 
-  public static QuaternionM4F negateInPlace(
-    final QuaternionM4F q)
+  public static <Q extends QuaternionWritable4FType &
+    QuaternionReadable4FType> Q negateInPlace(
+    final Q q)
   {
     return QuaternionM4F.negate(q, q);
   }
@@ -783,23 +785,22 @@ public final class QuaternionM4F
    *
    * @param out The output quaternion
    * @param q   The input quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return out
    */
 
-  public static QuaternionM4F normalize(
+  public static <Q extends QuaternionWritable4FType> Q normalize(
     final QuaternionReadable4FType q,
-    final QuaternionM4F out)
+    final Q out)
   {
     final double m = QuaternionM4F.magnitudeSquared(q);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
       return QuaternionM4F.scale(q, reciprocal, out);
     }
-    out.x = q.getXF();
-    out.y = q.getYF();
-    out.z = q.getZF();
-    out.w = q.getWF();
+
+    out.set4F(q.getXF(), q.getYF(), q.getZF(), q.getWF());
     return out;
   }
 
@@ -808,13 +809,15 @@ public final class QuaternionM4F
    * magnitude equal to {@code 1.0} in {@code q}. The function returns the zero
    * quaternion iff the input is the zero quaternion.
    *
-   * @param q The input quaternion
+   * @param q   The input quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return q
    */
 
-  public static QuaternionM4F normalizeInPlace(
-    final QuaternionM4F q)
+  public static <Q extends QuaternionWritable4FType &
+    QuaternionReadable4FType> Q normalizeInPlace(
+    final Q q)
   {
     return QuaternionM4F.normalize(q, q);
   }
@@ -826,23 +829,22 @@ public final class QuaternionM4F
    * @param q   The input quaternion
    * @param r   The scaling value
    * @param out The output quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code (q.x * r, q.y * r, q.z * r, q.w * r)}
    */
 
-  public static QuaternionM4F scale(
+  public static <Q extends QuaternionWritable4FType> Q scale(
     final QuaternionReadable4FType q,
     final double r,
-    final QuaternionM4F out)
+    final Q out)
   {
     final double x = (double) q.getXF() * r;
     final double y = (double) q.getYF() * r;
     final double z = (double) q.getZF() * r;
     final double w = (double) q.getWF() * r;
-    out.x = (float) x;
-    out.y = (float) y;
-    out.z = (float) z;
-    out.w = (float) w;
+
+    out.set4F((float) x, (float) y, (float) z, (float) w);
     return out;
   }
 
@@ -850,14 +852,16 @@ public final class QuaternionM4F
    * Scale the quaternion {@code q} by the scalar {@code r}, saving the result
    * to {@code q}.
    *
-   * @param q The input quaternion
-   * @param r The scaling value
+   * @param q   The input quaternion
+   * @param r   The scaling value
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code (q.x * r, q.y * r, q.z * r, q.w * r)}
    */
 
-  public static QuaternionM4F scaleInPlace(
-    final QuaternionM4F q,
+  public static <Q extends QuaternionWritable4FType &
+    QuaternionReadable4FType> Q scaleInPlace(
+    final Q q,
     final double r)
   {
     return QuaternionM4F.scale(q, r, q);
@@ -870,23 +874,21 @@ public final class QuaternionM4F
    * @param q0  The left input quaternion
    * @param q1  The right input quaternion
    * @param out The output quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code (q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)}
    */
 
-  public static QuaternionM4F subtract(
+  public static <Q extends QuaternionWritable4FType> Q subtract(
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1,
-    final QuaternionM4F out)
+    final Q out)
   {
     final float x = q0.getXF() - q1.getXF();
     final float y = q0.getYF() - q1.getYF();
     final float z = q0.getZF() - q1.getZF();
     final float w = q0.getWF() - q1.getWF();
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
@@ -894,14 +896,16 @@ public final class QuaternionM4F
    * Subtract the quaternion {@code q0} from the quaternion {@code q1}, saving
    * the result to {@code q0}.
    *
-   * @param q0 The left input quaternion
-   * @param q1 The right input quaternion
+   * @param q0  The left input quaternion
+   * @param q1  The right input quaternion
+   * @param <Q> The precise type of quaternion
    *
    * @return {@code (q0.x - q1.x, q0.y - q1.y, q0.z - q1.z, q0.w - q1.w)}
    */
 
-  public static QuaternionM4F subtractInPlace(
-    final QuaternionM4F q0,
+  public static <Q extends QuaternionWritable4FType &
+    QuaternionReadable4FType> Q subtractInPlace(
+    final Q q0,
     final QuaternionReadable4FType q1)
   {
     return QuaternionM4F.subtract(q0, q1, q0);
@@ -1053,7 +1057,7 @@ public final class QuaternionM4F
   }
 
   /**
-   * The Context type contains the minimum storage required for all of the
+   * The ContextQM4F type contains the minimum storage required for all of the
    * functions of the {@code QuaternionM4D} class.
    *
    * <p> The purpose of the class is to allow applications to allocate all
@@ -1062,29 +1066,32 @@ public final class QuaternionM4F
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
    *
-   * <p> The user should allocate one {@code Context} value per thread, and then
-   * pass this value to matrix functions. Any matrix function that takes a
-   * {@code Context} value will not generate garbage. </p>
+   * <p> The user should allocate one {@code ContextQM4F} value per thread, and
+   * then pass this value to quaternion functions. Any quaternion function that
+   * takes a {@code ContextQM4F} value will not generate garbage. </p>
    *
-   * @since 5.0.0
+   * @since 7.0.0
    */
 
-  public static class Context
+  public static class ContextQM4F
   {
-    private final MatrixM3x3F.Context m_context = new MatrixM3x3F.Context();
-    private final MatrixM3x3F         m3a       = new MatrixM3x3F();
-    private final VectorM3F           v3a       = new VectorM3F();
+    private final MatrixM3x3F.ContextM3F m_context =
+      new MatrixM3x3F.ContextM3F();
+    private final MatrixM3x3F            m3a       = new MatrixM3x3F();
+    private final VectorM3F              v3a       = new VectorM3F();
+    private final QuaternionM4F          qa        = new QuaternionM4F();
+    private final QuaternionM4F          qb        = new QuaternionM4F();
 
     /**
      * Construct a new context.
      */
 
-    public Context()
+    public ContextQM4F()
     {
 
     }
 
-    final MatrixM3x3F.Context getContext()
+    final MatrixM3x3F.ContextM3F getContext()
     {
       return this.m_context;
     }

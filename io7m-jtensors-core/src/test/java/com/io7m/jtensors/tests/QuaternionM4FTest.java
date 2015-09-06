@@ -16,9 +16,6 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
 import com.io7m.jequality.AlmostEqualFloat;
@@ -29,9 +26,11 @@ import com.io7m.jtensors.QuaternionM4F;
 import com.io7m.jtensors.VectorI3F;
 import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorReadable3FType;
+import org.junit.Assert;
+import org.junit.Test;
 
-@SuppressWarnings("static-method") public class QuaternionM4FTest extends
-  QuaternionM4Contract
+@SuppressWarnings("static-method") public class QuaternionM4FTest
+  extends QuaternionM4Contract
 {
   private static final VectorReadable3FType AXIS_X = new VectorI3F(1, 0, 0);
   private static final VectorReadable3FType AXIS_Y = new VectorI3F(0, 1, 0);
@@ -58,22 +57,18 @@ import com.io7m.jtensors.VectorReadable3FType;
       final QuaternionM4F vr0 = new QuaternionM4F();
       QuaternionM4F.add(v0, v1, vr0);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr0.getXF(),
-        v0.getXF() + v1.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr0.getYF(),
-        v0.getYF() + v1.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr0.getZF(),
-        v0.getZF() + v1.getZF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr0.getWF(),
-        v0.getWF() + v1.getWF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr0.getXF(), v0.getXF() + v1.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr0.getYF(), v0.getYF() + v1.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr0.getZF(), v0.getZF() + v1.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr0.getWF(), v0.getWF() + v1.getWF()));
 
       {
         final float orig_x = v0.getXF();
@@ -82,22 +77,18 @@ import com.io7m.jtensors.VectorReadable3FType;
         final float orig_w = v0.getWF();
         QuaternionM4F.addInPlace(v0, v1);
 
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v0.getXF(),
-          orig_x + v1.getXF()));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v0.getYF(),
-          orig_y + v1.getYF()));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v0.getZF(),
-          orig_z + v1.getZF()));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v0.getWF(),
-          orig_w + v1.getWF()));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v0.getXF(), orig_x + v1.getXF()));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v0.getYF(), orig_y + v1.getYF()));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v0.getZF(), orig_z + v1.getZF()));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v0.getWF(), orig_w + v1.getWF()));
       }
     }
   }
@@ -348,12 +339,11 @@ import com.io7m.jtensors.VectorReadable3FType;
 
   @Test public void testCopy2Correct()
   {
-    final QuaternionM4F v0 =
-      new QuaternionM4F(
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE);
+    final QuaternionM4F v0 = new QuaternionM4F(
+      (float) Math.random() * Float.MAX_VALUE,
+      (float) Math.random() * Float.MAX_VALUE,
+      (float) Math.random() * Float.MAX_VALUE,
+      (float) Math.random() * Float.MAX_VALUE);
     final QuaternionM4F v1 = new QuaternionM4F();
 
     v1.copyFrom2F(v0);
@@ -366,12 +356,11 @@ import com.io7m.jtensors.VectorReadable3FType;
 
   @Test public void testCopy3Correct()
   {
-    final QuaternionM4F v0 =
-      new QuaternionM4F(
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE);
+    final QuaternionM4F v0 = new QuaternionM4F(
+      (float) Math.random() * Float.MAX_VALUE,
+      (float) Math.random() * Float.MAX_VALUE,
+      (float) Math.random() * Float.MAX_VALUE,
+      (float) Math.random() * Float.MAX_VALUE);
     final QuaternionM4F v1 = new QuaternionM4F();
 
     v1.copyFrom4F(v0);
@@ -384,12 +373,11 @@ import com.io7m.jtensors.VectorReadable3FType;
 
   @Test public void testCopy4Correct()
   {
-    final QuaternionM4F v0 =
-      new QuaternionM4F(
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE,
-        (float) Math.random() * Float.MAX_VALUE);
+    final QuaternionM4F v0 = new QuaternionM4F(
+      (float) Math.random() * Float.MAX_VALUE,
+      (float) Math.random() * Float.MAX_VALUE,
+      (float) Math.random() * Float.MAX_VALUE,
+      (float) Math.random() * Float.MAX_VALUE);
     final QuaternionM4F v1 = new QuaternionM4F();
 
     v1.copyFrom3F(v0);
@@ -405,10 +393,9 @@ import com.io7m.jtensors.VectorReadable3FType;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    Assert.assertTrue(QuaternionM4F.almostEqual(
-      ec,
-      new QuaternionM4F(),
-      new QuaternionM4F(0, 0, 0, 1)));
+    Assert.assertTrue(
+      QuaternionM4F.almostEqual(
+        ec, new QuaternionM4F(), new QuaternionM4F(0, 0, 0, 1)));
   }
 
   @Override @Test public void testDotProduct()
@@ -599,6 +586,7 @@ import com.io7m.jtensors.VectorReadable3FType;
   {
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
+    final QuaternionM4F.ContextQM4F c = new QuaternionM4F.ContextQM4F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -615,42 +603,34 @@ import com.io7m.jtensors.VectorReadable3FType;
 
       final QuaternionM4F vr0 = new QuaternionM4F();
       final QuaternionM4F vr1 = new QuaternionM4F();
-      QuaternionM4F.interpolateLinear(v0, v1, 0.0f, vr0);
-      QuaternionM4F.interpolateLinear(v0, v1, 1.0f, vr1);
+      QuaternionM4F.interpolateLinear(c, v0, v1, 0.0f, vr0);
+      QuaternionM4F.interpolateLinear(c, v0, v1, 1.0f, vr1);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v0.getXF(),
-        vr0.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v0.getYF(),
-        vr0.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v0.getZF(),
-        vr0.getZF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v0.getWF(),
-        vr0.getWF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v0.getXF(), vr0.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v0.getYF(), vr0.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v0.getZF(), vr0.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v0.getWF(), vr0.getWF()));
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v1.getXF(),
-        vr1.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v1.getYF(),
-        vr1.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v1.getZF(),
-        vr1.getZF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v1.getWF(),
-        vr1.getWF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v1.getXF(), vr1.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v1.getYF(), vr1.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v1.getZF(), vr1.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v1.getWF(), vr1.getWF()));
     }
   }
 
@@ -659,8 +639,8 @@ import com.io7m.jtensors.VectorReadable3FType;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final MatrixM4x4F.Context mc = new MatrixM4x4F.Context();
-    final QuaternionM4F.Context qc = new QuaternionM4F.Context();
+    final MatrixM4x4F.ContextM4F mc = new MatrixM4x4F.ContextM4F();
+    final QuaternionM4F.ContextQM4F qc = new QuaternionM4F.ContextQM4F();
 
     final MatrixM4x4F mr = new MatrixM4x4F();
     final MatrixM4x4F mqr = new MatrixM4x4F();
@@ -696,8 +676,8 @@ import com.io7m.jtensors.VectorReadable3FType;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final MatrixM4x4F.Context mc = new MatrixM4x4F.Context();
-    final QuaternionM4F.Context qc = new QuaternionM4F.Context();
+    final MatrixM4x4F.ContextM4F mc = new MatrixM4x4F.ContextM4F();
+    final QuaternionM4F.ContextQM4F qc = new QuaternionM4F.ContextQM4F();
 
     final MatrixM4x4F mr = new MatrixM4x4F();
     final MatrixM4x4F mqr = new MatrixM4x4F();
@@ -733,8 +713,8 @@ import com.io7m.jtensors.VectorReadable3FType;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final QuaternionM4F.Context qc = new QuaternionM4F.Context();
-    final MatrixM4x4F.Context mc = new MatrixM4x4F.Context();
+    final QuaternionM4F.ContextQM4F qc = new QuaternionM4F.ContextQM4F();
+    final MatrixM4x4F.ContextM4F mc = new MatrixM4x4F.ContextM4F();
 
     final MatrixM4x4F ml = new MatrixM4x4F();
     final QuaternionM4F lq = new QuaternionM4F();
@@ -759,17 +739,9 @@ import com.io7m.jtensors.VectorReadable3FType;
       final VectorI3F target = new VectorI3F(target_x, target_y, target_z);
 
       MatrixM4x4F.lookAtWithContext(
-        mc,
-        origin,
-        target,
-        QuaternionM4FTest.AXIS_Y,
-        ml);
+        mc, origin, target, QuaternionM4FTest.AXIS_Y, ml);
       QuaternionM4F.lookAtWithContext(
-        qc,
-        origin,
-        target,
-        QuaternionM4FTest.AXIS_Y,
-        lq);
+        qc, origin, target, QuaternionM4FTest.AXIS_Y, lq);
       QuaternionM4F.makeRotationMatrix4x4(lq, mq);
 
       System.out.println("ml : ");
@@ -875,18 +847,13 @@ import com.io7m.jtensors.VectorReadable3FType;
       TestUtilities.getDoubleEqualityContext6dp();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final VectorI3F axis_r =
-        new VectorI3F(
-          (float) Math.random(),
-          (float) Math.random(),
-          (float) Math.random());
+      final VectorI3F axis_r = new VectorI3F(
+        (float) Math.random(), (float) Math.random(), (float) Math.random());
       final VectorI3F axis_n = VectorI3F.normalize(axis_r);
 
       final QuaternionM4F q = new QuaternionM4F();
       QuaternionM4F.makeFromAxisAngle(
-        axis_n,
-        Math.toRadians(Math.random() * 360),
-        q);
+        axis_n, Math.toRadians(Math.random() * 360), q);
 
       final double m = QuaternionM4F.magnitude(q);
 
@@ -919,16 +886,14 @@ import com.io7m.jtensors.VectorReadable3FType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getXF(),
-      0.3826834323650898f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getXF(), 0.3826834323650898f));
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getWF(),
-      0.9238795325112867f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getWF(), 0.9238795325112867f));
   }
 
   @Override @Test public void testMakeAxisAngleX_90()
@@ -950,16 +915,14 @@ import com.io7m.jtensors.VectorReadable3FType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getXF(),
-      0.7071067811865475f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getXF(), 0.7071067811865475f));
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getWF(),
-      0.7071067811865475f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getWF(), 0.7071067811865475f));
   }
 
   @Override @Test public void testMakeAxisAngleY_45()
@@ -982,15 +945,13 @@ import com.io7m.jtensors.VectorReadable3FType;
      */
 
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getYF(),
-      0.3826834323650898f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getYF(), 0.3826834323650898f));
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getWF(),
-      0.9238795325112867f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getWF(), 0.9238795325112867f));
   }
 
   @Override @Test public void testMakeAxisAngleY_90()
@@ -1013,15 +974,13 @@ import com.io7m.jtensors.VectorReadable3FType;
      */
 
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getYF(),
-      0.7071067811865475f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getYF(), 0.7071067811865475f));
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getWF(),
-      0.7071067811865475f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getWF(), 0.7071067811865475f));
   }
 
   @Override @Test public void testMakeAxisAngleZ_45()
@@ -1045,14 +1004,12 @@ import com.io7m.jtensors.VectorReadable3FType;
 
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getZF(),
-      0.3826834323650898f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getWF(),
-      0.9238795325112867f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getZF(), 0.3826834323650898f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getWF(), 0.9238795325112867f));
   }
 
   @Override @Test public void testMakeAxisAngleZ_90()
@@ -1076,14 +1033,12 @@ import com.io7m.jtensors.VectorReadable3FType;
 
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
     Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getZF(),
-      0.7071067811865475f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      q.getWF(),
-      0.7071067811865475f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getZF(), 0.7071067811865475f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, q.getWF(), 0.7071067811865475f));
   }
 
   @Override @Test public void testMakeFromMatrix3x3Exhaustive()
@@ -1709,22 +1664,18 @@ import com.io7m.jtensors.VectorReadable3FType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getXF(),
-      0.3535533905932738f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getYF(),
-      0.3535533905932738f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getZF(),
-      -0.14644660940672624f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getWF(),
-      0.8535533905932737f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getXF(), 0.3535533905932738f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getYF(), 0.3535533905932738f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getZF(), -0.14644660940672624f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getWF(), 0.8535533905932737f));
   }
 
   @Override @Test public void testMultiplyInPlace()
@@ -1759,22 +1710,18 @@ import com.io7m.jtensors.VectorReadable3FType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getXF(),
-      0.3535533983204287f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getYF(),
-      0.3535533983204287f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getZF(),
-      -0.14644661713388138f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getWF(),
-      0.8535533828661185f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getXF(), 0.3535533983204287f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getYF(), 0.3535533983204287f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getZF(), -0.14644661713388138f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getWF(), 0.8535533828661185f));
   }
 
   @Override @Test public void testMultiplyInPlaceOther()
@@ -1815,22 +1762,18 @@ import com.io7m.jtensors.VectorReadable3FType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getXF(),
-      0.1913417153164435f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getYF(),
-      0.4619397784426109f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getZF(),
-      0.1913417153164436f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getWF(),
-      0.8446231923478736f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getXF(), 0.1913417153164435f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getYF(), 0.4619397784426109f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getZF(), 0.1913417153164436f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getWF(), 0.8446231923478736f));
   }
 
   @Override @Test public void testMultiplyOther()
@@ -1870,22 +1813,18 @@ import com.io7m.jtensors.VectorReadable3FType;
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getXF(),
-      0.1913417153164435f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getYF(),
-      0.4619397784426109f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getZF(),
-      0.1913417153164436f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      qr.getWF(),
-      0.8446231923478736f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getXF(), 0.1913417153164435f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getYF(), 0.4619397784426109f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getZF(), 0.1913417153164436f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, qr.getWF(), 0.8446231923478736f));
   }
 
   @Override @Test public void testNegation()
@@ -2018,22 +1957,18 @@ import com.io7m.jtensors.VectorReadable3FType;
 
       QuaternionM4F.scale(v, 1.0f, vr);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v.getXF(),
-        vr.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v.getYF(),
-        vr.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v.getZF(),
-        vr.getZF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        v.getWF(),
-        vr.getWF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v.getXF(), vr.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v.getYF(), vr.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v.getZF(), vr.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, v.getWF(), vr.getWF()));
 
       {
         final float orig_x = v.getXF();
@@ -2043,22 +1978,18 @@ import com.io7m.jtensors.VectorReadable3FType;
 
         QuaternionM4F.scaleInPlace(v, 1.0f);
 
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v.getXF(),
-          orig_x));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v.getYF(),
-          orig_y));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v.getZF(),
-          orig_z));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v.getWF(),
-          orig_w));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v.getXF(), orig_x));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v.getYF(), orig_y));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v.getZF(), orig_z));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v.getWF(), orig_w));
       }
     }
   }
@@ -2079,42 +2010,34 @@ import com.io7m.jtensors.VectorReadable3FType;
 
       QuaternionM4F.scale(v, 0.0f, vr);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getXF(),
-        0.0f));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getYF(),
-        0.0f));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getZF(),
-        0.0f));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getWF(),
-        0.0f));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getXF(), 0.0f));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getYF(), 0.0f));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getZF(), 0.0f));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getWF(), 0.0f));
 
       {
         QuaternionM4F.scaleInPlace(v, 0.0f);
 
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v.getXF(),
-          0.0f));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v.getYF(),
-          0.0f));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v.getZF(),
-          0.0f));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v.getWF(),
-          0.0f));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v.getXF(), 0.0f));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v.getYF(), 0.0f));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v.getZF(), 0.0f));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v.getWF(), 0.0f));
       }
     }
   }
@@ -2147,22 +2070,18 @@ import com.io7m.jtensors.VectorReadable3FType;
       final QuaternionM4F vr0 = new QuaternionM4F();
       QuaternionM4F.subtract(v0, v1, vr0);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr0.getXF(),
-        v0.getXF() - v1.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr0.getYF(),
-        v0.getYF() - v1.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr0.getZF(),
-        v0.getZF() - v1.getZF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr0.getWF(),
-        v0.getWF() - v1.getWF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr0.getXF(), v0.getXF() - v1.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr0.getYF(), v0.getYF() - v1.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr0.getZF(), v0.getZF() - v1.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr0.getWF(), v0.getWF() - v1.getWF()));
 
       {
         final float orig_x = v0.getXF();
@@ -2171,22 +2090,18 @@ import com.io7m.jtensors.VectorReadable3FType;
         final float orig_w = v0.getWF();
         QuaternionM4F.subtractInPlace(v0, v1);
 
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v0.getXF(),
-          orig_x - v1.getXF()));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v0.getYF(),
-          orig_y - v1.getYF()));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v0.getZF(),
-          orig_z - v1.getZF()));
-        Assert.assertTrue(AlmostEqualFloat.almostEqual(
-          context,
-          v0.getWF(),
-          orig_w - v1.getWF()));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v0.getXF(), orig_x - v1.getXF()));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v0.getYF(), orig_y - v1.getYF()));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v0.getZF(), orig_z - v1.getZF()));
+        Assert.assertTrue(
+          AlmostEqualFloat.almostEqual(
+            context, v0.getWF(), orig_w - v1.getWF()));
       }
     }
   }

@@ -804,7 +804,7 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PMatrixM3x3D.Context mc = new PMatrixM3x3D.Context();
+    final PMatrixM3x3D.ContextPM3D mc = new PMatrixM3x3D.ContextPM3D();
     final PMatrixM3x3D<T, T> m = new PMatrixM3x3D<T, T>();
     final VectorM3D t = new VectorM3D();
     final VectorI3D origin = new VectorI3D(0, 0, 0);
@@ -853,7 +853,7 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PMatrixM3x3D.Context mc = new PMatrixM3x3D.Context();
+    final PMatrixM3x3D.ContextPM3D mc = new PMatrixM3x3D.ContextPM3D();
     final PMatrixM3x3D<T, T> m = new PMatrixM3x3D<T, T>();
     final VectorM3D t = new VectorM3D();
     final PVectorI3D<T> origin = new PVectorI3D<T>(0, 0, 0);
@@ -902,7 +902,7 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PMatrixM3x3D.Context mc = new PMatrixM3x3D.Context();
+    final PMatrixM3x3D.ContextPM3D mc = new PMatrixM3x3D.ContextPM3D();
     final PMatrixM3x3D<T, T> m = new PMatrixM3x3D<T, T>();
     final VectorM3D t = new VectorM3D();
     final PVectorI3D<T> origin = new PVectorI3D<T>(0, 0, 0);
@@ -951,7 +951,7 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PMatrixM3x3D.Context mc = new PMatrixM3x3D.Context();
+    final PMatrixM3x3D.ContextPM3D mc = new PMatrixM3x3D.ContextPM3D();
     final PMatrixM3x3D<T, T> m = new PMatrixM3x3D<T, T>();
     final VectorM3D t = new VectorM3D();
     final PVectorI3D<T> origin = new PVectorI3D<T>(0, 0, 0);
@@ -1000,7 +1000,7 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PMatrixM3x3D.Context mc = new PMatrixM3x3D.Context();
+    final PMatrixM3x3D.ContextPM3D mc = new PMatrixM3x3D.ContextPM3D();
     final PMatrixM3x3D<T, T> m = new PMatrixM3x3D<T, T>();
     final VectorM3D t = new VectorM3D();
     final PVectorI3D<T> origin = new PVectorI3D<T>(20 + 0, 30 + 0, 40 + 0);

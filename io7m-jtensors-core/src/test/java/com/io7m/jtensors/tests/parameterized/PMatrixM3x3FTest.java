@@ -807,7 +807,7 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PMatrixM3x3F.Context mc = new PMatrixM3x3F.Context();
+    final PMatrixM3x3F.ContextPM3F mc = new PMatrixM3x3F.ContextPM3F();
     final PMatrixM3x3F<T, T> m = new PMatrixM3x3F<T, T>();
     final VectorM3F t = new VectorM3F();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
@@ -856,7 +856,7 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PMatrixM3x3F.Context mc = new PMatrixM3x3F.Context();
+    final PMatrixM3x3F.ContextPM3F mc = new PMatrixM3x3F.ContextPM3F();
     final PMatrixM3x3F<T, T> m = new PMatrixM3x3F<T, T>();
     final VectorM3F t = new VectorM3F();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
@@ -905,7 +905,7 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PMatrixM3x3F.Context mc = new PMatrixM3x3F.Context();
+    final PMatrixM3x3F.ContextPM3F mc = new PMatrixM3x3F.ContextPM3F();
     final PMatrixM3x3F<T, T> m = new PMatrixM3x3F<T, T>();
     final VectorM3F t = new VectorM3F();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
@@ -954,7 +954,7 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PMatrixM3x3F.Context mc = new PMatrixM3x3F.Context();
+    final PMatrixM3x3F.ContextPM3F mc = new PMatrixM3x3F.ContextPM3F();
     final PMatrixM3x3F<T, T> m = new PMatrixM3x3F<T, T>();
     final VectorM3F t = new VectorM3F();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
@@ -1003,7 +1003,7 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PMatrixM3x3F.Context mc = new PMatrixM3x3F.Context();
+    final PMatrixM3x3F.ContextPM3F mc = new PMatrixM3x3F.ContextPM3F();
     final PMatrixM3x3F<T, T> m = new PMatrixM3x3F<T, T>();
     final VectorM3F t = new VectorM3F();
     final VectorI3F origin = new VectorI3F(20 + 0, 30 + 0, 40 + 0);

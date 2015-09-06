@@ -454,7 +454,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
 
   @Override @Test public void testAddRowScaledContextEquivalent()
   {
-    final PMatrixM4x4F.Context context = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F context = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m0 = new PMatrixM4x4F<T, T>();
     final PMatrixM4x4F<T, T> m1 = new PMatrixM4x4F<T, T>();
 
@@ -833,7 +833,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
 
   @Override @Test public void testExchangeRowsContextEquivalent()
   {
-    final PMatrixM4x4F.Context context = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F context = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m0 = new PMatrixM4x4F<T, T>();
     final PMatrixM4x4F<T, T> m1 = new PMatrixM4x4F<T, T>();
 
@@ -1098,7 +1098,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
 
   @Override @Test public void testInvertIdentityContextEquivalent()
   {
-    final PMatrixM4x4F.Context context = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F context = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m0 = new PMatrixM4x4F<T, T>();
     final PMatrixM4x4F<T, T> m1 = new PMatrixM4x4F<T, T>();
 
@@ -1480,7 +1480,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
     final AlmostEqualFloat.ContextRelative context_f =
       TestUtilities.getSingleEqualityContext3dp();
 
-    final PMatrixM4x4F.Context context = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F context = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m0 = new PMatrixM4x4F<T, T>();
     final PMatrixM4x4F<T, T> m1 = new PMatrixM4x4F<T, T>();
     boolean eq = false;
@@ -1684,7 +1684,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
 
   @Override @Test public void testInvertSimpleContextEquivalent()
   {
-    final PMatrixM4x4F.Context context = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F context = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m0 = new PMatrixM4x4F<T, T>();
     final PMatrixM4x4F<T, T> m1 = new PMatrixM4x4F<T, T>();
 
@@ -1805,7 +1805,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
 
   @Override @Test public void testInvertZeroContextEquivalent()
   {
-    final PMatrixM4x4F.Context context = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F context = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m0 = new PMatrixM4x4F<T, T>();
     final PMatrixM4x4F<T, T> m1 = new PMatrixM4x4F<T, T>();
 
@@ -1833,7 +1833,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PMatrixM4x4F.Context mc = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F mc = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
     final VectorI3F target = new VectorI3F(-1, 0, 0);
@@ -1900,7 +1900,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PMatrixM4x4F.Context mc = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F mc = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
     final VectorI3F target = new VectorI3F(0, 0, -1);
@@ -1967,7 +1967,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PMatrixM4x4F.Context mc = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F mc = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
     final VectorI3F target = new VectorI3F(1, 0, 0);
@@ -2034,7 +2034,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PMatrixM4x4F.Context mc = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F mc = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
     final VectorI3F target = new VectorI3F(0, 0, 1);
@@ -2103,7 +2103,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PMatrixM4x4F.Context mc = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F mc = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m = new PMatrixM4x4F<T, T>();
     final VectorI3F origin = new VectorI3F(20 + 0, 30 + 0, 40 + 0);
     final VectorI3F target = new VectorI3F(20 + 0, 30 + 0, 40 + -1);
@@ -2391,7 +2391,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
 
     final PVectorI4F<T> v = new PVectorI4F<T>(1.0f, 2.0f, 3.0f, 4.0f);
     final PVectorM4F<T> out = new PVectorM4F<T>();
-    final PMatrixM4x4F.Context context = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F context = new PMatrixM4x4F.ContextPM4F();
 
     Assert.assertEquals(0, m0.getDirectFloatBuffer().position());
 
@@ -3183,7 +3183,7 @@ public class PMatrixM4x4FTest<T> extends MatrixM4x4Contract
 
   @Override @Test public void testScaleRowContextEquivalent()
   {
-    final PMatrixM4x4F.Context context = new PMatrixM4x4F.Context();
+    final PMatrixM4x4F.ContextPM4F context = new PMatrixM4x4F.ContextPM4F();
     final PMatrixM4x4F<T, T> m0 = new PMatrixM4x4F<T, T>();
     final PMatrixM4x4F<T, T> m1 = new PMatrixM4x4F<T, T>();
 

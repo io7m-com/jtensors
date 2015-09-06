@@ -54,7 +54,7 @@ public final class MatrixM3x3D implements
 {
   /**
    * <p>
-   * The Context type contains the minimum storage required for all of the
+   * The {@code ContextM3D} type contains the minimum storage required for all of the
    * functions of the {@code MatrixM3x3D} class.
    * </p>
    * <p>
@@ -64,15 +64,15 @@ public final class MatrixM3x3D implements
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
    * <p>
-   * The user should allocate one {@code Context} value per thread, and
+   * The user should allocate one {@code ContextM3D} value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes
-   * a {@code Context} value will not generate garbage.
+   * a {@code ContextM3D} value will not generate garbage.
    * </p>
    *
-   * @since 5.0.0
+   * @since 7.0.0
    */
 
-  public static class Context
+  public static class ContextM3D
   {
     private final MatrixM3x3D m3a = new MatrixM3x3D();
     private final VectorM3D   v3a = new VectorM3D();
@@ -83,7 +83,7 @@ public final class MatrixM3x3D implements
      * Construct a new context.
      */
 
-    public Context()
+    public ContextM3D()
     {
 
     }
@@ -569,7 +569,7 @@ public final class MatrixM3x3D implements
    */
 
   public static void lookAtWithContext(
-    final Context context,
+    final ContextM3D context,
     final VectorReadable3DType origin,
     final VectorReadable3DType target,
     final VectorReadable3DType up,

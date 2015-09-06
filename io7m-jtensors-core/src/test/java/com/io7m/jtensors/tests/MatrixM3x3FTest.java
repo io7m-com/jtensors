@@ -815,7 +815,7 @@ import com.io7m.jtensors.VectorReadable3FType;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final MatrixM3x3F.Context mc = new MatrixM3x3F.Context();
+    final MatrixM3x3F.ContextM3F mc = new MatrixM3x3F.ContextM3F();
     final MatrixM3x3F m = new MatrixM3x3F();
     final VectorM3F t = new VectorM3F();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
@@ -864,7 +864,7 @@ import com.io7m.jtensors.VectorReadable3FType;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final MatrixM3x3F.Context mc = new MatrixM3x3F.Context();
+    final MatrixM3x3F.ContextM3F mc = new MatrixM3x3F.ContextM3F();
     final MatrixM3x3F m = new MatrixM3x3F();
     final VectorM3F t = new VectorM3F();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
@@ -913,7 +913,7 @@ import com.io7m.jtensors.VectorReadable3FType;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final MatrixM3x3F.Context mc = new MatrixM3x3F.Context();
+    final MatrixM3x3F.ContextM3F mc = new MatrixM3x3F.ContextM3F();
     final MatrixM3x3F m = new MatrixM3x3F();
     final VectorM3F t = new VectorM3F();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
@@ -962,7 +962,7 @@ import com.io7m.jtensors.VectorReadable3FType;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final MatrixM3x3F.Context mc = new MatrixM3x3F.Context();
+    final MatrixM3x3F.ContextM3F mc = new MatrixM3x3F.ContextM3F();
     final MatrixM3x3F m = new MatrixM3x3F();
     final VectorM3F t = new VectorM3F();
     final VectorI3F origin = new VectorI3F(0, 0, 0);
@@ -1011,7 +1011,7 @@ import com.io7m.jtensors.VectorReadable3FType;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final MatrixM3x3F.Context mc = new MatrixM3x3F.Context();
+    final MatrixM3x3F.ContextM3F mc = new MatrixM3x3F.ContextM3F();
     final MatrixM3x3F m = new MatrixM3x3F();
     final VectorM3F t = new VectorM3F();
     final VectorI3F origin = new VectorI3F(20 + 0, 30 + 0, 40 + 0);

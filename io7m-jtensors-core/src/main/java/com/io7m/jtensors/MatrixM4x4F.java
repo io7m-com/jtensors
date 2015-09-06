@@ -54,7 +54,7 @@ public final class MatrixM4x4F implements
 {
   /**
    * <p>
-   * The Context type contains the minimum storage required for all of the
+   * The {@code ContextM4F} type contains the minimum storage required for all of the
    * functions of the {@code MatrixM4x4F} class.
    * </p>
    * <p>
@@ -64,13 +64,15 @@ public final class MatrixM4x4F implements
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
    * <p>
-   * The user should allocate one {@code Context} value per thread, and
+   * The user should allocate one {@code ContextM4F} value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes
-   * a {@code Context} value will not generate garbage.
+   * a {@code ContextM4F} value will not generate garbage.
    * </p>
+   *
+   * @since 7.0.0
    */
 
-  public static class Context
+  public static class ContextM4F
   {
     private final MatrixM3x3F m3a = new MatrixM3x3F();
     private final MatrixM4x4F m4a = new MatrixM4x4F();
@@ -86,7 +88,7 @@ public final class MatrixM4x4F implements
      * Construct a new context.
      */
 
-    public Context()
+    public ContextM4F()
     {
 
     }
@@ -358,7 +360,7 @@ public final class MatrixM4x4F implements
    */
 
   public static MatrixM4x4F addRowScaledWithContext(
-    final Context context,
+    final ContextM4F context,
     final MatrixReadable4x4FType m,
     final int row_a,
     final int row_b,
@@ -565,7 +567,7 @@ public final class MatrixM4x4F implements
    */
 
   public static MatrixM4x4F exchangeRowsInPlaceWithContext(
-    final Context context,
+    final ContextM4F context,
     final MatrixM4x4F m,
     final int row_a,
     final int row_b)
@@ -616,7 +618,7 @@ public final class MatrixM4x4F implements
    */
 
   public static MatrixM4x4F exchangeRowsWithContext(
-    final Context context,
+    final ContextM4F context,
     final MatrixReadable4x4FType m,
     final int row_a,
     final int row_b,
@@ -1071,7 +1073,7 @@ public final class MatrixM4x4F implements
    */
 
   public static OptionType<MatrixM4x4F> invertInPlaceWithContext(
-    final Context context,
+    final ContextM4F context,
     final MatrixM4x4F m)
   {
     return MatrixM4x4F.invertWithContext(context, m, m);
@@ -1098,7 +1100,7 @@ public final class MatrixM4x4F implements
    */
 
   public static OptionType<MatrixM4x4F> invertWithContext(
-    final Context context,
+    final ContextM4F context,
     final MatrixReadable4x4FType m,
     final MatrixM4x4F out)
   {
@@ -1133,7 +1135,7 @@ public final class MatrixM4x4F implements
    */
 
   public static void lookAtWithContext(
-    final Context context,
+    final ContextM4F context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
     final VectorReadable3FType up,
@@ -1755,7 +1757,7 @@ public final class MatrixM4x4F implements
     <V extends VectorWritable4FType>
     V
     multiplyVector4FWithContext(
-      final Context context,
+      final ContextM4F context,
       final MatrixReadable4x4FType m,
       final VectorReadable4FType v,
       final V out)
@@ -1981,7 +1983,7 @@ public final class MatrixM4x4F implements
    */
 
   public static MatrixM4x4F scaleRowInPlaceWithContext(
-    final Context context,
+    final ContextM4F context,
     final MatrixM4x4F m,
     final int row,
     final double r)
@@ -2033,7 +2035,7 @@ public final class MatrixM4x4F implements
    */
 
   public static MatrixM4x4F scaleRowWithContext(
-    final Context context,
+    final ContextM4F context,
     final MatrixReadable4x4FType m,
     final int row,
     final double r,

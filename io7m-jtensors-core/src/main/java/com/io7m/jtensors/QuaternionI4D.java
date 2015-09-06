@@ -34,7 +34,7 @@ import net.jcip.annotations.Immutable;
 @Immutable public final class QuaternionI4D implements QuaternionReadable4DType
 {
   /**
-   * The Context type contains the minimum storage required for all of the
+   * The ContextQM4F type contains the minimum storage required for all of the
    * functions of the {@code QuaternionI4D} class.
    *
    * <p>
@@ -45,9 +45,9 @@ import net.jcip.annotations.Immutable;
    * </p>
    *
    * <p>
-   * The user should allocate one {@code Context} value per thread, and
+   * The user should allocate one {@code ContextQM4F} value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes
-   * a {@code Context} value will not generate garbage.
+   * a {@code ContextQM4F} value will not generate garbage.
    * </p>
    *
    * @since 5.0.0
@@ -55,9 +55,10 @@ import net.jcip.annotations.Immutable;
 
   public static class Context
   {
-    private final MatrixM3x3D.Context m_context = new MatrixM3x3D.Context();
-    private final MatrixM3x3D         m3a       = new MatrixM3x3D();
-    private final VectorM3D           v3a       = new VectorM3D();
+    private final MatrixM3x3D.ContextM3D m_context =
+      new MatrixM3x3D.ContextM3D();
+    private final MatrixM3x3D            m3a       = new MatrixM3x3D();
+    private final VectorM3D              v3a       = new VectorM3D();
 
     /**
      * Construct a new context.
@@ -68,7 +69,7 @@ import net.jcip.annotations.Immutable;
 
     }
 
-    final MatrixM3x3D.Context getContext()
+    final MatrixM3x3D.ContextM3D getContext()
     {
       return this.m_context;
     }
@@ -299,7 +300,7 @@ import net.jcip.annotations.Immutable;
   {
     final MatrixM3x3D m = context.getM3A();
     final VectorM3D t = context.getV3A();
-    final MatrixM3x3D.Context mc = context.getContext();
+    final MatrixM3x3D.ContextM3D mc = context.getContext();
 
     MatrixM3x3D.lookAtWithContext(mc, origin, target, up, m, t);
     return QuaternionI4D.makeFromRotationMatrix3x3(m);

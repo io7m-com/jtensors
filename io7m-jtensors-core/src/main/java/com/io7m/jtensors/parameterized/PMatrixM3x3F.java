@@ -30,74 +30,18 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 /**
- * <p>
- * A 3x3 mutable matrix type with single precision elements.
- * </p>
+ * <p> A 3x3 mutable matrix type with single precision elements. </p>
+ *
+ * @param <T0> A phantom type parameter.
+ * @param <T1> A phantom type parameter.
  *
  * @since 7.0.0
- *
- * @param <T0>
- *          A phantom type parameter.
- * @param <T1>
- *          A phantom type parameter.
  */
 
-@SuppressWarnings("unchecked") public final class PMatrixM3x3F<T0, T1> implements
-  PMatrixDirectReadable3x3FType<T0, T1>,
+@SuppressWarnings("unchecked") public final class PMatrixM3x3F<T0, T1>
+  implements PMatrixDirectReadable3x3FType<T0, T1>,
   PMatrixWritable3x3FType<T0, T1>
 {
-  /**
-   * <p>
-   * The Context type contains the minimum storage required for all of the
-   * functions of the {@code MatrixM3x3F} class.
-   * </p>
-   * <p>
-   * The purpose of the class is to allow applications to allocate all storage
-   * ahead of time in order to allow functions in the class to avoid
-   * allocating memory (not including stack space) for intermediate
-   * calculations. This can reduce garbage collection in speed critical code.
-   * </p>
-   * <p>
-   * The user should allocate one {@code Context} value per thread, and
-   * then pass this value to matrix functions. Any matrix function that takes
-   * a {@code Context} value will not generate garbage.
-   * </p>
-   *
-   *
-   */
-
-  public static class Context
-  {
-    private final PMatrixM3x3F<?, ?> m4a = new PMatrixM3x3F<Object, Object>();
-    private final VectorM3F          v3a = new VectorM3F();
-    private final VectorM3F          v3b = new VectorM3F();
-    private final VectorM3F          v3c = new VectorM3F();
-
-    /**
-     * Construct a new context.
-     */
-
-    public Context()
-    {
-
-    }
-
-    final VectorM3F getV3A()
-    {
-      return this.v3a;
-    }
-
-    final VectorM3F getV3B()
-    {
-      return this.v3b;
-    }
-
-    final VectorM3F getV3C()
-    {
-      return this.v3c;
-    }
-  }
-
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
   private static final int VIEW_ELEMENT_SIZE;
@@ -112,28 +56,75 @@ import java.nio.FloatBuffer;
     VIEW_BYTES = PMatrixM3x3F.VIEW_ELEMENTS * PMatrixM3x3F.VIEW_ELEMENT_SIZE;
   }
 
+  private final ByteBuffer  data;
+  private final FloatBuffer view;
+
+  /**
+   * Construct a new identity matrix.
+   */
+
+  public PMatrixM3x3F()
+  {
+    final ByteBuffer b = ByteBuffer.allocateDirect(PMatrixM3x3F.VIEW_BYTES);
+    assert b != null;
+
+    final ByteOrder order = ByteOrder.nativeOrder();
+    assert order != null;
+    b.order(order);
+
+    final FloatBuffer v = b.asFloatBuffer();
+    assert v != null;
+
+    this.data = b;
+    this.view = v;
+    PMatrixM3x3F.setIdentity(this);
+  }
+
+  /**
+   * Construct a new copy of the given matrix.
+   *
+   * @param source The source matrix.
+   */
+
+  public PMatrixM3x3F(
+    final PMatrixReadable3x3FType<T0, T1> source)
+  {
+    final ByteBuffer b = ByteBuffer.allocateDirect(PMatrixM3x3F.VIEW_BYTES);
+    assert b != null;
+
+    final ByteOrder order = ByteOrder.nativeOrder();
+    assert order != null;
+    b.order(order);
+
+    this.data = b;
+
+    final FloatBuffer v = this.data.asFloatBuffer();
+    assert v != null;
+
+    this.view = v;
+    this.view.rewind();
+
+    for (int row = 0; row < PMatrixM3x3F.VIEW_ROWS; ++row) {
+      for (int col = 0; col < PMatrixM3x3F.VIEW_COLS; ++col) {
+        this.setUnsafe(row, col, source.getRowColumnF(row, col));
+      }
+    }
+  }
+
   /**
    * Elementwise add of matrices {@code m0} and {@code m1}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m0   The left input matrix.
+   * @param m1   The right input matrix.
+   * @param out  The output matrix.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <T2> A phantom type parameter.
+   * @param <T3> A phantom type parameter.
+   * @param <T4> A phantom type parameter.
+   * @param <T5> A phantom type parameter.
+   *
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   * @param <T4>
-   *          A phantom type parameter.
-   * @param <T5>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3, T4, T5> PMatrixM3x3F<T4, T5> add(
@@ -168,26 +159,19 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Elementwise add of matrices {@code m0} and {@code m1},
-   * returning the result in {@code m0}.
+   * Elementwise add of matrices {@code m0} and {@code m1}, returning the result
+   * in {@code m0}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
+   * @param m0   The left input matrix.
+   * @param m1   The right input matrix.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <T2> A phantom type parameter.
+   * @param <T3> A phantom type parameter.
+   * @param <T4> A phantom type parameter.
+   * @param <T5> A phantom type parameter.
+   *
    * @return {@code m0}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
-   * @param <T4>
-   *          A phantom type parameter.
-   * @param <T5>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3, T4, T5> PMatrixM3x3F<T4, T5> addInPlace(
@@ -198,39 +182,25 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code out}.
-   * </p>
-   * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code out}. </p> <p> This is one of the three "elementary"
+   * operations defined on matrices. See <a href= "http://en.wikipedia
+   * .org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> . </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param m     The input matrix.
+   * @param row_a The row on the lefthand side of the addition.
+   * @param row_b The row on the righthand side of the addition.
+   * @param row_c The destination row.
+   * @param r     The scaling value.
+   * @param out   The output matrix.
+   * @param <T0>  A phantom type parameter.
+   * @param <T1>  A phantom type parameter.
+   * @param <T2>  A phantom type parameter.
+   * @param <T3>  A phantom type parameter.
+   *
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> addRowScaled(
@@ -251,37 +221,24 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code m}.
-   * </p>
-   * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code m}. </p> <p> This is one of the three "elementary" operations
+   * defined on matrices. See <a href= "http://en.wikipedia
+   * .org/wiki/Row_equivalence#Elementary_row_operations"
+   * >Elementary operations</a> . </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
+   * @param m     The input matrix.
+   * @param row_a The row on the lefthand side of the addition.
+   * @param row_b The row on the righthand side of the addition.
+   * @param row_c The destination row.
+   * @param r     The scaling value.
+   * @param <T0>  A phantom type parameter.
+   * @param <T1>  A phantom type parameter.
+   * @param <T2>  A phantom type parameter.
+   * @param <T3>  A phantom type parameter.
+   *
    * @return {@code m}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> addRowScaledInPlace(
@@ -292,12 +249,7 @@ import java.nio.FloatBuffer;
     final double r)
   {
     return (PMatrixM3x3F<T2, T3>) PMatrixM3x3F.addRowScaled(
-      m,
-      row_a,
-      row_b,
-      row_c,
-      r,
-      m);
+      m, row_a, row_b, row_c, r, m);
   }
 
   private static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> addRowScaledUnsafe(
@@ -329,18 +281,15 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Copy the contents of the matrix {@code input} to the matrix
-   * {@code output}, completely replacing all elements.
+   * Copy the contents of the matrix {@code input} to the matrix {@code output},
+   * completely replacing all elements.
    *
-   * @param input
-   *          The input vector.
-   * @param output
-   *          The output vector.
+   * @param input  The input vector.
+   * @param output The output vector.
+   * @param <T0>   A phantom type parameter.
+   * @param <T1>   A phantom type parameter.
+   *
    * @return {@code output}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> PMatrixM3x3F<T0, T1> copy(
@@ -358,13 +307,11 @@ import java.nio.FloatBuffer;
   /**
    * Calculate the determinant of the matrix {@code m}.
    *
+   * @param m    The input matrix.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   *
    * @return The determinant.
-   * @param m
-   *          The input matrix.
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> double determinant(
@@ -392,34 +339,22 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code out} .
-   * </p>
-   * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
+   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code out} . </p> <p> This is one
+   * of the three "elementary" operations defined on matrices. See <a href=
    * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
-   * </p>
+   * >Elementary operations</a> . </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
-   * @param out
-   *          The output matrix.
+   * @param m     The input matrix.
+   * @param row_a The first row.
+   * @param row_b The second row.
+   * @param out   The output matrix.
+   * @param <T0>  A phantom type parameter.
+   * @param <T1>  A phantom type parameter.
+   * @param <T2>  A phantom type parameter.
+   * @param <T3>  A phantom type parameter.
+   *
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> exchangeRows(
@@ -429,39 +364,25 @@ import java.nio.FloatBuffer;
     final PMatrixM3x3F<T2, T3> out)
   {
     return PMatrixM3x3F.exchangeRowsUnsafe(
-      m,
-      PMatrixM3x3F.rowCheck(row_a),
-      PMatrixM3x3F.rowCheck(row_b),
-      out);
+      m, PMatrixM3x3F.rowCheck(row_a), PMatrixM3x3F.rowCheck(row_b), out);
   }
 
   /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code m} .
-   * </p>
-   * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
+   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code m} . </p> <p> This is one of
+   * the three "elementary" operations defined on matrices. See <a href=
    * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
-   * </p>
+   * >Elementary operations</a> . </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
+   * @param m     The input matrix.
+   * @param row_a The first row.
+   * @param row_b The second row.
+   * @param <T0>  A phantom type parameter.
+   * @param <T1>  A phantom type parameter.
+   * @param <T2>  A phantom type parameter.
+   * @param <T3>  A phantom type parameter.
+   *
    * @return {@code m}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> exchangeRowsInPlace(
@@ -470,10 +391,7 @@ import java.nio.FloatBuffer;
     final int row_b)
   {
     return (PMatrixM3x3F<T2, T3>) PMatrixM3x3F.exchangeRows(
-      m,
-      row_a,
-      row_b,
-      m);
+      m, row_a, row_b, m);
   }
 
   private static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> exchangeRowsUnsafe(
@@ -498,21 +416,16 @@ import java.nio.FloatBuffer;
     final int column)
   {
     return PMatrixM3x3F.indexUnsafe(
-      PMatrixM3x3F.rowCheck(row),
-      PMatrixM3x3F.columnCheck(column));
+      PMatrixM3x3F.rowCheck(row), PMatrixM3x3F.columnCheck(column));
   }
 
   /**
-   * <p>
-   * The main function that indexes into the buffer that backs the array. The
-   * body of this function decides on how elements are stored. This
+   * <p> The main function that indexes into the buffer that backs the array.
+   * The body of this function decides on how elements are stored. This
    * implementation chooses to store values in column-major format as this
-   * allows matrices to be sent directly to OpenGL without conversion.
-   * </p>
-   * <p>
+   * allows matrices to be sent directly to OpenGL without conversion. </p> <p>
    * (row * 3) + column, corresponds to row-major storage. (column * 3) + row,
-   * corresponds to column-major (OpenGL) storage.
-   * </p>
+   * corresponds to column-major (OpenGL) storage. </p>
    */
 
   private static int indexUnsafe(
@@ -523,23 +436,19 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code out}. The function returns {@code Some(out)}
-   * iff it was possible to invert the matrix, and {@code None}
-   * otherwise. It is not possible to invert a matrix that has a determinant
-   * of {@code 0}.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code out}. The function returns {@code Some(out)} iff it was possible
+   * to invert the matrix, and {@code None} otherwise. It is not possible to
+   * invert a matrix that has a determinant of {@code 0}.
+   *
+   * @param m    The input matrix.
+   * @param out  The output matrix.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   *
+   * @return {@code out}
    *
    * @see PMatrixM3x3F#determinant(PMatrixReadable3x3FType)
-   *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> OptionType<PMatrixM3x3F<T1, T0>> invert(
@@ -595,21 +504,18 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code m}. The function returns {@code Some(m)} iff
-   * it was possible to invert the matrix, and {@code None} otherwise. It
-   * is not possible to invert a matrix that has a determinant of
-   * {@code 0}.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code m}. The function returns {@code Some(m)} iff it was possible to
+   * invert the matrix, and {@code None} otherwise. It is not possible to invert
+   * a matrix that has a determinant of {@code 0}.
+   *
+   * @param m    The input matrix.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   *
+   * @return {@code m}
    *
    * @see PMatrixM3x3F#determinant(PMatrixReadable3x3FType)
-   *
-   * @param m
-   *          The input matrix.
-   * @return {@code m}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> OptionType<PMatrixM3x3F<T1, T0>> invertInPlace(
@@ -620,52 +526,32 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p>
-   * Calculate a rotation and translation representing a "camera" looking from
-   * the point {@code origin} to the point {@code target}.
-   * {@code target} must represent the "up" vector for the camera.
-   * Usually, this is simply a unit vector {@code (0, 1, 0)} representing
-   * the Y axis.
-   * </p>
-   * <p>
-   * The function uses preallocated storage from {@code context}.
-   * </p>
-   * <p>
-   * The view is expressed as a rotation matrix and a translation vector,
-   * written to {@code out_matrix} and {@code out_translation},
-   * respectively.
-   * </p>
+   * <p> Calculate a rotation and translation representing a "camera" looking
+   * from the point {@code origin} to the point {@code target}. {@code target}
+   * must represent the "up" vector for the camera. Usually, this is simply a
+   * unit vector {@code (0, 1, 0)} representing the Y axis. </p> <p> The
+   * function uses preallocated storage from {@code context}. </p> <p> The view
+   * is expressed as a rotation matrix and a translation vector, written to
+   * {@code out_matrix} and {@code out_translation}, respectively. </p>
    *
-   * @param context
-   *          Preallocated storage
-   * @param out_matrix
-   *          The output matrix
-   * @param out_translation
-   *          The output translation
-   * @param origin
-   *          The position of the viewer
-   * @param target
-   *          The target being viewed
-   * @param up
-   *          The up vector
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <V>
-   *          The precise type of writable vector.
+   * @param context         Preallocated storage
+   * @param out_matrix      The output matrix
+   * @param out_translation The output translation
+   * @param origin          The position of the viewer
+   * @param target          The target being viewed
+   * @param up              The up vector
+   * @param <T0>            A phantom type parameter.
+   * @param <T1>            A phantom type parameter.
+   * @param <V>             The precise type of writable vector.
    */
 
-  public static
-    <T0, T1, V extends VectorWritable3FType>
-    void
-    lookAtWithContext(
-      final Context context,
-      final VectorReadable3FType origin,
-      final VectorReadable3FType target,
-      final VectorReadable3FType up,
-      final PMatrixM3x3F<T0, T1> out_matrix,
-      final V out_translation)
+  public static <T0, T1, V extends VectorWritable3FType> void lookAtWithContext(
+    final ContextPM3F context,
+    final VectorReadable3FType origin,
+    final VectorReadable3FType target,
+    final VectorReadable3FType up,
+    final PMatrixM3x3F<T0, T1> out_matrix,
+    final V out_translation)
   {
     final VectorM3F forward = context.getV3A();
     final VectorM3F new_up = context.getV3B();
@@ -718,26 +604,17 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p>
-   * Generate and return a matrix that represents a rotation of
-   * {@code angle} radians around the axis {@code axis}.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
+   * <p> Generate and return a matrix that represents a rotation of {@code
+   * angle} radians around the axis {@code axis}. </p> <p> The function assumes
+   * a right-handed coordinate system and therefore a positive rotation around
+   * any axis represents a counter-clockwise rotation around that axis. </p>
    *
+   * @param angle The angle in radians.
+   * @param axis  The axis.
+   * @param <T0>  A phantom type parameter.
+   * @param <T1>  A phantom type parameter.
    *
-   * @param angle
-   *          The angle in radians.
-   * @param axis
-   *          The axis.
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> PMatrixM3x3F<T0, T1> makeRotation(
@@ -750,28 +627,19 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p>
-   * Generate a matrix that represents a rotation of {@code angle}
-   * radians around the axis {@code axis} and save to {@code out}.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
+   * <p> Generate a matrix that represents a rotation of {@code angle} radians
+   * around the axis {@code axis} and save to {@code out}. </p> <p> The function
+   * assumes a right-handed coordinate system and therefore a positive rotation
+   * around any axis represents a counter-clockwise rotation around that axis.
    * </p>
    *
+   * @param angle The angle in radians.
+   * @param axis  The axis.
+   * @param out   The output matrix.
+   * @param <T0>  A phantom type parameter.
+   * @param <T1>  A phantom type parameter.
    *
-   * @param angle
-   *          The angle in radians.
-   * @param axis
-   *          The axis.
-   * @param out
-   *          The output matrix.
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> PMatrixM3x3F<T0, T1> makeRotationInto(
@@ -829,15 +697,12 @@ import java.nio.FloatBuffer;
    * Create a translation matrix that represents a translation by the vector
    * {@code v}, writing the resulting matrix to {@code out}.
    *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
+   * @param v    The translation vector.
+   * @param out  The output matrix.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   *
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> PMatrixM3x3F<T0, T1> makeTranslation2F(
@@ -853,15 +718,12 @@ import java.nio.FloatBuffer;
    * Create a translation matrix that represents a translation by the vector
    * {@code v}, writing the resulting matrix to {@code out}.
    *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
+   * @param v    The translation vector.
+   * @param out  The output matrix.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   *
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> PMatrixM3x3F<T0, T1> makeTranslation2I(
@@ -874,22 +736,17 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Multiply the matrix {@code m0} with the matrix {@code m1},
-   * writing the result to {@code out}.
+   * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
+   * result to {@code out}.
    *
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
-   * @param out
-   *          The output vector.
+   * @param m0   The left input vector.
+   * @param m1   The right input vector.
+   * @param out  The output vector.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <T2> A phantom type parameter.
+   *
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2> PMatrixM3x3F<T0, T2> multiply(
@@ -957,31 +814,24 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Multiply the matrix {@code m} with the vector {@code v},
-   * writing the resulting vector to {@code out}.
+   * Multiply the matrix {@code m} with the vector {@code v}, writing the
+   * resulting vector to {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
+   * @param m    The input matrix.
+   * @param v    The input vector.
+   * @param out  The output vector.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <V>  The precise type of writable vector.
+   *
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <V>
-   *          The precise type of writable vector.
    */
 
-  public static
-    <T0, T1, V extends PVectorWritable3FType<T1>>
-    V
-    multiplyVector3F(
-      final PMatrixReadable3x3FType<T0, T1> m,
-      final PVectorReadable3FType<T0> v,
-      final V out)
+  public static <T0, T1, V extends PVectorWritable3FType<T1>> V
+  multiplyVector3F(
+    final PMatrixReadable3x3FType<T0, T1> m,
+    final PVectorReadable3FType<T0> v,
+    final V out)
   {
     final VectorM3F row = new VectorM3F();
     final VectorM3F vi = new VectorM3F(v);
@@ -997,20 +847,14 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * @return Row {@code row} of the matrix {@code m} in the vector
-   *         {@code out}.
-   * @param m
-   *          The input matrix
-   * @param row
-   *          The row
-   * @param out
-   *          The output vector
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <V>
-   *          The precise type of writable vector.
+   * @param m    The input matrix
+   * @param row  The row
+   * @param out  The output vector
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <V>  The precise type of writable vector.
+   *
+   * @return Row {@code row} of the matrix {@code m} in the vector {@code out}.
    */
 
   public static <T0, T1, V extends VectorWritable3FType> V row(
@@ -1044,24 +888,18 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code out}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix
+   * @param m    The input matrix.
+   * @param r    The scaling value.
+   * @param out  The output matrix
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <T2> A phantom type parameter.
+   * @param <T3> A phantom type parameter.
+   *
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> scale(
@@ -1097,22 +935,17 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code m}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code m}.
    *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
+   * @param m    The input matrix.
+   * @param r    The scaling value.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <T2> A phantom type parameter.
+   * @param <T3> A phantom type parameter.
+   *
    * @return {@code m}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> scaleInPlace(
@@ -1123,34 +956,22 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p>
-   * Scale row {@code r} of the matrix {@code m} by {@code r},
-   * saving the result to row {@code r} of {@code out}.
-   * </p>
-   * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
+   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code out}. </p> <p> This is one of the three
+   * "elementary" operations defined on matrices. See <a href=
    * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
-   * </p>
+   * >Elementary operations</a> . </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code 0 <= row < 3}.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param m    The input matrix.
+   * @param row  The index of the row {@code 0 <= row < 3}.
+   * @param r    The scaling value.
+   * @param out  The output matrix.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <T2> A phantom type parameter.
+   * @param <T3> A phantom type parameter.
+   *
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> scaleRow(
@@ -1163,32 +984,21 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p>
-   * Scale row {@code r} of the matrix {@code m} by {@code r},
-   * saving the result to row {@code r} of {@code m}.
-   * </p>
-   * <p>
-   * This is one of the three "elementary" operations defined on matrices. See
-   * <a href=
+   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code m}. </p> <p> This is one of the three
+   * "elementary" operations defined on matrices. See <a href=
    * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> .
-   * </p>
+   * >Elementary operations</a> . </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code 0 <= row < 3}.
-   * @param r
-   *          The scaling value.
+   * @param m    The input matrix.
+   * @param row  The index of the row {@code 0 <= row < 3}.
+   * @param r    The scaling value.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <T2> A phantom type parameter.
+   * @param <T3> A phantom type parameter.
+   *
    * @return {@code m}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> scaleRowInPlace(
@@ -1197,10 +1007,7 @@ import java.nio.FloatBuffer;
     final double r)
   {
     return (PMatrixM3x3F<T2, T3>) PMatrixM3x3F.scaleRowUnsafe(
-      m,
-      PMatrixM3x3F.rowCheck(row),
-      r,
-      m);
+      m, PMatrixM3x3F.rowCheck(row), r, m);
   }
 
   private static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> scaleRowUnsafe(
@@ -1219,22 +1026,17 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Set the value in the matrix {@code m} at row {@code row},
-   * column {@code column} to {@code value}.
+   * Set the value in the matrix {@code m} at row {@code row}, column {@code
+   * column} to {@code value}.
    *
-   * @param m
-   *          The input matrix
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
+   * @param m      The input matrix
+   * @param row    The row
+   * @param column The column
+   * @param value  The value
+   * @param <T0>   A phantom type parameter.
+   * @param <T1>   A phantom type parameter.
+   *
    * @return {@code m}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> PMatrixM3x3F<T0, T1> set(
@@ -1250,17 +1052,13 @@ import java.nio.FloatBuffer;
   /**
    * Set the given matrix {@code m} to the identity matrix.
    *
-   * @param m
-   *          The matrix
+   * @param m    The matrix
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <T2> A phantom type parameter.
+   * @param <T3> A phantom type parameter.
+   *
    * @return {@code m}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> setIdentity(
@@ -1294,41 +1092,35 @@ import java.nio.FloatBuffer;
   /**
    * Set the given matrix {@code m} to the zero matrix.
    *
-   * @param m
-   *          The matrix
+   * @param m    The matrix
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <T2> A phantom type parameter.
+   * @param <T3> A phantom type parameter.
+   *
    * @return {@code m}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> setZero(
     final PMatrixM3x3F<T0, T1> m)
   {
     m.view.clear();
-    for (int index = 0; index < (PMatrixM3x3F.VIEW_ROWS * PMatrixM3x3F.VIEW_COLS); ++index) {
+    for (int index = 0; index < (PMatrixM3x3F.VIEW_ROWS
+                                 * PMatrixM3x3F.VIEW_COLS); ++index) {
       m.view.put(index, 0.0f);
     }
     return (PMatrixM3x3F<T2, T3>) m;
   }
 
   /**
-   * Return the trace of the matrix {@code m}. The trace is defined as
-   * the sum of the diagonal elements of the matrix.
+   * Return the trace of the matrix {@code m}. The trace is defined as the sum
+   * of the diagonal elements of the matrix.
    *
+   * @param m    The input matrix
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
    *
-   * @param m
-   *          The input matrix
    * @return The trace of the matrix
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> double trace(
@@ -1340,22 +1132,17 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code out}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m    The input matrix.
+   * @param out  The output matrix.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <T2> A phantom type parameter.
+   * @param <T3> A phantom type parameter.
+   *
    * @return {@code out}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> transpose(
@@ -1367,20 +1154,16 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code m}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code m}.
    *
-   * @param m
-   *          The input matrix.
+   * @param m    The input matrix.
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   * @param <T2> A phantom type parameter.
+   * @param <T3> A phantom type parameter.
+   *
    * @return {@code m}
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
-   * @param <T2>
-   *          A phantom type parameter.
-   * @param <T3>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1, T2, T3> PMatrixM3x3F<T2, T3> transposeInPlace(
@@ -1397,62 +1180,6 @@ import java.nio.FloatBuffer;
     }
 
     return (PMatrixM3x3F<T2, T3>) m;
-  }
-
-  private final ByteBuffer  data;
-  private final FloatBuffer view;
-
-  /**
-   * Construct a new identity matrix.
-   */
-
-  public PMatrixM3x3F()
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(PMatrixM3x3F.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    final FloatBuffer v = b.asFloatBuffer();
-    assert v != null;
-
-    this.data = b;
-    this.view = v;
-    PMatrixM3x3F.setIdentity(this);
-  }
-
-  /**
-   * Construct a new copy of the given matrix.
-   *
-   * @param source
-   *          The source matrix.
-   */
-
-  public PMatrixM3x3F(
-    final PMatrixReadable3x3FType<T0, T1> source)
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(PMatrixM3x3F.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    this.data = b;
-
-    final FloatBuffer v = this.data.asFloatBuffer();
-    assert v != null;
-
-    this.view = v;
-    this.view.rewind();
-
-    for (int row = 0; row < PMatrixM3x3F.VIEW_ROWS; ++row) {
-      for (int col = 0; col < PMatrixM3x3F.VIEW_COLS; ++col) {
-        this.setUnsafe(row, col, source.getRowColumnF(row, col));
-      }
-    }
   }
 
   @Override public boolean equals(
@@ -1512,12 +1239,10 @@ import java.nio.FloatBuffer;
   /**
    * Set the value at the given row and column.
    *
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
+   * @param row    The row
+   * @param column The column
+   * @param value  The value
+   *
    * @return {@code this}
    */
 
@@ -1560,5 +1285,54 @@ import java.nio.FloatBuffer;
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  /**
+   * <p> The {@code ContextPM3F} type contains the minimum storage required for
+   * all of the functions of the {@code PMatrixM3x3F} class. </p>
+   *
+   * <p> The purpose of the class is to allow applications to allocate all
+   * storage ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical code.
+   * </p>
+   *
+   * <p> The user should allocate one {@code ContextPM3F} value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes a
+   * {@code ContextPM3F} value will not generate garbage. </p>
+   *
+   * @since 7.0.0
+   */
+
+  public static class ContextPM3F
+  {
+    private final PMatrixM3x3F<?, ?> m4a = new PMatrixM3x3F<Object, Object>();
+    private final VectorM3F          v3a = new VectorM3F();
+    private final VectorM3F          v3b = new VectorM3F();
+    private final VectorM3F          v3c = new VectorM3F();
+
+    /**
+     * Construct a new context.
+     */
+
+    public ContextPM3F()
+    {
+
+    }
+
+    final VectorM3F getV3A()
+    {
+      return this.v3a;
+    }
+
+    final VectorM3F getV3B()
+    {
+      return this.v3b;
+    }
+
+    final VectorM3F getV3C()
+    {
+      return this.v3c;
+    }
   }
 }
