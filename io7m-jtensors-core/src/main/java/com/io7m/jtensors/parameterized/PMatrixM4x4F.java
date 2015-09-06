@@ -206,12 +206,12 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * <p>Add the values in row {@code row_b} to the values in row {@code row_a}
    * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
-   * matrix {@code out}. </p> <p> This is one of the three "elementary"
-   * operations defined on matrices. See <a href= "http://en.wikipedia
-   * .org/wiki/Row_equivalence#Elementary_row_operations" >Elementary
-   * operations</a> . </p>
+   * matrix {@code out}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m     The input matrix.
    * @param row_a The row on the lefthand side of the addition.
@@ -250,12 +250,12 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * <p>Add the values in row {@code row_b} to the values in row {@code row_a}
    * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
-   * matrix {@code m}. </p> <p> This is one of the three "elementary" operations
-   * defined on matrices. See <a href= "http://en.wikipedia
-   * .org/wiki/Row_equivalence#Elementary_row_operations" >Elementary
-   * operations</a> . </p>
+   * matrix {@code m}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m     The input matrix.
    * @param row_a The row on the lefthand side of the addition.
@@ -299,13 +299,13 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * <p>Add the values in row {@code row_b} to the values in row {@code row_a}
    * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
    * matrix {@code out}. The function uses storage preallocated in {@code
-   * context} to avoid any new allocations. </p> <p> This is one of the three
-   * "elementary" operations defined on matrices. See <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> . </p>
+   * context} to avoid any new allocations.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param context Preallocated storage.
    * @param m       The input matrix.
@@ -445,11 +445,11 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
-   * {@code m}, saving the exchanged rows to {@code out}. </p> <p> This is one
-   * of the three "elementary" operations defined on matrices. See <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> . </p>
+   * <p>Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code out}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m     The input matrix.
    * @param row_a The first row.
@@ -481,11 +481,11 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
-   * {@code m}, saving the exchanged rows to {@code m}. </p> <p> This is one of
-   * the three "elementary" operations defined on matrices. See <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> . </p>
+   * <p>Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code m}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m     The input matrix.
    * @param row_a The first row.
@@ -508,13 +508,12 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * <p>Exchange the row {@code row_a} and row {@code row_b} of the matrix
    * {@code m}, saving the exchanged rows to {@code m}. The function uses
-   * storage preallocated in {@code context} to avoid allocating memory. </p>
-   * <p> This is one of the three "elementary" operations defined on matrices.
-   * See <a href= "http://en.wikipedia
-   * .org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> . </p>
+   * storage preallocated in {@code context} to avoid allocating memory.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param context Preallocated storage.
    * @param m       The input matrix.
@@ -558,10 +557,10 @@ import java.nio.FloatBuffer;
    * <p> Exchange two rows {@code row_a} and row {@code row_b} of the matrix
    * {@code m}, saving the exchanged rows to {@code out} . </p> <p> The function
    * uses storage preallocated in {@code context} to avoid allocating memory.
-   * </p> <p> This is one of the three "elementary" operations defined on
-   * matrices. See <a href= "http://en.wikipedia
-   * .org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> . </p>
+   * </p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param context Preallocated storage.
    * @param m       The input matrix.
@@ -1828,11 +1827,11 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
-   * result to row {@code r} of {@code out}. </p> <p> This is one of the three
-   * "elementary" operations defined on matrices. See <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> . </p>
+   * <p>Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code out}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m    The input matrix.
    * @param row  The index of the row {@code 0 <= row < 4}.
@@ -1858,11 +1857,11 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p> Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
-   * result to row {@code r} of {@code m}. </p> <p> This is one of the three
-   * "elementary" operations defined on matrices. See <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> . </p>
+   * <p>Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
+   * result to row {@code r} of {@code m}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m    The input matrix.
    * @param row  The index of the row {@code 0 <= row < 4}.
@@ -1886,12 +1885,12 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p> Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
+   * <p>Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
    * result to row {@code r} of {@code m}. The function uses preallocated
-   * storage in {@code context} to avoid allocating memory. </p> <p> This is one
-   * of the three "elementary" operations defined on matrices. See <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> . </p>
+   * storage in {@code context} to avoid allocating memory.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param context Preallocated storage.
    * @param m       The input matrix.
@@ -1930,12 +1929,12 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p> Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
+   * <p>Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
    * result to row {@code r} of {@code out}. The function uses preallocated
-   * storage in {@code context} to avoid allocating memory. </p> <p> This is one
-   * of the three "elementary" operations defined on matrices. See <a href=
-   * "http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations"
-   * >Elementary operations</a> . </p>
+   * storage in {@code context} to avoid allocating memory.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param context Preallocated storage.
    * @param m       The input matrix.

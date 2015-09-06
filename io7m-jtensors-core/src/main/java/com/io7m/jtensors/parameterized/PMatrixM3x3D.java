@@ -31,11 +31,7 @@ import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 
 /**
- * <p> A 3x3 mutable matrix type with double precision elements. </p> <p> See <a
- * href="http://en.wikipedia
- * .org/wiki/Row_equivalence#Elementary_row_operations">Elementary
- * operations</a> for the three <i>elementary</i> operations defined on
- * matrices. </p>
+ * <p>A 3x3 mutable matrix type with double precision elements.</p>
  *
  * @param <T0> A phantom type parameter.
  * @param <T1> A phantom type parameter.
@@ -61,7 +57,7 @@ import java.nio.DoubleBuffer;
     VIEW_BYTES = PMatrixM3x3D.VIEW_ELEMENTS * PMatrixM3x3D.VIEW_ELEMENT_SIZE;
   }
 
-  private final ByteBuffer data;
+  private final ByteBuffer   data;
   private final DoubleBuffer view;
 
   /**
@@ -186,10 +182,12 @@ import java.nio.DoubleBuffer;
   }
 
   /**
-   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * <p>Add the values in row {@code row_b} to the values in row {@code row_a}
    * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
-   * matrix {@code out}. </p> <p> This is one of the three <i>elementary</i>
-   * operations defined on matrices. </p>
+   * matrix {@code out}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m     The input matrix.
    * @param row_a The row on the lefthand side of the addition.
@@ -223,10 +221,12 @@ import java.nio.DoubleBuffer;
   }
 
   /**
-   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * <p>Add the values in row {@code row_b} to the values in row {@code row_a}
    * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
-   * matrix {@code m}. </p> <p> This is one of the three <i>elementary</i>
-   * operations defined on matrices. </p>
+   * matrix {@code m}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m     The input matrix.
    * @param row_a The row on the lefthand side of the addition.
@@ -339,9 +339,11 @@ import java.nio.DoubleBuffer;
   }
 
   /**
-   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
-   * {@code m}, saving the exchanged rows to {@code out}. </p> <p> This is one
-   * of the three <i>elementary</i> operations defined on matrices. </p>
+   * <p>Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code out}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m     The input matrix.
    * @param row_a The first row.
@@ -366,9 +368,11 @@ import java.nio.DoubleBuffer;
   }
 
   /**
-   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
-   * {@code m}, saving the exchanged rows to {@code m}. </p> <p> This is one of
-   * the three <i>elementary</i> operations defined on matrices. </p>
+   * <p>Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code m}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m     The input matrix.
    * @param row_a The first row.
@@ -955,9 +959,11 @@ import java.nio.DoubleBuffer;
   }
 
   /**
-   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
-   * result to row {@code r} of {@code out}. </p> <p> This is one of the three
-   * <i>elementary</i> operations defined on matrices. </p>
+   * <p>Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code out}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m    The input matrix.
    * @param row  The index of the row {@code 0 <= row < 3}.
@@ -981,9 +987,11 @@ import java.nio.DoubleBuffer;
   }
 
   /**
-   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
-   * result to row {@code r} of {@code m}. </p> <p> This is one of the three
-   * <i>elementary</i> operations defined on matrices. </p>
+   * <p>Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code m}.</p>
+   *
+   * <p>This is one of the three <i>elementary</i> operations defined on
+   * matrices.</p>
    *
    * @param m    The input matrix.
    * @param row  The index of the row {@code 0 <= row < 3}.
@@ -1124,8 +1132,7 @@ import java.nio.DoubleBuffer;
     final PMatrixReadable3x3DType<T0, T1> m)
   {
     return m.getRowColumnD(0, 0) + m.getRowColumnD(1, 1) + m.getRowColumnD(
-      2,
-      2);
+      2, 2);
   }
 
   /**
