@@ -618,7 +618,7 @@ public abstract class VectorM3DContract extends VectorM3Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    final VectorM3D.Context3D c = new VectorM3D.Context3D();
+    final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
 
     final VectorM3D v0 = this.newVectorM3D(0.0f, 1.0f, 0.0f);
     final VectorM3D v1 = this.newVectorM3D(0.0f, 0.0f, 0.0f);
@@ -629,7 +629,7 @@ public abstract class VectorM3DContract extends VectorM3Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    final VectorM3D.Context3D c = new VectorM3D.Context3D();
+    final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
@@ -889,7 +889,7 @@ public abstract class VectorM3DContract extends VectorM3Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    final VectorM3D.Context3D c = new VectorM3D.Context3D();
+    final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -1037,7 +1037,7 @@ public abstract class VectorM3DContract extends VectorM3Contract
 
   @Override @Test public void testOrthonormalize()
   {
-    final VectorM3D.Context3D c = new VectorM3D.Context3D();
+    final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
     final VectorM3D v0 = this.newVectorM3D(0, 1, 0);
     final VectorM3D v1 = this.newVectorM3D(0.5f, 0.5f, 0);
     final VectorM3D v0_out = new VectorM3D();
@@ -1051,7 +1051,7 @@ public abstract class VectorM3DContract extends VectorM3Contract
 
   @Override @Test public void testOrthonormalizeMutation()
   {
-    final VectorM3D.Context3D c = new VectorM3D.Context3D();
+    final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
     final VectorM3D v0 = this.newVectorM3D(0f, 1f, 0f);
     final VectorM3D v1 = this.newVectorM3D(0.5f, 0.5f, 0f);
 

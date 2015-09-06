@@ -510,7 +510,7 @@ import java.nio.DoubleBuffer;
    * <p>Exchange the row {@code row_a} and row {@code row_b} of the matrix
    * {@code m}, saving the exchanged rows to {@code m}. The function uses
    * storage preallocated in {@code context} to avoid allocating memory.</p>
-  *
+   *
    * <p>This is one of the three <i>elementary</i> operations defined on
    * matrices.</p>
    *
@@ -1886,7 +1886,7 @@ import java.nio.DoubleBuffer;
    * <p>Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
    * result to row {@code r} of {@code m}. The function uses preallocated
    * storage in {@code context} to avoid allocating memory.</p>
-
+   *
    * <p>This is one of the three <i>elementary</i> operations defined on
    * matrices.</p>
    *
@@ -2236,18 +2236,18 @@ import java.nio.DoubleBuffer;
   }
 
   /**
-   * <p> The {@code ContextPM4D} type contains the minimum storage required for
-   * all of the functions of the {@code PMatrixM4x4D} class. </p>
+   * <p>The {@code ContextPM4D} type contains the minimum storage required for
+   * all of the functions of the {@code PMatrixM4x4D} class.</p>
    *
-   * <p> The purpose of the class is to allow applications to allocate all
+   * <p>The purpose of the class is to allow applications to allocate all
    * storage ahead of time in order to allow functions in the class to avoid
    * allocating memory (not including stack space) for intermediate
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
    *
-   * <p> The user should allocate one {@code ContextPM4D} value per thread, and
+   * <p>The user should allocate one {@code ContextPM4D} value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes a
-   * {@code ContextPM4D} value will not generate garbage. </p>
+   * {@code ContextPM4D} value will not generate garbage.</p>
    *
    * @since 7.0.0
    */

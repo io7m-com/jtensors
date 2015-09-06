@@ -465,7 +465,7 @@ public abstract class VectorM3LContract extends VectorM3Contract
 
   @Override @Test public void testDistance()
   {
-    final VectorM3L.Context3L c = new VectorM3L.Context3L();
+    final VectorM3L.ContextVM3L c = new VectorM3L.ContextVM3L();
     final VectorM3L v0 = this.newVectorM3L(0, 1, 0);
     final VectorM3L v1 = this.newVectorM3L(0, 0, 0);
     Assert.assertTrue(VectorM3L.distance(c, v0, v1) == 1);
@@ -473,7 +473,7 @@ public abstract class VectorM3LContract extends VectorM3Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    final VectorM3L.Context3L c = new VectorM3L.Context3L();
+    final VectorM3L.ContextVM3L c = new VectorM3L.ContextVM3L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorM3LContract.randomPositiveSmallNumber();
@@ -741,7 +741,7 @@ public abstract class VectorM3LContract extends VectorM3Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
-    final VectorM3L.Context3L c = new VectorM3L.Context3L();
+    final VectorM3L.ContextVM3L c = new VectorM3L.ContextVM3L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorM3LContract.randomPositiveNumber();

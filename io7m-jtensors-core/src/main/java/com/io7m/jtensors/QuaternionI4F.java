@@ -55,10 +55,10 @@ import net.jcip.annotations.Immutable;
 
   public static class Context
   {
-    private final MatrixM3x3F.ContextM3F m_context =
-      new MatrixM3x3F.ContextM3F();
-    private final MatrixM3x3F            m3a       = new MatrixM3x3F();
-    private final VectorM3F              v3a       = new VectorM3F();
+    private final MatrixM3x3F.ContextMM3F m_context =
+      new MatrixM3x3F.ContextMM3F();
+    private final MatrixM3x3F             m3a       = new MatrixM3x3F();
+    private final VectorM3F               v3a       = new VectorM3F();
 
     /**
      * Construct a new context.
@@ -69,7 +69,7 @@ import net.jcip.annotations.Immutable;
 
     }
 
-    final MatrixM3x3F.ContextM3F getContext()
+    final MatrixM3x3F.ContextMM3F getContext()
     {
       return this.m_context;
     }
@@ -146,8 +146,7 @@ import net.jcip.annotations.Immutable;
       AlmostEqualFloat.almostEqual(context, qa.getYF(), qb.getYF());
     final boolean zs =
       AlmostEqualFloat.almostEqual(context, qa.getZF(), qb.getZF());
-    final boolean ws =
-      AlmostEqualFloat.almostEqual(context, qa.getWF(), qb.getWF());
+    final boolean ws = AlmostEqualFloat.almostEqual(context, qa.getWF(), qb.getWF());
     return xs && ys && zs && ws;
   }
 
@@ -297,7 +296,7 @@ import net.jcip.annotations.Immutable;
   {
     final MatrixM3x3F m = context.getM3A();
     final VectorM3F t = context.getV3A();
-    final MatrixM3x3F.ContextM3F mc = context.getContext();
+    final MatrixM3x3F.ContextMM3F mc = context.getContext();
 
     MatrixM3x3F.lookAtWithContext(mc, origin, target, up, m, t);
     return QuaternionI4F.makeFromRotationMatrix3x3(m);

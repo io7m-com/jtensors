@@ -554,7 +554,7 @@ public final class VectorM2D
    */
 
   public static double distance(
-    final Context2D c,
+    final ContextVM2D c,
     final VectorReadable2DType v0,
     final VectorReadable2DType v1)
   {
@@ -600,7 +600,7 @@ public final class VectorM2D
    */
 
   public static <V extends VectorWritable2DType> V interpolateLinear(
-    final Context2D c,
+    final ContextVM2D c,
     final VectorReadable2DType v0,
     final VectorReadable2DType v1,
     final double alpha,
@@ -703,7 +703,7 @@ public final class VectorM2D
 
   public static <V extends VectorReadable2DType, U extends
     VectorWritable2DType> void orthoNormalize(
-    final Context2D c,
+    final ContextVM2D c,
     final VectorReadable2DType v0,
     final U v0_out,
     final VectorReadable2DType v1,
@@ -732,7 +732,7 @@ public final class VectorM2D
   public static <V extends VectorWritable2DType & VectorReadable2DType, W
     extends VectorWritable2DType & VectorReadable2DType> void
   orthoNormalizeInPlace(
-    final Context2D c,
+    final ContextVM2D c,
     final V v0,
     final W v1)
   {
@@ -936,7 +936,7 @@ public final class VectorM2D
    * @since 7.0.0
    */
 
-  public static final class Context2D
+  public static final class ContextVM2D
   {
     private final VectorM2D v2a;
     private final VectorM2D v2b;
@@ -946,7 +946,7 @@ public final class VectorM2D
      * Construct preallocated storage.
      */
 
-    public Context2D()
+    public ContextVM2D()
     {
       this.v2a = new VectorM2D();
       this.v2b = new VectorM2D();

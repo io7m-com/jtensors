@@ -305,7 +305,7 @@ public final class MatrixM4x4F
    */
 
   public static MatrixM4x4F addRowScaledWithContext(
-    final ContextM4F context,
+    final ContextMM4F context,
     final MatrixReadable4x4FType m,
     final int row_a,
     final int row_b,
@@ -488,7 +488,7 @@ public final class MatrixM4x4F
    */
 
   public static MatrixM4x4F exchangeRowsInPlaceWithContext(
-    final ContextM4F context,
+    final ContextMM4F context,
     final MatrixM4x4F m,
     final int row_a,
     final int row_b)
@@ -530,7 +530,7 @@ public final class MatrixM4x4F
    */
 
   public static MatrixM4x4F exchangeRowsWithContext(
-    final ContextM4F context,
+    final ContextMM4F context,
     final MatrixReadable4x4FType m,
     final int row_a,
     final int row_b,
@@ -975,7 +975,7 @@ public final class MatrixM4x4F
    */
 
   public static OptionType<MatrixM4x4F> invertInPlaceWithContext(
-    final ContextM4F context,
+    final ContextMM4F context,
     final MatrixM4x4F m)
   {
     return MatrixM4x4F.invertWithContext(context, m, m);
@@ -999,7 +999,7 @@ public final class MatrixM4x4F
    */
 
   public static OptionType<MatrixM4x4F> invertWithContext(
-    final ContextM4F context,
+    final ContextMM4F context,
     final MatrixReadable4x4FType m,
     final MatrixM4x4F out)
   {
@@ -1022,7 +1022,7 @@ public final class MatrixM4x4F
    */
 
   public static void lookAtWithContext(
-    final ContextM4F context,
+    final ContextMM4F context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
     final VectorReadable3FType up,
@@ -1613,7 +1613,7 @@ public final class MatrixM4x4F
    */
 
   public static <V extends VectorWritable4FType> V multiplyVector4FWithContext(
-    final ContextM4F context,
+    final ContextMM4F context,
     final MatrixReadable4x4FType m,
     final VectorReadable4FType v,
     final V out)
@@ -1806,7 +1806,7 @@ public final class MatrixM4x4F
    */
 
   public static MatrixM4x4F scaleRowInPlaceWithContext(
-    final ContextM4F context,
+    final ContextMM4F context,
     final MatrixM4x4F m,
     final int row,
     final double r)
@@ -1846,7 +1846,7 @@ public final class MatrixM4x4F
    */
 
   public static MatrixM4x4F scaleRowWithContext(
-    final ContextM4F context,
+    final ContextMM4F context,
     final MatrixReadable4x4FType m,
     final int row,
     final double r,
@@ -2112,20 +2112,23 @@ public final class MatrixM4x4F
   }
 
   /**
-   * <p> The {@code ContextM4F} type contains the minimum storage required for
-   * all of the functions of the {@code MatrixM4x4F} class. </p> <p> The purpose
-   * of the class is to allow applications to allocate all storage ahead of time
-   * in order to allow functions in the class to avoid allocating memory (not
-   * including stack space) for intermediate calculations. This can reduce
-   * garbage collection in speed critical code. </p> <p> The user should
-   * allocate one {@code ContextM4F} value per thread, and then pass this value
-   * to matrix functions. Any matrix function that takes a {@code ContextM4F}
-   * value will not generate garbage. </p>
+   * <p>The {@code ContextMM4F} type contains the minimum storage required for
+   * all of the functions of the {@code MatrixM4x4F} class.</p>
+   *
+   * <p> The purpose of the class is to allow applications to allocate all
+   * storage ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical
+   * code.</p>
+   *
+   * <p> The user should allocate one {@code ContextMM4F} value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes a
+   * {@code ContextMM4F} value will not generate garbage.</p>
    *
    * @since 7.0.0
    */
 
-  public static class ContextM4F
+  public static class ContextMM4F
   {
     private final MatrixM3x3F m3a = new MatrixM3x3F();
     private final MatrixM4x4F m4a = new MatrixM4x4F();
@@ -2141,7 +2144,7 @@ public final class MatrixM4x4F
      * Construct a new context.
      */
 
-    public ContextM4F()
+    public ContextMM4F()
     {
 
     }

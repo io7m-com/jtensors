@@ -52,62 +52,9 @@ import java.nio.DoubleBuffer;
 
 //@formatter:on
 
-public final class MatrixM3x3D implements
-  MatrixDirectReadable3x3DType,
-  MatrixWritable3x3DType
+public final class MatrixM3x3D
+  implements MatrixDirectReadable3x3DType, MatrixWritable3x3DType
 {
-  /**
-   * <p>
-   * The {@code ContextM3D} type contains the minimum storage required for all of the
-   * functions of the {@code MatrixM3x3D} class.
-   * </p>
-   * <p>
-   * The purpose of the class is to allow applications to allocate all storage
-   * ahead of time in order to allow functions in the class to avoid
-   * allocating memory (not including stack space) for intermediate
-   * calculations. This can reduce garbage collection in speed critical code.
-   * </p>
-   * <p>
-   * The user should allocate one {@code ContextM3D} value per thread, and
-   * then pass this value to matrix functions. Any matrix function that takes
-   * a {@code ContextM3D} value will not generate garbage.
-   * </p>
-   *
-   * @since 7.0.0
-   */
-
-  public static class ContextM3D
-  {
-    private final MatrixM3x3D m3a = new MatrixM3x3D();
-    private final VectorM3D   v3a = new VectorM3D();
-    private final VectorM3D   v3b = new VectorM3D();
-    private final VectorM3D   v3c = new VectorM3D();
-
-    /**
-     * Construct a new context.
-     */
-
-    public ContextM3D()
-    {
-
-    }
-
-    final VectorM3D getV3A()
-    {
-      return this.v3a;
-    }
-
-    final VectorM3D getV3B()
-    {
-      return this.v3b;
-    }
-
-    final VectorM3D getV3C()
-    {
-      return this.v3c;
-    }
-  }
-
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
   private static final int VIEW_ELEMENT_SIZE;
@@ -122,15 +69,65 @@ public final class MatrixM3x3D implements
     VIEW_BYTES = MatrixM3x3D.VIEW_ELEMENTS * MatrixM3x3D.VIEW_ELEMENT_SIZE;
   }
 
+  private final ByteBuffer   data;
+  private final DoubleBuffer view;
+
+  /**
+   * Construct a new identity matrix.
+   */
+
+  public MatrixM3x3D()
+  {
+    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3D.VIEW_BYTES);
+    assert b != null;
+
+    final ByteOrder order = ByteOrder.nativeOrder();
+    b.order(order);
+    this.data = b;
+
+    final DoubleBuffer v = this.data.asDoubleBuffer();
+    assert v != null;
+    this.view = v;
+
+    MatrixM3x3D.setIdentity(this);
+  }
+
+  /**
+   * Construct a new copy of the given matrix.
+   *
+   * @param source The source matrix.
+   */
+
+  public MatrixM3x3D(
+    final MatrixReadable3x3DType source)
+  {
+    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3D.VIEW_BYTES);
+    assert b != null;
+
+    final ByteOrder order = ByteOrder.nativeOrder();
+    b.order(order);
+    this.data = b;
+
+    final DoubleBuffer v = this.data.asDoubleBuffer();
+    assert v != null;
+
+    this.view = v;
+    this.view.clear();
+
+    for (int row = 0; row < MatrixM3x3D.VIEW_ROWS; ++row) {
+      for (int col = 0; col < MatrixM3x3D.VIEW_COLS; ++col) {
+        this.setUnsafe(row, col, source.getRowColumnD(row, col));
+      }
+    }
+  }
+
   /**
    * Elementwise add of matrices {@code m0} and {@code m1}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m0  The left input matrix.
+   * @param m1  The right input matrix.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -167,13 +164,12 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * Elementwise add of matrices {@code m0} and {@code m1},
-   * returning the result in {@code m0}.
+   * Elementwise add of matrices {@code m0} and {@code m1}, returning the result
+   * in {@code m0}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
+   * @param m0 The left input matrix.
+   * @param m1 The right input matrix.
+   *
    * @return {@code m0}
    */
 
@@ -185,28 +181,20 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code out}.
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code out}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param m     The input matrix.
+   * @param row_a The row on the lefthand side of the addition.
+   * @param row_b The row on the righthand side of the addition.
+   * @param row_c The destination row.
+   * @param r     The scaling value.
+   * @param out   The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -228,26 +216,19 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code m}.
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code m}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
+   * @param m     The input matrix.
+   * @param row_a The row on the lefthand side of the addition.
+   * @param row_b The row on the righthand side of the addition.
+   * @param row_c The destination row.
+   * @param r     The scaling value.
+   *
    * @return {@code m}
    */
 
@@ -290,13 +271,12 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * Copy the contents of the matrix {@code input} to the matrix
-   * {@code output}, completely replacing all elements.
+   * Copy the contents of the matrix {@code input} to the matrix {@code output},
+   * completely replacing all elements.
    *
-   * @param input
-   *          The input vector.
-   * @param output
-   *          The output vector.
+   * @param input  The input vector.
+   * @param output The output vector.
+   *
    * @return {@code output}
    */
 
@@ -315,9 +295,9 @@ public final class MatrixM3x3D implements
   /**
    * Calculate the determinant of the matrix {@code m}.
    *
+   * @param m The input matrix.
+   *
    * @return The determinant
-   * @param m
-   *          The input matrix.
    */
 
   public static double determinant(
@@ -345,23 +325,17 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code out}.
-   * </p>
+   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code out}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
-   * @param out
-   *          The output matrix.
+   * @param m     The input matrix.
+   * @param row_a The first row.
+   * @param row_b The second row.
+   * @param out   The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -372,28 +346,20 @@ public final class MatrixM3x3D implements
     final MatrixM3x3D out)
   {
     return MatrixM3x3D.exchangeRowsUnsafe(
-      m,
-      MatrixM3x3D.rowCheck(row_a),
-      MatrixM3x3D.rowCheck(row_b),
-      out);
+      m, MatrixM3x3D.rowCheck(row_a), MatrixM3x3D.rowCheck(row_b), out);
   }
 
   /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code m}.
-   * </p>
+   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code m}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
+   * @param m     The input matrix.
+   * @param row_a The first row.
+   * @param row_b The second row.
+   *
    * @return {@code m}
    */
 
@@ -427,21 +393,16 @@ public final class MatrixM3x3D implements
     final int column)
   {
     return MatrixM3x3D.indexUnsafe(
-      MatrixM3x3D.rowCheck(row),
-      MatrixM3x3D.columnCheck(column));
+      MatrixM3x3D.rowCheck(row), MatrixM3x3D.columnCheck(column));
   }
 
   /**
-   * <p>
-   * The main function that indexes into the buffer that backs the array. The
-   * body of this function decides on how elements are stored. This
+   * <p> The main function that indexes into the buffer that backs the array.
+   * The body of this function decides on how elements are stored. This
    * implementation chooses to store values in column-major format as this
-   * allows matrices to be sent directly to OpenGL without conversion.
-   * </p>
-   * <p>
+   * allows matrices to be sent directly to OpenGL without conversion. </p> <p>
    * (row * 3) + column, corresponds to row-major storage. (column * 3) + row,
-   * corresponds to column-major (OpenGL) storage.
-   * </p>
+   * corresponds to column-major (OpenGL) storage. </p>
    */
 
   private static int indexUnsafe(
@@ -452,20 +413,18 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code out}. The function returns {@code Some(out)}
-   * iff it was possible to invert the matrix, and {@code None}
-   * otherwise. It is not possible to invert a matrix that has a determinant
-   * of {@code 0}. If the function returns {@code None},
-   * {@code m} is untouched.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code out}. The function returns {@code Some(out)} iff it was possible
+   * to invert the matrix, and {@code None} otherwise. It is not possible to
+   * invert a matrix that has a determinant of {@code 0}. If the function
+   * returns {@code None}, {@code m} is untouched.
+   *
+   * @param m   The input matrix.
+   * @param out The output matrix.
+   *
+   * @return {@code out}
    *
    * @see MatrixM3x3D#determinant(MatrixReadable3x3DType)
-   *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
    */
 
   public static OptionType<MatrixM3x3D> invert(
@@ -521,18 +480,17 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code m}. The function returns {@code Some(m)} iff
-   * it was possible to invert the matrix, and {@code None} otherwise. It
-   * is not possible to invert a matrix that has a determinant of
-   * {@code 0}. If the function returns {@code None}, {@code m}
-   * is untouched.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code m}. The function returns {@code Some(m)} iff it was possible to
+   * invert the matrix, and {@code None} otherwise. It is not possible to invert
+   * a matrix that has a determinant of {@code 0}. If the function returns
+   * {@code None}, {@code m} is untouched.
+   *
+   * @param m The input matrix.
+   *
+   * @return {@code m}
    *
    * @see MatrixM3x3D#determinant(MatrixReadable3x3DType)
-   *
-   * @param m
-   *          The input matrix.
-   * @return {@code m}
    */
 
   public static OptionType<MatrixM3x3D> invertInPlace(
@@ -542,38 +500,24 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * <p>
-   * Calculate a rotation and translation representing a "camera" looking from
-   * the point {@code origin} to the point {@code target}.
-   * {@code target} must represent the "up" vector for the camera.
-   * Usually, this is simply a unit vector {@code (0, 1, 0)} representing
-   * the Y axis.
-   * </p>
-   * <p>
-   * The function uses preallocated storage from {@code context}.
-   * </p>
-   * <p>
-   * The view is expressed as a rotation matrix and a translation vector,
-   * written to {@code out_matrix} and {@code out_translation},
-   * respectively.
-   * </p>
+   * <p> Calculate a rotation and translation representing a "camera" looking
+   * from the point {@code origin} to the point {@code target}. {@code target}
+   * must represent the "up" vector for the camera. Usually, this is simply a
+   * unit vector {@code (0, 1, 0)} representing the Y axis. </p> <p> The
+   * function uses preallocated storage from {@code context}. </p> <p> The view
+   * is expressed as a rotation matrix and a translation vector, written to
+   * {@code out_matrix} and {@code out_translation}, respectively. </p>
    *
-   * @param context
-   *          Preallocated storage
-   * @param out_matrix
-   *          The output matrix
-   * @param out_translation
-   *          The output translation
-   * @param origin
-   *          The position of the viewer
-   * @param target
-   *          The target being viewed
-   * @param up
-   *          The up vector
+   * @param context         Preallocated storage
+   * @param out_matrix      The output matrix
+   * @param out_translation The output translation
+   * @param origin          The position of the viewer
+   * @param target          The target being viewed
+   * @param up              The up vector
    */
 
   public static void lookAtWithContext(
-    final ContextM3D context,
+    final ContextMM3D context,
     final VectorReadable3DType origin,
     final VectorReadable3DType target,
     final VectorReadable3DType up,
@@ -631,22 +575,17 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * <p>
-   * Generate and return a matrix that represents a rotation of
-   * {@code angle} radians around the axis {@code axis}.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
+   * <p> Generate and return a matrix that represents a rotation of {@code
+   * angle} radians around the axis {@code axis}. </p> <p> The function assumes
+   * a right-handed coordinate system and therefore a positive rotation around
+   * any axis represents a counter-clockwise rotation around that axis. </p>
+   *
+   * @param angle The angle in radians.
+   * @param axis  The axis.
+   *
+   * @return A rotation matrix.
    *
    * @since 5.0.0
-   * @param angle
-   *          The angle in radians.
-   * @param axis
-   *          The axis.
-   * @return A rotation matrix.
    */
 
   public static MatrixM3x3D makeRotation(
@@ -659,24 +598,19 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * <p>
-   * Generate a matrix that represents a rotation of {@code angle}
-   * radians around the axis {@code axis} and save to {@code out}.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
+   * <p> Generate a matrix that represents a rotation of {@code angle} radians
+   * around the axis {@code axis} and save to {@code out}. </p> <p> The function
+   * assumes a right-handed coordinate system and therefore a positive rotation
+   * around any axis represents a counter-clockwise rotation around that axis.
    * </p>
    *
-   * @since 5.0.0
-   * @param angle
-   *          The angle in radians.
-   * @param axis
-   *          The axis.
-   * @param out
-   *          The output matrix.
+   * @param angle The angle in radians.
+   * @param axis  The axis.
+   * @param out   The output matrix.
+   *
    * @return {@code out}
+   *
+   * @since 5.0.0
    */
 
   public static MatrixM3x3D makeRotationInto(
@@ -735,10 +669,9 @@ public final class MatrixM3x3D implements
    * Create a translation matrix that represents a translation by the vector
    * {@code v}, writing the resulting matrix to {@code out}.
    *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
+   * @param v   The translation vector.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -762,10 +695,9 @@ public final class MatrixM3x3D implements
    * Create a translation matrix that represents a translation by the vector
    * {@code v}, writing the resulting matrix to {@code out}.
    *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
+   * @param v   The translation vector.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -786,15 +718,13 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * Multiply the matrix {@code m0} with the matrix {@code m1},
-   * writing the result to {@code out}.
+   * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
+   * result to {@code out}.
    *
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
-   * @param out
-   *          The output vector.
+   * @param m0  The left input vector.
+   * @param m1  The right input vector.
+   * @param out The output vector.
+   *
    * @return {@code out}
    */
 
@@ -863,13 +793,12 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * Multiply the matrix {@code m0} with the matrix {@code m1},
-   * writing the result to {@code m0}.
+   * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
+   * result to {@code m0}.
    *
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
+   * @param m0 The left input vector.
+   * @param m1 The right input vector.
+   *
    * @return {@code out}
    */
 
@@ -881,18 +810,15 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * Multiply the matrix {@code m} with the vector {@code v},
-   * writing the resulting vector to {@code out}.
+   * Multiply the matrix {@code m} with the vector {@code v}, writing the
+   * resulting vector to {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
+   * @param m   The input matrix.
+   * @param v   The input vector.
+   * @param out The output vector.
+   * @param <V> The precise type of writable vector.
+   *
    * @return {@code out}
-   * @param <V>
-   *          The precise type of writable vector.
    */
 
   public static <V extends VectorWritable3DType> V multiplyVector3D(
@@ -914,16 +840,12 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * @return Row {@code row} of the matrix {@code m} in the vector
-   *         {@code out}.
-   * @param m
-   *          The input matrix
-   * @param row
-   *          The row
-   * @param out
-   *          The output matrix
-   * @param <V>
-   *          The precise type of writable vector.
+   * @param m   The input matrix
+   * @param row The row
+   * @param out The output matrix
+   * @param <V> The precise type of writable vector.
+   *
+   * @return Row {@code row} of the matrix {@code m} in the vector {@code out}.
    */
 
   public static <V extends VectorWritable3DType> V row(
@@ -957,15 +879,13 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code out}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param m   The input matrix.
+   * @param r   The scaling value.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -1002,13 +922,12 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code m}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code m}.
    *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
+   * @param m The input matrix.
+   * @param r The scaling value.
+   *
    * @return {@code m}
    */
 
@@ -1020,23 +939,17 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * <p>
-   * Scale row {@code r} of the matrix {@code m} by {@code r},
-   * saving the result to row {@code r} of {@code out}.
-   * </p>
+   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code out}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 3)}.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param m   The input matrix.
+   * @param row The index of the row {@code (0 <= row < 3)}.
+   * @param r   The scaling value.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -1050,21 +963,16 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * <p>
-   * Scale row {@code r} of the matrix {@code m} by {@code r},
-   * saving the result to row {@code r} of {@code m}.
-   * </p>
+   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code m}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 3)}.
-   * @param r
-   *          The scaling value.
+   * @param m   The input matrix.
+   * @param row The index of the row {@code (0 <= row < 3)}.
+   * @param r   The scaling value.
+   *
    * @return {@code m}
    */
 
@@ -1092,17 +1000,14 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * Set the value in the matrix {@code m} at row {@code row},
-   * column {@code column} to {@code value}.
+   * Set the value in the matrix {@code m} at row {@code row}, column {@code
+   * column} to {@code value}.
    *
-   * @param m
-   *          The matrix
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
+   * @param m      The matrix
+   * @param row    The row
+   * @param column The column
+   * @param value  The value
+   *
    * @return {@code m}
    */
 
@@ -1119,8 +1024,8 @@ public final class MatrixM3x3D implements
   /**
    * Set the given matrix {@code m} to the identity matrix.
    *
-   * @param m
-   *          The input matrix
+   * @param m The input matrix
+   *
    * @return {@code m}
    */
 
@@ -1132,9 +1037,9 @@ public final class MatrixM3x3D implements
     for (int row = 0; row < MatrixM3x3D.VIEW_ROWS; ++row) {
       for (int col = 0; col < MatrixM3x3D.VIEW_COLS; ++col) {
         if (row == col) {
-          m.setUnsafe(row, col, (double) 1.0);
+          m.setUnsafe(row, col, 1.0);
         } else {
-          m.setUnsafe(row, col, (double) 0.0);
+          m.setUnsafe(row, col, 0.0);
         }
       }
     }
@@ -1155,8 +1060,8 @@ public final class MatrixM3x3D implements
   /**
    * Set the given matrix {@code m} to the zero matrix.
    *
-   * @param m
-   *          The input matrix
+   * @param m The input matrix
+   *
    * @return {@code m}
    */
 
@@ -1165,38 +1070,38 @@ public final class MatrixM3x3D implements
   {
     m.view.clear();
 
-    for (int index = 0; index < (MatrixM3x3D.VIEW_ROWS * MatrixM3x3D.VIEW_COLS); ++index) {
+    for (int index = 0; index < (MatrixM3x3D.VIEW_ROWS
+                                 * MatrixM3x3D.VIEW_COLS); ++index) {
       m.view.put(index, 0.0);
     }
     return m;
   }
 
   /**
-   * Return the trace of the matrix {@code m}. The trace is defined as
-   * the sum of the diagonal elements of the matrix.
+   * Return the trace of the matrix {@code m}. The trace is defined as the sum
+   * of the diagonal elements of the matrix.
+   *
+   * @param m The input matrix
+   *
+   * @return The trace of the matrix
    *
    * @since 5.0.0
-   * @param m
-   *          The input matrix
-   * @return The trace of the matrix
    */
 
   public static double trace(
     final MatrixReadable3x3DType m)
   {
-    return m.getRowColumnD(0, 0)
-      + m.getRowColumnD(1, 1)
-      + m.getRowColumnD(2, 2);
+    return m.getRowColumnD(0, 0) + m.getRowColumnD(1, 1) + m.getRowColumnD(
+      2, 2);
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code out}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m   The input matrix.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -1209,11 +1114,11 @@ public final class MatrixM3x3D implements
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code m}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code m}.
    *
-   * @param m
-   *          The input matrix.
+   * @param m The input matrix.
+   *
    * @return {@code m}
    */
 
@@ -1231,59 +1136,6 @@ public final class MatrixM3x3D implements
     }
 
     return m;
-  }
-
-  private final ByteBuffer   data;
-  private final DoubleBuffer view;
-
-  /**
-   * Construct a new identity matrix.
-   */
-
-  public MatrixM3x3D()
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3D.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    b.order(order);
-    this.data = b;
-
-    final DoubleBuffer v = this.data.asDoubleBuffer();
-    assert v != null;
-    this.view = v;
-
-    MatrixM3x3D.setIdentity(this);
-  }
-
-  /**
-   * Construct a new copy of the given matrix.
-   *
-   * @param source
-   *          The source matrix.
-   */
-
-  public MatrixM3x3D(
-    final MatrixReadable3x3DType source)
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3D.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    b.order(order);
-    this.data = b;
-
-    final DoubleBuffer v = this.data.asDoubleBuffer();
-    assert v != null;
-
-    this.view = v;
-    this.view.clear();
-
-    for (int row = 0; row < MatrixM3x3D.VIEW_ROWS; ++row) {
-      for (int col = 0; col < MatrixM3x3D.VIEW_COLS; ++col) {
-        this.setUnsafe(row, col, source.getRowColumnD(row, col));
-      }
-    }
   }
 
   @Override public boolean equals(
@@ -1343,12 +1195,10 @@ public final class MatrixM3x3D implements
   /**
    * Set the value at the given row and column.
    *
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
+   * @param row    The row
+   * @param column The column
+   * @param value  The value
+   *
    * @return {@code this}
    */
 
@@ -1391,5 +1241,54 @@ public final class MatrixM3x3D implements
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  /**
+   * <p>The {@code ContextMM3D} type contains the minimum storage required for
+   * all of the functions of the {@code MatrixM3x3D} class.</p>
+   *
+   * <p> The purpose of the class is to allow applications to allocate all
+   * storage ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical
+   * code.</p>
+   *
+   * <p> The user should allocate one {@code ContextMM3D} value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes a
+   * {@code ContextMM3D} value will not generate garbage.</p>
+   *
+   * @since 7.0.0
+   */
+
+  public static class ContextMM3D
+  {
+    private final MatrixM3x3D m3a = new MatrixM3x3D();
+    private final VectorM3D   v3a = new VectorM3D();
+    private final VectorM3D   v3b = new VectorM3D();
+    private final VectorM3D   v3c = new VectorM3D();
+
+    /**
+     * Construct a new context.
+     */
+
+    public ContextMM3D()
+    {
+
+    }
+
+    final VectorM3D getV3A()
+    {
+      return this.v3a;
+    }
+
+    final VectorM3D getV3B()
+    {
+      return this.v3b;
+    }
+
+    final VectorM3D getV3C()
+    {
+      return this.v3c;
+    }
   }
 }

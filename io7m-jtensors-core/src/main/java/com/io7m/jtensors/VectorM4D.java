@@ -574,7 +574,7 @@ public final class VectorM4D
    */
 
   public static double distance(
-    final Context4D c,
+    final ContextVM4D c,
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
@@ -624,7 +624,7 @@ public final class VectorM4D
    */
 
   public static <V extends VectorWritable4DType> V interpolateLinear(
-    final Context4D c,
+    final ContextVM4D c,
     final VectorReadable4DType v0,
     final VectorReadable4DType v1,
     final double alpha,
@@ -727,7 +727,7 @@ public final class VectorM4D
 
   public static <V extends VectorReadable4DType, U extends
     VectorWritable4DType> void orthoNormalize(
-    final Context4D c,
+    final ContextVM4D c,
     final VectorReadable4DType v0,
     final U v0_out,
     final VectorReadable4DType v1,
@@ -756,7 +756,7 @@ public final class VectorM4D
   public static <V extends VectorWritable4DType & VectorReadable4DType, W
     extends VectorWritable4DType & VectorReadable4DType> void
   orthoNormalizeInPlace(
-    final Context4D c,
+    final ContextVM4D c,
     final V v0,
     final W v1)
   {
@@ -1034,7 +1034,7 @@ public final class VectorM4D
    * @since 7.0.0
    */
 
-  public static final class Context4D
+  public static final class ContextVM4D
   {
     private final VectorM4D v2a;
     private final VectorM4D v2b;
@@ -1044,7 +1044,7 @@ public final class VectorM4D
      * Construct preallocated storage.
      */
 
-    public Context4D()
+    public ContextVM4D()
     {
       this.v2a = new VectorM4D();
       this.v2b = new VectorM4D();

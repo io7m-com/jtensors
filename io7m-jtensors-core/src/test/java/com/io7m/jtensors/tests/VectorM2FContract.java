@@ -537,7 +537,7 @@ public abstract class VectorM2FContract extends VectorM2Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    final VectorM2F.Context2F c = new VectorM2F.Context2F();
+    final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
 
     final VectorM2F v0 = this.newVectorM2F(0.0f, 1.0f);
     final VectorM2F v1 = this.newVectorM2F(0.0f, 0.0f);
@@ -548,7 +548,7 @@ public abstract class VectorM2FContract extends VectorM2Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    final VectorM2F.Context2F c = new VectorM2F.Context2F();
+    final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -757,7 +757,7 @@ public abstract class VectorM2FContract extends VectorM2Contract
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
-    final VectorM2F.Context2F c = new VectorM2F.Context2F();
+    final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -897,7 +897,7 @@ public abstract class VectorM2FContract extends VectorM2Contract
 
   @Override @Test public void testOrthonormalize()
   {
-    final VectorM2F.Context2F c = new VectorM2F.Context2F();
+    final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
     final VectorM2F v0 = this.newVectorM2F(0, 1);
     final VectorM2F v1 = this.newVectorM2F(0.5f, 0.5f);
 
@@ -912,7 +912,7 @@ public abstract class VectorM2FContract extends VectorM2Contract
 
   @Override @Test public void testOrthonormalizeMutation()
   {
-    final VectorM2F.Context2F c = new VectorM2F.Context2F();
+    final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
     final VectorM2F v0 = this.newVectorM2F(0f, 1f);
     final VectorM2F v1 = this.newVectorM2F(0.5f, 0.5f);
 

@@ -574,7 +574,7 @@ public final class VectorM4L
    */
 
   public static long distance(
-    final Context4L c,
+    final ContextVM4L c,
     final VectorReadable4LType v0,
     final VectorReadable4LType v1)
     throws ArithmeticException
@@ -629,7 +629,7 @@ public final class VectorM4L
    */
 
   public static <V extends VectorWritable4LType> V interpolateLinear(
-    final Context4L c,
+    final ContextVM4L c,
     final VectorReadable4LType v0,
     final VectorReadable4LType v1,
     final double alpha,
@@ -961,21 +961,19 @@ public final class VectorM4L
    * @since 7.0.0
    */
 
-  public static final class Context4L
+  public static final class ContextVM4L
   {
     private final VectorM4L v2a;
     private final VectorM4L v2b;
-    private final VectorM4L v2c;
 
     /**
      * Construct preallocated storage.
      */
 
-    public Context4L()
+    public ContextVM4L()
     {
       this.v2a = new VectorM4L();
       this.v2b = new VectorM4L();
-      this.v2c = new VectorM4L();
     }
   }
 }

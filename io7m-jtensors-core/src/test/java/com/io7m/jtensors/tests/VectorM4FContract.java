@@ -19,7 +19,6 @@ package com.io7m.jtensors.tests;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
 import com.io7m.jequality.AlmostEqualFloat;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorM4F;
 import org.junit.Assert;
 import org.junit.Test;
@@ -679,7 +678,7 @@ public abstract class VectorM4FContract extends VectorM4Contract
 
   @Override @Test public void testDistance()
   {
-    final VectorM4F.Context4F c = new VectorM4F.Context4F();
+    final VectorM4F.ContextVM4F c = new VectorM4F.ContextVM4F();
     final VectorM4F v0 = this.newVectorM4F(0.0f, 1.0f, 0.0f, 0.0f);
     final VectorM4F v1 = this.newVectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final ContextRelative context = new ContextRelative();
@@ -690,7 +689,7 @@ public abstract class VectorM4FContract extends VectorM4Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    final VectorM4F.Context4F c = new VectorM4F.Context4F();
+    final VectorM4F.ContextVM4F c = new VectorM4F.ContextVM4F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -973,7 +972,7 @@ public abstract class VectorM4FContract extends VectorM4Contract
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
-    final VectorM4F.Context4F c = new VectorM4F.Context4F();
+    final VectorM4F.ContextVM4F c = new VectorM4F.ContextVM4F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -1130,7 +1129,7 @@ public abstract class VectorM4FContract extends VectorM4Contract
 
   @Override @Test public void testOrthonormalize()
   {
-    final VectorM4F.Context4F c = new VectorM4F.Context4F();
+    final VectorM4F.ContextVM4F c = new VectorM4F.ContextVM4F();
     final VectorM4F v0 = this.newVectorM4F(0, 1, 0, 0);
     final VectorM4F v1 = this.newVectorM4F(0.5f, 0.5f, 0, 0);
     final VectorM4F v0_out = new VectorM4F();
@@ -1144,7 +1143,7 @@ public abstract class VectorM4FContract extends VectorM4Contract
 
   @Override @Test public void testOrthonormalizeMutation()
   {
-    final VectorM4F.Context4F c = new VectorM4F.Context4F();
+    final VectorM4F.ContextVM4F c = new VectorM4F.ContextVM4F();
     final VectorM4F v0 = this.newVectorM4F(0f, 1f, 0f, 0f);
     final VectorM4F v1 = this.newVectorM4F(0.5f, 0.5f, 0f, 0f);
 

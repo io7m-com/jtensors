@@ -526,7 +526,7 @@ public abstract class VectorM4IContract extends VectorM4Contract
 
   @Override @Test public void testDistance()
   {
-    final VectorM4I.Context4I c = new VectorM4I.Context4I();
+    final VectorM4I.ContextVM4I c = new VectorM4I.ContextVM4I();
     final VectorM4I v0 = this.newVectorM4I(0, 1, 0, 0);
     final VectorM4I v1 = this.newVectorM4I(0, 0, 0, 0);
     Assert.assertTrue(VectorM4I.distance(c, v0, v1) == 1);
@@ -534,7 +534,7 @@ public abstract class VectorM4IContract extends VectorM4Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    final VectorM4I.Context4I c = new VectorM4I.Context4I();
+    final VectorM4I.ContextVM4I c = new VectorM4I.ContextVM4I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4IContract.randomPositiveSmallNumber();
       final int y0 = VectorM4IContract.randomPositiveSmallNumber();
@@ -823,7 +823,7 @@ public abstract class VectorM4IContract extends VectorM4Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
-    final VectorM4I.Context4I c = new VectorM4I.Context4I();
+    final VectorM4I.ContextVM4I c = new VectorM4I.ContextVM4I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM4IContract.randomPositiveNumber();
       final int y0 = VectorM4IContract.randomPositiveNumber();

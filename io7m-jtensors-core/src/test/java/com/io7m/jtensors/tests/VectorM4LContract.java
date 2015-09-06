@@ -536,7 +536,7 @@ public abstract class VectorM4LContract extends VectorM4Contract
 
   @Override @Test public void testDistance()
   {
-    final VectorM4L.Context4L c = new VectorM4L.Context4L();
+    final VectorM4L.ContextVM4L c = new VectorM4L.ContextVM4L();
     final VectorM4L v0 = this.newVectorM4L(0, 1, 0, 0);
     final VectorM4L v1 = this.newVectorM4L(0, 0, 0, 0);
     Assert.assertTrue(VectorM4L.distance(c, v0, v1) == 1);
@@ -544,7 +544,7 @@ public abstract class VectorM4LContract extends VectorM4Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    final VectorM4L.Context4L c = new VectorM4L.Context4L();
+    final VectorM4L.ContextVM4L c = new VectorM4L.ContextVM4L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorM4LContract.randomPositiveSmallNumber();
@@ -836,7 +836,7 @@ public abstract class VectorM4LContract extends VectorM4Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
-    final VectorM4L.Context4L c = new VectorM4L.Context4L();
+    final VectorM4L.ContextVM4L c = new VectorM4L.ContextVM4L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorM4LContract.randomPositiveNumber();

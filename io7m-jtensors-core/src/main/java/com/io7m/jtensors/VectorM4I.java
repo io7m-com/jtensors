@@ -572,7 +572,7 @@ public final class VectorM4I
    */
 
   public static int distance(
-    final Context4I c,
+    final ContextVM4I c,
     final VectorReadable4IType v0,
     final VectorReadable4IType v1)
     throws ArithmeticException
@@ -627,7 +627,7 @@ public final class VectorM4I
    */
 
   public static <V extends VectorWritable4IType> V interpolateLinear(
-    final Context4I c,
+    final ContextVM4I c,
     final VectorReadable4IType v0,
     final VectorReadable4IType v1,
     final double alpha,
@@ -959,21 +959,19 @@ public final class VectorM4I
    * @since 7.0.0
    */
 
-  public static final class Context4I
+  public static final class ContextVM4I
   {
     private final VectorM4I v2a;
     private final VectorM4I v2b;
-    private final VectorM4I v2c;
 
     /**
      * Construct preallocated storage.
      */
 
-    public Context4I()
+    public ContextVM4I()
     {
       this.v2a = new VectorM4I();
       this.v2b = new VectorM4I();
-      this.v2c = new VectorM4I();
     }
   }
 }

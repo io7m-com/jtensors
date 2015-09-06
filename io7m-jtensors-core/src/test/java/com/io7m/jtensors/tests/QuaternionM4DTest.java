@@ -695,7 +695,7 @@ import org.junit.Test;
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
+    final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
     final QuaternionM4D.ContextQM4D qc = new QuaternionM4D.ContextQM4D();
 
     final MatrixM4x4D mr = new MatrixM4x4D();
@@ -731,7 +731,7 @@ import org.junit.Test;
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
+    final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
     final QuaternionM4D.ContextQM4D qc = new QuaternionM4D.ContextQM4D();
 
     final MatrixM4x4D mr = new MatrixM4x4D();
@@ -769,7 +769,7 @@ import org.junit.Test;
       TestUtilities.getDoubleEqualityContext();
 
     final QuaternionM4D.ContextQM4D qc = new QuaternionM4D.ContextQM4D();
-    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
+    final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
 
     final MatrixM4x4D ml = new MatrixM4x4D();
     final QuaternionM4D lq = new QuaternionM4D();

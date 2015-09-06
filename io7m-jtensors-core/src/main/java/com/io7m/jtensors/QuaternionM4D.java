@@ -322,7 +322,7 @@ public final class QuaternionM4D
   {
     final MatrixM3x3D m = context.getM3A();
     final VectorM3D t = context.getV3A();
-    final MatrixM3x3D.ContextM3D mc = context.getContext();
+    final MatrixM3x3D.ContextMM3D mc = context.getContext();
 
     MatrixM3x3D.lookAtWithContext(mc, origin, target, up, m, t);
     QuaternionM4D.makeFromRotationMatrix3x3(m, q);
@@ -1065,8 +1065,8 @@ public final class QuaternionM4D
   }
 
   /**
-   * The {@code ContextQM4D} type contains the minimum storage required for all
-   * of the functions of the {@code QuaternionM4D} class.
+   * <p>The {@code ContextQM4D} type contains the minimum storage required for all
+   * of the functions of the {@code QuaternionM4D} class.</p>
    *
    * <p> The purpose of the class is to allow applications to allocate all
    * storage ahead of time in order to allow functions in the class to avoid
@@ -1083,12 +1083,12 @@ public final class QuaternionM4D
 
   public static class ContextQM4D
   {
-    private final MatrixM3x3D.ContextM3D m_context =
-      new MatrixM3x3D.ContextM3D();
-    private final MatrixM3x3D            m3a       = new MatrixM3x3D();
-    private final VectorM3D              v3a       = new VectorM3D();
-    private final QuaternionM4D          qa        = new QuaternionM4D();
-    private final QuaternionM4D          qb        = new QuaternionM4D();
+    private final MatrixM3x3D.ContextMM3D m_context =
+      new MatrixM3x3D.ContextMM3D();
+    private final MatrixM3x3D             m3a       = new MatrixM3x3D();
+    private final VectorM3D               v3a       = new VectorM3D();
+    private final QuaternionM4D           qa        = new QuaternionM4D();
+    private final QuaternionM4D           qb        = new QuaternionM4D();
 
     /**
      * Construct a new context.
@@ -1099,7 +1099,7 @@ public final class QuaternionM4D
 
     }
 
-    final MatrixM3x3D.ContextM3D getContext()
+    final MatrixM3x3D.ContextMM3D getContext()
     {
       return this.m_context;
     }

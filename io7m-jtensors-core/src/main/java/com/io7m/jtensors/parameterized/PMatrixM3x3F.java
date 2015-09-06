@@ -1288,18 +1288,18 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * <p> The {@code ContextPM3F} type contains the minimum storage required for
-   * all of the functions of the {@code PMatrixM3x3F} class. </p>
+   * <p>The {@code ContextPM3F} type contains the minimum storage required for
+   * all of the functions of the {@code PMatrixM3x3F} class.</p>
    *
-   * <p> The purpose of the class is to allow applications to allocate all
+   * <p>The purpose of the class is to allow applications to allocate all
    * storage ahead of time in order to allow functions in the class to avoid
    * allocating memory (not including stack space) for intermediate
    * calculations. This can reduce garbage collection in speed critical code.
    * </p>
    *
-   * <p> The user should allocate one {@code ContextPM3F} value per thread, and
+   * <p>The user should allocate one {@code ContextPM3F} value per thread, and
    * then pass this value to matrix functions. Any matrix function that takes a
-   * {@code ContextPM3F} value will not generate garbage. </p>
+   * {@code ContextPM3F} value will not generate garbage.</p>
    *
    * @since 7.0.0
    */

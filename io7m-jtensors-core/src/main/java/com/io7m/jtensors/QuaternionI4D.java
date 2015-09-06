@@ -55,10 +55,10 @@ import net.jcip.annotations.Immutable;
 
   public static class Context
   {
-    private final MatrixM3x3D.ContextM3D m_context =
-      new MatrixM3x3D.ContextM3D();
-    private final MatrixM3x3D            m3a       = new MatrixM3x3D();
-    private final VectorM3D              v3a       = new VectorM3D();
+    private final MatrixM3x3D.ContextMM3D m_context =
+      new MatrixM3x3D.ContextMM3D();
+    private final MatrixM3x3D             m3a       = new MatrixM3x3D();
+    private final VectorM3D               v3a       = new VectorM3D();
 
     /**
      * Construct a new context.
@@ -69,7 +69,7 @@ import net.jcip.annotations.Immutable;
 
     }
 
-    final MatrixM3x3D.ContextM3D getContext()
+    final MatrixM3x3D.ContextMM3D getContext()
     {
       return this.m_context;
     }
@@ -300,7 +300,7 @@ import net.jcip.annotations.Immutable;
   {
     final MatrixM3x3D m = context.getM3A();
     final VectorM3D t = context.getV3A();
-    final MatrixM3x3D.ContextM3D mc = context.getContext();
+    final MatrixM3x3D.ContextMM3D mc = context.getContext();
 
     MatrixM3x3D.lookAtWithContext(mc, origin, target, up, m, t);
     return QuaternionI4D.makeFromRotationMatrix3x3(m);

@@ -18,7 +18,6 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorM2D;
 import org.junit.Assert;
 import org.junit.Test;
@@ -529,7 +528,7 @@ public abstract class VectorM2DContract extends VectorM2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorM2D.Context2D c = new VectorM2D.Context2D();
+    final VectorM2D.ContextVM2D c = new VectorM2D.ContextVM2D();
     final VectorM2D v0 = this.newVectorM2D(0.0, 1.0);
     final VectorM2D v1 = this.newVectorM2D(0.0, 0.0);
     Assert.assertTrue(
@@ -539,7 +538,7 @@ public abstract class VectorM2DContract extends VectorM2Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    final VectorM2D.Context2D c = new VectorM2D.Context2D();
+    final VectorM2D.ContextVM2D c = new VectorM2D.ContextVM2D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -748,7 +747,7 @@ public abstract class VectorM2DContract extends VectorM2Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    final VectorM2D.Context2D c = new VectorM2D.Context2D();
+    final VectorM2D.ContextVM2D c = new VectorM2D.ContextVM2D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -887,7 +886,7 @@ public abstract class VectorM2DContract extends VectorM2Contract
     final VectorM2D v0_out = this.newVectorM2D();
     final VectorM2D v1_out = this.newVectorM2D();
 
-    final VectorM2D.Context2D c = new VectorM2D.Context2D();
+    final VectorM2D.ContextVM2D c = new VectorM2D.ContextVM2D();
     VectorM2D.orthoNormalize(c, v0, v0_out, v1, v1_out);
 
     Assert.assertEquals(this.newVectorM2D(0, 1), v0_out);
@@ -901,7 +900,7 @@ public abstract class VectorM2DContract extends VectorM2Contract
     final VectorM2D v0_out = this.newVectorM2D();
     final VectorM2D v1_out = this.newVectorM2D();
 
-    final VectorM2D.Context2D c = new VectorM2D.Context2D();
+    final VectorM2D.ContextVM2D c = new VectorM2D.ContextVM2D();
     VectorM2D.orthoNormalizeInPlace(c, v0, v1);
 
     Assert.assertEquals(this.newVectorM2D(0, 1), v0);

@@ -801,7 +801,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final MatrixM3x3D.ContextM3D mc = new MatrixM3x3D.ContextM3D();
+    final MatrixM3x3D.ContextMM3D mc = new MatrixM3x3D.ContextMM3D();
     final MatrixM3x3D m = MatrixM3x3DTest.newMatrix();
     final VectorM3D t = new VectorM3D();
     final VectorI3D origin = new VectorI3D(0, 0, 0);
@@ -850,7 +850,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final MatrixM3x3D.ContextM3D mc = new MatrixM3x3D.ContextM3D();
+    final MatrixM3x3D.ContextMM3D mc = new MatrixM3x3D.ContextMM3D();
     final MatrixM3x3D m = MatrixM3x3DTest.newMatrix();
     final VectorM3D t = new VectorM3D();
     final VectorI3D origin = new VectorI3D(0, 0, 0);
@@ -899,7 +899,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final MatrixM3x3D.ContextM3D mc = new MatrixM3x3D.ContextM3D();
+    final MatrixM3x3D.ContextMM3D mc = new MatrixM3x3D.ContextMM3D();
     final MatrixM3x3D m = MatrixM3x3DTest.newMatrix();
     final VectorM3D t = new VectorM3D();
     final VectorI3D origin = new VectorI3D(0, 0, 0);
@@ -948,7 +948,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final MatrixM3x3D.ContextM3D mc = new MatrixM3x3D.ContextM3D();
+    final MatrixM3x3D.ContextMM3D mc = new MatrixM3x3D.ContextMM3D();
     final MatrixM3x3D m = MatrixM3x3DTest.newMatrix();
     final VectorM3D t = new VectorM3D();
     final VectorI3D origin = new VectorI3D(0, 0, 0);
@@ -997,7 +997,7 @@ import com.io7m.jtensors.VectorReadable3DType;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final MatrixM3x3D.ContextM3D mc = new MatrixM3x3D.ContextM3D();
+    final MatrixM3x3D.ContextMM3D mc = new MatrixM3x3D.ContextMM3D();
     final MatrixM3x3D m = MatrixM3x3DTest.newMatrix();
     final VectorM3D t = new VectorM3D();
     final VectorI3D origin = new VectorI3D(20 + 0, 30 + 0, 40 + 0);

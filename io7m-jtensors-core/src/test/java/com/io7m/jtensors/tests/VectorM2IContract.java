@@ -451,7 +451,7 @@ public abstract class VectorM2IContract extends VectorM2Contract
 
   @Override @Test public void testDistance()
   {
-    final VectorM2I.Context2I c = new VectorM2I.Context2I();
+    final VectorM2I.ContextVM2I c = new VectorM2I.ContextVM2I();
     final VectorM2I v0 = this.newVectorM2I(0, 1);
     final VectorM2I v1 = this.newVectorM2I(0, 0);
     Assert.assertTrue(VectorM2I.distance(c, v0, v1) == 1);
@@ -459,7 +459,7 @@ public abstract class VectorM2IContract extends VectorM2Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    final VectorM2I.Context2I c = new VectorM2I.Context2I();
+    final VectorM2I.ContextVM2I c = new VectorM2I.ContextVM2I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM2IContract.randomPositiveSmallNumber();
       final int y0 = VectorM2IContract.randomPositiveSmallNumber();
@@ -654,7 +654,7 @@ public abstract class VectorM2IContract extends VectorM2Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
-    final VectorM2I.Context2I c = new VectorM2I.Context2I();
+    final VectorM2I.ContextVM2I c = new VectorM2I.ContextVM2I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = VectorM2IContract.randomPositiveNumber();
       final int y0 = VectorM2IContract.randomPositiveNumber();

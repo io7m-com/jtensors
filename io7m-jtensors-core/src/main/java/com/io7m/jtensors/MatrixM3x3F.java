@@ -518,7 +518,7 @@ public final class MatrixM3x3F
    */
 
   public static <V extends VectorWritable3FType> void lookAtWithContext(
-    final ContextM3F context,
+    final ContextMM3F context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
     final VectorReadable3FType up,
@@ -1244,20 +1244,23 @@ public final class MatrixM3x3F
   }
 
   /**
-   * <p> The {@code ContextM3F} type contains the minimum storage required for
-   * all of the functions of the {@code MatrixM3x3F} class. </p> <p> The purpose
-   * of the class is to allow applications to allocate all storage ahead of time
-   * in order to allow functions in the class to avoid allocating memory (not
-   * including stack space) for intermediate calculations. This can reduce
-   * garbage collection in speed critical code. </p> <p> The user should
-   * allocate one {@code ContextM3F} value per thread, and then pass this value
-   * to matrix functions. Any matrix function that takes a {@code ContextM3F}
-   * value will not generate garbage. </p>
+   * <p>The {@code ContextMM3F} type contains the minimum storage required for
+   * all of the functions of the {@code MatrixM3x3F} class.</p>
+   *
+   * <p> The purpose of the class is to allow applications to allocate all
+   * storage ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical
+   * code.</p>
+   *
+   * <p>The user should allocate one {@code ContextMM3F} value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes a
+   * {@code ContextMM3F} value will not generate garbage.</p>
    *
    * @since 7.0.0
    */
 
-  public static class ContextM3F
+  public static class ContextMM3F
   {
     private final VectorM3F v3a = new VectorM3F();
     private final VectorM3F v3b = new VectorM3F();
@@ -1267,7 +1270,7 @@ public final class MatrixM3x3F
      * Construct a new context.
      */
 
-    public ContextM3F()
+    public ContextMM3F()
     {
 
     }

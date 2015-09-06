@@ -18,7 +18,6 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorM4D;
 import org.junit.Assert;
 import org.junit.Test;
@@ -689,7 +688,7 @@ public abstract class VectorM4DContract extends VectorM4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorM4D.Context4D c = new VectorM4D.Context4D();
+    final VectorM4D.ContextVM4D c = new VectorM4D.ContextVM4D();
     final VectorM4D v0 = this.newVectorM4D(0.0, 1.0, 0.0, 0.0);
     final VectorM4D v1 = this.newVectorM4D(0.0, 0.0, 0.0, 0.0);
     Assert.assertTrue(
@@ -699,7 +698,7 @@ public abstract class VectorM4DContract extends VectorM4Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    final VectorM4D.Context4D c = new VectorM4D.Context4D();
+    final VectorM4D.ContextVM4D c = new VectorM4D.ContextVM4D();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
@@ -982,7 +981,7 @@ public abstract class VectorM4DContract extends VectorM4Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    final VectorM4D.Context4D c = new VectorM4D.Context4D();
+    final VectorM4D.ContextVM4D c = new VectorM4D.ContextVM4D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -1134,7 +1133,7 @@ public abstract class VectorM4DContract extends VectorM4Contract
 
   @Override @Test public void testOrthonormalize()
   {
-    final VectorM4D.Context4D c = new VectorM4D.Context4D();
+    final VectorM4D.ContextVM4D c = new VectorM4D.ContextVM4D();
     final VectorM4D v0 = this.newVectorM4D(0, 1, 0, 0);
     final VectorM4D v1 = this.newVectorM4D(0.5, 0.5, 0, 0);
     final VectorM4D v0_out = new VectorM4D();
@@ -1148,7 +1147,7 @@ public abstract class VectorM4DContract extends VectorM4Contract
 
   @Override @Test public void testOrthonormalizeMutation()
   {
-    final VectorM4D.Context4D c = new VectorM4D.Context4D();
+    final VectorM4D.ContextVM4D c = new VectorM4D.ContextVM4D();
     final VectorM4D v0 = this.newVectorM4D(0, 1, 0, 0);
     final VectorM4D v1 = this.newVectorM4D(0.5, 0.5, 0, 0);
 

@@ -625,7 +625,7 @@ public abstract class VectorM3FContract extends VectorM3Contract
 
   @Override @Test public void testDistance()
   {
-    final VectorM3F.Context3F c = new VectorM3F.Context3F();
+    final VectorM3F.ContextVM3F c = new VectorM3F.ContextVM3F();
     final VectorM3F v0 = this.newVectorM3F(0.0f, 1.0f, 0.0f);
     final VectorM3F v1 = this.newVectorM3F(0.0f, 0.0f, 0.0f);
     final AlmostEqualDouble.ContextRelative context =
@@ -637,7 +637,7 @@ public abstract class VectorM3FContract extends VectorM3Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    final VectorM3F.Context3F c = new VectorM3F.Context3F();
+    final VectorM3F.ContextVM3F c = new VectorM3F.ContextVM3F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -897,7 +897,7 @@ public abstract class VectorM3FContract extends VectorM3Contract
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
-    final VectorM3F.Context3F c = new VectorM3F.Context3F();
+    final VectorM3F.ContextVM3F c = new VectorM3F.ContextVM3F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -1045,7 +1045,7 @@ public abstract class VectorM3FContract extends VectorM3Contract
 
   @Override @Test public void testOrthonormalize()
   {
-    final VectorM3F.Context3F c = new VectorM3F.Context3F();
+    final VectorM3F.ContextVM3F c = new VectorM3F.ContextVM3F();
     final VectorM3F v0 = this.newVectorM3F(0, 1, 0);
     final VectorM3F v1 = this.newVectorM3F(0.5f, 0.5f, 0);
     final VectorM3F v0_out = new VectorM3F();
@@ -1059,7 +1059,7 @@ public abstract class VectorM3FContract extends VectorM3Contract
 
   @Override @Test public void testOrthonormalizeMutation()
   {
-    final VectorM3F.Context3F c = new VectorM3F.Context3F();
+    final VectorM3F.ContextVM3F c = new VectorM3F.ContextVM3F();
     final VectorM3F v0 = this.newVectorM3F(0f, 1f, 0f);
     final VectorM3F v1 = this.newVectorM3F(0.5f, 0.5f, 0f);
 

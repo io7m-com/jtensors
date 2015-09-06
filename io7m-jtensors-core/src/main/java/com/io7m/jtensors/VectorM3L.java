@@ -556,7 +556,7 @@ public final class VectorM3L
    */
 
   public static long distance(
-    final Context3L c,
+    final ContextVM3L c,
     final VectorReadable3LType v0,
     final VectorReadable3LType v1)
     throws ArithmeticException
@@ -612,7 +612,7 @@ public final class VectorM3L
    */
 
   public static <V extends VectorWritable3LType> V interpolateLinear(
-    final Context3L c,
+    final ContextVM3L c,
     final VectorReadable3LType v0,
     final VectorReadable3LType v1,
     final double alpha,
@@ -908,7 +908,7 @@ public final class VectorM3L
    * @since 7.0.0
    */
 
-  public static final class Context3L
+  public static final class ContextVM3L
   {
     private final VectorM3L v2a;
     private final VectorM3L v2b;
@@ -917,7 +917,7 @@ public final class VectorM3L
      * Construct preallocated storage.
      */
 
-    public Context3L()
+    public ContextVM3L()
     {
       this.v2a = new VectorM3L();
       this.v2b = new VectorM3L();

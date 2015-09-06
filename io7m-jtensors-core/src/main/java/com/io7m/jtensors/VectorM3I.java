@@ -554,7 +554,7 @@ public final class VectorM3I
    */
 
   public static int distance(
-    final Context3I c,
+    final ContextVM3I c,
     final VectorReadable3IType v0,
     final VectorReadable3IType v1)
     throws ArithmeticException
@@ -610,7 +610,7 @@ public final class VectorM3I
    */
 
   public static <V extends VectorWritable3IType> V interpolateLinear(
-    final Context3I c,
+    final ContextVM3I c,
     final VectorReadable3IType v0,
     final VectorReadable3IType v1,
     final double alpha,
@@ -906,7 +906,7 @@ public final class VectorM3I
    * @since 7.0.0
    */
 
-  public static final class Context3I
+  public static final class ContextVM3I
   {
     private final VectorM3I v2a;
     private final VectorM3I v2b;
@@ -915,7 +915,7 @@ public final class VectorM3I
      * Construct preallocated storage.
      */
 
-    public Context3I()
+    public ContextVM3I()
     {
       this.v2a = new VectorM3I();
       this.v2b = new VectorM3I();

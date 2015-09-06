@@ -579,7 +579,7 @@ public final class VectorM3D
    */
 
   public static double distance(
-    final Context3D c,
+    final ContextVM3D c,
     final VectorReadable3DType v0,
     final VectorReadable3DType v1)
   {
@@ -628,7 +628,7 @@ public final class VectorM3D
    */
 
   public static <V extends VectorWritable3DType> V interpolateLinear(
-    final Context3D c,
+    final ContextVM3D c,
     final VectorReadable3DType v0,
     final VectorReadable3DType v1,
     final double alpha,
@@ -732,7 +732,7 @@ public final class VectorM3D
 
   public static <V extends VectorReadable3DType, U extends
     VectorWritable3DType> void orthoNormalize(
-    final Context3D c,
+    final ContextVM3D c,
     final VectorReadable3DType v0,
     final U v0_out,
     final VectorReadable3DType v1,
@@ -761,7 +761,7 @@ public final class VectorM3D
   public static <V extends VectorWritable3DType & VectorReadable3DType, W
     extends VectorWritable3DType & VectorReadable3DType> void
   orthoNormalizeInPlace(
-    final Context3D c,
+    final ContextVM3D c,
     final V v0,
     final W v1)
   {
@@ -1001,7 +1001,7 @@ public final class VectorM3D
    * @since 7.0.0
    */
 
-  public static final class Context3D
+  public static final class ContextVM3D
   {
     private final VectorM3D v2a;
     private final VectorM3D v2b;
@@ -1011,7 +1011,7 @@ public final class VectorM3D
      * Construct preallocated storage.
      */
 
-    public Context3D()
+    public ContextVM3D()
     {
       this.v2a = new VectorM3D();
       this.v2b = new VectorM3D();

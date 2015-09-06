@@ -52,9 +52,8 @@ import java.nio.DoubleBuffer;
 
 //@formatter:on
 
-public final class MatrixM2x2D implements
-  MatrixDirectReadable2x2DType,
-  MatrixWritable2x2DType
+public final class MatrixM2x2D
+  implements MatrixDirectReadable2x2DType, MatrixWritable2x2DType
 {
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
@@ -70,15 +69,69 @@ public final class MatrixM2x2D implements
     VIEW_BYTES = MatrixM2x2D.VIEW_ELEMENTS * MatrixM2x2D.VIEW_ELEMENT_SIZE;
   }
 
+  private final ByteBuffer data;
+  private final DoubleBuffer view;
+
+  /**
+   * Construct a new matrix, initialized to the identity matrix.
+   */
+
+  public MatrixM2x2D()
+  {
+    final ByteOrder order = ByteOrder.nativeOrder();
+    assert order != null;
+
+    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM2x2D.VIEW_BYTES);
+    assert b != null;
+    b.order(order);
+
+    final DoubleBuffer v = b.asDoubleBuffer();
+    assert v != null;
+
+    this.data = b;
+    this.view = v;
+    this.view.clear();
+
+    MatrixM2x2D.setIdentity(this);
+  }
+
+  /**
+   * Construct a new copy of the given matrix.
+   *
+   * @param source The source matrix.
+   */
+
+  public MatrixM2x2D(
+    final MatrixReadable2x2DType source)
+  {
+    final ByteOrder order = ByteOrder.nativeOrder();
+    assert order != null;
+
+    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM2x2D.VIEW_BYTES);
+    assert b != null;
+    b.order(order);
+
+    final DoubleBuffer d = b.asDoubleBuffer();
+    assert d != null;
+
+    this.data = b;
+    this.view = d;
+    this.view.clear();
+
+    for (int row = 0; row < MatrixM2x2D.VIEW_ROWS; ++row) {
+      for (int col = 0; col < MatrixM2x2D.VIEW_COLS; ++col) {
+        this.setUnsafe(row, col, source.getRowColumnD(row, col));
+      }
+    }
+  }
+
   /**
    * Elementwise add of matrices {@code m0} and {@code m1}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m0  The left input matrix.
+   * @param m1  The right input matrix.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -102,13 +155,12 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Elementwise add of matrices {@code m0} and {@code m1},
-   * returning the result in {@code m0}.
+   * Elementwise add of matrices {@code m0} and {@code m1}, returning the result
+   * in {@code m0}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
+   * @param m0 The left input matrix.
+   * @param m1 The right input matrix.
+   *
    * @return {@code m0}
    */
 
@@ -120,28 +172,20 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code out}.
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code out}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param m     The input matrix.
+   * @param row_a The row on the lefthand side of the addition.
+   * @param row_b The row on the righthand side of the addition.
+   * @param row_c The destination row.
+   * @param r     The scaling value.
+   * @param out   The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -163,26 +207,19 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code m}.
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code m}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
+   * @param m     The input matrix.
+   * @param row_a The row on the lefthand side of the addition.
+   * @param row_b The row on the righthand side of the addition.
+   * @param row_c The destination row.
+   * @param r     The scaling value.
+   *
    * @return {@code m}
    */
 
@@ -226,13 +263,12 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Copy the contents of the matrix {@code input} to the matrix
-   * {@code output}, completely replacing all elements.
+   * Copy the contents of the matrix {@code input} to the matrix {@code output},
+   * completely replacing all elements.
    *
-   * @param input
-   *          The input vector.
-   * @param output
-   *          The output vector.
+   * @param input  The input vector.
+   * @param output The output vector.
+   *
    * @return {@code output}
    */
 
@@ -251,9 +287,9 @@ public final class MatrixM2x2D implements
   /**
    * Calculate the determinant of the matrix {@code m}.
    *
+   * @param m The input matrix.
+   *
    * @return The determinant.
-   * @param m
-   *          The input matrix.
    */
 
   public static double determinant(
@@ -268,23 +304,17 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * <p>
-   * Exchange two rows {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code out} .
-   * </p>
+   * <p> Exchange two rows {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code out} . </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
-   * @param out
-   *          The output matrix.
+   * @param m     The input matrix.
+   * @param row_a The first row.
+   * @param row_b The second row.
+   * @param out   The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -295,28 +325,20 @@ public final class MatrixM2x2D implements
     final MatrixM2x2D out)
   {
     return MatrixM2x2D.exchangeRowsUnsafe(
-      m,
-      MatrixM2x2D.rowCheck(row_a),
-      MatrixM2x2D.rowCheck(row_b),
-      out);
+      m, MatrixM2x2D.rowCheck(row_a), MatrixM2x2D.rowCheck(row_b), out);
   }
 
   /**
-   * <p>
-   * Exchange two rows {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code m} .
-   * </p>
+   * <p> Exchange two rows {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code m} . </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
+   * @param m     The input matrix.
+   * @param row_a The first row.
+   * @param row_b The second row.
+   *
    * @return {@code m}
    */
 
@@ -351,21 +373,16 @@ public final class MatrixM2x2D implements
     final int column)
   {
     return MatrixM2x2D.indexUnsafe(
-      MatrixM2x2D.rowCheck(row),
-      MatrixM2x2D.columnCheck(column));
+      MatrixM2x2D.rowCheck(row), MatrixM2x2D.columnCheck(column));
   }
 
   /**
-   * <p>
-   * The main function that indexes into the buffer that backs the array. The
-   * body of this function decides on how elements are stored. This
+   * <p> The main function that indexes into the buffer that backs the array.
+   * The body of this function decides on how elements are stored. This
    * implementation chooses to store values in column-major format as this
-   * allows matrices to be sent directly to OpenGL without conversion.
-   * </p>
-   * <p>
+   * allows matrices to be sent directly to OpenGL without conversion. </p> <p>
    * (row * 2) + column, corresponds to row-major storage. (column * 2) + row,
-   * corresponds to column-major (OpenGL) storage.
-   * </p>
+   * corresponds to column-major (OpenGL) storage. </p>
    */
 
   private static int indexUnsafe(
@@ -376,20 +393,18 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code out}. The function returns {@code Some(out)}
-   * iff it was possible to invert the matrix, and {@code None}
-   * otherwise. It is not possible to invert a matrix that has a determinant
-   * of {@code 0}. If the function returns {@code None},
-   * {@code m} is untouched.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code out}. The function returns {@code Some(out)} iff it was possible
+   * to invert the matrix, and {@code None} otherwise. It is not possible to
+   * invert a matrix that has a determinant of {@code 0}. If the function
+   * returns {@code None}, {@code m} is untouched.
+   *
+   * @param m   The input matrix.
+   * @param out The output matrix.
+   *
+   * @return The inverion of {@code m}, if any.
    *
    * @see MatrixM2x2D#determinant(MatrixReadable2x2DType)
-   *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
-   * @return The inverion of {@code m}, if any.
    */
 
   public static OptionType<MatrixM2x2D> invert(
@@ -418,18 +433,17 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code m}. The function returns {@code Some(m)} iff
-   * it was possible to invert the matrix, and {@code None} otherwise. It
-   * is not possible to invert a matrix that has a determinant of
-   * {@code 0}. If the function returns {@code None}, {@code m}
-   * is untouched.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code m}. The function returns {@code Some(m)} iff it was possible to
+   * invert the matrix, and {@code None} otherwise. It is not possible to invert
+   * a matrix that has a determinant of {@code 0}. If the function returns
+   * {@code None}, {@code m} is untouched.
+   *
+   * @param m The input matrix.
+   *
+   * @return The inverion of {@code m}, if any.
    *
    * @see MatrixM2x2D#determinant(MatrixReadable2x2DType)
-   *
-   * @param m
-   *          The input matrix.
-   * @return The inverion of {@code m}, if any.
    */
 
   public static OptionType<MatrixM2x2D> invertInPlace(
@@ -439,15 +453,13 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Multiply the matrix {@code m0} with the matrix {@code m1},
-   * writing the result to {@code out}.
+   * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
+   * result to {@code out}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m0  The left input matrix.
+   * @param m1  The right input matrix.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -457,17 +469,21 @@ public final class MatrixM2x2D implements
     final MatrixM2x2D out)
   {
     final double r0c0 =
-      (m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 0))
-        + (m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 1));
+      (m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 0)) + (m0.getRowColumnD(
+        1,
+        0) * m1.getRowColumnD(0, 1));
     final double r0c1 =
-      (m0.getRowColumnD(0, 1) * m1.getRowColumnD(0, 0))
-        + (m0.getRowColumnD(1, 1) * m1.getRowColumnD(0, 1));
+      (m0.getRowColumnD(0, 1) * m1.getRowColumnD(0, 0)) + (m0.getRowColumnD(
+        1,
+        1) * m1.getRowColumnD(0, 1));
     final double r1c0 =
-      (m0.getRowColumnD(0, 0) * m1.getRowColumnD(1, 0))
-        + (m0.getRowColumnD(1, 0) * m1.getRowColumnD(1, 1));
+      (m0.getRowColumnD(0, 0) * m1.getRowColumnD(1, 0)) + (m0.getRowColumnD(
+        1,
+        0) * m1.getRowColumnD(1, 1));
     final double r1c1 =
-      (m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 0))
-        + (m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 1));
+      (m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 0)) + (m0.getRowColumnD(
+        1,
+        1) * m1.getRowColumnD(1, 1));
 
     out.setUnsafe(0, 0, r0c0);
     out.setUnsafe(0, 1, r0c1);
@@ -478,13 +494,12 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Multiply the matrix {@code m0} with the matrix {@code m1},
-   * writing the result to {@code m0}.
+   * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
+   * result to {@code m0}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
+   * @param m0 The left input matrix.
+   * @param m1 The right input matrix.
+   *
    * @return {@code out}
    */
 
@@ -496,18 +511,15 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Multiply the matrix {@code m} with the vector {@code v},
-   * writing the resulting vector to {@code out}.
+   * Multiply the matrix {@code m} with the vector {@code v}, writing the
+   * resulting vector to {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
+   * @param m   The input matrix.
+   * @param v   The input vector.
+   * @param out The output vector.
+   * @param <V> The precise type of writable vector.
+   *
    * @return {@code out}
-   * @param <V>
-   *          The precise type of writable vector.
    */
 
   public static <V extends VectorWritable2DType> V multiplyVector2D(
@@ -526,18 +538,14 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Return row {@code row} of the matrix {@code m} in the vector
-   * {@code out}.
+   * Return row {@code row} of the matrix {@code m} in the vector {@code out}.
    *
-   * @param row
-   *          The row.
-   * @param out
-   *          The output vector.
-   * @param m
-   *          The matrix.
+   * @param row The row.
+   * @param out The output vector.
+   * @param m   The matrix.
+   * @param <V> The precise type of writable vector.
+   *
    * @return The row.
-   * @param <V>
-   *          The precise type of writable vector.
    */
 
   public static <V extends VectorWritable2DType> V row(
@@ -568,15 +576,13 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code out}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output row.
+   * @param m   The input matrix.
+   * @param r   The scaling value.
+   * @param out The output row.
+   *
    * @return {@code m}
    */
 
@@ -593,13 +599,12 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code m}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code m}.
    *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
+   * @param m The input matrix.
+   * @param r The scaling value.
+   *
    * @return {@code m}
    */
 
@@ -611,23 +616,17 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * <p>
-   * Scale row {@code r} of the matrix {@code m} by {@code r},
-   * saving the result to row {@code r} of {@code out}.
-   * </p>
+   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code out}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 2)}.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param m   The input matrix.
+   * @param row The index of the row {@code (0 <= row < 2)}.
+   * @param r   The scaling value.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -641,21 +640,16 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * <p>
-   * Scale row {@code r} of the matrix {@code m} by {@code r},
-   * saving the result to row {@code r} of {@code m}.
-   * </p>
+   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code m}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 4)}.
-   * @param r
-   *          The scaling value.
+   * @param m   The input matrix.
+   * @param row The index of the row {@code (0 <= row < 4)}.
+   * @param r   The scaling value.
+   *
    * @return {@code out}
    */
 
@@ -683,17 +677,14 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Set the value in the matrix {@code m} at row {@code row},
-   * column {@code column} to {@code value}.
+   * Set the value in the matrix {@code m} at row {@code row}, column {@code
+   * column} to {@code value}.
    *
-   * @param m
-   *          The input matrix
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
+   * @param m      The input matrix
+   * @param row    The row
+   * @param column The column
+   * @param value  The value
+   *
    * @return m
    */
 
@@ -710,8 +701,8 @@ public final class MatrixM2x2D implements
   /**
    * Set the given matrix {@code m} to the identity matrix.
    *
-   * @param m
-   *          The matrix
+   * @param m The matrix
+   *
    * @return {@code m}
    */
 
@@ -743,8 +734,8 @@ public final class MatrixM2x2D implements
   /**
    * Set the given matrix {@code m} to the zero matrix.
    *
-   * @param m
-   *          The matrix
+   * @param m The matrix
+   *
    * @return {@code m}
    */
 
@@ -752,20 +743,22 @@ public final class MatrixM2x2D implements
     final MatrixM2x2D m)
   {
     m.view.clear();
-    for (int index = 0; index < (MatrixM2x2D.VIEW_ROWS * MatrixM2x2D.VIEW_COLS); ++index) {
+    for (int index = 0; index < (MatrixM2x2D.VIEW_ROWS
+                                 * MatrixM2x2D.VIEW_COLS); ++index) {
       m.view.put(index, 0.0);
     }
     return m;
   }
 
   /**
-   * Return the trace of the matrix {@code m}. The trace is defined as
-   * the sum of the diagonal elements of the matrix.
+   * Return the trace of the matrix {@code m}. The trace is defined as the sum
+   * of the diagonal elements of the matrix.
+   *
+   * @param m The input matrix
+   *
+   * @return The trace of the matrix
    *
    * @since 5.0.0
-   * @param m
-   *          The input matrix
-   * @return The trace of the matrix
    */
 
   public static double trace(
@@ -775,13 +768,12 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code out}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m   The input matrix.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -794,11 +786,11 @@ public final class MatrixM2x2D implements
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code m}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code m}.
    *
-   * @param m
-   *          The input matrix.
+   * @param m The input matrix.
+   *
    * @return {@code m}
    */
 
@@ -814,63 +806,6 @@ public final class MatrixM2x2D implements
     }
 
     return m;
-  }
-
-  private final ByteBuffer   data;
-  private final DoubleBuffer view;
-
-  /**
-   * Construct a new matrix, initialized to the identity matrix.
-   */
-
-  public MatrixM2x2D()
-  {
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM2x2D.VIEW_BYTES);
-    assert b != null;
-    b.order(order);
-
-    final DoubleBuffer v = b.asDoubleBuffer();
-    assert v != null;
-
-    this.data = b;
-    this.view = v;
-    this.view.clear();
-
-    MatrixM2x2D.setIdentity(this);
-  }
-
-  /**
-   * Construct a new copy of the given matrix.
-   *
-   * @param source
-   *          The source matrix.
-   */
-
-  public MatrixM2x2D(
-    final MatrixReadable2x2DType source)
-  {
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM2x2D.VIEW_BYTES);
-    assert b != null;
-    b.order(order);
-
-    final DoubleBuffer d = b.asDoubleBuffer();
-    assert d != null;
-
-    this.data = b;
-    this.view = d;
-    this.view.clear();
-
-    for (int row = 0; row < MatrixM2x2D.VIEW_ROWS; ++row) {
-      for (int col = 0; col < MatrixM2x2D.VIEW_COLS; ++col) {
-        this.setUnsafe(row, col, source.getRowColumnD(row, col));
-      }
-    }
   }
 
   @Override public boolean equals(
@@ -928,13 +863,11 @@ public final class MatrixM2x2D implements
   }
 
   /**
+   * @param row    The row.
+   * @param column The column.
+   * @param value  The value.
+   *
    * @return Set the value at the given row and column.
-   * @param row
-   *          The row.
-   * @param column
-   *          The column.
-   * @param value
-   *          The value.
    */
 
   public MatrixM2x2D set(

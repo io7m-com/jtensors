@@ -502,7 +502,7 @@ public class QuaternionI4DTest extends QuaternionI4Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
+    final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
     final QuaternionI4D.Context qc = new QuaternionI4D.Context();
 
     final MatrixM4x4D mr = new MatrixM4x4D();
@@ -538,7 +538,7 @@ public class QuaternionI4DTest extends QuaternionI4Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
+    final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
     final QuaternionI4D.Context qc = new QuaternionI4D.Context();
 
     final MatrixM4x4D mr = new MatrixM4x4D();
@@ -576,7 +576,7 @@ public class QuaternionI4DTest extends QuaternionI4Contract
       TestUtilities.getDoubleEqualityContext();
 
     final QuaternionI4D.Context qc = new QuaternionI4D.Context();
-    final MatrixM4x4D.ContextM4D mc = new MatrixM4x4D.ContextM4D();
+    final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
 
     final MatrixM4x4D ml = new MatrixM4x4D();
     final MatrixM4x4D mq = new MatrixM4x4D();

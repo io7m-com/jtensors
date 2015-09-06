@@ -17,7 +17,6 @@
 package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
-import com.io7m.jtensors.VectorM2I;
 import com.io7m.jtensors.VectorM2L;
 import org.junit.Assert;
 import org.junit.Test;
@@ -461,7 +460,7 @@ public abstract class VectorM2LContract extends VectorM2Contract
 
   @Override @Test public void testDistance()
   {
-    final VectorM2L.Context2L c = new VectorM2L.Context2L();
+    final VectorM2L.ContextVM2L c = new VectorM2L.ContextVM2L();
     final VectorM2L v0 = this.newVectorM2L(0, 1);
     final VectorM2L v1 = this.newVectorM2L(0, 0);
     Assert.assertTrue(VectorM2L.distance(c, v0, v1) == 1);
@@ -469,7 +468,7 @@ public abstract class VectorM2LContract extends VectorM2Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    final VectorM2L.Context2L c = new VectorM2L.Context2L();
+    final VectorM2L.ContextVM2L c = new VectorM2L.ContextVM2L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorM2LContract.randomPositiveSmallNumber();
@@ -667,7 +666,7 @@ public abstract class VectorM2LContract extends VectorM2Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
-    final VectorM2L.Context2L c = new VectorM2L.Context2L();
+    final VectorM2L.ContextVM2L c = new VectorM2L.ContextVM2L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorM2LContract.randomPositiveNumber();

@@ -639,7 +639,7 @@ import org.junit.Test;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final MatrixM4x4F.ContextM4F mc = new MatrixM4x4F.ContextM4F();
+    final MatrixM4x4F.ContextMM4F mc = new MatrixM4x4F.ContextMM4F();
     final QuaternionM4F.ContextQM4F qc = new QuaternionM4F.ContextQM4F();
 
     final MatrixM4x4F mr = new MatrixM4x4F();
@@ -676,7 +676,7 @@ import org.junit.Test;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final MatrixM4x4F.ContextM4F mc = new MatrixM4x4F.ContextM4F();
+    final MatrixM4x4F.ContextMM4F mc = new MatrixM4x4F.ContextMM4F();
     final QuaternionM4F.ContextQM4F qc = new QuaternionM4F.ContextQM4F();
 
     final MatrixM4x4F mr = new MatrixM4x4F();
@@ -714,7 +714,7 @@ import org.junit.Test;
       TestUtilities.getSingleEqualityContext();
 
     final QuaternionM4F.ContextQM4F qc = new QuaternionM4F.ContextQM4F();
-    final MatrixM4x4F.ContextM4F mc = new MatrixM4x4F.ContextM4F();
+    final MatrixM4x4F.ContextMM4F mc = new MatrixM4x4F.ContextMM4F();
 
     final MatrixM4x4F ml = new MatrixM4x4F();
     final QuaternionM4F lq = new QuaternionM4F();
