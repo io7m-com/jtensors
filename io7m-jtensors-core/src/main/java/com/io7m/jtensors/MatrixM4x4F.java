@@ -24,121 +24,37 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+//@formatter:off
+
 /**
  * <p>
  * A 4x4 mutable matrix type with single precision elements.
  * </p>
  * <p>
- * Values of type {@code MatrixM4x4F} are backed by direct memory, with
- * the rows and columns of the matrices being stored in column-major format.
- * This allows the matrices to be passed to OpenGL directly, without requiring
+ * Values of type {@code MatrixM4x4F} are backed by direct memory, with the
+ * rows and columns of the matrices being stored in column-major format. This
+ * allows the matrices to be passed to OpenGL directly, without requiring
  * transposition.
  * </p>
  * <p>
- * Values of this type cannot be accessed safely from multiple threads without
- * explicit synchronization.
+ * Values of this type cannot be accessed safely from multiple threads
+ * without explicit synchronization.
  * </p>
  * <p>
- * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed for
- * the derivations of most of the code in this class (ISBN: 1-58450-277-0).
+ * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed
+ * for the derivations of most of the code in this class (ISBN: 1-58450-277-0).
  * </p>
  * <p>
- * See <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>
+ * See http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations
  * for the three <i>elementary</i> operations defined on matrices.
  * </p>
  */
 
-public final class MatrixM4x4F implements
-  MatrixDirectReadable4x4FType,
-  MatrixWritable4x4FType
+//@formatter:on
+
+public final class MatrixM4x4F
+  implements MatrixDirectReadable4x4FType, MatrixWritable4x4FType
 {
-  /**
-   * <p>
-   * The {@code ContextM4F} type contains the minimum storage required for all of the
-   * functions of the {@code MatrixM4x4F} class.
-   * </p>
-   * <p>
-   * The purpose of the class is to allow applications to allocate all storage
-   * ahead of time in order to allow functions in the class to avoid
-   * allocating memory (not including stack space) for intermediate
-   * calculations. This can reduce garbage collection in speed critical code.
-   * </p>
-   * <p>
-   * The user should allocate one {@code ContextM4F} value per thread, and
-   * then pass this value to matrix functions. Any matrix function that takes
-   * a {@code ContextM4F} value will not generate garbage.
-   * </p>
-   *
-   * @since 7.0.0
-   */
-
-  public static class ContextM4F
-  {
-    private final MatrixM3x3F m3a = new MatrixM3x3F();
-    private final MatrixM4x4F m4a = new MatrixM4x4F();
-    private final MatrixM4x4F m4b = new MatrixM4x4F();
-    private final VectorM3F   v3a = new VectorM3F();
-    private final VectorM3F   v3b = new VectorM3F();
-    private final VectorM3F   v3c = new VectorM3F();
-    private final VectorM3F   v3d = new VectorM3F();
-    private final VectorM4F   v4a = new VectorM4F();
-    private final VectorM4F   v4b = new VectorM4F();
-
-    /**
-     * Construct a new context.
-     */
-
-    public ContextM4F()
-    {
-
-    }
-
-    final MatrixM3x3F getM3a()
-    {
-      return this.m3a;
-    }
-
-    final MatrixM4x4F getM4a()
-    {
-      return this.m4a;
-    }
-
-    final MatrixM4x4F getM4b()
-    {
-      return this.m4b;
-    }
-
-    final VectorM3F getV3a()
-    {
-      return this.v3a;
-    }
-
-    final VectorM3F getV3b()
-    {
-      return this.v3b;
-    }
-
-    final VectorM3F getV3c()
-    {
-      return this.v3c;
-    }
-
-    final VectorM3F getV3d()
-    {
-      return this.v3d;
-    }
-
-    final VectorM4F getV4a()
-    {
-      return this.v4a;
-    }
-
-    final VectorM4F getV4b()
-    {
-      return this.v4b;
-    }
-  }
-
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
   private static final int VIEW_ELEMENT_SIZE;
@@ -153,15 +69,70 @@ public final class MatrixM4x4F implements
     VIEW_BYTES = MatrixM4x4F.VIEW_ELEMENTS * MatrixM4x4F.VIEW_ELEMENT_SIZE;
   }
 
+  private final ByteBuffer  data;
+  private final FloatBuffer view;
+
+  /**
+   * Construct a new identity matrix.
+   */
+
+  public MatrixM4x4F()
+  {
+    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM4x4F.VIEW_BYTES);
+    assert b != null;
+
+    final ByteOrder order = ByteOrder.nativeOrder();
+    assert order != null;
+    b.order(order);
+
+    this.data = b;
+
+    final FloatBuffer v = this.data.asFloatBuffer();
+    assert v != null;
+
+    this.view = v;
+    MatrixM4x4F.setIdentity(this);
+    this.view.rewind();
+  }
+
+  /**
+   * Construct a new copy of the given matrix.
+   *
+   * @param source The source matrix.
+   */
+
+  public MatrixM4x4F(
+    final MatrixReadable4x4FType source)
+  {
+    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM4x4F.VIEW_BYTES);
+    assert b != null;
+
+    final ByteOrder order = ByteOrder.nativeOrder();
+    assert order != null;
+    b.order(order);
+
+    this.data = b;
+
+    final FloatBuffer v = this.data.asFloatBuffer();
+    assert v != null;
+
+    this.view = v;
+    this.view.rewind();
+
+    for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {
+      for (int col = 0; col < MatrixM4x4F.VIEW_COLS; ++col) {
+        this.setUnsafe(row, col, source.getRowColumnF(row, col));
+      }
+    }
+  }
+
   /**
    * Elementwise add of matrices {@code m0} and {@code m1}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m0  The left input matrix.
+   * @param m1  The right input matrix.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -213,13 +184,12 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Elementwise add of matrices {@code m0} and {@code m1},
-   * returning the result in {@code m0}.
+   * Elementwise add of matrices {@code m0} and {@code m1}, returning the result
+   * in {@code m0}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
+   * @param m0 The left input matrix.
+   * @param m1 The right input matrix.
+   *
    * @return m0
    */
 
@@ -231,28 +201,20 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code out}.
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code out}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param m     The input matrix.
+   * @param row_a The row on the lefthand side of the addition.
+   * @param row_b The row on the righthand side of the addition.
+   * @param row_c The destination row.
+   * @param r     The scaling value.
+   * @param out   The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -279,26 +241,19 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code m}.
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code m}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
+   * @param m     The input matrix.
+   * @param row_a The row on the lefthand side of the addition.
+   * @param row_b The row on the righthand side of the addition.
+   * @param row_c The destination row.
+   * @param r     The scaling value.
+   *
    * @return {@code m}
    */
 
@@ -330,32 +285,22 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code out}. The function uses
-   * storage preallocated in {@code context} to avoid any new
-   * allocations.
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code out}. The function uses storage preallocated in {@code
+   * context} to avoid any new allocations. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param context Preallocated storage.
+   * @param m       The input matrix.
+   * @param row_a   The row on the lefthand side of the addition.
+   * @param row_b   The row on the righthand side of the addition.
+   * @param row_c   The destination row.
+   * @param r       The scaling value.
+   * @param out     The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -390,13 +335,12 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Copy the contents of the matrix {@code input} to the matrix
-   * {@code output}, completely replacing all elements.
+   * Copy the contents of the matrix {@code input} to the matrix {@code output},
+   * completely replacing all elements.
    *
-   * @param input
-   *          The input vector.
-   * @param output
-   *          The output vector.
+   * @param input  The input vector.
+   * @param output The output vector.
+   *
    * @return {@code output}
    */
 
@@ -415,9 +359,9 @@ public final class MatrixM4x4F implements
   /**
    * Calculate the determinant of the matrix {@code m}.
    *
+   * @param m The input matrix.
+   *
    * @return The determinant.
-   * @param m
-   *          The input matrix.
    */
 
   public static double determinant(
@@ -479,23 +423,17 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code out}.
-   * </p>
+   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code out}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
-   * @param out
-   *          The output matrix.
+   * @param m     The input matrix.
+   * @param row_a The first row.
+   * @param row_b The second row.
+   * @param out   The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -508,30 +446,20 @@ public final class MatrixM4x4F implements
     final VectorM4F va = new VectorM4F();
     final VectorM4F vb = new VectorM4F();
     return MatrixM4x4F.exchangeRowsUnsafe(
-      m,
-      MatrixM4x4F.rowCheck(row_a),
-      MatrixM4x4F.rowCheck(row_b),
-      va,
-      vb,
-      out);
+      m, MatrixM4x4F.rowCheck(row_a), MatrixM4x4F.rowCheck(row_b), va, vb, out);
   }
 
   /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code m}.
-   * </p>
+   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code m}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
+   * @param m     The input matrix.
+   * @param row_a The first row.
+   * @param row_b The second row.
+   *
    * @return {@code m}
    */
 
@@ -544,25 +472,18 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code m}. The
-   * function uses storage preallocated in {@code context} to avoid
-   * allocating memory.
-   * </p>
+   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code m}. The function uses
+   * storage preallocated in {@code context} to avoid allocating memory. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
+   * @param context Preallocated storage.
+   * @param m       The input matrix.
+   * @param row_a   The first row.
+   * @param row_b   The second row.
+   *
    * @return {@code m}
    */
 
@@ -591,29 +512,20 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Exchange two rows {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code out} .
-   * </p>
-   * <p>
-   * The function uses storage preallocated in {@code context} to avoid
-   * allocating memory.
+   * <p> Exchange two rows {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code out} . </p> <p> The function
+   * uses storage preallocated in {@code context} to avoid allocating memory.
    * </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
-   * @param out
-   *          The output matrix.
+   * @param context Preallocated storage.
+   * @param m       The input matrix.
+   * @param row_a   The first row.
+   * @param row_b   The second row.
+   * @param out     The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -638,21 +550,16 @@ public final class MatrixM4x4F implements
     final int column)
   {
     return MatrixM4x4F.indexUnsafe(
-      MatrixM4x4F.rowCheck(row),
-      MatrixM4x4F.columnCheck(column));
+      MatrixM4x4F.rowCheck(row), MatrixM4x4F.columnCheck(column));
   }
 
   /**
-   * <p>
-   * The main function that indexes into the buffer that backs the array. The
-   * body of this function decides on how elements are stored. This
+   * <p> The main function that indexes into the buffer that backs the array.
+   * The body of this function decides on how elements are stored. This
    * implementation chooses to store values in column-major format as this
-   * allows matrices to be sent directly to OpenGL without conversion.
-   * </p>
-   * <p>
+   * allows matrices to be sent directly to OpenGL without conversion. </p> <p>
    * (row * 4) + column, corresponds to row-major storage. (column * 4) + row,
-   * corresponds to column-major (OpenGL) storage.
-   * </p>
+   * corresponds to column-major (OpenGL) storage. </p>
    */
 
   private static int indexUnsafe(
@@ -663,20 +570,18 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code out}. The function returns {@code Some(out)}
-   * iff it was possible to invert the matrix, and {@code None}
-   * otherwise. It is not possible to invert a matrix that has a determinant
-   * of {@code 0}. If the function returns {@code None},
-   * {@code m} is untouched.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code out}. The function returns {@code Some(out)} iff it was possible
+   * to invert the matrix, and {@code None} otherwise. It is not possible to
+   * invert a matrix that has a determinant of {@code 0}. If the function
+   * returns {@code None}, {@code m} is untouched.
+   *
+   * @param m   The input matrix.
+   * @param out The output matrix.
+   *
+   * @return {@code out}.
    *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}.
    */
 
   public static OptionType<MatrixM4x4F> invert(
@@ -1034,18 +939,17 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code m}. The function returns {@code Some(m)} iff
-   * it was possible to invert the matrix, and {@code None} otherwise. It
-   * is not possible to invert a matrix that has a determinant of
-   * {@code 0}. If the function returns {@code None}, {@code m}
-   * is untouched.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code m}. The function returns {@code Some(m)} iff it was possible to
+   * invert the matrix, and {@code None} otherwise. It is not possible to invert
+   * a matrix that has a determinant of {@code 0}. If the function returns
+   * {@code None}, {@code m} is untouched.
+   *
+   * @param m The input matrix.
+   *
+   * @return {@code m}.
    *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   *
-   * @param m
-   *          The input matrix.
-   * @return {@code m}.
    */
 
   public static OptionType<MatrixM4x4F> invertInPlace(
@@ -1055,21 +959,19 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code m}. The function returns {@code Some(out)} iff
-   * it was possible to invert the matrix, and {@code None} otherwise. It
-   * is not possible to invert a matrix that has a determinant of
-   * {@code 0}. The function uses preallocated storage in
-   * {@code context} to avoid allocating memory. If the function returns
-   * {@code None}, {@code m} is untouched.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code m}. The function returns {@code Some(out)} iff it was possible to
+   * invert the matrix, and {@code None} otherwise. It is not possible to invert
+   * a matrix that has a determinant of {@code 0}. The function uses
+   * preallocated storage in {@code context} to avoid allocating memory. If the
+   * function returns {@code None}, {@code m} is untouched.
+   *
+   * @param context Preallocated storage.
+   * @param m       The input matrix.
+   *
+   * @return {@code m}
    *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @return {@code m}
    */
 
   public static OptionType<MatrixM4x4F> invertInPlaceWithContext(
@@ -1080,23 +982,20 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code out}. The function returns {@code Some(out)}
-   * iff it was possible to invert the matrix, and {@code None}
-   * otherwise. It is not possible to invert a matrix that has a determinant
-   * of {@code 0}. The function uses preallocated storage in
-   * {@code context} to avoid allocating memory. If the function returns
-   * {@code None}, {@code m} is untouched.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code out}. The function returns {@code Some(out)} iff it was possible
+   * to invert the matrix, and {@code None} otherwise. It is not possible to
+   * invert a matrix that has a determinant of {@code 0}. The function uses
+   * preallocated storage in {@code context} to avoid allocating memory. If the
+   * function returns {@code None}, {@code m} is untouched.
+   *
+   * @param context Preallocated storage.
+   * @param m       The input matrix.
+   * @param out     The output matrix.
+   *
+   * @return {@code out}
    *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
    */
 
   public static OptionType<MatrixM4x4F> invertWithContext(
@@ -1108,30 +1007,18 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Calculate a matrix representing a "camera" looking from the point
-   * {@code origin} to the point {@code target}. {@code target}
-   * must represent the "up" vector for the camera. Usually, this is simply a
-   * unit vector {@code (0, 1, 0)} representing the Y axis.
-   * </p>
-   * <p>
-   * The function uses preallocated storage from {@code context}.
-   * </p>
-   * <p>
-   * The view is expressed as a rotation and translation matrix, written to
-   * {@code out_matrix}.
-   * </p>
+   * <p> Calculate a matrix representing a "camera" looking from the point
+   * {@code origin} to the point {@code target}. {@code target} must represent
+   * the "up" vector for the camera. Usually, this is simply a unit vector
+   * {@code (0, 1, 0)} representing the Y axis. </p> <p> The function uses
+   * preallocated storage from {@code context}. </p> <p> The view is expressed
+   * as a rotation and translation matrix, written to {@code out_matrix}. </p>
    *
-   * @param context
-   *          Preallocated storage
-   * @param out_matrix
-   *          The output matrix
-   * @param origin
-   *          The position of the viewer
-   * @param target
-   *          The target being viewed
-   * @param up
-   *          The up vector
+   * @param context    Preallocated storage
+   * @param out_matrix The output matrix
+   * @param origin     The position of the viewer
+   * @param target     The target being viewed
+   * @param up         The up vector
    */
 
   public static void lookAtWithContext(
@@ -1204,21 +1091,15 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Generate and return a matrix that represents a rotation of
-   * {@code angle} radians around the axis {@code axis}.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
+   * <p> Generate and return a matrix that represents a rotation of {@code
+   * angle} radians around the axis {@code axis}. </p> <p> The function assumes
+   * a right-handed coordinate system and therefore a positive rotation around
+   * any axis represents a counter-clockwise rotation around that axis. </p>
+   *
+   * @param angle The angle in radians.
+   * @param axis  The axis.
    *
    * @return A rotation matrix.
-   * @param angle
-   *          The angle in radians.
-   * @param axis
-   *          The axis.
    */
 
   public static MatrixM4x4F makeRotation(
@@ -1231,22 +1112,16 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Generate a matrix that represents a rotation of {@code angle}
-   * radians around the axis {@code axis} and save to {@code out}.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
+   * <p> Generate a matrix that represents a rotation of {@code angle} radians
+   * around the axis {@code axis} and save to {@code out}. </p> <p> The function
+   * assumes a right-handed coordinate system and therefore a positive rotation
+   * around any axis represents a counter-clockwise rotation around that axis.
    * </p>
    *
-   * @param angle
-   *          The angle in radians.
-   * @param axis
-   *          The axis.
-   * @param out
-   *          The output matrix.
+   * @param angle The angle in radians.
+   * @param axis  The axis.
+   * @param out   The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -1318,11 +1193,11 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Generate and return a matrix that represents a translation of
-   * {@code (v.x, v.y)} from the origin.
+   * Generate and return a matrix that represents a translation of {@code (v.x,
+   * v.y)} from the origin.
    *
-   * @param v
-   *          The translation vector.
+   * @param v The translation vector.
+   *
    * @return {@code out}
    */
 
@@ -1335,13 +1210,12 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Generate a matrix that represents a translation of
-   * {@code (v.x, v.y)} from the origin, and save to {@code out}.
+   * Generate a matrix that represents a translation of {@code (v.x, v.y)} from
+   * the origin, and save to {@code out}.
    *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
+   * @param v   The translation vector.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -1372,11 +1246,11 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Generate and return a matrix that represents a translation of
-   * {@code (v.x, v.y)} from the origin.
+   * Generate and return a matrix that represents a translation of {@code (v.x,
+   * v.y)} from the origin.
    *
-   * @param v
-   *          The translation vector.
+   * @param v The translation vector.
+   *
    * @return {@code out}
    */
 
@@ -1389,13 +1263,12 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Generate a matrix that represents a translation of
-   * {@code (v.x, v.y)} from the origin, and save to {@code out}.
+   * Generate a matrix that represents a translation of {@code (v.x, v.y)} from
+   * the origin, and save to {@code out}.
    *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
+   * @param v   The translation vector.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -1426,11 +1299,11 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Generate and return a matrix that represents a translation of
-   * {@code (v.x, v.y, v.z)} from the origin.
+   * Generate and return a matrix that represents a translation of {@code (v.x,
+   * v.y, v.z)} from the origin.
    *
-   * @param v
-   *          The translation vector.
+   * @param v The translation vector.
+   *
    * @return {@code out}
    */
 
@@ -1443,14 +1316,12 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Generate a matrix that represents a translation of
-   * {@code (v.x, v.y, v.z)} from the origin, and save to
-   * {@code out}.
+   * Generate a matrix that represents a translation of {@code (v.x, v.y, v.z)}
+   * from the origin, and save to {@code out}.
    *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
+   * @param v   The translation vector.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -1481,11 +1352,11 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Generate and return a matrix that represents a translation of
-   * {@code (v.x, v.y, v.z)} from the origin.
+   * Generate and return a matrix that represents a translation of {@code (v.x,
+   * v.y, v.z)} from the origin.
    *
-   * @param v
-   *          The translation vector.
+   * @param v The translation vector.
+   *
    * @return {@code out}
    */
 
@@ -1498,14 +1369,12 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Generate a matrix that represents a translation of
-   * {@code (v.x, v.y, v.z)} from the origin, and save to
-   * {@code out}.
+   * Generate a matrix that represents a translation of {@code (v.x, v.y, v.z)}
+   * from the origin, and save to {@code out}.
    *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
+   * @param v   The translation vector.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -1536,15 +1405,13 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Multiply the matrix {@code m0} with the matrix {@code m1},
-   * writing the result to {@code out}.
+   * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
+   * result to {@code out}.
    *
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
-   * @param out
-   *          The output vector.
+   * @param m0  The left input vector.
+   * @param m1  The right input vector.
+   * @param out The output vector.
+   *
    * @return {@code out}
    */
 
@@ -1672,13 +1539,12 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Multiply the matrix {@code m0} with the matrix {@code m1},
-   * writing the result to {@code m0}.
+   * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
+   * result to {@code m0}.
    *
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
+   * @param m0 The left input vector.
+   * @param m1 The right input vector.
+   *
    * @return {@code out}
    */
 
@@ -1690,18 +1556,15 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Multiply the matrix {@code m} with the vector {@code v},
-   * writing the resulting vector to {@code out}.
+   * Multiply the matrix {@code m} with the vector {@code v}, writing the
+   * resulting vector to {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
+   * @param m   The input matrix.
+   * @param v   The input vector.
+   * @param out The output vector.
+   * @param <V> The precise type of writable vector.
+   *
    * @return {@code out}
-   * @param <V>
-   *          The precise type of writable vector.
    */
 
   public static <V extends VectorWritable4FType> V multiplyVector4F(
@@ -1736,53 +1599,38 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Multiply the matrix {@code m} with the vector {@code v},
-   * writing the resulting vector to {@code out}. The function uses
-   * preallocated storage in {@code context} to avoid allocating memory.
+   * Multiply the matrix {@code m} with the vector {@code v}, writing the
+   * resulting vector to {@code out}. The function uses preallocated storage in
+   * {@code context} to avoid allocating memory.
    *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
+   * @param context Preallocated storage.
+   * @param m       The input matrix.
+   * @param v       The input vector.
+   * @param out     The output vector.
+   * @param <V>     The precise type of writable vector.
+   *
    * @return {@code out}
-   * @param <V>
-   *          The precise type of writable vector.
    */
 
-  public static
-    <V extends VectorWritable4FType>
-    V
-    multiplyVector4FWithContext(
-      final ContextM4F context,
-      final MatrixReadable4x4FType m,
-      final VectorReadable4FType v,
-      final V out)
+  public static <V extends VectorWritable4FType> V multiplyVector4FWithContext(
+    final ContextM4F context,
+    final MatrixReadable4x4FType m,
+    final VectorReadable4FType v,
+    final V out)
   {
     return MatrixM4x4F.multiplyVector4FActual(
-      m,
-      v,
-      context.getV4a(),
-      context.getV4b(),
-      out);
+      m, v, context.getV4a(), context.getV4b(), out);
   }
 
   /**
-   * Return row {@code row} of the matrix {@code m} in the vector
-   * {@code out}.
+   * Return row {@code row} of the matrix {@code m} in the vector {@code out}.
    *
-   * @param row
-   *          The row
-   * @param m
-   *          The matrix
-   * @param out
-   *          The output vector
+   * @param row The row
+   * @param m   The matrix
+   * @param out The output vector
+   * @param <V> The precise type of writable vector.
+   *
    * @return out
-   * @param <V>
-   *          The precise type of writable vector.
    */
 
   public static <V extends VectorWritable4FType> V row(
@@ -1817,15 +1665,13 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code out}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code out}.
    *
-   * @param out
-   *          The output matrix.
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
+   * @param out The output matrix.
+   * @param m   The input matrix.
+   * @param r   The scaling value.
+   *
    * @return {@code out}
    */
 
@@ -1878,13 +1724,12 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code m}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code m}.
    *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
+   * @param m The input matrix.
+   * @param r The scaling value.
+   *
    * @return {@code m}
    */
 
@@ -1896,23 +1741,17 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Scale row {@code r} of the matrix {@code m} by {@code r},
-   * saving the result to row {@code r} of {@code out}.
-   * </p>
+   * <p> Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
+   * result to row {@code r} of {@code out}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 4)}.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param m   The input matrix.
+   * @param row The index of the row {@code (0 <= row < 4)}.
+   * @param r   The scaling value.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -1924,29 +1763,20 @@ public final class MatrixM4x4F implements
   {
     final VectorM4F tmp = new VectorM4F();
     return MatrixM4x4F.scaleRowUnsafe(
-      m,
-      MatrixM4x4F.rowCheck(row),
-      r,
-      tmp,
-      out);
+      m, MatrixM4x4F.rowCheck(row), r, tmp, out);
   }
 
   /**
-   * <p>
-   * Scale row {@code row} of the matrix {@code m} by {@code r}
-   * , saving the result to row {@code r} of {@code m}.
-   * </p>
+   * <p> Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
+   * result to row {@code r} of {@code m}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 4)}.
-   * @param r
-   *          The scaling value.
+   * @param m   The input matrix.
+   * @param row The index of the row {@code (0 <= row < 4)}.
+   * @param r   The scaling value.
+   *
    * @return {@code out}
    */
 
@@ -1960,25 +1790,18 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Scale row {@code row} of the matrix {@code m} by {@code r}
-   * , saving the result to row {@code r} of {@code m}. The function
-   * uses preallocated storage in {@code context} to avoid allocating
-   * memory.
-   * </p>
+   * <p> Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
+   * result to row {@code r} of {@code m}. The function uses preallocated
+   * storage in {@code context} to avoid allocating memory. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 4)}.
-   * @param r
-   *          The scaling value.
+   * @param context Preallocated storage.
+   * @param m       The input matrix.
+   * @param row     The index of the row {@code (0 <= row < 4)}.
+   * @param r       The scaling value.
+   *
    * @return {@code m}
    */
 
@@ -1989,11 +1812,7 @@ public final class MatrixM4x4F implements
     final double r)
   {
     return MatrixM4x4F.scaleRowUnsafe(
-      m,
-      MatrixM4x4F.rowCheck(row),
-      r,
-      context.getV4a(),
-      m);
+      m, MatrixM4x4F.rowCheck(row), r, context.getV4a(), m);
   }
 
   private static MatrixM4x4F scaleRowUnsafe(
@@ -2010,27 +1829,19 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Scale row {@code row} of the matrix {@code m} by {@code r}
-   * , saving the result to row {@code r} of {@code out}. The
-   * function uses preallocated storage in {@code context} to avoid
-   * allocating memory.
-   * </p>
+   * <p> Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
+   * result to row {@code r} of {@code out}. The function uses preallocated
+   * storage in {@code context} to avoid allocating memory. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 4)}.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param context Preallocated storage.
+   * @param m       The input matrix.
+   * @param row     The index of the row {@code (0 <= row < 4)}.
+   * @param r       The scaling value.
+   * @param out     The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -2042,26 +1853,19 @@ public final class MatrixM4x4F implements
     final MatrixM4x4F out)
   {
     return MatrixM4x4F.scaleRowUnsafe(
-      m,
-      MatrixM4x4F.rowCheck(row),
-      r,
-      context.getV4a(),
-      out);
+      m, MatrixM4x4F.rowCheck(row), r, context.getV4a(), out);
   }
 
   /**
-   * Set the value in the matrix {@code m} at row {@code row},
-   * column {@code column} to {@code value}.
+   * Set the value in the matrix {@code m} at row {@code row}, column {@code
+   * column} to {@code value}.
+   *
+   * @param m      The input matrix
+   * @param row    The row
+   * @param column The column
+   * @param value  The value
    *
    * @return {@code m}
-   * @param m
-   *          The input matrix
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
    */
 
   public static MatrixM4x4F set(
@@ -2077,8 +1881,8 @@ public final class MatrixM4x4F implements
   /**
    * Set the given matrix {@code m} to the identity matrix.
    *
-   * @param m
-   *          The input matrix
+   * @param m The input matrix
+   *
    * @return {@code m}
    */
 
@@ -2114,8 +1918,8 @@ public final class MatrixM4x4F implements
   /**
    * Set the given matrix {@code m} to the zero matrix.
    *
-   * @param m
-   *          The matrix
+   * @param m The matrix
+   *
    * @return {@code m}
    */
 
@@ -2123,20 +1927,22 @@ public final class MatrixM4x4F implements
     final MatrixM4x4F m)
   {
     m.view.clear();
-    for (int index = 0; index < (MatrixM4x4F.VIEW_ROWS * MatrixM4x4F.VIEW_COLS); ++index) {
+    for (int index = 0; index < (MatrixM4x4F.VIEW_ROWS
+                                 * MatrixM4x4F.VIEW_COLS); ++index) {
       m.view.put(index, 0.0f);
     }
     return m;
   }
 
   /**
-   * Return the trace of the matrix {@code m}. The trace is defined as
-   * the sum of the diagonal elements of the matrix.
+   * Return the trace of the matrix {@code m}. The trace is defined as the sum
+   * of the diagonal elements of the matrix.
+   *
+   * @param m The input matrix
+   *
+   * @return The trace of the matrix
    *
    * @since 5.0.0
-   * @param m
-   *          The input matrix
-   * @return The trace of the matrix
    */
 
   public static double trace(
@@ -2149,13 +1955,12 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code out}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m   The input matrix.
+   * @param out The output matrix.
+   *
    * @return {@code out}
    */
 
@@ -2168,11 +1973,11 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code m}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code m}.
    *
-   * @param m
-   *          The input matrix.
+   * @param m The input matrix.
+   *
    * @return {@code m}
    */
 
@@ -2190,64 +1995,6 @@ public final class MatrixM4x4F implements
     }
 
     return m;
-  }
-
-  private final ByteBuffer  data;
-  private final FloatBuffer view;
-
-  /**
-   * Construct a new identity matrix.
-   */
-
-  public MatrixM4x4F()
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM4x4F.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    this.data = b;
-
-    final FloatBuffer v = this.data.asFloatBuffer();
-    assert v != null;
-
-    this.view = v;
-    MatrixM4x4F.setIdentity(this);
-    this.view.rewind();
-  }
-
-  /**
-   * Construct a new copy of the given matrix.
-   *
-   * @param source
-   *          The source matrix.
-   */
-
-  public MatrixM4x4F(
-    final MatrixReadable4x4FType source)
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM4x4F.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    this.data = b;
-
-    final FloatBuffer v = this.data.asFloatBuffer();
-    assert v != null;
-
-    this.view = v;
-    this.view.rewind();
-
-    for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {
-      for (int col = 0; col < MatrixM4x4F.VIEW_COLS; ++col) {
-        this.setUnsafe(row, col, source.getRowColumnF(row, col));
-      }
-    }
   }
 
   @Override public boolean equals(
@@ -2307,12 +2054,10 @@ public final class MatrixM4x4F implements
   /**
    * Set the value at the given row and column.
    *
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
+   * @param row    The row
+   * @param column The column
+   * @param value  The value
+   *
    * @return {@code this}
    */
 
@@ -2334,8 +2079,8 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * Set the value at row {@code row} and {@code column} to
-   * {@code value} without bounds checking.
+   * Set the value at row {@code row} and {@code column} to {@code value}
+   * without bounds checking.
    *
    * This function is only accessible by code in the same package as this.
    */
@@ -2364,5 +2109,86 @@ public final class MatrixM4x4F implements
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  /**
+   * <p> The {@code ContextM4F} type contains the minimum storage required for
+   * all of the functions of the {@code MatrixM4x4F} class. </p> <p> The purpose
+   * of the class is to allow applications to allocate all storage ahead of time
+   * in order to allow functions in the class to avoid allocating memory (not
+   * including stack space) for intermediate calculations. This can reduce
+   * garbage collection in speed critical code. </p> <p> The user should
+   * allocate one {@code ContextM4F} value per thread, and then pass this value
+   * to matrix functions. Any matrix function that takes a {@code ContextM4F}
+   * value will not generate garbage. </p>
+   *
+   * @since 7.0.0
+   */
+
+  public static class ContextM4F
+  {
+    private final MatrixM3x3F m3a = new MatrixM3x3F();
+    private final MatrixM4x4F m4a = new MatrixM4x4F();
+    private final MatrixM4x4F m4b = new MatrixM4x4F();
+    private final VectorM3F   v3a = new VectorM3F();
+    private final VectorM3F   v3b = new VectorM3F();
+    private final VectorM3F   v3c = new VectorM3F();
+    private final VectorM3F   v3d = new VectorM3F();
+    private final VectorM4F   v4a = new VectorM4F();
+    private final VectorM4F   v4b = new VectorM4F();
+
+    /**
+     * Construct a new context.
+     */
+
+    public ContextM4F()
+    {
+
+    }
+
+    final MatrixM3x3F getM3a()
+    {
+      return this.m3a;
+    }
+
+    final MatrixM4x4F getM4a()
+    {
+      return this.m4a;
+    }
+
+    final MatrixM4x4F getM4b()
+    {
+      return this.m4b;
+    }
+
+    final VectorM3F getV3a()
+    {
+      return this.v3a;
+    }
+
+    final VectorM3F getV3b()
+    {
+      return this.v3b;
+    }
+
+    final VectorM3F getV3c()
+    {
+      return this.v3c;
+    }
+
+    final VectorM3F getV3d()
+    {
+      return this.v3d;
+    }
+
+    final VectorM4F getV4a()
+    {
+      return this.v4a;
+    }
+
+    final VectorM4F getV4b()
+    {
+      return this.v4b;
+    }
   }
 }

@@ -18,7 +18,6 @@ package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.parameterized.PVectorM4D;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
@@ -41,26 +40,20 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       final PVectorM4D<T> vr = this.newVectorM4D();
       PVectorM4D.absolute(v, vr);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getXD()),
-        vr.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getYD()),
-        vr.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getZD()),
-        vr.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getWD()),
-        vr.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getXD()), vr.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getYD()), vr.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getZD()), vr.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getWD()), vr.getWD()));
     }
   }
-
-
 
   @Override @Test public void testAbsoluteMutation()
   {
@@ -81,22 +74,18 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
 
       PVectorM4D.absoluteInPlace(v);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(orig_x),
-        v.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(orig_y),
-        v.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(orig_z),
-        v.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(orig_w),
-        v.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(orig_x), v.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(orig_y), v.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(orig_z), v.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(orig_w), v.getWD()));
     }
   }
 
@@ -127,22 +116,18 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       System.out.println("v1  : " + v1);
       System.out.println("vr0 : " + vr0);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getXD(),
-        v0.getXD() + v1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getYD(),
-        v0.getYD() + v1.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getZD(),
-        v0.getZD() + v1.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getWD(),
-        v0.getWD() + v1.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getXD(), v0.getXD() + v1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getYD(), v0.getYD() + v1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getZD(), v0.getZD() + v1.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getWD(), v0.getWD() + v1.getWD()));
 
       {
         final double orig_x = v0.getXD();
@@ -151,22 +136,18 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
         final double orig_w = v0.getWD();
         PVectorM4D.addInPlace(v0, v1);
 
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getXD(),
-          orig_x + v1.getXD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getYD(),
-          orig_y + v1.getYD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getZD(),
-          orig_z + v1.getZD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getWD(),
-          orig_w + v1.getWD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getXD(), orig_x + v1.getXD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getYD(), orig_y + v1.getYD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getZD(), orig_z + v1.getZD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getWD(), orig_w + v1.getWD()));
       }
     }
   }
@@ -252,22 +233,18 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       System.out.println("v1  : " + v1);
       System.out.println("vr0 : " + vr0);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getXD(),
-        v0.getXD() + (v1.getXD() * r)));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getYD(),
-        v0.getYD() + (v1.getYD() * r)));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getZD(),
-        v0.getZD() + (v1.getZD() * r)));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getWD(),
-        v0.getWD() + (v1.getWD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getXD(), v0.getXD() + (v1.getXD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getYD(), v0.getYD() + (v1.getYD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getZD(), v0.getZD() + (v1.getZD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getWD(), v0.getWD() + (v1.getWD() * r)));
 
       {
         final double orig_x = v0.getXD();
@@ -276,22 +253,18 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
         final double orig_w = v0.getWD();
         PVectorM4D.addScaledInPlace(v0, v1, r);
 
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getXD(),
-          orig_x + (v1.getXD() * r)));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getYD(),
-          orig_y + (v1.getYD() * r)));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getZD(),
-          orig_z + (v1.getZD() * r)));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getWD(),
-          orig_w + (v1.getWD() * r)));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getXD(), orig_x + (v1.getXD() * r)));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getYD(), orig_y + (v1.getYD() * r)));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getZD(), orig_z + (v1.getZD() * r)));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getWD(), orig_w + (v1.getWD() * r)));
       }
     }
   }
@@ -417,7 +390,8 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       final double max_y = Math.random() * Double.MIN_VALUE;
       final double max_z = Math.random() * Double.MIN_VALUE;
       final double max_w = Math.random() * Double.MIN_VALUE;
-      final PVectorM4D<T> maximum = this.newVectorM4D(max_x, max_y, max_z, max_w);
+      final PVectorM4D<T> maximum =
+        this.newVectorM4D(max_x, max_y, max_z, max_w);
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
@@ -426,8 +400,7 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       final PVectorM4D<T> v = this.newVectorM4D(x, y, z, w);
 
       final PVectorM4D<T> vr = this.newVectorM4D();
-      final PVectorM4D<T> vo =
-        PVectorM4D.clampMaximumByPVector(v, maximum, vr);
+      final PVectorM4D<T> vo = PVectorM4D.clampMaximumByPVector(v, maximum, vr);
 
       Assert.assertTrue(vo == vr);
       Assert.assertTrue(vr.getXD() <= maximum.getXD());
@@ -454,7 +427,8 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       final double min_y = Math.random() * Double.MAX_VALUE;
       final double min_z = Math.random() * Double.MAX_VALUE;
       final double min_w = Math.random() * Double.MAX_VALUE;
-      final PVectorM4D<T> minimum = this.newVectorM4D(min_x, min_y, min_z, min_w);
+      final PVectorM4D<T> minimum =
+        this.newVectorM4D(min_x, min_y, min_z, min_w);
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
@@ -463,8 +437,7 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       final PVectorM4D<T> v = this.newVectorM4D(x, y, z, w);
 
       final PVectorM4D<T> vr = this.newVectorM4D();
-      final PVectorM4D<T> vo =
-        PVectorM4D.clampMinimumByPVector(v, minimum, vr);
+      final PVectorM4D<T> vo = PVectorM4D.clampMinimumByPVector(v, minimum, vr);
 
       Assert.assertTrue(vo == vr);
       Assert.assertTrue(vr.getXD() >= minimum.getXD());
@@ -491,13 +464,15 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       final double min_y = Math.random() * Double.MIN_VALUE;
       final double min_z = Math.random() * Double.MIN_VALUE;
       final double min_w = Math.random() * Double.MIN_VALUE;
-      final PVectorM4D<T> minimum = this.newVectorM4D(min_x, min_y, min_z, min_w);
+      final PVectorM4D<T> minimum =
+        this.newVectorM4D(min_x, min_y, min_z, min_w);
 
       final double max_x = Math.random() * Double.MAX_VALUE;
       final double max_y = Math.random() * Double.MAX_VALUE;
       final double max_z = Math.random() * Double.MAX_VALUE;
       final double max_w = Math.random() * Double.MAX_VALUE;
-      final PVectorM4D<T> maximum = this.newVectorM4D(max_x, max_y, max_z, max_w);
+      final PVectorM4D<T> maximum =
+        this.newVectorM4D(max_x, max_y, max_z, max_w);
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
@@ -653,9 +628,10 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
   @Override @Test public void testCopy2Correct()
   {
     final PVectorM4D<T> v0 = this.newVectorM4D(
-      Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE);
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE);
     final PVectorM4D<T> v1 = this.newVectorM4D();
     final PVectorM4D<T> v2 = this.newVectorM4D();
 
@@ -677,9 +653,10 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
   @Override @Test public void testCopy3Correct()
   {
     final PVectorM4D<T> v0 = this.newVectorM4D(
-      Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE);
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE);
     final PVectorM4D<T> v1 = this.newVectorM4D();
     final PVectorM4D<T> v2 = this.newVectorM4D();
 
@@ -701,9 +678,10 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
   @Override @Test public void testCopy4Correct()
   {
     final PVectorM4D<T> v0 = this.newVectorM4D(
-      Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE, Math.random() * Double.MAX_VALUE, Math.random()
-        * Double.MAX_VALUE);
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE,
+      Math.random() * Double.MAX_VALUE);
     final PVectorM4D<T> v1 = this.newVectorM4D();
     final PVectorM4D<T> v2 = this.newVectorM4D();
 
@@ -726,25 +704,27 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
-    Assert.assertTrue(PVectorM4D.almostEqual(
-      ec, this.newVectorM4D(), this.newVectorM4D(0, 0, 0, 1)));
+    Assert.assertTrue(
+      PVectorM4D.almostEqual(
+        ec, this.newVectorM4D(), this.newVectorM4D(0, 0, 0, 1)));
   }
 
   @Override @Test public void testDistance()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final PVectorM4D.ContextPVM4D c = new PVectorM4D.ContextPVM4D();
 
     final PVectorM4D<T> v0 = this.newVectorM4D(0.0, 1.0, 0.0, 0.0);
     final PVectorM4D<T> v1 = this.newVectorM4D(0.0, 0.0, 0.0, 0.0);
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      PVectorM4D.distance(v0, v1),
-      1.0));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, PVectorM4D.distance(c, v0, v1), 1.0));
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final PVectorM4D.ContextPVM4D c = new PVectorM4D.ContextPVM4D();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
@@ -758,7 +738,7 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       final double w1 = Math.random() * Double.MAX_VALUE;
       final PVectorM4D<T> v1 = this.newVectorM4D(x1, y1, z1, w1);
 
-      Assert.assertTrue(PVectorM4D.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(PVectorM4D.distance(c, v0, v1) >= 0.0);
     }
   }
 
@@ -1027,6 +1007,7 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final PVectorM4D.ContextPVM4D c = new PVectorM4D.ContextPVM4D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -1043,42 +1024,34 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
 
       final PVectorM4D<T> vr0 = this.newVectorM4D();
       final PVectorM4D<T> vr1 = this.newVectorM4D();
-      PVectorM4D.interpolateLinear(v0, v1, 0.0, vr0);
-      PVectorM4D.interpolateLinear(v0, v1, 1.0, vr1);
+      PVectorM4D.interpolateLinear(c, v0, v1, 0.0, vr0);
+      PVectorM4D.interpolateLinear(c, v0, v1, 1.0, vr1);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v0.getXD(),
-        vr0.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v0.getYD(),
-        vr0.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v0.getZD(),
-        vr0.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v0.getWD(),
-        vr0.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v0.getXD(), vr0.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v0.getYD(), vr0.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v0.getZD(), vr0.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v0.getWD(), vr0.getWD()));
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v1.getXD(),
-        vr1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v1.getYD(),
-        vr1.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v1.getZD(),
-        vr1.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v1.getWD(),
-        vr1.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v1.getXD(), vr1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v1.getYD(), vr1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v1.getZD(), vr1.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v1.getWD(), vr1.getWD()));
     }
   }
 
@@ -1186,22 +1159,25 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
 
   @Override @Test public void testOrthonormalize()
   {
+    final PVectorM4D.ContextPVM4D c = new PVectorM4D.ContextPVM4D();
     final PVectorM4D<T> v0 = this.newVectorM4D(0, 1, 0, 0);
     final PVectorM4D<T> v1 = this.newVectorM4D(0.5, 0.5, 0, 0);
 
-    final Pair<PVectorM4D<T>, PVectorM4D<T>> r =
-      PVectorM4D.orthoNormalize(v0, v1);
+    final PVectorM4D<T> v0_out = new PVectorM4D<T>();
+    final PVectorM4D<T> v1_out = new PVectorM4D<T>();
+    PVectorM4D.orthoNormalize(c, v0, v0_out, v1, v1_out);
 
-    Assert.assertEquals(this.newVectorM4D(0, 1, 0, 0), r.getLeft());
-    Assert.assertEquals(this.newVectorM4D(1, 0, 0, 0), r.getRight());
+    Assert.assertEquals(this.newVectorM4D(0, 1, 0, 0), v0_out);
+    Assert.assertEquals(this.newVectorM4D(1, 0, 0, 0), v1_out);
   }
 
   @Override @Test public void testOrthonormalizeMutation()
   {
+    final PVectorM4D.ContextPVM4D c = new PVectorM4D.ContextPVM4D();
     final PVectorM4D<T> v0 = this.newVectorM4D(0, 1, 0, 0);
     final PVectorM4D<T> v1 = this.newVectorM4D(0.5, 0.5, 0, 0);
 
-    PVectorM4D.orthoNormalizeInPlace(v0, v1);
+    PVectorM4D.orthoNormalizeInPlace(c, v0, v1);
 
     Assert.assertEquals(this.newVectorM4D(0, 1, 0, 0), v0);
     Assert.assertEquals(this.newVectorM4D(1, 0, 0, 0), v1);
@@ -1286,22 +1262,18 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       PVectorM4D.scale(v, 1.0, vr);
 
       final ContextRelative context = new ContextRelative();
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        context,
-        v.getXD(),
-        vr.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        context,
-        v.getYD(),
-        vr.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        context,
-        v.getZD(),
-        vr.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        context,
-        v.getWD(),
-        vr.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          context, v.getXD(), vr.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          context, v.getYD(), vr.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          context, v.getZD(), vr.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          context, v.getWD(), vr.getWD()));
 
       {
         final double orig_x = v.getXD();
@@ -1311,14 +1283,10 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
 
         PVectorM4D.scaleInPlace(v, 1.0);
 
-        Assert
-          .assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), orig_x));
-        Assert
-          .assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), orig_y));
-        Assert
-          .assertTrue(AlmostEqualDouble.almostEqual(ec, v.getZD(), orig_z));
-        Assert
-          .assertTrue(AlmostEqualDouble.almostEqual(ec, v.getWD(), orig_w));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), orig_x));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), orig_y));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getZD(), orig_z));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getWD(), orig_w));
       }
     }
   }
@@ -1340,22 +1308,18 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       PVectorM4D.scale(v, 0.0, vr);
 
       final ContextRelative context = new ContextRelative();
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        context,
-        vr.getXD(),
-        0.0));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        context,
-        vr.getYD(),
-        0.0));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        context,
-        vr.getZD(),
-        0.0));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        context,
-        vr.getWD(),
-        0.0));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          context, vr.getXD(), 0.0));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          context, vr.getYD(), 0.0));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          context, vr.getZD(), 0.0));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          context, vr.getWD(), 0.0));
 
       {
         PVectorM4D.scaleInPlace(v, 0.0);
@@ -1395,22 +1359,18 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
       final PVectorM4D<T> vr0 = this.newVectorM4D();
       PVectorM4D.subtract(v0, v1, vr0);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getXD(),
-        v0.getXD() - v1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getYD(),
-        v0.getYD() - v1.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getZD(),
-        v0.getZD() - v1.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr0.getWD(),
-        v0.getWD() - v1.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getXD(), v0.getXD() - v1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getYD(), v0.getYD() - v1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getZD(), v0.getZD() - v1.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr0.getWD(), v0.getWD() - v1.getWD()));
 
       {
         final double orig_x = v0.getXD();
@@ -1419,22 +1379,18 @@ public abstract class PVectorM4DContract<T> extends PVectorM4Contract
         final double orig_w = v0.getWD();
         PVectorM4D.subtractInPlace(v0, v1);
 
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getXD(),
-          orig_x - v1.getXD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getYD(),
-          orig_y - v1.getYD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getZD(),
-          orig_z - v1.getZD()));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(
-          ec,
-          v0.getWD(),
-          orig_w - v1.getWD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getXD(), orig_x - v1.getXD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getYD(), orig_y - v1.getYD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getZD(), orig_z - v1.getZD()));
+        Assert.assertTrue(
+          AlmostEqualDouble.almostEqual(
+            ec, v0.getWD(), orig_w - v1.getWD()));
       }
     }
   }

@@ -749,6 +749,7 @@ public abstract class PVectorM2DContract<T> extends PVectorM2Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final PVectorM2D.ContextPVM2D c = new PVectorM2D.ContextPVM2D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -761,8 +762,8 @@ public abstract class PVectorM2DContract<T> extends PVectorM2Contract
 
       final PVectorM2D<T> vr0 = this.newVectorM2D();
       final PVectorM2D<T> vr1 = this.newVectorM2D();
-      PVectorM2D.interpolateLinear(v0, v1, 0.0, vr0);
-      PVectorM2D.interpolateLinear(v0, v1, 1.0, vr1);
+      PVectorM2D.interpolateLinear(c, v0, v1, 0.0, vr0);
+      PVectorM2D.interpolateLinear(c, v0, v1, 1.0, vr1);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(

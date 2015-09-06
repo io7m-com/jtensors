@@ -24,29 +24,33 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 
+//@formatter:off
+
 /**
  * <p>
  * A 2x2 mutable matrix type with double precision elements.
  * </p>
  * <p>
- * Values of type {@code MatrixM2x2D} are backed by direct memory, with
- * the rows and columns of the matrices being stored in column-major format.
- * This allows the matrices to be passed to OpenGL directly, without requiring
+ * Values of type {@code MatrixM2x2D} are backed by direct memory, with the
+ * rows and columns of the matrices being stored in column-major format. This
+ * allows the matrices to be passed to OpenGL directly, without requiring
  * transposition.
  * </p>
  * <p>
- * Values of this type cannot be accessed safely from multiple threads without
- * explicit synchronization.
+ * Values of this type cannot be accessed safely from multiple threads
+ * without explicit synchronization.
  * </p>
  * <p>
- * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed for
- * the derivations of most of the code in this class (ISBN: 1-58450-277-0).
+ * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed
+ * for the derivations of most of the code in this class (ISBN: 1-58450-277-0).
  * </p>
  * <p>
- * See <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>
+ * See http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations
  * for the three <i>elementary</i> operations defined on matrices.
  * </p>
  */
+
+//@formatter:on
 
 public final class MatrixM2x2D implements
   MatrixDirectReadable2x2DType,

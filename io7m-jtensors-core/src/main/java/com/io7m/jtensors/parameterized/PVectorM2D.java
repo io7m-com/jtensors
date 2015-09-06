@@ -615,32 +615,34 @@ public final class PVectorM2D<T>
    * The {@code alpha} parameter controls the degree of interpolation, such
    * that:
    *
-   * <ul> <li>{@code interpolateLinear(v0, v1, 0.0, r) → r = v0}</li>
-   * <li>{@code interpolateLinear(v0, v1, 1.0, r) → r = v1}</li> </ul>
+   * <ul> <li>{@code interpolateLinear(v0, v1, 0.0, r) -> r = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -> r = v1}</li> </ul>
    *
-   * @param v0    The left input vector.
-   * @param v1    The right input vector.
-   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}.
-   * @param r     The result vector.
-   * @param <T>   A phantom type parameter.
-   * @param <V>   The precise type of writable vector
+   * @param c     Preallocated storage
+   * @param v0    The left input vector
+   * @param v1    The right input vector
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}
+   * @param r     The result vector
+   * @param <V>   The precise type of vector
+   * @param <T>   A phantom type parameter
    *
    * @return {@code r}
+   *
+   * @since 7.0.0
    */
 
   public static <T, V extends PVectorWritable2DType<T>> V interpolateLinear(
+    final ContextPVM2D c,
     final PVectorReadable2DType<T> v0,
     final PVectorReadable2DType<T> v1,
     final double alpha,
     final V r)
   {
-    final PVectorM2D<T> w0 = new PVectorM2D<T>();
-    final PVectorM2D<T> w1 = new PVectorM2D<T>();
-
-    PVectorM2D.scale(v0, 1.0 - alpha, w0);
-    PVectorM2D.scale(v1, alpha, w1);
-
-    return PVectorM2D.add(w0, w1, r);
+    final PVectorM2D<T> va = (PVectorM2D<T>) c.va;
+    final PVectorM2D<T> vb = (PVectorM2D<T>) c.vb;
+    PVectorM2D.scale(v0, 1.0 - alpha, va);
+    PVectorM2D.scale(v1, alpha, vb);
+    return PVectorM2D.add(va, vb, r);
   }
 
   /**
@@ -969,5 +971,30 @@ public final class PVectorM2D<T>
     builder.append("]");
     final String r = builder.toString();
     return NullCheck.notNull(r);
+  }
+
+  /**
+   * Preallocated storage to allow all vector functions to run without
+   * allocating.
+   *
+   * @since 7.0.0
+   */
+
+  public static final class ContextPVM2D
+  {
+    private final PVectorM2D<?> va;
+    private final PVectorM2D<?> vb;
+    private final PVectorM2D<?> vc;
+
+    /**
+     * Construct preallocated storage.
+     */
+
+    public ContextPVM2D()
+    {
+      this.va = new PVectorM2D<Object>();
+      this.vb = new PVectorM2D<Object>();
+      this.vc = new PVectorM2D<Object>();
+    }
   }
 }
