@@ -49,9 +49,9 @@ import java.util.Arrays;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         if (row == col) {
-          m[row][col] = (double) 1.0;
+          m[row][col] = 1.0;
         } else {
-          m[row][col] = (double) 0.0;
+          m[row][col] = 0.0;
         }
       }
     }
@@ -142,10 +142,7 @@ import java.util.Arrays;
       return false;
     }
     final MatrixI3x3D other = (MatrixI3x3D) obj;
-    if (!Arrays.deepEquals(this.elements, other.elements)) {
-      return false;
-    }
-    return true;
+    return Arrays.deepEquals(this.elements, other.elements);
   }
 
   @Override public <V extends VectorWritable3DType> void getRow3D(

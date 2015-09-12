@@ -19,7 +19,6 @@ package com.io7m.jtensors.tests.parameterized;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
 import com.io7m.jequality.AlmostEqualFloat;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.parameterized.PVectorM4F;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
@@ -391,7 +390,8 @@ public abstract class PVectorM4FContract<T> extends PVectorM4Contract
       final float max_y = (float) (Math.random() * Float.MIN_VALUE);
       final float max_z = (float) (Math.random() * Float.MIN_VALUE);
       final float max_w = (float) (Math.random() * Float.MIN_VALUE);
-      final PVectorM4F<T> maximum = this.newVectorM4F(max_x, max_y, max_z, max_w);
+      final PVectorM4F<T> maximum =
+        this.newVectorM4F(max_x, max_y, max_z, max_w);
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
@@ -427,7 +427,8 @@ public abstract class PVectorM4FContract<T> extends PVectorM4Contract
       final float min_y = (float) (Math.random() * Float.MAX_VALUE);
       final float min_z = (float) (Math.random() * Float.MAX_VALUE);
       final float min_w = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorM4F<T> minimum = this.newVectorM4F(min_x, min_y, min_z, min_w);
+      final PVectorM4F<T> minimum =
+        this.newVectorM4F(min_x, min_y, min_z, min_w);
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
@@ -463,13 +464,15 @@ public abstract class PVectorM4FContract<T> extends PVectorM4Contract
       final float min_y = (float) (Math.random() * Float.MIN_VALUE);
       final float min_z = (float) (Math.random() * Float.MIN_VALUE);
       final float min_w = (float) (Math.random() * Float.MIN_VALUE);
-      final PVectorM4F<T> minimum = this.newVectorM4F(min_x, min_y, min_z, min_w);
+      final PVectorM4F<T> minimum =
+        this.newVectorM4F(min_x, min_y, min_z, min_w);
 
       final float max_x = (float) (Math.random() * Float.MAX_VALUE);
       final float max_y = (float) (Math.random() * Float.MAX_VALUE);
       final float max_z = (float) (Math.random() * Float.MAX_VALUE);
       final float max_w = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorM4F<T> maximum = this.newVectorM4F(max_x, max_y, max_z, max_w);
+      final PVectorM4F<T> maximum =
+        this.newVectorM4F(max_x, max_y, max_z, max_w);
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
@@ -708,16 +711,18 @@ public abstract class PVectorM4FContract<T> extends PVectorM4Contract
 
   @Override @Test public void testDistance()
   {
+    final PVectorM4F.ContextPVM4F c = new PVectorM4F.ContextPVM4F();
     final PVectorM4F<T> v0 = this.newVectorM4F(0.0f, 1.0f, 0.0f, 0.0f);
     final PVectorM4F<T> v1 = this.newVectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final ContextRelative context = new ContextRelative();
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
-        context, PVectorM4F.distance(v0, v1), 1.0f));
+        context, PVectorM4F.distance(c, v0, v1), 1.0f));
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final PVectorM4F.ContextPVM4F c = new PVectorM4F.ContextPVM4F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -731,7 +736,7 @@ public abstract class PVectorM4FContract<T> extends PVectorM4Contract
       final float w1 = (float) (Math.random() * Float.MAX_VALUE);
       final PVectorM4F<T> v1 = this.newVectorM4F(x1, y1, z1, w1);
 
-      Assert.assertTrue(PVectorM4F.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(PVectorM4F.distance(c, v0, v1) >= 0.0);
     }
   }
 
@@ -1000,6 +1005,7 @@ public abstract class PVectorM4FContract<T> extends PVectorM4Contract
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
+    final PVectorM4F.ContextPVM4F c = new PVectorM4F.ContextPVM4F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -1016,8 +1022,8 @@ public abstract class PVectorM4FContract<T> extends PVectorM4Contract
 
       final PVectorM4F<T> vr0 = this.newVectorM4F();
       final PVectorM4F<T> vr1 = this.newVectorM4F();
-      PVectorM4F.interpolateLinear(v0, v1, 0.0f, vr0);
-      PVectorM4F.interpolateLinear(v0, v1, 1.0f, vr1);
+      PVectorM4F.interpolateLinear(c, v0, v1, 0.0f, vr0);
+      PVectorM4F.interpolateLinear(c, v0, v1, 1.0f, vr1);
 
       Assert.assertTrue(
         AlmostEqualFloat.almostEqual(
@@ -1156,22 +1162,25 @@ public abstract class PVectorM4FContract<T> extends PVectorM4Contract
 
   @Override @Test public void testOrthonormalize()
   {
+    final PVectorM4F.ContextPVM4F c = new PVectorM4F.ContextPVM4F();
     final PVectorM4F<T> v0 = this.newVectorM4F(0, 1, 0, 0);
+    final PVectorM4F<T> v0_out = this.newVectorM4F();
     final PVectorM4F<T> v1 = this.newVectorM4F(0.5f, 0.5f, 0, 0);
+    final PVectorM4F<T> v1_out = this.newVectorM4F();
 
-    final Pair<PVectorM4F<T>, PVectorM4F<T>> r =
-      PVectorM4F.orthoNormalize(v0, v1);
+    PVectorM4F.orthoNormalize(c, v0, v0_out, v1, v1_out);
 
-    Assert.assertEquals(this.newVectorM4F(0, 1, 0, 0), r.getLeft());
-    Assert.assertEquals(this.newVectorM4F(1, 0, 0, 0), r.getRight());
+    Assert.assertEquals(this.newVectorM4F(0, 1, 0, 0), v0_out);
+    Assert.assertEquals(this.newVectorM4F(1, 0, 0, 0), v1_out);
   }
 
   @Override @Test public void testOrthonormalizeMutation()
   {
+    final PVectorM4F.ContextPVM4F c = new PVectorM4F.ContextPVM4F();
     final PVectorM4F<T> v0 = this.newVectorM4F(0f, 1f, 0f, 0f);
     final PVectorM4F<T> v1 = this.newVectorM4F(0.5f, 0.5f, 0f, 0f);
 
-    PVectorM4F.orthoNormalizeInPlace(v0, v1);
+    PVectorM4F.orthoNormalizeInPlace(c, v0, v1);
 
     Assert.assertEquals(this.newVectorM4F(0, 1, 0, 0), v0);
     Assert.assertEquals(this.newVectorM4F(1, 0, 0, 0), v1);
@@ -1256,17 +1265,13 @@ public abstract class PVectorM4FContract<T> extends PVectorM4Contract
       PVectorM4F.scale(v, 1.0f, vr);
 
       Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          ec, v.getXF(), vr.getXF()));
+        AlmostEqualFloat.almostEqual(ec, v.getXF(), vr.getXF()));
       Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          ec, v.getYF(), vr.getYF()));
+        AlmostEqualFloat.almostEqual(ec, v.getYF(), vr.getYF()));
       Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          ec, v.getZF(), vr.getZF()));
+        AlmostEqualFloat.almostEqual(ec, v.getZF(), vr.getZF()));
       Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          ec, v.getWF(), vr.getWF()));
+        AlmostEqualFloat.almostEqual(ec, v.getWF(), vr.getWF()));
 
       {
         final float orig_x = v.getXF();

@@ -840,10 +840,7 @@ import net.jcip.annotations.Immutable;
     if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
       return false;
     }
-    if (Float.floatToIntBits(this.z) != Float.floatToIntBits(other.z)) {
-      return false;
-    }
-    return true;
+    return Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
   }
 
   @Override public float getWF()

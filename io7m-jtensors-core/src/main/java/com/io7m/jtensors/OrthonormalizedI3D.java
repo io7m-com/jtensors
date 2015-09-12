@@ -86,10 +86,7 @@ import net.jcip.annotations.Immutable;
     if (!this.rv1.equals(other.rv1)) {
       return false;
     }
-    if (!this.rv2.equals(other.rv2)) {
-      return false;
-    }
-    return true;
+    return this.rv2.equals(other.rv2);
   }
 
   /**

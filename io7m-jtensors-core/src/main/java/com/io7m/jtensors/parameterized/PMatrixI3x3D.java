@@ -189,10 +189,7 @@ import java.util.Arrays;
       return false;
     }
     final PMatrixI3x3D<?, ?> other = (PMatrixI3x3D<?, ?>) obj;
-    if (!Arrays.deepEquals(this.elements, other.elements)) {
-      return false;
-    }
-    return true;
+    return Arrays.deepEquals(this.elements, other.elements);
   }
 
   @Override public <V extends VectorWritable3DType> void getRow3D(

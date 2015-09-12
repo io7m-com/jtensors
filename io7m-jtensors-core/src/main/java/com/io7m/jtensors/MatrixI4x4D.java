@@ -49,9 +49,9 @@ import java.util.Arrays;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         if (row == col) {
-          m[row][col] = (double) 1.0;
+          m[row][col] = 1.0;
         } else {
-          m[row][col] = (double) 0.0;
+          m[row][col] = 0.0;
         }
       }
     }
@@ -153,10 +153,7 @@ import java.util.Arrays;
       return false;
     }
     final MatrixI4x4D other = (MatrixI4x4D) obj;
-    if (!Arrays.deepEquals(this.elements, other.elements)) {
-      return false;
-    }
-    return true;
+    return Arrays.deepEquals(this.elements, other.elements);
   }
 
   @Override public <V extends VectorWritable4DType> void getRow4D(

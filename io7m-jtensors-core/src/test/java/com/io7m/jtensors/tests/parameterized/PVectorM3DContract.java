@@ -17,7 +17,6 @@
 package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jequality.AlmostEqualDouble;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.parameterized.PVectorM3D;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
@@ -635,16 +634,18 @@ public abstract class PVectorM3DContract<T> extends PVectorM3Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final PVectorM3D.ContextPVM3D c = new PVectorM3D.ContextPVM3D();
 
     final PVectorM3D<T> v0 = this.newVectorM3D(0.0f, 1.0f, 0.0f);
     final PVectorM3D<T> v1 = this.newVectorM3D(0.0f, 0.0f, 0.0f);
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
-        ec, PVectorM3D.distance(v0, v1), 1.0f));
+        ec, PVectorM3D.distance(c, v0, v1), 1.0f));
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final PVectorM3D.ContextPVM3D c = new PVectorM3D.ContextPVM3D();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
@@ -656,7 +657,7 @@ public abstract class PVectorM3DContract<T> extends PVectorM3Contract
       final double z1 = Math.random() * Double.MAX_VALUE;
       final PVectorM3D<T> v1 = this.newVectorM3D(x1, y1, z1);
 
-      Assert.assertTrue(PVectorM3D.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(PVectorM3D.distance(c, v0, v1) >= 0.0);
     }
   }
 
@@ -904,6 +905,7 @@ public abstract class PVectorM3DContract<T> extends PVectorM3Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final PVectorM3D.ContextPVM3D c = new PVectorM3D.ContextPVM3D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -918,8 +920,8 @@ public abstract class PVectorM3DContract<T> extends PVectorM3Contract
 
       final PVectorM3D<T> vr0 = this.newVectorM3D();
       final PVectorM3D<T> vr1 = this.newVectorM3D();
-      PVectorM3D.interpolateLinear(v0, v1, 0.0f, vr0);
-      PVectorM3D.interpolateLinear(v0, v1, 1.0f, vr1);
+      PVectorM3D.interpolateLinear(c, v0, v1, 0.0f, vr0);
+      PVectorM3D.interpolateLinear(c, v0, v1, 1.0f, vr1);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -1051,22 +1053,25 @@ public abstract class PVectorM3DContract<T> extends PVectorM3Contract
 
   @Override @Test public void testOrthonormalize()
   {
+    final PVectorM3D.ContextPVM3D c = new PVectorM3D.ContextPVM3D();
     final PVectorM3D<T> v0 = this.newVectorM3D(0, 1, 0);
+    final PVectorM3D<T> v0_out = this.newVectorM3D();
     final PVectorM3D<T> v1 = this.newVectorM3D(0.5f, 0.5f, 0);
+    final PVectorM3D<T> v1_out = this.newVectorM3D();
 
-    final Pair<PVectorM3D<T>, PVectorM3D<T>> r =
-      PVectorM3D.orthoNormalize(v0, v1);
+    PVectorM3D.orthoNormalize(c, v0, v0_out, v1, v1_out);
 
-    Assert.assertEquals(this.newVectorM3D(0, 1, 0), r.getLeft());
-    Assert.assertEquals(this.newVectorM3D(1, 0, 0), r.getRight());
+    Assert.assertEquals(this.newVectorM3D(0, 1, 0), v0_out);
+    Assert.assertEquals(this.newVectorM3D(1, 0, 0), v1_out);
   }
 
   @Override @Test public void testOrthonormalizeMutation()
   {
+    final PVectorM3D.ContextPVM3D c = new PVectorM3D.ContextPVM3D();
     final PVectorM3D<T> v0 = this.newVectorM3D(0f, 1f, 0f);
     final PVectorM3D<T> v1 = this.newVectorM3D(0.5f, 0.5f, 0f);
 
-    PVectorM3D.orthoNormalizeInPlace(v0, v1);
+    PVectorM3D.orthoNormalizeInPlace(c, v0, v1);
 
     Assert.assertEquals(this.newVectorM3D(0, 1, 0), v0);
     Assert.assertEquals(this.newVectorM3D(1, 0, 0), v1);

@@ -239,7 +239,8 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
       final int max_y = PVectorM4IContract.randomNegativeNumber();
       final int max_z = PVectorM4IContract.randomNegativeNumber();
       final int max_w = PVectorM4IContract.randomNegativeNumber();
-      final PVectorM4I<T> maximum = this.newVectorM4I(max_x, max_y, max_z, max_w);
+      final PVectorM4I<T> maximum =
+        this.newVectorM4I(max_x, max_y, max_z, max_w);
 
       final int x = PVectorM4IContract.randomNegativeNumber();
       final int y = PVectorM4IContract.randomNegativeNumber();
@@ -275,7 +276,8 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
       final int min_y = PVectorM4IContract.randomPositiveNumber();
       final int min_z = PVectorM4IContract.randomPositiveNumber();
       final int min_w = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> minimum = this.newVectorM4I(min_x, min_y, min_z, min_w);
+      final PVectorM4I<T> minimum =
+        this.newVectorM4I(min_x, min_y, min_z, min_w);
 
       final int x = PVectorM4IContract.randomNegativeNumber();
       final int y = PVectorM4IContract.randomNegativeNumber();
@@ -311,13 +313,15 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
       final int min_y = PVectorM4IContract.randomNegativeNumber();
       final int min_z = PVectorM4IContract.randomNegativeNumber();
       final int min_w = PVectorM4IContract.randomNegativeNumber();
-      final PVectorM4I<T> minimum = this.newVectorM4I(min_x, min_y, min_z, min_w);
+      final PVectorM4I<T> minimum =
+        this.newVectorM4I(min_x, min_y, min_z, min_w);
 
       final int max_x = PVectorM4IContract.randomPositiveNumber();
       final int max_y = PVectorM4IContract.randomPositiveNumber();
       final int max_z = PVectorM4IContract.randomPositiveNumber();
       final int max_w = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> maximum = this.newVectorM4I(max_x, max_y, max_z, max_w);
+      final PVectorM4I<T> maximum =
+        this.newVectorM4I(max_x, max_y, max_z, max_w);
 
       final int x = PVectorM4IContract.randomNegativeNumber();
       final int y = PVectorM4IContract.randomPositiveNumber();
@@ -553,13 +557,15 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
 
   @Override @Test public void testDistance()
   {
+    final PVectorM4I.ContextPVM4I c = new PVectorM4I.ContextPVM4I();
     final PVectorM4I<T> v0 = this.newVectorM4I(0, 1, 0, 0);
     final PVectorM4I<T> v1 = this.newVectorM4I(0, 0, 0, 0);
-    Assert.assertTrue(PVectorM4I.distance(v0, v1) == 1);
+    Assert.assertTrue(PVectorM4I.distance(c, v0, v1) == 1);
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final PVectorM4I.ContextPVM4I c = new PVectorM4I.ContextPVM4I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = PVectorM4IContract.randomPositiveSmallNumber();
       final int y0 = PVectorM4IContract.randomPositiveSmallNumber();
@@ -573,7 +579,7 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
       final int w1 = PVectorM4IContract.randomPositiveSmallNumber();
       final PVectorM4I<T> v1 = this.newVectorM4I(x1, y1, z1, w1);
 
-      Assert.assertTrue(PVectorM4I.distance(v0, v1) >= 0);
+      Assert.assertTrue(PVectorM4I.distance(c, v0, v1) >= 0);
     }
   }
 
@@ -848,6 +854,7 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
+    final PVectorM4I.ContextPVM4I c = new PVectorM4I.ContextPVM4I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = PVectorM4IContract.randomPositiveNumber();
       final int y0 = PVectorM4IContract.randomPositiveNumber();
@@ -863,8 +870,8 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
 
       final PVectorM4I<T> vr0 = this.newVectorM4I();
       final PVectorM4I<T> vr1 = this.newVectorM4I();
-      PVectorM4I.interpolateLinear(v0, v1, 0, vr0);
-      PVectorM4I.interpolateLinear(v0, v1, 1, vr1);
+      PVectorM4I.interpolateLinear(c, v0, v1, 0, vr0);
+      PVectorM4I.interpolateLinear(c, v0, v1, 1, vr1);
 
       Assert.assertTrue(v0.getXI() == vr0.getXI());
       Assert.assertTrue(v0.getYI() == vr0.getYI());

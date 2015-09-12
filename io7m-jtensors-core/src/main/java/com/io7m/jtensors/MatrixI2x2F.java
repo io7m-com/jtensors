@@ -133,10 +133,7 @@ import java.util.Arrays;
       return false;
     }
     final MatrixI2x2F other = (MatrixI2x2F) obj;
-    if (!Arrays.deepEquals(this.elements, other.elements)) {
-      return false;
-    }
-    return true;
+    return Arrays.deepEquals(this.elements, other.elements);
   }
 
   @Override public <V extends VectorWritable2FType> void getRow2F(

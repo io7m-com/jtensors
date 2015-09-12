@@ -483,13 +483,15 @@ public abstract class PVectorM3LContract<T> extends PVectorM3Contract
 
   @Override @Test public void testDistance()
   {
+    final PVectorM3L.ContextPVM3L c = new PVectorM3L.ContextPVM3L();
     final PVectorM3L<T> v0 = this.newVectorM3L(0, 1, 0);
     final PVectorM3L<T> v1 = this.newVectorM3L(0, 0, 0);
-    Assert.assertTrue(PVectorM3L.distance(v0, v1) == 1);
+    Assert.assertTrue(PVectorM3L.distance(c, v0, v1) == 1);
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final PVectorM3L.ContextPVM3L c = new PVectorM3L.ContextPVM3L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorM3LContract.randomPositiveSmallNumber();
@@ -502,7 +504,7 @@ public abstract class PVectorM3LContract<T> extends PVectorM3Contract
       final long z1 = PVectorM3LContract.randomPositiveSmallNumber();
       final PVectorM3L<T> v1 = this.newVectorM3L(x1, y1, z1);
 
-      Assert.assertTrue(PVectorM3L.distance(v0, v1) >= 0);
+      Assert.assertTrue(PVectorM3L.distance(c, v0, v1) >= 0);
     }
   }
 
@@ -757,6 +759,7 @@ public abstract class PVectorM3LContract<T> extends PVectorM3Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
+    final PVectorM3L.ContextPVM3L c = new PVectorM3L.ContextPVM3L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorM3LContract.randomPositiveNumber();
@@ -771,8 +774,8 @@ public abstract class PVectorM3LContract<T> extends PVectorM3Contract
 
       final PVectorM3L<T> vr0 = this.newVectorM3L();
       final PVectorM3L<T> vr1 = this.newVectorM3L();
-      PVectorM3L.interpolateLinear(v0, v1, 0, vr0);
-      PVectorM3L.interpolateLinear(v0, v1, 1, vr1);
+      PVectorM3L.interpolateLinear(c, v0, v1, 0, vr0);
+      PVectorM3L.interpolateLinear(c, v0, v1, 1, vr1);
 
       Assert.assertTrue(v0.getXL() == vr0.getXL());
       Assert.assertTrue(v0.getYL() == vr0.getYL());

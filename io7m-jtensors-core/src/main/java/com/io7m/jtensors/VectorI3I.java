@@ -544,10 +544,7 @@ import net.jcip.annotations.Immutable;
     if (this.y != other.y) {
       return false;
     }
-    if (this.z != other.z) {
-      return false;
-    }
-    return true;
+    return this.z == other.z;
   }
 
   @Override public int getXI()

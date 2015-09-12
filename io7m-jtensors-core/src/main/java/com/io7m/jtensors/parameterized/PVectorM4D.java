@@ -25,7 +25,6 @@ import com.io7m.jtensors.VectorM4D;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.VectorReadable4DType;
-import com.io7m.jtensors.VectorWritable4DType;
 
 /**
  * <p> A four-dimensional mutable vector type with double precision elements.
@@ -34,6 +33,7 @@ import com.io7m.jtensors.VectorWritable4DType;
  * <p> Values of this type cannot be accessed safely from multiple threads
  * without explicit synchronization. </p>
  *
+ * @since 7.0.0
  * @param <T> A phantom type parameter
  */
 
@@ -776,8 +776,8 @@ public final class PVectorM4D<T>
     final PVectorM4D<T> vb = (PVectorM4D<T>) c.vb;
     final PVectorM4D<T> vc = (PVectorM4D<T>) c.vc;
     PVectorM4D.normalize(v0, va);
-    PVectorM4D.scale(va, VectorM4D.dotProduct(v1, va), vb);
-    PVectorM4D.normalizeInPlace(VectorM4D.subtract(v1, vb, vc));
+    PVectorM4D.scale(va, PVectorM4D.dotProduct(v1, va), vb);
+    PVectorM4D.normalizeInPlace(PVectorM4D.subtract(v1, vb, vc));
     PVectorM4D.copy(va, v0_out);
     PVectorM4D.copy(vc, v1_out);
   }
@@ -789,23 +789,26 @@ public final class PVectorM4D<T>
    * @param c   Preallocated storage
    * @param v0  The left vector
    * @param v1  The right vector
-   * @param <V> The precise type of readable/writable vector
-   * @param <W> The precise type of readable/writable vector
+   * @param <V> The precise type of vector
+   * @param <T> A phantom type parameter
    *
    * @since 7.0.0
    */
 
-  public static <V extends VectorWritable4DType & VectorReadable4DType, W
-    extends VectorWritable4DType & VectorReadable4DType> void
-  orthoNormalizeInPlace(
+  public static <T, V extends PVectorWritable4DType<T> &
+    PVectorReadable4DType<T>> void orthoNormalizeInPlace(
     final ContextPVM4D c,
     final V v0,
-    final W v1)
+    final V v1)
   {
-    VectorM4D.normalizeInPlace(v0);
-    VectorM4D.scale(v0, VectorM4D.dotProduct(v1, v0), c.va);
-    VectorM4D.subtractInPlace(v1, c.va);
-    VectorM4D.normalizeInPlace(v1);
+    final PVectorM4D<T> va = (PVectorM4D<T>) c.va;
+    final PVectorM4D<T> vb = (PVectorM4D<T>) c.vb;
+    final PVectorM4D<T> vc = (PVectorM4D<T>) c.vc;
+    PVectorM4D.normalize(v0, va);
+    PVectorM4D.scale(va, PVectorM4D.dotProduct(v1, va), vb);
+    PVectorM4D.normalizeInPlace(PVectorM4D.subtract(v1, vb, vc));
+    PVectorM4D.copy(va, v0);
+    PVectorM4D.copy(vc, v1);
   }
 
   /**

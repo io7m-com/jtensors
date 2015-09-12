@@ -474,13 +474,15 @@ public abstract class PVectorM2LContract<T> extends PVectorM2Contract
 
   @Override @Test public void testDistance()
   {
+    final PVectorM2L.ContextPVM2L c = new PVectorM2L.ContextPVM2L();
     final PVectorM2L<T> v0 = this.newVectorM2L(0, 1);
     final PVectorM2L<T> v1 = this.newVectorM2L(0, 0);
-    Assert.assertTrue(PVectorM2L.distance(v0, v1) == 1);
+    Assert.assertTrue(PVectorM2L.distance(c, v0, v1) == 1);
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final PVectorM2L.ContextPVM2L c = new PVectorM2L.ContextPVM2L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorM2LContract.randomPositiveSmallNumber();
@@ -491,7 +493,7 @@ public abstract class PVectorM2LContract<T> extends PVectorM2Contract
       final long y1 = PVectorM2LContract.randomPositiveSmallNumber();
       final PVectorM2L<T> v1 = this.newVectorM2L(x1, y1);
 
-      Assert.assertTrue(PVectorM2L.distance(v0, v1) >= 0);
+      Assert.assertTrue(PVectorM2L.distance(c, v0, v1) >= 0);
     }
   }
 
@@ -678,6 +680,7 @@ public abstract class PVectorM2LContract<T> extends PVectorM2Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
+    final PVectorM2L.ContextPVM2L c = new PVectorM2L.ContextPVM2L();
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorM2LContract.randomPositiveNumber();
@@ -690,8 +693,8 @@ public abstract class PVectorM2LContract<T> extends PVectorM2Contract
 
       final PVectorM2L<T> vr0 = this.newVectorM2L();
       final PVectorM2L<T> vr1 = this.newVectorM2L();
-      PVectorM2L.interpolateLinear(v0, v1, 0, vr0);
-      PVectorM2L.interpolateLinear(v0, v1, 1, vr1);
+      PVectorM2L.interpolateLinear(c, v0, v1, 0, vr0);
+      PVectorM2L.interpolateLinear(c, v0, v1, 1, vr1);
 
       Assert.assertTrue(v0.getXL() == vr0.getXL());
       Assert.assertTrue(v0.getYL() == vr0.getYL());
@@ -942,5 +945,5 @@ public abstract class PVectorM2LContract<T> extends PVectorM2Contract
     Assert.assertTrue(v1.getYL() == 1);
   }
 
-  protected abstract  <T> PVectorM2L<T> newVectorM2L();
+  protected abstract <T> PVectorM2L<T> newVectorM2L();
 }

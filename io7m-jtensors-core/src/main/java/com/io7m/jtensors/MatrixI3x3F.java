@@ -142,10 +142,7 @@ import java.util.Arrays;
       return false;
     }
     final MatrixI3x3F other = (MatrixI3x3F) obj;
-    if (!Arrays.deepEquals(this.elements, other.elements)) {
-      return false;
-    }
-    return true;
+    return Arrays.deepEquals(this.elements, other.elements);
   }
 
   @Override public <V extends VectorWritable3FType> void getRow3F(

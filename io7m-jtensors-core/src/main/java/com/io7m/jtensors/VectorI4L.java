@@ -580,10 +580,7 @@ import net.jcip.annotations.Immutable;
     if (this.z != other.z) {
       return false;
     }
-    if (this.w != other.w) {
-      return false;
-    }
-    return true;
+    return this.w == other.w;
   }
 
   @Override public long getWL()

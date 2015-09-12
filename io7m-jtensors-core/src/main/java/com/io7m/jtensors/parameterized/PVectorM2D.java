@@ -32,6 +32,8 @@ import com.io7m.jtensors.VectorReadable2DType;
  * without explicit synchronization. </p>
  *
  * @param <T> A phantom type parameter.
+ *
+ * @since 7.0.0
  */
 
 public final class PVectorM2D<T>

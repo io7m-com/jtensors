@@ -549,8 +549,10 @@ public final class VectorM2F
    * @param c  Preallocated storage
    * @param v0 The left input vector
    * @param v1 The right input vector
-   *@since 7.0.0
+   *
    * @return The distance between the two vectors.
+   *
+   * @since 7.0.0
    */
 
   public static double distance(
@@ -713,7 +715,7 @@ public final class VectorM2F
     final U v1_out)
   {
     VectorM2F.normalize(v0, c.v2a);
-    VectorM2F.scale(c.v2a, VectorM2F.dotProduct(v1, c.v2a), c.v2b);
+    VectorM2F.scale(c.v2a, (double) VectorM2F.dotProduct(v1, c.v2a), c.v2b);
     VectorM2F.normalizeInPlace(VectorM2F.subtract(v1, c.v2b, c.v2c));
     v0_out.copyFrom2F(c.v2a);
     v1_out.copyFrom2F(c.v2c);
@@ -740,7 +742,7 @@ public final class VectorM2F
     final W v1)
   {
     VectorM2F.normalizeInPlace(v0);
-    VectorM2F.scale(v0, VectorM2F.dotProduct(v1, v0), c.v2a);
+    VectorM2F.scale(v0, (double) VectorM2F.dotProduct(v1, v0), c.v2a);
     VectorM2F.subtractInPlace(v1, c.v2a);
     VectorM2F.normalizeInPlace(v1);
   }

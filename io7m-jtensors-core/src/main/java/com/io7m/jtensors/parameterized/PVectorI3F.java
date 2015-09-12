@@ -654,11 +654,8 @@ import net.jcip.annotations.Immutable;
       .getYF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.getZF()) != Float.floatToIntBits(other
-      .getZF())) {
-      return false;
-    }
-    return true;
+    return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
+      other.getZF());
   }
 
   @Override public float getXF()

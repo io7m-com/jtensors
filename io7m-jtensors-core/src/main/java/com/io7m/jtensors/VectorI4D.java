@@ -593,10 +593,7 @@ import net.jcip.annotations.Immutable;
     if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
       return false;
     }
-    if (Double.doubleToLongBits(this.z) != Double.doubleToLongBits(other.z)) {
-      return false;
-    }
-    return true;
+    return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
   }
 
   @Override public double getWD()

@@ -473,13 +473,15 @@ public abstract class PVectorM3IContract<T> extends PVectorM3Contract
 
   @Override @Test public void testDistance()
   {
+    final PVectorM3I.ContextPVM3I c = new PVectorM3I.ContextPVM3I();
     final PVectorM3I<T> v0 = this.newVectorM3I(0, 1, 0);
     final PVectorM3I<T> v1 = this.newVectorM3I(0, 0, 0);
-    Assert.assertTrue(PVectorM3I.distance(v0, v1) == 1);
+    Assert.assertTrue(PVectorM3I.distance(c, v0, v1) == 1);
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final PVectorM3I.ContextPVM3I c = new PVectorM3I.ContextPVM3I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = PVectorM3IContract.randomPositiveSmallNumber();
       final int y0 = PVectorM3IContract.randomPositiveSmallNumber();
@@ -491,7 +493,7 @@ public abstract class PVectorM3IContract<T> extends PVectorM3Contract
       final int z1 = PVectorM3IContract.randomPositiveSmallNumber();
       final PVectorM3I<T> v1 = this.newVectorM3I(x1, y1, z1);
 
-      Assert.assertTrue(PVectorM3I.distance(v0, v1) >= 0);
+      Assert.assertTrue(PVectorM3I.distance(c, v0, v1) >= 0);
     }
   }
 
@@ -744,6 +746,7 @@ public abstract class PVectorM3IContract<T> extends PVectorM3Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
+    final PVectorM3I.ContextPVM3I c = new PVectorM3I.ContextPVM3I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = PVectorM3IContract.randomPositiveNumber();
       final int y0 = PVectorM3IContract.randomPositiveNumber();
@@ -757,8 +760,8 @@ public abstract class PVectorM3IContract<T> extends PVectorM3Contract
 
       final PVectorM3I<T> vr0 = this.newVectorM3I();
       final PVectorM3I<T> vr1 = this.newVectorM3I();
-      PVectorM3I.interpolateLinear(v0, v1, 0, vr0);
-      PVectorM3I.interpolateLinear(v0, v1, 1, vr1);
+      PVectorM3I.interpolateLinear(c, v0, v1, 0, vr0);
+      PVectorM3I.interpolateLinear(c, v0, v1, 1, vr1);
 
       Assert.assertTrue(v0.getXI() == vr0.getXI());
       Assert.assertTrue(v0.getYI() == vr0.getYI());

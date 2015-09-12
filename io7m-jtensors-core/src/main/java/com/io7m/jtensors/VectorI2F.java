@@ -567,10 +567,7 @@ import net.jcip.annotations.Immutable;
     if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
       return false;
     }
-    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
-      return false;
-    }
-    return true;
+    return Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y);
   }
 
   @Override public float getXF()

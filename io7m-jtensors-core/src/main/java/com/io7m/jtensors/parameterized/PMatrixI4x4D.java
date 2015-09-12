@@ -201,10 +201,7 @@ import java.util.Arrays;
       return false;
     }
     final PMatrixI4x4D<?, ?> other = (PMatrixI4x4D<?, ?>) obj;
-    if (!Arrays.deepEquals(this.elements, other.elements)) {
-      return false;
-    }
-    return true;
+    return Arrays.deepEquals(this.elements, other.elements);
   }
 
   @Override public <V extends VectorWritable4DType> void getRow4D(
