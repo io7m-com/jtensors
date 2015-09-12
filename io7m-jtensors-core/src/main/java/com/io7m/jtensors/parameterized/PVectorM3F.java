@@ -613,7 +613,7 @@ public final class PVectorM3F<T>
     final PVectorReadable3FType<T> v0,
     final PVectorReadable3FType<T> v1)
   {
-    final PVectorM3F<T> vr = new PVectorM3F<T>();
+    final PVectorM3F<T> vr = (PVectorM3F<T>) c.va;
     return (double) PVectorM3F.magnitude(PVectorM3F.subtract(v0, v1, vr));
   }
 

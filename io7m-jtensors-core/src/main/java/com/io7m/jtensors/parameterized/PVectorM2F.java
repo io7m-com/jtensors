@@ -17,7 +17,6 @@
 package com.io7m.jtensors.parameterized;
 
 import com.io7m.jequality.AlmostEqualFloat;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorM2F;
@@ -574,6 +573,7 @@ public final class PVectorM2F<T>
   /**
    * Calculate the distance between the two vectors {@code v0} and {@code v1}.
    *
+   * @param c   Preallocated storage
    * @param v0  The left input vector
    * @param v1  The right input vector
    * @param <T> A phantom type parameter.
@@ -582,10 +582,11 @@ public final class PVectorM2F<T>
    */
 
   public static <T> double distance(
+    final ContextPVM2F c,
     final PVectorReadable2FType<T> v0,
     final PVectorReadable2FType<T> v1)
   {
-    final PVectorM2F<T> vr = new PVectorM2F<T>();
+    final PVectorM2F<T> vr = (PVectorM2F<T>) c.va;
     return PVectorM2F.magnitude(PVectorM2F.subtract(v0, v1, vr));
   }
 
@@ -615,32 +616,34 @@ public final class PVectorM2F<T>
    * The {@code alpha} parameter controls the degree of interpolation, such
    * that:
    *
-   * <ul> <li>{@code interpolateLinear(v0, v1, 0.0, r) → r = v0}</li> <li>{@code
-   * interpolateLinear(v0, v1, 1.0, r) → r = v1}</li> </ul>
+   * <ul> <li>{@code interpolateLinear(v0, v1, 0.0, r) -> r = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -> r = v1}</li> </ul>
    *
-   * @param v0    The left input vector.
-   * @param v1    The right input vector.
-   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}.
-   * @param r     The result vector.
-   * @param <T>   A phantom type parameter.
+   * @param c     Preallocated storage
+   * @param v0    The left input vector
+   * @param v1    The right input vector
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}
+   * @param r     The result vector
    * @param <V>   The precise type of vector
+   * @param <T>   A phantom type parameter
    *
    * @return {@code r}
+   *
+   * @since 7.0.0
    */
 
   public static <T, V extends PVectorWritable2FType<T>> V interpolateLinear(
+    final ContextPVM2F c,
     final PVectorReadable2FType<T> v0,
     final PVectorReadable2FType<T> v1,
     final double alpha,
     final V r)
   {
-    final PVectorM2F<T> w0 = new PVectorM2F<T>();
-    final PVectorM2F<T> w1 = new PVectorM2F<T>();
-
-    PVectorM2F.scale(v0, 1.0 - alpha, w0);
-    PVectorM2F.scale(v1, alpha, w1);
-
-    return PVectorM2F.add(w0, w1, r);
+    final PVectorM2F<T> va = (PVectorM2F<T>) c.va;
+    final PVectorM2F<T> vb = (PVectorM2F<T>) c.vb;
+    PVectorM2F.scale(v0, 1.0 - alpha, va);
+    PVectorM2F.scale(v1, alpha, vb);
+    return PVectorM2F.add(va, vb, r);
   }
 
   /**
@@ -722,53 +725,65 @@ public final class PVectorM2F<T>
 
   /**
    * <p> Orthonormalize and return the vectors {@code v0} and {@code v1} . </p>
+   *
    * <p> See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
    *
-   * @param v0  The left vector
-   * @param v1  The right vector
-   * @param <T> A phantom type parameter.
-   *
-   * @return A pair {@code (v0, v1)}, orthonormalized.
+   * @param c      Preallocated storage
+   * @param v0     The left vector
+   * @param v0_out The orthonormalized form of {@code v0}
+   * @param v1     The right vector
+   * @param v1_out The orthonormalized form of {@code v1}
+   * @param <T>    A phantom type parameter
+   * @param <V>    The precise type of vector
    *
    * @since 7.0.0
    */
 
-  public static <T> Pair<PVectorM2F<T>, PVectorM2F<T>> orthoNormalize(
+  public static <T, V extends PVectorWritable2FType<T>> void orthoNormalize(
+    final ContextPVM2F c,
     final PVectorReadable2FType<T> v0,
-    final PVectorReadable2FType<T> v1)
+    final V v0_out,
+    final PVectorReadable2FType<T> v1,
+    final V v1_out)
   {
-    final PVectorM2F<T> v0n = new PVectorM2F<T>();
-    final PVectorM2F<T> vr = new PVectorM2F<T>();
-    final PVectorM2F<T> vp = new PVectorM2F<T>();
-
-    PVectorM2F.normalize(v0, v0n);
-    PVectorM2F.scale(v0n, (double) PVectorM2F.dotProduct(v1, v0n), vp);
-    PVectorM2F.normalizeInPlace(PVectorM2F.subtract(v1, vp, vr));
-    return Pair.pair(v0n, vr);
+    final PVectorM2F<T> va = (PVectorM2F<T>) c.va;
+    final PVectorM2F<T> vb = (PVectorM2F<T>) c.vb;
+    final PVectorM2F<T> vc = (PVectorM2F<T>) c.vc;
+    PVectorM2F.normalize(v0, va);
+    PVectorM2F.scale(va, PVectorM2F.dotProduct(v1, va), vb);
+    PVectorM2F.normalizeInPlace(PVectorM2F.subtract(v1, vb, vc));
+    PVectorM2F.copy(va, v0_out);
+    PVectorM2F.copy(vc, v1_out);
   }
 
   /**
    * <p> Orthonormalize and the vectors {@code v0} and {@code v1}. </p> <p> See
    * <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a> </p>
    *
+   * @param c   Preallocated storage
    * @param v0  The left vector
    * @param v1  The right vector
-   * @param <T> A phantom type parameter.
+   * @param <V> The precise type of vector
+   * @param <T> A phantom type parameter
    *
    * @since 7.0.0
    */
 
-  public static <T> void orthoNormalizeInPlace(
-    final PVectorM2F<T> v0,
-    final PVectorM2F<T> v1)
+  public static <T, V extends PVectorWritable2FType<T> &
+    PVectorReadable2FType<T>> void orthoNormalizeInPlace(
+    final ContextPVM2F c,
+    final V v0,
+    final V v1)
   {
-    final PVectorM2F<T> projection = new PVectorM2F<T>();
-
-    PVectorM2F.normalizeInPlace(v0);
-    PVectorM2F.scale(v0, (double) PVectorM2F.dotProduct(v1, v0), projection);
-    PVectorM2F.subtractInPlace(v1, projection);
-    PVectorM2F.normalizeInPlace(v1);
+    final PVectorM2F<T> va = (PVectorM2F<T>) c.va;
+    final PVectorM2F<T> vb = (PVectorM2F<T>) c.vb;
+    final PVectorM2F<T> vc = (PVectorM2F<T>) c.vc;
+    PVectorM2F.normalize(v0, va);
+    PVectorM2F.scale(va, PVectorM2F.dotProduct(v1, va), vb);
+    PVectorM2F.normalizeInPlace(PVectorM2F.subtract(v1, vb, vc));
+    PVectorM2F.copy(va, v0);
+    PVectorM2F.copy(vc, v1);
   }
 
   /**
@@ -964,5 +979,30 @@ public final class PVectorM2F<T>
     builder.append("]");
     final String r = builder.toString();
     return NullCheck.notNull(r);
+  }
+
+  /**
+   * Preallocated storage to allow all vector functions to run without
+   * allocating.
+   *
+   * @since 7.0.0
+   */
+
+  public static final class ContextPVM2F
+  {
+    private final PVectorM2F<?> va;
+    private final PVectorM2F<?> vb;
+    private final PVectorM2F<?> vc;
+
+    /**
+     * Construct preallocated storage.
+     */
+
+    public ContextPVM2F()
+    {
+      this.va = new PVectorM2F<Object>();
+      this.vb = new PVectorM2F<Object>();
+      this.vc = new PVectorM2F<Object>();
+    }
   }
 }

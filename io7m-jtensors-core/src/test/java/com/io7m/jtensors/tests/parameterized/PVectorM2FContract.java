@@ -19,7 +19,6 @@ package com.io7m.jtensors.tests.parameterized;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.parameterized.PVectorM2F;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
@@ -550,16 +549,18 @@ public abstract class PVectorM2FContract<T> extends PVectorM2Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final PVectorM2F.ContextPVM2F c = new PVectorM2F.ContextPVM2F();
 
     final PVectorM2F<T> v0 = this.newVectorM2F(0.0f, 1.0f);
     final PVectorM2F<T> v1 = this.newVectorM2F(0.0f, 0.0f);
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
-        ec, PVectorM2F.distance(v0, v1), 1.0f));
+        ec, PVectorM2F.distance(c, v0, v1), 1.0f));
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final PVectorM2F.ContextPVM2F c = new PVectorM2F.ContextPVM2F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -569,7 +570,7 @@ public abstract class PVectorM2FContract<T> extends PVectorM2Contract
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
       final PVectorM2F<T> v1 = this.newVectorM2F(x1, y1);
 
-      Assert.assertTrue(PVectorM2F.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(PVectorM2F.distance(c, v0, v1) >= 0.0);
     }
   }
 
@@ -767,6 +768,7 @@ public abstract class PVectorM2FContract<T> extends PVectorM2Contract
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
+    final PVectorM2F.ContextPVM2F c = new PVectorM2F.ContextPVM2F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -779,8 +781,8 @@ public abstract class PVectorM2FContract<T> extends PVectorM2Contract
 
       final PVectorM2F<T> vr0 = this.newVectorM2F();
       final PVectorM2F<T> vr1 = this.newVectorM2F();
-      PVectorM2F.interpolateLinear(v0, v1, 0.0f, vr0);
-      PVectorM2F.interpolateLinear(v0, v1, 1.0f, vr1);
+      PVectorM2F.interpolateLinear(c, v0, v1, 0.0f, vr0);
+      PVectorM2F.interpolateLinear(c, v0, v1, 1.0f, vr1);
 
       Assert.assertTrue(
         AlmostEqualFloat.almostEqual(
@@ -906,22 +908,25 @@ public abstract class PVectorM2FContract<T> extends PVectorM2Contract
 
   @Override @Test public void testOrthonormalize()
   {
+    final PVectorM2F.ContextPVM2F c = new PVectorM2F.ContextPVM2F();
     final PVectorM2F<T> v0 = this.newVectorM2F(0, 1);
+    final PVectorM2F<T> v0_out = this.newVectorM2F();
     final PVectorM2F<T> v1 = this.newVectorM2F(0.5f, 0.5f);
+    final PVectorM2F<T> v1_out = this.newVectorM2F();
 
-    final Pair<PVectorM2F<T>, PVectorM2F<T>> r =
-      PVectorM2F.orthoNormalize(v0, v1);
+    PVectorM2F.orthoNormalize(c, v0, v0_out, v1, v1_out);
 
-    Assert.assertEquals(this.newVectorM2F(0, 1), r.getLeft());
-    Assert.assertEquals(this.newVectorM2F(1, 0), r.getRight());
+    Assert.assertEquals(this.newVectorM2F(0, 1), v0_out);
+    Assert.assertEquals(this.newVectorM2F(1, 0), v1_out);
   }
 
   @Override @Test public void testOrthonormalizeMutation()
   {
+    final PVectorM2F.ContextPVM2F c = new PVectorM2F.ContextPVM2F();
     final PVectorM2F<T> v0 = this.newVectorM2F(0f, 1f);
     final PVectorM2F<T> v1 = this.newVectorM2F(0.5f, 0.5f);
 
-    PVectorM2F.orthoNormalizeInPlace(v0, v1);
+    PVectorM2F.orthoNormalizeInPlace(c, v0, v1);
 
     Assert.assertEquals(this.newVectorM2F(0, 1), v0);
     Assert.assertEquals(this.newVectorM2F(1, 0), v1);

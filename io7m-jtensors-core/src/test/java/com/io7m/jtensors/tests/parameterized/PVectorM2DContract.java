@@ -18,7 +18,6 @@ package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.parameterized.PVectorM2D;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
@@ -532,16 +531,18 @@ public abstract class PVectorM2DContract<T> extends PVectorM2Contract
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final PVectorM2D.ContextPVM2D c = new PVectorM2D.ContextPVM2D();
 
     final PVectorM2D<T> v0 = this.newVectorM2D(0.0, 1.0);
     final PVectorM2D<T> v1 = this.newVectorM2D(0.0, 0.0);
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
-        ec, PVectorM2D.distance(v0, v1), 1.0));
+        ec, PVectorM2D.distance(c, v0, v1), 1.0));
   }
 
   @Override @Test public void testDistanceOrdering()
   {
+    final PVectorM2D.ContextPVM2D c = new PVectorM2D.ContextPVM2D();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
@@ -551,7 +552,7 @@ public abstract class PVectorM2DContract<T> extends PVectorM2Contract
       final double y1 = Math.random() * Double.MAX_VALUE;
       final PVectorM2D<T> v1 = this.newVectorM2D(x1, y1);
 
-      Assert.assertTrue(PVectorM2D.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(PVectorM2D.distance(c, v0, v1) >= 0.0);
     }
   }
 
@@ -883,22 +884,25 @@ public abstract class PVectorM2DContract<T> extends PVectorM2Contract
 
   @Override @Test public void testOrthonormalize()
   {
+    final PVectorM2D.ContextPVM2D c = new PVectorM2D.ContextPVM2D();
     final PVectorM2D<T> v0 = this.newVectorM2D(0, 1);
+    final PVectorM2D<T> v0_out = this.newVectorM2D();
     final PVectorM2D<T> v1 = this.newVectorM2D(0.5f, 0.5f);
+    final PVectorM2D<T> v1_out = this.newVectorM2D();
 
-    final Pair<PVectorM2D<T>, PVectorM2D<T>> r =
-      PVectorM2D.orthoNormalize(v0, v1);
+    PVectorM2D.orthoNormalize(c, v0, v0_out, v1, v1_out);
 
-    Assert.assertEquals(this.newVectorM2D(0, 1), r.getLeft());
-    Assert.assertEquals(this.newVectorM2D(1, 0), r.getRight());
+    Assert.assertEquals(this.newVectorM2D(0, 1), v0_out);
+    Assert.assertEquals(this.newVectorM2D(1, 0), v1_out);
   }
 
   @Override @Test public void testOrthonormalizeMutation()
   {
+    final PVectorM2D.ContextPVM2D c = new PVectorM2D.ContextPVM2D();
     final PVectorM2D<T> v0 = this.newVectorM2D(0f, 1f);
     final PVectorM2D<T> v1 = this.newVectorM2D(0.5f, 0.5f);
 
-    PVectorM2D.orthoNormalizeInPlace(v0, v1);
+    PVectorM2D.orthoNormalizeInPlace(c, v0, v1);
 
     Assert.assertEquals(this.newVectorM2D(0, 1), v0);
     Assert.assertEquals(this.newVectorM2D(1, 0), v1);

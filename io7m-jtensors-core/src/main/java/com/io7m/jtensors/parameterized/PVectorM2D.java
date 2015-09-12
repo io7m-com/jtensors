@@ -18,7 +18,6 @@ package com.io7m.jtensors.parameterized;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorM2D;
@@ -576,6 +575,7 @@ public final class PVectorM2D<T>
   /**
    * Calculate the distance between the two vectors {@code v0} and {@code v1}.
    *
+   * @param c   Preallocated storage
    * @param v0  The left input vector
    * @param v1  The right input vector
    * @param <T> A phantom type parameter.
@@ -584,10 +584,11 @@ public final class PVectorM2D<T>
    */
 
   public static <T> double distance(
+    final ContextPVM2D c,
     final PVectorReadable2DType<T> v0,
     final PVectorReadable2DType<T> v1)
   {
-    final PVectorM2D<T> vr = new PVectorM2D<T>();
+    final PVectorM2D<T> vr = (PVectorM2D<T>) c.va;
     return PVectorM2D.magnitude(PVectorM2D.subtract(v0, v1, vr));
   }
 
@@ -726,55 +727,65 @@ public final class PVectorM2D<T>
 
   /**
    * <p> Orthonormalize and return the vectors {@code v0} and {@code v1} . </p>
+   *
    * <p> See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
    *
-   * @param v0  The left vector
-   * @param v1  The right vector
-   * @param <T> A phantom type parameter.
-   *
-   * @return A pair {@code (v0, v1)}, orthonormalized.
+   * @param c      Preallocated storage
+   * @param v0     The left vector
+   * @param v0_out The orthonormalized form of {@code v0}
+   * @param v1     The right vector
+   * @param v1_out The orthonormalized form of {@code v1}
+   * @param <T>    A phantom type parameter
+   * @param <V>    The precise type of vector
    *
    * @since 7.0.0
    */
 
-  public static <T> Pair<PVectorM2D<T>, PVectorM2D<T>> orthoNormalize(
+  public static <T, V extends PVectorWritable2DType<T>> void orthoNormalize(
+    final ContextPVM2D c,
     final PVectorReadable2DType<T> v0,
-    final PVectorReadable2DType<T> v1)
+    final V v0_out,
+    final PVectorReadable2DType<T> v1,
+    final V v1_out)
   {
-    final PVectorM2D<T> v0n = new PVectorM2D<T>();
-    final PVectorM2D<T> vr = new PVectorM2D<T>();
-    final PVectorM2D<T> vp = new PVectorM2D<T>();
-
-    PVectorM2D.normalize(v0, v0n);
-    PVectorM2D.scale(v0n, PVectorM2D.dotProduct(v1, v0n), vp);
-    PVectorM2D.normalizeInPlace(PVectorM2D.subtract(v1, vp, vr));
-    return Pair.pair(v0n, vr);
+    final PVectorM2D<T> va = (PVectorM2D<T>) c.va;
+    final PVectorM2D<T> vb = (PVectorM2D<T>) c.vb;
+    final PVectorM2D<T> vc = (PVectorM2D<T>) c.vc;
+    PVectorM2D.normalize(v0, va);
+    PVectorM2D.scale(va, PVectorM2D.dotProduct(v1, va), vb);
+    PVectorM2D.normalizeInPlace(PVectorM2D.subtract(v1, vb, vc));
+    PVectorM2D.copy(va, v0_out);
+    PVectorM2D.copy(vc, v1_out);
   }
 
   /**
    * <p> Orthonormalize and the vectors {@code v0} and {@code v1}. </p> <p> See
    * <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a> </p>
    *
+   * @param c   Preallocated storage
    * @param v0  The left vector
    * @param v1  The right vector
-   * @param <T> A phantom type parameter.
-   * @param <V> The precise type of readable/writable vector
+   * @param <V> The precise type of vector
+   * @param <T> A phantom type parameter
    *
    * @since 7.0.0
    */
 
   public static <T, V extends PVectorWritable2DType<T> &
     PVectorReadable2DType<T>> void orthoNormalizeInPlace(
+    final ContextPVM2D c,
     final V v0,
     final V v1)
   {
-    final PVectorM2D<T> projection = new PVectorM2D<T>();
-
-    PVectorM2D.normalizeInPlace(v0);
-    PVectorM2D.scale(v0, PVectorM2D.dotProduct(v1, v0), projection);
-    PVectorM2D.subtractInPlace(v1, projection);
-    PVectorM2D.normalizeInPlace(v1);
+    final PVectorM2D<T> va = (PVectorM2D<T>) c.va;
+    final PVectorM2D<T> vb = (PVectorM2D<T>) c.vb;
+    final PVectorM2D<T> vc = (PVectorM2D<T>) c.vc;
+    PVectorM2D.normalize(v0, va);
+    PVectorM2D.scale(va, PVectorM2D.dotProduct(v1, va), vb);
+    PVectorM2D.normalizeInPlace(PVectorM2D.subtract(v1, vb, vc));
+    PVectorM2D.copy(va, v0);
+    PVectorM2D.copy(vc, v1);
   }
 
   /**
