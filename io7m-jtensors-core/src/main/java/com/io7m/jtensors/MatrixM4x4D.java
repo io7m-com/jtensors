@@ -1940,7 +1940,7 @@ public final class MatrixM4x4D implements MatrixDirect4x4DType
     this.view.put(MatrixM4x4D.indexUnsafe(3, 3), x);
   }
 
-  @Override public double getRowColumnD(
+  public double getRowColumnD(
     final int row,
     final int column)
   {

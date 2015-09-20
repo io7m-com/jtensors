@@ -883,7 +883,7 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
     this.view.put(MatrixM2x2D.indexUnsafe(1, 1), x);
   }
 
-  @Override public double getRowColumnD(
+  public double getRowColumnD(
     final int row,
     final int column)
   {

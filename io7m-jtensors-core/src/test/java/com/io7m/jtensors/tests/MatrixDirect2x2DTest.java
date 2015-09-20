@@ -32,7 +32,7 @@ public final class MatrixDirect2x2DTest
   @Override protected MatrixDirect2x2DType newMatrixFrom(
     final MatrixReadable2x2DType source)
   {
-    return MatrixDirectM2x2D.newMatrix(source);
+    return MatrixDirectM2x2D.newMatrixFrom(source);
   }
 
   @Override

@@ -32,7 +32,7 @@ public final class MatrixDirect4x4FTest
   @Override protected MatrixDirect4x4FType newMatrixFrom(
     final MatrixReadable4x4FType source)
   {
-    return MatrixDirectM4x4F.newMatrix(source);
+    return MatrixDirectM4x4F.newMatrixFrom(source);
   }
 
   @Override

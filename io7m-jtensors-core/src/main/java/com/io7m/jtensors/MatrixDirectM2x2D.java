@@ -86,7 +86,8 @@ public final class MatrixDirectM2x2D implements MatrixDirect2x2DType
    * @return A new matrix based on the given matrix
    */
 
-  public static MatrixDirect2x2DType newMatrix(final MatrixReadable2x2DType m)
+  public static MatrixDirect2x2DType newMatrixFrom(
+    final MatrixReadable2x2DType m)
   {
     NullCheck.notNull(m);
     return new MatrixDirectM2x2D(m);

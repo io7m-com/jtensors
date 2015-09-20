@@ -86,7 +86,8 @@ public final class MatrixDirectM3x3D implements MatrixDirect3x3DType
    * @return A new matrix based on the given matrix
    */
 
-  public static MatrixDirect3x3DType newMatrix(final MatrixReadable3x3DType m)
+  public static MatrixDirect3x3DType newMatrixFrom(
+    final MatrixReadable3x3DType m)
   {
     NullCheck.notNull(m);
     return new MatrixDirectM3x3D(m);

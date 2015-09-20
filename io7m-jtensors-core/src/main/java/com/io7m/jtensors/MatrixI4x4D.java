@@ -214,7 +214,7 @@ import java.util.Arrays;
    * @return The value at the given row and column
    */
 
-  @Override public double getRowColumnD(
+  public double getRowColumnD(
     final int row,
     final int col)
   {

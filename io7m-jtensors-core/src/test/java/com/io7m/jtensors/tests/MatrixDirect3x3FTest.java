@@ -32,7 +32,7 @@ public final class MatrixDirect3x3FTest
   @Override protected MatrixDirect3x3FType newMatrixFrom(
     final MatrixReadable3x3FType source)
   {
-    return MatrixDirectM3x3F.newMatrix(source);
+    return MatrixDirectM3x3F.newMatrixFrom(source);
   }
 
   @Override

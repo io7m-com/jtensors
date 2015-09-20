@@ -46,7 +46,7 @@ public final class MatrixDirectM2x2F implements MatrixDirect2x2FType
       MatrixDirectM2x2F.VIEW_ELEMENTS * MatrixDirectM2x2F.VIEW_ELEMENT_SIZE;
   }
 
-  private final ByteBuffer   data;
+  private final ByteBuffer  data;
   private final FloatBuffer view;
 
   private MatrixDirectM2x2F(final @Nullable MatrixReadable2x2FType m)
@@ -86,7 +86,8 @@ public final class MatrixDirectM2x2F implements MatrixDirect2x2FType
    * @return A new matrix based on the given matrix
    */
 
-  public static MatrixDirect2x2FType newMatrix(final MatrixReadable2x2FType m)
+  public static MatrixDirect2x2FType newMatrixFrom(
+    final MatrixReadable2x2FType m)
   {
     NullCheck.notNull(m);
     return new MatrixDirectM2x2F(m);

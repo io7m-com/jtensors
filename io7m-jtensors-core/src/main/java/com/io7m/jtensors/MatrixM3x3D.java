@@ -1266,7 +1266,7 @@ public final class MatrixM3x3D implements MatrixDirect3x3DType
     this.view.put(MatrixM3x3D.indexUnsafe(2, 2), x);
   }
 
-  @Override public double getRowColumnD(
+  public double getRowColumnD(
     final int row,
     final int column)
   {
