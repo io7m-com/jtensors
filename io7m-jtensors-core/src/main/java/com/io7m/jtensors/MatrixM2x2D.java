@@ -16,8 +16,6 @@
 
 package com.io7m.jtensors;
 
-import com.io7m.jfunctional.Option;
-import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
 
 import java.nio.ByteBuffer;
@@ -415,19 +413,19 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
    * @param out The output matrix
    * @param <M> The precise type of matrix
    *
-   * @return The inversion of {@code m}, if any.
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM2x2D#determinant(MatrixReadable2x2DType)
    */
 
-  public static <M extends MatrixWritable2x2DType> OptionType<M> invert(
+  public static <M extends MatrixWritable2x2DType> boolean invert(
     final MatrixReadable2x2DType m,
     final M out)
   {
     final double d = MatrixM2x2D.determinant(m);
 
     if (d == 0.0) {
-      return Option.none();
+      return false;
     }
 
     final double d_inv = 1.0 / d;
@@ -442,7 +440,7 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
     out.setR1C0D(r1c0);
     out.setR1C1D(r1c1);
 
-    return Option.some(out);
+    return true;
   }
 
   /**
@@ -455,13 +453,13 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
    * @param m   The input matrix
    * @param <M> The precise type of matrix
    *
-   * @return The inversion of {@code m}, if any.
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM2x2D#determinant(MatrixReadable2x2DType)
    */
 
   public static <M extends MatrixWritable2x2DType & MatrixReadable2x2DType>
-  OptionType<M> invertInPlace(
+  boolean invertInPlace(
     final M m)
   {
     return MatrixM2x2D.invert(m, m);

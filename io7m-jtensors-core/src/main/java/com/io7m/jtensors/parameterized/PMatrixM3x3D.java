@@ -16,8 +16,6 @@
 
 package com.io7m.jtensors.parameterized;
 
-import com.io7m.jfunctional.Option;
-import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixM3x3D;
@@ -154,13 +152,13 @@ import java.nio.DoubleBuffer;
    * @param <T1>    A phantom type parameter
    * @param <MOUT>  The precise type of output matrix
    *
-   * @return {@code out}
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM3x3D#determinant(com.io7m.jtensors.MatrixReadable3x3DType)
    */
 
   public static <T0, T1, MOUT extends PMatrixWritable3x3DType<T1, T0>>
-  OptionType<MOUT> invert(
+  boolean invert(
     final ContextPM3D context,
     final PMatrixReadable3x3DType<T0, T1> m,
     final MOUT out)
@@ -168,7 +166,7 @@ import java.nio.DoubleBuffer;
     final double d = MatrixM3x3D.determinant(m);
 
     if (d == 0.0) {
-      return Option.none();
+      return false;
     }
 
     final double d_inv = 1.0 / d;
@@ -212,7 +210,7 @@ import java.nio.DoubleBuffer;
     temp.setR2C2D(r2c2);
 
     MatrixM3x3D.scale(temp, d_inv, out);
-    return Option.some(out);
+    return true;
   }
 
   /**
@@ -229,19 +227,19 @@ import java.nio.DoubleBuffer;
    * @param <MIN>   The precise type of input matrix
    * @param <MOUT>  The precise type of output matrix
    *
-   * @return {@code m}
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM3x3D#determinant(com.io7m.jtensors.MatrixReadable3x3DType)
    */
 
   public static <T0, T1, MIN extends PMatrixWritable3x3DType<T0, T1> &
     PMatrixReadable3x3DType<T0, T1>, MOUT extends PMatrixWritable3x3DType<T1,
-    T0> & PMatrixReadable3x3DType<T1, T0>> OptionType<MOUT> invertInPlace(
+    T0> & PMatrixReadable3x3DType<T1, T0>> boolean invertInPlace(
     final ContextPM3D context,
     final MIN m)
   {
     final PMatrixM3x3D<T1, T0> mt = (PMatrixM3x3D<T1, T0>) m;
-    return (OptionType<MOUT>) PMatrixM3x3D.invert(context, m, mt);
+    return (boolean) PMatrixM3x3D.invert(context, m, mt);
   }
 
   /**

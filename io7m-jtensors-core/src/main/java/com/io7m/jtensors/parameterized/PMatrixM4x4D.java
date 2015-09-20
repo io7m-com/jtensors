@@ -16,8 +16,6 @@
 
 package com.io7m.jtensors.parameterized;
 
-import com.io7m.jfunctional.Option;
-import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixM3x3D;
@@ -150,7 +148,7 @@ import java.nio.DoubleBuffer;
   }
 
   private static <T0, T1, M extends PMatrixWritable4x4DType<T1, T0>>
-  OptionType<M> invertActual(
+  boolean invertActual(
     final PMatrixReadable4x4DType<T0, T1> m,
     final MatrixM3x3D m3,
     final PMatrixM4x4D<T1, T0> temp,
@@ -159,7 +157,7 @@ import java.nio.DoubleBuffer;
     final double d = MatrixM4x4D.determinant(m);
 
     if (d == 0.0) {
-      return Option.none();
+      return false;
     }
 
     final double d_inv = 1.0 / d;
@@ -494,7 +492,7 @@ import java.nio.DoubleBuffer;
     temp.setR3C3D(r3c3 * d_inv);
 
     MatrixM4x4D.transpose(temp, out);
-    return Option.some(out);
+    return true;
   }
 
   /**
@@ -512,17 +510,17 @@ import java.nio.DoubleBuffer;
    * @param <MIN>   The precise type of input matrix
    * @param <MOUT>  The precise type of output matrix
    *
-   * @return {@code m}
+   * @return {@code true} iff the matrix was invertible
    */
 
   public static <T0, T1, MIN extends PMatrixWritable4x4DType<T0, T1> &
     PMatrixReadable4x4DType<T0, T1>, MOUT extends PMatrixWritable4x4DType<T1,
-    T0> & PMatrixReadable4x4DType<T1, T0>> OptionType<MOUT> invertInPlace(
+    T0> & PMatrixReadable4x4DType<T1, T0>> boolean invertInPlace(
     final ContextPM4D context,
     final MIN m)
   {
     final PMatrixM4x4D<T1, T0> mt = (PMatrixM4x4D<T1, T0>) m;
-    return (OptionType<MOUT>) PMatrixM4x4D.invert(context, m, mt);
+    return (boolean) PMatrixM4x4D.invert(context, m, mt);
   }
 
   /**
@@ -540,11 +538,11 @@ import java.nio.DoubleBuffer;
    * @param <T1>    A phantom type parameter
    * @param <MOUT>  The precise type of output matrix
    *
-   * @return {@code out}
+   * @return {@code true} iff the matrix was invertible
    */
 
   public static <T0, T1, MOUT extends PMatrixWritable4x4DType<T1, T0>>
-  OptionType<MOUT> invert(
+  boolean invert(
     final ContextPM4D context,
     final PMatrixReadable4x4DType<T0, T1> m,
     final MOUT out)

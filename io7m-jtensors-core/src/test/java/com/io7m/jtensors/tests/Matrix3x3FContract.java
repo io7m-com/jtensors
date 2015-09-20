@@ -17,8 +17,6 @@
 package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualFloat;
-import com.io7m.jfunctional.OptionType;
-import com.io7m.jfunctional.Some;
 import com.io7m.jtensors.Matrix3x3FType;
 import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.VectorI2F;
@@ -620,10 +618,9 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final T m1 = this.newMatrix();
 
     {
-      final OptionType<T> r = MatrixM3x3F.invert(s, m0, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> some = (Some<T>) r;
-      final T rm = some.get();
+      final boolean r = MatrixM3x3F.invert(s, m0, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -647,10 +644,9 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
 
     {
-      final OptionType<T> r = MatrixM3x3F.invertInPlace(s, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> some = (Some<T>) r;
-      final T rm = some.get();
+      final boolean r = MatrixM3x3F.invertInPlace(s, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -693,10 +689,9 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     m0.setR2C2F(2.0f);
 
     {
-      final OptionType<T> r = MatrixM3x3F.invert(c, m0, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> some = (Some<T>) r;
-      final T rm = some.get();
+      final boolean r = MatrixM3x3F.invert(c, m0, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -720,10 +715,9 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
 
     {
-      final OptionType<T> r = MatrixM3x3F.invertInPlace(c, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> some = (Some<T>) r;
-      final T rm = some.get();
+      final boolean r = MatrixM3x3F.invertInPlace(c, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -756,13 +750,13 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     MatrixM3x3F.setZero(m0);
 
     {
-      final OptionType<T> r = MatrixM3x3F.invert(c, m0, m1);
-      Assert.assertTrue(r.isNone());
+      final boolean r = MatrixM3x3F.invert(c, m0, m1);
+      Assert.assertFalse(r);
     }
 
     {
-      final OptionType<T> r = MatrixM3x3F.invertInPlace(c, m0);
-      Assert.assertTrue(r.isNone());
+      final boolean r = MatrixM3x3F.invertInPlace(c, m0);
+      Assert.assertFalse(r);
     }
   }
 

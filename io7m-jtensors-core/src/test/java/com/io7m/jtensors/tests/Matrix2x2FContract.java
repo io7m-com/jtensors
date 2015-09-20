@@ -16,8 +16,6 @@
 
 package com.io7m.jtensors.tests;
 
-import com.io7m.jfunctional.OptionType;
-import com.io7m.jfunctional.Some;
 import com.io7m.jtensors.Matrix2x2FType;
 import com.io7m.jtensors.MatrixM2x2F;
 import com.io7m.jtensors.VectorI2F;
@@ -375,10 +373,9 @@ public abstract class Matrix2x2FContract<T extends Matrix2x2FType>
     final T m1 = this.newMatrix();
 
     {
-      final OptionType<T> r = MatrixM2x2F.invert(m0, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM2x2F.invert(m0, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
       this.checkDirectBufferInvariants(rm);
 
       Assert.assertEquals(1.0, (double) rm.getRowColumnF(0, 0), 0.0);
@@ -389,10 +386,9 @@ public abstract class Matrix2x2FContract<T extends Matrix2x2FType>
     }
 
     {
-      final OptionType<T> r = MatrixM2x2F.invertInPlace(m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM2x2F.invertInPlace(m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
       this.checkDirectBufferInvariants(rm);
 
       Assert.assertEquals(1.0, (double) rm.getRowColumnF(0, 0), 0.0);
@@ -415,10 +411,9 @@ public abstract class Matrix2x2FContract<T extends Matrix2x2FType>
     m0.setR1C1F(2.0f);
 
     {
-      final OptionType<T> r = MatrixM2x2F.invert(m0, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM2x2F.invert(m0, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
       this.checkDirectBufferInvariants(rm);
 
       Assert.assertEquals(0.5, (double) rm.getRowColumnF(0, 0), 0.0);
@@ -429,10 +424,9 @@ public abstract class Matrix2x2FContract<T extends Matrix2x2FType>
     }
 
     {
-      final OptionType<T> r = MatrixM2x2F.invertInPlace(m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM2x2F.invertInPlace(m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
       this.checkDirectBufferInvariants(rm);
 
       Assert.assertEquals(2.0, (double) rm.getRowColumnF(0, 0), 0.0);
@@ -452,13 +446,13 @@ public abstract class Matrix2x2FContract<T extends Matrix2x2FType>
     this.checkDirectBufferInvariants(m0);
 
     {
-      final OptionType<T> r = MatrixM2x2F.invert(m0, m1);
-      Assert.assertTrue(r.isNone());
+      final boolean r = MatrixM2x2F.invert(m0, m1);
+      Assert.assertFalse(r);
     }
 
     {
-      final OptionType<T> r = MatrixM2x2F.invertInPlace(m0);
-      Assert.assertTrue(r.isNone());
+      final boolean r = MatrixM2x2F.invertInPlace(m0);
+      Assert.assertFalse(r);
     }
   }
 

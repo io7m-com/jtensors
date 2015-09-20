@@ -16,8 +16,6 @@
 
 package com.io7m.jtensors;
 
-import com.io7m.jfunctional.Option;
-import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
 
 import java.nio.ByteBuffer;
@@ -502,7 +500,7 @@ public final class MatrixM4x4F implements MatrixDirect4x4FType
     return (column * MatrixM4x4F.VIEW_COLS) + row;
   }
 
-  private static <M extends MatrixWritable4x4FType> OptionType<M> invertActual(
+  private static <M extends MatrixWritable4x4FType> boolean invertActual(
     final MatrixReadable4x4FType m,
     final MatrixM3x3F m3,
     final MatrixM4x4F temp,
@@ -511,7 +509,7 @@ public final class MatrixM4x4F implements MatrixDirect4x4FType
     final double d = MatrixM4x4F.determinant(m);
 
     if (d == 0.0) {
-      return Option.none();
+      return false;
     }
 
     final double d_inv = 1.0 / d;
@@ -846,7 +844,7 @@ public final class MatrixM4x4F implements MatrixDirect4x4FType
     temp.setR3C3F((float) (r3c3 * d_inv));
 
     MatrixM4x4F.transpose(temp, out);
-    return Option.some(out);
+    return true;
   }
 
   /**
@@ -861,13 +859,13 @@ public final class MatrixM4x4F implements MatrixDirect4x4FType
    * @param m       The input matrix
    * @param <M>     The precise type of matrix
    *
-   * @return {@code m}
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
    */
 
   public static <M extends MatrixWritable4x4FType & MatrixReadable4x4FType>
-  OptionType<M> invertInPlace(
+  boolean invertInPlace(
     final ContextMM4F context,
     final M m)
   {
@@ -887,12 +885,12 @@ public final class MatrixM4x4F implements MatrixDirect4x4FType
    * @param out     The output matrix
    * @param <M>     The precise type of matrix
    *
-   * @return {@code out}
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
    */
 
-  public static <M extends MatrixWritable4x4FType> OptionType<M> invert(
+  public static <M extends MatrixWritable4x4FType> boolean invert(
     final ContextMM4F context,
     final MatrixReadable4x4FType m,
     final M out)

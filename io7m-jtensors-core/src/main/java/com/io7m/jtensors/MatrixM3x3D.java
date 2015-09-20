@@ -16,8 +16,6 @@
 
 package com.io7m.jtensors;
 
-import com.io7m.jfunctional.Option;
-import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
 
 import java.nio.ByteBuffer;
@@ -448,12 +446,12 @@ public final class MatrixM3x3D implements MatrixDirect3x3DType
    * @param out The output matrix
    * @param <M> The precise type of matrix
    *
-   * @return {@code out}
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM3x3D#determinant(MatrixReadable3x3DType)
    */
 
-  public static <M extends MatrixWritable3x3DType> OptionType<M> invert(
+  public static <M extends MatrixWritable3x3DType> boolean invert(
     final ContextMM3D c,
     final MatrixReadable3x3DType m,
     final M out)
@@ -461,7 +459,7 @@ public final class MatrixM3x3D implements MatrixDirect3x3DType
     final double d = MatrixM3x3D.determinant(m);
 
     if (d == 0.0) {
-      return Option.none();
+      return false;
     }
 
     final double d_inv = 1.0 / d;
@@ -505,7 +503,7 @@ public final class MatrixM3x3D implements MatrixDirect3x3DType
     temp.setR2C2D(r2c2);
 
     MatrixM3x3D.scale(temp, d_inv, out);
-    return Option.some(out);
+    return true;
   }
 
   /**
@@ -519,13 +517,13 @@ public final class MatrixM3x3D implements MatrixDirect3x3DType
    * @param m   The input matrix
    * @param <M> The precise type of matrix
    *
-   * @return {@code m}
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM3x3D#determinant(MatrixReadable3x3DType)
    */
 
   public static <M extends MatrixWritable3x3DType & MatrixReadable3x3DType>
-  OptionType<M> invertInPlace(
+  boolean invertInPlace(
     final ContextMM3D c,
     final M m)
   {

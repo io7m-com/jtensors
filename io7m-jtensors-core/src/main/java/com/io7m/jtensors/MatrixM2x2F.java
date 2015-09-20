@@ -16,8 +16,6 @@
 
 package com.io7m.jtensors;
 
-import com.io7m.jfunctional.Option;
-import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
 
 import java.nio.ByteBuffer;
@@ -208,7 +206,8 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
       m,
       MatrixM2x2F.rowCheck(row_a),
       MatrixM2x2F.rowCheck(row_b),
-      MatrixM2x2F.rowCheck(row_c), (double) r,
+      MatrixM2x2F.rowCheck(row_c),
+      (double) r,
       c.v2a,
       c.v2b,
       out);
@@ -422,19 +421,19 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
    * @param m   The input matrix
    * @param out The output matrix
    *
-   * @return {@code out}
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM2x2F#determinant(MatrixReadable2x2FType)
    */
 
-  public static <M extends MatrixWritable2x2FType> OptionType<M> invert(
+  public static <M extends MatrixWritable2x2FType> boolean invert(
     final MatrixReadable2x2FType m,
     final M out)
   {
     final float d = MatrixM2x2F.determinant(m);
 
     if (d == 0.0F) {
-      return Option.none();
+      return false;
     }
 
     final float d_inv = 1.0F / d;
@@ -449,7 +448,7 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
     out.setR1C0F(r1c0);
     out.setR1C1F(r1c1);
 
-    return Option.some(out);
+    return true;
   }
 
   /**
@@ -462,13 +461,13 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
    * @param <M> The precise type of matrix
    * @param m   The input matrix
    *
-   * @return {@code m}
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM2x2F#determinant(MatrixReadable2x2FType)
    */
 
   public static <M extends MatrixWritable2x2FType & MatrixReadable2x2FType>
-  OptionType<M> invertInPlace(
+  boolean invertInPlace(
     final M m)
   {
     return MatrixM2x2F.invert(m, m);
@@ -952,8 +951,8 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
 
   public static final class ContextMM2F
   {
-    private final VectorM2F   v2a = new VectorM2F();
-    private final VectorM2F   v2b = new VectorM2F();
+    private final VectorM2F v2a = new VectorM2F();
+    private final VectorM2F v2b = new VectorM2F();
 
     /**
      * Construct a new context.
