@@ -147,8 +147,8 @@ import java.nio.DoubleBuffer;
     return (column * PMatrixM4x4D.VIEW_COLS) + row;
   }
 
-  private static <T0, T1, M extends PMatrixWritable4x4DType<T1, T0>>
-  boolean invertActual(
+  private static <T0, T1, M extends PMatrixWritable4x4DType<T1, T0>> boolean
+  invertActual(
     final PMatrixReadable4x4DType<T0, T1> m,
     final MatrixM3x3D m3,
     final PMatrixM4x4D<T1, T0> temp,
@@ -1148,5 +1148,26 @@ import java.nio.DoubleBuffer;
     {
 
     }
+  }
+
+  /**
+   * Copy the contents of the matrix {@code input} to the matrix {@code output},
+   * completely replacing all elements.
+   *
+   * @param input  The input vector
+   * @param output The output vector
+   * @param <M>    The precise type of matrix
+   * @param <T0>   A phantom type parameter
+   * @param <T1>   A phantom type parameter
+   *
+   * @return {@code output}
+   */
+
+  public static <T0, T1, M extends PMatrixWritable4x4DType<T0, T1>> M copy(
+    final PMatrixReadable4x4DType<T0, T1> input,
+    final M output)
+  {
+    MatrixM4x4D.copy(input, output);
+    return output;
   }
 }

@@ -24,6 +24,7 @@ import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorM4F;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.parameterized.PMatrix4x4FType;
+import com.io7m.jtensors.parameterized.PMatrixM3x3D;
 import com.io7m.jtensors.parameterized.PMatrixM4x4F;
 import com.io7m.jtensors.parameterized.PMatrixReadable4x4FType;
 import com.io7m.jtensors.parameterized.PVectorI4F;
@@ -1551,5 +1552,65 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     Assert.assertEquals(0.0, (double) v.getZF(), 0.0);
     Assert.assertEquals(0.0, (double) v.getWF(), 0.0);
     this.checkDirectBufferInvariants(m);
+  }
+
+  @Test public final void testCopyTyped()
+  {
+    final T m0 = this.newMatrix();
+    final T m1 = this.newMatrix();
+
+    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariants(m1);
+
+    m0.setR0C0F(1.0f);
+    m0.setR0C1F(2.0f);
+    m0.setR0C2F(3.0f);
+    m0.setR0C3F(4.0f);
+
+    m0.setR1C0F(5.0f);
+    m0.setR1C1F(6.0f);
+    m0.setR1C2F(7.0f);
+    m0.setR1C3F(8.0f);
+
+    m0.setR2C0F(9.0f);
+    m0.setR2C1F(10.0f);
+    m0.setR2C2F(11.0f);
+    m0.setR2C3F(12.0f);
+
+    m0.setR3C0F(13.0f);
+    m0.setR3C1F(14.0f);
+    m0.setR3C2F(15.0f);
+    m0.setR3C3F(16.0f);
+
+    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariants(m1);
+
+    PMatrixM4x4F.copy(m0, m1);
+
+    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariants(m1);
+
+    Assert.assertEquals(1.0, (double) m1.getR0C0F(), 0.0);
+    Assert.assertEquals(2.0, (double) m1.getR0C1F(), 0.0);
+    Assert.assertEquals(3.0, (double) m1.getR0C2F(), 0.0);
+    Assert.assertEquals(4.0, (double) m1.getR0C3F(), 0.0);
+
+    Assert.assertEquals(5.0, (double) m1.getR1C0F(), 0.0);
+    Assert.assertEquals(6.0, (double) m1.getR1C1F(), 0.0);
+    Assert.assertEquals(7.0, (double) m1.getR1C2F(), 0.0);
+    Assert.assertEquals(8.0, (double) m1.getR1C3F(), 0.0);
+
+    Assert.assertEquals(9.0, (double) m1.getR2C0F(), 0.0);
+    Assert.assertEquals(10.0, (double) m1.getR2C1F(), 0.0);
+    Assert.assertEquals(11.0, (double) m1.getR2C2F(), 0.0);
+    Assert.assertEquals(12.0, (double) m1.getR2C3F(), 0.0);
+
+    Assert.assertEquals(13.0, (double) m1.getR3C0F(), 0.0);
+    Assert.assertEquals(14.0, (double) m1.getR3C1F(), 0.0);
+    Assert.assertEquals(15.0, (double) m1.getR3C2F(), 0.0);
+    Assert.assertEquals(16.0, (double) m1.getR3C3F(), 0.0);
+
+    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariants(m1);
   }
 }

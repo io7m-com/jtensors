@@ -379,13 +379,9 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
         Assert.assertEquals(
-          mr.getRowColumnD(row, column),
-          m0.getRowColumnD(row, column),
-          0.0);
+          mr.getRowColumnD(row, column), m0.getRowColumnD(row, column), 0.0);
         Assert.assertEquals(
-          mr.getRowColumnD(row, column),
-          m1.getRowColumnD(row, column),
-          0.0);
+          mr.getRowColumnD(row, column), m1.getRowColumnD(row, column), 0.0);
       }
     }
 
@@ -823,5 +819,49 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     Assert.assertEquals(100.0, v.getXD(), 0.0);
     Assert.assertEquals(200.0, v.getYD(), 0.0);
     this.checkDirectBufferInvariants(m);
+  }
+
+  @Test public final void testCopyTyped()
+  {
+    final T m0 = this.newMatrix();
+    final T m1 = this.newMatrix();
+
+    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariants(m1);
+
+    m0.setR0C0D(1.0);
+    m0.setR0C1D(2.0);
+    m0.setR0C2D(3.0);
+
+    m0.setR1C0D(5.0);
+    m0.setR1C1D(6.0);
+    m0.setR1C2D(7.0);
+
+    m0.setR2C0D(9.0);
+    m0.setR2C1D(10.0);
+    m0.setR2C2D(11.0);
+
+    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariants(m1);
+
+    PMatrixM3x3D.copy(m0, m1);
+
+    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariants(m1);
+
+    Assert.assertEquals(1.0, m1.getR0C0D(), 0.0);
+    Assert.assertEquals(2.0, m1.getR0C1D(), 0.0);
+    Assert.assertEquals(3.0, m1.getR0C2D(), 0.0);
+
+    Assert.assertEquals(5.0, m1.getR1C0D(), 0.0);
+    Assert.assertEquals(6.0, m1.getR1C1D(), 0.0);
+    Assert.assertEquals(7.0, m1.getR1C2D(), 0.0);
+
+    Assert.assertEquals(9.0, m1.getR2C0D(), 0.0);
+    Assert.assertEquals(10.0, m1.getR2C1D(), 0.0);
+    Assert.assertEquals(11.0, m1.getR2C2D(), 0.0);
+
+    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariants(m1);
   }
 }

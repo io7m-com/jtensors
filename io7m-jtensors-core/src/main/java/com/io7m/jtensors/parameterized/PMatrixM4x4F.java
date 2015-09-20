@@ -19,6 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixM3x3F;
+import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.MatrixM4x4F;
 import com.io7m.jtensors.MatrixReadable4x4FType;
 import com.io7m.jtensors.VectorM3F;
@@ -1152,5 +1153,26 @@ import java.nio.FloatBuffer;
     {
 
     }
+  }
+
+  /**
+   * Copy the contents of the matrix {@code input} to the matrix {@code output},
+   * completely replacing all elements.
+   *
+   * @param input  The input vector
+   * @param output The output vector
+   * @param <M>    The precise type of matrix
+   * @param <T0>   A phantom type parameter
+   * @param <T1>   A phantom type parameter
+   *
+   * @return {@code output}
+   */
+
+  public static <T0, T1, M extends PMatrixWritable4x4FType<T0, T1>> M copy(
+    final PMatrixReadable4x4FType<T0, T1> input,
+    final M output)
+  {
+    MatrixM4x4F.copy(input, output);
+    return output;
   }
 }

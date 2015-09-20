@@ -609,4 +609,25 @@ import java.nio.DoubleBuffer;
 
     }
   }
+
+  /**
+   * Copy the contents of the matrix {@code input} to the matrix {@code output},
+   * completely replacing all elements.
+   *
+   * @param input  The input vector
+   * @param output The output vector
+   * @param <M>    The precise type of matrix
+   * @param <T0>   A phantom type parameter
+   * @param <T1>   A phantom type parameter
+   *
+   * @return {@code output}
+   */
+
+  public static <T0, T1, M extends PMatrixWritable3x3DType<T0, T1>> M copy(
+    final PMatrixReadable3x3DType<T0, T1> input,
+    final M output)
+  {
+    MatrixM3x3D.copy(input, output);
+    return output;
+  }
 }
