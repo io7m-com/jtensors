@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,13 +16,12 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jtensors.MatrixI2x2D;
 import com.io7m.jtensors.MatrixM2x2D;
 import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorM3D;
+import org.junit.Assert;
+import org.junit.Test;
 
 @SuppressWarnings("static-method") public class MatrixI2x2DTest
 {
@@ -33,7 +32,7 @@ import com.io7m.jtensors.VectorM3D;
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnD(row, col, index);
         ++index;
       }
     }
@@ -44,9 +43,7 @@ import com.io7m.jtensors.VectorM3D;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
         Assert.assertEquals(
-          im0.getRowColumnD(row, col),
-          m0.getRowColumnD(row, col),
-          0.0);
+          im0.getRowColumnD(row, col), m0.getRowColumnD(row, col), 0.0);
       }
     }
 
@@ -59,7 +56,7 @@ import com.io7m.jtensors.VectorM3D;
     index = 100;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnD(row, col, index);
         ++index;
       }
     }
@@ -72,11 +69,11 @@ import com.io7m.jtensors.VectorM3D;
   {
     final MatrixM2x2D m0 = new MatrixM2x2D();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
+    m0.setR0C0D( 0.0f);
+    m0.setR1C0D( 0.1f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
+    m0.setR0C1D( 10.0f);
+    m0.setR1C1D( 10.1f);
 
     final MatrixI2x2D im0 = MatrixI2x2D.newFromReadable(m0);
 
@@ -92,11 +89,11 @@ import com.io7m.jtensors.VectorM3D;
   {
     final MatrixM2x2D m0 = new MatrixM2x2D();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
+    m0.setR0C0D( 0.0f);
+    m0.setR1C0D( 0.1f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
+    m0.setR0C1D( 10.0f);
+    m0.setR1C1D( 10.1f);
 
     final MatrixI2x2D im = MatrixI2x2D.newFromReadable(m0);
 
@@ -127,7 +124,7 @@ import com.io7m.jtensors.VectorM3D;
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnD(row, col, index);
         ++index;
       }
     }
@@ -145,8 +142,8 @@ import com.io7m.jtensors.VectorM3D;
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
-        m1.set(row, col, index);
+        m0.setRowColumnD(row, col, index);
+        m1.setRowColumnD(row, col, index);
         ++index;
       }
     }

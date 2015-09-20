@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -751,7 +751,7 @@ public final class PVectorM2F<T>
     final PVectorM2F<T> vb = (PVectorM2F<T>) c.vb;
     final PVectorM2F<T> vc = (PVectorM2F<T>) c.vc;
     PVectorM2F.normalize(v0, va);
-    PVectorM2F.scale(va, PVectorM2F.dotProduct(v1, va), vb);
+    PVectorM2F.scale(va, (double) PVectorM2F.dotProduct(v1, va), vb);
     PVectorM2F.normalizeInPlace(PVectorM2F.subtract(v1, vb, vc));
     PVectorM2F.copy(va, v0_out);
     PVectorM2F.copy(vc, v1_out);
@@ -780,7 +780,7 @@ public final class PVectorM2F<T>
     final PVectorM2F<T> vb = (PVectorM2F<T>) c.vb;
     final PVectorM2F<T> vc = (PVectorM2F<T>) c.vc;
     PVectorM2F.normalize(v0, va);
-    PVectorM2F.scale(va, PVectorM2F.dotProduct(v1, va), vb);
+    PVectorM2F.scale(va, (double) PVectorM2F.dotProduct(v1, va), vb);
     PVectorM2F.normalizeInPlace(PVectorM2F.subtract(v1, vb, vc));
     PVectorM2F.copy(va, v0);
     PVectorM2F.copy(vc, v1);

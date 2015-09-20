@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -583,7 +583,7 @@ public final class VectorM3F
     final VectorReadable3FType v0,
     final VectorReadable3FType v1)
   {
-    return VectorM3F.magnitude(VectorM3F.subtract(v0, v1, c.v2a));
+    return (double) VectorM3F.magnitude(VectorM3F.subtract(v0, v1, c.v2a));
   }
 
   /**

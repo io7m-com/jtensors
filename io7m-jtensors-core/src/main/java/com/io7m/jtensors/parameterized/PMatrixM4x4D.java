@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -19,15 +19,17 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jfunctional.Option;
 import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
+import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixM3x3D;
+import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.MatrixReadable4x4DType;
 import com.io7m.jtensors.VectorM3D;
 import com.io7m.jtensors.VectorM4D;
 import com.io7m.jtensors.VectorReadable2DType;
-import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3DType;
-import com.io7m.jtensors.VectorReadable3IType;
 import com.io7m.jtensors.VectorReadable4DType;
+import com.io7m.jtensors.VectorWritable2DType;
+import com.io7m.jtensors.VectorWritable3DType;
 import com.io7m.jtensors.VectorWritable4DType;
 
 import java.nio.ByteBuffer;
@@ -37,15 +39,14 @@ import java.nio.DoubleBuffer;
 /**
  * <p> A 4x4 mutable matrix type with double precision elements. </p>
  *
- * @param <T0> A phantom type parameter.
- * @param <T1> A phantom type parameter.
+ * @param <T0> A phantom type parameter
+ * @param <T1> A phantom type parameter
  *
  * @since 7.0.0
  */
 
 @SuppressWarnings("unchecked") public final class PMatrixM4x4D<T0, T1>
-  implements PMatrixDirectReadable4x4DType<T0, T1>,
-  PMatrixWritable4x4DType<T0, T1>
+  implements PMatrixDirect4x4DType<T0, T1>
 {
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
@@ -84,13 +85,13 @@ import java.nio.DoubleBuffer;
 
     this.view = v;
     this.view.clear();
-    PMatrixM4x4D.setIdentity(this);
+    MatrixM4x4D.setIdentity(this);
   }
 
   /**
    * Construct a new copy of the given matrix.
    *
-   * @param source The source matrix.
+   * @param source The source matrix
    */
 
   public PMatrixM4x4D(
@@ -111,234 +112,7 @@ import java.nio.DoubleBuffer;
     this.view = v;
     this.view.clear();
 
-    for (int row = 0; row < PMatrixM4x4D.VIEW_ROWS; ++row) {
-      for (int col = 0; col < PMatrixM4x4D.VIEW_COLS; ++col) {
-        this.setUnsafe(row, col, source.getRowColumnD(row, col));
-      }
-    }
-  }
-
-  /**
-   * Elementwise add of matrices {@code m0} and {@code m1}.
-   *
-   * @param m0   The left input matrix.
-   * @param m1   The right input matrix.
-   * @param out  The output matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <T2> A phantom type parameter.
-   * @param <T3> A phantom type parameter.
-   * @param <T4> A phantom type parameter.
-   * @param <T5> A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1, T2, T3, T4, T5> PMatrixM4x4D<T4, T5> add(
-    final PMatrixReadable4x4DType<T0, T1> m0,
-    final PMatrixReadable4x4DType<T2, T3> m1,
-    final PMatrixM4x4D<T4, T5> out)
-  {
-    final double r0c0 = m0.getRowColumnD(0, 0) + m1.getRowColumnD(0, 0);
-    final double r1c0 = m0.getRowColumnD(1, 0) + m1.getRowColumnD(1, 0);
-    final double r2c0 = m0.getRowColumnD(2, 0) + m1.getRowColumnD(2, 0);
-    final double r3c0 = m0.getRowColumnD(3, 0) + m1.getRowColumnD(3, 0);
-
-    final double r0c1 = m0.getRowColumnD(0, 1) + m1.getRowColumnD(0, 1);
-    final double r1c1 = m0.getRowColumnD(1, 1) + m1.getRowColumnD(1, 1);
-    final double r2c1 = m0.getRowColumnD(2, 1) + m1.getRowColumnD(2, 1);
-    final double r3c1 = m0.getRowColumnD(3, 1) + m1.getRowColumnD(3, 1);
-
-    final double r0c2 = m0.getRowColumnD(0, 2) + m1.getRowColumnD(0, 2);
-    final double r1c2 = m0.getRowColumnD(1, 2) + m1.getRowColumnD(1, 2);
-    final double r2c2 = m0.getRowColumnD(2, 2) + m1.getRowColumnD(2, 2);
-    final double r3c2 = m0.getRowColumnD(3, 2) + m1.getRowColumnD(3, 2);
-
-    final double r0c3 = m0.getRowColumnD(0, 3) + m1.getRowColumnD(0, 3);
-    final double r1c3 = m0.getRowColumnD(1, 3) + m1.getRowColumnD(1, 3);
-    final double r2c3 = m0.getRowColumnD(2, 3) + m1.getRowColumnD(2, 3);
-    final double r3c3 = m0.getRowColumnD(3, 3) + m1.getRowColumnD(3, 3);
-
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(1, 0, r1c0);
-    out.setUnsafe(2, 0, r2c0);
-    out.setUnsafe(3, 0, r3c0);
-
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(1, 1, r1c1);
-    out.setUnsafe(2, 1, r2c1);
-    out.setUnsafe(3, 1, r3c1);
-
-    out.setUnsafe(0, 2, r0c2);
-    out.setUnsafe(1, 2, r1c2);
-    out.setUnsafe(2, 2, r2c2);
-    out.setUnsafe(3, 2, r3c2);
-
-    out.setUnsafe(0, 3, r0c3);
-    out.setUnsafe(1, 3, r1c3);
-    out.setUnsafe(2, 3, r2c3);
-    out.setUnsafe(3, 3, r3c3);
-    return out;
-  }
-
-  /**
-   * Elementwise add of matrices {@code m0} and {@code m1}, returning the result
-   * in {@code m0}.
-   *
-   * @param m0   The left input matrix.
-   * @param m1   The right input matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <T2> A phantom type parameter.
-   * @param <T3> A phantom type parameter.
-   * @param <T4> A phantom type parameter.
-   * @param <T5> A phantom type parameter.
-   *
-   * @return m0
-   */
-
-  public static <T0, T1, T2, T3, T4, T5> PMatrixM4x4D<T4, T5> addInPlace(
-    final PMatrixM4x4D<T0, T1> m0,
-    final PMatrixReadable4x4DType<T2, T3> m1)
-  {
-    return (PMatrixM4x4D<T4, T5>) PMatrixM4x4D.add(m0, m1, m0);
-  }
-
-  /**
-   * <p>Add the values in row {@code row_b} to the values in row {@code row_a}
-   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
-   * matrix {@code out}.</p>
-   *
-   * <p>This is one of the three <i>elementary</i> operations defined on
-   * matrices.</p>
-   *
-   * @param m     The input matrix.
-   * @param row_a The row on the lefthand side of the addition.
-   * @param row_b The row on the righthand side of the addition.
-   * @param row_c The destination row.
-   * @param r     The scaling value.
-   * @param out   The output matrix.
-   * @param <T0>  A phantom type parameter.
-   * @param <T1>  A phantom type parameter.
-   * @param <T2>  A phantom type parameter.
-   * @param <T3>  A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> addRowScaled(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final int row_a,
-    final int row_b,
-    final int row_c,
-    final double r,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    final VectorM4D va = new VectorM4D();
-    final VectorM4D vb = new VectorM4D();
-
-    return PMatrixM4x4D.addRowScaledUnsafe(
-      m,
-      PMatrixM4x4D.rowCheck(row_a),
-      PMatrixM4x4D.rowCheck(row_b),
-      PMatrixM4x4D.rowCheck(row_c),
-      r,
-      va,
-      vb,
-      out);
-  }
-
-  /**
-   * <p>Add the values in row {@code row_b} to the values in row {@code row_a}
-   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
-   * matrix {@code m}.</p>
-   *
-   * <p>This is one of the three <i>elementary</i> operations defined on
-   * matrices.</p>
-   *
-   * @param m     The input matrix.
-   * @param row_a The row on the lefthand side of the addition.
-   * @param row_b The row on the righthand side of the addition.
-   * @param row_c The destination row.
-   * @param r     The scaling value.
-   * @param <T0>  A phantom type parameter.
-   * @param <T1>  A phantom type parameter.
-   * @param <T2>  A phantom type parameter.
-   * @param <T3>  A phantom type parameter.
-   *
-   * @return {@code m}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> addRowScaledInPlace(
-    final PMatrixM4x4D<T0, T1> m,
-    final int row_a,
-    final int row_b,
-    final int row_c,
-    final double r)
-  {
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.addRowScaled(
-      m, row_a, row_b, row_c, r, m);
-  }
-
-  private static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> addRowScaledUnsafe(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final int row_a,
-    final int row_b,
-    final int row_c,
-    final double r,
-    final VectorM4D va,
-    final VectorM4D vb,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    PMatrixM4x4D.rowUnsafe(m, row_a, va);
-    PMatrixM4x4D.rowUnsafe(m, row_b, vb);
-    VectorM4D.addScaledInPlace(va, vb, r);
-    PMatrixM4x4D.setRowUnsafe(out, row_c, va);
-    return out;
-  }
-
-  /**
-   * <p>Add the values in row {@code row_b} to the values in row {@code row_a}
-   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
-   * matrix {@code out}. The function uses storage preallocated in {@code
-   * context} to avoid any new allocations.</p>
-   *
-   * <p>This is one of the three <i>elementary</i> operations defined on
-   * matrices.</p>
-   *
-   * @param context Preallocated storage.
-   * @param m       The input matrix.
-   * @param row_a   The row on the lefthand side of the addition.
-   * @param row_b   The row on the righthand side of the addition.
-   * @param row_c   The destination row.
-   * @param r       The scaling value.
-   * @param out     The output matrix.
-   * @param <T0>    A phantom type parameter.
-   * @param <T1>    A phantom type parameter.
-   * @param <T2>    A phantom type parameter.
-   * @param <T3>    A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> addRowScaledWithContext(
-    final ContextPM4D context,
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final int row_a,
-    final int row_b,
-    final int row_c,
-    final double r,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    return PMatrixM4x4D.addRowScaledUnsafe(
-      m,
-      PMatrixM4x4D.rowCheck(row_a),
-      PMatrixM4x4D.rowCheck(row_b),
-      PMatrixM4x4D.rowCheck(row_c),
-      r,
-      context.getV4a(),
-      context.getV4b(),
-      out);
+    MatrixM4x4D.copy(source, this);
   }
 
   private static int columnCheck(
@@ -349,243 +123,6 @@ import java.nio.DoubleBuffer;
         "column must be in the range 0 <= row < " + PMatrixM4x4D.VIEW_COLS);
     }
     return column;
-  }
-
-  /**
-   * Copy the contents of the matrix {@code input} to the matrix {@code output},
-   * completely replacing all elements.
-   *
-   * @param input  The input vector.
-   * @param output The output vector.
-   * @param <T0>   A phantom type parameter.
-   * @param <T1>   A phantom type parameter.
-   *
-   * @return {@code output}
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> copy(
-    final PMatrixReadable4x4DType<T0, T1> input,
-    final PMatrixM4x4D<T0, T1> output)
-  {
-    for (int col = 0; col < PMatrixM4x4D.VIEW_COLS; ++col) {
-      for (int row = 0; row < PMatrixM4x4D.VIEW_ROWS; ++row) {
-        output.setUnsafe(row, col, input.getRowColumnD(row, col));
-      }
-    }
-    return output;
-  }
-
-  /**
-   * Calculate the determinant of the matrix {@code m}.
-   *
-   * @param m    The input matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return The determinant.
-   */
-
-  public static <T0, T1> double determinant(
-    final PMatrixReadable4x4DType<T0, T1> m)
-  {
-    final double r0c0 = m.getRowColumnD(0, 0);
-    final double r1c0 = m.getRowColumnD(1, 0);
-    final double r2c0 = m.getRowColumnD(2, 0);
-    final double r3c0 = m.getRowColumnD(3, 0);
-
-    final double r0c1 = m.getRowColumnD(0, 1);
-    final double r1c1 = m.getRowColumnD(1, 1);
-    final double r2c1 = m.getRowColumnD(2, 1);
-    final double r3c1 = m.getRowColumnD(3, 1);
-
-    final double r0c2 = m.getRowColumnD(0, 2);
-    final double r1c2 = m.getRowColumnD(1, 2);
-    final double r2c2 = m.getRowColumnD(2, 2);
-    final double r3c2 = m.getRowColumnD(3, 2);
-
-    final double r0c3 = m.getRowColumnD(0, 3);
-    final double r1c3 = m.getRowColumnD(1, 3);
-    final double r2c3 = m.getRowColumnD(2, 3);
-    final double r3c3 = m.getRowColumnD(3, 3);
-
-    double sum = 0.0;
-
-    sum += r0c0 * r1c1 * r2c2 * r3c3;
-    sum -= r0c0 * r1c1 * r2c3 * r3c2;
-    sum += r0c0 * r1c2 * r2c3 * r3c1;
-    sum -= r0c0 * r1c2 * r2c1 * r3c3;
-
-    sum += r0c0 * r1c3 * r2c1 * r3c2;
-    sum -= r0c0 * r1c3 * r2c2 * r3c1;
-    sum -= r0c1 * r1c2 * r2c3 * r3c0;
-    sum += r0c1 * r1c2 * r2c0 * r3c3;
-
-    sum -= r0c1 * r1c3 * r2c0 * r3c2;
-    sum += r0c1 * r1c3 * r2c2 * r3c0;
-    sum -= r0c1 * r1c0 * r2c2 * r3c3;
-    sum += r0c1 * r1c0 * r2c3 * r3c2;
-
-    sum += r0c2 * r1c3 * r2c0 * r3c1;
-    sum -= r0c2 * r1c3 * r2c1 * r3c0;
-    sum += r0c2 * r1c0 * r2c1 * r3c3;
-    sum -= r0c2 * r1c0 * r2c3 * r3c1;
-
-    sum += r0c2 * r1c1 * r2c3 * r3c0;
-    sum -= r0c2 * r1c1 * r2c0 * r3c3;
-    sum -= r0c3 * r1c0 * r2c1 * r3c2;
-    sum += r0c3 * r1c0 * r2c2 * r3c1;
-
-    sum -= r0c3 * r1c1 * r2c2 * r3c0;
-    sum += r0c3 * r1c1 * r2c0 * r3c2;
-    sum -= r0c3 * r1c2 * r2c0 * r3c1;
-    sum += r0c3 * r1c2 * r2c1 * r3c0;
-
-    return sum;
-  }
-
-  /**
-   * <p>Exchange the row {@code row_a} and row {@code row_b} of the matrix
-   * {@code m}, saving the exchanged rows to {@code out}.</p>
-   *
-   * <p>This is one of the three <i>elementary</i> operations defined on
-   * matrices.</p>
-   *
-   * @param m     The input matrix.
-   * @param row_a The first row.
-   * @param row_b The second row.
-   * @param out   The output matrix.
-   * @param <T0>  A phantom type parameter.
-   * @param <T1>  A phantom type parameter.
-   * @param <T2>  A phantom type parameter.
-   * @param <T3>  A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> exchangeRows(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final int row_a,
-    final int row_b,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    final VectorM4D va = new VectorM4D();
-    final VectorM4D vb = new VectorM4D();
-    return PMatrixM4x4D.exchangeRowsUnsafe(
-      m,
-      PMatrixM4x4D.rowCheck(row_a),
-      PMatrixM4x4D.rowCheck(row_b),
-      va,
-      vb,
-      out);
-  }
-
-  /**
-   * <p>Exchange the row {@code row_a} and row {@code row_b} of the matrix
-   * {@code m}, saving the exchanged rows to {@code m}.</p>
-   *
-   * <p>This is one of the three <i>elementary</i> operations defined on
-   * matrices.</p>
-   *
-   * @param m     The input matrix.
-   * @param row_a The first row.
-   * @param row_b The second row.
-   * @param <T0>  A phantom type parameter.
-   * @param <T1>  A phantom type parameter.
-   * @param <T2>  A phantom type parameter.
-   * @param <T3>  A phantom type parameter.
-   *
-   * @return {@code m}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> exchangeRowsInPlace(
-    final PMatrixM4x4D<T0, T1> m,
-    final int row_a,
-    final int row_b)
-  {
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.exchangeRows(
-      m, row_a, row_b, m);
-  }
-
-  /**
-   * <p>Exchange the row {@code row_a} and row {@code row_b} of the matrix
-   * {@code m}, saving the exchanged rows to {@code m}. The function uses
-   * storage preallocated in {@code context} to avoid allocating memory.</p>
-   *
-   * <p>This is one of the three <i>elementary</i> operations defined on
-   * matrices.</p>
-   *
-   * @param context Preallocated storage.
-   * @param m       The input matrix.
-   * @param row_a   The first row.
-   * @param row_b   The second row.
-   * @param <T0>    A phantom type parameter.
-   * @param <T1>    A phantom type parameter.
-   * @param <T2>    A phantom type parameter.
-   * @param <T3>    A phantom type parameter.
-   *
-   * @return {@code m}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3>
-  exchangeRowsInPlaceWithContext(
-    final ContextPM4D context,
-    final PMatrixM4x4D<T0, T1> m,
-    final int row_a,
-    final int row_b)
-  {
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.exchangeRowsWithContext(
-      context, m, row_a, row_b, m);
-  }
-
-  private static <T0, T1> PMatrixM4x4D<T0, T1> exchangeRowsUnsafe(
-    final MatrixReadable4x4DType m,
-    final int row_a,
-    final int row_b,
-    final VectorM4D va,
-    final VectorM4D vb,
-    final PMatrixM4x4D<T0, T1> out)
-  {
-    PMatrixM4x4D.rowUnsafe(m, row_a, va);
-    PMatrixM4x4D.rowUnsafe(m, row_b, vb);
-    PMatrixM4x4D.setRowUnsafe(out, row_a, vb);
-    PMatrixM4x4D.setRowUnsafe(out, row_b, va);
-    return out;
-  }
-
-  /**
-   * <p>Exchange two rows {@code row_a} and row {@code row_b} of the matrix
-   * {@code m}, saving the exchanged rows to {@code out}.</p>
-   *
-   * <p>This is one of the three <i>elementary</i> operations defined on
-   * matrices.</p>
-   *
-   * @param context Preallocated storage.
-   * @param m       The input matrix.
-   * @param row_a   The first row.
-   * @param row_b   The second row.
-   * @param out     The output matrix.
-   * @param <T0>    A phantom type parameter.
-   * @param <T1>    A phantom type parameter.
-   * @param <T2>    A phantom type parameter.
-   * @param <T3>    A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> exchangeRowsWithContext(
-    final ContextPM4D context,
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final int row_a,
-    final int row_b,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    return PMatrixM4x4D.exchangeRowsUnsafe(
-      m,
-      PMatrixM4x4D.rowCheck(row_a),
-      PMatrixM4x4D.rowCheck(row_b),
-      context.getV4a(),
-      context.getV4b(),
-      out);
   }
 
   private static int indexChecked(
@@ -612,37 +149,14 @@ import java.nio.DoubleBuffer;
     return (column * PMatrixM4x4D.VIEW_COLS) + row;
   }
 
-  /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
-   * to {@code out}. The function returns {@code Some(out)} iff it was possible
-   * to invert the matrix, and {@code None} otherwise. It is not possible to
-   * invert a matrix that has a determinant of {@code 0}. If the function
-   * returns {@code None}, {@code m} is untouched.
-   *
-   * @param m    The input matrix.
-   * @param out  The output matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return {@code out}
-   *
-   * @see PMatrixM4x4D#determinant(PMatrixReadable4x4DType)
-   */
-
-  public static <T0, T1> OptionType<PMatrixM4x4D<T1, T0>> invert(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final PMatrixM4x4D<T1, T0> out)
-  {
-    final MatrixM3x3D m3 = new MatrixM3x3D();
-    return PMatrixM4x4D.invertActual(m, m3, out);
-  }
-
-  private static <T0, T1> OptionType<PMatrixM4x4D<T1, T0>> invertActual(
+  private static <T0, T1, M extends PMatrixWritable4x4DType<T1, T0>>
+  OptionType<M> invertActual(
     final PMatrixReadable4x4DType<T0, T1> m,
     final MatrixM3x3D m3,
-    final PMatrixM4x4D<T1, T0> out)
+    final PMatrixM4x4D<T1, T0> temp,
+    final M out)
   {
-    final double d = PMatrixM4x4D.determinant(m);
+    final double d = MatrixM4x4D.determinant(m);
 
     if (d == 0.0) {
       return Option.none();
@@ -686,15 +200,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[0, 0]
       // 1 = (-1) ^ (0 + 0)
 
-      m3.set(0, 0, m.getRowColumnD(1, 1));
-      m3.set(0, 1, m.getRowColumnD(1, 2));
-      m3.set(0, 2, m.getRowColumnD(1, 3));
-      m3.set(1, 0, m.getRowColumnD(2, 1));
-      m3.set(1, 1, m.getRowColumnD(2, 2));
-      m3.set(1, 2, m.getRowColumnD(2, 3));
-      m3.set(2, 0, m.getRowColumnD(3, 1));
-      m3.set(2, 1, m.getRowColumnD(3, 2));
-      m3.set(2, 2, m.getRowColumnD(3, 3));
+      m3.setR0C0D(m.getR1C1D());
+      m3.setR0C1D(m.getR1C2D());
+      m3.setR0C2D(m.getR1C3D());
+      m3.setR1C0D(m.getR2C1D());
+      m3.setR1C1D(m.getR2C2D());
+      m3.setR1C2D(m.getR2C3D());
+      m3.setR2C0D(m.getR3C1D());
+      m3.setR2C1D(m.getR3C2D());
+      m3.setR2C2D(m.getR3C3D());
 
       r0c0 = MatrixM3x3D.determinant(m3);
     }
@@ -703,15 +217,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[0, 1]
       // -1 = (-1) ^ (0 + 1)
 
-      m3.set(0, 0, m.getRowColumnD(1, 0));
-      m3.set(0, 1, m.getRowColumnD(1, 2));
-      m3.set(0, 2, m.getRowColumnD(1, 3));
-      m3.set(1, 0, m.getRowColumnD(2, 0));
-      m3.set(1, 1, m.getRowColumnD(2, 2));
-      m3.set(1, 2, m.getRowColumnD(2, 3));
-      m3.set(2, 0, m.getRowColumnD(3, 0));
-      m3.set(2, 1, m.getRowColumnD(3, 2));
-      m3.set(2, 2, m.getRowColumnD(3, 3));
+      m3.setR0C0D(m.getR1C0D());
+      m3.setR0C1D(m.getR1C2D());
+      m3.setR0C2D(m.getR1C3D());
+      m3.setR1C0D(m.getR2C0D());
+      m3.setR1C1D(m.getR2C2D());
+      m3.setR1C2D(m.getR2C3D());
+      m3.setR2C0D(m.getR3C0D());
+      m3.setR2C1D(m.getR3C2D());
+      m3.setR2C2D(m.getR3C3D());
 
       r0c1 = -MatrixM3x3D.determinant(m3);
     }
@@ -720,15 +234,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[0, 2]
       // 1 = (-1) ^ (0 + 2)
 
-      m3.set(0, 0, m.getRowColumnD(1, 0));
-      m3.set(0, 1, m.getRowColumnD(1, 1));
-      m3.set(0, 2, m.getRowColumnD(1, 3));
-      m3.set(1, 0, m.getRowColumnD(2, 0));
-      m3.set(1, 1, m.getRowColumnD(2, 1));
-      m3.set(1, 2, m.getRowColumnD(2, 3));
-      m3.set(2, 0, m.getRowColumnD(3, 0));
-      m3.set(2, 1, m.getRowColumnD(3, 1));
-      m3.set(2, 2, m.getRowColumnD(3, 3));
+      m3.setR0C0D(m.getR1C0D());
+      m3.setR0C1D(m.getR1C1D());
+      m3.setR0C2D(m.getR1C3D());
+      m3.setR1C0D(m.getR2C0D());
+      m3.setR1C1D(m.getR2C1D());
+      m3.setR1C2D(m.getR2C3D());
+      m3.setR2C0D(m.getR3C0D());
+      m3.setR2C1D(m.getR3C1D());
+      m3.setR2C2D(m.getR3C3D());
 
       r0c2 = MatrixM3x3D.determinant(m3);
     }
@@ -737,15 +251,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[0, 3]
       // -1 = (-1) ^ (0 + 3)
 
-      m3.set(0, 0, m.getRowColumnD(1, 0));
-      m3.set(0, 1, m.getRowColumnD(1, 1));
-      m3.set(0, 2, m.getRowColumnD(1, 2));
-      m3.set(1, 0, m.getRowColumnD(2, 0));
-      m3.set(1, 1, m.getRowColumnD(2, 1));
-      m3.set(1, 2, m.getRowColumnD(2, 2));
-      m3.set(2, 0, m.getRowColumnD(3, 0));
-      m3.set(2, 1, m.getRowColumnD(3, 1));
-      m3.set(2, 2, m.getRowColumnD(3, 2));
+      m3.setR0C0D(m.getR1C0D());
+      m3.setR0C1D(m.getR1C1D());
+      m3.setR0C2D(m.getR1C2D());
+      m3.setR1C0D(m.getR2C0D());
+      m3.setR1C1D(m.getR2C1D());
+      m3.setR1C2D(m.getR2C2D());
+      m3.setR2C0D(m.getR3C0D());
+      m3.setR2C1D(m.getR3C1D());
+      m3.setR2C2D(m.getR3C2D());
 
       r0c3 = -MatrixM3x3D.determinant(m3);
     }
@@ -754,15 +268,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[1, 0]
       // -1 = (-1) ^ (1 + 0)
 
-      m3.set(0, 0, m.getRowColumnD(0, 1));
-      m3.set(0, 1, m.getRowColumnD(0, 2));
-      m3.set(0, 2, m.getRowColumnD(0, 3));
-      m3.set(1, 0, m.getRowColumnD(2, 1));
-      m3.set(1, 1, m.getRowColumnD(2, 2));
-      m3.set(1, 2, m.getRowColumnD(2, 3));
-      m3.set(2, 0, m.getRowColumnD(3, 1));
-      m3.set(2, 1, m.getRowColumnD(3, 2));
-      m3.set(2, 2, m.getRowColumnD(3, 3));
+      m3.setR0C0D(m.getR0C1D());
+      m3.setR0C1D(m.getR0C2D());
+      m3.setR0C2D(m.getR0C3D());
+      m3.setR1C0D(m.getR2C1D());
+      m3.setR1C1D(m.getR2C2D());
+      m3.setR1C2D(m.getR2C3D());
+      m3.setR2C0D(m.getR3C1D());
+      m3.setR2C1D(m.getR3C2D());
+      m3.setR2C2D(m.getR3C3D());
 
       r1c0 = -MatrixM3x3D.determinant(m3);
     }
@@ -771,15 +285,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[1, 1]
       // 1 = (-1) ^ (1 + 1)
 
-      m3.set(0, 0, m.getRowColumnD(0, 0));
-      m3.set(0, 1, m.getRowColumnD(0, 2));
-      m3.set(0, 2, m.getRowColumnD(0, 3));
-      m3.set(1, 0, m.getRowColumnD(2, 0));
-      m3.set(1, 1, m.getRowColumnD(2, 2));
-      m3.set(1, 2, m.getRowColumnD(2, 3));
-      m3.set(2, 0, m.getRowColumnD(3, 0));
-      m3.set(2, 1, m.getRowColumnD(3, 2));
-      m3.set(2, 2, m.getRowColumnD(3, 3));
+      m3.setR0C0D(m.getR0C0D());
+      m3.setR0C1D(m.getR0C2D());
+      m3.setR0C2D(m.getR0C3D());
+      m3.setR1C0D(m.getR2C0D());
+      m3.setR1C1D(m.getR2C2D());
+      m3.setR1C2D(m.getR2C3D());
+      m3.setR2C0D(m.getR3C0D());
+      m3.setR2C1D(m.getR3C2D());
+      m3.setR2C2D(m.getR3C3D());
 
       r1c1 = MatrixM3x3D.determinant(m3);
     }
@@ -788,15 +302,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[1, 2]
       // -1 = (-1) ^ (1 + 2)
 
-      m3.set(0, 0, m.getRowColumnD(0, 0));
-      m3.set(0, 1, m.getRowColumnD(0, 1));
-      m3.set(0, 2, m.getRowColumnD(0, 3));
-      m3.set(1, 0, m.getRowColumnD(2, 0));
-      m3.set(1, 1, m.getRowColumnD(2, 1));
-      m3.set(1, 2, m.getRowColumnD(2, 3));
-      m3.set(2, 0, m.getRowColumnD(3, 0));
-      m3.set(2, 1, m.getRowColumnD(3, 1));
-      m3.set(2, 2, m.getRowColumnD(3, 3));
+      m3.setR0C0D(m.getR0C0D());
+      m3.setR0C1D(m.getR0C1D());
+      m3.setR0C2D(m.getR0C3D());
+      m3.setR1C0D(m.getR2C0D());
+      m3.setR1C1D(m.getR2C1D());
+      m3.setR1C2D(m.getR2C3D());
+      m3.setR2C0D(m.getR3C0D());
+      m3.setR2C1D(m.getR3C1D());
+      m3.setR2C2D(m.getR3C3D());
 
       r1c2 = -MatrixM3x3D.determinant(m3);
     }
@@ -805,15 +319,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[1, 3]
       // 1 = (-1) ^ (1 + 3)
 
-      m3.set(0, 0, m.getRowColumnD(0, 0));
-      m3.set(0, 1, m.getRowColumnD(0, 1));
-      m3.set(0, 2, m.getRowColumnD(0, 2));
-      m3.set(1, 0, m.getRowColumnD(2, 0));
-      m3.set(1, 1, m.getRowColumnD(2, 1));
-      m3.set(1, 2, m.getRowColumnD(2, 2));
-      m3.set(2, 0, m.getRowColumnD(3, 0));
-      m3.set(2, 1, m.getRowColumnD(3, 1));
-      m3.set(2, 2, m.getRowColumnD(3, 2));
+      m3.setR0C0D(m.getR0C0D());
+      m3.setR0C1D(m.getR0C1D());
+      m3.setR0C2D(m.getR0C2D());
+      m3.setR1C0D(m.getR2C0D());
+      m3.setR1C1D(m.getR2C1D());
+      m3.setR1C2D(m.getR2C2D());
+      m3.setR2C0D(m.getR3C0D());
+      m3.setR2C1D(m.getR3C1D());
+      m3.setR2C2D(m.getR3C2D());
 
       r1c3 = MatrixM3x3D.determinant(m3);
     }
@@ -822,15 +336,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[2, 0]
       // 1 = (-1) ^ (2 + 0)
 
-      m3.set(0, 0, m.getRowColumnD(0, 1));
-      m3.set(0, 1, m.getRowColumnD(0, 2));
-      m3.set(0, 2, m.getRowColumnD(0, 3));
-      m3.set(1, 0, m.getRowColumnD(1, 1));
-      m3.set(1, 1, m.getRowColumnD(1, 2));
-      m3.set(1, 2, m.getRowColumnD(1, 3));
-      m3.set(2, 0, m.getRowColumnD(3, 1));
-      m3.set(2, 1, m.getRowColumnD(3, 2));
-      m3.set(2, 2, m.getRowColumnD(3, 3));
+      m3.setR0C0D(m.getR0C1D());
+      m3.setR0C1D(m.getR0C2D());
+      m3.setR0C2D(m.getR0C3D());
+      m3.setR1C0D(m.getR1C1D());
+      m3.setR1C1D(m.getR1C2D());
+      m3.setR1C2D(m.getR1C3D());
+      m3.setR2C0D(m.getR3C1D());
+      m3.setR2C1D(m.getR3C2D());
+      m3.setR2C2D(m.getR3C3D());
 
       r2c0 = MatrixM3x3D.determinant(m3);
     }
@@ -839,15 +353,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[2, 1]
       // -1 = (-1) ^ (2 + 1)
 
-      m3.set(0, 0, m.getRowColumnD(0, 0));
-      m3.set(0, 1, m.getRowColumnD(0, 2));
-      m3.set(0, 2, m.getRowColumnD(0, 3));
-      m3.set(1, 0, m.getRowColumnD(1, 0));
-      m3.set(1, 1, m.getRowColumnD(1, 2));
-      m3.set(1, 2, m.getRowColumnD(1, 3));
-      m3.set(2, 0, m.getRowColumnD(3, 0));
-      m3.set(2, 1, m.getRowColumnD(3, 2));
-      m3.set(2, 2, m.getRowColumnD(3, 3));
+      m3.setR0C0D(m.getR0C0D());
+      m3.setR0C1D(m.getR0C2D());
+      m3.setR0C2D(m.getR0C3D());
+      m3.setR1C0D(m.getR1C0D());
+      m3.setR1C1D(m.getR1C2D());
+      m3.setR1C2D(m.getR1C3D());
+      m3.setR2C0D(m.getR3C0D());
+      m3.setR2C1D(m.getR3C2D());
+      m3.setR2C2D(m.getR3C3D());
 
       r2c1 = -MatrixM3x3D.determinant(m3);
     }
@@ -856,15 +370,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[2, 2]
       // 1 = (-1) ^ (2 + 2)
 
-      m3.set(0, 0, m.getRowColumnD(0, 0));
-      m3.set(0, 1, m.getRowColumnD(0, 1));
-      m3.set(0, 2, m.getRowColumnD(0, 3));
-      m3.set(1, 0, m.getRowColumnD(1, 0));
-      m3.set(1, 1, m.getRowColumnD(1, 1));
-      m3.set(1, 2, m.getRowColumnD(1, 3));
-      m3.set(2, 0, m.getRowColumnD(3, 0));
-      m3.set(2, 1, m.getRowColumnD(3, 1));
-      m3.set(2, 2, m.getRowColumnD(3, 3));
+      m3.setR0C0D(m.getR0C0D());
+      m3.setR0C1D(m.getR0C1D());
+      m3.setR0C2D(m.getR0C3D());
+      m3.setR1C0D(m.getR1C0D());
+      m3.setR1C1D(m.getR1C1D());
+      m3.setR1C2D(m.getR1C3D());
+      m3.setR2C0D(m.getR3C0D());
+      m3.setR2C1D(m.getR3C1D());
+      m3.setR2C2D(m.getR3C3D());
 
       r2c2 = MatrixM3x3D.determinant(m3);
     }
@@ -873,15 +387,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[2, 3]
       // -1 = (-1) ^ (2 + 3)
 
-      m3.set(0, 0, m.getRowColumnD(0, 0));
-      m3.set(0, 1, m.getRowColumnD(0, 1));
-      m3.set(0, 2, m.getRowColumnD(0, 2));
-      m3.set(1, 0, m.getRowColumnD(1, 0));
-      m3.set(1, 1, m.getRowColumnD(1, 1));
-      m3.set(1, 2, m.getRowColumnD(1, 2));
-      m3.set(2, 0, m.getRowColumnD(3, 0));
-      m3.set(2, 1, m.getRowColumnD(3, 1));
-      m3.set(2, 2, m.getRowColumnD(3, 2));
+      m3.setR0C0D(m.getR0C0D());
+      m3.setR0C1D(m.getR0C1D());
+      m3.setR0C2D(m.getR0C2D());
+      m3.setR1C0D(m.getR1C0D());
+      m3.setR1C1D(m.getR1C1D());
+      m3.setR1C2D(m.getR1C2D());
+      m3.setR2C0D(m.getR3C0D());
+      m3.setR2C1D(m.getR3C1D());
+      m3.setR2C2D(m.getR3C2D());
 
       r2c3 = -MatrixM3x3D.determinant(m3);
     }
@@ -890,15 +404,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[3, 0]
       // -1 = (-1) ^ (3 + 0)
 
-      m3.set(0, 0, m.getRowColumnD(0, 1));
-      m3.set(0, 1, m.getRowColumnD(0, 2));
-      m3.set(0, 2, m.getRowColumnD(0, 3));
-      m3.set(1, 0, m.getRowColumnD(1, 1));
-      m3.set(1, 1, m.getRowColumnD(1, 2));
-      m3.set(1, 2, m.getRowColumnD(1, 3));
-      m3.set(2, 0, m.getRowColumnD(2, 1));
-      m3.set(2, 1, m.getRowColumnD(2, 2));
-      m3.set(2, 2, m.getRowColumnD(2, 3));
+      m3.setR0C0D(m.getR0C1D());
+      m3.setR0C1D(m.getR0C2D());
+      m3.setR0C2D(m.getR0C3D());
+      m3.setR1C0D(m.getR1C1D());
+      m3.setR1C1D(m.getR1C2D());
+      m3.setR1C2D(m.getR1C3D());
+      m3.setR2C0D(m.getR2C1D());
+      m3.setR2C1D(m.getR2C2D());
+      m3.setR2C2D(m.getR2C3D());
 
       r3c0 = -MatrixM3x3D.determinant(m3);
     }
@@ -907,15 +421,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[3, 1]
       // 1 = (-1) ^ (3 + 1)
 
-      m3.set(0, 0, m.getRowColumnD(0, 0));
-      m3.set(0, 1, m.getRowColumnD(0, 2));
-      m3.set(0, 2, m.getRowColumnD(0, 3));
-      m3.set(1, 0, m.getRowColumnD(1, 0));
-      m3.set(1, 1, m.getRowColumnD(1, 2));
-      m3.set(1, 2, m.getRowColumnD(1, 3));
-      m3.set(2, 0, m.getRowColumnD(2, 0));
-      m3.set(2, 1, m.getRowColumnD(2, 2));
-      m3.set(2, 2, m.getRowColumnD(2, 3));
+      m3.setR0C0D(m.getR0C0D());
+      m3.setR0C1D(m.getR0C2D());
+      m3.setR0C2D(m.getR0C3D());
+      m3.setR1C0D(m.getR1C0D());
+      m3.setR1C1D(m.getR1C2D());
+      m3.setR1C2D(m.getR1C3D());
+      m3.setR2C0D(m.getR2C0D());
+      m3.setR2C1D(m.getR2C2D());
+      m3.setR2C2D(m.getR2C3D());
 
       r3c1 = MatrixM3x3D.determinant(m3);
     }
@@ -924,15 +438,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[3, 2]
       // -1 = (-1) ^ (3 + 2)
 
-      m3.set(0, 0, m.getRowColumnD(0, 0));
-      m3.set(0, 1, m.getRowColumnD(0, 1));
-      m3.set(0, 2, m.getRowColumnD(0, 3));
-      m3.set(1, 0, m.getRowColumnD(1, 0));
-      m3.set(1, 1, m.getRowColumnD(1, 1));
-      m3.set(1, 2, m.getRowColumnD(1, 3));
-      m3.set(2, 0, m.getRowColumnD(2, 0));
-      m3.set(2, 1, m.getRowColumnD(2, 1));
-      m3.set(2, 2, m.getRowColumnD(2, 3));
+      m3.setR0C0D(m.getR0C0D());
+      m3.setR0C1D(m.getR0C1D());
+      m3.setR0C2D(m.getR0C3D());
+      m3.setR1C0D(m.getR1C0D());
+      m3.setR1C1D(m.getR1C1D());
+      m3.setR1C2D(m.getR1C3D());
+      m3.setR2C0D(m.getR2C0D());
+      m3.setR2C1D(m.getR2C1D());
+      m3.setR2C2D(m.getR2C3D());
 
       r3c2 = -MatrixM3x3D.determinant(m3);
     }
@@ -941,15 +455,15 @@ import java.nio.DoubleBuffer;
       // Sub-matrix obtained by removing m[3, 3]
       // 1 = (-1) ^ (3 + 3)
 
-      m3.set(0, 0, m.getRowColumnD(0, 0));
-      m3.set(0, 1, m.getRowColumnD(0, 1));
-      m3.set(0, 2, m.getRowColumnD(0, 2));
-      m3.set(1, 0, m.getRowColumnD(1, 0));
-      m3.set(1, 1, m.getRowColumnD(1, 1));
-      m3.set(1, 2, m.getRowColumnD(1, 2));
-      m3.set(2, 0, m.getRowColumnD(2, 0));
-      m3.set(2, 1, m.getRowColumnD(2, 1));
-      m3.set(2, 2, m.getRowColumnD(2, 2));
+      m3.setR0C0D(m.getR0C0D());
+      m3.setR0C1D(m.getR0C1D());
+      m3.setR0C2D(m.getR0C2D());
+      m3.setR1C0D(m.getR1C0D());
+      m3.setR1C1D(m.getR1C1D());
+      m3.setR1C2D(m.getR1C2D());
+      m3.setR2C0D(m.getR2C0D());
+      m3.setR2C1D(m.getR2C1D());
+      m3.setR2C2D(m.getR2C2D());
 
       r3c3 = MatrixM3x3D.determinant(m3);
     }
@@ -959,51 +473,28 @@ import java.nio.DoubleBuffer;
      * matrix and transpose.
      */
 
-    out.setUnsafe(0, 0, r0c0 * d_inv);
-    out.setUnsafe(0, 1, r0c1 * d_inv);
-    out.setUnsafe(0, 2, r0c2 * d_inv);
-    out.setUnsafe(0, 3, r0c3 * d_inv);
+    temp.setR0C0D(r0c0 * d_inv);
+    temp.setR0C1D(r0c1 * d_inv);
+    temp.setR0C2D(r0c2 * d_inv);
+    temp.setR0C3D(r0c3 * d_inv);
 
-    out.setUnsafe(1, 0, r1c0 * d_inv);
-    out.setUnsafe(1, 1, r1c1 * d_inv);
-    out.setUnsafe(1, 2, r1c2 * d_inv);
-    out.setUnsafe(1, 3, r1c3 * d_inv);
+    temp.setR1C0D(r1c0 * d_inv);
+    temp.setR1C1D(r1c1 * d_inv);
+    temp.setR1C2D(r1c2 * d_inv);
+    temp.setR1C3D(r1c3 * d_inv);
 
-    out.setUnsafe(2, 0, r2c0 * d_inv);
-    out.setUnsafe(2, 1, r2c1 * d_inv);
-    out.setUnsafe(2, 2, r2c2 * d_inv);
-    out.setUnsafe(2, 3, r2c3 * d_inv);
+    temp.setR2C0D(r2c0 * d_inv);
+    temp.setR2C1D(r2c1 * d_inv);
+    temp.setR2C2D(r2c2 * d_inv);
+    temp.setR2C3D(r2c3 * d_inv);
 
-    out.setUnsafe(3, 0, r3c0 * d_inv);
-    out.setUnsafe(3, 1, r3c1 * d_inv);
-    out.setUnsafe(3, 2, r3c2 * d_inv);
-    out.setUnsafe(3, 3, r3c3 * d_inv);
+    temp.setR3C0D(r3c0 * d_inv);
+    temp.setR3C1D(r3c1 * d_inv);
+    temp.setR3C2D(r3c2 * d_inv);
+    temp.setR3C3D(r3c3 * d_inv);
 
-    PMatrixM4x4D.transposeInPlace(out);
+    MatrixM4x4D.transpose(temp, out);
     return Option.some(out);
-  }
-
-  /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
-   * to {@code m}. The function returns {@code Some(m)} iff it was possible to
-   * invert the matrix, and {@code None} otherwise. It is not possible to invert
-   * a matrix that has a determinant of {@code 0}. If the function returns
-   * {@code None}, {@code m} is untouched.
-   *
-   * @param m    The input matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return {@code m}
-   *
-   * @see PMatrixM4x4D#determinant(PMatrixReadable4x4DType)
-   */
-
-  public static <T0, T1> OptionType<PMatrixM4x4D<T1, T0>> invertInPlace(
-    final PMatrixM4x4D<T0, T1> m)
-  {
-    final PMatrixM4x4D<T1, T0> mt = (PMatrixM4x4D<T1, T0>) m;
-    return PMatrixM4x4D.invert(m, mt);
   }
 
   /**
@@ -1014,23 +505,24 @@ import java.nio.DoubleBuffer;
    * preallocated storage in {@code context} to avoid allocating memory. If the
    * function returns {@code None}, {@code m} is untouched.
    *
-   * @param context Preallocated storage.
-   * @param m       The input matrix.
-   * @param <T0>    A phantom type parameter.
-   * @param <T1>    A phantom type parameter.
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param <T0>    A phantom type parameter
+   * @param <T1>    A phantom type parameter
+   * @param <MIN>   The precise type of input matrix
+   * @param <MOUT>  The precise type of output matrix
    *
    * @return {@code m}
-   *
-   * @see PMatrixM4x4D#determinant(PMatrixReadable4x4DType)
    */
 
-  public static <T0, T1> OptionType<PMatrixM4x4D<T1, T0>>
-  invertInPlaceWithContext(
+  public static <T0, T1, MIN extends PMatrixWritable4x4DType<T0, T1> &
+    PMatrixReadable4x4DType<T0, T1>, MOUT extends PMatrixWritable4x4DType<T1,
+    T0> & PMatrixReadable4x4DType<T1, T0>> OptionType<MOUT> invertInPlace(
     final ContextPM4D context,
-    final PMatrixM4x4D<T0, T1> m)
+    final MIN m)
   {
     final PMatrixM4x4D<T1, T0> mt = (PMatrixM4x4D<T1, T0>) m;
-    return PMatrixM4x4D.invertWithContext(context, m, mt);
+    return (OptionType<MOUT>) PMatrixM4x4D.invert(context, m, mt);
   }
 
   /**
@@ -1041,680 +533,163 @@ import java.nio.DoubleBuffer;
    * preallocated storage in {@code context} to avoid allocating memory. If the
    * function returns {@code None}, {@code m} is untouched.
    *
-   * @param context Preallocated storage.
-   * @param m       The input matrix.
-   * @param out     The output matrix.
-   * @param <T0>    A phantom type parameter.
-   * @param <T1>    A phantom type parameter.
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param out     The output matrix
+   * @param <T0>    A phantom type parameter
+   * @param <T1>    A phantom type parameter
+   * @param <MOUT>  The precise type of output matrix
    *
    * @return {@code out}
-   *
-   * @see PMatrixM4x4D#determinant(PMatrixReadable4x4DType)
    */
 
-  public static <T0, T1> OptionType<PMatrixM4x4D<T1, T0>> invertWithContext(
+  public static <T0, T1, MOUT extends PMatrixWritable4x4DType<T1, T0>>
+  OptionType<MOUT> invert(
     final ContextPM4D context,
     final PMatrixReadable4x4DType<T0, T1> m,
-    final PMatrixM4x4D<T1, T0> out)
+    final MOUT out)
   {
-    return PMatrixM4x4D.invertActual(m, context.getM3a(), out);
-  }
-
-  /**
-   * <p> Calculate a matrix representing a "camera" looking from the point
-   * {@code origin} to the point {@code target}. {@code target} must represent
-   * the "up" vector for the camera. Usually, this is simply a unit vector
-   * {@code (0, 1, 0)} representing the Y axis. </p> <p> The function uses
-   * preallocated storage from {@code context}. </p> <p> The view is expressed
-   * as a rotation and translation matrix, written to {@code out_matrix}. </p>
-   *
-   * @param context    Preallocated storage
-   * @param out_matrix The output matrix
-   * @param origin     The position of the viewer
-   * @param target     The target being viewed
-   * @param up         The up vector
-   * @param <T0>       A phantom type parameter.
-   * @param <T1>       A phantom type parameter.
-   */
-
-  public static <T0, T1> void lookAtWithContext(
-    final ContextPM4D context,
-    final VectorReadable3DType origin,
-    final VectorReadable3DType target,
-    final VectorReadable3DType up,
-    final PMatrixM4x4D<T0, T1> out_matrix)
-  {
-    final VectorM3D forward = context.getV3a();
-    final VectorM3D new_up = context.getV3b();
-    final VectorM3D side = context.getV3c();
-    final VectorM3D move = context.getV3d();
-    final PMatrixM4x4D<T1, Phantom2Type> rotation =
-      (PMatrixM4x4D<T1, Phantom2Type>) context.getM4a();
-    final PMatrixM4x4D<T0, T1> translation =
-      (PMatrixM4x4D<T0, T1>) context.getM4b();
-
-    PMatrixM4x4D.setIdentity(rotation);
-    PMatrixM4x4D.setIdentity(translation);
-    PMatrixM4x4D.setIdentity(out_matrix);
-
-    /**
-     * Calculate "forward" vector
-     */
-
-    forward.set3D(
-      target.getXD() - origin.getXD(),
-      target.getYD() - origin.getYD(),
-      target.getZD() - origin.getZD());
-    VectorM3D.normalizeInPlace(forward);
-
-    /**
-     * Calculate "side" vector
-     */
-
-    VectorM3D.crossProduct(forward, up, side);
-    VectorM3D.normalizeInPlace(side);
-
-    /**
-     * Calculate new "up" vector
-     */
-
-    VectorM3D.crossProduct(side, forward, new_up);
-
-    /**
-     * Calculate rotation matrix
-     */
-
-    rotation.set(0, 0, side.getXD());
-    rotation.set(0, 1, side.getYD());
-    rotation.set(0, 2, side.getZD());
-    rotation.set(1, 0, new_up.getXD());
-    rotation.set(1, 1, new_up.getYD());
-    rotation.set(1, 2, new_up.getZD());
-    rotation.set(2, 0, -forward.getXD());
-    rotation.set(2, 1, -forward.getYD());
-    rotation.set(2, 2, -forward.getZD());
-
-    /**
-     * Calculate camera translation matrix
-     */
-
-    move.set3D(-origin.getXD(), -origin.getYD(), -origin.getZD());
-    PMatrixM4x4D.makeTranslation3DInto(move, translation);
-
-    /**
-     * Produce output matrix
-     */
-
-    PMatrixM4x4D.multiply(
-      rotation, translation, (PMatrixM4x4D<T0, Phantom2Type>) out_matrix);
-  }
-
-  /**
-   * <p> Generate and return a matrix that represents a rotation of {@code
-   * angle} radians around the axis {@code axis}. </p> <p> The function assumes
-   * a right-handed coordinate system and therefore a positive rotation around
-   * any axis represents a counter-clockwise rotation around that axis. </p>
-   *
-   * @param angle The angle in radians.
-   * @param axis  The axis.
-   * @param <T0>  A phantom type parameter.
-   * @param <T1>  A phantom type parameter.
-   *
-   * @return A rotation matrix.
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> makeRotation(
-    final double angle,
-    final VectorReadable3DType axis)
-  {
-    final PMatrixM4x4D<T0, T1> out = new PMatrixM4x4D<T0, T1>();
-    PMatrixM4x4D.makeRotationInto(angle, axis, out);
-    return out;
-  }
-
-  /**
-   * <p> Generate a matrix that represents a rotation of {@code angle} radians
-   * around the axis {@code axis} and save to {@code out}. </p> <p> The function
-   * assumes a right-handed coordinate system and therefore a positive rotation
-   * around any axis represents a counter-clockwise rotation around that axis.
-   * </p>
-   *
-   * @param angle The angle in radians.
-   * @param axis  The axis.
-   * @param out   The output matrix.
-   * @param <T0>  A phantom type parameter.
-   * @param <T1>  A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> makeRotationInto(
-    final double angle,
-    final VectorReadable3DType axis,
-    final PMatrixM4x4D<T0, T1> out)
-  {
-    final double axis_x = axis.getXD();
-    final double axis_y = axis.getYD();
-    final double axis_z = axis.getZD();
-
-    final double s = Math.sin(angle);
-    final double c = Math.cos(angle);
-    final double t = 1.0 - c;
-
-    final double tx_sq = t * (axis_x * axis_x);
-    final double ty_sq = t * (axis_y * axis_y);
-    final double tz_sq = t * (axis_z * axis_z);
-
-    final double txy = t * (axis_x * axis_y);
-    final double txz = t * (axis_x * axis_z);
-    final double tyz = t * (axis_y * axis_z);
-
-    final double sx = s * axis_x;
-    final double sy = s * axis_y;
-    final double sz = s * axis_z;
-
-    final double r0c0 = tx_sq + c;
-    final double r0c1 = txy - sz;
-    final double r0c2 = txz + sy;
-    final double r0c3 = 0.0;
-
-    final double r1c0 = txy + sz;
-    final double r1c1 = ty_sq + c;
-    final double r1c2 = tyz - sx;
-    final double r1c3 = 0.0;
-
-    final double r2c0 = txz - sy;
-    final double r2c1 = tyz + sx;
-    final double r2c2 = tz_sq + c;
-    final double r2c3 = 0.0;
-
-    final double r3c0 = 0.0;
-    final double r3c1 = 0.0;
-    final double r3c2 = 0.0;
-    final double r3c3 = 1.0;
-
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(0, 2, r0c2);
-    out.setUnsafe(0, 3, r0c3);
-
-    out.setUnsafe(1, 0, r1c0);
-    out.setUnsafe(1, 1, r1c1);
-    out.setUnsafe(1, 2, r1c2);
-    out.setUnsafe(1, 3, r1c3);
-
-    out.setUnsafe(2, 0, r2c0);
-    out.setUnsafe(2, 1, r2c1);
-    out.setUnsafe(2, 2, r2c2);
-    out.setUnsafe(2, 3, r2c3);
-
-    out.setUnsafe(3, 0, r3c0);
-    out.setUnsafe(3, 1, r3c1);
-    out.setUnsafe(3, 2, r3c2);
-    out.setUnsafe(3, 3, r3c3);
-    return out;
-  }
-
-  /**
-   * Generate and return a matrix that represents a translation of {@code (v.x,
-   * v.y)} from the origin.
-   *
-   * @param v    The translation vector.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation2D(
-    final VectorReadable2DType v)
-  {
-    final PMatrixM4x4D<T0, T1> out = new PMatrixM4x4D<T0, T1>();
-    PMatrixM4x4D.makeTranslation2DInto(v, out);
-    return out;
-  }
-
-  /**
-   * Generate a matrix that represents a translation of {@code (v.x, v.y)} from
-   * the origin, and save to {@code out}.
-   *
-   * @param v    The translation vector.
-   * @param out  The output matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation2DInto(
-    final VectorReadable2DType v,
-    final PMatrixM4x4D<T0, T1> out)
-  {
-    out.setUnsafe(0, 0, 1.0);
-    out.setUnsafe(0, 1, 0.0);
-    out.setUnsafe(0, 2, 0.0);
-    out.setUnsafe(0, 3, v.getXD());
-
-    out.setUnsafe(1, 0, 0.0);
-    out.setUnsafe(1, 1, 1.0);
-    out.setUnsafe(1, 2, 0.0);
-    out.setUnsafe(1, 3, v.getYD());
-
-    out.setUnsafe(2, 0, 0.0);
-    out.setUnsafe(2, 1, 0.0);
-    out.setUnsafe(2, 2, 1.0);
-    out.setUnsafe(2, 3, 0.0);
-
-    out.setUnsafe(3, 0, 0.0);
-    out.setUnsafe(3, 1, 0.0);
-    out.setUnsafe(3, 2, 0.0);
-    out.setUnsafe(3, 3, 1.0);
-    return out;
-  }
-
-  /**
-   * Generate and return a matrix that represents a translation of {@code (v.x,
-   * v.y)} from the origin.
-   *
-   * @param v    The translation vector.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation2I(
-    final VectorReadable2IType v)
-  {
-    final PMatrixM4x4D<T0, T1> out = new PMatrixM4x4D<T0, T1>();
-    PMatrixM4x4D.makeTranslation2IInto(v, out);
-    return out;
-  }
-
-  /**
-   * Generate a matrix that represents a translation of {@code (v.x, v.y)} from
-   * the origin, and save to {@code out}.
-   *
-   * @param v    The translation vector.
-   * @param out  The output matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation2IInto(
-    final VectorReadable2IType v,
-    final PMatrixM4x4D<T0, T1> out)
-  {
-    out.setUnsafe(0, 0, 1.0);
-    out.setUnsafe(0, 1, 0.0);
-    out.setUnsafe(0, 2, 0.0);
-    out.setUnsafe(0, 3, (double) v.getXI());
-
-    out.setUnsafe(1, 0, 0.0);
-    out.setUnsafe(1, 1, 1.0);
-    out.setUnsafe(1, 2, 0.0);
-    out.setUnsafe(1, 3, (double) v.getYI());
-
-    out.setUnsafe(2, 0, 0.0);
-    out.setUnsafe(2, 1, 0.0);
-    out.setUnsafe(2, 2, 1.0);
-    out.setUnsafe(2, 3, 0.0);
-
-    out.setUnsafe(3, 0, 0.0);
-    out.setUnsafe(3, 1, 0.0);
-    out.setUnsafe(3, 2, 0.0);
-    out.setUnsafe(3, 3, 1.0);
-    return out;
-  }
-
-  /**
-   * Generate and return a matrix that represents a translation of {@code (v.x,
-   * v.y, v.z)} from the origin.
-   *
-   * @param v    The translation vector.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation3D(
-    final VectorReadable3DType v)
-  {
-    final PMatrixM4x4D<T0, T1> out = new PMatrixM4x4D<T0, T1>();
-    PMatrixM4x4D.makeTranslation3DInto(v, out);
-    return out;
-  }
-
-  /**
-   * Generate a matrix that represents a translation of {@code (v.x, v.y, v.z)}
-   * from the origin, and save to {@code out}.
-   *
-   * @param v    The translation vector.
-   * @param out  The output matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation3DInto(
-    final VectorReadable3DType v,
-    final PMatrixM4x4D<T0, T1> out)
-  {
-    out.setUnsafe(0, 0, 1.0);
-    out.setUnsafe(0, 1, 0.0);
-    out.setUnsafe(0, 2, 0.0);
-    out.setUnsafe(0, 3, v.getXD());
-
-    out.setUnsafe(1, 0, 0.0);
-    out.setUnsafe(1, 1, 1.0);
-    out.setUnsafe(1, 2, 0.0);
-    out.setUnsafe(1, 3, v.getYD());
-
-    out.setUnsafe(2, 0, 0.0);
-    out.setUnsafe(2, 1, 0.0);
-    out.setUnsafe(2, 2, 1.0);
-    out.setUnsafe(2, 3, v.getZD());
-
-    out.setUnsafe(3, 0, 0.0);
-    out.setUnsafe(3, 1, 0.0);
-    out.setUnsafe(3, 2, 0.0);
-    out.setUnsafe(3, 3, 1.0);
-    return out;
-  }
-
-  /**
-   * Generate and return a matrix that represents a translation of {@code (v.x,
-   * v.y, v.z)} from the origin.
-   *
-   * @param v    The translation vector.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation3I(
-    final VectorReadable3IType v)
-  {
-    final PMatrixM4x4D<T0, T1> out = new PMatrixM4x4D<T0, T1>();
-    PMatrixM4x4D.makeTranslation3IInto(v, out);
-    return out;
-  }
-
-  /**
-   * Generate a matrix that represents a translation of {@code (v.x, v.y, v.z)}
-   * from the origin, and save to {@code out}.
-   *
-   * @param v    The translation vector.
-   * @param out  The output matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> makeTranslation3IInto(
-    final VectorReadable3IType v,
-    final PMatrixM4x4D<T0, T1> out)
-  {
-    out.setUnsafe(0, 0, 1.0);
-    out.setUnsafe(0, 1, 0.0);
-    out.setUnsafe(0, 2, 0.0);
-    out.setUnsafe(0, 3, (double) v.getXI());
-
-    out.setUnsafe(1, 0, 0.0);
-    out.setUnsafe(1, 1, 1.0);
-    out.setUnsafe(1, 2, 0.0);
-    out.setUnsafe(1, 3, (double) v.getYI());
-
-    out.setUnsafe(2, 0, 0.0);
-    out.setUnsafe(2, 1, 0.0);
-    out.setUnsafe(2, 2, 1.0);
-    out.setUnsafe(2, 3, (double) v.getZI());
-
-    out.setUnsafe(3, 0, 0.0);
-    out.setUnsafe(3, 1, 0.0);
-    out.setUnsafe(3, 2, 0.0);
-    out.setUnsafe(3, 3, 1.0);
-    return out;
+    final PMatrixM4x4D<T1, T0> m4a = (PMatrixM4x4D<T1, T0>) context.m4a;
+    return PMatrixM4x4D.invertActual(m, context.m3a, m4a, out);
   }
 
   /**
    * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
    * result to {@code out}.
    *
-   * @param m0   The left input vector.
-   * @param m1   The right input vector.
-   * @param out  The output vector.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <T2> A phantom type parameter.
+   * @param m0     The left input vector
+   * @param m1     The right input vector
+   * @param out    The output vector
+   * @param <T0>   A phantom type parameter
+   * @param <T1>   A phantom type parameter
+   * @param <T2>   A phantom type parameter
+   * @param <MOUT> The precise type of output matrix
    *
    * @return {@code out}
    */
 
-  public static <T0, T1, T2> PMatrixM4x4D<T0, T2> multiply(
+  public static <T0, T1, T2, MOUT extends PMatrixWritable4x4DType<T0, T2>>
+  MOUT multiply(
     final PMatrixReadable4x4DType<T1, T2> m0,
     final PMatrixReadable4x4DType<T0, T1> m1,
-    final PMatrixM4x4D<T0, T2> out)
+    final MOUT out)
   {
     double r0c0 = 0.0;
-    r0c0 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 0);
-    r0c0 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 0);
-    r0c0 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 0);
-    r0c0 += m0.getRowColumnD(0, 3) * m1.getRowColumnD(3, 0);
+    r0c0 += m0.getR0C0D() * m1.getR0C0D();
+    r0c0 += m0.getR0C1D() * m1.getR1C0D();
+    r0c0 += m0.getR0C2D() * m1.getR2C0D();
+    r0c0 += m0.getR0C3D() * m1.getR3C0D();
 
     double r1c0 = 0.0;
-    r1c0 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 0);
-    r1c0 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 0);
-    r1c0 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 0);
-    r1c0 += m0.getRowColumnD(1, 3) * m1.getRowColumnD(3, 0);
+    r1c0 += m0.getR1C0D() * m1.getR0C0D();
+    r1c0 += m0.getR1C1D() * m1.getR1C0D();
+    r1c0 += m0.getR1C2D() * m1.getR2C0D();
+    r1c0 += m0.getR1C3D() * m1.getR3C0D();
 
     double r2c0 = 0.0;
-    r2c0 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 0);
-    r2c0 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 0);
-    r2c0 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 0);
-    r2c0 += m0.getRowColumnD(2, 3) * m1.getRowColumnD(3, 0);
+    r2c0 += m0.getR2C0D() * m1.getR0C0D();
+    r2c0 += m0.getR2C1D() * m1.getR1C0D();
+    r2c0 += m0.getR2C2D() * m1.getR2C0D();
+    r2c0 += m0.getR2C3D() * m1.getR3C0D();
 
     double r3c0 = 0.0;
-    r3c0 += m0.getRowColumnD(3, 0) * m1.getRowColumnD(0, 0);
-    r3c0 += m0.getRowColumnD(3, 1) * m1.getRowColumnD(1, 0);
-    r3c0 += m0.getRowColumnD(3, 2) * m1.getRowColumnD(2, 0);
-    r3c0 += m0.getRowColumnD(3, 3) * m1.getRowColumnD(3, 0);
+    r3c0 += m0.getR3C0D() * m1.getR0C0D();
+    r3c0 += m0.getR3C1D() * m1.getR1C0D();
+    r3c0 += m0.getR3C2D() * m1.getR2C0D();
+    r3c0 += m0.getR3C3D() * m1.getR3C0D();
 
     double r0c1 = 0.0;
-    r0c1 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 1);
-    r0c1 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 1);
-    r0c1 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 1);
-    r0c1 += m0.getRowColumnD(0, 3) * m1.getRowColumnD(3, 1);
+    r0c1 += m0.getR0C0D() * m1.getR0C1D();
+    r0c1 += m0.getR0C1D() * m1.getR1C1D();
+    r0c1 += m0.getR0C2D() * m1.getR2C1D();
+    r0c1 += m0.getR0C3D() * m1.getR3C1D();
 
     double r1c1 = 0.0;
-    r1c1 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 1);
-    r1c1 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 1);
-    r1c1 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 1);
-    r1c1 += m0.getRowColumnD(1, 3) * m1.getRowColumnD(3, 1);
+    r1c1 += m0.getR1C0D() * m1.getR0C1D();
+    r1c1 += m0.getR1C1D() * m1.getR1C1D();
+    r1c1 += m0.getR1C2D() * m1.getR2C1D();
+    r1c1 += m0.getR1C3D() * m1.getR3C1D();
 
     double r2c1 = 0.0;
-    r2c1 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 1);
-    r2c1 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 1);
-    r2c1 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 1);
-    r2c1 += m0.getRowColumnD(2, 3) * m1.getRowColumnD(3, 1);
+    r2c1 += m0.getR2C0D() * m1.getR0C1D();
+    r2c1 += m0.getR2C1D() * m1.getR1C1D();
+    r2c1 += m0.getR2C2D() * m1.getR2C1D();
+    r2c1 += m0.getR2C3D() * m1.getR3C1D();
 
     double r3c1 = 0.0;
-    r3c1 += m0.getRowColumnD(3, 0) * m1.getRowColumnD(0, 1);
-    r3c1 += m0.getRowColumnD(3, 1) * m1.getRowColumnD(1, 1);
-    r3c1 += m0.getRowColumnD(3, 2) * m1.getRowColumnD(2, 1);
-    r3c1 += m0.getRowColumnD(3, 3) * m1.getRowColumnD(3, 1);
+    r3c1 += m0.getR3C0D() * m1.getR0C1D();
+    r3c1 += m0.getR3C1D() * m1.getR1C1D();
+    r3c1 += m0.getR3C2D() * m1.getR2C1D();
+    r3c1 += m0.getR3C3D() * m1.getR3C1D();
 
     double r0c2 = 0.0;
-    r0c2 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 2);
-    r0c2 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 2);
-    r0c2 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 2);
-    r0c2 += m0.getRowColumnD(0, 3) * m1.getRowColumnD(3, 2);
+    r0c2 += m0.getR0C0D() * m1.getR0C2D();
+    r0c2 += m0.getR0C1D() * m1.getR1C2D();
+    r0c2 += m0.getR0C2D() * m1.getR2C2D();
+    r0c2 += m0.getR0C3D() * m1.getR3C2D();
 
     double r1c2 = 0.0;
-    r1c2 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 2);
-    r1c2 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 2);
-    r1c2 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 2);
-    r1c2 += m0.getRowColumnD(1, 3) * m1.getRowColumnD(3, 2);
+    r1c2 += m0.getR1C0D() * m1.getR0C2D();
+    r1c2 += m0.getR1C1D() * m1.getR1C2D();
+    r1c2 += m0.getR1C2D() * m1.getR2C2D();
+    r1c2 += m0.getR1C3D() * m1.getR3C2D();
 
     double r2c2 = 0.0;
-    r2c2 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 2);
-    r2c2 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 2);
-    r2c2 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 2);
-    r2c2 += m0.getRowColumnD(2, 3) * m1.getRowColumnD(3, 2);
+    r2c2 += m0.getR2C0D() * m1.getR0C2D();
+    r2c2 += m0.getR2C1D() * m1.getR1C2D();
+    r2c2 += m0.getR2C2D() * m1.getR2C2D();
+    r2c2 += m0.getR2C3D() * m1.getR3C2D();
 
     double r3c2 = 0.0;
-    r3c2 += m0.getRowColumnD(3, 0) * m1.getRowColumnD(0, 2);
-    r3c2 += m0.getRowColumnD(3, 1) * m1.getRowColumnD(1, 2);
-    r3c2 += m0.getRowColumnD(3, 2) * m1.getRowColumnD(2, 2);
-    r3c2 += m0.getRowColumnD(3, 3) * m1.getRowColumnD(3, 2);
+    r3c2 += m0.getR3C0D() * m1.getR0C2D();
+    r3c2 += m0.getR3C1D() * m1.getR1C2D();
+    r3c2 += m0.getR3C2D() * m1.getR2C2D();
+    r3c2 += m0.getR3C3D() * m1.getR3C2D();
 
     double r0c3 = 0.0;
-    r0c3 += m0.getRowColumnD(0, 0) * m1.getRowColumnD(0, 3);
-    r0c3 += m0.getRowColumnD(0, 1) * m1.getRowColumnD(1, 3);
-    r0c3 += m0.getRowColumnD(0, 2) * m1.getRowColumnD(2, 3);
-    r0c3 += m0.getRowColumnD(0, 3) * m1.getRowColumnD(3, 3);
+    r0c3 += m0.getR0C0D() * m1.getR0C3D();
+    r0c3 += m0.getR0C1D() * m1.getR1C3D();
+    r0c3 += m0.getR0C2D() * m1.getR2C3D();
+    r0c3 += m0.getR0C3D() * m1.getR3C3D();
 
     double r1c3 = 0.0;
-    r1c3 += m0.getRowColumnD(1, 0) * m1.getRowColumnD(0, 3);
-    r1c3 += m0.getRowColumnD(1, 1) * m1.getRowColumnD(1, 3);
-    r1c3 += m0.getRowColumnD(1, 2) * m1.getRowColumnD(2, 3);
-    r1c3 += m0.getRowColumnD(1, 3) * m1.getRowColumnD(3, 3);
+    r1c3 += m0.getR1C0D() * m1.getR0C3D();
+    r1c3 += m0.getR1C1D() * m1.getR1C3D();
+    r1c3 += m0.getR1C2D() * m1.getR2C3D();
+    r1c3 += m0.getR1C3D() * m1.getR3C3D();
 
     double r2c3 = 0.0;
-    r2c3 += m0.getRowColumnD(2, 0) * m1.getRowColumnD(0, 3);
-    r2c3 += m0.getRowColumnD(2, 1) * m1.getRowColumnD(1, 3);
-    r2c3 += m0.getRowColumnD(2, 2) * m1.getRowColumnD(2, 3);
-    r2c3 += m0.getRowColumnD(2, 3) * m1.getRowColumnD(3, 3);
+    r2c3 += m0.getR2C0D() * m1.getR0C3D();
+    r2c3 += m0.getR2C1D() * m1.getR1C3D();
+    r2c3 += m0.getR2C2D() * m1.getR2C3D();
+    r2c3 += m0.getR2C3D() * m1.getR3C3D();
 
     double r3c3 = 0.0;
-    r3c3 += m0.getRowColumnD(3, 0) * m1.getRowColumnD(0, 3);
-    r3c3 += m0.getRowColumnD(3, 1) * m1.getRowColumnD(1, 3);
-    r3c3 += m0.getRowColumnD(3, 2) * m1.getRowColumnD(2, 3);
-    r3c3 += m0.getRowColumnD(3, 3) * m1.getRowColumnD(3, 3);
+    r3c3 += m0.getR3C0D() * m1.getR0C3D();
+    r3c3 += m0.getR3C1D() * m1.getR1C3D();
+    r3c3 += m0.getR3C2D() * m1.getR2C3D();
+    r3c3 += m0.getR3C3D() * m1.getR3C3D();
 
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(0, 2, r0c2);
-    out.setUnsafe(0, 3, r0c3);
+    out.setR0C0D(r0c0);
+    out.setR0C1D(r0c1);
+    out.setR0C2D(r0c2);
+    out.setR0C3D(r0c3);
 
-    out.setUnsafe(1, 0, r1c0);
-    out.setUnsafe(1, 1, r1c1);
-    out.setUnsafe(1, 2, r1c2);
-    out.setUnsafe(1, 3, r1c3);
+    out.setR1C0D(r1c0);
+    out.setR1C1D(r1c1);
+    out.setR1C2D(r1c2);
+    out.setR1C3D(r1c3);
 
-    out.setUnsafe(2, 0, r2c0);
-    out.setUnsafe(2, 1, r2c1);
-    out.setUnsafe(2, 2, r2c2);
-    out.setUnsafe(2, 3, r2c3);
+    out.setR2C0D(r2c0);
+    out.setR2C1D(r2c1);
+    out.setR2C2D(r2c2);
+    out.setR2C3D(r2c3);
 
-    out.setUnsafe(3, 0, r3c0);
-    out.setUnsafe(3, 1, r3c1);
-    out.setUnsafe(3, 2, r3c2);
-    out.setUnsafe(3, 3, r3c3);
+    out.setR3C0D(r3c0);
+    out.setR3C1D(r3c1);
+    out.setR3C2D(r3c2);
+    out.setR3C3D(r3c3);
     return out;
-  }
-
-  /**
-   * <p> Multiply the matrix {@code m} with the vector {@code v}, writing the
-   * resulting vector to {@code out}. </p> <p> Formally, this can be considered
-   * to be premultiplication of the column vector {@code v} with the matrix
-   * {@code m}. </p>
-   *
-   * @param m    The input matrix.
-   * @param v    The input vector.
-   * @param out  The output vector.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <V>  The precise type of writable vector.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1, V extends PVectorWritable4DType<T1>> V
-  multiplyVector4D(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final PVectorReadable4DType<T0> v,
-    final V out)
-  {
-    final VectorM4D va = new VectorM4D();
-    final VectorM4D vb = new VectorM4D();
-    return PMatrixM4x4D.multiplyVector4DActual(m, v, va, vb, out);
-  }
-
-  private static <T0, T1, V extends PVectorWritable4DType<T1>> V
-  multiplyVector4DActual(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final PVectorReadable4DType<T0> v,
-    final VectorM4D va,
-    final VectorM4D vb,
-    final V out)
-  {
-    vb.copyFrom4D(v);
-
-    PMatrixM4x4D.rowUnsafe(m, 0, va);
-    out.setXD(VectorM4D.dotProduct(va, vb));
-    PMatrixM4x4D.rowUnsafe(m, 1, va);
-    out.setYD(VectorM4D.dotProduct(va, vb));
-    PMatrixM4x4D.rowUnsafe(m, 2, va);
-    out.setZD(VectorM4D.dotProduct(va, vb));
-    PMatrixM4x4D.rowUnsafe(m, 3, va);
-    out.setWD(VectorM4D.dotProduct(va, vb));
-
-    return out;
-  }
-
-  /**
-   * <p> Multiply the matrix {@code m} with the vector {@code v}, writing the
-   * resulting vector to {@code out}. </p> <p> The function uses preallocated
-   * storage in {@code context} to avoid allocating memory. </p> <p> Formally,
-   * this can be considered to be premultiplication of the column vector {@code
-   * v} with the matrix {@code m}. </p>
-   *
-   * @param context Preallocated storage.
-   * @param m       The input matrix.
-   * @param v       The input vector.
-   * @param out     The output vector.
-   * @param <T0>    A phantom type parameter.
-   * @param <T1>    A phantom type parameter.
-   * @param <V>     The precise type of writable vector.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1, V extends PVectorWritable4DType<T1>> V
-  multiplyVector4DWithContext(
-    final ContextPM4D context,
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final PVectorReadable4DType<T0> v,
-    final V out)
-  {
-    return PMatrixM4x4D.multiplyVector4DActual(
-      m, v, context.getV4a(), context.getV4b(), out);
-  }
-
-  /**
-   * @param m    The matrix
-   * @param row  The row
-   * @param out  The output vector
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <V>  The precise type of writable vector.
-   *
-   * @return Row {@code row} of the matrix {@code m} in the vector {@code out}.
-   */
-
-  public static <T0, T1, V extends VectorWritable4DType> V row(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final int row,
-    final V out)
-  {
-    return PMatrixM4x4D.rowUnsafe(m, PMatrixM4x4D.rowCheck(row), out);
   }
 
   private static int rowCheck(
@@ -1727,394 +702,54 @@ import java.nio.DoubleBuffer;
     return row;
   }
 
-  private static <V extends VectorWritable4DType> V rowUnsafe(
+  private static <V extends VectorWritable4DType> V multiplyVector4DActual(
     final MatrixReadable4x4DType m,
-    final int row,
+    final VectorReadable4DType v,
+    final VectorM4D va,
+    final VectorM4D vb,
     final V out)
   {
-    out.set4D(
-      m.getRowColumnD(row, 0),
-      m.getRowColumnD(row, 1),
-      m.getRowColumnD(row, 2),
-      m.getRowColumnD(row, 3));
-    return out;
-  }
+    vb.copyFrom4D(v);
 
-  /**
-   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
-   * saving the result in {@code out}.
-   *
-   * @param out  The output matrix.
-   * @param m    The input matrix.
-   * @param r    The scaling value.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <T2> A phantom type parameter.
-   * @param <T3> A phantom type parameter.
-   *
-   * @return {@code m}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> scale(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final double r,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    final double r0c0 = m.getRowColumnD(0, 0) * r;
-    final double r1c0 = m.getRowColumnD(1, 0) * r;
-    final double r2c0 = m.getRowColumnD(2, 0) * r;
-    final double r3c0 = m.getRowColumnD(3, 0) * r;
-
-    final double r0c1 = m.getRowColumnD(0, 1) * r;
-    final double r1c1 = m.getRowColumnD(1, 1) * r;
-    final double r2c1 = m.getRowColumnD(2, 1) * r;
-    final double r3c1 = m.getRowColumnD(3, 1) * r;
-
-    final double r0c2 = m.getRowColumnD(0, 2) * r;
-    final double r1c2 = m.getRowColumnD(1, 2) * r;
-    final double r2c2 = m.getRowColumnD(2, 2) * r;
-    final double r3c2 = m.getRowColumnD(3, 2) * r;
-
-    final double r0c3 = m.getRowColumnD(0, 3) * r;
-    final double r1c3 = m.getRowColumnD(1, 3) * r;
-    final double r2c3 = m.getRowColumnD(2, 3) * r;
-    final double r3c3 = m.getRowColumnD(3, 3) * r;
-
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(1, 0, r1c0);
-    out.setUnsafe(2, 0, r2c0);
-    out.setUnsafe(3, 0, r3c0);
-
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(1, 1, r1c1);
-    out.setUnsafe(2, 1, r2c1);
-    out.setUnsafe(3, 1, r3c1);
-
-    out.setUnsafe(0, 2, r0c2);
-    out.setUnsafe(1, 2, r1c2);
-    out.setUnsafe(2, 2, r2c2);
-    out.setUnsafe(3, 2, r3c2);
-
-    out.setUnsafe(0, 3, r0c3);
-    out.setUnsafe(1, 3, r1c3);
-    out.setUnsafe(2, 3, r2c3);
-    out.setUnsafe(3, 3, r3c3);
+    m.getRow4DUnsafe(0, va);
+    out.setXD(VectorM4D.dotProduct(va, vb));
+    m.getRow4DUnsafe(1, va);
+    out.setYD(VectorM4D.dotProduct(va, vb));
+    m.getRow4DUnsafe(2, va);
+    out.setZD(VectorM4D.dotProduct(va, vb));
+    m.getRow4DUnsafe(3, va);
+    out.setWD(VectorM4D.dotProduct(va, vb));
 
     return out;
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
-   * saving the result in {@code m}.
+   * <p> Multiply the matrix {@code m} with the vector {@code v}, writing the
+   * resulting vector to {@code out}. </p> <p> The function uses preallocated
+   * storage in {@code context} to avoid allocating memory. </p> <p> Formally,
+   * this can be considered to be premultiplication of the column vector {@code
+   * v} with the matrix {@code m}. </p>
    *
-   * @param m    The input matrix.
-   * @param r    The scaling value.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <T2> A phantom type parameter.
-   * @param <T3> A phantom type parameter.
-   *
-   * @return {@code m}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> scaleInPlace(
-    final PMatrixM4x4D<T0, T1> m,
-    final double r)
-  {
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.scale(m, r, m);
-  }
-
-  /**
-   * <p>Scale row {@code r} of the matrix {@code m} by {@code r}, saving the
-   * result to row {@code r} of {@code out}.</p>
-   *
-   * <p>This is one of the three <i>elementary</i> operations defined on
-   * matrices.</p>
-   *
-   * @param m    The input matrix.
-   * @param row  The index of the row {@code 0 <= row < 4}.
-   * @param r    The scaling value.
-   * @param out  The output matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <T2> A phantom type parameter.
-   * @param <T3> A phantom type parameter.
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param v       The input vector
+   * @param out     The output vector
+   * @param <T0>    A phantom type parameter
+   * @param <T1>    A phantom type parameter
+   * @param <V>     The precise type of writable vector
    *
    * @return {@code out}
    */
 
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> scaleRow(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final int row,
-    final double r,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    final VectorM4D tmp = new VectorM4D();
-    return PMatrixM4x4D.scaleRowUnsafe(
-      m, PMatrixM4x4D.rowCheck(row), r, tmp, out);
-  }
-
-  /**
-   * <p>Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
-   * result to row {@code r} of {@code m}.</p>
-   *
-   * <p>This is one of the three <i>elementary</i> operations defined on
-   * matrices.</p>
-   *
-   * @param m    The input matrix.
-   * @param row  The index of the row {@code 0 <= row < 4}.
-   * @param r    The scaling value.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <T2> A phantom type parameter.
-   * @param <T3> A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> scaleRowInPlace(
-    final PMatrixM4x4D<T0, T1> m,
-    final int row,
-    final double r)
-  {
-    final VectorM4D tmp = new VectorM4D();
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.scaleRowUnsafe(
-      m, row, r, tmp, m);
-  }
-
-  /**
-   * <p>Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
-   * result to row {@code r} of {@code m}. The function uses preallocated
-   * storage in {@code context} to avoid allocating memory.</p>
-   *
-   * <p>This is one of the three <i>elementary</i> operations defined on
-   * matrices.</p>
-   *
-   * @param context Preallocated storage.
-   * @param m       The input matrix.
-   * @param row     The index of the row {@code 0 <= row < 4}.
-   * @param r       The scaling value.
-   * @param <T0>    A phantom type parameter.
-   * @param <T1>    A phantom type parameter.
-   * @param <T2>    A phantom type parameter.
-   * @param <T3>    A phantom type parameter.
-   *
-   * @return {@code m}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3>
-  scaleRowInPlaceWithContext(
-    final ContextPM4D context,
-    final PMatrixM4x4D<T0, T1> m,
-    final int row,
-    final double r)
-  {
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.scaleRowUnsafe(
-      m, PMatrixM4x4D.rowCheck(row), r, context.getV4a(), m);
-  }
-
-  private static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> scaleRowUnsafe(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final int row,
-    final double r,
-    final VectorM4D tmp,
-    final PMatrixM4x4D<T2, T3> out)
-  {
-    PMatrixM4x4D.rowUnsafe(m, row, tmp);
-    VectorM4D.scaleInPlace(tmp, r);
-    PMatrixM4x4D.setRowUnsafe(out, row, tmp);
-    return out;
-  }
-
-  /**
-   * <p>Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
-   * result to row {@code r} of {@code out}. The function uses preallocated
-   * storage in {@code context} to avoid allocating memory.</p>
-   *
-   * <p>This is one of the three <i>elementary</i> operations defined on
-   * matrices.</p>
-   *
-   * @param context Preallocated storage.
-   * @param m       The input matrix.
-   * @param row     The index of the row {@code 0 <= row < 4}.
-   * @param r       The scaling value.
-   * @param out     The output matrix.
-   * @param <T0>    A phantom type parameter.
-   * @param <T1>    A phantom type parameter.
-   * @param <T2>    A phantom type parameter.
-   * @param <T3>    A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> scaleRowWithContext(
+  public static <T0, T1, V extends PVectorWritable4DType<T1>> V
+  multiplyVector4D(
     final ContextPM4D context,
     final PMatrixReadable4x4DType<T0, T1> m,
-    final int row,
-    final double r,
-    final PMatrixM4x4D<T2, T3> out)
+    final PVectorReadable4DType<T0> v,
+    final V out)
   {
-    return PMatrixM4x4D.scaleRowUnsafe(
-      m, PMatrixM4x4D.rowCheck(row), r, context.getV4a(), out);
-  }
-
-  /**
-   * Set the value in the matrix {@code m} at row {@code row}, column {@code
-   * column} to {@code value}.
-   *
-   * @param m      The matrix
-   * @param row    The row
-   * @param column The column
-   * @param value  The value
-   * @param <T0>   A phantom type parameter.
-   * @param <T1>   A phantom type parameter.
-   *
-   * @return {@code m}
-   */
-
-  public static <T0, T1> PMatrixM4x4D<T0, T1> set(
-    final PMatrixM4x4D<T0, T1> m,
-    final int row,
-    final int column,
-    final double value)
-  {
-    m.view.put(PMatrixM4x4D.indexChecked(row, column), value);
-    return m;
-  }
-
-  /**
-   * Set the given matrix {@code m} to the identity matrix.
-   *
-   * @param m    The matrix
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <T2> A phantom type parameter.
-   * @param <T3> A phantom type parameter.
-   *
-   * @return {@code m}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> setIdentity(
-    final PMatrixM4x4D<T0, T1> m)
-  {
-    m.view.clear();
-
-    for (int row = 0; row < PMatrixM4x4D.VIEW_ROWS; ++row) {
-      for (int col = 0; col < PMatrixM4x4D.VIEW_COLS; ++col) {
-        if (row == col) {
-          m.setUnsafe(row, col, 1.0);
-        } else {
-          m.setUnsafe(row, col, 0.0);
-        }
-      }
-    }
-
-    return (PMatrixM4x4D<T2, T3>) m;
-  }
-
-  private static <T0, T1> void setRowUnsafe(
-    final PMatrixM4x4D<T0, T1> m,
-    final int row,
-    final VectorReadable4DType v)
-  {
-    m.setUnsafe(row, 0, v.getXD());
-    m.setUnsafe(row, 1, v.getYD());
-    m.setUnsafe(row, 2, v.getZD());
-    m.setUnsafe(row, 3, v.getWD());
-  }
-
-  /**
-   * Set the given matrix {@code m} to the zero matrix.
-   *
-   * @param m    The matrix
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <T2> A phantom type parameter.
-   * @param <T3> A phantom type parameter.
-   *
-   * @return {@code m}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> setZero(
-    final PMatrixM4x4D<T0, T1> m)
-  {
-    m.view.clear();
-    for (int index = 0; index < (PMatrixM4x4D.VIEW_ROWS
-                                 * PMatrixM4x4D.VIEW_COLS); ++index) {
-      m.view.put(index, 0.0);
-    }
-    return (PMatrixM4x4D<T2, T3>) m;
-  }
-
-  /**
-   * Return the trace of the matrix {@code m}. The trace is defined as the sum
-   * of the diagonal elements of the matrix.
-   *
-   * @param m    The input matrix
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   *
-   * @return The trace of the matrix
-   */
-
-  public static <T0, T1> double trace(
-    final PMatrixReadable4x4DType<T0, T1> m)
-  {
-    return m.getRowColumnD(0, 0)
-           + m.getRowColumnD(1, 1)
-           + m.getRowColumnD(2, 2)
-           + m.getRowColumnD(3, 3);
-  }
-
-  /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix to
-   * {@code out}.
-   *
-   * @param m    The input matrix.
-   * @param out  The output matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <T2> A phantom type parameter.
-   * @param <T3> A phantom type parameter.
-   *
-   * @return {@code out}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> transpose(
-    final PMatrixReadable4x4DType<T0, T1> m,
-    final PMatrixM4x4D<T0, T1> out)
-  {
-    PMatrixM4x4D.copy(m, out);
-    return (PMatrixM4x4D<T2, T3>) PMatrixM4x4D.transposeInPlace(out);
-  }
-
-  /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix to
-   * {@code m}.
-   *
-   * @param m    The input matrix.
-   * @param <T0> A phantom type parameter.
-   * @param <T1> A phantom type parameter.
-   * @param <T2> A phantom type parameter.
-   * @param <T3> A phantom type parameter.
-   *
-   * @return {@code m}
-   */
-
-  public static <T0, T1, T2, T3> PMatrixM4x4D<T2, T3> transposeInPlace(
-    final PMatrixM4x4D<T0, T1> m)
-  {
-    for (int row = 0; row < (PMatrixM4x4D.VIEW_ROWS - 1); ++row) {
-      for (int column = row + 1; column < PMatrixM4x4D.VIEW_COLS; ++column) {
-        final double x = m.view.get((row * PMatrixM4x4D.VIEW_ROWS) + column);
-        m.view.put(
-          (row * PMatrixM4x4D.VIEW_ROWS) + column,
-          m.view.get(row + (PMatrixM4x4D.VIEW_COLS * column)));
-        m.view.put(row + (PMatrixM4x4D.VIEW_COLS * column), x);
-      }
-    }
-
-    return (PMatrixM4x4D<T2, T3>) m;
+    return PMatrixM4x4D.multiplyVector4DActual(
+      m, v, context.v4a, context.v4b, out);
   }
 
   @Override public boolean equals(
@@ -2148,7 +783,139 @@ import java.nio.DoubleBuffer;
     final int row,
     final V out)
   {
-    PMatrixM4x4D.rowUnsafe(this, PMatrixM4x4D.rowCheck(row), out);
+    PMatrixM4x4D.rowCheck(row);
+    this.getRow4DUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable4DType> void getRow4DUnsafe(
+    final int row,
+    final V out)
+  {
+    final double x = this.view.get(PMatrixM4x4D.indexUnsafe(row, 0));
+    final double y = this.view.get(PMatrixM4x4D.indexUnsafe(row, 1));
+    final double z = this.view.get(PMatrixM4x4D.indexUnsafe(row, 2));
+    final double w = this.view.get(PMatrixM4x4D.indexUnsafe(row, 3));
+    out.set4D(x, y, z, w);
+  }
+
+  @Override public double getR0C3D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(0, 3));
+  }
+
+  @Override public void setR0C3D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(0, 3), x);
+  }
+
+  @Override public void setRowWith4D(
+    final int row,
+    final VectorReadable4DType v)
+  {
+    PMatrixM4x4D.rowCheck(row);
+    this.setRowWith4DUnsafe(row, v);
+  }
+
+  @Override public void setRowWith4DUnsafe(
+    final int row,
+    final VectorReadable4DType v)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(row, 0), v.getXD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(row, 1), v.getYD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(row, 2), v.getZD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(row, 3), v.getWD());
+  }
+
+  @Override public void setRow0With4D(final VectorReadable4DType v)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(0, 0), v.getXD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(0, 1), v.getYD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(0, 2), v.getZD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(0, 3), v.getWD());
+  }
+
+  @Override public void setRow1With4D(final VectorReadable4DType v)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(1, 0), v.getXD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(1, 1), v.getYD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(1, 2), v.getZD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(1, 3), v.getWD());
+  }
+
+  @Override public void setRow2With4D(final VectorReadable4DType v)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(2, 0), v.getXD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(2, 1), v.getYD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(2, 2), v.getZD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(2, 3), v.getWD());
+  }
+
+  @Override public void setRow3With4D(final VectorReadable4DType v)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(3, 0), v.getXD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(3, 1), v.getYD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(3, 2), v.getZD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(3, 3), v.getWD());
+  }
+
+  @Override public double getR1C3D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(1, 3));
+  }
+
+  @Override public void setR1C3D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(1, 3), x);
+  }
+
+  @Override public double getR2C3D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(2, 3));
+  }
+
+  @Override public void setR2C3D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(2, 3), x);
+  }
+
+  @Override public double getR3C0D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(3, 0));
+  }
+
+  @Override public void setR3C0D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(3, 0), x);
+  }
+
+  @Override public double getR3C1D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(3, 1));
+  }
+
+  @Override public void setR3C1D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(3, 1), x);
+  }
+
+  @Override public double getR3C2D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(3, 2));
+  }
+
+  @Override public void setR3C2D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(3, 2), x);
+  }
+
+  @Override public double getR3C3D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(3, 3));
+  }
+
+  @Override public void setR3C3D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(3, 3), x);
   }
 
   @Override public double getRowColumnD(
@@ -2161,33 +928,29 @@ import java.nio.DoubleBuffer;
   @Override public int hashCode()
   {
     final int prime = 31;
-    int result = 1;
-    result = (prime * result);
+    int r = prime;
 
-    for (int index = 0; index < PMatrixM4x4D.VIEW_ELEMENTS; ++index) {
-      result += Double.valueOf(this.view.get(index)).hashCode();
-    }
-    return result;
-  }
+    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR2C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR3C0D(), prime, r);
 
-  /**
-   * Set the value at the given row and column.
-   *
-   * @param row    The row
-   * @param column The column
-   * @param value  The value
-   *
-   * @return {@code this}
-   */
+    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR2C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR3C1D(), prime, r);
 
-  public PMatrixM4x4D<T0, T1> set(
-    final int row,
-    final int column,
-    final double value)
-  {
-    this.view.put(PMatrixM4x4D.indexChecked(row, column), value);
-    this.view.clear();
-    return this;
+    r = HashUtility.accumulateDoubleHash(this.getR0C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR2C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR3C2D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(this.getR0C3D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C3D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR2C3D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR3C3D(), prime, r);
+
+    return r;
   }
 
   @Override public void setRowColumnD(
@@ -2198,24 +961,9 @@ import java.nio.DoubleBuffer;
     this.view.put(PMatrixM4x4D.indexChecked(row, column), value);
   }
 
-  /**
-   * <p> Set the value at row {@code row} and {@code column} to {@code value}
-   * without bounds checking. </p> <p> This function is only accessible by code
-   * in the same package as this. </p>
-   */
-
-  PMatrixM4x4D<T0, T1> setUnsafe(
-    final int row,
-    final int column,
-    final double value)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(row, column), value);
-    return this;
-  }
-
   @SuppressWarnings("boxing") @Override public String toString()
   {
-    final StringBuilder builder = new StringBuilder();
+    final StringBuilder builder = new StringBuilder(512);
     for (int row = 0; row < PMatrixM4x4D.VIEW_ROWS; ++row) {
       final double c0 = this.view.get(PMatrixM4x4D.indexUnsafe(row, 0));
       final double c1 = this.view.get(PMatrixM4x4D.indexUnsafe(row, 1));
@@ -2228,6 +976,164 @@ import java.nio.DoubleBuffer;
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  @Override public <V extends VectorWritable3DType> void getRow3D(
+    final int row,
+    final V out)
+  {
+    PMatrixM4x4D.rowCheck(row);
+    this.getRow3DUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable3DType> void getRow3DUnsafe(
+    final int row,
+    final V out)
+  {
+    final double x = this.view.get(PMatrixM4x4D.indexUnsafe(row, 0));
+    final double y = this.view.get(PMatrixM4x4D.indexUnsafe(row, 1));
+    final double z = this.view.get(PMatrixM4x4D.indexUnsafe(row, 2));
+    out.set3D(x, y, z);
+  }
+
+  @Override public double getR0C2D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(0, 2));
+  }
+
+  @Override public void setR0C2D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(0, 2), x);
+  }
+
+  @Override public void setRowWith3D(
+    final int row,
+    final VectorReadable3DType v)
+  {
+    PMatrixM4x4D.rowCheck(row);
+    this.setRowWith3DUnsafe(row, v);
+  }
+
+  @Override public void setRowWith3DUnsafe(
+    final int row,
+    final VectorReadable3DType v)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(row, 0), v.getXD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(row, 1), v.getYD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(row, 2), v.getZD());
+  }
+
+  @Override public double getR1C2D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(1, 2));
+  }
+
+  @Override public void setR1C2D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(1, 2), x);
+  }
+
+  @Override public double getR2C0D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(2, 0));
+  }
+
+  @Override public void setR2C0D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(2, 0), x);
+  }
+
+  @Override public double getR2C1D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(2, 1));
+  }
+
+  @Override public void setR2C1D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(2, 1), x);
+  }
+
+  @Override public double getR2C2D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(2, 2));
+  }
+
+  @Override public void setR2C2D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(2, 2), x);
+  }
+
+  @Override public <V extends VectorWritable2DType> void getRow2D(
+    final int row,
+    final V out)
+  {
+    PMatrixM4x4D.rowCheck(row);
+    this.getRow2DUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
+    final int row,
+    final V out)
+  {
+    final double x = this.view.get(PMatrixM4x4D.indexUnsafe(row, 0));
+    final double y = this.view.get(PMatrixM4x4D.indexUnsafe(row, 1));
+    out.set2D(x, y);
+  }
+
+  @Override public double getR0C0D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(0, 0));
+  }
+
+  @Override public void setR0C0D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(0, 0), x);
+  }
+
+  @Override public void setRowWith2D(
+    final int row,
+    final VectorReadable2DType v)
+  {
+    PMatrixM4x4D.rowCheck(row);
+    this.setRowWith2DUnsafe(row, v);
+  }
+
+  @Override public void setRowWith2DUnsafe(
+    final int row,
+    final VectorReadable2DType v)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(row, 0), v.getXD());
+    this.view.put(PMatrixM4x4D.indexUnsafe(row, 1), v.getYD());
+  }
+
+  @Override public double getR1C0D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(1, 0));
+  }
+
+  @Override public void setR1C0D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(1, 0), x);
+  }
+
+  @Override public double getR0C1D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(0, 1));
+  }
+
+  @Override public void setR0C1D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(0, 1), x);
+  }
+
+  @Override public double getR1C1D()
+  {
+    return this.view.get(PMatrixM4x4D.indexUnsafe(1, 1));
+  }
+
+  @Override public void setR1C1D(final double x)
+  {
+    this.view.put(PMatrixM4x4D.indexUnsafe(1, 1), x);
   }
 
   private interface Phantom2Type
@@ -2271,51 +1177,6 @@ import java.nio.DoubleBuffer;
     public ContextPM4D()
     {
 
-    }
-
-    final MatrixM3x3D getM3a()
-    {
-      return this.m3a;
-    }
-
-    final PMatrixM4x4D<?, ?> getM4a()
-    {
-      return this.m4a;
-    }
-
-    final PMatrixM4x4D<?, ?> getM4b()
-    {
-      return this.m4b;
-    }
-
-    final VectorM3D getV3a()
-    {
-      return this.v3a;
-    }
-
-    final VectorM3D getV3b()
-    {
-      return this.v3b;
-    }
-
-    final VectorM3D getV3c()
-    {
-      return this.v3c;
-    }
-
-    final VectorM3D getV3d()
-    {
-      return this.v3d;
-    }
-
-    final VectorM4D getV4a()
-    {
-      return this.v4a;
-    }
-
-    final VectorM4D getV4b()
-    {
-      return this.v4b;
     }
   }
 }

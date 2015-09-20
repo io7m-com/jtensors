@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -52,8 +52,7 @@ import java.nio.FloatBuffer;
 
 //@formatter:on
 
-public final class MatrixM2x2F
-  implements MatrixDirectReadable2x2FType, MatrixWritable2x2FType
+public final class MatrixM2x2F implements MatrixDirect2x2FType
 {
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
@@ -69,7 +68,7 @@ public final class MatrixM2x2F
     VIEW_BYTES = MatrixM2x2F.VIEW_ELEMENTS * MatrixM2x2F.VIEW_ELEMENT_SIZE;
   }
 
-  @SuppressWarnings("unused") private final ByteBuffer data;
+  @SuppressWarnings("unused") private final ByteBuffer  data;
   private final                             FloatBuffer view;
 
   /**
@@ -122,39 +121,36 @@ public final class MatrixM2x2F
     this.view = v;
     this.view.clear();
 
-    for (int row = 0; row < MatrixM2x2F.VIEW_ROWS; ++row) {
-      for (int col = 0; col < MatrixM2x2F.VIEW_COLS; ++col) {
-        this.setUnsafe(row, col, source.getRowColumnF(row, col));
-      }
-    }
+    MatrixM2x2F.copy(source, this);
   }
 
   /**
    * Elementwise add of matrices {@code m0} and {@code m1}.
    *
-   * @param m0  The left input matrix.
-   * @param m1  The right input matrix.
-   * @param out The output matrix.
+   * @param <M> The precise type of matrix
+   * @param m0  The left input matrix
+   * @param m1  The right input matrix
+   * @param out The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM2x2F add(
+  public static <M extends MatrixWritable2x2FType> M add(
     final MatrixReadable2x2FType m0,
     final MatrixReadable2x2FType m1,
-    final MatrixM2x2F out)
+    final M out)
   {
-    final float r0c0 = m0.getRowColumnF(0, 0) + m1.getRowColumnF(0, 0);
-    final float r1c0 = m0.getRowColumnF(1, 0) + m1.getRowColumnF(1, 0);
+    final float r0c0 = m0.getR0C0F() + m1.getR0C0F();
+    final float r1c0 = m0.getR1C0F() + m1.getR1C0F();
 
-    final float r0c1 = m0.getRowColumnF(0, 1) + m1.getRowColumnF(0, 1);
-    final float r1c1 = m0.getRowColumnF(1, 1) + m1.getRowColumnF(1, 1);
+    final float r0c1 = m0.getR0C1F() + m1.getR0C1F();
+    final float r1c1 = m0.getR1C1F() + m1.getR1C1F();
 
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(1, 0, r1c0);
+    out.setR0C0F(r0c0);
+    out.setR1C0F(r1c0);
 
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(1, 1, r1c1);
+    out.setR0C1F(r0c1);
+    out.setR1C1F(r1c1);
     return out;
   }
 
@@ -162,16 +158,18 @@ public final class MatrixM2x2F
    * Elementwise add of matrices {@code m0} and {@code m1}, returning the result
    * in {@code m0}.
    *
-   * @param m0 The left input matrix.
-   * @param m1 The right input matrix.
+   * @param <M> The precise type of matrix
+   * @param m0  The left input matrix
+   * @param m1  The right input matrix
    *
    * @return {@code m0}
    *
    * @since 5.0.0
    */
 
-  public static MatrixM2x2F addInPlace(
-    final MatrixM2x2F m0,
+  public static <M extends MatrixWritable2x2FType & MatrixReadable2x2FType> M
+  addInPlace(
+    final M m0,
     final MatrixReadable2x2FType m1)
   {
     return MatrixM2x2F.add(m0, m1, m0);
@@ -185,30 +183,34 @@ public final class MatrixM2x2F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m     The input matrix.
-   * @param row_a The row on the lefthand side of the addition.
-   * @param row_b The row on the righthand side of the addition.
-   * @param row_c The destination row.
-   * @param r     The scaling value.
-   * @param out   The output matrix.
+   * @param <M>   The precise type of matrix
+   * @param c     Preallocated storage
+   * @param m     The input matrix
+   * @param row_a The row on the lefthand side of the addition
+   * @param row_b The row on the righthand side of the addition
+   * @param row_c The destination row
+   * @param r     The scaling value
+   * @param out   The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM2x2F addRowScaled(
+  public static <M extends MatrixWritable2x2FType> M addRowScaled(
+    final ContextMM2F c,
     final MatrixReadable2x2FType m,
     final int row_a,
     final int row_b,
     final int row_c,
     final float r,
-    final MatrixM2x2F out)
+    final M out)
   {
     return MatrixM2x2F.addRowScaledUnsafe(
       m,
       MatrixM2x2F.rowCheck(row_a),
       MatrixM2x2F.rowCheck(row_b),
-      MatrixM2x2F.rowCheck(row_c),
-      r,
+      MatrixM2x2F.rowCheck(row_c), (double) r,
+      c.v2a,
+      c.v2b,
       out);
   }
 
@@ -220,40 +222,43 @@ public final class MatrixM2x2F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m     The input matrix.
-   * @param row_a The row on the lefthand side of the addition.
-   * @param row_b The row on the righthand side of the addition.
-   * @param row_c The destination row.
-   * @param r     The scaling value.
+   * @param <M>   The precise type of matrix
+   * @param c     Preallocated storage
+   * @param m     The input matrix
+   * @param row_a The row on the lefthand side of the addition
+   * @param row_b The row on the righthand side of the addition
+   * @param row_c The destination row
+   * @param r     The scaling value
    *
    * @return {@code m}
    */
 
-  public static MatrixM2x2F addRowScaledInPlace(
-    final MatrixM2x2F m,
+  public static <M extends MatrixWritable2x2FType & MatrixReadable2x2FType> M
+  addRowScaledInPlace(
+    final ContextMM2F c,
+    final M m,
     final int row_a,
     final int row_b,
     final int row_c,
     final float r)
   {
-    return MatrixM2x2F.addRowScaled(m, row_a, row_b, row_c, r, m);
+    return MatrixM2x2F.addRowScaled(c, m, row_a, row_b, row_c, r, m);
   }
 
-  private static MatrixM2x2F addRowScaledUnsafe(
+  private static <M extends MatrixWritable2x2FType> M addRowScaledUnsafe(
     final MatrixReadable2x2FType m,
     final int row_a,
     final int row_b,
     final int row_c,
-    final float r,
-    final MatrixM2x2F out)
+    final double r,
+    final VectorM2F va,
+    final VectorM2F vb,
+    final M out)
   {
-    final VectorM2F va = new VectorM2F();
-    final VectorM2F vb = new VectorM2F();
-    MatrixM2x2F.rowUnsafe(m, row_a, va);
-    MatrixM2x2F.rowUnsafe(m, row_b, vb);
-
-    VectorM2F.addScaledInPlace(va, vb, (double) r);
-    MatrixM2x2F.setRowUnsafe(out, row_c, va);
+    m.getRow2FUnsafe(row_a, va);
+    m.getRow2FUnsafe(row_b, vb);
+    VectorM2F.addScaledInPlace(va, vb, r);
+    out.setRowWith2FUnsafe(row_c, va);
     return out;
   }
 
@@ -271,28 +276,28 @@ public final class MatrixM2x2F
    * Copy the contents of the matrix {@code input} to the matrix {@code output},
    * completely replacing all elements.
    *
-   * @param input  The input vector.
-   * @param output The output vector.
+   * @param <M>    The precise type of matrix
+   * @param input  The input vector
+   * @param output The output vector
    *
    * @return {@code output}
    */
 
-  public static MatrixM2x2F copy(
+  public static <M extends MatrixWritable2x2FType> M copy(
     final MatrixReadable2x2FType input,
-    final MatrixM2x2F output)
+    final M output)
   {
-    for (int col = 0; col < MatrixM2x2F.VIEW_COLS; ++col) {
-      for (int row = 0; row < MatrixM2x2F.VIEW_ROWS; ++row) {
-        output.setUnsafe(row, col, input.getRowColumnF(row, col));
-      }
-    }
+    output.setR0C0F(input.getR0C0F());
+    output.setR1C0F(input.getR1C0F());
+    output.setR0C1F(input.getR0C1F());
+    output.setR1C1F(input.getR1C1F());
     return output;
   }
 
   /**
    * Calculate the determinant of the matrix {@code m}.
    *
-   * @param m The input matrix.
+   * @param m The input matrix
    *
    * @return The determinant
    */
@@ -300,10 +305,10 @@ public final class MatrixM2x2F
   public static float determinant(
     final MatrixReadable2x2FType m)
   {
-    final float r0c0 = m.getRowColumnF(0, 0);
-    final float r0c1 = m.getRowColumnF(0, 1);
-    final float r1c0 = m.getRowColumnF(1, 0);
-    final float r1c1 = m.getRowColumnF(1, 1);
+    final float r0c0 = m.getR0C0F();
+    final float r0c1 = m.getR0C1F();
+    final float r1c0 = m.getR1C0F();
+    final float r1c1 = m.getR1C1F();
 
     return (r0c0 * r1c1) - (r0c1 * r1c0);
   }
@@ -315,22 +320,30 @@ public final class MatrixM2x2F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m     The input matrix.
-   * @param row_a The first row.
-   * @param row_b The second row.
-   * @param out   The output matrix.
+   * @param <M>   The precise type of matrix
+   * @param c     Preallocated storage
+   * @param m     The input matrix
+   * @param row_a The first row
+   * @param row_b The second row
+   * @param out   The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM2x2F exchangeRows(
+  public static <M extends MatrixWritable2x2FType> M exchangeRows(
+    final ContextMM2F c,
     final MatrixReadable2x2FType m,
     final int row_a,
     final int row_b,
-    final MatrixM2x2F out)
+    final M out)
   {
     return MatrixM2x2F.exchangeRowsUnsafe(
-      m, MatrixM2x2F.rowCheck(row_a), MatrixM2x2F.rowCheck(row_b), out);
+      m,
+      MatrixM2x2F.rowCheck(row_a),
+      MatrixM2x2F.rowCheck(row_b),
+      c.v2a,
+      c.v2b,
+      out);
   }
 
   /**
@@ -340,35 +353,37 @@ public final class MatrixM2x2F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m     The input matrix.
-   * @param row_a The first row.
-   * @param row_b The second row.
+   * @param <M>   The precise type of matrix
+   * @param c     Preallocated storage
+   * @param m     The input matrix
+   * @param row_a The first row
+   * @param row_b The second row
    *
    * @return {@code m}
    */
 
-  public static MatrixM2x2F exchangeRowsInPlace(
-    final MatrixM2x2F m,
+  public static <M extends MatrixWritable2x2FType & MatrixReadable2x2FType> M
+  exchangeRowsInPlace(
+    final ContextMM2F c,
+    final M m,
     final int row_a,
     final int row_b)
   {
-    return MatrixM2x2F.exchangeRows(m, row_a, row_b, m);
+    return MatrixM2x2F.exchangeRows(c, m, row_a, row_b, m);
   }
 
-  private static MatrixM2x2F exchangeRowsUnsafe(
+  private static <M extends MatrixWritable2x2FType> M exchangeRowsUnsafe(
     final MatrixReadable2x2FType m,
     final int row_a,
     final int row_b,
-    final MatrixM2x2F out)
+    final VectorM2F va,
+    final VectorM2F vb,
+    final M out)
   {
-    final VectorM2F va = new VectorM2F();
-    final VectorM2F vb = new VectorM2F();
-
-    MatrixM2x2F.rowUnsafe(m, row_a, va);
-    MatrixM2x2F.rowUnsafe(m, row_b, vb);
-
-    MatrixM2x2F.setRowUnsafe(out, row_a, vb);
-    MatrixM2x2F.setRowUnsafe(out, row_b, va);
+    m.getRow2FUnsafe(row_a, va);
+    m.getRow2FUnsafe(row_b, vb);
+    out.setRowWith2FUnsafe(row_a, vb);
+    out.setRowWith2FUnsafe(row_b, va);
     return out;
   }
 
@@ -403,17 +418,18 @@ public final class MatrixM2x2F
    * invert a matrix that has a determinant of {@code 0}. If the function
    * returns {@code None}, {@code m} is untouched.
    *
-   * @param m   The input matrix.
-   * @param out The output matrix.
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
+   * @param out The output matrix
    *
    * @return {@code out}
    *
    * @see MatrixM2x2F#determinant(MatrixReadable2x2FType)
    */
 
-  public static OptionType<MatrixM2x2F> invert(
+  public static <M extends MatrixWritable2x2FType> OptionType<M> invert(
     final MatrixReadable2x2FType m,
-    final MatrixM2x2F out)
+    final M out)
   {
     final float d = MatrixM2x2F.determinant(m);
 
@@ -423,15 +439,15 @@ public final class MatrixM2x2F
 
     final float d_inv = 1.0F / d;
 
-    final float r0c0 = m.getRowColumnF(1, 1) * d_inv;
-    final float r0c1 = -m.getRowColumnF(0, 1) * d_inv;
-    final float r1c0 = -m.getRowColumnF(1, 0) * d_inv;
-    final float r1c1 = m.getRowColumnF(0, 0) * d_inv;
+    final float r0c0 = m.getR1C1F() * d_inv;
+    final float r0c1 = -m.getR0C1F() * d_inv;
+    final float r1c0 = -m.getR1C0F() * d_inv;
+    final float r1c1 = m.getR0C0F() * d_inv;
 
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(1, 0, r1c0);
-    out.setUnsafe(1, 1, r1c1);
+    out.setR0C0F(r0c0);
+    out.setR0C1F(r0c1);
+    out.setR1C0F(r1c0);
+    out.setR1C1F(r1c1);
 
     return Option.some(out);
   }
@@ -443,15 +459,17 @@ public final class MatrixM2x2F
    * a matrix that has a determinant of {@code 0}. If the function returns
    * {@code None}, {@code m} is untouched.
    *
-   * @param m The input matrix.
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
    *
    * @return {@code m}
    *
    * @see MatrixM2x2F#determinant(MatrixReadable2x2FType)
    */
 
-  public static OptionType<MatrixM2x2F> invertInPlace(
-    final MatrixM2x2F m)
+  public static <M extends MatrixWritable2x2FType & MatrixReadable2x2FType>
+  OptionType<M> invertInPlace(
+    final M m)
   {
     return MatrixM2x2F.invert(m, m);
   }
@@ -460,39 +478,38 @@ public final class MatrixM2x2F
    * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
    * result to {@code out}.
    *
-   * @param m0  The left input matrix.
-   * @param m1  The right input matrix.
-   * @param out The output matrix.
+   * @param <M> The precise type of matrix
+   * @param m0  The left input matrix
+   * @param m1  The right input matrix
+   * @param out The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM2x2F multiply(
+  public static <M extends MatrixWritable2x2FType> M multiply(
     final MatrixReadable2x2FType m0,
     final MatrixReadable2x2FType m1,
-    final MatrixM2x2F out)
+    final M out)
   {
-    final float r0c0 =
-      (m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 0)) + (m0.getRowColumnF(
-        1,
-        0) * m1.getRowColumnF(0, 1));
-    final float r0c1 =
-      (m0.getRowColumnF(0, 1) * m1.getRowColumnF(0, 0)) + (m0.getRowColumnF(
-        1,
-        1) * m1.getRowColumnF(0, 1));
-    final float r1c0 =
-      (m0.getRowColumnF(0, 0) * m1.getRowColumnF(1, 0)) + (m0.getRowColumnF(
-        1,
-        0) * m1.getRowColumnF(1, 1));
-    final float r1c1 =
-      (m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 0)) + (m0.getRowColumnF(
-        1,
-        1) * m1.getRowColumnF(1, 1));
+    final float r0c0_l = m0.getR0C0F();
+    final float r1c0_l = m0.getR1C0F();
+    final float r0c1_l = m0.getR0C1F();
+    final float r1c1_l = m0.getR1C1F();
 
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(1, 0, r1c0);
-    out.setUnsafe(1, 1, r1c1);
+    final float r0c0_r = m1.getR0C0F();
+    final float r0c1_r = m1.getR0C1F();
+    final float r1c0_r = m1.getR1C0F();
+    final float r1c1_r = m1.getR1C1F();
+
+    final float r0c0 = (r0c0_l * r0c0_r) + (r1c0_l * r0c1_r);
+    final float r0c1 = (r0c1_l * r0c0_r) + (r1c1_l * r0c1_r);
+    final float r1c0 = (r0c0_l * r1c0_r) + (r1c0_l * r1c1_r);
+    final float r1c1 = (r0c1_l * r1c0_r) + (r1c1_l * r1c1_r);
+
+    out.setR0C0F(r0c0);
+    out.setR0C1F(r0c1);
+    out.setR1C0F(r1c0);
+    out.setR1C1F(r1c1);
 
     return out;
   }
@@ -501,14 +518,16 @@ public final class MatrixM2x2F
    * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
    * result to {@code m0}.
    *
-   * @param m0 The left input vector.
-   * @param m1 The right input vector.
+   * @param <M> The precise type of matrix
+   * @param m0  The left input vector
+   * @param m1  The right input vector
    *
    * @return {@code out}
    */
 
-  public static MatrixM2x2F multiplyInPlace(
-    final MatrixM2x2F m0,
+  public static <M extends MatrixWritable2x2FType & MatrixReadable2x2FType> M
+  multiplyInPlace(
+    final M m0,
     final MatrixReadable2x2FType m1)
   {
     return MatrixM2x2F.multiply(m0, m1, m0);
@@ -518,44 +537,28 @@ public final class MatrixM2x2F
    * Multiply the matrix {@code m} with the vector {@code v}, writing the
    * resulting vector to {@code out}.
    *
-   * @param m   The input matrix.
-   * @param v   The input vector.
-   * @param out The output vector.
-   * @param <V> The precise type of writable vector.
+   * @param c   Preallocated storage
+   * @param m   The input matrix
+   * @param v   The input vector
+   * @param out The output vector
+   * @param <V> The precise type of writable vector
    *
    * @return {@code out}
    */
 
   public static <V extends VectorWritable2FType> V multiplyVector2F(
+    final ContextMM2F c,
     final MatrixReadable2x2FType m,
     final VectorReadable2FType v,
     final V out)
   {
-    final VectorM2F row = new VectorM2F();
-    final VectorM2F vi = new VectorM2F(v);
+    final VectorM2F row = c.v2a;
 
-    m.getRow2F(0, row);
-    out.setXF(VectorM2F.dotProduct(row, vi));
-    m.getRow2F(1, row);
-    out.setYF(VectorM2F.dotProduct(row, vi));
+    m.getRow2FUnsafe(0, row);
+    out.setXF(VectorM2F.dotProduct(row, v));
+    m.getRow2FUnsafe(1, row);
+    out.setYF(VectorM2F.dotProduct(row, v));
     return out;
-  }
-
-  /**
-   * @param m   The matrix
-   * @param row The row
-   * @param out The output vector
-   * @param <V> The precise type of writable vector.
-   *
-   * @return Row {@code row} of the matrix {@code m} in the vector {@code out}.
-   */
-
-  public static <V extends VectorWritable2FType> V row(
-    final MatrixReadable2x2FType m,
-    final int row,
-    final V out)
-  {
-    return MatrixM2x2F.rowUnsafe(m, MatrixM2x2F.rowCheck(row), out);
   }
 
   private static int rowCheck(
@@ -568,35 +571,27 @@ public final class MatrixM2x2F
     return row;
   }
 
-  private static <V extends VectorWritable2FType> V rowUnsafe(
-    final MatrixReadable2x2FType m,
-    final int row,
-    final V out)
-  {
-    out.set2F(m.getRowColumnF(row, 0), m.getRowColumnF(row, 1));
-    return out;
-  }
-
   /**
    * Scale all elements of the matrix {@code m} by the scaling value {@code r},
    * saving the result in {@code out}.
    *
-   * @param m   The input matrix.
-   * @param r   The scaling value.
-   * @param out The output matrix.
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
+   * @param r   The scaling value
+   * @param out The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM2x2F scale(
+  public static <M extends MatrixWritable2x2FType> M scale(
     final MatrixReadable2x2FType m,
     final float r,
-    final MatrixM2x2F out)
+    final M out)
   {
-    out.setUnsafe(0, 0, m.getRowColumnF(0, 0) * r);
-    out.setUnsafe(1, 0, m.getRowColumnF(1, 0) * r);
-    out.setUnsafe(0, 1, m.getRowColumnF(0, 1) * r);
-    out.setUnsafe(1, 1, m.getRowColumnF(1, 1) * r);
+    out.setR0C0F(m.getR0C0F() * r);
+    out.setR1C0F(m.getR1C0F() * r);
+    out.setR0C1F(m.getR0C1F() * r);
+    out.setR1C1F(m.getR1C1F() * r);
     return out;
   }
 
@@ -604,14 +599,16 @@ public final class MatrixM2x2F
    * Scale all elements of the matrix {@code m} by the scaling value {@code r},
    * saving the result in {@code m}.
    *
-   * @param m The input matrix.
-   * @param r The scaling value.
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
+   * @param r   The scaling value
    *
    * @return {@code m}
    */
 
-  public static MatrixM2x2F scaleInPlace(
-    final MatrixM2x2F m,
+  public static <M extends MatrixWritable2x2FType & MatrixReadable2x2FType> M
+  scaleInPlace(
+    final M m,
     final float r)
   {
     return MatrixM2x2F.scale(m, r, m);
@@ -624,21 +621,25 @@ public final class MatrixM2x2F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m   The input matrix.
-   * @param row The index of the row {@code (0 <= row < 2)}.
-   * @param r   The scaling value.
-   * @param out The output matrix.
+   * @param <M> The precise type of matrix
+   * @param c   Preallocated storage
+   * @param m   The input matrix
+   * @param row The index of the row {@code (0 <= row < 2)}
+   * @param r   The scaling value
+   * @param out The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM2x2F scaleRow(
+  public static <M extends MatrixWritable2x2FType> M scaleRow(
+    final ContextMM2F c,
     final MatrixReadable2x2FType m,
     final int row,
     final float r,
-    final MatrixM2x2F out)
+    final M out)
   {
-    return MatrixM2x2F.scaleRowUnsafe(m, MatrixM2x2F.rowCheck(row), r, out);
+    return MatrixM2x2F.scaleRowUnsafe(
+      m, MatrixM2x2F.rowCheck(row), (double) r, c.v2a, out);
   }
 
   /**
@@ -648,108 +649,74 @@ public final class MatrixM2x2F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m   The input matrix.
-   * @param row The index of the row {@code (0 <= row < 2)}.
-   * @param r   The scaling value.
+   * @param <M> The precise type of matrix
+   * @param c   Preallocated storage
+   * @param m   The input matrix
+   * @param row The index of the row {@code (0 <= row < 2)}
+   * @param r   The scaling value
    *
    * @return {@code m}
    */
 
-  public static MatrixM2x2F scaleRowInPlace(
-    final MatrixM2x2F m,
+  public static <M extends MatrixWritable2x2FType & MatrixReadable2x2FType> M
+  scaleRowInPlace(
+    final ContextMM2F c,
+    final M m,
     final int row,
     final float r)
   {
-    return MatrixM2x2F.scaleRowUnsafe(m, MatrixM2x2F.rowCheck(row), r, m);
+    return MatrixM2x2F.scaleRowUnsafe(
+      m, MatrixM2x2F.rowCheck(row), (double) r, c.v2a, m);
   }
 
-  private static MatrixM2x2F scaleRowUnsafe(
+  private static <M extends MatrixWritable2x2FType> M scaleRowUnsafe(
     final MatrixReadable2x2FType m,
     final int row,
-    final float r,
-    final MatrixM2x2F out)
+    final double r,
+    final VectorM2F tmp,
+    final M out)
   {
-    final VectorM2F v = new VectorM2F();
-
-    MatrixM2x2F.rowUnsafe(m, row, v);
-    VectorM2F.scaleInPlace(v, (double) r);
-
-    MatrixM2x2F.setRowUnsafe(out, row, v);
+    m.getRow2FUnsafe(row, tmp);
+    VectorM2F.scaleInPlace(tmp, r);
+    out.setRowWith2FUnsafe(row, tmp);
     return out;
-  }
-
-  /**
-   * Set the value in the matrix {@code m} at row {@code row}, column {@code
-   * column} to {@code value}.
-   *
-   * @param m      The matrix
-   * @param row    The row
-   * @param column The column
-   * @param value  The value
-   *
-   * @return {@code m}
-   */
-
-  public static MatrixM2x2F set(
-    final MatrixM2x2F m,
-    final int row,
-    final int column,
-    final float value)
-  {
-    m.view.put(MatrixM2x2F.indexChecked(row, column), value);
-    return m;
   }
 
   /**
    * Set the given matrix {@code m} to the identity matrix.
    *
-   * @param m The matrix
+   * @param <M> The precise type of matrix
+   * @param m   The matrix
    *
    * @return {@code m}
    */
 
-  public static MatrixM2x2F setIdentity(
-    final MatrixM2x2F m)
+  public static <M extends MatrixWritable2x2FType> M setIdentity(
+    final M m)
   {
-    m.view.clear();
-
-    for (int row = 0; row < MatrixM2x2F.VIEW_ROWS; ++row) {
-      for (int col = 0; col < MatrixM2x2F.VIEW_COLS; ++col) {
-        if (row == col) {
-          m.setUnsafe(row, col, 1.0f);
-        } else {
-          m.setUnsafe(row, col, 0.0f);
-        }
-      }
-    }
+    m.setR0C0F(1.0f);
+    m.setR0C1F(0.0f);
+    m.setR1C0F(0.0f);
+    m.setR1C1F(1.0f);
     return m;
-  }
-
-  private static void setRowUnsafe(
-    final MatrixM2x2F m,
-    final int row,
-    final VectorReadable2FType v)
-  {
-    m.setUnsafe(row, 0, v.getXF());
-    m.setUnsafe(row, 1, v.getYF());
   }
 
   /**
    * Set the given matrix {@code m} to the zero matrix.
    *
-   * @param m The matrix
+   * @param <M> The precise type of matrix
+   * @param m   The matrix
    *
    * @return {@code m}
    */
 
-  public static MatrixM2x2F setZero(
-    final MatrixM2x2F m)
+  public static <M extends MatrixWritable2x2FType> M setZero(
+    final M m)
   {
-    m.view.clear();
-    for (int index = 0; index < (MatrixM2x2F.VIEW_ROWS
-                                 * MatrixM2x2F.VIEW_COLS); ++index) {
-      m.view.put(index, 0.0f);
-    }
+    m.setR0C0F(0.0f);
+    m.setR0C1F(0.0f);
+    m.setR1C0F(0.0f);
+    m.setR1C1F(0.0f);
     return m;
   }
 
@@ -767,47 +734,58 @@ public final class MatrixM2x2F
   public static float trace(
     final MatrixReadable2x2FType m)
   {
-    return m.getRowColumnF(0, 0) + m.getRowColumnF(1, 1);
+    return m.getR0C0F() + m.getR1C1F();
   }
 
   /**
    * Transpose the given matrix {@code m}, writing the resulting matrix to
    * {@code out}.
    *
-   * @param m   The input matrix.
-   * @param out The output matrix.
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
+   * @param out The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM2x2F transpose(
+  public static <M extends MatrixWritable2x2FType> M transpose(
     final MatrixReadable2x2FType m,
-    final MatrixM2x2F out)
+    final M out)
   {
-    MatrixM2x2F.copy(m, out);
-    return MatrixM2x2F.transposeInPlace(out);
+    final float r0c0 = m.getR0C0F();
+    final float r1c0 = m.getR1C0F();
+
+    final float r0c1 = m.getR0C1F();
+    final float r1c1 = m.getR1C1F();
+
+    out.setR0C0F(r0c0);
+    out.setR1C0F(r0c1); // swap 0
+
+    out.setR0C1F(r1c0); // swap 0
+    out.setR1C1F(r1c1);
+
+    return out;
   }
 
   /**
    * Transpose the given matrix {@code m}, writing the resulting matrix to
    * {@code m}.
    *
-   * @param m The input matrix.
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
    *
    * @return {@code m}
    */
 
-  public static MatrixM2x2F transposeInPlace(
-    final MatrixM2x2F m)
+  public static <M extends MatrixWritable2x2FType & MatrixReadable2x2FType> M
+  transposeInPlace(
+    final M m)
   {
-    for (int row = 0; row < (2 - 1); ++row) {
-      for (int column = row + 1; column < 2; ++column) {
-        final float x = m.view.get((row * 2) + column);
-        m.view.put((row * 2) + column, m.view.get(row + (2 * column)));
-        m.view.put(row + (2 * column), x);
-      }
-    }
+    final float r1c0 = m.getR1C0F();
+    final float r0c1 = m.getR0C1F();
 
+    m.setR1C0F(r0c1); // swap 0
+    m.setR0C1F(r1c0); // swap 0
     return m;
   }
 
@@ -843,7 +821,57 @@ public final class MatrixM2x2F
     final int row,
     final V out)
   {
-    MatrixM2x2F.rowUnsafe(this, MatrixM2x2F.rowCheck(row), out);
+    MatrixM2x2F.rowCheck(row);
+    this.getRow2FUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
+    final int row,
+    final V out)
+  {
+    final float x = this.view.get(MatrixM2x2F.indexUnsafe(row, 0));
+    final float y = this.view.get(MatrixM2x2F.indexUnsafe(row, 1));
+    out.set2F(x, y);
+  }
+
+  @Override public float getR0C0F()
+  {
+    return this.view.get(MatrixM2x2F.indexUnsafe(0, 0));
+  }
+
+  @Override public void setR0C0F(final float x)
+  {
+    this.view.put(MatrixM2x2F.indexUnsafe(0, 0), x);
+  }
+
+  @Override public float getR1C0F()
+  {
+    return this.view.get(MatrixM2x2F.indexUnsafe(1, 0));
+  }
+
+  @Override public void setR1C0F(final float x)
+  {
+    this.view.put(MatrixM2x2F.indexUnsafe(1, 0), x);
+  }
+
+  @Override public float getR0C1F()
+  {
+    return this.view.get(MatrixM2x2F.indexUnsafe(0, 1));
+  }
+
+  @Override public void setR0C1F(final float x)
+  {
+    this.view.put(MatrixM2x2F.indexUnsafe(0, 1), x);
+  }
+
+  @Override public float getR1C1F()
+  {
+    return this.view.get(MatrixM2x2F.indexUnsafe(1, 1));
+  }
+
+  @Override public void setR1C1F(final float x)
+  {
+    this.view.put(MatrixM2x2F.indexUnsafe(1, 1), x);
   }
 
   @Override public float getRowColumnF(
@@ -856,30 +884,31 @@ public final class MatrixM2x2F
   @Override public int hashCode()
   {
     final int prime = 31;
-    int result = 1;
-    result = (prime * result);
+    int r = prime;
 
-    for (int index = 0; index < MatrixM2x2F.VIEW_ELEMENTS; ++index) {
-      result += Float.valueOf(this.view.get(index)).hashCode();
-    }
-    return result;
+    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
+
+    return r;
   }
 
-  /**
-   * @param row    The row
-   * @param column The column
-   * @param value  The value
-   *
-   * @return Set the value at the given row and column.
-   */
-
-  public MatrixM2x2F set(
+  @Override public void setRowWith2F(
     final int row,
-    final int column,
-    final float value)
+    final VectorReadable2FType v)
   {
-    this.view.put(MatrixM2x2F.indexChecked(row, column), value);
-    return this;
+    MatrixM2x2F.rowCheck(row);
+    this.setRowWith2FUnsafe(row, v);
+  }
+
+  @Override public void setRowWith2FUnsafe(
+    final int row,
+    final VectorReadable2FType v)
+  {
+    this.view.put(MatrixM2x2F.indexUnsafe(row, 0), v.getXF());
+    this.view.put(MatrixM2x2F.indexUnsafe(row, 1), v.getYF());
   }
 
   @Override public void setRowColumnF(
@@ -890,18 +919,9 @@ public final class MatrixM2x2F
     this.view.put(MatrixM2x2F.indexChecked(row, column), value);
   }
 
-  private MatrixM2x2F setUnsafe(
-    final int row,
-    final int column,
-    final float value)
-  {
-    this.view.put(MatrixM2x2F.indexUnsafe(row, column), value);
-    return this;
-  }
-
   @SuppressWarnings("boxing") @Override public String toString()
   {
-    final StringBuilder builder = new StringBuilder();
+    final StringBuilder builder = new StringBuilder(512);
     for (int row = 0; row < MatrixM2x2F.VIEW_ROWS; ++row) {
       final float c0 = this.view.get(MatrixM2x2F.indexUnsafe(row, 0));
       final float c1 = this.view.get(MatrixM2x2F.indexUnsafe(row, 1));
@@ -911,5 +931,37 @@ public final class MatrixM2x2F
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  /**
+   * <p>The {@code ContextMM2F} type contains the minimum storage required for
+   * all of the functions of the {@code MatrixM2x2F} class.</p>
+   *
+   * <p> The purpose of the class is to allow applications to allocate all
+   * storage ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical
+   * code.</p>
+   *
+   * <p> The user should allocate one {@code ContextMM2F} value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes a
+   * {@code ContextMM2F} value will not generate garbage.</p>
+   *
+   * @since 7.0.0
+   */
+
+  public static final class ContextMM2F
+  {
+    private final VectorM2F   v2a = new VectorM2F();
+    private final VectorM2F   v2b = new VectorM2F();
+
+    /**
+     * Construct a new context.
+     */
+
+    public ContextMM2F()
+    {
+
+    }
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -324,7 +324,7 @@ public final class QuaternionM4D
     final VectorM3D t = context.getV3A();
     final MatrixM3x3D.ContextMM3D mc = context.getContext();
 
-    MatrixM3x3D.lookAtWithContext(mc, origin, target, up, m, t);
+    MatrixM3x3D.lookAt(mc, origin, target, up, m, t);
     QuaternionM4D.makeFromRotationMatrix3x3(m, q);
     return q;
   }
@@ -416,15 +416,15 @@ public final class QuaternionM4D
     final MatrixReadable3x3DType m,
     final Q out)
   {
-    final double m00 = m.getRowColumnD(0, 0);
-    final double m01 = m.getRowColumnD(0, 1);
-    final double m02 = m.getRowColumnD(0, 2);
-    final double m10 = m.getRowColumnD(1, 0);
-    final double m11 = m.getRowColumnD(1, 1);
-    final double m12 = m.getRowColumnD(1, 2);
-    final double m20 = m.getRowColumnD(2, 0);
-    final double m21 = m.getRowColumnD(2, 1);
-    final double m22 = m.getRowColumnD(2, 2);
+    final double m00 = m.getR0C0D();
+    final double m01 = m.getR0C1D();
+    final double m02 = m.getR0C2D();
+    final double m10 = m.getR1C0D();
+    final double m11 = m.getR1C1D();
+    final double m12 = m.getR1C2D();
+    final double m20 = m.getR2C0D();
+    final double m21 = m.getR2C1D();
+    final double m22 = m.getR2C2D();
 
     final double trace = MatrixM3x3D.trace(m);
 
@@ -484,15 +484,15 @@ public final class QuaternionM4D
     final MatrixReadable4x4DType m,
     final Q out)
   {
-    final double m00 = m.getRowColumnD(0, 0);
-    final double m01 = m.getRowColumnD(0, 1);
-    final double m02 = m.getRowColumnD(0, 2);
-    final double m10 = m.getRowColumnD(1, 0);
-    final double m11 = m.getRowColumnD(1, 1);
-    final double m12 = m.getRowColumnD(1, 2);
-    final double m20 = m.getRowColumnD(2, 0);
-    final double m21 = m.getRowColumnD(2, 1);
-    final double m22 = m.getRowColumnD(2, 2);
+    final double m00 = m.getR0C0D();
+    final double m01 = m.getR0C1D();
+    final double m02 = m.getR0C2D();
+    final double m10 = m.getR1C0D();
+    final double m11 = m.getR1C1D();
+    final double m12 = m.getR1C2D();
+    final double m20 = m.getR2C0D();
+    final double m21 = m.getR2C1D();
+    final double m22 = m.getR2C2D();
 
     /**
      * Explicitly ignore the bottom right element of the matrix, as this
@@ -579,17 +579,17 @@ public final class QuaternionM4D
     final double r2c1 = (2.0 * yz) + (2.0 * wx);
     final double r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
 
-    m.setRowColumnD(0, 0, r0c0);
-    m.setRowColumnD(0, 1, r0c1);
-    m.setRowColumnD(0, 2, r0c2);
+    m.setR0C0D(r0c0);
+    m.setR0C1D(r0c1);
+    m.setR0C2D(r0c2);
 
-    m.setRowColumnD(1, 0, r1c0);
-    m.setRowColumnD(1, 1, r1c1);
-    m.setRowColumnD(1, 2, r1c2);
+    m.setR1C0D(r1c0);
+    m.setR1C1D(r1c1);
+    m.setR1C2D(r1c2);
 
-    m.setRowColumnD(2, 0, r2c0);
-    m.setRowColumnD(2, 1, r2c1);
-    m.setRowColumnD(2, 2, r2c2);
+    m.setR2C0D(r2c0);
+    m.setR2C1D(r2c1);
+    m.setR2C2D(r2c2);
 
     return m;
   }
@@ -598,9 +598,9 @@ public final class QuaternionM4D
    * Produce a rotation matrix from the quaternion {@code q}, saving the result
    * to {@code m}.
    *
-   * @param q The input quaternion
-   * @param m The output matrix
-   *          @param <M> The precise type of matrix
+   * @param q   The input quaternion
+   * @param m   The output matrix
+   * @param <M> The precise type of matrix
    *
    * @return {@code m}
    *
@@ -641,25 +641,25 @@ public final class QuaternionM4D
     final double r3c2 = 0.0;
     final double r3c3 = 1.0;
 
-    m.setRowColumnD(0, 0, r0c0);
-    m.setRowColumnD(0, 1, r0c1);
-    m.setRowColumnD(0, 2, r0c2);
-    m.setRowColumnD(0, 3, r0c3);
+    m.setR0C0D(r0c0);
+    m.setR0C1D(r0c1);
+    m.setR0C2D(r0c2);
+    m.setR0C3D(r0c3);
 
-    m.setRowColumnD(1, 0, r1c0);
-    m.setRowColumnD(1, 1, r1c1);
-    m.setRowColumnD(1, 2, r1c2);
-    m.setRowColumnD(1, 3, r1c3);
+    m.setR1C0D(r1c0);
+    m.setR1C1D(r1c1);
+    m.setR1C2D(r1c2);
+    m.setR1C3D(r1c3);
 
-    m.setRowColumnD(2, 0, r2c0);
-    m.setRowColumnD(2, 1, r2c1);
-    m.setRowColumnD(2, 2, r2c2);
-    m.setRowColumnD(2, 3, r2c3);
+    m.setR2C0D(r2c0);
+    m.setR2C1D(r2c1);
+    m.setR2C2D(r2c2);
+    m.setR2C3D(r2c3);
 
-    m.setRowColumnD(3, 0, r3c0);
-    m.setRowColumnD(3, 1, r3c1);
-    m.setRowColumnD(3, 2, r3c2);
-    m.setRowColumnD(3, 3, r3c3);
+    m.setR3C0D(r3c0);
+    m.setR3C1D(r3c1);
+    m.setR3C2D(r3c2);
+    m.setR3C3D(r3c3);
 
     return m;
   }
@@ -700,19 +700,23 @@ public final class QuaternionM4D
     final QuaternionReadable4DType q1,
     final Q qr)
   {
-    final double rx = ((q0.getWD() * q1.getXD()) + (q0.getXD() * q1.getWD()) + (
-      q0.getYD()
-      * q1.getZD())) - (q0.getZD() * q1.getYD());
+    final double q0_w = q0.getWD();
+    final double q1_x = q1.getXD();
+    final double q0_x = q0.getXD();
+    final double q1_w = q1.getWD();
+    final double q0_y = q0.getYD();
+    final double q1_z = q1.getZD();
+    final double q0_z = q0.getZD();
+    final double q1_y = q1.getYD();
+
+    final double rx =
+      ((q0_w * q1_x) + (q0_x * q1_w) + (q0_y * q1_z)) - (q0_z * q1_y);
     final double ry =
-      ((q0.getWD() * q1.getYD()) - (q0.getXD() * q1.getZD())) + (q0.getYD() * q1
-        .getWD()) + (q0.getZD() * q1.getXD());
+      ((q0_w * q1_y) - (q0_x * q1_z)) + (q0_y * q1_w) + (q0_z * q1_x);
     final double rz =
-      (((q0.getWD() * q1.getZD()) + (q0.getXD() * q1.getYD())) - (q0.getYD()
-                                                                  * q1.getXD()))
-      + (q0.getZD() * q1.getWD());
-    final double rw = (q0.getWD() * q1.getWD()) - (q0.getXD() * q1.getXD()) - (
-      q0.getYD()
-      * q1.getYD()) - (q0.getZD() * q1.getZD());
+      (((q0_w * q1_z) + (q0_x * q1_y)) - (q0_y * q1_x)) + (q0_z * q1_w);
+    final double rw =
+      (q0_w * q1_w) - (q0_x * q1_x) - (q0_y * q1_y) - (q0_z * q1_z);
 
     qr.set4D(rx, ry, rz, rw);
     return qr;
@@ -1065,8 +1069,8 @@ public final class QuaternionM4D
   }
 
   /**
-   * <p>The {@code ContextQM4D} type contains the minimum storage required for all
-   * of the functions of the {@code QuaternionM4D} class.</p>
+   * <p>The {@code ContextQM4D} type contains the minimum storage required for
+   * all of the functions of the {@code QuaternionM4D} class.</p>
    *
    * <p> The purpose of the class is to allow applications to allocate all
    * storage ahead of time in order to allow functions in the class to avoid

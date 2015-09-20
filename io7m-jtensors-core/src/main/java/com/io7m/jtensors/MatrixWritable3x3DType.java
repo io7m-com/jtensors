@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -22,7 +22,69 @@ package com.io7m.jtensors;
  * @since 7.0.0
  */
 
-public interface MatrixWritable3x3DType extends MatrixWritableDType
+public interface MatrixWritable3x3DType extends MatrixWritable2x2DType
 {
-  // No extra functions.
+  /**
+   * Set row {@code row} of the matrix to {@code v}.
+   *
+   * @param row The row index
+   * @param v   The row vector
+   */
+
+  void setRowWith3D(
+    int row,
+    VectorReadable3DType v);
+
+  /**
+   * Set row {@code row} of the matrix to {@code v}. No bounds checking is
+   * performed for {@code row}, and out-of-bounds values result in undefined
+   * behaviour.
+   *
+   * @param row The row index
+   * @param v   The row vector
+   */
+
+  void setRowWith3DUnsafe(
+    int row,
+    VectorReadable3DType v);
+
+  /**
+   * Set row 0, column 2 of the matrix to {@code x}.
+   *
+   * @param x The value
+   */
+
+  void setR0C2D(double x);
+
+  /**
+   * Set row 1, column 2 of the matrix to {@code x}.
+   *
+   * @param x The value
+   */
+
+  void setR1C2D(double x);
+
+  /**
+   * Set row 2, column 0 of the matrix to {@code x}.
+   *
+   * @param x The value
+   */
+
+  void setR2C0D(double x);
+
+  /**
+   * Set row 2, column 1 of the matrix to {@code x}.
+   *
+   * @param x The value
+   */
+
+  void setR2C1D(double x);
+
+  /**
+   * Set row 2, column 2 of the matrix to {@code x}.
+   *
+   * @param x The value
+   */
+
+  void setR2C2D(double x);
 }

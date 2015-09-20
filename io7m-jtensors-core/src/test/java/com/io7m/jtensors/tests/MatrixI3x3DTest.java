@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,15 +16,16 @@
 
 package com.io7m.jtensors.tests;
 
+import com.io7m.jtensors.MatrixI3x3D;
+import com.io7m.jtensors.MatrixM3x3D;
+import com.io7m.jtensors.MatrixReadable3x3DType;
+import com.io7m.jtensors.VectorI3D;
+import com.io7m.jtensors.VectorM3D;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.io7m.jtensors.MatrixI3x3D;
-import com.io7m.jtensors.MatrixM3x3D;
-import com.io7m.jtensors.VectorI3D;
-import com.io7m.jtensors.VectorM3D;
-
-@SuppressWarnings("static-method") public class MatrixI3x3DTest
+public final class MatrixI3x3DTest
+  extends MatrixReadable3x3DContract<MatrixI3x3D>
 {
   @Test public void testEquals()
   {
@@ -33,7 +34,7 @@ import com.io7m.jtensors.VectorM3D;
     int index = 0;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnD(row, col, index);
         ++index;
       }
     }
@@ -44,9 +45,7 @@ import com.io7m.jtensors.VectorM3D;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         Assert.assertEquals(
-          im0.getRowColumnD(row, col),
-          m0.getRowColumnD(row, col),
-          0.0);
+          im0.getRowColumnD(row, col), m0.getRowColumnD(row, col), 0.0);
       }
     }
 
@@ -59,7 +58,7 @@ import com.io7m.jtensors.VectorM3D;
     index = 100;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnD(row, col, index);
         ++index;
       }
     }
@@ -72,17 +71,17 @@ import com.io7m.jtensors.VectorM3D;
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
-    m0.set(2, 0, 0.2f);
+    m0.setR0C0D(0.0f);
+    m0.setR1C0D(0.1f);
+    m0.setR2C0D(0.2f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
-    m0.set(2, 1, 10.2f);
+    m0.setR0C1D(10.0f);
+    m0.setR1C1D(10.1f);
+    m0.setR2C1D(10.2f);
 
-    m0.set(0, 2, 20.0f);
-    m0.set(1, 2, 20.1f);
-    m0.set(2, 2, 20.2f);
+    m0.setR0C2D(20.0f);
+    m0.setR1C2D(20.1f);
+    m0.setR2C2D(20.2f);
 
     final MatrixI3x3D im0 = MatrixI3x3D.newFromReadable(m0);
 
@@ -100,17 +99,17 @@ import com.io7m.jtensors.VectorM3D;
   {
     final MatrixM3x3D m0 = new MatrixM3x3D();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
-    m0.set(2, 0, 0.2f);
+    m0.setR0C0D(0.0f);
+    m0.setR1C0D(0.1f);
+    m0.setR2C0D(0.2f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
-    m0.set(2, 1, 10.2f);
+    m0.setR0C1D(10.0f);
+    m0.setR1C1D(10.1f);
+    m0.setR2C1D(10.2f);
 
-    m0.set(0, 2, 20.0f);
-    m0.set(1, 2, 20.1f);
-    m0.set(2, 2, 20.2f);
+    m0.setR0C2D(20.0f);
+    m0.setR1C2D(20.1f);
+    m0.setR2C2D(20.2f);
 
     final MatrixI3x3D im = MatrixI3x3D.newFromReadable(m0);
 
@@ -148,7 +147,7 @@ import com.io7m.jtensors.VectorM3D;
     int index = 0;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnD(row, col, index);
         ++index;
       }
     }
@@ -166,8 +165,8 @@ import com.io7m.jtensors.VectorM3D;
     int index = 0;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        m0.set(row, col, index);
-        m1.set(row, col, index);
+        m0.setRowColumnD(row, col, index);
+        m1.setRowColumnD(row, col, index);
         ++index;
       }
     }
@@ -175,5 +174,21 @@ import com.io7m.jtensors.VectorM3D;
     final MatrixI3x3D im0 = MatrixI3x3D.newFromReadable(m0);
     final MatrixI3x3D im1 = MatrixI3x3D.newFromReadable(m1);
     Assert.assertEquals(im1.toString(), im0.toString());
+  }
+
+  @Override protected MatrixI3x3D newMatrix()
+  {
+    return MatrixI3x3D.identity();
+  }
+
+  @Override
+  protected MatrixI3x3D newMatrixFrom(final MatrixReadable3x3DType source)
+  {
+    return MatrixI3x3D.newFromReadable(source);
+  }
+
+  @Override protected void checkDirectBufferInvariants(final MatrixI3x3D m)
+  {
+    // Nothing required
   }
 }

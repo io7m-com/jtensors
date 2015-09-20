@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,15 +16,16 @@
 
 package com.io7m.jtensors.tests;
 
+import com.io7m.jtensors.MatrixI3x3F;
+import com.io7m.jtensors.MatrixM3x3F;
+import com.io7m.jtensors.MatrixReadable3x3FType;
+import com.io7m.jtensors.VectorI3F;
+import com.io7m.jtensors.VectorM3F;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.io7m.jtensors.MatrixI3x3F;
-import com.io7m.jtensors.MatrixM3x3F;
-import com.io7m.jtensors.VectorI3F;
-import com.io7m.jtensors.VectorM3F;
-
-@SuppressWarnings("static-method") public class MatrixI3x3FTest
+public final class MatrixI3x3FTest
+  extends MatrixReadable3x3FContract<MatrixI3x3F>
 {
   @Test public void testEquals()
   {
@@ -33,7 +34,7 @@ import com.io7m.jtensors.VectorM3F;
     int index = 0;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, (float) index);
         ++index;
       }
     }
@@ -44,14 +45,12 @@ import com.io7m.jtensors.VectorM3F;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         Assert.assertEquals(
-          im0.getRowColumnF(row, col),
-          m0.getRowColumnF(row, col),
-          0.0);
+          (double) im0.getRowColumnF(row, col), (double) m0.getRowColumnF(row, col), 0.0);
       }
     }
 
     Assert.assertEquals(im0, im0);
-    Assert.assertEquals(im0.hashCode(), im0.hashCode());
+    Assert.assertEquals((long) im0.hashCode(), (long) im0.hashCode());
     Assert.assertEquals(im0, im1);
     Assert.assertFalse(im0.equals(null));
     Assert.assertFalse(im0.equals(Integer.valueOf(23)));
@@ -59,7 +58,7 @@ import com.io7m.jtensors.VectorM3F;
     index = 100;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, (float) index);
         ++index;
       }
     }
@@ -72,17 +71,17 @@ import com.io7m.jtensors.VectorM3F;
   {
     final MatrixM3x3F m0 = new MatrixM3x3F();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
-    m0.set(2, 0, 0.2f);
+    m0.setR0C0F(0.0f);
+    m0.setR1C0F(0.1f);
+    m0.setR2C0F(0.2f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
-    m0.set(2, 1, 10.2f);
+    m0.setR0C1F(10.0f);
+    m0.setR1C1F(10.1f);
+    m0.setR2C1F(10.2f);
 
-    m0.set(0, 2, 20.0f);
-    m0.set(1, 2, 20.1f);
-    m0.set(2, 2, 20.2f);
+    m0.setR0C2F(20.0f);
+    m0.setR1C2F(20.1f);
+    m0.setR2C2F(20.2f);
 
     final MatrixI3x3F im0 = MatrixI3x3F.newFromReadable(m0);
 
@@ -100,36 +99,36 @@ import com.io7m.jtensors.VectorM3F;
   {
     final MatrixM3x3F m0 = new MatrixM3x3F();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
-    m0.set(2, 0, 0.2f);
+    m0.setR0C0F(0.0f);
+    m0.setR1C0F(0.1f);
+    m0.setR2C0F(0.2f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
-    m0.set(2, 1, 10.2f);
+    m0.setR0C1F(10.0f);
+    m0.setR1C1F(10.1f);
+    m0.setR2C1F(10.2f);
 
-    m0.set(0, 2, 20.0f);
-    m0.set(1, 2, 20.1f);
-    m0.set(2, 2, 20.2f);
+    m0.setR0C2F(20.0f);
+    m0.setR1C2F(20.1f);
+    m0.setR2C2F(20.2f);
 
     final MatrixI3x3F im = MatrixI3x3F.newFromReadable(m0);
 
     final VectorM3F row = new VectorM3F();
 
     im.getRow3F(0, row);
-    Assert.assertEquals(0.0f, row.getXF(), 0.0);
-    Assert.assertEquals(10.0f, row.getYF(), 0.0);
-    Assert.assertEquals(20.0f, row.getZF(), 0.0);
+    Assert.assertEquals(0.0, (double) row.getXF(), 0.0);
+    Assert.assertEquals(10.0, (double) row.getYF(), 0.0);
+    Assert.assertEquals(20.0, (double) row.getZF(), 0.0);
 
     im.getRow3F(1, row);
-    Assert.assertEquals(0.1f, row.getXF(), 0.0);
-    Assert.assertEquals(10.1f, row.getYF(), 0.0);
-    Assert.assertEquals(20.1f, row.getZF(), 0.0);
+    Assert.assertEquals(0.1, (double) row.getXF(), 0.000001);
+    Assert.assertEquals(10.1, (double) row.getYF(), 0.000001);
+    Assert.assertEquals(20.1, (double) row.getZF(), 0.000001);
 
     im.getRow3F(2, row);
-    Assert.assertEquals(0.2f, row.getXF(), 0.0);
-    Assert.assertEquals(10.2f, row.getYF(), 0.0);
-    Assert.assertEquals(20.2f, row.getZF(), 0.0);
+    Assert.assertEquals(0.2, (double) row.getXF(), 0.000001);
+    Assert.assertEquals(10.2, (double) row.getYF(), 0.000001);
+    Assert.assertEquals(20.2, (double) row.getZF(), 0.000001);
   }
 
   @Test public void testIdentity()
@@ -148,7 +147,7 @@ import com.io7m.jtensors.VectorM3F;
     int index = 0;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, (float) index);
         ++index;
       }
     }
@@ -166,8 +165,8 @@ import com.io7m.jtensors.VectorM3F;
     int index = 0;
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
-        m0.set(row, col, index);
-        m1.set(row, col, index);
+        m0.setRowColumnF(row, col, (float) index);
+        m1.setRowColumnF(row, col, (float) index);
         ++index;
       }
     }
@@ -175,5 +174,21 @@ import com.io7m.jtensors.VectorM3F;
     final MatrixI3x3F im0 = MatrixI3x3F.newFromReadable(m0);
     final MatrixI3x3F im1 = MatrixI3x3F.newFromReadable(m1);
     Assert.assertEquals(im1.toString(), im0.toString());
+  }
+
+  @Override protected MatrixI3x3F newMatrix()
+  {
+    return MatrixI3x3F.identity();
+  }
+
+  @Override
+  protected MatrixI3x3F newMatrixFrom(final MatrixReadable3x3FType source)
+  {
+    return MatrixI3x3F.newFromReadable(source);
+  }
+
+  @Override protected void checkDirectBufferInvariants(final MatrixI3x3F m)
+  {
+    // Nothing required
   }
 }

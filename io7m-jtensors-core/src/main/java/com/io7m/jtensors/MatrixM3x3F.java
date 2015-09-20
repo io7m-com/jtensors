@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -52,8 +52,7 @@ import java.nio.FloatBuffer;
 
 //@formatter:on
 
-public final class MatrixM3x3F
-  implements MatrixDirectReadable3x3FType, MatrixWritable3x3FType
+public final class MatrixM3x3F implements MatrixDirect3x3FType
 {
   private static final int VIEW_BYTES;
   private static final int VIEW_COLS;
@@ -96,7 +95,7 @@ public final class MatrixM3x3F
   /**
    * Construct a new copy of the given matrix.
    *
-   * @param source The source matrix.
+   * @param source The source matrix
    */
 
   public MatrixM3x3F(
@@ -127,41 +126,42 @@ public final class MatrixM3x3F
   /**
    * Elementwise add of matrices {@code m0} and {@code m1}.
    *
-   * @param m0  The left input matrix.
-   * @param m1  The right input matrix.
-   * @param out The output matrix.
+   * @param <M> The precise type of matrix
+   * @param m0  The left input matrix
+   * @param m1  The right input matrix
+   * @param out The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM3x3F add(
+  public static <M extends MatrixWritable3x3FType> M add(
     final MatrixReadable3x3FType m0,
     final MatrixReadable3x3FType m1,
-    final MatrixM3x3F out)
+    final M out)
   {
-    final float r0c0 = m0.getRowColumnF(0, 0) + m1.getRowColumnF(0, 0);
-    final float r1c0 = m0.getRowColumnF(1, 0) + m1.getRowColumnF(1, 0);
-    final float r2c0 = m0.getRowColumnF(2, 0) + m1.getRowColumnF(2, 0);
+    final float r0c0 = m0.getR0C0F() + m1.getR0C0F();
+    final float r1c0 = m0.getR1C0F() + m1.getR1C0F();
+    final float r2c0 = m0.getR2C0F() + m1.getR2C0F();
 
-    final float r0c1 = m0.getRowColumnF(0, 1) + m1.getRowColumnF(0, 1);
-    final float r1c1 = m0.getRowColumnF(1, 1) + m1.getRowColumnF(1, 1);
-    final float r2c1 = m0.getRowColumnF(2, 1) + m1.getRowColumnF(2, 1);
+    final float r0c1 = m0.getR0C1F() + m1.getR0C1F();
+    final float r1c1 = m0.getR1C1F() + m1.getR1C1F();
+    final float r2c1 = m0.getR2C1F() + m1.getR2C1F();
 
-    final float r0c2 = m0.getRowColumnF(0, 2) + m1.getRowColumnF(0, 2);
-    final float r1c2 = m0.getRowColumnF(1, 2) + m1.getRowColumnF(1, 2);
-    final float r2c2 = m0.getRowColumnF(2, 2) + m1.getRowColumnF(2, 2);
+    final float r0c2 = m0.getR0C2F() + m1.getR0C2F();
+    final float r1c2 = m0.getR1C2F() + m1.getR1C2F();
+    final float r2c2 = m0.getR2C2F() + m1.getR2C2F();
 
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(1, 0, r1c0);
-    out.setUnsafe(2, 0, r2c0);
+    out.setR0C0F(r0c0);
+    out.setR1C0F(r1c0);
+    out.setR2C0F(r2c0);
 
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(1, 1, r1c1);
-    out.setUnsafe(2, 1, r2c1);
+    out.setR0C1F(r0c1);
+    out.setR1C1F(r1c1);
+    out.setR2C1F(r2c1);
 
-    out.setUnsafe(0, 2, r0c2);
-    out.setUnsafe(1, 2, r1c2);
-    out.setUnsafe(2, 2, r2c2);
+    out.setR0C2F(r0c2);
+    out.setR1C2F(r1c2);
+    out.setR2C2F(r2c2);
     return out;
   }
 
@@ -169,15 +169,17 @@ public final class MatrixM3x3F
    * Elementwise add of matrices {@code m0} and {@code m1}, returning the result
    * in {@code m0}.
    *
-   * @param m0 The left input matrix.
-   * @param m1 The right input matrix.
+   * @param <M> The precise type of matrix
+   * @param m0  The left input matrix
+   * @param m1  The right input matrix
    *
    * @return {@code m0}
    */
 
-  public static MatrixM3x3F addInPlace(
-    final MatrixM3x3F m0,
-    final MatrixM3x3F m1)
+  public static <M extends MatrixWritable3x3FType & MatrixReadable3x3FType> M
+  addInPlace(
+    final M m0,
+    final MatrixReadable3x3FType m1)
   {
     return MatrixM3x3F.add(m0, m1, m0);
   }
@@ -190,23 +192,26 @@ public final class MatrixM3x3F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m     The input matrix.
-   * @param row_a The row on the lefthand side of the addition.
-   * @param row_b The row on the righthand side of the addition.
-   * @param row_c The destination row.
-   * @param r     The scaling value.
-   * @param out   The output matrix.
+   * @param c     Preallocated storage
+   * @param <M>   The precise type of matrix
+   * @param m     The input matrix
+   * @param row_a The row on the lefthand side of the addition
+   * @param row_b The row on the righthand side of the addition
+   * @param row_c The destination row
+   * @param r     The scaling value
+   * @param out   The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM3x3F addRowScaled(
+  public static <M extends MatrixWritable3x3FType> M addRowScaled(
+    final ContextMM3F c,
     final MatrixReadable3x3FType m,
     final int row_a,
     final int row_b,
     final int row_c,
     final double r,
-    final MatrixM3x3F out)
+    final M out)
   {
     return MatrixM3x3F.addRowScaledUnsafe(
       m,
@@ -214,6 +219,8 @@ public final class MatrixM3x3F
       MatrixM3x3F.rowCheck(row_b),
       MatrixM3x3F.rowCheck(row_c),
       r,
+      c.v3a,
+      c.v3b,
       out);
   }
 
@@ -225,40 +232,43 @@ public final class MatrixM3x3F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m     The input matrix.
-   * @param row_a The row on the lefthand side of the addition.
-   * @param row_b The row on the righthand side of the addition.
-   * @param row_c The destination row.
-   * @param r     The scaling value.
+   * @param c     Preallocated storage
+   * @param <M>   The precise type of matrix
+   * @param m     The input matrix
+   * @param row_a The row on the lefthand side of the addition
+   * @param row_b The row on the righthand side of the addition
+   * @param row_c The destination row
+   * @param r     The scaling value
    *
    * @return {@code m}
    */
 
-  public static MatrixM3x3F addRowScaledInPlace(
-    final MatrixM3x3F m,
+  public static <M extends MatrixWritable3x3FType & MatrixReadable3x3FType> M
+  addRowScaledInPlace(
+    final ContextMM3F c,
+    final M m,
     final int row_a,
     final int row_b,
     final int row_c,
     final double r)
   {
-    return MatrixM3x3F.addRowScaled(m, row_a, row_b, row_c, r, m);
+    return MatrixM3x3F.addRowScaled(c, m, row_a, row_b, row_c, r, m);
   }
 
-  private static MatrixM3x3F addRowScaledUnsafe(
+  private static <M extends MatrixWritable3x3FType> M addRowScaledUnsafe(
     final MatrixReadable3x3FType m,
     final int row_a,
     final int row_b,
     final int row_c,
     final double r,
-    final MatrixM3x3F out)
+    final VectorM3F va,
+    final VectorM3F vb,
+    final M out)
   {
-    final VectorM3F va = new VectorM3F();
-    final VectorM3F vb = new VectorM3F();
-    MatrixM3x3F.rowUnsafe(m, row_a, va);
-    MatrixM3x3F.rowUnsafe(m, row_b, vb);
-
+    m.getRow3FUnsafe(row_a, va);
+    m.getRow3FUnsafe(row_b, vb);
     VectorM3F.addScaledInPlace(va, vb, r);
-    MatrixM3x3F.setRowUnsafe(out, row_c, va);
+    out.setRowWith3FUnsafe(row_c, va);
     return out;
   }
 
@@ -276,28 +286,36 @@ public final class MatrixM3x3F
    * Copy the contents of the matrix {@code input} to the matrix {@code output},
    * completely replacing all elements.
    *
-   * @param input  The input vector.
-   * @param output The output vector.
+   * @param <M>    The precise type of matrix
+   * @param input  The input vector
+   * @param output The output vector
    *
    * @return {@code output}
    */
 
-  public static MatrixM3x3F copy(
+  public static <M extends MatrixWritable3x3FType> M copy(
     final MatrixReadable3x3FType input,
-    final MatrixM3x3F output)
+    final M output)
   {
-    for (int col = 0; col < MatrixM3x3F.VIEW_COLS; ++col) {
-      for (int row = 0; row < MatrixM3x3F.VIEW_ROWS; ++row) {
-        output.setUnsafe(row, col, input.getRowColumnF(row, col));
-      }
-    }
+    output.setR0C0F(input.getR0C0F());
+    output.setR0C1F(input.getR0C1F());
+    output.setR0C2F(input.getR0C2F());
+
+    output.setR1C0F(input.getR1C0F());
+    output.setR1C1F(input.getR1C1F());
+    output.setR1C2F(input.getR1C2F());
+
+    output.setR2C0F(input.getR2C0F());
+    output.setR2C1F(input.getR2C1F());
+    output.setR2C2F(input.getR2C2F());
+
     return output;
   }
 
   /**
    * Calculate the determinant of the matrix {@code m}.
    *
-   * @param m The input matrix.
+   * @param m The input matrix
    *
    * @return The determinant.
    */
@@ -305,17 +323,17 @@ public final class MatrixM3x3F
   public static double determinant(
     final MatrixReadable3x3FType m)
   {
-    final double r0c0 = (double) m.getRowColumnF(0, 0);
-    final double r0c1 = (double) m.getRowColumnF(0, 1);
-    final double r0c2 = (double) m.getRowColumnF(0, 2);
+    final double r0c0 = (double) m.getR0C0F();
+    final double r0c1 = (double) m.getR0C1F();
+    final double r0c2 = (double) m.getR0C2F();
 
-    final double r1c0 = (double) m.getRowColumnF(1, 0);
-    final double r1c1 = (double) m.getRowColumnF(1, 1);
-    final double r1c2 = (double) m.getRowColumnF(1, 2);
+    final double r1c0 = (double) m.getR1C0F();
+    final double r1c1 = (double) m.getR1C1F();
+    final double r1c2 = (double) m.getR1C2F();
 
-    final double r2c0 = (double) m.getRowColumnF(2, 0);
-    final double r2c1 = (double) m.getRowColumnF(2, 1);
-    final double r2c2 = (double) m.getRowColumnF(2, 2);
+    final double r2c0 = (double) m.getR2C0F();
+    final double r2c1 = (double) m.getR2C1F();
+    final double r2c2 = (double) m.getR2C2F();
 
     double sum = 0.0;
 
@@ -333,22 +351,30 @@ public final class MatrixM3x3F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m     The input matrix.
-   * @param row_a The first row.
-   * @param row_b The second row.
-   * @param out   The output matrix.
+   * @param c     Preallocated storage
+   * @param <M>   The precise type of matrix
+   * @param m     The input matrix
+   * @param row_a The first row
+   * @param row_b The second row
+   * @param out   The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM3x3F exchangeRows(
+  public static <M extends MatrixWritable3x3FType> M exchangeRows(
+    final ContextMM3F c,
     final MatrixReadable3x3FType m,
     final int row_a,
     final int row_b,
-    final MatrixM3x3F out)
+    final M out)
   {
     return MatrixM3x3F.exchangeRowsUnsafe(
-      m, MatrixM3x3F.rowCheck(row_a), MatrixM3x3F.rowCheck(row_b), out);
+      m,
+      MatrixM3x3F.rowCheck(row_a),
+      MatrixM3x3F.rowCheck(row_b),
+      c.v3a,
+      c.v3b,
+      out);
   }
 
   /**
@@ -358,35 +384,37 @@ public final class MatrixM3x3F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m     The input matrix.
-   * @param row_a The first row.
-   * @param row_b The second row.
+   * @param c     Preallocated storage
+   * @param <M>   The precise type of matrix
+   * @param m     The input matrix
+   * @param row_a The first row
+   * @param row_b The second row
    *
    * @return {@code m}
    */
 
-  public static MatrixM3x3F exchangeRowsInPlace(
-    final MatrixM3x3F m,
+  public static <M extends MatrixWritable3x3FType & MatrixReadable3x3FType> M
+  exchangeRowsInPlace(
+    final ContextMM3F c,
+    final M m,
     final int row_a,
     final int row_b)
   {
-    return MatrixM3x3F.exchangeRows(m, row_a, row_b, m);
+    return MatrixM3x3F.exchangeRows(c, m, row_a, row_b, m);
   }
 
-  private static MatrixM3x3F exchangeRowsUnsafe(
+  private static <M extends MatrixWritable3x3FType> M exchangeRowsUnsafe(
     final MatrixReadable3x3FType m,
     final int row_a,
     final int row_b,
-    final MatrixM3x3F out)
+    final VectorM3F va,
+    final VectorM3F vb,
+    final M out)
   {
-    final VectorM3F va = new VectorM3F();
-    final VectorM3F vb = new VectorM3F();
-
-    MatrixM3x3F.rowUnsafe(m, row_a, va);
-    MatrixM3x3F.rowUnsafe(m, row_b, vb);
-
-    MatrixM3x3F.setRowUnsafe(out, row_a, vb);
-    MatrixM3x3F.setRowUnsafe(out, row_b, va);
+    m.getRow3FUnsafe(row_a, va);
+    m.getRow3FUnsafe(row_b, vb);
+    out.setRowWith3FUnsafe(row_a, vb);
+    out.setRowWith3FUnsafe(row_b, va);
     return out;
   }
 
@@ -420,17 +448,20 @@ public final class MatrixM3x3F
    * to invert the matrix, and {@code None} otherwise. It is not possible to
    * invert a matrix that has a determinant of {@code 0}.
    *
-   * @param m   The input matrix.
-   * @param out The output matrix.
+   * @param c   Preallocated storage
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
+   * @param out The output matrix
    *
    * @return {@code out}
    *
    * @see MatrixM3x3F#determinant(MatrixReadable3x3FType)
    */
 
-  public static OptionType<MatrixM3x3F> invert(
+  public static <M extends MatrixWritable3x3FType> OptionType<M> invert(
+    final ContextMM3F c,
     final MatrixReadable3x3FType m,
-    final MatrixM3x3F out)
+    final M out)
   {
     final double d = MatrixM3x3F.determinant(m);
 
@@ -440,17 +471,17 @@ public final class MatrixM3x3F
 
     final double d_inv = 1.0 / d;
 
-    final double orig_r0c0 = (double) m.getRowColumnF(0, 0);
-    final double orig_r0c1 = (double) m.getRowColumnF(0, 1);
-    final double orig_r0c2 = (double) m.getRowColumnF(0, 2);
+    final double orig_r0c0 = (double) m.getR0C0F();
+    final double orig_r0c1 = (double) m.getR0C1F();
+    final double orig_r0c2 = (double) m.getR0C2F();
 
-    final double orig_r1c0 = (double) m.getRowColumnF(1, 0);
-    final double orig_r1c1 = (double) m.getRowColumnF(1, 1);
-    final double orig_r1c2 = (double) m.getRowColumnF(1, 2);
+    final double orig_r1c0 = (double) m.getR1C0F();
+    final double orig_r1c1 = (double) m.getR1C1F();
+    final double orig_r1c2 = (double) m.getR1C2F();
 
-    final double orig_r2c0 = (double) m.getRowColumnF(2, 0);
-    final double orig_r2c1 = (double) m.getRowColumnF(2, 1);
-    final double orig_r2c2 = (double) m.getRowColumnF(2, 2);
+    final double orig_r2c0 = (double) m.getR2C0F();
+    final double orig_r2c1 = (double) m.getR2C1F();
+    final double orig_r2c2 = (double) m.getR2C2F();
 
     final double r0c0 = (orig_r1c1 * orig_r2c2) - (orig_r1c2 * orig_r2c1);
     final double r0c1 = (orig_r0c2 * orig_r2c1) - (orig_r0c1 * orig_r2c2);
@@ -464,19 +495,21 @@ public final class MatrixM3x3F
     final double r2c1 = (orig_r0c1 * orig_r2c0) - (orig_r0c0 * orig_r2c1);
     final double r2c2 = (orig_r0c0 * orig_r1c1) - (orig_r0c1 * orig_r1c0);
 
-    MatrixM3x3F.set(out, 0, 0, (float) r0c0);
-    MatrixM3x3F.set(out, 0, 1, (float) r0c1);
-    MatrixM3x3F.set(out, 0, 2, (float) r0c2);
+    final MatrixM3x3F temp = c.m3a;
 
-    MatrixM3x3F.set(out, 1, 0, (float) r1c0);
-    MatrixM3x3F.set(out, 1, 1, (float) r1c1);
-    MatrixM3x3F.set(out, 1, 2, (float) r1c2);
+    temp.setR0C0F((float) r0c0);
+    temp.setR0C1F((float) r0c1);
+    temp.setR0C2F((float) r0c2);
 
-    MatrixM3x3F.set(out, 2, 0, (float) r2c0);
-    MatrixM3x3F.set(out, 2, 1, (float) r2c1);
-    MatrixM3x3F.set(out, 2, 2, (float) r2c2);
+    temp.setR1C0F((float) r1c0);
+    temp.setR1C1F((float) r1c1);
+    temp.setR1C2F((float) r1c2);
 
-    MatrixM3x3F.scaleInPlace(out, d_inv);
+    temp.setR2C0F((float) r2c0);
+    temp.setR2C1F((float) r2c1);
+    temp.setR2C2F((float) r2c2);
+
+    MatrixM3x3F.scale(temp, d_inv, out);
     return Option.some(out);
   }
 
@@ -486,17 +519,21 @@ public final class MatrixM3x3F
    * invert the matrix, and {@code None} otherwise. It is not possible to invert
    * a matrix that has a determinant of {@code 0}.
    *
-   * @param m The input matrix.
+   * @param c   Preallocated storage
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
    *
    * @return {@code m}
    *
    * @see MatrixM3x3F#determinant(MatrixReadable3x3FType)
    */
 
-  public static OptionType<MatrixM3x3F> invertInPlace(
-    final MatrixM3x3F m)
+  public static <M extends MatrixWritable3x3FType & MatrixReadable3x3FType>
+  OptionType<M> invertInPlace(
+    final ContextMM3F c,
+    final M m)
   {
-    return MatrixM3x3F.invert(m, m);
+    return MatrixM3x3F.invert(c, m, m);
   }
 
   /**
@@ -508,26 +545,28 @@ public final class MatrixM3x3F
    * is expressed as a rotation matrix and a translation vector, written to
    * {@code out_matrix} and {@code out_translation}, respectively. </p>
    *
+   * @param <M>             The precise type of matrix
    * @param context         Preallocated storage
    * @param out_matrix      The output matrix
    * @param out_translation The output translation
    * @param origin          The position of the viewer
    * @param target          The target being viewed
    * @param up              The up vector
-   * @param <V>             The precise type of writable vector.
+   * @param <V>             The precise type of writable vector
    */
 
-  public static <V extends VectorWritable3FType> void lookAtWithContext(
+  public static <V extends VectorWritable3FType, M extends
+    MatrixWritable3x3FType> void lookAt(
     final ContextMM3F context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
     final VectorReadable3FType up,
-    final MatrixM3x3F out_matrix,
+    final M out_matrix,
     final V out_translation)
   {
-    final VectorM3F forward = context.getV3A();
-    final VectorM3F new_up = context.getV3B();
-    final VectorM3F side = context.getV3C();
+    final VectorM3F forward = context.v3a;
+    final VectorM3F new_up = context.v3b;
+    final VectorM3F side = context.v3c;
 
     MatrixM3x3F.setIdentity(out_matrix);
 
@@ -558,15 +597,15 @@ public final class MatrixM3x3F
      * Calculate rotation matrix
      */
 
-    out_matrix.set(0, 0, side.getXF());
-    out_matrix.set(0, 1, side.getYF());
-    out_matrix.set(0, 2, side.getZF());
-    out_matrix.set(1, 0, new_up.getXF());
-    out_matrix.set(1, 1, new_up.getYF());
-    out_matrix.set(1, 2, new_up.getZF());
-    out_matrix.set(2, 0, -forward.getXF());
-    out_matrix.set(2, 1, -forward.getYF());
-    out_matrix.set(2, 2, -forward.getZF());
+    out_matrix.setR0C0F(side.getXF());
+    out_matrix.setR0C1F(side.getYF());
+    out_matrix.setR0C2F(side.getZF());
+    out_matrix.setR1C0F(new_up.getXF());
+    out_matrix.setR1C1F(new_up.getYF());
+    out_matrix.setR1C2F(new_up.getZF());
+    out_matrix.setR2C0F(-forward.getXF());
+    out_matrix.setR2C1F(-forward.getYF());
+    out_matrix.setR2C2F(-forward.getZF());
 
     /**
      * Calculate camera translation matrix
@@ -576,48 +615,24 @@ public final class MatrixM3x3F
   }
 
   /**
-   * <p> Generate and return a matrix that represents a rotation of {@code
-   * angle} radians around the axis {@code axis}. </p> <p> The function assumes
-   * a right-handed coordinate system and therefore a positive rotation around
-   * any axis represents a counter-clockwise rotation around that axis. </p>
-   *
-   * @param angle The angle in radians.
-   * @param axis  The axis.
-   *
-   * @return {@code out}
-   *
-   * @since 5.0.0
-   */
-
-  public static MatrixM3x3F makeRotation(
-    final double angle,
-    final VectorReadable3FType axis)
-  {
-    final MatrixM3x3F out = new MatrixM3x3F();
-    MatrixM3x3F.makeRotationInto(angle, axis, out);
-    return out;
-  }
-
-  /**
    * <p> Generate a matrix that represents a rotation of {@code angle} radians
    * around the axis {@code axis} and save to {@code out}. </p> <p> The function
    * assumes a right-handed coordinate system and therefore a positive rotation
    * around any axis represents a counter-clockwise rotation around that axis.
    * </p>
    *
-   * @param angle The angle in radians.
-   * @param axis  The axis.
-   * @param out   The output matrix.
+   * @param <M>   The precise type of matrix
+   * @param angle The angle in radians
+   * @param axis  The axis
+   * @param out   The output matrix
    *
    * @return {@code out}
-   *
-   * @since 5.0.0
    */
 
-  public static MatrixM3x3F makeRotationInto(
+  public static <M extends MatrixWritable3x3FType> M makeRotation(
     final double angle,
     final VectorReadable3FType axis,
-    final MatrixM3x3F out)
+    final M out)
   {
     final double axis_x = (double) axis.getXF();
     final double axis_y = (double) axis.getYF();
@@ -651,17 +666,17 @@ public final class MatrixM3x3F
     final double r2c1 = tyz + sx;
     final double r2c2 = tz_sq + c;
 
-    out.setUnsafe(0, 0, (float) r0c0);
-    out.setUnsafe(0, 1, (float) r0c1);
-    out.setUnsafe(0, 2, (float) r0c2);
+    out.setR0C0F((float) r0c0);
+    out.setR0C1F((float) r0c1);
+    out.setR0C2F((float) r0c2);
 
-    out.setUnsafe(1, 0, (float) r1c0);
-    out.setUnsafe(1, 1, (float) r1c1);
-    out.setUnsafe(1, 2, (float) r1c2);
+    out.setR1C0F((float) r1c0);
+    out.setR1C1F((float) r1c1);
+    out.setR1C2F((float) r1c2);
 
-    out.setUnsafe(2, 0, (float) r2c0);
-    out.setUnsafe(2, 1, (float) r2c1);
-    out.setUnsafe(2, 2, (float) r2c2);
+    out.setR2C0F((float) r2c0);
+    out.setR2C1F((float) r2c1);
+    out.setR2C2F((float) r2c2);
     return out;
   }
 
@@ -669,25 +684,28 @@ public final class MatrixM3x3F
    * Create a translation matrix that represents a translation by the vector
    * {@code v}, writing the resulting matrix to {@code out}.
    *
-   * @param v   The translation vector.
-   * @param out The output matrix.
+   * @param <M> The precise type of matrix
+   * @param v   The translation vector
+   * @param out The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM3x3F makeTranslation2F(
+  public static <M extends MatrixWritable3x3FType> M makeTranslation2F(
     final VectorReadable2FType v,
-    final MatrixM3x3F out)
+    final M out)
   {
-    out.setUnsafe(0, 0, 1.0f);
-    out.setUnsafe(0, 1, 0.0f);
-    out.setUnsafe(0, 2, v.getXF());
-    out.setUnsafe(1, 0, 0.0f);
-    out.setUnsafe(1, 1, 1.0f);
-    out.setUnsafe(1, 2, v.getYF());
-    out.setUnsafe(2, 0, 0.0f);
-    out.setUnsafe(2, 1, 0.0f);
-    out.setUnsafe(2, 2, 1.0f);
+    out.setR0C0F(1.0f);
+    out.setR0C1F(0.0f);
+    out.setR0C2F(v.getXF());
+
+    out.setR1C0F(0.0f);
+    out.setR1C1F(1.0f);
+    out.setR1C2F(v.getYF());
+
+    out.setR2C0F(0.0f);
+    out.setR2C1F(0.0f);
+    out.setR2C2F(1.0f);
     return out;
   }
 
@@ -695,25 +713,28 @@ public final class MatrixM3x3F
    * Create a translation matrix that represents a translation by the vector
    * {@code v}, writing the resulting matrix to {@code out}.
    *
-   * @param v   The translation vector.
-   * @param out The output matrix.
+   * @param <M> The precise type of matrix
+   * @param v   The translation vector
+   * @param out The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM3x3F makeTranslation2I(
+  public static <M extends MatrixWritable3x3FType> M makeTranslation2I(
     final VectorReadable2IType v,
-    final MatrixM3x3F out)
+    final M out)
   {
-    out.setUnsafe(0, 0, 1.0f);
-    out.setUnsafe(0, 1, 0.0f);
-    out.setUnsafe(0, 2, (float) v.getXI());
-    out.setUnsafe(1, 0, 0.0f);
-    out.setUnsafe(1, 1, 1.0f);
-    out.setUnsafe(1, 2, (float) v.getYI());
-    out.setUnsafe(2, 0, 0.0f);
-    out.setUnsafe(2, 1, 0.0f);
-    out.setUnsafe(2, 2, 1.0f);
+    out.setR0C0F(1.0f);
+    out.setR0C1F(0.0f);
+    out.setR0C2F((float) v.getXI());
+
+    out.setR1C0F(0.0f);
+    out.setR1C1F(1.0f);
+    out.setR1C2F((float) v.getYI());
+
+    out.setR2C0F(0.0f);
+    out.setR2C1F(0.0f);
+    out.setR2C2F(1.0f);
     return out;
   }
 
@@ -721,74 +742,75 @@ public final class MatrixM3x3F
    * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
    * result to {@code out}.
    *
-   * @param m0  The left input vector.
-   * @param m1  The right input vector.
-   * @param out The output vector.
+   * @param <M> The precise type of matrix
+   * @param m0  The left input vector
+   * @param m1  The right input vector
+   * @param out The output vector
    *
    * @return {@code out}
    */
 
-  public static MatrixM3x3F multiply(
+  public static <M extends MatrixWritable3x3FType> M multiply(
     final MatrixReadable3x3FType m0,
     final MatrixReadable3x3FType m1,
-    final MatrixM3x3F out)
+    final M out)
   {
     double r0c0 = 0.0;
-    r0c0 += (double) (m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 0));
-    r0c0 += (double) (m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 0));
-    r0c0 += (double) (m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 0));
+    r0c0 += (double) (m0.getR0C0F() * m1.getR0C0F());
+    r0c0 += (double) (m0.getR0C1F() * m1.getR1C0F());
+    r0c0 += (double) (m0.getR0C2F() * m1.getR2C0F());
 
     double r1c0 = 0.0;
-    r1c0 += (double) (m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 0));
-    r1c0 += (double) (m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 0));
-    r1c0 += (double) (m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 0));
+    r1c0 += (double) (m0.getR1C0F() * m1.getR0C0F());
+    r1c0 += (double) (m0.getR1C1F() * m1.getR1C0F());
+    r1c0 += (double) (m0.getR1C2F() * m1.getR2C0F());
 
     double r2c0 = 0.0;
-    r2c0 += (double) (m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 0));
-    r2c0 += (double) (m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 0));
-    r2c0 += (double) (m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 0));
+    r2c0 += (double) (m0.getR2C0F() * m1.getR0C0F());
+    r2c0 += (double) (m0.getR2C1F() * m1.getR1C0F());
+    r2c0 += (double) (m0.getR2C2F() * m1.getR2C0F());
 
     double r0c1 = 0.0;
-    r0c1 += (double) (m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 1));
-    r0c1 += (double) (m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 1));
-    r0c1 += (double) (m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 1));
+    r0c1 += (double) (m0.getR0C0F() * m1.getR0C1F());
+    r0c1 += (double) (m0.getR0C1F() * m1.getR1C1F());
+    r0c1 += (double) (m0.getR0C2F() * m1.getR2C1F());
 
     double r1c1 = 0.0;
-    r1c1 += (double) (m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 1));
-    r1c1 += (double) (m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 1));
-    r1c1 += (double) (m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 1));
+    r1c1 += (double) (m0.getR1C0F() * m1.getR0C1F());
+    r1c1 += (double) (m0.getR1C1F() * m1.getR1C1F());
+    r1c1 += (double) (m0.getR1C2F() * m1.getR2C1F());
 
     double r2c1 = 0.0;
-    r2c1 += (double) (m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 1));
-    r2c1 += (double) (m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 1));
-    r2c1 += (double) (m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 1));
+    r2c1 += (double) (m0.getR2C0F() * m1.getR0C1F());
+    r2c1 += (double) (m0.getR2C1F() * m1.getR1C1F());
+    r2c1 += (double) (m0.getR2C2F() * m1.getR2C1F());
 
     double r0c2 = 0.0;
-    r0c2 += (double) (m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 2));
-    r0c2 += (double) (m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 2));
-    r0c2 += (double) (m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 2));
+    r0c2 += (double) (m0.getR0C0F() * m1.getR0C2F());
+    r0c2 += (double) (m0.getR0C1F() * m1.getR1C2F());
+    r0c2 += (double) (m0.getR0C2F() * m1.getR2C2F());
 
     double r1c2 = 0.0;
-    r1c2 += (double) (m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 2));
-    r1c2 += (double) (m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 2));
-    r1c2 += (double) (m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 2));
+    r1c2 += (double) (m0.getR1C0F() * m1.getR0C2F());
+    r1c2 += (double) (m0.getR1C1F() * m1.getR1C2F());
+    r1c2 += (double) (m0.getR1C2F() * m1.getR2C2F());
 
     double r2c2 = 0.0;
-    r2c2 += (double) (m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 2));
-    r2c2 += (double) (m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 2));
-    r2c2 += (double) (m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 2));
+    r2c2 += (double) (m0.getR2C0F() * m1.getR0C2F());
+    r2c2 += (double) (m0.getR2C1F() * m1.getR1C2F());
+    r2c2 += (double) (m0.getR2C2F() * m1.getR2C2F());
 
-    out.setUnsafe(0, 0, (float) r0c0);
-    out.setUnsafe(0, 1, (float) r0c1);
-    out.setUnsafe(0, 2, (float) r0c2);
+    out.setR0C0F((float) r0c0);
+    out.setR0C1F((float) r0c1);
+    out.setR0C2F((float) r0c2);
 
-    out.setUnsafe(1, 0, (float) r1c0);
-    out.setUnsafe(1, 1, (float) r1c1);
-    out.setUnsafe(1, 2, (float) r1c2);
+    out.setR1C0F((float) r1c0);
+    out.setR1C1F((float) r1c1);
+    out.setR1C2F((float) r1c2);
 
-    out.setUnsafe(2, 0, (float) r2c0);
-    out.setUnsafe(2, 1, (float) r2c1);
-    out.setUnsafe(2, 2, (float) r2c2);
+    out.setR2C0F((float) r2c0);
+    out.setR2C1F((float) r2c1);
+    out.setR2C2F((float) r2c2);
     return out;
   }
 
@@ -796,14 +818,16 @@ public final class MatrixM3x3F
    * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
    * result to {@code m0}.
    *
-   * @param m0 The left input vector.
-   * @param m1 The right input vector.
+   * @param <M> The precise type of matrix
+   * @param m0  The left input vector
+   * @param m1  The right input vector
    *
    * @return {@code out}
    */
 
-  public static MatrixM3x3F multiplyInPlace(
-    final MatrixM3x3F m0,
+  public static <M extends MatrixWritable3x3FType & MatrixReadable3x3FType> M
+  multiplyInPlace(
+    final M m0,
     final MatrixReadable3x3FType m1)
   {
     return MatrixM3x3F.multiply(m0, m1, m0);
@@ -813,47 +837,34 @@ public final class MatrixM3x3F
    * Multiply the matrix {@code m} with the vector {@code v}, writing the
    * resulting vector to {@code out}.
    *
-   * @param m   The input matrix.
-   * @param v   The input vector.
-   * @param out The output vector.
-   * @param <V> The precise type of writable vector.
+   * @param c   Preallocated storage
+   * @param m   The input matrix
+   * @param v   The input vector
+   * @param out The output vector
+   * @param <V> The precise type of writable vector
    *
    * @return {@code out}
    */
 
   public static <V extends VectorWritable3FType> V multiplyVector3F(
+    final ContextMM3F c,
     final MatrixReadable3x3FType m,
     final VectorReadable3FType v,
     final V out)
   {
-    final VectorM3F row = new VectorM3F();
-    final VectorM3F vi = new VectorM3F(v);
+    final VectorM3F va = c.v3a;
+    final VectorM3F vb = c.v3b;
 
-    MatrixM3x3F.rowUnsafe(m, 0, row);
-    out.setXF((float) VectorM3F.dotProduct(row, vi));
-    MatrixM3x3F.rowUnsafe(m, 1, row);
-    out.setYF((float) VectorM3F.dotProduct(row, vi));
-    MatrixM3x3F.rowUnsafe(m, 2, row);
-    out.setZF((float) VectorM3F.dotProduct(row, vi));
+    vb.copyFrom3F(v);
+
+    m.getRow3FUnsafe(0, va);
+    out.setXF((float) VectorM3F.dotProduct(va, vb));
+    m.getRow3FUnsafe(1, va);
+    out.setYF((float) VectorM3F.dotProduct(va, vb));
+    m.getRow3FUnsafe(2, va);
+    out.setZF((float) VectorM3F.dotProduct(va, vb));
 
     return out;
-  }
-
-  /**
-   * @param m   The input matrix
-   * @param row The row
-   * @param out The output vector
-   * @param <V> The precise type of writable vector.
-   *
-   * @return Row {@code row} of the matrix {@code m} in the vector {@code out}.
-   */
-
-  public static <V extends VectorWritable3FType> V row(
-    final MatrixReadable3x3FType m,
-    final int row,
-    final V out)
-  {
-    return MatrixM3x3F.rowUnsafe(m, MatrixM3x3F.rowCheck(row), out);
   }
 
   private static int rowCheck(
@@ -866,57 +877,46 @@ public final class MatrixM3x3F
     return row;
   }
 
-  private static <V extends VectorWritable3FType> V rowUnsafe(
-    final MatrixReadable3x3FType m,
-    final int row,
-    final V out)
-  {
-    out.set3F(
-      m.getRowColumnF(row, 0),
-      m.getRowColumnF(row, 1),
-      m.getRowColumnF(row, 2));
-    return out;
-  }
-
   /**
    * Scale all elements of the matrix {@code m} by the scaling value {@code r},
    * saving the result in {@code out}.
    *
-   * @param m   The input matrix.
-   * @param r   The scaling value.
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
+   * @param r   The scaling value
    * @param out The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM3x3F scale(
+  public static <M extends MatrixWritable3x3FType> M scale(
     final MatrixReadable3x3FType m,
     final double r,
-    final MatrixM3x3F out)
+    final M out)
   {
-    final float r0c0 = (float) ((double) m.getRowColumnF(0, 0) * r);
-    final float r1c0 = (float) ((double) m.getRowColumnF(1, 0) * r);
-    final float r2c0 = (float) ((double) m.getRowColumnF(2, 0) * r);
+    final float r0c0 = (float) ((double) m.getR0C0F() * r);
+    final float r1c0 = (float) ((double) m.getR1C0F() * r);
+    final float r2c0 = (float) ((double) m.getR2C0F() * r);
 
-    final float r0c1 = (float) ((double) m.getRowColumnF(0, 1) * r);
-    final float r1c1 = (float) ((double) m.getRowColumnF(1, 1) * r);
-    final float r2c1 = (float) ((double) m.getRowColumnF(2, 1) * r);
+    final float r0c1 = (float) ((double) m.getR0C1F() * r);
+    final float r1c1 = (float) ((double) m.getR1C1F() * r);
+    final float r2c1 = (float) ((double) m.getR2C1F() * r);
 
-    final float r0c2 = (float) ((double) m.getRowColumnF(0, 2) * r);
-    final float r1c2 = (float) ((double) m.getRowColumnF(1, 2) * r);
-    final float r2c2 = (float) ((double) m.getRowColumnF(2, 2) * r);
+    final float r0c2 = (float) ((double) m.getR0C2F() * r);
+    final float r1c2 = (float) ((double) m.getR1C2F() * r);
+    final float r2c2 = (float) ((double) m.getR2C2F() * r);
 
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(1, 0, r1c0);
-    out.setUnsafe(2, 0, r2c0);
+    out.setR0C0F(r0c0);
+    out.setR1C0F(r1c0);
+    out.setR2C0F(r2c0);
 
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(1, 1, r1c1);
-    out.setUnsafe(2, 1, r2c1);
+    out.setR0C1F(r0c1);
+    out.setR1C1F(r1c1);
+    out.setR2C1F(r2c1);
 
-    out.setUnsafe(0, 2, r0c2);
-    out.setUnsafe(1, 2, r1c2);
-    out.setUnsafe(2, 2, r2c2);
+    out.setR0C2F(r0c2);
+    out.setR1C2F(r1c2);
+    out.setR2C2F(r2c2);
 
     return out;
   }
@@ -925,14 +925,16 @@ public final class MatrixM3x3F
    * Scale all elements of the matrix {@code m} by the scaling value {@code r},
    * saving the result in {@code m}.
    *
-   * @param m The input matrix.
-   * @param r The scaling value.
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
+   * @param r   The scaling value
    *
    * @return {@code m}
    */
 
-  public static MatrixM3x3F scaleInPlace(
-    final MatrixM3x3F m,
+  public static <M extends MatrixWritable3x3FType & MatrixReadable3x3FType> M
+  scaleInPlace(
+    final M m,
     final double r)
   {
     return MatrixM3x3F.scale(m, r, m);
@@ -945,21 +947,25 @@ public final class MatrixM3x3F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m   The input matrix.
-   * @param row The index of the row {@code (0 <= row < 3)}.
-   * @param r   The scaling value.
-   * @param out The output matrix.
+   * @param c   Preallocated storage
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
+   * @param row The index of the row {@code (0 <= row < 3)}
+   * @param r   The scaling value
+   * @param out The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM3x3F scaleRow(
+  public static <M extends MatrixWritable3x3FType> M scaleRow(
+    final ContextMM3F c,
     final MatrixReadable3x3FType m,
     final int row,
     final double r,
-    final MatrixM3x3F out)
+    final M out)
   {
-    return MatrixM3x3F.scaleRowUnsafe(m, MatrixM3x3F.rowCheck(row), r, out);
+    return MatrixM3x3F.scaleRowUnsafe(
+      m, MatrixM3x3F.rowCheck(row), r, c.v3a, out);
   }
 
   /**
@@ -969,110 +975,90 @@ public final class MatrixM3x3F
    * <p> This is one of the three <i>elementary</i> operations defined on
    * matrices. </p>
    *
-   * @param m   The input matrix.
-   * @param row The index of the row {@code (0 <= row < 3)}.
-   * @param r   The scaling value.
+   * @param c   Preallocated storage
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
+   * @param row The index of the row {@code (0 <= row < 3)}
+   * @param r   The scaling value
    *
    * @return {@code m}
    */
 
-  public static MatrixM3x3F scaleRowInPlace(
-    final MatrixM3x3F m,
+  public static <M extends MatrixWritable3x3FType & MatrixReadable3x3FType> M
+  scaleRowInPlace(
+    final ContextMM3F c,
+    final M m,
     final int row,
     final double r)
   {
-    return MatrixM3x3F.scaleRowUnsafe(m, MatrixM3x3F.rowCheck(row), r, m);
+    return MatrixM3x3F.scaleRowUnsafe(
+      m, MatrixM3x3F.rowCheck(row), r, c.v3a, m);
   }
 
-  private static MatrixM3x3F scaleRowUnsafe(
+  private static <M extends MatrixWritable3x3FType> M scaleRowUnsafe(
     final MatrixReadable3x3FType m,
     final int row,
     final double r,
-    final MatrixM3x3F out)
+    final VectorM3F tmp,
+    final M out)
   {
-    final VectorM3F v = new VectorM3F();
-
-    MatrixM3x3F.rowUnsafe(m, row, v);
-    VectorM3F.scaleInPlace(v, r);
-
-    MatrixM3x3F.setRowUnsafe(out, row, v);
+    m.getRow3FUnsafe(row, tmp);
+    VectorM3F.scaleInPlace(tmp, r);
+    out.setRowWith3FUnsafe(row, tmp);
     return out;
-  }
-
-  /**
-   * Set the value in the matrix {@code m} at row {@code row}, column {@code
-   * column} to {@code value}.
-   *
-   * @param m      The input matrix
-   * @param row    The row
-   * @param column The column
-   * @param value  The value
-   *
-   * @return {@code m}
-   */
-
-  public static MatrixM3x3F set(
-    final MatrixM3x3F m,
-    final int row,
-    final int column,
-    final float value)
-  {
-    m.view.put(MatrixM3x3F.indexChecked(row, column), value);
-    return m;
   }
 
   /**
    * Set the given matrix {@code m} to the identity matrix.
    *
-   * @param m The matrix
+   * @param <M> The precise type of matrix
+   * @param m   The matrix
    *
    * @return {@code m}
    */
 
-  public static MatrixM3x3F setIdentity(
-    final MatrixM3x3F m)
+  public static <M extends MatrixWritable3x3FType> M setIdentity(
+    final M m)
   {
-    m.view.clear();
+    m.setR0C0F(1.0f);
+    m.setR1C0F(0.0f);
+    m.setR2C0F(0.0f);
 
-    for (int row = 0; row < MatrixM3x3F.VIEW_ROWS; ++row) {
-      for (int col = 0; col < MatrixM3x3F.VIEW_COLS; ++col) {
-        if (row == col) {
-          m.setUnsafe(row, col, 1.0f);
-        } else {
-          m.setUnsafe(row, col, 0.0f);
-        }
-      }
-    }
+    m.setR0C1F(0.0f);
+    m.setR1C1F(1.0f);
+    m.setR2C1F(0.0f);
+
+    m.setR0C2F(0.0f);
+    m.setR1C2F(0.0f);
+    m.setR2C2F(1.0f);
 
     return m;
-  }
-
-  private static void setRowUnsafe(
-    final MatrixM3x3F m,
-    final int row,
-    final VectorReadable3FType v)
-  {
-    m.setUnsafe(row, 0, v.getXF());
-    m.setUnsafe(row, 1, v.getYF());
-    m.setUnsafe(row, 2, v.getZF());
   }
 
   /**
    * Set the given matrix {@code m} to the zero matrix.
    *
-   * @param m The matrix
+   * @param <M> The precise type of matrix
+   * @param m   The matrix
    *
    * @return {@code m}
    */
 
-  public static MatrixM3x3F setZero(
-    final MatrixM3x3F m)
+  public static <M extends MatrixWritable3x3FType> M setZero(
+    final M m)
   {
-    m.view.clear();
-    for (int index = 0; index < (MatrixM3x3F.VIEW_ROWS
-                                 * MatrixM3x3F.VIEW_COLS); ++index) {
-      m.view.put(index, 0.0f);
-    }
+    m.setR0C0F(0.0f);
+    m.setR1C0F(0.0f);
+    m.setR2C0F(0.0f);
+
+    m.setR0C1F(0.0f);
+    m.setR1C1F(0.0f);
+    m.setR2C1F(0.0f);
+
+    m.setR0C2F(0.0f);
+    m.setR1C2F(0.0f);
+    m.setR2C2F(0.0f);
+
     return m;
   }
 
@@ -1090,50 +1076,82 @@ public final class MatrixM3x3F
   public static double trace(
     final MatrixReadable3x3FType m)
   {
-    return (double) (m.getRowColumnF(0, 0)
-                     + m.getRowColumnF(1, 1)
-                     + m.getRowColumnF(2, 2));
+    return (double) (m.getR0C0F() + m.getR1C1F() + m.getR2C2F());
   }
 
   /**
    * Transpose the given matrix {@code m}, writing the resulting matrix to
    * {@code out}.
    *
-   * @param m   The input matrix.
-   * @param out The output matrix.
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
+   * @param out The output matrix
    *
    * @return {@code out}
    */
 
-  public static MatrixM3x3F transpose(
+  public static <M extends MatrixWritable3x3FType> M transpose(
     final MatrixReadable3x3FType m,
-    final MatrixM3x3F out)
+    final M out)
   {
-    MatrixM3x3F.copy(m, out);
-    return MatrixM3x3F.transposeInPlace(out);
+    final float r0c0 = m.getR0C0F();
+    final float r1c0 = m.getR1C0F();
+    final float r2c0 = m.getR2C0F();
+
+    final float r0c1 = m.getR0C1F();
+    final float r1c1 = m.getR1C1F();
+    final float r2c1 = m.getR2C1F();
+
+    final float r0c2 = m.getR0C2F();
+    final float r1c2 = m.getR1C2F();
+    final float r2c2 = m.getR2C2F();
+
+    out.setR0C0F(r0c0);
+    out.setR1C0F(r0c1); // swap 0
+    out.setR2C0F(r0c2); // swap 1
+
+    out.setR0C1F(r1c0); // swap 0
+    out.setR1C1F(r1c1);
+    out.setR2C1F(r1c2); // swap 2
+
+    out.setR0C2F(r2c0); // swap 1
+    out.setR1C2F(r2c1); // swap 2
+    out.setR2C2F(r2c2);
+
+    return out;
   }
 
   /**
    * Transpose the given matrix {@code m}, writing the resulting matrix to
    * {@code m}.
    *
-   * @param m The input matrix.
+   * @param <M> The precise type of matrix
+   * @param m   The input matrix
    *
    * @return {@code m}
    */
 
-  public static MatrixM3x3F transposeInPlace(
-    final MatrixM3x3F m)
+  public static <M extends MatrixWritable3x3FType & MatrixReadable3x3FType> M
+  transposeInPlace(
+    final M m)
   {
-    for (int row = 0; row < (MatrixM3x3F.VIEW_ROWS - 1); ++row) {
-      for (int column = row + 1; column < MatrixM3x3F.VIEW_COLS; ++column) {
-        final float x = m.view.get((row * MatrixM3x3F.VIEW_ROWS) + column);
-        m.view.put(
-          (row * MatrixM3x3F.VIEW_ROWS) + column,
-          m.view.get(row + (MatrixM3x3F.VIEW_COLS * column)));
-        m.view.put(row + (MatrixM3x3F.VIEW_COLS * column), x);
-      }
-    }
+    final float r1c0 = m.getR1C0F();
+    final float r2c0 = m.getR2C0F();
+
+    final float r0c1 = m.getR0C1F();
+    final float r2c1 = m.getR2C1F();
+
+    final float r0c2 = m.getR0C2F();
+    final float r1c2 = m.getR1C2F();
+
+    m.setR1C0F(r0c1); // swap 0
+    m.setR2C0F(r0c2); // swap 1
+
+    m.setR0C1F(r1c0); // swap 0
+    m.setR2C1F(r1c2); // swap 2
+
+    m.setR0C2F(r2c0); // swap 1
+    m.setR1C2F(r2c1); // swap 2
 
     return m;
   }
@@ -1170,7 +1188,68 @@ public final class MatrixM3x3F
     final int row,
     final V out)
   {
-    MatrixM3x3F.rowUnsafe(this, MatrixM3x3F.rowCheck(row), out);
+    MatrixM3x3F.rowCheck(row);
+    this.getRow3FUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable3FType> void getRow3FUnsafe(
+    final int row,
+    final V out)
+  {
+    final float x = this.view.get(MatrixM3x3F.indexUnsafe(row, 0));
+    final float y = this.view.get(MatrixM3x3F.indexUnsafe(row, 1));
+    final float z = this.view.get(MatrixM3x3F.indexUnsafe(row, 2));
+    out.set3F(x, y, z);
+  }
+
+  @Override public float getR0C2F()
+  {
+    return this.view.get(MatrixM3x3F.indexUnsafe(0, 2));
+  }
+
+  @Override public void setR0C2F(final float x)
+  {
+    this.view.put(MatrixM3x3F.indexUnsafe(0, 2), x);
+  }
+
+  @Override public float getR1C2F()
+  {
+    return this.view.get(MatrixM3x3F.indexUnsafe(1, 2));
+  }
+
+  @Override public void setR1C2F(final float x)
+  {
+    this.view.put(MatrixM3x3F.indexUnsafe(1, 2), x);
+  }
+
+  @Override public float getR2C0F()
+  {
+    return this.view.get(MatrixM3x3F.indexUnsafe(2, 0));
+  }
+
+  @Override public void setR2C0F(final float x)
+  {
+    this.view.put(MatrixM3x3F.indexUnsafe(2, 0), x);
+  }
+
+  @Override public float getR2C1F()
+  {
+    return this.view.get(MatrixM3x3F.indexUnsafe(2, 1));
+  }
+
+  @Override public void setR2C1F(final float x)
+  {
+    this.view.put(MatrixM3x3F.indexUnsafe(2, 1), x);
+  }
+
+  @Override public float getR2C2F()
+  {
+    return this.view.get(MatrixM3x3F.indexUnsafe(2, 2));
+  }
+
+  @Override public void setR2C2F(final float x)
+  {
+    this.view.put(MatrixM3x3F.indexUnsafe(2, 2), x);
   }
 
   @Override public float getRowColumnF(
@@ -1183,32 +1262,54 @@ public final class MatrixM3x3F
   @Override public int hashCode()
   {
     final int prime = 31;
-    int result = 1;
-    result = (prime * result);
+    int r = prime;
 
-    for (int index = 0; index < MatrixM3x3F.VIEW_ELEMENTS; ++index) {
-      result += Float.valueOf(this.view.get(index)).hashCode();
-    }
-    return result;
+    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR2C0F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR2C1F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(this.getR0C2F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR1C2F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR2C2F(), prime, r);
+
+    return r;
   }
 
-  /**
-   * Set the value at the given row and column.
-   *
-   * @param row    The row
-   * @param column The column
-   * @param value  The value
-   *
-   * @return {@code this}
-   */
-
-  public MatrixM3x3F set(
+  @Override public void setRowWith3F(
     final int row,
-    final int column,
-    final float value)
+    final VectorReadable3FType v)
   {
-    this.view.put(MatrixM3x3F.indexChecked(row, column), value);
-    return this;
+    MatrixM3x3F.rowCheck(row);
+    this.setRowWith3FUnsafe(row, v);
+  }
+
+  @Override public void setRowWith2F(
+    final int row,
+    final VectorReadable2FType v)
+  {
+    MatrixM3x3F.rowCheck(row);
+    this.setRowWith2FUnsafe(row, v);
+  }
+
+  @Override public void setRowWith2FUnsafe(
+    final int row,
+    final VectorReadable2FType v)
+  {
+    this.view.put(MatrixM3x3F.indexUnsafe(row, 0), v.getXF());
+    this.view.put(MatrixM3x3F.indexUnsafe(row, 1), v.getYF());
+  }
+
+  @Override public void setRowWith3FUnsafe(
+    final int row,
+    final VectorReadable3FType v)
+  {
+    this.view.put(MatrixM3x3F.indexUnsafe(row, 0), v.getXF());
+    this.view.put(MatrixM3x3F.indexUnsafe(row, 1), v.getYF());
+    this.view.put(MatrixM3x3F.indexUnsafe(row, 2), v.getZF());
   }
 
   @Override public void setRowColumnF(
@@ -1230,7 +1331,7 @@ public final class MatrixM3x3F
 
   @SuppressWarnings("boxing") @Override public String toString()
   {
-    final StringBuilder builder = new StringBuilder();
+    final StringBuilder builder = new StringBuilder(512);
     for (int row = 0; row < MatrixM3x3F.VIEW_ROWS; ++row) {
       final float c0 = this.view.get(MatrixM3x3F.indexUnsafe(row, 0));
       final float c1 = this.view.get(MatrixM3x3F.indexUnsafe(row, 1));
@@ -1241,6 +1342,63 @@ public final class MatrixM3x3F
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  @Override public <V extends VectorWritable2FType> void getRow2F(
+    final int row,
+    final V out)
+  {
+    MatrixM3x3F.rowCheck(row);
+    this.getRow2FUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
+    final int row,
+    final V out)
+  {
+    final float x = this.view.get(MatrixM3x3F.indexUnsafe(row, 0));
+    final float y = this.view.get(MatrixM3x3F.indexUnsafe(row, 1));
+    out.set2F(x, y);
+  }
+
+  @Override public float getR0C0F()
+  {
+    return this.view.get(MatrixM3x3F.indexUnsafe(0, 0));
+  }
+
+  @Override public void setR0C0F(final float x)
+  {
+    this.view.put(MatrixM3x3F.indexUnsafe(0, 0), x);
+  }
+
+  @Override public float getR1C0F()
+  {
+    return this.view.get(MatrixM3x3F.indexUnsafe(1, 0));
+  }
+
+  @Override public void setR1C0F(final float x)
+  {
+    this.view.put(MatrixM3x3F.indexUnsafe(1, 0), x);
+  }
+
+  @Override public float getR0C1F()
+  {
+    return this.view.get(MatrixM3x3F.indexUnsafe(0, 1));
+  }
+
+  @Override public void setR0C1F(final float x)
+  {
+    this.view.put(MatrixM3x3F.indexUnsafe(0, 1), x);
+  }
+
+  @Override public float getR1C1F()
+  {
+    return this.view.get(MatrixM3x3F.indexUnsafe(1, 1));
+  }
+
+  @Override public void setR1C1F(final float x)
+  {
+    this.view.put(MatrixM3x3F.indexUnsafe(1, 1), x);
   }
 
   /**
@@ -1260,11 +1418,12 @@ public final class MatrixM3x3F
    * @since 7.0.0
    */
 
-  public static class ContextMM3F
+  public static final class ContextMM3F
   {
-    private final VectorM3F v3a = new VectorM3F();
-    private final VectorM3F v3b = new VectorM3F();
-    private final VectorM3F v3c = new VectorM3F();
+    private final MatrixM3x3F m3a = new MatrixM3x3F();
+    private final VectorM3F   v3a = new VectorM3F();
+    private final VectorM3F   v3b = new VectorM3F();
+    private final VectorM3F   v3c = new VectorM3F();
 
     /**
      * Construct a new context.
@@ -1273,21 +1432,6 @@ public final class MatrixM3x3F
     public ContextMM3F()
     {
 
-    }
-
-    final VectorM3F getV3A()
-    {
-      return this.v3a;
-    }
-
-    final VectorM3F getV3B()
-    {
-      return this.v3b;
-    }
-
-    final VectorM3F getV3C()
-    {
-      return this.v3c;
     }
   }
 }

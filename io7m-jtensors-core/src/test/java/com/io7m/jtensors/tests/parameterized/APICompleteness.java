@@ -16,13 +16,6 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
-import org.junit.Test;
-
 import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.MatrixM4x4F;
 import com.io7m.jtensors.VectorI2D;
@@ -60,6 +53,12 @@ import com.io7m.jtensors.parameterized.PVectorM3I;
 import com.io7m.jtensors.parameterized.PVectorM4D;
 import com.io7m.jtensors.parameterized.PVectorM4F;
 import com.io7m.jtensors.parameterized.PVectorM4I;
+import org.junit.Test;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 @SuppressWarnings("static-method") public final class APICompleteness
 {

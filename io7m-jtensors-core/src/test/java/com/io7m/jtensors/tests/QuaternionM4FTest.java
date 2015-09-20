@@ -650,7 +650,7 @@ import org.junit.Test;
     final VectorReadable3FType target = new VectorI3F(-1, 0, 0);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Y;
 
-    MatrixM4x4F.lookAtWithContext(mc, origin, target, axis, mr);
+    MatrixM4x4F.lookAt(mc, origin, target, axis, mr);
     QuaternionM4F.lookAtWithContext(qc, origin, target, axis, qr);
     QuaternionM4F.makeRotationMatrix4x4(qr, mqr);
 
@@ -687,7 +687,7 @@ import org.junit.Test;
     final VectorReadable3FType target = new VectorI3F(1, 0, 0);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Y;
 
-    MatrixM4x4F.lookAtWithContext(mc, origin, target, axis, mr);
+    MatrixM4x4F.lookAt(mc, origin, target, axis, mr);
     QuaternionM4F.lookAtWithContext(qc, origin, target, axis, qr);
     QuaternionM4F.makeRotationMatrix4x4(qr, mqr);
 
@@ -738,7 +738,7 @@ import org.junit.Test;
       final VectorI3F origin = new VectorI3F(origin_x, origin_y, origin_z);
       final VectorI3F target = new VectorI3F(target_x, target_y, target_z);
 
-      MatrixM4x4F.lookAtWithContext(
+      MatrixM4x4F.lookAt(
         mc, origin, target, QuaternionM4FTest.AXIS_Y, ml);
       QuaternionM4F.lookAtWithContext(
         qc, origin, target, QuaternionM4FTest.AXIS_Y, lq);
@@ -1073,7 +1073,7 @@ import org.junit.Test;
        * quaternion from that matrix.
        */
 
-      MatrixM3x3F.makeRotationInto(angle, axis, m);
+      MatrixM3x3F.makeRotation(angle, axis, m);
       QuaternionM4F.makeFromRotationMatrix3x3(m, qfm);
 
       final double mag_qfm = QuaternionM4F.magnitude(qfm);
@@ -1150,7 +1150,7 @@ import org.junit.Test;
        * quaternion from that matrix.
        */
 
-      MatrixM4x4F.makeRotationInto(angle, axis, m);
+      MatrixM4x4F.makeRotation(angle, axis, m);
       QuaternionM4F.makeFromRotationMatrix4x4(m, qfm);
 
       final double mag_qfm = QuaternionM4F.magnitude(qfm);
@@ -1210,7 +1210,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_X;
 
-    MatrixM3x3F.makeRotationInto(radians, axis, mr);
+    MatrixM3x3F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix3x3(q, mq);
 
@@ -1242,7 +1242,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Y;
 
-    MatrixM3x3F.makeRotationInto(radians, axis, mr);
+    MatrixM3x3F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix3x3(q, mq);
 
@@ -1274,7 +1274,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Z;
 
-    MatrixM3x3F.makeRotationInto(radians, axis, mr);
+    MatrixM3x3F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix3x3(q, mq);
 
@@ -1326,7 +1326,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(-45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_X;
 
-    MatrixM3x3F.makeRotationInto(radians, axis, mr);
+    MatrixM3x3F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix3x3(q, mq);
 
@@ -1358,7 +1358,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(-45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Y;
 
-    MatrixM3x3F.makeRotationInto(radians, axis, mr);
+    MatrixM3x3F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix3x3(q, mq);
 
@@ -1390,7 +1390,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(-45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Z;
 
-    MatrixM3x3F.makeRotationInto(radians, axis, mr);
+    MatrixM3x3F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix3x3(q, mq);
 
@@ -1422,7 +1422,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_X;
 
-    MatrixM4x4F.makeRotationInto(radians, axis, mr);
+    MatrixM4x4F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix4x4(q, mq);
 
@@ -1454,7 +1454,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Y;
 
-    MatrixM4x4F.makeRotationInto(radians, axis, mr);
+    MatrixM4x4F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix4x4(q, mq);
 
@@ -1486,7 +1486,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Z;
 
-    MatrixM4x4F.makeRotationInto(radians, axis, mr);
+    MatrixM4x4F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix4x4(q, mq);
 
@@ -1546,7 +1546,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(-45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_X;
 
-    MatrixM4x4F.makeRotationInto(radians, axis, mr);
+    MatrixM4x4F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix4x4(q, mq);
 
@@ -1578,7 +1578,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(-45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Y;
 
-    MatrixM4x4F.makeRotationInto(radians, axis, mr);
+    MatrixM4x4F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix4x4(q, mq);
 
@@ -1610,7 +1610,7 @@ import org.junit.Test;
     final double radians = Math.toRadians(-45);
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Z;
 
-    MatrixM4x4F.makeRotationInto(radians, axis, mr);
+    MatrixM4x4F.makeRotation(radians, axis, mr);
     QuaternionM4F.makeFromAxisAngle(axis, radians, q);
     QuaternionM4F.makeRotationMatrix4x4(q, mq);
 

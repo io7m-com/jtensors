@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -23,15 +23,15 @@ package com.io7m.jtensors;
 public interface MatrixWritableFType
 {
   /**
-   * Set the value from the matrix at row {@code row}, column
-   * {@code column} to {@code value}.
+   * Set the value from the matrix at row {@code row}, column {@code column} to
+   * {@code value}.
    *
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
+   * @param row    The row
+   * @param column The column
+   * @param value  The value
+   *
+   * @throws IndexOutOfBoundsException Iff {@code row} or {@code column} are out
+   *                                   of range for the given matrix type
    */
 
   void setRowColumnF(

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -28,11 +28,18 @@ import java.util.Arrays;
  * @since 7.0.0
  */
 
-@EqualityStructural @Immutable public final class MatrixI2x2F implements
-  MatrixReadable2x2FType
+@EqualityStructural @Immutable public final class MatrixI2x2F
+  implements MatrixReadable2x2FType
 {
-  private static final float[][] IDENTITY  = MatrixI2x2F.makeIdentity();
+  private static final float[][]   IDENTITY  = MatrixI2x2F.makeIdentity();
   private static final MatrixI2x2F IDENTITYM = MatrixI2x2F.makeIdentityM();
+  private final float[][] elements;
+
+  private MatrixI2x2F(
+    final float[][] e)
+  {
+    this.elements = e;
+  }
 
   /**
    * @return The identity matrix
@@ -66,10 +73,8 @@ import java.util.Arrays;
   /**
    * Construct a new immutable 2x2 matrix from the given columns.
    *
-   * @param column_0
-   *          The first column
-   * @param column_1
-   *          The second column
+   * @param column_0 The first column
+   * @param column_1 The second column
    *
    * @return A new 2x2 matrix
    */
@@ -92,8 +97,7 @@ import java.util.Arrays;
   /**
    * Construct a new immutable 2x2 matrix from the given readable 2x2 matrix.
    *
-   * @param m
-   *          The original matrix
+   * @param m The original matrix
    *
    * @return A new 2x2 matrix
    */
@@ -110,14 +114,6 @@ import java.util.Arrays;
     }
 
     return new MatrixI2x2F(e);
-  }
-
-  private final float[][] elements;
-
-  private MatrixI2x2F(
-    final float[][] e)
-  {
-    this.elements = e;
   }
 
   @Override public boolean equals(
@@ -140,14 +136,41 @@ import java.util.Arrays;
     final int row,
     final V out)
   {
-    out.set2F(this.elements[row][0], this.elements[row][1]);
+    this.getRow2FUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
+    final int row,
+    final V out)
+  {
+    out.set2F(
+      this.elements[row][0], this.elements[row][1]);
+  }
+
+  @Override public float getR0C0F()
+  {
+    return this.elements[0][0];
+  }
+
+  @Override public float getR1C0F()
+  {
+    return this.elements[1][0];
+  }
+
+  @Override public float getR0C1F()
+  {
+    return this.elements[0][1];
+  }
+
+  @Override public float getR1C1F()
+  {
+    return this.elements[1][1];
   }
 
   /**
-   * @param row
-   *          The row
-   * @param col
-   *          The column
+   * @param row The row
+   * @param col The column
+   *
    * @return The value at the given row and column
    */
 
@@ -160,35 +183,41 @@ import java.util.Arrays;
 
   @Override public int hashCode()
   {
-    return Arrays.hashCode(this.elements);
+    final int prime = 31;
+    int r = prime;
+
+    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
+
+    return r;
   }
 
   /**
    * Write the current matrix into the given mutable matrix.
    *
-   * @param m
-   *          The mutable matrix
+   * @param m The mutable matrix
    */
 
   public void makeMatrixM2x2F(
     final MatrixM2x2F m)
   {
-    for (int row = 0; row < 2; ++row) {
-      for (int col = 0; col < 2; ++col) {
-        m.set(row, col, this.elements[row][col]);
-      }
-    }
+    m.setR0C0F(this.getR0C0F());
+    m.setR1C0F(this.getR1C0F());
+    m.setR0C1F(this.getR0C1F());
+    m.setR1C1F(this.getR1C1F());
   }
 
   @Override public String toString()
   {
-    final StringBuilder builder = new StringBuilder();
+    final StringBuilder builder = new StringBuilder(512);
     for (int row = 0; row < 2; ++row) {
-      final String text =
-        String.format(
-          "[%+.6f %+.6f]\n",
-          Float.valueOf(this.elements[row][0]),
-          Float.valueOf(this.elements[row][1]));
+      final String text = String.format(
+        "[%+.6f %+.6f]\n",
+        Float.valueOf(this.elements[row][0]),
+        Float.valueOf(this.elements[row][1]));
       builder.append(text);
     }
     final String r = builder.toString();

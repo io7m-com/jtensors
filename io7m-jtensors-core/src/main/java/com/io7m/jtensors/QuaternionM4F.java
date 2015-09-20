@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -327,7 +327,7 @@ public final class QuaternionM4F
     final VectorM3F t = context.getV3A();
     final MatrixM3x3F.ContextMM3F mc = context.getContext();
 
-    MatrixM3x3F.lookAtWithContext(mc, origin, target, up, m, t);
+    MatrixM3x3F.lookAt(mc, origin, target, up, m, t);
     QuaternionM4F.makeFromRotationMatrix3x3(m, q);
     return q;
   }
@@ -414,15 +414,15 @@ public final class QuaternionM4F
     final MatrixReadable3x3FType m,
     final Q out)
   {
-    final double m00 = (double) m.getRowColumnF(0, 0);
-    final double m01 = (double) m.getRowColumnF(0, 1);
-    final double m02 = (double) m.getRowColumnF(0, 2);
-    final double m10 = (double) m.getRowColumnF(1, 0);
-    final double m11 = (double) m.getRowColumnF(1, 1);
-    final double m12 = (double) m.getRowColumnF(1, 2);
-    final double m20 = (double) m.getRowColumnF(2, 0);
-    final double m21 = (double) m.getRowColumnF(2, 1);
-    final double m22 = (double) m.getRowColumnF(2, 2);
+    final double m00 = (double) m.getR0C0F();
+    final double m01 = (double) m.getR0C1F();
+    final double m02 = (double) m.getR0C2F();
+    final double m10 = (double) m.getR1C0F();
+    final double m11 = (double) m.getR1C1F();
+    final double m12 = (double) m.getR1C2F();
+    final double m20 = (double) m.getR2C0F();
+    final double m21 = (double) m.getR2C1F();
+    final double m22 = (double) m.getR2C2F();
     final double trace = MatrixM3x3F.trace(m);
 
     final double x;
@@ -482,15 +482,15 @@ public final class QuaternionM4F
     final MatrixReadable4x4FType m,
     final Q out)
   {
-    final double m00 = (double) m.getRowColumnF(0, 0);
-    final double m01 = (double) m.getRowColumnF(0, 1);
-    final double m02 = (double) m.getRowColumnF(0, 2);
-    final double m10 = (double) m.getRowColumnF(1, 0);
-    final double m11 = (double) m.getRowColumnF(1, 1);
-    final double m12 = (double) m.getRowColumnF(1, 2);
-    final double m20 = (double) m.getRowColumnF(2, 0);
-    final double m21 = (double) m.getRowColumnF(2, 1);
-    final double m22 = (double) m.getRowColumnF(2, 2);
+    final double m00 = (double) m.getR0C0F();
+    final double m01 = (double) m.getR0C1F();
+    final double m02 = (double) m.getR0C2F();
+    final double m10 = (double) m.getR1C0F();
+    final double m11 = (double) m.getR1C1F();
+    final double m12 = (double) m.getR1C2F();
+    final double m20 = (double) m.getR2C0F();
+    final double m21 = (double) m.getR2C1F();
+    final double m22 = (double) m.getR2C2F();
 
     /**
      * Explicitly ignore the bottom right element of the matrix, as this
@@ -577,17 +577,17 @@ public final class QuaternionM4F
     final double r2c1 = (2.0 * yz) + (2.0 * wx);
     final double r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
 
-    m.setRowColumnF(0, 0, (float) r0c0);
-    m.setRowColumnF(0, 1, (float) r0c1);
-    m.setRowColumnF(0, 2, (float) r0c2);
+    m.setR0C0F((float) r0c0);
+    m.setR0C1F((float) r0c1);
+    m.setR0C2F((float) r0c2);
 
-    m.setRowColumnF(1, 0, (float) r1c0);
-    m.setRowColumnF(1, 1, (float) r1c1);
-    m.setRowColumnF(1, 2, (float) r1c2);
+    m.setR1C0F((float) r1c0);
+    m.setR1C1F((float) r1c1);
+    m.setR1C2F((float) r1c2);
 
-    m.setRowColumnF(2, 0, (float) r2c0);
-    m.setRowColumnF(2, 1, (float) r2c1);
-    m.setRowColumnF(2, 2, (float) r2c2);
+    m.setR2C0F((float) r2c0);
+    m.setR2C1F((float) r2c1);
+    m.setR2C2F((float) r2c2);
 
     return m;
   }
@@ -639,25 +639,25 @@ public final class QuaternionM4F
     final double r3c2 = 0.0;
     final double r3c3 = 1.0;
 
-    m.setRowColumnF(0, 0, (float) r0c0);
-    m.setRowColumnF(0, 1, (float) r0c1);
-    m.setRowColumnF(0, 2, (float) r0c2);
-    m.setRowColumnF(0, 3, (float) r0c3);
+    m.setR0C0F((float) r0c0);
+    m.setR0C1F((float) r0c1);
+    m.setR0C2F((float) r0c2);
+    m.setR0C3F((float) r0c3);
 
-    m.setRowColumnF(1, 0, (float) r1c0);
-    m.setRowColumnF(1, 1, (float) r1c1);
-    m.setRowColumnF(1, 2, (float) r1c2);
-    m.setRowColumnF(1, 3, (float) r1c3);
+    m.setR1C0F((float) r1c0);
+    m.setR1C1F((float) r1c1);
+    m.setR1C2F((float) r1c2);
+    m.setR1C3F((float) r1c3);
 
-    m.setRowColumnF(2, 0, (float) r2c0);
-    m.setRowColumnF(2, 1, (float) r2c1);
-    m.setRowColumnF(2, 2, (float) r2c2);
-    m.setRowColumnF(2, 3, (float) r2c3);
+    m.setR2C0F((float) r2c0);
+    m.setR2C1F((float) r2c1);
+    m.setR2C2F((float) r2c2);
+    m.setR2C3F((float) r2c3);
 
-    m.setRowColumnF(3, 0, (float) r3c0);
-    m.setRowColumnF(3, 1, (float) r3c1);
-    m.setRowColumnF(3, 2, (float) r3c2);
-    m.setRowColumnF(3, 3, (float) r3c3);
+    m.setR3C0F((float) r3c0);
+    m.setR3C1F((float) r3c1);
+    m.setR3C2F((float) r3c2);
+    m.setR3C3F((float) r3c3);
 
     return m;
   }

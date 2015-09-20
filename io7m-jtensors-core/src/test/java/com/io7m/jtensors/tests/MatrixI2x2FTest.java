@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -33,7 +33,7 @@ import com.io7m.jtensors.VectorM3F;
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, index);
         ++index;
       }
     }
@@ -59,7 +59,7 @@ import com.io7m.jtensors.VectorM3F;
     index = 100;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, index);
         ++index;
       }
     }
@@ -72,11 +72,11 @@ import com.io7m.jtensors.VectorM3F;
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
+    m0.setR0C0F( 0.0f);
+    m0.setR1C0F( 0.1f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
+    m0.setR0C1F( 10.0f);
+    m0.setR1C1F( 10.1f);
 
     final MatrixI2x2F im0 = MatrixI2x2F.newFromReadable(m0);
 
@@ -92,11 +92,11 @@ import com.io7m.jtensors.VectorM3F;
   {
     final MatrixM2x2F m0 = new MatrixM2x2F();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
+    m0.setR0C0F( 0.0f);
+    m0.setR1C0F( 0.1f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
+    m0.setR0C1F( 10.0f);
+    m0.setR1C1F( 10.1f);
 
     final MatrixI2x2F im = MatrixI2x2F.newFromReadable(m0);
 
@@ -127,7 +127,7 @@ import com.io7m.jtensors.VectorM3F;
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, index);
         ++index;
       }
     }
@@ -145,8 +145,8 @@ import com.io7m.jtensors.VectorM3F;
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
-        m1.set(row, col, index);
+        m0.setRowColumnF(row, col, index);
+        m1.setRowColumnF(row, col, index);
         ++index;
       }
     }
