@@ -813,7 +813,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     {
       final T m0 = this.newMatrix();
       final T m1 = this.newMatrix();
-      Assert.assertTrue(m0.equals(m1));
+      Assert.assertEquals(m0, m1);
+      Assert.assertNotSame(m0, m1);
       this.checkDirectBufferInvariants(m0);
     }
   }
