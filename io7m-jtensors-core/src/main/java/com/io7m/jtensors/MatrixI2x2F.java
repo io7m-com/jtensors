@@ -198,11 +198,12 @@ import java.util.Arrays;
   /**
    * Write the current matrix into the given mutable matrix.
    *
-   * @param m The mutable matrix
+   * @param <M> The precise type of mutable matrix
+   * @param m   The mutable matrix
    */
 
-  public void makeMatrixM2x2F(
-    final MatrixM2x2F m)
+  public <M extends MatrixWritable2x2FType> void makeMatrix2x2F(
+    final M m)
   {
     m.setR0C0F(this.getR0C0F());
     m.setR1C0F(this.getR1C0F());

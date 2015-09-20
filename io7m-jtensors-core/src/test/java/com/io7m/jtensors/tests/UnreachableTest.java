@@ -24,45 +24,59 @@ import java.lang.reflect.InvocationTargetException;
 
 public final class UnreachableTest
 {
-  @Test(expected = UnreachableCodeException.class)
-  public void testUnreachableCast()
-    throws Exception
+  private static void execNoArgPrivateConstructor(final String name)
+    throws
+    ClassNotFoundException,
+    InstantiationException,
+    IllegalAccessException
   {
     try {
-      final Class<?> c = Class.forName("com.io7m.jtensors.Cast");
+      final Class<?> c = Class.forName(name);
       final Constructor<?>[] cons = c.getDeclaredConstructors();
       cons[0].setAccessible(true);
       cons[0].newInstance();
     } catch (final InvocationTargetException e) {
       throw (UnreachableCodeException) e.getCause();
     }
+  }
+
+  @Test(expected = UnreachableCodeException.class)
+  public void testUnreachableCast()
+    throws Exception
+  {
+    UnreachableTest.execNoArgPrivateConstructor(
+      "com.io7m.jtensors.Cast");
   }
 
   @Test(expected = UnreachableCodeException.class)
   public void testUnreachableParameterizedCast()
     throws Exception
   {
-    try {
-      final Class<?> c = Class.forName("com.io7m.jtensors.parameterized.Cast");
-      final Constructor<?>[] cons = c.getDeclaredConstructors();
-      cons[0].setAccessible(true);
-      cons[0].newInstance();
-    } catch (final InvocationTargetException e) {
-      throw (UnreachableCodeException) e.getCause();
-    }
+    UnreachableTest.execNoArgPrivateConstructor(
+      "com.io7m.jtensors.parameterized.Cast");
   }
 
   @Test(expected = UnreachableCodeException.class)
   public void testUnreachableHashUtility()
     throws Exception
   {
-    try {
-      final Class<?> c = Class.forName("com.io7m.jtensors.HashUtility");
-      final Constructor<?>[] cons = c.getDeclaredConstructors();
-      cons[0].setAccessible(true);
-      cons[0].newInstance();
-    } catch (final InvocationTargetException e) {
-      throw (UnreachableCodeException) e.getCause();
-    }
+    UnreachableTest.execNoArgPrivateConstructor(
+      "com.io7m.jtensors.HashUtility");
+  }
+
+  @Test(expected = UnreachableCodeException.class)
+  public void testUnreachableMatrixM2x2D()
+    throws Exception
+  {
+    UnreachableTest.execNoArgPrivateConstructor(
+      "com.io7m.jtensors.MatrixM2x2D");
+  }
+
+  @Test(expected = UnreachableCodeException.class)
+  public void testUnreachableMatrixM2x2F()
+    throws Exception
+  {
+    UnreachableTest.execNoArgPrivateConstructor(
+      "com.io7m.jtensors.MatrixM2x2F");
   }
 }

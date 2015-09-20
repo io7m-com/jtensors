@@ -16,8 +16,9 @@
 
 package com.io7m.jtensors.tests;
 
+import com.io7m.jtensors.Matrix2x2DType;
+import com.io7m.jtensors.MatrixHeapArrayM2x2D;
 import com.io7m.jtensors.MatrixI2x2D;
-import com.io7m.jtensors.MatrixM2x2D;
 import com.io7m.jtensors.MatrixReadable2x2DType;
 import com.io7m.jtensors.VectorI4D;
 import com.io7m.jtensors.VectorM2D;
@@ -109,7 +110,7 @@ public abstract class MatrixReadable2x2DContract<T extends
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
 
-    final MatrixM2x2D m2 = new MatrixM2x2D();
+    final Matrix2x2DType m2 = MatrixHeapArrayM2x2D.newMatrix();
     m2.setR0C0D(2.0);
 
     Assert.assertEquals(m0.toString(), m1.toString());
