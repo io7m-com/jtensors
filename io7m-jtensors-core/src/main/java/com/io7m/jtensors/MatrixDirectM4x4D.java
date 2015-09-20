@@ -24,7 +24,8 @@ import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 
 /**
- * The default implementation of the {@link MatrixDirect4x4DType} interface.
+ * <p>The default implementation of the {@link MatrixDirect4x4DType}
+ * interface.</p>
  *
  * @since 7.0.0
  */

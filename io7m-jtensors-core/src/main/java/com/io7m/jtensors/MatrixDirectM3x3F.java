@@ -24,7 +24,8 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 /**
- * The default implementation of the {@link MatrixDirect3x3FType} interface.
+ * <p>The default implementation of the {@link MatrixDirect3x3FType}
+ * interface.</p>
  *
  * @since 7.0.0
  */
