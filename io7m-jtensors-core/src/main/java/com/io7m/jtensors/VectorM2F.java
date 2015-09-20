@@ -28,8 +28,7 @@ import com.io7m.jnull.Nullable;
  * without explicit synchronization. </p>
  */
 
-public final class VectorM2F
-  implements VectorReadable2FType, VectorWritable2FType
+public final class VectorM2F implements Vector2FType
 {
   private float x;
   private float y;

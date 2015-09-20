@@ -16,25 +16,26 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import com.io7m.jtensors.parameterized.PVectorM2F;
+import com.io7m.jtensors.parameterized.PVectorM2D;
+import com.io7m.jtensors.tests.VectorM2DContract;
 
-public final class PVectorM2FTest<T>
-  extends PVectorM2FContract<T, PVectorM2F<T>>
+public final class PVectorM2DUntypedTest<T>
+  extends VectorM2DContract<PVectorM2D<T>>
 {
-  @Override protected PVectorM2F<T> newVectorM2F(final PVectorM2F<T> v0)
+  @Override protected PVectorM2D<T> newVectorM2D(final PVectorM2D<T> v)
   {
-    return new PVectorM2F<T>(v0);
+    return new PVectorM2D<T>(v);
   }
 
-  @Override protected PVectorM2F<T> newVectorM2F(
-    final float x1,
-    final float y1)
+  @Override protected PVectorM2D<T> newVectorM2D()
   {
-    return new PVectorM2F<T>(x1, y1);
+    return new PVectorM2D<T>();
   }
 
-  @Override protected PVectorM2F<T> newVectorM2F()
+  @Override protected PVectorM2D<T> newVectorM2D(
+    final double x,
+    final double y)
   {
-    return new PVectorM2F<T>();
+    return new PVectorM2D<T>(x, y);
   }
 }

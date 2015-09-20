@@ -18,17 +18,22 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jtensors.VectorM2I;
 
-public final class VectorM2ITest extends VectorM2IContract
+public final class VectorM2ITest extends VectorM2IContract<VectorM2I>
 {
-  protected VectorM2I newVectorM2I(
+  @Override protected VectorM2I newVectorM2I(
     final int x,
     final int y)
   {
     return new VectorM2I(x, y);
   }
 
-  protected VectorM2I newVectorM2I()
+  @Override protected VectorM2I newVectorM2I()
   {
     return new VectorM2I();
+  }
+
+  @Override protected VectorM2I newVectorM2I(final VectorM2I v)
+  {
+    return new VectorM2I(v);
   }
 }

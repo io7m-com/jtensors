@@ -17,9 +17,10 @@
 package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.parameterized.PVectorM2F;
+import com.io7m.jtensors.tests.VectorM2FContract;
 
-public final class PVectorM2FTest<T>
-  extends PVectorM2FContract<T, PVectorM2F<T>>
+public final class PVectorM2FUntypedTest<T>
+  extends VectorM2FContract<PVectorM2F<T>>
 {
   @Override protected PVectorM2F<T> newVectorM2F(final PVectorM2F<T> v0)
   {

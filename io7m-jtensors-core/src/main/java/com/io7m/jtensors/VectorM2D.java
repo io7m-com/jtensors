@@ -29,8 +29,7 @@ import com.io7m.jnull.Nullable;
  * without explicit synchronization. </p>
  */
 
-public final class VectorM2D
-  implements VectorReadable2DType, VectorWritable2DType
+public final class VectorM2D implements Vector2DType
 {
   private double x;
   private double y;
@@ -549,8 +548,10 @@ public final class VectorM2D
    * @param c  Preallocated storage
    * @param v0 The left input vector
    * @param v1 The right input vector
-   *@since 7.0.0
+   *
    * @return The distance between the two vectors.
+   *
+   * @since 7.0.0
    */
 
   public static double distance(
@@ -595,8 +596,10 @@ public final class VectorM2D
    * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}.
    * @param r     The result vector.
    * @param <V>   The precise type of writable vector
-   *@since 7.0.0
+   *
    * @return {@code r}
+   *
+   * @since 7.0.0
    */
 
   public static <V extends VectorWritable2DType> V interpolateLinear(

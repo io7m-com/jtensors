@@ -33,8 +33,7 @@ import com.io7m.jtensors.VectorReadable2LType;
  * @since 7.0.0
  */
 
-public final class PVectorM2L<T>
-  implements PVectorReadable2LType<T>, PVectorWritable2LType<T>
+public final class PVectorM2L<T> implements PVector2LType<T>
 {
   private long x;
   private long y;

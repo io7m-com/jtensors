@@ -35,8 +35,7 @@ import com.io7m.jtensors.VectorReadable2DType;
  * @since 7.0.0
  */
 
-public final class PVectorM2D<T>
-  implements PVectorReadable2DType<T>, PVectorWritable2DType<T>
+public final class PVectorM2D<T> implements PVector2DType<T>
 {
   private double x;
   private double y;

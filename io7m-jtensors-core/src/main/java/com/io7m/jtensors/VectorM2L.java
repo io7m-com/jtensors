@@ -29,8 +29,7 @@ import com.io7m.jnull.Nullable;
  * @since 5.3.0
  */
 
-public final class VectorM2L
-  implements VectorReadable2LType, VectorWritable2LType
+public final class VectorM2L implements Vector2LType
 {
   private long x;
   private long y;

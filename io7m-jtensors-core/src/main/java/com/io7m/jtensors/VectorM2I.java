@@ -27,8 +27,7 @@ import com.io7m.jnull.Nullable;
  * without explicit synchronization. </p>
  */
 
-public final class VectorM2I
-  implements VectorReadable2IType, VectorWritable2IType
+public final class VectorM2I implements Vector2IType
 {
   private int x;
   private int y;
@@ -603,11 +602,12 @@ public final class VectorM2I
    * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}.
    * @param r     The result vector.
    * @param <V>   The precise type of vector
-   *@since 7.0.0
+   *
    * @return {@code r}
    *
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             integer overflow.
+   * @since 7.0.0
    */
 
   public static <V extends VectorWritable2IType> V interpolateLinear(

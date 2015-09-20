@@ -33,8 +33,7 @@ import com.io7m.jtensors.VectorReadable2IType;
  * @since 7.0.0
  */
 
-public final class PVectorM2I<T>
-  implements PVectorReadable2IType<T>, PVectorWritable2IType<T>
+public final class PVectorM2I<T> implements PVector2IType<T>
 {
   private int x;
   private int y;

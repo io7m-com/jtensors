@@ -34,8 +34,7 @@ import com.io7m.jtensors.VectorReadable2FType;
  * @since 7.0.0
  */
 
-public final class PVectorM2F<T>
-  implements PVectorReadable2FType<T>, PVectorWritable2FType<T>
+public final class PVectorM2F<T> implements PVector2FType<T>
 {
   private float x;
   private float y;

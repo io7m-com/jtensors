@@ -14,27 +14,21 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests.parameterized;
+package com.io7m.jtensors.parameterized;
 
-import com.io7m.jtensors.parameterized.PVectorM2F;
+import com.io7m.jtensors.Vector2LType;
 
-public final class PVectorM2FTest<T>
-  extends PVectorM2FContract<T, PVectorM2F<T>>
+/**
+ * <p>The type of two-element vectors that are both readable and writable, and
+ * have {@code long} elements</p>
+ *
+ * @param <T> A phantom type parameter
+ *
+ * @since 7.0.0
+ */
+
+public interface PVector2LType<T>
+  extends PVectorReadable2LType<T>, PVectorWritable2LType<T>, Vector2LType
 {
-  @Override protected PVectorM2F<T> newVectorM2F(final PVectorM2F<T> v0)
-  {
-    return new PVectorM2F<T>(v0);
-  }
-
-  @Override protected PVectorM2F<T> newVectorM2F(
-    final float x1,
-    final float y1)
-  {
-    return new PVectorM2F<T>(x1, y1);
-  }
-
-  @Override protected PVectorM2F<T> newVectorM2F()
-  {
-    return new PVectorM2F<T>();
-  }
+  // No extra functions
 }
