@@ -839,10 +839,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     final T m1 = this.newMatrix();
 
     {
-      final OptionType<T> r = MatrixM4x4D.invert(c, m0, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invert(c, m0, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -874,10 +873,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     }
 
     {
-      final OptionType<T> r = MatrixM4x4D.invertInPlace(c, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invertInPlace(c, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -916,10 +914,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     final T m1 = this.newMatrix();
 
     {
-      final OptionType<T> r = MatrixM4x4D.invert(context, m0, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invert(context, m0, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -951,10 +948,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     }
 
     {
-      final OptionType<T> r = MatrixM4x4D.invertInPlace(context, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invertInPlace(context, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -1013,10 +1009,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     m0.setRowColumnD(3, 3, 2.0);
 
     {
-      final OptionType<T> r = MatrixM4x4D.invert(c, m0, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invert(c, m0, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -1048,10 +1043,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     }
 
     {
-      final OptionType<T> r = MatrixM4x4D.invertInPlace(c, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invertInPlace(c, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -1114,10 +1108,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     m0.setRowColumnD(3, 3, 4.0);
 
     {
-      final OptionType<T> r = MatrixM4x4D.invert(c, m0, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invert(c, m0, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -1188,10 +1181,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     }
 
     {
-      final OptionType<T> r = MatrixM4x4D.invertInPlace(c, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invertInPlace(c, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -1293,10 +1285,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     m0.setRowColumnD(3, 3, 4.0);
 
     {
-      final OptionType<T> r = MatrixM4x4D.invert(context, m0, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invert(context, m0, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -1360,10 +1351,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     }
 
     {
-      final OptionType<T> r = MatrixM4x4D.invertInPlace(context, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invertInPlace(context, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -1454,10 +1444,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     m0.setRowColumnD(3, 3, 2.0);
 
     {
-      final OptionType<T> r = MatrixM4x4D.invert(context, m0, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invert(context, m0, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -1489,10 +1478,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     }
 
     {
-      final OptionType<T> r = MatrixM4x4D.invertInPlace(context, m1);
-      Assert.assertTrue(r.isSome());
-      final Some<T> s = (Some<T>) r;
-      final T rm = s.get();
+      final boolean r = MatrixM4x4D.invertInPlace(context, m1);
+      Assert.assertTrue(r);
+      final T rm = m1;
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -1533,13 +1521,13 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     MatrixM4x4D.setZero(m0);
 
     {
-      final OptionType<T> r = MatrixM4x4D.invert(c, m0, m1);
-      Assert.assertTrue(r.isNone());
+      final boolean r = MatrixM4x4D.invert(c, m0, m1);
+      Assert.assertFalse(r);
     }
 
     {
-      final OptionType<T> r = MatrixM4x4D.invertInPlace(c, m0);
-      Assert.assertTrue(r.isNone());
+      final boolean r = MatrixM4x4D.invertInPlace(c, m0);
+      Assert.assertFalse(r);
     }
   }
 
@@ -1552,15 +1540,15 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     MatrixM4x4D.setZero(m0);
 
     {
-      final OptionType<T> r = MatrixM4x4D.invert(context, m0, m1);
-      Assert.assertTrue(r.isNone());
+      final boolean r = MatrixM4x4D.invert(context, m0, m1);
+      Assert.assertFalse(r);
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
     }
 
     {
-      final OptionType<T> r = MatrixM4x4D.invertInPlace(context, m0);
-      Assert.assertTrue(r.isNone());
+      final boolean r = MatrixM4x4D.invertInPlace(context, m0);
+      Assert.assertFalse(r);
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
     }

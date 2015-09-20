@@ -16,8 +16,6 @@
 
 package com.io7m.jtensors;
 
-import com.io7m.jfunctional.Option;
-import com.io7m.jfunctional.OptionType;
 import com.io7m.jnull.Nullable;
 
 import java.nio.ByteBuffer;
@@ -503,7 +501,7 @@ public final class MatrixM4x4D implements MatrixDirect4x4DType
     return (column * MatrixM4x4D.VIEW_COLS) + row;
   }
 
-  private static <M extends MatrixWritable4x4DType> OptionType<M> invertActual(
+  private static <M extends MatrixWritable4x4DType> boolean invertActual(
     final MatrixReadable4x4DType m,
     final MatrixM3x3D m3,
     final MatrixM4x4D temp,
@@ -512,7 +510,7 @@ public final class MatrixM4x4D implements MatrixDirect4x4DType
     final double d = MatrixM4x4D.determinant(m);
 
     if (d == 0.0) {
-      return Option.none();
+      return false;
     }
 
     final double d_inv = 1.0 / d;
@@ -847,7 +845,7 @@ public final class MatrixM4x4D implements MatrixDirect4x4DType
     temp.setR3C3D(r3c3 * d_inv);
 
     MatrixM4x4D.transpose(temp, out);
-    return Option.some(out);
+    return true;
   }
 
   /**
@@ -862,13 +860,13 @@ public final class MatrixM4x4D implements MatrixDirect4x4DType
    * @param m       The input matrix
    * @param <M>     The precise type of matrix
    *
-   * @return {@code m}
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM4x4D#determinant(MatrixReadable4x4DType)
    */
 
   public static <M extends MatrixWritable4x4DType & MatrixReadable4x4DType>
-  OptionType<M> invertInPlace(
+  boolean invertInPlace(
     final ContextMM4D context,
     final M m)
   {
@@ -888,12 +886,12 @@ public final class MatrixM4x4D implements MatrixDirect4x4DType
    * @param out     The output matrix
    * @param <M>     The precise type of matrix
    *
-   * @return {@code out}
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM4x4D#determinant(MatrixReadable4x4DType)
    */
 
-  public static <M extends MatrixWritable4x4DType> OptionType<M> invert(
+  public static <M extends MatrixWritable4x4DType> boolean invert(
     final ContextMM4D context,
     final MatrixReadable4x4DType m,
     final M out)
