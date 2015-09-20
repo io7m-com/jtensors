@@ -37,8 +37,7 @@ import com.io7m.jtensors.VectorReadable3DType;
  * @since 7.0.0
  */
 
-public final class PVectorM3D<T>
-  implements PVectorReadable3DType<T>, PVectorWritable3DType<T>
+public final class PVectorM3D<T> implements PVector3DType<T>
 {
   private double x;
   private double y;

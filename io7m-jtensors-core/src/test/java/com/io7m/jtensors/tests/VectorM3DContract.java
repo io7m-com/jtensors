@@ -17,24 +17,39 @@
 package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
+import com.io7m.jtensors.Vector3DType;
 import com.io7m.jtensors.VectorM3D;
 import org.junit.Assert;
 import org.junit.Test;
 
-public abstract class VectorM3DContract extends VectorM3Contract
+public abstract class VectorM3DContract<T extends Vector3DType>
 {
-  @Override @Test public void testAbsolute()
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
+
+  protected abstract T newVectorM3D(final T v0);
+
+  protected abstract T newVectorM3D(
+    final double x,
+    final double y,
+    final double z);
+
+  protected abstract T newVectorM3D();
+
+  @Test public final void testAbsolute()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = Math.random() * Float.MIN_VALUE;
-      final double y = Math.random() * Float.MIN_VALUE;
-      final double z = Math.random() * Float.MIN_VALUE;
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double y = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double z = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final T v = this.newVectorM3D(x, y, z);
 
-      final VectorM3D vr = this.newVectorM3D();
+      final T vr = this.newVectorM3D();
       VectorM3D.absolute(v, vr);
 
       Assert.assertTrue(
@@ -49,23 +64,16 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  protected abstract VectorM3D newVectorM3D(
-    final double x,
-    final double y,
-    final double z);
-
-  protected abstract VectorM3D newVectorM3D();
-
-  @Override @Test public void testAbsoluteMutation()
+  @Test public final void testAbsoluteMutation()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = Math.random() * Float.MIN_VALUE;
-      final double y = Math.random() * Float.MIN_VALUE;
-      final double z = Math.random() * Float.MIN_VALUE;
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double y = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double z = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final T v = this.newVectorM3D(x, y, z);
 
       final double orig_x = v.getXD();
       final double orig_y = v.getYD();
@@ -85,25 +93,25 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testAdd()
+  @Test public final void testAdd()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double max = 1000.0f;
+      final double max = 1000.0;
 
-      final double x0 = Math.random() * max;
-      final double y0 = Math.random() * max;
-      final double z0 = Math.random() * max;
-      final VectorM3D v0 = this.newVectorM3D(x0, y0, z0);
+      final double x0 = VectorM3DContract.getRandom() * max;
+      final double y0 = VectorM3DContract.getRandom() * max;
+      final double z0 = VectorM3DContract.getRandom() * max;
+      final T v0 = this.newVectorM3D(x0, y0, z0);
 
-      final double x1 = Math.random() * max;
-      final double y1 = Math.random() * max;
-      final double z1 = Math.random() * max;
-      final VectorM3D v1 = this.newVectorM3D(x1, y1, z1);
+      final double x1 = VectorM3DContract.getRandom() * max;
+      final double y1 = VectorM3DContract.getRandom() * max;
+      final double z1 = VectorM3DContract.getRandom() * max;
+      final T v1 = this.newVectorM3D(x1, y1, z1);
 
-      final VectorM3D vr0 = this.newVectorM3D();
+      final T vr0 = this.newVectorM3D();
       VectorM3D.add(v0, v1, vr0);
 
       Assert.assertTrue(
@@ -135,70 +143,72 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testAddMutation()
+  @Test public final void testAddMutation()
   {
-    final VectorM3D out = this.newVectorM3D();
-    final VectorM3D v0 = this.newVectorM3D(1.0f, 1.0f, 1.0f);
-    final VectorM3D v1 = this.newVectorM3D(1.0f, 1.0f, 1.0f);
+    final T out = this.newVectorM3D();
+    final T v0 = this.newVectorM3D(1.0, 1.0, 1.0);
+    final T v1 = this.newVectorM3D(1.0, 1.0, 1.0);
 
-    Assert.assertTrue(out.getXD() == 0.0);
-    Assert.assertTrue(out.getYD() == 0.0);
-    Assert.assertTrue(out.getZD() == 0.0);
-    Assert.assertTrue(v0.getXD() == 1.0);
-    Assert.assertTrue(v0.getYD() == 1.0);
-    Assert.assertTrue(v0.getZD() == 1.0);
-    Assert.assertTrue(v1.getXD() == 1.0);
-    Assert.assertTrue(v1.getYD() == 1.0);
-    Assert.assertTrue(v1.getZD() == 1.0);
+    Assert.assertEquals(0.0, out.getXD(), 0.0);
+    Assert.assertEquals(0.0, out.getYD(), 0.0);
+    Assert.assertEquals(0.0, out.getZD(), 0.0);
+    Assert.assertEquals(1.0, v0.getXD(), 0.0);
+    Assert.assertEquals(1.0, v0.getYD(), 0.0);
+    Assert.assertEquals(1.0, v0.getZD(), 0.0);
+    Assert.assertEquals(1.0, v1.getXD(), 0.0);
+    Assert.assertEquals(1.0, v1.getYD(), 0.0);
+    Assert.assertEquals(1.0, v1.getZD(), 0.0);
 
-    final VectorM3D ov0 = VectorM3D.add(v0, v1, out);
+    final T ov0 = VectorM3D.add(v0, v1, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXD() == 2.0);
-    Assert.assertTrue(out.getYD() == 2.0);
-    Assert.assertTrue(out.getZD() == 2.0);
-    Assert.assertTrue(v0.getXD() == 1.0);
-    Assert.assertTrue(v0.getYD() == 1.0);
-    Assert.assertTrue(v0.getZD() == 1.0);
-    Assert.assertTrue(v1.getXD() == 1.0);
-    Assert.assertTrue(v1.getYD() == 1.0);
-    Assert.assertTrue(v1.getZD() == 1.0);
+    Assert.assertEquals(ov0, out);
+    Assert.assertSame(ov0, out);
+    Assert.assertEquals(2.0, out.getXD(), 0.0);
+    Assert.assertEquals(2.0, out.getYD(), 0.0);
+    Assert.assertEquals(2.0, out.getZD(), 0.0);
+    Assert.assertEquals(1.0, v0.getXD(), 0.0);
+    Assert.assertEquals(1.0, v0.getYD(), 0.0);
+    Assert.assertEquals(1.0, v0.getZD(), 0.0);
+    Assert.assertEquals(1.0, v1.getXD(), 0.0);
+    Assert.assertEquals(1.0, v1.getYD(), 0.0);
+    Assert.assertEquals(1.0, v1.getZD(), 0.0);
 
-    final VectorM3D ov1 = VectorM3D.addInPlace(v0, v1);
+    final T ov1 = VectorM3D.addInPlace(v0, v1);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXD() == 2.0);
-    Assert.assertTrue(ov1.getYD() == 2.0);
-    Assert.assertTrue(ov1.getZD() == 2.0);
-    Assert.assertTrue(v0.getXD() == 2.0);
-    Assert.assertTrue(v0.getYD() == 2.0);
-    Assert.assertTrue(v0.getZD() == 2.0);
-    Assert.assertTrue(v1.getXD() == 1.0);
-    Assert.assertTrue(v1.getYD() == 1.0);
-    Assert.assertTrue(v1.getZD() == 1.0);
+    Assert.assertEquals(v0, ov1);
+    Assert.assertSame(v0, ov1);
+    Assert.assertEquals(2.0, ov1.getXD(), 0.0);
+    Assert.assertEquals(2.0, ov1.getYD(), 0.0);
+    Assert.assertEquals(2.0, ov1.getZD(), 0.0);
+    Assert.assertEquals(2.0, v0.getXD(), 0.0);
+    Assert.assertEquals(2.0, v0.getYD(), 0.0);
+    Assert.assertEquals(2.0, v0.getZD(), 0.0);
+    Assert.assertEquals(1.0, v1.getXD(), 0.0);
+    Assert.assertEquals(1.0, v1.getYD(), 0.0);
+    Assert.assertEquals(1.0, v1.getZD(), 0.0);
   }
 
-  @Override @Test public void testAddScaled()
+  @Test public final void testAddScaled()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double max = 1000.0f;
+      final double max = 1000.0;
 
-      final double x0 = Math.random() * max;
-      final double y0 = Math.random() * max;
-      final double z0 = Math.random() * max;
-      final VectorM3D v0 = this.newVectorM3D(x0, y0, z0);
+      final double x0 = VectorM3DContract.getRandom() * max;
+      final double y0 = VectorM3DContract.getRandom() * max;
+      final double z0 = VectorM3DContract.getRandom() * max;
+      final T v0 = this.newVectorM3D(x0, y0, z0);
 
-      final double x1 = Math.random() * max;
-      final double y1 = Math.random() * max;
-      final double z1 = Math.random() * max;
-      final VectorM3D v1 = this.newVectorM3D(x1, y1, z1);
+      final double x1 = VectorM3DContract.getRandom() * max;
+      final double y1 = VectorM3DContract.getRandom() * max;
+      final double z1 = VectorM3DContract.getRandom() * max;
+      final T v1 = this.newVectorM3D(x1, y1, z1);
 
-      final double r = Math.random() * max;
+      final double r = VectorM3DContract.getRandom() * max;
 
-      final VectorM3D vr0 = this.newVectorM3D();
+      final T vr0 = this.newVectorM3D();
       VectorM3D.addScaled(v0, v1, r, vr0);
 
       Assert.assertTrue(
@@ -230,96 +240,96 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+  @Test public final void testAlmostEqualNot()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final double x = Math.random();
-    final double y = x + 1.0f;
-    final double z = y + 1.0f;
-    final double w = z + 1.0f;
-    final double q = w + 1.0f;
+    final double x = VectorM3DContract.getRandom();
+    final double y = x + 1.0;
+    final double z = y + 1.0;
+    final double w = z + 1.0;
+    final double q = w + 1.0;
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, y, z);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, y, z);
       Assert.assertFalse(VectorM3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(x, q, z);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(x, q, z);
       Assert.assertFalse(VectorM3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(x, y, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(x, y, q);
       Assert.assertFalse(VectorM3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, q, z);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, q, z);
       Assert.assertFalse(VectorM3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, y, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, y, q);
       Assert.assertFalse(VectorM3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, y, z);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, y, z);
       Assert.assertFalse(VectorM3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, q, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, q, q);
       Assert.assertFalse(VectorM3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, q, z);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, q, z);
       Assert.assertFalse(VectorM3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, q, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, q, q);
       Assert.assertFalse(VectorM3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(x, q, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(x, q, q);
       Assert.assertFalse(VectorM3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(x, y, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(x, y, q);
       Assert.assertFalse(VectorM3D.almostEqual(ec, m0, m1));
     }
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+  @Test public final void testAlmostEqualTransitive()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = Math.random() * Double.MAX_VALUE;
-      final double y0 = Math.random() * Double.MAX_VALUE;
-      final double z0 = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v0 = this.newVectorM3D(x0, y0, z0);
-      final VectorM3D v1 = this.newVectorM3D(x0, y0, z0);
-      final VectorM3D v2 = this.newVectorM3D(x0, y0, z0);
+      final double x0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double y0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v0 = this.newVectorM3D(x0, y0, z0);
+      final T v1 = this.newVectorM3D(x0, y0, z0);
+      final T v2 = this.newVectorM3D(x0, y0, z0);
 
       Assert.assertTrue(VectorM3D.almostEqual(ec, v0, v1));
       Assert.assertTrue(VectorM3D.almostEqual(ec, v1, v2));
@@ -327,39 +337,44 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testCheckInterface()
+  @Test public final void testCheckInterface()
   {
-    final VectorM3D v = this.newVectorM3D(3.0f, 5.0f, 7.0f);
+    final T v = this.newVectorM3D(3.0, 5.0, 7.0);
 
-    Assert.assertTrue(v.getXD() == v.getXD());
-    Assert.assertTrue(v.getYD() == v.getYD());
-    Assert.assertTrue(v.getZD() == v.getZD());
+    Assert.assertEquals(v.getXD(), v.getXD(), 0.0);
+    Assert.assertEquals(v.getYD(), v.getYD(), 0.0);
+    Assert.assertEquals(v.getZD(), v.getZD(), 0.0);
   }
 
-  @Override @Test public void testClampByVectorMaximumOrdering()
+  @Test public final void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double max_x = Math.random() * Float.MIN_VALUE;
-      final double max_y = Math.random() * Float.MIN_VALUE;
-      final double max_z = Math.random() * Float.MIN_VALUE;
-      final VectorM3D maximum = this.newVectorM3D(max_x, max_y, max_z);
+      final double max_x =
+        VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double max_y =
+        VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double max_z =
+        VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final T maximum = this.newVectorM3D(max_x, max_y, max_z);
 
-      final double x = Math.random() * Float.MIN_VALUE;
-      final double y = Math.random() * Float.MIN_VALUE;
-      final double z = Math.random() * Float.MIN_VALUE;
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double y = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double z = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final T v = this.newVectorM3D(x, y, z);
 
-      final VectorM3D vr = this.newVectorM3D();
-      final VectorM3D vo = VectorM3D.clampMaximumByVector(v, maximum, vr);
+      final T vr = this.newVectorM3D();
+      final T vo = VectorM3D.clampMaximumByVector(v, maximum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo);
+      Assert.assertSame(vr, vo);
       Assert.assertTrue(vr.getXD() <= maximum.getXD());
       Assert.assertTrue(vr.getYD() <= maximum.getYD());
       Assert.assertTrue(vr.getZD() <= maximum.getZD());
 
       {
-        final VectorM3D vr0 = VectorM3D.clampMaximumByVectorInPlace(v, maximum);
-        Assert.assertTrue(vr0 == v);
+        final T vr0 = VectorM3D.clampMaximumByVectorInPlace(v, maximum);
+        Assert.assertEquals(v, vr0);
+        Assert.assertSame(v, vr0);
         Assert.assertTrue(v.getXD() <= maximum.getXD());
         Assert.assertTrue(v.getYD() <= maximum.getYD());
         Assert.assertTrue(v.getZD() <= maximum.getZD());
@@ -367,30 +382,32 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testClampByVectorMinimumOrdering()
+  @Test public final void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double min_x = Math.random() * Double.MAX_VALUE;
-      final double min_y = Math.random() * Double.MAX_VALUE;
-      final double min_z = Math.random() * Double.MAX_VALUE;
-      final VectorM3D minimum = this.newVectorM3D(min_x, min_y, min_z);
+      final double min_x = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double min_y = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double min_z = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T minimum = this.newVectorM3D(min_x, min_y, min_z);
 
-      final double x = Math.random() * Float.MIN_VALUE;
-      final double y = Math.random() * Float.MIN_VALUE;
-      final double z = Math.random() * Float.MIN_VALUE;
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double y = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double z = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final T v = this.newVectorM3D(x, y, z);
 
-      final VectorM3D vr = this.newVectorM3D();
-      final VectorM3D vo = VectorM3D.clampMinimumByVector(v, minimum, vr);
+      final T vr = this.newVectorM3D();
+      final T vo = VectorM3D.clampMinimumByVector(v, minimum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo);
+      Assert.assertSame(vr, vo);
       Assert.assertTrue(vr.getXD() >= minimum.getXD());
       Assert.assertTrue(vr.getYD() >= minimum.getYD());
       Assert.assertTrue(vr.getZD() >= minimum.getZD());
 
       {
-        final VectorM3D vr0 = VectorM3D.clampMinimumByVectorInPlace(v, minimum);
-        Assert.assertTrue(vr0 == v);
+        final T vr0 = VectorM3D.clampMinimumByVectorInPlace(v, minimum);
+        Assert.assertEquals(v, vr0);
+        Assert.assertSame(v, vr0);
         Assert.assertTrue(v.getXD() >= minimum.getXD());
         Assert.assertTrue(v.getYD() >= minimum.getYD());
         Assert.assertTrue(v.getZD() >= minimum.getZD());
@@ -398,28 +415,32 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testClampByVectorOrdering()
+  @Test public final void testClampByVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double min_x = Math.random() * Float.MIN_VALUE;
-      final double min_y = Math.random() * Float.MIN_VALUE;
-      final double min_z = Math.random() * Float.MIN_VALUE;
-      final VectorM3D minimum = this.newVectorM3D(min_x, min_y, min_z);
+      final double min_x =
+        VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double min_y =
+        VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double min_z =
+        VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final T minimum = this.newVectorM3D(min_x, min_y, min_z);
 
-      final double max_x = Math.random() * Double.MAX_VALUE;
-      final double max_y = Math.random() * Double.MAX_VALUE;
-      final double max_z = Math.random() * Double.MAX_VALUE;
-      final VectorM3D maximum = this.newVectorM3D(max_x, max_y, max_z);
+      final double max_x = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double max_y = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double max_z = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T maximum = this.newVectorM3D(max_x, max_y, max_z);
 
-      final double x = Math.random() * Float.MIN_VALUE;
-      final double y = Math.random() * Double.MAX_VALUE;
-      final double z = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double y = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v = this.newVectorM3D(x, y, z);
 
-      final VectorM3D vr = this.newVectorM3D();
-      final VectorM3D vo = VectorM3D.clampByVector(v, minimum, maximum, vr);
+      final T vr = this.newVectorM3D();
+      final T vo = VectorM3D.clampByVector(v, minimum, maximum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo);
+      Assert.assertSame(vr, vo);
       Assert.assertTrue(vr.getXD() <= maximum.getXD());
       Assert.assertTrue(vr.getYD() <= maximum.getYD());
       Assert.assertTrue(vr.getZD() <= maximum.getZD());
@@ -429,9 +450,9 @@ public abstract class VectorM3DContract extends VectorM3Contract
       Assert.assertTrue(vr.getZD() >= minimum.getZD());
 
       {
-        final VectorM3D vr0 =
-          VectorM3D.clampByVectorInPlace(v, minimum, maximum);
-        Assert.assertTrue(vr0 == v);
+        final T vr0 = VectorM3D.clampByVectorInPlace(v, minimum, maximum);
+        Assert.assertEquals(v, vr0);
+        Assert.assertSame(v, vr0);
         Assert.assertTrue(v.getXD() <= maximum.getXD());
         Assert.assertTrue(v.getYD() <= maximum.getYD());
         Assert.assertTrue(v.getZD() <= maximum.getZD());
@@ -443,17 +464,18 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+  @Test public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double maximum = Math.random() * Float.MIN_VALUE;
+      final double maximum =
+        VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
 
-      final double x = Math.random() * Double.MAX_VALUE;
-      final double y = Math.random() * Double.MAX_VALUE;
-      final double z = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double y = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v = this.newVectorM3D(x, y, z);
 
-      final VectorM3D vr = this.newVectorM3D();
+      final T vr = this.newVectorM3D();
       VectorM3D.clampMaximum(v, maximum, vr);
 
       Assert.assertTrue(vr.getXD() <= maximum);
@@ -469,17 +491,17 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+  @Test public final void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double minimum = Math.random() * Double.MAX_VALUE;
+      final double minimum = VectorM3DContract.getRandom() * Double.MAX_VALUE;
 
-      final double x = Math.random() * Float.MIN_VALUE;
-      final double y = Math.random() * Float.MIN_VALUE;
-      final double z = Math.random() * Float.MIN_VALUE;
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double y = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double z = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final T v = this.newVectorM3D(x, y, z);
 
-      final VectorM3D vr = this.newVectorM3D();
+      final T vr = this.newVectorM3D();
       VectorM3D.clampMinimum(v, minimum, vr);
 
       Assert.assertTrue(vr.getXD() >= minimum);
@@ -495,18 +517,19 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testClampOrdering()
+  @Test public final void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double minimum = Math.random() * Float.MIN_VALUE;
-      final double maximum = Math.random() * Double.MAX_VALUE;
+      final double minimum =
+        VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double maximum = VectorM3DContract.getRandom() * Double.MAX_VALUE;
 
-      final double x = Math.random() * Float.MIN_VALUE;
-      final double y = Math.random() * Double.MAX_VALUE;
-      final double z = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom() * (double) Float.MIN_VALUE;
+      final double y = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v = this.newVectorM3D(x, y, z);
 
-      final VectorM3D vr = this.newVectorM3D();
+      final T vr = this.newVectorM3D();
       VectorM3D.clamp(v, minimum, maximum, vr);
 
       Assert.assertTrue(vr.getXD() <= maximum);
@@ -529,71 +552,71 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testCopy()
+  @Test public final void testCopy()
   {
-    final VectorM3D vb = this.newVectorM3D(5, 6, 7);
-    final VectorM3D va = this.newVectorM3D(1, 2, 3);
+    final T vb = this.newVectorM3D(5.0, 6.0, 7.0);
+    final T va = this.newVectorM3D(1.0, 2.0, 3.0);
 
-    Assert.assertFalse(va.getXD() == vb.getXD());
-    Assert.assertFalse(va.getYD() == vb.getYD());
-    Assert.assertFalse(va.getZD() == vb.getZD());
+    Assert.assertNotEquals(vb.getXD(), va.getXD(), 0.0);
+    Assert.assertNotEquals(vb.getYD(), va.getYD(), 0.0);
+    Assert.assertNotEquals(vb.getZD(), va.getZD(), 0.0);
 
     VectorM3D.copy(va, vb);
 
-    Assert.assertTrue(va.getXD() == vb.getXD());
-    Assert.assertTrue(va.getYD() == vb.getYD());
-    Assert.assertTrue(va.getZD() == vb.getZD());
+    Assert.assertEquals(vb.getXD(), va.getXD(), 0.0);
+    Assert.assertEquals(vb.getYD(), va.getYD(), 0.0);
+    Assert.assertEquals(vb.getZD(), va.getZD(), 0.0);
   }
 
-  @Override @Test public void testCopy2Correct()
+  @Test public final void testCopy2Correct()
   {
-    final VectorM3D v0 = this.newVectorM3D(
-      Math.random() * Double.MAX_VALUE,
-      Math.random() * Double.MAX_VALUE,
-      Math.random() * Double.MAX_VALUE);
-    final VectorM3D v1 = this.newVectorM3D();
+    final T v0 = this.newVectorM3D(
+      VectorM3DContract.getRandom() * Double.MAX_VALUE,
+      VectorM3DContract.getRandom() * Double.MAX_VALUE,
+      VectorM3DContract.getRandom() * Double.MAX_VALUE);
+    final T v1 = this.newVectorM3D();
 
     v1.copyFrom2D(v0);
 
-    Assert.assertEquals(v0.getXD(), v1.getXD(), 0.0f);
-    Assert.assertEquals(v0.getYD(), v1.getYD(), 0.0f);
-    Assert.assertEquals(0, v1.getZD(), 0.0f);
+    Assert.assertEquals(v0.getXD(), v1.getXD(), 0.0);
+    Assert.assertEquals(v0.getYD(), v1.getYD(), 0.0);
+    Assert.assertEquals(0.0, v1.getZD(), 0.0);
   }
 
-  @Override @Test public void testCopy3Correct()
+  @Test public final void testCopy3Correct()
   {
-    final VectorM3D v0 = this.newVectorM3D(
-      Math.random() * Double.MAX_VALUE,
-      Math.random() * Double.MAX_VALUE,
-      Math.random() * Double.MAX_VALUE);
-    final VectorM3D v1 = this.newVectorM3D();
+    final T v0 = this.newVectorM3D(
+      VectorM3DContract.getRandom() * Double.MAX_VALUE,
+      VectorM3DContract.getRandom() * Double.MAX_VALUE,
+      VectorM3DContract.getRandom() * Double.MAX_VALUE);
+    final T v1 = this.newVectorM3D();
 
     v1.copyFrom3D(v0);
 
-    Assert.assertEquals(v0.getXD(), v1.getXD(), 0.0f);
-    Assert.assertEquals(v0.getYD(), v1.getYD(), 0.0f);
-    Assert.assertEquals(v0.getZD(), v1.getZD(), 0.0f);
+    Assert.assertEquals(v0.getXD(), v1.getXD(), 0.0);
+    Assert.assertEquals(v0.getYD(), v1.getYD(), 0.0);
+    Assert.assertEquals(v0.getZD(), v1.getZD(), 0.0);
   }
 
-  @Override @Test public void testCrossProductPerpendicular()
+  @Test public final void testCrossProductPerpendicular()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = Math.random();
-      final double y0 = Math.random();
-      final double z0 = Math.random();
-      final VectorM3D v0 = this.newVectorM3D(x0, y0, z0);
+      final double x0 = VectorM3DContract.getRandom();
+      final double y0 = VectorM3DContract.getRandom();
+      final double z0 = VectorM3DContract.getRandom();
+      final T v0 = this.newVectorM3D(x0, y0, z0);
       VectorM3D.normalizeInPlace(v0);
 
-      final double x1 = Math.random();
-      final double y1 = Math.random();
-      final double z1 = Math.random();
-      final VectorM3D v1 = this.newVectorM3D(x1, y1, z1);
+      final double x1 = VectorM3DContract.getRandom();
+      final double y1 = VectorM3DContract.getRandom();
+      final double z1 = VectorM3DContract.getRandom();
+      final T v1 = this.newVectorM3D(x1, y1, z1);
       VectorM3D.normalizeInPlace(v1);
 
-      final VectorM3D vr = this.newVectorM3D();
+      final T vr = this.newVectorM3D();
       VectorM3D.crossProduct(v0, v1, vr);
       VectorM3D.normalizeInPlace(vr);
 
@@ -605,106 +628,106 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testDefault000()
+  @Test public final void testDefault000()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
     Assert.assertTrue(
       VectorM3D.almostEqual(
-        ec, this.newVectorM3D(), this.newVectorM3D(0, 0, 0)));
+        ec, this.newVectorM3D(), this.newVectorM3D(0.0, 0.0, 0.0)));
   }
 
-  @Override @Test public void testDistance()
+  @Test public final void testDistance()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
     final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
 
-    final VectorM3D v0 = this.newVectorM3D(0.0f, 1.0f, 0.0f);
-    final VectorM3D v1 = this.newVectorM3D(0.0f, 0.0f, 0.0f);
+    final T v0 = this.newVectorM3D(0.0, 1.0, 0.0);
+    final T v1 = this.newVectorM3D(0.0, 0.0, 0.0);
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
-        ec, VectorM3D.distance(c, v0, v1), 1.0f));
+        ec, VectorM3D.distance(c, v0, v1), 1.0));
   }
 
-  @Override @Test public void testDistanceOrdering()
+  @Test public final void testDistanceOrdering()
   {
     final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = Math.random() * Double.MAX_VALUE;
-      final double y0 = Math.random() * Double.MAX_VALUE;
-      final double z0 = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v0 = this.newVectorM3D(x0, y0, z0);
+      final double x0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double y0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v0 = this.newVectorM3D(x0, y0, z0);
 
-      final double x1 = Math.random() * Double.MAX_VALUE;
-      final double y1 = Math.random() * Double.MAX_VALUE;
-      final double z1 = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v1 = this.newVectorM3D(x1, y1, z1);
+      final double x1 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double y1 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z1 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v1 = this.newVectorM3D(x1, y1, z1);
 
       Assert.assertTrue(VectorM3D.distance(c, v0, v1) >= 0.0);
     }
   }
 
-  @Override @Test public void testDotProduct()
+  @Test public final void testDotProduct()
   {
-    final VectorM3D v0 = this.newVectorM3D(10.0f, 10.0f, 10.0f);
-    final VectorM3D v1 = this.newVectorM3D(10.0f, 10.0f, 10.0f);
+    final T v0 = this.newVectorM3D(10.0, 10.0, 10.0);
+    final T v1 = this.newVectorM3D(10.0, 10.0, 10.0);
 
     {
       final double p = VectorM3D.dotProduct(v0, v1);
-      Assert.assertTrue(v0.getXD() == 10.0);
-      Assert.assertTrue(v0.getYD() == 10.0);
-      Assert.assertTrue(v0.getZD() == 10.0);
-      Assert.assertTrue(v1.getXD() == 10.0);
-      Assert.assertTrue(v1.getYD() == 10.0);
-      Assert.assertTrue(v1.getZD() == 10.0);
-      Assert.assertTrue(p == 300.0);
+      Assert.assertEquals(10.0, v0.getXD(), 0.0);
+      Assert.assertEquals(10.0, v0.getYD(), 0.0);
+      Assert.assertEquals(10.0, v0.getZD(), 0.0);
+      Assert.assertEquals(10.0, v1.getXD(), 0.0);
+      Assert.assertEquals(10.0, v1.getYD(), 0.0);
+      Assert.assertEquals(10.0, v1.getZD(), 0.0);
+      Assert.assertEquals(300.0, p, 0.0);
     }
 
     {
       final double p = VectorM3D.dotProduct(v0, v0);
-      Assert.assertTrue(v0.getXD() == 10.0);
-      Assert.assertTrue(v0.getYD() == 10.0);
-      Assert.assertTrue(v0.getZD() == 10.0);
-      Assert.assertTrue(p == 300.0);
+      Assert.assertEquals(10.0, v0.getXD(), 0.0);
+      Assert.assertEquals(10.0, v0.getYD(), 0.0);
+      Assert.assertEquals(10.0, v0.getZD(), 0.0);
+      Assert.assertEquals(300.0, p, 0.0);
     }
 
     {
       final double p = VectorM3D.dotProduct(v1, v1);
-      Assert.assertTrue(v1.getXD() == 10.0);
-      Assert.assertTrue(v1.getYD() == 10.0);
-      Assert.assertTrue(v1.getZD() == 10.0);
-      Assert.assertTrue(p == 300.0);
+      Assert.assertEquals(10.0, v1.getXD(), 0.0);
+      Assert.assertEquals(10.0, v1.getYD(), 0.0);
+      Assert.assertEquals(10.0, v1.getZD(), 0.0);
+      Assert.assertEquals(300.0, p, 0.0);
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+  @Test public final void testDotProductPerpendicular()
   {
-    final VectorM3D vpx = this.newVectorM3D(1.0f, 0.0f, 0.0f);
-    final VectorM3D vmx = this.newVectorM3D(-1.0f, 0.0f, 0.0f);
+    final T vpx = this.newVectorM3D(1.0, 0.0, 0.0);
+    final T vmx = this.newVectorM3D(-1.0, 0.0, 0.0);
 
-    final VectorM3D vpy = this.newVectorM3D(0.0f, 1.0f, 0.0f);
-    final VectorM3D vmy = this.newVectorM3D(0.0f, -1.0f, 0.0f);
+    final T vpy = this.newVectorM3D(0.0, 1.0, 0.0);
+    final T vmy = this.newVectorM3D(0.0, -1.0, 0.0);
 
-    final VectorM3D vpz = this.newVectorM3D(0.0f, 0.0f, 1.0f);
-    final VectorM3D vmz = this.newVectorM3D(0.0f, 0.0f, -1.0f);
+    final T vpz = this.newVectorM3D(0.0, 0.0, 1.0);
+    final T vmz = this.newVectorM3D(0.0, 0.0, -1.0);
 
-    Assert.assertTrue(VectorM3D.dotProduct(vpx, vpy) == 0.0);
-    Assert.assertTrue(VectorM3D.dotProduct(vpy, vpz) == 0.0);
-    Assert.assertTrue(VectorM3D.dotProduct(vmx, vmy) == 0.0);
-    Assert.assertTrue(VectorM3D.dotProduct(vmy, vmz) == 0.0);
+    Assert.assertEquals(0.0, VectorM3D.dotProduct(vpx, vpy), 0.0);
+    Assert.assertEquals(0.0, VectorM3D.dotProduct(vpy, vpz), 0.0);
+    Assert.assertEquals(0.0, VectorM3D.dotProduct(vmx, vmy), 0.0);
+    Assert.assertEquals(0.0, VectorM3D.dotProduct(vmy, vmz), 0.0);
   }
 
-  @Override @Test public void testDotProductSelf()
+  @Test public final void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = Math.random();
-      final double y = Math.random();
-      final double z = Math.random();
-      final VectorM3D q = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom();
+      final double y = VectorM3DContract.getRandom();
+      final double z = VectorM3DContract.getRandom();
+      final T q = this.newVectorM3D(x, y, z);
       final double dp = VectorM3D.dotProduct(q, q);
 
       System.out.println("q  : " + q);
@@ -714,198 +737,201 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  @Test public final void testDotProductSelfMagnitudeSquared()
   {
-    final VectorM3D v0 = this.newVectorM3D(10.0f, 10.0f, 10.0f);
+    final T v0 = this.newVectorM3D(10.0, 10.0, 10.0);
 
     {
       final double p = VectorM3D.dotProduct(v0, v0);
-      Assert.assertTrue(v0.getXD() == 10.0);
-      Assert.assertTrue(v0.getYD() == 10.0);
-      Assert.assertTrue(v0.getZD() == 10.0);
-      Assert.assertTrue(p == 300.0);
+      Assert.assertEquals(10.0, v0.getXD(), 0.0);
+      Assert.assertEquals(10.0, v0.getYD(), 0.0);
+      Assert.assertEquals(10.0, v0.getZD(), 0.0);
+      Assert.assertEquals(300.0, p, 0.0);
     }
 
     {
       final double p = VectorM3D.magnitudeSquared(v0);
-      Assert.assertTrue(v0.getXD() == 10.0);
-      Assert.assertTrue(v0.getYD() == 10.0);
-      Assert.assertTrue(v0.getZD() == 10.0);
-      Assert.assertTrue(p == 300.0);
+      Assert.assertEquals(10.0, v0.getXD(), 0.0);
+      Assert.assertEquals(10.0, v0.getYD(), 0.0);
+      Assert.assertEquals(10.0, v0.getZD(), 0.0);
+      Assert.assertEquals(300.0, p, 0.0);
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+  @Test public final void testEqualsCorrect()
   {
     {
-      final VectorM3D m0 = this.newVectorM3D();
+      final T m0 = this.newVectorM3D();
       Assert.assertTrue(m0.equals(m0));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D();
+      final T m0 = this.newVectorM3D();
       Assert.assertFalse(m0.equals(null));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D();
+      final T m0 = this.newVectorM3D();
       Assert.assertFalse(m0.equals(Integer.valueOf(23)));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D();
-      final VectorM3D m1 = this.newVectorM3D();
+      final T m0 = this.newVectorM3D();
+      final T m1 = this.newVectorM3D();
       Assert.assertTrue(m0.equals(m1));
     }
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+  @Test public final void testEqualsNotEqualCorrect()
   {
-    final double x = Math.random();
-    final double y = x + 1.0f;
-    final double z = y + 1.0f;
-    final double w = z + 1.0f;
-    final double q = w + 1.0f;
+    final double x = VectorM3DContract.getRandom();
+    final double y = x + 1.0;
+    final double z = y + 1.0;
+    final double w = z + 1.0;
+    final double q = w + 1.0;
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
+      final T m0 = this.newVectorM3D(x, y, z);
       Assert.assertFalse(m0.equals(null));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
+      final T m0 = this.newVectorM3D(x, y, z);
       Assert.assertFalse(m0.equals(Integer.valueOf(23)));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, y, z);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, y, z);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(x, q, z);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(x, q, z);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(x, y, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(x, y, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, q, z);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, q, z);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, y, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, y, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, y, z);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, y, z);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, q, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, q, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, q, z);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, q, z);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(q, q, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(q, q, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(x, q, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(x, q, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D(x, y, z);
-      final VectorM3D m1 = this.newVectorM3D(x, y, q);
+      final T m0 = this.newVectorM3D(x, y, z);
+      final T m1 = this.newVectorM3D(x, y, q);
       Assert.assertFalse(m0.equals(m1));
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+  @Test public final void testHashCodeEqualsCorrect()
   {
-    final VectorM3D m0 = this.newVectorM3D();
-    final VectorM3D m1 = this.newVectorM3D();
-    Assert.assertEquals(m0.hashCode(), m1.hashCode());
+    final T m0 = this.newVectorM3D();
+    final T m1 = this.newVectorM3D();
+    Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+  @Test public final void testHashCodeNotEqualCorrect()
   {
     {
-      final VectorM3D m0 = this.newVectorM3D();
-      final VectorM3D m1 = this.newVectorM3D();
-      m1.setXD(23);
-      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      final T m0 = this.newVectorM3D();
+      final T m1 = this.newVectorM3D();
+      m1.setXD(23.0);
+      Assert.assertNotEquals(
+        (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D();
-      final VectorM3D m1 = this.newVectorM3D();
-      m1.setYD(23);
-      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      final T m0 = this.newVectorM3D();
+      final T m1 = this.newVectorM3D();
+      m1.setYD(23.0);
+      Assert.assertNotEquals(
+        (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
     }
 
     {
-      final VectorM3D m0 = this.newVectorM3D();
-      final VectorM3D m1 = this.newVectorM3D();
-      m1.setZD(23);
-      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      final T m0 = this.newVectorM3D();
+      final T m1 = this.newVectorM3D();
+      m1.setZD(23.0);
+      Assert.assertNotEquals(
+        (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+  @Test public final void testInitializeReadable()
   {
-    final VectorM3D v0 = this.newVectorM3D(1.0f, 2.0f, 3.0f);
-    final VectorM3D v1 = new VectorM3D(v0);
+    final T v0 = this.newVectorM3D(1.0, 2.0, 3.0);
+    final T v1 = this.newVectorM3D(v0);
 
-    Assert.assertTrue(v0.getXD() == v1.getXD());
-    Assert.assertTrue(v0.getYD() == v1.getYD());
-    Assert.assertTrue(v0.getZD() == v1.getZD());
+    Assert.assertEquals(v1.getXD(), v0.getXD(), 0.0);
+    Assert.assertEquals(v1.getYD(), v0.getYD(), 0.0);
+    Assert.assertEquals(v1.getZD(), v0.getZD(), 0.0);
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+  @Test public final void testInterpolateLinearLimits()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
     final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = Math.random() * Double.MAX_VALUE;
-      final double y0 = Math.random() * Double.MAX_VALUE;
-      final double z0 = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v0 = this.newVectorM3D(x0, y0, z0);
+      final double x0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double y0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v0 = this.newVectorM3D(x0, y0, z0);
 
-      final double x1 = Math.random() * Double.MAX_VALUE;
-      final double y1 = Math.random() * Double.MAX_VALUE;
-      final double z1 = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v1 = this.newVectorM3D(x1, y1, z1);
+      final double x1 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double y1 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z1 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v1 = this.newVectorM3D(x1, y1, z1);
 
-      final VectorM3D vr0 = this.newVectorM3D();
-      final VectorM3D vr1 = this.newVectorM3D();
-      VectorM3D.interpolateLinear(c, v0, v1, 0.0f, vr0);
-      VectorM3D.interpolateLinear(c, v0, v1, 1.0f, vr1);
+      final T vr0 = this.newVectorM3D();
+      final T vr1 = this.newVectorM3D();
+      VectorM3D.interpolateLinear(c, v0, v1, 0.0, vr0);
+      VectorM3D.interpolateLinear(c, v0, v1, 1.0, vr1);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -929,31 +955,34 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+  @Test public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = Math.random() * Double.MAX_VALUE;
-      final double y = Math.random() * Double.MAX_VALUE;
-      final double z = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double y = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v = this.newVectorM3D(x, y, z);
 
       final double m = VectorM3D.magnitude(v);
       Assert.assertTrue(m >= 1.0);
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+  @Test public final void testMagnitudeNormal()
   {
     final AlmostEqualDouble.ContextRelative context_d =
       TestUtilities.getDoubleEqualityContext6dp();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
-      final double y = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
-      final double z = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x =
+        VectorM3DContract.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
+      final double y =
+        VectorM3DContract.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
+      final double z =
+        VectorM3DContract.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
+      final T v = this.newVectorM3D(x, y, z);
 
-      final VectorM3D vr = this.newVectorM3D();
+      final T vr = this.newVectorM3D();
       VectorM3D.normalize(v, vr);
       Assert.assertNotSame(v, vr);
 
@@ -964,173 +993,176 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+  @Test public final void testMagnitudeNormalizeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorM3D v = this.newVectorM3D(0.0f, 0.0f, 0.0f);
-    final VectorM3D vr = VectorM3D.normalizeInPlace(v);
+    final T v = this.newVectorM3D(0.0, 0.0, 0.0);
+    final T vr = VectorM3D.normalizeInPlace(v);
     final double m = VectorM3D.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testMagnitudeOne()
+  @Test public final void testMagnitudeOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorM3D v = this.newVectorM3D(1.0f, 0.0f, 0.0f);
+    final T v = this.newVectorM3D(1.0, 0.0, 0.0);
     final double m = VectorM3D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
-  @Override @Test public void testMagnitudeSimple()
+  @Test public final void testMagnitudeSimple()
   {
-    final VectorM3D v = this.newVectorM3D(8.0f, 0.0f, 0.0f);
+    final T v = this.newVectorM3D(8.0, 0.0, 0.0);
 
     {
       final double p = VectorM3D.dotProduct(v, v);
       final double q = VectorM3D.magnitudeSquared(v);
       final double r = VectorM3D.magnitude(v);
-      Assert.assertTrue(p == 64.0);
-      Assert.assertTrue(q == 64.0);
-      Assert.assertTrue(r == 8.0);
+      Assert.assertEquals(64.0, p, 0.0);
+      Assert.assertEquals(64.0, q, 0.0);
+      Assert.assertEquals(8.0, r, 0.0);
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+  @Test public final void testMagnitudeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorM3D v = this.newVectorM3D(0.0f, 0.0f, 0.0f);
+    final T v = this.newVectorM3D(0.0, 0.0, 0.0);
     final double m = VectorM3D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testNormalizeSimple()
+  @Test public final void testNormalizeSimple()
   {
-    final VectorM3D v0 = this.newVectorM3D(8.0f, 0.0f, 0.0f);
-    final VectorM3D out = this.newVectorM3D();
-    final VectorM3D vr = VectorM3D.normalize(v0, out);
+    final T v0 = this.newVectorM3D(8.0, 0.0, 0.0);
+    final T out = this.newVectorM3D();
+    final T vr = VectorM3D.normalize(v0, out);
 
-    Assert.assertTrue(vr == out);
+    Assert.assertEquals(out, vr);
+    Assert.assertSame(out, vr);
 
     final double m = VectorM3D.magnitude(out);
-    Assert.assertTrue(m == 1.0);
+    Assert.assertEquals(1.0, m, 0.0);
   }
 
-  @Override @Test public void testNormalizeZero()
+  @Test public final void testNormalizeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorM3D qr = this.newVectorM3D();
-    final VectorM3D q = this.newVectorM3D(0, 0, 0);
+    final T qr = this.newVectorM3D();
+    final T q = this.newVectorM3D(0.0, 0.0, 0.0);
     VectorM3D.normalize(q, qr);
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.getXD()));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.getYD()));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.getZD()));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0.0, qr.getXD()));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0.0, qr.getYD()));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0.0, qr.getZD()));
   }
 
-  @Override @Test public void testOrthonormalize()
+  @Test public final void testOrthonormalize()
   {
     final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
-    final VectorM3D v0 = this.newVectorM3D(0, 1, 0);
-    final VectorM3D v1 = this.newVectorM3D(0.5f, 0.5f, 0);
-    final VectorM3D v0_out = new VectorM3D();
-    final VectorM3D v1_out = new VectorM3D();
+    final T v0 = this.newVectorM3D(0.0, 1.0, 0.0);
+    final T v1 = this.newVectorM3D(0.5, 0.5, 0.0);
+    final T v0_out = this.newVectorM3D();
+    final T v1_out = this.newVectorM3D();
 
     VectorM3D.orthoNormalize(c, v0, v0_out, v1, v1_out);
 
-    Assert.assertEquals(this.newVectorM3D(0, 1, 0), v0_out);
-    Assert.assertEquals(this.newVectorM3D(1, 0, 0), v1_out);
+    Assert.assertEquals(this.newVectorM3D(0.0, 1.0, 0.0), v0_out);
+    Assert.assertEquals(this.newVectorM3D(1.0, 0.0, 0.0), v1_out);
   }
 
-  @Override @Test public void testOrthonormalizeMutation()
+  @Test public final void testOrthonormalizeMutation()
   {
     final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
-    final VectorM3D v0 = this.newVectorM3D(0f, 1f, 0f);
-    final VectorM3D v1 = this.newVectorM3D(0.5f, 0.5f, 0f);
+    final T v0 = this.newVectorM3D(0.0, 1.0, 0.0);
+    final T v1 = this.newVectorM3D(0.5, 0.5, 0.0);
 
     VectorM3D.orthoNormalizeInPlace(c, v0, v1);
 
-    Assert.assertEquals(this.newVectorM3D(0, 1, 0), v0);
-    Assert.assertEquals(this.newVectorM3D(1, 0, 0), v1);
+    Assert.assertEquals(this.newVectorM3D(0.0, 1.0, 0.0), v0);
+    Assert.assertEquals(this.newVectorM3D(1.0, 0.0, 0.0), v1);
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+  @Test public final void testProjectionPerpendicularZero()
   {
     {
-      final VectorM3D p = this.newVectorM3D(1.0f, 0.0f, 0.0f);
-      final VectorM3D q = this.newVectorM3D(0.0f, 1.0f, 0.0f);
-      final VectorM3D r = this.newVectorM3D();
-      final VectorM3D u = VectorM3D.projection(p, q, r);
+      final T p = this.newVectorM3D(1.0, 0.0, 0.0);
+      final T q = this.newVectorM3D(0.0, 1.0, 0.0);
+      final T r = this.newVectorM3D();
+      final T u = VectorM3D.projection(p, q, r);
 
       Assert.assertSame(r, u);
-      Assert.assertTrue(VectorM3D.magnitude(u) == 0.0);
+      Assert.assertEquals(0.0, VectorM3D.magnitude(u), 0.0);
     }
 
     {
-      final VectorM3D p = this.newVectorM3D(-1.0f, 0.0f, 0.0f);
-      final VectorM3D q = this.newVectorM3D(0.0f, 1.0f, 0.0f);
-      final VectorM3D r = this.newVectorM3D();
-      final VectorM3D u = VectorM3D.projection(p, q, r);
+      final T p = this.newVectorM3D(-1.0, 0.0, 0.0);
+      final T q = this.newVectorM3D(0.0, 1.0, 0.0);
+      final T r = this.newVectorM3D();
+      final T u = VectorM3D.projection(p, q, r);
 
       Assert.assertSame(r, u);
-      Assert.assertTrue(VectorM3D.magnitude(u) == 0.0);
+      Assert.assertEquals(0.0, VectorM3D.magnitude(u), 0.0);
     }
   }
 
-  @Override @Test public void testScaleMutation()
+  @Test public final void testScaleMutation()
   {
-    final VectorM3D out = this.newVectorM3D();
-    final VectorM3D v0 = this.newVectorM3D(1.0f, 1.0f, 1.0f);
+    final T out = this.newVectorM3D();
+    final T v0 = this.newVectorM3D(1.0, 1.0, 1.0);
 
-    Assert.assertTrue(out.getXD() == 0.0);
-    Assert.assertTrue(out.getYD() == 0.0);
-    Assert.assertTrue(out.getZD() == 0.0);
-    Assert.assertTrue(v0.getXD() == 1.0);
-    Assert.assertTrue(v0.getYD() == 1.0);
-    Assert.assertTrue(v0.getZD() == 1.0);
+    Assert.assertEquals(0.0, out.getXD(), 0.0);
+    Assert.assertEquals(0.0, out.getYD(), 0.0);
+    Assert.assertEquals(0.0, out.getZD(), 0.0);
+    Assert.assertEquals(1.0, v0.getXD(), 0.0);
+    Assert.assertEquals(1.0, v0.getYD(), 0.0);
+    Assert.assertEquals(1.0, v0.getZD(), 0.0);
 
-    final VectorM3D ov0 = VectorM3D.scale(v0, 2.0f, out);
+    final T ov0 = VectorM3D.scale(v0, 2.0, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXD() == 2.0);
-    Assert.assertTrue(out.getYD() == 2.0);
-    Assert.assertTrue(out.getZD() == 2.0);
-    Assert.assertTrue(v0.getXD() == 1.0);
-    Assert.assertTrue(v0.getYD() == 1.0);
-    Assert.assertTrue(v0.getZD() == 1.0);
+    Assert.assertEquals(ov0, out);
+    Assert.assertSame(ov0, out);
+    Assert.assertEquals(2.0, out.getXD(), 0.0);
+    Assert.assertEquals(2.0, out.getYD(), 0.0);
+    Assert.assertEquals(2.0, out.getZD(), 0.0);
+    Assert.assertEquals(1.0, v0.getXD(), 0.0);
+    Assert.assertEquals(1.0, v0.getYD(), 0.0);
+    Assert.assertEquals(1.0, v0.getZD(), 0.0);
 
-    final VectorM3D ov1 = VectorM3D.scaleInPlace(v0, 2.0f);
+    final T ov1 = VectorM3D.scaleInPlace(v0, 2.0);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXD() == 2.0);
-    Assert.assertTrue(ov1.getYD() == 2.0);
-    Assert.assertTrue(ov1.getZD() == 2.0);
-    Assert.assertTrue(v0.getXD() == 2.0);
-    Assert.assertTrue(v0.getYD() == 2.0);
-    Assert.assertTrue(v0.getZD() == 2.0);
+    Assert.assertEquals(v0, ov1);
+    Assert.assertSame(v0, ov1);
+    Assert.assertEquals(2.0, ov1.getXD(), 0.0);
+    Assert.assertEquals(2.0, ov1.getYD(), 0.0);
+    Assert.assertEquals(2.0, ov1.getZD(), 0.0);
+    Assert.assertEquals(2.0, v0.getXD(), 0.0);
+    Assert.assertEquals(2.0, v0.getYD(), 0.0);
+    Assert.assertEquals(2.0, v0.getZD(), 0.0);
   }
 
-  @Override @Test public void testScaleOne()
+  @Test public final void testScaleOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = Math.random() * Double.MAX_VALUE;
-      final double y = Math.random() * Double.MAX_VALUE;
-      final double z = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double y = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v = this.newVectorM3D(x, y, z);
 
-      final VectorM3D vr = this.newVectorM3D();
+      final T vr = this.newVectorM3D();
 
-      VectorM3D.scale(v, 1.0f, vr);
+      VectorM3D.scale(v, 1.0, vr);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -1147,7 +1179,7 @@ public abstract class VectorM3DContract extends VectorM3Contract
         final double orig_y = v.getYD();
         final double orig_z = v.getZD();
 
-        VectorM3D.scaleInPlace(v, 1.0f);
+        VectorM3D.scaleInPlace(v, 1.0);
 
         Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), orig_x));
         Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), orig_y));
@@ -1156,58 +1188,58 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testScaleZero()
+  @Test public final void testScaleZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = Math.random() * Double.MAX_VALUE;
-      final double y = Math.random() * Double.MAX_VALUE;
-      final double z = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v = this.newVectorM3D(x, y, z);
+      final double x = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double y = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v = this.newVectorM3D(x, y, z);
 
-      final VectorM3D vr = this.newVectorM3D();
+      final T vr = this.newVectorM3D();
 
-      VectorM3D.scale(v, 0.0f, vr);
+      VectorM3D.scale(v, 0.0, vr);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.getXD(), 0.0f));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.getYD(), 0.0f));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.getZD(), 0.0f));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.getXD(), 0.0));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.getYD(), 0.0));
+      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, vr.getZD(), 0.0));
 
       {
-        VectorM3D.scaleInPlace(v, 0.0f);
+        VectorM3D.scaleInPlace(v, 0.0);
 
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), 0.0f));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), 0.0f));
-        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getZD(), 0.0f));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), 0.0));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), 0.0));
+        Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getZD(), 0.0));
       }
     }
   }
 
-  @Override @Test public void testString()
+  @Test public final void testString()
   {
-    final VectorM3D v = this.newVectorM3D(1.0f, 2.0f, 3.0f);
-    Assert.assertTrue(v.toString().equals("[VectorM3D 1.0 2.0 3.0]"));
+    final T v = this.newVectorM3D(1.0, 2.0, 3.0);
+    Assert.assertTrue(v.toString().endsWith("1.0 2.0 3.0]"));
   }
 
-  @Override @Test public void testSubtract()
+  @Test public final void testSubtract()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = Math.random() * Double.MAX_VALUE;
-      final double y0 = Math.random() * Double.MAX_VALUE;
-      final double z0 = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v0 = this.newVectorM3D(x0, y0, z0);
+      final double x0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double y0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z0 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v0 = this.newVectorM3D(x0, y0, z0);
 
-      final double x1 = Math.random() * Double.MAX_VALUE;
-      final double y1 = Math.random() * Double.MAX_VALUE;
-      final double z1 = Math.random() * Double.MAX_VALUE;
-      final VectorM3D v1 = this.newVectorM3D(x1, y1, z1);
+      final double x1 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double y1 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final double z1 = VectorM3DContract.getRandom() * Double.MAX_VALUE;
+      final T v1 = this.newVectorM3D(x1, y1, z1);
 
-      final VectorM3D vr0 = this.newVectorM3D();
+      final T vr0 = this.newVectorM3D();
       VectorM3D.subtract(v0, v1, vr0);
 
       Assert.assertTrue(
@@ -1239,52 +1271,54 @@ public abstract class VectorM3DContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testSubtractMutation()
+  @Test public final void testSubtractMutation()
   {
-    final VectorM3D out = this.newVectorM3D();
-    final VectorM3D v0 = this.newVectorM3D(1.0f, 1.0f, 1.0f);
-    final VectorM3D v1 = this.newVectorM3D(1.0f, 1.0f, 1.0f);
+    final T out = this.newVectorM3D();
+    final T v0 = this.newVectorM3D(1.0, 1.0, 1.0);
+    final T v1 = this.newVectorM3D(1.0, 1.0, 1.0);
 
-    Assert.assertTrue(out.getXD() == 0.0);
-    Assert.assertTrue(out.getYD() == 0.0);
-    Assert.assertTrue(out.getZD() == 0.0);
+    Assert.assertEquals(0.0, out.getXD(), 0.0);
+    Assert.assertEquals(0.0, out.getYD(), 0.0);
+    Assert.assertEquals(0.0, out.getZD(), 0.0);
 
-    Assert.assertTrue(v0.getXD() == 1.0);
-    Assert.assertTrue(v0.getYD() == 1.0);
-    Assert.assertTrue(v0.getZD() == 1.0);
+    Assert.assertEquals(1.0, v0.getXD(), 0.0);
+    Assert.assertEquals(1.0, v0.getYD(), 0.0);
+    Assert.assertEquals(1.0, v0.getZD(), 0.0);
 
-    Assert.assertTrue(v1.getXD() == 1.0);
-    Assert.assertTrue(v1.getYD() == 1.0);
-    Assert.assertTrue(v1.getZD() == 1.0);
+    Assert.assertEquals(1.0, v1.getXD(), 0.0);
+    Assert.assertEquals(1.0, v1.getYD(), 0.0);
+    Assert.assertEquals(1.0, v1.getZD(), 0.0);
 
-    final VectorM3D ov0 = VectorM3D.subtract(v0, v1, out);
+    final T ov0 = VectorM3D.subtract(v0, v1, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXD() == 0.0);
-    Assert.assertTrue(out.getYD() == 0.0);
-    Assert.assertTrue(out.getZD() == 0.0);
+    Assert.assertEquals(ov0, out);
+    Assert.assertSame(ov0, out);
+    Assert.assertEquals(0.0, out.getXD(), 0.0);
+    Assert.assertEquals(0.0, out.getYD(), 0.0);
+    Assert.assertEquals(0.0, out.getZD(), 0.0);
 
-    Assert.assertTrue(v0.getXD() == 1.0);
-    Assert.assertTrue(v0.getYD() == 1.0);
-    Assert.assertTrue(v0.getZD() == 1.0);
+    Assert.assertEquals(1.0, v0.getXD(), 0.0);
+    Assert.assertEquals(1.0, v0.getYD(), 0.0);
+    Assert.assertEquals(1.0, v0.getZD(), 0.0);
 
-    Assert.assertTrue(v1.getXD() == 1.0);
-    Assert.assertTrue(v1.getYD() == 1.0);
-    Assert.assertTrue(v1.getZD() == 1.0);
+    Assert.assertEquals(1.0, v1.getXD(), 0.0);
+    Assert.assertEquals(1.0, v1.getYD(), 0.0);
+    Assert.assertEquals(1.0, v1.getZD(), 0.0);
 
-    final VectorM3D ov1 = VectorM3D.subtractInPlace(v0, v1);
+    final T ov1 = VectorM3D.subtractInPlace(v0, v1);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXD() == 0.0);
-    Assert.assertTrue(ov1.getYD() == 0.0);
-    Assert.assertTrue(ov1.getZD() == 0.0);
+    Assert.assertEquals(v0, ov1);
+    Assert.assertSame(v0, ov1);
+    Assert.assertEquals(0.0, ov1.getXD(), 0.0);
+    Assert.assertEquals(0.0, ov1.getYD(), 0.0);
+    Assert.assertEquals(0.0, ov1.getZD(), 0.0);
 
-    Assert.assertTrue(v0.getXD() == 0.0);
-    Assert.assertTrue(v0.getYD() == 0.0);
-    Assert.assertTrue(v0.getZD() == 0.0);
+    Assert.assertEquals(0.0, v0.getXD(), 0.0);
+    Assert.assertEquals(0.0, v0.getYD(), 0.0);
+    Assert.assertEquals(0.0, v0.getZD(), 0.0);
 
-    Assert.assertTrue(v1.getXD() == 1.0);
-    Assert.assertTrue(v1.getYD() == 1.0);
-    Assert.assertTrue(v1.getZD() == 1.0);
+    Assert.assertEquals(1.0, v1.getXD(), 0.0);
+    Assert.assertEquals(1.0, v1.getYD(), 0.0);
+    Assert.assertEquals(1.0, v1.getZD(), 0.0);
   }
 }

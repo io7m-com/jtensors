@@ -14,28 +14,16 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests.parameterized;
+package com.io7m.jtensors;
 
-import com.io7m.jtensors.parameterized.PVectorM3I;
+/**
+ * <p>The type of three-element vectors that are both readable and writable, and
+ * have {@code long} elements</p>
+ *
+ * @since 7.0.0
+ */
 
-public final class PVectorM3ITest<T>
-  extends PVectorM3IContract<T, PVectorM3I<T>>
+public interface Vector3LType extends VectorReadable3LType, VectorWritable3LType
 {
-  @Override protected PVectorM3I<T> newVectorM3I(
-    final int x,
-    final int y,
-    final int z)
-  {
-    return new PVectorM3I<T>(x, y, z);
-  }
-
-  @Override protected PVectorM3I<T> newVectorM3I()
-  {
-    return new PVectorM3I<T>();
-  }
-
-  @Override protected PVectorM3I<T> newVectorM3I(final PVectorM3I<T> v)
-  {
-    return new PVectorM3I<T>(v);
-  }
+  // No extra functions
 }

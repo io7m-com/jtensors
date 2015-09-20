@@ -17,37 +17,53 @@
 package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
+import com.io7m.jtensors.Vector3LType;
 import com.io7m.jtensors.VectorM3L;
 import org.junit.Assert;
 import org.junit.Test;
 
-public abstract class VectorM3LContract extends VectorM3Contract
+public abstract class VectorM3LContract<T extends Vector3LType>
 {
   public static long randomNegativeNumber()
   {
-    return (long) (Math.random() * Long.MIN_VALUE);
+    return (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
   }
 
   public static long randomPositiveNumber()
   {
-    return (long) (Math.random() * Long.MAX_VALUE);
+    return (long) (VectorM3LContract.getRandom() * (double) Long.MAX_VALUE);
   }
 
   public static long randomPositiveSmallNumber()
   {
-    return (long) (Math.random() * (1 << 14));
+    return (long) (VectorM3LContract.getRandom() * (double) (1 << 14));
   }
 
-  @Override @Test public void testAbsolute()
+  protected static double getRandom()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = (long) (Math.random() * Long.MIN_VALUE);
-      final long y = (long) (Math.random() * Long.MIN_VALUE);
-      final long z = (long) (Math.random() * Long.MIN_VALUE);
-      final VectorM3L v = this.newVectorM3L(x, y, z);
+    return Math.random();
+  }
 
-      final VectorM3L vr = this.newVectorM3L();
+  protected abstract T newVectorM3L(
+    final long x,
+    final long y,
+    final long z);
+
+  protected abstract T newVectorM3L();
+
+  protected abstract T newVectorM3L(T v);
+
+  @Test public final void testAbsolute()
+  {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
+      final long x = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final long y = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final long z = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final T v = this.newVectorM3L(x, y, z);
+
+      final T vr = this.newVectorM3L();
       VectorM3L.absolute(v, vr);
 
       Assert.assertEquals(Math.abs(v.getXL()), vr.getXL());
@@ -56,19 +72,15 @@ public abstract class VectorM3LContract extends VectorM3Contract
     }
   }
 
-  protected abstract VectorM3L newVectorM3L(
-    final long x,
-    final long y,
-    final long z);
-
-  @Override @Test public void testAbsoluteMutation()
+  @Test public final void testAbsoluteMutation()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = (long) (Math.random() * Long.MIN_VALUE);
-      final long y = (long) (Math.random() * Long.MIN_VALUE);
-      final long z = (long) (Math.random() * Long.MIN_VALUE);
-      final VectorM3L v = this.newVectorM3L(x, y, z);
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
+      final long x = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final long y = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final long z = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final T v = this.newVectorM3L(x, y, z);
 
       VectorM3L.absoluteInPlace(v);
 
@@ -78,26 +90,27 @@ public abstract class VectorM3LContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testAdd()
+  @Test public final void testAdd()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long x0 = VectorM3LContract.randomPositiveSmallNumber();
       final long y0 = VectorM3LContract.randomPositiveSmallNumber();
       final long z0 = VectorM3LContract.randomPositiveSmallNumber();
-      final VectorM3L v0 = this.newVectorM3L(x0, y0, z0);
+      final T v0 = this.newVectorM3L(x0, y0, z0);
 
       final long x1 = VectorM3LContract.randomPositiveSmallNumber();
       final long y1 = VectorM3LContract.randomPositiveSmallNumber();
       final long z1 = VectorM3LContract.randomPositiveSmallNumber();
-      final VectorM3L v1 = this.newVectorM3L(x1, y1, z1);
+      final T v1 = this.newVectorM3L(x1, y1, z1);
 
-      final VectorM3L vr0 = this.newVectorM3L();
+      final T vr0 = this.newVectorM3L();
       VectorM3L.add(v0, v1, vr0);
 
-      Assert.assertTrue(vr0.getXL() == (v0.getXL() + v1.getXL()));
-      Assert.assertTrue(vr0.getYL() == (v0.getYL() + v1.getYL()));
-      Assert.assertTrue(vr0.getZL() == (v0.getZL() + v1.getZL()));
+      Assert.assertEquals((v0.getXL() + v1.getXL()), vr0.getXL());
+      Assert.assertEquals((v0.getYL() + v1.getYL()), vr0.getYL());
+      Assert.assertEquals((v0.getZL() + v1.getZL()), vr0.getZL());
 
       {
         final long orig_x = v0.getXL();
@@ -105,136 +118,142 @@ public abstract class VectorM3LContract extends VectorM3Contract
         final long orig_z = v0.getZL();
         VectorM3L.addInPlace(v0, v1);
 
-        Assert.assertTrue(v0.getXL() == (orig_x + v1.getXL()));
-        Assert.assertTrue(v0.getYL() == (orig_y + v1.getYL()));
-        Assert.assertTrue(v0.getZL() == (orig_z + v1.getZL()));
+        Assert.assertEquals((orig_x + v1.getXL()), v0.getXL());
+        Assert.assertEquals((orig_y + v1.getYL()), v0.getYL());
+        Assert.assertEquals((orig_z + v1.getZL()), v0.getZL());
       }
     }
   }
 
-  @Override @Test public void testAddMutation()
+  @Test public final void testAddMutation()
   {
-    final VectorM3L out = this.newVectorM3L();
-    final VectorM3L v0 = this.newVectorM3L(1, 1, 1);
-    final VectorM3L v1 = this.newVectorM3L(1, 1, 1);
+    final T out = this.newVectorM3L();
+    final T v0 = this.newVectorM3L(1L, 1L, 1L);
+    final T v1 = this.newVectorM3L(1L, 1L, 1L);
 
-    Assert.assertTrue(out.getXL() == 0);
-    Assert.assertTrue(out.getYL() == 0);
-    Assert.assertTrue(out.getZL() == 0);
-    Assert.assertTrue(v0.getXL() == 1);
-    Assert.assertTrue(v0.getYL() == 1);
-    Assert.assertTrue(v0.getZL() == 1);
-    Assert.assertTrue(v1.getXL() == 1);
-    Assert.assertTrue(v1.getYL() == 1);
-    Assert.assertTrue(v1.getZL() == 1);
+    Assert.assertEquals(0L, out.getXL());
+    Assert.assertEquals(0L, out.getYL());
+    Assert.assertEquals(0L, out.getZL());
+    Assert.assertEquals(1L, v0.getXL());
+    Assert.assertEquals(1L, v0.getYL());
+    Assert.assertEquals(1L, v0.getZL());
+    Assert.assertEquals(1L, v1.getXL());
+    Assert.assertEquals(1L, v1.getYL());
+    Assert.assertEquals(1L, v1.getZL());
 
-    final VectorM3L ov0 = VectorM3L.add(v0, v1, out);
+    final T ov0 = VectorM3L.add(v0, v1, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXL() == 2);
-    Assert.assertTrue(out.getYL() == 2);
-    Assert.assertTrue(out.getZL() == 2);
-    Assert.assertTrue(v0.getXL() == 1);
-    Assert.assertTrue(v0.getYL() == 1);
-    Assert.assertTrue(v0.getZL() == 1);
-    Assert.assertTrue(v1.getXL() == 1);
-    Assert.assertTrue(v1.getYL() == 1);
-    Assert.assertTrue(v1.getZL() == 1);
+    Assert.assertEquals(ov0, out);
+    Assert.assertSame(ov0, out);
+    Assert.assertEquals(2L, out.getXL());
+    Assert.assertEquals(2L, out.getYL());
+    Assert.assertEquals(2L, out.getZL());
+    Assert.assertEquals(1L, v0.getXL());
+    Assert.assertEquals(1L, v0.getYL());
+    Assert.assertEquals(1L, v0.getZL());
+    Assert.assertEquals(1L, v1.getXL());
+    Assert.assertEquals(1L, v1.getYL());
+    Assert.assertEquals(1L, v1.getZL());
 
-    final VectorM3L ov1 = VectorM3L.addInPlace(v0, v1);
+    final T ov1 = VectorM3L.addInPlace(v0, v1);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXL() == 2);
-    Assert.assertTrue(ov1.getYL() == 2);
-    Assert.assertTrue(ov1.getZL() == 2);
-    Assert.assertTrue(v0.getXL() == 2);
-    Assert.assertTrue(v0.getYL() == 2);
-    Assert.assertTrue(v0.getZL() == 2);
-    Assert.assertTrue(v1.getXL() == 1);
-    Assert.assertTrue(v1.getYL() == 1);
-    Assert.assertTrue(v1.getZL() == 1);
+    Assert.assertEquals(v0, ov1);
+    Assert.assertSame(v0, ov1);
+    Assert.assertEquals(2L, ov1.getXL());
+    Assert.assertEquals(2L, ov1.getYL());
+    Assert.assertEquals(2L, ov1.getZL());
+    Assert.assertEquals(2L, v0.getXL());
+    Assert.assertEquals(2L, v0.getYL());
+    Assert.assertEquals(2L, v0.getZL());
+    Assert.assertEquals(1L, v1.getXL());
+    Assert.assertEquals(1L, v1.getYL());
+    Assert.assertEquals(1L, v1.getZL());
   }
 
-  @Override @Test public void testAddScaled()
+  @Test public final void testAddScaled()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long x0 = VectorM3LContract.randomPositiveSmallNumber();
       final long y0 = VectorM3LContract.randomPositiveSmallNumber();
       final long z0 = VectorM3LContract.randomPositiveSmallNumber();
-      final VectorM3L v0 = this.newVectorM3L(x0, y0, z0);
+      final T v0 = this.newVectorM3L(x0, y0, z0);
 
       final long x1 = VectorM3LContract.randomPositiveSmallNumber();
       final long y1 = VectorM3LContract.randomPositiveSmallNumber();
       final long z1 = VectorM3LContract.randomPositiveSmallNumber();
-      final VectorM3L v1 = this.newVectorM3L(x1, y1, z1);
+      final T v1 = this.newVectorM3L(x1, y1, z1);
 
       final long r = VectorM3LContract.randomPositiveSmallNumber();
 
-      final VectorM3L vr0 = this.newVectorM3L();
-      VectorM3L.addScaled(v0, v1, r, vr0);
+      final T vr0 = this.newVectorM3L();
+      VectorM3L.addScaled(v0, v1, (double) r, vr0);
 
-      Assert.assertTrue(vr0.getXL() == (v0.getXL() + (v1.getXL() * r)));
-      Assert.assertTrue(vr0.getYL() == (v0.getYL() + (v1.getYL() * r)));
-      Assert.assertTrue(vr0.getZL() == (v0.getZL() + (v1.getZL() * r)));
+      Assert.assertEquals((v0.getXL() + (v1.getXL() * r)), vr0.getXL());
+      Assert.assertEquals((v0.getYL() + (v1.getYL() * r)), vr0.getYL());
+      Assert.assertEquals((v0.getZL() + (v1.getZL() * r)), vr0.getZL());
 
       {
         final long orig_x = v0.getXL();
         final long orig_y = v0.getYL();
         final long orig_z = v0.getZL();
-        VectorM3L.addScaledInPlace(v0, v1, r);
+        VectorM3L.addScaledInPlace(v0, v1, (double) r);
 
-        Assert.assertTrue(v0.getXL() == (orig_x + (v1.getXL() * r)));
-        Assert.assertTrue(v0.getYL() == (orig_y + (v1.getYL() * r)));
-        Assert.assertTrue(v0.getZL() == (orig_z + (v1.getZL() * r)));
+        Assert.assertEquals((orig_x + (v1.getXL() * r)), v0.getXL());
+        Assert.assertEquals((orig_y + (v1.getYL() * r)), v0.getYL());
+        Assert.assertEquals((orig_z + (v1.getZL() * r)), v0.getZL());
       }
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+  @Test public final void testAlmostEqualNot()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+  @Test public final void testAlmostEqualTransitive()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testCheckInterface()
+  @Test public final void testCheckInterface()
   {
-    final VectorM3L v = this.newVectorM3L(3, 5, 7);
+    final T v = this.newVectorM3L(3L, 5L, 7L);
 
-    Assert.assertTrue(v.getXL() == v.getXL());
-    Assert.assertTrue(v.getYL() == v.getYL());
-    Assert.assertTrue(v.getZL() == v.getZL());
+    Assert.assertEquals(v.getXL(), v.getXL());
+    Assert.assertEquals(v.getYL(), v.getYL());
+    Assert.assertEquals(v.getZL(), v.getZL());
   }
 
-  @Override @Test public void testClampByVectorMaximumOrdering()
+  @Test public final void testClampByVectorMaximumOrdering()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long max_x = VectorM3LContract.randomNegativeNumber();
       final long max_y = VectorM3LContract.randomNegativeNumber();
       final long max_z = VectorM3LContract.randomNegativeNumber();
-      final VectorM3L maximum = this.newVectorM3L(max_x, max_y, max_z);
+      final T maximum = this.newVectorM3L(max_x, max_y, max_z);
 
       final long x = VectorM3LContract.randomNegativeNumber();
       final long y = VectorM3LContract.randomNegativeNumber();
       final long z = VectorM3LContract.randomNegativeNumber();
-      final VectorM3L v = this.newVectorM3L(x, y, z);
+      final T v = this.newVectorM3L(x, y, z);
 
-      final VectorM3L vr = this.newVectorM3L();
-      final VectorM3L vo = VectorM3L.clampMaximumByVector(v, maximum, vr);
+      final T vr = this.newVectorM3L();
+      final T vo = VectorM3L.clampMaximumByVector(v, maximum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo);
+      Assert.assertSame(vr, vo);
       Assert.assertTrue(vr.getXL() <= maximum.getXL());
       Assert.assertTrue(vr.getYL() <= maximum.getYL());
       Assert.assertTrue(vr.getZL() <= maximum.getZL());
 
       {
-        final VectorM3L vr0 = VectorM3L.clampMaximumByVectorInPlace(v, maximum);
-        Assert.assertTrue(vr0 == v);
+        final T vr0 = VectorM3L.clampMaximumByVectorInPlace(v, maximum);
+        Assert.assertEquals(v, vr0);
+        Assert.assertSame(v, vr0);
         Assert.assertTrue(v.getXL() <= maximum.getXL());
         Assert.assertTrue(v.getYL() <= maximum.getYL());
         Assert.assertTrue(v.getZL() <= maximum.getZL());
@@ -242,31 +261,34 @@ public abstract class VectorM3LContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testClampByVectorMinimumOrdering()
+  @Test public final void testClampByVectorMinimumOrdering()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long min_x = VectorM3LContract.randomPositiveNumber();
       final long min_y = VectorM3LContract.randomPositiveNumber();
       final long min_z = VectorM3LContract.randomPositiveNumber();
-      final VectorM3L minimum = this.newVectorM3L(min_x, min_y, min_z);
+      final T minimum = this.newVectorM3L(min_x, min_y, min_z);
 
       final long x = VectorM3LContract.randomNegativeNumber();
       final long y = VectorM3LContract.randomNegativeNumber();
       final long z = VectorM3LContract.randomNegativeNumber();
-      final VectorM3L v = this.newVectorM3L(x, y, z);
+      final T v = this.newVectorM3L(x, y, z);
 
-      final VectorM3L vr = this.newVectorM3L();
-      final VectorM3L vo = VectorM3L.clampMinimumByVector(v, minimum, vr);
+      final T vr = this.newVectorM3L();
+      final T vo = VectorM3L.clampMinimumByVector(v, minimum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo);
+      Assert.assertSame(vr, vo);
       Assert.assertTrue(vr.getXL() >= minimum.getXL());
       Assert.assertTrue(vr.getYL() >= minimum.getYL());
       Assert.assertTrue(vr.getZL() >= minimum.getZL());
 
       {
-        final VectorM3L vr0 = VectorM3L.clampMinimumByVectorInPlace(v, minimum);
-        Assert.assertTrue(vr0 == v);
+        final T vr0 = VectorM3L.clampMinimumByVectorInPlace(v, minimum);
+        Assert.assertEquals(v, vr0);
+        Assert.assertSame(v, vr0);
         Assert.assertTrue(v.getXL() >= minimum.getXL());
         Assert.assertTrue(v.getYL() >= minimum.getYL());
         Assert.assertTrue(v.getZL() >= minimum.getZL());
@@ -274,29 +296,31 @@ public abstract class VectorM3LContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testClampByVectorOrdering()
+  @Test public final void testClampByVectorOrdering()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long min_x = VectorM3LContract.randomNegativeNumber();
       final long min_y = VectorM3LContract.randomNegativeNumber();
       final long min_z = VectorM3LContract.randomNegativeNumber();
-      final VectorM3L minimum = this.newVectorM3L(min_x, min_y, min_z);
+      final T minimum = this.newVectorM3L(min_x, min_y, min_z);
 
       final long max_x = VectorM3LContract.randomPositiveNumber();
       final long max_y = VectorM3LContract.randomPositiveNumber();
       final long max_z = VectorM3LContract.randomPositiveNumber();
-      final VectorM3L maximum = this.newVectorM3L(max_x, max_y, max_z);
+      final T maximum = this.newVectorM3L(max_x, max_y, max_z);
 
       final long x = VectorM3LContract.randomNegativeNumber();
       final long y = VectorM3LContract.randomPositiveNumber();
       final long z = VectorM3LContract.randomPositiveNumber();
-      final VectorM3L v = this.newVectorM3L(x, y, z);
+      final T v = this.newVectorM3L(x, y, z);
 
-      final VectorM3L vr = this.newVectorM3L();
-      final VectorM3L vo = VectorM3L.clampByVector(v, minimum, maximum, vr);
+      final T vr = this.newVectorM3L();
+      final T vo = VectorM3L.clampByVector(v, minimum, maximum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo);
+      Assert.assertSame(vr, vo);
       Assert.assertTrue(vr.getXL() <= maximum.getXL());
       Assert.assertTrue(vr.getYL() <= maximum.getYL());
       Assert.assertTrue(vr.getZL() <= maximum.getZL());
@@ -305,9 +329,9 @@ public abstract class VectorM3LContract extends VectorM3Contract
       Assert.assertTrue(vr.getZL() >= minimum.getZL());
 
       {
-        final VectorM3L vr0 =
-          VectorM3L.clampByVectorInPlace(v, minimum, maximum);
-        Assert.assertTrue(vr0 == v);
+        final T vr0 = VectorM3L.clampByVectorInPlace(v, minimum, maximum);
+        Assert.assertEquals(v, vr0);
+        Assert.assertSame(v, vr0);
         Assert.assertTrue(v.getXL() <= maximum.getXL());
         Assert.assertTrue(v.getYL() <= maximum.getYL());
         Assert.assertTrue(v.getZL() <= maximum.getZL());
@@ -318,18 +342,19 @@ public abstract class VectorM3LContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+  @Test public final void testClampMaximumOrdering()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long maximum = VectorM3LContract.randomNegativeNumber();
 
       final long x = VectorM3LContract.randomPositiveNumber();
       final long y = VectorM3LContract.randomPositiveNumber();
       final long z = VectorM3LContract.randomPositiveNumber();
-      final VectorM3L v = this.newVectorM3L(x, y, z);
+      final T v = this.newVectorM3L(x, y, z);
 
-      final VectorM3L vr = this.newVectorM3L();
+      final T vr = this.newVectorM3L();
       VectorM3L.clampMaximum(v, maximum, vr);
 
       Assert.assertTrue(vr.getXL() <= maximum);
@@ -345,18 +370,19 @@ public abstract class VectorM3LContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+  @Test public final void testClampMinimumOrdering()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long minimum = VectorM3LContract.randomPositiveNumber();
 
       final long x = VectorM3LContract.randomNegativeNumber();
       final long y = VectorM3LContract.randomNegativeNumber();
       final long z = VectorM3LContract.randomNegativeNumber();
-      final VectorM3L v = this.newVectorM3L(x, y, z);
+      final T v = this.newVectorM3L(x, y, z);
 
-      final VectorM3L vr = this.newVectorM3L();
+      final T vr = this.newVectorM3L();
       VectorM3L.clampMinimum(v, minimum, vr);
 
       Assert.assertTrue(vr.getXL() >= minimum);
@@ -372,19 +398,20 @@ public abstract class VectorM3LContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testClampOrdering()
+  @Test public final void testClampOrdering()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long minimum = VectorM3LContract.randomNegativeNumber();
       final long maximum = VectorM3LContract.randomPositiveNumber();
 
       final long x = VectorM3LContract.randomNegativeNumber();
       final long y = VectorM3LContract.randomPositiveNumber();
       final long z = VectorM3LContract.randomPositiveNumber();
-      final VectorM3L v = this.newVectorM3L(x, y, z);
+      final T v = this.newVectorM3L(x, y, z);
 
-      final VectorM3L vr = this.newVectorM3L();
+      final T vr = this.newVectorM3L();
       VectorM3L.clamp(v, minimum, maximum, vr);
 
       Assert.assertTrue(vr.getXL() <= maximum);
@@ -407,10 +434,10 @@ public abstract class VectorM3LContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testCopy()
+  @Test public final void testCopy()
   {
-    final VectorM3L vb = this.newVectorM3L(5, 6, 7);
-    final VectorM3L va = this.newVectorM3L(1, 2, 3);
+    final T vb = this.newVectorM3L(5L, 6L, 7L);
+    final T va = this.newVectorM3L(1L, 2L, 3L);
 
     Assert.assertFalse(va.getXL() == vb.getXL());
     Assert.assertFalse(va.getYL() == vb.getYL());
@@ -418,33 +445,34 @@ public abstract class VectorM3LContract extends VectorM3Contract
 
     VectorM3L.copy(va, vb);
 
-    Assert.assertTrue(va.getXL() == vb.getXL());
-    Assert.assertTrue(va.getYL() == vb.getYL());
-    Assert.assertTrue(va.getZL() == vb.getZL());
+    Assert.assertEquals(vb.getXL(), va.getXL());
+    Assert.assertEquals(vb.getYL(), va.getYL());
+    Assert.assertEquals(vb.getZL(), va.getZL());
   }
 
-  @Override @Test public void testCopy2Correct()
+  @Test public final void testCopy2Correct()
   {
-    final VectorM3L v0 = this.newVectorM3L(
-      (long) Math.random() * Long.MAX_VALUE,
-      (long) Math.random() * Long.MAX_VALUE,
-      (long) Math.random() * Long.MAX_VALUE);
-    final VectorM3L v1 = this.newVectorM3L();
+    final T v0 = this.newVectorM3L(
+      this.getLarge(), this.getLarge(), this.getLarge());
+    final T v1 = this.newVectorM3L();
 
     v1.copyFrom2L(v0);
 
     Assert.assertEquals(v0.getXL(), v1.getXL());
     Assert.assertEquals(v0.getYL(), v1.getYL());
-    Assert.assertEquals(0, v1.getZL());
+    Assert.assertEquals(0L, v1.getZL());
   }
 
-  @Override @Test public void testCopy3Correct()
+  protected long getLarge()
   {
-    final VectorM3L v0 = this.newVectorM3L(
-      (long) Math.random() * Long.MAX_VALUE,
-      (long) Math.random() * Long.MAX_VALUE,
-      (long) Math.random() * Long.MAX_VALUE);
-    final VectorM3L v1 = this.newVectorM3L();
+    return (long) (VectorM3LContract.getRandom() * Long.MAX_VALUE);
+  }
+
+  @Test public final void testCopy3Correct()
+  {
+    final T v0 = this.newVectorM3L(
+      this.getLarge(), this.getLarge(), this.getLarge());
+    final T v1 = this.newVectorM3L();
 
     v1.copyFrom3L(v0);
 
@@ -453,91 +481,95 @@ public abstract class VectorM3LContract extends VectorM3Contract
     Assert.assertEquals(v0.getZL(), v1.getZL());
   }
 
-  @Override @Test public void testCrossProductPerpendicular()
+  @Test public final void testCrossProductPerpendicular()
   {
     // Not applicable for integer vectors
   }
 
-  @Override @Test public void testDefault000()
+  @Test public final void testDefault000()
   {
-    Assert.assertTrue(this.newVectorM3L().equals(this.newVectorM3L(0, 0, 0)));
+    Assert.assertTrue(
+      this.newVectorM3L().equals(this.newVectorM3L(0L, 0L, 0L)));
   }
 
-  @Override @Test public void testDistance()
+  @Test public final void testDistance()
   {
     final VectorM3L.ContextVM3L c = new VectorM3L.ContextVM3L();
-    final VectorM3L v0 = this.newVectorM3L(0, 1, 0);
-    final VectorM3L v1 = this.newVectorM3L(0, 0, 0);
-    Assert.assertTrue(VectorM3L.distance(c, v0, v1) == 1);
+    final T v0 = this.newVectorM3L(0L, 1L, 0L);
+    final T v1 = this.newVectorM3L(0L, 0L, 0L);
+    Assert.assertEquals(1L, VectorM3L.distance(c, v0, v1));
   }
 
-  @Override @Test public void testDistanceOrdering()
+  @Test public final void testDistanceOrdering()
   {
     final VectorM3L.ContextVM3L c = new VectorM3L.ContextVM3L();
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long x0 = VectorM3LContract.randomPositiveSmallNumber();
       final long y0 = VectorM3LContract.randomPositiveSmallNumber();
       final long z0 = VectorM3LContract.randomPositiveSmallNumber();
-      final VectorM3L v0 = this.newVectorM3L(x0, y0, z0);
+      final T v0 = this.newVectorM3L(x0, y0, z0);
 
       final long x1 = VectorM3LContract.randomPositiveSmallNumber();
       final long y1 = VectorM3LContract.randomPositiveSmallNumber();
       final long z1 = VectorM3LContract.randomPositiveSmallNumber();
-      final VectorM3L v1 = this.newVectorM3L(x1, y1, z1);
+      final T v1 = this.newVectorM3L(x1, y1, z1);
 
-      Assert.assertTrue(VectorM3L.distance(c, v0, v1) >= 0);
+      Assert.assertTrue(VectorM3L.distance(c, v0, v1) >= 0L);
     }
   }
 
-  @Override @Test public void testDotProduct()
+  @Test public final void testDotProduct()
   {
-    final VectorM3L v0 = this.newVectorM3L(10, 10, 10);
-    final VectorM3L v1 = this.newVectorM3L(10, 10, 10);
+    final T v0 = this.newVectorM3L(10L, 10L, 10L);
+    final T v1 = this.newVectorM3L(10L, 10L, 10L);
 
     {
       final long p = VectorM3L.dotProduct(v0, v1);
-      Assert.assertTrue(v0.getXL() == 10);
-      Assert.assertTrue(v0.getYL() == 10);
-      Assert.assertTrue(v0.getZL() == 10);
-      Assert.assertTrue(v1.getXL() == 10);
-      Assert.assertTrue(v1.getYL() == 10);
-      Assert.assertTrue(v1.getZL() == 10);
-      Assert.assertTrue(p == 300);
+      Assert.assertEquals(10L, v0.getXL());
+      Assert.assertEquals(10L, v0.getYL());
+      Assert.assertEquals(10L, v0.getZL());
+      Assert.assertEquals(10L, v1.getXL());
+      Assert.assertEquals(10L, v1.getYL());
+      Assert.assertEquals(10L, v1.getZL());
+      Assert.assertEquals(300L, p);
+
     }
 
     {
       final long p = VectorM3L.dotProduct(v0, v0);
-      Assert.assertTrue(v0.getXL() == 10);
-      Assert.assertTrue(v0.getYL() == 10);
-      Assert.assertTrue(v0.getZL() == 10);
-      Assert.assertTrue(p == 300);
+      Assert.assertEquals(10L, v0.getXL());
+      Assert.assertEquals(10L, v0.getYL());
+      Assert.assertEquals(10L, v0.getZL());
+      Assert.assertEquals(300L, p);
     }
 
     {
       final long p = VectorM3L.dotProduct(v1, v1);
-      Assert.assertTrue(v1.getXL() == 10);
-      Assert.assertTrue(v1.getYL() == 10);
-      Assert.assertTrue(v1.getZL() == 10);
-      Assert.assertTrue(p == 300);
+      Assert.assertEquals(10L, v1.getXL());
+      Assert.assertEquals(10L, v1.getYL());
+      Assert.assertEquals(10L, v1.getZL());
+      Assert.assertEquals(300L, p);
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+  @Test public final void testDotProductPerpendicular()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long max = 1000;
-      final long x = (long) (Math.random() * max);
-      final long y = (long) (Math.random() * max);
-      final long z = (long) (Math.random() * max);
-      final VectorM3L q = this.newVectorM3L(x, y, z);
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
+      final long max = 1000L;
+      final long x = (long) (VectorM3LContract.getRandom() * (double) max);
+      final long y = (long) (VectorM3LContract.getRandom() * (double) max);
+      final long z = (long) (VectorM3LContract.getRandom() * (double) max);
+      final T q = this.newVectorM3L(x, y, z);
 
-      final double ms = VectorM3L.magnitudeSquared(q);
-      final double dp = VectorM3L.dotProduct(q, q);
+      final double ms = (double) VectorM3L.magnitudeSquared(q);
+      final double dp = (double) VectorM3L.dotProduct(q, q);
 
       System.out.println("q  : " + q);
       System.out.println("ms : " + ms);
@@ -547,19 +579,20 @@ public abstract class VectorM3LContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testDotProductSelf()
+  @Test public final void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long max = 1000;
-      final long x = (long) (Math.random() * max);
-      final long y = (long) (Math.random() * max);
-      final long z = (long) (Math.random() * max);
-      final VectorM3L q = this.newVectorM3L(x, y, z);
-      final double dp = VectorM3L.dotProduct(q, q);
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
+      final long max = 1000L;
+      final long x = (long) (VectorM3LContract.getRandom() * (double) max);
+      final long y = (long) (VectorM3LContract.getRandom() * (double) max);
+      final long z = (long) (VectorM3LContract.getRandom() * (double) max);
+      final T q = this.newVectorM3L(x, y, z);
+      final double dp = (double) VectorM3L.dotProduct(q, q);
 
       System.out.println("q  : " + q);
       System.out.println("dp : " + dp);
@@ -568,419 +601,433 @@ public abstract class VectorM3LContract extends VectorM3Contract
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  @Test public final void testDotProductSelfMagnitudeSquared()
   {
-    final VectorM3L v0 = this.newVectorM3L(10, 10, 10);
+    final T v0 = this.newVectorM3L(10L, 10L, 10L);
 
     {
       final long p = VectorM3L.dotProduct(v0, v0);
-      Assert.assertTrue(v0.getXL() == 10);
-      Assert.assertTrue(v0.getYL() == 10);
-      Assert.assertTrue(v0.getZL() == 10);
-      Assert.assertTrue(p == 300);
+      Assert.assertEquals(10L, v0.getXL());
+      Assert.assertEquals(10L, v0.getYL());
+      Assert.assertEquals(10L, v0.getZL());
+      Assert.assertEquals(300L, p);
+
     }
 
     {
       final long p = VectorM3L.magnitudeSquared(v0);
-      Assert.assertTrue(v0.getXL() == 10);
-      Assert.assertTrue(v0.getYL() == 10);
-      Assert.assertTrue(v0.getZL() == 10);
-      Assert.assertTrue(p == 300);
+      Assert.assertEquals(10L, v0.getXL());
+      Assert.assertEquals(10L, v0.getYL());
+      Assert.assertEquals(10L, v0.getZL());
+      Assert.assertEquals(300L, p);
+
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+  @Test public final void testEqualsCorrect()
   {
     {
-      final VectorM3L m0 = this.newVectorM3L();
+      final T m0 = this.newVectorM3L();
       Assert.assertTrue(m0.equals(m0));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L();
+      final T m0 = this.newVectorM3L();
       Assert.assertFalse(m0.equals(null));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L();
-      Assert.assertFalse(m0.equals(Long.valueOf(23)));
+      final T m0 = this.newVectorM3L();
+      Assert.assertFalse(m0.equals(Long.valueOf(23L)));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L();
-      final VectorM3L m1 = this.newVectorM3L();
+      final T m0 = this.newVectorM3L();
+      final T m1 = this.newVectorM3L();
       Assert.assertTrue(m0.equals(m1));
     }
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+  @Test public final void testEqualsNotEqualCorrect()
   {
-    final long x = (long) (Math.random() * 1000);
-    final long y = x + 1;
-    final long z = y + 1;
-    final long w = z + 1;
-    final long q = w + 1;
+    final long x = (long) (VectorM3LContract.getRandom() * 1000.0);
+    final long y = x + 1L;
+    final long z = y + 1L;
+    final long w = z + 1L;
+    final long q = w + 1L;
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
+      final T m0 = this.newVectorM3L(x, y, z);
       Assert.assertFalse(m0.equals(null));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      Assert.assertFalse(m0.equals(Long.valueOf(23)));
+      final T m0 = this.newVectorM3L(x, y, z);
+      Assert.assertFalse(m0.equals(Long.valueOf(23L)));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      final VectorM3L m1 = this.newVectorM3L(q, y, z);
+      final T m0 = this.newVectorM3L(x, y, z);
+      final T m1 = this.newVectorM3L(q, y, z);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      final VectorM3L m1 = this.newVectorM3L(x, q, z);
+      final T m0 = this.newVectorM3L(x, y, z);
+      final T m1 = this.newVectorM3L(x, q, z);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      final VectorM3L m1 = this.newVectorM3L(x, y, q);
+      final T m0 = this.newVectorM3L(x, y, z);
+      final T m1 = this.newVectorM3L(x, y, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      final VectorM3L m1 = this.newVectorM3L(q, q, z);
+      final T m0 = this.newVectorM3L(x, y, z);
+      final T m1 = this.newVectorM3L(q, q, z);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      final VectorM3L m1 = this.newVectorM3L(q, y, q);
+      final T m0 = this.newVectorM3L(x, y, z);
+      final T m1 = this.newVectorM3L(q, y, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      final VectorM3L m1 = this.newVectorM3L(q, y, z);
+      final T m0 = this.newVectorM3L(x, y, z);
+      final T m1 = this.newVectorM3L(q, y, z);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      final VectorM3L m1 = this.newVectorM3L(q, q, q);
+      final T m0 = this.newVectorM3L(x, y, z);
+      final T m1 = this.newVectorM3L(q, q, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      final VectorM3L m1 = this.newVectorM3L(q, q, z);
+      final T m0 = this.newVectorM3L(x, y, z);
+      final T m1 = this.newVectorM3L(q, q, z);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      final VectorM3L m1 = this.newVectorM3L(q, q, q);
+      final T m0 = this.newVectorM3L(x, y, z);
+      final T m1 = this.newVectorM3L(q, q, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      final VectorM3L m1 = this.newVectorM3L(x, q, q);
+      final T m0 = this.newVectorM3L(x, y, z);
+      final T m1 = this.newVectorM3L(x, q, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L(x, y, z);
-      final VectorM3L m1 = this.newVectorM3L(x, y, q);
+      final T m0 = this.newVectorM3L(x, y, z);
+      final T m1 = this.newVectorM3L(x, y, q);
       Assert.assertFalse(m0.equals(m1));
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+  @Test public final void testHashCodeEqualsCorrect()
   {
-    final VectorM3L m0 = this.newVectorM3L();
-    final VectorM3L m1 = this.newVectorM3L();
-    Assert.assertEquals(m0.hashCode(), m1.hashCode());
+    final T m0 = this.newVectorM3L();
+    final T m1 = this.newVectorM3L();
+    Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+  @Test public final void testHashCodeNotEqualCorrect()
   {
     {
-      final VectorM3L m0 = this.newVectorM3L();
-      final VectorM3L m1 = this.newVectorM3L();
-      m1.setXL(23);
+      final T m0 = this.newVectorM3L();
+      final T m1 = this.newVectorM3L();
+      m1.setXL(23L);
       Assert.assertFalse(m0.hashCode() == m1.hashCode());
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L();
-      final VectorM3L m1 = this.newVectorM3L();
-      m1.setYL(23);
+      final T m0 = this.newVectorM3L();
+      final T m1 = this.newVectorM3L();
+      m1.setYL(23L);
       Assert.assertFalse(m0.hashCode() == m1.hashCode());
     }
 
     {
-      final VectorM3L m0 = this.newVectorM3L();
-      final VectorM3L m1 = this.newVectorM3L();
-      m1.setZL(23);
+      final T m0 = this.newVectorM3L();
+      final T m1 = this.newVectorM3L();
+      m1.setZL(23L);
       Assert.assertFalse(m0.hashCode() == m1.hashCode());
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+  @Test public final void testInitializeReadable()
   {
-    final VectorM3L v0 = this.newVectorM3L(1, 2, 3);
-    final VectorM3L v1 = new VectorM3L(v0);
+    final T v0 = this.newVectorM3L(1L, 2L, 3L);
+    final T v1 = this.newVectorM3L(v0);
 
-    Assert.assertTrue(v0.getXL() == v1.getXL());
-    Assert.assertTrue(v0.getYL() == v1.getYL());
-    Assert.assertTrue(v0.getZL() == v1.getZL());
+    Assert.assertEquals(v1.getXL(), v0.getXL());
+    Assert.assertEquals(v1.getYL(), v0.getYL());
+    Assert.assertEquals(v1.getZL(), v0.getZL());
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+  @Test public final void testInterpolateLinearLimits()
   {
     final VectorM3L.ContextVM3L c = new VectorM3L.ContextVM3L();
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long x0 = VectorM3LContract.randomPositiveNumber();
       final long y0 = VectorM3LContract.randomPositiveNumber();
       final long z0 = VectorM3LContract.randomPositiveNumber();
-      final VectorM3L v0 = this.newVectorM3L(x0, y0, z0);
+      final T v0 = this.newVectorM3L(x0, y0, z0);
 
       final long x1 = VectorM3LContract.randomPositiveNumber();
       final long y1 = VectorM3LContract.randomPositiveNumber();
       final long z1 = VectorM3LContract.randomPositiveNumber();
-      final VectorM3L v1 = this.newVectorM3L(x1, y1, z1);
+      final T v1 = this.newVectorM3L(x1, y1, z1);
 
-      final VectorM3L vr0 = this.newVectorM3L();
-      final VectorM3L vr1 = this.newVectorM3L();
-      VectorM3L.interpolateLinear(c, v0, v1, 0, vr0);
-      VectorM3L.interpolateLinear(c, v0, v1, 1, vr1);
+      final T vr0 = this.newVectorM3L();
+      final T vr1 = this.newVectorM3L();
+      VectorM3L.interpolateLinear(c, v0, v1, 0.0, vr0);
+      VectorM3L.interpolateLinear(c, v0, v1, 1.0, vr1);
 
-      Assert.assertTrue(v0.getXL() == vr0.getXL());
-      Assert.assertTrue(v0.getYL() == vr0.getYL());
-      Assert.assertTrue(v0.getZL() == vr0.getZL());
+      Assert.assertEquals(vr0.getXL(), v0.getXL());
+      Assert.assertEquals(vr0.getYL(), v0.getYL());
+      Assert.assertEquals(vr0.getZL(), v0.getZL());
 
-      Assert.assertTrue(v1.getXL() == vr1.getXL());
-      Assert.assertTrue(v1.getYL() == vr1.getYL());
-      Assert.assertTrue(v1.getZL() == vr1.getZL());
+      Assert.assertEquals(vr1.getXL(), v1.getXL());
+      Assert.assertEquals(vr1.getYL(), v1.getYL());
+      Assert.assertEquals(vr1.getZL(), v1.getZL());
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+  @Test public final void testMagnitudeNonzero()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long x = VectorM3LContract.randomPositiveSmallNumber();
       final long y = VectorM3LContract.randomPositiveSmallNumber();
       final long z = VectorM3LContract.randomPositiveSmallNumber();
-      final VectorM3L v = this.newVectorM3L(x, y, z);
+      final T v = this.newVectorM3L(x, y, z);
 
       final long m = VectorM3L.magnitude(v);
-      Assert.assertTrue(m >= 1);
+      Assert.assertTrue(m >= 1L);
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+  @Test public final void testMagnitudeNormal()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+  @Test public final void testMagnitudeNormalizeZero()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeOne()
+  @Test public final void testMagnitudeOne()
   {
-    final VectorM3L v = this.newVectorM3L(1, 0, 0);
+    final T v = this.newVectorM3L(1L, 0L, 0L);
     final long m = VectorM3L.magnitude(v);
-    Assert.assertTrue(m == 1);
+    Assert.assertEquals(1L, m);
+
   }
 
-  @Override @Test public void testMagnitudeSimple()
+  @Test public final void testMagnitudeSimple()
   {
-    final VectorM3L v = this.newVectorM3L(8, 0, 0);
+    final T v = this.newVectorM3L(8L, 0L, 0L);
 
     {
       final long p = VectorM3L.dotProduct(v, v);
       final long q = VectorM3L.magnitudeSquared(v);
       final long r = VectorM3L.magnitude(v);
-      Assert.assertTrue(p == 64);
-      Assert.assertTrue(q == 64);
-      Assert.assertTrue(r == 8);
+      Assert.assertEquals(64L, p);
+
+      Assert.assertEquals(64L, q);
+
+      Assert.assertEquals(8L, r);
+
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+  @Test public final void testMagnitudeZero()
   {
-    final VectorM3L v = this.newVectorM3L(0, 0, 0);
+    final T v = this.newVectorM3L(0L, 0L, 0L);
     final long m = VectorM3L.magnitude(v);
-    Assert.assertTrue(m == 0);
+    Assert.assertEquals(0L, m);
+
   }
 
-  @Override @Test public void testNormalizeSimple()
+  @Test public final void testNormalizeSimple()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testNormalizeZero()
+  @Test public final void testNormalizeZero()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testOrthonormalize()
+  @Test public final void testOrthonormalize()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testOrthonormalizeMutation()
+  @Test public final void testOrthonormalizeMutation()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+  @Test public final void testProjectionPerpendicularZero()
   {
     {
-      final VectorM3L p = this.newVectorM3L(1, 0, 0);
-      final VectorM3L q = this.newVectorM3L(0, 1, 0);
-      final VectorM3L r = this.newVectorM3L();
-      final VectorM3L u = VectorM3L.projection(p, q, r);
+      final T p = this.newVectorM3L(1L, 0L, 0L);
+      final T q = this.newVectorM3L(0L, 1L, 0L);
+      final T r = this.newVectorM3L();
+      final T u = VectorM3L.projection(p, q, r);
 
       Assert.assertSame(r, u);
-      Assert.assertTrue(VectorM3L.magnitude(u) == 0);
+      Assert.assertEquals(0L, VectorM3L.magnitude(u));
     }
 
     {
-      final VectorM3L p = this.newVectorM3L(-1, 0, 0);
-      final VectorM3L q = this.newVectorM3L(0, 1, 0);
-      final VectorM3L r = this.newVectorM3L();
-      final VectorM3L u = VectorM3L.projection(p, q, r);
+      final T p = this.newVectorM3L(-1L, 0L, 0L);
+      final T q = this.newVectorM3L(0L, 1L, 0L);
+      final T r = this.newVectorM3L();
+      final T u = VectorM3L.projection(p, q, r);
 
       Assert.assertSame(r, u);
-      Assert.assertTrue(VectorM3L.magnitude(u) == 0);
+      Assert.assertEquals(0L, VectorM3L.magnitude(u));
     }
   }
 
-  @Override @Test public void testScaleMutation()
+  @Test public final void testScaleMutation()
   {
-    final VectorM3L out = this.newVectorM3L();
-    final VectorM3L v0 = this.newVectorM3L(1, 1, 1);
+    final T out = this.newVectorM3L();
+    final T v0 = this.newVectorM3L(1L, 1L, 1L);
 
-    Assert.assertTrue(out.getXL() == 0);
-    Assert.assertTrue(out.getYL() == 0);
-    Assert.assertTrue(out.getZL() == 0);
-    Assert.assertTrue(v0.getXL() == 1);
-    Assert.assertTrue(v0.getYL() == 1);
-    Assert.assertTrue(v0.getZL() == 1);
+    Assert.assertEquals(0L, out.getXL());
+    Assert.assertEquals(0L, out.getYL());
+    Assert.assertEquals(0L, out.getZL());
+    Assert.assertEquals(1L, v0.getXL());
+    Assert.assertEquals(1L, v0.getYL());
+    Assert.assertEquals(1L, v0.getZL());
 
-    final VectorM3L ov0 = VectorM3L.scale(v0, 2, out);
+    final T ov0 = VectorM3L.scale(v0, 2.0, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXL() == 2);
-    Assert.assertTrue(out.getYL() == 2);
-    Assert.assertTrue(out.getZL() == 2);
-    Assert.assertTrue(v0.getXL() == 1);
-    Assert.assertTrue(v0.getYL() == 1);
-    Assert.assertTrue(v0.getZL() == 1);
+    Assert.assertEquals(ov0, out);
+    Assert.assertSame(ov0, out);
+    Assert.assertEquals(2L, out.getXL());
+    Assert.assertEquals(2L, out.getYL());
+    Assert.assertEquals(2L, out.getZL());
+    Assert.assertEquals(1L, v0.getXL());
+    Assert.assertEquals(1L, v0.getYL());
+    Assert.assertEquals(1L, v0.getZL());
 
-    final VectorM3L ov1 = VectorM3L.scaleInPlace(v0, 2);
+    final T ov1 = VectorM3L.scaleInPlace(v0, 2L);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXL() == 2);
-    Assert.assertTrue(ov1.getYL() == 2);
-    Assert.assertTrue(ov1.getZL() == 2);
-    Assert.assertTrue(v0.getXL() == 2);
-    Assert.assertTrue(v0.getYL() == 2);
-    Assert.assertTrue(v0.getZL() == 2);
+    Assert.assertEquals(v0, ov1);
+    Assert.assertSame(v0, ov1);
+    Assert.assertEquals(2L, ov1.getXL());
+    Assert.assertEquals(2L, ov1.getYL());
+    Assert.assertEquals(2L, ov1.getZL());
+    Assert.assertEquals(2L, v0.getXL());
+    Assert.assertEquals(2L, v0.getYL());
+    Assert.assertEquals(2L, v0.getZL());
   }
 
-  @Override @Test public void testScaleOne()
+  @Test public final void testScaleOne()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long x = VectorM3LContract.randomPositiveNumber();
       final long y = VectorM3LContract.randomPositiveNumber();
       final long z = VectorM3LContract.randomPositiveNumber();
-      final VectorM3L v = this.newVectorM3L(x, y, z);
+      final T v = this.newVectorM3L(x, y, z);
 
-      final VectorM3L vr = this.newVectorM3L();
+      final T vr = this.newVectorM3L();
 
-      VectorM3L.scale(v, 1, vr);
+      VectorM3L.scale(v, 1.0, vr);
 
-      Assert.assertTrue(v.getXL() == vr.getXL());
-      Assert.assertTrue(v.getYL() == vr.getYL());
-      Assert.assertTrue(v.getZL() == vr.getZL());
+      Assert.assertEquals(vr.getXL(), v.getXL());
+      Assert.assertEquals(vr.getYL(), v.getYL());
+      Assert.assertEquals(vr.getZL(), v.getZL());
 
       {
         final long orig_x = v.getXL();
         final long orig_y = v.getYL();
         final long orig_z = v.getZL();
 
-        VectorM3L.scaleInPlace(v, 1);
+        VectorM3L.scaleInPlace(v, 1L);
 
-        Assert.assertTrue(v.getXL() == orig_x);
-        Assert.assertTrue(v.getYL() == orig_y);
-        Assert.assertTrue(v.getZL() == orig_z);
+        Assert.assertEquals(orig_x, v.getXL());
+        Assert.assertEquals(orig_y, v.getYL());
+        Assert.assertEquals(orig_z, v.getZL());
       }
     }
   }
 
-  @Override @Test public void testScaleZero()
+  @Test public final void testScaleZero()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long x = VectorM3LContract.randomPositiveNumber();
       final long y = VectorM3LContract.randomPositiveNumber();
       final long z = VectorM3LContract.randomPositiveNumber();
-      final VectorM3L v = this.newVectorM3L(x, y, z);
+      final T v = this.newVectorM3L(x, y, z);
 
-      final VectorM3L vr = this.newVectorM3L();
+      final T vr = this.newVectorM3L();
 
-      VectorM3L.scale(v, 0, vr);
+      VectorM3L.scale(v, 0.0, vr);
 
-      Assert.assertTrue(vr.getXL() == 0);
-      Assert.assertTrue(vr.getYL() == 0);
-      Assert.assertTrue(vr.getZL() == 0);
+      Assert.assertEquals(0L, vr.getXL());
+      Assert.assertEquals(0L, vr.getYL());
+      Assert.assertEquals(0L, vr.getZL());
 
       {
-        VectorM3L.scaleInPlace(v, 0);
+        VectorM3L.scaleInPlace(v, 0L);
 
-        Assert.assertTrue(v.getXL() == 0);
-        Assert.assertTrue(v.getYL() == 0);
-        Assert.assertTrue(v.getZL() == 0);
+        Assert.assertEquals(0L, v.getXL());
+        Assert.assertEquals(0L, v.getYL());
+        Assert.assertEquals(0L, v.getZL());
       }
     }
   }
 
-  @Override @Test public void testString()
+  @Test public final void testString()
   {
-    final VectorM3L v = this.newVectorM3L(1, 2, 3);
-    Assert.assertTrue(v.toString().equals("[VectorM3L 1 2 3]"));
+    final T v = this.newVectorM3L(1L, 2L, 3L);
+    Assert.assertTrue(v.toString().endsWith("1 2 3]"));
   }
 
-  @Override @Test public void testSubtract()
+  @Test public final void testSubtract()
   {
-    for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0L; index
+                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+         ++index) {
       final long x0 = VectorM3LContract.randomPositiveNumber();
       final long y0 = VectorM3LContract.randomPositiveNumber();
       final long z0 = VectorM3LContract.randomPositiveNumber();
-      final VectorM3L v0 = this.newVectorM3L(x0, y0, z0);
+      final T v0 = this.newVectorM3L(x0, y0, z0);
 
       final long x1 = VectorM3LContract.randomPositiveNumber();
       final long y1 = VectorM3LContract.randomPositiveNumber();
       final long z1 = VectorM3LContract.randomPositiveNumber();
-      final VectorM3L v1 = this.newVectorM3L(x1, y1, z1);
+      final T v1 = this.newVectorM3L(x1, y1, z1);
 
-      final VectorM3L vr0 = this.newVectorM3L();
+      final T vr0 = this.newVectorM3L();
       VectorM3L.subtract(v0, v1, vr0);
 
-      Assert.assertTrue(vr0.getXL() == (v0.getXL() - v1.getXL()));
-      Assert.assertTrue(vr0.getYL() == (v0.getYL() - v1.getYL()));
-      Assert.assertTrue(vr0.getZL() == (v0.getZL() - v1.getZL()));
+      Assert.assertEquals((v0.getXL() - v1.getXL()), vr0.getXL());
+      Assert.assertEquals((v0.getYL() - v1.getYL()), vr0.getYL());
+      Assert.assertEquals((v0.getZL() - v1.getZL()), vr0.getZL());
 
       {
         final long orig_x = v0.getXL();
@@ -988,55 +1035,56 @@ public abstract class VectorM3LContract extends VectorM3Contract
         final long orig_z = v0.getZL();
         VectorM3L.subtractInPlace(v0, v1);
 
-        Assert.assertTrue(v0.getXL() == (orig_x - v1.getXL()));
-        Assert.assertTrue(v0.getYL() == (orig_y - v1.getYL()));
-        Assert.assertTrue(v0.getZL() == (orig_z - v1.getZL()));
+        Assert.assertEquals((orig_x - v1.getXL()), v0.getXL());
+        Assert.assertEquals((orig_y - v1.getYL()), v0.getYL());
+        Assert.assertEquals((orig_z - v1.getZL()), v0.getZL());
       }
     }
   }
 
-  @Override @Test public void testSubtractMutation()
+  @Test public final void testSubtractMutation()
   {
-    final VectorM3L out = this.newVectorM3L();
-    final VectorM3L v0 = this.newVectorM3L(1, 1, 1);
-    final VectorM3L v1 = this.newVectorM3L(1, 1, 1);
+    final T out = this.newVectorM3L();
+    final T v0 = this.newVectorM3L(1L, 1L, 1L);
+    final T v1 = this.newVectorM3L(1L, 1L, 1L);
 
-    Assert.assertTrue(out.getXL() == 0);
-    Assert.assertTrue(out.getYL() == 0);
-    Assert.assertTrue(out.getZL() == 0);
-    Assert.assertTrue(v0.getXL() == 1);
-    Assert.assertTrue(v0.getYL() == 1);
-    Assert.assertTrue(v0.getZL() == 1);
-    Assert.assertTrue(v1.getXL() == 1);
-    Assert.assertTrue(v1.getYL() == 1);
-    Assert.assertTrue(v1.getZL() == 1);
+    Assert.assertEquals(0L, out.getXL());
+    Assert.assertEquals(0L, out.getYL());
+    Assert.assertEquals(0L, out.getZL());
+    Assert.assertEquals(1L, v0.getXL());
+    Assert.assertEquals(1L, v0.getYL());
+    Assert.assertEquals(1L, v0.getZL());
+    Assert.assertEquals(1L, v1.getXL());
+    Assert.assertEquals(1L, v1.getYL());
+    Assert.assertEquals(1L, v1.getZL());
 
-    final VectorM3L ov0 = VectorM3L.subtract(v0, v1, out);
+    final T ov0 = VectorM3L.subtract(v0, v1, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXL() == 0);
-    Assert.assertTrue(out.getYL() == 0);
-    Assert.assertTrue(out.getZL() == 0);
-    Assert.assertTrue(v0.getXL() == 1);
-    Assert.assertTrue(v0.getYL() == 1);
-    Assert.assertTrue(v0.getZL() == 1);
-    Assert.assertTrue(v1.getXL() == 1);
-    Assert.assertTrue(v1.getYL() == 1);
-    Assert.assertTrue(v1.getZL() == 1);
+    Assert.assertEquals(ov0, out);
+    Assert.assertSame(ov0, out);
+    Assert.assertEquals(0L, out.getXL());
+    Assert.assertEquals(0L, out.getYL());
+    Assert.assertEquals(0L, out.getZL());
+    Assert.assertEquals(1L, v0.getXL());
+    Assert.assertEquals(1L, v0.getYL());
+    Assert.assertEquals(1L, v0.getZL());
+    Assert.assertEquals(1L, v1.getXL());
+    Assert.assertEquals(1L, v1.getYL());
+    Assert.assertEquals(1L, v1.getZL());
 
-    final VectorM3L ov1 = VectorM3L.subtractInPlace(v0, v1);
+    final T ov1 = VectorM3L.subtractInPlace(v0, v1);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXL() == 0);
-    Assert.assertTrue(ov1.getYL() == 0);
-    Assert.assertTrue(ov1.getZL() == 0);
-    Assert.assertTrue(v0.getXL() == 0);
-    Assert.assertTrue(v0.getYL() == 0);
-    Assert.assertTrue(v0.getZL() == 0);
-    Assert.assertTrue(v1.getXL() == 1);
-    Assert.assertTrue(v1.getYL() == 1);
-    Assert.assertTrue(v1.getZL() == 1);
+    Assert.assertEquals(v0, ov1);
+    Assert.assertSame(v0, ov1);
+    Assert.assertEquals(0L, ov1.getXL());
+    Assert.assertEquals(0L, ov1.getYL());
+    Assert.assertEquals(0L, ov1.getZL());
+    Assert.assertEquals(0L, v0.getXL());
+    Assert.assertEquals(0L, v0.getYL());
+    Assert.assertEquals(0L, v0.getZL());
+    Assert.assertEquals(1L, v1.getXL());
+    Assert.assertEquals(1L, v1.getYL());
+    Assert.assertEquals(1L, v1.getZL());
   }
 
-  protected abstract VectorM3L newVectorM3L();
 }

@@ -29,8 +29,7 @@ import com.io7m.jnull.Nullable;
  * without explicit synchronization. </p>
  */
 
-public final class VectorM3D
-  implements VectorReadable3DType, VectorWritable3DType
+public final class VectorM3D implements Vector3DType
 {
   private double x;
   private double y;

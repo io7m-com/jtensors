@@ -35,8 +35,7 @@ import com.io7m.jtensors.VectorReadable3LType;
  * @since 7.0.0
  */
 
-public final class PVectorM3L<T>
-  implements PVectorReadable3LType<T>, PVectorWritable3LType<T>
+public final class PVectorM3L<T> implements PVector3LType<T>
 {
   private long x;
   private long y;

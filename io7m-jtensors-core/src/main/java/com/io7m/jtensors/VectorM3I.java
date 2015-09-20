@@ -27,8 +27,7 @@ import com.io7m.jnull.Nullable;
  * without explicit synchronization. </p>
  */
 
-public final class VectorM3I
-  implements VectorReadable3IType, VectorWritable3IType
+public final class VectorM3I implements Vector3IType
 {
   private int x;
   private int y;

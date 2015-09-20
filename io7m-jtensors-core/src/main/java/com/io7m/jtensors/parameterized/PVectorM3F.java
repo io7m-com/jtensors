@@ -36,8 +36,7 @@ import com.io7m.jtensors.VectorReadable3FType;
  * @since 7.0.0
  */
 
-public final class PVectorM3F<T>
-  implements PVectorReadable3FType<T>, PVectorWritable3FType<T>
+public final class PVectorM3F<T> implements PVector3FType<T>
 {
   private float x;
   private float y;

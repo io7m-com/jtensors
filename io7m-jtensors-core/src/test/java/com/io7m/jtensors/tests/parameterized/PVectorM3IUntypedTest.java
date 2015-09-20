@@ -17,9 +17,10 @@
 package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.parameterized.PVectorM3I;
+import com.io7m.jtensors.tests.VectorM3IContract;
 
-public final class PVectorM3ITest<T>
-  extends PVectorM3IContract<T, PVectorM3I<T>>
+public final class PVectorM3IUntypedTest<T>
+  extends VectorM3IContract<PVectorM3I<T>>
 {
   @Override protected PVectorM3I<T> newVectorM3I(
     final int x,

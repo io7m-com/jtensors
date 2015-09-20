@@ -29,8 +29,7 @@ import com.io7m.jnull.Nullable;
  * @since 5.3.0
  */
 
-public final class VectorM3L
-  implements VectorReadable3LType, VectorWritable3LType
+public final class VectorM3L implements Vector3LType
 {
   private long x;
   private long y;

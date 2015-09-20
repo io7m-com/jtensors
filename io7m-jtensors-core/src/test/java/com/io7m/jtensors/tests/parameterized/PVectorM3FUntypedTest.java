@@ -16,26 +16,27 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import com.io7m.jtensors.parameterized.PVectorM3I;
+import com.io7m.jtensors.parameterized.PVectorM3F;
+import com.io7m.jtensors.tests.VectorM3FContract;
 
-public final class PVectorM3ITest<T>
-  extends PVectorM3IContract<T, PVectorM3I<T>>
+public final class PVectorM3FUntypedTest<T>
+  extends VectorM3FContract<PVectorM3F<T>>
 {
-  @Override protected PVectorM3I<T> newVectorM3I(
-    final int x,
-    final int y,
-    final int z)
+  @Override protected PVectorM3F<T> newVectorM3F(final PVectorM3F<T> v0)
   {
-    return new PVectorM3I<T>(x, y, z);
+    return new PVectorM3F<T>(v0);
   }
 
-  @Override protected PVectorM3I<T> newVectorM3I()
+  @Override protected PVectorM3F<T> newVectorM3F()
   {
-    return new PVectorM3I<T>();
+    return new PVectorM3F<T>();
   }
 
-  @Override protected PVectorM3I<T> newVectorM3I(final PVectorM3I<T> v)
+  @Override protected PVectorM3F<T> newVectorM3F(
+    final float x,
+    final float y,
+    final float z)
   {
-    return new PVectorM3I<T>(v);
+    return new PVectorM3F<T>(x, y, z);
   }
 }

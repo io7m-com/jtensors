@@ -28,8 +28,7 @@ import com.io7m.jnull.Nullable;
  * without explicit synchronization. </p>
  */
 
-public final class VectorM3F
-  implements VectorReadable3FType, VectorWritable3FType
+public final class VectorM3F implements Vector3FType
 {
   private float x;
   private float y;

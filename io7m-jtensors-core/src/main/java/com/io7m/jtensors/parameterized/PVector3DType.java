@@ -14,28 +14,21 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests.parameterized;
+package com.io7m.jtensors.parameterized;
 
-import com.io7m.jtensors.parameterized.PVectorM3I;
+import com.io7m.jtensors.Vector3DType;
 
-public final class PVectorM3ITest<T>
-  extends PVectorM3IContract<T, PVectorM3I<T>>
+/**
+ * <p>The type of three-element vectors that are both readable and writable, and
+ * have {@code double} elements</p>
+ *
+ * @param <T> A phantom type parameter
+ *
+ * @since 7.0.0
+ */
+
+public interface PVector3DType<T>
+  extends PVectorReadable3DType<T>, PVectorWritable3DType<T>, Vector3DType
 {
-  @Override protected PVectorM3I<T> newVectorM3I(
-    final int x,
-    final int y,
-    final int z)
-  {
-    return new PVectorM3I<T>(x, y, z);
-  }
-
-  @Override protected PVectorM3I<T> newVectorM3I()
-  {
-    return new PVectorM3I<T>();
-  }
-
-  @Override protected PVectorM3I<T> newVectorM3I(final PVectorM3I<T> v)
-  {
-    return new PVectorM3I<T>(v);
-  }
+  // No extra functions
 }

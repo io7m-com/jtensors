@@ -18,9 +18,14 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jtensors.VectorM3D;
 
-public final class VectorM3DTest extends VectorM3DContract
+public final class VectorM3DTest extends VectorM3DContract<VectorM3D>
 {
-  protected VectorM3D newVectorM3D(
+  @Override protected VectorM3D newVectorM3D(final VectorM3D v0)
+  {
+    return new VectorM3D(v0);
+  }
+
+  @Override protected VectorM3D newVectorM3D(
     final double x,
     final double y,
     final double z)
@@ -28,7 +33,7 @@ public final class VectorM3DTest extends VectorM3DContract
     return new VectorM3D(x, y, z);
   }
 
-  protected VectorM3D newVectorM3D()
+  @Override protected VectorM3D newVectorM3D()
   {
     return new VectorM3D();
   }
