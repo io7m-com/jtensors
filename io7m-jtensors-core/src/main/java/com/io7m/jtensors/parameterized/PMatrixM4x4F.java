@@ -497,34 +497,6 @@ import java.nio.FloatBuffer;
 
   /**
    * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
-   * to {@code m}. The function returns {@code Some(out)} iff it was possible to
-   * invert the matrix, and {@code None} otherwise. It is not possible to invert
-   * a matrix that has a determinant of {@code 0}. The function uses
-   * preallocated storage in {@code context} to avoid allocating memory. If the
-   * function returns {@code None}, {@code m} is untouched.
-   *
-   * @param context Preallocated storage
-   * @param m       The input matrix
-   * @param <T0>    A phantom type parameter
-   * @param <T1>    A phantom type parameter
-   * @param <MIN>   The precise type of input matrix
-   * @param <MOUT>  The precise type of output matrix
-   *
-   * @return {@code true} iff the matrix was invertible
-   */
-
-  public static <T0, T1, MIN extends PMatrixWritable4x4FType<T0, T1> &
-    PMatrixReadable4x4FType<T0, T1>, MOUT extends PMatrixWritable4x4FType<T1,
-    T0> & PMatrixReadable4x4FType<T1, T0>> boolean invertInPlace(
-    final ContextPM4F context,
-    final MIN m)
-  {
-    final PMatrixM4x4F<T1, T0> mt = (PMatrixM4x4F<T1, T0>) m;
-    return PMatrixM4x4F.invert(context, m, mt);
-  }
-
-  /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
    * to {@code out}. The function returns {@code Some(out)} iff it was possible
    * to invert the matrix, and {@code None} otherwise. It is not possible to
    * invert a matrix that has a determinant of {@code 0}. The function uses

@@ -214,35 +214,6 @@ import java.nio.FloatBuffer;
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
-   * to {@code m}. The function returns {@code Some(m)} iff it was possible to
-   * invert the matrix, and {@code None} otherwise. It is not possible to invert
-   * a matrix that has a determinant of {@code 0}. If the function returns
-   * {@code None}, {@code m} is untouched.
-   *
-   * @param context Preallocated storage
-   * @param m       The input matrix
-   * @param <T0>    A phantom type parameter
-   * @param <T1>    A phantom type parameter
-   * @param <MIN>   The precise type of input matrix
-   * @param <MOUT>  The precise type of output matrix
-   *
-   * @return {@code true} iff the matrix was invertible
-   *
-   * @see MatrixM3x3F#determinant(com.io7m.jtensors.MatrixReadable3x3FType)
-   */
-
-  public static <T0, T1, MIN extends PMatrixWritable3x3FType<T0, T1> &
-    PMatrixReadable3x3FType<T0, T1>, MOUT extends PMatrixWritable3x3FType<T1,
-    T0> & PMatrixReadable3x3FType<T1, T0>> boolean invertInPlace(
-    final ContextPM3F context,
-    final MIN m)
-  {
-    final PMatrixM3x3F<T1, T0> mt = (PMatrixM3x3F<T1, T0>) m;
-    return  PMatrixM3x3F.invert(context, m, mt);
-  }
-
-  /**
    * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
    * result to {@code out}.
    *

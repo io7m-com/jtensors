@@ -323,31 +323,6 @@ public abstract class PMatrix3x3FContract<T0, T1, T2,
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(m1);
     }
-
-    {
-      final boolean r = PMatrixM3x3F.invertInPlace(s, m1);
-      Assert.assertTrue(r);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-
-      Assert.assertEquals(1.0, (double) m1.getRowColumnF(0, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 2), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 0), 0.0);
-      Assert.assertEquals(1.0, (double) m1.getRowColumnF(1, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 2), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 1), 0.0);
-      Assert.assertEquals(1.0, (double) m1.getRowColumnF(2, 2), 0.0);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-    }
   }
 
   @Test public final void testInvertSimpleNF()
@@ -392,31 +367,6 @@ public abstract class PMatrix3x3FContract<T0, T1, T2,
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(m1);
     }
-
-    {
-      final boolean r = PMatrixM3x3F.invertInPlace(c, m1);
-      Assert.assertTrue(r);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-
-      Assert.assertEquals(2.0, (double) m1.getRowColumnF(0, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 2), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 0), 0.0);
-      Assert.assertEquals(2.0, (double) m1.getRowColumnF(1, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 2), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 1), 0.0);
-      Assert.assertEquals(2.0, (double) m1.getRowColumnF(2, 2), 0.0);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-    }
   }
 
   @Test public final void testInvertZeroNF()
@@ -429,11 +379,6 @@ public abstract class PMatrix3x3FContract<T0, T1, T2,
 
     {
       final boolean r = PMatrixM3x3F.invert(c, m0, m1);
-      Assert.assertFalse(r);
-    }
-
-    {
-      final boolean r = PMatrixM3x3F.invertInPlace(c, m0);
       Assert.assertFalse(r);
     }
   }

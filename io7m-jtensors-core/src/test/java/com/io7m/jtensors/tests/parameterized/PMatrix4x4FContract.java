@@ -292,39 +292,6 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(m1);
     }
-    
-    {
-      final boolean r = PMatrixM4x4F.invertInPlace(c, m1);
-      Assert.assertTrue(r);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-
-      Assert.assertEquals(1.0, (double) m1.getRowColumnF(0, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 0), 0.0);
-      Assert.assertEquals(1.0, (double) m1.getRowColumnF(1, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 1), 0.0);
-      Assert.assertEquals(1.0, (double) m1.getRowColumnF(2, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 2), 0.0);
-      Assert.assertEquals(1.0, (double) m1.getRowColumnF(3, 3), 0.0);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-    }
   }
 
   @Test public final void testInvertIdentityContextEquivalent()
@@ -335,39 +302,6 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
 
     {
       final boolean r = PMatrixM4x4F.invert(context, m0, m1);
-      Assert.assertTrue(r);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-
-      Assert.assertEquals(1.0, (double) m1.getRowColumnF(0, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 0), 0.0);
-      Assert.assertEquals(1.0, (double) m1.getRowColumnF(1, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 1), 0.0);
-      Assert.assertEquals(1.0, (double) m1.getRowColumnF(2, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 2), 0.0);
-      Assert.assertEquals(1.0, (double) m1.getRowColumnF(3, 3), 0.0);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-    }
-
-    {
-      final boolean r = PMatrixM4x4F.invertInPlace(context, m1);
       Assert.assertTrue(r);
 
       this.checkDirectBufferInvariants(m0);
@@ -453,39 +387,6 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 1), 0.0);
       Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 2), 0.0);
       Assert.assertEquals(0.5, (double) m1.getRowColumnF(3, 3), 0.0);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-    }
-
-    {
-      final boolean r = PMatrixM4x4F.invertInPlace(c, m1);
-      Assert.assertTrue(r);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-
-      Assert.assertEquals(2.0, (double) m1.getRowColumnF(0, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 0), 0.0);
-      Assert.assertEquals(2.0, (double) m1.getRowColumnF(1, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 1), 0.0);
-      Assert.assertEquals(2.0, (double) m1.getRowColumnF(2, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 2), 0.0);
-      Assert.assertEquals(2.0, (double) m1.getRowColumnF(3, 3), 0.0);
 
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
@@ -594,78 +495,6 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(m1);
     }
-
-    {
-      final boolean r = PMatrixM4x4F.invertInPlace(c, m1);
-      Assert.assertTrue(r);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-
-      System.out.println("m0 : ");
-      System.out.println(m0);
-      System.out.println("m1 : ");
-      System.out.println(m1);
-      System.out.println("rm : ");
-      System.out.println(m1);
-
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(0, 0), 1.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(0, 1), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(0, 2), 5.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(0, 3), 0.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(1, 0), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(1, 1), 2.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(1, 2), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(1, 3), 11.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(2, 0), 7.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(2, 1), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(2, 2), 3.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(2, 3), 0.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(3, 0), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(3, 1), 13.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(3, 2), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(3, 3), 4.0);
-      Assert.assertTrue(eq);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-    }
   }
 
   @Test public final void testInvertSimple2ContextEquivalent()
@@ -762,71 +591,6 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(m1);
     }
-
-    {
-      final boolean r = PMatrixM4x4F.invertInPlace(context, m1);
-      Assert.assertTrue(r);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(0, 0), 1.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(0, 1), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(0, 2), 5.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(0, 3), 0.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(1, 0), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(1, 1), 2.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(1, 2), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(1, 3), 11.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(2, 0), 7.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(2, 1), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(2, 2), 3.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(2, 3), 0.0);
-      Assert.assertTrue(eq);
-
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(3, 0), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(3, 1), 13.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(3, 2), 0.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(
-        context_d, (double) m1.getRowColumnF(3, 3), 4.0);
-      Assert.assertTrue(eq);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-    }
   }
 
   @Test public final void testInvertSimpleContextEquivalent()
@@ -887,39 +651,6 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(m1);
     }
-
-    {
-      final boolean r = PMatrixM4x4F.invertInPlace(context, m1);
-      Assert.assertTrue(r);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-
-      Assert.assertEquals(2.0, (double) m1.getRowColumnF(0, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 0), 0.0);
-      Assert.assertEquals(2.0, (double) m1.getRowColumnF(1, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(1, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 1), 0.0);
-      Assert.assertEquals(2.0, (double) m1.getRowColumnF(2, 2), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(2, 3), 0.0);
-
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 0), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 1), 0.0);
-      Assert.assertEquals(0.0, (double) m1.getRowColumnF(3, 2), 0.0);
-      Assert.assertEquals(2.0, (double) m1.getRowColumnF(3, 3), 0.0);
-
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
-    }
   }
 
   @Test public final void testInvertZero()
@@ -934,11 +665,6 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       final boolean r = PMatrixM4x4F.invert(c, m0, m1);
       Assert.assertFalse(r);
     }
-
-    {
-      final boolean r = PMatrixM4x4F.invertInPlace(c, m0);
-      Assert.assertFalse(r);
-    }
   }
 
   @Test public final void testInvertZeroContextEquivalent()
@@ -951,13 +677,6 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
 
     {
       final boolean r = PMatrixM4x4F.invert(context, m0, m1);
-      Assert.assertFalse(r);
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-    }
-
-    {
-      final boolean r = PMatrixM4x4F.invertInPlace(context, m0);
       Assert.assertFalse(r);
       this.checkDirectBufferInvariants(m0);
       this.checkDirectBufferInvariants(m1);
