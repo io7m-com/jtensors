@@ -14,30 +14,16 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests.parameterized;
+package com.io7m.jtensors;
 
-import com.io7m.jtensors.parameterized.PVectorM4D;
+/**
+ * <p>The type of four-element vectors that are both readable and writable, and
+ * have {@code float} elements</p>
+ *
+ * @since 7.0.0
+ */
 
-public final class PVectorM4DTest<T>
-  extends PVectorM4DContract<T, PVectorM4D<T>>
+public interface Vector4FType extends VectorReadable4FType, VectorWritable4FType
 {
-
-  @Override protected PVectorM4D<T> newVectorM4D()
-  {
-    return new PVectorM4D<T>();
-  }
-
-  @Override protected PVectorM4D<T> newVectorM4DFrom(final PVectorM4D<T> v)
-  {
-    return new PVectorM4D<T>(v);
-  }
-
-  @Override protected PVectorM4D<T> newVectorM4D(
-    final double x,
-    final double y,
-    final double z,
-    final double w)
-  {
-    return new PVectorM4D<T>(x, y, z, w);
-  }
+  // No extra functions
 }

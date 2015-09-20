@@ -16,28 +16,28 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import com.io7m.jtensors.parameterized.PVectorM4D;
+import com.io7m.jtensors.parameterized.PVectorM4F;
+import com.io7m.jtensors.tests.VectorM4FContract;
 
-public final class PVectorM4DTest<T>
-  extends PVectorM4DContract<T, PVectorM4D<T>>
+public final class PVectorM4FUntypedTest<T>
+  extends VectorM4FContract<PVectorM4F<T>>
 {
-
-  @Override protected PVectorM4D<T> newVectorM4D()
+  @Override protected PVectorM4F<T> newVectorM4F(
+    final float x,
+    final float y,
+    final float z,
+    final float w)
   {
-    return new PVectorM4D<T>();
+    return new PVectorM4F<T>(x, y, z, w);
   }
 
-  @Override protected PVectorM4D<T> newVectorM4DFrom(final PVectorM4D<T> v)
+  @Override protected PVectorM4F<T> newVectorM4FFrom(final PVectorM4F<T> v)
   {
-    return new PVectorM4D<T>(v);
+    return new PVectorM4F<T>(v);
   }
 
-  @Override protected PVectorM4D<T> newVectorM4D(
-    final double x,
-    final double y,
-    final double z,
-    final double w)
+  @Override protected PVectorM4F<T> newVectorM4F()
   {
-    return new PVectorM4D<T>(x, y, z, w);
+    return new PVectorM4F<T>();
   }
 }

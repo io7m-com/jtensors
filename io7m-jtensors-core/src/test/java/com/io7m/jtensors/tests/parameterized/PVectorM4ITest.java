@@ -18,19 +18,25 @@ package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.parameterized.PVectorM4I;
 
-public final class PVectorM4ITest<U> extends PVectorM4IContract<U>
+public final class PVectorM4ITest<T>
+  extends PVectorM4IContract<T, PVectorM4I<T>>
 {
-  protected <T> PVectorM4I<T> newVectorM4I()
-  {
-    return new PVectorM4I<T>();
-  }
-
-  protected <T> PVectorM4I<T> newVectorM4I(
+  @Override protected PVectorM4I<T> newVectorM4I(
     final int x,
     final int y,
     final int z,
     final int w)
   {
     return new PVectorM4I<T>(x, y, z, w);
+  }
+
+  @Override protected PVectorM4I<T> newVectorM4I()
+  {
+    return new PVectorM4I<T>();
+  }
+
+  @Override protected PVectorM4I<T> newVectorM4IFrom(final PVectorM4I<T> v)
+  {
+    return new PVectorM4I<T>(v);
   }
 }

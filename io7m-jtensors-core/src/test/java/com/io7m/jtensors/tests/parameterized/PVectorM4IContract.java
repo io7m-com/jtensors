@@ -17,93 +17,98 @@
 package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jequality.AlmostEqualDouble;
+import com.io7m.jtensors.parameterized.PVector4IType;
 import com.io7m.jtensors.parameterized.PVectorM4I;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
 
-public abstract class PVectorM4IContract<T> extends PVectorM4Contract
+public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
 {
   public static int randomNegativeNumber()
   {
-    return (int) (Math.random() * Integer.MIN_VALUE);
+    return (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
   }
 
   public static int randomPositiveNumber()
   {
-    return (int) (Math.random() * Integer.MAX_VALUE);
+    return (int) (PVectorM4IContract.getRandom() * (double) Integer.MAX_VALUE);
   }
 
   public static int randomPositiveSmallNumber()
   {
-    return (int) (Math.random() * (1 << 14));
+    return (int) (PVectorM4IContract.getRandom() * (double) (1 << 14));
   }
 
-  @Override @Test public void testAbsolute()
-  {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = (int) (Math.random() * Integer.MIN_VALUE);
-      final int y = (int) (Math.random() * Integer.MIN_VALUE);
-      final int z = (int) (Math.random() * Integer.MIN_VALUE);
-      final int w = (int) (Math.random() * Integer.MIN_VALUE);
-      final PVectorM4I<T> v = this.newVectorM4I(x, y, z, w);
-
-      final PVectorM4I<T> vr = this.newVectorM4I();
-      PVectorM4I.absolute(v, vr);
-
-      Assert.assertEquals(Math.abs(v.getXI()), vr.getXI());
-      Assert.assertEquals(Math.abs(v.getYI()), vr.getYI());
-      Assert.assertEquals(Math.abs(v.getZI()), vr.getZI());
-      Assert.assertEquals(Math.abs(v.getWI()), vr.getWI());
-    }
-  }
-
-  protected abstract <T> PVectorM4I<T> newVectorM4I(
+  protected abstract V newVectorM4I(
     final int x,
     final int y,
     final int z,
     final int w);
 
-  @Override @Test public void testAbsoluteMutation()
+  protected abstract V newVectorM4I();
+
+  protected abstract V newVectorM4IFrom(V v);
+
+  @Test public final void testAbsolute()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = (int) (Math.random() * Integer.MIN_VALUE);
-      final int y = (int) (Math.random() * Integer.MIN_VALUE);
-      final int z = (int) (Math.random() * Integer.MIN_VALUE);
-      final int w = (int) (Math.random() * Integer.MIN_VALUE);
-      final PVectorM4I<T> v = this.newVectorM4I(x, y, z, w);
+      final int x = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int y = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int z = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int w = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final V v = this.newVectorM4I(x, y, z, w);
 
-      PVectorM4I.absoluteInPlace(v);
+      final V vr = this.newVectorM4I();
+      PVectorM4I.absolute(v, vr);
 
-      Assert.assertEquals(v.getXI(), Math.abs(x));
-      Assert.assertEquals(v.getYI(), Math.abs(y));
-      Assert.assertEquals(v.getZI(), Math.abs(z));
-      Assert.assertEquals(v.getWI(), Math.abs(w));
+      Assert.assertEquals((long) Math.abs(v.getXI()), (long) vr.getXI());
+      Assert.assertEquals((long) Math.abs(v.getYI()), (long) vr.getYI());
+      Assert.assertEquals((long) Math.abs(v.getZI()), (long) vr.getZI());
+      Assert.assertEquals((long) Math.abs(v.getWI()), (long) vr.getWI());
     }
   }
 
-  @Override @Test public void testAdd()
+  @Test public final void testAbsoluteMutation()
+  {
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final int x = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int y = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int z = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int w = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final V v = this.newVectorM4I(x, y, z, w);
+
+      PVectorM4I.absoluteInPlace(v);
+
+      Assert.assertEquals((long) v.getXI(), (long) Math.abs(x));
+      Assert.assertEquals((long) v.getYI(), (long) Math.abs(y));
+      Assert.assertEquals((long) v.getZI(), (long) Math.abs(z));
+      Assert.assertEquals((long) v.getWI(), (long) Math.abs(w));
+    }
+  }
+
+  @Test public final void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = PVectorM4IContract.randomPositiveSmallNumber();
       final int y0 = PVectorM4IContract.randomPositiveSmallNumber();
       final int z0 = PVectorM4IContract.randomPositiveSmallNumber();
       final int w0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final PVectorM4I<T> v0 = this.newVectorM4I(x0, y0, z0, w0);
+      final V v0 = this.newVectorM4I(x0, y0, z0, w0);
 
       final int x1 = PVectorM4IContract.randomPositiveSmallNumber();
       final int y1 = PVectorM4IContract.randomPositiveSmallNumber();
       final int z1 = PVectorM4IContract.randomPositiveSmallNumber();
       final int w1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final PVectorM4I<T> v1 = this.newVectorM4I(x1, y1, z1, w1);
+      final V v1 = this.newVectorM4I(x1, y1, z1, w1);
 
-      final PVectorM4I<T> vr0 = this.newVectorM4I();
+      final V vr0 = this.newVectorM4I();
       PVectorM4I.add(v0, v1, vr0);
 
-      Assert.assertTrue(vr0.getXI() == (v0.getXI() + v1.getXI()));
-      Assert.assertTrue(vr0.getYI() == (v0.getYI() + v1.getYI()));
-      Assert.assertTrue(vr0.getZI() == (v0.getZI() + v1.getZI()));
-      Assert.assertTrue(vr0.getWI() == (v0.getWI() + v1.getWI()));
+      Assert.assertEquals((long) (v0.getXI() + v1.getXI()), (long) vr0.getXI());
+      Assert.assertEquals((long) (v0.getYI() + v1.getYI()), (long) vr0.getYI());
+      Assert.assertEquals((long) (v0.getZI() + v1.getZI()), (long) vr0.getZI());
+      Assert.assertEquals((long) (v0.getWI() + v1.getWI()), (long) vr0.getWI());
 
       {
         final int orig_x = v0.getXI();
@@ -112,155 +117,169 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
         final int orig_w = v0.getWI();
         PVectorM4I.addInPlace(v0, v1);
 
-        Assert.assertTrue(v0.getXI() == (orig_x + v1.getXI()));
-        Assert.assertTrue(v0.getYI() == (orig_y + v1.getYI()));
-        Assert.assertTrue(v0.getZI() == (orig_z + v1.getZI()));
-        Assert.assertTrue(v0.getWI() == (orig_w + v1.getWI()));
+        Assert.assertEquals((long) (orig_x + v1.getXI()), (long) v0.getXI());
+        Assert.assertEquals((long) (orig_y + v1.getYI()), (long) v0.getYI());
+        Assert.assertEquals((long) (orig_z + v1.getZI()), (long) v0.getZI());
+        Assert.assertEquals((long) (orig_w + v1.getWI()), (long) v0.getWI());
       }
     }
   }
 
-  @Override @Test public void testAddMutation()
+  @Test public final void testAddMutation()
   {
-    final PVectorM4I<T> out = this.newVectorM4I();
-    final PVectorM4I<T> v0 = this.newVectorM4I(1, 1, 1, 1);
-    final PVectorM4I<T> v1 = this.newVectorM4I(1, 1, 1, 1);
+    final V out = this.newVectorM4I();
+    final V v0 = this.newVectorM4I(1, 1, 1, 1);
+    final V v1 = this.newVectorM4I(1, 1, 1, 1);
 
-    Assert.assertTrue(out.getXI() == 0);
-    Assert.assertTrue(out.getYI() == 0);
-    Assert.assertTrue(out.getZI() == 0);
-    Assert.assertTrue(out.getWI() == 1);
-    Assert.assertTrue(v0.getXI() == 1);
-    Assert.assertTrue(v0.getYI() == 1);
-    Assert.assertTrue(v0.getZI() == 1);
-    Assert.assertTrue(v0.getWI() == 1);
-    Assert.assertTrue(v1.getXI() == 1);
-    Assert.assertTrue(v1.getYI() == 1);
-    Assert.assertTrue(v1.getZI() == 1);
-    Assert.assertTrue(v1.getWI() == 1);
+    Assert.assertEquals(0L, (long) out.getXI());
+    Assert.assertEquals(0L, (long) out.getYI());
+    Assert.assertEquals(0L, (long) out.getZI());
+    Assert.assertEquals(1L, (long) out.getWI());
+    Assert.assertEquals(1L, (long) v0.getXI());
+    Assert.assertEquals(1L, (long) v0.getYI());
+    Assert.assertEquals(1L, (long) v0.getZI());
+    Assert.assertEquals(1L, (long) v0.getWI());
+    Assert.assertEquals(1L, (long) v1.getXI());
+    Assert.assertEquals(1L, (long) v1.getYI());
+    Assert.assertEquals(1L, (long) v1.getZI());
+    Assert.assertEquals(1L, (long) v1.getWI());
 
-    final PVectorM4I<T> ov0 = PVectorM4I.add(v0, v1, out);
+    final V ov0 = PVectorM4I.add(v0, v1, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXI() == 2);
-    Assert.assertTrue(out.getYI() == 2);
-    Assert.assertTrue(out.getZI() == 2);
-    Assert.assertTrue(out.getWI() == 2);
-    Assert.assertTrue(v0.getXI() == 1);
-    Assert.assertTrue(v0.getYI() == 1);
-    Assert.assertTrue(v0.getZI() == 1);
-    Assert.assertTrue(v0.getWI() == 1);
-    Assert.assertTrue(v1.getXI() == 1);
-    Assert.assertTrue(v1.getYI() == 1);
-    Assert.assertTrue(v1.getZI() == 1);
-    Assert.assertTrue(v1.getWI() == 1);
+    Assert.assertEquals(ov0, out);
+    Assert.assertEquals(2L, (long) out.getXI());
+    Assert.assertEquals(2L, (long) out.getYI());
+    Assert.assertEquals(2L, (long) out.getZI());
+    Assert.assertEquals(2L, (long) out.getWI());
+    Assert.assertEquals(1L, (long) v0.getXI());
+    Assert.assertEquals(1L, (long) v0.getYI());
+    Assert.assertEquals(1L, (long) v0.getZI());
+    Assert.assertEquals(1L, (long) v0.getWI());
+    Assert.assertEquals(1L, (long) v1.getXI());
+    Assert.assertEquals(1L, (long) v1.getYI());
+    Assert.assertEquals(1L, (long) v1.getZI());
+    Assert.assertEquals(1L, (long) v1.getWI());
 
-    final PVectorM4I<T> ov1 = PVectorM4I.addInPlace(v0, v1);
+    final V ov1 = PVectorM4I.addInPlace(v0, v1);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXI() == 2);
-    Assert.assertTrue(ov1.getYI() == 2);
-    Assert.assertTrue(ov1.getZI() == 2);
-    Assert.assertTrue(ov1.getWI() == 2);
-    Assert.assertTrue(v0.getXI() == 2);
-    Assert.assertTrue(v0.getYI() == 2);
-    Assert.assertTrue(v0.getZI() == 2);
-    Assert.assertTrue(v0.getWI() == 2);
-    Assert.assertTrue(v1.getXI() == 1);
-    Assert.assertTrue(v1.getYI() == 1);
-    Assert.assertTrue(v1.getZI() == 1);
-    Assert.assertTrue(v1.getWI() == 1);
+    Assert.assertEquals(v0, ov1);
+    Assert.assertEquals(2L, (long) ov1.getXI());
+    Assert.assertEquals(2L, (long) ov1.getYI());
+    Assert.assertEquals(2L, (long) ov1.getZI());
+    Assert.assertEquals(2L, (long) ov1.getWI());
+    Assert.assertEquals(2L, (long) v0.getXI());
+    Assert.assertEquals(2L, (long) v0.getYI());
+    Assert.assertEquals(2L, (long) v0.getZI());
+    Assert.assertEquals(2L, (long) v0.getWI());
+    Assert.assertEquals(1L, (long) v1.getXI());
+    Assert.assertEquals(1L, (long) v1.getYI());
+    Assert.assertEquals(1L, (long) v1.getZI());
+    Assert.assertEquals(1L, (long) v1.getWI());
   }
 
-  @Override @Test public void testAddScaled()
+  @Test public final void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = PVectorM4IContract.randomPositiveSmallNumber();
       final int y0 = PVectorM4IContract.randomPositiveSmallNumber();
       final int z0 = PVectorM4IContract.randomPositiveSmallNumber();
       final int w0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final PVectorM4I<T> v0 = this.newVectorM4I(x0, y0, z0, w0);
+      final V v0 = this.newVectorM4I(x0, y0, z0, w0);
 
       final int x1 = PVectorM4IContract.randomPositiveSmallNumber();
       final int y1 = PVectorM4IContract.randomPositiveSmallNumber();
       final int z1 = PVectorM4IContract.randomPositiveSmallNumber();
       final int w1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final PVectorM4I<T> v1 = this.newVectorM4I(x1, y1, z1, w1);
+      final V v1 = this.newVectorM4I(x1, y1, z1, w1);
 
       final int r = PVectorM4IContract.randomPositiveSmallNumber();
 
-      final PVectorM4I<T> vr0 = this.newVectorM4I();
-      PVectorM4I.addScaled(v0, v1, r, vr0);
+      final V vr0 = this.newVectorM4I();
+      PVectorM4I.addScaled(v0, v1, (double) r, vr0);
 
-      Assert.assertTrue(vr0.getXI() == (v0.getXI() + (v1.getXI() * r)));
-      Assert.assertTrue(vr0.getYI() == (v0.getYI() + (v1.getYI() * r)));
-      Assert.assertTrue(vr0.getZI() == (v0.getZI() + (v1.getZI() * r)));
-      Assert.assertTrue(vr0.getWI() == (v0.getWI() + (v1.getWI() * r)));
+      Assert.assertEquals(
+        (long) (v0.getXI() + (v1.getXI() * r)),
+        (long) vr0.getXI());
+      Assert.assertEquals(
+        (long) (v0.getYI() + (v1.getYI() * r)),
+        (long) vr0.getYI());
+      Assert.assertEquals(
+        (long) (v0.getZI() + (v1.getZI() * r)),
+        (long) vr0.getZI());
+      Assert.assertEquals(
+        (long) (v0.getWI() + (v1.getWI() * r)),
+        (long) vr0.getWI());
 
       {
         final int orig_x = v0.getXI();
         final int orig_y = v0.getYI();
         final int orig_z = v0.getZI();
         final int orig_w = v0.getWI();
-        PVectorM4I.addScaledInPlace(v0, v1, r);
+        PVectorM4I.addScaledInPlace(v0, v1, (double) r);
 
-        Assert.assertTrue(v0.getXI() == (orig_x + (v1.getXI() * r)));
-        Assert.assertTrue(v0.getYI() == (orig_y + (v1.getYI() * r)));
-        Assert.assertTrue(v0.getZI() == (orig_z + (v1.getZI() * r)));
-        Assert.assertTrue(v0.getWI() == (orig_w + (v1.getWI() * r)));
+        Assert.assertEquals(
+          (long) (orig_x + (v1.getXI() * r)),
+          (long) v0.getXI());
+        Assert.assertEquals(
+          (long) (orig_y + (v1.getYI() * r)),
+          (long) v0.getYI());
+        Assert.assertEquals(
+          (long) (orig_z + (v1.getZI() * r)),
+          (long) v0.getZI());
+        Assert.assertEquals(
+          (long) (orig_w + (v1.getWI() * r)),
+          (long) v0.getWI());
       }
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+  @Test public final void testAlmostEqualNot()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+  @Test public final void testAlmostEqualTransitive()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testCheckInterface()
+  @Test public final void testCheckInterface()
   {
-    final PVectorM4I<T> v = this.newVectorM4I(3, 5, 7, 11);
+    final V v = this.newVectorM4I(3, 5, 7, 11);
 
-    Assert.assertTrue(v.getXI() == v.getXI());
-    Assert.assertTrue(v.getYI() == v.getYI());
-    Assert.assertTrue(v.getZI() == v.getZI());
-    Assert.assertTrue(v.getWI() == v.getWI());
+    Assert.assertEquals((long) v.getXI(), (long) v.getXI());
+    Assert.assertEquals((long) v.getYI(), (long) v.getYI());
+    Assert.assertEquals((long) v.getZI(), (long) v.getZI());
+    Assert.assertEquals((long) v.getWI(), (long) v.getWI());
   }
 
-  @Override @Test public void testClampByPVectorMaximumOrdering()
+  @Test public final void testClampByPVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max_x = PVectorM4IContract.randomNegativeNumber();
       final int max_y = PVectorM4IContract.randomNegativeNumber();
       final int max_z = PVectorM4IContract.randomNegativeNumber();
       final int max_w = PVectorM4IContract.randomNegativeNumber();
-      final PVectorM4I<T> maximum =
-        this.newVectorM4I(max_x, max_y, max_z, max_w);
+      final V maximum = this.newVectorM4I(max_x, max_y, max_z, max_w);
 
       final int x = PVectorM4IContract.randomNegativeNumber();
       final int y = PVectorM4IContract.randomNegativeNumber();
       final int z = PVectorM4IContract.randomNegativeNumber();
       final int w = PVectorM4IContract.randomNegativeNumber();
-      final PVectorM4I<T> v = this.newVectorM4I(x, y, z, w);
+      final V v = this.newVectorM4I(x, y, z, w);
 
-      final PVectorM4I<T> vr = this.newVectorM4I();
-      final PVectorM4I<T> vo = PVectorM4I.clampMaximumByPVector(v, maximum, vr);
+      final V vr = this.newVectorM4I();
+      final V vo = PVectorM4I.clampMaximumByPVector(v, maximum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo);
       Assert.assertTrue(vr.getXI() <= maximum.getXI());
       Assert.assertTrue(vr.getYI() <= maximum.getYI());
       Assert.assertTrue(vr.getZI() <= maximum.getZI());
       Assert.assertTrue(vr.getWI() <= maximum.getWI());
 
       {
-        final PVectorM4I<T> vr0 =
-          PVectorM4I.clampMaximumByPVectorInPlace(v, maximum);
-        Assert.assertTrue(vr0 == v);
+        final V vr0 = PVectorM4I.clampMaximumByPVectorInPlace(v, maximum);
+        Assert.assertEquals(v, vr0);
         Assert.assertTrue(v.getXI() <= maximum.getXI());
         Assert.assertTrue(v.getYI() <= maximum.getYI());
         Assert.assertTrue(v.getZI() <= maximum.getZI());
@@ -269,35 +288,33 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
     }
   }
 
-  @Override @Test public void testClampByPVectorMinimumOrdering()
+  @Test public final void testClampByPVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = PVectorM4IContract.randomPositiveNumber();
       final int min_y = PVectorM4IContract.randomPositiveNumber();
       final int min_z = PVectorM4IContract.randomPositiveNumber();
       final int min_w = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> minimum =
-        this.newVectorM4I(min_x, min_y, min_z, min_w);
+      final V minimum = this.newVectorM4I(min_x, min_y, min_z, min_w);
 
       final int x = PVectorM4IContract.randomNegativeNumber();
       final int y = PVectorM4IContract.randomNegativeNumber();
       final int z = PVectorM4IContract.randomNegativeNumber();
       final int w = PVectorM4IContract.randomNegativeNumber();
-      final PVectorM4I<T> v = this.newVectorM4I(x, y, z, w);
+      final V v = this.newVectorM4I(x, y, z, w);
 
-      final PVectorM4I<T> vr = this.newVectorM4I();
-      final PVectorM4I<T> vo = PVectorM4I.clampMinimumByPVector(v, minimum, vr);
+      final V vr = this.newVectorM4I();
+      final V vo = PVectorM4I.clampMinimumByPVector(v, minimum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo);
       Assert.assertTrue(vr.getXI() >= minimum.getXI());
       Assert.assertTrue(vr.getYI() >= minimum.getYI());
       Assert.assertTrue(vr.getZI() >= minimum.getZI());
       Assert.assertTrue(vr.getWI() >= minimum.getWI());
 
       {
-        final PVectorM4I<T> vr0 =
-          PVectorM4I.clampMinimumByPVectorInPlace(v, minimum);
-        Assert.assertTrue(vr0 == v);
+        final V vr0 = PVectorM4I.clampMinimumByPVectorInPlace(v, minimum);
+        Assert.assertEquals(v, vr0);
         Assert.assertTrue(v.getXI() >= minimum.getXI());
         Assert.assertTrue(v.getYI() >= minimum.getYI());
         Assert.assertTrue(v.getZI() >= minimum.getZI());
@@ -306,34 +323,31 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
     }
   }
 
-  @Override @Test public void testClampByPVectorOrdering()
+  @Test public final void testClampByPVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = PVectorM4IContract.randomNegativeNumber();
       final int min_y = PVectorM4IContract.randomNegativeNumber();
       final int min_z = PVectorM4IContract.randomNegativeNumber();
       final int min_w = PVectorM4IContract.randomNegativeNumber();
-      final PVectorM4I<T> minimum =
-        this.newVectorM4I(min_x, min_y, min_z, min_w);
+      final V minimum = this.newVectorM4I(min_x, min_y, min_z, min_w);
 
       final int max_x = PVectorM4IContract.randomPositiveNumber();
       final int max_y = PVectorM4IContract.randomPositiveNumber();
       final int max_z = PVectorM4IContract.randomPositiveNumber();
       final int max_w = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> maximum =
-        this.newVectorM4I(max_x, max_y, max_z, max_w);
+      final V maximum = this.newVectorM4I(max_x, max_y, max_z, max_w);
 
       final int x = PVectorM4IContract.randomNegativeNumber();
       final int y = PVectorM4IContract.randomPositiveNumber();
       final int z = PVectorM4IContract.randomPositiveNumber();
       final int w = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> v = this.newVectorM4I(x, y, z, w);
+      final V v = this.newVectorM4I(x, y, z, w);
 
-      final PVectorM4I<T> vr = this.newVectorM4I();
-      final PVectorM4I<T> vo =
-        PVectorM4I.clampByPVector(v, minimum, maximum, vr);
+      final V vr = this.newVectorM4I();
+      final V vo = PVectorM4I.clampByPVector(v, minimum, maximum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo);
       Assert.assertTrue(vr.getXI() <= maximum.getXI());
       Assert.assertTrue(vr.getYI() <= maximum.getYI());
       Assert.assertTrue(vr.getZI() <= maximum.getZI());
@@ -344,9 +358,8 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
       Assert.assertTrue(vr.getWI() >= minimum.getWI());
 
       {
-        final PVectorM4I<T> vr0 =
-          PVectorM4I.clampByPVectorInPlace(v, minimum, maximum);
-        Assert.assertTrue(vr0 == v);
+        final V vr0 = PVectorM4I.clampByPVectorInPlace(v, minimum, maximum);
+        Assert.assertEquals(v, vr0);
         Assert.assertTrue(v.getXI() <= maximum.getXI());
         Assert.assertTrue(v.getYI() <= maximum.getYI());
         Assert.assertTrue(v.getZI() <= maximum.getZI());
@@ -359,7 +372,7 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+  @Test public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int maximum = PVectorM4IContract.randomNegativeNumber();
@@ -368,9 +381,9 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
       final int y = PVectorM4IContract.randomPositiveNumber();
       final int z = PVectorM4IContract.randomPositiveNumber();
       final int w = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> v = this.newVectorM4I(x, y, z, w);
+      final V v = this.newVectorM4I(x, y, z, w);
 
-      final PVectorM4I<T> vr = this.newVectorM4I();
+      final V vr = this.newVectorM4I();
       PVectorM4I.clampMaximum(v, maximum, vr);
 
       Assert.assertTrue(vr.getXI() <= maximum);
@@ -388,7 +401,7 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+  @Test public final void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = PVectorM4IContract.randomPositiveNumber();
@@ -397,9 +410,9 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
       final int y = PVectorM4IContract.randomNegativeNumber();
       final int z = PVectorM4IContract.randomNegativeNumber();
       final int w = PVectorM4IContract.randomNegativeNumber();
-      final PVectorM4I<T> v = this.newVectorM4I(x, y, z, w);
+      final V v = this.newVectorM4I(x, y, z, w);
 
-      final PVectorM4I<T> vr = this.newVectorM4I();
+      final V vr = this.newVectorM4I();
       PVectorM4I.clampMinimum(v, minimum, vr);
 
       Assert.assertTrue(vr.getXI() >= minimum);
@@ -417,7 +430,7 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
     }
   }
 
-  @Override @Test public void testClampOrdering()
+  @Test public final void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = PVectorM4IContract.randomNegativeNumber();
@@ -427,9 +440,9 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
       final int y = PVectorM4IContract.randomPositiveNumber();
       final int z = PVectorM4IContract.randomPositiveNumber();
       final int w = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> v = this.newVectorM4I(x, y, z, w);
+      final V v = this.newVectorM4I(x, y, z, w);
 
-      final PVectorM4I<T> vr = this.newVectorM4I();
+      final V vr = this.newVectorM4I();
       PVectorM4I.clamp(v, minimum, maximum, vr);
 
       Assert.assertTrue(vr.getXI() <= maximum);
@@ -456,114 +469,119 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
     }
   }
 
-  @Override @Test public void testCopy()
+  @Test public final void testCopy()
   {
-    final PVectorM4I<T> vb = this.newVectorM4I(5, 6, 7, 8);
-    final PVectorM4I<T> va = this.newVectorM4I(1, 2, 3, 4);
+    final V vb = this.newVectorM4I(5, 6, 7, 8);
+    final V va = this.newVectorM4I(1, 2, 3, 4);
 
-    Assert.assertFalse(va.getXI() == vb.getXI());
-    Assert.assertFalse(va.getYI() == vb.getYI());
-    Assert.assertFalse(va.getZI() == vb.getZI());
-    Assert.assertFalse(va.getWI() == vb.getWI());
+    Assert.assertNotEquals((long) vb.getXI(), (long) va.getXI());
+    Assert.assertNotEquals((long) vb.getYI(), (long) va.getYI());
+    Assert.assertNotEquals((long) vb.getZI(), (long) va.getZI());
+    Assert.assertNotEquals((long) vb.getWI(), (long) va.getWI());
 
     PVectorM4I.copy(va, vb);
 
-    Assert.assertTrue(va.getXI() == vb.getXI());
-    Assert.assertTrue(va.getYI() == vb.getYI());
-    Assert.assertTrue(va.getZI() == vb.getZI());
-    Assert.assertTrue(va.getWI() == vb.getWI());
+    Assert.assertEquals((long) vb.getXI(), (long) va.getXI());
+    Assert.assertEquals((long) vb.getYI(), (long) va.getYI());
+    Assert.assertEquals((long) vb.getZI(), (long) va.getZI());
+    Assert.assertEquals((long) vb.getWI(), (long) va.getWI());
   }
 
-  @Override @Test public void testCopy2Correct()
+  @Test public final void testCopy2Correct()
   {
-    final PVectorM4I<T> v0 = this.newVectorM4I(
-      (int) Math.random() * Integer.MAX_VALUE,
-      (int) Math.random() * Integer.MAX_VALUE,
-      (int) Math.random() * Integer.MAX_VALUE,
-      (int) Math.random() * Integer.MAX_VALUE);
-    final PVectorM4I<T> v1 = this.newVectorM4I();
-    final PVectorM4I<T> v2 = this.newVectorM4I();
+    final V v0 = this.newVectorM4I(
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE));
+    final V v1 = this.newVectorM4I();
+    final V v2 = this.newVectorM4I();
 
     v1.copyFrom2I(v0);
 
-    Assert.assertEquals(v0.getXI(), v1.getXI());
-    Assert.assertEquals(v0.getYI(), v1.getYI());
-    Assert.assertEquals(0, v1.getZI());
-    Assert.assertEquals(1, v1.getWI());
+    Assert.assertEquals((long) v0.getXI(), (long) v1.getXI());
+    Assert.assertEquals((long) v0.getYI(), (long) v1.getYI());
+    Assert.assertEquals(0L, (long) v1.getZI());
+    Assert.assertEquals(1L, (long) v1.getWI());
 
     v2.copyFromTyped2I(v0);
 
-    Assert.assertEquals(v0.getXI(), v2.getXI());
-    Assert.assertEquals(v0.getYI(), v2.getYI());
-    Assert.assertEquals(0, v2.getZI());
-    Assert.assertEquals(1, v2.getWI());
+    Assert.assertEquals((long) v0.getXI(), (long) v2.getXI());
+    Assert.assertEquals((long) v0.getYI(), (long) v2.getYI());
+    Assert.assertEquals(0L, (long) v2.getZI());
+    Assert.assertEquals(1L, (long) v2.getWI());
   }
 
-  @Override @Test public void testCopy3Correct()
+  protected static double getRandom()
   {
-    final PVectorM4I<T> v0 = this.newVectorM4I(
-      (int) Math.random() * Integer.MAX_VALUE,
-      (int) Math.random() * Integer.MAX_VALUE,
-      (int) Math.random() * Integer.MAX_VALUE,
-      (int) Math.random() * Integer.MAX_VALUE);
-    final PVectorM4I<T> v1 = this.newVectorM4I();
-    final PVectorM4I<T> v2 = this.newVectorM4I();
+    return Math.random();
+  }
+
+  @Test public final void testCopy3Correct()
+  {
+    final V v0 = this.newVectorM4I(
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE));
+    final V v1 = this.newVectorM4I();
+    final V v2 = this.newVectorM4I();
 
     v1.copyFrom3I(v0);
 
-    Assert.assertEquals(v0.getXI(), v1.getXI());
-    Assert.assertEquals(v0.getYI(), v1.getYI());
-    Assert.assertEquals(v0.getZI(), v1.getZI());
-    Assert.assertEquals(1, v1.getWI());
+    Assert.assertEquals((long) v0.getXI(), (long) v1.getXI());
+    Assert.assertEquals((long) v0.getYI(), (long) v1.getYI());
+    Assert.assertEquals((long) v0.getZI(), (long) v1.getZI());
+    Assert.assertEquals(1L, (long) v1.getWI());
 
     v2.copyFromTyped3I(v0);
 
-    Assert.assertEquals(v0.getXI(), v2.getXI());
-    Assert.assertEquals(v0.getYI(), v2.getYI());
-    Assert.assertEquals(v0.getZI(), v2.getZI());
-    Assert.assertEquals(1, v2.getWI());
+    Assert.assertEquals((long) v0.getXI(), (long) v2.getXI());
+    Assert.assertEquals((long) v0.getYI(), (long) v2.getYI());
+    Assert.assertEquals((long) v0.getZI(), (long) v2.getZI());
+    Assert.assertEquals(1L, (long) v2.getWI());
   }
 
-  @Override @Test public void testCopy4Correct()
+  @Test public final void testCopy4Correct()
   {
-    final PVectorM4I<T> v0 = this.newVectorM4I(
-      (int) Math.random() * Integer.MAX_VALUE,
-      (int) Math.random() * Integer.MAX_VALUE,
-      (int) Math.random() * Integer.MAX_VALUE,
-      (int) Math.random() * Integer.MAX_VALUE);
-    final PVectorM4I<T> v1 = this.newVectorM4I();
-    final PVectorM4I<T> v2 = this.newVectorM4I();
+    final V v0 = this.newVectorM4I(
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
+      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE));
+    final V v1 = this.newVectorM4I();
+    final V v2 = this.newVectorM4I();
 
     v1.copyFrom4I(v0);
 
-    Assert.assertEquals(v0.getXI(), v1.getXI());
-    Assert.assertEquals(v0.getYI(), v1.getYI());
-    Assert.assertEquals(v0.getZI(), v1.getZI());
-    Assert.assertEquals(v0.getWI(), v1.getWI());
+    Assert.assertEquals((long) v0.getXI(), (long) v1.getXI());
+    Assert.assertEquals((long) v0.getYI(), (long) v1.getYI());
+    Assert.assertEquals((long) v0.getZI(), (long) v1.getZI());
+    Assert.assertEquals((long) v0.getWI(), (long) v1.getWI());
 
     v2.copyFromTyped4I(v0);
 
-    Assert.assertEquals(v0.getXI(), v2.getXI());
-    Assert.assertEquals(v0.getYI(), v2.getYI());
-    Assert.assertEquals(v0.getZI(), v2.getZI());
-    Assert.assertEquals(v0.getWI(), v2.getWI());
+    Assert.assertEquals((long) v0.getXI(), (long) v2.getXI());
+    Assert.assertEquals((long) v0.getYI(), (long) v2.getYI());
+    Assert.assertEquals((long) v0.getZI(), (long) v2.getZI());
+    Assert.assertEquals((long) v0.getWI(), (long) v2.getWI());
   }
 
-  @Override @Test public void testDefault0001()
+  @Test public final void testDefault0001()
   {
     Assert.assertTrue(
       this.newVectorM4I().equals(this.newVectorM4I(0, 0, 0, 1)));
   }
 
-  @Override @Test public void testDistance()
+  @Test public final void testDistance()
   {
     final PVectorM4I.ContextPVM4I c = new PVectorM4I.ContextPVM4I();
-    final PVectorM4I<T> v0 = this.newVectorM4I(0, 1, 0, 0);
-    final PVectorM4I<T> v1 = this.newVectorM4I(0, 0, 0, 0);
-    Assert.assertTrue(PVectorM4I.distance(c, v0, v1) == 1);
+    final V v0 = this.newVectorM4I(0, 1, 0, 0);
+    final V v1 = this.newVectorM4I(0, 0, 0, 0);
+    Assert.assertEquals(1L, (long) PVectorM4I.distance(c, v0, v1));
   }
 
-  @Override @Test public void testDistanceOrdering()
+  @Test public final void testDistanceOrdering()
   {
     final PVectorM4I.ContextPVM4I c = new PVectorM4I.ContextPVM4I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
@@ -571,70 +589,70 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
       final int y0 = PVectorM4IContract.randomPositiveSmallNumber();
       final int z0 = PVectorM4IContract.randomPositiveSmallNumber();
       final int w0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final PVectorM4I<T> v0 = this.newVectorM4I(x0, y0, z0, w0);
+      final V v0 = this.newVectorM4I(x0, y0, z0, w0);
 
       final int x1 = PVectorM4IContract.randomPositiveSmallNumber();
       final int y1 = PVectorM4IContract.randomPositiveSmallNumber();
       final int z1 = PVectorM4IContract.randomPositiveSmallNumber();
       final int w1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final PVectorM4I<T> v1 = this.newVectorM4I(x1, y1, z1, w1);
+      final V v1 = this.newVectorM4I(x1, y1, z1, w1);
 
       Assert.assertTrue(PVectorM4I.distance(c, v0, v1) >= 0);
     }
   }
 
-  @Override @Test public void testDotProduct()
+  @Test public final void testDotProduct()
   {
-    final PVectorM4I<T> v0 = this.newVectorM4I(10, 10, 10, 10);
-    final PVectorM4I<T> v1 = this.newVectorM4I(10, 10, 10, 10);
+    final V v0 = this.newVectorM4I(10, 10, 10, 10);
+    final V v1 = this.newVectorM4I(10, 10, 10, 10);
 
     {
       final int p = PVectorM4I.dotProduct(v0, v1);
-      Assert.assertTrue(v0.getXI() == 10);
-      Assert.assertTrue(v0.getYI() == 10);
-      Assert.assertTrue(v0.getZI() == 10);
-      Assert.assertTrue(v0.getWI() == 10);
-      Assert.assertTrue(v1.getXI() == 10);
-      Assert.assertTrue(v1.getYI() == 10);
-      Assert.assertTrue(v1.getZI() == 10);
-      Assert.assertTrue(v1.getWI() == 10);
-      Assert.assertTrue(p == 400);
+      Assert.assertEquals(10L, (long) v0.getXI());
+      Assert.assertEquals(10L, (long) v0.getYI());
+      Assert.assertEquals(10L, (long) v0.getZI());
+      Assert.assertEquals(10L, (long) v0.getWI());
+      Assert.assertEquals(10L, (long) v1.getXI());
+      Assert.assertEquals(10L, (long) v1.getYI());
+      Assert.assertEquals(10L, (long) v1.getZI());
+      Assert.assertEquals(10L, (long) v1.getWI());
+      Assert.assertEquals(400L, (long) p);
     }
 
     {
       final int p = PVectorM4I.dotProduct(v0, v0);
-      Assert.assertTrue(v0.getXI() == 10);
-      Assert.assertTrue(v0.getYI() == 10);
-      Assert.assertTrue(v0.getZI() == 10);
-      Assert.assertTrue(v0.getWI() == 10);
-      Assert.assertTrue(p == 400);
+      Assert.assertEquals(10L, (long) v0.getXI());
+      Assert.assertEquals(10L, (long) v0.getYI());
+      Assert.assertEquals(10L, (long) v0.getZI());
+      Assert.assertEquals(10L, (long) v0.getWI());
+      Assert.assertEquals(400L, (long) p);
     }
 
     {
       final int p = PVectorM4I.dotProduct(v1, v1);
-      Assert.assertTrue(v1.getXI() == 10);
-      Assert.assertTrue(v1.getYI() == 10);
-      Assert.assertTrue(v1.getZI() == 10);
-      Assert.assertTrue(v1.getWI() == 10);
-      Assert.assertTrue(p == 400);
+      Assert.assertEquals(10L, (long) v1.getXI());
+      Assert.assertEquals(10L, (long) v1.getYI());
+      Assert.assertEquals(10L, (long) v1.getZI());
+      Assert.assertEquals(10L, (long) v1.getWI());
+      Assert.assertEquals(400L, (long) p);
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+  @Test public final void testDotProductPerpendicular()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max = 1000;
-      final int x = (int) (Math.random() * max);
-      final int y = (int) (Math.random() * max);
-      final int z = (int) (Math.random() * max);
-      final int w = (int) (Math.random() * max);
-      final PVectorM4I<T> q = this.newVectorM4I(x, y, z, w);
+      final int x = (int) (PVectorM4IContract.getRandom() * (double) max);
+      final int y = (int) (PVectorM4IContract.getRandom() * (double) max);
+      final int z = (int) (PVectorM4IContract.getRandom() * (double) max);
+      final int w = (int) (PVectorM4IContract.getRandom() * (double) max);
+      final V q = this.newVectorM4I(x, y, z, w);
 
-      final double ms = PVectorM4I.magnitudeSquared(q);
-      final double dp = PVectorM4I.dotProduct(q, q);
+      final double ms = (double) PVectorM4I.magnitudeSquared(q);
+      final double dp = (double) PVectorM4I.dotProduct(q, q);
 
       System.out.println("q  : " + q);
       System.out.println("ms : " + ms);
@@ -644,19 +662,19 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
     }
   }
 
-  @Override @Test public void testDotProductSelf()
+  @Test public final void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max = 1000;
-      final int x = (int) (Math.random() * max);
-      final int y = (int) (Math.random() * max);
-      final int z = (int) (Math.random() * max);
-      final int w = (int) (Math.random() * max);
-      final PVectorM4I<T> q = this.newVectorM4I(x, y, z, w);
-      final double dp = PVectorM4I.dotProduct(q, q);
+      final int x = (int) (PVectorM4IContract.getRandom() * (double) max);
+      final int y = (int) (PVectorM4IContract.getRandom() * (double) max);
+      final int z = (int) (PVectorM4IContract.getRandom() * (double) max);
+      final int w = (int) (PVectorM4IContract.getRandom() * (double) max);
+      final V q = this.newVectorM4I(x, y, z, w);
+      final double dp = (double) PVectorM4I.dotProduct(q, q);
 
       System.out.println("q  : " + q);
       System.out.println("dp : " + dp);
@@ -665,194 +683,194 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  @Test public final void testDotProductSelfMagnitudeSquared()
   {
-    final PVectorM4I<T> v0 = this.newVectorM4I(10, 10, 10, 10);
+    final V v0 = this.newVectorM4I(10, 10, 10, 10);
 
     {
       final int p = PVectorM4I.dotProduct(v0, v0);
-      Assert.assertTrue(v0.getXI() == 10);
-      Assert.assertTrue(v0.getYI() == 10);
-      Assert.assertTrue(v0.getZI() == 10);
-      Assert.assertTrue(v0.getWI() == 10);
-      Assert.assertTrue(p == 400);
+      Assert.assertEquals(10L, (long) v0.getXI());
+      Assert.assertEquals(10L, (long) v0.getYI());
+      Assert.assertEquals(10L, (long) v0.getZI());
+      Assert.assertEquals(10L, (long) v0.getWI());
+      Assert.assertEquals(400L, (long) p);
     }
 
     {
       final int p = PVectorM4I.magnitudeSquared(v0);
-      Assert.assertTrue(v0.getXI() == 10);
-      Assert.assertTrue(v0.getYI() == 10);
-      Assert.assertTrue(v0.getZI() == 10);
-      Assert.assertTrue(v0.getWI() == 10);
-      Assert.assertTrue(p == 400);
+      Assert.assertEquals(10L, (long) v0.getXI());
+      Assert.assertEquals(10L, (long) v0.getYI());
+      Assert.assertEquals(10L, (long) v0.getZI());
+      Assert.assertEquals(10L, (long) v0.getWI());
+      Assert.assertEquals(400L, (long) p);
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+  @Test public final void testEqualsCorrect()
   {
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I();
+      final V m0 = this.newVectorM4I();
       Assert.assertTrue(m0.equals(m0));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I();
+      final V m0 = this.newVectorM4I();
       Assert.assertFalse(m0.equals(null));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I();
+      final V m0 = this.newVectorM4I();
       Assert.assertFalse(m0.equals(Integer.valueOf(23)));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I();
-      final PVectorM4I<T> m1 = this.newVectorM4I();
+      final V m0 = this.newVectorM4I();
+      final V m1 = this.newVectorM4I();
       Assert.assertTrue(m0.equals(m1));
     }
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+  @Test public final void testEqualsNotEqualCorrect()
   {
-    final int x = (int) (Math.random() * 1000);
+    final int x = (int) (PVectorM4IContract.getRandom() * 1000.0);
     final int y = x + 1;
     final int z = y + 1;
     final int w = z + 1;
     final int q = w + 1;
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
+      final V m0 = this.newVectorM4I(x, y, z, w);
       Assert.assertFalse(m0.equals(null));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
+      final V m0 = this.newVectorM4I(x, y, z, w);
       Assert.assertFalse(m0.equals(Integer.valueOf(23)));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(q, y, z, w);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(q, y, z, w);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(x, q, z, w);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(x, q, z, w);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(x, y, q, w);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(x, y, q, w);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(x, y, z, q);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(x, y, z, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(q, q, z, w);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(q, q, z, w);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(q, y, q, w);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(q, y, q, w);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(q, y, z, q);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(q, y, z, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(q, q, q, w);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(q, q, q, w);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(q, q, z, q);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(q, q, z, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(q, q, q, q);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(q, q, q, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(x, q, q, q);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(x, q, q, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I(x, y, z, w);
-      final PVectorM4I<T> m1 = this.newVectorM4I(x, y, q, q);
+      final V m0 = this.newVectorM4I(x, y, z, w);
+      final V m1 = this.newVectorM4I(x, y, q, q);
       Assert.assertFalse(m0.equals(m1));
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+  @Test public final void testHashCodeEqualsCorrect()
   {
-    final PVectorM4I<T> m0 = this.newVectorM4I();
-    final PVectorM4I<T> m1 = this.newVectorM4I();
-    Assert.assertEquals(m0.hashCode(), m1.hashCode());
+    final V m0 = this.newVectorM4I();
+    final V m1 = this.newVectorM4I();
+    Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+  @Test public final void testHashCodeNotEqualCorrect()
   {
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I();
-      final PVectorM4I<T> m1 = this.newVectorM4I();
+      final V m0 = this.newVectorM4I();
+      final V m1 = this.newVectorM4I();
       m1.setXI(23);
-      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I();
-      final PVectorM4I<T> m1 = this.newVectorM4I();
+      final V m0 = this.newVectorM4I();
+      final V m1 = this.newVectorM4I();
       m1.setYI(23);
-      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I();
-      final PVectorM4I<T> m1 = this.newVectorM4I();
+      final V m0 = this.newVectorM4I();
+      final V m1 = this.newVectorM4I();
       m1.setZI(23);
-      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());
     }
 
     {
-      final PVectorM4I<T> m0 = this.newVectorM4I();
-      final PVectorM4I<T> m1 = this.newVectorM4I();
+      final V m0 = this.newVectorM4I();
+      final V m1 = this.newVectorM4I();
       m1.setWI(23);
-      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+  @Test public final void testInitializeReadable()
   {
-    final PVectorM4I<T> v0 = this.newVectorM4I(1, 2, 3, 4);
-    final PVectorM4I<T> v1 = new PVectorM4I<T>(v0);
+    final V v0 = this.newVectorM4I(1, 2, 3, 4);
+    final V v1 = this.newVectorM4IFrom(v0);
 
-    Assert.assertTrue(v0.getXI() == v1.getXI());
-    Assert.assertTrue(v0.getYI() == v1.getYI());
-    Assert.assertTrue(v0.getZI() == v1.getZI());
-    Assert.assertTrue(v0.getWI() == v1.getWI());
+    Assert.assertEquals((long) v1.getXI(), (long) v0.getXI());
+    Assert.assertEquals((long) v1.getYI(), (long) v0.getYI());
+    Assert.assertEquals((long) v1.getZI(), (long) v0.getZI());
+    Assert.assertEquals((long) v1.getWI(), (long) v0.getWI());
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+  @Test public final void testInterpolateLinearLimits()
   {
     final PVectorM4I.ContextPVM4I c = new PVectorM4I.ContextPVM4I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
@@ -860,182 +878,182 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
       final int y0 = PVectorM4IContract.randomPositiveNumber();
       final int z0 = PVectorM4IContract.randomPositiveNumber();
       final int w0 = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> v0 = this.newVectorM4I(x0, y0, z0, w0);
+      final V v0 = this.newVectorM4I(x0, y0, z0, w0);
 
       final int x1 = PVectorM4IContract.randomPositiveNumber();
       final int y1 = PVectorM4IContract.randomPositiveNumber();
       final int z1 = PVectorM4IContract.randomPositiveNumber();
       final int w1 = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> v1 = this.newVectorM4I(x1, y1, z1, w1);
+      final V v1 = this.newVectorM4I(x1, y1, z1, w1);
 
-      final PVectorM4I<T> vr0 = this.newVectorM4I();
-      final PVectorM4I<T> vr1 = this.newVectorM4I();
-      PVectorM4I.interpolateLinear(c, v0, v1, 0, vr0);
-      PVectorM4I.interpolateLinear(c, v0, v1, 1, vr1);
+      final V vr0 = this.newVectorM4I();
+      final V vr1 = this.newVectorM4I();
+      PVectorM4I.interpolateLinear(c, v0, v1, 0.0, vr0);
+      PVectorM4I.interpolateLinear(c, v0, v1, 1.0, vr1);
 
-      Assert.assertTrue(v0.getXI() == vr0.getXI());
-      Assert.assertTrue(v0.getYI() == vr0.getYI());
-      Assert.assertTrue(v0.getZI() == vr0.getZI());
-      Assert.assertTrue(v0.getWI() == vr0.getWI());
+      Assert.assertEquals((long) vr0.getXI(), (long) v0.getXI());
+      Assert.assertEquals((long) vr0.getYI(), (long) v0.getYI());
+      Assert.assertEquals((long) vr0.getZI(), (long) v0.getZI());
+      Assert.assertEquals((long) vr0.getWI(), (long) v0.getWI());
 
-      Assert.assertTrue(v1.getXI() == vr1.getXI());
-      Assert.assertTrue(v1.getYI() == vr1.getYI());
-      Assert.assertTrue(v1.getZI() == vr1.getZI());
-      Assert.assertTrue(v1.getWI() == vr1.getWI());
+      Assert.assertEquals((long) vr1.getXI(), (long) v1.getXI());
+      Assert.assertEquals((long) vr1.getYI(), (long) v1.getYI());
+      Assert.assertEquals((long) vr1.getZI(), (long) v1.getZI());
+      Assert.assertEquals((long) vr1.getWI(), (long) v1.getWI());
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+  @Test public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = PVectorM4IContract.randomPositiveSmallNumber();
       final int y = PVectorM4IContract.randomPositiveSmallNumber();
       final int z = PVectorM4IContract.randomPositiveSmallNumber();
       final int w = PVectorM4IContract.randomPositiveSmallNumber();
-      final PVectorM4I<T> v = this.newVectorM4I(x, y, z, w);
+      final V v = this.newVectorM4I(x, y, z, w);
 
       final int m = PVectorM4I.magnitude(v);
       Assert.assertTrue(m >= 1);
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+  @Test public final void testMagnitudeNormal()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+  @Test public final void testMagnitudeNormalizeZero()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeOne()
+  @Test public final void testMagnitudeOne()
   {
-    final PVectorM4I<T> v = this.newVectorM4I(1, 0, 0, 0);
+    final V v = this.newVectorM4I(1, 0, 0, 0);
     final int m = PVectorM4I.magnitude(v);
-    Assert.assertTrue(m == 1);
+    Assert.assertEquals(1L, (long) m);
   }
 
-  @Override @Test public void testMagnitudeSimple()
+  @Test public final void testMagnitudeSimple()
   {
-    final PVectorM4I<T> v = this.newVectorM4I(8, 0, 0, 0);
+    final V v = this.newVectorM4I(8, 0, 0, 0);
 
     {
       final int p = PVectorM4I.dotProduct(v, v);
       final int q = PVectorM4I.magnitudeSquared(v);
       final int r = PVectorM4I.magnitude(v);
-      Assert.assertTrue(p == 64);
-      Assert.assertTrue(q == 64);
-      Assert.assertTrue(r == 8);
+      Assert.assertEquals(64L, (long) p);
+      Assert.assertEquals(64L, (long) q);
+      Assert.assertEquals(8L, (long) r);
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+  @Test public final void testMagnitudeZero()
   {
-    final PVectorM4I<T> v = this.newVectorM4I(0, 0, 0, 0);
+    final V v = this.newVectorM4I(0, 0, 0, 0);
     final int m = PVectorM4I.magnitude(v);
-    Assert.assertTrue(m == 0);
+    Assert.assertEquals(0L, (long) m);
   }
 
-  @Override @Test public void testNormalizeSimple()
+  @Test public final void testNormalizeSimple()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testNormalizeZero()
+  @Test public final void testNormalizeZero()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testOrthonormalize()
+  @Test public final void testOrthonormalize()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testOrthonormalizeMutation()
+  @Test public final void testOrthonormalizeMutation()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+  @Test public final void testProjectionPerpendicularZero()
   {
     {
-      final PVectorM4I<T> p = this.newVectorM4I(1, 0, 0, 0);
-      final PVectorM4I<T> q = this.newVectorM4I(0, 1, 0, 0);
-      final PVectorM4I<T> r = this.newVectorM4I();
-      final PVectorM4I<T> u = PVectorM4I.projection(p, q, r);
+      final V p = this.newVectorM4I(1, 0, 0, 0);
+      final V q = this.newVectorM4I(0, 1, 0, 0);
+      final V r = this.newVectorM4I();
+      final V u = PVectorM4I.projection(p, q, r);
 
       Assert.assertSame(r, u);
-      Assert.assertTrue(PVectorM4I.magnitude(u) == 0);
+      Assert.assertEquals(0L, (long) PVectorM4I.magnitude(u));
     }
 
     {
-      final PVectorM4I<T> p = this.newVectorM4I(-1, 0, 0, 0);
-      final PVectorM4I<T> q = this.newVectorM4I(0, 1, 0, 0);
-      final PVectorM4I<T> r = this.newVectorM4I();
-      final PVectorM4I<T> u = PVectorM4I.projection(p, q, r);
+      final V p = this.newVectorM4I(-1, 0, 0, 0);
+      final V q = this.newVectorM4I(0, 1, 0, 0);
+      final V r = this.newVectorM4I();
+      final V u = PVectorM4I.projection(p, q, r);
 
       Assert.assertSame(r, u);
-      Assert.assertTrue(PVectorM4I.magnitude(u) == 0);
+      Assert.assertEquals(0L, (long) PVectorM4I.magnitude(u));
     }
   }
 
-  @Override @Test public void testScaleMutation()
+  @Test public final void testScaleMutation()
   {
-    final PVectorM4I<T> out = this.newVectorM4I();
-    final PVectorM4I<T> v0 = this.newVectorM4I(1, 1, 1, 1);
+    final V out = this.newVectorM4I();
+    final V v0 = this.newVectorM4I(1, 1, 1, 1);
 
-    Assert.assertTrue(out.getXI() == 0);
-    Assert.assertTrue(out.getYI() == 0);
-    Assert.assertTrue(out.getZI() == 0);
-    Assert.assertTrue(out.getWI() == 1);
-    Assert.assertTrue(v0.getXI() == 1);
-    Assert.assertTrue(v0.getYI() == 1);
-    Assert.assertTrue(v0.getZI() == 1);
-    Assert.assertTrue(v0.getWI() == 1);
+    Assert.assertEquals(0L, (long) out.getXI());
+    Assert.assertEquals(0L, (long) out.getYI());
+    Assert.assertEquals(0L, (long) out.getZI());
+    Assert.assertEquals(1L, (long) out.getWI());
+    Assert.assertEquals(1L, (long) v0.getXI());
+    Assert.assertEquals(1L, (long) v0.getYI());
+    Assert.assertEquals(1L, (long) v0.getZI());
+    Assert.assertEquals(1L, (long) v0.getWI());
 
-    final PVectorM4I<T> ov0 = PVectorM4I.scale(v0, 2, out);
+    final V ov0 = PVectorM4I.scale(v0, 2.0, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXI() == 2);
-    Assert.assertTrue(out.getYI() == 2);
-    Assert.assertTrue(out.getZI() == 2);
-    Assert.assertTrue(out.getWI() == 2);
-    Assert.assertTrue(v0.getXI() == 1);
-    Assert.assertTrue(v0.getYI() == 1);
-    Assert.assertTrue(v0.getZI() == 1);
-    Assert.assertTrue(v0.getWI() == 1);
+    Assert.assertEquals(ov0, out);
+    Assert.assertEquals(2L, (long) out.getXI());
+    Assert.assertEquals(2L, (long) out.getYI());
+    Assert.assertEquals(2L, (long) out.getZI());
+    Assert.assertEquals(2L, (long) out.getWI());
+    Assert.assertEquals(1L, (long) v0.getXI());
+    Assert.assertEquals(1L, (long) v0.getYI());
+    Assert.assertEquals(1L, (long) v0.getZI());
+    Assert.assertEquals(1L, (long) v0.getWI());
 
-    final PVectorM4I<T> ov1 = PVectorM4I.scaleInPlace(v0, 2);
+    final V ov1 = PVectorM4I.scaleInPlace(v0, 2);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXI() == 2);
-    Assert.assertTrue(ov1.getYI() == 2);
-    Assert.assertTrue(ov1.getZI() == 2);
-    Assert.assertTrue(ov1.getWI() == 2);
-    Assert.assertTrue(v0.getXI() == 2);
-    Assert.assertTrue(v0.getYI() == 2);
-    Assert.assertTrue(v0.getZI() == 2);
-    Assert.assertTrue(v0.getWI() == 2);
+    Assert.assertEquals(v0, ov1);
+    Assert.assertEquals(2L, (long) ov1.getXI());
+    Assert.assertEquals(2L, (long) ov1.getYI());
+    Assert.assertEquals(2L, (long) ov1.getZI());
+    Assert.assertEquals(2L, (long) ov1.getWI());
+    Assert.assertEquals(2L, (long) v0.getXI());
+    Assert.assertEquals(2L, (long) v0.getYI());
+    Assert.assertEquals(2L, (long) v0.getZI());
+    Assert.assertEquals(2L, (long) v0.getWI());
   }
 
-  @Override @Test public void testScaleOne()
+  @Test public final void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = PVectorM4IContract.randomPositiveNumber();
       final int y = PVectorM4IContract.randomPositiveNumber();
       final int z = PVectorM4IContract.randomPositiveNumber();
       final int w = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> v = this.newVectorM4I(x, y, z, w);
+      final V v = this.newVectorM4I(x, y, z, w);
 
-      final PVectorM4I<T> vr = this.newVectorM4I();
+      final V vr = this.newVectorM4I();
 
-      PVectorM4I.scale(v, 1, vr);
+      PVectorM4I.scale(v, 1.0, vr);
 
-      Assert.assertTrue(v.getXI() == vr.getXI());
-      Assert.assertTrue(v.getYI() == vr.getYI());
-      Assert.assertTrue(v.getZI() == vr.getZI());
-      Assert.assertTrue(v.getWI() == vr.getWI());
+      Assert.assertEquals((long) vr.getXI(), (long) v.getXI());
+      Assert.assertEquals((long) vr.getYI(), (long) v.getYI());
+      Assert.assertEquals((long) vr.getZI(), (long) v.getZI());
+      Assert.assertEquals((long) vr.getWI(), (long) v.getWI());
 
       {
         final int orig_x = v.getXI();
@@ -1045,71 +1063,71 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
 
         PVectorM4I.scaleInPlace(v, 1);
 
-        Assert.assertTrue(v.getXI() == orig_x);
-        Assert.assertTrue(v.getYI() == orig_y);
-        Assert.assertTrue(v.getZI() == orig_z);
-        Assert.assertTrue(v.getWI() == orig_w);
+        Assert.assertEquals((long) orig_x, (long) v.getXI());
+        Assert.assertEquals((long) orig_y, (long) v.getYI());
+        Assert.assertEquals((long) orig_z, (long) v.getZI());
+        Assert.assertEquals((long) orig_w, (long) v.getWI());
       }
     }
   }
 
-  @Override @Test public void testScaleZero()
+  @Test public final void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = PVectorM4IContract.randomPositiveNumber();
       final int y = PVectorM4IContract.randomPositiveNumber();
       final int z = PVectorM4IContract.randomPositiveNumber();
       final int w = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> v = this.newVectorM4I(x, y, z, w);
+      final V v = this.newVectorM4I(x, y, z, w);
 
-      final PVectorM4I<T> vr = this.newVectorM4I();
+      final V vr = this.newVectorM4I();
 
-      PVectorM4I.scale(v, 0, vr);
+      PVectorM4I.scale(v, 0.0, vr);
 
-      Assert.assertTrue(vr.getXI() == 0);
-      Assert.assertTrue(vr.getYI() == 0);
-      Assert.assertTrue(vr.getZI() == 0);
-      Assert.assertTrue(vr.getWI() == 0);
+      Assert.assertEquals(0L, (long) vr.getXI());
+      Assert.assertEquals(0L, (long) vr.getYI());
+      Assert.assertEquals(0L, (long) vr.getZI());
+      Assert.assertEquals(0L, (long) vr.getWI());
 
       {
         PVectorM4I.scaleInPlace(v, 0);
 
-        Assert.assertTrue(v.getXI() == 0);
-        Assert.assertTrue(v.getYI() == 0);
-        Assert.assertTrue(v.getZI() == 0);
-        Assert.assertTrue(v.getWI() == 0);
+        Assert.assertEquals(0L, (long) v.getXI());
+        Assert.assertEquals(0L, (long) v.getYI());
+        Assert.assertEquals(0L, (long) v.getZI());
+        Assert.assertEquals(0L, (long) v.getWI());
       }
     }
   }
 
-  @Override @Test public void testString()
+  @Test public final void testString()
   {
-    final PVectorM4I<T> v = this.newVectorM4I(1, 2, 3, 4);
-    Assert.assertTrue(v.toString().equals("[PVectorM4I 1 2 3 4]"));
+    final V v = this.newVectorM4I(1, 2, 3, 4);
+    Assert.assertTrue(v.toString().endsWith("1 2 3 4]"));
   }
 
-  @Override @Test public void testSubtract()
+  @Test public final void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = PVectorM4IContract.randomPositiveNumber();
       final int y0 = PVectorM4IContract.randomPositiveNumber();
       final int z0 = PVectorM4IContract.randomPositiveNumber();
       final int w0 = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> v0 = this.newVectorM4I(x0, y0, z0, w0);
+      final V v0 = this.newVectorM4I(x0, y0, z0, w0);
 
       final int x1 = PVectorM4IContract.randomPositiveNumber();
       final int y1 = PVectorM4IContract.randomPositiveNumber();
       final int z1 = PVectorM4IContract.randomPositiveNumber();
       final int w1 = PVectorM4IContract.randomPositiveNumber();
-      final PVectorM4I<T> v1 = this.newVectorM4I(x1, y1, z1, w1);
+      final V v1 = this.newVectorM4I(x1, y1, z1, w1);
 
-      final PVectorM4I<T> vr0 = this.newVectorM4I();
+      final V vr0 = this.newVectorM4I();
       PVectorM4I.subtract(v0, v1, vr0);
 
-      Assert.assertTrue(vr0.getXI() == (v0.getXI() - v1.getXI()));
-      Assert.assertTrue(vr0.getYI() == (v0.getYI() - v1.getYI()));
-      Assert.assertTrue(vr0.getZI() == (v0.getZI() - v1.getZI()));
-      Assert.assertTrue(vr0.getWI() == (v0.getWI() - v1.getWI()));
+      Assert.assertEquals((long) (v0.getXI() - v1.getXI()), (long) vr0.getXI());
+      Assert.assertEquals((long) (v0.getYI() - v1.getYI()), (long) vr0.getYI());
+      Assert.assertEquals((long) (v0.getZI() - v1.getZI()), (long) vr0.getZI());
+      Assert.assertEquals((long) (v0.getWI() - v1.getWI()), (long) vr0.getWI());
 
       {
         final int orig_x = v0.getXI();
@@ -1118,65 +1136,64 @@ public abstract class PVectorM4IContract<T> extends PVectorM4Contract
         final int orig_w = v0.getWI();
         PVectorM4I.subtractInPlace(v0, v1);
 
-        Assert.assertTrue(v0.getXI() == (orig_x - v1.getXI()));
-        Assert.assertTrue(v0.getYI() == (orig_y - v1.getYI()));
-        Assert.assertTrue(v0.getZI() == (orig_z - v1.getZI()));
-        Assert.assertTrue(v0.getWI() == (orig_w - v1.getWI()));
+        Assert.assertEquals((long) (orig_x - v1.getXI()), (long) v0.getXI());
+        Assert.assertEquals((long) (orig_y - v1.getYI()), (long) v0.getYI());
+        Assert.assertEquals((long) (orig_z - v1.getZI()), (long) v0.getZI());
+        Assert.assertEquals((long) (orig_w - v1.getWI()), (long) v0.getWI());
       }
     }
   }
 
-  @Override @Test public void testSubtractMutation()
+  @Test public final void testSubtractMutation()
   {
-    final PVectorM4I<T> out = this.newVectorM4I();
-    final PVectorM4I<T> v0 = this.newVectorM4I(1, 1, 1, 1);
-    final PVectorM4I<T> v1 = this.newVectorM4I(1, 1, 1, 1);
+    final V out = this.newVectorM4I();
+    final V v0 = this.newVectorM4I(1, 1, 1, 1);
+    final V v1 = this.newVectorM4I(1, 1, 1, 1);
 
-    Assert.assertTrue(out.getXI() == 0);
-    Assert.assertTrue(out.getYI() == 0);
-    Assert.assertTrue(out.getZI() == 0);
-    Assert.assertTrue(out.getWI() == 1);
-    Assert.assertTrue(v0.getXI() == 1);
-    Assert.assertTrue(v0.getYI() == 1);
-    Assert.assertTrue(v0.getZI() == 1);
-    Assert.assertTrue(v0.getWI() == 1);
-    Assert.assertTrue(v1.getXI() == 1);
-    Assert.assertTrue(v1.getYI() == 1);
-    Assert.assertTrue(v1.getZI() == 1);
-    Assert.assertTrue(v1.getWI() == 1);
+    Assert.assertEquals(0L, (long) out.getXI());
+    Assert.assertEquals(0L, (long) out.getYI());
+    Assert.assertEquals(0L, (long) out.getZI());
+    Assert.assertEquals(1L, (long) out.getWI());
+    Assert.assertEquals(1L, (long) v0.getXI());
+    Assert.assertEquals(1L, (long) v0.getYI());
+    Assert.assertEquals(1L, (long) v0.getZI());
+    Assert.assertEquals(1L, (long) v0.getWI());
+    Assert.assertEquals(1L, (long) v1.getXI());
+    Assert.assertEquals(1L, (long) v1.getYI());
+    Assert.assertEquals(1L, (long) v1.getZI());
+    Assert.assertEquals(1L, (long) v1.getWI());
 
-    final PVectorM4I<T> ov0 = PVectorM4I.subtract(v0, v1, out);
+    final V ov0 = PVectorM4I.subtract(v0, v1, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXI() == 0);
-    Assert.assertTrue(out.getYI() == 0);
-    Assert.assertTrue(out.getZI() == 0);
-    Assert.assertTrue(out.getWI() == 0);
-    Assert.assertTrue(v0.getXI() == 1);
-    Assert.assertTrue(v0.getYI() == 1);
-    Assert.assertTrue(v0.getZI() == 1);
-    Assert.assertTrue(v0.getWI() == 1);
-    Assert.assertTrue(v1.getXI() == 1);
-    Assert.assertTrue(v1.getYI() == 1);
-    Assert.assertTrue(v1.getZI() == 1);
-    Assert.assertTrue(v1.getWI() == 1);
+    Assert.assertEquals(ov0, out);
+    Assert.assertEquals(0L, (long) out.getXI());
+    Assert.assertEquals(0L, (long) out.getYI());
+    Assert.assertEquals(0L, (long) out.getZI());
+    Assert.assertEquals(0L, (long) out.getWI());
+    Assert.assertEquals(1L, (long) v0.getXI());
+    Assert.assertEquals(1L, (long) v0.getYI());
+    Assert.assertEquals(1L, (long) v0.getZI());
+    Assert.assertEquals(1L, (long) v0.getWI());
+    Assert.assertEquals(1L, (long) v1.getXI());
+    Assert.assertEquals(1L, (long) v1.getYI());
+    Assert.assertEquals(1L, (long) v1.getZI());
+    Assert.assertEquals(1L, (long) v1.getWI());
 
-    final PVectorM4I<T> ov1 = PVectorM4I.subtractInPlace(v0, v1);
+    final V ov1 = PVectorM4I.subtractInPlace(v0, v1);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXI() == 0);
-    Assert.assertTrue(ov1.getYI() == 0);
-    Assert.assertTrue(ov1.getZI() == 0);
-    Assert.assertTrue(ov1.getWI() == 0);
-    Assert.assertTrue(v0.getXI() == 0);
-    Assert.assertTrue(v0.getYI() == 0);
-    Assert.assertTrue(v0.getZI() == 0);
-    Assert.assertTrue(v0.getWI() == 0);
-    Assert.assertTrue(v1.getXI() == 1);
-    Assert.assertTrue(v1.getYI() == 1);
-    Assert.assertTrue(v1.getZI() == 1);
-    Assert.assertTrue(v1.getWI() == 1);
+    Assert.assertEquals(v0, ov1);
+    Assert.assertEquals(0L, (long) ov1.getXI());
+    Assert.assertEquals(0L, (long) ov1.getYI());
+    Assert.assertEquals(0L, (long) ov1.getZI());
+    Assert.assertEquals(0L, (long) ov1.getWI());
+    Assert.assertEquals(0L, (long) v0.getXI());
+    Assert.assertEquals(0L, (long) v0.getYI());
+    Assert.assertEquals(0L, (long) v0.getZI());
+    Assert.assertEquals(0L, (long) v0.getWI());
+    Assert.assertEquals(1L, (long) v1.getXI());
+    Assert.assertEquals(1L, (long) v1.getYI());
+    Assert.assertEquals(1L, (long) v1.getZI());
+    Assert.assertEquals(1L, (long) v1.getWI());
   }
 
-  protected abstract <T> PVectorM4I<T> newVectorM4I();
 }

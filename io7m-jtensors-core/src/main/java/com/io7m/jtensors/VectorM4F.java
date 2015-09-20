@@ -28,8 +28,7 @@ import com.io7m.jnull.Nullable;
  * without explicit synchronization. </p>
  */
 
-public final class VectorM4F
-  implements VectorReadable4FType, VectorWritable4FType
+public final class VectorM4F implements Vector4FType
 {
   private float w = 1.0f;
   private float x;

@@ -37,8 +37,7 @@ import com.io7m.jtensors.VectorReadable4IType;
  * @since 7.0.0
  */
 
-public final class PVectorM4I<T>
-  implements PVectorReadable4IType<T>, PVectorWritable4IType<T>
+public final class PVectorM4I<T> implements PVector4IType<T>
 {
   private int w = 1;
   private int x;

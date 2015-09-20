@@ -17,9 +17,10 @@
 package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.parameterized.PVectorM4D;
+import com.io7m.jtensors.tests.VectorM4DContract;
 
-public final class PVectorM4DTest<T>
-  extends PVectorM4DContract<T, PVectorM4D<T>>
+public final class PVectorM4DUntypedTest<T>
+  extends VectorM4DContract<PVectorM4D<T>>
 {
 
   @Override protected PVectorM4D<T> newVectorM4D()

@@ -28,8 +28,7 @@ import com.io7m.jnull.Nullable;
  * @since 5.3.0
  */
 
-public final class VectorM4L
-  implements VectorReadable4LType, VectorWritable4LType
+public final class VectorM4L implements Vector4LType
 {
   private long w = 1L;
   private long x;

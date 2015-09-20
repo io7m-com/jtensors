@@ -33,12 +33,12 @@ import com.io7m.jtensors.VectorReadable4FType;
  * <p> Values of this type cannot be accessed safely from multiple threads
  * without explicit synchronization. </p>
  *
- * @since 7.0.0
  * @param <T> A phantom type parameter
+ *
+ * @since 7.0.0
  */
 
-public final class PVectorM4F<T>
-  implements PVectorReadable4FType<T>, PVectorWritable4FType<T>
+public final class PVectorM4F<T> implements PVector4FType<T>
 {
   private float w = 1.0f;
   private float x;

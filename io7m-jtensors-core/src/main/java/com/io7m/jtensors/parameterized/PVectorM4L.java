@@ -29,17 +29,15 @@ import com.io7m.jtensors.VectorReadable4LType;
 /**
  * <p> A four-dimensional mutable vector type with integer elements. </p>
  *
- * <p>
- * Values of this type cannot be accessed safely from multiple threads without
- * explicit synchronization. </p>
+ * <p> Values of this type cannot be accessed safely from multiple threads
+ * without explicit synchronization. </p>
  *
  * @param <T> A phantom type parameter
  *
  * @since 7.0.0
  */
 
-public final class PVectorM4L<T>
-  implements PVectorReadable4LType<T>, PVectorWritable4LType<T>
+public final class PVectorM4L<T> implements PVector4LType<T>
 {
   private long w = 1L;
   private long x;
@@ -649,7 +647,7 @@ public final class PVectorM4L<T>
    * <ul> <li>{@code interpolateLinear(v0, v1, 0.0, r) → r = v0}</li> <li>{@code
    * interpolateLinear(v0, v1, 1.0, r) → r = v1}</li> </ul>
    *
-   * @param c Preallocated storage
+   * @param c     Preallocated storage
    * @param v0    The left input vector.
    * @param v1    The right input vector.
    * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}.

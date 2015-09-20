@@ -26,8 +26,7 @@ import com.io7m.jnull.Nullable;
  * explicit synchronization. </p>
  */
 
-public final class VectorM4I
-  implements VectorReadable4IType, VectorWritable4IType
+public final class VectorM4I implements Vector4IType
 {
   private int w = 1;
   private int x;

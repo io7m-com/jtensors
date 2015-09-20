@@ -28,8 +28,7 @@ import com.io7m.jnull.Nullable;
  * without explicit synchronization. </p>
  */
 
-public final class VectorM4D
-  implements VectorReadable4DType, VectorWritable4DType
+public final class VectorM4D implements Vector4DType
 {
   private double w = 1.0;
   private double x;
