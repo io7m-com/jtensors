@@ -316,7 +316,7 @@ public final class QuaternionM4F
    * @since 5.0.0
    */
 
-  public static <Q extends QuaternionWritable4FType> Q lookAtWithContext(
+  public static <Q extends QuaternionWritable4FType> Q lookAt(
     final ContextQM4F context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,

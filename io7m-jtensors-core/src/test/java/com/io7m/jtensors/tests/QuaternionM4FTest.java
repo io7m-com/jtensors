@@ -651,7 +651,7 @@ import org.junit.Test;
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Y;
 
     MatrixM4x4F.lookAt(mc, origin, target, axis, mr);
-    QuaternionM4F.lookAtWithContext(qc, origin, target, axis, qr);
+    QuaternionM4F.lookAt(qc, origin, target, axis, qr);
     QuaternionM4F.makeRotationMatrix4x4(qr, mqr);
 
     System.out.println("mr: ");
@@ -688,7 +688,7 @@ import org.junit.Test;
     final VectorReadable3FType axis = QuaternionM4FTest.AXIS_Y;
 
     MatrixM4x4F.lookAt(mc, origin, target, axis, mr);
-    QuaternionM4F.lookAtWithContext(qc, origin, target, axis, qr);
+    QuaternionM4F.lookAt(qc, origin, target, axis, qr);
     QuaternionM4F.makeRotationMatrix4x4(qr, mqr);
 
     System.out.println("mr: ");
@@ -740,7 +740,7 @@ import org.junit.Test;
 
       MatrixM4x4F.lookAt(
         mc, origin, target, QuaternionM4FTest.AXIS_Y, ml);
-      QuaternionM4F.lookAtWithContext(
+      QuaternionM4F.lookAt(
         qc, origin, target, QuaternionM4FTest.AXIS_Y, lq);
       QuaternionM4F.makeRotationMatrix4x4(lq, mq);
 

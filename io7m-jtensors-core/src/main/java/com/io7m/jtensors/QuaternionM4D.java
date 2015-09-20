@@ -313,7 +313,7 @@ public final class QuaternionM4D
    * @since 5.0.0
    */
 
-  public static <Q extends QuaternionWritable4DType> Q lookAtWithContext(
+  public static <Q extends QuaternionWritable4DType> Q lookAt(
     final ContextQM4D context,
     final VectorReadable3DType origin,
     final VectorReadable3DType target,
