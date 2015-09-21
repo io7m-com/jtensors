@@ -19,7 +19,6 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixM3x3F;
-import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.MatrixM4x4F;
 import com.io7m.jtensors.MatrixReadable4x4FType;
 import com.io7m.jtensors.VectorM3F;
