@@ -1703,4 +1703,179 @@ public final class MatrixM4x4F
 
     }
   }
+
+
+
+
+
+
+
+
+
+  /**
+   * Compare matrices.
+   *
+   * @param m0 The left matrix
+   * @param m1 The right matrix
+   *
+   * @return {@code true} if all elements of {@code m0} are equal to {@code m1}.
+   */
+
+  public static boolean compareElements(
+    final MatrixReadable4x4FType m0,
+    final MatrixReadable4x4FType m1)
+  {
+    if (!MatrixM4x4F.compareRow0(m0, m1)) {
+      return false;
+    }
+    if (!MatrixM4x4F.compareRow1(m0, m1)) {
+      return false;
+    }
+    if (!MatrixM4x4F.compareRow2(m0, m1)) {
+      return false;
+    }
+    return MatrixM4x4F.compareRow3(m0, m1);
+  }
+
+  /**
+   * Hash matrices.
+   *
+   * @param m The input matrix
+   *
+   * @return The hash of all the elements of {@code m}
+   */
+
+  public static int hashElements(final MatrixReadable4x4FType m)
+  {
+    final int prime = 31;
+    int r = prime;
+
+    r = HashUtility.accumulateFloatHash(m.getR0C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR1C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR2C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR3C0F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(m.getR0C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR1C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR2C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR3C1F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(m.getR0C2F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR1C2F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR2C2F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR3C2F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(m.getR0C3F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR1C3F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR2C3F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR3C3F(), prime, r);
+
+    return r;
+  }
+
+  /**
+   * Show matrices. Print all of the elements of {@code m} in square-bracketed
+   * matrix form.
+   *
+   * @param m  The input matrix
+   * @param sb The string builder
+   */
+
+  public static void showElements(
+    final MatrixReadable4x4FType m,
+    final StringBuilder sb)
+  {
+    final String row0 = String.format(
+      "[%+.6f %+.6f %+.6f %+.6f]\n",
+      m.getR0C0F(),
+      m.getR0C0F(),
+      m.getR0C0F(),
+      m.getR0C0F());
+    final String row1 = String.format(
+      "[%+.6f %+.6f %+.6f %+.6f]\n",
+      m.getR1C0F(),
+      m.getR1C0F(),
+      m.getR1C0F(),
+      m.getR1C0F());
+    final String row2 = String.format(
+      "[%+.6f %+.6f %+.6f %+.6f]\n",
+      m.getR2C0F(),
+      m.getR2C0F(),
+      m.getR2C0F(),
+      m.getR2C0F());
+    final String row3 = String.format(
+      "[%+.6f %+.6f %+.6f %+.6f]\n",
+      m.getR3C0F(),
+      m.getR3C0F(),
+      m.getR3C0F(),
+      m.getR3C0F());
+    sb.append(row0);
+    sb.append(row1);
+    sb.append(row2);
+    sb.append(row3);
+  }
+
+  private static boolean compareRow0(
+    final MatrixReadable4x4FType m0,
+    final MatrixReadable4x4FType m1)
+  {
+    if (m0.getR0C0F() != m1.getR0C0F()) {
+      return false;
+    }
+    if (m0.getR0C1F() != m1.getR0C1F()) {
+      return false;
+    }
+    if (m0.getR0C2F() != m1.getR0C2F()) {
+      return false;
+    }
+    return m0.getR0C3F() == m1.getR0C3F();
+  }
+
+  private static boolean compareRow1(
+    final MatrixReadable4x4FType m0,
+    final MatrixReadable4x4FType m1)
+  {
+    if (m0.getR1C0F() != m1.getR1C0F()) {
+      return false;
+    }
+    if (m0.getR1C1F() != m1.getR1C1F()) {
+      return false;
+    }
+    if (m0.getR1C2F() != m1.getR1C2F()) {
+      return false;
+    }
+    return m0.getR1C3F() == m1.getR1C3F();
+  }
+
+  private static boolean compareRow2(
+    final MatrixReadable4x4FType m0,
+    final MatrixReadable4x4FType m1)
+  {
+    if (m0.getR2C0F() != m1.getR2C0F()) {
+      return false;
+    }
+    if (m0.getR2C1F() != m1.getR2C1F()) {
+      return false;
+    }
+    if (m0.getR2C2F() != m1.getR2C2F()) {
+      return false;
+    }
+    return m0.getR2C3F() == m1.getR2C3F();
+  }
+
+  private static boolean compareRow3(
+    final MatrixReadable4x4FType m0,
+    final MatrixReadable4x4FType m1)
+  {
+    if (m0.getR3C0F() != m1.getR3C0F()) {
+      return false;
+    }
+    if (m0.getR3C1F() != m1.getR3C1F()) {
+      return false;
+    }
+    if (m0.getR3C2F() != m1.getR3C2F()) {
+      return false;
+    }
+    return m0.getR3C3F() == m1.getR3C3F();
+  }
 }

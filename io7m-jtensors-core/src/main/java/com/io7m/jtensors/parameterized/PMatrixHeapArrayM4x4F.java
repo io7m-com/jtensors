@@ -18,7 +18,6 @@ package com.io7m.jtensors.parameterized;
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixM4x4F;
 import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
@@ -26,8 +25,6 @@ import com.io7m.jtensors.VectorReadable4FType;
 import com.io7m.jtensors.VectorWritable2FType;
 import com.io7m.jtensors.VectorWritable3FType;
 import com.io7m.jtensors.VectorWritable4FType;
-
-import java.util.Arrays;
 
 /**
  * <p>The default implementation of the {@link PMatrix4x4FType} interface.</p>
@@ -46,8 +43,7 @@ public final class PMatrixHeapArrayM4x4F<T0, T1>
   private final float[][] elements;
 
   private PMatrixHeapArrayM4x4F(
-    final @Nullable
-    PMatrixReadable4x4FType<T0, T1> m)
+    final @Nullable PMatrixReadable4x4FType<T0, T1> m)
   {
     this.elements = new float[4][4];
 
@@ -99,7 +95,7 @@ public final class PMatrixHeapArrayM4x4F<T0, T1>
     }
 
     final PMatrixHeapArrayM4x4F<?, ?> other = (PMatrixHeapArrayM4x4F<?, ?>) obj;
-    return Arrays.deepEquals(this.elements, other.elements);
+    return MatrixM4x4F.compareElements(this, other);
   }
 
   @Override public <V extends VectorWritable4FType> void getRow4F(
@@ -248,30 +244,7 @@ public final class PMatrixHeapArrayM4x4F<T0, T1>
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C0F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C1F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C2F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C3F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C3F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C3F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C3F(), prime, r);
-
-    return r;
+    return MatrixM4x4F.hashElements(this);
   }
 
   @Override public void setRowColumnF(
@@ -282,21 +255,11 @@ public final class PMatrixHeapArrayM4x4F<T0, T1>
     this.elements[row][column] = value;
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < 4; ++row) {
-      final float c0 = this.elements[row][0];
-      final float c1 = this.elements[row][1];
-      final float c2 = this.elements[row][2];
-      final float c3 = this.elements[row][3];
-      final String s =
-        String.format("[%+.6f %+.6f %+.6f %+.6f]\n", c0, c1, c2, c3);
-      builder.append(s);
-    }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
+    MatrixM4x4F.showElements(this, builder);
+    return builder.toString();
   }
 
   @Override public <V extends VectorWritable3FType> void getRow3F(
