@@ -29,6 +29,11 @@
       <artifactId>io7m-jtensors-core</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>io7m-jtensors-bytebuffered</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
   <build>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:section
+  xmlns:s="http://schemas.io7m.com/structural/2.1.0"
+  xml:id="com.io7m.jtensors.conventions.matrices">
+  <s:section-title>Matrices</s:section-title>
+  <s:section-contents/>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.matrices.types">
+    <s:subsection-title>Types</s:subsection-title>
+    <s:paragraph>
+      The <s:term s:type="package">${project.parent.name}</s:term> package provides only square
+      matrix types with single-precision (<s:term s:type="type">float</s:term>) elements,
+      and double-precision (<s:term s:type="type">double</s:term>) elements.
+      The package unambiguously identifies the matrix types by using the following
+      naming conventions for the types (given as a simple
+      <s:link-external s:target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
+      grammar), where <s:term s:type="term">prefix</s:term> is a type-specific prefix:
+    </s:paragraph>
+    <s:formal-item s:kind="convention">
+      <s:formal-item-title>Matrix type naming</s:formal-item-title>
+      <s:verbatim><![CDATA[
+prefix       = ...
+mutability   = "M" | "I" ;
+size         = "2x2" | "3x3" | "4x4" ;
+element_type = "F" | "D" ;
+type         = prefix , mutability , size , element_type ;]]>
+      </s:verbatim>
+    </s:formal-item>
+  </s:subsection>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.matrices.storage">
+    <s:subsection-title>Storage</s:subsection-title>
+    <s:paragraph>
+      Several implementations of the matrix types are available, some of
+      which store the elements of matrices data in direct memory
+      <s:footnote>
+        See <s:link-external s:target="http://docs.oracle.com/javase/1.5.0/docs/api/java/nio/ByteBuffer.html#allocateDirect(int)">ByteBuffer.allocateDirect(int)</s:link-external>.
+      </s:footnote>. This allows for zero-copy passing of the matrix data
+      to native code
+      <s:footnote>
+        Typically, the <s:link-external s:target="http://opengl.org">OpenGL</s:link-external> API.
+      </s:footnote>. Use of direct memory does incur an extra cost with regards
+      to creation and deletion of matrices, and some functions in the package do
+      require temporary matrices in order to work. Therefore, the package provides
+      <s:term s:type="type">Context</s:term> types that allow the user to pre-allocate
+      storage that the functions can reuse an unlimited number of times. The package
+      typically defines one <s:term s:type="type">Context</s:term> type per class.
+      See the <s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM4x4D.ContextMM4D.html">MatrixM4x4D.ContextMM4D</s:link-external>
+      type for a concrete example; any function in the
+      <s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM4x4D.html">MatrixM4x4D</s:link-external>
+      class that takes a <s:term s:type="type">ContextMM4D</s:term> as an argument can be
+      depended upon not to allocate more memory. Note that the <s:term s:type="type">ContextMM4D</s:term>
+      type cannot be shared across threads and is completely opaque outside of the
+      <s:term s:type="package">jtensors</s:term> package: Users should
+      allocate one <s:term s:type="type">ContextMM4D</s:term>
+      per thread.
+    </s:paragraph>
+    <s:formal-item s:kind="example">
+      <s:formal-item-title>Context usage</s:formal-item-title>
+      <s:verbatim><![CDATA[
+MatrixM4x4D.ContextMM4D context = new MatrixM4x4D.ContextMM4D();
+Matrix4x4DType mi = MatrixDirectM4x4D.newMatrix();
+Matrix4x4DType mo = MatrixDirectM4x4D.newMatrix();
+
+MatrixM4x4D.invert(context, mi, mo);
+MatrixM4x4D.invert(context, mo, mi);]]>
+      </s:verbatim>
+    </s:formal-item>
+    <s:paragraph>
+      Matrix data is stored in column-major format
+      <s:footnote>
+        The convention used by most programs using the <s:link-external s:target="http://opengl.org">OpenGL</s:link-external> API.
+      </s:footnote>, in whatever is the
+      platform's native byte order. For an <s:term s:type="variable">m x m</s:term>
+      square matrix, assuming that each element of the matrix uses
+      <s:term s:type="variable">n</s:term> bytes, the first byte of the element at
+      row <s:term s:type="variable">r</s:term> and column <s:term s:type="variable">c</s:term>
+      (assuming <s:term s:type="function">0 &lt;= r &lt; m</s:term> and
+      <s:term s:type="function">0 &lt;= c &lt; m</s:term>)
+      can be found by <s:term s:type="function">(c * m * n) + (r * n)</s:term>.
+    </s:paragraph>
+    <s:paragraph>
+      As an example, a 4x4 matrix with <s:term s:type="constant">4</s:term>
+      byte elements would be stored in memory as shown in the following
+      diagram:
+    </s:paragraph>
+    <s:formal-item s:kind="example">
+      <s:formal-item-title>Column-major storage memory layout</s:formal-item-title>
+      <s:image s:source="images/memory.png">Column-major storage memory layout</s:image>
+    </s:formal-item>
+    <s:paragraph>
+      So, the element at row <s:term s:type="constant">0</s:term>,
+      column <s:term s:type="constant">0</s:term> would be stored in
+      bytes <s:term s:type="constant">[0 .. 3]</s:term>. The
+      element at row <s:term s:type="constant">1</s:term>, column
+      <s:term s:type="constant">0</s:term> would be stored in bytes
+      <s:term s:type="constant">[4 .. 7]</s:term>. The
+      element at row <s:term s:type="constant">0</s:term>, column
+      <s:term s:type="constant">1</s:term> would be stored in bytes
+      <s:term s:type="constant">[16 .. 19]</s:term>, and so on.
+    </s:paragraph>
+    <s:paragraph>
+      The immutable matrix types available in the package are not
+      backed by direct memory and only offer a small fraction of
+      the functionality of the mutable types. They are essentially
+      provided as a way to construct immutable snapshots of a mutable
+      matrix in order to, for example, safely transfer matrix values
+      across threads without sharing a reference to mutable memory.
+    </s:paragraph>
+  </s:subsection>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.matrices.handedness">
+    <s:subsection-title>Rotations &amp; Handedness</s:subsection-title>
+    <s:paragraph>
+      Any of the matrix functions that deal with rotations
+      assume a right-handed coordinate system. This
+      matches the system used by <s:link-external
+      s:target="http://opengl.org">OpenGL</s:link-external> (and most
+      mathematics literature). A right-handed coordinate system
+      assumes that if the viewer is standing at the origin and
+      looking towards negative infinity on the Z axis, then the
+      X axis runs horizontally (left towards negative infinity
+      and right towards positive infinity), and the Y axis runs
+      vertically (down towards negative infinity and up towards
+      positive infinity). The following image demonstrates this
+      axis configuration:
+    </s:paragraph>
+    <s:formal-item s:kind="example">
+      <s:formal-item-title>Right-handed coordinate system</s:formal-item-title>
+      <s:image s:source="images/axes2.png">Right-handed coordinate system</s:image>
+    </s:formal-item>
+    <s:paragraph>
+      The <s:term s:type="package">${project.parent.name}</s:term> package adheres
+      to the convention that a positive rotation around an axis
+      represents a counter-clockwise rotation when viewing the
+      system along the negative direction of the axis in question.
+    </s:paragraph>
+    <s:formal-item s:kind="example">
+      <s:formal-item-title>Right-handed rotations</s:formal-item-title>
+      <s:image s:source="images/rotations.png">Right-handed rotations</s:image>
+    </s:formal-item>
+    <s:paragraph>
+      The package uses the following matrices to define rotations
+      around each axis:
+    </s:paragraph>
+    <s:formal-item s:kind="matrix">
+      <s:formal-item-title>Rotation of r radians around the X axis</s:formal-item-title>
+      <s:image s:source="images/matrix_rx.png">Rotation of r radians around the X axis</s:image>
+    </s:formal-item>
+    <s:formal-item s:kind="matrix">
+      <s:formal-item-title>Rotation of r radians around the Y axis</s:formal-item-title>
+      <s:image s:source="images/matrix_ry.png">Rotation of r radians around the Y axis</s:image>
+    </s:formal-item>
+    <s:formal-item s:kind="matrix">
+      <s:formal-item-title>Rotation of r radians around the Z axis</s:formal-item-title>
+      <s:image s:source="images/matrix_rz.png">Rotation of r radians around the Z axis</s:image>
+    </s:formal-item>
+    <s:paragraph>
+      Which results in the following matrix for rotating <s:term
+      s:type="variable">r</s:term> radians around the axis given
+      by <s:term s:type="constant">(x, y, z)</s:term>, assuming
+      <s:term s:type="variable">s = sin(r)</s:term> and <s:term
+      s:type="variable">c = cos(r)</s:term>
+      <s:footnote>
+        See <s:link-external s:target="http://mathfor3dgameprogramming.com">Mathematics
+        for 3D Game Programming and Computer
+        Graphics</s:link-external> 3rd Edition, section 4.3.1 for the
+        derivation.
+      </s:footnote>:
+    </s:paragraph>
+    <s:formal-item s:kind="matrix">
+      <s:formal-item-title>Rotation of r radians around an arbitrary axis</s:formal-item-title>
+      <s:image s:source="images/rot_matrix.png">Rotation of r radians around an arbitrary axis</s:image>
+    </s:formal-item>
+  </s:subsection>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.matrices.access">
+    <s:subsection-title>Access control</s:subsection-title>
+    <s:paragraph>
+      If a function only needs to read from a value of a matrix type, then
+      it would be desirable to be able to statically enforce this fact. Therefore,
+      the package provides a set of <s:term s:type="type">Readable</s:term>
+      interfaces that all matrix types implement. By writing a function that
+      takes a value of a type implementing a <s:term s:type="type">Readable</s:term>
+      interface, the programmer is implicitly stating that this function does
+      not modify the matrix.
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available matrix Readable types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable2x2FType.html">MatrixReadable2x2FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable2x2DType.html">MatrixReadable2x2DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable3x3FType.html">MatrixReadable3x3FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable3x3DType.html">MatrixReadable3x3DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable4x4FType.html">MatrixReadable4x4FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable4x4DType.html">MatrixReadable4x4DType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+    <s:paragraph>
+      If a function needs to write to a value of a matrix type, then
+      it would be desirable to be able to statically indicate this fact. Therefore,
+      the package provides a set of <s:term s:type="type">Writable</s:term>
+      interfaces that all mutable matrix types implement. By writing a function that
+      takes a value of a type implementing a <s:term s:type="type">Writable</s:term>
+      interface, the programmer is implicitly stating that this function may
+      modify the matrix.
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available matrix Writable types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixWritable2x2FType.html">MatrixWritable2x2FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixWritable2x2DType.html">MatrixWritable2x2DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixWritable3x3FType.html">MatrixWritable3x3FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixWritable3x3DType.html">MatrixWritable3x3DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixWritable4x4FType.html">MatrixWritable4x4FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixWritable4x4DType.html">MatrixWritable4x4DType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+    <s:paragraph>
+      A combination of the above interfaces is provided that
+      essentially abstracts over mutable matrix types. This allows the
+      programmer to write code against pure interfaces without referring
+      to a specific type, and to freely substitute alternative
+      implementations at any time.
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available matrix interface types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Matrix2x2FType.html">Matrix2x2FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Matrix2x2DType.html">Matrix2x2DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Matrix3x3FType.html">Matrix3x3FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Matrix3x3DType.html">Matrix3x3DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Matrix4x4FType.html">Matrix4x4FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Matrix4x4DType.html">Matrix4x4DType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+    <s:paragraph>
+      Finally, if matrices that are backed by direct memory are required
+      (in order to pass them directly to native code, for example), the
+      programmer can require matrices of a
+      <s:term s:type="type">Direct</s:term> type.
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available matrix Direct types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirectDType.html">MatrixDirectDType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirectFType.html">MatrixDirectFType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+    <s:paragraph>
+      It is also useful for the sizes of matrices to be indicated
+      in the types, so the package provides a set of interfaces
+      combining the <s:term s:type="type">Readable</s:term> and
+      <s:term s:type="type">Direct</s:term> types.
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available matrix DirectReadable types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirectReadable2x2FType.html">MatrixDirectReadable2x2FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirectReadable2x2DType.html">MatrixDirectReadable2x2DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirectReadable3x3FType.html">MatrixDirectReadable3x3FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirectReadable3x3DType.html">MatrixDirectReadable3x3DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirectReadable4x4FType.html">MatrixDirectReadable4x4FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirectReadable4x4DType.html">MatrixDirectReadable4x4DType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+    <s:paragraph>
+      Interfaces that abstract over direct, mutable matrices are also
+      provided:
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available matrix Direct types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirect2x2FType.html">MatrixDirect2x2FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirect2x2DType.html">MatrixDirect2x2DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirect3x3FType.html">MatrixDirect3x3FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirect3x3DType.html">MatrixDirect3x3DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirect4x4FType.html">MatrixDirect4x4FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixDirect4x4DType.html">MatrixDirect4x4DType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+  </s:subsection>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.matrices.phantom_types">
+    <s:subsection-title>Phantom Types</s:subsection-title>
+    <s:paragraph>
+      As with the <s:link s:target="com.io7m.jtensors.conventions.vectors.phantom_types">vector</s:link>
+      types, the <s:term s:type="package">${project.parent.name}</s:term> package
+      provides copies of all of the existing matrix types (and interfaces) indexed
+      by a pair of <s:term s:type="term">phantom type parameters</s:term>.
+    </s:paragraph>
+    <s:paragraph>
+      Conceptually, a matrix can be considered as storing a transform from
+      coordinate space <s:term s:type="type">T0</s:term> to space
+      <s:term s:type="type">T1</s:term>. For a 4x4 mutable matrix
+      in the <s:term s:type="package">${project.parent.name}</s:term> package,
+      this is denoted by the type <s:term s:type="type">PMatrixM4x4F&lt;T0,T1></s:term>.
+      It then follows that when matrices are concatenated via multiplications,
+      their type parameters are translated accordingly. For example,
+      a matrix <s:term s:type="type">PMatrixM4x4F&lt;T0,T1></s:term>
+      multiplied by a matrix
+      <s:term s:type="type">PMatrixM4x4F&lt;T1,T2></s:term> results
+      in a matrix of type
+      <s:term s:type="type">PMatrixM4x4F&lt;T0,T2></s:term>. Inverting
+      a matrix results in a matrix that represents the inverse of the original
+      transform that the matrix represented. For example, inverting a matrix of
+      type <s:term s:type="type">PMatrixM4x4F&lt;T0,T1></s:term> results
+      in a matrix of type
+      <s:term s:type="type">PMatrixM4x4F&lt;T1,T0></s:term>.
+    </s:paragraph>
+    <s:paragraph>
+      Type parameters are also translated across multiplications by
+      vectors. A multiplication of a vector of type
+      <s:term s:type="type">PVectorI4F&lt;T0></s:term> by a matrix of
+      type
+      <s:term s:type="type">PMatrixM4x4F&lt;T0,T1></s:term> results in
+      a vector of type
+      <s:term s:type="type">PVectorI4F&lt;T1></s:term>.
+    </s:paragraph>
+    <s:paragraph>
+      Being able to track the types of transforms at this level of detail
+      is invaluable when using systems such as OpenGL, where accidentally
+      mixing up matrices tends to result in visual anomalies that can be
+      extremely hard to track down. By explicitly denoting coordinate spaces
+      with empty types, it's possible to statically prevent all bugs involving
+      accidentally mixing up matrices. It's also possible to prevent the
+      incorrect construction of matrices
+      <s:footnote>
+        It is common for people to make mistakes with matrix multiplication:
+        The order of matrices is effectively the reverse of the order in which
+        the transforms will be applied.
+      </s:footnote>. Additionally,
+      with each matrix labelled by the type of transform it represents, code becomes
+      self-documenting.
+    </s:paragraph>
+    <s:formal-item s:kind="example">
+      <s:formal-item-title>Static tracking of transforms</s:formal-item-title>
+      <s:verbatim><![CDATA[
+interface WorldSpace { }
+interface ViewSpace { }
+interface ObjectSpace { }
+
+PMatrixM4x4F<ObjectSpace, WorldSpace> matrix_model;
+PMatrixM4x4F<WorldSpace, ViewSpace> matrix_view;
+PMatrixM4x4F<ObjectSpace, ViewSpace> matrix_modelview;
+
+PMatrixM4x4F.multiply (matrix_view, matrix_model, matrix_modelview);
+
+// Compilation error: The resulting matrix would be of type PMatrixM4x4F<ViewSpace, ObjectSpace>
+// PMatrixM4x4F.multiply (matrix_model, matrix_view, matrix_modelview);
+
+PMatrixM4x4F<ViewSpace, WorldSpace> matrix_view_inverse;
+PMatrixM4x4F.invert(context, matrix_view, matrix_view_inverse);
+]]></s:verbatim>
+    </s:formal-item>
+    <s:paragraph>
+      Of course, because the type system is unsound, and because the matrices
+      are mutable, it is obviously possible to deliberately construct matrices
+      that claim to be of a particular type of transform but nevertheless
+      contain nonsense values. It is, however, difficult to do this accidentally.
+      The <s:term s:type="package">${project.parent.name}</s:term> package strives
+      to provide a means to prevent accidental errors, and doesn't attempt to
+      address deliberate sabotage.
+    </s:paragraph>
+    <s:paragraph>
+      The parameterized matrix types and interfaces are provided in
+      the <s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/package-summary.html">com.io7m.jtensors.parameterized</s:link-external>
+      package.
+    </s:paragraph>
+  </s:subsection>
+</s:section>

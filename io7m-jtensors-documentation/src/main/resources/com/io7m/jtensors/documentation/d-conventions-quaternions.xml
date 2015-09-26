@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:section
+  xmlns:s="http://schemas.io7m.com/structural/2.1.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xml:id="com.io7m.jtensors.conventions.quaternions">
+  <s:section-title>Quaternions</s:section-title>
+  <s:section-contents/>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.quaternions.types">
+    <s:subsection-title>Types</s:subsection-title>
+    <s:paragraph>
+      The <s:term s:type="package">${project.parent.name}</s:term>
+      package provides quaternions with single-precision
+      (<s:term s:type="type">float</s:term>) elements, and
+      double-precision (<s:term s:type="type">double</s:term>)
+      elements.  Each quaternion type is available in mutable or
+      immutable versions. The package unambiguously identifies
+      the quaternion types by using the following naming
+      conventions for the types (given as a simple <s:link-external
+      s:target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
+      grammar):
+    </s:paragraph>
+    <s:formal-item s:kind="convention">
+      <s:formal-item-title>Quaternion type naming</s:formal-item-title>
+      <s:verbatim><![CDATA[
+mutability   = "M" | "I" ;
+size         = "4" ;
+element_type = "F" | "D" ;
+type         = "Quaternion" , mutability , size , element_type ;]]>
+      </s:verbatim>
+    </s:formal-item>
+    <s:paragraph>
+      A comprehensive list of the available quaternion types is as follows:
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available quaternion types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionM4D.html">QuaternionM4D</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionM4F.html">QuaternionM4F</s:link-external></s:list-item>
+
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionI4D.html">QuaternionI4D</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionI4F.html">QuaternionI4F</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+  </s:subsection>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.quaternions.handedness">
+    <s:subsection-title>Rotations &amp; Handedness</s:subsection-title>
+    <s:paragraph>
+      The included quaternion types and functions have consistent semantics and
+      assumptions with regards to rotation and coordinate systems as the
+      <s:link s:target="com.io7m.jtensors.conventions.matrices.handedness">Matrix</s:link>
+      types, and functions are provided to convert between matrices and
+      quaternions.
+    </s:paragraph>
+  </s:subsection>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.quaternions.access">
+    <s:subsection-title>Access control</s:subsection-title>
+    <s:paragraph>
+      If a function only needs to read from a value of a quaternion type, then
+      it would be desirable to be able to statically enforce this fact. Therefore,
+      the package provides a set of <s:term s:type="type">Readable</s:term>
+      interfaces that all quaternion types implement. By writing a function that
+      takes a value of a type implementing a <s:term s:type="type">Readable</s:term>
+      interface, the programmer is implicitly stating that this function does
+      not modify the quaternion.
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available quaternion Readable types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionReadable4FType.html">QuaternionReadable4FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionReadable4DType.html">QuaternionReadable4DType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+    <s:paragraph>
+      <s:term s:type="type">Writable</s:term> interfaces are provided:
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available quaternion Writable types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionWritable4FType.html">QuaternionWritable4FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionWritable4DType.html">QuaternionWritable4DType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+    <s:paragraph>
+      Interfaces that abstract over mutable quaternions are provided:
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available quaternion  types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Quaternion4FType.html">Quaternion4FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Quaternion4DType.html">Quaternion4DType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+  </s:subsection>
+</s:section>

@@ -18,6 +18,7 @@ package com.io7m.jtensors;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
+import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
 import net.jcip.annotations.Immutable;
 
@@ -28,7 +29,8 @@ import net.jcip.annotations.Immutable;
  * from multiple threads. </p>
  */
 
-@Immutable public final class QuaternionI4D implements QuaternionReadable4DType
+@EqualityStructural @Immutable public final class QuaternionI4D
+  implements QuaternionReadable4DType
 {
   /**
    * The "identity" quaternion, [0.0 0.0 0.0 1.0]
