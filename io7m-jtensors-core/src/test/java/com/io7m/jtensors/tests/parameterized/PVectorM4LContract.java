@@ -1105,7 +1105,7 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
   @Test public final void testString()
   {
     final V v = this.newVectorM4L(1L, 2L, 3L, 4L);
-    Assert.assertTrue("[PVectorM4L 1 2 3 4]".equals(v.toString()));
+    Assert.assertTrue(v.toString().endsWith(" 1 2 3 4]"));
   }
 
   @Test public final void testSubtract()

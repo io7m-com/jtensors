@@ -15,8 +15,9 @@
  */
 
 /**
- * {@link java.nio.ByteBuffer} backed tensors.
+ * {@link java.nio.ByteBuffer} backed parameterized tensors.
  */
 
-@com.io7m.jnull.NonNullByDefault package com.io7m.jtensors.bytebuffered;
+@com.io7m.jnull.NonNullByDefault package com.io7m.jtensors.bytebuffered
+  .parameterized;
 
