@@ -14,29 +14,22 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests;
+package com.io7m.jtensors;
 
-import com.io7m.jtensors.QuaternionM4F;
+import java.nio.DoubleBuffer;
 
-public final class QuaternionM4FTest
-  extends QuaternionM4FContract<QuaternionM4F>
+/**
+ * <p>The type of direct-memory backed matrices with {@code double}
+ * elements.</p>
+ *
+ * @since 7.0.0
+ */
+
+public interface MatrixDirectDType extends MatrixReadableDType
 {
-  @Override protected QuaternionM4F newQuaternion()
-  {
-    return new QuaternionM4F();
-  }
+  /**
+   * @return The direct-memory double buffer that backs the matrix.
+   */
 
-  @Override protected QuaternionM4F newQuaternion(
-    final float x,
-    final float y,
-    final float z,
-    final float w)
-  {
-    return new QuaternionM4F(x, y, z, w);
-  }
-
-  @Override protected QuaternionM4F newQuaternion(final QuaternionM4F v)
-  {
-    return new QuaternionM4F(v);
-  }
+  DoubleBuffer getDirectDoubleBuffer();
 }

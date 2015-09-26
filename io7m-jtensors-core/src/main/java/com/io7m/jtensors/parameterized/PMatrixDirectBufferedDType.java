@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.parameterized;
 
-import com.io7m.jtensors.MatrixDirectBufferedDType;
+import com.io7m.jtensors.MatrixDirectDType;
 
 /**
  * <p>The type of direct-memory backed matrices with {@code double}
@@ -29,7 +29,7 @@ import com.io7m.jtensors.MatrixDirectBufferedDType;
  */
 
 public interface PMatrixDirectBufferedDType<T, U>
-  extends MatrixDirectBufferedDType
+  extends MatrixDirectDType
 {
   // No extra functions.
 }

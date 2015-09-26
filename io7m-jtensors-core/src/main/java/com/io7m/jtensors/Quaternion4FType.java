@@ -1,10 +1,10 @@
 /*
  * Copyright © 2015 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -14,29 +14,14 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests;
+package com.io7m.jtensors;
 
-import com.io7m.jtensors.QuaternionM4F;
+/**
+ * The type of mutable  quaternions with {@code float} elements.
+ */
 
-public final class QuaternionM4FTest
-  extends QuaternionM4FContract<QuaternionM4F>
+public interface Quaternion4FType
+  extends QuaternionReadable4FType, QuaternionWritable4FType
 {
-  @Override protected QuaternionM4F newQuaternion()
-  {
-    return new QuaternionM4F();
-  }
-
-  @Override protected QuaternionM4F newQuaternion(
-    final float x,
-    final float y,
-    final float z,
-    final float w)
-  {
-    return new QuaternionM4F(x, y, z, w);
-  }
-
-  @Override protected QuaternionM4F newQuaternion(final QuaternionM4F v)
-  {
-    return new QuaternionM4F(v);
-  }
+  // No extra fields
 }

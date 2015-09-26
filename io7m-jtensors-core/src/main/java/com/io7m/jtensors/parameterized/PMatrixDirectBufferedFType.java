@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.parameterized;
 
-import com.io7m.jtensors.MatrixDirectBufferedFType;
+import com.io7m.jtensors.MatrixDirectFType;
 
 /**
  * <p>The type of direct-memory backed matrices with {@code float}
@@ -29,7 +29,7 @@ import com.io7m.jtensors.MatrixDirectBufferedFType;
  */
 
 public interface PMatrixDirectBufferedFType<T, U>
-  extends MatrixDirectBufferedFType
+  extends MatrixDirectFType
 {
   // No extra functions.
 }

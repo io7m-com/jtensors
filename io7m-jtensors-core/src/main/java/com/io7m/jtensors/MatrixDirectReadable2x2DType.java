@@ -23,7 +23,7 @@ package com.io7m.jtensors;
  */
 
 public interface MatrixDirectReadable2x2DType
-  extends MatrixReadable2x2DType, MatrixDirectBufferedDType
+  extends MatrixReadable2x2DType, MatrixDirectDType
 {
   // No extra functions.
 }

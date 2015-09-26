@@ -25,7 +25,7 @@ import java.nio.FloatBuffer;
  * @since 7.0.0
  */
 
-public interface MatrixDirectBufferedFType extends MatrixReadableFType
+public interface MatrixDirectFType extends MatrixReadableFType
 {
   /**
    * @return The direct-memory float buffer that backs the matrix.

@@ -27,8 +27,7 @@ import com.io7m.jnull.Nullable;
  * without explicit synchronization. </p>
  */
 
-public final class QuaternionM4F
-  implements QuaternionReadable4FType, QuaternionWritable4FType
+public final class QuaternionM4F implements Quaternion4FType
 {
   private float w;
   private float x;

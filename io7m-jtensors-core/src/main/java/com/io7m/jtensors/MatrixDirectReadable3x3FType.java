@@ -23,7 +23,7 @@ package com.io7m.jtensors;
  */
 
 public interface MatrixDirectReadable3x3FType
-  extends MatrixReadable3x3FType, MatrixDirectBufferedFType
+  extends MatrixReadable3x3FType, MatrixDirectFType
 {
   // No extra functions.
 }

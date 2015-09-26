@@ -21,14 +21,14 @@ import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
 import com.io7m.jnull.Nullable;
 
 /**
- * A four-dimensional mutable quaternion type with {@code double} elements.
+ * <p>A four-dimensional mutable quaternion type with {@code double}
+ * elements.</p>
  *
- * <p> Values of this type cannot be accessed safely from multiple threads
- * without explicit synchronization. </p>
+ * <p>Values of this type cannot be accessed safely from multiple threads
+ * without explicit synchronization.</p>
  */
 
-public final class QuaternionM4D
-  implements QuaternionReadable4DType, QuaternionWritable4DType
+public final class QuaternionM4D implements Quaternion4DType
 {
   private double w;
   private double x;
