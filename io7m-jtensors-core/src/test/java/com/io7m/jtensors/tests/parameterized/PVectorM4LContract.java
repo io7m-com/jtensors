@@ -139,7 +139,6 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     Assert.assertEquals(0L, out.getZL());
     Assert.assertEquals(1L, out.getWL());
     Assert.assertEquals(1L, v0.getXL());
-    ;
     Assert.assertEquals(1L, v0.getYL());
     Assert.assertEquals(1L, v0.getZL());
     Assert.assertEquals(1L, v0.getWL());
@@ -239,7 +238,6 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     Assert.assertEquals(v.getXL(), v.getXL());
     Assert.assertEquals(v.getYL(), v.getYL());
     Assert.assertEquals(v.getZL(), v.getZL());
-    ;
     Assert.assertEquals(v.getWL(), v.getWL());
   }
 
@@ -620,7 +618,6 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     {
       final long p = PVectorM4L.dotProduct(v0, v0);
       Assert.assertEquals(10L, v0.getXL());
-      ;
       Assert.assertEquals(10L, v0.getYL());
       Assert.assertEquals(10L, v0.getZL());
       Assert.assertEquals(10L, v0.getWL());
@@ -896,7 +893,6 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
       Assert.assertEquals(vr0.getXL(), v0.getXL());
       Assert.assertEquals(vr0.getYL(), v0.getYL());
       Assert.assertEquals(vr0.getZL(), v0.getZL());
-      ;
       Assert.assertEquals(vr0.getWL(), v0.getWL());
 
       Assert.assertEquals(vr1.getXL(), v1.getXL());
@@ -1035,7 +1031,6 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     Assert.assertEquals(2L, ov1.getYL());
     Assert.assertEquals(2L, ov1.getZL());
     Assert.assertEquals(2L, ov1.getWL());
-    ;
     Assert.assertEquals(2L, v0.getXL());
     Assert.assertEquals(2L, v0.getYL());
     Assert.assertEquals(2L, v0.getZL());
@@ -1072,7 +1067,6 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
         Assert.assertEquals(orig_x, v.getXL());
         Assert.assertEquals(orig_y, v.getYL());
         Assert.assertEquals(orig_z, v.getZL());
-        ;
         Assert.assertEquals(orig_w, v.getWL());
       }
     }

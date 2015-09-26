@@ -14,22 +14,5 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.parameterized;
+@com.io7m.jnull.NonNullByDefault package com.io7m.jtensors.bytebuffered;
 
-import com.io7m.jtensors.MatrixDirectBufferedDType;
-
-/**
- * <p>The type of direct-memory backed matrices with {@code double}
- * elements.</p>
- *
- * @param <T> A phantom type parameter.
- * @param <U> A phantom type parameter.
- *
- * @since 7.0.0
- */
-
-public interface PMatrixDirectBufferedDType<T, U>
-  extends MatrixDirectBufferedDType
-{
-  // No extra functions.
-}

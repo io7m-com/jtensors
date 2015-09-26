@@ -1157,7 +1157,6 @@ public abstract class VectorM3FContract<T extends Vector3FType>
 
     Assert.assertEquals(v0, ov1);
     Assert.assertSame(v0, ov1);
-    ;
     Assert.assertEquals(2.0, (double) ov1.getXF(), 0.0);
     Assert.assertEquals(2.0, (double) ov1.getYF(), 0.0);
     Assert.assertEquals(2.0, (double) ov1.getZF(), 0.0);

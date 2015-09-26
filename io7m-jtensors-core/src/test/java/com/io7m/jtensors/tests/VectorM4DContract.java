@@ -615,10 +615,10 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     final T vb = this.newVectorM4D(5.0, 6.0, 7.0, 8.0);
     final T va = this.newVectorM4D(1.0, 2.0, 3.0, 4.0);
 
-    Assert.assertNotEquals(vb.getXD(), va.getXD());;
-    Assert.assertNotEquals(vb.getYD(), va.getYD());;
-    Assert.assertNotEquals(vb.getZD(), va.getZD());;
-    Assert.assertNotEquals(vb.getWD(), va.getWD());;
+    Assert.assertNotEquals(vb.getXD(), va.getXD());
+    Assert.assertNotEquals(vb.getYD(), va.getYD());
+    Assert.assertNotEquals(vb.getZD(), va.getZD());
+    Assert.assertNotEquals(vb.getWD(), va.getWD());
 
     VectorM4D.copy(va, vb);
 
@@ -945,28 +945,28 @@ public abstract class VectorM4DContract<T extends Vector4DType>
       final T m0 = this.newVectorM4D();
       final T m1 = this.newVectorM4D();
       m1.setXD(23.0);
-      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());;
+      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());
     }
 
     {
       final T m0 = this.newVectorM4D();
       final T m1 = this.newVectorM4D();
       m1.setYD(23.0);
-      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());;
+      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());
     }
 
     {
       final T m0 = this.newVectorM4D();
       final T m1 = this.newVectorM4D();
       m1.setZD(23.0);
-      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());;
+      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());
     }
 
     {
       final T m0 = this.newVectorM4D();
       final T m1 = this.newVectorM4D();
       m1.setWD(23.0);
-      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());;
+      Assert.assertNotEquals((long) m1.hashCode(), (long) m0.hashCode());
     }
   }
 

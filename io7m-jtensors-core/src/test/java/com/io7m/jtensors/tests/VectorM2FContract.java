@@ -88,7 +88,7 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals(-1.0, (double) vx, 0.0);
     Assert.assertEquals(-1.0, (double) vy, 0.0);
 
-    Assert.assertEquals(ov, out); Assert.assertSame(ov, out);;
+    Assert.assertEquals(ov, out); Assert.assertSame(ov, out);
     Assert.assertEquals(1.0, (double) out.getXF(), 0.0);
     Assert.assertEquals(1.0, (double) out.getYF(), 0.0);
   }
@@ -148,7 +148,7 @@ public abstract class VectorM2FContract<T extends Vector2FType>
 
     final T ov0 = VectorM2F.add(v0, v1, out);
 
-    Assert.assertEquals(ov0, out); Assert.assertSame(ov0, out);;
+    Assert.assertEquals(ov0, out); Assert.assertSame(ov0, out);
     Assert.assertEquals(2.0, (double) out.getXF(), 0.0);
     Assert.assertEquals(2.0, (double) out.getYF(), 0.0);
     Assert.assertEquals(1.0, (double) v0.getXF(), 0.0);
@@ -158,7 +158,7 @@ public abstract class VectorM2FContract<T extends Vector2FType>
 
     final T ov1 = VectorM2F.addInPlace(v0, v1);
 
-    Assert.assertEquals(v0, ov1); Assert.assertSame(v0, ov1);;
+    Assert.assertEquals(v0, ov1); Assert.assertSame(v0, ov1);
     Assert.assertEquals(2.0, (double) ov1.getXF(), 0.0);
     Assert.assertEquals(2.0, (double) ov1.getYF(), 0.0);
     Assert.assertEquals(2.0, (double) v0.getXF(), 0.0);
@@ -355,13 +355,13 @@ public abstract class VectorM2FContract<T extends Vector2FType>
       final T vr = this.newVectorM2F();
       final T vo = VectorM2F.clampMaximumByVector(v, maximum, vr);
 
-      Assert.assertEquals(vr, vo); Assert.assertSame(vr, vo);;
+      Assert.assertEquals(vr, vo); Assert.assertSame(vr, vo);
       Assert.assertTrue(vr.getXF() <= maximum.getXF());
       Assert.assertTrue(vr.getYF() <= maximum.getYF());
 
       {
         final T vr0 = VectorM2F.clampMaximumByVectorInPlace(v, maximum);
-        Assert.assertEquals(v, vr0); Assert.assertSame(v, vr0);;
+        Assert.assertEquals(v, vr0); Assert.assertSame(v, vr0);
         Assert.assertTrue(v.getXF() <= maximum.getXF());
         Assert.assertTrue(v.getYF() <= maximum.getYF());
       }
@@ -387,13 +387,13 @@ public abstract class VectorM2FContract<T extends Vector2FType>
       final T vr = this.newVectorM2F();
       final T vo = VectorM2F.clampMinimumByVector(v, minimum, vr);
 
-      Assert.assertEquals(vr, vo); Assert.assertSame(vr, vo);;
+      Assert.assertEquals(vr, vo); Assert.assertSame(vr, vo);
       Assert.assertTrue(vr.getXF() >= minimum.getXF());
       Assert.assertTrue(vr.getYF() >= minimum.getYF());
 
       {
         final T vr0 = VectorM2F.clampMinimumByVectorInPlace(v, minimum);
-        Assert.assertEquals(v, vr0); Assert.assertSame(v, vr0);;
+        Assert.assertEquals(v, vr0); Assert.assertSame(v, vr0);
         Assert.assertTrue(v.getXF() >= minimum.getXF());
         Assert.assertTrue(v.getYF() >= minimum.getYF());
       }
@@ -418,7 +418,7 @@ public abstract class VectorM2FContract<T extends Vector2FType>
       final T vr = this.newVectorM2F();
       final T vo = VectorM2F.clampByVector(v, minimum, maximum, vr);
 
-      Assert.assertEquals(vr, vo); Assert.assertSame(vr, vo);;
+      Assert.assertEquals(vr, vo); Assert.assertSame(vr, vo);
       Assert.assertTrue(vr.getXF() <= maximum.getXF());
       Assert.assertTrue(vr.getYF() <= maximum.getYF());
       Assert.assertTrue(vr.getXF() >= minimum.getXF());
@@ -427,7 +427,7 @@ public abstract class VectorM2FContract<T extends Vector2FType>
       {
         final T vr0 =
           VectorM2F.clampByVectorInPlace(v, minimum, maximum);
-        Assert.assertEquals(v, vr0); Assert.assertSame(v, vr0);;
+        Assert.assertEquals(v, vr0); Assert.assertSame(v, vr0);
         Assert.assertTrue(v.getXF() <= maximum.getXF());
         Assert.assertTrue(v.getYF() <= maximum.getYF());
         Assert.assertTrue(v.getXF() >= minimum.getXF());
@@ -900,7 +900,7 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     final T out = this.newVectorM2F();
     final T vr = VectorM2F.normalize(v0, out);
 
-    Assert.assertEquals(out, vr); Assert.assertSame(out, vr);;
+    Assert.assertEquals(out, vr); Assert.assertSame(out, vr);
 
     final double m = VectorM2F.magnitude(out);
     Assert.assertEquals(1.0, m, 0.0);
@@ -981,7 +981,7 @@ public abstract class VectorM2FContract<T extends Vector2FType>
 
     final T ov0 = VectorM2F.scale(v0, 2.0, out);
 
-    Assert.assertEquals(ov0, out); Assert.assertSame(ov0, out);;
+    Assert.assertEquals(ov0, out); Assert.assertSame(ov0, out);
     Assert.assertEquals(2.0, (double) out.getXF(), 0.0);
     Assert.assertEquals(2.0, (double) out.getYF(), 0.0);
     Assert.assertEquals(1.0, (double) v0.getXF(), 0.0);
@@ -989,7 +989,7 @@ public abstract class VectorM2FContract<T extends Vector2FType>
 
     final T ov1 = VectorM2F.scaleInPlace(v0, 2.0);
 
-    Assert.assertEquals(v0, ov1); Assert.assertSame(v0, ov1);;
+    Assert.assertEquals(v0, ov1); Assert.assertSame(v0, ov1);
     Assert.assertEquals(2.0, (double) ov1.getXF(), 0.0);
     Assert.assertEquals(2.0, (double) ov1.getYF(), 0.0);
     Assert.assertEquals(2.0, (double) v0.getXF(), 0.0);
@@ -1120,7 +1120,7 @@ public abstract class VectorM2FContract<T extends Vector2FType>
 
     final T ov0 = VectorM2F.subtract(v0, v1, out);
 
-    Assert.assertEquals(ov0, out); Assert.assertSame(ov0, out);;
+    Assert.assertEquals(ov0, out); Assert.assertSame(ov0, out);
     Assert.assertEquals(0.0, (double) out.getXF(), 0.0);
     Assert.assertEquals(0.0, (double) out.getYF(), 0.0);
     Assert.assertEquals(1.0, (double) v0.getXF(), 0.0);
@@ -1130,7 +1130,7 @@ public abstract class VectorM2FContract<T extends Vector2FType>
 
     final T ov1 = VectorM2F.subtractInPlace(v0, v1);
 
-    Assert.assertEquals(v0, ov1); Assert.assertSame(v0, ov1);;
+    Assert.assertEquals(v0, ov1); Assert.assertSame(v0, ov1);
     Assert.assertEquals(0.0, (double) ov1.getXF(), 0.0);
     Assert.assertEquals(0.0, (double) ov1.getYF(), 0.0);
     Assert.assertEquals(0.0, (double) v0.getXF(), 0.0);
