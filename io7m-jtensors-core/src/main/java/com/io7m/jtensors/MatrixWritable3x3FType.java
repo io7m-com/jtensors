@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Write' interface to 3x3 matrices with single precision elements.
+ * 'Write' interface to 3x3 matrices with {@code float} elements.
  *
  * @since 7.0.0
  */

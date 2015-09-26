@@ -20,7 +20,7 @@ import com.io7m.jtensors.VectorWritable3DType;
 
 /**
  * <p>
- * 'Write' interface to three-dimensional vectors with double precision
+ * 'Write' interface to three-dimensional vectors with {@code double}
  * elements.
  * </p>
  *

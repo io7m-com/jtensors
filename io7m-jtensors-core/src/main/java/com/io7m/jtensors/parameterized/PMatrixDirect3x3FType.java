@@ -19,7 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixDirect3x3FType;
 
 /**
- * <p>The type of 3x3 matrices with single precision elements that are backed by
+ * <p>The type of 3x3 matrices with {@code float} elements that are backed by
  * direct byte buffers.</p>
  *
  * <p>Values of type {@code PMatrixDirect3x3FType} are backed by direct memory,

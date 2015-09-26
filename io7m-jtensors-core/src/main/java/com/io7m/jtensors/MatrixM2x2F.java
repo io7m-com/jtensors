@@ -22,7 +22,7 @@ import com.io7m.junreachable.UnreachableCodeException;
 
 /**
  * <p>
- * Functions over 2x2 mutable matrix types with single precision elements.
+ * Functions over 2x2 mutable matrix types with {@code float} elements.
  * </p>
  * <p>
  * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed

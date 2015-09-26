@@ -19,7 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixWritable2x2DType;
 
 /**
- * 'Write' interface to 2x2 matrices with double precision elements.
+ * 'Write' interface to 2x2 matrices with {@code double} elements.
  *
  * @since 7.0.0
  * @param <T>

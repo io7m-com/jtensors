@@ -18,7 +18,7 @@ package com.io7m.jtensors;
 
 /**
  * <p>
- * 'Read' interface to four-dimensional vectors with single precision
+ * 'Read' interface to four-dimensional vectors with {@code float}
  * elements.
  * </p>
  */

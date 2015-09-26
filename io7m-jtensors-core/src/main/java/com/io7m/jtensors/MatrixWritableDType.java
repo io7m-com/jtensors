@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Write' interface to matrices with double precision elements.
+ * 'Write' interface to matrices with {@code double} elements.
  */
 
 public interface MatrixWritableDType

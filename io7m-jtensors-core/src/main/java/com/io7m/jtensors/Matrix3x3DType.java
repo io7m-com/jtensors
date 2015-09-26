@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * The type of 3x3 matrices with double precision elements.
+ * The type of 3x3 matrices with {@code double} elements.
  *
  * @since 7.0.0
  */

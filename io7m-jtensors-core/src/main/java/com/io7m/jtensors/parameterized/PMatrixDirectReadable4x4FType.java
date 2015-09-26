@@ -19,7 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixDirectReadable4x4FType;
 
 /**
- * 'Read' interface to 4x4 direct-memory matrices with single precision
+ * 'Read' interface to 4x4 direct-memory matrices with {@code float}
  * elements.
  *
  * @param <T>

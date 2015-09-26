@@ -21,7 +21,7 @@ import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
 import com.io7m.jnull.Nullable;
 
 /**
- * A four-dimensional mutable quaternion type with double precision elements.
+ * A four-dimensional mutable quaternion type with {@code double} elements.
  *
  * <p> Values of this type cannot be accessed safely from multiple threads
  * without explicit synchronization. </p>

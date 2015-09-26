@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to 3x3 direct-memory matrices with single precision
+ * 'Read' interface to 3x3 direct-memory matrices with {@code float}
  * elements.
  *
  * @since 7.0.0

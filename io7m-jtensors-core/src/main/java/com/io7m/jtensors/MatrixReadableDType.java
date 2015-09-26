@@ -18,7 +18,7 @@ package com.io7m.jtensors;
 
 
 /**
- * 'Read' interface to matrices with double precision elements.
+ * 'Read' interface to matrices with {@code double} elements.
  */
 
 public interface MatrixReadableDType

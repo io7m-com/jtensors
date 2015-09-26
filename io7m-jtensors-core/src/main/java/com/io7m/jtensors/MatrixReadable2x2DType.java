@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to 2x2 matrices with double precision elements.
+ * 'Read' interface to 2x2 matrices with {@code double} elements.
  */
 
 public interface MatrixReadable2x2DType extends MatrixReadableDType

@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * <p>The type of 3x3 matrices with double precision elements that are backed by
+ * <p>The type of 3x3 matrices with {@code float} elements that are backed by
  * direct byte buffers.</p>
  *
  * <p>Values of type {@code MatrixDirect3x3FType} are backed by direct memory,

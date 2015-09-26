@@ -94,7 +94,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     return new MatrixDirectM4x4D(m);
   }
 
-  private static int columnCheck(
+  private static int checkColumn(
     final int column)
   {
     if ((column < 0) || (column >= MatrixDirectM4x4D.VIEW_COLS)) {
@@ -110,7 +110,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int column)
   {
     return MatrixDirectM4x4D.indexUnsafe(
-      MatrixDirectM4x4D.rowCheck(row), MatrixDirectM4x4D.columnCheck(column));
+      MatrixDirectM4x4D.checkRow(row), MatrixDirectM4x4D.checkColumn(column));
   }
 
   /**
@@ -129,7 +129,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     return (column * MatrixDirectM4x4D.VIEW_COLS) + row;
   }
 
-  private static int rowCheck(
+  private static int checkRow(
     final int row)
   {
     if ((row < 0) || (row >= MatrixDirectM4x4D.VIEW_COLS)) {
@@ -171,7 +171,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int row,
     final V out)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.getRow4DUnsafe(row, out);
   }
 
@@ -200,7 +200,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int row,
     final VectorReadable4DType v)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.setRowWith4DUnsafe(row, v);
   }
 
@@ -370,7 +370,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int row,
     final V out)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.getRow3DUnsafe(row, out);
   }
 
@@ -398,7 +398,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int row,
     final VectorReadable3DType v)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.setRowWith3DUnsafe(row, v);
   }
 
@@ -455,7 +455,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int row,
     final V out)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.getRow2DUnsafe(row, out);
   }
 
@@ -482,7 +482,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int row,
     final VectorReadable2DType v)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.setRowWith2DUnsafe(row, v);
   }
 

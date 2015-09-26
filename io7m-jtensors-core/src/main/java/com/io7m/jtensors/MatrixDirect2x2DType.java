@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * <p>The type of 2x2 matrices with double precision elements that are backed by
+ * <p>The type of 2x2 matrices with {@code double} elements that are backed by
  * direct byte buffers.</p>
  *
  * <p>Values of type {@code MatrixDirect2x2DType} are backed by direct memory,

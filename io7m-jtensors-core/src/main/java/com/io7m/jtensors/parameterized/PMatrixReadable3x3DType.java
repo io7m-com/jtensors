@@ -19,7 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixReadable3x3DType;
 
 /**
- * 'Read' interface to 3x3 matrices with double precision elements.
+ * 'Read' interface to 3x3 matrices with {@code double} elements.
  *
  * @param <T>
  *          A phantom type parameter.

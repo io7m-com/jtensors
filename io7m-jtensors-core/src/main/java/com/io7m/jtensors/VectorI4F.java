@@ -24,7 +24,7 @@ import net.jcip.annotations.Immutable;
 
 /**
  * <p>
- * A four-dimensional immutable vector type with single precision elements.
+ * A four-dimensional immutable vector type with {@code float} elements.
  * </p>
  * <p>
  * Values of this type are immutable and can therefore be safely accessed from

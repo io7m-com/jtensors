@@ -19,7 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixWritable4x4FType;
 
 /**
- * 'Write' interface to 4x4 matrices with single precision elements.
+ * 'Write' interface to 4x4 matrices with {@code float} elements.
  *
  * @since 7.0.0
  * @param <T>

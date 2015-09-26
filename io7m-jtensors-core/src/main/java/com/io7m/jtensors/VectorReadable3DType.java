@@ -18,7 +18,7 @@ package com.io7m.jtensors;
 
 /**
  * <p>
- * 'Read' interface to three-dimensional vectors with double precision
+ * 'Read' interface to three-dimensional vectors with {@code double}
  * elements.
  * </p>
  */

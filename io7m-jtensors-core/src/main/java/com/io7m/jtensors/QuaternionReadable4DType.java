@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to four-dimensional quaternions with double precision
+ * 'Read' interface to four-dimensional quaternions with {@code double}
  * elements.
  */
 

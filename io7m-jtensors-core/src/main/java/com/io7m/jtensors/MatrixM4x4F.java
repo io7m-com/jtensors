@@ -22,7 +22,7 @@ import com.io7m.junreachable.UnreachableCodeException;
 
 /**
  * <p>
- * A 4x4 mutable matrix type with single precision elements.
+ * A 4x4 mutable matrix type with {@code float} elements.
  * </p>
  * <p>
  * Values of type {@code MatrixM4x4F} are backed by direct memory, with the

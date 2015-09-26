@@ -19,7 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixDirectReadable3x3DType;
 
 /**
- * 'Read' interface to 3x3 direct-memory matrices with double precision
+ * 'Read' interface to 3x3 direct-memory matrices with {@code double}
  * elements.
  *
  * @param <T>

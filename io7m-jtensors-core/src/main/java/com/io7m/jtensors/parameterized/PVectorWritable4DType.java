@@ -20,7 +20,7 @@ import com.io7m.jtensors.VectorWritable4DType;
 
 /**
  * <p>
- * 'Write' interface to four-dimensional vectors with double precision
+ * 'Write' interface to four-dimensional vectors with {@code double}
  * elements.
  * </p>
  *

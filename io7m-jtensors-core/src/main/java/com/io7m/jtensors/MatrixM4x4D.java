@@ -22,7 +22,7 @@ import com.io7m.junreachable.UnreachableCodeException;
 
 /**
  * <p>
- * Functions over 4x4 mutable matrix types with double precision elements.
+ * Functions over 4x4 mutable matrix types with {@code double} elements.
  * </p>
  * <p>
  * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed

@@ -18,7 +18,7 @@ package com.io7m.jtensors;
 
 /**
  * <p>
- * 'Write' interface to four-dimensional vectors with double precision
+ * 'Write' interface to four-dimensional vectors with {@code double}
  * elements.
  * </p>
  */

@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to matrices with single precision elements.
+ * 'Read' interface to matrices with {@code float} elements.
  */
 
 public interface MatrixReadableFType

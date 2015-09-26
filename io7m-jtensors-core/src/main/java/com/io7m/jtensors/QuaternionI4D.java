@@ -22,7 +22,7 @@ import com.io7m.jnull.Nullable;
 import net.jcip.annotations.Immutable;
 
 /**
- * A four-dimensional immutable quaternion type with double precision elements.
+ * A four-dimensional immutable quaternion type with {@code double} elements.
  *
  * <p> Values of this type are immutable and can therefore be safely accessed
  * from multiple threads. </p>

@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to 2x2 direct-memory matrices with double precision
+ * 'Read' interface to 2x2 direct-memory matrices with {@code double}
  * elements.
  *
  * @since 7.0.0

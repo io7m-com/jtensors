@@ -20,7 +20,7 @@ import com.io7m.jtensors.VectorWritable3FType;
 
 /**
  * <p>
- * 'Write' interface to three-dimensional vectors with single precision
+ * 'Write' interface to three-dimensional vectors with {@code float}
  * elements.
  * </p>
  *

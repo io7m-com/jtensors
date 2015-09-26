@@ -21,7 +21,7 @@ import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 
 /**
- * <p> A two-dimensional mutable vector type with single precision elements.
+ * <p> A two-dimensional mutable vector type with {@code float} elements.
  * </p>
  *
  * <p> Values of this type cannot be accessed safely from multiple threads

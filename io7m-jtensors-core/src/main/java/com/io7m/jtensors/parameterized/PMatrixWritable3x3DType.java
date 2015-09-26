@@ -19,7 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixWritable3x3DType;
 
 /**
- * 'Write' interface to 3x3 matrices with double precision elements.
+ * 'Write' interface to 3x3 matrices with {@code double} elements.
  *
  * @since 7.0.0
  * @param <T>
