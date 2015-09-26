@@ -64,14 +64,15 @@ public final class PMatrixDirectM4x4DTest<T0, T1, T2>
     return PMatrixDirectM4x4D.newMatrixFrom(m);
   }
 
-  @Override protected void checkDirectBufferInvariants(
+  @Override protected void checkDirectBufferInvariantsGeneric(
     final PMatrixDirect4x4DType<T0, T1> m)
   {
     Assert.assertEquals(0L, (long) m.getDirectDoubleBuffer().position());
   }
 
   @Override
-  protected void checkDirectBufferInvariants(final PMatrix4x4DType<?, ?> m)
+  protected void checkDirectBufferInvariantsUntyped(final PMatrix4x4DType<?,
+    ?> m)
   {
     final PMatrixDirect4x4DType<?, ?> mx = (PMatrixDirect4x4DType<?, ?>) m;
     Assert.assertEquals(0L, (long) mx.getDirectDoubleBuffer().position());

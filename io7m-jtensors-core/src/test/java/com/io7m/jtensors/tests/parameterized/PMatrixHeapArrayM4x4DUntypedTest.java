@@ -16,31 +16,31 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import com.io7m.jtensors.MatrixM3x3F;
-import com.io7m.jtensors.MatrixReadable3x3FType;
-import com.io7m.jtensors.parameterized.PMatrixM3x3F;
-import com.io7m.jtensors.tests.MatrixDirect3x3FContract;
-import org.junit.Assert;
+import com.io7m.jtensors.MatrixM4x4D;
+import com.io7m.jtensors.MatrixReadable4x4DType;
+import com.io7m.jtensors.parameterized.PMatrix4x4DType;
+import com.io7m.jtensors.parameterized.PMatrixHeapArrayM4x4D;
+import com.io7m.jtensors.tests.Matrix4x4DContract;
 
-public final class PMatrixM3x3FUntypedTest<T0, T1>
-  extends MatrixDirect3x3FContract<PMatrixM3x3F<T0, T1>>
+public final class PMatrixHeapArrayM4x4DUntypedTest<T0, T1>
+  extends Matrix4x4DContract<PMatrix4x4DType<T0, T1>>
 {
-  @Override protected PMatrixM3x3F<T0, T1> newMatrix()
+  @Override protected PMatrix4x4DType<T0, T1> newMatrix()
   {
-    return new PMatrixM3x3F<T0, T1>();
+    return PMatrixHeapArrayM4x4D.newMatrix();
   }
 
-  @Override protected PMatrixM3x3F<T0, T1> newMatrixFrom(
-    final MatrixReadable3x3FType source)
+  @Override protected PMatrix4x4DType<T0, T1> newMatrixFrom(
+    final MatrixReadable4x4DType m)
   {
-    final PMatrixM3x3F<T0, T1> m = new PMatrixM3x3F<T0, T1>();
-    MatrixM3x3F.copy(source, m);
-    return m;
+    final PMatrix4x4DType<T0, T1> r = PMatrixHeapArrayM4x4D.newMatrix();
+    MatrixM4x4D.copy(m, r);
+    return r;
   }
 
   @Override
-  protected void checkDirectBufferInvariants(final PMatrixM3x3F<T0, T1> m)
+  protected void checkDirectBufferInvariants(final PMatrix4x4DType<T0, T1> m)
   {
-    Assert.assertEquals(0L, (long) m.getDirectFloatBuffer().position());
+    // Nothing
   }
 }

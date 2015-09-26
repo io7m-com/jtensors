@@ -16,11 +16,13 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import com.io7m.jtensors.MatrixM4x4F;
+import com.io7m.jtensors.Matrix4x4FType;
+import com.io7m.jtensors.MatrixHeapArrayM4x4F;
 import com.io7m.jtensors.VectorI4F;
 import com.io7m.jtensors.VectorM4F;
+import com.io7m.jtensors.parameterized.PMatrix4x4FType;
+import com.io7m.jtensors.parameterized.PMatrixHeapArrayM4x4F;
 import com.io7m.jtensors.parameterized.PMatrixI4x4F;
-import com.io7m.jtensors.parameterized.PMatrixM4x4F;
 import com.io7m.jtensors.parameterized.PMatrixReadable4x4FType;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,9 +31,9 @@ public final class PMatrixI4x4FTest<T0, T1>
   extends PMatrixReadable4x4FContract<T0, T1, PMatrixI4x4F<T0, T1>>
 {
 
-  @Test public void testEquals()
+  @Test public final void testEquals()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 4; ++row) {
@@ -69,44 +71,40 @@ public final class PMatrixI4x4FTest<T0, T1>
     Assert.assertFalse(im0.equals(im2));
   }
 
-  @Test public void testFromColumns()
+  @Test public final void testFromColumns()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
-    m0.setR0C0F((float) 0.0);
-    m0.setR1C0F((float) 0.1);
-    m0.setR2C0F((float) 0.2);
-    m0.setR3C0F((float) 0.3);
+    m0.setR0C0F(0.0f);
+    m0.setR1C0F(0.1f);
+    m0.setR2C0F(0.2f);
+    m0.setR3C0F(0.3f);
 
-    m0.setR0C1F((float) 10.0);
-    m0.setR1C1F((float) 10.1);
-    m0.setR2C1F((float) 10.2);
-    m0.setR3C1F((float) 10.3);
+    m0.setR0C1F(10.0f);
+    m0.setR1C1F(10.1f);
+    m0.setR2C1F(10.2f);
+    m0.setR3C1F(10.3f);
 
-    m0.setR0C2F((float) 20.0);
-    m0.setR1C2F((float) 20.1);
-    m0.setR2C2F((float) 20.2);
-    m0.setR3C2F((float) 20.3);
+    m0.setR0C2F(20.0f);
+    m0.setR1C2F(20.1f);
+    m0.setR2C2F(20.2f);
+    m0.setR3C2F(20.3f);
 
-    m0.setR0C3F((float) 30.0);
-    m0.setR1C3F((float) 30.1);
-    m0.setR2C3F((float) 30.2);
-    m0.setR3C3F((float) 30.3);
+    m0.setR0C3F(30.0f);
+    m0.setR1C3F(30.1f);
+    m0.setR2C3F(30.2f);
+    m0.setR3C3F(30.3f);
 
     final PMatrixI4x4F<T0, T1> im0 = PMatrixI4x4F.newFromReadableUntyped(m0);
 
     final VectorI4F column_0 = new VectorI4F(
-      (float) 0.0,
-                                             (float) 0.1, (float) 0.2, (float) 0.3);
+      0.0f, 0.1f, 0.2f, 0.3f);
     final VectorI4F column_1 = new VectorI4F(
-      (float) 10.0, (float) 10.1,
-                                             (float) 10.2, (float) 10.3);
+      10.0f, 10.1f, 10.2f, 10.3f);
     final VectorI4F column_2 = new VectorI4F(
-      (float) 20.0, (float) 20.1,
-                                             (float) 20.2, (float) 20.3);
+      20.0f, 20.1f, 20.2f, 20.3f);
     final VectorI4F column_3 = new VectorI4F(
-      (float) 30.0, (float) 30.1,
-                                             (float) 30.2, (float) 30.3);
+      30.0f, 30.1f, 30.2f, 30.3f);
 
     final PMatrixI4x4F<T0, T1> im1 =
       PMatrixI4x4F.newFromColumns(column_0, column_1, column_2, column_3);
@@ -114,29 +112,29 @@ public final class PMatrixI4x4FTest<T0, T1>
     Assert.assertEquals(im0, im1);
   }
 
-  @Test public void testFromRows()
+  @Test public final void testFromRows()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
-    m0.setR0C0F((float) 0.0);
-    m0.setR1C0F((float) 0.1);
-    m0.setR2C0F((float) 0.2);
-    m0.setR3C0F((float) 0.3);
+    m0.setR0C0F(0.0f);
+    m0.setR1C0F(0.1f);
+    m0.setR2C0F(0.2f);
+    m0.setR3C0F(0.3f);
 
-    m0.setR0C1F((float) 10.0);
-    m0.setR1C1F((float) 10.1);
-    m0.setR2C1F((float) 10.2);
-    m0.setR3C1F((float) 10.3);
+    m0.setR0C1F(10.0f);
+    m0.setR1C1F(10.1f);
+    m0.setR2C1F(10.2f);
+    m0.setR3C1F(10.3f);
 
-    m0.setR0C2F((float) 20.0);
-    m0.setR1C2F((float) 20.1);
-    m0.setR2C2F((float) 20.2);
-    m0.setR3C2F((float) 20.3);
+    m0.setR0C2F(20.0f);
+    m0.setR1C2F(20.1f);
+    m0.setR2C2F(20.2f);
+    m0.setR3C2F(20.3f);
 
-    m0.setR0C3F((float) 30.0);
-    m0.setR1C3F((float) 30.1);
-    m0.setR2C3F((float) 30.2);
-    m0.setR3C3F((float) 30.3);
+    m0.setR0C3F(30.0f);
+    m0.setR1C3F(30.1f);
+    m0.setR2C3F(30.2f);
+    m0.setR3C3F(30.3f);
 
     final PMatrixI4x4F<T0, T1> im = PMatrixI4x4F.newFromReadableUntyped(m0);
 
@@ -167,18 +165,18 @@ public final class PMatrixI4x4FTest<T0, T1>
     Assert.assertEquals(30.3, (double) row.getWF(), 0.000001);
   }
 
-  @Test public void testIdentity()
+  @Test public final void testIdentity()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
     final PMatrixI4x4F<T0, T1> im0 = PMatrixI4x4F.identity();
     final PMatrixI4x4F<T0, T1> im1 = PMatrixI4x4F.newFromReadableUntyped(m0);
     Assert.assertEquals(im1, im0);
   }
 
-  @Test public void testMakeMatrix4x4FUntyped()
+  @Test public final void testMakeMatrix4x4FUntyped()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
-    final MatrixM4x4F m1 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
+    final Matrix4x4FType m1 = MatrixHeapArrayM4x4F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 4; ++row) {
@@ -193,10 +191,10 @@ public final class PMatrixI4x4FTest<T0, T1>
     Assert.assertEquals(m0, m1);
   }
 
-  @Test public void testMakeMatrix4x4F()
+  @Test public final void testMakeMatrix4x4F()
   {
-    final PMatrixM4x4F<T0, T1> m0 = new PMatrixM4x4F<T0, T1>();
-    final PMatrixM4x4F<T0, T1> m1 = new PMatrixM4x4F<T0, T1>();
+    final PMatrix4x4FType<T0, T1> m0 = PMatrixHeapArrayM4x4F.newMatrix();
+    final PMatrix4x4FType<T0, T1> m1 = PMatrixHeapArrayM4x4F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 4; ++row) {
@@ -211,10 +209,10 @@ public final class PMatrixI4x4FTest<T0, T1>
     Assert.assertEquals(m0, m1);
   }
 
-  @Test public void testToString()
+  @Test public final void testToString()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
-    final MatrixM4x4F m1 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
+    final Matrix4x4FType m1 = MatrixHeapArrayM4x4F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 4; ++row) {

@@ -16,7 +16,8 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import com.io7m.jtensors.MatrixM4x4D;
+import com.io7m.jtensors.Matrix4x4DType;
+import com.io7m.jtensors.MatrixHeapArrayM4x4D;
 import com.io7m.jtensors.VectorI4D;
 import com.io7m.jtensors.VectorM2D;
 import com.io7m.jtensors.VectorM3D;
@@ -34,22 +35,22 @@ public abstract class PMatrixReadable4x4DContract<T0, T1, T extends
   protected abstract T newMatrixFrom(
     PMatrixReadable4x4DType<T0, T1> source);
 
-  protected abstract void checkDirectBufferInvariants(T m);
+  protected abstract void checkDirectBufferInvariantsGeneric(T m);
 
   @Test public final void testHashcodeNeqExhaustive()
   {
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         final T m0 = this.newMatrix();
-        final MatrixM4x4D m1 = new MatrixM4x4D();
-        this.checkDirectBufferInvariants(m0);
+        final Matrix4x4DType m1 = MatrixHeapArrayM4x4D.newMatrix();
+        this.checkDirectBufferInvariantsGeneric(m0);
         Assert.assertEquals(
           (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
-        this.checkDirectBufferInvariants(m0);
+        this.checkDirectBufferInvariantsGeneric(m0);
         m1.setRowColumnD(row, col, 256.0);
-        this.checkDirectBufferInvariants(m0);
+        this.checkDirectBufferInvariantsGeneric(m0);
         Assert.assertFalse(m0.hashCode() == m1.hashCode());
-        this.checkDirectBufferInvariants(m0);
+        this.checkDirectBufferInvariantsGeneric(m0);
       }
     }
   }
@@ -362,7 +363,7 @@ public abstract class PMatrixReadable4x4DContract<T0, T1, T extends
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
 
-    final MatrixM4x4D m2 = new MatrixM4x4D();
+    final Matrix4x4DType m2 = MatrixHeapArrayM4x4D.newMatrix();
     m2.setR0C0D(2.0);
 
     Assert.assertEquals(m0.toString(), m1.toString());

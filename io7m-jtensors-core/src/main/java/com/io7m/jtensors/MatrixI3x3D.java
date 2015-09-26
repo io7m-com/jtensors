@@ -188,7 +188,7 @@ import java.util.Arrays;
    * @return The value at the given row and column
    */
 
-  public double getRowColumnD(
+  @Override public double getRowColumnD(
     final int row,
     final int col)
   {
@@ -222,7 +222,7 @@ import java.util.Arrays;
    * @param m The mutable matrix
    */
 
-  public <M extends MatrixWritable3x3DType> void makeMatrixM3x3D(
+  public <M extends MatrixWritable3x3DType> void makeMatrix3x3D(
     final M m)
   {
     m.setR0C0D(this.getR0C0D());

@@ -173,7 +173,7 @@ import java.util.Arrays;
    * @return The value at the given row and column
    */
 
-  public double getRowColumnD(
+  @Override public double getRowColumnD(
     final int row,
     final int col)
   {

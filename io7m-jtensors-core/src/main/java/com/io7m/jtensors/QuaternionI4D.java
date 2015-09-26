@@ -252,18 +252,18 @@ import net.jcip.annotations.Immutable;
    *
    * @return A quaternion looking at the target
    *
-   * @since 5.0.0
+   * @since 7.0.0
    */
 
-  public static QuaternionI4D lookAtWithContext(
+  public static QuaternionI4D lookAt(
     final Context context,
     final VectorReadable3DType origin,
     final VectorReadable3DType target,
     final VectorReadable3DType up)
   {
-    final MatrixM3x3D m = context.getM3A();
-    final VectorM3D t = context.getV3A();
-    final MatrixM3x3D.ContextMM3D mc = context.getContext();
+    final Matrix3x3DType m = context.m3a;
+    final VectorM3D t = context.v3a;
+    final MatrixM3x3D.ContextMM3D mc = context.m_context;
 
     MatrixM3x3D.lookAt(mc, origin, target, up, m, t);
     return QuaternionI4D.makeFromRotationMatrix3x3(m);
@@ -462,17 +462,18 @@ import net.jcip.annotations.Immutable;
    * Produce a rotation matrix from the quaternion {@code q}, saving the result
    * to {@code m}.
    *
-   * @param q The input quaternion
-   * @param m The output matrix
+   * @param q   The input quaternion
+   * @param m   The output matrix
+   * @param <M> The precise type of output matrix
    *
    * @return {@code m}
    *
    * @since 5.0.0
    */
 
-  public static MatrixM3x3D makeRotationMatrix3x3(
+  public static <M extends MatrixWritable3x3DType> M makeRotationMatrix3x3(
     final QuaternionReadable4DType q,
-    final MatrixM3x3D m)
+    final M m)
   {
     final double xx = q.getXD() * q.getXD();
     final double xy = q.getXD() * q.getYD();
@@ -804,7 +805,8 @@ import net.jcip.annotations.Immutable;
   {
     private final MatrixM3x3D.ContextMM3D m_context =
       new MatrixM3x3D.ContextMM3D();
-    private final MatrixM3x3D             m3a       = new MatrixM3x3D();
+    private final Matrix3x3DType          m3a       =
+      MatrixHeapArrayM3x3D.newMatrix();
     private final VectorM3D               v3a       = new VectorM3D();
 
     /**
@@ -814,21 +816,6 @@ import net.jcip.annotations.Immutable;
     public Context()
     {
 
-    }
-
-    final MatrixM3x3D.ContextMM3D getContext()
-    {
-      return this.m_context;
-    }
-
-    final MatrixM3x3D getM3A()
-    {
-      return this.m3a;
-    }
-
-    final VectorM3D getV3A()
-    {
-      return this.v3a;
     }
   }
 }

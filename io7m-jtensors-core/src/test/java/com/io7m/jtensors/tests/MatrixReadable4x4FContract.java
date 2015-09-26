@@ -16,8 +16,9 @@
 
 package com.io7m.jtensors.tests;
 
+import com.io7m.jtensors.Matrix4x4FType;
+import com.io7m.jtensors.MatrixHeapArrayM4x4F;
 import com.io7m.jtensors.MatrixI4x4F;
-import com.io7m.jtensors.MatrixM4x4F;
 import com.io7m.jtensors.MatrixReadable4x4FType;
 import com.io7m.jtensors.VectorI4F;
 import com.io7m.jtensors.VectorM2F;
@@ -41,7 +42,7 @@ public abstract class MatrixReadable4x4FContract<T extends
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         final T m0 = this.newMatrix();
-        final MatrixM4x4F m1 = new MatrixM4x4F();
+        final Matrix4x4FType m1 = MatrixHeapArrayM4x4F.newMatrix();
         this.checkDirectBufferInvariants(m0);
         Assert.assertEquals((long) m1.hashCode(), (long) m0.hashCode());
         this.checkDirectBufferInvariants(m0);
@@ -377,8 +378,8 @@ public abstract class MatrixReadable4x4FContract<T extends
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
 
-    final MatrixM4x4F m2 = new MatrixM4x4F();
-    m2.setR0C0F((float) 2.0);
+    final Matrix4x4FType m2 = MatrixHeapArrayM4x4F.newMatrix();
+    m2.setR0C0F(2.0f);
 
     Assert.assertEquals(m0.toString(), m1.toString());
     Assert.assertFalse(m0.toString().equals(m2.toString()));

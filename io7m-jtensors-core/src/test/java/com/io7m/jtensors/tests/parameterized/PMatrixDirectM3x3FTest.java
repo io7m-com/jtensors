@@ -63,7 +63,7 @@ public final class PMatrixDirectM3x3FTest<T0, T1, T2>
     return PMatrixDirectM3x3F.newMatrixFrom(m);
   }
 
-  @Override protected void checkDirectBufferInvariants(
+  @Override protected void checkDirectBufferInvariantsWildcard(
     final PMatrixReadable3x3FType<?, ?> m)
   {
     final PMatrixDirect3x3FType<?, ?> mx = (PMatrixDirect3x3FType<?, ?>) m;

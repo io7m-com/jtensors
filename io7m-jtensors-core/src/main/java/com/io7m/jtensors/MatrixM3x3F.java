@@ -16,11 +16,7 @@
 
 package com.io7m.jtensors;
 
-import com.io7m.jnull.Nullable;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
+import com.io7m.junreachable.UnreachableCodeException;
 
 //@formatter:off
 
@@ -50,75 +46,11 @@ import java.nio.FloatBuffer;
 
 //@formatter:on
 
-public final class MatrixM3x3F implements MatrixDirect3x3FType
+public final class MatrixM3x3F
 {
-  private static final int VIEW_BYTES;
-  private static final int VIEW_COLS;
-  private static final int VIEW_ELEMENT_SIZE;
-  private static final int VIEW_ELEMENTS;
-  private static final int VIEW_ROWS;
-
-  static {
-    VIEW_ROWS = 3;
-    VIEW_COLS = 3;
-    VIEW_ELEMENT_SIZE = 4;
-    VIEW_ELEMENTS = MatrixM3x3F.VIEW_ROWS * MatrixM3x3F.VIEW_COLS;
-    VIEW_BYTES = MatrixM3x3F.VIEW_ELEMENTS * MatrixM3x3F.VIEW_ELEMENT_SIZE;
-  }
-
-  private final ByteBuffer  data;
-  private final FloatBuffer view;
-
-  /**
-   * Construct a new identity matrix.
-   */
-
-  public MatrixM3x3F()
+  private MatrixM3x3F()
   {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3F.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    final FloatBuffer v = b.asFloatBuffer();
-    assert v != null;
-
-    this.data = b;
-    this.view = v;
-    MatrixM3x3F.setIdentity(this);
-  }
-
-  /**
-   * Construct a new copy of the given matrix.
-   *
-   * @param source The source matrix
-   */
-
-  public MatrixM3x3F(
-    final MatrixReadable3x3FType source)
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3F.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    this.data = b;
-
-    final FloatBuffer v = this.data.asFloatBuffer();
-    assert v != null;
-
-    this.view = v;
-    this.view.rewind();
-
-    for (int row = 0; row < MatrixM3x3F.VIEW_ROWS; ++row) {
-      for (int col = 0; col < MatrixM3x3F.VIEW_COLS; ++col) {
-        this.setUnsafe(row, col, source.getRowColumnF(row, col));
-      }
-    }
+    throw new UnreachableCodeException();
   }
 
   /**
@@ -270,16 +202,6 @@ public final class MatrixM3x3F implements MatrixDirect3x3FType
     return out;
   }
 
-  private static int columnCheck(
-    final int column)
-  {
-    if ((column < 0) || (column >= MatrixM3x3F.VIEW_COLS)) {
-      throw new IndexOutOfBoundsException(
-        "column must be in the range 0 <= column < " + MatrixM3x3F.VIEW_COLS);
-    }
-    return column;
-  }
-
   /**
    * Copy the contents of the matrix {@code input} to the matrix {@code output},
    * completely replacing all elements.
@@ -416,30 +338,6 @@ public final class MatrixM3x3F implements MatrixDirect3x3FType
     return out;
   }
 
-  private static int indexChecked(
-    final int row,
-    final int column)
-  {
-    return MatrixM3x3F.indexUnsafe(
-      MatrixM3x3F.rowCheck(row), MatrixM3x3F.columnCheck(column));
-  }
-
-  /**
-   * <p> The main function that indexes into the buffer that backs the array.
-   * The body of this function decides on how elements are stored. This
-   * implementation chooses to store values in column-major format as this
-   * allows matrices to be sent directly to OpenGL without conversion. </p> <p>
-   * (row * 3) + column, corresponds to row-major storage. (column * 3) + row,
-   * corresponds to column-major (OpenGL) storage. </p>
-   */
-
-  private static int indexUnsafe(
-    final int row,
-    final int column)
-  {
-    return (column * 3) + row;
-  }
-
   /**
    * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
    * to {@code out}. The function returns {@code Some(out)} iff it was possible
@@ -493,7 +391,7 @@ public final class MatrixM3x3F implements MatrixDirect3x3FType
     final double r2c1 = (orig_r0c1 * orig_r2c0) - (orig_r0c0 * orig_r2c1);
     final double r2c2 = (orig_r0c0 * orig_r1c1) - (orig_r0c1 * orig_r1c0);
 
-    final MatrixM3x3F temp = c.m3a;
+    final Matrix3x3FType temp = c.m3a;
 
     temp.setR0C0F((float) r0c0);
     temp.setR0C1F((float) r0c1);
@@ -868,9 +766,9 @@ public final class MatrixM3x3F implements MatrixDirect3x3FType
   private static int rowCheck(
     final int row)
   {
-    if ((row < 0) || (row >= MatrixM3x3F.VIEW_ROWS)) {
+    if ((row < 0) || (row >= 3)) {
       throw new IndexOutOfBoundsException(
-        "row must be in the range 0 <= row < " + MatrixM3x3F.VIEW_ROWS);
+        "row must be in the range 0 <= row < 3");
     }
     return row;
   }
@@ -1154,251 +1052,6 @@ public final class MatrixM3x3F implements MatrixDirect3x3FType
     return m;
   }
 
-  @Override public boolean equals(
-    final @Nullable Object obj)
-  {
-    if (this == obj) {
-      return true;
-    }
-    if (obj == null) {
-      return false;
-    }
-    if (this.getClass() != obj.getClass()) {
-      return false;
-    }
-    final MatrixM3x3F other = (MatrixM3x3F) obj;
-
-    for (int index = 0; index < MatrixM3x3F.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  @Override public FloatBuffer getDirectFloatBuffer()
-  {
-    return this.view;
-  }
-
-  @Override public <V extends VectorWritable3FType> void getRow3F(
-    final int row,
-    final V out)
-  {
-    MatrixM3x3F.rowCheck(row);
-    this.getRow3FUnsafe(row, out);
-  }
-
-  @Override public <V extends VectorWritable3FType> void getRow3FUnsafe(
-    final int row,
-    final V out)
-  {
-    final float x = this.view.get(MatrixM3x3F.indexUnsafe(row, 0));
-    final float y = this.view.get(MatrixM3x3F.indexUnsafe(row, 1));
-    final float z = this.view.get(MatrixM3x3F.indexUnsafe(row, 2));
-    out.set3F(x, y, z);
-  }
-
-  @Override public float getR0C2F()
-  {
-    return this.view.get(MatrixM3x3F.indexUnsafe(0, 2));
-  }
-
-  @Override public void setR0C2F(final float x)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(0, 2), x);
-  }
-
-  @Override public float getR1C2F()
-  {
-    return this.view.get(MatrixM3x3F.indexUnsafe(1, 2));
-  }
-
-  @Override public void setR1C2F(final float x)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(1, 2), x);
-  }
-
-  @Override public float getR2C0F()
-  {
-    return this.view.get(MatrixM3x3F.indexUnsafe(2, 0));
-  }
-
-  @Override public void setR2C0F(final float x)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(2, 0), x);
-  }
-
-  @Override public float getR2C1F()
-  {
-    return this.view.get(MatrixM3x3F.indexUnsafe(2, 1));
-  }
-
-  @Override public void setR2C1F(final float x)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(2, 1), x);
-  }
-
-  @Override public float getR2C2F()
-  {
-    return this.view.get(MatrixM3x3F.indexUnsafe(2, 2));
-  }
-
-  @Override public void setR2C2F(final float x)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(2, 2), x);
-  }
-
-  @Override public float getRowColumnF(
-    final int row,
-    final int column)
-  {
-    return this.view.get(MatrixM3x3F.indexChecked(row, column));
-  }
-
-  @Override public int hashCode()
-  {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C0F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C1F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C2F(), prime, r);
-
-    return r;
-  }
-
-  @Override public void setRowWith3F(
-    final int row,
-    final VectorReadable3FType v)
-  {
-    MatrixM3x3F.rowCheck(row);
-    this.setRowWith3FUnsafe(row, v);
-  }
-
-  @Override public void setRowWith2F(
-    final int row,
-    final VectorReadable2FType v)
-  {
-    MatrixM3x3F.rowCheck(row);
-    this.setRowWith2FUnsafe(row, v);
-  }
-
-  @Override public void setRowWith2FUnsafe(
-    final int row,
-    final VectorReadable2FType v)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(row, 0), v.getXF());
-    this.view.put(MatrixM3x3F.indexUnsafe(row, 1), v.getYF());
-  }
-
-  @Override public void setRowWith3FUnsafe(
-    final int row,
-    final VectorReadable3FType v)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(row, 0), v.getXF());
-    this.view.put(MatrixM3x3F.indexUnsafe(row, 1), v.getYF());
-    this.view.put(MatrixM3x3F.indexUnsafe(row, 2), v.getZF());
-  }
-
-  @Override public void setRowColumnF(
-    final int row,
-    final int column,
-    final float value)
-  {
-    this.view.put(MatrixM3x3F.indexChecked(row, column), value);
-  }
-
-  MatrixM3x3F setUnsafe(
-    final int row,
-    final int column,
-    final float value)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(row, column), value);
-    return this;
-  }
-
-  @SuppressWarnings("boxing") @Override public String toString()
-  {
-    final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < MatrixM3x3F.VIEW_ROWS; ++row) {
-      final float c0 = this.view.get(MatrixM3x3F.indexUnsafe(row, 0));
-      final float c1 = this.view.get(MatrixM3x3F.indexUnsafe(row, 1));
-      final float c2 = this.view.get(MatrixM3x3F.indexUnsafe(row, 2));
-      final String s = String.format("[%+.6f %+.6f %+.6f]\n", c0, c1, c2);
-      builder.append(s);
-    }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
-  }
-
-  @Override public <V extends VectorWritable2FType> void getRow2F(
-    final int row,
-    final V out)
-  {
-    MatrixM3x3F.rowCheck(row);
-    this.getRow2FUnsafe(row, out);
-  }
-
-  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
-    final int row,
-    final V out)
-  {
-    final float x = this.view.get(MatrixM3x3F.indexUnsafe(row, 0));
-    final float y = this.view.get(MatrixM3x3F.indexUnsafe(row, 1));
-    out.set2F(x, y);
-  }
-
-  @Override public float getR0C0F()
-  {
-    return this.view.get(MatrixM3x3F.indexUnsafe(0, 0));
-  }
-
-  @Override public void setR0C0F(final float x)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(0, 0), x);
-  }
-
-  @Override public float getR1C0F()
-  {
-    return this.view.get(MatrixM3x3F.indexUnsafe(1, 0));
-  }
-
-  @Override public void setR1C0F(final float x)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(1, 0), x);
-  }
-
-  @Override public float getR0C1F()
-  {
-    return this.view.get(MatrixM3x3F.indexUnsafe(0, 1));
-  }
-
-  @Override public void setR0C1F(final float x)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(0, 1), x);
-  }
-
-  @Override public float getR1C1F()
-  {
-    return this.view.get(MatrixM3x3F.indexUnsafe(1, 1));
-  }
-
-  @Override public void setR1C1F(final float x)
-  {
-    this.view.put(MatrixM3x3F.indexUnsafe(1, 1), x);
-  }
-
   /**
    * <p>The {@code ContextMM3F} type contains the minimum storage required for
    * all of the functions of the {@code MatrixM3x3F} class.</p>
@@ -1418,10 +1071,10 @@ public final class MatrixM3x3F implements MatrixDirect3x3FType
 
   public static final class ContextMM3F
   {
-    private final MatrixM3x3F m3a = new MatrixM3x3F();
-    private final VectorM3F   v3a = new VectorM3F();
-    private final VectorM3F   v3b = new VectorM3F();
-    private final VectorM3F   v3c = new VectorM3F();
+    private final Matrix3x3FType m3a = MatrixHeapArrayM3x3F.newMatrix();
+    private final VectorM3F      v3a = new VectorM3F();
+    private final VectorM3F      v3b = new VectorM3F();
+    private final VectorM3F      v3c = new VectorM3F();
 
     /**
      * Construct a new context.

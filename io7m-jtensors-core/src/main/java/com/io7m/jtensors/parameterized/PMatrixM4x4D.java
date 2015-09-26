@@ -16,142 +16,37 @@
 
 package com.io7m.jtensors.parameterized;
 
-import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.HashUtility;
+import com.io7m.jtensors.Matrix3x3DType;
+import com.io7m.jtensors.Matrix4x4DType;
+import com.io7m.jtensors.MatrixHeapArrayM3x3D;
+import com.io7m.jtensors.MatrixHeapArrayM4x4D;
 import com.io7m.jtensors.MatrixM3x3D;
 import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.MatrixReadable4x4DType;
 import com.io7m.jtensors.VectorM3D;
 import com.io7m.jtensors.VectorM4D;
-import com.io7m.jtensors.VectorReadable2DType;
-import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.VectorReadable4DType;
-import com.io7m.jtensors.VectorWritable2DType;
-import com.io7m.jtensors.VectorWritable3DType;
 import com.io7m.jtensors.VectorWritable4DType;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
+import com.io7m.junreachable.UnreachableCodeException;
 
 /**
  * <p> A 4x4 mutable matrix type with double precision elements. </p>
  *
- * @param <T0> A phantom type parameter
- * @param <T1> A phantom type parameter
- *
  * @since 7.0.0
  */
 
-@SuppressWarnings("unchecked") public final class PMatrixM4x4D<T0, T1>
-  implements PMatrixDirect4x4DType<T0, T1>
+@SuppressWarnings("unchecked") public final class PMatrixM4x4D
 {
-  private static final int VIEW_BYTES;
-  private static final int VIEW_COLS;
-  private static final int VIEW_ELEMENT_SIZE;
-  private static final int VIEW_ELEMENTS;
-  private static final int VIEW_ROWS;
-
-  static {
-    VIEW_ROWS = 4;
-    VIEW_COLS = 4;
-    VIEW_ELEMENT_SIZE = 8;
-    VIEW_ELEMENTS = PMatrixM4x4D.VIEW_ROWS * PMatrixM4x4D.VIEW_COLS;
-    VIEW_BYTES = PMatrixM4x4D.VIEW_ELEMENTS * PMatrixM4x4D.VIEW_ELEMENT_SIZE;
-  }
-
-  private final ByteBuffer   data;
-  private final DoubleBuffer view;
-
-  /**
-   * Construct a new identity matrix.
-   */
-
-  public PMatrixM4x4D()
+  private PMatrixM4x4D()
   {
-    final ByteBuffer b = ByteBuffer.allocateDirect(PMatrixM4x4D.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    this.data = b;
-
-    final DoubleBuffer v = this.data.asDoubleBuffer();
-    assert v != null;
-
-    this.view = v;
-    this.view.clear();
-    MatrixM4x4D.setIdentity(this);
-  }
-
-  /**
-   * Construct a new copy of the given matrix.
-   *
-   * @param source The source matrix
-   */
-
-  public PMatrixM4x4D(
-    final PMatrixReadable4x4DType<T0, T1> source)
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(PMatrixM4x4D.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    this.data = b;
-
-    final DoubleBuffer v = this.data.asDoubleBuffer();
-    assert v != null;
-
-    this.view = v;
-    this.view.clear();
-
-    MatrixM4x4D.copy(source, this);
-  }
-
-  private static int columnCheck(
-    final int column)
-  {
-    if ((column < 0) || (column >= PMatrixM4x4D.VIEW_COLS)) {
-      throw new IndexOutOfBoundsException(
-        "column must be in the range 0 <= row < " + PMatrixM4x4D.VIEW_COLS);
-    }
-    return column;
-  }
-
-  private static int indexChecked(
-    final int row,
-    final int column)
-  {
-    return PMatrixM4x4D.indexUnsafe(
-      PMatrixM4x4D.rowCheck(row), PMatrixM4x4D.columnCheck(column));
-  }
-
-  /**
-   * <p> The main function that indexes into the buffer that backs the array.
-   * The body of this function decides on how elements are stored. This
-   * implementation chooses to store values in column-major format as this
-   * allows matrices to be sent directly to OpenGL without conversion. </p> <p>
-   * (row * 4) + column, corresponds to row-major storage. (column * 4) + row,
-   * corresponds to column-major (OpenGL) storage. </p>
-   */
-
-  private static int indexUnsafe(
-    final int row,
-    final int column)
-  {
-    return (column * PMatrixM4x4D.VIEW_COLS) + row;
+    throw new UnreachableCodeException();
   }
 
   private static <T0, T1, M extends PMatrixWritable4x4DType<T1, T0>> boolean
   invertActual(
     final PMatrixReadable4x4DType<T0, T1> m,
-    final MatrixM3x3D m3,
-    final PMatrixM4x4D<T1, T0> temp,
+    final Matrix3x3DType m3,
+    final Matrix4x4DType temp,
     final M out)
   {
     final double d = MatrixM4x4D.determinant(m);
@@ -519,8 +414,7 @@ import java.nio.DoubleBuffer;
     final PMatrixReadable4x4DType<T0, T1> m,
     final MOUT out)
   {
-    final PMatrixM4x4D<T1, T0> m4a = (PMatrixM4x4D<T1, T0>) context.m4a;
-    return PMatrixM4x4D.invertActual(m, context.m3a, m4a, out);
+    return PMatrixM4x4D.invertActual(m, context.m3a, context.m4a, out);
   }
 
   /**
@@ -662,16 +556,6 @@ import java.nio.DoubleBuffer;
     return out;
   }
 
-  private static int rowCheck(
-    final int row)
-  {
-    if ((row < 0) || (row >= PMatrixM4x4D.VIEW_COLS)) {
-      throw new IndexOutOfBoundsException(
-        "row must be in the range 0 <= row < " + PMatrixM4x4D.VIEW_COLS);
-    }
-    return row;
-  }
-
   private static <V extends VectorWritable4DType> V multiplyVector4DActual(
     final MatrixReadable4x4DType m,
     final VectorReadable4DType v,
@@ -722,393 +606,25 @@ import java.nio.DoubleBuffer;
       m, v, context.v4a, context.v4b, out);
   }
 
-  @Override public boolean equals(
-    final @Nullable Object obj)
+  /**
+   * Copy the contents of the matrix {@code input} to the matrix {@code output},
+   * completely replacing all elements.
+   *
+   * @param input  The input vector
+   * @param output The output vector
+   * @param <M>    The precise type of matrix
+   * @param <T0>   A phantom type parameter
+   * @param <T1>   A phantom type parameter
+   *
+   * @return {@code output}
+   */
+
+  public static <T0, T1, M extends PMatrixWritable4x4DType<T0, T1>> M copy(
+    final PMatrixReadable4x4DType<T0, T1> input,
+    final M output)
   {
-    if (this == obj) {
-      return true;
-    }
-    if (obj == null) {
-      return false;
-    }
-    if (this.getClass() != obj.getClass()) {
-      return false;
-    }
-    final PMatrixM4x4D<?, ?> other = (PMatrixM4x4D<?, ?>) obj;
-    for (int index = 0; index < PMatrixM4x4D.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  @Override public DoubleBuffer getDirectDoubleBuffer()
-  {
-    return this.view;
-  }
-
-  @Override public <V extends VectorWritable4DType> void getRow4D(
-    final int row,
-    final V out)
-  {
-    PMatrixM4x4D.rowCheck(row);
-    this.getRow4DUnsafe(row, out);
-  }
-
-  @Override public <V extends VectorWritable4DType> void getRow4DUnsafe(
-    final int row,
-    final V out)
-  {
-    final double x = this.view.get(PMatrixM4x4D.indexUnsafe(row, 0));
-    final double y = this.view.get(PMatrixM4x4D.indexUnsafe(row, 1));
-    final double z = this.view.get(PMatrixM4x4D.indexUnsafe(row, 2));
-    final double w = this.view.get(PMatrixM4x4D.indexUnsafe(row, 3));
-    out.set4D(x, y, z, w);
-  }
-
-  @Override public double getR0C3D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(0, 3));
-  }
-
-  @Override public void setR0C3D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(0, 3), x);
-  }
-
-  @Override public void setRowWith4D(
-    final int row,
-    final VectorReadable4DType v)
-  {
-    PMatrixM4x4D.rowCheck(row);
-    this.setRowWith4DUnsafe(row, v);
-  }
-
-  @Override public void setRowWith4DUnsafe(
-    final int row,
-    final VectorReadable4DType v)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(row, 0), v.getXD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(row, 1), v.getYD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(row, 2), v.getZD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(row, 3), v.getWD());
-  }
-
-  @Override public void setRow0With4D(final VectorReadable4DType v)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(0, 0), v.getXD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(0, 1), v.getYD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(0, 2), v.getZD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(0, 3), v.getWD());
-  }
-
-  @Override public void setRow1With4D(final VectorReadable4DType v)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(1, 0), v.getXD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(1, 1), v.getYD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(1, 2), v.getZD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(1, 3), v.getWD());
-  }
-
-  @Override public void setRow2With4D(final VectorReadable4DType v)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(2, 0), v.getXD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(2, 1), v.getYD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(2, 2), v.getZD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(2, 3), v.getWD());
-  }
-
-  @Override public void setRow3With4D(final VectorReadable4DType v)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(3, 0), v.getXD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(3, 1), v.getYD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(3, 2), v.getZD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(3, 3), v.getWD());
-  }
-
-  @Override public double getR1C3D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(1, 3));
-  }
-
-  @Override public void setR1C3D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(1, 3), x);
-  }
-
-  @Override public double getR2C3D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(2, 3));
-  }
-
-  @Override public void setR2C3D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(2, 3), x);
-  }
-
-  @Override public double getR3C0D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(3, 0));
-  }
-
-  @Override public void setR3C0D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(3, 0), x);
-  }
-
-  @Override public double getR3C1D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(3, 1));
-  }
-
-  @Override public void setR3C1D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(3, 1), x);
-  }
-
-  @Override public double getR3C2D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(3, 2));
-  }
-
-  @Override public void setR3C2D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(3, 2), x);
-  }
-
-  @Override public double getR3C3D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(3, 3));
-  }
-
-  @Override public void setR3C3D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(3, 3), x);
-  }
-
-  @Override public double getRowColumnD(
-    final int row,
-    final int column)
-  {
-    return this.view.get(PMatrixM4x4D.indexChecked(row, column));
-  }
-
-  @Override public int hashCode()
-  {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C0D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C1D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C2D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C3D(), prime, r);
-
-    return r;
-  }
-
-  @Override public void setRowColumnD(
-    final int row,
-    final int column,
-    final double value)
-  {
-    this.view.put(PMatrixM4x4D.indexChecked(row, column), value);
-  }
-
-  @SuppressWarnings("boxing") @Override public String toString()
-  {
-    final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < PMatrixM4x4D.VIEW_ROWS; ++row) {
-      final double c0 = this.view.get(PMatrixM4x4D.indexUnsafe(row, 0));
-      final double c1 = this.view.get(PMatrixM4x4D.indexUnsafe(row, 1));
-      final double c2 = this.view.get(PMatrixM4x4D.indexUnsafe(row, 2));
-      final double c3 = this.view.get(PMatrixM4x4D.indexUnsafe(row, 3));
-      final String s =
-        String.format("[%+.15f %+.15f %+.15f %+.15f]\n", c0, c1, c2, c3);
-      builder.append(s);
-    }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
-  }
-
-  @Override public <V extends VectorWritable3DType> void getRow3D(
-    final int row,
-    final V out)
-  {
-    PMatrixM4x4D.rowCheck(row);
-    this.getRow3DUnsafe(row, out);
-  }
-
-  @Override public <V extends VectorWritable3DType> void getRow3DUnsafe(
-    final int row,
-    final V out)
-  {
-    final double x = this.view.get(PMatrixM4x4D.indexUnsafe(row, 0));
-    final double y = this.view.get(PMatrixM4x4D.indexUnsafe(row, 1));
-    final double z = this.view.get(PMatrixM4x4D.indexUnsafe(row, 2));
-    out.set3D(x, y, z);
-  }
-
-  @Override public double getR0C2D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(0, 2));
-  }
-
-  @Override public void setR0C2D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(0, 2), x);
-  }
-
-  @Override public void setRowWith3D(
-    final int row,
-    final VectorReadable3DType v)
-  {
-    PMatrixM4x4D.rowCheck(row);
-    this.setRowWith3DUnsafe(row, v);
-  }
-
-  @Override public void setRowWith3DUnsafe(
-    final int row,
-    final VectorReadable3DType v)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(row, 0), v.getXD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(row, 1), v.getYD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(row, 2), v.getZD());
-  }
-
-  @Override public double getR1C2D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(1, 2));
-  }
-
-  @Override public void setR1C2D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(1, 2), x);
-  }
-
-  @Override public double getR2C0D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(2, 0));
-  }
-
-  @Override public void setR2C0D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(2, 0), x);
-  }
-
-  @Override public double getR2C1D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(2, 1));
-  }
-
-  @Override public void setR2C1D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(2, 1), x);
-  }
-
-  @Override public double getR2C2D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(2, 2));
-  }
-
-  @Override public void setR2C2D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(2, 2), x);
-  }
-
-  @Override public <V extends VectorWritable2DType> void getRow2D(
-    final int row,
-    final V out)
-  {
-    PMatrixM4x4D.rowCheck(row);
-    this.getRow2DUnsafe(row, out);
-  }
-
-  @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
-    final int row,
-    final V out)
-  {
-    final double x = this.view.get(PMatrixM4x4D.indexUnsafe(row, 0));
-    final double y = this.view.get(PMatrixM4x4D.indexUnsafe(row, 1));
-    out.set2D(x, y);
-  }
-
-  @Override public double getR0C0D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(0, 0));
-  }
-
-  @Override public void setR0C0D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(0, 0), x);
-  }
-
-  @Override public void setRowWith2D(
-    final int row,
-    final VectorReadable2DType v)
-  {
-    PMatrixM4x4D.rowCheck(row);
-    this.setRowWith2DUnsafe(row, v);
-  }
-
-  @Override public void setRowWith2DUnsafe(
-    final int row,
-    final VectorReadable2DType v)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(row, 0), v.getXD());
-    this.view.put(PMatrixM4x4D.indexUnsafe(row, 1), v.getYD());
-  }
-
-  @Override public double getR1C0D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(1, 0));
-  }
-
-  @Override public void setR1C0D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(1, 0), x);
-  }
-
-  @Override public double getR0C1D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(0, 1));
-  }
-
-  @Override public void setR0C1D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(0, 1), x);
-  }
-
-  @Override public double getR1C1D()
-  {
-    return this.view.get(PMatrixM4x4D.indexUnsafe(1, 1));
-  }
-
-  @Override public void setR1C1D(final double x)
-  {
-    this.view.put(PMatrixM4x4D.indexUnsafe(1, 1), x);
-  }
-
-  private interface Phantom2Type
-  {
-    // Type-level only.
+    MatrixM4x4D.copy(input, output);
+    return output;
   }
 
   /**
@@ -1130,15 +646,15 @@ import java.nio.DoubleBuffer;
 
   public static class ContextPM4D
   {
-    private final MatrixM3x3D        m3a = new MatrixM3x3D();
-    private final PMatrixM4x4D<?, ?> m4a = new PMatrixM4x4D<Object, Object>();
-    private final PMatrixM4x4D<?, ?> m4b = new PMatrixM4x4D<Object, Object>();
-    private final VectorM3D          v3a = new VectorM3D();
-    private final VectorM3D          v3b = new VectorM3D();
-    private final VectorM3D          v3c = new VectorM3D();
-    private final VectorM3D          v3d = new VectorM3D();
-    private final VectorM4D          v4a = new VectorM4D();
-    private final VectorM4D          v4b = new VectorM4D();
+    private final Matrix3x3DType m3a = MatrixHeapArrayM3x3D.newMatrix();
+    private final Matrix4x4DType m4a = MatrixHeapArrayM4x4D.newMatrix();
+    private final Matrix4x4DType m4b = MatrixHeapArrayM4x4D.newMatrix();
+    private final VectorM3D      v3a = new VectorM3D();
+    private final VectorM3D      v3b = new VectorM3D();
+    private final VectorM3D      v3c = new VectorM3D();
+    private final VectorM3D      v3d = new VectorM3D();
+    private final VectorM4D      v4a = new VectorM4D();
+    private final VectorM4D      v4b = new VectorM4D();
 
     /**
      * Construct a new context.
@@ -1148,26 +664,5 @@ import java.nio.DoubleBuffer;
     {
 
     }
-  }
-
-  /**
-   * Copy the contents of the matrix {@code input} to the matrix {@code output},
-   * completely replacing all elements.
-   *
-   * @param input  The input vector
-   * @param output The output vector
-   * @param <M>    The precise type of matrix
-   * @param <T0>   A phantom type parameter
-   * @param <T1>   A phantom type parameter
-   *
-   * @return {@code output}
-   */
-
-  public static <T0, T1, M extends PMatrixWritable4x4DType<T0, T1>> M copy(
-    final PMatrixReadable4x4DType<T0, T1> input,
-    final M output)
-  {
-    MatrixM4x4D.copy(input, output);
-    return output;
   }
 }

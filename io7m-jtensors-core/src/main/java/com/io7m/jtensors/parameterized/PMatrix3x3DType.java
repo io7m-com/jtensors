@@ -16,6 +16,8 @@
 
 package com.io7m.jtensors.parameterized;
 
+import com.io7m.jtensors.Matrix3x3DType;
+
 /**
  * The type of 3x3 matrices with double precision elements.
  *
@@ -26,7 +28,9 @@ package com.io7m.jtensors.parameterized;
  */
 
 public interface PMatrix3x3DType<T0, T1>
-  extends PMatrixWritable3x3DType<T0, T1>, PMatrixReadable3x3DType<T0, T1>
+  extends PMatrixWritable3x3DType<T0, T1>,
+  PMatrixReadable3x3DType<T0, T1>,
+  Matrix3x3DType
 {
   // No extra functions
 }

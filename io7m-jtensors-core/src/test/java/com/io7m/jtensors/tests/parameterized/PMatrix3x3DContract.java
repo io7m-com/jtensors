@@ -164,17 +164,17 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
   @Test public final void testEqualsCase1()
   {
     final T m0 = this.newMatrix();
-    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariantsGeneric(m0);
     Assert.assertFalse(m0.equals(null));
-    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariantsGeneric(m0);
   }
 
   @Test public final void testEqualsCase2()
   {
     final T m0 = this.newMatrix();
-    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariantsGeneric(m0);
     Assert.assertFalse(m0.equals(Integer.valueOf(23)));
-    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariantsGeneric(m0);
   }
 
   @Test public final void testEqualsCase3()
@@ -182,8 +182,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
     Assert.assertTrue(m0.equals(m1));
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
+    this.checkDirectBufferInvariantsGeneric(m0);
+    this.checkDirectBufferInvariantsGeneric(m1);
   }
 
   @Test public final void testEqualsNeqExhaustive()
@@ -194,8 +194,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
         final T m1 = this.newMatrix();
         m1.setRowColumnD(row, col, 256.0);
         Assert.assertFalse(m0.equals(m1));
-        this.checkDirectBufferInvariants(m0);
-        this.checkDirectBufferInvariants(m1);
+        this.checkDirectBufferInvariantsGeneric(m0);
+        this.checkDirectBufferInvariantsGeneric(m1);
       }
     }
   }
@@ -208,14 +208,14 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
         final T m1 = this.newMatrix();
         Assert.assertEquals(
           (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
-        this.checkDirectBufferInvariants(m0);
-        this.checkDirectBufferInvariants(m1);
+        this.checkDirectBufferInvariantsGeneric(m0);
+        this.checkDirectBufferInvariantsGeneric(m1);
         m1.setRowColumnD(row, col, 256.0);
-        this.checkDirectBufferInvariants(m0);
-        this.checkDirectBufferInvariants(m1);
+        this.checkDirectBufferInvariantsGeneric(m0);
+        this.checkDirectBufferInvariantsGeneric(m1);
         Assert.assertFalse(m0.hashCode() == m1.hashCode());
-        this.checkDirectBufferInvariants(m0);
-        this.checkDirectBufferInvariants(m1);
+        this.checkDirectBufferInvariantsGeneric(m0);
+        this.checkDirectBufferInvariantsGeneric(m1);
       }
     }
   }
@@ -236,12 +236,12 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     m0.setR2C1D(23.0);
     m0.setR2C2D(29.0);
 
-    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariantsGeneric(m0);
 
     final T m1 = this.newMatrixFrom(m0);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
+    this.checkDirectBufferInvariantsGeneric(m0);
+    this.checkDirectBufferInvariantsGeneric(m1);
 
     Assert.assertEquals(3.0, m1.getRowColumnD(0, 0), 0.0);
     Assert.assertEquals(5.0, m1.getRowColumnD(0, 1), 0.0);
@@ -255,8 +255,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     Assert.assertEquals(23.0, m1.getRowColumnD(2, 1), 0.0);
     Assert.assertEquals(29.0, m1.getRowColumnD(2, 2), 0.0);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
+    this.checkDirectBufferInvariantsGeneric(m0);
+    this.checkDirectBufferInvariantsGeneric(m1);
   }
 
   @Test public final void testInitializationIdentity()
@@ -275,7 +275,7 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     Assert.assertEquals(0.0, m.getRowColumnD(2, 1), 0.0);
     Assert.assertEquals(1.0, m.getRowColumnD(2, 2), 0.0);
 
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
   }
 
   @Test public final void testInvertIdentity()
@@ -288,9 +288,9 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
       final boolean r = PMatrixM3x3D.invert(s, m0, m1);
       Assert.assertTrue(r);
 
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsGeneric(m0);
+      this.checkDirectBufferInvariantsWildcard(m1);
+      this.checkDirectBufferInvariantsWildcard(m1);
 
       Assert.assertEquals(1.0, m1.getRowColumnD(0, 0), 0.0);
       Assert.assertEquals(0.0, m1.getRowColumnD(0, 1), 0.0);
@@ -304,9 +304,9 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
       Assert.assertEquals(0.0, m1.getRowColumnD(2, 1), 0.0);
       Assert.assertEquals(1.0, m1.getRowColumnD(2, 2), 0.0);
 
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsGeneric(m0);
+      this.checkDirectBufferInvariantsWildcard(m1);
+      this.checkDirectBufferInvariantsWildcard(m1);
     }
   }
 
@@ -332,9 +332,9 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
       final boolean r = PMatrixM3x3D.invert(c, m0, m1);
       Assert.assertTrue(r);
 
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsGeneric(m0);
+      this.checkDirectBufferInvariantsWildcard(m1);
+      this.checkDirectBufferInvariantsWildcard(m1);
 
       Assert.assertEquals(0.5, m1.getRowColumnD(0, 0), 0.0);
       Assert.assertEquals(0.0, m1.getRowColumnD(0, 1), 0.0);
@@ -348,9 +348,9 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
       Assert.assertEquals(0.0, m1.getRowColumnD(2, 1), 0.0);
       Assert.assertEquals(0.5, m1.getRowColumnD(2, 2), 0.0);
 
-      this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsGeneric(m0);
+      this.checkDirectBufferInvariantsWildcard(m1);
+      this.checkDirectBufferInvariantsWildcard(m1);
     }
   }
 
@@ -385,9 +385,9 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
       }
     }
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
-    this.checkDirectBufferInvariants(mr);
+    this.checkDirectBufferInvariantsWildcard(m0);
+    this.checkDirectBufferInvariantsWildcard(m1);
+    this.checkDirectBufferInvariantsWildcard(mr);
   }
 
   @Test public final void testMultiplySimple()
@@ -410,15 +410,15 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     MatrixM3x3D.copy(m0, m1);
     final TMULTRESULT mr = this.newMatrixMultResult();
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
+    this.checkDirectBufferInvariantsWildcard(m0);
+    this.checkDirectBufferInvariantsWildcard(m1);
 
     final TMULTRESULT r = PMatrixM3x3D.multiply(m0, m1, mr);
     Assert.assertSame(r, mr);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
-    this.checkDirectBufferInvariants(mr);
+    this.checkDirectBufferInvariantsWildcard(m0);
+    this.checkDirectBufferInvariantsWildcard(m1);
+    this.checkDirectBufferInvariantsWildcard(mr);
 
     Assert.assertEquals(30.0, r.getRowColumnD(0, 0), 0.0);
     Assert.assertEquals(36.0, r.getRowColumnD(0, 1), 0.0);
@@ -432,9 +432,9 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     Assert.assertEquals(126.0, r.getRowColumnD(2, 1), 0.0);
     Assert.assertEquals(150.0, r.getRowColumnD(2, 2), 0.0);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
-    this.checkDirectBufferInvariants(mr);
+    this.checkDirectBufferInvariantsWildcard(m0);
+    this.checkDirectBufferInvariantsWildcard(m1);
+    this.checkDirectBufferInvariantsWildcard(mr);
   }
 
   @Test public final void testMultiplyVectorSimple()
@@ -454,7 +454,7 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     m0.setR2C1D(8.0);
     m0.setR2C2D(9.0);
 
-    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariantsGeneric(m0);
 
     final PVectorI3D<T0> v = new PVectorI3D<T0>(1.0, 2.0, 3.0);
     final PVectorM3D<T1> out = new PVectorM3D<T1>();
@@ -466,7 +466,7 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     Assert.assertEquals(32.0, out.getYD(), 0.0);
     Assert.assertEquals(50.0, out.getZD(), 0.0);
 
-    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariantsGeneric(m0);
   }
 
   @Test public final void testMultiplyZero()
@@ -477,16 +477,16 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
 
     MatrixM3x3D.setZero(m1);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
-    this.checkDirectBufferInvariants(mr);
+    this.checkDirectBufferInvariantsWildcard(m0);
+    this.checkDirectBufferInvariantsWildcard(m1);
+    this.checkDirectBufferInvariantsWildcard(mr);
 
     final TMULTRESULT r = PMatrixM3x3D.multiply(m0, m1, mr);
     Assert.assertSame(mr, r);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
-    this.checkDirectBufferInvariants(mr);
+    this.checkDirectBufferInvariantsWildcard(m0);
+    this.checkDirectBufferInvariantsWildcard(m1);
+    this.checkDirectBufferInvariantsWildcard(mr);
 
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
@@ -494,9 +494,9 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
       }
     }
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
-    this.checkDirectBufferInvariants(mr);
+    this.checkDirectBufferInvariantsWildcard(m0);
+    this.checkDirectBufferInvariantsWildcard(m1);
+    this.checkDirectBufferInvariantsWildcard(mr);
   }
 
   @Test(expected = IndexOutOfBoundsException.class)
@@ -531,25 +531,25 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
   {
     final T m = this.newMatrix();
     final VectorM3D v = new VectorM3D();
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.getRow3D(0, v);
     Assert.assertEquals(1.0, v.getXD(), 0.0);
     Assert.assertEquals(0.0, v.getYD(), 0.0);
     Assert.assertEquals(0.0, v.getZD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.getRow3D(1, v);
     Assert.assertEquals(0.0, v.getXD(), 0.0);
     Assert.assertEquals(1.0, v.getYD(), 0.0);
     Assert.assertEquals(0.0, v.getZD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.getRow3D(2, v);
     Assert.assertEquals(0.0, v.getXD(), 0.0);
     Assert.assertEquals(0.0, v.getYD(), 0.0);
     Assert.assertEquals(1.0, v.getZD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
   }
 
   @Test(expected = IndexOutOfBoundsException.class)
@@ -610,7 +610,7 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
   {
     final T m = this.newMatrix();
 
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     {
       MatrixM3x3D.setZero(m);
@@ -672,14 +672,14 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
       this.checkZeroExcept(m, 2, 2);
     }
 
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
   }
 
   @Test public final void testSetGetInterfaceIdentity()
   {
     final T m = this.newMatrix();
 
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.setRowColumnD(0, 0, 3.0);
     Assert.assertEquals(3.0, m.getRowColumnD(0, 0), 0.0);
@@ -688,7 +688,7 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     m.setRowColumnD(0, 2, 7.0);
     Assert.assertEquals(7.0, m.getRowColumnD(0, 2), 0.0);
 
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.setRowColumnD(1, 0, 13.0);
     Assert.assertEquals(13.0, m.getRowColumnD(1, 0), 0.0);
@@ -697,7 +697,7 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     m.setRowColumnD(1, 2, 19.0);
     Assert.assertEquals(19.0, m.getRowColumnD(1, 2), 0.0);
 
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.setRowColumnD(2, 0, 29.0);
     Assert.assertEquals(29.0, m.getRowColumnD(2, 0), 0.0);
@@ -706,14 +706,14 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     m.setRowColumnD(2, 2, 37.0);
     Assert.assertEquals(37.0, m.getRowColumnD(2, 2), 0.0);
 
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
   }
 
   @Test public final void testRowSet3Get3()
   {
     final T m = this.newMatrix();
     final VectorM3D v = new VectorM3D(0.0, 0.0, 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.setRowWith3D(0, new VectorI3D(1.0, 2.0, 3.0));
     m.setRowWith3D(1, new VectorI3D(10.0, 20.0, 30.0));
@@ -723,28 +723,28 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     Assert.assertEquals(1.0, v.getXD(), 0.0);
     Assert.assertEquals(2.0, v.getYD(), 0.0);
     Assert.assertEquals(3.0, v.getZD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.getRow3D(1, v);
     Assert.assertEquals(10.0, v.getXD(), 0.0);
     Assert.assertEquals(20.0, v.getYD(), 0.0);
     Assert.assertEquals(30.0, v.getZD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.getRow3D(2, v);
     Assert.assertEquals(100.0, v.getXD(), 0.0);
     Assert.assertEquals(200.0, v.getYD(), 0.0);
     Assert.assertEquals(300.0, v.getZD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
   }
 
-  protected abstract void checkDirectBufferInvariants(final T m);
+  protected abstract void checkDirectBufferInvariantsGeneric(final T m);
 
   @Test public final void testRowSet3Get3Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM3D v = new VectorM3D(0.0, 0.0, 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.setRowWith3D(0, new VectorI3D(1.0, 2.0, 3.0));
     m.setRowWith3D(1, new VectorI3D(10.0, 20.0, 30.0));
@@ -754,26 +754,26 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     Assert.assertEquals(1.0, v.getXD(), 0.0);
     Assert.assertEquals(2.0, v.getYD(), 0.0);
     Assert.assertEquals(3.0, v.getZD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.getRow3DUnsafe(1, v);
     Assert.assertEquals(10.0, v.getXD(), 0.0);
     Assert.assertEquals(20.0, v.getYD(), 0.0);
     Assert.assertEquals(30.0, v.getZD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.getRow3DUnsafe(2, v);
     Assert.assertEquals(100.0, v.getXD(), 0.0);
     Assert.assertEquals(200.0, v.getYD(), 0.0);
     Assert.assertEquals(300.0, v.getZD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
   }
 
   @Test public final void testRowSet2Get2()
   {
     final T m = this.newMatrix();
     final VectorM2D v = new VectorM2D(0.0, 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.setRowWith2D(0, new VectorI2D(1.0, 2.0));
     m.setRowWith2D(1, new VectorI2D(10.0, 20.0));
@@ -782,24 +782,24 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     m.getRow2D(0, v);
     Assert.assertEquals(1.0, v.getXD(), 0.0);
     Assert.assertEquals(2.0, v.getYD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.getRow2D(1, v);
     Assert.assertEquals(10.0, v.getXD(), 0.0);
     Assert.assertEquals(20.0, v.getYD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.getRow2D(2, v);
     Assert.assertEquals(100.0, v.getXD(), 0.0);
     Assert.assertEquals(200.0, v.getYD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
   }
 
   @Test public final void testRowSet2Get2Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM2D v = new VectorM2D(0.0, 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.setRowWith2D(0, new VectorI2D(1.0, 2.0));
     m.setRowWith2D(1, new VectorI2D(10.0, 20.0));
@@ -808,17 +808,17 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     m.getRow2DUnsafe(0, v);
     Assert.assertEquals(1.0, v.getXD(), 0.0);
     Assert.assertEquals(2.0, v.getYD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.getRow2DUnsafe(1, v);
     Assert.assertEquals(10.0, v.getXD(), 0.0);
     Assert.assertEquals(20.0, v.getYD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
 
     m.getRow2DUnsafe(2, v);
     Assert.assertEquals(100.0, v.getXD(), 0.0);
     Assert.assertEquals(200.0, v.getYD(), 0.0);
-    this.checkDirectBufferInvariants(m);
+    this.checkDirectBufferInvariantsGeneric(m);
   }
 
   @Test public final void testCopyTyped()
@@ -826,8 +826,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
+    this.checkDirectBufferInvariantsGeneric(m0);
+    this.checkDirectBufferInvariantsGeneric(m1);
 
     m0.setR0C0D(1.0);
     m0.setR0C1D(2.0);
@@ -841,13 +841,13 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     m0.setR2C1D(10.0);
     m0.setR2C2D(11.0);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
+    this.checkDirectBufferInvariantsGeneric(m0);
+    this.checkDirectBufferInvariantsGeneric(m1);
 
     PMatrixM3x3D.copy(m0, m1);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
+    this.checkDirectBufferInvariantsGeneric(m0);
+    this.checkDirectBufferInvariantsGeneric(m1);
 
     Assert.assertEquals(1.0, m1.getR0C0D(), 0.0);
     Assert.assertEquals(2.0, m1.getR0C1D(), 0.0);
@@ -861,7 +861,7 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     Assert.assertEquals(10.0, m1.getR2C1D(), 0.0);
     Assert.assertEquals(11.0, m1.getR2C2D(), 0.0);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
+    this.checkDirectBufferInvariantsGeneric(m0);
+    this.checkDirectBufferInvariantsGeneric(m1);
   }
 }

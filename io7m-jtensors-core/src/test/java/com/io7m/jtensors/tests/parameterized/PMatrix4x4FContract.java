@@ -24,7 +24,6 @@ import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorM4F;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.parameterized.PMatrix4x4FType;
-import com.io7m.jtensors.parameterized.PMatrixM3x3D;
 import com.io7m.jtensors.parameterized.PMatrixM4x4F;
 import com.io7m.jtensors.parameterized.PMatrixReadable4x4FType;
 import com.io7m.jtensors.parameterized.PVectorI4F;
@@ -64,7 +63,7 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
   @Override
   protected abstract T newMatrixFrom(PMatrixReadable4x4FType<T0, T1> m);
 
-  protected abstract void checkDirectBufferInvariants(
+  protected abstract void checkDirectBufferInvariantsUntyped(
     final PMatrix4x4FType<?, ?> m);
 
   @Test public final void testCopy()
@@ -266,8 +265,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertTrue(r);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
 
       Assert.assertEquals(1.0, (double) m1.getRowColumnF(0, 0), 0.0);
       Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 1), 0.0);
@@ -290,8 +289,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertEquals(1.0, (double) m1.getRowColumnF(3, 3), 0.0);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
     }
   }
 
@@ -306,8 +305,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertTrue(r);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
 
       Assert.assertEquals(1.0, (double) m1.getRowColumnF(0, 0), 0.0);
       Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 1), 0.0);
@@ -330,8 +329,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertEquals(1.0, (double) m1.getRowColumnF(3, 3), 0.0);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
     }
   }
 
@@ -366,8 +365,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertTrue(r);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
 
       Assert.assertEquals(0.5, (double) m1.getRowColumnF(0, 0), 0.0);
       Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 1), 0.0);
@@ -390,8 +389,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertEquals(0.5, (double) m1.getRowColumnF(3, 3), 0.0);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
     }
   }
 
@@ -430,8 +429,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertTrue(r);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
 
       System.out.println("m0 : ");
       System.out.println(m0);
@@ -493,8 +492,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertTrue(eq);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
     }
   }
 
@@ -533,8 +532,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertTrue(r);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
 
       eq = AlmostEqualDouble.almostEqual(
         context_d, (double) m1.getRowColumnF(0, 0), -0.09375);
@@ -589,8 +588,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertTrue(eq);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
     }
   }
 
@@ -625,8 +624,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertTrue(r);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
 
       Assert.assertEquals(0.5, (double) m1.getRowColumnF(0, 0), 0.0);
       Assert.assertEquals(0.0, (double) m1.getRowColumnF(0, 1), 0.0);
@@ -649,8 +648,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       Assert.assertEquals(0.5, (double) m1.getRowColumnF(3, 3), 0.0);
 
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
     }
   }
 
@@ -680,7 +679,7 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       final boolean r = PMatrixM4x4F.invert(context, m0, m1);
       Assert.assertFalse(r);
       this.checkDirectBufferInvariants(m0);
-      this.checkDirectBufferInvariants(m1);
+      this.checkDirectBufferInvariantsUntyped(m1);
     }
   }
 
@@ -702,9 +701,9 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
           (double) mr.getRowColumnF(row, column),
           (double) m1.getRowColumnF(row, column),
           0.0);
-        this.checkDirectBufferInvariants(m0);
-        this.checkDirectBufferInvariants(m1);
-        this.checkDirectBufferInvariants(mr);
+        this.checkDirectBufferInvariantsUntyped(m0);
+        this.checkDirectBufferInvariantsUntyped(m1);
+        this.checkDirectBufferInvariantsUntyped(mr);
       }
     }
   }
@@ -737,9 +736,9 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     final TMULTRESULT r = PMatrixM4x4F.multiply(m0, m1, mr);
     Assert.assertSame(r, mr);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
-    this.checkDirectBufferInvariants(mr);
+    this.checkDirectBufferInvariantsUntyped(m0);
+    this.checkDirectBufferInvariantsUntyped(m1);
+    this.checkDirectBufferInvariantsUntyped(mr);
 
     Assert.assertEquals(90.0, (double) r.getRowColumnF(0, 0), 0.0);
     Assert.assertEquals(100.0, (double) r.getRowColumnF(0, 1), 0.0);
@@ -758,9 +757,9 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     Assert.assertEquals(542.0, (double) r.getRowColumnF(3, 2), 0.0);
     Assert.assertEquals(600.0, (double) r.getRowColumnF(3, 3), 0.0);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
-    this.checkDirectBufferInvariants(mr);
+    this.checkDirectBufferInvariantsUntyped(m0);
+    this.checkDirectBufferInvariantsUntyped(m1);
+    this.checkDirectBufferInvariantsUntyped(mr);
   }
 
   @Test public final void testMultiplyVectorSimple()
@@ -810,9 +809,9 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     final TMULTRESULT r = PMatrixM4x4F.multiply(m0, m1, mr);
     Assert.assertSame(mr, r);
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
-    this.checkDirectBufferInvariants(mr);
+    this.checkDirectBufferInvariantsUntyped(m0);
+    this.checkDirectBufferInvariantsUntyped(m1);
+    this.checkDirectBufferInvariantsUntyped(mr);
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
@@ -820,9 +819,9 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
       }
     }
 
-    this.checkDirectBufferInvariants(m0);
-    this.checkDirectBufferInvariants(m1);
-    this.checkDirectBufferInvariants(mr);
+    this.checkDirectBufferInvariantsUntyped(m0);
+    this.checkDirectBufferInvariantsUntyped(m1);
+    this.checkDirectBufferInvariantsUntyped(mr);
   }
 
   @Test public final void testRow4()
