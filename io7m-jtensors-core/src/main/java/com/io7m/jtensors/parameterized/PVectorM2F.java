@@ -23,8 +23,7 @@ import com.io7m.jtensors.VectorM2F;
 import com.io7m.jtensors.VectorReadable2FType;
 
 /**
- * <p> A two-dimensional mutable vector type with {@code float} elements.
- * </p>
+ * <p> A two-dimensional mutable vector type with {@code float} elements. </p>
  *
  * <p> Values of this type cannot be accessed safely from multiple threads
  * without explicit synchronization. </p>

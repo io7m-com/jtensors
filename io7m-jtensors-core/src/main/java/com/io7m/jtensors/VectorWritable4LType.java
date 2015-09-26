@@ -17,8 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Write' interface to four-dimensional vectors with long integer elements.
+ * <p> 'Write' interface to four-dimensional vectors with long integer elements.
  * </p>
  */
 
@@ -27,25 +26,20 @@ public interface VectorWritable4LType extends VectorWritable3LType
   /**
    * Set the current vector to the contents of the input vector.
    *
-   * @param in_v
-   *          The input vector
+   * @param in_v The input vector
    */
 
   void copyFrom4L(
     VectorReadable4LType in_v);
 
   /**
-   * Set the current {@code x}, {@code y}, {@code z} and
-   * {@code w} values of the current vector.
+   * Set the current {@code x}, {@code y}, {@code z} and {@code w} values of the
+   * current vector.
    *
-   * @param x
-   *          The new {@code x} value.
-   * @param y
-   *          The new {@code y} value.
-   * @param z
-   *          The new {@code z} value.
-   * @param w
-   *          The new {@code w} value.
+   * @param x The new {@code x} value.
+   * @param y The new {@code y} value.
+   * @param z The new {@code z} value.
+   * @param w The new {@code w} value.
    */
 
   void set4L(
@@ -57,8 +51,7 @@ public interface VectorWritable4LType extends VectorWritable3LType
   /**
    * Set the current {@code w} value of the current vector.
    *
-   * @param w
-   *          The new {@code w} value.
+   * @param w The new {@code w} value.
    */
 
   void setWL(

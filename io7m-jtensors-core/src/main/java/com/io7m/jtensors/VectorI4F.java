@@ -23,13 +23,9 @@ import com.io7m.jnull.Nullable;
 import net.jcip.annotations.Immutable;
 
 /**
- * <p>
- * A four-dimensional immutable vector type with {@code float} elements.
- * </p>
- * <p>
- * Values of this type are immutable and can therefore be safely accessed from
- * multiple threads.
- * </p>
+ * <p> A four-dimensional immutable vector type with {@code float} elements.
+ * </p> <p> Values of this type are immutable and can therefore be safely
+ * accessed from multiple threads. </p>
  */
 
 @Immutable public final class VectorI4F implements VectorReadable4FType
@@ -39,33 +35,86 @@ import net.jcip.annotations.Immutable;
    */
 
   public static final VectorI4F ZERO = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
+  private final float w;
+  private final float x;
+  private final float y;
+  private final float z;
+
+  /**
+   * Default constructor, initializing the vector with values {@code [0.0, 0.0,
+   * 0.0, 1.0]}.
+   */
+
+  public VectorI4F()
+  {
+    this.x = 0.0f;
+    this.y = 0.0f;
+    this.z = 0.0f;
+    this.w = 1.0f;
+  }
+
+  /**
+   * Construct a vector initialized with the given values.
+   *
+   * @param in_x The {@code x} value
+   * @param in_y The {@code y} value
+   * @param in_z The {@code z} value
+   * @param in_w The {@code w} value
+   */
+
+  public VectorI4F(
+    final float in_x,
+    final float in_y,
+    final float in_z,
+    final float in_w)
+  {
+    this.x = in_x;
+    this.y = in_y;
+    this.z = in_z;
+    this.w = in_w;
+  }
+
+  /**
+   * Construct a vector initialized with the values given in the vector {@code
+   * in_v}.
+   *
+   * @param in_v The source vector
+   */
+
+  public VectorI4F(
+    final VectorReadable4FType in_v)
+  {
+    this.x = in_v.getXF();
+    this.y = in_v.getYF();
+    this.z = in_v.getZF();
+    this.w = in_v.getWF();
+  }
 
   /**
    * Calculate the absolute value of the vector {@code v}.
    *
-   * @param v
-   *          The input vector
+   * @param v The input vector
    *
-   * @return {@code (abs v.getXF(), abs v.getYF(), abs v.getZF(), abs v.getWF())}
+   * @return {@code (abs v.getXF(), abs v.getYF(), abs v.getZF(), abs
+   * v.getWF())}
    */
 
   public static VectorI4F absolute(
     final VectorReadable4FType v)
   {
-    return new VectorI4F(Math.abs(v.getXF()), Math.abs(v.getYF()), Math.abs(v
-      .getZF()), Math.abs(v.getWF()));
+    return new VectorI4F(
+      Math.abs(v.getXF()), Math.abs(v.getYF()), Math.abs(
+      v.getZF()), Math.abs(v.getWF()));
   }
 
   /**
-   * Calculate the element-wise sum of the vectors {@code v0} and
-   * {@code v1}.
+   * Calculate the element-wise sum of the vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0 The left input vector
+   * @param v1 The right input vector
    *
-   * @return {@code (v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF(), v0.getZF() + v1.getZF(), v0.getWF() + v1.getWF())}
+   * @return {@code (v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF(),
+   * v0.getZF() + v1.getZF(), v0.getWF() + v1.getWF())}
    */
 
   public static VectorI4F add(
@@ -83,14 +132,12 @@ import net.jcip.annotations.Immutable;
    * Calculate the element-wise sum of the vectors {@code v0} and the
    * element-wise product of {@code v1} and {@code r}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param r
-   *          The scaling value
+   * @param v0 The left input vector
+   * @param v1 The right input vector
+   * @param r  The scaling value
    *
-   * @return {@code (v0.getXF() + (v1.getXF() * r), v0.getYF() + (v1.getYF() * r), v0.getZF() + (v1.getZF() * r), v0.getWF() + (v1.getWF() * r))}
+   * @return {@code (v0.getXF() + (v1.getXF() * r), v0.getYF() + (v1.getYF() *
+   * r), v0.getZF() + (v1.getZF() * r), v0.getWF() + (v1.getWF() * r))}
    */
 
   public static VectorI4F addScaled(
@@ -102,19 +149,18 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Determine whether or not the vectors {@code va} and {@code vb}
-   * are equal to within the degree of error given in {@code context}.
+   * Determine whether or not the vectors {@code va} and {@code vb} are equal to
+   * within the degree of error given in {@code context}.
    *
-   * @see AlmostEqualFloat#almostEqual(AlmostEqualFloat.ContextRelative, float, float)
+   * @param context The equality context
+   * @param va      The left input vector
+   * @param vb      The right input vector
    *
-   * @param context
-   *          The equality context
-   * @param va
-   *          The left input vector
-   * @param vb
-   *          The right input vector
-   * @since 5.0.0
    * @return {@code true} iff the vectors are almost equal.
+   *
+   * @see AlmostEqualFloat#almostEqual(AlmostEqualFloat.ContextRelative, float,
+   * float)
+   * @since 5.0.0
    */
 
   public static boolean almostEqual(
@@ -134,18 +180,15 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. maximum]} inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * maximum]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param maximum The maximum allowed value
    *
-   * @return A vector with both elements equal to at most {@code maximum}
-   *         and at least {@code minimum}
+   * @return A vector with both elements equal to at most {@code maximum} and at
+   * least {@code minimum}
    */
 
   public static VectorI4F clamp(
@@ -161,23 +204,17 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum} and
-   * {@code maximum}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum} and {@code maximum}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param maximum The vector containing the maximum acceptable values
    *
-   * @return {@code (
-   *   min(max(v.getXF(), minimum.getXF()), maximum.getXF()),
-   *   min(max(v.getYF(), minimum.getYF()), maximum.getYF()),
-   *   min(max(v.getZF(), minimum.getZF()), maximum.getZF()),
-   *   min(max(v.getWF(), minimum.getWF()), maximum.getWF())
-   * )}
+   * @return {@code ( min(max(v.getXF(), minimum.getXF()), maximum.getXF()),
+   * min(max(v.getYF(), minimum.getYF()), maximum.getYF()), min(max(v.getZF(),
+   * minimum.getZF()), maximum.getZF()), min(max(v.getWF(), minimum.getWF()),
+   * maximum.getWF()) )}
    */
 
   public static VectorI4F clampByVector(
@@ -197,13 +234,11 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [-Infinity .. maximum]} inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [-Infinity
+   * .. maximum]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param maximum The maximum allowed value
    *
    * @return A vector with both elements equal to at most {@code maximum}
    */
@@ -220,15 +255,15 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code maximum}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code maximum}.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param maximum The vector containing the maximum acceptable values
    *
-   * @return {@code (min(v.getXF(), maximum.getXF()), min(v.getYF(), maximum.getYF()), min(v.getZF(), maximum.getZF()), min(v.getWF(), maximum.getWF()))}
+   * @return {@code (min(v.getXF(), maximum.getXF()), min(v.getYF(),
+   * maximum.getYF()), min(v.getZF(), maximum.getZF()), min(v.getWF(),
+   * maximum.getWF()))}
    */
 
   public static VectorI4F clampMaximumByVector(
@@ -243,16 +278,13 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. Infinity]} inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * Infinity]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
    *
-   * @return A vector with both elements equal to at least
-   *         {@code minimum}.
+   * @return A vector with both elements equal to at least {@code minimum}.
    */
 
   public static VectorI4F clampMinimum(
@@ -267,15 +299,15 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
    *
-   * @return {@code (max(v.getXF(), minimum.getXF()), max(v.getYF(), minimum.getYF()), max(v.getZF(), minimum.getZF()), max(v.getWF(), minimum.getWF()))}
+   * @return {@code (max(v.getXF(), minimum.getXF()), max(v.getYF(),
+   * minimum.getYF()), max(v.getZF(), minimum.getZF()), max(v.getWF(),
+   * minimum.getWF()))}
    */
 
   public static VectorI4F clampMinimumByVector(
@@ -290,13 +322,10 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Calculate the distance between the two vectors {@code v0} and
-   * {@code v1}.
+   * Calculate the distance between the two vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0 The left input vector
+   * @param v1 The right input vector
    *
    * @return The distance between the two vectors
    */
@@ -309,13 +338,10 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Calculate the scalar product of the vectors {@code v0} and
-   * {@code v1}.
+   * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0 The left input vector
+   * @param v1 The right input vector
    *
    * @return The scalar product of the two vectors
    */
@@ -332,24 +358,18 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Linearly interpolate between {@code v0} and {@code v1} by the
-   * amount {@code alpha}.
+   * Linearly interpolate between {@code v0} and {@code v1} by the amount {@code
+   * alpha}.
    *
-   * The {@code alpha} parameter controls the degree of interpolation,
-   * such that:
+   * The {@code alpha} parameter controls the degree of interpolation, such
+   * that:
    *
-   * <ul>
-   * <li>{@code interpolateLinear(v0, v1, 0.0) = v0}</li>
-   * <li>{@code interpolateLinear(v0, v1, 1.0) = v1}</li>
-   * </ul>
+   * <ul> <li>{@code interpolateLinear(v0, v1, 0.0) = v0}</li> <li>{@code
+   * interpolateLinear(v0, v1, 1.0) = v1}</li> </ul>
    *
-   * @param v0
-   *          The left input vector.
-   * @param v1
-   *          The right input vector.
-   * @param alpha
-   *          The interpolation value, between {@code 0.0} and
-   *          {@code 1.0}.
+   * @param v0    The left input vector.
+   * @param v1    The right input vector.
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}.
    *
    * @return {@code (1 - alpha) * v0 + alpha * v1}
    */
@@ -369,8 +389,7 @@ import net.jcip.annotations.Immutable;
    *
    * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
-   * @param v
-   *          The input vector
+   * @param v The input vector
    *
    * @return The magnitude of the input vector
    */
@@ -384,8 +403,7 @@ import net.jcip.annotations.Immutable;
   /**
    * Calculate the squared magnitude of the vector {@code v}.
    *
-   * @param v
-   *          The input vector
+   * @param v The input vector
    *
    * @return The squared magnitude of the input vector
    */
@@ -397,14 +415,13 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Normalize the vector {@code v}, preserving its direction but
-   * reducing it to unit length.
+   * Normalize the vector {@code v}, preserving its direction but reducing it to
+   * unit length.
    *
-   * @param v
-   *          The input vector
+   * @param v The input vector
    *
-   * @return A vector with the same orientation as {@code v} but with
-   *         magnitude equal to {@code 1.0}
+   * @return A vector with the same orientation as {@code v} but with magnitude
+   * equal to {@code 1.0}
    */
 
   public static VectorI4F normalize(
@@ -419,19 +436,15 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * <p>
-   * Orthonormalize and return the vectors {@code v0} and {@code v1}
-   * .
-   * </p>
-   * <p>
-   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
+   * <p> Orthonormalize and return the vectors {@code v0} and {@code v1} . </p>
+   * <p> See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
    *
-   * @param v0
-   *          The left vector
-   * @param v1
-   *          The right vector
+   * @param v0 The left vector
+   * @param v1 The right vector
+   *
    * @return A pair {@code (v0, v1)}, orthonormalized.
+   *
    * @since 5.0.0
    */
 
@@ -448,13 +461,12 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Calculate the projection of the vector {@code p} onto the vector
-   * {@code q}.
+   * Calculate the projection of the vector {@code p} onto the vector {@code
+   * q}.
    *
-   * @param p
-   *          The left vector
-   * @param q
-   *          The right vector
+   * @param p The left vector
+   * @param q The right vector
+   *
    * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    */
 
@@ -471,12 +483,11 @@ import net.jcip.annotations.Immutable;
   /**
    * Scale the vector {@code v} by the scalar {@code r}.
    *
-   * @param v
-   *          The input vector
-   * @param r
-   *          The scaling value
+   * @param v The input vector
+   * @param r The scaling value
    *
-   * @return {@code (v.getXF() * r, v.getYF() * r, v.getZF() * r, v.getWF() * r)}
+   * @return {@code (v.getXF() * r, v.getYF() * r, v.getZF() * r, v.getWF() *
+   * r)}
    */
 
   public static VectorI4F scale(
@@ -484,21 +495,17 @@ import net.jcip.annotations.Immutable;
     final float r)
   {
     return new VectorI4F(
-      v.getXF() * r,
-      v.getYF() * r,
-      v.getZF() * r,
-      v.getWF() * r);
+      v.getXF() * r, v.getYF() * r, v.getZF() * r, v.getWF() * r);
   }
 
   /**
    * Subtract the vector {@code v1} from the vector {@code v0}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0 The left input vector
+   * @param v1 The right input vector
    *
-   * @return {@code (v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF(), v0.getZF() - v1.getZF())}
+   * @return {@code (v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF(),
+   * v0.getZF() - v1.getZF())}
    */
 
   public static VectorI4F subtract(
@@ -510,66 +517,6 @@ import net.jcip.annotations.Immutable;
       v0.getYF() - v1.getYF(),
       v0.getZF() - v1.getZF(),
       v0.getWF() - v1.getWF());
-  }
-
-  private final float w;
-  private final float x;
-  private final float y;
-  private final float z;
-
-  /**
-   * Default constructor, initializing the vector with values
-   * {@code [0.0, 0.0, 0.0, 1.0]}.
-   */
-
-  public VectorI4F()
-  {
-    this.x = 0.0f;
-    this.y = 0.0f;
-    this.z = 0.0f;
-    this.w = 1.0f;
-  }
-
-  /**
-   * Construct a vector initialized with the given values.
-   *
-   * @param in_x
-   *          The {@code x} value
-   * @param in_y
-   *          The {@code y} value
-   * @param in_z
-   *          The {@code z} value
-   * @param in_w
-   *          The {@code w} value
-   */
-
-  public VectorI4F(
-    final float in_x,
-    final float in_y,
-    final float in_z,
-    final float in_w)
-  {
-    this.x = in_x;
-    this.y = in_y;
-    this.z = in_z;
-    this.w = in_w;
-  }
-
-  /**
-   * Construct a vector initialized with the values given in the vector
-   * {@code in_v}.
-   *
-   * @param in_v
-   *          The source vector
-   */
-
-  public VectorI4F(
-    final VectorReadable4FType in_v)
-  {
-    this.x = in_v.getXF();
-    this.y = in_v.getYF();
-    this.z = in_v.getZF();
-    this.w = in_v.getWF();
   }
 
   @Override public boolean equals(
@@ -585,16 +532,16 @@ import net.jcip.annotations.Immutable;
       return false;
     }
     final VectorReadable4FType other = (VectorI4F) obj;
-    if (Float.floatToIntBits(this.getWF()) != Float.floatToIntBits(other
-      .getWF())) {
+    if (Float.floatToIntBits(this.getWF()) != Float.floatToIntBits(
+      other.getWF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.getXF()) != Float.floatToIntBits(other
-      .getXF())) {
+    if (Float.floatToIntBits(this.getXF()) != Float.floatToIntBits(
+      other.getXF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.getYF()) != Float.floatToIntBits(other
-      .getYF())) {
+    if (Float.floatToIntBits(this.getYF()) != Float.floatToIntBits(
+      other.getYF())) {
       return false;
     }
     return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(

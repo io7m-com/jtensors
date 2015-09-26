@@ -19,18 +19,14 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.VectorReadable4LType;
 
 /**
- * <p>
- * 'Read' interface to phantom-typed four-dimensional vectors with long
- * integer elements.
- * </p>
+ * <p> 'Read' interface to phantom-typed four-dimensional vectors with long
+ * integer elements. </p>
  *
- * @param <T>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
  */
 
-public interface PVectorReadable4LType<T> extends
-  VectorReadable4LType,
-  PVectorReadable3LType<T>
+public interface PVectorReadable4LType<T>
+  extends VectorReadable4LType, PVectorReadable3LType<T>
 {
   // No extra functions.
 }

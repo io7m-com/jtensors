@@ -18,7 +18,7 @@ package com.io7m.jtensors.parameterized;
 
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.HashUtility;
+import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.MatrixReadable4x4DType;
 import com.io7m.jtensors.MatrixWritable4x4DType;
 import com.io7m.jtensors.VectorReadable4DType;
@@ -26,8 +26,6 @@ import com.io7m.jtensors.VectorWritable2DType;
 import com.io7m.jtensors.VectorWritable3DType;
 import com.io7m.jtensors.VectorWritable4DType;
 import net.jcip.annotations.Immutable;
-
-import java.util.Arrays;
 
 /**
  * An immutable 4x4 matrix type.
@@ -189,7 +187,7 @@ import java.util.Arrays;
       return false;
     }
     final PMatrixI4x4D<?, ?> other = (PMatrixI4x4D<?, ?>) obj;
-    return Arrays.deepEquals(this.elements, other.elements);
+    return MatrixM4x4D.compareElements(this, other);
   }
 
   @Override public <V extends VectorWritable4DType> void getRow4D(
@@ -265,30 +263,7 @@ import java.util.Arrays;
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C0D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C1D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C2D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C3D(), prime, r);
-
-    return r;
+    return MatrixM4x4D.hashElements(this);
   }
 
   /**
@@ -336,18 +311,8 @@ import java.util.Arrays;
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < 4; ++row) {
-      final String text = String.format(
-        "[%+.15f %+.15f %+.15f %+.15f]\n",
-        Double.valueOf(this.elements[row][0]),
-        Double.valueOf(this.elements[row][1]),
-        Double.valueOf(this.elements[row][2]),
-        Double.valueOf(this.elements[row][3]));
-      builder.append(text);
-    }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
+    MatrixM4x4D.showElements(this, builder);
+    return builder.toString();
   }
 
   @Override public <V extends VectorWritable3DType> void getRow3D(

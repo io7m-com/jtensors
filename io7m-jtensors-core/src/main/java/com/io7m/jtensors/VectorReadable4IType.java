@@ -17,9 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Read' interface to four-dimensional vectors with integer elements.
- * </p>
+ * <p> 'Read' interface to four-dimensional vectors with integer elements. </p>
  */
 
 public interface VectorReadable4IType extends VectorReadable3IType

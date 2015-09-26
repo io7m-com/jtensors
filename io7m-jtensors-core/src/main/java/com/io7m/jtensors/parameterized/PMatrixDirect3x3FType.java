@@ -37,7 +37,8 @@ import com.io7m.jtensors.MatrixDirect3x3FType;
  */
 
 public interface PMatrixDirect3x3FType<T0, T1> extends PMatrix3x3FType<T0, T1>,
-  PMatrixDirectReadable3x3FType<T0, T1>, MatrixDirect3x3FType
+  PMatrixDirectReadable3x3FType<T0, T1>,
+  MatrixDirect3x3FType
 {
   // No extra functions
 }

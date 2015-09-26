@@ -1666,59 +1666,14 @@ public final class MatrixM4x4F
   }
 
   /**
-   * <p>The {@code ContextMM4F} type contains the minimum storage required for
-   * all of the functions of the {@code MatrixM4x4F} class.</p>
-   *
-   * <p> The purpose of the class is to allow applications to allocate all
-   * storage ahead of time in order to allow functions in the class to avoid
-   * allocating memory (not including stack space) for intermediate
-   * calculations. This can reduce garbage collection in speed critical
-   * code.</p>
-   *
-   * <p> The user should allocate one {@code ContextMM4F} value per thread, and
-   * then pass this value to matrix functions. Any matrix function that takes a
-   * {@code ContextMM4F} value will not generate garbage.</p>
-   *
-   * @since 7.0.0
-   */
-
-  public static final class ContextMM4F
-  {
-    private final Matrix3x3FType m3a = MatrixHeapArrayM3x3F.newMatrix();
-    private final Matrix4x4FType m4a = MatrixHeapArrayM4x4F.newMatrix();
-    private final Matrix4x4FType m4b = MatrixHeapArrayM4x4F.newMatrix();
-    private final VectorM3F      v3a = new VectorM3F();
-    private final VectorM3F      v3b = new VectorM3F();
-    private final VectorM3F      v3c = new VectorM3F();
-    private final VectorM3F      v3d = new VectorM3F();
-    private final VectorM4F      v4a = new VectorM4F();
-    private final VectorM4F      v4b = new VectorM4F();
-
-    /**
-     * Construct a new context.
-     */
-
-    public ContextMM4F()
-    {
-
-    }
-  }
-
-
-
-
-
-
-
-
-
-  /**
    * Compare matrices.
    *
    * @param m0 The left matrix
    * @param m1 The right matrix
    *
    * @return {@code true} if all elements of {@code m0} are equal to {@code m1}.
+   *
+   * @since 7.0.0
    */
 
   public static boolean compareElements(
@@ -1743,6 +1698,8 @@ public final class MatrixM4x4F
    * @param m The input matrix
    *
    * @return The hash of all the elements of {@code m}
+   *
+   * @since 7.0.0
    */
 
   public static int hashElements(final MatrixReadable4x4FType m)
@@ -1779,6 +1736,8 @@ public final class MatrixM4x4F
    *
    * @param m  The input matrix
    * @param sb The string builder
+   *
+   * @since 7.0.0
    */
 
   public static void showElements(
@@ -1788,27 +1747,27 @@ public final class MatrixM4x4F
     final String row0 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
       m.getR0C0F(),
-      m.getR0C0F(),
-      m.getR0C0F(),
-      m.getR0C0F());
+      m.getR0C1F(),
+      m.getR0C2F(),
+      m.getR0C3F());
     final String row1 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
       m.getR1C0F(),
-      m.getR1C0F(),
-      m.getR1C0F(),
-      m.getR1C0F());
+      m.getR1C1F(),
+      m.getR1C2F(),
+      m.getR1C3F());
     final String row2 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
       m.getR2C0F(),
-      m.getR2C0F(),
-      m.getR2C0F(),
-      m.getR2C0F());
+      m.getR2C1F(),
+      m.getR2C2F(),
+      m.getR2C3F());
     final String row3 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
       m.getR3C0F(),
-      m.getR3C0F(),
-      m.getR3C0F(),
-      m.getR3C0F());
+      m.getR3C1F(),
+      m.getR3C2F(),
+      m.getR3C3F());
     sb.append(row0);
     sb.append(row1);
     sb.append(row2);
@@ -1877,5 +1836,44 @@ public final class MatrixM4x4F
       return false;
     }
     return m0.getR3C3F() == m1.getR3C3F();
+  }
+
+  /**
+   * <p>The {@code ContextMM4F} type contains the minimum storage required for
+   * all of the functions of the {@code MatrixM4x4F} class.</p>
+   *
+   * <p> The purpose of the class is to allow applications to allocate all
+   * storage ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical
+   * code.</p>
+   *
+   * <p> The user should allocate one {@code ContextMM4F} value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes a
+   * {@code ContextMM4F} value will not generate garbage.</p>
+   *
+   * @since 7.0.0
+   */
+
+  public static final class ContextMM4F
+  {
+    private final Matrix3x3FType m3a = MatrixHeapArrayM3x3F.newMatrix();
+    private final Matrix4x4FType m4a = MatrixHeapArrayM4x4F.newMatrix();
+    private final Matrix4x4FType m4b = MatrixHeapArrayM4x4F.newMatrix();
+    private final VectorM3F      v3a = new VectorM3F();
+    private final VectorM3F      v3b = new VectorM3F();
+    private final VectorM3F      v3c = new VectorM3F();
+    private final VectorM3F      v3d = new VectorM3F();
+    private final VectorM4F      v4a = new VectorM4F();
+    private final VectorM4F      v4b = new VectorM4F();
+
+    /**
+     * Construct a new context.
+     */
+
+    public ContextMM4F()
+    {
+
+    }
   }
 }

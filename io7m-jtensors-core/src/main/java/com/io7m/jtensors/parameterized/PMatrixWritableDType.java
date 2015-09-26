@@ -21,11 +21,10 @@ import com.io7m.jtensors.MatrixWritableDType;
 /**
  * 'Write' interface to matrices with {@code double} elements.
  *
+ * @param <T0> A phantom type parameter.
+ * @param <T1> A phantom type parameter.
+ *
  * @since 7.0.0
- * @param <T0>
- *          A phantom type parameter.
- * @param <T1>
- *          A phantom type parameter.
  */
 
 public interface PMatrixWritableDType<T0, T1> extends MatrixWritableDType

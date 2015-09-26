@@ -18,14 +18,11 @@ package com.io7m.jtensors.parameterized;
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixM3x3D;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.VectorWritable2DType;
 import com.io7m.jtensors.VectorWritable3DType;
-
-import java.util.Arrays;
 
 /**
  * <p>The default implementation of the {@link PMatrix3x3DType} interface.</p>
@@ -96,7 +93,7 @@ public final class PMatrixHeapArrayM3x3D<T0, T1>
     }
 
     final PMatrixHeapArrayM3x3D<?, ?> other = (PMatrixHeapArrayM3x3D<?, ?>) obj;
-    return Arrays.deepEquals(this.elements, other.elements);
+    return MatrixM3x3D.compareElements(this, other);
   }
 
   @Override public double getRowColumnD(
@@ -108,22 +105,7 @@ public final class PMatrixHeapArrayM3x3D<T0, T1>
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C0D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C1D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C2D(), prime, r);
-
-    return r;
+    return MatrixM3x3D.hashElements(this);
   }
 
   @Override public void setRowColumnD(
@@ -134,16 +116,10 @@ public final class PMatrixHeapArrayM3x3D<T0, T1>
     this.elements[row][column] = value;
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < 3; ++row) {
-      final double c0 = this.elements[row][0];
-      final double c1 = this.elements[row][1];
-      final double c2 = this.elements[row][2];
-      final String s = String.format("[%+.15f %+.15f %+.15f]\n", c0, c1, c2);
-      builder.append(s);
-    }
+    MatrixM3x3D.showElements(this, builder);
     return builder.toString();
   }
 

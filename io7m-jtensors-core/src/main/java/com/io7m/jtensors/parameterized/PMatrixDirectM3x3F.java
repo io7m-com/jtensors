@@ -18,7 +18,6 @@ package com.io7m.jtensors.parameterized;
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.MatrixReadable3x3FType;
 import com.io7m.jtensors.VectorReadable2FType;
@@ -181,14 +180,9 @@ public final class PMatrixDirectM3x3F<T0, T1>
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final PMatrixDirectM3x3F<?, ?> other = (PMatrixDirectM3x3F<?, ?>) obj;
-    for (int index = 0; index < PMatrixDirectM3x3F.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
 
-    return true;
+    final PMatrixDirectM3x3F<?, ?> other = (PMatrixDirectM3x3F<?, ?>) obj;
+    return MatrixM3x3F.compareElements(this, other);
   }
 
   @Override public FloatBuffer getDirectFloatBuffer()
@@ -198,22 +192,7 @@ public final class PMatrixDirectM3x3F<T0, T1>
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C0F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C1F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C2F(), prime, r);
-
-    return r;
+    return MatrixM3x3F.hashElements(this);
   }
 
   @Override public void setRowColumnF(
@@ -224,16 +203,10 @@ public final class PMatrixDirectM3x3F<T0, T1>
     this.view.put(PMatrixDirectM3x3F.indexChecked(row, column), value);
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < PMatrixDirectM3x3F.VIEW_ROWS; ++row) {
-      final float c0 = this.view.get(PMatrixDirectM3x3F.indexUnsafe(row, 0));
-      final float c1 = this.view.get(PMatrixDirectM3x3F.indexUnsafe(row, 1));
-      final float c2 = this.view.get(PMatrixDirectM3x3F.indexUnsafe(row, 2));
-      final String s = String.format("[%+.15f %+.15f %+.15f]\n", c0, c1, c2);
-      builder.append(s);
-    }
+    MatrixM3x3F.showElements(this, builder);
     return builder.toString();
   }
 

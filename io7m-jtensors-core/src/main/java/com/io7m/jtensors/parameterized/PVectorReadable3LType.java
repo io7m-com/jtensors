@@ -19,18 +19,14 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.VectorReadable3LType;
 
 /**
- * <p>
- * 'Read' interface to phantom-typed three-dimensional vectors with long
- * integer elements.
- * </p>
+ * <p> 'Read' interface to phantom-typed three-dimensional vectors with long
+ * integer elements. </p>
  *
- * @param <T>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
  */
 
-public interface PVectorReadable3LType<T> extends
-  VectorReadable3LType,
-  PVectorReadable2LType<T>
+public interface PVectorReadable3LType<T>
+  extends VectorReadable3LType, PVectorReadable2LType<T>
 {
   // No extra functions.
 }

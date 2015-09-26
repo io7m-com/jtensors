@@ -21,16 +21,14 @@ import com.io7m.jtensors.MatrixWritable2x2DType;
 /**
  * 'Write' interface to 2x2 matrices with {@code double} elements.
  *
+ * @param <T> A phantom type parameter.
+ * @param <U> A phantom type parameter.
+ *
  * @since 7.0.0
- * @param <T>
- *          A phantom type parameter.
- * @param <U>
- *          A phantom type parameter.
  */
 
-public interface PMatrixWritable2x2DType<T, U> extends
-  MatrixWritable2x2DType,
-  PMatrixWritableDType<T, U>
+public interface PMatrixWritable2x2DType<T, U>
+  extends MatrixWritable2x2DType, PMatrixWritableDType<T, U>
 {
   // No extra functions.
 }

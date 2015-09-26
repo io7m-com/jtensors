@@ -20,6 +20,11 @@ import com.io7m.junreachable.UnreachableCodeException;
 
 final class Cast
 {
+  private Cast()
+  {
+    throw new UnreachableCodeException();
+  }
+
   static int castToInt(
     final double x)
   {
@@ -30,10 +35,5 @@ final class Cast
     final double x)
   {
     return Math.round(x);
-  }
-
-  private Cast()
-  {
-    throw new UnreachableCodeException();
   }
 }

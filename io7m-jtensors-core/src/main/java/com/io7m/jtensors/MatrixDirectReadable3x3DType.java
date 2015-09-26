@@ -17,15 +17,13 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to 3x3 direct-memory matrices with {@code double}
- * elements.
+ * 'Read' interface to 3x3 direct-memory matrices with {@code double} elements.
  *
  * @since 7.0.0
  */
 
-public interface MatrixDirectReadable3x3DType extends
-  MatrixReadable3x3DType,
-  MatrixDirectBufferedDType
+public interface MatrixDirectReadable3x3DType
+  extends MatrixReadable3x3DType, MatrixDirectBufferedDType
 {
   // No extra functions.
 }

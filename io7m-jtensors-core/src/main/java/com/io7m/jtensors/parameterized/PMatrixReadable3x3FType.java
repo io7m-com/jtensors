@@ -21,15 +21,12 @@ import com.io7m.jtensors.MatrixReadable3x3FType;
 /**
  * 'Read' interface to 3x3 matrices with {@code float} elements.
  *
- * @param <T>
- *          A phantom type parameter.
- * @param <U>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
+ * @param <U> A phantom type parameter.
  */
 
-public interface PMatrixReadable3x3FType<T, U> extends
-  PMatrixReadableFType<T, U>,
-  MatrixReadable3x3FType
+public interface PMatrixReadable3x3FType<T, U>
+  extends PMatrixReadableFType<T, U>, MatrixReadable3x3FType
 {
   // No extra functions.
 }

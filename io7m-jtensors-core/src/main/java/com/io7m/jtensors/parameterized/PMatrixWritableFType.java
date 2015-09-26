@@ -21,11 +21,10 @@ import com.io7m.jtensors.MatrixWritableFType;
 /**
  * 'Write' interface to matrices with {@code float} elements.
  *
+ * @param <T0> A phantom type parameter.
+ * @param <T1> A phantom type parameter.
+ *
  * @since 7.0.0
- * @param <T0>
- *          A phantom type parameter.
- * @param <T1>
- *          A phantom type parameter.
  */
 
 public interface PMatrixWritableFType<T0, T1> extends MatrixWritableFType

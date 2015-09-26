@@ -17,9 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Read' interface to two-dimensional vectors with integer elements.
- * </p>
+ * <p> 'Read' interface to two-dimensional vectors with integer elements. </p>
  *
  * @since 5.3.0
  */

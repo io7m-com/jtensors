@@ -50,6 +50,8 @@ public final class MatrixM4x4D
    * @param m1 The right matrix
    *
    * @return {@code true} if all elements of {@code m0} are equal to {@code m1}.
+   *
+   * @since 7.0.0
    */
 
   public static boolean compareElements(
@@ -74,6 +76,8 @@ public final class MatrixM4x4D
    * @param m The input matrix
    *
    * @return The hash of all the elements of {@code m}
+   *
+   * @since 7.0.0
    */
 
   public static int hashElements(final MatrixReadable4x4DType m)
@@ -110,6 +114,8 @@ public final class MatrixM4x4D
    *
    * @param m  The input matrix
    * @param sb The string builder
+   *
+   * @since 7.0.0
    */
 
   public static void showElements(
@@ -119,27 +125,27 @@ public final class MatrixM4x4D
     final String row0 = String.format(
       "[%+.15f %+.15f %+.15f %+.15f]\n",
       m.getR0C0D(),
-      m.getR0C0D(),
-      m.getR0C0D(),
-      m.getR0C0D());
+      m.getR0C1D(),
+      m.getR0C2D(),
+      m.getR0C3D());
     final String row1 = String.format(
       "[%+.15f %+.15f %+.15f %+.15f]\n",
       m.getR1C0D(),
-      m.getR1C0D(),
-      m.getR1C0D(),
-      m.getR1C0D());
+      m.getR1C1D(),
+      m.getR1C2D(),
+      m.getR1C3D());
     final String row2 = String.format(
       "[%+.15f %+.15f %+.15f %+.15f]\n",
       m.getR2C0D(),
-      m.getR2C0D(),
-      m.getR2C0D(),
-      m.getR2C0D());
+      m.getR2C1D(),
+      m.getR2C2D(),
+      m.getR2C3D());
     final String row3 = String.format(
       "[%+.15f %+.15f %+.15f %+.15f]\n",
       m.getR3C0D(),
-      m.getR3C0D(),
-      m.getR3C0D(),
-      m.getR3C0D());
+      m.getR3C1D(),
+      m.getR3C2D(),
+      m.getR3C3D());
     sb.append(row0);
     sb.append(row1);
     sb.append(row2);

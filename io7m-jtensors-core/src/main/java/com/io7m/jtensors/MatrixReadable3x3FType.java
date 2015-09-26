@@ -24,13 +24,10 @@ public interface MatrixReadable3x3FType extends MatrixReadable2x2FType
 {
   /**
    * Retrieve row {@code row}, saving the result to {@code out}.
-   * 
-   * @param row
-   *          The index of the row, starting at {@code 0}.
-   * @param out
-   *          The output vector.
-   * @param <V>
-   *          The precise type of writable vector.
+   *
+   * @param row The index of the row, starting at {@code 0}.
+   * @param out The output vector.
+   * @param <V> The precise type of writable vector.
    */
 
   <V extends VectorWritable3FType> void getRow3F(

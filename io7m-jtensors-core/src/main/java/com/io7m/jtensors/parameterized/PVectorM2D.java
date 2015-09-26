@@ -24,8 +24,7 @@ import com.io7m.jtensors.VectorM2D;
 import com.io7m.jtensors.VectorReadable2DType;
 
 /**
- * <p> A two-dimensional mutable vector type with {@code double} elements.
- * </p>
+ * <p> A two-dimensional mutable vector type with {@code double} elements. </p>
  *
  * <p> Values of this type cannot be accessed safely from multiple threads
  * without explicit synchronization. </p>

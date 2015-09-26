@@ -17,15 +17,13 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to 4x4 direct-memory matrices with {@code float}
- * elements.
+ * 'Read' interface to 4x4 direct-memory matrices with {@code float} elements.
  *
  * @since 7.0.0
  */
 
-public interface MatrixDirectReadable4x4FType extends
-  MatrixReadable4x4FType,
-  MatrixDirectBufferedFType
+public interface MatrixDirectReadable4x4FType
+  extends MatrixReadable4x4FType, MatrixDirectBufferedFType
 {
   // No extra functions.
 }

@@ -1053,6 +1053,124 @@ public final class MatrixM3x3F
   }
 
   /**
+   * Compare matrices.
+   *
+   * @param m0 The left matrix
+   * @param m1 The right matrix
+   *
+   * @return {@code true} if all elements of {@code m0} are equal to {@code m1}.
+   *
+   * @since 7.0.0
+   */
+
+  public static boolean compareElements(
+    final MatrixReadable3x3FType m0,
+    final MatrixReadable3x3FType m1)
+  {
+    if (!MatrixM3x3F.compareRow0(m0, m1)) {
+      return false;
+    }
+    if (!MatrixM3x3F.compareRow1(m0, m1)) {
+      return false;
+    }
+    return MatrixM3x3F.compareRow2(m0, m1);
+  }
+
+  /**
+   * Hash matrices.
+   *
+   * @param m The input matrix
+   *
+   * @return The hash of all the elements of {@code m}
+   *
+   * @since 7.0.0
+   */
+
+  public static int hashElements(final MatrixReadable3x3FType m)
+  {
+    final int prime = 31;
+    int r = prime;
+
+    r = HashUtility.accumulateFloatHash(m.getR0C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR1C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR2C0F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(m.getR0C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR1C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR2C1F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(m.getR0C2F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR1C2F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR2C2F(), prime, r);
+
+    return r;
+  }
+
+  /**
+   * Show matrices. Print all of the elements of {@code m} in square-bracketed
+   * matrix form.
+   *
+   * @param m  The input matrix
+   * @param sb The string builder
+   *
+   * @since 7.0.0
+   */
+
+  public static void showElements(
+    final MatrixReadable3x3FType m,
+    final StringBuilder sb)
+  {
+    final String row0 = String.format(
+      "[%+.6f %+.6f %+.6f]\n", m.getR0C0F(), m.getR0C1F(), m.getR0C2F());
+    final String row1 = String.format(
+      "[%+.6f %+.6f %+.6f]\n", m.getR1C0F(), m.getR1C1F(), m.getR1C2F());
+    final String row2 = String.format(
+      "[%+.6f %+.6f %+.6f]\n", m.getR2C0F(), m.getR2C1F(), m.getR2C2F());
+    sb.append(row0);
+    sb.append(row1);
+    sb.append(row2);
+  }
+
+  private static boolean compareRow0(
+    final MatrixReadable3x3FType m0,
+    final MatrixReadable3x3FType m1)
+  {
+    if (m0.getR0C0F() != m1.getR0C0F()) {
+      return false;
+    }
+    if (m0.getR0C1F() != m1.getR0C1F()) {
+      return false;
+    }
+    return m0.getR0C2F() == m1.getR0C2F();
+  }
+
+  private static boolean compareRow1(
+    final MatrixReadable3x3FType m0,
+    final MatrixReadable3x3FType m1)
+  {
+    if (m0.getR1C0F() != m1.getR1C0F()) {
+      return false;
+    }
+    if (m0.getR1C1F() != m1.getR1C1F()) {
+      return false;
+    }
+    return m0.getR1C2F() == m1.getR1C2F();
+  }
+
+  private static boolean compareRow2(
+    final MatrixReadable3x3FType m0,
+    final MatrixReadable3x3FType m1)
+  {
+    if (m0.getR2C0F() != m1.getR2C0F()) {
+      return false;
+    }
+    if (m0.getR2C1F() != m1.getR2C1F()) {
+      return false;
+    }
+    return m0.getR2C2F() == m1.getR2C2F();
+  }
+
+  /**
    * <p>The {@code ContextMM3F} type contains the minimum storage required for
    * all of the functions of the {@code MatrixM3x3F} class.</p>
    *

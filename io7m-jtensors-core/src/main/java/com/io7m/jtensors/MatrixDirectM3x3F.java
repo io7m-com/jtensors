@@ -151,15 +151,9 @@ public final class MatrixDirectM3x3F implements MatrixDirect3x3FType
     if (this.getClass() != obj.getClass()) {
       return false;
     }
+
     final MatrixDirectM3x3F other = (MatrixDirectM3x3F) obj;
-
-    for (int index = 0; index < MatrixDirectM3x3F.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
-
-    return true;
+    return MatrixM3x3F.compareElements(this, other);
   }
 
   @Override public FloatBuffer getDirectFloatBuffer()
@@ -244,22 +238,7 @@ public final class MatrixDirectM3x3F implements MatrixDirect3x3FType
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C0F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C1F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C2F(), prime, r);
-
-    return r;
+    return MatrixM3x3F.hashElements(this);
   }
 
   @Override public void setRowWith3F(
@@ -303,16 +282,10 @@ public final class MatrixDirectM3x3F implements MatrixDirect3x3FType
     this.view.put(MatrixDirectM3x3F.indexChecked(row, column), value);
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < MatrixDirectM3x3F.VIEW_ROWS; ++row) {
-      final float c0 = this.view.get(MatrixDirectM3x3F.indexUnsafe(row, 0));
-      final float c1 = this.view.get(MatrixDirectM3x3F.indexUnsafe(row, 1));
-      final float c2 = this.view.get(MatrixDirectM3x3F.indexUnsafe(row, 2));
-      final String s = String.format("[%+.6f %+.6f %+.6f]\n", c0, c1, c2);
-      builder.append(s);
-    }
+    MatrixM3x3F.showElements(this, builder);
     return builder.toString();
   }
 

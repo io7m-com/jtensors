@@ -19,13 +19,11 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixDirectReadable4x4DType;
 
 /**
- * 'Read' interface to 4x4 direct-memory matrices with {@code double}
- * elements.
+ * 'Read' interface to 4x4 direct-memory matrices with {@code double} elements.
  *
- * @param <T>
- *          A phantom type parameter.
- * @param <U>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
+ * @param <U> A phantom type parameter.
+ *
  * @since 7.0.0
  */
 

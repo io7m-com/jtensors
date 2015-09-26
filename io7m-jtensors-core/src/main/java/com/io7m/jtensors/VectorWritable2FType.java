@@ -17,9 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Write' interface to two-dimensional vectors with {@code float}
- * elements.
+ * <p> 'Write' interface to two-dimensional vectors with {@code float} elements.
  * </p>
  */
 
@@ -28,21 +26,17 @@ public interface VectorWritable2FType
   /**
    * Set the current vector to the contents of the input vector.
    *
-   * @param in_v
-   *          The input vector
+   * @param in_v The input vector
    */
 
   void copyFrom2F(
     VectorReadable2FType in_v);
 
   /**
-   * Set the current {@code x} and {@code y} values of the current
-   * vector.
+   * Set the current {@code x} and {@code y} values of the current vector.
    *
-   * @param x
-   *          The new {@code x} value.
-   * @param y
-   *          The new {@code y} value.
+   * @param x The new {@code x} value.
+   * @param y The new {@code y} value.
    */
 
   void set2F(
@@ -52,8 +46,7 @@ public interface VectorWritable2FType
   /**
    * Set the current {@code x} value of the current vector.
    *
-   * @param x
-   *          The new {@code x} value.
+   * @param x The new {@code x} value.
    */
 
   void setXF(
@@ -62,8 +55,7 @@ public interface VectorWritable2FType
   /**
    * Set the current {@code y} value of the current vector.
    *
-   * @param y
-   *          The new {@code y} value.
+   * @param y The new {@code y} value.
    */
 
   void setYF(

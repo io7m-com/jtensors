@@ -19,23 +19,19 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.VectorWritable4IType;
 
 /**
- * <p>
- * 'Write' interface to four-dimensional vectors with integer elements.
+ * <p> 'Write' interface to four-dimensional vectors with integer elements.
  * </p>
  *
- * @param <T>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
  */
 
-public interface PVectorWritable4IType<T> extends
-  VectorWritable4IType,
-  PVectorWritable3IType<T>
+public interface PVectorWritable4IType<T>
+  extends VectorWritable4IType, PVectorWritable3IType<T>
 {
   /**
    * Set the current vector to the contents of the input vector.
    *
-   * @param in_v
-   *          The input vector
+   * @param in_v The input vector
    */
 
   void copyFromTyped4I(

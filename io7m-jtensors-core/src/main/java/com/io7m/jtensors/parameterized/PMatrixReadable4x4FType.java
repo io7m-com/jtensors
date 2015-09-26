@@ -21,15 +21,12 @@ import com.io7m.jtensors.MatrixReadable4x4FType;
 /**
  * 'Read' interface to 4x4 matrices with {@code float} elements.
  *
- * @param <T>
- *          A phantom type parameter.
- * @param <U>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
+ * @param <U> A phantom type parameter.
  */
 
-public interface PMatrixReadable4x4FType<T, U> extends
-  PMatrixReadableFType<T, U>,
-  MatrixReadable4x4FType
+public interface PMatrixReadable4x4FType<T, U>
+  extends PMatrixReadableFType<T, U>, MatrixReadable4x4FType
 {
   // No extra functions.
 }
