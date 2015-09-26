@@ -909,9 +909,7 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       final V m1 = this.newVectorM3F();
       m1.setXF(23.0F);
       Assert.assertNotEquals(
-        (double) m1.hashCode(),
-        (double) m0.hashCode(),
-        0.0);
+        (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
     }
 
     {
@@ -919,9 +917,7 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       final V m1 = this.newVectorM3F();
       m1.setYF(23.0F);
       Assert.assertNotEquals(
-        (double) m1.hashCode(),
-        (double) m0.hashCode(),
-        0.0);
+        (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
     }
 
     {
@@ -929,9 +925,7 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       final V m1 = this.newVectorM3F();
       m1.setZF(23.0F);
       Assert.assertNotEquals(
-        (double) m1.hashCode(),
-        (double) m0.hashCode(),
-        0.0);
+        (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
     }
   }
 

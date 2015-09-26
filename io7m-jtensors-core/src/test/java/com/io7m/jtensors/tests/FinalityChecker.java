@@ -16,12 +16,6 @@
 
 package com.io7m.jtensors.tests;
 
-import java.lang.reflect.Modifier;
-
-import javax.annotation.Nonnull;
-
-import org.junit.Test;
-
 import com.io7m.jtensors.MatrixM2x2D;
 import com.io7m.jtensors.MatrixM2x2F;
 import com.io7m.jtensors.MatrixM3x3D;
@@ -68,26 +62,17 @@ import com.io7m.jtensors.parameterized.PVectorM3I;
 import com.io7m.jtensors.parameterized.PVectorM4D;
 import com.io7m.jtensors.parameterized.PVectorM4F;
 import com.io7m.jtensors.parameterized.PVectorM4I;
+import org.junit.Test;
+
+import javax.annotation.Nonnull;
+import java.lang.reflect.Modifier;
 
 /**
- * <p>
- * All classes must be final.
- * </p>
+ * <p> All classes must be final. </p>
  */
 
 @SuppressWarnings("static-method") public final class FinalityChecker
 {
-  private static class NotFinal extends Exception
-  {
-    private static final long serialVersionUID = -3278041028041610303L;
-
-    NotFinal(
-      final @Nonnull Class<?> c)
-    {
-      super(c + " not final");
-    }
-  }
-
   static void checkClassFinal(
     final @Nonnull Class<?> c)
     throws NotFinal
@@ -372,5 +357,16 @@ import com.io7m.jtensors.parameterized.PVectorM4I;
     throws NotFinal
   {
     FinalityChecker.checkClassFinal(VectorM4I.class);
+  }
+
+  private static class NotFinal extends Exception
+  {
+    private static final long serialVersionUID = -3278041028041610303L;
+
+    NotFinal(
+      final @Nonnull Class<?> c)
+    {
+      super(c + " not final");
+    }
   }
 }

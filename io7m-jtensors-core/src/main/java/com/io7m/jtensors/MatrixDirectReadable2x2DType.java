@@ -17,15 +17,13 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to 2x2 direct-memory matrices with double precision
- * elements.
+ * 'Read' interface to 2x2 direct-memory matrices with {@code double} elements.
  *
  * @since 7.0.0
  */
 
-public interface MatrixDirectReadable2x2DType extends
-  MatrixReadable2x2DType,
-  MatrixDirectBufferedDType
+public interface MatrixDirectReadable2x2DType
+  extends MatrixReadable2x2DType, MatrixDirectBufferedDType
 {
   // No extra functions.
 }

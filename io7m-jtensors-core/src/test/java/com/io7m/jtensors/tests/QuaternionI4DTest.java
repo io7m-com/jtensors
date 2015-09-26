@@ -513,8 +513,7 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     final VectorReadable3DType axis = QuaternionI4DTest.AXIS_Y;
 
     MatrixM4x4D.lookAt(mc, origin, target, axis, mr);
-    final QuaternionI4D q =
-      QuaternionI4D.lookAt(qc, origin, target, axis);
+    final QuaternionI4D q = QuaternionI4D.lookAt(qc, origin, target, axis);
     QuaternionI4D.makeRotationMatrix4x4(q, mqr);
 
     System.out.println("mr: ");
@@ -549,8 +548,7 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     final VectorReadable3DType axis = QuaternionI4DTest.AXIS_Y;
 
     MatrixM4x4D.lookAt(mc, origin, target, axis, mr);
-    final QuaternionI4D q =
-      QuaternionI4D.lookAt(qc, origin, target, axis);
+    final QuaternionI4D q = QuaternionI4D.lookAt(qc, origin, target, axis);
     QuaternionI4D.makeRotationMatrix4x4(q, mqr);
 
     System.out.println("mr: ");

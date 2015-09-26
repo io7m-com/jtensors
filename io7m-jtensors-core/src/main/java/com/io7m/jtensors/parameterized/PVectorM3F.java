@@ -25,7 +25,7 @@ import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
 
 /**
- * <p> A three-dimensional mutable vector type with single precision elements.
+ * <p> A three-dimensional mutable vector type with {@code float} elements.
  * </p>
  *
  * <p> Values of this type cannot be accessed safely from multiple threads

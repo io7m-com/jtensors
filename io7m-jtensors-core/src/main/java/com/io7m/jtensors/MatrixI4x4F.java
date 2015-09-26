@@ -20,8 +20,6 @@ import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
 import net.jcip.annotations.Immutable;
 
-import java.util.Arrays;
-
 /**
  * An immutable 4x4 matrix type.
  *
@@ -147,7 +145,7 @@ import java.util.Arrays;
       return false;
     }
     final MatrixI4x4F other = (MatrixI4x4F) obj;
-    return Arrays.deepEquals(this.elements, other.elements);
+    return MatrixM4x4F.compareElements(this, other);
   }
 
   @Override public <V extends VectorWritable4FType> void getRow4F(
@@ -219,30 +217,7 @@ import java.util.Arrays;
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C0F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C1F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C2F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C3F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C3F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C3F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C3F(), prime, r);
-
-    return r;
+    return MatrixM4x4F.hashElements(this);
   }
 
   /**
@@ -278,18 +253,8 @@ import java.util.Arrays;
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < 4; ++row) {
-      final String text = String.format(
-        "[%+.6f %+.6f %+.6f %+.6f]\n",
-        Float.valueOf(this.elements[row][0]),
-        Float.valueOf(this.elements[row][1]),
-        Float.valueOf(this.elements[row][2]),
-        Float.valueOf(this.elements[row][3]));
-      builder.append(text);
-    }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
+    MatrixM4x4F.showElements(this, builder);
+    return builder.toString();
   }
 
   @Override public <V extends VectorWritable3FType> void getRow3F(

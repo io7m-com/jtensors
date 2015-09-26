@@ -153,13 +153,7 @@ public final class MatrixDirectM4x4F implements MatrixDirect4x4FType
     }
 
     final MatrixDirectM4x4F other = (MatrixDirectM4x4F) obj;
-    for (int index = 0; index < MatrixDirectM4x4F.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
-
-    return true;
+    return MatrixM4x4F.compareElements(this, other);
   }
 
   @Override public FloatBuffer getDirectFloatBuffer()
@@ -315,30 +309,7 @@ public final class MatrixDirectM4x4F implements MatrixDirect4x4FType
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C0F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C1F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C2F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C3F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C3F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C3F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR3C3F(), prime, r);
-
-    return r;
+    return MatrixM4x4F.hashElements(this);
   }
 
   @Override public void setRowColumnF(
@@ -349,18 +320,10 @@ public final class MatrixDirectM4x4F implements MatrixDirect4x4FType
     this.view.put(MatrixDirectM4x4F.indexChecked(row, column), value);
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < MatrixDirectM4x4F.VIEW_ROWS; ++row) {
-      final float c0 = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 0));
-      final float c1 = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 1));
-      final float c2 = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 2));
-      final float c3 = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 3));
-      final String s =
-        String.format("[%+.6f %+.6f %+.6f %+.6f]\n", c0, c1, c2, c3);
-      builder.append(s);
-    }
+    MatrixM4x4F.showElements(this, builder);
     return builder.toString();
   }
 

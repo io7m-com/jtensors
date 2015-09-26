@@ -23,7 +23,7 @@ import com.io7m.jtensors.VectorM3F;
 import com.io7m.junreachable.UnreachableCodeException;
 
 /**
- * <p>A 3x3 mutable matrix type with single precision elements.</p>
+ * <p>A 3x3 mutable matrix type with {@code float} elements.</p>
  *
  * @since 7.0.0
  */

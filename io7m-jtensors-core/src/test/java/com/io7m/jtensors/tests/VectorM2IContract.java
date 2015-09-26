@@ -24,14 +24,6 @@ import org.junit.Test;
 
 public abstract class VectorM2IContract<T extends Vector2IType>
 {
-  protected abstract T newVectorM2I(
-    final int x,
-    final int y);
-
-  protected abstract T newVectorM2I();
-
-  protected abstract T newVectorM2I(T v);
-
   public static int randomNegativeNumber()
   {
     return (int) (VectorM2IContract.getRandom() * (double) Integer.MIN_VALUE);
@@ -51,6 +43,19 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   {
     return (int) (VectorM2IContract.getRandom() * (double) (1 << 14));
   }
+
+  protected static int getRandomLargePositive()
+  {
+    return (int) (VectorM2IContract.getRandom() * Integer.MAX_VALUE);
+  }
+
+  protected abstract T newVectorM2I(
+    final int x,
+    final int y);
+
+  protected abstract T newVectorM2I();
+
+  protected abstract T newVectorM2I(T v);
 
   @Test public final void testAbsolute()
   {
@@ -188,11 +193,9 @@ public abstract class VectorM2IContract<T extends Vector2IType>
       VectorM2I.addScaled(v0, v1, (double) r, vr0);
 
       Assert.assertEquals(
-        (long) (v0.getXI() + (v1.getXI() * r)),
-        (long) vr0.getXI());
+        (long) (v0.getXI() + (v1.getXI() * r)), (long) vr0.getXI());
       Assert.assertEquals(
-        (long) (v0.getYI() + (v1.getYI() * r)),
-        (long) vr0.getYI());
+        (long) (v0.getYI() + (v1.getYI() * r)), (long) vr0.getYI());
 
       {
         final int orig_x = v0.getXI();
@@ -200,11 +203,9 @@ public abstract class VectorM2IContract<T extends Vector2IType>
         VectorM2I.addScaledInPlace(v0, v1, (double) r);
 
         Assert.assertEquals(
-          (long) (orig_x + (v1.getXI() * r)),
-          (long) v0.getXI());
+          (long) (orig_x + (v1.getXI() * r)), (long) v0.getXI());
         Assert.assertEquals(
-          (long) (orig_y + (v1.getYI() * r)),
-          (long) v0.getYI());
+          (long) (orig_y + (v1.getYI() * r)), (long) v0.getYI());
       }
     }
   }
@@ -361,8 +362,7 @@ public abstract class VectorM2IContract<T extends Vector2IType>
       Assert.assertTrue(vr.getYI() >= minimum.getYI());
 
       {
-        final T vr0 =
-          VectorM2I.clampByVectorInPlace(v, minimum, maximum);
+        final T vr0 = VectorM2I.clampByVectorInPlace(v, minimum, maximum);
         Assert.assertEquals(v, vr0);
         Assert.assertSame(v, vr0);
         Assert.assertTrue(v.getXI() <= maximum.getXI());
@@ -473,11 +473,6 @@ public abstract class VectorM2IContract<T extends Vector2IType>
 
     Assert.assertEquals((long) v0.getXI(), (long) v1.getXI());
     Assert.assertEquals((long) v0.getYI(), (long) v1.getYI());
-  }
-
-  protected static int getRandomLargePositive()
-  {
-    return (int) (VectorM2IContract.getRandom() * Integer.MAX_VALUE);
   }
 
   @Test public final void testDefault00()

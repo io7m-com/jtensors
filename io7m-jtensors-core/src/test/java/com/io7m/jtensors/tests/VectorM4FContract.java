@@ -496,8 +496,7 @@ public abstract class VectorM4FContract<T extends Vector4FType>
       Assert.assertTrue(vr.getWF() >= minimum.getWF());
 
       {
-        final T vr0 =
-          VectorM4F.clampByVectorInPlace(v, minimum, maximum);
+        final T vr0 = VectorM4F.clampByVectorInPlace(v, minimum, maximum);
         Assert.assertSame(v, vr0);
         Assert.assertTrue(v.getXF() <= maximum.getXF());
         Assert.assertTrue(v.getYF() <= maximum.getYF());
@@ -692,7 +691,7 @@ public abstract class VectorM4FContract<T extends Vector4FType>
 
   @Test public final void testDistance()
   {
-    final VectorM4F.ContextVM4F  c = new VectorM4F.ContextVM4F();
+    final VectorM4F.ContextVM4F c = new VectorM4F.ContextVM4F();
     final T v0 = this.newVectorM4F(0.0f, 1.0f, 0.0f, 0.0f);
     final T v1 = this.newVectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final ContextRelative context = new ContextRelative();
@@ -703,7 +702,7 @@ public abstract class VectorM4FContract<T extends Vector4FType>
 
   @Test public final void testDistanceOrdering()
   {
-    final VectorM4F.ContextVM4F  c = new VectorM4F.ContextVM4F();
+    final VectorM4F.ContextVM4F c = new VectorM4F.ContextVM4F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
       final float y0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
@@ -982,13 +981,11 @@ public abstract class VectorM4FContract<T extends Vector4FType>
     Assert.assertEquals((double) v1.getWF(), (double) v0.getWF(), 0.0);
   }
 
-
-
   @Test public final void testInterpolateLinearLimits()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
-    final VectorM4F.ContextVM4F  c = new VectorM4F.ContextVM4F();
+    final VectorM4F.ContextVM4F c = new VectorM4F.ContextVM4F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
@@ -1149,7 +1146,7 @@ public abstract class VectorM4FContract<T extends Vector4FType>
 
   @Test public final void testOrthonormalize()
   {
-    final VectorM4F.ContextVM4F  c = new VectorM4F.ContextVM4F();
+    final VectorM4F.ContextVM4F c = new VectorM4F.ContextVM4F();
     final T v0 = this.newVectorM4F(0.0F, 1.0F, 0.0F, 0.0F);
     final T v1 = this.newVectorM4F(0.5f, 0.5f, 0.0F, 0.0F);
     final T v0_out = this.newVectorM4F();
@@ -1163,7 +1160,7 @@ public abstract class VectorM4FContract<T extends Vector4FType>
 
   @Test public final void testOrthonormalizeMutation()
   {
-    final VectorM4F.ContextVM4F  c = new VectorM4F.ContextVM4F();
+    final VectorM4F.ContextVM4F c = new VectorM4F.ContextVM4F();
     final T v0 = this.newVectorM4F(0f, 1f, 0f, 0f);
     final T v1 = this.newVectorM4F(0.5f, 0.5f, 0f, 0f);
 

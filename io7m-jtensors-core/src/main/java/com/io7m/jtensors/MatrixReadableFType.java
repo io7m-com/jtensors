@@ -17,18 +17,17 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to matrices with single precision elements.
+ * 'Read' interface to matrices with {@code float} elements.
  */
 
 public interface MatrixReadableFType
 {
   /**
-   * @return The value from the matrix at row {@code row} , column
-   *         {@code column}.
-   * @param row
-   *          The row
-   * @param column
-   *          The column
+   * @param row    The row
+   * @param column The column
+   *
+   * @return The value from the matrix at row {@code row} , column {@code
+   * column}.
    */
 
   float getRowColumnF(

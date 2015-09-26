@@ -19,8 +19,6 @@ package com.io7m.jtensors;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 
-import java.util.Arrays;
-
 /**
  * <p>The default implementation of the {@link Matrix3x3FType} interface.</p>
  *
@@ -80,7 +78,7 @@ public final class MatrixHeapArrayM3x3F implements Matrix3x3FType
     }
 
     final MatrixHeapArrayM3x3F other = (MatrixHeapArrayM3x3F) obj;
-    return Arrays.deepEquals(this.elements, other.elements);
+    return MatrixM3x3F.compareElements(this, other);
   }
 
   @Override public float getRowColumnF(
@@ -92,22 +90,7 @@ public final class MatrixHeapArrayM3x3F implements Matrix3x3FType
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C0F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C1F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C2F(), prime, r);
-
-    return r;
+    return MatrixM3x3F.hashElements(this);
   }
 
   @Override public void setRowColumnF(
@@ -118,17 +101,10 @@ public final class MatrixHeapArrayM3x3F implements Matrix3x3FType
     this.elements[row][column] = value;
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < 3; ++row) {
-      final float c0 = this.elements[row][0];
-      final float c1 = this.elements[row][1];
-      final float c2 = this.elements[row][2];
-      final String s =
-        String.format("[%+.6f %+.6f %+.6f]\n", c0, c1, c2);
-      builder.append(s);
-    }
+    MatrixM3x3F.showElements(this, builder);
     return builder.toString();
   }
 

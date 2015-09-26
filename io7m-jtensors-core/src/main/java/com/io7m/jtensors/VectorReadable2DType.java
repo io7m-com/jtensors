@@ -17,8 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Read' interface to two-dimensional vectors with double precision elements.
+ * <p> 'Read' interface to two-dimensional vectors with {@code double} elements.
  * </p>
  */
 

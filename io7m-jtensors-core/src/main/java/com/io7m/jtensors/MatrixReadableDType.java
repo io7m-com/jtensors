@@ -16,20 +16,18 @@
 
 package com.io7m.jtensors;
 
-
 /**
- * 'Read' interface to matrices with double precision elements.
+ * 'Read' interface to matrices with {@code double} elements.
  */
 
 public interface MatrixReadableDType
 {
   /**
-   * @return The value from the matrix at row {@code row} , column
-   *         {@code column}.
-   * @param row
-   *          The row
-   * @param column
-   *          The column
+   * @param row    The row
+   * @param column The column
+   *
+   * @return The value from the matrix at row {@code row} , column {@code
+   * column}.
    */
 
   double getRowColumnD(

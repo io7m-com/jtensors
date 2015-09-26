@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to four-dimensional quaternions with single precision
+ * 'Read' interface to four-dimensional quaternions with {@code float}
  * elements.
  */
 

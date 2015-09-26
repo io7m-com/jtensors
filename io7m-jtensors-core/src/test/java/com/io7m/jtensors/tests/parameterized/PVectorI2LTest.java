@@ -16,23 +16,15 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.parameterized.PVectorI2L;
 import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Assert;
+import org.junit.Test;
 
-@SuppressWarnings("static-method") public class PVectorI2LTest<T> extends
-  PVectorI2Contract
+@SuppressWarnings("static-method") public class PVectorI2LTest<T>
+  extends PVectorI2Contract
 {
-  @Test public void testZero()
-  {
-    final PVectorI2L<Object> z = PVectorI2L.zero();
-    Assert.assertEquals(0, z.getXL());
-    Assert.assertEquals(0, z.getYL());
-  }
-
   public static long randomNegativeNumber()
   {
     return (long) (Math.random() * Long.MIN_VALUE);
@@ -48,9 +40,17 @@ import com.io7m.jtensors.tests.TestUtilities;
     return (long) (Math.random() * (1 << 14));
   }
 
+  @Test public void testZero()
+  {
+    final PVectorI2L<Object> z = PVectorI2L.zero();
+    Assert.assertEquals(0, z.getXL());
+    Assert.assertEquals(0, z.getYL());
+  }
+
   @Override @Test public void testAbsolute()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = (long) (Math.random() * Long.MIN_VALUE);
       final long y = (long) (Math.random() * Long.MIN_VALUE);
       final PVectorI2L<T> v = new PVectorI2L<T>(x, y);
@@ -64,7 +64,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testAdd()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorI2LTest.randomPositiveSmallNumber();
       final long y0 = PVectorI2LTest.randomPositiveSmallNumber();
       final PVectorI2L<T> v0 = new PVectorI2L<T>(x0, y0);
@@ -82,7 +83,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testAddScaled()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorI2LTest.randomPositiveSmallNumber();
       final long y0 = PVectorI2LTest.randomPositiveSmallNumber();
       final PVectorI2L<T> v0 = new PVectorI2L<T>(x0, y0);
@@ -138,10 +140,9 @@ import com.io7m.jtensors.tests.TestUtilities;
       System.out.println("v1    : " + v1);
       System.out.println("angle : " + angle);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        angle,
-        Math.toRadians(90)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, angle, Math.toRadians(90)));
     }
 
     {
@@ -155,10 +156,9 @@ import com.io7m.jtensors.tests.TestUtilities;
       System.out.println("v1    : " + v1);
       System.out.println("angle : " + angle);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        angle,
-        Math.toRadians(90)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, angle, Math.toRadians(90)));
     }
   }
 
@@ -172,7 +172,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampByPVectorMaximumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max_x = PVectorI2LTest.randomNegativeNumber();
       final long max_y = PVectorI2LTest.randomNegativeNumber();
       final PVectorI2L<T> maximum = new PVectorI2L<T>(max_x, max_y);
@@ -190,7 +191,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampByPVectorMinimumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long min_x = PVectorI2LTest.randomPositiveNumber();
       final long min_y = PVectorI2LTest.randomPositiveNumber();
       final PVectorI2L<T> minimum = new PVectorI2L<T>(min_x, min_y);
@@ -208,7 +210,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampByPVectorOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long min_x = PVectorI2LTest.randomNegativeNumber();
       final long min_y = PVectorI2LTest.randomNegativeNumber();
       final PVectorI2L<T> minimum = new PVectorI2L<T>(min_x, min_y);
@@ -232,7 +235,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampMaximumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long maximum = PVectorI2LTest.randomNegativeNumber();
 
       final long x = PVectorI2LTest.randomPositiveNumber();
@@ -248,7 +252,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampMinimumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long minimum = PVectorI2LTest.randomPositiveNumber();
 
       final long x = PVectorI2LTest.randomNegativeNumber();
@@ -264,7 +269,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long minimum = PVectorI2LTest.randomNegativeNumber();
       final long maximum = PVectorI2LTest.randomPositiveNumber();
 
@@ -312,7 +318,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testDistanceOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorI2LTest.randomPositiveSmallNumber();
       final long y0 = PVectorI2LTest.randomPositiveSmallNumber();
       final PVectorI2L<T> v0 = new PVectorI2L<T>(x0, y0);
@@ -359,7 +366,8 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max = 1000;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
@@ -381,7 +389,8 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max = 1000;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
@@ -508,7 +517,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testInterpolateLinearLimits()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorI2LTest.randomPositiveNumber();
       final long y0 = PVectorI2LTest.randomPositiveNumber();
       final PVectorI2L<T> v0 = new PVectorI2L<T>(x0, y0);
@@ -530,7 +540,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testMagnitudeNonzero()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = PVectorI2LTest.randomPositiveSmallNumber();
       final long y = PVectorI2LTest.randomPositiveSmallNumber();
       final PVectorI2L<T> v = new PVectorI2L<T>(x, y);
@@ -614,7 +625,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testScaleOne()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = PVectorI2LTest.randomPositiveNumber();
       final long y = PVectorI2LTest.randomPositiveNumber();
       final PVectorI2L<T> v = new PVectorI2L<T>(x, y);
@@ -628,7 +640,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testScaleZero()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = PVectorI2LTest.randomPositiveNumber();
       final long y = PVectorI2LTest.randomPositiveNumber();
       final PVectorI2L<T> v = new PVectorI2L<T>(x, y);
@@ -648,7 +661,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testSubtract()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorI2LTest.randomPositiveNumber();
       final long y0 = PVectorI2LTest.randomPositiveNumber();
       final PVectorI2L<T> v0 = new PVectorI2L<T>(x0, y0);

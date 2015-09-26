@@ -19,13 +19,10 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.VectorWritable2FType;
 
 /**
- * <p>
- * 'Write' interface to two-dimensional vectors with single precision
- * elements.
+ * <p> 'Write' interface to two-dimensional vectors with {@code float} elements.
  * </p>
  *
- * @param <T>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
  */
 
 public interface PVectorWritable2FType<T> extends VectorWritable2FType
@@ -33,8 +30,7 @@ public interface PVectorWritable2FType<T> extends VectorWritable2FType
   /**
    * Set the current vector to the contents of the input vector.
    *
-   * @param in_v
-   *          The input vector
+   * @param in_v The input vector
    */
 
   void copyFromTyped2F(

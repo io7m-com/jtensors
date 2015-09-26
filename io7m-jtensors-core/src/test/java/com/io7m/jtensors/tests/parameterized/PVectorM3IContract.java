@@ -25,15 +25,6 @@ import org.junit.Test;
 
 public abstract class PVectorM3IContract<T, V extends PVector3IType<T>>
 {
-  protected abstract V newVectorM3I(
-    final int x,
-    final int y,
-    final int z);
-
-  protected abstract V newVectorM3I();
-
-  protected abstract V newVectorM3I(V v);
-
   public static int randomNegativeNumber()
   {
     return (int) (PVectorM3IContract.getRandom() * (double) Integer.MIN_VALUE);
@@ -48,6 +39,25 @@ public abstract class PVectorM3IContract<T, V extends PVector3IType<T>>
   {
     return (int) (PVectorM3IContract.getRandom() * (double) (1 << 14));
   }
+
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
+
+  protected static int getLarge()
+  {
+    return (int) (PVectorM3IContract.getRandom() * Integer.MAX_VALUE);
+  }
+
+  protected abstract V newVectorM3I(
+    final int x,
+    final int y,
+    final int z);
+
+  protected abstract V newVectorM3I();
+
+  protected abstract V newVectorM3I(V v);
 
   @Test public final void testAbsolute()
   {
@@ -67,11 +77,6 @@ public abstract class PVectorM3IContract<T, V extends PVector3IType<T>>
       Assert.assertEquals((long) Math.abs(v.getYI()), (long) vr.getYI());
       Assert.assertEquals((long) Math.abs(v.getZI()), (long) vr.getZI());
     }
-  }
-
-  protected static double getRandom()
-  {
-    return Math.random();
   }
 
   @Test public final void testAbsoluteMutation()
@@ -432,9 +437,11 @@ public abstract class PVectorM3IContract<T, V extends PVector3IType<T>>
   @Test public final void testCopy2Correct()
   {
     final V v0 = this.newVectorM3I(
-      PVectorM3IContract.getLarge(), PVectorM3IContract.getLarge(), PVectorM3IContract
+      PVectorM3IContract.getLarge(),
+      PVectorM3IContract.getLarge(),
+      PVectorM3IContract
 
-      .getLarge());
+        .getLarge());
     final V v1 = this.newVectorM3I();
     final V v2 = this.newVectorM3I();
 
@@ -454,8 +461,9 @@ public abstract class PVectorM3IContract<T, V extends PVector3IType<T>>
   @Test public final void testCopy3Correct()
   {
     final V v0 = this.newVectorM3I(
-      PVectorM3IContract.getLarge(), PVectorM3IContract.getLarge(), PVectorM3IContract
-      .getLarge());
+      PVectorM3IContract.getLarge(),
+      PVectorM3IContract.getLarge(),
+      PVectorM3IContract.getLarge());
     final V v1 = this.newVectorM3I();
     final V v2 = this.newVectorM3I();
 
@@ -470,11 +478,6 @@ public abstract class PVectorM3IContract<T, V extends PVector3IType<T>>
     Assert.assertEquals((long) v0.getXI(), (long) v2.getXI());
     Assert.assertEquals((long) v0.getYI(), (long) v2.getYI());
     Assert.assertEquals((long) v0.getZI(), (long) v2.getZI());
-  }
-
-  protected static int getLarge()
-  {
-    return (int) (PVectorM3IContract.getRandom() * Integer.MAX_VALUE);
   }
 
   @Test public final void testCrossProductPerpendicular()

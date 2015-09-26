@@ -116,18 +116,18 @@ public abstract class PMatrix3x3FContract<T0, T1, T2,
     eq = AlmostEqualDouble.almostEqual(
       context, 0.0, (double) r.getRowColumnF(1, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 1.0,
-                                       (double) r.getRowColumnF(1, 1));
+    eq = AlmostEqualDouble.almostEqual(
+      context, 1.0, (double) r.getRowColumnF(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0,
-                                       (double) r.getRowColumnF(1, 2));
+    eq = AlmostEqualDouble.almostEqual(
+      context, 0.0, (double) r.getRowColumnF(1, 2));
     Assert.assertTrue(eq);
 
     eq = AlmostEqualDouble.almostEqual(
       context, -0.707106781187, (double) r.getRowColumnF(2, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context, 0.0,
-                                       (double) r.getRowColumnF(2, 1));
+    eq = AlmostEqualDouble.almostEqual(
+      context, 0.0, (double) r.getRowColumnF(2, 1));
     Assert.assertTrue(eq);
     eq = AlmostEqualDouble.almostEqual(
       context, 0.707106781187, (double) r.getRowColumnF(2, 2));
@@ -145,8 +145,8 @@ public abstract class PMatrix3x3FContract<T0, T1, T2,
     eq = AlmostEqualDouble.almostEqual(
       context_d, -0.707106781187, (double) r.getRowColumnF(0, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0,
-                                       (double) r.getRowColumnF(0, 2));
+    eq = AlmostEqualDouble.almostEqual(
+      context_d, 0.0, (double) r.getRowColumnF(0, 2));
     Assert.assertTrue(eq);
 
     eq = AlmostEqualDouble.almostEqual(
@@ -155,18 +155,18 @@ public abstract class PMatrix3x3FContract<T0, T1, T2,
     eq = AlmostEqualDouble.almostEqual(
       context_d, 0.707106781187, (double) r.getRowColumnF(1, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0,
-                                       (double) r.getRowColumnF(1, 2));
+    eq = AlmostEqualDouble.almostEqual(
+      context_d, 0.0, (double) r.getRowColumnF(1, 2));
     Assert.assertTrue(eq);
 
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0,
-                                       (double) r.getRowColumnF(2, 0));
+    eq = AlmostEqualDouble.almostEqual(
+      context_d, 0.0, (double) r.getRowColumnF(2, 0));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 0.0,
-                                       (double) r.getRowColumnF(2, 1));
+    eq = AlmostEqualDouble.almostEqual(
+      context_d, 0.0, (double) r.getRowColumnF(2, 1));
     Assert.assertTrue(eq);
-    eq = AlmostEqualDouble.almostEqual(context_d, 1.0,
-                                       (double) r.getRowColumnF(2, 2));
+    eq = AlmostEqualDouble.almostEqual(
+      context_d, 1.0, (double) r.getRowColumnF(2, 2));
     Assert.assertTrue(eq);
   }
 
@@ -394,10 +394,12 @@ public abstract class PMatrix3x3FContract<T0, T1, T2,
     for (int row = 0; row < 3; ++row) {
       for (int column = 0; column < 3; ++column) {
         Assert.assertEquals(
-          (double) mr.getRowColumnF(row, column), (double) m0.getRowColumnF(row, column),
+          (double) mr.getRowColumnF(row, column),
+          (double) m0.getRowColumnF(row, column),
           0.0);
         Assert.assertEquals(
-          (double) mr.getRowColumnF(row, column), (double) m1.getRowColumnF(row, column),
+          (double) mr.getRowColumnF(row, column),
+          (double) m1.getRowColumnF(row, column),
           0.0);
       }
     }

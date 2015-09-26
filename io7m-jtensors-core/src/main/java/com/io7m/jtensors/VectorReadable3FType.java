@@ -17,10 +17,8 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Read' interface to three-dimensional vectors with single precision
- * elements.
- * </p>
+ * <p> 'Read' interface to three-dimensional vectors with {@code float}
+ * elements. </p>
  */
 
 public interface VectorReadable3FType extends VectorReadable2FType

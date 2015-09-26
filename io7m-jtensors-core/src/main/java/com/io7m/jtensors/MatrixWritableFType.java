@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Write' interface to matrices with single precision elements.
+ * 'Write' interface to matrices with {@code float} elements.
  */
 
 public interface MatrixWritableFType

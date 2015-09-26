@@ -22,7 +22,7 @@ import com.io7m.junreachable.UnreachableCodeException;
 
 /**
  * <p>
- * Functions over 2x2 mutable matrix types with single precision elements.
+ * Functions over 2x2 mutable matrix types with {@code float} elements.
  * </p>
  * <p>
  * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed
@@ -673,6 +673,93 @@ public final class MatrixM2x2F
     m.setR1C0F(r0c1); // swap 0
     m.setR0C1F(r1c0); // swap 0
     return m;
+  }
+
+  /**
+   * Compare matrices.
+   *
+   * @param m0 The left matrix
+   * @param m1 The right matrix
+   *
+   * @return {@code true} if all elements of {@code m0} are equal to {@code m1}.
+   *
+   * @since 7.0.0
+   */
+
+  public static boolean compareElements(
+    final MatrixReadable2x2FType m0,
+    final MatrixReadable2x2FType m1)
+  {
+    if (!MatrixM2x2F.compareRow0(m0, m1)) {
+      return false;
+    }
+    return MatrixM2x2F.compareRow1(m0, m1);
+  }
+
+  /**
+   * Hash matrices.
+   *
+   * @param m The input matrix
+   *
+   * @return The hash of all the elements of {@code m}
+   *
+   * @since 7.0.0
+   */
+
+  public static int hashElements(final MatrixReadable2x2FType m)
+  {
+    final int prime = 31;
+    int r = prime;
+
+    r = HashUtility.accumulateFloatHash(m.getR0C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR1C0F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(m.getR0C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(m.getR1C1F(), prime, r);
+
+    return r;
+  }
+
+  /**
+   * Show matrices. Print all of the elements of {@code m} in square-bracketed
+   * matrix form.
+   *
+   * @param m  The input matrix
+   * @param sb The string builder
+   *
+   * @since 7.0.0
+   */
+
+  public static void showElements(
+    final MatrixReadable2x2FType m,
+    final StringBuilder sb)
+  {
+    final String row0 = String.format(
+      "[%+.6f %+.6f]\n", m.getR0C0F(), m.getR0C1F());
+    final String row1 = String.format(
+      "[%+.6f %+.6f]\n", m.getR1C0F(), m.getR1C1F());
+    sb.append(row0);
+    sb.append(row1);
+  }
+
+  private static boolean compareRow0(
+    final MatrixReadable2x2FType m0,
+    final MatrixReadable2x2FType m1)
+  {
+    if (m0.getR0C0F() != m1.getR0C0F()) {
+      return false;
+    }
+    return m0.getR0C1F() == m1.getR0C1F();
+  }
+
+  private static boolean compareRow1(
+    final MatrixReadable2x2FType m0,
+    final MatrixReadable2x2FType m1)
+  {
+    if (m0.getR1C0F() != m1.getR1C0F()) {
+      return false;
+    }
+    return m0.getR1C1F() == m1.getR1C1F();
   }
 
   /**

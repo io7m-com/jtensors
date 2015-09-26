@@ -62,9 +62,8 @@ public final class PMatrixHeapArrayM3x3DTest<T0, T1, T2>
     return PMatrixHeapArrayM3x3D.newMatrixFrom(m);
   }
 
-  @Override
-  protected void checkDirectBufferInvariantsWildcard(final
-  PMatrixReadable3x3DType<?, ?> m)
+  @Override protected void checkDirectBufferInvariantsWildcard(
+    final PMatrixReadable3x3DType<?, ?> m)
   {
     // Nothing
   }

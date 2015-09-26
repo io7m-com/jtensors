@@ -408,7 +408,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
       Assert.assertEquals(vr, vo);
       Assert.assertSame(vr, vo);
-      ;
       Assert.assertTrue(vr.getXF() <= maximum.getXF());
       Assert.assertTrue(vr.getYF() <= maximum.getYF());
       Assert.assertTrue(vr.getZF() <= maximum.getZF());
@@ -418,7 +417,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
         final V vr0 = PVectorM4F.clampMaximumByPVectorInPlace(v, maximum);
         Assert.assertEquals(v, vr0);
         Assert.assertSame(v, vr0);
-        ;
         Assert.assertTrue(v.getXF() <= maximum.getXF());
         Assert.assertTrue(v.getYF() <= maximum.getYF());
         Assert.assertTrue(v.getZF() <= maximum.getZF());
@@ -447,7 +445,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
       Assert.assertEquals(vr, vo);
       Assert.assertSame(vr, vo);
-      ;
       Assert.assertTrue(vr.getXF() >= minimum.getXF());
       Assert.assertTrue(vr.getYF() >= minimum.getYF());
       Assert.assertTrue(vr.getZF() >= minimum.getZF());
@@ -457,7 +454,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
         final V vr0 = PVectorM4F.clampMinimumByPVectorInPlace(v, minimum);
         Assert.assertEquals(v, vr0);
         Assert.assertSame(v, vr0);
-        ;
         Assert.assertTrue(v.getXF() >= minimum.getXF());
         Assert.assertTrue(v.getYF() >= minimum.getYF());
         Assert.assertTrue(v.getZF() >= minimum.getZF());
@@ -492,7 +488,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
       Assert.assertEquals(vr, vo);
       Assert.assertSame(vr, vo);
-      ;
       Assert.assertTrue(vr.getXF() <= maximum.getXF());
       Assert.assertTrue(vr.getYF() <= maximum.getYF());
       Assert.assertTrue(vr.getZF() <= maximum.getZF());
@@ -506,7 +501,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
         final V vr0 = PVectorM4F.clampByPVectorInPlace(v, minimum, maximum);
         Assert.assertEquals(v, vr0);
         Assert.assertSame(v, vr0);
-        ;
         Assert.assertTrue(v.getXF() <= maximum.getXF());
         Assert.assertTrue(v.getYF() <= maximum.getYF());
         Assert.assertTrue(v.getZF() <= maximum.getZF());
@@ -1167,7 +1161,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
     Assert.assertEquals(out, vr);
     Assert.assertSame(out, vr);
-    ;
 
     final double m = PVectorM4F.magnitude(out);
     Assert.assertEquals(1.0, m, 0.0);
@@ -1255,7 +1248,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
     Assert.assertEquals(ov0, out);
     Assert.assertSame(ov0, out);
-    ;
     Assert.assertEquals(2.0, (double) out.getXF(), 0.0);
     Assert.assertEquals(2.0, (double) out.getYF(), 0.0);
     Assert.assertEquals(2.0, (double) out.getZF(), 0.0);
@@ -1269,7 +1261,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
     Assert.assertEquals(v0, ov1);
     Assert.assertSame(v0, ov1);
-    ;
     Assert.assertEquals(2.0, (double) ov1.getXF(), 0.0);
     Assert.assertEquals(2.0, (double) ov1.getYF(), 0.0);
     Assert.assertEquals(2.0, (double) ov1.getZF(), 0.0);
@@ -1439,7 +1430,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
     Assert.assertEquals(ov0, out);
     Assert.assertSame(ov0, out);
-    ;
     Assert.assertEquals(0.0, (double) out.getXF(), 0.0);
     Assert.assertEquals(0.0, (double) out.getYF(), 0.0);
     Assert.assertEquals(0.0, (double) out.getZF(), 0.0);
@@ -1457,7 +1447,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
     Assert.assertEquals(v0, ov1);
     Assert.assertSame(v0, ov1);
-    ;
     Assert.assertEquals(0.0, (double) ov1.getXF(), 0.0);
     Assert.assertEquals(0.0, (double) ov1.getYF(), 0.0);
     Assert.assertEquals(0.0, (double) ov1.getZF(), 0.0);

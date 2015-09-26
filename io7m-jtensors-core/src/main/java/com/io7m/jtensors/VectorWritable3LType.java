@@ -17,9 +17,8 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Write' interface to three-dimensional vectors with long integer elements.
- * </p>
+ * <p> 'Write' interface to three-dimensional vectors with long integer
+ * elements. </p>
  */
 
 public interface VectorWritable3LType extends VectorWritable2LType
@@ -27,23 +26,19 @@ public interface VectorWritable3LType extends VectorWritable2LType
   /**
    * Set the current vector to the contents of the input vector.
    *
-   * @param in_v
-   *          The input vector
+   * @param in_v The input vector
    */
 
   void copyFrom3L(
     VectorReadable3LType in_v);
 
   /**
-   * Set the current {@code x}, {@code y} and {@code z} values
-   * of the current vector.
+   * Set the current {@code x}, {@code y} and {@code z} values of the current
+   * vector.
    *
-   * @param x
-   *          The new {@code x} value.
-   * @param y
-   *          The new {@code y} value.
-   * @param z
-   *          The new {@code z} value.
+   * @param x The new {@code x} value.
+   * @param y The new {@code y} value.
+   * @param z The new {@code z} value.
    */
 
   void set3L(
@@ -54,8 +49,7 @@ public interface VectorWritable3LType extends VectorWritable2LType
   /**
    * Set the current {@code z} value of the current vector.
    *
-   * @param z
-   *          The new {@code z} value.
+   * @param z The new {@code z} value.
    */
 
   void setZL(

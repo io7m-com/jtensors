@@ -19,7 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixDirectBufferedDType;
 
 /**
- * <p>The type of direct-memory backed matrices with double-precision
+ * <p>The type of direct-memory backed matrices with {@code double}
  * elements.</p>
  *
  * @param <T> A phantom type parameter.

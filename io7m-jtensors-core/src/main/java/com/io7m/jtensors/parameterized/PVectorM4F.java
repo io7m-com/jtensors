@@ -27,8 +27,7 @@ import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorReadable4FType;
 
 /**
- * <p> A four-dimensional mutable vector type with single precision elements.
- * </p>
+ * <p> A four-dimensional mutable vector type with {@code float} elements. </p>
  *
  * <p> Values of this type cannot be accessed safely from multiple threads
  * without explicit synchronization. </p>

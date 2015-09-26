@@ -19,7 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.Matrix3x3DType;
 
 /**
- * The type of 3x3 matrices with double precision elements.
+ * The type of 3x3 matrices with {@code double} elements.
  *
  * @param <T0> A phantom type parameter
  * @param <T1> A phantom type parameter

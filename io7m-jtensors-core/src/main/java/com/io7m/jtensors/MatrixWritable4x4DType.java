@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Write' interface to 4x4 matrices with double precision elements.
+ * 'Write' interface to 4x4 matrices with {@code double} elements.
  *
  * @since 7.0.0
  */

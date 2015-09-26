@@ -19,17 +19,14 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixReadable4x4DType;
 
 /**
- * 'Read' interface to 4x4 matrices with double precision elements.
+ * 'Read' interface to 4x4 matrices with {@code double} elements.
  *
- * @param <T>
- *          A phantom type parameter.
- * @param <U>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
+ * @param <U> A phantom type parameter.
  */
 
-public interface PMatrixReadable4x4DType<T, U> extends
-  PMatrixReadableDType<T, U>,
-  MatrixReadable4x4DType
+public interface PMatrixReadable4x4DType<T, U>
+  extends PMatrixReadableDType<T, U>, MatrixReadable4x4DType
 {
   // No extra functions.
 }

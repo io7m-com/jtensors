@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * The type of 4x4 matrices with single precision elements.
+ * The type of 4x4 matrices with {@code float} elements.
  *
  * @since 7.0.0
  */

@@ -19,7 +19,7 @@ package com.io7m.jtensors;
 import java.nio.DoubleBuffer;
 
 /**
- * <p>The type of direct-memory backed matrices with double-precision
+ * <p>The type of direct-memory backed matrices with {@code double}
  * elements.</p>
  *
  * @since 7.0.0

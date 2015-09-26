@@ -19,13 +19,10 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.VectorReadable2DType;
 
 /**
- * <p>
- * 'Read' interface to phantom-typed two-dimensional vectors with double
- * precision elements.
- * </p>
+ * <p> 'Read' interface to phantom-typed two-dimensional vectors with double
+ * precision elements. </p>
  *
- * @param <T>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
  */
 
 public interface PVectorReadable2DType<T> extends VectorReadable2DType

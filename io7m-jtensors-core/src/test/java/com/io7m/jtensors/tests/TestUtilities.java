@@ -32,9 +32,7 @@ public final class TestUtilities
     return context;
   }
 
-  public static
-    AlmostEqualDouble.ContextRelative
-    getDoubleEqualityContext3dp()
+  public static AlmostEqualDouble.ContextRelative getDoubleEqualityContext3dp()
   {
     final AlmostEqualDouble.ContextRelative context =
       new AlmostEqualDouble.ContextRelative();
@@ -43,9 +41,7 @@ public final class TestUtilities
     return context;
   }
 
-  public static
-    AlmostEqualDouble.ContextRelative
-    getDoubleEqualityContext6dp()
+  public static AlmostEqualDouble.ContextRelative getDoubleEqualityContext6dp()
   {
     final AlmostEqualDouble.ContextRelative context =
       new AlmostEqualDouble.ContextRelative();
@@ -63,9 +59,7 @@ public final class TestUtilities
     return context;
   }
 
-  public static
-    AlmostEqualFloat.ContextRelative
-    getSingleEqualityContext2dp()
+  public static AlmostEqualFloat.ContextRelative getSingleEqualityContext2dp()
   {
     final AlmostEqualFloat.ContextRelative context =
       new AlmostEqualFloat.ContextRelative();
@@ -74,9 +68,7 @@ public final class TestUtilities
     return context;
   }
 
-  public static
-    AlmostEqualFloat.ContextRelative
-    getSingleEqualityContext3dp()
+  public static AlmostEqualFloat.ContextRelative getSingleEqualityContext3dp()
   {
     final AlmostEqualFloat.ContextRelative context =
       new AlmostEqualFloat.ContextRelative();
@@ -85,9 +77,7 @@ public final class TestUtilities
     return context;
   }
 
-  public static
-    AlmostEqualFloat.ContextRelative
-    getSingleEqualityContext5dp()
+  public static AlmostEqualFloat.ContextRelative getSingleEqualityContext5dp()
   {
     final AlmostEqualFloat.ContextRelative context =
       new AlmostEqualFloat.ContextRelative();

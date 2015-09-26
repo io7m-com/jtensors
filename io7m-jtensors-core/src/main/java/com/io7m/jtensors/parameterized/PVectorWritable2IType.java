@@ -19,12 +19,9 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.VectorWritable2IType;
 
 /**
- * <p>
- * 'Write' interface to two-dimensional vectors with integer elements.
- * </p>
+ * <p> 'Write' interface to two-dimensional vectors with integer elements. </p>
  *
- * @param <T>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
  */
 
 public interface PVectorWritable2IType<T> extends VectorWritable2IType
@@ -32,8 +29,7 @@ public interface PVectorWritable2IType<T> extends VectorWritable2IType
   /**
    * Set the current vector to the contents of the input vector.
    *
-   * @param in_v
-   *          The input vector
+   * @param in_v The input vector
    */
 
   void copyFromTyped2I(

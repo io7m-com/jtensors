@@ -26,7 +26,7 @@ import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
 
 /**
- * <p> A three-dimensional mutable vector type with double precision elements.
+ * <p> A three-dimensional mutable vector type with {@code double} elements.
  * </p>
  *
  * <p> Values of this type cannot be accessed safely from multiple threads

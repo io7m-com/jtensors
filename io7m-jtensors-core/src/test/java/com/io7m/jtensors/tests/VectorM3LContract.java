@@ -58,9 +58,12 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
-      final long y = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
-      final long z = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final long x =
+        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final long y =
+        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final long z =
+        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
       final T v = this.newVectorM3L(x, y, z);
 
       final T vr = this.newVectorM3L();
@@ -77,9 +80,12 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
-      final long y = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
-      final long z = (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final long x =
+        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final long y =
+        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+      final long z =
+        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
       final T v = this.newVectorM3L(x, y, z);
 
       VectorM3L.absoluteInPlace(v);

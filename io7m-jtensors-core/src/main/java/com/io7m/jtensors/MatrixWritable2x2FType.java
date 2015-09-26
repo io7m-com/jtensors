@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Write' interface to 2x2 matrices with single precision elements.
+ * 'Write' interface to 2x2 matrices with {@code float} elements.
  *
  * @since 7.0.0
  */

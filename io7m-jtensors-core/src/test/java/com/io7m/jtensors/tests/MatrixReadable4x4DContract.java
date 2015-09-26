@@ -19,7 +19,6 @@ package com.io7m.jtensors.tests;
 import com.io7m.jtensors.Matrix4x4DType;
 import com.io7m.jtensors.MatrixHeapArrayM4x4D;
 import com.io7m.jtensors.MatrixI4x4D;
-import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.MatrixReadable4x4DType;
 import com.io7m.jtensors.VectorI4D;
 import com.io7m.jtensors.VectorM2D;
@@ -368,5 +367,33 @@ public abstract class MatrixReadable4x4DContract<T extends
 
     Assert.assertEquals(m0.toString(), m1.toString());
     Assert.assertFalse(m0.toString().equals(m2.toString()));
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class)
+  public final void testGetOutOfBoundsColumn0()
+  {
+    final T m0 = this.newMatrix();
+    m0.getRowColumnD(0, 4);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class)
+  public final void testGetOutOfBoundsColumn1()
+  {
+    final T m0 = this.newMatrix();
+    m0.getRowColumnD(0, -1);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class)
+  public final void testGetOutOfBoundsRow0()
+  {
+    final T m0 = this.newMatrix();
+    m0.getRowColumnD(4, 0);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class)
+  public final void testGetOutOfBoundsRow1()
+  {
+    final T m0 = this.newMatrix();
+    m0.getRowColumnD(-1, 0);
   }
 }

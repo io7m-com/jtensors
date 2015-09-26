@@ -37,6 +37,11 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     return (float) (VectorM3FContract.getRandom() * (double) Float.MAX_VALUE);
   }
 
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
+
   protected abstract T newVectorM3F(final T v0);
 
   protected abstract T newVectorM3F();
@@ -875,11 +880,6 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  protected static double getRandom()
-  {
-    return Math.random();
-  }
-
   @Test public final void testHashCodeEqualsCorrect()
   {
     final T m0 = this.newVectorM3F();
@@ -894,9 +894,7 @@ public abstract class VectorM3FContract<T extends Vector3FType>
       final T m1 = this.newVectorM3F();
       m1.setXF(23.0F);
       Assert.assertNotEquals(
-        (double) m1.hashCode(),
-        (double) m0.hashCode(),
-        0.0);
+        (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
     }
 
     {
@@ -904,9 +902,7 @@ public abstract class VectorM3FContract<T extends Vector3FType>
       final T m1 = this.newVectorM3F();
       m1.setYF(23.0F);
       Assert.assertNotEquals(
-        (double) m1.hashCode(),
-        (double) m0.hashCode(),
-        0.0);
+        (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
     }
 
     {
@@ -914,9 +910,7 @@ public abstract class VectorM3FContract<T extends Vector3FType>
       final T m1 = this.newVectorM3F();
       m1.setZF(23.0F);
       Assert.assertNotEquals(
-        (double) m1.hashCode(),
-        (double) m0.hashCode(),
-        0.0);
+        (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
     }
   }
 
@@ -993,12 +987,12 @@ public abstract class VectorM3FContract<T extends Vector3FType>
       TestUtilities.getDoubleEqualityContext6dp();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x =
-        (float) (VectorM3FContract.getRandom() * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
-      final float y =
-        (float) (VectorM3FContract.getRandom() * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
-      final float z =
-        (float) (VectorM3FContract.getRandom() * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
+      final float x = (float) (VectorM3FContract.getRandom()
+                               * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
+      final float y = (float) (VectorM3FContract.getRandom()
+                               * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
+      final float z = (float) (VectorM3FContract.getRandom()
+                               * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
       final T v = this.newVectorM3F(x, y, z);
 
       final T vr = this.newVectorM3F();
@@ -1157,7 +1151,6 @@ public abstract class VectorM3FContract<T extends Vector3FType>
 
     Assert.assertEquals(v0, ov1);
     Assert.assertSame(v0, ov1);
-    ;
     Assert.assertEquals(2.0, (double) ov1.getXF(), 0.0);
     Assert.assertEquals(2.0, (double) ov1.getYF(), 0.0);
     Assert.assertEquals(2.0, (double) ov1.getZF(), 0.0);

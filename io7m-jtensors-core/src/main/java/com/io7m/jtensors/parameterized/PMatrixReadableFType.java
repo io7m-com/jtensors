@@ -19,12 +19,10 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixReadableFType;
 
 /**
- * 'Read' interface to matrices with single precision elements.
+ * 'Read' interface to matrices with {@code float} elements.
  *
- * @param <T>
- *          A phantom type parameter.
- * @param <U>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
+ * @param <U> A phantom type parameter.
  */
 
 public interface PMatrixReadableFType<T, U> extends MatrixReadableFType

@@ -1265,9 +1265,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       double angle = Math.random() * (2.0 * Math.PI);
       axis.set3F(
-        (float) Math.random(),
-        (float) Math.random(),
-        (float) Math.random());
+        (float) Math.random(), (float) Math.random(), (float) Math.random());
 
       if (Math.random() > 0.5) {
         angle = -angle;
@@ -1648,9 +1646,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     {
       final T r = this.newMatrix();
       MatrixM3x3F.makeRotation(
-        Math.toRadians(45.0),
-        Matrix3x3FContract.AXIS_X,
-        r);
+        Math.toRadians(45.0), Matrix3x3FContract.AXIS_X, r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
@@ -1670,9 +1666,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     {
       final T r = this.newMatrix();
       MatrixM3x3F.makeRotation(
-        Math.toRadians(45.0),
-        Matrix3x3FContract.AXIS_Y,
-        r);
+        Math.toRadians(45.0), Matrix3x3FContract.AXIS_Y, r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
@@ -1692,9 +1686,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     {
       final T r = this.newMatrix();
       MatrixM3x3F.makeRotation(
-        Math.toRadians(45.0),
-        Matrix3x3FContract.AXIS_Z,
-        r);
+        Math.toRadians(45.0), Matrix3x3FContract.AXIS_Z, r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 

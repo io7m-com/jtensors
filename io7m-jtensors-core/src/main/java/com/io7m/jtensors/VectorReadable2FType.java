@@ -17,8 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Read' interface to two-dimensional vectors with single precision elements.
+ * <p> 'Read' interface to two-dimensional vectors with {@code float} elements.
  * </p>
  */
 

@@ -19,7 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.Matrix4x4FType;
 
 /**
- * The type of 4x4 matrices with single precision elements.
+ * The type of 4x4 matrices with {@code float} elements.
  *
  * @param <T0> A phantom type parameter
  * @param <T1> A phantom type parameter

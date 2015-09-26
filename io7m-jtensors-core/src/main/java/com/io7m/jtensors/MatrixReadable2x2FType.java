@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to 2x2 matrices with single precision elements.
+ * 'Read' interface to 2x2 matrices with {@code float} elements.
  */
 
 public interface MatrixReadable2x2FType extends MatrixReadableFType

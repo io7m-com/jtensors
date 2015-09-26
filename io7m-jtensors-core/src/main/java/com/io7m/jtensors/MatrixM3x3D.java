@@ -22,7 +22,7 @@ import com.io7m.junreachable.UnreachableCodeException;
 
 /**
  * <p>
- * A 3x3 mutable matrix type with double precision elements.
+ * A 3x3 mutable matrix type with {@code double} elements.
  * </p>
  * <p>
  * Values of type {@code MatrixM3x3D} are backed by direct memory, with the
@@ -1056,6 +1056,124 @@ public final class MatrixM3x3D
     m.setR1C2D(r2c1); // swap 2
 
     return m;
+  }
+
+  /**
+   * Compare matrices.
+   *
+   * @param m0 The left matrix
+   * @param m1 The right matrix
+   *
+   * @return {@code true} if all elements of {@code m0} are equal to {@code m1}.
+   *
+   * @since 7.0.0
+   */
+
+  public static boolean compareElements(
+    final MatrixReadable3x3DType m0,
+    final MatrixReadable3x3DType m1)
+  {
+    if (!MatrixM3x3D.compareRow0(m0, m1)) {
+      return false;
+    }
+    if (!MatrixM3x3D.compareRow1(m0, m1)) {
+      return false;
+    }
+    return MatrixM3x3D.compareRow2(m0, m1);
+  }
+
+  /**
+   * Hash matrices.
+   *
+   * @param m The input matrix
+   *
+   * @return The hash of all the elements of {@code m}
+   *
+   * @since 7.0.0
+   */
+
+  public static int hashElements(final MatrixReadable3x3DType m)
+  {
+    final int prime = 31;
+    int r = prime;
+
+    r = HashUtility.accumulateDoubleHash(m.getR0C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR1C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR2C0D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(m.getR0C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR1C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR2C1D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(m.getR0C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR1C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR2C2D(), prime, r);
+
+    return r;
+  }
+
+  /**
+   * Show matrices. Print all of the elements of {@code m} in square-bracketed
+   * matrix form.
+   *
+   * @param m  The input matrix
+   * @param sb The string builder
+   *
+   * @since 7.0.0
+   */
+
+  public static void showElements(
+    final MatrixReadable3x3DType m,
+    final StringBuilder sb)
+  {
+    final String row0 = String.format(
+      "[%+.15f %+.15f %+.15f]\n", m.getR0C0D(), m.getR0C1D(), m.getR0C2D());
+    final String row1 = String.format(
+      "[%+.15f %+.15f %+.15f]\n", m.getR1C0D(), m.getR1C1D(), m.getR1C2D());
+    final String row2 = String.format(
+      "[%+.15f %+.15f %+.15f]\n", m.getR2C0D(), m.getR2C1D(), m.getR2C2D());
+    sb.append(row0);
+    sb.append(row1);
+    sb.append(row2);
+  }
+
+  private static boolean compareRow0(
+    final MatrixReadable3x3DType m0,
+    final MatrixReadable3x3DType m1)
+  {
+    if (m0.getR0C0D() != m1.getR0C0D()) {
+      return false;
+    }
+    if (m0.getR0C1D() != m1.getR0C1D()) {
+      return false;
+    }
+    return m0.getR0C2D() == m1.getR0C2D();
+  }
+
+  private static boolean compareRow1(
+    final MatrixReadable3x3DType m0,
+    final MatrixReadable3x3DType m1)
+  {
+    if (m0.getR1C0D() != m1.getR1C0D()) {
+      return false;
+    }
+    if (m0.getR1C1D() != m1.getR1C1D()) {
+      return false;
+    }
+    return m0.getR1C2D() == m1.getR1C2D();
+  }
+
+  private static boolean compareRow2(
+    final MatrixReadable3x3DType m0,
+    final MatrixReadable3x3DType m1)
+  {
+    if (m0.getR2C0D() != m1.getR2C0D()) {
+      return false;
+    }
+    if (m0.getR2C1D() != m1.getR2C1D()) {
+      return false;
+    }
+    return m0.getR2C2D() == m1.getR2C2D();
   }
 
   /**

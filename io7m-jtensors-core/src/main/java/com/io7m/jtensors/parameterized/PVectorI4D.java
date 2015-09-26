@@ -23,16 +23,11 @@ import com.io7m.jnull.Nullable;
 import net.jcip.annotations.Immutable;
 
 /**
- * <p>
- * A four-dimensional immutable vector type with double precision elements.
- * </p>
- * <p>
- * Values of this type are immutable and can therefore be safely accessed from
- * multiple threads.
- * </p>
+ * <p> A four-dimensional immutable vector type with {@code double} elements.
+ * </p> <p> Values of this type are immutable and can therefore be safely
+ * accessed from multiple threads. </p>
  *
- * @param <T>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
  */
 
 @Immutable public final class PVectorI4D<T> implements PVectorReadable4DType<T>
@@ -47,15 +42,68 @@ import net.jcip.annotations.Immutable;
     ZERO = new PVectorI4D<Float>(0.0, 0.0, 0.0, 0.0);
   }
 
+  private final double w;
+  private final double x;
+  private final double y;
+  private final double z;
+
+  /**
+   * Default constructor, initializing the vector with values {@code [0.0, 0.0,
+   * 0.0, 1.0]}.
+   */
+
+  public PVectorI4D()
+  {
+    this.x = 0.0;
+    this.y = 0.0;
+    this.z = 0.0;
+    this.w = 1.0;
+  }
+
+  /**
+   * Construct a vector initialized with the given values.
+   *
+   * @param in_x The {@code x} value
+   * @param in_y The {@code y} value
+   * @param in_z The {@code z} value
+   * @param in_w The {@code w} value
+   */
+
+  public PVectorI4D(
+    final double in_x,
+    final double in_y,
+    final double in_z,
+    final double in_w)
+  {
+    this.x = in_x;
+    this.y = in_y;
+    this.z = in_z;
+    this.w = in_w;
+  }
+
+  /**
+   * Construct a vector initialized with the values given in the vector {@code
+   * in_v}.
+   *
+   * @param in_v The input vector.
+   */
+
+  public PVectorI4D(
+    final PVectorReadable4DType<T> in_v)
+  {
+    this.x = in_v.getXD();
+    this.y = in_v.getYD();
+    this.z = in_v.getZD();
+    this.w = in_v.getWD();
+  }
+
   /**
    * Calculate the absolute value of the vector {@code v}.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter.
    *
    * @return {@code (abs v.x, abs v.y, abs v.z, abs v.w)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> PVectorI4D<T> absolute(
@@ -69,17 +117,13 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Calculate the element-wise sum of the vectors {@code v0} and
-   * {@code v1}.
+   * Calculate the element-wise sum of the vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter.
    *
    * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> PVectorI4D<T> add(
@@ -97,16 +141,13 @@ import net.jcip.annotations.Immutable;
    * Calculate the element-wise sum of the vectors {@code v0} and the
    * element-wise product of {@code v1} and {@code r}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param r
-   *          The scaling value
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param r   The scaling value
+   * @param <T> A phantom type parameter.
    *
-   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r),
+   * v0.w + (v1.w * r))}
    */
 
   public static <T> PVectorI4D<T> addScaled(
@@ -118,21 +159,19 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Determine whether or not the vectors {@code va} and {@code vb}
-   * are equal to within the degree of error given in {@code context}.
+   * Determine whether or not the vectors {@code va} and {@code vb} are equal to
+   * within the degree of error given in {@code context}.
    *
-   * @see AlmostEqualDouble#almostEqual(AlmostEqualDouble.ContextRelative, double, double)
+   * @param context The equality context
+   * @param va      The left input vector
+   * @param vb      The right input vector
+   * @param <T>     A phantom type parameter.
    *
-   * @param context
-   *          The equality context
-   * @param va
-   *          The left input vector
-   * @param vb
-   *          The right input vector
-   * @since 7.0.0
    * @return {@code true} iff the vectors are almost equal.
-   * @param <T>
-   *          A phantom type parameter.
+   *
+   * @see AlmostEqualDouble#almostEqual(AlmostEqualDouble.ContextRelative,
+   * double, double)
+   * @since 7.0.0
    */
 
   public static <T> boolean almostEqual(
@@ -152,20 +191,16 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. maximum]} inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * maximum]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param maximum The maximum allowed value
+   * @param <T>     A phantom type parameter.
    *
-   * @return A vector with both elements equal to at most {@code maximum}
-   *         and at least {@code minimum}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return A vector with both elements equal to at most {@code maximum} and at
+   * least {@code minimum}
    */
 
   public static <T> PVectorI4D<T> clamp(
@@ -181,20 +216,17 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum} and
-   * {@code maximum}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum} and {@code maximum}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param maximum The vector containing the maximum acceptable values
+   * @param <T>     A phantom type parameter.
    *
-   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y,
+   * minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w,
+   * minimum.w), maximum.w))}
    */
 
   public static <T> PVectorI4D<T> clampByPVector(
@@ -214,17 +246,14 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [-Infinity .. maximum]} inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [-Infinity
+   * .. maximum]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param maximum The maximum allowed value
+   * @param <T>     A phantom type parameter.
    *
    * @return A vector with both elements equal to at most {@code maximum}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> PVectorI4D<T> clampMaximum(
@@ -239,17 +268,15 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code maximum}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code maximum}.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param maximum The vector containing the maximum acceptable values
+   * @param <T>     A phantom type parameter.
    *
-   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z,
+   * maximum.z), min(v.w, maximum.w))}
    */
 
   public static <T> PVectorI4D<T> clampMaximumByPVector(
@@ -264,18 +291,14 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. Infinity]} inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * Infinity]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param <T>     A phantom type parameter.
    *
-   * @return A vector with both elements equal to at least
-   *         {@code minimum}.
-   * @param <T>
-   *          A phantom type parameter.
+   * @return A vector with both elements equal to at least {@code minimum}.
    */
 
   public static <T> PVectorI4D<T> clampMinimum(
@@ -290,17 +313,15 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param <T>     A phantom type parameter.
    *
-   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
+   * minimum.z), max(v.w, minimum.w))}
    */
 
   public static <T> PVectorI4D<T> clampMinimumByPVector(
@@ -315,17 +336,13 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Calculate the distance between the two vectors {@code v0} and
-   * {@code v1}.
+   * Calculate the distance between the two vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter.
    *
    * @return The distance between the two vectors.
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double distance(
@@ -336,17 +353,13 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Calculate the scalar product of the vectors {@code v0} and
-   * {@code v1}.
+   * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter.
    *
    * @return The scalar product of the two vectors
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double dotProduct(
@@ -361,28 +374,21 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Linearly interpolate between {@code v0} and {@code v1} by the
-   * amount {@code alpha}.
+   * Linearly interpolate between {@code v0} and {@code v1} by the amount {@code
+   * alpha}.
    *
-   * The {@code alpha} parameter controls the degree of interpolation,
-   * such that:
+   * The {@code alpha} parameter controls the degree of interpolation, such
+   * that:
    *
-   * <ul>
-   * <li>{@code interpolateLinear(v0, v1, 0.0) = v0}</li>
-   * <li>{@code interpolateLinear(v0, v1, 1.0) = v1}</li>
-   * </ul>
+   * <ul> <li>{@code interpolateLinear(v0, v1, 0.0) = v0}</li> <li>{@code
+   * interpolateLinear(v0, v1, 1.0) = v1}</li> </ul>
    *
-   * @param v0
-   *          The left input vector.
-   * @param v1
-   *          The right input vector.
-   * @param alpha
-   *          The interpolation value, between {@code 0.0} and
-   *          {@code 1.0}.
+   * @param v0    The left input vector.
+   * @param v1    The right input vector.
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}.
+   * @param <T>   A phantom type parameter.
    *
    * @return {@code (1 - alpha) * v0 + alpha * v1}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> PVectorI4D<T> interpolateLinear(
@@ -400,12 +406,10 @@ import net.jcip.annotations.Immutable;
    *
    * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter.
    *
    * @return The magnitude of the input vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double magnitude(
@@ -417,12 +421,10 @@ import net.jcip.annotations.Immutable;
   /**
    * Calculate the squared magnitude of the vector {@code v}.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter.
    *
    * @return The squared magnitude of the input vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double magnitudeSquared(
@@ -432,16 +434,14 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Normalize the vector {@code v}, preserving its direction but
-   * reducing it to unit length.
+   * Normalize the vector {@code v}, preserving its direction but reducing it to
+   * unit length.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter.
    *
-   * @return A vector with the same orientation as {@code v} but with
-   *         magnitude equal to {@code 1.0}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return A vector with the same orientation as {@code v} but with magnitude
+   * equal to {@code 1.0}
    */
 
   public static <T> PVectorI4D<T> normalize(
@@ -456,22 +456,17 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * <p>
-   * Orthonormalize and return the vectors {@code v0} and {@code v1}
-   * .
-   * </p>
-   * <p>
-   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
+   * <p> Orthonormalize and return the vectors {@code v0} and {@code v1} . </p>
+   * <p> See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
    *
-   * @param v0
-   *          The left vector
-   * @param v1
-   *          The right vector
+   * @param v0  The left vector
+   * @param v1  The right vector
+   * @param <T> A phantom type parameter.
+   *
    * @return A pair {@code (v0, v1)}, orthonormalized.
+   *
    * @since 7.0.0
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> Pair<PVectorI4D<T>, PVectorI4D<T>> orthoNormalize(
@@ -487,16 +482,14 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Calculate the projection of the vector {@code p} onto the vector
-   * {@code q}.
+   * Calculate the projection of the vector {@code p} onto the vector {@code
+   * q}.
    *
-   * @param p
-   *          The left vector
-   * @param q
-   *          The right vector
+   * @param p   The left vector
+   * @param q   The right vector
+   * @param <T> A phantom type parameter.
+   *
    * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> PVectorI4D<T> projection(
@@ -512,14 +505,11 @@ import net.jcip.annotations.Immutable;
   /**
    * Scale the vector {@code v} by the scalar {@code r}.
    *
-   * @param v
-   *          The input vector
-   * @param r
-   *          The scaling value
+   * @param v   The input vector
+   * @param r   The scaling value
+   * @param <T> A phantom type parameter.
    *
    * @return {@code (v.x * r, v.y * r, v.z * r, v.w * r)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> PVectorI4D<T> scale(
@@ -527,23 +517,17 @@ import net.jcip.annotations.Immutable;
     final double r)
   {
     return new PVectorI4D<T>(
-      v.getXD() * r,
-      v.getYD() * r,
-      v.getZD() * r,
-      v.getWD() * r);
+      v.getXD() * r, v.getYD() * r, v.getZD() * r, v.getWD() * r);
   }
 
   /**
    * Subtract the vector {@code v1} from the vector {@code v0}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter.
    *
    * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> PVectorI4D<T> subtract(
@@ -558,75 +542,14 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * @return The zero vector.
+   * @param <T> A phantom type parameter.
    *
-   * @param <T>
-   *          A phantom type parameter.
+   * @return The zero vector.
    */
 
   @SuppressWarnings("unchecked") public static <T> PVectorI4D<T> zero()
   {
     return (PVectorI4D<T>) PVectorI4D.ZERO;
-  }
-
-  private final double w;
-  private final double x;
-  private final double y;
-  private final double z;
-
-  /**
-   * Default constructor, initializing the vector with values
-   * {@code [0.0, 0.0, 0.0, 1.0]}.
-   */
-
-  public PVectorI4D()
-  {
-    this.x = 0.0;
-    this.y = 0.0;
-    this.z = 0.0;
-    this.w = 1.0;
-  }
-
-  /**
-   * Construct a vector initialized with the given values.
-   *
-   * @param in_x
-   *          The {@code x} value
-   * @param in_y
-   *          The {@code y} value
-   * @param in_z
-   *          The {@code z} value
-   * @param in_w
-   *          The {@code w} value
-   */
-
-  public PVectorI4D(
-    final double in_x,
-    final double in_y,
-    final double in_z,
-    final double in_w)
-  {
-    this.x = in_x;
-    this.y = in_y;
-    this.z = in_z;
-    this.w = in_w;
-  }
-
-  /**
-   * Construct a vector initialized with the values given in the vector
-   * {@code in_v}.
-   *
-   * @param in_v
-   *          The input vector.
-   */
-
-  public PVectorI4D(
-    final PVectorReadable4DType<T> in_v)
-  {
-    this.x = in_v.getXD();
-    this.y = in_v.getYD();
-    this.z = in_v.getZD();
-    this.w = in_v.getWD();
   }
 
   @Override public boolean equals(

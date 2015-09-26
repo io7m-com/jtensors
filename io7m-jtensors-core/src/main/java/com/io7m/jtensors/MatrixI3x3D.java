@@ -20,8 +20,6 @@ import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
 import net.jcip.annotations.Immutable;
 
-import java.util.Arrays;
-
 /**
  * An immutable 3x3 matrix type.
  *
@@ -137,7 +135,7 @@ import java.util.Arrays;
       return false;
     }
     final MatrixI3x3D other = (MatrixI3x3D) obj;
-    return Arrays.deepEquals(this.elements, other.elements);
+    return MatrixM3x3D.compareElements(this, other);
   }
 
   @Override public <V extends VectorWritable3DType> void getRow3D(
@@ -197,29 +195,14 @@ import java.util.Arrays;
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C0D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C1D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C2D(), prime, r);
-
-    return r;
+    return MatrixM3x3D.hashElements(this);
   }
 
   /**
    * Write the current matrix into the given mutable matrix.
    *
    * @param <M> The precise type of matrix
-   * @param m The mutable matrix
+   * @param m   The mutable matrix
    */
 
   public <M extends MatrixWritable3x3DType> void makeMatrix3x3D(
@@ -241,17 +224,8 @@ import java.util.Arrays;
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < 3; ++row) {
-      final String text = String.format(
-        "[%+.15f %+.15f %+.15f]\n",
-        Double.valueOf(this.elements[row][0]),
-        Double.valueOf(this.elements[row][1]),
-        Double.valueOf(this.elements[row][2]));
-      builder.append(text);
-    }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
+    MatrixM3x3D.showElements(this, builder);
+    return builder.toString();
   }
 
   @Override public <V extends VectorWritable2DType> void getRow2D(

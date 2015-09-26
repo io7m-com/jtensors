@@ -19,12 +19,10 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixReadableDType;
 
 /**
- * 'Read' interface to matrices with double precision elements.
+ * 'Read' interface to matrices with {@code double} elements.
  *
- * @param <T>
- *          A phantom type parameter.
- * @param <U>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
+ * @param <U> A phantom type parameter.
  */
 
 public interface PMatrixReadableDType<T, U> extends MatrixReadableDType

@@ -26,6 +26,21 @@ import org.junit.Test;
 
 public abstract class PVectorM2DContract<T, V extends PVector2DType<T>>
 {
+  protected static double getRandomSmall()
+  {
+    return PVectorM2DContract.getRandom() * Double.MIN_VALUE;
+  }
+
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
+
+  protected static double getRandomLarge()
+  {
+    return PVectorM2DContract.getRandom() * Double.MAX_VALUE;
+  }
+
   protected abstract V newVectorM2D(V v);
 
   protected abstract V newVectorM2D();
@@ -424,11 +439,6 @@ public abstract class PVectorM2DContract<T, V extends PVector2DType<T>>
     }
   }
 
-  protected static double getRandomSmall()
-  {
-    return PVectorM2DContract.getRandom() * Double.MIN_VALUE;
-  }
-
   @Test public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
@@ -536,11 +546,6 @@ public abstract class PVectorM2DContract<T, V extends PVector2DType<T>>
     Assert.assertEquals(v0.getYD(), v2.getYD(), 0.0);
   }
 
-  protected static double getRandom()
-  {
-    return Math.random();
-  }
-
   @Test public final void testDefault00()
   {
     final AlmostEqualDouble.ContextRelative ec =
@@ -577,11 +582,6 @@ public abstract class PVectorM2DContract<T, V extends PVector2DType<T>>
 
       Assert.assertTrue(PVectorM2D.distance(c, v0, v1) >= 0.0);
     }
-  }
-
-  protected static double getRandomLarge()
-  {
-    return PVectorM2DContract.getRandom() * Double.MAX_VALUE;
   }
 
   @Test public final void testDotProduct()
@@ -755,9 +755,7 @@ public abstract class PVectorM2DContract<T, V extends PVector2DType<T>>
       final V m1 = this.newVectorM2D();
       m1.setXD(23.0);
       Assert.assertNotEquals(
-        (double) m1.hashCode(),
-        (double) m0.hashCode(),
-        0.0);
+        (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
     }
 
     {
@@ -765,9 +763,7 @@ public abstract class PVectorM2DContract<T, V extends PVector2DType<T>>
       final V m1 = this.newVectorM2D();
       m1.setYD(23.0);
       Assert.assertNotEquals(
-        (double) m1.hashCode(),
-        (double) m0.hashCode(),
-        0.0);
+        (double) m1.hashCode(), (double) m0.hashCode(), 0.0);
     }
   }
 

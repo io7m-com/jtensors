@@ -48,7 +48,9 @@ public final class PMatrixI3x3FTest<T0, T1>
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         Assert.assertEquals(
-          (double) im0.getRowColumnF(row, col), (double) m0.getRowColumnF(row, col), 0.0);
+          (double) im0.getRowColumnF(row, col),
+          (double) m0.getRowColumnF(row, col),
+          0.0);
       }
     }
 

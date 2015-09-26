@@ -18,7 +18,6 @@ package com.io7m.jtensors.parameterized;
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
@@ -26,8 +25,6 @@ import com.io7m.jtensors.VectorReadable4DType;
 import com.io7m.jtensors.VectorWritable2DType;
 import com.io7m.jtensors.VectorWritable3DType;
 import com.io7m.jtensors.VectorWritable4DType;
-
-import java.util.Arrays;
 
 /**
  * <p>The default implementation of the {@link PMatrix4x4DType} interface.</p>
@@ -98,7 +95,7 @@ public final class PMatrixHeapArrayM4x4D<T0, T1>
     }
 
     final PMatrixHeapArrayM4x4D<?, ?> other = (PMatrixHeapArrayM4x4D<?, ?>) obj;
-    return Arrays.deepEquals(this.elements, other.elements);
+    return MatrixM4x4D.compareElements(this, other);
   }
 
   @Override public <V extends VectorWritable4DType> void getRow4D(
@@ -247,30 +244,7 @@ public final class PMatrixHeapArrayM4x4D<T0, T1>
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C0D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C1D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C2D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C3D(), prime, r);
-
-    return r;
+    return MatrixM4x4D.hashElements(this);
   }
 
   @Override public void setRowColumnD(
@@ -281,21 +255,11 @@ public final class PMatrixHeapArrayM4x4D<T0, T1>
     this.elements[row][column] = value;
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < 4; ++row) {
-      final double c0 = this.elements[row][0];
-      final double c1 = this.elements[row][1];
-      final double c2 = this.elements[row][2];
-      final double c3 = this.elements[row][3];
-      final String s =
-        String.format("[%+.15f %+.15f %+.15f %+.15f]\n", c0, c1, c2, c3);
-      builder.append(s);
-    }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
+    MatrixM4x4D.showElements(this, builder);
+    return builder.toString();
   }
 
   @Override public <V extends VectorWritable3DType> void getRow3D(

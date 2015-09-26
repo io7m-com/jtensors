@@ -24,7 +24,7 @@ import com.io7m.jtensors.VectorM3F;
 import org.junit.Assert;
 import org.junit.Test;
 
-@SuppressWarnings("static-method") public class MatrixI2x2FTest
+@SuppressWarnings("static-method") public final class MatrixI2x2FTest
 {
   @Test public void testEquals()
   {

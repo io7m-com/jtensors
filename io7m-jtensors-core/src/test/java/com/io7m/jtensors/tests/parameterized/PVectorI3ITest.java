@@ -16,24 +16,15 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.parameterized.PVectorI3I;
 import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Assert;
+import org.junit.Test;
 
-@SuppressWarnings("static-method") public class PVectorI3ITest<T> extends
-  PVectorI3Contract
+@SuppressWarnings("static-method") public class PVectorI3ITest<T>
+  extends PVectorI3Contract
 {
-  @Test public void testZero()
-  {
-    final PVectorI3I<Object> z = PVectorI3I.zero();
-    Assert.assertEquals(0, z.getXI());
-    Assert.assertEquals(0, z.getYI());
-    Assert.assertEquals(0, z.getZI());
-  }
-
   public static int randomNegativeNumber()
   {
     return (int) (Math.random() * Integer.MIN_VALUE);
@@ -47,6 +38,14 @@ import com.io7m.jtensors.tests.TestUtilities;
   public static int randomPositiveSmallNumber()
   {
     return (int) (Math.random() * (1 << 14));
+  }
+
+  @Test public void testZero()
+  {
+    final PVectorI3I<Object> z = PVectorI3I.zero();
+    Assert.assertEquals(0, z.getXI());
+    Assert.assertEquals(0, z.getYI());
+    Assert.assertEquals(0, z.getZI());
   }
 
   @Override @Test public void testAbsolute()

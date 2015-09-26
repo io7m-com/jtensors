@@ -94,7 +94,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     return new MatrixDirectM4x4D(m);
   }
 
-  private static int columnCheck(
+  private static int checkColumn(
     final int column)
   {
     if ((column < 0) || (column >= MatrixDirectM4x4D.VIEW_COLS)) {
@@ -110,7 +110,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int column)
   {
     return MatrixDirectM4x4D.indexUnsafe(
-      MatrixDirectM4x4D.rowCheck(row), MatrixDirectM4x4D.columnCheck(column));
+      MatrixDirectM4x4D.checkRow(row), MatrixDirectM4x4D.checkColumn(column));
   }
 
   /**
@@ -129,7 +129,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     return (column * MatrixDirectM4x4D.VIEW_COLS) + row;
   }
 
-  private static int rowCheck(
+  private static int checkRow(
     final int row)
   {
     if ((row < 0) || (row >= MatrixDirectM4x4D.VIEW_COLS)) {
@@ -153,13 +153,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     }
 
     final MatrixDirectM4x4D other = (MatrixDirectM4x4D) obj;
-    for (int index = 0; index < MatrixDirectM4x4D.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
-
-    return true;
+    return MatrixM4x4D.compareElements(this, other);
   }
 
   @Override public DoubleBuffer getDirectDoubleBuffer()
@@ -171,7 +165,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int row,
     final V out)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.getRow4DUnsafe(row, out);
   }
 
@@ -200,7 +194,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int row,
     final VectorReadable4DType v)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.setRowWith4DUnsafe(row, v);
   }
 
@@ -315,30 +309,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C0D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C1D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C2D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C3D(), prime, r);
-
-    return r;
+    return MatrixM4x4D.hashElements(this);
   }
 
   @Override public void setRowColumnD(
@@ -349,28 +320,18 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     this.view.put(MatrixDirectM4x4D.indexChecked(row, column), value);
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < MatrixDirectM4x4D.VIEW_ROWS; ++row) {
-      final double c0 = this.view.get(MatrixDirectM4x4D.indexUnsafe(row, 0));
-      final double c1 = this.view.get(MatrixDirectM4x4D.indexUnsafe(row, 1));
-      final double c2 = this.view.get(MatrixDirectM4x4D.indexUnsafe(row, 2));
-      final double c3 = this.view.get(MatrixDirectM4x4D.indexUnsafe(row, 3));
-      final String s =
-        String.format("[%+.15f %+.15f %+.15f %+.15f]\n", c0, c1, c2, c3);
-      builder.append(s);
-    }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
+    MatrixM4x4D.showElements(this, builder);
+    return builder.toString();
   }
 
   @Override public <V extends VectorWritable3DType> void getRow3D(
     final int row,
     final V out)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.getRow3DUnsafe(row, out);
   }
 
@@ -398,7 +359,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int row,
     final VectorReadable3DType v)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.setRowWith3DUnsafe(row, v);
   }
 
@@ -455,7 +416,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int row,
     final V out)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.getRow2DUnsafe(row, out);
   }
 
@@ -482,7 +443,7 @@ public final class MatrixDirectM4x4D implements MatrixDirect4x4DType
     final int row,
     final VectorReadable2DType v)
   {
-    MatrixDirectM4x4D.rowCheck(row);
+    MatrixDirectM4x4D.checkRow(row);
     this.setRowWith2DUnsafe(row, v);
   }
 

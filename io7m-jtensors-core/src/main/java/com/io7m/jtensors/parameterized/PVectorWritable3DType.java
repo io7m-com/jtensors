@@ -19,24 +19,19 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.VectorWritable3DType;
 
 /**
- * <p>
- * 'Write' interface to three-dimensional vectors with double precision
- * elements.
- * </p>
+ * <p> 'Write' interface to three-dimensional vectors with {@code double}
+ * elements. </p>
  *
- * @param <T>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
  */
 
-public interface PVectorWritable3DType<T> extends
-  VectorWritable3DType,
-  PVectorWritable2DType<T>
+public interface PVectorWritable3DType<T>
+  extends VectorWritable3DType, PVectorWritable2DType<T>
 {
   /**
    * Set the current vector to the contents of the input vector.
    *
-   * @param in_v
-   *          The input vector
+   * @param in_v The input vector
    */
 
   void copyFromTyped3D(

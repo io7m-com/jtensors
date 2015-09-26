@@ -18,7 +18,8 @@ package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.parameterized.PVectorM4L;
 
-public final class PVectorM4LTest<T> extends PVectorM4LContract<T, PVectorM4L<T>>
+public final class PVectorM4LTest<T>
+  extends PVectorM4LContract<T, PVectorM4L<T>>
 {
   @Override protected PVectorM4L<T> newVectorM4L(
     final long x,

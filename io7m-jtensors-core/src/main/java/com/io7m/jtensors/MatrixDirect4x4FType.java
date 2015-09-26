@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * <p>The type of 4x4 matrices with single precision elements that are backed by
+ * <p>The type of 4x4 matrices with {@code float} elements that are backed by
  * direct byte buffers.</p>
  *
  * <p>Values of type {@code MatrixDirect4x4FType} are backed by direct memory,

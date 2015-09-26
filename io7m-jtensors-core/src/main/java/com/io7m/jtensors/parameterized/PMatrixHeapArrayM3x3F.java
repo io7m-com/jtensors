@@ -18,14 +18,11 @@ package com.io7m.jtensors.parameterized;
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorWritable2FType;
 import com.io7m.jtensors.VectorWritable3FType;
-
-import java.util.Arrays;
 
 /**
  * <p>The default implementation of the {@link PMatrix3x3FType} interface.</p>
@@ -44,8 +41,7 @@ public final class PMatrixHeapArrayM3x3F<T0, T1>
   private final float[][] elements;
 
   private PMatrixHeapArrayM3x3F(
-    final @Nullable
-    PMatrixReadable3x3FType<T0, T1> m)
+    final @Nullable PMatrixReadable3x3FType<T0, T1> m)
   {
     this.elements = new float[3][3];
 
@@ -97,7 +93,7 @@ public final class PMatrixHeapArrayM3x3F<T0, T1>
     }
 
     final PMatrixHeapArrayM3x3F<?, ?> other = (PMatrixHeapArrayM3x3F<?, ?>) obj;
-    return Arrays.deepEquals(this.elements, other.elements);
+    return MatrixM3x3F.compareElements(this, other);
   }
 
   @Override public float getRowColumnF(
@@ -109,22 +105,7 @@ public final class PMatrixHeapArrayM3x3F<T0, T1>
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C0F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C1F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C2F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR2C2F(), prime, r);
-
-    return r;
+    return MatrixM3x3F.hashElements(this);
   }
 
   @Override public void setRowColumnF(
@@ -135,16 +116,10 @@ public final class PMatrixHeapArrayM3x3F<T0, T1>
     this.elements[row][column] = value;
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < 3; ++row) {
-      final float c0 = this.elements[row][0];
-      final float c1 = this.elements[row][1];
-      final float c2 = this.elements[row][2];
-      final String s = String.format("[%+.6f %+.6f %+.6f]\n", c0, c1, c2);
-      builder.append(s);
-    }
+    MatrixM3x3F.showElements(this, builder);
     return builder.toString();
   }
 

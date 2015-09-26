@@ -19,8 +19,6 @@ package com.io7m.jtensors;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 
-import java.util.Arrays;
-
 /**
  * <p>The default implementation of the {@link Matrix2x2DType} interface.</p>
  *
@@ -80,7 +78,7 @@ public final class MatrixHeapArrayM2x2D implements Matrix2x2DType
     }
 
     final MatrixHeapArrayM2x2D other = (MatrixHeapArrayM2x2D) obj;
-    return Arrays.deepEquals(this.elements, other.elements);
+    return MatrixM2x2D.compareElements(this, other);
   }
 
   @Override public double getRowColumnD(
@@ -92,16 +90,7 @@ public final class MatrixHeapArrayM2x2D implements Matrix2x2DType
 
   @Override public int hashCode()
   {
-    final int prime = 21;
-    int r = prime;
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
-
-    return r;
+    return MatrixM2x2D.hashElements(this);
   }
 
   @Override public void setRowColumnD(
@@ -112,16 +101,10 @@ public final class MatrixHeapArrayM2x2D implements Matrix2x2DType
     this.elements[row][column] = value;
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < 2; ++row) {
-      final double c0 = this.elements[row][0];
-      final double c1 = this.elements[row][1];
-      final String s =
-        String.format("[%+.15f %+.15f]\n", c0, c1);
-      builder.append(s);
-    }
+    MatrixM2x2D.showElements(this, builder);
     return builder.toString();
   }
 

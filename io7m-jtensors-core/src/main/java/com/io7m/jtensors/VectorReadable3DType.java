@@ -17,10 +17,8 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Read' interface to three-dimensional vectors with double precision
- * elements.
- * </p>
+ * <p> 'Read' interface to three-dimensional vectors with {@code double}
+ * elements. </p>
  */
 
 public interface VectorReadable3DType extends VectorReadable2DType

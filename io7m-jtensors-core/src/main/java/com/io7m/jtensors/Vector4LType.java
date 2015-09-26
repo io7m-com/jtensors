@@ -17,8 +17,8 @@
 package com.io7m.jtensors;
 
 /**
- * <p>The type of four-element vectors that are both readable and writable, and have
- * {@code long} elements</p>
+ * <p>The type of four-element vectors that are both readable and writable, and
+ * have {@code long} elements</p>
  *
  * @since 7.0.0
  */

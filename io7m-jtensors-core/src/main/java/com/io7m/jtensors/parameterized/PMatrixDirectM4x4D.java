@@ -18,7 +18,6 @@ package com.io7m.jtensors.parameterized;
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.MatrixReadable4x4DType;
 import com.io7m.jtensors.VectorReadable2DType;
@@ -183,14 +182,9 @@ public final class PMatrixDirectM4x4D<T0, T1>
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final PMatrixDirectM4x4D<?, ?> other = (PMatrixDirectM4x4D<?, ?>) obj;
-    for (int index = 0; index < PMatrixDirectM4x4D.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
 
-    return true;
+    final PMatrixDirectM4x4D<?, ?> other = (PMatrixDirectM4x4D<?, ?>) obj;
+    return MatrixM4x4D.compareElements(this, other);
   }
 
   @Override public DoubleBuffer getDirectDoubleBuffer()
@@ -346,30 +340,7 @@ public final class PMatrixDirectM4x4D<T0, T1>
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C0D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C1D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C2D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C3D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR3C3D(), prime, r);
-
-    return r;
+    return MatrixM4x4D.hashElements(this);
   }
 
   @Override public void setRowColumnD(
@@ -380,18 +351,10 @@ public final class PMatrixDirectM4x4D<T0, T1>
     this.view.put(PMatrixDirectM4x4D.indexChecked(row, column), value);
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < PMatrixDirectM4x4D.VIEW_ROWS; ++row) {
-      final double c0 = this.view.get(PMatrixDirectM4x4D.indexUnsafe(row, 0));
-      final double c1 = this.view.get(PMatrixDirectM4x4D.indexUnsafe(row, 1));
-      final double c2 = this.view.get(PMatrixDirectM4x4D.indexUnsafe(row, 2));
-      final double c3 = this.view.get(PMatrixDirectM4x4D.indexUnsafe(row, 3));
-      final String s =
-        String.format("[%+.15f %+.15f %+.15f %+.15f]\n", c0, c1, c2, c3);
-      builder.append(s);
-    }
+    MatrixM4x4D.showElements(this, builder);
     return builder.toString();
   }
 

@@ -19,18 +19,14 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.VectorReadable4DType;
 
 /**
- * <p>
- * 'Read' interface to phantom-typed four-dimensional vectors with double
- * precision elements.
- * </p>
+ * <p> 'Read' interface to phantom-typed four-dimensional vectors with double
+ * precision elements. </p>
  *
- * @param <T>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
  */
 
-public interface PVectorReadable4DType<T> extends
-  VectorReadable4DType,
-  PVectorReadable3DType<T>
+public interface PVectorReadable4DType<T>
+  extends VectorReadable4DType, PVectorReadable3DType<T>
 {
   // No extra functions.
 }

@@ -16,11 +16,10 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.VectorI3L;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class VectorI3LTest extends VectorI3Contract
 {
@@ -41,7 +40,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testAbsolute()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = (long) (Math.random() * Long.MIN_VALUE);
       final long y = (long) (Math.random() * Long.MIN_VALUE);
       final long z = (long) (Math.random() * Long.MIN_VALUE);
@@ -57,7 +57,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testAdd()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorI3LTest.randomPositiveSmallNumber();
       final long y0 = VectorI3LTest.randomPositiveSmallNumber();
       final long z0 = VectorI3LTest.randomPositiveSmallNumber();
@@ -78,7 +79,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testAddScaled()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorI3LTest.randomPositiveSmallNumber();
       final long y0 = VectorI3LTest.randomPositiveSmallNumber();
       final long z0 = VectorI3LTest.randomPositiveSmallNumber();
@@ -120,7 +122,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testClampByVectorMaximumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max_x = VectorI3LTest.randomNegativeNumber();
       final long max_y = VectorI3LTest.randomNegativeNumber();
       final long max_z = VectorI3LTest.randomNegativeNumber();
@@ -141,7 +144,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testClampByVectorMinimumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long min_x = VectorI3LTest.randomPositiveNumber();
       final long min_y = VectorI3LTest.randomPositiveNumber();
       final long min_z = VectorI3LTest.randomPositiveNumber();
@@ -162,7 +166,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testClampByVectorOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long min_x = VectorI3LTest.randomNegativeNumber();
       final long min_y = VectorI3LTest.randomNegativeNumber();
       final long min_z = VectorI3LTest.randomNegativeNumber();
@@ -191,7 +196,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testClampMaximumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long maximum = VectorI3LTest.randomNegativeNumber();
 
       final long x = VectorI3LTest.randomPositiveNumber();
@@ -209,7 +215,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testClampMinimumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long minimum = VectorI3LTest.randomPositiveNumber();
 
       final long x = VectorI3LTest.randomNegativeNumber();
@@ -227,7 +234,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testClampOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long minimum = VectorI3LTest.randomNegativeNumber();
       final long maximum = VectorI3LTest.randomPositiveNumber();
 
@@ -286,7 +294,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testDistanceOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorI3LTest.randomPositiveSmallNumber();
       final long y0 = VectorI3LTest.randomPositiveSmallNumber();
       final long z0 = VectorI3LTest.randomPositiveSmallNumber();
@@ -339,7 +348,8 @@ public class VectorI3LTest extends VectorI3Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max = 1000;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
@@ -362,7 +372,8 @@ public class VectorI3LTest extends VectorI3Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max = 1000;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
@@ -547,7 +558,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testInterpolateLinearLimits()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorI3LTest.randomPositiveNumber();
       final long y0 = VectorI3LTest.randomPositiveNumber();
       final long z0 = VectorI3LTest.randomPositiveNumber();
@@ -573,7 +585,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testMagnitudeNonzero()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = VectorI3LTest.randomPositiveSmallNumber();
       final long y = VectorI3LTest.randomPositiveSmallNumber();
       final long z = VectorI3LTest.randomPositiveSmallNumber();
@@ -658,7 +671,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testScaleOne()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = VectorI3LTest.randomPositiveNumber();
       final long y = VectorI3LTest.randomPositiveNumber();
       final long z = VectorI3LTest.randomPositiveNumber();
@@ -674,7 +688,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testScaleZero()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = VectorI3LTest.randomPositiveNumber();
       final long y = VectorI3LTest.randomPositiveNumber();
       final long z = VectorI3LTest.randomPositiveNumber();
@@ -696,7 +711,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testSubtract()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = VectorI3LTest.randomPositiveNumber();
       final long y0 = VectorI3LTest.randomPositiveNumber();
       final long z0 = VectorI3LTest.randomPositiveNumber();

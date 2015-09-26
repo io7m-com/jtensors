@@ -16,18 +16,17 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.parameterized.PVectorI4F;
 import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Assert;
+import org.junit.Test;
 
-@SuppressWarnings("static-method") public class PVectorI4FTest<T> extends
-  PVectorI4Contract
+@SuppressWarnings("static-method") public class PVectorI4FTest<T>
+  extends PVectorI4Contract
 {
   @Test public void testZero()
   {
@@ -52,22 +51,18 @@ import com.io7m.jtensors.tests.TestUtilities;
 
       final PVectorI4F<T> vr = PVectorI4F.absolute(v);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        Math.abs(v.getXF()),
-        vr.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        Math.abs(v.getYF()),
-        vr.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        Math.abs(v.getZF()),
-        vr.getZF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        Math.abs(v.getWF()),
-        vr.getWF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, Math.abs(v.getXF()), vr.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, Math.abs(v.getYF()), vr.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, Math.abs(v.getZF()), vr.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, Math.abs(v.getWF()), vr.getWF()));
     }
   }
 
@@ -94,32 +89,28 @@ import com.io7m.jtensors.tests.TestUtilities;
         final float expected = v0.getXF() + v1.getXF();
         final float got = vr.getXF();
         System.out.println("x: expected " + expected + " got " + got);
-        Assert.assertTrue(AlmostEqualFloat
-          .almostEqual(context, expected, got));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getYF() + v1.getYF();
         final float got = vr.getYF();
         System.out.println("y: expected " + expected + " got " + got);
-        Assert.assertTrue(AlmostEqualFloat
-          .almostEqual(context, expected, got));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getZF() + v1.getZF();
         final float got = vr.getZF();
         System.out.println("z: expected " + expected + " got " + got);
-        Assert.assertTrue(AlmostEqualFloat
-          .almostEqual(context, expected, got));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getWF() + v1.getWF();
         final float got = vr.getWF();
         System.out.println("w: expected " + expected + " got " + got);
-        Assert.assertTrue(AlmostEqualFloat
-          .almostEqual(context, expected, got));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
     }
   }
@@ -148,32 +139,28 @@ import com.io7m.jtensors.tests.TestUtilities;
         final float expected = v0.getXF() + (v1.getXF() * r);
         final float got = vr.getXF();
         System.out.println("x: expected " + expected + " got " + got);
-        Assert.assertTrue(AlmostEqualFloat
-          .almostEqual(context, expected, got));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getYF() + (v1.getYF() * r);
         final float got = vr.getYF();
         System.out.println("y: expected " + expected + " got " + got);
-        Assert.assertTrue(AlmostEqualFloat
-          .almostEqual(context, expected, got));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getZF() + (v1.getZF() * r);
         final float got = vr.getZF();
         System.out.println("z: expected " + expected + " got " + got);
-        Assert.assertTrue(AlmostEqualFloat
-          .almostEqual(context, expected, got));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getWF() + (v1.getWF() * r);
         final float got = vr.getWF();
         System.out.println("w: expected " + expected + " got " + got);
-        Assert.assertTrue(AlmostEqualFloat
-          .almostEqual(context, expected, got));
+        Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
     }
   }
@@ -308,18 +295,18 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float w = (float) (Math.random() * Float.MIN_VALUE);
       final PVectorI4F<T> v = new PVectorI4F<T>(x, y, z, w);
 
-      Assert
-        .assertTrue(PVectorI4F.clampMaximumByPVector(v, maximum).getXF() <= maximum
-          .getXF());
-      Assert
-        .assertTrue(PVectorI4F.clampMaximumByPVector(v, maximum).getYF() <= maximum
-          .getYF());
-      Assert
-        .assertTrue(PVectorI4F.clampMaximumByPVector(v, maximum).getZF() <= maximum
-          .getZF());
-      Assert
-        .assertTrue(PVectorI4F.clampMaximumByPVector(v, maximum).getWF() <= maximum
-          .getWF());
+      Assert.assertTrue(
+        PVectorI4F.clampMaximumByPVector(v, maximum).getXF()
+        <= maximum.getXF());
+      Assert.assertTrue(
+        PVectorI4F.clampMaximumByPVector(v, maximum).getYF()
+        <= maximum.getYF());
+      Assert.assertTrue(
+        PVectorI4F.clampMaximumByPVector(v, maximum).getZF()
+        <= maximum.getZF());
+      Assert.assertTrue(
+        PVectorI4F.clampMaximumByPVector(v, maximum).getWF()
+        <= maximum.getWF());
     }
   }
 
@@ -339,18 +326,18 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float w = (float) (Math.random() * Float.MIN_VALUE);
       final PVectorI4F<T> v = new PVectorI4F<T>(x, y, z, w);
 
-      Assert
-        .assertTrue(PVectorI4F.clampMinimumByPVector(v, minimum).getXF() >= minimum
-          .getXF());
-      Assert
-        .assertTrue(PVectorI4F.clampMinimumByPVector(v, minimum).getYF() >= minimum
-          .getYF());
-      Assert
-        .assertTrue(PVectorI4F.clampMinimumByPVector(v, minimum).getZF() >= minimum
-          .getZF());
-      Assert
-        .assertTrue(PVectorI4F.clampMinimumByPVector(v, minimum).getWF() >= minimum
-          .getWF());
+      Assert.assertTrue(
+        PVectorI4F.clampMinimumByPVector(v, minimum).getXF()
+        >= minimum.getXF());
+      Assert.assertTrue(
+        PVectorI4F.clampMinimumByPVector(v, minimum).getYF()
+        >= minimum.getYF());
+      Assert.assertTrue(
+        PVectorI4F.clampMinimumByPVector(v, minimum).getZF()
+        >= minimum.getZF());
+      Assert.assertTrue(
+        PVectorI4F.clampMinimumByPVector(v, minimum).getWF()
+        >= minimum.getWF());
     }
   }
 
@@ -377,30 +364,30 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float w = (float) (Math.random() * Float.MAX_VALUE);
       final PVectorI4F<T> v = new PVectorI4F<T>(x, y, z, w);
 
-      Assert.assertTrue(PVectorI4F
-        .clampByPVector(v, minimum, maximum)
-        .getXF() <= maximum.getXF());
-      Assert.assertTrue(PVectorI4F
-        .clampByPVector(v, minimum, maximum)
-        .getXF() >= minimum.getXF());
-      Assert.assertTrue(PVectorI4F
-        .clampByPVector(v, minimum, maximum)
-        .getYF() <= maximum.getYF());
-      Assert.assertTrue(PVectorI4F
-        .clampByPVector(v, minimum, maximum)
-        .getYF() >= minimum.getYF());
-      Assert.assertTrue(PVectorI4F
-        .clampByPVector(v, minimum, maximum)
-        .getZF() <= maximum.getZF());
-      Assert.assertTrue(PVectorI4F
-        .clampByPVector(v, minimum, maximum)
-        .getZF() >= minimum.getZF());
-      Assert.assertTrue(PVectorI4F
-        .clampByPVector(v, minimum, maximum)
-        .getWF() <= maximum.getWF());
-      Assert.assertTrue(PVectorI4F
-        .clampByPVector(v, minimum, maximum)
-        .getWF() >= minimum.getWF());
+      Assert.assertTrue(
+        PVectorI4F.clampByPVector(v, minimum, maximum).getXF()
+        <= maximum.getXF());
+      Assert.assertTrue(
+        PVectorI4F.clampByPVector(v, minimum, maximum).getXF()
+        >= minimum.getXF());
+      Assert.assertTrue(
+        PVectorI4F.clampByPVector(v, minimum, maximum).getYF()
+        <= maximum.getYF());
+      Assert.assertTrue(
+        PVectorI4F.clampByPVector(v, minimum, maximum).getYF()
+        >= minimum.getYF());
+      Assert.assertTrue(
+        PVectorI4F.clampByPVector(v, minimum, maximum).getZF()
+        <= maximum.getZF());
+      Assert.assertTrue(
+        PVectorI4F.clampByPVector(v, minimum, maximum).getZF()
+        >= minimum.getZF());
+      Assert.assertTrue(
+        PVectorI4F.clampByPVector(v, minimum, maximum).getWF()
+        <= maximum.getWF());
+      Assert.assertTrue(
+        PVectorI4F.clampByPVector(v, minimum, maximum).getWF()
+        >= minimum.getWF());
     }
   }
 
@@ -415,14 +402,10 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float w = (float) (Math.random() * Float.MAX_VALUE);
       final PVectorI4F<T> v = new PVectorI4F<T>(x, y, z, w);
 
-      Assert
-        .assertTrue(PVectorI4F.clampMaximum(v, maximum).getXF() <= maximum);
-      Assert
-        .assertTrue(PVectorI4F.clampMaximum(v, maximum).getYF() <= maximum);
-      Assert
-        .assertTrue(PVectorI4F.clampMaximum(v, maximum).getZF() <= maximum);
-      Assert
-        .assertTrue(PVectorI4F.clampMaximum(v, maximum).getWF() <= maximum);
+      Assert.assertTrue(PVectorI4F.clampMaximum(v, maximum).getXF() <= maximum);
+      Assert.assertTrue(PVectorI4F.clampMaximum(v, maximum).getYF() <= maximum);
+      Assert.assertTrue(PVectorI4F.clampMaximum(v, maximum).getZF() <= maximum);
+      Assert.assertTrue(PVectorI4F.clampMaximum(v, maximum).getWF() <= maximum);
     }
   }
 
@@ -437,14 +420,10 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float w = (float) (Math.random() * Float.MIN_VALUE);
       final PVectorI4F<T> v = new PVectorI4F<T>(x, y, z, w);
 
-      Assert
-        .assertTrue(PVectorI4F.clampMinimum(v, minimum).getXF() >= minimum);
-      Assert
-        .assertTrue(PVectorI4F.clampMinimum(v, minimum).getYF() >= minimum);
-      Assert
-        .assertTrue(PVectorI4F.clampMinimum(v, minimum).getZF() >= minimum);
-      Assert
-        .assertTrue(PVectorI4F.clampMinimum(v, minimum).getWF() >= minimum);
+      Assert.assertTrue(PVectorI4F.clampMinimum(v, minimum).getXF() >= minimum);
+      Assert.assertTrue(PVectorI4F.clampMinimum(v, minimum).getYF() >= minimum);
+      Assert.assertTrue(PVectorI4F.clampMinimum(v, minimum).getZF() >= minimum);
+      Assert.assertTrue(PVectorI4F.clampMinimum(v, minimum).getWF() >= minimum);
     }
   }
 
@@ -460,22 +439,30 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float w = (float) (Math.random() * Float.MIN_VALUE);
       final PVectorI4F<T> v = new PVectorI4F<T>(x, y, z, w);
 
-      Assert
-        .assertTrue(PVectorI4F.clamp(v, minimum, maximum).getXF() <= maximum);
-      Assert
-        .assertTrue(PVectorI4F.clamp(v, minimum, maximum).getXF() >= minimum);
-      Assert
-        .assertTrue(PVectorI4F.clamp(v, minimum, maximum).getYF() <= maximum);
-      Assert
-        .assertTrue(PVectorI4F.clamp(v, minimum, maximum).getYF() >= minimum);
-      Assert
-        .assertTrue(PVectorI4F.clamp(v, minimum, maximum).getZF() <= maximum);
-      Assert
-        .assertTrue(PVectorI4F.clamp(v, minimum, maximum).getZF() >= minimum);
-      Assert
-        .assertTrue(PVectorI4F.clamp(v, minimum, maximum).getWF() <= maximum);
-      Assert
-        .assertTrue(PVectorI4F.clamp(v, minimum, maximum).getWF() >= minimum);
+      Assert.assertTrue(
+        PVectorI4F.clamp(v, minimum, maximum).getXF()
+        <= maximum);
+      Assert.assertTrue(
+        PVectorI4F.clamp(v, minimum, maximum).getXF()
+        >= minimum);
+      Assert.assertTrue(
+        PVectorI4F.clamp(v, minimum, maximum).getYF()
+        <= maximum);
+      Assert.assertTrue(
+        PVectorI4F.clamp(v, minimum, maximum).getYF()
+        >= minimum);
+      Assert.assertTrue(
+        PVectorI4F.clamp(v, minimum, maximum).getZF()
+        <= maximum);
+      Assert.assertTrue(
+        PVectorI4F.clamp(v, minimum, maximum).getZF()
+        >= minimum);
+      Assert.assertTrue(
+        PVectorI4F.clamp(v, minimum, maximum).getWF()
+        <= maximum);
+      Assert.assertTrue(
+        PVectorI4F.clamp(v, minimum, maximum).getWF()
+        >= minimum);
     }
   }
 
@@ -510,10 +497,9 @@ import com.io7m.jtensors.tests.TestUtilities;
     final PVectorI4F<T> v1 = new PVectorI4F<T>(0.0f, 0.0f, 0.0f, 0.0f);
 
     final ContextRelative context = new AlmostEqualFloat.ContextRelative();
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      PVectorI4F.distance(v0, v1),
-      1.0f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, PVectorI4F.distance(v0, v1), 1.0f));
   }
 
   @Override @Test public void testDistanceOrdering()
@@ -805,14 +791,12 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float w1 = (float) (Math.random() * Float.MAX_VALUE);
       final PVectorI4F<T> v1 = new PVectorI4F<T>(x1, y1, z1, w1);
 
-      Assert.assertTrue(PVectorI4F.almostEqual(
-        ec,
-        PVectorI4F.interpolateLinear(v0, v1, 0.0f),
-        v0));
-      Assert.assertTrue(PVectorI4F.almostEqual(
-        ec,
-        PVectorI4F.interpolateLinear(v0, v1, 1.0f),
-        v1));
+      Assert.assertTrue(
+        PVectorI4F.almostEqual(
+          ec, PVectorI4F.interpolateLinear(v0, v1, 0.0f), v0));
+      Assert.assertTrue(
+        PVectorI4F.almostEqual(
+          ec, PVectorI4F.interpolateLinear(v0, v1, 1.0f), v1));
     }
   }
 
@@ -960,22 +944,18 @@ import com.io7m.jtensors.tests.TestUtilities;
 
       final PVectorI4F<T> vr = PVectorI4F.scale(v, 1.0f);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        v.getXF(),
-        vr.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        v.getYF(),
-        vr.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        v.getZF(),
-        vr.getZF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        v.getWF(),
-        vr.getWF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, v.getXF(), vr.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, v.getYF(), vr.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, v.getZF(), vr.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, v.getWF(), vr.getWF()));
     }
   }
 
@@ -1024,22 +1004,18 @@ import com.io7m.jtensors.tests.TestUtilities;
       final PVectorI4F<T> vr = PVectorI4F.subtract(v0, v1);
 
       final ContextRelative context = new AlmostEqualFloat.ContextRelative();
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getXF(),
-        v0.getXF() - v1.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getYF(),
-        v0.getYF() - v1.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getZF(),
-        v0.getZF() - v1.getZF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getWF(),
-        v0.getWF() - v1.getWF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getXF(), v0.getXF() - v1.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getYF(), v0.getYF() - v1.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getZF(), v0.getZF() - v1.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getWF(), v0.getWF() - v1.getWF()));
     }
   }
 

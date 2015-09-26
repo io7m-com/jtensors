@@ -19,7 +19,7 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixDirect4x4DType;
 
 /**
- * <p>The type of 4x4 matrices with double precision elements that are backed by
+ * <p>The type of 4x4 matrices with {@code double} elements that are backed by
  * direct byte buffers.</p>
  *
  * <p>Values of type {@code PMatrixDirect4x4DType} are backed by direct memory,

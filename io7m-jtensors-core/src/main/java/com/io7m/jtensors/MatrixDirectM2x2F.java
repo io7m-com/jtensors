@@ -236,27 +236,12 @@ public final class MatrixDirectM2x2F implements MatrixDirect2x2FType
     }
 
     final MatrixDirectM2x2F other = (MatrixDirectM2x2F) obj;
-    for (int index = 0; index < MatrixDirectM2x2F.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
-
-    return true;
+    return MatrixM2x2F.compareElements(this, other);
   }
 
   @Override public int hashCode()
   {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C0F(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C0F(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C1F(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C1F(), prime, r);
-
-    return r;
+    return MatrixM2x2F.hashElements(this);
   }
 
   @Override public void setRowColumnF(
@@ -267,15 +252,10 @@ public final class MatrixDirectM2x2F implements MatrixDirect2x2FType
     this.view.put(MatrixDirectM2x2F.indexChecked(row, column), x);
   }
 
-  @SuppressWarnings("boxing") @Override public String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < MatrixDirectM2x2F.VIEW_ROWS; ++row) {
-      final float c0 = this.view.get(MatrixDirectM2x2F.indexUnsafe(row, 0));
-      final float c1 = this.view.get(MatrixDirectM2x2F.indexUnsafe(row, 1));
-      final String s = String.format("[%+.6f %+.6f]\n", c0, c1);
-      builder.append(s);
-    }
+    MatrixM2x2F.showElements(this, builder);
     return builder.toString();
   }
 }

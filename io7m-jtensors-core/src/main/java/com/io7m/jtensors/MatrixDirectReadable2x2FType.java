@@ -17,15 +17,13 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to 2x2 direct-memory matrices with single precision
- * elements.
+ * 'Read' interface to 2x2 direct-memory matrices with {@code float} elements.
  *
  * @since 7.0.0
  */
 
-public interface MatrixDirectReadable2x2FType extends
-  MatrixReadable2x2FType,
-  MatrixDirectBufferedFType
+public interface MatrixDirectReadable2x2FType
+  extends MatrixReadable2x2FType, MatrixDirectBufferedFType
 {
   // No extra functions.
 }

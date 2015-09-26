@@ -30,7 +30,7 @@ import com.io7m.jtensors.VectorWritable4DType;
 import com.io7m.junreachable.UnreachableCodeException;
 
 /**
- * <p> A 4x4 mutable matrix type with double precision elements. </p>
+ * <p> A 4x4 mutable matrix type with {@code double} elements. </p>
  *
  * @since 7.0.0
  */

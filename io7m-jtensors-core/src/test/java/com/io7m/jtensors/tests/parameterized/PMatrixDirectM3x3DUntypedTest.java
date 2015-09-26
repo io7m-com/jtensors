@@ -36,9 +36,8 @@ public final class PMatrixDirectM3x3DUntypedTest<T0, T1>
     return PMatrixDirectM3x3D.newMatrixFromUntyped(source);
   }
 
-  @Override
-  protected void checkDirectBufferInvariants(final PMatrixDirect3x3DType<T0,
-    T1> m)
+  @Override protected void checkDirectBufferInvariants(
+    final PMatrixDirect3x3DType<T0, T1> m)
   {
     Assert.assertEquals(0L, (long) m.getDirectDoubleBuffer().position());
   }

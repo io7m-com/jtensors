@@ -15,8 +15,9 @@
   <url>http://io7m.github.io/jtensors/</url>
 
   <modules>
-    <module>io7m-jtensors-core</module>
+    <module>io7m-jtensors-bytebuffered</module>
     <module>io7m-jtensors-checkstyle</module>
+    <module>io7m-jtensors-core</module>
     <module>io7m-jtensors-documentation</module>
   </modules>
 

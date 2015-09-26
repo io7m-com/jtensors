@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Write' interface to four-dimensional quaternions with double precision
+ * 'Write' interface to four-dimensional quaternions with {@code double}
  * elements.
  */
 

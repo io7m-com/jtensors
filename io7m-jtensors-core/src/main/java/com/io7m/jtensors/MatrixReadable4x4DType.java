@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to 4x4 matrices with double precision elements.
+ * 'Read' interface to 4x4 matrices with {@code double} elements.
  */
 
 public interface MatrixReadable4x4DType extends MatrixReadable3x3DType

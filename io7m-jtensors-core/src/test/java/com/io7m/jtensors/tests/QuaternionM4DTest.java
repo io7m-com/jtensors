@@ -41,6 +41,11 @@ import org.junit.Test;
   private static final VectorReadable3DType AXIS_Z = new VectorI3D(
     0.0, 0.0, 1.0);
 
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
+
   @Override @Test public final void testAdd()
   {
     final AlmostEqualDouble.ContextRelative ec =
@@ -97,11 +102,6 @@ import org.junit.Test;
             ec, v0.getWD(), orig_w + v1.getWD()));
       }
     }
-  }
-
-  protected static double getRandom()
-  {
-    return Math.random();
   }
 
   @Override @Test public final void testAddMutation()
@@ -788,19 +788,25 @@ import org.junit.Test;
     final Matrix4x4DType mq = MatrixHeapArrayM4x4D.newMatrix();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double origin_x =
-        (QuaternionM4DTest.getRandom() * 100.0) - (QuaternionM4DTest.getRandom() * 100.0);
-      final double origin_y =
-        (QuaternionM4DTest.getRandom() * 100.0) - (QuaternionM4DTest.getRandom() * 100.0);
-      final double origin_z =
-        (QuaternionM4DTest.getRandom() * 100.0) - (QuaternionM4DTest.getRandom() * 100.0);
+      final double origin_x = (QuaternionM4DTest.getRandom() * 100.0) - (
+        QuaternionM4DTest.getRandom()
+        * 100.0);
+      final double origin_y = (QuaternionM4DTest.getRandom() * 100.0) - (
+        QuaternionM4DTest.getRandom()
+        * 100.0);
+      final double origin_z = (QuaternionM4DTest.getRandom() * 100.0) - (
+        QuaternionM4DTest.getRandom()
+        * 100.0);
 
-      final double target_x =
-        (QuaternionM4DTest.getRandom() * 100.0) - (QuaternionM4DTest.getRandom() * 100.0);
-      final double target_y =
-        (QuaternionM4DTest.getRandom() * 100.0) - (QuaternionM4DTest.getRandom() * 100.0);
-      final double target_z =
-        (QuaternionM4DTest.getRandom() * 100.0) - (QuaternionM4DTest.getRandom() * 100.0);
+      final double target_x = (QuaternionM4DTest.getRandom() * 100.0) - (
+        QuaternionM4DTest.getRandom()
+        * 100.0);
+      final double target_y = (QuaternionM4DTest.getRandom() * 100.0) - (
+        QuaternionM4DTest.getRandom()
+        * 100.0);
+      final double target_z = (QuaternionM4DTest.getRandom() * 100.0) - (
+        QuaternionM4DTest.getRandom()
+        * 100.0);
 
       final VectorI3D origin = new VectorI3D(origin_x, origin_y, origin_z);
       final VectorI3D target = new VectorI3D(target_x, target_y, target_z);
@@ -848,10 +854,14 @@ import org.junit.Test;
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = QuaternionM4DTest.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
-      final double y = QuaternionM4DTest.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
-      final double z = QuaternionM4DTest.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
-      final double w = QuaternionM4DTest.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
+      final double x =
+        QuaternionM4DTest.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
+      final double y =
+        QuaternionM4DTest.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
+      final double z =
+        QuaternionM4DTest.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
+      final double w =
+        QuaternionM4DTest.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
       final QuaternionM4D v = new QuaternionM4D(x, y, z, w);
 
       final QuaternionM4D vr = new QuaternionM4D();
@@ -916,9 +926,11 @@ import org.junit.Test;
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final VectorI3D axis_r = new VectorI3D(
-        QuaternionM4DTest.getRandom(), QuaternionM4DTest.getRandom(), QuaternionM4DTest
+        QuaternionM4DTest.getRandom(),
+        QuaternionM4DTest.getRandom(),
+        QuaternionM4DTest
 
-        .getRandom());
+          .getRandom());
       final VectorI3D axis_n = VectorI3D.normalize(axis_r);
 
       final QuaternionM4D q = new QuaternionM4D();
@@ -1126,7 +1138,8 @@ import org.junit.Test;
     boolean eq = false;
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double degrees = (2.0 * QuaternionM4DTest.getRandom() * 360.0) - 360.0;
+      final double degrees =
+        (2.0 * QuaternionM4DTest.getRandom() * 360.0) - 360.0;
       final double angle = Math.toRadians(degrees);
       final double axis_x = QuaternionM4DTest.getRandom();
       final double axis_y = QuaternionM4DTest.getRandom();
@@ -1203,7 +1216,8 @@ import org.junit.Test;
     boolean eq = false;
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double degrees = (2.0 * QuaternionM4DTest.getRandom() * 360.0) - 360.0;
+      final double degrees =
+        (2.0 * QuaternionM4DTest.getRandom() * 360.0) - 360.0;
       final double angle = Math.toRadians(degrees);
       final double axis_x = QuaternionM4DTest.getRandom();
       final double axis_y = QuaternionM4DTest.getRandom();
@@ -1890,14 +1904,14 @@ import org.junit.Test;
     final ContextRelative context = TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = (QuaternionM4DTest.getRandom() * 2.0) - QuaternionM4DTest
-        .getRandom();
-      final double y = (QuaternionM4DTest.getRandom() * 2.0) - QuaternionM4DTest
-        .getRandom();
-      final double z = (QuaternionM4DTest.getRandom() * 2.0) - QuaternionM4DTest
-        .getRandom();
-      final double w = (QuaternionM4DTest.getRandom() * 2.0) - QuaternionM4DTest
-        .getRandom();
+      final double x =
+        (QuaternionM4DTest.getRandom() * 2.0) - QuaternionM4DTest.getRandom();
+      final double y =
+        (QuaternionM4DTest.getRandom() * 2.0) - QuaternionM4DTest.getRandom();
+      final double z =
+        (QuaternionM4DTest.getRandom() * 2.0) - QuaternionM4DTest.getRandom();
+      final double w =
+        (QuaternionM4DTest.getRandom() * 2.0) - QuaternionM4DTest.getRandom();
       final QuaternionM4D qi = new QuaternionM4D(x, y, z, w);
       final QuaternionM4D qn = new QuaternionM4D(-x, -y, -z, -w);
       final QuaternionM4D qr = new QuaternionM4D();
