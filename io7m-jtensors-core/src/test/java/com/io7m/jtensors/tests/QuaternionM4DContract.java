@@ -412,9 +412,12 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    Assert.assertTrue(
-      QuaternionM4D.almostEqual(
-        ec, this.newQuaternion(), this.newQuaternion(0.0, 0.0, 0.0, 1.0)));
+    final T ql = this.newQuaternion();
+    final T qr = this.newQuaternion(0.0, 0.0, 0.0, 1.0);
+
+    System.out.println("ql: " + ql);
+    System.out.println("qr: " + qr);
+    Assert.assertTrue(QuaternionM4D.almostEqual(ec, ql, qr));
   }
 
   @Test public final void testDotProduct()
@@ -2106,7 +2109,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   @Test public final void testString()
   {
     final T v = this.newQuaternion(1.0, 2.0, 3.0, 4.0);
-    Assert.assertTrue("[QuaternionM4D 1.0 2.0 3.0 4.0]".equals(v.toString()));
+    Assert.assertTrue(v.toString().endsWith(" 1.0 2.0 3.0 4.0]"));
   }
 
   @Test public final void testSubtract()

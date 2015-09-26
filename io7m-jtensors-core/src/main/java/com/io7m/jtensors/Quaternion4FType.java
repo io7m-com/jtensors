@@ -21,7 +21,7 @@ package com.io7m.jtensors;
  */
 
 public interface Quaternion4FType
-  extends QuaternionReadable4FType, QuaternionWritable4FType
+  extends QuaternionReadable4FType, QuaternionWritable4FType, Vector4FType
 {
   // No extra fields
 }

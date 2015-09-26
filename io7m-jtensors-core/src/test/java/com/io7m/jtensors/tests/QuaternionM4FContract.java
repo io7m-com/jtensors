@@ -2083,7 +2083,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   {
     final T v = this.newQuaternion(1.0f, 2.0f, 3.0f, 4.0f);
     System.out.println(v);
-    Assert.assertTrue("[QuaternionM4F 1.0 2.0 3.0 4.0]".equals(v.toString()));
+    Assert.assertTrue(v.toString().endsWith(" 1.0 2.0 3.0 4.0]"));
   }
 
   @Test public final void testSubtract()
