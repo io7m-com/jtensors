@@ -16,7 +16,8 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import com.io7m.jtensors.MatrixM3x3F;
+import com.io7m.jtensors.Matrix3x3FType;
+import com.io7m.jtensors.MatrixHeapArrayM3x3F;
 import com.io7m.jtensors.VectorI4F;
 import com.io7m.jtensors.VectorM2F;
 import com.io7m.jtensors.VectorM3F;
@@ -33,7 +34,7 @@ public abstract class PMatrixReadable3x3FContract<T0, T1, T extends
   protected abstract T newMatrixFrom(
     PMatrixReadable3x3FType<T0, T1> source);
 
-  protected abstract void checkDirectBufferInvariants(
+  protected abstract void checkDirectBufferInvariantsWildcard(
     PMatrixReadable3x3FType<?, ?> m);
 
   /**
@@ -204,7 +205,7 @@ public abstract class PMatrixReadable3x3FContract<T0, T1, T extends
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
 
-    final MatrixM3x3F m2 = new MatrixM3x3F();
+    final Matrix3x3FType m2 = MatrixHeapArrayM3x3F.newMatrix();
     m2.setR0C0F(2.0f);
 
     Assert.assertEquals(m0.toString(), m1.toString());

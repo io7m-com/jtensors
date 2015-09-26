@@ -16,6 +16,8 @@
 
 package com.io7m.jtensors.parameterized;
 
+import com.io7m.jtensors.Matrix4x4FType;
+
 /**
  * The type of 4x4 matrices with single precision elements.
  *
@@ -26,7 +28,9 @@ package com.io7m.jtensors.parameterized;
  */
 
 public interface PMatrix4x4FType<T0, T1>
-  extends PMatrixWritable4x4FType<T0, T1>, PMatrixReadable4x4FType<T0, T1>
+  extends PMatrixWritable4x4FType<T0, T1>,
+  PMatrixReadable4x4FType<T0, T1>,
+  Matrix4x4FType
 {
   // No extra functions
 }

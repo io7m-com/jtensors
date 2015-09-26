@@ -18,29 +18,29 @@ package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.MatrixM3x3D;
 import com.io7m.jtensors.MatrixReadable3x3DType;
-import com.io7m.jtensors.parameterized.PMatrixM3x3D;
-import com.io7m.jtensors.tests.MatrixDirect3x3DContract;
-import org.junit.Assert;
+import com.io7m.jtensors.parameterized.PMatrix3x3DType;
+import com.io7m.jtensors.parameterized.PMatrixHeapArrayM3x3D;
+import com.io7m.jtensors.tests.Matrix3x3DContract;
 
-public final class PMatrixM3x3DUntypedTest<T0, T1>
-  extends MatrixDirect3x3DContract<PMatrixM3x3D<T0, T1>>
+public final class PMatrixHeapArrayM3x3DUntypedTest<T0, T1>
+  extends Matrix3x3DContract<PMatrix3x3DType<T0, T1>>
 {
-  @Override protected PMatrixM3x3D<T0, T1> newMatrix()
+  @Override protected PMatrix3x3DType<T0, T1> newMatrix()
   {
-    return new PMatrixM3x3D<T0, T1>();
+    return PMatrixHeapArrayM3x3D.newMatrix();
   }
 
-  @Override protected PMatrixM3x3D<T0, T1> newMatrixFrom(
-    final MatrixReadable3x3DType source)
+  @Override protected PMatrix3x3DType<T0, T1> newMatrixFrom(
+    final MatrixReadable3x3DType m)
   {
-    final PMatrixM3x3D<T0, T1> m = new PMatrixM3x3D<T0, T1>();
-    MatrixM3x3D.copy(source, m);
-    return m;
+    final PMatrix3x3DType<T0, T1> r = PMatrixHeapArrayM3x3D.newMatrix();
+    MatrixM3x3D.copy(m, r);
+    return r;
   }
 
   @Override
-  protected void checkDirectBufferInvariants(final PMatrixM3x3D<T0, T1> m)
+  protected void checkDirectBufferInvariants(final PMatrix3x3DType<T0, T1> m)
   {
-    Assert.assertEquals(0L, (long) m.getDirectDoubleBuffer().position());
+    // Nothing
   }
 }

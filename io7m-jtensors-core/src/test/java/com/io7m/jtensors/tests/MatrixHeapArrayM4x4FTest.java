@@ -16,25 +16,26 @@
 
 package com.io7m.jtensors.tests;
 
-import com.io7m.jtensors.MatrixM4x4D;
-import com.io7m.jtensors.MatrixReadable4x4DType;
-import org.junit.Assert;
+import com.io7m.jtensors.Matrix4x4FType;
+import com.io7m.jtensors.MatrixHeapArrayM4x4F;
+import com.io7m.jtensors.MatrixReadable4x4FType;
 
-public final class MatrixM4x4DTest extends MatrixDirect4x4DContract<MatrixM4x4D>
+public final class MatrixHeapArrayM4x4FTest
+  extends Matrix4x4FContract<Matrix4x4FType>
 {
-  @Override protected MatrixM4x4D newMatrix()
+  @Override protected Matrix4x4FType newMatrix()
   {
-    return new MatrixM4x4D();
+    return MatrixHeapArrayM4x4F.newMatrix();
   }
 
-  @Override protected MatrixM4x4D newMatrixFrom(
-    final MatrixReadable4x4DType source)
+  @Override protected Matrix4x4FType newMatrixFrom(
+    final MatrixReadable4x4FType source)
   {
-    return new MatrixM4x4D(source);
+    return MatrixHeapArrayM4x4F.newMatrixFrom(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(final MatrixM4x4D m)
+  @Override protected void checkDirectBufferInvariants(final Matrix4x4FType m)
   {
-    Assert.assertEquals(0L, (long) m.getDirectDoubleBuffer().position());
+    // Nothing required
   }
 }

@@ -16,11 +16,7 @@
 
 package com.io7m.jtensors;
 
-import com.io7m.jnull.Nullable;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
+import com.io7m.junreachable.UnreachableCodeException;
 
 //@formatter:off
 
@@ -50,68 +46,11 @@ import java.nio.DoubleBuffer;
 
 //@formatter:on
 
-public final class MatrixM3x3D implements MatrixDirect3x3DType
+public final class MatrixM3x3D
 {
-  private static final int VIEW_BYTES;
-  private static final int VIEW_COLS;
-  private static final int VIEW_ELEMENT_SIZE;
-  private static final int VIEW_ELEMENTS;
-  private static final int VIEW_ROWS;
-
-  static {
-    VIEW_ROWS = 3;
-    VIEW_COLS = 3;
-    VIEW_ELEMENT_SIZE = 8;
-    VIEW_ELEMENTS = MatrixM3x3D.VIEW_ROWS * MatrixM3x3D.VIEW_COLS;
-    VIEW_BYTES = MatrixM3x3D.VIEW_ELEMENTS * MatrixM3x3D.VIEW_ELEMENT_SIZE;
-  }
-
-  private final ByteBuffer   data;
-  private final DoubleBuffer view;
-
-  /**
-   * Construct a new identity matrix.
-   */
-
-  public MatrixM3x3D()
+  private MatrixM3x3D()
   {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3D.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    b.order(order);
-    this.data = b;
-
-    final DoubleBuffer v = this.data.asDoubleBuffer();
-    assert v != null;
-    this.view = v;
-
-    MatrixM3x3D.setIdentity(this);
-  }
-
-  /**
-   * Construct a new copy of the given matrix.
-   *
-   * @param source The source matrix
-   */
-
-  public MatrixM3x3D(
-    final MatrixReadable3x3DType source)
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM3x3D.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    b.order(order);
-    this.data = b;
-
-    final DoubleBuffer v = this.data.asDoubleBuffer();
-    assert v != null;
-
-    this.view = v;
-    this.view.clear();
-
-    MatrixM3x3D.copy(source, this);
+    throw new UnreachableCodeException();
   }
 
   /**
@@ -264,16 +203,6 @@ public final class MatrixM3x3D implements MatrixDirect3x3DType
     return out;
   }
 
-  private static int columnCheck(
-    final int column)
-  {
-    if ((column < 0) || (column >= MatrixM3x3D.VIEW_COLS)) {
-      throw new IndexOutOfBoundsException(
-        "column must be in the range 0 <= column < " + MatrixM3x3D.VIEW_COLS);
-    }
-    return column;
-  }
-
   /**
    * Copy the contents of the matrix {@code input} to the matrix {@code output},
    * completely replacing all elements.
@@ -410,30 +339,6 @@ public final class MatrixM3x3D implements MatrixDirect3x3DType
     return out;
   }
 
-  private static int indexChecked(
-    final int row,
-    final int column)
-  {
-    return MatrixM3x3D.indexUnsafe(
-      MatrixM3x3D.rowCheck(row), MatrixM3x3D.columnCheck(column));
-  }
-
-  /**
-   * <p> The main function that indexes into the buffer that backs the array.
-   * The body of this function decides on how elements are stored. This
-   * implementation chooses to store values in column-major format as this
-   * allows matrices to be sent directly to OpenGL without conversion. </p> <p>
-   * (row * 3) + column, corresponds to row-major storage. (column * 3) + row,
-   * corresponds to column-major (OpenGL) storage. </p>
-   */
-
-  private static int indexUnsafe(
-    final int row,
-    final int column)
-  {
-    return (column * 3) + row;
-  }
-
   /**
    * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
    * to {@code out}. The function returns {@code Some(out)} iff it was possible
@@ -488,7 +393,7 @@ public final class MatrixM3x3D implements MatrixDirect3x3DType
     final double r2c1 = (orig_r0c1 * orig_r2c0) - (orig_r0c0 * orig_r2c1);
     final double r2c2 = (orig_r0c0 * orig_r1c1) - (orig_r0c1 * orig_r1c0);
 
-    final MatrixM3x3D temp = c.m3a;
+    final Matrix3x3DType temp = c.m3a;
 
     temp.setR0C0D(r0c0);
     temp.setR0C1D(r0c1);
@@ -867,9 +772,9 @@ public final class MatrixM3x3D implements MatrixDirect3x3DType
   private static int rowCheck(
     final int row)
   {
-    if ((row < 0) || (row >= MatrixM3x3D.VIEW_ROWS)) {
+    if ((row < 0) || (row >= 3)) {
       throw new IndexOutOfBoundsException(
-        "row must be in the range 0 <= row < " + MatrixM3x3D.VIEW_ROWS);
+        "row must be in the range 0 <= row < 3");
     }
     return row;
   }
@@ -1153,242 +1058,6 @@ public final class MatrixM3x3D implements MatrixDirect3x3DType
     return m;
   }
 
-  @Override public boolean equals(
-    final @Nullable Object obj)
-  {
-    if (this == obj) {
-      return true;
-    }
-    if (obj == null) {
-      return false;
-    }
-    if (this.getClass() != obj.getClass()) {
-      return false;
-    }
-    final MatrixM3x3D other = (MatrixM3x3D) obj;
-
-    for (int index = 0; index < MatrixM3x3D.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  @Override public DoubleBuffer getDirectDoubleBuffer()
-  {
-    return this.view;
-  }
-
-  @Override public <V extends VectorWritable3DType> void getRow3D(
-    final int row,
-    final V out)
-  {
-    MatrixM3x3D.rowCheck(row);
-    this.getRow3DUnsafe(row, out);
-  }
-
-  @Override public <V extends VectorWritable3DType> void getRow3DUnsafe(
-    final int row,
-    final V out)
-  {
-    final double x = this.view.get(MatrixM3x3D.indexUnsafe(row, 0));
-    final double y = this.view.get(MatrixM3x3D.indexUnsafe(row, 1));
-    final double z = this.view.get(MatrixM3x3D.indexUnsafe(row, 2));
-    out.set3D(x, y, z);
-  }
-
-  @Override public double getR0C2D()
-  {
-    return this.view.get(MatrixM3x3D.indexUnsafe(0, 2));
-  }
-
-  @Override public void setR0C2D(final double x)
-  {
-    this.view.put(MatrixM3x3D.indexUnsafe(0, 2), x);
-  }
-
-  @Override public void setRowWith3D(
-    final int row,
-    final VectorReadable3DType v)
-  {
-    MatrixM3x3D.rowCheck(row);
-    this.setRowWith3DUnsafe(row, v);
-  }
-
-  @Override public void setRowWith3DUnsafe(
-    final int row,
-    final VectorReadable3DType v)
-  {
-    this.view.put(MatrixM3x3D.indexUnsafe(row, 0), v.getXD());
-    this.view.put(MatrixM3x3D.indexUnsafe(row, 1), v.getYD());
-    this.view.put(MatrixM3x3D.indexUnsafe(row, 2), v.getZD());
-  }
-
-  @Override public double getR1C2D()
-  {
-    return this.view.get(MatrixM3x3D.indexUnsafe(1, 2));
-  }
-
-  @Override public void setR1C2D(final double x)
-  {
-    this.view.put(MatrixM3x3D.indexUnsafe(1, 2), x);
-  }
-
-  @Override public double getR2C0D()
-  {
-    return this.view.get(MatrixM3x3D.indexUnsafe(2, 0));
-  }
-
-  @Override public void setR2C0D(final double x)
-  {
-    this.view.put(MatrixM3x3D.indexUnsafe(2, 0), x);
-  }
-
-  @Override public double getR2C1D()
-  {
-    return this.view.get(MatrixM3x3D.indexUnsafe(2, 1));
-  }
-
-  @Override public void setR2C1D(final double x)
-  {
-    this.view.put(MatrixM3x3D.indexUnsafe(2, 1), x);
-  }
-
-  @Override public double getR2C2D()
-  {
-    return this.view.get(MatrixM3x3D.indexUnsafe(2, 2));
-  }
-
-  @Override public void setR2C2D(final double x)
-  {
-    this.view.put(MatrixM3x3D.indexUnsafe(2, 2), x);
-  }
-
-  @Override public double getRowColumnD(
-    final int row,
-    final int column)
-  {
-    return this.view.get(MatrixM3x3D.indexChecked(row, column));
-  }
-
-  @Override public int hashCode()
-  {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C0D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C1D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C2D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR2C2D(), prime, r);
-
-    return r;
-  }
-
-  @Override public void setRowColumnD(
-    final int row,
-    final int column,
-    final double value)
-  {
-    this.view.put(MatrixM3x3D.indexChecked(row, column), value);
-  }
-
-  @SuppressWarnings("boxing") @Override public String toString()
-  {
-    final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < MatrixM3x3D.VIEW_ROWS; ++row) {
-      final double c0 = this.view.get(MatrixM3x3D.indexUnsafe(row, 0));
-      final double c1 = this.view.get(MatrixM3x3D.indexUnsafe(row, 1));
-      final double c2 = this.view.get(MatrixM3x3D.indexUnsafe(row, 2));
-      final String s = String.format("[%+.15f %+.15f %+.15f]\n", c0, c1, c2);
-      builder.append(s);
-    }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
-  }
-
-  @Override public <V extends VectorWritable2DType> void getRow2D(
-    final int row,
-    final V out)
-  {
-    MatrixM3x3D.rowCheck(row);
-    this.getRow2DUnsafe(row, out);
-  }
-
-  @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
-    final int row,
-    final V out)
-  {
-    final double x = this.view.get(MatrixM3x3D.indexUnsafe(row, 0));
-    final double y = this.view.get(MatrixM3x3D.indexUnsafe(row, 1));
-    out.set2D(x, y);
-  }
-
-  @Override public double getR0C0D()
-  {
-    return this.view.get(MatrixM3x3D.indexUnsafe(0, 0));
-  }
-
-  @Override public void setR0C0D(final double x)
-  {
-    this.view.put(MatrixM3x3D.indexUnsafe(0, 0), x);
-  }
-
-  @Override public void setRowWith2D(
-    final int row,
-    final VectorReadable2DType v)
-  {
-    MatrixM3x3D.rowCheck(row);
-    this.setRowWith2DUnsafe(row, v);
-  }
-
-  @Override public void setRowWith2DUnsafe(
-    final int row,
-    final VectorReadable2DType v)
-  {
-    this.view.put(MatrixM3x3D.indexUnsafe(row, 0), v.getXD());
-    this.view.put(MatrixM3x3D.indexUnsafe(row, 1), v.getYD());
-  }
-
-  @Override public double getR1C0D()
-  {
-    return this.view.get(MatrixM3x3D.indexUnsafe(1, 0));
-  }
-
-  @Override public void setR1C0D(final double x)
-  {
-    this.view.put(MatrixM3x3D.indexUnsafe(1, 0), x);
-  }
-
-  @Override public double getR0C1D()
-  {
-    return this.view.get(MatrixM3x3D.indexUnsafe(0, 1));
-  }
-
-  @Override public void setR0C1D(final double x)
-  {
-    this.view.put(MatrixM3x3D.indexUnsafe(0, 1), x);
-  }
-
-  @Override public double getR1C1D()
-  {
-    return this.view.get(MatrixM3x3D.indexUnsafe(1, 1));
-  }
-
-  @Override public void setR1C1D(final double x)
-  {
-    this.view.put(MatrixM3x3D.indexUnsafe(1, 1), x);
-  }
-
   /**
    * <p>The {@code ContextMM3D} type contains the minimum storage required for
    * all of the functions of the {@code MatrixM3x3D} class.</p>
@@ -1408,10 +1077,10 @@ public final class MatrixM3x3D implements MatrixDirect3x3DType
 
   public static final class ContextMM3D
   {
-    private final MatrixM3x3D m3a = new MatrixM3x3D();
-    private final VectorM3D   v3a = new VectorM3D();
-    private final VectorM3D   v3b = new VectorM3D();
-    private final VectorM3D   v3c = new VectorM3D();
+    private final Matrix3x3DType m3a = MatrixHeapArrayM3x3D.newMatrix();
+    private final VectorM3D      v3a = new VectorM3D();
+    private final VectorM3D      v3b = new VectorM3D();
+    private final VectorM3D      v3c = new VectorM3D();
 
     /**
      * Construct a new context.

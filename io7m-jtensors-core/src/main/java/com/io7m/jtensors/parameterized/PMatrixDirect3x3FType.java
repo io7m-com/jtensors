@@ -19,8 +19,16 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixDirect3x3FType;
 
 /**
- * The type of 3x3 matrices with single precision elements that are backed by
- * direct byte buffers.
+ * <p>The type of 3x3 matrices with single precision elements that are backed by
+ * direct byte buffers.</p>
+ *
+ * <p>Values of type {@code PMatrixDirect3x3FType} are backed by direct memory,
+ * with the rows and columns of the matrices being stored in column-major
+ * format. This allows the matrices to be passed to OpenGL directly, without
+ * requiring transposition.</p>
+ *
+ * <p>Values of this type cannot be accessed safely from multiple threads
+ * without explicit synchronization.</p>
  *
  * @param <T0> A phantom type parameter
  * @param <T1> A phantom type parameter

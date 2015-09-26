@@ -16,11 +16,13 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import com.io7m.jtensors.MatrixM3x3F;
+import com.io7m.jtensors.Matrix3x3FType;
+import com.io7m.jtensors.MatrixHeapArrayM3x3F;
 import com.io7m.jtensors.VectorI3F;
 import com.io7m.jtensors.VectorM3F;
+import com.io7m.jtensors.parameterized.PMatrix3x3FType;
+import com.io7m.jtensors.parameterized.PMatrixHeapArrayM3x3F;
 import com.io7m.jtensors.parameterized.PMatrixI3x3F;
-import com.io7m.jtensors.parameterized.PMatrixM3x3F;
 import com.io7m.jtensors.parameterized.PMatrixReadable3x3FType;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,7 +32,7 @@ public final class PMatrixI3x3FTest<T0, T1>
 {
   @Test public void testEquals()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 3; ++row) {
@@ -70,7 +72,7 @@ public final class PMatrixI3x3FTest<T0, T1>
 
   @Test public void testFromColumns()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
 
     m0.setR0C0F(0.0f);
     m0.setR1C0F(0.1f);
@@ -98,7 +100,7 @@ public final class PMatrixI3x3FTest<T0, T1>
 
   @Test public void testFromRows()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
 
     m0.setR0C0F(0.0f);
     m0.setR1C0F(0.1f);
@@ -134,7 +136,7 @@ public final class PMatrixI3x3FTest<T0, T1>
 
   @Test public void testIdentity()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
     final PMatrixI3x3F<T0, T1> im0 = PMatrixI3x3F.identity();
     final PMatrixI3x3F<T0, T1> im1 = PMatrixI3x3F.newFromReadableUntyped(m0);
     Assert.assertEquals(im1, im0);
@@ -142,8 +144,8 @@ public final class PMatrixI3x3FTest<T0, T1>
 
   @Test public void testMakeMatrix3x3FUntyped()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
-    final MatrixM3x3F m1 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
+    final Matrix3x3FType m1 = MatrixHeapArrayM3x3F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 3; ++row) {
@@ -160,8 +162,8 @@ public final class PMatrixI3x3FTest<T0, T1>
 
   @Test public void testMakeMatrix3x3F()
   {
-    final PMatrixM3x3F<T0, T1> m0 = new PMatrixM3x3F<T0, T1>();
-    final PMatrixM3x3F<T0, T1> m1 = new PMatrixM3x3F<T0, T1>();
+    final PMatrix3x3FType<T0, T1> m0 = PMatrixHeapArrayM3x3F.newMatrix();
+    final PMatrix3x3FType<T0, T1> m1 = PMatrixHeapArrayM3x3F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 3; ++row) {
@@ -178,8 +180,8 @@ public final class PMatrixI3x3FTest<T0, T1>
 
   @Test public void testToString()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
-    final MatrixM3x3F m1 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
+    final Matrix3x3FType m1 = MatrixHeapArrayM3x3F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 3; ++row) {
@@ -206,7 +208,7 @@ public final class PMatrixI3x3FTest<T0, T1>
     return PMatrixI3x3F.newFromReadable(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(
+  @Override protected void checkDirectBufferInvariantsWildcard(
     final PMatrixReadable3x3FType<?, ?> m)
   {
     // Nothing required

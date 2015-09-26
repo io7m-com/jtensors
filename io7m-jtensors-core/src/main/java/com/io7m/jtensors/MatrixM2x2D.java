@@ -16,27 +16,13 @@
 
 package com.io7m.jtensors;
 
-import com.io7m.jnull.Nullable;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
+import com.io7m.junreachable.UnreachableCodeException;
 
 //@formatter:off
 
 /**
  * <p>
- * A 2x2 mutable matrix type with double precision elements.
- * </p>
- * <p>
- * Values of type {@code MatrixM2x2D} are backed by direct memory, with the
- * rows and columns of the matrices being stored in column-major format. This
- * allows the matrices to be passed to OpenGL directly, without requiring
- * transposition.
- * </p>
- * <p>
- * Values of this type cannot be accessed safely from multiple threads
- * without explicit synchronization.
+ * Functions over 2x2 mutable matrix types with double precision elements.
  * </p>
  * <p>
  * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed
@@ -50,72 +36,21 @@ import java.nio.DoubleBuffer;
 
 //@formatter:on
 
-public final class MatrixM2x2D implements MatrixDirect2x2DType
+public final class MatrixM2x2D
 {
-  private static final int VIEW_BYTES;
-  private static final int VIEW_COLS;
-  private static final int VIEW_ELEMENT_SIZE;
-  private static final int VIEW_ELEMENTS;
-  private static final int VIEW_ROWS;
-
-  static {
-    VIEW_ROWS = 2;
-    VIEW_COLS = 2;
-    VIEW_ELEMENT_SIZE = 8;
-    VIEW_ELEMENTS = MatrixM2x2D.VIEW_ROWS * MatrixM2x2D.VIEW_COLS;
-    VIEW_BYTES = MatrixM2x2D.VIEW_ELEMENTS * MatrixM2x2D.VIEW_ELEMENT_SIZE;
+  private MatrixM2x2D()
+  {
+    throw new UnreachableCodeException();
   }
 
-  private final ByteBuffer   data;
-  private final DoubleBuffer view;
-
-  /**
-   * Construct a new matrix, initialized to the identity matrix.
-   */
-
-  public MatrixM2x2D()
+  private static int checkRow(
+    final int row)
   {
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM2x2D.VIEW_BYTES);
-    assert b != null;
-    b.order(order);
-
-    final DoubleBuffer v = b.asDoubleBuffer();
-    assert v != null;
-
-    this.data = b;
-    this.view = v;
-    this.view.clear();
-
-    MatrixM2x2D.setIdentity(this);
-  }
-
-  /**
-   * Construct a new copy of the given matrix.
-   *
-   * @param source The source matrix
-   */
-
-  public MatrixM2x2D(
-    final MatrixReadable2x2DType source)
-  {
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM2x2D.VIEW_BYTES);
-    assert b != null;
-    b.order(order);
-
-    final DoubleBuffer d = b.asDoubleBuffer();
-    assert d != null;
-
-    this.data = b;
-    this.view = d;
-    this.view.clear();
-
-    MatrixM2x2D.copy(source, this);
+    if ((row < 0) || (row >= 2)) {
+      throw new IndexOutOfBoundsException(
+        "row must be in the range 0 <= row < 2");
+    }
+    return row;
   }
 
   /**
@@ -196,9 +131,9 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
   {
     return MatrixM2x2D.addRowScaledUnsafe(
       m,
-      MatrixM2x2D.rowCheck(row_a),
-      MatrixM2x2D.rowCheck(row_b),
-      MatrixM2x2D.rowCheck(row_c),
+      MatrixM2x2D.checkRow(row_a),
+      MatrixM2x2D.checkRow(row_b),
+      MatrixM2x2D.checkRow(row_c),
       r,
       c.v2a,
       c.v2b,
@@ -251,16 +186,6 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
     VectorM2D.addScaledInPlace(va, vb, r);
     out.setRowWith2DUnsafe(row_c, va);
     return out;
-  }
-
-  private static int columnCheck(
-    final int column)
-  {
-    if ((column < 0) || (column > 1)) {
-      throw new IndexOutOfBoundsException(
-        "column must be in the range 0 <= column < 2");
-    }
-    return column;
   }
 
   /**
@@ -330,8 +255,8 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
   {
     return MatrixM2x2D.exchangeRowsUnsafe(
       m,
-      MatrixM2x2D.rowCheck(row_a),
-      MatrixM2x2D.rowCheck(row_b),
+      MatrixM2x2D.checkRow(row_a),
+      MatrixM2x2D.checkRow(row_b),
       c.v2a,
       c.v2b,
       out);
@@ -376,30 +301,6 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
     out.setRowWith2DUnsafe(row_a, vb);
     out.setRowWith2DUnsafe(row_b, va);
     return out;
-  }
-
-  private static int indexChecked(
-    final int row,
-    final int column)
-  {
-    return MatrixM2x2D.indexUnsafe(
-      MatrixM2x2D.rowCheck(row), MatrixM2x2D.columnCheck(column));
-  }
-
-  /**
-   * <p> The main function that indexes into the buffer that backs the array.
-   * The body of this function decides on how elements are stored. This
-   * implementation chooses to store values in column-major format as this
-   * allows matrices to be sent directly to OpenGL without conversion. </p> <p>
-   * (row * 2) + column, corresponds to row-major storage. (column * 2) + row,
-   * corresponds to column-major (OpenGL) storage. </p>
-   */
-
-  private static int indexUnsafe(
-    final int row,
-    final int column)
-  {
-    return (column * 2) + row;
   }
 
   /**
@@ -554,16 +455,6 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
     return out;
   }
 
-  private static int rowCheck(
-    final int row)
-  {
-    if ((row < 0) || (row > 1)) {
-      throw new IndexOutOfBoundsException(
-        "row must be in the range 0 <= row < 2");
-    }
-    return row;
-  }
-
   /**
    * Scale all elements of the matrix {@code m} by the scaling value {@code r},
    * saving the result in {@code out}.
@@ -632,7 +523,7 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
     final M out)
   {
     return MatrixM2x2D.scaleRowUnsafe(
-      m, MatrixM2x2D.rowCheck(row), r, c.v2a, out);
+      m, MatrixM2x2D.checkRow(row), r, c.v2a, out);
   }
 
   /**
@@ -659,7 +550,7 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
     final double r)
   {
     return MatrixM2x2D.scaleRowUnsafe(
-      m, MatrixM2x2D.rowCheck(row), r, c.v2a, m);
+      m, MatrixM2x2D.checkRow(row), r, c.v2a, m);
   }
 
   private static <M extends MatrixWritable2x2DType> M scaleRowUnsafe(
@@ -782,150 +673,6 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
     return m;
   }
 
-  @Override public boolean equals(
-    final @Nullable Object obj)
-  {
-    if (this == obj) {
-      return true;
-    }
-    if (obj == null) {
-      return false;
-    }
-    if (this.getClass() != obj.getClass()) {
-      return false;
-    }
-
-    final MatrixM2x2D other = (MatrixM2x2D) obj;
-    for (int index = 0; index < MatrixM2x2D.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  @Override public DoubleBuffer getDirectDoubleBuffer()
-  {
-    return this.view;
-  }
-
-  @Override public <V extends VectorWritable2DType> void getRow2D(
-    final int row,
-    final V out)
-  {
-    MatrixM2x2D.rowCheck(row);
-    this.getRow2DUnsafe(row, out);
-  }
-
-  @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
-    final int row,
-    final V out)
-  {
-    final double x = this.view.get(MatrixM2x2D.indexUnsafe(row, 0));
-    final double y = this.view.get(MatrixM2x2D.indexUnsafe(row, 1));
-    out.set2D(x, y);
-  }
-
-  @Override public double getR0C0D()
-  {
-    return this.view.get(MatrixM2x2D.indexUnsafe(0, 0));
-  }
-
-  @Override public void setR0C0D(final double x)
-  {
-    this.view.put(MatrixM2x2D.indexUnsafe(0, 0), x);
-  }
-
-  @Override public void setRowWith2D(
-    final int row,
-    final VectorReadable2DType v)
-  {
-    MatrixM2x2D.rowCheck(row);
-    this.setRowWith2DUnsafe(row, v);
-  }
-
-  @Override public void setRowWith2DUnsafe(
-    final int row,
-    final VectorReadable2DType v)
-  {
-    this.view.put(MatrixM2x2D.indexUnsafe(row, 0), v.getXD());
-    this.view.put(MatrixM2x2D.indexUnsafe(row, 1), v.getYD());
-  }
-
-  @Override public double getR1C0D()
-  {
-    return this.view.get(MatrixM2x2D.indexUnsafe(1, 0));
-  }
-
-  @Override public void setR1C0D(final double x)
-  {
-    this.view.put(MatrixM2x2D.indexUnsafe(1, 0), x);
-  }
-
-  @Override public double getR0C1D()
-  {
-    return this.view.get(MatrixM2x2D.indexUnsafe(0, 1));
-  }
-
-  @Override public void setR0C1D(final double x)
-  {
-    this.view.put(MatrixM2x2D.indexUnsafe(0, 1), x);
-  }
-
-  @Override public double getR1C1D()
-  {
-    return this.view.get(MatrixM2x2D.indexUnsafe(1, 1));
-  }
-
-  @Override public void setR1C1D(final double x)
-  {
-    this.view.put(MatrixM2x2D.indexUnsafe(1, 1), x);
-  }
-
-  @Override public double getRowColumnD(
-    final int row,
-    final int column)
-  {
-    return this.view.get(MatrixM2x2D.indexChecked(row, column));
-  }
-
-  @Override public int hashCode()
-  {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
-
-    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
-    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
-
-    return r;
-  }
-
-  @Override public void setRowColumnD(
-    final int row,
-    final int column,
-    final double value)
-  {
-    this.view.put(MatrixM2x2D.indexChecked(row, column), value);
-  }
-
-  @SuppressWarnings("boxing") @Override public String toString()
-  {
-    final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < MatrixM2x2D.VIEW_ROWS; ++row) {
-      final double c0 = this.view.get(MatrixM2x2D.indexUnsafe(row, 0));
-      final double c1 = this.view.get(MatrixM2x2D.indexUnsafe(row, 1));
-      final String s = String.format("[%+.15f %+.15f]\n", c0, c1);
-      builder.append(s);
-    }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
-  }
-
   /**
    * <p>The {@code ContextMM2D} type contains the minimum storage required for
    * all of the functions of the {@code MatrixM2x2D} class.</p>
@@ -945,8 +692,8 @@ public final class MatrixM2x2D implements MatrixDirect2x2DType
 
   public static final class ContextMM2D
   {
-    private final VectorM2D   v2a = new VectorM2D();
-    private final VectorM2D   v2b = new VectorM2D();
+    private final VectorM2D v2a = new VectorM2D();
+    private final VectorM2D v2b = new VectorM2D();
 
     /**
      * Construct a new context.

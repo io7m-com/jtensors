@@ -19,17 +19,17 @@ package com.io7m.jtensors.parameterized;
 import com.io7m.jtensors.MatrixDirectBufferedDType;
 
 /**
- * The type of direct-memory backed matrices with double-precision elements.
+ * <p>The type of direct-memory backed matrices with double-precision
+ * elements.</p>
  *
- * @param <T>
- *          A phantom type parameter.
- * @param <U>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter.
+ * @param <U> A phantom type parameter.
+ *
  * @since 7.0.0
  */
 
-public interface PMatrixDirectBufferedDType<T, U> extends
-  MatrixDirectBufferedDType
+public interface PMatrixDirectBufferedDType<T, U>
+  extends MatrixDirectBufferedDType
 {
   // No extra functions.
 }

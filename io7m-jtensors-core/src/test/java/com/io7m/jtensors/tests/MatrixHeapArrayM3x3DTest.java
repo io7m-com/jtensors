@@ -16,25 +16,26 @@
 
 package com.io7m.jtensors.tests;
 
-import com.io7m.jtensors.MatrixM2x2F;
-import com.io7m.jtensors.MatrixReadable2x2FType;
-import org.junit.Assert;
+import com.io7m.jtensors.Matrix3x3DType;
+import com.io7m.jtensors.MatrixHeapArrayM3x3D;
+import com.io7m.jtensors.MatrixReadable3x3DType;
 
-public final class MatrixM2x2FTest extends MatrixDirect2x2FContract<MatrixM2x2F>
+public final class MatrixHeapArrayM3x3DTest
+  extends Matrix3x3DContract<Matrix3x3DType>
 {
-  @Override protected MatrixM2x2F newMatrix()
+  @Override protected Matrix3x3DType newMatrix()
   {
-    return new MatrixM2x2F();
+    return MatrixHeapArrayM3x3D.newMatrix();
   }
 
-  @Override protected MatrixM2x2F newMatrixFrom(
-    final MatrixReadable2x2FType source)
+  @Override protected Matrix3x3DType newMatrixFrom(
+    final MatrixReadable3x3DType source)
   {
-    return new MatrixM2x2F(source);
+    return MatrixHeapArrayM3x3D.newMatrixFrom(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(final MatrixM2x2F m)
+  @Override protected void checkDirectBufferInvariants(final Matrix3x3DType m)
   {
-    Assert.assertEquals(0L, (long) m.getDirectFloatBuffer().position());
+    // Nothing required
   }
 }

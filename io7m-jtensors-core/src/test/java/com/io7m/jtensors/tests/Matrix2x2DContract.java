@@ -243,7 +243,10 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
-    Assert.assertTrue(m0.equals(m1));
+    Assert.assertEquals(m0, m1);
+    Assert.assertNotSame(m0, m1);
+    this.checkDirectBufferInvariants(m0);
+    this.checkDirectBufferInvariants(m1);
   }
 
   @Test public final void testEqualsNeqExhaustive()

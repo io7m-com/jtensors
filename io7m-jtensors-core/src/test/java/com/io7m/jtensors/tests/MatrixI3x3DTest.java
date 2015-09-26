@@ -16,8 +16,9 @@
 
 package com.io7m.jtensors.tests;
 
+import com.io7m.jtensors.Matrix3x3DType;
+import com.io7m.jtensors.MatrixHeapArrayM3x3D;
 import com.io7m.jtensors.MatrixI3x3D;
-import com.io7m.jtensors.MatrixM3x3D;
 import com.io7m.jtensors.MatrixReadable3x3DType;
 import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorM3D;
@@ -29,7 +30,7 @@ public final class MatrixI3x3DTest
 {
   @Test public void testEquals()
   {
-    final MatrixM3x3D m0 = new MatrixM3x3D();
+    final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 3; ++row) {
@@ -69,7 +70,7 @@ public final class MatrixI3x3DTest
 
   @Test public void testFromColumns()
   {
-    final MatrixM3x3D m0 = new MatrixM3x3D();
+    final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
 
     m0.setR0C0D(0.0f);
     m0.setR1C0D(0.1f);
@@ -97,7 +98,7 @@ public final class MatrixI3x3DTest
 
   @Test public void testFromRows()
   {
-    final MatrixM3x3D m0 = new MatrixM3x3D();
+    final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
 
     m0.setR0C0D(0.0f);
     m0.setR1C0D(0.1f);
@@ -133,7 +134,7 @@ public final class MatrixI3x3DTest
 
   @Test public void testIdentity()
   {
-    final MatrixM3x3D m0 = new MatrixM3x3D();
+    final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
     final MatrixI3x3D im0 = MatrixI3x3D.identity();
     final MatrixI3x3D im1 = MatrixI3x3D.newFromReadable(m0);
     Assert.assertEquals(im1, im0);
@@ -141,8 +142,8 @@ public final class MatrixI3x3DTest
 
   @Test public void testMakeMatrix3x3D()
   {
-    final MatrixM3x3D m0 = new MatrixM3x3D();
-    final MatrixM3x3D m1 = new MatrixM3x3D();
+    final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
+    final Matrix3x3DType m1 = MatrixHeapArrayM3x3D.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 3; ++row) {
@@ -153,14 +154,14 @@ public final class MatrixI3x3DTest
     }
 
     final MatrixI3x3D im = MatrixI3x3D.newFromReadable(m0);
-    im.makeMatrixM3x3D(m1);
+    im.makeMatrix3x3D(m1);
     Assert.assertEquals(m0, m1);
   }
 
   @Test public void testToString()
   {
-    final MatrixM3x3D m0 = new MatrixM3x3D();
-    final MatrixM3x3D m1 = new MatrixM3x3D();
+    final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
+    final Matrix3x3DType m1 = MatrixHeapArrayM3x3D.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 3; ++row) {

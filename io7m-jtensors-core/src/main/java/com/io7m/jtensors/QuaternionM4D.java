@@ -320,9 +320,9 @@ public final class QuaternionM4D
     final VectorReadable3DType up,
     final Q q)
   {
-    final MatrixM3x3D m = context.getM3A();
-    final VectorM3D t = context.getV3A();
-    final MatrixM3x3D.ContextMM3D mc = context.getContext();
+    final Matrix3x3DType m = context.m3a;
+    final VectorM3D t = context.v3a;
+    final MatrixM3x3D.ContextMM3D mc = context.m_context;
 
     MatrixM3x3D.lookAt(mc, origin, target, up, m, t);
     QuaternionM4D.makeFromRotationMatrix3x3(m, q);
@@ -1089,7 +1089,8 @@ public final class QuaternionM4D
   {
     private final MatrixM3x3D.ContextMM3D m_context =
       new MatrixM3x3D.ContextMM3D();
-    private final MatrixM3x3D             m3a       = new MatrixM3x3D();
+    private final Matrix3x3DType          m3a       =
+      MatrixHeapArrayM3x3D.newMatrix();
     private final VectorM3D               v3a       = new VectorM3D();
     private final QuaternionM4D           qa        = new QuaternionM4D();
     private final QuaternionM4D           qb        = new QuaternionM4D();
@@ -1101,21 +1102,6 @@ public final class QuaternionM4D
     public ContextQM4D()
     {
 
-    }
-
-    final MatrixM3x3D.ContextMM3D getContext()
-    {
-      return this.m_context;
-    }
-
-    final MatrixM3x3D getM3A()
-    {
-      return this.m3a;
-    }
-
-    final VectorM3D getV3A()
-    {
-      return this.v3a;
     }
   }
 }

@@ -17,9 +17,9 @@
 package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
-import com.io7m.jfunctional.OptionType;
-import com.io7m.jfunctional.Some;
+import com.io7m.jtensors.Matrix3x3DType;
 import com.io7m.jtensors.Matrix4x4DType;
+import com.io7m.jtensors.MatrixHeapArrayM3x3D;
 import com.io7m.jtensors.MatrixM3x3D;
 import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.MatrixReadable4x4DType;
@@ -523,7 +523,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     {
       final T m0 = this.newMatrix();
       final T m1 = this.newMatrix();
-      Assert.assertTrue(m0.equals(m1));
+      Assert.assertEquals(m0, m1);
+      Assert.assertNotSame(m0, m1);
       this.checkDirectBufferInvariants(m0);
     }
   }
@@ -3443,7 +3444,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
 
-    final MatrixM3x3D m3 = new MatrixM3x3D();
+    final Matrix3x3DType m3 = MatrixHeapArrayM3x3D.newMatrix();
     final T m4 = this.newMatrix();
     final VectorI3D v = new VectorI3D(3.0, 7.0, 0.0);
     final VectorM3D v3i = new VectorM3D(1.0, 1.0, 1.0);

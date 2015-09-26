@@ -252,7 +252,7 @@ import java.util.Arrays;
    */
 
   public void makeMatrixM4x4F(
-    final MatrixM4x4F m)
+    final MatrixWritable4x4FType m)
   {
     m.setR0C0F(this.getR0C0F());
     m.setR0C1F(this.getR0C1F());

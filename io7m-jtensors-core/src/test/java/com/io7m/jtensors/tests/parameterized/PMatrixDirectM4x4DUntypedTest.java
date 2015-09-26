@@ -14,26 +14,30 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests;
+package com.io7m.jtensors.tests.parameterized;
 
-import com.io7m.jtensors.MatrixM3x3D;
-import com.io7m.jtensors.MatrixReadable3x3DType;
+import com.io7m.jtensors.MatrixReadable4x4DType;
+import com.io7m.jtensors.parameterized.PMatrixDirect4x4DType;
+import com.io7m.jtensors.parameterized.PMatrixDirectM4x4D;
+import com.io7m.jtensors.tests.MatrixDirect4x4DContract;
 import org.junit.Assert;
 
-public final class MatrixM3x3DTest extends MatrixDirect3x3DContract<MatrixM3x3D>
+public final class PMatrixDirectM4x4DUntypedTest<T0, T1>
+  extends MatrixDirect4x4DContract<PMatrixDirect4x4DType<T0, T1>>
 {
-  @Override protected MatrixM3x3D newMatrix()
+  @Override protected PMatrixDirect4x4DType<T0, T1> newMatrix()
   {
-    return new MatrixM3x3D();
+    return PMatrixDirectM4x4D.newMatrix();
   }
 
-  @Override protected MatrixM3x3D newMatrixFrom(
-    final MatrixReadable3x3DType source)
+  @Override protected PMatrixDirect4x4DType<T0, T1> newMatrixFrom(
+    final MatrixReadable4x4DType source)
   {
-    return new MatrixM3x3D(source);
+    return PMatrixDirectM4x4D.newMatrixFromUntyped(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(final MatrixM3x3D m)
+  @Override
+  protected void checkDirectBufferInvariants(final PMatrixDirect4x4DType<T0, T1> m)
   {
     Assert.assertEquals(0L, (long) m.getDirectDoubleBuffer().position());
   }

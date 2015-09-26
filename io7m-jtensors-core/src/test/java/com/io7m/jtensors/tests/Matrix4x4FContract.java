@@ -18,9 +18,9 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
-import com.io7m.jfunctional.OptionType;
-import com.io7m.jfunctional.Some;
+import com.io7m.jtensors.Matrix3x3FType;
 import com.io7m.jtensors.Matrix4x4FType;
+import com.io7m.jtensors.MatrixHeapArrayM3x3F;
 import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.MatrixM4x4F;
 import com.io7m.jtensors.MatrixReadable4x4FType;
@@ -813,7 +813,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     {
       final T m0 = this.newMatrix();
       final T m1 = this.newMatrix();
-      Assert.assertTrue(m0.equals(m1));
+      Assert.assertEquals(m0, m1);
+      Assert.assertNotSame(m0, m1);
       this.checkDirectBufferInvariants(m0);
     }
   }
@@ -3502,7 +3503,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
   {
     final MatrixM3x3F.ContextMM3F s3 = new MatrixM3x3F.ContextMM3F();
     final MatrixM4x4F.ContextMM4F s4 = new MatrixM4x4F.ContextMM4F();
-    final MatrixM3x3F m3 = new MatrixM3x3F();
+    final Matrix3x3FType m3 = MatrixHeapArrayM3x3F.newMatrix();
     final T m4 = this.newMatrix();
     final VectorI3F v = new VectorI3F(3.0f, 7.0f, 0.0f);
     final VectorM3F v3i = new VectorM3F(1.0F, 1.0F, 1.0F);

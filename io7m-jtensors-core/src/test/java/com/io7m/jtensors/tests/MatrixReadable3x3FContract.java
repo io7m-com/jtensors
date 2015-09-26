@@ -16,8 +16,9 @@
 
 package com.io7m.jtensors.tests;
 
+import com.io7m.jtensors.Matrix3x3FType;
+import com.io7m.jtensors.MatrixHeapArrayM3x3F;
 import com.io7m.jtensors.MatrixI3x3F;
-import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.MatrixReadable3x3FType;
 import com.io7m.jtensors.VectorI4F;
 import com.io7m.jtensors.VectorM2F;
@@ -206,7 +207,7 @@ public abstract class MatrixReadable3x3FContract<T extends
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
 
-    final MatrixM3x3F m2 = new MatrixM3x3F();
+    final Matrix3x3FType m2 = MatrixHeapArrayM3x3F.newMatrix();
     m2.setR0C0F(2.0f);
 
     Assert.assertEquals(m0.toString(), m1.toString());

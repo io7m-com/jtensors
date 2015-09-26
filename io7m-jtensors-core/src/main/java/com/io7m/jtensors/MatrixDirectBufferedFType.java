@@ -19,7 +19,8 @@ package com.io7m.jtensors;
 import java.nio.FloatBuffer;
 
 /**
- * The type of direct-memory backed matrices with single-precision elements.
+ * <p>The type of direct-memory backed matrices with single-precision
+ * elements.</p>
  *
  * @since 7.0.0
  */

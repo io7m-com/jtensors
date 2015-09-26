@@ -16,8 +16,9 @@
 
 package com.io7m.jtensors.tests;
 
+import com.io7m.jtensors.Matrix4x4FType;
+import com.io7m.jtensors.MatrixHeapArrayM4x4F;
 import com.io7m.jtensors.MatrixI4x4F;
-import com.io7m.jtensors.MatrixM4x4F;
 import com.io7m.jtensors.MatrixReadable4x4FType;
 import com.io7m.jtensors.VectorI4F;
 import com.io7m.jtensors.VectorM4F;
@@ -29,7 +30,7 @@ public final class MatrixI4x4FTest
 {
   @Test public void testEquals()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 4; ++row) {
@@ -71,7 +72,7 @@ public final class MatrixI4x4FTest
 
   @Test public void testFromColumns()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
     m0.setR0C0F(0.0f);
     m0.setR1C0F(0.1f);
@@ -108,7 +109,7 @@ public final class MatrixI4x4FTest
 
   @Test public void testFromRows()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
     m0.setR0C0F(0.0f);
     m0.setR1C0F(0.1f);
@@ -161,7 +162,7 @@ public final class MatrixI4x4FTest
 
   @Test public void testIdentity()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
     final MatrixI4x4F im0 = MatrixI4x4F.identity();
     final MatrixI4x4F im1 = MatrixI4x4F.newFromReadable(m0);
     Assert.assertEquals(im1, im0);
@@ -169,8 +170,8 @@ public final class MatrixI4x4FTest
 
   @Test public void testMakeMatrix4x4F()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
-    final MatrixM4x4F m1 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
+    final Matrix4x4FType m1 = MatrixHeapArrayM4x4F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 4; ++row) {
@@ -187,8 +188,8 @@ public final class MatrixI4x4FTest
 
   @Test public void testToString()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
-    final MatrixM4x4F m1 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
+    final Matrix4x4FType m1 = MatrixHeapArrayM4x4F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 4; ++row) {

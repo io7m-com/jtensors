@@ -16,27 +16,13 @@
 
 package com.io7m.jtensors;
 
-import com.io7m.jnull.Nullable;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
+import com.io7m.junreachable.UnreachableCodeException;
 
 //@formatter:off
 
 /**
  * <p>
- * A 2x2 mutable matrix type with single precision elements.
- * </p>
- * <p>
- * Values of type {@code MatrixM2x2F} are backed by direct memory, with the
- * rows and columns of the matrices being stored in column-major format. This
- * allows the matrices to be passed to OpenGL directly, without requiring
- * transposition.
- * </p>
- * <p>
- * Values of this type cannot be accessed safely from multiple threads
- * without explicit synchronization.
+ * Functions over 2x2 mutable matrix types with single precision elements.
  * </p>
  * <p>
  * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed
@@ -50,76 +36,11 @@ import java.nio.FloatBuffer;
 
 //@formatter:on
 
-public final class MatrixM2x2F implements MatrixDirect2x2FType
+public final class MatrixM2x2F
 {
-  private static final int VIEW_BYTES;
-  private static final int VIEW_COLS;
-  private static final int VIEW_ELEMENT_SIZE;
-  private static final int VIEW_ELEMENTS;
-  private static final int VIEW_ROWS;
-
-  static {
-    VIEW_ROWS = 2;
-    VIEW_COLS = 2;
-    VIEW_ELEMENT_SIZE = 4;
-    VIEW_ELEMENTS = MatrixM2x2F.VIEW_ROWS * MatrixM2x2F.VIEW_COLS;
-    VIEW_BYTES = MatrixM2x2F.VIEW_ELEMENTS * MatrixM2x2F.VIEW_ELEMENT_SIZE;
-  }
-
-  @SuppressWarnings("unused") private final ByteBuffer  data;
-  private final                             FloatBuffer view;
-
-  /**
-   * Construct a new identity matrix.
-   */
-
-  public MatrixM2x2F()
+  private MatrixM2x2F()
   {
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM2x2F.VIEW_BYTES);
-    assert b != null;
-
-    b.order(order);
-
-    this.data = b;
-
-    final FloatBuffer v = b.asFloatBuffer();
-    assert v != null;
-
-    this.view = v;
-    this.view.clear();
-
-    MatrixM2x2F.setIdentity(this);
-  }
-
-  /**
-   * Construct a new matrix from the given source matrix.
-   *
-   * @param source The source matrix
-   */
-
-  public MatrixM2x2F(
-    final MatrixReadable2x2FType source)
-  {
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM2x2F.VIEW_BYTES);
-    assert b != null;
-
-    b.order(order);
-
-    this.data = b;
-
-    final FloatBuffer v = b.asFloatBuffer();
-    assert v != null;
-
-    this.view = v;
-    this.view.clear();
-
-    MatrixM2x2F.copy(source, this);
+    throw new UnreachableCodeException();
   }
 
   /**
@@ -204,9 +125,9 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
   {
     return MatrixM2x2F.addRowScaledUnsafe(
       m,
-      MatrixM2x2F.rowCheck(row_a),
-      MatrixM2x2F.rowCheck(row_b),
-      MatrixM2x2F.rowCheck(row_c),
+      MatrixM2x2F.checkRow(row_a),
+      MatrixM2x2F.checkRow(row_b),
+      MatrixM2x2F.checkRow(row_c),
       (double) r,
       c.v2a,
       c.v2b,
@@ -259,16 +180,6 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
     VectorM2F.addScaledInPlace(va, vb, r);
     out.setRowWith2FUnsafe(row_c, va);
     return out;
-  }
-
-  private static int columnCheck(
-    final int column)
-  {
-    if ((column < 0) || (column >= MatrixM2x2F.VIEW_COLS)) {
-      throw new IndexOutOfBoundsException(
-        "column must be in the range 0 <= column < " + MatrixM2x2F.VIEW_COLS);
-    }
-    return column;
   }
 
   /**
@@ -338,8 +249,8 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
   {
     return MatrixM2x2F.exchangeRowsUnsafe(
       m,
-      MatrixM2x2F.rowCheck(row_a),
-      MatrixM2x2F.rowCheck(row_b),
+      MatrixM2x2F.checkRow(row_a),
+      MatrixM2x2F.checkRow(row_b),
       c.v2a,
       c.v2b,
       out);
@@ -384,30 +295,6 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
     out.setRowWith2FUnsafe(row_a, vb);
     out.setRowWith2FUnsafe(row_b, va);
     return out;
-  }
-
-  private static int indexChecked(
-    final int row,
-    final int column)
-  {
-    return MatrixM2x2F.indexUnsafe(
-      MatrixM2x2F.rowCheck(row), MatrixM2x2F.columnCheck(column));
-  }
-
-  /**
-   * <p> The main function that indexes into the buffer that backs the array.
-   * The body of this function decides on how elements are stored. This
-   * implementation chooses to store values in column-major format as this
-   * allows matrices to be sent directly to OpenGL without conversion. </p> <p>
-   * (row * 2) + column, corresponds to row-major storage. (column * 2) + row,
-   * corresponds to column-major (OpenGL) storage. </p>
-   */
-
-  private static int indexUnsafe(
-    final int row,
-    final int column)
-  {
-    return (column * 2) + row;
   }
 
   /**
@@ -560,12 +447,12 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
     return out;
   }
 
-  private static int rowCheck(
+  private static int checkRow(
     final int row)
   {
-    if ((row < 0) || (row >= MatrixM2x2F.VIEW_ROWS)) {
+    if ((row < 0) || (row >= 2)) {
       throw new IndexOutOfBoundsException(
-        "row must be in the range 0 <= row < " + MatrixM2x2F.VIEW_ROWS);
+        "row must be in the range 0 <= row < 2");
     }
     return row;
   }
@@ -638,7 +525,7 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
     final M out)
   {
     return MatrixM2x2F.scaleRowUnsafe(
-      m, MatrixM2x2F.rowCheck(row), (double) r, c.v2a, out);
+      m, MatrixM2x2F.checkRow(row), (double) r, c.v2a, out);
   }
 
   /**
@@ -665,7 +552,7 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
     final float r)
   {
     return MatrixM2x2F.scaleRowUnsafe(
-      m, MatrixM2x2F.rowCheck(row), (double) r, c.v2a, m);
+      m, MatrixM2x2F.checkRow(row), (double) r, c.v2a, m);
   }
 
   private static <M extends MatrixWritable2x2FType> M scaleRowUnsafe(
@@ -786,150 +673,6 @@ public final class MatrixM2x2F implements MatrixDirect2x2FType
     m.setR1C0F(r0c1); // swap 0
     m.setR0C1F(r1c0); // swap 0
     return m;
-  }
-
-  @Override public boolean equals(
-    final @Nullable Object obj)
-  {
-    if (this == obj) {
-      return true;
-    }
-    if (obj == null) {
-      return false;
-    }
-    if (this.getClass() != obj.getClass()) {
-      return false;
-    }
-    final MatrixM2x2F other = (MatrixM2x2F) obj;
-
-    for (int index = 0; index < MatrixM2x2F.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  @Override public FloatBuffer getDirectFloatBuffer()
-  {
-    return this.view;
-  }
-
-  @Override public <V extends VectorWritable2FType> void getRow2F(
-    final int row,
-    final V out)
-  {
-    MatrixM2x2F.rowCheck(row);
-    this.getRow2FUnsafe(row, out);
-  }
-
-  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
-    final int row,
-    final V out)
-  {
-    final float x = this.view.get(MatrixM2x2F.indexUnsafe(row, 0));
-    final float y = this.view.get(MatrixM2x2F.indexUnsafe(row, 1));
-    out.set2F(x, y);
-  }
-
-  @Override public float getR0C0F()
-  {
-    return this.view.get(MatrixM2x2F.indexUnsafe(0, 0));
-  }
-
-  @Override public void setR0C0F(final float x)
-  {
-    this.view.put(MatrixM2x2F.indexUnsafe(0, 0), x);
-  }
-
-  @Override public float getR1C0F()
-  {
-    return this.view.get(MatrixM2x2F.indexUnsafe(1, 0));
-  }
-
-  @Override public void setR1C0F(final float x)
-  {
-    this.view.put(MatrixM2x2F.indexUnsafe(1, 0), x);
-  }
-
-  @Override public float getR0C1F()
-  {
-    return this.view.get(MatrixM2x2F.indexUnsafe(0, 1));
-  }
-
-  @Override public void setR0C1F(final float x)
-  {
-    this.view.put(MatrixM2x2F.indexUnsafe(0, 1), x);
-  }
-
-  @Override public float getR1C1F()
-  {
-    return this.view.get(MatrixM2x2F.indexUnsafe(1, 1));
-  }
-
-  @Override public void setR1C1F(final float x)
-  {
-    this.view.put(MatrixM2x2F.indexUnsafe(1, 1), x);
-  }
-
-  @Override public float getRowColumnF(
-    final int row,
-    final int column)
-  {
-    return this.view.get(MatrixM2x2F.indexChecked(row, column));
-  }
-
-  @Override public int hashCode()
-  {
-    final int prime = 31;
-    int r = prime;
-
-    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
-
-    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
-    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
-
-    return r;
-  }
-
-  @Override public void setRowWith2F(
-    final int row,
-    final VectorReadable2FType v)
-  {
-    MatrixM2x2F.rowCheck(row);
-    this.setRowWith2FUnsafe(row, v);
-  }
-
-  @Override public void setRowWith2FUnsafe(
-    final int row,
-    final VectorReadable2FType v)
-  {
-    this.view.put(MatrixM2x2F.indexUnsafe(row, 0), v.getXF());
-    this.view.put(MatrixM2x2F.indexUnsafe(row, 1), v.getYF());
-  }
-
-  @Override public void setRowColumnF(
-    final int row,
-    final int column,
-    final float value)
-  {
-    this.view.put(MatrixM2x2F.indexChecked(row, column), value);
-  }
-
-  @SuppressWarnings("boxing") @Override public String toString()
-  {
-    final StringBuilder builder = new StringBuilder(512);
-    for (int row = 0; row < MatrixM2x2F.VIEW_ROWS; ++row) {
-      final float c0 = this.view.get(MatrixM2x2F.indexUnsafe(row, 0));
-      final float c1 = this.view.get(MatrixM2x2F.indexUnsafe(row, 1));
-      final String s = String.format("[%+.6f %+.6f]\n", c0, c1);
-      builder.append(s);
-    }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
   }
 
   /**

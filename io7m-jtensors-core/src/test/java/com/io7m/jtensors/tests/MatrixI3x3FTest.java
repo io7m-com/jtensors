@@ -16,8 +16,9 @@
 
 package com.io7m.jtensors.tests;
 
+import com.io7m.jtensors.Matrix3x3FType;
+import com.io7m.jtensors.MatrixHeapArrayM3x3F;
 import com.io7m.jtensors.MatrixI3x3F;
-import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.MatrixReadable3x3FType;
 import com.io7m.jtensors.VectorI3F;
 import com.io7m.jtensors.VectorM3F;
@@ -29,7 +30,7 @@ public final class MatrixI3x3FTest
 {
   @Test public void testEquals()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 3; ++row) {
@@ -69,7 +70,7 @@ public final class MatrixI3x3FTest
 
   @Test public void testFromColumns()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
 
     m0.setR0C0F(0.0f);
     m0.setR1C0F(0.1f);
@@ -97,7 +98,7 @@ public final class MatrixI3x3FTest
 
   @Test public void testFromRows()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
 
     m0.setR0C0F(0.0f);
     m0.setR1C0F(0.1f);
@@ -133,7 +134,7 @@ public final class MatrixI3x3FTest
 
   @Test public void testIdentity()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
     final MatrixI3x3F im0 = MatrixI3x3F.identity();
     final MatrixI3x3F im1 = MatrixI3x3F.newFromReadable(m0);
     Assert.assertEquals(im1, im0);
@@ -141,8 +142,8 @@ public final class MatrixI3x3FTest
 
   @Test public void testMakeMatrix3x3F()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
-    final MatrixM3x3F m1 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
+    final Matrix3x3FType m1 = MatrixHeapArrayM3x3F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 3; ++row) {
@@ -159,8 +160,8 @@ public final class MatrixI3x3FTest
 
   @Test public void testToString()
   {
-    final MatrixM3x3F m0 = new MatrixM3x3F();
-    final MatrixM3x3F m1 = new MatrixM3x3F();
+    final Matrix3x3FType m0 = MatrixHeapArrayM3x3F.newMatrix();
+    final Matrix3x3FType m1 = MatrixHeapArrayM3x3F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 3; ++row) {
