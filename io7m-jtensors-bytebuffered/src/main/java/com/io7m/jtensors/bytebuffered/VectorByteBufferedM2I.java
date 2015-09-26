@@ -162,9 +162,6 @@ public final class VectorByteBufferedM2I implements Vector2IType
     if (this.getXI() != other.getXI()) {
       return false;
     }
-    if (this.getYI() != other.getYI()) {
-      return false;
-    }
-    return true;
+    return this.getYI() == other.getYI();
   }
 }
