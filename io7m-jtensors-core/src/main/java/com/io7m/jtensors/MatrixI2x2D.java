@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -28,11 +28,18 @@ import java.util.Arrays;
  * @since 7.0.0
  */
 
-@EqualityStructural @Immutable public final class MatrixI2x2D implements
-  MatrixReadable2x2DType
+@EqualityStructural @Immutable public final class MatrixI2x2D
+  implements MatrixReadable2x2DType
 {
-  private static final double[][] IDENTITY  = MatrixI2x2D.makeIdentity();
+  private static final double[][]  IDENTITY  = MatrixI2x2D.makeIdentity();
   private static final MatrixI2x2D IDENTITYM = MatrixI2x2D.makeIdentityM();
+  private final double[][] elements;
+
+  private MatrixI2x2D(
+    final double[][] e)
+  {
+    this.elements = e;
+  }
 
   /**
    * @return The identity matrix
@@ -49,9 +56,9 @@ import java.util.Arrays;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
         if (row == col) {
-          m[row][col] = (double) 1.0;
+          m[row][col] = 1.0;
         } else {
-          m[row][col] = (double) 0.0;
+          m[row][col] = 0.0;
         }
       }
     }
@@ -66,10 +73,8 @@ import java.util.Arrays;
   /**
    * Construct a new immutable 2x2 matrix from the given columns.
    *
-   * @param column_0
-   *          The first column
-   * @param column_1
-   *          The second column
+   * @param column_0 The first column
+   * @param column_1 The second column
    *
    * @return A new 2x2 matrix
    */
@@ -92,8 +97,7 @@ import java.util.Arrays;
   /**
    * Construct a new immutable 2x2 matrix from the given readable 2x2 matrix.
    *
-   * @param m
-   *          The original matrix
+   * @param m The original matrix
    *
    * @return A new 2x2 matrix
    */
@@ -112,14 +116,6 @@ import java.util.Arrays;
     return new MatrixI2x2D(e);
   }
 
-  private final double[][] elements;
-
-  private MatrixI2x2D(
-    final double[][] e)
-  {
-    this.elements = e;
-  }
-
   @Override public boolean equals(
     final @Nullable Object obj)
   {
@@ -133,24 +129,47 @@ import java.util.Arrays;
       return false;
     }
     final MatrixI2x2D other = (MatrixI2x2D) obj;
-    if (!Arrays.deepEquals(this.elements, other.elements)) {
-      return false;
-    }
-    return true;
+    return Arrays.deepEquals(this.elements, other.elements);
   }
 
   @Override public <V extends VectorWritable2DType> void getRow2D(
     final int row,
     final V out)
   {
+    this.getRow2DUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
+    final int row,
+    final V out)
+  {
     out.set2D(this.elements[row][0], this.elements[row][1]);
   }
 
+  @Override public double getR0C0D()
+  {
+    return this.elements[0][0];
+  }
+
+  @Override public double getR1C0D()
+  {
+    return this.elements[1][0];
+  }
+
+  @Override public double getR0C1D()
+  {
+    return this.elements[0][1];
+  }
+
+  @Override public double getR1C1D()
+  {
+    return this.elements[1][1];
+  }
+
   /**
-   * @param row
-   *          The row
-   * @param col
-   *          The column
+   * @param row The row
+   * @param col The column
+   *
    * @return The value at the given row and column
    */
 
@@ -163,35 +182,42 @@ import java.util.Arrays;
 
   @Override public int hashCode()
   {
-    return Arrays.hashCode(this.elements);
+    final int prime = 31;
+    int r = prime;
+
+    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
+
+    return r;
   }
 
   /**
    * Write the current matrix into the given mutable matrix.
    *
-   * @param m
-   *          The mutable matrix
+   * @param <M> The precise type of mutable matrix
+   * @param m   The mutable matrix
    */
 
-  public void makeMatrixM2x2D(
-    final MatrixM2x2D m)
+  public <M extends MatrixWritable2x2DType> void makeMatrix2x2D(
+    final M m)
   {
-    for (int row = 0; row < 2; ++row) {
-      for (int col = 0; col < 2; ++col) {
-        m.set(row, col, this.elements[row][col]);
-      }
-    }
+    m.setR0C0D(this.getR0C0D());
+    m.setR1C0D(this.getR1C0D());
+    m.setR0C1D(this.getR0C1D());
+    m.setR1C1D(this.getR1C1D());
   }
 
   @Override public String toString()
   {
-    final StringBuilder builder = new StringBuilder();
+    final StringBuilder builder = new StringBuilder(512);
     for (int row = 0; row < 2; ++row) {
-      final String text =
-        String.format(
-          "[%+.15f %+.15f]\n",
-          Double.valueOf(this.elements[row][0]),
-          Double.valueOf(this.elements[row][1]));
+      final String text = String.format(
+        "[%+.15f %+.15f]\n",
+        Double.valueOf(this.elements[row][0]),
+        Double.valueOf(this.elements[row][1]));
       builder.append(text);
     }
     final String r = builder.toString();

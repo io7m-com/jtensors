@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -349,8 +349,8 @@ import net.jcip.annotations.Immutable;
    * such that:
    *
    * <ul>
-   * <li>{@code interpolateLinear(v0, v1, 0.0, r) -&gt; r = v0}</li>
-   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -&gt; r = v1}</li>
+   * <li>{@code interpolateLinear(v0, v1, 0.0, r) → r = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0, r) → r = v1}</li>
    * </ul>
    *
    * @param v0
@@ -593,10 +593,7 @@ import net.jcip.annotations.Immutable;
     if (this.y != other.y) {
       return false;
     }
-    if (this.z != other.z) {
-      return false;
-    }
-    return true;
+    return this.z == other.z;
   }
 
   @Override public int getXI()

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -24,5 +24,59 @@ package com.io7m.jtensors;
 
 public interface MatrixWritable2x2FType extends MatrixWritableFType
 {
-  // No extra functions.
+  /**
+   * Set row {@code row} of the matrix to {@code v}.
+   *
+   * @param row The row index
+   * @param v   The row vector
+   */
+
+  void setRowWith2F(
+    int row,
+    VectorReadable2FType v);
+
+  /**
+   * Set row {@code row} of the matrix to {@code v}. No bounds checking is
+   * performed for {@code row}, and out-of-bounds values result in undefined
+   * behaviour.
+   *
+   * @param row The row index
+   * @param v   The row vector
+   */
+
+  void setRowWith2FUnsafe(
+    int row,
+    VectorReadable2FType v);
+
+  /**
+   * Set row 0, column 0 of the matrix to {@code x}.
+   *
+   * @param x The value
+   */
+
+  void setR0C0F(float x);
+
+  /**
+   * Set row 0, column 1 of the matrix to {@code x}.
+   *
+   * @param x The value
+   */
+
+  void setR0C1F(float x);
+
+  /**
+   * Set row 1, column 0 of the matrix to {@code x}.
+   *
+   * @param x The value
+   */
+
+  void setR1C0F(float x);
+
+  /**
+   * Set row 1, column 1 of the matrix to {@code x}.
+   *
+   * @param x The value
+   */
+
+  void setR1C1F(float x);
 }

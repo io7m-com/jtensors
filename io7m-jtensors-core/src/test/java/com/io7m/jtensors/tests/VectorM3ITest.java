@@ -18,18 +18,23 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jtensors.VectorM3I;
 
-public final class VectorM3ITest extends VectorM3IContract
+public final class VectorM3ITest extends VectorM3IContract<VectorM3I>
 {
-  protected VectorM3I newVectorM3I(
+  @Override protected VectorM3I newVectorM3I(final VectorM3I v)
+  {
+    return new VectorM3I(v);
+  }
+
+  @Override protected VectorM3I newVectorM3I()
+  {
+    return new VectorM3I();
+  }
+
+  @Override protected VectorM3I newVectorM3I(
     final int x,
     final int y,
     final int z)
   {
     return new VectorM3I(x, y, z);
-  }
-
-  protected VectorM3I newVectorM3I()
-  {
-    return new VectorM3I();
   }
 }

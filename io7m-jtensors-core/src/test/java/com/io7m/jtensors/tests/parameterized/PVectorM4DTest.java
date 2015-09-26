@@ -18,14 +18,21 @@ package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.parameterized.PVectorM4D;
 
-public final class PVectorM4DTest<U> extends PVectorM4DContract<U>
+public final class PVectorM4DTest<T>
+  extends PVectorM4DContract<T, PVectorM4D<T>>
 {
-  protected <T> PVectorM4D<T> newVectorM4D()
+
+  @Override protected PVectorM4D<T> newVectorM4D()
   {
     return new PVectorM4D<T>();
   }
 
-  protected <T> PVectorM4D<T> newVectorM4D(
+  @Override protected PVectorM4D<T> newVectorM4DFrom(final PVectorM4D<T> v)
+  {
+    return new PVectorM4D<T>(v);
+  }
+
+  @Override protected PVectorM4D<T> newVectorM4D(
     final double x,
     final double y,
     final double z,

@@ -83,7 +83,6 @@
     <module name="InnerAssignment"/>
     <!-- <module name="InnerTypeLast"/> -->
     <module name="InterfaceIsType"/>
-    <module name="JUnitTestCase"/>
     <module name="JavaNCSS">
       <property name="methodMaximum" value="200"/>
     </module>
@@ -148,7 +147,6 @@
     <module name="NoWhitespaceAfter"/>
     <module name="NoWhitespaceBefore"/>
     <module name="OneStatementPerLine"/>
-    <module name="OperatorWrap"/>
     <module name="OuterTypeFilename"/>
     <module name="OuterTypeNumber"/>
     <module name="PackageAnnotation"/>
@@ -172,7 +170,7 @@
       <property name="format" value="^[A-Z][A-Z0-9]*$"/>
     </module>
     <module name="StringLiteralEquality"/>
-    <module name="TrailingComment"/>
+    <!-- <module name="TrailingComment"/> -->
 
     <!-- Restrict class names -->
     <module name="TypeName">
@@ -198,12 +196,13 @@
   <module name="FileLength">
     <property name="max" value="3500"/>
   </module>
-  
+
   <module name="FileTabCharacter"/>
 
   <!-- Check license headers of all Java files -->
   <module name="Header">
-    <property name="header" value="/*\n * Copyright © 2014 &lt;code@io7m.com&gt; http://io7m.com\n"/>
+    <property name="header"
+              value="/*\n * Copyright © 2015 &lt;code@io7m.com&gt; http://io7m.com\n"/>
     <property name="charset" value="UTF-8"/>
   </module>
 

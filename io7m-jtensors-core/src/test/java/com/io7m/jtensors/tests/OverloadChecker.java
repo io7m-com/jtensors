@@ -16,11 +16,6 @@
 
 package com.io7m.jtensors.tests;
 
-import java.lang.reflect.Field;
-import java.util.HashSet;
-
-import org.junit.Test;
-
 import com.io7m.jtensors.MatrixM2x2D;
 import com.io7m.jtensors.MatrixM2x2F;
 import com.io7m.jtensors.MatrixM3x3D;
@@ -79,6 +74,11 @@ import com.io7m.jtensors.parameterized.PVectorM4D;
 import com.io7m.jtensors.parameterized.PVectorM4F;
 import com.io7m.jtensors.parameterized.PVectorM4I;
 import com.io7m.jtensors.parameterized.PVectorM4L;
+import org.junit.Test;
+
+import java.lang.reflect.Field;
+import java.util.HashSet;
+import java.util.Set;
 
 @SuppressWarnings("static-method") public final class OverloadChecker
 {
@@ -86,7 +86,7 @@ import com.io7m.jtensors.parameterized.PVectorM4L;
     final Class<?> c)
     throws Exception
   {
-    final HashSet<String> names = new HashSet<String>();
+    final Set<String> names = new HashSet<String>();
     final HashSet<String> collisions = new HashSet<String>();
 
     for (final Field n : c.getDeclaredFields()) {

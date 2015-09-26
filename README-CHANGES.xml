@@ -6,6 +6,29 @@
     <c:date>2015-08-29</c:date>
     <c:version>7.0.0</c:version>
     <c:item>
+      <c:date>2015-09-06</c:date>
+      <c:type-code-change/>
+      <c:summary>
+        Rename all Context* types to behave more pleasantly with unqualified imports.
+      </c:summary>
+    </c:item>
+    <c:item>
+      <c:date>2015-09-05</c:date>
+      <c:type-code-change/>
+      <c:summary>
+        All vector functions that allocated temporary objects now take re-usable preallocated
+        Context values in the same manner as matrix functions.
+      </c:summary>
+    </c:item>
+    <c:item>
+      <c:date>2015-09-05</c:date>
+      <c:type-code-change/>
+      <c:summary>
+        Replace most direct uses of mutable vector types with generics and interfaces. This allows
+        for code sharing between a selection of new vector types.
+      </c:summary>
+    </c:item>
+    <c:item>
       <c:date>2014-11-29</c:date>
       <c:type-code-new/>
       <c:summary>

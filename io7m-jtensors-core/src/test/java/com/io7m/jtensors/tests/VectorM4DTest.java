@@ -18,9 +18,9 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jtensors.VectorM4D;
 
-public final class VectorM4DTest extends VectorM4DContract
+public final class VectorM4DTest extends VectorM4DContract<VectorM4D>
 {
-  protected VectorM4D newVectorM4D(
+  @Override protected VectorM4D newVectorM4D(
     final double x,
     final double y,
     final double z,
@@ -29,8 +29,13 @@ public final class VectorM4DTest extends VectorM4DContract
     return new VectorM4D(x, y, z, w);
   }
 
-  protected  VectorM4D newVectorM4D()
+  @Override protected VectorM4D newVectorM4D()
   {
     return new VectorM4D();
+  }
+
+  @Override protected VectorM4D newVectorM4DFrom(final VectorM4D v)
+  {
+    return new VectorM4D(v);
   }
 }

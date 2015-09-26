@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -17,7 +17,6 @@
 package com.io7m.jtensors.parameterized;
 
 import com.io7m.jequality.AlmostEqualFloat;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorM2F;
@@ -28,49 +27,92 @@ import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorReadable4FType;
 
 /**
- * <p>
- * A four-dimensional mutable vector type with single precision elements.
+ * <p> A four-dimensional mutable vector type with single precision elements.
  * </p>
  *
- * <p>
- * Values of this type cannot be accessed safely from multiple threads without
- * explicit synchronization.
- * </p>
+ * <p> Values of this type cannot be accessed safely from multiple threads
+ * without explicit synchronization. </p>
  *
- * @param <T>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter
+ *
+ * @since 7.0.0
  */
 
-public final class PVectorM4F<T> implements
-  PVectorReadable4FType<T>,
-  PVectorWritable4FType<T>
+public final class PVectorM4F<T> implements PVector4FType<T>
 {
+  private float w = 1.0f;
+  private float x;
+  private float y;
+  private float z;
+
   /**
-   * Calculate the absolute values of the elements in vector {@code v},
-   * saving the result to {@code out}.
-   *
-   * @param v
-   *          The input vector
-   * @param out
-   *          The output vector
-   *
-   * @return {@code (abs v.x, abs v.y, abs v.z, abs.w)}
-   * @param <T>
-   *          A phantom type parameter.
+   * Default constructor, initializing the vector with values {@code [0.0, 0.0,
+   * 0.0, 1.0]}.
    */
 
-  public static <T> PVectorM4F<T> absolute(
+  public PVectorM4F()
+  {
+
+  }
+
+  /**
+   * Construct a vector initialized with the given values.
+   *
+   * @param in_x The {@code x} value
+   * @param in_y The {@code y} value
+   * @param in_z The {@code z} value
+   * @param in_w The {@code w} value
+   */
+
+  public PVectorM4F(
+    final float in_x,
+    final float in_y,
+    final float in_z,
+    final float in_w)
+  {
+    this.x = in_x;
+    this.y = in_y;
+    this.z = in_z;
+    this.w = in_w;
+  }
+
+  /**
+   * Construct a vector initialized with the values given in the vector {@code
+   * in_v}.
+   *
+   * @param in_v The source vector
+   */
+
+  public PVectorM4F(
+    final PVectorReadable4FType<T> in_v)
+  {
+    this.x = in_v.getXF();
+    this.y = in_v.getYF();
+    this.z = in_v.getZF();
+    this.w = in_v.getWF();
+  }
+
+  /**
+   * Calculate the absolute values of the elements in vector {@code v}, saving
+   * the result to {@code out}.
+   *
+   * @param v   The input vector
+   * @param out The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
+   *
+   * @return {@code (abs v.x, abs v.y, abs v.z, abs.w)}
+   */
+
+  public static <T, V extends PVectorWritable4FType<T>> V absolute(
     final PVectorReadable4FType<T> v,
-    final PVectorM4F<T> out)
+    final V out)
   {
     final float x = Math.abs(v.getXF());
     final float y = Math.abs(v.getYF());
     final float z = Math.abs(v.getZF());
     final float w = Math.abs(v.getWF());
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
@@ -78,68 +120,61 @@ public final class PVectorM4F<T> implements
    * Calculate the absolute values of the elements in vector {@code v},
    * modifying the vector in-place.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (abs v.x, abs v.y, abs v.z, abs v.w)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> absoluteInPlace(
-    final PVectorM4F<T> v)
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V absoluteInPlace(
+    final V v)
   {
     return PVectorM4F.absolute(v, v);
   }
 
   /**
-   * Calculate the element-wise sum of the vectors {@code v0} and
-   * {@code v1}, saving the result to {@code out}.
+   * Calculate the element-wise sum of the vectors {@code v0} and {@code v1},
+   * saving the result to {@code out}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param out
-   *          The output vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param out The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> add(
+  public static <T, V extends PVectorWritable4FType<T>> V add(
     final PVectorReadable4FType<T> v0,
     final PVectorReadable4FType<T> v1,
-    final PVectorM4F<T> out)
+    final V out)
   {
     final float x = v0.getXF() + v1.getXF();
     final float y = v0.getYF() + v1.getYF();
     final float z = v0.getZF() + v1.getZF();
     final float w = v0.getWF() + v1.getWF();
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
   /**
-   * Calculate the element-wise sum of the vectors {@code v0} and
-   * {@code v1}, saving the result to {@code v0}.
+   * Calculate the element-wise sum of the vectors {@code v0} and {@code v1},
+   * saving the result to {@code v0}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> addInPlace(
-    final PVectorM4F<T> v0,
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V addInPlace(
+    final V v0,
     final PVectorReadable4FType<T> v1)
   {
     return PVectorM4F.add(v0, v1, v0);
@@ -147,59 +182,52 @@ public final class PVectorM4F<T> implements
 
   /**
    * Calculate the element-wise sum of the vectors {@code v0} and the
-   * element-wise product of {@code v1} and {@code r}, saving the
-   * result to {@code out}.
+   * element-wise product of {@code v1} and {@code r}, saving the result to
+   * {@code out}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param out
-   *          The output vector
-   * @param r
-   *          The scaling value
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param out The output vector
+   * @param r   The scaling value
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
-   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r),
+   * v0.w + (v1.w * r))}
    */
 
-  public static <T> PVectorM4F<T> addScaled(
+  public static <T, V extends PVectorWritable4FType<T>> V addScaled(
     final PVectorReadable4FType<T> v0,
     final PVectorReadable4FType<T> v1,
     final double r,
-    final PVectorM4F<T> out)
+    final V out)
   {
     final float x = (float) ((double) v0.getXF() + ((double) v1.getXF() * r));
     final float y = (float) ((double) v0.getYF() + ((double) v1.getYF() * r));
     final float z = (float) ((double) v0.getZF() + ((double) v1.getZF() * r));
     final float w = (float) ((double) v0.getWF() + ((double) v1.getWF() * r));
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
   /**
    * Calculate the element-wise sum of the vectors {@code v0} and the
-   * element-wise product of {@code v1} and {@code r}, saving the
-   * result to {@code v0}.
+   * element-wise product of {@code v1} and {@code r}, saving the result to
+   * {@code v0}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param r
-   *          The scaling value
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param r   The scaling value
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
-   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r),
+   * v0.w + (v1.w * r))}
    */
 
-  public static <T> PVectorM4F<T> addScaledInPlace(
-    final PVectorM4F<T> v0,
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V addScaledInPlace(
+    final V v0,
     final PVectorReadable4FType<T> v1,
     final double r)
   {
@@ -207,21 +235,19 @@ public final class PVectorM4F<T> implements
   }
 
   /**
-   * Determine whether or not the vectors {@code va} and {@code vb}
-   * are equal to within the degree of error given in {@code context}.
+   * Determine whether or not the vectors {@code va} and {@code vb} are equal to
+   * within the degree of error given in {@code context}.
    *
-   * @see AlmostEqualFloat#almostEqual(AlmostEqualFloat.ContextRelative, float, float)
+   * @param context The equality context
+   * @param va      The left input vector
+   * @param vb      The right input vector
+   * @param <T>     A phantom type parameter
    *
-   * @param context
-   *          The equality context
-   * @param va
-   *          The left input vector
-   * @param vb
-   *          The right input vector
-   * @since 7.0.0
    * @return {@code true} if the vectors are almost equal
-   * @param <T>
-   *          A phantom type parameter.
+   *
+   * @see AlmostEqualFloat#almostEqual(AlmostEqualFloat.ContextRelative, float,
+   * float)
+   * @since 7.0.0
    */
 
   public static <T> boolean almostEqual(
@@ -241,66 +267,60 @@ public final class PVectorM4F<T> implements
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. maximum]} inclusive, saving the result to
-   * {@code out}.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * maximum]} inclusive, saving the result to {@code out}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
-   * @param maximum
-   *          The maximum allowed value
-   * @param out
-   *          The output vector
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param maximum The maximum allowed value
+   * @param out     The output vector
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return A vector with both elements equal to at most {@code maximum}
-   *         and at least {@code minimum}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return A vector with both elements equal to at most {@code maximum} and at
+   * least {@code minimum}
    */
 
-  public static <T> PVectorM4F<T> clamp(
+  public static <T, V extends PVectorWritable4FType<T>> V clamp(
     final PVectorReadable4FType<T> v,
     final double minimum,
     final double maximum,
-    final PVectorM4F<T> out)
+    final V out)
   {
-    final float x = (float) Math.min(Math.max((double) v.getXF(), minimum), maximum);
-    final float y = (float) Math.min(Math.max((double) v.getYF(), minimum), maximum);
-    final float z = (float) Math.min(Math.max((double) v.getZF(), minimum), maximum);
-    final float w = (float) Math.min(Math.max((double) v.getWF(), minimum), maximum);
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    final float x =
+      (float) Math.min(Math.max((double) v.getXF(), minimum), maximum);
+    final float y =
+      (float) Math.min(Math.max((double) v.getYF(), minimum), maximum);
+    final float z =
+      (float) Math.min(Math.max((double) v.getZF(), minimum), maximum);
+    final float w =
+      (float) Math.min(Math.max((double) v.getWF(), minimum), maximum);
+    out.set4F(x, y, z, w);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum} and
-   * {@code maximum}, saving the result to {@code out}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum} and {@code maximum}, saving
+   * the result to {@code out}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
-   * @param maximum
-   *          The vector containing the maximum acceptable values
-   * @param out
-   *          The output vector
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param maximum The vector containing the maximum acceptable values
+   * @param out     The output vector
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y,
+   * minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w,
+   * minimum.w), maximum.w))}
    */
 
-  public static <T> PVectorM4F<T> clampByPVector(
+  public static <T, V extends PVectorWritable4FType<T>> V clampByPVector(
     final PVectorReadable4FType<T> v,
     final PVectorReadable4FType<T> minimum,
     final PVectorReadable4FType<T> maximum,
-    final PVectorM4F<T> out)
+    final V out)
   {
     final float x =
       Math.min(Math.max(v.getXF(), minimum.getXF()), maximum.getXF());
@@ -310,32 +330,29 @@ public final class PVectorM4F<T> implements
       Math.min(Math.max(v.getZF(), minimum.getZF()), maximum.getZF());
     final float w =
       Math.min(Math.max(v.getWF(), minimum.getWF()), maximum.getWF());
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum} and
-   * {@code maximum}, saving the result to {@code v}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum} and {@code maximum}, saving
+   * the result to {@code v}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param maximum The vector containing the maximum acceptable values
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y,
+   * minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w,
+   * minimum.w), maximum.w))}
    */
 
-  public static <T> PVectorM4F<T> clampByPVectorInPlace(
-    final PVectorM4F<T> v,
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V clampByPVectorInPlace(
+    final V v,
     final PVectorReadable4FType<T> minimum,
     final PVectorReadable4FType<T> maximum)
   {
@@ -343,25 +360,22 @@ public final class PVectorM4F<T> implements
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. maximum]} inclusive, saving the result to
-   * {@code v}.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * maximum]} inclusive, saving the result to {@code v}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param maximum The maximum allowed value
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return A vector with both elements equal to at most {@code maximum}
-   *         and at least {@code minimum}, in {@code v}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return A vector with both elements equal to at most {@code maximum} and at
+   * least {@code minimum}, in {@code v}
    */
 
-  public static <T> PVectorM4F<T> clampInPlace(
-    final PVectorM4F<T> v,
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V clampInPlace(
+    final V v,
     final float minimum,
     final float maximum)
   {
@@ -369,243 +383,209 @@ public final class PVectorM4F<T> implements
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [-Infinity .. maximum]} inclusive, saving the result to
-   * {@code out}.
+   * Clamp the elements of the vector {@code v} to the range {@code [-Infinity
+   * .. maximum]} inclusive, saving the result to {@code out}.
    *
-   * @param v
-   *          The input vector
-   * @param out
-   *          The output vector
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param out     The output vector
+   * @param maximum The maximum allowed value
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
    * @return A vector with both elements equal to at most {@code maximum}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> clampMaximum(
+  public static <T, V extends PVectorWritable4FType<T>> V clampMaximum(
     final PVectorReadable4FType<T> v,
     final float maximum,
-    final PVectorM4F<T> out)
+    final V out)
   {
     final float x = Math.min(v.getXF(), maximum);
     final float y = Math.min(v.getYF(), maximum);
     final float z = Math.min(v.getZF(), maximum);
     final float w = Math.min(v.getWF(), maximum);
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code maximum}, saving the
-   * result to {@code out}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code maximum}, saving the result to {@code
+   * out}.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The vector containing the maximum acceptable values
-   * @param out
-   *          The output vector
+   * @param v       The input vector
+   * @param maximum The vector containing the maximum acceptable values
+   * @param out     The output vector
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z,
+   * maximum.z), min(v.w, maximum.w))}
    */
 
-  public static <T> PVectorM4F<T> clampMaximumByPVector(
+  public static <T, V extends PVectorWritable4FType<T>> V clampMaximumByPVector(
     final PVectorReadable4FType<T> v,
     final PVectorReadable4FType<T> maximum,
-    final PVectorM4F<T> out)
+    final V out)
   {
     final float x = Math.min(v.getXF(), maximum.getXF());
     final float y = Math.min(v.getYF(), maximum.getYF());
     final float z = Math.min(v.getZF(), maximum.getZF());
     final float w = Math.min(v.getWF(), maximum.getWF());
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code maximum}, saving the
-   * result to {@code v}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code maximum}, saving the result to {@code
+   * v}.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param maximum The vector containing the maximum acceptable values
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z,
+   * maximum.z), min(v.w, maximum.w))}
    */
 
-  public static <T> PVectorM4F<T> clampMaximumByPVectorInPlace(
-    final PVectorM4F<T> v,
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V clampMaximumByPVectorInPlace(
+    final V v,
     final PVectorReadable4FType<T> maximum)
   {
     return PVectorM4F.clampMaximumByPVector(v, maximum, v);
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [-Infinity .. maximum]} inclusive, saving the result to
-   * {@code v}.
+   * Clamp the elements of the vector {@code v} to the range {@code [-Infinity
+   * .. maximum]} inclusive, saving the result to {@code v}.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param maximum The maximum allowed value
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return A vector with both elements equal to at most {@code maximum}
-   *         , in {@code v}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return A vector with both elements equal to at most {@code maximum} , in
+   * {@code v}
    */
 
-  public static <T> PVectorM4F<T> clampMaximumInPlace(
-    final PVectorM4F<T> v,
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V clampMaximumInPlace(
+    final V v,
     final float maximum)
   {
     return PVectorM4F.clampMaximum(v, maximum, v);
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. Infinity]} inclusive, saving the result to
-   * {@code out}.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * Infinity]} inclusive, saving the result to {@code out}.
    *
-   * @param v
-   *          The input vector
-   * @param out
-   *          The output vector
-   * @param minimum
-   *          The minimum allowed value
+   * @param v       The input vector
+   * @param out     The output vector
+   * @param minimum The minimum allowed value
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return A vector with both elements equal to at least
-   *         {@code minimum}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return A vector with both elements equal to at least {@code minimum}
    */
 
-  public static <T> PVectorM4F<T> clampMinimum(
+  public static <T, V extends PVectorWritable4FType<T>> V clampMinimum(
     final PVectorReadable4FType<T> v,
     final float minimum,
-    final PVectorM4F<T> out)
+    final V out)
   {
     final float x = Math.max(v.getXF(), minimum);
     final float y = Math.max(v.getYF(), minimum);
     final float z = Math.max(v.getZF(), minimum);
     final float w = Math.max(v.getWF(), minimum);
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum}, saving the
-   * result to {@code out}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum}, saving the result to {@code
+   * out}.
    *
-   * @param v
-   *          The input vector
-   * @param out
-   *          The output vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
+   * @param v       The input vector
+   * @param out     The output vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
+   * minimum.z), max(v.w, minimum.w))}
    */
 
-  public static <T> PVectorM4F<T> clampMinimumByPVector(
+  public static <T, V extends PVectorWritable4FType<T>> V clampMinimumByPVector(
     final PVectorReadable4FType<T> v,
     final PVectorReadable4FType<T> minimum,
-    final PVectorM4F<T> out)
+    final V out)
   {
     final float x = Math.max(v.getXF(), minimum.getXF());
     final float y = Math.max(v.getYF(), minimum.getYF());
     final float z = Math.max(v.getZF(), minimum.getZF());
     final float w = Math.max(v.getWF(), minimum.getWF());
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum}, saving the
-   * result to {@code v}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum}, saving the result to {@code
+   * v}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))}
-   *         , in {@code v}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
+   * minimum.z), max(v.w, minimum.w))} , in {@code v}
    */
 
-  public static <T> PVectorM4F<T> clampMinimumByPVectorInPlace(
-    final PVectorM4F<T> v,
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V clampMinimumByPVectorInPlace(
+    final V v,
     final PVectorReadable4FType<T> minimum)
   {
     return PVectorM4F.clampMinimumByPVector(v, minimum, v);
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. Infinity]} inclusive, saving the result to
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * Infinity]} inclusive, saving the result to {@code v}.
+   *
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
+   *
+   * @return A vector with both elements equal to at least {@code minimum}, in
    * {@code v}.
-   *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
-   *
-   * @return A vector with both elements equal to at least
-   *         {@code minimum}, in {@code v}.
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> clampMinimumInPlace(
-    final PVectorM4F<T> v,
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V clampMinimumInPlace(
+    final V v,
     final float minimum)
   {
     return PVectorM4F.clampMinimum(v, minimum, v);
   }
 
   /**
-   * Copy all elements of the vector {@code input} to the vector
-   * {@code output}.
+   * Copy all elements of the vector {@code input} to the vector {@code
+   * output}.
    *
-   * @param <U>
-   *          The specific type of vector
-   * @param input
-   *          The input vector
-   * @param output
-   *          The output vector
+   * @param <U>    The specific type of vector
+   * @param input  The input vector
+   * @param output The output vector
+   * @param <T>    A phantom type parameter
    *
    * @return output
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T, U extends PVectorWritable4FType<T>> U copy(
@@ -617,39 +597,33 @@ public final class PVectorM4F<T> implements
   }
 
   /**
-   * Calculate the distance between the two vectors {@code v0} and
-   * {@code v1}.
+   * Calculate the distance between the two vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param c   Preallocated storage
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter
    *
    * @return The distance between the two vectors.
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double distance(
+    final ContextPVM4F c,
     final PVectorReadable4FType<T> v0,
     final PVectorReadable4FType<T> v1)
   {
-    final PVectorM4F<T> vr = new PVectorM4F<T>();
+    final PVectorM4F<T> vr = (PVectorM4F<T>) c.va;
     return PVectorM4F.magnitude(PVectorM4F.subtract(v0, v1, vr));
   }
 
   /**
-   * Calculate the scalar product of the vectors {@code v0} and
-   * {@code v1}.
+   * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter
    *
    * @return The scalar product of the two vectors
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double dotProduct(
@@ -664,45 +638,40 @@ public final class PVectorM4F<T> implements
   }
 
   /**
-   * Linearly interpolate between {@code v0} and {@code v1} by the
-   * amount {@code alpha}, saving the result to {@code r}.
+   * Linearly interpolate between {@code v0} and {@code v1} by the amount {@code
+   * alpha}, saving the result to {@code r}.
    *
-   * The {@code alpha} parameter controls the degree of interpolation,
-   * such that:
+   * The {@code alpha} parameter controls the degree of interpolation, such
+   * that:
    *
-   * <ul>
-   * <li>{@code interpolateLinear(v0, v1, 0.0, r) -&gt; r = v0}</li>
-   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -&gt; r = v1}</li>
-   * </ul>
+   * <ul> <li>{@code interpolateLinear(v0, v1, 0.0, r) -> r = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -> r = v1}</li> </ul>
    *
-   * @param v0
-   *          The left input vector.
-   * @param v1
-   *          The right input vector.
-   * @param alpha
-   *          The interpolation value, between {@code 0.0} and
-   *          {@code 1.0}.
-   * @param r
-   *          The result vector.
+   * @param c     Preallocated storage
+   * @param v0    The left input vector
+   * @param v1    The right input vector
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}
+   * @param r     The result vector
+   * @param <T>   A phantom type parameter
+   * @param <V>   The precise type of vector
    *
    * @return {@code r}
-   * @param <T>
-   *          A phantom type parameter.
+   *
+   * @since 7.0.0
    */
 
-  public static <T> PVectorM4F<T> interpolateLinear(
+  public static <T, V extends PVectorWritable4FType<T>> V interpolateLinear(
+    final ContextPVM4F c,
     final PVectorReadable4FType<T> v0,
     final PVectorReadable4FType<T> v1,
     final double alpha,
-    final PVectorM4F<T> r)
+    final V r)
   {
-    final PVectorM4F<T> w0 = new PVectorM4F<T>();
-    final PVectorM4F<T> w1 = new PVectorM4F<T>();
-
-    PVectorM4F.scale(v0, 1.0 - alpha, w0);
-    PVectorM4F.scale(v1, alpha, w1);
-
-    return PVectorM4F.add(w0, w1, r);
+    final PVectorM4F<T> va = (PVectorM4F<T>) c.va;
+    final PVectorM4F<T> vb = (PVectorM4F<T>) c.vb;
+    PVectorM4F.scale(v0, 1.0 - alpha, va);
+    PVectorM4F.scale(v1, alpha, vb);
+    return PVectorM4F.add(va, vb, r);
   }
 
   /**
@@ -710,12 +679,10 @@ public final class PVectorM4F<T> implements
    *
    * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter
    *
    * @return The magnitude of the input vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double magnitude(
@@ -727,12 +694,10 @@ public final class PVectorM4F<T> implements
   /**
    * Calculate the squared magnitude of the vector {@code v}.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter
    *
    * @return The squared magnitude of the input vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double magnitudeSquared(
@@ -742,136 +707,131 @@ public final class PVectorM4F<T> implements
   }
 
   /**
-   * Returns a vector with the same orientation as {@code v} but with
-   * magnitude equal to {@code 1.0} in {@code out}. The function
-   * returns the zero vector iff the input is the zero vector.
+   * Returns a vector with the same orientation as {@code v} but with magnitude
+   * equal to {@code 1.0} in {@code out}. The function returns the zero vector
+   * iff the input is the zero vector.
    *
-   * @param v
-   *          The input vector
-   * @param out
-   *          The output vector
+   * @param v   The input vector
+   * @param out The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return out
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> normalize(
+  public static <T, V extends PVectorWritable4FType<T>> V normalize(
     final PVectorReadable4FType<T> v,
-    final PVectorM4F<T> out)
+    final V out)
   {
     final double m = PVectorM4F.magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
       return PVectorM4F.scale(v, reciprocal, out);
     }
-    out.x = v.getXF();
-    out.y = v.getYF();
-    out.z = v.getZF();
-    out.w = v.getWF();
+
+    out.set4F(v.getXF(), v.getYF(), v.getZF(), v.getWF());
     return out;
   }
 
   /**
-   * Returns a vector with the same orientation as {@code v} but with
-   * magnitude equal to {@code 1.0} in {@code v}. The function
-   * returns the zero vector iff the input is the zero vector.
+   * Returns a vector with the same orientation as {@code v} but with magnitude
+   * equal to {@code 1.0} in {@code v}. The function returns the zero vector iff
+   * the input is the zero vector.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return v
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> normalizeInPlace(
-    final PVectorM4F<T> v)
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V normalizeInPlace(
+    final V v)
   {
     return PVectorM4F.normalize(v, v);
   }
 
   /**
-   * <p>
-   * Orthonormalize and return the vectors {@code v0} and {@code v1}
-   * .
-   * </p>
-   * <p>
-   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
+   * <p> Orthonormalize and return the vectors {@code v0} and {@code v1} . </p>
+   *
+   * <p> See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
    *
-   * @return A pair {@code (v0, v1)}, orthonormalized.
+   * @param c      Preallocated storage
+   * @param v0     The left vector
+   * @param v0_out The orthonormalized form of {@code v0}
+   * @param v1     The right vector
+   * @param v1_out The orthonormalized form of {@code v1}
+   * @param <T>    A phantom type parameter
+   * @param <V>    The precise type of vector
+   *
    * @since 7.0.0
-   * @param v0
-   *          The left vector
-   * @param v1
-   *          The right vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> Pair<PVectorM4F<T>, PVectorM4F<T>> orthoNormalize(
+  public static <T, V extends PVectorWritable4FType<T>> void orthoNormalize(
+    final ContextPVM4F c,
     final PVectorReadable4FType<T> v0,
-    final PVectorReadable4FType<T> v1)
+    final V v0_out,
+    final PVectorReadable4FType<T> v1,
+    final V v1_out)
   {
-    final PVectorM4F<T> v0n = new PVectorM4F<T>();
-    final PVectorM4F<T> vr = new PVectorM4F<T>();
-    final PVectorM4F<T> vp = new PVectorM4F<T>();
-
-    PVectorM4F.normalize(v0, v0n);
-    PVectorM4F.scale(v0n, PVectorM4F.dotProduct(v1, v0n), vp);
-    PVectorM4F.normalizeInPlace(PVectorM4F.subtract(v1, vp, vr));
-    return Pair.pair(v0n, vr);
+    final PVectorM4F<T> va = (PVectorM4F<T>) c.va;
+    final PVectorM4F<T> vb = (PVectorM4F<T>) c.vb;
+    final PVectorM4F<T> vc = (PVectorM4F<T>) c.vc;
+    PVectorM4F.normalize(v0, va);
+    PVectorM4F.scale(va, PVectorM4F.dotProduct(v1, va), vb);
+    PVectorM4F.normalizeInPlace(PVectorM4F.subtract(v1, vb, vc));
+    PVectorM4F.copy(va, v0_out);
+    PVectorM4F.copy(vc, v1_out);
   }
 
   /**
-   * <p>
-   * Orthonormalize and the vectors {@code v0} and {@code v1}.
-   * </p>
-   * <p>
-   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
-   * </p>
+   * <p> Orthonormalize and the vectors {@code v0} and {@code v1}. </p> <p> See
+   * <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a> </p>
+   *
+   * @param c   Preallocated storage
+   * @param v0  The left vector
+   * @param v1  The right vector
+   * @param <V> The precise type of vector
+   * @param <T> A phantom type parameter
    *
    * @since 7.0.0
-   * @param v0
-   *          The left vector
-   * @param v1
-   *          The right vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> void orthoNormalizeInPlace(
-    final PVectorM4F<T> v0,
-    final PVectorM4F<T> v1)
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> void orthoNormalizeInPlace(
+    final ContextPVM4F c,
+    final V v0,
+    final V v1)
   {
-    final PVectorM4F<T> projection = new PVectorM4F<T>();
-
-    PVectorM4F.normalizeInPlace(v0);
-    PVectorM4F.scale(v0, PVectorM4F.dotProduct(v1, v0), projection);
-    PVectorM4F.subtractInPlace(v1, projection);
-    PVectorM4F.normalizeInPlace(v1);
+    final PVectorM4F<T> va = (PVectorM4F<T>) c.va;
+    final PVectorM4F<T> vb = (PVectorM4F<T>) c.vb;
+    final PVectorM4F<T> vc = (PVectorM4F<T>) c.vc;
+    PVectorM4F.normalize(v0, va);
+    PVectorM4F.scale(va, PVectorM4F.dotProduct(v1, va), vb);
+    PVectorM4F.normalizeInPlace(PVectorM4F.subtract(v1, vb, vc));
+    PVectorM4F.copy(va, v0);
+    PVectorM4F.copy(vc, v1);
   }
 
   /**
-   * Calculate the projection of the vector {@code p} onto the vector
-   * {@code q}, saving the result in {@code r}.
+   * Calculate the projection of the vector {@code p} onto the vector {@code q},
+   * saving the result in {@code r}.
+   *
+   * @param p   The left vector
+   * @param q   The right vector
+   * @param r   The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
-   * @param p
-   *          The left vector
-   * @param q
-   *          The right vector
-   * @param r
-   *          The output vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> projection(
+  public static <T, V extends PVectorWritable4FType<T>> V projection(
     final PVectorReadable4FType<T> p,
     final PVectorReadable4FType<T> q,
-    final PVectorM4F<T> r)
+    final V r)
   {
     final double dot = PVectorM4F.dotProduct(p, q);
     final double qms = PVectorM4F.magnitudeSquared(q);
@@ -881,166 +841,95 @@ public final class PVectorM4F<T> implements
   }
 
   /**
-   * Scale the vector {@code v} by the scalar {@code r}, saving the
-   * result to {@code out}.
+   * Scale the vector {@code v} by the scalar {@code r}, saving the result to
+   * {@code out}.
    *
-   * @param v
-   *          The input vector
-   * @param r
-   *          The scaling value
-   * @param out
-   *          The output vector
+   * @param v   The input vector
+   * @param r   The scaling value
+   * @param out The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v.x * r, v.y * r, v.z * r, v.w * r)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> scale(
+  public static <T, V extends PVectorWritable4FType<T>> V scale(
     final PVectorReadable4FType<T> v,
     final double r,
-    final PVectorM4F<T> out)
+    final V out)
   {
     final float x = (float) ((double) v.getXF() * r);
     final float y = (float) ((double) v.getYF() * r);
     final float z = (float) ((double) v.getZF() * r);
     final float w = (float) ((double) v.getWF() * r);
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
   /**
-   * Scale the vector {@code v} by the scalar {@code r}, saving the
-   * result to {@code v}.
+   * Scale the vector {@code v} by the scalar {@code r}, saving the result to
+   * {@code v}.
    *
-   * @param v
-   *          The input vector
-   * @param r
-   *          The scaling value
+   * @param v   The input vector
+   * @param r   The scaling value
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v.x * r, v.y * r, v.z * r, v.w * r)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> scaleInPlace(
-    final PVectorM4F<T> v,
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V scaleInPlace(
+    final V v,
     final double r)
   {
     return PVectorM4F.scale(v, r, v);
   }
 
   /**
-   * Subtract the vector {@code v1} from the vector {@code v0},
-   * saving the result to {@code out}.
+   * Subtract the vector {@code v1} from the vector {@code v0}, saving the
+   * result to {@code out}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param out
-   *          The output vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param out The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> subtract(
+  public static <T, V extends PVectorWritable4FType<T>> V subtract(
     final PVectorReadable4FType<T> v0,
     final PVectorReadable4FType<T> v1,
-    final PVectorM4F<T> out)
+    final V out)
   {
     final float x = v0.getXF() - v1.getXF();
     final float y = v0.getYF() - v1.getYF();
     final float z = v0.getZF() - v1.getZF();
     final float w = v0.getWF() - v1.getWF();
-    out.x = x;
-    out.y = y;
-    out.z = z;
-    out.w = w;
+    out.set4F(x, y, z, w);
     return out;
   }
 
   /**
-   * Subtract the vector {@code v1} from the vector {@code v0},
-   * saving the result to {@code v0}.
+   * Subtract the vector {@code v1} from the vector {@code v0}, saving the
+   * result to {@code v0}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM4F<T> subtractInPlace(
-    final PVectorM4F<T> v0,
+  public static <T, V extends PVectorWritable4FType<T> &
+    PVectorReadable4FType<T>> V subtractInPlace(
+    final V v0,
     final PVectorReadable4FType<T> v1)
   {
     return PVectorM4F.subtract(v0, v1, v0);
-  }
-
-  private float w = 1.0f;
-  private float x;
-  private float y;
-  private float z;
-
-  /**
-   * Default constructor, initializing the vector with values
-   * {@code [0.0, 0.0, 0.0, 1.0]}.
-   */
-
-  public PVectorM4F()
-  {
-
-  }
-
-  /**
-   * Construct a vector initialized with the given values.
-   *
-   * @param in_x
-   *          The {@code x} value
-   * @param in_y
-   *          The {@code y} value
-   * @param in_z
-   *          The {@code z} value
-   * @param in_w
-   *          The {@code w} value
-   */
-
-  public PVectorM4F(
-    final float in_x,
-    final float in_y,
-    final float in_z,
-    final float in_w)
-  {
-    this.x = in_x;
-    this.y = in_y;
-    this.z = in_z;
-    this.w = in_w;
-  }
-
-  /**
-   * Construct a vector initialized with the values given in the vector
-   * {@code in_v}.
-   *
-   * @param in_v
-   *          The source vector
-   */
-
-  public PVectorM4F(
-    final PVectorReadable4FType<T> in_v)
-  {
-    this.x = in_v.getXF();
-    this.y = in_v.getYF();
-    this.z = in_v.getZF();
-    this.w = in_v.getWF();
   }
 
   @Override public void copyFrom2F(
@@ -1101,10 +990,7 @@ public final class PVectorM4F<T> implements
     if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
       return false;
     }
-    if (Float.floatToIntBits(this.z) != Float.floatToIntBits(other.z)) {
-      return false;
-    }
-    return true;
+    return Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
   }
 
   @Override public float getWF()
@@ -1112,9 +998,21 @@ public final class PVectorM4F<T> implements
     return this.w;
   }
 
+  @Override public void setWF(
+    final float in_w)
+  {
+    this.w = in_w;
+  }
+
   @Override public float getXF()
   {
     return this.x;
+  }
+
+  @Override public void setXF(
+    final float in_x)
+  {
+    this.x = in_x;
   }
 
   @Override public float getYF()
@@ -1122,9 +1020,21 @@ public final class PVectorM4F<T> implements
     return this.y;
   }
 
+  @Override public void setYF(
+    final float in_y)
+  {
+    this.y = in_y;
+  }
+
   @Override public float getZF()
   {
     return this.z;
+  }
+
+  @Override public void setZF(
+    final float in_z)
+  {
+    this.z = in_z;
   }
 
   @Override public int hashCode()
@@ -1168,30 +1078,6 @@ public final class PVectorM4F<T> implements
     this.w = in_w;
   }
 
-  @Override public void setWF(
-    final float in_w)
-  {
-    this.w = in_w;
-  }
-
-  @Override public void setXF(
-    final float in_x)
-  {
-    this.x = in_x;
-  }
-
-  @Override public void setYF(
-    final float in_y)
-  {
-    this.y = in_y;
-  }
-
-  @Override public void setZF(
-    final float in_z)
-  {
-    this.z = in_z;
-  }
-
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
@@ -1206,5 +1092,30 @@ public final class PVectorM4F<T> implements
     builder.append("]");
     final String r = builder.toString();
     return NullCheck.notNull(r);
+  }
+
+  /**
+   * Preallocated storage to allow all vector functions to run without
+   * allocating.
+   *
+   * @since 7.0.0
+   */
+
+  public static final class ContextPVM4F
+  {
+    private final PVectorM4F<?> va;
+    private final PVectorM4F<?> vb;
+    private final PVectorM4F<?> vc;
+
+    /**
+     * Construct preallocated storage.
+     */
+
+    public ContextPVM4F()
+    {
+      this.va = new PVectorM4F<Object>();
+      this.vb = new PVectorM4F<Object>();
+      this.vc = new PVectorM4F<Object>();
+    }
   }
 }

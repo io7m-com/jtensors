@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,8 +18,11 @@ package com.io7m.jtensors.parameterized;
 
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
+import com.io7m.jtensors.HashUtility;
 import com.io7m.jtensors.MatrixReadable3x3DType;
+import com.io7m.jtensors.MatrixWritable3x3DType;
 import com.io7m.jtensors.VectorReadable3DType;
+import com.io7m.jtensors.VectorWritable2DType;
 import com.io7m.jtensors.VectorWritable3DType;
 import net.jcip.annotations.Immutable;
 
@@ -28,25 +31,30 @@ import java.util.Arrays;
 /**
  * An immutable 3x3 matrix type.
  *
- * @param <T0>
- *          A phantom type parameter.
- * @param <T1>
- *          A phantom type parameter.
+ * @param <T0> A phantom type parameter.
+ * @param <T1> A phantom type parameter.
  */
 
-@EqualityStructural @Immutable public final class PMatrixI3x3D<T0, T1> implements
-  PMatrixReadable3x3DType<T0, T1>
+@EqualityStructural @Immutable public final class PMatrixI3x3D<T0, T1>
+  implements PMatrixReadable3x3DType<T0, T1>
 {
-  private static final double[][]   IDENTITY  = PMatrixI3x3D.makeIdentity();
+  private static final double[][]         IDENTITY  =
+    PMatrixI3x3D.makeIdentity();
   private static final PMatrixI3x3D<?, ?> IDENTITYM =
     PMatrixI3x3D.makeIdentityM();
+  private final double[][] elements;
+
+  private PMatrixI3x3D(
+    final double[][] e)
+  {
+    this.elements = e;
+  }
 
   /**
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
+   *
    * @return The identity matrix
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   @SuppressWarnings("unchecked")
@@ -78,16 +86,11 @@ import java.util.Arrays;
   /**
    * Construct a new immutable 3x3 matrix from the given columns.
    *
-   * @param column_0
-   *          The first column
-   * @param column_1
-   *          The second column
-   * @param column_2
-   *          The third column
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
+   * @param column_0 The first column
+   * @param column_1 The second column
+   * @param column_2 The third column
+   * @param <T0>     A phantom type parameter.
+   * @param <T1>     A phantom type parameter.
    *
    * @return A new 3x3 matrix
    */
@@ -117,14 +120,11 @@ import java.util.Arrays;
   /**
    * Construct a new immutable 3x3 matrix from the given readable 3x3 matrix.
    *
-   * @param m
-   *          The original matrix
+   * @param m    The original matrix
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
    *
    * @return A new 3x3 matrix
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> PMatrixI3x3D<T0, T1> newFromReadable(
@@ -144,14 +144,11 @@ import java.util.Arrays;
   /**
    * Construct a new immutable 3x3 matrix from the given readable 3x3 matrix.
    *
-   * @param m
-   *          The original matrix
+   * @param m    The original matrix
+   * @param <T0> A phantom type parameter.
+   * @param <T1> A phantom type parameter.
    *
    * @return A new 3x3 matrix
-   * @param <T0>
-   *          A phantom type parameter.
-   * @param <T1>
-   *          A phantom type parameter.
    */
 
   public static <T0, T1> PMatrixI3x3D<T0, T1> newFromReadableUntyped(
@@ -168,14 +165,6 @@ import java.util.Arrays;
     return new PMatrixI3x3D<T0, T1>(e);
   }
 
-  private final double[][] elements;
-
-  private PMatrixI3x3D(
-    final double[][] e)
-  {
-    this.elements = e;
-  }
-
   @Override public boolean equals(
     final @Nullable Object obj)
   {
@@ -189,27 +178,53 @@ import java.util.Arrays;
       return false;
     }
     final PMatrixI3x3D<?, ?> other = (PMatrixI3x3D<?, ?>) obj;
-    if (!Arrays.deepEquals(this.elements, other.elements)) {
-      return false;
-    }
-    return true;
+    return Arrays.deepEquals(this.elements, other.elements);
   }
 
   @Override public <V extends VectorWritable3DType> void getRow3D(
     final int row,
     final V out)
   {
+    this.getRow3DUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable3DType> void getRow3DUnsafe(
+    final int row,
+    final V out)
+  {
     out.set3D(
-      this.elements[row][0],
-      this.elements[row][1],
-      this.elements[row][2]);
+      this.elements[row][0], this.elements[row][1], this.elements[row][2]);
+  }
+
+  @Override public double getR0C2D()
+  {
+    return this.elements[0][2];
+  }
+
+  @Override public double getR1C2D()
+  {
+    return this.elements[1][2];
+  }
+
+  @Override public double getR2C0D()
+  {
+    return this.elements[2][0];
+  }
+
+  @Override public double getR2C1D()
+  {
+    return this.elements[2][1];
+  }
+
+  @Override public double getR2C2D()
+  {
+    return this.elements[2][2];
   }
 
   /**
-   * @param row
-   *          The row
-   * @param col
-   *          The column
+   * @param row The row
+   * @param col The column
+   *
    * @return The value at the given row and column
    */
 
@@ -222,40 +237,105 @@ import java.util.Arrays;
 
   @Override public int hashCode()
   {
-    return Arrays.hashCode(this.elements);
+    final int prime = 31;
+    int r = prime;
+
+    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR2C0D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR2C1D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(this.getR0C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR2C2D(), prime, r);
+
+    return r;
   }
 
   /**
    * Write the current matrix into the given mutable matrix.
    *
-   * @param m
-   *          The mutable matrix
+   * @param m The mutable matrix
    */
 
-  public void makeMatrixM3x3D(
-    final PMatrixM3x3D<T0, T1> m)
+  public void makeMatrix3x3D(
+    final PMatrixWritable3x3DType<T0, T1> m)
   {
-    for (int row = 0; row < 3; ++row) {
-      for (int col = 0; col < 3; ++col) {
-        m.set(row, col, this.elements[row][col]);
-      }
-    }
+    this.makeMatrix3x3DUntyped(m);
+  }
+
+  /**
+   * Write the current matrix into the given mutable matrix.
+   *
+   * @param m The mutable matrix
+   */
+
+  public void makeMatrix3x3DUntyped(
+    final MatrixWritable3x3DType m)
+  {
+    m.setR0C0D(this.getR0C0D());
+    m.setR0C1D(this.getR0C1D());
+    m.setR0C2D(this.getR0C2D());
+
+    m.setR1C0D(this.getR1C0D());
+    m.setR1C1D(this.getR1C1D());
+    m.setR1C2D(this.getR1C2D());
+
+    m.setR2C0D(this.getR2C0D());
+    m.setR2C1D(this.getR2C1D());
+    m.setR2C2D(this.getR2C2D());
   }
 
   @Override public String toString()
   {
-    final StringBuilder builder = new StringBuilder();
+    final StringBuilder builder = new StringBuilder(512);
     for (int row = 0; row < 3; ++row) {
-      final String text =
-        String.format(
-          "[%+.15f %+.15f %+.15f]\n",
-          Double.valueOf(this.elements[row][0]),
-          Double.valueOf(this.elements[row][1]),
-          Double.valueOf(this.elements[row][2]));
+      final String text = String.format(
+        "[%+.15f %+.15f %+.15f]\n",
+        Double.valueOf(this.elements[row][0]),
+        Double.valueOf(this.elements[row][1]),
+        Double.valueOf(this.elements[row][2]));
       builder.append(text);
     }
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  @Override public <V extends VectorWritable2DType> void getRow2D(
+    final int row,
+    final V out)
+  {
+    this.getRow2DUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
+    final int row,
+    final V out)
+  {
+    out.set2D(this.elements[row][0], this.elements[row][1]);
+  }
+
+  @Override public double getR0C0D()
+  {
+    return this.elements[0][0];
+  }
+
+  @Override public double getR1C0D()
+  {
+    return this.elements[1][0];
+  }
+
+  @Override public double getR0C1D()
+  {
+    return this.elements[0][1];
+  }
+
+  @Override public double getR1C1D()
+  {
+    return this.elements[1][1];
   }
 }

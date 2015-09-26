@@ -45,9 +45,13 @@
           for zero-copy sharing of structures with native code.
         </s:paragraph>
         <s:paragraph>
-          Many of the matrix functions also provide interfaces that allow for
-          preallocation of all storage, reducing garbage collector pressure in
-          code with soft-realtime constraints.
+          Each vector and matrix type has an associated
+          <s:term s:type="term">context</s:term> type containing enough
+          preallocated storage to execute all functions in the type without
+          performing any allocations. All code paths are therefore
+          allocation free
+          (with the exception of <s:term s:type="function">toString</s:term>
+          methods, which require allocation by design).
         </s:paragraph>
       </s:subsection>
 
@@ -114,7 +118,7 @@
       <s:paragraph>
         All files distributed with the <s:term s:type="package">${project.parent.name}</s:term>
         package are placed under the following license:
-        <s:verbatim s:type="license"><![CDATA[Copyright © 2014 <code@io7m.com> http://io7m.com
+        <s:verbatim s:type="license"><![CDATA[Copyright © 2015 <code@io7m.com> http://io7m.com
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -235,6 +239,16 @@ type         = "Vector" , mutability , size , element_type ;]]>
         </s:formal-item>
       </s:subsection>
 
+      <s:subsection xml:id="com.io7m.jtensors.conventions.vectors.storage">
+        <s:subsection-title>Storage</s:subsection-title>
+        <s:paragraph>
+          As with all matrix types, all vector types have associated
+          <s:link s:target="com.io7m.jtensors.conventions.matrices.storage">Context</s:link>
+          types that allow for all methods to execute without allocating
+          any memory. See the linked section for details.
+        </s:paragraph>
+      </s:subsection>
+
       <s:subsection xml:id="com.io7m.jtensors.conventions.vectors.phantom_types">
         <s:subsection-title>Phantom types</s:subsection-title>
         <s:paragraph>
@@ -350,22 +364,24 @@ type         = "Matrix" , mutability , size , element_type ;]]>
           <s:term s:type="type">Context</s:term> types that allow the user to pre-allocate
           storage that the functions can reuse an unlimited number of times. The package
           typically defines one <s:term s:type="type">Context</s:term> type per class.
-          See the <s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM4x4D.Context.html">MatrixM4x4D.Context</s:link-external>
+          See the <s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM4x4D.ContextMM4D.html">MatrixM4x4D.ContextMM4D</s:link-external>
           type for a concrete example; any function in the
           <s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM4x4D.html">MatrixM4x4D</s:link-external>
-          class that takes a <s:term s:type="type">Context</s:term> as an argument can be
-          depended upon not to allocate more memory. Note that the <s:term s:type="type">Context</s:term>
+          class that takes a <s:term s:type="type">ContextMM4D</s:term> as an argument can be
+          depended upon not to allocate more memory. Note that the <s:term s:type="type">ContextMM4D</s:term>
           type cannot be shared across threads and is completely opaque outside of the
-          <s:term s:type="package">jtensors</s:term> package.
+          <s:term s:type="package">jtensors</s:term> package: Users should
+          allocate one <s:term s:type="type">ContextMM4D</s:term>
+          per thread.
         </s:paragraph>
         <s:formal-item s:kind="example">
           <s:formal-item-title>Context usage</s:formal-item-title>
-          <s:verbatim><![CDATA[MatrixM4x4D.Context context = new MatrixM4x4D.Context();
+          <s:verbatim><![CDATA[MatrixM4x4D.ContextMM4D context = new MatrixM4x4D.ContextMM4D();
 MatrixM4x4D mi = new MatrixM4x4D();
 MatrixM4x4D mo = new MatrixM4x4D();
 
-MatrixM4x4D.invertWithContext(context, mi, mo);
-MatrixM4x4D.invertWithContext(context, mo, mi);]]>
+MatrixM4x4D.invert(context, mi, mo);
+MatrixM4x4D.invert(context, mo, mi);]]>
           </s:verbatim>
         </s:formal-item>
         <s:paragraph>
@@ -619,7 +635,7 @@ PMatrixM4x4F.multiply (matrix_view, matrix_model, matrix_modelview);
 // PMatrixM4x4F.multiply (matrix_view, matrix_model, matrix_modelview);
 
 PMatrixM4x4F<ViewSpace, WorldSpace> matrix_view_inverse;
-PMatrixM4x4F.invertWithContext(context, matrix_view, matrix_view_inverse);
+PMatrixM4x4F.invert(context, matrix_view, matrix_view_inverse);
 ]]></s:verbatim>
         </s:formal-item>
         <s:paragraph>

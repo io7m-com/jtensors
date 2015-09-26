@@ -18,18 +18,24 @@ package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.parameterized.PVectorM3I;
 
-public final class PVectorM3ITest<U> extends PVectorM3IContract<U>
+public final class PVectorM3ITest<T>
+  extends PVectorM3IContract<T, PVectorM3I<T>>
 {
-  protected <T> PVectorM3I<T> newVectorM3I()
+  @Override protected PVectorM3I<T> newVectorM3I(
+    final int x,
+    final int y,
+    final int z)
+  {
+    return new PVectorM3I<T>(x, y, z);
+  }
+
+  @Override protected PVectorM3I<T> newVectorM3I()
   {
     return new PVectorM3I<T>();
   }
 
-  protected <T> PVectorM3I<T> newVectorM3I(
-    final int x1,
-    final int y1,
-    final int z1)
+  @Override protected PVectorM3I<T> newVectorM3I(final PVectorM3I<T> v)
   {
-    return new PVectorM3I<T>(x1, y1, z1);
+    return new PVectorM3I<T>(v);
   }
 }

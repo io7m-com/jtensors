@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,301 +16,152 @@
 
 package com.io7m.jtensors;
 
-import com.io7m.jfunctional.Option;
-import com.io7m.jfunctional.OptionType;
-import com.io7m.jnull.Nullable;
+import com.io7m.junreachable.UnreachableCodeException;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
+//@formatter:off
 
 /**
  * <p>
  * A 4x4 mutable matrix type with single precision elements.
  * </p>
  * <p>
- * Values of type {@code MatrixM4x4F} are backed by direct memory, with
- * the rows and columns of the matrices being stored in column-major format.
- * This allows the matrices to be passed to OpenGL directly, without requiring
+ * Values of type {@code MatrixM4x4F} are backed by direct memory, with the
+ * rows and columns of the matrices being stored in column-major format. This
+ * allows the matrices to be passed to OpenGL directly, without requiring
  * transposition.
  * </p>
  * <p>
- * Values of this type cannot be accessed safely from multiple threads without
- * explicit synchronization.
+ * Values of this type cannot be accessed safely from multiple threads
+ * without explicit synchronization.
  * </p>
  * <p>
- * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed for
- * the derivations of most of the code in this class (ISBN: 1-58450-277-0).
+ * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed
+ * for the derivations of most of the code in this class (ISBN: 1-58450-277-0).
  * </p>
  * <p>
- * See <a href="http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations">Elementary operations</a>
+ * See http://en.wikipedia.org/wiki/Row_equivalence#Elementary_row_operations
  * for the three <i>elementary</i> operations defined on matrices.
  * </p>
  */
 
-public final class MatrixM4x4F implements
-  MatrixDirectReadable4x4FType,
-  MatrixWritable4x4FType
+//@formatter:on
+
+public final class MatrixM4x4F
 {
-  /**
-   * <p>
-   * The Context type contains the minimum storage required for all of the
-   * functions of the {@code MatrixM4x4F} class.
-   * </p>
-   * <p>
-   * The purpose of the class is to allow applications to allocate all storage
-   * ahead of time in order to allow functions in the class to avoid
-   * allocating memory (not including stack space) for intermediate
-   * calculations. This can reduce garbage collection in speed critical code.
-   * </p>
-   * <p>
-   * The user should allocate one {@code Context} value per thread, and
-   * then pass this value to matrix functions. Any matrix function that takes
-   * a {@code Context} value will not generate garbage.
-   * </p>
-   */
-
-  public static class Context
+  private MatrixM4x4F()
   {
-    private final MatrixM3x3F m3a = new MatrixM3x3F();
-    private final MatrixM4x4F m4a = new MatrixM4x4F();
-    private final MatrixM4x4F m4b = new MatrixM4x4F();
-    private final VectorM3F   v3a = new VectorM3F();
-    private final VectorM3F   v3b = new VectorM3F();
-    private final VectorM3F   v3c = new VectorM3F();
-    private final VectorM3F   v3d = new VectorM3F();
-    private final VectorM4F   v4a = new VectorM4F();
-    private final VectorM4F   v4b = new VectorM4F();
-
-    /**
-     * Construct a new context.
-     */
-
-    public Context()
-    {
-
-    }
-
-    final MatrixM3x3F getM3a()
-    {
-      return this.m3a;
-    }
-
-    final MatrixM4x4F getM4a()
-    {
-      return this.m4a;
-    }
-
-    final MatrixM4x4F getM4b()
-    {
-      return this.m4b;
-    }
-
-    final VectorM3F getV3a()
-    {
-      return this.v3a;
-    }
-
-    final VectorM3F getV3b()
-    {
-      return this.v3b;
-    }
-
-    final VectorM3F getV3c()
-    {
-      return this.v3c;
-    }
-
-    final VectorM3F getV3d()
-    {
-      return this.v3d;
-    }
-
-    final VectorM4F getV4a()
-    {
-      return this.v4a;
-    }
-
-    final VectorM4F getV4b()
-    {
-      return this.v4b;
-    }
-  }
-
-  private static final int VIEW_BYTES;
-  private static final int VIEW_COLS;
-  private static final int VIEW_ELEMENT_SIZE;
-  private static final int VIEW_ELEMENTS;
-  private static final int VIEW_ROWS;
-
-  static {
-    VIEW_ROWS = 4;
-    VIEW_COLS = 4;
-    VIEW_ELEMENT_SIZE = 4;
-    VIEW_ELEMENTS = MatrixM4x4F.VIEW_ROWS * MatrixM4x4F.VIEW_COLS;
-    VIEW_BYTES = MatrixM4x4F.VIEW_ELEMENTS * MatrixM4x4F.VIEW_ELEMENT_SIZE;
+    throw new UnreachableCodeException();
   }
 
   /**
    * Elementwise add of matrices {@code m0} and {@code m1}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m0  The left input matrix
+   * @param m1  The right input matrix
+   * @param out The output matrix
+   * @param <M> The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F add(
+  public static <M extends MatrixWritable4x4FType> M add(
     final MatrixReadable4x4FType m0,
     final MatrixReadable4x4FType m1,
-    final MatrixM4x4F out)
+    final M out)
   {
-    final float r0c0 = m0.getRowColumnF(0, 0) + m1.getRowColumnF(0, 0);
-    final float r1c0 = m0.getRowColumnF(1, 0) + m1.getRowColumnF(1, 0);
-    final float r2c0 = m0.getRowColumnF(2, 0) + m1.getRowColumnF(2, 0);
-    final float r3c0 = m0.getRowColumnF(3, 0) + m1.getRowColumnF(3, 0);
+    final float r0c0 = m0.getR0C0F() + m1.getR0C0F();
+    final float r1c0 = m0.getR1C0F() + m1.getR1C0F();
+    final float r2c0 = m0.getR2C0F() + m1.getR2C0F();
+    final float r3c0 = m0.getR3C0F() + m1.getR3C0F();
 
-    final float r0c1 = m0.getRowColumnF(0, 1) + m1.getRowColumnF(0, 1);
-    final float r1c1 = m0.getRowColumnF(1, 1) + m1.getRowColumnF(1, 1);
-    final float r2c1 = m0.getRowColumnF(2, 1) + m1.getRowColumnF(2, 1);
-    final float r3c1 = m0.getRowColumnF(3, 1) + m1.getRowColumnF(3, 1);
+    final float r0c1 = m0.getR0C1F() + m1.getR0C1F();
+    final float r1c1 = m0.getR1C1F() + m1.getR1C1F();
+    final float r2c1 = m0.getR2C1F() + m1.getR2C1F();
+    final float r3c1 = m0.getR3C1F() + m1.getR3C1F();
 
-    final float r0c2 = m0.getRowColumnF(0, 2) + m1.getRowColumnF(0, 2);
-    final float r1c2 = m0.getRowColumnF(1, 2) + m1.getRowColumnF(1, 2);
-    final float r2c2 = m0.getRowColumnF(2, 2) + m1.getRowColumnF(2, 2);
-    final float r3c2 = m0.getRowColumnF(3, 2) + m1.getRowColumnF(3, 2);
+    final float r0c2 = m0.getR0C2F() + m1.getR0C2F();
+    final float r1c2 = m0.getR1C2F() + m1.getR1C2F();
+    final float r2c2 = m0.getR2C2F() + m1.getR2C2F();
+    final float r3c2 = m0.getR3C2F() + m1.getR3C2F();
 
-    final float r0c3 = m0.getRowColumnF(0, 3) + m1.getRowColumnF(0, 3);
-    final float r1c3 = m0.getRowColumnF(1, 3) + m1.getRowColumnF(1, 3);
-    final float r2c3 = m0.getRowColumnF(2, 3) + m1.getRowColumnF(2, 3);
-    final float r3c3 = m0.getRowColumnF(3, 3) + m1.getRowColumnF(3, 3);
+    final float r0c3 = m0.getR0C3F() + m1.getR0C3F();
+    final float r1c3 = m0.getR1C3F() + m1.getR1C3F();
+    final float r2c3 = m0.getR2C3F() + m1.getR2C3F();
+    final float r3c3 = m0.getR3C3F() + m1.getR3C3F();
 
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(1, 0, r1c0);
-    out.setUnsafe(2, 0, r2c0);
-    out.setUnsafe(3, 0, r3c0);
+    out.setR0C0F(r0c0);
+    out.setR1C0F(r1c0);
+    out.setR2C0F(r2c0);
+    out.setR3C0F(r3c0);
 
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(1, 1, r1c1);
-    out.setUnsafe(2, 1, r2c1);
-    out.setUnsafe(3, 1, r3c1);
+    out.setR0C1F(r0c1);
+    out.setR1C1F(r1c1);
+    out.setR2C1F(r2c1);
+    out.setR3C1F(r3c1);
 
-    out.setUnsafe(0, 2, r0c2);
-    out.setUnsafe(1, 2, r1c2);
-    out.setUnsafe(2, 2, r2c2);
-    out.setUnsafe(3, 2, r3c2);
+    out.setR0C2F(r0c2);
+    out.setR1C2F(r1c2);
+    out.setR2C2F(r2c2);
+    out.setR3C2F(r3c2);
 
-    out.setUnsafe(0, 3, r0c3);
-    out.setUnsafe(1, 3, r1c3);
-    out.setUnsafe(2, 3, r2c3);
-    out.setUnsafe(3, 3, r3c3);
+    out.setR0C3F(r0c3);
+    out.setR1C3F(r1c3);
+    out.setR2C3F(r2c3);
+    out.setR3C3F(r3c3);
     return out;
   }
 
   /**
-   * Elementwise add of matrices {@code m0} and {@code m1},
-   * returning the result in {@code m0}.
+   * Elementwise add of matrices {@code m0} and {@code m1}, returning the result
+   * in {@code m0}.
    *
-   * @param m0
-   *          The left input matrix.
-   * @param m1
-   *          The right input matrix.
+   * @param m0  The left input matrix
+   * @param m1  The right input matrix
+   * @param <M> The precise type of matrix
+   *
    * @return m0
    */
 
-  public static MatrixM4x4F addInPlace(
-    final MatrixM4x4F m0,
+  public static <M extends MatrixWritable4x4FType & MatrixReadable4x4FType> M
+  addInPlace(
+    final M m0,
     final MatrixReadable4x4FType m1)
   {
     return MatrixM4x4F.add(m0, m1, m0);
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code out}.
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code m}. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
-   */
-
-  public static MatrixM4x4F addRowScaled(
-    final MatrixReadable4x4FType m,
-    final int row_a,
-    final int row_b,
-    final int row_c,
-    final double r,
-    final MatrixM4x4F out)
-  {
-    final VectorM4F va = new VectorM4F();
-    final VectorM4F vb = new VectorM4F();
-
-    return MatrixM4x4F.addRowScaledUnsafe(
-      m,
-      MatrixM4x4F.rowCheck(row_a),
-      MatrixM4x4F.rowCheck(row_b),
-      MatrixM4x4F.rowCheck(row_c),
-      r,
-      va,
-      vb,
-      out);
-  }
-
-  /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code m}.
-   * </p>
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param row_a   The row on the lefthand side of the addition
+   * @param row_b   The row on the righthand side of the addition
+   * @param row_c   The destination row
+   * @param r       The scaling value
+   * @param <M>     The precise type of matrix
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
-   *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
    * @return {@code m}
    */
 
-  public static MatrixM4x4F addRowScaledInPlace(
-    final MatrixM4x4F m,
+  public static <M extends MatrixWritable4x4FType & MatrixReadable4x4FType> M
+  addRowScaledInPlace(
+    final ContextMM4F context,
+    final M m,
     final int row_a,
     final int row_b,
     final int row_c,
     final double r)
   {
-    return MatrixM4x4F.addRowScaled(m, row_a, row_b, row_c, r, m);
+    return MatrixM4x4F.addRowScaled(context, m, row_a, row_b, row_c, r, m);
   }
 
-  private static MatrixM4x4F addRowScaledUnsafe(
+  private static <M extends MatrixWritable4x4FType> M addRowScaledUnsafe(
     final MatrixReadable4x4FType m,
     final int row_a,
     final int row_b,
@@ -318,53 +169,44 @@ public final class MatrixM4x4F implements
     final double r,
     final VectorM4F va,
     final VectorM4F vb,
-    final MatrixM4x4F out)
+    final M out)
   {
-    MatrixM4x4F.rowUnsafe(m, row_a, va);
-    MatrixM4x4F.rowUnsafe(m, row_b, vb);
+    m.getRow4FUnsafe(row_a, va);
+    m.getRow4FUnsafe(row_b, vb);
     VectorM4F.addScaledInPlace(va, vb, r);
-    MatrixM4x4F.setRowUnsafe(out, row_c, va);
+    out.setRowWith4FUnsafe(row_c, va);
     return out;
   }
 
   /**
-   * <p>
-   * Add the values in row {@code row_b} to the values in row
-   * {@code row_a} scaled by {@code r}, saving the resulting row in
-   * row {@code row_c} of the matrix {@code out}. The function uses
-   * storage preallocated in {@code context} to avoid any new
-   * allocations.
-   * </p>
+   * <p> Add the values in row {@code row_b} to the values in row {@code row_a}
+   * scaled by {@code r}, saving the resulting row in row {@code row_c} of the
+   * matrix {@code out}. The function uses storage preallocated in {@code
+   * context} to avoid any new allocations. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The row on the lefthand side of the addition.
-   * @param row_b
-   *          The row on the righthand side of the addition.
-   * @param row_c
-   *          The destination row.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param row_a   The row on the lefthand side of the addition
+   * @param row_b   The row on the righthand side of the addition
+   * @param row_c   The destination row
+   * @param r       The scaling value
+   * @param out     The output matrix
+   * @param <M>     The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F addRowScaledWithContext(
-    final Context context,
+  public static <M extends MatrixWritable4x4FType> M addRowScaled(
+    final ContextMM4F context,
     final MatrixReadable4x4FType m,
     final int row_a,
     final int row_b,
     final int row_c,
     final double r,
-    final MatrixM4x4F out)
+    final M out)
   {
     return MatrixM4x4F.addRowScaledUnsafe(
       m,
@@ -372,74 +214,79 @@ public final class MatrixM4x4F implements
       MatrixM4x4F.rowCheck(row_b),
       MatrixM4x4F.rowCheck(row_c),
       r,
-      context.getV4a(),
-      context.getV4b(),
+      context.v4a,
+      context.v4b,
       out);
   }
 
-  private static int columnCheck(
-    final int column)
-  {
-    if ((column < 0) || (column >= MatrixM4x4F.VIEW_COLS)) {
-      throw new IndexOutOfBoundsException(
-        "column must be in the range 0 <= row < " + MatrixM4x4F.VIEW_COLS);
-    }
-    return column;
-  }
-
   /**
-   * Copy the contents of the matrix {@code input} to the matrix
-   * {@code output}, completely replacing all elements.
+   * Copy the contents of the matrix {@code input} to the matrix {@code output},
+   * completely replacing all elements.
    *
-   * @param input
-   *          The input vector.
-   * @param output
-   *          The output vector.
+   * @param input  The input vector
+   * @param output The output vector
+   * @param <M>    The precise type of matrix
+   *
    * @return {@code output}
    */
 
-  public static MatrixM4x4F copy(
+  public static <M extends MatrixWritable4x4FType> M copy(
     final MatrixReadable4x4FType input,
-    final MatrixM4x4F output)
+    final M output)
   {
-    for (int col = 0; col < MatrixM4x4F.VIEW_COLS; ++col) {
-      for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {
-        output.setUnsafe(row, col, input.getRowColumnF(row, col));
-      }
-    }
+    output.setR0C0F(input.getR0C0F());
+    output.setR0C1F(input.getR0C1F());
+    output.setR0C2F(input.getR0C2F());
+    output.setR0C3F(input.getR0C3F());
+
+    output.setR1C0F(input.getR1C0F());
+    output.setR1C1F(input.getR1C1F());
+    output.setR1C2F(input.getR1C2F());
+    output.setR1C3F(input.getR1C3F());
+
+    output.setR2C0F(input.getR2C0F());
+    output.setR2C1F(input.getR2C1F());
+    output.setR2C2F(input.getR2C2F());
+    output.setR2C3F(input.getR2C3F());
+
+    output.setR3C0F(input.getR3C0F());
+    output.setR3C1F(input.getR3C1F());
+    output.setR3C2F(input.getR3C2F());
+    output.setR3C3F(input.getR3C3F());
+
     return output;
   }
 
   /**
    * Calculate the determinant of the matrix {@code m}.
    *
+   * @param m The input matrix
+   *
    * @return The determinant.
-   * @param m
-   *          The input matrix.
    */
 
   public static double determinant(
     final MatrixReadable4x4FType m)
   {
-    final double r0c0 = (double) m.getRowColumnF(0, 0);
-    final double r1c0 = (double) m.getRowColumnF(1, 0);
-    final double r2c0 = (double) m.getRowColumnF(2, 0);
-    final double r3c0 = (double) m.getRowColumnF(3, 0);
+    final double r0c0 = (double) m.getR0C0F();
+    final double r1c0 = (double) m.getR1C0F();
+    final double r2c0 = (double) m.getR2C0F();
+    final double r3c0 = (double) m.getR3C0F();
 
-    final double r0c1 = (double) m.getRowColumnF(0, 1);
-    final double r1c1 = (double) m.getRowColumnF(1, 1);
-    final double r2c1 = (double) m.getRowColumnF(2, 1);
-    final double r3c1 = (double) m.getRowColumnF(3, 1);
+    final double r0c1 = (double) m.getR0C1F();
+    final double r1c1 = (double) m.getR1C1F();
+    final double r2c1 = (double) m.getR2C1F();
+    final double r3c1 = (double) m.getR3C1F();
 
-    final double r0c2 = (double) m.getRowColumnF(0, 2);
-    final double r1c2 = (double) m.getRowColumnF(1, 2);
-    final double r2c2 = (double) m.getRowColumnF(2, 2);
-    final double r3c2 = (double) m.getRowColumnF(3, 2);
+    final double r0c2 = (double) m.getR0C2F();
+    final double r1c2 = (double) m.getR1C2F();
+    final double r2c2 = (double) m.getR2C2F();
+    final double r3c2 = (double) m.getR3C2F();
 
-    final double r0c3 = (double) m.getRowColumnF(0, 3);
-    final double r1c3 = (double) m.getRowColumnF(1, 3);
-    final double r2c3 = (double) m.getRowColumnF(2, 3);
-    final double r3c3 = (double) m.getRowColumnF(3, 3);
+    final double r0c3 = (double) m.getR0C3F();
+    final double r1c3 = (double) m.getR1C3F();
+    final double r2c3 = (double) m.getR2C3F();
+    final double r3c3 = (double) m.getR3C3F();
 
     double sum = 0.0;
 
@@ -477,223 +324,92 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code out}.
-   * </p>
+   * <p> Exchange the row {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code m}. The function uses
+   * storage preallocated in {@code context} to avoid allocating memory. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
-   */
-
-  public static MatrixM4x4F exchangeRows(
-    final MatrixReadable4x4FType m,
-    final int row_a,
-    final int row_b,
-    final MatrixM4x4F out)
-  {
-    final VectorM4F va = new VectorM4F();
-    final VectorM4F vb = new VectorM4F();
-    return MatrixM4x4F.exchangeRowsUnsafe(
-      m,
-      MatrixM4x4F.rowCheck(row_a),
-      MatrixM4x4F.rowCheck(row_b),
-      va,
-      vb,
-      out);
-  }
-
-  /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code m}.
-   * </p>
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param row_a   The first row
+   * @param row_b   The second row
+   * @param <M>     The precise type of matrix
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
-   *
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
    * @return {@code m}
    */
 
-  public static MatrixM4x4F exchangeRowsInPlace(
-    final MatrixM4x4F m,
+  public static <M extends MatrixWritable4x4FType & MatrixReadable4x4FType> M
+  exchangeRowsInPlace(
+    final ContextMM4F context,
+    final M m,
     final int row_a,
     final int row_b)
   {
-    return MatrixM4x4F.exchangeRows(m, row_a, row_b, m);
+    return MatrixM4x4F.exchangeRows(context, m, row_a, row_b, m);
   }
 
-  /**
-   * <p>
-   * Exchange the row {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code m}. The
-   * function uses storage preallocated in {@code context} to avoid
-   * allocating memory.
-   * </p>
-   *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
-   *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
-   * @return {@code m}
-   */
-
-  public static MatrixM4x4F exchangeRowsInPlaceWithContext(
-    final Context context,
-    final MatrixM4x4F m,
-    final int row_a,
-    final int row_b)
-  {
-    return MatrixM4x4F.exchangeRowsWithContext(context, m, row_a, row_b, m);
-  }
-
-  private static MatrixM4x4F exchangeRowsUnsafe(
+  private static <M extends MatrixWritable4x4FType> M exchangeRowsUnsafe(
     final MatrixReadable4x4FType m,
     final int row_a,
     final int row_b,
     final VectorM4F va,
     final VectorM4F vb,
-    final MatrixM4x4F out)
+    final M out)
   {
-    MatrixM4x4F.rowUnsafe(m, row_a, va);
-    MatrixM4x4F.rowUnsafe(m, row_b, vb);
-    MatrixM4x4F.setRowUnsafe(out, row_a, vb);
-    MatrixM4x4F.setRowUnsafe(out, row_b, va);
+    m.getRow4FUnsafe(row_a, va);
+    m.getRow4FUnsafe(row_b, vb);
+    out.setRowWith4FUnsafe(row_a, vb);
+    out.setRowWith4FUnsafe(row_b, va);
     return out;
   }
 
   /**
-   * <p>
-   * Exchange two rows {@code row_a} and row {@code row_b} of the
-   * matrix {@code m}, saving the exchanged rows to {@code out} .
-   * </p>
-   * <p>
-   * The function uses storage preallocated in {@code context} to avoid
-   * allocating memory.
+   * <p> Exchange two rows {@code row_a} and row {@code row_b} of the matrix
+   * {@code m}, saving the exchanged rows to {@code out} . </p> <p> The function
+   * uses storage preallocated in {@code context} to avoid allocating memory.
    * </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row_a
-   *          The first row.
-   * @param row_b
-   *          The second row.
-   * @param out
-   *          The output matrix.
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param row_a   The first row
+   * @param row_b   The second row
+   * @param out     The output matrix
+   * @param <M>     The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F exchangeRowsWithContext(
-    final Context context,
+  public static <M extends MatrixWritable4x4FType> M exchangeRows(
+    final ContextMM4F context,
     final MatrixReadable4x4FType m,
     final int row_a,
     final int row_b,
-    final MatrixM4x4F out)
+    final M out)
   {
     return MatrixM4x4F.exchangeRowsUnsafe(
       m,
       MatrixM4x4F.rowCheck(row_a),
       MatrixM4x4F.rowCheck(row_b),
-      context.getV4a(),
-      context.getV4b(),
+      context.v4a,
+      context.v4b,
       out);
   }
 
-  private static int indexChecked(
-    final int row,
-    final int column)
-  {
-    return MatrixM4x4F.indexUnsafe(
-      MatrixM4x4F.rowCheck(row),
-      MatrixM4x4F.columnCheck(column));
-  }
-
-  /**
-   * <p>
-   * The main function that indexes into the buffer that backs the array. The
-   * body of this function decides on how elements are stored. This
-   * implementation chooses to store values in column-major format as this
-   * allows matrices to be sent directly to OpenGL without conversion.
-   * </p>
-   * <p>
-   * (row * 4) + column, corresponds to row-major storage. (column * 4) + row,
-   * corresponds to column-major (OpenGL) storage.
-   * </p>
-   */
-
-  private static int indexUnsafe(
-    final int row,
-    final int column)
-  {
-    return (column * MatrixM4x4F.VIEW_COLS) + row;
-  }
-
-  /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code out}. The function returns {@code Some(out)}
-   * iff it was possible to invert the matrix, and {@code None}
-   * otherwise. It is not possible to invert a matrix that has a determinant
-   * of {@code 0}. If the function returns {@code None},
-   * {@code m} is untouched.
-   *
-   * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}.
-   */
-
-  public static OptionType<MatrixM4x4F> invert(
+  private static <M extends MatrixWritable4x4FType> boolean invertActual(
     final MatrixReadable4x4FType m,
-    final MatrixM4x4F out)
-  {
-    final MatrixM3x3F m3 = new MatrixM3x3F();
-    return MatrixM4x4F.invertActual(m, m3, out);
-  }
-
-  private static OptionType<MatrixM4x4F> invertActual(
-    final MatrixReadable4x4FType m,
-    final MatrixM3x3F m3,
-    final MatrixM4x4F out)
+    final Matrix3x3FType m3,
+    final Matrix4x4FType temp,
+    final M out)
   {
     final double d = MatrixM4x4F.determinant(m);
 
     if (d == 0.0) {
-      return Option.none();
+      return false;
     }
 
     final double d_inv = 1.0 / d;
@@ -734,15 +450,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[0, 0]
       // 1 = (-1) ^ (0 + 0)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(1, 1));
-      m3.setUnsafe(0, 1, m.getRowColumnF(1, 2));
-      m3.setUnsafe(0, 2, m.getRowColumnF(1, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(2, 1));
-      m3.setUnsafe(1, 1, m.getRowColumnF(2, 2));
-      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 1));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
+      m3.setR0C0F(m.getR1C1F());
+      m3.setR0C1F(m.getR1C2F());
+      m3.setR0C2F(m.getR1C3F());
+      m3.setR1C0F(m.getR2C1F());
+      m3.setR1C1F(m.getR2C2F());
+      m3.setR1C2F(m.getR2C3F());
+      m3.setR2C0F(m.getR3C1F());
+      m3.setR2C1F(m.getR3C2F());
+      m3.setR2C2F(m.getR3C3F());
 
       r0c0 = MatrixM3x3F.determinant(m3);
     }
@@ -751,15 +467,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[0, 1]
       // -1 = (-1) ^ (0 + 1)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(1, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(1, 2));
-      m3.setUnsafe(0, 2, m.getRowColumnF(1, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(2, 2));
-      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
+      m3.setR0C0F(m.getR1C0F());
+      m3.setR0C1F(m.getR1C2F());
+      m3.setR0C2F(m.getR1C3F());
+      m3.setR1C0F(m.getR2C0F());
+      m3.setR1C1F(m.getR2C2F());
+      m3.setR1C2F(m.getR2C3F());
+      m3.setR2C0F(m.getR3C0F());
+      m3.setR2C1F(m.getR3C2F());
+      m3.setR2C2F(m.getR3C3F());
 
       r0c1 = -MatrixM3x3F.determinant(m3);
     }
@@ -768,15 +484,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[0, 2]
       // 1 = (-1) ^ (0 + 2)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(1, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(1, 1));
-      m3.setUnsafe(0, 2, m.getRowColumnF(1, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(2, 1));
-      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
+      m3.setR0C0F(m.getR1C0F());
+      m3.setR0C1F(m.getR1C1F());
+      m3.setR0C2F(m.getR1C3F());
+      m3.setR1C0F(m.getR2C0F());
+      m3.setR1C1F(m.getR2C1F());
+      m3.setR1C2F(m.getR2C3F());
+      m3.setR2C0F(m.getR3C0F());
+      m3.setR2C1F(m.getR3C1F());
+      m3.setR2C2F(m.getR3C3F());
 
       r0c2 = MatrixM3x3F.determinant(m3);
     }
@@ -785,15 +501,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[0, 3]
       // -1 = (-1) ^ (0 + 3)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(1, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(1, 1));
-      m3.setUnsafe(0, 2, m.getRowColumnF(1, 2));
-      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(2, 1));
-      m3.setUnsafe(1, 2, m.getRowColumnF(2, 2));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 2));
+      m3.setR0C0F(m.getR1C0F());
+      m3.setR0C1F(m.getR1C1F());
+      m3.setR0C2F(m.getR1C2F());
+      m3.setR1C0F(m.getR2C0F());
+      m3.setR1C1F(m.getR2C1F());
+      m3.setR1C2F(m.getR2C2F());
+      m3.setR2C0F(m.getR3C0F());
+      m3.setR2C1F(m.getR3C1F());
+      m3.setR2C2F(m.getR3C2F());
 
       r0c3 = -MatrixM3x3F.determinant(m3);
     }
@@ -802,15 +518,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[1, 0]
       // -1 = (-1) ^ (1 + 0)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 1));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(2, 1));
-      m3.setUnsafe(1, 1, m.getRowColumnF(2, 2));
-      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 1));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
+      m3.setR0C0F(m.getR0C1F());
+      m3.setR0C1F(m.getR0C2F());
+      m3.setR0C2F(m.getR0C3F());
+      m3.setR1C0F(m.getR2C1F());
+      m3.setR1C1F(m.getR2C2F());
+      m3.setR1C2F(m.getR2C3F());
+      m3.setR2C0F(m.getR3C1F());
+      m3.setR2C1F(m.getR3C2F());
+      m3.setR2C2F(m.getR3C3F());
 
       r1c0 = -MatrixM3x3F.determinant(m3);
     }
@@ -819,15 +535,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[1, 1]
       // 1 = (-1) ^ (1 + 1)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(2, 2));
-      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
+      m3.setR0C0F(m.getR0C0F());
+      m3.setR0C1F(m.getR0C2F());
+      m3.setR0C2F(m.getR0C3F());
+      m3.setR1C0F(m.getR2C0F());
+      m3.setR1C1F(m.getR2C2F());
+      m3.setR1C2F(m.getR2C3F());
+      m3.setR2C0F(m.getR3C0F());
+      m3.setR2C1F(m.getR3C2F());
+      m3.setR2C2F(m.getR3C3F());
 
       r1c1 = MatrixM3x3F.determinant(m3);
     }
@@ -836,15 +552,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[1, 2]
       // -1 = (-1) ^ (1 + 2)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(2, 1));
-      m3.setUnsafe(1, 2, m.getRowColumnF(2, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
+      m3.setR0C0F(m.getR0C0F());
+      m3.setR0C1F(m.getR0C1F());
+      m3.setR0C2F(m.getR0C3F());
+      m3.setR1C0F(m.getR2C0F());
+      m3.setR1C1F(m.getR2C1F());
+      m3.setR1C2F(m.getR2C3F());
+      m3.setR2C0F(m.getR3C0F());
+      m3.setR2C1F(m.getR3C1F());
+      m3.setR2C2F(m.getR3C3F());
 
       r1c2 = -MatrixM3x3F.determinant(m3);
     }
@@ -853,15 +569,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[1, 3]
       // 1 = (-1) ^ (1 + 3)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 2));
-      m3.setUnsafe(1, 0, m.getRowColumnF(2, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(2, 1));
-      m3.setUnsafe(1, 2, m.getRowColumnF(2, 2));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 2));
+      m3.setR0C0F(m.getR0C0F());
+      m3.setR0C1F(m.getR0C1F());
+      m3.setR0C2F(m.getR0C2F());
+      m3.setR1C0F(m.getR2C0F());
+      m3.setR1C1F(m.getR2C1F());
+      m3.setR1C2F(m.getR2C2F());
+      m3.setR2C0F(m.getR3C0F());
+      m3.setR2C1F(m.getR3C1F());
+      m3.setR2C2F(m.getR3C2F());
 
       r1c3 = MatrixM3x3F.determinant(m3);
     }
@@ -870,15 +586,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[2, 0]
       // 1 = (-1) ^ (2 + 0)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 1));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(1, 1));
-      m3.setUnsafe(1, 1, m.getRowColumnF(1, 2));
-      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 1));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
+      m3.setR0C0F(m.getR0C1F());
+      m3.setR0C1F(m.getR0C2F());
+      m3.setR0C2F(m.getR0C3F());
+      m3.setR1C0F(m.getR1C1F());
+      m3.setR1C1F(m.getR1C2F());
+      m3.setR1C2F(m.getR1C3F());
+      m3.setR2C0F(m.getR3C1F());
+      m3.setR2C1F(m.getR3C2F());
+      m3.setR2C2F(m.getR3C3F());
 
       r2c0 = MatrixM3x3F.determinant(m3);
     }
@@ -887,15 +603,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[2, 1]
       // -1 = (-1) ^ (2 + 1)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(1, 2));
-      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 2));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
+      m3.setR0C0F(m.getR0C0F());
+      m3.setR0C1F(m.getR0C2F());
+      m3.setR0C2F(m.getR0C3F());
+      m3.setR1C0F(m.getR1C0F());
+      m3.setR1C1F(m.getR1C2F());
+      m3.setR1C2F(m.getR1C3F());
+      m3.setR2C0F(m.getR3C0F());
+      m3.setR2C1F(m.getR3C2F());
+      m3.setR2C2F(m.getR3C3F());
 
       r2c1 = -MatrixM3x3F.determinant(m3);
     }
@@ -904,15 +620,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[2, 2]
       // 1 = (-1) ^ (2 + 2)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(1, 1));
-      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 3));
+      m3.setR0C0F(m.getR0C0F());
+      m3.setR0C1F(m.getR0C1F());
+      m3.setR0C2F(m.getR0C3F());
+      m3.setR1C0F(m.getR1C0F());
+      m3.setR1C1F(m.getR1C1F());
+      m3.setR1C2F(m.getR1C3F());
+      m3.setR2C0F(m.getR3C0F());
+      m3.setR2C1F(m.getR3C1F());
+      m3.setR2C2F(m.getR3C3F());
 
       r2c2 = MatrixM3x3F.determinant(m3);
     }
@@ -921,15 +637,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[2, 3]
       // -1 = (-1) ^ (2 + 3)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 2));
-      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(1, 1));
-      m3.setUnsafe(1, 2, m.getRowColumnF(1, 2));
-      m3.setUnsafe(2, 0, m.getRowColumnF(3, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(3, 1));
-      m3.setUnsafe(2, 2, m.getRowColumnF(3, 2));
+      m3.setR0C0F(m.getR0C0F());
+      m3.setR0C1F(m.getR0C1F());
+      m3.setR0C2F(m.getR0C2F());
+      m3.setR1C0F(m.getR1C0F());
+      m3.setR1C1F(m.getR1C1F());
+      m3.setR1C2F(m.getR1C2F());
+      m3.setR2C0F(m.getR3C0F());
+      m3.setR2C1F(m.getR3C1F());
+      m3.setR2C2F(m.getR3C2F());
 
       r2c3 = -MatrixM3x3F.determinant(m3);
     }
@@ -938,15 +654,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[3, 0]
       // -1 = (-1) ^ (3 + 0)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 1));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(1, 1));
-      m3.setUnsafe(1, 1, m.getRowColumnF(1, 2));
-      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(2, 1));
-      m3.setUnsafe(2, 1, m.getRowColumnF(2, 2));
-      m3.setUnsafe(2, 2, m.getRowColumnF(2, 3));
+      m3.setR0C0F(m.getR0C1F());
+      m3.setR0C1F(m.getR0C2F());
+      m3.setR0C2F(m.getR0C3F());
+      m3.setR1C0F(m.getR1C1F());
+      m3.setR1C1F(m.getR1C2F());
+      m3.setR1C2F(m.getR1C3F());
+      m3.setR2C0F(m.getR2C1F());
+      m3.setR2C1F(m.getR2C2F());
+      m3.setR2C2F(m.getR2C3F());
 
       r3c0 = -MatrixM3x3F.determinant(m3);
     }
@@ -955,15 +671,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[3, 1]
       // 1 = (-1) ^ (3 + 1)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 2));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(1, 2));
-      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(2, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(2, 2));
-      m3.setUnsafe(2, 2, m.getRowColumnF(2, 3));
+      m3.setR0C0F(m.getR0C0F());
+      m3.setR0C1F(m.getR0C2F());
+      m3.setR0C2F(m.getR0C3F());
+      m3.setR1C0F(m.getR1C0F());
+      m3.setR1C1F(m.getR1C2F());
+      m3.setR1C2F(m.getR1C3F());
+      m3.setR2C0F(m.getR2C0F());
+      m3.setR2C1F(m.getR2C2F());
+      m3.setR2C2F(m.getR2C3F());
 
       r3c1 = MatrixM3x3F.determinant(m3);
     }
@@ -972,15 +688,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[3, 2]
       // -1 = (-1) ^ (3 + 2)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 3));
-      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(1, 1));
-      m3.setUnsafe(1, 2, m.getRowColumnF(1, 3));
-      m3.setUnsafe(2, 0, m.getRowColumnF(2, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(2, 1));
-      m3.setUnsafe(2, 2, m.getRowColumnF(2, 3));
+      m3.setR0C0F(m.getR0C0F());
+      m3.setR0C1F(m.getR0C1F());
+      m3.setR0C2F(m.getR0C3F());
+      m3.setR1C0F(m.getR1C0F());
+      m3.setR1C1F(m.getR1C1F());
+      m3.setR1C2F(m.getR1C3F());
+      m3.setR2C0F(m.getR2C0F());
+      m3.setR2C1F(m.getR2C1F());
+      m3.setR2C2F(m.getR2C3F());
 
       r3c2 = -MatrixM3x3F.determinant(m3);
     }
@@ -989,15 +705,15 @@ public final class MatrixM4x4F implements
       // Sub-matrix obtained by removing m[3, 3]
       // 1 = (-1) ^ (3 + 3)
 
-      m3.setUnsafe(0, 0, m.getRowColumnF(0, 0));
-      m3.setUnsafe(0, 1, m.getRowColumnF(0, 1));
-      m3.setUnsafe(0, 2, m.getRowColumnF(0, 2));
-      m3.setUnsafe(1, 0, m.getRowColumnF(1, 0));
-      m3.setUnsafe(1, 1, m.getRowColumnF(1, 1));
-      m3.setUnsafe(1, 2, m.getRowColumnF(1, 2));
-      m3.setUnsafe(2, 0, m.getRowColumnF(2, 0));
-      m3.setUnsafe(2, 1, m.getRowColumnF(2, 1));
-      m3.setUnsafe(2, 2, m.getRowColumnF(2, 2));
+      m3.setR0C0F(m.getR0C0F());
+      m3.setR0C1F(m.getR0C1F());
+      m3.setR0C2F(m.getR0C2F());
+      m3.setR1C0F(m.getR1C0F());
+      m3.setR1C1F(m.getR1C1F());
+      m3.setR1C2F(m.getR1C2F());
+      m3.setR2C0F(m.getR2C0F());
+      m3.setR2C1F(m.getR2C1F());
+      m3.setR2C2F(m.getR2C2F());
 
       r3c3 = MatrixM3x3F.determinant(m3);
     }
@@ -1007,144 +723,110 @@ public final class MatrixM4x4F implements
      * matrix and transpose.
      */
 
-    out.setUnsafe(0, 0, (float) (r0c0 * d_inv));
-    out.setUnsafe(0, 1, (float) (r0c1 * d_inv));
-    out.setUnsafe(0, 2, (float) (r0c2 * d_inv));
-    out.setUnsafe(0, 3, (float) (r0c3 * d_inv));
+    temp.setR0C0F((float) (r0c0 * d_inv));
+    temp.setR0C1F((float) (r0c1 * d_inv));
+    temp.setR0C2F((float) (r0c2 * d_inv));
+    temp.setR0C3F((float) (r0c3 * d_inv));
 
-    out.setUnsafe(1, 0, (float) (r1c0 * d_inv));
-    out.setUnsafe(1, 1, (float) (r1c1 * d_inv));
-    out.setUnsafe(1, 2, (float) (r1c2 * d_inv));
-    out.setUnsafe(1, 3, (float) (r1c3 * d_inv));
+    temp.setR1C0F((float) (r1c0 * d_inv));
+    temp.setR1C1F((float) (r1c1 * d_inv));
+    temp.setR1C2F((float) (r1c2 * d_inv));
+    temp.setR1C3F((float) (r1c3 * d_inv));
 
-    out.setUnsafe(2, 0, (float) (r2c0 * d_inv));
-    out.setUnsafe(2, 1, (float) (r2c1 * d_inv));
-    out.setUnsafe(2, 2, (float) (r2c2 * d_inv));
-    out.setUnsafe(2, 3, (float) (r2c3 * d_inv));
+    temp.setR2C0F((float) (r2c0 * d_inv));
+    temp.setR2C1F((float) (r2c1 * d_inv));
+    temp.setR2C2F((float) (r2c2 * d_inv));
+    temp.setR2C3F((float) (r2c3 * d_inv));
 
-    out.setUnsafe(3, 0, (float) (r3c0 * d_inv));
-    out.setUnsafe(3, 1, (float) (r3c1 * d_inv));
-    out.setUnsafe(3, 2, (float) (r3c2 * d_inv));
-    out.setUnsafe(3, 3, (float) (r3c3 * d_inv));
+    temp.setR3C0F((float) (r3c0 * d_inv));
+    temp.setR3C1F((float) (r3c1 * d_inv));
+    temp.setR3C2F((float) (r3c2 * d_inv));
+    temp.setR3C3F((float) (r3c3 * d_inv));
 
-    MatrixM4x4F.transposeInPlace(out);
-    return Option.some(out);
+    MatrixM4x4F.transpose(temp, out);
+    return true;
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code m}. The function returns {@code Some(m)} iff
-   * it was possible to invert the matrix, and {@code None} otherwise. It
-   * is not possible to invert a matrix that has a determinant of
-   * {@code 0}. If the function returns {@code None}, {@code m}
-   * is untouched.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code m}. The function returns {@code Some(out)} iff it was possible to
+   * invert the matrix, and {@code None} otherwise. It is not possible to invert
+   * a matrix that has a determinant of {@code 0}. The function uses
+   * preallocated storage in {@code context} to avoid allocating memory. If the
+   * function returns {@code None}, {@code m} is untouched.
+   *
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param <M>     The precise type of matrix
+   *
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   *
-   * @param m
-   *          The input matrix.
-   * @return {@code m}.
    */
 
-  public static OptionType<MatrixM4x4F> invertInPlace(
-    final MatrixM4x4F m)
+  public static <M extends MatrixWritable4x4FType & MatrixReadable4x4FType>
+  boolean invertInPlace(
+    final ContextMM4F context,
+    final M m)
   {
-    return MatrixM4x4F.invert(m, m);
+    return MatrixM4x4F.invert(context, m, m);
   }
 
   /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code m}. The function returns {@code Some(out)} iff
-   * it was possible to invert the matrix, and {@code None} otherwise. It
-   * is not possible to invert a matrix that has a determinant of
-   * {@code 0}. The function uses preallocated storage in
-   * {@code context} to avoid allocating memory. If the function returns
-   * {@code None}, {@code m} is untouched.
+   * Calculate the inverse of the matrix {@code m}, saving the resulting matrix
+   * to {@code out}. The function returns {@code Some(out)} iff it was possible
+   * to invert the matrix, and {@code None} otherwise. It is not possible to
+   * invert a matrix that has a determinant of {@code 0}. The function uses
+   * preallocated storage in {@code context} to avoid allocating memory. If the
+   * function returns {@code None}, {@code m} is untouched.
+   *
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param out     The output matrix
+   * @param <M>     The precise type of matrix
+   *
+   * @return {@code true} iff the matrix was invertible
    *
    * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @return {@code m}
    */
 
-  public static OptionType<MatrixM4x4F> invertInPlaceWithContext(
-    final Context context,
-    final MatrixM4x4F m)
-  {
-    return MatrixM4x4F.invertWithContext(context, m, m);
-  }
-
-  /**
-   * Calculate the inverse of the matrix {@code m}, saving the resulting
-   * matrix to {@code out}. The function returns {@code Some(out)}
-   * iff it was possible to invert the matrix, and {@code None}
-   * otherwise. It is not possible to invert a matrix that has a determinant
-   * of {@code 0}. The function uses preallocated storage in
-   * {@code context} to avoid allocating memory. If the function returns
-   * {@code None}, {@code m} is untouched.
-   *
-   * @see MatrixM4x4F#determinant(MatrixReadable4x4FType)
-   *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
-   */
-
-  public static OptionType<MatrixM4x4F> invertWithContext(
-    final Context context,
+  public static <M extends MatrixWritable4x4FType> boolean invert(
+    final ContextMM4F context,
     final MatrixReadable4x4FType m,
-    final MatrixM4x4F out)
+    final M out)
   {
-    return MatrixM4x4F.invertActual(m, context.getM3a(), out);
+    return MatrixM4x4F.invertActual(m, context.m3a, context.m4a, out);
   }
 
   /**
-   * <p>
-   * Calculate a matrix representing a "camera" looking from the point
-   * {@code origin} to the point {@code target}. {@code target}
-   * must represent the "up" vector for the camera. Usually, this is simply a
-   * unit vector {@code (0, 1, 0)} representing the Y axis.
-   * </p>
-   * <p>
-   * The function uses preallocated storage from {@code context}.
-   * </p>
-   * <p>
-   * The view is expressed as a rotation and translation matrix, written to
-   * {@code out_matrix}.
-   * </p>
+   * <p> Calculate a matrix representing a "camera" looking from the point
+   * {@code origin} to the point {@code target}. {@code target} must represent
+   * the "up" vector for the camera. Usually, this is simply a unit vector
+   * {@code (0, 1, 0)} representing the Y axis. </p> <p> The function uses
+   * preallocated storage from {@code context}. </p> <p> The view is expressed
+   * as a rotation and translation matrix, written to {@code out_matrix}. </p>
    *
-   * @param context
-   *          Preallocated storage
-   * @param out_matrix
-   *          The output matrix
-   * @param origin
-   *          The position of the viewer
-   * @param target
-   *          The target being viewed
-   * @param up
-   *          The up vector
+   * @param context    Preallocated storage
+   * @param out_matrix The output matrix
+   * @param origin     The position of the viewer
+   * @param target     The target being viewed
+   * @param up         The up vector
+   * @param <M>        The precise type of matrix
    */
 
-  public static void lookAtWithContext(
-    final Context context,
+  public static <M extends MatrixWritable4x4FType> void lookAt(
+    final ContextMM4F context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
     final VectorReadable3FType up,
-    final MatrixM4x4F out_matrix)
+    final M out_matrix)
   {
-    final VectorM3F forward = context.getV3a();
-    final VectorM3F new_up = context.getV3b();
-    final VectorM3F side = context.getV3c();
-    final VectorM3F move = context.getV3d();
-    final MatrixM4x4F rotation = context.getM4a();
-    final MatrixM4x4F translation = context.getM4b();
+    final VectorM3F forward = context.v3a;
+    final VectorM3F new_up = context.v3b;
+    final VectorM3F side = context.v3c;
+    final VectorM3F move = context.v3d;
+    final Matrix4x4FType rotation = context.m4a;
+    final Matrix4x4FType translation = context.m4b;
 
     MatrixM4x4F.setIdentity(rotation);
     MatrixM4x4F.setIdentity(translation);
@@ -1177,22 +859,22 @@ public final class MatrixM4x4F implements
      * Calculate rotation matrix
      */
 
-    rotation.set(0, 0, side.getXF());
-    rotation.set(0, 1, side.getYF());
-    rotation.set(0, 2, side.getZF());
-    rotation.set(1, 0, new_up.getXF());
-    rotation.set(1, 1, new_up.getYF());
-    rotation.set(1, 2, new_up.getZF());
-    rotation.set(2, 0, -forward.getXF());
-    rotation.set(2, 1, -forward.getYF());
-    rotation.set(2, 2, -forward.getZF());
+    rotation.setR0C0F(side.getXF());
+    rotation.setR0C1F(side.getYF());
+    rotation.setR0C2F(side.getZF());
+    rotation.setR1C0F(new_up.getXF());
+    rotation.setR1C1F(new_up.getYF());
+    rotation.setR1C2F(new_up.getZF());
+    rotation.setR2C0F(-forward.getXF());
+    rotation.setR2C1F(-forward.getYF());
+    rotation.setR2C2F(-forward.getZF());
 
     /**
      * Calculate camera translation matrix
      */
 
     move.set3F(-origin.getXF(), -origin.getYF(), -origin.getZF());
-    MatrixM4x4F.makeTranslation3FInto(move, translation);
+    MatrixM4x4F.makeTranslation3F(move, translation);
 
     /**
      * Produce output matrix
@@ -1202,56 +884,24 @@ public final class MatrixM4x4F implements
   }
 
   /**
-   * <p>
-   * Generate and return a matrix that represents a rotation of
-   * {@code angle} radians around the axis {@code axis}.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
+   * <p> Generate a matrix that represents a rotation of {@code angle} radians
+   * around the axis {@code axis} and save to {@code out}. </p> <p> The function
+   * assumes a right-handed coordinate system and therefore a positive rotation
+   * around any axis represents a counter-clockwise rotation around that axis.
    * </p>
    *
-   * @return A rotation matrix.
-   * @param angle
-   *          The angle in radians.
-   * @param axis
-   *          The axis.
-   */
-
-  public static MatrixM4x4F makeRotation(
-    final double angle,
-    final VectorReadable3FType axis)
-  {
-    final MatrixM4x4F out = new MatrixM4x4F();
-    MatrixM4x4F.makeRotationInto(angle, axis, out);
-    return out;
-  }
-
-  /**
-   * <p>
-   * Generate a matrix that represents a rotation of {@code angle}
-   * radians around the axis {@code axis} and save to {@code out}.
-   * </p>
-   * <p>
-   * The function assumes a right-handed coordinate system and therefore a
-   * positive rotation around any axis represents a counter-clockwise rotation
-   * around that axis.
-   * </p>
+   * @param angle The angle in radians
+   * @param axis  The axis
+   * @param out   The output matrix
+   * @param <M>   The precise type of matrix
    *
-   * @param angle
-   *          The angle in radians.
-   * @param axis
-   *          The axis.
-   * @param out
-   *          The output matrix.
    * @return {@code out}
    */
 
-  public static MatrixM4x4F makeRotationInto(
+  public static <M extends MatrixWritable4x4FType> M makeRotation(
     final double angle,
     final VectorReadable3FType axis,
-    final MatrixM4x4F out)
+    final M out)
   {
     final double axis_x = (double) axis.getXF();
     final double axis_y = (double) axis.getYF();
@@ -1293,423 +943,328 @@ public final class MatrixM4x4F implements
     final double r3c2 = 0.0;
     final double r3c3 = 1.0;
 
-    out.setUnsafe(0, 0, (float) r0c0);
-    out.setUnsafe(0, 1, (float) r0c1);
-    out.setUnsafe(0, 2, (float) r0c2);
-    out.setUnsafe(0, 3, (float) r0c3);
+    out.setR0C0F((float) r0c0);
+    out.setR0C1F((float) r0c1);
+    out.setR0C2F((float) r0c2);
+    out.setR0C3F((float) r0c3);
 
-    out.setUnsafe(1, 0, (float) r1c0);
-    out.setUnsafe(1, 1, (float) r1c1);
-    out.setUnsafe(1, 2, (float) r1c2);
-    out.setUnsafe(1, 3, (float) r1c3);
+    out.setR1C0F((float) r1c0);
+    out.setR1C1F((float) r1c1);
+    out.setR1C2F((float) r1c2);
+    out.setR1C3F((float) r1c3);
 
-    out.setUnsafe(2, 0, (float) r2c0);
-    out.setUnsafe(2, 1, (float) r2c1);
-    out.setUnsafe(2, 2, (float) r2c2);
-    out.setUnsafe(2, 3, (float) r2c3);
+    out.setR2C0F((float) r2c0);
+    out.setR2C1F((float) r2c1);
+    out.setR2C2F((float) r2c2);
+    out.setR2C3F((float) r2c3);
 
-    out.setUnsafe(3, 0, (float) r3c0);
-    out.setUnsafe(3, 1, (float) r3c1);
-    out.setUnsafe(3, 2, (float) r3c2);
-    out.setUnsafe(3, 3, (float) r3c3);
+    out.setR3C0F((float) r3c0);
+    out.setR3C1F((float) r3c1);
+    out.setR3C2F((float) r3c2);
+    out.setR3C3F((float) r3c3);
     return out;
   }
 
   /**
-   * Generate and return a matrix that represents a translation of
-   * {@code (v.x, v.y)} from the origin.
+   * Generate a matrix that represents a translation of {@code (v.x, v.y)} from
+   * the origin, and save to {@code out}.
    *
-   * @param v
-   *          The translation vector.
+   * @param v   The translation vector
+   * @param out The output matrix
+   * @param <M> The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F makeTranslation2F(
-    final VectorReadable2FType v)
-  {
-    final MatrixM4x4F out = new MatrixM4x4F();
-    MatrixM4x4F.makeTranslation2FInto(v, out);
-    return out;
-  }
-
-  /**
-   * Generate a matrix that represents a translation of
-   * {@code (v.x, v.y)} from the origin, and save to {@code out}.
-   *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
-   */
-
-  public static MatrixM4x4F makeTranslation2FInto(
+  public static <M extends MatrixWritable4x4FType> M makeTranslation2F(
     final VectorReadable2FType v,
-    final MatrixM4x4F out)
+    final M out)
   {
-    out.setUnsafe(0, 0, 1.0f);
-    out.setUnsafe(0, 1, 0.0f);
-    out.setUnsafe(0, 2, 0.0f);
-    out.setUnsafe(0, 3, v.getXF());
+    out.setR0C0F(1.0f);
+    out.setR0C1F(0.0f);
+    out.setR0C2F(0.0f);
+    out.setR0C3F(v.getXF());
 
-    out.setUnsafe(1, 0, 0.0f);
-    out.setUnsafe(1, 1, 1.0f);
-    out.setUnsafe(1, 2, 0.0f);
-    out.setUnsafe(1, 3, v.getYF());
+    out.setR1C0F(0.0f);
+    out.setR1C1F(1.0f);
+    out.setR1C2F(0.0f);
+    out.setR1C3F(v.getYF());
 
-    out.setUnsafe(2, 0, 0.0f);
-    out.setUnsafe(2, 1, 0.0f);
-    out.setUnsafe(2, 2, 1.0f);
-    out.setUnsafe(2, 3, 0.0f);
+    out.setR2C0F(0.0f);
+    out.setR2C1F(0.0f);
+    out.setR2C2F(1.0f);
+    out.setR2C3F(0.0f);
 
-    out.setUnsafe(3, 0, 0.0f);
-    out.setUnsafe(3, 1, 0.0f);
-    out.setUnsafe(3, 2, 0.0f);
-    out.setUnsafe(3, 3, 1.0f);
+    out.setR3C0F(0.0f);
+    out.setR3C1F(0.0f);
+    out.setR3C2F(0.0f);
+    out.setR3C3F(1.0f);
     return out;
   }
 
   /**
-   * Generate and return a matrix that represents a translation of
-   * {@code (v.x, v.y)} from the origin.
+   * Generate a matrix that represents a translation of {@code (v.x, v.y)} from
+   * the origin, and save to {@code out}.
    *
-   * @param v
-   *          The translation vector.
+   * @param v   The translation vector
+   * @param out The output matrix
+   * @param <M> The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F makeTranslation2I(
-    final VectorReadable2IType v)
-  {
-    final MatrixM4x4F out = new MatrixM4x4F();
-    MatrixM4x4F.makeTranslation2IInto(v, out);
-    return out;
-  }
-
-  /**
-   * Generate a matrix that represents a translation of
-   * {@code (v.x, v.y)} from the origin, and save to {@code out}.
-   *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
-   */
-
-  public static MatrixM4x4F makeTranslation2IInto(
+  public static <M extends MatrixWritable4x4FType> M makeTranslation2I(
     final VectorReadable2IType v,
-    final MatrixM4x4F out)
+    final M out)
   {
-    out.setUnsafe(0, 0, 1.0f);
-    out.setUnsafe(0, 1, 0.0f);
-    out.setUnsafe(0, 2, 0.0f);
-    out.setUnsafe(0, 3, (float) v.getXI());
+    out.setR0C0F(1.0f);
+    out.setR0C1F(0.0f);
+    out.setR0C2F(0.0f);
+    out.setR0C3F((float) v.getXI());
 
-    out.setUnsafe(1, 0, 0.0f);
-    out.setUnsafe(1, 1, 1.0f);
-    out.setUnsafe(1, 2, 0.0f);
-    out.setUnsafe(1, 3, (float) v.getYI());
+    out.setR1C0F(0.0f);
+    out.setR1C1F(1.0f);
+    out.setR1C2F(0.0f);
+    out.setR1C3F((float) v.getYI());
 
-    out.setUnsafe(2, 0, 0.0f);
-    out.setUnsafe(2, 1, 0.0f);
-    out.setUnsafe(2, 2, 1.0f);
-    out.setUnsafe(2, 3, 0.0f);
+    out.setR2C0F(0.0f);
+    out.setR2C1F(0.0f);
+    out.setR2C2F(1.0f);
+    out.setR2C3F(0.0f);
 
-    out.setUnsafe(3, 0, 0.0f);
-    out.setUnsafe(3, 1, 0.0f);
-    out.setUnsafe(3, 2, 0.0f);
-    out.setUnsafe(3, 3, 1.0f);
+    out.setR3C0F(0.0f);
+    out.setR3C1F(0.0f);
+    out.setR3C2F(0.0f);
+    out.setR3C3F(1.0f);
     return out;
   }
 
   /**
-   * Generate and return a matrix that represents a translation of
-   * {@code (v.x, v.y, v.z)} from the origin.
+   * Generate a matrix that represents a translation of {@code (v.x, v.y, v.z)}
+   * from the origin, and save to {@code out}.
    *
-   * @param v
-   *          The translation vector.
+   * @param v   The translation vector
+   * @param out The output matrix
+   * @param <M> The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F makeTranslation3F(
-    final VectorReadable3FType v)
-  {
-    final MatrixM4x4F out = new MatrixM4x4F();
-    MatrixM4x4F.makeTranslation3FInto(v, out);
-    return out;
-  }
-
-  /**
-   * Generate a matrix that represents a translation of
-   * {@code (v.x, v.y, v.z)} from the origin, and save to
-   * {@code out}.
-   *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
-   */
-
-  public static MatrixM4x4F makeTranslation3FInto(
+  public static <M extends MatrixWritable4x4FType> M makeTranslation3F(
     final VectorReadable3FType v,
-    final MatrixM4x4F out)
+    final M out)
   {
-    out.setUnsafe(0, 0, 1.0f);
-    out.setUnsafe(0, 1, 0.0f);
-    out.setUnsafe(0, 2, 0.0f);
-    out.setUnsafe(0, 3, v.getXF());
+    out.setR0C0F(1.0f);
+    out.setR0C1F(0.0f);
+    out.setR0C2F(0.0f);
+    out.setR0C3F(v.getXF());
 
-    out.setUnsafe(1, 0, 0.0f);
-    out.setUnsafe(1, 1, 1.0f);
-    out.setUnsafe(1, 2, 0.0f);
-    out.setUnsafe(1, 3, v.getYF());
+    out.setR1C0F(0.0f);
+    out.setR1C1F(1.0f);
+    out.setR1C2F(0.0f);
+    out.setR1C3F(v.getYF());
 
-    out.setUnsafe(2, 0, 0.0f);
-    out.setUnsafe(2, 1, 0.0f);
-    out.setUnsafe(2, 2, 1.0f);
-    out.setUnsafe(2, 3, v.getZF());
+    out.setR2C0F(0.0f);
+    out.setR2C1F(0.0f);
+    out.setR2C2F(1.0f);
+    out.setR2C3F(v.getZF());
 
-    out.setUnsafe(3, 0, 0.0f);
-    out.setUnsafe(3, 1, 0.0f);
-    out.setUnsafe(3, 2, 0.0f);
-    out.setUnsafe(3, 3, 1.0f);
+    out.setR3C0F(0.0f);
+    out.setR3C1F(0.0f);
+    out.setR3C2F(0.0f);
+    out.setR3C3F(1.0f);
     return out;
   }
 
   /**
-   * Generate and return a matrix that represents a translation of
-   * {@code (v.x, v.y, v.z)} from the origin.
+   * Generate a matrix that represents a translation of {@code (v.x, v.y, v.z)}
+   * from the origin, and save to {@code out}.
    *
-   * @param v
-   *          The translation vector.
+   * @param v   The translation vector
+   * @param out The output matrix
+   * @param <M> The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F makeTranslation3I(
-    final VectorReadable3IType v)
-  {
-    final MatrixM4x4F out = new MatrixM4x4F();
-    MatrixM4x4F.makeTranslation3IInto(v, out);
-    return out;
-  }
-
-  /**
-   * Generate a matrix that represents a translation of
-   * {@code (v.x, v.y, v.z)} from the origin, and save to
-   * {@code out}.
-   *
-   * @param v
-   *          The translation vector.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
-   */
-
-  public static MatrixM4x4F makeTranslation3IInto(
+  public static <M extends MatrixWritable4x4FType> M makeTranslation3I(
     final VectorReadable3IType v,
-    final MatrixM4x4F out)
+    final M out)
   {
-    out.setUnsafe(0, 0, 1.0f);
-    out.setUnsafe(0, 1, 0.0f);
-    out.setUnsafe(0, 2, 0.0f);
-    out.setUnsafe(0, 3, (float) v.getXI());
+    out.setR0C0F(1.0f);
+    out.setR0C1F(0.0f);
+    out.setR0C2F(0.0f);
+    out.setR0C3F((float) v.getXI());
 
-    out.setUnsafe(1, 0, 0.0f);
-    out.setUnsafe(1, 1, 1.0f);
-    out.setUnsafe(1, 2, 0.0f);
-    out.setUnsafe(1, 3, (float) v.getYI());
+    out.setR1C0F(0.0f);
+    out.setR1C1F(1.0f);
+    out.setR1C2F(0.0f);
+    out.setR1C3F((float) v.getYI());
 
-    out.setUnsafe(2, 0, 0.0f);
-    out.setUnsafe(2, 1, 0.0f);
-    out.setUnsafe(2, 2, 1.0f);
-    out.setUnsafe(2, 3, (float) v.getZI());
+    out.setR2C0F(0.0f);
+    out.setR2C1F(0.0f);
+    out.setR2C2F(1.0f);
+    out.setR2C3F((float) v.getZI());
 
-    out.setUnsafe(3, 0, 0.0f);
-    out.setUnsafe(3, 1, 0.0f);
-    out.setUnsafe(3, 2, 0.0f);
-    out.setUnsafe(3, 3, 1.0f);
+    out.setR3C0F(0.0f);
+    out.setR3C1F(0.0f);
+    out.setR3C2F(0.0f);
+    out.setR3C3F(1.0f);
     return out;
   }
 
   /**
-   * Multiply the matrix {@code m0} with the matrix {@code m1},
-   * writing the result to {@code out}.
+   * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
+   * result to {@code out}.
    *
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
-   * @param out
-   *          The output vector.
+   * @param m0  The left input vector
+   * @param m1  The right input vector
+   * @param out The output vector
+   * @param <M> The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F multiply(
+  public static <M extends MatrixWritable4x4FType> M multiply(
     final MatrixReadable4x4FType m0,
     final MatrixReadable4x4FType m1,
-    final MatrixM4x4F out)
+    final M out)
   {
     float r0c0 = 0.0F;
-    r0c0 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 0);
-    r0c0 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 0);
-    r0c0 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 0);
-    r0c0 += m0.getRowColumnF(0, 3) * m1.getRowColumnF(3, 0);
+    r0c0 += m0.getR0C0F() * m1.getR0C0F();
+    r0c0 += m0.getR0C1F() * m1.getR1C0F();
+    r0c0 += m0.getR0C2F() * m1.getR2C0F();
+    r0c0 += m0.getR0C3F() * m1.getR3C0F();
 
     float r1c0 = 0.0F;
-    r1c0 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 0);
-    r1c0 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 0);
-    r1c0 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 0);
-    r1c0 += m0.getRowColumnF(1, 3) * m1.getRowColumnF(3, 0);
+    r1c0 += m0.getR1C0F() * m1.getR0C0F();
+    r1c0 += m0.getR1C1F() * m1.getR1C0F();
+    r1c0 += m0.getR1C2F() * m1.getR2C0F();
+    r1c0 += m0.getR1C3F() * m1.getR3C0F();
 
     float r2c0 = 0.0F;
-    r2c0 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 0);
-    r2c0 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 0);
-    r2c0 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 0);
-    r2c0 += m0.getRowColumnF(2, 3) * m1.getRowColumnF(3, 0);
+    r2c0 += m0.getR2C0F() * m1.getR0C0F();
+    r2c0 += m0.getR2C1F() * m1.getR1C0F();
+    r2c0 += m0.getR2C2F() * m1.getR2C0F();
+    r2c0 += m0.getR2C3F() * m1.getR3C0F();
 
     float r3c0 = 0.0F;
-    r3c0 += m0.getRowColumnF(3, 0) * m1.getRowColumnF(0, 0);
-    r3c0 += m0.getRowColumnF(3, 1) * m1.getRowColumnF(1, 0);
-    r3c0 += m0.getRowColumnF(3, 2) * m1.getRowColumnF(2, 0);
-    r3c0 += m0.getRowColumnF(3, 3) * m1.getRowColumnF(3, 0);
+    r3c0 += m0.getR3C0F() * m1.getR0C0F();
+    r3c0 += m0.getR3C1F() * m1.getR1C0F();
+    r3c0 += m0.getR3C2F() * m1.getR2C0F();
+    r3c0 += m0.getR3C3F() * m1.getR3C0F();
 
     float r0c1 = 0.0F;
-    r0c1 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 1);
-    r0c1 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 1);
-    r0c1 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 1);
-    r0c1 += m0.getRowColumnF(0, 3) * m1.getRowColumnF(3, 1);
+    r0c1 += m0.getR0C0F() * m1.getR0C1F();
+    r0c1 += m0.getR0C1F() * m1.getR1C1F();
+    r0c1 += m0.getR0C2F() * m1.getR2C1F();
+    r0c1 += m0.getR0C3F() * m1.getR3C1F();
 
     float r1c1 = 0.0F;
-    r1c1 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 1);
-    r1c1 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 1);
-    r1c1 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 1);
-    r1c1 += m0.getRowColumnF(1, 3) * m1.getRowColumnF(3, 1);
+    r1c1 += m0.getR1C0F() * m1.getR0C1F();
+    r1c1 += m0.getR1C1F() * m1.getR1C1F();
+    r1c1 += m0.getR1C2F() * m1.getR2C1F();
+    r1c1 += m0.getR1C3F() * m1.getR3C1F();
 
     float r2c1 = 0.0F;
-    r2c1 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 1);
-    r2c1 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 1);
-    r2c1 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 1);
-    r2c1 += m0.getRowColumnF(2, 3) * m1.getRowColumnF(3, 1);
+    r2c1 += m0.getR2C0F() * m1.getR0C1F();
+    r2c1 += m0.getR2C1F() * m1.getR1C1F();
+    r2c1 += m0.getR2C2F() * m1.getR2C1F();
+    r2c1 += m0.getR2C3F() * m1.getR3C1F();
 
     float r3c1 = 0.0F;
-    r3c1 += m0.getRowColumnF(3, 0) * m1.getRowColumnF(0, 1);
-    r3c1 += m0.getRowColumnF(3, 1) * m1.getRowColumnF(1, 1);
-    r3c1 += m0.getRowColumnF(3, 2) * m1.getRowColumnF(2, 1);
-    r3c1 += m0.getRowColumnF(3, 3) * m1.getRowColumnF(3, 1);
+    r3c1 += m0.getR3C0F() * m1.getR0C1F();
+    r3c1 += m0.getR3C1F() * m1.getR1C1F();
+    r3c1 += m0.getR3C2F() * m1.getR2C1F();
+    r3c1 += m0.getR3C3F() * m1.getR3C1F();
 
     float r0c2 = 0.0F;
-    r0c2 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 2);
-    r0c2 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 2);
-    r0c2 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 2);
-    r0c2 += m0.getRowColumnF(0, 3) * m1.getRowColumnF(3, 2);
+    r0c2 += m0.getR0C0F() * m1.getR0C2F();
+    r0c2 += m0.getR0C1F() * m1.getR1C2F();
+    r0c2 += m0.getR0C2F() * m1.getR2C2F();
+    r0c2 += m0.getR0C3F() * m1.getR3C2F();
 
     float r1c2 = 0.0F;
-    r1c2 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 2);
-    r1c2 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 2);
-    r1c2 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 2);
-    r1c2 += m0.getRowColumnF(1, 3) * m1.getRowColumnF(3, 2);
+    r1c2 += m0.getR1C0F() * m1.getR0C2F();
+    r1c2 += m0.getR1C1F() * m1.getR1C2F();
+    r1c2 += m0.getR1C2F() * m1.getR2C2F();
+    r1c2 += m0.getR1C3F() * m1.getR3C2F();
 
     float r2c2 = 0.0F;
-    r2c2 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 2);
-    r2c2 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 2);
-    r2c2 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 2);
-    r2c2 += m0.getRowColumnF(2, 3) * m1.getRowColumnF(3, 2);
+    r2c2 += m0.getR2C0F() * m1.getR0C2F();
+    r2c2 += m0.getR2C1F() * m1.getR1C2F();
+    r2c2 += m0.getR2C2F() * m1.getR2C2F();
+    r2c2 += m0.getR2C3F() * m1.getR3C2F();
 
     float r3c2 = 0.0F;
-    r3c2 += m0.getRowColumnF(3, 0) * m1.getRowColumnF(0, 2);
-    r3c2 += m0.getRowColumnF(3, 1) * m1.getRowColumnF(1, 2);
-    r3c2 += m0.getRowColumnF(3, 2) * m1.getRowColumnF(2, 2);
-    r3c2 += m0.getRowColumnF(3, 3) * m1.getRowColumnF(3, 2);
+    r3c2 += m0.getR3C0F() * m1.getR0C2F();
+    r3c2 += m0.getR3C1F() * m1.getR1C2F();
+    r3c2 += m0.getR3C2F() * m1.getR2C2F();
+    r3c2 += m0.getR3C3F() * m1.getR3C2F();
 
     float r0c3 = 0.0F;
-    r0c3 += m0.getRowColumnF(0, 0) * m1.getRowColumnF(0, 3);
-    r0c3 += m0.getRowColumnF(0, 1) * m1.getRowColumnF(1, 3);
-    r0c3 += m0.getRowColumnF(0, 2) * m1.getRowColumnF(2, 3);
-    r0c3 += m0.getRowColumnF(0, 3) * m1.getRowColumnF(3, 3);
+    r0c3 += m0.getR0C0F() * m1.getR0C3F();
+    r0c3 += m0.getR0C1F() * m1.getR1C3F();
+    r0c3 += m0.getR0C2F() * m1.getR2C3F();
+    r0c3 += m0.getR0C3F() * m1.getR3C3F();
 
     float r1c3 = 0.0F;
-    r1c3 += m0.getRowColumnF(1, 0) * m1.getRowColumnF(0, 3);
-    r1c3 += m0.getRowColumnF(1, 1) * m1.getRowColumnF(1, 3);
-    r1c3 += m0.getRowColumnF(1, 2) * m1.getRowColumnF(2, 3);
-    r1c3 += m0.getRowColumnF(1, 3) * m1.getRowColumnF(3, 3);
+    r1c3 += m0.getR1C0F() * m1.getR0C3F();
+    r1c3 += m0.getR1C1F() * m1.getR1C3F();
+    r1c3 += m0.getR1C2F() * m1.getR2C3F();
+    r1c3 += m0.getR1C3F() * m1.getR3C3F();
 
     float r2c3 = 0.0F;
-    r2c3 += m0.getRowColumnF(2, 0) * m1.getRowColumnF(0, 3);
-    r2c3 += m0.getRowColumnF(2, 1) * m1.getRowColumnF(1, 3);
-    r2c3 += m0.getRowColumnF(2, 2) * m1.getRowColumnF(2, 3);
-    r2c3 += m0.getRowColumnF(2, 3) * m1.getRowColumnF(3, 3);
+    r2c3 += m0.getR2C0F() * m1.getR0C3F();
+    r2c3 += m0.getR2C1F() * m1.getR1C3F();
+    r2c3 += m0.getR2C2F() * m1.getR2C3F();
+    r2c3 += m0.getR2C3F() * m1.getR3C3F();
 
     float r3c3 = 0.0F;
-    r3c3 += m0.getRowColumnF(3, 0) * m1.getRowColumnF(0, 3);
-    r3c3 += m0.getRowColumnF(3, 1) * m1.getRowColumnF(1, 3);
-    r3c3 += m0.getRowColumnF(3, 2) * m1.getRowColumnF(2, 3);
-    r3c3 += m0.getRowColumnF(3, 3) * m1.getRowColumnF(3, 3);
+    r3c3 += m0.getR3C0F() * m1.getR0C3F();
+    r3c3 += m0.getR3C1F() * m1.getR1C3F();
+    r3c3 += m0.getR3C2F() * m1.getR2C3F();
+    r3c3 += m0.getR3C3F() * m1.getR3C3F();
 
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(0, 2, r0c2);
-    out.setUnsafe(0, 3, r0c3);
+    out.setR0C0F(r0c0);
+    out.setR0C1F(r0c1);
+    out.setR0C2F(r0c2);
+    out.setR0C3F(r0c3);
 
-    out.setUnsafe(1, 0, r1c0);
-    out.setUnsafe(1, 1, r1c1);
-    out.setUnsafe(1, 2, r1c2);
-    out.setUnsafe(1, 3, r1c3);
+    out.setR1C0F(r1c0);
+    out.setR1C1F(r1c1);
+    out.setR1C2F(r1c2);
+    out.setR1C3F(r1c3);
 
-    out.setUnsafe(2, 0, r2c0);
-    out.setUnsafe(2, 1, r2c1);
-    out.setUnsafe(2, 2, r2c2);
-    out.setUnsafe(2, 3, r2c3);
+    out.setR2C0F(r2c0);
+    out.setR2C1F(r2c1);
+    out.setR2C2F(r2c2);
+    out.setR2C3F(r2c3);
 
-    out.setUnsafe(3, 0, r3c0);
-    out.setUnsafe(3, 1, r3c1);
-    out.setUnsafe(3, 2, r3c2);
-    out.setUnsafe(3, 3, r3c3);
+    out.setR3C0F(r3c0);
+    out.setR3C1F(r3c1);
+    out.setR3C2F(r3c2);
+    out.setR3C3F(r3c3);
     return out;
   }
 
   /**
-   * Multiply the matrix {@code m0} with the matrix {@code m1},
-   * writing the result to {@code m0}.
+   * Multiply the matrix {@code m0} with the matrix {@code m1}, writing the
+   * result to {@code m0}.
    *
-   * @param m0
-   *          The left input vector.
-   * @param m1
-   *          The right input vector.
+   * @param m0  The left input vector
+   * @param m1  The right input vector
+   * @param <M> The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F multiplyInPlace(
-    final MatrixM4x4F m0,
+  public static <M extends MatrixWritable4x4FType & MatrixReadable4x4FType> M
+  multiplyInPlace(
+    final M m0,
     final MatrixReadable4x4FType m1)
   {
     return MatrixM4x4F.multiply(m0, m1, m0);
-  }
-
-  /**
-   * Multiply the matrix {@code m} with the vector {@code v},
-   * writing the resulting vector to {@code out}.
-   *
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
-   * @return {@code out}
-   * @param <V>
-   *          The precise type of writable vector.
-   */
-
-  public static <V extends VectorWritable4FType> V multiplyVector4F(
-    final MatrixReadable4x4FType m,
-    final VectorReadable4FType v,
-    final V out)
-  {
-    final VectorM4F va = new VectorM4F();
-    final VectorM4F vb = new VectorM4F();
-    return MatrixM4x4F.multiplyVector4FActual(m, v, va, vb, out);
   }
 
   private static <V extends VectorWritable4FType> V multiplyVector4FActual(
@@ -1719,648 +1274,433 @@ public final class MatrixM4x4F implements
     final VectorM4F vb,
     final V out)
   {
-    VectorM4F.copy(v, vb);
+    vb.copyFrom4F(v);
 
-    MatrixM4x4F.rowUnsafe(m, 0, va);
+    m.getRow4FUnsafe(0, va);
     out.setXF((float) VectorM4F.dotProduct(va, vb));
-    MatrixM4x4F.rowUnsafe(m, 1, va);
+    m.getRow4FUnsafe(1, va);
     out.setYF((float) VectorM4F.dotProduct(va, vb));
-    MatrixM4x4F.rowUnsafe(m, 2, va);
+    m.getRow4FUnsafe(2, va);
     out.setZF((float) VectorM4F.dotProduct(va, vb));
-    MatrixM4x4F.rowUnsafe(m, 3, va);
+    m.getRow4FUnsafe(3, va);
     out.setWF((float) VectorM4F.dotProduct(va, vb));
 
     return out;
   }
 
   /**
-   * Multiply the matrix {@code m} with the vector {@code v},
-   * writing the resulting vector to {@code out}. The function uses
-   * preallocated storage in {@code context} to avoid allocating memory.
+   * Multiply the matrix {@code m} with the vector {@code v}, writing the
+   * resulting vector to {@code out}. The function uses preallocated storage in
+   * {@code context} to avoid allocating memory.
    *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param v
-   *          The input vector.
-   * @param out
-   *          The output vector.
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param v       The input vector
+   * @param out     The output vector
+   * @param <V>     The precise type of writable vector
+   *
    * @return {@code out}
-   * @param <V>
-   *          The precise type of writable vector.
    */
 
-  public static
-    <V extends VectorWritable4FType>
-    V
-    multiplyVector4FWithContext(
-      final Context context,
-      final MatrixReadable4x4FType m,
-      final VectorReadable4FType v,
-      final V out)
-  {
-    return MatrixM4x4F.multiplyVector4FActual(
-      m,
-      v,
-      context.getV4a(),
-      context.getV4b(),
-      out);
-  }
-
-  /**
-   * Return row {@code row} of the matrix {@code m} in the vector
-   * {@code out}.
-   *
-   * @param row
-   *          The row
-   * @param m
-   *          The matrix
-   * @param out
-   *          The output vector
-   * @return out
-   * @param <V>
-   *          The precise type of writable vector.
-   */
-
-  public static <V extends VectorWritable4FType> V row(
+  public static <V extends VectorWritable4FType> V multiplyVector4F(
+    final ContextMM4F context,
     final MatrixReadable4x4FType m,
-    final int row,
+    final VectorReadable4FType v,
     final V out)
   {
-    return MatrixM4x4F.rowUnsafe(m, MatrixM4x4F.rowCheck(row), out);
+    return MatrixM4x4F.multiplyVector4FActual(
+      m, v, context.v4a, context.v4b, out);
   }
 
   private static int rowCheck(
     final int row)
   {
-    if ((row < 0) || (row >= MatrixM4x4F.VIEW_COLS)) {
+    if ((row < 0) || (row >= 4)) {
       throw new IndexOutOfBoundsException(
-        "row must be in the range 0 <= row < " + MatrixM4x4F.VIEW_COLS);
+        "row must be in the range 0 <= row < 4");
     }
     return row;
   }
 
-  private static <V extends VectorWritable4FType> V rowUnsafe(
-    final MatrixReadable4x4FType m,
-    final int row,
-    final V out)
-  {
-    out.set4F(
-      m.getRowColumnF(row, 0),
-      m.getRowColumnF(row, 1),
-      m.getRowColumnF(row, 2),
-      m.getRowColumnF(row, 3));
-    return out;
-  }
-
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code out}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code out}.
    *
-   * @param out
-   *          The output matrix.
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
+   * @param out The output matrix
+   * @param m   The input matrix
+   * @param r   The scaling value
+   * @param <M> The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F scale(
+  public static <M extends MatrixWritable4x4FType> M scale(
     final MatrixReadable4x4FType m,
     final double r,
-    final MatrixM4x4F out)
+    final M out)
   {
-    final float r0c0 = (float) ((double) m.getRowColumnF(0, 0) * r);
-    final float r1c0 = (float) ((double) m.getRowColumnF(1, 0) * r);
-    final float r2c0 = (float) ((double) m.getRowColumnF(2, 0) * r);
-    final float r3c0 = (float) ((double) m.getRowColumnF(3, 0) * r);
+    final float r0c0 = (float) ((double) m.getR0C0F() * r);
+    final float r1c0 = (float) ((double) m.getR1C0F() * r);
+    final float r2c0 = (float) ((double) m.getR2C0F() * r);
+    final float r3c0 = (float) ((double) m.getR3C0F() * r);
 
-    final float r0c1 = (float) ((double) m.getRowColumnF(0, 1) * r);
-    final float r1c1 = (float) ((double) m.getRowColumnF(1, 1) * r);
-    final float r2c1 = (float) ((double) m.getRowColumnF(2, 1) * r);
-    final float r3c1 = (float) ((double) m.getRowColumnF(3, 1) * r);
+    final float r0c1 = (float) ((double) m.getR0C1F() * r);
+    final float r1c1 = (float) ((double) m.getR1C1F() * r);
+    final float r2c1 = (float) ((double) m.getR2C1F() * r);
+    final float r3c1 = (float) ((double) m.getR3C1F() * r);
 
-    final float r0c2 = (float) ((double) m.getRowColumnF(0, 2) * r);
-    final float r1c2 = (float) ((double) m.getRowColumnF(1, 2) * r);
-    final float r2c2 = (float) ((double) m.getRowColumnF(2, 2) * r);
-    final float r3c2 = (float) ((double) m.getRowColumnF(3, 2) * r);
+    final float r0c2 = (float) ((double) m.getR0C2F() * r);
+    final float r1c2 = (float) ((double) m.getR1C2F() * r);
+    final float r2c2 = (float) ((double) m.getR2C2F() * r);
+    final float r3c2 = (float) ((double) m.getR3C2F() * r);
 
-    final float r0c3 = (float) ((double) m.getRowColumnF(0, 3) * r);
-    final float r1c3 = (float) ((double) m.getRowColumnF(1, 3) * r);
-    final float r2c3 = (float) ((double) m.getRowColumnF(2, 3) * r);
-    final float r3c3 = (float) ((double) m.getRowColumnF(3, 3) * r);
+    final float r0c3 = (float) ((double) m.getR0C3F() * r);
+    final float r1c3 = (float) ((double) m.getR1C3F() * r);
+    final float r2c3 = (float) ((double) m.getR2C3F() * r);
+    final float r3c3 = (float) ((double) m.getR3C3F() * r);
 
-    out.setUnsafe(0, 0, r0c0);
-    out.setUnsafe(1, 0, r1c0);
-    out.setUnsafe(2, 0, r2c0);
-    out.setUnsafe(3, 0, r3c0);
+    out.setR0C0F(r0c0);
+    out.setR1C0F(r1c0);
+    out.setR2C0F(r2c0);
+    out.setR3C0F(r3c0);
 
-    out.setUnsafe(0, 1, r0c1);
-    out.setUnsafe(1, 1, r1c1);
-    out.setUnsafe(2, 1, r2c1);
-    out.setUnsafe(3, 1, r3c1);
+    out.setR0C1F(r0c1);
+    out.setR1C1F(r1c1);
+    out.setR2C1F(r2c1);
+    out.setR3C1F(r3c1);
 
-    out.setUnsafe(0, 2, r0c2);
-    out.setUnsafe(1, 2, r1c2);
-    out.setUnsafe(2, 2, r2c2);
-    out.setUnsafe(3, 2, r3c2);
+    out.setR0C2F(r0c2);
+    out.setR1C2F(r1c2);
+    out.setR2C2F(r2c2);
+    out.setR3C2F(r3c2);
 
-    out.setUnsafe(0, 3, r0c3);
-    out.setUnsafe(1, 3, r1c3);
-    out.setUnsafe(2, 3, r2c3);
-    out.setUnsafe(3, 3, r3c3);
+    out.setR0C3F(r0c3);
+    out.setR1C3F(r1c3);
+    out.setR2C3F(r2c3);
+    out.setR3C3F(r3c3);
 
     return out;
   }
 
   /**
-   * Scale all elements of the matrix {@code m} by the scaling value
-   * {@code r}, saving the result in {@code m}.
+   * Scale all elements of the matrix {@code m} by the scaling value {@code r},
+   * saving the result in {@code m}.
    *
-   * @param m
-   *          The input matrix.
-   * @param r
-   *          The scaling value.
+   * @param m   The input matrix
+   * @param r   The scaling value
+   * @param <M> The precise type of matrix
+   *
    * @return {@code m}
    */
 
-  public static MatrixM4x4F scaleInPlace(
-    final MatrixM4x4F m,
+  public static <M extends MatrixWritable4x4FType & MatrixReadable4x4FType> M
+  scaleInPlace(
+    final M m,
     final double r)
   {
     return MatrixM4x4F.scale(m, r, m);
   }
 
   /**
-   * <p>
-   * Scale row {@code r} of the matrix {@code m} by {@code r},
-   * saving the result to row {@code r} of {@code out}.
-   * </p>
+   * <p> Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
+   * result to row {@code r} of {@code m}. The function uses preallocated
+   * storage in {@code context} to avoid allocating memory. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 4)}.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
-   * @return {@code out}
-   */
-
-  public static MatrixM4x4F scaleRow(
-    final MatrixReadable4x4FType m,
-    final int row,
-    final double r,
-    final MatrixM4x4F out)
-  {
-    final VectorM4F tmp = new VectorM4F();
-    return MatrixM4x4F.scaleRowUnsafe(
-      m,
-      MatrixM4x4F.rowCheck(row),
-      r,
-      tmp,
-      out);
-  }
-
-  /**
-   * <p>
-   * Scale row {@code row} of the matrix {@code m} by {@code r}
-   * , saving the result to row {@code r} of {@code m}.
-   * </p>
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param row     The index of the row {@code (0 <= row < 4)}
+   * @param r       The scaling value
+   * @param <M>     The precise type of matrix
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
-   *
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 4)}.
-   * @param r
-   *          The scaling value.
-   * @return {@code out}
-   */
-
-  public static MatrixM4x4F scaleRowInPlace(
-    final MatrixM4x4F m,
-    final int row,
-    final double r)
-  {
-    final VectorM4F tmp = new VectorM4F();
-    return MatrixM4x4F.scaleRowUnsafe(m, row, r, tmp, m);
-  }
-
-  /**
-   * <p>
-   * Scale row {@code row} of the matrix {@code m} by {@code r}
-   * , saving the result to row {@code r} of {@code m}. The function
-   * uses preallocated storage in {@code context} to avoid allocating
-   * memory.
-   * </p>
-   *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
-   *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 4)}.
-   * @param r
-   *          The scaling value.
    * @return {@code m}
    */
 
-  public static MatrixM4x4F scaleRowInPlaceWithContext(
-    final Context context,
-    final MatrixM4x4F m,
+  public static <M extends MatrixWritable4x4FType & MatrixReadable4x4FType> M
+  scaleRowInPlace(
+    final ContextMM4F context,
+    final M m,
     final int row,
     final double r)
   {
     return MatrixM4x4F.scaleRowUnsafe(
-      m,
-      MatrixM4x4F.rowCheck(row),
-      r,
-      context.getV4a(),
-      m);
+      m, MatrixM4x4F.rowCheck(row), r, context.v4a, m);
   }
 
-  private static MatrixM4x4F scaleRowUnsafe(
+  private static <M extends MatrixWritable4x4FType> M scaleRowUnsafe(
     final MatrixReadable4x4FType m,
     final int row,
     final double r,
     final VectorM4F tmp,
-    final MatrixM4x4F out)
+    final M out)
   {
-    MatrixM4x4F.rowUnsafe(m, row, tmp);
+    m.getRow4FUnsafe(row, tmp);
     VectorM4F.scaleInPlace(tmp, r);
-    MatrixM4x4F.setRowUnsafe(out, row, tmp);
+    out.setRowWith4FUnsafe(row, tmp);
     return out;
   }
 
   /**
-   * <p>
-   * Scale row {@code row} of the matrix {@code m} by {@code r}
-   * , saving the result to row {@code r} of {@code out}. The
-   * function uses preallocated storage in {@code context} to avoid
-   * allocating memory.
-   * </p>
+   * <p> Scale row {@code row} of the matrix {@code m} by {@code r} , saving the
+   * result to row {@code r} of {@code out}. The function uses preallocated
+   * storage in {@code context} to avoid allocating memory. </p>
    *
-   * <p>
-   * This is one of the three <i>elementary</i> operations defined on matrices.
-   * </p>
+   * <p> This is one of the three <i>elementary</i> operations defined on
+   * matrices. </p>
    *
-   * @param context
-   *          Preallocated storage.
-   * @param m
-   *          The input matrix.
-   * @param row
-   *          The index of the row {@code (0 <= row < 4)}.
-   * @param r
-   *          The scaling value.
-   * @param out
-   *          The output matrix.
+   * @param context Preallocated storage
+   * @param m       The input matrix
+   * @param row     The index of the row {@code (0 <= row < 4)}
+   * @param r       The scaling value
+   * @param out     The output matrix
+   * @param <M>     The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F scaleRowWithContext(
-    final Context context,
+  public static <M extends MatrixWritable4x4FType> M scaleRow(
+    final ContextMM4F context,
     final MatrixReadable4x4FType m,
     final int row,
     final double r,
-    final MatrixM4x4F out)
+    final M out)
   {
     return MatrixM4x4F.scaleRowUnsafe(
-      m,
-      MatrixM4x4F.rowCheck(row),
-      r,
-      context.getV4a(),
-      out);
-  }
-
-  /**
-   * Set the value in the matrix {@code m} at row {@code row},
-   * column {@code column} to {@code value}.
-   *
-   * @return {@code m}
-   * @param m
-   *          The input matrix
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
-   */
-
-  public static MatrixM4x4F set(
-    final MatrixM4x4F m,
-    final int row,
-    final int column,
-    final float value)
-  {
-    m.view.put(MatrixM4x4F.indexChecked(row, column), value);
-    return m;
+      m, MatrixM4x4F.rowCheck(row), r, context.v4a, out);
   }
 
   /**
    * Set the given matrix {@code m} to the identity matrix.
    *
-   * @param m
-   *          The input matrix
+   * @param m   The input matrix
+   * @param <M> The precise type of matrix
+   *
    * @return {@code m}
    */
 
-  public static MatrixM4x4F setIdentity(
-    final MatrixM4x4F m)
+  public static <M extends MatrixWritable4x4FType> M setIdentity(
+    final M m)
   {
-    m.view.clear();
+    m.setR0C0F(1.0f);
+    m.setR1C0F(0.0f);
+    m.setR2C0F(0.0f);
+    m.setR3C0F(0.0f);
 
-    for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {
-      for (int col = 0; col < MatrixM4x4F.VIEW_COLS; ++col) {
-        if (row == col) {
-          m.setUnsafe(row, col, 1.0f);
-        } else {
-          m.setUnsafe(row, col, 0.0f);
-        }
-      }
-    }
+    m.setR0C1F(0.0f);
+    m.setR1C1F(1.0f);
+    m.setR2C1F(0.0f);
+    m.setR3C1F(0.0f);
+
+    m.setR0C2F(0.0f);
+    m.setR1C2F(0.0f);
+    m.setR2C2F(1.0f);
+    m.setR3C2F(0.0f);
+
+    m.setR0C3F(0.0f);
+    m.setR1C3F(0.0f);
+    m.setR2C3F(0.0f);
+    m.setR3C3F(1.0f);
 
     return m;
-  }
-
-  private static void setRowUnsafe(
-    final MatrixM4x4F m,
-    final int row,
-    final VectorReadable4FType v)
-  {
-    m.setUnsafe(row, 0, v.getXF());
-    m.setUnsafe(row, 1, v.getYF());
-    m.setUnsafe(row, 2, v.getZF());
-    m.setUnsafe(row, 3, v.getWF());
   }
 
   /**
    * Set the given matrix {@code m} to the zero matrix.
    *
-   * @param m
-   *          The matrix
+   * @param m   The matrix
+   * @param <M> The precise type of matrix
+   *
    * @return {@code m}
    */
 
-  public static MatrixM4x4F setZero(
-    final MatrixM4x4F m)
+  public static <M extends MatrixWritable4x4FType> M setZero(
+    final M m)
   {
-    m.view.clear();
-    for (int index = 0; index < (MatrixM4x4F.VIEW_ROWS * MatrixM4x4F.VIEW_COLS); ++index) {
-      m.view.put(index, 0.0f);
-    }
+    m.setR0C0F(0.0f);
+    m.setR1C0F(0.0f);
+    m.setR2C0F(0.0f);
+    m.setR3C0F(0.0f);
+
+    m.setR0C1F(0.0f);
+    m.setR1C1F(0.0f);
+    m.setR2C1F(0.0f);
+    m.setR3C1F(0.0f);
+
+    m.setR0C2F(0.0f);
+    m.setR1C2F(0.0f);
+    m.setR2C2F(0.0f);
+    m.setR3C2F(0.0f);
+
+    m.setR0C3F(0.0f);
+    m.setR1C3F(0.0f);
+    m.setR2C3F(0.0f);
+    m.setR3C3F(0.0f);
+
     return m;
   }
 
   /**
-   * Return the trace of the matrix {@code m}. The trace is defined as
-   * the sum of the diagonal elements of the matrix.
+   * Return the trace of the matrix {@code m}. The trace is defined as the sum
+   * of the diagonal elements of the matrix.
+   *
+   * @param m The input matrix
+   *
+   * @return The trace of the matrix
    *
    * @since 5.0.0
-   * @param m
-   *          The input matrix
-   * @return The trace of the matrix
    */
 
   public static double trace(
     final MatrixReadable4x4FType m)
   {
-    return (double) (m.getRowColumnF(0, 0)
-                     + m.getRowColumnF(1, 1)
-                     + m.getRowColumnF(2, 2)
-                     + m.getRowColumnF(3, 3));
+    return (double) (m.getR0C0F() + m.getR1C1F() + m.getR2C2F() + m.getR3C3F());
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code out}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code out}.
    *
-   * @param m
-   *          The input matrix.
-   * @param out
-   *          The output matrix.
+   * @param m   The input matrix
+   * @param out The output matrix
+   * @param <M> The precise type of matrix
+   *
    * @return {@code out}
    */
 
-  public static MatrixM4x4F transpose(
+  public static <M extends MatrixWritable4x4FType> M transpose(
     final MatrixReadable4x4FType m,
-    final MatrixM4x4F out)
+    final M out)
   {
-    MatrixM4x4F.copy(m, out);
-    return MatrixM4x4F.transposeInPlace(out);
+    final float r0c0 = m.getR0C0F();
+    final float r1c0 = m.getR1C0F();
+    final float r2c0 = m.getR2C0F();
+    final float r3c0 = m.getR3C0F();
+
+    final float r0c1 = m.getR0C1F();
+    final float r1c1 = m.getR1C1F();
+    final float r2c1 = m.getR2C1F();
+    final float r3c1 = m.getR3C1F();
+
+    final float r0c2 = m.getR0C2F();
+    final float r1c2 = m.getR1C2F();
+    final float r2c2 = m.getR2C2F();
+    final float r3c2 = m.getR3C2F();
+
+    final float r0c3 = m.getR0C3F();
+    final float r1c3 = m.getR1C3F();
+    final float r2c3 = m.getR2C3F();
+    final float r3c3 = m.getR3C3F();
+
+    out.setR0C0F(r0c0);
+    out.setR1C0F(r0c1); // swap 0
+    out.setR2C0F(r0c2); // swap 1
+    out.setR3C0F(r0c3); // swap 2
+
+    out.setR0C1F(r1c0); // swap 0
+    out.setR1C1F(r1c1);
+    out.setR2C1F(r1c2); // swap 3
+    out.setR3C1F(r1c3); // swap 4
+
+    out.setR0C2F(r2c0); // swap 1
+    out.setR1C2F(r2c1); // swap 3
+    out.setR2C2F(r2c2);
+    out.setR3C2F(r2c3); // swap 5
+
+    out.setR0C3F(r3c0); // swap 2
+    out.setR1C3F(r3c1); // swap 4
+    out.setR2C3F(r3c2); // swap 5
+    out.setR3C3F(r3c3);
+
+    return out;
   }
 
   /**
-   * Transpose the given matrix {@code m}, writing the resulting matrix
-   * to {@code m}.
+   * Transpose the given matrix {@code m}, writing the resulting matrix to
+   * {@code m}.
    *
-   * @param m
-   *          The input matrix.
+   * @param m   The input matrix
+   * @param <M> The precise type of matrix
+   *
    * @return {@code m}
    */
 
-  public static MatrixM4x4F transposeInPlace(
-    final MatrixM4x4F m)
+  public static <M extends MatrixWritable4x4FType & MatrixReadable4x4FType> M
+  transposeInPlace(
+    final M m)
   {
-    for (int row = 0; row < (MatrixM4x4F.VIEW_ROWS - 1); ++row) {
-      for (int column = row + 1; column < MatrixM4x4F.VIEW_COLS; ++column) {
-        final float x = m.view.get((row * MatrixM4x4F.VIEW_ROWS) + column);
-        m.view.put(
-          (row * MatrixM4x4F.VIEW_ROWS) + column,
-          m.view.get(row + (MatrixM4x4F.VIEW_COLS * column)));
-        m.view.put(row + (MatrixM4x4F.VIEW_COLS * column), x);
-      }
-    }
+    final float r1c0 = m.getR1C0F();
+    final float r2c0 = m.getR2C0F();
+    final float r3c0 = m.getR3C0F();
+
+    final float r0c1 = m.getR0C1F();
+    final float r2c1 = m.getR2C1F();
+    final float r3c1 = m.getR3C1F();
+
+    final float r0c2 = m.getR0C2F();
+    final float r1c2 = m.getR1C2F();
+    final float r3c2 = m.getR3C2F();
+
+    final float r0c3 = m.getR0C3F();
+    final float r1c3 = m.getR1C3F();
+    final float r2c3 = m.getR2C3F();
+
+    m.setR1C0F(r0c1); // swap 0
+    m.setR2C0F(r0c2); // swap 1
+    m.setR3C0F(r0c3); // swap 2
+
+    m.setR0C1F(r1c0); // swap 0
+    m.setR2C1F(r1c2); // swap 3
+    m.setR3C1F(r1c3); // swap 4
+
+    m.setR0C2F(r2c0); // swap 1
+    m.setR1C2F(r2c1); // swap 3
+    m.setR3C2F(r2c3); // swap 5
+
+    m.setR0C3F(r3c0); // swap 2
+    m.setR1C3F(r3c1); // swap 4
+    m.setR2C3F(r3c2); // swap 5
 
     return m;
   }
 
-  private final ByteBuffer  data;
-  private final FloatBuffer view;
-
   /**
-   * Construct a new identity matrix.
-   */
-
-  public MatrixM4x4F()
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM4x4F.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    this.data = b;
-
-    final FloatBuffer v = this.data.asFloatBuffer();
-    assert v != null;
-
-    this.view = v;
-    MatrixM4x4F.setIdentity(this);
-    this.view.rewind();
-  }
-
-  /**
-   * Construct a new copy of the given matrix.
+   * <p>The {@code ContextMM4F} type contains the minimum storage required for
+   * all of the functions of the {@code MatrixM4x4F} class.</p>
    *
-   * @param source
-   *          The source matrix.
-   */
-
-  public MatrixM4x4F(
-    final MatrixReadable4x4FType source)
-  {
-    final ByteBuffer b = ByteBuffer.allocateDirect(MatrixM4x4F.VIEW_BYTES);
-    assert b != null;
-
-    final ByteOrder order = ByteOrder.nativeOrder();
-    assert order != null;
-    b.order(order);
-
-    this.data = b;
-
-    final FloatBuffer v = this.data.asFloatBuffer();
-    assert v != null;
-
-    this.view = v;
-    this.view.rewind();
-
-    for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {
-      for (int col = 0; col < MatrixM4x4F.VIEW_COLS; ++col) {
-        this.setUnsafe(row, col, source.getRowColumnF(row, col));
-      }
-    }
-  }
-
-  @Override public boolean equals(
-    final @Nullable Object obj)
-  {
-    if (this == obj) {
-      return true;
-    }
-    if (obj == null) {
-      return false;
-    }
-    if (this.getClass() != obj.getClass()) {
-      return false;
-    }
-    final MatrixM4x4F other = (MatrixM4x4F) obj;
-
-    for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
-      if (other.view.get(index) != this.view.get(index)) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  @Override public FloatBuffer getDirectFloatBuffer()
-  {
-    return this.view;
-  }
-
-  @Override public <V extends VectorWritable4FType> void getRow4F(
-    final int row,
-    final V out)
-  {
-    MatrixM4x4F.rowUnsafe(this, MatrixM4x4F.rowCheck(row), out);
-  }
-
-  @Override public float getRowColumnF(
-    final int row,
-    final int column)
-  {
-    return this.view.get(MatrixM4x4F.indexChecked(row, column));
-  }
-
-  @Override public int hashCode()
-  {
-    final int prime = 31;
-    int result = 1;
-    result = (prime * result);
-
-    for (int index = 0; index < MatrixM4x4F.VIEW_ELEMENTS; ++index) {
-      result += Float.valueOf(this.view.get(index)).hashCode();
-    }
-    return result;
-  }
-
-  /**
-   * Set the value at the given row and column.
+   * <p> The purpose of the class is to allow applications to allocate all
+   * storage ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical
+   * code.</p>
    *
-   * @param row
-   *          The row
-   * @param column
-   *          The column
-   * @param value
-   *          The value
-   * @return {@code this}
-   */
-
-  public MatrixM4x4F set(
-    final int row,
-    final int column,
-    final float value)
-  {
-    this.view.put(MatrixM4x4F.indexChecked(row, column), value);
-    return this;
-  }
-
-  @Override public void setRowColumnF(
-    final int row,
-    final int column,
-    final float value)
-  {
-    this.view.put(MatrixM4x4F.indexChecked(row, column), value);
-  }
-
-  /**
-   * Set the value at row {@code row} and {@code column} to
-   * {@code value} without bounds checking.
+   * <p> The user should allocate one {@code ContextMM4F} value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes a
+   * {@code ContextMM4F} value will not generate garbage.</p>
    *
-   * This function is only accessible by code in the same package as this.
+   * @since 7.0.0
    */
 
-  MatrixM4x4F setUnsafe(
-    final int row,
-    final int column,
-    final float value)
+  public static final class ContextMM4F
   {
-    this.view.put(MatrixM4x4F.indexUnsafe(row, column), value);
-    return this;
-  }
+    private final Matrix3x3FType m3a = MatrixHeapArrayM3x3F.newMatrix();
+    private final Matrix4x4FType m4a = MatrixHeapArrayM4x4F.newMatrix();
+    private final Matrix4x4FType m4b = MatrixHeapArrayM4x4F.newMatrix();
+    private final VectorM3F      v3a = new VectorM3F();
+    private final VectorM3F      v3b = new VectorM3F();
+    private final VectorM3F      v3c = new VectorM3F();
+    private final VectorM3F      v3d = new VectorM3F();
+    private final VectorM4F      v4a = new VectorM4F();
+    private final VectorM4F      v4b = new VectorM4F();
 
-  @SuppressWarnings("boxing") @Override public String toString()
-  {
-    final StringBuilder builder = new StringBuilder();
-    for (int row = 0; row < MatrixM4x4F.VIEW_ROWS; ++row) {
-      final float c0 = this.view.get(MatrixM4x4F.indexUnsafe(row, 0));
-      final float c1 = this.view.get(MatrixM4x4F.indexUnsafe(row, 1));
-      final float c2 = this.view.get(MatrixM4x4F.indexUnsafe(row, 2));
-      final float c3 = this.view.get(MatrixM4x4F.indexUnsafe(row, 3));
-      final String s =
-        String.format("[%+.6f %+.6f %+.6f %+.6f]\n", c0, c1, c2, c3);
-      builder.append(s);
+    /**
+     * Construct a new context.
+     */
+
+    public ContextMM4F()
+    {
+
     }
-    final String r = builder.toString();
-    assert r != null;
-    return r;
   }
 }

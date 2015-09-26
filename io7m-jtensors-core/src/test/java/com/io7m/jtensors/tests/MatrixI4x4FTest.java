@@ -16,24 +16,26 @@
 
 package com.io7m.jtensors.tests;
 
+import com.io7m.jtensors.Matrix4x4FType;
+import com.io7m.jtensors.MatrixHeapArrayM4x4F;
+import com.io7m.jtensors.MatrixI4x4F;
+import com.io7m.jtensors.MatrixReadable4x4FType;
+import com.io7m.jtensors.VectorI4F;
+import com.io7m.jtensors.VectorM4F;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.io7m.jtensors.MatrixI4x4F;
-import com.io7m.jtensors.MatrixM4x4F;
-import com.io7m.jtensors.VectorI4F;
-import com.io7m.jtensors.VectorM4F;
-
-@SuppressWarnings("static-method") public class MatrixI4x4FTest
+public final class MatrixI4x4FTest
+  extends MatrixReadable4x4FContract<MatrixI4x4F>
 {
   @Test public void testEquals()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, (float) index);
         ++index;
       }
     }
@@ -44,14 +46,14 @@ import com.io7m.jtensors.VectorM4F;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         Assert.assertEquals(
-          im0.getRowColumnF(row, col),
-          m0.getRowColumnF(row, col),
+          (double) im0.getRowColumnF(row, col),
+          (double) m0.getRowColumnF(row, col),
           0.0);
       }
     }
 
     Assert.assertEquals(im0, im0);
-    Assert.assertEquals(im0.hashCode(), im0.hashCode());
+    Assert.assertEquals((long) im0.hashCode(), (long) im0.hashCode());
     Assert.assertEquals(im0, im1);
     Assert.assertFalse(im0.equals(null));
     Assert.assertFalse(im0.equals(Integer.valueOf(23)));
@@ -59,7 +61,7 @@ import com.io7m.jtensors.VectorM4F;
     index = 100;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, (float) index);
         ++index;
       }
     }
@@ -70,27 +72,27 @@ import com.io7m.jtensors.VectorM4F;
 
   @Test public void testFromColumns()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
-    m0.set(2, 0, 0.2f);
-    m0.set(3, 0, 0.3f);
+    m0.setR0C0F(0.0f);
+    m0.setR1C0F(0.1f);
+    m0.setR2C0F(0.2f);
+    m0.setR3C0F(0.3f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
-    m0.set(2, 1, 10.2f);
-    m0.set(3, 1, 10.3f);
+    m0.setR0C1F(10.0f);
+    m0.setR1C1F(10.1f);
+    m0.setR2C1F(10.2f);
+    m0.setR3C1F(10.3f);
 
-    m0.set(0, 2, 20.0f);
-    m0.set(1, 2, 20.1f);
-    m0.set(2, 2, 20.2f);
-    m0.set(3, 2, 20.3f);
+    m0.setR0C2F(20.0f);
+    m0.setR1C2F(20.1f);
+    m0.setR2C2F(20.2f);
+    m0.setR3C2F(20.3f);
 
-    m0.set(0, 3, 30.0f);
-    m0.set(1, 3, 30.1f);
-    m0.set(2, 3, 30.2f);
-    m0.set(3, 3, 30.3f);
+    m0.setR0C3F(30.0f);
+    m0.setR1C3F(30.1f);
+    m0.setR2C3F(30.2f);
+    m0.setR3C3F(30.3f);
 
     final MatrixI4x4F im0 = MatrixI4x4F.newFromReadable(m0);
 
@@ -107,60 +109,60 @@ import com.io7m.jtensors.VectorM4F;
 
   @Test public void testFromRows()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
-    m0.set(2, 0, 0.2f);
-    m0.set(3, 0, 0.3f);
+    m0.setR0C0F(0.0f);
+    m0.setR1C0F(0.1f);
+    m0.setR2C0F(0.2f);
+    m0.setR3C0F(0.3f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
-    m0.set(2, 1, 10.2f);
-    m0.set(3, 1, 10.3f);
+    m0.setR0C1F(10.0f);
+    m0.setR1C1F(10.1f);
+    m0.setR2C1F(10.2f);
+    m0.setR3C1F(10.3f);
 
-    m0.set(0, 2, 20.0f);
-    m0.set(1, 2, 20.1f);
-    m0.set(2, 2, 20.2f);
-    m0.set(3, 2, 20.3f);
+    m0.setR0C2F(20.0f);
+    m0.setR1C2F(20.1f);
+    m0.setR2C2F(20.2f);
+    m0.setR3C2F(20.3f);
 
-    m0.set(0, 3, 30.0f);
-    m0.set(1, 3, 30.1f);
-    m0.set(2, 3, 30.2f);
-    m0.set(3, 3, 30.3f);
+    m0.setR0C3F(30.0f);
+    m0.setR1C3F(30.1f);
+    m0.setR2C3F(30.2f);
+    m0.setR3C3F(30.3f);
 
     final MatrixI4x4F im = MatrixI4x4F.newFromReadable(m0);
 
     final VectorM4F row = new VectorM4F();
 
     im.getRow4F(0, row);
-    Assert.assertEquals(0.0f, row.getXF(), 0.0);
-    Assert.assertEquals(10.0f, row.getYF(), 0.0);
-    Assert.assertEquals(20.0f, row.getZF(), 0.0);
-    Assert.assertEquals(30.0f, row.getWF(), 0.0);
+    Assert.assertEquals(0.0, (double) row.getXF(), 0.0);
+    Assert.assertEquals(10.0, (double) row.getYF(), 0.0);
+    Assert.assertEquals(20.0, (double) row.getZF(), 0.0);
+    Assert.assertEquals(30.0, (double) row.getWF(), 0.0);
 
     im.getRow4F(1, row);
-    Assert.assertEquals(0.1f, row.getXF(), 0.0);
-    Assert.assertEquals(10.1f, row.getYF(), 0.0);
-    Assert.assertEquals(20.1f, row.getZF(), 0.0);
-    Assert.assertEquals(30.1f, row.getWF(), 0.0);
+    Assert.assertEquals(0.1, (double) row.getXF(), 0.000001);
+    Assert.assertEquals(10.1, (double) row.getYF(), 0.000001);
+    Assert.assertEquals(20.1, (double) row.getZF(), 0.000001);
+    Assert.assertEquals(30.1, (double) row.getWF(), 0.000001);
 
     im.getRow4F(2, row);
-    Assert.assertEquals(0.2f, row.getXF(), 0.0);
-    Assert.assertEquals(10.2f, row.getYF(), 0.0);
-    Assert.assertEquals(20.2f, row.getZF(), 0.0);
-    Assert.assertEquals(30.2f, row.getWF(), 0.0);
+    Assert.assertEquals(0.2, (double) row.getXF(), 0.000001);
+    Assert.assertEquals(10.2, (double) row.getYF(), 0.000001);
+    Assert.assertEquals(20.2, (double) row.getZF(), 0.000001);
+    Assert.assertEquals(30.2, (double) row.getWF(), 0.000001);
 
     im.getRow4F(3, row);
-    Assert.assertEquals(0.3f, row.getXF(), 0.0);
-    Assert.assertEquals(10.3f, row.getYF(), 0.0);
-    Assert.assertEquals(20.3f, row.getZF(), 0.0);
-    Assert.assertEquals(30.3f, row.getWF(), 0.0);
+    Assert.assertEquals(0.3, (double) row.getXF(), 0.000001);
+    Assert.assertEquals(10.3, (double) row.getYF(), 0.000001);
+    Assert.assertEquals(20.3, (double) row.getZF(), 0.000001);
+    Assert.assertEquals(30.3, (double) row.getWF(), 0.000001);
   }
 
   @Test public void testIdentity()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
     final MatrixI4x4F im0 = MatrixI4x4F.identity();
     final MatrixI4x4F im1 = MatrixI4x4F.newFromReadable(m0);
     Assert.assertEquals(im1, im0);
@@ -168,13 +170,13 @@ import com.io7m.jtensors.VectorM4F;
 
   @Test public void testMakeMatrix4x4F()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
-    final MatrixM4x4F m1 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
+    final Matrix4x4FType m1 = MatrixHeapArrayM4x4F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, (float) index);
         ++index;
       }
     }
@@ -186,14 +188,14 @@ import com.io7m.jtensors.VectorM4F;
 
   @Test public void testToString()
   {
-    final MatrixM4x4F m0 = new MatrixM4x4F();
-    final MatrixM4x4F m1 = new MatrixM4x4F();
+    final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
+    final Matrix4x4FType m1 = MatrixHeapArrayM4x4F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        m0.set(row, col, index);
-        m1.set(row, col, index);
+        m0.setRowColumnF(row, col, (float) index);
+        m1.setRowColumnF(row, col, (float) index);
         ++index;
       }
     }
@@ -201,5 +203,21 @@ import com.io7m.jtensors.VectorM4F;
     final MatrixI4x4F im0 = MatrixI4x4F.newFromReadable(m0);
     final MatrixI4x4F im1 = MatrixI4x4F.newFromReadable(m1);
     Assert.assertEquals(im0.toString(), im1.toString());
+  }
+
+  @Override protected MatrixI4x4F newMatrix()
+  {
+    return MatrixI4x4F.identity();
+  }
+
+  @Override
+  protected MatrixI4x4F newMatrixFrom(final MatrixReadable4x4FType source)
+  {
+    return MatrixI4x4F.newFromReadable(source);
+  }
+
+  @Override protected void checkDirectBufferInvariants(final MatrixI4x4F m)
+  {
+    // Nothing required
   }
 }

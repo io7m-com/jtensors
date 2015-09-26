@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,7 +18,6 @@ package com.io7m.jtensors.parameterized;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
-import com.io7m.jfunctional.Pair;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorM2D;
@@ -27,47 +26,86 @@ import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
 
 /**
- * <p>
- * A three-dimensional mutable vector type with double precision elements.
+ * <p> A three-dimensional mutable vector type with double precision elements.
  * </p>
  *
- * <p>
- * Values of this type cannot be accessed safely from multiple threads without
- * explicit synchronization.
- * </p>
+ * <p> Values of this type cannot be accessed safely from multiple threads
+ * without explicit synchronization. </p>
  *
- * @param <T>
- *          A phantom type parameter.
+ * @param <T> A phantom type parameter
+ *
+ * @since 7.0.0
  */
 
-public final class PVectorM3D<T> implements
-  PVectorReadable3DType<T>,
-  PVectorWritable3DType<T>
+public final class PVectorM3D<T> implements PVector3DType<T>
 {
+  private double x;
+  private double y;
+  private double z;
+
   /**
-   * Calculate the absolute values of the elements in vector {@code v},
-   * saving the result to {@code out}.
-   *
-   * @param v
-   *          The input vector
-   * @param out
-   *          The output vector
-   *
-   * @return {@code (abs v.x, abs v.y, abs v.z)}
-   * @param <T>
-   *          A phantom type parameter.
+   * Default constructor, initializing the vector with values {@code [0.0, 0.0,
+   * 0.0]}.
    */
 
-  public static <T> PVectorM3D<T> absolute(
+  public PVectorM3D()
+  {
+
+  }
+
+  /**
+   * Construct a vector initialized with the given values.
+   *
+   * @param in_x The {@code x} value
+   * @param in_y The {@code y} value
+   * @param in_z The {@code z} value
+   */
+
+  public PVectorM3D(
+    final double in_x,
+    final double in_y,
+    final double in_z)
+  {
+    this.x = in_x;
+    this.y = in_y;
+    this.z = in_z;
+  }
+
+  /**
+   * Construct a vector initialized with the values given in the vector {@code
+   * v}.
+   *
+   * @param in_v The source vector
+   */
+
+  public PVectorM3D(
+    final PVectorReadable3DType<T> in_v)
+  {
+    this.x = in_v.getXD();
+    this.y = in_v.getYD();
+    this.z = in_v.getZD();
+  }
+
+  /**
+   * Calculate the absolute values of the elements in vector {@code v}, saving
+   * the result to {@code out}.
+   *
+   * @param v   The input vector
+   * @param out The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
+   *
+   * @return {@code (abs v.x, abs v.y, abs v.z)}
+   */
+
+  public static <T, V extends PVectorWritable3DType<T>> V absolute(
     final PVectorReadable3DType<T> v,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x = Math.abs(v.getXD());
     final double y = Math.abs(v.getYD());
     final double z = Math.abs(v.getZD());
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
@@ -75,66 +113,60 @@ public final class PVectorM3D<T> implements
    * Calculate the absolute values of the elements in vector {@code v},
    * modifying the vector in-place.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (abs v.x, abs v.y, abs v.z)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> absoluteInPlace(
-    final PVectorM3D<T> v)
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V absoluteInPlace(
+    final V v)
   {
     return PVectorM3D.absolute(v, v);
   }
 
   /**
-   * Calculate the element-wise sum of the vectors {@code v0} and
-   * {@code v1}, saving the result to {@code out}.
+   * Calculate the element-wise sum of the vectors {@code v0} and {@code v1},
+   * saving the result to {@code out}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param out
-   *          The output vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param out The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> add(
+  public static <T, V extends PVectorWritable3DType<T>> V add(
     final PVectorReadable3DType<T> v0,
     final PVectorReadable3DType<T> v1,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x = v0.getXD() + v1.getXD();
     final double y = v0.getYD() + v1.getYD();
     final double z = v0.getZD() + v1.getZD();
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
   /**
-   * Calculate the element-wise sum of the vectors {@code v0} and
-   * {@code v1}, saving the result to {@code v0}.
+   * Calculate the element-wise sum of the vectors {@code v0} and {@code v1},
+   * saving the result to {@code v0}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> addInPlace(
-    final PVectorM3D<T> v0,
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V addInPlace(
+    final V v0,
     final PVectorReadable3DType<T> v1)
   {
     return PVectorM3D.add(v0, v1, v0);
@@ -142,57 +174,49 @@ public final class PVectorM3D<T> implements
 
   /**
    * Calculate the element-wise sum of the vectors {@code v0} and the
-   * element-wise product of {@code v1} and {@code r}, saving the
-   * result to {@code out}.
+   * element-wise product of {@code v1} and {@code r}, saving the result to
+   * {@code out}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param out
-   *          The output vector
-   * @param r
-   *          The scaling value
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param out The output vector
+   * @param r   The scaling value
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> addScaled(
+  public static <T, V extends PVectorWritable3DType<T>> V addScaled(
     final PVectorReadable3DType<T> v0,
     final PVectorReadable3DType<T> v1,
     final double r,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x = v0.getXD() + (v1.getXD() * r);
     final double y = v0.getYD() + (v1.getYD() * r);
     final double z = v0.getZD() + (v1.getZD() * r);
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
   /**
    * Calculate the element-wise sum of the vectors {@code v0} and the
-   * element-wise product of {@code v1} and {@code r}, saving the
-   * result to {@code v0}.
+   * element-wise product of {@code v1} and {@code r}, saving the result to
+   * {@code v0}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param r
-   *          The scaling value
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param r   The scaling value
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> addScaledInPlace(
-    final PVectorM3D<T> v0,
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V addScaledInPlace(
+    final V v0,
     final PVectorReadable3DType<T> v1,
     final double r)
   {
@@ -200,21 +224,18 @@ public final class PVectorM3D<T> implements
   }
 
   /**
-   * Determine whether or not the vectors {@code qa} and {@code qb}
-   * are equal to within the degree of error given in {@code context}.
+   * Determine whether or not the vectors {@code qa} and {@code qb} are equal to
+   * within the degree of error given in {@code context}.
+   *
+   * @param context The equality context
+   * @param qa      The left input vector
+   * @param qb      The right input vector
+   * @param <T>     A phantom type parameter
+   *
+   * @return {@code true} if the vectors are almost equal
    *
    * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
-   *
-   * @param context
-   *          The equality context
-   * @param qa
-   *          The left input vector
-   * @param qb
-   *          The right input vector
    * @since 7.0.0
-   * @return {@code true} if the vectors are almost equal
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> boolean almostEqual(
@@ -232,64 +253,54 @@ public final class PVectorM3D<T> implements
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. maximum]} inclusive, saving the result to
-   * {@code out}.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * maximum]} inclusive, saving the result to {@code out}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
-   * @param maximum
-   *          The maximum allowed value
-   * @param out
-   *          The output vector
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param maximum The maximum allowed value
+   * @param out     The output vector
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return A vector with both elements equal to at most {@code maximum}
-   *         and at least {@code minimum}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return A vector with both elements equal to at most {@code maximum} and at
+   * least {@code minimum}
    */
 
-  public static <T> PVectorM3D<T> clamp(
+  public static <T, V extends PVectorWritable3DType<T>> V clamp(
     final PVectorReadable3DType<T> v,
     final double minimum,
     final double maximum,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x = Math.min(Math.max(v.getXD(), minimum), maximum);
     final double y = Math.min(Math.max(v.getYD(), minimum), maximum);
     final double z = Math.min(Math.max(v.getZD(), minimum), maximum);
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum} and
-   * {@code maximum}, saving the result to {@code out}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum} and {@code maximum}, saving
+   * the result to {@code out}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
-   * @param maximum
-   *          The vector containing the maximum acceptable values
-   * @param out
-   *          The output vector
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param maximum The vector containing the maximum acceptable values
+   * @param out     The output vector
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y,
+   * minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))}
    */
 
-  public static <T> PVectorM3D<T> clampByPVector(
+  public static <T, V extends PVectorWritable3DType<T>> V clampByPVector(
     final PVectorReadable3DType<T> v,
     final PVectorReadable3DType<T> minimum,
     final PVectorReadable3DType<T> maximum,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x =
       Math.min(Math.max(v.getXD(), minimum.getXD()), maximum.getXD());
@@ -297,31 +308,28 @@ public final class PVectorM3D<T> implements
       Math.min(Math.max(v.getYD(), minimum.getYD()), maximum.getYD());
     final double z =
       Math.min(Math.max(v.getZD(), minimum.getZD()), maximum.getZD());
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum} and
-   * {@code maximum}, saving the result to {@code v}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum} and {@code maximum}, saving
+   * the result to {@code v}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param maximum The vector containing the maximum acceptable values
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y,
+   * minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))}
    */
 
-  public static <T> PVectorM3D<T> clampByPVectorInPlace(
-    final PVectorM3D<T> v,
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V clampByPVectorInPlace(
+    final V v,
     final PVectorReadable3DType<T> minimum,
     final PVectorReadable3DType<T> maximum)
   {
@@ -329,25 +337,22 @@ public final class PVectorM3D<T> implements
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. maximum]} inclusive, saving the result to
-   * {@code v}.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * maximum]} inclusive, saving the result to {@code v}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param maximum The maximum allowed value
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return A vector with both elements equal to at most {@code maximum}
-   *         and at least {@code minimum}, in {@code v}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return A vector with both elements equal to at most {@code maximum} and at
+   * least {@code minimum}, in {@code v}
    */
 
-  public static <T> PVectorM3D<T> clampInPlace(
-    final PVectorM3D<T> v,
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V clampInPlace(
+    final V v,
     final double minimum,
     final double maximum)
   {
@@ -355,233 +360,204 @@ public final class PVectorM3D<T> implements
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [-Infinity .. maximum]} inclusive, saving the result to
-   * {@code out}.
+   * Clamp the elements of the vector {@code v} to the range {@code [-Infinity
+   * .. maximum]} inclusive, saving the result to {@code out}.
    *
-   * @param v
-   *          The input vector
-   * @param out
-   *          The output vector
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param out     The output vector
+   * @param maximum The maximum allowed value
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
    * @return A vector with both elements equal to at most {@code maximum}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> clampMaximum(
+  public static <T, V extends PVectorWritable3DType<T>> V clampMaximum(
     final PVectorReadable3DType<T> v,
     final double maximum,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x = Math.min(v.getXD(), maximum);
     final double y = Math.min(v.getYD(), maximum);
     final double z = Math.min(v.getZD(), maximum);
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code maximum}, saving the
-   * result to {@code out}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code maximum}, saving the result to {@code
+   * out}.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The vector containing the maximum acceptable values
-   * @param out
-   *          The output vector
+   * @param v       The input vector
+   * @param maximum The vector containing the maximum acceptable values
+   * @param out     The output vector
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z,
+   * maximum.z))}
    */
 
-  public static <T> PVectorM3D<T> clampMaximumByPVector(
+  public static <T, V extends PVectorWritable3DType<T>> V clampMaximumByPVector(
     final PVectorReadable3DType<T> v,
     final PVectorReadable3DType<T> maximum,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x = Math.min(v.getXD(), maximum.getXD());
     final double y = Math.min(v.getYD(), maximum.getYD());
     final double z = Math.min(v.getZD(), maximum.getZD());
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code maximum}, saving the
-   * result to {@code v}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code maximum}, saving the result to {@code
+   * v}.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param maximum The vector containing the maximum acceptable values
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z,
+   * maximum.z))}
    */
 
-  public static <T> PVectorM3D<T> clampMaximumByPVectorInPlace(
-    final PVectorM3D<T> v,
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V clampMaximumByPVectorInPlace(
+    final V v,
     final PVectorReadable3DType<T> maximum)
   {
     return PVectorM3D.clampMaximumByPVector(v, maximum, v);
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [-Infinity .. maximum]} inclusive, saving the result to
-   * {@code v}.
+   * Clamp the elements of the vector {@code v} to the range {@code [-Infinity
+   * .. maximum]} inclusive, saving the result to {@code v}.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param maximum The maximum allowed value
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return A vector with both elements equal to at most {@code maximum}
-   *         , in {@code v}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return A vector with both elements equal to at most {@code maximum} , in
+   * {@code v}
    */
 
-  public static <T> PVectorM3D<T> clampMaximumInPlace(
-    final PVectorM3D<T> v,
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V clampMaximumInPlace(
+    final V v,
     final double maximum)
   {
     return PVectorM3D.clampMaximum(v, maximum, v);
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. Infinity]} inclusive, saving the result to
-   * {@code out}.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * Infinity]} inclusive, saving the result to {@code out}.
    *
-   * @param v
-   *          The input vector
-   * @param out
-   *          The output vector
-   * @param minimum
-   *          The minimum allowed value
+   * @param v       The input vector
+   * @param out     The output vector
+   * @param minimum The minimum allowed value
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return A vector with both elements equal to at least
-   *         {@code minimum}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return A vector with both elements equal to at least {@code minimum}
    */
 
-  public static <T> PVectorM3D<T> clampMinimum(
+  public static <T, V extends PVectorWritable3DType<T>> V clampMinimum(
     final PVectorReadable3DType<T> v,
     final double minimum,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x = Math.max(v.getXD(), minimum);
     final double y = Math.max(v.getYD(), minimum);
     final double z = Math.max(v.getZD(), minimum);
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum}, saving the
-   * result to {@code out}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum}, saving the result to {@code
+   * out}.
    *
-   * @param v
-   *          The input vector
-   * @param out
-   *          The output vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
+   * @param v       The input vector
+   * @param out     The output vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
+   * minimum.z))}
    */
 
-  public static <T> PVectorM3D<T> clampMinimumByPVector(
+  public static <T, V extends PVectorWritable3DType<T>> V clampMinimumByPVector(
     final PVectorReadable3DType<T> v,
     final PVectorReadable3DType<T> minimum,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x = Math.max(v.getXD(), minimum.getXD());
     final double y = Math.max(v.getYD(), minimum.getYD());
     final double z = Math.max(v.getZD(), minimum.getZD());
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the inclusive range
-   * given by the corresponding elements in {@code minimum}, saving the
-   * result to {@code v}.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum}, saving the result to {@code
+   * v}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
    *
-   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))}
-   *         , in {@code v}
-   * @param <T>
-   *          A phantom type parameter.
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
+   * minimum.z))} , in {@code v}
    */
 
-  public static <T> PVectorM3D<T> clampMinimumByPVectorInPlace(
-    final PVectorM3D<T> v,
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V clampMinimumByPVectorInPlace(
+    final V v,
     final PVectorReadable3DType<T> minimum)
   {
     return PVectorM3D.clampMinimumByPVector(v, minimum, v);
   }
 
   /**
-   * Clamp the elements of the vector {@code v} to the range
-   * {@code [minimum .. Infinity]} inclusive, saving the result to
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * Infinity]} inclusive, saving the result to {@code v}.
+   *
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param <T>     A phantom type parameter
+   * @param <V>     The precise type of vector
+   *
+   * @return A vector with both elements equal to at least {@code minimum}, in
    * {@code v}.
-   *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
-   *
-   * @return A vector with both elements equal to at least
-   *         {@code minimum}, in {@code v}.
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> clampMinimumInPlace(
-    final PVectorM3D<T> v,
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V clampMinimumInPlace(
+    final V v,
     final double minimum)
   {
     return PVectorM3D.clampMinimum(v, minimum, v);
   }
 
   /**
-   * Copy all elements of the vector {@code input} to the vector
-   * {@code output}.
+   * Copy all elements of the vector {@code input} to the vector {@code
+   * output}.
    *
-   * @param input
-   *          The input vector
-   * @param output
-   *          The output vector
+   * @param input  The input vector
+   * @param output The output vector
+   * @param <T>    A phantom type parameter
    *
    * @return output
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> PVectorWritable3DType<T> copy(
@@ -593,68 +569,58 @@ public final class PVectorM3D<T> implements
   }
 
   /**
-   * Return a vector perpendicular to both {@code v0} and {@code v1}
-   * , saving the result in {@code out}.
+   * Return a vector perpendicular to both {@code v0} and {@code v1} , saving
+   * the result in {@code out}.
    *
-   * @param v0
-   *          The left input vector.
-   * @param v1
-   *          The right input vector.
-   * @param out
-   *          The output vector.
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param out The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
+   *
    * @return out
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> crossProduct(
+  public static <T, V extends PVectorWritable3DType<T>> V crossProduct(
     final PVectorReadable3DType<T> v0,
     final PVectorReadable3DType<T> v1,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x = (v0.getYD() * v1.getZD()) - (v0.getZD() * v1.getYD());
     final double y = (v0.getZD() * v1.getXD()) - (v0.getXD() * v1.getZD());
     final double z = (v0.getXD() * v1.getYD()) - (v0.getYD() * v1.getXD());
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
   /**
-   * Calculate the distance between the two vectors {@code v0} and
-   * {@code v1}.
+   * Calculate the distance between the two vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param c   Preallocated storage
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter
    *
    * @return The distance between the two vectors.
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double distance(
+    final ContextPVM3D c,
     final PVectorReadable3DType<T> v0,
     final PVectorReadable3DType<T> v1)
   {
-    final PVectorM3D<T> vr = new PVectorM3D<T>();
+    final PVectorM3D<T> vr = (PVectorM3D<T>) c.va;
     return PVectorM3D.magnitude(PVectorM3D.subtract(v0, v1, vr));
   }
 
   /**
-   * Calculate the scalar product of the vectors {@code v0} and
-   * {@code v1}.
+   * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter
    *
    * @return The scalar product of the two vectors
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double dotProduct(
@@ -668,45 +634,40 @@ public final class PVectorM3D<T> implements
   }
 
   /**
-   * Linearly interpolate between {@code v0} and {@code v1} by the
-   * amount {@code alpha}, saving the result to {@code r}.
+   * Linearly interpolate between {@code v0} and {@code v1} by the amount {@code
+   * alpha}, saving the result to {@code r}.
    *
-   * The {@code alpha} parameter controls the degree of interpolation,
-   * such that:
+   * The {@code alpha} parameter controls the degree of interpolation, such
+   * that:
    *
-   * <ul>
-   * <li>{@code interpolateLinear(v0, v1, 0.0, r) -&gt; r = v0}</li>
-   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -&gt; r = v1}</li>
-   * </ul>
+   * <ul> <li>{@code interpolateLinear(v0, v1, 0.0, r) -> r = v0}</li>
+   * <li>{@code interpolateLinear(v0, v1, 1.0, r) -> r = v1}</li> </ul>
    *
-   * @param v0
-   *          The left input vector.
-   * @param v1
-   *          The right input vector.
-   * @param alpha
-   *          The interpolation value, between {@code 0.0} and
-   *          {@code 1.0}.
-   * @param r
-   *          The result vector.
+   * @param c     Preallocated storage
+   * @param v0    The left input vector
+   * @param v1    The right input vector
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}
+   * @param r     The result vector
+   * @param <T>   A phantom type parameter
+   * @param <V>   The precise type of vector
    *
    * @return {@code r}
-   * @param <T>
-   *          A phantom type parameter.
+   *
+   * @since 7.0.0
    */
 
-  public static <T> PVectorM3D<T> interpolateLinear(
+  public static <T, V extends PVectorWritable3DType<T>> V interpolateLinear(
+    final ContextPVM3D c,
     final PVectorReadable3DType<T> v0,
     final PVectorReadable3DType<T> v1,
     final double alpha,
-    final PVectorM3D<T> r)
+    final V r)
   {
-    final PVectorM3D<T> w0 = new PVectorM3D<T>();
-    final PVectorM3D<T> w1 = new PVectorM3D<T>();
-
-    PVectorM3D.scale(v0, 1.0 - alpha, w0);
-    PVectorM3D.scale(v1, alpha, w1);
-
-    return PVectorM3D.add(w0, w1, r);
+    final PVectorM3D<T> va = (PVectorM3D<T>) c.va;
+    final PVectorM3D<T> vb = (PVectorM3D<T>) c.vb;
+    PVectorM3D.scale(v0, 1.0 - alpha, va);
+    PVectorM3D.scale(v1, alpha, vb);
+    return PVectorM3D.add(va, vb, r);
   }
 
   /**
@@ -714,12 +675,10 @@ public final class PVectorM3D<T> implements
    *
    * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter
    *
    * @return The magnitude of the input vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double magnitude(
@@ -731,12 +690,10 @@ public final class PVectorM3D<T> implements
   /**
    * Calculate the squared magnitude of the vector {@code v}.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter
    *
    * @return The squared magnitude of the input vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
   public static <T> double magnitudeSquared(
@@ -746,135 +703,130 @@ public final class PVectorM3D<T> implements
   }
 
   /**
-   * Returns a vector with the same orientation as {@code v} but with
-   * magnitude equal to {@code 1.0} in {@code out}. The function
-   * returns the zero vector iff the input is the zero vector.
+   * Returns a vector with the same orientation as {@code v} but with magnitude
+   * equal to {@code 1.0} in {@code out}. The function returns the zero vector
+   * iff the input is the zero vector.
    *
-   * @param v
-   *          The input vector
-   * @param out
-   *          The output vector
+   * @param v   The input vector
+   * @param out The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return out
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> normalize(
+  public static <T, V extends PVectorWritable3DType<T>> V normalize(
     final PVectorReadable3DType<T> v,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double m = PVectorM3D.magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
       return PVectorM3D.scale(v, reciprocal, out);
     }
-    out.x = v.getXD();
-    out.y = v.getYD();
-    out.z = v.getZD();
+    out.set3D(v.getXD(), v.getYD(), v.getZD());
     return out;
   }
 
   /**
-   * Returns a vector with the same orientation as {@code v} but with
-   * magnitude equal to {@code 1.0} in {@code v}. The function
-   * returns the zero vector iff the input is the zero vector.
+   * Returns a vector with the same orientation as {@code v} but with magnitude
+   * equal to {@code 1.0} in {@code v}. The function returns the zero vector iff
+   * the input is the zero vector.
    *
-   * @param v
-   *          The input vector
+   * @param v   The input vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return v
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> normalizeInPlace(
-    final PVectorM3D<T> v)
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V normalizeInPlace(
+    final V v)
   {
     return PVectorM3D.normalize(v, v);
   }
 
   /**
-   * <p>
-   * Orthonormalize and return the vectors {@code v0} and {@code v1}
-   * .
-   * </p>
-   * <p>
-   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
+   * <p> Orthonormalize and return the vectors {@code v0} and {@code v1} . </p>
+   *
+   * <p> See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
    *
-   * @return A pair {@code (v0, v1)}, orthonormalized.
+   * @param c      Preallocated storage
+   * @param v0     The left vector
+   * @param v0_out The orthonormalized form of {@code v0}
+   * @param v1     The right vector
+   * @param v1_out The orthonormalized form of {@code v1}
+   * @param <T>    A phantom type parameter
+   * @param <V>    The precise type of vector
+   *
    * @since 7.0.0
-   * @param v0
-   *          The left vector
-   * @param v1
-   *          The right vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> Pair<PVectorM3D<T>, PVectorM3D<T>> orthoNormalize(
+  public static <T, V extends PVectorWritable3DType<T>> void orthoNormalize(
+    final ContextPVM3D c,
     final PVectorReadable3DType<T> v0,
-    final PVectorReadable3DType<T> v1)
+    final V v0_out,
+    final PVectorReadable3DType<T> v1,
+    final V v1_out)
   {
-    final PVectorM3D<T> v0n = new PVectorM3D<T>();
-    final PVectorM3D<T> vr = new PVectorM3D<T>();
-    final PVectorM3D<T> vp = new PVectorM3D<T>();
-
-    PVectorM3D.normalize(v0, v0n);
-    PVectorM3D.scale(v0n, PVectorM3D.dotProduct(v1, v0n), vp);
-    PVectorM3D.normalizeInPlace(PVectorM3D.subtract(v1, vp, vr));
-    return Pair.pair(v0n, vr);
+    final PVectorM3D<T> va = (PVectorM3D<T>) c.va;
+    final PVectorM3D<T> vb = (PVectorM3D<T>) c.vb;
+    final PVectorM3D<T> vc = (PVectorM3D<T>) c.vc;
+    PVectorM3D.normalize(v0, va);
+    PVectorM3D.scale(va, PVectorM3D.dotProduct(v1, va), vb);
+    PVectorM3D.normalizeInPlace(PVectorM3D.subtract(v1, vb, vc));
+    PVectorM3D.copy(va, v0_out);
+    PVectorM3D.copy(vc, v1_out);
   }
 
   /**
-   * <p>
-   * Orthonormalize and the vectors {@code v0} and {@code v1}.
-   * </p>
-   * <p>
-   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
-   * </p>
+   * <p> Orthonormalize and the vectors {@code v0} and {@code v1}. </p> <p> See
+   * <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a> </p>
+   *
+   * @param c   Preallocated storage
+   * @param v0  The left vector
+   * @param v1  The right vector
+   * @param <V> The precise type of vector
+   * @param <T> A phantom type parameter
    *
    * @since 7.0.0
-   * @param v0
-   *          The left vector
-   * @param v1
-   *          The right vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> void orthoNormalizeInPlace(
-    final PVectorM3D<T> v0,
-    final PVectorM3D<T> v1)
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> void orthoNormalizeInPlace(
+    final ContextPVM3D c,
+    final V v0,
+    final V v1)
   {
-    final PVectorM3D<T> projection = new PVectorM3D<T>();
-
-    PVectorM3D.normalizeInPlace(v0);
-    PVectorM3D.scale(v0, PVectorM3D.dotProduct(v1, v0), projection);
-    PVectorM3D.subtractInPlace(v1, projection);
-    PVectorM3D.normalizeInPlace(v1);
+    final PVectorM3D<T> va = (PVectorM3D<T>) c.va;
+    final PVectorM3D<T> vb = (PVectorM3D<T>) c.vb;
+    final PVectorM3D<T> vc = (PVectorM3D<T>) c.vc;
+    PVectorM3D.normalize(v0, va);
+    PVectorM3D.scale(va, PVectorM3D.dotProduct(v1, va), vb);
+    PVectorM3D.normalizeInPlace(PVectorM3D.subtract(v1, vb, vc));
+    PVectorM3D.copy(va, v0);
+    PVectorM3D.copy(vc, v1);
   }
 
   /**
-   * Calculate the projection of the vector {@code p} onto the vector
-   * {@code q}, saving the result in {@code r}.
+   * Calculate the projection of the vector {@code p} onto the vector {@code q},
+   * saving the result in {@code r}.
+   *
+   * @param p   The left vector
+   * @param q   The right vector
+   * @param r   The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
-   * @param p
-   *          The left vector
-   * @param q
-   *          The right vector
-   * @param r
-   *          The output vector
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> projection(
+  public static <T, V extends PVectorWritable3DType<T>> V projection(
     final PVectorReadable3DType<T> p,
     final PVectorReadable3DType<T> q,
-    final PVectorM3D<T> r)
+    final V r)
   {
     final double dot = PVectorM3D.dotProduct(p, q);
     final double qms = PVectorM3D.magnitudeSquared(q);
@@ -884,156 +836,93 @@ public final class PVectorM3D<T> implements
   }
 
   /**
-   * Scale the vector {@code v} by the scalar {@code r}, saving the
-   * result to {@code out}.
+   * Scale the vector {@code v} by the scalar {@code r}, saving the result to
+   * {@code out}.
    *
-   * @param v
-   *          The input vector
-   * @param r
-   *          The scaling value
-   * @param out
-   *          The output vector
+   * @param v   The input vector
+   * @param r   The scaling value
+   * @param out The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v.x * r, v.y * r, v.z * r)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> scale(
+  public static <T, V extends PVectorWritable3DType<T>> V scale(
     final PVectorReadable3DType<T> v,
     final double r,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x = v.getXD() * r;
     final double y = v.getYD() * r;
     final double z = v.getZD() * r;
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
   /**
-   * Scale the vector {@code v} by the scalar {@code r}, saving the
-   * result to {@code v}.
+   * Scale the vector {@code v} by the scalar {@code r}, saving the result to
+   * {@code v}.
    *
-   * @param v
-   *          The input vector
-   * @param r
-   *          The scaling value
+   * @param v   The input vector
+   * @param r   The scaling value
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v.x * r, v.y * r, v.z * r)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> scaleInPlace(
-    final PVectorM3D<T> v,
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V scaleInPlace(
+    final V v,
     final double r)
   {
     return PVectorM3D.scale(v, r, v);
   }
 
   /**
-   * Subtract the vector {@code v1} from the vector {@code v0},
-   * saving the result to {@code out}.
+   * Subtract the vector {@code v1} from the vector {@code v0}, saving the
+   * result to {@code out}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param out
-   *          The output vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param out The output vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> subtract(
+  public static <T, V extends PVectorWritable3DType<T>> V subtract(
     final PVectorReadable3DType<T> v0,
     final PVectorReadable3DType<T> v1,
-    final PVectorM3D<T> out)
+    final V out)
   {
     final double x = v0.getXD() - v1.getXD();
     final double y = v0.getYD() - v1.getYD();
     final double z = v0.getZD() - v1.getZD();
-    out.x = x;
-    out.y = y;
-    out.z = z;
+    out.set3D(x, y, z);
     return out;
   }
 
   /**
-   * Subtract the vector {@code v1} from the vector {@code v0},
-   * saving the result to {@code v0}.
+   * Subtract the vector {@code v1} from the vector {@code v0}, saving the
+   * result to {@code v0}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0  The left input vector
+   * @param v1  The right input vector
+   * @param <T> A phantom type parameter
+   * @param <V> The precise type of vector
    *
    * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)}
-   * @param <T>
-   *          A phantom type parameter.
    */
 
-  public static <T> PVectorM3D<T> subtractInPlace(
-    final PVectorM3D<T> v0,
+  public static <T, V extends PVectorWritable3DType<T> &
+    PVectorReadable3DType<T>> V subtractInPlace(
+    final V v0,
     final PVectorReadable3DType<T> v1)
   {
     return PVectorM3D.subtract(v0, v1, v0);
-  }
-
-  private double x;
-  private double y;
-  private double z;
-
-  /**
-   * Default constructor, initializing the vector with values
-   * {@code [0.0, 0.0, 0.0]}.
-   */
-
-  public PVectorM3D()
-  {
-
-  }
-
-  /**
-   * Construct a vector initialized with the given values.
-   *
-   * @param in_x
-   *          The {@code x} value
-   * @param in_y
-   *          The {@code y} value
-   * @param in_z
-   *          The {@code z} value
-   */
-
-  public PVectorM3D(
-    final double in_x,
-    final double in_y,
-    final double in_z)
-  {
-    this.x = in_x;
-    this.y = in_y;
-    this.z = in_z;
-  }
-
-  /**
-   * Construct a vector initialized with the values given in the vector
-   * {@code v}.
-   *
-   * @param in_v
-   *          The source vector
-   */
-
-  public PVectorM3D(
-    final PVectorReadable3DType<T> in_v)
-  {
-    this.x = in_v.getXD();
-    this.y = in_v.getYD();
-    this.z = in_v.getZD();
   }
 
   @Override public void copyFrom2D(
@@ -1079,10 +968,7 @@ public final class PVectorM3D<T> implements
     if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
       return false;
     }
-    if (Double.doubleToLongBits(this.z) != Double.doubleToLongBits(other.z)) {
-      return false;
-    }
-    return true;
+    return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
   }
 
   @Override public double getXD()
@@ -1090,14 +976,32 @@ public final class PVectorM3D<T> implements
     return this.x;
   }
 
+  @Override public void setXD(
+    final double in_x)
+  {
+    this.x = in_x;
+  }
+
   @Override public double getYD()
   {
     return this.y;
   }
 
+  @Override public void setYD(
+    final double in_y)
+  {
+    this.y = in_y;
+  }
+
   @Override public double getZD()
   {
     return this.z;
+  }
+
+  @Override public void setZD(
+    final double in_z)
+  {
+    this.z = in_z;
   }
 
   @Override public int hashCode()
@@ -1132,24 +1036,6 @@ public final class PVectorM3D<T> implements
     this.z = in_z;
   }
 
-  @Override public void setXD(
-    final double in_x)
-  {
-    this.x = in_x;
-  }
-
-  @Override public void setYD(
-    final double in_y)
-  {
-    this.y = in_y;
-  }
-
-  @Override public void setZD(
-    final double in_z)
-  {
-    this.z = in_z;
-  }
-
   @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
@@ -1162,5 +1048,30 @@ public final class PVectorM3D<T> implements
     builder.append("]");
     final String r = builder.toString();
     return NullCheck.notNull(r);
+  }
+
+  /**
+   * Preallocated storage to allow all vector functions to run without
+   * allocating.
+   *
+   * @since 7.0.0
+   */
+
+  public static final class ContextPVM3D
+  {
+    private final PVectorM3D<?> va;
+    private final PVectorM3D<?> vb;
+    private final PVectorM3D<?> vc;
+
+    /**
+     * Construct preallocated storage.
+     */
+
+    public ContextPVM3D()
+    {
+      this.va = new PVectorM3D<Object>();
+      this.vb = new PVectorM3D<Object>();
+      this.vc = new PVectorM3D<Object>();
+    }
   }
 }

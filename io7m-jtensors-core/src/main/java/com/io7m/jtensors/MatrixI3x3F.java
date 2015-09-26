@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -28,11 +28,18 @@ import java.util.Arrays;
  * @since 7.0.0
  */
 
-@EqualityStructural @Immutable public final class MatrixI3x3F implements
-  MatrixReadable3x3FType
+@EqualityStructural @Immutable public final class MatrixI3x3F
+  implements MatrixReadable3x3FType
 {
-  private static final float[][] IDENTITY  = MatrixI3x3F.makeIdentity();
+  private static final float[][]   IDENTITY  = MatrixI3x3F.makeIdentity();
   private static final MatrixI3x3F IDENTITYM = MatrixI3x3F.makeIdentityM();
+  private final float[][] elements;
+
+  private MatrixI3x3F(
+    final float[][] e)
+  {
+    this.elements = e;
+  }
 
   /**
    * @return The identity matrix
@@ -66,12 +73,9 @@ import java.util.Arrays;
   /**
    * Construct a new immutable 3x3 matrix from the given columns.
    *
-   * @param column_0
-   *          The first column
-   * @param column_1
-   *          The second column
-   * @param column_2
-   *          The third column
+   * @param column_0 The first column
+   * @param column_1 The second column
+   * @param column_2 The third column
    *
    * @return A new 3x3 matrix
    */
@@ -101,8 +105,7 @@ import java.util.Arrays;
   /**
    * Construct a new immutable 3x3 matrix from the given readable 3x3 matrix.
    *
-   * @param m
-   *          The original matrix
+   * @param m The original matrix
    *
    * @return A new 3x3 matrix
    */
@@ -121,14 +124,6 @@ import java.util.Arrays;
     return new MatrixI3x3F(e);
   }
 
-  private final float[][] elements;
-
-  private MatrixI3x3F(
-    final float[][] e)
-  {
-    this.elements = e;
-  }
-
   @Override public boolean equals(
     final @Nullable Object obj)
   {
@@ -142,27 +137,53 @@ import java.util.Arrays;
       return false;
     }
     final MatrixI3x3F other = (MatrixI3x3F) obj;
-    if (!Arrays.deepEquals(this.elements, other.elements)) {
-      return false;
-    }
-    return true;
+    return Arrays.deepEquals(this.elements, other.elements);
   }
 
   @Override public <V extends VectorWritable3FType> void getRow3F(
     final int row,
     final V out)
   {
+    this.getRow3FUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable3FType> void getRow3FUnsafe(
+    final int row,
+    final V out)
+  {
     out.set3F(
-      this.elements[row][0],
-      this.elements[row][1],
-      this.elements[row][2]);
+      this.elements[row][0], this.elements[row][1], this.elements[row][2]);
+  }
+
+  @Override public float getR0C2F()
+  {
+    return this.elements[0][2];
+  }
+
+  @Override public float getR1C2F()
+  {
+    return this.elements[1][2];
+  }
+
+  @Override public float getR2C0F()
+  {
+    return this.elements[2][0];
+  }
+
+  @Override public float getR2C1F()
+  {
+    return this.elements[2][1];
+  }
+
+  @Override public float getR2C2F()
+  {
+    return this.elements[2][2];
   }
 
   /**
-   * @param row
-   *          The row
-   * @param col
-   *          The column
+   * @param row The row
+   * @param col The column
+   *
    * @return The value at the given row and column
    */
 
@@ -175,40 +196,94 @@ import java.util.Arrays;
 
   @Override public int hashCode()
   {
-    return Arrays.hashCode(this.elements);
+    final int prime = 31;
+    int r = prime;
+
+    r = HashUtility.accumulateFloatHash(this.getR0C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR1C0F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR2C0F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(this.getR0C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR1C1F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR2C1F(), prime, r);
+
+    r = HashUtility.accumulateFloatHash(this.getR0C2F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR1C2F(), prime, r);
+    r = HashUtility.accumulateFloatHash(this.getR2C2F(), prime, r);
+
+    return r;
   }
 
   /**
    * Write the current matrix into the given mutable matrix.
    *
-   * @param m
-   *          The mutable matrix
+   * @param <M> The precise type of matrix
+   * @param m   The mutable matrix
    */
 
-  public void makeMatrixM3x3F(
-    final MatrixM3x3F m)
+  public <M extends MatrixWritable3x3FType> void makeMatrixM3x3F(
+    final M m)
   {
-    for (int row = 0; row < 3; ++row) {
-      for (int col = 0; col < 3; ++col) {
-        m.set(row, col, this.elements[row][col]);
-      }
-    }
+    m.setR0C0F(this.getR0C0F());
+    m.setR0C1F(this.getR0C1F());
+    m.setR0C2F(this.getR0C2F());
+
+    m.setR1C0F(this.getR1C0F());
+    m.setR1C1F(this.getR1C1F());
+    m.setR1C2F(this.getR1C2F());
+
+    m.setR2C0F(this.getR2C0F());
+    m.setR2C1F(this.getR2C1F());
+    m.setR2C2F(this.getR2C2F());
   }
 
   @Override public String toString()
   {
-    final StringBuilder builder = new StringBuilder();
+    final StringBuilder builder = new StringBuilder(512);
     for (int row = 0; row < 3; ++row) {
-      final String text =
-        String.format(
-          "[%+.6f %+.6f %+.6f]\n",
-          Float.valueOf(this.elements[row][0]),
-          Float.valueOf(this.elements[row][1]),
-          Float.valueOf(this.elements[row][2]));
+      final String text = String.format(
+        "[%+.6f %+.6f %+.6f]\n",
+        Float.valueOf(this.elements[row][0]),
+        Float.valueOf(this.elements[row][1]),
+        Float.valueOf(this.elements[row][2]));
       builder.append(text);
     }
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  @Override public <V extends VectorWritable2FType> void getRow2F(
+    final int row,
+    final V out)
+  {
+    this.getRow2FUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
+    final int row,
+    final V out)
+  {
+    out.set2F(this.elements[row][0], this.elements[row][1]);
+  }
+
+  @Override public float getR0C0F()
+  {
+    return this.elements[0][0];
+  }
+
+  @Override public float getR1C0F()
+  {
+    return this.elements[1][0];
+  }
+
+  @Override public float getR0C1F()
+  {
+    return this.elements[0][1];
+  }
+
+  @Override public float getR1C1F()
+  {
+    return this.elements[1][1];
   }
 }

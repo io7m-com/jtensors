@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,24 +16,24 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
+import com.io7m.jtensors.Matrix2x2DType;
+import com.io7m.jtensors.MatrixHeapArrayM2x2D;
 import com.io7m.jtensors.MatrixI2x2D;
-import com.io7m.jtensors.MatrixM2x2D;
 import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorM3D;
+import org.junit.Assert;
+import org.junit.Test;
 
 @SuppressWarnings("static-method") public class MatrixI2x2DTest
 {
   @Test public void testEquals()
   {
-    final MatrixM2x2D m0 = new MatrixM2x2D();
+    final Matrix2x2DType m0 = MatrixHeapArrayM2x2D.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnD(row, col, (double) index);
         ++index;
       }
     }
@@ -44,14 +44,12 @@ import com.io7m.jtensors.VectorM3D;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
         Assert.assertEquals(
-          im0.getRowColumnD(row, col),
-          m0.getRowColumnD(row, col),
-          0.0);
+          im0.getRowColumnD(row, col), m0.getRowColumnD(row, col), 0.0);
       }
     }
 
     Assert.assertEquals(im0, im0);
-    Assert.assertEquals(im0.hashCode(), im0.hashCode());
+    Assert.assertEquals((long) im0.hashCode(), (long) im0.hashCode());
     Assert.assertEquals(im0, im1);
     Assert.assertFalse(im0.equals(null));
     Assert.assertFalse(im0.equals(Integer.valueOf(23)));
@@ -59,7 +57,7 @@ import com.io7m.jtensors.VectorM3D;
     index = 100;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnD(row, col, (double) index);
         ++index;
       }
     }
@@ -70,18 +68,18 @@ import com.io7m.jtensors.VectorM3D;
 
   @Test public void testFromColumns()
   {
-    final MatrixM2x2D m0 = new MatrixM2x2D();
+    final Matrix2x2DType m0 = MatrixHeapArrayM2x2D.newMatrix();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
+    m0.setR0C0D(0.0);
+    m0.setR1C0D(0.1);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
+    m0.setR0C1D(10.0);
+    m0.setR1C1D(10.1);
 
     final MatrixI2x2D im0 = MatrixI2x2D.newFromReadable(m0);
 
-    final VectorI3D column_0 = new VectorI3D(0.0f, 0.1f, 0.2f);
-    final VectorI3D column_1 = new VectorI3D(10.0f, 10.1f, 10.2f);
+    final VectorI3D column_0 = new VectorI3D(0.0, 0.1, 0.2);
+    final VectorI3D column_1 = new VectorI3D(10.0, 10.1, 10.2);
 
     final MatrixI2x2D im1 = MatrixI2x2D.newFromColumns(column_0, column_1);
 
@@ -90,30 +88,30 @@ import com.io7m.jtensors.VectorM3D;
 
   @Test public void testFromRows()
   {
-    final MatrixM2x2D m0 = new MatrixM2x2D();
+    final Matrix2x2DType m0 = MatrixHeapArrayM2x2D.newMatrix();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
+    m0.setR0C0D(0.0);
+    m0.setR1C0D(0.1);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
+    m0.setR0C1D(10.0);
+    m0.setR1C1D(10.1);
 
     final MatrixI2x2D im = MatrixI2x2D.newFromReadable(m0);
 
     final VectorM3D row = new VectorM3D();
 
     im.getRow2D(0, row);
-    Assert.assertEquals(0.0f, row.getXD(), 0.0);
-    Assert.assertEquals(10.0f, row.getYD(), 0.0);
+    Assert.assertEquals(0.0, row.getXD(), 0.0);
+    Assert.assertEquals(10.0, row.getYD(), 0.0);
 
     im.getRow2D(1, row);
-    Assert.assertEquals(0.1f, row.getXD(), 0.0);
-    Assert.assertEquals(10.1f, row.getYD(), 0.0);
+    Assert.assertEquals(0.1, row.getXD(), 0.0);
+    Assert.assertEquals(10.1, row.getYD(), 0.0);
   }
 
   @Test public void testIdentity()
   {
-    final MatrixM2x2D m0 = new MatrixM2x2D();
+    final Matrix2x2DType m0 = MatrixHeapArrayM2x2D.newMatrix();
     final MatrixI2x2D im0 = MatrixI2x2D.identity();
     final MatrixI2x2D im1 = MatrixI2x2D.newFromReadable(m0);
     Assert.assertEquals(im1, im0);
@@ -121,32 +119,32 @@ import com.io7m.jtensors.VectorM3D;
 
   @Test public void testMakeMatrix2x2D()
   {
-    final MatrixM2x2D m0 = new MatrixM2x2D();
-    final MatrixM2x2D m1 = new MatrixM2x2D();
+    final Matrix2x2DType m0 = MatrixHeapArrayM2x2D.newMatrix();
+    final Matrix2x2DType m1 = MatrixHeapArrayM2x2D.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnD(row, col, (double) index);
         ++index;
       }
     }
 
     final MatrixI2x2D im = MatrixI2x2D.newFromReadable(m0);
-    im.makeMatrixM2x2D(m1);
+    im.makeMatrix2x2D(m1);
     Assert.assertEquals(m0, m1);
   }
 
   @Test public void testToString()
   {
-    final MatrixM2x2D m0 = new MatrixM2x2D();
-    final MatrixM2x2D m1 = new MatrixM2x2D();
+    final Matrix2x2DType m0 = MatrixHeapArrayM2x2D.newMatrix();
+    final Matrix2x2DType m1 = MatrixHeapArrayM2x2D.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
-        m1.set(row, col, index);
+        m0.setRowColumnD(row, col, (double) index);
+        m1.setRowColumnD(row, col, (double) index);
         ++index;
       }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -578,10 +578,7 @@ import net.jcip.annotations.Immutable;
     if (this.z != other.z) {
       return false;
     }
-    if (this.w != other.w) {
-      return false;
-    }
-    return true;
+    return this.w == other.w;
   }
 
   @Override public int getWI()

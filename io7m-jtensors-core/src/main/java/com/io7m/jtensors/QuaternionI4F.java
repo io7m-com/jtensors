@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -22,68 +22,14 @@ import com.io7m.jnull.Nullable;
 import net.jcip.annotations.Immutable;
 
 /**
- * A four-dimensional immutable quaternion type with single precision
- * elements.
+ * A four-dimensional immutable quaternion type with single precision elements.
  *
- * <p>
- * Values of this type are immutable and can therefore be safely accessed from
- * multiple threads.
- * </p>
+ * <p> Values of this type are immutable and can therefore be safely accessed
+ * from multiple threads. </p>
  */
 
 @Immutable public final class QuaternionI4F implements QuaternionReadable4FType
 {
-  /**
-   * The Context type contains the minimum storage required for all of the
-   * functions of the {@code QuaternionM4F} class.
-   *
-   * <p>
-   * The purpose of the class is to allow applications to allocate all storage
-   * ahead of time in order to allow functions in the class to avoid
-   * allocating memory (not including stack space) for intermediate
-   * calculations. This can reduce garbage collection in speed critical code.
-   * </p>
-   *
-   * <p>
-   * The user should allocate one {@code Context} value per thread, and
-   * then pass this value to matrix functions. Any matrix function that takes
-   * a {@code Context} value will not generate garbage.
-   * </p>
-   *
-   * @since 5.0.0
-   */
-
-  public static class Context
-  {
-    private final MatrixM3x3F.Context m_context = new MatrixM3x3F.Context();
-    private final MatrixM3x3F         m3a       = new MatrixM3x3F();
-    private final VectorM3F           v3a       = new VectorM3F();
-
-    /**
-     * Construct a new context.
-     */
-
-    public Context()
-    {
-
-    }
-
-    final MatrixM3x3F.Context getContext()
-    {
-      return this.m_context;
-    }
-
-    final MatrixM3x3F getM3A()
-    {
-      return this.m3a;
-    }
-
-    final VectorM3F getV3A()
-    {
-      return this.v3a;
-    }
-  }
-
   /**
    * The "identity" quaternion, [0.0 0.0 0.0 1.0]
    */
@@ -94,14 +40,60 @@ import net.jcip.annotations.Immutable;
     IDENTITY = new QuaternionI4F(0.0f, 0.0f, 0.0f, 1.0f);
   }
 
+  private final float w;
+  private final float x;
+  private final float y;
+  private final float z;
+
   /**
-   * Calculate the element-wise sum of the quaternions {@code q0} and
-   * {@code q1}.
+   * Default constructor, initializing the quaternion with values {@code [0.0,
+   * 0.0, 0.0, 1.0]}
+   */
+
+  public QuaternionI4F()
+  {
+    this(0.0f, 0.0f, 0.0f, 1.0f);
+  }
+
+  /**
+   * Construct a quaternion initialized with the given values.
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
+   * @param in_x The {@code x} value
+   * @param in_y The {@code y} value
+   * @param in_z The {@code z} value
+   * @param in_w The {@code w} value
+   */
+
+  public QuaternionI4F(
+    final float in_x,
+    final float in_y,
+    final float in_z,
+    final float in_w)
+  {
+    this.x = in_x;
+    this.y = in_y;
+    this.z = in_z;
+    this.w = in_w;
+  }
+
+  /**
+   * Construct a quaternion initialized with the values contained in {@code q}.
+   *
+   * @param q The source quaternion
+   */
+
+  public QuaternionI4F(
+    final QuaternionReadable4FType q)
+  {
+    this(q.getXF(), q.getYF(), q.getZF(), q.getWF());
+  }
+
+  /**
+   * Calculate the element-wise sum of the quaternions {@code q0} and {@code
+   * q1}.
+   *
+   * @param q0 The left input quaternion
+   * @param q1 The right input quaternion
    *
    * @return {@code (q0.x + q1.x, q0.y + q1.y, q0.z + q1.z, q0.w + q1.w)}
    */
@@ -118,20 +110,17 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Determine whether or not the quaternions {@code qa} and
-   * {@code qb} are equal to within the degree of error given in
-   * {@code context}.
+   * Determine whether or not the quaternions {@code qa} and {@code qb} are
+   * equal to within the degree of error given in {@code context}.
+   *
+   * @param context The equality context
+   * @param qa      The left input quaternion
+   * @param qb      The right input quaternion
+   *
+   * @return {@code true} if the quaternions are almost equal
    *
    * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
-   *
-   * @param context
-   *          The equality context
-   * @param qa
-   *          The left input quaternion
-   * @param qb
-   *          The right input quaternion
    * @since 5.0.0
-   * @return {@code true} if the quaternions are almost equal
    */
 
   public static boolean almostEqual(
@@ -153,8 +142,7 @@ import net.jcip.annotations.Immutable;
   /**
    * Calculate the conjugate of the input quaternion {@code q}.
    *
-   * @param q
-   *          The input quaternion
+   * @param q The input quaternion
    *
    * @return The conjugate of the input quaternion
    */
@@ -170,13 +158,10 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Calculate the scalar product of the quaternions {@code q0} and
-   * {@code q1}.
+   * Calculate the scalar product of the quaternions {@code q0} and {@code q1}.
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
+   * @param q0 The left input quaternion
+   * @param q1 The right input quaternion
    *
    * @return The scalar product of the two quaternions
    */
@@ -193,21 +178,15 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Linearly interpolate between {@code q0} and {@code q1} by the
-   * amount {@code alpha}, such that:
+   * Linearly interpolate between {@code q0} and {@code q1} by the amount {@code
+   * alpha}, such that:
    *
-   * <ul>
-   * <li>{@code interpolateLinear(q0, q1, 0.0) = q0}</li>
-   * <li>{@code interpolateLinear(q0, q1, 1.0) = q1}</li>
-   * </ul>
+   * <ul> <li>{@code interpolateLinear(q0, q1, 0.0) = q0}</li> <li>{@code
+   * interpolateLinear(q0, q1, 1.0) = q1}</li> </ul>
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
-   * @param alpha
-   *          The interpolation value, between {@code 0.0} and
-   *          {@code 1.0}
+   * @param q0    The left input quaternion
+   * @param q1    The right input quaternion
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}
    *
    * @return {@code (1 - alpha) * q0 + alpha * q1}
    */
@@ -223,23 +202,18 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Return {@code true} iff {@code qa} is the negation of
-   * {@code qb}.
+   * Return {@code true} iff {@code qa} is the negation of {@code qb}.
    *
-   * <p>
-   * Each element is compared with
-   * {@link AlmostEqualFloat#almostEqual(ContextRelative, float, float)}.
-   * </p>
+   * <p> Each element is compared with {@link AlmostEqualFloat#almostEqual
+   * (ContextRelative, float, float)}. </p>
    *
-   * @param context
-   *          The equality context
-   * @param qa
-   *          The left quaternion
-   * @param qb
-   *          The right quaternion
+   * @param context The equality context
+   * @param qa      The left quaternion
+   * @param qb      The right quaternion
+   *
+   * @return {@code true} iff {@code qa} is the negation of {@code qb}
+   *
    * @since 5.0.0
-   * @return {@code true} iff {@code qa} is the negation of
-   *         {@code qb}
    */
 
   public static boolean isNegationOf(
@@ -267,38 +241,33 @@ import net.jcip.annotations.Immutable;
 
   /**
    * Produce a quaternion that represents a rotation that "looks at" the point
-   * at {@code target} assuming the viewer is at {@code origin},
-   * using {@code up} as the "up" vector.
+   * at {@code target} assuming the viewer is at {@code origin}, using {@code
+   * up} as the "up" vector.
    *
-   * <p>
-   * The function uses storage preallocated in {@code context} to avoid
-   * any new allocations.
-   * </p>
+   * <p> The function uses storage preallocated in {@code context} to avoid any
+   * new allocations. </p>
    *
-   * @param context
-   *          Preallocated storage
-   * @param origin
-   *          The origin point
-   * @param target
-   *          The target point
-   * @param up
-   *          The up vector
+   * @param context Preallocated storage
+   * @param origin  The origin point
+   * @param target  The target point
+   * @param up      The up vector
+   *
+   * @return A quaternion looking at the target
    *
    * @since 5.0.0
-   * @return A quaternion looking at the target
    */
 
   public static QuaternionI4F lookAtWithContext(
-    final Context context,
+    final ContextQI4F context,
     final VectorReadable3FType origin,
     final VectorReadable3FType target,
     final VectorReadable3FType up)
   {
-    final MatrixM3x3F m = context.getM3A();
-    final VectorM3F t = context.getV3A();
-    final MatrixM3x3F.Context mc = context.getContext();
+    final Matrix3x3FType m = context.m3a;
+    final VectorM3F t = context.v3a;
+    final MatrixM3x3F.ContextMM3F mc = context.m_context;
 
-    MatrixM3x3F.lookAtWithContext(mc, origin, target, up, m, t);
+    MatrixM3x3F.lookAt(mc, origin, target, up, m, t);
     return QuaternionI4F.makeFromRotationMatrix3x3(m);
   }
 
@@ -307,8 +276,7 @@ import net.jcip.annotations.Immutable;
    *
    * Correspondingly, {@code magnitude(normalize(q)) == 1.0}.
    *
-   * @param q
-   *          The input quaternion
+   * @param q The input quaternion
    *
    * @return The magnitude of the input quaternion
    */
@@ -322,8 +290,7 @@ import net.jcip.annotations.Immutable;
   /**
    * Calculate the squared magnitude of the quaternion {@code q}.
    *
-   * @param q
-   *          The input quaternion
+   * @param q The input quaternion
    *
    * @return The squared magnitude of the input quaternion
    */
@@ -335,21 +302,19 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Produce a quaternion that represents a rotation of {@code angle}
-   * degrees around the axis specified by {@code axis}. {@code axis}
-   * is assumed to be of unit length.
+   * Produce a quaternion that represents a rotation of {@code angle} degrees
+   * around the axis specified by {@code axis}. {@code axis} is assumed to be of
+   * unit length.
+   *
+   * @param axis  The normalized vector representing the axis
+   * @param angle The angle to rotate, in radians
+   *
+   * @return A quaternion representing the rotation
    *
    * @see VectorI3F#normalize(VectorReadable3FType)
    * @see VectorI4F#normalize(VectorReadable4FType)
-   * @see VectorM3F#normalize(VectorReadable3FType, VectorM3F)
-   * @see VectorM4F#normalize(VectorReadable4FType, VectorM4F)
-   *
-   * @param axis
-   *          The normalized vector representing the axis
-   * @param angle
-   *          The angle to rotate, in radians
-   *
-   * @return A quaternion representing the rotation
+   * @see VectorM3F#normalize(VectorReadable3FType, VectorWritable3FType)
+   * @see VectorM4F#normalize(VectorReadable4FType, VectorWritable4FType)
    */
 
   public static QuaternionI4F makeFromAxisAngle(
@@ -368,24 +333,25 @@ import net.jcip.annotations.Immutable;
   /**
    * Produce a quaternion equivalent to the rotation matrix {@code m}.
    *
-   * @since 5.0.0
-   * @param m
-   *          The rotation matrix
+   * @param m The rotation matrix
+   *
    * @return A quaternion representing the rotation matrix
+   *
+   * @since 5.0.0
    */
 
   public static QuaternionI4F makeFromRotationMatrix3x3(
     final MatrixReadable3x3FType m)
   {
-    final double m00 = (double) m.getRowColumnF(0, 0);
-    final double m01 = (double) m.getRowColumnF(0, 1);
-    final double m02 = (double) m.getRowColumnF(0, 2);
-    final double m10 = (double) m.getRowColumnF(1, 0);
-    final double m11 = (double) m.getRowColumnF(1, 1);
-    final double m12 = (double) m.getRowColumnF(1, 2);
-    final double m20 = (double) m.getRowColumnF(2, 0);
-    final double m21 = (double) m.getRowColumnF(2, 1);
-    final double m22 = (double) m.getRowColumnF(2, 2);
+    final double m00 = (double) m.getR0C0F();
+    final double m01 = (double) m.getR0C1F();
+    final double m02 = (double) m.getR0C2F();
+    final double m10 = (double) m.getR1C0F();
+    final double m11 = (double) m.getR1C1F();
+    final double m12 = (double) m.getR1C2F();
+    final double m20 = (double) m.getR2C0F();
+    final double m21 = (double) m.getR2C1F();
+    final double m22 = (double) m.getR2C2F();
 
     final double trace = MatrixM3x3F.trace(m);
 
@@ -428,27 +394,28 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Produce a quaternion equivalent to the rotation matrix {@code m},
-   * writing the result to {@code out}.
+   * Produce a quaternion equivalent to the rotation matrix {@code m}, writing
+   * the result to {@code out}.
+   *
+   * @param m The rotation matrix
+   *
+   * @return A quaternion representing the rotation matrix
    *
    * @since 5.0.0
-   * @param m
-   *          The rotation matrix
-   * @return A quaternion representing the rotation matrix
    */
 
   public static QuaternionI4F makeFromRotationMatrix4x4(
     final MatrixReadable4x4FType m)
   {
-    final double m00 = (double) m.getRowColumnF(0, 0);
-    final double m01 = (double) m.getRowColumnF(0, 1);
-    final double m02 = (double) m.getRowColumnF(0, 2);
-    final double m10 = (double) m.getRowColumnF(1, 0);
-    final double m11 = (double) m.getRowColumnF(1, 1);
-    final double m12 = (double) m.getRowColumnF(1, 2);
-    final double m20 = (double) m.getRowColumnF(2, 0);
-    final double m21 = (double) m.getRowColumnF(2, 1);
-    final double m22 = (double) m.getRowColumnF(2, 2);
+    final double m00 = (double) m.getR0C0F();
+    final double m01 = (double) m.getR0C1F();
+    final double m02 = (double) m.getR0C2F();
+    final double m10 = (double) m.getR1C0F();
+    final double m11 = (double) m.getR1C1F();
+    final double m12 = (double) m.getR1C2F();
+    final double m20 = (double) m.getR2C0F();
+    final double m21 = (double) m.getR2C1F();
+    final double m22 = (double) m.getR2C2F();
 
     /**
      * Explicitly ignore the bottom right element of the matrix, as this
@@ -496,18 +463,16 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Produce a rotation matrix from the quaternion {@code q}, saving the
-   * result to {@code m}.
+   * Produce a rotation matrix from the quaternion {@code q}, saving the result
+   * to {@code m}.
    *
-   * @since 5.0.0
-   * @param q
-   *          The input quaternion
-   * @param m
-   *          The output matrix
+   * @param q   The input quaternion
+   * @param m   The output matrix
+   * @param <M> The precise type of writable matrix.
    *
    * @return {@code m}
-   * @param <M>
-   *          The precise type of writable matrix.
+   *
+   * @since 5.0.0
    */
 
   public static <M extends MatrixWritable3x3FType> M makeRotationMatrix3x3(
@@ -536,37 +501,37 @@ import net.jcip.annotations.Immutable;
     final double r2c1 = (2.0 * yz) + (2.0 * wx);
     final double r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
 
-    m.setRowColumnF(0, 0, (float) r0c0);
-    m.setRowColumnF(0, 1, (float) r0c1);
-    m.setRowColumnF(0, 2, (float) r0c2);
+    m.setR0C0F((float) r0c0);
+    m.setR0C1F((float) r0c1);
+    m.setR0C2F((float) r0c2);
 
-    m.setRowColumnF(1, 0, (float) r1c0);
-    m.setRowColumnF(1, 1, (float) r1c1);
-    m.setRowColumnF(1, 2, (float) r1c2);
+    m.setR1C0F((float) r1c0);
+    m.setR1C1F((float) r1c1);
+    m.setR1C2F((float) r1c2);
 
-    m.setRowColumnF(2, 0, (float) r2c0);
-    m.setRowColumnF(2, 1, (float) r2c1);
-    m.setRowColumnF(2, 2, (float) r2c2);
+    m.setR2C0F((float) r2c0);
+    m.setR2C1F((float) r2c1);
+    m.setR2C2F((float) r2c2);
 
     return m;
   }
 
   /**
-   * Produce a rotation matrix from the quaternion {@code q}, saving the
-   * result to {@code m}.
+   * Produce a rotation matrix from the quaternion {@code q}, saving the result
+   * to {@code m}.
    *
-   * @since 5.0.0
-   * @param q
-   *          The input quaternion
-   * @param m
-   *          The output matrix
+   * @param q   The input quaternion
+   * @param m   The output matrix
+   * @param <M> The precise type of matrix
    *
    * @return {@code m}
+   *
+   * @since 5.0.0
    */
 
-  public static MatrixM4x4F makeRotationMatrix4x4(
+  public static <M extends MatrixWritable4x4FType> M makeRotationMatrix4x4(
     final QuaternionReadable4FType q,
-    final MatrixM4x4F m)
+    final M m)
   {
     final double xx = (double) (q.getXF() * q.getXF());
     final double xy = (double) (q.getXF() * q.getYF());
@@ -598,63 +563,51 @@ import net.jcip.annotations.Immutable;
     final double r3c2 = 0.0;
     final double r3c3 = 1.0;
 
-    m.setUnsafe(0, 0, (float) r0c0);
-    m.setUnsafe(0, 1, (float) r0c1);
-    m.setUnsafe(0, 2, (float) r0c2);
-    m.setUnsafe(0, 3, (float) r0c3);
+    m.setR0C0F((float) r0c0);
+    m.setR0C1F((float) r0c1);
+    m.setR0C2F((float) r0c2);
+    m.setR0C3F((float) r0c3);
 
-    m.setUnsafe(1, 0, (float) r1c0);
-    m.setUnsafe(1, 1, (float) r1c1);
-    m.setUnsafe(1, 2, (float) r1c2);
-    m.setUnsafe(1, 3, (float) r1c3);
+    m.setR1C0F((float) r1c0);
+    m.setR1C1F((float) r1c1);
+    m.setR1C2F((float) r1c2);
+    m.setR1C3F((float) r1c3);
 
-    m.setUnsafe(2, 0, (float) r2c0);
-    m.setUnsafe(2, 1, (float) r2c1);
-    m.setUnsafe(2, 2, (float) r2c2);
-    m.setUnsafe(2, 3, (float) r2c3);
+    m.setR2C0F((float) r2c0);
+    m.setR2C1F((float) r2c1);
+    m.setR2C2F((float) r2c2);
+    m.setR2C3F((float) r2c3);
 
-    m.setUnsafe(3, 0, (float) r3c0);
-    m.setUnsafe(3, 1, (float) r3c1);
-    m.setUnsafe(3, 2, (float) r3c2);
-    m.setUnsafe(3, 3, (float) r3c3);
+    m.setR3C0F((float) r3c0);
+    m.setR3C1F((float) r3c1);
+    m.setR3C2F((float) r3c2);
+    m.setR3C3F((float) r3c3);
 
     return m;
   }
 
   /**
-   * Multiply the quaternion {@code q0} by the quaternion {@code q1}
-   * .
+   * Multiply the quaternion {@code q0} by the quaternion {@code q1} .
    *
-   * <p>
-   * Note that this operation is not commutative.
-   * </p>
+   * <p> Note that this operation is not commutative. </p>
    *
-   * <p>
-   * The function is most often used to concatenate quaternions to combine
-   * rotations. As an example, assuming that:
-   * </p>
+   * <p> The function is most often used to concatenate quaternions to combine
+   * rotations. As an example, assuming that: </p>
    *
-   * <ul>
-   * <li>{@code qx} represents some rotation around the X axis</li>
-   * <li>{@code qy} represents some rotation around the Y axis</li>
-   * <li>{@code qz} represents some rotation around the Z axis</li>
-   * </ul>
+   * <ul> <li>{@code qx} represents some rotation around the X axis</li>
+   * <li>{@code qy} represents some rotation around the Y axis</li> <li>{@code
+   * qz} represents some rotation around the Z axis</li> </ul>
    *
-   * <p>
-   * The following code produces a quaternion {@code qr1} that represents
-   * a rotation around the X axis, followed by a rotation around the Y axis,
-   * followed by a rotation around the Z axis:
-   * </p>
+   * <p> The following code produces a quaternion {@code qr1} that represents a
+   * rotation around the X axis, followed by a rotation around the Y axis,
+   * followed by a rotation around the Z axis: </p>
    *
-   * {@code
-   * qr0 = QuaternionI4F.multiply(qy, qx);
-   * qr1 = QuaternionI4F.multiply(qz, qy);
-   * }
+   * {@code qr0 = QuaternionI4F.multiply(qy, qx); qr1 = QuaternionI4F
+   * .multiply(qz, qy); }
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
+   * @param q0 The left input quaternion
+   * @param q1 The right input quaternion
+   *
    * @return The multiplication of the input quaternions
    */
 
@@ -662,21 +615,23 @@ import net.jcip.annotations.Immutable;
     final QuaternionReadable4FType q0,
     final QuaternionReadable4FType q1)
   {
+    final float q0_w = q0.getWF();
+    final float q1_x = q1.getXF();
+    final float q0_x = q0.getXF();
+    final float q1_w = q1.getWF();
+    final float q1_z = q1.getZF();
+    final float q0_z = q0.getZF();
+    final float q1_y = q1.getYF();
+    final float q0_y = q0.getYF();
+
     final float rx =
-      ((q0.getWF() * q1.getXF()) + (q0.getXF() * q1.getWF()) + (q0.getYF() * q1
-        .getZF())) - (q0.getZF() * q1.getYF());
+      ((q0_w * q1_x) + (q0_x * q1_w) + (q0_y * q1_z)) - (q0_z * q1_y);
     final float ry =
-      ((q0.getWF() * q1.getYF()) - (q0.getXF() * q1.getZF()))
-        + (q0.getYF() * q1.getWF())
-        + (q0.getZF() * q1.getXF());
+      ((q0_w * q1_y) - (q0_x * q1_z)) + (q0_y * q1_w) + (q0_z * q1_x);
     final float rz =
-      (((q0.getWF() * q1.getZF()) + (q0.getXF() * q1.getYF())) - (q0.getYF() * q1
-        .getXF())) + (q0.getZF() * q1.getWF());
+      (((q0_w * q1_z) + (q0_x * q1_y)) - (q0_y * q1_x)) + (q0_z * q1_w);
     final float rw =
-      (q0.getWF() * q1.getWF())
-        - (q0.getXF() * q1.getXF())
-        - (q0.getYF() * q1.getYF())
-        - (q0.getZF() * q1.getZF());
+      (q0_w * q1_w) - (q0_x * q1_x) - (q0_y * q1_y) - (q0_z * q1_z);
 
     return new QuaternionI4F(rx, ry, rz, rw);
   }
@@ -684,11 +639,11 @@ import net.jcip.annotations.Immutable;
   /**
    * Negate the elements of {@code q}.
    *
-   * @since 5.0.0
+   * @param q The source quaternion
    *
-   * @param q
-   *          The source quaternion
    * @return The negation of {@code q}
+   *
+   * @since 5.0.0
    */
 
   public static QuaternionI4F negate(
@@ -698,14 +653,13 @@ import net.jcip.annotations.Immutable;
   }
 
   /**
-   * Normalize the quaternion {@code q}, preserqing its direction but
-   * reducing it to unit length.
+   * Normalize the quaternion {@code q}, preserqing its direction but reducing
+   * it to unit length.
    *
-   * @param q
-   *          The input quaternion
+   * @param q The input quaternion
    *
    * @return A quaternion with the same orientation as {@code q} but with
-   *         magnitude equal to {@code 1.0}
+   * magnitude equal to {@code 1.0}
    */
 
   public static QuaternionI4F normalize(
@@ -722,10 +676,8 @@ import net.jcip.annotations.Immutable;
   /**
    * Scale the quaternion {@code q} by the scalar {@code r}.
    *
-   * @param q
-   *          The input quaternion
-   * @param r
-   *          The scaling value
+   * @param q The input quaternion
+   * @param r The scaling value
    *
    * @return {@code (q.x * r, q.y * r, q.z * r, q.w * r)}
    */
@@ -735,20 +687,14 @@ import net.jcip.annotations.Immutable;
     final float r)
   {
     return new QuaternionI4F(
-      q.getXF() * r,
-      q.getYF() * r,
-      q.getZF() * r,
-      q.getWF() * r);
+      q.getXF() * r, q.getYF() * r, q.getZF() * r, q.getWF() * r);
   }
 
   /**
-   * Subtract the quaternion {@code q0} from the quaternion
-   * {@code q1}.
+   * Subtract the quaternion {@code q0} from the quaternion {@code q1}.
    *
-   * @param q0
-   *          The left input quaternion
-   * @param q1
-   *          The right input quaternion
+   * @param q0 The left input quaternion
+   * @param q1 The right input quaternion
    *
    * @return {@code (q0.x - q1.x, q0.y - q1.y, q0.z - q1.z)}
    */
@@ -762,60 +708,6 @@ import net.jcip.annotations.Immutable;
     final float z = q0.getZF() - q1.getZF();
     final float w = q0.getWF() - q1.getWF();
     return new QuaternionI4F(x, y, z, w);
-  }
-
-  private final float w;
-  private final float x;
-  private final float y;
-  private final float z;
-
-  /**
-   * Default constructor, initializing the quaternion with values
-   * {@code [0.0, 0.0, 0.0, 1.0]}
-   */
-
-  public QuaternionI4F()
-  {
-    this(0.0f, 0.0f, 0.0f, 1.0f);
-  }
-
-  /**
-   * Construct a quaternion initialized with the given values.
-   *
-   * @param in_x
-   *          The {@code x} value
-   * @param in_y
-   *          The {@code y} value
-   * @param in_z
-   *          The {@code z} value
-   * @param in_w
-   *          The {@code w} value
-   */
-
-  public QuaternionI4F(
-    final float in_x,
-    final float in_y,
-    final float in_z,
-    final float in_w)
-  {
-    this.x = in_x;
-    this.y = in_y;
-    this.z = in_z;
-    this.w = in_w;
-  }
-
-  /**
-   * Construct a quaternion initialized with the values contained in
-   * {@code q}.
-   *
-   * @param q
-   *          The source quaternion
-   */
-
-  public QuaternionI4F(
-    final QuaternionReadable4FType q)
-  {
-    this(q.getXF(), q.getYF(), q.getZF(), q.getWF());
   }
 
   @Override public boolean equals(
@@ -840,10 +732,7 @@ import net.jcip.annotations.Immutable;
     if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
       return false;
     }
-    if (Float.floatToIntBits(this.z) != Float.floatToIntBits(other.z)) {
-      return false;
-    }
-    return true;
+    return Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
   }
 
   @Override public float getWF()
@@ -892,6 +781,41 @@ import net.jcip.annotations.Immutable;
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  /**
+   * The ContextQM4F type contains the minimum storage required for all of the
+   * functions of the {@code QuaternionM4F} class.
+   *
+   * <p> The purpose of the class is to allow applications to allocate all
+   * storage ahead of time in order to allow functions in the class to avoid
+   * allocating memory (not including stack space) for intermediate
+   * calculations. This can reduce garbage collection in speed critical code.
+   * </p>
+   *
+   * <p> The user should allocate one {@code ContextQM4F} value per thread, and
+   * then pass this value to matrix functions. Any matrix function that takes a
+   * {@code ContextQM4F} value will not generate garbage. </p>
+   *
+   * @since 5.0.0
+   */
+
+  public static class ContextQI4F
+  {
+    private final MatrixM3x3F.ContextMM3F m_context =
+      new MatrixM3x3F.ContextMM3F();
+    private final Matrix3x3FType          m3a       =
+      MatrixHeapArrayM3x3F.newMatrix();
+    private final VectorM3F               v3a       = new VectorM3F();
+
+    /**
+     * Construct a new context.
+     */
+
+    public ContextQI4F()
+    {
+
+    }
   }
 
 }

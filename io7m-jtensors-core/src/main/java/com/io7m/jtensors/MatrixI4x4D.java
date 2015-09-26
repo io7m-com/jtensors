@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -28,11 +28,18 @@ import java.util.Arrays;
  * @since 7.0.0
  */
 
-@EqualityStructural @Immutable public final class MatrixI4x4D implements
-  MatrixReadable4x4DType
+@EqualityStructural @Immutable public final class MatrixI4x4D
+  implements MatrixReadable4x4DType
 {
-  private static final double[][] IDENTITY  = MatrixI4x4D.makeIdentity();
+  private static final double[][]  IDENTITY  = MatrixI4x4D.makeIdentity();
   private static final MatrixI4x4D IDENTITYM = MatrixI4x4D.makeIdentityM();
+  private final double[][] elements;
+
+  private MatrixI4x4D(
+    final double[][] e)
+  {
+    this.elements = e;
+  }
 
   /**
    * @return The identity matrix
@@ -49,9 +56,9 @@ import java.util.Arrays;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         if (row == col) {
-          m[row][col] = (double) 1.0;
+          m[row][col] = 1.0;
         } else {
-          m[row][col] = (double) 0.0;
+          m[row][col] = 0.0;
         }
       }
     }
@@ -66,14 +73,10 @@ import java.util.Arrays;
   /**
    * Construct a new immutable 4x4 matrix from the given columns.
    *
-   * @param column_0
-   *          The first column
-   * @param column_1
-   *          The second column
-   * @param column_2
-   *          The third column
-   * @param column_3
-   *          The fourth column
+   * @param column_0 The first column
+   * @param column_1 The second column
+   * @param column_2 The third column
+   * @param column_3 The fourth column
    *
    * @return A new 4x4 matrix
    */
@@ -112,8 +115,7 @@ import java.util.Arrays;
   /**
    * Construct a new immutable 4x4 matrix from the given readable 4x4 matrix.
    *
-   * @param m
-   *          The original matrix
+   * @param m The original matrix
    *
    * @return A new 4x4 matrix
    */
@@ -132,14 +134,6 @@ import java.util.Arrays;
     return new MatrixI4x4D(e);
   }
 
-  private final double[][] elements;
-
-  private MatrixI4x4D(
-    final double[][] e)
-  {
-    this.elements = e;
-  }
-
   @Override public boolean equals(
     final @Nullable Object obj)
   {
@@ -153,10 +147,7 @@ import java.util.Arrays;
       return false;
     }
     final MatrixI4x4D other = (MatrixI4x4D) obj;
-    if (!Arrays.deepEquals(this.elements, other.elements)) {
-      return false;
-    }
-    return true;
+    return Arrays.deepEquals(this.elements, other.elements);
   }
 
   @Override public <V extends VectorWritable4DType> void getRow4D(
@@ -170,11 +161,56 @@ import java.util.Arrays;
       this.elements[row][3]);
   }
 
+  @Override public <V extends VectorWritable4DType> void getRow4DUnsafe(
+    final int row,
+    final V out)
+  {
+    out.set4D(
+      this.elements[row][0],
+      this.elements[row][1],
+      this.elements[row][2],
+      this.elements[row][3]);
+  }
+
+  @Override public double getR0C3D()
+  {
+    return this.elements[0][3];
+  }
+
+  @Override public double getR1C3D()
+  {
+    return this.elements[1][3];
+  }
+
+  @Override public double getR2C3D()
+  {
+    return this.elements[2][3];
+  }
+
+  @Override public double getR3C0D()
+  {
+    return this.elements[3][0];
+  }
+
+  @Override public double getR3C1D()
+  {
+    return this.elements[3][1];
+  }
+
+  @Override public double getR3C2D()
+  {
+    return this.elements[3][2];
+  }
+
+  @Override public double getR3C3D()
+  {
+    return this.elements[3][3];
+  }
+
   /**
-   * @param row
-   *          The row
-   * @param col
-   *          The column
+   * @param row The row
+   * @param col The column
+   *
    * @return The value at the given row and column
    */
 
@@ -187,41 +223,151 @@ import java.util.Arrays;
 
   @Override public int hashCode()
   {
-    return Arrays.hashCode(this.elements);
+    final int prime = 31;
+    int r = prime;
+
+    r = HashUtility.accumulateDoubleHash(this.getR0C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR2C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR3C0D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(this.getR0C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR2C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR3C1D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(this.getR0C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR2C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR3C2D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(this.getR0C3D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR1C3D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR2C3D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(this.getR3C3D(), prime, r);
+
+    return r;
   }
 
   /**
    * Write the current matrix into the given mutable matrix.
    *
-   * @param m
-   *          The mutable matrix
+   * @param <M> The precise type of matrix
+   * @param m   The mutable matrix
    */
 
-  public void makeMatrixM4x4D(
-    final MatrixM4x4D m)
+  public <M extends MatrixWritable4x4DType> void makeMatrixM4x4D(
+    final M m)
   {
-    for (int row = 0; row < 4; ++row) {
-      for (int col = 0; col < 4; ++col) {
-        m.set(row, col, this.elements[row][col]);
-      }
-    }
+    m.setR0C0D(this.getR0C0D());
+    m.setR0C1D(this.getR0C1D());
+    m.setR0C2D(this.getR0C2D());
+    m.setR0C3D(this.getR0C3D());
+
+    m.setR1C0D(this.getR1C0D());
+    m.setR1C1D(this.getR1C1D());
+    m.setR1C2D(this.getR1C2D());
+    m.setR1C3D(this.getR1C3D());
+
+    m.setR2C0D(this.getR2C0D());
+    m.setR2C1D(this.getR2C1D());
+    m.setR2C2D(this.getR2C2D());
+    m.setR2C3D(this.getR2C3D());
+
+    m.setR3C0D(this.getR3C0D());
+    m.setR3C1D(this.getR3C1D());
+    m.setR3C2D(this.getR3C2D());
+    m.setR3C3D(this.getR3C3D());
   }
 
   @Override public String toString()
   {
-    final StringBuilder builder = new StringBuilder();
+    final StringBuilder builder = new StringBuilder(512);
     for (int row = 0; row < 4; ++row) {
-      final String text =
-        String.format(
-          "[%+.15f %+.15f %+.15f %+.15f]\n",
-          Double.valueOf(this.elements[row][0]),
-          Double.valueOf(this.elements[row][1]),
-          Double.valueOf(this.elements[row][2]),
-          Double.valueOf(this.elements[row][3]));
+      final String text = String.format(
+        "[%+.15f %+.15f %+.15f %+.15f]\n",
+        Double.valueOf(this.elements[row][0]),
+        Double.valueOf(this.elements[row][1]),
+        Double.valueOf(this.elements[row][2]),
+        Double.valueOf(this.elements[row][3]));
       builder.append(text);
     }
     final String r = builder.toString();
     assert r != null;
     return r;
+  }
+
+  @Override public <V extends VectorWritable3DType> void getRow3D(
+    final int row,
+    final V out)
+  {
+    this.getRow3DUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable3DType> void getRow3DUnsafe(
+    final int row,
+    final V out)
+  {
+    out.set3D(
+      this.elements[row][0], this.elements[row][1], this.elements[row][2]);
+  }
+
+  @Override public double getR0C2D()
+  {
+    return this.elements[0][2];
+  }
+
+  @Override public double getR1C2D()
+  {
+    return this.elements[1][2];
+  }
+
+  @Override public double getR2C0D()
+  {
+    return this.elements[2][0];
+  }
+
+  @Override public double getR2C1D()
+  {
+    return this.elements[2][1];
+  }
+
+  @Override public double getR2C2D()
+  {
+    return this.elements[2][2];
+  }
+
+  @Override public <V extends VectorWritable2DType> void getRow2D(
+    final int row,
+    final V out)
+  {
+    this.getRow2DUnsafe(row, out);
+  }
+
+  @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
+    final int row,
+    final V out)
+  {
+    out.set2D(this.elements[row][0], this.elements[row][1]);
+  }
+
+  @Override public double getR0C0D()
+  {
+    return this.elements[0][0];
+  }
+
+  @Override public double getR1C0D()
+  {
+    return this.elements[1][0];
+  }
+
+  @Override public double getR0C1D()
+  {
+    return this.elements[0][1];
+  }
+
+  @Override public double getR1C1D()
+  {
+    return this.elements[1][1];
   }
 }

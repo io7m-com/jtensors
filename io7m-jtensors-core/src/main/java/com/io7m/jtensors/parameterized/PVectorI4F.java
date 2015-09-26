@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -659,11 +659,8 @@ import net.jcip.annotations.Immutable;
       .getYF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.getZF()) != Float.floatToIntBits(other
-      .getZF())) {
-      return false;
-    }
-    return true;
+    return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
+      other.getZF());
   }
 
   @Override public float getWF()

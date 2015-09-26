@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,24 +16,24 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
+import com.io7m.jtensors.Matrix2x2FType;
+import com.io7m.jtensors.MatrixHeapArrayM2x2F;
 import com.io7m.jtensors.MatrixI2x2F;
-import com.io7m.jtensors.MatrixM2x2F;
 import com.io7m.jtensors.VectorI3F;
 import com.io7m.jtensors.VectorM3F;
+import org.junit.Assert;
+import org.junit.Test;
 
 @SuppressWarnings("static-method") public class MatrixI2x2FTest
 {
   @Test public void testEquals()
   {
-    final MatrixM2x2F m0 = new MatrixM2x2F();
+    final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, index);
         ++index;
       }
     }
@@ -44,9 +44,7 @@ import com.io7m.jtensors.VectorM3F;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
         Assert.assertEquals(
-          im0.getRowColumnF(row, col),
-          m0.getRowColumnF(row, col),
-          0.0);
+          im0.getRowColumnF(row, col), m0.getRowColumnF(row, col), 0.0);
       }
     }
 
@@ -59,7 +57,7 @@ import com.io7m.jtensors.VectorM3F;
     index = 100;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, index);
         ++index;
       }
     }
@@ -70,13 +68,13 @@ import com.io7m.jtensors.VectorM3F;
 
   @Test public void testFromColumns()
   {
-    final MatrixM2x2F m0 = new MatrixM2x2F();
+    final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
+    m0.setR0C0F(0.0f);
+    m0.setR1C0F(0.1f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
+    m0.setR0C1F(10.0f);
+    m0.setR1C1F(10.1f);
 
     final MatrixI2x2F im0 = MatrixI2x2F.newFromReadable(m0);
 
@@ -90,13 +88,13 @@ import com.io7m.jtensors.VectorM3F;
 
   @Test public void testFromRows()
   {
-    final MatrixM2x2F m0 = new MatrixM2x2F();
+    final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
 
-    m0.set(0, 0, 0.0f);
-    m0.set(1, 0, 0.1f);
+    m0.setR0C0F(0.0f);
+    m0.setR1C0F(0.1f);
 
-    m0.set(0, 1, 10.0f);
-    m0.set(1, 1, 10.1f);
+    m0.setR0C1F(10.0f);
+    m0.setR1C1F(10.1f);
 
     final MatrixI2x2F im = MatrixI2x2F.newFromReadable(m0);
 
@@ -113,7 +111,7 @@ import com.io7m.jtensors.VectorM3F;
 
   @Test public void testIdentity()
   {
-    final MatrixM2x2F m0 = new MatrixM2x2F();
+    final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
     final MatrixI2x2F im0 = MatrixI2x2F.identity();
     final MatrixI2x2F im1 = MatrixI2x2F.newFromReadable(m0);
     Assert.assertEquals(im1, im0);
@@ -121,32 +119,32 @@ import com.io7m.jtensors.VectorM3F;
 
   @Test public void testMakeMatrix2x2F()
   {
-    final MatrixM2x2F m0 = new MatrixM2x2F();
-    final MatrixM2x2F m1 = new MatrixM2x2F();
+    final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
+    final Matrix2x2FType m1 = MatrixHeapArrayM2x2F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
+        m0.setRowColumnF(row, col, index);
         ++index;
       }
     }
 
     final MatrixI2x2F im = MatrixI2x2F.newFromReadable(m0);
-    im.makeMatrixM2x2F(m1);
+    im.makeMatrix2x2F(m1);
     Assert.assertEquals(m0, m1);
   }
 
   @Test public void testToString()
   {
-    final MatrixM2x2F m0 = new MatrixM2x2F();
-    final MatrixM2x2F m1 = new MatrixM2x2F();
+    final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
+    final Matrix2x2FType m1 = MatrixHeapArrayM2x2F.newMatrix();
 
     int index = 0;
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
-        m0.set(row, col, index);
-        m1.set(row, col, index);
+        m0.setRowColumnF(row, col, index);
+        m1.setRowColumnF(row, col, index);
         ++index;
       }
     }

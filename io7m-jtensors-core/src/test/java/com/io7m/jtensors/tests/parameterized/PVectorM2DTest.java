@@ -18,14 +18,21 @@ package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.parameterized.PVectorM2D;
 
-public final class PVectorM2DTest<U> extends PVectorM2DContract<U>
+public final class PVectorM2DTest<T>
+  extends PVectorM2DContract<T, PVectorM2D<T>>
 {
-  protected <T> PVectorM2D<T> newVectorM2D()
+
+  @Override protected PVectorM2D<T> newVectorM2D(final PVectorM2D<T> v)
+  {
+    return new PVectorM2D<T>(v);
+  }
+
+  @Override protected PVectorM2D<T> newVectorM2D()
   {
     return new PVectorM2D<T>();
   }
 
-  protected <T> PVectorM2D<T> newVectorM2D(
+  @Override protected PVectorM2D<T> newVectorM2D(
     final double x1,
     final double y1)
   {

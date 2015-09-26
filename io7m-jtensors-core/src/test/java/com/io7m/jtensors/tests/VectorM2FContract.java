@@ -19,24 +19,32 @@ package com.io7m.jtensors.tests;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
-import com.io7m.jfunctional.Pair;
+import com.io7m.jtensors.Vector2FType;
 import com.io7m.jtensors.VectorM2F;
 import org.junit.Assert;
 import org.junit.Test;
 
-public abstract class VectorM2FContract extends VectorM2Contract
+public abstract class VectorM2FContract<T extends Vector2FType>
 {
-  @Override @Test public void testAbsolute()
+  protected abstract T newVectorM2F(T v);
+
+  protected abstract T newVectorM2F();
+
+  protected abstract T newVectorM2F(
+    final float x,
+    final float y);
+
+   @Test public final void testAbsolute()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (Math.random() * Float.MIN_VALUE);
-      final float y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorM2F v = this.newVectorM2F(x, y);
+      final float x = VectorM2FContract.getRandomLargeNegative();
+      final float y = VectorM2FContract.getRandomLargeNegative();
+      final T v = this.newVectorM2F(x, y);
 
-      final VectorM2F vr = this.newVectorM2F();
+      final T vr = this.newVectorM2F();
       VectorM2F.absolute(v, vr);
 
       Assert.assertTrue(
@@ -62,45 +70,45 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testAbsoluteMutation()
+   @Test public final void testAbsoluteMutation()
   {
-    final VectorM2F out = this.newVectorM2F();
-    final VectorM2F v = this.newVectorM2F(-1.0f, -1.0f);
+    final T out = this.newVectorM2F();
+    final T v = this.newVectorM2F(-1.0f, -1.0f);
 
-    Assert.assertTrue(v.getXF() == -1.0);
-    Assert.assertTrue(v.getYF() == -1.0);
+    Assert.assertEquals(-1.0, (double) v.getXF(), 0.0);
+    Assert.assertEquals(-1.0, (double) v.getYF(), 0.0);
 
     final float vx = v.getXF();
     final float vy = v.getYF();
 
-    final VectorM2F ov = VectorM2F.absolute(v, out);
+    final T ov = VectorM2F.absolute(v, out);
 
-    Assert.assertTrue(vx == v.getXF());
-    Assert.assertTrue(vy == v.getYF());
-    Assert.assertTrue(vx == -1.0);
-    Assert.assertTrue(vy == -1.0);
+    Assert.assertEquals((double) v.getXF(), (double) vx, 0.0);
+    Assert.assertEquals((double) v.getYF(), (double) vy, 0.0);
+    Assert.assertEquals(-1.0, (double) vx, 0.0);
+    Assert.assertEquals(-1.0, (double) vy, 0.0);
 
-    Assert.assertTrue(out == ov);
-    Assert.assertTrue(out.getXF() == 1.0);
-    Assert.assertTrue(out.getYF() == 1.0);
+    Assert.assertEquals(ov, out); Assert.assertSame(ov, out);;
+    Assert.assertEquals(1.0, (double) out.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) out.getYF(), 0.0);
   }
 
-  @Override @Test public void testAdd()
+   @Test public final void testAdd()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 10000.0f;
-      final float x0 = (float) (Math.random() * max);
-      final float y0 = (float) (Math.random() * max);
-      final VectorM2F v0 = this.newVectorM2F(x0, y0);
+      final float x0 = (float) (VectorM2FContract.getRandom() * (double) max);
+      final float y0 = (float) (VectorM2FContract.getRandom() * (double) max);
+      final T v0 = this.newVectorM2F(x0, y0);
 
-      final float x1 = (float) (Math.random() * max);
-      final float y1 = (float) (Math.random() * max);
-      final VectorM2F v1 = this.newVectorM2F(x1, y1);
+      final float x1 = (float) (VectorM2FContract.getRandom() * (double) max);
+      final float y1 = (float) (VectorM2FContract.getRandom() * (double) max);
+      final T v1 = this.newVectorM2F(x1, y1);
 
-      final VectorM2F vr0 = this.newVectorM2F();
+      final T vr0 = this.newVectorM2F();
       VectorM2F.add(v0, v1, vr0);
 
       Assert.assertTrue(
@@ -125,59 +133,59 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testAddMutation()
+   @Test public final void testAddMutation()
   {
-    final VectorM2F out = this.newVectorM2F();
-    final VectorM2F v0 = this.newVectorM2F(1.0f, 1.0f);
-    final VectorM2F v1 = this.newVectorM2F(1.0f, 1.0f);
+    final T out = this.newVectorM2F();
+    final T v0 = this.newVectorM2F(1.0f, 1.0f);
+    final T v1 = this.newVectorM2F(1.0f, 1.0f);
 
-    Assert.assertTrue(out.getXF() == 0.0);
-    Assert.assertTrue(out.getYF() == 0.0);
-    Assert.assertTrue(v0.getXF() == 1.0);
-    Assert.assertTrue(v0.getYF() == 1.0);
-    Assert.assertTrue(v1.getXF() == 1.0);
-    Assert.assertTrue(v1.getYF() == 1.0);
+    Assert.assertEquals(0.0, (double) out.getXF(), 0.0);
+    Assert.assertEquals(0.0, (double) out.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getYF(), 0.0);
 
-    final VectorM2F ov0 = VectorM2F.add(v0, v1, out);
+    final T ov0 = VectorM2F.add(v0, v1, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXF() == 2.0);
-    Assert.assertTrue(out.getYF() == 2.0);
-    Assert.assertTrue(v0.getXF() == 1.0);
-    Assert.assertTrue(v0.getYF() == 1.0);
-    Assert.assertTrue(v1.getXF() == 1.0);
-    Assert.assertTrue(v1.getYF() == 1.0);
+    Assert.assertEquals(ov0, out); Assert.assertSame(ov0, out);;
+    Assert.assertEquals(2.0, (double) out.getXF(), 0.0);
+    Assert.assertEquals(2.0, (double) out.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getYF(), 0.0);
 
-    final VectorM2F ov1 = VectorM2F.addInPlace(v0, v1);
+    final T ov1 = VectorM2F.addInPlace(v0, v1);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXF() == 2.0);
-    Assert.assertTrue(ov1.getYF() == 2.0);
-    Assert.assertTrue(v0.getXF() == 2.0);
-    Assert.assertTrue(v0.getYF() == 2.0);
-    Assert.assertTrue(v1.getXF() == 1.0);
-    Assert.assertTrue(v1.getYF() == 1.0);
+    Assert.assertEquals(v0, ov1); Assert.assertSame(v0, ov1);;
+    Assert.assertEquals(2.0, (double) ov1.getXF(), 0.0);
+    Assert.assertEquals(2.0, (double) ov1.getYF(), 0.0);
+    Assert.assertEquals(2.0, (double) v0.getXF(), 0.0);
+    Assert.assertEquals(2.0, (double) v0.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getYF(), 0.0);
   }
 
-  @Override @Test public void testAddScaled()
+   @Test public final void testAddScaled()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 20000.0f;
-      final float x0 = (float) (Math.random() * max);
-      final float y0 = (float) (Math.random() * max);
-      final VectorM2F v0 = this.newVectorM2F(x0, y0);
+      final float x0 = (float) (VectorM2FContract.getRandom() * (double) max);
+      final float y0 = (float) (VectorM2FContract.getRandom() * (double) max);
+      final T v0 = this.newVectorM2F(x0, y0);
 
-      final float x1 = (float) (Math.random() * max);
-      final float y1 = (float) (Math.random() * max);
-      final VectorM2F v1 = this.newVectorM2F(x1, y1);
+      final float x1 = (float) (VectorM2FContract.getRandom() * (double) max);
+      final float y1 = (float) (VectorM2FContract.getRandom() * (double) max);
+      final T v1 = this.newVectorM2F(x1, y1);
 
-      final float r = (float) (Math.random() * max);
+      final float r = (float) (VectorM2FContract.getRandom() * (double) max);
 
-      final VectorM2F vr0 = this.newVectorM2F();
-      VectorM2F.addScaled(v0, v1, r, vr0);
+      final T vr0 = this.newVectorM2F();
+      VectorM2F.addScaled(v0, v1, (double) r, vr0);
 
       Assert.assertTrue(
         AlmostEqualFloat.almostEqual(
@@ -189,7 +197,7 @@ public abstract class VectorM2FContract extends VectorM2Contract
       {
         final float orig_x = v0.getXF();
         final float orig_y = v0.getYF();
-        VectorM2F.addScaledInPlace(v0, v1, r);
+        VectorM2F.addScaledInPlace(v0, v1, (double) r);
 
         Assert.assertTrue(
           AlmostEqualFloat.almostEqual(
@@ -201,65 +209,65 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+   @Test public final void testAlmostEqualNot()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final float x = (float) Math.random();
+    final float x = (float) VectorM2FContract.getRandom();
     final float y = x + 1.0f;
     final float z = y + 1.0f;
     final float w = z + 1.0f;
     final float q = w + 1.0f;
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(q, y);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(q, y);
       Assert.assertFalse(VectorM2F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(x, q);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(x, q);
       Assert.assertFalse(VectorM2F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(q, y);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(q, y);
       Assert.assertFalse(VectorM2F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(q, y);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(q, y);
       Assert.assertFalse(VectorM2F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(q, q);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(q, q);
       Assert.assertFalse(VectorM2F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(x, q);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(x, q);
       Assert.assertFalse(VectorM2F.almostEqual(ec, m0, m1));
     }
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+   @Test public final void testAlmostEqualTransitive()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v0 = this.newVectorM2F(x0, y0);
-      final VectorM2F v1 = this.newVectorM2F(x0, y0);
-      final VectorM2F v2 = this.newVectorM2F(x0, y0);
+      final float x0 = VectorM2FContract.getRandomLargePositive();
+      final float y0 = VectorM2FContract.getRandomLargePositive();
+      final T v0 = this.newVectorM2F(x0, y0);
+      final T v1 = this.newVectorM2F(x0, y0);
+      final T v2 = this.newVectorM2F(x0, y0);
 
       Assert.assertTrue(VectorM2F.almostEqual(ec, v0, v1));
       Assert.assertTrue(VectorM2F.almostEqual(ec, v1, v2));
@@ -267,16 +275,16 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testAngle()
+   @Test public final void testAngle()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext3dp();
 
     {
-      final float x = (float) Math.random();
-      final float y = (float) Math.random();
-      final VectorM2F v0 = this.newVectorM2F(x, y);
-      final VectorM2F v1 = this.newVectorM2F(x, y);
+      final float x = (float) VectorM2FContract.getRandom();
+      final float y = (float) VectorM2FContract.getRandom();
+      final T v0 = this.newVectorM2F(x, y);
+      final T v1 = this.newVectorM2F(x, y);
       VectorM2F.normalizeInPlace(v0);
       VectorM2F.normalizeInPlace(v1);
       final double angle = VectorM2F.angle(v0, v1);
@@ -289,10 +297,10 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
 
     {
-      final float x = (float) Math.random();
-      final float y = (float) Math.random();
-      final VectorM2F v0 = this.newVectorM2F(x, y);
-      final VectorM2F v1 = this.newVectorM2F(y, -x);
+      final float x = (float) VectorM2FContract.getRandom();
+      final float y = (float) VectorM2FContract.getRandom();
+      final T v0 = this.newVectorM2F(x, y);
+      final T v1 = this.newVectorM2F(y, -x);
       VectorM2F.normalizeInPlace(v0);
       VectorM2F.normalizeInPlace(v1);
       final double angle = VectorM2F.angle(v0, v1);
@@ -303,14 +311,14 @@ public abstract class VectorM2FContract extends VectorM2Contract
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
-          ec, angle, Math.toRadians(90)));
+          ec, angle, Math.toRadians(90.0)));
     }
 
     {
-      final float x = (float) Math.random();
-      final float y = (float) Math.random();
-      final VectorM2F v0 = this.newVectorM2F(x, y);
-      final VectorM2F v1 = this.newVectorM2F(-y, x);
+      final float x = (float) VectorM2FContract.getRandom();
+      final float y = (float) VectorM2FContract.getRandom();
+      final T v0 = this.newVectorM2F(x, y);
+      final T v1 = this.newVectorM2F(-y, x);
       VectorM2F.normalizeInPlace(v0);
       VectorM2F.normalizeInPlace(v1);
       final double angle = VectorM2F.angle(v0, v1);
@@ -321,100 +329,105 @@ public abstract class VectorM2FContract extends VectorM2Contract
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
-          ec, angle, Math.toRadians(90)));
+          ec, angle, Math.toRadians(90.0)));
     }
   }
 
-  @Override @Test public void testCheckInterface()
+   @Test public final void testCheckInterface()
   {
-    final VectorM2F v = this.newVectorM2F(3.0f, 5.0f);
+    final T v = this.newVectorM2F(3.0f, 5.0f);
 
-    Assert.assertTrue(v.getXF() == v.getXF());
-    Assert.assertTrue(v.getYF() == v.getYF());
+    Assert.assertEquals((double) v.getXF(), (double) v.getXF(), 0.0);
+    Assert.assertEquals((double) v.getYF(), (double) v.getYF(), 0.0);
   }
 
-  @Override @Test public void testClampByVectorMaximumOrdering()
+   @Test public final void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float max_x = (float) (Math.random() * Float.MIN_VALUE);
-      final float max_y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorM2F maximum = this.newVectorM2F(max_x, max_y);
+      final float max_x = VectorM2FContract.getRandomLargeNegative();
+      final float max_y = VectorM2FContract.getRandomLargeNegative();
+      final T maximum = this.newVectorM2F(max_x, max_y);
 
-      final float x = (float) (Math.random() * Float.MIN_VALUE);
-      final float y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorM2F v = this.newVectorM2F(x, y);
+      final float x = VectorM2FContract.getRandomLargeNegative();
+      final float y = VectorM2FContract.getRandomLargeNegative();
+      final T v = this.newVectorM2F(x, y);
 
-      final VectorM2F vr = this.newVectorM2F();
-      final VectorM2F vo = VectorM2F.clampMaximumByVector(v, maximum, vr);
+      final T vr = this.newVectorM2F();
+      final T vo = VectorM2F.clampMaximumByVector(v, maximum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo); Assert.assertSame(vr, vo);;
       Assert.assertTrue(vr.getXF() <= maximum.getXF());
       Assert.assertTrue(vr.getYF() <= maximum.getYF());
 
       {
-        final VectorM2F vr0 = VectorM2F.clampMaximumByVectorInPlace(v, maximum);
-        Assert.assertTrue(vr0 == v);
+        final T vr0 = VectorM2F.clampMaximumByVectorInPlace(v, maximum);
+        Assert.assertEquals(v, vr0); Assert.assertSame(v, vr0);;
         Assert.assertTrue(v.getXF() <= maximum.getXF());
         Assert.assertTrue(v.getYF() <= maximum.getYF());
       }
     }
   }
 
-  @Override @Test public void testClampByVectorMinimumOrdering()
+  protected static float getRandomLargeNegative()
+  {
+    return (float) (VectorM2FContract.getRandom() * (double) -Float.MAX_VALUE);
+  }
+
+  @Test public final void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float min_x = (float) (Math.random() * Float.MAX_VALUE);
-      final float min_y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F minimum = this.newVectorM2F(min_x, min_y);
+      final float min_x = VectorM2FContract.getRandomLargePositive();
+      final float min_y = VectorM2FContract.getRandomLargePositive();
+      final T minimum = this.newVectorM2F(min_x, min_y);
 
-      final float x = (float) (Math.random() * Float.MIN_VALUE);
-      final float y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorM2F v = this.newVectorM2F(x, y);
+      final float x = VectorM2FContract.getRandomLargeNegative();
+      final float y = VectorM2FContract.getRandomLargeNegative();
+      final T v = this.newVectorM2F(x, y);
 
-      final VectorM2F vr = this.newVectorM2F();
-      final VectorM2F vo = VectorM2F.clampMinimumByVector(v, minimum, vr);
+      final T vr = this.newVectorM2F();
+      final T vo = VectorM2F.clampMinimumByVector(v, minimum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo); Assert.assertSame(vr, vo);;
       Assert.assertTrue(vr.getXF() >= minimum.getXF());
       Assert.assertTrue(vr.getYF() >= minimum.getYF());
 
       {
-        final VectorM2F vr0 = VectorM2F.clampMinimumByVectorInPlace(v, minimum);
-        Assert.assertTrue(vr0 == v);
+        final T vr0 = VectorM2F.clampMinimumByVectorInPlace(v, minimum);
+        Assert.assertEquals(v, vr0); Assert.assertSame(v, vr0);;
         Assert.assertTrue(v.getXF() >= minimum.getXF());
         Assert.assertTrue(v.getYF() >= minimum.getYF());
       }
     }
   }
 
-  @Override @Test public void testClampByVectorOrdering()
+   @Test public final void testClampByVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float min_x = (float) (Math.random() * Float.MIN_VALUE);
-      final float min_y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorM2F minimum = this.newVectorM2F(min_x, min_y);
+      final float min_x = VectorM2FContract.getRandomLargeNegative();
+      final float min_y = VectorM2FContract.getRandomLargeNegative();
+      final T minimum = this.newVectorM2F(min_x, min_y);
 
-      final float max_x = (float) (Math.random() * Float.MAX_VALUE);
-      final float max_y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F maximum = this.newVectorM2F(max_x, max_y);
+      final float max_x = VectorM2FContract.getRandomLargePositive();
+      final float max_y = VectorM2FContract.getRandomLargePositive();
+      final T maximum = this.newVectorM2F(max_x, max_y);
 
-      final float x = (float) (Math.random() * Float.MIN_VALUE);
-      final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v = this.newVectorM2F(x, y);
+      final float x = VectorM2FContract.getRandomLargeNegative();
+      final float y = VectorM2FContract.getRandomLargePositive();
+      final T v = this.newVectorM2F(x, y);
 
-      final VectorM2F vr = this.newVectorM2F();
-      final VectorM2F vo = VectorM2F.clampByVector(v, minimum, maximum, vr);
+      final T vr = this.newVectorM2F();
+      final T vo = VectorM2F.clampByVector(v, minimum, maximum, vr);
 
-      Assert.assertTrue(vo == vr);
+      Assert.assertEquals(vr, vo); Assert.assertSame(vr, vo);;
       Assert.assertTrue(vr.getXF() <= maximum.getXF());
       Assert.assertTrue(vr.getYF() <= maximum.getYF());
       Assert.assertTrue(vr.getXF() >= minimum.getXF());
       Assert.assertTrue(vr.getYF() >= minimum.getYF());
 
       {
-        final VectorM2F vr0 =
+        final T vr0 =
           VectorM2F.clampByVectorInPlace(v, minimum, maximum);
-        Assert.assertTrue(vr0 == v);
+        Assert.assertEquals(v, vr0); Assert.assertSame(v, vr0);;
         Assert.assertTrue(v.getXF() <= maximum.getXF());
         Assert.assertTrue(v.getYF() <= maximum.getYF());
         Assert.assertTrue(v.getXF() >= minimum.getXF());
@@ -423,16 +436,16 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+   @Test public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float maximum = (float) (Math.random() * Float.MIN_VALUE);
+      final float maximum = VectorM2FContract.getRandomLargeNegative();
 
-      final float x = (float) (Math.random() * Float.MAX_VALUE);
-      final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v = this.newVectorM2F(x, y);
+      final float x = VectorM2FContract.getRandomLargePositive();
+      final float y = VectorM2FContract.getRandomLargePositive();
+      final T v = this.newVectorM2F(x, y);
 
-      final VectorM2F vr = this.newVectorM2F();
+      final T vr = this.newVectorM2F();
       VectorM2F.clampMaximum(v, maximum, vr);
 
       Assert.assertTrue(vr.getXF() <= maximum);
@@ -446,16 +459,16 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+   @Test public final void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float minimum = (float) (Math.random() * Float.MAX_VALUE);
+      final float minimum = VectorM2FContract.getRandomLargePositive();
 
-      final float x = (float) (Math.random() * Float.MIN_VALUE);
-      final float y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorM2F v = this.newVectorM2F(x, y);
+      final float x = VectorM2FContract.getRandomLargeNegative();
+      final float y = VectorM2FContract.getRandomLargeNegative();
+      final T v = this.newVectorM2F(x, y);
 
-      final VectorM2F vr = this.newVectorM2F();
+      final T vr = this.newVectorM2F();
       VectorM2F.clampMinimum(v, minimum, vr);
 
       Assert.assertTrue(vr.getXF() >= minimum);
@@ -469,17 +482,17 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testClampOrdering()
+   @Test public final void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float minimum = (float) (Math.random() * Float.MIN_VALUE);
-      final float maximum = (float) (Math.random() * Float.MAX_VALUE);
+      final float minimum = VectorM2FContract.getRandomLargeNegative();
+      final float maximum = VectorM2FContract.getRandomLargePositive();
 
-      final float x = (float) (Math.random() * Float.MIN_VALUE);
-      final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v = this.newVectorM2F(x, y);
+      final float x = VectorM2FContract.getRandomLargeNegative();
+      final float y = VectorM2FContract.getRandomLargePositive();
+      final T v = this.newVectorM2F(x, y);
 
-      final VectorM2F vr = this.newVectorM2F();
+      final T vr = this.newVectorM2F();
       VectorM2F.clamp(v, minimum, maximum, vr);
 
       Assert.assertTrue(vr.getXF() <= maximum);
@@ -498,26 +511,26 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testCopy()
+   @Test public final void testCopy()
   {
-    final VectorM2F vb = this.newVectorM2F(5, 6);
-    final VectorM2F va = this.newVectorM2F(1, 2);
+    final T vb = this.newVectorM2F(5.0F, 6.0F);
+    final T va = this.newVectorM2F(1.0F, 2.0F);
 
-    Assert.assertFalse(va.getXF() == vb.getXF());
-    Assert.assertFalse(va.getYF() == vb.getYF());
+    Assert.assertNotEquals((double) vb.getXF(), (double) va.getXF(), 0.0);
+    Assert.assertNotEquals((double) vb.getYF(), (double) va.getYF(), 0.0);
 
     VectorM2F.copy(va, vb);
 
-    Assert.assertTrue(va.getXF() == vb.getXF());
-    Assert.assertTrue(va.getYF() == vb.getYF());
+    Assert.assertEquals((double) vb.getXF(), (double) va.getXF(), 0.0);
+    Assert.assertEquals((double) vb.getYF(), (double) va.getYF(), 0.0);
   }
 
-  @Override @Test public void testCopy2Correct()
+   @Test public final void testCopy2Correct()
   {
-    final VectorM2F v0 = this.newVectorM2F(
-      (float) Math.random() * Float.MAX_VALUE,
-      (float) Math.random() * Float.MAX_VALUE);
-    final VectorM2F v1 = this.newVectorM2F();
+    final T v0 = this.newVectorM2F(
+      VectorM2FContract.getRandomLargePositive(),
+      VectorM2FContract.getRandomLargePositive());
+    final T v1 = this.newVectorM2F();
 
     v1.copyFrom2F(v0);
 
@@ -525,250 +538,264 @@ public abstract class VectorM2FContract extends VectorM2Contract
     Assert.assertEquals(v0.getYF(), v1.getYF(), 0.0f);
   }
 
-  @Override @Test public void testDefault00()
+  protected static float getRandomLargePositive()
+  {
+    return (float) VectorM2FContract.getRandom() * Float.MAX_VALUE;
+  }
+
+  @Test public final void testDefault00()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
     Assert.assertTrue(
       VectorM2F.almostEqual(
-        ec, this.newVectorM2F(), this.newVectorM2F(0, 0)));
+        ec, this.newVectorM2F(), this.newVectorM2F(0.0F, 0.0F)));
   }
 
-  @Override @Test public void testDistance()
+   @Test public final void testDistance()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
+    final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
 
-    final VectorM2F v0 = this.newVectorM2F(0.0f, 1.0f);
-    final VectorM2F v1 = this.newVectorM2F(0.0f, 0.0f);
+    final T v0 = this.newVectorM2F(0.0f, 1.0f);
+    final T v1 = this.newVectorM2F(0.0f, 0.0f);
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
-        ec, VectorM2F.distance(v0, v1), 1.0f));
+        ec, VectorM2F.distance(c, v0, v1), 1.0));
   }
 
-  @Override @Test public void testDistanceOrdering()
+   @Test public final void testDistanceOrdering()
   {
+    final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v0 = this.newVectorM2F(x0, y0);
+      final float x0 = VectorM2FContract.getRandomLargePositive();
+      final float y0 = VectorM2FContract.getRandomLargePositive();
+      final T v0 = this.newVectorM2F(x0, y0);
 
-      final float x1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v1 = this.newVectorM2F(x1, y1);
+      final float x1 = VectorM2FContract.getRandomLargePositive();
+      final float y1 = VectorM2FContract.getRandomLargePositive();
+      final T v1 = this.newVectorM2F(x1, y1);
 
-      Assert.assertTrue(VectorM2F.distance(v0, v1) >= 0.0);
+      Assert.assertTrue(VectorM2F.distance(c, v0, v1) >= 0.0);
     }
   }
 
-  @Override @Test public void testDotProduct()
+   @Test public final void testDotProduct()
   {
-    final VectorM2F v0 = this.newVectorM2F(10.0f, 10.0f);
-    final VectorM2F v1 = this.newVectorM2F(10.0f, 10.0f);
+    final T v0 = this.newVectorM2F(10.0f, 10.0f);
+    final T v1 = this.newVectorM2F(10.0f, 10.0f);
 
     {
       final float p = VectorM2F.dotProduct(v0, v1);
-      Assert.assertTrue(v0.getXF() == 10.0f);
-      Assert.assertTrue(v0.getYF() == 10.0f);
-      Assert.assertTrue(v1.getXF() == 10.0f);
-      Assert.assertTrue(v1.getYF() == 10.0f);
-      Assert.assertTrue(p == 200.0f);
+      Assert.assertEquals(10.0, (double) v0.getXF(), 0.0);
+      Assert.assertEquals(10.0, (double) v0.getYF(), 0.0);
+      Assert.assertEquals(10.0, (double) v1.getXF(), 0.0);
+      Assert.assertEquals(10.0, (double) v1.getYF(), 0.0);
+      Assert.assertEquals(200.0, (double) p, 0.0);
     }
 
     {
       final float p = VectorM2F.dotProduct(v0, v0);
-      Assert.assertTrue(v0.getXF() == 10.0f);
-      Assert.assertTrue(v0.getYF() == 10.0f);
-      Assert.assertTrue(p == 200.0f);
+      Assert.assertEquals(10.0, (double) v0.getXF(), 0.0);
+      Assert.assertEquals(10.0, (double) v0.getYF(), 0.0);
+      Assert.assertEquals(200.0, (double) p, 0.0);
     }
 
     {
       final float p = VectorM2F.dotProduct(v1, v1);
-      Assert.assertTrue(v1.getXF() == 10.0f);
-      Assert.assertTrue(v1.getYF() == 10.0f);
-      Assert.assertTrue(p == 200.0f);
+      Assert.assertEquals(10.0, (double) v1.getXF(), 0.0);
+      Assert.assertEquals(10.0, (double) v1.getYF(), 0.0);
+      Assert.assertEquals(200.0, (double) p, 0.0);
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+   @Test public final void testDotProductPerpendicular()
   {
-    final VectorM2F vpx = this.newVectorM2F(1.0f, 0.0f);
-    final VectorM2F vmx = this.newVectorM2F(-1.0f, 0.0f);
+    final T vpx = this.newVectorM2F(1.0f, 0.0f);
+    final T vmx = this.newVectorM2F(-1.0f, 0.0f);
 
-    final VectorM2F vpy = this.newVectorM2F(0.0f, 1.0f);
-    final VectorM2F vmy = this.newVectorM2F(0.0f, -1.0f);
+    final T vpy = this.newVectorM2F(0.0f, 1.0f);
+    final T vmy = this.newVectorM2F(0.0f, -1.0f);
 
-    Assert.assertTrue(VectorM2F.dotProduct(vpx, vpy) == 0.0);
-    Assert.assertTrue(VectorM2F.dotProduct(vmx, vmy) == 0.0);
+    Assert.assertEquals(0.0, (double) VectorM2F.dotProduct(vpx, vpy), 0.0);
+    Assert.assertEquals(0.0, (double) VectorM2F.dotProduct(vmx, vmy), 0.0);
   }
 
-  @Override @Test public void testDotProductSelf()
+   @Test public final void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) Math.random();
-      final float y = (float) Math.random();
-      final VectorM2F q = this.newVectorM2F(x, y);
+      final float x = (float) VectorM2FContract.getRandom();
+      final float y = (float) VectorM2FContract.getRandom();
+      final T q = this.newVectorM2F(x, y);
       final float dp = VectorM2F.dotProduct(q, q);
 
       System.out.println("q  : " + q);
       System.out.println("dp : " + dp);
 
-      AlmostEqualDouble.almostEqual(ec, 1.0, dp);
+      AlmostEqualDouble.almostEqual(ec, 1.0, (double) dp);
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  protected static double getRandom()
   {
-    final VectorM2F v0 = this.newVectorM2F(10.0f, 10.0f);
+    return Math.random();
+  }
+
+  @Test public final void testDotProductSelfMagnitudeSquared()
+  {
+    final T v0 = this.newVectorM2F(10.0f, 10.0f);
 
     {
-      final double p = VectorM2F.dotProduct(v0, v0);
-      Assert.assertTrue(v0.getXF() == 10.0f);
-      Assert.assertTrue(v0.getYF() == 10.0f);
-      Assert.assertTrue(p == 200.0f);
+      final double p = (double) VectorM2F.dotProduct(v0, v0);
+      Assert.assertEquals(10.0, (double) v0.getXF(), 0.0);
+      Assert.assertEquals(10.0, (double) v0.getYF(), 0.0);
+      Assert.assertEquals(200.0, p, 0.0);
     }
 
     {
       final double p = VectorM2F.magnitudeSquared(v0);
-      Assert.assertTrue(v0.getXF() == 10.0f);
-      Assert.assertTrue(v0.getYF() == 10.0f);
-      Assert.assertTrue(p == 200.0f);
+      Assert.assertEquals(10.0, (double) v0.getXF(), 0.0);
+      Assert.assertEquals(10.0, (double) v0.getYF(), 0.0);
+      Assert.assertEquals(200.0, p, 0.0);
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+   @Test public final void testEqualsCorrect()
   {
     {
-      final VectorM2F m0 = this.newVectorM2F();
+      final T m0 = this.newVectorM2F();
       Assert.assertTrue(m0.equals(m0));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F();
+      final T m0 = this.newVectorM2F();
       Assert.assertFalse(m0.equals(null));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F();
+      final T m0 = this.newVectorM2F();
       Assert.assertFalse(m0.equals(Integer.valueOf(23)));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F();
-      final VectorM2F m1 = this.newVectorM2F();
+      final T m0 = this.newVectorM2F();
+      final T m1 = this.newVectorM2F();
       Assert.assertTrue(m0.equals(m1));
     }
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+   @Test public final void testEqualsNotEqualCorrect()
   {
-    final float x = (float) Math.random();
+    final float x = (float) VectorM2FContract.getRandom();
     final float y = x + 1.0f;
     final float z = y + 1.0f;
     final float w = z + 1.0f;
     final float q = w + 1.0f;
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
+      final T m0 = this.newVectorM2F(x, y);
       Assert.assertFalse(m0.equals(null));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
+      final T m0 = this.newVectorM2F(x, y);
       Assert.assertFalse(m0.equals(Integer.valueOf(23)));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(q, y);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(q, y);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(x, q);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(x, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(q, y);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(q, y);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(q, y);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(q, y);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(q, q);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(q, q);
       Assert.assertFalse(m0.equals(m1));
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F(x, y);
-      final VectorM2F m1 = this.newVectorM2F(x, q);
+      final T m0 = this.newVectorM2F(x, y);
+      final T m1 = this.newVectorM2F(x, q);
       Assert.assertFalse(m0.equals(m1));
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+   @Test public final void testHashCodeEqualsCorrect()
   {
-    final VectorM2F m0 = this.newVectorM2F();
-    final VectorM2F m1 = this.newVectorM2F();
-    Assert.assertEquals(m0.hashCode(), m1.hashCode());
+    final T m0 = this.newVectorM2F();
+    final T m1 = this.newVectorM2F();
+    Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+   @Test public final void testHashCodeNotEqualCorrect()
   {
     {
-      final VectorM2F m0 = this.newVectorM2F();
-      final VectorM2F m1 = this.newVectorM2F();
-      m1.setXF(23);
-      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      final T m0 = this.newVectorM2F();
+      final T m1 = this.newVectorM2F();
+      m1.setXF(23.0F);
+      Assert.assertNotEquals((long) m0.hashCode(), (long) m1.hashCode());
     }
 
     {
-      final VectorM2F m0 = this.newVectorM2F();
-      final VectorM2F m1 = this.newVectorM2F();
-      m1.setYF(23);
-      Assert.assertFalse(m0.hashCode() == m1.hashCode());
+      final T m0 = this.newVectorM2F();
+      final T m1 = this.newVectorM2F();
+      m1.setYF(23.0F);
+      Assert.assertNotEquals((long) m0.hashCode(), (long) m1.hashCode());
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+   @Test public final void testInitializeReadable()
   {
-    final VectorM2F v0 = this.newVectorM2F(1.0f, 2.0f);
-    final VectorM2F v1 = new VectorM2F(v0);
+    final T v0 = this.newVectorM2F(1.0f, 2.0f);
+    final T v1 = this.newVectorM2F(v0);
 
-    Assert.assertTrue(v0.getXF() == v1.getXF());
-    Assert.assertTrue(v0.getYF() == v1.getYF());
+    Assert.assertEquals((double) v1.getXF(), (double) v0.getXF(), 0.0);
+    Assert.assertEquals((double) v1.getYF(), (double) v0.getYF(), 0.0);
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+   @Test public final void testInterpolateLinearLimits()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
+    final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v0 = this.newVectorM2F(x0, y0);
+      final float x0 = VectorM2FContract.getRandomLargePositive();
+      final float y0 = VectorM2FContract.getRandomLargePositive();
+      final T v0 = this.newVectorM2F(x0, y0);
 
-      final float x1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v1 = this.newVectorM2F(x1, y1);
+      final float x1 = VectorM2FContract.getRandomLargePositive();
+      final float y1 = VectorM2FContract.getRandomLargePositive();
+      final T v1 = this.newVectorM2F(x1, y1);
 
-      final VectorM2F vr0 = this.newVectorM2F();
-      final VectorM2F vr1 = this.newVectorM2F();
-      VectorM2F.interpolateLinear(v0, v1, 0.0f, vr0);
-      VectorM2F.interpolateLinear(v0, v1, 1.0f, vr1);
+      final T vr0 = this.newVectorM2F();
+      final T vr1 = this.newVectorM2F();
+      VectorM2F.interpolateLinear(c, v0, v1, 0.0, vr0);
+      VectorM2F.interpolateLinear(c, v0, v1, 1.0, vr1);
 
       Assert.assertTrue(
         AlmostEqualFloat.almostEqual(
@@ -785,30 +812,30 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+   @Test public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (Math.random() * Float.MAX_VALUE);
-      final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v = this.newVectorM2F(x, y);
+      final float x = VectorM2FContract.getRandomLargePositive();
+      final float y = VectorM2FContract.getRandomLargePositive();
+      final T v = this.newVectorM2F(x, y);
 
       final double m = VectorM2F.magnitude(v);
       Assert.assertTrue(m >= 1.0);
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+   @Test public final void testMagnitudeNormal()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext6dp();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 20000.0f;
-      final float x = (float) (Math.random() * max);
-      final float y = (float) (Math.random() * max);
-      final VectorM2F v = this.newVectorM2F(x, y);
+      final float x = (float) (VectorM2FContract.getRandom() * (double) max);
+      final float y = (float) (VectorM2FContract.getRandom() * (double) max);
+      final T v = this.newVectorM2F(x, y);
 
-      final VectorM2F vr = this.newVectorM2F();
+      final T vr = this.newVectorM2F();
       VectorM2F.normalize(v, vr);
       Assert.assertNotSame(v, vr);
 
@@ -822,161 +849,166 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+   @Test public final void testMagnitudeNormalizeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorM2F v = this.newVectorM2F(0.0f, 0.0f);
-    final VectorM2F vr = VectorM2F.normalizeInPlace(v);
+    final T v = this.newVectorM2F(0.0f, 0.0f);
+    final T vr = VectorM2F.normalizeInPlace(v);
     final double m = VectorM2F.magnitude(vr);
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0f));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testMagnitudeOne()
+   @Test public final void testMagnitudeOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorM2F v = this.newVectorM2F(1.0f, 0.0f);
+    final T v = this.newVectorM2F(1.0f, 0.0f);
     final double m = VectorM2F.magnitude(v);
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0f));
+    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
-  @Override @Test public void testMagnitudeSimple()
+   @Test public final void testMagnitudeSimple()
   {
-    final VectorM2F v = this.newVectorM2F(8.0f, 0.0f);
+    final T v = this.newVectorM2F(8.0f, 0.0f);
 
     {
-      final double p = VectorM2F.dotProduct(v, v);
+      final double p = (double) VectorM2F.dotProduct(v, v);
       final double q = VectorM2F.magnitudeSquared(v);
       final double r = VectorM2F.magnitude(v);
-      Assert.assertTrue(p == 64.0);
-      Assert.assertTrue(q == 64.0);
-      Assert.assertTrue(r == 8.0);
+      Assert.assertEquals(64.0, p, 0.0);
+      Assert.assertEquals(64.0, q, 0.0);
+      Assert.assertEquals(8.0, r, 0.0);
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+   @Test public final void testMagnitudeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorM2F v = this.newVectorM2F(0.0f, 0.0f);
+    final T v = this.newVectorM2F(0.0f, 0.0f);
     final double m = VectorM2F.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testNormalizeSimple()
+   @Test public final void testNormalizeSimple()
   {
-    final VectorM2F v0 = this.newVectorM2F(8.0f, 0.0f);
-    final VectorM2F out = this.newVectorM2F();
-    final VectorM2F vr = VectorM2F.normalize(v0, out);
+    final T v0 = this.newVectorM2F(8.0f, 0.0f);
+    final T out = this.newVectorM2F();
+    final T vr = VectorM2F.normalize(v0, out);
 
-    Assert.assertTrue(vr == out);
+    Assert.assertEquals(out, vr); Assert.assertSame(out, vr);;
 
     final double m = VectorM2F.magnitude(out);
-    Assert.assertTrue(m == 1.0);
+    Assert.assertEquals(1.0, m, 0.0);
   }
 
-  @Override @Test public void testNormalizeZero()
+   @Test public final void testNormalizeZero()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final VectorM2F qr = this.newVectorM2F();
-    final VectorM2F q = this.newVectorM2F(0, 0);
+    final T qr = this.newVectorM2F();
+    final T q = this.newVectorM2F(0.0F, 0.0F);
     VectorM2F.normalize(q, qr);
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.getXF()));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.getYF()));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0.0F, qr.getXF()));
+    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0.0F, qr.getYF()));
   }
 
-  @Override @Test public void testOrthonormalize()
+   @Test public final void testOrthonormalize()
   {
-    final VectorM2F v0 = this.newVectorM2F(0, 1);
-    final VectorM2F v1 = this.newVectorM2F(0.5f, 0.5f);
+    final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
+    final T v0 = this.newVectorM2F(0.0F, 1.0F);
+    final T v1 = this.newVectorM2F(0.5f, 0.5f);
 
-    final Pair<VectorM2F, VectorM2F> r = VectorM2F.orthoNormalize(v0, v1);
+    final T v0_out = this.newVectorM2F();
+    final T v1_out = this.newVectorM2F();
 
-    Assert.assertEquals(this.newVectorM2F(0, 1), r.getLeft());
-    Assert.assertEquals(this.newVectorM2F(1, 0), r.getRight());
+    VectorM2F.orthoNormalize(c, v0, v0_out, v1, v1_out);
+
+    Assert.assertEquals(this.newVectorM2F(0.0F, 1.0F), v0_out);
+    Assert.assertEquals(this.newVectorM2F(1.0F, 0.0F), v1_out);
   }
 
-  @Override @Test public void testOrthonormalizeMutation()
+   @Test public final void testOrthonormalizeMutation()
   {
-    final VectorM2F v0 = this.newVectorM2F(0f, 1f);
-    final VectorM2F v1 = this.newVectorM2F(0.5f, 0.5f);
+    final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
+    final T v0 = this.newVectorM2F(0f, 1f);
+    final T v1 = this.newVectorM2F(0.5f, 0.5f);
 
-    VectorM2F.orthoNormalizeInPlace(v0, v1);
+    VectorM2F.orthoNormalizeInPlace(c, v0, v1);
 
-    Assert.assertEquals(this.newVectorM2F(0, 1), v0);
-    Assert.assertEquals(this.newVectorM2F(1, 0), v1);
+    Assert.assertEquals(this.newVectorM2F(0.0F, 1.0F), v0);
+    Assert.assertEquals(this.newVectorM2F(1.0F, 0.0F), v1);
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+   @Test public final void testProjectionPerpendicularZero()
   {
     {
-      final VectorM2F p = this.newVectorM2F(1.0f, 0.0f);
-      final VectorM2F q = this.newVectorM2F(0.0f, 1.0f);
-      final VectorM2F r = this.newVectorM2F();
-      final VectorM2F u = VectorM2F.projection(p, q, r);
+      final T p = this.newVectorM2F(1.0f, 0.0f);
+      final T q = this.newVectorM2F(0.0f, 1.0f);
+      final T r = this.newVectorM2F();
+      final T u = VectorM2F.projection(p, q, r);
 
       Assert.assertSame(r, u);
-      Assert.assertTrue(VectorM2F.magnitude(u) == 0.0);
+      Assert.assertEquals(0.0, VectorM2F.magnitude(u), 0.0);
     }
 
     {
-      final VectorM2F p = this.newVectorM2F(-1.0f, 0.0f);
-      final VectorM2F q = this.newVectorM2F(0.0f, 1.0f);
-      final VectorM2F r = this.newVectorM2F();
-      final VectorM2F u = VectorM2F.projection(p, q, r);
+      final T p = this.newVectorM2F(-1.0f, 0.0f);
+      final T q = this.newVectorM2F(0.0f, 1.0f);
+      final T r = this.newVectorM2F();
+      final T u = VectorM2F.projection(p, q, r);
 
       Assert.assertSame(r, u);
-      Assert.assertTrue(VectorM2F.magnitude(u) == 0.0);
+      Assert.assertEquals(0.0, VectorM2F.magnitude(u), 0.0);
     }
   }
 
-  @Override @Test public void testScaleMutation()
+   @Test public final void testScaleMutation()
   {
-    final VectorM2F out = this.newVectorM2F();
-    final VectorM2F v0 = this.newVectorM2F(1.0f, 1.0f);
+    final T out = this.newVectorM2F();
+    final T v0 = this.newVectorM2F(1.0f, 1.0f);
 
-    Assert.assertTrue(out.getXF() == 0.0f);
-    Assert.assertTrue(out.getYF() == 0.0f);
-    Assert.assertTrue(v0.getXF() == 1.0f);
-    Assert.assertTrue(v0.getYF() == 1.0f);
+    Assert.assertEquals(0.0, (double) out.getXF(), 0.0);
+    Assert.assertEquals(0.0, (double) out.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getYF(), 0.0);
 
-    final VectorM2F ov0 = VectorM2F.scale(v0, 2.0f, out);
+    final T ov0 = VectorM2F.scale(v0, 2.0, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXF() == 2.0f);
-    Assert.assertTrue(out.getYF() == 2.0f);
-    Assert.assertTrue(v0.getXF() == 1.0f);
-    Assert.assertTrue(v0.getYF() == 1.0f);
+    Assert.assertEquals(ov0, out); Assert.assertSame(ov0, out);;
+    Assert.assertEquals(2.0, (double) out.getXF(), 0.0);
+    Assert.assertEquals(2.0, (double) out.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getYF(), 0.0);
 
-    final VectorM2F ov1 = VectorM2F.scaleInPlace(v0, 2.0f);
+    final T ov1 = VectorM2F.scaleInPlace(v0, 2.0);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXF() == 2.0f);
-    Assert.assertTrue(ov1.getYF() == 2.0f);
-    Assert.assertTrue(v0.getXF() == 2.0f);
-    Assert.assertTrue(v0.getYF() == 2.0f);
+    Assert.assertEquals(v0, ov1); Assert.assertSame(v0, ov1);;
+    Assert.assertEquals(2.0, (double) ov1.getXF(), 0.0);
+    Assert.assertEquals(2.0, (double) ov1.getYF(), 0.0);
+    Assert.assertEquals(2.0, (double) v0.getXF(), 0.0);
+    Assert.assertEquals(2.0, (double) v0.getYF(), 0.0);
   }
 
-  @Override @Test public void testScaleOne()
+   @Test public final void testScaleOne()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (Math.random() * Float.MAX_VALUE);
-      final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v = this.newVectorM2F(x, y);
+      final float x = VectorM2FContract.getRandomLargePositive();
+      final float y = VectorM2FContract.getRandomLargePositive();
+      final T v = this.newVectorM2F(x, y);
 
-      final VectorM2F vr = this.newVectorM2F();
+      final T vr = this.newVectorM2F();
 
-      VectorM2F.scale(v, 1.0f, vr);
+      VectorM2F.scale(v, 1.0, vr);
 
       Assert.assertTrue(
         AlmostEqualFloat.almostEqual(
@@ -989,7 +1021,7 @@ public abstract class VectorM2FContract extends VectorM2Contract
         final float orig_x = v.getXF();
         final float orig_y = v.getYF();
 
-        VectorM2F.scaleInPlace(v, 1.0f);
+        VectorM2F.scaleInPlace(v, 1.0);
 
         Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.getXF(), orig_x));
         Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.getYF(), orig_y));
@@ -997,19 +1029,19 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testScaleZero()
+   @Test public final void testScaleZero()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (Math.random() * Float.MAX_VALUE);
-      final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v = this.newVectorM2F(x, y);
+      final float x = VectorM2FContract.getRandomLargePositive();
+      final float y = VectorM2FContract.getRandomLargePositive();
+      final T v = this.newVectorM2F(x, y);
 
-      final VectorM2F vr = this.newVectorM2F();
+      final T vr = this.newVectorM2F();
 
-      VectorM2F.scale(v, 0.0f, vr);
+      VectorM2F.scale(v, 0.0, vr);
 
       final ContextRelative context = new ContextRelative();
       Assert.assertTrue(
@@ -1020,7 +1052,7 @@ public abstract class VectorM2FContract extends VectorM2Contract
           context, vr.getYF(), 0.0f));
 
       {
-        VectorM2F.scaleInPlace(v, 0.0f);
+        VectorM2F.scaleInPlace(v, 0.0);
 
         Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.getXF(), 0.0f));
         Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.getYF(), 0.0f));
@@ -1028,27 +1060,27 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testString()
+   @Test public final void testString()
   {
-    final VectorM2F v = this.newVectorM2F(0.0f, 1.0f);
-    Assert.assertTrue(v.toString().equals("[VectorM2F 0.0 1.0]"));
+    final T v = this.newVectorM2F(0.0f, 1.0f);
+    Assert.assertTrue(v.toString().endsWith("0.0 1.0]"));
   }
 
-  @Override @Test public void testSubtract()
+   @Test public final void testSubtract()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v0 = this.newVectorM2F(x0, y0);
+      final float x0 = VectorM2FContract.getRandomLargePositive();
+      final float y0 = VectorM2FContract.getRandomLargePositive();
+      final T v0 = this.newVectorM2F(x0, y0);
 
-      final float x1 = (float) (Math.random() * Float.MAX_VALUE);
-      final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorM2F v1 = this.newVectorM2F(x1, y1);
+      final float x1 = VectorM2FContract.getRandomLargePositive();
+      final float y1 = VectorM2FContract.getRandomLargePositive();
+      final T v1 = this.newVectorM2F(x1, y1);
 
-      final VectorM2F vr0 = this.newVectorM2F();
+      final T vr0 = this.newVectorM2F();
       VectorM2F.subtract(v0, v1, vr0);
 
       Assert.assertTrue(
@@ -1073,43 +1105,37 @@ public abstract class VectorM2FContract extends VectorM2Contract
     }
   }
 
-  @Override @Test public void testSubtractMutation()
+   @Test public final void testSubtractMutation()
   {
-    final VectorM2F out = this.newVectorM2F();
-    final VectorM2F v0 = this.newVectorM2F(1.0f, 1.0f);
-    final VectorM2F v1 = this.newVectorM2F(1.0f, 1.0f);
+    final T out = this.newVectorM2F();
+    final T v0 = this.newVectorM2F(1.0f, 1.0f);
+    final T v1 = this.newVectorM2F(1.0f, 1.0f);
 
-    Assert.assertTrue(out.getXF() == 0.0f);
-    Assert.assertTrue(out.getYF() == 0.0f);
-    Assert.assertTrue(v0.getXF() == 1.0f);
-    Assert.assertTrue(v0.getYF() == 1.0f);
-    Assert.assertTrue(v1.getXF() == 1.0f);
-    Assert.assertTrue(v1.getYF() == 1.0f);
+    Assert.assertEquals(0.0, (double) out.getXF(), 0.0);
+    Assert.assertEquals(0.0, (double) out.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getYF(), 0.0);
 
-    final VectorM2F ov0 = VectorM2F.subtract(v0, v1, out);
+    final T ov0 = VectorM2F.subtract(v0, v1, out);
 
-    Assert.assertTrue(out == ov0);
-    Assert.assertTrue(out.getXF() == 0.0f);
-    Assert.assertTrue(out.getYF() == 0.0f);
-    Assert.assertTrue(v0.getXF() == 1.0f);
-    Assert.assertTrue(v0.getYF() == 1.0f);
-    Assert.assertTrue(v1.getXF() == 1.0f);
-    Assert.assertTrue(v1.getYF() == 1.0f);
+    Assert.assertEquals(ov0, out); Assert.assertSame(ov0, out);;
+    Assert.assertEquals(0.0, (double) out.getXF(), 0.0);
+    Assert.assertEquals(0.0, (double) out.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v0.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getYF(), 0.0);
 
-    final VectorM2F ov1 = VectorM2F.subtractInPlace(v0, v1);
+    final T ov1 = VectorM2F.subtractInPlace(v0, v1);
 
-    Assert.assertTrue(ov1 == v0);
-    Assert.assertTrue(ov1.getXF() == 0.0f);
-    Assert.assertTrue(ov1.getYF() == 0.0f);
-    Assert.assertTrue(v0.getXF() == 0.0f);
-    Assert.assertTrue(v0.getYF() == 0.0f);
-    Assert.assertTrue(v1.getXF() == 1.0f);
-    Assert.assertTrue(v1.getYF() == 1.0f);
+    Assert.assertEquals(v0, ov1); Assert.assertSame(v0, ov1);;
+    Assert.assertEquals(0.0, (double) ov1.getXF(), 0.0);
+    Assert.assertEquals(0.0, (double) ov1.getYF(), 0.0);
+    Assert.assertEquals(0.0, (double) v0.getXF(), 0.0);
+    Assert.assertEquals(0.0, (double) v0.getYF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getXF(), 0.0);
+    Assert.assertEquals(1.0, (double) v1.getYF(), 0.0);
   }
-
-  protected abstract VectorM2F newVectorM2F();
-
-  protected abstract VectorM2F newVectorM2F(
-    final float x,
-    final float y);
 }
