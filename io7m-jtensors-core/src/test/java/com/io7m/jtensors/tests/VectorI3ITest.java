@@ -16,11 +16,10 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.VectorI3I;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class VectorI3ITest extends VectorI3Contract
 {

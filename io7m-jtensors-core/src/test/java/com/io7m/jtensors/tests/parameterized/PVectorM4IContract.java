@@ -40,6 +40,11 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
     return (int) (PVectorM4IContract.getRandom() * (double) (1 << 14));
   }
 
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
+
   protected abstract V newVectorM4I(
     final int x,
     final int y,
@@ -53,10 +58,14 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testAbsolute()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
-      final int y = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
-      final int z = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
-      final int w = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int x =
+        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int y =
+        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int z =
+        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int w =
+        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
       final V v = this.newVectorM4I(x, y, z, w);
 
       final V vr = this.newVectorM4I();
@@ -72,10 +81,14 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testAbsoluteMutation()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
-      final int y = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
-      final int z = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
-      final int w = (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int x =
+        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int y =
+        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int z =
+        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int w =
+        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
       final V v = this.newVectorM4I(x, y, z, w);
 
       PVectorM4I.absoluteInPlace(v);
@@ -198,17 +211,13 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
       PVectorM4I.addScaled(v0, v1, (double) r, vr0);
 
       Assert.assertEquals(
-        (long) (v0.getXI() + (v1.getXI() * r)),
-        (long) vr0.getXI());
+        (long) (v0.getXI() + (v1.getXI() * r)), (long) vr0.getXI());
       Assert.assertEquals(
-        (long) (v0.getYI() + (v1.getYI() * r)),
-        (long) vr0.getYI());
+        (long) (v0.getYI() + (v1.getYI() * r)), (long) vr0.getYI());
       Assert.assertEquals(
-        (long) (v0.getZI() + (v1.getZI() * r)),
-        (long) vr0.getZI());
+        (long) (v0.getZI() + (v1.getZI() * r)), (long) vr0.getZI());
       Assert.assertEquals(
-        (long) (v0.getWI() + (v1.getWI() * r)),
-        (long) vr0.getWI());
+        (long) (v0.getWI() + (v1.getWI() * r)), (long) vr0.getWI());
 
       {
         final int orig_x = v0.getXI();
@@ -218,17 +227,13 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
         PVectorM4I.addScaledInPlace(v0, v1, (double) r);
 
         Assert.assertEquals(
-          (long) (orig_x + (v1.getXI() * r)),
-          (long) v0.getXI());
+          (long) (orig_x + (v1.getXI() * r)), (long) v0.getXI());
         Assert.assertEquals(
-          (long) (orig_y + (v1.getYI() * r)),
-          (long) v0.getYI());
+          (long) (orig_y + (v1.getYI() * r)), (long) v0.getYI());
         Assert.assertEquals(
-          (long) (orig_z + (v1.getZI() * r)),
-          (long) v0.getZI());
+          (long) (orig_z + (v1.getZI() * r)), (long) v0.getZI());
         Assert.assertEquals(
-          (long) (orig_w + (v1.getWI() * r)),
-          (long) v0.getWI());
+          (long) (orig_w + (v1.getWI() * r)), (long) v0.getWI());
       }
     }
   }
@@ -510,11 +515,6 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
     Assert.assertEquals((long) v0.getYI(), (long) v2.getYI());
     Assert.assertEquals(0L, (long) v2.getZI());
     Assert.assertEquals(1L, (long) v2.getWI());
-  }
-
-  protected static double getRandom()
-  {
-    return Math.random();
   }
 
   @Test public final void testCopy3Correct()

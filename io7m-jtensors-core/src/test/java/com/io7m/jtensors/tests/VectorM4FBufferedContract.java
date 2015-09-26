@@ -18,7 +18,6 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jtensors.Vector4FType;
 import com.io7m.jtensors.VectorI4F;
-import com.io7m.jtensors.tests.VectorM4FContract;
 import org.junit.Assert;
 import org.junit.Test;
 

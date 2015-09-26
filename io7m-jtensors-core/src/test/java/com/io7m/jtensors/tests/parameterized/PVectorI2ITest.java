@@ -16,23 +16,15 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.parameterized.PVectorI2I;
 import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Assert;
+import org.junit.Test;
 
-@SuppressWarnings("static-method") public class PVectorI2ITest<T> extends
-  PVectorI2Contract
+@SuppressWarnings("static-method") public class PVectorI2ITest<T>
+  extends PVectorI2Contract
 {
-  @Test public void testZero()
-  {
-    final PVectorI2I<Object> z = PVectorI2I.zero();
-    Assert.assertEquals(0, z.getXI());
-    Assert.assertEquals(0, z.getYI());
-  }
-
   public static int randomNegativeNumber()
   {
     return (int) (Math.random() * Integer.MIN_VALUE);
@@ -46,6 +38,13 @@ import com.io7m.jtensors.tests.TestUtilities;
   public static int randomPositiveSmallNumber()
   {
     return (int) (Math.random() * (1 << 14));
+  }
+
+  @Test public void testZero()
+  {
+    final PVectorI2I<Object> z = PVectorI2I.zero();
+    Assert.assertEquals(0, z.getXI());
+    Assert.assertEquals(0, z.getYI());
   }
 
   @Override @Test public void testAbsolute()
@@ -138,10 +137,9 @@ import com.io7m.jtensors.tests.TestUtilities;
       System.out.println("v1    : " + v1);
       System.out.println("angle : " + angle);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        angle,
-        Math.toRadians(90)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, angle, Math.toRadians(90)));
     }
 
     {
@@ -155,10 +153,9 @@ import com.io7m.jtensors.tests.TestUtilities;
       System.out.println("v1    : " + v1);
       System.out.println("angle : " + angle);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        angle,
-        Math.toRadians(90)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, angle, Math.toRadians(90)));
     }
   }
 

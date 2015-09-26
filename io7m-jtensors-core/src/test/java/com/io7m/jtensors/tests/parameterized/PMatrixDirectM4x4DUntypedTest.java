@@ -37,7 +37,8 @@ public final class PMatrixDirectM4x4DUntypedTest<T0, T1>
   }
 
   @Override
-  protected void checkDirectBufferInvariants(final PMatrixDirect4x4DType<T0, T1> m)
+  protected void checkDirectBufferInvariants(final PMatrixDirect4x4DType<T0,
+    T1> m)
   {
     Assert.assertEquals(0L, (long) m.getDirectDoubleBuffer().position());
   }

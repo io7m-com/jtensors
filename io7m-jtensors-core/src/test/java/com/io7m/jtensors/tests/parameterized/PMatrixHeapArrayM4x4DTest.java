@@ -62,9 +62,8 @@ public final class PMatrixHeapArrayM4x4DTest<T0, T1, T2>
     return PMatrixHeapArrayM4x4D.newMatrixFrom(m);
   }
 
-  @Override
-  protected void checkDirectBufferInvariantsGeneric(final PMatrix4x4DType<T0,
-    T1> m)
+  @Override protected void checkDirectBufferInvariantsGeneric(
+    final PMatrix4x4DType<T0, T1> m)
   {
     // Nothing
   }

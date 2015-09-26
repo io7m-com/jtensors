@@ -158,7 +158,6 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     MatrixM2x2D.addRowScaledInPlace(c, m, 0, 0, -1, 1.0);
   }
 
-
   @Test public final void testCopy()
   {
     final T m0 = this.newMatrix();
@@ -856,10 +855,6 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
 
     this.checkDirectBufferInvariants(m);
   }
-
-
-
-
 
   @Test public final void testTrace()
   {

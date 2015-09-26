@@ -38,7 +38,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
   private static final VectorReadable3DType AXIS_Z = new VectorI3D(
     0.0, 0.0, 1.0);
 
-  private  void isRotationMatrixX(
+  private void isRotationMatrixX(
     final AlmostEqualDouble.ContextRelative context,
     final T r)
   {
@@ -69,7 +69,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     Assert.assertTrue(eq);
   }
 
-  private  void isRotationMatrixY(
+  private void isRotationMatrixY(
     final AlmostEqualDouble.ContextRelative context,
     final T r)
   {
@@ -100,7 +100,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     Assert.assertTrue(eq);
   }
 
-  private  void isRotationMatrixZ(
+  private void isRotationMatrixZ(
     final AlmostEqualDouble.ContextRelative context_d,
     final T r)
   {
@@ -1631,7 +1631,10 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
 
     {
       final T r = this.newMatrix();
-      MatrixM3x3D.makeRotation(Math.toRadians(45.0), Matrix3x3DContract.AXIS_X, r);
+      MatrixM3x3D.makeRotation(
+        Math.toRadians(45.0),
+        Matrix3x3DContract.AXIS_X,
+        r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
@@ -1650,7 +1653,10 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
 
     {
       final T r = this.newMatrix();
-      MatrixM3x3D.makeRotation(Math.toRadians(45.0), Matrix3x3DContract.AXIS_Y, r);
+      MatrixM3x3D.makeRotation(
+        Math.toRadians(45.0),
+        Matrix3x3DContract.AXIS_Y,
+        r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 
@@ -1669,7 +1675,10 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
 
     {
       final T r = this.newMatrix();
-      MatrixM3x3D.makeRotation(Math.toRadians(45.0), Matrix3x3DContract.AXIS_Z, r);
+      MatrixM3x3D.makeRotation(
+        Math.toRadians(45.0),
+        Matrix3x3DContract.AXIS_Z,
+        r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3D.determinant(r), 0.0);
 

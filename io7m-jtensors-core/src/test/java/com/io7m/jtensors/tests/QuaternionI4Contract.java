@@ -106,12 +106,8 @@ public abstract class QuaternionI4Contract
   public abstract void testInitializeReadable();
 
   /**
-   * <p>
-   * <code>∀q r s. interpolateLinear(q, r, 1.0) = r</code>
-   * </p>
-   * <p>
-   * <code>∀q r s. interpolateLinear(q, r, 0.0) = q</code>
-   * </p>
+   * <p> <code>∀q r s. interpolateLinear(q, r, 1.0) = r</code> </p> <p> <code>∀q
+   * r s. interpolateLinear(q, r, 0.0) = q</code> </p>
    */
 
   public abstract void testInterpolateLinearLimits();
@@ -144,25 +140,19 @@ public abstract class QuaternionI4Contract
   public abstract void testMagnitudeNonzero();
 
   /**
-   * <p>
-   * <code>∀q. magnitude(normalize(q)) = 1</code>
-   * </p>
+   * <p> <code>∀q. magnitude(normalize(q)) = 1</code> </p>
    */
 
   public abstract void testMagnitudeNormal();
 
   /**
-   * <p>
-   * <code>magnitude(normalize((0,0,0,0)) = 0</code>
-   * </p>
+   * <p> <code>magnitude(normalize((0,0,0,0)) = 0</code> </p>
    */
 
   public abstract void testMagnitudeNormalizeZero();
 
   /**
-   * <p>
-   * <code>magnitude((1,0,0,0)) = 1</code>
-   * </p>
+   * <p> <code>magnitude((1,0,0,0)) = 1</code> </p>
    */
 
   public abstract void testMagnitudeOne();
@@ -174,17 +164,13 @@ public abstract class QuaternionI4Contract
   public abstract void testMagnitudeSimple();
 
   /**
-   * <p>
-   * <code>magnitude((0,0,0,0)) = 0</code>
-   * </p>
+   * <p> <code>magnitude((0,0,0,0)) = 0</code> </p>
    */
 
   public abstract void testMagnitudeZero();
 
   /**
-   * <p>
-   * <code>∀a r. magnitude(makeFromAxisAngle(a, r)) = 1</code>
-   * </p>
+   * <p> <code>∀a r. magnitude(makeFromAxisAngle(a, r)) = 1</code> </p>
    */
 
   public abstract void testMakeAxisAngleNormal();
@@ -260,9 +246,7 @@ public abstract class QuaternionI4Contract
   public abstract void testMultiply();
 
   /**
-   * <p>
-   * <code>∀q. isNegationOf(q, negate(q))</code>
-   * </p>
+   * <p> <code>∀q. isNegationOf(q, negate(q))</code> </p>
    */
 
   public abstract void testNegation();
@@ -278,17 +262,13 @@ public abstract class QuaternionI4Contract
   public abstract void testNormalizeZero();
 
   /**
-   * <p>
-   * <code>∀q. scale(q, 1) = q</code>
-   * </p>
+   * <p> <code>∀q. scale(q, 1) = q</code> </p>
    */
 
   public abstract void testScaleOne();
 
   /**
-   * <p>
-   * <code>∀q. scale(q, 0) = (0,0,0,0)</code>
-   * </p>
+   * <p> <code>∀q. scale(q, 0) = (0,0,0,0)</code> </p>
    */
 
   public abstract void testScaleZero();

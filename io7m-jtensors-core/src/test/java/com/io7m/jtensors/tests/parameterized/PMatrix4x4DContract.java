@@ -60,7 +60,8 @@ public abstract class PMatrix4x4DContract<T0, T1, T2,
 
   protected abstract TINVERSE newMatrixInverse();
 
-  @Override protected abstract T newMatrixFrom(PMatrixReadable4x4DType<T0, T1> m);
+  @Override
+  protected abstract T newMatrixFrom(PMatrixReadable4x4DType<T0, T1> m);
 
   protected abstract void checkDirectBufferInvariantsUntyped(
     final PMatrix4x4DType<?, ?> m);

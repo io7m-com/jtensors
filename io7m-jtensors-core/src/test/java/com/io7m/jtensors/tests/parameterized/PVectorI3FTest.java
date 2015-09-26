@@ -16,18 +16,17 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.parameterized.PVectorI3F;
 import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Assert;
+import org.junit.Test;
 
-@SuppressWarnings("static-method") public class PVectorI3FTest<T> extends
-  PVectorI3Contract
+@SuppressWarnings("static-method") public class PVectorI3FTest<T>
+  extends PVectorI3Contract
 {
   @Test public void testZero()
   {
@@ -50,18 +49,15 @@ import com.io7m.jtensors.tests.TestUtilities;
 
       final PVectorI3F<T> vr = PVectorI3F.absolute(v);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        Math.abs(v.getXF()),
-        vr.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        Math.abs(v.getYF()),
-        vr.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        Math.abs(v.getZF()),
-        vr.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, Math.abs(v.getXF()), vr.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, Math.abs(v.getYF()), vr.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, Math.abs(v.getZF()), vr.getZF()));
     }
   }
 
@@ -81,18 +77,15 @@ import com.io7m.jtensors.tests.TestUtilities;
       final PVectorI3F<T> vr = PVectorI3F.add(v0, v1);
 
       final ContextRelative context = new AlmostEqualFloat.ContextRelative();
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getXF(),
-        v0.getXF() + v1.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getYF(),
-        v0.getYF() + v1.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getZF(),
-        v0.getZF() + v1.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getXF(), v0.getXF() + v1.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getYF(), v0.getYF() + v1.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getZF(), v0.getZF() + v1.getZF()));
     }
   }
 
@@ -113,18 +106,15 @@ import com.io7m.jtensors.tests.TestUtilities;
       final PVectorI3F<T> vr = PVectorI3F.addScaled(v0, v1, r);
 
       final ContextRelative context = new AlmostEqualFloat.ContextRelative();
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getXF(),
-        v0.getXF() + (v1.getXF() * r)));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getYF(),
-        v0.getYF() + (v1.getYF() * r)));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getZF(),
-        v0.getZF() + (v1.getZF() * r)));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getXF(), v0.getXF() + (v1.getXF() * r)));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getYF(), v0.getYF() + (v1.getYF() * r)));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getZF(), v0.getZF() + (v1.getZF() * r)));
     }
   }
 
@@ -247,15 +237,15 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
 
-      Assert
-        .assertTrue(PVectorI3F.clampMaximumByPVector(v, maximum).getXF() <= maximum
-          .getXF());
-      Assert
-        .assertTrue(PVectorI3F.clampMaximumByPVector(v, maximum).getYF() <= maximum
-          .getYF());
-      Assert
-        .assertTrue(PVectorI3F.clampMaximumByPVector(v, maximum).getZF() <= maximum
-          .getZF());
+      Assert.assertTrue(
+        PVectorI3F.clampMaximumByPVector(v, maximum).getXF()
+        <= maximum.getXF());
+      Assert.assertTrue(
+        PVectorI3F.clampMaximumByPVector(v, maximum).getYF()
+        <= maximum.getYF());
+      Assert.assertTrue(
+        PVectorI3F.clampMaximumByPVector(v, maximum).getZF()
+        <= maximum.getZF());
     }
   }
 
@@ -272,15 +262,15 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
 
-      Assert
-        .assertTrue(PVectorI3F.clampMinimumByPVector(v, minimum).getXF() >= minimum
-          .getXF());
-      Assert
-        .assertTrue(PVectorI3F.clampMinimumByPVector(v, minimum).getYF() >= minimum
-          .getYF());
-      Assert
-        .assertTrue(PVectorI3F.clampMinimumByPVector(v, minimum).getZF() >= minimum
-          .getZF());
+      Assert.assertTrue(
+        PVectorI3F.clampMinimumByPVector(v, minimum).getXF()
+        >= minimum.getXF());
+      Assert.assertTrue(
+        PVectorI3F.clampMinimumByPVector(v, minimum).getYF()
+        >= minimum.getYF());
+      Assert.assertTrue(
+        PVectorI3F.clampMinimumByPVector(v, minimum).getZF()
+        >= minimum.getZF());
     }
   }
 
@@ -302,24 +292,24 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float z = (float) (Math.random() * Float.MAX_VALUE);
       final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
 
-      Assert.assertTrue(PVectorI3F
-        .clampByPVector(v, minimum, maximum)
-        .getXF() <= maximum.getXF());
-      Assert.assertTrue(PVectorI3F
-        .clampByPVector(v, minimum, maximum)
-        .getXF() >= minimum.getXF());
-      Assert.assertTrue(PVectorI3F
-        .clampByPVector(v, minimum, maximum)
-        .getYF() <= maximum.getYF());
-      Assert.assertTrue(PVectorI3F
-        .clampByPVector(v, minimum, maximum)
-        .getYF() >= minimum.getYF());
-      Assert.assertTrue(PVectorI3F
-        .clampByPVector(v, minimum, maximum)
-        .getZF() <= maximum.getZF());
-      Assert.assertTrue(PVectorI3F
-        .clampByPVector(v, minimum, maximum)
-        .getZF() >= minimum.getZF());
+      Assert.assertTrue(
+        PVectorI3F.clampByPVector(v, minimum, maximum).getXF()
+        <= maximum.getXF());
+      Assert.assertTrue(
+        PVectorI3F.clampByPVector(v, minimum, maximum).getXF()
+        >= minimum.getXF());
+      Assert.assertTrue(
+        PVectorI3F.clampByPVector(v, minimum, maximum).getYF()
+        <= maximum.getYF());
+      Assert.assertTrue(
+        PVectorI3F.clampByPVector(v, minimum, maximum).getYF()
+        >= minimum.getYF());
+      Assert.assertTrue(
+        PVectorI3F.clampByPVector(v, minimum, maximum).getZF()
+        <= maximum.getZF());
+      Assert.assertTrue(
+        PVectorI3F.clampByPVector(v, minimum, maximum).getZF()
+        >= minimum.getZF());
     }
   }
 
@@ -333,12 +323,9 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float z = (float) (Math.random() * Float.MAX_VALUE);
       final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
 
-      Assert
-        .assertTrue(PVectorI3F.clampMaximum(v, maximum).getXF() <= maximum);
-      Assert
-        .assertTrue(PVectorI3F.clampMaximum(v, maximum).getYF() <= maximum);
-      Assert
-        .assertTrue(PVectorI3F.clampMaximum(v, maximum).getZF() <= maximum);
+      Assert.assertTrue(PVectorI3F.clampMaximum(v, maximum).getXF() <= maximum);
+      Assert.assertTrue(PVectorI3F.clampMaximum(v, maximum).getYF() <= maximum);
+      Assert.assertTrue(PVectorI3F.clampMaximum(v, maximum).getZF() <= maximum);
     }
   }
 
@@ -352,12 +339,9 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
 
-      Assert
-        .assertTrue(PVectorI3F.clampMinimum(v, minimum).getXF() >= minimum);
-      Assert
-        .assertTrue(PVectorI3F.clampMinimum(v, minimum).getYF() >= minimum);
-      Assert
-        .assertTrue(PVectorI3F.clampMinimum(v, minimum).getZF() >= minimum);
+      Assert.assertTrue(PVectorI3F.clampMinimum(v, minimum).getXF() >= minimum);
+      Assert.assertTrue(PVectorI3F.clampMinimum(v, minimum).getYF() >= minimum);
+      Assert.assertTrue(PVectorI3F.clampMinimum(v, minimum).getZF() >= minimum);
     }
   }
 
@@ -372,18 +356,24 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
 
-      Assert
-        .assertTrue(PVectorI3F.clamp(v, minimum, maximum).getXF() <= maximum);
-      Assert
-        .assertTrue(PVectorI3F.clamp(v, minimum, maximum).getXF() >= minimum);
-      Assert
-        .assertTrue(PVectorI3F.clamp(v, minimum, maximum).getYF() <= maximum);
-      Assert
-        .assertTrue(PVectorI3F.clamp(v, minimum, maximum).getYF() >= minimum);
-      Assert
-        .assertTrue(PVectorI3F.clamp(v, minimum, maximum).getZF() <= maximum);
-      Assert
-        .assertTrue(PVectorI3F.clamp(v, minimum, maximum).getZF() >= minimum);
+      Assert.assertTrue(
+        PVectorI3F.clamp(v, minimum, maximum).getXF()
+        <= maximum);
+      Assert.assertTrue(
+        PVectorI3F.clamp(v, minimum, maximum).getXF()
+        >= minimum);
+      Assert.assertTrue(
+        PVectorI3F.clamp(v, minimum, maximum).getYF()
+        <= maximum);
+      Assert.assertTrue(
+        PVectorI3F.clamp(v, minimum, maximum).getYF()
+        >= minimum);
+      Assert.assertTrue(
+        PVectorI3F.clamp(v, minimum, maximum).getZF()
+        <= maximum);
+      Assert.assertTrue(
+        PVectorI3F.clamp(v, minimum, maximum).getZF()
+        >= minimum);
     }
   }
 
@@ -455,10 +445,9 @@ import com.io7m.jtensors.tests.TestUtilities;
     final PVectorI3F<T> v1 = new PVectorI3F<T>(0.0f, 0.0f, 0.0f);
 
     final ContextRelative context = new AlmostEqualFloat.ContextRelative();
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(
-      context,
-      PVectorI3F.distance(v0, v1),
-      1.0f));
+    Assert.assertTrue(
+      AlmostEqualFloat.almostEqual(
+        context, PVectorI3F.distance(v0, v1), 1.0f));
   }
 
   @Override @Test public void testDistanceOrdering()
@@ -725,14 +714,12 @@ import com.io7m.jtensors.tests.TestUtilities;
       final float z1 = (float) (Math.random() * Float.MAX_VALUE);
       final PVectorI3F<T> v1 = new PVectorI3F<T>(x1, y1, z1);
 
-      Assert.assertTrue(PVectorI3F.almostEqual(
-        ec,
-        PVectorI3F.interpolateLinear(v0, v1, 0.0f),
-        v0));
-      Assert.assertTrue(PVectorI3F.almostEqual(
-        ec,
-        PVectorI3F.interpolateLinear(v0, v1, 1.0f),
-        v1));
+      Assert.assertTrue(
+        PVectorI3F.almostEqual(
+          ec, PVectorI3F.interpolateLinear(v0, v1, 0.0f), v0));
+      Assert.assertTrue(
+        PVectorI3F.almostEqual(
+          ec, PVectorI3F.interpolateLinear(v0, v1, 1.0f), v1));
     }
   }
 
@@ -877,18 +864,15 @@ import com.io7m.jtensors.tests.TestUtilities;
 
       final PVectorI3F<T> vr = PVectorI3F.scale(v, 1.0f);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        v.getXF(),
-        vr.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        v.getYF(),
-        vr.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        ec,
-        v.getZF(),
-        vr.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, v.getXF(), vr.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, v.getYF(), vr.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          ec, v.getZF(), vr.getZF()));
     }
   }
 
@@ -933,18 +917,15 @@ import com.io7m.jtensors.tests.TestUtilities;
       final PVectorI3F<T> vr = PVectorI3F.subtract(v0, v1);
 
       final ContextRelative context = new AlmostEqualFloat.ContextRelative();
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getXF(),
-        v0.getXF() - v1.getXF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getYF(),
-        v0.getYF() - v1.getYF()));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(
-        context,
-        vr.getZF(),
-        v0.getZF() - v1.getZF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getXF(), v0.getXF() - v1.getXF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getYF(), v0.getYF() - v1.getYF()));
+      Assert.assertTrue(
+        AlmostEqualFloat.almostEqual(
+          context, vr.getZF(), v0.getZF() - v1.getZF()));
     }
   }
 }

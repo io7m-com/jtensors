@@ -16,25 +16,15 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.parameterized.PVectorI4I;
 import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Assert;
+import org.junit.Test;
 
-@SuppressWarnings("static-method") public class PVectorI4ITest<T> extends
-  PVectorI4Contract
+@SuppressWarnings("static-method") public class PVectorI4ITest<T>
+  extends PVectorI4Contract
 {
-  @Test public void testZero()
-  {
-    final PVectorI4I<Object> z = PVectorI4I.zero();
-    Assert.assertEquals(0, z.getXI());
-    Assert.assertEquals(0, z.getYI());
-    Assert.assertEquals(0, z.getZI());
-    Assert.assertEquals(0, z.getWI());
-  }
-
   public static int randomNegativeNumber()
   {
     return (int) (Math.random() * Integer.MIN_VALUE);
@@ -48,6 +38,15 @@ import com.io7m.jtensors.tests.TestUtilities;
   public static int randomPositiveSmallNumber()
   {
     return (int) (Math.random() * (1 << 14));
+  }
+
+  @Test public void testZero()
+  {
+    final PVectorI4I<Object> z = PVectorI4I.zero();
+    Assert.assertEquals(0, z.getXI());
+    Assert.assertEquals(0, z.getYI());
+    Assert.assertEquals(0, z.getZI());
+    Assert.assertEquals(0, z.getWI());
   }
 
   @Override @Test public void testAbsolute()
@@ -314,8 +313,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testDefault0001()
   {
-    Assert.assertTrue(new PVectorI4I<T>()
-      .equals(new PVectorI4I<T>(0, 0, 0, 1)));
+    Assert.assertTrue(
+      new PVectorI4I<T>().equals(new PVectorI4I<T>(0, 0, 0, 1)));
   }
 
   @Override @Test public void testDistance()

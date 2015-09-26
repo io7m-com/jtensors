@@ -16,13 +16,6 @@
 
 package com.io7m.jtensors.tests;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
-import org.junit.Test;
-
 import com.io7m.jtensors.MatrixM2x2D;
 import com.io7m.jtensors.MatrixM2x2F;
 import com.io7m.jtensors.MatrixM3x3D;
@@ -51,6 +44,12 @@ import com.io7m.jtensors.VectorM3I;
 import com.io7m.jtensors.VectorM4D;
 import com.io7m.jtensors.VectorM4F;
 import com.io7m.jtensors.VectorM4I;
+import org.junit.Test;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 public final class APICompleteness
 {
@@ -74,11 +73,8 @@ public final class APICompleteness
       }
 
       if (methods.containsKey(m_name) == false) {
-        System.out.println(c_name
-          + ": "
-          + m_name
-          + " not present from "
-          + c_base.getName());
+        System.out.println(
+          c_name + ": " + m_name + " not present from " + c_base.getName());
       }
     }
 
@@ -93,7 +89,8 @@ public final class APICompleteness
         continue;
       }
 
-      System.out.println(c_name
+      System.out.println(
+        c_name
         + ": extra method "
         + m_name
         + " not in base "
@@ -138,13 +135,12 @@ public final class APICompleteness
 
   private static void checkVector2()
   {
-    final Class<?> classes[] =
-      {
-        VectorM2F.class,
-        VectorM2I.class,
-        VectorI2D.class,
-        VectorI2F.class,
-        VectorI2I.class };
+    final Class<?> classes[] = {
+      VectorM2F.class,
+      VectorM2I.class,
+      VectorI2D.class,
+      VectorI2F.class,
+      VectorI2I.class };
     for (final Class<?> c : classes) {
       APICompleteness.checkAgainst(VectorM2D.class, c);
     }
@@ -153,13 +149,12 @@ public final class APICompleteness
   private static void checkVector3()
   {
     {
-      final Class<?> classes[] =
-        {
-          VectorM3F.class,
-          VectorM3I.class,
-          VectorI3D.class,
-          VectorI3F.class,
-          VectorI3I.class };
+      final Class<?> classes[] = {
+        VectorM3F.class,
+        VectorM3I.class,
+        VectorI3D.class,
+        VectorI3F.class,
+        VectorI3I.class };
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(VectorM3D.class, c);
       }
@@ -176,13 +171,12 @@ public final class APICompleteness
   private static void checkVector4()
   {
     {
-      final Class<?> classes[] =
-        {
-          VectorM4F.class,
-          VectorM4I.class,
-          VectorI4D.class,
-          VectorI4F.class,
-          VectorI4I.class };
+      final Class<?> classes[] = {
+        VectorM4F.class,
+        VectorM4I.class,
+        VectorI4D.class,
+        VectorI4F.class,
+        VectorI4I.class };
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(VectorM4D.class, c);
       }
@@ -227,9 +221,8 @@ public final class APICompleteness
     return methods;
   }
 
-  @SuppressWarnings("static-method") @Test public
-    void
-    testQuaternionCompleteness()
+  @SuppressWarnings("static-method") @Test
+  public void testQuaternionCompleteness()
   {
     APICompleteness.checkQuaternionM4();
     APICompleteness.checkMatrix4();

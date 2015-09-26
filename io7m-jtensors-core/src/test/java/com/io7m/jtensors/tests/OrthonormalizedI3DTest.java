@@ -16,18 +16,15 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.OrthonormalizedI3D;
 import com.io7m.jtensors.VectorI3D;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class OrthonormalizedI3DTest
 {
-  @SuppressWarnings("static-method") @Test public
-    void
-    testAlreadyOrthonormal0()
+  @SuppressWarnings("static-method") @Test public void testAlreadyOrthonormal0()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();

@@ -63,8 +63,10 @@ public abstract class VectorM3IContract<T extends Vector3IType>
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x =
         (int) (VectorM3IContract.getRandom() * (double) Integer.MIN_VALUE);
-      final int y = (int) (VectorM3IContract.getRandom() * (double) Integer.MIN_VALUE);
-      final int z = (int) (VectorM3IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int y =
+        (int) (VectorM3IContract.getRandom() * (double) Integer.MIN_VALUE);
+      final int z =
+        (int) (VectorM3IContract.getRandom() * (double) Integer.MIN_VALUE);
       final T v = this.newVectorM3I(x, y, z);
 
       final T vr = this.newVectorM3I();

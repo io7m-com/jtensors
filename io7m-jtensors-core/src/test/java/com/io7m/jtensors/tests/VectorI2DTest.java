@@ -16,12 +16,11 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorI2D;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class VectorI2DTest extends VectorI2Contract
 {
@@ -37,14 +36,12 @@ public class VectorI2DTest extends VectorI2Contract
 
       final VectorI2D vr = VectorI2D.absolute(v);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getXD()),
-        vr.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getYD()),
-        vr.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getXD()), vr.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getYD()), vr.getYD()));
     }
   }
 
@@ -65,14 +62,12 @@ public class VectorI2DTest extends VectorI2Contract
 
       final VectorI2D vr = VectorI2D.add(v0, v1);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getXD(),
-        v0.getXD() + v1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getYD(),
-        v0.getYD() + v1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getXD(), v0.getXD() + v1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getYD(), v0.getYD() + v1.getYD()));
     }
   }
 
@@ -94,14 +89,12 @@ public class VectorI2DTest extends VectorI2Contract
       final double r = Math.random() * 100.0;
       final VectorI2D vr = VectorI2D.addScaled(v0, v1, r);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getXD(),
-        v0.getXD() + (v1.getXD() * r)));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getYD(),
-        v0.getYD() + (v1.getYD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getXD(), v0.getXD() + (v1.getXD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getYD(), v0.getYD() + (v1.getYD() * r)));
     }
   }
 
@@ -180,10 +173,9 @@ public class VectorI2DTest extends VectorI2Contract
       System.out.println("v1    : " + v1);
       System.out.println("angle : " + angle);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        angle,
-        Math.toRadians(90)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, angle, Math.toRadians(90)));
     }
 
     {
@@ -197,10 +189,9 @@ public class VectorI2DTest extends VectorI2Contract
       System.out.println("v1    : " + v1);
       System.out.println("angle : " + angle);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        angle,
-        Math.toRadians(90)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, angle, Math.toRadians(90)));
     }
   }
 
@@ -223,12 +214,12 @@ public class VectorI2DTest extends VectorI2Contract
       final double y = Math.random() * Double.MIN_VALUE;
       final VectorI2D v = new VectorI2D(x, y);
 
-      Assert
-        .assertTrue(VectorI2D.clampMaximumByVector(v, maximum).getXD() <= maximum
-          .getXD());
-      Assert
-        .assertTrue(VectorI2D.clampMaximumByVector(v, maximum).getYD() <= maximum
-          .getYD());
+      Assert.assertTrue(
+        VectorI2D.clampMaximumByVector(v, maximum).getXD()
+        <= maximum.getXD());
+      Assert.assertTrue(
+        VectorI2D.clampMaximumByVector(v, maximum).getYD()
+        <= maximum.getYD());
     }
   }
 
@@ -243,12 +234,12 @@ public class VectorI2DTest extends VectorI2Contract
       final double y = Math.random() * Double.MIN_VALUE;
       final VectorI2D v = new VectorI2D(x, y);
 
-      Assert
-        .assertTrue(VectorI2D.clampMinimumByVector(v, minimum).getXD() >= minimum
-          .getXD());
-      Assert
-        .assertTrue(VectorI2D.clampMinimumByVector(v, minimum).getYD() >= minimum
-          .getYD());
+      Assert.assertTrue(
+        VectorI2D.clampMinimumByVector(v, minimum).getXD()
+        >= minimum.getXD());
+      Assert.assertTrue(
+        VectorI2D.clampMinimumByVector(v, minimum).getYD()
+        >= minimum.getYD());
     }
   }
 
@@ -267,18 +258,18 @@ public class VectorI2DTest extends VectorI2Contract
       final double y = Math.random() * Double.MAX_VALUE;
       final VectorI2D v = new VectorI2D(x, y);
 
-      Assert
-        .assertTrue(VectorI2D.clampByVector(v, minimum, maximum).getXD() <= maximum
-          .getXD());
-      Assert
-        .assertTrue(VectorI2D.clampByVector(v, minimum, maximum).getXD() >= minimum
-          .getXD());
-      Assert
-        .assertTrue(VectorI2D.clampByVector(v, minimum, maximum).getYD() <= maximum
-          .getYD());
-      Assert
-        .assertTrue(VectorI2D.clampByVector(v, minimum, maximum).getYD() >= minimum
-          .getYD());
+      Assert.assertTrue(
+        VectorI2D.clampByVector(v, minimum, maximum).getXD()
+        <= maximum.getXD());
+      Assert.assertTrue(
+        VectorI2D.clampByVector(v, minimum, maximum).getXD()
+        >= minimum.getXD());
+      Assert.assertTrue(
+        VectorI2D.clampByVector(v, minimum, maximum).getYD()
+        <= maximum.getYD());
+      Assert.assertTrue(
+        VectorI2D.clampByVector(v, minimum, maximum).getYD()
+        >= minimum.getYD());
     }
   }
 
@@ -291,10 +282,8 @@ public class VectorI2DTest extends VectorI2Contract
       final double y = Math.random() * Double.MAX_VALUE;
       final VectorI2D v = new VectorI2D(x, y);
 
-      Assert
-        .assertTrue(VectorI2D.clampMaximum(v, maximum).getXD() <= maximum);
-      Assert
-        .assertTrue(VectorI2D.clampMaximum(v, maximum).getYD() <= maximum);
+      Assert.assertTrue(VectorI2D.clampMaximum(v, maximum).getXD() <= maximum);
+      Assert.assertTrue(VectorI2D.clampMaximum(v, maximum).getYD() <= maximum);
     }
   }
 
@@ -307,10 +296,8 @@ public class VectorI2DTest extends VectorI2Contract
       final double y = Math.random() * Double.MIN_VALUE;
       final VectorI2D v = new VectorI2D(x, y);
 
-      Assert
-        .assertTrue(VectorI2D.clampMinimum(v, minimum).getXD() >= minimum);
-      Assert
-        .assertTrue(VectorI2D.clampMinimum(v, minimum).getYD() >= minimum);
+      Assert.assertTrue(VectorI2D.clampMinimum(v, minimum).getXD() >= minimum);
+      Assert.assertTrue(VectorI2D.clampMinimum(v, minimum).getYD() >= minimum);
     }
   }
 
@@ -324,14 +311,18 @@ public class VectorI2DTest extends VectorI2Contract
       final double y = Math.random() * Double.MAX_VALUE;
       final VectorI2D v = new VectorI2D(x, y);
 
-      Assert
-        .assertTrue(VectorI2D.clamp(v, minimum, maximum).getXD() <= maximum);
-      Assert
-        .assertTrue(VectorI2D.clamp(v, minimum, maximum).getXD() >= minimum);
-      Assert
-        .assertTrue(VectorI2D.clamp(v, minimum, maximum).getYD() <= maximum);
-      Assert
-        .assertTrue(VectorI2D.clamp(v, minimum, maximum).getYD() >= minimum);
+      Assert.assertTrue(
+        VectorI2D.clamp(v, minimum, maximum).getXD()
+        <= maximum);
+      Assert.assertTrue(
+        VectorI2D.clamp(v, minimum, maximum).getXD()
+        >= minimum);
+      Assert.assertTrue(
+        VectorI2D.clamp(v, minimum, maximum).getYD()
+        <= maximum);
+      Assert.assertTrue(
+        VectorI2D.clamp(v, minimum, maximum).getYD()
+        >= minimum);
     }
   }
 
@@ -370,10 +361,9 @@ public class VectorI2DTest extends VectorI2Contract
     final VectorI2D v0 = new VectorI2D(0.0, 1.0);
     final VectorI2D v1 = new VectorI2D(0.0, 0.0);
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      VectorI2D.distance(v0, v1),
-      1.0));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, VectorI2D.distance(v0, v1), 1.0));
   }
 
   @Override @Test public void testDistanceOrdering()
@@ -613,14 +603,12 @@ public class VectorI2DTest extends VectorI2Contract
       final double y1 = Math.random() * Double.MAX_VALUE;
       final VectorI2D v1 = new VectorI2D(x1, y1);
 
-      Assert.assertTrue(VectorI2D.almostEqual(
-        ec,
-        VectorI2D.interpolateLinear(v0, v1, 0.0),
-        v0));
-      Assert.assertTrue(VectorI2D.almostEqual(
-        ec,
-        VectorI2D.interpolateLinear(v0, v1, 1.0),
-        v1));
+      Assert.assertTrue(
+        VectorI2D.almostEqual(
+          ec, VectorI2D.interpolateLinear(v0, v1, 0.0), v0));
+      Assert.assertTrue(
+        VectorI2D.almostEqual(
+          ec, VectorI2D.interpolateLinear(v0, v1, 1.0), v1));
     }
   }
 
@@ -758,14 +746,12 @@ public class VectorI2DTest extends VectorI2Contract
 
       final VectorI2D vr = VectorI2D.scale(v, 1.0);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getXD(),
-        vr.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getYD(),
-        vr.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getXD(), vr.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getYD(), vr.getYD()));
     }
   }
 
@@ -808,14 +794,12 @@ public class VectorI2DTest extends VectorI2Contract
 
       final VectorI2D vr = VectorI2D.subtract(v0, v1);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getXD(),
-        v0.getXD() - v1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getYD(),
-        v0.getYD() - v1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getXD(), v0.getXD() - v1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getYD(), v0.getYD() - v1.getYD()));
     }
   }
 }

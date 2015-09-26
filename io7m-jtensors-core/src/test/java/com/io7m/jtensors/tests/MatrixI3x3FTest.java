@@ -46,7 +46,9 @@ public final class MatrixI3x3FTest
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         Assert.assertEquals(
-          (double) im0.getRowColumnF(row, col), (double) m0.getRowColumnF(row, col), 0.0);
+          (double) im0.getRowColumnF(row, col),
+          (double) m0.getRowColumnF(row, col),
+          0.0);
       }
     }
 

@@ -16,11 +16,10 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.VectorI2I;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class VectorI2ITest extends VectorI2Contract
 {
@@ -129,10 +128,9 @@ public class VectorI2ITest extends VectorI2Contract
       System.out.println("v1    : " + v1);
       System.out.println("angle : " + angle);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        angle,
-        Math.toRadians(90)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, angle, Math.toRadians(90)));
     }
 
     {
@@ -146,10 +144,9 @@ public class VectorI2ITest extends VectorI2Contract
       System.out.println("v1    : " + v1);
       System.out.println("angle : " + angle);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        angle,
-        Math.toRadians(90)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, angle, Math.toRadians(90)));
     }
   }
 

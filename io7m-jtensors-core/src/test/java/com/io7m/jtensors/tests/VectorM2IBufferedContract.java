@@ -76,7 +76,6 @@ public abstract class VectorM2IBufferedContract<T extends Vector2IType>
     v.copyFrom2I(new VectorI2I(23, 23));
   }
 
-
   @Test(expected = IndexOutOfBoundsException.class)
   public final void testOutOfBoundsGetX()
   {

@@ -25,6 +25,16 @@ import org.junit.Test;
 
 public abstract class PVectorM3DContract<T, V extends PVector3DType<T>>
 {
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
+
+  protected static double getRandomLarge()
+  {
+    return PVectorM3DContract.getRandom() * Double.MAX_VALUE;
+  }
+
   protected abstract V newVectorM3D(V v);
 
   protected abstract V newVectorM3D();
@@ -61,11 +71,6 @@ public abstract class PVectorM3DContract<T, V extends PVector3DType<T>>
         AlmostEqualDouble.almostEqual(
           ec, Math.abs(v.getZD()), vr.getZD()));
     }
-  }
-
-  protected static double getRandom()
-  {
-    return Math.random();
   }
 
   @Test public final void testAbsoluteMutation()
@@ -1298,11 +1303,6 @@ public abstract class PVectorM3DContract<T, V extends PVector3DType<T>>
             ec, v0.getZD(), orig_z - v1.getZD()));
       }
     }
-  }
-
-  protected static double getRandomLarge()
-  {
-    return PVectorM3DContract.getRandom() * Double.MAX_VALUE;
   }
 
   @Test public final void testSubtractMutation()

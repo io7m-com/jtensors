@@ -23,7 +23,8 @@ package com.io7m.jtensors.tests.parameterized;
 public abstract class PVectorI3Contract
 {
   /**
-   * <code>∀v. w = absolute(v) → w.x = abs(v.x) ∧ w.y = abs(v.y) ∧ w.z = abs(v.z)</code>
+   * <code>∀v. w = absolute(v) → w.x = abs(v.x) ∧ w.y = abs(v.y) ∧ w.z =
+   * abs(v.z)</code>
    */
 
   public abstract void testAbsolute();
@@ -77,9 +78,8 @@ public abstract class PVectorI3Contract
   public abstract void testCopy();
 
   /**
-   * <p>
-   * <code>∀v u. dotProduct(crossProduct(v, u), v) = 0 ∧ dotProduct(crossProduct(v, u), u) = 0</code>
-   * </p>
+   * <p> <code>∀v u. dotProduct(crossProduct(v, u), v) = 0 ∧
+   * dotProduct(crossProduct(v, u), u) = 0</code> </p>
    */
 
   public abstract void testCrossProductPerpendicular();
@@ -141,12 +141,8 @@ public abstract class PVectorI3Contract
   public abstract void testInitializeReadable();
 
   /**
-   * <p>
-   * <code>∀v r s. interpolateLinear(v, r, 1.0) = r</code>
-   * </p>
-   * <p>
-   * <code>∀v r s. interpolateLinear(v, r, 0.0) = v</code>
-   * </p>
+   * <p> <code>∀v r s. interpolateLinear(v, r, 1.0) = r</code> </p> <p> <code>∀v
+   * r s. interpolateLinear(v, r, 0.0) = v</code> </p>
    */
 
   public abstract void testInterpolateLinearLimits();
@@ -158,25 +154,19 @@ public abstract class PVectorI3Contract
   public abstract void testMagnitudeNonzero();
 
   /**
-   * <p>
-   * <code>∀v. magnitude(normalize(v)) = 1</code>
-   * </p>
+   * <p> <code>∀v. magnitude(normalize(v)) = 1</code> </p>
    */
 
   public abstract void testMagnitudeNormal();
 
   /**
-   * <p>
-   * <code>magnitude(normalize((0,0,0)) = 0</code>
-   * </p>
+   * <p> <code>magnitude(normalize((0,0,0)) = 0</code> </p>
    */
 
   public abstract void testMagnitudeNormalizeZero();
 
   /**
-   * <p>
-   * <code>magnitude((1,0,0)) = 1</code>
-   * </p>
+   * <p> <code>magnitude((1,0,0)) = 1</code> </p>
    */
 
   public abstract void testMagnitudeOne();
@@ -188,9 +178,7 @@ public abstract class PVectorI3Contract
   public abstract void testMagnitudeSimple();
 
   /**
-   * <p>
-   * <code>magnitude((0,0,0)) = 0</code>
-   * </p>
+   * <p> <code>magnitude((0,0,0)) = 0</code> </p>
    */
 
   public abstract void testMagnitudeZero();
@@ -217,17 +205,13 @@ public abstract class PVectorI3Contract
   public abstract void testProjectionPerpendicularZero();
 
   /**
-   * <p>
-   * <code>∀v. scale(v, 1) = v</code>
-   * </p>
+   * <p> <code>∀v. scale(v, 1) = v</code> </p>
    */
 
   public abstract void testScaleOne();
 
   /**
-   * <p>
-   * <code>∀v. scale(v, 0) = (0,0,0)</code>
-   * </p>
+   * <p> <code>∀v. scale(v, 0) = (0,0,0)</code> </p>
    */
 
   public abstract void testScaleZero();

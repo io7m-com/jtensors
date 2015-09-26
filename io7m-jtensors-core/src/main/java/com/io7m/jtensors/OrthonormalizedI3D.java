@@ -88,9 +88,8 @@ import net.jcip.annotations.Immutable;
 
   /**
    * @return The first vector passed to {@link #OrthonormalizedI3D
-   * (VectorReadable3DType,
-   * VectorReadable3DType, VectorReadable3DType)} , orthonormalized with respect
-   * to the other two vectors.
+   * (VectorReadable3DType, VectorReadable3DType, VectorReadable3DType)} ,
+   * orthonormalized with respect to the other two vectors.
    */
 
   public VectorI3D getV0()
@@ -100,9 +99,8 @@ import net.jcip.annotations.Immutable;
 
   /**
    * @return The second vector passed to {@link #OrthonormalizedI3D
-   * (VectorReadable3DType,
-   * VectorReadable3DType, VectorReadable3DType)} , orthonormalized with respect
-   * to the other two vectors.
+   * (VectorReadable3DType, VectorReadable3DType, VectorReadable3DType)} ,
+   * orthonormalized with respect to the other two vectors.
    */
 
   public VectorI3D getV1()
@@ -112,9 +110,8 @@ import net.jcip.annotations.Immutable;
 
   /**
    * @return The third vector passed to {@link #OrthonormalizedI3D
-   * (VectorReadable3DType,
-   * VectorReadable3DType, VectorReadable3DType)} , orthonormalized with respect
-   * to the other two vectors.
+   * (VectorReadable3DType, VectorReadable3DType, VectorReadable3DType)} ,
+   * orthonormalized with respect to the other two vectors.
    */
 
   public VectorI3D getV2()

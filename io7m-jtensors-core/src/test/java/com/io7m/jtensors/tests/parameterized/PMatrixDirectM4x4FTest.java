@@ -70,9 +70,8 @@ public final class PMatrixDirectM4x4FTest<T0, T1, T2>
     Assert.assertEquals(0L, (long) m.getDirectFloatBuffer().position());
   }
 
-  @Override
-  protected void checkDirectBufferInvariantsUntyped(final PMatrix4x4FType<?,
-    ?> m)
+  @Override protected void checkDirectBufferInvariantsUntyped(
+    final PMatrix4x4FType<?, ?> m)
   {
     final PMatrixDirect4x4FType<?, ?> mx = (PMatrixDirect4x4FType<?, ?>) m;
     Assert.assertEquals(0L, (long) mx.getDirectFloatBuffer().position());

@@ -25,6 +25,11 @@ import org.junit.Test;
 
 public abstract class VectorM2DContract<T extends Vector2DType>
 {
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
+
   protected abstract T newVectorM2D(T v);
 
   protected abstract T newVectorM2D();
@@ -132,11 +137,6 @@ public abstract class VectorM2DContract<T extends Vector2DType>
             ec, v0.getYD(), orig_y + v1.getYD()));
       }
     }
-  }
-
-  protected static double getRandom()
-  {
-    return Math.random();
   }
 
   @Test public final void testAddMutation()

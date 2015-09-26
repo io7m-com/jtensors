@@ -631,8 +631,10 @@ public abstract class VectorM4DContract<T extends Vector4DType>
   @Test public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM4D(
-      this.getRandom() * Double.MAX_VALUE, this.getRandom() * Double.MAX_VALUE,
-      this.getRandom() * Double.MAX_VALUE, this.getRandom() * Double.MAX_VALUE);
+      this.getRandom() * Double.MAX_VALUE,
+      this.getRandom() * Double.MAX_VALUE,
+      this.getRandom() * Double.MAX_VALUE,
+      this.getRandom() * Double.MAX_VALUE);
     final T v1 = this.newVectorM4D();
 
     v1.copyFrom2D(v0);
@@ -646,8 +648,10 @@ public abstract class VectorM4DContract<T extends Vector4DType>
   @Test public final void testCopy3Correct()
   {
     final T v0 = this.newVectorM4D(
-      this.getRandom() * Double.MAX_VALUE, this.getRandom() * Double.MAX_VALUE,
-      this.getRandom() * Double.MAX_VALUE, this.getRandom() * Double.MAX_VALUE);
+      this.getRandom() * Double.MAX_VALUE,
+      this.getRandom() * Double.MAX_VALUE,
+      this.getRandom() * Double.MAX_VALUE,
+      this.getRandom() * Double.MAX_VALUE);
     final T v1 = this.newVectorM4D();
 
     v1.copyFrom4D(v0);
@@ -661,8 +665,10 @@ public abstract class VectorM4DContract<T extends Vector4DType>
   @Test public final void testCopy4Correct()
   {
     final T v0 = this.newVectorM4D(
-      this.getRandom() * Double.MAX_VALUE, this.getRandom() * Double.MAX_VALUE,
-      this.getRandom() * Double.MAX_VALUE, this.getRandom() * Double.MAX_VALUE);
+      this.getRandom() * Double.MAX_VALUE,
+      this.getRandom() * Double.MAX_VALUE,
+      this.getRandom() * Double.MAX_VALUE,
+      this.getRandom() * Double.MAX_VALUE);
     final T v1 = this.newVectorM4D();
 
     v1.copyFrom3D(v0);

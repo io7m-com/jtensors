@@ -82,11 +82,8 @@ import java.util.Map.Entry;
       }
 
       if (methods.containsKey(m_name) == false) {
-        System.out.println(c_name
-          + ": "
-          + m_name
-          + " not present from "
-          + c_base.getName());
+        System.out.println(
+          c_name + ": " + m_name + " not present from " + c_base.getName());
       }
     }
 
@@ -101,7 +98,8 @@ import java.util.Map.Entry;
         continue;
       }
 
-      System.out.println(c_name
+      System.out.println(
+        c_name
         + ": extra method "
         + m_name
         + " not in base "
@@ -113,19 +111,18 @@ import java.util.Map.Entry;
 
   private static void checkPVector2()
   {
-    final Class<?> classes[] =
-      {
-        PVectorM2F.class,
-        PVectorM2I.class,
-        PVectorI2D.class,
-        PVectorI2F.class,
-        PVectorI2I.class,
+    final Class<?> classes[] = {
+      PVectorM2F.class,
+      PVectorM2I.class,
+      PVectorI2D.class,
+      PVectorI2F.class,
+      PVectorI2I.class,
 
-        VectorM2F.class,
-        VectorM2I.class,
-        VectorI2D.class,
-        VectorI2F.class,
-        VectorI2I.class };
+      VectorM2F.class,
+      VectorM2I.class,
+      VectorI2D.class,
+      VectorI2F.class,
+      VectorI2I.class };
 
     for (final Class<?> c : classes) {
       APICompleteness.checkAgainst(PVectorM2D.class, c);
@@ -135,19 +132,18 @@ import java.util.Map.Entry;
   private static void checkPVector3()
   {
     {
-      final Class<?> classes[] =
-        {
-          PVectorM3F.class,
-          PVectorM3I.class,
-          PVectorI3D.class,
-          PVectorI3F.class,
-          PVectorI3I.class,
+      final Class<?> classes[] = {
+        PVectorM3F.class,
+        PVectorM3I.class,
+        PVectorI3D.class,
+        PVectorI3F.class,
+        PVectorI3I.class,
 
-          VectorM3F.class,
-          VectorM3I.class,
-          VectorI3D.class,
-          VectorI3F.class,
-          VectorI3I.class };
+        VectorM3F.class,
+        VectorM3I.class,
+        VectorI3D.class,
+        VectorI3F.class,
+        VectorI3I.class };
 
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(PVectorM3D.class, c);
@@ -165,19 +161,18 @@ import java.util.Map.Entry;
   private static void checkPVector4()
   {
     {
-      final Class<?> classes[] =
-        {
-          PVectorM4F.class,
-          PVectorM4I.class,
-          PVectorI4D.class,
-          PVectorI4F.class,
-          PVectorI4I.class,
+      final Class<?> classes[] = {
+        PVectorM4F.class,
+        PVectorM4I.class,
+        PVectorI4D.class,
+        PVectorI4F.class,
+        PVectorI4I.class,
 
-          VectorM4F.class,
-          VectorM4I.class,
-          VectorI4D.class,
-          VectorI4F.class,
-          VectorI4I.class };
+        VectorM4F.class,
+        VectorM4I.class,
+        VectorI4D.class,
+        VectorI4F.class,
+        VectorI4I.class };
 
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(PVectorM4D.class, c);

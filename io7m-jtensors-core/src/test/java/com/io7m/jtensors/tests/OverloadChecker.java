@@ -100,10 +100,9 @@ import java.util.Set;
     }
 
     if (collisions.size() > 0) {
-      throw new Exception(String.format(
-        "Overloaded fields for class %s: %s",
-        c,
-        collisions));
+      throw new Exception(
+        String.format(
+          "Overloaded fields for class %s: %s", c, collisions));
     }
   }
 

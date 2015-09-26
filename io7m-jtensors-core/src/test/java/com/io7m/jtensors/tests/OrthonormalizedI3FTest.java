@@ -16,12 +16,11 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jtensors.OrthonormalizedI3F;
 import com.io7m.jtensors.VectorI3F;
+import org.junit.Assert;
+import org.junit.Test;
 
 @SuppressWarnings("static-method") public class OrthonormalizedI3FTest
 {

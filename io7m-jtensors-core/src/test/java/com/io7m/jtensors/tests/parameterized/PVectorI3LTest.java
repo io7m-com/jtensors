@@ -16,24 +16,15 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.parameterized.PVectorI3L;
 import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Assert;
+import org.junit.Test;
 
-@SuppressWarnings("static-method") public class PVectorI3LTest<T> extends
-  PVectorI3Contract
+@SuppressWarnings("static-method") public class PVectorI3LTest<T>
+  extends PVectorI3Contract
 {
-  @Test public void testZero()
-  {
-    final PVectorI3L<Object> z = PVectorI3L.zero();
-    Assert.assertEquals(0, z.getXL());
-    Assert.assertEquals(0, z.getYL());
-    Assert.assertEquals(0, z.getZL());
-  }
-
   public static long randomNegativeNumber()
   {
     return (long) (Math.random() * Long.MIN_VALUE);
@@ -49,9 +40,18 @@ import com.io7m.jtensors.tests.TestUtilities;
     return (long) (Math.random() * (1 << 14));
   }
 
+  @Test public void testZero()
+  {
+    final PVectorI3L<Object> z = PVectorI3L.zero();
+    Assert.assertEquals(0, z.getXL());
+    Assert.assertEquals(0, z.getYL());
+    Assert.assertEquals(0, z.getZL());
+  }
+
   @Override @Test public void testAbsolute()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = (long) (Math.random() * Long.MIN_VALUE);
       final long y = (long) (Math.random() * Long.MIN_VALUE);
       final long z = (long) (Math.random() * Long.MIN_VALUE);
@@ -67,7 +67,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testAdd()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorI3LTest.randomPositiveSmallNumber();
       final long y0 = PVectorI3LTest.randomPositiveSmallNumber();
       final long z0 = PVectorI3LTest.randomPositiveSmallNumber();
@@ -88,7 +89,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testAddScaled()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorI3LTest.randomPositiveSmallNumber();
       final long y0 = PVectorI3LTest.randomPositiveSmallNumber();
       final long z0 = PVectorI3LTest.randomPositiveSmallNumber();
@@ -130,7 +132,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampByPVectorMaximumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max_x = PVectorI3LTest.randomNegativeNumber();
       final long max_y = PVectorI3LTest.randomNegativeNumber();
       final long max_z = PVectorI3LTest.randomNegativeNumber();
@@ -151,7 +154,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampByPVectorMinimumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long min_x = PVectorI3LTest.randomPositiveNumber();
       final long min_y = PVectorI3LTest.randomPositiveNumber();
       final long min_z = PVectorI3LTest.randomPositiveNumber();
@@ -172,7 +176,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampByPVectorOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long min_x = PVectorI3LTest.randomNegativeNumber();
       final long min_y = PVectorI3LTest.randomNegativeNumber();
       final long min_z = PVectorI3LTest.randomNegativeNumber();
@@ -201,7 +206,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampMaximumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long maximum = PVectorI3LTest.randomNegativeNumber();
 
       final long x = PVectorI3LTest.randomPositiveNumber();
@@ -219,7 +225,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampMinimumOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long minimum = PVectorI3LTest.randomPositiveNumber();
 
       final long x = PVectorI3LTest.randomNegativeNumber();
@@ -237,7 +244,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testClampOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long minimum = PVectorI3LTest.randomNegativeNumber();
       final long maximum = PVectorI3LTest.randomPositiveNumber();
 
@@ -296,7 +304,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testDistanceOrdering()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorI3LTest.randomPositiveSmallNumber();
       final long y0 = PVectorI3LTest.randomPositiveSmallNumber();
       final long z0 = PVectorI3LTest.randomPositiveSmallNumber();
@@ -349,7 +358,8 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max = 1000;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
@@ -372,7 +382,8 @@ import com.io7m.jtensors.tests.TestUtilities;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max = 1000;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
@@ -557,7 +568,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testInterpolateLinearLimits()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorI3LTest.randomPositiveNumber();
       final long y0 = PVectorI3LTest.randomPositiveNumber();
       final long z0 = PVectorI3LTest.randomPositiveNumber();
@@ -583,7 +595,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testMagnitudeNonzero()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = PVectorI3LTest.randomPositiveSmallNumber();
       final long y = PVectorI3LTest.randomPositiveSmallNumber();
       final long z = PVectorI3LTest.randomPositiveSmallNumber();
@@ -668,7 +681,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testScaleOne()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = PVectorI3LTest.randomPositiveNumber();
       final long y = PVectorI3LTest.randomPositiveNumber();
       final long z = PVectorI3LTest.randomPositiveNumber();
@@ -684,7 +698,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testScaleZero()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = PVectorI3LTest.randomPositiveNumber();
       final long y = PVectorI3LTest.randomPositiveNumber();
       final long z = PVectorI3LTest.randomPositiveNumber();
@@ -706,7 +721,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 
   @Override @Test public void testSubtract()
   {
-    for (long index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+    for (long index = 0; index
+                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = PVectorI3LTest.randomPositiveNumber();
       final long y0 = PVectorI3LTest.randomPositiveNumber();
       final long z0 = PVectorI3LTest.randomPositiveNumber();

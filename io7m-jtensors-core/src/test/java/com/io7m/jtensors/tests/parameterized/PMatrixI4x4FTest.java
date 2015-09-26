@@ -38,7 +38,7 @@ public final class PMatrixI4x4FTest<T0, T1>
     int index = 0;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        m0.setRowColumnF(row, col,  index);
+        m0.setRowColumnF(row, col, index);
         ++index;
       }
     }
@@ -49,7 +49,9 @@ public final class PMatrixI4x4FTest<T0, T1>
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         Assert.assertEquals(
-          (double) im0.getRowColumnF(row, col), (double) m0.getRowColumnF(row, col), 0.0);
+          (double) im0.getRowColumnF(row, col),
+          (double) m0.getRowColumnF(row, col),
+          0.0);
       }
     }
 
@@ -62,7 +64,7 @@ public final class PMatrixI4x4FTest<T0, T1>
     index = 100;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        m0.setRowColumnF(row, col,  index);
+        m0.setRowColumnF(row, col, index);
         ++index;
       }
     }
@@ -181,7 +183,7 @@ public final class PMatrixI4x4FTest<T0, T1>
     int index = 0;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        m0.setRowColumnF(row, col,  index);
+        m0.setRowColumnF(row, col, index);
         ++index;
       }
     }
@@ -199,7 +201,7 @@ public final class PMatrixI4x4FTest<T0, T1>
     int index = 0;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        m0.setRowColumnF(row, col,  index);
+        m0.setRowColumnF(row, col, index);
         ++index;
       }
     }
@@ -217,8 +219,8 @@ public final class PMatrixI4x4FTest<T0, T1>
     int index = 0;
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
-        m0.setRowColumnF(row, col,  index);
-        m1.setRowColumnF(row, col,  index);
+        m0.setRowColumnF(row, col, index);
+        m1.setRowColumnF(row, col, index);
         ++index;
       }
     }

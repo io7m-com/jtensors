@@ -16,16 +16,15 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.parameterized.PVectorI4D;
 import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Assert;
+import org.junit.Test;
 
-@SuppressWarnings("static-method") public class PVectorI4DTest<T> extends
-  PVectorI4Contract
+@SuppressWarnings("static-method") public class PVectorI4DTest<T>
+  extends PVectorI4Contract
 {
   @Test public void testZero()
   {
@@ -50,22 +49,18 @@ import com.io7m.jtensors.tests.TestUtilities;
 
       final PVectorI4D<T> vr = PVectorI4D.absolute(v);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getXD()),
-        vr.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getYD()),
-        vr.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getZD()),
-        vr.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getWD()),
-        vr.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getXD()), vr.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getYD()), vr.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getZD()), vr.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getWD()), vr.getWD()));
     }
   }
 
@@ -90,22 +85,18 @@ import com.io7m.jtensors.tests.TestUtilities;
 
       final PVectorI4D<T> vr = PVectorI4D.add(v0, v1);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getXD(),
-        v0.getXD() + v1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getYD(),
-        v0.getYD() + v1.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getZD(),
-        v0.getZD() + v1.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getWD(),
-        v0.getWD() + v1.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getXD(), v0.getXD() + v1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getYD(), v0.getYD() + v1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getZD(), v0.getZD() + v1.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getWD(), v0.getWD() + v1.getWD()));
     }
   }
 
@@ -131,22 +122,18 @@ import com.io7m.jtensors.tests.TestUtilities;
       final double r = Math.random() * 100.0;
       final PVectorI4D<T> vr = PVectorI4D.addScaled(v0, v1, r);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getXD(),
-        v0.getXD() + (v1.getXD() * r)));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getYD(),
-        v0.getYD() + (v1.getYD() * r)));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getZD(),
-        v0.getZD() + (v1.getZD() * r)));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getWD(),
-        v0.getWD() + (v1.getWD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getXD(), v0.getXD() + (v1.getXD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getYD(), v0.getYD() + (v1.getYD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getZD(), v0.getZD() + (v1.getZD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getWD(), v0.getWD() + (v1.getWD() * r)));
     }
   }
 
@@ -280,18 +267,18 @@ import com.io7m.jtensors.tests.TestUtilities;
       final double w = Math.random() * Double.MIN_VALUE;
       final PVectorI4D<T> v = new PVectorI4D<T>(x, y, z, w);
 
-      Assert
-        .assertTrue(PVectorI4D.clampMaximumByPVector(v, maximum).getXD() <= maximum
-          .getXD());
-      Assert
-        .assertTrue(PVectorI4D.clampMaximumByPVector(v, maximum).getYD() <= maximum
-          .getYD());
-      Assert
-        .assertTrue(PVectorI4D.clampMaximumByPVector(v, maximum).getZD() <= maximum
-          .getZD());
-      Assert
-        .assertTrue(PVectorI4D.clampMaximumByPVector(v, maximum).getWD() <= maximum
-          .getWD());
+      Assert.assertTrue(
+        PVectorI4D.clampMaximumByPVector(v, maximum).getXD()
+        <= maximum.getXD());
+      Assert.assertTrue(
+        PVectorI4D.clampMaximumByPVector(v, maximum).getYD()
+        <= maximum.getYD());
+      Assert.assertTrue(
+        PVectorI4D.clampMaximumByPVector(v, maximum).getZD()
+        <= maximum.getZD());
+      Assert.assertTrue(
+        PVectorI4D.clampMaximumByPVector(v, maximum).getWD()
+        <= maximum.getWD());
     }
   }
 
@@ -311,18 +298,18 @@ import com.io7m.jtensors.tests.TestUtilities;
       final double w = Math.random() * Double.MIN_VALUE;
       final PVectorI4D<T> v = new PVectorI4D<T>(x, y, z, w);
 
-      Assert
-        .assertTrue(PVectorI4D.clampMinimumByPVector(v, minimum).getXD() >= minimum
-          .getXD());
-      Assert
-        .assertTrue(PVectorI4D.clampMinimumByPVector(v, minimum).getYD() >= minimum
-          .getYD());
-      Assert
-        .assertTrue(PVectorI4D.clampMinimumByPVector(v, minimum).getZD() >= minimum
-          .getZD());
-      Assert
-        .assertTrue(PVectorI4D.clampMinimumByPVector(v, minimum).getWD() >= minimum
-          .getWD());
+      Assert.assertTrue(
+        PVectorI4D.clampMinimumByPVector(v, minimum).getXD()
+        >= minimum.getXD());
+      Assert.assertTrue(
+        PVectorI4D.clampMinimumByPVector(v, minimum).getYD()
+        >= minimum.getYD());
+      Assert.assertTrue(
+        PVectorI4D.clampMinimumByPVector(v, minimum).getZD()
+        >= minimum.getZD());
+      Assert.assertTrue(
+        PVectorI4D.clampMinimumByPVector(v, minimum).getWD()
+        >= minimum.getWD());
     }
   }
 
@@ -349,30 +336,30 @@ import com.io7m.jtensors.tests.TestUtilities;
       final double w = Math.random() * Double.MAX_VALUE;
       final PVectorI4D<T> v = new PVectorI4D<T>(x, y, z, w);
 
-      Assert.assertTrue(PVectorI4D
-        .clampByPVector(v, minimum, maximum)
-        .getXD() <= maximum.getXD());
-      Assert.assertTrue(PVectorI4D
-        .clampByPVector(v, minimum, maximum)
-        .getXD() >= minimum.getXD());
-      Assert.assertTrue(PVectorI4D
-        .clampByPVector(v, minimum, maximum)
-        .getYD() <= maximum.getYD());
-      Assert.assertTrue(PVectorI4D
-        .clampByPVector(v, minimum, maximum)
-        .getYD() >= minimum.getYD());
-      Assert.assertTrue(PVectorI4D
-        .clampByPVector(v, minimum, maximum)
-        .getZD() <= maximum.getZD());
-      Assert.assertTrue(PVectorI4D
-        .clampByPVector(v, minimum, maximum)
-        .getZD() >= minimum.getZD());
-      Assert.assertTrue(PVectorI4D
-        .clampByPVector(v, minimum, maximum)
-        .getWD() <= maximum.getWD());
-      Assert.assertTrue(PVectorI4D
-        .clampByPVector(v, minimum, maximum)
-        .getWD() >= minimum.getWD());
+      Assert.assertTrue(
+        PVectorI4D.clampByPVector(v, minimum, maximum).getXD()
+        <= maximum.getXD());
+      Assert.assertTrue(
+        PVectorI4D.clampByPVector(v, minimum, maximum).getXD()
+        >= minimum.getXD());
+      Assert.assertTrue(
+        PVectorI4D.clampByPVector(v, minimum, maximum).getYD()
+        <= maximum.getYD());
+      Assert.assertTrue(
+        PVectorI4D.clampByPVector(v, minimum, maximum).getYD()
+        >= minimum.getYD());
+      Assert.assertTrue(
+        PVectorI4D.clampByPVector(v, minimum, maximum).getZD()
+        <= maximum.getZD());
+      Assert.assertTrue(
+        PVectorI4D.clampByPVector(v, minimum, maximum).getZD()
+        >= minimum.getZD());
+      Assert.assertTrue(
+        PVectorI4D.clampByPVector(v, minimum, maximum).getWD()
+        <= maximum.getWD());
+      Assert.assertTrue(
+        PVectorI4D.clampByPVector(v, minimum, maximum).getWD()
+        >= minimum.getWD());
     }
   }
 
@@ -387,14 +374,10 @@ import com.io7m.jtensors.tests.TestUtilities;
       final double w = Math.random() * Double.MAX_VALUE;
       final PVectorI4D<T> v = new PVectorI4D<T>(x, y, z, w);
 
-      Assert
-        .assertTrue(PVectorI4D.clampMaximum(v, maximum).getXD() <= maximum);
-      Assert
-        .assertTrue(PVectorI4D.clampMaximum(v, maximum).getYD() <= maximum);
-      Assert
-        .assertTrue(PVectorI4D.clampMaximum(v, maximum).getZD() <= maximum);
-      Assert
-        .assertTrue(PVectorI4D.clampMaximum(v, maximum).getWD() <= maximum);
+      Assert.assertTrue(PVectorI4D.clampMaximum(v, maximum).getXD() <= maximum);
+      Assert.assertTrue(PVectorI4D.clampMaximum(v, maximum).getYD() <= maximum);
+      Assert.assertTrue(PVectorI4D.clampMaximum(v, maximum).getZD() <= maximum);
+      Assert.assertTrue(PVectorI4D.clampMaximum(v, maximum).getWD() <= maximum);
     }
   }
 
@@ -409,14 +392,10 @@ import com.io7m.jtensors.tests.TestUtilities;
       final double w = Math.random() * Double.MIN_VALUE;
       final PVectorI4D<T> v = new PVectorI4D<T>(x, y, z, w);
 
-      Assert
-        .assertTrue(PVectorI4D.clampMinimum(v, minimum).getXD() >= minimum);
-      Assert
-        .assertTrue(PVectorI4D.clampMinimum(v, minimum).getYD() >= minimum);
-      Assert
-        .assertTrue(PVectorI4D.clampMinimum(v, minimum).getZD() >= minimum);
-      Assert
-        .assertTrue(PVectorI4D.clampMinimum(v, minimum).getWD() >= minimum);
+      Assert.assertTrue(PVectorI4D.clampMinimum(v, minimum).getXD() >= minimum);
+      Assert.assertTrue(PVectorI4D.clampMinimum(v, minimum).getYD() >= minimum);
+      Assert.assertTrue(PVectorI4D.clampMinimum(v, minimum).getZD() >= minimum);
+      Assert.assertTrue(PVectorI4D.clampMinimum(v, minimum).getWD() >= minimum);
     }
   }
 
@@ -432,22 +411,30 @@ import com.io7m.jtensors.tests.TestUtilities;
       final double w = Math.random() * Double.MIN_VALUE;
       final PVectorI4D<T> v = new PVectorI4D<T>(x, y, z, w);
 
-      Assert
-        .assertTrue(PVectorI4D.clamp(v, minimum, maximum).getXD() <= maximum);
-      Assert
-        .assertTrue(PVectorI4D.clamp(v, minimum, maximum).getXD() >= minimum);
-      Assert
-        .assertTrue(PVectorI4D.clamp(v, minimum, maximum).getYD() <= maximum);
-      Assert
-        .assertTrue(PVectorI4D.clamp(v, minimum, maximum).getYD() >= minimum);
-      Assert
-        .assertTrue(PVectorI4D.clamp(v, minimum, maximum).getZD() <= maximum);
-      Assert
-        .assertTrue(PVectorI4D.clamp(v, minimum, maximum).getZD() >= minimum);
-      Assert
-        .assertTrue(PVectorI4D.clamp(v, minimum, maximum).getWD() <= maximum);
-      Assert
-        .assertTrue(PVectorI4D.clamp(v, minimum, maximum).getWD() >= minimum);
+      Assert.assertTrue(
+        PVectorI4D.clamp(v, minimum, maximum).getXD()
+        <= maximum);
+      Assert.assertTrue(
+        PVectorI4D.clamp(v, minimum, maximum).getXD()
+        >= minimum);
+      Assert.assertTrue(
+        PVectorI4D.clamp(v, minimum, maximum).getYD()
+        <= maximum);
+      Assert.assertTrue(
+        PVectorI4D.clamp(v, minimum, maximum).getYD()
+        >= minimum);
+      Assert.assertTrue(
+        PVectorI4D.clamp(v, minimum, maximum).getZD()
+        <= maximum);
+      Assert.assertTrue(
+        PVectorI4D.clamp(v, minimum, maximum).getZD()
+        >= minimum);
+      Assert.assertTrue(
+        PVectorI4D.clamp(v, minimum, maximum).getWD()
+        <= maximum);
+      Assert.assertTrue(
+        PVectorI4D.clamp(v, minimum, maximum).getWD()
+        >= minimum);
     }
   }
 
@@ -488,10 +475,9 @@ import com.io7m.jtensors.tests.TestUtilities;
     final PVectorI4D<T> v0 = new PVectorI4D<T>(0.0, 1.0, 0.0, 0.0);
     final PVectorI4D<T> v1 = new PVectorI4D<T>(0.0, 0.0, 0.0, 0.0);
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      PVectorI4D.distance(v0, v1),
-      1.0));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, PVectorI4D.distance(v0, v1), 1.0));
   }
 
   @Override @Test public void testDistanceOrdering()
@@ -788,14 +774,12 @@ import com.io7m.jtensors.tests.TestUtilities;
       final double w1 = Math.random() * Double.MAX_VALUE;
       final PVectorI4D<T> v1 = new PVectorI4D<T>(x1, y1, z1, w1);
 
-      Assert.assertTrue(PVectorI4D.almostEqual(
-        ec,
-        PVectorI4D.interpolateLinear(v0, v1, 0.0),
-        v0));
-      Assert.assertTrue(PVectorI4D.almostEqual(
-        ec,
-        PVectorI4D.interpolateLinear(v0, v1, 1.0),
-        v1));
+      Assert.assertTrue(
+        PVectorI4D.almostEqual(
+          ec, PVectorI4D.interpolateLinear(v0, v1, 0.0), v0));
+      Assert.assertTrue(
+        PVectorI4D.almostEqual(
+          ec, PVectorI4D.interpolateLinear(v0, v1, 1.0), v1));
     }
   }
 
@@ -942,22 +926,18 @@ import com.io7m.jtensors.tests.TestUtilities;
 
       final PVectorI4D<T> vr = PVectorI4D.scale(v, 1.0);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getXD(),
-        vr.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getYD(),
-        vr.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getZD(),
-        vr.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getWD(),
-        vr.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getXD(), vr.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getYD(), vr.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getZD(), vr.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getWD(), vr.getWD()));
     }
   }
 
@@ -1008,22 +988,18 @@ import com.io7m.jtensors.tests.TestUtilities;
 
       final PVectorI4D<T> vr = PVectorI4D.subtract(v0, v1);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getXD(),
-        v0.getXD() - v1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getYD(),
-        v0.getYD() - v1.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getZD(),
-        v0.getZD() - v1.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getWD(),
-        v0.getWD() - v1.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getXD(), v0.getXD() - v1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getYD(), v0.getYD() - v1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getZD(), v0.getZD() - v1.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getWD(), v0.getWD() - v1.getWD()));
     }
   }
 }
