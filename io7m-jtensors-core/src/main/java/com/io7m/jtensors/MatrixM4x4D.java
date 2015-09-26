@@ -44,6 +44,173 @@ public final class MatrixM4x4D
   }
 
   /**
+   * Compare matrices.
+   *
+   * @param m0 The left matrix
+   * @param m1 The right matrix
+   *
+   * @return {@code true} if all elements of {@code m0} are equal to {@code m1}.
+   */
+
+  public static boolean compareElements(
+    final MatrixReadable4x4DType m0,
+    final MatrixReadable4x4DType m1)
+  {
+    if (!MatrixM4x4D.compareRow0(m0, m1)) {
+      return false;
+    }
+    if (!MatrixM4x4D.compareRow1(m0, m1)) {
+      return false;
+    }
+    if (!MatrixM4x4D.compareRow2(m0, m1)) {
+      return false;
+    }
+    return MatrixM4x4D.compareRow3(m0, m1);
+  }
+
+  /**
+   * Hash matrices.
+   *
+   * @param m The input matrix
+   *
+   * @return The hash of all the elements of {@code m}
+   */
+
+  public static int hashElements(final MatrixReadable4x4DType m)
+  {
+    final int prime = 31;
+    int r = prime;
+
+    r = HashUtility.accumulateDoubleHash(m.getR0C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR1C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR2C0D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR3C0D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(m.getR0C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR1C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR2C1D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR3C1D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(m.getR0C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR1C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR2C2D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR3C2D(), prime, r);
+
+    r = HashUtility.accumulateDoubleHash(m.getR0C3D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR1C3D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR2C3D(), prime, r);
+    r = HashUtility.accumulateDoubleHash(m.getR3C3D(), prime, r);
+
+    return r;
+  }
+
+  /**
+   * Show matrices. Print all of the elements of {@code m} in square-bracketed
+   * matrix form.
+   *
+   * @param m  The input matrix
+   * @param sb The string builder
+   */
+
+  public static void showElements(
+    final MatrixReadable4x4DType m,
+    final StringBuilder sb)
+  {
+    final String row0 = String.format(
+      "[%+.15f %+.15f %+.15f %+.15f]\n",
+      m.getR0C0D(),
+      m.getR0C0D(),
+      m.getR0C0D(),
+      m.getR0C0D());
+    final String row1 = String.format(
+      "[%+.15f %+.15f %+.15f %+.15f]\n",
+      m.getR1C0D(),
+      m.getR1C0D(),
+      m.getR1C0D(),
+      m.getR1C0D());
+    final String row2 = String.format(
+      "[%+.15f %+.15f %+.15f %+.15f]\n",
+      m.getR2C0D(),
+      m.getR2C0D(),
+      m.getR2C0D(),
+      m.getR2C0D());
+    final String row3 = String.format(
+      "[%+.15f %+.15f %+.15f %+.15f]\n",
+      m.getR3C0D(),
+      m.getR3C0D(),
+      m.getR3C0D(),
+      m.getR3C0D());
+    sb.append(row0);
+    sb.append(row1);
+    sb.append(row2);
+    sb.append(row3);
+  }
+
+  private static boolean compareRow0(
+    final MatrixReadable4x4DType m0,
+    final MatrixReadable4x4DType m1)
+  {
+    if (m0.getR0C0D() != m1.getR0C0D()) {
+      return false;
+    }
+    if (m0.getR0C1D() != m1.getR0C1D()) {
+      return false;
+    }
+    if (m0.getR0C2D() != m1.getR0C2D()) {
+      return false;
+    }
+    return m0.getR0C3D() == m1.getR0C3D();
+  }
+
+  private static boolean compareRow1(
+    final MatrixReadable4x4DType m0,
+    final MatrixReadable4x4DType m1)
+  {
+    if (m0.getR1C0D() != m1.getR1C0D()) {
+      return false;
+    }
+    if (m0.getR1C1D() != m1.getR1C1D()) {
+      return false;
+    }
+    if (m0.getR1C2D() != m1.getR1C2D()) {
+      return false;
+    }
+    return m0.getR1C3D() == m1.getR1C3D();
+  }
+
+  private static boolean compareRow2(
+    final MatrixReadable4x4DType m0,
+    final MatrixReadable4x4DType m1)
+  {
+    if (m0.getR2C0D() != m1.getR2C0D()) {
+      return false;
+    }
+    if (m0.getR2C1D() != m1.getR2C1D()) {
+      return false;
+    }
+    if (m0.getR2C2D() != m1.getR2C2D()) {
+      return false;
+    }
+    return m0.getR2C3D() == m1.getR2C3D();
+  }
+
+  private static boolean compareRow3(
+    final MatrixReadable4x4DType m0,
+    final MatrixReadable4x4DType m1)
+  {
+    if (m0.getR3C0D() != m1.getR3C0D()) {
+      return false;
+    }
+    if (m0.getR3C1D() != m1.getR3C1D()) {
+      return false;
+    }
+    if (m0.getR3C2D() != m1.getR3C2D()) {
+      return false;
+    }
+    return m0.getR3C3D() == m1.getR3C3D();
+  }
+
+  /**
    * Elementwise add of matrices {@code m0} and {@code m1}.
    *
    * @param m0  The left input matrix
