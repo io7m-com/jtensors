@@ -110,10 +110,7 @@ public final class MatrixByteBufferedM3x3D implements Matrix3x3DType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public String toString()

@@ -70,10 +70,7 @@ public final class VectorByteBufferedM3L implements Vector3LType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public long getZL()

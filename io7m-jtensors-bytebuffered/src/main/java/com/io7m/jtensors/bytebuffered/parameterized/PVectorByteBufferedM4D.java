@@ -22,6 +22,7 @@ import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.VectorReadable4DType;
+import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.parameterized.PVector4DType;
 import com.io7m.jtensors.parameterized.PVectorReadable2DType;
 import com.io7m.jtensors.parameterized.PVectorReadable3DType;
@@ -77,10 +78,7 @@ public final class PVectorByteBufferedM4D<T> implements PVector4DType<T>
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public double getWD()

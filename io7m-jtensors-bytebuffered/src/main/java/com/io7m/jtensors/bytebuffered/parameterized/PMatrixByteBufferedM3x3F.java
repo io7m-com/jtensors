@@ -24,6 +24,7 @@ import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorWritable2FType;
 import com.io7m.jtensors.VectorWritable3FType;
+import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.parameterized.PMatrix3x3FType;
 
 import java.nio.ByteBuffer;
@@ -116,10 +117,7 @@ public final class PMatrixByteBufferedM3x3F<T0, T1>
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 4));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public String toString()

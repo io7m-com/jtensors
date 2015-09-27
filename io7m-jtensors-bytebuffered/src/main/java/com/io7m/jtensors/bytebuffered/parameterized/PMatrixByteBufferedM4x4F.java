@@ -26,6 +26,7 @@ import com.io7m.jtensors.VectorReadable4FType;
 import com.io7m.jtensors.VectorWritable2FType;
 import com.io7m.jtensors.VectorWritable3FType;
 import com.io7m.jtensors.VectorWritable4FType;
+import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.parameterized.PMatrix4x4FType;
 
 import java.nio.ByteBuffer;
@@ -118,10 +119,7 @@ public final class PMatrixByteBufferedM4x4F<T0, T1>
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 4));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public String toString()

@@ -21,6 +21,7 @@ import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3IType;
+import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.parameterized.PVector3IType;
 import com.io7m.jtensors.parameterized.PVectorReadable2IType;
 import com.io7m.jtensors.parameterized.PVectorReadable3IType;
@@ -75,10 +76,7 @@ public final class PVectorByteBufferedM3I<T> implements PVector3IType<T>
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public int getZI()
