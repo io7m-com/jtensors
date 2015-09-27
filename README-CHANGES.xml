@@ -6,6 +6,20 @@
     <c:date>2015-08-29</c:date>
     <c:version>7.0.0</c:version>
     <c:item>
+      <c:date>2015-09-27</c:date>
+      <c:type-code-new/>
+      <c:summary>
+        Add heap-array allocated matrix types.
+      </c:summary>
+    </c:item>
+    <c:item>
+      <c:date>2015-09-27</c:date>
+      <c:type-code-new/>
+      <c:summary>
+        Add buffered vector and matrix types for addressing values that are packed inside large shared ByteBuffers.
+      </c:summary>
+    </c:item>
+    <c:item>
       <c:date>2015-09-06</c:date>
       <c:type-code-change/>
       <c:summary>
