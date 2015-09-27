@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Vector2LType;
 import com.io7m.jtensors.VectorReadable2LType;
 
 import java.nio.ByteBuffer;
@@ -32,10 +31,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM2L implements Vector2LType
+public final class VectorByteBufferedM2L implements VectorByteBuffered2LType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private VectorByteBufferedM2L(
     final ByteBuffer in_buffer,
@@ -57,7 +56,7 @@ public final class VectorByteBufferedM2L implements Vector2LType
    * @return A new buffered vector
    */
 
-  public static Vector2LType newVectorFromByteBuffer(
+  public static VectorByteBuffered2LType newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -69,10 +68,7 @@ public final class VectorByteBufferedM2L implements Vector2LType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public long getXL()
@@ -163,5 +159,15 @@ public final class VectorByteBufferedM2L implements Vector2LType
       return false;
     }
     return this.getYL() == other.getYL();
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

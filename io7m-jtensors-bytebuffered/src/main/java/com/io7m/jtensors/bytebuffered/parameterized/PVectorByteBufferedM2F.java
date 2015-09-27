@@ -20,7 +20,7 @@ import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2FType;
-import com.io7m.jtensors.parameterized.PVector2FType;
+import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.parameterized.PVectorReadable2FType;
 
 import java.nio.ByteBuffer;
@@ -35,10 +35,10 @@ import java.nio.ByteBuffer;
  * @param <T> A phantom type parameter
  */
 
-public final class PVectorByteBufferedM2F<T> implements PVector2FType<T>
+public final class PVectorByteBufferedM2F<T> implements PVectorByteBuffered2FType<T>
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private PVectorByteBufferedM2F(
     final ByteBuffer in_buffer,
@@ -61,7 +61,7 @@ public final class PVectorByteBufferedM2F<T> implements PVector2FType<T>
    * @return A new buffered vector
    */
 
-  public static <T> PVector2FType<T> newVectorFromByteBuffer(
+  public static <T> PVectorByteBuffered2FType<T> newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -73,10 +73,7 @@ public final class PVectorByteBufferedM2F<T> implements PVector2FType<T>
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 4));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public float getXF()
@@ -178,5 +175,15 @@ public final class PVectorByteBufferedM2F<T> implements PVector2FType<T>
   {
     this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
     this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

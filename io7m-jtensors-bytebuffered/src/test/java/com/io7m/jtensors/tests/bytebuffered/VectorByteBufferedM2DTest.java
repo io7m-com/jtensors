@@ -16,46 +16,45 @@
 
 package com.io7m.jtensors.tests.bytebuffered;
 
-import com.io7m.jtensors.Vector2DType;
+import com.io7m.jtensors.bytebuffered.VectorByteBuffered2DType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM2D;
-import com.io7m.jtensors.tests.VectorM2DBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedM2DTest
-  extends VectorM2DBufferedContract<Vector2DType>
+  extends VectorByteBufferedM2DContract<VectorByteBuffered2DType>
 {
-  @Override protected Vector2DType newVectorM2D(
+  @Override protected VectorByteBuffered2DType newVectorM2D(
     final double x,
     final double y)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector2DType v =
+    final VectorByteBuffered2DType v =
       VectorByteBufferedM2D.newVectorFromByteBuffer(buf, 50L);
     v.set2D(x, y);
     return v;
   }
 
-  @Override protected Vector2DType newVectorM2D()
+  @Override protected VectorByteBuffered2DType newVectorM2D()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector2DType v =
+    final VectorByteBuffered2DType v =
       VectorByteBufferedM2D.newVectorFromByteBuffer(buf, 50L);
     v.set2D(0.0, 0.0);
     return v;
   }
 
-  @Override protected Vector2DType newVectorM2D(
-    final Vector2DType v)
+  @Override protected VectorByteBuffered2DType newVectorM2D(
+    final VectorByteBuffered2DType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector2DType vr =
+    final VectorByteBuffered2DType vr =
       VectorByteBufferedM2D.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom2D(v);
     return vr;
   }
 
-  @Override protected Vector2DType newVectorM2DAtIndexFromSize(
+  @Override protected VectorByteBuffered2DType newVectorM2DAtIndexFromSize(
     final long size,
     final long offset)
   {

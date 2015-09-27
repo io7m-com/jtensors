@@ -16,47 +16,47 @@
 
 package com.io7m.jtensors.tests.bytebuffered;
 
-import com.io7m.jtensors.Matrix2x2DType;
 import com.io7m.jtensors.MatrixM2x2D;
 import com.io7m.jtensors.MatrixReadable2x2DType;
+import com.io7m.jtensors.bytebuffered.MatrixByteBuffered2x2DType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM2x2D;
-import com.io7m.jtensors.tests.Matrix2x2DBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class MatrixByteBufferedM2x2DTest
-  extends Matrix2x2DBufferedContract<Matrix2x2DType>
+  extends MatrixByteBuffered2x2DContract<MatrixByteBuffered2x2DType>
 {
-  @Override protected Matrix2x2DType newMatrix()
+  @Override protected MatrixByteBuffered2x2DType newMatrix()
   {
     final ByteBuffer buf = ByteBuffer.allocate(200);
-    final Matrix2x2DType mr =
+    final MatrixByteBuffered2x2DType mr =
       MatrixByteBufferedM2x2D.newMatrixFromByteBuffer(buf, 0L);
     MatrixM2x2D.setIdentity(mr);
     return mr;
   }
 
-  @Override
-  protected Matrix2x2DType newMatrixFrom(final MatrixReadable2x2DType m)
+  @Override protected MatrixByteBuffered2x2DType newMatrixFrom(
+    final MatrixReadable2x2DType m)
   {
     final ByteBuffer buf = ByteBuffer.allocate(200);
-    final Matrix2x2DType mr =
+    final MatrixByteBuffered2x2DType mr =
       MatrixByteBufferedM2x2D.newMatrixFromByteBuffer(buf, 0L);
     MatrixM2x2D.copy(m, mr);
     return mr;
   }
 
-  @Override protected void checkDirectBufferInvariants(final Matrix2x2DType m)
+  @Override
+  protected void checkDirectBufferInvariants(final MatrixByteBuffered2x2DType m)
   {
     // Nothing required
   }
 
-  @Override protected Matrix2x2DType newMatrixAtIndexFromSize(
+  @Override protected MatrixByteBuffered2x2DType newMatrixAtIndexFromSize(
     final long size,
     final long offset)
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
-    final Matrix2x2DType mr =
+    final MatrixByteBuffered2x2DType mr =
       MatrixByteBufferedM2x2D.newMatrixFromByteBuffer(buf, offset);
     return mr;
   }

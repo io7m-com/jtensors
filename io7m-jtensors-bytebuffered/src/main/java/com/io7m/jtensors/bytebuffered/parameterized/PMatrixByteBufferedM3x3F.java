@@ -24,7 +24,7 @@ import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorWritable2FType;
 import com.io7m.jtensors.VectorWritable3FType;
-import com.io7m.jtensors.parameterized.PMatrix3x3FType;
+import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 
 import java.nio.ByteBuffer;
 
@@ -40,10 +40,10 @@ import java.nio.ByteBuffer;
  */
 
 public final class PMatrixByteBufferedM3x3F<T0, T1>
-  implements PMatrix3x3FType<T0, T1>
+  implements PMatrixByteBuffered3x3FType<T0, T1>
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private PMatrixByteBufferedM3x3F(
     final ByteBuffer in_buffer,
@@ -67,7 +67,8 @@ public final class PMatrixByteBufferedM3x3F<T0, T1>
    * @return A new buffered matrix
    */
 
-  public static <T0, T1> PMatrix3x3FType<T0, T1> newMatrixFromByteBuffer(
+  public static <T0, T1> PMatrixByteBuffered3x3FType<T0, T1>
+  newMatrixFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -116,10 +117,7 @@ public final class PMatrixByteBufferedM3x3F<T0, T1>
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 4));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public String toString()
@@ -346,5 +344,15 @@ public final class PMatrixByteBufferedM3x3F<T0, T1>
     PMatrixByteBufferedM3x3F.checkRow(row);
     PMatrixByteBufferedM3x3F.checkColumn(column);
     this.setAtOffsetAndRowColumn(this.offset, row, column, value);
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

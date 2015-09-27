@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Quaternion4FType;
 import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorReadable4FType;
@@ -34,10 +33,11 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class QuaternionByteBufferedM4F implements Quaternion4FType
+public final class QuaternionByteBufferedM4F
+  implements QuaternionByteBuffered4FType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private       long       offset;
 
   private QuaternionByteBufferedM4F(
     final ByteBuffer in_buffer,
@@ -59,7 +59,7 @@ public final class QuaternionByteBufferedM4F implements Quaternion4FType
    * @return A new buffered vector
    */
 
-  public static Quaternion4FType newQuaternionFromByteBuffer(
+  public static QuaternionByteBuffered4FType newQuaternionFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -71,10 +71,7 @@ public final class QuaternionByteBufferedM4F implements Quaternion4FType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 4));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public float getWF()
@@ -113,8 +110,7 @@ public final class QuaternionByteBufferedM4F implements Quaternion4FType
     final float x)
   {
     this.buffer.putFloat(
-      QuaternionByteBufferedM4F.getByteOffsetForIndex(o, i),
-      x);
+      QuaternionByteBufferedM4F.getByteOffsetForIndex(o, i), x);
   }
 
   private float getAtOffsetAndIndex(
@@ -245,5 +241,15 @@ public final class QuaternionByteBufferedM4F implements Quaternion4FType
     }
     return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
       other.getZF());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

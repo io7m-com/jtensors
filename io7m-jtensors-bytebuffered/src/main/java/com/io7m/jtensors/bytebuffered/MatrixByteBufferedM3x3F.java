@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Matrix3x3FType;
 import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
@@ -36,10 +35,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class MatrixByteBufferedM3x3F implements Matrix3x3FType
+public final class MatrixByteBufferedM3x3F implements MatrixByteBuffered3x3FType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private MatrixByteBufferedM3x3F(
     final ByteBuffer in_buffer,
@@ -61,7 +60,7 @@ public final class MatrixByteBufferedM3x3F implements Matrix3x3FType
    * @return A new buffered matrix
    */
 
-  public static Matrix3x3FType newMatrixFromByteBuffer(
+  public static MatrixByteBuffered3x3FType newMatrixFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -110,10 +109,7 @@ public final class MatrixByteBufferedM3x3F implements Matrix3x3FType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 4));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public String toString()
@@ -339,5 +335,15 @@ public final class MatrixByteBufferedM3x3F implements Matrix3x3FType
     MatrixByteBufferedM3x3F.checkRow(row);
     MatrixByteBufferedM3x3F.checkColumn(column);
     this.setAtOffsetAndRowColumn(this.offset, row, column, value);
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

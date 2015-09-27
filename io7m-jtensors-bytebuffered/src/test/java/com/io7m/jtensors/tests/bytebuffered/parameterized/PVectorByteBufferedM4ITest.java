@@ -16,48 +16,47 @@
 
 package com.io7m.jtensors.tests.bytebuffered.parameterized;
 
+import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4IType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM4I;
-import com.io7m.jtensors.parameterized.PVector4IType;
-import com.io7m.jtensors.tests.parameterized.PVectorM4IBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class PVectorByteBufferedM4ITest<T>
-  extends PVectorM4IBufferedContract<T, PVector4IType<T>>
+  extends PVectorByteBufferedM4IContract<T, PVectorByteBuffered4IType<T>>
 {
-  @Override protected PVector4IType<T> newVectorM4I(
+  @Override protected PVectorByteBuffered4IType<T> newVectorM4I(
     final int x,
     final int y,
     final int z,
     final int w)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector4IType<T> v =
+    final PVectorByteBuffered4IType<T> v =
       PVectorByteBufferedM4I.newVectorFromByteBuffer(buf, 50L);
     v.set4I(x, y, z, w);
     return v;
   }
 
-  @Override protected PVector4IType<T> newVectorM4I()
+  @Override protected PVectorByteBuffered4IType<T> newVectorM4I()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector4IType<T> v =
+    final PVectorByteBuffered4IType<T> v =
       PVectorByteBufferedM4I.newVectorFromByteBuffer(buf, 50L);
     v.set4I((int) 0L, (int) 0L, (int) 0L, (int) 1L);
     return v;
   }
 
-  @Override protected PVector4IType<T> newVectorM4IFrom(
-    final PVector4IType<T> v)
+  @Override protected PVectorByteBuffered4IType<T> newVectorM4IFrom(
+    final PVectorByteBuffered4IType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector4IType<T> vr =
+    final PVectorByteBuffered4IType<T> vr =
       PVectorByteBufferedM4I.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom4I(v);
     return vr;
   }
 
-  @Override protected PVector4IType<T> newVectorM4IAtIndexFromSize(
+  @Override protected PVectorByteBuffered4IType<T> newVectorM4IAtIndexFromSize(
     final long size,
     final long offset)
   {

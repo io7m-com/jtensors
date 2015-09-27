@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Matrix2x2FType;
 import com.io7m.jtensors.MatrixM2x2F;
 import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorWritable2FType;
@@ -34,10 +33,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class MatrixByteBufferedM2x2F implements Matrix2x2FType
+public final class MatrixByteBufferedM2x2F implements MatrixByteBuffered2x2FType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private MatrixByteBufferedM2x2F(
     final ByteBuffer in_buffer,
@@ -59,7 +58,7 @@ public final class MatrixByteBufferedM2x2F implements Matrix2x2FType
    * @return A new buffered matrix
    */
 
-  public static Matrix2x2FType newMatrixFromByteBuffer(
+  public static MatrixByteBuffered2x2FType newMatrixFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -108,10 +107,7 @@ public final class MatrixByteBufferedM2x2F implements Matrix2x2FType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 4));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public String toString()
@@ -253,5 +249,15 @@ public final class MatrixByteBufferedM2x2F implements Matrix2x2FType
     MatrixByteBufferedM2x2F.checkRow(row);
     MatrixByteBufferedM2x2F.checkColumn(column);
     this.setAtOffsetAndRowColumn(this.offset, row, column, value);
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

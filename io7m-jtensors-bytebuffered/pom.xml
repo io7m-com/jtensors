@@ -60,6 +60,10 @@
       <artifactId>io7m-jnull-core</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.io7m.jranges</groupId>
+      <artifactId>io7m-jranges-core</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.io7m.junreachable</groupId>
       <artifactId>io7m-junreachable-core</artifactId>
     </dependency>

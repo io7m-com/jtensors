@@ -16,47 +16,47 @@
 
 package com.io7m.jtensors.tests.bytebuffered;
 
-import com.io7m.jtensors.Matrix4x4DType;
 import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.MatrixReadable4x4DType;
+import com.io7m.jtensors.bytebuffered.MatrixByteBuffered4x4DType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM4x4D;
-import com.io7m.jtensors.tests.Matrix4x4DBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class MatrixByteBufferedM4x4DTest
-  extends Matrix4x4DBufferedContract<Matrix4x4DType>
+  extends MatrixByteBuffered4x4DContract<MatrixByteBuffered4x4DType>
 {
-  @Override protected Matrix4x4DType newMatrix()
+  @Override protected MatrixByteBuffered4x4DType newMatrix()
   {
     final ByteBuffer buf = ByteBuffer.allocate(200);
-    final Matrix4x4DType mr =
+    final MatrixByteBuffered4x4DType mr =
       MatrixByteBufferedM4x4D.newMatrixFromByteBuffer(buf, 0L);
     MatrixM4x4D.setIdentity(mr);
     return mr;
   }
 
-  @Override
-  protected Matrix4x4DType newMatrixFrom(final MatrixReadable4x4DType m)
+  @Override protected MatrixByteBuffered4x4DType newMatrixFrom(
+    final MatrixReadable4x4DType m)
   {
     final ByteBuffer buf = ByteBuffer.allocate(200);
-    final Matrix4x4DType mr =
+    final MatrixByteBuffered4x4DType mr =
       MatrixByteBufferedM4x4D.newMatrixFromByteBuffer(buf, 0L);
     MatrixM4x4D.copy(m, mr);
     return mr;
   }
 
-  @Override protected void checkDirectBufferInvariants(final Matrix4x4DType m)
+  @Override
+  protected void checkDirectBufferInvariants(final MatrixByteBuffered4x4DType m)
   {
     // Nothing required
   }
 
-  @Override protected Matrix4x4DType newMatrixAtIndexFromSize(
+  @Override protected MatrixByteBuffered4x4DType newMatrixAtIndexFromSize(
     final long size,
     final long offset)
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
-    final Matrix4x4DType mr =
+    final MatrixByteBuffered4x4DType mr =
       MatrixByteBufferedM4x4D.newMatrixFromByteBuffer(buf, offset);
     return mr;
   }

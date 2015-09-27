@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Vector4FType;
 import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorReadable4FType;
@@ -34,10 +33,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM4F implements Vector4FType
+public final class VectorByteBufferedM4F implements VectorByteBuffered4FType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private VectorByteBufferedM4F(
     final ByteBuffer in_buffer,
@@ -59,7 +58,7 @@ public final class VectorByteBufferedM4F implements Vector4FType
    * @return A new buffered vector
    */
 
-  public static Vector4FType newVectorFromByteBuffer(
+  public static VectorByteBuffered4FType newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -71,10 +70,7 @@ public final class VectorByteBufferedM4F implements Vector4FType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 4));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public float getWF()
@@ -243,5 +239,15 @@ public final class VectorByteBufferedM4F implements Vector4FType
     }
     return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
       other.getZF());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

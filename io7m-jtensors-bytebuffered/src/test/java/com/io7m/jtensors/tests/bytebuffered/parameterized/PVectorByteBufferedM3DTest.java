@@ -16,47 +16,46 @@
 
 package com.io7m.jtensors.tests.bytebuffered.parameterized;
 
+import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3DType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM3D;
-import com.io7m.jtensors.parameterized.PVector3DType;
-import com.io7m.jtensors.tests.parameterized.PVectorM3DBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class PVectorByteBufferedM3DTest<T>
-  extends PVectorM3DBufferedContract<T, PVector3DType<T>>
+  extends PVectorByteBufferedM3DContract<T, PVectorByteBuffered3DType<T>>
 {
-  @Override protected PVector3DType<T> newVectorM3D(
+  @Override protected PVectorByteBuffered3DType<T> newVectorM3D(
     final double x,
     final double y,
     final double z)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector3DType<T> v =
+    final PVectorByteBuffered3DType<T> v =
       PVectorByteBufferedM3D.newVectorFromByteBuffer(buf, 50L);
     v.set3D(x, y, z);
     return v;
   }
 
-  @Override protected PVector3DType<T> newVectorM3D()
+  @Override protected PVectorByteBuffered3DType<T> newVectorM3D()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector3DType<T> v =
+    final PVectorByteBuffered3DType<T> v =
       PVectorByteBufferedM3D.newVectorFromByteBuffer(buf, 50L);
     v.set3D(0.0, 0.0, 0.0);
     return v;
   }
 
-  @Override protected PVector3DType<T> newVectorM3D(
-    final PVector3DType<T> v)
+  @Override protected PVectorByteBuffered3DType<T> newVectorM3D(
+    final PVectorByteBuffered3DType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector3DType<T> vr =
+    final PVectorByteBuffered3DType<T> vr =
       PVectorByteBufferedM3D.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom3D(v);
     return vr;
   }
 
-  @Override protected PVector3DType<T> newVectorM3DAtIndexFromSize(
+  @Override protected PVectorByteBuffered3DType<T> newVectorM3DAtIndexFromSize(
     final long size,
     final long offset)
   {

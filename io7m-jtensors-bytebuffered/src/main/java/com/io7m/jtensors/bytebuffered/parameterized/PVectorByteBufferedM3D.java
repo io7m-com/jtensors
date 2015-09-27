@@ -21,7 +21,7 @@ import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
-import com.io7m.jtensors.parameterized.PVector3DType;
+import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.parameterized.PVectorReadable2DType;
 import com.io7m.jtensors.parameterized.PVectorReadable3DType;
 
@@ -37,10 +37,10 @@ import java.nio.ByteBuffer;
  * @param <T> A phantom type parameter
  */
 
-public final class PVectorByteBufferedM3D<T> implements PVector3DType<T>
+public final class PVectorByteBufferedM3D<T> implements PVectorByteBuffered3DType<T>
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private PVectorByteBufferedM3D(
     final ByteBuffer in_buffer,
@@ -63,7 +63,7 @@ public final class PVectorByteBufferedM3D<T> implements PVector3DType<T>
    * @return A new buffered vector
    */
 
-  public static <T> PVector3DType<T> newVectorFromByteBuffer(
+  public static <T> PVectorByteBuffered3DType<T> newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -75,10 +75,7 @@ public final class PVectorByteBufferedM3D<T> implements PVector3DType<T>
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public double getZD()
@@ -107,8 +104,7 @@ public final class PVectorByteBufferedM3D<T> implements PVector3DType<T>
     final double x)
   {
     this.buffer.putDouble(
-      PVectorByteBufferedM3D.getByteOffsetForIndex(o, i),
-      x);
+      PVectorByteBufferedM3D.getByteOffsetForIndex(o, i), x);
   }
 
   private double getAtOffsetAndIndex(
@@ -224,5 +220,15 @@ public final class PVectorByteBufferedM3D<T> implements PVector3DType<T>
   {
     this.setAtOffsetAndIndex(this.offset, 0, in_v.getXD());
     this.setAtOffsetAndIndex(this.offset, 1, in_v.getYD());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

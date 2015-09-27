@@ -16,47 +16,46 @@
 
 package com.io7m.jtensors.tests.bytebuffered;
 
-import com.io7m.jtensors.Vector3IType;
+import com.io7m.jtensors.bytebuffered.VectorByteBuffered3IType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM3I;
-import com.io7m.jtensors.tests.VectorM3IBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedM3ITest
-  extends VectorM3IBufferedContract<Vector3IType>
+  extends VectorByteBufferedM3IContract<VectorByteBuffered3IType>
 {
-  @Override protected Vector3IType newVectorM3I(
+  @Override protected VectorByteBuffered3IType newVectorM3I(
     final int x,
     final int y,
     final int z)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector3IType v =
+    final VectorByteBuffered3IType v =
       VectorByteBufferedM3I.newVectorFromByteBuffer(buf, 50L);
     v.set3I(x, y, z);
     return v;
   }
 
-  @Override protected Vector3IType newVectorM3I()
+  @Override protected VectorByteBuffered3IType newVectorM3I()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector3IType v =
+    final VectorByteBuffered3IType v =
       VectorByteBufferedM3I.newVectorFromByteBuffer(buf, 50L);
     v.set3I((int) 0L, (int) 0L, (int) 0L);
     return v;
   }
 
-  @Override protected Vector3IType newVectorM3I(
-    final Vector3IType v)
+  @Override protected VectorByteBuffered3IType newVectorM3I(
+    final VectorByteBuffered3IType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector3IType vr =
+    final VectorByteBuffered3IType vr =
       VectorByteBufferedM3I.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom3I(v);
     return vr;
   }
 
-  @Override protected Vector3IType newVectorM3IAtIndexFromSize(
+  @Override protected VectorByteBuffered3IType newVectorM3IAtIndexFromSize(
     final long size,
     final long offset)
   {

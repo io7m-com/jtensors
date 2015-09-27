@@ -21,7 +21,7 @@ import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3IType;
-import com.io7m.jtensors.parameterized.PVector3IType;
+import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.parameterized.PVectorReadable2IType;
 import com.io7m.jtensors.parameterized.PVectorReadable3IType;
 
@@ -37,10 +37,10 @@ import java.nio.ByteBuffer;
  * @param <T> A phantom type parameter
  */
 
-public final class PVectorByteBufferedM3I<T> implements PVector3IType<T>
+public final class PVectorByteBufferedM3I<T> implements PVectorByteBuffered3IType<T>
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private PVectorByteBufferedM3I(
     final ByteBuffer in_buffer,
@@ -63,7 +63,7 @@ public final class PVectorByteBufferedM3I<T> implements PVector3IType<T>
    * @return A new buffered vector
    */
 
-  public static <T> PVector3IType<T> newVectorFromByteBuffer(
+  public static <T> PVectorByteBuffered3IType<T> newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -75,10 +75,7 @@ public final class PVectorByteBufferedM3I<T> implements PVector3IType<T>
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public int getZI()
@@ -215,5 +212,15 @@ public final class PVectorByteBufferedM3I<T> implements PVector3IType<T>
   {
     this.setAtOffsetAndIndex(this.offset, 0, in_v.getXI());
     this.setAtOffsetAndIndex(this.offset, 1, in_v.getYI());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }
