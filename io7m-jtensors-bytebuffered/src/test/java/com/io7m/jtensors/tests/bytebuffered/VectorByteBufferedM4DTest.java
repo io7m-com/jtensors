@@ -16,48 +16,47 @@
 
 package com.io7m.jtensors.tests.bytebuffered;
 
-import com.io7m.jtensors.Vector4DType;
+import com.io7m.jtensors.bytebuffered.VectorByteBuffered4DType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM4D;
-import com.io7m.jtensors.tests.VectorM4DBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedM4DTest
-  extends VectorM4DBufferedContract<Vector4DType>
+  extends VectorByteBufferedM4DContract<VectorByteBuffered4DType>
 {
-  @Override protected Vector4DType newVectorM4D(
+  @Override protected VectorByteBuffered4DType newVectorM4D(
     final double x,
     final double y,
     final double z,
     final double w)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector4DType v =
+    final VectorByteBuffered4DType v =
       VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
     v.set4D(x, y, z, w);
     return v;
   }
 
-  @Override protected Vector4DType newVectorM4D()
+  @Override protected VectorByteBuffered4DType newVectorM4D()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector4DType v =
+    final VectorByteBuffered4DType v =
       VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
     v.set4D(0.0, 0.0, 0.0, 1.0);
     return v;
   }
 
-  @Override protected Vector4DType newVectorM4DFrom(
-    final Vector4DType v)
+  @Override protected VectorByteBuffered4DType newVectorM4DFrom(
+    final VectorByteBuffered4DType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector4DType vr =
+    final VectorByteBuffered4DType vr =
       VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom4D(v);
     return vr;
   }
 
-  @Override protected Vector4DType newVectorM4DAtIndexFromSize(
+  @Override protected VectorByteBuffered4DType newVectorM4DAtIndexFromSize(
     final long size,
     final long offset)
   {

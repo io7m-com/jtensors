@@ -16,48 +16,47 @@
 
 package com.io7m.jtensors.tests.bytebuffered;
 
-import com.io7m.jtensors.Vector4FType;
+import com.io7m.jtensors.bytebuffered.VectorByteBuffered4FType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM4F;
-import com.io7m.jtensors.tests.VectorM4FBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedM4FTest
-  extends VectorM4FBufferedContract<Vector4FType>
+  extends VectorByteBufferedM4FContract<VectorByteBuffered4FType>
 {
-  @Override protected Vector4FType newVectorM4F(
+  @Override protected VectorByteBuffered4FType newVectorM4F(
     final float x,
     final float y,
     final float z,
     final float w)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector4FType v =
+    final VectorByteBuffered4FType v =
       VectorByteBufferedM4F.newVectorFromByteBuffer(buf, 50L);
     v.set4F(x, y, z, w);
     return v;
   }
 
-  @Override protected Vector4FType newVectorM4F()
+  @Override protected VectorByteBuffered4FType newVectorM4F()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector4FType v =
+    final VectorByteBuffered4FType v =
       VectorByteBufferedM4F.newVectorFromByteBuffer(buf, 50L);
     v.set4F(0.0f, 0.0f, 0.0f, 1.0f);
     return v;
   }
 
-  @Override protected Vector4FType newVectorM4FFrom(
-    final Vector4FType v)
+  @Override protected VectorByteBuffered4FType newVectorM4FFrom(
+    final VectorByteBuffered4FType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector4FType vr =
+    final VectorByteBuffered4FType vr =
       VectorByteBufferedM4F.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom4F(v);
     return vr;
   }
 
-  @Override protected Vector4FType newVectorM4FAtIndexFromSize(
+  @Override protected VectorByteBuffered4FType newVectorM4FAtIndexFromSize(
     final long size,
     final long offset)
   {

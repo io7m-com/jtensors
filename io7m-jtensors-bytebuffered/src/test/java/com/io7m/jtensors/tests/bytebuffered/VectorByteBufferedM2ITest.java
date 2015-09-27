@@ -16,45 +16,44 @@
 
 package com.io7m.jtensors.tests.bytebuffered;
 
-import com.io7m.jtensors.Vector2IType;
+import com.io7m.jtensors.bytebuffered.VectorByteBuffered2IType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM2I;
-import com.io7m.jtensors.tests.VectorM2IBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedM2ITest
-  extends VectorM2IBufferedContract<Vector2IType>
+  extends VectorByteBufferedM2IContract<VectorByteBuffered2IType>
 {
-  @Override protected Vector2IType newVectorM2I(
+  @Override protected VectorByteBuffered2IType newVectorM2I(
     final int x,
     final int y)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector2IType v =
+    final VectorByteBuffered2IType v =
       VectorByteBufferedM2I.newVectorFromByteBuffer(buf, 50L);
     v.set2I(x, y);
     return v;
   }
 
-  @Override protected Vector2IType newVectorM2I()
+  @Override protected VectorByteBuffered2IType newVectorM2I()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector2IType v =
+    final VectorByteBuffered2IType v =
       VectorByteBufferedM2I.newVectorFromByteBuffer(buf, 50L);
     v.set2I((int) 0L, (int) 0L);
     return v;
   }
 
-  @Override protected Vector2IType newVectorM2I(final Vector2IType v)
+  @Override protected VectorByteBuffered2IType newVectorM2I(final VectorByteBuffered2IType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector2IType vr =
+    final VectorByteBuffered2IType vr =
       VectorByteBufferedM2I.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom2I(v);
     return vr;
   }
 
-  @Override protected Vector2IType newVectorM2IAtIndexFromSize(
+  @Override protected VectorByteBuffered2IType newVectorM2IAtIndexFromSize(
     final long size,
     final long offset)
   {

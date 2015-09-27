@@ -16,53 +16,53 @@
 
 package com.io7m.jtensors.tests.bytebuffered;
 
-import com.io7m.jtensors.Quaternion4FType;
 import com.io7m.jtensors.Vector4FType;
+import com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4FType;
 import com.io7m.jtensors.bytebuffered.QuaternionByteBufferedM4F;
-import com.io7m.jtensors.tests.VectorM4FBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class QuaternionByteBufferedM4FVectorTest
-  extends VectorM4FBufferedContract<Quaternion4FType>
+  extends VectorByteBufferedM4FContract<QuaternionByteBuffered4FType>
 {
   @Override protected Vector4FType newVectorM4FAtIndexFromSize(
     final long size,
     final long offset)
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
-    final Quaternion4FType vr =
+    final QuaternionByteBuffered4FType vr =
       QuaternionByteBufferedM4F.newQuaternionFromByteBuffer(buf, offset);
     return vr;
   }
 
-  @Override protected Quaternion4FType newVectorM4F(
+  @Override protected QuaternionByteBuffered4FType newVectorM4F(
     final float x,
     final float y,
     final float z,
     final float w)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Quaternion4FType vr =
+    final QuaternionByteBuffered4FType vr =
       QuaternionByteBufferedM4F.newQuaternionFromByteBuffer(buf, 50L);
     vr.set4F(x, y, z, w);
     return vr;
   }
 
-  @Override protected Quaternion4FType newVectorM4F()
+  @Override protected QuaternionByteBuffered4FType newVectorM4F()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Quaternion4FType vr =
+    final QuaternionByteBuffered4FType vr =
       QuaternionByteBufferedM4F.newQuaternionFromByteBuffer(buf, 50L);
     vr.set4F(0.0f, 0.0f, 0.0f, 1.0f);
     return vr;
   }
 
   @Override
-  protected Quaternion4FType newVectorM4FFrom(final Quaternion4FType v)
+  protected QuaternionByteBuffered4FType newVectorM4FFrom(final
+  QuaternionByteBuffered4FType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Quaternion4FType vr =
+    final QuaternionByteBuffered4FType vr =
       QuaternionByteBufferedM4F.newQuaternionFromByteBuffer(buf, 50L);
     vr.copyFrom4F(v);
     return vr;

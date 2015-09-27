@@ -16,48 +16,47 @@
 
 package com.io7m.jtensors.tests.bytebuffered;
 
-import com.io7m.jtensors.Vector4LType;
+import com.io7m.jtensors.bytebuffered.VectorByteBuffered4LType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM4L;
-import com.io7m.jtensors.tests.VectorM4LBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedM4LTest
-  extends VectorM4LBufferedContract<Vector4LType>
+  extends VectorByteBufferedM4LContract<VectorByteBuffered4LType>
 {
-  @Override protected Vector4LType newVectorM4L(
+  @Override protected VectorByteBuffered4LType newVectorM4L(
     final long x,
     final long y,
     final long z,
     final long w)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector4LType v =
+    final VectorByteBuffered4LType v =
       VectorByteBufferedM4L.newVectorFromByteBuffer(buf, 50L);
     v.set4L(x, y, z, w);
     return v;
   }
 
-  @Override protected Vector4LType newVectorM4L()
+  @Override protected VectorByteBuffered4LType newVectorM4L()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector4LType v =
+    final VectorByteBuffered4LType v =
       VectorByteBufferedM4L.newVectorFromByteBuffer(buf, 50L);
     v.set4L(0L, 0L, 0L, 1L);
     return v;
   }
 
-  @Override protected Vector4LType newVectorM4LFrom(
-    final Vector4LType v)
+  @Override protected VectorByteBuffered4LType newVectorM4LFrom(
+    final VectorByteBuffered4LType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final Vector4LType vr =
+    final VectorByteBuffered4LType vr =
       VectorByteBufferedM4L.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom4L(v);
     return vr;
   }
 
-  @Override protected Vector4LType newVectorM4LAtIndexFromSize(
+  @Override protected VectorByteBuffered4LType newVectorM4LAtIndexFromSize(
     final long size,
     final long offset)
   {

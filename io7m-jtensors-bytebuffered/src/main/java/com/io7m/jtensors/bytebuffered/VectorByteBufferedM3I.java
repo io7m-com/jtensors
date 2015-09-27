@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Vector3IType;
 import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3IType;
 
@@ -33,10 +32,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM3I implements Vector3IType
+public final class VectorByteBufferedM3I implements VectorByteBuffered3IType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private VectorByteBufferedM3I(
     final ByteBuffer in_buffer,
@@ -58,7 +57,7 @@ public final class VectorByteBufferedM3I implements Vector3IType
    * @return A new buffered vector
    */
 
-  public static Vector3IType newVectorFromByteBuffer(
+  public static VectorByteBuffered3IType newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -194,5 +193,15 @@ public final class VectorByteBufferedM3I implements Vector3IType
       return false;
     }
     return this.getZI() == other.getZI();
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

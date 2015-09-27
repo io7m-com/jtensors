@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Vector2DType;
 import com.io7m.jtensors.VectorReadable2DType;
 
 import java.nio.ByteBuffer;
@@ -32,10 +31,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM2D implements Vector2DType
+public final class VectorByteBufferedM2D implements VectorByteBuffered2DType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private VectorByteBufferedM2D(
     final ByteBuffer in_buffer,
@@ -57,7 +56,7 @@ public final class VectorByteBufferedM2D implements Vector2DType
    * @return A new buffered vector
    */
 
-  public static Vector2DType newVectorFromByteBuffer(
+  public static VectorByteBuffered2DType newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -165,5 +164,15 @@ public final class VectorByteBufferedM2D implements Vector2DType
     }
     return Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
       other.getYD());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }
