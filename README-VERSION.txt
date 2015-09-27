@@ -1,1 +1,1 @@
-io7m-jtensors 6.0.1
+io7m-jtensors 7.0.0-beta0003
