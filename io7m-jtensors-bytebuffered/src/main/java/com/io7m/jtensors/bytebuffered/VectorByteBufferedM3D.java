@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Vector3DType;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
 
@@ -33,10 +32,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM3D implements Vector3DType
+public final class VectorByteBufferedM3D implements VectorByteBuffered3DType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private VectorByteBufferedM3D(
     final ByteBuffer in_buffer,
@@ -58,7 +57,7 @@ public final class VectorByteBufferedM3D implements Vector3DType
    * @return A new buffered vector
    */
 
-  public static Vector3DType newVectorFromByteBuffer(
+  public static VectorByteBuffered3DType newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -70,10 +69,7 @@ public final class VectorByteBufferedM3D implements Vector3DType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public double getZD()
@@ -204,5 +200,15 @@ public final class VectorByteBufferedM3D implements Vector3DType
     }
     return Double.doubleToLongBits(this.getZD()) == Double.doubleToLongBits(
       other.getZD());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

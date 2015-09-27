@@ -16,47 +16,46 @@
 
 package com.io7m.jtensors.tests.bytebuffered.parameterized;
 
+import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3FType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM3F;
-import com.io7m.jtensors.parameterized.PVector3FType;
-import com.io7m.jtensors.tests.parameterized.PVectorM3FBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class PVectorByteBufferedM3FTest<T>
-  extends PVectorM3FBufferedContract<T, PVector3FType<T>>
+  extends PVectorByteBufferedM3FContract<T, PVectorByteBuffered3FType<T>>
 {
-  @Override protected PVector3FType<T> newVectorM3F(
+  @Override protected PVectorByteBuffered3FType<T> newVectorM3F(
     final float x,
     final float y,
     final float z)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector3FType<T> v =
+    final PVectorByteBuffered3FType<T> v =
       PVectorByteBufferedM3F.newVectorFromByteBuffer(buf, 50L);
     v.set3F(x, y, z);
     return v;
   }
 
-  @Override protected PVector3FType<T> newVectorM3F()
+  @Override protected PVectorByteBuffered3FType<T> newVectorM3F()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector3FType<T> v =
+    final PVectorByteBuffered3FType<T> v =
       PVectorByteBufferedM3F.newVectorFromByteBuffer(buf, 50L);
     v.set3F(0.0f, 0.0f, 0.0f);
     return v;
   }
 
-  @Override protected PVector3FType<T> newVectorM3F(
-    final PVector3FType<T> v)
+  @Override protected PVectorByteBuffered3FType<T> newVectorM3F(
+    final PVectorByteBuffered3FType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector3FType<T> vr =
+    final PVectorByteBuffered3FType<T> vr =
       PVectorByteBufferedM3F.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom3F(v);
     return vr;
   }
 
-  @Override protected PVector3FType<T> newVectorM3FAtIndexFromSize(
+  @Override protected PVectorByteBuffered3FType<T> newVectorM3FAtIndexFromSize(
     final long size,
     final long offset)
   {

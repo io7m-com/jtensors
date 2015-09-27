@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Vector3LType;
 import com.io7m.jtensors.VectorReadable2LType;
 import com.io7m.jtensors.VectorReadable3LType;
 
@@ -33,10 +32,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM3L implements Vector3LType
+public final class VectorByteBufferedM3L implements VectorByteBuffered3LType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private VectorByteBufferedM3L(
     final ByteBuffer in_buffer,
@@ -58,7 +57,7 @@ public final class VectorByteBufferedM3L implements Vector3LType
    * @return A new buffered vector
    */
 
-  public static Vector3LType newVectorFromByteBuffer(
+  public static VectorByteBuffered3LType newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -70,10 +69,7 @@ public final class VectorByteBufferedM3L implements Vector3LType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public long getZL()
@@ -199,5 +195,15 @@ public final class VectorByteBufferedM3L implements Vector3LType
       return false;
     }
     return this.getZL() == other.getZL();
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

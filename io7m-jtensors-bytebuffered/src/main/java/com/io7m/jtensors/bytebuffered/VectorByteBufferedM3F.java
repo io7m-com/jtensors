@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Vector3FType;
 import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
 
@@ -33,10 +32,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM3F implements Vector3FType
+public final class VectorByteBufferedM3F implements VectorByteBuffered3FType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private VectorByteBufferedM3F(
     final ByteBuffer in_buffer,
@@ -58,7 +57,7 @@ public final class VectorByteBufferedM3F implements Vector3FType
    * @return A new buffered vector
    */
 
-  public static Vector3FType newVectorFromByteBuffer(
+  public static VectorByteBuffered3FType newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -70,10 +69,7 @@ public final class VectorByteBufferedM3F implements Vector3FType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 4));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public float getZF()
@@ -204,5 +200,15 @@ public final class VectorByteBufferedM3F implements Vector3FType
     }
     return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
       other.getZF());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

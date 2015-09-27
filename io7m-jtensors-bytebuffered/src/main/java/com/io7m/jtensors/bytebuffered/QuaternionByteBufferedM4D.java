@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Quaternion4DType;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.VectorReadable4DType;
@@ -34,10 +33,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class QuaternionByteBufferedM4D implements Quaternion4DType
+public final class QuaternionByteBufferedM4D implements QuaternionByteBuffered4DType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private QuaternionByteBufferedM4D(
     final ByteBuffer in_buffer,
@@ -59,7 +58,7 @@ public final class QuaternionByteBufferedM4D implements Quaternion4DType
    * @return A new buffered vector
    */
 
-  public static Quaternion4DType newQuaternionFromByteBuffer(
+  public static QuaternionByteBuffered4DType newQuaternionFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -71,10 +70,7 @@ public final class QuaternionByteBufferedM4D implements Quaternion4DType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public double getWD()
@@ -245,5 +241,15 @@ public final class QuaternionByteBufferedM4D implements Quaternion4DType
     }
     return Double.doubleToLongBits(this.getZD()) == Double.doubleToLongBits(
       other.getZD());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

@@ -16,47 +16,47 @@
 
 package com.io7m.jtensors.tests.bytebuffered;
 
-import com.io7m.jtensors.Matrix3x3FType;
 import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.MatrixReadable3x3FType;
+import com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3FType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM3x3F;
-import com.io7m.jtensors.tests.Matrix3x3FBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class MatrixByteBufferedM3x3FTest
-  extends Matrix3x3FBufferedContract<Matrix3x3FType>
+  extends MatrixByteBuffered3x3FContract<MatrixByteBuffered3x3FType>
 {
-  @Override protected Matrix3x3FType newMatrix()
+  @Override protected MatrixByteBuffered3x3FType newMatrix()
   {
     final ByteBuffer buf = ByteBuffer.allocate(200);
-    final Matrix3x3FType mr =
+    final MatrixByteBuffered3x3FType mr =
       MatrixByteBufferedM3x3F.newMatrixFromByteBuffer(buf, 0L);
     MatrixM3x3F.setIdentity(mr);
     return mr;
   }
 
-  @Override
-  protected Matrix3x3FType newMatrixFrom(final MatrixReadable3x3FType m)
+  @Override protected MatrixByteBuffered3x3FType newMatrixFrom(
+    final MatrixReadable3x3FType m)
   {
     final ByteBuffer buf = ByteBuffer.allocate(200);
-    final Matrix3x3FType mr =
+    final MatrixByteBuffered3x3FType mr =
       MatrixByteBufferedM3x3F.newMatrixFromByteBuffer(buf, 0L);
     MatrixM3x3F.copy(m, mr);
     return mr;
   }
 
-  @Override protected void checkDirectBufferInvariants(final Matrix3x3FType m)
+  @Override
+  protected void checkDirectBufferInvariants(final MatrixByteBuffered3x3FType m)
   {
     // Nothing required
   }
 
-  @Override protected Matrix3x3FType newMatrixAtIndexFromSize(
+  @Override protected MatrixByteBuffered3x3FType newMatrixAtIndexFromSize(
     final long size,
     final long offset)
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
-    final Matrix3x3FType mr =
+    final MatrixByteBuffered3x3FType mr =
       MatrixByteBufferedM3x3F.newMatrixFromByteBuffer(buf, offset);
     return mr;
   }

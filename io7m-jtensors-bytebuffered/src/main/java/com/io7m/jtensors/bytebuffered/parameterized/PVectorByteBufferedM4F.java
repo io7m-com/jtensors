@@ -22,7 +22,7 @@ import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorReadable4FType;
-import com.io7m.jtensors.parameterized.PVector4FType;
+import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.parameterized.PVectorReadable2FType;
 import com.io7m.jtensors.parameterized.PVectorReadable3FType;
 import com.io7m.jtensors.parameterized.PVectorReadable4FType;
@@ -39,10 +39,10 @@ import java.nio.ByteBuffer;
  * @param <T> A phantom type parameter
  */
 
-public final class PVectorByteBufferedM4F<T> implements PVector4FType<T>
+public final class PVectorByteBufferedM4F<T> implements PVectorByteBuffered4FType<T>
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private PVectorByteBufferedM4F(
     final ByteBuffer in_buffer,
@@ -65,7 +65,7 @@ public final class PVectorByteBufferedM4F<T> implements PVector4FType<T>
    * @return A new buffered vector
    */
 
-  public static <T> PVector4FType<T> newVectorFromByteBuffer(
+  public static <T> PVectorByteBuffered4FType<T> newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -77,10 +77,7 @@ public final class PVectorByteBufferedM4F<T> implements PVector4FType<T>
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 4));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public float getWF()
@@ -270,5 +267,15 @@ public final class PVectorByteBufferedM4F<T> implements PVector4FType<T>
   {
     this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
     this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

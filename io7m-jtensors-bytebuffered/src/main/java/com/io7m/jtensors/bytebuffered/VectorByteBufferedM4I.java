@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Vector4IType;
 import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3IType;
 import com.io7m.jtensors.VectorReadable4IType;
@@ -34,10 +33,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM4I implements Vector4IType
+public final class VectorByteBufferedM4I implements VectorByteBuffered4IType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private VectorByteBufferedM4I(
     final ByteBuffer in_buffer,
@@ -59,7 +58,7 @@ public final class VectorByteBufferedM4I implements Vector4IType
    * @return A new buffered vector
    */
 
-  public static Vector4IType newVectorFromByteBuffer(
+  public static VectorByteBuffered4IType newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -71,10 +70,7 @@ public final class VectorByteBufferedM4I implements Vector4IType
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public int getWI()
@@ -234,5 +230,15 @@ public final class VectorByteBufferedM4I implements Vector4IType
       return false;
     }
     return this.getZI() == other.getZI();
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

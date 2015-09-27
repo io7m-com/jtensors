@@ -26,7 +26,7 @@ import com.io7m.jtensors.VectorReadable4DType;
 import com.io7m.jtensors.VectorWritable2DType;
 import com.io7m.jtensors.VectorWritable3DType;
 import com.io7m.jtensors.VectorWritable4DType;
-import com.io7m.jtensors.parameterized.PMatrix4x4DType;
+import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 
 import java.nio.ByteBuffer;
 
@@ -42,10 +42,10 @@ import java.nio.ByteBuffer;
  */
 
 public final class PMatrixByteBufferedM4x4D<T0, T1>
-  implements PMatrix4x4DType<T0, T1>
+  implements PMatrixByteBuffered4x4DType<T0, T1>
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private PMatrixByteBufferedM4x4D(
     final ByteBuffer in_buffer,
@@ -69,7 +69,8 @@ public final class PMatrixByteBufferedM4x4D<T0, T1>
    * @return A new buffered matrix
    */
 
-  public static <T0, T1> PMatrix4x4DType<T0, T1> newMatrixFromByteBuffer(
+  public static <T0, T1> PMatrixByteBuffered4x4DType<T0, T1>
+  newMatrixFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -118,10 +119,7 @@ public final class PMatrixByteBufferedM4x4D<T0, T1>
     final int index)
   {
     final long b = CheckedMath.add(base, (long) (index * 8));
-    if (b >= (long) Integer.MAX_VALUE) {
-      throw new IndexOutOfBoundsException(Long.toString(b));
-    }
-    return (int) b;
+    return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
   @Override public String toString()
@@ -486,5 +484,15 @@ public final class PMatrixByteBufferedM4x4D<T0, T1>
     PMatrixByteBufferedM4x4D.checkRow(row);
     PMatrixByteBufferedM4x4D.checkColumn(column);
     this.setAtOffsetAndRowColumn(this.offset, row, column, value);
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }
