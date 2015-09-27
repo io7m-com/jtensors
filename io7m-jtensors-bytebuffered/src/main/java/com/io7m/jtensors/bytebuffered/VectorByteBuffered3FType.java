@@ -20,6 +20,8 @@ import com.io7m.jtensors.Vector3FType;
 
 /**
  * The type of {@link Vector3FType} values that are also byte buffered.
+ *
+ * @since 7.0.0
  */
 
 public interface VectorByteBuffered3FType extends Vector3FType, ByteBufferedType

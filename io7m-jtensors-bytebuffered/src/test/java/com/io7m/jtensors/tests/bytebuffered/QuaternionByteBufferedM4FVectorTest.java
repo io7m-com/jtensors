@@ -57,9 +57,8 @@ public final class QuaternionByteBufferedM4FVectorTest
     return vr;
   }
 
-  @Override
-  protected QuaternionByteBuffered4FType newVectorM4FFrom(final
-  QuaternionByteBuffered4FType v)
+  @Override protected QuaternionByteBuffered4FType newVectorM4FFrom(
+    final QuaternionByteBuffered4FType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final QuaternionByteBuffered4FType vr =

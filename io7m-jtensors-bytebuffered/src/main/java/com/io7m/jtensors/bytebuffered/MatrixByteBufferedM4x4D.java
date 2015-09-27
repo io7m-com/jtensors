@@ -19,7 +19,6 @@ package com.io7m.jtensors.bytebuffered;
 import com.io7m.jintegers.CheckedMath;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
-import com.io7m.jtensors.Matrix4x4DType;
 import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
@@ -38,10 +37,10 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class MatrixByteBufferedM4x4D implements Matrix4x4DType
+public final class MatrixByteBufferedM4x4D implements MatrixByteBuffered4x4DType
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private MatrixByteBufferedM4x4D(
     final ByteBuffer in_buffer,
@@ -63,7 +62,7 @@ public final class MatrixByteBufferedM4x4D implements Matrix4x4DType
    * @return A new buffered matrix
    */
 
-  public static Matrix4x4DType newMatrixFromByteBuffer(
+  public static MatrixByteBuffered4x4DType newMatrixFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -476,5 +475,15 @@ public final class MatrixByteBufferedM4x4D implements Matrix4x4DType
     MatrixByteBufferedM4x4D.checkRow(row);
     MatrixByteBufferedM4x4D.checkColumn(column);
     this.setAtOffsetAndRowColumn(this.offset, row, column, value);
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

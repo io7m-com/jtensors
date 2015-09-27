@@ -16,15 +16,17 @@
 
 package com.io7m.jtensors.bytebuffered;
 
-import com.io7m.jtensors.Vector2FType;
+import com.io7m.jtensors.Matrix3x3FType;
 
 /**
- * The type of {@link Vector2FType} values that are also byte buffered.
+ * <p>The type of {@link Matrix3x3FType} values that are also byte
+ * buffered.</p>
  *
  * @since 7.0.0
  */
 
-public interface VectorByteBuffered2FType extends Vector2FType, ByteBufferedType
+public interface MatrixByteBuffered3x3FType
+  extends Matrix3x3FType, ByteBufferedType
 {
   // No extra functions
 }

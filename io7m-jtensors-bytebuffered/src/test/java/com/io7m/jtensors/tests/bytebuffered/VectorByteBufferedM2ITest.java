@@ -44,7 +44,9 @@ public final class VectorByteBufferedM2ITest
     return v;
   }
 
-  @Override protected VectorByteBuffered2IType newVectorM2I(final VectorByteBuffered2IType v)
+  @Override
+  protected VectorByteBuffered2IType newVectorM2I(final
+  VectorByteBuffered2IType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final VectorByteBuffered2IType vr =

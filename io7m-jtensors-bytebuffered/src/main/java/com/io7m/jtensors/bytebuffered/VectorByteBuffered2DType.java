@@ -20,6 +20,8 @@ import com.io7m.jtensors.Vector2DType;
 
 /**
  * The type of {@link Vector2DType} values that are also byte buffered.
+ *
+ * @since 7.0.0
  */
 
 public interface VectorByteBuffered2DType extends Vector2DType, ByteBufferedType

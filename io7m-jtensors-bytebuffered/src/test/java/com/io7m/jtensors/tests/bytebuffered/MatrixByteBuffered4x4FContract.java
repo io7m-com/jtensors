@@ -14,17 +14,28 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.bytebuffered;
+package com.io7m.jtensors.tests.bytebuffered;
 
-import com.io7m.jtensors.Vector2FType;
+import com.io7m.jtensors.bytebuffered.MatrixByteBuffered4x4FType;
+import com.io7m.jtensors.tests.Matrix4x4FBufferedContract;
+import org.junit.Assert;
+import org.junit.Test;
 
-/**
- * The type of {@link Vector2FType} values that are also byte buffered.
- *
- * @since 7.0.0
- */
-
-public interface VectorByteBuffered2FType extends Vector2FType, ByteBufferedType
+public abstract class MatrixByteBuffered4x4FContract<T extends
+  MatrixByteBuffered4x4FType>
+  extends Matrix4x4FBufferedContract<T>
 {
-  // No extra functions
+  @Test public final void testByteOffsetSetGetIdentity()
+  {
+    final T v = this.newMatrix();
+    v.setByteOffset(23L);
+    Assert.assertEquals(23L, v.getByteOffset());
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class)
+  public final void testByteOffsetSetOutOfRange()
+  {
+    final T v = this.newMatrix();
+    v.setByteOffset((long) Integer.MAX_VALUE);
+  }
 }

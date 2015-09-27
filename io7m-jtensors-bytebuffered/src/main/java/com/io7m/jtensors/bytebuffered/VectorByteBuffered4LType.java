@@ -20,6 +20,8 @@ import com.io7m.jtensors.Vector4LType;
 
 /**
  * The type of {@link Vector4LType} values that are also byte buffered.
+ *
+ * @since 7.0.0
  */
 
 public interface VectorByteBuffered4LType extends Vector4LType, ByteBufferedType

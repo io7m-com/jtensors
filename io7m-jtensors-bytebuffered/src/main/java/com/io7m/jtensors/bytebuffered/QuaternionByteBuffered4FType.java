@@ -20,6 +20,8 @@ import com.io7m.jtensors.Quaternion4FType;
 
 /**
  * The type of {@link Quaternion4FType} values that are also byte buffered.
+ *
+ * @since 7.0.0
  */
 
 public interface QuaternionByteBuffered4FType

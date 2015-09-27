@@ -20,6 +20,8 @@ import com.io7m.jtensors.Vector4FType;
 
 /**
  * The type of {@link Vector4FType} values that are also byte buffered.
+ *
+ * @since 7.0.0
  */
 
 public interface VectorByteBuffered4FType extends Vector4FType, ByteBufferedType
