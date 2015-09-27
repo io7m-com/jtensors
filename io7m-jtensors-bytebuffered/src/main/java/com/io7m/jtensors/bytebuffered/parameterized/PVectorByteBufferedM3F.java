@@ -22,7 +22,6 @@ import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
-import com.io7m.jtensors.parameterized.PVector3FType;
 import com.io7m.jtensors.parameterized.PVectorReadable2FType;
 import com.io7m.jtensors.parameterized.PVectorReadable3FType;
 
@@ -38,10 +37,10 @@ import java.nio.ByteBuffer;
  * @param <T> A phantom type parameter
  */
 
-public final class PVectorByteBufferedM3F<T> implements PVector3FType<T>
+public final class PVectorByteBufferedM3F<T> implements PVectorByteBuffered3FType<T>
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private PVectorByteBufferedM3F(
     final ByteBuffer in_buffer,
@@ -64,7 +63,7 @@ public final class PVectorByteBufferedM3F<T> implements PVector3FType<T>
    * @return A new buffered vector
    */
 
-  public static <T> PVector3FType<T> newVectorFromByteBuffer(
+  public static <T> PVectorByteBuffered3FType<T> newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -220,5 +219,15 @@ public final class PVectorByteBufferedM3F<T> implements PVector3FType<T>
   {
     this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
     this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

@@ -17,85 +17,85 @@
 package com.io7m.jtensors.tests.bytebuffered.parameterized;
 
 import com.io7m.jtensors.MatrixM3x3D;
+import com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered3x3DType;
 import com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBufferedM3x3D;
-import com.io7m.jtensors.parameterized.PMatrix3x3DType;
 import com.io7m.jtensors.parameterized.PMatrixM3x3D;
 import com.io7m.jtensors.parameterized.PMatrixReadable3x3DType;
-import com.io7m.jtensors.tests.parameterized.PMatrix3x3DBufferedContract;
 
 import java.nio.ByteBuffer;
 
 //@formatter:off
 public final class PMatrixByteBufferedM3x3DTest<T0, T1, T2>
-  extends PMatrix3x3DBufferedContract<T0, T1, T2,
-  PMatrix3x3DType<T0, T1>,
-  PMatrix3x3DType<T0, T1>,
-  PMatrix3x3DType<T1, T2>,
-  PMatrix3x3DType<T0, T2>,
-  PMatrix3x3DType<T1, T0>>
+  extends PMatrixByteBuffered3x3DContract<T0, T1, T2,
+  PMatrixByteBuffered3x3DType<T0, T1>,
+  PMatrixByteBuffered3x3DType<T0, T1>,
+  PMatrixByteBuffered3x3DType<T1, T2>,
+  PMatrixByteBuffered3x3DType<T0, T2>,
+  PMatrixByteBuffered3x3DType<T1, T0>>
 {
     //@formatter:on
 
-  @Override protected PMatrix3x3DType<T0, T1> newMatrixAtIndexFromSize(
+  @Override
+  protected PMatrixByteBuffered3x3DType<T0, T1> newMatrixAtIndexFromSize(
     final long size,
     final long offset)
   {
     final ByteBuffer b = ByteBuffer.allocate((int) size);
-    final PMatrix3x3DType<T0, T1> mr =
+    final PMatrixByteBuffered3x3DType<T0, T1> mr =
       PMatrixByteBufferedM3x3D.newMatrixFromByteBuffer(b, offset);
     return mr;
   }
 
-  @Override protected PMatrix3x3DType<T0, T1> newMatrix()
+  @Override protected PMatrixByteBuffered3x3DType<T0, T1> newMatrix()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix3x3DType<T0, T1> mr =
+    final PMatrixByteBuffered3x3DType<T0, T1> mr =
       PMatrixByteBufferedM3x3D.newMatrixFromByteBuffer(b, 0L);
     MatrixM3x3D.setIdentity(mr);
     return mr;
   }
 
-  @Override protected PMatrix3x3DType<T1, T2> newMatrixMultLeft()
+  @Override protected PMatrixByteBuffered3x3DType<T1, T2> newMatrixMultLeft()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix3x3DType<T1, T2> mr =
+    final PMatrixByteBuffered3x3DType<T1, T2> mr =
       PMatrixByteBufferedM3x3D.newMatrixFromByteBuffer(b, 0L);
     MatrixM3x3D.setIdentity(mr);
     return mr;
   }
 
-  @Override protected PMatrix3x3DType<T0, T1> newMatrixMultRight()
+  @Override protected PMatrixByteBuffered3x3DType<T0, T1> newMatrixMultRight()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix3x3DType<T0, T1> mr =
+    final PMatrixByteBuffered3x3DType<T0, T1> mr =
       PMatrixByteBufferedM3x3D.newMatrixFromByteBuffer(b, 0L);
     MatrixM3x3D.setIdentity(mr);
     return mr;
   }
 
-  @Override protected PMatrix3x3DType<T0, T2> newMatrixMultResult()
+  @Override protected PMatrixByteBuffered3x3DType<T0, T2> newMatrixMultResult()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix3x3DType<T0, T2> mr =
+    final PMatrixByteBuffered3x3DType<T0, T2> mr =
       PMatrixByteBufferedM3x3D.newMatrixFromByteBuffer(b, 0L);
     MatrixM3x3D.setIdentity(mr);
     return mr;
   }
 
-  @Override protected PMatrix3x3DType<T1, T0> newMatrixInverse()
+  @Override protected PMatrixByteBuffered3x3DType<T1, T0> newMatrixInverse()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix3x3DType<T1, T0> mr =
+    final PMatrixByteBuffered3x3DType<T1, T0> mr =
       PMatrixByteBufferedM3x3D.newMatrixFromByteBuffer(b, 0L);
     MatrixM3x3D.setIdentity(mr);
     return mr;
   }
 
-  @Override protected PMatrix3x3DType<T0, T1> newMatrixFrom(
+  @Override protected PMatrixByteBuffered3x3DType<T0, T1> newMatrixFrom(
     final PMatrixReadable3x3DType<T0, T1> m)
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix3x3DType<T0, T1> mr =
+    final PMatrixByteBuffered3x3DType<T0, T1> mr =
       PMatrixByteBufferedM3x3D.newMatrixFromByteBuffer(b, 0L);
     PMatrixM3x3D.copy(m, mr);
     return mr;
@@ -108,7 +108,7 @@ public final class PMatrixByteBufferedM3x3DTest<T0, T1, T2>
   }
 
   @Override protected void checkDirectBufferInvariantsGeneric(
-    final PMatrix3x3DType<T0, T1> m)
+    final PMatrixByteBuffered3x3DType<T0, T1> m)
   {
     // Nothing
   }

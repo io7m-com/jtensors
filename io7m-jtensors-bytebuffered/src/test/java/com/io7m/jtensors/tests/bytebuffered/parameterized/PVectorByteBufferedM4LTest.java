@@ -16,48 +16,47 @@
 
 package com.io7m.jtensors.tests.bytebuffered.parameterized;
 
+import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4LType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM4L;
-import com.io7m.jtensors.parameterized.PVector4LType;
-import com.io7m.jtensors.tests.parameterized.PVectorM4LBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class PVectorByteBufferedM4LTest<T>
-  extends PVectorM4LBufferedContract<T, PVector4LType<T>>
+  extends PVectorByteBufferedM4LContract<T, PVectorByteBuffered4LType<T>>
 {
-  @Override protected PVector4LType<T> newVectorM4L(
+  @Override protected PVectorByteBuffered4LType<T> newVectorM4L(
     final long x,
     final long y,
     final long z,
     final long w)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector4LType<T> v =
+    final PVectorByteBuffered4LType<T> v =
       PVectorByteBufferedM4L.newVectorFromByteBuffer(buf, 50L);
     v.set4L(x, y, z, w);
     return v;
   }
 
-  @Override protected PVector4LType<T> newVectorM4L()
+  @Override protected PVectorByteBuffered4LType<T> newVectorM4L()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector4LType<T> v =
+    final PVectorByteBuffered4LType<T> v =
       PVectorByteBufferedM4L.newVectorFromByteBuffer(buf, 50L);
     v.set4L(0L, 0L, 0L, 1L);
     return v;
   }
 
-  @Override protected PVector4LType<T> newVectorM4LFrom(
-    final PVector4LType<T> v)
+  @Override protected PVectorByteBuffered4LType<T> newVectorM4LFrom(
+    final PVectorByteBuffered4LType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector4LType<T> vr =
+    final PVectorByteBuffered4LType<T> vr =
       PVectorByteBufferedM4L.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom4L(v);
     return vr;
   }
 
-  @Override protected PVector4LType<T> newVectorM4LAtIndexFromSize(
+  @Override protected PVectorByteBuffered4LType<T> newVectorM4LAtIndexFromSize(
     final long size,
     final long offset)
   {

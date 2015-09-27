@@ -17,94 +17,89 @@
 package com.io7m.jtensors.tests.bytebuffered.parameterized;
 
 import com.io7m.jtensors.MatrixM4x4F;
+import com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered4x4FType;
 import com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBufferedM4x4F;
 import com.io7m.jtensors.parameterized.PMatrix4x4FType;
 import com.io7m.jtensors.parameterized.PMatrixM4x4F;
 import com.io7m.jtensors.parameterized.PMatrixReadable4x4FType;
-import com.io7m.jtensors.tests.parameterized.PMatrix4x4FBufferedContract;
 
 import java.nio.ByteBuffer;
 
 //@formatter:off
 public final class PMatrixByteBufferedM4x4FTest<T0, T1, T2>
-  extends PMatrix4x4FBufferedContract<T0, T1, T2,
-  PMatrix4x4FType<T0, T1>,
-  PMatrix4x4FType<T0, T1>,
-  PMatrix4x4FType<T1, T2>,
-  PMatrix4x4FType<T0, T2>,
-  PMatrix4x4FType<T1, T0>>
+  extends PMatrixByteBuffered4x4FContract<T0, T1, T2,
+  PMatrixByteBuffered4x4FType<T0, T1>,
+  PMatrixByteBuffered4x4FType<T0, T1>,
+  PMatrixByteBuffered4x4FType<T1, T2>,
+  PMatrixByteBuffered4x4FType<T0, T2>,
+  PMatrixByteBuffered4x4FType<T1, T0>>
 {
     //@formatter:on
 
-  @Override protected PMatrix4x4FType<T0, T1> newMatrixAtIndexFromSize(
+  @Override
+  protected PMatrixByteBuffered4x4FType<T0, T1> newMatrixAtIndexFromSize(
     final long size,
     final long offset)
   {
     final ByteBuffer b = ByteBuffer.allocate((int) size);
-    final PMatrix4x4FType<T0, T1> mr =
+    final PMatrixByteBuffered4x4FType<T0, T1> mr =
       PMatrixByteBufferedM4x4F.newMatrixFromByteBuffer(b, offset);
     return mr;
   }
 
-  @Override protected PMatrix4x4FType<T0, T1> newMatrix()
+  @Override protected PMatrixByteBuffered4x4FType<T0, T1> newMatrix()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix4x4FType<T0, T1> mr =
+    final PMatrixByteBuffered4x4FType<T0, T1> mr =
       PMatrixByteBufferedM4x4F.newMatrixFromByteBuffer(b, 0L);
     MatrixM4x4F.setIdentity(mr);
     return mr;
   }
 
-  @Override protected PMatrix4x4FType<T1, T2> newMatrixMultLeft()
+  @Override protected PMatrixByteBuffered4x4FType<T1, T2> newMatrixMultLeft()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix4x4FType<T1, T2> mr =
+    final PMatrixByteBuffered4x4FType<T1, T2> mr =
       PMatrixByteBufferedM4x4F.newMatrixFromByteBuffer(b, 0L);
     MatrixM4x4F.setIdentity(mr);
     return mr;
   }
 
-  @Override protected PMatrix4x4FType<T0, T1> newMatrixMultRight()
+  @Override protected PMatrixByteBuffered4x4FType<T0, T1> newMatrixMultRight()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix4x4FType<T0, T1> mr =
+    final PMatrixByteBuffered4x4FType<T0, T1> mr =
       PMatrixByteBufferedM4x4F.newMatrixFromByteBuffer(b, 0L);
     MatrixM4x4F.setIdentity(mr);
     return mr;
   }
 
-  @Override protected PMatrix4x4FType<T0, T2> newMatrixMultResult()
+  @Override protected PMatrixByteBuffered4x4FType<T0, T2> newMatrixMultResult()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix4x4FType<T0, T2> mr =
+    final PMatrixByteBuffered4x4FType<T0, T2> mr =
       PMatrixByteBufferedM4x4F.newMatrixFromByteBuffer(b, 0L);
     MatrixM4x4F.setIdentity(mr);
     return mr;
   }
 
-  @Override protected PMatrix4x4FType<T1, T0> newMatrixInverse()
+  @Override protected PMatrixByteBuffered4x4FType<T1, T0> newMatrixInverse()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix4x4FType<T1, T0> mr =
+    final PMatrixByteBuffered4x4FType<T1, T0> mr =
       PMatrixByteBufferedM4x4F.newMatrixFromByteBuffer(b, 0L);
     MatrixM4x4F.setIdentity(mr);
     return mr;
   }
 
-  @Override protected PMatrix4x4FType<T0, T1> newMatrixFrom(
+  @Override protected PMatrixByteBuffered4x4FType<T0, T1> newMatrixFrom(
     final PMatrixReadable4x4FType<T0, T1> m)
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
-    final PMatrix4x4FType<T0, T1> mr =
+    final PMatrixByteBuffered4x4FType<T0, T1> mr =
       PMatrixByteBufferedM4x4F.newMatrixFromByteBuffer(b, 0L);
     PMatrixM4x4F.copy(m, mr);
     return mr;
-  }
-
-  @Override
-  protected void checkDirectBufferInvariants(final PMatrix4x4FType<T0, T1> m)
-  {
-    // Nothing
   }
 
   @Override protected void checkDirectBufferInvariantsUntyped(
@@ -113,4 +108,9 @@ public final class PMatrixByteBufferedM4x4FTest<T0, T1, T2>
     // Nothing
   }
 
+  @Override protected void checkDirectBufferInvariants(
+    final PMatrixByteBuffered4x4FType<T0, T1> m)
+  {
+    // Nothing
+  }
 }

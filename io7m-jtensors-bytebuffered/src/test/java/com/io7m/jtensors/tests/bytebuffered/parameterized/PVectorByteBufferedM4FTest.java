@@ -16,48 +16,47 @@
 
 package com.io7m.jtensors.tests.bytebuffered.parameterized;
 
+import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4FType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM4F;
-import com.io7m.jtensors.parameterized.PVector4FType;
-import com.io7m.jtensors.tests.parameterized.PVectorM4FBufferedContract;
 
 import java.nio.ByteBuffer;
 
 public final class PVectorByteBufferedM4FTest<T>
-  extends PVectorM4FBufferedContract<T, PVector4FType<T>>
+  extends PVectorByteBufferedM4FContract<T, PVectorByteBuffered4FType<T>>
 {
-  @Override protected PVector4FType<T> newVectorM4F(
+  @Override protected PVectorByteBuffered4FType<T> newVectorM4F(
     final float x,
     final float y,
     final float z,
     final float w)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector4FType<T> v =
+    final PVectorByteBuffered4FType<T> v =
       PVectorByteBufferedM4F.newVectorFromByteBuffer(buf, 50L);
     v.set4F(x, y, z, w);
     return v;
   }
 
-  @Override protected PVector4FType<T> newVectorM4F()
+  @Override protected PVectorByteBuffered4FType<T> newVectorM4F()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector4FType<T> v =
+    final PVectorByteBuffered4FType<T> v =
       PVectorByteBufferedM4F.newVectorFromByteBuffer(buf, 50L);
     v.set4F(0.0f, 0.0f, 0.0f, 1.0f);
     return v;
   }
 
-  @Override protected PVector4FType<T> newVectorM4FFrom(
-    final PVector4FType<T> v)
+  @Override protected PVectorByteBuffered4FType<T> newVectorM4FFrom(
+    final PVectorByteBuffered4FType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
-    final PVector4FType<T> vr =
+    final PVectorByteBuffered4FType<T> vr =
       PVectorByteBufferedM4F.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom4F(v);
     return vr;
   }
 
-  @Override protected PVector4FType<T> newVectorM4FAtIndexFromSize(
+  @Override protected PVectorByteBuffered4FType<T> newVectorM4FAtIndexFromSize(
     final long size,
     final long offset)
   {

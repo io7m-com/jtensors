@@ -23,7 +23,6 @@ import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.VectorReadable4DType;
 import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
-import com.io7m.jtensors.parameterized.PVector4DType;
 import com.io7m.jtensors.parameterized.PVectorReadable2DType;
 import com.io7m.jtensors.parameterized.PVectorReadable3DType;
 import com.io7m.jtensors.parameterized.PVectorReadable4DType;
@@ -40,10 +39,10 @@ import java.nio.ByteBuffer;
  * @param <T> A phantom type parameter
  */
 
-public final class PVectorByteBufferedM4D<T> implements PVector4DType<T>
+public final class PVectorByteBufferedM4D<T> implements PVectorByteBuffered4DType<T>
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private PVectorByteBufferedM4D(
     final ByteBuffer in_buffer,
@@ -66,7 +65,7 @@ public final class PVectorByteBufferedM4D<T> implements PVector4DType<T>
    * @return A new buffered vector
    */
 
-  public static <T> PVector4DType<T> newVectorFromByteBuffer(
+  public static <T> PVectorByteBuffered4DType<T> newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -269,5 +268,15 @@ public final class PVectorByteBufferedM4D<T> implements PVector4DType<T>
   {
     this.setAtOffsetAndIndex(this.offset, 0, in_v.getXD());
     this.setAtOffsetAndIndex(this.offset, 1, in_v.getYD());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

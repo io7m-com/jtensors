@@ -21,7 +21,6 @@ import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
-import com.io7m.jtensors.parameterized.PVector2DType;
 import com.io7m.jtensors.parameterized.PVectorReadable2DType;
 
 import java.nio.ByteBuffer;
@@ -36,10 +35,10 @@ import java.nio.ByteBuffer;
  * @param <T> A phantom type parameter
  */
 
-public final class PVectorByteBufferedM2D<T> implements PVector2DType<T>
+public final class PVectorByteBufferedM2D<T> implements PVectorByteBuffered2DType<T>
 {
   private final ByteBuffer buffer;
-  private final long       offset;
+  private long offset;
 
   private PVectorByteBufferedM2D(
     final ByteBuffer in_buffer,
@@ -62,7 +61,7 @@ public final class PVectorByteBufferedM2D<T> implements PVector2DType<T>
    * @return A new buffered vector
    */
 
-  public static <T> PVector2DType<T> newVectorFromByteBuffer(
+  public static <T> PVectorByteBuffered2DType<T> newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -177,5 +176,15 @@ public final class PVectorByteBufferedM2D<T> implements PVector2DType<T>
   {
     this.setAtOffsetAndIndex(this.offset, 0, in_v.getXD());
     this.setAtOffsetAndIndex(this.offset, 1, in_v.getYD());
+  }
+
+  @Override public long getByteOffset()
+  {
+    return this.offset;
+  }
+
+  @Override public void setByteOffset(final long b)
+  {
+    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }
