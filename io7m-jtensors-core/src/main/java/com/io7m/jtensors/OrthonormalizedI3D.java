@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -17,29 +17,27 @@
 package com.io7m.jtensors;
 
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
  * Three immutable orthonormal vectors.
- * 
+ *
  * @since 5.2.0
  */
 
-public final class OrthonormalizedI3D
+@Immutable public final class OrthonormalizedI3D
 {
   private final VectorI3D rv0;
   private final VectorI3D rv1;
   private final VectorI3D rv2;
 
   /**
-   * Orthonormalize and store the vectors <code>v0</code>, <code>v1</code>,
-   * and <code>v2</code>.
-   * 
-   * @param v0
-   *          The first vector
-   * @param v1
-   *          The second vector
-   * @param v2
-   *          The third vector
+   * Orthonormalize and store the vectors {@code v0}, {@code v1}, and {@code
+   * v2}.
+   *
+   * @param v0 The first vector
+   * @param v1 The second vector
+   * @param v2 The third vector
    */
 
   public OrthonormalizedI3D(
@@ -85,16 +83,13 @@ public final class OrthonormalizedI3D
     if (!this.rv1.equals(other.rv1)) {
       return false;
     }
-    if (!this.rv2.equals(other.rv2)) {
-      return false;
-    }
-    return true;
+    return this.rv2.equals(other.rv2);
   }
 
   /**
-   * @return The first vector passed to
-   *         {@link #OrthonormalizedI3D(VectorReadable3DType, VectorReadable3DType, VectorReadable3DType)}
-   *         , orthonormalized with respect to the other two vectors.
+   * @return The first vector passed to {@link #OrthonormalizedI3D
+   * (VectorReadable3DType, VectorReadable3DType, VectorReadable3DType)} ,
+   * orthonormalized with respect to the other two vectors.
    */
 
   public VectorI3D getV0()
@@ -103,9 +98,9 @@ public final class OrthonormalizedI3D
   }
 
   /**
-   * @return The second vector passed to
-   *         {@link #OrthonormalizedI3D(VectorReadable3DType, VectorReadable3DType, VectorReadable3DType)}
-   *         , orthonormalized with respect to the other two vectors.
+   * @return The second vector passed to {@link #OrthonormalizedI3D
+   * (VectorReadable3DType, VectorReadable3DType, VectorReadable3DType)} ,
+   * orthonormalized with respect to the other two vectors.
    */
 
   public VectorI3D getV1()
@@ -114,9 +109,9 @@ public final class OrthonormalizedI3D
   }
 
   /**
-   * @return The third vector passed to
-   *         {@link #OrthonormalizedI3D(VectorReadable3DType, VectorReadable3DType, VectorReadable3DType)}
-   *         , orthonormalized with respect to the other two vectors.
+   * @return The third vector passed to {@link #OrthonormalizedI3D
+   * (VectorReadable3DType, VectorReadable3DType, VectorReadable3DType)} ,
+   * orthonormalized with respect to the other two vectors.
    */
 
   public VectorI3D getV2()

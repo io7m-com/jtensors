@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -17,7 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * 'Write' interface to four-dimensional quaternions with single precision
+ * 'Write' interface to four-dimensional quaternions with {@code float}
  * elements.
  */
 

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -17,22 +17,64 @@
 package com.io7m.jtensors;
 
 /**
- * 'Read' interface to 3x3 matrices with double precision elements.
+ * 'Read' interface to 3x3 matrices with {@code double} elements.
  */
 
-public interface MatrixReadable3x3DType extends MatrixReadableDType
+public interface MatrixReadable3x3DType extends MatrixReadable2x2DType
 {
   /**
-   * Retrieve row <code>row</code>, saving the result to <code>out</code>.
-   * 
-   * @since 5.0.0
-   * @param row
-   *          The index of the row, starting at <code>0</code>.
-   * @param out
-   *          The output vector.
+   * Retrieve row {@code row}, saving the result to {@code out}.
+   *
+   * @param row The index of the row, starting at {@code 0}.
+   * @param out The output vector.
+   * @param <V> The precise type of writable vector.
    */
 
-  void getRow3D(
+  <V extends VectorWritable3DType> void getRow3D(
     final int row,
-    final VectorM3D out);
+    final V out);
+
+  /**
+   * Retrieve row {@code row}, saving the result to {@code out}. No bounds
+   * checking is performed for {@code row}, and out-of-bounds values result in
+   * undefined behaviour.
+   *
+   * @param row The index of the row, starting at {@code 0}.
+   * @param out The output vector.
+   * @param <V> The precise type of writable vector.
+   */
+
+  <V extends VectorWritable3DType> void getRow3DUnsafe(
+    final int row,
+    final V out);
+
+  /**
+   * @return The value at row 0, column 2
+   */
+
+  double getR0C2D();
+
+  /**
+   * @return The value at row 1, column 2
+   */
+
+  double getR1C2D();
+
+  /**
+   * @return The value at row 2, column 0
+   */
+
+  double getR2C0D();
+
+  /**
+   * @return The value at row 2, column 1
+   */
+
+  double getR2C1D();
+
+  /**
+   * @return The value at row 2, column 2
+   */
+
+  double getR2C2D();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -17,10 +17,8 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Write' interface to three-dimensional vectors with double precision
- * elements.
- * </p>
+ * <p> 'Write' interface to three-dimensional vectors with {@code double}
+ * elements. </p>
  */
 
 public interface VectorWritable3DType extends VectorWritable2DType
@@ -28,23 +26,19 @@ public interface VectorWritable3DType extends VectorWritable2DType
   /**
    * Set the current vector to the contents of the input vector.
    *
-   * @param in_v
-   *          The input vector
+   * @param in_v The input vector
    */
 
   void copyFrom3D(
     VectorReadable3DType in_v);
 
   /**
-   * Set the current <code>x</code>, <code>y</code> and <code>z</code> values
-   * of the current vector.
+   * Set the current {@code x}, {@code y} and {@code z} values of the current
+   * vector.
    *
-   * @param x
-   *          The new <code>x</code> value.
-   * @param y
-   *          The new <code>y</code> value.
-   * @param z
-   *          The new <code>z</code> value.
+   * @param x The new {@code x} value.
+   * @param y The new {@code y} value.
+   * @param z The new {@code z} value.
    */
 
   void set3D(
@@ -53,10 +47,9 @@ public interface VectorWritable3DType extends VectorWritable2DType
     double z);
 
   /**
-   * Set the current <code>z</code> value of the current vector.
+   * Set the current {@code z} value of the current vector.
    *
-   * @param z
-   *          The new <code>z</code> value.
+   * @param z The new {@code z} value.
    */
 
   void setZD(

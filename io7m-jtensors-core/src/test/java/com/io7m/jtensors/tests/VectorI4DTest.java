@@ -16,12 +16,11 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorI4D;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class VectorI4DTest extends VectorI4Contract
 {
@@ -39,22 +38,18 @@ public class VectorI4DTest extends VectorI4Contract
 
       final VectorI4D vr = VectorI4D.absolute(v);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getXD()),
-        vr.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getYD()),
-        vr.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getZD()),
-        vr.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        Math.abs(v.getWD()),
-        vr.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getXD()), vr.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getYD()), vr.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getZD()), vr.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, Math.abs(v.getWD()), vr.getWD()));
     }
   }
 
@@ -79,22 +74,18 @@ public class VectorI4DTest extends VectorI4Contract
 
       final VectorI4D vr = VectorI4D.add(v0, v1);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getXD(),
-        v0.getXD() + v1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getYD(),
-        v0.getYD() + v1.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getZD(),
-        v0.getZD() + v1.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getWD(),
-        v0.getWD() + v1.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getXD(), v0.getXD() + v1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getYD(), v0.getYD() + v1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getZD(), v0.getZD() + v1.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getWD(), v0.getWD() + v1.getWD()));
     }
   }
 
@@ -120,22 +111,18 @@ public class VectorI4DTest extends VectorI4Contract
       final double r = Math.random() * 100.0;
       final VectorI4D vr = VectorI4D.addScaled(v0, v1, r);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getXD(),
-        v0.getXD() + (v1.getXD() * r)));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getYD(),
-        v0.getYD() + (v1.getYD() * r)));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getZD(),
-        v0.getZD() + (v1.getZD() * r)));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getWD(),
-        v0.getWD() + (v1.getWD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getXD(), v0.getXD() + (v1.getXD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getYD(), v0.getYD() + (v1.getYD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getZD(), v0.getZD() + (v1.getZD() * r)));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getWD(), v0.getWD() + (v1.getWD() * r)));
     }
   }
 
@@ -268,18 +255,18 @@ public class VectorI4DTest extends VectorI4Contract
       final double w = Math.random() * Double.MIN_VALUE;
       final VectorI4D v = new VectorI4D(x, y, z, w);
 
-      Assert
-        .assertTrue(VectorI4D.clampMaximumByVector(v, maximum).getXD() <= maximum
-          .getXD());
-      Assert
-        .assertTrue(VectorI4D.clampMaximumByVector(v, maximum).getYD() <= maximum
-          .getYD());
-      Assert
-        .assertTrue(VectorI4D.clampMaximumByVector(v, maximum).getZD() <= maximum
-          .getZD());
-      Assert
-        .assertTrue(VectorI4D.clampMaximumByVector(v, maximum).getWD() <= maximum
-          .getWD());
+      Assert.assertTrue(
+        VectorI4D.clampMaximumByVector(v, maximum).getXD()
+        <= maximum.getXD());
+      Assert.assertTrue(
+        VectorI4D.clampMaximumByVector(v, maximum).getYD()
+        <= maximum.getYD());
+      Assert.assertTrue(
+        VectorI4D.clampMaximumByVector(v, maximum).getZD()
+        <= maximum.getZD());
+      Assert.assertTrue(
+        VectorI4D.clampMaximumByVector(v, maximum).getWD()
+        <= maximum.getWD());
     }
   }
 
@@ -298,18 +285,18 @@ public class VectorI4DTest extends VectorI4Contract
       final double w = Math.random() * Double.MIN_VALUE;
       final VectorI4D v = new VectorI4D(x, y, z, w);
 
-      Assert
-        .assertTrue(VectorI4D.clampMinimumByVector(v, minimum).getXD() >= minimum
-          .getXD());
-      Assert
-        .assertTrue(VectorI4D.clampMinimumByVector(v, minimum).getYD() >= minimum
-          .getYD());
-      Assert
-        .assertTrue(VectorI4D.clampMinimumByVector(v, minimum).getZD() >= minimum
-          .getZD());
-      Assert
-        .assertTrue(VectorI4D.clampMinimumByVector(v, minimum).getWD() >= minimum
-          .getWD());
+      Assert.assertTrue(
+        VectorI4D.clampMinimumByVector(v, minimum).getXD()
+        >= minimum.getXD());
+      Assert.assertTrue(
+        VectorI4D.clampMinimumByVector(v, minimum).getYD()
+        >= minimum.getYD());
+      Assert.assertTrue(
+        VectorI4D.clampMinimumByVector(v, minimum).getZD()
+        >= minimum.getZD());
+      Assert.assertTrue(
+        VectorI4D.clampMinimumByVector(v, minimum).getWD()
+        >= minimum.getWD());
     }
   }
 
@@ -334,30 +321,30 @@ public class VectorI4DTest extends VectorI4Contract
       final double w = Math.random() * Double.MAX_VALUE;
       final VectorI4D v = new VectorI4D(x, y, z, w);
 
-      Assert
-        .assertTrue(VectorI4D.clampByVector(v, minimum, maximum).getXD() <= maximum
-          .getXD());
-      Assert
-        .assertTrue(VectorI4D.clampByVector(v, minimum, maximum).getXD() >= minimum
-          .getXD());
-      Assert
-        .assertTrue(VectorI4D.clampByVector(v, minimum, maximum).getYD() <= maximum
-          .getYD());
-      Assert
-        .assertTrue(VectorI4D.clampByVector(v, minimum, maximum).getYD() >= minimum
-          .getYD());
-      Assert
-        .assertTrue(VectorI4D.clampByVector(v, minimum, maximum).getZD() <= maximum
-          .getZD());
-      Assert
-        .assertTrue(VectorI4D.clampByVector(v, minimum, maximum).getZD() >= minimum
-          .getZD());
-      Assert
-        .assertTrue(VectorI4D.clampByVector(v, minimum, maximum).getWD() <= maximum
-          .getWD());
-      Assert
-        .assertTrue(VectorI4D.clampByVector(v, minimum, maximum).getWD() >= minimum
-          .getWD());
+      Assert.assertTrue(
+        VectorI4D.clampByVector(v, minimum, maximum).getXD()
+        <= maximum.getXD());
+      Assert.assertTrue(
+        VectorI4D.clampByVector(v, minimum, maximum).getXD()
+        >= minimum.getXD());
+      Assert.assertTrue(
+        VectorI4D.clampByVector(v, minimum, maximum).getYD()
+        <= maximum.getYD());
+      Assert.assertTrue(
+        VectorI4D.clampByVector(v, minimum, maximum).getYD()
+        >= minimum.getYD());
+      Assert.assertTrue(
+        VectorI4D.clampByVector(v, minimum, maximum).getZD()
+        <= maximum.getZD());
+      Assert.assertTrue(
+        VectorI4D.clampByVector(v, minimum, maximum).getZD()
+        >= minimum.getZD());
+      Assert.assertTrue(
+        VectorI4D.clampByVector(v, minimum, maximum).getWD()
+        <= maximum.getWD());
+      Assert.assertTrue(
+        VectorI4D.clampByVector(v, minimum, maximum).getWD()
+        >= minimum.getWD());
     }
   }
 
@@ -372,14 +359,10 @@ public class VectorI4DTest extends VectorI4Contract
       final double w = Math.random() * Double.MAX_VALUE;
       final VectorI4D v = new VectorI4D(x, y, z, w);
 
-      Assert
-        .assertTrue(VectorI4D.clampMaximum(v, maximum).getXD() <= maximum);
-      Assert
-        .assertTrue(VectorI4D.clampMaximum(v, maximum).getYD() <= maximum);
-      Assert
-        .assertTrue(VectorI4D.clampMaximum(v, maximum).getZD() <= maximum);
-      Assert
-        .assertTrue(VectorI4D.clampMaximum(v, maximum).getWD() <= maximum);
+      Assert.assertTrue(VectorI4D.clampMaximum(v, maximum).getXD() <= maximum);
+      Assert.assertTrue(VectorI4D.clampMaximum(v, maximum).getYD() <= maximum);
+      Assert.assertTrue(VectorI4D.clampMaximum(v, maximum).getZD() <= maximum);
+      Assert.assertTrue(VectorI4D.clampMaximum(v, maximum).getWD() <= maximum);
     }
   }
 
@@ -394,14 +377,10 @@ public class VectorI4DTest extends VectorI4Contract
       final double w = Math.random() * Double.MIN_VALUE;
       final VectorI4D v = new VectorI4D(x, y, z, w);
 
-      Assert
-        .assertTrue(VectorI4D.clampMinimum(v, minimum).getXD() >= minimum);
-      Assert
-        .assertTrue(VectorI4D.clampMinimum(v, minimum).getYD() >= minimum);
-      Assert
-        .assertTrue(VectorI4D.clampMinimum(v, minimum).getZD() >= minimum);
-      Assert
-        .assertTrue(VectorI4D.clampMinimum(v, minimum).getWD() >= minimum);
+      Assert.assertTrue(VectorI4D.clampMinimum(v, minimum).getXD() >= minimum);
+      Assert.assertTrue(VectorI4D.clampMinimum(v, minimum).getYD() >= minimum);
+      Assert.assertTrue(VectorI4D.clampMinimum(v, minimum).getZD() >= minimum);
+      Assert.assertTrue(VectorI4D.clampMinimum(v, minimum).getWD() >= minimum);
     }
   }
 
@@ -417,22 +396,30 @@ public class VectorI4DTest extends VectorI4Contract
       final double w = Math.random() * Double.MIN_VALUE;
       final VectorI4D v = new VectorI4D(x, y, z, w);
 
-      Assert
-        .assertTrue(VectorI4D.clamp(v, minimum, maximum).getXD() <= maximum);
-      Assert
-        .assertTrue(VectorI4D.clamp(v, minimum, maximum).getXD() >= minimum);
-      Assert
-        .assertTrue(VectorI4D.clamp(v, minimum, maximum).getYD() <= maximum);
-      Assert
-        .assertTrue(VectorI4D.clamp(v, minimum, maximum).getYD() >= minimum);
-      Assert
-        .assertTrue(VectorI4D.clamp(v, minimum, maximum).getZD() <= maximum);
-      Assert
-        .assertTrue(VectorI4D.clamp(v, minimum, maximum).getZD() >= minimum);
-      Assert
-        .assertTrue(VectorI4D.clamp(v, minimum, maximum).getWD() <= maximum);
-      Assert
-        .assertTrue(VectorI4D.clamp(v, minimum, maximum).getWD() >= minimum);
+      Assert.assertTrue(
+        VectorI4D.clamp(v, minimum, maximum).getXD()
+        <= maximum);
+      Assert.assertTrue(
+        VectorI4D.clamp(v, minimum, maximum).getXD()
+        >= minimum);
+      Assert.assertTrue(
+        VectorI4D.clamp(v, minimum, maximum).getYD()
+        <= maximum);
+      Assert.assertTrue(
+        VectorI4D.clamp(v, minimum, maximum).getYD()
+        >= minimum);
+      Assert.assertTrue(
+        VectorI4D.clamp(v, minimum, maximum).getZD()
+        <= maximum);
+      Assert.assertTrue(
+        VectorI4D.clamp(v, minimum, maximum).getZD()
+        >= minimum);
+      Assert.assertTrue(
+        VectorI4D.clamp(v, minimum, maximum).getWD()
+        <= maximum);
+      Assert.assertTrue(
+        VectorI4D.clamp(v, minimum, maximum).getWD()
+        >= minimum);
     }
   }
 
@@ -473,10 +460,9 @@ public class VectorI4DTest extends VectorI4Contract
     final VectorI4D v0 = new VectorI4D(0.0, 1.0, 0.0, 0.0);
     final VectorI4D v1 = new VectorI4D(0.0, 0.0, 0.0, 0.0);
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(
-      ec,
-      VectorI4D.distance(v0, v1),
-      1.0));
+    Assert.assertTrue(
+      AlmostEqualDouble.almostEqual(
+        ec, VectorI4D.distance(v0, v1), 1.0));
   }
 
   @Override @Test public void testDistanceOrdering()
@@ -773,14 +759,12 @@ public class VectorI4DTest extends VectorI4Contract
       final double w1 = Math.random() * Double.MAX_VALUE;
       final VectorI4D v1 = new VectorI4D(x1, y1, z1, w1);
 
-      Assert.assertTrue(VectorI4D.almostEqual(
-        ec,
-        VectorI4D.interpolateLinear(v0, v1, 0.0),
-        v0));
-      Assert.assertTrue(VectorI4D.almostEqual(
-        ec,
-        VectorI4D.interpolateLinear(v0, v1, 1.0),
-        v1));
+      Assert.assertTrue(
+        VectorI4D.almostEqual(
+          ec, VectorI4D.interpolateLinear(v0, v1, 0.0), v0));
+      Assert.assertTrue(
+        VectorI4D.almostEqual(
+          ec, VectorI4D.interpolateLinear(v0, v1, 1.0), v1));
     }
   }
 
@@ -926,22 +910,18 @@ public class VectorI4DTest extends VectorI4Contract
 
       final VectorI4D vr = VectorI4D.scale(v, 1.0);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getXD(),
-        vr.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getYD(),
-        vr.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getZD(),
-        vr.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        v.getWD(),
-        vr.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getXD(), vr.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getYD(), vr.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getZD(), vr.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, v.getWD(), vr.getWD()));
     }
   }
 
@@ -992,22 +972,18 @@ public class VectorI4DTest extends VectorI4Contract
 
       final VectorI4D vr = VectorI4D.subtract(v0, v1);
 
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getXD(),
-        v0.getXD() - v1.getXD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getYD(),
-        v0.getYD() - v1.getYD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getZD(),
-        v0.getZD() - v1.getZD()));
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(
-        ec,
-        vr.getWD(),
-        v0.getWD() - v1.getWD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getXD(), v0.getXD() - v1.getXD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getYD(), v0.getYD() - v1.getYD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getZD(), v0.getZD() - v1.getZD()));
+      Assert.assertTrue(
+        AlmostEqualDouble.almostEqual(
+          ec, vr.getWD(), v0.getWD() - v1.getWD()));
     }
   }
 }

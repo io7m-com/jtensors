@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,19 +18,17 @@ package com.io7m.jtensors;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jfunctional.Pair;
+import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
- * <p>
- * A four-dimensional immutable vector type with double precision elements.
- * </p>
- * <p>
- * Values of this type are immutable and can therefore be safely accessed from
- * multiple threads.
- * </p>
+ * <p> A four-dimensional immutable vector type with {@code double} elements.
+ * </p> <p> Values of this type are immutable and can therefore be safely
+ * accessed from multiple threads. </p>
  */
 
- public class VectorI4D implements VectorReadable4DType
+@Immutable public final class VectorI4D implements VectorReadable4DType
 {
   /**
    * The zero vector.
@@ -42,35 +40,87 @@ import com.io7m.jnull.Nullable;
     ZERO = new VectorI4D(0.0, 0.0, 0.0, 0.0);
   }
 
+  private final double w;
+  private final double x;
+  private final double y;
+  private final double z;
+
   /**
-   * Calculate the absolute value of the vector <code>v</code>.
-   *
-   * @param v
-   *          The input vector
-   *
-   * @return <code>(abs v.x, abs v.y, abs v.z, abs v.w)</code>
+   * Default constructor, initializing the vector with values {@code [0.0, 0.0,
+   * 0.0, 1.0]}.
    */
 
-  public final static VectorI4D absolute(
-    final VectorReadable4DType v)
+  public VectorI4D()
   {
-    return new VectorI4D(Math.abs(v.getXD()), Math.abs(v.getYD()), Math.abs(v
-      .getZD()), Math.abs(v.getWD()));
+    this.x = 0.0;
+    this.y = 0.0;
+    this.z = 0.0;
+    this.w = 1.0;
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Construct a vector initialized with the given values.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   *
-   * @return <code>(v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)</code>
+   * @param in_x The {@code x} value
+   * @param in_y The {@code y} value
+   * @param in_z The {@code z} value
+   * @param in_w The {@code w} value
    */
 
-  public final static VectorI4D add(
+  public VectorI4D(
+    final double in_x,
+    final double in_y,
+    final double in_z,
+    final double in_w)
+  {
+    this.x = in_x;
+    this.y = in_y;
+    this.z = in_z;
+    this.w = in_w;
+  }
+
+  /**
+   * Construct a vector initialized with the values given in the vector {@code
+   * in_v}.
+   *
+   * @param in_v The input vector.
+   */
+
+  public VectorI4D(
+    final VectorReadable4DType in_v)
+  {
+    this.x = in_v.getXD();
+    this.y = in_v.getYD();
+    this.z = in_v.getZD();
+    this.w = in_v.getWD();
+  }
+
+  /**
+   * Calculate the absolute value of the vector {@code v}.
+   *
+   * @param v The input vector
+   *
+   * @return {@code (abs v.x, abs v.y, abs v.z, abs v.w)}
+   */
+
+  public static VectorI4D absolute(
+    final VectorReadable4DType v)
+  {
+    return new VectorI4D(
+      Math.abs(v.getXD()), Math.abs(v.getYD()), Math.abs(
+      v.getZD()), Math.abs(v.getWD()));
+  }
+
+  /**
+   * Calculate the element-wise sum of the vectors {@code v0} and {@code v1}.
+   *
+   * @param v0 The left input vector
+   * @param v1 The right input vector
+   *
+   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)}
+   */
+
+  public static VectorI4D add(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
@@ -82,20 +132,18 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param r
-   *          The scaling value
+   * @param v0 The left input vector
+   * @param v1 The right input vector
+   * @param r  The scaling value
    *
-   * @return <code>(v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))</code>
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r),
+   * v0.w + (v1.w * r))}
    */
 
-  public final static VectorI4D addScaled(
+  public static VectorI4D addScaled(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1,
     final double r)
@@ -104,22 +152,21 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Determine whether or not the vectors <code>va</code> and <code>vb</code>
-   * are equal to within the degree of error given in <code>context</code>.
+   * Determine whether or not the vectors {@code va} and {@code vb} are equal to
+   * within the degree of error given in {@code context}.
    *
-   * @see AlmostEqualDouble#almostEqual(ContextRelative, double, double)
+   * @param context The equality context
+   * @param va      The left input vector
+   * @param vb      The right input vector
    *
-   * @param context
-   *          The equality context
-   * @param va
-   *          The left input vector
-   * @param vb
-   *          The right input vector
+   * @return {@code true} iff the vectors are almost equal.
+   *
+   * @see AlmostEqualDouble#almostEqual(AlmostEqualDouble.ContextRelative,
+   * double, double)
    * @since 5.0.0
-   * @return <code>true</code> iff the vectors are almost equal.
    */
 
-  public final static boolean almostEqual(
+  public static boolean almostEqual(
     final AlmostEqualDouble.ContextRelative context,
     final VectorReadable4DType va,
     final VectorReadable4DType vb)
@@ -136,21 +183,18 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * maximum]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param maximum The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>
+   * @return A vector with both elements equal to at most {@code maximum} and at
+   * least {@code minimum}
    */
 
-  public final static VectorI4D clamp(
+  public static VectorI4D clamp(
     final VectorReadable4DType v,
     final double minimum,
     final double maximum)
@@ -163,21 +207,19 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum} and {@code maximum}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param maximum The vector containing the maximum acceptable values
    *
-   * @return <code>(min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w, minimum.w), maximum.w))</code>
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y,
+   * minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w,
+   * minimum.w), maximum.w))}
    */
 
-  public final static VectorI4D clampByVector(
+  public static VectorI4D clampByVector(
     final VectorReadable4DType v,
     final VectorReadable4DType minimum,
     final VectorReadable4DType maximum)
@@ -194,18 +236,16 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [-Infinity
+   * .. maximum]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param maximum The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
    */
 
-  public final static VectorI4D clampMaximum(
+  public static VectorI4D clampMaximum(
     final VectorReadable4DType v,
     final double maximum)
   {
@@ -217,18 +257,17 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code maximum}.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param maximum The vector containing the maximum acceptable values
    *
-   * @return <code>(min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z), min(v.w, maximum.w))</code>
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z,
+   * maximum.z), min(v.w, maximum.w))}
    */
 
-  public final static VectorI4D clampMaximumByVector(
+  public static VectorI4D clampMaximumByVector(
     final VectorReadable4DType v,
     final VectorReadable4DType maximum)
   {
@@ -240,19 +279,16 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * Infinity]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
    *
-   * @return A vector with both elements equal to at least
-   *         <code>minimum</code>.
+   * @return A vector with both elements equal to at least {@code minimum}.
    */
 
-  public final static VectorI4D clampMinimum(
+  public static VectorI4D clampMinimum(
     final VectorReadable4DType v,
     final double minimum)
   {
@@ -264,18 +300,17 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z), max(v.w, minimum.w))</code>
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
+   * minimum.z), max(v.w, minimum.w))}
    */
 
-  public final static VectorI4D clampMinimumByVector(
+  public static VectorI4D clampMinimumByVector(
     final VectorReadable4DType v,
     final VectorReadable4DType minimum)
   {
@@ -287,18 +322,15 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Calculate the distance between the two vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the distance between the two vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0 The left input vector
+   * @param v1 The right input vector
    *
    * @return The distance between the two vectors.
    */
 
-  public final static double distance(
+  public static double distance(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
@@ -306,18 +338,15 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Calculate the scalar product of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0 The left input vector
+   * @param v1 The right input vector
    *
    * @return The scalar product of the two vectors
    */
 
-  public final static double dotProduct(
+  public static double dotProduct(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
@@ -329,29 +358,23 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
-   * amount <code>alpha</code>.
+   * Linearly interpolate between {@code v0} and {@code v1} by the amount {@code
+   * alpha}.
    *
-   * The <code>alpha</code> parameter controls the degree of interpolation,
-   * such that:
+   * The {@code alpha} parameter controls the degree of interpolation, such
+   * that:
    *
-   * <ul>
-   * <li>{@code interpolateLinear(v0, v1, 0.0) = v0}</li>
-   * <li>{@code interpolateLinear(v0, v1, 1.0) = v1}</li>
-   * </ul>
+   * <ul> <li>{@code interpolateLinear(v0, v1, 0.0) = v0}</li> <li>{@code
+   * interpolateLinear(v0, v1, 1.0) = v1}</li> </ul>
    *
-   * @param v0
-   *          The left input vector.
-   * @param v1
-   *          The right input vector.
-   * @param alpha
-   *          The interpolation value, between <code>0.0</code> and
-   *          <code>1.0</code>.
+   * @param v0    The left input vector.
+   * @param v1    The right input vector.
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}.
    *
-   * @return <code>(1 - alpha) * v0 + alpha * v1</code>
+   * @return {@code (1 - alpha) * v0 + alpha * v1}
    */
 
-  public final static VectorI4D interpolateLinear(
+  public static VectorI4D interpolateLinear(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1,
     final double alpha)
@@ -362,53 +385,50 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Calculate the magnitude of the vector <code>v</code>.
+   * Calculate the magnitude of the vector {@code v}.
    *
-   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
-   * @param v
-   *          The input vector
+   * @param v The input vector
    *
    * @return The magnitude of the input vector
    */
 
-  public final static double magnitude(
+  public static double magnitude(
     final VectorReadable4DType v)
   {
     return Math.sqrt(VectorI4D.magnitudeSquared(v));
   }
 
   /**
-   * Calculate the squared magnitude of the vector <code>v</code>.
+   * Calculate the squared magnitude of the vector {@code v}.
    *
-   * @param v
-   *          The input vector
+   * @param v The input vector
    *
    * @return The squared magnitude of the input vector
    */
 
-  public final static double magnitudeSquared(
+  public static double magnitudeSquared(
     final VectorReadable4DType v)
   {
     return VectorI4D.dotProduct(v, v);
   }
 
   /**
-   * Normalize the vector <code>v</code>, preserving its direction but
-   * reducing it to unit length.
+   * Normalize the vector {@code v}, preserving its direction but reducing it to
+   * unit length.
    *
-   * @param v
-   *          The input vector
+   * @param v The input vector
    *
-   * @return A vector with the same orientation as <code>v</code> but with
-   *         magnitude equal to <code>1.0</code>
+   * @return A vector with the same orientation as {@code v} but with magnitude
+   * equal to {@code 1.0}
    */
 
-  public final static VectorI4D normalize(
+  public static VectorI4D normalize(
     final VectorReadable4DType v)
   {
     final double m = VectorI4D.magnitudeSquared(v);
-    if (m > 0) {
+    if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
       return VectorI4D.scale(v, reciprocal);
     }
@@ -416,23 +436,19 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * <p>
-   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
-   * .
-   * </p>
-   * <p>
-   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
+   * <p> Orthonormalize and return the vectors {@code v0} and {@code v1} . </p>
+   * <p> See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
    *
-   * @param v0
-   *          The left vector
-   * @param v1
-   *          The right vector
-   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * @param v0 The left vector
+   * @param v1 The right vector
+   *
+   * @return A pair {@code (v0, v1)}, orthonormalized.
+   *
    * @since 5.0.0
    */
 
-  public final static Pair<VectorI4D, VectorI4D> orthoNormalize(
+  public static Pair<VectorI4D, VectorI4D> orthoNormalize(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
@@ -445,17 +461,16 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Calculate the projection of the vector <code>p</code> onto the vector
-   * <code>q</code>.
+   * Calculate the projection of the vector {@code p} onto the vector {@code
+   * q}.
    *
-   * @param p
-   *          The left vector
-   * @param q
-   *          The right vector
-   * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
+   * @param p The left vector
+   * @param q The right vector
+   *
+   * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    */
 
-  public final static VectorI4D projection(
+  public static VectorI4D projection(
     final VectorReadable4DType p,
     final VectorReadable4DType q)
   {
@@ -466,39 +481,32 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>.
+   * Scale the vector {@code v} by the scalar {@code r}.
    *
-   * @param v
-   *          The input vector
-   * @param r
-   *          The scaling value
+   * @param v The input vector
+   * @param r The scaling value
    *
-   * @return <code>(v.x * r, v.y * r, v.z * r, v.w * r)</code>
+   * @return {@code (v.x * r, v.y * r, v.z * r, v.w * r)}
    */
 
-  public final static VectorI4D scale(
+  public static VectorI4D scale(
     final VectorReadable4DType v,
     final double r)
   {
     return new VectorI4D(
-      v.getXD() * r,
-      v.getYD() * r,
-      v.getZD() * r,
-      v.getWD() * r);
+      v.getXD() * r, v.getYD() * r, v.getZD() * r, v.getWD() * r);
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0 The left input vector
+   * @param v1 The right input vector
    *
-   * @return <code>(v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)</code>
+   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)}
    */
 
-  public final static VectorI4D subtract(
+  public static VectorI4D subtract(
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
@@ -509,67 +517,7 @@ import com.io7m.jnull.Nullable;
       v0.getWD() - v1.getWD());
   }
 
-  private final double w;
-  private final double x;
-  private final double y;
-  private final double z;
-
-  /**
-   * Default constructor, initializing the vector with values
-   * <code>[0.0, 0.0, 0.0, 1.0]</code>.
-   */
-
-  public VectorI4D()
-  {
-    this.x = 0.0;
-    this.y = 0.0;
-    this.z = 0.0;
-    this.w = 1.0;
-  }
-
-  /**
-   * Construct a vector initialized with the given values.
-   *
-   * @param in_x
-   *          The <code>x</code> value
-   * @param in_y
-   *          The <code>y</code> value
-   * @param in_z
-   *          The <code>z</code> value
-   * @param in_w
-   *          The <code>w</code> value
-   */
-
-  public VectorI4D(
-    final double in_x,
-    final double in_y,
-    final double in_z,
-    final double in_w)
-  {
-    this.x = in_x;
-    this.y = in_y;
-    this.z = in_z;
-    this.w = in_w;
-  }
-
-  /**
-   * Construct a vector initialized with the values given in the vector
-   * <code>in_v</code>.
-   *
-   * @param in_v
-   *          The input vector.
-   */
-
-  public VectorI4D(
-    final VectorReadable4DType in_v)
-  {
-    this.x = in_v.getXD();
-    this.y = in_v.getYD();
-    this.z = in_v.getZD();
-    this.w = in_v.getWD();
-  }
-
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -591,33 +539,30 @@ import com.io7m.jnull.Nullable;
     if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
       return false;
     }
-    if (Double.doubleToLongBits(this.z) != Double.doubleToLongBits(other.z)) {
-      return false;
-    }
-    return true;
+    return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
   }
 
-  @Override public final double getWD()
+  @Override public double getWD()
   {
     return this.w;
   }
 
-  @Override public final double getXD()
+  @Override public double getXD()
   {
     return this.x;
   }
 
-  @Override public final double getYD()
+  @Override public double getYD()
   {
     return this.y;
   }
 
-  @Override public final double getZD()
+  @Override public double getZD()
   {
     return this.z;
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -633,7 +578,7 @@ import com.io7m.jnull.Nullable;
     return result;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI4D ");
@@ -646,7 +591,6 @@ import com.io7m.jnull.Nullable;
     builder.append(this.w);
     builder.append("]");
     final String r = builder.toString();
-    assert r != null;
-    return r;
+    return NullCheck.notNull(r);
   }
 }

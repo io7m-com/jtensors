@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -16,18 +16,15 @@
 
 package com.io7m.jtensors.tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jtensors.OrthonormalizedI3F;
 import com.io7m.jtensors.VectorI3F;
+import org.junit.Assert;
+import org.junit.Test;
 
-public class OrthonormalizedI3FTest
+@SuppressWarnings("static-method") public class OrthonormalizedI3FTest
 {
-  @SuppressWarnings("static-method") @Test public
-    void
-    testAlreadyOrthonormal0()
+  @Test public void testAlreadyOrthonormal0()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -53,10 +50,10 @@ public class OrthonormalizedI3FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAlwaysOrthnormal()
+  @Test public void testAlwaysOrthnormal()
   {
     final AlmostEqualFloat.ContextRelative ec =
-      TestUtilities.getSingleEqualityContext3dp();
+      TestUtilities.getSingleEqualityContext2dp();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 10000.0f;
@@ -110,7 +107,7 @@ public class OrthonormalizedI3FTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEquals()
+  @Test public void testEquals()
   {
     final VectorI3F v0 = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F v1 = new VectorI3F(0.0f, 1.0f, 0.0f);
@@ -134,7 +131,7 @@ public class OrthonormalizedI3FTest
     Assert.assertTrue(o0.equals(o1));
   }
 
-  @SuppressWarnings("static-method") @Test public void testHashcode()
+  @Test public void testHashcode()
   {
     final VectorI3F v0 = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F v1 = new VectorI3F(0.0f, 1.0f, 0.0f);
@@ -156,7 +153,7 @@ public class OrthonormalizedI3FTest
     Assert.assertTrue(o0.hashCode() == (o1.hashCode()));
   }
 
-  @SuppressWarnings("static-method") @Test public void testToString()
+  @Test public void testToString()
   {
     final VectorI3F v0 = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F v1 = new VectorI3F(0.0f, 1.0f, 0.0f);

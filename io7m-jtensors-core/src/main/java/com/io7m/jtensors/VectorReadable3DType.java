@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -17,10 +17,8 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Read' interface to three-dimensional vectors with double precision
- * elements.
- * </p>
+ * <p> 'Read' interface to three-dimensional vectors with {@code double}
+ * elements. </p>
  */
 
 public interface VectorReadable3DType extends VectorReadable2DType

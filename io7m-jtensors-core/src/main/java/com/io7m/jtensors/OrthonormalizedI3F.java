@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -17,29 +17,27 @@
 package com.io7m.jtensors;
 
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
  * Three immutable orthonormal vectors.
- * 
+ *
  * @since 5.2.0
  */
 
-public final class OrthonormalizedI3F
+@Immutable public final class OrthonormalizedI3F
 {
   private final VectorI3F rv0;
   private final VectorI3F rv1;
   private final VectorI3F rv2;
 
   /**
-   * Orthonormalize and store the vectors <code>v0</code>, <code>v1</code>,
-   * and <code>v2</code>.
-   * 
-   * @param v0
-   *          The first vector
-   * @param v1
-   *          The second vector
-   * @param v2
-   *          The third vector
+   * Orthonormalize and store the vectors {@code v0}, {@code v1}, and {@code
+   * v2}.
+   *
+   * @param v0 The first vector
+   * @param v1 The second vector
+   * @param v2 The third vector
    */
 
   public OrthonormalizedI3F(
@@ -85,16 +83,13 @@ public final class OrthonormalizedI3F
     if (!this.rv1.equals(other.rv1)) {
       return false;
     }
-    if (!this.rv2.equals(other.rv2)) {
-      return false;
-    }
-    return true;
+    return this.rv2.equals(other.rv2);
   }
 
   /**
-   * @return The first vector passed to
-   *         {@link #OrthonormalizedI3F(VectorReadable3FType, VectorReadable3FType, VectorReadable3FType)}
-   *         , orthonormalized with respect to the other two vectors.
+   * @return The first vector passed to {@link #OrthonormalizedI3F
+   * (VectorReadable3FType, VectorReadable3FType, VectorReadable3FType)} ,
+   * orthonormalized with respect to the other two vectors.
    */
 
   public VectorI3F getV0()
@@ -103,9 +98,9 @@ public final class OrthonormalizedI3F
   }
 
   /**
-   * @return The second vector passed to
-   *         {@link #OrthonormalizedI3F(VectorReadable3FType, VectorReadable3FType, VectorReadable3FType)}
-   *         , orthonormalized with respect to the other two vectors.
+   * @return The second vector passed to {@link #OrthonormalizedI3F
+   * (VectorReadable3FType, VectorReadable3FType, VectorReadable3FType)} ,
+   * orthonormalized with respect to the other two vectors.
    */
 
   public VectorI3F getV1()
@@ -114,9 +109,9 @@ public final class OrthonormalizedI3F
   }
 
   /**
-   * @return The third vector passed to
-   *         {@link #OrthonormalizedI3F(VectorReadable3FType, VectorReadable3FType, VectorReadable3FType)}
-   *         , orthonormalized with respect to the other two vectors.
+   * @return The third vector passed to {@link #OrthonormalizedI3F
+   * (VectorReadable3FType, VectorReadable3FType, VectorReadable3FType)} ,
+   * orthonormalized with respect to the other two vectors.
    */
 
   public VectorI3F getV2()

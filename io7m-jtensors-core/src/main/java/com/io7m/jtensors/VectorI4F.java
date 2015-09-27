@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,55 +18,106 @@ package com.io7m.jtensors;
 
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jfunctional.Pair;
+import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
+import net.jcip.annotations.Immutable;
 
 /**
- * <p>
- * A four-dimensional immutable vector type with single precision elements.
- * </p>
- * <p>
- * Values of this type are immutable and can therefore be safely accessed from
- * multiple threads.
- * </p>
+ * <p> A four-dimensional immutable vector type with {@code float} elements.
+ * </p> <p> Values of this type are immutable and can therefore be safely
+ * accessed from multiple threads. </p>
  */
 
- public class VectorI4F implements VectorReadable4FType
+@Immutable public final class VectorI4F implements VectorReadable4FType
 {
   /**
    * The zero vector.
    */
 
   public static final VectorI4F ZERO = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
+  private final float w;
+  private final float x;
+  private final float y;
+  private final float z;
 
   /**
-   * Calculate the absolute value of the vector <code>v</code>.
-   *
-   * @param v
-   *          The input vector
-   *
-   * @return <code>(abs v.getXF(), abs v.getYF(), abs v.getZF(), abs v.getWF())</code>
+   * Default constructor, initializing the vector with values {@code [0.0, 0.0,
+   * 0.0, 1.0]}.
    */
 
-  public final static VectorI4F absolute(
-    final VectorReadable4FType v)
+  public VectorI4F()
   {
-    return new VectorI4F(Math.abs(v.getXF()), Math.abs(v.getYF()), Math.abs(v
-      .getZF()), Math.abs(v.getWF()));
+    this.x = 0.0f;
+    this.y = 0.0f;
+    this.z = 0.0f;
+    this.w = 1.0f;
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Construct a vector initialized with the given values.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   *
-   * @return <code>(v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF(), v0.getZF() + v1.getZF(), v0.getWF() + v1.getWF())</code>
+   * @param in_x The {@code x} value
+   * @param in_y The {@code y} value
+   * @param in_z The {@code z} value
+   * @param in_w The {@code w} value
    */
 
-  public final static VectorI4F add(
+  public VectorI4F(
+    final float in_x,
+    final float in_y,
+    final float in_z,
+    final float in_w)
+  {
+    this.x = in_x;
+    this.y = in_y;
+    this.z = in_z;
+    this.w = in_w;
+  }
+
+  /**
+   * Construct a vector initialized with the values given in the vector {@code
+   * in_v}.
+   *
+   * @param in_v The source vector
+   */
+
+  public VectorI4F(
+    final VectorReadable4FType in_v)
+  {
+    this.x = in_v.getXF();
+    this.y = in_v.getYF();
+    this.z = in_v.getZF();
+    this.w = in_v.getWF();
+  }
+
+  /**
+   * Calculate the absolute value of the vector {@code v}.
+   *
+   * @param v The input vector
+   *
+   * @return {@code (abs v.getXF(), abs v.getYF(), abs v.getZF(), abs
+   * v.getWF())}
+   */
+
+  public static VectorI4F absolute(
+    final VectorReadable4FType v)
+  {
+    return new VectorI4F(
+      Math.abs(v.getXF()), Math.abs(v.getYF()), Math.abs(
+      v.getZF()), Math.abs(v.getWF()));
+  }
+
+  /**
+   * Calculate the element-wise sum of the vectors {@code v0} and {@code v1}.
+   *
+   * @param v0 The left input vector
+   * @param v1 The right input vector
+   *
+   * @return {@code (v0.getXF() + v1.getXF(), v0.getYF() + v1.getYF(),
+   * v0.getZF() + v1.getZF(), v0.getWF() + v1.getWF())}
+   */
+
+  public static VectorI4F add(
     final VectorReadable4FType v0,
     final VectorReadable4FType v1)
   {
@@ -78,20 +129,18 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Calculate the element-wise sum of the vectors <code>v0</code> and the
-   * element-wise product of <code>v1</code> and <code>r</code>.
+   * Calculate the element-wise sum of the vectors {@code v0} and the
+   * element-wise product of {@code v1} and {@code r}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
-   * @param r
-   *          The scaling value
+   * @param v0 The left input vector
+   * @param v1 The right input vector
+   * @param r  The scaling value
    *
-   * @return <code>(v0.getXF() + (v1.getXF() * r), v0.getYF() + (v1.getYF() * r), v0.getZF() + (v1.getZF() * r), v0.getWF() + (v1.getWF() * r))</code>
+   * @return {@code (v0.getXF() + (v1.getXF() * r), v0.getYF() + (v1.getYF() *
+   * r), v0.getZF() + (v1.getZF() * r), v0.getWF() + (v1.getWF() * r))}
    */
 
-  public final static VectorI4F addScaled(
+  public static VectorI4F addScaled(
     final VectorReadable4FType v0,
     final VectorReadable4FType v1,
     final float r)
@@ -100,22 +149,21 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Determine whether or not the vectors <code>va</code> and <code>vb</code>
-   * are equal to within the degree of error given in <code>context</code>.
+   * Determine whether or not the vectors {@code va} and {@code vb} are equal to
+   * within the degree of error given in {@code context}.
    *
-   * @see AlmostEqualFloat#almostEqual(ContextRelative, float, float)
+   * @param context The equality context
+   * @param va      The left input vector
+   * @param vb      The right input vector
    *
-   * @param context
-   *          The equality context
-   * @param va
-   *          The left input vector
-   * @param vb
-   *          The right input vector
+   * @return {@code true} iff the vectors are almost equal.
+   *
+   * @see AlmostEqualFloat#almostEqual(AlmostEqualFloat.ContextRelative, float,
+   * float)
    * @since 5.0.0
-   * @return <code>true</code> iff the vectors are almost equal.
    */
 
-  public final static boolean almostEqual(
+  public static boolean almostEqual(
     final AlmostEqualFloat.ContextRelative context,
     final VectorReadable4FType va,
     final VectorReadable4FType vb)
@@ -132,21 +180,18 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * maximum]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param maximum The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
-   *         and at least <code>minimum</code>
+   * @return A vector with both elements equal to at most {@code maximum} and at
+   * least {@code minimum}
    */
 
-  public final static VectorI4F clamp(
+  public static VectorI4F clamp(
     final VectorReadable4FType v,
     final float minimum,
     final float maximum)
@@ -159,26 +204,20 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code> and
-   * <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum} and {@code maximum}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
+   * @param maximum The vector containing the maximum acceptable values
    *
-   * @return <code>(
-   *   min(max(v.getXF(), minimum.getXF()), maximum.getXF()),
-   *   min(max(v.getYF(), minimum.getYF()), maximum.getYF()),
-   *   min(max(v.getZF(), minimum.getZF()), maximum.getZF()),
-   *   min(max(v.getWF(), minimum.getWF()), maximum.getWF())
-   * )</code>
+   * @return {@code ( min(max(v.getXF(), minimum.getXF()), maximum.getXF()),
+   * min(max(v.getYF(), minimum.getYF()), maximum.getYF()), min(max(v.getZF(),
+   * minimum.getZF()), maximum.getZF()), min(max(v.getWF(), minimum.getWF()),
+   * maximum.getWF()) )}
    */
 
-  public final static VectorI4F clampByVector(
+  public static VectorI4F clampByVector(
     final VectorReadable4FType v,
     final VectorReadable4FType minimum,
     final VectorReadable4FType maximum)
@@ -195,18 +234,16 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[-Infinity .. maximum]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [-Infinity
+   * .. maximum]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The maximum allowed value
+   * @param v       The input vector
+   * @param maximum The maximum allowed value
    *
-   * @return A vector with both elements equal to at most <code>maximum</code>
+   * @return A vector with both elements equal to at most {@code maximum}
    */
 
-  public final static VectorI4F clampMaximum(
+  public static VectorI4F clampMaximum(
     final VectorReadable4FType v,
     final float maximum)
   {
@@ -218,18 +255,18 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>maximum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code maximum}.
    *
-   * @param v
-   *          The input vector
-   * @param maximum
-   *          The vector containing the maximum acceptable values
+   * @param v       The input vector
+   * @param maximum The vector containing the maximum acceptable values
    *
-   * @return <code>(min(v.getXF(), maximum.getXF()), min(v.getYF(), maximum.getYF()), min(v.getZF(), maximum.getZF()), min(v.getWF(), maximum.getWF()))</code>
+   * @return {@code (min(v.getXF(), maximum.getXF()), min(v.getYF(),
+   * maximum.getYF()), min(v.getZF(), maximum.getZF()), min(v.getWF(),
+   * maximum.getWF()))}
    */
 
-  public final static VectorI4F clampMaximumByVector(
+  public static VectorI4F clampMaximumByVector(
     final VectorReadable4FType v,
     final VectorReadable4FType maximum)
   {
@@ -241,19 +278,16 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the range
-   * <code>[minimum .. Infinity]</code> inclusive.
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * Infinity]} inclusive.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The minimum allowed value
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
    *
-   * @return A vector with both elements equal to at least
-   *         <code>minimum</code>.
+   * @return A vector with both elements equal to at least {@code minimum}.
    */
 
-  public final static VectorI4F clampMinimum(
+  public static VectorI4F clampMinimum(
     final VectorReadable4FType v,
     final float minimum)
   {
@@ -265,18 +299,18 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Clamp the elements of the vector <code>v</code> to the inclusive range
-   * given by the corresponding elements in <code>minimum</code>.
+   * Clamp the elements of the vector {@code v} to the inclusive range given by
+   * the corresponding elements in {@code minimum}.
    *
-   * @param v
-   *          The input vector
-   * @param minimum
-   *          The vector containing the minimum acceptable values
+   * @param v       The input vector
+   * @param minimum The vector containing the minimum acceptable values
    *
-   * @return <code>(max(v.getXF(), minimum.getXF()), max(v.getYF(), minimum.getYF()), max(v.getZF(), minimum.getZF()), max(v.getWF(), minimum.getWF()))</code>
+   * @return {@code (max(v.getXF(), minimum.getXF()), max(v.getYF(),
+   * minimum.getYF()), max(v.getZF(), minimum.getZF()), max(v.getWF(),
+   * minimum.getWF()))}
    */
 
-  public final static VectorI4F clampMinimumByVector(
+  public static VectorI4F clampMinimumByVector(
     final VectorReadable4FType v,
     final VectorReadable4FType minimum)
   {
@@ -288,18 +322,15 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Calculate the distance between the two vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the distance between the two vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0 The left input vector
+   * @param v1 The right input vector
    *
    * @return The distance between the two vectors
    */
 
-  public final static float distance(
+  public static float distance(
     final VectorReadable4FType v0,
     final VectorReadable4FType v1)
   {
@@ -307,18 +338,15 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Calculate the scalar product of the vectors <code>v0</code> and
-   * <code>v1</code>.
+   * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0 The left input vector
+   * @param v1 The right input vector
    *
    * @return The scalar product of the two vectors
    */
 
-  public final static float dotProduct(
+  public static float dotProduct(
     final VectorReadable4FType v0,
     final VectorReadable4FType v1)
   {
@@ -330,29 +358,23 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Linearly interpolate between <code>v0</code> and <code>v1</code> by the
-   * amount <code>alpha</code>.
+   * Linearly interpolate between {@code v0} and {@code v1} by the amount {@code
+   * alpha}.
    *
-   * The <code>alpha</code> parameter controls the degree of interpolation,
-   * such that:
+   * The {@code alpha} parameter controls the degree of interpolation, such
+   * that:
    *
-   * <ul>
-   * <li>{@code interpolateLinear(v0, v1, 0.0) = v0}</li>
-   * <li>{@code interpolateLinear(v0, v1, 1.0) = v1}</li>
-   * </ul>
+   * <ul> <li>{@code interpolateLinear(v0, v1, 0.0) = v0}</li> <li>{@code
+   * interpolateLinear(v0, v1, 1.0) = v1}</li> </ul>
    *
-   * @param v0
-   *          The left input vector.
-   * @param v1
-   *          The right input vector.
-   * @param alpha
-   *          The interpolation value, between <code>0.0</code> and
-   *          <code>1.0</code>.
+   * @param v0    The left input vector.
+   * @param v1    The right input vector.
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}.
    *
-   * @return <code>(1 - alpha) * v0 + alpha * v1</code>
+   * @return {@code (1 - alpha) * v0 + alpha * v1}
    */
 
-  public final static VectorI4F interpolateLinear(
+  public static VectorI4F interpolateLinear(
     final VectorReadable4FType v0,
     final VectorReadable4FType v1,
     final float alpha)
@@ -363,77 +385,70 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Calculate the magnitude of the vector <code>v</code>.
+   * Calculate the magnitude of the vector {@code v}.
    *
-   * Correspondingly, <code>magnitude(normalize(v)) == 1.0</code>.
+   * Correspondingly, {@code magnitude(normalize(v)) == 1.0}.
    *
-   * @param v
-   *          The input vector
+   * @param v The input vector
    *
    * @return The magnitude of the input vector
    */
 
-  public final static float magnitude(
+  public static float magnitude(
     final VectorReadable4FType v)
   {
-    return (float) Math.sqrt(VectorI4F.magnitudeSquared(v));
+    return (float) Math.sqrt((double) VectorI4F.magnitudeSquared(v));
   }
 
   /**
-   * Calculate the squared magnitude of the vector <code>v</code>.
+   * Calculate the squared magnitude of the vector {@code v}.
    *
-   * @param v
-   *          The input vector
+   * @param v The input vector
    *
    * @return The squared magnitude of the input vector
    */
 
-  public final static float magnitudeSquared(
+  public static float magnitudeSquared(
     final VectorReadable4FType v)
   {
     return VectorI4F.dotProduct(v, v);
   }
 
   /**
-   * Normalize the vector <code>v</code>, preserving its direction but
-   * reducing it to unit length.
+   * Normalize the vector {@code v}, preserving its direction but reducing it to
+   * unit length.
    *
-   * @param v
-   *          The input vector
+   * @param v The input vector
    *
-   * @return A vector with the same orientation as <code>v</code> but with
-   *         magnitude equal to <code>1.0</code>
+   * @return A vector with the same orientation as {@code v} but with magnitude
+   * equal to {@code 1.0}
    */
 
-  public final static VectorI4F normalize(
+  public static VectorI4F normalize(
     final VectorReadable4FType v)
   {
     final float m = VectorI4F.magnitudeSquared(v);
-    if (m > 0) {
-      final float reciprocal = (float) (1.0f / Math.sqrt(m));
+    if (m > 0.0F) {
+      final float reciprocal = (float) (1.0 / Math.sqrt((double) m));
       return VectorI4F.scale(v, reciprocal);
     }
     return new VectorI4F(v);
   }
 
   /**
-   * <p>
-   * Orthonormalize and return the vectors <code>v0</code> and <code>v1</code>
-   * .
-   * </p>
-   * <p>
-   * See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
+   * <p> Orthonormalize and return the vectors {@code v0} and {@code v1} . </p>
+   * <p> See <a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP</a>
    * </p>
    *
-   * @param v0
-   *          The left vector
-   * @param v1
-   *          The right vector
-   * @return A pair <code>(v0, v1)</code>, orthonormalized.
+   * @param v0 The left vector
+   * @param v1 The right vector
+   *
+   * @return A pair {@code (v0, v1)}, orthonormalized.
+   *
    * @since 5.0.0
    */
 
-  public final static Pair<VectorI4F, VectorI4F> orthoNormalize(
+  public static Pair<VectorI4F, VectorI4F> orthoNormalize(
     final VectorReadable4FType v0,
     final VectorReadable4FType v1)
   {
@@ -446,17 +461,16 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Calculate the projection of the vector <code>p</code> onto the vector
-   * <code>q</code>.
+   * Calculate the projection of the vector {@code p} onto the vector {@code
+   * q}.
    *
-   * @param p
-   *          The left vector
-   * @param q
-   *          The right vector
-   * @return <code>((dotProduct p q) / magnitudeSquared q) * q</code>
+   * @param p The left vector
+   * @param q The right vector
+   *
+   * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    */
 
-  public final static VectorI4F projection(
+  public static VectorI4F projection(
     final VectorReadable4FType p,
     final VectorReadable4FType q)
   {
@@ -467,39 +481,34 @@ import com.io7m.jnull.Nullable;
   }
 
   /**
-   * Scale the vector <code>v</code> by the scalar <code>r</code>.
+   * Scale the vector {@code v} by the scalar {@code r}.
    *
-   * @param v
-   *          The input vector
-   * @param r
-   *          The scaling value
+   * @param v The input vector
+   * @param r The scaling value
    *
-   * @return <code>(v.getXF() * r, v.getYF() * r, v.getZF() * r, v.getWF() * r)</code>
+   * @return {@code (v.getXF() * r, v.getYF() * r, v.getZF() * r, v.getWF() *
+   * r)}
    */
 
-  public final static VectorI4F scale(
+  public static VectorI4F scale(
     final VectorReadable4FType v,
     final float r)
   {
     return new VectorI4F(
-      v.getXF() * r,
-      v.getYF() * r,
-      v.getZF() * r,
-      v.getWF() * r);
+      v.getXF() * r, v.getYF() * r, v.getZF() * r, v.getWF() * r);
   }
 
   /**
-   * Subtract the vector <code>v1</code> from the vector <code>v0</code>.
+   * Subtract the vector {@code v1} from the vector {@code v0}.
    *
-   * @param v0
-   *          The left input vector
-   * @param v1
-   *          The right input vector
+   * @param v0 The left input vector
+   * @param v1 The right input vector
    *
-   * @return <code>(v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF(), v0.getZF() - v1.getZF())</code>
+   * @return {@code (v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF(),
+   * v0.getZF() - v1.getZF())}
    */
 
-  public final static VectorI4F subtract(
+  public static VectorI4F subtract(
     final VectorReadable4FType v0,
     final VectorReadable4FType v1)
   {
@@ -510,67 +519,7 @@ import com.io7m.jnull.Nullable;
       v0.getWF() - v1.getWF());
   }
 
-  private final float w;
-  private final float x;
-  private final float y;
-  private final float z;
-
-  /**
-   * Default constructor, initializing the vector with values
-   * <code>[0.0, 0.0, 0.0, 1.0]</code>.
-   */
-
-  public VectorI4F()
-  {
-    this.x = 0.0f;
-    this.y = 0.0f;
-    this.z = 0.0f;
-    this.w = 1.0f;
-  }
-
-  /**
-   * Construct a vector initialized with the given values.
-   *
-   * @param in_x
-   *          The <code>x</code> value
-   * @param in_y
-   *          The <code>y</code> value
-   * @param in_z
-   *          The <code>z</code> value
-   * @param in_w
-   *          The <code>w</code> value
-   */
-
-  public VectorI4F(
-    final float in_x,
-    final float in_y,
-    final float in_z,
-    final float in_w)
-  {
-    this.x = in_x;
-    this.y = in_y;
-    this.z = in_z;
-    this.w = in_w;
-  }
-
-  /**
-   * Construct a vector initialized with the values given in the vector
-   * <code>in_v</code>.
-   *
-   * @param in_v
-   *          The source vector
-   */
-
-  public VectorI4F(
-    final VectorReadable4FType in_v)
-  {
-    this.x = in_v.getXF();
-    this.y = in_v.getYF();
-    this.z = in_v.getZF();
-    this.w = in_v.getWF();
-  }
-
-  @Override public final boolean equals(
+  @Override public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -583,46 +532,43 @@ import com.io7m.jnull.Nullable;
       return false;
     }
     final VectorReadable4FType other = (VectorI4F) obj;
-    if (Float.floatToIntBits(this.getWF()) != Float.floatToIntBits(other
-      .getWF())) {
+    if (Float.floatToIntBits(this.getWF()) != Float.floatToIntBits(
+      other.getWF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.getXF()) != Float.floatToIntBits(other
-      .getXF())) {
+    if (Float.floatToIntBits(this.getXF()) != Float.floatToIntBits(
+      other.getXF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.getYF()) != Float.floatToIntBits(other
-      .getYF())) {
+    if (Float.floatToIntBits(this.getYF()) != Float.floatToIntBits(
+      other.getYF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.getZF()) != Float.floatToIntBits(other
-      .getZF())) {
-      return false;
-    }
-    return true;
+    return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
+      other.getZF());
   }
 
-  @Override public final float getWF()
+  @Override public float getWF()
   {
     return this.w;
   }
 
-  @Override public final float getXF()
+  @Override public float getXF()
   {
     return this.x;
   }
 
-  @Override public final float getYF()
+  @Override public float getYF()
   {
     return this.y;
   }
 
-  @Override public final float getZF()
+  @Override public float getZF()
   {
     return this.z;
   }
 
-  @Override public final int hashCode()
+  @Override public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -633,7 +579,7 @@ import com.io7m.jnull.Nullable;
     return result;
   }
 
-  @Override public final String toString()
+  @Override public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI4F ");
@@ -646,7 +592,6 @@ import com.io7m.jnull.Nullable;
     builder.append(this.getWF());
     builder.append("]");
     final String r = builder.toString();
-    assert r != null;
-    return r;
+    return NullCheck.notNull(r);
   }
 }

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:section
+  xmlns:s="http://schemas.io7m.com/structural/2.1.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xml:id="com.io7m.jtensors.conventions.vectors">
+  <s:section-title>Vectors</s:section-title>
+  <s:section-contents/>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.vectors.types">
+    <s:subsection-title>Types</s:subsection-title>
+    <s:paragraph>
+      The <s:term s:type="package">${project.parent.name}</s:term> package provides vectors with
+      single-precision (<s:term s:type="type">float</s:term>) elements,
+      double-precision (<s:term s:type="type">double</s:term>) elements,
+      integer (<s:term s:type="type">int</s:term>), and
+      long integer (<s:term s:type="type">long</s:term>) elements. Each vector type
+      is available in two, three, and four element versions. Each vector type is
+      available in mutable or immutable versions.
+      The package unambiguously identifies the vector types by using the
+      following naming conventions for the types (given as a simple
+      <s:link-external s:target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
+      grammar), where <s:term s:type="term">prefix</s:term> is a type-specific prefix:
+    </s:paragraph>
+    <s:formal-item s:kind="convention">
+      <s:formal-item-title>Vector type naming</s:formal-item-title>
+      <s:verbatim><![CDATA[
+prefix       = ...
+mutability   = "M" | "I" ;
+size         = "2" | "3" | "4" ;
+element_type = "I" | "L" | "F" | "D" ;
+type         = prefix , mutability , size , element_type ;]]>
+      </s:verbatim>
+    </s:formal-item>
+  </s:subsection>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.vectors.access">
+    <s:subsection-title>Access control</s:subsection-title>
+    <s:paragraph>
+      If a function only needs to read from a value of a vector type, then
+      it would be desirable to be able to statically enforce this fact. Therefore,
+      the package provides a set of <s:term s:type="type">Readable</s:term>
+      interfaces that all vector types implement. By writing a function that
+      takes a value of a type implementing a <s:term s:type="type">Readable</s:term>
+      interface, the programmer is implicitly stating that this function does
+      not modify the vector.
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available vector Readable types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable2IType.html">VectorReadable2IType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable2FType.html">VectorReadable2FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable2DType.html">VectorReadable2DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable2LType.html">VectorReadable2LType</s:link-external></s:list-item>
+
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable3IType.html">VectorReadable3IType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable3FType.html">VectorReadable3FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable3DType.html">VectorReadable3DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable3LType.html">VectorReadable3LType</s:link-external></s:list-item>
+
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable4IType.html">VectorReadable4IType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable4FType.html">VectorReadable4FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable4DType.html">VectorReadable4DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable4LType.html">VectorReadable4LType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+    <s:paragraph>
+      Conversely, if a function writes to the elements of a vector without
+      ever reading from it, it again would be desirable to statically enforce
+      this fact. The package provides <s:term s:type="type">Writable</s:term>
+      interfaces that all mutable vector types implement:
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available vector Writable types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable2IType.html">VectorWritable2IType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable2FType.html">VectorWritable2FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable2DType.html">VectorWritable2DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable2LType.html">VectorWritable2LType</s:link-external></s:list-item>
+
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable3IType.html">VectorWritable3IType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable3FType.html">VectorWritable3FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable3DType.html">VectorWritable3DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable3LType.html">VectorWritable3LType</s:link-external></s:list-item>
+
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable4IType.html">VectorWritable4IType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable4FType.html">VectorWritable4FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable4DType.html">VectorWritable4DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorWritable4LType.html">VectorWritable4LType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+    <s:paragraph>
+      Finally, a combination of the above interfaces is provided that
+      essentially abstracts over mutable vector types. This allows the
+      programmer to write code against pure interfaces without referring
+      to a specific type, and to freely substitute alternative
+      implementations at any time.
+    </s:paragraph>
+    <s:formal-item s:kind="listing">
+      <s:formal-item-title>Available vector interface types</s:formal-item-title>
+      <s:list-unordered>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector2IType.html">Vector2IType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector2FType.html">Vector2FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector2DType.html">Vector2DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector2LType.html">Vector2LType</s:link-external></s:list-item>
+
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector3IType.html">Vector3IType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector3FType.html">Vector3FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector3DType.html">Vector3DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector3LType.html">Vector3LType</s:link-external></s:list-item>
+
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector4IType.html">Vector4IType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector4FType.html">Vector4FType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector4DType.html">Vector4DType</s:link-external></s:list-item>
+        <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/Vector4LType.html">Vector4LType</s:link-external></s:list-item>
+      </s:list-unordered>
+    </s:formal-item>
+  </s:subsection>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.vectors.storage">
+    <s:subsection-title>Storage</s:subsection-title>
+    <s:paragraph>
+      As with all matrix types, all vector types have associated
+      <s:link s:target="com.io7m.jtensors.conventions.matrices.storage">Context</s:link>
+      types that allow for all methods to execute without allocating
+      any memory. See the linked section for details.
+    </s:paragraph>
+  </s:subsection>
+
+  <s:subsection xml:id="com.io7m.jtensors.conventions.vectors.phantom_types">
+    <s:subsection-title>Phantom types</s:subsection-title>
+    <s:paragraph>
+      The <s:term s:type="package">${project.parent.name}</s:term> package also provides
+      copies of the existing vector types indexed by a
+      <s:term s:type="term">phantom type parameter</s:term> in order to
+      allow the programmer to make semantically distinct values
+      <s:term s:type="term">type-incompatible</s:term>
+      <s:footnote>
+        See <s:link-external s:target="http://io7m.com/documents/tt1-pt/">http://io7m.com/documents/tt1-pt/</s:link-external>.
+      </s:footnote>.
+    </s:paragraph>
+    <s:paragraph>
+      The parameterized vector types and interfaces are provided in
+      the <s:link-external s:target="apidocs/com/io7m/jtensors/parameterized/package-summary.html">com.io7m.jtensors.parameterized</s:link-external>
+      package.
+    </s:paragraph>
+  </s:subsection>
+</s:section>

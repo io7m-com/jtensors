@@ -19,11 +19,11 @@ package com.io7m.jtensors.tests;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
 
-final class TestUtilities
+public final class TestUtilities
 {
   public static final int TEST_RANDOM_ITERATIONS = 1000;
 
-  static AlmostEqualDouble.ContextRelative getDoubleEqualityContext()
+  public static AlmostEqualDouble.ContextRelative getDoubleEqualityContext()
   {
     final AlmostEqualDouble.ContextRelative context =
       new AlmostEqualDouble.ContextRelative();
@@ -32,7 +32,7 @@ final class TestUtilities
     return context;
   }
 
-  static AlmostEqualDouble.ContextRelative getDoubleEqualityContext3dp()
+  public static AlmostEqualDouble.ContextRelative getDoubleEqualityContext3dp()
   {
     final AlmostEqualDouble.ContextRelative context =
       new AlmostEqualDouble.ContextRelative();
@@ -41,7 +41,7 @@ final class TestUtilities
     return context;
   }
 
-  static AlmostEqualDouble.ContextRelative getDoubleEqualityContext6dp()
+  public static AlmostEqualDouble.ContextRelative getDoubleEqualityContext6dp()
   {
     final AlmostEqualDouble.ContextRelative context =
       new AlmostEqualDouble.ContextRelative();
@@ -50,7 +50,7 @@ final class TestUtilities
     return context;
   }
 
-  static AlmostEqualFloat.ContextRelative getSingleEqualityContext()
+  public static AlmostEqualFloat.ContextRelative getSingleEqualityContext()
   {
     final AlmostEqualFloat.ContextRelative context =
       new AlmostEqualFloat.ContextRelative();
@@ -59,7 +59,16 @@ final class TestUtilities
     return context;
   }
 
-  static AlmostEqualFloat.ContextRelative getSingleEqualityContext3dp()
+  public static AlmostEqualFloat.ContextRelative getSingleEqualityContext2dp()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      new AlmostEqualFloat.ContextRelative();
+    context.setMaxAbsoluteDifference(0.01f);
+    context.setMaxRelativeDifference(0.01f);
+    return context;
+  }
+
+  public static AlmostEqualFloat.ContextRelative getSingleEqualityContext3dp()
   {
     final AlmostEqualFloat.ContextRelative context =
       new AlmostEqualFloat.ContextRelative();
@@ -68,7 +77,7 @@ final class TestUtilities
     return context;
   }
 
-  static AlmostEqualFloat.ContextRelative getSingleEqualityContext5dp()
+  public static AlmostEqualFloat.ContextRelative getSingleEqualityContext5dp()
   {
     final AlmostEqualFloat.ContextRelative context =
       new AlmostEqualFloat.ContextRelative();

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -17,8 +17,7 @@
 package com.io7m.jtensors;
 
 /**
- * <p>
- * 'Write' interface to two-dimensional vectors with long integer elements.
+ * <p> 'Write' interface to two-dimensional vectors with long integer elements.
  * </p>
  */
 
@@ -27,21 +26,17 @@ public interface VectorWritable2LType
   /**
    * Set the current vector to the contents of the input vector.
    *
-   * @param in_v
-   *          The input vector
+   * @param in_v The input vector
    */
 
   void copyFrom2L(
     VectorReadable2LType in_v);
 
   /**
-   * Set the current <code>x</code> and <code>y</code> values of the current
-   * vector.
+   * Set the current {@code x} and {@code y} values of the current vector.
    *
-   * @param x
-   *          The new <code>x</code> value.
-   * @param y
-   *          The new <code>y</code> value.
+   * @param x The new {@code x} value.
+   * @param y The new {@code y} value.
    */
 
   void set2L(
@@ -49,20 +44,18 @@ public interface VectorWritable2LType
     long y);
 
   /**
-   * Set the current <code>x</code> value of the current vector.
+   * Set the current {@code x} value of the current vector.
    *
-   * @param x
-   *          The new <code>x</code> value.
+   * @param x The new {@code x} value.
    */
 
   void setXL(
     long x);
 
   /**
-   * Set the current <code>y</code> value of the current vector.
+   * Set the current {@code y} value of the current vector.
    *
-   * @param y
-   *          The new <code>y</code> value.
+   * @param y The new {@code y} value.
    */
 
   void setYL(
