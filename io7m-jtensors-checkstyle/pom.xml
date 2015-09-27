@@ -23,4 +23,11 @@
     <developerConnection>${project.parent.scm.developerConnection}</developerConnection>
   </scm>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.io7m.jnull</groupId>
+      <artifactId>io7m-jnull-core</artifactId>
+    </dependency>
+  </dependencies>
+
 </project>
