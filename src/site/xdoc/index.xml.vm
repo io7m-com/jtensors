@@ -32,7 +32,7 @@
         <li>Simple heap-backed vectors/matrices: For when a simple Java 2D array is good enough.</li>
         <li>Direct-memory-backed matrix types in column-major order for efficient interfacing with OpenGL and native code.</li>
         <li>Heavily partitioned by interfaces: Write code that is generalized over matrix/vector representations. Easily wrap third-party vector libraries for uniformity!</li>
-        <li>Memory efficient: All functions that require extra temporary memory take programmer-provided constant-sized temporary storage - all code paths for mutable types are allocation-free.</li>
+        <li>Memory efficient: All functions that require extra temporary memory take programmer-provided constant-sized temporary storage, reusable per-thread for the lifetime of the program - all code paths for mutable types are allocation-free.</li>
         <li>Phantom-typed variants of all types for statically distinguishing between semantically different but otherwise type-compatible vectors and matrices.</li>
         <li>Fully documented (Javadoc).</li>
         <li>Massive battery of tests for checking the behaviour of matrix/vector implementations: Ensure your own implementations are correct with ease!</li>
