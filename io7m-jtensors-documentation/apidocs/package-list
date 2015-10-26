@@ -1,2 +1,5 @@
 com.io7m.jtensors
+com.io7m.jtensors.bytebuffered
+com.io7m.jtensors.bytebuffered.parameterized
 com.io7m.jtensors.documentation
+com.io7m.jtensors.parameterized

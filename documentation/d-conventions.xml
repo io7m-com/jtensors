@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:part
+  xmlns:s="http://schemas.io7m.com/structural/2.1.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xml:id="com.io7m.jtensors.conventions">
+
+  <s:part-title>Usage &amp; Conventions</s:part-title>
+  <s:part-contents/>
+
+  <xi:include href="d-conventions-vectors.xml"/>
+  <xi:include href="d-conventions-matrices.xml"/>
+  <xi:include href="d-conventions-quaternions.xml"/>
+
+</s:part>

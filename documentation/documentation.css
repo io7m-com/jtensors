@@ -28,9 +28,16 @@
 .file,
 .function,
 .keyword,
-.type
+.type,
+.variable
 {
   font-family: monospace;
+}
+
+.term
+{
+  font-family: monospace;
+  font-style: italic;
 }
 
 .example, .license, .terminal

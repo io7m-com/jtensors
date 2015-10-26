@@ -19,11 +19,11 @@
 <s:document
   xmlns:s="http://schemas.io7m.com/structural/2.1.0"
   xmlns:xi="http://www.w3.org/2001/XInclude">
-  <s:document-title>io7m-jtensors 6.0.2 Documentation</s:document-title>
+  <s:document-title>io7m-jtensors 7.0.0-beta0004 Documentation</s:document-title>
   <s:document-style>documentation.css</s:document-style>
   <s:document-contents/>
 
-  <s:part>
+  <s:part xml:id="com.io7m.jtensors.package_info">
     <s:part-title>Package Information</s:part-title>
     <s:part-contents />
     <s:section>
@@ -31,7 +31,7 @@
       <s:subsection>
         <s:subsection-title>Overview</s:subsection-title>
         <s:paragraph>
-          The <s:term s:type="package">jtensors</s:term> package implements a
+          The <s:term s:type="package">io7m-jtensors</s:term> package implements a
           set of efficient vector, matrix, and quaternion classes intended for use
           in computer graphics applications.
         </s:paragraph>
@@ -45,9 +45,13 @@
           for zero-copy sharing of structures with native code.
         </s:paragraph>
         <s:paragraph>
-          Many of the matrix functions also provide interfaces that allow for
-          preallocation of all storage, reducing garbage collector pressure in
-          code with soft-realtime constraints.
+          Each vector and matrix type has an associated
+          <s:term s:type="term">context</s:term> type containing enough
+          preallocated storage to execute all functions in the type without
+          performing any allocations. All code paths are therefore
+          allocation free
+          (with the exception of <s:term s:type="function">toString</s:term>
+          methods, which require allocation by design).
         </s:paragraph>
       </s:subsection>
 
@@ -86,7 +90,7 @@
           <s:verbatim s:type="example"><![CDATA[<dependency>
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors-core</artifactId>
-  <version>6.0.2</version>
+  <version>7.0.0-beta0004</version>
 </dependency>]]></s:verbatim>
         </s:paragraph>
         <s:paragraph>
@@ -114,7 +118,7 @@
       <s:paragraph>
         All files distributed with the <s:term s:type="package">io7m-jtensors</s:term>
         package are placed under the following license:
-        <s:verbatim s:type="license"><![CDATA[Copyright © 2014 <code@io7m.com> http://io7m.com
+        <s:verbatim s:type="license"><![CDATA[Copyright © 2015 <code@io7m.com> http://io7m.com
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -132,415 +136,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.]]>
     </s:section>
   </s:part>
 
-  <s:part>
-    <s:part-title>Usage &amp; Conventions</s:part-title>
-    <s:part-contents/>
+  <xi:include href="d-conventions.xml"/>
 
-    <s:section>
-      <s:section-title>Vectors</s:section-title>
-      <s:section-contents/>
 
-      <s:subsection>
-        <s:subsection-title>Types</s:subsection-title>
-        <s:paragraph>
-          The <s:term s:type="package">jtensors</s:term> package provides vectors with
-          single-precision (<s:term s:type="type">float</s:term>) elements,
-          double-precision (<s:term s:type="type">double</s:term>) elements,
-          integer (<s:term s:type="type">int</s:term>), and
-          long integer (<s:term s:type="type">long</s:term>) elements. Each vector type
-          is available in two, three, and four element versions. Each vector type is
-          available in mutable or immutable versions. The package unambiguously identifies
-          the vector types by using the following naming conventions for the types
-          (given as a simple
-          <s:link-external s:target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
-          grammar):
-        </s:paragraph>
-        <s:formal-item s:kind="convention">
-          <s:formal-item-title>Vector type naming</s:formal-item-title>
-          <s:verbatim><![CDATA[
-mutability   = "M" | "I" ;
-size         = "2" | "3" | "4" ;
-element_type = "I" | "L" | "F" | "D" ;
-type         = "Vector" , mutability , size , element_type ;]]>
-          </s:verbatim>
-        </s:formal-item>
-        <s:paragraph>
-          A comprehensive list of the available vector types is as follows:
-        </s:paragraph>
-        <s:formal-item s:kind="listing">
-          <s:formal-item-title>Available vector types</s:formal-item-title>
-          <s:list-unordered>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM2D.html">VectorM2D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM2F.html">VectorM2F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM2I.html">VectorM2I</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM2L.html">VectorM2L</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM3D.html">VectorM3D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM3F.html">VectorM3F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM3I.html">VectorM3I</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM3L.html">VectorM3L</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM4D.html">VectorM4D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM4F.html">VectorM4F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM4I.html">VectorM4I</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorM4L.html">VectorM4L</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI2D.html">VectorI2D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI2F.html">VectorI2F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI2I.html">VectorI2I</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI2L.html">VectorI2L</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI3D.html">VectorI3D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI3F.html">VectorI3F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI3I.html">VectorI3I</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI3L.html">VectorI3L</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI4D.html">VectorI4D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI4F.html">VectorI4F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI4I.html">VectorI4I</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorI4L.html">VectorI4L</s:link-external></s:list-item>
-          </s:list-unordered>
-        </s:formal-item>
-      </s:subsection>
-
-      <s:subsection>
-        <s:subsection-title>Access control</s:subsection-title>
-        <s:paragraph>
-          If a function only needs to read from a value of a vector type, then
-          it would be desirable to be able to statically enforce this fact. Therefore,
-          the package provides a set of <s:term s:type="type">Readable</s:term>
-          interfaces that all vector types implement. By writing a function that
-          takes a value of a type implementing a <s:term s:type="type">Readable</s:term>
-          interface, the programmer is implicitly stating that this function does
-          not modify the vector.
-        </s:paragraph>
-        <s:formal-item s:kind="listing">
-          <s:formal-item-title>Available vector Readable types</s:formal-item-title>
-          <s:list-unordered>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable2I.html">VectorReadable2I</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable2F.html">VectorReadable2F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable2D.html">VectorReadable2D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable2L.html">VectorReadable2L</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable3I.html">VectorReadable3I</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable3F.html">VectorReadable3F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable3D.html">VectorReadable3D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable3L.html">VectorReadable3L</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable4I.html">VectorReadable4I</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable4F.html">VectorReadable4F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable4D.html">VectorReadable4D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/VectorReadable4L.html">VectorReadable4L</s:link-external></s:list-item>
-          </s:list-unordered>
-        </s:formal-item>
-      </s:subsection>
-    </s:section>
-
-    <s:section>
-      <s:section-title>Matrices</s:section-title>
-      <s:section-contents/>
-
-      <s:subsection>
-        <s:subsection-title>Types</s:subsection-title>
-        <s:paragraph>
-          The <s:term s:type="package">jtensors</s:term> package provides only square
-          matrix types with single-precision (<s:term s:type="type">float</s:term>) elements,
-          and double-precision (<s:term s:type="type">double</s:term>) elements.
-          Matrices are currently only available in mutable form. The package unambiguously
-          identifies the matrix types by using the following naming conventions for the types
-          (given as a simple
-          <s:link-external s:target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
-          grammar):
-        </s:paragraph>
-        <s:formal-item s:kind="convention">
-          <s:formal-item-title>Matrix type naming</s:formal-item-title>
-          <s:verbatim><![CDATA[
-mutability   = "M" ;
-size         = "2x2" | "3x3" | "4x4" ;
-element_type = "F" | "D" ;
-type         = "Matrix" , mutability , size , element_type ;]]>
-          </s:verbatim>
-        </s:formal-item>
-        <s:paragraph>
-          A comprehensive list of the available matrix types is as follows:
-        </s:paragraph>
-        <s:formal-item s:kind="listing">
-          <s:formal-item-title>Available vector types</s:formal-item-title>
-          <s:list-unordered>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM2x2D.html">MatrixM2x2D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM2x2F.html">MatrixM2x2F</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM3x3D.html">MatrixM3x3D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM3x3F.html">MatrixM3x3F</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM4x4D.html">MatrixM4x4D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM4x4F.html">MatrixM4x4F</s:link-external></s:list-item>
-          </s:list-unordered>
-        </s:formal-item>
-      </s:subsection>
-
-      <s:subsection>
-        <s:subsection-title>Storage</s:subsection-title>
-        <s:paragraph>
-          All of the currently available matrix types are stored in direct memory
-          <s:footnote>
-            See <s:link-external s:target="http://docs.oracle.com/javase/1.5.0/docs/api/java/nio/ByteBuffer.html#allocateDirect(int)">ByteBuffer.allocateDirect(int)</s:link-external>.
-          </s:footnote>. This allows for zero-copy passing of the matrix data
-          to native code
-          <s:footnote>
-            Typically, the <s:link-external s:target="http://opengl.org">OpenGL</s:link-external> API.
-          </s:footnote>. Use of direct memory does incur an extra cost with regards
-          to creation and deletion of matrices, and some functions in the package do
-          require temporary matrices in order to work. Therefore, the package provides
-          <s:term s:type="type">Context</s:term> types that allow the user to pre-allocate
-          storage that the functions can reuse an unlimited number of times. The package
-          typically defines one <s:term s:type="type">Context</s:term> type per class.
-          See the <s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM4x4D.Context.html">MatrixM4x4D.Context</s:link-external>
-          type for a concrete example; any function in the
-          <s:link-external s:target="apidocs/com/io7m/jtensors/MatrixM4x4D.html">MatrixM4x4D</s:link-external>
-          class that takes a <s:term s:type="type">Context</s:term> as an argument can be
-          depended upon not to allocate more memory. Note that the <s:term s:type="type">Context</s:term>
-          type cannot be shared across threads and is completely opaque outside of the
-          <s:term s:type="package">jtensors</s:term> package.
-        </s:paragraph>
-        <s:formal-item s:kind="example">
-          <s:formal-item-title>Context usage</s:formal-item-title>
-          <s:verbatim><![CDATA[MatrixM4x4D.Context context = new MatrixM4x4D.Context();
-MatrixM4x4D mi = new MatrixM4x4D();
-MatrixM4x4D mo = new MatrixM4x4D();
-
-MatrixM4x4D.invertWithContext(context, mi, mo);
-MatrixM4x4D.invertWithContext(context, mo, mi);]]>
-          </s:verbatim>
-        </s:formal-item>
-        <s:paragraph>
-          Matrix data is stored in column-major format
-          <s:footnote>
-            The convention used by most programs using the <s:link-external s:target="http://opengl.org">OpenGL</s:link-external> API.
-          </s:footnote>, in whatever is the
-          platform's native byte order. For an <s:term s:type="variable">m x m</s:term>
-          square matrix, assuming that each element of the matrix uses
-          <s:term s:type="variable">n</s:term> bytes, the first byte of the element at
-          row <s:term s:type="variable">r</s:term> and column <s:term s:type="variable">c</s:term>
-          (assuming <s:term s:type="function">0 &lt;= r &lt; m</s:term> and
-          <s:term s:type="function">0 &lt;= c &lt; m</s:term>)
-          can be found by <s:term s:type="function">(c * m * n) + (r * n)</s:term>.
-        </s:paragraph>
-        <s:paragraph>
-          As an example, a 4x4 matrix with <s:term s:type="constant">4</s:term>
-          byte elements would be stored in memory as shown in the following
-          diagram:
-        </s:paragraph>
-        <s:formal-item s:kind="example">
-          <s:formal-item-title>Column-major storage memory layout</s:formal-item-title>
-          <s:image s:source="images/memory.png">Column-major storage memory layout</s:image>
-        </s:formal-item>
-        <s:paragraph>
-          So, the element at row <s:term s:type="constant">0</s:term>,
-          column <s:term s:type="constant">0</s:term> would be stored in
-          bytes <s:term s:type="constant">[0 .. 3]</s:term>. The
-          element at row <s:term s:type="constant">1</s:term>, column
-          <s:term s:type="constant">0</s:term> would be stored in bytes
-          <s:term s:type="constant">[4 .. 7]</s:term>. The
-          element at row <s:term s:type="constant">0</s:term>, column
-          <s:term s:type="constant">1</s:term> would be stored in bytes
-          <s:term s:type="constant">[16 .. 19]</s:term>, and so on.
-        </s:paragraph>
-      </s:subsection>
-
-      <s:subsection xml:id="matrices.handedness">
-        <s:subsection-title>Rotations &amp; Handedness</s:subsection-title>
-        <s:paragraph>
-          Any of the matrix functions that deal with rotations
-          assume a right-handed coordinate system. This
-          matches the system used by <s:link-external
-          s:target="http://opengl.org">OpenGL</s:link-external> (and most
-          mathematics literature). A right-handed coordinate system
-          assumes that if the viewer is standing at the origin and
-          looking towards negative infinity on the Z axis, then the
-          X axis runs horizontally (left towards negative infinity
-          and right towards positive infinity), and the Y axis runs
-          vertically (down towards negative infinity and up towards
-          positive infinity). The following image demonstrates this
-          axis configuration:
-        </s:paragraph>
-        <s:formal-item s:kind="example">
-          <s:formal-item-title>Right-handed coordinate system</s:formal-item-title>
-          <s:image s:source="images/axes2.png">Right-handed coordinate system</s:image>
-        </s:formal-item>
-        <s:paragraph>
-          The <s:term s:type="package">jtensors</s:term> package adheres
-          to the convention that a positive rotation around an axis
-          represents a counter-clockwise rotation when viewing the
-          system along the negative direction of the axis in question.
-        </s:paragraph>
-        <s:formal-item s:kind="example">
-          <s:formal-item-title>Right-handed rotations</s:formal-item-title>
-          <s:image s:source="images/rotations.png">Right-handed rotations</s:image>
-        </s:formal-item>
-        <s:paragraph>
-          The package uses the following matrices to define rotations
-          around each axis:
-        </s:paragraph>
-        <s:formal-item s:kind="matrix">
-          <s:formal-item-title>Rotation of r radians around the X axis</s:formal-item-title>
-          <s:image s:source="images/matrix_rx.png">Rotation of r radians around the X axis</s:image>
-        </s:formal-item>
-        <s:formal-item s:kind="matrix">
-          <s:formal-item-title>Rotation of r radians around the Y axis</s:formal-item-title>
-          <s:image s:source="images/matrix_ry.png">Rotation of r radians around the Y axis</s:image>
-        </s:formal-item>
-        <s:formal-item s:kind="matrix">
-          <s:formal-item-title>Rotation of r radians around the Z axis</s:formal-item-title>
-          <s:image s:source="images/matrix_rz.png">Rotation of r radians around the Z axis</s:image>
-        </s:formal-item>
-        <s:paragraph>
-          Which results in the following matrix for rotating <s:term
-          s:type="variable">r</s:term> radians around the axis given
-          by <s:term s:type="constant">(x, y, z)</s:term>, assuming
-          <s:term s:type="variable">s = sin(r)</s:term> and <s:term
-          s:type="variable">c = cos(r)</s:term>
-          <s:footnote>
-            See <s:link-external s:target="http://mathfor3dgameprogramming.com">Mathematics
-            for 3D Game Programming and Computer
-            Graphics</s:link-external> 3rd Edition, section 4.3.1 for the
-            derivation.
-          </s:footnote>:
-        </s:paragraph>
-        <s:formal-item s:kind="matrix">
-          <s:formal-item-title>Rotation of r radians around an arbitrary axis</s:formal-item-title>
-          <s:image s:source="images/rot_matrix.png">Rotation of r radians around an arbitrary axis</s:image>
-        </s:formal-item>
-      </s:subsection>
-
-      <s:subsection>
-        <s:subsection-title>Access control</s:subsection-title>
-        <s:paragraph>
-          If a function only needs to read from a value of a matrix type, then
-          it would be desirable to be able to statically enforce this fact. Therefore,
-          the package provides a set of <s:term s:type="type">Readable</s:term>
-          interfaces that all matrix types implement. By writing a function that
-          takes a value of a type implementing a <s:term s:type="type">Readable</s:term>
-          interface, the programmer is implicitly stating that this function does
-          not modify the matrix.
-        </s:paragraph>
-        <s:formal-item s:kind="listing">
-          <s:formal-item-title>Available matrix Readable types</s:formal-item-title>
-          <s:list-unordered>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable2x2F.html">MatrixReadable2x2F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable2x2D.html">MatrixReadable2x2D</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable3x3F.html">MatrixReadable3x3F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable3x3D.html">MatrixReadable3x3D</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable4x4F.html">MatrixReadable4x4F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/MatrixReadable4x4D.html">MatrixReadable4x4D</s:link-external></s:list-item>
-          </s:list-unordered>
-        </s:formal-item>
-      </s:subsection>
-    </s:section>
-
-    <s:section>
-      <s:section-title>Quaternions</s:section-title>
-      <s:section-contents/>
-
-      <s:subsection>
-        <s:subsection-title>Types</s:subsection-title>
-        <s:paragraph>
-          The <s:term s:type="package">jtensors</s:term>
-          package provides quaternions with single-precision
-          (<s:term s:type="type">float</s:term>) elements, and
-          double-precision (<s:term s:type="type">double</s:term>)
-          elements.  Each quaternion type is available in mutable or
-          immutable versions. The package unambiguously identifies
-          the quaternion types by using the following naming
-          conventions for the types (given as a simple <s:link-external
-          s:target="http://en.wikipedia.org/wiki/EBNF">EBNF</s:link-external>
-          grammar):
-        </s:paragraph>
-        <s:formal-item s:kind="convention">
-          <s:formal-item-title>Quaternion type naming</s:formal-item-title>
-          <s:verbatim><![CDATA[
-mutability   = "M" | "I" ;
-size         = "4" ;
-element_type = "F" | "D" ;
-type         = "Quaternion" , mutability , size , element_type ;]]>
-          </s:verbatim>
-        </s:formal-item>
-        <s:paragraph>
-          A comprehensive list of the available quaternion types is as follows:
-        </s:paragraph>
-        <s:formal-item s:kind="listing">
-          <s:formal-item-title>Available quaternion types</s:formal-item-title>
-          <s:list-unordered>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionM4D.html">QuaternionM4D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionM4F.html">QuaternionM4F</s:link-external></s:list-item>
-
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionI4D.html">QuaternionI4D</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionI4F.html">QuaternionI4F</s:link-external></s:list-item>
-          </s:list-unordered>
-        </s:formal-item>
-      </s:subsection>
-
-      <s:subsection xml:id="quaternions.handedness">
-        <s:subsection-title>Rotations &amp; Handedness</s:subsection-title>
-        <s:paragraph>
-          The included quaternion types and functions have consistent semantics and
-          assumptions with regards to rotation and coordinate systems as the
-          <s:link s:target="matrices.handedness">Matrix</s:link>
-          types, and functions are provided to convert between matrices and
-          quaternions.
-        </s:paragraph>
-      </s:subsection>
-
-      <s:subsection>
-        <s:subsection-title>Access control</s:subsection-title>
-        <s:paragraph>
-          If a function only needs to read from a value of a quaternion type, then
-          it would be desirable to be able to statically enforce this fact. Therefore,
-          the package provides a set of <s:term s:type="type">Readable</s:term>
-          interfaces that all quaternion types implement. By writing a function that
-          takes a value of a type implementing a <s:term s:type="type">Readable</s:term>
-          interface, the programmer is implicitly stating that this function does
-          not modify the quaternion.
-        </s:paragraph>
-        <s:formal-item s:kind="listing">
-          <s:formal-item-title>Available quaternion Readable types</s:formal-item-title>
-          <s:list-unordered>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionReadable4F.html">QuaternionReadable4F</s:link-external></s:list-item>
-            <s:list-item><s:link-external s:target="apidocs/com/io7m/jtensors/QuaternionReadable4D.html">QuaternionReadable4D</s:link-external></s:list-item>
-          </s:list-unordered>
-        </s:formal-item>
-      </s:subsection>
-    </s:section>
-
-    <s:section>
-      <s:section-title>Subclassing</s:section-title>
-      <s:paragraph>
-        The types in the <s:term s:type="package">jtensors</s:term> package
-        are not marked as <s:term s:type="constant">final</s:term>, despite
-        all of their methods being <s:term s:type="constant">final</s:term>. The
-        intention is to allow users of the types to subclass them with the
-        intention of adding "phantom" type parameters
-        <s:footnote>
-          <s:link-external s:target="http://io7m.com/documents/java/tt1-pt/">http://io7m.com/documents/java/tt1-pt/</s:link-external>
-        </s:footnote>
-        in order to distinguish between semantically distinct (but structurally
-        identical) values at compile time.
-      </s:paragraph>
-    </s:section>
-  </s:part>
-
-  <s:part>
-    <s:part-title>API Reference</s:part-title>
-    <s:part-contents/>
-    <s:section>
-      <s:section-title>Javadoc</s:section-title>
-      <s:paragraph>
-        API documentation for the package is provided via the
-        included <s:link-external s:target="apidocs">Javadoc</s:link-external>.
-      </s:paragraph>
-    </s:section>
-  </s:part>
 
 </s:document>
