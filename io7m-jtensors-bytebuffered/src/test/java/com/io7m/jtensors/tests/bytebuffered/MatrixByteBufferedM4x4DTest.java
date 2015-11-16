@@ -22,6 +22,7 @@ import com.io7m.jtensors.bytebuffered.MatrixByteBuffered4x4DType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM4x4D;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class MatrixByteBufferedM4x4DTest
   extends MatrixByteBuffered4x4DContract<MatrixByteBuffered4x4DType>
@@ -59,5 +60,15 @@ public final class MatrixByteBufferedM4x4DTest
     final MatrixByteBuffered4x4DType mr =
       MatrixByteBufferedM4x4D.newMatrixFromByteBuffer(buf, offset);
     return mr;
+  }
+
+  @Override protected MatrixByteBuffered4x4DType newMatrixWithBaseOffset(
+    final int size,
+    final AtomicLong base,
+    final int offset)
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(size);
+    return MatrixByteBufferedM4x4D.newMatrixFromByteBufferAndBase(
+      buf, base, offset);
   }
 }

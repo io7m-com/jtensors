@@ -20,8 +20,10 @@ import com.io7m.jtensors.MatrixM2x2D;
 import com.io7m.jtensors.MatrixReadable2x2DType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBuffered2x2DType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM2x2D;
+import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM4x4D;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class MatrixByteBufferedM2x2DTest
   extends MatrixByteBuffered2x2DContract<MatrixByteBuffered2x2DType>
@@ -59,5 +61,15 @@ public final class MatrixByteBufferedM2x2DTest
     final MatrixByteBuffered2x2DType mr =
       MatrixByteBufferedM2x2D.newMatrixFromByteBuffer(buf, offset);
     return mr;
+  }
+
+  @Override protected MatrixByteBuffered2x2DType newMatrixWithBaseOffset(
+    final int size,
+    final AtomicLong base,
+    final int offset)
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(size);
+    return MatrixByteBufferedM2x2D.newMatrixFromByteBufferAndBase(
+      buf, base, offset);
   }
 }

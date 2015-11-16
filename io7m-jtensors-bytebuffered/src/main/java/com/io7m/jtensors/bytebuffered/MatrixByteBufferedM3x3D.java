@@ -26,6 +26,7 @@ import com.io7m.jtensors.VectorWritable2DType;
 import com.io7m.jtensors.VectorWritable3DType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>A 3x3 matrix type with {@code double} elements, packed into a {@link
@@ -35,17 +36,17 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class MatrixByteBufferedM3x3D implements MatrixByteBuffered3x3DType
+public final class MatrixByteBufferedM3x3D extends ByteBuffered implements MatrixByteBuffered3x3DType
 {
   private final ByteBuffer buffer;
-  private long offset;
 
   private MatrixByteBufferedM3x3D(
     final ByteBuffer in_buffer,
-    final long in_offset)
+    final AtomicLong in_base,
+    final int in_offset)
   {
+    super(in_base, in_offset);
     this.buffer = NullCheck.notNull(in_buffer);
-    this.offset = in_offset;
   }
 
   /**
@@ -64,7 +65,32 @@ public final class MatrixByteBufferedM3x3D implements MatrixByteBuffered3x3DType
     final ByteBuffer b,
     final long byte_offset)
   {
-    return new MatrixByteBufferedM3x3D(b, byte_offset);
+    return new MatrixByteBufferedM3x3D(b, new AtomicLong(byte_offset), 0);
+  }
+
+  /**
+   * <p>Return a new matrix that is backed by the given byte buffer {@code b}
+   * </p>
+   *
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered matrix
+   */
+
+  public static MatrixByteBuffered3x3DType newMatrixFromByteBufferAndBase(
+    final ByteBuffer b,
+    final AtomicLong base,
+    final int offset)
+  {
+    return new MatrixByteBufferedM3x3D(b, base, offset);
   }
 
   private static int checkColumn(
@@ -173,60 +199,61 @@ public final class MatrixByteBufferedM3x3D implements MatrixByteBuffered3x3DType
     final int row,
     final V out)
   {
+    final long o = super.getIndex();
     out.set3D(
-      this.getAtOffsetAndRowColumn(this.offset, row, 0),
-      this.getAtOffsetAndRowColumn(this.offset, row, 1),
-      this.getAtOffsetAndRowColumn(this.offset, row, 2));
+      this.getAtOffsetAndRowColumn(o, row, 0),
+      this.getAtOffsetAndRowColumn(o, row, 1),
+      this.getAtOffsetAndRowColumn(o, row, 2));
   }
 
   @Override public double getR0C2D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 0, 2);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 0, 2);
   }
 
   @Override public void setR0C2D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 0, 2, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 0, 2, x);
   }
 
   @Override public double getR1C2D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 1, 2);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 1, 2);
   }
 
   @Override public void setR1C2D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 1, 2, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 1, 2, x);
   }
 
   @Override public double getR2C0D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 2, 0);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 2, 0);
   }
 
   @Override public void setR2C0D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 2, 0, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 2, 0, x);
   }
 
   @Override public double getR2C1D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 2, 1);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 2, 1);
   }
 
   @Override public void setR2C1D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 2, 1, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 2, 1, x);
   }
 
   @Override public double getR2C2D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 2, 2);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 2, 2);
   }
 
   @Override public void setR2C2D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 2, 2, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 2, 2, x);
   }
 
   @Override public <V extends VectorWritable2DType> void getRow2D(
@@ -240,49 +267,50 @@ public final class MatrixByteBufferedM3x3D implements MatrixByteBuffered3x3DType
     final int row,
     final V out)
   {
+    final long o = super.getIndex();
     out.set2D(
-      this.getAtOffsetAndRowColumn(this.offset, row, 0),
-      this.getAtOffsetAndRowColumn(this.offset, row, 1));
+      this.getAtOffsetAndRowColumn(o, row, 0),
+      this.getAtOffsetAndRowColumn(o, row, 1));
   }
 
   @Override public double getR0C0D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 0, 0);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 0, 0);
   }
 
   @Override public void setR0C0D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 0, 0, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 0, 0, x);
   }
 
   @Override public double getR1C0D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 1, 0);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 1, 0);
   }
 
   @Override public void setR1C0D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 1, 0, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 1, 0, x);
   }
 
   @Override public double getR0C1D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 0, 1);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 0, 1);
   }
 
   @Override public void setR0C1D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 0, 1, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 0, 1, x);
   }
 
   @Override public double getR1C1D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 1, 1);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 1, 1);
   }
 
   @Override public void setR1C1D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 1, 1, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 1, 1, x);
   }
 
   @Override public double getRowColumnD(
@@ -291,7 +319,7 @@ public final class MatrixByteBufferedM3x3D implements MatrixByteBuffered3x3DType
   {
     MatrixByteBufferedM3x3D.checkRow(row);
     MatrixByteBufferedM3x3D.checkColumn(column);
-    return this.getAtOffsetAndRowColumn(this.offset, row, column);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), row, column);
   }
 
   @Override public void setRowWith3D(
@@ -306,9 +334,10 @@ public final class MatrixByteBufferedM3x3D implements MatrixByteBuffered3x3DType
     final int row,
     final VectorReadable3DType v)
   {
-    this.setAtOffsetAndRowColumn(this.offset, row, 0, v.getXD());
-    this.setAtOffsetAndRowColumn(this.offset, row, 1, v.getYD());
-    this.setAtOffsetAndRowColumn(this.offset, row, 2, v.getZD());
+    final long o = super.getIndex();
+    this.setAtOffsetAndRowColumn(o, row, 0, v.getXD());
+    this.setAtOffsetAndRowColumn(o, row, 1, v.getYD());
+    this.setAtOffsetAndRowColumn(o, row, 2, v.getZD());
   }
 
   @Override public void setRowWith2D(
@@ -323,8 +352,9 @@ public final class MatrixByteBufferedM3x3D implements MatrixByteBuffered3x3DType
     final int row,
     final VectorReadable2DType v)
   {
-    this.setAtOffsetAndRowColumn(this.offset, row, 0, v.getXD());
-    this.setAtOffsetAndRowColumn(this.offset, row, 1, v.getYD());
+    final long o = super.getIndex();
+    this.setAtOffsetAndRowColumn(o, row, 0, v.getXD());
+    this.setAtOffsetAndRowColumn(o, row, 1, v.getYD());
   }
 
   @Override public void setRowColumnD(
@@ -334,16 +364,6 @@ public final class MatrixByteBufferedM3x3D implements MatrixByteBuffered3x3DType
   {
     MatrixByteBufferedM3x3D.checkRow(row);
     MatrixByteBufferedM3x3D.checkColumn(column);
-    this.setAtOffsetAndRowColumn(this.offset, row, column, value);
-  }
-
-  @Override public long getByteOffset()
-  {
-    return this.offset;
-  }
-
-  @Override public void setByteOffset(final long b)
-  {
-    this.offset = ByteBufferRanges.checkByteOffset(b);
+    this.setAtOffsetAndRowColumn(super.getIndex(), row, column, value);
   }
 }

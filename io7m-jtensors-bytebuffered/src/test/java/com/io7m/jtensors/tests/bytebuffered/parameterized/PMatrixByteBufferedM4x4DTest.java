@@ -17,6 +17,7 @@
 package com.io7m.jtensors.tests.bytebuffered.parameterized;
 
 import com.io7m.jtensors.MatrixM4x4D;
+import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM4x4D;
 import com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered4x4DType;
 import com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBufferedM4x4D;
 import com.io7m.jtensors.parameterized.PMatrix4x4DType;
@@ -24,6 +25,7 @@ import com.io7m.jtensors.parameterized.PMatrixM4x4D;
 import com.io7m.jtensors.parameterized.PMatrixReadable4x4DType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 //@formatter:off
 public final class PMatrixByteBufferedM4x4DTest<T0, T1, T2>
@@ -112,5 +114,16 @@ public final class PMatrixByteBufferedM4x4DTest<T0, T1, T2>
     final PMatrixByteBuffered4x4DType<T0, T1> m)
   {
     // Nothing
+  }
+
+  @Override
+  protected PMatrixByteBuffered4x4DType<T0, T1> newMatrixWithBaseOffset(
+    final int size,
+    final AtomicLong base,
+    final int offset)
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(size);
+    return PMatrixByteBufferedM4x4D.newMatrixFromByteBufferAndBase(
+      buf, base, offset);
   }
 }

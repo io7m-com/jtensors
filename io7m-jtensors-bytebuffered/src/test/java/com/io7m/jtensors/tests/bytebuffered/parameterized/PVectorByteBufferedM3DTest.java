@@ -20,6 +20,7 @@ import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3DType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM3D;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class PVectorByteBufferedM3DTest<T>
   extends PVectorByteBufferedM3DContract<T, PVectorByteBuffered3DType<T>>
@@ -61,5 +62,15 @@ public final class PVectorByteBufferedM3DTest<T>
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
     return PVectorByteBufferedM3D.newVectorFromByteBuffer(buf, offset);
+  }
+
+  @Override protected PVectorByteBuffered3DType<T> newVectorM3DWithBaseOffset(
+    final int size,
+    final AtomicLong base,
+    final int offset)
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(size);
+    return PVectorByteBufferedM3D.newVectorFromByteBufferAndBase(
+      buf, base, offset);
   }
 }

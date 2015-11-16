@@ -33,17 +33,17 @@ import java.util.concurrent.atomic.AtomicLong;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM3I implements VectorByteBuffered3IType
+public final class VectorByteBufferedM3I extends ByteBuffered implements VectorByteBuffered3IType
 {
   private final ByteBuffer buffer;
-  private final AtomicLong offset;
 
   private VectorByteBufferedM3I(
     final ByteBuffer in_buffer,
-    final AtomicLong in_offset)
+    final AtomicLong in_base,
+    final int in_offset)
   {
+    super(in_base, in_offset);
     this.buffer = NullCheck.notNull(in_buffer);
-    this.offset = NullCheck.notNull(in_offset);
   }
 
   /**
@@ -62,7 +62,32 @@ public final class VectorByteBufferedM3I implements VectorByteBuffered3IType
     final ByteBuffer b,
     final long byte_offset)
   {
-    return new VectorByteBufferedM3I(b, new AtomicLong(byte_offset));
+    return new VectorByteBufferedM3I(b, new AtomicLong(byte_offset), 0);
+  }
+
+  /**
+   * <p>Return a new vector that is backed by the given byte buffer {@code b}
+   * </p>
+   *
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered vector
+   */
+
+  public static VectorByteBuffered3IType newVectorFromByteBufferAndBase(
+    final ByteBuffer b,
+    final AtomicLong base,
+    final int offset)
+  {
+    return new VectorByteBufferedM3I(b, base, offset);
   }
 
   private static int getByteOffsetForIndex(
@@ -75,22 +100,22 @@ public final class VectorByteBufferedM3I implements VectorByteBuffered3IType
 
   @Override public int getZI()
   {
-    return this.getAtOffsetAndIndex(this.offset.get(), 2);
+    return this.getAtOffsetAndIndex(super.getIndex(), 2);
   }
 
   @Override public void setZI(final int z)
   {
-    this.setAtOffsetAndIndex(this.offset.get(), 2, z);
+    this.setAtOffsetAndIndex(super.getIndex(), 2, z);
   }
 
   @Override public int getXI()
   {
-    return this.getAtOffsetAndIndex(this.offset.get(), 0);
+    return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
   @Override public void setXI(final int x)
   {
-    this.setAtOffsetAndIndex(this.offset.get(), 0, x);
+    this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
 
   private void setAtOffsetAndIndex(
@@ -111,17 +136,17 @@ public final class VectorByteBufferedM3I implements VectorByteBuffered3IType
 
   @Override public int getYI()
   {
-    return this.getAtOffsetAndIndex(this.offset.get(), 1);
+    return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
   @Override public void setYI(final int y)
   {
-    this.setAtOffsetAndIndex(this.offset.get(), 1, y);
+    this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
   @Override public void copyFrom3I(final VectorReadable3IType in_v)
   {
-    final long o = this.offset.get();
+    final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXI());
     this.setAtOffsetAndIndex(o, 1, in_v.getYI());
     this.setAtOffsetAndIndex(o, 2, in_v.getZI());
@@ -132,7 +157,7 @@ public final class VectorByteBufferedM3I implements VectorByteBuffered3IType
     final int y,
     final int z)
   {
-    final long o = this.offset.get();
+    final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, x);
     this.setAtOffsetAndIndex(o, 1, y);
     this.setAtOffsetAndIndex(o, 2, z);
@@ -140,7 +165,7 @@ public final class VectorByteBufferedM3I implements VectorByteBuffered3IType
 
   @Override public void copyFrom2I(final VectorReadable2IType in_v)
   {
-    final long o = this.offset.get();
+    final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXI());
     this.setAtOffsetAndIndex(o, 1, in_v.getYI());
   }
@@ -149,7 +174,7 @@ public final class VectorByteBufferedM3I implements VectorByteBuffered3IType
     final int x,
     final int y)
   {
-    final long o = this.offset.get();
+    final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, x);
     this.setAtOffsetAndIndex(o, 1, y);
   }
@@ -198,15 +223,5 @@ public final class VectorByteBufferedM3I implements VectorByteBuffered3IType
       return false;
     }
     return this.getZI() == other.getZI();
-  }
-
-  @Override public long getByteOffset()
-  {
-    return this.offset.get();
-  }
-
-  @Override public void setByteOffset(final long b)
-  {
-    this.offset.set(ByteBufferRanges.checkByteOffset(b));
   }
 }
