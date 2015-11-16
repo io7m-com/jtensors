@@ -24,6 +24,7 @@ import com.io7m.jtensors.VectorReadable3IType;
 import com.io7m.jtensors.VectorReadable4IType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>A four-element vector type with {@code int} elements, packed into a {@link
@@ -36,14 +37,14 @@ import java.nio.ByteBuffer;
 public final class VectorByteBufferedM4I implements VectorByteBuffered4IType
 {
   private final ByteBuffer buffer;
-  private long offset;
+  private final AtomicLong offset;
 
   private VectorByteBufferedM4I(
     final ByteBuffer in_buffer,
-    final long in_offset)
+    final AtomicLong in_offset)
   {
     this.buffer = NullCheck.notNull(in_buffer);
-    this.offset = in_offset;
+    this.offset = NullCheck.notNull(in_offset);
   }
 
   /**
@@ -62,7 +63,7 @@ public final class VectorByteBufferedM4I implements VectorByteBuffered4IType
     final ByteBuffer b,
     final long byte_offset)
   {
-    return new VectorByteBufferedM4I(b, byte_offset);
+    return new VectorByteBufferedM4I(b, new AtomicLong(byte_offset));
   }
 
   private static int getByteOffsetForIndex(
@@ -75,32 +76,32 @@ public final class VectorByteBufferedM4I implements VectorByteBuffered4IType
 
   @Override public int getWI()
   {
-    return this.getAtOffsetAndIndex(this.offset, 3);
+    return this.getAtOffsetAndIndex(this.offset.get(), 3);
   }
 
   @Override public void setWI(final int w)
   {
-    this.setAtOffsetAndIndex(this.offset, 3, w);
+    this.setAtOffsetAndIndex(this.offset.get(), 3, w);
   }
 
   @Override public int getZI()
   {
-    return this.getAtOffsetAndIndex(this.offset, 2);
+    return this.getAtOffsetAndIndex(this.offset.get(), 2);
   }
 
   @Override public void setZI(final int z)
   {
-    this.setAtOffsetAndIndex(this.offset, 2, z);
+    this.setAtOffsetAndIndex(this.offset.get(), 2, z);
   }
 
   @Override public int getXI()
   {
-    return this.getAtOffsetAndIndex(this.offset, 0);
+    return this.getAtOffsetAndIndex(this.offset.get(), 0);
   }
 
   @Override public void setXI(final int x)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
+    this.setAtOffsetAndIndex(this.offset.get(), 0, x);
   }
 
   private void setAtOffsetAndIndex(
@@ -121,20 +122,21 @@ public final class VectorByteBufferedM4I implements VectorByteBuffered4IType
 
   @Override public int getYI()
   {
-    return this.getAtOffsetAndIndex(this.offset, 1);
+    return this.getAtOffsetAndIndex(this.offset.get(), 1);
   }
 
   @Override public void setYI(final int y)
   {
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    this.setAtOffsetAndIndex(this.offset.get(), 1, y);
   }
 
   @Override public void copyFrom4I(final VectorReadable4IType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXI());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYI());
-    this.setAtOffsetAndIndex(this.offset, 2, in_v.getZI());
-    this.setAtOffsetAndIndex(this.offset, 3, in_v.getWI());
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXI());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYI());
+    this.setAtOffsetAndIndex(o, 2, in_v.getZI());
+    this.setAtOffsetAndIndex(o, 3, in_v.getWI());
   }
 
   @Override public void set4I(
@@ -143,17 +145,19 @@ public final class VectorByteBufferedM4I implements VectorByteBuffered4IType
     final int z,
     final int w)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
-    this.setAtOffsetAndIndex(this.offset, 2, z);
-    this.setAtOffsetAndIndex(this.offset, 3, w);
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
+    this.setAtOffsetAndIndex(o, 2, z);
+    this.setAtOffsetAndIndex(o, 3, w);
   }
 
   @Override public void copyFrom3I(final VectorReadable3IType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXI());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYI());
-    this.setAtOffsetAndIndex(this.offset, 2, in_v.getZI());
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXI());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYI());
+    this.setAtOffsetAndIndex(o, 2, in_v.getZI());
   }
 
   @Override public void set3I(
@@ -161,23 +165,26 @@ public final class VectorByteBufferedM4I implements VectorByteBuffered4IType
     final int y,
     final int z)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
-    this.setAtOffsetAndIndex(this.offset, 2, z);
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
+    this.setAtOffsetAndIndex(o, 2, z);
   }
 
   @Override public void copyFrom2I(final VectorReadable2IType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXI());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYI());
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXI());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYI());
   }
 
   @Override public void set2I(
     final int x,
     final int y)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
   }
 
   @Override public int hashCode()
@@ -234,11 +241,11 @@ public final class VectorByteBufferedM4I implements VectorByteBuffered4IType
 
   @Override public long getByteOffset()
   {
-    return this.offset;
+    return this.offset.get();
   }
 
   @Override public void setByteOffset(final long b)
   {
-    this.offset = ByteBufferRanges.checkByteOffset(b);
+    this.offset.set(ByteBufferRanges.checkByteOffset(b));
   }
 }

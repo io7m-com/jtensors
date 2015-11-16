@@ -23,6 +23,7 @@ import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>A four-element vector type with {@code float} elements, packed into a
@@ -35,14 +36,14 @@ import java.nio.ByteBuffer;
 public final class VectorByteBufferedM3F implements VectorByteBuffered3FType
 {
   private final ByteBuffer buffer;
-  private long offset;
+  private final AtomicLong offset;
 
   private VectorByteBufferedM3F(
     final ByteBuffer in_buffer,
-    final long in_offset)
+    final AtomicLong in_offset)
   {
     this.buffer = NullCheck.notNull(in_buffer);
-    this.offset = in_offset;
+    this.offset = NullCheck.notNull(in_offset);
   }
 
   /**
@@ -61,7 +62,7 @@ public final class VectorByteBufferedM3F implements VectorByteBuffered3FType
     final ByteBuffer b,
     final long byte_offset)
   {
-    return new VectorByteBufferedM3F(b, byte_offset);
+    return new VectorByteBufferedM3F(b, new AtomicLong(byte_offset));
   }
 
   private static int getByteOffsetForIndex(
@@ -74,22 +75,22 @@ public final class VectorByteBufferedM3F implements VectorByteBuffered3FType
 
   @Override public float getZF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 2);
+    return this.getAtOffsetAndIndex(this.offset.get(), 2);
   }
 
   @Override public void setZF(final float z)
   {
-    this.setAtOffsetAndIndex(this.offset, 2, z);
+    this.setAtOffsetAndIndex(this.offset.get(), 2, z);
   }
 
   @Override public float getXF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 0);
+    return this.getAtOffsetAndIndex(this.offset.get(), 0);
   }
 
   @Override public void setXF(final float x)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
+    this.setAtOffsetAndIndex(this.offset.get(), 0, x);
   }
 
   private void setAtOffsetAndIndex(
@@ -110,19 +111,20 @@ public final class VectorByteBufferedM3F implements VectorByteBuffered3FType
 
   @Override public float getYF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 1);
+    return this.getAtOffsetAndIndex(this.offset.get(), 1);
   }
 
   @Override public void setYF(final float y)
   {
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    this.setAtOffsetAndIndex(this.offset.get(), 1, y);
   }
 
   @Override public void copyFrom3F(final VectorReadable3FType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
-    this.setAtOffsetAndIndex(this.offset, 2, in_v.getZF());
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXF());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYF());
+    this.setAtOffsetAndIndex(o, 2, in_v.getZF());
   }
 
   @Override public void set3F(
@@ -130,23 +132,26 @@ public final class VectorByteBufferedM3F implements VectorByteBuffered3FType
     final float y,
     final float z)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
-    this.setAtOffsetAndIndex(this.offset, 2, z);
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
+    this.setAtOffsetAndIndex(o, 2, z);
   }
 
   @Override public void copyFrom2F(final VectorReadable2FType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXF());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYF());
   }
 
   @Override public void set2F(
     final float x,
     final float y)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
   }
 
   @Override public int hashCode()
@@ -204,11 +209,11 @@ public final class VectorByteBufferedM3F implements VectorByteBuffered3FType
 
   @Override public long getByteOffset()
   {
-    return this.offset;
+    return this.offset.get();
   }
 
   @Override public void setByteOffset(final long b)
   {
-    this.offset = ByteBufferRanges.checkByteOffset(b);
+    this.offset.set(ByteBufferRanges.checkByteOffset(b));
   }
 }

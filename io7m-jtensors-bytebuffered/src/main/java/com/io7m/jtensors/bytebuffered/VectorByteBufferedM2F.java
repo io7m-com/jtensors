@@ -22,6 +22,7 @@ import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2FType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>A two-element vector type with {@code float} elements, packed into a
@@ -34,14 +35,14 @@ import java.nio.ByteBuffer;
 public final class VectorByteBufferedM2F implements VectorByteBuffered2FType
 {
   private final ByteBuffer buffer;
-  private long offset;
+  private final AtomicLong offset;
 
   private VectorByteBufferedM2F(
     final ByteBuffer in_buffer,
-    final long in_offset)
+    final AtomicLong in_offset)
   {
     this.buffer = NullCheck.notNull(in_buffer);
-    this.offset = in_offset;
+    this.offset = NullCheck.notNull(in_offset);
   }
 
   /**
@@ -60,7 +61,7 @@ public final class VectorByteBufferedM2F implements VectorByteBuffered2FType
     final ByteBuffer b,
     final long byte_offset)
   {
-    return new VectorByteBufferedM2F(b, byte_offset);
+    return new VectorByteBufferedM2F(b, new AtomicLong(byte_offset));
   }
 
   private static int getByteOffsetForIndex(
@@ -73,12 +74,12 @@ public final class VectorByteBufferedM2F implements VectorByteBuffered2FType
 
   @Override public float getXF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 0);
+    return this.getAtOffsetAndIndex(this.offset.get(), 0);
   }
 
   @Override public void setXF(final float x)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
+    this.setAtOffsetAndIndex(this.offset.get(), 0, x);
   }
 
   private void setAtOffsetAndIndex(
@@ -99,26 +100,28 @@ public final class VectorByteBufferedM2F implements VectorByteBuffered2FType
 
   @Override public float getYF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 1);
+    return this.getAtOffsetAndIndex(this.offset.get(), 1);
   }
 
   @Override public void setYF(final float y)
   {
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    this.setAtOffsetAndIndex(this.offset.get(), 1, y);
   }
 
   @Override public void copyFrom2F(final VectorReadable2FType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXF());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYF());
   }
 
   @Override public void set2F(
     final float x,
     final float y)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    final long o = this.offset.get();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
   }
 
   @Override public int hashCode()
@@ -168,11 +171,11 @@ public final class VectorByteBufferedM2F implements VectorByteBuffered2FType
 
   @Override public long getByteOffset()
   {
-    return this.offset;
+    return this.offset.get();
   }
 
   @Override public void setByteOffset(final long b)
   {
-    this.offset = ByteBufferRanges.checkByteOffset(b);
+    this.offset.set(ByteBufferRanges.checkByteOffset(b));
   }
 }
