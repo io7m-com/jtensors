@@ -95,6 +95,11 @@
         </configuration>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.19</version>
+      </plugin>
+      <plugin>
         <groupId>com.io7m.changelog</groupId>
         <artifactId>io7m-changelog-plugin</artifactId>
         <version>2.1.1</version>
