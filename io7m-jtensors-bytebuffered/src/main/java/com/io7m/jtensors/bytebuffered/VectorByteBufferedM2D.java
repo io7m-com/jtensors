@@ -22,6 +22,7 @@ import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2DType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>A two-element vector type with {@code double} elements, packed into a
@@ -31,17 +32,17 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM2D implements VectorByteBuffered2DType
+public final class VectorByteBufferedM2D extends ByteBuffered implements VectorByteBuffered2DType
 {
   private final ByteBuffer buffer;
-  private long offset;
 
   private VectorByteBufferedM2D(
     final ByteBuffer in_buffer,
-    final long in_offset)
+    final AtomicLong in_base,
+    final int in_offset)
   {
+    super(in_base, in_offset);
     this.buffer = NullCheck.notNull(in_buffer);
-    this.offset = in_offset;
   }
 
   /**
@@ -60,7 +61,32 @@ public final class VectorByteBufferedM2D implements VectorByteBuffered2DType
     final ByteBuffer b,
     final long byte_offset)
   {
-    return new VectorByteBufferedM2D(b, byte_offset);
+    return new VectorByteBufferedM2D(b, new AtomicLong(byte_offset), 0);
+  }
+
+  /**
+   * <p>Return a new vector that is backed by the given byte buffer {@code b}
+   * </p>
+   *
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered vector
+   */
+
+  public static VectorByteBuffered2DType newVectorFromByteBufferAndBase(
+    final ByteBuffer b,
+    final AtomicLong base,
+    final int offset)
+  {
+    return new VectorByteBufferedM2D(b, base, offset);
   }
 
   private static int getByteOffsetForIndex(
@@ -73,12 +99,12 @@ public final class VectorByteBufferedM2D implements VectorByteBuffered2DType
 
   @Override public double getXD()
   {
-    return this.getAtOffsetAndIndex(this.offset, 0);
+    return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
   @Override public void setXD(final double x)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
+    this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
 
   private void setAtOffsetAndIndex(
@@ -99,26 +125,28 @@ public final class VectorByteBufferedM2D implements VectorByteBuffered2DType
 
   @Override public double getYD()
   {
-    return this.getAtOffsetAndIndex(this.offset, 1);
+    return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
   @Override public void setYD(final double y)
   {
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
   @Override public void copyFrom2D(final VectorReadable2DType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXD());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYD());
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXD());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYD());
   }
 
   @Override public void set2D(
     final double x,
     final double y)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
   }
 
   @Override public int hashCode()
@@ -164,15 +192,5 @@ public final class VectorByteBufferedM2D implements VectorByteBuffered2DType
     }
     return Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
       other.getYD());
-  }
-
-  @Override public long getByteOffset()
-  {
-    return this.offset;
-  }
-
-  @Override public void setByteOffset(final long b)
-  {
-    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

@@ -21,10 +21,17 @@ import com.io7m.jtensors.tests.VectorM2FBufferedContract;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 public abstract class VectorByteBufferedM2FContract<T extends
   VectorByteBuffered2FType>
   extends VectorM2FBufferedContract<T>
 {
+  protected abstract T newVectorM2FWithBaseOffset(
+    int size,
+    AtomicLong base,
+    int offset);
+
   @Test public final void testByteOffsetSetGetIdentity()
   {
     final T v = this.newVectorM2F();
@@ -37,5 +44,21 @@ public abstract class VectorByteBufferedM2FContract<T extends
   {
     final T v = this.newVectorM2F();
     v.setByteOffset((long) Integer.MAX_VALUE);
+  }
+
+  @Test public final void testByteBaseOffsetSetGetIdentity()
+  {
+    final AtomicLong base = new AtomicLong(0L);
+    final T v = this.newVectorM2FWithBaseOffset(1000, base, 0);
+    v.setByteOffset(23L);
+    Assert.assertEquals(23L, v.getByteOffset());
+  }
+
+  @Test public final void testByteBaseOffsetSetGetIdentity100()
+  {
+    final AtomicLong base = new AtomicLong(0L);
+    final T v = this.newVectorM2FWithBaseOffset(1000, base, 100);
+    v.setByteOffset(23L);
+    Assert.assertEquals(123L, v.getByteOffset());
   }
 }

@@ -24,6 +24,7 @@ import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorReadable4FType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>A four-element vector type with {@code float} elements, packed into a
@@ -33,17 +34,18 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM4F implements VectorByteBuffered4FType
+public final class VectorByteBufferedM4F extends ByteBuffered
+  implements VectorByteBuffered4FType
 {
   private final ByteBuffer buffer;
-  private long offset;
 
   private VectorByteBufferedM4F(
     final ByteBuffer in_buffer,
-    final long in_offset)
+    final AtomicLong in_base,
+    final int in_offset)
   {
+    super(in_base, in_offset);
     this.buffer = NullCheck.notNull(in_buffer);
-    this.offset = in_offset;
   }
 
   /**
@@ -62,7 +64,32 @@ public final class VectorByteBufferedM4F implements VectorByteBuffered4FType
     final ByteBuffer b,
     final long byte_offset)
   {
-    return new VectorByteBufferedM4F(b, byte_offset);
+    return new VectorByteBufferedM4F(b, new AtomicLong(byte_offset), 0);
+  }
+
+  /**
+   * <p>Return a new vector that is backed by the given byte buffer {@code b}
+   * </p>
+   *
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered vector
+   */
+
+  public static VectorByteBuffered4FType newVectorFromByteBufferAndBase(
+    final ByteBuffer b,
+    final AtomicLong base,
+    final int offset)
+  {
+    return new VectorByteBufferedM4F(b, base, offset);
   }
 
   private static int getByteOffsetForIndex(
@@ -75,32 +102,32 @@ public final class VectorByteBufferedM4F implements VectorByteBuffered4FType
 
   @Override public float getWF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 3);
+    return this.getAtOffsetAndIndex(super.getIndex(), 3);
   }
 
   @Override public void setWF(final float w)
   {
-    this.setAtOffsetAndIndex(this.offset, 3, w);
+    this.setAtOffsetAndIndex(super.getIndex(), 3, w);
   }
 
   @Override public float getZF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 2);
+    return this.getAtOffsetAndIndex(super.getIndex(), 2);
   }
 
   @Override public void setZF(final float z)
   {
-    this.setAtOffsetAndIndex(this.offset, 2, z);
+    this.setAtOffsetAndIndex(super.getIndex(), 2, z);
   }
 
   @Override public float getXF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 0);
+    return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
   @Override public void setXF(final float x)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
+    this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
 
   private void setAtOffsetAndIndex(
@@ -121,20 +148,21 @@ public final class VectorByteBufferedM4F implements VectorByteBuffered4FType
 
   @Override public float getYF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 1);
+    return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
   @Override public void setYF(final float y)
   {
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
   @Override public void copyFrom4F(final VectorReadable4FType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
-    this.setAtOffsetAndIndex(this.offset, 2, in_v.getZF());
-    this.setAtOffsetAndIndex(this.offset, 3, in_v.getWF());
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXF());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYF());
+    this.setAtOffsetAndIndex(o, 2, in_v.getZF());
+    this.setAtOffsetAndIndex(o, 3, in_v.getWF());
   }
 
   @Override public void set4F(
@@ -143,17 +171,19 @@ public final class VectorByteBufferedM4F implements VectorByteBuffered4FType
     final float z,
     final float w)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
-    this.setAtOffsetAndIndex(this.offset, 2, z);
-    this.setAtOffsetAndIndex(this.offset, 3, w);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
+    this.setAtOffsetAndIndex(o, 2, z);
+    this.setAtOffsetAndIndex(o, 3, w);
   }
 
   @Override public void copyFrom3F(final VectorReadable3FType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
-    this.setAtOffsetAndIndex(this.offset, 2, in_v.getZF());
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXF());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYF());
+    this.setAtOffsetAndIndex(o, 2, in_v.getZF());
   }
 
   @Override public void set3F(
@@ -161,23 +191,26 @@ public final class VectorByteBufferedM4F implements VectorByteBuffered4FType
     final float y,
     final float z)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
-    this.setAtOffsetAndIndex(this.offset, 2, z);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
+    this.setAtOffsetAndIndex(o, 2, z);
   }
 
   @Override public void copyFrom2F(final VectorReadable2FType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXF());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYF());
   }
 
   @Override public void set2F(
     final float x,
     final float y)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
   }
 
   @Override public int hashCode()
@@ -239,15 +272,5 @@ public final class VectorByteBufferedM4F implements VectorByteBuffered4FType
     }
     return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
       other.getZF());
-  }
-
-  @Override public long getByteOffset()
-  {
-    return this.offset;
-  }
-
-  @Override public void setByteOffset(final long b)
-  {
-    this.offset = ByteBufferRanges.checkByteOffset(b);
   }
 }

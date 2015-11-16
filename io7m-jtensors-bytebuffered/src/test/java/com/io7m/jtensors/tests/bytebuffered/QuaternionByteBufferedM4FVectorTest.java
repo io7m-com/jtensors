@@ -21,6 +21,7 @@ import com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4FType;
 import com.io7m.jtensors.bytebuffered.QuaternionByteBufferedM4F;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class QuaternionByteBufferedM4FVectorTest
   extends VectorByteBufferedM4FContract<QuaternionByteBuffered4FType>
@@ -65,5 +66,15 @@ public final class QuaternionByteBufferedM4FVectorTest
       QuaternionByteBufferedM4F.newQuaternionFromByteBuffer(buf, 50L);
     vr.copyFrom4F(v);
     return vr;
+  }
+
+  @Override protected QuaternionByteBuffered4FType newVectorM4FWithBaseOffset(
+    final int size,
+    final AtomicLong base,
+    final int offset)
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(size);
+    return QuaternionByteBufferedM4F.newQuaternionFromByteBufferAndBase(
+      buf, base, offset);
   }
 }

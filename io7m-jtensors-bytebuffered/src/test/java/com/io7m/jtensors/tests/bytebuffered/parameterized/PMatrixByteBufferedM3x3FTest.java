@@ -23,6 +23,7 @@ import com.io7m.jtensors.parameterized.PMatrixM3x3F;
 import com.io7m.jtensors.parameterized.PMatrixReadable3x3FType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 //@formatter:off
 public final class PMatrixByteBufferedM3x3FTest<T0, T1, T2>
@@ -110,5 +111,16 @@ public final class PMatrixByteBufferedM3x3FTest<T0, T1, T2>
     final PMatrixReadable3x3FType<?, ?> m)
   {
     // Nothing
+  }
+
+  @Override
+  protected PMatrixByteBuffered3x3FType<T0, T1> newMatrixWithBaseOffset(
+    final int size,
+    final AtomicLong base,
+    final int offset)
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(size);
+    return PMatrixByteBufferedM3x3F.newMatrixFromByteBufferAndBase(
+      buf, base, offset);
   }
 }

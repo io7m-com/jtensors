@@ -20,6 +20,7 @@ import com.io7m.jtensors.bytebuffered.VectorByteBuffered4FType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM4F;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class VectorByteBufferedM4FTest
   extends VectorByteBufferedM4FContract<VectorByteBuffered4FType>
@@ -62,5 +63,15 @@ public final class VectorByteBufferedM4FTest
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
     return VectorByteBufferedM4F.newVectorFromByteBuffer(buf, offset);
+  }
+
+  @Override protected VectorByteBuffered4FType newVectorM4FWithBaseOffset(
+    final int size,
+    final AtomicLong base,
+    final int offset)
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(size);
+    return VectorByteBufferedM4F.newVectorFromByteBufferAndBase(
+      buf, base, offset);
   }
 }
