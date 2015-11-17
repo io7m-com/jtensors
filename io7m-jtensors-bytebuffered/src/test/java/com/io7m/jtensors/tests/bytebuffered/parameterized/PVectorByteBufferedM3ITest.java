@@ -18,8 +18,11 @@ package com.io7m.jtensors.tests.bytebuffered.parameterized;
 
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3IType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM3I;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class PVectorByteBufferedM3ITest<T>
@@ -72,5 +75,19 @@ public final class PVectorByteBufferedM3ITest<T>
     final ByteBuffer buf = ByteBuffer.allocate(size);
     return PVectorByteBufferedM3I.newVectorFromByteBufferAndBase(
       buf, base, offset);
+  }
+
+  @Test public void testImplementationSpecificMemoryLayout0()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(3 * 4);
+    b.order(ByteOrder.BIG_ENDIAN);
+
+    final PVectorByteBuffered3IType<?> v =
+      PVectorByteBufferedM3I.newVectorFromByteBuffer(b, 0L);
+    v.set3I(0x11223344, 0x55667788, 0x99aabbcc);
+
+    Assert.assertEquals(0x11223344, b.getInt(0));
+    Assert.assertEquals(0x55667788, b.getInt(4));
+    Assert.assertEquals(0x99aabbcc, b.getInt(8));
   }
 }

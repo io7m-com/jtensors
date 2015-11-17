@@ -18,8 +18,11 @@ package com.io7m.jtensors.tests.bytebuffered;
 
 import com.io7m.jtensors.bytebuffered.VectorByteBuffered2DType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM2D;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class VectorByteBufferedM2DTest
@@ -71,5 +74,20 @@ public final class VectorByteBufferedM2DTest
     final ByteBuffer buf = ByteBuffer.allocate(size);
     return VectorByteBufferedM2D.newVectorFromByteBufferAndBase(
       buf, base, offset);
+  }
+
+  @Test public void testImplementationSpecificMemoryLayout0()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(2 * 8);
+    b.order(ByteOrder.BIG_ENDIAN);
+
+    final VectorByteBuffered2DType v =
+      VectorByteBufferedM2D.newVectorFromByteBuffer(b, 0L);
+    v.set2D(
+      Double.longBitsToDouble(0x1020304011223344L),
+      Double.longBitsToDouble(0x5060708051525354L));
+
+    Assert.assertEquals(0x1020304011223344L, b.getLong(0));
+    Assert.assertEquals(0x5060708051525354L, b.getLong(8));
   }
 }

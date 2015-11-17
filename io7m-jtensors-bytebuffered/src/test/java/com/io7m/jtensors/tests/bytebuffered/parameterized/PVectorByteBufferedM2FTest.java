@@ -18,8 +18,11 @@ package com.io7m.jtensors.tests.bytebuffered.parameterized;
 
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2FType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM2F;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class PVectorByteBufferedM2FTest<T>
@@ -71,5 +74,19 @@ public final class PVectorByteBufferedM2FTest<T>
     final ByteBuffer buf = ByteBuffer.allocate(size);
     return PVectorByteBufferedM2F.newVectorFromByteBufferAndBase(
       buf, base, offset);
+  }
+
+  @Test public void testImplementationSpecificMemoryLayout0()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(3 * 4);
+    b.order(ByteOrder.BIG_ENDIAN);
+
+    final PVectorByteBuffered2FType<?> v =
+      PVectorByteBufferedM2F.newVectorFromByteBuffer(b, 0L);
+    v.set2F(
+      Float.intBitsToFloat(0x10203040), Float.intBitsToFloat(0x50607080));
+
+    Assert.assertEquals(0x10203040, b.getInt(0));
+    Assert.assertEquals(0x50607080, b.getInt(4));
   }
 }

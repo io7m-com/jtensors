@@ -20,9 +20,11 @@ import com.io7m.jtensors.MatrixM2x2D;
 import com.io7m.jtensors.MatrixReadable2x2DType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBuffered2x2DType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM2x2D;
-import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM4x4D;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class MatrixByteBufferedM2x2DTest
@@ -71,5 +73,26 @@ public final class MatrixByteBufferedM2x2DTest
     final ByteBuffer buf = ByteBuffer.allocate(size);
     return MatrixByteBufferedM2x2D.newMatrixFromByteBufferAndBase(
       buf, base, offset);
+  }
+
+  @Test public void testImplementationSpecificMemoryLayout0()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(4 * 8);
+    b.order(ByteOrder.BIG_ENDIAN);
+
+    final MatrixByteBuffered2x2DType m =
+      MatrixByteBufferedM2x2D.newMatrixFromByteBuffer(b, 0L);
+
+    m.setRowColumnD(0, 0, Double.longBitsToDouble(0x0102030405060708L));
+    m.setRowColumnD(1, 0, Double.longBitsToDouble(0x1112131415161718L));
+
+    m.setRowColumnD(0, 1, Double.longBitsToDouble(0x4142434445464748L));
+    m.setRowColumnD(1, 1, Double.longBitsToDouble(0x5152535455565758L));
+
+    Assert.assertEquals(0x0102030405060708L, b.getLong(0));
+    Assert.assertEquals(0x1112131415161718L, b.getLong(8));
+
+    Assert.assertEquals(0x4142434445464748L, b.getLong(16));
+    Assert.assertEquals(0x5152535455565758L, b.getLong(24));
   }
 }

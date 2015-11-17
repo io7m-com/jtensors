@@ -94,7 +94,7 @@ public final class VectorByteBufferedM3I extends ByteBuffered implements VectorB
     final long base,
     final int index)
   {
-    final long b = CheckedMath.add(base, (long) (index * 8));
+    final long b = CheckedMath.add(base, (long) (index * 4));
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 

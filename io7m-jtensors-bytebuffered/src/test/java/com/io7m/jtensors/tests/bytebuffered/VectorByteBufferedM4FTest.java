@@ -18,8 +18,11 @@ package com.io7m.jtensors.tests.bytebuffered;
 
 import com.io7m.jtensors.bytebuffered.VectorByteBuffered4FType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM4F;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class VectorByteBufferedM4FTest
@@ -73,5 +76,24 @@ public final class VectorByteBufferedM4FTest
     final ByteBuffer buf = ByteBuffer.allocate(size);
     return VectorByteBufferedM4F.newVectorFromByteBufferAndBase(
       buf, base, offset);
+  }
+
+  @Test public void testImplementationSpecificMemoryLayout0()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(4 * 4);
+    b.order(ByteOrder.BIG_ENDIAN);
+
+    final VectorByteBuffered4FType v =
+      VectorByteBufferedM4F.newVectorFromByteBuffer(b, 0L);
+    v.set4F(
+      Float.intBitsToFloat(0x10203040),
+      Float.intBitsToFloat(0x50607080),
+      Float.intBitsToFloat(0x90a0b0c0),
+      Float.intBitsToFloat(0xd0e0f000));
+
+    Assert.assertEquals(0x10203040, b.getInt(0));
+    Assert.assertEquals(0x50607080, b.getInt(4));
+    Assert.assertEquals(0x90a0b0c0, b.getInt(8));
+    Assert.assertEquals(0xd0e0f000, b.getInt(12));
   }
 }

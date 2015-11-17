@@ -19,10 +19,12 @@ package com.io7m.jtensors.tests.bytebuffered;
 import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.MatrixReadable3x3FType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3FType;
-import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM3x3D;
 import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM3x3F;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class MatrixByteBufferedM3x3FTest
@@ -71,5 +73,38 @@ public final class MatrixByteBufferedM3x3FTest
     final ByteBuffer buf = ByteBuffer.allocate(size);
     return MatrixByteBufferedM3x3F.newMatrixFromByteBufferAndBase(
       buf, base, offset);
+  }
+
+  @Test public void testImplementationSpecificMemoryLayout0()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(9 * 4);
+    b.order(ByteOrder.BIG_ENDIAN);
+
+    final MatrixByteBuffered3x3FType m =
+      MatrixByteBufferedM3x3F.newMatrixFromByteBuffer(b, 0L);
+
+    m.setRowColumnF(0, 0, Float.intBitsToFloat(0x01020304));
+    m.setRowColumnF(1, 0, Float.intBitsToFloat(0x11121314));
+    m.setRowColumnF(2, 0, Float.intBitsToFloat(0x21222324));
+
+    m.setRowColumnF(0, 1, Float.intBitsToFloat(0x41424344));
+    m.setRowColumnF(1, 1, Float.intBitsToFloat(0x51525354));
+    m.setRowColumnF(2, 1, Float.intBitsToFloat(0x61626364));
+
+    m.setRowColumnF(0, 2, Float.intBitsToFloat(0x81828384));
+    m.setRowColumnF(1, 2, Float.intBitsToFloat(0x91929394));
+    m.setRowColumnF(2, 2, Float.intBitsToFloat(0xa1a2a3a4));
+
+    Assert.assertEquals(0x01020304, b.getInt(0));
+    Assert.assertEquals(0x11121314, b.getInt(4));
+    Assert.assertEquals(0x21222324, b.getInt(8));
+
+    Assert.assertEquals(0x41424344, b.getInt(12));
+    Assert.assertEquals(0x51525354, b.getInt(16));
+    Assert.assertEquals(0x61626364, b.getInt(20));
+
+    Assert.assertEquals(0x81828384, b.getInt(24));
+    Assert.assertEquals(0x91929394, b.getInt(28));
+    Assert.assertEquals(0xa1a2a3a4, b.getInt(32));
   }
 }
