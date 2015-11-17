@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>io7m-jtensors</artifactId>
-    <version>7.0.0-beta0005</version>
+    <version>7.0.0-beta0006</version>
   </parent>
   <artifactId>io7m-jtensors-checkstyle</artifactId>
 
