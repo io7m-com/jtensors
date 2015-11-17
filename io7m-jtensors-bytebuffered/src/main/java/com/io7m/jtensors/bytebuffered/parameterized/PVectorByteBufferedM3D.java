@@ -22,10 +22,12 @@ import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
+import com.io7m.jtensors.bytebuffered.ByteBuffered;
 import com.io7m.jtensors.parameterized.PVectorReadable2DType;
 import com.io7m.jtensors.parameterized.PVectorReadable3DType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>A three-element vector type with {@code double} elements, packed into a
@@ -37,17 +39,17 @@ import java.nio.ByteBuffer;
  * @param <T> A phantom type parameter
  */
 
-public final class PVectorByteBufferedM3D<T> implements PVectorByteBuffered3DType<T>
+public final class PVectorByteBufferedM3D<T> extends ByteBuffered implements PVectorByteBuffered3DType<T>
 {
   private final ByteBuffer buffer;
-  private long offset;
 
   private PVectorByteBufferedM3D(
     final ByteBuffer in_buffer,
-    final long in_offset)
+    final AtomicLong in_base,
+    final int in_offset)
   {
+    super(in_base, in_offset);
     this.buffer = NullCheck.notNull(in_buffer);
-    this.offset = in_offset;
   }
 
   /**
@@ -67,7 +69,33 @@ public final class PVectorByteBufferedM3D<T> implements PVectorByteBuffered3DTyp
     final ByteBuffer b,
     final long byte_offset)
   {
-    return new PVectorByteBufferedM3D<T>(b, byte_offset);
+    return new PVectorByteBufferedM3D<T>(b, new AtomicLong(byte_offset), 0);
+  }
+
+  /**
+   * <p>Return a new vector that is backed by the given byte buffer {@code b}
+   * </p>
+   *
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param <T>    A phantom type parameter
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered vector
+   */
+
+  public static <T> PVectorByteBuffered3DType<T> newVectorFromByteBufferAndBase(
+    final ByteBuffer b,
+    final AtomicLong base,
+    final int offset)
+  {
+    return new PVectorByteBufferedM3D<T>(b, base, offset);
   }
 
   private static int getByteOffsetForIndex(
@@ -80,22 +108,22 @@ public final class PVectorByteBufferedM3D<T> implements PVectorByteBuffered3DTyp
 
   @Override public double getZD()
   {
-    return this.getAtOffsetAndIndex(this.offset, 2);
+    return this.getAtOffsetAndIndex(super.getIndex(), 2);
   }
 
   @Override public void setZD(final double z)
   {
-    this.setAtOffsetAndIndex(this.offset, 2, z);
+    this.setAtOffsetAndIndex(super.getIndex(), 2, z);
   }
 
   @Override public double getXD()
   {
-    return this.getAtOffsetAndIndex(this.offset, 0);
+    return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
   @Override public void setXD(final double x)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
+    this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
 
   private void setAtOffsetAndIndex(
@@ -117,19 +145,20 @@ public final class PVectorByteBufferedM3D<T> implements PVectorByteBuffered3DTyp
 
   @Override public double getYD()
   {
-    return this.getAtOffsetAndIndex(this.offset, 1);
+    return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
   @Override public void setYD(final double y)
   {
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
   @Override public void copyFrom3D(final VectorReadable3DType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXD());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYD());
-    this.setAtOffsetAndIndex(this.offset, 2, in_v.getZD());
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXD());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYD());
+    this.setAtOffsetAndIndex(o, 2, in_v.getZD());
   }
 
   @Override public void set3D(
@@ -137,23 +166,26 @@ public final class PVectorByteBufferedM3D<T> implements PVectorByteBuffered3DTyp
     final double y,
     final double z)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
-    this.setAtOffsetAndIndex(this.offset, 2, z);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
+    this.setAtOffsetAndIndex(o, 2, z);
   }
 
   @Override public void copyFrom2D(final VectorReadable2DType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXD());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYD());
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXD());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYD());
   }
 
   @Override public void set2D(
     final double x,
     final double y)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
   }
 
   @Override public int hashCode()
@@ -211,24 +243,16 @@ public final class PVectorByteBufferedM3D<T> implements PVectorByteBuffered3DTyp
 
   @Override public void copyFromTyped3D(final PVectorReadable3DType<T> in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXD());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYD());
-    this.setAtOffsetAndIndex(this.offset, 2, in_v.getZD());
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXD());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYD());
+    this.setAtOffsetAndIndex(o, 2, in_v.getZD());
   }
 
   @Override public void copyFromTyped2D(final PVectorReadable2DType<T> in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXD());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYD());
-  }
-
-  @Override public long getByteOffset()
-  {
-    return this.offset;
-  }
-
-  @Override public void setByteOffset(final long b)
-  {
-    this.offset = ByteBufferRanges.checkByteOffset(b);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXD());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYD());
   }
 }

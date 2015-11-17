@@ -22,10 +22,12 @@ import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
+import com.io7m.jtensors.bytebuffered.ByteBuffered;
 import com.io7m.jtensors.parameterized.PVectorReadable2FType;
 import com.io7m.jtensors.parameterized.PVectorReadable3FType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>A four-element vector type with {@code float} elements, packed into a
@@ -37,17 +39,17 @@ import java.nio.ByteBuffer;
  * @param <T> A phantom type parameter
  */
 
-public final class PVectorByteBufferedM3F<T> implements PVectorByteBuffered3FType<T>
+public final class PVectorByteBufferedM3F<T> extends ByteBuffered implements PVectorByteBuffered3FType<T>
 {
   private final ByteBuffer buffer;
-  private long offset;
 
   private PVectorByteBufferedM3F(
     final ByteBuffer in_buffer,
-    final long in_offset)
+    final AtomicLong in_base,
+    final int in_offset)
   {
+    super(in_base, in_offset);
     this.buffer = NullCheck.notNull(in_buffer);
-    this.offset = in_offset;
   }
 
   /**
@@ -67,7 +69,33 @@ public final class PVectorByteBufferedM3F<T> implements PVectorByteBuffered3FTyp
     final ByteBuffer b,
     final long byte_offset)
   {
-    return new PVectorByteBufferedM3F<T>(b, byte_offset);
+    return new PVectorByteBufferedM3F<T>(b, new AtomicLong(byte_offset), 0);
+  }
+
+  /**
+   * <p>Return a new vector that is backed by the given byte buffer {@code b}
+   * </p>
+   *
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param <T>    A phantom type parameter
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered vector
+   */
+
+  public static <T> PVectorByteBuffered3FType<T> newVectorFromByteBufferAndBase(
+    final ByteBuffer b,
+    final AtomicLong base,
+    final int offset)
+  {
+    return new PVectorByteBufferedM3F<T>(b, base, offset);
   }
 
   private static int getByteOffsetForIndex(
@@ -80,22 +108,22 @@ public final class PVectorByteBufferedM3F<T> implements PVectorByteBuffered3FTyp
 
   @Override public float getZF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 2);
+    return this.getAtOffsetAndIndex(super.getIndex(), 2);
   }
 
   @Override public void setZF(final float z)
   {
-    this.setAtOffsetAndIndex(this.offset, 2, z);
+    this.setAtOffsetAndIndex(super.getIndex(), 2, z);
   }
 
   @Override public float getXF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 0);
+    return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
   @Override public void setXF(final float x)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
+    this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
 
   private void setAtOffsetAndIndex(
@@ -116,19 +144,20 @@ public final class PVectorByteBufferedM3F<T> implements PVectorByteBuffered3FTyp
 
   @Override public float getYF()
   {
-    return this.getAtOffsetAndIndex(this.offset, 1);
+    return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
   @Override public void setYF(final float y)
   {
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
   @Override public void copyFrom3F(final VectorReadable3FType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
-    this.setAtOffsetAndIndex(this.offset, 2, in_v.getZF());
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXF());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYF());
+    this.setAtOffsetAndIndex(o, 2, in_v.getZF());
   }
 
   @Override public void set3F(
@@ -136,23 +165,26 @@ public final class PVectorByteBufferedM3F<T> implements PVectorByteBuffered3FTyp
     final float y,
     final float z)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
-    this.setAtOffsetAndIndex(this.offset, 2, z);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
+    this.setAtOffsetAndIndex(o, 2, z);
   }
 
   @Override public void copyFrom2F(final VectorReadable2FType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXF());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYF());
   }
 
   @Override public void set2F(
     final float x,
     final float y)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
   }
 
   @Override public int hashCode()
@@ -210,24 +242,16 @@ public final class PVectorByteBufferedM3F<T> implements PVectorByteBuffered3FTyp
 
   @Override public void copyFromTyped3F(final PVectorReadable3FType<T> in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
-    this.setAtOffsetAndIndex(this.offset, 2, in_v.getZF());
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXF());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYF());
+    this.setAtOffsetAndIndex(o, 2, in_v.getZF());
   }
 
   @Override public void copyFromTyped2F(final PVectorReadable2FType<T> in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXF());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYF());
-  }
-
-  @Override public long getByteOffset()
-  {
-    return this.offset;
-  }
-
-  @Override public void setByteOffset(final long b)
-  {
-    this.offset = ByteBufferRanges.checkByteOffset(b);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXF());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYF());
   }
 }

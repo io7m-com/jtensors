@@ -20,6 +20,7 @@ import com.io7m.jtensors.bytebuffered.VectorByteBuffered2IType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM2I;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class VectorByteBufferedM2ITest
   extends VectorByteBufferedM2IContract<VectorByteBuffered2IType>
@@ -61,5 +62,15 @@ public final class VectorByteBufferedM2ITest
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
     return VectorByteBufferedM2I.newVectorFromByteBuffer(buf, offset);
+  }
+
+  @Override protected VectorByteBuffered2IType newVectorM2IWithBaseOffset(
+    final int size,
+    final AtomicLong base,
+    final int offset)
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(size);
+    return VectorByteBufferedM2I.newVectorFromByteBufferAndBase(
+      buf, base, offset);
   }
 }

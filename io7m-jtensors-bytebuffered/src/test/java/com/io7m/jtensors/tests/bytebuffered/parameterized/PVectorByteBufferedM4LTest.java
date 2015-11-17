@@ -20,6 +20,7 @@ import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4LType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM4L;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class PVectorByteBufferedM4LTest<T>
   extends PVectorByteBufferedM4LContract<T, PVectorByteBuffered4LType<T>>
@@ -62,5 +63,15 @@ public final class PVectorByteBufferedM4LTest<T>
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
     return PVectorByteBufferedM4L.newVectorFromByteBuffer(buf, offset);
+  }
+
+  @Override protected PVectorByteBuffered4LType<T> newVectorM4LWithBaseOffset(
+    final int size,
+    final AtomicLong base,
+    final int offset)
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(size);
+    return PVectorByteBufferedM4L.newVectorFromByteBufferAndBase(
+      buf, base, offset);
   }
 }

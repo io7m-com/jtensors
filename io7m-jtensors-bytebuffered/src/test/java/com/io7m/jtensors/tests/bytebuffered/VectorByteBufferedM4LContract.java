@@ -21,10 +21,17 @@ import com.io7m.jtensors.tests.VectorM4LBufferedContract;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 public abstract class VectorByteBufferedM4LContract<T extends
   VectorByteBuffered4LType>
   extends VectorM4LBufferedContract<T>
 {
+  protected abstract T newVectorM4LWithBaseOffset(
+    int size,
+    AtomicLong base,
+    int offset);
+
   @Test public final void testByteOffsetSetGetIdentity()
   {
     final T v = this.newVectorM4L();
@@ -38,4 +45,20 @@ public abstract class VectorByteBufferedM4LContract<T extends
     final T v = this.newVectorM4L();
     v.setByteOffset((long) Integer.MAX_VALUE);
   }
+  @Test public final void testByteBaseOffsetSetGetIdentity()
+  {
+    final AtomicLong base = new AtomicLong(0L);
+    final T v = this.newVectorM4LWithBaseOffset(1000, base, 0);
+    v.setByteOffset(23L);
+    Assert.assertEquals(23L, v.getByteOffset());
+  }
+
+  @Test public final void testByteBaseOffsetSetGetIdentity100()
+  {
+    final AtomicLong base = new AtomicLong(0L);
+    final T v = this.newVectorM4LWithBaseOffset(1000, base, 100);
+    v.setByteOffset(23L);
+    Assert.assertEquals(123L, v.getByteOffset());
+  }
+
 }

@@ -19,9 +19,11 @@ package com.io7m.jtensors.tests.bytebuffered;
 import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.MatrixReadable3x3FType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3FType;
+import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM3x3D;
 import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM3x3F;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class MatrixByteBufferedM3x3FTest
   extends MatrixByteBuffered3x3FContract<MatrixByteBuffered3x3FType>
@@ -59,5 +61,15 @@ public final class MatrixByteBufferedM3x3FTest
     final MatrixByteBuffered3x3FType mr =
       MatrixByteBufferedM3x3F.newMatrixFromByteBuffer(buf, offset);
     return mr;
+  }
+
+  @Override protected MatrixByteBuffered3x3FType newMatrixWithBaseOffset(
+    final int size,
+    final AtomicLong base,
+    final int offset)
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(size);
+    return MatrixByteBufferedM3x3F.newMatrixFromByteBufferAndBase(
+      buf, base, offset);
   }
 }

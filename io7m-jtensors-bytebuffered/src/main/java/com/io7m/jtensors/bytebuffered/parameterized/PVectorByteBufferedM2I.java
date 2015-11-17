@@ -21,9 +21,11 @@ import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
+import com.io7m.jtensors.bytebuffered.ByteBuffered;
 import com.io7m.jtensors.parameterized.PVectorReadable2IType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>A three-element vector type with {@code int} elements, packed into a
@@ -35,17 +37,18 @@ import java.nio.ByteBuffer;
  * @param <T> A phantom type parameter
  */
 
-public final class PVectorByteBufferedM2I<T> implements PVectorByteBuffered2IType<T>
+public final class PVectorByteBufferedM2I<T> extends ByteBuffered
+  implements PVectorByteBuffered2IType<T>
 {
   private final ByteBuffer buffer;
-  private long offset;
 
   private PVectorByteBufferedM2I(
     final ByteBuffer in_buffer,
-    final long in_offset)
+    final AtomicLong in_base,
+    final int in_offset)
   {
+    super(in_base, in_offset);
     this.buffer = NullCheck.notNull(in_buffer);
-    this.offset = in_offset;
   }
 
   /**
@@ -65,7 +68,33 @@ public final class PVectorByteBufferedM2I<T> implements PVectorByteBuffered2ITyp
     final ByteBuffer b,
     final long byte_offset)
   {
-    return new PVectorByteBufferedM2I<T>(b, byte_offset);
+    return new PVectorByteBufferedM2I<T>(b, new AtomicLong(byte_offset), 0);
+  }
+
+  /**
+   * <p>Return a new vector that is backed by the given byte buffer {@code b}
+   * </p>
+   *
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param <T>    A phantom type parameter
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered vector
+   */
+
+  public static <T> PVectorByteBuffered2IType<T> newVectorFromByteBufferAndBase(
+    final ByteBuffer b,
+    final AtomicLong base,
+    final int offset)
+  {
+    return new PVectorByteBufferedM2I<T>(b, base, offset);
   }
 
   private static int getByteOffsetForIndex(
@@ -78,12 +107,12 @@ public final class PVectorByteBufferedM2I<T> implements PVectorByteBuffered2ITyp
 
   @Override public int getXI()
   {
-    return this.getAtOffsetAndIndex(this.offset, 0);
+    return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
   @Override public void setXI(final int x)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
+    this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
 
   private void setAtOffsetAndIndex(
@@ -104,26 +133,28 @@ public final class PVectorByteBufferedM2I<T> implements PVectorByteBuffered2ITyp
 
   @Override public int getYI()
   {
-    return this.getAtOffsetAndIndex(this.offset, 1);
+    return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
   @Override public void setYI(final int y)
   {
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
   @Override public void copyFrom2I(final VectorReadable2IType in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXI());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYI());
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXI());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYI());
   }
 
   @Override public void set2I(
     final int x,
     final int y)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, x);
-    this.setAtOffsetAndIndex(this.offset, 1, y);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, x);
+    this.setAtOffsetAndIndex(o, 1, y);
   }
 
   @Override public int hashCode()
@@ -168,17 +199,8 @@ public final class PVectorByteBufferedM2I<T> implements PVectorByteBuffered2ITyp
 
   @Override public void copyFromTyped2I(final PVectorReadable2IType<T> in_v)
   {
-    this.setAtOffsetAndIndex(this.offset, 0, in_v.getXI());
-    this.setAtOffsetAndIndex(this.offset, 1, in_v.getYI());
-  }
-
-  @Override public long getByteOffset()
-  {
-    return this.offset;
-  }
-
-  @Override public void setByteOffset(final long b)
-  {
-    this.offset = ByteBufferRanges.checkByteOffset(b);
+    final long o = super.getIndex();
+    this.setAtOffsetAndIndex(o, 0, in_v.getXI());
+    this.setAtOffsetAndIndex(o, 1, in_v.getYI());
   }
 }

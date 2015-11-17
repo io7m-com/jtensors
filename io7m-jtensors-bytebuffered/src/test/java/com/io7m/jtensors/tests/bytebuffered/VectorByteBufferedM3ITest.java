@@ -20,6 +20,7 @@ import com.io7m.jtensors.bytebuffered.VectorByteBuffered3IType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM3I;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class VectorByteBufferedM3ITest
   extends VectorByteBufferedM3IContract<VectorByteBuffered3IType>
@@ -61,5 +62,15 @@ public final class VectorByteBufferedM3ITest
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
     return VectorByteBufferedM3I.newVectorFromByteBuffer(buf, offset);
+  }
+
+  @Override protected VectorByteBuffered3IType newVectorM3IWithBaseOffset(
+    final int size,
+    final AtomicLong base,
+    final int offset)
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(size);
+    return VectorByteBufferedM3I.newVectorFromByteBufferAndBase(
+      buf, base, offset);
   }
 }

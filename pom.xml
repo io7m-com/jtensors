@@ -7,7 +7,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors</artifactId>
-  <version>7.0.0-beta0004</version>
+  <version>7.0.0-beta0005</version>
 
   <packaging>pom</packaging>
   <name>io7m-jtensors</name>
@@ -93,6 +93,11 @@
         <configuration>
           <validate>true</validate>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.19</version>
       </plugin>
       <plugin>
         <groupId>com.io7m.changelog</groupId>

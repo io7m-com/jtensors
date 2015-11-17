@@ -24,6 +24,7 @@ import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorWritable2DType;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>A 2x2 matrix type with {@code double} elements, packed into a {@link
@@ -33,17 +34,17 @@ import java.nio.ByteBuffer;
  * without explicit synchronization. </p>
  */
 
-public final class MatrixByteBufferedM2x2D implements MatrixByteBuffered2x2DType
+public final class MatrixByteBufferedM2x2D extends ByteBuffered implements MatrixByteBuffered2x2DType
 {
   private final ByteBuffer buffer;
-  private long offset;
 
   private MatrixByteBufferedM2x2D(
     final ByteBuffer in_buffer,
-    final long in_offset)
+    final AtomicLong in_base,
+    final int in_offset)
   {
+    super(in_base, in_offset);
     this.buffer = NullCheck.notNull(in_buffer);
-    this.offset = in_offset;
   }
 
   /**
@@ -62,7 +63,32 @@ public final class MatrixByteBufferedM2x2D implements MatrixByteBuffered2x2DType
     final ByteBuffer b,
     final long byte_offset)
   {
-    return new MatrixByteBufferedM2x2D(b, byte_offset);
+    return new MatrixByteBufferedM2x2D(b, new AtomicLong(byte_offset), 0);
+  }
+
+  /**
+   * <p>Return a new matrix that is backed by the given byte buffer {@code b}
+   * </p>
+   *
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered matrix
+   */
+
+  public static MatrixByteBuffered2x2DType newMatrixFromByteBufferAndBase(
+    final ByteBuffer b,
+    final AtomicLong base,
+    final int offset)
+  {
+    return new MatrixByteBufferedM2x2D(b, base, offset);
   }
 
   private static int checkColumn(
@@ -171,49 +197,50 @@ public final class MatrixByteBufferedM2x2D implements MatrixByteBuffered2x2DType
     final int row,
     final V out)
   {
+    final long o = super.getIndex();
     out.set2D(
-      this.getAtOffsetAndRowColumn(this.offset, row, 0),
-      this.getAtOffsetAndRowColumn(this.offset, row, 1));
+      this.getAtOffsetAndRowColumn(o, row, 0),
+      this.getAtOffsetAndRowColumn(o, row, 1));
   }
 
   @Override public double getR0C0D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 0, 0);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 0, 0);
   }
 
   @Override public void setR0C0D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 0, 0, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 0, 0, x);
   }
 
   @Override public double getR1C0D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 1, 0);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 1, 0);
   }
 
   @Override public void setR1C0D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 1, 0, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 1, 0, x);
   }
 
   @Override public double getR0C1D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 0, 1);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 0, 1);
   }
 
   @Override public void setR0C1D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 0, 1, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 0, 1, x);
   }
 
   @Override public double getR1C1D()
   {
-    return this.getAtOffsetAndRowColumn(this.offset, 1, 1);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), 1, 1);
   }
 
   @Override public void setR1C1D(final double x)
   {
-    this.setAtOffsetAndRowColumn(this.offset, 1, 1, x);
+    this.setAtOffsetAndRowColumn(super.getIndex(), 1, 1, x);
   }
 
   @Override public double getRowColumnD(
@@ -222,7 +249,7 @@ public final class MatrixByteBufferedM2x2D implements MatrixByteBuffered2x2DType
   {
     MatrixByteBufferedM2x2D.checkRow(row);
     MatrixByteBufferedM2x2D.checkColumn(column);
-    return this.getAtOffsetAndRowColumn(this.offset, row, column);
+    return this.getAtOffsetAndRowColumn(super.getIndex(), row, column);
   }
 
   @Override public void setRowWith2D(
@@ -237,8 +264,9 @@ public final class MatrixByteBufferedM2x2D implements MatrixByteBuffered2x2DType
     final int row,
     final VectorReadable2DType v)
   {
-    this.setAtOffsetAndRowColumn(this.offset, row, 0, v.getXD());
-    this.setAtOffsetAndRowColumn(this.offset, row, 1, v.getYD());
+    final long o = super.getIndex();
+    this.setAtOffsetAndRowColumn(o, row, 0, v.getXD());
+    this.setAtOffsetAndRowColumn(o, row, 1, v.getYD());
   }
 
   @Override public void setRowColumnD(
@@ -248,16 +276,6 @@ public final class MatrixByteBufferedM2x2D implements MatrixByteBuffered2x2DType
   {
     MatrixByteBufferedM2x2D.checkRow(row);
     MatrixByteBufferedM2x2D.checkColumn(column);
-    this.setAtOffsetAndRowColumn(this.offset, row, column, value);
-  }
-
-  @Override public long getByteOffset()
-  {
-    return this.offset;
-  }
-
-  @Override public void setByteOffset(final long b)
-  {
-    this.offset = ByteBufferRanges.checkByteOffset(b);
+    this.setAtOffsetAndRowColumn(super.getIndex(), row, column, value);
   }
 }
