@@ -20,8 +20,11 @@ import com.io7m.jtensors.MatrixM3x3D;
 import com.io7m.jtensors.MatrixReadable3x3DType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3DType;
 import com.io7m.jtensors.bytebuffered.MatrixByteBufferedM3x3D;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class MatrixByteBufferedM3x3DTest
@@ -70,5 +73,38 @@ public final class MatrixByteBufferedM3x3DTest
     final ByteBuffer buf = ByteBuffer.allocate(size);
     return MatrixByteBufferedM3x3D.newMatrixFromByteBufferAndBase(
       buf, base, offset);
+  }
+
+  @Test public void testImplementationSpecificMemoryLayout0()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(9 * 8);
+    b.order(ByteOrder.BIG_ENDIAN);
+
+    final MatrixByteBuffered3x3DType m =
+      MatrixByteBufferedM3x3D.newMatrixFromByteBuffer(b, 0L);
+
+    m.setRowColumnD(0, 0, Double.longBitsToDouble(0x0102030405060708L));
+    m.setRowColumnD(1, 0, Double.longBitsToDouble(0x1112131415161718L));
+    m.setRowColumnD(2, 0, Double.longBitsToDouble(0x2122232425262728L));
+
+    m.setRowColumnD(0, 1, Double.longBitsToDouble(0x4142434445464748L));
+    m.setRowColumnD(1, 1, Double.longBitsToDouble(0x5152535455565758L));
+    m.setRowColumnD(2, 1, Double.longBitsToDouble(0x6162636465666768L));
+
+    m.setRowColumnD(0, 2, Double.longBitsToDouble(0x8182838485868788L));
+    m.setRowColumnD(1, 2, Double.longBitsToDouble(0x9192939495969798L));
+    m.setRowColumnD(2, 2, Double.longBitsToDouble(0xa1a2a3a4a5a6a7a8L));
+
+    Assert.assertEquals(0x0102030405060708L, b.getLong(0));
+    Assert.assertEquals(0x1112131415161718L, b.getLong(8));
+    Assert.assertEquals(0x2122232425262728L, b.getLong(16));
+
+    Assert.assertEquals(0x4142434445464748L, b.getLong(24));
+    Assert.assertEquals(0x5152535455565758L, b.getLong(32));
+    Assert.assertEquals(0x6162636465666768L, b.getLong(40));
+
+    Assert.assertEquals(0x8182838485868788L, b.getLong(48));
+    Assert.assertEquals(0x9192939495969798L, b.getLong(56));
+    Assert.assertEquals(0xa1a2a3a4a5a6a7a8L, b.getLong(64));
   }
 }

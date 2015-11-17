@@ -103,7 +103,7 @@ public final class PVectorByteBufferedM3I<T> extends ByteBuffered
     final long base,
     final int index)
   {
-    final long b = CheckedMath.add(base, (long) (index * 8));
+    final long b = CheckedMath.add(base, (long) (index * 4));
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 

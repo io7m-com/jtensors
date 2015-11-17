@@ -17,10 +17,14 @@
 package com.io7m.jtensors.tests.bytebuffered;
 
 import com.io7m.jtensors.Quaternion4FType;
+import com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4FType;
 import com.io7m.jtensors.bytebuffered.QuaternionByteBufferedM4F;
 import com.io7m.jtensors.tests.QuaternionM4FContract;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public final class QuaternionByteBufferedM4FTest
   extends QuaternionM4FContract<Quaternion4FType>
@@ -55,5 +59,24 @@ public final class QuaternionByteBufferedM4FTest
       QuaternionByteBufferedM4F.newQuaternionFromByteBuffer(buf, 50L);
     vr.copyFrom4F(v);
     return vr;
+  }
+
+  @Test public void testImplementationSpecificMemoryLayout0()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(4 * 4);
+    b.order(ByteOrder.BIG_ENDIAN);
+
+    final QuaternionByteBuffered4FType v =
+      QuaternionByteBufferedM4F.newQuaternionFromByteBuffer(b, 0L);
+    v.set4F(
+      Float.intBitsToFloat(0x10203040),
+      Float.intBitsToFloat(0x50607080),
+      Float.intBitsToFloat(0x90a0b0c0),
+      Float.intBitsToFloat(0xd0e0f000));
+
+    Assert.assertEquals(0x10203040, b.getInt(0));
+    Assert.assertEquals(0x50607080, b.getInt(4));
+    Assert.assertEquals(0x90a0b0c0, b.getInt(8));
+    Assert.assertEquals(0xd0e0f000, b.getInt(12));
   }
 }
