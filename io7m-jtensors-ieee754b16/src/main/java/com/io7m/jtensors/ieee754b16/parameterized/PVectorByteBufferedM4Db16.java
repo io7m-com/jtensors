@@ -25,7 +25,6 @@ import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.VectorReadable4DType;
 import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.bytebuffered.ByteBuffered;
-import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4DType;
 import com.io7m.jtensors.parameterized.PVectorReadable2DType;
 import com.io7m.jtensors.parameterized.PVectorReadable3DType;
 import com.io7m.jtensors.parameterized.PVectorReadable4DType;
@@ -45,7 +44,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 
 public final class PVectorByteBufferedM4Db16<T> extends ByteBuffered
-  implements PVectorByteBuffered4DType<T>
+  implements PVectorByteBuffered4Db16Type<T>
 {
   private final ByteBuffer buffer;
 
@@ -71,7 +70,7 @@ public final class PVectorByteBufferedM4Db16<T> extends ByteBuffered
    * @return A new buffered vector
    */
 
-  public static <T> PVectorByteBuffered4DType<T> newVectorFromByteBuffer(
+  public static <T> PVectorByteBuffered4Db16Type<T> newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -96,7 +95,8 @@ public final class PVectorByteBufferedM4Db16<T> extends ByteBuffered
    * @return A new buffered vector
    */
 
-  public static <T> PVectorByteBuffered4DType<T> newVectorFromByteBufferAndBase(
+  public static <T> PVectorByteBuffered4Db16Type<T>
+  newVectorFromByteBufferAndBase(
     final ByteBuffer b,
     final AtomicLong base,
     final int offset)
@@ -272,8 +272,8 @@ public final class PVectorByteBufferedM4Db16<T> extends ByteBuffered
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final PVectorByteBufferedM4Db16<?>
-      other = (PVectorByteBufferedM4Db16<?>) obj;
+    final PVectorByteBufferedM4Db16<?> other =
+      (PVectorByteBufferedM4Db16<?>) obj;
     final double tw = this.getWD();
     final double tx = this.getXD();
     final double ty = this.getYD();

@@ -1,10 +1,10 @@
 /*
  * Copyright © 2015 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -14,18 +14,19 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.bytebuffered;
+package com.io7m.jtensors.ieee754b16.parameterized;
 
-import com.io7m.jtensors.Vector3DType;
+import com.io7m.jtensors.parameterized.PVectorReadable2DType;
 
 /**
- * The type of {@link Vector3DType} values that are also byte buffered.
+ * <p>'Read' interface to phantom-typed two-dimensional vectors with double
+ * precision elements that are actually stored as <b>IEEE 754</b> {@code
+ * binary16} values.</p>
  *
- * @since 7.0.0
+ * @param <T> A phantom type parameter.
  */
 
-public interface VectorByteBuffered3DType
-  extends Vector3DType, VectorByteBuffered2DType
+public interface PVectorReadable2Db16Type<T> extends PVectorReadable2DType<T>
 {
-  // No extra functions
+  // No extra functions.
 }

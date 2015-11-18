@@ -24,7 +24,6 @@ import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.bytebuffered.ByteBuffered;
-import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3DType;
 import com.io7m.jtensors.parameterized.PVectorReadable2DType;
 import com.io7m.jtensors.parameterized.PVectorReadable3DType;
 
@@ -43,7 +42,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 
 public final class PVectorByteBufferedM3Db16<T> extends ByteBuffered
-  implements PVectorByteBuffered3DType<T>
+  implements PVectorByteBuffered3Db16Type<T>
 {
   private final ByteBuffer buffer;
 
@@ -69,7 +68,7 @@ public final class PVectorByteBufferedM3Db16<T> extends ByteBuffered
    * @return A new buffered vector
    */
 
-  public static <T> PVectorByteBuffered3DType<T> newVectorFromByteBuffer(
+  public static <T> PVectorByteBuffered3Db16Type<T> newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -94,7 +93,8 @@ public final class PVectorByteBufferedM3Db16<T> extends ByteBuffered
    * @return A new buffered vector
    */
 
-  public static <T> PVectorByteBuffered3DType<T> newVectorFromByteBufferAndBase(
+  public static <T> PVectorByteBuffered3Db16Type<T>
+  newVectorFromByteBufferAndBase(
     final ByteBuffer b,
     final AtomicLong base,
     final int offset)

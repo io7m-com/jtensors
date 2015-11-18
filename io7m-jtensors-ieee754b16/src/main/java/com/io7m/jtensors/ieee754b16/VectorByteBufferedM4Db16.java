@@ -25,7 +25,6 @@ import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.VectorReadable4DType;
 import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.bytebuffered.ByteBuffered;
-import com.io7m.jtensors.bytebuffered.VectorByteBuffered4DType;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicLong;
@@ -40,7 +39,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 
 public final class VectorByteBufferedM4Db16 extends ByteBuffered
-  implements VectorByteBuffered4DType
+  implements VectorByteBuffered4Db16Type
 {
   private final ByteBuffer buffer;
 
@@ -65,7 +64,7 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
    * @return A new buffered vector
    */
 
-  public static VectorByteBuffered4DType newVectorFromByteBuffer(
+  public static VectorByteBuffered4Db16Type newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -89,7 +88,7 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
    * @return A new buffered vector
    */
 
-  public static VectorByteBuffered4DType newVectorFromByteBufferAndBase(
+  public static VectorByteBuffered4Db16Type newVectorFromByteBufferAndBase(
     final ByteBuffer b,
     final AtomicLong base,
     final int offset)

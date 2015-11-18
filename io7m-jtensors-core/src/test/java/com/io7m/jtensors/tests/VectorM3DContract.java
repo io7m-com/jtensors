@@ -208,9 +208,18 @@ public abstract class VectorM3DContract<T extends Vector3DType>
       final T vr0 = this.newVectorM3D();
       VectorM3D.addScaled(v0, v1, r, vr0);
 
-      Assert.assertEquals(v0.getXD() + (v1.getXD() * r), vr0.getXD(), this.delta());
-      Assert.assertEquals(v0.getYD() + (v1.getYD() * r), vr0.getYD(), this.delta());
-      Assert.assertEquals(v0.getZD() + (v1.getZD() * r), vr0.getZD(), this.delta());
+      Assert.assertEquals(
+        v0.getXD() + (v1.getXD() * r),
+        vr0.getXD(),
+        this.delta());
+      Assert.assertEquals(
+        v0.getYD() + (v1.getYD() * r),
+        vr0.getYD(),
+        this.delta());
+      Assert.assertEquals(
+        v0.getZD() + (v1.getZD() * r),
+        vr0.getZD(),
+        this.delta());
 
       {
         final double orig_x = v0.getXD();
@@ -218,9 +227,18 @@ public abstract class VectorM3DContract<T extends Vector3DType>
         final double orig_z = v0.getZD();
         VectorM3D.addScaledInPlace(v0, v1, r);
 
-        Assert.assertEquals(orig_x + (v1.getXD() * r), v0.getXD(), this.delta());
-        Assert.assertEquals(orig_y + (v1.getYD() * r), v0.getYD(), this.delta());
-        Assert.assertEquals(orig_z + (v1.getZD() * r), v0.getZD(), this.delta());
+        Assert.assertEquals(
+          orig_x + (v1.getXD() * r),
+          v0.getXD(),
+          this.delta());
+        Assert.assertEquals(
+          orig_y + (v1.getYD() * r),
+          v0.getYD(),
+          this.delta());
+        Assert.assertEquals(
+          orig_z + (v1.getZD() * r),
+          v0.getZD(),
+          this.delta());
       }
     }
   }
@@ -557,7 +575,8 @@ public abstract class VectorM3DContract<T extends Vector3DType>
   {
     final T v0 = this.newVectorM3D(
       this.randomLargePositive(),
-      this.randomLargePositive(), this.randomLargePositive());
+      this.randomLargePositive(),
+      this.randomLargePositive());
     final T v1 = this.newVectorM3D();
 
     v1.copyFrom2D(v0);
@@ -571,7 +590,8 @@ public abstract class VectorM3DContract<T extends Vector3DType>
   {
     final T v0 = this.newVectorM3D(
       this.randomLargePositive(),
-      this.randomLargePositive(), this.randomLargePositive());
+      this.randomLargePositive(),
+      this.randomLargePositive());
     final T v1 = this.newVectorM3D();
 
     v1.copyFrom3D(v0);
@@ -583,6 +603,8 @@ public abstract class VectorM3DContract<T extends Vector3DType>
 
   @Test public final void testCrossProductPerpendicular()
   {
+    int checked = 0;
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = this.randomLargePositive();
       final double y0 = this.randomLargePositive();
@@ -600,18 +622,28 @@ public abstract class VectorM3DContract<T extends Vector3DType>
       VectorM3D.crossProduct(v0, v1, vr);
       VectorM3D.normalizeInPlace(vr);
 
-      final double dp0 = VectorM3D.dotProduct(v0, vr);
-      final double dp1 = VectorM3D.dotProduct(v1, vr);
+      boolean ok = vr.getXD() != Double.NaN;
+      ok = ok && vr.getYD() != Double.NaN;
+      ok = ok && vr.getZD() != Double.NaN;
 
-      System.out.printf("v0  : %s\n", v0);
-      System.out.printf("v1  : %s\n", v1);
-      System.out.printf("vr  : %s\n", vr);
-      System.out.printf("dp0 : %f\n", dp0);
-      System.out.printf("dp1 : %f\n", dp1);
+      if (ok) {
+        checked++;
 
-      Assert.assertEquals(0.0, dp0, this.delta());
-      Assert.assertEquals(0.0, dp1, this.delta());
+        final double dp0 = VectorM3D.dotProduct(v0, vr);
+        final double dp1 = VectorM3D.dotProduct(v1, vr);
+
+        System.out.printf("v0  : %s\n", v0);
+        System.out.printf("v1  : %s\n", v1);
+        System.out.printf("vr  : %s\n", vr);
+        System.out.printf("dp0 : %f\n", dp0);
+        System.out.printf("dp1 : %f\n", dp1);
+
+        Assert.assertEquals(0.0, dp0, this.delta());
+        Assert.assertEquals(0.0, dp1, this.delta());
+      }
     }
+
+    Assert.assertTrue(checked > 0);
   }
 
   @Test public final void testDefault000()
@@ -930,12 +962,14 @@ public abstract class VectorM3DContract<T extends Vector3DType>
   @Test public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = this.randomLargePositive();
-      final double y = this.randomLargePositive();
-      final double z = this.randomLargePositive();
+      final double x = 1.0 + this.randomLargePositive();
+      final double y = 1.0 + this.randomLargePositive();
+      final double z = 1.0 + this.randomLargePositive();
       final T v = this.newVectorM3D(x, y, z);
 
       final double m = VectorM3D.magnitude(v);
+      System.out.println("v : " + v);
+      System.out.println("m : " + m);
       Assert.assertTrue(m >= 1.0);
     }
   }
@@ -954,7 +988,9 @@ public abstract class VectorM3DContract<T extends Vector3DType>
 
       final double m = VectorM3D.magnitude(vr);
 
-      System.out.println("m : " + m);
+      System.out.println("v  : " + v);
+      System.out.println("vr : " + vr);
+      System.out.println("m  : " + m);
       Assert.assertEquals(1.0, m, this.delta());
     }
   }

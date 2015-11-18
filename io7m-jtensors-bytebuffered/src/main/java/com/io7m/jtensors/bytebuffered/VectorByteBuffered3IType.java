@@ -24,7 +24,8 @@ import com.io7m.jtensors.Vector3IType;
  * @since 7.0.0
  */
 
-public interface VectorByteBuffered3IType extends Vector3IType, ByteBufferedType
+public interface VectorByteBuffered3IType
+  extends Vector3IType, VectorByteBuffered2IType
 {
   // No extra functions
 }

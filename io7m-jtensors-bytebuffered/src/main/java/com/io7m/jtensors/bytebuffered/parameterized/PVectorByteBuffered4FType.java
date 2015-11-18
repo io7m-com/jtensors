@@ -16,7 +16,6 @@
 
 package com.io7m.jtensors.bytebuffered.parameterized;
 
-import com.io7m.jtensors.bytebuffered.ByteBufferedType;
 import com.io7m.jtensors.parameterized.PVector4FType;
 
 /**
@@ -28,7 +27,7 @@ import com.io7m.jtensors.parameterized.PVector4FType;
  */
 
 public interface PVectorByteBuffered4FType<T>
-  extends PVector4FType<T>, ByteBufferedType
+  extends PVector4FType<T>, PVectorByteBuffered3FType<T>
 {
   // No extra functions
 }

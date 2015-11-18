@@ -563,6 +563,8 @@ public abstract class PVectorM3DContract<T, V extends PVector3DType<T>>
 
   @Test public final void testCrossProductPerpendicular()
   {
+    int checked = 0;
+
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = this.randomLargePositive();
       final double y0 = this.randomLargePositive();
@@ -580,12 +582,28 @@ public abstract class PVectorM3DContract<T, V extends PVector3DType<T>>
       PVectorM3D.crossProduct(v0, v1, vr);
       PVectorM3D.normalizeInPlace(vr);
 
-      final double dp0 = PVectorM3D.dotProduct(v0, vr);
-      final double dp1 = PVectorM3D.dotProduct(v1, vr);
+      boolean ok = vr.getXD() != Double.NaN;
+      ok = ok && vr.getYD() != Double.NaN;
+      ok = ok && vr.getZD() != Double.NaN;
 
-      Assert.assertEquals(0.0, dp0, this.delta());
-      Assert.assertEquals(0.0, dp1, this.delta());
+      if (ok) {
+        checked++;
+
+        final double dp0 = PVectorM3D.dotProduct(v0, vr);
+        final double dp1 = PVectorM3D.dotProduct(v1, vr);
+
+        System.out.printf("v0  : %s\n", v0);
+        System.out.printf("v1  : %s\n", v1);
+        System.out.printf("vr  : %s\n", vr);
+        System.out.printf("dp0 : %f\n", dp0);
+        System.out.printf("dp1 : %f\n", dp1);
+
+        Assert.assertEquals(0.0, dp0, this.delta());
+        Assert.assertEquals(0.0, dp1, this.delta());
+      }
     }
+
+    Assert.assertTrue(checked > 0);
   }
 
   @Test public final void testDefault000()

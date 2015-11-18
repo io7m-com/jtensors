@@ -14,18 +14,20 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.bytebuffered;
+package com.io7m.jtensors.ieee754b16.parameterized;
 
-import com.io7m.jtensors.Vector3DType;
+import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4DType;
 
 /**
- * The type of {@link Vector3DType} values that are also byte buffered.
+ * The type of {@link PVector4Db16Type} values that are also byte buffered.
+ *
+ * @param <T> A phantom type parameter
  *
  * @since 7.0.0
  */
 
-public interface VectorByteBuffered3DType
-  extends Vector3DType, VectorByteBuffered2DType
+public interface PVectorByteBuffered4Db16Type<T>
+  extends PVector4Db16Type<T>, PVectorByteBuffered4DType<T>
 {
   // No extra functions
 }

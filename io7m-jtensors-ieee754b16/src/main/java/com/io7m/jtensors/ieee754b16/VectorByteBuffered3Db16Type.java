@@ -14,18 +14,18 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.bytebuffered;
+package com.io7m.jtensors.ieee754b16;
 
-import com.io7m.jtensors.Vector3DType;
+import com.io7m.jtensors.bytebuffered.VectorByteBuffered3DType;
 
 /**
- * The type of {@link Vector3DType} values that are also byte buffered.
+ * The type of {@link VectorByteBuffered3DType} values with elements that are
+ * actually stored as <b>IEEE 754</b> {@code binary16} values.
  *
  * @since 7.0.0
  */
 
-public interface VectorByteBuffered3DType
-  extends Vector3DType, VectorByteBuffered2DType
+public interface VectorByteBuffered3Db16Type extends VectorByteBuffered3DType
 {
   // No extra functions
 }

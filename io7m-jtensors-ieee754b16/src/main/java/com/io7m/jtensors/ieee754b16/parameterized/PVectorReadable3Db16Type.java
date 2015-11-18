@@ -14,18 +14,20 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.bytebuffered;
+package com.io7m.jtensors.ieee754b16.parameterized;
 
-import com.io7m.jtensors.Vector3DType;
+import com.io7m.jtensors.parameterized.PVectorReadable3DType;
 
 /**
- * The type of {@link Vector3DType} values that are also byte buffered.
+ * <p>'Read' interface to phantom-typed three-dimensional vectors with double
+ * precision elements that are actually stored as <b>IEEE 754</b> {@code
+ * binary16} values.</p>
  *
- * @since 7.0.0
+ * @param <T> A phantom type parameter.
  */
 
-public interface VectorByteBuffered3DType
-  extends Vector3DType, VectorByteBuffered2DType
+public interface PVectorReadable3Db16Type<T>
+  extends PVectorReadable3DType<T>, PVectorReadable2Db16Type<T>
 {
-  // No extra functions
+  // No extra functions.
 }

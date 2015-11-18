@@ -23,7 +23,6 @@ import com.io7m.jnull.Nullable;
 import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.bytebuffered.ByteBufferRanges;
 import com.io7m.jtensors.bytebuffered.ByteBuffered;
-import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType;
 import com.io7m.jtensors.parameterized.PVectorReadable2DType;
 
 import java.nio.ByteBuffer;
@@ -41,7 +40,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 
 public final class PVectorByteBufferedM2Db16<T> extends ByteBuffered
-  implements PVectorByteBuffered2DType<T>
+  implements PVectorByteBuffered2Db16Type<T>
 {
   private final ByteBuffer buffer;
 
@@ -67,7 +66,7 @@ public final class PVectorByteBufferedM2Db16<T> extends ByteBuffered
    * @return A new buffered vector
    */
 
-  public static <T> PVectorByteBuffered2DType<T> newVectorFromByteBuffer(
+  public static <T> PVectorByteBuffered2Db16Type<T> newVectorFromByteBuffer(
     final ByteBuffer b,
     final long byte_offset)
   {
@@ -92,7 +91,8 @@ public final class PVectorByteBufferedM2Db16<T> extends ByteBuffered
    * @return A new buffered vector
    */
 
-  public static <T> PVectorByteBuffered2DType<T> newVectorFromByteBufferAndBase(
+  public static <T> PVectorByteBuffered2Db16Type<T>
+  newVectorFromByteBufferAndBase(
     final ByteBuffer b,
     final AtomicLong base,
     final int offset)
