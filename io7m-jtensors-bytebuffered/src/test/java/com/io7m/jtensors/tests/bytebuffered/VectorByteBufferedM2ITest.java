@@ -32,29 +32,28 @@ public final class VectorByteBufferedM2ITest
     final int x,
     final int y)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(2 * 4);
     final VectorByteBuffered2IType v =
-      VectorByteBufferedM2I.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM2I.newVectorFromByteBuffer(buf, 0L);
     v.set2I(x, y);
     return v;
   }
 
   @Override protected VectorByteBuffered2IType newVectorM2I()
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(2 * 4);
     final VectorByteBuffered2IType v =
-      VectorByteBufferedM2I.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM2I.newVectorFromByteBuffer(buf, 0L);
     v.set2I((int) 0L, (int) 0L);
     return v;
   }
 
-  @Override
-  protected VectorByteBuffered2IType newVectorM2I(final
-  VectorByteBuffered2IType v)
+  @Override protected VectorByteBuffered2IType newVectorM2I(
+    final VectorByteBuffered2IType v)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(2 * 4);
     final VectorByteBuffered2IType vr =
-      VectorByteBufferedM2I.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM2I.newVectorFromByteBuffer(buf, 0L);
     vr.copyFrom2I(v);
     return vr;
   }

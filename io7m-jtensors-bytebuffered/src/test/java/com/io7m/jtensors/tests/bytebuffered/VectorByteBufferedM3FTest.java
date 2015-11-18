@@ -35,7 +35,7 @@ public final class VectorByteBufferedM3FTest
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final VectorByteBuffered3FType v =
-      VectorByteBufferedM3F.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM3F.newVectorFromByteBuffer(buf, 0L);
     v.set3F(x, y, z);
     return v;
   }
@@ -44,7 +44,7 @@ public final class VectorByteBufferedM3FTest
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final VectorByteBuffered3FType v =
-      VectorByteBufferedM3F.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM3F.newVectorFromByteBuffer(buf, 0L);
     v.set3F(0.0f, 0.0f, 0.0f);
     return v;
   }
@@ -54,7 +54,7 @@ public final class VectorByteBufferedM3FTest
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final VectorByteBuffered3FType vr =
-      VectorByteBufferedM3F.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM3F.newVectorFromByteBuffer(buf, 0L);
     vr.copyFrom3F(v);
     return vr;
   }

@@ -33,18 +33,18 @@ public final class VectorByteBufferedM3LTest
     final long y,
     final long z)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(3 * 8);
     final VectorByteBuffered3LType v =
-      VectorByteBufferedM3L.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM3L.newVectorFromByteBuffer(buf, 0L);
     v.set3L(x, y, z);
     return v;
   }
 
   @Override protected VectorByteBuffered3LType newVectorM3L()
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(3 * 8);
     final VectorByteBuffered3LType v =
-      VectorByteBufferedM3L.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM3L.newVectorFromByteBuffer(buf, 0L);
     v.set3L(0L, 0L, 0L);
     return v;
   }
@@ -52,9 +52,9 @@ public final class VectorByteBufferedM3LTest
   @Override protected VectorByteBuffered3LType newVectorM3L(
     final VectorByteBuffered3LType v)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(3 * 8);
     final VectorByteBuffered3LType vr =
-      VectorByteBufferedM3L.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM3L.newVectorFromByteBuffer(buf, 0L);
     vr.copyFrom3L(v);
     return vr;
   }

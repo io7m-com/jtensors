@@ -49,18 +49,18 @@ public final class VectorByteBufferedM4DTest
     final double z,
     final double w)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(4 * 8);
     final VectorByteBuffered4DType v =
-      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 0L);
     v.set4D(x, y, z, w);
     return v;
   }
 
   @Override protected VectorByteBuffered4DType newVectorM4D()
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(4 * 8);
     final VectorByteBuffered4DType v =
-      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 0L);
     v.set4D(0.0, 0.0, 0.0, 1.0);
     return v;
   }
@@ -68,9 +68,9 @@ public final class VectorByteBufferedM4DTest
   @Override protected VectorByteBuffered4DType newVectorM4DFrom(
     final VectorByteBuffered4DType v)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(4 * 8);
     final VectorByteBuffered4DType vr =
-      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 0L);
     vr.copyFrom4D(v);
     return vr;
   }

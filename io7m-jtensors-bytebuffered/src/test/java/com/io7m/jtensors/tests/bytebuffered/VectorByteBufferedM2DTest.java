@@ -47,18 +47,18 @@ public final class VectorByteBufferedM2DTest
     final double x,
     final double y)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(2 * 8);
     final VectorByteBuffered2DType v =
-      VectorByteBufferedM2D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM2D.newVectorFromByteBuffer(buf, 0L);
     v.set2D(x, y);
     return v;
   }
 
   @Override protected VectorByteBuffered2DType newVectorM2D()
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(2 * 8);
     final VectorByteBuffered2DType v =
-      VectorByteBufferedM2D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM2D.newVectorFromByteBuffer(buf, 0L);
     v.set2D(0.0, 0.0);
     return v;
   }
@@ -66,9 +66,9 @@ public final class VectorByteBufferedM2DTest
   @Override protected VectorByteBuffered2DType newVectorM2D(
     final VectorByteBuffered2DType v)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(2 * 8);
     final VectorByteBuffered2DType vr =
-      VectorByteBufferedM2D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM2D.newVectorFromByteBuffer(buf, 0L);
     vr.copyFrom2D(v);
     return vr;
   }

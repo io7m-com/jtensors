@@ -48,18 +48,18 @@ public final class VectorByteBufferedM3DTest
     final double y,
     final double z)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(3 * 8);
     final VectorByteBuffered3DType v =
-      VectorByteBufferedM3D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM3D.newVectorFromByteBuffer(buf, 0L);
     v.set3D(x, y, z);
     return v;
   }
 
   @Override protected VectorByteBuffered3DType newVectorM3D()
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(3 * 8);
     final VectorByteBuffered3DType v =
-      VectorByteBufferedM3D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM3D.newVectorFromByteBuffer(buf, 0L);
     v.set3D(0.0, 0.0, 0.0);
     return v;
   }
@@ -67,9 +67,9 @@ public final class VectorByteBufferedM3DTest
   @Override protected VectorByteBuffered3DType newVectorM3D(
     final VectorByteBuffered3DType v)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(3 * 8);
     final VectorByteBuffered3DType vr =
-      VectorByteBufferedM3D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM3D.newVectorFromByteBuffer(buf, 0L);
     vr.copyFrom3D(v);
     return vr;
   }

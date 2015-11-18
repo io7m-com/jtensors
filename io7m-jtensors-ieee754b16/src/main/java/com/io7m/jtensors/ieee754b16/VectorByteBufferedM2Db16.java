@@ -98,7 +98,7 @@ public final class VectorByteBufferedM2Db16 extends ByteBuffered
     final long base,
     final int index)
   {
-    final long b = CheckedMath.add(base, (long) (index * 8));
+    final long b = CheckedMath.add(base, (long) (index * 2));
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
