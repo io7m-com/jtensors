@@ -14,33 +14,31 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests.bytebuffered.parameterized;
+package com.io7m.jtensors.tests.ieee754b16.parameterized;
 
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3DType;
-import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM3D;
-import org.junit.Assert;
-import org.junit.Test;
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorByteBufferedM3Db16;
+import com.io7m.jtensors.tests.bytebuffered.parameterized.PVectorByteBufferedM3DContract;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.concurrent.atomic.AtomicLong;
 
-public final class PVectorByteBufferedM3DTest<T>
+public final class PVectorByteBufferedM3Db16Test<T>
   extends PVectorByteBufferedM3DContract<T, PVectorByteBuffered3DType<T>>
 {
   @Override protected double delta()
   {
-    return 0.0000000000001;
+    return 0.5;
   }
 
   @Override protected double randomLargeNegative()
   {
-    return Math.random() * -1000000.0;
+    return Math.random() * -20.0;
   }
 
   @Override protected double randomLargePositive()
   {
-    return Math.random() * 1000000.0;
+    return Math.random() * 20.0;
   }
 
   @Override protected PVectorByteBuffered3DType<T> newVectorM3D(
@@ -50,7 +48,7 @@ public final class PVectorByteBufferedM3DTest<T>
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered3DType<T> v =
-      PVectorByteBufferedM3D.newVectorFromByteBuffer(buf, 50L);
+      PVectorByteBufferedM3Db16.newVectorFromByteBuffer(buf, 50L);
     v.set3D(x, y, z);
     return v;
   }
@@ -59,7 +57,7 @@ public final class PVectorByteBufferedM3DTest<T>
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered3DType<T> v =
-      PVectorByteBufferedM3D.newVectorFromByteBuffer(buf, 50L);
+      PVectorByteBufferedM3Db16.newVectorFromByteBuffer(buf, 50L);
     v.set3D(0.0, 0.0, 0.0);
     return v;
   }
@@ -69,7 +67,7 @@ public final class PVectorByteBufferedM3DTest<T>
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered3DType<T> vr =
-      PVectorByteBufferedM3D.newVectorFromByteBuffer(buf, 50L);
+      PVectorByteBufferedM3Db16.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom3D(v);
     return vr;
   }
@@ -79,7 +77,7 @@ public final class PVectorByteBufferedM3DTest<T>
     final long offset)
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
-    return PVectorByteBufferedM3D.newVectorFromByteBuffer(buf, offset);
+    return PVectorByteBufferedM3Db16.newVectorFromByteBuffer(buf, offset);
   }
 
   @Override protected PVectorByteBuffered3DType<T> newVectorM3DWithBaseOffset(
@@ -88,24 +86,7 @@ public final class PVectorByteBufferedM3DTest<T>
     final int offset)
   {
     final ByteBuffer buf = ByteBuffer.allocate(size);
-    return PVectorByteBufferedM3D.newVectorFromByteBufferAndBase(
+    return PVectorByteBufferedM3Db16.newVectorFromByteBufferAndBase(
       buf, base, offset);
-  }
-
-  @Test public void testImplementationSpecificMemoryLayout0()
-  {
-    final ByteBuffer b = ByteBuffer.allocate(3 * 8);
-    b.order(ByteOrder.BIG_ENDIAN);
-
-    final PVectorByteBuffered3DType<?> v =
-      PVectorByteBufferedM3D.newVectorFromByteBuffer(b, 0L);
-    v.set3D(
-      Double.longBitsToDouble(0x1020304011223344L),
-      Double.longBitsToDouble(0x5060708051525354L),
-      Double.longBitsToDouble(0x90a0b0c091a1b1c1L));
-
-    Assert.assertEquals(0x1020304011223344L, b.getLong(0));
-    Assert.assertEquals(0x5060708051525354L, b.getLong(8));
-    Assert.assertEquals(0x90a0b0c091a1b1c1L, b.getLong(16));
   }
 }

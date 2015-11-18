@@ -21,6 +21,21 @@ import com.io7m.jtensors.parameterized.PVectorM3D;
 public final class PVectorM3DTest<T>
   extends PVectorM3DContract<T, PVectorM3D<T>>
 {
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -1000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 1000000.0;
+  }
+
   @Override protected PVectorM3D<T> newVectorM3D(final PVectorM3D<T> v)
   {
     return new PVectorM3D<T>(v);

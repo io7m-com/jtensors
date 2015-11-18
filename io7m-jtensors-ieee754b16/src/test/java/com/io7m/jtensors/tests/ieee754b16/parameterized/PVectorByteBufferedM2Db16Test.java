@@ -14,33 +14,31 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests.bytebuffered.parameterized;
+package com.io7m.jtensors.tests.ieee754b16.parameterized;
 
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType;
-import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM2D;
-import org.junit.Assert;
-import org.junit.Test;
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorByteBufferedM2Db16;
+import com.io7m.jtensors.tests.bytebuffered.parameterized.PVectorByteBufferedM2DContract;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.concurrent.atomic.AtomicLong;
 
-public final class PVectorByteBufferedM2DTest<T>
+public final class PVectorByteBufferedM2Db16Test<T>
   extends PVectorByteBufferedM2DContract<T, PVectorByteBuffered2DType<T>>
 {
   @Override protected double delta()
   {
-    return 0.0000000000001;
+    return 0.5;
   }
 
   @Override protected double randomLargeNegative()
   {
-    return Math.random() * -100000000.0;
+    return Math.random() * -20.0;
   }
 
   @Override protected double randomLargePositive()
   {
-    return Math.random() * 100000000.0;
+    return Math.random() * 20.0;
   }
 
   @Override protected PVectorByteBuffered2DType<T> newVectorM2D(
@@ -49,7 +47,7 @@ public final class PVectorByteBufferedM2DTest<T>
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered2DType<T> v =
-      PVectorByteBufferedM2D.newVectorFromByteBuffer(buf, 50L);
+      PVectorByteBufferedM2Db16.newVectorFromByteBuffer(buf, 50L);
     v.set2D(x, y);
     return v;
   }
@@ -58,7 +56,7 @@ public final class PVectorByteBufferedM2DTest<T>
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered2DType<T> v =
-      PVectorByteBufferedM2D.newVectorFromByteBuffer(buf, 50L);
+      PVectorByteBufferedM2Db16.newVectorFromByteBuffer(buf, 50L);
     v.set2D(0.0, 0.0);
     return v;
   }
@@ -68,7 +66,7 @@ public final class PVectorByteBufferedM2DTest<T>
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered2DType<T> vr =
-      PVectorByteBufferedM2D.newVectorFromByteBuffer(buf, 50L);
+      PVectorByteBufferedM2Db16.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom2D(v);
     return vr;
   }
@@ -78,7 +76,7 @@ public final class PVectorByteBufferedM2DTest<T>
     final long offset)
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
-    return PVectorByteBufferedM2D.newVectorFromByteBuffer(buf, offset);
+    return PVectorByteBufferedM2Db16.newVectorFromByteBuffer(buf, offset);
   }
 
   @Override protected PVectorByteBuffered2DType<T> newVectorM2DWithBaseOffset(
@@ -87,22 +85,7 @@ public final class PVectorByteBufferedM2DTest<T>
     final int offset)
   {
     final ByteBuffer buf = ByteBuffer.allocate(size);
-    return PVectorByteBufferedM2D.newVectorFromByteBufferAndBase(
+    return PVectorByteBufferedM2Db16.newVectorFromByteBufferAndBase(
       buf, base, offset);
-  }
-
-  @Test public void testImplementationSpecificMemoryLayout0()
-  {
-    final ByteBuffer b = ByteBuffer.allocate(2 * 8);
-    b.order(ByteOrder.BIG_ENDIAN);
-
-    final PVectorByteBuffered2DType<?> v =
-      PVectorByteBufferedM2D.newVectorFromByteBuffer(b, 0L);
-    v.set2D(
-      Double.longBitsToDouble(0x1020304011223344L),
-      Double.longBitsToDouble(0x5060708051525354L));
-
-    Assert.assertEquals(0x1020304011223344L, b.getLong(0));
-    Assert.assertEquals(0x5060708051525354L, b.getLong(8));
   }
 }

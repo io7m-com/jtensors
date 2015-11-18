@@ -14,18 +14,16 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests.bytebuffered.parameterized;
+package com.io7m.jtensors.tests.ieee754b16.parameterized;
 
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4DType;
-import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM4D;
-import org.junit.Assert;
-import org.junit.Test;
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorByteBufferedM4Db16;
+import com.io7m.jtensors.tests.bytebuffered.parameterized.PVectorByteBufferedM4DContract;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.concurrent.atomic.AtomicLong;
 
-public final class PVectorByteBufferedM4DTest<T>
+public final class PVectorByteBufferedM4Db16Test<T>
   extends PVectorByteBufferedM4DContract<T, PVectorByteBuffered4DType<T>>
 {
   @Override protected PVectorByteBuffered4DType<T> newVectorM4D(
@@ -36,31 +34,31 @@ public final class PVectorByteBufferedM4DTest<T>
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered4DType<T> v =
-      PVectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
+      PVectorByteBufferedM4Db16.newVectorFromByteBuffer(buf, 50L);
     v.set4D(x, y, z, w);
     return v;
   }
 
   @Override protected double delta()
   {
-    return 0.0000000000001;
+    return 0.5;
   }
 
   @Override protected double randomLargeNegative()
   {
-    return Math.random() * -1000000.0;
+    return Math.random() * -20.0;
   }
 
   @Override protected double randomLargePositive()
   {
-    return Math.random() * 1000000.0;
+    return Math.random() * 20.0;
   }
 
   @Override protected PVectorByteBuffered4DType<T> newVectorM4D()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered4DType<T> v =
-      PVectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
+      PVectorByteBufferedM4Db16.newVectorFromByteBuffer(buf, 50L);
     v.set4D(0.0, 0.0, 0.0, 1.0);
     return v;
   }
@@ -70,7 +68,7 @@ public final class PVectorByteBufferedM4DTest<T>
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered4DType<T> vr =
-      PVectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
+      PVectorByteBufferedM4Db16.newVectorFromByteBuffer(buf, 50L);
     vr.copyFrom4D(v);
     return vr;
   }
@@ -80,7 +78,7 @@ public final class PVectorByteBufferedM4DTest<T>
     final long offset)
   {
     final ByteBuffer buf = ByteBuffer.allocate((int) size);
-    return PVectorByteBufferedM4D.newVectorFromByteBuffer(buf, offset);
+    return PVectorByteBufferedM4Db16.newVectorFromByteBuffer(buf, offset);
   }
 
   @Override protected PVectorByteBuffered4DType<T> newVectorM4DWithBaseOffset(
@@ -89,26 +87,7 @@ public final class PVectorByteBufferedM4DTest<T>
     final int offset)
   {
     final ByteBuffer buf = ByteBuffer.allocate(size);
-    return PVectorByteBufferedM4D.newVectorFromByteBufferAndBase(
+    return PVectorByteBufferedM4Db16.newVectorFromByteBufferAndBase(
       buf, base, offset);
-  }
-
-  @Test public void testImplementationSpecificMemoryLayout0()
-  {
-    final ByteBuffer b = ByteBuffer.allocate(4 * 8);
-    b.order(ByteOrder.BIG_ENDIAN);
-
-    final PVectorByteBuffered4DType<?> v =
-      PVectorByteBufferedM4D.newVectorFromByteBuffer(b, 0L);
-    v.set4D(
-      Double.longBitsToDouble(0x1020304011223344L),
-      Double.longBitsToDouble(0x5060708051525354L),
-      Double.longBitsToDouble(0x90a0b0c091a1b1c1L),
-      Double.longBitsToDouble(0xd0e0f000d1e1f101L));
-
-    Assert.assertEquals(0x1020304011223344L, b.getLong(0));
-    Assert.assertEquals(0x5060708051525354L, b.getLong(8));
-    Assert.assertEquals(0x90a0b0c091a1b1c1L, b.getLong(16));
-    Assert.assertEquals(0xd0e0f000d1e1f101L, b.getLong(24));
   }
 }

@@ -1,10 +1,10 @@
 /*
  * Copyright © 2015 <code@io7m.com> http://io7m.com
- *
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -14,41 +14,11 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests;
+/**
+ * {@link java.nio.ByteBuffer} backed parameterized tensors that encode elements
+ * as <b>IEEE 754</b> {@code binary16} values.
+ */
 
-import com.io7m.jtensors.VectorM2D;
+@com.io7m.jnull.NonNullByDefault
+package com.io7m.jtensors.ieee754b16.parameterized;
 
-public final class VectorM2DTest extends VectorM2DContract<VectorM2D>
-{
-  @Override protected double delta()
-  {
-    return 0.0000000000001;
-  }
-
-  @Override protected double randomLargeNegative()
-  {
-    return Math.random() * -100000000.0;
-  }
-
-  @Override protected double randomLargePositive()
-  {
-    return Math.random() * 100000000.0;
-  }
-
-  @Override protected VectorM2D newVectorM2D(final VectorM2D v)
-  {
-    return new VectorM2D(v);
-  }
-
-  @Override protected VectorM2D newVectorM2D()
-  {
-    return new VectorM2D();
-  }
-
-  @Override protected VectorM2D newVectorM2D(
-    final double x,
-    final double y)
-  {
-    return new VectorM2D(x, y);
-  }
-}
