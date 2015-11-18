@@ -20,6 +20,21 @@ import com.io7m.jtensors.VectorM4D;
 
 public final class VectorM4DTest extends VectorM4DContract<VectorM4D>
 {
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -100000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 100000000.0;
+  }
+
   @Override protected VectorM4D newVectorM4D(
     final double x,
     final double y,

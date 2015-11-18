@@ -21,6 +21,20 @@ import com.io7m.jtensors.parameterized.PVectorM2D;
 public final class PVectorM2DTest<T>
   extends PVectorM2DContract<T, PVectorM2D<T>>
 {
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -100000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 100000000.0;
+  }
 
   @Override protected PVectorM2D<T> newVectorM2D(final PVectorM2D<T> v)
   {

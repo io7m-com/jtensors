@@ -20,6 +20,21 @@ import com.io7m.jtensors.VectorM2D;
 
 public final class VectorM2DTest extends VectorM2DContract<VectorM2D>
 {
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -100000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 100000000.0;
+  }
+
   @Override protected VectorM2D newVectorM2D(final VectorM2D v)
   {
     return new VectorM2D(v);

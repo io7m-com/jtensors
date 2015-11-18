@@ -21,6 +21,20 @@ import com.io7m.jtensors.parameterized.PVectorM4D;
 public final class PVectorM4DTest<T>
   extends PVectorM4DContract<T, PVectorM4D<T>>
 {
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -1000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 1000000.0;
+  }
 
   @Override protected PVectorM4D<T> newVectorM4D()
   {

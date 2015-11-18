@@ -19,6 +19,7 @@
     <module>io7m-jtensors-checkstyle</module>
     <module>io7m-jtensors-core</module>
     <module>io7m-jtensors-documentation</module>
+    <module>io7m-jtensors-ieee754b16</module>
   </modules>
 
   <properties>
@@ -153,6 +154,11 @@
       <dependency>
         <groupId>com.io7m.junreachable</groupId>
         <artifactId>io7m-junreachable-core</artifactId>
+        <version>[1.0.0, 2.0.0)</version>
+      </dependency>
+      <dependency>
+        <groupId>com.io7m.ieee754b16</groupId>
+        <artifactId>io7m-ieee754b16-core</artifactId>
         <version>[1.0.0, 2.0.0)</version>
       </dependency>
       <dependency>

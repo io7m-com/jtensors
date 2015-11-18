@@ -22,6 +22,21 @@ import com.io7m.jtensors.tests.VectorM3DContract;
 public final class PVectorM3DUntypedTest<T>
   extends VectorM3DContract<PVectorM3D<T>>
 {
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -100000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 100000000.0;
+  }
+
   @Override protected PVectorM3D<T> newVectorM3D(final PVectorM3D<T> v)
   {
     return new PVectorM3D<T>(v);

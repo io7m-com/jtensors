@@ -28,6 +28,21 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class PVectorByteBufferedM3DTest<T>
   extends PVectorByteBufferedM3DContract<T, PVectorByteBuffered3DType<T>>
 {
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -1000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 1000000.0;
+  }
+
   @Override protected PVectorByteBuffered3DType<T> newVectorM3D(
     final double x,
     final double y,

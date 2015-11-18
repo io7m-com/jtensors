@@ -28,6 +28,21 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class VectorByteBufferedM2DTest
   extends VectorByteBufferedM2DContract<VectorByteBuffered2DType>
 {
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -100000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 100000000.0;
+  }
+
   @Override protected VectorByteBuffered2DType newVectorM2D(
     final double x,
     final double y)

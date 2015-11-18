@@ -26,6 +26,21 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class QuaternionByteBufferedM4DVectorTest
   extends VectorByteBufferedM4DContract<QuaternionByteBuffered4DType>
 {
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -100000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 100000000.0;
+  }
+
   @Override protected Vector4DType newVectorM4DAtIndexFromSize(
     final long size,
     final long offset)

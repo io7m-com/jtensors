@@ -41,6 +41,21 @@ public final class PVectorByteBufferedM4DTest<T>
     return v;
   }
 
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -1000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 1000000.0;
+  }
+
   @Override protected PVectorByteBuffered4DType<T> newVectorM4D()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);

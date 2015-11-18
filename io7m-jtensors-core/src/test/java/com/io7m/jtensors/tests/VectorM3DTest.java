@@ -20,6 +20,21 @@ import com.io7m.jtensors.VectorM3D;
 
 public final class VectorM3DTest extends VectorM3DContract<VectorM3D>
 {
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -100000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 100000000.0;
+  }
+
   @Override protected VectorM3D newVectorM3D(final VectorM3D v0)
   {
     return new VectorM3D(v0);
