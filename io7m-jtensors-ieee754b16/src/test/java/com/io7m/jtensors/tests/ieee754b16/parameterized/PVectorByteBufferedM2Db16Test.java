@@ -16,14 +16,34 @@
 
 package com.io7m.jtensors.tests.ieee754b16.parameterized;
 
+import com.io7m.jtensors.Vector2DType;
+import com.io7m.jtensors.VectorReadable2DType;
+import com.io7m.jtensors.VectorWritable2DType;
+import com.io7m.jtensors.bytebuffered.ByteBufferedType;
+import com.io7m.jtensors.bytebuffered.VectorByteBuffered2DType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType;
+import com.io7m.jtensors.ieee754b16.Vector2Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorByteBuffered2Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorReadable2Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorWritable2Db16Type;
+import com.io7m.jtensors.ieee754b16.parameterized.PVector2Db16Type;
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorByteBuffered2Db16Type;
 import com.io7m.jtensors.ieee754b16.parameterized.PVectorByteBufferedM2Db16;
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorReadable2Db16Type;
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorWritable2Db16Type;
+import com.io7m.jtensors.parameterized.PVector2DType;
+import com.io7m.jtensors.parameterized.PVectorReadable2DType;
+import com.io7m.jtensors.parameterized.PVectorWritable2DType;
+import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.bytebuffered.parameterized
   .PVectorByteBufferedM2DContract;
+import org.junit.Assert;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
+import java.util.SortedMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class PVectorByteBufferedM2Db16Test<T>
@@ -101,5 +121,47 @@ public final class PVectorByteBufferedM2Db16Test<T>
     final ByteBuffer buf = ByteBuffer.allocate(size);
     return PVectorByteBufferedM2Db16.newVectorFromByteBufferAndBase(
       buf, base, offset);
+  }
+
+  @Test public void testHierarchy()
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(6);
+    final PVectorByteBuffered2Db16Type<?> v =
+      PVectorByteBufferedM2Db16.newVectorFromByteBuffer(buf, 0L);
+
+    Assert.assertTrue(v instanceof VectorByteBuffered2Db16Type);
+    Assert.assertTrue(v instanceof VectorByteBuffered2DType);
+
+    Assert.assertTrue(v instanceof Vector2Db16Type);
+    Assert.assertTrue(v instanceof Vector2DType);
+
+    Assert.assertTrue(v instanceof VectorReadable2Db16Type);
+    Assert.assertTrue(v instanceof VectorReadable2DType);
+
+    Assert.assertTrue(v instanceof VectorWritable2Db16Type);
+    Assert.assertTrue(v instanceof VectorWritable2DType);
+
+    Assert.assertTrue(v instanceof ByteBufferedType);
+
+    Assert.assertTrue(v instanceof PVectorByteBuffered2Db16Type);
+    Assert.assertTrue(v instanceof PVectorByteBuffered2DType);
+
+    Assert.assertTrue(v instanceof PVector2Db16Type);
+    Assert.assertTrue(v instanceof PVector2DType);
+
+    Assert.assertTrue(v instanceof PVectorReadable2Db16Type);
+    Assert.assertTrue(v instanceof PVectorReadable2DType);
+
+    Assert.assertTrue(v instanceof PVectorWritable2Db16Type);
+    Assert.assertTrue(v instanceof PVectorWritable2DType);
+
+    final SortedMap<String, Class<?>> interfaces =
+      TestUtilities.getInterfaces(v.getClass());
+    for (final String k : interfaces.keySet()) {
+      PVectorByteBufferedM2Db16Test.LOG.debug(
+        "{} implements {}", PVectorByteBufferedM2Db16.class, k);
+    }
+
+    Assert.assertEquals(17L, (long) interfaces.size());
   }
 }

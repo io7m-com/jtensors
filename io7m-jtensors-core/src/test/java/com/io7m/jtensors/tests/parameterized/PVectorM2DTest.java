@@ -16,9 +16,20 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
+import com.io7m.jtensors.Vector2DType;
+import com.io7m.jtensors.VectorReadable2DType;
+import com.io7m.jtensors.VectorWritable2DType;
+import com.io7m.jtensors.parameterized.PVector2DType;
 import com.io7m.jtensors.parameterized.PVectorM2D;
+import com.io7m.jtensors.parameterized.PVectorReadable2DType;
+import com.io7m.jtensors.parameterized.PVectorWritable2DType;
+import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Assert;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.SortedMap;
 
 public final class PVectorM2DTest<T>
   extends PVectorM2DContract<T, PVectorM2D<T>>
@@ -64,5 +75,31 @@ public final class PVectorM2DTest<T>
     final double y1)
   {
     return new PVectorM2D<T>(x1, y1);
+  }
+
+  @Test public void testHierarchy()
+  {
+    final PVectorM2D<?> v = new PVectorM2D<Object>();
+
+    Assert.assertTrue(v instanceof Vector2DType);
+
+    Assert.assertTrue(v instanceof VectorReadable2DType);
+
+    Assert.assertTrue(v instanceof VectorWritable2DType);
+
+    Assert.assertTrue(v instanceof PVector2DType);
+
+    Assert.assertTrue(v instanceof PVectorReadable2DType);
+
+    Assert.assertTrue(v instanceof PVectorWritable2DType);
+
+    final SortedMap<String, Class<?>> interfaces =
+      TestUtilities.getInterfaces(v.getClass());
+    for (final String k : interfaces.keySet()) {
+      PVectorM2DTest.LOG.debug(
+        "{} implements {}", PVectorM2D.class, k);
+    }
+
+    Assert.assertEquals(6L, (long) interfaces.size());
   }
 }

@@ -16,11 +16,36 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
+import com.io7m.jtensors.Vector2FType;
+import com.io7m.jtensors.Vector3FType;
+import com.io7m.jtensors.VectorReadable2FType;
+import com.io7m.jtensors.VectorReadable3FType;
+import com.io7m.jtensors.VectorWritable2FType;
+import com.io7m.jtensors.VectorWritable3FType;
+import com.io7m.jtensors.parameterized.PVector2FType;
+import com.io7m.jtensors.parameterized.PVector3FType;
 import com.io7m.jtensors.parameterized.PVectorM3F;
+import com.io7m.jtensors.parameterized.PVectorReadable2FType;
+import com.io7m.jtensors.parameterized.PVectorReadable3FType;
+import com.io7m.jtensors.parameterized.PVectorWritable2FType;
+import com.io7m.jtensors.parameterized.PVectorWritable3FType;
+import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Assert;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.SortedMap;
 
 public final class PVectorM3FTest<T>
   extends PVectorM3FContract<T, PVectorM3F<T>>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(PVectorM3FTest.class);
+  }
+
   @Override protected PVectorM3F<T> newVectorM3F(final PVectorM3F<T> v0)
   {
     return new PVectorM3F<T>(v0);
@@ -37,5 +62,37 @@ public final class PVectorM3FTest<T>
     final float z)
   {
     return new PVectorM3F<T>(x, y, z);
+  }
+
+  @Test public void testHierarchy()
+  {
+    final PVectorM3F<?> v = new PVectorM3F<Object>();
+
+    Assert.assertTrue(v instanceof Vector3FType);
+    Assert.assertTrue(v instanceof Vector2FType);
+
+    Assert.assertTrue(v instanceof VectorReadable3FType);
+    Assert.assertTrue(v instanceof VectorReadable2FType);
+
+    Assert.assertTrue(v instanceof VectorWritable3FType);
+    Assert.assertTrue(v instanceof VectorWritable2FType);
+
+    Assert.assertTrue(v instanceof PVector3FType);
+    Assert.assertTrue(v instanceof PVector2FType);
+
+    Assert.assertTrue(v instanceof PVectorReadable3FType);
+    Assert.assertTrue(v instanceof PVectorReadable2FType);
+
+    Assert.assertTrue(v instanceof PVectorWritable3FType);
+    Assert.assertTrue(v instanceof PVectorWritable2FType);
+
+    final SortedMap<String, Class<?>> interfaces =
+      TestUtilities.getInterfaces(v.getClass());
+    for (final String k : interfaces.keySet()) {
+      PVectorM3FTest.LOG.debug(
+        "{} implements {}", PVectorM3F.class, k);
+    }
+
+    Assert.assertEquals(12L, (long) interfaces.size());
   }
 }

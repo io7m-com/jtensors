@@ -27,8 +27,10 @@ import com.io7m.jtensors.Vector4FType;
  * @since 7.0.0
  */
 
-public interface PVector4FType<T>
-  extends PVectorReadable4FType<T>, PVectorWritable4FType<T>, Vector4FType
+public interface PVector4FType<T> extends PVectorReadable4FType<T>,
+  PVectorWritable4FType<T>,
+  Vector4FType,
+  PVector3FType<T>
 {
   // No extra functions
 }

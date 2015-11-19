@@ -23,7 +23,8 @@ package com.io7m.jtensors;
  * @since 7.0.0
  */
 
-public interface Vector3LType extends VectorReadable3LType, VectorWritable3LType
+public interface Vector3LType
+  extends VectorReadable3LType, VectorWritable3LType, Vector2LType
 {
   // No extra functions
 }

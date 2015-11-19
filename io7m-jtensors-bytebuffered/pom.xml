@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>io7m-jtensors</artifactId>
-    <version>7.0.0-beta0008</version>
+    <version>7.0.0-beta0009</version>
   </parent>
   <artifactId>io7m-jtensors-bytebuffered</artifactId>
 
