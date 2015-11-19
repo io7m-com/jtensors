@@ -27,8 +27,10 @@ import com.io7m.jtensors.Vector3IType;
  * @since 7.0.0
  */
 
-public interface PVector3IType<T>
-  extends PVectorReadable3IType<T>, PVectorWritable3IType<T>, Vector3IType
+public interface PVector3IType<T> extends PVectorReadable3IType<T>,
+  PVectorWritable3IType<T>,
+  Vector3IType,
+  PVector2IType<T>
 {
   // No extra functions
 }

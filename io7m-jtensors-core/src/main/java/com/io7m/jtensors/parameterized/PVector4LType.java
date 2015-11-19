@@ -27,8 +27,10 @@ import com.io7m.jtensors.Vector4LType;
  * @since 7.0.0
  */
 
-public interface PVector4LType<T>
-  extends PVectorReadable4LType<T>, PVectorWritable4LType<T>, Vector4LType
+public interface PVector4LType<T> extends PVectorReadable4LType<T>,
+  PVectorWritable4LType<T>,
+  Vector4LType,
+  PVector3LType<T>
 {
   // No extra functions
 }

@@ -16,11 +16,30 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
+import com.io7m.jtensors.Vector2LType;
+import com.io7m.jtensors.VectorReadable2LType;
+import com.io7m.jtensors.VectorWritable2LType;
+import com.io7m.jtensors.parameterized.PVector2LType;
 import com.io7m.jtensors.parameterized.PVectorM2L;
+import com.io7m.jtensors.parameterized.PVectorReadable2LType;
+import com.io7m.jtensors.parameterized.PVectorWritable2LType;
+import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Assert;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.SortedMap;
 
 public final class PVectorM2LTest<T>
   extends PVectorM2LContract<T, PVectorM2L<T>>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(PVectorM2LTest.class);
+  }
+
   @Override protected PVectorM2L<T> newVectorM2L(
     final long x,
     final long y)
@@ -36,5 +55,31 @@ public final class PVectorM2LTest<T>
   @Override protected PVectorM2L<T> newVectorM2L()
   {
     return new PVectorM2L<T>();
+  }
+
+  @Test public void testHierarchy()
+  {
+    final PVectorM2L<?> v = new PVectorM2L<Object>();
+
+    Assert.assertTrue(v instanceof Vector2LType);
+
+    Assert.assertTrue(v instanceof VectorReadable2LType);
+
+    Assert.assertTrue(v instanceof VectorWritable2LType);
+
+    Assert.assertTrue(v instanceof PVector2LType);
+
+    Assert.assertTrue(v instanceof PVectorReadable2LType);
+
+    Assert.assertTrue(v instanceof PVectorWritable2LType);
+
+    final SortedMap<String, Class<?>> interfaces =
+      TestUtilities.getInterfaces(v.getClass());
+    for (final String k : interfaces.keySet()) {
+      PVectorM2LTest.LOG.debug(
+        "{} implements {}", PVectorM2L.class, k);
+    }
+
+    Assert.assertEquals(6L, (long) interfaces.size());
   }
 }

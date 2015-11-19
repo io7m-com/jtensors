@@ -25,7 +25,8 @@ import com.io7m.jtensors.bytebuffered.VectorByteBuffered2DType;
  * @since 7.0.0
  */
 
-public interface VectorByteBuffered2Db16Type extends VectorByteBuffered2DType
+public interface VectorByteBuffered2Db16Type
+  extends VectorByteBuffered2DType, Vector2Db16Type
 {
   // No extra functions
 }

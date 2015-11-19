@@ -16,13 +16,33 @@
 
 package com.io7m.jtensors.tests.ieee754b16;
 
+import com.io7m.jtensors.Vector2DType;
+import com.io7m.jtensors.Vector3DType;
+import com.io7m.jtensors.VectorReadable2DType;
+import com.io7m.jtensors.VectorReadable3DType;
+import com.io7m.jtensors.VectorWritable2DType;
+import com.io7m.jtensors.VectorWritable3DType;
+import com.io7m.jtensors.bytebuffered.ByteBufferedType;
+import com.io7m.jtensors.bytebuffered.VectorByteBuffered2DType;
 import com.io7m.jtensors.bytebuffered.VectorByteBuffered3DType;
+import com.io7m.jtensors.ieee754b16.Vector2Db16Type;
+import com.io7m.jtensors.ieee754b16.Vector3Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorByteBuffered2Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorByteBuffered3Db16Type;
 import com.io7m.jtensors.ieee754b16.VectorByteBufferedM3Db16;
+import com.io7m.jtensors.ieee754b16.VectorReadable2Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorReadable3Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorWritable2Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorWritable3Db16Type;
+import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.bytebuffered.VectorByteBufferedM3DContract;
+import org.junit.Assert;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
+import java.util.SortedMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class VectorByteBufferedM3Db16Test
@@ -101,5 +121,43 @@ public final class VectorByteBufferedM3Db16Test
     final ByteBuffer buf = ByteBuffer.allocate(size);
     return VectorByteBufferedM3Db16.newVectorFromByteBufferAndBase(
       buf, base, offset);
+  }
+
+  @Test public void testHierarchy()
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(6);
+    final VectorByteBuffered3Db16Type v =
+      VectorByteBufferedM3Db16.newVectorFromByteBuffer(buf, 0L);
+
+    Assert.assertTrue(v instanceof VectorByteBuffered3Db16Type);
+    Assert.assertTrue(v instanceof VectorByteBuffered3DType);
+    Assert.assertTrue(v instanceof VectorByteBuffered2Db16Type);
+    Assert.assertTrue(v instanceof VectorByteBuffered2DType);
+
+    Assert.assertTrue(v instanceof Vector3Db16Type);
+    Assert.assertTrue(v instanceof Vector3DType);
+    Assert.assertTrue(v instanceof Vector2Db16Type);
+    Assert.assertTrue(v instanceof Vector2DType);
+
+    Assert.assertTrue(v instanceof VectorReadable3Db16Type);
+    Assert.assertTrue(v instanceof VectorReadable3DType);
+    Assert.assertTrue(v instanceof VectorReadable2Db16Type);
+    Assert.assertTrue(v instanceof VectorReadable2DType);
+
+    Assert.assertTrue(v instanceof VectorWritable3Db16Type);
+    Assert.assertTrue(v instanceof VectorWritable3DType);
+    Assert.assertTrue(v instanceof VectorWritable2Db16Type);
+    Assert.assertTrue(v instanceof VectorWritable2DType);
+
+    Assert.assertTrue(v instanceof ByteBufferedType);
+
+    final SortedMap<String, Class<?>> interfaces =
+      TestUtilities.getInterfaces(v.getClass());
+    for (final String k : interfaces.keySet()) {
+      VectorByteBufferedM3Db16Test.LOG.debug(
+        "{} implements {}", VectorByteBufferedM3Db16.class, k);
+    }
+
+    Assert.assertEquals(17L, (long) interfaces.size());
   }
 }

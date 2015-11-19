@@ -16,15 +16,50 @@
 
 package com.io7m.jtensors.tests.ieee754b16.parameterized;
 
+import com.io7m.jtensors.Vector2DType;
+import com.io7m.jtensors.Vector3DType;
+import com.io7m.jtensors.VectorReadable2DType;
+import com.io7m.jtensors.VectorReadable3DType;
+import com.io7m.jtensors.VectorWritable2DType;
+import com.io7m.jtensors.VectorWritable3DType;
+import com.io7m.jtensors.bytebuffered.ByteBufferedType;
+import com.io7m.jtensors.bytebuffered.VectorByteBuffered2DType;
+import com.io7m.jtensors.bytebuffered.VectorByteBuffered3DType;
+import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3DType;
+import com.io7m.jtensors.ieee754b16.Vector2Db16Type;
+import com.io7m.jtensors.ieee754b16.Vector3Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorByteBuffered2Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorByteBuffered3Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorReadable2Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorReadable3Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorWritable2Db16Type;
+import com.io7m.jtensors.ieee754b16.VectorWritable3Db16Type;
+import com.io7m.jtensors.ieee754b16.parameterized.PVector2Db16Type;
+import com.io7m.jtensors.ieee754b16.parameterized.PVector3Db16Type;
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorByteBuffered2Db16Type;
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorByteBuffered3Db16Type;
 import com.io7m.jtensors.ieee754b16.parameterized.PVectorByteBufferedM3Db16;
-import com.io7m.jtensors.tests.bytebuffered.parameterized.PVectorByteBufferedM3DContract;
-
-
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorReadable2Db16Type;
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorReadable3Db16Type;
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorWritable2Db16Type;
+import com.io7m.jtensors.ieee754b16.parameterized.PVectorWritable3Db16Type;
+import com.io7m.jtensors.parameterized.PVector2DType;
+import com.io7m.jtensors.parameterized.PVector3DType;
+import com.io7m.jtensors.parameterized.PVectorReadable2DType;
+import com.io7m.jtensors.parameterized.PVectorReadable3DType;
+import com.io7m.jtensors.parameterized.PVectorWritable2DType;
+import com.io7m.jtensors.parameterized.PVectorWritable3DType;
+import com.io7m.jtensors.tests.TestUtilities;
+import com.io7m.jtensors.tests.bytebuffered.parameterized
+  .PVectorByteBufferedM3DContract;
+import org.junit.Assert;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
+import java.util.SortedMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class PVectorByteBufferedM3Db16Test<T>
@@ -103,5 +138,63 @@ public final class PVectorByteBufferedM3Db16Test<T>
     final ByteBuffer buf = ByteBuffer.allocate(size);
     return PVectorByteBufferedM3Db16.newVectorFromByteBufferAndBase(
       buf, base, offset);
+  }
+
+  @Test public void testHierarchy()
+  {
+    final ByteBuffer buf = ByteBuffer.allocate(6);
+    final PVectorByteBuffered3Db16Type<?> v =
+      PVectorByteBufferedM3Db16.newVectorFromByteBuffer(buf, 0L);
+
+    Assert.assertTrue(v instanceof VectorByteBuffered3Db16Type);
+    Assert.assertTrue(v instanceof VectorByteBuffered3DType);
+    Assert.assertTrue(v instanceof VectorByteBuffered2Db16Type);
+    Assert.assertTrue(v instanceof VectorByteBuffered2DType);
+
+    Assert.assertTrue(v instanceof Vector3Db16Type);
+    Assert.assertTrue(v instanceof Vector3DType);
+    Assert.assertTrue(v instanceof Vector2Db16Type);
+    Assert.assertTrue(v instanceof Vector2DType);
+
+    Assert.assertTrue(v instanceof VectorReadable3Db16Type);
+    Assert.assertTrue(v instanceof VectorReadable3DType);
+    Assert.assertTrue(v instanceof VectorReadable2Db16Type);
+    Assert.assertTrue(v instanceof VectorReadable2DType);
+
+    Assert.assertTrue(v instanceof VectorWritable3Db16Type);
+    Assert.assertTrue(v instanceof VectorWritable3DType);
+    Assert.assertTrue(v instanceof VectorWritable2Db16Type);
+    Assert.assertTrue(v instanceof VectorWritable2DType);
+
+    Assert.assertTrue(v instanceof ByteBufferedType);
+
+    Assert.assertTrue(v instanceof PVectorByteBuffered3Db16Type);
+    Assert.assertTrue(v instanceof PVectorByteBuffered3DType);
+    Assert.assertTrue(v instanceof PVectorByteBuffered2Db16Type);
+    Assert.assertTrue(v instanceof PVectorByteBuffered2DType);
+
+    Assert.assertTrue(v instanceof PVector3Db16Type);
+    Assert.assertTrue(v instanceof PVector3DType);
+    Assert.assertTrue(v instanceof PVector2Db16Type);
+    Assert.assertTrue(v instanceof PVector2DType);
+
+    Assert.assertTrue(v instanceof PVectorReadable3Db16Type);
+    Assert.assertTrue(v instanceof PVectorReadable3DType);
+    Assert.assertTrue(v instanceof PVectorReadable2Db16Type);
+    Assert.assertTrue(v instanceof PVectorReadable2DType);
+
+    Assert.assertTrue(v instanceof PVectorWritable3Db16Type);
+    Assert.assertTrue(v instanceof PVectorWritable3DType);
+    Assert.assertTrue(v instanceof PVectorWritable2Db16Type);
+    Assert.assertTrue(v instanceof PVectorWritable2DType);
+
+    final SortedMap<String, Class<?>> interfaces =
+      TestUtilities.getInterfaces(v.getClass());
+    for (final String k : interfaces.keySet()) {
+      PVectorByteBufferedM3Db16Test.LOG.debug(
+        "{} implements {}", PVectorByteBufferedM3Db16.class, k);
+    }
+
+    Assert.assertEquals(33L, (long) interfaces.size());
   }
 }

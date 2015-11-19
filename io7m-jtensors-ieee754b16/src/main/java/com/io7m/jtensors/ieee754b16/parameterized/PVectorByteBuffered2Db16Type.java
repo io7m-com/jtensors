@@ -17,6 +17,7 @@
 package com.io7m.jtensors.ieee754b16.parameterized;
 
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType;
+import com.io7m.jtensors.ieee754b16.VectorByteBuffered2Db16Type;
 
 /**
  * The type of {@link PVector2Db16Type} values that are also byte buffered.
@@ -26,8 +27,9 @@ import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType;
  * @since 7.0.0
  */
 
-public interface PVectorByteBuffered2Db16Type<T>
-  extends PVector2Db16Type<T>, PVectorByteBuffered2DType<T>
+public interface PVectorByteBuffered2Db16Type<T> extends PVector2Db16Type<T>,
+  PVectorByteBuffered2DType<T>,
+  VectorByteBuffered2Db16Type
 {
   // No extra functions
 }

@@ -27,8 +27,10 @@ import com.io7m.jtensors.Vector4DType;
  * @since 7.0.0
  */
 
-public interface PVector4DType<T>
-  extends PVectorReadable4DType<T>, PVectorWritable4DType<T>, Vector4DType
+public interface PVector4DType<T> extends PVectorReadable4DType<T>,
+  PVectorWritable4DType<T>,
+  Vector4DType,
+  PVector3DType<T>
 {
   // No extra functions
 }

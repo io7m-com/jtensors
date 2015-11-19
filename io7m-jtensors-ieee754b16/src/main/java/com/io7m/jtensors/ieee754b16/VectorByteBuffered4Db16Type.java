@@ -19,15 +19,14 @@ package com.io7m.jtensors.ieee754b16;
 import com.io7m.jtensors.bytebuffered.VectorByteBuffered4DType;
 
 /**
- * The type of {@link VectorByteBuffered4DType} values with
- * elements that are actually stored as <b>IEEE 754</b> {@code binary16}
- * values.
+ * The type of {@link VectorByteBuffered4DType} values with elements that are
+ * actually stored as <b>IEEE 754</b> {@code binary16} values.
  *
  * @since 7.0.0
  */
 
 public interface VectorByteBuffered4Db16Type
-  extends VectorByteBuffered4DType, VectorByteBuffered3Db16Type
+  extends VectorByteBuffered4DType, VectorByteBuffered3Db16Type, Vector4Db16Type
 {
   // No extra functions
 }
