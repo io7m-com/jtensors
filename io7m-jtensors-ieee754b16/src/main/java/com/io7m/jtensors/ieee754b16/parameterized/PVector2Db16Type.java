@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.ieee754b16.parameterized;
 
-import com.io7m.jtensors.Vector2DType;
+import com.io7m.jtensors.parameterized.PVector2DType;
 
 /**
  * <p>The type of two-element vectors that are both readable and writable, and
@@ -28,8 +28,8 @@ import com.io7m.jtensors.Vector2DType;
  * @since 7.0.0
  */
 
-public interface PVector2Db16Type<T>
-  extends PVectorReadable2Db16Type<T>, PVectorWritable2Db16Type<T>, Vector2DType
+public interface PVector2Db16Type<T> extends PVectorReadable2Db16Type<T>,
+  PVectorWritable2Db16Type<T>, PVector2DType<T>
 {
   // No extra functions
 }

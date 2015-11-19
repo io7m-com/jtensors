@@ -16,6 +16,8 @@
 
 package com.io7m.jtensors.ieee754b16;
 
+import com.io7m.jtensors.Vector4DType;
+
 /**
  * <p>The type of four-element vectors that are both readable and writable, and
  * have {@code double} elements that are actually stored as <b>IEEE 754</b>
@@ -25,7 +27,7 @@ package com.io7m.jtensors.ieee754b16;
  */
 
 public interface Vector4Db16Type
-  extends VectorReadable4Db16Type, VectorWritable4Db16Type
+  extends VectorReadable4Db16Type, VectorWritable4Db16Type, Vector4DType
 {
   // No extra functions
 }
