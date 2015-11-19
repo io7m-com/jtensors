@@ -19,7 +19,7 @@
 <s:document
   xmlns:s="http://schemas.io7m.com/structural/2.1.0"
   xmlns:xi="http://www.w3.org/2001/XInclude">
-  <s:document-title>io7m-jtensors 7.0.0-beta0006 Documentation</s:document-title>
+  <s:document-title>io7m-jtensors 7.0.0-beta0007 Documentation</s:document-title>
   <s:document-style>documentation.css</s:document-style>
   <s:document-contents/>
 
@@ -90,7 +90,27 @@
           <s:verbatim s:type="example"><![CDATA[<dependency>
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors-core</artifactId>
-  <version>7.0.0-beta0006</version>
+  <version>7.0.0-beta0007</version>
+</dependency>]]></s:verbatim>
+        </s:paragraph>
+        <s:paragraph>
+          To use the optional <s:term s:type="package">bytebuffered</s:term> module:
+        </s:paragraph>
+        <s:paragraph>
+          <s:verbatim s:type="example"><![CDATA[<dependency>
+  <groupId>com.io7m.jtensors</groupId>
+  <artifactId>io7m-jtensors-bytebuffered</artifactId>
+  <version>7.0.0-beta0007</version>
+</dependency>]]></s:verbatim>
+        </s:paragraph>
+        <s:paragraph>
+          To use the optional <s:term s:type="package">ieee754b16</s:term> module:
+        </s:paragraph>
+        <s:paragraph>
+          <s:verbatim s:type="example"><![CDATA[<dependency>
+  <groupId>com.io7m.jtensors</groupId>
+  <artifactId>io7m-jtensors-ieee754b16</artifactId>
+  <version>7.0.0-beta0007</version>
 </dependency>]]></s:verbatim>
         </s:paragraph>
         <s:paragraph>
