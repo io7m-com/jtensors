@@ -36,7 +36,7 @@ public final class VectorByteBufferedM4FTest
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final VectorByteBuffered4FType v =
-      VectorByteBufferedM4F.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM4F.newVectorFromByteBuffer(buf, 0L);
     v.set4F(x, y, z, w);
     return v;
   }
@@ -45,7 +45,7 @@ public final class VectorByteBufferedM4FTest
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final VectorByteBuffered4FType v =
-      VectorByteBufferedM4F.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM4F.newVectorFromByteBuffer(buf, 0L);
     v.set4F(0.0f, 0.0f, 0.0f, 1.0f);
     return v;
   }
@@ -55,7 +55,7 @@ public final class VectorByteBufferedM4FTest
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final VectorByteBuffered4FType vr =
-      VectorByteBufferedM4F.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM4F.newVectorFromByteBuffer(buf, 0L);
     vr.copyFrom4F(v);
     return vr;
   }

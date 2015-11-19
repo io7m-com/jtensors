@@ -230,9 +230,9 @@ public abstract class VectorM2IContract<T extends Vector2IType>
       final T v1 = this.newVectorM2I(1, 0);
       final double angle = VectorM2I.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
+      
+      
+      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, angle, 0.0));
     }
@@ -244,9 +244,9 @@ public abstract class VectorM2IContract<T extends Vector2IType>
       final T v1 = this.newVectorM2I(y, -x);
       final double angle = VectorM2I.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
+      
+      
+      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -260,9 +260,9 @@ public abstract class VectorM2IContract<T extends Vector2IType>
       final T v1 = this.newVectorM2I(-y, x);
       final double angle = VectorM2I.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
+      
+      
+      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -547,9 +547,9 @@ public abstract class VectorM2IContract<T extends Vector2IType>
       final double ms = (double) VectorM2I.magnitudeSquared(q);
       final double dp = (double) VectorM2I.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
+      
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
@@ -567,8 +567,8 @@ public abstract class VectorM2IContract<T extends Vector2IType>
       final T q = this.newVectorM2I(x, y);
       final double dp = (double) VectorM2I.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }

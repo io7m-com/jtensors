@@ -167,10 +167,6 @@ import org.junit.Test;
       final PVectorI2F<T> v1 = PVectorI2F.normalize(new PVectorI2F<T>(y, -x));
       final double angle = PVectorI2F.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
-
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
           ec, angle, Math.toRadians(90)));
@@ -182,10 +178,6 @@ import org.junit.Test;
       final PVectorI2F<T> v0 = PVectorI2F.normalize(new PVectorI2F<T>(x, y));
       final PVectorI2F<T> v1 = PVectorI2F.normalize(new PVectorI2F<T>(-y, x));
       final double angle = PVectorI2F.angle(v0, v1);
-
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -310,17 +302,13 @@ import org.junit.Test;
       final PVectorI2F<T> v = new PVectorI2F<T>(x, y);
 
       Assert.assertTrue(
-        PVectorI2F.clamp(v, minimum, maximum).getXF()
-        <= maximum);
+        PVectorI2F.clamp(v, minimum, maximum).getXF() <= maximum);
       Assert.assertTrue(
-        PVectorI2F.clamp(v, minimum, maximum).getXF()
-        >= minimum);
+        PVectorI2F.clamp(v, minimum, maximum).getXF() >= minimum);
       Assert.assertTrue(
-        PVectorI2F.clamp(v, minimum, maximum).getYF()
-        <= maximum);
+        PVectorI2F.clamp(v, minimum, maximum).getYF() <= maximum);
       Assert.assertTrue(
-        PVectorI2F.clamp(v, minimum, maximum).getYF()
-        >= minimum);
+        PVectorI2F.clamp(v, minimum, maximum).getYF() >= minimum);
     }
   }
 
@@ -431,9 +419,6 @@ import org.junit.Test;
       final PVectorI2F<T> q = new PVectorI2F<T>(x, y);
       final double dp = PVectorI2F.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
-
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
@@ -450,10 +435,6 @@ import org.junit.Test;
 
       final double ms = PVectorI2F.magnitudeSquared(q);
       final double dp = PVectorI2F.dotProduct(q, q);
-
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
@@ -637,11 +618,6 @@ import org.junit.Test;
 
       final double m = PVectorI2F.magnitude(vr);
 
-      System.out.println("v  : " + v);
-      System.out.println("vr : " + vr);
-      System.out.println("m  : " + m);
-      System.out.println("--");
-
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
     }
   }
@@ -703,15 +679,6 @@ import org.junit.Test;
     final double m0 = PVectorI2F.magnitude(v0);
     final PVectorI2F<T> vr = PVectorI2F.normalize(v0);
     final double mn = PVectorI2F.magnitude(vr);
-
-    System.out.println("v0  : " + v0);
-    System.out.println("dp  : " + dp);
-    System.out.println("m0  : " + m0);
-    System.out.println("ms  : " + ms);
-    System.out.println("mss : " + mss);
-    System.out.println("vr  : " + vr);
-    System.out.println("mn  : " + mn);
-    System.out.println("--");
 
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp, 64.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, mn, 1.0));

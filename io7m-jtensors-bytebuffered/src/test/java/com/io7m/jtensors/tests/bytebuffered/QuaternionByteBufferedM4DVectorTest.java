@@ -19,6 +19,8 @@ package com.io7m.jtensors.tests.bytebuffered;
 import com.io7m.jtensors.Vector4DType;
 import com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4DType;
 import com.io7m.jtensors.bytebuffered.QuaternionByteBufferedM4D;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicLong;
@@ -26,6 +28,32 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class QuaternionByteBufferedM4DVectorTest
   extends VectorByteBufferedM4DContract<QuaternionByteBuffered4DType>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(QuaternionByteBufferedM4DVectorTest.class);
+  }
+
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -100000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 100000000.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return LOG;
+  }
+
   @Override protected Vector4DType newVectorM4DAtIndexFromSize(
     final long size,
     final long offset)

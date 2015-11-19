@@ -308,10 +308,6 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       PVectorM2F.normalizeInPlace(v1);
       final double angle = PVectorM2F.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
-
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, angle, 0.0));
     }
 
@@ -323,10 +319,6 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       PVectorM2F.normalizeInPlace(v0);
       PVectorM2F.normalizeInPlace(v1);
       final double angle = PVectorM2F.angle(v0, v1);
-
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -341,10 +333,6 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       PVectorM2F.normalizeInPlace(v0);
       PVectorM2F.normalizeInPlace(v1);
       final double angle = PVectorM2F.angle(v0, v1);
-
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -653,9 +641,6 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       final V q = this.newVectorM2F(x, y);
       final float dp = PVectorM2F.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
-
       AlmostEqualDouble.almostEqual(ec, 1.0, (double) dp);
     }
   }
@@ -854,10 +839,6 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       Assert.assertNotSame(v, vr);
 
       final double m = PVectorM2F.magnitude(vr);
-
-      System.out.println("v  : " + v);
-      System.out.println("vr : " + vr);
-      System.out.println("m  : " + m);
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
     }

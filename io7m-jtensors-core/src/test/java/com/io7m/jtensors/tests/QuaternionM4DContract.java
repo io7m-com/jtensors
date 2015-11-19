@@ -415,8 +415,8 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final T ql = this.newQuaternion();
     final T qr = this.newQuaternion(0.0, 0.0, 0.0, 1.0);
 
-    System.out.println("ql: " + ql);
-    System.out.println("qr: " + qr);
+    
+    
     Assert.assertTrue(QuaternionM4D.almostEqual(ec, ql, qr));
   }
 
@@ -470,8 +470,8 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       final T q = this.newQuaternion(x, y, z, w);
       final double dp = QuaternionM4D.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
@@ -492,9 +492,9 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       final double ms = QuaternionM4D.magnitudeSquared(q);
       final double dp = QuaternionM4D.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
+      
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
@@ -735,10 +735,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.lookAt(qc, origin, target, axis, qr);
     QuaternionM4D.makeRotationMatrix4x4(qr, mqr);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mqr: ");
-    System.out.println(mqr);
+    
+    
+    
+    
 
     boolean eq = false;
 
@@ -771,10 +771,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.lookAt(qc, origin, target, axis, qr);
     QuaternionM4D.makeRotationMatrix4x4(qr, mqr);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mqr: ");
-    System.out.println(mqr);
+    
+    
+    
+    
 
     boolean eq = false;
 
@@ -824,10 +824,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
         qc, origin, target, QuaternionM4DContract.AXIS_Y, lq);
       QuaternionM4D.makeRotationMatrix4x4(lq, mq);
 
-      System.out.println("ml : ");
-      System.out.println(ml);
-      System.out.println("mq : ");
-      System.out.println(mq);
+      
+      
+      
+      
 
       for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 3; ++col) {
@@ -954,11 +954,11 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       final double m = QuaternionM4D.magnitude(q);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
 
-      System.out.println("axis_r : " + axis_r);
-      System.out.println("axis_n : " + axis_n);
-      System.out.println("m      : " + m);
-      System.out.println("q      : " + q);
-      System.out.println("--");
+      
+      
+      
+      
+      
     }
   }
 
@@ -974,7 +974,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(45.0), q);
     Assert.assertSame(r, q);
 
-    System.out.println("r : " + r);
+    
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1004,7 +1004,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(90.0), q);
     Assert.assertSame(r, q);
 
-    System.out.println("r : " + r);
+    
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1034,7 +1034,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(45.0), q);
     Assert.assertSame(r, q);
 
-    System.out.println("r : " + r);
+    
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1064,7 +1064,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(90.0), q);
     Assert.assertSame(r, q);
 
-    System.out.println("r : " + r);
+    
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1094,7 +1094,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(45.0), q);
     Assert.assertSame(r, q);
 
-    System.out.println("r : " + r);
+    
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1124,7 +1124,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       QuaternionM4D.makeFromAxisAngle(c, axis, Math.toRadians(90.0), q);
     Assert.assertSame(r, q);
 
-    System.out.println("r : " + r);
+    
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1178,15 +1178,15 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       final double mag_qfm = QuaternionM4D.magnitude(qfm);
       final double mag_qaa = QuaternionM4D.magnitude(qaa);
 
-      System.out.println("mag_qfm : " + mag_qfm);
-      System.out.println("mag_qaa : " + mag_qaa);
-      System.out.println("axis    : " + axis);
-      System.out.println("angle   : " + angle);
-      System.out.println("m       : ");
-      System.out.println(m);
-      System.out.println("qfm     : " + qfm);
-      System.out.println("qaa     : " + qaa);
-      System.out.println("--");
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
       /**
        * The resulting quaternions are unit quaternions.
@@ -1256,15 +1256,15 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       final double mag_qfm = QuaternionM4D.magnitude(qfm);
       final double mag_qaa = QuaternionM4D.magnitude(qaa);
 
-      System.out.println("mag_qfm : " + mag_qfm);
-      System.out.println("mag_qaa : " + mag_qaa);
-      System.out.println("axis    : " + axis);
-      System.out.println("angle   : " + angle);
-      System.out.println("m       : ");
-      System.out.println(m);
-      System.out.println("qfm     : " + qfm);
-      System.out.println("qaa     : " + qaa);
-      System.out.println("--");
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
       /**
        * The resulting quaternions are unit quaternions.
@@ -1314,10 +1314,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
@@ -1346,10 +1346,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
@@ -1378,10 +1378,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
@@ -1430,10 +1430,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
@@ -1462,10 +1462,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
@@ -1494,10 +1494,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix3x3(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
@@ -1526,10 +1526,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -1558,10 +1558,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -1590,10 +1590,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -1650,10 +1650,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -1682,10 +1682,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -1714,10 +1714,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
     QuaternionM4D.makeRotationMatrix4x4(q, mq);
 
-    System.out.println("mr: ");
-    System.out.println(mr);
-    System.out.println("mq: ");
-    System.out.println(mq);
+    
+    
+    
+    
 
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -1755,9 +1755,9 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final T qr = this.newQuaternion();
     QuaternionM4D.multiply(qy, qx, qr);
 
-    System.out.println("qx : " + qx);
-    System.out.println("qy : " + qy);
-    System.out.println("qr : " + qr);
+    
+    
+    
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1802,9 +1802,9 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.multiplyInPlace(qr, qy);
     QuaternionM4D.multiplyInPlace(qr, qx);
 
-    System.out.println("qx : " + qx);
-    System.out.println("qy : " + qy);
-    System.out.println("qr : " + qr);
+    
+    
+    
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1849,10 +1849,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.multiplyInPlace(qr, qy);
     QuaternionM4D.multiplyInPlace(qr, qx);
 
-    System.out.println("qx : " + qx);
-    System.out.println("qy : " + qy);
-    System.out.println("qz : " + qz);
-    System.out.println("qr : " + qr);
+    
+    
+    
+    
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1896,10 +1896,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     QuaternionM4D.multiply(qy, qx, qr);
     QuaternionM4D.multiply(qz, qr, qr);
 
-    System.out.println("qx : " + qx);
-    System.out.println("qy : " + qy);
-    System.out.println("qz : " + qz);
-    System.out.println("qr : " + qr);
+    
+    
+    
+    
 
     /**
      * Values obtained by checking against the results produced by Blender.
@@ -1932,10 +1932,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
 
       QuaternionM4D.negate(qi, qr);
 
-      System.out.println("qi : " + qi);
-      System.out.println("qn : " + qn);
-      System.out.println("qr : " + qr);
-      System.out.println("--");
+      
+      
+      
+      
 
       Assert.assertTrue(QuaternionM4D.isNegationOf(context, qi, qr));
       Assert.assertTrue(QuaternionM4D.almostEqual(context, qn, qr));

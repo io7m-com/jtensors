@@ -359,9 +359,9 @@ public class VectorI3LTest extends VectorI3Contract
       final double ms = VectorI3L.magnitudeSquared(q);
       final double dp = VectorI3L.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
+      
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
@@ -381,8 +381,8 @@ public class VectorI3LTest extends VectorI3Contract
       final VectorI3L q = new VectorI3L(x, y, z);
       final double dp = VectorI3L.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }

@@ -20,6 +20,8 @@ import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM2D;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -28,6 +30,32 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class PVectorByteBufferedM2DTest<T>
   extends PVectorByteBufferedM2DContract<T, PVectorByteBuffered2DType<T>>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(PVectorByteBufferedM2DTest.class);
+  }
+
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -100000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 100000000.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return LOG;
+  }
+
   @Override protected PVectorByteBuffered2DType<T> newVectorM2D(
     final double x,
     final double y)

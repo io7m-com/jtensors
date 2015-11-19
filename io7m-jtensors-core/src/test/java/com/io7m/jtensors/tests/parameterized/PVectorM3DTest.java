@@ -17,10 +17,38 @@
 package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.parameterized.PVectorM3D;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class PVectorM3DTest<T>
   extends PVectorM3DContract<T, PVectorM3D<T>>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(PVectorM3DTest.class);
+  }
+
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -1000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 1000000.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return LOG;
+  }
+
   @Override protected PVectorM3D<T> newVectorM3D(final PVectorM3D<T> v)
   {
     return new PVectorM3D<T>(v);

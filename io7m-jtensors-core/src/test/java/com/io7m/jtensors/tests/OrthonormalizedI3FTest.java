@@ -19,11 +19,25 @@ package com.io7m.jtensors.tests;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jtensors.OrthonormalizedI3F;
 import com.io7m.jtensors.VectorI3F;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.jtensors.tests.rules.PercentagePassing;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@SuppressWarnings("static-method") public class OrthonormalizedI3FTest
+public final class OrthonormalizedI3FTest
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(OrthonormalizedI3FTest.class);
+  }
+
+  @Rule public PercentagePassRule percent =
+    new PercentagePassRule(TestUtilities.TEST_RANDOM_ITERATIONS);
+
   @Test public void testAlreadyOrthonormal0()
   {
     final AlmostEqualFloat.ContextRelative ec =
@@ -50,61 +64,56 @@ import org.junit.Test;
     }
   }
 
-  @Test public void testAlwaysOrthnormal()
+  @Test @PercentagePassing public void testAlwaysOrthnormal()
   {
-    final AlmostEqualFloat.ContextRelative ec =
-      TestUtilities.getSingleEqualityContext2dp();
+    final float max = 10000.0f;
 
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float max = 10000.0f;
+    final float x0 = (float) (Math.random() * max);
+    final float y0 = (float) (Math.random() * max);
+    final float z0 = (float) (Math.random() * max);
+    final VectorI3F v0 = new VectorI3F(x0, y0, z0);
 
-      final float x0 = (float) (Math.random() * max);
-      final float y0 = (float) (Math.random() * max);
-      final float z0 = (float) (Math.random() * max);
-      final VectorI3F v0 = new VectorI3F(x0, y0, z0);
+    final float x1 = (float) (Math.random() * max);
+    final float y1 = (float) (Math.random() * max);
+    final float z1 = (float) (Math.random() * max);
+    final VectorI3F v1 = new VectorI3F(x1, y1, z1);
 
-      final float x1 = (float) (Math.random() * max);
-      final float y1 = (float) (Math.random() * max);
-      final float z1 = (float) (Math.random() * max);
-      final VectorI3F v1 = new VectorI3F(x1, y1, z1);
+    final float x2 = (float) (Math.random() * max);
+    final float y2 = (float) (Math.random() * max);
+    final float z2 = (float) (Math.random() * max);
+    final VectorI3F v2 = new VectorI3F(x2, y2, z2);
 
-      final float x2 = (float) (Math.random() * max);
-      final float y2 = (float) (Math.random() * max);
-      final float z2 = (float) (Math.random() * max);
-      final VectorI3F v2 = new VectorI3F(x2, y2, z2);
+    final OrthonormalizedI3F o = new OrthonormalizedI3F(v0, v1, v2);
 
-      final OrthonormalizedI3F o = new OrthonormalizedI3F(v0, v1, v2);
+    final float v0m = VectorI3F.magnitude(o.getV0());
+    final float v1m = VectorI3F.magnitude(o.getV1());
+    final float v2m = VectorI3F.magnitude(o.getV2());
 
-      final float v0m = VectorI3F.magnitude(o.getV0());
-      final float v1m = VectorI3F.magnitude(o.getV1());
-      final float v2m = VectorI3F.magnitude(o.getV2());
+    final float v0_dot_v1 = VectorI3F.dotProduct(o.getV0(), o.getV1());
+    final float v0_dot_v2 = VectorI3F.dotProduct(o.getV0(), o.getV2());
+    final float v1_dot_v2 = VectorI3F.dotProduct(o.getV1(), o.getV2());
 
-      final float v0_dot_v1 = VectorI3F.dotProduct(o.getV0(), o.getV1());
-      final float v0_dot_v2 = VectorI3F.dotProduct(o.getV0(), o.getV2());
-      final float v1_dot_v2 = VectorI3F.dotProduct(o.getV1(), o.getV2());
+    OrthonormalizedI3FTest.LOG.debug("v0              : {}", v0);
+    OrthonormalizedI3FTest.LOG.debug("v1              : {}", v1);
+    OrthonormalizedI3FTest.LOG.debug("v2              : {}", v2);
+    OrthonormalizedI3FTest.LOG.debug("o.v0            : {}", o.getV0());
+    OrthonormalizedI3FTest.LOG.debug("o.v1            : {}", o.getV1());
+    OrthonormalizedI3FTest.LOG.debug("o.v2            : {}", o.getV2());
+    OrthonormalizedI3FTest.LOG.debug("magnitude(o.v0) : {}", v0m);
+    OrthonormalizedI3FTest.LOG.debug("magnitude(o.v1) : {}", v1m);
+    OrthonormalizedI3FTest.LOG.debug("magnitude(o.v2) : {}", v2m);
+    OrthonormalizedI3FTest.LOG.debug("o.v0 dot o.v1   : {}", v0_dot_v1);
+    OrthonormalizedI3FTest.LOG.debug("o.v0 dot o.v2   : {}", v0_dot_v2);
+    OrthonormalizedI3FTest.LOG.debug("o.v1 dot o.v2   : {}", v1_dot_v2);
+    OrthonormalizedI3FTest.LOG.debug("--");
 
-      System.err.println("v0              : " + v0);
-      System.err.println("v1              : " + v1);
-      System.err.println("v2              : " + v2);
-      System.err.println("o.v0            : " + o.getV0());
-      System.err.println("o.v1            : " + o.getV1());
-      System.err.println("o.v2            : " + o.getV2());
-      System.err.println("magniture(o.v0) : " + v0m);
-      System.err.println("magniture(o.v1) : " + v1m);
-      System.err.println("magniture(o.v2) : " + v2m);
-      System.err.println("o.v0 dot o.v1   : " + v0_dot_v1);
-      System.err.println("o.v0 dot o.v2   : " + v0_dot_v2);
-      System.err.println("o.v1 dot o.v2   : " + v1_dot_v2);
-      System.err.println("--");
+    Assert.assertEquals(1.0f, v0m, 0.00001f);
+    Assert.assertEquals(1.0f, v1m, 0.00001f);
+    Assert.assertEquals(1.0f, v2m, 0.00001f);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0m, 1.0f));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v1m, 1.0f));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v2m, 1.0f));
-
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0_dot_v1, 0.0f));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v0_dot_v2, 0.0f));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v1_dot_v2, 0.0f));
-    }
+    Assert.assertEquals(0.0f, v0_dot_v1, 0.00005f);
+    Assert.assertEquals(0.0f, v0_dot_v2, 0.00005f);
+    Assert.assertEquals(0.0f, v1_dot_v2, 0.00005f);
   }
 
   @Test public void testEquals()

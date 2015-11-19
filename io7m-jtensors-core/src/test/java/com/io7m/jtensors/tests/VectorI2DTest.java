@@ -169,9 +169,9 @@ public class VectorI2DTest extends VectorI2Contract
       final VectorI2D v1 = VectorI2D.normalize(new VectorI2D(y, -x));
       final double angle = VectorI2D.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
+      
+      
+      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -185,9 +185,9 @@ public class VectorI2DTest extends VectorI2Contract
       final VectorI2D v1 = VectorI2D.normalize(new VectorI2D(-y, x));
       final double angle = VectorI2D.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
+      
+      
+      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -433,8 +433,8 @@ public class VectorI2DTest extends VectorI2Contract
       final VectorI2D q = new VectorI2D(x, y);
       final double dp = VectorI2D.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
@@ -453,9 +453,9 @@ public class VectorI2DTest extends VectorI2Contract
       final double ms = VectorI2D.magnitudeSquared(q);
       final double dp = VectorI2D.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
+      
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }

@@ -20,6 +20,8 @@ import com.io7m.jtensors.bytebuffered.VectorByteBuffered4DType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM4D;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -28,24 +30,50 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class VectorByteBufferedM4DTest
   extends VectorByteBufferedM4DContract<VectorByteBuffered4DType>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(VectorByteBufferedM4DTest.class);
+  }
+
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -100000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 100000000.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return LOG;
+  }
+
   @Override protected VectorByteBuffered4DType newVectorM4D(
     final double x,
     final double y,
     final double z,
     final double w)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(4 * 8);
     final VectorByteBuffered4DType v =
-      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 0L);
     v.set4D(x, y, z, w);
     return v;
   }
 
   @Override protected VectorByteBuffered4DType newVectorM4D()
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(4 * 8);
     final VectorByteBuffered4DType v =
-      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 0L);
     v.set4D(0.0, 0.0, 0.0, 1.0);
     return v;
   }
@@ -53,9 +81,9 @@ public final class VectorByteBufferedM4DTest
   @Override protected VectorByteBuffered4DType newVectorM4DFrom(
     final VectorByteBuffered4DType v)
   {
-    final ByteBuffer buf = ByteBuffer.allocate(100);
+    final ByteBuffer buf = ByteBuffer.allocate(4 * 8);
     final VectorByteBuffered4DType vr =
-      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 50L);
+      VectorByteBufferedM4D.newVectorFromByteBuffer(buf, 0L);
     vr.copyFrom4D(v);
     return vr;
   }

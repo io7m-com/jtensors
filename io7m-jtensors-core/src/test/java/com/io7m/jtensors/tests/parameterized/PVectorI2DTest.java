@@ -178,10 +178,6 @@ import org.junit.Test;
       final PVectorI2D<T> v1 = PVectorI2D.normalize(new PVectorI2D<T>(y, -x));
       final double angle = PVectorI2D.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
-
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
           ec, angle, Math.toRadians(90)));
@@ -193,10 +189,6 @@ import org.junit.Test;
       final PVectorI2D<T> v0 = PVectorI2D.normalize(new PVectorI2D<T>(x, y));
       final PVectorI2D<T> v1 = PVectorI2D.normalize(new PVectorI2D<T>(-y, x));
       final double angle = PVectorI2D.angle(v0, v1);
-
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -321,17 +313,13 @@ import org.junit.Test;
       final PVectorI2D<T> v = new PVectorI2D<T>(x, y);
 
       Assert.assertTrue(
-        PVectorI2D.clamp(v, minimum, maximum).getXD()
-        <= maximum);
+        PVectorI2D.clamp(v, minimum, maximum).getXD() <= maximum);
       Assert.assertTrue(
-        PVectorI2D.clamp(v, minimum, maximum).getXD()
-        >= minimum);
+        PVectorI2D.clamp(v, minimum, maximum).getXD() >= minimum);
       Assert.assertTrue(
-        PVectorI2D.clamp(v, minimum, maximum).getYD()
-        <= maximum);
+        PVectorI2D.clamp(v, minimum, maximum).getYD() <= maximum);
       Assert.assertTrue(
-        PVectorI2D.clamp(v, minimum, maximum).getYD()
-        >= minimum);
+        PVectorI2D.clamp(v, minimum, maximum).getYD() >= minimum);
     }
   }
 
@@ -442,9 +430,6 @@ import org.junit.Test;
       final PVectorI2D<T> q = new PVectorI2D<T>(x, y);
       final double dp = PVectorI2D.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
-
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
@@ -461,10 +446,6 @@ import org.junit.Test;
 
       final double ms = PVectorI2D.magnitudeSquared(q);
       final double dp = PVectorI2D.dotProduct(q, q);
-
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }

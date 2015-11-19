@@ -551,8 +551,8 @@ public class VectorI4DTest extends VectorI4Contract
       final VectorI4D q = new VectorI4D(x, y, z, w);
       final double dp = VectorI4D.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
@@ -573,9 +573,9 @@ public class VectorI4DTest extends VectorI4Contract
       final double ms = VectorI4D.magnitudeSquared(q);
       final double dp = VectorI4D.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
+      
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }

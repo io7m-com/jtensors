@@ -412,14 +412,14 @@ public class VectorI3DTest extends VectorI3Contract
       final double dp0 = VectorI3D.dotProduct(v0, vr);
       final double dp1 = VectorI3D.dotProduct(v1, vr);
 
-      System.out.println("v0      : " + v0);
-      System.out.println("mag(v0) : " + VectorI3D.magnitude(v0));
-      System.out.println("v1      : " + v1);
-      System.out.println("mag(v1) : " + VectorI3D.magnitude(v1));
-      System.out.println("vr      : " + vr);
-      System.out.println("mag(vr) : " + VectorI3D.magnitude(vr));
-      System.out.println("dp0     : " + dp0);
-      System.out.println("dp1     : " + dp1);
+      
+      
+      
+      
+      
+      
+      
+      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp0, 0.0));
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp1, 0.0));
@@ -529,8 +529,8 @@ public class VectorI3DTest extends VectorI3Contract
       final VectorI3D q = new VectorI3D(x, y, z);
       final double dp = VectorI3D.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
@@ -550,9 +550,9 @@ public class VectorI3DTest extends VectorI3Contract
       final double ms = VectorI3D.magnitudeSquared(q);
       final double dp = VectorI3D.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
+      
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }

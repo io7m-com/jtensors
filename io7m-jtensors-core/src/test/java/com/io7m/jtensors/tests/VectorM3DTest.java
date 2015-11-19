@@ -17,9 +17,37 @@
 package com.io7m.jtensors.tests;
 
 import com.io7m.jtensors.VectorM3D;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class VectorM3DTest extends VectorM3DContract<VectorM3D>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(VectorM3DTest.class);
+  }
+
+  @Override protected double delta()
+  {
+    return 0.0000000000001;
+  }
+
+  @Override protected double randomLargeNegative()
+  {
+    return Math.random() * -100000000.0;
+  }
+
+  @Override protected double randomLargePositive()
+  {
+    return Math.random() * 100000000.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return VectorM3DTest.LOG;
+  }
+
   @Override protected VectorM3D newVectorM3D(final VectorM3D v0)
   {
     return new VectorM3D(v0);

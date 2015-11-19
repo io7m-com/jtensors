@@ -94,6 +94,26 @@
 </dependency>]]></s:verbatim>
         </s:paragraph>
         <s:paragraph>
+          To use the optional <s:term s:type="package">bytebuffered</s:term> module:
+        </s:paragraph>
+        <s:paragraph>
+          <s:verbatim s:type="example"><![CDATA[<dependency>
+  <groupId>${project.groupId}</groupId>
+  <artifactId>${project.parent.artifactId}-bytebuffered</artifactId>
+  <version>${project.version}</version>
+</dependency>]]></s:verbatim>
+        </s:paragraph>
+        <s:paragraph>
+          To use the optional <s:term s:type="package">ieee754b16</s:term> module:
+        </s:paragraph>
+        <s:paragraph>
+          <s:verbatim s:type="example"><![CDATA[<dependency>
+  <groupId>${project.groupId}</groupId>
+  <artifactId>${project.parent.artifactId}-ieee754b16</artifactId>
+  <version>${project.version}</version>
+</dependency>]]></s:verbatim>
+        </s:paragraph>
+        <s:paragraph>
           All <s:link-external s:target="http://io7m.com">io7m.com</s:link-external>
           packages use Semantic Versioning
           <s:footnote>

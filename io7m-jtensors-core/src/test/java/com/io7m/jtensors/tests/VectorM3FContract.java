@@ -628,14 +628,14 @@ public abstract class VectorM3FContract<T extends Vector3FType>
       final double dp0 = VectorM3F.dotProduct(v0, vr);
       final double dp1 = VectorM3F.dotProduct(v1, vr);
 
-      System.out.println("v0      : " + v0);
-      System.out.println("mag(v0) : " + VectorM3F.magnitude(v0));
-      System.out.println("v1      : " + v1);
-      System.out.println("mag(v1) : " + VectorM3F.magnitude(v1));
-      System.out.println("vr      : " + vr);
-      System.out.println("mag(vr) : " + VectorM3F.magnitude(vr));
-      System.out.println("dp0     : " + dp0);
-      System.out.println("dp1     : " + dp1);
+      
+      
+      
+      
+      
+      
+      
+      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp0, 0.0));
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp1, 0.0));
@@ -743,8 +743,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
       final T q = this.newVectorM3F(x, y, z);
       final double dp = VectorM3F.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
@@ -1001,7 +1001,7 @@ public abstract class VectorM3FContract<T extends Vector3FType>
 
       final double m = (double) VectorM3F.magnitude(vr);
 
-      System.out.println("m : " + m);
+      
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, m, 1.0));
     }
   }

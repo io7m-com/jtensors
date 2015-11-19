@@ -774,10 +774,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
-    System.out.println("m : ");
-    System.out.println(m);
-    System.out.println("t : ");
-    System.out.println(t);
+    
+    
+    
+    
 
     boolean eq = false;
 
@@ -823,10 +823,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
-    System.out.println("m : ");
-    System.out.println(m);
-    System.out.println("t : ");
-    System.out.println(t);
+    
+    
+    
+    
 
     boolean eq = false;
 
@@ -872,10 +872,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
-    System.out.println("m : ");
-    System.out.println(m);
-    System.out.println("t : ");
-    System.out.println(t);
+    
+    
+    
+    
 
     boolean eq = false;
 
@@ -921,10 +921,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
-    System.out.println("m : ");
-    System.out.println(m);
-    System.out.println("t : ");
-    System.out.println(t);
+    
+    
+    
+    
 
     boolean eq = false;
 
@@ -972,10 +972,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
-    System.out.println("m : ");
-    System.out.println(m);
-    System.out.println("t : ");
-    System.out.println(t);
+    
+    
+    
+    
 
     boolean eq = false;
 
@@ -1281,13 +1281,13 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       }
       VectorM3F.normalizeInPlace(axis);
 
-      System.out.println("axis  : " + axis);
-      System.out.println("angle : " + angle);
+      
+      
 
       MatrixM3x3F.makeRotation(angle, axis, m);
 
       final double det = MatrixM3x3F.determinant(m);
-      System.out.println("det   : " + det);
+      
 
       AlmostEqualFloat.almostEqual(context, (float) det, 1.0f);
 
@@ -1301,15 +1301,15 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
           final boolean eq =
             AlmostEqualFloat.almostEqual(context, (float) mx, (float) my);
 
-          System.out.println("mi(" + row + ", " + col + ") == " + mx);
-          System.out.println("mt(" + row + ", " + col + ") == " + my);
-          System.out.println(eq);
+          
+          
+          
 
           Assert.assertTrue(eq);
         }
       }
 
-      System.out.println("--");
+      
     }
   }
 
@@ -1331,10 +1331,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     MatrixM3x3F.makeRotation(0.0, Matrix3x3FContract.AXIS_X, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     Assert.assertTrue(VectorM3F.almostEqual(ec, v_exp, v_got));
   }
@@ -1357,10 +1357,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     MatrixM3x3F.makeRotation(0.0, Matrix3x3FContract.AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     Assert.assertTrue(VectorM3F.almostEqual(ec, v_exp, v_got));
   }
@@ -1383,10 +1383,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     MatrixM3x3F.makeRotation(0.0, Matrix3x3FContract.AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     Assert.assertTrue(VectorM3F.almostEqual(ec, v_exp, v_got));
   }
@@ -1419,13 +1419,13 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
 
     MatrixM3x3F.makeRotation(
       Math.toRadians(90.0), Matrix3x3FContract.AXIS_X, m);
-    System.out.println(m);
+    
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1465,10 +1465,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       Math.toRadians(90.0), Matrix3x3FContract.AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1501,10 +1501,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       Math.toRadians(90.0), Matrix3x3FContract.AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1542,13 +1542,13 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
 
     MatrixM3x3F.makeRotation(
       Math.toRadians(-90.0), Matrix3x3FContract.AXIS_X, m);
-    System.out.println(m);
+    
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1588,10 +1588,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       Math.toRadians(-90.0), Matrix3x3FContract.AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1624,10 +1624,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       Math.toRadians(-90.0), Matrix3x3FContract.AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1650,7 +1650,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
-      System.out.println(r);
+      
 
       this.isRotationMatrixX(context_d, r);
 
@@ -1670,7 +1670,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
-      System.out.println(r);
+      
 
       this.isRotationMatrixY(context, r);
 
@@ -1690,7 +1690,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
-      System.out.println(r);
+      
 
       this.isRotationMatrixZ(context_d, r);
 

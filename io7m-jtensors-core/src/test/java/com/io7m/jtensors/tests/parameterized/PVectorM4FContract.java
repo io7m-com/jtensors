@@ -814,9 +814,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
       final V q = this.newVectorM4F(x, y, z, w);
       final double dp = PVectorM4F.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
-
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
@@ -1109,7 +1106,6 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
       final double m = PVectorM4F.magnitude(vr);
 
-      System.out.println("m : " + m);
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, m, 1.0));
     }
   }
