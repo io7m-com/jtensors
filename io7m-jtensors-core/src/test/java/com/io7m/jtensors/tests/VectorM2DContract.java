@@ -19,11 +19,18 @@ package com.io7m.jtensors.tests;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.Vector2DType;
 import com.io7m.jtensors.VectorM2D;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.jtensors.tests.rules.PercentagePassing;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
 
-public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDContract
+public abstract class VectorM2DContract<T extends Vector2DType>
+  extends VectorDContract
 {
+  @Rule public PercentagePassRule percent =
+    new PercentagePassRule(TestUtilities.TEST_RANDOM_ITERATIONS);
+
   protected abstract T newVectorM2D(T v);
 
   protected abstract T newVectorM2D();
@@ -32,38 +39,19 @@ public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDC
     final double x,
     final double y);
 
-  @Test public final void testAbsolute()
+  @Test @PercentagePassing public final void testAbsolute()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = this.randomLargeNegative();
-      final double y = this.randomLargeNegative();
-      final T v = this.newVectorM2D(x, y);
+    final double x = this.randomLargeNegative();
+    final double y = this.randomLargeNegative();
+    final T v = this.newVectorM2D(x, y);
 
-      final T vr = this.newVectorM2D();
-      VectorM2D.absolute(v, vr);
+    final T vr = this.newVectorM2D();
+    VectorM2D.absolute(v, vr);
 
-      Assert.assertEquals(Math.abs(v.getXD()), vr.getXD(), this.delta());
-      Assert.assertEquals(Math.abs(v.getYD()), vr.getYD(), this.delta());
+    Assert.assertEquals(Math.abs(v.getXD()), vr.getXD(), this.delta());
+    Assert.assertEquals(Math.abs(v.getYD()), vr.getYD(), this.delta());
 
-      {
-        final double orig_x = v.getXD();
-        final double orig_y = v.getYD();
-
-        VectorM2D.absoluteInPlace(v);
-
-        Assert.assertEquals(Math.abs(orig_x), v.getXD(), this.delta());
-        Assert.assertEquals(Math.abs(orig_y), v.getYD(), this.delta());
-      }
-    }
-  }
-
-  @Test public final void testAbsoluteMutation()
-  {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = this.randomLargeNegative();
-      final double y = this.randomLargeNegative();
-      final T v = this.newVectorM2D(x, y);
-
+    {
       final double orig_x = v.getXD();
       final double orig_y = v.getYD();
 
@@ -74,32 +62,44 @@ public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDC
     }
   }
 
-  @Test public final void testAdd()
+  @Test @PercentagePassing public final void testAbsoluteMutation()
   {
+    final double x = this.randomLargeNegative();
+    final double y = this.randomLargeNegative();
+    final T v = this.newVectorM2D(x, y);
 
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = this.randomLargePositive();
-      final double y0 = this.randomLargePositive();
-      final T v0 = this.newVectorM2D(x0, y0);
+    final double orig_x = v.getXD();
+    final double orig_y = v.getYD();
 
-      final double x1 = this.randomLargePositive();
-      final double y1 = this.randomLargePositive();
-      final T v1 = this.newVectorM2D(x1, y1);
+    VectorM2D.absoluteInPlace(v);
 
-      final T vr0 = this.newVectorM2D();
-      VectorM2D.add(v0, v1, vr0);
+    Assert.assertEquals(Math.abs(orig_x), v.getXD(), this.delta());
+    Assert.assertEquals(Math.abs(orig_y), v.getYD(), this.delta());
+  }
 
-      Assert.assertEquals(vr0.getXD(), v0.getXD() + v1.getXD(), this.delta());
-      Assert.assertEquals(vr0.getYD(), v0.getYD() + v1.getYD(), this.delta());
+  @Test @PercentagePassing public final void testAdd()
+  {
+    final double x0 = this.randomLargePositive();
+    final double y0 = this.randomLargePositive();
+    final T v0 = this.newVectorM2D(x0, y0);
 
-      {
-        final double orig_x = v0.getXD();
-        final double orig_y = v0.getYD();
-        VectorM2D.addInPlace(v0, v1);
+    final double x1 = this.randomLargePositive();
+    final double y1 = this.randomLargePositive();
+    final T v1 = this.newVectorM2D(x1, y1);
 
-        Assert.assertEquals(v0.getXD(), orig_x + v1.getXD(), this.delta());
-        Assert.assertEquals(v0.getYD(), orig_y + v1.getYD(), this.delta());
-      }
+    final T vr0 = this.newVectorM2D();
+    VectorM2D.add(v0, v1, vr0);
+
+    Assert.assertEquals(vr0.getXD(), v0.getXD() + v1.getXD(), this.delta());
+    Assert.assertEquals(vr0.getYD(), v0.getYD() + v1.getYD(), this.delta());
+
+    {
+      final double orig_x = v0.getXD();
+      final double orig_y = v0.getYD();
+      VectorM2D.addInPlace(v0, v1);
+
+      Assert.assertEquals(v0.getXD(), orig_x + v1.getXD(), this.delta());
+      Assert.assertEquals(v0.getYD(), orig_y + v1.getYD(), this.delta());
     }
   }
 
@@ -139,33 +139,33 @@ public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDC
     Assert.assertEquals(1.0, v1.getYD(), this.delta());
   }
 
-  @Test public final void testAddScaled()
+  @Test @PercentagePassing public final void testAddScaled()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = this.randomLargePositive();
-      final double y0 = this.randomLargePositive();
-      final T v0 = this.newVectorM2D(x0, y0);
+    final double x0 = this.randomLargePositive();
+    final double y0 = this.randomLargePositive();
+    final T v0 = this.newVectorM2D(x0, y0);
 
-      final double x1 = this.randomLargePositive();
-      final double y1 = this.randomLargePositive();
-      final T v1 = this.newVectorM2D(x1, y1);
+    final double x1 = this.randomLargePositive();
+    final double y1 = this.randomLargePositive();
+    final T v1 = this.newVectorM2D(x1, y1);
 
-      final double r = this.randomLargePositive();
+    final double r = this.randomLargePositive();
 
-      final T vr0 = this.newVectorM2D();
-      VectorM2D.addScaled(v0, v1, r, vr0);
+    final T vr0 = this.newVectorM2D();
+    VectorM2D.addScaled(v0, v1, r, vr0);
 
-      Assert.assertEquals(vr0.getXD(), v0.getXD() + (v1.getXD() * r), this.delta());
-      Assert.assertEquals(vr0.getYD(), v0.getYD() + (v1.getYD() * r), this.delta());
+    Assert.assertEquals(
+      vr0.getXD(), v0.getXD() + (v1.getXD() * r), this.delta());
+    Assert.assertEquals(
+      vr0.getYD(), v0.getYD() + (v1.getYD() * r), this.delta());
 
-      {
-        final double orig_x = v0.getXD();
-        final double orig_y = v0.getYD();
-        VectorM2D.addScaledInPlace(v0, v1, r);
+    {
+      final double orig_x = v0.getXD();
+      final double orig_y = v0.getYD();
+      VectorM2D.addScaledInPlace(v0, v1, r);
 
-        Assert.assertEquals(v0.getXD(), orig_x + (v1.getXD() * r), this.delta());
-        Assert.assertEquals(v0.getYD(), orig_y + (v1.getYD() * r), this.delta());
-      }
+      Assert.assertEquals(v0.getXD(), orig_x + (v1.getXD() * r), this.delta());
+      Assert.assertEquals(v0.getYD(), orig_y + (v1.getYD() * r), this.delta());
     }
   }
 
@@ -217,25 +217,23 @@ public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDC
     }
   }
 
-  @Test public final void testAlmostEqualTransitive()
+  @Test @PercentagePassing public final void testAlmostEqualTransitive()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = this.randomLargePositive();
-      final double y0 = this.randomLargePositive();
-      final T v0 = this.newVectorM2D(x0, y0);
-      final T v1 = this.newVectorM2D(x0, y0);
-      final T v2 = this.newVectorM2D(x0, y0);
+    final double x0 = this.randomLargePositive();
+    final double y0 = this.randomLargePositive();
+    final T v0 = this.newVectorM2D(x0, y0);
+    final T v1 = this.newVectorM2D(x0, y0);
+    final T v2 = this.newVectorM2D(x0, y0);
 
-      Assert.assertTrue(VectorM2D.almostEqual(ec, v0, v1));
-      Assert.assertTrue(VectorM2D.almostEqual(ec, v1, v2));
-      Assert.assertTrue(VectorM2D.almostEqual(ec, v0, v2));
-    }
+    Assert.assertTrue(VectorM2D.almostEqual(ec, v0, v1));
+    Assert.assertTrue(VectorM2D.almostEqual(ec, v1, v2));
+    Assert.assertTrue(VectorM2D.almostEqual(ec, v0, v2));
   }
 
-  @Test public final void testAngle()
+  @Test @PercentagePassing public final void testAngle()
   {
     {
       final double x = this.randomLargePositive();
@@ -245,10 +243,6 @@ public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDC
       VectorM2D.normalizeInPlace(v0);
       VectorM2D.normalizeInPlace(v1);
       final double angle = VectorM2D.angle(v0, v1);
-
-      
-      
-      
 
       Assert.assertEquals(angle, Math.toRadians(90.0), this.delta());
     }
@@ -262,10 +256,6 @@ public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDC
       VectorM2D.normalizeInPlace(v1);
       final double angle = VectorM2D.angle(v0, v1);
 
-      
-      
-      
-
       Assert.assertEquals(angle, Math.toRadians(90.0), this.delta());
     }
   }
@@ -278,181 +268,161 @@ public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDC
     Assert.assertEquals(v.getYD(), v.getYD(), this.delta());
   }
 
-  @Test public final void testClampByVectorMaximumOrdering()
+  @Test @PercentagePassing public final void testClampByVectorMaximumOrdering()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double max_x = this.randomLargeNegative();
-      final double max_y = this.randomLargeNegative();
-      final T maximum = this.newVectorM2D(max_x, max_y);
+    final double max_x = this.randomLargeNegative();
+    final double max_y = this.randomLargeNegative();
+    final T maximum = this.newVectorM2D(max_x, max_y);
 
-      final double x = this.randomLargeNegative();
-      final double y = this.randomLargeNegative();
-      final T v = this.newVectorM2D(x, y);
+    final double x = this.randomLargeNegative();
+    final double y = this.randomLargeNegative();
+    final T v = this.newVectorM2D(x, y);
 
-      final T vr = this.newVectorM2D();
-      final T vo = VectorM2D.clampMaximumByVector(v, maximum, vr);
+    final T vr = this.newVectorM2D();
+    final T vo = VectorM2D.clampMaximumByVector(v, maximum, vr);
 
-      Assert.assertEquals(vr, vo);
-      Assert.assertSame(vr, vo);
-      Assert.assertTrue(vr.getXD() <= maximum.getXD());
-      Assert.assertTrue(vr.getYD() <= maximum.getYD());
+    Assert.assertEquals(vr, vo);
+    Assert.assertSame(vr, vo);
+    Assert.assertTrue(vr.getXD() <= maximum.getXD());
+    Assert.assertTrue(vr.getYD() <= maximum.getYD());
 
-      {
-        final T vr0 = VectorM2D.clampMaximumByVectorInPlace(v, maximum);
-        Assert.assertEquals(v, vr0);
-        Assert.assertSame(v, vr0);
-        Assert.assertTrue(v.getXD() <= maximum.getXD());
-        Assert.assertTrue(v.getYD() <= maximum.getYD());
-      }
+    {
+      final T vr0 = VectorM2D.clampMaximumByVectorInPlace(v, maximum);
+      Assert.assertEquals(v, vr0);
+      Assert.assertSame(v, vr0);
+      Assert.assertTrue(v.getXD() <= maximum.getXD());
+      Assert.assertTrue(v.getYD() <= maximum.getYD());
     }
   }
 
-  @Test public final void testClampByVectorMinimumOrdering()
+  @Test @PercentagePassing public final void testClampByVectorMinimumOrdering()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double min_x = this.randomLargePositive();
-      final double min_y = this.randomLargePositive();
-      final T minimum = this.newVectorM2D(min_x, min_y);
+    final double min_x = this.randomLargePositive();
+    final double min_y = this.randomLargePositive();
+    final T minimum = this.newVectorM2D(min_x, min_y);
 
-      final double x = this.randomLargeNegative();
-      final double y = this.randomLargeNegative();
-      final T v = this.newVectorM2D(x, y);
+    final double x = this.randomLargeNegative();
+    final double y = this.randomLargeNegative();
+    final T v = this.newVectorM2D(x, y);
 
-      final T vr = this.newVectorM2D();
-      final T vo = VectorM2D.clampMinimumByVector(v, minimum, vr);
+    final T vr = this.newVectorM2D();
+    final T vo = VectorM2D.clampMinimumByVector(v, minimum, vr);
 
-      Assert.assertEquals(vr, vo);
-      Assert.assertSame(vr, vo);
-      Assert.assertTrue(vr.getXD() >= minimum.getXD());
-      Assert.assertTrue(vr.getYD() >= minimum.getYD());
+    Assert.assertEquals(vr, vo);
+    Assert.assertSame(vr, vo);
+    Assert.assertTrue(vr.getXD() >= minimum.getXD());
+    Assert.assertTrue(vr.getYD() >= minimum.getYD());
 
-      {
-        final T vr0 = VectorM2D.clampMinimumByVectorInPlace(v, minimum);
-        Assert.assertEquals(v, vr0);
-        Assert.assertSame(v, vr0);
-        Assert.assertTrue(v.getXD() >= minimum.getXD());
-        Assert.assertTrue(v.getYD() >= minimum.getYD());
-      }
+    {
+      final T vr0 = VectorM2D.clampMinimumByVectorInPlace(v, minimum);
+      Assert.assertEquals(v, vr0);
+      Assert.assertSame(v, vr0);
+      Assert.assertTrue(v.getXD() >= minimum.getXD());
+      Assert.assertTrue(v.getYD() >= minimum.getYD());
     }
   }
 
-  @Test public final void testClampByVectorOrdering()
+  @Test @PercentagePassing public final void testClampByVectorOrdering()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double min_x = this.randomLargeNegative();
-      final double min_y = this.randomLargeNegative();
-      final T minimum = this.newVectorM2D(min_x, min_y);
+    final double min_x = this.randomLargeNegative();
+    final double min_y = this.randomLargeNegative();
+    final T minimum = this.newVectorM2D(min_x, min_y);
 
-      final double max_x = this.randomLargePositive();
-      final double max_y = this.randomLargePositive();
-      final T maximum = this.newVectorM2D(max_x, max_y);
+    final double max_x = this.randomLargePositive();
+    final double max_y = this.randomLargePositive();
+    final T maximum = this.newVectorM2D(max_x, max_y);
 
-      final double x = this.randomLargeNegative();
-      final double y = this.randomLargePositive();
-      final T v = this.newVectorM2D(x, y);
+    final double x = this.randomLargeNegative();
+    final double y = this.randomLargePositive();
+    final T v = this.newVectorM2D(x, y);
 
-      final T vr = this.newVectorM2D();
-      final T vo = VectorM2D.clampByVector(v, minimum, maximum, vr);
+    final T vr = this.newVectorM2D();
+    final T vo = VectorM2D.clampByVector(v, minimum, maximum, vr);
 
-      Assert.assertEquals(vr, vo);
-      Assert.assertSame(vr, vo);
-      Assert.assertTrue(vr.getXD() <= maximum.getXD());
-      Assert.assertTrue(vr.getYD() <= maximum.getYD());
-      Assert.assertTrue(vr.getXD() >= minimum.getXD());
-      Assert.assertTrue(vr.getYD() >= minimum.getYD());
+    Assert.assertEquals(vr, vo);
+    Assert.assertSame(vr, vo);
+    Assert.assertTrue(vr.getXD() <= maximum.getXD());
+    Assert.assertTrue(vr.getYD() <= maximum.getYD());
+    Assert.assertTrue(vr.getXD() >= minimum.getXD());
+    Assert.assertTrue(vr.getYD() >= minimum.getYD());
 
-      {
-        final T vr0 = VectorM2D.clampByVectorInPlace(v, minimum, maximum);
-        Assert.assertEquals(v, vr0);
-        Assert.assertSame(v, vr0);
-        Assert.assertTrue(v.getXD() <= maximum.getXD());
-        Assert.assertTrue(v.getYD() <= maximum.getYD());
-        Assert.assertTrue(v.getXD() >= minimum.getXD());
-        Assert.assertTrue(v.getYD() >= minimum.getYD());
-      }
+    {
+      final T vr0 = VectorM2D.clampByVectorInPlace(v, minimum, maximum);
+      Assert.assertEquals(v, vr0);
+      Assert.assertSame(v, vr0);
+      Assert.assertTrue(v.getXD() <= maximum.getXD());
+      Assert.assertTrue(v.getYD() <= maximum.getYD());
+      Assert.assertTrue(v.getXD() >= minimum.getXD());
+      Assert.assertTrue(v.getYD() >= minimum.getYD());
     }
   }
 
-  @Test public final void testClampMaximumOrdering()
+  @Test @PercentagePassing public final void testClampMaximumOrdering()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double maximum = this.randomLargeNegative();
+    final double maximum = this.randomLargeNegative();
 
-      final double x = this.randomLargePositive();
-      final double y = this.randomLargePositive();
-      final T v = this.newVectorM2D(x, y);
+    final double x = this.randomLargePositive();
+    final double y = this.randomLargePositive();
+    final T v = this.newVectorM2D(x, y);
 
-      final T vr = this.newVectorM2D();
-      VectorM2D.clampMaximum(v, maximum, vr);
+    final T vr = this.newVectorM2D();
+    VectorM2D.clampMaximum(v, maximum, vr);
 
-      
-      
-      
+    Assert.assertEquals(maximum, vr.getXD(), this.delta());
+    Assert.assertEquals(maximum, vr.getYD(), this.delta());
 
-      Assert.assertEquals(maximum, vr.getXD(), this.delta());
-      Assert.assertEquals(maximum, vr.getYD(), this.delta());
-
-      {
-        VectorM2D.clampMaximumInPlace(v, maximum);
-        Assert.assertEquals(maximum, v.getXD(), this.delta());
-        Assert.assertEquals(maximum, v.getYD(), this.delta());
-      }
+    {
+      VectorM2D.clampMaximumInPlace(v, maximum);
+      Assert.assertEquals(maximum, v.getXD(), this.delta());
+      Assert.assertEquals(maximum, v.getYD(), this.delta());
     }
   }
 
-  @Test public final void testClampMinimumOrdering()
+  @Test @PercentagePassing public final void testClampMinimumOrdering()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double minimum = this.randomLargePositive();
+    final double minimum = this.randomLargePositive();
 
-      final double x = this.randomLargeNegative();
-      final double y = this.randomLargeNegative();
-      final T v = this.newVectorM2D(x, y);
+    final double x = this.randomLargeNegative();
+    final double y = this.randomLargeNegative();
+    final T v = this.newVectorM2D(x, y);
 
-      final T vr = this.newVectorM2D();
-      VectorM2D.clampMinimum(v, minimum, vr);
+    final T vr = this.newVectorM2D();
+    VectorM2D.clampMinimum(v, minimum, vr);
 
-      
-      
-      
+    Assert.assertEquals(minimum, vr.getXD(), this.delta());
+    Assert.assertEquals(minimum, vr.getYD(), this.delta());
 
-      Assert.assertEquals(minimum, vr.getXD(), this.delta());
-      Assert.assertEquals(minimum, vr.getYD(), this.delta());
-
-      {
-        VectorM2D.clampMinimumInPlace(v, minimum);
-        Assert.assertEquals(minimum, v.getXD(), this.delta());
-        Assert.assertEquals(minimum, v.getYD(), this.delta());
-      }
+    {
+      VectorM2D.clampMinimumInPlace(v, minimum);
+      Assert.assertEquals(minimum, v.getXD(), this.delta());
+      Assert.assertEquals(minimum, v.getYD(), this.delta());
     }
   }
 
-  @Test public final void testClampOrdering()
+  @Test @PercentagePassing public final void testClampOrdering()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double minimum = this.randomLargeNegative();
-      final double maximum = this.randomLargePositive();
+    final double minimum = this.randomLargeNegative();
+    final double maximum = this.randomLargePositive();
 
-      final double x = this.randomLargeNegative();
-      final double y = this.randomLargePositive();
-      final T v = this.newVectorM2D(x, y);
+    final double x = this.randomLargeNegative();
+    final double y = this.randomLargePositive();
+    final T v = this.newVectorM2D(x, y);
 
-      final T vr = this.newVectorM2D();
-      VectorM2D.clamp(v, minimum, maximum, vr);
+    final T vr = this.newVectorM2D();
+    VectorM2D.clamp(v, minimum, maximum, vr);
 
-      Assert.assertTrue(vr.getXD() <= maximum);
-      Assert.assertTrue(vr.getXD() >= minimum);
-      Assert.assertTrue(vr.getYD() <= maximum);
-      Assert.assertTrue(vr.getYD() >= minimum);
+    Assert.assertTrue(vr.getXD() <= maximum);
+    Assert.assertTrue(vr.getXD() >= minimum);
+    Assert.assertTrue(vr.getYD() <= maximum);
+    Assert.assertTrue(vr.getYD() >= minimum);
 
-      {
-        VectorM2D.clampInPlace(v, minimum, maximum);
+    {
+      VectorM2D.clampInPlace(v, minimum, maximum);
 
-        Assert.assertTrue(v.getXD() <= maximum);
-        Assert.assertTrue(v.getXD() >= minimum);
-        Assert.assertTrue(v.getYD() <= maximum);
-        Assert.assertTrue(v.getYD() >= minimum);
-      }
+      Assert.assertTrue(v.getXD() <= maximum);
+      Assert.assertTrue(v.getXD() >= minimum);
+      Assert.assertTrue(v.getYD() <= maximum);
+      Assert.assertTrue(v.getYD() >= minimum);
     }
   }
 
@@ -504,21 +474,19 @@ public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDC
         ec, VectorM2D.distance(c, v0, v1), 1.0));
   }
 
-  @Test public final void testDistanceOrdering()
+  @Test @PercentagePassing public final void testDistanceOrdering()
   {
     final VectorM2D.ContextVM2D c = new VectorM2D.ContextVM2D();
 
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = this.randomLargePositive();
-      final double y0 = this.randomLargePositive();
-      final T v0 = this.newVectorM2D(x0, y0);
+    final double x0 = this.randomLargePositive();
+    final double y0 = this.randomLargePositive();
+    final T v0 = this.newVectorM2D(x0, y0);
 
-      final double x1 = this.randomLargePositive();
-      final double y1 = this.randomLargePositive();
-      final T v1 = this.newVectorM2D(x1, y1);
+    final double x1 = this.randomLargePositive();
+    final double y1 = this.randomLargePositive();
+    final T v1 = this.newVectorM2D(x1, y1);
 
-      Assert.assertTrue(VectorM2D.distance(c, v0, v1) >= 0.0);
-    }
+    Assert.assertTrue(VectorM2D.distance(c, v0, v1) >= 0.0);
   }
 
   @Test public final void testDotProduct()
@@ -693,58 +661,52 @@ public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDC
     Assert.assertEquals(v1.getYD(), v0.getYD(), this.delta());
   }
 
-  @Test public final void testInterpolateLinearLimits()
+  @Test @PercentagePassing public final void testInterpolateLinearLimits()
   {
     final VectorM2D.ContextVM2D c = new VectorM2D.ContextVM2D();
 
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = this.randomLargePositive();
-      final double y0 = this.randomLargePositive();
-      final T v0 = this.newVectorM2D(x0, y0);
+    final double x0 = this.randomLargePositive();
+    final double y0 = this.randomLargePositive();
+    final T v0 = this.newVectorM2D(x0, y0);
 
-      final double x1 = this.randomLargePositive();
-      final double y1 = this.randomLargePositive();
-      final T v1 = this.newVectorM2D(x1, y1);
+    final double x1 = this.randomLargePositive();
+    final double y1 = this.randomLargePositive();
+    final T v1 = this.newVectorM2D(x1, y1);
 
-      final T vr0 = this.newVectorM2D();
-      final T vr1 = this.newVectorM2D();
-      VectorM2D.interpolateLinear(c, v0, v1, 0.0, vr0);
-      VectorM2D.interpolateLinear(c, v0, v1, 1.0, vr1);
+    final T vr0 = this.newVectorM2D();
+    final T vr1 = this.newVectorM2D();
+    VectorM2D.interpolateLinear(c, v0, v1, 0.0, vr0);
+    VectorM2D.interpolateLinear(c, v0, v1, 1.0, vr1);
 
-      Assert.assertEquals(v0.getXD(), vr0.getXD(), this.delta());
-      Assert.assertEquals(v0.getYD(), vr0.getYD(), this.delta());
-      Assert.assertEquals(v1.getXD(), vr1.getXD(), this.delta());
-      Assert.assertEquals(v1.getYD(), vr1.getYD(), this.delta());
-    }
+    Assert.assertEquals(v0.getXD(), vr0.getXD(), this.delta());
+    Assert.assertEquals(v0.getYD(), vr0.getYD(), this.delta());
+    Assert.assertEquals(v1.getXD(), vr1.getXD(), this.delta());
+    Assert.assertEquals(v1.getYD(), vr1.getYD(), this.delta());
   }
 
-  @Test public final void testMagnitudeNonzero()
+  @Test @PercentagePassing public final void testMagnitudeNonzero()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = this.randomLargePositive();
-      final double y = this.randomLargePositive();
-      final T v = this.newVectorM2D(x, y);
+    final double x = this.randomLargePositive();
+    final double y = this.randomLargePositive();
+    final T v = this.newVectorM2D(x, y);
 
-      final double m = VectorM2D.magnitude(v);
-      
-      Assert.assertTrue(m > 0.0);
-    }
+    final double m = VectorM2D.magnitude(v);
+
+    Assert.assertTrue(m > 0.0);
   }
 
-  @Test public final void testMagnitudeNormal()
+  @Test @PercentagePassing public final void testMagnitudeNormal()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = this.randomLargePositive();
-      final double y = this.randomLargePositive();
-      final T v = this.newVectorM2D(x, y);
+    final double x = this.randomLargePositive();
+    final double y = this.randomLargePositive();
+    final T v = this.newVectorM2D(x, y);
 
-      final T vr = this.newVectorM2D();
-      VectorM2D.normalize(v, vr);
-      Assert.assertNotSame(v, vr);
+    final T vr = this.newVectorM2D();
+    VectorM2D.normalize(v, vr);
+    Assert.assertNotSame(v, vr);
 
-      final double m = VectorM2D.magnitude(vr);
-      Assert.assertEquals(m, 1.0, this.delta());
-    }
+    final double m = VectorM2D.magnitude(vr);
+    Assert.assertEquals(m, 1.0, this.delta());
   }
 
   @Test public final void testMagnitudeNormalizeZero()
@@ -884,52 +846,48 @@ public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDC
     Assert.assertEquals(2.0, v0.getYD(), this.delta());
   }
 
-  @Test public final void testScaleOne()
+  @Test @PercentagePassing public final void testScaleOne()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = this.randomLargePositive();
-      final double y = this.randomLargePositive();
-      final T v = this.newVectorM2D(x, y);
+    final double x = this.randomLargePositive();
+    final double y = this.randomLargePositive();
+    final T v = this.newVectorM2D(x, y);
 
-      final T vr = this.newVectorM2D();
+    final T vr = this.newVectorM2D();
 
-      VectorM2D.scale(v, 1.0, vr);
+    VectorM2D.scale(v, 1.0, vr);
 
-      Assert.assertEquals(v.getXD(), vr.getXD(), this.delta());
-      Assert.assertEquals(v.getYD(), vr.getYD(), this.delta());
+    Assert.assertEquals(v.getXD(), vr.getXD(), this.delta());
+    Assert.assertEquals(v.getYD(), vr.getYD(), this.delta());
 
-      {
-        final double orig_x = v.getXD();
-        final double orig_y = v.getYD();
+    {
+      final double orig_x = v.getXD();
+      final double orig_y = v.getYD();
 
-        VectorM2D.scaleInPlace(v, 1.0);
+      VectorM2D.scaleInPlace(v, 1.0);
 
-        Assert.assertEquals(v.getXD(), orig_x, this.delta());
-        Assert.assertEquals(v.getYD(), orig_y, this.delta());
-      }
+      Assert.assertEquals(v.getXD(), orig_x, this.delta());
+      Assert.assertEquals(v.getYD(), orig_y, this.delta());
     }
   }
 
-  @Test public final void testScaleZero()
+  @Test @PercentagePassing public final void testScaleZero()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = this.randomLargePositive();
-      final double y = this.randomLargePositive();
-      final T v = this.newVectorM2D(x, y);
+    final double x = this.randomLargePositive();
+    final double y = this.randomLargePositive();
+    final T v = this.newVectorM2D(x, y);
 
-      final T vr = this.newVectorM2D();
+    final T vr = this.newVectorM2D();
 
-      VectorM2D.scale(v, 0.0, vr);
+    VectorM2D.scale(v, 0.0, vr);
 
-      Assert.assertEquals(vr.getXD(), 0.0, this.delta());
-      Assert.assertEquals(vr.getYD(), 0.0, this.delta());
+    Assert.assertEquals(vr.getXD(), 0.0, this.delta());
+    Assert.assertEquals(vr.getYD(), 0.0, this.delta());
 
-      {
-        VectorM2D.scaleInPlace(v, 0.0);
+    {
+      VectorM2D.scaleInPlace(v, 0.0);
 
-        Assert.assertEquals(v.getXD(), 0.0, this.delta());
-        Assert.assertEquals(v.getYD(), 0.0, this.delta());
-      }
+      Assert.assertEquals(v.getXD(), 0.0, this.delta());
+      Assert.assertEquals(v.getYD(), 0.0, this.delta());
     }
   }
 
@@ -939,31 +897,29 @@ public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDC
     Assert.assertTrue(v.toString().endsWith("0.0 1.0]"));
   }
 
-  @Test public final void testSubtract()
+  @Test @PercentagePassing public final void testSubtract()
   {
-    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = this.randomLargePositive();
-      final double y0 = this.randomLargePositive();
-      final T v0 = this.newVectorM2D(x0, y0);
+    final double x0 = this.randomLargePositive();
+    final double y0 = this.randomLargePositive();
+    final T v0 = this.newVectorM2D(x0, y0);
 
-      final double x1 = this.randomLargePositive();
-      final double y1 = this.randomLargePositive();
-      final T v1 = this.newVectorM2D(x1, y1);
+    final double x1 = this.randomLargePositive();
+    final double y1 = this.randomLargePositive();
+    final T v1 = this.newVectorM2D(x1, y1);
 
-      final T vr0 = this.newVectorM2D();
-      VectorM2D.subtract(v0, v1, vr0);
+    final T vr0 = this.newVectorM2D();
+    VectorM2D.subtract(v0, v1, vr0);
 
-      Assert.assertEquals(vr0.getXD(), v0.getXD() - v1.getXD(), this.delta());
-      Assert.assertEquals(vr0.getYD(), v0.getYD() - v1.getYD(), this.delta());
+    Assert.assertEquals(vr0.getXD(), v0.getXD() - v1.getXD(), this.delta());
+    Assert.assertEquals(vr0.getYD(), v0.getYD() - v1.getYD(), this.delta());
 
-      {
-        final double orig_x = v0.getXD();
-        final double orig_y = v0.getYD();
-        VectorM2D.subtractInPlace(v0, v1);
+    {
+      final double orig_x = v0.getXD();
+      final double orig_y = v0.getYD();
+      VectorM2D.subtractInPlace(v0, v1);
 
-        Assert.assertEquals(v0.getXD(), orig_x - v1.getXD(), this.delta());
-        Assert.assertEquals(v0.getYD(), orig_y - v1.getYD(), this.delta());
-      }
+      Assert.assertEquals(v0.getXD(), orig_x - v1.getXD(), this.delta());
+      Assert.assertEquals(v0.getYD(), orig_y - v1.getYD(), this.delta());
     }
   }
 
