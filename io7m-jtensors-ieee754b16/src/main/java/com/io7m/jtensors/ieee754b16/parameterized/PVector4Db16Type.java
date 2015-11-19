@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.ieee754b16.parameterized;
 
-import com.io7m.jtensors.Vector4DType;
+import com.io7m.jtensors.parameterized.PVector4DType;
 
 /**
  * <p>The type of four-element vectors that are both readable and writable, and
@@ -28,8 +28,8 @@ import com.io7m.jtensors.Vector4DType;
  * @since 7.0.0
  */
 
-public interface PVector4Db16Type<T>
-  extends PVectorReadable4Db16Type<T>, PVectorWritable4Db16Type<T>, Vector4DType
+public interface PVector4Db16Type<T> extends PVectorReadable4Db16Type<T>,
+  PVectorWritable4Db16Type<T>, PVector4DType<T>
 {
   // No extra functions
 }

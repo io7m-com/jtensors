@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.ieee754b16.parameterized;
 
-import com.io7m.jtensors.Vector3DType;
+import com.io7m.jtensors.parameterized.PVector3DType;
 
 /**
  * <p>The type of three-element vectors that are both readable and writable, and
@@ -28,8 +28,8 @@ import com.io7m.jtensors.Vector3DType;
  * @since 7.0.0
  */
 
-public interface PVector3Db16Type<T>
-  extends PVectorReadable3Db16Type<T>, PVectorWritable3Db16Type<T>, Vector3DType
+public interface PVector3Db16Type<T> extends PVectorReadable3Db16Type<T>,
+  PVectorWritable3Db16Type<T>, PVector3DType<T>
 {
   // No extra functions
 }

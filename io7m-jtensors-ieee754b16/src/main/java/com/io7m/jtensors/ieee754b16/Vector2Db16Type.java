@@ -16,6 +16,8 @@
 
 package com.io7m.jtensors.ieee754b16;
 
+import com.io7m.jtensors.Vector2DType;
+
 /**
  * <p>The type of two-element vectors that are both readable and writable, and
  * have {@code double} elements that are actually stored as <b>IEEE 754</b>
@@ -25,7 +27,7 @@ package com.io7m.jtensors.ieee754b16;
  */
 
 public interface Vector2Db16Type
-  extends VectorReadable2Db16Type, VectorWritable2Db16Type
+  extends VectorReadable2Db16Type, VectorWritable2Db16Type, Vector2DType
 {
   // No extra functions
 }

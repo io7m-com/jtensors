@@ -16,6 +16,8 @@
 
 package com.io7m.jtensors.ieee754b16;
 
+import com.io7m.jtensors.Vector3DType;
+
 /**
  * <p>The type of three-element vectors that are both readable and writable, and
  * have {@code double} elements that are actually stored as <b>IEEE 754</b>
@@ -25,7 +27,7 @@ package com.io7m.jtensors.ieee754b16;
  */
 
 public interface Vector3Db16Type
-  extends VectorReadable3Db16Type, VectorWritable3Db16Type
+  extends VectorReadable3Db16Type, VectorWritable3Db16Type, Vector3DType
 {
   // No extra functions
 }
