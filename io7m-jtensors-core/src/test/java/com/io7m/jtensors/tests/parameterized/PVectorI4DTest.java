@@ -412,29 +412,21 @@ import org.junit.Test;
       final PVectorI4D<T> v = new PVectorI4D<T>(x, y, z, w);
 
       Assert.assertTrue(
-        PVectorI4D.clamp(v, minimum, maximum).getXD()
-        <= maximum);
+        PVectorI4D.clamp(v, minimum, maximum).getXD() <= maximum);
       Assert.assertTrue(
-        PVectorI4D.clamp(v, minimum, maximum).getXD()
-        >= minimum);
+        PVectorI4D.clamp(v, minimum, maximum).getXD() >= minimum);
       Assert.assertTrue(
-        PVectorI4D.clamp(v, minimum, maximum).getYD()
-        <= maximum);
+        PVectorI4D.clamp(v, minimum, maximum).getYD() <= maximum);
       Assert.assertTrue(
-        PVectorI4D.clamp(v, minimum, maximum).getYD()
-        >= minimum);
+        PVectorI4D.clamp(v, minimum, maximum).getYD() >= minimum);
       Assert.assertTrue(
-        PVectorI4D.clamp(v, minimum, maximum).getZD()
-        <= maximum);
+        PVectorI4D.clamp(v, minimum, maximum).getZD() <= maximum);
       Assert.assertTrue(
-        PVectorI4D.clamp(v, minimum, maximum).getZD()
-        >= minimum);
+        PVectorI4D.clamp(v, minimum, maximum).getZD() >= minimum);
       Assert.assertTrue(
-        PVectorI4D.clamp(v, minimum, maximum).getWD()
-        <= maximum);
+        PVectorI4D.clamp(v, minimum, maximum).getWD() <= maximum);
       Assert.assertTrue(
-        PVectorI4D.clamp(v, minimum, maximum).getWD()
-        >= minimum);
+        PVectorI4D.clamp(v, minimum, maximum).getWD() >= minimum);
     }
   }
 
@@ -566,9 +558,6 @@ import org.junit.Test;
       final PVectorI4D<T> q = new PVectorI4D<T>(x, y, z, w);
       final double dp = PVectorI4D.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
-
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
@@ -587,10 +576,6 @@ import org.junit.Test;
 
       final double ms = PVectorI4D.magnitudeSquared(q);
       final double dp = PVectorI4D.dotProduct(q, q);
-
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }

@@ -232,10 +232,6 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
       final V v1 = this.newVectorM2I(1, 0);
       final double angle = PVectorM2I.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
-
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, angle, 0.0));
     }
 
@@ -245,10 +241,6 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
       final V v0 = this.newVectorM2I(x, y);
       final V v1 = this.newVectorM2I(y, -x);
       final double angle = PVectorM2I.angle(v0, v1);
-
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -261,10 +253,6 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
       final V v0 = this.newVectorM2I(x, y);
       final V v1 = this.newVectorM2I(-y, x);
       final double angle = PVectorM2I.angle(v0, v1);
-
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -555,10 +543,6 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
       final double ms = (double) PVectorM2I.magnitudeSquared(q);
       final double dp = (double) PVectorM2I.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
-
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
   }
@@ -574,9 +558,6 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
       final int y = (int) (PVectorM2IContract.getRandom() * (double) max);
       final V q = this.newVectorM2I(x, y);
       final double dp = (double) PVectorM2I.dotProduct(q, q);
-
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }

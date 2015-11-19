@@ -88,28 +88,28 @@ import org.junit.Test;
       {
         final float expected = v0.getXF() + v1.getXF();
         final float got = vr.getXF();
-        System.out.println("x: expected " + expected + " got " + got);
+
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getYF() + v1.getYF();
         final float got = vr.getYF();
-        System.out.println("y: expected " + expected + " got " + got);
+
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getZF() + v1.getZF();
         final float got = vr.getZF();
-        System.out.println("z: expected " + expected + " got " + got);
+
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getWF() + v1.getWF();
         final float got = vr.getWF();
-        System.out.println("w: expected " + expected + " got " + got);
+
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
     }
@@ -138,28 +138,28 @@ import org.junit.Test;
       {
         final float expected = v0.getXF() + (v1.getXF() * r);
         final float got = vr.getXF();
-        System.out.println("x: expected " + expected + " got " + got);
+
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getYF() + (v1.getYF() * r);
         final float got = vr.getYF();
-        System.out.println("y: expected " + expected + " got " + got);
+
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getZF() + (v1.getZF() * r);
         final float got = vr.getZF();
-        System.out.println("z: expected " + expected + " got " + got);
+
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getWF() + (v1.getWF() * r);
         final float got = vr.getWF();
-        System.out.println("w: expected " + expected + " got " + got);
+
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
     }
@@ -440,29 +440,21 @@ import org.junit.Test;
       final PVectorI4F<T> v = new PVectorI4F<T>(x, y, z, w);
 
       Assert.assertTrue(
-        PVectorI4F.clamp(v, minimum, maximum).getXF()
-        <= maximum);
+        PVectorI4F.clamp(v, minimum, maximum).getXF() <= maximum);
       Assert.assertTrue(
-        PVectorI4F.clamp(v, minimum, maximum).getXF()
-        >= minimum);
+        PVectorI4F.clamp(v, minimum, maximum).getXF() >= minimum);
       Assert.assertTrue(
-        PVectorI4F.clamp(v, minimum, maximum).getYF()
-        <= maximum);
+        PVectorI4F.clamp(v, minimum, maximum).getYF() <= maximum);
       Assert.assertTrue(
-        PVectorI4F.clamp(v, minimum, maximum).getYF()
-        >= minimum);
+        PVectorI4F.clamp(v, minimum, maximum).getYF() >= minimum);
       Assert.assertTrue(
-        PVectorI4F.clamp(v, minimum, maximum).getZF()
-        <= maximum);
+        PVectorI4F.clamp(v, minimum, maximum).getZF() <= maximum);
       Assert.assertTrue(
-        PVectorI4F.clamp(v, minimum, maximum).getZF()
-        >= minimum);
+        PVectorI4F.clamp(v, minimum, maximum).getZF() >= minimum);
       Assert.assertTrue(
-        PVectorI4F.clamp(v, minimum, maximum).getWF()
-        <= maximum);
+        PVectorI4F.clamp(v, minimum, maximum).getWF() <= maximum);
       Assert.assertTrue(
-        PVectorI4F.clamp(v, minimum, maximum).getWF()
-        >= minimum);
+        PVectorI4F.clamp(v, minimum, maximum).getWF() >= minimum);
     }
   }
 
@@ -588,9 +580,6 @@ import org.junit.Test;
       final PVectorI4F<T> q = new PVectorI4F<T>(x, y, z, w);
       final double dp = PVectorI4F.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
-
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
@@ -609,10 +598,6 @@ import org.junit.Test;
 
       final double ms = PVectorI4F.magnitudeSquared(q);
       final double dp = PVectorI4F.dotProduct(q, q);
-
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
@@ -831,10 +816,6 @@ import org.junit.Test;
       Assert.assertNotSame(v, vr);
 
       final double m = PVectorI4F.magnitude(vr);
-
-      System.out.println("v  : " + v);
-      System.out.println("vr : " + vr);
-      System.out.println("m  : " + m);
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
     }

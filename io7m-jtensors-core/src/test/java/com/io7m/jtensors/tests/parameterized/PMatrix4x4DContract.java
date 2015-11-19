@@ -432,13 +432,6 @@ public abstract class PMatrix4x4DContract<T0, T1, T2,
       this.checkDirectBufferInvariantsUntyped(m1);
       this.checkDirectBufferInvariantsUntyped(m1);
 
-      System.out.println("m0 : ");
-      System.out.println(m0);
-      System.out.println("m1 : ");
-      System.out.println(m1);
-      System.out.println("rm : ");
-      System.out.println(m1);
-
       eq = AlmostEqualDouble.almostEqual(
         context_d, m1.getRowColumnD(0, 0), -0.09375);
       Assert.assertTrue(eq);

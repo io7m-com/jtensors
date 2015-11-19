@@ -657,10 +657,6 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
       final double ms = (double) PVectorM4L.magnitudeSquared(q);
       final double dp = (double) PVectorM4L.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
-
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
   }
@@ -680,9 +676,6 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
       final long w = (long) (Math.random() * (double) max);
       final V q = this.newVectorM4L(x, y, z, w);
       final double dp = (double) PVectorM4L.dotProduct(q, q);
-
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }

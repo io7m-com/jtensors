@@ -20,6 +20,8 @@ import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3DType;
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM3D;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -28,6 +30,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class PVectorByteBufferedM3DTest<T>
   extends PVectorByteBufferedM3DContract<T, PVectorByteBuffered3DType<T>>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(PVectorByteBufferedM3DTest.class);
+  }
+
   @Override protected double delta()
   {
     return 0.0000000000001;
@@ -41,6 +49,11 @@ public final class PVectorByteBufferedM3DTest<T>
   @Override protected double randomLargePositive()
   {
     return Math.random() * 1000000.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return PVectorByteBufferedM3DTest.LOG;
   }
 
   @Override protected PVectorByteBuffered3DType<T> newVectorM3D(

@@ -642,9 +642,9 @@ public abstract class VectorM4LContract<T extends Vector4LType>
       final double ms = (double) VectorM4L.magnitudeSquared(q);
       final double dp = (double) VectorM4L.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
+      
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
@@ -666,8 +666,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
       final T q = this.newVectorM4L(x, y, z, w);
       final double dp = (double) VectorM4L.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }

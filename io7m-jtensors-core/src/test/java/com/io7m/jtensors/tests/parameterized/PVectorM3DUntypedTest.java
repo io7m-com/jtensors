@@ -18,10 +18,18 @@ package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.parameterized.PVectorM3D;
 import com.io7m.jtensors.tests.VectorM3DContract;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class PVectorM3DUntypedTest<T>
   extends VectorM3DContract<PVectorM3D<T>>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(PVectorM3DUntypedTest.class);
+  }
+
   @Override protected double delta()
   {
     return 0.0000000000001;
@@ -35,6 +43,11 @@ public final class PVectorM3DUntypedTest<T>
   @Override protected double randomLargePositive()
   {
     return Math.random() * 100000000.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return PVectorM3DUntypedTest.LOG;
   }
 
   @Override protected PVectorM3D<T> newVectorM3D(final PVectorM3D<T> v)

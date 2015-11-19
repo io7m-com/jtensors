@@ -17,10 +17,18 @@
 package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jtensors.parameterized.PVectorM4D;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class PVectorM4DTest<T>
   extends PVectorM4DContract<T, PVectorM4D<T>>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(PVectorM4DTest.class);
+  }
+
   @Override protected double delta()
   {
     return 0.0000000000001;
@@ -34,6 +42,11 @@ public final class PVectorM4DTest<T>
   @Override protected double randomLargePositive()
   {
     return Math.random() * 1000000.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return LOG;
   }
 
   @Override protected PVectorM4D<T> newVectorM4D()

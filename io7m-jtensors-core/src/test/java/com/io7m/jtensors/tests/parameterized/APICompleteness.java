@@ -66,8 +66,6 @@ import java.util.Map.Entry;
     final Class<?> c_base,
     final Class<?> c)
   {
-    System.out.println("Checking " + c + " against " + c_base);
-    System.out.println();
 
     final HashMap<String, Method> methods = APICompleteness.getMethods(c);
     final HashMap<String, Method> baseline_methods =
@@ -106,7 +104,6 @@ import java.util.Map.Entry;
         + c_base.getName());
     }
 
-    System.out.println("--");
   }
 
   private static void checkPVector2()

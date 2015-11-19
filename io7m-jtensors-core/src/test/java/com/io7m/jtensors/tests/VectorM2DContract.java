@@ -1,10 +1,10 @@
 /*
  * Copyright © 2013 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -22,28 +22,8 @@ import com.io7m.jtensors.VectorM2D;
 import org.junit.Assert;
 import org.junit.Test;
 
-public abstract class VectorM2DContract<T extends Vector2DType>
+public abstract class VectorM2DContract<T extends Vector2DType> extends VectorDContract
 {
-  protected abstract double delta();
-
-  protected abstract double randomLargeNegative();
-
-  protected abstract double randomLargePositive();
-
-  @Test public final void testConstants()
-  {
-    Assert.assertTrue(this.delta() >= 0.0);
-    Assert.assertTrue(this.delta() <= 1.0);
-
-    for (int index = 0; index < 1000; ++index) {
-      Assert.assertTrue(this.randomLargeNegative() <= 0.0);
-    }
-
-    for (int index = 0; index < 1000; ++index) {
-      Assert.assertTrue(this.randomLargePositive() >= 0.0);
-    }
-  }
-
   protected abstract T newVectorM2D(T v);
 
   protected abstract T newVectorM2D();
@@ -266,9 +246,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
       VectorM2D.normalizeInPlace(v1);
       final double angle = VectorM2D.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
+      
+      
+      
 
       Assert.assertEquals(angle, Math.toRadians(90.0), this.delta());
     }
@@ -282,9 +262,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
       VectorM2D.normalizeInPlace(v1);
       final double angle = VectorM2D.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
+      
+      
+      
 
       Assert.assertEquals(angle, Math.toRadians(90.0), this.delta());
     }
@@ -405,9 +385,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
       final T vr = this.newVectorM2D();
       VectorM2D.clampMaximum(v, maximum, vr);
 
-      System.out.printf("f  : %f\n", maximum);
-      System.out.printf("v  : %s\n", v);
-      System.out.printf("vr : %s\n", v);
+      
+      
+      
 
       Assert.assertEquals(maximum, vr.getXD(), this.delta());
       Assert.assertEquals(maximum, vr.getYD(), this.delta());
@@ -432,9 +412,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
       final T vr = this.newVectorM2D();
       VectorM2D.clampMinimum(v, minimum, vr);
 
-      System.out.printf("f  : %f\n", minimum);
-      System.out.printf("v  : %s\n", v);
-      System.out.printf("vr : %s\n", v);
+      
+      
+      
 
       Assert.assertEquals(minimum, vr.getXD(), this.delta());
       Assert.assertEquals(minimum, vr.getYD(), this.delta());
@@ -746,7 +726,7 @@ public abstract class VectorM2DContract<T extends Vector2DType>
       final T v = this.newVectorM2D(x, y);
 
       final double m = VectorM2D.magnitude(v);
-      System.out.printf("%s → %f\n", v, m);
+      
       Assert.assertTrue(m > 0.0);
     }
   }

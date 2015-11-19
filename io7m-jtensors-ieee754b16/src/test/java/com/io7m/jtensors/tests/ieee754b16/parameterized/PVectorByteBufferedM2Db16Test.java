@@ -18,7 +18,10 @@ package com.io7m.jtensors.tests.ieee754b16.parameterized;
 
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType;
 import com.io7m.jtensors.ieee754b16.parameterized.PVectorByteBufferedM2Db16;
-import com.io7m.jtensors.tests.bytebuffered.parameterized.PVectorByteBufferedM2DContract;
+import com.io7m.jtensors.tests.bytebuffered.parameterized
+  .PVectorByteBufferedM2DContract;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicLong;
@@ -26,6 +29,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class PVectorByteBufferedM2Db16Test<T>
   extends PVectorByteBufferedM2DContract<T, PVectorByteBuffered2DType<T>>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(PVectorByteBufferedM2Db16Test.class);
+  }
+
   @Override protected double delta()
   {
     return 0.5;
@@ -39,6 +48,11 @@ public final class PVectorByteBufferedM2Db16Test<T>
   @Override protected double randomLargePositive()
   {
     return Math.random() * 20.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return PVectorByteBufferedM2Db16Test.LOG;
   }
 
   @Override protected PVectorByteBuffered2DType<T> newVectorM2D(

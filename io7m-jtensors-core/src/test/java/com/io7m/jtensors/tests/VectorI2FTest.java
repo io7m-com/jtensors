@@ -158,9 +158,9 @@ public class VectorI2FTest extends VectorI2Contract
       final VectorI2F v1 = VectorI2F.normalize(new VectorI2F(y, -x));
       final double angle = VectorI2F.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
+      
+      
+      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -174,9 +174,9 @@ public class VectorI2FTest extends VectorI2Contract
       final VectorI2F v1 = VectorI2F.normalize(new VectorI2F(-y, x));
       final double angle = VectorI2F.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
+      
+      
+      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -422,8 +422,8 @@ public class VectorI2FTest extends VectorI2Contract
       final VectorI2F q = new VectorI2F(x, y);
       final double dp = VectorI2F.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
@@ -442,9 +442,9 @@ public class VectorI2FTest extends VectorI2Contract
       final double ms = VectorI2F.magnitudeSquared(q);
       final double dp = VectorI2F.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
+      
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
@@ -628,10 +628,10 @@ public class VectorI2FTest extends VectorI2Contract
 
       final double m = VectorI2F.magnitude(vr);
 
-      System.out.println("v  : " + v);
-      System.out.println("vr : " + vr);
-      System.out.println("m  : " + m);
-      System.out.println("--");
+      
+      
+      
+      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
     }
@@ -695,14 +695,14 @@ public class VectorI2FTest extends VectorI2Contract
     final VectorI2F vr = VectorI2F.normalize(v0);
     final double mn = VectorI2F.magnitude(vr);
 
-    System.out.println("v0  : " + v0);
-    System.out.println("dp  : " + dp);
-    System.out.println("m0  : " + m0);
-    System.out.println("ms  : " + ms);
-    System.out.println("mss : " + mss);
-    System.out.println("vr  : " + vr);
-    System.out.println("mn  : " + mn);
-    System.out.println("--");
+    
+    
+    
+    
+    
+    
+    
+    
 
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp, 64.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, mn, 1.0));

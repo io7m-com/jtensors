@@ -563,9 +563,9 @@ public abstract class VectorM3IContract<T extends Vector3IType>
       final double ms = (double) VectorM3I.magnitudeSquared(q);
       final double dp = (double) VectorM3I.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
+      
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
@@ -584,8 +584,8 @@ public abstract class VectorM3IContract<T extends Vector3IType>
       final T q = this.newVectorM3I(x, y, z);
       final double dp = (double) VectorM3I.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }

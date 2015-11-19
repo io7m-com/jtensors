@@ -634,9 +634,9 @@ public abstract class VectorM4IContract<T extends Vector4IType>
       final double ms = (double) VectorM4I.magnitudeSquared(q);
       final double dp = (double) VectorM4I.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
+      
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
@@ -656,8 +656,8 @@ public abstract class VectorM4IContract<T extends Vector4IType>
       final T q = this.newVectorM4I(x, y, z, w);
       final double dp = (double) VectorM4I.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }

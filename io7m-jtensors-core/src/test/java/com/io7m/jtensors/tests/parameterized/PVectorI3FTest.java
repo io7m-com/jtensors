@@ -357,23 +357,17 @@ import org.junit.Test;
       final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
 
       Assert.assertTrue(
-        PVectorI3F.clamp(v, minimum, maximum).getXF()
-        <= maximum);
+        PVectorI3F.clamp(v, minimum, maximum).getXF() <= maximum);
       Assert.assertTrue(
-        PVectorI3F.clamp(v, minimum, maximum).getXF()
-        >= minimum);
+        PVectorI3F.clamp(v, minimum, maximum).getXF() >= minimum);
       Assert.assertTrue(
-        PVectorI3F.clamp(v, minimum, maximum).getYF()
-        <= maximum);
+        PVectorI3F.clamp(v, minimum, maximum).getYF() <= maximum);
       Assert.assertTrue(
-        PVectorI3F.clamp(v, minimum, maximum).getYF()
-        >= minimum);
+        PVectorI3F.clamp(v, minimum, maximum).getYF() >= minimum);
       Assert.assertTrue(
-        PVectorI3F.clamp(v, minimum, maximum).getZF()
-        <= maximum);
+        PVectorI3F.clamp(v, minimum, maximum).getZF() <= maximum);
       Assert.assertTrue(
-        PVectorI3F.clamp(v, minimum, maximum).getZF()
-        >= minimum);
+        PVectorI3F.clamp(v, minimum, maximum).getZF() >= minimum);
     }
   }
 
@@ -416,15 +410,6 @@ import org.junit.Test;
 
       final double dp0 = PVectorI3F.dotProduct(v0, vr);
       final double dp1 = PVectorI3F.dotProduct(v1, vr);
-
-      System.out.println("v0      : " + v0);
-      System.out.println("mag(v0) : " + PVectorI3F.magnitude(v0));
-      System.out.println("v1      : " + v1);
-      System.out.println("mag(v1) : " + PVectorI3F.magnitude(v1));
-      System.out.println("vr      : " + vr);
-      System.out.println("mag(vr) : " + PVectorI3F.magnitude(vr));
-      System.out.println("dp0     : " + dp0);
-      System.out.println("dp1     : " + dp1);
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp0, 0.0));
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp1, 0.0));
@@ -529,9 +514,6 @@ import org.junit.Test;
       final PVectorI3F<T> q = new PVectorI3F<T>(x, y, z);
       final double dp = PVectorI3F.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
-
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
@@ -549,10 +531,6 @@ import org.junit.Test;
 
       final double ms = PVectorI3F.magnitudeSquared(q);
       final double dp = PVectorI3F.dotProduct(q, q);
-
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
@@ -752,10 +730,6 @@ import org.junit.Test;
       Assert.assertNotSame(v, vr);
 
       final double m = PVectorI3F.magnitude(vr);
-
-      System.out.println("v  : " + v);
-      System.out.println("vr : " + vr);
-      System.out.println("m  : " + m);
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
     }

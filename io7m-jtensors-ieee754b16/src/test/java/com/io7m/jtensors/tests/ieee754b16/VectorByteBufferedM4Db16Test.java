@@ -19,6 +19,8 @@ package com.io7m.jtensors.tests.ieee754b16;
 import com.io7m.jtensors.bytebuffered.VectorByteBuffered4DType;
 import com.io7m.jtensors.ieee754b16.VectorByteBufferedM4Db16;
 import com.io7m.jtensors.tests.bytebuffered.VectorByteBufferedM4DContract;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicLong;
@@ -26,6 +28,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class VectorByteBufferedM4Db16Test
   extends VectorByteBufferedM4DContract<VectorByteBuffered4DType>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(VectorByteBufferedM4Db16Test.class);
+  }
+
   @Override protected double delta()
   {
     return 0.5;
@@ -39,6 +47,11 @@ public final class VectorByteBufferedM4Db16Test
   @Override protected double randomLargePositive()
   {
     return Math.random() * 20.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return VectorByteBufferedM4Db16Test.LOG;
   }
 
   @Override protected VectorByteBuffered4DType newVectorM4D(

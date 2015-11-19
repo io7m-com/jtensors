@@ -396,10 +396,6 @@ import org.junit.Test;
       final double ms = PVectorI4I.magnitudeSquared(q);
       final double dp = PVectorI4I.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
-
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
   }
@@ -417,9 +413,6 @@ import org.junit.Test;
       final int w = (int) (Math.random() * max);
       final PVectorI4I<T> q = new PVectorI4I<T>(x, y, z, w);
       final double dp = PVectorI4I.dotProduct(q, q);
-
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }

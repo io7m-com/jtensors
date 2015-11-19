@@ -17,9 +17,17 @@
 package com.io7m.jtensors.tests;
 
 import com.io7m.jtensors.VectorM2D;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class VectorM2DTest extends VectorM2DContract<VectorM2D>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(VectorM2DTest.class);
+  }
+
   @Override protected double delta()
   {
     return 0.0000000000001;
@@ -33,6 +41,11 @@ public final class VectorM2DTest extends VectorM2DContract<VectorM2D>
   @Override protected double randomLargePositive()
   {
     return Math.random() * 100000000.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return VectorM2DTest.LOG;
   }
 
   @Override protected VectorM2D newVectorM2D(final VectorM2D v)

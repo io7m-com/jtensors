@@ -50,7 +50,7 @@ import java.lang.reflect.Modifier;
     throws NotFinal
   {
     if ((c.getModifiers() & Modifier.FINAL) != Modifier.FINAL) {
-      System.out.println("Class " + c.getCanonicalName() + " is not final!");
+
       throw new NotFinal(c);
     }
   }

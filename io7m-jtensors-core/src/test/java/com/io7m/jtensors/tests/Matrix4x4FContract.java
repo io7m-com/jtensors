@@ -1407,12 +1407,12 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(rm);
 
-      System.out.println("m0 : ");
-      System.out.println(m0);
-      System.out.println("m1 : ");
-      System.out.println(m1);
-      System.out.println("rm : ");
-      System.out.println(rm);
+      
+      
+      
+      
+      
+      
 
       eq = AlmostEqualFloat.almostEqual(
         context_f, rm.getRowColumnF(0, 0), -0.09375f);
@@ -1480,12 +1480,12 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(rm);
 
-      System.out.println("m0 : ");
-      System.out.println(m0);
-      System.out.println("m1 : ");
-      System.out.println(m1);
-      System.out.println("rm : ");
-      System.out.println(rm);
+      
+      
+      
+      
+      
+      
 
       eq =
         AlmostEqualFloat.almostEqual(context_f, rm.getRowColumnF(0, 0), 1.0f);
@@ -1584,12 +1584,12 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(rm);
 
-      System.out.println("m0 : ");
-      System.out.println(m0);
-      System.out.println("m1 : ");
-      System.out.println(m1);
-      System.out.println("rm : ");
-      System.out.println(rm);
+      
+      
+      
+      
+      
+      
 
       eq = AlmostEqualFloat.almostEqual(
         context_f, rm.getRowColumnF(0, 0), -0.09375f);
@@ -1657,12 +1657,12 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(rm);
 
-      System.out.println("m0 : ");
-      System.out.println(m0);
-      System.out.println("m1 : ");
-      System.out.println(m1);
-      System.out.println("rm : ");
-      System.out.println(rm);
+      
+      
+      
+      
+      
+      
 
       eq =
         AlmostEqualFloat.almostEqual(context_f, rm.getRowColumnF(0, 0), 1.0f);
@@ -1875,8 +1875,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorI3F axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
-    System.out.println("m : ");
-    System.out.println(m);
+    
+    
 
     boolean eq = false;
 
@@ -1942,8 +1942,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorI3F axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
-    System.out.println("m : ");
-    System.out.println(m);
+    
+    
 
     boolean eq = false;
 
@@ -2009,8 +2009,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorI3F axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
-    System.out.println("m : ");
-    System.out.println(m);
+    
+    
 
     boolean eq = false;
 
@@ -2076,8 +2076,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorI3F axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
-    System.out.println("m : ");
-    System.out.println(m);
+    
+    
 
     boolean eq = false;
 
@@ -2145,8 +2145,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorI3F axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
-    System.out.println("m : ");
-    System.out.println(m);
+    
+    
 
     boolean eq = false;
 
@@ -2534,13 +2534,13 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       }
       VectorM3F.normalizeInPlace(axis);
 
-      System.out.println("axis  : " + axis);
-      System.out.println("angle : " + angle);
+      
+      
 
       MatrixM4x4F.makeRotation((double) angle, axis, m);
 
       final double det = MatrixM4x4F.determinant(m);
-      System.out.println("det   : " + det);
+      
 
       AlmostEqualDouble.almostEqual(context, det, 1.0);
 
@@ -2553,15 +2553,15 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
           final float my = mt.getRowColumnF(row, col);
           final boolean eq = AlmostEqualFloat.almostEqual(context_f, mx, my);
 
-          System.out.println("mi(" + row + ", " + col + ") == " + mx);
-          System.out.println("mt(" + row + ", " + col + ") == " + my);
-          System.out.println(eq);
+          
+          
+          
 
           Assert.assertTrue(eq);
         }
       }
 
-      System.out.println("--");
+      
     }
   }
 
@@ -2583,10 +2583,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     MatrixM4x4F.makeRotation(0.0, Matrix4x4FContract.AXIS_X, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     Assert.assertTrue(VectorM4F.almostEqual(ec, v_exp, v_got));
   }
@@ -2609,10 +2609,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     MatrixM4x4F.makeRotation(0.0, Matrix4x4FContract.AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     Assert.assertTrue(VectorM4F.almostEqual(ec, v_exp, v_got));
   }
@@ -2635,10 +2635,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     MatrixM4x4F.makeRotation(0.0, Matrix4x4FContract.AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     Assert.assertTrue(VectorM4F.almostEqual(ec, v_exp, v_got));
   }
@@ -2671,13 +2671,13 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     MatrixM4x4F.makeRotation(
       Math.toRadians(90.0), Matrix4x4FContract.AXIS_X, m);
-    System.out.println(m);
+    
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2717,10 +2717,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       Math.toRadians(90.0), Matrix4x4FContract.AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2753,10 +2753,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       Math.toRadians(90.0), Matrix4x4FContract.AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2794,13 +2794,13 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     MatrixM4x4F.makeRotation(
       Math.toRadians(-90.0), Matrix4x4FContract.AXIS_X, m);
-    System.out.println(m);
+    
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2840,10 +2840,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       Math.toRadians(-90.0), Matrix4x4FContract.AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2876,10 +2876,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       Math.toRadians(-90.0), Matrix4x4FContract.AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    System.out.println("in  : " + v_in);
-    System.out.println("exp : " + v_exp);
-    System.out.println("got : " + v_got);
-    System.out.println("--");
+    
+    
+    
+    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2901,7 +2901,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
       this.checkDirectBufferInvariants(r);
 
-      System.out.println(r);
+      
 
       this.isRotationMatrixY(context, r);
 
@@ -2921,7 +2921,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
       this.checkDirectBufferInvariants(r);
 
-      System.out.println(r);
+      
 
       this.isRotationMatrixZ(context, r);
 

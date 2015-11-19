@@ -20,6 +20,8 @@ import com.io7m.jtensors.bytebuffered.VectorByteBuffered2DType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM2D;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -28,6 +30,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class VectorByteBufferedM2DTest
   extends VectorByteBufferedM2DContract<VectorByteBuffered2DType>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(VectorByteBufferedM2DTest.class);
+  }
+
   @Override protected double delta()
   {
     return 0.0000000000001;
@@ -41,6 +49,11 @@ public final class VectorByteBufferedM2DTest
   @Override protected double randomLargePositive()
   {
     return Math.random() * 100000000.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return VectorByteBufferedM2DTest.LOG;
   }
 
   @Override protected VectorByteBuffered2DType newVectorM2D(

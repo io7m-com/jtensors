@@ -77,28 +77,28 @@ public class VectorI4FTest extends VectorI4Contract
       {
         final float expected = v0.getXF() + v1.getXF();
         final float got = vr.getXF();
-        System.out.println("x: expected " + expected + " got " + got);
+        
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getYF() + v1.getYF();
         final float got = vr.getYF();
-        System.out.println("y: expected " + expected + " got " + got);
+        
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getZF() + v1.getZF();
         final float got = vr.getZF();
-        System.out.println("z: expected " + expected + " got " + got);
+        
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getWF() + v1.getWF();
         final float got = vr.getWF();
-        System.out.println("w: expected " + expected + " got " + got);
+        
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
     }
@@ -127,28 +127,28 @@ public class VectorI4FTest extends VectorI4Contract
       {
         final float expected = v0.getXF() + (v1.getXF() * r);
         final float got = vr.getXF();
-        System.out.println("x: expected " + expected + " got " + got);
+        
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getYF() + (v1.getYF() * r);
         final float got = vr.getYF();
-        System.out.println("y: expected " + expected + " got " + got);
+        
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getZF() + (v1.getZF() * r);
         final float got = vr.getZF();
-        System.out.println("z: expected " + expected + " got " + got);
+        
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
 
       {
         final float expected = v0.getWF() + (v1.getWF() * r);
         final float got = vr.getWF();
-        System.out.println("w: expected " + expected + " got " + got);
+        
         Assert.assertTrue(AlmostEqualFloat.almostEqual(context, expected, got));
       }
     }
@@ -573,8 +573,8 @@ public class VectorI4FTest extends VectorI4Contract
       final VectorI4F q = new VectorI4F(x, y, z, w);
       final double dp = VectorI4F.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
@@ -595,9 +595,9 @@ public class VectorI4FTest extends VectorI4Contract
       final double ms = VectorI4F.magnitudeSquared(q);
       final double dp = VectorI4F.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
+      
+      
+      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
@@ -817,9 +817,9 @@ public class VectorI4FTest extends VectorI4Contract
 
       final double m = VectorI4F.magnitude(vr);
 
-      System.out.println("v  : " + v);
-      System.out.println("vr : " + vr);
-      System.out.println("m  : " + m);
+      
+      
+      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
     }

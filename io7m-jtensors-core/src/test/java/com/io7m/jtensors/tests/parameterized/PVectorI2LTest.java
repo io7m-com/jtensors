@@ -122,10 +122,6 @@ import org.junit.Test;
       final PVectorI2L<T> v1 = new PVectorI2L<T>(1, 0);
       final double angle = PVectorI2L.angle(v0, v1);
 
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
-
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, angle, 0.0));
     }
 
@@ -135,10 +131,6 @@ import org.junit.Test;
       final PVectorI2L<T> v0 = new PVectorI2L<T>(x, y);
       final PVectorI2L<T> v1 = new PVectorI2L<T>(y, -x);
       final double angle = PVectorI2L.angle(v0, v1);
-
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -151,10 +143,6 @@ import org.junit.Test;
       final PVectorI2L<T> v0 = new PVectorI2L<T>(x, y);
       final PVectorI2L<T> v1 = new PVectorI2L<T>(-y, x);
       final double angle = PVectorI2L.angle(v0, v1);
-
-      System.out.println("v0    : " + v0);
-      System.out.println("v1    : " + v1);
-      System.out.println("angle : " + angle);
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -376,10 +364,6 @@ import org.junit.Test;
       final double ms = PVectorI2L.magnitudeSquared(q);
       final double dp = PVectorI2L.dotProduct(q, q);
 
-      System.out.println("q  : " + q);
-      System.out.println("ms : " + ms);
-      System.out.println("dp : " + dp);
-
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
   }
@@ -396,9 +380,6 @@ import org.junit.Test;
       final long y = (long) (Math.random() * max);
       final PVectorI2L<T> q = new PVectorI2L<T>(x, y);
       final double dp = PVectorI2L.dotProduct(q, q);
-
-      System.out.println("q  : " + q);
-      System.out.println("dp : " + dp);
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }

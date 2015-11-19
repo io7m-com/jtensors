@@ -20,6 +20,8 @@ import com.io7m.jtensors.bytebuffered.VectorByteBuffered4DType;
 import com.io7m.jtensors.bytebuffered.VectorByteBufferedM4D;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -28,6 +30,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class VectorByteBufferedM4DTest
   extends VectorByteBufferedM4DContract<VectorByteBuffered4DType>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(VectorByteBufferedM4DTest.class);
+  }
+
   @Override protected double delta()
   {
     return 0.0000000000001;
@@ -41,6 +49,11 @@ public final class VectorByteBufferedM4DTest
   @Override protected double randomLargePositive()
   {
     return Math.random() * 100000000.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return LOG;
   }
 
   @Override protected VectorByteBuffered4DType newVectorM4D(

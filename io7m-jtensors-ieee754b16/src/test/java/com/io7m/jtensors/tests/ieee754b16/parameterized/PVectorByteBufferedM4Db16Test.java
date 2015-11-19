@@ -18,7 +18,10 @@ package com.io7m.jtensors.tests.ieee754b16.parameterized;
 
 import com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4DType;
 import com.io7m.jtensors.ieee754b16.parameterized.PVectorByteBufferedM4Db16;
-import com.io7m.jtensors.tests.bytebuffered.parameterized.PVectorByteBufferedM4DContract;
+import com.io7m.jtensors.tests.bytebuffered.parameterized
+  .PVectorByteBufferedM4DContract;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicLong;
@@ -26,6 +29,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class PVectorByteBufferedM4Db16Test<T>
   extends PVectorByteBufferedM4DContract<T, PVectorByteBuffered4DType<T>>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(PVectorByteBufferedM4Db16Test.class);
+  }
+
   @Override protected PVectorByteBuffered4DType<T> newVectorM4D(
     final double x,
     final double y,
@@ -52,6 +61,11 @@ public final class PVectorByteBufferedM4Db16Test<T>
   @Override protected double randomLargePositive()
   {
     return Math.random() * 20.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return PVectorByteBufferedM4Db16Test.LOG;
   }
 
   @Override protected PVectorByteBuffered4DType<T> newVectorM4D()

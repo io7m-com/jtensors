@@ -19,6 +19,8 @@ package com.io7m.jtensors.tests.ieee754b16;
 import com.io7m.jtensors.bytebuffered.VectorByteBuffered3DType;
 import com.io7m.jtensors.ieee754b16.VectorByteBufferedM3Db16;
 import com.io7m.jtensors.tests.bytebuffered.VectorByteBufferedM3DContract;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicLong;
@@ -26,6 +28,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class VectorByteBufferedM3Db16Test
   extends VectorByteBufferedM3DContract<VectorByteBuffered3DType>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(VectorByteBufferedM3Db16Test.class);
+  }
+
   @Override protected double delta()
   {
     return 0.5;
@@ -39,6 +47,11 @@ public final class VectorByteBufferedM3Db16Test
   @Override protected double randomLargePositive()
   {
     return Math.random() * 20.0;
+  }
+
+  @Override protected Logger logger()
+  {
+    return VectorByteBufferedM3Db16Test.LOG;
   }
 
   @Override protected VectorByteBuffered3DType newVectorM3D(
