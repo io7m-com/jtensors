@@ -103,7 +103,7 @@
       <plugin>
         <groupId>com.io7m.changelog</groupId>
         <artifactId>io7m-changelog-plugin</artifactId>
-        <version>2.1.1</version>
+        <version>2.1.2</version>
         <inherited>false</inherited>
         <configuration>
           <file>README-CHANGES.xml</file>
