@@ -20,6 +20,7 @@
     <module>io7m-jtensors-core</module>
     <module>io7m-jtensors-documentation</module>
     <module>io7m-jtensors-ieee754b16</module>
+    <module>io7m-jtensors-tests</module>
   </modules>
 
   <properties>
