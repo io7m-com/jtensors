@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>io7m-jtensors</artifactId>
-    <version>7.0.0-beta0010</version>
+    <version>7.0.0-beta0011</version>
   </parent>
   <artifactId>io7m-jtensors-bytebuffered</artifactId>
 
@@ -22,30 +22,6 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>io7m-jtensors-core</artifactId>
       <version>${project.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>io7m-jtensors-core</artifactId>
-      <version>${project.version}</version>
-      <classifier>tests</classifier>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.reflections</groupId>
-      <artifactId>reflections</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <scope>test</scope>
     </dependency>
 
     <dependency>
