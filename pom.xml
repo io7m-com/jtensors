@@ -7,7 +7,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors</artifactId>
-  <version>7.0.0-beta0010</version>
+  <version>7.0.0-beta0011</version>
 
   <packaging>pom</packaging>
   <name>io7m-jtensors</name>
@@ -20,6 +20,7 @@
     <module>io7m-jtensors-core</module>
     <module>io7m-jtensors-documentation</module>
     <module>io7m-jtensors-ieee754b16</module>
+    <module>io7m-jtensors-tests</module>
   </modules>
 
   <properties>
@@ -82,7 +83,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.8</version>
+        <version>2.9</version>
         <configuration>
           <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
         </configuration>
@@ -90,7 +91,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.4</version>
+        <version>3.5.1</version>
         <configuration>
           <validate>true</validate>
         </configuration>
@@ -103,7 +104,7 @@
       <plugin>
         <groupId>com.io7m.changelog</groupId>
         <artifactId>io7m-changelog-plugin</artifactId>
-        <version>2.1.1</version>
+        <version>2.1.2</version>
         <inherited>false</inherited>
         <configuration>
           <file>README-CHANGES.xml</file>
@@ -129,42 +130,42 @@
       <dependency>
         <groupId>com.io7m.jequality</groupId>
         <artifactId>io7m-jequality-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.0.4, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.jfunctional</groupId>
         <artifactId>io7m-jfunctional-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.2.1, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.jintegers</groupId>
         <artifactId>io7m-jintegers-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.0.2, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.jranges</groupId>
         <artifactId>io7m-jranges-core</artifactId>
-        <version>[2.0.0, 3.0.0)</version>
+        <version>[2.0.3, 3.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.jnull</groupId>
         <artifactId>io7m-jnull-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.0.2, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.junreachable</groupId>
         <artifactId>io7m-junreachable-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.0.2, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.ieee754b16</groupId>
         <artifactId>io7m-ieee754b16-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.0.2, 2.0.0)</version>
       </dependency>
       <dependency>
-        <groupId>com.github.stephenc.jcip</groupId>
+        <groupId>com.io7m.jcip</groupId>
         <artifactId>jcip-annotations</artifactId>
-        <version>1.0-1</version>
+        <version>1.0.2</version>
       </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>
@@ -181,7 +182,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>2.6.1</version>
+          <version>3.0.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -196,12 +197,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>2.7</version>
+          <version>3.0.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
-          <version>2.4</version>
+          <version>3.0.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -211,7 +212,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.18.1</version>
+          <version>2.19.1</version>
           <configuration>
             <redirectTestOutputToFile>true</redirectTestOutputToFile>
           </configuration>
@@ -221,7 +222,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>2.15</version>
+          <version>2.17</version>
           <dependencies>
             <dependency>
               <groupId>${project.groupId}</groupId>
@@ -249,7 +250,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.5.5</version>
+          <version>2.6</version>
         </plugin>
         <plugin>
           <groupId>com.io7m.jstructural</groupId>
@@ -261,12 +262,18 @@
           <artifactId>truezip-maven-plugin</artifactId>
           <version>1.2</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>3.2.0</version>
+          <extensions>true</extensions>
+        </plugin>
 
         <!-- Require JDK >= 1.6 -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.3</version>
+          <version>3.5.1</version>
           <configuration>
             <source>1.6</source>
             <target>1.6</target>
@@ -277,7 +284,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>2.6</version>
+          <version>3.0.0</version>
           <executions>
             <!-- Produce jar file with custom manifest -->
             <execution>
@@ -329,7 +336,7 @@
         <plugin>
           <groupId>org.sonatype.plugins</groupId>
           <artifactId>nexus-staging-maven-plugin</artifactId>
-          <version>1.6.5</version>
+          <version>1.6.7</version>
           <extensions>true</extensions>
           <configuration>
             <serverId>sonatype-nexus-staging</serverId>
@@ -409,6 +416,27 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- Produce OSGi bundle -->
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Export-Package>com.io7m.jproperties</Export-Package>
+            <Specification-Title>${project.name}</Specification-Title>
+            <Specification-Version>${project.version}</Specification-Version>
+            <Specification-Vendor>io7m.com</Specification-Vendor>
+            <Implementation-Title>${project.name}</Implementation-Title>
+            <Implementation-Version>${project.version}</Implementation-Version>
+            <Implementation-Vendor>io7m.com</Implementation-Vendor>
+            <Implementation-Vendor-Id>${project.groupId}</Implementation-Vendor-Id>
+            <Built-By>io7m</Built-By>
+            <Sealed>true</Sealed>
+          </instructions>
+        </configuration>
       </plugin>
     </plugins>
   </build>
