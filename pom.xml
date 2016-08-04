@@ -129,42 +129,42 @@
       <dependency>
         <groupId>com.io7m.jequality</groupId>
         <artifactId>io7m-jequality-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.0.4, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.jfunctional</groupId>
         <artifactId>io7m-jfunctional-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.2.1, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.jintegers</groupId>
         <artifactId>io7m-jintegers-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.0.2, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.jranges</groupId>
         <artifactId>io7m-jranges-core</artifactId>
-        <version>[2.0.0, 3.0.0)</version>
+        <version>[2.0.3, 3.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.jnull</groupId>
         <artifactId>io7m-jnull-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.0.2, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.junreachable</groupId>
         <artifactId>io7m-junreachable-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.0.2, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.ieee754b16</groupId>
         <artifactId>io7m-ieee754b16-core</artifactId>
-        <version>[1.0.0, 2.0.0)</version>
+        <version>[1.0.2, 2.0.0)</version>
       </dependency>
       <dependency>
-        <groupId>com.github.stephenc.jcip</groupId>
+        <groupId>com.io7m.jcip</groupId>
         <artifactId>jcip-annotations</artifactId>
-        <version>1.0-1</version>
+        <version>1.0.2</version>
       </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>
@@ -260,6 +260,12 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>truezip-maven-plugin</artifactId>
           <version>1.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>3.2.0</version>
+          <extensions>true</extensions>
         </plugin>
 
         <!-- Require JDK >= 1.6 -->
@@ -409,6 +415,27 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- Produce OSGi bundle -->
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Export-Package>com.io7m.jproperties</Export-Package>
+            <Specification-Title>${project.name}</Specification-Title>
+            <Specification-Version>${project.version}</Specification-Version>
+            <Specification-Vendor>io7m.com</Specification-Vendor>
+            <Implementation-Title>${project.name}</Implementation-Title>
+            <Implementation-Version>${project.version}</Implementation-Version>
+            <Implementation-Vendor>io7m.com</Implementation-Vendor>
+            <Implementation-Vendor-Id>${project.groupId}</Implementation-Vendor-Id>
+            <Built-By>io7m</Built-By>
+            <Sealed>true</Sealed>
+          </instructions>
+        </configuration>
       </plugin>
     </plugins>
   </build>

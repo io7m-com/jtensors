@@ -12,7 +12,7 @@
   </parent>
   <artifactId>io7m-jtensors-core</artifactId>
 
-  <packaging>jar</packaging>
+  <packaging>bundle</packaging>
   <description>Vector/matrix math package (Core)</description>
   <url>http://io7m.github.io/jtensors/</url>
   <name>${project.artifactId}</name>
@@ -55,7 +55,7 @@
       <artifactId>io7m-junreachable-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.github.stephenc.jcip</groupId>
+      <groupId>com.io7m.jcip</groupId>
       <artifactId>jcip-annotations</artifactId>
     </dependency>
   </dependencies>
@@ -65,6 +65,21 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+
+      <!-- Produce OSGi bundle -->
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Export-Package>
+              com.io7m.jtensors,
+              com.io7m.jtensors.parameterized
+            </Export-Package>
+          </instructions>
+        </configuration>
       </plugin>
     </plugins>
   </build>
