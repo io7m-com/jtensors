@@ -425,7 +425,6 @@
         <extensions>true</extensions>
         <configuration>
           <instructions>
-            <Export-Package>com.io7m.jproperties</Export-Package>
             <Specification-Title>${project.name}</Specification-Title>
             <Specification-Version>${project.version}</Specification-Version>
             <Specification-Vendor>io7m.com</Specification-Vendor>
