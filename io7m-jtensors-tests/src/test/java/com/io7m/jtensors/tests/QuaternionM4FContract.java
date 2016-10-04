@@ -82,7 +82,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     Assert.assertEquals(
       1.0, VectorM3F.magnitude(result_axis), Eq.DELTA_F_SMALL);
     Assert.assertEquals(
-      expected_angle, result_angle, 0.0001);
+      expected_angle, result_angle, 0.0005);
     Assert.assertEquals(
       result_axis.getXF(), expected_axis.getXF(), Eq.DELTA_F_SMALL);
     Assert.assertEquals(
