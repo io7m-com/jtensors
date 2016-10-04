@@ -1081,15 +1081,25 @@ public final class QuaternionM4D implements Quaternion4DType
     final QuaternionReadable4DType q,
     final V out)
   {
+    final double rx;
+    final double ry;
+    final double rz;
     final double angle;
+
     final double mag_s = QuaternionM4D.magnitudeSquared(q);
     if (mag_s != 0.0) {
       angle = 2.0 * StrictMath.acos(q.getWD());
+      rx = q.getXD();
+      ry = q.getYD();
+      rz = q.getZD();
     } else {
       angle = 0.0;
+      rx = 1.0;
+      ry = 0.0;
+      rz = 0.0;
     }
 
-    VectorM3D.normalize(new VectorM3D(q.getXD(), q.getYD(), q.getZD()), out);
+    VectorM3D.normalize(new VectorM3D(rx, ry, rz), out);
     return angle;
   }
 

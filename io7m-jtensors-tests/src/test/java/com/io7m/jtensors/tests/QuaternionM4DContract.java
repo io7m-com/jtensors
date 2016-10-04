@@ -25,8 +25,10 @@ import com.io7m.jtensors.MatrixM3x3D;
 import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.Quaternion4DType;
 import com.io7m.jtensors.QuaternionM4D;
+import com.io7m.jtensors.QuaternionM4F;
 import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorM3D;
+import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorReadable3DType;
 import org.junit.Assert;
 import org.junit.Test;
@@ -871,6 +873,19 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final T v = this.newQuaternion(0.0, 0.0, 0.0, 0.0);
     final double m = QuaternionM4D.magnitude(v);
     Assert.assertEquals(0.0, m, Eq.DELTA_D_SMALL);
+  }
+
+  @Test
+  public final void testToAxisAngleZero()
+  {
+    final T q = this.newQuaternion(0.0, 0.0, 0.0, 0.0);
+    final VectorM3D out = new VectorM3D();
+    final double angle = QuaternionM4D.toAxisAngle(q, out);
+
+    Assert.assertEquals(0.0, angle, 0.0);
+    Assert.assertEquals(1.0, out.getXD(), 0.0);
+    Assert.assertEquals(0.0, out.getYD(), 0.0);
+    Assert.assertEquals(0.0, out.getZD(), 0.0);
   }
 
   @Test

@@ -1068,15 +1068,25 @@ public final class QuaternionM4F implements Quaternion4FType
     final QuaternionReadable4FType q,
     final V out)
   {
+    final float rx;
+    final float ry;
+    final float rz;
     final double angle;
+
     final double mag_s = QuaternionM4F.magnitudeSquared(q);
     if (mag_s != 0.0) {
-      angle = 2.0 * StrictMath.acos((double) q.getWF());
+      angle = 2.0 * StrictMath.acos(q.getWF());
+      rx = q.getXF();
+      ry = q.getYF();
+      rz = q.getZF();
     } else {
       angle = 0.0;
+      rx = 1.0f;
+      ry = 0.0f;
+      rz = 0.0f;
     }
 
-    VectorM3F.normalize(new VectorM3F(q.getXF(), q.getYF(), q.getZF()), out);
+    VectorM3F.normalize(new VectorM3F(rx, ry, rz), out);
     return angle;
   }
 

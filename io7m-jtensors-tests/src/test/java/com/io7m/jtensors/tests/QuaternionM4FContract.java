@@ -27,14 +27,24 @@ import com.io7m.jtensors.MatrixM4x4F;
 import com.io7m.jtensors.Quaternion4FType;
 import com.io7m.jtensors.QuaternionM4D;
 import com.io7m.jtensors.QuaternionM4F;
+import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorI3F;
+import com.io7m.jtensors.VectorM3D;
 import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorReadable3FType;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class QuaternionM4FContract<T extends Quaternion4FType>
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(QuaternionM4FContract.class);
+  }
+
   private static final VectorReadable3FType AXIS_X = new VectorI3F(
     1.0F, 0.0F, 0.0F);
   private static final VectorReadable3FType AXIS_Y = new VectorI3F(
@@ -51,6 +61,35 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     final float w);
 
   protected abstract T newQuaternion(final T v);
+
+  private void checkAxisAngle(
+    final VectorI3F expected_axis,
+    final double expected_angle,
+    final T q)
+  {
+    final VectorM3F result_axis = new VectorM3F();
+    final double result_angle = QuaternionM4F.toAxisAngle(q, result_axis);
+
+    QuaternionM4FContract.LOG.debug(
+      "angle expected: {}", Double.valueOf(expected_angle));
+    QuaternionM4FContract.LOG.debug(
+      "angle result:   {}", Double.valueOf(result_angle));
+    QuaternionM4FContract.LOG.debug(
+      "axis expected:  {}", expected_axis);
+    QuaternionM4FContract.LOG.debug(
+      "axis result:    {}", result_axis);
+
+    Assert.assertEquals(
+      1.0, VectorM3F.magnitude(result_axis), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(
+      expected_angle, result_angle, 0.0001);
+    Assert.assertEquals(
+      result_axis.getXF(), expected_axis.getXF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(
+      result_axis.getYF(), expected_axis.getYF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(
+      result_axis.getZF(), expected_axis.getZF(), Eq.DELTA_F_SMALL);
+  }
 
   @Test
   public final void testAdd()
@@ -822,6 +861,19 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   }
 
   @Test
+  public final void testToAxisAngleZero()
+  {
+    final T q = this.newQuaternion(0.0f, 0.0f, 0.0f, 0.0f);
+    final VectorM3F out = new VectorM3F();
+    final double angle = QuaternionM4F.toAxisAngle(q, out);
+
+    Assert.assertEquals(0.0, angle, 0.0);
+    Assert.assertEquals(1.0, out.getXF(), 0.0);
+    Assert.assertEquals(0.0, out.getYF(), 0.0);
+    Assert.assertEquals(0.0, out.getZF(), 0.0);
+  }
+
+  @Test
   public final void testMakeAxisAngleNormal()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
@@ -832,11 +884,13 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       final VectorI3F axis_n = VectorI3F.normalize(axis_r);
 
       final T q = this.newQuaternion();
-      QuaternionM4F.makeFromAxisAngle(
-        axis_n, Math.toRadians(this.getRandom() * 360.0), q);
+      final double angle = Math.toRadians(this.getRandom() * 360.0);
+      QuaternionM4F.makeFromAxisAngle(axis_n, angle, q);
 
       final double m = QuaternionM4F.magnitude(q);
-      Assert.assertEquals(1.0, m, 0.000001);
+      Assert.assertEquals(1.0, m, Eq.DELTA_F_SMALL);
+
+      this.checkAxisAngle(axis_n, angle, q);
     }
   }
 
@@ -845,8 +899,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   {
     final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
     final T q = this.newQuaternion();
-    final T r = QuaternionM4F.makeFromAxisAngle(
-      axis, Math.toRadians(45.0), q);
+    final double angle = Math.toRadians(45.0);
+    final T r = QuaternionM4F.makeFromAxisAngle(axis, angle, q);
     Assert.assertSame(r, q);
 
     /*
@@ -859,6 +913,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     Assert.assertEquals(0.0f, q.getYF(), Eq.DELTA_F_SMALL);
     Assert.assertEquals(0.0f, q.getZF(), Eq.DELTA_F_SMALL);
     Assert.assertEquals(0.9238795325112867f, q.getWF(), Eq.DELTA_F_SMALL);
+
+    this.checkAxisAngle(axis, angle, q);
   }
 
   @Test
@@ -887,8 +943,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   {
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     final T q = this.newQuaternion();
-    final T r = QuaternionM4F.makeFromAxisAngle(
-      axis, Math.toRadians(45.0), q);
+    final double angle = Math.toRadians(45.0);
+    final T r = QuaternionM4F.makeFromAxisAngle(axis, angle, q);
     Assert.assertSame(r, q);
 
     /*
@@ -901,6 +957,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     Assert.assertEquals(0.3826834323650898f, q.getYF(), Eq.DELTA_F_SMALL);
     Assert.assertEquals(0.0f, q.getZF(), Eq.DELTA_F_SMALL);
     Assert.assertEquals(0.9238795325112867f, q.getWF(), Eq.DELTA_F_SMALL);
+
+    this.checkAxisAngle(axis, angle, q);
   }
 
   @Test
@@ -908,8 +966,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   {
     final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     final T q = this.newQuaternion();
-    final T r = QuaternionM4F.makeFromAxisAngle(
-      axis, Math.toRadians(90.0), q);
+    final double angle = Math.toRadians(90.0);
+    final T r = QuaternionM4F.makeFromAxisAngle(axis, angle, q);
     Assert.assertSame(r, q);
 
     /*
@@ -922,6 +980,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     Assert.assertEquals(0.7071067811865475f, q.getYF(), Eq.DELTA_F_SMALL);
     Assert.assertEquals(0.0f, q.getZF(), Eq.DELTA_F_SMALL);
     Assert.assertEquals(0.7071067811865475f, q.getWF(), Eq.DELTA_F_SMALL);
+
+    this.checkAxisAngle(axis, angle, q);
   }
 
   @Test
@@ -929,8 +989,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   {
     final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
     final T q = this.newQuaternion();
-    final T r = QuaternionM4F.makeFromAxisAngle(
-      axis, Math.toRadians(45.0), q);
+    final double angle = Math.toRadians(45.0);
+    final T r = QuaternionM4F.makeFromAxisAngle(axis, angle, q);
     Assert.assertSame(r, q);
 
     /*
@@ -943,6 +1003,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     Assert.assertEquals(0.0f, q.getYF(), Eq.DELTA_F_SMALL);
     Assert.assertEquals(0.3826834323650898f, q.getZF(), Eq.DELTA_F_SMALL);
     Assert.assertEquals(0.9238795325112867f, q.getWF(), Eq.DELTA_F_SMALL);
+
+    this.checkAxisAngle(axis, angle, q);
   }
 
   @Test
@@ -950,8 +1012,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   {
     final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
     final T q = this.newQuaternion();
-    final T r = QuaternionM4F.makeFromAxisAngle(
-      axis, Math.toRadians(90.0), q);
+    final double angle = Math.toRadians(90.0);
+    final T r = QuaternionM4F.makeFromAxisAngle(axis, angle, q);
     Assert.assertSame(r, q);
 
     /*
@@ -964,6 +1026,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     Assert.assertEquals(0.0f, q.getYF(), Eq.DELTA_F_SMALL);
     Assert.assertEquals(0.7071067811865475f, q.getZF(), Eq.DELTA_F_SMALL);
     Assert.assertEquals(0.7071067811865475f, q.getWF(), Eq.DELTA_F_SMALL);
+
+    this.checkAxisAngle(axis, angle, q);
   }
 
   @Test
