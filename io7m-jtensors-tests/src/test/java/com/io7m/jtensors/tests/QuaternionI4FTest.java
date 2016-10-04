@@ -60,18 +60,10 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
       final QuaternionI4F vr = QuaternionI4F.add(v0, v1);
 
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          context, vr.getXF(), v0.getXF() + v1.getXF()));
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          context, vr.getYF(), v0.getYF() + v1.getYF()));
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          context, vr.getZF(), v0.getZF() + v1.getZF()));
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          context, vr.getWF(), v0.getWF() + v1.getWF()));
+      Assert.assertEquals(v0.getXF() + v1.getXF(), vr.getXF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(v0.getYF() + v1.getYF(), vr.getYF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(v0.getZF() + v1.getZF(), vr.getZF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(v0.getWF() + v1.getWF(), vr.getWF(), Eq.DELTA_F_SMALL);
     }
   }
 
@@ -209,11 +201,6 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testConjugateInvertible()
   {
-    final AlmostEqualFloat.ContextRelative context =
-      TestUtilities.getSingleEqualityContext();
-
-    boolean eq = false;
-
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) ((this.getRandom() * 200.0) - 100.0);
       final float y = (float) ((this.getRandom() * 200.0) - 100.0);
@@ -224,14 +211,10 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final QuaternionI4F qc0 = QuaternionI4F.conjugate(q);
       final QuaternionI4F qc1 = QuaternionI4F.conjugate(qc0);
 
-      eq = AlmostEqualFloat.almostEqual(context, q.getXF(), qc1.getXF());
-      Assert.assertTrue(eq);
-      eq = AlmostEqualFloat.almostEqual(context, q.getYF(), qc1.getYF());
-      Assert.assertTrue(eq);
-      eq = AlmostEqualFloat.almostEqual(context, q.getZF(), qc1.getZF());
-      Assert.assertTrue(eq);
-      eq = AlmostEqualFloat.almostEqual(context, q.getWF(), qc1.getWF());
-      Assert.assertTrue(eq);
+      Assert.assertEquals(qc1.getXF(), q.getXF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(qc1.getYF(), q.getYF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(qc1.getZF(), q.getZF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(qc1.getWF(), q.getWF(), Eq.DELTA_F_SMALL);
     }
   }
 
@@ -290,13 +273,11 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final float y = (float) this.getRandom();
       final float z = (float) this.getRandom();
       final float w = (float) this.getRandom();
-      final QuaternionI4F q = new QuaternionI4F(x, y, z, w);
+      final QuaternionI4F q =
+        QuaternionI4F.normalize(new QuaternionI4F(x, y, z, w));
       final double dp = (double) QuaternionI4F.dotProduct(q, q);
 
-      
-      
-
-      AlmostEqualDouble.almostEqual(ec, 1.0, dp);
+      Assert.assertEquals(dp, 1.0, 0.00001);
     }
   }
 
@@ -315,11 +296,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final double ms = (double) QuaternionI4F.magnitudeSquared(q);
       final double dp = (double) QuaternionI4F.dotProduct(q, q);
 
-      
-      
-      
-
-      AlmostEqualDouble.almostEqual(ec, ms, dp);
+      Assert.assertEquals(dp, ms, Eq.DELTA_D_SMALL);
     }
   }
 
@@ -507,9 +484,6 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testLookAtConsistent_Origin_NegativeX()
   {
-    final AlmostEqualFloat.ContextRelative ec =
-      TestUtilities.getSingleEqualityContext();
-
     final MatrixM4x4F.ContextMM4F mc = new MatrixM4x4F.ContextMM4F();
     final QuaternionI4F.ContextQI4F qc = new QuaternionI4F.ContextQI4F();
 
@@ -525,28 +499,17 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       QuaternionI4F.lookAtWithContext(qc, origin, target, axis);
     QuaternionI4F.makeRotationMatrix4x4(q, mqr);
 
-    
-    
-    
-    
-
-    boolean eq = false;
-
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mqr.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(ec, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
 
   @Override @Test public final void testLookAtConsistent_Origin_PositiveX()
   {
-    final AlmostEqualFloat.ContextRelative ec =
-      TestUtilities.getSingleEqualityContext();
-
     final MatrixM4x4F.ContextMM4F mc = new MatrixM4x4F.ContextMM4F();
     final QuaternionI4F.ContextQI4F qc = new QuaternionI4F.ContextQI4F();
 
@@ -562,28 +525,17 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       QuaternionI4F.lookAtWithContext(qc, origin, target, axis);
     QuaternionI4F.makeRotationMatrix4x4(q, mqr);
 
-    
-    
-    
-    
-
-    boolean eq = false;
-
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mqr.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(ec, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
 
   @Override @Test public final void testLookAtMatrixEquivalentAxisY()
   {
-    final AlmostEqualFloat.ContextRelative ec =
-      TestUtilities.getSingleEqualityContext();
-
     final QuaternionI4F.ContextQI4F qc = new QuaternionI4F.ContextQI4F();
     final MatrixM4x4F.ContextMM4F mc = new MatrixM4x4F.ContextMM4F();
 
@@ -614,18 +566,11 @@ public class QuaternionI4FTest extends QuaternionI4Contract
         qc, origin, target, QuaternionI4FTest.AXIS_Y);
       QuaternionI4F.makeRotationMatrix4x4(lq, mq);
 
-      
-      
-      
-      
-
       for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 3; ++col) {
           final float x = ml.getRowColumnF(row, col);
           final float y = mq.getRowColumnF(row, col);
-
-          final boolean eq = AlmostEqualFloat.almostEqual(ec, x, y);
-          Assert.assertTrue(eq);
+          Assert.assertEquals(y, x, 0.000001);
         }
       }
     }
@@ -651,9 +596,6 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMagnitudeNormal()
   {
-    final AlmostEqualDouble.ContextRelative ec =
-      TestUtilities.getDoubleEqualityContext6dp();
-
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 10000.0f;
       final float x = (float) (1.0 + (this.getRandom() * (double) max));
@@ -666,34 +608,23 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       Assert.assertNotSame(v, vr);
 
       final double m = (double) QuaternionI4F.magnitude(vr);
-
-      
-      
-      
-
-      Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
+      Assert.assertEquals(1.0, m, 0.00001);
     }
   }
 
   @Override @Test public final void testMagnitudeNormalizeZero()
   {
-    final AlmostEqualDouble.ContextRelative ec =
-      TestUtilities.getDoubleEqualityContext();
-
     final QuaternionI4F v = new QuaternionI4F(0.0f, 0.0f, 0.0f, 0.0f);
     final QuaternionI4F vr = QuaternionI4F.normalize(v);
     final double m = (double) QuaternionI4F.magnitude(vr);
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
+    Assert.assertEquals(0.0, m, Eq.DELTA_D_SMALL);
   }
 
   @Override @Test public final void testMagnitudeOne()
   {
-    final AlmostEqualDouble.ContextRelative ec =
-      TestUtilities.getDoubleEqualityContext();
-
     final QuaternionI4F v = new QuaternionI4F(1.0f, 0.0f, 0.0f, 0.0f);
     final double m = (double) QuaternionI4F.magnitude(v);
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
+    Assert.assertEquals(1.0, m, Eq.DELTA_D_SMALL);
   }
 
   @Override @Test public final void testMagnitudeSimple()
@@ -712,19 +643,13 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMagnitudeZero()
   {
-    final AlmostEqualDouble.ContextRelative ec =
-      TestUtilities.getDoubleEqualityContext();
-
     final QuaternionI4F v = new QuaternionI4F(0.0f, 0.0f, 0.0f, 0.0f);
     final double m = (double) QuaternionI4F.magnitude(v);
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
+    Assert.assertEquals(0.0, m, Eq.DELTA_D_SMALL);
   }
 
   @Override @Test public final void testMakeAxisAngleNormal()
   {
-    final AlmostEqualFloat.ContextRelative context =
-      TestUtilities.getSingleEqualityContext();
-
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final VectorI3F axis_r = new VectorI3F(
         (float) this.getRandom(),
@@ -735,11 +660,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
         axis_n, (double) (float) Math.toRadians(this.getRandom() * 360.0));
 
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          context, QuaternionI4F.magnitude(q), 1.0f));
-
-      
+      Assert.assertEquals(1.0f, QuaternionI4F.magnitude(q), 0.00001);
     }
   }
 
@@ -752,157 +673,106 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(45.0));
 
-    
-
-    /**
+    /*
      * Values obtained by checking against the results produced by Blender.
      *
      * @see http://blender.org
      */
 
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getXF(), 0.3826834323650898f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getWF(), 0.9238795325112867f));
+    Assert.assertEquals(0.3826834323650898f, q.getXF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.0f, q.getYF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.0f, q.getZF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.9238795325112867f, q.getWF(), Eq.DELTA_F_SMALL);
   }
 
   @Override @Test public final void testMakeAxisAngleX_90()
   {
-    final AlmostEqualFloat.ContextRelative context =
-      TestUtilities.getSingleEqualityContext();
-
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_X;
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(90.0));
 
-    
-
-    /**
+    /*
      * Values obtained by checking against the results produced by Blender.
      *
      * @see http://blender.org
      */
 
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getXF(), 0.7071067811865475f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getWF(), 0.7071067811865475f));
+    Assert.assertEquals(0.7071067811865475f, q.getXF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.0f, q.getYF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.0f, q.getZF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.7071067811865475f, q.getWF(), Eq.DELTA_F_SMALL);
   }
 
   @Override @Test public final void testMakeAxisAngleY_45()
   {
-    final AlmostEqualFloat.ContextRelative context =
-      TestUtilities.getSingleEqualityContext();
-
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(45.0));
 
-    
-
-    /**
+    /*
      * Values obtained by checking against the results produced by Blender.
      *
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getYF(), 0.3826834323650898f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getWF(), 0.9238795325112867f));
+    Assert.assertEquals(0.0f, q.getXF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.3826834323650898f, q.getYF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.0f, q.getZF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.9238795325112867f, q.getWF(), Eq.DELTA_F_SMALL);
   }
 
   @Override @Test public final void testMakeAxisAngleY_90()
   {
-    final AlmostEqualFloat.ContextRelative context =
-      TestUtilities.getSingleEqualityContext();
-
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(90.0));
 
-    
-
-    /**
+    /*
      * Values obtained by checking against the results produced by Blender.
      *
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getYF(), 0.7071067811865475f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getZF(), 0.0f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getWF(), 0.7071067811865475f));
+    Assert.assertEquals(0.0f, q.getXF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.7071067811865475f, q.getYF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.0f, q.getZF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.7071067811865475f, q.getWF(), Eq.DELTA_F_SMALL);
   }
 
   @Override @Test public final void testMakeAxisAngleZ_45()
   {
-    final AlmostEqualFloat.ContextRelative context =
-      TestUtilities.getSingleEqualityContext();
-
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(45.0));
 
-    
-
-    /**
+    /*
      * Values obtained by checking against the results produced by Blender.
      *
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getZF(), 0.3826834323650898f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getWF(), 0.9238795325112867f));
+    Assert.assertEquals(0.0f, q.getXF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.0f, q.getYF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.3826834323650898f, q.getZF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.9238795325112867f, q.getWF(), Eq.DELTA_F_SMALL);
   }
 
   @Override @Test public final void testMakeAxisAngleZ_90()
   {
-    final AlmostEqualFloat.ContextRelative context =
-      TestUtilities.getSingleEqualityContext();
-
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(90.0));
 
-    
-
-    /**
+    /*
      * Values obtained by checking against the results produced by Blender.
      *
      * @see http://blender.org
      */
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getXF(), 0.0f));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(context, q.getYF(), 0.0f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getZF(), 0.7071067811865475f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, q.getWF(), 0.7071067811865475f));
+    Assert.assertEquals(0.0f, q.getXF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.0f, q.getYF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.7071067811865475f, q.getZF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.7071067811865475f, q.getWF(), Eq.DELTA_F_SMALL);
   }
 
   @Override @Test public final void testMakeFromMatrix3x3Exhaustive()
@@ -913,7 +783,6 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       TestUtilities.getDoubleEqualityContext6dp();
 
     final Matrix3x3FType m = MatrixHeapArrayM3x3F.newMatrix();
-    boolean eq = false;
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double degrees = (2.0 * this.getRandom() * 360.0) - 360.0;
@@ -924,13 +793,13 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final VectorM3F axis = new VectorM3F(axis_x, axis_y, axis_z);
       VectorM3F.normalizeInPlace(axis);
 
-      /**
+      /*
        * Produce a quaternion from an axis and angle.
        */
 
       final QuaternionI4F qaa = QuaternionI4F.makeFromAxisAngle(axis, angle);
 
-      /**
+      /*
        * Produce a rotation matrix from an axis and angle, and then a
        * quaternion from that matrix.
        */
@@ -941,26 +810,14 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final double mag_qfm = (double) QuaternionI4F.magnitude(qfm);
       final double mag_qaa = (double) QuaternionI4F.magnitude(qaa);
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-      /**
+      /*
        * The resulting quaternions are unit quaternions.
        */
 
-      eq = AlmostEqualDouble.almostEqual(context_d, mag_qfm, 1.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, mag_qaa, 1.0);
-      Assert.assertTrue(eq);
+      Assert.assertEquals(1.0, mag_qfm, 0.00001);
+      Assert.assertEquals(1.0, mag_qaa, 0.00001);
 
-      /**
+      /*
        * The resulting quaternions match.
        */
 
@@ -969,7 +826,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
         continue;
       }
 
-      /**
+      /*
        * The sign of quaternions may flip when created from matrices.
        */
 
@@ -990,7 +847,6 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       TestUtilities.getDoubleEqualityContext6dp();
 
     final Matrix4x4FType m = MatrixHeapArrayM4x4F.newMatrix();
-    boolean eq = false;
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double degrees = (2.0 * this.getRandom() * 360.0) - 360.0;
@@ -1001,13 +857,13 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final VectorM3F axis = new VectorM3F(axis_x, axis_y, axis_z);
       VectorM3F.normalizeInPlace(axis);
 
-      /**
+      /*
        * Produce a quaternion from an axis and angle.
        */
 
       final QuaternionI4F qaa = QuaternionI4F.makeFromAxisAngle(axis, angle);
 
-      /**
+      /*
        * Produce a rotation matrix from an axis and angle, and then a
        * quaternion from that matrix.
        */
@@ -1018,26 +874,14 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final double mag_qfm = (double) QuaternionI4F.magnitude(qfm);
       final double mag_qaa = (double) QuaternionI4F.magnitude(qaa);
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-      /**
+      /*
        * The resulting quaternions are unit quaternions.
        */
 
-      eq = AlmostEqualDouble.almostEqual(context_d, mag_qfm, 1.0);
-      Assert.assertTrue(eq);
-      eq = AlmostEqualDouble.almostEqual(context_d, mag_qaa, 1.0);
-      Assert.assertTrue(eq);
+      Assert.assertEquals(1.0, mag_qfm, 0.00001);
+      Assert.assertEquals(1.0, mag_qaa, 0.00001);
 
-      /**
+      /*
        * The resulting quaternions match.
        */
 
@@ -1046,7 +890,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
         continue;
       }
 
-      /**
+      /*
        * The sign of quaternions may flip when created from matrices.
        */
 
@@ -1061,12 +905,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMakeMatrix3x3_45X()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix3x3FType mq = MatrixHeapArrayM3x3F.newMatrix();
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_X;
@@ -1075,29 +915,19 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix3x3(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
 
   @Override @Test public final void testMakeMatrix3x3_45Y()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix3x3FType mq = MatrixHeapArrayM3x3F.newMatrix();
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
@@ -1106,29 +936,19 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix3x3(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
 
   @Override @Test public final void testMakeMatrix3x3_45Z()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix3x3FType mq = MatrixHeapArrayM3x3F.newMatrix();
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
@@ -1137,17 +957,11 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix3x3(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
@@ -1174,12 +988,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMakeMatrix3x3_Minus45X()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix3x3FType mq = MatrixHeapArrayM3x3F.newMatrix();
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(-45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_X;
@@ -1188,29 +998,19 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix3x3(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
 
   @Override @Test public final void testMakeMatrix3x3_Minus45Y()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix3x3FType mq = MatrixHeapArrayM3x3F.newMatrix();
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(-45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
@@ -1219,29 +1019,19 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix3x3(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
 
   @Override @Test public final void testMakeMatrix3x3_Minus45Z()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix3x3FType mq = MatrixHeapArrayM3x3F.newMatrix();
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(-45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
@@ -1250,29 +1040,19 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix3x3(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
 
   @Override @Test public final void testMakeMatrix4x4_45X()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix4x4FType mq = MatrixHeapArrayM4x4F.newMatrix();
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_X;
@@ -1281,29 +1061,19 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix4x4(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
 
   @Override @Test public final void testMakeMatrix4x4_45Y()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix4x4FType mq = MatrixHeapArrayM4x4F.newMatrix();
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
@@ -1312,29 +1082,19 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix4x4(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
 
   @Override @Test public final void testMakeMatrix4x4_45Z()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix4x4FType mq = MatrixHeapArrayM4x4F.newMatrix();
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
@@ -1343,17 +1103,11 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix4x4(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
@@ -1388,12 +1142,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMakeMatrix4x4_Minus45X()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix4x4FType mq = MatrixHeapArrayM4x4F.newMatrix();
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(-45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_X;
@@ -1402,29 +1152,19 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix4x4(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
 
   @Override @Test public final void testMakeMatrix4x4_Minus45Y()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix4x4FType mq = MatrixHeapArrayM4x4F.newMatrix();
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(-45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
@@ -1433,29 +1173,19 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix4x4(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
 
   @Override @Test public final void testMakeMatrix4x4_Minus45Z()
   {
-    final AlmostEqualFloat.ContextRelative context_f =
-      TestUtilities.getSingleEqualityContext();
-
     final Matrix4x4FType mq = MatrixHeapArrayM4x4F.newMatrix();
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
-    boolean eq = false;
 
     final double radians = Math.toRadians(-45.0);
     final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
@@ -1464,17 +1194,11 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
     QuaternionI4F.makeRotationMatrix4x4(q, mq);
 
-    
-    
-    
-    
-
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
         final float x = mr.getRowColumnF(row, col);
         final float y = mq.getRowColumnF(row, col);
-        eq = AlmostEqualFloat.almostEqual(context_f, x, y);
-        Assert.assertTrue(eq);
+        Assert.assertEquals(y, x, Eq.DELTA_F_SMALL);
       }
     }
   }
@@ -1491,32 +1215,23 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F qy = QuaternionI4F.makeFromAxisAngle(
       axis_y, (double) (float) Math.toRadians(45.0));
 
-    /**
+    /*
      * The quaternion resulting from a 45 degree rotation around the global X
      * axis, followed by a 45 degree rotation around the global Y axis.
      */
 
     final QuaternionI4F qr = QuaternionI4F.multiply(qy, qx);
-    
 
-    /**
+    /*
      * Values obtained by checking against the results produced by Blender.
      *
      * @see http://blender.org
      */
 
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, qr.getXF(), 0.3535533905932738f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, qr.getYF(), 0.3535533905932738f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, qr.getZF(), -0.14644660940672624f));
-    Assert.assertTrue(
-      AlmostEqualFloat.almostEqual(
-        context, qr.getWF(), 0.8535533905932737f));
+    Assert.assertEquals(0.3535533905932738f, qr.getXF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.3535533905932738f, qr.getYF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(-0.14644660940672624f, qr.getZF(), Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.8535533905932737f, qr.getWF(), Eq.DELTA_F_SMALL);
   }
 
   @Override @Test public final void testNegation()
@@ -1534,11 +1249,6 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final QuaternionI4F qn =
         new QuaternionI4F((float) -x, (float) -y, (float) -z, (float) -w);
       final QuaternionI4F qr = QuaternionI4F.negate(qi);
-
-      
-      
-      
-      
 
       Assert.assertTrue(QuaternionI4F.isNegationOf(context, qi, qr));
       Assert.assertTrue(QuaternionI4F.almostEqual(context, qn, qr));
@@ -1583,10 +1293,10 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final QuaternionI4F q = new QuaternionI4F(0.0F, 0.0F, 0.0F, 0.0F);
     final QuaternionI4F qr = QuaternionI4F.normalize(q);
 
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0.0F, qr.getXF()));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0.0F, qr.getYF()));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0.0F, qr.getZF()));
-    Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0.0F, qr.getWF()));
+    Assert.assertEquals(qr.getXF(), 0.0F, Eq.DELTA_F_SMALL);
+    Assert.assertEquals(qr.getYF(), 0.0F, Eq.DELTA_F_SMALL);
+    Assert.assertEquals(qr.getZF(), 0.0F, Eq.DELTA_F_SMALL);
+    Assert.assertEquals(qr.getWF(), 0.0F, Eq.DELTA_F_SMALL);
   }
 
   @Override @Test public final void testScaleOne()
@@ -1603,18 +1313,10 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
       final QuaternionI4F vr = QuaternionI4F.scale(v, 1.0f);
 
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          ec, v.getXF(), vr.getXF()));
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          ec, v.getYF(), vr.getYF()));
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          ec, v.getZF(), vr.getZF()));
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          ec, v.getWF(), vr.getWF()));
+      Assert.assertEquals(vr.getXF(), v.getXF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(vr.getYF(), v.getYF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(vr.getZF(), v.getZF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(vr.getWF(), v.getWF(), Eq.DELTA_F_SMALL);
     }
   }
 
@@ -1632,10 +1334,10 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
       final QuaternionI4F vr = QuaternionI4F.scale(v, 0.0f);
 
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.getXF(), 0.0f));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.getYF(), 0.0f));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.getZF(), 0.0f));
-      Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, vr.getWF(), 0.0f));
+      Assert.assertEquals(0.0f, vr.getXF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(0.0f, vr.getYF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(0.0f, vr.getZF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(0.0f, vr.getWF(), Eq.DELTA_F_SMALL);
     }
   }
 
@@ -1665,18 +1367,10 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
       final QuaternionI4F vr = QuaternionI4F.subtract(v0, v1);
 
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          context, vr.getXF(), v0.getXF() - v1.getXF()));
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          context, vr.getYF(), v0.getYF() - v1.getYF()));
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          context, vr.getZF(), v0.getZF() - v1.getZF()));
-      Assert.assertTrue(
-        AlmostEqualFloat.almostEqual(
-          context, vr.getWF(), v0.getWF() - v1.getWF()));
+      Assert.assertEquals(v0.getXF() - v1.getXF(), vr.getXF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(v0.getYF() - v1.getYF(), vr.getYF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(v0.getZF() - v1.getZF(), vr.getZF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(v0.getWF() - v1.getWF(), vr.getWF(), Eq.DELTA_F_SMALL);
     }
   }
 }
