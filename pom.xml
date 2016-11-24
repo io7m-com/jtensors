@@ -19,6 +19,7 @@
     <module>io7m-jtensors-checkstyle</module>
     <module>io7m-jtensors-core</module>
     <module>io7m-jtensors-documentation</module>
+    <module>io7m-jtensors-generators</module>
     <module>io7m-jtensors-ieee754b16</module>
     <module>io7m-jtensors-tests</module>
   </modules>
@@ -171,6 +172,11 @@
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
         <version>1.1.3</version>
+      </dependency>
+      <dependency>
+        <groupId>net.java.quickcheck</groupId>
+        <artifactId>quickcheck</artifactId>
+        <version>0.6</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
