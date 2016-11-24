@@ -53,7 +53,8 @@
         <configuration>
           <instructions>
             <Export-Package>
-              com.io7m.jtensors.generators
+              com.io7m.jtensors.generators,
+              com.io7m.jtensors.generators.parameterized
             </Export-Package>
           </instructions>
         </configuration>
