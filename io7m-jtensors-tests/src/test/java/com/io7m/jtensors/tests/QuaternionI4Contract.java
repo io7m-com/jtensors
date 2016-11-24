@@ -31,7 +31,7 @@ public abstract class QuaternionI4Contract
   public abstract void testAlmostEqualNot();
 
   /**
-   * <code>∀q r s. q ≃ r ∧ r ≃ s → q ≃ s</code>
+   * {@code ∀q r s. q ≃ r ∧ r ≃ s → q ≃ s}
    */
 
   public abstract void testAlmostEqualTransitive();
@@ -43,14 +43,14 @@ public abstract class QuaternionI4Contract
   public abstract void testCheckInterface();
 
   /**
-   * The conjugate of a quaternion <code>q = (v, s)</code> is given by
-   * <code>(-v, s)</code>.
+   * The conjugate of a quaternion {@code q = (v, s)} is given by
+   * {@code (-v, s)}.
    */
 
   public abstract void testConjugate();
 
   /**
-   * Conjugation is invertible; <code>∀q. conjugate(conjugate(q)) = q</code>
+   * Conjugation is invertible; {@code ∀q. conjugate(conjugate(q)) = q}
    */
 
   public abstract void testConjugateInvertible();
@@ -62,19 +62,19 @@ public abstract class QuaternionI4Contract
   public abstract void testDefault0001();
 
   /**
-   * The <code>dotProduct</code> function gives expected results.
+   * The {@code dotProduct} function gives expected results.
    */
 
   public abstract void testDotProduct();
 
   /**
-   * <code>∀q. dotProduct(q, q) = 1</code>
+   * {@code ∀q. dotProduct(q, q) = 1}
    */
 
   public abstract void testDotProductSelf();
 
   /**
-   * <code>∀q. dotProduct(q, q) = magnitude(q)²</code>
+   * {@code ∀q. dotProduct(q, q) = magnitude(q)²}
    */
 
   public abstract void testDotProductSelfMagnitudeSquared();
@@ -106,8 +106,8 @@ public abstract class QuaternionI4Contract
   public abstract void testInitializeReadable();
 
   /**
-   * <p> <code>∀q r s. interpolateLinear(q, r, 1.0) = r</code> </p> <p> <code>∀q
-   * r s. interpolateLinear(q, r, 0.0) = q</code> </p>
+   * <p> {@code ∀q r s. interpolateLinear(q, r, 1.0) = r} </p> <p> {@code ∀q
+   * r s. interpolateLinear(q, r, 0.0) = q} </p>
    */
 
   public abstract void testInterpolateLinearLimits();
@@ -140,19 +140,19 @@ public abstract class QuaternionI4Contract
   public abstract void testMagnitudeNonzero();
 
   /**
-   * <p> <code>∀q. magnitude(normalize(q)) = 1</code> </p>
+   * <p> {@code ∀q. magnitude(normalize(q)) = 1} </p>
    */
 
   public abstract void testMagnitudeNormal();
 
   /**
-   * <p> <code>magnitude(normalize((0,0,0,0)) = 0</code> </p>
+   * <p> {@code magnitude(normalize((0,0,0,0)) = 0} </p>
    */
 
   public abstract void testMagnitudeNormalizeZero();
 
   /**
-   * <p> <code>magnitude((1,0,0,0)) = 1</code> </p>
+   * <p> {@code magnitude((1,0,0,0)) = 1} </p>
    */
 
   public abstract void testMagnitudeOne();
@@ -164,13 +164,13 @@ public abstract class QuaternionI4Contract
   public abstract void testMagnitudeSimple();
 
   /**
-   * <p> <code>magnitude((0,0,0,0)) = 0</code> </p>
+   * <p> {@code magnitude((0,0,0,0)) = 0} </p>
    */
 
   public abstract void testMagnitudeZero();
 
   /**
-   * <p> <code>∀a r. magnitude(makeFromAxisAngle(a, r)) = 1</code> </p>
+   * <p> {@code ∀a r. magnitude(makeFromAxisAngle(a, r)) = 1} </p>
    */
 
   public abstract void testMakeAxisAngleNormal();
@@ -188,17 +188,17 @@ public abstract class QuaternionI4Contract
   public abstract void testMakeAxisAngleZ_90();
 
   /**
-   * A quaternion <code>q</code> produced from an axis/angle, and a quaternion
-   * <code>r</code> produced from a 3x3 matrix produced from an axis/angle
-   * implies <code>q = r</code>.
+   * A quaternion {@code q} produced from an axis/angle, and a quaternion
+   * {@code r} produced from a 3x3 matrix produced from an axis/angle
+   * implies {@code q = r}.
    */
 
   public abstract void testMakeFromMatrix3x3Exhaustive();
 
   /**
-   * A quaternion <code>q</code> produced from an axis/angle, and a quaternion
-   * <code>r</code> produced from a 4x4 matrix produced from an axis/angle
-   * implies <code>q = r</code>.
+   * A quaternion {@code q} produced from an axis/angle, and a quaternion
+   * {@code r} produced from a 4x4 matrix produced from an axis/angle
+   * implies {@code q = r}.
    */
 
   public abstract void testMakeFromMatrix4x4Exhaustive();
@@ -246,7 +246,7 @@ public abstract class QuaternionI4Contract
   public abstract void testMultiply();
 
   /**
-   * <p> <code>∀q. isNegationOf(q, negate(q))</code> </p>
+   * <p> {@code ∀q. isNegationOf(q, negate(q))} </p>
    */
 
   public abstract void testNegation();
@@ -262,13 +262,13 @@ public abstract class QuaternionI4Contract
   public abstract void testNormalizeZero();
 
   /**
-   * <p> <code>∀q. scale(q, 1) = q</code> </p>
+   * <p> {@code ∀q. scale(q, 1) = q} </p>
    */
 
   public abstract void testScaleOne();
 
   /**
-   * <p> <code>∀q. scale(q, 0) = (0,0,0,0)</code> </p>
+   * <p> {@code ∀q. scale(q, 0) = (0,0,0,0)} </p>
    */
 
   public abstract void testScaleZero();

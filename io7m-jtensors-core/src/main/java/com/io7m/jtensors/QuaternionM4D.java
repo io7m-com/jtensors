@@ -1,5 +1,5 @@
 /*
- * Copyright © 2015 <code@io7m.com> http://io7m.com
+ * Copyright © 2016 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -918,25 +918,29 @@ public final class QuaternionM4D implements Quaternion4DType
     return QuaternionM4D.subtract(q0, q1, q0);
   }
 
-  @Override public void copyFrom2D(
+  @Override
+  public void copyFrom2D(
     final VectorReadable2DType in_v)
   {
     VectorM2D.copy(in_v, this);
   }
 
-  @Override public void copyFrom3D(
+  @Override
+  public void copyFrom3D(
     final VectorReadable3DType in_v)
   {
     VectorM3D.copy(in_v, this);
   }
 
-  @Override public void copyFrom4D(
+  @Override
+  public void copyFrom4D(
     final VectorReadable4DType in_v)
   {
     VectorM4D.copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -961,51 +965,60 @@ public final class QuaternionM4D implements Quaternion4DType
     return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
   }
 
-  @Override public double getWD()
+  @Override
+  public double getWD()
   {
     return this.w;
   }
 
-  @Override public void setWD(
+  @Override
+  public void setWD(
     final double in_w)
   {
     this.w = in_w;
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public void setXD(
+  @Override
+  public void setXD(
     final double in_x)
   {
     this.x = in_x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public void setYD(
+  @Override
+  public void setYD(
     final double in_y)
   {
     this.y = in_y;
   }
 
-  @Override public double getZD()
+  @Override
+  public double getZD()
   {
     return this.z;
   }
 
-  @Override public void setZD(
+  @Override
+  public void setZD(
     final double in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1021,7 +1034,8 @@ public final class QuaternionM4D implements Quaternion4DType
     return result;
   }
 
-  @Override public void set2D(
+  @Override
+  public void set2D(
     final double in_x,
     final double in_y)
   {
@@ -1029,7 +1043,8 @@ public final class QuaternionM4D implements Quaternion4DType
     this.y = in_y;
   }
 
-  @Override public void set3D(
+  @Override
+  public void set3D(
     final double in_x,
     final double in_y,
     final double in_z)
@@ -1039,7 +1054,8 @@ public final class QuaternionM4D implements Quaternion4DType
     this.z = in_z;
   }
 
-  @Override public void set4D(
+  @Override
+  public void set4D(
     final double in_x,
     final double in_y,
     final double in_z,
@@ -1051,7 +1067,44 @@ public final class QuaternionM4D implements Quaternion4DType
     this.w = in_w;
   }
 
-  @Override public String toString()
+  /**
+   * Determine the axis-angle representation of the given quaternion.
+   *
+   * @param q   The input quaternion
+   * @param out The output vector that will contain the axis
+   * @param <V> The precise type of output vector
+   *
+   * @return The angle
+   */
+
+  public static <V extends VectorWritable3DType> double toAxisAngle(
+    final QuaternionReadable4DType q,
+    final V out)
+  {
+    final double rx;
+    final double ry;
+    final double rz;
+    final double angle;
+
+    final double mag_s = QuaternionM4D.magnitudeSquared(q);
+    if (mag_s != 0.0) {
+      angle = 2.0 * StrictMath.acos(q.getWD());
+      rx = q.getXD();
+      ry = q.getYD();
+      rz = q.getZD();
+    } else {
+      angle = 0.0;
+      rx = 1.0;
+      ry = 0.0;
+      rz = 0.0;
+    }
+
+    VectorM3D.normalize(new VectorM3D(rx, ry, rz), out);
+    return angle;
+  }
+
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[QuaternionM4D ");
@@ -1089,11 +1142,11 @@ public final class QuaternionM4D implements Quaternion4DType
   {
     private final MatrixM3x3D.ContextMM3D m_context =
       new MatrixM3x3D.ContextMM3D();
-    private final Matrix3x3DType          m3a       =
+    private final Matrix3x3DType m3a =
       MatrixHeapArrayM3x3D.newMatrix();
-    private final VectorM3D               v3a       = new VectorM3D();
-    private final QuaternionM4D           qa        = new QuaternionM4D();
-    private final QuaternionM4D           qb        = new QuaternionM4D();
+    private final VectorM3D v3a = new VectorM3D();
+    private final QuaternionM4D qa = new QuaternionM4D();
+    private final QuaternionM4D qb = new QuaternionM4D();
 
     /**
      * Construct a new context.

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2015 <code@io7m.com> http://io7m.com
+ * Copyright © 2016 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -910,25 +910,29 @@ public final class QuaternionM4F implements Quaternion4FType
     return QuaternionM4F.subtract(q0, q1, q0);
   }
 
-  @Override public void copyFrom2F(
+  @Override
+  public void copyFrom2F(
     final VectorReadable2FType in_v)
   {
     VectorM2F.copy(in_v, this);
   }
 
-  @Override public void copyFrom3F(
+  @Override
+  public void copyFrom3F(
     final VectorReadable3FType in_v)
   {
     VectorM3F.copy(in_v, this);
   }
 
-  @Override public void copyFrom4F(
+  @Override
+  public void copyFrom4F(
     final VectorReadable4FType in_v)
   {
     VectorM4F.copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -953,51 +957,60 @@ public final class QuaternionM4F implements Quaternion4FType
     return Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
   }
 
-  @Override public float getWF()
+  @Override
+  public float getWF()
   {
     return this.w;
   }
 
-  @Override public void setWF(
+  @Override
+  public void setWF(
     final float in_w)
   {
     this.w = in_w;
   }
 
-  @Override public float getXF()
+  @Override
+  public float getXF()
   {
     return this.x;
   }
 
-  @Override public void setXF(
+  @Override
+  public void setXF(
     final float in_x)
   {
     this.x = in_x;
   }
 
-  @Override public float getYF()
+  @Override
+  public float getYF()
   {
     return this.y;
   }
 
-  @Override public void setYF(
+  @Override
+  public void setYF(
     final float in_y)
   {
     this.y = in_y;
   }
 
-  @Override public float getZF()
+  @Override
+  public float getZF()
   {
     return this.z;
   }
 
-  @Override public void setZF(
+  @Override
+  public void setZF(
     final float in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1008,7 +1021,8 @@ public final class QuaternionM4F implements Quaternion4FType
     return result;
   }
 
-  @Override public void set2F(
+  @Override
+  public void set2F(
     final float in_x,
     final float in_y)
   {
@@ -1016,7 +1030,8 @@ public final class QuaternionM4F implements Quaternion4FType
     this.y = in_y;
   }
 
-  @Override public void set3F(
+  @Override
+  public void set3F(
     final float in_x,
     final float in_y,
     final float in_z)
@@ -1026,7 +1041,8 @@ public final class QuaternionM4F implements Quaternion4FType
     this.z = in_z;
   }
 
-  @Override public void set4F(
+  @Override
+  public void set4F(
     final float in_x,
     final float in_y,
     final float in_z,
@@ -1038,7 +1054,44 @@ public final class QuaternionM4F implements Quaternion4FType
     this.w = in_w;
   }
 
-  @Override public String toString()
+  /**
+   * Determine the axis-angle representation of the given quaternion.
+   *
+   * @param q   The input quaternion
+   * @param out The output vector that will contain the axis
+   * @param <V> The precise type of output vector
+   *
+   * @return The angle
+   */
+
+  public static <V extends VectorWritable3FType> double toAxisAngle(
+    final QuaternionReadable4FType q,
+    final V out)
+  {
+    final float rx;
+    final float ry;
+    final float rz;
+    final double angle;
+
+    final double mag_s = QuaternionM4F.magnitudeSquared(q);
+    if (mag_s != 0.0) {
+      angle = 2.0 * StrictMath.acos(q.getWF());
+      rx = q.getXF();
+      ry = q.getYF();
+      rz = q.getZF();
+    } else {
+      angle = 0.0;
+      rx = 1.0f;
+      ry = 0.0f;
+      rz = 0.0f;
+    }
+
+    VectorM3F.normalize(new VectorM3F(rx, ry, rz), out);
+    return angle;
+  }
+
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[QuaternionM4F ");
@@ -1076,11 +1129,11 @@ public final class QuaternionM4F implements Quaternion4FType
   {
     private final MatrixM3x3F.ContextMM3F m_context =
       new MatrixM3x3F.ContextMM3F();
-    private final Matrix3x3FType          m3a       =
+    private final Matrix3x3FType m3a =
       MatrixHeapArrayM3x3F.newMatrix();
-    private final VectorM3F               v3a       = new VectorM3F();
-    private final QuaternionM4F           qa        = new QuaternionM4F();
-    private final QuaternionM4F           qb        = new QuaternionM4F();
+    private final VectorM3F v3a = new VectorM3F();
+    private final QuaternionM4F qa = new QuaternionM4F();
+    private final QuaternionM4F qb = new QuaternionM4F();
 
     /**
      * Construct a new context.
