@@ -27,8 +27,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <siteReposDirectory>/com/io7m/jtensors</siteReposDirectory>
-    <siteDocumentationDirectory>/com/io7m/jtensors/io7m-jtensors-documentation</siteDocumentationDirectory>
+    <siteReposDirectory>com/io7m/jtensors</siteReposDirectory>
+    <siteDocumentationDirectory>com/io7m/jtensors/io7m-jtensors-documentation</siteDocumentationDirectory>
   </properties>
 
   <licenses>
