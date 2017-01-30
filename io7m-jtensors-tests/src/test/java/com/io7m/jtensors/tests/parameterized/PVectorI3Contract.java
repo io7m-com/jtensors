@@ -141,8 +141,8 @@ public abstract class PVectorI3Contract
   public abstract void testInitializeReadable();
 
   /**
-   * <p> {@code ∀v r s. interpolateLinear(v, r, 1.0) = r} </p> <p> <code>∀v
-   * r s. interpolateLinear(v, r, 0.0) = v</code> </p>
+   * <p> {@code ∀v r s. interpolateLinear(v, r, 1.0) = r} </p> <p> {@code ∀v
+   * r s. interpolateLinear(v, r, 0.0) = v} </p>
    */
 
   public abstract void testInterpolateLinearLimits();
