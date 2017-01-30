@@ -565,7 +565,7 @@ public class QuaternionI4DTest extends QuaternionI4Contract
       Assert.assertTrue(
         QuaternionI4D.almostEqual(context, r0, v0));
       Assert.assertTrue(
-        QuaternionI4D.almostEqual(context, r1, r1));
+        QuaternionI4D.almostEqual(context, r1, v1));
     }
   }
 

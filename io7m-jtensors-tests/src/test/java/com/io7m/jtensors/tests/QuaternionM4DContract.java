@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors.tests;
 
+import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualDouble.ContextRelative;
 import com.io7m.jtensors.Matrix3x3DType;
 import com.io7m.jtensors.Matrix4x4DType;
@@ -25,6 +26,7 @@ import com.io7m.jtensors.MatrixM3x3D;
 import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.Quaternion4DType;
 import com.io7m.jtensors.QuaternionM4D;
+import com.io7m.jtensors.QuaternionReadable4DType;
 import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorM3D;
 import com.io7m.jtensors.VectorReadable3DType;
@@ -689,6 +691,116 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       Assert.assertEquals(vr1.getYD(), v1.getYD(), Eq.DELTA_D_SMALL);
       Assert.assertEquals(vr1.getZD(), v1.getZD(), Eq.DELTA_D_SMALL);
       Assert.assertEquals(vr1.getWD(), v1.getWD(), Eq.DELTA_D_SMALL);
+    }
+  }
+
+  @Test
+  public final void testInterpolateSphericalLinearLimits()
+  {
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x0 = getRandom() * 100000.0;
+      final double y0 = getRandom() * 100000.0;
+      final double z0 = getRandom() * 100000.0;
+      final double w0 = getRandom() * 100000.0;
+      final T v0 = this.newQuaternion(x0, y0, z0, w0);
+
+      final double x1 = getRandom() * 100000.0;
+      final double y1 = getRandom() * 100000.0;
+      final double z1 = getRandom() * 100000.0;
+      final double w1 = getRandom() * 100000.0;
+      final T v1 = this.newQuaternion(x1, y1, z1, w1);
+
+      final T vr0 = this.newQuaternion();
+      final T vr1 = this.newQuaternion();
+      QuaternionM4D.interpolateSphericalLinear(c, v0, v1, 0.0, vr0);
+      QuaternionM4D.interpolateSphericalLinear(c, v0, v1, 1.0, vr1);
+
+      LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(0.0), vr0);
+      LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(1.0), vr1);
+
+      final T v0n = this.newQuaternion(v0);
+      QuaternionM4D.normalizeInPlace(v0n);
+      final T v1n = this.newQuaternion(v1);
+      QuaternionM4D.normalizeInPlace(v1n);
+
+      Assert.assertEquals(vr0.getXD(), v0n.getXD(), Eq.DELTA_D_SMALL);
+      Assert.assertEquals(vr0.getYD(), v0n.getYD(), Eq.DELTA_D_SMALL);
+      Assert.assertEquals(vr0.getZD(), v0n.getZD(), Eq.DELTA_D_SMALL);
+      Assert.assertEquals(vr0.getWD(), v0n.getWD(), Eq.DELTA_D_SMALL);
+
+      Assert.assertEquals(vr1.getXD(), v1n.getXD(), Eq.DELTA_D_SMALL);
+      Assert.assertEquals(vr1.getYD(), v1n.getYD(), Eq.DELTA_D_SMALL);
+      Assert.assertEquals(vr1.getZD(), v1n.getZD(), Eq.DELTA_D_SMALL);
+      Assert.assertEquals(vr1.getWD(), v1n.getWD(), Eq.DELTA_D_SMALL);
+    }
+  }
+
+  @Test public final void testInterpolateSphericalLinearNegated()
+  {
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
+
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    final VectorI3D axis0 =
+      VectorI3D.normalize(new VectorI3D(0.0, 1.0, 0.0));
+
+    final T v0 = this.newQuaternion();
+    final T v1 = this.newQuaternion();
+
+    QuaternionM4D.makeFromAxisAngle(c, axis0, 0.0, v0);
+    QuaternionM4D.makeFromAxisAngle(c, axis0, Math.toRadians(181.0), v1);
+
+    Assert.assertTrue(QuaternionM4D.dotProduct(v0, v1) < 0.0);
+
+    final T r0 = this.newQuaternion();
+    final T r1 = this.newQuaternion();
+
+    QuaternionM4D.interpolateSphericalLinear(c, v0, v1, 0.0, r0);
+    QuaternionM4D.interpolateSphericalLinear(c, v0, v1, 1.0, r1);
+
+    LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(0.0), r0);
+    LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(1.0), r1);
+
+    Assert.assertTrue(
+      QuaternionM4D.almostEqual(context, r0, v0));
+
+    QuaternionM4D.negateInPlace(v1);
+    Assert.assertTrue(
+      QuaternionM4D.almostEqual(context, r1, v1));
+  }
+
+  @Test public final void testInterpolateSphericalLinearCodirectional()
+  {
+    final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
+    final ContextRelative context = TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x0 = getRandom() * 100000.0;
+      final double y0 = getRandom() * 100000.0;
+      final double z0 = getRandom() * 100000.0;
+      final double w0 = getRandom() * 100000.0;
+      final T v0 = this.newQuaternion(x0, y0, z0, w0);
+      QuaternionM4D.normalizeInPlace(v0);
+      final T v1 = this.newQuaternion(v0);
+      QuaternionM4D.normalizeInPlace(v1);
+
+      final double alpha = getRandom();
+
+      final T vr0 = this.newQuaternion();
+      final T vr1 = this.newQuaternion();
+      QuaternionM4D.interpolateSphericalLinear(c, v0, v1, alpha, vr0);
+      QuaternionM4D.interpolateLinear(c, v0, v1, alpha, vr1);
+
+      LOG.debug("spherical {} {} {} -> {}", v0, v0, Double.valueOf(alpha), vr0);
+      LOG.debug("linear    {} {} {} -> {}", v0, v0, Double.valueOf(alpha), vr1);
+
+      Assert.assertTrue(
+        QuaternionM4D.almostEqual(context, vr0, v0));
+      Assert.assertTrue(
+        QuaternionM4D.almostEqual(context, vr1, v1));
     }
   }
 
