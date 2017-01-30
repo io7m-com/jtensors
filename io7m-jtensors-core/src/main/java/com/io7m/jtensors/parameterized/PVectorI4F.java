@@ -579,11 +579,8 @@ public final class PVectorI4F<T> implements PVectorReadable4FType<T>
       other.getXF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.getYF()) != Float.floatToIntBits(
-      other.getYF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
+    return Float.floatToIntBits(this.getYF()) == Float.floatToIntBits(
+      other.getYF()) && Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
       other.getZF());
   }
 

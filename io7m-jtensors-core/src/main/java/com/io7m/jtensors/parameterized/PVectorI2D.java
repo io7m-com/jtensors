@@ -546,10 +546,8 @@ public final class PVectorI2D<T> implements PVectorReadable2DType<T>
     }
     @SuppressWarnings("unchecked") final PVectorI2D<T> other =
       (PVectorI2D<T>) obj;
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y);
+    return Double.doubleToLongBits(this.x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(
+      this.y) == Double.doubleToLongBits(other.y);
   }
 
   @Override

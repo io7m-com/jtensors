@@ -542,11 +542,8 @@ public final class VectorI4F implements VectorReadable4FType
       other.getXF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.getYF()) != Float.floatToIntBits(
-      other.getYF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
+    return Float.floatToIntBits(this.getYF()) == Float.floatToIntBits(
+      other.getYF()) && Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
       other.getZF());
   }
 

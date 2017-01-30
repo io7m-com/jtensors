@@ -925,10 +925,8 @@ public final class PVectorM2F<T> implements PVector2FType<T>
       return false;
     }
     final PVectorM2F<?> other = (PVectorM2F<?>) obj;
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
-      return false;
-    }
-    return Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y);
+    return Float.floatToIntBits(this.x) == Float.floatToIntBits(other.x) && Float.floatToIntBits(
+      this.y) == Float.floatToIntBits(other.y);
   }
 
   @Override

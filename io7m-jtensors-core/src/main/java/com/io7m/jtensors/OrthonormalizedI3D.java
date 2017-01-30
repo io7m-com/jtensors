@@ -82,10 +82,7 @@ public final class OrthonormalizedI3D
     if (!this.rv0.equals(other.rv0)) {
       return false;
     }
-    if (!this.rv1.equals(other.rv1)) {
-      return false;
-    }
-    return this.rv2.equals(other.rv2);
+    return this.rv1.equals(other.rv1) && this.rv2.equals(other.rv2);
   }
 
   /**

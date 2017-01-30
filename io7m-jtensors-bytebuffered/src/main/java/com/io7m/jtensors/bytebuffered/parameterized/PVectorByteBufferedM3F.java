@@ -229,15 +229,11 @@ public final class PVectorByteBufferedM3F<T> extends ByteBuffered implements PVe
     }
     final PVectorByteBufferedM3F<?> other = (PVectorByteBufferedM3F<?>) obj;
     if (Float.floatToIntBits(this.getXF())
-        != Float.floatToIntBits(other.getXF())) {
+      != Float.floatToIntBits(other.getXF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.getYF())
-        != Float.floatToIntBits(other.getYF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
-      other.getZF());
+    return Float.floatToIntBits(this.getYF()) == Float.floatToIntBits(other.getYF()) && Float.floatToIntBits(
+      this.getZF()) == Float.floatToIntBits(other.getZF());
   }
 
   @Override public void copyFromTyped3F(final PVectorReadable3FType<T> in_v)

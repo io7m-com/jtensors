@@ -690,10 +690,7 @@ public final class MatrixM2x2F
     final MatrixReadable2x2FType m0,
     final MatrixReadable2x2FType m1)
   {
-    if (!compareRow0(m0, m1)) {
-      return false;
-    }
-    return compareRow1(m0, m1);
+    return compareRow0(m0, m1) && compareRow1(m0, m1);
   }
 
   /**
@@ -746,20 +743,14 @@ public final class MatrixM2x2F
     final MatrixReadable2x2FType m0,
     final MatrixReadable2x2FType m1)
   {
-    if (m0.getR0C0F() != m1.getR0C0F()) {
-      return false;
-    }
-    return m0.getR0C1F() == m1.getR0C1F();
+    return !(m0.getR0C0F() != m1.getR0C0F()) && m0.getR0C1F() == m1.getR0C1F();
   }
 
   private static boolean compareRow1(
     final MatrixReadable2x2FType m0,
     final MatrixReadable2x2FType m1)
   {
-    if (m0.getR1C0F() != m1.getR1C0F()) {
-      return false;
-    }
-    return m0.getR1C1F() == m1.getR1C1F();
+    return !(m0.getR1C0F() != m1.getR1C0F()) && m0.getR1C1F() == m1.getR1C1F();
   }
 
   /**

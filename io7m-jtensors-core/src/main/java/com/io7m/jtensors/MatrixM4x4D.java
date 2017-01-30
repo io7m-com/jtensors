@@ -64,10 +64,7 @@ public final class MatrixM4x4D
     if (!compareRow1(m0, m1)) {
       return false;
     }
-    if (!compareRow2(m0, m1)) {
-      return false;
-    }
-    return compareRow3(m0, m1);
+    return compareRow2(m0, m1) && compareRow3(m0, m1);
   }
 
   /**
@@ -162,10 +159,7 @@ public final class MatrixM4x4D
     if (m0.getR0C1D() != m1.getR0C1D()) {
       return false;
     }
-    if (m0.getR0C2D() != m1.getR0C2D()) {
-      return false;
-    }
-    return m0.getR0C3D() == m1.getR0C3D();
+    return !(m0.getR0C2D() != m1.getR0C2D()) && m0.getR0C3D() == m1.getR0C3D();
   }
 
   private static boolean compareRow1(
@@ -178,10 +172,7 @@ public final class MatrixM4x4D
     if (m0.getR1C1D() != m1.getR1C1D()) {
       return false;
     }
-    if (m0.getR1C2D() != m1.getR1C2D()) {
-      return false;
-    }
-    return m0.getR1C3D() == m1.getR1C3D();
+    return !(m0.getR1C2D() != m1.getR1C2D()) && m0.getR1C3D() == m1.getR1C3D();
   }
 
   private static boolean compareRow2(
@@ -194,10 +185,7 @@ public final class MatrixM4x4D
     if (m0.getR2C1D() != m1.getR2C1D()) {
       return false;
     }
-    if (m0.getR2C2D() != m1.getR2C2D()) {
-      return false;
-    }
-    return m0.getR2C3D() == m1.getR2C3D();
+    return !(m0.getR2C2D() != m1.getR2C2D()) && m0.getR2C3D() == m1.getR2C3D();
   }
 
   private static boolean compareRow3(
@@ -210,10 +198,7 @@ public final class MatrixM4x4D
     if (m0.getR3C1D() != m1.getR3C1D()) {
       return false;
     }
-    if (m0.getR3C2D() != m1.getR3C2D()) {
-      return false;
-    }
-    return m0.getR3C3D() == m1.getR3C3D();
+    return !(m0.getR3C2D() != m1.getR3C2D()) && m0.getR3C3D() == m1.getR3C3D();
   }
 
   /**

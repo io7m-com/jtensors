@@ -927,10 +927,8 @@ public final class PVectorM2D<T> implements PVector2DType<T>
       return false;
     }
     final PVectorM2D<?> other = (PVectorM2D<?>) obj;
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y);
+    return Double.doubleToLongBits(this.x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(
+      this.y) == Double.doubleToLongBits(other.y);
   }
 
   @Override

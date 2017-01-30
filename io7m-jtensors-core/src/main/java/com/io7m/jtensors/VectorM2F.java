@@ -874,10 +874,8 @@ public final class VectorM2F implements Vector2FType
       return false;
     }
     final VectorM2F other = (VectorM2F) obj;
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
-      return false;
-    }
-    return Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y);
+    return Float.floatToIntBits(this.x) == Float.floatToIntBits(other.x) && Float.floatToIntBits(
+      this.y) == Float.floatToIntBits(other.y);
   }
 
   @Override

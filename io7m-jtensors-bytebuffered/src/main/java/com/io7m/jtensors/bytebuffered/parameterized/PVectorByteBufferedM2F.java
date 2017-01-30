@@ -194,12 +194,8 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
       return false;
     }
     final PVectorByteBufferedM2F<?> other = (PVectorByteBufferedM2F<?>) obj;
-    if (Float.floatToIntBits(this.getXF())
-        != Float.floatToIntBits(other.getXF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getYF()) == Float.floatToIntBits(
-      other.getYF());
+    return Float.floatToIntBits(this.getXF()) == Float.floatToIntBits(other.getXF()) && Float.floatToIntBits(
+      this.getYF()) == Float.floatToIntBits(other.getYF());
   }
 
   @Override public void copyFromTyped2F(final PVectorReadable2FType<T> in_v)

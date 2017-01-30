@@ -191,10 +191,7 @@ public final class PVectorByteBufferedM2I<T> extends ByteBuffered
       return false;
     }
     final PVectorByteBufferedM2I<?> other = (PVectorByteBufferedM2I<?>) obj;
-    if (this.getXI() != other.getXI()) {
-      return false;
-    }
-    return this.getYI() == other.getYI();
+    return this.getXI() == other.getXI() && this.getYI() == other.getYI();
   }
 
   @Override public void copyFromTyped2I(final PVectorReadable2IType<T> in_v)

@@ -852,10 +852,7 @@ public final class PVectorM2L<T> implements PVector2LType<T>
       return false;
     }
     final PVectorM2L<?> other = (PVectorM2L<?>) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y;
+    return this.x == other.x && this.y == other.y;
   }
 
   @Override

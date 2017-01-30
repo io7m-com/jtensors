@@ -219,9 +219,6 @@ public final class VectorByteBufferedM3I extends ByteBuffered implements VectorB
     if (this.getXI() != other.getXI()) {
       return false;
     }
-    if (this.getYI() != other.getYI()) {
-      return false;
-    }
-    return this.getZI() == other.getZI();
+    return this.getYI() == other.getYI() && this.getZI() == other.getZI();
   }
 }

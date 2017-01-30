@@ -873,10 +873,8 @@ public final class VectorM2D implements Vector2DType
       return false;
     }
     final VectorM2D other = (VectorM2D) obj;
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y);
+    return Double.doubleToLongBits(this.x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(
+      this.y) == Double.doubleToLongBits(other.y);
   }
 
   @Override

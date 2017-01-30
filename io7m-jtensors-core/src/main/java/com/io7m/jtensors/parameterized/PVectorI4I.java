@@ -568,10 +568,7 @@ public final class PVectorI4I<T> implements PVectorReadable4IType<T>
     if (this.y != other.y) {
       return false;
     }
-    if (this.z != other.z) {
-      return false;
-    }
-    return this.w == other.w;
+    return this.z == other.z && this.w == other.w;
   }
 
   @Override

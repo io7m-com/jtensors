@@ -538,10 +538,7 @@ public final class PVectorI3I<T> implements PVectorReadable3IType<T>
     if (this.x != other.x) {
       return false;
     }
-    if (this.y != other.y) {
-      return false;
-    }
-    return this.z == other.z;
+    return this.y == other.y && this.z == other.z;
   }
 
   @Override

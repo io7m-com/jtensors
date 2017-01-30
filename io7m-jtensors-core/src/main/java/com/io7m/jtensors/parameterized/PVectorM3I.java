@@ -871,10 +871,7 @@ public final class PVectorM3I<T> implements PVector3IType<T>
     if (this.x != other.x) {
       return false;
     }
-    if (this.y != other.y) {
-      return false;
-    }
-    return this.z == other.z;
+    return this.y == other.y && this.z == other.z;
   }
 
   @Override

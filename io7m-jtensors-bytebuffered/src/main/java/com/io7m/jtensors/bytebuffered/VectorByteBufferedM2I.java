@@ -184,9 +184,6 @@ public final class VectorByteBufferedM2I extends ByteBuffered
       return false;
     }
     final VectorByteBufferedM2I other = (VectorByteBufferedM2I) obj;
-    if (this.getXI() != other.getXI()) {
-      return false;
-    }
-    return this.getYI() == other.getYI();
+    return this.getXI() == other.getXI() && this.getYI() == other.getYI();
   }
 }

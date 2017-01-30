@@ -260,18 +260,14 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     }
     final QuaternionByteBufferedM4F other = (QuaternionByteBufferedM4F) obj;
     if (Float.floatToIntBits(this.getWF())
-        != Float.floatToIntBits(other.getWF())) {
+      != Float.floatToIntBits(other.getWF())) {
       return false;
     }
     if (Float.floatToIntBits(this.getXF())
-        != Float.floatToIntBits(other.getXF())) {
+      != Float.floatToIntBits(other.getXF())) {
       return false;
     }
-    if (Float.floatToIntBits(this.getYF())
-        != Float.floatToIntBits(other.getYF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
-      other.getZF());
+    return Float.floatToIntBits(this.getYF()) == Float.floatToIntBits(other.getYF()) && Float.floatToIntBits(
+      this.getZF()) == Float.floatToIntBits(other.getZF());
   }
 }

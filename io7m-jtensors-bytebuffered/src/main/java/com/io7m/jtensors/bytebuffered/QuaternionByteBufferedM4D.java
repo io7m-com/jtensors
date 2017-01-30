@@ -260,18 +260,15 @@ public final class QuaternionByteBufferedM4D extends ByteBuffered
     }
     final QuaternionByteBufferedM4D other = (QuaternionByteBufferedM4D) obj;
     if (Double.doubleToLongBits(this.getWD())
-        != Double.doubleToLongBits(other.getWD())) {
+      != Double.doubleToLongBits(other.getWD())) {
       return false;
     }
     if (Double.doubleToLongBits(this.getXD())
-        != Double.doubleToLongBits(other.getXD())) {
+      != Double.doubleToLongBits(other.getXD())) {
       return false;
     }
-    if (Double.doubleToLongBits(this.getYD())
-        != Double.doubleToLongBits(other.getYD())) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.getZD()) == Double.doubleToLongBits(
+    return Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
+      other.getYD()) && Double.doubleToLongBits(this.getZD()) == Double.doubleToLongBits(
       other.getZD());
   }
 }

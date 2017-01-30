@@ -502,10 +502,7 @@ public final class VectorI2L implements VectorReadable2LType
       return false;
     }
     final VectorI2L other = (VectorI2L) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y;
+    return this.x == other.x && this.y == other.y;
   }
 
   @Override

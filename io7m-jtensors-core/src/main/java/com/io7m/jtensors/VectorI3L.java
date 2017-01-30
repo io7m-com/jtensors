@@ -509,10 +509,7 @@ public final class VectorI3L implements VectorReadable3LType
     if (this.x != other.x) {
       return false;
     }
-    if (this.y != other.y) {
-      return false;
-    }
-    return this.z == other.z;
+    return this.y == other.y && this.z == other.z;
   }
 
   @Override

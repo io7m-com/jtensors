@@ -186,11 +186,8 @@ public final class VectorByteBufferedM2D extends ByteBuffered implements VectorB
       return false;
     }
     final VectorByteBufferedM2D other = (VectorByteBufferedM2D) obj;
-    if (Double.doubleToLongBits(this.getXD())
-        != Double.doubleToLongBits(other.getXD())) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
+    return Double.doubleToLongBits(this.getXD()) == Double.doubleToLongBits(
+      other.getXD()) && Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
       other.getYD());
   }
 }

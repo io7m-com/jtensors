@@ -507,10 +507,8 @@ public final class VectorI2F implements VectorReadable2FType
       return false;
     }
     final VectorI2F other = (VectorI2F) obj;
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
-      return false;
-    }
-    return Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y);
+    return Float.floatToIntBits(this.x) == Float.floatToIntBits(other.x) && Float.floatToIntBits(
+      this.y) == Float.floatToIntBits(other.y);
   }
 
   @Override

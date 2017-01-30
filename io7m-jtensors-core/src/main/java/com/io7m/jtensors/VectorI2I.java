@@ -500,10 +500,7 @@ public final class VectorI2I implements VectorReadable2IType
       return false;
     }
     final VectorI2I other = (VectorI2I) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y;
+    return this.x == other.x && this.y == other.y;
   }
 
   @Override

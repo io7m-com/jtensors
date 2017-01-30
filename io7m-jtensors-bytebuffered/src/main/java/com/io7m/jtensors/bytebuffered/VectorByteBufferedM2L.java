@@ -183,9 +183,6 @@ public final class VectorByteBufferedM2L extends ByteBuffered implements VectorB
       return false;
     }
     final VectorByteBufferedM2L other = (VectorByteBufferedM2L) obj;
-    if (this.getXL() != other.getXL()) {
-      return false;
-    }
-    return this.getYL() == other.getYL();
+    return this.getXL() == other.getXL() && this.getYL() == other.getYL();
   }
 }

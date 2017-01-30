@@ -973,10 +973,8 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
       return false;
     }
-    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
-      return false;
-    }
-    return Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
+    return Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y) && Float.floatToIntBits(
+      this.z) == Float.floatToIntBits(other.z);
   }
 
   @Override

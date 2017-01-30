@@ -539,10 +539,8 @@ public final class PVectorI2F<T> implements PVectorReadable2FType<T>
       return false;
     }
     final PVectorI2F<?> other = (PVectorI2F<?>) obj;
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
-      return false;
-    }
-    return Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y);
+    return Float.floatToIntBits(this.x) == Float.floatToIntBits(other.x) && Float.floatToIntBits(
+      this.y) == Float.floatToIntBits(other.y);
   }
 
   @Override

@@ -528,10 +528,7 @@ public final class PVectorI2I<T> implements PVectorReadable2IType<T>
       return false;
     }
     final PVectorI2I<?> other = (PVectorI2I<?>) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y;
+    return this.x == other.x && this.y == other.y;
   }
 
   @Override
