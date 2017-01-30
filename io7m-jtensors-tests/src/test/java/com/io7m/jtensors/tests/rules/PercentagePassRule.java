@@ -104,11 +104,11 @@ public final class PercentagePassRule implements TestRule
 
       final StringBuilder sb = new StringBuilder(128);
       sb.append("Target pass percentage: ");
-      sb.append(String.format("%.2f", this.target_percent));
+      sb.append(String.format("%.2f", Double.valueOf(this.target_percent)));
       sb.append("%");
       sb.append("\n");
       sb.append("Actual pass percentage: ");
-      sb.append(String.format("%.2f", actual_percent));
+      sb.append(String.format("%.2f", Double.valueOf(actual_percent)));
       sb.append("%");
       sb.append(" (");
       sb.append(this.iterations);

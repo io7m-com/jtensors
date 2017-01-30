@@ -616,10 +616,10 @@ public abstract class VectorM4FContract<T extends Vector4FType>
     final T vb = this.newVectorM4F(5.0F, 6.0F, 7.0F, 8.0F);
     final T va = this.newVectorM4F(1.0F, 2.0F, 3.0F, 4.0F);
 
-    Assert.assertNotEquals(vb.getXF(), va.getXF());
-    Assert.assertNotEquals(vb.getYF(), va.getYF());
-    Assert.assertNotEquals(vb.getZF(), va.getZF());
-    Assert.assertNotEquals(vb.getWF(), va.getWF());
+    Assert.assertNotEquals(Float.valueOf(vb.getXF()), Float.valueOf(va.getXF()));
+    Assert.assertNotEquals(Float.valueOf(vb.getYF()), Float.valueOf(va.getYF()));
+    Assert.assertNotEquals(Float.valueOf(vb.getZF()), Float.valueOf(va.getZF()));
+    Assert.assertNotEquals(Float.valueOf(vb.getWF()), Float.valueOf(va.getWF()));
 
     VectorM4F.copy(va, vb);
 

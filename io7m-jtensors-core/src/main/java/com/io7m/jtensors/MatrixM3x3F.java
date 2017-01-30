@@ -1118,11 +1118,17 @@ public final class MatrixM3x3F
     final StringBuilder sb)
   {
     final String row0 = String.format(
-      "[%+.6f %+.6f %+.6f]\n", m.getR0C0F(), m.getR0C1F(), m.getR0C2F());
+      "[%+.6f %+.6f %+.6f]\n",
+      Float.valueOf(m.getR0C0F()), Float.valueOf(m.getR0C1F()),
+      Float.valueOf(m.getR0C2F()));
     final String row1 = String.format(
-      "[%+.6f %+.6f %+.6f]\n", m.getR1C0F(), m.getR1C1F(), m.getR1C2F());
+      "[%+.6f %+.6f %+.6f]\n",
+      Float.valueOf(m.getR1C0F()), Float.valueOf(m.getR1C1F()),
+      Float.valueOf(m.getR1C2F()));
     final String row2 = String.format(
-      "[%+.6f %+.6f %+.6f]\n", m.getR2C0F(), m.getR2C1F(), m.getR2C2F());
+      "[%+.6f %+.6f %+.6f]\n",
+      Float.valueOf(m.getR2C0F()), Float.valueOf(m.getR2C1F()),
+      Float.valueOf(m.getR2C2F()));
     sb.append(row0);
     sb.append(row1);
     sb.append(row2);

@@ -730,9 +730,11 @@ public final class MatrixM2x2D
     final StringBuilder sb)
   {
     final String row0 = String.format(
-      "[%+.15f %+.15f]\n", m.getR0C0D(), m.getR0C1D());
+      "[%+.15f %+.15f]\n",
+      Double.valueOf(m.getR0C0D()), Double.valueOf(m.getR0C1D()));
     final String row1 = String.format(
-      "[%+.15f %+.15f]\n", m.getR1C0D(), m.getR1C1D());
+      "[%+.15f %+.15f]\n",
+      Double.valueOf(m.getR1C0D()), Double.valueOf(m.getR1C1D()));
     sb.append(row0);
     sb.append(row1);
   }

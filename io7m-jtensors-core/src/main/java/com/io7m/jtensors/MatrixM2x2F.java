@@ -732,9 +732,11 @@ public final class MatrixM2x2F
     final StringBuilder sb)
   {
     final String row0 = String.format(
-      "[%+.6f %+.6f]\n", m.getR0C0F(), m.getR0C1F());
+      "[%+.6f %+.6f]\n",
+      Float.valueOf(m.getR0C0F()), Float.valueOf(m.getR0C1F()));
     final String row1 = String.format(
-      "[%+.6f %+.6f]\n", m.getR1C0F(), m.getR1C1F());
+      "[%+.6f %+.6f]\n",
+      Float.valueOf(m.getR1C0F()), Float.valueOf(m.getR1C1F()));
     sb.append(row0);
     sb.append(row1);
   }

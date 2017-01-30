@@ -99,12 +99,12 @@ public final class OrthonormalizedI3FTest
     LOG.debug("o.v0            : {}", o.getV0());
     LOG.debug("o.v1            : {}", o.getV1());
     LOG.debug("o.v2            : {}", o.getV2());
-    LOG.debug("magnitude(o.v0) : {}", v0m);
-    LOG.debug("magnitude(o.v1) : {}", v1m);
-    LOG.debug("magnitude(o.v2) : {}", v2m);
-    LOG.debug("o.v0 dot o.v1   : {}", v0_dot_v1);
-    LOG.debug("o.v0 dot o.v2   : {}", v0_dot_v2);
-    LOG.debug("o.v1 dot o.v2   : {}", v1_dot_v2);
+    LOG.debug("magnitude(o.v0) : {}", Float.valueOf(v0m));
+    LOG.debug("magnitude(o.v1) : {}", Float.valueOf(v1m));
+    LOG.debug("magnitude(o.v2) : {}", Float.valueOf(v2m));
+    LOG.debug("o.v0 dot o.v1   : {}", Float.valueOf(v0_dot_v1));
+    LOG.debug("o.v0 dot o.v2   : {}", Float.valueOf(v0_dot_v2));
+    LOG.debug("o.v1 dot o.v2   : {}", Float.valueOf(v1_dot_v2));
     LOG.debug("--");
 
     Assert.assertEquals(1.0f, v0m, 0.00001f);

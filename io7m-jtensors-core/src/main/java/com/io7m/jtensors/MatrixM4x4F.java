@@ -1743,28 +1743,28 @@ public final class MatrixM4x4F
   {
     final String row0 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
-      m.getR0C0F(),
-      m.getR0C1F(),
-      m.getR0C2F(),
-      m.getR0C3F());
+      Float.valueOf(m.getR0C0F()),
+      Float.valueOf(m.getR0C1F()),
+      Float.valueOf(m.getR0C2F()),
+      Float.valueOf(m.getR0C3F()));
     final String row1 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
-      m.getR1C0F(),
-      m.getR1C1F(),
-      m.getR1C2F(),
-      m.getR1C3F());
+      Float.valueOf(m.getR1C0F()),
+      Float.valueOf(m.getR1C1F()),
+      Float.valueOf(m.getR1C2F()),
+      Float.valueOf(m.getR1C3F()));
     final String row2 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
-      m.getR2C0F(),
-      m.getR2C1F(),
-      m.getR2C2F(),
-      m.getR2C3F());
+      Float.valueOf(m.getR2C0F()),
+      Float.valueOf(m.getR2C1F()),
+      Float.valueOf(m.getR2C2F()),
+      Float.valueOf(m.getR2C3F()));
     final String row3 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
-      m.getR3C0F(),
-      m.getR3C1F(),
-      m.getR3C2F(),
-      m.getR3C3F());
+      Float.valueOf(m.getR3C0F()),
+      Float.valueOf(m.getR3C1F()),
+      Float.valueOf(m.getR3C2F()),
+      Float.valueOf(m.getR3C3F()));
     sb.append(row0);
     sb.append(row1);
     sb.append(row2);

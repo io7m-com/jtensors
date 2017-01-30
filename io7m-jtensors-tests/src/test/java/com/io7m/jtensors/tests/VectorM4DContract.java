@@ -549,10 +549,10 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     final T vb = this.newVectorM4D(5.0, 6.0, 7.0, 8.0);
     final T va = this.newVectorM4D(1.0, 2.0, 3.0, 4.0);
 
-    Assert.assertNotEquals(vb.getXD(), va.getXD());
-    Assert.assertNotEquals(vb.getYD(), va.getYD());
-    Assert.assertNotEquals(vb.getZD(), va.getZD());
-    Assert.assertNotEquals(vb.getWD(), va.getWD());
+    Assert.assertNotEquals(Double.valueOf(vb.getXD()), Double.valueOf(va.getXD()));
+    Assert.assertNotEquals(Double.valueOf(vb.getYD()), Double.valueOf(va.getYD()));
+    Assert.assertNotEquals(Double.valueOf(vb.getZD()), Double.valueOf(va.getZD()));
+    Assert.assertNotEquals(Double.valueOf(vb.getWD()), Double.valueOf(va.getWD()));
 
     VectorM4D.copy(va, vb);
 
@@ -724,8 +724,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
 
     final Logger log = this.logger();
     log.debug("q  : {}", q);
-    log.debug("ms : {}", ms);
-    log.debug("dp : {}", dp);
+    log.debug("ms : {}", Double.valueOf(ms));
+    log.debug("dp : {}", Double.valueOf(dp));
 
     Assert.assertEquals(ms, dp, this.delta());
   }

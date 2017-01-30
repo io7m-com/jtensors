@@ -1124,11 +1124,17 @@ public final class MatrixM3x3D
     final StringBuilder sb)
   {
     final String row0 = String.format(
-      "[%+.15f %+.15f %+.15f]\n", m.getR0C0D(), m.getR0C1D(), m.getR0C2D());
+      "[%+.15f %+.15f %+.15f]\n",
+      Double.valueOf(m.getR0C0D()), Double.valueOf(m.getR0C1D()),
+      Double.valueOf(m.getR0C2D()));
     final String row1 = String.format(
-      "[%+.15f %+.15f %+.15f]\n", m.getR1C0D(), m.getR1C1D(), m.getR1C2D());
+      "[%+.15f %+.15f %+.15f]\n",
+      Double.valueOf(m.getR1C0D()), Double.valueOf(m.getR1C1D()),
+      Double.valueOf(m.getR1C2D()));
     final String row2 = String.format(
-      "[%+.15f %+.15f %+.15f]\n", m.getR2C0D(), m.getR2C1D(), m.getR2C2D());
+      "[%+.15f %+.15f %+.15f]\n",
+      Double.valueOf(m.getR2C0D()), Double.valueOf(m.getR2C1D()),
+      Double.valueOf(m.getR2C2D()));
     sb.append(row0);
     sb.append(row1);
     sb.append(row2);

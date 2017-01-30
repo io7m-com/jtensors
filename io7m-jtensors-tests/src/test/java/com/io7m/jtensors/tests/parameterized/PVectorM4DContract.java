@@ -469,7 +469,7 @@ public abstract class PVectorM4DContract<T, V extends PVector4DType<T>>
     PVectorM4D.clampMaximum(v, maximum, vr);
 
     final Logger logger = this.logger();
-    logger.debug("f  : {}", maximum);
+    logger.debug("f  : {}", Double.valueOf(maximum));
     logger.debug("v  : {}", v);
     logger.debug("vr : {}", v);
 
@@ -501,7 +501,7 @@ public abstract class PVectorM4DContract<T, V extends PVector4DType<T>>
     PVectorM4D.clampMinimum(v, minimum, vr);
 
     final Logger logger = this.logger();
-    logger.debug("f  : {}", minimum);
+    logger.debug("f  : {}", Double.valueOf(minimum));
     logger.debug("v  : {}", v);
     logger.debug("vr : {}", v);
 
@@ -761,8 +761,8 @@ public abstract class PVectorM4DContract<T, V extends PVector4DType<T>>
 
     final Logger logger = this.logger();
     logger.debug("q  : {}", q);
-    logger.debug("ms : {}", ms);
-    logger.debug("dp : {}", dp);
+    logger.debug("ms : {}", Double.valueOf(ms));
+    logger.debug("dp : {}", Double.valueOf(dp));
 
     Assert.assertEquals(ms, dp, this.delta());
   }
@@ -989,7 +989,7 @@ public abstract class PVectorM4DContract<T, V extends PVector4DType<T>>
 
     final double m = PVectorM4D.magnitude(vr);
     final Logger logger = this.logger();
-    logger.debug("m : {}", m);
+    logger.debug("m : {}", Double.valueOf(m));
     Assert.assertEquals(m, 1.0, this.delta());
   }
 
