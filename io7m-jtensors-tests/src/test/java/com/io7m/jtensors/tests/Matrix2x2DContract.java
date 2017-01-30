@@ -53,6 +53,7 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
+  @Override
   protected abstract void checkDirectBufferInvariants(final T mk);
 
   @Test public final void testAddMutate()

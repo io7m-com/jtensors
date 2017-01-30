@@ -26,6 +26,7 @@ import java.nio.DoubleBuffer;
 public abstract class MatrixDirect4x4DContract<T extends MatrixDirect4x4DType>
   extends Matrix4x4DContract<T>
 {
+  @Override
   protected abstract T newMatrix();
 
   @Test public final void testBufferEndianness()

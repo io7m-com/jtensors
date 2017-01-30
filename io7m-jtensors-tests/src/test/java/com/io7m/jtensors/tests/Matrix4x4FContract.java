@@ -49,8 +49,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
   private static final VectorReadable3FType AXIS_Z = new VectorI3F(
     0.0F, 0.0F, 1.0F);
 
+  @Override
   protected abstract T newMatrix();
 
+  @Override
   protected abstract T newMatrixFrom(MatrixReadable4x4FType m);
 
   private void isRotationMatrixX(
@@ -473,6 +475,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(mr);
   }
 
+  @Override
   protected abstract void checkDirectBufferInvariants(final T m0);
 
   @Test public final void testAddMutate()

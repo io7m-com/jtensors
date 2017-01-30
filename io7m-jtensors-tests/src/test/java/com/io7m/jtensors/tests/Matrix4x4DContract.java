@@ -48,8 +48,10 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
   private static final VectorReadable3DType AXIS_Z = new VectorI3D(
     0.0, 0.0, 1.0);
 
+  @Override
   protected abstract T newMatrix();
 
+  @Override
   protected abstract T newMatrixFrom(MatrixReadable4x4DType m);
 
   private void isRotationMatrixX(
@@ -3509,6 +3511,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     }
   }
 
+  @Override
   protected abstract void checkDirectBufferInvariants(final T m);
 
   @Test public final void testTranslationMakeEquivalent3Integer()

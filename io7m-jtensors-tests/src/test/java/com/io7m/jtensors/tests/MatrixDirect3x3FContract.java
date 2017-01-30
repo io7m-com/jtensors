@@ -26,6 +26,7 @@ import java.nio.FloatBuffer;
 public abstract class MatrixDirect3x3FContract<T extends MatrixDirect3x3FType>
   extends Matrix3x3FContract<T>
 {
+  @Override
   protected abstract T newMatrix();
 
   @Test public final void testBufferEndianness()

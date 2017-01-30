@@ -2300,6 +2300,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     this.checkDirectBufferInvariants(m);
   }
 
+  @Override
   protected abstract void checkDirectBufferInvariants(final T m);
 
   @Test public final void testRowSet3Get3Unsafe()
