@@ -236,8 +236,8 @@ public final class QuaternionI4D implements QuaternionReadable4DType
      */
 
     double dot = dotProduct(q0n, q1n);
-    final double DOT_THRESHOLD = 0.9995;
-    if (dot > DOT_THRESHOLD) {
+    final double threshold = 0.9995;
+    if (dot > threshold) {
       return normalize(interpolateLinear(q0n, q1n, alpha));
     }
 

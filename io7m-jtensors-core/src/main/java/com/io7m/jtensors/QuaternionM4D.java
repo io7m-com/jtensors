@@ -293,8 +293,8 @@ public final class QuaternionM4D implements Quaternion4DType
      */
 
     double dot = dotProduct(q0n, q1n);
-    final double DOT_THRESHOLD = 0.9995;
-    if (dot > DOT_THRESHOLD) {
+    final double threshold = 0.9995;
+    if (dot > threshold) {
       interpolateLinear(c, q0n, q1n, alpha, c.qc);
       normalize(c.qc, r);
       return r;

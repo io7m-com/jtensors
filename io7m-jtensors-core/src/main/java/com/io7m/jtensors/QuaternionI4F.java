@@ -237,8 +237,8 @@ public final class QuaternionI4F implements QuaternionReadable4FType
      */
 
     float dot = dotProduct(q0n, q1n);
-    final float DOT_THRESHOLD = 0.9995f;
-    if (dot > DOT_THRESHOLD) {
+    final float threshold = 0.9995f;
+    if (dot > threshold) {
       return normalize(interpolateLinear(q0n, q1n, alpha));
     }
 
