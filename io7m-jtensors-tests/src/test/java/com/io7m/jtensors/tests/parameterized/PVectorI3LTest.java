@@ -711,7 +711,7 @@ import org.junit.Test;
   @Override @Test public void testString()
   {
     final PVectorI3L<T> v = new PVectorI3L<T>(1, 2, 3);
-    Assert.assertTrue(v.toString().equals("[PVectorI3L 1 2 3]"));
+    Assert.assertTrue("[PVectorI3L 1 2 3]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()

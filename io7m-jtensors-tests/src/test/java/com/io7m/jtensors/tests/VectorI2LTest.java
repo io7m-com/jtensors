@@ -648,7 +648,7 @@ public class VectorI2LTest extends VectorI2Contract
   @Override @Test public void testString()
   {
     final VectorI2L v = new VectorI2L(1, 2);
-    Assert.assertTrue(v.toString().equals("[VectorI2L 1 2]"));
+    Assert.assertTrue("[VectorI2L 1 2]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()

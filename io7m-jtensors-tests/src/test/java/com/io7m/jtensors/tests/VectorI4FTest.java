@@ -968,7 +968,7 @@ public class VectorI4FTest extends VectorI4Contract
   @Override @Test public void testString()
   {
     final VectorI4F v = new VectorI4F(0.0f, 1.0f, 2.0f, 3.0f);
-    Assert.assertTrue(v.toString().equals("[VectorI4F 0.0 1.0 2.0 3.0]"));
+    Assert.assertTrue("[VectorI4F 0.0 1.0 2.0 3.0]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()

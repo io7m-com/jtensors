@@ -632,7 +632,7 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testString()
   {
     final VectorI2I v = new VectorI2I(1, 2);
-    Assert.assertTrue(v.toString().equals("[VectorI2I 1 2]"));
+    Assert.assertTrue("[VectorI2I 1 2]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()

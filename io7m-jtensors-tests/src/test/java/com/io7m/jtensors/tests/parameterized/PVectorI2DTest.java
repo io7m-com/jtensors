@@ -768,7 +768,7 @@ import org.junit.Test;
   @Override @Test public void testString()
   {
     final PVectorI2D<T> v = new PVectorI2D<T>(0.0, 1.0);
-    Assert.assertTrue(v.toString().equals("[PVectorI2D 0.0 1.0]"));
+    Assert.assertTrue("[PVectorI2D 0.0 1.0]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()

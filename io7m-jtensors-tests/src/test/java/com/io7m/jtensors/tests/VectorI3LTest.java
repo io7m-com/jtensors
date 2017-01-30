@@ -707,7 +707,7 @@ public class VectorI3LTest extends VectorI3Contract
   @Override @Test public void testString()
   {
     final VectorI3L v = new VectorI3L(1, 2, 3);
-    Assert.assertTrue(v.toString().equals("[VectorI3L 1 2 3]"));
+    Assert.assertTrue("[VectorI3L 1 2 3]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()

@@ -789,7 +789,7 @@ public class VectorI2FTest extends VectorI2Contract
   @Override @Test public void testString()
   {
     final VectorI2F v = new VectorI2F(0.0f, 1.0f);
-    Assert.assertTrue(v.toString().equals("[VectorI2F 0.0 1.0]"));
+    Assert.assertTrue("[VectorI2F 0.0 1.0]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()

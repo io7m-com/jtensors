@@ -903,7 +903,7 @@ public class VectorI3DTest extends VectorI3Contract
   @Override @Test public void testString()
   {
     final VectorI3D v = new VectorI3D(0.0, 1.0, 2.0);
-    Assert.assertTrue(v.toString().equals("[VectorI3D 0.0 1.0 2.0]"));
+    Assert.assertTrue("[VectorI3D 0.0 1.0 2.0]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()

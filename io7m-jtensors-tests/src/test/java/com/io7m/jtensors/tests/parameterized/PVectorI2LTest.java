@@ -639,7 +639,7 @@ import org.junit.Test;
   @Override @Test public void testString()
   {
     final PVectorI2L<T> v = new PVectorI2L<T>(1, 2);
-    Assert.assertTrue(v.toString().equals("[PVectorI2L 1 2]"));
+    Assert.assertTrue("[PVectorI2L 1 2]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()
