@@ -138,8 +138,6 @@ public final class OrthonormalizedI3D
     builder.append(" ");
     builder.append(this.rv2);
     builder.append("]");
-    final String r = builder.toString();
-    assert r != null;
-    return r;
+    return builder.toString();
   }
 }
