@@ -16,6 +16,8 @@
 
 package com.io7m.jtensors.tests;
 
+import org.junit.Test;
+
 public abstract class QuaternionI4Contract
 {
   /**
@@ -111,6 +113,27 @@ public abstract class QuaternionI4Contract
    */
 
   public abstract void testInterpolateLinearLimits();
+
+  /**
+   * <p> {@code ∀q r s. interpolateSphericalLinear(q, r, 1.0) = r} </p> <p> {@code ∀q
+   * r s. interpolateSphericalLinear(q, r, 0.0) = q} </p>
+   */
+
+  public abstract void testInterpolateSphericalLinearLimits();
+
+  /**
+   * <p> {@code ∀q r s. interpolateSphericalLinear(q, negate(q), 1.0) = negate(q)} </p> <p> {@code ∀q
+   * r s. interpolateSphericalLinear(q, negate(q), 0.0) = q} </p>
+   */
+
+  public abstract void testInterpolateSphericalLinearNegated();
+
+  /**
+   * Spherical linearly interpolating codirectional vectors gives the same
+   * results as linearly interpolating.
+   */
+
+  public abstract void testInterpolateSphericalLinearCodirectional();
 
   /**
    * Looking at (-1,0,0) from the origin gives consistent results with the 4x4

@@ -33,9 +33,17 @@ import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.VectorReadable4DType;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class QuaternionI4DTest extends QuaternionI4Contract
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(QuaternionI4DTest.class);
+  }
+
   private static final VectorReadable3DType AXIS_X = new VectorI3D(
     1.0, 0.0, 0.0);
   private static final VectorReadable3DType AXIS_Y = new VectorI3D(
@@ -466,6 +474,98 @@ public class QuaternionI4DTest extends QuaternionI4Contract
       Assert.assertTrue(
         QuaternionI4D.almostEqual(
           context, QuaternionI4D.interpolateLinear(v0, v1, 1.0), v1));
+    }
+  }
+
+  @Override @Test public final void testInterpolateSphericalLinearLimits()
+  {
+    final ContextRelative context = TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x0 = getRandom() * 100000.0;
+      final double y0 = getRandom() * 100000.0;
+      final double z0 = getRandom() * 100000.0;
+      final double w0 = getRandom() * 100000.0;
+      final QuaternionReadable4DType v0 = new QuaternionI4D(x0, y0, z0, w0);
+
+      final double x1 = getRandom() * 100000.0;
+      final double y1 = getRandom() * 100000.0;
+      final double z1 = getRandom() * 100000.0;
+      final double w1 = getRandom() * 100000.0;
+      final QuaternionReadable4DType v1 = new QuaternionI4D(x1, y1, z1, w1);
+
+      final QuaternionI4D r0 =
+        QuaternionI4D.interpolateSphericalLinear(v0, v1, 0.0);
+      final QuaternionI4D r1 =
+        QuaternionI4D.interpolateSphericalLinear(v0, v1, 1.0);
+
+      LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(0.0), r0);
+      LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(1.0), r1);
+
+      Assert.assertTrue(
+        QuaternionI4D.almostEqual(context, r0, QuaternionI4D.normalize(v0)));
+      Assert.assertTrue(
+        QuaternionI4D.almostEqual(context, r1, QuaternionI4D.normalize(v1)));
+    }
+  }
+
+  @Override @Test public final void testInterpolateSphericalLinearNegated()
+  {
+    final AlmostEqualDouble.ContextRelative context =
+      TestUtilities.getDoubleEqualityContext();
+
+    final VectorI3D axis0 =
+      VectorI3D.normalize(new VectorI3D(0.0, 1.0, 0.0));
+
+    final QuaternionReadable4DType v0 =
+      QuaternionI4D.makeFromAxisAngle(axis0, 0.0);
+    final QuaternionReadable4DType v1 =
+      QuaternionI4D.makeFromAxisAngle(axis0, Math.toRadians(181.0));
+
+    Assert.assertTrue(QuaternionI4D.dotProduct(v0, v1) < 0.0);
+
+    final QuaternionI4D r0 =
+      QuaternionI4D.interpolateSphericalLinear(v0, v1, 0.0);
+    final QuaternionI4D r1 =
+      QuaternionI4D.interpolateSphericalLinear(v0, v1, 1.0);
+
+    LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(0.0), r0);
+    LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(1.0), r1);
+
+    Assert.assertTrue(
+      QuaternionI4D.almostEqual(context, r0, v0));
+    Assert.assertTrue(
+      QuaternionI4D.almostEqual(context, r1, QuaternionI4D.negate(v1)));
+  }
+
+  @Override @Test public final void testInterpolateSphericalLinearCodirectional()
+  {
+    final ContextRelative context = TestUtilities.getDoubleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final double x0 = getRandom() * 100000.0;
+      final double y0 = getRandom() * 100000.0;
+      final double z0 = getRandom() * 100000.0;
+      final double w0 = getRandom() * 100000.0;
+      final QuaternionReadable4DType v0 =
+        QuaternionI4D.normalize(new QuaternionI4D(x0, y0, z0, w0));
+      final QuaternionI4D v1 =
+        QuaternionI4D.normalize(new QuaternionI4D(v0));
+
+      final double alpha = getRandom();
+
+      final QuaternionI4D r0 =
+        QuaternionI4D.interpolateSphericalLinear(v0, v1, alpha);
+      final QuaternionI4D r1 =
+        QuaternionI4D.interpolateLinear(v0, v1, alpha);
+
+      LOG.debug("spherical {} {} {} -> {}", v0, v0, Double.valueOf(alpha), r0);
+      LOG.debug("linear    {} {} {} -> {}", v0, v0, Double.valueOf(alpha), r1);
+
+      Assert.assertTrue(
+        QuaternionI4D.almostEqual(context, r0, v0));
+      Assert.assertTrue(
+        QuaternionI4D.almostEqual(context, r1, r1));
     }
   }
 

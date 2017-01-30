@@ -25,16 +25,26 @@ import com.io7m.jtensors.MatrixHeapArrayM4x4F;
 import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.MatrixM4x4F;
 import com.io7m.jtensors.QuaternionI4F;
+import com.io7m.jtensors.QuaternionM4F;
 import com.io7m.jtensors.QuaternionReadable4FType;
+import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorI3F;
 import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.VectorReadable4FType;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class QuaternionI4FTest extends QuaternionI4Contract
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(QuaternionI4FTest.class);
+  }
+
   private static final VectorReadable3FType AXIS_X = new VectorI3F(
     1.0F, 0.0F, 0.0F);
   private static final VectorReadable3FType AXIS_Y = new VectorI3F(
@@ -481,6 +491,100 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       Assert.assertTrue(
         QuaternionI4F.almostEqual(
           context, QuaternionI4F.interpolateLinear(v0, v1, 1.0f), v1));
+    }
+  }
+
+  @Override @Test public final void testInterpolateSphericalLinearLimits()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float x0 = (float) (getRandom() * 10000.0);
+      final float y0 = (float) (getRandom() * 10000.0);
+      final float z0 = (float) (getRandom() * 10000.0);
+      final float w0 = (float) (getRandom() * 10000.0);
+      final QuaternionReadable4FType v0 = new QuaternionI4F(x0, y0, z0, w0);
+
+      final float x1 = (float) (getRandom() * 10000.0);
+      final float y1 = (float) (getRandom() * 10000.0);
+      final float z1 = (float) (getRandom() * 10000.0);
+      final float w1 = (float) (getRandom() * 10000.0);
+      final QuaternionReadable4FType v1 = new QuaternionI4F(x1, y1, z1, w1);
+
+      final QuaternionI4F r0 =
+        QuaternionI4F.interpolateSphericalLinear(v0, v1, 0.0f);
+      final QuaternionI4F r1 =
+        QuaternionI4F.interpolateSphericalLinear(v0, v1, 1.0f);
+
+      LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(0.0), r0);
+      LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(1.0), r1);
+
+      Assert.assertTrue(
+        QuaternionI4F.almostEqual(context, r0, QuaternionI4F.normalize(v0)));
+      Assert.assertTrue(
+        QuaternionI4F.almostEqual(context, r1, QuaternionI4F.normalize(v1)));
+    }
+  }
+
+  @Override @Test public final void testInterpolateSphericalLinearNegated()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    final VectorI3F axis0 =
+      VectorI3F.normalize(new VectorI3F(0.0f, 1.0f, 0.0f));
+
+    final QuaternionReadable4FType v0 =
+      QuaternionI4F.makeFromAxisAngle(axis0, 0.0);
+    final QuaternionReadable4FType v1 =
+      QuaternionI4F.makeFromAxisAngle(axis0, Math.toRadians(181.0));
+
+    Assert.assertTrue(QuaternionI4F.dotProduct(v0, v1) < 0.0);
+
+    final QuaternionI4F r0 =
+      QuaternionI4F.interpolateSphericalLinear(v0, v1, 0.0f);
+    final QuaternionI4F r1 =
+      QuaternionI4F.interpolateSphericalLinear(v0, v1, 1.0f);
+
+    LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(0.0), r0);
+    LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(1.0), r1);
+
+    Assert.assertTrue(
+      QuaternionI4F.almostEqual(context, r0, v0));
+    Assert.assertTrue(
+      QuaternionI4F.almostEqual(context, r1, QuaternionI4F.negate(v1)));
+  }
+
+  @Override @Test public final void testInterpolateSphericalLinearCodirectional()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float x0 = (float) (getRandom() * 10000.0);
+      final float y0 = (float) (getRandom() * 10000.0);
+      final float z0 = (float) (getRandom() * 10000.0);
+      final float w0 = (float) (getRandom() * 10000.0);
+      final QuaternionReadable4FType v0 =
+        QuaternionI4F.normalize(new QuaternionI4F(x0, y0, z0, w0));
+      final QuaternionI4F v1 =
+        QuaternionI4F.normalize(new QuaternionI4F(v0));
+
+      final float alpha = (float) getRandom();
+
+      final QuaternionI4F r0 =
+        QuaternionI4F.interpolateSphericalLinear(v0, v1, alpha);
+      final QuaternionI4F r1 =
+        QuaternionI4F.interpolateLinear(v0, v1, alpha);
+
+      LOG.debug("spherical {} {} {} -> {}", v0, v0, Float.valueOf(alpha), r0);
+      LOG.debug("linear    {} {} {} -> {}", v0, v0, Float.valueOf(alpha), r1);
+
+      Assert.assertTrue(
+        QuaternionI4F.almostEqual(context, r0, v0));
+      Assert.assertTrue(
+        QuaternionI4F.almostEqual(context, r1, r1));
     }
   }
 

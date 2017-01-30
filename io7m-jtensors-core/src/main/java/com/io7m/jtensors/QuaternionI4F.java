@@ -20,6 +20,7 @@ import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
+import com.io7m.junreachable.UnreachableCodeException;
 import net.jcip.annotations.Immutable;
 
 /**
@@ -202,6 +203,64 @@ public final class QuaternionI4F implements QuaternionReadable4FType
     final QuaternionI4F w0 = scale(q0, 1.0f - alpha);
     final QuaternionI4F w1 = scale(q1, alpha);
     return add(w0, w1);
+  }
+
+  /**
+   * Interpolate between {@code q0} and {@code q1}, using <i>spherical linear
+   * interpolation</i>, by the amount {@code alpha}, such that:
+   *
+   * <ul> <li>{@code interpolateSphericalLinear(q0, q1, 0.0) = normalize(q0)}</li>
+   * <li>{@code interpolateSphericalLinear(q0, q1, 1.0) = normalize(q1)}</li> </ul>
+   *
+   * <p>Note that unlike simple linear interpolation, this function is guaranteed
+   * to return a normalized quaternion.</p>
+   *
+   * @param q0    The left input quaternion
+   * @param q1    The right input quaternion
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}
+   *
+   * @return A spherical-linearly interpolated quaternion between {@code q0} and
+   * {@code q1}
+   */
+
+  public static QuaternionI4F interpolateSphericalLinear(
+    final QuaternionReadable4FType q0,
+    final QuaternionReadable4FType q1,
+    final float alpha)
+  {
+    final QuaternionI4F q0n = normalize(q0);
+    QuaternionI4F q1n = normalize(q1);
+
+    /*
+     * Calculate the dot product to determine if the quaternions are nearly
+     * codirectional. If they are, fall back to simple linear interpolation.
+     */
+
+    float dot = dotProduct(q0n, q1n);
+    final float DOT_THRESHOLD = 0.9995f;
+    if (dot > DOT_THRESHOLD) {
+      return normalize(interpolateLinear(q0n, q1n, alpha));
+    }
+
+    /*
+     * If the dot product is negative, the quaternions are separated by more
+     * than 180° and a spherical linear interpolation wouldn't result in the
+     * shortest path. By negating one quaternion, the shortest path is obtained.
+     */
+
+    if (dot < 0.0f) {
+      q1n = negate(q1n);
+      dot = -dot;
+    }
+
+    dot = Math.max(-1.0f, Math.min(dot, 1.0f));
+    final double theta_0 = StrictMath.acos((double) dot);
+    final double theta = theta_0 * (double) alpha;
+
+    final QuaternionI4F q2 = normalize(subtract(q1n, scale(q0n, dot)));
+    final QuaternionI4F r0 = scale(q0n, (float) StrictMath.cos(theta));
+    final QuaternionI4F r1 = scale(q2, (float) StrictMath.sin(theta));
+    return add(r0, r1);
   }
 
   /**
