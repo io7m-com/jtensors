@@ -498,10 +498,10 @@ public abstract class VectorM4LContract<T extends Vector4LType>
   @Test public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM4L(
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge());
+      VectorM4LContract.getRandomLarge(),
+      VectorM4LContract.getRandomLarge(),
+      VectorM4LContract.getRandomLarge(),
+      VectorM4LContract.getRandomLarge());
     final T v1 = this.newVectorM4L();
 
     v1.copyFrom2L(v0);
@@ -515,10 +515,10 @@ public abstract class VectorM4LContract<T extends Vector4LType>
   @Test public final void testCopy3Correct()
   {
     final T v0 = this.newVectorM4L(
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge());
+      VectorM4LContract.getRandomLarge(),
+      VectorM4LContract.getRandomLarge(),
+      VectorM4LContract.getRandomLarge(),
+      VectorM4LContract.getRandomLarge());
     final T v1 = this.newVectorM4L();
 
     v1.copyFrom4L(v0);
@@ -532,10 +532,10 @@ public abstract class VectorM4LContract<T extends Vector4LType>
   @Test public final void testCopy4Correct()
   {
     final T v0 = this.newVectorM4L(
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge());
+      VectorM4LContract.getRandomLarge(),
+      VectorM4LContract.getRandomLarge(),
+      VectorM4LContract.getRandomLarge(),
+      VectorM4LContract.getRandomLarge());
     final T v1 = this.newVectorM4L();
 
     v1.copyFrom3L(v0);
@@ -546,7 +546,7 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     Assert.assertEquals(1L, v1.getWL());
   }
 
-  protected long getRandomLarge()
+  protected static long getRandomLarge()
   {
     return (long) Math.random() * Long.MAX_VALUE;
   }

@@ -96,16 +96,16 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float y0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float z0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float w0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
       final T v0 = this.newQuaternion(x0, y0, z0, w0);
 
-      final float x1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float y1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float z1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float w1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
       final T v1 = this.newQuaternion(x1, y1, z1, w1);
 
       final T vr0 = this.newQuaternion();
@@ -202,7 +202,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final float x = (float) this.getRandom();
+    final float x = (float) QuaternionM4FContract.getRandom();
     final float y = x + 1.0f;
     final float z = y + 1.0f;
     final float w = z + 1.0f;
@@ -288,10 +288,10 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float y0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float z0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float w0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
       final T v0 = this.newQuaternion(x0, y0, z0, w0);
       final T v1 = this.newQuaternion(x0, y0, z0, w0);
       final T v2 = this.newQuaternion(x0, y0, z0, w0);
@@ -352,10 +352,10 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) ((this.getRandom() * 200.0) - 100.0);
-      final float y = (float) ((this.getRandom() * 200.0) - 100.0);
-      final float z = (float) ((this.getRandom() * 200.0) - 100.0);
-      final float w = (float) ((this.getRandom() * 200.0) - 100.0);
+      final float x = (float) ((QuaternionM4FContract.getRandom() * 200.0) - 100.0);
+      final float y = (float) ((QuaternionM4FContract.getRandom() * 200.0) - 100.0);
+      final float z = (float) ((QuaternionM4FContract.getRandom() * 200.0) - 100.0);
+      final float w = (float) ((QuaternionM4FContract.getRandom() * 200.0) - 100.0);
 
       final T q = this.newQuaternion(x, y, z, w);
       final T qc0 = this.newQuaternion();
@@ -393,10 +393,10 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   public final void testCopy2Correct()
   {
     final T v0 = this.newQuaternion(
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE);
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE,
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE,
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE,
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE);
     final T v1 = this.newQuaternion();
 
     v1.copyFrom2F(v0);
@@ -411,10 +411,10 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   public final void testCopy3Correct()
   {
     final T v0 = this.newQuaternion(
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE);
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE,
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE,
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE,
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE);
     final T v1 = this.newQuaternion();
 
     v1.copyFrom4F(v0);
@@ -429,10 +429,10 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   public final void testCopy4Correct()
   {
     final T v0 = this.newQuaternion(
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE);
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE,
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE,
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE,
+      (float) QuaternionM4FContract.getRandom() * Float.MAX_VALUE);
     final T v1 = this.newQuaternion();
 
     v1.copyFrom3F(v0);
@@ -496,10 +496,10 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   public final void testDotProductSelf()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) this.getRandom();
-      final float y = (float) this.getRandom();
-      final float z = (float) this.getRandom();
-      final float w = (float) this.getRandom();
+      final float x = (float) QuaternionM4FContract.getRandom();
+      final float y = (float) QuaternionM4FContract.getRandom();
+      final float z = (float) QuaternionM4FContract.getRandom();
+      final float w = (float) QuaternionM4FContract.getRandom();
       final QuaternionM4D q = new QuaternionM4D(
         (double) x, (double) y, (double) z, (double) w);
       QuaternionM4D.normalizeInPlace(q);
@@ -648,16 +648,16 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     final QuaternionM4F.ContextQM4F c = new QuaternionM4F.ContextQM4F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float y0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float z0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float w0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
       final T v0 = this.newQuaternion(x0, y0, z0, w0);
 
-      final float x1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float y1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float z1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float w1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
       final T v1 = this.newQuaternion(x1, y1, z1, w1);
 
       final T vr0 = this.newQuaternion();
@@ -677,7 +677,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     }
   }
 
-  protected double getRandom()
+  protected static double getRandom()
   {
     return Math.random();
   }
@@ -748,18 +748,18 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float origin_x =
-        (float) ((this.getRandom() * 100.0) - (this.getRandom() * 100.0));
+        (float) ((QuaternionM4FContract.getRandom() * 100.0) - (QuaternionM4FContract.getRandom() * 100.0));
       final float origin_y =
-        (float) ((this.getRandom() * 100.0) - (this.getRandom() * 100.0));
+        (float) ((QuaternionM4FContract.getRandom() * 100.0) - (QuaternionM4FContract.getRandom() * 100.0));
       final float origin_z =
-        (float) ((this.getRandom() * 100.0) - (this.getRandom() * 100.0));
+        (float) ((QuaternionM4FContract.getRandom() * 100.0) - (QuaternionM4FContract.getRandom() * 100.0));
 
       final float target_x =
-        (float) ((this.getRandom() * 100.0) - (this.getRandom() * 100.0));
+        (float) ((QuaternionM4FContract.getRandom() * 100.0) - (QuaternionM4FContract.getRandom() * 100.0));
       final float target_y =
-        (float) ((this.getRandom() * 100.0) - (this.getRandom() * 100.0));
+        (float) ((QuaternionM4FContract.getRandom() * 100.0) - (QuaternionM4FContract.getRandom() * 100.0));
       final float target_z =
-        (float) ((this.getRandom() * 100.0) - (this.getRandom() * 100.0));
+        (float) ((QuaternionM4FContract.getRandom() * 100.0) - (QuaternionM4FContract.getRandom() * 100.0));
 
       final VectorReadable3FType origin = new VectorI3F(origin_x, origin_y, origin_z);
       final VectorReadable3FType target = new VectorI3F(target_x, target_y, target_z);
@@ -784,10 +784,10 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float y = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float z = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float w = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
       final T v = this.newQuaternion(x, y, z, w);
 
       final double m = QuaternionM4F.magnitude(v);
@@ -800,13 +800,13 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x =
-        (float) (this.getRandom() * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
+        (float) (QuaternionM4FContract.getRandom() * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
       final float y =
-        (float) (this.getRandom() * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
+        (float) (QuaternionM4FContract.getRandom() * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
       final float z =
-        (float) (this.getRandom() * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
+        (float) (QuaternionM4FContract.getRandom() * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
       final float w =
-        (float) (this.getRandom() * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
+        (float) (QuaternionM4FContract.getRandom() * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
       final T v = this.newQuaternion(x, y, z, w);
 
       final T vr = this.newQuaternion();
@@ -876,13 +876,13 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final VectorReadable3FType axis_r = new VectorI3F(
-        (float) this.getRandom(),
-        (float) this.getRandom(),
-        (float) this.getRandom());
+        (float) QuaternionM4FContract.getRandom(),
+        (float) QuaternionM4FContract.getRandom(),
+        (float) QuaternionM4FContract.getRandom());
       final VectorI3F axis_n = VectorI3F.normalize(axis_r);
 
       final T q = this.newQuaternion();
-      final double angle = Math.toRadians(this.getRandom() * 360.0);
+      final double angle = Math.toRadians(QuaternionM4FContract.getRandom() * 360.0);
       QuaternionM4F.makeFromAxisAngle(axis_n, angle, q);
 
       final double m = QuaternionM4F.magnitude(q);
@@ -1039,11 +1039,11 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     final Matrix3x3FType m = MatrixHeapArrayM3x3F.newMatrix();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float degrees = (float) ((2.0 * this.getRandom() * 360.0) - 360.0);
+      final float degrees = (float) ((2.0 * QuaternionM4FContract.getRandom() * 360.0) - 360.0);
       final float angle = (float) Math.toRadians((double) degrees);
-      final float axis_x = (float) this.getRandom();
-      final float axis_y = (float) this.getRandom();
-      final float axis_z = (float) this.getRandom();
+      final float axis_x = (float) QuaternionM4FContract.getRandom();
+      final float axis_y = (float) QuaternionM4FContract.getRandom();
+      final float axis_z = (float) QuaternionM4FContract.getRandom();
       final VectorM3F axis = new VectorM3F(axis_x, axis_y, axis_z);
       VectorM3F.normalizeInPlace(axis);
 
@@ -1104,11 +1104,11 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     final Matrix4x4FType m = MatrixHeapArrayM4x4F.newMatrix();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float degrees = (float) ((2.0 * this.getRandom() * 360.0) - 360.0);
+      final float degrees = (float) ((2.0 * QuaternionM4FContract.getRandom() * 360.0) - 360.0);
       final float angle = (float) Math.toRadians((double) degrees);
-      final float axis_x = (float) this.getRandom();
-      final float axis_y = (float) this.getRandom();
-      final float axis_z = (float) this.getRandom();
+      final float axis_x = (float) QuaternionM4FContract.getRandom();
+      final float axis_y = (float) QuaternionM4FContract.getRandom();
+      final float axis_z = (float) QuaternionM4FContract.getRandom();
       final VectorM3F axis = new VectorM3F(axis_x, axis_y, axis_z);
       VectorM3F.normalizeInPlace(axis);
 
@@ -1631,10 +1631,10 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) ((this.getRandom() * 2.0) - this.getRandom());
-      final float y = (float) ((this.getRandom() * 2.0) - this.getRandom());
-      final float z = (float) ((this.getRandom() * 2.0) - this.getRandom());
-      final float w = (float) ((this.getRandom() * 2.0) - this.getRandom());
+      final float x = (float) ((QuaternionM4FContract.getRandom() * 2.0) - QuaternionM4FContract.getRandom());
+      final float y = (float) ((QuaternionM4FContract.getRandom() * 2.0) - QuaternionM4FContract.getRandom());
+      final float z = (float) ((QuaternionM4FContract.getRandom() * 2.0) - QuaternionM4FContract.getRandom());
+      final float w = (float) ((QuaternionM4FContract.getRandom() * 2.0) - QuaternionM4FContract.getRandom());
       final T qi = this.newQuaternion(x, y, z, w);
       final T qn = this.newQuaternion(-x, -y, -z, -w);
       final T qr = this.newQuaternion();
@@ -1739,10 +1739,10 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   public final void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float y = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float z = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float w = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
       final T v = this.newQuaternion(x, y, z, w);
 
       final T vr = this.newQuaternion();
@@ -1774,10 +1774,10 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   public final void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float y = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float z = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float w = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
       final T v = this.newQuaternion(x, y, z, w);
 
       final T vr = this.newQuaternion();
@@ -1812,16 +1812,16 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   public final void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float y0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float z0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float w0 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
       final T v0 = this.newQuaternion(x0, y0, z0, w0);
 
-      final float x1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float y1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float z1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
+      final float w1 = (float) (QuaternionM4FContract.getRandom() * (double) Float.MAX_VALUE);
       final T v1 = this.newQuaternion(x1, y1, z1, w1);
 
       final T vr0 = this.newQuaternion();
