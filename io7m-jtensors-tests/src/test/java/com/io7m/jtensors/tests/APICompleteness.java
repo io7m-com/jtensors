@@ -73,7 +73,7 @@ public final class APICompleteness
         continue;
       }
 
-      if (methods.containsKey(m_name) == false) {
+      if (!methods.containsKey(m_name)) {
         System.out.println(
           c_name + ": " + m_name + " not present from " + c_base.getName());
       }
