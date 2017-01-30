@@ -25,10 +25,8 @@ import com.io7m.jtensors.MatrixM3x3D;
 import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.Quaternion4DType;
 import com.io7m.jtensors.QuaternionM4D;
-import com.io7m.jtensors.QuaternionM4F;
 import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorM3D;
-import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorReadable3DType;
 import org.junit.Assert;
 import org.junit.Test;
@@ -70,16 +68,16 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double max = 10000.0;
-      final double x0 = QuaternionM4DContract.getRandom() * max;
-      final double y0 = QuaternionM4DContract.getRandom() * max;
-      final double z0 = QuaternionM4DContract.getRandom() * max;
-      final double w0 = QuaternionM4DContract.getRandom() * max;
+      final double x0 = getRandom() * max;
+      final double y0 = getRandom() * max;
+      final double z0 = getRandom() * max;
+      final double w0 = getRandom() * max;
       final T v0 = this.newQuaternion(x0, y0, z0, w0);
 
-      final double x1 = QuaternionM4DContract.getRandom() * max;
-      final double y1 = QuaternionM4DContract.getRandom() * max;
-      final double z1 = QuaternionM4DContract.getRandom() * max;
-      final double w1 = QuaternionM4DContract.getRandom() * max;
+      final double x1 = getRandom() * max;
+      final double y1 = getRandom() * max;
+      final double z1 = getRandom() * max;
+      final double w1 = getRandom() * max;
       final T v1 = this.newQuaternion(x1, y1, z1, w1);
 
       final T vr0 = this.newQuaternion();
@@ -172,7 +170,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final double x = QuaternionM4DContract.getRandom();
+    final double x = getRandom();
     final double y = x + 1.0;
     final double z = y + 1.0;
     final double w = z + 1.0;
@@ -258,10 +256,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double y0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double z0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double w0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
+      final double x0 = getRandom() * Double.MAX_VALUE;
+      final double y0 = getRandom() * Double.MAX_VALUE;
+      final double z0 = getRandom() * Double.MAX_VALUE;
+      final double w0 = getRandom() * Double.MAX_VALUE;
       final T v0 = this.newQuaternion(x0, y0, z0, w0);
       final T v1 = this.newQuaternion(x0, y0, z0, w0);
       final T v2 = this.newQuaternion(x0, y0, z0, w0);
@@ -317,10 +315,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   public final void testConjugateInvertible()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = (QuaternionM4DContract.getRandom() * 200.0) - 100.0;
-      final double y = (QuaternionM4DContract.getRandom() * 200.0) - 100.0;
-      final double z = (QuaternionM4DContract.getRandom() * 200.0) - 100.0;
-      final double w = (QuaternionM4DContract.getRandom() * 200.0) - 100.0;
+      final double x = (getRandom() * 200.0) - 100.0;
+      final double y = (getRandom() * 200.0) - 100.0;
+      final double z = (getRandom() * 200.0) - 100.0;
+      final double w = (getRandom() * 200.0) - 100.0;
 
       final T q = this.newQuaternion(x, y, z, w);
       final T qc0 = this.newQuaternion();
@@ -358,10 +356,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   public final void testCopy2Correct()
   {
     final T v0 = this.newQuaternion(
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE,
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE,
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE,
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE);
+      getRandom() * Double.MAX_VALUE,
+      getRandom() * Double.MAX_VALUE,
+      getRandom() * Double.MAX_VALUE,
+      getRandom() * Double.MAX_VALUE);
     final T v1 = this.newQuaternion();
 
     v1.copyFrom2D(v0);
@@ -376,10 +374,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   public final void testCopy3Correct()
   {
     final T v0 = this.newQuaternion(
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE,
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE,
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE,
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE);
+      getRandom() * Double.MAX_VALUE,
+      getRandom() * Double.MAX_VALUE,
+      getRandom() * Double.MAX_VALUE,
+      getRandom() * Double.MAX_VALUE);
     final T v1 = this.newQuaternion();
 
     v1.copyFrom4D(v0);
@@ -394,10 +392,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   public final void testCopy4Correct()
   {
     final T v0 = this.newQuaternion(
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE,
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE,
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE,
-      QuaternionM4DContract.getRandom() * Double.MAX_VALUE);
+      getRandom() * Double.MAX_VALUE,
+      getRandom() * Double.MAX_VALUE,
+      getRandom() * Double.MAX_VALUE,
+      getRandom() * Double.MAX_VALUE);
     final T v1 = this.newQuaternion();
 
     v1.copyFrom3D(v0);
@@ -462,10 +460,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   public final void testDotProductSelf()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = QuaternionM4DContract.getRandom();
-      final double y = QuaternionM4DContract.getRandom();
-      final double z = QuaternionM4DContract.getRandom();
-      final double w = QuaternionM4DContract.getRandom();
+      final double x = getRandom();
+      final double y = getRandom();
+      final double z = getRandom();
+      final double w = getRandom();
       final T q = this.newQuaternion(x, y, z, w);
       QuaternionM4D.normalizeInPlace(q);
 
@@ -478,10 +476,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   public final void testDotProductSelfMagnitudeSquared()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = QuaternionM4DContract.getRandom();
-      final double y = QuaternionM4DContract.getRandom();
-      final double z = QuaternionM4DContract.getRandom();
-      final double w = QuaternionM4DContract.getRandom();
+      final double x = getRandom();
+      final double y = getRandom();
+      final double z = getRandom();
+      final double w = getRandom();
       final T q = this.newQuaternion(x, y, z, w);
 
       final double ms = QuaternionM4D.magnitudeSquared(q);
@@ -518,7 +516,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   @Test
   public final void testEqualsNotEqualCorrect()
   {
-    final double x = QuaternionM4DContract.getRandom();
+    final double x = getRandom();
     final double y = x + 1.0;
     final double z = y + 1.0;
     final double w = z + 1.0;
@@ -665,16 +663,16 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double y0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double z0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double w0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
+      final double x0 = getRandom() * Double.MAX_VALUE;
+      final double y0 = getRandom() * Double.MAX_VALUE;
+      final double z0 = getRandom() * Double.MAX_VALUE;
+      final double w0 = getRandom() * Double.MAX_VALUE;
       final T v0 = this.newQuaternion(x0, y0, z0, w0);
 
-      final double x1 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double y1 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double z1 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double w1 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
+      final double x1 = getRandom() * Double.MAX_VALUE;
+      final double y1 = getRandom() * Double.MAX_VALUE;
+      final double z1 = getRandom() * Double.MAX_VALUE;
+      final double w1 = getRandom() * Double.MAX_VALUE;
       final T v1 = this.newQuaternion(x1, y1, z1, w1);
 
       final T vr0 = this.newQuaternion();
@@ -706,7 +704,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
 
     final VectorReadable3DType origin = new VectorI3D(0.0, 0.0, 0.0);
     final VectorReadable3DType target = new VectorI3D(-1.0, 0.0, 0.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_Y;
+    final VectorReadable3DType axis = AXIS_Y;
 
     MatrixM4x4D.lookAt(mc, origin, target, axis, mr);
     QuaternionM4D.lookAt(qc, origin, target, axis, qr);
@@ -733,7 +731,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
 
     final VectorReadable3DType origin = new VectorI3D(0.0, 0.0, 0.0);
     final VectorReadable3DType target = new VectorI3D(1.0, 0.0, 0.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_Y;
+    final VectorReadable3DType axis = AXIS_Y;
 
     MatrixM4x4D.lookAt(mc, origin, target, axis, mr);
     QuaternionM4D.lookAt(qc, origin, target, axis, qr);
@@ -759,27 +757,27 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix4x4DType mq = MatrixHeapArrayM4x4D.newMatrix();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double origin_x = (QuaternionM4DContract.getRandom() * 100.0)
-        - (QuaternionM4DContract.getRandom() * 100.0);
-      final double origin_y = (QuaternionM4DContract.getRandom() * 100.0)
-        - (QuaternionM4DContract.getRandom() * 100.0);
-      final double origin_z = (QuaternionM4DContract.getRandom() * 100.0)
-        - (QuaternionM4DContract.getRandom() * 100.0);
+      final double origin_x = (getRandom() * 100.0)
+        - (getRandom() * 100.0);
+      final double origin_y = (getRandom() * 100.0)
+        - (getRandom() * 100.0);
+      final double origin_z = (getRandom() * 100.0)
+        - (getRandom() * 100.0);
 
-      final double target_x = (QuaternionM4DContract.getRandom() * 100.0)
-        - (QuaternionM4DContract.getRandom() * 100.0);
-      final double target_y = (QuaternionM4DContract.getRandom() * 100.0)
-        - (QuaternionM4DContract.getRandom() * 100.0);
-      final double target_z = (QuaternionM4DContract.getRandom() * 100.0)
-        - (QuaternionM4DContract.getRandom() * 100.0);
+      final double target_x = (getRandom() * 100.0)
+        - (getRandom() * 100.0);
+      final double target_y = (getRandom() * 100.0)
+        - (getRandom() * 100.0);
+      final double target_z = (getRandom() * 100.0)
+        - (getRandom() * 100.0);
 
       final VectorI3D origin = new VectorI3D(origin_x, origin_y, origin_z);
       final VectorI3D target = new VectorI3D(target_x, target_y, target_z);
 
       MatrixM4x4D.lookAt(
-        mc, origin, target, QuaternionM4DContract.AXIS_Y, ml);
+        mc, origin, target, AXIS_Y, ml);
       QuaternionM4D.lookAt(
-        qc, origin, target, QuaternionM4DContract.AXIS_Y, lq);
+        qc, origin, target, AXIS_Y, lq);
       QuaternionM4D.makeRotationMatrix4x4(lq, mq);
 
 
@@ -798,13 +796,13 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x =
-        1.0 + (QuaternionM4DContract.getRandom() * Double.MAX_VALUE);
+        1.0 + (getRandom() * Double.MAX_VALUE);
       final double y =
-        1.0 + (QuaternionM4DContract.getRandom() * Double.MAX_VALUE);
+        1.0 + (getRandom() * Double.MAX_VALUE);
       final double z =
-        1.0 + (QuaternionM4DContract.getRandom() * Double.MAX_VALUE);
+        1.0 + (getRandom() * Double.MAX_VALUE);
       final double w =
-        1.0 + (QuaternionM4DContract.getRandom() * Double.MAX_VALUE);
+        1.0 + (getRandom() * Double.MAX_VALUE);
       final T v = this.newQuaternion(x, y, z, w);
 
       final double m = QuaternionM4D.magnitude(v);
@@ -817,13 +815,13 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x =
-        QuaternionM4DContract.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
+        getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
       final double y =
-        QuaternionM4DContract.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
+        getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
       final double z =
-        QuaternionM4DContract.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
+        getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
       final double w =
-        QuaternionM4DContract.getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
+        getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
       final T v = this.newQuaternion(x, y, z, w);
 
       final T vr = this.newQuaternion();
@@ -894,14 +892,12 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final VectorI3D axis_r = new VectorI3D(
-        QuaternionM4DContract.getRandom(),
-        QuaternionM4DContract.getRandom(),
-        QuaternionM4DContract.getRandom());
+      final VectorI3D axis_r =
+        new VectorI3D(getRandom(), getRandom(), getRandom());
       final VectorI3D axis_n =
         VectorI3D.normalize(axis_r);
       final double angle =
-        Math.toRadians(QuaternionM4DContract.getRandom() * 360.0);
+        Math.toRadians(getRandom() * 360.0);
 
       final T q = this.newQuaternion();
       QuaternionM4D.makeFromAxisAngle(c, axis_n, angle, q);
@@ -921,13 +917,13 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final VectorM3D result_axis = new VectorM3D();
     final double result_angle = QuaternionM4D.toAxisAngle(q, result_axis);
 
-    QuaternionM4DContract.LOG.debug(
+    LOG.debug(
       "angle expected: {}", Double.valueOf(expected_angle));
-    QuaternionM4DContract.LOG.debug(
+    LOG.debug(
       "angle result:   {}", Double.valueOf(result_angle));
-    QuaternionM4DContract.LOG.debug(
+    LOG.debug(
       "axis expected:  {}", expected_axis);
-    QuaternionM4DContract.LOG.debug(
+    LOG.debug(
       "axis result:    {}", result_axis);
 
     Assert.assertEquals(
@@ -1103,11 +1099,11 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double degrees =
-        (2.0 * QuaternionM4DContract.getRandom() * 360.0) - 360.0;
+        (2.0 * getRandom() * 360.0) - 360.0;
       final double angle = Math.toRadians(degrees);
-      final double axis_x = QuaternionM4DContract.getRandom();
-      final double axis_y = QuaternionM4DContract.getRandom();
-      final double axis_z = QuaternionM4DContract.getRandom();
+      final double axis_x = getRandom();
+      final double axis_y = getRandom();
+      final double axis_z = getRandom();
       final VectorM3D axis = new VectorM3D(axis_x, axis_y, axis_z);
       VectorM3D.normalizeInPlace(axis);
 
@@ -1169,11 +1165,11 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double degrees =
-        (2.0 * QuaternionM4DContract.getRandom() * 360.0) - 360.0;
+        (2.0 * getRandom() * 360.0) - 360.0;
       final double angle = Math.toRadians(degrees);
-      final double axis_x = QuaternionM4DContract.getRandom();
-      final double axis_y = QuaternionM4DContract.getRandom();
-      final double axis_z = QuaternionM4DContract.getRandom();
+      final double axis_x = getRandom();
+      final double axis_y = getRandom();
+      final double axis_z = getRandom();
       final VectorM3D axis = new VectorM3D(axis_x, axis_y, axis_z);
       VectorM3D.normalizeInPlace(axis);
 
@@ -1233,7 +1229,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix3x3DType mr = MatrixHeapArrayM3x3D.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_X;
+    final VectorReadable3DType axis = AXIS_X;
 
     MatrixM3x3D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1258,7 +1254,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix3x3DType mr = MatrixHeapArrayM3x3D.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_Y;
+    final VectorReadable3DType axis = AXIS_Y;
 
     MatrixM3x3D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1283,7 +1279,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix3x3DType mr = MatrixHeapArrayM3x3D.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_Z;
+    final VectorReadable3DType axis = AXIS_Z;
 
     MatrixM3x3D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1329,7 +1325,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix3x3DType mr = MatrixHeapArrayM3x3D.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_X;
+    final VectorReadable3DType axis = AXIS_X;
 
     MatrixM3x3D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1354,7 +1350,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix3x3DType mr = MatrixHeapArrayM3x3D.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_Y;
+    final VectorReadable3DType axis = AXIS_Y;
 
     MatrixM3x3D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1379,7 +1375,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix3x3DType mr = MatrixHeapArrayM3x3D.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_Z;
+    final VectorReadable3DType axis = AXIS_Z;
 
     MatrixM3x3D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1404,7 +1400,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix4x4DType mr = MatrixHeapArrayM4x4D.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_X;
+    final VectorReadable3DType axis = AXIS_X;
 
     MatrixM4x4D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1429,7 +1425,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix4x4DType mr = MatrixHeapArrayM4x4D.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_Y;
+    final VectorReadable3DType axis = AXIS_Y;
 
     MatrixM4x4D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1454,7 +1450,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix4x4DType mr = MatrixHeapArrayM4x4D.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_Z;
+    final VectorReadable3DType axis = AXIS_Z;
 
     MatrixM4x4D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1508,7 +1504,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix4x4DType mr = MatrixHeapArrayM4x4D.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_X;
+    final VectorReadable3DType axis = AXIS_X;
 
     MatrixM4x4D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1533,7 +1529,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix4x4DType mr = MatrixHeapArrayM4x4D.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_Y;
+    final VectorReadable3DType axis = AXIS_Y;
 
     MatrixM4x4D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1558,7 +1554,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final Matrix4x4DType mr = MatrixHeapArrayM4x4D.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3DType axis = QuaternionM4DContract.AXIS_Z;
+    final VectorReadable3DType axis = AXIS_Z;
 
     MatrixM4x4D.makeRotation(radians, axis, mr);
     QuaternionM4D.makeFromAxisAngle(c, axis, radians, q);
@@ -1734,10 +1730,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final ContextRelative context = TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = (QuaternionM4DContract.getRandom() * 2.0) - QuaternionM4DContract.getRandom();
-      final double y = (QuaternionM4DContract.getRandom() * 2.0) - QuaternionM4DContract.getRandom();
-      final double z = (QuaternionM4DContract.getRandom() * 2.0) - QuaternionM4DContract.getRandom();
-      final double w = (QuaternionM4DContract.getRandom() * 2.0) - QuaternionM4DContract.getRandom();
+      final double x = (getRandom() * 2.0) - getRandom();
+      final double y = (getRandom() * 2.0) - getRandom();
+      final double z = (getRandom() * 2.0) - getRandom();
+      final double w = (getRandom() * 2.0) - getRandom();
       final T qi = this.newQuaternion(x, y, z, w);
       final T qn = this.newQuaternion(-x, -y, -z, -w);
       final T qr = this.newQuaternion();
@@ -1841,10 +1837,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   public final void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double y = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double z = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double w = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
+      final double x = getRandom() * Double.MAX_VALUE;
+      final double y = getRandom() * Double.MAX_VALUE;
+      final double z = getRandom() * Double.MAX_VALUE;
+      final double w = getRandom() * Double.MAX_VALUE;
       final T v = this.newQuaternion(x, y, z, w);
 
       final T vr = this.newQuaternion();
@@ -1876,10 +1872,10 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   public final void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double y = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double z = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double w = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
+      final double x = getRandom() * Double.MAX_VALUE;
+      final double y = getRandom() * Double.MAX_VALUE;
+      final double z = getRandom() * Double.MAX_VALUE;
+      final double w = getRandom() * Double.MAX_VALUE;
       final T v = this.newQuaternion(x, y, z, w);
 
       final T vr = this.newQuaternion();
@@ -1913,16 +1909,16 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   public final void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final double x0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double y0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double z0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double w0 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
+      final double x0 = getRandom() * Double.MAX_VALUE;
+      final double y0 = getRandom() * Double.MAX_VALUE;
+      final double z0 = getRandom() * Double.MAX_VALUE;
+      final double w0 = getRandom() * Double.MAX_VALUE;
       final T v0 = this.newQuaternion(x0, y0, z0, w0);
 
-      final double x1 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double y1 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double z1 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
-      final double w1 = QuaternionM4DContract.getRandom() * Double.MAX_VALUE;
+      final double x1 = getRandom() * Double.MAX_VALUE;
+      final double y1 = getRandom() * Double.MAX_VALUE;
+      final double z1 = getRandom() * Double.MAX_VALUE;
+      final double w1 = getRandom() * Double.MAX_VALUE;
       final T v1 = this.newQuaternion(x1, y1, z1, w1);
 
       final T vr0 = this.newQuaternion();
