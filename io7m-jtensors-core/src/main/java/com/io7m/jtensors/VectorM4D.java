@@ -912,13 +912,9 @@ public final class VectorM4D implements Vector4DType
       return false;
     }
     final VectorM4D other = (VectorM4D) obj;
-    if (Double.doubleToLongBits(this.w) != Double.doubleToLongBits(other.w)) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(
+    return Double.doubleToLongBits(this.w) == Double.doubleToLongBits(other.w) && Double.doubleToLongBits(
+      this.x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(
+      this.y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(
       this.z) == Double.doubleToLongBits(other.z);
   }
 

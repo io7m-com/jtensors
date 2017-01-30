@@ -253,12 +253,6 @@ public final class VectorByteBufferedM4I extends ByteBuffered
       return false;
     }
     final VectorByteBufferedM4I other = (VectorByteBufferedM4I) obj;
-    if (this.getWI() != other.getWI()) {
-      return false;
-    }
-    if (this.getXI() != other.getXI()) {
-      return false;
-    }
-    return this.getYI() == other.getYI() && this.getZI() == other.getZI();
+    return this.getWI() == other.getWI() && this.getXI() == other.getXI() && this.getYI() == other.getYI() && this.getZI() == other.getZI();
   }
 }

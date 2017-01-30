@@ -842,13 +842,7 @@ public final class VectorM4I implements Vector4IType
       return false;
     }
     final VectorM4I other = (VectorM4I) obj;
-    if (this.w != other.w) {
-      return false;
-    }
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y && this.z == other.z;
+    return this.w == other.w && this.x == other.x && this.y == other.y && this.z == other.z;
   }
 
   @Override

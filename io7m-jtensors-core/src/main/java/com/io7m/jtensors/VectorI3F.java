@@ -530,11 +530,8 @@ public final class VectorI3F implements VectorReadable3FType
       return false;
     }
     final VectorI3F other = (VectorI3F) obj;
-    if (Float.floatToIntBits(this.getXF()) != Float.floatToIntBits(
-      other.getXF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getYF()) == Float.floatToIntBits(
+    return Float.floatToIntBits(this.getXF()) == Float.floatToIntBits(
+      other.getXF()) && Float.floatToIntBits(this.getYF()) == Float.floatToIntBits(
       other.getYF()) && Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
       other.getZF());
   }

@@ -844,13 +844,7 @@ public final class VectorM4L implements Vector4LType
       return false;
     }
     final VectorM4L other = (VectorM4L) obj;
-    if (this.w != other.w) {
-      return false;
-    }
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y && this.z == other.z;
+    return this.w == other.w && this.x == other.x && this.y == other.y && this.z == other.z;
   }
 
   @Override

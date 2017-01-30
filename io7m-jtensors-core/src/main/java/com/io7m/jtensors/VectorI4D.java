@@ -532,13 +532,9 @@ public final class VectorI4D implements VectorReadable4DType
       return false;
     }
     final VectorI4D other = (VectorI4D) obj;
-    if (Double.doubleToLongBits(this.w) != Double.doubleToLongBits(other.w)) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(
+    return Double.doubleToLongBits(this.w) == Double.doubleToLongBits(other.w) && Double.doubleToLongBits(
+      this.x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(
+      this.y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(
       this.z) == Double.doubleToLongBits(other.z);
   }
 

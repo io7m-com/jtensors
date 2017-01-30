@@ -970,11 +970,9 @@ public final class PVectorM3F<T> implements PVector3FType<T>
       return false;
     }
     final PVectorM3F<?> other = (PVectorM3F<?>) obj;
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
-      return false;
-    }
-    return Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y) && Float.floatToIntBits(
-      this.z) == Float.floatToIntBits(other.z);
+    return Float.floatToIntBits(this.x) == Float.floatToIntBits(other.x) && Float.floatToIntBits(
+      this.y) == Float.floatToIntBits(other.y) && Float.floatToIntBits(this.z) == Float.floatToIntBits(
+      other.z);
   }
 
   @Override

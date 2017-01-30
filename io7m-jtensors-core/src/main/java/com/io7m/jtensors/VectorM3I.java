@@ -817,10 +817,7 @@ public final class VectorM3I implements Vector3IType
       return false;
     }
     final VectorM3I other = (VectorM3I) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y && this.z == other.z;
+    return this.x == other.x && this.y == other.y && this.z == other.z;
   }
 
   @Override

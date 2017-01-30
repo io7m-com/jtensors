@@ -58,13 +58,11 @@ public final class MatrixM4x4D
     final MatrixReadable4x4DType m0,
     final MatrixReadable4x4DType m1)
   {
-    if (!compareRow0(m0, m1)) {
-      return false;
-    }
-    if (!compareRow1(m0, m1)) {
-      return false;
-    }
-    return compareRow2(m0, m1) && compareRow3(m0, m1);
+    return compareRow0(m0, m1) && compareRow1(m0, m1) && compareRow2(
+      m0,
+      m1) && compareRow3(
+      m0,
+      m1);
   }
 
   /**
@@ -153,52 +151,28 @@ public final class MatrixM4x4D
     final MatrixReadable4x4DType m0,
     final MatrixReadable4x4DType m1)
   {
-    if (m0.getR0C0D() != m1.getR0C0D()) {
-      return false;
-    }
-    if (m0.getR0C1D() != m1.getR0C1D()) {
-      return false;
-    }
-    return !(m0.getR0C2D() != m1.getR0C2D()) && m0.getR0C3D() == m1.getR0C3D();
+    return !(m0.getR0C0D() != m1.getR0C0D()) && !(m0.getR0C1D() != m1.getR0C1D()) && !(m0.getR0C2D() != m1.getR0C2D()) && m0.getR0C3D() == m1.getR0C3D();
   }
 
   private static boolean compareRow1(
     final MatrixReadable4x4DType m0,
     final MatrixReadable4x4DType m1)
   {
-    if (m0.getR1C0D() != m1.getR1C0D()) {
-      return false;
-    }
-    if (m0.getR1C1D() != m1.getR1C1D()) {
-      return false;
-    }
-    return !(m0.getR1C2D() != m1.getR1C2D()) && m0.getR1C3D() == m1.getR1C3D();
+    return !(m0.getR1C0D() != m1.getR1C0D()) && !(m0.getR1C1D() != m1.getR1C1D()) && !(m0.getR1C2D() != m1.getR1C2D()) && m0.getR1C3D() == m1.getR1C3D();
   }
 
   private static boolean compareRow2(
     final MatrixReadable4x4DType m0,
     final MatrixReadable4x4DType m1)
   {
-    if (m0.getR2C0D() != m1.getR2C0D()) {
-      return false;
-    }
-    if (m0.getR2C1D() != m1.getR2C1D()) {
-      return false;
-    }
-    return !(m0.getR2C2D() != m1.getR2C2D()) && m0.getR2C3D() == m1.getR2C3D();
+    return !(m0.getR2C0D() != m1.getR2C0D()) && !(m0.getR2C1D() != m1.getR2C1D()) && !(m0.getR2C2D() != m1.getR2C2D()) && m0.getR2C3D() == m1.getR2C3D();
   }
 
   private static boolean compareRow3(
     final MatrixReadable4x4DType m0,
     final MatrixReadable4x4DType m1)
   {
-    if (m0.getR3C0D() != m1.getR3C0D()) {
-      return false;
-    }
-    if (m0.getR3C1D() != m1.getR3C1D()) {
-      return false;
-    }
-    return !(m0.getR3C2D() != m1.getR3C2D()) && m0.getR3C3D() == m1.getR3C3D();
+    return !(m0.getR3C0D() != m1.getR3C0D()) && !(m0.getR3C1D() != m1.getR3C1D()) && !(m0.getR3C2D() != m1.getR3C2D()) && m0.getR3C3D() == m1.getR3C3D();
   }
 
   /**

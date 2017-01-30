@@ -537,10 +537,7 @@ public final class PVectorI3L<T> implements PVectorReadable3LType<T>
       return false;
     }
     final PVectorI3L<?> other = (PVectorI3L<?>) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y && this.z == other.z;
+    return this.x == other.x && this.y == other.y && this.z == other.z;
   }
 
   @Override

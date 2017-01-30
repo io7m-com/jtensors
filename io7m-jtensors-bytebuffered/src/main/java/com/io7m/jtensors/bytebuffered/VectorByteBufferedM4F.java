@@ -258,15 +258,9 @@ public final class VectorByteBufferedM4F extends ByteBuffered
       return false;
     }
     final VectorByteBufferedM4F other = (VectorByteBufferedM4F) obj;
-    if (Float.floatToIntBits(this.getWF())
-      != Float.floatToIntBits(other.getWF())) {
-      return false;
-    }
-    if (Float.floatToIntBits(this.getXF())
-      != Float.floatToIntBits(other.getXF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getYF()) == Float.floatToIntBits(other.getYF()) && Float.floatToIntBits(
+    return Float.floatToIntBits(this.getWF()) == Float.floatToIntBits(other.getWF()) && Float.floatToIntBits(
+      this.getXF()) == Float.floatToIntBits(other.getXF()) && Float.floatToIntBits(
+      this.getYF()) == Float.floatToIntBits(other.getYF()) && Float.floatToIntBits(
       this.getZF()) == Float.floatToIntBits(other.getZF());
   }
 }

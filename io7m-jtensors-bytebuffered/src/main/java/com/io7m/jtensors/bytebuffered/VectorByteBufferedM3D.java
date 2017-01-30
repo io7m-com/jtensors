@@ -220,11 +220,8 @@ public final class VectorByteBufferedM3D extends ByteBuffered implements VectorB
       return false;
     }
     final VectorByteBufferedM3D other = (VectorByteBufferedM3D) obj;
-    if (Double.doubleToLongBits(this.getXD())
-      != Double.doubleToLongBits(other.getXD())) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
+    return Double.doubleToLongBits(this.getXD()) == Double.doubleToLongBits(
+      other.getXD()) && Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
       other.getYD()) && Double.doubleToLongBits(this.getZD()) == Double.doubleToLongBits(
       other.getZD());
   }

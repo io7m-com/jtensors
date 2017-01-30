@@ -910,13 +910,7 @@ public final class PVectorM4L<T> implements PVector4LType<T>
       return false;
     }
     final PVectorM4L<?> other = (PVectorM4L<?>) obj;
-    if (this.w != other.w) {
-      return false;
-    }
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y && this.z == other.z;
+    return this.w == other.w && this.x == other.x && this.y == other.y && this.z == other.z;
   }
 
   @Override

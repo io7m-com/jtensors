@@ -967,10 +967,8 @@ public final class PVectorM3D<T> implements PVector3DType<T>
       return false;
     }
     final PVectorM3D<?> other = (PVectorM3D<?>) obj;
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(
+    return Double.doubleToLongBits(this.x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(
+      this.y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(
       this.z) == Double.doubleToLongBits(other.z);
   }
 

@@ -819,10 +819,7 @@ public final class VectorM3L implements Vector3LType
       return false;
     }
     final VectorM3L other = (VectorM3L) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y && this.z == other.z;
+    return this.x == other.x && this.y == other.y && this.z == other.z;
   }
 
   @Override

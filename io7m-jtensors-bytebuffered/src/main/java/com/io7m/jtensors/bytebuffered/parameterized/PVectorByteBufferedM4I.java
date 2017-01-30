@@ -261,13 +261,7 @@ public final class PVectorByteBufferedM4I<T> extends ByteBuffered implements PVe
       return false;
     }
     final PVectorByteBufferedM4I<?> other = (PVectorByteBufferedM4I<?>) obj;
-    if (this.getWI() != other.getWI()) {
-      return false;
-    }
-    if (this.getXI() != other.getXI()) {
-      return false;
-    }
-    return this.getYI() == other.getYI() && this.getZI() == other.getZI();
+    return this.getWI() == other.getWI() && this.getXI() == other.getXI() && this.getYI() == other.getYI() && this.getZI() == other.getZI();
   }
 
   @Override public void copyFromTyped4I(final PVectorReadable4IType<T> in_v)

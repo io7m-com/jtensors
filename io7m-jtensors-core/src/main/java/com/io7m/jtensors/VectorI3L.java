@@ -506,10 +506,7 @@ public final class VectorI3L implements VectorReadable3LType
       return false;
     }
     final VectorI3L other = (VectorI3L) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y && this.z == other.z;
+    return this.x == other.x && this.y == other.y && this.z == other.z;
   }
 
   @Override

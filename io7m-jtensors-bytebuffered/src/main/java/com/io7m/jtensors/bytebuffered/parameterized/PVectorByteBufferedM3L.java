@@ -224,10 +224,7 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
       return false;
     }
     final PVectorByteBufferedM3L<?> other = (PVectorByteBufferedM3L<?>) obj;
-    if (this.getXL() != other.getXL()) {
-      return false;
-    }
-    return this.getYL() == other.getYL() && this.getZL() == other.getZL();
+    return this.getXL() == other.getXL() && this.getYL() == other.getYL() && this.getZL() == other.getZL();
   }
 
   @Override public void copyFromTyped3L(final PVectorReadable3LType<T> in_v)

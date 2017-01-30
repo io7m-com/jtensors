@@ -79,7 +79,6 @@ import org.junit.Test;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 @SuppressWarnings("static-method") public final class OverloadChecker
 {

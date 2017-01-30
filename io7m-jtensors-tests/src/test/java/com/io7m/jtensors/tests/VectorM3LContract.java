@@ -459,7 +459,7 @@ public abstract class VectorM3LContract<T extends Vector3LType>
   @Test public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM3L(
-      VectorM3LContract.getLarge(), VectorM3LContract.getLarge(), VectorM3LContract.getLarge());
+      getLarge(), getLarge(), getLarge());
     final T v1 = this.newVectorM3L();
 
     v1.copyFrom2L(v0);
@@ -477,7 +477,7 @@ public abstract class VectorM3LContract<T extends Vector3LType>
   @Test public final void testCopy3Correct()
   {
     final T v0 = this.newVectorM3L(
-      VectorM3LContract.getLarge(), VectorM3LContract.getLarge(), VectorM3LContract.getLarge());
+      getLarge(), getLarge(), getLarge());
     final T v1 = this.newVectorM3L();
 
     v1.copyFrom3L(v0);

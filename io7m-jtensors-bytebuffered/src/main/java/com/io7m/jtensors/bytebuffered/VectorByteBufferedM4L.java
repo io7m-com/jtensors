@@ -253,12 +253,6 @@ public final class VectorByteBufferedM4L extends ByteBuffered
       return false;
     }
     final VectorByteBufferedM4L other = (VectorByteBufferedM4L) obj;
-    if (this.getWL() != other.getWL()) {
-      return false;
-    }
-    if (this.getXL() != other.getXL()) {
-      return false;
-    }
-    return this.getYL() == other.getYL() && this.getZL() == other.getZL();
+    return this.getWL() == other.getWL() && this.getXL() == other.getXL() && this.getYL() == other.getYL() && this.getZL() == other.getZL();
   }
 }

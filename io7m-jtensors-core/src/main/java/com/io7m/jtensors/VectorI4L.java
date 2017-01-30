@@ -532,13 +532,7 @@ public final class VectorI4L implements VectorReadable4LType
       return false;
     }
     final VectorI4L other = (VectorI4L) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    if (this.y != other.y) {
-      return false;
-    }
-    return this.z == other.z && this.w == other.w;
+    return this.x == other.x && this.y == other.y && this.z == other.z && this.w == other.w;
   }
 
   @Override

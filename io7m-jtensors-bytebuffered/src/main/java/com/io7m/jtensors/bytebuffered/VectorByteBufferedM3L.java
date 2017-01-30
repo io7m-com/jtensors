@@ -217,9 +217,6 @@ public final class VectorByteBufferedM3L extends ByteBuffered
       return false;
     }
     final VectorByteBufferedM3L other = (VectorByteBufferedM3L) obj;
-    if (this.getXL() != other.getXL()) {
-      return false;
-    }
-    return this.getYL() == other.getYL() && this.getZL() == other.getZL();
+    return this.getXL() == other.getXL() && this.getYL() == other.getYL() && this.getZL() == other.getZL();
   }
 }

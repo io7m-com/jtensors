@@ -908,10 +908,8 @@ public final class VectorM3D implements Vector3DType
       return false;
     }
     final VectorM3D other = (VectorM3D) obj;
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(
+    return Double.doubleToLongBits(this.x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(
+      this.y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(
       this.z) == Double.doubleToLongBits(other.z);
   }
 

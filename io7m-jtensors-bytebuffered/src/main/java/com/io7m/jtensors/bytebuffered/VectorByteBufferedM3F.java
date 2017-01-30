@@ -220,11 +220,8 @@ public final class VectorByteBufferedM3F extends ByteBuffered implements VectorB
       return false;
     }
     final VectorByteBufferedM3F other = (VectorByteBufferedM3F) obj;
-    if (Float.floatToIntBits(this.getXF())
-      != Float.floatToIntBits(other.getXF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getYF()) == Float.floatToIntBits(other.getYF()) && Float.floatToIntBits(
+    return Float.floatToIntBits(this.getXF()) == Float.floatToIntBits(other.getXF()) && Float.floatToIntBits(
+      this.getYF()) == Float.floatToIntBits(other.getYF()) && Float.floatToIntBits(
       this.getZF()) == Float.floatToIntBits(other.getZF());
   }
 }

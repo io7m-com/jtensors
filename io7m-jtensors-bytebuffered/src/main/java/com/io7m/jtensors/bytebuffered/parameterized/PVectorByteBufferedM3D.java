@@ -229,11 +229,8 @@ public final class PVectorByteBufferedM3D<T> extends ByteBuffered implements PVe
       return false;
     }
     final PVectorByteBufferedM3D<?> other = (PVectorByteBufferedM3D<?>) obj;
-    if (Double.doubleToLongBits(this.getXD())
-      != Double.doubleToLongBits(other.getXD())) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
+    return Double.doubleToLongBits(this.getXD()) == Double.doubleToLongBits(
+      other.getXD()) && Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
       other.getYD()) && Double.doubleToLongBits(this.getZD()) == Double.doubleToLongBits(
       other.getZD());
   }

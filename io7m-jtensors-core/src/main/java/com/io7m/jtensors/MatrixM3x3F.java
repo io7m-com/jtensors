@@ -1067,10 +1067,7 @@ public final class MatrixM3x3F
     final MatrixReadable3x3FType m0,
     final MatrixReadable3x3FType m1)
   {
-    if (!compareRow0(m0, m1)) {
-      return false;
-    }
-    return compareRow1(m0, m1) && compareRow2(m0, m1);
+    return compareRow0(m0, m1) && compareRow1(m0, m1) && compareRow2(m0, m1);
   }
 
   /**
@@ -1138,30 +1135,21 @@ public final class MatrixM3x3F
     final MatrixReadable3x3FType m0,
     final MatrixReadable3x3FType m1)
   {
-    if (m0.getR0C0F() != m1.getR0C0F()) {
-      return false;
-    }
-    return !(m0.getR0C1F() != m1.getR0C1F()) && m0.getR0C2F() == m1.getR0C2F();
+    return !(m0.getR0C0F() != m1.getR0C0F()) && !(m0.getR0C1F() != m1.getR0C1F()) && m0.getR0C2F() == m1.getR0C2F();
   }
 
   private static boolean compareRow1(
     final MatrixReadable3x3FType m0,
     final MatrixReadable3x3FType m1)
   {
-    if (m0.getR1C0F() != m1.getR1C0F()) {
-      return false;
-    }
-    return !(m0.getR1C1F() != m1.getR1C1F()) && m0.getR1C2F() == m1.getR1C2F();
+    return !(m0.getR1C0F() != m1.getR1C0F()) && !(m0.getR1C1F() != m1.getR1C1F()) && m0.getR1C2F() == m1.getR1C2F();
   }
 
   private static boolean compareRow2(
     final MatrixReadable3x3FType m0,
     final MatrixReadable3x3FType m1)
   {
-    if (m0.getR2C0F() != m1.getR2C0F()) {
-      return false;
-    }
-    return !(m0.getR2C1F() != m1.getR2C1F()) && m0.getR2C2F() == m1.getR2C2F();
+    return !(m0.getR2C0F() != m1.getR2C0F()) && !(m0.getR2C1F() != m1.getR2C1F()) && m0.getR2C2F() == m1.getR2C2F();
   }
 
   /**

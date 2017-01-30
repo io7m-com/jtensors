@@ -915,14 +915,9 @@ public final class VectorM4F implements Vector4FType
       return false;
     }
     final VectorM4F other = (VectorM4F) obj;
-    if (Float.floatToIntBits(this.w) != Float.floatToIntBits(other.w)) {
-      return false;
-    }
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
-      return false;
-    }
-    return Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y) && Float.floatToIntBits(
-      this.z) == Float.floatToIntBits(other.z);
+    return Float.floatToIntBits(this.w) == Float.floatToIntBits(other.w) && Float.floatToIntBits(
+      this.x) == Float.floatToIntBits(other.x) && Float.floatToIntBits(this.y) == Float.floatToIntBits(
+      other.y) && Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
   }
 
   @Override

@@ -908,11 +908,9 @@ public final class VectorM3F implements Vector3FType
       return false;
     }
     final VectorM3F other = (VectorM3F) obj;
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
-      return false;
-    }
-    return Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y) && Float.floatToIntBits(
-      this.z) == Float.floatToIntBits(other.z);
+    return Float.floatToIntBits(this.x) == Float.floatToIntBits(other.x) && Float.floatToIntBits(
+      this.y) == Float.floatToIntBits(other.y) && Float.floatToIntBits(this.z) == Float.floatToIntBits(
+      other.z);
   }
 
   @Override
