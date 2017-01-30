@@ -124,7 +124,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     PVectorReadable3DType<T>> V absoluteInPlace(
     final V v)
   {
-    return PVectorM3D.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -169,7 +169,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final V v0,
     final PVectorReadable3DType<T> v1)
   {
-    return PVectorM3D.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -220,7 +220,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final PVectorReadable3DType<T> v1,
     final double r)
   {
-    return PVectorM3D.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -333,7 +333,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final PVectorReadable3DType<T> minimum,
     final PVectorReadable3DType<T> maximum)
   {
-    return PVectorM3D.clampByPVector(v, minimum, maximum, v);
+    return clampByPVector(v, minimum, maximum, v);
   }
 
   /**
@@ -356,7 +356,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final double minimum,
     final double maximum)
   {
-    return PVectorM3D.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -430,7 +430,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final V v,
     final PVectorReadable3DType<T> maximum)
   {
-    return PVectorM3D.clampMaximumByPVector(v, maximum, v);
+    return clampMaximumByPVector(v, maximum, v);
   }
 
   /**
@@ -451,7 +451,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final V v,
     final double maximum)
   {
-    return PVectorM3D.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -525,7 +525,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final V v,
     final PVectorReadable3DType<T> minimum)
   {
-    return PVectorM3D.clampMinimumByPVector(v, minimum, v);
+    return clampMinimumByPVector(v, minimum, v);
   }
 
   /**
@@ -546,7 +546,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final V v,
     final double minimum)
   {
-    return PVectorM3D.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -610,7 +610,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final PVectorReadable3DType<T> v1)
   {
     final PVectorM3D<T> vr = (PVectorM3D<T>) c.va;
-    return PVectorM3D.magnitude(PVectorM3D.subtract(v0, v1, vr));
+    return magnitude(subtract(v0, v1, vr));
   }
 
   /**
@@ -665,9 +665,9 @@ public final class PVectorM3D<T> implements PVector3DType<T>
   {
     final PVectorM3D<T> va = (PVectorM3D<T>) c.va;
     final PVectorM3D<T> vb = (PVectorM3D<T>) c.vb;
-    PVectorM3D.scale(v0, 1.0 - alpha, va);
-    PVectorM3D.scale(v1, alpha, vb);
-    return PVectorM3D.add(va, vb, r);
+    scale(v0, 1.0 - alpha, va);
+    scale(v1, alpha, vb);
+    return add(va, vb, r);
   }
 
   /**
@@ -684,7 +684,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
   public static <T> double magnitude(
     final PVectorReadable3DType<T> v)
   {
-    return Math.sqrt(PVectorM3D.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -699,7 +699,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
   public static <T> double magnitudeSquared(
     final PVectorReadable3DType<T> v)
   {
-    return PVectorM3D.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -719,10 +719,10 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final PVectorReadable3DType<T> v,
     final V out)
   {
-    final double m = PVectorM3D.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return PVectorM3D.scale(v, reciprocal, out);
+      return scale(v, reciprocal, out);
     }
     out.set3D(v.getXD(), v.getYD(), v.getZD());
     return out;
@@ -744,7 +744,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     PVectorReadable3DType<T>> V normalizeInPlace(
     final V v)
   {
-    return PVectorM3D.normalize(v, v);
+    return normalize(v, v);
   }
 
   /**
@@ -774,11 +774,11 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final PVectorM3D<T> va = (PVectorM3D<T>) c.va;
     final PVectorM3D<T> vb = (PVectorM3D<T>) c.vb;
     final PVectorM3D<T> vc = (PVectorM3D<T>) c.vc;
-    PVectorM3D.normalize(v0, va);
-    PVectorM3D.scale(va, PVectorM3D.dotProduct(v1, va), vb);
-    PVectorM3D.normalizeInPlace(PVectorM3D.subtract(v1, vb, vc));
-    PVectorM3D.copy(va, v0_out);
-    PVectorM3D.copy(vc, v1_out);
+    normalize(v0, va);
+    scale(va, dotProduct(v1, va), vb);
+    normalizeInPlace(subtract(v1, vb, vc));
+    copy(va, v0_out);
+    copy(vc, v1_out);
   }
 
   /**
@@ -803,11 +803,11 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final PVectorM3D<T> va = (PVectorM3D<T>) c.va;
     final PVectorM3D<T> vb = (PVectorM3D<T>) c.vb;
     final PVectorM3D<T> vc = (PVectorM3D<T>) c.vc;
-    PVectorM3D.normalize(v0, va);
-    PVectorM3D.scale(va, PVectorM3D.dotProduct(v1, va), vb);
-    PVectorM3D.normalizeInPlace(PVectorM3D.subtract(v1, vb, vc));
-    PVectorM3D.copy(va, v0);
-    PVectorM3D.copy(vc, v1);
+    normalize(v0, va);
+    scale(va, dotProduct(v1, va), vb);
+    normalizeInPlace(subtract(v1, vb, vc));
+    copy(va, v0);
+    copy(vc, v1);
   }
 
   /**
@@ -828,11 +828,11 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final PVectorReadable3DType<T> q,
     final V r)
   {
-    final double dot = PVectorM3D.dotProduct(p, q);
-    final double qms = PVectorM3D.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
 
-    return PVectorM3D.scale(p, s, r);
+    return scale(p, s, r);
   }
 
   /**
@@ -877,7 +877,7 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final V v,
     final double r)
   {
-    return PVectorM3D.scale(v, r, v);
+    return scale(v, r, v);
   }
 
   /**
@@ -922,34 +922,39 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     final V v0,
     final PVectorReadable3DType<T> v1)
   {
-    return PVectorM3D.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2D(
+  @Override
+  public void copyFrom2D(
     final VectorReadable2DType in_v)
   {
     VectorM2D.copy(in_v, this);
   }
 
-  @Override public void copyFrom3D(
+  @Override
+  public void copyFrom3D(
     final VectorReadable3DType in_v)
   {
     VectorM3D.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped2D(
+  @Override
+  public void copyFromTyped2D(
     final PVectorReadable2DType<T> in_v)
   {
     PVectorM2D.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped3D(
+  @Override
+  public void copyFromTyped3D(
     final PVectorReadable3DType<T> in_v)
   {
-    PVectorM3D.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -962,49 +967,52 @@ public final class PVectorM3D<T> implements PVector3DType<T>
       return false;
     }
     final PVectorM3D<?> other = (PVectorM3D<?>) obj;
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
+    return Double.doubleToLongBits(this.x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(
+      this.y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(
+      this.z) == Double.doubleToLongBits(other.z);
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public void setXD(
+  @Override
+  public void setXD(
     final double in_x)
   {
     this.x = in_x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public void setYD(
+  @Override
+  public void setYD(
     final double in_y)
   {
     this.y = in_y;
   }
 
-  @Override public double getZD()
+  @Override
+  public double getZD()
   {
     return this.z;
   }
 
-  @Override public void setZD(
+  @Override
+  public void setZD(
     final double in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1018,7 +1026,8 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     return result;
   }
 
-  @Override public void set2D(
+  @Override
+  public void set2D(
     final double in_x,
     final double in_y)
   {
@@ -1026,7 +1035,8 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     this.y = in_y;
   }
 
-  @Override public void set3D(
+  @Override
+  public void set3D(
     final double in_x,
     final double in_y,
     final double in_z)
@@ -1036,7 +1046,8 @@ public final class PVectorM3D<T> implements PVector3DType<T>
     this.z = in_z;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorM3D ");

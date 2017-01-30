@@ -26,6 +26,7 @@ import java.nio.DoubleBuffer;
 public abstract class MatrixDirect3x3DContract<T extends MatrixDirect3x3DType>
   extends Matrix3x3DContract<T>
 {
+  @Override
   protected abstract T newMatrix();
 
   @Test public final void testBufferEndianness()

@@ -76,7 +76,7 @@ public final class PVectorM2ITest<T>
     final SortedMap<String, Class<?>> interfaces =
       TestUtilities.getInterfaces(v.getClass());
     for (final String k : interfaces.keySet()) {
-      PVectorM2ITest.LOG.debug(
+      LOG.debug(
         "{} implements {}", PVectorM2I.class, k);
     }
 

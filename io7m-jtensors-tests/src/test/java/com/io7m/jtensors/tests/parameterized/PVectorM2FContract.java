@@ -29,7 +29,7 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
 {
   protected static float getRandomLargeNegative()
   {
-    return (float) (PVectorM2FContract.getRandom() * (double) -Float.MAX_VALUE);
+    return (float) (getRandom() * (double) -Float.MAX_VALUE);
   }
 
   protected static double getRandom()
@@ -39,7 +39,7 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
 
   protected static float getRandomLargePositive()
   {
-    return (float) (PVectorM2FContract.getRandom() * (double) Float.MAX_VALUE);
+    return (float) (getRandom() * (double) Float.MAX_VALUE);
   }
 
   protected abstract V newVectorM2F(final V v0);
@@ -56,8 +56,8 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = PVectorM2FContract.getRandomLargeNegative();
-      final float y = PVectorM2FContract.getRandomLargeNegative();
+      final float x = getRandomLargeNegative();
+      final float y = getRandomLargeNegative();
       final V v = this.newVectorM2F(x, y);
 
       final V vr = this.newVectorM2F();
@@ -117,12 +117,12 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 10000.0f;
-      final float x0 = (float) (PVectorM2FContract.getRandom() * (double) max);
-      final float y0 = (float) (PVectorM2FContract.getRandom() * (double) max);
+      final float x0 = (float) (getRandom() * (double) max);
+      final float y0 = (float) (getRandom() * (double) max);
       final V v0 = this.newVectorM2F(x0, y0);
 
-      final float x1 = (float) (PVectorM2FContract.getRandom() * (double) max);
-      final float y1 = (float) (PVectorM2FContract.getRandom() * (double) max);
+      final float x1 = (float) (getRandom() * (double) max);
+      final float y1 = (float) (getRandom() * (double) max);
       final V v1 = this.newVectorM2F(x1, y1);
 
       final V vr0 = this.newVectorM2F();
@@ -193,15 +193,15 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 20000.0f;
-      final float x0 = (float) (PVectorM2FContract.getRandom() * (double) max);
-      final float y0 = (float) (PVectorM2FContract.getRandom() * (double) max);
+      final float x0 = (float) (getRandom() * (double) max);
+      final float y0 = (float) (getRandom() * (double) max);
       final V v0 = this.newVectorM2F(x0, y0);
 
-      final float x1 = (float) (PVectorM2FContract.getRandom() * (double) max);
-      final float y1 = (float) (PVectorM2FContract.getRandom() * (double) max);
+      final float x1 = (float) (getRandom() * (double) max);
+      final float y1 = (float) (getRandom() * (double) max);
       final V v1 = this.newVectorM2F(x1, y1);
 
-      final float r = (float) (PVectorM2FContract.getRandom() * (double) max);
+      final float r = (float) (getRandom() * (double) max);
 
       final V vr0 = this.newVectorM2F();
       PVectorM2F.addScaled(v0, v1, (double) r, vr0);
@@ -233,7 +233,7 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final float x = (float) PVectorM2FContract.getRandom();
+    final float x = (float) getRandom();
     final float y = x + 1.0f;
     final float z = y + 1.0f;
     final float w = z + 1.0f;
@@ -282,8 +282,8 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = PVectorM2FContract.getRandomLargePositive();
-      final float y0 = PVectorM2FContract.getRandomLargePositive();
+      final float x0 = getRandomLargePositive();
+      final float y0 = getRandomLargePositive();
       final V v0 = this.newVectorM2F(x0, y0);
       final V v1 = this.newVectorM2F(x0, y0);
       final V v2 = this.newVectorM2F(x0, y0);
@@ -300,8 +300,8 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       TestUtilities.getDoubleEqualityContext3dp();
 
     {
-      final float x = (float) PVectorM2FContract.getRandom();
-      final float y = (float) PVectorM2FContract.getRandom();
+      final float x = (float) getRandom();
+      final float y = (float) getRandom();
       final V v0 = this.newVectorM2F(x, y);
       final V v1 = this.newVectorM2F(x, y);
       PVectorM2F.normalizeInPlace(v0);
@@ -312,8 +312,8 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
     }
 
     {
-      final float x = (float) PVectorM2FContract.getRandom();
-      final float y = (float) PVectorM2FContract.getRandom();
+      final float x = (float) getRandom();
+      final float y = (float) getRandom();
       final V v0 = this.newVectorM2F(x, y);
       final V v1 = this.newVectorM2F(y, -x);
       PVectorM2F.normalizeInPlace(v0);
@@ -326,8 +326,8 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
     }
 
     {
-      final float x = (float) PVectorM2FContract.getRandom();
-      final float y = (float) PVectorM2FContract.getRandom();
+      final float x = (float) getRandom();
+      final float y = (float) getRandom();
       final V v0 = this.newVectorM2F(x, y);
       final V v1 = this.newVectorM2F(-y, x);
       PVectorM2F.normalizeInPlace(v0);
@@ -351,12 +351,12 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
   @Test public final void testClampByPVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float max_x = PVectorM2FContract.getRandomLargeNegative();
-      final float max_y = PVectorM2FContract.getRandomLargeNegative();
+      final float max_x = getRandomLargeNegative();
+      final float max_y = getRandomLargeNegative();
       final V maximum = this.newVectorM2F(max_x, max_y);
 
-      final float x = PVectorM2FContract.getRandomLargeNegative();
-      final float y = PVectorM2FContract.getRandomLargeNegative();
+      final float x = getRandomLargeNegative();
+      final float y = getRandomLargeNegative();
       final V v = this.newVectorM2F(x, y);
 
       final V vr = this.newVectorM2F();
@@ -380,12 +380,12 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
   @Test public final void testClampByPVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float min_x = PVectorM2FContract.getRandomLargePositive();
-      final float min_y = PVectorM2FContract.getRandomLargePositive();
+      final float min_x = getRandomLargePositive();
+      final float min_y = getRandomLargePositive();
       final V minimum = this.newVectorM2F(min_x, min_y);
 
-      final float x = PVectorM2FContract.getRandomLargeNegative();
-      final float y = PVectorM2FContract.getRandomLargeNegative();
+      final float x = getRandomLargeNegative();
+      final float y = getRandomLargeNegative();
       final V v = this.newVectorM2F(x, y);
 
       final V vr = this.newVectorM2F();
@@ -409,16 +409,16 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
   @Test public final void testClampByPVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float min_x = PVectorM2FContract.getRandomLargeNegative();
-      final float min_y = PVectorM2FContract.getRandomLargeNegative();
+      final float min_x = getRandomLargeNegative();
+      final float min_y = getRandomLargeNegative();
       final V minimum = this.newVectorM2F(min_x, min_y);
 
-      final float max_x = PVectorM2FContract.getRandomLargePositive();
-      final float max_y = PVectorM2FContract.getRandomLargePositive();
+      final float max_x = getRandomLargePositive();
+      final float max_y = getRandomLargePositive();
       final V maximum = this.newVectorM2F(max_x, max_y);
 
-      final float x = PVectorM2FContract.getRandomLargeNegative();
-      final float y = PVectorM2FContract.getRandomLargePositive();
+      final float x = getRandomLargeNegative();
+      final float y = getRandomLargePositive();
       final V v = this.newVectorM2F(x, y);
 
       final V vr = this.newVectorM2F();
@@ -446,10 +446,10 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
   @Test public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float maximum = PVectorM2FContract.getRandomLargeNegative();
+      final float maximum = getRandomLargeNegative();
 
-      final float x = PVectorM2FContract.getRandomLargePositive();
-      final float y = PVectorM2FContract.getRandomLargePositive();
+      final float x = getRandomLargePositive();
+      final float y = getRandomLargePositive();
       final V v = this.newVectorM2F(x, y);
 
       final V vr = this.newVectorM2F();
@@ -469,10 +469,10 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
   @Test public final void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float minimum = PVectorM2FContract.getRandomLargePositive();
+      final float minimum = getRandomLargePositive();
 
-      final float x = PVectorM2FContract.getRandomLargeNegative();
-      final float y = PVectorM2FContract.getRandomLargeNegative();
+      final float x = getRandomLargeNegative();
+      final float y = getRandomLargeNegative();
       final V v = this.newVectorM2F(x, y);
 
       final V vr = this.newVectorM2F();
@@ -492,11 +492,11 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
   @Test public final void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float minimum = PVectorM2FContract.getRandomLargeNegative();
-      final float maximum = PVectorM2FContract.getRandomLargePositive();
+      final float minimum = getRandomLargeNegative();
+      final float maximum = getRandomLargePositive();
 
-      final float x = PVectorM2FContract.getRandomLargeNegative();
-      final float y = PVectorM2FContract.getRandomLargePositive();
+      final float x = getRandomLargeNegative();
+      final float y = getRandomLargePositive();
       final V v = this.newVectorM2F(x, y);
 
       final V vr = this.newVectorM2F();
@@ -535,8 +535,8 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
   @Test public final void testCopy2Correct()
   {
     final V v0 = this.newVectorM2F(
-      PVectorM2FContract.getRandomLargePositive(),
-      PVectorM2FContract.getRandomLargePositive());
+      getRandomLargePositive(),
+      getRandomLargePositive());
     final V v1 = this.newVectorM2F();
     final V v2 = this.newVectorM2F();
 
@@ -577,12 +577,12 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
   {
     final PVectorM2F.ContextPVM2F c = new PVectorM2F.ContextPVM2F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = PVectorM2FContract.getRandomLargePositive();
-      final float y0 = PVectorM2FContract.getRandomLargePositive();
+      final float x0 = getRandomLargePositive();
+      final float y0 = getRandomLargePositive();
       final V v0 = this.newVectorM2F(x0, y0);
 
-      final float x1 = PVectorM2FContract.getRandomLargePositive();
-      final float y1 = PVectorM2FContract.getRandomLargePositive();
+      final float x1 = getRandomLargePositive();
+      final float y1 = getRandomLargePositive();
       final V v1 = this.newVectorM2F(x1, y1);
 
       Assert.assertTrue(PVectorM2F.distance(c, v0, v1) >= 0.0);
@@ -636,8 +636,8 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) PVectorM2FContract.getRandom();
-      final float y = (float) PVectorM2FContract.getRandom();
+      final float x = (float) getRandom();
+      final float y = (float) getRandom();
       final V q = this.newVectorM2F(x, y);
       final float dp = PVectorM2F.dotProduct(q, q);
 
@@ -690,7 +690,7 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
 
   @Test public final void testEqualsNotEqualCorrect()
   {
-    final float x = (float) PVectorM2FContract.getRandom();
+    final float x = (float) getRandom();
     final float y = x + 1.0f;
     final float z = y + 1.0f;
     final float w = z + 1.0f;
@@ -783,12 +783,12 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
     final PVectorM2F.ContextPVM2F c = new PVectorM2F.ContextPVM2F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = PVectorM2FContract.getRandomLargePositive();
-      final float y0 = PVectorM2FContract.getRandomLargePositive();
+      final float x0 = getRandomLargePositive();
+      final float y0 = getRandomLargePositive();
       final V v0 = this.newVectorM2F(x0, y0);
 
-      final float x1 = PVectorM2FContract.getRandomLargePositive();
-      final float y1 = PVectorM2FContract.getRandomLargePositive();
+      final float x1 = getRandomLargePositive();
+      final float y1 = getRandomLargePositive();
       final V v1 = this.newVectorM2F(x1, y1);
 
       final V vr0 = this.newVectorM2F();
@@ -814,8 +814,8 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
   @Test public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = PVectorM2FContract.getRandomLargePositive();
-      final float y = PVectorM2FContract.getRandomLargePositive();
+      final float x = getRandomLargePositive();
+      final float y = getRandomLargePositive();
       final V v = this.newVectorM2F(x, y);
 
       final double m = PVectorM2F.magnitude(v);
@@ -830,8 +830,8 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 20000.0f;
-      final float x = (float) (PVectorM2FContract.getRandom() * (double) max);
-      final float y = (float) (PVectorM2FContract.getRandom() * (double) max);
+      final float x = (float) (getRandom() * (double) max);
+      final float y = (float) (getRandom() * (double) max);
       final V v = this.newVectorM2F(x, y);
 
       final V vr = this.newVectorM2F();
@@ -999,8 +999,8 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = PVectorM2FContract.getRandomLargePositive();
-      final float y = PVectorM2FContract.getRandomLargePositive();
+      final float x = getRandomLargePositive();
+      final float y = getRandomLargePositive();
       final V v = this.newVectorM2F(x, y);
 
       final V vr = this.newVectorM2F();
@@ -1032,8 +1032,8 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = PVectorM2FContract.getRandomLargePositive();
-      final float y = PVectorM2FContract.getRandomLargePositive();
+      final float x = getRandomLargePositive();
+      final float y = getRandomLargePositive();
       final V v = this.newVectorM2F(x, y);
 
       final V vr = this.newVectorM2F();
@@ -1069,12 +1069,12 @@ public abstract class PVectorM2FContract<T, V extends PVector2FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = PVectorM2FContract.getRandomLargePositive();
-      final float y0 = PVectorM2FContract.getRandomLargePositive();
+      final float x0 = getRandomLargePositive();
+      final float y0 = getRandomLargePositive();
       final V v0 = this.newVectorM2F(x0, y0);
 
-      final float x1 = PVectorM2FContract.getRandomLargePositive();
-      final float y1 = PVectorM2FContract.getRandomLargePositive();
+      final float x1 = getRandomLargePositive();
+      final float y1 = getRandomLargePositive();
       final V v1 = this.newVectorM2F(x1, y1);
 
       final V vr0 = this.newVectorM2F();

@@ -19,6 +19,7 @@ package com.io7m.jtensors.tests;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorI2D;
+import com.io7m.jtensors.VectorReadable2DType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,7 +33,7 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
-      final VectorI2D v = new VectorI2D(x, y);
+      final VectorReadable2DType v = new VectorI2D(x, y);
 
       final VectorI2D vr = VectorI2D.absolute(v);
 
@@ -54,11 +55,11 @@ public class VectorI2DTest extends VectorI2Contract
       final double max = 10000.0;
       final double x0 = Math.random() * max;
       final double y0 = Math.random() * max;
-      final VectorI2D v0 = new VectorI2D(x0, y0);
+      final VectorReadable2DType v0 = new VectorI2D(x0, y0);
 
       final double x1 = Math.random() * max;
       final double y1 = Math.random() * max;
-      final VectorI2D v1 = new VectorI2D(x1, y1);
+      final VectorReadable2DType v1 = new VectorI2D(x1, y1);
 
       final VectorI2D vr = VectorI2D.add(v0, v1);
 
@@ -80,11 +81,11 @@ public class VectorI2DTest extends VectorI2Contract
       final double max = 10000.0;
       final double x0 = Math.random() * max;
       final double y0 = Math.random() * max;
-      final VectorI2D v0 = new VectorI2D(x0, y0);
+      final VectorReadable2DType v0 = new VectorI2D(x0, y0);
 
       final double x1 = Math.random() * max;
       final double y1 = Math.random() * max;
-      final VectorI2D v1 = new VectorI2D(x1, y1);
+      final VectorReadable2DType v1 = new VectorI2D(x1, y1);
 
       final double r = Math.random() * 100.0;
       final VectorI2D vr = VectorI2D.addScaled(v0, v1, r);
@@ -109,32 +110,32 @@ public class VectorI2DTest extends VectorI2Contract
     final double q = z + 1.0;
 
     {
-      final VectorI2D m0 = new VectorI2D(x, y);
-      final VectorI2D m1 = new VectorI2D(q, y);
+      final VectorReadable2DType m0 = new VectorI2D(x, y);
+      final VectorReadable2DType m1 = new VectorI2D(q, y);
       Assert.assertFalse(VectorI2D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI2D m0 = new VectorI2D(x, y);
-      final VectorI2D m1 = new VectorI2D(x, q);
+      final VectorReadable2DType m0 = new VectorI2D(x, y);
+      final VectorReadable2DType m1 = new VectorI2D(x, q);
       Assert.assertFalse(VectorI2D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI2D m0 = new VectorI2D(x, y);
-      final VectorI2D m1 = new VectorI2D(q, q);
+      final VectorReadable2DType m0 = new VectorI2D(x, y);
+      final VectorReadable2DType m1 = new VectorI2D(q, q);
       Assert.assertFalse(VectorI2D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI2D m0 = new VectorI2D(x, y);
-      final VectorI2D m1 = new VectorI2D(q, y);
+      final VectorReadable2DType m0 = new VectorI2D(x, y);
+      final VectorReadable2DType m1 = new VectorI2D(q, y);
       Assert.assertFalse(VectorI2D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI2D m0 = new VectorI2D(x, y);
-      final VectorI2D m1 = new VectorI2D(q, q);
+      final VectorReadable2DType m0 = new VectorI2D(x, y);
+      final VectorReadable2DType m1 = new VectorI2D(q, q);
       Assert.assertFalse(VectorI2D.almostEqual(ec, m0, m1));
     }
   }
@@ -147,9 +148,9 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v0 = new VectorI2D(x0, y0);
-      final VectorI2D v1 = new VectorI2D(x0, y0);
-      final VectorI2D v2 = new VectorI2D(x0, y0);
+      final VectorReadable2DType v0 = new VectorI2D(x0, y0);
+      final VectorReadable2DType v1 = new VectorI2D(x0, y0);
+      final VectorReadable2DType v2 = new VectorI2D(x0, y0);
 
       Assert.assertTrue(VectorI2D.almostEqual(ec, v0, v1));
       Assert.assertTrue(VectorI2D.almostEqual(ec, v1, v2));
@@ -197,7 +198,7 @@ public class VectorI2DTest extends VectorI2Contract
 
   @Override @Test public void testCheckInterface()
   {
-    final VectorI2D v = new VectorI2D(3.0, 5.0);
+    final VectorReadable2DType v = new VectorI2D(3.0, 5.0);
 
     Assert.assertTrue(v.getXD() == v.getXD());
     Assert.assertTrue(v.getYD() == v.getYD());
@@ -208,11 +209,11 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double max_x = Math.random() * Double.MIN_VALUE;
       final double max_y = Math.random() * Double.MIN_VALUE;
-      final VectorI2D maximum = new VectorI2D(max_x, max_y);
+      final VectorReadable2DType maximum = new VectorI2D(max_x, max_y);
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
-      final VectorI2D v = new VectorI2D(x, y);
+      final VectorReadable2DType v = new VectorI2D(x, y);
 
       Assert.assertTrue(
         VectorI2D.clampMaximumByVector(v, maximum).getXD()
@@ -228,11 +229,11 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MAX_VALUE;
       final double min_y = Math.random() * Double.MAX_VALUE;
-      final VectorI2D minimum = new VectorI2D(min_x, min_y);
+      final VectorReadable2DType minimum = new VectorI2D(min_x, min_y);
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
-      final VectorI2D v = new VectorI2D(x, y);
+      final VectorReadable2DType v = new VectorI2D(x, y);
 
       Assert.assertTrue(
         VectorI2D.clampMinimumByVector(v, minimum).getXD()
@@ -248,15 +249,15 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MIN_VALUE;
       final double min_y = Math.random() * Double.MIN_VALUE;
-      final VectorI2D minimum = new VectorI2D(min_x, min_y);
+      final VectorReadable2DType minimum = new VectorI2D(min_x, min_y);
 
       final double max_x = Math.random() * Double.MAX_VALUE;
       final double max_y = Math.random() * Double.MAX_VALUE;
-      final VectorI2D maximum = new VectorI2D(max_x, max_y);
+      final VectorReadable2DType maximum = new VectorI2D(max_x, max_y);
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v = new VectorI2D(x, y);
+      final VectorReadable2DType v = new VectorI2D(x, y);
 
       Assert.assertTrue(
         VectorI2D.clampByVector(v, minimum, maximum).getXD()
@@ -280,7 +281,7 @@ public class VectorI2DTest extends VectorI2Contract
 
       final double x = Math.random() * Double.MAX_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v = new VectorI2D(x, y);
+      final VectorReadable2DType v = new VectorI2D(x, y);
 
       Assert.assertTrue(VectorI2D.clampMaximum(v, maximum).getXD() <= maximum);
       Assert.assertTrue(VectorI2D.clampMaximum(v, maximum).getYD() <= maximum);
@@ -294,7 +295,7 @@ public class VectorI2DTest extends VectorI2Contract
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
-      final VectorI2D v = new VectorI2D(x, y);
+      final VectorReadable2DType v = new VectorI2D(x, y);
 
       Assert.assertTrue(VectorI2D.clampMinimum(v, minimum).getXD() >= minimum);
       Assert.assertTrue(VectorI2D.clampMinimum(v, minimum).getYD() >= minimum);
@@ -309,7 +310,7 @@ public class VectorI2DTest extends VectorI2Contract
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v = new VectorI2D(x, y);
+      final VectorReadable2DType v = new VectorI2D(x, y);
 
       Assert.assertTrue(
         VectorI2D.clamp(v, minimum, maximum).getXD()
@@ -336,7 +337,7 @@ public class VectorI2DTest extends VectorI2Contract
       final double y = Math.random();
 
       final VectorI2D v0 = new VectorI2D(x, y);
-      final VectorI2D v1 = new VectorI2D(v0);
+      final VectorReadable2DType v1 = new VectorI2D(v0);
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.getXD(), x));
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.getYD(), y));
@@ -348,7 +349,7 @@ public class VectorI2DTest extends VectorI2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI2D v = new VectorI2D();
+    final VectorReadable2DType v = new VectorI2D();
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), 0.0));
   }
@@ -358,8 +359,8 @@ public class VectorI2DTest extends VectorI2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI2D v0 = new VectorI2D(0.0, 1.0);
-    final VectorI2D v1 = new VectorI2D(0.0, 0.0);
+    final VectorReadable2DType v0 = new VectorI2D(0.0, 1.0);
+    final VectorReadable2DType v1 = new VectorI2D(0.0, 0.0);
 
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
@@ -371,11 +372,11 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v0 = new VectorI2D(x0, y0);
+      final VectorReadable2DType v0 = new VectorI2D(x0, y0);
 
       final double x1 = Math.random() * Double.MAX_VALUE;
       final double y1 = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v1 = new VectorI2D(x1, y1);
+      final VectorReadable2DType v1 = new VectorI2D(x1, y1);
 
       Assert.assertTrue(VectorI2D.distance(v0, v1) >= 0.0);
     }
@@ -383,8 +384,8 @@ public class VectorI2DTest extends VectorI2Contract
 
   @Override @Test public void testDotProduct()
   {
-    final VectorI2D v0 = new VectorI2D(10.0, 10.0);
-    final VectorI2D v1 = new VectorI2D(10.0, 10.0);
+    final VectorReadable2DType v0 = new VectorI2D(10.0, 10.0);
+    final VectorReadable2DType v1 = new VectorI2D(10.0, 10.0);
 
     {
       final double p = VectorI2D.dotProduct(v0, v1);
@@ -412,11 +413,11 @@ public class VectorI2DTest extends VectorI2Contract
 
   @Override @Test public void testDotProductPerpendicular()
   {
-    final VectorI2D vpx = new VectorI2D(1.0f, 0.0f);
-    final VectorI2D vmx = new VectorI2D(-1.0f, 0.0f);
+    final VectorReadable2DType vpx = new VectorI2D(1.0f, 0.0f);
+    final VectorReadable2DType vmx = new VectorI2D(-1.0f, 0.0f);
 
-    final VectorI2D vpy = new VectorI2D(0.0f, 1.0f);
-    final VectorI2D vmy = new VectorI2D(0.0f, -1.0f);
+    final VectorReadable2DType vpy = new VectorI2D(0.0f, 1.0f);
+    final VectorReadable2DType vmy = new VectorI2D(0.0f, -1.0f);
 
     Assert.assertTrue(VectorI2D.dotProduct(vpx, vpy) == 0.0);
     Assert.assertTrue(VectorI2D.dotProduct(vmx, vmy) == 0.0);
@@ -430,7 +431,7 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random();
       final double y = Math.random();
-      final VectorI2D q = new VectorI2D(x, y);
+      final VectorReadable2DType q = new VectorI2D(x, y);
       final double dp = VectorI2D.dotProduct(q, q);
 
       
@@ -448,7 +449,7 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random();
       final double y = Math.random();
-      final VectorI2D q = new VectorI2D(x, y);
+      final VectorReadable2DType q = new VectorI2D(x, y);
 
       final double ms = VectorI2D.magnitudeSquared(q);
       final double dp = VectorI2D.dotProduct(q, q);
@@ -583,7 +584,7 @@ public class VectorI2DTest extends VectorI2Contract
   @Override @Test public void testInitializeReadable()
   {
     final VectorI2D v0 = new VectorI2D(1.0f, 2.0f);
-    final VectorI2D v1 = new VectorI2D(v0);
+    final VectorReadable2DType v1 = new VectorI2D(v0);
 
     Assert.assertTrue(v0.getXD() == v1.getXD());
     Assert.assertTrue(v0.getYD() == v1.getYD());
@@ -597,11 +598,11 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v0 = new VectorI2D(x0, y0);
+      final VectorReadable2DType v0 = new VectorI2D(x0, y0);
 
       final double x1 = Math.random() * Double.MAX_VALUE;
       final double y1 = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v1 = new VectorI2D(x1, y1);
+      final VectorReadable2DType v1 = new VectorI2D(x1, y1);
 
       Assert.assertTrue(
         VectorI2D.almostEqual(
@@ -617,7 +618,7 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = 1.0 + (Math.random() * Double.MAX_VALUE);
       final double y = 1.0 + (Math.random() * Double.MAX_VALUE);
-      final VectorI2D v = new VectorI2D(x, y);
+      final VectorReadable2DType v = new VectorI2D(x, y);
 
       final double m = VectorI2D.magnitude(v);
       Assert.assertTrue(m > 0.0);
@@ -632,7 +633,7 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
       final double y = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
-      final VectorI2D v = new VectorI2D(x, y);
+      final VectorReadable2DType v = new VectorI2D(x, y);
 
       final VectorI2D vr = VectorI2D.normalize(v);
       Assert.assertNotSame(v, vr);
@@ -647,7 +648,7 @@ public class VectorI2DTest extends VectorI2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI2D v = new VectorI2D(0.0, 0.0);
+    final VectorReadable2DType v = new VectorI2D(0.0, 0.0);
     final VectorI2D vr = VectorI2D.normalize(v);
     final double m = VectorI2D.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
@@ -658,14 +659,14 @@ public class VectorI2DTest extends VectorI2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI2D v = new VectorI2D(1.0, 0.0);
+    final VectorReadable2DType v = new VectorI2D(1.0, 0.0);
     final double m = VectorI2D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final VectorI2D v = new VectorI2D(8.0, 0.0);
+    final VectorReadable2DType v = new VectorI2D(8.0, 0.0);
 
     {
       final double p = VectorI2D.dotProduct(v, v);
@@ -682,14 +683,14 @@ public class VectorI2DTest extends VectorI2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI2D v = new VectorI2D(0.0, 0.0);
+    final VectorReadable2DType v = new VectorI2D(0.0, 0.0);
     final double m = VectorI2D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
   @Override @Test public void testNormalizeSimple()
   {
-    final VectorI2D v0 = new VectorI2D(8.0, 0.0);
+    final VectorReadable2DType v0 = new VectorI2D(8.0, 0.0);
     final VectorI2D vr = VectorI2D.normalize(v0);
     final double m = VectorI2D.magnitude(vr);
     Assert.assertTrue(m == 1.0);
@@ -700,7 +701,7 @@ public class VectorI2DTest extends VectorI2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI2D q = new VectorI2D(0, 0);
+    final VectorReadable2DType q = new VectorI2D(0, 0);
     final VectorI2D qr = VectorI2D.normalize(q);
 
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.getXD()));
@@ -709,8 +710,8 @@ public class VectorI2DTest extends VectorI2Contract
 
   @Override @Test public void testOrthonormalize()
   {
-    final VectorI2D v0 = new VectorI2D(0, 1);
-    final VectorI2D v1 = new VectorI2D(0.5, 0.5);
+    final VectorReadable2DType v0 = new VectorI2D(0, 1);
+    final VectorReadable2DType v1 = new VectorI2D(0.5, 0.5);
     final Pair<VectorI2D, VectorI2D> on = VectorI2D.orthoNormalize(v0, v1);
 
     Assert.assertEquals(v0, on.getLeft());
@@ -720,15 +721,15 @@ public class VectorI2DTest extends VectorI2Contract
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final VectorI2D p = new VectorI2D(1.0, 0.0);
-      final VectorI2D q = new VectorI2D(0.0, 1.0);
+      final VectorReadable2DType p = new VectorI2D(1.0, 0.0);
+      final VectorReadable2DType q = new VectorI2D(0.0, 1.0);
       final VectorI2D r = VectorI2D.projection(p, q);
       Assert.assertTrue(VectorI2D.magnitude(r) == 0.0);
     }
 
     {
-      final VectorI2D p = new VectorI2D(-1.0, 0.0);
-      final VectorI2D q = new VectorI2D(0.0, 1.0);
+      final VectorReadable2DType p = new VectorI2D(-1.0, 0.0);
+      final VectorReadable2DType q = new VectorI2D(0.0, 1.0);
       final VectorI2D r = VectorI2D.projection(p, q);
       Assert.assertTrue(VectorI2D.magnitude(r) == 0.0);
     }
@@ -742,7 +743,7 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * Double.MAX_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v = new VectorI2D(x, y);
+      final VectorReadable2DType v = new VectorI2D(x, y);
 
       final VectorI2D vr = VectorI2D.scale(v, 1.0);
 
@@ -763,7 +764,7 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * Double.MAX_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v = new VectorI2D(x, y);
+      final VectorReadable2DType v = new VectorI2D(x, y);
 
       final VectorI2D vr = VectorI2D.scale(v, 0.0);
 
@@ -775,7 +776,7 @@ public class VectorI2DTest extends VectorI2Contract
   @Override @Test public void testString()
   {
     final VectorI2D v = new VectorI2D(0.0, 1.0);
-    Assert.assertTrue(v.toString().equals("[VectorI2D 0.0 1.0]"));
+    Assert.assertTrue("[VectorI2D 0.0 1.0]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()
@@ -786,11 +787,11 @@ public class VectorI2DTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v0 = new VectorI2D(x0, y0);
+      final VectorReadable2DType v0 = new VectorI2D(x0, y0);
 
       final double x1 = Math.random() * Double.MAX_VALUE;
       final double y1 = Math.random() * Double.MAX_VALUE;
-      final VectorI2D v1 = new VectorI2D(x1, y1);
+      final VectorReadable2DType v1 = new VectorI2D(x1, y1);
 
       final VectorI2D vr = VectorI2D.subtract(v0, v1);
 

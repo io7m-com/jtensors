@@ -29,7 +29,8 @@ import net.jcip.annotations.Immutable;
  * accessed from multiple threads. </p>
  */
 
-@Immutable public final class VectorI2D implements VectorReadable2DType
+@Immutable
+public final class VectorI2D implements VectorReadable2DType
 {
   /**
    * The zero vector.
@@ -134,7 +135,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2DType v1,
     final double r)
   {
-    return VectorI2D.add(v0, VectorI2D.scale(v1, r));
+    return add(v0, scale(v1, r));
   }
 
   /**
@@ -177,10 +178,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2DType v0,
     final VectorReadable2DType v1)
   {
-    final double m0 = VectorI2D.magnitude(v0);
-    final double m1 = VectorI2D.magnitude(v1);
+    final double m0 = magnitude(v0);
+    final double m1 = magnitude(v1);
     final double dp =
-      Math.min(Math.max(-1.0, VectorI2D.dotProduct(v0, v1)), 1.0);
+      Math.min(Math.max(-1.0, dotProduct(v0, v1)), 1.0);
     final double f = m0 * m1;
     final double r = dp / f;
     return Math.acos(r);
@@ -322,7 +323,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2DType v0,
     final VectorReadable2DType v1)
   {
-    return VectorI2D.magnitude(VectorI2D.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -365,9 +366,9 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2DType v1,
     final double alpha)
   {
-    final VectorI2D w0 = VectorI2D.scale(v0, 1.0 - alpha);
-    final VectorI2D w1 = VectorI2D.scale(v1, alpha);
-    return VectorI2D.add(w0, w1);
+    final VectorI2D w0 = scale(v0, 1.0 - alpha);
+    final VectorI2D w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -383,7 +384,7 @@ import net.jcip.annotations.Immutable;
   public static double magnitude(
     final VectorReadable2DType v)
   {
-    return Math.sqrt(VectorI2D.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -397,7 +398,7 @@ import net.jcip.annotations.Immutable;
   public static double magnitudeSquared(
     final VectorReadable2DType v)
   {
-    return VectorI2D.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -413,11 +414,11 @@ import net.jcip.annotations.Immutable;
   public static VectorI2D normalize(
     final VectorReadable2DType v)
   {
-    final double m = VectorI2D.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double sq = Math.sqrt(m);
       final double r = 1.0 / sq;
-      return VectorI2D.scale(v, r);
+      return scale(v, r);
     }
     return new VectorI2D(v);
   }
@@ -439,11 +440,11 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2DType v0,
     final VectorReadable2DType v1)
   {
-    final VectorI2D v0n = VectorI2D.normalize(v0);
+    final VectorI2D v0n = normalize(v0);
     final VectorI2D projection =
-      VectorI2D.scale(v0n, VectorI2D.dotProduct(v1, v0n));
+      scale(v0n, dotProduct(v1, v0n));
     final VectorI2D vr =
-      VectorI2D.normalize(VectorI2D.subtract(v1, projection));
+      normalize(subtract(v1, projection));
     return Pair.pair(v0n, vr);
   }
 
@@ -461,10 +462,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2DType p,
     final VectorReadable2DType q)
   {
-    final double dot = VectorI2D.dotProduct(p, q);
-    final double qms = VectorI2D.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
-    return VectorI2D.scale(p, s);
+    return scale(p, s);
   }
 
   /**
@@ -499,7 +500,8 @@ import net.jcip.annotations.Immutable;
     return new VectorI2D(v0.getXD() - v1.getXD(), v0.getYD() - v1.getYD());
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -512,23 +514,24 @@ import net.jcip.annotations.Immutable;
       return false;
     }
     final VectorI2D other = (VectorI2D) obj;
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y);
+    return Double.doubleToLongBits(this.x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(
+      this.y) == Double.doubleToLongBits(other.y);
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -540,7 +543,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI2D ");

@@ -26,7 +26,7 @@ public abstract class VectorM4LContract<T extends Vector4LType>
 {
   public static long randomNegativeNumber()
   {
-    return VectorM4LContract.getRandomSmall();
+    return getRandomSmall();
   }
 
   public static long randomPositiveNumber()
@@ -49,10 +49,10 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM4LContract.getRandomSmall();
-      final long y = VectorM4LContract.getRandomSmall();
-      final long z = VectorM4LContract.getRandomSmall();
-      final long w = VectorM4LContract.getRandomSmall();
+      final long x = getRandomSmall();
+      final long y = getRandomSmall();
+      final long z = getRandomSmall();
+      final long w = getRandomSmall();
       final T v = this.newVectorM4L(x, y, z, w);
 
       final T vr = this.newVectorM4L();
@@ -80,10 +80,10 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM4LContract.getRandomSmall();
-      final long y = VectorM4LContract.getRandomSmall();
-      final long z = VectorM4LContract.getRandomSmall();
-      final long w = VectorM4LContract.getRandomSmall();
+      final long x = getRandomSmall();
+      final long y = getRandomSmall();
+      final long z = getRandomSmall();
+      final long w = getRandomSmall();
       final T v = this.newVectorM4L(x, y, z, w);
 
       VectorM4L.absoluteInPlace(v);
@@ -100,16 +100,16 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM4LContract.randomPositiveSmallNumber();
-      final long y0 = VectorM4LContract.randomPositiveSmallNumber();
-      final long z0 = VectorM4LContract.randomPositiveSmallNumber();
-      final long w0 = VectorM4LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
+      final long w0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM4L(x0, y0, z0, w0);
 
-      final long x1 = VectorM4LContract.randomPositiveSmallNumber();
-      final long y1 = VectorM4LContract.randomPositiveSmallNumber();
-      final long z1 = VectorM4LContract.randomPositiveSmallNumber();
-      final long w1 = VectorM4LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
+      final long w1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM4L(x1, y1, z1, w1);
 
       final T vr0 = this.newVectorM4L();
@@ -192,19 +192,19 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM4LContract.randomPositiveSmallNumber();
-      final long y0 = VectorM4LContract.randomPositiveSmallNumber();
-      final long z0 = VectorM4LContract.randomPositiveSmallNumber();
-      final long w0 = VectorM4LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
+      final long w0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM4L(x0, y0, z0, w0);
 
-      final long x1 = VectorM4LContract.randomPositiveSmallNumber();
-      final long y1 = VectorM4LContract.randomPositiveSmallNumber();
-      final long z1 = VectorM4LContract.randomPositiveSmallNumber();
-      final long w1 = VectorM4LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
+      final long w1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM4L(x1, y1, z1, w1);
 
-      final long r = VectorM4LContract.randomPositiveSmallNumber();
+      final long r = randomPositiveSmallNumber();
 
       final T vr0 = this.newVectorM4L();
       VectorM4L.addScaled(v0, v1, (double) r, vr0);
@@ -254,16 +254,16 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long max_x = VectorM4LContract.randomNegativeNumber();
-      final long max_y = VectorM4LContract.randomNegativeNumber();
-      final long max_z = VectorM4LContract.randomNegativeNumber();
-      final long max_w = VectorM4LContract.randomNegativeNumber();
+      final long max_x = randomNegativeNumber();
+      final long max_y = randomNegativeNumber();
+      final long max_z = randomNegativeNumber();
+      final long max_w = randomNegativeNumber();
       final T maximum = this.newVectorM4L(max_x, max_y, max_z, max_w);
 
-      final long x = VectorM4LContract.randomNegativeNumber();
-      final long y = VectorM4LContract.randomNegativeNumber();
-      final long z = VectorM4LContract.randomNegativeNumber();
-      final long w = VectorM4LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
+      final long w = randomNegativeNumber();
       final T v = this.newVectorM4L(x, y, z, w);
 
       final T vr = this.newVectorM4L();
@@ -291,16 +291,16 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long min_x = VectorM4LContract.randomPositiveNumber();
-      final long min_y = VectorM4LContract.randomPositiveNumber();
-      final long min_z = VectorM4LContract.randomPositiveNumber();
-      final long min_w = VectorM4LContract.randomPositiveNumber();
+      final long min_x = randomPositiveNumber();
+      final long min_y = randomPositiveNumber();
+      final long min_z = randomPositiveNumber();
+      final long min_w = randomPositiveNumber();
       final T minimum = this.newVectorM4L(min_x, min_y, min_z, min_w);
 
-      final long x = VectorM4LContract.randomNegativeNumber();
-      final long y = VectorM4LContract.randomNegativeNumber();
-      final long z = VectorM4LContract.randomNegativeNumber();
-      final long w = VectorM4LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
+      final long w = randomNegativeNumber();
       final T v = this.newVectorM4L(x, y, z, w);
 
       final T vr = this.newVectorM4L();
@@ -328,22 +328,22 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long min_x = VectorM4LContract.randomNegativeNumber();
-      final long min_y = VectorM4LContract.randomNegativeNumber();
-      final long min_z = VectorM4LContract.randomNegativeNumber();
-      final long min_w = VectorM4LContract.randomNegativeNumber();
+      final long min_x = randomNegativeNumber();
+      final long min_y = randomNegativeNumber();
+      final long min_z = randomNegativeNumber();
+      final long min_w = randomNegativeNumber();
       final T minimum = this.newVectorM4L(min_x, min_y, min_z, min_w);
 
-      final long max_x = VectorM4LContract.randomPositiveNumber();
-      final long max_y = VectorM4LContract.randomPositiveNumber();
-      final long max_z = VectorM4LContract.randomPositiveNumber();
-      final long max_w = VectorM4LContract.randomPositiveNumber();
+      final long max_x = randomPositiveNumber();
+      final long max_y = randomPositiveNumber();
+      final long max_z = randomPositiveNumber();
+      final long max_w = randomPositiveNumber();
       final T maximum = this.newVectorM4L(max_x, max_y, max_z, max_w);
 
-      final long x = VectorM4LContract.randomNegativeNumber();
-      final long y = VectorM4LContract.randomPositiveNumber();
-      final long z = VectorM4LContract.randomPositiveNumber();
-      final long w = VectorM4LContract.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
       final T v = this.newVectorM4L(x, y, z, w);
 
       final T vr = this.newVectorM4L();
@@ -379,12 +379,12 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long maximum = VectorM4LContract.randomNegativeNumber();
+      final long maximum = randomNegativeNumber();
 
-      final long x = VectorM4LContract.randomPositiveNumber();
-      final long y = VectorM4LContract.randomPositiveNumber();
-      final long z = VectorM4LContract.randomPositiveNumber();
-      final long w = VectorM4LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
       final T v = this.newVectorM4L(x, y, z, w);
 
       final T vr = this.newVectorM4L();
@@ -410,12 +410,12 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long minimum = VectorM4LContract.randomPositiveNumber();
+      final long minimum = randomPositiveNumber();
 
-      final long x = VectorM4LContract.randomNegativeNumber();
-      final long y = VectorM4LContract.randomNegativeNumber();
-      final long z = VectorM4LContract.randomNegativeNumber();
-      final long w = VectorM4LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
+      final long w = randomNegativeNumber();
       final T v = this.newVectorM4L(x, y, z, w);
 
       final T vr = this.newVectorM4L();
@@ -441,13 +441,13 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long minimum = VectorM4LContract.randomNegativeNumber();
-      final long maximum = VectorM4LContract.randomPositiveNumber();
+      final long minimum = randomNegativeNumber();
+      final long maximum = randomPositiveNumber();
 
-      final long x = VectorM4LContract.randomNegativeNumber();
-      final long y = VectorM4LContract.randomPositiveNumber();
-      final long z = VectorM4LContract.randomPositiveNumber();
-      final long w = VectorM4LContract.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
       final T v = this.newVectorM4L(x, y, z, w);
 
       final T vr = this.newVectorM4L();
@@ -498,10 +498,10 @@ public abstract class VectorM4LContract<T extends Vector4LType>
   @Test public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM4L(
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge());
+      getRandomLarge(),
+      getRandomLarge(),
+      getRandomLarge(),
+      getRandomLarge());
     final T v1 = this.newVectorM4L();
 
     v1.copyFrom2L(v0);
@@ -515,10 +515,10 @@ public abstract class VectorM4LContract<T extends Vector4LType>
   @Test public final void testCopy3Correct()
   {
     final T v0 = this.newVectorM4L(
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge());
+      getRandomLarge(),
+      getRandomLarge(),
+      getRandomLarge(),
+      getRandomLarge());
     final T v1 = this.newVectorM4L();
 
     v1.copyFrom4L(v0);
@@ -532,10 +532,10 @@ public abstract class VectorM4LContract<T extends Vector4LType>
   @Test public final void testCopy4Correct()
   {
     final T v0 = this.newVectorM4L(
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge(),
-      this.getRandomLarge());
+      getRandomLarge(),
+      getRandomLarge(),
+      getRandomLarge(),
+      getRandomLarge());
     final T v1 = this.newVectorM4L();
 
     v1.copyFrom3L(v0);
@@ -546,7 +546,7 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     Assert.assertEquals(1L, v1.getWL());
   }
 
-  protected long getRandomLarge()
+  protected static long getRandomLarge()
   {
     return (long) Math.random() * Long.MAX_VALUE;
   }
@@ -571,16 +571,16 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM4LContract.randomPositiveSmallNumber();
-      final long y0 = VectorM4LContract.randomPositiveSmallNumber();
-      final long z0 = VectorM4LContract.randomPositiveSmallNumber();
-      final long w0 = VectorM4LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
+      final long w0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM4L(x0, y0, z0, w0);
 
-      final long x1 = VectorM4LContract.randomPositiveSmallNumber();
-      final long y1 = VectorM4LContract.randomPositiveSmallNumber();
-      final long z1 = VectorM4LContract.randomPositiveSmallNumber();
-      final long w1 = VectorM4LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
+      final long w1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM4L(x1, y1, z1, w1);
 
       Assert.assertTrue(VectorM4L.distance(c, v0, v1) >= 0L);
@@ -866,16 +866,16 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM4LContract.randomPositiveNumber();
-      final long y0 = VectorM4LContract.randomPositiveNumber();
-      final long z0 = VectorM4LContract.randomPositiveNumber();
-      final long w0 = VectorM4LContract.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
+      final long w0 = randomPositiveNumber();
       final T v0 = this.newVectorM4L(x0, y0, z0, w0);
 
-      final long x1 = VectorM4LContract.randomPositiveNumber();
-      final long y1 = VectorM4LContract.randomPositiveNumber();
-      final long z1 = VectorM4LContract.randomPositiveNumber();
-      final long w1 = VectorM4LContract.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
+      final long w1 = randomPositiveNumber();
       final T v1 = this.newVectorM4L(x1, y1, z1, w1);
 
       final T vr0 = this.newVectorM4L();
@@ -900,10 +900,10 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM4LContract.randomPositiveSmallNumber();
-      final long y = VectorM4LContract.randomPositiveSmallNumber();
-      final long z = VectorM4LContract.randomPositiveSmallNumber();
-      final long w = VectorM4LContract.randomPositiveSmallNumber();
+      final long x = randomPositiveSmallNumber();
+      final long y = randomPositiveSmallNumber();
+      final long z = randomPositiveSmallNumber();
+      final long w = randomPositiveSmallNumber();
       final T v = this.newVectorM4L(x, y, z, w);
 
       final long m = VectorM4L.magnitude(v);
@@ -1036,10 +1036,10 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM4LContract.randomPositiveNumber();
-      final long y = VectorM4LContract.randomPositiveNumber();
-      final long z = VectorM4LContract.randomPositiveNumber();
-      final long w = VectorM4LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
       final T v = this.newVectorM4L(x, y, z, w);
 
       final T vr = this.newVectorM4L();
@@ -1072,10 +1072,10 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM4LContract.randomPositiveNumber();
-      final long y = VectorM4LContract.randomPositiveNumber();
-      final long z = VectorM4LContract.randomPositiveNumber();
-      final long w = VectorM4LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
       final T v = this.newVectorM4L(x, y, z, w);
 
       final T vr = this.newVectorM4L();
@@ -1109,16 +1109,16 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM4LContract.randomPositiveNumber();
-      final long y0 = VectorM4LContract.randomPositiveNumber();
-      final long z0 = VectorM4LContract.randomPositiveNumber();
-      final long w0 = VectorM4LContract.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
+      final long w0 = randomPositiveNumber();
       final T v0 = this.newVectorM4L(x0, y0, z0, w0);
 
-      final long x1 = VectorM4LContract.randomPositiveNumber();
-      final long y1 = VectorM4LContract.randomPositiveNumber();
-      final long z1 = VectorM4LContract.randomPositiveNumber();
-      final long w1 = VectorM4LContract.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
+      final long w1 = randomPositiveNumber();
       final T v1 = this.newVectorM4L(x1, y1, z1, w1);
 
       final T vr0 = this.newVectorM4L();

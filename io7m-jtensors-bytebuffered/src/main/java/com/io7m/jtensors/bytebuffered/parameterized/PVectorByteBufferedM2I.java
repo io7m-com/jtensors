@@ -120,7 +120,7 @@ public final class PVectorByteBufferedM2I<T> extends ByteBuffered
     final int i,
     final int x)
   {
-    this.buffer.putInt(PVectorByteBufferedM2I.getByteOffsetForIndex(o, i), x);
+    this.buffer.putInt(getByteOffsetForIndex(o, i), x);
   }
 
   private int getAtOffsetAndIndex(
@@ -128,7 +128,7 @@ public final class PVectorByteBufferedM2I<T> extends ByteBuffered
     final int i)
   {
     return this.buffer.getInt(
-      PVectorByteBufferedM2I.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public int getYI()
@@ -191,10 +191,7 @@ public final class PVectorByteBufferedM2I<T> extends ByteBuffered
       return false;
     }
     final PVectorByteBufferedM2I<?> other = (PVectorByteBufferedM2I<?>) obj;
-    if (this.getXI() != other.getXI()) {
-      return false;
-    }
-    return this.getYI() == other.getYI();
+    return this.getXI() == other.getXI() && this.getYI() == other.getYI();
   }
 
   @Override public void copyFromTyped2I(final PVectorReadable2IType<T> in_v)

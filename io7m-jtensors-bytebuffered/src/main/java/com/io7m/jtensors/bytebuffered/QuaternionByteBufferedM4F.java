@@ -136,7 +136,7 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     final float x)
   {
     this.buffer.putFloat(
-      QuaternionByteBufferedM4F.getByteOffsetForIndex(o, i), x);
+      getByteOffsetForIndex(o, i), x);
   }
 
   private float getAtOffsetAndIndex(
@@ -144,7 +144,7 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     final int i)
   {
     return this.buffer.getFloat(
-      QuaternionByteBufferedM4F.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public float getYF()
@@ -259,19 +259,9 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
       return false;
     }
     final QuaternionByteBufferedM4F other = (QuaternionByteBufferedM4F) obj;
-    if (Float.floatToIntBits(this.getWF())
-        != Float.floatToIntBits(other.getWF())) {
-      return false;
-    }
-    if (Float.floatToIntBits(this.getXF())
-        != Float.floatToIntBits(other.getXF())) {
-      return false;
-    }
-    if (Float.floatToIntBits(this.getYF())
-        != Float.floatToIntBits(other.getYF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
-      other.getZF());
+    return Float.floatToIntBits(this.getWF()) == Float.floatToIntBits(other.getWF()) && Float.floatToIntBits(
+      this.getXF()) == Float.floatToIntBits(other.getXF()) && Float.floatToIntBits(
+      this.getYF()) == Float.floatToIntBits(other.getYF()) && Float.floatToIntBits(
+      this.getZF()) == Float.floatToIntBits(other.getZF());
   }
 }

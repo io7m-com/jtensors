@@ -26,7 +26,7 @@ public abstract class VectorM2IContract<T extends Vector2IType>
 {
   public static int randomNegativeNumber()
   {
-    return (int) (VectorM2IContract.getRandom() * (double) Integer.MIN_VALUE);
+    return (int) (getRandom() * (double) Integer.MIN_VALUE);
   }
 
   protected static double getRandom()
@@ -36,17 +36,17 @@ public abstract class VectorM2IContract<T extends Vector2IType>
 
   public static int randomPositiveNumber()
   {
-    return (int) (VectorM2IContract.getRandom() * (double) Integer.MAX_VALUE);
+    return (int) (getRandom() * (double) Integer.MAX_VALUE);
   }
 
   public static int randomPositiveSmallNumber()
   {
-    return (int) (VectorM2IContract.getRandom() * (double) (1 << 14));
+    return (int) (getRandom() * (double) (1 << 14));
   }
 
   protected static int getRandomLargePositive()
   {
-    return (int) (VectorM2IContract.getRandom() * Integer.MAX_VALUE);
+    return (int) (getRandom() * Integer.MAX_VALUE);
   }
 
   protected abstract T newVectorM2I(
@@ -60,8 +60,8 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testAbsolute()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = VectorM2IContract.randomNegativeNumber();
-      final int y = VectorM2IContract.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
       final T v = this.newVectorM2I(x, y);
 
       final T vr = this.newVectorM2I();
@@ -109,12 +109,12 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorM2IContract.randomPositiveSmallNumber();
-      final int y0 = VectorM2IContract.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM2I(x0, y0);
 
-      final int x1 = VectorM2IContract.randomPositiveSmallNumber();
-      final int y1 = VectorM2IContract.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM2I(x1, y1);
 
       final T vr0 = this.newVectorM2I();
@@ -179,15 +179,15 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorM2IContract.randomPositiveSmallNumber();
-      final int y0 = VectorM2IContract.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM2I(x0, y0);
 
-      final int x1 = VectorM2IContract.randomPositiveSmallNumber();
-      final int y1 = VectorM2IContract.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM2I(x1, y1);
 
-      final int r = VectorM2IContract.randomPositiveSmallNumber();
+      final int r = randomPositiveSmallNumber();
 
       final T vr0 = this.newVectorM2I();
       VectorM2I.addScaled(v0, v1, (double) r, vr0);
@@ -238,8 +238,8 @@ public abstract class VectorM2IContract<T extends Vector2IType>
     }
 
     {
-      final int x = (int) (VectorM2IContract.getRandom() * 200.0);
-      final int y = (int) (VectorM2IContract.getRandom() * 200.0);
+      final int x = (int) (getRandom() * 200.0);
+      final int y = (int) (getRandom() * 200.0);
       final T v0 = this.newVectorM2I(x, y);
       final T v1 = this.newVectorM2I(y, -x);
       final double angle = VectorM2I.angle(v0, v1);
@@ -254,8 +254,8 @@ public abstract class VectorM2IContract<T extends Vector2IType>
     }
 
     {
-      final int x = (int) (VectorM2IContract.getRandom() * 200.0);
-      final int y = (int) (VectorM2IContract.getRandom() * 200.0);
+      final int x = (int) (getRandom() * 200.0);
+      final int y = (int) (getRandom() * 200.0);
       final T v0 = this.newVectorM2I(x, y);
       final T v1 = this.newVectorM2I(-y, x);
       final double angle = VectorM2I.angle(v0, v1);
@@ -281,12 +281,12 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int max_x = VectorM2IContract.randomNegativeNumber();
-      final int max_y = VectorM2IContract.randomNegativeNumber();
+      final int max_x = randomNegativeNumber();
+      final int max_y = randomNegativeNumber();
       final T maximum = this.newVectorM2I(max_x, max_y);
 
-      final int x = VectorM2IContract.randomNegativeNumber();
-      final int y = VectorM2IContract.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
       final T v = this.newVectorM2I(x, y);
 
       final T vr = this.newVectorM2I();
@@ -310,12 +310,12 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = VectorM2IContract.randomPositiveNumber();
-      final int min_y = VectorM2IContract.randomPositiveNumber();
+      final int min_x = randomPositiveNumber();
+      final int min_y = randomPositiveNumber();
       final T minimum = this.newVectorM2I(min_x, min_y);
 
-      final int x = VectorM2IContract.randomNegativeNumber();
-      final int y = VectorM2IContract.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
       final T v = this.newVectorM2I(x, y);
 
       final T vr = this.newVectorM2I();
@@ -339,16 +339,16 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testClampByVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = VectorM2IContract.randomNegativeNumber();
-      final int min_y = VectorM2IContract.randomNegativeNumber();
+      final int min_x = randomNegativeNumber();
+      final int min_y = randomNegativeNumber();
       final T minimum = this.newVectorM2I(min_x, min_y);
 
-      final int max_x = VectorM2IContract.randomPositiveNumber();
-      final int max_y = VectorM2IContract.randomPositiveNumber();
+      final int max_x = randomPositiveNumber();
+      final int max_y = randomPositiveNumber();
       final T maximum = this.newVectorM2I(max_x, max_y);
 
-      final int x = VectorM2IContract.randomNegativeNumber();
-      final int y = VectorM2IContract.randomPositiveNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
       final T v = this.newVectorM2I(x, y);
 
       final T vr = this.newVectorM2I();
@@ -376,10 +376,10 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int maximum = VectorM2IContract.randomNegativeNumber();
+      final int maximum = randomNegativeNumber();
 
-      final int x = VectorM2IContract.randomPositiveNumber();
-      final int y = VectorM2IContract.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
       final T v = this.newVectorM2I(x, y);
 
       final T vr = this.newVectorM2I();
@@ -399,10 +399,10 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = VectorM2IContract.randomPositiveNumber();
+      final int minimum = randomPositiveNumber();
 
-      final int x = VectorM2IContract.randomNegativeNumber();
-      final int y = VectorM2IContract.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
       final T v = this.newVectorM2I(x, y);
 
       final T vr = this.newVectorM2I();
@@ -422,11 +422,11 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = VectorM2IContract.randomNegativeNumber();
-      final int maximum = VectorM2IContract.randomPositiveNumber();
+      final int minimum = randomNegativeNumber();
+      final int maximum = randomPositiveNumber();
 
-      final int x = VectorM2IContract.randomNegativeNumber();
-      final int y = VectorM2IContract.randomPositiveNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
       final T v = this.newVectorM2I(x, y);
 
       final T vr = this.newVectorM2I();
@@ -465,8 +465,8 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM2I(
-      VectorM2IContract.getRandomLargePositive(),
-      VectorM2IContract.getRandomLargePositive());
+      getRandomLargePositive(),
+      getRandomLargePositive());
     final T v1 = this.newVectorM2I();
 
     v1.copyFrom2I(v0);
@@ -492,12 +492,12 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   {
     final VectorM2I.ContextVM2I c = new VectorM2I.ContextVM2I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorM2IContract.randomPositiveSmallNumber();
-      final int y0 = VectorM2IContract.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM2I(x0, y0);
 
-      final int x1 = VectorM2IContract.randomPositiveSmallNumber();
-      final int y1 = VectorM2IContract.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM2I(x1, y1);
 
       Assert.assertTrue(VectorM2I.distance(c, v0, v1) >= 0);
@@ -540,8 +540,8 @@ public abstract class VectorM2IContract<T extends Vector2IType>
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max = 1000;
-      final int x = (int) (VectorM2IContract.getRandom() * (double) max);
-      final int y = (int) (VectorM2IContract.getRandom() * (double) max);
+      final int x = (int) (getRandom() * (double) max);
+      final int y = (int) (getRandom() * (double) max);
       final T q = this.newVectorM2I(x, y);
 
       final double ms = (double) VectorM2I.magnitudeSquared(q);
@@ -562,8 +562,8 @@ public abstract class VectorM2IContract<T extends Vector2IType>
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max = 1000;
-      final int x = (int) (VectorM2IContract.getRandom() * (double) max);
-      final int y = (int) (VectorM2IContract.getRandom() * (double) max);
+      final int x = (int) (getRandom() * (double) max);
+      final int y = (int) (getRandom() * (double) max);
       final T q = this.newVectorM2I(x, y);
       final double dp = (double) VectorM2I.dotProduct(q, q);
 
@@ -619,7 +619,7 @@ public abstract class VectorM2IContract<T extends Vector2IType>
 
   @Test public final void testEqualsNotEqualCorrect()
   {
-    final int x = (int) (VectorM2IContract.getRandom() * 1000.0);
+    final int x = (int) (getRandom() * 1000.0);
     final int y = x + 1;
     final int z = y + 1;
     final int w = z + 1;
@@ -687,12 +687,12 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   {
     final VectorM2I.ContextVM2I c = new VectorM2I.ContextVM2I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorM2IContract.randomPositiveNumber();
-      final int y0 = VectorM2IContract.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
       final T v0 = this.newVectorM2I(x0, y0);
 
-      final int x1 = VectorM2IContract.randomPositiveNumber();
-      final int y1 = VectorM2IContract.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
       final T v1 = this.newVectorM2I(x1, y1);
 
       final T vr0 = this.newVectorM2I();
@@ -711,8 +711,8 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = VectorM2IContract.randomPositiveSmallNumber();
-      final int y = VectorM2IContract.randomPositiveSmallNumber();
+      final int x = randomPositiveSmallNumber();
+      final int y = randomPositiveSmallNumber();
       final T v = this.newVectorM2I(x, y);
 
       final int m = VectorM2I.magnitude(v);
@@ -833,8 +833,8 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = VectorM2IContract.randomPositiveNumber();
-      final int y = VectorM2IContract.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
       final T v = this.newVectorM2I(x, y);
 
       final T vr = this.newVectorM2I();
@@ -859,8 +859,8 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = VectorM2IContract.randomPositiveNumber();
-      final int y = VectorM2IContract.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
       final T v = this.newVectorM2I(x, y);
 
       final T vr = this.newVectorM2I();
@@ -888,12 +888,12 @@ public abstract class VectorM2IContract<T extends Vector2IType>
   @Test public final void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorM2IContract.randomPositiveNumber();
-      final int y0 = VectorM2IContract.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
       final T v0 = this.newVectorM2I(x0, y0);
 
-      final int x1 = VectorM2IContract.randomPositiveNumber();
-      final int y1 = VectorM2IContract.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
       final T v1 = this.newVectorM2I(x1, y1);
 
       final T vr0 = this.newVectorM2I();

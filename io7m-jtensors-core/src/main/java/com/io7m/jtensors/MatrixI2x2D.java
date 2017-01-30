@@ -26,11 +26,13 @@ import net.jcip.annotations.Immutable;
  * @since 7.0.0
  */
 
-@EqualityStructural @Immutable public final class MatrixI2x2D
+@EqualityStructural
+@Immutable
+public final class MatrixI2x2D
   implements MatrixReadable2x2DType
 {
-  private static final double[][]  IDENTITY  = MatrixI2x2D.makeIdentity();
-  private static final MatrixI2x2D IDENTITYM = MatrixI2x2D.makeIdentityM();
+  private static final double[][] IDENTITY = makeIdentity();
+  private static final MatrixI2x2D IDENTITYM = makeIdentityM();
   private final double[][] elements;
 
   private MatrixI2x2D(
@@ -45,7 +47,7 @@ import net.jcip.annotations.Immutable;
 
   public static MatrixI2x2D identity()
   {
-    return MatrixI2x2D.IDENTITYM;
+    return IDENTITYM;
   }
 
   private static double[][] makeIdentity()
@@ -65,7 +67,7 @@ import net.jcip.annotations.Immutable;
 
   private static MatrixI2x2D makeIdentityM()
   {
-    return new MatrixI2x2D(MatrixI2x2D.IDENTITY);
+    return new MatrixI2x2D(IDENTITY);
   }
 
   /**
@@ -114,7 +116,8 @@ import net.jcip.annotations.Immutable;
     return new MatrixI2x2D(e);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -130,36 +133,42 @@ import net.jcip.annotations.Immutable;
     return MatrixM2x2D.compareElements(this, other);
   }
 
-  @Override public <V extends VectorWritable2DType> void getRow2D(
+  @Override
+  public <V extends VectorWritable2DType> void getRow2D(
     final int row,
     final V out)
   {
     this.getRow2DUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
+  @Override
+  public <V extends VectorWritable2DType> void getRow2DUnsafe(
     final int row,
     final V out)
   {
     out.set2D(this.elements[row][0], this.elements[row][1]);
   }
 
-  @Override public double getR0C0D()
+  @Override
+  public double getR0C0D()
   {
     return this.elements[0][0];
   }
 
-  @Override public double getR1C0D()
+  @Override
+  public double getR1C0D()
   {
     return this.elements[1][0];
   }
 
-  @Override public double getR0C1D()
+  @Override
+  public double getR0C1D()
   {
     return this.elements[0][1];
   }
 
-  @Override public double getR1C1D()
+  @Override
+  public double getR1C1D()
   {
     return this.elements[1][1];
   }
@@ -171,14 +180,16 @@ import net.jcip.annotations.Immutable;
    * @return The value at the given row and column
    */
 
-  @Override public double getRowColumnD(
+  @Override
+  public double getRowColumnD(
     final int row,
     final int col)
   {
     return this.elements[row][col];
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     return MatrixM2x2D.hashElements(this);
   }
@@ -199,7 +210,8 @@ import net.jcip.annotations.Immutable;
     m.setR1C1D(this.getR1C1D());
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
     MatrixM2x2D.showElements(this, builder);

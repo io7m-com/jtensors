@@ -45,7 +45,7 @@ public final class VectorM2DTest extends VectorM2DContract<VectorM2D>
 
   @Override protected Logger logger()
   {
-    return VectorM2DTest.LOG;
+    return LOG;
   }
 
   @Override protected VectorM2D newVectorM2D(final VectorM2D v)

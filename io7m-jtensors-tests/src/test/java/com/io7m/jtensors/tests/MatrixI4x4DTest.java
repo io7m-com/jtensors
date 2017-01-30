@@ -22,6 +22,7 @@ import com.io7m.jtensors.MatrixI4x4D;
 import com.io7m.jtensors.MatrixReadable4x4DType;
 import com.io7m.jtensors.VectorI4D;
 import com.io7m.jtensors.VectorM4D;
+import com.io7m.jtensors.VectorReadable4DType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -110,10 +111,10 @@ public final class MatrixI4x4DTest
 
     final MatrixI4x4D im0 = MatrixI4x4D.newFromReadable(m0);
 
-    final VectorI4D column_0 = new VectorI4D(0.0, 0.1, 0.2, 0.3);
-    final VectorI4D column_1 = new VectorI4D(10.0, 10.1, 10.2, 10.3);
-    final VectorI4D column_2 = new VectorI4D(20.0, 20.1, 20.2, 20.3);
-    final VectorI4D column_3 = new VectorI4D(30.0, 30.1, 30.2, 30.3);
+    final VectorReadable4DType column_0 = new VectorI4D(0.0, 0.1, 0.2, 0.3);
+    final VectorReadable4DType column_1 = new VectorI4D(10.0, 10.1, 10.2, 10.3);
+    final VectorReadable4DType column_2 = new VectorI4D(20.0, 20.1, 20.2, 20.3);
+    final VectorReadable4DType column_3 = new VectorI4D(30.0, 30.1, 30.2, 30.3);
 
     final MatrixI4x4D im1 =
       MatrixI4x4D.newFromColumns(column_0, column_1, column_2, column_3);

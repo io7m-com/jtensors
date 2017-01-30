@@ -135,7 +135,7 @@ public final class VectorByteBufferedM4L extends ByteBuffered
     final int i,
     final long x)
   {
-    this.buffer.putLong(VectorByteBufferedM4L.getByteOffsetForIndex(o, i), x);
+    this.buffer.putLong(getByteOffsetForIndex(o, i), x);
   }
 
   private long getAtOffsetAndIndex(
@@ -143,7 +143,7 @@ public final class VectorByteBufferedM4L extends ByteBuffered
     final int i)
   {
     return this.buffer.getLong(
-      VectorByteBufferedM4L.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public long getYL()
@@ -253,15 +253,6 @@ public final class VectorByteBufferedM4L extends ByteBuffered
       return false;
     }
     final VectorByteBufferedM4L other = (VectorByteBufferedM4L) obj;
-    if (this.getWL() != other.getWL()) {
-      return false;
-    }
-    if (this.getXL() != other.getXL()) {
-      return false;
-    }
-    if (this.getYL() != other.getYL()) {
-      return false;
-    }
-    return this.getZL() == other.getZL();
+    return this.getWL() == other.getWL() && this.getXL() == other.getXL() && this.getYL() == other.getYL() && this.getZL() == other.getZL();
   }
 }

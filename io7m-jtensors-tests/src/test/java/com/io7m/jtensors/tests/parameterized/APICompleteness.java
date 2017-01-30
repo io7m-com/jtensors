@@ -58,6 +58,7 @@ import org.junit.Test;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 @SuppressWarnings("static-method") public final class APICompleteness
@@ -67,19 +68,19 @@ import java.util.Map.Entry;
     final Class<?> c)
   {
 
-    final HashMap<String, Method> methods = APICompleteness.getMethods(c);
-    final HashMap<String, Method> baseline_methods =
-      APICompleteness.getMethods(c_base);
+    final Map<String, Method> methods = getMethods(c);
+    final Map<String, Method> baseline_methods =
+      getMethods(c_base);
 
     for (final Entry<String, Method> e : baseline_methods.entrySet()) {
       final String m_name = e.getKey();
       final String c_name = c.getName();
 
-      if (methods.containsKey(APICompleteness.floatVersion(m_name))) {
+      if (methods.containsKey(floatVersion(m_name))) {
         continue;
       }
 
-      if (methods.containsKey(m_name) == false) {
+      if (!methods.containsKey(m_name)) {
         System.out.println(
           c_name + ": " + m_name + " not present from " + c_base.getName());
       }
@@ -89,7 +90,7 @@ import java.util.Map.Entry;
       final String m_name = e.getKey();
       final String c_name = c.getName();
 
-      if (baseline_methods.containsKey(APICompleteness.doubleVersion(m_name))) {
+      if (baseline_methods.containsKey(doubleVersion(m_name))) {
         continue;
       }
       if (baseline_methods.containsKey(m_name)) {
@@ -108,7 +109,7 @@ import java.util.Map.Entry;
 
   private static void checkPVector2()
   {
-    final Class<?> classes[] = {
+    final Class<?>[] classes = {
       PVectorM2F.class,
       PVectorM2I.class,
       PVectorI2D.class,
@@ -119,17 +120,17 @@ import java.util.Map.Entry;
       VectorM2I.class,
       VectorI2D.class,
       VectorI2F.class,
-      VectorI2I.class };
+      VectorI2I.class};
 
     for (final Class<?> c : classes) {
-      APICompleteness.checkAgainst(PVectorM2D.class, c);
+      checkAgainst(PVectorM2D.class, c);
     }
   }
 
   private static void checkPVector3()
   {
     {
-      final Class<?> classes[] = {
+      final Class<?>[] classes = {
         PVectorM3F.class,
         PVectorM3I.class,
         PVectorI3D.class,
@@ -140,17 +141,17 @@ import java.util.Map.Entry;
         VectorM3I.class,
         VectorI3D.class,
         VectorI3F.class,
-        VectorI3I.class };
+        VectorI3I.class};
 
       for (final Class<?> c : classes) {
-        APICompleteness.checkAgainst(PVectorM3D.class, c);
+        checkAgainst(PVectorM3D.class, c);
       }
     }
 
     {
-      final Class<?> classes[] = { PVectorI3F.class, PVectorI3I.class };
+      final Class<?>[] classes = {PVectorI3F.class, PVectorI3I.class};
       for (final Class<?> c : classes) {
-        APICompleteness.checkAgainst(PVectorI3D.class, c);
+        checkAgainst(PVectorI3D.class, c);
       }
     }
   }
@@ -158,7 +159,7 @@ import java.util.Map.Entry;
   private static void checkPVector4()
   {
     {
-      final Class<?> classes[] = {
+      final Class<?>[] classes = {
         PVectorM4F.class,
         PVectorM4I.class,
         PVectorI4D.class,
@@ -169,17 +170,17 @@ import java.util.Map.Entry;
         VectorM4I.class,
         VectorI4D.class,
         VectorI4F.class,
-        VectorI4I.class };
+        VectorI4I.class};
 
       for (final Class<?> c : classes) {
-        APICompleteness.checkAgainst(PVectorM4D.class, c);
+        checkAgainst(PVectorM4D.class, c);
       }
     }
 
     {
-      final Class<?> classes[] = { PVectorI4F.class, PVectorI4I.class };
+      final Class<?>[] classes = {PVectorI4F.class, PVectorI4I.class};
       for (final Class<?> c : classes) {
-        APICompleteness.checkAgainst(PVectorI4D.class, c);
+        checkAgainst(PVectorI4D.class, c);
       }
     }
   }
@@ -196,7 +197,7 @@ import java.util.Map.Entry;
     return name.replace('D', 'F').replaceAll("double", "float");
   }
 
-  private static HashMap<String, Method> getMethods(
+  private static Map<String, Method> getMethods(
     final Class<?> c)
   {
     final HashMap<String, Method> methods = new HashMap<String, Method>();
@@ -217,30 +218,30 @@ import java.util.Map.Entry;
 
   private static void checkPMatrix4F()
   {
-    final Class<?> classes[] = { MatrixM4x4F.class };
+    final Class<?>[] classes = {MatrixM4x4F.class};
     for (final Class<?> c : classes) {
-      APICompleteness.checkAgainst(PMatrixM4x4F.class, c);
+      checkAgainst(PMatrixM4x4F.class, c);
     }
   }
 
   private static void checkPMatrix4D()
   {
-    final Class<?> classes[] = { MatrixM4x4D.class };
+    final Class<?>[] classes = {MatrixM4x4D.class};
     for (final Class<?> c : classes) {
-      APICompleteness.checkAgainst(PMatrixM4x4D.class, c);
+      checkAgainst(PMatrixM4x4D.class, c);
     }
   }
 
   @Test public void testMatrixCompleteness()
   {
-    APICompleteness.checkPMatrix4F();
-    APICompleteness.checkPMatrix4D();
+    checkPMatrix4F();
+    checkPMatrix4D();
   }
 
   @Test public void testVectorCompleteness()
   {
-    APICompleteness.checkPVector4();
-    APICompleteness.checkPVector3();
-    APICompleteness.checkPVector2();
+    checkPVector4();
+    checkPVector3();
+    checkPVector2();
   }
 }

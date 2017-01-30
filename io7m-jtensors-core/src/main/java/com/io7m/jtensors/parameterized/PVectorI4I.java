@@ -29,7 +29,8 @@ import net.jcip.annotations.Immutable;
  * @param <T> A phantom type parameter.
  */
 
-@Immutable public final class PVectorI4I<T> implements PVectorReadable4IType<T>
+@Immutable
+public final class PVectorI4I<T> implements PVectorReadable4IType<T>
 {
   /**
    * The zero vector.
@@ -350,7 +351,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable4IType<T> v1)
     throws ArithmeticException
   {
-    return PVectorI4I.magnitude(PVectorI4I.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -412,9 +413,9 @@ import net.jcip.annotations.Immutable;
     final double alpha)
     throws ArithmeticException
   {
-    final PVectorI4I<T> w0 = PVectorI4I.scale(v0, 1.0 - alpha);
-    final PVectorI4I<T> w1 = PVectorI4I.scale(v1, alpha);
-    return PVectorI4I.add(w0, w1);
+    final PVectorI4I<T> w0 = scale(v0, 1.0 - alpha);
+    final PVectorI4I<T> w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -436,7 +437,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable4IType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt((double) PVectorI4I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -456,7 +457,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable4IType<T> v)
     throws ArithmeticException
   {
-    return PVectorI4I.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -479,10 +480,10 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable4IType<T> q)
     throws ArithmeticException
   {
-    final int dot = PVectorI4I.dotProduct(p, q);
-    final int qms = PVectorI4I.magnitudeSquared(q);
+    final int dot = dotProduct(p, q);
+    final int qms = magnitudeSquared(q);
     final int s = dot / qms;
-    return PVectorI4I.scale(p, (double) s);
+    return scale(p, (double) s);
   }
 
   /**
@@ -541,12 +542,14 @@ import net.jcip.annotations.Immutable;
    * @return The zero vector.
    */
 
-  @SuppressWarnings("unchecked") public static <T> PVectorI4I<T> zero()
+  @SuppressWarnings("unchecked")
+  public static <T> PVectorI4I<T> zero()
   {
-    return (PVectorI4I<T>) PVectorI4I.ZERO;
+    return (PVectorI4I<T>) ZERO;
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -559,39 +562,35 @@ import net.jcip.annotations.Immutable;
       return false;
     }
     final PVectorI4I<?> other = (PVectorI4I<?>) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    if (this.y != other.y) {
-      return false;
-    }
-    if (this.z != other.z) {
-      return false;
-    }
-    return this.w == other.w;
+    return this.x == other.x && this.y == other.y && this.z == other.z && this.w == other.w;
   }
 
-  @Override public int getWI()
+  @Override
+  public int getWI()
   {
     return this.w;
   }
 
-  @Override public int getXI()
+  @Override
+  public int getXI()
   {
     return this.x;
   }
 
-  @Override public int getYI()
+  @Override
+  public int getYI()
   {
     return this.y;
   }
 
-  @Override public int getZI()
+  @Override
+  public int getZI()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -602,7 +601,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorI4I ");

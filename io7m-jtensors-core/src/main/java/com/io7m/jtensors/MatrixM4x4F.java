@@ -127,7 +127,7 @@ public final class MatrixM4x4F
     final M m0,
     final MatrixReadable4x4FType m1)
   {
-    return MatrixM4x4F.add(m0, m1, m0);
+    return add(m0, m1, m0);
   }
 
   /**
@@ -158,7 +158,7 @@ public final class MatrixM4x4F
     final int row_c,
     final double r)
   {
-    return MatrixM4x4F.addRowScaled(context, m, row_a, row_b, row_c, r, m);
+    return addRowScaled(context, m, row_a, row_b, row_c, r, m);
   }
 
   private static <M extends MatrixWritable4x4FType> M addRowScaledUnsafe(
@@ -208,11 +208,11 @@ public final class MatrixM4x4F
     final double r,
     final M out)
   {
-    return MatrixM4x4F.addRowScaledUnsafe(
+    return addRowScaledUnsafe(
       m,
-      MatrixM4x4F.rowCheck(row_a),
-      MatrixM4x4F.rowCheck(row_b),
-      MatrixM4x4F.rowCheck(row_c),
+      rowCheck(row_a),
+      rowCheck(row_b),
+      rowCheck(row_c),
       r,
       context.v4a,
       context.v4b,
@@ -347,7 +347,7 @@ public final class MatrixM4x4F
     final int row_a,
     final int row_b)
   {
-    return MatrixM4x4F.exchangeRows(context, m, row_a, row_b, m);
+    return exchangeRows(context, m, row_a, row_b, m);
   }
 
   private static <M extends MatrixWritable4x4FType> M exchangeRowsUnsafe(
@@ -391,10 +391,10 @@ public final class MatrixM4x4F
     final int row_b,
     final M out)
   {
-    return MatrixM4x4F.exchangeRowsUnsafe(
+    return exchangeRowsUnsafe(
       m,
-      MatrixM4x4F.rowCheck(row_a),
-      MatrixM4x4F.rowCheck(row_b),
+      rowCheck(row_a),
+      rowCheck(row_b),
       context.v4a,
       context.v4b,
       out);
@@ -406,7 +406,7 @@ public final class MatrixM4x4F
     final Matrix4x4FType temp,
     final M out)
   {
-    final double d = MatrixM4x4F.determinant(m);
+    final double d = determinant(m);
 
     if (d == 0.0) {
       return false;
@@ -414,16 +414,16 @@ public final class MatrixM4x4F
 
     final double d_inv = 1.0 / d;
 
-    /**
-     * This code is based on the Laplace Expansion theorem. Essentially, the
-     * inverse of the matrix is calculated by taking the determinants of 3x3
-     * sub-matrices of the original matrix. The sub-matrices are created by
-     * removing a specific row and column to leave 9 (possibly non-adjacent)
-     * cells, which are then placed in a 3x3 matrix.
-     *
-     * This implementation was derived from the paper "The Laplace Expansion
-     * Theorem: Computing the Determinants and Inverses of Matrices" by David
-     * Eberly.
+    /*
+      This code is based on the Laplace Expansion theorem. Essentially, the
+      inverse of the matrix is calculated by taking the determinants of 3x3
+      sub-matrices of the original matrix. The sub-matrices are created by
+      removing a specific row and column to leave 9 (possibly non-adjacent)
+      cells, which are then placed in a 3x3 matrix.
+
+      This implementation was derived from the paper "The Laplace Expansion
+      Theorem: Computing the Determinants and Inverses of Matrices" by David
+      Eberly.
      */
 
     final double r0c0;
@@ -718,9 +718,9 @@ public final class MatrixM4x4F
       r3c3 = MatrixM3x3F.determinant(m3);
     }
 
-    /**
-     * Divide sub-matrix determinants by the determinant of the original
-     * matrix and transpose.
+    /*
+      Divide sub-matrix determinants by the determinant of the original
+      matrix and transpose.
      */
 
     temp.setR0C0F((float) (r0c0 * d_inv));
@@ -743,7 +743,7 @@ public final class MatrixM4x4F
     temp.setR3C2F((float) (r3c2 * d_inv));
     temp.setR3C3F((float) (r3c3 * d_inv));
 
-    MatrixM4x4F.transpose(temp, out);
+    transpose(temp, out);
     return true;
   }
 
@@ -769,7 +769,7 @@ public final class MatrixM4x4F
     final ContextMM4F context,
     final M m)
   {
-    return MatrixM4x4F.invert(context, m, m);
+    return invert(context, m, m);
   }
 
   /**
@@ -795,7 +795,7 @@ public final class MatrixM4x4F
     final MatrixReadable4x4FType m,
     final M out)
   {
-    return MatrixM4x4F.invertActual(m, context.m3a, context.m4a, out);
+    return invertActual(m, context.m3a, context.m4a, out);
   }
 
   /**
@@ -828,12 +828,12 @@ public final class MatrixM4x4F
     final Matrix4x4FType rotation = context.m4a;
     final Matrix4x4FType translation = context.m4b;
 
-    MatrixM4x4F.setIdentity(rotation);
-    MatrixM4x4F.setIdentity(translation);
-    MatrixM4x4F.setIdentity(out_matrix);
+    setIdentity(rotation);
+    setIdentity(translation);
+    setIdentity(out_matrix);
 
-    /**
-     * Calculate "forward" vector
+    /*
+      Calculate "forward" vector
      */
 
     forward.set3F(
@@ -842,21 +842,21 @@ public final class MatrixM4x4F
       target.getZF() - origin.getZF());
     VectorM3F.normalizeInPlace(forward);
 
-    /**
-     * Calculate "side" vector
+    /*
+      Calculate "side" vector
      */
 
     VectorM3F.crossProduct(forward, up, side);
     VectorM3F.normalizeInPlace(side);
 
-    /**
-     * Calculate new "up" vector
+    /*
+      Calculate new "up" vector
      */
 
     VectorM3F.crossProduct(side, forward, new_up);
 
-    /**
-     * Calculate rotation matrix
+    /*
+      Calculate rotation matrix
      */
 
     rotation.setR0C0F(side.getXF());
@@ -869,18 +869,18 @@ public final class MatrixM4x4F
     rotation.setR2C1F(-forward.getYF());
     rotation.setR2C2F(-forward.getZF());
 
-    /**
-     * Calculate camera translation matrix
+    /*
+      Calculate camera translation matrix
      */
 
     move.set3F(-origin.getXF(), -origin.getYF(), -origin.getZF());
-    MatrixM4x4F.makeTranslation3F(move, translation);
+    makeTranslation3F(move, translation);
 
-    /**
-     * Produce output matrix
+    /*
+      Produce output matrix
      */
 
-    MatrixM4x4F.multiply(rotation, translation, out_matrix);
+    multiply(rotation, translation, out_matrix);
   }
 
   /**
@@ -1264,7 +1264,7 @@ public final class MatrixM4x4F
     final M m0,
     final MatrixReadable4x4FType m1)
   {
-    return MatrixM4x4F.multiply(m0, m1, m0);
+    return multiply(m0, m1, m0);
   }
 
   private static <V extends VectorWritable4FType> V multiplyVector4FActual(
@@ -1308,7 +1308,7 @@ public final class MatrixM4x4F
     final VectorReadable4FType v,
     final V out)
   {
-    return MatrixM4x4F.multiplyVector4FActual(
+    return multiplyVector4FActual(
       m, v, context.v4a, context.v4b, out);
   }
 
@@ -1398,7 +1398,7 @@ public final class MatrixM4x4F
     final M m,
     final double r)
   {
-    return MatrixM4x4F.scale(m, r, m);
+    return scale(m, r, m);
   }
 
   /**
@@ -1425,8 +1425,8 @@ public final class MatrixM4x4F
     final int row,
     final double r)
   {
-    return MatrixM4x4F.scaleRowUnsafe(
-      m, MatrixM4x4F.rowCheck(row), r, context.v4a, m);
+    return scaleRowUnsafe(
+      m, rowCheck(row), r, context.v4a, m);
   }
 
   private static <M extends MatrixWritable4x4FType> M scaleRowUnsafe(
@@ -1467,8 +1467,8 @@ public final class MatrixM4x4F
     final double r,
     final M out)
   {
-    return MatrixM4x4F.scaleRowUnsafe(
-      m, MatrixM4x4F.rowCheck(row), r, context.v4a, out);
+    return scaleRowUnsafe(
+      m, rowCheck(row), r, context.v4a, out);
   }
 
   /**
@@ -1680,16 +1680,11 @@ public final class MatrixM4x4F
     final MatrixReadable4x4FType m0,
     final MatrixReadable4x4FType m1)
   {
-    if (!MatrixM4x4F.compareRow0(m0, m1)) {
-      return false;
-    }
-    if (!MatrixM4x4F.compareRow1(m0, m1)) {
-      return false;
-    }
-    if (!MatrixM4x4F.compareRow2(m0, m1)) {
-      return false;
-    }
-    return MatrixM4x4F.compareRow3(m0, m1);
+    return compareRow0(m0, m1) && compareRow1(m0, m1) && compareRow2(
+      m0,
+      m1) && compareRow3(
+      m0,
+      m1);
   }
 
   /**
@@ -1746,28 +1741,28 @@ public final class MatrixM4x4F
   {
     final String row0 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
-      m.getR0C0F(),
-      m.getR0C1F(),
-      m.getR0C2F(),
-      m.getR0C3F());
+      Float.valueOf(m.getR0C0F()),
+      Float.valueOf(m.getR0C1F()),
+      Float.valueOf(m.getR0C2F()),
+      Float.valueOf(m.getR0C3F()));
     final String row1 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
-      m.getR1C0F(),
-      m.getR1C1F(),
-      m.getR1C2F(),
-      m.getR1C3F());
+      Float.valueOf(m.getR1C0F()),
+      Float.valueOf(m.getR1C1F()),
+      Float.valueOf(m.getR1C2F()),
+      Float.valueOf(m.getR1C3F()));
     final String row2 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
-      m.getR2C0F(),
-      m.getR2C1F(),
-      m.getR2C2F(),
-      m.getR2C3F());
+      Float.valueOf(m.getR2C0F()),
+      Float.valueOf(m.getR2C1F()),
+      Float.valueOf(m.getR2C2F()),
+      Float.valueOf(m.getR2C3F()));
     final String row3 = String.format(
       "[%+.6f %+.6f %+.6f %+.6f]\n",
-      m.getR3C0F(),
-      m.getR3C1F(),
-      m.getR3C2F(),
-      m.getR3C3F());
+      Float.valueOf(m.getR3C0F()),
+      Float.valueOf(m.getR3C1F()),
+      Float.valueOf(m.getR3C2F()),
+      Float.valueOf(m.getR3C3F()));
     sb.append(row0);
     sb.append(row1);
     sb.append(row2);
@@ -1778,64 +1773,28 @@ public final class MatrixM4x4F
     final MatrixReadable4x4FType m0,
     final MatrixReadable4x4FType m1)
   {
-    if (m0.getR0C0F() != m1.getR0C0F()) {
-      return false;
-    }
-    if (m0.getR0C1F() != m1.getR0C1F()) {
-      return false;
-    }
-    if (m0.getR0C2F() != m1.getR0C2F()) {
-      return false;
-    }
-    return m0.getR0C3F() == m1.getR0C3F();
+    return !(m0.getR0C0F() != m1.getR0C0F()) && !(m0.getR0C1F() != m1.getR0C1F()) && !(m0.getR0C2F() != m1.getR0C2F()) && m0.getR0C3F() == m1.getR0C3F();
   }
 
   private static boolean compareRow1(
     final MatrixReadable4x4FType m0,
     final MatrixReadable4x4FType m1)
   {
-    if (m0.getR1C0F() != m1.getR1C0F()) {
-      return false;
-    }
-    if (m0.getR1C1F() != m1.getR1C1F()) {
-      return false;
-    }
-    if (m0.getR1C2F() != m1.getR1C2F()) {
-      return false;
-    }
-    return m0.getR1C3F() == m1.getR1C3F();
+    return !(m0.getR1C0F() != m1.getR1C0F()) && !(m0.getR1C1F() != m1.getR1C1F()) && !(m0.getR1C2F() != m1.getR1C2F()) && m0.getR1C3F() == m1.getR1C3F();
   }
 
   private static boolean compareRow2(
     final MatrixReadable4x4FType m0,
     final MatrixReadable4x4FType m1)
   {
-    if (m0.getR2C0F() != m1.getR2C0F()) {
-      return false;
-    }
-    if (m0.getR2C1F() != m1.getR2C1F()) {
-      return false;
-    }
-    if (m0.getR2C2F() != m1.getR2C2F()) {
-      return false;
-    }
-    return m0.getR2C3F() == m1.getR2C3F();
+    return !(m0.getR2C0F() != m1.getR2C0F()) && !(m0.getR2C1F() != m1.getR2C1F()) && !(m0.getR2C2F() != m1.getR2C2F()) && m0.getR2C3F() == m1.getR2C3F();
   }
 
   private static boolean compareRow3(
     final MatrixReadable4x4FType m0,
     final MatrixReadable4x4FType m1)
   {
-    if (m0.getR3C0F() != m1.getR3C0F()) {
-      return false;
-    }
-    if (m0.getR3C1F() != m1.getR3C1F()) {
-      return false;
-    }
-    if (m0.getR3C2F() != m1.getR3C2F()) {
-      return false;
-    }
-    return m0.getR3C3F() == m1.getR3C3F();
+    return !(m0.getR3C0F() != m1.getR3C0F()) && !(m0.getR3C1F() != m1.getR3C1F()) && !(m0.getR3C2F() != m1.getR3C2F()) && m0.getR3C3F() == m1.getR3C3F();
   }
 
   /**
@@ -1860,12 +1819,12 @@ public final class MatrixM4x4F
     private final Matrix3x3FType m3a = MatrixHeapArrayM3x3F.newMatrix();
     private final Matrix4x4FType m4a = MatrixHeapArrayM4x4F.newMatrix();
     private final Matrix4x4FType m4b = MatrixHeapArrayM4x4F.newMatrix();
-    private final VectorM3F      v3a = new VectorM3F();
-    private final VectorM3F      v3b = new VectorM3F();
-    private final VectorM3F      v3c = new VectorM3F();
-    private final VectorM3F      v3d = new VectorM3F();
-    private final VectorM4F      v4a = new VectorM4F();
-    private final VectorM4F      v4b = new VectorM4F();
+    private final VectorM3F v3a = new VectorM3F();
+    private final VectorM3F v3b = new VectorM3F();
+    private final VectorM3F v3c = new VectorM3F();
+    private final VectorM3F v3d = new VectorM3F();
+    private final VectorM4F v4a = new VectorM4F();
+    private final VectorM4F v4b = new VectorM4F();
 
     /**
      * Construct a new context.

@@ -18,5 +18,6 @@
  * Parameterized vector and matrix types.
  */
 
-@com.io7m.jnull.NonNullByDefault package com.io7m.jtensors.parameterized;
+@com.io7m.jnull.NonNullByDefault
+package com.io7m.jtensors.parameterized;
 

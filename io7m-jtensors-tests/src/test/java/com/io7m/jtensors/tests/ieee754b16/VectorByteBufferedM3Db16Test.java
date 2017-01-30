@@ -71,7 +71,7 @@ public final class VectorByteBufferedM3Db16Test
 
   @Override protected Logger logger()
   {
-    return VectorByteBufferedM3Db16Test.LOG;
+    return LOG;
   }
 
   @Override protected VectorByteBuffered3DType newVectorM3D(
@@ -154,7 +154,7 @@ public final class VectorByteBufferedM3Db16Test
     final SortedMap<String, Class<?>> interfaces =
       TestUtilities.getInterfaces(v.getClass());
     for (final String k : interfaces.keySet()) {
-      VectorByteBufferedM3Db16Test.LOG.debug(
+      LOG.debug(
         "{} implements {}", VectorByteBufferedM3Db16.class, k);
     }
 

@@ -20,6 +20,7 @@ import com.io7m.jtensors.Matrix3x3FType;
 import com.io7m.jtensors.MatrixHeapArrayM3x3F;
 import com.io7m.jtensors.VectorI3F;
 import com.io7m.jtensors.VectorM3F;
+import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.parameterized.PMatrix3x3FType;
 import com.io7m.jtensors.parameterized.PMatrixHeapArrayM3x3F;
 import com.io7m.jtensors.parameterized.PMatrixI3x3F;
@@ -90,9 +91,9 @@ public final class PMatrixI3x3FTest<T0, T1>
 
     final PMatrixI3x3F<T0, T1> im0 = PMatrixI3x3F.newFromReadableUntyped(m0);
 
-    final VectorI3F column_0 = new VectorI3F(0.0f, 0.1f, 0.2f);
-    final VectorI3F column_1 = new VectorI3F(10.0f, 10.1f, 10.2f);
-    final VectorI3F column_2 = new VectorI3F(20.0f, 20.1f, 20.2f);
+    final VectorReadable3FType column_0 = new VectorI3F(0.0f, 0.1f, 0.2f);
+    final VectorReadable3FType column_1 = new VectorI3F(10.0f, 10.1f, 10.2f);
+    final VectorReadable3FType column_2 = new VectorI3F(20.0f, 20.1f, 20.2f);
 
     final PMatrixI3x3F<T0, T1> im1 =
       PMatrixI3x3F.newFromColumns(column_0, column_1, column_2);

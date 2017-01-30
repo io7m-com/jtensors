@@ -93,19 +93,19 @@ public final class OrthonormalizedI3FTest
     final float v0_dot_v2 = VectorI3F.dotProduct(o.getV0(), o.getV2());
     final float v1_dot_v2 = VectorI3F.dotProduct(o.getV1(), o.getV2());
 
-    OrthonormalizedI3FTest.LOG.debug("v0              : {}", v0);
-    OrthonormalizedI3FTest.LOG.debug("v1              : {}", v1);
-    OrthonormalizedI3FTest.LOG.debug("v2              : {}", v2);
-    OrthonormalizedI3FTest.LOG.debug("o.v0            : {}", o.getV0());
-    OrthonormalizedI3FTest.LOG.debug("o.v1            : {}", o.getV1());
-    OrthonormalizedI3FTest.LOG.debug("o.v2            : {}", o.getV2());
-    OrthonormalizedI3FTest.LOG.debug("magnitude(o.v0) : {}", v0m);
-    OrthonormalizedI3FTest.LOG.debug("magnitude(o.v1) : {}", v1m);
-    OrthonormalizedI3FTest.LOG.debug("magnitude(o.v2) : {}", v2m);
-    OrthonormalizedI3FTest.LOG.debug("o.v0 dot o.v1   : {}", v0_dot_v1);
-    OrthonormalizedI3FTest.LOG.debug("o.v0 dot o.v2   : {}", v0_dot_v2);
-    OrthonormalizedI3FTest.LOG.debug("o.v1 dot o.v2   : {}", v1_dot_v2);
-    OrthonormalizedI3FTest.LOG.debug("--");
+    LOG.debug("v0              : {}", v0);
+    LOG.debug("v1              : {}", v1);
+    LOG.debug("v2              : {}", v2);
+    LOG.debug("o.v0            : {}", o.getV0());
+    LOG.debug("o.v1            : {}", o.getV1());
+    LOG.debug("o.v2            : {}", o.getV2());
+    LOG.debug("magnitude(o.v0) : {}", Float.valueOf(v0m));
+    LOG.debug("magnitude(o.v1) : {}", Float.valueOf(v1m));
+    LOG.debug("magnitude(o.v2) : {}", Float.valueOf(v2m));
+    LOG.debug("o.v0 dot o.v1   : {}", Float.valueOf(v0_dot_v1));
+    LOG.debug("o.v0 dot o.v2   : {}", Float.valueOf(v0_dot_v2));
+    LOG.debug("o.v1 dot o.v2   : {}", Float.valueOf(v1_dot_v2));
+    LOG.debug("--");
 
     Assert.assertEquals(1.0f, v0m, 0.00001f);
     Assert.assertEquals(1.0f, v1m, 0.00001f);

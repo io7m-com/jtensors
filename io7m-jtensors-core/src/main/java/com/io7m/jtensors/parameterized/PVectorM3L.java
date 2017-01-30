@@ -130,7 +130,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final V v)
     throws ArithmeticException
   {
-    return PVectorM3L.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -183,7 +183,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final PVectorReadable3LType<T> v1)
     throws ArithmeticException
   {
-    return PVectorM3L.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -245,7 +245,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final double r)
     throws ArithmeticException
   {
-    return PVectorM3L.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -329,7 +329,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final PVectorReadable3LType<T> minimum,
     final PVectorReadable3LType<T> maximum)
   {
-    return PVectorM3L.clampByPVector(v, minimum, maximum, v);
+    return clampByPVector(v, minimum, maximum, v);
   }
 
   /**
@@ -352,7 +352,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final long minimum,
     final long maximum)
   {
-    return PVectorM3L.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -426,7 +426,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final V v,
     final PVectorReadable3LType<T> maximum)
   {
-    return PVectorM3L.clampMaximumByPVector(v, maximum, v);
+    return clampMaximumByPVector(v, maximum, v);
   }
 
   /**
@@ -447,7 +447,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final V v,
     final long maximum)
   {
-    return PVectorM3L.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -521,7 +521,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final V v,
     final PVectorReadable3LType<T> minimum)
   {
-    return PVectorM3L.clampMinimumByPVector(v, minimum, v);
+    return clampMinimumByPVector(v, minimum, v);
   }
 
   /**
@@ -542,7 +542,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final V v,
     final long minimum)
   {
-    return PVectorM3L.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -587,7 +587,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     throws ArithmeticException
   {
     final PVectorM3L<T> vr = (PVectorM3L<T>) c.va;
-    return PVectorM3L.magnitude(PVectorM3L.subtract(v0, v1, vr));
+    return magnitude(subtract(v0, v1, vr));
   }
 
   /**
@@ -646,9 +646,9 @@ public final class PVectorM3L<T> implements PVector3LType<T>
   {
     final PVectorM3L<T> va = (PVectorM3L<T>) c.va;
     final PVectorM3L<T> vb = (PVectorM3L<T>) c.vb;
-    PVectorM3L.scale(v0, 1.0 - alpha, va);
-    PVectorM3L.scale(v1, alpha, vb);
-    return PVectorM3L.add(va, vb, r);
+    scale(v0, 1.0 - alpha, va);
+    scale(v1, alpha, vb);
+    return add(va, vb, r);
   }
 
   /**
@@ -669,7 +669,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final PVectorReadable3LType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt((double) PVectorM3L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -688,7 +688,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final PVectorReadable3LType<T> v)
     throws ArithmeticException
   {
-    return PVectorM3L.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -713,11 +713,11 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final V r)
     throws ArithmeticException
   {
-    final long dot = PVectorM3L.dotProduct(p, q);
-    final long qms = PVectorM3L.magnitudeSquared(q);
+    final long dot = dotProduct(p, q);
+    final long qms = magnitudeSquared(q);
     final long s = dot / qms;
 
-    return PVectorM3L.scale(p, (double) s, r);
+    return scale(p, (double) s, r);
   }
 
   /**
@@ -770,7 +770,7 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final long r)
     throws ArithmeticException
   {
-    return PVectorM3L.scale(v, (double) r, v);
+    return scale(v, (double) r, v);
   }
 
   /**
@@ -823,34 +823,39 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     final PVectorReadable3LType<T> v1)
     throws ArithmeticException
   {
-    return PVectorM3L.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2L(
+  @Override
+  public void copyFrom2L(
     final VectorReadable2LType in_v)
   {
     VectorM2L.copy(in_v, this);
   }
 
-  @Override public void copyFrom3L(
+  @Override
+  public void copyFrom3L(
     final VectorReadable3LType in_v)
   {
     VectorM3L.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped2L(
+  @Override
+  public void copyFromTyped2L(
     final PVectorReadable2LType<T> in_v)
   {
     PVectorM2L.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped3L(
+  @Override
+  public void copyFromTyped3L(
     final PVectorReadable3LType<T> in_v)
   {
     VectorM3L.copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -863,49 +868,50 @@ public final class PVectorM3L<T> implements PVector3LType<T>
       return false;
     }
     final PVectorM3L<?> other = (PVectorM3L<?>) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    if (this.y != other.y) {
-      return false;
-    }
-    return this.z == other.z;
+    return this.x == other.x && this.y == other.y && this.z == other.z;
   }
 
-  @Override public long getXL()
+  @Override
+  public long getXL()
   {
     return this.x;
   }
 
-  @Override public void setXL(
+  @Override
+  public void setXL(
     final long in_x)
   {
     this.x = in_x;
   }
 
-  @Override public long getYL()
+  @Override
+  public long getYL()
   {
     return this.y;
   }
 
-  @Override public void setYL(
+  @Override
+  public void setYL(
     final long in_y)
   {
     this.y = in_y;
   }
 
-  @Override public long getZL()
+  @Override
+  public long getZL()
   {
     return this.z;
   }
 
-  @Override public void setZL(
+  @Override
+  public void setZL(
     final long in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final long prime = 31L;
     long result = 1L;
@@ -915,7 +921,8 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     return (int) result;
   }
 
-  @Override public void set2L(
+  @Override
+  public void set2L(
     final long in_x,
     final long in_y)
   {
@@ -923,7 +930,8 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     this.y = in_y;
   }
 
-  @Override public void set3L(
+  @Override
+  public void set3L(
     final long in_x,
     final long in_y,
     final long in_z)
@@ -933,7 +941,8 @@ public final class PVectorM3L<T> implements PVector3LType<T>
     this.z = in_z;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorM3L ");

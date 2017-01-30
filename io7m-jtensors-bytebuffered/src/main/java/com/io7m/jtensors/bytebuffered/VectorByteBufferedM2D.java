@@ -112,7 +112,7 @@ public final class VectorByteBufferedM2D extends ByteBuffered implements VectorB
     final int i,
     final double x)
   {
-    this.buffer.putDouble(VectorByteBufferedM2D.getByteOffsetForIndex(o, i), x);
+    this.buffer.putDouble(getByteOffsetForIndex(o, i), x);
   }
 
   private double getAtOffsetAndIndex(
@@ -120,7 +120,7 @@ public final class VectorByteBufferedM2D extends ByteBuffered implements VectorB
     final int i)
   {
     return this.buffer.getDouble(
-      VectorByteBufferedM2D.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public double getYD()
@@ -186,11 +186,8 @@ public final class VectorByteBufferedM2D extends ByteBuffered implements VectorB
       return false;
     }
     final VectorByteBufferedM2D other = (VectorByteBufferedM2D) obj;
-    if (Double.doubleToLongBits(this.getXD())
-        != Double.doubleToLongBits(other.getXD())) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
+    return Double.doubleToLongBits(this.getXD()) == Double.doubleToLongBits(
+      other.getXD()) && Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
       other.getYD());
   }
 }

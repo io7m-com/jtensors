@@ -120,7 +120,7 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
     final int i,
     final float x)
   {
-    this.buffer.putFloat(PVectorByteBufferedM2F.getByteOffsetForIndex(o, i), x);
+    this.buffer.putFloat(getByteOffsetForIndex(o, i), x);
   }
 
   private float getAtOffsetAndIndex(
@@ -128,7 +128,7 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
     final int i)
   {
     return this.buffer.getFloat(
-      PVectorByteBufferedM2F.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public float getYF()
@@ -194,12 +194,8 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
       return false;
     }
     final PVectorByteBufferedM2F<?> other = (PVectorByteBufferedM2F<?>) obj;
-    if (Float.floatToIntBits(this.getXF())
-        != Float.floatToIntBits(other.getXF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getYF()) == Float.floatToIntBits(
-      other.getYF());
+    return Float.floatToIntBits(this.getXF()) == Float.floatToIntBits(other.getXF()) && Float.floatToIntBits(
+      this.getYF()) == Float.floatToIntBits(other.getYF());
   }
 
   @Override public void copyFromTyped2F(final PVectorReadable2FType<T> in_v)

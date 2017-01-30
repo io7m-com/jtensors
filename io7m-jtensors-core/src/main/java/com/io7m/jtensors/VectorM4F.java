@@ -118,7 +118,7 @@ public final class VectorM4F implements Vector4FType
   absoluteInPlace(
     final V v)
   {
-    return VectorM4F.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -162,7 +162,7 @@ public final class VectorM4F implements Vector4FType
     final V v0,
     final VectorReadable4FType v1)
   {
-    return VectorM4F.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -214,7 +214,7 @@ public final class VectorM4F implements Vector4FType
     final VectorReadable4FType v1,
     final double r)
   {
-    return VectorM4F.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -335,7 +335,7 @@ public final class VectorM4F implements Vector4FType
     final VectorReadable4FType minimum,
     final VectorReadable4FType maximum)
   {
-    return VectorM4F.clampByVector(v, minimum, maximum, v);
+    return clampByVector(v, minimum, maximum, v);
   }
 
   /**
@@ -357,7 +357,7 @@ public final class VectorM4F implements Vector4FType
     final float minimum,
     final float maximum)
   {
-    return VectorM4F.clamp(v, (double) minimum, (double) maximum, v);
+    return clamp(v, (double) minimum, (double) maximum, v);
   }
 
   /**
@@ -430,7 +430,7 @@ public final class VectorM4F implements Vector4FType
     final V v,
     final VectorReadable4FType maximum)
   {
-    return VectorM4F.clampMaximumByVector(v, maximum, v);
+    return clampMaximumByVector(v, maximum, v);
   }
 
   /**
@@ -450,7 +450,7 @@ public final class VectorM4F implements Vector4FType
     final V v,
     final float maximum)
   {
-    return VectorM4F.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -523,7 +523,7 @@ public final class VectorM4F implements Vector4FType
     final V v,
     final VectorReadable4FType minimum)
   {
-    return VectorM4F.clampMinimumByVector(v, minimum, v);
+    return clampMinimumByVector(v, minimum, v);
   }
 
   /**
@@ -543,7 +543,7 @@ public final class VectorM4F implements Vector4FType
     final V v,
     final float minimum)
   {
-    return VectorM4F.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -580,7 +580,7 @@ public final class VectorM4F implements Vector4FType
     final VectorReadable4FType v0,
     final VectorReadable4FType v1)
   {
-    return VectorM4F.magnitude(VectorM4F.subtract(v0, v1, c.v2a));
+    return magnitude(subtract(v0, v1, c.v2a));
   }
 
   /**
@@ -632,9 +632,9 @@ public final class VectorM4F implements Vector4FType
     final double alpha,
     final V r)
   {
-    VectorM4F.scale(v0, 1.0 - alpha, c.v2a);
-    VectorM4F.scale(v1, alpha, c.v2b);
-    return VectorM4F.add(c.v2a, c.v2b, r);
+    scale(v0, 1.0 - alpha, c.v2a);
+    scale(v1, alpha, c.v2b);
+    return add(c.v2a, c.v2b, r);
   }
 
   /**
@@ -650,7 +650,7 @@ public final class VectorM4F implements Vector4FType
   public static double magnitude(
     final VectorReadable4FType v)
   {
-    return Math.sqrt(VectorM4F.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -664,7 +664,7 @@ public final class VectorM4F implements Vector4FType
   public static double magnitudeSquared(
     final VectorReadable4FType v)
   {
-    return VectorM4F.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -683,10 +683,10 @@ public final class VectorM4F implements Vector4FType
     final VectorReadable4FType v,
     final V out)
   {
-    final double m = VectorM4F.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return VectorM4F.scale(v, reciprocal, out);
+      return scale(v, reciprocal, out);
     }
     out.set4F(v.getXF(), v.getYF(), v.getZF(), v.getWF());
     return out;
@@ -707,7 +707,7 @@ public final class VectorM4F implements Vector4FType
   normalizeInPlace(
     final V v)
   {
-    return VectorM4F.normalize(v, v);
+    return normalize(v, v);
   }
 
   /**
@@ -735,9 +735,9 @@ public final class VectorM4F implements Vector4FType
     final VectorReadable4FType v1,
     final U v1_out)
   {
-    VectorM4F.normalize(v0, c.v2a);
-    VectorM4F.scale(c.v2a, VectorM4F.dotProduct(v1, c.v2a), c.v2b);
-    VectorM4F.normalizeInPlace(VectorM4F.subtract(v1, c.v2b, c.v2c));
+    normalize(v0, c.v2a);
+    scale(c.v2a, dotProduct(v1, c.v2a), c.v2b);
+    normalizeInPlace(subtract(v1, c.v2b, c.v2c));
     v0_out.copyFrom4F(c.v2a);
     v1_out.copyFrom4F(c.v2c);
   }
@@ -762,10 +762,10 @@ public final class VectorM4F implements Vector4FType
     final V v0,
     final W v1)
   {
-    VectorM4F.normalizeInPlace(v0);
-    VectorM4F.scale(v0, VectorM4F.dotProduct(v1, v0), c.v2a);
-    VectorM4F.subtractInPlace(v1, c.v2a);
-    VectorM4F.normalizeInPlace(v1);
+    normalizeInPlace(v0);
+    scale(v0, dotProduct(v1, v0), c.v2a);
+    subtractInPlace(v1, c.v2a);
+    normalizeInPlace(v1);
   }
 
   /**
@@ -785,11 +785,11 @@ public final class VectorM4F implements Vector4FType
     final VectorReadable4FType q,
     final V r)
   {
-    final double dot = VectorM4F.dotProduct(p, q);
-    final double qms = VectorM4F.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
 
-    return VectorM4F.scale(p, s, r);
+    return scale(p, s, r);
   }
 
   /**
@@ -833,7 +833,7 @@ public final class VectorM4F implements Vector4FType
     final V v,
     final double r)
   {
-    return VectorM4F.scale(v, r, v);
+    return scale(v, r, v);
   }
 
   /**
@@ -877,28 +877,32 @@ public final class VectorM4F implements Vector4FType
     final V v0,
     final VectorReadable4FType v1)
   {
-    return VectorM4F.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2F(
+  @Override
+  public void copyFrom2F(
     final VectorReadable2FType in_v)
   {
     VectorM2F.copy(in_v, this);
   }
 
-  @Override public void copyFrom3F(
+  @Override
+  public void copyFrom3F(
     final VectorReadable3FType in_v)
   {
     VectorM3F.copy(in_v, this);
   }
 
-  @Override public void copyFrom4F(
+  @Override
+  public void copyFrom4F(
     final VectorReadable4FType in_v)
   {
-    VectorM4F.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -911,63 +915,65 @@ public final class VectorM4F implements Vector4FType
       return false;
     }
     final VectorM4F other = (VectorM4F) obj;
-    if (Float.floatToIntBits(this.w) != Float.floatToIntBits(other.w)) {
-      return false;
-    }
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
-      return false;
-    }
-    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
-      return false;
-    }
-    return Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
+    return Float.floatToIntBits(this.w) == Float.floatToIntBits(other.w) && Float.floatToIntBits(
+      this.x) == Float.floatToIntBits(other.x) && Float.floatToIntBits(this.y) == Float.floatToIntBits(
+      other.y) && Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
   }
 
-  @Override public float getWF()
+  @Override
+  public float getWF()
   {
     return this.w;
   }
 
-  @Override public void setWF(
+  @Override
+  public void setWF(
     final float in_w)
   {
     this.w = in_w;
   }
 
-  @Override public float getXF()
+  @Override
+  public float getXF()
   {
     return this.x;
   }
 
-  @Override public void setXF(
+  @Override
+  public void setXF(
     final float in_x)
   {
     this.x = in_x;
   }
 
-  @Override public float getYF()
+  @Override
+  public float getYF()
   {
     return this.y;
   }
 
-  @Override public void setYF(
+  @Override
+  public void setYF(
     final float in_y)
   {
     this.y = in_y;
   }
 
-  @Override public float getZF()
+  @Override
+  public float getZF()
   {
     return this.z;
   }
 
-  @Override public void setZF(
+  @Override
+  public void setZF(
     final float in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -978,7 +984,8 @@ public final class VectorM4F implements Vector4FType
     return result;
   }
 
-  @Override public void set2F(
+  @Override
+  public void set2F(
     final float in_x,
     final float in_y)
   {
@@ -986,7 +993,8 @@ public final class VectorM4F implements Vector4FType
     this.y = in_y;
   }
 
-  @Override public void set3F(
+  @Override
+  public void set3F(
     final float in_x,
     final float in_y,
     final float in_z)
@@ -996,7 +1004,8 @@ public final class VectorM4F implements Vector4FType
     this.z = in_z;
   }
 
-  @Override public void set4F(
+  @Override
+  public void set4F(
     final float in_x,
     final float in_y,
     final float in_z,
@@ -1008,7 +1017,8 @@ public final class VectorM4F implements Vector4FType
     this.w = in_w;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM4F ");

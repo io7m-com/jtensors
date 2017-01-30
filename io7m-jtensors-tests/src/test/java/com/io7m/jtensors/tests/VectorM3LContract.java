@@ -26,17 +26,17 @@ public abstract class VectorM3LContract<T extends Vector3LType>
 {
   public static long randomNegativeNumber()
   {
-    return (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+    return (long) (getRandom() * (double) Long.MIN_VALUE);
   }
 
   public static long randomPositiveNumber()
   {
-    return (long) (VectorM3LContract.getRandom() * (double) Long.MAX_VALUE);
+    return (long) (getRandom() * (double) Long.MAX_VALUE);
   }
 
   public static long randomPositiveSmallNumber()
   {
-    return (long) (VectorM3LContract.getRandom() * (double) (1 << 14));
+    return (long) (getRandom() * (double) (1 << 14));
   }
 
   protected static double getRandom()
@@ -59,11 +59,11 @@ public abstract class VectorM3LContract<T extends Vector3LType>
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x =
-        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+        (long) (getRandom() * (double) Long.MIN_VALUE);
       final long y =
-        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+        (long) (getRandom() * (double) Long.MIN_VALUE);
       final long z =
-        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+        (long) (getRandom() * (double) Long.MIN_VALUE);
       final T v = this.newVectorM3L(x, y, z);
 
       final T vr = this.newVectorM3L();
@@ -81,11 +81,11 @@ public abstract class VectorM3LContract<T extends Vector3LType>
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x =
-        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+        (long) (getRandom() * (double) Long.MIN_VALUE);
       final long y =
-        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+        (long) (getRandom() * (double) Long.MIN_VALUE);
       final long z =
-        (long) (VectorM3LContract.getRandom() * (double) Long.MIN_VALUE);
+        (long) (getRandom() * (double) Long.MIN_VALUE);
       final T v = this.newVectorM3L(x, y, z);
 
       VectorM3L.absoluteInPlace(v);
@@ -101,14 +101,14 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM3LContract.randomPositiveSmallNumber();
-      final long y0 = VectorM3LContract.randomPositiveSmallNumber();
-      final long z0 = VectorM3LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM3L(x0, y0, z0);
 
-      final long x1 = VectorM3LContract.randomPositiveSmallNumber();
-      final long y1 = VectorM3LContract.randomPositiveSmallNumber();
-      final long z1 = VectorM3LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM3L(x1, y1, z1);
 
       final T vr0 = this.newVectorM3L();
@@ -181,17 +181,17 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM3LContract.randomPositiveSmallNumber();
-      final long y0 = VectorM3LContract.randomPositiveSmallNumber();
-      final long z0 = VectorM3LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM3L(x0, y0, z0);
 
-      final long x1 = VectorM3LContract.randomPositiveSmallNumber();
-      final long y1 = VectorM3LContract.randomPositiveSmallNumber();
-      final long z1 = VectorM3LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM3L(x1, y1, z1);
 
-      final long r = VectorM3LContract.randomPositiveSmallNumber();
+      final long r = randomPositiveSmallNumber();
 
       final T vr0 = this.newVectorM3L();
       VectorM3L.addScaled(v0, v1, (double) r, vr0);
@@ -237,14 +237,14 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long max_x = VectorM3LContract.randomNegativeNumber();
-      final long max_y = VectorM3LContract.randomNegativeNumber();
-      final long max_z = VectorM3LContract.randomNegativeNumber();
+      final long max_x = randomNegativeNumber();
+      final long max_y = randomNegativeNumber();
+      final long max_z = randomNegativeNumber();
       final T maximum = this.newVectorM3L(max_x, max_y, max_z);
 
-      final long x = VectorM3LContract.randomNegativeNumber();
-      final long y = VectorM3LContract.randomNegativeNumber();
-      final long z = VectorM3LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
       final T v = this.newVectorM3L(x, y, z);
 
       final T vr = this.newVectorM3L();
@@ -272,14 +272,14 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long min_x = VectorM3LContract.randomPositiveNumber();
-      final long min_y = VectorM3LContract.randomPositiveNumber();
-      final long min_z = VectorM3LContract.randomPositiveNumber();
+      final long min_x = randomPositiveNumber();
+      final long min_y = randomPositiveNumber();
+      final long min_z = randomPositiveNumber();
       final T minimum = this.newVectorM3L(min_x, min_y, min_z);
 
-      final long x = VectorM3LContract.randomNegativeNumber();
-      final long y = VectorM3LContract.randomNegativeNumber();
-      final long z = VectorM3LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
       final T v = this.newVectorM3L(x, y, z);
 
       final T vr = this.newVectorM3L();
@@ -307,19 +307,19 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long min_x = VectorM3LContract.randomNegativeNumber();
-      final long min_y = VectorM3LContract.randomNegativeNumber();
-      final long min_z = VectorM3LContract.randomNegativeNumber();
+      final long min_x = randomNegativeNumber();
+      final long min_y = randomNegativeNumber();
+      final long min_z = randomNegativeNumber();
       final T minimum = this.newVectorM3L(min_x, min_y, min_z);
 
-      final long max_x = VectorM3LContract.randomPositiveNumber();
-      final long max_y = VectorM3LContract.randomPositiveNumber();
-      final long max_z = VectorM3LContract.randomPositiveNumber();
+      final long max_x = randomPositiveNumber();
+      final long max_y = randomPositiveNumber();
+      final long max_z = randomPositiveNumber();
       final T maximum = this.newVectorM3L(max_x, max_y, max_z);
 
-      final long x = VectorM3LContract.randomNegativeNumber();
-      final long y = VectorM3LContract.randomPositiveNumber();
-      final long z = VectorM3LContract.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final T v = this.newVectorM3L(x, y, z);
 
       final T vr = this.newVectorM3L();
@@ -353,11 +353,11 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long maximum = VectorM3LContract.randomNegativeNumber();
+      final long maximum = randomNegativeNumber();
 
-      final long x = VectorM3LContract.randomPositiveNumber();
-      final long y = VectorM3LContract.randomPositiveNumber();
-      final long z = VectorM3LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final T v = this.newVectorM3L(x, y, z);
 
       final T vr = this.newVectorM3L();
@@ -381,11 +381,11 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long minimum = VectorM3LContract.randomPositiveNumber();
+      final long minimum = randomPositiveNumber();
 
-      final long x = VectorM3LContract.randomNegativeNumber();
-      final long y = VectorM3LContract.randomNegativeNumber();
-      final long z = VectorM3LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
       final T v = this.newVectorM3L(x, y, z);
 
       final T vr = this.newVectorM3L();
@@ -409,12 +409,12 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long minimum = VectorM3LContract.randomNegativeNumber();
-      final long maximum = VectorM3LContract.randomPositiveNumber();
+      final long minimum = randomNegativeNumber();
+      final long maximum = randomPositiveNumber();
 
-      final long x = VectorM3LContract.randomNegativeNumber();
-      final long y = VectorM3LContract.randomPositiveNumber();
-      final long z = VectorM3LContract.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final T v = this.newVectorM3L(x, y, z);
 
       final T vr = this.newVectorM3L();
@@ -459,7 +459,7 @@ public abstract class VectorM3LContract<T extends Vector3LType>
   @Test public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM3L(
-      this.getLarge(), this.getLarge(), this.getLarge());
+      getLarge(), getLarge(), getLarge());
     final T v1 = this.newVectorM3L();
 
     v1.copyFrom2L(v0);
@@ -469,15 +469,15 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     Assert.assertEquals(0L, v1.getZL());
   }
 
-  protected long getLarge()
+  protected static long getLarge()
   {
-    return (long) (VectorM3LContract.getRandom() * Long.MAX_VALUE);
+    return (long) (getRandom() * Long.MAX_VALUE);
   }
 
   @Test public final void testCopy3Correct()
   {
     final T v0 = this.newVectorM3L(
-      this.getLarge(), this.getLarge(), this.getLarge());
+      getLarge(), getLarge(), getLarge());
     final T v1 = this.newVectorM3L();
 
     v1.copyFrom3L(v0);
@@ -512,14 +512,14 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM3LContract.randomPositiveSmallNumber();
-      final long y0 = VectorM3LContract.randomPositiveSmallNumber();
-      final long z0 = VectorM3LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM3L(x0, y0, z0);
 
-      final long x1 = VectorM3LContract.randomPositiveSmallNumber();
-      final long y1 = VectorM3LContract.randomPositiveSmallNumber();
-      final long z1 = VectorM3LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM3L(x1, y1, z1);
 
       Assert.assertTrue(VectorM3L.distance(c, v0, v1) >= 0L);
@@ -569,9 +569,9 @@ public abstract class VectorM3LContract<T extends Vector3LType>
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long max = 1000L;
-      final long x = (long) (VectorM3LContract.getRandom() * (double) max);
-      final long y = (long) (VectorM3LContract.getRandom() * (double) max);
-      final long z = (long) (VectorM3LContract.getRandom() * (double) max);
+      final long x = (long) (getRandom() * (double) max);
+      final long y = (long) (getRandom() * (double) max);
+      final long z = (long) (getRandom() * (double) max);
       final T q = this.newVectorM3L(x, y, z);
 
       final double ms = (double) VectorM3L.magnitudeSquared(q);
@@ -594,9 +594,9 @@ public abstract class VectorM3LContract<T extends Vector3LType>
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long max = 1000L;
-      final long x = (long) (VectorM3LContract.getRandom() * (double) max);
-      final long y = (long) (VectorM3LContract.getRandom() * (double) max);
-      final long z = (long) (VectorM3LContract.getRandom() * (double) max);
+      final long x = (long) (getRandom() * (double) max);
+      final long y = (long) (getRandom() * (double) max);
+      final long z = (long) (getRandom() * (double) max);
       final T q = this.newVectorM3L(x, y, z);
       final double dp = (double) VectorM3L.dotProduct(q, q);
 
@@ -656,7 +656,7 @@ public abstract class VectorM3LContract<T extends Vector3LType>
 
   @Test public final void testEqualsNotEqualCorrect()
   {
-    final long x = (long) (VectorM3LContract.getRandom() * 1000.0);
+    final long x = (long) (getRandom() * 1000.0);
     final long y = x + 1L;
     final long z = y + 1L;
     final long w = z + 1L;
@@ -786,14 +786,14 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM3LContract.randomPositiveNumber();
-      final long y0 = VectorM3LContract.randomPositiveNumber();
-      final long z0 = VectorM3LContract.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
       final T v0 = this.newVectorM3L(x0, y0, z0);
 
-      final long x1 = VectorM3LContract.randomPositiveNumber();
-      final long y1 = VectorM3LContract.randomPositiveNumber();
-      final long z1 = VectorM3LContract.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
       final T v1 = this.newVectorM3L(x1, y1, z1);
 
       final T vr0 = this.newVectorM3L();
@@ -816,9 +816,9 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM3LContract.randomPositiveSmallNumber();
-      final long y = VectorM3LContract.randomPositiveSmallNumber();
-      final long z = VectorM3LContract.randomPositiveSmallNumber();
+      final long x = randomPositiveSmallNumber();
+      final long y = randomPositiveSmallNumber();
+      final long z = randomPositiveSmallNumber();
       final T v = this.newVectorM3L(x, y, z);
 
       final long m = VectorM3L.magnitude(v);
@@ -952,9 +952,9 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM3LContract.randomPositiveNumber();
-      final long y = VectorM3LContract.randomPositiveNumber();
-      final long z = VectorM3LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final T v = this.newVectorM3L(x, y, z);
 
       final T vr = this.newVectorM3L();
@@ -984,9 +984,9 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM3LContract.randomPositiveNumber();
-      final long y = VectorM3LContract.randomPositiveNumber();
-      final long z = VectorM3LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final T v = this.newVectorM3L(x, y, z);
 
       final T vr = this.newVectorM3L();
@@ -1018,14 +1018,14 @@ public abstract class VectorM3LContract<T extends Vector3LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM3LContract.randomPositiveNumber();
-      final long y0 = VectorM3LContract.randomPositiveNumber();
-      final long z0 = VectorM3LContract.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
       final T v0 = this.newVectorM3L(x0, y0, z0);
 
-      final long x1 = VectorM3LContract.randomPositiveNumber();
-      final long y1 = VectorM3LContract.randomPositiveNumber();
-      final long z1 = VectorM3LContract.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
       final T v1 = this.newVectorM3L(x1, y1, z1);
 
       final T vr0 = this.newVectorM3L();

@@ -143,7 +143,7 @@ public final class PVectorByteBufferedM4I<T> extends ByteBuffered implements PVe
     final int i,
     final int x)
   {
-    this.buffer.putInt(PVectorByteBufferedM4I.getByteOffsetForIndex(o, i), x);
+    this.buffer.putInt(getByteOffsetForIndex(o, i), x);
   }
 
   private int getAtOffsetAndIndex(
@@ -151,7 +151,7 @@ public final class PVectorByteBufferedM4I<T> extends ByteBuffered implements PVe
     final int i)
   {
     return this.buffer.getInt(
-      PVectorByteBufferedM4I.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public int getYI()
@@ -261,16 +261,7 @@ public final class PVectorByteBufferedM4I<T> extends ByteBuffered implements PVe
       return false;
     }
     final PVectorByteBufferedM4I<?> other = (PVectorByteBufferedM4I<?>) obj;
-    if (this.getWI() != other.getWI()) {
-      return false;
-    }
-    if (this.getXI() != other.getXI()) {
-      return false;
-    }
-    if (this.getYI() != other.getYI()) {
-      return false;
-    }
-    return this.getZI() == other.getZI();
+    return this.getWI() == other.getWI() && this.getXI() == other.getXI() && this.getYI() == other.getYI() && this.getZI() == other.getZI();
   }
 
   @Override public void copyFromTyped4I(final PVectorReadable4IType<T> in_v)

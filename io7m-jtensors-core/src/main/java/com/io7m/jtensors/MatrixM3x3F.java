@@ -111,7 +111,7 @@ public final class MatrixM3x3F
     final M m0,
     final MatrixReadable3x3FType m1)
   {
-    return MatrixM3x3F.add(m0, m1, m0);
+    return add(m0, m1, m0);
   }
 
   /**
@@ -143,11 +143,11 @@ public final class MatrixM3x3F
     final double r,
     final M out)
   {
-    return MatrixM3x3F.addRowScaledUnsafe(
+    return addRowScaledUnsafe(
       m,
-      MatrixM3x3F.rowCheck(row_a),
-      MatrixM3x3F.rowCheck(row_b),
-      MatrixM3x3F.rowCheck(row_c),
+      rowCheck(row_a),
+      rowCheck(row_b),
+      rowCheck(row_c),
       r,
       c.v3a,
       c.v3b,
@@ -182,7 +182,7 @@ public final class MatrixM3x3F
     final int row_c,
     final double r)
   {
-    return MatrixM3x3F.addRowScaled(c, m, row_a, row_b, row_c, r, m);
+    return addRowScaled(c, m, row_a, row_b, row_c, r, m);
   }
 
   private static <M extends MatrixWritable3x3FType> M addRowScaledUnsafe(
@@ -288,10 +288,10 @@ public final class MatrixM3x3F
     final int row_b,
     final M out)
   {
-    return MatrixM3x3F.exchangeRowsUnsafe(
+    return exchangeRowsUnsafe(
       m,
-      MatrixM3x3F.rowCheck(row_a),
-      MatrixM3x3F.rowCheck(row_b),
+      rowCheck(row_a),
+      rowCheck(row_b),
       c.v3a,
       c.v3b,
       out);
@@ -320,7 +320,7 @@ public final class MatrixM3x3F
     final int row_a,
     final int row_b)
   {
-    return MatrixM3x3F.exchangeRows(c, m, row_a, row_b, m);
+    return exchangeRows(c, m, row_a, row_b, m);
   }
 
   private static <M extends MatrixWritable3x3FType> M exchangeRowsUnsafe(
@@ -359,7 +359,7 @@ public final class MatrixM3x3F
     final MatrixReadable3x3FType m,
     final M out)
   {
-    final double d = MatrixM3x3F.determinant(m);
+    final double d = determinant(m);
 
     if (d == 0.0) {
       return false;
@@ -405,7 +405,7 @@ public final class MatrixM3x3F
     temp.setR2C1F((float) r2c1);
     temp.setR2C2F((float) r2c2);
 
-    MatrixM3x3F.scale(temp, d_inv, out);
+    scale(temp, d_inv, out);
     return true;
   }
 
@@ -429,7 +429,7 @@ public final class MatrixM3x3F
     final ContextMM3F c,
     final M m)
   {
-    return MatrixM3x3F.invert(c, m, m);
+    return invert(c, m, m);
   }
 
   /**
@@ -464,10 +464,10 @@ public final class MatrixM3x3F
     final VectorM3F new_up = context.v3b;
     final VectorM3F side = context.v3c;
 
-    MatrixM3x3F.setIdentity(out_matrix);
+    setIdentity(out_matrix);
 
-    /**
-     * Calculate "forward" vector
+    /*
+      Calculate "forward" vector
      */
 
     forward.set3F(
@@ -476,21 +476,21 @@ public final class MatrixM3x3F
       target.getZF() - origin.getZF());
     VectorM3F.normalizeInPlace(forward);
 
-    /**
-     * Calculate "side" vector
+    /*
+      Calculate "side" vector
      */
 
     VectorM3F.crossProduct(forward, up, side);
     VectorM3F.normalizeInPlace(side);
 
-    /**
-     * Calculate new "up" vector
+    /*
+      Calculate new "up" vector
      */
 
     VectorM3F.crossProduct(side, forward, new_up);
 
-    /**
-     * Calculate rotation matrix
+    /*
+      Calculate rotation matrix
      */
 
     out_matrix.setR0C0F(side.getXF());
@@ -503,8 +503,8 @@ public final class MatrixM3x3F
     out_matrix.setR2C1F(-forward.getYF());
     out_matrix.setR2C2F(-forward.getZF());
 
-    /**
-     * Calculate camera translation matrix
+    /*
+      Calculate camera translation matrix
      */
 
     out_translation.set3F(-origin.getXF(), -origin.getYF(), -origin.getZF());
@@ -726,7 +726,7 @@ public final class MatrixM3x3F
     final M m0,
     final MatrixReadable3x3FType m1)
   {
-    return MatrixM3x3F.multiply(m0, m1, m0);
+    return multiply(m0, m1, m0);
   }
 
   /**
@@ -833,7 +833,7 @@ public final class MatrixM3x3F
     final M m,
     final double r)
   {
-    return MatrixM3x3F.scale(m, r, m);
+    return scale(m, r, m);
   }
 
   /**
@@ -860,8 +860,8 @@ public final class MatrixM3x3F
     final double r,
     final M out)
   {
-    return MatrixM3x3F.scaleRowUnsafe(
-      m, MatrixM3x3F.rowCheck(row), r, c.v3a, out);
+    return scaleRowUnsafe(
+      m, rowCheck(row), r, c.v3a, out);
   }
 
   /**
@@ -887,8 +887,8 @@ public final class MatrixM3x3F
     final int row,
     final double r)
   {
-    return MatrixM3x3F.scaleRowUnsafe(
-      m, MatrixM3x3F.rowCheck(row), r, c.v3a, m);
+    return scaleRowUnsafe(
+      m, rowCheck(row), r, c.v3a, m);
   }
 
   private static <M extends MatrixWritable3x3FType> M scaleRowUnsafe(
@@ -1067,13 +1067,7 @@ public final class MatrixM3x3F
     final MatrixReadable3x3FType m0,
     final MatrixReadable3x3FType m1)
   {
-    if (!MatrixM3x3F.compareRow0(m0, m1)) {
-      return false;
-    }
-    if (!MatrixM3x3F.compareRow1(m0, m1)) {
-      return false;
-    }
-    return MatrixM3x3F.compareRow2(m0, m1);
+    return compareRow0(m0, m1) && compareRow1(m0, m1) && compareRow2(m0, m1);
   }
 
   /**
@@ -1121,11 +1115,17 @@ public final class MatrixM3x3F
     final StringBuilder sb)
   {
     final String row0 = String.format(
-      "[%+.6f %+.6f %+.6f]\n", m.getR0C0F(), m.getR0C1F(), m.getR0C2F());
+      "[%+.6f %+.6f %+.6f]\n",
+      Float.valueOf(m.getR0C0F()), Float.valueOf(m.getR0C1F()),
+      Float.valueOf(m.getR0C2F()));
     final String row1 = String.format(
-      "[%+.6f %+.6f %+.6f]\n", m.getR1C0F(), m.getR1C1F(), m.getR1C2F());
+      "[%+.6f %+.6f %+.6f]\n",
+      Float.valueOf(m.getR1C0F()), Float.valueOf(m.getR1C1F()),
+      Float.valueOf(m.getR1C2F()));
     final String row2 = String.format(
-      "[%+.6f %+.6f %+.6f]\n", m.getR2C0F(), m.getR2C1F(), m.getR2C2F());
+      "[%+.6f %+.6f %+.6f]\n",
+      Float.valueOf(m.getR2C0F()), Float.valueOf(m.getR2C1F()),
+      Float.valueOf(m.getR2C2F()));
     sb.append(row0);
     sb.append(row1);
     sb.append(row2);
@@ -1135,39 +1135,21 @@ public final class MatrixM3x3F
     final MatrixReadable3x3FType m0,
     final MatrixReadable3x3FType m1)
   {
-    if (m0.getR0C0F() != m1.getR0C0F()) {
-      return false;
-    }
-    if (m0.getR0C1F() != m1.getR0C1F()) {
-      return false;
-    }
-    return m0.getR0C2F() == m1.getR0C2F();
+    return !(m0.getR0C0F() != m1.getR0C0F()) && !(m0.getR0C1F() != m1.getR0C1F()) && m0.getR0C2F() == m1.getR0C2F();
   }
 
   private static boolean compareRow1(
     final MatrixReadable3x3FType m0,
     final MatrixReadable3x3FType m1)
   {
-    if (m0.getR1C0F() != m1.getR1C0F()) {
-      return false;
-    }
-    if (m0.getR1C1F() != m1.getR1C1F()) {
-      return false;
-    }
-    return m0.getR1C2F() == m1.getR1C2F();
+    return !(m0.getR1C0F() != m1.getR1C0F()) && !(m0.getR1C1F() != m1.getR1C1F()) && m0.getR1C2F() == m1.getR1C2F();
   }
 
   private static boolean compareRow2(
     final MatrixReadable3x3FType m0,
     final MatrixReadable3x3FType m1)
   {
-    if (m0.getR2C0F() != m1.getR2C0F()) {
-      return false;
-    }
-    if (m0.getR2C1F() != m1.getR2C1F()) {
-      return false;
-    }
-    return m0.getR2C2F() == m1.getR2C2F();
+    return !(m0.getR2C0F() != m1.getR2C0F()) && !(m0.getR2C1F() != m1.getR2C1F()) && m0.getR2C2F() == m1.getR2C2F();
   }
 
   /**
@@ -1190,9 +1172,9 @@ public final class MatrixM3x3F
   public static final class ContextMM3F
   {
     private final Matrix3x3FType m3a = MatrixHeapArrayM3x3F.newMatrix();
-    private final VectorM3F      v3a = new VectorM3F();
-    private final VectorM3F      v3b = new VectorM3F();
-    private final VectorM3F      v3c = new VectorM3F();
+    private final VectorM3F v3a = new VectorM3F();
+    private final VectorM3F v3b = new VectorM3F();
+    private final VectorM3F v3c = new VectorM3F();
 
     /**
      * Construct a new context.

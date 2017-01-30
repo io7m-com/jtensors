@@ -29,7 +29,8 @@ import net.jcip.annotations.Immutable;
  * accessed from multiple threads. </p>
  */
 
-@Immutable public final class VectorI3D implements VectorReadable3DType
+@Immutable
+public final class VectorI3D implements VectorReadable3DType
 {
   /**
    * The zero vector.
@@ -136,7 +137,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3DType v1,
     final double r)
   {
-    return VectorI3D.add(v0, VectorI3D.scale(v1, r));
+    return add(v0, scale(v1, r));
   }
 
   /**
@@ -331,7 +332,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3DType v0,
     final VectorReadable3DType v1)
   {
-    return VectorI3D.magnitude(VectorI3D.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -375,9 +376,9 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3DType v1,
     final double alpha)
   {
-    final VectorI3D w0 = VectorI3D.scale(v0, 1.0 - alpha);
-    final VectorI3D w1 = VectorI3D.scale(v1, alpha);
-    return VectorI3D.add(w0, w1);
+    final VectorI3D w0 = scale(v0, 1.0 - alpha);
+    final VectorI3D w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -393,7 +394,7 @@ import net.jcip.annotations.Immutable;
   public static double magnitude(
     final VectorReadable3DType v)
   {
-    return Math.sqrt(VectorI3D.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -407,7 +408,7 @@ import net.jcip.annotations.Immutable;
   public static double magnitudeSquared(
     final VectorReadable3DType v)
   {
-    return VectorI3D.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -423,10 +424,10 @@ import net.jcip.annotations.Immutable;
   public static VectorI3D normalize(
     final VectorReadable3DType v)
   {
-    final double m = VectorI3D.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return VectorI3D.scale(v, reciprocal);
+      return scale(v, reciprocal);
     }
     return new VectorI3D(v);
   }
@@ -448,11 +449,11 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3DType v0,
     final VectorReadable3DType v1)
   {
-    final VectorI3D v0n = VectorI3D.normalize(v0);
+    final VectorI3D v0n = normalize(v0);
     final VectorI3D projection =
-      VectorI3D.scale(v0n, VectorI3D.dotProduct(v1, v0n));
+      scale(v0n, dotProduct(v1, v0n));
     final VectorI3D vr =
-      VectorI3D.normalize(VectorI3D.subtract(v1, projection));
+      normalize(subtract(v1, projection));
     return Pair.pair(v0n, vr);
   }
 
@@ -470,10 +471,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3DType p,
     final VectorReadable3DType q)
   {
-    final double dot = VectorI3D.dotProduct(p, q);
-    final double qms = VectorI3D.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
-    return VectorI3D.scale(p, s);
+    return scale(p, s);
   }
 
   /**
@@ -511,7 +512,8 @@ import net.jcip.annotations.Immutable;
       v0.getZD() - v1.getZD());
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -524,31 +526,31 @@ import net.jcip.annotations.Immutable;
       return false;
     }
     final VectorI3D other = (VectorI3D) obj;
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
+    return Double.doubleToLongBits(this.x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(
+      this.y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(
+      this.z) == Double.doubleToLongBits(other.z);
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public double getZD()
+  @Override
+  public double getZD()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -562,7 +564,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI3D ");

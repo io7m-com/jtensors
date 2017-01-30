@@ -143,7 +143,7 @@ public final class PVectorByteBufferedM4F<T> extends ByteBuffered implements PVe
     final int i,
     final float x)
   {
-    this.buffer.putFloat(PVectorByteBufferedM4F.getByteOffsetForIndex(o, i), x);
+    this.buffer.putFloat(getByteOffsetForIndex(o, i), x);
   }
 
   private float getAtOffsetAndIndex(
@@ -151,7 +151,7 @@ public final class PVectorByteBufferedM4F<T> extends ByteBuffered implements PVe
     final int i)
   {
     return this.buffer.getFloat(
-      PVectorByteBufferedM4F.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public float getYF()
@@ -266,20 +266,10 @@ public final class PVectorByteBufferedM4F<T> extends ByteBuffered implements PVe
       return false;
     }
     final PVectorByteBufferedM4F<?> other = (PVectorByteBufferedM4F<?>) obj;
-    if (Float.floatToIntBits(this.getWF())
-        != Float.floatToIntBits(other.getWF())) {
-      return false;
-    }
-    if (Float.floatToIntBits(this.getXF())
-        != Float.floatToIntBits(other.getXF())) {
-      return false;
-    }
-    if (Float.floatToIntBits(this.getYF())
-        != Float.floatToIntBits(other.getYF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
-      other.getZF());
+    return Float.floatToIntBits(this.getWF()) == Float.floatToIntBits(other.getWF()) && Float.floatToIntBits(
+      this.getXF()) == Float.floatToIntBits(other.getXF()) && Float.floatToIntBits(
+      this.getYF()) == Float.floatToIntBits(other.getYF()) && Float.floatToIntBits(
+      this.getZF()) == Float.floatToIntBits(other.getZF());
   }
 
   @Override public void copyFromTyped4F(final PVectorReadable4FType<T> in_v)

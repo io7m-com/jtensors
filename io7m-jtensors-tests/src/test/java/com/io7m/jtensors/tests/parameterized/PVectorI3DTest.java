@@ -18,7 +18,9 @@ package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jfunctional.Pair;
+import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.parameterized.PVectorI3D;
+import com.io7m.jtensors.parameterized.PVectorReadable3DType;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
@@ -133,74 +135,74 @@ import org.junit.Test;
     final double q = z + 1.0;
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(q, y, z);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(q, y, z);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(x, q, z);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(x, q, z);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(x, y, q);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(x, y, q);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(x, y, q);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(x, y, q);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(q, q, z);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(q, q, z);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(q, y, q);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(q, y, q);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(q, y, z);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(q, y, z);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(q, q, q);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(q, q, q);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(q, q, z);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(q, q, z);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(q, q, q);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(q, q, q);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(x, q, q);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(x, q, q);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3D<T> m0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> m1 = new PVectorI3D<T>(x, y, q);
+      final PVectorReadable3DType<T> m0 = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> m1 = new PVectorI3D<T>(x, y, q);
       Assert.assertFalse(PVectorI3D.almostEqual(ec, m0, m1));
     }
   }
@@ -214,9 +216,9 @@ import org.junit.Test;
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
-      final PVectorI3D<T> v0 = new PVectorI3D<T>(x0, y0, z0);
-      final PVectorI3D<T> v1 = new PVectorI3D<T>(x0, y0, z0);
-      final PVectorI3D<T> v2 = new PVectorI3D<T>(x0, y0, z0);
+      final PVectorReadable3DType<T> v0 = new PVectorI3D<T>(x0, y0, z0);
+      final PVectorReadable3DType<T> v1 = new PVectorI3D<T>(x0, y0, z0);
+      final PVectorReadable3DType<T> v2 = new PVectorI3D<T>(x0, y0, z0);
 
       Assert.assertTrue(PVectorI3D.almostEqual(ec, v0, v1));
       Assert.assertTrue(PVectorI3D.almostEqual(ec, v1, v2));
@@ -226,7 +228,7 @@ import org.junit.Test;
 
   @Override @Test public void testCheckInterface()
   {
-    final PVectorI3D<T> v = new PVectorI3D<T>(3.0, 5.0, 7.0);
+    final VectorReadable3DType v = new PVectorI3D<T>(3.0, 5.0, 7.0);
 
     Assert.assertTrue(v.getXD() == v.getXD());
     Assert.assertTrue(v.getYD() == v.getYD());
@@ -244,7 +246,7 @@ import org.junit.Test;
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
-      final PVectorI3D<T> v = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> v = new PVectorI3D<T>(x, y, z);
 
       Assert.assertTrue(
         PVectorI3D.clampMaximumByPVector(v, maximum).getXD()
@@ -269,7 +271,7 @@ import org.junit.Test;
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
-      final PVectorI3D<T> v = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> v = new PVectorI3D<T>(x, y, z);
 
       Assert.assertTrue(
         PVectorI3D.clampMinimumByPVector(v, minimum).getXD()
@@ -299,7 +301,7 @@ import org.junit.Test;
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MAX_VALUE;
-      final PVectorI3D<T> v = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> v = new PVectorI3D<T>(x, y, z);
 
       Assert.assertTrue(
         PVectorI3D.clampByPVector(v, minimum, maximum).getXD()
@@ -330,7 +332,7 @@ import org.junit.Test;
       final double x = Math.random() * Double.MAX_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MAX_VALUE;
-      final PVectorI3D<T> v = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> v = new PVectorI3D<T>(x, y, z);
 
       Assert.assertTrue(PVectorI3D.clampMaximum(v, maximum).getXD() <= maximum);
       Assert.assertTrue(PVectorI3D.clampMaximum(v, maximum).getYD() <= maximum);
@@ -346,7 +348,7 @@ import org.junit.Test;
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
-      final PVectorI3D<T> v = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> v = new PVectorI3D<T>(x, y, z);
 
       Assert.assertTrue(PVectorI3D.clampMinimum(v, minimum).getXD() >= minimum);
       Assert.assertTrue(PVectorI3D.clampMinimum(v, minimum).getYD() >= minimum);
@@ -363,7 +365,7 @@ import org.junit.Test;
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
-      final PVectorI3D<T> v = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> v = new PVectorI3D<T>(x, y, z);
 
       Assert.assertTrue(
         PVectorI3D.clamp(v, minimum, maximum).getXD() <= maximum);
@@ -390,7 +392,7 @@ import org.junit.Test;
       final double y = Math.random();
       final double z = Math.random();
       final PVectorI3D<T> v0 = new PVectorI3D<T>(x, y, z);
-      final PVectorI3D<T> v1 = new PVectorI3D<T>(v0);
+      final PVectorReadable3DType<T> v1 = new PVectorI3D<T>(v0);
       Assert.assertTrue(PVectorI3D.almostEqual(ec, v0, v1));
     }
   }
@@ -429,7 +431,7 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI3D<T> v = new PVectorI3D<T>();
+    final VectorReadable3DType v = new PVectorI3D<T>();
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getZD(), 0.0));
@@ -440,8 +442,8 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI3D<T> v0 = new PVectorI3D<T>(0.0, 1.0, 0.0);
-    final PVectorI3D<T> v1 = new PVectorI3D<T>(0.0, 0.0, 0.0);
+    final PVectorReadable3DType<T> v0 = new PVectorI3D<T>(0.0, 1.0, 0.0);
+    final PVectorReadable3DType<T> v1 = new PVectorI3D<T>(0.0, 0.0, 0.0);
 
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
@@ -454,12 +456,12 @@ import org.junit.Test;
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
-      final PVectorI3D<T> v0 = new PVectorI3D<T>(x0, y0, z0);
+      final PVectorReadable3DType<T> v0 = new PVectorI3D<T>(x0, y0, z0);
 
       final double x1 = Math.random() * Double.MAX_VALUE;
       final double y1 = Math.random() * Double.MAX_VALUE;
       final double z1 = Math.random() * Double.MAX_VALUE;
-      final PVectorI3D<T> v1 = new PVectorI3D<T>(x1, y1, z1);
+      final PVectorReadable3DType<T> v1 = new PVectorI3D<T>(x1, y1, z1);
 
       Assert.assertTrue(PVectorI3D.distance(v0, v1) >= 0.0);
     }
@@ -500,14 +502,14 @@ import org.junit.Test;
 
   @Override @Test public void testDotProductPerpendicular()
   {
-    final PVectorI3D<T> vpx = new PVectorI3D<T>(1.0f, 0.0f, 0.0f);
-    final PVectorI3D<T> vmx = new PVectorI3D<T>(-1.0f, 0.0f, 0.0f);
+    final PVectorReadable3DType<T> vpx = new PVectorI3D<T>(1.0f, 0.0f, 0.0f);
+    final PVectorReadable3DType<T> vmx = new PVectorI3D<T>(-1.0f, 0.0f, 0.0f);
 
-    final PVectorI3D<T> vpy = new PVectorI3D<T>(0.0f, 1.0f, 0.0f);
-    final PVectorI3D<T> vmy = new PVectorI3D<T>(0.0f, -1.0f, 0.0f);
+    final PVectorReadable3DType<T> vpy = new PVectorI3D<T>(0.0f, 1.0f, 0.0f);
+    final PVectorReadable3DType<T> vmy = new PVectorI3D<T>(0.0f, -1.0f, 0.0f);
 
-    final PVectorI3D<T> vpz = new PVectorI3D<T>(0.0f, 0.0f, 1.0f);
-    final PVectorI3D<T> vmz = new PVectorI3D<T>(0.0f, 0.0f, -1.0f);
+    final PVectorReadable3DType<T> vpz = new PVectorI3D<T>(0.0f, 0.0f, 1.0f);
+    final PVectorReadable3DType<T> vmz = new PVectorI3D<T>(0.0f, 0.0f, -1.0f);
 
     Assert.assertTrue(PVectorI3D.dotProduct(vpx, vpy) == 0.0);
     Assert.assertTrue(PVectorI3D.dotProduct(vpy, vpz) == 0.0);
@@ -524,7 +526,7 @@ import org.junit.Test;
       final double x = Math.random();
       final double y = Math.random();
       final double z = Math.random();
-      final PVectorI3D<T> q = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> q = new PVectorI3D<T>(x, y, z);
       final double dp = PVectorI3D.dotProduct(q, q);
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
@@ -540,7 +542,7 @@ import org.junit.Test;
       final double x = Math.random();
       final double y = Math.random();
       final double z = Math.random();
-      final PVectorI3D<T> q = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> q = new PVectorI3D<T>(x, y, z);
 
       final double ms = PVectorI3D.magnitudeSquared(q);
       final double dp = PVectorI3D.dotProduct(q, q);
@@ -689,7 +691,7 @@ import org.junit.Test;
   @Override @Test public void testInitializeReadable()
   {
     final PVectorI3D<T> v0 = new PVectorI3D<T>(1.0f, 2.0f, 3.0f);
-    final PVectorI3D<T> v1 = new PVectorI3D<T>(v0);
+    final VectorReadable3DType v1 = new PVectorI3D<T>(v0);
 
     Assert.assertTrue(v0.getXD() == v1.getXD());
     Assert.assertTrue(v0.getYD() == v1.getYD());
@@ -705,12 +707,12 @@ import org.junit.Test;
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
-      final PVectorI3D<T> v0 = new PVectorI3D<T>(x0, y0, z0);
+      final PVectorReadable3DType<T> v0 = new PVectorI3D<T>(x0, y0, z0);
 
       final double x1 = Math.random() * Double.MAX_VALUE;
       final double y1 = Math.random() * Double.MAX_VALUE;
       final double z1 = Math.random() * Double.MAX_VALUE;
-      final PVectorI3D<T> v1 = new PVectorI3D<T>(x1, y1, z1);
+      final PVectorReadable3DType<T> v1 = new PVectorI3D<T>(x1, y1, z1);
 
       Assert.assertTrue(
         PVectorI3D.almostEqual(
@@ -727,7 +729,7 @@ import org.junit.Test;
       final double x = 1.0 + (Math.random() * Double.MAX_VALUE);
       final double y = 1.0 + (Math.random() * Double.MAX_VALUE);
       final double z = 1.0 + (Math.random() * Double.MAX_VALUE);
-      final PVectorI3D<T> v = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> v = new PVectorI3D<T>(x, y, z);
 
       final double m = PVectorI3D.magnitude(v);
       Assert.assertTrue(m > 0.0);
@@ -743,7 +745,7 @@ import org.junit.Test;
       final double x = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
       final double y = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
       final double z = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
-      final PVectorI3D<T> v = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> v = new PVectorI3D<T>(x, y, z);
 
       final PVectorI3D<T> vr = PVectorI3D.normalize(v);
       Assert.assertNotSame(v, vr);
@@ -758,7 +760,7 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI3D<T> v = new PVectorI3D<T>(0.0, 0.0, 0.0);
+    final PVectorReadable3DType<T> v = new PVectorI3D<T>(0.0, 0.0, 0.0);
     final PVectorI3D<T> vr = PVectorI3D.normalize(v);
     final double m = PVectorI3D.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
@@ -769,14 +771,14 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI3D<T> v = new PVectorI3D<T>(1.0, 0.0, 0.0);
+    final PVectorReadable3DType<T> v = new PVectorI3D<T>(1.0, 0.0, 0.0);
     final double m = PVectorI3D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final PVectorI3D<T> v = new PVectorI3D<T>(8.0, 0.0, 0.0);
+    final PVectorReadable3DType<T> v = new PVectorI3D<T>(8.0, 0.0, 0.0);
 
     {
       final double p = PVectorI3D.dotProduct(v, v);
@@ -793,14 +795,14 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI3D<T> v = new PVectorI3D<T>(0.0, 0.0, 0.0);
+    final PVectorReadable3DType<T> v = new PVectorI3D<T>(0.0, 0.0, 0.0);
     final double m = PVectorI3D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
   @Override @Test public void testNormalizeSimple()
   {
-    final PVectorI3D<T> v0 = new PVectorI3D<T>(8.0, 0.0, 0.0);
+    final PVectorReadable3DType<T> v0 = new PVectorI3D<T>(8.0, 0.0, 0.0);
     final PVectorI3D<T> vr = PVectorI3D.normalize(v0);
     final double m = PVectorI3D.magnitude(vr);
     Assert.assertTrue(m == 1.0);
@@ -811,7 +813,7 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI3D<T> q = new PVectorI3D<T>(0, 0, 0);
+    final PVectorReadable3DType<T> q = new PVectorI3D<T>(0, 0, 0);
     final PVectorI3D<T> qr = PVectorI3D.normalize(q);
 
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.getXD()));
@@ -821,8 +823,8 @@ import org.junit.Test;
 
   @Override @Test public void testOrthonormalize()
   {
-    final PVectorI3D<T> v0 = new PVectorI3D<T>(0, 1, 0);
-    final PVectorI3D<T> v1 = new PVectorI3D<T>(0.5, 0.5, 0);
+    final PVectorReadable3DType<T> v0 = new PVectorI3D<T>(0, 1, 0);
+    final PVectorReadable3DType<T> v1 = new PVectorI3D<T>(0.5, 0.5, 0);
     final Pair<PVectorI3D<T>, PVectorI3D<T>> on =
       PVectorI3D.orthoNormalize(v0, v1);
 
@@ -833,15 +835,15 @@ import org.junit.Test;
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final PVectorI3D<T> p = new PVectorI3D<T>(1.0, 0.0, 0.0);
-      final PVectorI3D<T> q = new PVectorI3D<T>(0.0, 1.0, 0.0);
+      final PVectorReadable3DType<T> p = new PVectorI3D<T>(1.0, 0.0, 0.0);
+      final PVectorReadable3DType<T> q = new PVectorI3D<T>(0.0, 1.0, 0.0);
       final PVectorI3D<T> r = PVectorI3D.projection(p, q);
       Assert.assertTrue(PVectorI3D.magnitude(r) == 0.0);
     }
 
     {
-      final PVectorI3D<T> p = new PVectorI3D<T>(-1.0, 0.0, 0.0);
-      final PVectorI3D<T> q = new PVectorI3D<T>(0.0, 1.0, 0.0);
+      final PVectorReadable3DType<T> p = new PVectorI3D<T>(-1.0, 0.0, 0.0);
+      final PVectorReadable3DType<T> q = new PVectorI3D<T>(0.0, 1.0, 0.0);
       final PVectorI3D<T> r = PVectorI3D.projection(p, q);
       Assert.assertTrue(PVectorI3D.magnitude(r) == 0.0);
     }
@@ -881,7 +883,7 @@ import org.junit.Test;
       final double x = Math.random() * Double.MAX_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MAX_VALUE;
-      final PVectorI3D<T> v = new PVectorI3D<T>(x, y, z);
+      final PVectorReadable3DType<T> v = new PVectorI3D<T>(x, y, z);
 
       final PVectorI3D<T> vr = PVectorI3D.scale(v, 0.0);
 
@@ -894,7 +896,7 @@ import org.junit.Test;
   @Override @Test public void testString()
   {
     final PVectorI3D<T> v = new PVectorI3D<T>(0.0, 1.0, 2.0);
-    Assert.assertTrue(v.toString().equals("[PVectorI3D 0.0 1.0 2.0]"));
+    Assert.assertTrue("[PVectorI3D 0.0 1.0 2.0]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()

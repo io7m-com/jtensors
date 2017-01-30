@@ -31,7 +31,8 @@ import net.jcip.annotations.Immutable;
  * @since 7.0.0
  */
 
-@Immutable public final class PVectorI2L<T> implements PVectorReadable2LType<T>
+@Immutable
+public final class PVectorI2L<T> implements PVectorReadable2LType<T>
 {
   private static final PVectorI2L<?> ZERO = new PVectorI2L<Integer>(0L, 0L);
   private final long x;
@@ -165,9 +166,9 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable2LType<T> v0,
     final PVectorReadable2LType<T> v1)
   {
-    final double m0 = (double) PVectorI2L.magnitude(v0);
-    final double m1 = (double) PVectorI2L.magnitude(v1);
-    return Math.acos((double) PVectorI2L.dotProduct(v0, v1) / (m0 * m1));
+    final double m0 = (double) magnitude(v0);
+    final double m1 = (double) magnitude(v1);
+    return Math.acos((double) dotProduct(v0, v1) / (m0 * m1));
   }
 
   /**
@@ -329,7 +330,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable2LType<T> v1)
     throws ArithmeticException
   {
-    return PVectorI2L.magnitude(PVectorI2L.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -384,9 +385,9 @@ import net.jcip.annotations.Immutable;
     final double alpha)
     throws ArithmeticException
   {
-    final PVectorI2L<T> w0 = PVectorI2L.scale(v0, 1.0 - alpha);
-    final PVectorI2L<T> w1 = PVectorI2L.scale(v1, alpha);
-    return PVectorI2L.add(w0, w1);
+    final PVectorI2L<T> w0 = scale(v0, 1.0 - alpha);
+    final PVectorI2L<T> w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -408,7 +409,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable2LType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt((double) PVectorI2L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -428,7 +429,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable2LType<T> v)
     throws ArithmeticException
   {
-    return PVectorI2L.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -451,10 +452,10 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable2LType<T> q)
     throws ArithmeticException
   {
-    final long dot = PVectorI2L.dotProduct(p, q);
-    final long qms = PVectorI2L.magnitudeSquared(q);
+    final long dot = dotProduct(p, q);
+    final long qms = magnitudeSquared(q);
     final long s = dot / qms;
-    return PVectorI2L.scale(p, (double) s);
+    return scale(p, (double) s);
   }
 
   /**
@@ -509,12 +510,14 @@ import net.jcip.annotations.Immutable;
    * @return The zero vector.
    */
 
-  @SuppressWarnings("unchecked") public static <T> PVectorI2L<T> zero()
+  @SuppressWarnings("unchecked")
+  public static <T> PVectorI2L<T> zero()
   {
-    return (PVectorI2L<T>) PVectorI2L.ZERO;
+    return (PVectorI2L<T>) ZERO;
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -527,23 +530,23 @@ import net.jcip.annotations.Immutable;
       return false;
     }
     final PVectorI2L<?> other = (PVectorI2L<?>) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y;
+    return this.x == other.x && this.y == other.y;
   }
 
-  @Override public long getXL()
+  @Override
+  public long getXL()
   {
     return this.x;
   }
 
-  @Override public long getYL()
+  @Override
+  public long getYL()
   {
     return this.y;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final long prime = 31L;
     long result = 1L;
@@ -552,7 +555,8 @@ import net.jcip.annotations.Immutable;
     return (int) result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorI2L ");

@@ -96,16 +96,16 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long y0 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long z0 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long w0 = PVectorM4LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
+      final long w0 = randomPositiveSmallNumber();
       final V v0 = this.newVectorM4L(x0, y0, z0, w0);
 
-      final long x1 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long y1 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long z1 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long w1 = PVectorM4LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
+      final long w1 = randomPositiveSmallNumber();
       final V v1 = this.newVectorM4L(x1, y1, z1, w1);
 
       final V vr0 = this.newVectorM4L();
@@ -188,19 +188,19 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long y0 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long z0 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long w0 = PVectorM4LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
+      final long w0 = randomPositiveSmallNumber();
       final V v0 = this.newVectorM4L(x0, y0, z0, w0);
 
-      final long x1 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long y1 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long z1 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long w1 = PVectorM4LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
+      final long w1 = randomPositiveSmallNumber();
       final V v1 = this.newVectorM4L(x1, y1, z1, w1);
 
-      final long r = PVectorM4LContract.randomPositiveSmallNumber();
+      final long r = randomPositiveSmallNumber();
 
       final V vr0 = this.newVectorM4L();
       PVectorM4L.addScaled(v0, v1, (double) r, vr0);
@@ -250,16 +250,16 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long max_x = PVectorM4LContract.randomNegativeNumber();
-      final long max_y = PVectorM4LContract.randomNegativeNumber();
-      final long max_z = PVectorM4LContract.randomNegativeNumber();
-      final long max_w = PVectorM4LContract.randomNegativeNumber();
+      final long max_x = randomNegativeNumber();
+      final long max_y = randomNegativeNumber();
+      final long max_z = randomNegativeNumber();
+      final long max_w = randomNegativeNumber();
       final V maximum = this.newVectorM4L(max_x, max_y, max_z, max_w);
 
-      final long x = PVectorM4LContract.randomNegativeNumber();
-      final long y = PVectorM4LContract.randomNegativeNumber();
-      final long z = PVectorM4LContract.randomNegativeNumber();
-      final long w = PVectorM4LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
+      final long w = randomNegativeNumber();
       final V v = this.newVectorM4L(x, y, z, w);
 
       final V vr = this.newVectorM4L();
@@ -287,16 +287,16 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long min_x = PVectorM4LContract.randomPositiveNumber();
-      final long min_y = PVectorM4LContract.randomPositiveNumber();
-      final long min_z = PVectorM4LContract.randomPositiveNumber();
-      final long min_w = PVectorM4LContract.randomPositiveNumber();
+      final long min_x = randomPositiveNumber();
+      final long min_y = randomPositiveNumber();
+      final long min_z = randomPositiveNumber();
+      final long min_w = randomPositiveNumber();
       final V minimum = this.newVectorM4L(min_x, min_y, min_z, min_w);
 
-      final long x = PVectorM4LContract.randomNegativeNumber();
-      final long y = PVectorM4LContract.randomNegativeNumber();
-      final long z = PVectorM4LContract.randomNegativeNumber();
-      final long w = PVectorM4LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
+      final long w = randomNegativeNumber();
       final V v = this.newVectorM4L(x, y, z, w);
 
       final V vr = this.newVectorM4L();
@@ -324,22 +324,22 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long min_x = PVectorM4LContract.randomNegativeNumber();
-      final long min_y = PVectorM4LContract.randomNegativeNumber();
-      final long min_z = PVectorM4LContract.randomNegativeNumber();
-      final long min_w = PVectorM4LContract.randomNegativeNumber();
+      final long min_x = randomNegativeNumber();
+      final long min_y = randomNegativeNumber();
+      final long min_z = randomNegativeNumber();
+      final long min_w = randomNegativeNumber();
       final V minimum = this.newVectorM4L(min_x, min_y, min_z, min_w);
 
-      final long max_x = PVectorM4LContract.randomPositiveNumber();
-      final long max_y = PVectorM4LContract.randomPositiveNumber();
-      final long max_z = PVectorM4LContract.randomPositiveNumber();
-      final long max_w = PVectorM4LContract.randomPositiveNumber();
+      final long max_x = randomPositiveNumber();
+      final long max_y = randomPositiveNumber();
+      final long max_z = randomPositiveNumber();
+      final long max_w = randomPositiveNumber();
       final V maximum = this.newVectorM4L(max_x, max_y, max_z, max_w);
 
-      final long x = PVectorM4LContract.randomNegativeNumber();
-      final long y = PVectorM4LContract.randomPositiveNumber();
-      final long z = PVectorM4LContract.randomPositiveNumber();
-      final long w = PVectorM4LContract.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
       final V v = this.newVectorM4L(x, y, z, w);
 
       final V vr = this.newVectorM4L();
@@ -375,12 +375,12 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long maximum = PVectorM4LContract.randomNegativeNumber();
+      final long maximum = randomNegativeNumber();
 
-      final long x = PVectorM4LContract.randomPositiveNumber();
-      final long y = PVectorM4LContract.randomPositiveNumber();
-      final long z = PVectorM4LContract.randomPositiveNumber();
-      final long w = PVectorM4LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
       final V v = this.newVectorM4L(x, y, z, w);
 
       final V vr = this.newVectorM4L();
@@ -406,12 +406,12 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long minimum = PVectorM4LContract.randomPositiveNumber();
+      final long minimum = randomPositiveNumber();
 
-      final long x = PVectorM4LContract.randomNegativeNumber();
-      final long y = PVectorM4LContract.randomNegativeNumber();
-      final long z = PVectorM4LContract.randomNegativeNumber();
-      final long w = PVectorM4LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
+      final long w = randomNegativeNumber();
       final V v = this.newVectorM4L(x, y, z, w);
 
       final V vr = this.newVectorM4L();
@@ -437,13 +437,13 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long minimum = PVectorM4LContract.randomNegativeNumber();
-      final long maximum = PVectorM4LContract.randomPositiveNumber();
+      final long minimum = randomNegativeNumber();
+      final long maximum = randomPositiveNumber();
 
-      final long x = PVectorM4LContract.randomNegativeNumber();
-      final long y = PVectorM4LContract.randomPositiveNumber();
-      final long z = PVectorM4LContract.randomPositiveNumber();
-      final long w = PVectorM4LContract.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
       final V v = this.newVectorM4L(x, y, z, w);
 
       final V vr = this.newVectorM4L();
@@ -586,16 +586,16 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long y0 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long z0 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long w0 = PVectorM4LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
+      final long w0 = randomPositiveSmallNumber();
       final V v0 = this.newVectorM4L(x0, y0, z0, w0);
 
-      final long x1 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long y1 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long z1 = PVectorM4LContract.randomPositiveSmallNumber();
-      final long w1 = PVectorM4LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
+      final long w1 = randomPositiveSmallNumber();
       final V v1 = this.newVectorM4L(x1, y1, z1, w1);
 
       Assert.assertTrue(PVectorM4L.distance(c, v0, v1) >= 0L);
@@ -874,16 +874,16 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = PVectorM4LContract.randomPositiveNumber();
-      final long y0 = PVectorM4LContract.randomPositiveNumber();
-      final long z0 = PVectorM4LContract.randomPositiveNumber();
-      final long w0 = PVectorM4LContract.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
+      final long w0 = randomPositiveNumber();
       final V v0 = this.newVectorM4L(x0, y0, z0, w0);
 
-      final long x1 = PVectorM4LContract.randomPositiveNumber();
-      final long y1 = PVectorM4LContract.randomPositiveNumber();
-      final long z1 = PVectorM4LContract.randomPositiveNumber();
-      final long w1 = PVectorM4LContract.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
+      final long w1 = randomPositiveNumber();
       final V v1 = this.newVectorM4L(x1, y1, z1, w1);
 
       final V vr0 = this.newVectorM4L();
@@ -908,10 +908,10 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = PVectorM4LContract.randomPositiveSmallNumber();
-      final long y = PVectorM4LContract.randomPositiveSmallNumber();
-      final long z = PVectorM4LContract.randomPositiveSmallNumber();
-      final long w = PVectorM4LContract.randomPositiveSmallNumber();
+      final long x = randomPositiveSmallNumber();
+      final long y = randomPositiveSmallNumber();
+      final long z = randomPositiveSmallNumber();
+      final long w = randomPositiveSmallNumber();
       final V v = this.newVectorM4L(x, y, z, w);
 
       final long m = PVectorM4L.magnitude(v);
@@ -1044,10 +1044,10 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = PVectorM4LContract.randomPositiveNumber();
-      final long y = PVectorM4LContract.randomPositiveNumber();
-      final long z = PVectorM4LContract.randomPositiveNumber();
-      final long w = PVectorM4LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
       final V v = this.newVectorM4L(x, y, z, w);
 
       final V vr = this.newVectorM4L();
@@ -1080,10 +1080,10 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = PVectorM4LContract.randomPositiveNumber();
-      final long y = PVectorM4LContract.randomPositiveNumber();
-      final long z = PVectorM4LContract.randomPositiveNumber();
-      final long w = PVectorM4LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
       final V v = this.newVectorM4L(x, y, z, w);
 
       final V vr = this.newVectorM4L();
@@ -1117,16 +1117,16 @@ public abstract class PVectorM4LContract<T, V extends PVector4LType<T>>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = PVectorM4LContract.randomPositiveNumber();
-      final long y0 = PVectorM4LContract.randomPositiveNumber();
-      final long z0 = PVectorM4LContract.randomPositiveNumber();
-      final long w0 = PVectorM4LContract.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
+      final long w0 = randomPositiveNumber();
       final V v0 = this.newVectorM4L(x0, y0, z0, w0);
 
-      final long x1 = PVectorM4LContract.randomPositiveNumber();
-      final long y1 = PVectorM4LContract.randomPositiveNumber();
-      final long z1 = PVectorM4LContract.randomPositiveNumber();
-      final long w1 = PVectorM4LContract.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
+      final long w1 = randomPositiveNumber();
       final V v1 = this.newVectorM4L(x1, y1, z1, w1);
 
       final V vr0 = this.newVectorM4L();

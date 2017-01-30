@@ -28,6 +28,7 @@ import com.io7m.jtensors.parameterized.PMatrixM4x4F;
 import com.io7m.jtensors.parameterized.PMatrixReadable4x4FType;
 import com.io7m.jtensors.parameterized.PVectorI4F;
 import com.io7m.jtensors.parameterized.PVectorM4F;
+import com.io7m.jtensors.parameterized.PVectorReadable4FType;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
@@ -777,7 +778,7 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     m0.setR3C2F(15.0f);
     m0.setR3C3F(16.0f);
 
-    final PVectorI4F<T0> v = new PVectorI4F<T0>(
+    final PVectorReadable4FType<T0> v = new PVectorI4F<T0>(
       1.0f, 2.0f, 3.0f, 4.0f);
     final PVectorM4F<T1> out = new PVectorM4F<T1>();
     final PVectorM4F<T1> r = PMatrixM4x4F.multiplyVector4F(c, m0, v, out);

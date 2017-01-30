@@ -19,7 +19,9 @@ package com.io7m.jtensors.tests.parameterized;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jfunctional.Pair;
+import com.io7m.jtensors.VectorReadable2FType;
 import com.io7m.jtensors.parameterized.PVectorI2F;
+import com.io7m.jtensors.parameterized.PVectorReadable2FType;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
@@ -119,20 +121,20 @@ import org.junit.Test;
     final float q = z + 1.0f;
 
     {
-      final PVectorI2F<T> m0 = new PVectorI2F<T>(x, y);
-      final PVectorI2F<T> m1 = new PVectorI2F<T>(q, y);
+      final PVectorReadable2FType<T> m0 = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> m1 = new PVectorI2F<T>(q, y);
       Assert.assertFalse(PVectorI2F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI2F<T> m0 = new PVectorI2F<T>(x, y);
-      final PVectorI2F<T> m1 = new PVectorI2F<T>(x, q);
+      final PVectorReadable2FType<T> m0 = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> m1 = new PVectorI2F<T>(x, q);
       Assert.assertFalse(PVectorI2F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI2F<T> m0 = new PVectorI2F<T>(x, y);
-      final PVectorI2F<T> m1 = new PVectorI2F<T>(q, q);
+      final PVectorReadable2FType<T> m0 = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> m1 = new PVectorI2F<T>(q, q);
       Assert.assertFalse(PVectorI2F.almostEqual(ec, m0, m1));
     }
   }
@@ -145,9 +147,9 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI2F<T> v0 = new PVectorI2F<T>(x0, y0);
-      final PVectorI2F<T> v1 = new PVectorI2F<T>(x0, y0);
-      final PVectorI2F<T> v2 = new PVectorI2F<T>(x0, y0);
+      final PVectorReadable2FType<T> v0 = new PVectorI2F<T>(x0, y0);
+      final PVectorReadable2FType<T> v1 = new PVectorI2F<T>(x0, y0);
+      final PVectorReadable2FType<T> v2 = new PVectorI2F<T>(x0, y0);
 
       Assert.assertTrue(PVectorI2F.almostEqual(ec, v0, v1));
       Assert.assertTrue(PVectorI2F.almostEqual(ec, v1, v2));
@@ -187,7 +189,7 @@ import org.junit.Test;
 
   @Override @Test public void testCheckInterface()
   {
-    final PVectorI2F<T> v = new PVectorI2F<T>(3.0f, 5.0f);
+    final VectorReadable2FType v = new PVectorI2F<T>(3.0f, 5.0f);
 
     Assert.assertTrue(v.getXF() == v.getXF());
     Assert.assertTrue(v.getYF() == v.getYF());
@@ -202,7 +204,7 @@ import org.junit.Test;
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
-      final PVectorI2F<T> v = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> v = new PVectorI2F<T>(x, y);
 
       Assert.assertTrue(
         PVectorI2F.clampMaximumByPVector(v, maximum).getXF()
@@ -222,7 +224,7 @@ import org.junit.Test;
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
-      final PVectorI2F<T> v = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> v = new PVectorI2F<T>(x, y);
 
       Assert.assertTrue(
         PVectorI2F.clampMinimumByPVector(v, minimum).getXF()
@@ -246,7 +248,7 @@ import org.junit.Test;
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI2F<T> v = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> v = new PVectorI2F<T>(x, y);
 
       Assert.assertTrue(
         PVectorI2F.clampByPVector(v, minimum, maximum).getXF()
@@ -270,7 +272,7 @@ import org.junit.Test;
 
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI2F<T> v = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> v = new PVectorI2F<T>(x, y);
 
       Assert.assertTrue(PVectorI2F.clampMaximum(v, maximum).getXF() <= maximum);
       Assert.assertTrue(PVectorI2F.clampMaximum(v, maximum).getYF() <= maximum);
@@ -284,7 +286,7 @@ import org.junit.Test;
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
-      final PVectorI2F<T> v = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> v = new PVectorI2F<T>(x, y);
 
       Assert.assertTrue(PVectorI2F.clampMinimum(v, minimum).getXF() >= minimum);
       Assert.assertTrue(PVectorI2F.clampMinimum(v, minimum).getYF() >= minimum);
@@ -299,7 +301,7 @@ import org.junit.Test;
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI2F<T> v = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> v = new PVectorI2F<T>(x, y);
 
       Assert.assertTrue(
         PVectorI2F.clamp(v, minimum, maximum).getXF() <= maximum);
@@ -322,7 +324,7 @@ import org.junit.Test;
       final float y = (float) Math.random();
 
       final PVectorI2F<T> v0 = new PVectorI2F<T>(x, y);
-      final PVectorI2F<T> v1 = new PVectorI2F<T>(v0);
+      final VectorReadable2FType v1 = new PVectorI2F<T>(v0);
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.getXF(), x));
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.getYF(), y));
@@ -334,7 +336,7 @@ import org.junit.Test;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PVectorI2F<T> v = new PVectorI2F<T>();
+    final VectorReadable2FType v = new PVectorI2F<T>();
     Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.getXF(), 0.0f));
     Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.getYF(), 0.0f));
   }
@@ -344,8 +346,8 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI2F<T> v0 = new PVectorI2F<T>(0.0f, 1.0f);
-    final PVectorI2F<T> v1 = new PVectorI2F<T>(0.0f, 0.0f);
+    final PVectorReadable2FType<T> v0 = new PVectorI2F<T>(0.0f, 1.0f);
+    final PVectorReadable2FType<T> v1 = new PVectorI2F<T>(0.0f, 0.0f);
 
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
@@ -357,11 +359,11 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI2F<T> v0 = new PVectorI2F<T>(x0, y0);
+      final PVectorReadable2FType<T> v0 = new PVectorI2F<T>(x0, y0);
 
       final float x1 = (float) (Math.random() * Float.MAX_VALUE);
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI2F<T> v1 = new PVectorI2F<T>(x1, y1);
+      final PVectorReadable2FType<T> v1 = new PVectorI2F<T>(x1, y1);
 
       Assert.assertTrue(PVectorI2F.distance(v0, v1) >= 0.0f);
     }
@@ -398,11 +400,11 @@ import org.junit.Test;
 
   @Override @Test public void testDotProductPerpendicular()
   {
-    final PVectorI2F<T> vpx = new PVectorI2F<T>(1.0f, 0.0f);
-    final PVectorI2F<T> vmx = new PVectorI2F<T>(-1.0f, 0.0f);
+    final PVectorReadable2FType<T> vpx = new PVectorI2F<T>(1.0f, 0.0f);
+    final PVectorReadable2FType<T> vmx = new PVectorI2F<T>(-1.0f, 0.0f);
 
-    final PVectorI2F<T> vpy = new PVectorI2F<T>(0.0f, 1.0f);
-    final PVectorI2F<T> vmy = new PVectorI2F<T>(0.0f, -1.0f);
+    final PVectorReadable2FType<T> vpy = new PVectorI2F<T>(0.0f, 1.0f);
+    final PVectorReadable2FType<T> vmy = new PVectorI2F<T>(0.0f, -1.0f);
 
     Assert.assertTrue(PVectorI2F.dotProduct(vpx, vpy) == 0.0f);
     Assert.assertTrue(PVectorI2F.dotProduct(vmx, vmy) == 0.0f);
@@ -416,7 +418,7 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) Math.random();
       final float y = (float) Math.random();
-      final PVectorI2F<T> q = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> q = new PVectorI2F<T>(x, y);
       final double dp = PVectorI2F.dotProduct(q, q);
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
@@ -431,7 +433,7 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) Math.random();
       final float y = (float) Math.random();
-      final PVectorI2F<T> q = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> q = new PVectorI2F<T>(x, y);
 
       final double ms = PVectorI2F.magnitudeSquared(q);
       final double dp = PVectorI2F.dotProduct(q, q);
@@ -562,7 +564,7 @@ import org.junit.Test;
   @Override @Test public void testInitializeReadable()
   {
     final PVectorI2F<T> v0 = new PVectorI2F<T>(1.0f, 2.0f);
-    final PVectorI2F<T> v1 = new PVectorI2F<T>(v0);
+    final VectorReadable2FType v1 = new PVectorI2F<T>(v0);
 
     Assert.assertTrue(v0.getXF() == v1.getXF());
     Assert.assertTrue(v0.getYF() == v1.getYF());
@@ -576,11 +578,11 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI2F<T> v0 = new PVectorI2F<T>(x0, y0);
+      final PVectorReadable2FType<T> v0 = new PVectorI2F<T>(x0, y0);
 
       final float x1 = (float) (Math.random() * Float.MAX_VALUE);
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI2F<T> v1 = new PVectorI2F<T>(x1, y1);
+      final PVectorReadable2FType<T> v1 = new PVectorI2F<T>(x1, y1);
 
       Assert.assertTrue(
         PVectorI2F.almostEqual(
@@ -596,7 +598,7 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (1.0 + (Math.random() * Float.MAX_VALUE));
       final float y = (float) (1.0 + (Math.random() * Float.MAX_VALUE));
-      final PVectorI2F<T> v = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> v = new PVectorI2F<T>(x, y);
 
       final double m = PVectorI2F.magnitude(v);
       Assert.assertTrue(m > 0.0);
@@ -611,7 +613,7 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) Math.random();
       final float y = (float) Math.random();
-      final PVectorI2F<T> v = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> v = new PVectorI2F<T>(x, y);
 
       final PVectorI2F<T> vr = PVectorI2F.normalize(v);
       Assert.assertNotSame(v, vr);
@@ -627,7 +629,7 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI2F<T> v = new PVectorI2F<T>(0.0f, 0.0f);
+    final PVectorReadable2FType<T> v = new PVectorI2F<T>(0.0f, 0.0f);
     final PVectorI2F<T> vr = PVectorI2F.normalize(v);
     final double m = PVectorI2F.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
@@ -638,14 +640,14 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI2F<T> v = new PVectorI2F<T>(1.0f, 0.0f);
+    final PVectorReadable2FType<T> v = new PVectorI2F<T>(1.0f, 0.0f);
     final double m = PVectorI2F.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final PVectorI2F<T> v = new PVectorI2F<T>(8.0f, 0.0f);
+    final PVectorReadable2FType<T> v = new PVectorI2F<T>(8.0f, 0.0f);
 
     {
       final double p = PVectorI2F.dotProduct(v, v);
@@ -662,7 +664,7 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI2F<T> v = new PVectorI2F<T>(0.0f, 0.0f);
+    final PVectorReadable2FType<T> v = new PVectorI2F<T>(0.0f, 0.0f);
     final double m = PVectorI2F.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
@@ -672,7 +674,7 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI2F<T> v0 = new PVectorI2F<T>(8.0f, 0.0f);
+    final PVectorReadable2FType<T> v0 = new PVectorI2F<T>(8.0f, 0.0f);
     final double dp = PVectorI2F.dotProduct(v0, v0);
     final double ms = PVectorI2F.magnitudeSquared(v0);
     final double mss = Math.sqrt(ms);
@@ -689,7 +691,7 @@ import org.junit.Test;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PVectorI2F<T> q = new PVectorI2F<T>(0, 0);
+    final PVectorReadable2FType<T> q = new PVectorI2F<T>(0, 0);
     final PVectorI2F<T> qr = PVectorI2F.normalize(q);
 
     Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.getXF()));
@@ -698,8 +700,8 @@ import org.junit.Test;
 
   @Override @Test public void testOrthonormalize()
   {
-    final PVectorI2F<T> v0 = new PVectorI2F<T>(0, 1);
-    final PVectorI2F<T> v1 = new PVectorI2F<T>(0.5f, 0.5f);
+    final PVectorReadable2FType<T> v0 = new PVectorI2F<T>(0, 1);
+    final PVectorReadable2FType<T> v1 = new PVectorI2F<T>(0.5f, 0.5f);
     final Pair<PVectorI2F<T>, PVectorI2F<T>> on =
       PVectorI2F.orthoNormalize(v0, v1);
 
@@ -710,15 +712,15 @@ import org.junit.Test;
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final PVectorI2F<T> p = new PVectorI2F<T>(1.0f, 0.0f);
-      final PVectorI2F<T> q = new PVectorI2F<T>(0.0f, 1.0f);
+      final PVectorReadable2FType<T> p = new PVectorI2F<T>(1.0f, 0.0f);
+      final PVectorReadable2FType<T> q = new PVectorI2F<T>(0.0f, 1.0f);
       final PVectorI2F<T> r = PVectorI2F.projection(p, q);
       Assert.assertTrue(PVectorI2F.magnitude(r) == 0.0f);
     }
 
     {
-      final PVectorI2F<T> p = new PVectorI2F<T>(-1.0f, 0.0f);
-      final PVectorI2F<T> q = new PVectorI2F<T>(0.0f, 1.0f);
+      final PVectorReadable2FType<T> p = new PVectorI2F<T>(-1.0f, 0.0f);
+      final PVectorReadable2FType<T> q = new PVectorI2F<T>(0.0f, 1.0f);
       final PVectorI2F<T> r = PVectorI2F.projection(p, q);
       Assert.assertTrue(PVectorI2F.magnitude(r) == 0.0f);
     }
@@ -753,7 +755,7 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI2F<T> v = new PVectorI2F<T>(x, y);
+      final PVectorReadable2FType<T> v = new PVectorI2F<T>(x, y);
 
       final PVectorI2F<T> vr = PVectorI2F.scale(v, 0.0f);
 
@@ -765,7 +767,7 @@ import org.junit.Test;
   @Override @Test public void testString()
   {
     final PVectorI2F<T> v = new PVectorI2F<T>(0.0f, 1.0f);
-    Assert.assertTrue(v.toString().equals("[PVectorI2F 0.0 1.0]"));
+    Assert.assertTrue("[PVectorI2F 0.0 1.0]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()

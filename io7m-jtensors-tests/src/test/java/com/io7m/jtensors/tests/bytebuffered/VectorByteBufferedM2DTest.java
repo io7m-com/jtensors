@@ -53,7 +53,7 @@ public final class VectorByteBufferedM2DTest
 
   @Override protected Logger logger()
   {
-    return VectorByteBufferedM2DTest.LOG;
+    return LOG;
   }
 
   @Override protected VectorByteBuffered2DType newVectorM2D(

@@ -22,6 +22,7 @@ import com.io7m.jtensors.VectorI4F;
 import com.io7m.jtensors.VectorM2F;
 import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorM4F;
+import com.io7m.jtensors.VectorReadable4FType;
 import com.io7m.jtensors.parameterized.PMatrixI4x4F;
 import com.io7m.jtensors.parameterized.PMatrixReadable4x4FType;
 import org.junit.Assert;
@@ -61,13 +62,13 @@ public abstract class PMatrixReadable4x4FContract<T0, T1, T extends
 
   @Test public final void testGetCorrect()
   {
-    final VectorI4F c0 = new VectorI4F(
+    final VectorReadable4FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
-    final VectorI4F c1 = new VectorI4F(
+    final VectorReadable4FType c1 = new VectorI4F(
       2.0f, 20.0f, 200.0f, 2000.0f);
-    final VectorI4F c2 = new VectorI4F(
+    final VectorReadable4FType c2 = new VectorI4F(
       3.0f, 30.0f, 300.0f, 3000.0f);
-    final VectorI4F c3 = new VectorI4F(
+    final VectorReadable4FType c3 = new VectorI4F(
       4.0f, 40.0f, 400.0f, 4000.0f);
     final PMatrixI4x4F<T0, T1> m0 = PMatrixI4x4F.newFromColumns(c0, c1, c2, c3);
 
@@ -119,13 +120,13 @@ public abstract class PMatrixReadable4x4FContract<T0, T1, T extends
 
   @Test public final void testGetRow4Correct()
   {
-    final VectorI4F c0 = new VectorI4F(
+    final VectorReadable4FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
-    final VectorI4F c1 = new VectorI4F(
+    final VectorReadable4FType c1 = new VectorI4F(
       2.0f, 20.0f, 200.0f, 2000.0f);
-    final VectorI4F c2 = new VectorI4F(
+    final VectorReadable4FType c2 = new VectorI4F(
       3.0f, 30.0f, 300.0f, 3000.0f);
-    final VectorI4F c3 = new VectorI4F(
+    final VectorReadable4FType c3 = new VectorI4F(
       4.0f, 40.0f, 400.0f, 4000.0f);
     final PMatrixI4x4F<T0, T1> m0 = PMatrixI4x4F.newFromColumns(c0, c1, c2, c3);
 
@@ -214,13 +215,13 @@ public abstract class PMatrixReadable4x4FContract<T0, T1, T extends
 
   @Test public final void testGetRow3Correct()
   {
-    final VectorI4F c0 = new VectorI4F(
+    final VectorReadable4FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
-    final VectorI4F c1 = new VectorI4F(
+    final VectorReadable4FType c1 = new VectorI4F(
       2.0f, 20.0f, 200.0f, 2000.0f);
-    final VectorI4F c2 = new VectorI4F(
+    final VectorReadable4FType c2 = new VectorI4F(
       3.0f, 30.0f, 300.0f, 3000.0f);
-    final VectorI4F c3 = new VectorI4F(
+    final VectorReadable4FType c3 = new VectorI4F(
       4.0f, 40.0f, 400.0f, 4000.0f);
     final PMatrixI4x4F<T0, T1> m0 = PMatrixI4x4F.newFromColumns(c0, c1, c2, c3);
 
@@ -301,13 +302,13 @@ public abstract class PMatrixReadable4x4FContract<T0, T1, T extends
 
   @Test public final void testGetRow2Correct()
   {
-    final VectorI4F c0 = new VectorI4F(
+    final VectorReadable4FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
-    final VectorI4F c1 = new VectorI4F(
+    final VectorReadable4FType c1 = new VectorI4F(
       2.0f, 20.0f, 200.0f, 2000.0f);
-    final VectorI4F c2 = new VectorI4F(
+    final VectorReadable4FType c2 = new VectorI4F(
       3.0f, 30.0f, 300.0f, 3000.0f);
-    final VectorI4F c3 = new VectorI4F(
+    final VectorReadable4FType c3 = new VectorI4F(
       4.0f, 40.0f, 400.0f, 4000.0f);
     final PMatrixI4x4F<T0, T1> m0 = PMatrixI4x4F.newFromColumns(c0, c1, c2, c3);
 

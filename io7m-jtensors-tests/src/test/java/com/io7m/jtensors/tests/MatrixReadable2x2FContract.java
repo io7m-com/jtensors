@@ -22,6 +22,7 @@ import com.io7m.jtensors.MatrixI2x2F;
 import com.io7m.jtensors.MatrixReadable2x2FType;
 import com.io7m.jtensors.VectorI4F;
 import com.io7m.jtensors.VectorM2F;
+import com.io7m.jtensors.VectorReadable2FType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -41,9 +42,9 @@ public abstract class MatrixReadable2x2FContract<T extends
 
   @Test public final void testGetCorrect()
   {
-    final VectorI4F c0 = new VectorI4F(
+    final VectorReadable2FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
-    final VectorI4F c1 = new VectorI4F(
+    final VectorReadable2FType c1 = new VectorI4F(
       2.0f, 20.0f, 200.0f, 2000.0f);
     final MatrixI2x2F m0 = MatrixI2x2F.newFromColumns(c0, c1);
 
@@ -67,9 +68,9 @@ public abstract class MatrixReadable2x2FContract<T extends
 
   @Test public final void testGetRow2Correct()
   {
-    final VectorI4F c0 = new VectorI4F(
+    final VectorReadable2FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
-    final VectorI4F c1 = new VectorI4F(
+    final VectorReadable2FType c1 = new VectorI4F(
       2.0f, 20.0f, 200.0f, 2000.0f);
     final VectorI4F c2 = new VectorI4F(
       3.0f, 30.0f, 300.0f, 3000.0f);

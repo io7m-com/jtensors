@@ -31,7 +31,11 @@ import com.io7m.jtensors.VectorI3I;
 import com.io7m.jtensors.VectorI4F;
 import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorM4F;
+import com.io7m.jtensors.VectorReadable2FType;
+import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3FType;
+import com.io7m.jtensors.VectorReadable3IType;
+import com.io7m.jtensors.VectorReadable4FType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -45,8 +49,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
   private static final VectorReadable3FType AXIS_Z = new VectorI3F(
     0.0F, 0.0F, 1.0F);
 
+  @Override
   protected abstract T newMatrix();
 
+  @Override
   protected abstract T newMatrixFrom(MatrixReadable4x4FType m);
 
   private void isRotationMatrixX(
@@ -193,7 +199,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
   @Test public final void testTranslationMakeEquivalent2Integer()
   {
     final T m = this.newMatrix();
-    final VectorI2I v = new VectorI2I(1, 2);
+    final VectorReadable2IType v = new VectorI2I(1, 2);
 
     {
       final T r = this.newMatrix();
@@ -392,7 +398,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
   @Test public final void testTranslationMakeEquivalent2Real()
   {
     final T m = this.newMatrix();
-    final VectorI2F v = new VectorI2F(1.0f, 2.0f);
+    final VectorReadable2FType v = new VectorI2F(1.0f, 2.0f);
 
     {
       final T r = this.newMatrix();
@@ -469,6 +475,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(mr);
   }
 
+  @Override
   protected abstract void checkDirectBufferInvariants(final T m0);
 
   @Test public final void testAddMutate()
@@ -1870,9 +1877,9 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     final MatrixM4x4F.ContextMM4F mc = new MatrixM4x4F.ContextMM4F();
     final T m = this.newMatrix();
-    final VectorI3F origin = new VectorI3F(0.0F, 0.0F, 0.0F);
-    final VectorI3F target = new VectorI3F(-1.0F, 0.0F, 0.0F);
-    final VectorI3F axis = new VectorI3F(0.0F, 1.0F, 0.0F);
+    final VectorReadable3FType origin = new VectorI3F(0.0F, 0.0F, 0.0F);
+    final VectorReadable3FType target = new VectorI3F(-1.0F, 0.0F, 0.0F);
+    final VectorReadable3FType axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
     
@@ -1880,8 +1887,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 0));
@@ -1905,8 +1912,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 3));
@@ -1916,8 +1923,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(3, 0));
@@ -1937,9 +1944,9 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     final MatrixM4x4F.ContextMM4F mc = new MatrixM4x4F.ContextMM4F();
     final T m = this.newMatrix();
-    final VectorI3F origin = new VectorI3F(0.0F, 0.0F, 0.0F);
-    final VectorI3F target = new VectorI3F(0.0F, 0.0F, -1.0F);
-    final VectorI3F axis = new VectorI3F(0.0F, 1.0F, 0.0F);
+    final VectorReadable3FType origin = new VectorI3F(0.0F, 0.0F, 0.0F);
+    final VectorReadable3FType target = new VectorI3F(0.0F, 0.0F, -1.0F);
+    final VectorReadable3FType axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
     
@@ -1947,8 +1954,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.getRowColumnF(0, 0));
@@ -1972,8 +1979,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.getRowColumnF(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 3));
@@ -1983,8 +1990,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(3, 0));
@@ -2004,9 +2011,9 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     final MatrixM4x4F.ContextMM4F mc = new MatrixM4x4F.ContextMM4F();
     final T m = this.newMatrix();
-    final VectorI3F origin = new VectorI3F(0.0F, 0.0F, 0.0F);
-    final VectorI3F target = new VectorI3F(1.0F, 0.0F, 0.0F);
-    final VectorI3F axis = new VectorI3F(0.0F, 1.0F, 0.0F);
+    final VectorReadable3FType origin = new VectorI3F(0.0F, 0.0F, 0.0F);
+    final VectorReadable3FType target = new VectorI3F(1.0F, 0.0F, 0.0F);
+    final VectorReadable3FType axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
     
@@ -2014,8 +2021,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 0));
@@ -2039,8 +2046,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 3));
@@ -2050,8 +2057,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(3, 0));
@@ -2071,9 +2078,9 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     final MatrixM4x4F.ContextMM4F mc = new MatrixM4x4F.ContextMM4F();
     final T m = this.newMatrix();
-    final VectorI3F origin = new VectorI3F(0.0F, 0.0F, 0.0F);
-    final VectorI3F target = new VectorI3F(0.0F, 0.0F, 1.0F);
-    final VectorI3F axis = new VectorI3F(0.0F, 1.0F, 0.0F);
+    final VectorReadable3FType origin = new VectorI3F(0.0F, 0.0F, 0.0F);
+    final VectorReadable3FType target = new VectorI3F(0.0F, 0.0F, 1.0F);
+    final VectorReadable3FType axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
     
@@ -2081,8 +2088,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, -1.0f, m.getRowColumnF(0, 0));
@@ -2106,8 +2113,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, -1.0f, m.getRowColumnF(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 3));
@@ -2117,8 +2124,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(3, 0));
@@ -2138,11 +2145,11 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     final MatrixM4x4F.ContextMM4F mc = new MatrixM4x4F.ContextMM4F();
     final T m = this.newMatrix();
-    final VectorI3F origin = new VectorI3F(
+    final VectorReadable3FType origin = new VectorI3F(
       (float) (20 + 0), (float) (30 + 0), (float) (40 + 0));
-    final VectorI3F target = new VectorI3F(
+    final VectorReadable3FType target = new VectorI3F(
       (float) (20 + 0), (float) (30 + 0), (float) (40 + -1));
-    final VectorI3F axis = new VectorI3F(0.0F, 1.0F, 0.0F);
+    final VectorReadable3FType axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
     
@@ -2150,8 +2157,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.getRowColumnF(0, 0));
@@ -2175,8 +2182,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.getRowColumnF(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, -20.0f, m.getRowColumnF(0, 3));
@@ -2186,8 +2193,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, -40.0f, m.getRowColumnF(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(3, 0));
@@ -2382,7 +2389,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     m0.setR3C2F(15.0f);
     m0.setR3C3F(16.0f);
 
-    final VectorI4F v = new VectorI4F(1.0f, 2.0f, 3.0f, 4.0f);
+    final VectorReadable4FType v = new VectorI4F(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorM4F out = new VectorM4F();
 
     this.checkDirectBufferInvariants(m0);
@@ -2423,7 +2430,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     this.checkDirectBufferInvariants(m0);
 
-    final VectorI4F v = new VectorI4F(1.0f, 2.0f, 3.0f, 4.0f);
+    final VectorReadable4FType v = new VectorI4F(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorM4F out = new VectorM4F();
     final MatrixM4x4F.ContextMM4F context = new MatrixM4x4F.ContextMM4F();
 
@@ -2576,11 +2583,11 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       TestUtilities.getSingleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM4F v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
+    final VectorReadable4FType v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
     final VectorM4F v_got = new VectorM4F();
-    final VectorM4F v_exp = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
+    final VectorReadable4FType v_exp = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
 
-    MatrixM4x4F.makeRotation(0.0, Matrix4x4FContract.AXIS_X, m);
+    MatrixM4x4F.makeRotation(0.0, AXIS_X, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2602,11 +2609,11 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       TestUtilities.getSingleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM4F v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
+    final VectorReadable4FType v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
     final VectorM4F v_got = new VectorM4F();
-    final VectorM4F v_exp = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
+    final VectorReadable4FType v_exp = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
 
-    MatrixM4x4F.makeRotation(0.0, Matrix4x4FContract.AXIS_Y, m);
+    MatrixM4x4F.makeRotation(0.0, AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2628,11 +2635,11 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       TestUtilities.getSingleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM4F v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
+    final VectorReadable4FType v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
     final VectorM4F v_got = new VectorM4F();
-    final VectorM4F v_exp = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
+    final VectorReadable4FType v_exp = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
 
-    MatrixM4x4F.makeRotation(0.0, Matrix4x4FContract.AXIS_Z, m);
+    MatrixM4x4F.makeRotation(0.0, AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2658,19 +2665,19 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     final T m = this.newMatrix();
     final VectorM4F v_got = new VectorM4F();
-    final VectorM4F v_in = new VectorM4F(0.0F, 1.0F, 0.0F, 1.0F);
+    final VectorReadable4FType v_in = new VectorM4F(0.0F, 1.0F, 0.0F, 1.0F);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
-    final VectorM4F v_exp =
+    final VectorReadable3FType v_exp =
       new VectorM4F(0.0F, 6.1232339957367E-17f, 1.0F, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(90.0), Matrix4x4FContract.AXIS_X, m);
+      Math.toRadians(90.0), AXIS_X, m);
     
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
@@ -2702,19 +2709,19 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     final T m = this.newMatrix();
     final VectorM4F v_got = new VectorM4F();
-    final VectorM4F v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
+    final VectorReadable4FType v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
-    final VectorM4F v_exp =
+    final VectorReadable3FType v_exp =
       new VectorM4F(-1.0F, 0.0F, -6.1232339957367E-17f, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(90.0), Matrix4x4FContract.AXIS_Y, m);
+      Math.toRadians(90.0), AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2745,12 +2752,12 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     final T m = this.newMatrix();
     final VectorM4F v_got = new VectorM4F();
-    final VectorM4F v_in = new VectorM4F(0.0F, 1.0F, 0.0F, 1.0F);
-    final VectorM4F v_exp =
+    final VectorReadable4FType v_in = new VectorM4F(0.0F, 1.0F, 0.0F, 1.0F);
+    final VectorReadable3FType v_exp =
       new VectorM4F(-1.0F, 6.123233995736766E-17f, 0.0F, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(90.0), Matrix4x4FContract.AXIS_Z, m);
+      Math.toRadians(90.0), AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2781,19 +2788,19 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     final T m = this.newMatrix();
     final VectorM4F v_got = new VectorM4F();
-    final VectorM4F v_in = new VectorM4F(0.0F, 1.0F, 0.0F, 1.0F);
+    final VectorReadable4FType v_in = new VectorM4F(0.0F, 1.0F, 0.0F, 1.0F);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
-    final VectorM4F v_exp =
+    final VectorReadable3FType v_exp =
       new VectorM4F(0.0F, 6.1232339957367E-17f, -1.0F, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(-90.0), Matrix4x4FContract.AXIS_X, m);
+      Math.toRadians(-90.0), AXIS_X, m);
     
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
@@ -2825,19 +2832,19 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     final T m = this.newMatrix();
     final VectorM4F v_got = new VectorM4F();
-    final VectorM4F v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
+    final VectorReadable4FType v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
-    final VectorM4F v_exp =
+    final VectorReadable3FType v_exp =
       new VectorM4F(1.0F, 0.0F, -6.1232339957367E-17f, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(-90.0), Matrix4x4FContract.AXIS_Y, m);
+      Math.toRadians(-90.0), AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2868,12 +2875,12 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     final T m = this.newMatrix();
     final VectorM4F v_got = new VectorM4F();
-    final VectorM4F v_in = new VectorM4F(0.0F, 1.0F, 0.0F, 1.0F);
-    final VectorM4F v_exp =
+    final VectorReadable4FType v_in = new VectorM4F(0.0F, 1.0F, 0.0F, 1.0F);
+    final VectorReadable3FType v_exp =
       new VectorM4F(1.0F, 6.123233995736766E-17f, 0.0F, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(-90.0), Matrix4x4FContract.AXIS_Z, m);
+      Math.toRadians(-90.0), AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2897,7 +2904,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     {
       final T r = this.newMatrix();
       MatrixM4x4F.makeRotation(
-        Math.toRadians(45.0), Matrix4x4FContract.AXIS_Y, r);
+        Math.toRadians(45.0), AXIS_Y, r);
 
       this.checkDirectBufferInvariants(r);
 
@@ -2917,7 +2924,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     {
       final T r = this.newMatrix();
       MatrixM4x4F.makeRotation(
-        Math.toRadians(45.0), Matrix4x4FContract.AXIS_Z, r);
+        Math.toRadians(45.0), AXIS_Z, r);
 
       this.checkDirectBufferInvariants(r);
 
@@ -3505,10 +3512,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final MatrixM4x4F.ContextMM4F s4 = new MatrixM4x4F.ContextMM4F();
     final Matrix3x3FType m3 = MatrixHeapArrayM3x3F.newMatrix();
     final T m4 = this.newMatrix();
-    final VectorI3F v = new VectorI3F(3.0f, 7.0f, 0.0f);
-    final VectorM3F v3i = new VectorM3F(1.0F, 1.0F, 1.0F);
+    final VectorReadable3FType v = new VectorI3F(3.0f, 7.0f, 0.0f);
+    final VectorReadable3FType v3i = new VectorM3F(1.0F, 1.0F, 1.0F);
     final VectorM3F v3o = new VectorM3F();
-    final VectorM4F w3i = new VectorM4F(1.0F, 1.0F, 1.0F, 1.0F);
+    final VectorReadable4FType w3i = new VectorM4F(1.0F, 1.0F, 1.0F, 1.0F);
     final VectorM4F w3o = new VectorM4F();
 
     MatrixM3x3F.makeTranslation2F(v, m3);
@@ -3524,7 +3531,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
   @Test public final void testTranslationMakeEquivalent3Integer()
   {
     final T m = this.newMatrix();
-    final VectorI3I v = new VectorI3I(1, 2, 3);
+    final VectorReadable3IType v = new VectorI3I(1, 2, 3);
 
     {
       final T r = this.newMatrix();
@@ -3565,7 +3572,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
   @Test public final void testTranslationMakeEquivalent3Real()
   {
     final T m = this.newMatrix();
-    final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
+    final VectorReadable3FType v = new VectorI3F(1.0f, 2.0f, 3.0f);
 
     {
       final T r = this.newMatrix();

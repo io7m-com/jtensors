@@ -113,7 +113,7 @@ public final class VectorByteBufferedM2I extends ByteBuffered
     final int i,
     final int x)
   {
-    this.buffer.putInt(VectorByteBufferedM2I.getByteOffsetForIndex(o, i), x);
+    this.buffer.putInt(getByteOffsetForIndex(o, i), x);
   }
 
   private int getAtOffsetAndIndex(
@@ -121,7 +121,7 @@ public final class VectorByteBufferedM2I extends ByteBuffered
     final int i)
   {
     return this.buffer.getInt(
-      VectorByteBufferedM2I.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public int getYI()
@@ -184,9 +184,6 @@ public final class VectorByteBufferedM2I extends ByteBuffered
       return false;
     }
     final VectorByteBufferedM2I other = (VectorByteBufferedM2I) obj;
-    if (this.getXI() != other.getXI()) {
-      return false;
-    }
-    return this.getYI() == other.getYI();
+    return this.getXI() == other.getXI() && this.getYI() == other.getYI();
   }
 }

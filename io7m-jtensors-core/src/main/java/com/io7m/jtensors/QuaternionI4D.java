@@ -29,8 +29,9 @@ import net.jcip.annotations.Immutable;
  * from multiple threads. </p>
  */
 
-@EqualityStructural @Immutable public final class QuaternionI4D
-  implements QuaternionReadable4DType
+@EqualityStructural
+@Immutable
+public final class QuaternionI4D implements QuaternionReadable4DType
 {
   /**
    * The "identity" quaternion, [0.0 0.0 0.0 1.0]
@@ -198,9 +199,9 @@ import net.jcip.annotations.Immutable;
     final QuaternionReadable4DType q1,
     final double alpha)
   {
-    final QuaternionReadable4DType w0 = QuaternionI4D.scale(q0, 1.0 - alpha);
-    final QuaternionReadable4DType w1 = QuaternionI4D.scale(q1, alpha);
-    return QuaternionI4D.add(w0, w1);
+    final QuaternionReadable4DType w0 = scale(q0, 1.0 - alpha);
+    final QuaternionReadable4DType w1 = scale(q1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -268,7 +269,7 @@ import net.jcip.annotations.Immutable;
     final MatrixM3x3D.ContextMM3D mc = context.m_context;
 
     MatrixM3x3D.lookAt(mc, origin, target, up, m, t);
-    return QuaternionI4D.makeFromRotationMatrix3x3(m);
+    return makeFromRotationMatrix3x3(m);
   }
 
   /**
@@ -284,7 +285,7 @@ import net.jcip.annotations.Immutable;
   public static double magnitude(
     final QuaternionReadable4DType q)
   {
-    return Math.sqrt(QuaternionI4D.magnitudeSquared(q));
+    return Math.sqrt(magnitudeSquared(q));
   }
 
   /**
@@ -298,7 +299,7 @@ import net.jcip.annotations.Immutable;
   public static double magnitudeSquared(
     final QuaternionReadable4DType q)
   {
-    return QuaternionI4D.dotProduct(q, q);
+    return dotProduct(q, q);
   }
 
   /**
@@ -415,7 +416,7 @@ import net.jcip.annotations.Immutable;
     final double m21 = m.getR2C1D();
     final double m22 = m.getR2C2D();
 
-    /**
+    /*
      * Explicitly ignore the bottom right element of the matrix, as this
      * affects the magnitude of the created quaternion.
      */
@@ -663,10 +664,10 @@ import net.jcip.annotations.Immutable;
   public static QuaternionI4D normalize(
     final QuaternionReadable4DType q)
   {
-    final double m = QuaternionI4D.magnitudeSquared(q);
+    final double m = magnitudeSquared(q);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return QuaternionI4D.scale(q, reciprocal);
+      return scale(q, reciprocal);
     }
     return new QuaternionI4D(q);
   }
@@ -708,7 +709,8 @@ import net.jcip.annotations.Immutable;
     return new QuaternionI4D(x, y, z, w);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -721,39 +723,38 @@ import net.jcip.annotations.Immutable;
       return false;
     }
     final QuaternionI4D other = (QuaternionI4D) obj;
-    if (Double.doubleToLongBits(this.w) != Double.doubleToLongBits(other.w)) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
+    return Double.doubleToLongBits(this.w) == Double.doubleToLongBits(other.w)
+      && Double.doubleToLongBits(this.x) == Double.doubleToLongBits(other.x)
+      && Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y)
+      && Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
   }
 
-  @Override public double getWD()
+  @Override
+  public double getWD()
   {
     return this.w;
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public double getZD()
+  @Override
+  public double getZD()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -769,9 +770,10 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
-    final StringBuilder builder = new StringBuilder();
+    final StringBuilder builder = new StringBuilder(64);
     builder.append("[QuaternionI4D ");
     builder.append(this.x);
     builder.append(" ");
@@ -781,9 +783,7 @@ import net.jcip.annotations.Immutable;
     builder.append(" ");
     builder.append(this.w);
     builder.append("]");
-    final String r = builder.toString();
-    assert r != null;
-    return r;
+    return builder.toString();
   }
 
   /**
@@ -807,9 +807,10 @@ import net.jcip.annotations.Immutable;
   {
     private final MatrixM3x3D.ContextMM3D m_context =
       new MatrixM3x3D.ContextMM3D();
-    private final Matrix3x3DType          m3a       =
+    private final Matrix3x3DType m3a =
       MatrixHeapArrayM3x3D.newMatrix();
-    private final VectorM3D               v3a       = new VectorM3D();
+    private final VectorM3D v3a =
+      new VectorM3D();
 
     /**
      * Construct a new context.

@@ -91,7 +91,7 @@ public final class MatrixM2x2F
     final M m0,
     final MatrixReadable2x2FType m1)
   {
-    return MatrixM2x2F.add(m0, m1, m0);
+    return add(m0, m1, m0);
   }
 
   /**
@@ -123,11 +123,11 @@ public final class MatrixM2x2F
     final float r,
     final M out)
   {
-    return MatrixM2x2F.addRowScaledUnsafe(
+    return addRowScaledUnsafe(
       m,
-      MatrixM2x2F.checkRow(row_a),
-      MatrixM2x2F.checkRow(row_b),
-      MatrixM2x2F.checkRow(row_c),
+      checkRow(row_a),
+      checkRow(row_b),
+      checkRow(row_c),
       (double) r,
       c.v2a,
       c.v2b,
@@ -162,7 +162,7 @@ public final class MatrixM2x2F
     final int row_c,
     final float r)
   {
-    return MatrixM2x2F.addRowScaled(c, m, row_a, row_b, row_c, r, m);
+    return addRowScaled(c, m, row_a, row_b, row_c, r, m);
   }
 
   private static <M extends MatrixWritable2x2FType> M addRowScaledUnsafe(
@@ -247,10 +247,10 @@ public final class MatrixM2x2F
     final int row_b,
     final M out)
   {
-    return MatrixM2x2F.exchangeRowsUnsafe(
+    return exchangeRowsUnsafe(
       m,
-      MatrixM2x2F.checkRow(row_a),
-      MatrixM2x2F.checkRow(row_b),
+      checkRow(row_a),
+      checkRow(row_b),
       c.v2a,
       c.v2b,
       out);
@@ -279,7 +279,7 @@ public final class MatrixM2x2F
     final int row_a,
     final int row_b)
   {
-    return MatrixM2x2F.exchangeRows(c, m, row_a, row_b, m);
+    return exchangeRows(c, m, row_a, row_b, m);
   }
 
   private static <M extends MatrixWritable2x2FType> M exchangeRowsUnsafe(
@@ -317,7 +317,7 @@ public final class MatrixM2x2F
     final MatrixReadable2x2FType m,
     final M out)
   {
-    final float d = MatrixM2x2F.determinant(m);
+    final float d = determinant(m);
 
     if (d == 0.0F) {
       return false;
@@ -357,7 +357,7 @@ public final class MatrixM2x2F
   boolean invertInPlace(
     final M m)
   {
-    return MatrixM2x2F.invert(m, m);
+    return invert(m, m);
   }
 
   /**
@@ -416,7 +416,7 @@ public final class MatrixM2x2F
     final M m0,
     final MatrixReadable2x2FType m1)
   {
-    return MatrixM2x2F.multiply(m0, m1, m0);
+    return multiply(m0, m1, m0);
   }
 
   /**
@@ -497,7 +497,7 @@ public final class MatrixM2x2F
     final M m,
     final float r)
   {
-    return MatrixM2x2F.scale(m, r, m);
+    return scale(m, r, m);
   }
 
   /**
@@ -524,8 +524,8 @@ public final class MatrixM2x2F
     final float r,
     final M out)
   {
-    return MatrixM2x2F.scaleRowUnsafe(
-      m, MatrixM2x2F.checkRow(row), (double) r, c.v2a, out);
+    return scaleRowUnsafe(
+      m, checkRow(row), (double) r, c.v2a, out);
   }
 
   /**
@@ -551,8 +551,8 @@ public final class MatrixM2x2F
     final int row,
     final float r)
   {
-    return MatrixM2x2F.scaleRowUnsafe(
-      m, MatrixM2x2F.checkRow(row), (double) r, c.v2a, m);
+    return scaleRowUnsafe(
+      m, checkRow(row), (double) r, c.v2a, m);
   }
 
   private static <M extends MatrixWritable2x2FType> M scaleRowUnsafe(
@@ -690,10 +690,7 @@ public final class MatrixM2x2F
     final MatrixReadable2x2FType m0,
     final MatrixReadable2x2FType m1)
   {
-    if (!MatrixM2x2F.compareRow0(m0, m1)) {
-      return false;
-    }
-    return MatrixM2x2F.compareRow1(m0, m1);
+    return compareRow0(m0, m1) && compareRow1(m0, m1);
   }
 
   /**
@@ -735,9 +732,11 @@ public final class MatrixM2x2F
     final StringBuilder sb)
   {
     final String row0 = String.format(
-      "[%+.6f %+.6f]\n", m.getR0C0F(), m.getR0C1F());
+      "[%+.6f %+.6f]\n",
+      Float.valueOf(m.getR0C0F()), Float.valueOf(m.getR0C1F()));
     final String row1 = String.format(
-      "[%+.6f %+.6f]\n", m.getR1C0F(), m.getR1C1F());
+      "[%+.6f %+.6f]\n",
+      Float.valueOf(m.getR1C0F()), Float.valueOf(m.getR1C1F()));
     sb.append(row0);
     sb.append(row1);
   }
@@ -746,20 +745,14 @@ public final class MatrixM2x2F
     final MatrixReadable2x2FType m0,
     final MatrixReadable2x2FType m1)
   {
-    if (m0.getR0C0F() != m1.getR0C0F()) {
-      return false;
-    }
-    return m0.getR0C1F() == m1.getR0C1F();
+    return !(m0.getR0C0F() != m1.getR0C0F()) && m0.getR0C1F() == m1.getR0C1F();
   }
 
   private static boolean compareRow1(
     final MatrixReadable2x2FType m0,
     final MatrixReadable2x2FType m1)
   {
-    if (m0.getR1C0F() != m1.getR1C0F()) {
-      return false;
-    }
-    return m0.getR1C1F() == m1.getR1C1F();
+    return !(m0.getR1C0F() != m1.getR1C0F()) && m0.getR1C1F() == m1.getR1C1F();
   }
 
   /**

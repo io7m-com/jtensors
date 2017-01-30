@@ -34,13 +34,15 @@ import net.jcip.annotations.Immutable;
  * @param <T1> A phantom type parameter.
  */
 
-@EqualityStructural @Immutable public final class PMatrixI4x4F<T0, T1>
+@EqualityStructural
+@Immutable
+public final class PMatrixI4x4F<T0, T1>
   implements PMatrixReadable4x4FType<T0, T1>
 {
-  private static final float[][]                    IDENTITY  =
-    PMatrixI4x4F.makeIdentity();
+  private static final float[][] IDENTITY =
+    makeIdentity();
   private static final PMatrixI4x4F<Object, Object> IDENTITYM =
-    PMatrixI4x4F.makeIdentityM();
+    makeIdentityM();
   private final float[][] elements;
 
   private PMatrixI4x4F(
@@ -59,7 +61,7 @@ import net.jcip.annotations.Immutable;
   @SuppressWarnings("unchecked")
   public static <T0, T1> PMatrixI4x4F<T0, T1> identity()
   {
-    return (PMatrixI4x4F<T0, T1>) PMatrixI4x4F.IDENTITYM;
+    return (PMatrixI4x4F<T0, T1>) IDENTITYM;
   }
 
   private static float[][] makeIdentity()
@@ -79,7 +81,7 @@ import net.jcip.annotations.Immutable;
 
   private static PMatrixI4x4F<Object, Object> makeIdentityM()
   {
-    return new PMatrixI4x4F<Object, Object>(PMatrixI4x4F.IDENTITY);
+    return new PMatrixI4x4F<Object, Object>(IDENTITY);
   }
 
   /**
@@ -216,7 +218,8 @@ import net.jcip.annotations.Immutable;
     m.setR3C3F(this.getR3C3F());
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -232,14 +235,16 @@ import net.jcip.annotations.Immutable;
     return MatrixM4x4F.compareElements(this, other);
   }
 
-  @Override public <V extends VectorWritable4FType> void getRow4F(
+  @Override
+  public <V extends VectorWritable4FType> void getRow4F(
     final int row,
     final V out)
   {
     this.getRow4FUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable4FType> void getRow4FUnsafe(
+  @Override
+  public <V extends VectorWritable4FType> void getRow4FUnsafe(
     final int row,
     final V out)
   {
@@ -250,37 +255,44 @@ import net.jcip.annotations.Immutable;
       this.elements[row][3]);
   }
 
-  @Override public float getR0C3F()
+  @Override
+  public float getR0C3F()
   {
     return this.elements[0][3];
   }
 
-  @Override public float getR1C3F()
+  @Override
+  public float getR1C3F()
   {
     return this.elements[1][3];
   }
 
-  @Override public float getR2C3F()
+  @Override
+  public float getR2C3F()
   {
     return this.elements[2][3];
   }
 
-  @Override public float getR3C0F()
+  @Override
+  public float getR3C0F()
   {
     return this.elements[3][0];
   }
 
-  @Override public float getR3C1F()
+  @Override
+  public float getR3C1F()
   {
     return this.elements[3][1];
   }
 
-  @Override public float getR3C2F()
+  @Override
+  public float getR3C2F()
   {
     return this.elements[3][2];
   }
 
-  @Override public float getR3C3F()
+  @Override
+  public float getR3C3F()
   {
     return this.elements[3][3];
   }
@@ -292,33 +304,38 @@ import net.jcip.annotations.Immutable;
    * @return The value at the given row and column
    */
 
-  @Override public float getRowColumnF(
+  @Override
+  public float getRowColumnF(
     final int row,
     final int col)
   {
     return this.elements[row][col];
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     return MatrixM4x4F.hashElements(this);
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
     MatrixM4x4F.showElements(this, builder);
     return builder.toString();
   }
 
-  @Override public <V extends VectorWritable3FType> void getRow3F(
+  @Override
+  public <V extends VectorWritable3FType> void getRow3F(
     final int row,
     final V out)
   {
     this.getRow3FUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable3FType> void getRow3FUnsafe(
+  @Override
+  public <V extends VectorWritable3FType> void getRow3FUnsafe(
     final int row,
     final V out)
   {
@@ -326,39 +343,46 @@ import net.jcip.annotations.Immutable;
       this.elements[row][0], this.elements[row][1], this.elements[row][2]);
   }
 
-  @Override public float getR0C2F()
+  @Override
+  public float getR0C2F()
   {
     return this.elements[0][2];
   }
 
-  @Override public float getR1C2F()
+  @Override
+  public float getR1C2F()
   {
     return this.elements[1][2];
   }
 
-  @Override public float getR2C0F()
+  @Override
+  public float getR2C0F()
   {
     return this.elements[2][0];
   }
 
-  @Override public float getR2C1F()
+  @Override
+  public float getR2C1F()
   {
     return this.elements[2][1];
   }
 
-  @Override public float getR2C2F()
+  @Override
+  public float getR2C2F()
   {
     return this.elements[2][2];
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2F(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2F(
     final int row,
     final V out)
   {
     this.getRow2FUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2FUnsafe(
     final int row,
     final V out)
   {
@@ -366,22 +390,26 @@ import net.jcip.annotations.Immutable;
       this.elements[row][0], this.elements[row][1]);
   }
 
-  @Override public float getR0C0F()
+  @Override
+  public float getR0C0F()
   {
     return this.elements[0][0];
   }
 
-  @Override public float getR1C0F()
+  @Override
+  public float getR1C0F()
   {
     return this.elements[1][0];
   }
 
-  @Override public float getR0C1F()
+  @Override
+  public float getR0C1F()
   {
     return this.elements[0][1];
   }
 
-  @Override public float getR1C1F()
+  @Override
+  public float getR1C1F()
   {
     return this.elements[1][1];
   }

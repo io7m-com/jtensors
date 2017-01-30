@@ -85,13 +85,13 @@ public final class PercentagePassRule implements TestRule
       for (int index = 0; index < this.iterations; ++index) {
         try {
           this.statement.evaluate();
-          PercentagePassRule.LOG.trace(
+          LOG.trace(
             "{} [{}]: succeeded",
             this.description.getDisplayName(),
             Integer.valueOf(index));
           ++pass;
         } catch (final Throwable e) {
-          PercentagePassRule.LOG.warn(
+          LOG.warn(
             "{} [{}]: failed: ",
             this.description.getDisplayName(),
             Integer.valueOf(index),
@@ -104,11 +104,11 @@ public final class PercentagePassRule implements TestRule
 
       final StringBuilder sb = new StringBuilder(128);
       sb.append("Target pass percentage: ");
-      sb.append(String.format("%.2f", this.target_percent));
+      sb.append(String.format("%.2f", Double.valueOf(this.target_percent)));
       sb.append("%");
       sb.append("\n");
       sb.append("Actual pass percentage: ");
-      sb.append(String.format("%.2f", actual_percent));
+      sb.append(String.format("%.2f", Double.valueOf(actual_percent)));
       sb.append("%");
       sb.append(" (");
       sb.append(this.iterations);
@@ -119,7 +119,7 @@ public final class PercentagePassRule implements TestRule
       sb.append(" failures)");
       final String message = sb.toString();
 
-      PercentagePassRule.LOG.trace(
+      LOG.trace(
         "{}: {}", this.description.getDisplayName(), message);
       if (actual_percent < this.target_percent) {
         Assert.fail(message);

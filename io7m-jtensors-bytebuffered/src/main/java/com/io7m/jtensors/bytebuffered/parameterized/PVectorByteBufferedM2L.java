@@ -119,7 +119,7 @@ public final class PVectorByteBufferedM2L<T> extends ByteBuffered implements PVe
     final int i,
     final long x)
   {
-    this.buffer.putLong(PVectorByteBufferedM2L.getByteOffsetForIndex(o, i), x);
+    this.buffer.putLong(getByteOffsetForIndex(o, i), x);
   }
 
   private long getAtOffsetAndIndex(
@@ -127,7 +127,7 @@ public final class PVectorByteBufferedM2L<T> extends ByteBuffered implements PVe
     final int i)
   {
     return this.buffer.getLong(
-      PVectorByteBufferedM2L.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public long getYL()
@@ -190,10 +190,7 @@ public final class PVectorByteBufferedM2L<T> extends ByteBuffered implements PVe
       return false;
     }
     final PVectorByteBufferedM2L<?> other = (PVectorByteBufferedM2L<?>) obj;
-    if (this.getXL() != other.getXL()) {
-      return false;
-    }
-    return this.getYL() == other.getYL();
+    return this.getXL() == other.getXL() && this.getYL() == other.getYL();
   }
 
   @Override public void copyFromTyped2L(final PVectorReadable2LType<T> in_v)

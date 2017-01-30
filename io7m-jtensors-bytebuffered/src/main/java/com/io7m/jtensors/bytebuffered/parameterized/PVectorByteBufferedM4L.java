@@ -144,7 +144,7 @@ public final class PVectorByteBufferedM4L<T> extends ByteBuffered
     final int i,
     final long x)
   {
-    this.buffer.putLong(PVectorByteBufferedM4L.getByteOffsetForIndex(o, i), x);
+    this.buffer.putLong(getByteOffsetForIndex(o, i), x);
   }
 
   private long getAtOffsetAndIndex(
@@ -152,7 +152,7 @@ public final class PVectorByteBufferedM4L<T> extends ByteBuffered
     final int i)
   {
     return this.buffer.getLong(
-      PVectorByteBufferedM4L.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public long getYL()
@@ -262,16 +262,7 @@ public final class PVectorByteBufferedM4L<T> extends ByteBuffered
       return false;
     }
     final PVectorByteBufferedM4L<?> other = (PVectorByteBufferedM4L<?>) obj;
-    if (this.getWL() != other.getWL()) {
-      return false;
-    }
-    if (this.getXL() != other.getXL()) {
-      return false;
-    }
-    if (this.getYL() != other.getYL()) {
-      return false;
-    }
-    return this.getZL() == other.getZL();
+    return this.getWL() == other.getWL() && this.getXL() == other.getXL() && this.getYL() == other.getYL() && this.getZL() == other.getZL();
   }
 
   @Override public void copyFromTyped4L(final PVectorReadable4LType<T> in_v)

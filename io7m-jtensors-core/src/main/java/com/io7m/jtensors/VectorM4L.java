@@ -127,7 +127,7 @@ public final class VectorM4L implements Vector4LType
     final V v)
     throws ArithmeticException
   {
-    return VectorM4L.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -179,7 +179,7 @@ public final class VectorM4L implements Vector4LType
     final VectorReadable4LType v1)
     throws ArithmeticException
   {
-    return VectorM4L.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -243,7 +243,7 @@ public final class VectorM4L implements Vector4LType
     final double r)
     throws ArithmeticException
   {
-    return VectorM4L.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -329,7 +329,7 @@ public final class VectorM4L implements Vector4LType
     final VectorReadable4LType minimum,
     final VectorReadable4LType maximum)
   {
-    return VectorM4L.clampByVector(v, minimum, maximum, v);
+    return clampByVector(v, minimum, maximum, v);
   }
 
   /**
@@ -351,7 +351,7 @@ public final class VectorM4L implements Vector4LType
     final long minimum,
     final long maximum)
   {
-    return VectorM4L.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -424,7 +424,7 @@ public final class VectorM4L implements Vector4LType
     final V v,
     final VectorReadable4LType maximum)
   {
-    return VectorM4L.clampMaximumByVector(v, maximum, v);
+    return clampMaximumByVector(v, maximum, v);
   }
 
   /**
@@ -444,7 +444,7 @@ public final class VectorM4L implements Vector4LType
     final V v,
     final long maximum)
   {
-    return VectorM4L.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -517,7 +517,7 @@ public final class VectorM4L implements Vector4LType
     final V v,
     final VectorReadable4LType minimum)
   {
-    return VectorM4L.clampMinimumByVector(v, minimum, v);
+    return clampMinimumByVector(v, minimum, v);
   }
 
   /**
@@ -537,7 +537,7 @@ public final class VectorM4L implements Vector4LType
     final V v,
     final long minimum)
   {
-    return VectorM4L.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -578,7 +578,7 @@ public final class VectorM4L implements Vector4LType
     final VectorReadable4LType v1)
     throws ArithmeticException
   {
-    return VectorM4L.magnitude(VectorM4L.subtract(v0, v1, c.v2a));
+    return magnitude(subtract(v0, v1, c.v2a));
   }
 
   /**
@@ -634,9 +634,9 @@ public final class VectorM4L implements Vector4LType
     final double alpha,
     final V r)
   {
-    VectorM4L.scale(v0, 1.0 - alpha, c.v2a);
-    VectorM4L.scale(v1, alpha, c.v2b);
-    return VectorM4L.add(c.v2a, c.v2b, r);
+    scale(v0, 1.0 - alpha, c.v2a);
+    scale(v1, alpha, c.v2b);
+    return add(c.v2a, c.v2b, r);
   }
 
   /**
@@ -656,7 +656,7 @@ public final class VectorM4L implements Vector4LType
     final VectorReadable4LType v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt((double) VectorM4L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -674,7 +674,7 @@ public final class VectorM4L implements Vector4LType
     final VectorReadable4LType v)
     throws ArithmeticException
   {
-    return VectorM4L.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -698,11 +698,11 @@ public final class VectorM4L implements Vector4LType
     final V r)
     throws ArithmeticException
   {
-    final long dot = VectorM4L.dotProduct(p, q);
-    final long qms = VectorM4L.magnitudeSquared(q);
+    final long dot = dotProduct(p, q);
+    final long qms = magnitudeSquared(q);
     final long s = dot / qms;
 
-    return VectorM4L.scale(p, (double) s, r);
+    return scale(p, (double) s, r);
   }
 
   /**
@@ -754,7 +754,7 @@ public final class VectorM4L implements Vector4LType
     final long r)
     throws ArithmeticException
   {
-    return VectorM4L.scale(v, (double) r, v);
+    return scale(v, (double) r, v);
   }
 
   /**
@@ -806,28 +806,32 @@ public final class VectorM4L implements Vector4LType
     final VectorReadable4LType v1)
     throws ArithmeticException
   {
-    return VectorM4L.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2L(
+  @Override
+  public void copyFrom2L(
     final VectorReadable2LType in_v)
   {
     VectorM2L.copy(in_v, this);
   }
 
-  @Override public void copyFrom3L(
+  @Override
+  public void copyFrom3L(
     final VectorReadable3LType in_v)
   {
     VectorM3L.copy(in_v, this);
   }
 
-  @Override public void copyFrom4L(
+  @Override
+  public void copyFrom4L(
     final VectorReadable4LType in_v)
   {
-    VectorM4L.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -840,63 +844,63 @@ public final class VectorM4L implements Vector4LType
       return false;
     }
     final VectorM4L other = (VectorM4L) obj;
-    if (this.w != other.w) {
-      return false;
-    }
-    if (this.x != other.x) {
-      return false;
-    }
-    if (this.y != other.y) {
-      return false;
-    }
-    return this.z == other.z;
+    return this.w == other.w && this.x == other.x && this.y == other.y && this.z == other.z;
   }
 
-  @Override public long getWL()
+  @Override
+  public long getWL()
   {
     return this.w;
   }
 
-  @Override public void setWL(
+  @Override
+  public void setWL(
     final long in_w)
   {
     this.w = in_w;
   }
 
-  @Override public long getXL()
+  @Override
+  public long getXL()
   {
     return this.x;
   }
 
-  @Override public void setXL(
+  @Override
+  public void setXL(
     final long in_x)
   {
     this.x = in_x;
   }
 
-  @Override public long getYL()
+  @Override
+  public long getYL()
   {
     return this.y;
   }
 
-  @Override public void setYL(
+  @Override
+  public void setYL(
     final long in_y)
   {
     this.y = in_y;
   }
 
-  @Override public long getZL()
+  @Override
+  public long getZL()
   {
     return this.z;
   }
 
-  @Override public void setZL(
+  @Override
+  public void setZL(
     final long in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final long prime = 31L;
     long result = 1L;
@@ -907,7 +911,8 @@ public final class VectorM4L implements Vector4LType
     return (int) result;
   }
 
-  @Override public void set2L(
+  @Override
+  public void set2L(
     final long in_x,
     final long in_y)
   {
@@ -915,7 +920,8 @@ public final class VectorM4L implements Vector4LType
     this.y = in_y;
   }
 
-  @Override public void set3L(
+  @Override
+  public void set3L(
     final long in_x,
     final long in_y,
     final long in_z)
@@ -925,7 +931,8 @@ public final class VectorM4L implements Vector4LType
     this.z = in_z;
   }
 
-  @Override public void set4L(
+  @Override
+  public void set4L(
     final long in_x,
     final long in_y,
     final long in_z,
@@ -937,7 +944,8 @@ public final class VectorM4L implements Vector4LType
     this.w = in_w;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM4L ");

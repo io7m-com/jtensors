@@ -24,6 +24,8 @@ import com.io7m.jtensors.VectorI3F;
 import com.io7m.jtensors.VectorM2F;
 import com.io7m.jtensors.VectorM2I;
 import com.io7m.jtensors.VectorM3F;
+import com.io7m.jtensors.VectorReadable2FType;
+import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3FType;
 import org.junit.Assert;
 import org.junit.Test;
@@ -769,9 +771,9 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final MatrixM3x3F.ContextMM3F mc = new MatrixM3x3F.ContextMM3F();
     final T m = this.newMatrix();
     final VectorM3F t = new VectorM3F();
-    final VectorI3F origin = new VectorI3F(0.0f, 0.0f, 0.0f);
-    final VectorI3F target = new VectorI3F(-1.0f, 0.0f, 0.0f);
-    final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType origin = new VectorI3F(0.0f, 0.0f, 0.0f);
+    final VectorReadable3FType target = new VectorI3F(-1.0f, 0.0f, 0.0f);
+    final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
     
@@ -818,9 +820,9 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final MatrixM3x3F.ContextMM3F mc = new MatrixM3x3F.ContextMM3F();
     final T m = this.newMatrix();
     final VectorM3F t = new VectorM3F();
-    final VectorI3F origin = new VectorI3F(0.0f, 0.0f, 0.0f);
-    final VectorI3F target = new VectorI3F(0.0f, 0.0f, -1.0f);
-    final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType origin = new VectorI3F(0.0f, 0.0f, 0.0f);
+    final VectorReadable3FType target = new VectorI3F(0.0f, 0.0f, -1.0f);
+    final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
     
@@ -867,9 +869,9 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final MatrixM3x3F.ContextMM3F mc = new MatrixM3x3F.ContextMM3F();
     final T m = this.newMatrix();
     final VectorM3F t = new VectorM3F();
-    final VectorI3F origin = new VectorI3F(0.0f, 0.0f, 0.0f);
-    final VectorI3F target = new VectorI3F(1.0f, 0.0f, 0.0f);
-    final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType origin = new VectorI3F(0.0f, 0.0f, 0.0f);
+    final VectorReadable3FType target = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
     
@@ -916,9 +918,9 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final MatrixM3x3F.ContextMM3F mc = new MatrixM3x3F.ContextMM3F();
     final T m = this.newMatrix();
     final VectorM3F t = new VectorM3F();
-    final VectorI3F origin = new VectorI3F(0.0f, 0.0f, 0.0f);
-    final VectorI3F target = new VectorI3F(0.0f, 0.0f, 1.0f);
-    final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType origin = new VectorI3F(0.0f, 0.0f, 0.0f);
+    final VectorReadable3FType target = new VectorI3F(0.0f, 0.0f, 1.0f);
+    final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
     
@@ -965,11 +967,11 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final MatrixM3x3F.ContextMM3F mc = new MatrixM3x3F.ContextMM3F();
     final T m = this.newMatrix();
     final VectorM3F t = new VectorM3F();
-    final VectorI3F origin = new VectorI3F(
+    final VectorReadable3FType origin = new VectorI3F(
       (20 + 0), (30 + 0), (40 + 0));
-    final VectorI3F target = new VectorI3F(
+    final VectorReadable3FType target = new VectorI3F(
       (20 + 0), (30 + 0), (40 + -1));
-    final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
     
@@ -1176,7 +1178,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
 
     this.checkDirectBufferInvariants(m0);
 
-    final VectorI3F v = new VectorI3F(1.0f, 2.0f, 3.0f);
+    final VectorReadable3FType v = new VectorI3F(1.0f, 2.0f, 3.0f);
     final VectorM3F out = new VectorM3F();
 
     final VectorM3F r = MatrixM3x3F.multiplyVector3F(c, m0, v, out);
@@ -1324,11 +1326,11 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       TestUtilities.getSingleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM3F v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
+    final VectorReadable3FType v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
     final VectorM3F v_got = new VectorM3F();
-    final VectorM3F v_exp = new VectorM3F(0.0f, 0.0f, -1.0f);
+    final VectorReadable3FType v_exp = new VectorM3F(0.0f, 0.0f, -1.0f);
 
-    MatrixM3x3F.makeRotation(0.0, Matrix3x3FContract.AXIS_X, m);
+    MatrixM3x3F.makeRotation(0.0, AXIS_X, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1350,11 +1352,11 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       TestUtilities.getSingleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM3F v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
+    final VectorReadable3FType v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
     final VectorM3F v_got = new VectorM3F();
-    final VectorM3F v_exp = new VectorM3F(0.0f, 0.0f, -1.0f);
+    final VectorReadable3FType v_exp = new VectorM3F(0.0f, 0.0f, -1.0f);
 
-    MatrixM3x3F.makeRotation(0.0, Matrix3x3FContract.AXIS_Y, m);
+    MatrixM3x3F.makeRotation(0.0, AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1376,11 +1378,11 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       TestUtilities.getSingleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM3F v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
+    final VectorReadable3FType v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
     final VectorM3F v_got = new VectorM3F();
-    final VectorM3F v_exp = new VectorM3F(0.0f, 0.0f, -1.0f);
+    final VectorReadable3FType v_exp = new VectorM3F(0.0f, 0.0f, -1.0f);
 
-    MatrixM3x3F.makeRotation(0.0, Matrix3x3FContract.AXIS_Z, m);
+    MatrixM3x3F.makeRotation(0.0, AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1406,19 +1408,19 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
 
     final T m = this.newMatrix();
     final VectorM3F v_got = new VectorM3F();
-    final VectorM3F v_in = new VectorM3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType v_in = new VectorM3F(0.0f, 1.0f, 0.0f);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
-    final VectorM3F v_exp = new VectorM3F(
+    final VectorReadable3FType v_exp = new VectorM3F(
       0.0f, 6.1232339957367E-17f, 1.0f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(90.0), Matrix3x3FContract.AXIS_X, m);
+      Math.toRadians(90.0), AXIS_X, m);
     
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
@@ -1450,19 +1452,19 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
 
     final T m = this.newMatrix();
     final VectorM3F v_got = new VectorM3F();
-    final VectorM3F v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
+    final VectorReadable3FType v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
-    final VectorM3F v_exp = new VectorM3F(
+    final VectorReadable3FType v_exp = new VectorM3F(
       -1.0f, 0.0f, -6.1232339957367E-17f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(90.0), Matrix3x3FContract.AXIS_Y, m);
+      Math.toRadians(90.0), AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1493,12 +1495,12 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
 
     final T m = this.newMatrix();
     final VectorM3F v_got = new VectorM3F();
-    final VectorM3F v_in = new VectorM3F(0.0f, 1.0f, 0.0f);
-    final VectorM3F v_exp = new VectorM3F(
+    final VectorReadable3FType v_in = new VectorM3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType v_exp = new VectorM3F(
       -1.0f, 6.123233995736766E-17f, 0.0f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(90.0), Matrix3x3FContract.AXIS_Z, m);
+      Math.toRadians(90.0), AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1529,19 +1531,19 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
 
     final T m = this.newMatrix();
     final VectorM3F v_got = new VectorM3F();
-    final VectorM3F v_in = new VectorM3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType v_in = new VectorM3F(0.0f, 1.0f, 0.0f);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
-    final VectorM3F v_exp = new VectorM3F(
+    final VectorReadable3FType v_exp = new VectorM3F(
       0.0f, 6.1232339957367E-17f, -1.0f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(-90.0), Matrix3x3FContract.AXIS_X, m);
+      Math.toRadians(-90.0), AXIS_X, m);
     
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
@@ -1573,19 +1575,19 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
 
     final T m = this.newMatrix();
     final VectorM3F v_got = new VectorM3F();
-    final VectorM3F v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
+    final VectorReadable3FType v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
-    final VectorM3F v_exp = new VectorM3F(
+    final VectorReadable3FType v_exp = new VectorM3F(
       1.0f, 0.0f, -6.1232339957367E-17f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(-90.0), Matrix3x3FContract.AXIS_Y, m);
+      Math.toRadians(-90.0), AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1616,12 +1618,12 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
 
     final T m = this.newMatrix();
     final VectorM3F v_got = new VectorM3F();
-    final VectorM3F v_in = new VectorM3F(0.0f, 1.0f, 0.0f);
-    final VectorM3F v_exp = new VectorM3F(
+    final VectorReadable3FType v_in = new VectorM3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType v_exp = new VectorM3F(
       1.0f, 6.123233995736766E-17f, 0.0f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(-90.0), Matrix3x3FContract.AXIS_Z, m);
+      Math.toRadians(-90.0), AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1646,7 +1648,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     {
       final T r = this.newMatrix();
       MatrixM3x3F.makeRotation(
-        Math.toRadians(45.0), Matrix3x3FContract.AXIS_X, r);
+        Math.toRadians(45.0), AXIS_X, r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
@@ -1666,7 +1668,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     {
       final T r = this.newMatrix();
       MatrixM3x3F.makeRotation(
-        Math.toRadians(45.0), Matrix3x3FContract.AXIS_Y, r);
+        Math.toRadians(45.0), AXIS_Y, r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
@@ -1686,7 +1688,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     {
       final T r = this.newMatrix();
       MatrixM3x3F.makeRotation(
-        Math.toRadians(45.0), Matrix3x3FContract.AXIS_Z, r);
+        Math.toRadians(45.0), AXIS_Z, r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
@@ -2049,7 +2051,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
   {
     final T m = this.newMatrix();
 
-    final VectorM2F v = new VectorM2F(0.0f, 0.0f);
+    final VectorReadable2FType v = new VectorM2F(0.0f, 0.0f);
 
     MatrixM3x3F.makeTranslation2F(v, m);
     this.checkDirectBufferInvariants(m);
@@ -2077,7 +2079,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
   {
     final T m = this.newMatrix();
 
-    final VectorM2F v = new VectorM2F(3.0f, 7.0f);
+    final VectorReadable2FType v = new VectorM2F(3.0f, 7.0f);
 
     MatrixM3x3F.makeTranslation2F(v, m);
     this.checkDirectBufferInvariants(m);
@@ -2105,7 +2107,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
   {
     final T m = this.newMatrix();
 
-    final VectorM2I v = new VectorM2I(0, 0);
+    final VectorReadable2IType v = new VectorM2I(0, 0);
 
     MatrixM3x3F.makeTranslation2I(v, m);
     this.checkDirectBufferInvariants(m);
@@ -2133,7 +2135,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
   {
     final T m = this.newMatrix();
 
-    final VectorM2I v = new VectorM2I(3, 7);
+    final VectorReadable2IType v = new VectorM2I(3, 7);
 
     MatrixM3x3F.makeTranslation2I(v, m);
     this.checkDirectBufferInvariants(m);
@@ -2306,6 +2308,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
+  @Override
   protected abstract void checkDirectBufferInvariants(final T m);
 
   @Test public final void testRowSet3Get3Unsafe()

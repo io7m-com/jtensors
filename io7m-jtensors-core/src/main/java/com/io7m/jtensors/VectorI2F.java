@@ -29,7 +29,8 @@ import net.jcip.annotations.Immutable;
  * from multiple threads. </p>
  */
 
-@Immutable public final class VectorI2F implements VectorReadable2FType
+@Immutable
+public final class VectorI2F implements VectorReadable2FType
 {
   /**
    * The zero vector.
@@ -125,7 +126,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2FType v1,
     final double r)
   {
-    return VectorI2F.add(v0, VectorI2F.scale(v1, r));
+    return add(v0, scale(v1, r));
   }
 
   /**
@@ -168,10 +169,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2FType v0,
     final VectorReadable2FType v1)
   {
-    final double m0 = VectorI2F.magnitude(v0);
-    final double m1 = VectorI2F.magnitude(v1);
+    final double m0 = magnitude(v0);
+    final double m1 = magnitude(v1);
     final double dp =
-      Math.min(Math.max(-1.0, VectorI2F.dotProduct(v0, v1)), 1.0);
+      Math.min(Math.max(-1.0, dotProduct(v0, v1)), 1.0);
     final double f = m0 * m1;
     final double r = dp / f;
     return Math.acos(r);
@@ -312,7 +313,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2FType v0,
     final VectorReadable2FType v1)
   {
-    return VectorI2F.magnitude(VectorI2F.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -356,9 +357,9 @@ import net.jcip.annotations.Immutable;
     final float alpha)
   {
     final VectorReadable2FType w0 =
-      VectorI2F.scale(v0, (double) (float) (1.0 - (double) alpha));
-    final VectorReadable2FType w1 = VectorI2F.scale(v1, (double) alpha);
-    return VectorI2F.add(w0, w1);
+      scale(v0, (double) (float) (1.0 - (double) alpha));
+    final VectorReadable2FType w1 = scale(v1, (double) alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -374,7 +375,7 @@ import net.jcip.annotations.Immutable;
   public static double magnitude(
     final VectorReadable2FType v)
   {
-    return Math.sqrt(VectorI2F.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -388,7 +389,7 @@ import net.jcip.annotations.Immutable;
   public static double magnitudeSquared(
     final VectorReadable2FType v)
   {
-    return VectorI2F.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -404,11 +405,11 @@ import net.jcip.annotations.Immutable;
   public static VectorI2F normalize(
     final VectorReadable2FType v)
   {
-    final double m = VectorI2F.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double sq = Math.sqrt(m);
       final double r = 1.0 / sq;
-      return VectorI2F.scale(v, r);
+      return scale(v, r);
     }
     return new VectorI2F(v);
   }
@@ -430,11 +431,11 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2FType v0,
     final VectorReadable2FType v1)
   {
-    final VectorI2F v0n = VectorI2F.normalize(v0);
+    final VectorI2F v0n = normalize(v0);
     final VectorI2F projection =
-      VectorI2F.scale(v0n, VectorI2F.dotProduct(v1, v0n));
+      scale(v0n, dotProduct(v1, v0n));
     final VectorI2F vr =
-      VectorI2F.normalize(VectorI2F.subtract(v1, projection));
+      normalize(subtract(v1, projection));
     return Pair.pair(v0n, vr);
   }
 
@@ -452,10 +453,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2FType p,
     final VectorReadable2FType q)
   {
-    final double dot = VectorI2F.dotProduct(p, q);
-    final double qms = VectorI2F.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
-    return VectorI2F.scale(p, s);
+    return scale(p, s);
   }
 
   /**
@@ -492,7 +493,8 @@ import net.jcip.annotations.Immutable;
     return new VectorI2F(v0.getXF() - v1.getXF(), v0.getYF() - v1.getYF());
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -505,23 +507,24 @@ import net.jcip.annotations.Immutable;
       return false;
     }
     final VectorI2F other = (VectorI2F) obj;
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
-      return false;
-    }
-    return Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y);
+    return Float.floatToIntBits(this.x) == Float.floatToIntBits(other.x) && Float.floatToIntBits(
+      this.y) == Float.floatToIntBits(other.y);
   }
 
-  @Override public float getXF()
+  @Override
+  public float getXF()
   {
     return this.x;
   }
 
-  @Override public float getYF()
+  @Override
+  public float getYF()
   {
     return this.y;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -530,7 +533,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI2F ");

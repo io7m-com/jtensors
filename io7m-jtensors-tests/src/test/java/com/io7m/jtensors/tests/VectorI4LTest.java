@@ -18,6 +18,7 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.VectorI4L;
+import com.io7m.jtensors.VectorReadable4LType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -61,16 +62,16 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI4LTest.randomPositiveSmallNumber();
-      final long y0 = VectorI4LTest.randomPositiveSmallNumber();
-      final long z0 = VectorI4LTest.randomPositiveSmallNumber();
-      final long w0 = VectorI4LTest.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
+      final long w0 = randomPositiveSmallNumber();
       final VectorI4L v0 = new VectorI4L(x0, y0, z0, w0);
 
-      final long x1 = VectorI4LTest.randomPositiveSmallNumber();
-      final long y1 = VectorI4LTest.randomPositiveSmallNumber();
-      final long z1 = VectorI4LTest.randomPositiveSmallNumber();
-      final long w1 = VectorI4LTest.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
+      final long w1 = randomPositiveSmallNumber();
       final VectorI4L v1 = new VectorI4L(x1, y1, z1, w1);
 
       final VectorI4L vr0 = VectorI4L.add(v0, v1);
@@ -86,19 +87,19 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI4LTest.randomPositiveSmallNumber();
-      final long y0 = VectorI4LTest.randomPositiveSmallNumber();
-      final long z0 = VectorI4LTest.randomPositiveSmallNumber();
-      final long w0 = VectorI4LTest.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
+      final long w0 = randomPositiveSmallNumber();
       final VectorI4L v0 = new VectorI4L(x0, y0, z0, w0);
 
-      final long x1 = VectorI4LTest.randomPositiveSmallNumber();
-      final long y1 = VectorI4LTest.randomPositiveSmallNumber();
-      final long z1 = VectorI4LTest.randomPositiveSmallNumber();
-      final long w1 = VectorI4LTest.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
+      final long w1 = randomPositiveSmallNumber();
       final VectorI4L v1 = new VectorI4L(x1, y1, z1, w1);
 
-      final long r = VectorI4LTest.randomPositiveSmallNumber();
+      final long r = randomPositiveSmallNumber();
 
       final VectorI4L vr0 = VectorI4L.addScaled(v0, v1, r);
 
@@ -121,7 +122,7 @@ public class VectorI4LTest extends VectorI4Contract
 
   @Override @Test public void testCheckInterface()
   {
-    final VectorI4L v = new VectorI4L(3, 5, 7, 11);
+    final VectorReadable4LType v = new VectorI4L(3, 5, 7, 11);
 
     Assert.assertTrue(v.getXL() == v.getXL());
     Assert.assertTrue(v.getYL() == v.getYL());
@@ -133,17 +134,17 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long max_x = VectorI4LTest.randomNegativeNumber();
-      final long max_y = VectorI4LTest.randomNegativeNumber();
-      final long max_z = VectorI4LTest.randomNegativeNumber();
-      final long max_w = VectorI4LTest.randomNegativeNumber();
+      final long max_x = randomNegativeNumber();
+      final long max_y = randomNegativeNumber();
+      final long max_z = randomNegativeNumber();
+      final long max_w = randomNegativeNumber();
       final VectorI4L maximum = new VectorI4L(max_x, max_y, max_z, max_w);
 
-      final long x = VectorI4LTest.randomNegativeNumber();
-      final long y = VectorI4LTest.randomNegativeNumber();
-      final long z = VectorI4LTest.randomNegativeNumber();
-      final long w = VectorI4LTest.randomNegativeNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
+      final long w = randomNegativeNumber();
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clampMaximumByVector(v, maximum);
 
@@ -158,17 +159,17 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long min_x = VectorI4LTest.randomPositiveNumber();
-      final long min_y = VectorI4LTest.randomPositiveNumber();
-      final long min_z = VectorI4LTest.randomPositiveNumber();
-      final long min_w = VectorI4LTest.randomPositiveNumber();
+      final long min_x = randomPositiveNumber();
+      final long min_y = randomPositiveNumber();
+      final long min_z = randomPositiveNumber();
+      final long min_w = randomPositiveNumber();
       final VectorI4L minimum = new VectorI4L(min_x, min_y, min_z, min_w);
 
-      final long x = VectorI4LTest.randomNegativeNumber();
-      final long y = VectorI4LTest.randomNegativeNumber();
-      final long z = VectorI4LTest.randomNegativeNumber();
-      final long w = VectorI4LTest.randomNegativeNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
+      final long w = randomNegativeNumber();
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clampMinimumByVector(v, minimum);
 
@@ -183,23 +184,23 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long min_x = VectorI4LTest.randomNegativeNumber();
-      final long min_y = VectorI4LTest.randomNegativeNumber();
-      final long min_z = VectorI4LTest.randomNegativeNumber();
-      final long min_w = VectorI4LTest.randomNegativeNumber();
+      final long min_x = randomNegativeNumber();
+      final long min_y = randomNegativeNumber();
+      final long min_z = randomNegativeNumber();
+      final long min_w = randomNegativeNumber();
       final VectorI4L minimum = new VectorI4L(min_x, min_y, min_z, min_w);
 
-      final long max_x = VectorI4LTest.randomPositiveNumber();
-      final long max_y = VectorI4LTest.randomPositiveNumber();
-      final long max_z = VectorI4LTest.randomPositiveNumber();
-      final long max_w = VectorI4LTest.randomPositiveNumber();
+      final long max_x = randomPositiveNumber();
+      final long max_y = randomPositiveNumber();
+      final long max_z = randomPositiveNumber();
+      final long max_w = randomPositiveNumber();
       final VectorI4L maximum = new VectorI4L(max_x, max_y, max_z, max_w);
 
-      final long x = VectorI4LTest.randomNegativeNumber();
-      final long y = VectorI4LTest.randomPositiveNumber();
-      final long z = VectorI4LTest.randomPositiveNumber();
-      final long w = VectorI4LTest.randomPositiveNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clampByVector(v, minimum, maximum);
 
@@ -218,13 +219,13 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long maximum = VectorI4LTest.randomNegativeNumber();
+      final long maximum = randomNegativeNumber();
 
-      final long x = VectorI4LTest.randomPositiveNumber();
-      final long y = VectorI4LTest.randomPositiveNumber();
-      final long z = VectorI4LTest.randomPositiveNumber();
-      final long w = VectorI4LTest.randomPositiveNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clampMaximum(v, maximum);
 
@@ -239,13 +240,13 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long minimum = VectorI4LTest.randomPositiveNumber();
+      final long minimum = randomPositiveNumber();
 
-      final long x = VectorI4LTest.randomNegativeNumber();
-      final long y = VectorI4LTest.randomNegativeNumber();
-      final long z = VectorI4LTest.randomNegativeNumber();
-      final long w = VectorI4LTest.randomNegativeNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
+      final long w = randomNegativeNumber();
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clampMinimum(v, minimum);
 
@@ -260,14 +261,14 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long minimum = VectorI4LTest.randomNegativeNumber();
-      final long maximum = VectorI4LTest.randomPositiveNumber();
+      final long minimum = randomNegativeNumber();
+      final long maximum = randomPositiveNumber();
 
-      final long x = VectorI4LTest.randomNegativeNumber();
-      final long y = VectorI4LTest.randomPositiveNumber();
-      final long z = VectorI4LTest.randomPositiveNumber();
-      final long w = VectorI4LTest.randomPositiveNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clamp(v, minimum, maximum);
 
@@ -312,8 +313,8 @@ public class VectorI4LTest extends VectorI4Contract
 
   @Override @Test public void testDistance()
   {
-    final VectorI4L v0 = new VectorI4L(0, 1, 0, 0);
-    final VectorI4L v1 = new VectorI4L(0, 0, 0, 0);
+    final VectorReadable4LType v0 = new VectorI4L(0, 1, 0, 0);
+    final VectorReadable4LType v1 = new VectorI4L(0, 0, 0, 0);
     Assert.assertTrue(VectorI4L.distance(v0, v1) == 1);
   }
 
@@ -321,17 +322,17 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI4LTest.randomPositiveSmallNumber();
-      final long y0 = VectorI4LTest.randomPositiveSmallNumber();
-      final long z0 = VectorI4LTest.randomPositiveSmallNumber();
-      final long w0 = VectorI4LTest.randomPositiveSmallNumber();
-      final VectorI4L v0 = new VectorI4L(x0, y0, z0, w0);
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
+      final long w0 = randomPositiveSmallNumber();
+      final VectorReadable4LType v0 = new VectorI4L(x0, y0, z0, w0);
 
-      final long x1 = VectorI4LTest.randomPositiveSmallNumber();
-      final long y1 = VectorI4LTest.randomPositiveSmallNumber();
-      final long z1 = VectorI4LTest.randomPositiveSmallNumber();
-      final long w1 = VectorI4LTest.randomPositiveSmallNumber();
-      final VectorI4L v1 = new VectorI4L(x1, y1, z1, w1);
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
+      final long w1 = randomPositiveSmallNumber();
+      final VectorReadable4LType v1 = new VectorI4L(x1, y1, z1, w1);
 
       Assert.assertTrue(VectorI4L.distance(v0, v1) >= 0);
     }
@@ -386,7 +387,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = (long) (Math.random() * max);
       final long z = (long) (Math.random() * max);
       final long w = (long) (Math.random() * max);
-      final VectorI4L q = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType q = new VectorI4L(x, y, z, w);
 
       final double ms = VectorI4L.magnitudeSquared(q);
       final double dp = VectorI4L.dotProduct(q, q);
@@ -411,7 +412,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = (long) (Math.random() * max);
       final long z = (long) (Math.random() * max);
       final long w = (long) (Math.random() * max);
-      final VectorI4L q = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType q = new VectorI4L(x, y, z, w);
       final double dp = VectorI4L.dotProduct(q, q);
 
       
@@ -596,7 +597,7 @@ public class VectorI4LTest extends VectorI4Contract
   @Override @Test public void testInitializeReadable()
   {
     final VectorI4L v0 = new VectorI4L(1, 2, 3, 4);
-    final VectorI4L v1 = new VectorI4L(v0);
+    final VectorReadable4LType v1 = new VectorI4L(v0);
 
     Assert.assertTrue(v0.getXL() == v1.getXL());
     Assert.assertTrue(v0.getYL() == v1.getYL());
@@ -608,16 +609,16 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI4LTest.randomPositiveNumber();
-      final long y0 = VectorI4LTest.randomPositiveNumber();
-      final long z0 = VectorI4LTest.randomPositiveNumber();
-      final long w0 = VectorI4LTest.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
+      final long w0 = randomPositiveNumber();
       final VectorI4L v0 = new VectorI4L(x0, y0, z0, w0);
 
-      final long x1 = VectorI4LTest.randomPositiveNumber();
-      final long y1 = VectorI4LTest.randomPositiveNumber();
-      final long z1 = VectorI4LTest.randomPositiveNumber();
-      final long w1 = VectorI4LTest.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
+      final long w1 = randomPositiveNumber();
       final VectorI4L v1 = new VectorI4L(x1, y1, z1, w1);
 
       final VectorI4L vr0 = VectorI4L.interpolateLinear(v0, v1, 0);
@@ -639,11 +640,11 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = VectorI4LTest.randomPositiveSmallNumber();
-      final long y = VectorI4LTest.randomPositiveSmallNumber();
-      final long z = VectorI4LTest.randomPositiveSmallNumber();
-      final long w = VectorI4LTest.randomPositiveSmallNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final long x = randomPositiveSmallNumber();
+      final long y = randomPositiveSmallNumber();
+      final long z = randomPositiveSmallNumber();
+      final long w = randomPositiveSmallNumber();
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final long m = VectorI4L.magnitude(v);
       Assert.assertTrue(m >= 1);
@@ -662,14 +663,14 @@ public class VectorI4LTest extends VectorI4Contract
 
   @Override @Test public void testMagnitudeOne()
   {
-    final VectorI4L v = new VectorI4L(1, 0, 0, 0);
+    final VectorReadable4LType v = new VectorI4L(1, 0, 0, 0);
     final long m = VectorI4L.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final VectorI4L v = new VectorI4L(8, 0, 0, 0);
+    final VectorReadable4LType v = new VectorI4L(8, 0, 0, 0);
 
     {
       final long p = VectorI4L.dotProduct(v, v);
@@ -683,7 +684,7 @@ public class VectorI4LTest extends VectorI4Contract
 
   @Override @Test public void testMagnitudeZero()
   {
-    final VectorI4L v = new VectorI4L(0, 0, 0, 0);
+    final VectorReadable4LType v = new VectorI4L(0, 0, 0, 0);
     final long m = VectorI4L.magnitude(v);
     Assert.assertTrue(m == 0);
   }
@@ -706,16 +707,16 @@ public class VectorI4LTest extends VectorI4Contract
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final VectorI4L p = new VectorI4L(1, 0, 0, 1);
-      final VectorI4L q = new VectorI4L(0, 1, 0, 1);
+      final VectorReadable4LType p = new VectorI4L(1, 0, 0, 1);
+      final VectorReadable4LType q = new VectorI4L(0, 1, 0, 1);
       final VectorI4L u = VectorI4L.projection(p, q);
 
       Assert.assertTrue(VectorI4L.magnitude(u) == 0);
     }
 
     {
-      final VectorI4L p = new VectorI4L(-1, 0, 0, 1);
-      final VectorI4L q = new VectorI4L(0, 1, 0, 1);
+      final VectorReadable4LType p = new VectorI4L(-1, 0, 0, 1);
+      final VectorReadable4LType q = new VectorI4L(0, 1, 0, 1);
       final VectorI4L u = VectorI4L.projection(p, q);
 
       Assert.assertTrue(VectorI4L.magnitude(u) == 0);
@@ -726,10 +727,10 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = VectorI4LTest.randomPositiveNumber();
-      final long y = VectorI4LTest.randomPositiveNumber();
-      final long z = VectorI4LTest.randomPositiveNumber();
-      final long w = VectorI4LTest.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
       final VectorI4L v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.scale(v, 1);
@@ -745,11 +746,11 @@ public class VectorI4LTest extends VectorI4Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = VectorI4LTest.randomPositiveNumber();
-      final long y = VectorI4LTest.randomPositiveNumber();
-      final long z = VectorI4LTest.randomPositiveNumber();
-      final long w = VectorI4LTest.randomPositiveNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
+      final long w = randomPositiveNumber();
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.scale(v, 0);
 
@@ -763,23 +764,23 @@ public class VectorI4LTest extends VectorI4Contract
   @Override @Test public void testString()
   {
     final VectorI4L v = new VectorI4L(1, 2, 3, 4);
-    Assert.assertTrue(v.toString().equals("[VectorI4L 1 2 3 4]"));
+    Assert.assertTrue("[VectorI4L 1 2 3 4]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI4LTest.randomPositiveNumber();
-      final long y0 = VectorI4LTest.randomPositiveNumber();
-      final long z0 = VectorI4LTest.randomPositiveNumber();
-      final long w0 = VectorI4LTest.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
+      final long w0 = randomPositiveNumber();
       final VectorI4L v0 = new VectorI4L(x0, y0, z0, w0);
 
-      final long x1 = VectorI4LTest.randomPositiveNumber();
-      final long y1 = VectorI4LTest.randomPositiveNumber();
-      final long z1 = VectorI4LTest.randomPositiveNumber();
-      final long w1 = VectorI4LTest.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
+      final long w1 = randomPositiveNumber();
       final VectorI4L v1 = new VectorI4L(x1, y1, z1, w1);
 
       final VectorI4L vr0 = VectorI4L.subtract(v0, v1);

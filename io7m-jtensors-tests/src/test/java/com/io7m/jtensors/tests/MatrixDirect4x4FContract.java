@@ -26,6 +26,7 @@ import java.nio.FloatBuffer;
 public abstract class MatrixDirect4x4FContract<T extends MatrixDirect4x4FType>
   extends Matrix4x4FContract<T>
 {
+  @Override
   protected abstract T newMatrix();
 
   @Test public final void testBufferEndianness()

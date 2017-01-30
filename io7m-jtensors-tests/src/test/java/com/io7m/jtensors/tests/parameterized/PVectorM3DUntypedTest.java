@@ -47,7 +47,7 @@ public final class PVectorM3DUntypedTest<T>
 
   @Override protected Logger logger()
   {
-    return PVectorM3DUntypedTest.LOG;
+    return LOG;
   }
 
   @Override protected PVectorM3D<T> newVectorM3D(final PVectorM3D<T> v)

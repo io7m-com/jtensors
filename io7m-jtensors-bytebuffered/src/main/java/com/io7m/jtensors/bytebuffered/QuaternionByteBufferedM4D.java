@@ -136,7 +136,7 @@ public final class QuaternionByteBufferedM4D extends ByteBuffered
     final double x)
   {
     this.buffer.putDouble(
-      QuaternionByteBufferedM4D.getByteOffsetForIndex(o, i), x);
+      getByteOffsetForIndex(o, i), x);
   }
 
   private double getAtOffsetAndIndex(
@@ -144,7 +144,7 @@ public final class QuaternionByteBufferedM4D extends ByteBuffered
     final int i)
   {
     return this.buffer.getDouble(
-      QuaternionByteBufferedM4D.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public double getYD()
@@ -259,19 +259,10 @@ public final class QuaternionByteBufferedM4D extends ByteBuffered
       return false;
     }
     final QuaternionByteBufferedM4D other = (QuaternionByteBufferedM4D) obj;
-    if (Double.doubleToLongBits(this.getWD())
-        != Double.doubleToLongBits(other.getWD())) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.getXD())
-        != Double.doubleToLongBits(other.getXD())) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.getYD())
-        != Double.doubleToLongBits(other.getYD())) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.getZD()) == Double.doubleToLongBits(
+    return Double.doubleToLongBits(this.getWD()) == Double.doubleToLongBits(
+      other.getWD()) && Double.doubleToLongBits(this.getXD()) == Double.doubleToLongBits(
+      other.getXD()) && Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
+      other.getYD()) && Double.doubleToLongBits(this.getZD()) == Double.doubleToLongBits(
       other.getZD());
   }
 }

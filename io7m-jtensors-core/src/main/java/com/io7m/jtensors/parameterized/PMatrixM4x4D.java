@@ -35,7 +35,8 @@ import com.io7m.junreachable.UnreachableCodeException;
  * @since 7.0.0
  */
 
-@SuppressWarnings("unchecked") public final class PMatrixM4x4D
+@SuppressWarnings("unchecked")
+public final class PMatrixM4x4D
 {
   private PMatrixM4x4D()
   {
@@ -57,16 +58,16 @@ import com.io7m.junreachable.UnreachableCodeException;
 
     final double d_inv = 1.0 / d;
 
-    /**
-     * This code is based on the Laplace Expansion theorem. Essentially, the
-     * inverse of the matrix is calculated by taking the determinants of 3x3
-     * sub-matrices of the original matrix. The sub-matrices are created by
-     * removing a specific row and column to leave 9 (possibly non-adjacent)
-     * cells, which are then placed in a 3x3 matrix.
-     *
-     * This implementation was derived from the paper "The Laplace Expansion
-     * Theorem: Computing the Determinants and Inverses of Matrices" by David
-     * Eberly.
+    /*
+      This code is based on the Laplace Expansion theorem. Essentially, the
+      inverse of the matrix is calculated by taking the determinants of 3x3
+      sub-matrices of the original matrix. The sub-matrices are created by
+      removing a specific row and column to leave 9 (possibly non-adjacent)
+      cells, which are then placed in a 3x3 matrix.
+
+      This implementation was derived from the paper "The Laplace Expansion
+      Theorem: Computing the Determinants and Inverses of Matrices" by David
+      Eberly.
      */
 
     final double r0c0;
@@ -361,9 +362,9 @@ import com.io7m.junreachable.UnreachableCodeException;
       r3c3 = MatrixM3x3D.determinant(m3);
     }
 
-    /**
-     * Divide sub-matrix determinants by the determinant of the original
-     * matrix and transpose.
+    /*
+      Divide sub-matrix determinants by the determinant of the original
+      matrix and transpose.
      */
 
     temp.setR0C0D(r0c0 * d_inv);
@@ -414,7 +415,7 @@ import com.io7m.junreachable.UnreachableCodeException;
     final PMatrixReadable4x4DType<T0, T1> m,
     final MOUT out)
   {
-    return PMatrixM4x4D.invertActual(m, context.m3a, context.m4a, out);
+    return invertActual(m, context.m3a, context.m4a, out);
   }
 
   /**
@@ -602,7 +603,7 @@ import com.io7m.junreachable.UnreachableCodeException;
     final PVectorReadable4DType<T0> v,
     final V out)
   {
-    return PMatrixM4x4D.multiplyVector4DActual(
+    return multiplyVector4DActual(
       m, v, context.v4a, context.v4b, out);
   }
 
@@ -649,12 +650,12 @@ import com.io7m.junreachable.UnreachableCodeException;
     private final Matrix3x3DType m3a = MatrixHeapArrayM3x3D.newMatrix();
     private final Matrix4x4DType m4a = MatrixHeapArrayM4x4D.newMatrix();
     private final Matrix4x4DType m4b = MatrixHeapArrayM4x4D.newMatrix();
-    private final VectorM3D      v3a = new VectorM3D();
-    private final VectorM3D      v3b = new VectorM3D();
-    private final VectorM3D      v3c = new VectorM3D();
-    private final VectorM3D      v3d = new VectorM3D();
-    private final VectorM4D      v4a = new VectorM4D();
-    private final VectorM4D      v4b = new VectorM4D();
+    private final VectorM3D v3a = new VectorM3D();
+    private final VectorM3D v3b = new VectorM3D();
+    private final VectorM3D v3c = new VectorM3D();
+    private final VectorM3D v3d = new VectorM3D();
+    private final VectorM4D v4a = new VectorM4D();
+    private final VectorM4D v4b = new VectorM4D();
 
     /**
      * Construct a new context.

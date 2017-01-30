@@ -21,6 +21,7 @@ import com.io7m.jtensors.MatrixHeapArrayM2x2D;
 import com.io7m.jtensors.MatrixI2x2D;
 import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorM3D;
+import com.io7m.jtensors.VectorReadable2DType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -78,8 +79,8 @@ import org.junit.Test;
 
     final MatrixI2x2D im0 = MatrixI2x2D.newFromReadable(m0);
 
-    final VectorI3D column_0 = new VectorI3D(0.0, 0.1, 0.2);
-    final VectorI3D column_1 = new VectorI3D(10.0, 10.1, 10.2);
+    final VectorReadable2DType column_0 = new VectorI3D(0.0, 0.1, 0.2);
+    final VectorReadable2DType column_1 = new VectorI3D(10.0, 10.1, 10.2);
 
     final MatrixI2x2D im1 = MatrixI2x2D.newFromColumns(column_0, column_1);
 

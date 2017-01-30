@@ -28,7 +28,8 @@ import net.jcip.annotations.Immutable;
  * accessed from multiple threads. </p>
  */
 
-@Immutable public final class VectorI3F implements VectorReadable3FType
+@Immutable
+public final class VectorI3F implements VectorReadable3FType
 {
   /**
    * The zero vector.
@@ -137,7 +138,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3FType v1,
     final float r)
   {
-    return VectorI3F.add(v0, VectorI3F.scale(v1, r));
+    return add(v0, scale(v1, r));
   }
 
   /**
@@ -334,7 +335,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3FType v0,
     final VectorReadable3FType v1)
   {
-    return VectorI3F.magnitude(VectorI3F.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -378,9 +379,9 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3FType v1,
     final float alpha)
   {
-    final VectorReadable3FType w0 = VectorI3F.scale(v0, 1.0f - alpha);
-    final VectorReadable3FType w1 = VectorI3F.scale(v1, alpha);
-    return VectorI3F.add(w0, w1);
+    final VectorReadable3FType w0 = scale(v0, 1.0f - alpha);
+    final VectorReadable3FType w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -396,7 +397,7 @@ import net.jcip.annotations.Immutable;
   public static float magnitude(
     final VectorReadable3FType v)
   {
-    return (float) Math.sqrt((double) VectorI3F.magnitudeSquared(v));
+    return (float) Math.sqrt((double) magnitudeSquared(v));
   }
 
   /**
@@ -410,7 +411,7 @@ import net.jcip.annotations.Immutable;
   public static float magnitudeSquared(
     final VectorReadable3FType v)
   {
-    return VectorI3F.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -426,10 +427,10 @@ import net.jcip.annotations.Immutable;
   public static VectorI3F normalize(
     final VectorReadable3FType v)
   {
-    final float m = VectorI3F.magnitudeSquared(v);
+    final float m = magnitudeSquared(v);
     if (m > 0.0F) {
       final float reciprocal = (float) (1.0 / Math.sqrt((double) m));
-      return VectorI3F.scale(v, reciprocal);
+      return scale(v, reciprocal);
     }
     return new VectorI3F(v);
   }
@@ -451,11 +452,11 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3FType v0,
     final VectorReadable3FType v1)
   {
-    final VectorI3F v0n = VectorI3F.normalize(v0);
+    final VectorI3F v0n = normalize(v0);
     final VectorI3F projection =
-      VectorI3F.scale(v0n, VectorI3F.dotProduct(v1, v0n));
+      scale(v0n, dotProduct(v1, v0n));
     final VectorI3F vr =
-      VectorI3F.normalize(VectorI3F.subtract(v1, projection));
+      normalize(subtract(v1, projection));
     return Pair.pair(v0n, vr);
   }
 
@@ -473,10 +474,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3FType p,
     final VectorReadable3FType q)
   {
-    final float dot = VectorI3F.dotProduct(p, q);
-    final float qms = VectorI3F.magnitudeSquared(q);
+    final float dot = dotProduct(p, q);
+    final float qms = magnitudeSquared(q);
     final float s = dot / qms;
-    return VectorI3F.scale(p, s);
+    return scale(p, s);
   }
 
   /**
@@ -515,7 +516,8 @@ import net.jcip.annotations.Immutable;
       v0.getZF() - v1.getZF());
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -528,34 +530,32 @@ import net.jcip.annotations.Immutable;
       return false;
     }
     final VectorI3F other = (VectorI3F) obj;
-    if (Float.floatToIntBits(this.getXF()) != Float.floatToIntBits(
-      other.getXF())) {
-      return false;
-    }
-    if (Float.floatToIntBits(this.getYF()) != Float.floatToIntBits(
-      other.getYF())) {
-      return false;
-    }
-    return Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
+    return Float.floatToIntBits(this.getXF()) == Float.floatToIntBits(
+      other.getXF()) && Float.floatToIntBits(this.getYF()) == Float.floatToIntBits(
+      other.getYF()) && Float.floatToIntBits(this.getZF()) == Float.floatToIntBits(
       other.getZF());
   }
 
-  @Override public float getXF()
+  @Override
+  public float getXF()
   {
     return this.x;
   }
 
-  @Override public float getYF()
+  @Override
+  public float getYF()
   {
     return this.y;
   }
 
-  @Override public float getZF()
+  @Override
+  public float getZF()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -565,7 +565,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI3F ");

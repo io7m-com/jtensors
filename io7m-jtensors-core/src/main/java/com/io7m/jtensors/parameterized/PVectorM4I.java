@@ -138,7 +138,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final V v)
     throws ArithmeticException
   {
-    return PVectorM4I.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -192,7 +192,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final PVectorReadable4IType<T> v1)
     throws ArithmeticException
   {
-    return PVectorM4I.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -258,7 +258,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final double r)
     throws ArithmeticException
   {
-    return PVectorM4I.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -347,7 +347,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final PVectorReadable4IType<T> minimum,
     final PVectorReadable4IType<T> maximum)
   {
-    return PVectorM4I.clampByPVector(v, minimum, maximum, v);
+    return clampByPVector(v, minimum, maximum, v);
   }
 
   /**
@@ -370,7 +370,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final int minimum,
     final int maximum)
   {
-    return PVectorM4I.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -446,7 +446,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final V v,
     final PVectorReadable4IType<T> maximum)
   {
-    return PVectorM4I.clampMaximumByPVector(v, maximum, v);
+    return clampMaximumByPVector(v, maximum, v);
   }
 
   /**
@@ -467,7 +467,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final V v,
     final int maximum)
   {
-    return PVectorM4I.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -543,7 +543,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final V v,
     final PVectorReadable4IType<T> minimum)
   {
-    return PVectorM4I.clampMinimumByPVector(v, minimum, v);
+    return clampMinimumByPVector(v, minimum, v);
   }
 
   /**
@@ -564,7 +564,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final V v,
     final int minimum)
   {
-    return PVectorM4I.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -609,7 +609,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     throws ArithmeticException
   {
     final PVectorM4I<T> vr = (PVectorM4I<T>) c.va;
-    return PVectorM4I.magnitude(PVectorM4I.subtract(v0, v1, vr));
+    return magnitude(subtract(v0, v1, vr));
   }
 
   /**
@@ -672,9 +672,9 @@ public final class PVectorM4I<T> implements PVector4IType<T>
   {
     final PVectorM4I<T> va = (PVectorM4I<T>) c.va;
     final PVectorM4I<T> vb = (PVectorM4I<T>) c.vb;
-    PVectorM4I.scale(v0, 1.0 - alpha, va);
-    PVectorM4I.scale(v1, alpha, vb);
-    return PVectorM4I.add(va, vb, r);
+    scale(v0, 1.0 - alpha, va);
+    scale(v1, alpha, vb);
+    return add(va, vb, r);
   }
 
   /**
@@ -695,7 +695,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final PVectorReadable4IType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt((double) PVectorM4I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -714,7 +714,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final PVectorReadable4IType<T> v)
     throws ArithmeticException
   {
-    return PVectorM4I.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -739,11 +739,11 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final V r)
     throws ArithmeticException
   {
-    final int dot = PVectorM4I.dotProduct(p, q);
-    final int qms = PVectorM4I.magnitudeSquared(q);
+    final int dot = dotProduct(p, q);
+    final int qms = magnitudeSquared(q);
     final int s = dot / qms;
 
-    return PVectorM4I.scale(p, (double) s, r);
+    return scale(p, (double) s, r);
   }
 
   /**
@@ -797,7 +797,7 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final int r)
     throws ArithmeticException
   {
-    return PVectorM4I.scale(v, (double) r, v);
+    return scale(v, (double) r, v);
   }
 
   /**
@@ -851,46 +851,53 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     final PVectorReadable4IType<T> v1)
     throws ArithmeticException
   {
-    return PVectorM4I.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2I(
+  @Override
+  public void copyFrom2I(
     final VectorReadable2IType in_v)
   {
     VectorM2I.copy(in_v, this);
   }
 
-  @Override public void copyFrom3I(
+  @Override
+  public void copyFrom3I(
     final VectorReadable3IType in_v)
   {
     VectorM3I.copy(in_v, this);
   }
 
-  @Override public void copyFrom4I(
+  @Override
+  public void copyFrom4I(
     final VectorReadable4IType in_v)
   {
     VectorM4I.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped2I(
+  @Override
+  public void copyFromTyped2I(
     final PVectorReadable2IType<T> in_v)
   {
     PVectorM2I.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped3I(
+  @Override
+  public void copyFromTyped3I(
     final PVectorReadable3IType<T> in_v)
   {
     PVectorM3I.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped4I(
+  @Override
+  public void copyFromTyped4I(
     final PVectorReadable4IType<T> in_v)
   {
     VectorM4I.copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -903,63 +910,63 @@ public final class PVectorM4I<T> implements PVector4IType<T>
       return false;
     }
     final PVectorM4I<?> other = (PVectorM4I<?>) obj;
-    if (this.w != other.w) {
-      return false;
-    }
-    if (this.x != other.x) {
-      return false;
-    }
-    if (this.y != other.y) {
-      return false;
-    }
-    return this.z == other.z;
+    return this.w == other.w && this.x == other.x && this.y == other.y && this.z == other.z;
   }
 
-  @Override public int getWI()
+  @Override
+  public int getWI()
   {
     return this.w;
   }
 
-  @Override public void setWI(
+  @Override
+  public void setWI(
     final int in_w)
   {
     this.w = in_w;
   }
 
-  @Override public int getXI()
+  @Override
+  public int getXI()
   {
     return this.x;
   }
 
-  @Override public void setXI(
+  @Override
+  public void setXI(
     final int in_x)
   {
     this.x = in_x;
   }
 
-  @Override public int getYI()
+  @Override
+  public int getYI()
   {
     return this.y;
   }
 
-  @Override public void setYI(
+  @Override
+  public void setYI(
     final int in_y)
   {
     this.y = in_y;
   }
 
-  @Override public int getZI()
+  @Override
+  public int getZI()
   {
     return this.z;
   }
 
-  @Override public void setZI(
+  @Override
+  public void setZI(
     final int in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -970,7 +977,8 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     return result;
   }
 
-  @Override public void set2I(
+  @Override
+  public void set2I(
     final int in_x,
     final int in_y)
   {
@@ -978,7 +986,8 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     this.y = in_y;
   }
 
-  @Override public void set3I(
+  @Override
+  public void set3I(
     final int in_x,
     final int in_y,
     final int in_z)
@@ -988,7 +997,8 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     this.z = in_z;
   }
 
-  @Override public void set4I(
+  @Override
+  public void set4I(
     final int in_x,
     final int in_y,
     final int in_z,
@@ -1000,7 +1010,8 @@ public final class PVectorM4I<T> implements PVector4IType<T>
     this.w = in_w;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorM4I ");

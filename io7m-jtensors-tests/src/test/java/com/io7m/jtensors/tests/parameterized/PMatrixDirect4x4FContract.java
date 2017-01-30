@@ -45,6 +45,7 @@ public abstract class PMatrixDirect4x4FContract<
 {
   //@formatter:on
 
+  @Override
   protected abstract T newMatrix();
 
   @Test public final void testBufferEndianness()

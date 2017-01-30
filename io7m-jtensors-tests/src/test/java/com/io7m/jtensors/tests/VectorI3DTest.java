@@ -19,6 +19,7 @@ package com.io7m.jtensors.tests;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorI3D;
+import com.io7m.jtensors.VectorReadable3DType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -123,74 +124,74 @@ public class VectorI3DTest extends VectorI3Contract
     final double q = z + 1.0;
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(q, y, z);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(q, y, z);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(x, q, z);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(x, q, z);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(x, y, q);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(x, y, q);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(x, y, q);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(x, y, q);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(q, q, z);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(q, q, z);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(q, y, q);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(q, y, q);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(q, y, z);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(q, y, z);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(q, q, q);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(q, q, q);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(q, q, z);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(q, q, z);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(q, q, q);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(q, q, q);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(x, q, q);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(x, q, q);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3D m0 = new VectorI3D(x, y, z);
-      final VectorI3D m1 = new VectorI3D(x, y, q);
+      final VectorReadable3DType m0 = new VectorI3D(x, y, z);
+      final VectorReadable3DType m1 = new VectorI3D(x, y, q);
       Assert.assertFalse(VectorI3D.almostEqual(ec, m0, m1));
     }
   }
@@ -204,9 +205,9 @@ public class VectorI3DTest extends VectorI3Contract
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
-      final VectorI3D v0 = new VectorI3D(x0, y0, z0);
-      final VectorI3D v1 = new VectorI3D(x0, y0, z0);
-      final VectorI3D v2 = new VectorI3D(x0, y0, z0);
+      final VectorReadable3DType v0 = new VectorI3D(x0, y0, z0);
+      final VectorReadable3DType v1 = new VectorI3D(x0, y0, z0);
+      final VectorReadable3DType v2 = new VectorI3D(x0, y0, z0);
 
       Assert.assertTrue(VectorI3D.almostEqual(ec, v0, v1));
       Assert.assertTrue(VectorI3D.almostEqual(ec, v1, v2));
@@ -216,7 +217,7 @@ public class VectorI3DTest extends VectorI3Contract
 
   @Override @Test public void testCheckInterface()
   {
-    final VectorI3D v = new VectorI3D(3.0, 5.0, 7.0);
+    final VectorReadable3DType v = new VectorI3D(3.0, 5.0, 7.0);
 
     Assert.assertTrue(v.getXD() == v.getXD());
     Assert.assertTrue(v.getYD() == v.getYD());
@@ -234,7 +235,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
-      final VectorI3D v = new VectorI3D(x, y, z);
+      final VectorReadable3DType v = new VectorI3D(x, y, z);
 
       Assert.assertTrue(
         VectorI3D.clampMaximumByVector(v, maximum).getXD()
@@ -259,7 +260,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
-      final VectorI3D v = new VectorI3D(x, y, z);
+      final VectorReadable3DType v = new VectorI3D(x, y, z);
 
       Assert.assertTrue(
         VectorI3D.clampMinimumByVector(v, minimum).getXD()
@@ -289,7 +290,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MAX_VALUE;
-      final VectorI3D v = new VectorI3D(x, y, z);
+      final VectorReadable3DType v = new VectorI3D(x, y, z);
 
       Assert.assertTrue(
         VectorI3D.clampByVector(v, minimum, maximum).getXD()
@@ -320,7 +321,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double x = Math.random() * Double.MAX_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MAX_VALUE;
-      final VectorI3D v = new VectorI3D(x, y, z);
+      final VectorReadable3DType v = new VectorI3D(x, y, z);
 
       Assert.assertTrue(VectorI3D.clampMaximum(v, maximum).getXD() <= maximum);
       Assert.assertTrue(VectorI3D.clampMaximum(v, maximum).getYD() <= maximum);
@@ -336,7 +337,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
-      final VectorI3D v = new VectorI3D(x, y, z);
+      final VectorReadable3DType v = new VectorI3D(x, y, z);
 
       Assert.assertTrue(VectorI3D.clampMinimum(v, minimum).getXD() >= minimum);
       Assert.assertTrue(VectorI3D.clampMinimum(v, minimum).getYD() >= minimum);
@@ -353,7 +354,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
-      final VectorI3D v = new VectorI3D(x, y, z);
+      final VectorReadable3DType v = new VectorI3D(x, y, z);
 
       Assert.assertTrue(
         VectorI3D.clamp(v, minimum, maximum).getXD()
@@ -386,7 +387,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double y = Math.random();
       final double z = Math.random();
       final VectorI3D v0 = new VectorI3D(x, y, z);
-      final VectorI3D v1 = new VectorI3D(v0);
+      final VectorReadable3DType v1 = new VectorI3D(v0);
       Assert.assertTrue(VectorI3D.almostEqual(ec, v0, v1));
     }
   }
@@ -431,7 +432,7 @@ public class VectorI3DTest extends VectorI3Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI3D v = new VectorI3D();
+    final VectorReadable3DType v = new VectorI3D();
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getZD(), 0.0));
@@ -442,8 +443,8 @@ public class VectorI3DTest extends VectorI3Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI3D v0 = new VectorI3D(0.0, 1.0, 0.0);
-    final VectorI3D v1 = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorReadable3DType v0 = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType v1 = new VectorI3D(0.0, 0.0, 0.0);
 
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
@@ -456,12 +457,12 @@ public class VectorI3DTest extends VectorI3Contract
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
-      final VectorI3D v0 = new VectorI3D(x0, y0, z0);
+      final VectorReadable3DType v0 = new VectorI3D(x0, y0, z0);
 
       final double x1 = Math.random() * Double.MAX_VALUE;
       final double y1 = Math.random() * Double.MAX_VALUE;
       final double z1 = Math.random() * Double.MAX_VALUE;
-      final VectorI3D v1 = new VectorI3D(x1, y1, z1);
+      final VectorReadable3DType v1 = new VectorI3D(x1, y1, z1);
 
       Assert.assertTrue(VectorI3D.distance(v0, v1) >= 0.0);
     }
@@ -502,14 +503,14 @@ public class VectorI3DTest extends VectorI3Contract
 
   @Override @Test public void testDotProductPerpendicular()
   {
-    final VectorI3D vpx = new VectorI3D(1.0f, 0.0f, 0.0f);
-    final VectorI3D vmx = new VectorI3D(-1.0f, 0.0f, 0.0f);
+    final VectorReadable3DType vpx = new VectorI3D(1.0f, 0.0f, 0.0f);
+    final VectorReadable3DType vmx = new VectorI3D(-1.0f, 0.0f, 0.0f);
 
-    final VectorI3D vpy = new VectorI3D(0.0f, 1.0f, 0.0f);
-    final VectorI3D vmy = new VectorI3D(0.0f, -1.0f, 0.0f);
+    final VectorReadable3DType vpy = new VectorI3D(0.0f, 1.0f, 0.0f);
+    final VectorReadable3DType vmy = new VectorI3D(0.0f, -1.0f, 0.0f);
 
-    final VectorI3D vpz = new VectorI3D(0.0f, 0.0f, 1.0f);
-    final VectorI3D vmz = new VectorI3D(0.0f, 0.0f, -1.0f);
+    final VectorReadable3DType vpz = new VectorI3D(0.0f, 0.0f, 1.0f);
+    final VectorReadable3DType vmz = new VectorI3D(0.0f, 0.0f, -1.0f);
 
     Assert.assertTrue(VectorI3D.dotProduct(vpx, vpy) == 0.0);
     Assert.assertTrue(VectorI3D.dotProduct(vpy, vpz) == 0.0);
@@ -526,7 +527,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double x = Math.random();
       final double y = Math.random();
       final double z = Math.random();
-      final VectorI3D q = new VectorI3D(x, y, z);
+      final VectorReadable3DType q = new VectorI3D(x, y, z);
       final double dp = VectorI3D.dotProduct(q, q);
 
       
@@ -545,7 +546,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double x = Math.random();
       final double y = Math.random();
       final double z = Math.random();
-      final VectorI3D q = new VectorI3D(x, y, z);
+      final VectorReadable3DType q = new VectorI3D(x, y, z);
 
       final double ms = VectorI3D.magnitudeSquared(q);
       final double dp = VectorI3D.dotProduct(q, q);
@@ -698,7 +699,7 @@ public class VectorI3DTest extends VectorI3Contract
   @Override @Test public void testInitializeReadable()
   {
     final VectorI3D v0 = new VectorI3D(1.0f, 2.0f, 3.0f);
-    final VectorI3D v1 = new VectorI3D(v0);
+    final VectorReadable3DType v1 = new VectorI3D(v0);
 
     Assert.assertTrue(v0.getXD() == v1.getXD());
     Assert.assertTrue(v0.getYD() == v1.getYD());
@@ -714,12 +715,12 @@ public class VectorI3DTest extends VectorI3Contract
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
-      final VectorI3D v0 = new VectorI3D(x0, y0, z0);
+      final VectorReadable3DType v0 = new VectorI3D(x0, y0, z0);
 
       final double x1 = Math.random() * Double.MAX_VALUE;
       final double y1 = Math.random() * Double.MAX_VALUE;
       final double z1 = Math.random() * Double.MAX_VALUE;
-      final VectorI3D v1 = new VectorI3D(x1, y1, z1);
+      final VectorReadable3DType v1 = new VectorI3D(x1, y1, z1);
 
       Assert.assertTrue(
         VectorI3D.almostEqual(
@@ -736,7 +737,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double x = 1.0 + (Math.random() * Double.MAX_VALUE);
       final double y = 1.0 + (Math.random() * Double.MAX_VALUE);
       final double z = 1.0 + (Math.random() * Double.MAX_VALUE);
-      final VectorI3D v = new VectorI3D(x, y, z);
+      final VectorReadable3DType v = new VectorI3D(x, y, z);
 
       final double m = VectorI3D.magnitude(v);
       Assert.assertTrue(m > 0.0);
@@ -752,7 +753,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double x = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
       final double y = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
       final double z = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
-      final VectorI3D v = new VectorI3D(x, y, z);
+      final VectorReadable3DType v = new VectorI3D(x, y, z);
 
       final VectorI3D vr = VectorI3D.normalize(v);
       Assert.assertNotSame(v, vr);
@@ -767,7 +768,7 @@ public class VectorI3DTest extends VectorI3Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI3D v = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorReadable3DType v = new VectorI3D(0.0, 0.0, 0.0);
     final VectorI3D vr = VectorI3D.normalize(v);
     final double m = VectorI3D.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
@@ -778,14 +779,14 @@ public class VectorI3DTest extends VectorI3Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI3D v = new VectorI3D(1.0, 0.0, 0.0);
+    final VectorReadable3DType v = new VectorI3D(1.0, 0.0, 0.0);
     final double m = VectorI3D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final VectorI3D v = new VectorI3D(8.0, 0.0, 0.0);
+    final VectorReadable3DType v = new VectorI3D(8.0, 0.0, 0.0);
 
     {
       final double p = VectorI3D.dotProduct(v, v);
@@ -802,14 +803,14 @@ public class VectorI3DTest extends VectorI3Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI3D v = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorReadable3DType v = new VectorI3D(0.0, 0.0, 0.0);
     final double m = VectorI3D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
   @Override @Test public void testNormalizeSimple()
   {
-    final VectorI3D v0 = new VectorI3D(8.0, 0.0, 0.0);
+    final VectorReadable3DType v0 = new VectorI3D(8.0, 0.0, 0.0);
     final VectorI3D vr = VectorI3D.normalize(v0);
     final double m = VectorI3D.magnitude(vr);
     Assert.assertTrue(m == 1.0);
@@ -820,7 +821,7 @@ public class VectorI3DTest extends VectorI3Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI3D q = new VectorI3D(0, 0, 0);
+    final VectorReadable3DType q = new VectorI3D(0, 0, 0);
     final VectorI3D qr = VectorI3D.normalize(q);
 
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.getXD()));
@@ -830,8 +831,8 @@ public class VectorI3DTest extends VectorI3Contract
 
   @Override @Test public void testOrthonormalize()
   {
-    final VectorI3D v0 = new VectorI3D(0, 1, 0);
-    final VectorI3D v1 = new VectorI3D(0.5, 0.5, 0);
+    final VectorReadable3DType v0 = new VectorI3D(0, 1, 0);
+    final VectorReadable3DType v1 = new VectorI3D(0.5, 0.5, 0);
     final Pair<VectorI3D, VectorI3D> on = VectorI3D.orthoNormalize(v0, v1);
 
     Assert.assertEquals(v0, on.getLeft());
@@ -841,15 +842,15 @@ public class VectorI3DTest extends VectorI3Contract
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final VectorI3D p = new VectorI3D(1.0, 0.0, 0.0);
-      final VectorI3D q = new VectorI3D(0.0, 1.0, 0.0);
+      final VectorReadable3DType p = new VectorI3D(1.0, 0.0, 0.0);
+      final VectorReadable3DType q = new VectorI3D(0.0, 1.0, 0.0);
       final VectorI3D r = VectorI3D.projection(p, q);
       Assert.assertTrue(VectorI3D.magnitude(r) == 0.0);
     }
 
     {
-      final VectorI3D p = new VectorI3D(-1.0, 0.0, 0.0);
-      final VectorI3D q = new VectorI3D(0.0, 1.0, 0.0);
+      final VectorReadable3DType p = new VectorI3D(-1.0, 0.0, 0.0);
+      final VectorReadable3DType q = new VectorI3D(0.0, 1.0, 0.0);
       final VectorI3D r = VectorI3D.projection(p, q);
       Assert.assertTrue(VectorI3D.magnitude(r) == 0.0);
     }
@@ -889,7 +890,7 @@ public class VectorI3DTest extends VectorI3Contract
       final double x = Math.random() * Double.MAX_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MAX_VALUE;
-      final VectorI3D v = new VectorI3D(x, y, z);
+      final VectorReadable3DType v = new VectorI3D(x, y, z);
 
       final VectorI3D vr = VectorI3D.scale(v, 0.0);
 
@@ -902,7 +903,7 @@ public class VectorI3DTest extends VectorI3Contract
   @Override @Test public void testString()
   {
     final VectorI3D v = new VectorI3D(0.0, 1.0, 2.0);
-    Assert.assertTrue(v.toString().equals("[VectorI3D 0.0 1.0 2.0]"));
+    Assert.assertTrue("[VectorI3D 0.0 1.0 2.0]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()

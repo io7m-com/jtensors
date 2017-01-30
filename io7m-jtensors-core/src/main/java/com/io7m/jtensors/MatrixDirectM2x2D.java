@@ -42,12 +42,12 @@ public final class MatrixDirectM2x2D implements MatrixDirect2x2DType
     VIEW_ROWS = 2;
     VIEW_COLS = 2;
     VIEW_ELEMENT_SIZE = 8;
-    VIEW_ELEMENTS = MatrixDirectM2x2D.VIEW_ROWS * MatrixDirectM2x2D.VIEW_COLS;
+    VIEW_ELEMENTS = VIEW_ROWS * VIEW_COLS;
     VIEW_BYTES =
-      MatrixDirectM2x2D.VIEW_ELEMENTS * MatrixDirectM2x2D.VIEW_ELEMENT_SIZE;
+      VIEW_ELEMENTS * VIEW_ELEMENT_SIZE;
   }
 
-  private final ByteBuffer   data;
+  private final ByteBuffer data;
   private final DoubleBuffer view;
 
   private MatrixDirectM2x2D(final @Nullable MatrixReadable2x2DType m)
@@ -56,7 +56,7 @@ public final class MatrixDirectM2x2D implements MatrixDirect2x2DType
     assert order != null;
 
     final ByteBuffer b =
-      ByteBuffer.allocateDirect(MatrixDirectM2x2D.VIEW_BYTES);
+      ByteBuffer.allocateDirect(VIEW_BYTES);
     b.order(order);
 
     final DoubleBuffer v = b.asDoubleBuffer();
@@ -98,8 +98,8 @@ public final class MatrixDirectM2x2D implements MatrixDirect2x2DType
     final int row,
     final int column)
   {
-    return MatrixDirectM2x2D.indexUnsafe(
-      MatrixDirectM2x2D.checkRow(row), MatrixDirectM2x2D.checkColumn(column));
+    return indexUnsafe(
+      checkRow(row), checkColumn(column));
   }
 
   /**
@@ -138,92 +138,107 @@ public final class MatrixDirectM2x2D implements MatrixDirect2x2DType
     return column;
   }
 
-  @Override public DoubleBuffer getDirectDoubleBuffer()
+  @Override
+  public DoubleBuffer getDirectDoubleBuffer()
   {
     return this.view;
   }
 
-  @Override public void setRowWith2D(
+  @Override
+  public void setRowWith2D(
     final int row,
     final VectorReadable2DType v)
   {
-    MatrixDirectM2x2D.checkRow(row);
+    checkRow(row);
     this.setRowWith2DUnsafe(row, v);
   }
 
-  @Override public void setRowWith2DUnsafe(
+  @Override
+  public void setRowWith2DUnsafe(
     final int row,
     final VectorReadable2DType v)
   {
-    this.view.put(MatrixDirectM2x2D.indexUnsafe(row, 0), v.getXD());
-    this.view.put(MatrixDirectM2x2D.indexUnsafe(row, 1), v.getYD());
+    this.view.put(indexUnsafe(row, 0), v.getXD());
+    this.view.put(indexUnsafe(row, 1), v.getYD());
   }
 
-  @Override public <V extends VectorWritable2DType> void getRow2D(
+  @Override
+  public <V extends VectorWritable2DType> void getRow2D(
     final int row,
     final V out)
   {
-    MatrixDirectM2x2D.checkRow(row);
+    checkRow(row);
     this.getRow2DUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
+  @Override
+  public <V extends VectorWritable2DType> void getRow2DUnsafe(
     final int row,
     final V out)
   {
-    final double x = this.view.get(MatrixDirectM2x2D.indexUnsafe(row, 0));
-    final double y = this.view.get(MatrixDirectM2x2D.indexUnsafe(row, 1));
+    final double x = this.view.get(indexUnsafe(row, 0));
+    final double y = this.view.get(indexUnsafe(row, 1));
     out.set2D(x, y);
   }
 
-  @Override public double getR0C0D()
+  @Override
+  public double getR0C0D()
   {
-    return this.view.get(MatrixDirectM2x2D.indexUnsafe(0, 0));
+    return this.view.get(indexUnsafe(0, 0));
   }
 
-  @Override public void setR0C0D(final double x)
+  @Override
+  public void setR0C0D(final double x)
   {
-    this.view.put(MatrixDirectM2x2D.indexUnsafe(0, 0), x);
+    this.view.put(indexUnsafe(0, 0), x);
   }
 
-  @Override public double getR1C0D()
+  @Override
+  public double getR1C0D()
   {
-    return this.view.get(MatrixDirectM2x2D.indexUnsafe(1, 0));
+    return this.view.get(indexUnsafe(1, 0));
   }
 
-  @Override public void setR1C0D(final double x)
+  @Override
+  public void setR1C0D(final double x)
   {
-    this.view.put(MatrixDirectM2x2D.indexUnsafe(1, 0), x);
+    this.view.put(indexUnsafe(1, 0), x);
   }
 
-  @Override public double getR0C1D()
+  @Override
+  public double getR0C1D()
   {
-    return this.view.get(MatrixDirectM2x2D.indexUnsafe(0, 1));
+    return this.view.get(indexUnsafe(0, 1));
   }
 
-  @Override public void setR0C1D(final double x)
+  @Override
+  public void setR0C1D(final double x)
   {
-    this.view.put(MatrixDirectM2x2D.indexUnsafe(0, 1), x);
+    this.view.put(indexUnsafe(0, 1), x);
   }
 
-  @Override public double getR1C1D()
+  @Override
+  public double getR1C1D()
   {
-    return this.view.get(MatrixDirectM2x2D.indexUnsafe(1, 1));
+    return this.view.get(indexUnsafe(1, 1));
   }
 
-  @Override public void setR1C1D(final double x)
+  @Override
+  public void setR1C1D(final double x)
   {
-    this.view.put(MatrixDirectM2x2D.indexUnsafe(1, 1), x);
+    this.view.put(indexUnsafe(1, 1), x);
   }
 
-  @Override public double getRowColumnD(
+  @Override
+  public double getRowColumnD(
     final int row,
     final int column)
   {
-    return this.view.get(MatrixDirectM2x2D.indexChecked(row, column));
+    return this.view.get(indexChecked(row, column));
   }
 
-  @Override public boolean equals(final Object obj)
+  @Override
+  public boolean equals(final Object obj)
   {
     if (this == obj) {
       return true;
@@ -239,20 +254,23 @@ public final class MatrixDirectM2x2D implements MatrixDirect2x2DType
     return MatrixM2x2D.compareElements(this, other);
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     return MatrixM2x2D.hashElements(this);
   }
 
-  @Override public void setRowColumnD(
+  @Override
+  public void setRowColumnD(
     final int row,
     final int column,
     final double x)
   {
-    this.view.put(MatrixDirectM2x2D.indexChecked(row, column), x);
+    this.view.put(indexChecked(row, column), x);
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
     MatrixM2x2D.showElements(this, builder);

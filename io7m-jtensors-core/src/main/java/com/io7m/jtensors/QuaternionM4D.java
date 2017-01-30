@@ -119,7 +119,7 @@ public final class QuaternionM4D implements Quaternion4DType
     final Q q0,
     final QuaternionReadable4DType q1)
   {
-    return QuaternionM4D.add(q0, q1, q0);
+    return add(q0, q1, q0);
   }
 
   /**
@@ -185,7 +185,7 @@ public final class QuaternionM4D implements Quaternion4DType
     QuaternionReadable4DType> Q conjugateInPlace(
     final Q q)
   {
-    return QuaternionM4D.conjugate(q, q);
+    return conjugate(q, q);
   }
 
   /**
@@ -250,9 +250,9 @@ public final class QuaternionM4D implements Quaternion4DType
     final double alpha,
     final Q r)
   {
-    QuaternionM4D.scale(q0, 1.0 - alpha, c.qa);
-    QuaternionM4D.scale(q1, alpha, c.qb);
-    return QuaternionM4D.add(c.qa, c.qb, r);
+    scale(q0, 1.0 - alpha, c.qa);
+    scale(q1, alpha, c.qb);
+    return add(c.qa, c.qb, r);
   }
 
   /**
@@ -325,7 +325,7 @@ public final class QuaternionM4D implements Quaternion4DType
     final MatrixM3x3D.ContextMM3D mc = context.m_context;
 
     MatrixM3x3D.lookAt(mc, origin, target, up, m, t);
-    QuaternionM4D.makeFromRotationMatrix3x3(m, q);
+    makeFromRotationMatrix3x3(m, q);
     return q;
   }
 
@@ -342,7 +342,7 @@ public final class QuaternionM4D implements Quaternion4DType
   public static double magnitude(
     final QuaternionReadable4DType q)
   {
-    return Math.sqrt(QuaternionM4D.magnitudeSquared(q));
+    return Math.sqrt(magnitudeSquared(q));
   }
 
   /**
@@ -356,7 +356,7 @@ public final class QuaternionM4D implements Quaternion4DType
   public static double magnitudeSquared(
     final QuaternionReadable4DType q)
   {
-    return QuaternionM4D.dotProduct(q, q);
+    return dotProduct(q, q);
   }
 
   /**
@@ -394,7 +394,7 @@ public final class QuaternionM4D implements Quaternion4DType
     final double w = Math.cos(angle_r);
 
     c.qa.set4D(x, y, z, w);
-    QuaternionM4D.normalize(c.qa, out);
+    normalize(c.qa, out);
     return out;
   }
 
@@ -494,7 +494,7 @@ public final class QuaternionM4D implements Quaternion4DType
     final double m21 = m.getR2C1D();
     final double m22 = m.getR2C2D();
 
-    /**
+    /*
      * Explicitly ignore the bottom right element of the matrix, as this
      * affects the magnitude of the created quaternion.
      */
@@ -741,7 +741,7 @@ public final class QuaternionM4D implements Quaternion4DType
     final Q q0,
     final QuaternionReadable4DType q1)
   {
-    return QuaternionM4D.multiply(q0, q1, q0);
+    return multiply(q0, q1, q0);
   }
 
   /**
@@ -784,7 +784,7 @@ public final class QuaternionM4D implements Quaternion4DType
     QuaternionReadable4DType> Q negateInPlace(
     final Q q)
   {
-    return QuaternionM4D.negate(q, q);
+    return negate(q, q);
   }
 
   /**
@@ -803,10 +803,10 @@ public final class QuaternionM4D implements Quaternion4DType
     final QuaternionReadable4DType q,
     final Q out)
   {
-    final double m = QuaternionM4D.magnitudeSquared(q);
+    final double m = magnitudeSquared(q);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return QuaternionM4D.scale(q, reciprocal, out);
+      return scale(q, reciprocal, out);
     }
     out.set4D(q.getXD(), q.getYD(), q.getZD(), q.getWD());
     return out;
@@ -827,7 +827,7 @@ public final class QuaternionM4D implements Quaternion4DType
     QuaternionReadable4DType> Q normalizeInPlace(
     final Q q)
   {
-    return QuaternionM4D.normalize(q, q);
+    return normalize(q, q);
   }
 
   /**
@@ -871,7 +871,7 @@ public final class QuaternionM4D implements Quaternion4DType
     final Q q,
     final double r)
   {
-    return QuaternionM4D.scale(q, r, q);
+    return scale(q, r, q);
   }
 
   /**
@@ -915,7 +915,43 @@ public final class QuaternionM4D implements Quaternion4DType
     final Q q0,
     final QuaternionReadable4DType q1)
   {
-    return QuaternionM4D.subtract(q0, q1, q0);
+    return subtract(q0, q1, q0);
+  }
+
+  /**
+   * Determine the axis-angle representation of the given quaternion.
+   *
+   * @param q   The input quaternion
+   * @param out The output vector that will contain the axis
+   * @param <V> The precise type of output vector
+   *
+   * @return The angle
+   */
+
+  public static <V extends VectorWritable3DType> double toAxisAngle(
+    final QuaternionReadable4DType q,
+    final V out)
+  {
+    final double rx;
+    final double ry;
+    final double rz;
+    final double angle;
+
+    final double mag_s = magnitudeSquared(q);
+    if (mag_s != 0.0) {
+      angle = 2.0 * StrictMath.acos(q.getWD());
+      rx = q.getXD();
+      ry = q.getYD();
+      rz = q.getZD();
+    } else {
+      angle = 0.0;
+      rx = 1.0;
+      ry = 0.0;
+      rz = 0.0;
+    }
+
+    VectorM3D.normalize(new VectorM3D(rx, ry, rz), out);
+    return angle;
   }
 
   @Override
@@ -953,16 +989,10 @@ public final class QuaternionM4D implements Quaternion4DType
       return false;
     }
     final QuaternionM4D other = (QuaternionM4D) obj;
-    if (Double.doubleToLongBits(this.w) != Double.doubleToLongBits(other.w)) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
+    return Double.doubleToLongBits(this.w) == Double.doubleToLongBits(other.w)
+      && Double.doubleToLongBits(this.x) == Double.doubleToLongBits(other.x)
+      && Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y)
+      && Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
   }
 
   @Override
@@ -1067,46 +1097,10 @@ public final class QuaternionM4D implements Quaternion4DType
     this.w = in_w;
   }
 
-  /**
-   * Determine the axis-angle representation of the given quaternion.
-   *
-   * @param q   The input quaternion
-   * @param out The output vector that will contain the axis
-   * @param <V> The precise type of output vector
-   *
-   * @return The angle
-   */
-
-  public static <V extends VectorWritable3DType> double toAxisAngle(
-    final QuaternionReadable4DType q,
-    final V out)
-  {
-    final double rx;
-    final double ry;
-    final double rz;
-    final double angle;
-
-    final double mag_s = QuaternionM4D.magnitudeSquared(q);
-    if (mag_s != 0.0) {
-      angle = 2.0 * StrictMath.acos(q.getWD());
-      rx = q.getXD();
-      ry = q.getYD();
-      rz = q.getZD();
-    } else {
-      angle = 0.0;
-      rx = 1.0;
-      ry = 0.0;
-      rz = 0.0;
-    }
-
-    VectorM3D.normalize(new VectorM3D(rx, ry, rz), out);
-    return angle;
-  }
-
   @Override
   public String toString()
   {
-    final StringBuilder builder = new StringBuilder();
+    final StringBuilder builder = new StringBuilder(64);
     builder.append("[QuaternionM4D ");
     builder.append(this.x);
     builder.append(" ");
@@ -1116,9 +1110,7 @@ public final class QuaternionM4D implements Quaternion4DType
     builder.append(" ");
     builder.append(this.w);
     builder.append("]");
-    final String r = builder.toString();
-    assert r != null;
-    return r;
+    return builder.toString();
   }
 
   /**

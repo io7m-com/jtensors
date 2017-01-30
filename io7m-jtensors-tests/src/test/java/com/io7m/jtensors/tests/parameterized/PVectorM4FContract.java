@@ -44,10 +44,10 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MIN_VALUE);
+      final float x = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float y = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float z = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float w = (float) (getRandom() * (double) Float.MIN_VALUE);
       final V v = this.newVectorM4F(x, y, z, w);
 
       final V vr = this.newVectorM4F();
@@ -74,10 +74,10 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MIN_VALUE);
+      final float x = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float y = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float z = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float w = (float) (getRandom() * (double) Float.MIN_VALUE);
       final V v = this.newVectorM4F(x, y, z, w);
 
       final float orig_x = v.getXF();
@@ -110,16 +110,16 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 1000.0f;
 
-      final float x0 = (float) (this.getRandom() * (double) max);
-      final float y0 = (float) (this.getRandom() * (double) max);
-      final float z0 = (float) (this.getRandom() * (double) max);
-      final float w0 = (float) (this.getRandom() * (double) max);
+      final float x0 = (float) (getRandom() * (double) max);
+      final float y0 = (float) (getRandom() * (double) max);
+      final float z0 = (float) (getRandom() * (double) max);
+      final float w0 = (float) (getRandom() * (double) max);
       final V v0 = this.newVectorM4F(x0, y0, z0, w0);
 
-      final float x1 = (float) (this.getRandom() * (double) max);
-      final float y1 = (float) (this.getRandom() * (double) max);
-      final float z1 = (float) (this.getRandom() * (double) max);
-      final float w1 = (float) (this.getRandom() * (double) max);
+      final float x1 = (float) (getRandom() * (double) max);
+      final float y1 = (float) (getRandom() * (double) max);
+      final float z1 = (float) (getRandom() * (double) max);
+      final float w1 = (float) (getRandom() * (double) max);
       final V v1 = this.newVectorM4F(x1, y1, z1, w1);
 
       final V vr0 = this.newVectorM4F();
@@ -221,19 +221,19 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 1000.0f;
 
-      final float x0 = (float) (this.getRandom() * (double) max);
-      final float y0 = (float) (this.getRandom() * (double) max);
-      final float z0 = (float) (this.getRandom() * (double) max);
-      final float w0 = (float) (this.getRandom() * (double) max);
+      final float x0 = (float) (getRandom() * (double) max);
+      final float y0 = (float) (getRandom() * (double) max);
+      final float z0 = (float) (getRandom() * (double) max);
+      final float w0 = (float) (getRandom() * (double) max);
       final V v0 = this.newVectorM4F(x0, y0, z0, w0);
 
-      final float x1 = (float) (this.getRandom() * (double) max);
-      final float y1 = (float) (this.getRandom() * (double) max);
-      final float z1 = (float) (this.getRandom() * (double) max);
-      final float w1 = (float) (this.getRandom() * (double) max);
+      final float x1 = (float) (getRandom() * (double) max);
+      final float y1 = (float) (getRandom() * (double) max);
+      final float z1 = (float) (getRandom() * (double) max);
+      final float w1 = (float) (getRandom() * (double) max);
       final V v1 = this.newVectorM4F(x1, y1, z1, w1);
 
-      final float r = (float) (this.getRandom() * (double) max);
+      final float r = (float) (getRandom() * (double) max);
 
       final V vr0 = this.newVectorM4F();
       PVectorM4F.addScaled(v0, v1, (double) r, vr0);
@@ -279,7 +279,7 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final float x = (float) this.getRandom();
+    final float x = (float) getRandom();
     final float y = x + 1.0f;
     final float z = y + 1.0f;
     final float w = z + 1.0f;
@@ -364,10 +364,10 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float y0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w0 = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v0 = this.newVectorM4F(x0, y0, z0, w0);
       final V v1 = this.newVectorM4F(x0, y0, z0, w0);
       final V v2 = this.newVectorM4F(x0, y0, z0, w0);
@@ -391,16 +391,16 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
   @Test public final void testClampByPVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float max_x = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float max_y = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float max_z = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float max_w = (float) (this.getRandom() * (double) Float.MIN_VALUE);
+      final float max_x = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float max_y = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float max_z = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float max_w = (float) (getRandom() * (double) Float.MIN_VALUE);
       final V maximum = this.newVectorM4F(max_x, max_y, max_z, max_w);
 
-      final float x = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MIN_VALUE);
+      final float x = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float y = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float z = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float w = (float) (getRandom() * (double) Float.MIN_VALUE);
       final V v = this.newVectorM4F(x, y, z, w);
 
       final V vr = this.newVectorM4F();
@@ -428,16 +428,16 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
   @Test public final void testClampByPVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float min_x = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float min_y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float min_z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float min_w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float min_x = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float min_y = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float min_z = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float min_w = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V minimum = this.newVectorM4F(min_x, min_y, min_z, min_w);
 
-      final float x = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MIN_VALUE);
+      final float x = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float y = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float z = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float w = (float) (getRandom() * (double) Float.MIN_VALUE);
       final V v = this.newVectorM4F(x, y, z, w);
 
       final V vr = this.newVectorM4F();
@@ -465,22 +465,22 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
   @Test public final void testClampByPVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float min_x = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float min_y = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float min_z = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float min_w = (float) (this.getRandom() * (double) Float.MIN_VALUE);
+      final float min_x = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float min_y = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float min_z = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float min_w = (float) (getRandom() * (double) Float.MIN_VALUE);
       final V minimum = this.newVectorM4F(min_x, min_y, min_z, min_w);
 
-      final float max_x = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float max_y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float max_z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float max_w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float max_x = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float max_y = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float max_z = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float max_w = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V maximum = this.newVectorM4F(max_x, max_y, max_z, max_w);
 
-      final float x = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float y = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v = this.newVectorM4F(x, y, z, w);
 
       final V vr = this.newVectorM4F();
@@ -517,12 +517,12 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float maximum =
-        (float) (this.getRandom() * (double) Float.MIN_VALUE);
+        (float) (getRandom() * (double) Float.MIN_VALUE);
 
-      final float x = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float y = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v = this.newVectorM4F(x, y, z, w);
 
       final V vr = this.newVectorM4F();
@@ -547,12 +547,12 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum =
-        (float) (this.getRandom() * (double) Float.MAX_VALUE);
+        (float) (getRandom() * (double) Float.MAX_VALUE);
 
-      final float x = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MIN_VALUE);
+      final float x = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float y = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float z = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float w = (float) (getRandom() * (double) Float.MIN_VALUE);
       final V v = this.newVectorM4F(x, y, z, w);
 
       final V vr = this.newVectorM4F();
@@ -577,14 +577,14 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum =
-        (float) (this.getRandom() * (double) Float.MIN_VALUE);
+        (float) (getRandom() * (double) Float.MIN_VALUE);
       final float maximum =
-        (float) (this.getRandom() * (double) Float.MAX_VALUE);
+        (float) (getRandom() * (double) Float.MAX_VALUE);
 
-      final float x = (float) (this.getRandom() * (double) Float.MIN_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x = (float) (getRandom() * (double) Float.MIN_VALUE);
+      final float y = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v = this.newVectorM4F(x, y, z, w);
 
       final V vr = this.newVectorM4F();
@@ -635,10 +635,10 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
   @Test public final void testCopy2Correct()
   {
     final V v0 = this.newVectorM4F(
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE);
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE);
     final V v1 = this.newVectorM4F();
     final V v2 = this.newVectorM4F();
 
@@ -660,10 +660,10 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
   @Test public final void testCopy3Correct()
   {
     final V v0 = this.newVectorM4F(
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE);
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE);
     final V v1 = this.newVectorM4F();
     final V v2 = this.newVectorM4F();
 
@@ -685,10 +685,10 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
   @Test public final void testCopy4Correct()
   {
     final V v0 = this.newVectorM4F(
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE,
-      (float) this.getRandom() * Float.MAX_VALUE);
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE);
     final V v1 = this.newVectorM4F();
     final V v2 = this.newVectorM4F();
 
@@ -731,16 +731,16 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
   {
     final PVectorM4F.ContextPVM4F c = new PVectorM4F.ContextPVM4F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float y0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w0 = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v0 = this.newVectorM4F(x0, y0, z0, w0);
 
-      final float x1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x1 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float y1 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z1 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w1 = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v1 = this.newVectorM4F(x1, y1, z1, w1);
 
       Assert.assertTrue(PVectorM4F.distance(c, v0, v1) >= 0.0);
@@ -807,10 +807,10 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) this.getRandom();
-      final float y = (float) this.getRandom();
-      final float z = (float) this.getRandom();
-      final float w = (float) this.getRandom();
+      final float x = (float) getRandom();
+      final float y = (float) getRandom();
+      final float z = (float) getRandom();
+      final float w = (float) getRandom();
       final V q = this.newVectorM4F(x, y, z, w);
       final double dp = PVectorM4F.dotProduct(q, q);
 
@@ -867,7 +867,7 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
   @Test public final void testEqualsNotEqualCorrect()
   {
-    final float x = (float) this.getRandom();
+    final float x = (float) getRandom();
     final float y = x + 1.0f;
     final float z = y + 1.0f;
     final float w = z + 1.0f;
@@ -956,7 +956,7 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  protected double getRandom()
+  protected static double getRandom()
   {
     return Math.random();
   }
@@ -1021,16 +1021,16 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     final PVectorM4F.ContextPVM4F c = new PVectorM4F.ContextPVM4F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float y0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w0 = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v0 = this.newVectorM4F(x0, y0, z0, w0);
 
-      final float x1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x1 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float y1 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z1 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w1 = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v1 = this.newVectorM4F(x1, y1, z1, w1);
 
       final V vr0 = this.newVectorM4F();
@@ -1069,10 +1069,10 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
   @Test public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float y = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v = this.newVectorM4F(x, y, z, w);
 
       final double m = PVectorM4F.magnitude(v);
@@ -1087,16 +1087,16 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x =
-        (float) (this.getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
+        (float) (getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
                                      / 2.0));
       final float y =
-        (float) (this.getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
+        (float) (getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
                                      / 2.0));
       final float z =
-        (float) (this.getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
+        (float) (getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
                                      / 2.0));
       final float w =
-        (float) (this.getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
+        (float) (getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
                                      / 2.0));
       final V v = this.newVectorM4F(x, y, z, w);
 
@@ -1273,10 +1273,10 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float y = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v = this.newVectorM4F(x, y, z, w);
 
       final V vr = this.newVectorM4F();
@@ -1314,10 +1314,10 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float y = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v = this.newVectorM4F(x, y, z, w);
 
       final V vr = this.newVectorM4F();
@@ -1352,16 +1352,16 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float y0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z0 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w0 = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v0 = this.newVectorM4F(x0, y0, z0, w0);
 
-      final float x1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float y1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float z1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final float w1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
+      final float x1 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float y1 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float z1 = (float) (getRandom() * (double) Float.MAX_VALUE);
+      final float w1 = (float) (getRandom() * (double) Float.MAX_VALUE);
       final V v1 = this.newVectorM4F(x1, y1, z1, w1);
 
       final V vr0 = this.newVectorM4F();

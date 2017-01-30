@@ -44,7 +44,7 @@ public final class UnreachableTest
   public void testUnreachableCast()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.Cast");
   }
 
@@ -52,7 +52,7 @@ public final class UnreachableTest
   public void testUnreachableParameterizedCast()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.parameterized.Cast");
   }
 
@@ -60,7 +60,7 @@ public final class UnreachableTest
   public void testUnreachableHashUtility()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.HashUtility");
   }
 
@@ -68,7 +68,7 @@ public final class UnreachableTest
   public void testUnreachableMatrixM2x2D()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.MatrixM2x2D");
   }
 
@@ -76,7 +76,7 @@ public final class UnreachableTest
   public void testUnreachableMatrixM2x2F()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.MatrixM2x2F");
   }
 
@@ -84,7 +84,7 @@ public final class UnreachableTest
   public void testUnreachableMatrixM3x3D()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.MatrixM3x3D");
   }
 
@@ -92,7 +92,7 @@ public final class UnreachableTest
   public void testUnreachableMatrixM3x3F()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.MatrixM3x3F");
   }
 
@@ -100,7 +100,7 @@ public final class UnreachableTest
   public void testUnreachableMatrixM4x4D()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.MatrixM4x4D");
   }
 
@@ -108,7 +108,7 @@ public final class UnreachableTest
   public void testUnreachableMatrixM4x4F()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.MatrixM4x4F");
   }
 
@@ -116,7 +116,7 @@ public final class UnreachableTest
   public void testUnreachablePMatrixM3x3D()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.parameterized.PMatrixM3x3D");
   }
 
@@ -124,7 +124,7 @@ public final class UnreachableTest
   public void testUnreachablePMatrixM3x3F()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.parameterized.PMatrixM3x3F");
   }
 
@@ -132,7 +132,7 @@ public final class UnreachableTest
   public void testUnreachablePMatrixM4x4D()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.parameterized.PMatrixM4x4D");
   }
 
@@ -140,7 +140,7 @@ public final class UnreachableTest
   public void testUnreachablePMatrixM4x4F()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.parameterized.PMatrixM4x4F");
   }
 }

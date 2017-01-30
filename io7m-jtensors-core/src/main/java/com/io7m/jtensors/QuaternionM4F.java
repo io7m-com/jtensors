@@ -118,7 +118,7 @@ public final class QuaternionM4F implements Quaternion4FType
     final Q q0,
     final QuaternionReadable4FType q1)
   {
-    return QuaternionM4F.add(q0, q1, q0);
+    return add(q0, q1, q0);
   }
 
   /**
@@ -185,7 +185,7 @@ public final class QuaternionM4F implements Quaternion4FType
     QuaternionReadable4FType> Q conjugateInPlace(
     final Q q)
   {
-    return QuaternionM4F.conjugate(q, q);
+    return conjugate(q, q);
   }
 
   /**
@@ -252,9 +252,9 @@ public final class QuaternionM4F implements Quaternion4FType
     final double alpha,
     final Q r)
   {
-    QuaternionM4F.scale(q0, 1.0 - alpha, c.qa);
-    QuaternionM4F.scale(q1, alpha, c.qb);
-    return QuaternionM4F.add(c.qa, c.qb, r);
+    scale(q0, 1.0 - alpha, c.qa);
+    scale(q1, alpha, c.qb);
+    return add(c.qa, c.qb, r);
   }
 
   /**
@@ -327,7 +327,7 @@ public final class QuaternionM4F implements Quaternion4FType
     final MatrixM3x3F.ContextMM3F mc = context.m_context;
 
     MatrixM3x3F.lookAt(mc, origin, target, up, m, t);
-    QuaternionM4F.makeFromRotationMatrix3x3(m, q);
+    makeFromRotationMatrix3x3(m, q);
     return q;
   }
 
@@ -344,7 +344,7 @@ public final class QuaternionM4F implements Quaternion4FType
   public static double magnitude(
     final QuaternionReadable4FType q)
   {
-    return Math.sqrt(QuaternionM4F.magnitudeSquared(q));
+    return Math.sqrt(magnitudeSquared(q));
   }
 
   /**
@@ -358,7 +358,7 @@ public final class QuaternionM4F implements Quaternion4FType
   public static double magnitudeSquared(
     final QuaternionReadable4FType q)
   {
-    return QuaternionM4F.dotProduct(q, q);
+    return dotProduct(q, q);
   }
 
   /**
@@ -491,7 +491,7 @@ public final class QuaternionM4F implements Quaternion4FType
     final double m21 = (double) m.getR2C1F();
     final double m22 = (double) m.getR2C2F();
 
-    /**
+    /*
      * Explicitly ignore the bottom right element of the matrix, as this
      * affects the magnitude of the created quaternion.
      */
@@ -731,7 +731,7 @@ public final class QuaternionM4F implements Quaternion4FType
     final Q q0,
     final QuaternionReadable4FType q1)
   {
-    return QuaternionM4F.multiply(q0, q1, q0);
+    return multiply(q0, q1, q0);
   }
 
   /**
@@ -774,7 +774,7 @@ public final class QuaternionM4F implements Quaternion4FType
     QuaternionReadable4FType> Q negateInPlace(
     final Q q)
   {
-    return QuaternionM4F.negate(q, q);
+    return negate(q, q);
   }
 
   /**
@@ -793,10 +793,10 @@ public final class QuaternionM4F implements Quaternion4FType
     final QuaternionReadable4FType q,
     final Q out)
   {
-    final double m = QuaternionM4F.magnitudeSquared(q);
+    final double m = magnitudeSquared(q);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return QuaternionM4F.scale(q, reciprocal, out);
+      return scale(q, reciprocal, out);
     }
 
     out.set4F(q.getXF(), q.getYF(), q.getZF(), q.getWF());
@@ -818,7 +818,7 @@ public final class QuaternionM4F implements Quaternion4FType
     QuaternionReadable4FType> Q normalizeInPlace(
     final Q q)
   {
-    return QuaternionM4F.normalize(q, q);
+    return normalize(q, q);
   }
 
   /**
@@ -863,7 +863,7 @@ public final class QuaternionM4F implements Quaternion4FType
     final Q q,
     final double r)
   {
-    return QuaternionM4F.scale(q, r, q);
+    return scale(q, r, q);
   }
 
   /**
@@ -907,7 +907,43 @@ public final class QuaternionM4F implements Quaternion4FType
     final Q q0,
     final QuaternionReadable4FType q1)
   {
-    return QuaternionM4F.subtract(q0, q1, q0);
+    return subtract(q0, q1, q0);
+  }
+
+  /**
+   * Determine the axis-angle representation of the given quaternion.
+   *
+   * @param q   The input quaternion
+   * @param out The output vector that will contain the axis
+   * @param <V> The precise type of output vector
+   *
+   * @return The angle
+   */
+
+  public static <V extends VectorWritable3FType> double toAxisAngle(
+    final QuaternionReadable4FType q,
+    final V out)
+  {
+    final float rx;
+    final float ry;
+    final float rz;
+    final double angle;
+
+    final double mag_s = magnitudeSquared(q);
+    if (mag_s != 0.0) {
+      angle = 2.0 * StrictMath.acos(q.getWF());
+      rx = q.getXF();
+      ry = q.getYF();
+      rz = q.getZF();
+    } else {
+      angle = 0.0;
+      rx = 1.0f;
+      ry = 0.0f;
+      rz = 0.0f;
+    }
+
+    VectorM3F.normalize(new VectorM3F(rx, ry, rz), out);
+    return angle;
   }
 
   @Override
@@ -945,16 +981,10 @@ public final class QuaternionM4F implements Quaternion4FType
       return false;
     }
     final QuaternionM4F other = (QuaternionM4F) obj;
-    if (Float.floatToIntBits(this.w) != Float.floatToIntBits(other.w)) {
-      return false;
-    }
-    if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
-      return false;
-    }
-    if (Float.floatToIntBits(this.y) != Float.floatToIntBits(other.y)) {
-      return false;
-    }
-    return Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
+    return Float.floatToIntBits(this.w) == Float.floatToIntBits(other.w)
+      && Float.floatToIntBits(this.x) == Float.floatToIntBits(other.x)
+      && Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y)
+      && Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
   }
 
   @Override
@@ -1054,46 +1084,10 @@ public final class QuaternionM4F implements Quaternion4FType
     this.w = in_w;
   }
 
-  /**
-   * Determine the axis-angle representation of the given quaternion.
-   *
-   * @param q   The input quaternion
-   * @param out The output vector that will contain the axis
-   * @param <V> The precise type of output vector
-   *
-   * @return The angle
-   */
-
-  public static <V extends VectorWritable3FType> double toAxisAngle(
-    final QuaternionReadable4FType q,
-    final V out)
-  {
-    final float rx;
-    final float ry;
-    final float rz;
-    final double angle;
-
-    final double mag_s = QuaternionM4F.magnitudeSquared(q);
-    if (mag_s != 0.0) {
-      angle = 2.0 * StrictMath.acos(q.getWF());
-      rx = q.getXF();
-      ry = q.getYF();
-      rz = q.getZF();
-    } else {
-      angle = 0.0;
-      rx = 1.0f;
-      ry = 0.0f;
-      rz = 0.0f;
-    }
-
-    VectorM3F.normalize(new VectorM3F(rx, ry, rz), out);
-    return angle;
-  }
-
   @Override
   public String toString()
   {
-    final StringBuilder builder = new StringBuilder();
+    final StringBuilder builder = new StringBuilder(64);
     builder.append("[QuaternionM4F ");
     builder.append(this.x);
     builder.append(" ");
@@ -1103,9 +1097,7 @@ public final class QuaternionM4F implements Quaternion4FType
     builder.append(" ");
     builder.append(this.w);
     builder.append("]");
-    final String r = builder.toString();
-    assert r != null;
-    return r;
+    return builder.toString();
   }
 
   /**

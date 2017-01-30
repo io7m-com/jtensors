@@ -31,7 +31,8 @@ import net.jcip.annotations.Immutable;
  * @since 7.0.0
  */
 
-@Immutable public final class PVectorI3L<T> implements PVectorReadable3LType<T>
+@Immutable
+public final class PVectorI3L<T> implements PVectorReadable3LType<T>
 {
   /**
    * The zero vector.
@@ -332,7 +333,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3LType<T> v1)
     throws ArithmeticException
   {
-    return PVectorI3L.magnitude(PVectorI3L.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -388,9 +389,9 @@ import net.jcip.annotations.Immutable;
     final double alpha)
     throws ArithmeticException
   {
-    final PVectorI3L<T> w0 = PVectorI3L.scale(v0, 1.0 - alpha);
-    final PVectorI3L<T> w1 = PVectorI3L.scale(v1, alpha);
-    return PVectorI3L.add(w0, w1);
+    final PVectorI3L<T> w0 = scale(v0, 1.0 - alpha);
+    final PVectorI3L<T> w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -412,7 +413,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3LType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt((double) PVectorI3L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -432,7 +433,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3LType<T> v)
     throws ArithmeticException
   {
-    return PVectorI3L.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -455,10 +456,10 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3LType<T> q)
     throws ArithmeticException
   {
-    final long dot = PVectorI3L.dotProduct(p, q);
-    final long qms = PVectorI3L.magnitudeSquared(q);
+    final long dot = dotProduct(p, q);
+    final long qms = magnitudeSquared(q);
     final long s = dot / qms;
-    return PVectorI3L.scale(p, (double) s);
+    return scale(p, (double) s);
   }
 
   /**
@@ -516,12 +517,14 @@ import net.jcip.annotations.Immutable;
    * @return The zero vector.
    */
 
-  @SuppressWarnings("unchecked") public static <T> PVectorI3L<T> zero()
+  @SuppressWarnings("unchecked")
+  public static <T> PVectorI3L<T> zero()
   {
-    return (PVectorI3L<T>) PVectorI3L.ZERO;
+    return (PVectorI3L<T>) ZERO;
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -534,31 +537,29 @@ import net.jcip.annotations.Immutable;
       return false;
     }
     final PVectorI3L<?> other = (PVectorI3L<?>) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    if (this.y != other.y) {
-      return false;
-    }
-    return this.z == other.z;
+    return this.x == other.x && this.y == other.y && this.z == other.z;
   }
 
-  @Override public long getXL()
+  @Override
+  public long getXL()
   {
     return this.x;
   }
 
-  @Override public long getYL()
+  @Override
+  public long getYL()
   {
     return this.y;
   }
 
-  @Override public long getZL()
+  @Override
+  public long getZL()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final long prime = 31L;
     long result = 1L;
@@ -568,7 +569,8 @@ import net.jcip.annotations.Immutable;
     return (int) result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorI3L ");

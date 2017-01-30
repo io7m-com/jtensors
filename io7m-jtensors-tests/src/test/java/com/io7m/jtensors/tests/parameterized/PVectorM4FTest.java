@@ -102,7 +102,7 @@ public final class PVectorM4FTest<T>
     final SortedMap<String, Class<?>> interfaces =
       TestUtilities.getInterfaces(v.getClass());
     for (final String k : interfaces.keySet()) {
-      PVectorM4FTest.LOG.debug(
+      LOG.debug(
         "{} implements {}", PVectorM4F.class, k);
     }
 

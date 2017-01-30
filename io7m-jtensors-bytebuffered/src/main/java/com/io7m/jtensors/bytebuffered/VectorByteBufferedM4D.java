@@ -135,7 +135,7 @@ public final class VectorByteBufferedM4D extends ByteBuffered
     final int i,
     final double x)
   {
-    this.buffer.putDouble(VectorByteBufferedM4D.getByteOffsetForIndex(o, i), x);
+    this.buffer.putDouble(getByteOffsetForIndex(o, i), x);
   }
 
   private double getAtOffsetAndIndex(
@@ -143,7 +143,7 @@ public final class VectorByteBufferedM4D extends ByteBuffered
     final int i)
   {
     return this.buffer.getDouble(
-      VectorByteBufferedM4D.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public double getYD()
@@ -258,19 +258,10 @@ public final class VectorByteBufferedM4D extends ByteBuffered
       return false;
     }
     final VectorByteBufferedM4D other = (VectorByteBufferedM4D) obj;
-    if (Double.doubleToLongBits(this.getWD())
-        != Double.doubleToLongBits(other.getWD())) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.getXD())
-        != Double.doubleToLongBits(other.getXD())) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.getYD())
-        != Double.doubleToLongBits(other.getYD())) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.getZD()) == Double.doubleToLongBits(
+    return Double.doubleToLongBits(this.getWD()) == Double.doubleToLongBits(
+      other.getWD()) && Double.doubleToLongBits(this.getXD()) == Double.doubleToLongBits(
+      other.getXD()) && Double.doubleToLongBits(this.getYD()) == Double.doubleToLongBits(
+      other.getYD()) && Double.doubleToLongBits(this.getZD()) == Double.doubleToLongBits(
       other.getZD());
   }
 }

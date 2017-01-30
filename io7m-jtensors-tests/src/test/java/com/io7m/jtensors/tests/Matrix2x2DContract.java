@@ -20,6 +20,7 @@ import com.io7m.jtensors.Matrix2x2DType;
 import com.io7m.jtensors.MatrixM2x2D;
 import com.io7m.jtensors.VectorI2D;
 import com.io7m.jtensors.VectorM2D;
+import com.io7m.jtensors.VectorReadable2DType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -52,6 +53,7 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
+  @Override
   protected abstract void checkDirectBufferInvariants(final T mk);
 
   @Test public final void testAddMutate()
@@ -560,7 +562,7 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     m0.setR1C0D(3.0);
     m0.setR1C1D(4.0);
 
-    final VectorI2D v = new VectorI2D(1.0, 2.0);
+    final VectorReadable2DType v = new VectorI2D(1.0, 2.0);
     final VectorM2D out = new VectorM2D();
 
     final VectorM2D r = MatrixM2x2D.multiplyVector2D(c, m0, v, out);

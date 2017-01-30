@@ -26,6 +26,7 @@ import java.nio.FloatBuffer;
 public abstract class MatrixDirect2x2FContract<T extends MatrixDirect2x2FType>
   extends Matrix2x2FContract<T>
 {
+  @Override
   protected abstract T newMatrix();
 
   @Test public final void testBufferEndianness()

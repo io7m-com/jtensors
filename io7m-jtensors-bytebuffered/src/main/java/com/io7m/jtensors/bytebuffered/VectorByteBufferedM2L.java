@@ -112,7 +112,7 @@ public final class VectorByteBufferedM2L extends ByteBuffered implements VectorB
     final int i,
     final long x)
   {
-    this.buffer.putLong(VectorByteBufferedM2L.getByteOffsetForIndex(o, i), x);
+    this.buffer.putLong(getByteOffsetForIndex(o, i), x);
   }
 
   private long getAtOffsetAndIndex(
@@ -120,7 +120,7 @@ public final class VectorByteBufferedM2L extends ByteBuffered implements VectorB
     final int i)
   {
     return this.buffer.getLong(
-      VectorByteBufferedM2L.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public long getYL()
@@ -183,9 +183,6 @@ public final class VectorByteBufferedM2L extends ByteBuffered implements VectorB
       return false;
     }
     final VectorByteBufferedM2L other = (VectorByteBufferedM2L) obj;
-    if (this.getXL() != other.getXL()) {
-      return false;
-    }
-    return this.getYL() == other.getYL();
+    return this.getXL() == other.getXL() && this.getYL() == other.getYL();
   }
 }

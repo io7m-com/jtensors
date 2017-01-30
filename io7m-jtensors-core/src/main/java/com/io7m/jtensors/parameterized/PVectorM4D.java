@@ -131,7 +131,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     PVectorReadable4DType<T>> V absoluteInPlace(
     final V v)
   {
-    return PVectorM4D.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -177,7 +177,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final V v0,
     final PVectorReadable4DType<T> v1)
   {
-    return PVectorM4D.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -231,7 +231,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final PVectorReadable4DType<T> v1,
     final double r)
   {
-    return PVectorM4D.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -352,7 +352,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final PVectorReadable4DType<T> minimum,
     final PVectorReadable4DType<T> maximum)
   {
-    return PVectorM4D.clampByPVector(v, minimum, maximum, v);
+    return clampByPVector(v, minimum, maximum, v);
   }
 
   /**
@@ -375,7 +375,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final double minimum,
     final double maximum)
   {
-    return PVectorM4D.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -451,7 +451,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final V v,
     final PVectorReadable4DType<T> maximum)
   {
-    return PVectorM4D.clampMaximumByPVector(v, maximum, v);
+    return clampMaximumByPVector(v, maximum, v);
   }
 
   /**
@@ -472,7 +472,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final V v,
     final double maximum)
   {
-    return PVectorM4D.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -548,7 +548,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final V v,
     final PVectorReadable4DType<T> minimum)
   {
-    return PVectorM4D.clampMinimumByPVector(v, minimum, v);
+    return clampMinimumByPVector(v, minimum, v);
   }
 
   /**
@@ -569,7 +569,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final V v,
     final double minimum)
   {
-    return PVectorM4D.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -609,7 +609,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final PVectorReadable4DType<T> v1)
   {
     final PVectorM4D<T> vr = (PVectorM4D<T>) c.va;
-    return PVectorM4D.magnitude(PVectorM4D.subtract(v0, v1, vr));
+    return magnitude(subtract(v0, v1, vr));
   }
 
   /**
@@ -665,9 +665,9 @@ public final class PVectorM4D<T> implements PVector4DType<T>
   {
     final PVectorM4D<T> va = (PVectorM4D<T>) c.va;
     final PVectorM4D<T> vb = (PVectorM4D<T>) c.vb;
-    PVectorM4D.scale(v0, 1.0 - alpha, va);
-    PVectorM4D.scale(v1, alpha, vb);
-    return PVectorM4D.add(va, vb, r);
+    scale(v0, 1.0 - alpha, va);
+    scale(v1, alpha, vb);
+    return add(va, vb, r);
   }
 
   /**
@@ -684,7 +684,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
   public static <T> double magnitude(
     final PVectorReadable4DType<T> v)
   {
-    return Math.sqrt(PVectorM4D.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -699,7 +699,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
   public static <T> double magnitudeSquared(
     final PVectorReadable4DType<T> v)
   {
-    return PVectorM4D.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -719,10 +719,10 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final PVectorReadable4DType<T> v,
     final V out)
   {
-    final double m = PVectorM4D.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return PVectorM4D.scale(v, reciprocal, out);
+      return scale(v, reciprocal, out);
     }
 
     out.set4D(v.getXD(), v.getYD(), v.getZD(), v.getWD());
@@ -745,7 +745,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     PVectorReadable4DType<T>> V normalizeInPlace(
     final V v)
   {
-    return PVectorM4D.normalize(v, v);
+    return normalize(v, v);
   }
 
   /**
@@ -775,11 +775,11 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final PVectorM4D<T> va = (PVectorM4D<T>) c.va;
     final PVectorM4D<T> vb = (PVectorM4D<T>) c.vb;
     final PVectorM4D<T> vc = (PVectorM4D<T>) c.vc;
-    PVectorM4D.normalize(v0, va);
-    PVectorM4D.scale(va, PVectorM4D.dotProduct(v1, va), vb);
-    PVectorM4D.normalizeInPlace(PVectorM4D.subtract(v1, vb, vc));
-    PVectorM4D.copy(va, v0_out);
-    PVectorM4D.copy(vc, v1_out);
+    normalize(v0, va);
+    scale(va, dotProduct(v1, va), vb);
+    normalizeInPlace(subtract(v1, vb, vc));
+    copy(va, v0_out);
+    copy(vc, v1_out);
   }
 
   /**
@@ -804,11 +804,11 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final PVectorM4D<T> va = (PVectorM4D<T>) c.va;
     final PVectorM4D<T> vb = (PVectorM4D<T>) c.vb;
     final PVectorM4D<T> vc = (PVectorM4D<T>) c.vc;
-    PVectorM4D.normalize(v0, va);
-    PVectorM4D.scale(va, PVectorM4D.dotProduct(v1, va), vb);
-    PVectorM4D.normalizeInPlace(PVectorM4D.subtract(v1, vb, vc));
-    PVectorM4D.copy(va, v0);
-    PVectorM4D.copy(vc, v1);
+    normalize(v0, va);
+    scale(va, dotProduct(v1, va), vb);
+    normalizeInPlace(subtract(v1, vb, vc));
+    copy(va, v0);
+    copy(vc, v1);
   }
 
   /**
@@ -829,11 +829,11 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final PVectorReadable4DType<T> q,
     final V r)
   {
-    final double dot = PVectorM4D.dotProduct(p, q);
-    final double qms = PVectorM4D.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
 
-    return PVectorM4D.scale(p, s, r);
+    return scale(p, s, r);
   }
 
   /**
@@ -879,7 +879,7 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final V v,
     final double r)
   {
-    return PVectorM4D.scale(v, r, v);
+    return scale(v, r, v);
   }
 
   /**
@@ -925,46 +925,53 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     final V v0,
     final PVectorReadable4DType<T> v1)
   {
-    return PVectorM4D.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2D(
+  @Override
+  public void copyFrom2D(
     final VectorReadable2DType in_v)
   {
     VectorM2D.copy(in_v, this);
   }
 
-  @Override public void copyFrom3D(
+  @Override
+  public void copyFrom3D(
     final VectorReadable3DType in_v)
   {
     VectorM3D.copy(in_v, this);
   }
 
-  @Override public void copyFrom4D(
+  @Override
+  public void copyFrom4D(
     final VectorReadable4DType in_v)
   {
     VectorM4D.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped2D(
+  @Override
+  public void copyFromTyped2D(
     final PVectorReadable2DType<T> in_v)
   {
     PVectorM2D.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped3D(
+  @Override
+  public void copyFromTyped3D(
     final PVectorReadable3DType<T> in_v)
   {
     PVectorM3D.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped4D(
+  @Override
+  public void copyFromTyped4D(
     final PVectorReadable4DType<T> in_v)
   {
     VectorM4D.copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -977,63 +984,66 @@ public final class PVectorM4D<T> implements PVector4DType<T>
       return false;
     }
     final PVectorM4D<?> other = (PVectorM4D<?>) obj;
-    if (Double.doubleToLongBits(this.w) != Double.doubleToLongBits(other.w)) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
-      return false;
-    }
-    if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
-      return false;
-    }
-    return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
+    return Double.doubleToLongBits(this.w) == Double.doubleToLongBits(other.w) && Double.doubleToLongBits(
+      this.x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(
+      this.y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(
+      this.z) == Double.doubleToLongBits(other.z);
   }
 
-  @Override public double getWD()
+  @Override
+  public double getWD()
   {
     return this.w;
   }
 
-  @Override public void setWD(
+  @Override
+  public void setWD(
     final double in_w)
   {
     this.w = in_w;
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public void setXD(
+  @Override
+  public void setXD(
     final double in_x)
   {
     this.x = in_x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public void setYD(
+  @Override
+  public void setYD(
     final double in_y)
   {
     this.y = in_y;
   }
 
-  @Override public double getZD()
+  @Override
+  public double getZD()
   {
     return this.z;
   }
 
-  @Override public void setZD(
+  @Override
+  public void setZD(
     final double in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1049,7 +1059,8 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     return result;
   }
 
-  @Override public void set2D(
+  @Override
+  public void set2D(
     final double in_x,
     final double in_y)
   {
@@ -1057,7 +1068,8 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     this.y = in_y;
   }
 
-  @Override public void set3D(
+  @Override
+  public void set3D(
     final double in_x,
     final double in_y,
     final double in_z)
@@ -1067,7 +1079,8 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     this.z = in_z;
   }
 
-  @Override public void set4D(
+  @Override
+  public void set4D(
     final double in_x,
     final double in_y,
     final double in_z,
@@ -1079,7 +1092,8 @@ public final class PVectorM4D<T> implements PVector4DType<T>
     this.w = in_w;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorM4D ");

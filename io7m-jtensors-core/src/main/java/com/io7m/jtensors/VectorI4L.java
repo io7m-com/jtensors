@@ -29,7 +29,8 @@ import net.jcip.annotations.Immutable;
  * @since 5.3.0
  */
 
-@Immutable public final class VectorI4L implements VectorReadable4LType
+@Immutable
+public final class VectorI4L implements VectorReadable4LType
 {
   /**
    * The zero vector.
@@ -339,7 +340,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4LType v1)
     throws ArithmeticException
   {
-    return VectorI4L.magnitude(VectorI4L.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -399,9 +400,9 @@ import net.jcip.annotations.Immutable;
     final double alpha)
     throws ArithmeticException
   {
-    final VectorI4L w0 = VectorI4L.scale(v0, 1.0 - alpha);
-    final VectorI4L w1 = VectorI4L.scale(v1, alpha);
-    return VectorI4L.add(w0, w1);
+    final VectorI4L w0 = scale(v0, 1.0 - alpha);
+    final VectorI4L w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -422,7 +423,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4LType v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt((double) VectorI4L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -441,7 +442,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4LType v)
     throws ArithmeticException
   {
-    return VectorI4L.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -463,10 +464,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4LType q)
     throws ArithmeticException
   {
-    final long dot = VectorI4L.dotProduct(p, q);
-    final long qms = VectorI4L.magnitudeSquared(q);
+    final long dot = dotProduct(p, q);
+    final long qms = magnitudeSquared(q);
     final long s = dot / qms;
-    return VectorI4L.scale(p, (double) s);
+    return scale(p, (double) s);
   }
 
   /**
@@ -517,7 +518,8 @@ import net.jcip.annotations.Immutable;
     return new VectorI4L(x, y, z, w);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -530,39 +532,35 @@ import net.jcip.annotations.Immutable;
       return false;
     }
     final VectorI4L other = (VectorI4L) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    if (this.y != other.y) {
-      return false;
-    }
-    if (this.z != other.z) {
-      return false;
-    }
-    return this.w == other.w;
+    return this.x == other.x && this.y == other.y && this.z == other.z && this.w == other.w;
   }
 
-  @Override public long getWL()
+  @Override
+  public long getWL()
   {
     return this.w;
   }
 
-  @Override public long getXL()
+  @Override
+  public long getXL()
   {
     return this.x;
   }
 
-  @Override public long getYL()
+  @Override
+  public long getYL()
   {
     return this.y;
   }
 
-  @Override public long getZL()
+  @Override
+  public long getZL()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final long prime = 31L;
     long result = 1L;
@@ -573,7 +571,8 @@ import net.jcip.annotations.Immutable;
     return (int) result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI4L ");

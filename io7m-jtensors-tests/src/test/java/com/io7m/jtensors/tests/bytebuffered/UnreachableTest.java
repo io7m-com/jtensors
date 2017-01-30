@@ -44,7 +44,7 @@ public final class UnreachableTest
   public void testUnreachableCast()
     throws Exception
   {
-    UnreachableTest.execNoArgPrivateConstructor(
+    execNoArgPrivateConstructor(
       "com.io7m.jtensors.bytebuffered.ByteBufferRanges");
   }
 }

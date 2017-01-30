@@ -27,7 +27,8 @@ import net.jcip.annotations.Immutable;
  * multiple threads. </p>
  */
 
-@Immutable public final class VectorI2I implements VectorReadable2IType
+@Immutable
+public final class VectorI2I implements VectorReadable2IType
 {
   /**
    * The zero vector.
@@ -161,9 +162,9 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2IType v0,
     final VectorReadable2IType v1)
   {
-    final double m0 = (double) VectorI2I.magnitude(v0);
-    final double m1 = (double) VectorI2I.magnitude(v1);
-    return Math.acos((double) VectorI2I.dotProduct(v0, v1) / (m0 * m1));
+    final double m0 = (double) magnitude(v0);
+    final double m1 = (double) magnitude(v1);
+    return Math.acos((double) dotProduct(v0, v1) / (m0 * m1));
   }
 
   /**
@@ -318,7 +319,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2IType v1)
     throws ArithmeticException
   {
-    return VectorI2I.magnitude(VectorI2I.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -371,9 +372,9 @@ import net.jcip.annotations.Immutable;
     final double alpha)
     throws ArithmeticException
   {
-    final VectorI2I w0 = VectorI2I.scale(v0, 1.0 - alpha);
-    final VectorI2I w1 = VectorI2I.scale(v1, alpha);
-    return VectorI2I.add(w0, w1);
+    final VectorI2I w0 = scale(v0, 1.0 - alpha);
+    final VectorI2I w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -394,7 +395,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2IType v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt((double) VectorI2I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -413,7 +414,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2IType v)
     throws ArithmeticException
   {
-    return VectorI2I.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -435,10 +436,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2IType q)
     throws ArithmeticException
   {
-    final int dot = VectorI2I.dotProduct(p, q);
-    final int qms = VectorI2I.magnitudeSquared(q);
+    final int dot = dotProduct(p, q);
+    final int qms = magnitudeSquared(q);
     final int s = dot / qms;
-    return VectorI2I.scale(p, (double) s);
+    return scale(p, (double) s);
   }
 
   /**
@@ -485,7 +486,8 @@ import net.jcip.annotations.Immutable;
     return new VectorI2I(x, y);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -498,23 +500,23 @@ import net.jcip.annotations.Immutable;
       return false;
     }
     final VectorI2I other = (VectorI2I) obj;
-    if (this.x != other.x) {
-      return false;
-    }
-    return this.y == other.y;
+    return this.x == other.x && this.y == other.y;
   }
 
-  @Override public int getXI()
+  @Override
+  public int getXI()
   {
     return this.x;
   }
 
-  @Override public int getYI()
+  @Override
+  public int getYI()
   {
     return this.y;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -523,7 +525,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI2I ");

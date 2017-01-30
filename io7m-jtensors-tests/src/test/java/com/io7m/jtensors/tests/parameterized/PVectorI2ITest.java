@@ -17,7 +17,9 @@
 package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jequality.AlmostEqualDouble;
+import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.parameterized.PVectorI2I;
+import com.io7m.jtensors.parameterized.PVectorReadable2IType;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
@@ -64,12 +66,12 @@ import org.junit.Test;
   @Override @Test public void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorI2ITest.randomPositiveSmallNumber();
-      final int y0 = PVectorI2ITest.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
       final PVectorI2I<T> v0 = new PVectorI2I<T>(x0, y0);
 
-      final int x1 = PVectorI2ITest.randomPositiveSmallNumber();
-      final int y1 = PVectorI2ITest.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
       final PVectorI2I<T> v1 = new PVectorI2I<T>(x1, y1);
 
       final PVectorI2I<T> vr0 = PVectorI2I.add(v0, v1);
@@ -82,15 +84,15 @@ import org.junit.Test;
   @Override @Test public void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorI2ITest.randomPositiveSmallNumber();
-      final int y0 = PVectorI2ITest.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
       final PVectorI2I<T> v0 = new PVectorI2I<T>(x0, y0);
 
-      final int x1 = PVectorI2ITest.randomPositiveSmallNumber();
-      final int y1 = PVectorI2ITest.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
       final PVectorI2I<T> v1 = new PVectorI2I<T>(x1, y1);
 
-      final int r = PVectorI2ITest.randomPositiveSmallNumber();
+      final int r = randomPositiveSmallNumber();
 
       final PVectorI2I<T> vr0 = PVectorI2I.addScaled(v0, v1, r);
 
@@ -115,8 +117,8 @@ import org.junit.Test;
       TestUtilities.getDoubleEqualityContext3dp();
 
     {
-      final PVectorI2I<T> v0 = new PVectorI2I<T>(1, 0);
-      final PVectorI2I<T> v1 = new PVectorI2I<T>(1, 0);
+      final PVectorReadable2IType<T> v0 = new PVectorI2I<T>(1, 0);
+      final PVectorReadable2IType<T> v1 = new PVectorI2I<T>(1, 0);
       final double angle = PVectorI2I.angle(v0, v1);
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, angle, 0.0));
@@ -125,8 +127,8 @@ import org.junit.Test;
     {
       final int x = (int) (Math.random() * 200);
       final int y = (int) (Math.random() * 200);
-      final PVectorI2I<T> v0 = new PVectorI2I<T>(x, y);
-      final PVectorI2I<T> v1 = new PVectorI2I<T>(y, -x);
+      final PVectorReadable2IType<T> v0 = new PVectorI2I<T>(x, y);
+      final PVectorReadable2IType<T> v1 = new PVectorI2I<T>(y, -x);
       final double angle = PVectorI2I.angle(v0, v1);
 
       Assert.assertTrue(
@@ -137,8 +139,8 @@ import org.junit.Test;
     {
       final int x = (int) (Math.random() * 200);
       final int y = (int) (Math.random() * 200);
-      final PVectorI2I<T> v0 = new PVectorI2I<T>(x, y);
-      final PVectorI2I<T> v1 = new PVectorI2I<T>(-y, x);
+      final PVectorReadable2IType<T> v0 = new PVectorI2I<T>(x, y);
+      final PVectorReadable2IType<T> v1 = new PVectorI2I<T>(-y, x);
       final double angle = PVectorI2I.angle(v0, v1);
 
       Assert.assertTrue(
@@ -149,7 +151,7 @@ import org.junit.Test;
 
   @Override @Test public void testCheckInterface()
   {
-    final PVectorI2I<T> v = new PVectorI2I<T>(3, 5);
+    final VectorReadable2IType v = new PVectorI2I<T>(3, 5);
 
     Assert.assertTrue(v.getXI() == v.getXI());
     Assert.assertTrue(v.getYI() == v.getYI());
@@ -158,13 +160,13 @@ import org.junit.Test;
   @Override @Test public void testClampByPVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int max_x = PVectorI2ITest.randomNegativeNumber();
-      final int max_y = PVectorI2ITest.randomNegativeNumber();
+      final int max_x = randomNegativeNumber();
+      final int max_y = randomNegativeNumber();
       final PVectorI2I<T> maximum = new PVectorI2I<T>(max_x, max_y);
 
-      final int x = PVectorI2ITest.randomNegativeNumber();
-      final int y = PVectorI2ITest.randomNegativeNumber();
-      final PVectorI2I<T> v = new PVectorI2I<T>(x, y);
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final PVectorReadable2IType<T> v = new PVectorI2I<T>(x, y);
 
       final PVectorI2I<T> vr = PVectorI2I.clampMaximumByPVector(v, maximum);
 
@@ -176,13 +178,13 @@ import org.junit.Test;
   @Override @Test public void testClampByPVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = PVectorI2ITest.randomPositiveNumber();
-      final int min_y = PVectorI2ITest.randomPositiveNumber();
+      final int min_x = randomPositiveNumber();
+      final int min_y = randomPositiveNumber();
       final PVectorI2I<T> minimum = new PVectorI2I<T>(min_x, min_y);
 
-      final int x = PVectorI2ITest.randomNegativeNumber();
-      final int y = PVectorI2ITest.randomNegativeNumber();
-      final PVectorI2I<T> v = new PVectorI2I<T>(x, y);
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final PVectorReadable2IType<T> v = new PVectorI2I<T>(x, y);
 
       final PVectorI2I<T> vr = PVectorI2I.clampMinimumByPVector(v, minimum);
 
@@ -194,17 +196,17 @@ import org.junit.Test;
   @Override @Test public void testClampByPVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = PVectorI2ITest.randomNegativeNumber();
-      final int min_y = PVectorI2ITest.randomNegativeNumber();
+      final int min_x = randomNegativeNumber();
+      final int min_y = randomNegativeNumber();
       final PVectorI2I<T> minimum = new PVectorI2I<T>(min_x, min_y);
 
-      final int max_x = PVectorI2ITest.randomPositiveNumber();
-      final int max_y = PVectorI2ITest.randomPositiveNumber();
+      final int max_x = randomPositiveNumber();
+      final int max_y = randomPositiveNumber();
       final PVectorI2I<T> maximum = new PVectorI2I<T>(max_x, max_y);
 
-      final int x = PVectorI2ITest.randomNegativeNumber();
-      final int y = PVectorI2ITest.randomPositiveNumber();
-      final PVectorI2I<T> v = new PVectorI2I<T>(x, y);
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
+      final PVectorReadable2IType<T> v = new PVectorI2I<T>(x, y);
 
       final PVectorI2I<T> vr = PVectorI2I.clampByPVector(v, minimum, maximum);
 
@@ -218,11 +220,11 @@ import org.junit.Test;
   @Override @Test public void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int maximum = PVectorI2ITest.randomNegativeNumber();
+      final int maximum = randomNegativeNumber();
 
-      final int x = PVectorI2ITest.randomPositiveNumber();
-      final int y = PVectorI2ITest.randomPositiveNumber();
-      final PVectorI2I<T> v = new PVectorI2I<T>(x, y);
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
+      final PVectorReadable2IType<T> v = new PVectorI2I<T>(x, y);
 
       final PVectorI2I<T> vr = PVectorI2I.clampMaximum(v, maximum);
 
@@ -234,11 +236,11 @@ import org.junit.Test;
   @Override @Test public void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = PVectorI2ITest.randomPositiveNumber();
+      final int minimum = randomPositiveNumber();
 
-      final int x = PVectorI2ITest.randomNegativeNumber();
-      final int y = PVectorI2ITest.randomNegativeNumber();
-      final PVectorI2I<T> v = new PVectorI2I<T>(x, y);
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final PVectorReadable2IType<T> v = new PVectorI2I<T>(x, y);
 
       final PVectorI2I<T> vr = PVectorI2I.clampMinimum(v, minimum);
 
@@ -250,12 +252,12 @@ import org.junit.Test;
   @Override @Test public void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = PVectorI2ITest.randomNegativeNumber();
-      final int maximum = PVectorI2ITest.randomPositiveNumber();
+      final int minimum = randomNegativeNumber();
+      final int maximum = randomPositiveNumber();
 
-      final int x = PVectorI2ITest.randomNegativeNumber();
-      final int y = PVectorI2ITest.randomPositiveNumber();
-      final PVectorI2I<T> v = new PVectorI2I<T>(x, y);
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
+      final PVectorReadable2IType<T> v = new PVectorI2I<T>(x, y);
 
       final PVectorI2I<T> vr = PVectorI2I.clamp(v, minimum, maximum);
 
@@ -268,13 +270,13 @@ import org.junit.Test;
 
   @Override @Test public void testCopy()
   {
-    final PVectorI2I<T> vb = new PVectorI2I<T>(5, 6);
+    final VectorReadable2IType vb = new PVectorI2I<T>(5, 6);
     final PVectorI2I<T> va = new PVectorI2I<T>(1, 2);
 
     Assert.assertFalse(va.getXI() == vb.getXI());
     Assert.assertFalse(va.getYI() == vb.getYI());
 
-    final PVectorI2I<T> vc = new PVectorI2I<T>(va);
+    final VectorReadable2IType vc = new PVectorI2I<T>(va);
 
     Assert.assertTrue(va.getXI() == vc.getXI());
     Assert.assertTrue(va.getYI() == vc.getYI());
@@ -290,21 +292,21 @@ import org.junit.Test;
 
   @Override @Test public void testDistance()
   {
-    final PVectorI2I<T> v0 = new PVectorI2I<T>(0, 1);
-    final PVectorI2I<T> v1 = new PVectorI2I<T>(0, 0);
+    final PVectorReadable2IType<T> v0 = new PVectorI2I<T>(0, 1);
+    final PVectorReadable2IType<T> v1 = new PVectorI2I<T>(0, 0);
     Assert.assertTrue(PVectorI2I.distance(v0, v1) == 1);
   }
 
   @Override @Test public void testDistanceOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorI2ITest.randomPositiveSmallNumber();
-      final int y0 = PVectorI2ITest.randomPositiveSmallNumber();
-      final PVectorI2I<T> v0 = new PVectorI2I<T>(x0, y0);
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
+      final PVectorReadable2IType<T> v0 = new PVectorI2I<T>(x0, y0);
 
-      final int x1 = PVectorI2ITest.randomPositiveSmallNumber();
-      final int y1 = PVectorI2ITest.randomPositiveSmallNumber();
-      final PVectorI2I<T> v1 = new PVectorI2I<T>(x1, y1);
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
+      final PVectorReadable2IType<T> v1 = new PVectorI2I<T>(x1, y1);
 
       Assert.assertTrue(PVectorI2I.distance(v0, v1) >= 0);
     }
@@ -348,7 +350,7 @@ import org.junit.Test;
       final int max = 1000;
       final int x = (int) (Math.random() * max);
       final int y = (int) (Math.random() * max);
-      final PVectorI2I<T> q = new PVectorI2I<T>(x, y);
+      final PVectorReadable2IType<T> q = new PVectorI2I<T>(x, y);
 
       final double ms = PVectorI2I.magnitudeSquared(q);
       final double dp = PVectorI2I.dotProduct(q, q);
@@ -366,7 +368,7 @@ import org.junit.Test;
       final int max = 1000;
       final int x = (int) (Math.random() * max);
       final int y = (int) (Math.random() * max);
-      final PVectorI2I<T> q = new PVectorI2I<T>(x, y);
+      final PVectorReadable2IType<T> q = new PVectorI2I<T>(x, y);
       final double dp = PVectorI2I.dotProduct(q, q);
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
@@ -478,7 +480,7 @@ import org.junit.Test;
   @Override @Test public void testInitializeReadable()
   {
     final PVectorI2I<T> v0 = new PVectorI2I<T>(1, 2);
-    final PVectorI2I<T> v1 = new PVectorI2I<T>(v0);
+    final VectorReadable2IType v1 = new PVectorI2I<T>(v0);
 
     Assert.assertTrue(v0.getXI() == v1.getXI());
     Assert.assertTrue(v0.getYI() == v1.getYI());
@@ -487,12 +489,12 @@ import org.junit.Test;
   @Override @Test public void testInterpolateLinearLimits()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorI2ITest.randomPositiveNumber();
-      final int y0 = PVectorI2ITest.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
       final PVectorI2I<T> v0 = new PVectorI2I<T>(x0, y0);
 
-      final int x1 = PVectorI2ITest.randomPositiveNumber();
-      final int y1 = PVectorI2ITest.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
       final PVectorI2I<T> v1 = new PVectorI2I<T>(x1, y1);
 
       final PVectorI2I<T> vr0 = PVectorI2I.interpolateLinear(v0, v1, 0);
@@ -509,9 +511,9 @@ import org.junit.Test;
   @Override @Test public void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = PVectorI2ITest.randomPositiveSmallNumber();
-      final int y = PVectorI2ITest.randomPositiveSmallNumber();
-      final PVectorI2I<T> v = new PVectorI2I<T>(x, y);
+      final int x = randomPositiveSmallNumber();
+      final int y = randomPositiveSmallNumber();
+      final PVectorReadable2IType<T> v = new PVectorI2I<T>(x, y);
 
       final int m = PVectorI2I.magnitude(v);
       Assert.assertTrue(m >= 1);
@@ -530,14 +532,14 @@ import org.junit.Test;
 
   @Override @Test public void testMagnitudeOne()
   {
-    final PVectorI2I<T> v = new PVectorI2I<T>(1, 0);
+    final PVectorReadable2IType<T> v = new PVectorI2I<T>(1, 0);
     final int m = PVectorI2I.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final PVectorI2I<T> v = new PVectorI2I<T>(8, 0);
+    final PVectorReadable2IType<T> v = new PVectorI2I<T>(8, 0);
 
     {
       final int p = PVectorI2I.dotProduct(v, v);
@@ -551,7 +553,7 @@ import org.junit.Test;
 
   @Override @Test public void testMagnitudeZero()
   {
-    final PVectorI2I<T> v = new PVectorI2I<T>(0, 0);
+    final PVectorReadable2IType<T> v = new PVectorI2I<T>(0, 0);
     final int m = PVectorI2I.magnitude(v);
     Assert.assertTrue(m == 0);
   }
@@ -574,16 +576,16 @@ import org.junit.Test;
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final PVectorI2I<T> p = new PVectorI2I<T>(1, 0);
-      final PVectorI2I<T> q = new PVectorI2I<T>(0, 1);
+      final PVectorReadable2IType<T> p = new PVectorI2I<T>(1, 0);
+      final PVectorReadable2IType<T> q = new PVectorI2I<T>(0, 1);
       final PVectorI2I<T> u = PVectorI2I.projection(p, q);
 
       Assert.assertTrue(PVectorI2I.magnitude(u) == 0);
     }
 
     {
-      final PVectorI2I<T> p = new PVectorI2I<T>(-1, 0);
-      final PVectorI2I<T> q = new PVectorI2I<T>(0, 1);
+      final PVectorReadable2IType<T> p = new PVectorI2I<T>(-1, 0);
+      final PVectorReadable2IType<T> q = new PVectorI2I<T>(0, 1);
       final PVectorI2I<T> u = PVectorI2I.projection(p, q);
 
       Assert.assertTrue(PVectorI2I.magnitude(u) == 0);
@@ -593,8 +595,8 @@ import org.junit.Test;
   @Override @Test public void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = PVectorI2ITest.randomPositiveNumber();
-      final int y = PVectorI2ITest.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
       final PVectorI2I<T> v = new PVectorI2I<T>(x, y);
 
       final PVectorI2I<T> vr = PVectorI2I.scale(v, 1);
@@ -607,9 +609,9 @@ import org.junit.Test;
   @Override @Test public void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = PVectorI2ITest.randomPositiveNumber();
-      final int y = PVectorI2ITest.randomPositiveNumber();
-      final PVectorI2I<T> v = new PVectorI2I<T>(x, y);
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
+      final PVectorReadable2IType<T> v = new PVectorI2I<T>(x, y);
 
       final PVectorI2I<T> vr = PVectorI2I.scale(v, 0);
 
@@ -621,18 +623,18 @@ import org.junit.Test;
   @Override @Test public void testString()
   {
     final PVectorI2I<T> v = new PVectorI2I<T>(1, 2);
-    Assert.assertTrue(v.toString().equals("[PVectorI2I 1 2]"));
+    Assert.assertTrue("[PVectorI2I 1 2]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorI2ITest.randomPositiveNumber();
-      final int y0 = PVectorI2ITest.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
       final PVectorI2I<T> v0 = new PVectorI2I<T>(x0, y0);
 
-      final int x1 = PVectorI2ITest.randomPositiveNumber();
-      final int y1 = PVectorI2ITest.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
       final PVectorI2I<T> v1 = new PVectorI2I<T>(x1, y1);
 
       final PVectorI2I<T> vr0 = PVectorI2I.subtract(v0, v1);

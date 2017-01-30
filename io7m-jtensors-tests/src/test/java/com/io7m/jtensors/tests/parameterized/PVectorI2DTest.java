@@ -18,7 +18,9 @@ package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jfunctional.Pair;
+import com.io7m.jtensors.VectorReadable2DType;
 import com.io7m.jtensors.parameterized.PVectorI2D;
+import com.io7m.jtensors.parameterized.PVectorReadable2DType;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
@@ -118,32 +120,32 @@ import org.junit.Test;
     final double q = z + 1.0;
 
     {
-      final PVectorI2D<T> m0 = new PVectorI2D<T>(x, y);
-      final PVectorI2D<T> m1 = new PVectorI2D<T>(q, y);
+      final PVectorReadable2DType<T> m0 = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> m1 = new PVectorI2D<T>(q, y);
       Assert.assertFalse(PVectorI2D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI2D<T> m0 = new PVectorI2D<T>(x, y);
-      final PVectorI2D<T> m1 = new PVectorI2D<T>(x, q);
+      final PVectorReadable2DType<T> m0 = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> m1 = new PVectorI2D<T>(x, q);
       Assert.assertFalse(PVectorI2D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI2D<T> m0 = new PVectorI2D<T>(x, y);
-      final PVectorI2D<T> m1 = new PVectorI2D<T>(q, q);
+      final PVectorReadable2DType<T> m0 = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> m1 = new PVectorI2D<T>(q, q);
       Assert.assertFalse(PVectorI2D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI2D<T> m0 = new PVectorI2D<T>(x, y);
-      final PVectorI2D<T> m1 = new PVectorI2D<T>(q, y);
+      final PVectorReadable2DType<T> m0 = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> m1 = new PVectorI2D<T>(q, y);
       Assert.assertFalse(PVectorI2D.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI2D<T> m0 = new PVectorI2D<T>(x, y);
-      final PVectorI2D<T> m1 = new PVectorI2D<T>(q, q);
+      final PVectorReadable2DType<T> m0 = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> m1 = new PVectorI2D<T>(q, q);
       Assert.assertFalse(PVectorI2D.almostEqual(ec, m0, m1));
     }
   }
@@ -156,9 +158,9 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
-      final PVectorI2D<T> v0 = new PVectorI2D<T>(x0, y0);
-      final PVectorI2D<T> v1 = new PVectorI2D<T>(x0, y0);
-      final PVectorI2D<T> v2 = new PVectorI2D<T>(x0, y0);
+      final PVectorReadable2DType<T> v0 = new PVectorI2D<T>(x0, y0);
+      final PVectorReadable2DType<T> v1 = new PVectorI2D<T>(x0, y0);
+      final PVectorReadable2DType<T> v2 = new PVectorI2D<T>(x0, y0);
 
       Assert.assertTrue(PVectorI2D.almostEqual(ec, v0, v1));
       Assert.assertTrue(PVectorI2D.almostEqual(ec, v1, v2));
@@ -198,7 +200,7 @@ import org.junit.Test;
 
   @Override @Test public void testCheckInterface()
   {
-    final PVectorI2D<T> v = new PVectorI2D<T>(3.0, 5.0);
+    final VectorReadable2DType v = new PVectorI2D<T>(3.0, 5.0);
 
     Assert.assertTrue(v.getXD() == v.getXD());
     Assert.assertTrue(v.getYD() == v.getYD());
@@ -213,7 +215,7 @@ import org.junit.Test;
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
-      final PVectorI2D<T> v = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> v = new PVectorI2D<T>(x, y);
 
       Assert.assertTrue(
         PVectorI2D.clampMaximumByPVector(v, maximum).getXD()
@@ -233,7 +235,7 @@ import org.junit.Test;
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
-      final PVectorI2D<T> v = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> v = new PVectorI2D<T>(x, y);
 
       Assert.assertTrue(
         PVectorI2D.clampMinimumByPVector(v, minimum).getXD()
@@ -257,7 +259,7 @@ import org.junit.Test;
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
-      final PVectorI2D<T> v = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> v = new PVectorI2D<T>(x, y);
 
       Assert.assertTrue(
         PVectorI2D.clampByPVector(v, minimum, maximum).getXD()
@@ -281,7 +283,7 @@ import org.junit.Test;
 
       final double x = Math.random() * Double.MAX_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
-      final PVectorI2D<T> v = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> v = new PVectorI2D<T>(x, y);
 
       Assert.assertTrue(PVectorI2D.clampMaximum(v, maximum).getXD() <= maximum);
       Assert.assertTrue(PVectorI2D.clampMaximum(v, maximum).getYD() <= maximum);
@@ -295,7 +297,7 @@ import org.junit.Test;
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MIN_VALUE;
-      final PVectorI2D<T> v = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> v = new PVectorI2D<T>(x, y);
 
       Assert.assertTrue(PVectorI2D.clampMinimum(v, minimum).getXD() >= minimum);
       Assert.assertTrue(PVectorI2D.clampMinimum(v, minimum).getYD() >= minimum);
@@ -310,7 +312,7 @@ import org.junit.Test;
 
       final double x = Math.random() * Double.MIN_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
-      final PVectorI2D<T> v = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> v = new PVectorI2D<T>(x, y);
 
       Assert.assertTrue(
         PVectorI2D.clamp(v, minimum, maximum).getXD() <= maximum);
@@ -333,7 +335,7 @@ import org.junit.Test;
       final double y = Math.random();
 
       final PVectorI2D<T> v0 = new PVectorI2D<T>(x, y);
-      final PVectorI2D<T> v1 = new PVectorI2D<T>(v0);
+      final VectorReadable2DType v1 = new PVectorI2D<T>(v0);
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.getXD(), x));
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.getYD(), y));
@@ -345,7 +347,7 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI2D<T> v = new PVectorI2D<T>();
+    final VectorReadable2DType v = new PVectorI2D<T>();
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), 0.0));
   }
@@ -355,8 +357,8 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI2D<T> v0 = new PVectorI2D<T>(0.0, 1.0);
-    final PVectorI2D<T> v1 = new PVectorI2D<T>(0.0, 0.0);
+    final PVectorReadable2DType<T> v0 = new PVectorI2D<T>(0.0, 1.0);
+    final PVectorReadable2DType<T> v1 = new PVectorI2D<T>(0.0, 0.0);
 
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
@@ -368,11 +370,11 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
-      final PVectorI2D<T> v0 = new PVectorI2D<T>(x0, y0);
+      final PVectorReadable2DType<T> v0 = new PVectorI2D<T>(x0, y0);
 
       final double x1 = Math.random() * Double.MAX_VALUE;
       final double y1 = Math.random() * Double.MAX_VALUE;
-      final PVectorI2D<T> v1 = new PVectorI2D<T>(x1, y1);
+      final PVectorReadable2DType<T> v1 = new PVectorI2D<T>(x1, y1);
 
       Assert.assertTrue(PVectorI2D.distance(v0, v1) >= 0.0);
     }
@@ -409,11 +411,11 @@ import org.junit.Test;
 
   @Override @Test public void testDotProductPerpendicular()
   {
-    final PVectorI2D<T> vpx = new PVectorI2D<T>(1.0f, 0.0f);
-    final PVectorI2D<T> vmx = new PVectorI2D<T>(-1.0f, 0.0f);
+    final PVectorReadable2DType<T> vpx = new PVectorI2D<T>(1.0f, 0.0f);
+    final PVectorReadable2DType<T> vmx = new PVectorI2D<T>(-1.0f, 0.0f);
 
-    final PVectorI2D<T> vpy = new PVectorI2D<T>(0.0f, 1.0f);
-    final PVectorI2D<T> vmy = new PVectorI2D<T>(0.0f, -1.0f);
+    final PVectorReadable2DType<T> vpy = new PVectorI2D<T>(0.0f, 1.0f);
+    final PVectorReadable2DType<T> vmy = new PVectorI2D<T>(0.0f, -1.0f);
 
     Assert.assertTrue(PVectorI2D.dotProduct(vpx, vpy) == 0.0);
     Assert.assertTrue(PVectorI2D.dotProduct(vmx, vmy) == 0.0);
@@ -427,7 +429,7 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random();
       final double y = Math.random();
-      final PVectorI2D<T> q = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> q = new PVectorI2D<T>(x, y);
       final double dp = PVectorI2D.dotProduct(q, q);
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
@@ -442,7 +444,7 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random();
       final double y = Math.random();
-      final PVectorI2D<T> q = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> q = new PVectorI2D<T>(x, y);
 
       final double ms = PVectorI2D.magnitudeSquared(q);
       final double dp = PVectorI2D.dotProduct(q, q);
@@ -573,7 +575,7 @@ import org.junit.Test;
   @Override @Test public void testInitializeReadable()
   {
     final PVectorI2D<T> v0 = new PVectorI2D<T>(1.0f, 2.0f);
-    final PVectorI2D<T> v1 = new PVectorI2D<T>(v0);
+    final VectorReadable2DType v1 = new PVectorI2D<T>(v0);
 
     Assert.assertTrue(v0.getXD() == v1.getXD());
     Assert.assertTrue(v0.getYD() == v1.getYD());
@@ -587,11 +589,11 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
       final double y0 = Math.random() * Double.MAX_VALUE;
-      final PVectorI2D<T> v0 = new PVectorI2D<T>(x0, y0);
+      final PVectorReadable2DType<T> v0 = new PVectorI2D<T>(x0, y0);
 
       final double x1 = Math.random() * Double.MAX_VALUE;
       final double y1 = Math.random() * Double.MAX_VALUE;
-      final PVectorI2D<T> v1 = new PVectorI2D<T>(x1, y1);
+      final PVectorReadable2DType<T> v1 = new PVectorI2D<T>(x1, y1);
 
       Assert.assertTrue(
         PVectorI2D.almostEqual(
@@ -607,7 +609,7 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = 1.0 + (Math.random() * Double.MAX_VALUE);
       final double y = 1.0 + (Math.random() * Double.MAX_VALUE);
-      final PVectorI2D<T> v = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> v = new PVectorI2D<T>(x, y);
 
       final double m = PVectorI2D.magnitude(v);
       Assert.assertTrue(m > 0.0);
@@ -622,7 +624,7 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
       final double y = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
-      final PVectorI2D<T> v = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> v = new PVectorI2D<T>(x, y);
 
       final PVectorI2D<T> vr = PVectorI2D.normalize(v);
       Assert.assertNotSame(v, vr);
@@ -637,7 +639,7 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI2D<T> v = new PVectorI2D<T>(0.0, 0.0);
+    final PVectorReadable2DType<T> v = new PVectorI2D<T>(0.0, 0.0);
     final PVectorI2D<T> vr = PVectorI2D.normalize(v);
     final double m = PVectorI2D.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
@@ -648,14 +650,14 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI2D<T> v = new PVectorI2D<T>(1.0, 0.0);
+    final PVectorReadable2DType<T> v = new PVectorI2D<T>(1.0, 0.0);
     final double m = PVectorI2D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final PVectorI2D<T> v = new PVectorI2D<T>(8.0, 0.0);
+    final PVectorReadable2DType<T> v = new PVectorI2D<T>(8.0, 0.0);
 
     {
       final double p = PVectorI2D.dotProduct(v, v);
@@ -672,14 +674,14 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI2D<T> v = new PVectorI2D<T>(0.0, 0.0);
+    final PVectorReadable2DType<T> v = new PVectorI2D<T>(0.0, 0.0);
     final double m = PVectorI2D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
   @Override @Test public void testNormalizeSimple()
   {
-    final PVectorI2D<T> v0 = new PVectorI2D<T>(8.0, 0.0);
+    final PVectorReadable2DType<T> v0 = new PVectorI2D<T>(8.0, 0.0);
     final PVectorI2D<T> vr = PVectorI2D.normalize(v0);
     final double m = PVectorI2D.magnitude(vr);
     Assert.assertTrue(m == 1.0);
@@ -690,7 +692,7 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI2D<T> q = new PVectorI2D<T>(0, 0);
+    final PVectorReadable2DType<T> q = new PVectorI2D<T>(0, 0);
     final PVectorI2D<T> qr = PVectorI2D.normalize(q);
 
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.getXD()));
@@ -699,8 +701,8 @@ import org.junit.Test;
 
   @Override @Test public void testOrthonormalize()
   {
-    final PVectorI2D<T> v0 = new PVectorI2D<T>(0, 1);
-    final PVectorI2D<T> v1 = new PVectorI2D<T>(0.5, 0.5);
+    final PVectorReadable2DType<T> v0 = new PVectorI2D<T>(0, 1);
+    final PVectorReadable2DType<T> v1 = new PVectorI2D<T>(0.5, 0.5);
     final Pair<PVectorI2D<T>, PVectorI2D<T>> on =
       PVectorI2D.orthoNormalize(v0, v1);
 
@@ -711,15 +713,15 @@ import org.junit.Test;
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final PVectorI2D<T> p = new PVectorI2D<T>(1.0, 0.0);
-      final PVectorI2D<T> q = new PVectorI2D<T>(0.0, 1.0);
+      final PVectorReadable2DType<T> p = new PVectorI2D<T>(1.0, 0.0);
+      final PVectorReadable2DType<T> q = new PVectorI2D<T>(0.0, 1.0);
       final PVectorI2D<T> r = PVectorI2D.projection(p, q);
       Assert.assertTrue(PVectorI2D.magnitude(r) == 0.0);
     }
 
     {
-      final PVectorI2D<T> p = new PVectorI2D<T>(-1.0, 0.0);
-      final PVectorI2D<T> q = new PVectorI2D<T>(0.0, 1.0);
+      final PVectorReadable2DType<T> p = new PVectorI2D<T>(-1.0, 0.0);
+      final PVectorReadable2DType<T> q = new PVectorI2D<T>(0.0, 1.0);
       final PVectorI2D<T> r = PVectorI2D.projection(p, q);
       Assert.assertTrue(PVectorI2D.magnitude(r) == 0.0);
     }
@@ -754,7 +756,7 @@ import org.junit.Test;
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = Math.random() * Double.MAX_VALUE;
       final double y = Math.random() * Double.MAX_VALUE;
-      final PVectorI2D<T> v = new PVectorI2D<T>(x, y);
+      final PVectorReadable2DType<T> v = new PVectorI2D<T>(x, y);
 
       final PVectorI2D<T> vr = PVectorI2D.scale(v, 0.0);
 
@@ -766,7 +768,7 @@ import org.junit.Test;
   @Override @Test public void testString()
   {
     final PVectorI2D<T> v = new PVectorI2D<T>(0.0, 1.0);
-    Assert.assertTrue(v.toString().equals("[PVectorI2D 0.0 1.0]"));
+    Assert.assertTrue("[PVectorI2D 0.0 1.0]".equals(v.toString()));
   }
 
   @Override @Test public void testSubtract()
