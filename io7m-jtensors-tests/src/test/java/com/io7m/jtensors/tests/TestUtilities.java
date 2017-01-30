@@ -18,6 +18,7 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
+import com.io7m.junreachable.UnreachableCodeException;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -25,6 +26,11 @@ import java.util.TreeMap;
 public final class TestUtilities
 {
   public static final int TEST_RANDOM_ITERATIONS = 1000;
+
+  private TestUtilities()
+  {
+    throw new UnreachableCodeException();
+  }
 
   public static AlmostEqualDouble.ContextRelative getDoubleEqualityContext()
   {
