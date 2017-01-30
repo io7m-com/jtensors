@@ -51,7 +51,7 @@ public final class ByteBufferRanges
 
   public static long checkByteOffset(final long b)
   {
-    if (ByteBufferRanges.NON_NEGATIVE_INT_RANGE.includesValue(b)) {
+    if (NON_NEGATIVE_INT_RANGE.includesValue(b)) {
       return b;
     }
 
@@ -59,7 +59,7 @@ public final class ByteBufferRanges
       String.format(
         "Byte offset %d is not in the range [%d, %d]",
         Long.valueOf(b),
-        Long.valueOf(ByteBufferRanges.NON_NEGATIVE_INT_RANGE.getLower()),
-        Long.valueOf(ByteBufferRanges.NON_NEGATIVE_INT_RANGE.getUpper())));
+        Long.valueOf(NON_NEGATIVE_INT_RANGE.getLower()),
+        Long.valueOf(NON_NEGATIVE_INT_RANGE.getUpper())));
   }
 }

@@ -35,7 +35,8 @@ import com.io7m.junreachable.UnreachableCodeException;
  * @since 7.0.0
  */
 
-@SuppressWarnings("unchecked") public final class PMatrixM4x4F
+@SuppressWarnings("unchecked")
+public final class PMatrixM4x4F
 {
   private PMatrixM4x4F()
   {
@@ -414,7 +415,7 @@ import com.io7m.junreachable.UnreachableCodeException;
     final PMatrixReadable4x4FType<T0, T1> m,
     final MOUT out)
   {
-    return PMatrixM4x4F.invertActual(m, context.m3a, context.m4a, out);
+    return invertActual(m, context.m3a, context.m4a, out);
   }
 
   /**
@@ -602,7 +603,7 @@ import com.io7m.junreachable.UnreachableCodeException;
     final PVectorReadable4FType<T0> v,
     final V out)
   {
-    return PMatrixM4x4F.multiplyVector4FActual(
+    return multiplyVector4FActual(
       m, v, context.v4a, context.v4b, out);
   }
 
@@ -649,12 +650,12 @@ import com.io7m.junreachable.UnreachableCodeException;
     private final Matrix3x3FType m3a = MatrixHeapArrayM3x3F.newMatrix();
     private final Matrix4x4FType m4a = MatrixHeapArrayM4x4F.newMatrix();
     private final Matrix4x4FType m4b = MatrixHeapArrayM4x4F.newMatrix();
-    private final VectorM3F      v3a = new VectorM3F();
-    private final VectorM3F      v3b = new VectorM3F();
-    private final VectorM3F      v3c = new VectorM3F();
-    private final VectorM3F      v3d = new VectorM3F();
-    private final VectorM4F      v4a = new VectorM4F();
-    private final VectorM4F      v4b = new VectorM4F();
+    private final VectorM3F v3a = new VectorM3F();
+    private final VectorM3F v3b = new VectorM3F();
+    private final VectorM3F v3c = new VectorM3F();
+    private final VectorM3F v3d = new VectorM3F();
+    private final VectorM4F v4a = new VectorM4F();
+    private final VectorM4F v4b = new VectorM4F();
 
     /**
      * Construct a new context.

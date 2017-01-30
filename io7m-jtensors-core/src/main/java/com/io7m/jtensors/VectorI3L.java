@@ -29,7 +29,8 @@ import net.jcip.annotations.Immutable;
  * @since 5.3.0
  */
 
-@Immutable public final class VectorI3L implements VectorReadable3LType
+@Immutable
+public final class VectorI3L implements VectorReadable3LType
 {
   /**
    * The zero vector.
@@ -320,7 +321,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3LType v1)
     throws ArithmeticException
   {
-    return VectorI3L.magnitude(VectorI3L.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -374,9 +375,9 @@ import net.jcip.annotations.Immutable;
     final double alpha)
     throws ArithmeticException
   {
-    final VectorI3L w0 = VectorI3L.scale(v0, 1.0 - alpha);
-    final VectorI3L w1 = VectorI3L.scale(v1, alpha);
-    return VectorI3L.add(w0, w1);
+    final VectorI3L w0 = scale(v0, 1.0 - alpha);
+    final VectorI3L w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -397,7 +398,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3LType v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt((double) VectorI3L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -416,7 +417,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3LType v)
     throws ArithmeticException
   {
-    return VectorI3L.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -438,10 +439,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable3LType q)
     throws ArithmeticException
   {
-    final long dot = VectorI3L.dotProduct(p, q);
-    final long qms = VectorI3L.magnitudeSquared(q);
+    final long dot = dotProduct(p, q);
+    final long qms = magnitudeSquared(q);
     final long s = dot / qms;
-    return VectorI3L.scale(p, (double) s);
+    return scale(p, (double) s);
   }
 
   /**
@@ -491,7 +492,8 @@ import net.jcip.annotations.Immutable;
     return new VectorI3L(x, y, z);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -513,22 +515,26 @@ import net.jcip.annotations.Immutable;
     return this.z == other.z;
   }
 
-  @Override public long getXL()
+  @Override
+  public long getXL()
   {
     return this.x;
   }
 
-  @Override public long getYL()
+  @Override
+  public long getYL()
   {
     return this.y;
   }
 
-  @Override public long getZL()
+  @Override
+  public long getZL()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final long prime = 31L;
     long result = 1L;
@@ -538,7 +544,8 @@ import net.jcip.annotations.Immutable;
     return (int) result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI3L ");

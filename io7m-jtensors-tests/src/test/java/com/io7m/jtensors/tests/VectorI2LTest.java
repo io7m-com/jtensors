@@ -58,12 +58,12 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI2LTest.randomPositiveSmallNumber();
-      final long y0 = VectorI2LTest.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
       final VectorReadable2LType v0 = new VectorI2L(x0, y0);
 
-      final long x1 = VectorI2LTest.randomPositiveSmallNumber();
-      final long y1 = VectorI2LTest.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
       final VectorReadable2LType v1 = new VectorI2L(x1, y1);
 
       final VectorI2L vr0 = VectorI2L.add(v0, v1);
@@ -77,15 +77,15 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI2LTest.randomPositiveSmallNumber();
-      final long y0 = VectorI2LTest.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
       final VectorReadable2LType v0 = new VectorI2L(x0, y0);
 
-      final long x1 = VectorI2LTest.randomPositiveSmallNumber();
-      final long y1 = VectorI2LTest.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
       final VectorReadable2LType v1 = new VectorI2L(x1, y1);
 
-      final long r = VectorI2LTest.randomPositiveSmallNumber();
+      final long r = randomPositiveSmallNumber();
 
       final VectorI2L vr0 = VectorI2L.addScaled(v0, v1, r);
 
@@ -166,12 +166,12 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long max_x = VectorI2LTest.randomNegativeNumber();
-      final long max_y = VectorI2LTest.randomNegativeNumber();
+      final long max_x = randomNegativeNumber();
+      final long max_y = randomNegativeNumber();
       final VectorReadable2LType maximum = new VectorI2L(max_x, max_y);
 
-      final long x = VectorI2LTest.randomNegativeNumber();
-      final long y = VectorI2LTest.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
 
       final VectorI2L vr = VectorI2L.clampMaximumByVector(v, maximum);
@@ -185,12 +185,12 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long min_x = VectorI2LTest.randomPositiveNumber();
-      final long min_y = VectorI2LTest.randomPositiveNumber();
+      final long min_x = randomPositiveNumber();
+      final long min_y = randomPositiveNumber();
       final VectorReadable2LType minimum = new VectorI2L(min_x, min_y);
 
-      final long x = VectorI2LTest.randomNegativeNumber();
-      final long y = VectorI2LTest.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
 
       final VectorI2L vr = VectorI2L.clampMinimumByVector(v, minimum);
@@ -204,16 +204,16 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long min_x = VectorI2LTest.randomNegativeNumber();
-      final long min_y = VectorI2LTest.randomNegativeNumber();
+      final long min_x = randomNegativeNumber();
+      final long min_y = randomNegativeNumber();
       final VectorReadable2LType minimum = new VectorI2L(min_x, min_y);
 
-      final long max_x = VectorI2LTest.randomPositiveNumber();
-      final long max_y = VectorI2LTest.randomPositiveNumber();
+      final long max_x = randomPositiveNumber();
+      final long max_y = randomPositiveNumber();
       final VectorReadable2LType maximum = new VectorI2L(max_x, max_y);
 
-      final long x = VectorI2LTest.randomNegativeNumber();
-      final long y = VectorI2LTest.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
 
       final VectorI2L vr = VectorI2L.clampByVector(v, minimum, maximum);
@@ -229,10 +229,10 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long maximum = VectorI2LTest.randomNegativeNumber();
+      final long maximum = randomNegativeNumber();
 
-      final long x = VectorI2LTest.randomPositiveNumber();
-      final long y = VectorI2LTest.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
 
       final VectorI2L vr = VectorI2L.clampMaximum(v, maximum);
@@ -246,10 +246,10 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long minimum = VectorI2LTest.randomPositiveNumber();
+      final long minimum = randomPositiveNumber();
 
-      final long x = VectorI2LTest.randomNegativeNumber();
-      final long y = VectorI2LTest.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
 
       final VectorI2L vr = VectorI2L.clampMinimum(v, minimum);
@@ -263,11 +263,11 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long minimum = VectorI2LTest.randomNegativeNumber();
-      final long maximum = VectorI2LTest.randomPositiveNumber();
+      final long minimum = randomNegativeNumber();
+      final long maximum = randomPositiveNumber();
 
-      final long x = VectorI2LTest.randomNegativeNumber();
-      final long y = VectorI2LTest.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
 
       final VectorI2L vr = VectorI2L.clamp(v, minimum, maximum);
@@ -312,12 +312,12 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI2LTest.randomPositiveSmallNumber();
-      final long y0 = VectorI2LTest.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
       final VectorReadable2LType v0 = new VectorI2L(x0, y0);
 
-      final long x1 = VectorI2LTest.randomPositiveSmallNumber();
-      final long y1 = VectorI2LTest.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
       final VectorReadable2LType v1 = new VectorI2L(x1, y1);
 
       Assert.assertTrue(VectorI2L.distance(v0, v1) >= 0);
@@ -511,12 +511,12 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI2LTest.randomPositiveNumber();
-      final long y0 = VectorI2LTest.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
       final VectorReadable2LType v0 = new VectorI2L(x0, y0);
 
-      final long x1 = VectorI2LTest.randomPositiveNumber();
-      final long y1 = VectorI2LTest.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
       final VectorReadable2LType v1 = new VectorI2L(x1, y1);
 
       final VectorI2L vr0 = VectorI2L.interpolateLinear(v0, v1, 0);
@@ -534,8 +534,8 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = VectorI2LTest.randomPositiveSmallNumber();
-      final long y = VectorI2LTest.randomPositiveSmallNumber();
+      final long x = randomPositiveSmallNumber();
+      final long y = randomPositiveSmallNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
 
       final long m = VectorI2L.magnitude(v);
@@ -619,8 +619,8 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = VectorI2LTest.randomPositiveNumber();
-      final long y = VectorI2LTest.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
 
       final VectorI2L vr = VectorI2L.scale(v, 1);
@@ -634,8 +634,8 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = VectorI2LTest.randomPositiveNumber();
-      final long y = VectorI2LTest.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
 
       final VectorI2L vr = VectorI2L.scale(v, 0);
@@ -655,12 +655,12 @@ public class VectorI2LTest extends VectorI2Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI2LTest.randomPositiveNumber();
-      final long y0 = VectorI2LTest.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
       final VectorReadable2LType v0 = new VectorI2L(x0, y0);
 
-      final long x1 = VectorI2LTest.randomPositiveNumber();
-      final long y1 = VectorI2LTest.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
       final VectorReadable2LType v1 = new VectorI2L(x1, y1);
 
       final VectorI2L vr0 = VectorI2L.subtract(v0, v1);

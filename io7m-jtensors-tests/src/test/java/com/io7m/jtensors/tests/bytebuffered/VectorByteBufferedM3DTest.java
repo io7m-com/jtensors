@@ -53,7 +53,7 @@ public final class VectorByteBufferedM3DTest
 
   @Override protected Logger logger()
   {
-    return VectorByteBufferedM3DTest.LOG;
+    return LOG;
   }
 
   @Override protected VectorByteBuffered3DType newVectorM3D(

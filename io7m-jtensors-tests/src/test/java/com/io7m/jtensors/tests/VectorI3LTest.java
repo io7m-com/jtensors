@@ -60,14 +60,14 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI3LTest.randomPositiveSmallNumber();
-      final long y0 = VectorI3LTest.randomPositiveSmallNumber();
-      final long z0 = VectorI3LTest.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
       final VectorI3L v0 = new VectorI3L(x0, y0, z0);
 
-      final long x1 = VectorI3LTest.randomPositiveSmallNumber();
-      final long y1 = VectorI3LTest.randomPositiveSmallNumber();
-      final long z1 = VectorI3LTest.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
       final VectorI3L v1 = new VectorI3L(x1, y1, z1);
 
       final VectorI3L vr0 = VectorI3L.add(v0, v1);
@@ -82,17 +82,17 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI3LTest.randomPositiveSmallNumber();
-      final long y0 = VectorI3LTest.randomPositiveSmallNumber();
-      final long z0 = VectorI3LTest.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
       final VectorI3L v0 = new VectorI3L(x0, y0, z0);
 
-      final long x1 = VectorI3LTest.randomPositiveSmallNumber();
-      final long y1 = VectorI3LTest.randomPositiveSmallNumber();
-      final long z1 = VectorI3LTest.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
       final VectorI3L v1 = new VectorI3L(x1, y1, z1);
 
-      final long r = VectorI3LTest.randomPositiveSmallNumber();
+      final long r = randomPositiveSmallNumber();
 
       final VectorI3L vr0 = VectorI3L.addScaled(v0, v1, r);
 
@@ -125,14 +125,14 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long max_x = VectorI3LTest.randomNegativeNumber();
-      final long max_y = VectorI3LTest.randomNegativeNumber();
-      final long max_z = VectorI3LTest.randomNegativeNumber();
+      final long max_x = randomNegativeNumber();
+      final long max_y = randomNegativeNumber();
+      final long max_z = randomNegativeNumber();
       final VectorI3L maximum = new VectorI3L(max_x, max_y, max_z);
 
-      final long x = VectorI3LTest.randomNegativeNumber();
-      final long y = VectorI3LTest.randomNegativeNumber();
-      final long z = VectorI3LTest.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
       final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clampMaximumByVector(v, maximum);
@@ -147,14 +147,14 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long min_x = VectorI3LTest.randomPositiveNumber();
-      final long min_y = VectorI3LTest.randomPositiveNumber();
-      final long min_z = VectorI3LTest.randomPositiveNumber();
+      final long min_x = randomPositiveNumber();
+      final long min_y = randomPositiveNumber();
+      final long min_z = randomPositiveNumber();
       final VectorI3L minimum = new VectorI3L(min_x, min_y, min_z);
 
-      final long x = VectorI3LTest.randomNegativeNumber();
-      final long y = VectorI3LTest.randomNegativeNumber();
-      final long z = VectorI3LTest.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
       final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clampMinimumByVector(v, minimum);
@@ -169,19 +169,19 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long min_x = VectorI3LTest.randomNegativeNumber();
-      final long min_y = VectorI3LTest.randomNegativeNumber();
-      final long min_z = VectorI3LTest.randomNegativeNumber();
+      final long min_x = randomNegativeNumber();
+      final long min_y = randomNegativeNumber();
+      final long min_z = randomNegativeNumber();
       final VectorI3L minimum = new VectorI3L(min_x, min_y, min_z);
 
-      final long max_x = VectorI3LTest.randomPositiveNumber();
-      final long max_y = VectorI3LTest.randomPositiveNumber();
-      final long max_z = VectorI3LTest.randomPositiveNumber();
+      final long max_x = randomPositiveNumber();
+      final long max_y = randomPositiveNumber();
+      final long max_z = randomPositiveNumber();
       final VectorI3L maximum = new VectorI3L(max_x, max_y, max_z);
 
-      final long x = VectorI3LTest.randomNegativeNumber();
-      final long y = VectorI3LTest.randomPositiveNumber();
-      final long z = VectorI3LTest.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clampByVector(v, minimum, maximum);
@@ -199,11 +199,11 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long maximum = VectorI3LTest.randomNegativeNumber();
+      final long maximum = randomNegativeNumber();
 
-      final long x = VectorI3LTest.randomPositiveNumber();
-      final long y = VectorI3LTest.randomPositiveNumber();
-      final long z = VectorI3LTest.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clampMaximum(v, maximum);
@@ -218,11 +218,11 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long minimum = VectorI3LTest.randomPositiveNumber();
+      final long minimum = randomPositiveNumber();
 
-      final long x = VectorI3LTest.randomNegativeNumber();
-      final long y = VectorI3LTest.randomNegativeNumber();
-      final long z = VectorI3LTest.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
       final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clampMinimum(v, minimum);
@@ -237,12 +237,12 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long minimum = VectorI3LTest.randomNegativeNumber();
-      final long maximum = VectorI3LTest.randomPositiveNumber();
+      final long minimum = randomNegativeNumber();
+      final long maximum = randomPositiveNumber();
 
-      final long x = VectorI3LTest.randomNegativeNumber();
-      final long y = VectorI3LTest.randomPositiveNumber();
-      final long z = VectorI3LTest.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clamp(v, minimum, maximum);
@@ -297,14 +297,14 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI3LTest.randomPositiveSmallNumber();
-      final long y0 = VectorI3LTest.randomPositiveSmallNumber();
-      final long z0 = VectorI3LTest.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
       final VectorReadable3LType v0 = new VectorI3L(x0, y0, z0);
 
-      final long x1 = VectorI3LTest.randomPositiveSmallNumber();
-      final long y1 = VectorI3LTest.randomPositiveSmallNumber();
-      final long z1 = VectorI3LTest.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
       final VectorReadable3LType v1 = new VectorI3L(x1, y1, z1);
 
       Assert.assertTrue(VectorI3L.distance(v0, v1) >= 0);
@@ -561,14 +561,14 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI3LTest.randomPositiveNumber();
-      final long y0 = VectorI3LTest.randomPositiveNumber();
-      final long z0 = VectorI3LTest.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
       final VectorI3L v0 = new VectorI3L(x0, y0, z0);
 
-      final long x1 = VectorI3LTest.randomPositiveNumber();
-      final long y1 = VectorI3LTest.randomPositiveNumber();
-      final long z1 = VectorI3LTest.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
       final VectorI3L v1 = new VectorI3L(x1, y1, z1);
 
       final VectorI3L vr0 = VectorI3L.interpolateLinear(v0, v1, 0);
@@ -588,9 +588,9 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = VectorI3LTest.randomPositiveSmallNumber();
-      final long y = VectorI3LTest.randomPositiveSmallNumber();
-      final long z = VectorI3LTest.randomPositiveSmallNumber();
+      final long x = randomPositiveSmallNumber();
+      final long y = randomPositiveSmallNumber();
+      final long z = randomPositiveSmallNumber();
       final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final long m = VectorI3L.magnitude(v);
@@ -674,9 +674,9 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = VectorI3LTest.randomPositiveNumber();
-      final long y = VectorI3LTest.randomPositiveNumber();
-      final long z = VectorI3LTest.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final VectorI3L v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.scale(v, 1);
@@ -691,9 +691,9 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = VectorI3LTest.randomPositiveNumber();
-      final long y = VectorI3LTest.randomPositiveNumber();
-      final long z = VectorI3LTest.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.scale(v, 0);
@@ -714,14 +714,14 @@ public class VectorI3LTest extends VectorI3Contract
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = VectorI3LTest.randomPositiveNumber();
-      final long y0 = VectorI3LTest.randomPositiveNumber();
-      final long z0 = VectorI3LTest.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
       final VectorI3L v0 = new VectorI3L(x0, y0, z0);
 
-      final long x1 = VectorI3LTest.randomPositiveNumber();
-      final long y1 = VectorI3LTest.randomPositiveNumber();
-      final long z1 = VectorI3LTest.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
       final VectorI3L v1 = new VectorI3L(x1, y1, z1);
 
       final VectorI3L vr0 = VectorI3L.subtract(v0, v1);

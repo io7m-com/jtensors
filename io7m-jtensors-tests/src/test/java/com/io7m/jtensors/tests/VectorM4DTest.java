@@ -45,7 +45,7 @@ public final class VectorM4DTest extends VectorM4DContract<VectorM4D>
 
   @Override protected Logger logger()
   {
-    return VectorM4DTest.LOG;
+    return LOG;
   }
 
   @Override protected VectorM4D newVectorM4D(

@@ -120,7 +120,7 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
     final int i,
     final float x)
   {
-    this.buffer.putFloat(PVectorByteBufferedM2F.getByteOffsetForIndex(o, i), x);
+    this.buffer.putFloat(getByteOffsetForIndex(o, i), x);
   }
 
   private float getAtOffsetAndIndex(
@@ -128,7 +128,7 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
     final int i)
   {
     return this.buffer.getFloat(
-      PVectorByteBufferedM2F.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public float getYF()

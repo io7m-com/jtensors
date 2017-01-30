@@ -114,7 +114,7 @@ public final class VectorM3D implements Vector3DType
   absoluteInPlace(
     final V v)
   {
-    return VectorM3D.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -157,7 +157,7 @@ public final class VectorM3D implements Vector3DType
     final V v0,
     final VectorReadable3DType v1)
   {
-    return VectorM3D.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -206,7 +206,7 @@ public final class VectorM3D implements Vector3DType
     final VectorReadable3DType v1,
     final double r)
   {
-    return VectorM3D.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -315,7 +315,7 @@ public final class VectorM3D implements Vector3DType
     final VectorReadable3DType minimum,
     final VectorReadable3DType maximum)
   {
-    return VectorM3D.clampByVector(v, minimum, maximum, v);
+    return clampByVector(v, minimum, maximum, v);
   }
 
   /**
@@ -337,7 +337,7 @@ public final class VectorM3D implements Vector3DType
     final double minimum,
     final double maximum)
   {
-    return VectorM3D.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -408,7 +408,7 @@ public final class VectorM3D implements Vector3DType
     final V v,
     final VectorReadable3DType maximum)
   {
-    return VectorM3D.clampMaximumByVector(v, maximum, v);
+    return clampMaximumByVector(v, maximum, v);
   }
 
   /**
@@ -428,7 +428,7 @@ public final class VectorM3D implements Vector3DType
     final V v,
     final double maximum)
   {
-    return VectorM3D.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -499,7 +499,7 @@ public final class VectorM3D implements Vector3DType
     final V v,
     final VectorReadable3DType minimum)
   {
-    return VectorM3D.clampMinimumByVector(v, minimum, v);
+    return clampMinimumByVector(v, minimum, v);
   }
 
   /**
@@ -519,7 +519,7 @@ public final class VectorM3D implements Vector3DType
     final V v,
     final double minimum)
   {
-    return VectorM3D.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -582,7 +582,7 @@ public final class VectorM3D implements Vector3DType
     final VectorReadable3DType v0,
     final VectorReadable3DType v1)
   {
-    return VectorM3D.magnitude(VectorM3D.subtract(v0, v1, c.v2a));
+    return magnitude(subtract(v0, v1, c.v2a));
   }
 
   /**
@@ -633,9 +633,9 @@ public final class VectorM3D implements Vector3DType
     final double alpha,
     final V r)
   {
-    VectorM3D.scale(v0, 1.0 - alpha, c.v2a);
-    VectorM3D.scale(v1, alpha, c.v2b);
-    return VectorM3D.add(c.v2a, c.v2b, r);
+    scale(v0, 1.0 - alpha, c.v2a);
+    scale(v1, alpha, c.v2b);
+    return add(c.v2a, c.v2b, r);
   }
 
   /**
@@ -651,7 +651,7 @@ public final class VectorM3D implements Vector3DType
   public static double magnitude(
     final VectorReadable3DType v)
   {
-    return Math.sqrt(VectorM3D.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -665,7 +665,7 @@ public final class VectorM3D implements Vector3DType
   public static double magnitudeSquared(
     final VectorReadable3DType v)
   {
-    return VectorM3D.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -684,10 +684,10 @@ public final class VectorM3D implements Vector3DType
     final VectorReadable3DType v,
     final V out)
   {
-    final double m = VectorM3D.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return VectorM3D.scale(v, reciprocal, out);
+      return scale(v, reciprocal, out);
     }
 
     out.set3D(v.getXD(), v.getYD(), v.getZD());
@@ -709,7 +709,7 @@ public final class VectorM3D implements Vector3DType
   normalizeInPlace(
     final V v)
   {
-    return VectorM3D.normalize(v, v);
+    return normalize(v, v);
   }
 
   /**
@@ -737,9 +737,9 @@ public final class VectorM3D implements Vector3DType
     final VectorReadable3DType v1,
     final U v1_out)
   {
-    VectorM3D.normalize(v0, c.v2a);
-    VectorM3D.scale(c.v2a, VectorM3D.dotProduct(v1, c.v2a), c.v2b);
-    VectorM3D.normalizeInPlace(VectorM3D.subtract(v1, c.v2b, c.v2c));
+    normalize(v0, c.v2a);
+    scale(c.v2a, dotProduct(v1, c.v2a), c.v2b);
+    normalizeInPlace(subtract(v1, c.v2b, c.v2c));
     v0_out.copyFrom3D(c.v2a);
     v1_out.copyFrom3D(c.v2c);
   }
@@ -764,10 +764,10 @@ public final class VectorM3D implements Vector3DType
     final V v0,
     final W v1)
   {
-    VectorM3D.normalizeInPlace(v0);
-    VectorM3D.scale(v0, VectorM3D.dotProduct(v1, v0), c.v2a);
-    VectorM3D.subtractInPlace(v1, c.v2a);
-    VectorM3D.normalizeInPlace(v1);
+    normalizeInPlace(v0);
+    scale(v0, dotProduct(v1, v0), c.v2a);
+    subtractInPlace(v1, c.v2a);
+    normalizeInPlace(v1);
   }
 
   /**
@@ -787,11 +787,11 @@ public final class VectorM3D implements Vector3DType
     final VectorReadable3DType q,
     final V r)
   {
-    final double dot = VectorM3D.dotProduct(p, q);
-    final double qms = VectorM3D.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
 
-    return VectorM3D.scale(p, s, r);
+    return scale(p, s, r);
   }
 
   /**
@@ -834,7 +834,7 @@ public final class VectorM3D implements Vector3DType
     final V v,
     final double r)
   {
-    return VectorM3D.scale(v, r, v);
+    return scale(v, r, v);
   }
 
   /**
@@ -877,22 +877,25 @@ public final class VectorM3D implements Vector3DType
     final V v0,
     final VectorReadable3DType v1)
   {
-    return VectorM3D.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2D(
+  @Override
+  public void copyFrom2D(
     final VectorReadable2DType in_v)
   {
     VectorM2D.copy(in_v, this);
   }
 
-  @Override public void copyFrom3D(
+  @Override
+  public void copyFrom3D(
     final VectorReadable3DType in_v)
   {
-    VectorM3D.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -914,40 +917,47 @@ public final class VectorM3D implements Vector3DType
     return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public void setXD(
+  @Override
+  public void setXD(
     final double in_x)
   {
     this.x = in_x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public void setYD(
+  @Override
+  public void setYD(
     final double in_y)
   {
     this.y = in_y;
   }
 
-  @Override public double getZD()
+  @Override
+  public double getZD()
   {
     return this.z;
   }
 
-  @Override public void setZD(
+  @Override
+  public void setZD(
     final double in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -961,7 +971,8 @@ public final class VectorM3D implements Vector3DType
     return result;
   }
 
-  @Override public void set2D(
+  @Override
+  public void set2D(
     final double in_x,
     final double in_y)
   {
@@ -969,7 +980,8 @@ public final class VectorM3D implements Vector3DType
     this.y = in_y;
   }
 
-  @Override public void set3D(
+  @Override
+  public void set3D(
     final double in_x,
     final double in_y,
     final double in_z)
@@ -979,7 +991,8 @@ public final class VectorM3D implements Vector3DType
     this.z = in_z;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM3D ");

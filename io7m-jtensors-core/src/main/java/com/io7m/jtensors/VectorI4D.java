@@ -28,7 +28,8 @@ import net.jcip.annotations.Immutable;
  * accessed from multiple threads. </p>
  */
 
-@Immutable public final class VectorI4D implements VectorReadable4DType
+@Immutable
+public final class VectorI4D implements VectorReadable4DType
 {
   /**
    * The zero vector.
@@ -148,7 +149,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4DType v1,
     final double r)
   {
-    return VectorI4D.add(v0, VectorI4D.scale(v1, r));
+    return add(v0, scale(v1, r));
   }
 
   /**
@@ -334,7 +335,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
-    return VectorI4D.magnitude(VectorI4D.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -379,9 +380,9 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4DType v1,
     final double alpha)
   {
-    final VectorReadable4DType w0 = VectorI4D.scale(v0, 1.0 - alpha);
-    final VectorReadable4DType w1 = VectorI4D.scale(v1, alpha);
-    return VectorI4D.add(w0, w1);
+    final VectorReadable4DType w0 = scale(v0, 1.0 - alpha);
+    final VectorReadable4DType w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -397,7 +398,7 @@ import net.jcip.annotations.Immutable;
   public static double magnitude(
     final VectorReadable4DType v)
   {
-    return Math.sqrt(VectorI4D.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -411,7 +412,7 @@ import net.jcip.annotations.Immutable;
   public static double magnitudeSquared(
     final VectorReadable4DType v)
   {
-    return VectorI4D.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -427,10 +428,10 @@ import net.jcip.annotations.Immutable;
   public static VectorI4D normalize(
     final VectorReadable4DType v)
   {
-    final double m = VectorI4D.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return VectorI4D.scale(v, reciprocal);
+      return scale(v, reciprocal);
     }
     return new VectorI4D(v);
   }
@@ -452,11 +453,11 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
-    final VectorI4D v0n = VectorI4D.normalize(v0);
+    final VectorI4D v0n = normalize(v0);
     final VectorI4D projection =
-      VectorI4D.scale(v0n, VectorI4D.dotProduct(v1, v0n));
+      scale(v0n, dotProduct(v1, v0n));
     final VectorI4D vr =
-      VectorI4D.normalize(VectorI4D.subtract(v1, projection));
+      normalize(subtract(v1, projection));
     return Pair.pair(v0n, vr);
   }
 
@@ -474,10 +475,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4DType p,
     final VectorReadable4DType q)
   {
-    final double dot = VectorI4D.dotProduct(p, q);
-    final double qms = VectorI4D.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
-    return VectorI4D.scale(p, s);
+    return scale(p, s);
   }
 
   /**
@@ -517,7 +518,8 @@ import net.jcip.annotations.Immutable;
       v0.getWD() - v1.getWD());
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -542,27 +544,32 @@ import net.jcip.annotations.Immutable;
     return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
   }
 
-  @Override public double getWD()
+  @Override
+  public double getWD()
   {
     return this.w;
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public double getZD()
+  @Override
+  public double getZD()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -578,7 +585,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI4D ");

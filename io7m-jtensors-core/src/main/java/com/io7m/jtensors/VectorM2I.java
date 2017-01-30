@@ -114,7 +114,7 @@ public final class VectorM2I implements Vector2IType
     final V v)
     throws ArithmeticException
   {
-    return VectorM2I.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -164,7 +164,7 @@ public final class VectorM2I implements Vector2IType
     final VectorReadable2IType v1)
     throws ArithmeticException
   {
-    return VectorM2I.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -222,7 +222,7 @@ public final class VectorM2I implements Vector2IType
     final double r)
     throws ArithmeticException
   {
-    return VectorM2I.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -238,9 +238,9 @@ public final class VectorM2I implements Vector2IType
     final VectorReadable2IType v0,
     final VectorReadable2IType v1)
   {
-    final double m0 = (double) VectorM2I.magnitude(v0);
-    final double m1 = (double) VectorM2I.magnitude(v1);
-    return Math.acos((double) VectorM2I.dotProduct(v0, v1) / (m0 * m1));
+    final double m0 = (double) magnitude(v0);
+    final double m1 = (double) magnitude(v1);
+    return Math.acos((double) dotProduct(v0, v1) / (m0 * m1));
   }
 
   /**
@@ -318,7 +318,7 @@ public final class VectorM2I implements Vector2IType
     final VectorReadable2IType minimum,
     final VectorReadable2IType maximum)
   {
-    return VectorM2I.clampByVector(v, minimum, maximum, v);
+    return clampByVector(v, minimum, maximum, v);
   }
 
   /**
@@ -340,7 +340,7 @@ public final class VectorM2I implements Vector2IType
     final int minimum,
     final int maximum)
   {
-    return VectorM2I.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -409,7 +409,7 @@ public final class VectorM2I implements Vector2IType
     final V v,
     final VectorReadable2IType maximum)
   {
-    return VectorM2I.clampMaximumByVector(v, maximum, v);
+    return clampMaximumByVector(v, maximum, v);
   }
 
   /**
@@ -429,7 +429,7 @@ public final class VectorM2I implements Vector2IType
     final V v,
     final int maximum)
   {
-    return VectorM2I.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -499,7 +499,7 @@ public final class VectorM2I implements Vector2IType
     final V v,
     final VectorReadable2IType minimum)
   {
-    return VectorM2I.clampMinimumByVector(v, minimum, v);
+    return clampMinimumByVector(v, minimum, v);
   }
 
   /**
@@ -519,7 +519,7 @@ public final class VectorM2I implements Vector2IType
     final V v,
     final int minimum)
   {
-    return VectorM2I.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -561,7 +561,7 @@ public final class VectorM2I implements Vector2IType
     final VectorReadable2IType v1)
     throws ArithmeticException
   {
-    return VectorM2I.magnitude(VectorM2I.subtract(v0, v1, c.v2a));
+    return magnitude(subtract(v0, v1, c.v2a));
   }
 
   /**
@@ -618,9 +618,9 @@ public final class VectorM2I implements Vector2IType
     final V r)
     throws ArithmeticException
   {
-    VectorM2I.scale(v0, 1.0 - alpha, c.v2a);
-    VectorM2I.scale(v1, alpha, c.v2b);
-    return VectorM2I.add(c.v2a, c.v2b, r);
+    scale(v0, 1.0 - alpha, c.v2a);
+    scale(v1, alpha, c.v2b);
+    return add(c.v2a, c.v2b, r);
   }
 
   /**
@@ -640,7 +640,7 @@ public final class VectorM2I implements Vector2IType
     final VectorReadable2IType v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt((double) VectorM2I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -658,7 +658,7 @@ public final class VectorM2I implements Vector2IType
     final VectorReadable2IType v)
     throws ArithmeticException
   {
-    return VectorM2I.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -682,11 +682,11 @@ public final class VectorM2I implements Vector2IType
     final V r)
     throws ArithmeticException
   {
-    final int dot = VectorM2I.dotProduct(p, q);
-    final int qms = VectorM2I.magnitudeSquared(q);
+    final int dot = dotProduct(p, q);
+    final int qms = magnitudeSquared(q);
     final int s = dot / qms;
 
-    return VectorM2I.scale(p, (double) s, r);
+    return scale(p, (double) s, r);
   }
 
   /**
@@ -736,7 +736,7 @@ public final class VectorM2I implements Vector2IType
     final int r)
     throws ArithmeticException
   {
-    return VectorM2I.scale(v, (double) r, v);
+    return scale(v, (double) r, v);
   }
 
   /**
@@ -786,16 +786,18 @@ public final class VectorM2I implements Vector2IType
     final VectorReadable2IType v1)
     throws ArithmeticException
   {
-    return VectorM2I.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2I(
+  @Override
+  public void copyFrom2I(
     final VectorReadable2IType in_v)
   {
-    VectorM2I.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -814,29 +816,34 @@ public final class VectorM2I implements Vector2IType
     return this.y == other.y;
   }
 
-  @Override public int getXI()
+  @Override
+  public int getXI()
   {
     return this.x;
   }
 
-  @Override public void setXI(
+  @Override
+  public void setXI(
     final int in_x)
   {
     this.x = in_x;
   }
 
-  @Override public int getYI()
+  @Override
+  public int getYI()
   {
     return this.y;
   }
 
-  @Override public void setYI(
+  @Override
+  public void setYI(
     final int in_y)
   {
     this.y = in_y;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -845,7 +852,8 @@ public final class VectorM2I implements Vector2IType
     return result;
   }
 
-  @Override public void set2I(
+  @Override
+  public void set2I(
     final int in_x,
     final int in_y)
   {
@@ -853,7 +861,8 @@ public final class VectorM2I implements Vector2IType
     this.y = in_y;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM2I ");

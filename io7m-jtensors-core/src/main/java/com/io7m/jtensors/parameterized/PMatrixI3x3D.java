@@ -33,13 +33,15 @@ import net.jcip.annotations.Immutable;
  * @param <T1> A phantom type parameter.
  */
 
-@EqualityStructural @Immutable public final class PMatrixI3x3D<T0, T1>
+@EqualityStructural
+@Immutable
+public final class PMatrixI3x3D<T0, T1>
   implements PMatrixReadable3x3DType<T0, T1>
 {
-  private static final double[][]         IDENTITY  =
-    PMatrixI3x3D.makeIdentity();
+  private static final double[][] IDENTITY =
+    makeIdentity();
   private static final PMatrixI3x3D<?, ?> IDENTITYM =
-    PMatrixI3x3D.makeIdentityM();
+    makeIdentityM();
   private final double[][] elements;
 
   private PMatrixI3x3D(
@@ -58,7 +60,7 @@ import net.jcip.annotations.Immutable;
   @SuppressWarnings("unchecked")
   public static <T0, T1> PMatrixI3x3D<T0, T1> identity()
   {
-    return (PMatrixI3x3D<T0, T1>) PMatrixI3x3D.IDENTITYM;
+    return (PMatrixI3x3D<T0, T1>) IDENTITYM;
   }
 
   private static double[][] makeIdentity()
@@ -78,7 +80,7 @@ import net.jcip.annotations.Immutable;
 
   private static PMatrixI3x3D<?, ?> makeIdentityM()
   {
-    return new PMatrixI3x3D<Object, Object>(PMatrixI3x3D.IDENTITY);
+    return new PMatrixI3x3D<Object, Object>(IDENTITY);
   }
 
   /**
@@ -163,7 +165,8 @@ import net.jcip.annotations.Immutable;
     return new PMatrixI3x3D<T0, T1>(e);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -179,14 +182,16 @@ import net.jcip.annotations.Immutable;
     return MatrixM3x3D.compareElements(this, other);
   }
 
-  @Override public <V extends VectorWritable3DType> void getRow3D(
+  @Override
+  public <V extends VectorWritable3DType> void getRow3D(
     final int row,
     final V out)
   {
     this.getRow3DUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable3DType> void getRow3DUnsafe(
+  @Override
+  public <V extends VectorWritable3DType> void getRow3DUnsafe(
     final int row,
     final V out)
   {
@@ -194,27 +199,32 @@ import net.jcip.annotations.Immutable;
       this.elements[row][0], this.elements[row][1], this.elements[row][2]);
   }
 
-  @Override public double getR0C2D()
+  @Override
+  public double getR0C2D()
   {
     return this.elements[0][2];
   }
 
-  @Override public double getR1C2D()
+  @Override
+  public double getR1C2D()
   {
     return this.elements[1][2];
   }
 
-  @Override public double getR2C0D()
+  @Override
+  public double getR2C0D()
   {
     return this.elements[2][0];
   }
 
-  @Override public double getR2C1D()
+  @Override
+  public double getR2C1D()
   {
     return this.elements[2][1];
   }
 
-  @Override public double getR2C2D()
+  @Override
+  public double getR2C2D()
   {
     return this.elements[2][2];
   }
@@ -226,14 +236,16 @@ import net.jcip.annotations.Immutable;
    * @return The value at the given row and column
    */
 
-  @Override public double getRowColumnD(
+  @Override
+  public double getRowColumnD(
     final int row,
     final int col)
   {
     return this.elements[row][col];
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     return MatrixM3x3D.hashElements(this);
   }
@@ -272,43 +284,50 @@ import net.jcip.annotations.Immutable;
     m.setR2C2D(this.getR2C2D());
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
     MatrixM3x3D.showElements(this, builder);
     return builder.toString();
   }
 
-  @Override public <V extends VectorWritable2DType> void getRow2D(
+  @Override
+  public <V extends VectorWritable2DType> void getRow2D(
     final int row,
     final V out)
   {
     this.getRow2DUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
+  @Override
+  public <V extends VectorWritable2DType> void getRow2DUnsafe(
     final int row,
     final V out)
   {
     out.set2D(this.elements[row][0], this.elements[row][1]);
   }
 
-  @Override public double getR0C0D()
+  @Override
+  public double getR0C0D()
   {
     return this.elements[0][0];
   }
 
-  @Override public double getR1C0D()
+  @Override
+  public double getR1C0D()
   {
     return this.elements[1][0];
   }
 
-  @Override public double getR0C1D()
+  @Override
+  public double getR0C1D()
   {
     return this.elements[0][1];
   }
 
-  @Override public double getR1C1D()
+  @Override
+  public double getR1C1D()
   {
     return this.elements[1][1];
   }

@@ -58,109 +58,109 @@ import java.lang.reflect.Modifier;
   @Test public void testPVectorI2D()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorI2D.class);
+    checkClassFinal(PVectorI2D.class);
   }
 
   @Test public void testPVectorI2F()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorI2F.class);
+    checkClassFinal(PVectorI2F.class);
   }
 
   @Test public void testPVectorI2I()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorI2I.class);
+    checkClassFinal(PVectorI2I.class);
   }
 
   @Test public void testPVectorI3D()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorI3D.class);
+    checkClassFinal(PVectorI3D.class);
   }
 
   @Test public void testPVectorI3F()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorI3F.class);
+    checkClassFinal(PVectorI3F.class);
   }
 
   @Test public void testPVectorI3I()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorI3I.class);
+    checkClassFinal(PVectorI3I.class);
   }
 
   @Test public void testPVectorI4D()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorI4D.class);
+    checkClassFinal(PVectorI4D.class);
   }
 
   @Test public void testPVectorI4F()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorI4F.class);
+    checkClassFinal(PVectorI4F.class);
   }
 
   @Test public void testPVectorI4I()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorI4I.class);
+    checkClassFinal(PVectorI4I.class);
   }
 
   @Test public void testPVectorM2D()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorM2D.class);
+    checkClassFinal(PVectorM2D.class);
   }
 
   @Test public void testPVectorM2F()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorM2F.class);
+    checkClassFinal(PVectorM2F.class);
   }
 
   @Test public void testPVectorM2I()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorM2I.class);
+    checkClassFinal(PVectorM2I.class);
   }
 
   @Test public void testPVectorM3D()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorM3D.class);
+    checkClassFinal(PVectorM3D.class);
   }
 
   @Test public void testPVectorM3F()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorM3F.class);
+    checkClassFinal(PVectorM3F.class);
   }
 
   @Test public void testPVectorM3I()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorM3I.class);
+    checkClassFinal(PVectorM3I.class);
   }
 
   @Test public void testPVectorM4D()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorM4D.class);
+    checkClassFinal(PVectorM4D.class);
   }
 
   @Test public void testPVectorM4F()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorM4F.class);
+    checkClassFinal(PVectorM4F.class);
   }
 
   @Test public void testPVectorM4I()
     throws NotFinal
   {
-    FinalityChecker.checkClassFinal(PVectorM4I.class);
+    checkClassFinal(PVectorM4I.class);
   }
 
   private static class NotFinal extends Exception

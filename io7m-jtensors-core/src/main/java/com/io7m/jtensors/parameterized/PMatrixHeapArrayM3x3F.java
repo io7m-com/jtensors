@@ -79,7 +79,8 @@ public final class PMatrixHeapArrayM3x3F<T0, T1>
     return new PMatrixHeapArrayM3x3F<T0, T1>(m);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -96,19 +97,22 @@ public final class PMatrixHeapArrayM3x3F<T0, T1>
     return MatrixM3x3F.compareElements(this, other);
   }
 
-  @Override public float getRowColumnF(
+  @Override
+  public float getRowColumnF(
     final int row,
     final int column)
   {
     return this.elements[row][column];
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     return MatrixM3x3F.hashElements(this);
   }
 
-  @Override public void setRowColumnF(
+  @Override
+  public void setRowColumnF(
     final int row,
     final int column,
     final float value)
@@ -116,21 +120,24 @@ public final class PMatrixHeapArrayM3x3F<T0, T1>
     this.elements[row][column] = value;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
     MatrixM3x3F.showElements(this, builder);
     return builder.toString();
   }
 
-  @Override public <V extends VectorWritable3FType> void getRow3F(
+  @Override
+  public <V extends VectorWritable3FType> void getRow3F(
     final int row,
     final V out)
   {
     this.getRow3FUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable3FType> void getRow3FUnsafe(
+  @Override
+  public <V extends VectorWritable3FType> void getRow3FUnsafe(
     final int row,
     final V out)
   {
@@ -140,24 +147,28 @@ public final class PMatrixHeapArrayM3x3F<T0, T1>
     out.set3F(x, y, z);
   }
 
-  @Override public float getR0C2F()
+  @Override
+  public float getR0C2F()
   {
     return this.elements[0][2];
   }
 
-  @Override public void setR0C2F(final float x)
+  @Override
+  public void setR0C2F(final float x)
   {
     this.elements[0][2] = x;
   }
 
-  @Override public void setRowWith3F(
+  @Override
+  public void setRowWith3F(
     final int row,
     final VectorReadable3FType v)
   {
     this.setRowWith3FUnsafe(row, v);
   }
 
-  @Override public void setRowWith3FUnsafe(
+  @Override
+  public void setRowWith3FUnsafe(
     final int row,
     final VectorReadable3FType v)
   {
@@ -166,54 +177,64 @@ public final class PMatrixHeapArrayM3x3F<T0, T1>
     this.elements[row][2] = v.getZF();
   }
 
-  @Override public float getR1C2F()
+  @Override
+  public float getR1C2F()
   {
     return this.elements[1][2];
   }
 
-  @Override public void setR1C2F(final float x)
+  @Override
+  public void setR1C2F(final float x)
   {
     this.elements[1][2] = x;
   }
 
-  @Override public float getR2C0F()
+  @Override
+  public float getR2C0F()
   {
     return this.elements[2][0];
   }
 
-  @Override public void setR2C0F(final float x)
+  @Override
+  public void setR2C0F(final float x)
   {
     this.elements[2][0] = x;
   }
 
-  @Override public float getR2C1F()
+  @Override
+  public float getR2C1F()
   {
     return this.elements[2][1];
   }
 
-  @Override public void setR2C1F(final float x)
+  @Override
+  public void setR2C1F(final float x)
   {
     this.elements[2][1] = x;
   }
 
-  @Override public float getR2C2F()
+  @Override
+  public float getR2C2F()
   {
     return this.elements[2][2];
   }
 
-  @Override public void setR2C2F(final float x)
+  @Override
+  public void setR2C2F(final float x)
   {
     this.elements[2][2] = x;
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2F(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2F(
     final int row,
     final V out)
   {
     this.getRow2FUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2FUnsafe(
     final int row,
     final V out)
   {
@@ -222,24 +243,28 @@ public final class PMatrixHeapArrayM3x3F<T0, T1>
     out.set2F(x, y);
   }
 
-  @Override public float getR0C0F()
+  @Override
+  public float getR0C0F()
   {
     return this.elements[0][0];
   }
 
-  @Override public void setR0C0F(final float x)
+  @Override
+  public void setR0C0F(final float x)
   {
     this.elements[0][0] = x;
   }
 
-  @Override public void setRowWith2F(
+  @Override
+  public void setRowWith2F(
     final int row,
     final VectorReadable2FType v)
   {
     this.setRowWith2FUnsafe(row, v);
   }
 
-  @Override public void setRowWith2FUnsafe(
+  @Override
+  public void setRowWith2FUnsafe(
     final int row,
     final VectorReadable2FType v)
   {
@@ -247,32 +272,38 @@ public final class PMatrixHeapArrayM3x3F<T0, T1>
     this.elements[row][1] = v.getYF();
   }
 
-  @Override public float getR1C0F()
+  @Override
+  public float getR1C0F()
   {
     return this.elements[1][0];
   }
 
-  @Override public void setR1C0F(final float x)
+  @Override
+  public void setR1C0F(final float x)
   {
     this.elements[1][0] = x;
   }
 
-  @Override public float getR0C1F()
+  @Override
+  public float getR0C1F()
   {
     return this.elements[0][1];
   }
 
-  @Override public void setR0C1F(final float x)
+  @Override
+  public void setR0C1F(final float x)
   {
     this.elements[0][1] = x;
   }
 
-  @Override public float getR1C1F()
+  @Override
+  public float getR1C1F()
   {
     return this.elements[1][1];
   }
 
-  @Override public void setR1C1F(final float x)
+  @Override
+  public void setR1C1F(final float x)
   {
     this.elements[1][1] = x;
   }

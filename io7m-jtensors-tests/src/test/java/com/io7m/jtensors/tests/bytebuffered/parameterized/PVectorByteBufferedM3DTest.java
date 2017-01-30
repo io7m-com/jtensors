@@ -53,7 +53,7 @@ public final class PVectorByteBufferedM3DTest<T>
 
   @Override protected Logger logger()
   {
-    return PVectorByteBufferedM3DTest.LOG;
+    return LOG;
   }
 
   @Override protected PVectorByteBuffered3DType<T> newVectorM3D(

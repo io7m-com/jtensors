@@ -119,7 +119,7 @@ public final class VectorM4D implements Vector4DType
   absoluteInPlace(
     final V v)
   {
-    return VectorM4D.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -163,7 +163,7 @@ public final class VectorM4D implements Vector4DType
     final V v0,
     final VectorReadable4DType v1)
   {
-    return VectorM4D.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -215,7 +215,7 @@ public final class VectorM4D implements Vector4DType
     final VectorReadable4DType v1,
     final double r)
   {
-    return VectorM4D.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -332,7 +332,7 @@ public final class VectorM4D implements Vector4DType
     final VectorReadable4DType minimum,
     final VectorReadable4DType maximum)
   {
-    return VectorM4D.clampByVector(v, minimum, maximum, v);
+    return clampByVector(v, minimum, maximum, v);
   }
 
   /**
@@ -354,7 +354,7 @@ public final class VectorM4D implements Vector4DType
     final double minimum,
     final double maximum)
   {
-    return VectorM4D.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -427,7 +427,7 @@ public final class VectorM4D implements Vector4DType
     final V v,
     final VectorReadable4DType maximum)
   {
-    return VectorM4D.clampMaximumByVector(v, maximum, v);
+    return clampMaximumByVector(v, maximum, v);
   }
 
   /**
@@ -447,7 +447,7 @@ public final class VectorM4D implements Vector4DType
     final V v,
     final double maximum)
   {
-    return VectorM4D.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -520,7 +520,7 @@ public final class VectorM4D implements Vector4DType
     final V v,
     final VectorReadable4DType minimum)
   {
-    return VectorM4D.clampMinimumByVector(v, minimum, v);
+    return clampMinimumByVector(v, minimum, v);
   }
 
   /**
@@ -540,7 +540,7 @@ public final class VectorM4D implements Vector4DType
     final V v,
     final double minimum)
   {
-    return VectorM4D.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -577,7 +577,7 @@ public final class VectorM4D implements Vector4DType
     final VectorReadable4DType v0,
     final VectorReadable4DType v1)
   {
-    return VectorM4D.magnitude(VectorM4D.subtract(v0, v1, c.v2a));
+    return magnitude(subtract(v0, v1, c.v2a));
   }
 
   /**
@@ -629,9 +629,9 @@ public final class VectorM4D implements Vector4DType
     final double alpha,
     final V r)
   {
-    VectorM4D.scale(v0, 1.0 - alpha, c.v2a);
-    VectorM4D.scale(v1, alpha, c.v2b);
-    return VectorM4D.add(c.v2a, c.v2b, r);
+    scale(v0, 1.0 - alpha, c.v2a);
+    scale(v1, alpha, c.v2b);
+    return add(c.v2a, c.v2b, r);
   }
 
   /**
@@ -647,7 +647,7 @@ public final class VectorM4D implements Vector4DType
   public static double magnitude(
     final VectorReadable4DType v)
   {
-    return Math.sqrt(VectorM4D.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -661,7 +661,7 @@ public final class VectorM4D implements Vector4DType
   public static double magnitudeSquared(
     final VectorReadable4DType v)
   {
-    return VectorM4D.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -680,10 +680,10 @@ public final class VectorM4D implements Vector4DType
     final VectorReadable4DType v,
     final V out)
   {
-    final double m = VectorM4D.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return VectorM4D.scale(v, reciprocal, out);
+      return scale(v, reciprocal, out);
     }
     out.set4D(v.getXD(), v.getYD(), v.getZD(), v.getWD());
     return out;
@@ -704,7 +704,7 @@ public final class VectorM4D implements Vector4DType
   normalizeInPlace(
     final V v)
   {
-    return VectorM4D.normalize(v, v);
+    return normalize(v, v);
   }
 
   /**
@@ -732,9 +732,9 @@ public final class VectorM4D implements Vector4DType
     final VectorReadable4DType v1,
     final U v1_out)
   {
-    VectorM4D.normalize(v0, c.v2a);
-    VectorM4D.scale(c.v2a, VectorM4D.dotProduct(v1, c.v2a), c.v2b);
-    VectorM4D.normalizeInPlace(VectorM4D.subtract(v1, c.v2b, c.v2c));
+    normalize(v0, c.v2a);
+    scale(c.v2a, dotProduct(v1, c.v2a), c.v2b);
+    normalizeInPlace(subtract(v1, c.v2b, c.v2c));
     v0_out.copyFrom4D(c.v2a);
     v1_out.copyFrom4D(c.v2c);
   }
@@ -759,10 +759,10 @@ public final class VectorM4D implements Vector4DType
     final V v0,
     final W v1)
   {
-    VectorM4D.normalizeInPlace(v0);
-    VectorM4D.scale(v0, VectorM4D.dotProduct(v1, v0), c.v2a);
-    VectorM4D.subtractInPlace(v1, c.v2a);
-    VectorM4D.normalizeInPlace(v1);
+    normalizeInPlace(v0);
+    scale(v0, dotProduct(v1, v0), c.v2a);
+    subtractInPlace(v1, c.v2a);
+    normalizeInPlace(v1);
   }
 
   /**
@@ -782,11 +782,11 @@ public final class VectorM4D implements Vector4DType
     final VectorReadable4DType q,
     final V r)
   {
-    final double dot = VectorM4D.dotProduct(p, q);
-    final double qms = VectorM4D.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
 
-    return VectorM4D.scale(p, s, r);
+    return scale(p, s, r);
   }
 
   /**
@@ -830,7 +830,7 @@ public final class VectorM4D implements Vector4DType
     final V v,
     final double r)
   {
-    return VectorM4D.scale(v, r, v);
+    return scale(v, r, v);
   }
 
   /**
@@ -874,28 +874,32 @@ public final class VectorM4D implements Vector4DType
     final V v0,
     final VectorReadable4DType v1)
   {
-    return VectorM4D.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2D(
+  @Override
+  public void copyFrom2D(
     final VectorReadable2DType in_v)
   {
     VectorM2D.copy(in_v, this);
   }
 
-  @Override public void copyFrom3D(
+  @Override
+  public void copyFrom3D(
     final VectorReadable3DType in_v)
   {
     VectorM3D.copy(in_v, this);
   }
 
-  @Override public void copyFrom4D(
+  @Override
+  public void copyFrom4D(
     final VectorReadable4DType in_v)
   {
-    VectorM4D.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -920,51 +924,60 @@ public final class VectorM4D implements Vector4DType
     return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
   }
 
-  @Override public double getWD()
+  @Override
+  public double getWD()
   {
     return this.w;
   }
 
-  @Override public void setWD(
+  @Override
+  public void setWD(
     final double in_w)
   {
     this.w = in_w;
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public void setXD(
+  @Override
+  public void setXD(
     final double in_x)
   {
     this.x = in_x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public void setYD(
+  @Override
+  public void setYD(
     final double in_y)
   {
     this.y = in_y;
   }
 
-  @Override public double getZD()
+  @Override
+  public double getZD()
   {
     return this.z;
   }
 
-  @Override public void setZD(
+  @Override
+  public void setZD(
     final double in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -980,7 +993,8 @@ public final class VectorM4D implements Vector4DType
     return result;
   }
 
-  @Override public void set2D(
+  @Override
+  public void set2D(
     final double in_x,
     final double in_y)
   {
@@ -988,7 +1002,8 @@ public final class VectorM4D implements Vector4DType
     this.y = in_y;
   }
 
-  @Override public void set3D(
+  @Override
+  public void set3D(
     final double in_x,
     final double in_y,
     final double in_z)
@@ -998,7 +1013,8 @@ public final class VectorM4D implements Vector4DType
     this.z = in_z;
   }
 
-  @Override public void set4D(
+  @Override
+  public void set4D(
     final double in_x,
     final double in_y,
     final double in_z,
@@ -1010,7 +1026,8 @@ public final class VectorM4D implements Vector4DType
     this.w = in_w;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM4D ");

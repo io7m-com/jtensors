@@ -56,12 +56,12 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorI2ITest.randomPositiveSmallNumber();
-      final int y0 = VectorI2ITest.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
       final VectorReadable2IType v0 = new VectorI2I(x0, y0);
 
-      final int x1 = VectorI2ITest.randomPositiveSmallNumber();
-      final int y1 = VectorI2ITest.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
       final VectorReadable2IType v1 = new VectorI2I(x1, y1);
 
       final VectorI2I vr0 = VectorI2I.add(v0, v1);
@@ -74,15 +74,15 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorI2ITest.randomPositiveSmallNumber();
-      final int y0 = VectorI2ITest.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
       final VectorReadable2IType v0 = new VectorI2I(x0, y0);
 
-      final int x1 = VectorI2ITest.randomPositiveSmallNumber();
-      final int y1 = VectorI2ITest.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
       final VectorReadable2IType v1 = new VectorI2I(x1, y1);
 
-      final int r = VectorI2ITest.randomPositiveSmallNumber();
+      final int r = randomPositiveSmallNumber();
 
       final VectorI2I vr0 = VectorI2I.addScaled(v0, v1, r);
 
@@ -162,12 +162,12 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int max_x = VectorI2ITest.randomNegativeNumber();
-      final int max_y = VectorI2ITest.randomNegativeNumber();
+      final int max_x = randomNegativeNumber();
+      final int max_y = randomNegativeNumber();
       final VectorReadable2IType maximum = new VectorI2I(max_x, max_y);
 
-      final int x = VectorI2ITest.randomNegativeNumber();
-      final int y = VectorI2ITest.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
       final VectorReadable2IType v = new VectorI2I(x, y);
 
       final VectorI2I vr = VectorI2I.clampMaximumByVector(v, maximum);
@@ -180,12 +180,12 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = VectorI2ITest.randomPositiveNumber();
-      final int min_y = VectorI2ITest.randomPositiveNumber();
+      final int min_x = randomPositiveNumber();
+      final int min_y = randomPositiveNumber();
       final VectorReadable2IType minimum = new VectorI2I(min_x, min_y);
 
-      final int x = VectorI2ITest.randomNegativeNumber();
-      final int y = VectorI2ITest.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
       final VectorReadable2IType v = new VectorI2I(x, y);
 
       final VectorI2I vr = VectorI2I.clampMinimumByVector(v, minimum);
@@ -198,16 +198,16 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testClampByVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = VectorI2ITest.randomNegativeNumber();
-      final int min_y = VectorI2ITest.randomNegativeNumber();
+      final int min_x = randomNegativeNumber();
+      final int min_y = randomNegativeNumber();
       final VectorReadable2IType minimum = new VectorI2I(min_x, min_y);
 
-      final int max_x = VectorI2ITest.randomPositiveNumber();
-      final int max_y = VectorI2ITest.randomPositiveNumber();
+      final int max_x = randomPositiveNumber();
+      final int max_y = randomPositiveNumber();
       final VectorReadable2IType maximum = new VectorI2I(max_x, max_y);
 
-      final int x = VectorI2ITest.randomNegativeNumber();
-      final int y = VectorI2ITest.randomPositiveNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
       final VectorReadable2IType v = new VectorI2I(x, y);
 
       final VectorI2I vr = VectorI2I.clampByVector(v, minimum, maximum);
@@ -222,10 +222,10 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int maximum = VectorI2ITest.randomNegativeNumber();
+      final int maximum = randomNegativeNumber();
 
-      final int x = VectorI2ITest.randomPositiveNumber();
-      final int y = VectorI2ITest.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
       final VectorReadable2IType v = new VectorI2I(x, y);
 
       final VectorI2I vr = VectorI2I.clampMaximum(v, maximum);
@@ -238,10 +238,10 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = VectorI2ITest.randomPositiveNumber();
+      final int minimum = randomPositiveNumber();
 
-      final int x = VectorI2ITest.randomNegativeNumber();
-      final int y = VectorI2ITest.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
       final VectorReadable2IType v = new VectorI2I(x, y);
 
       final VectorI2I vr = VectorI2I.clampMinimum(v, minimum);
@@ -254,11 +254,11 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = VectorI2ITest.randomNegativeNumber();
-      final int maximum = VectorI2ITest.randomPositiveNumber();
+      final int minimum = randomNegativeNumber();
+      final int maximum = randomPositiveNumber();
 
-      final int x = VectorI2ITest.randomNegativeNumber();
-      final int y = VectorI2ITest.randomPositiveNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
       final VectorReadable2IType v = new VectorI2I(x, y);
 
       final VectorI2I vr = VectorI2I.clamp(v, minimum, maximum);
@@ -302,12 +302,12 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testDistanceOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorI2ITest.randomPositiveSmallNumber();
-      final int y0 = VectorI2ITest.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
       final VectorReadable2IType v0 = new VectorI2I(x0, y0);
 
-      final int x1 = VectorI2ITest.randomPositiveSmallNumber();
-      final int y1 = VectorI2ITest.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
       final VectorReadable2IType v1 = new VectorI2I(x1, y1);
 
       Assert.assertTrue(VectorI2I.distance(v0, v1) >= 0);
@@ -498,12 +498,12 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testInterpolateLinearLimits()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorI2ITest.randomPositiveNumber();
-      final int y0 = VectorI2ITest.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
       final VectorReadable2IType v0 = new VectorI2I(x0, y0);
 
-      final int x1 = VectorI2ITest.randomPositiveNumber();
-      final int y1 = VectorI2ITest.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
       final VectorReadable2IType v1 = new VectorI2I(x1, y1);
 
       final VectorI2I vr0 = VectorI2I.interpolateLinear(v0, v1, 0);
@@ -520,8 +520,8 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = VectorI2ITest.randomPositiveSmallNumber();
-      final int y = VectorI2ITest.randomPositiveSmallNumber();
+      final int x = randomPositiveSmallNumber();
+      final int y = randomPositiveSmallNumber();
       final VectorReadable2IType v = new VectorI2I(x, y);
 
       final int m = VectorI2I.magnitude(v);
@@ -604,8 +604,8 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = VectorI2ITest.randomPositiveNumber();
-      final int y = VectorI2ITest.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
       final VectorReadable2IType v = new VectorI2I(x, y);
 
       final VectorI2I vr = VectorI2I.scale(v, 1);
@@ -618,8 +618,8 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = VectorI2ITest.randomPositiveNumber();
-      final int y = VectorI2ITest.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
       final VectorReadable2IType v = new VectorI2I(x, y);
 
       final VectorI2I vr = VectorI2I.scale(v, 0);
@@ -638,12 +638,12 @@ public class VectorI2ITest extends VectorI2Contract
   @Override @Test public void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorI2ITest.randomPositiveNumber();
-      final int y0 = VectorI2ITest.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
       final VectorReadable2IType v0 = new VectorI2I(x0, y0);
 
-      final int x1 = VectorI2ITest.randomPositiveNumber();
-      final int y1 = VectorI2ITest.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
       final VectorReadable2IType v1 = new VectorI2I(x1, y1);
 
       final VectorI2I vr0 = VectorI2I.subtract(v0, v1);

@@ -29,7 +29,8 @@ import net.jcip.annotations.Immutable;
  * @param <T> A phantom type parameter.
  */
 
-@Immutable public final class PVectorI3I<T> implements PVectorReadable3IType<T>
+@Immutable
+public final class PVectorI3I<T> implements PVectorReadable3IType<T>
 {
   /**
    * The zero vector.
@@ -330,7 +331,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3IType<T> v1)
     throws ArithmeticException
   {
-    return PVectorI3I.magnitude(PVectorI3I.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -386,9 +387,9 @@ import net.jcip.annotations.Immutable;
     final double alpha)
     throws ArithmeticException
   {
-    final PVectorI3I<T> w0 = PVectorI3I.scale(v0, 1.0 - alpha);
-    final PVectorI3I<T> w1 = PVectorI3I.scale(v1, alpha);
-    return PVectorI3I.add(w0, w1);
+    final PVectorI3I<T> w0 = scale(v0, 1.0 - alpha);
+    final PVectorI3I<T> w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -410,7 +411,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3IType<T> v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt((double) PVectorI3I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -430,7 +431,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3IType<T> v)
     throws ArithmeticException
   {
-    return PVectorI3I.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -453,10 +454,10 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3IType<T> q)
     throws ArithmeticException
   {
-    final int dot = PVectorI3I.dotProduct(p, q);
-    final int qms = PVectorI3I.magnitudeSquared(q);
+    final int dot = dotProduct(p, q);
+    final int qms = magnitudeSquared(q);
     final int s = dot / qms;
-    return PVectorI3I.scale(p, (double) s);
+    return scale(p, (double) s);
   }
 
   /**
@@ -514,12 +515,14 @@ import net.jcip.annotations.Immutable;
    * @return The zero vector.
    */
 
-  @SuppressWarnings("unchecked") public static <T> PVectorI3I<T> zero()
+  @SuppressWarnings("unchecked")
+  public static <T> PVectorI3I<T> zero()
   {
-    return (PVectorI3I<T>) PVectorI3I.ZERO;
+    return (PVectorI3I<T>) ZERO;
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -541,22 +544,26 @@ import net.jcip.annotations.Immutable;
     return this.z == other.z;
   }
 
-  @Override public int getXI()
+  @Override
+  public int getXI()
   {
     return this.x;
   }
 
-  @Override public int getYI()
+  @Override
+  public int getYI()
   {
     return this.y;
   }
 
-  @Override public int getZI()
+  @Override
+  public int getZI()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -566,7 +573,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorI3I ");

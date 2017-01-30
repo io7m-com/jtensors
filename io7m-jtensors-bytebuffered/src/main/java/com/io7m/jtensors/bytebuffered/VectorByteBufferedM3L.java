@@ -124,7 +124,7 @@ public final class VectorByteBufferedM3L extends ByteBuffered
     final int i,
     final long x)
   {
-    this.buffer.putLong(VectorByteBufferedM3L.getByteOffsetForIndex(o, i), x);
+    this.buffer.putLong(getByteOffsetForIndex(o, i), x);
   }
 
   private long getAtOffsetAndIndex(
@@ -132,7 +132,7 @@ public final class VectorByteBufferedM3L extends ByteBuffered
     final int i)
   {
     return this.buffer.getLong(
-      VectorByteBufferedM3L.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public long getYL()

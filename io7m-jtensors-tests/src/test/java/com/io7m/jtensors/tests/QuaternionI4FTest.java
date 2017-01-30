@@ -494,7 +494,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     final VectorReadable3FType origin = new VectorI3F(0.0F, 0.0F, 0.0F);
     final VectorReadable3FType target = new VectorI3F(-1.0F, 0.0F, 0.0F);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
+    final VectorReadable3FType axis = AXIS_Y;
 
     MatrixM4x4F.lookAt(mc, origin, target, axis, mr);
     final QuaternionI4F q =
@@ -520,7 +520,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
     final VectorReadable3FType origin = new VectorI3F(0.0F, 0.0F, 0.0F);
     final VectorReadable3FType target = new VectorI3F(1.0F, 0.0F, 0.0F);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
+    final VectorReadable3FType axis = AXIS_Y;
 
     MatrixM4x4F.lookAt(mc, origin, target, axis, mr);
     final QuaternionI4F q =
@@ -563,9 +563,9 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final VectorReadable3FType target = new VectorI3F(target_x, target_y, target_z);
 
       MatrixM4x4F.lookAt(
-        mc, origin, target, QuaternionI4FTest.AXIS_Y, ml);
+        mc, origin, target, AXIS_Y, ml);
       final QuaternionI4F lq = QuaternionI4F.lookAtWithContext(
-        qc, origin, target, QuaternionI4FTest.AXIS_Y);
+        qc, origin, target, AXIS_Y);
       QuaternionI4F.makeRotationMatrix4x4(lq, mq);
 
       for (int row = 0; row < 3; ++row) {
@@ -671,7 +671,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
 
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_X;
+    final VectorReadable3FType axis = AXIS_X;
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(45.0));
 
@@ -689,7 +689,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMakeAxisAngleX_90()
   {
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_X;
+    final VectorReadable3FType axis = AXIS_X;
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(90.0));
 
@@ -707,7 +707,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMakeAxisAngleY_45()
   {
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
+    final VectorReadable3FType axis = AXIS_Y;
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(45.0));
 
@@ -725,7 +725,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMakeAxisAngleY_90()
   {
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
+    final VectorReadable3FType axis = AXIS_Y;
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(90.0));
 
@@ -743,7 +743,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMakeAxisAngleZ_45()
   {
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
+    final VectorReadable3FType axis = AXIS_Z;
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(45.0));
 
@@ -761,7 +761,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMakeAxisAngleZ_90()
   {
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
+    final VectorReadable3FType axis = AXIS_Z;
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(
       axis, (double) (float) Math.toRadians(90.0));
 
@@ -911,7 +911,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_X;
+    final VectorReadable3FType axis = AXIS_X;
 
     MatrixM3x3F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -932,7 +932,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
+    final VectorReadable3FType axis = AXIS_Y;
 
     MatrixM3x3F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -953,7 +953,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
+    final VectorReadable3FType axis = AXIS_Z;
 
     MatrixM3x3F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -994,7 +994,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_X;
+    final VectorReadable3FType axis = AXIS_X;
 
     MatrixM3x3F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -1015,7 +1015,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
+    final VectorReadable3FType axis = AXIS_Y;
 
     MatrixM3x3F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -1036,7 +1036,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix3x3FType mr = MatrixHeapArrayM3x3F.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
+    final VectorReadable3FType axis = AXIS_Z;
 
     MatrixM3x3F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -1057,7 +1057,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_X;
+    final VectorReadable3FType axis = AXIS_X;
 
     MatrixM4x4F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -1078,7 +1078,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
+    final VectorReadable3FType axis = AXIS_Y;
 
     MatrixM4x4F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -1099,7 +1099,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
 
     final double radians = Math.toRadians(45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
+    final VectorReadable3FType axis = AXIS_Z;
 
     MatrixM4x4F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -1148,7 +1148,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_X;
+    final VectorReadable3FType axis = AXIS_X;
 
     MatrixM4x4F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -1169,7 +1169,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Y;
+    final VectorReadable3FType axis = AXIS_Y;
 
     MatrixM4x4F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -1190,7 +1190,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final Matrix4x4FType mr = MatrixHeapArrayM4x4F.newMatrix();
 
     final double radians = Math.toRadians(-45.0);
-    final VectorReadable3FType axis = QuaternionI4FTest.AXIS_Z;
+    final VectorReadable3FType axis = AXIS_Z;
 
     MatrixM4x4F.makeRotation(radians, axis, mr);
     final QuaternionI4F q = QuaternionI4F.makeFromAxisAngle(axis, radians);
@@ -1210,8 +1210,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
 
-    final VectorReadable3FType axis_x = QuaternionI4FTest.AXIS_X;
-    final VectorReadable3FType axis_y = QuaternionI4FTest.AXIS_Y;
+    final VectorReadable3FType axis_x = AXIS_X;
+    final VectorReadable3FType axis_y = AXIS_Y;
     final QuaternionI4F qx = QuaternionI4F.makeFromAxisAngle(
       axis_x, (double) (float) Math.toRadians(45.0));
     final QuaternionI4F qy = QuaternionI4F.makeFromAxisAngle(

@@ -114,7 +114,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     PVectorReadable2FType<T>> V absoluteInPlace(
     final V v)
   {
-    return PVectorM2F.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -158,7 +158,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final V v0,
     final PVectorReadable2FType<T> v1)
   {
-    return PVectorM2F.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -208,7 +208,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final PVectorReadable2FType<T> v1,
     final double r)
   {
-    return PVectorM2F.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -253,10 +253,10 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final PVectorReadable2FType<T> v0,
     final PVectorReadable2FType<T> v1)
   {
-    final double m0 = PVectorM2F.magnitude(v0);
-    final double m1 = PVectorM2F.magnitude(v1);
+    final double m0 = magnitude(v0);
+    final double m1 = magnitude(v1);
     final double dp =
-      Math.min(Math.max(-1.0, (double) PVectorM2F.dotProduct(v0, v1)), 1.0);
+      Math.min(Math.max(-1.0, (double) dotProduct(v0, v1)), 1.0);
     final double f = m0 * m1;
     final double r = dp / f;
     return Math.acos(r);
@@ -340,7 +340,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final PVectorReadable2FType<T> minimum,
     final PVectorReadable2FType<T> maximum)
   {
-    return PVectorM2F.clampByPVector(v, minimum, maximum, v);
+    return clampByPVector(v, minimum, maximum, v);
   }
 
   /**
@@ -363,7 +363,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final float minimum,
     final float maximum)
   {
-    return PVectorM2F.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -433,7 +433,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final V v,
     final PVectorReadable2FType<T> maximum)
   {
-    return PVectorM2F.clampMaximumByPVector(v, maximum, v);
+    return clampMaximumByPVector(v, maximum, v);
   }
 
   /**
@@ -454,7 +454,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final V v,
     final float maximum)
   {
-    return PVectorM2F.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -524,7 +524,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final V v,
     final PVectorReadable2FType<T> minimum)
   {
-    return PVectorM2F.clampMinimumByPVector(v, minimum, v);
+    return clampMinimumByPVector(v, minimum, v);
   }
 
   /**
@@ -545,7 +545,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final V v,
     final float minimum)
   {
-    return PVectorM2F.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -585,7 +585,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final PVectorReadable2FType<T> v1)
   {
     final PVectorM2F<T> vr = (PVectorM2F<T>) c.va;
-    return PVectorM2F.magnitude(PVectorM2F.subtract(v0, v1, vr));
+    return magnitude(subtract(v0, v1, vr));
   }
 
   /**
@@ -639,9 +639,9 @@ public final class PVectorM2F<T> implements PVector2FType<T>
   {
     final PVectorM2F<T> va = (PVectorM2F<T>) c.va;
     final PVectorM2F<T> vb = (PVectorM2F<T>) c.vb;
-    PVectorM2F.scale(v0, 1.0 - alpha, va);
-    PVectorM2F.scale(v1, alpha, vb);
-    return PVectorM2F.add(va, vb, r);
+    scale(v0, 1.0 - alpha, va);
+    scale(v1, alpha, vb);
+    return add(va, vb, r);
   }
 
   /**
@@ -658,7 +658,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
   public static <T> double magnitude(
     final PVectorReadable2FType<T> v)
   {
-    return Math.sqrt(PVectorM2F.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -673,7 +673,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
   public static <T> double magnitudeSquared(
     final PVectorReadable2FType<T> v)
   {
-    return (double) PVectorM2F.dotProduct(v, v);
+    return (double) dotProduct(v, v);
   }
 
   /**
@@ -693,10 +693,10 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final PVectorReadable2FType<T> v,
     final V out)
   {
-    final double m = PVectorM2F.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return PVectorM2F.scale(v, reciprocal, out);
+      return scale(v, reciprocal, out);
     }
     out.set2F(v.getXF(), v.getYF());
     return out;
@@ -718,7 +718,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     PVectorReadable2FType<T>> V normalizeInPlace(
     final V v)
   {
-    return PVectorM2F.normalize(v, v);
+    return normalize(v, v);
   }
 
   /**
@@ -748,11 +748,11 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final PVectorM2F<T> va = (PVectorM2F<T>) c.va;
     final PVectorM2F<T> vb = (PVectorM2F<T>) c.vb;
     final PVectorM2F<T> vc = (PVectorM2F<T>) c.vc;
-    PVectorM2F.normalize(v0, va);
-    PVectorM2F.scale(va, (double) PVectorM2F.dotProduct(v1, va), vb);
-    PVectorM2F.normalizeInPlace(PVectorM2F.subtract(v1, vb, vc));
-    PVectorM2F.copy(va, v0_out);
-    PVectorM2F.copy(vc, v1_out);
+    normalize(v0, va);
+    scale(va, (double) dotProduct(v1, va), vb);
+    normalizeInPlace(subtract(v1, vb, vc));
+    copy(va, v0_out);
+    copy(vc, v1_out);
   }
 
   /**
@@ -777,11 +777,11 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final PVectorM2F<T> va = (PVectorM2F<T>) c.va;
     final PVectorM2F<T> vb = (PVectorM2F<T>) c.vb;
     final PVectorM2F<T> vc = (PVectorM2F<T>) c.vc;
-    PVectorM2F.normalize(v0, va);
-    PVectorM2F.scale(va, (double) PVectorM2F.dotProduct(v1, va), vb);
-    PVectorM2F.normalizeInPlace(PVectorM2F.subtract(v1, vb, vc));
-    PVectorM2F.copy(va, v0);
-    PVectorM2F.copy(vc, v1);
+    normalize(v0, va);
+    scale(va, (double) dotProduct(v1, va), vb);
+    normalizeInPlace(subtract(v1, vb, vc));
+    copy(va, v0);
+    copy(vc, v1);
   }
 
   /**
@@ -802,11 +802,11 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final PVectorReadable2FType<T> q,
     final V r)
   {
-    final double dot = (double) PVectorM2F.dotProduct(p, q);
-    final double qms = PVectorM2F.magnitudeSquared(q);
+    final double dot = (double) dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
 
-    return PVectorM2F.scale(p, s, r);
+    return scale(p, s, r);
   }
 
   /**
@@ -850,7 +850,7 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final V v,
     final double r)
   {
-    return PVectorM2F.scale(v, r, v);
+    return scale(v, r, v);
   }
 
   /**
@@ -894,22 +894,25 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     final V v0,
     final PVectorReadable2FType<T> v1)
   {
-    return PVectorM2F.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2F(
+  @Override
+  public void copyFrom2F(
     final VectorReadable2FType in_v)
   {
     VectorM2F.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped2F(
+  @Override
+  public void copyFromTyped2F(
     final PVectorReadable2FType<T> in_v)
   {
-    PVectorM2F.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -928,29 +931,34 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     return Float.floatToIntBits(this.y) == Float.floatToIntBits(other.y);
   }
 
-  @Override public float getXF()
+  @Override
+  public float getXF()
   {
     return this.x;
   }
 
-  @Override public void setXF(
+  @Override
+  public void setXF(
     final float in_x)
   {
     this.x = in_x;
   }
 
-  @Override public float getYF()
+  @Override
+  public float getYF()
   {
     return this.y;
   }
 
-  @Override public void setYF(
+  @Override
+  public void setYF(
     final float in_y)
   {
     this.y = in_y;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -959,7 +967,8 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     return result;
   }
 
-  @Override public void set2F(
+  @Override
+  public void set2F(
     final float in_x,
     final float in_y)
   {
@@ -967,7 +976,8 @@ public final class PVectorM2F<T> implements PVector2FType<T>
     this.y = in_y;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorM2F ");

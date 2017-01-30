@@ -113,7 +113,7 @@ public final class VectorM3F implements Vector3FType
   absoluteInPlace(
     final V v)
   {
-    return VectorM3F.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -156,7 +156,7 @@ public final class VectorM3F implements Vector3FType
     final V v0,
     final VectorReadable3FType v1)
   {
-    return VectorM3F.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -205,7 +205,7 @@ public final class VectorM3F implements Vector3FType
     final VectorReadable3FType v1,
     final double r)
   {
-    return VectorM3F.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -315,7 +315,7 @@ public final class VectorM3F implements Vector3FType
     final VectorReadable3FType minimum,
     final VectorReadable3FType maximum)
   {
-    return VectorM3F.clampByVector(v, minimum, maximum, v);
+    return clampByVector(v, minimum, maximum, v);
   }
 
   /**
@@ -337,7 +337,7 @@ public final class VectorM3F implements Vector3FType
     final float minimum,
     final float maximum)
   {
-    return VectorM3F.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -408,7 +408,7 @@ public final class VectorM3F implements Vector3FType
     final V v,
     final VectorReadable3FType maximum)
   {
-    return VectorM3F.clampMaximumByVector(v, maximum, v);
+    return clampMaximumByVector(v, maximum, v);
   }
 
   /**
@@ -428,7 +428,7 @@ public final class VectorM3F implements Vector3FType
     final V v,
     final float maximum)
   {
-    return VectorM3F.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -499,7 +499,7 @@ public final class VectorM3F implements Vector3FType
     final V v,
     final VectorReadable3FType minimum)
   {
-    return VectorM3F.clampMinimumByVector(v, minimum, v);
+    return clampMinimumByVector(v, minimum, v);
   }
 
   /**
@@ -519,7 +519,7 @@ public final class VectorM3F implements Vector3FType
     final V v,
     final float minimum)
   {
-    return VectorM3F.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -582,7 +582,7 @@ public final class VectorM3F implements Vector3FType
     final VectorReadable3FType v0,
     final VectorReadable3FType v1)
   {
-    return (double) VectorM3F.magnitude(VectorM3F.subtract(v0, v1, c.v2a));
+    return (double) magnitude(subtract(v0, v1, c.v2a));
   }
 
   /**
@@ -633,9 +633,9 @@ public final class VectorM3F implements Vector3FType
     final double alpha,
     final V r)
   {
-    VectorM3F.scale(v0, 1.0 - alpha, c.v2a);
-    VectorM3F.scale(v1, alpha, c.v2b);
-    return VectorM3F.add(c.v2a, c.v2b, r);
+    scale(v0, 1.0 - alpha, c.v2a);
+    scale(v1, alpha, c.v2b);
+    return add(c.v2a, c.v2b, r);
   }
 
   /**
@@ -651,7 +651,7 @@ public final class VectorM3F implements Vector3FType
   public static float magnitude(
     final VectorReadable3FType v)
   {
-    return (float) Math.sqrt(VectorM3F.magnitudeSquared(v));
+    return (float) Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -665,7 +665,7 @@ public final class VectorM3F implements Vector3FType
   public static double magnitudeSquared(
     final VectorReadable3FType v)
   {
-    return VectorM3F.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -684,10 +684,10 @@ public final class VectorM3F implements Vector3FType
     final VectorReadable3FType v,
     final V out)
   {
-    final double m = VectorM3F.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return VectorM3F.scale(v, reciprocal, out);
+      return scale(v, reciprocal, out);
     }
 
     out.set3F(v.getXF(), v.getYF(), v.getZF());
@@ -709,7 +709,7 @@ public final class VectorM3F implements Vector3FType
   normalizeInPlace(
     final V v)
   {
-    return VectorM3F.normalize(v, v);
+    return normalize(v, v);
   }
 
   /**
@@ -737,9 +737,9 @@ public final class VectorM3F implements Vector3FType
     final VectorReadable3FType v1,
     final U v1_out)
   {
-    VectorM3F.normalize(v0, c.v2a);
-    VectorM3F.scale(c.v2a, VectorM3F.dotProduct(v1, c.v2a), c.v2b);
-    VectorM3F.normalizeInPlace(VectorM3F.subtract(v1, c.v2b, c.v2c));
+    normalize(v0, c.v2a);
+    scale(c.v2a, dotProduct(v1, c.v2a), c.v2b);
+    normalizeInPlace(subtract(v1, c.v2b, c.v2c));
     v0_out.copyFrom3F(c.v2a);
     v1_out.copyFrom3F(c.v2c);
   }
@@ -764,10 +764,10 @@ public final class VectorM3F implements Vector3FType
     final V v0,
     final W v1)
   {
-    VectorM3F.normalizeInPlace(v0);
-    VectorM3F.scale(v0, VectorM3F.dotProduct(v1, v0), c.v2a);
-    VectorM3F.subtractInPlace(v1, c.v2a);
-    VectorM3F.normalizeInPlace(v1);
+    normalizeInPlace(v0);
+    scale(v0, dotProduct(v1, v0), c.v2a);
+    subtractInPlace(v1, c.v2a);
+    normalizeInPlace(v1);
   }
 
   /**
@@ -787,11 +787,11 @@ public final class VectorM3F implements Vector3FType
     final VectorReadable3FType q,
     final V r)
   {
-    final double dot = VectorM3F.dotProduct(p, q);
-    final double qms = VectorM3F.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
 
-    return VectorM3F.scale(p, s, r);
+    return scale(p, s, r);
   }
 
   /**
@@ -834,7 +834,7 @@ public final class VectorM3F implements Vector3FType
     final V v,
     final double r)
   {
-    return VectorM3F.scale(v, r, v);
+    return scale(v, r, v);
   }
 
   /**
@@ -877,22 +877,25 @@ public final class VectorM3F implements Vector3FType
     final V v0,
     final VectorReadable3FType v1)
   {
-    return VectorM3F.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2F(
+  @Override
+  public void copyFrom2F(
     final VectorReadable2FType in_v)
   {
     VectorM2F.copy(in_v, this);
   }
 
-  @Override public void copyFrom3F(
+  @Override
+  public void copyFrom3F(
     final VectorReadable3FType in_v)
   {
-    VectorM3F.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -914,40 +917,47 @@ public final class VectorM3F implements Vector3FType
     return Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
   }
 
-  @Override public float getXF()
+  @Override
+  public float getXF()
   {
     return this.x;
   }
 
-  @Override public void setXF(
+  @Override
+  public void setXF(
     final float in_x)
   {
     this.x = in_x;
   }
 
-  @Override public float getYF()
+  @Override
+  public float getYF()
   {
     return this.y;
   }
 
-  @Override public void setYF(
+  @Override
+  public void setYF(
     final float in_y)
   {
     this.y = in_y;
   }
 
-  @Override public float getZF()
+  @Override
+  public float getZF()
   {
     return this.z;
   }
 
-  @Override public void setZF(
+  @Override
+  public void setZF(
     final float in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -957,7 +967,8 @@ public final class VectorM3F implements Vector3FType
     return result;
   }
 
-  @Override public void set2F(
+  @Override
+  public void set2F(
     final float in_x,
     final float in_y)
   {
@@ -965,7 +976,8 @@ public final class VectorM3F implements Vector3FType
     this.y = in_y;
   }
 
-  @Override public void set3F(
+  @Override
+  public void set3F(
     final float in_x,
     final float in_y,
     final float in_z)
@@ -975,7 +987,8 @@ public final class VectorM3F implements Vector3FType
     this.z = in_z;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM3F ");

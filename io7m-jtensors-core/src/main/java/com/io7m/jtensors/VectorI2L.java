@@ -29,7 +29,8 @@ import net.jcip.annotations.Immutable;
  * @since 5.3.0
  */
 
-@Immutable public final class VectorI2L implements VectorReadable2LType
+@Immutable
+public final class VectorI2L implements VectorReadable2LType
 {
   /**
    * The zero vector.
@@ -163,9 +164,9 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2LType v0,
     final VectorReadable2LType v1)
   {
-    final double m0 = (double) VectorI2L.magnitude(v0);
-    final double m1 = (double) VectorI2L.magnitude(v1);
-    return Math.acos((double) VectorI2L.dotProduct(v0, v1) / (m0 * m1));
+    final double m0 = (double) magnitude(v0);
+    final double m1 = (double) magnitude(v1);
+    return Math.acos((double) dotProduct(v0, v1) / (m0 * m1));
   }
 
   /**
@@ -320,7 +321,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2LType v1)
     throws ArithmeticException
   {
-    return VectorI2L.magnitude(VectorI2L.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -373,9 +374,9 @@ import net.jcip.annotations.Immutable;
     final double alpha)
     throws ArithmeticException
   {
-    final VectorI2L w0 = VectorI2L.scale(v0, 1.0 - alpha);
-    final VectorI2L w1 = VectorI2L.scale(v1, alpha);
-    return VectorI2L.add(w0, w1);
+    final VectorI2L w0 = scale(v0, 1.0 - alpha);
+    final VectorI2L w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -396,7 +397,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2LType v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt((double) VectorI2L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -415,7 +416,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2LType v)
     throws ArithmeticException
   {
-    return VectorI2L.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -437,10 +438,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable2LType q)
     throws ArithmeticException
   {
-    final long dot = VectorI2L.dotProduct(p, q);
-    final long qms = VectorI2L.magnitudeSquared(q);
+    final long dot = dotProduct(p, q);
+    final long qms = magnitudeSquared(q);
     final long s = dot / qms;
-    return VectorI2L.scale(p, (double) s);
+    return scale(p, (double) s);
   }
 
   /**
@@ -487,7 +488,8 @@ import net.jcip.annotations.Immutable;
     return new VectorI2L(x, y);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -506,17 +508,20 @@ import net.jcip.annotations.Immutable;
     return this.y == other.y;
   }
 
-  @Override public long getXL()
+  @Override
+  public long getXL()
   {
     return this.x;
   }
 
-  @Override public long getYL()
+  @Override
+  public long getYL()
   {
     return this.y;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final long prime = 31L;
     long result = 1L;
@@ -525,7 +530,8 @@ import net.jcip.annotations.Immutable;
     return (int) result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI2L ");

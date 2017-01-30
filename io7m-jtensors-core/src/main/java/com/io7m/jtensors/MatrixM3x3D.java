@@ -112,7 +112,7 @@ public final class MatrixM3x3D
     final M m0,
     final MatrixReadable3x3DType m1)
   {
-    return MatrixM3x3D.add(m0, m1, m0);
+    return add(m0, m1, m0);
   }
 
   /**
@@ -144,11 +144,11 @@ public final class MatrixM3x3D
     final double r,
     final M out)
   {
-    return MatrixM3x3D.addRowScaledUnsafe(
+    return addRowScaledUnsafe(
       m,
-      MatrixM3x3D.rowCheck(row_a),
-      MatrixM3x3D.rowCheck(row_b),
-      MatrixM3x3D.rowCheck(row_c),
+      rowCheck(row_a),
+      rowCheck(row_b),
+      rowCheck(row_c),
       r,
       c.v3a,
       c.v3b,
@@ -183,7 +183,7 @@ public final class MatrixM3x3D
     final int row_c,
     final double r)
   {
-    return MatrixM3x3D.addRowScaled(c, m, row_a, row_b, row_c, r, m);
+    return addRowScaled(c, m, row_a, row_b, row_c, r, m);
   }
 
   private static <M extends MatrixWritable3x3DType> M addRowScaledUnsafe(
@@ -289,10 +289,10 @@ public final class MatrixM3x3D
     final int row_b,
     final M out)
   {
-    return MatrixM3x3D.exchangeRowsUnsafe(
+    return exchangeRowsUnsafe(
       m,
-      MatrixM3x3D.rowCheck(row_a),
-      MatrixM3x3D.rowCheck(row_b),
+      rowCheck(row_a),
+      rowCheck(row_b),
       c.v3a,
       c.v3b,
       out);
@@ -321,7 +321,7 @@ public final class MatrixM3x3D
     final int row_a,
     final int row_b)
   {
-    return MatrixM3x3D.exchangeRows(c, m, row_a, row_b, m);
+    return exchangeRows(c, m, row_a, row_b, m);
   }
 
   private static <M extends MatrixWritable3x3DType> M exchangeRowsUnsafe(
@@ -361,7 +361,7 @@ public final class MatrixM3x3D
     final MatrixReadable3x3DType m,
     final M out)
   {
-    final double d = MatrixM3x3D.determinant(m);
+    final double d = determinant(m);
 
     if (d == 0.0) {
       return false;
@@ -407,7 +407,7 @@ public final class MatrixM3x3D
     temp.setR2C1D(r2c1);
     temp.setR2C2D(r2c2);
 
-    MatrixM3x3D.scale(temp, d_inv, out);
+    scale(temp, d_inv, out);
     return true;
   }
 
@@ -432,7 +432,7 @@ public final class MatrixM3x3D
     final ContextMM3D c,
     final M m)
   {
-    return MatrixM3x3D.invert(c, m, m);
+    return invert(c, m, m);
   }
 
   /**
@@ -467,7 +467,7 @@ public final class MatrixM3x3D
     final VectorM3D new_up = context.v3b;
     final VectorM3D side = context.v3c;
 
-    MatrixM3x3D.setIdentity(out_matrix);
+    setIdentity(out_matrix);
 
     /**
      * Calculate "forward" vector
@@ -732,7 +732,7 @@ public final class MatrixM3x3D
     final M m0,
     final MatrixReadable3x3DType m1)
   {
-    return MatrixM3x3D.multiply(m0, m1, m0);
+    return multiply(m0, m1, m0);
   }
 
   /**
@@ -839,7 +839,7 @@ public final class MatrixM3x3D
     final M m,
     final double r)
   {
-    return MatrixM3x3D.scale(m, r, m);
+    return scale(m, r, m);
   }
 
   /**
@@ -866,8 +866,8 @@ public final class MatrixM3x3D
     final double r,
     final M out)
   {
-    return MatrixM3x3D.scaleRowUnsafe(
-      m, MatrixM3x3D.rowCheck(row), r, c.v3a, out);
+    return scaleRowUnsafe(
+      m, rowCheck(row), r, c.v3a, out);
   }
 
   /**
@@ -893,8 +893,8 @@ public final class MatrixM3x3D
     final int row,
     final double r)
   {
-    return MatrixM3x3D.scaleRowUnsafe(
-      m, MatrixM3x3D.rowCheck(row), r, c.v3a, m);
+    return scaleRowUnsafe(
+      m, rowCheck(row), r, c.v3a, m);
   }
 
   private static <M extends MatrixWritable3x3DType> M scaleRowUnsafe(
@@ -1073,13 +1073,13 @@ public final class MatrixM3x3D
     final MatrixReadable3x3DType m0,
     final MatrixReadable3x3DType m1)
   {
-    if (!MatrixM3x3D.compareRow0(m0, m1)) {
+    if (!compareRow0(m0, m1)) {
       return false;
     }
-    if (!MatrixM3x3D.compareRow1(m0, m1)) {
+    if (!compareRow1(m0, m1)) {
       return false;
     }
-    return MatrixM3x3D.compareRow2(m0, m1);
+    return compareRow2(m0, m1);
   }
 
   /**
@@ -1196,9 +1196,9 @@ public final class MatrixM3x3D
   public static final class ContextMM3D
   {
     private final Matrix3x3DType m3a = MatrixHeapArrayM3x3D.newMatrix();
-    private final VectorM3D      v3a = new VectorM3D();
-    private final VectorM3D      v3b = new VectorM3D();
-    private final VectorM3D      v3c = new VectorM3D();
+    private final VectorM3D v3a = new VectorM3D();
+    private final VectorM3D v3b = new VectorM3D();
+    private final VectorM3D v3c = new VectorM3D();
 
     /**
      * Construct a new context.

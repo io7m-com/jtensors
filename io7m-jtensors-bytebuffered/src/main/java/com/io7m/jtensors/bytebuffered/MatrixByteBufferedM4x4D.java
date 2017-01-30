@@ -154,8 +154,8 @@ public final class MatrixByteBufferedM4x4D extends ByteBuffered
     final int col,
     final double x)
   {
-    final int i = MatrixByteBufferedM4x4D.getByteOffsetForIndex(
-      o, MatrixByteBufferedM4x4D.indexUnsafe(row, col));
+    final int i = getByteOffsetForIndex(
+      o, indexUnsafe(row, col));
     this.buffer.putDouble(i, x);
   }
 
@@ -165,15 +165,15 @@ public final class MatrixByteBufferedM4x4D extends ByteBuffered
     final int col)
   {
     return this.buffer.getDouble(
-      MatrixByteBufferedM4x4D.getByteOffsetForIndex(
-        o, MatrixByteBufferedM4x4D.indexUnsafe(row, col)));
+      getByteOffsetForIndex(
+        o, indexUnsafe(row, col)));
   }
 
   @Override public <V extends VectorWritable4DType> void getRow4D(
     final int row,
     final V out)
   {
-    this.getRow4DUnsafe(MatrixByteBufferedM4x4D.checkRow(row), out);
+    this.getRow4DUnsafe(checkRow(row), out);
   }
 
   @Override public <V extends VectorWritable4DType> void getRow4DUnsafe(
@@ -284,7 +284,7 @@ public final class MatrixByteBufferedM4x4D extends ByteBuffered
     final int row,
     final V out)
   {
-    this.getRow3DUnsafe(MatrixByteBufferedM4x4D.checkRow(row), out);
+    this.getRow3DUnsafe(checkRow(row), out);
   }
 
   @Override public <V extends VectorWritable3DType> void getRow3DUnsafe(
@@ -352,7 +352,7 @@ public final class MatrixByteBufferedM4x4D extends ByteBuffered
     final int row,
     final V out)
   {
-    this.getRow2DUnsafe(MatrixByteBufferedM4x4D.checkRow(row), out);
+    this.getRow2DUnsafe(checkRow(row), out);
   }
 
   @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
@@ -409,8 +409,8 @@ public final class MatrixByteBufferedM4x4D extends ByteBuffered
     final int row,
     final int column)
   {
-    MatrixByteBufferedM4x4D.checkRow(row);
-    MatrixByteBufferedM4x4D.checkColumn(column);
+    checkRow(row);
+    checkColumn(column);
     return this.getAtOffsetAndRowColumn(super.getIndex(), row, column);
   }
 
@@ -418,7 +418,7 @@ public final class MatrixByteBufferedM4x4D extends ByteBuffered
     final int row,
     final VectorReadable4DType v)
   {
-    MatrixByteBufferedM4x4D.checkRow(row);
+    checkRow(row);
     this.setRowWith4DUnsafe(row, v);
   }
 
@@ -473,7 +473,7 @@ public final class MatrixByteBufferedM4x4D extends ByteBuffered
     final int row,
     final VectorReadable3DType v)
   {
-    MatrixByteBufferedM4x4D.checkRow(row);
+    checkRow(row);
     this.setRowWith3DUnsafe(row, v);
   }
 
@@ -491,7 +491,7 @@ public final class MatrixByteBufferedM4x4D extends ByteBuffered
     final int row,
     final VectorReadable2DType v)
   {
-    MatrixByteBufferedM4x4D.checkRow(row);
+    checkRow(row);
     this.setRowWith2DUnsafe(row, v);
   }
 
@@ -509,8 +509,8 @@ public final class MatrixByteBufferedM4x4D extends ByteBuffered
     final int column,
     final double value)
   {
-    MatrixByteBufferedM4x4D.checkRow(row);
-    MatrixByteBufferedM4x4D.checkColumn(column);
+    checkRow(row);
+    checkColumn(column);
     this.setAtOffsetAndRowColumn(super.getIndex(), row, column, value);
   }
 }

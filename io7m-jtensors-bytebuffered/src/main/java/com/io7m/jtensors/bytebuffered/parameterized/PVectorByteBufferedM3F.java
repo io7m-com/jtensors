@@ -131,7 +131,7 @@ public final class PVectorByteBufferedM3F<T> extends ByteBuffered implements PVe
     final int i,
     final float x)
   {
-    this.buffer.putFloat(PVectorByteBufferedM3F.getByteOffsetForIndex(o, i), x);
+    this.buffer.putFloat(getByteOffsetForIndex(o, i), x);
   }
 
   private float getAtOffsetAndIndex(
@@ -139,7 +139,7 @@ public final class PVectorByteBufferedM3F<T> extends ByteBuffered implements PVe
     final int i)
   {
     return this.buffer.getFloat(
-      PVectorByteBufferedM3F.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public float getYF()

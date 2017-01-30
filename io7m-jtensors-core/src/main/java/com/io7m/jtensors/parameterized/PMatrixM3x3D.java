@@ -28,7 +28,8 @@ import com.io7m.junreachable.UnreachableCodeException;
  * @since 7.0.0
  */
 
-@SuppressWarnings("unchecked") public final class PMatrixM3x3D
+@SuppressWarnings("unchecked")
+public final class PMatrixM3x3D
 {
   private PMatrixM3x3D()
   {
@@ -269,8 +270,8 @@ import com.io7m.junreachable.UnreachableCodeException;
   public static class ContextPM3D
   {
     private final Matrix3x3DType m3a = MatrixHeapArrayM3x3D.newMatrix();
-    private final VectorM3D      v3a = new VectorM3D();
-    private final VectorM3D      v3b = new VectorM3D();
+    private final VectorM3D v3a = new VectorM3D();
+    private final VectorM3D v3b = new VectorM3D();
 
     /**
      * Construct a new context.

@@ -125,7 +125,7 @@ public final class VectorM4I implements Vector4IType
     final V v)
     throws ArithmeticException
   {
-    return VectorM4I.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -177,7 +177,7 @@ public final class VectorM4I implements Vector4IType
     final VectorReadable4IType v1)
     throws ArithmeticException
   {
-    return VectorM4I.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -241,7 +241,7 @@ public final class VectorM4I implements Vector4IType
     final double r)
     throws ArithmeticException
   {
-    return VectorM4I.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -327,7 +327,7 @@ public final class VectorM4I implements Vector4IType
     final VectorReadable4IType minimum,
     final VectorReadable4IType maximum)
   {
-    return VectorM4I.clampByVector(v, minimum, maximum, v);
+    return clampByVector(v, minimum, maximum, v);
   }
 
   /**
@@ -349,7 +349,7 @@ public final class VectorM4I implements Vector4IType
     final int minimum,
     final int maximum)
   {
-    return VectorM4I.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -422,7 +422,7 @@ public final class VectorM4I implements Vector4IType
     final V v,
     final VectorReadable4IType maximum)
   {
-    return VectorM4I.clampMaximumByVector(v, maximum, v);
+    return clampMaximumByVector(v, maximum, v);
   }
 
   /**
@@ -442,7 +442,7 @@ public final class VectorM4I implements Vector4IType
     final V v,
     final int maximum)
   {
-    return VectorM4I.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -515,7 +515,7 @@ public final class VectorM4I implements Vector4IType
     final V v,
     final VectorReadable4IType minimum)
   {
-    return VectorM4I.clampMinimumByVector(v, minimum, v);
+    return clampMinimumByVector(v, minimum, v);
   }
 
   /**
@@ -535,7 +535,7 @@ public final class VectorM4I implements Vector4IType
     final V v,
     final int minimum)
   {
-    return VectorM4I.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -576,7 +576,7 @@ public final class VectorM4I implements Vector4IType
     final VectorReadable4IType v1)
     throws ArithmeticException
   {
-    return VectorM4I.magnitude(VectorM4I.subtract(v0, v1, c.v2a));
+    return magnitude(subtract(v0, v1, c.v2a));
   }
 
   /**
@@ -632,9 +632,9 @@ public final class VectorM4I implements Vector4IType
     final double alpha,
     final V r)
   {
-    VectorM4I.scale(v0, 1.0 - alpha, c.v2a);
-    VectorM4I.scale(v1, alpha, c.v2b);
-    return VectorM4I.add(c.v2a, c.v2b, r);
+    scale(v0, 1.0 - alpha, c.v2a);
+    scale(v1, alpha, c.v2b);
+    return add(c.v2a, c.v2b, r);
   }
 
   /**
@@ -654,7 +654,7 @@ public final class VectorM4I implements Vector4IType
     final VectorReadable4IType v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt((double) VectorM4I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -672,7 +672,7 @@ public final class VectorM4I implements Vector4IType
     final VectorReadable4IType v)
     throws ArithmeticException
   {
-    return VectorM4I.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -696,11 +696,11 @@ public final class VectorM4I implements Vector4IType
     final V r)
     throws ArithmeticException
   {
-    final int dot = VectorM4I.dotProduct(p, q);
-    final int qms = VectorM4I.magnitudeSquared(q);
+    final int dot = dotProduct(p, q);
+    final int qms = magnitudeSquared(q);
     final int s = dot / qms;
 
-    return VectorM4I.scale(p, (double) s, r);
+    return scale(p, (double) s, r);
   }
 
   /**
@@ -752,7 +752,7 @@ public final class VectorM4I implements Vector4IType
     final int r)
     throws ArithmeticException
   {
-    return VectorM4I.scale(v, (double) r, v);
+    return scale(v, (double) r, v);
   }
 
   /**
@@ -804,28 +804,32 @@ public final class VectorM4I implements Vector4IType
     final VectorReadable4IType v1)
     throws ArithmeticException
   {
-    return VectorM4I.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2I(
+  @Override
+  public void copyFrom2I(
     final VectorReadable2IType in_v)
   {
     VectorM2I.copy(in_v, this);
   }
 
-  @Override public void copyFrom3I(
+  @Override
+  public void copyFrom3I(
     final VectorReadable3IType in_v)
   {
     VectorM3I.copy(in_v, this);
   }
 
-  @Override public void copyFrom4I(
+  @Override
+  public void copyFrom4I(
     final VectorReadable4IType in_v)
   {
-    VectorM4I.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -850,51 +854,60 @@ public final class VectorM4I implements Vector4IType
     return this.z == other.z;
   }
 
-  @Override public int getWI()
+  @Override
+  public int getWI()
   {
     return this.w;
   }
 
-  @Override public void setWI(
+  @Override
+  public void setWI(
     final int in_w)
   {
     this.w = in_w;
   }
 
-  @Override public int getXI()
+  @Override
+  public int getXI()
   {
     return this.x;
   }
 
-  @Override public void setXI(
+  @Override
+  public void setXI(
     final int in_x)
   {
     this.x = in_x;
   }
 
-  @Override public int getYI()
+  @Override
+  public int getYI()
   {
     return this.y;
   }
 
-  @Override public void setYI(
+  @Override
+  public void setYI(
     final int in_y)
   {
     this.y = in_y;
   }
 
-  @Override public int getZI()
+  @Override
+  public int getZI()
   {
     return this.z;
   }
 
-  @Override public void setZI(
+  @Override
+  public void setZI(
     final int in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -905,7 +918,8 @@ public final class VectorM4I implements Vector4IType
     return result;
   }
 
-  @Override public void set2I(
+  @Override
+  public void set2I(
     final int in_x,
     final int in_y)
   {
@@ -913,7 +927,8 @@ public final class VectorM4I implements Vector4IType
     this.y = in_y;
   }
 
-  @Override public void set3I(
+  @Override
+  public void set3I(
     final int in_x,
     final int in_y,
     final int in_z)
@@ -923,7 +938,8 @@ public final class VectorM4I implements Vector4IType
     this.z = in_z;
   }
 
-  @Override public void set4I(
+  @Override
+  public void set4I(
     final int in_x,
     final int in_y,
     final int in_z,
@@ -935,7 +951,8 @@ public final class VectorM4I implements Vector4IType
     this.w = in_w;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM4I ");

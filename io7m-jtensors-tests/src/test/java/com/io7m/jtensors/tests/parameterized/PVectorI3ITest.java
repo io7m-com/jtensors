@@ -69,14 +69,14 @@ import org.junit.Test;
   @Override @Test public void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int y0 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int z0 = PVectorI3ITest.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
+      final int z0 = randomPositiveSmallNumber();
       final PVectorI3I<T> v0 = new PVectorI3I<T>(x0, y0, z0);
 
-      final int x1 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int y1 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int z1 = PVectorI3ITest.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
+      final int z1 = randomPositiveSmallNumber();
       final PVectorI3I<T> v1 = new PVectorI3I<T>(x1, y1, z1);
 
       final PVectorI3I<T> vr0 = PVectorI3I.add(v0, v1);
@@ -90,17 +90,17 @@ import org.junit.Test;
   @Override @Test public void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int y0 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int z0 = PVectorI3ITest.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
+      final int z0 = randomPositiveSmallNumber();
       final PVectorI3I<T> v0 = new PVectorI3I<T>(x0, y0, z0);
 
-      final int x1 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int y1 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int z1 = PVectorI3ITest.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
+      final int z1 = randomPositiveSmallNumber();
       final PVectorI3I<T> v1 = new PVectorI3I<T>(x1, y1, z1);
 
-      final int r = PVectorI3ITest.randomPositiveSmallNumber();
+      final int r = randomPositiveSmallNumber();
 
       final PVectorI3I<T> vr0 = PVectorI3I.addScaled(v0, v1, r);
 
@@ -132,14 +132,14 @@ import org.junit.Test;
   @Override @Test public void testClampByPVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int max_x = PVectorI3ITest.randomNegativeNumber();
-      final int max_y = PVectorI3ITest.randomNegativeNumber();
-      final int max_z = PVectorI3ITest.randomNegativeNumber();
+      final int max_x = randomNegativeNumber();
+      final int max_y = randomNegativeNumber();
+      final int max_z = randomNegativeNumber();
       final PVectorI3I<T> maximum = new PVectorI3I<T>(max_x, max_y, max_z);
 
-      final int x = PVectorI3ITest.randomNegativeNumber();
-      final int y = PVectorI3ITest.randomNegativeNumber();
-      final int z = PVectorI3ITest.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final int z = randomNegativeNumber();
       final PVectorReadable3IType<T> v = new PVectorI3I<T>(x, y, z);
 
       final PVectorI3I<T> vr = PVectorI3I.clampMaximumByPVector(v, maximum);
@@ -153,14 +153,14 @@ import org.junit.Test;
   @Override @Test public void testClampByPVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = PVectorI3ITest.randomPositiveNumber();
-      final int min_y = PVectorI3ITest.randomPositiveNumber();
-      final int min_z = PVectorI3ITest.randomPositiveNumber();
+      final int min_x = randomPositiveNumber();
+      final int min_y = randomPositiveNumber();
+      final int min_z = randomPositiveNumber();
       final PVectorI3I<T> minimum = new PVectorI3I<T>(min_x, min_y, min_z);
 
-      final int x = PVectorI3ITest.randomNegativeNumber();
-      final int y = PVectorI3ITest.randomNegativeNumber();
-      final int z = PVectorI3ITest.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final int z = randomNegativeNumber();
       final PVectorReadable3IType<T> v = new PVectorI3I<T>(x, y, z);
 
       final PVectorI3I<T> vr = PVectorI3I.clampMinimumByPVector(v, minimum);
@@ -174,19 +174,19 @@ import org.junit.Test;
   @Override @Test public void testClampByPVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = PVectorI3ITest.randomNegativeNumber();
-      final int min_y = PVectorI3ITest.randomNegativeNumber();
-      final int min_z = PVectorI3ITest.randomNegativeNumber();
+      final int min_x = randomNegativeNumber();
+      final int min_y = randomNegativeNumber();
+      final int min_z = randomNegativeNumber();
       final PVectorI3I<T> minimum = new PVectorI3I<T>(min_x, min_y, min_z);
 
-      final int max_x = PVectorI3ITest.randomPositiveNumber();
-      final int max_y = PVectorI3ITest.randomPositiveNumber();
-      final int max_z = PVectorI3ITest.randomPositiveNumber();
+      final int max_x = randomPositiveNumber();
+      final int max_y = randomPositiveNumber();
+      final int max_z = randomPositiveNumber();
       final PVectorI3I<T> maximum = new PVectorI3I<T>(max_x, max_y, max_z);
 
-      final int x = PVectorI3ITest.randomNegativeNumber();
-      final int y = PVectorI3ITest.randomPositiveNumber();
-      final int z = PVectorI3ITest.randomPositiveNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
       final PVectorReadable3IType<T> v = new PVectorI3I<T>(x, y, z);
 
       final PVectorI3I<T> vr = PVectorI3I.clampByPVector(v, minimum, maximum);
@@ -203,11 +203,11 @@ import org.junit.Test;
   @Override @Test public void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int maximum = PVectorI3ITest.randomNegativeNumber();
+      final int maximum = randomNegativeNumber();
 
-      final int x = PVectorI3ITest.randomPositiveNumber();
-      final int y = PVectorI3ITest.randomPositiveNumber();
-      final int z = PVectorI3ITest.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
       final PVectorReadable3IType<T> v = new PVectorI3I<T>(x, y, z);
 
       final PVectorI3I<T> vr = PVectorI3I.clampMaximum(v, maximum);
@@ -221,11 +221,11 @@ import org.junit.Test;
   @Override @Test public void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = PVectorI3ITest.randomPositiveNumber();
+      final int minimum = randomPositiveNumber();
 
-      final int x = PVectorI3ITest.randomNegativeNumber();
-      final int y = PVectorI3ITest.randomNegativeNumber();
-      final int z = PVectorI3ITest.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final int z = randomNegativeNumber();
       final PVectorReadable3IType<T> v = new PVectorI3I<T>(x, y, z);
 
       final PVectorI3I<T> vr = PVectorI3I.clampMinimum(v, minimum);
@@ -239,12 +239,12 @@ import org.junit.Test;
   @Override @Test public void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = PVectorI3ITest.randomNegativeNumber();
-      final int maximum = PVectorI3ITest.randomPositiveNumber();
+      final int minimum = randomNegativeNumber();
+      final int maximum = randomPositiveNumber();
 
-      final int x = PVectorI3ITest.randomNegativeNumber();
-      final int y = PVectorI3ITest.randomPositiveNumber();
-      final int z = PVectorI3ITest.randomPositiveNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
       final PVectorReadable3IType<T> v = new PVectorI3I<T>(x, y, z);
 
       final PVectorI3I<T> vr = PVectorI3I.clamp(v, minimum, maximum);
@@ -298,14 +298,14 @@ import org.junit.Test;
   @Override @Test public void testDistanceOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int y0 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int z0 = PVectorI3ITest.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
+      final int z0 = randomPositiveSmallNumber();
       final PVectorReadable3IType<T> v0 = new PVectorI3I<T>(x0, y0, z0);
 
-      final int x1 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int y1 = PVectorI3ITest.randomPositiveSmallNumber();
-      final int z1 = PVectorI3ITest.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
+      final int z1 = randomPositiveSmallNumber();
       final PVectorReadable3IType<T> v1 = new PVectorI3I<T>(x1, y1, z1);
 
       Assert.assertTrue(PVectorI3I.distance(v0, v1) >= 0);
@@ -552,14 +552,14 @@ import org.junit.Test;
   @Override @Test public void testInterpolateLinearLimits()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorI3ITest.randomPositiveNumber();
-      final int y0 = PVectorI3ITest.randomPositiveNumber();
-      final int z0 = PVectorI3ITest.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
+      final int z0 = randomPositiveNumber();
       final PVectorI3I<T> v0 = new PVectorI3I<T>(x0, y0, z0);
 
-      final int x1 = PVectorI3ITest.randomPositiveNumber();
-      final int y1 = PVectorI3ITest.randomPositiveNumber();
-      final int z1 = PVectorI3ITest.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
+      final int z1 = randomPositiveNumber();
       final PVectorI3I<T> v1 = new PVectorI3I<T>(x1, y1, z1);
 
       final PVectorI3I<T> vr0 = PVectorI3I.interpolateLinear(v0, v1, 0);
@@ -578,9 +578,9 @@ import org.junit.Test;
   @Override @Test public void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = PVectorI3ITest.randomPositiveSmallNumber();
-      final int y = PVectorI3ITest.randomPositiveSmallNumber();
-      final int z = PVectorI3ITest.randomPositiveSmallNumber();
+      final int x = randomPositiveSmallNumber();
+      final int y = randomPositiveSmallNumber();
+      final int z = randomPositiveSmallNumber();
       final PVectorReadable3IType<T> v = new PVectorI3I<T>(x, y, z);
 
       final int m = PVectorI3I.magnitude(v);
@@ -663,9 +663,9 @@ import org.junit.Test;
   @Override @Test public void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = PVectorI3ITest.randomPositiveNumber();
-      final int y = PVectorI3ITest.randomPositiveNumber();
-      final int z = PVectorI3ITest.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
       final PVectorI3I<T> v = new PVectorI3I<T>(x, y, z);
 
       final PVectorI3I<T> vr = PVectorI3I.scale(v, 1);
@@ -679,9 +679,9 @@ import org.junit.Test;
   @Override @Test public void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = PVectorI3ITest.randomPositiveNumber();
-      final int y = PVectorI3ITest.randomPositiveNumber();
-      final int z = PVectorI3ITest.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
       final PVectorReadable3IType<T> v = new PVectorI3I<T>(x, y, z);
 
       final PVectorI3I<T> vr = PVectorI3I.scale(v, 0);
@@ -701,14 +701,14 @@ import org.junit.Test;
   @Override @Test public void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorI3ITest.randomPositiveNumber();
-      final int y0 = PVectorI3ITest.randomPositiveNumber();
-      final int z0 = PVectorI3ITest.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
+      final int z0 = randomPositiveNumber();
       final PVectorI3I<T> v0 = new PVectorI3I<T>(x0, y0, z0);
 
-      final int x1 = PVectorI3ITest.randomPositiveNumber();
-      final int y1 = PVectorI3ITest.randomPositiveNumber();
-      final int z1 = PVectorI3ITest.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
+      final int z1 = randomPositiveNumber();
       final PVectorI3I<T> v1 = new PVectorI3I<T>(x1, y1, z1);
 
       final PVectorI3I<T> vr0 = PVectorI3I.subtract(v0, v1);

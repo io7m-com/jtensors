@@ -120,7 +120,7 @@ public final class PVectorByteBufferedM2D<T> extends ByteBuffered implements PVe
     final double x)
   {
     this.buffer.putDouble(
-      PVectorByteBufferedM2D.getByteOffsetForIndex(o, i), x);
+      getByteOffsetForIndex(o, i), x);
   }
 
   private double getAtOffsetAndIndex(
@@ -128,7 +128,7 @@ public final class PVectorByteBufferedM2D<T> extends ByteBuffered implements PVe
     final int i)
   {
     return this.buffer.getDouble(
-      PVectorByteBufferedM2D.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public double getYD()

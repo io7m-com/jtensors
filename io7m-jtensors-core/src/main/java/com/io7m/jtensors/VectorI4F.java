@@ -28,7 +28,8 @@ import net.jcip.annotations.Immutable;
  * accessed from multiple threads. </p>
  */
 
-@Immutable public final class VectorI4F implements VectorReadable4FType
+@Immutable
+public final class VectorI4F implements VectorReadable4FType
 {
   /**
    * The zero vector.
@@ -145,7 +146,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4FType v1,
     final float r)
   {
-    return VectorI4F.add(v0, VectorI4F.scale(v1, r));
+    return add(v0, scale(v1, r));
   }
 
   /**
@@ -334,7 +335,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4FType v0,
     final VectorReadable4FType v1)
   {
-    return VectorI4F.magnitude(VectorI4F.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -379,9 +380,9 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4FType v1,
     final float alpha)
   {
-    final VectorReadable4FType w0 = VectorI4F.scale(v0, 1.0f - alpha);
-    final VectorReadable4FType w1 = VectorI4F.scale(v1, alpha);
-    return VectorI4F.add(w0, w1);
+    final VectorReadable4FType w0 = scale(v0, 1.0f - alpha);
+    final VectorReadable4FType w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -397,7 +398,7 @@ import net.jcip.annotations.Immutable;
   public static float magnitude(
     final VectorReadable4FType v)
   {
-    return (float) Math.sqrt((double) VectorI4F.magnitudeSquared(v));
+    return (float) Math.sqrt((double) magnitudeSquared(v));
   }
 
   /**
@@ -411,7 +412,7 @@ import net.jcip.annotations.Immutable;
   public static float magnitudeSquared(
     final VectorReadable4FType v)
   {
-    return VectorI4F.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -427,10 +428,10 @@ import net.jcip.annotations.Immutable;
   public static VectorI4F normalize(
     final VectorReadable4FType v)
   {
-    final float m = VectorI4F.magnitudeSquared(v);
+    final float m = magnitudeSquared(v);
     if (m > 0.0F) {
       final float reciprocal = (float) (1.0 / Math.sqrt((double) m));
-      return VectorI4F.scale(v, reciprocal);
+      return scale(v, reciprocal);
     }
     return new VectorI4F(v);
   }
@@ -452,11 +453,11 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4FType v0,
     final VectorReadable4FType v1)
   {
-    final VectorI4F v0n = VectorI4F.normalize(v0);
+    final VectorI4F v0n = normalize(v0);
     final VectorI4F projection =
-      VectorI4F.scale(v0n, VectorI4F.dotProduct(v1, v0n));
+      scale(v0n, dotProduct(v1, v0n));
     final VectorI4F vr =
-      VectorI4F.normalize(VectorI4F.subtract(v1, projection));
+      normalize(subtract(v1, projection));
     return Pair.pair(v0n, vr);
   }
 
@@ -474,10 +475,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4FType p,
     final VectorReadable4FType q)
   {
-    final float dot = VectorI4F.dotProduct(p, q);
-    final float qms = VectorI4F.magnitudeSquared(q);
+    final float dot = dotProduct(p, q);
+    final float qms = magnitudeSquared(q);
     final float s = dot / qms;
-    return VectorI4F.scale(p, s);
+    return scale(p, s);
   }
 
   /**
@@ -519,7 +520,8 @@ import net.jcip.annotations.Immutable;
       v0.getWF() - v1.getWF());
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -548,27 +550,32 @@ import net.jcip.annotations.Immutable;
       other.getZF());
   }
 
-  @Override public float getWF()
+  @Override
+  public float getWF()
   {
     return this.w;
   }
 
-  @Override public float getXF()
+  @Override
+  public float getXF()
   {
     return this.x;
   }
 
-  @Override public float getYF()
+  @Override
+  public float getYF()
   {
     return this.y;
   }
 
-  @Override public float getZF()
+  @Override
+  public float getZF()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -579,7 +586,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI4F ");

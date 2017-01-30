@@ -58,14 +58,14 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorI3ITest.randomPositiveSmallNumber();
-      final int y0 = VectorI3ITest.randomPositiveSmallNumber();
-      final int z0 = VectorI3ITest.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
+      final int z0 = randomPositiveSmallNumber();
       final VectorI3I v0 = new VectorI3I(x0, y0, z0);
 
-      final int x1 = VectorI3ITest.randomPositiveSmallNumber();
-      final int y1 = VectorI3ITest.randomPositiveSmallNumber();
-      final int z1 = VectorI3ITest.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
+      final int z1 = randomPositiveSmallNumber();
       final VectorI3I v1 = new VectorI3I(x1, y1, z1);
 
       final VectorI3I vr0 = VectorI3I.add(v0, v1);
@@ -79,17 +79,17 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorI3ITest.randomPositiveSmallNumber();
-      final int y0 = VectorI3ITest.randomPositiveSmallNumber();
-      final int z0 = VectorI3ITest.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
+      final int z0 = randomPositiveSmallNumber();
       final VectorI3I v0 = new VectorI3I(x0, y0, z0);
 
-      final int x1 = VectorI3ITest.randomPositiveSmallNumber();
-      final int y1 = VectorI3ITest.randomPositiveSmallNumber();
-      final int z1 = VectorI3ITest.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
+      final int z1 = randomPositiveSmallNumber();
       final VectorI3I v1 = new VectorI3I(x1, y1, z1);
 
-      final int r = VectorI3ITest.randomPositiveSmallNumber();
+      final int r = randomPositiveSmallNumber();
 
       final VectorI3I vr0 = VectorI3I.addScaled(v0, v1, r);
 
@@ -121,14 +121,14 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int max_x = VectorI3ITest.randomNegativeNumber();
-      final int max_y = VectorI3ITest.randomNegativeNumber();
-      final int max_z = VectorI3ITest.randomNegativeNumber();
+      final int max_x = randomNegativeNumber();
+      final int max_y = randomNegativeNumber();
+      final int max_z = randomNegativeNumber();
       final VectorI3I maximum = new VectorI3I(max_x, max_y, max_z);
 
-      final int x = VectorI3ITest.randomNegativeNumber();
-      final int y = VectorI3ITest.randomNegativeNumber();
-      final int z = VectorI3ITest.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final int z = randomNegativeNumber();
       final VectorReadable3IType v = new VectorI3I(x, y, z);
 
       final VectorI3I vr = VectorI3I.clampMaximumByVector(v, maximum);
@@ -142,14 +142,14 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = VectorI3ITest.randomPositiveNumber();
-      final int min_y = VectorI3ITest.randomPositiveNumber();
-      final int min_z = VectorI3ITest.randomPositiveNumber();
+      final int min_x = randomPositiveNumber();
+      final int min_y = randomPositiveNumber();
+      final int min_z = randomPositiveNumber();
       final VectorI3I minimum = new VectorI3I(min_x, min_y, min_z);
 
-      final int x = VectorI3ITest.randomNegativeNumber();
-      final int y = VectorI3ITest.randomNegativeNumber();
-      final int z = VectorI3ITest.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final int z = randomNegativeNumber();
       final VectorReadable3IType v = new VectorI3I(x, y, z);
 
       final VectorI3I vr = VectorI3I.clampMinimumByVector(v, minimum);
@@ -163,19 +163,19 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testClampByVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = VectorI3ITest.randomNegativeNumber();
-      final int min_y = VectorI3ITest.randomNegativeNumber();
-      final int min_z = VectorI3ITest.randomNegativeNumber();
+      final int min_x = randomNegativeNumber();
+      final int min_y = randomNegativeNumber();
+      final int min_z = randomNegativeNumber();
       final VectorI3I minimum = new VectorI3I(min_x, min_y, min_z);
 
-      final int max_x = VectorI3ITest.randomPositiveNumber();
-      final int max_y = VectorI3ITest.randomPositiveNumber();
-      final int max_z = VectorI3ITest.randomPositiveNumber();
+      final int max_x = randomPositiveNumber();
+      final int max_y = randomPositiveNumber();
+      final int max_z = randomPositiveNumber();
       final VectorI3I maximum = new VectorI3I(max_x, max_y, max_z);
 
-      final int x = VectorI3ITest.randomNegativeNumber();
-      final int y = VectorI3ITest.randomPositiveNumber();
-      final int z = VectorI3ITest.randomPositiveNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
       final VectorReadable3IType v = new VectorI3I(x, y, z);
 
       final VectorI3I vr = VectorI3I.clampByVector(v, minimum, maximum);
@@ -192,11 +192,11 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int maximum = VectorI3ITest.randomNegativeNumber();
+      final int maximum = randomNegativeNumber();
 
-      final int x = VectorI3ITest.randomPositiveNumber();
-      final int y = VectorI3ITest.randomPositiveNumber();
-      final int z = VectorI3ITest.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
       final VectorReadable3IType v = new VectorI3I(x, y, z);
 
       final VectorI3I vr = VectorI3I.clampMaximum(v, maximum);
@@ -210,11 +210,11 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = VectorI3ITest.randomPositiveNumber();
+      final int minimum = randomPositiveNumber();
 
-      final int x = VectorI3ITest.randomNegativeNumber();
-      final int y = VectorI3ITest.randomNegativeNumber();
-      final int z = VectorI3ITest.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final int z = randomNegativeNumber();
       final VectorReadable3IType v = new VectorI3I(x, y, z);
 
       final VectorI3I vr = VectorI3I.clampMinimum(v, minimum);
@@ -228,12 +228,12 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = VectorI3ITest.randomNegativeNumber();
-      final int maximum = VectorI3ITest.randomPositiveNumber();
+      final int minimum = randomNegativeNumber();
+      final int maximum = randomPositiveNumber();
 
-      final int x = VectorI3ITest.randomNegativeNumber();
-      final int y = VectorI3ITest.randomPositiveNumber();
-      final int z = VectorI3ITest.randomPositiveNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
       final VectorReadable3IType v = new VectorI3I(x, y, z);
 
       final VectorI3I vr = VectorI3I.clamp(v, minimum, maximum);
@@ -287,14 +287,14 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testDistanceOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorI3ITest.randomPositiveSmallNumber();
-      final int y0 = VectorI3ITest.randomPositiveSmallNumber();
-      final int z0 = VectorI3ITest.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
+      final int z0 = randomPositiveSmallNumber();
       final VectorReadable3IType v0 = new VectorI3I(x0, y0, z0);
 
-      final int x1 = VectorI3ITest.randomPositiveSmallNumber();
-      final int y1 = VectorI3ITest.randomPositiveSmallNumber();
-      final int z1 = VectorI3ITest.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
+      final int z1 = randomPositiveSmallNumber();
       final VectorReadable3IType v1 = new VectorI3I(x1, y1, z1);
 
       Assert.assertTrue(VectorI3I.distance(v0, v1) >= 0);
@@ -548,14 +548,14 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testInterpolateLinearLimits()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorI3ITest.randomPositiveNumber();
-      final int y0 = VectorI3ITest.randomPositiveNumber();
-      final int z0 = VectorI3ITest.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
+      final int z0 = randomPositiveNumber();
       final VectorI3I v0 = new VectorI3I(x0, y0, z0);
 
-      final int x1 = VectorI3ITest.randomPositiveNumber();
-      final int y1 = VectorI3ITest.randomPositiveNumber();
-      final int z1 = VectorI3ITest.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
+      final int z1 = randomPositiveNumber();
       final VectorI3I v1 = new VectorI3I(x1, y1, z1);
 
       final VectorI3I vr0 = VectorI3I.interpolateLinear(v0, v1, 0);
@@ -574,9 +574,9 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = VectorI3ITest.randomPositiveSmallNumber();
-      final int y = VectorI3ITest.randomPositiveSmallNumber();
-      final int z = VectorI3ITest.randomPositiveSmallNumber();
+      final int x = randomPositiveSmallNumber();
+      final int y = randomPositiveSmallNumber();
+      final int z = randomPositiveSmallNumber();
       final VectorReadable3IType v = new VectorI3I(x, y, z);
 
       final int m = VectorI3I.magnitude(v);
@@ -659,9 +659,9 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = VectorI3ITest.randomPositiveNumber();
-      final int y = VectorI3ITest.randomPositiveNumber();
-      final int z = VectorI3ITest.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
       final VectorI3I v = new VectorI3I(x, y, z);
 
       final VectorI3I vr = VectorI3I.scale(v, 1);
@@ -675,9 +675,9 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = VectorI3ITest.randomPositiveNumber();
-      final int y = VectorI3ITest.randomPositiveNumber();
-      final int z = VectorI3ITest.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
       final VectorReadable3IType v = new VectorI3I(x, y, z);
 
       final VectorI3I vr = VectorI3I.scale(v, 0);
@@ -697,14 +697,14 @@ public class VectorI3ITest extends VectorI3Contract
   @Override @Test public void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = VectorI3ITest.randomPositiveNumber();
-      final int y0 = VectorI3ITest.randomPositiveNumber();
-      final int z0 = VectorI3ITest.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
+      final int z0 = randomPositiveNumber();
       final VectorI3I v0 = new VectorI3I(x0, y0, z0);
 
-      final int x1 = VectorI3ITest.randomPositiveNumber();
-      final int y1 = VectorI3ITest.randomPositiveNumber();
-      final int z1 = VectorI3ITest.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
+      final int z1 = randomPositiveNumber();
       final VectorI3I v1 = new VectorI3I(x1, y1, z1);
 
       final VectorI3I vr0 = VectorI3I.subtract(v0, v1);

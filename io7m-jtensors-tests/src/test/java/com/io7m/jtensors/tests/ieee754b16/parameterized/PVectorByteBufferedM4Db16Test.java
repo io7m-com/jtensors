@@ -116,7 +116,7 @@ public final class PVectorByteBufferedM4Db16Test<T>
 
   @Override protected Logger logger()
   {
-    return PVectorByteBufferedM4Db16Test.LOG;
+    return LOG;
   }
 
   @Override protected PVectorByteBuffered4DType<T> newVectorM4D()
@@ -223,7 +223,7 @@ public final class PVectorByteBufferedM4Db16Test<T>
     final SortedMap<String, Class<?>> interfaces =
       TestUtilities.getInterfaces(v.getClass());
     for (final String k : interfaces.keySet()) {
-      PVectorByteBufferedM4Db16Test.LOG.debug(
+      LOG.debug(
         "{} implements {}", PVectorByteBufferedM4Db16.class, k);
     }
 

@@ -130,7 +130,7 @@ public final class VectorByteBufferedM3Db16 extends ByteBuffered
   {
     final char k = Binary16.packDouble(x);
     this.buffer.putChar(
-      VectorByteBufferedM3Db16.getByteOffsetForIndex(o, i), k);
+      getByteOffsetForIndex(o, i), k);
   }
 
   private double getAtOffsetAndIndex(
@@ -138,7 +138,7 @@ public final class VectorByteBufferedM3Db16 extends ByteBuffered
     final int i)
   {
     final char k = this.buffer.getChar(
-      VectorByteBufferedM3Db16.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
     return Binary16.unpackDouble(k);
   }
 

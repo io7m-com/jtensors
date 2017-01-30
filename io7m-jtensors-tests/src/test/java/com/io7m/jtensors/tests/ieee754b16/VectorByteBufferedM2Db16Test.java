@@ -63,7 +63,7 @@ public final class VectorByteBufferedM2Db16Test
 
   @Override protected Logger logger()
   {
-    return VectorByteBufferedM2Db16Test.LOG;
+    return LOG;
   }
 
   @Override protected VectorByteBuffered2DType newVectorM2D(
@@ -137,7 +137,7 @@ public final class VectorByteBufferedM2Db16Test
     final SortedMap<String, Class<?>> interfaces =
       TestUtilities.getInterfaces(v.getClass());
     for (final String k : interfaces.keySet()) {
-      VectorByteBufferedM2Db16Test.LOG.debug(
+      LOG.debug(
         "{} implements {}", VectorByteBufferedM2Db16.class, k);
     }
 

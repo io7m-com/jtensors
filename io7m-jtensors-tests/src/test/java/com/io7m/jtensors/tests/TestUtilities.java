@@ -90,7 +90,7 @@ public final class TestUtilities
     final Class<?> c)
   {
     final SortedMap<String, Class<?>> rs = new TreeMap<String, Class<?>>();
-    TestUtilities.getInterfacesActual(c, rs);
+    getInterfacesActual(c, rs);
     return rs;
   }
 
@@ -100,7 +100,7 @@ public final class TestUtilities
   {
     for (final Class<?> i : c.getInterfaces()) {
       rs.put(i.getCanonicalName(), i);
-      TestUtilities.getInterfacesActual(i, rs);
+      getInterfacesActual(i, rs);
     }
   }
 }

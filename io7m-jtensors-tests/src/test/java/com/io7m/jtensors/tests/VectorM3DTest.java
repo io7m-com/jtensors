@@ -45,7 +45,7 @@ public final class VectorM3DTest extends VectorM3DContract<VectorM3D>
 
   @Override protected Logger logger()
   {
-    return VectorM3DTest.LOG;
+    return LOG;
   }
 
   @Override protected VectorM3D newVectorM3D(final VectorM3D v0)

@@ -107,7 +107,7 @@ public final class VectorM2D implements Vector2DType
   absoluteInPlace(
     final V v)
   {
-    return VectorM2D.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -149,7 +149,7 @@ public final class VectorM2D implements Vector2DType
     final V v0,
     final VectorReadable2DType v1)
   {
-    return VectorM2D.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -197,7 +197,7 @@ public final class VectorM2D implements Vector2DType
     final VectorReadable2DType v1,
     final double r)
   {
-    return VectorM2D.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -239,10 +239,10 @@ public final class VectorM2D implements Vector2DType
     final VectorReadable2DType v0,
     final VectorReadable2DType v1)
   {
-    final double m0 = VectorM2D.magnitude(v0);
-    final double m1 = VectorM2D.magnitude(v1);
+    final double m0 = magnitude(v0);
+    final double m1 = magnitude(v1);
     final double dp =
-      Math.min(Math.max(-1.0, VectorM2D.dotProduct(v0, v1)), 1.0);
+      Math.min(Math.max(-1.0, dotProduct(v0, v1)), 1.0);
     final double f = m0 * m1;
     final double r = dp / f;
     return Math.acos(r);
@@ -323,7 +323,7 @@ public final class VectorM2D implements Vector2DType
     final VectorReadable2DType minimum,
     final VectorReadable2DType maximum)
   {
-    return VectorM2D.clampByVector(v, minimum, maximum, v);
+    return clampByVector(v, minimum, maximum, v);
   }
 
   /**
@@ -345,7 +345,7 @@ public final class VectorM2D implements Vector2DType
     final double minimum,
     final double maximum)
   {
-    return VectorM2D.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -412,7 +412,7 @@ public final class VectorM2D implements Vector2DType
     final V v,
     final VectorReadable2DType maximum)
   {
-    return VectorM2D.clampMaximumByVector(v, maximum, v);
+    return clampMaximumByVector(v, maximum, v);
   }
 
   /**
@@ -432,7 +432,7 @@ public final class VectorM2D implements Vector2DType
     final V v,
     final double maximum)
   {
-    return VectorM2D.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -499,7 +499,7 @@ public final class VectorM2D implements Vector2DType
     final V v,
     final VectorReadable2DType minimum)
   {
-    return VectorM2D.clampMinimumByVector(v, minimum, v);
+    return clampMinimumByVector(v, minimum, v);
   }
 
   /**
@@ -519,7 +519,7 @@ public final class VectorM2D implements Vector2DType
     final V v,
     final double minimum)
   {
-    return VectorM2D.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -558,7 +558,7 @@ public final class VectorM2D implements Vector2DType
     final VectorReadable2DType v0,
     final VectorReadable2DType v1)
   {
-    return VectorM2D.magnitude(VectorM2D.subtract(v0, v1, c.v2a));
+    return magnitude(subtract(v0, v1, c.v2a));
   }
 
   /**
@@ -608,9 +608,9 @@ public final class VectorM2D implements Vector2DType
     final double alpha,
     final V r)
   {
-    VectorM2D.scale(v0, 1.0 - alpha, c.v2a);
-    VectorM2D.scale(v1, alpha, c.v2b);
-    return VectorM2D.add(c.v2a, c.v2b, r);
+    scale(v0, 1.0 - alpha, c.v2a);
+    scale(v1, alpha, c.v2b);
+    return add(c.v2a, c.v2b, r);
   }
 
   /**
@@ -626,7 +626,7 @@ public final class VectorM2D implements Vector2DType
   public static double magnitude(
     final VectorReadable2DType v)
   {
-    return Math.sqrt(VectorM2D.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -640,7 +640,7 @@ public final class VectorM2D implements Vector2DType
   public static double magnitudeSquared(
     final VectorReadable2DType v)
   {
-    return VectorM2D.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -659,10 +659,10 @@ public final class VectorM2D implements Vector2DType
     final VectorReadable2DType v,
     final V out)
   {
-    final double m = VectorM2D.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return VectorM2D.scale(v, reciprocal, out);
+      return scale(v, reciprocal, out);
     }
     out.set2D(v.getXD(), v.getYD());
     return out;
@@ -683,7 +683,7 @@ public final class VectorM2D implements Vector2DType
   normalizeInPlace(
     final V v)
   {
-    return VectorM2D.normalize(v, v);
+    return normalize(v, v);
   }
 
   /**
@@ -711,9 +711,9 @@ public final class VectorM2D implements Vector2DType
     final VectorReadable2DType v1,
     final U v1_out)
   {
-    VectorM2D.normalize(v0, c.v2a);
-    VectorM2D.scale(c.v2a, VectorM2D.dotProduct(v1, c.v2a), c.v2b);
-    VectorM2D.normalizeInPlace(VectorM2D.subtract(v1, c.v2b, c.v2c));
+    normalize(v0, c.v2a);
+    scale(c.v2a, dotProduct(v1, c.v2a), c.v2b);
+    normalizeInPlace(subtract(v1, c.v2b, c.v2c));
     v0_out.copyFrom2D(c.v2a);
     v1_out.copyFrom2D(c.v2c);
   }
@@ -738,10 +738,10 @@ public final class VectorM2D implements Vector2DType
     final V v0,
     final W v1)
   {
-    VectorM2D.normalizeInPlace(v0);
-    VectorM2D.scale(v0, VectorM2D.dotProduct(v1, v0), c.v2a);
-    VectorM2D.subtractInPlace(v1, c.v2a);
-    VectorM2D.normalizeInPlace(v1);
+    normalizeInPlace(v0);
+    scale(v0, dotProduct(v1, v0), c.v2a);
+    subtractInPlace(v1, c.v2a);
+    normalizeInPlace(v1);
   }
 
   /**
@@ -761,11 +761,11 @@ public final class VectorM2D implements Vector2DType
     final VectorReadable2DType q,
     final V r)
   {
-    final double dot = VectorM2D.dotProduct(p, q);
-    final double qms = VectorM2D.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
 
-    return VectorM2D.scale(p, s, r);
+    return scale(p, s, r);
   }
 
   /**
@@ -807,7 +807,7 @@ public final class VectorM2D implements Vector2DType
     final V v,
     final double r)
   {
-    return VectorM2D.scale(v, r, v);
+    return scale(v, r, v);
   }
 
   /**
@@ -849,16 +849,18 @@ public final class VectorM2D implements Vector2DType
     final V v0,
     final VectorReadable2DType v1)
   {
-    return VectorM2D.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2D(
+  @Override
+  public void copyFrom2D(
     final VectorReadable2DType in_v)
   {
-    VectorM2D.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -877,29 +879,34 @@ public final class VectorM2D implements Vector2DType
     return Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y);
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public void setXD(
+  @Override
+  public void setXD(
     final double in_x)
   {
     this.x = in_x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public void setYD(
+  @Override
+  public void setYD(
     final double in_y)
   {
     this.y = in_y;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -911,7 +918,8 @@ public final class VectorM2D implements Vector2DType
     return result;
   }
 
-  @Override public void set2D(
+  @Override
+  public void set2D(
     final double in_x,
     final double in_y)
   {
@@ -919,7 +927,8 @@ public final class VectorM2D implements Vector2DType
     this.y = in_y;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM2D ");

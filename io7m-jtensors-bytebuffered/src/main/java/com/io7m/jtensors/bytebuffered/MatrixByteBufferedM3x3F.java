@@ -151,8 +151,8 @@ public final class MatrixByteBufferedM3x3F extends ByteBuffered implements Matri
     final int col,
     final float x)
   {
-    final int i = MatrixByteBufferedM3x3F.getByteOffsetForIndex(
-      o, MatrixByteBufferedM3x3F.indexUnsafe(row, col));
+    final int i = getByteOffsetForIndex(
+      o, indexUnsafe(row, col));
     this.buffer.putFloat(i, x);
   }
 
@@ -162,8 +162,8 @@ public final class MatrixByteBufferedM3x3F extends ByteBuffered implements Matri
     final int col)
   {
     return this.buffer.getFloat(
-      MatrixByteBufferedM3x3F.getByteOffsetForIndex(
-        o, MatrixByteBufferedM3x3F.indexUnsafe(row, col)));
+      getByteOffsetForIndex(
+        o, indexUnsafe(row, col)));
   }
 
   @Override public int hashCode()
@@ -192,7 +192,7 @@ public final class MatrixByteBufferedM3x3F extends ByteBuffered implements Matri
     final int row,
     final V out)
   {
-    this.getRow3FUnsafe(MatrixByteBufferedM3x3F.checkRow(row), out);
+    this.getRow3FUnsafe(checkRow(row), out);
   }
 
   @Override public <V extends VectorWritable3FType> void getRow3FUnsafe(
@@ -260,7 +260,7 @@ public final class MatrixByteBufferedM3x3F extends ByteBuffered implements Matri
     final int row,
     final V out)
   {
-    this.getRow2FUnsafe(MatrixByteBufferedM3x3F.checkRow(row), out);
+    this.getRow2FUnsafe(checkRow(row), out);
   }
 
   @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
@@ -317,8 +317,8 @@ public final class MatrixByteBufferedM3x3F extends ByteBuffered implements Matri
     final int row,
     final int column)
   {
-    MatrixByteBufferedM3x3F.checkRow(row);
-    MatrixByteBufferedM3x3F.checkColumn(column);
+    checkRow(row);
+    checkColumn(column);
     return this.getAtOffsetAndRowColumn(super.getIndex(), row, column);
   }
 
@@ -326,7 +326,7 @@ public final class MatrixByteBufferedM3x3F extends ByteBuffered implements Matri
     final int row,
     final VectorReadable3FType v)
   {
-    MatrixByteBufferedM3x3F.checkRow(row);
+    checkRow(row);
     this.setRowWith3FUnsafe(row, v);
   }
 
@@ -344,7 +344,7 @@ public final class MatrixByteBufferedM3x3F extends ByteBuffered implements Matri
     final int row,
     final VectorReadable2FType v)
   {
-    MatrixByteBufferedM3x3F.checkRow(row);
+    checkRow(row);
     this.setRowWith2FUnsafe(row, v);
   }
 
@@ -362,8 +362,8 @@ public final class MatrixByteBufferedM3x3F extends ByteBuffered implements Matri
     final int column,
     final float value)
   {
-    MatrixByteBufferedM3x3F.checkRow(row);
-    MatrixByteBufferedM3x3F.checkColumn(column);
+    checkRow(row);
+    checkColumn(column);
     this.setAtOffsetAndRowColumn(super.getIndex(), row, column, value);
   }
 }

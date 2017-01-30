@@ -164,8 +164,8 @@ public final class PMatrixByteBufferedM3x3D<T0, T1> extends ByteBuffered
     final int col,
     final double x)
   {
-    final int i = PMatrixByteBufferedM3x3D.getByteOffsetForIndex(
-      o, PMatrixByteBufferedM3x3D.indexUnsafe(row, col));
+    final int i = getByteOffsetForIndex(
+      o, indexUnsafe(row, col));
     this.buffer.putDouble(i, x);
   }
 
@@ -175,8 +175,8 @@ public final class PMatrixByteBufferedM3x3D<T0, T1> extends ByteBuffered
     final int col)
   {
     return this.buffer.getDouble(
-      PMatrixByteBufferedM3x3D.getByteOffsetForIndex(
-        o, PMatrixByteBufferedM3x3D.indexUnsafe(row, col)));
+      getByteOffsetForIndex(
+        o, indexUnsafe(row, col)));
   }
 
   @Override public int hashCode()
@@ -206,7 +206,7 @@ public final class PMatrixByteBufferedM3x3D<T0, T1> extends ByteBuffered
     final int row,
     final V out)
   {
-    this.getRow3DUnsafe(PMatrixByteBufferedM3x3D.checkRow(row), out);
+    this.getRow3DUnsafe(checkRow(row), out);
   }
 
   @Override public <V extends VectorWritable3DType> void getRow3DUnsafe(
@@ -274,7 +274,7 @@ public final class PMatrixByteBufferedM3x3D<T0, T1> extends ByteBuffered
     final int row,
     final V out)
   {
-    this.getRow2DUnsafe(PMatrixByteBufferedM3x3D.checkRow(row), out);
+    this.getRow2DUnsafe(checkRow(row), out);
   }
 
   @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
@@ -331,8 +331,8 @@ public final class PMatrixByteBufferedM3x3D<T0, T1> extends ByteBuffered
     final int row,
     final int column)
   {
-    PMatrixByteBufferedM3x3D.checkRow(row);
-    PMatrixByteBufferedM3x3D.checkColumn(column);
+    checkRow(row);
+    checkColumn(column);
     return this.getAtOffsetAndRowColumn(super.getIndex(), row, column);
   }
 
@@ -340,7 +340,7 @@ public final class PMatrixByteBufferedM3x3D<T0, T1> extends ByteBuffered
     final int row,
     final VectorReadable3DType v)
   {
-    PMatrixByteBufferedM3x3D.checkRow(row);
+    checkRow(row);
     this.setRowWith3DUnsafe(row, v);
   }
 
@@ -358,7 +358,7 @@ public final class PMatrixByteBufferedM3x3D<T0, T1> extends ByteBuffered
     final int row,
     final VectorReadable2DType v)
   {
-    PMatrixByteBufferedM3x3D.checkRow(row);
+    checkRow(row);
     this.setRowWith2DUnsafe(row, v);
   }
 
@@ -376,8 +376,8 @@ public final class PMatrixByteBufferedM3x3D<T0, T1> extends ByteBuffered
     final int column,
     final double value)
   {
-    PMatrixByteBufferedM3x3D.checkRow(row);
-    PMatrixByteBufferedM3x3D.checkColumn(column);
+    checkRow(row);
+    checkColumn(column);
     this.setAtOffsetAndRowColumn(super.getIndex(), row, column, value);
   }
 }

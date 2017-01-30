@@ -35,12 +35,12 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
 
   protected static float getRandomSmall()
   {
-    return (float) (PVectorM3FContract.getRandom() * (double) Float.MIN_VALUE);
+    return (float) (getRandom() * (double) Float.MIN_VALUE);
   }
 
   protected static float getRandomLarge()
   {
-    return (float) (PVectorM3FContract.getRandom() * (double) Float.MAX_VALUE);
+    return (float) (getRandom() * (double) Float.MAX_VALUE);
   }
 
   protected abstract V newVectorM3F(final V v0);
@@ -58,9 +58,9 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = PVectorM3FContract.getRandomSmall();
-      final float y = PVectorM3FContract.getRandomSmall();
-      final float z = PVectorM3FContract.getRandomSmall();
+      final float x = getRandomSmall();
+      final float y = getRandomSmall();
+      final float z = getRandomSmall();
       final V v = this.newVectorM3F(x, y, z);
 
       final V vr = this.newVectorM3F();
@@ -84,9 +84,9 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = PVectorM3FContract.getRandomSmall();
-      final float y = PVectorM3FContract.getRandomSmall();
-      final float z = PVectorM3FContract.getRandomSmall();
+      final float x = getRandomSmall();
+      final float y = getRandomSmall();
+      final float z = getRandomSmall();
       final V v = this.newVectorM3F(x, y, z);
 
       final float orig_x = v.getXF();
@@ -115,14 +115,14 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 1000.0f;
 
-      final float x0 = (float) (PVectorM3FContract.getRandom() * (double) max);
-      final float y0 = (float) (PVectorM3FContract.getRandom() * (double) max);
-      final float z0 = (float) (PVectorM3FContract.getRandom() * (double) max);
+      final float x0 = (float) (getRandom() * (double) max);
+      final float y0 = (float) (getRandom() * (double) max);
+      final float z0 = (float) (getRandom() * (double) max);
       final V v0 = this.newVectorM3F(x0, y0, z0);
 
-      final float x1 = (float) (PVectorM3FContract.getRandom() * (double) max);
-      final float y1 = (float) (PVectorM3FContract.getRandom() * (double) max);
-      final float z1 = (float) (PVectorM3FContract.getRandom() * (double) max);
+      final float x1 = (float) (getRandom() * (double) max);
+      final float y1 = (float) (getRandom() * (double) max);
+      final float z1 = (float) (getRandom() * (double) max);
       final V v1 = this.newVectorM3F(x1, y1, z1);
 
       final V vr0 = this.newVectorM3F();
@@ -210,17 +210,17 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max = 1000.0f;
 
-      final float x0 = (float) (PVectorM3FContract.getRandom() * (double) max);
-      final float y0 = (float) (PVectorM3FContract.getRandom() * (double) max);
-      final float z0 = (float) (PVectorM3FContract.getRandom() * (double) max);
+      final float x0 = (float) (getRandom() * (double) max);
+      final float y0 = (float) (getRandom() * (double) max);
+      final float z0 = (float) (getRandom() * (double) max);
       final V v0 = this.newVectorM3F(x0, y0, z0);
 
-      final float x1 = (float) (PVectorM3FContract.getRandom() * (double) max);
-      final float y1 = (float) (PVectorM3FContract.getRandom() * (double) max);
-      final float z1 = (float) (PVectorM3FContract.getRandom() * (double) max);
+      final float x1 = (float) (getRandom() * (double) max);
+      final float y1 = (float) (getRandom() * (double) max);
+      final float z1 = (float) (getRandom() * (double) max);
       final V v1 = this.newVectorM3F(x1, y1, z1);
 
-      final float r = (float) (PVectorM3FContract.getRandom() * (double) max);
+      final float r = (float) (getRandom() * (double) max);
 
       final V vr0 = this.newVectorM3F();
       PVectorM3F.addScaled(v0, v1, (double) r, vr0);
@@ -259,7 +259,7 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final float x = (float) PVectorM3FContract.getRandom();
+    final float x = (float) getRandom();
     final float y = x + 1.0f;
     final float z = y + 1.0f;
     final float w = z + 1.0f;
@@ -338,9 +338,9 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = PVectorM3FContract.getRandomLarge();
-      final float y0 = PVectorM3FContract.getRandomLarge();
-      final float z0 = PVectorM3FContract.getRandomLarge();
+      final float x0 = getRandomLarge();
+      final float y0 = getRandomLarge();
+      final float z0 = getRandomLarge();
       final V v0 = this.newVectorM3F(x0, y0, z0);
       final V v1 = this.newVectorM3F(x0, y0, z0);
       final V v2 = this.newVectorM3F(x0, y0, z0);
@@ -363,14 +363,14 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
   @Test public final void testClampByPVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float max_x = PVectorM3FContract.getRandomSmall();
-      final float max_y = PVectorM3FContract.getRandomSmall();
-      final float max_z = PVectorM3FContract.getRandomSmall();
+      final float max_x = getRandomSmall();
+      final float max_y = getRandomSmall();
+      final float max_z = getRandomSmall();
       final V maximum = this.newVectorM3F(max_x, max_y, max_z);
 
-      final float x = PVectorM3FContract.getRandomSmall();
-      final float y = PVectorM3FContract.getRandomSmall();
-      final float z = PVectorM3FContract.getRandomSmall();
+      final float x = getRandomSmall();
+      final float y = getRandomSmall();
+      final float z = getRandomSmall();
       final V v = this.newVectorM3F(x, y, z);
 
       final V vr = this.newVectorM3F();
@@ -396,14 +396,14 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
   @Test public final void testClampByPVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float min_x = PVectorM3FContract.getRandomLarge();
-      final float min_y = PVectorM3FContract.getRandomLarge();
-      final float min_z = PVectorM3FContract.getRandomLarge();
+      final float min_x = getRandomLarge();
+      final float min_y = getRandomLarge();
+      final float min_z = getRandomLarge();
       final V minimum = this.newVectorM3F(min_x, min_y, min_z);
 
-      final float x = PVectorM3FContract.getRandomSmall();
-      final float y = PVectorM3FContract.getRandomSmall();
-      final float z = PVectorM3FContract.getRandomSmall();
+      final float x = getRandomSmall();
+      final float y = getRandomSmall();
+      final float z = getRandomSmall();
       final V v = this.newVectorM3F(x, y, z);
 
       final V vr = this.newVectorM3F();
@@ -429,19 +429,19 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
   @Test public final void testClampByPVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float min_x = PVectorM3FContract.getRandomSmall();
-      final float min_y = PVectorM3FContract.getRandomSmall();
-      final float min_z = PVectorM3FContract.getRandomSmall();
+      final float min_x = getRandomSmall();
+      final float min_y = getRandomSmall();
+      final float min_z = getRandomSmall();
       final V minimum = this.newVectorM3F(min_x, min_y, min_z);
 
-      final float max_x = PVectorM3FContract.getRandomLarge();
-      final float max_y = PVectorM3FContract.getRandomLarge();
-      final float max_z = PVectorM3FContract.getRandomLarge();
+      final float max_x = getRandomLarge();
+      final float max_y = getRandomLarge();
+      final float max_z = getRandomLarge();
       final V maximum = this.newVectorM3F(max_x, max_y, max_z);
 
-      final float x = PVectorM3FContract.getRandomSmall();
-      final float y = PVectorM3FContract.getRandomLarge();
-      final float z = PVectorM3FContract.getRandomLarge();
+      final float x = getRandomSmall();
+      final float y = getRandomLarge();
+      final float z = getRandomLarge();
       final V v = this.newVectorM3F(x, y, z);
 
       final V vr = this.newVectorM3F();
@@ -475,11 +475,11 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
   @Test public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float maximum = PVectorM3FContract.getRandomSmall();
+      final float maximum = getRandomSmall();
 
-      final float x = PVectorM3FContract.getRandomLarge();
-      final float y = PVectorM3FContract.getRandomLarge();
-      final float z = PVectorM3FContract.getRandomLarge();
+      final float x = getRandomLarge();
+      final float y = getRandomLarge();
+      final float z = getRandomLarge();
       final V v = this.newVectorM3F(x, y, z);
 
       final V vr = this.newVectorM3F();
@@ -501,11 +501,11 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
   @Test public final void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float minimum = PVectorM3FContract.getRandomLarge();
+      final float minimum = getRandomLarge();
 
-      final float x = PVectorM3FContract.getRandomSmall();
-      final float y = PVectorM3FContract.getRandomSmall();
-      final float z = PVectorM3FContract.getRandomSmall();
+      final float x = getRandomSmall();
+      final float y = getRandomSmall();
+      final float z = getRandomSmall();
       final V v = this.newVectorM3F(x, y, z);
 
       final V vr = this.newVectorM3F();
@@ -527,12 +527,12 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
   @Test public final void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float minimum = PVectorM3FContract.getRandomSmall();
-      final float maximum = PVectorM3FContract.getRandomLarge();
+      final float minimum = getRandomSmall();
+      final float maximum = getRandomLarge();
 
-      final float x = PVectorM3FContract.getRandomSmall();
-      final float y = PVectorM3FContract.getRandomLarge();
-      final float z = PVectorM3FContract.getRandomLarge();
+      final float x = getRandomSmall();
+      final float y = getRandomLarge();
+      final float z = getRandomLarge();
       final V v = this.newVectorM3F(x, y, z);
 
       final V vr = this.newVectorM3F();
@@ -577,9 +577,9 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
   @Test public final void testCopy2Correct()
   {
     final V v0 = this.newVectorM3F(
-      (float) PVectorM3FContract.getRandom() * Float.MAX_VALUE,
-      (float) PVectorM3FContract.getRandom() * Float.MAX_VALUE,
-      (float) PVectorM3FContract.getRandom() * Float.MAX_VALUE);
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE);
     final V v1 = this.newVectorM3F();
     final V v2 = this.newVectorM3F();
 
@@ -599,9 +599,9 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
   @Test public final void testCopy3Correct()
   {
     final V v0 = this.newVectorM3F(
-      (float) PVectorM3FContract.getRandom() * Float.MAX_VALUE,
-      (float) PVectorM3FContract.getRandom() * Float.MAX_VALUE,
-      (float) PVectorM3FContract.getRandom() * Float.MAX_VALUE);
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE,
+      (float) getRandom() * Float.MAX_VALUE);
     final V v1 = this.newVectorM3F();
     final V v2 = this.newVectorM3F();
 
@@ -624,15 +624,15 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       TestUtilities.getDoubleEqualityContext3dp();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = (float) PVectorM3FContract.getRandom();
-      final float y0 = (float) PVectorM3FContract.getRandom();
-      final float z0 = (float) PVectorM3FContract.getRandom();
+      final float x0 = (float) getRandom();
+      final float y0 = (float) getRandom();
+      final float z0 = (float) getRandom();
       final V v0 = this.newVectorM3F(x0, y0, z0);
       PVectorM3F.normalizeInPlace(v0);
 
-      final float x1 = (float) PVectorM3FContract.getRandom();
-      final float y1 = (float) PVectorM3FContract.getRandom();
-      final float z1 = (float) PVectorM3FContract.getRandom();
+      final float x1 = (float) getRandom();
+      final float y1 = (float) getRandom();
+      final float z1 = (float) getRandom();
       final V v1 = this.newVectorM3F(x1, y1, z1);
       PVectorM3F.normalizeInPlace(v1);
 
@@ -673,14 +673,14 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
   {
     final PVectorM3F.ContextPVM3F c = new PVectorM3F.ContextPVM3F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = PVectorM3FContract.getRandomLarge();
-      final float y0 = PVectorM3FContract.getRandomLarge();
-      final float z0 = PVectorM3FContract.getRandomLarge();
+      final float x0 = getRandomLarge();
+      final float y0 = getRandomLarge();
+      final float z0 = getRandomLarge();
       final V v0 = this.newVectorM3F(x0, y0, z0);
 
-      final float x1 = PVectorM3FContract.getRandomLarge();
-      final float y1 = PVectorM3FContract.getRandomLarge();
-      final float z1 = PVectorM3FContract.getRandomLarge();
+      final float x1 = getRandomLarge();
+      final float y1 = getRandomLarge();
+      final float z1 = getRandomLarge();
       final V v1 = this.newVectorM3F(x1, y1, z1);
 
       Assert.assertTrue(PVectorM3F.distance(c, v0, v1) >= 0.0);
@@ -743,9 +743,9 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       TestUtilities.getDoubleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) PVectorM3FContract.getRandom();
-      final float y = (float) PVectorM3FContract.getRandom();
-      final float z = (float) PVectorM3FContract.getRandom();
+      final float x = (float) getRandom();
+      final float y = (float) getRandom();
+      final float z = (float) getRandom();
       final V q = this.newVectorM3F(x, y, z);
       final double dp = PVectorM3F.dotProduct(q, q);
 
@@ -800,7 +800,7 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
 
   @Test public final void testEqualsNotEqualCorrect()
   {
-    final float x = (float) PVectorM3FContract.getRandom();
+    final float x = (float) getRandom();
     final float y = x + 1.0f;
     final float z = y + 1.0f;
     final float w = z + 1.0f;
@@ -934,14 +934,14 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
     final PVectorM3F.ContextPVM3F c = new PVectorM3F.ContextPVM3F();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = PVectorM3FContract.getRandomLarge();
-      final float y0 = PVectorM3FContract.getRandomLarge();
-      final float z0 = PVectorM3FContract.getRandomLarge();
+      final float x0 = getRandomLarge();
+      final float y0 = getRandomLarge();
+      final float z0 = getRandomLarge();
       final V v0 = this.newVectorM3F(x0, y0, z0);
 
-      final float x1 = PVectorM3FContract.getRandomLarge();
-      final float y1 = PVectorM3FContract.getRandomLarge();
-      final float z1 = PVectorM3FContract.getRandomLarge();
+      final float x1 = getRandomLarge();
+      final float y1 = getRandomLarge();
+      final float z1 = getRandomLarge();
       final V v1 = this.newVectorM3F(x1, y1, z1);
 
       final V vr0 = this.newVectorM3F();
@@ -974,9 +974,9 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
   @Test public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = PVectorM3FContract.getRandomLarge();
-      final float y = PVectorM3FContract.getRandomLarge();
-      final float z = PVectorM3FContract.getRandomLarge();
+      final float x = getRandomLarge();
+      final float y = getRandomLarge();
+      final float z = getRandomLarge();
       final V v = this.newVectorM3F(x, y, z);
 
       final double m = (double) PVectorM3F.magnitude(v);
@@ -990,11 +990,11 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       TestUtilities.getDoubleEqualityContext6dp();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = (float) (PVectorM3FContract.getRandom()
+      final float x = (float) (getRandom()
                                * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
-      final float y = (float) (PVectorM3FContract.getRandom()
+      final float y = (float) (getRandom()
                                * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
-      final float z = (float) (PVectorM3FContract.getRandom()
+      final float z = (float) (getRandom()
                                * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
       final V v = this.newVectorM3F(x, y, z);
 
@@ -1167,9 +1167,9 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = PVectorM3FContract.getRandomLarge();
-      final float y = PVectorM3FContract.getRandomLarge();
-      final float z = PVectorM3FContract.getRandomLarge();
+      final float x = getRandomLarge();
+      final float y = getRandomLarge();
+      final float z = getRandomLarge();
       final V v = this.newVectorM3F(x, y, z);
 
       final V vr = this.newVectorM3F();
@@ -1206,9 +1206,9 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x = PVectorM3FContract.getRandomLarge();
-      final float y = PVectorM3FContract.getRandomLarge();
-      final float z = PVectorM3FContract.getRandomLarge();
+      final float x = getRandomLarge();
+      final float y = getRandomLarge();
+      final float z = getRandomLarge();
       final V v = this.newVectorM3F(x, y, z);
 
       final V vr = this.newVectorM3F();
@@ -1248,14 +1248,14 @@ public abstract class PVectorM3FContract<T, V extends PVector3FType<T>>
       TestUtilities.getSingleEqualityContext();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final float x0 = PVectorM3FContract.getRandomLarge();
-      final float y0 = PVectorM3FContract.getRandomLarge();
-      final float z0 = PVectorM3FContract.getRandomLarge();
+      final float x0 = getRandomLarge();
+      final float y0 = getRandomLarge();
+      final float z0 = getRandomLarge();
       final V v0 = this.newVectorM3F(x0, y0, z0);
 
-      final float x1 = PVectorM3FContract.getRandomLarge();
-      final float y1 = PVectorM3FContract.getRandomLarge();
-      final float z1 = PVectorM3FContract.getRandomLarge();
+      final float x1 = getRandomLarge();
+      final float y1 = getRandomLarge();
+      final float z1 = getRandomLarge();
       final V v1 = this.newVectorM3F(x1, y1, z1);
 
       final V vr0 = this.newVectorM3F();

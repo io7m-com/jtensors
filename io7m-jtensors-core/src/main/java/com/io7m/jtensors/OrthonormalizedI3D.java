@@ -25,7 +25,8 @@ import net.jcip.annotations.Immutable;
  * @since 5.2.0
  */
 
-@Immutable public final class OrthonormalizedI3D
+@Immutable
+public final class OrthonormalizedI3D
 {
   private final VectorI3D rv0;
   private final VectorI3D rv1;
@@ -64,7 +65,8 @@ import net.jcip.annotations.Immutable;
     }
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -119,7 +121,8 @@ import net.jcip.annotations.Immutable;
     return this.rv2;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -129,7 +132,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[OrthonormalizedI3D ");

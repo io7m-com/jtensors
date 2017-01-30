@@ -136,7 +136,7 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     final float x)
   {
     this.buffer.putFloat(
-      QuaternionByteBufferedM4F.getByteOffsetForIndex(o, i), x);
+      getByteOffsetForIndex(o, i), x);
   }
 
   private float getAtOffsetAndIndex(
@@ -144,7 +144,7 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     final int i)
   {
     return this.buffer.getFloat(
-      QuaternionByteBufferedM4F.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public float getYF()

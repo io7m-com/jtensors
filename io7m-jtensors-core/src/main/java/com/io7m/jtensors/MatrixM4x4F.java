@@ -127,7 +127,7 @@ public final class MatrixM4x4F
     final M m0,
     final MatrixReadable4x4FType m1)
   {
-    return MatrixM4x4F.add(m0, m1, m0);
+    return add(m0, m1, m0);
   }
 
   /**
@@ -158,7 +158,7 @@ public final class MatrixM4x4F
     final int row_c,
     final double r)
   {
-    return MatrixM4x4F.addRowScaled(context, m, row_a, row_b, row_c, r, m);
+    return addRowScaled(context, m, row_a, row_b, row_c, r, m);
   }
 
   private static <M extends MatrixWritable4x4FType> M addRowScaledUnsafe(
@@ -208,11 +208,11 @@ public final class MatrixM4x4F
     final double r,
     final M out)
   {
-    return MatrixM4x4F.addRowScaledUnsafe(
+    return addRowScaledUnsafe(
       m,
-      MatrixM4x4F.rowCheck(row_a),
-      MatrixM4x4F.rowCheck(row_b),
-      MatrixM4x4F.rowCheck(row_c),
+      rowCheck(row_a),
+      rowCheck(row_b),
+      rowCheck(row_c),
       r,
       context.v4a,
       context.v4b,
@@ -347,7 +347,7 @@ public final class MatrixM4x4F
     final int row_a,
     final int row_b)
   {
-    return MatrixM4x4F.exchangeRows(context, m, row_a, row_b, m);
+    return exchangeRows(context, m, row_a, row_b, m);
   }
 
   private static <M extends MatrixWritable4x4FType> M exchangeRowsUnsafe(
@@ -391,10 +391,10 @@ public final class MatrixM4x4F
     final int row_b,
     final M out)
   {
-    return MatrixM4x4F.exchangeRowsUnsafe(
+    return exchangeRowsUnsafe(
       m,
-      MatrixM4x4F.rowCheck(row_a),
-      MatrixM4x4F.rowCheck(row_b),
+      rowCheck(row_a),
+      rowCheck(row_b),
       context.v4a,
       context.v4b,
       out);
@@ -406,7 +406,7 @@ public final class MatrixM4x4F
     final Matrix4x4FType temp,
     final M out)
   {
-    final double d = MatrixM4x4F.determinant(m);
+    final double d = determinant(m);
 
     if (d == 0.0) {
       return false;
@@ -743,7 +743,7 @@ public final class MatrixM4x4F
     temp.setR3C2F((float) (r3c2 * d_inv));
     temp.setR3C3F((float) (r3c3 * d_inv));
 
-    MatrixM4x4F.transpose(temp, out);
+    transpose(temp, out);
     return true;
   }
 
@@ -769,7 +769,7 @@ public final class MatrixM4x4F
     final ContextMM4F context,
     final M m)
   {
-    return MatrixM4x4F.invert(context, m, m);
+    return invert(context, m, m);
   }
 
   /**
@@ -795,7 +795,7 @@ public final class MatrixM4x4F
     final MatrixReadable4x4FType m,
     final M out)
   {
-    return MatrixM4x4F.invertActual(m, context.m3a, context.m4a, out);
+    return invertActual(m, context.m3a, context.m4a, out);
   }
 
   /**
@@ -828,9 +828,9 @@ public final class MatrixM4x4F
     final Matrix4x4FType rotation = context.m4a;
     final Matrix4x4FType translation = context.m4b;
 
-    MatrixM4x4F.setIdentity(rotation);
-    MatrixM4x4F.setIdentity(translation);
-    MatrixM4x4F.setIdentity(out_matrix);
+    setIdentity(rotation);
+    setIdentity(translation);
+    setIdentity(out_matrix);
 
     /**
      * Calculate "forward" vector
@@ -874,13 +874,13 @@ public final class MatrixM4x4F
      */
 
     move.set3F(-origin.getXF(), -origin.getYF(), -origin.getZF());
-    MatrixM4x4F.makeTranslation3F(move, translation);
+    makeTranslation3F(move, translation);
 
     /**
      * Produce output matrix
      */
 
-    MatrixM4x4F.multiply(rotation, translation, out_matrix);
+    multiply(rotation, translation, out_matrix);
   }
 
   /**
@@ -1264,7 +1264,7 @@ public final class MatrixM4x4F
     final M m0,
     final MatrixReadable4x4FType m1)
   {
-    return MatrixM4x4F.multiply(m0, m1, m0);
+    return multiply(m0, m1, m0);
   }
 
   private static <V extends VectorWritable4FType> V multiplyVector4FActual(
@@ -1308,7 +1308,7 @@ public final class MatrixM4x4F
     final VectorReadable4FType v,
     final V out)
   {
-    return MatrixM4x4F.multiplyVector4FActual(
+    return multiplyVector4FActual(
       m, v, context.v4a, context.v4b, out);
   }
 
@@ -1398,7 +1398,7 @@ public final class MatrixM4x4F
     final M m,
     final double r)
   {
-    return MatrixM4x4F.scale(m, r, m);
+    return scale(m, r, m);
   }
 
   /**
@@ -1425,8 +1425,8 @@ public final class MatrixM4x4F
     final int row,
     final double r)
   {
-    return MatrixM4x4F.scaleRowUnsafe(
-      m, MatrixM4x4F.rowCheck(row), r, context.v4a, m);
+    return scaleRowUnsafe(
+      m, rowCheck(row), r, context.v4a, m);
   }
 
   private static <M extends MatrixWritable4x4FType> M scaleRowUnsafe(
@@ -1467,8 +1467,8 @@ public final class MatrixM4x4F
     final double r,
     final M out)
   {
-    return MatrixM4x4F.scaleRowUnsafe(
-      m, MatrixM4x4F.rowCheck(row), r, context.v4a, out);
+    return scaleRowUnsafe(
+      m, rowCheck(row), r, context.v4a, out);
   }
 
   /**
@@ -1680,16 +1680,16 @@ public final class MatrixM4x4F
     final MatrixReadable4x4FType m0,
     final MatrixReadable4x4FType m1)
   {
-    if (!MatrixM4x4F.compareRow0(m0, m1)) {
+    if (!compareRow0(m0, m1)) {
       return false;
     }
-    if (!MatrixM4x4F.compareRow1(m0, m1)) {
+    if (!compareRow1(m0, m1)) {
       return false;
     }
-    if (!MatrixM4x4F.compareRow2(m0, m1)) {
+    if (!compareRow2(m0, m1)) {
       return false;
     }
-    return MatrixM4x4F.compareRow3(m0, m1);
+    return compareRow3(m0, m1);
   }
 
   /**
@@ -1860,12 +1860,12 @@ public final class MatrixM4x4F
     private final Matrix3x3FType m3a = MatrixHeapArrayM3x3F.newMatrix();
     private final Matrix4x4FType m4a = MatrixHeapArrayM4x4F.newMatrix();
     private final Matrix4x4FType m4b = MatrixHeapArrayM4x4F.newMatrix();
-    private final VectorM3F      v3a = new VectorM3F();
-    private final VectorM3F      v3b = new VectorM3F();
-    private final VectorM3F      v3c = new VectorM3F();
-    private final VectorM3F      v3d = new VectorM3F();
-    private final VectorM4F      v4a = new VectorM4F();
-    private final VectorM4F      v4b = new VectorM4F();
+    private final VectorM3F v3a = new VectorM3F();
+    private final VectorM3F v3b = new VectorM3F();
+    private final VectorM3F v3c = new VectorM3F();
+    private final VectorM3F v3d = new VectorM3F();
+    private final VectorM4F v4a = new VectorM4F();
+    private final VectorM4F v4b = new VectorM4F();
 
     /**
      * Construct a new context.

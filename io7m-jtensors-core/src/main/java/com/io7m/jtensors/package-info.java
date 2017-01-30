@@ -18,5 +18,6 @@
  * Core vector and matrix types.
  */
 
-@com.io7m.jnull.NonNullByDefault package com.io7m.jtensors;
+@com.io7m.jnull.NonNullByDefault
+package com.io7m.jtensors;
 

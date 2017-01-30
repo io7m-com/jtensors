@@ -123,7 +123,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     PVectorReadable3FType<T>> V absoluteInPlace(
     final V v)
   {
-    return PVectorM3F.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -168,7 +168,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final V v0,
     final PVectorReadable3FType<T> v1)
   {
-    return PVectorM3F.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -219,7 +219,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final PVectorReadable3FType<T> v1,
     final double r)
   {
-    return PVectorM3F.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -333,7 +333,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final PVectorReadable3FType<T> minimum,
     final PVectorReadable3FType<T> maximum)
   {
-    return PVectorM3F.clampByPVector(v, minimum, maximum, v);
+    return clampByPVector(v, minimum, maximum, v);
   }
 
   /**
@@ -356,7 +356,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final float minimum,
     final float maximum)
   {
-    return PVectorM3F.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -430,7 +430,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final V v,
     final PVectorReadable3FType<T> maximum)
   {
-    return PVectorM3F.clampMaximumByPVector(v, maximum, v);
+    return clampMaximumByPVector(v, maximum, v);
   }
 
   /**
@@ -451,7 +451,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final V v,
     final float maximum)
   {
-    return PVectorM3F.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -525,7 +525,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final V v,
     final PVectorReadable3FType<T> minimum)
   {
-    return PVectorM3F.clampMinimumByPVector(v, minimum, v);
+    return clampMinimumByPVector(v, minimum, v);
   }
 
   /**
@@ -546,7 +546,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final V v,
     final float minimum)
   {
-    return PVectorM3F.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -613,7 +613,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final PVectorReadable3FType<T> v1)
   {
     final PVectorM3F<T> vr = (PVectorM3F<T>) c.va;
-    return (double) PVectorM3F.magnitude(PVectorM3F.subtract(v0, v1, vr));
+    return (double) magnitude(subtract(v0, v1, vr));
   }
 
   /**
@@ -668,9 +668,9 @@ public final class PVectorM3F<T> implements PVector3FType<T>
   {
     final PVectorM3F<T> va = (PVectorM3F<T>) c.va;
     final PVectorM3F<T> vb = (PVectorM3F<T>) c.vb;
-    PVectorM3F.scale(v0, 1.0 - alpha, va);
-    PVectorM3F.scale(v1, alpha, vb);
-    return PVectorM3F.add(va, vb, r);
+    scale(v0, 1.0 - alpha, va);
+    scale(v1, alpha, vb);
+    return add(va, vb, r);
   }
 
   /**
@@ -687,7 +687,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
   public static <T> float magnitude(
     final PVectorReadable3FType<T> v)
   {
-    return (float) Math.sqrt(PVectorM3F.magnitudeSquared(v));
+    return (float) Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -702,7 +702,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
   public static <T> double magnitudeSquared(
     final PVectorReadable3FType<T> v)
   {
-    return PVectorM3F.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -722,10 +722,10 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final PVectorReadable3FType<T> v,
     final V out)
   {
-    final double m = PVectorM3F.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return PVectorM3F.scale(v, reciprocal, out);
+      return scale(v, reciprocal, out);
     }
     out.set3F(v.getXF(), v.getYF(), v.getZF());
     return out;
@@ -747,7 +747,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     PVectorReadable3FType<T>> V normalizeInPlace(
     final V v)
   {
-    return PVectorM3F.normalize(v, v);
+    return normalize(v, v);
   }
 
   /**
@@ -777,11 +777,11 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final PVectorM3F<T> va = (PVectorM3F<T>) c.va;
     final PVectorM3F<T> vb = (PVectorM3F<T>) c.vb;
     final PVectorM3F<T> vc = (PVectorM3F<T>) c.vc;
-    PVectorM3F.normalize(v0, va);
-    PVectorM3F.scale(va, PVectorM3F.dotProduct(v1, va), vb);
-    PVectorM3F.normalizeInPlace(PVectorM3F.subtract(v1, vb, vc));
-    PVectorM3F.copy(va, v0_out);
-    PVectorM3F.copy(vc, v1_out);
+    normalize(v0, va);
+    scale(va, dotProduct(v1, va), vb);
+    normalizeInPlace(subtract(v1, vb, vc));
+    copy(va, v0_out);
+    copy(vc, v1_out);
   }
 
   /**
@@ -806,11 +806,11 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final PVectorM3F<T> va = (PVectorM3F<T>) c.va;
     final PVectorM3F<T> vb = (PVectorM3F<T>) c.vb;
     final PVectorM3F<T> vc = (PVectorM3F<T>) c.vc;
-    PVectorM3F.normalize(v0, va);
-    PVectorM3F.scale(va, PVectorM3F.dotProduct(v1, va), vb);
-    PVectorM3F.normalizeInPlace(PVectorM3F.subtract(v1, vb, vc));
-    PVectorM3F.copy(va, v0);
-    PVectorM3F.copy(vc, v1);
+    normalize(v0, va);
+    scale(va, dotProduct(v1, va), vb);
+    normalizeInPlace(subtract(v1, vb, vc));
+    copy(va, v0);
+    copy(vc, v1);
   }
 
   /**
@@ -831,11 +831,11 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final PVectorReadable3FType<T> q,
     final V r)
   {
-    final double dot = PVectorM3F.dotProduct(p, q);
-    final double qms = PVectorM3F.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
 
-    return PVectorM3F.scale(p, s, r);
+    return scale(p, s, r);
   }
 
   /**
@@ -880,7 +880,7 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final V v,
     final double r)
   {
-    return PVectorM3F.scale(v, r, v);
+    return scale(v, r, v);
   }
 
   /**
@@ -925,34 +925,39 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     final V v0,
     final PVectorReadable3FType<T> v1)
   {
-    return PVectorM3F.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2F(
+  @Override
+  public void copyFrom2F(
     final VectorReadable2FType in_v)
   {
     VectorM2F.copy(in_v, this);
   }
 
-  @Override public void copyFrom3F(
+  @Override
+  public void copyFrom3F(
     final VectorReadable3FType in_v)
   {
     VectorM3F.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped2F(
+  @Override
+  public void copyFromTyped2F(
     final PVectorReadable2FType<T> in_v)
   {
     PVectorM2F.copy(in_v, this);
   }
 
-  @Override public void copyFromTyped3F(
+  @Override
+  public void copyFromTyped3F(
     final PVectorReadable3FType<T> in_v)
   {
-    PVectorM3F.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -974,40 +979,47 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     return Float.floatToIntBits(this.z) == Float.floatToIntBits(other.z);
   }
 
-  @Override public float getXF()
+  @Override
+  public float getXF()
   {
     return this.x;
   }
 
-  @Override public void setXF(
+  @Override
+  public void setXF(
     final float in_x)
   {
     this.x = in_x;
   }
 
-  @Override public float getYF()
+  @Override
+  public float getYF()
   {
     return this.y;
   }
 
-  @Override public void setYF(
+  @Override
+  public void setYF(
     final float in_y)
   {
     this.y = in_y;
   }
 
-  @Override public float getZF()
+  @Override
+  public float getZF()
   {
     return this.z;
   }
 
-  @Override public void setZF(
+  @Override
+  public void setZF(
     final float in_z)
   {
     this.z = in_z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -1017,7 +1029,8 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     return result;
   }
 
-  @Override public void set2F(
+  @Override
+  public void set2F(
     final float in_x,
     final float in_y)
   {
@@ -1025,7 +1038,8 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     this.y = in_y;
   }
 
-  @Override public void set3F(
+  @Override
+  public void set3F(
     final float in_x,
     final float in_y,
     final float in_z)
@@ -1035,7 +1049,8 @@ public final class PVectorM3F<T> implements PVector3FType<T>
     this.z = in_z;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorM3F ");

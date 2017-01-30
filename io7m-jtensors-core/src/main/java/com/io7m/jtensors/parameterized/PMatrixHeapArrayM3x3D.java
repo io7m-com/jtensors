@@ -79,7 +79,8 @@ public final class PMatrixHeapArrayM3x3D<T0, T1>
     return new PMatrixHeapArrayM3x3D<T0, T1>(m);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -96,19 +97,22 @@ public final class PMatrixHeapArrayM3x3D<T0, T1>
     return MatrixM3x3D.compareElements(this, other);
   }
 
-  @Override public double getRowColumnD(
+  @Override
+  public double getRowColumnD(
     final int row,
     final int column)
   {
     return this.elements[row][column];
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     return MatrixM3x3D.hashElements(this);
   }
 
-  @Override public void setRowColumnD(
+  @Override
+  public void setRowColumnD(
     final int row,
     final int column,
     final double value)
@@ -116,21 +120,24 @@ public final class PMatrixHeapArrayM3x3D<T0, T1>
     this.elements[row][column] = value;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
     MatrixM3x3D.showElements(this, builder);
     return builder.toString();
   }
 
-  @Override public <V extends VectorWritable3DType> void getRow3D(
+  @Override
+  public <V extends VectorWritable3DType> void getRow3D(
     final int row,
     final V out)
   {
     this.getRow3DUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable3DType> void getRow3DUnsafe(
+  @Override
+  public <V extends VectorWritable3DType> void getRow3DUnsafe(
     final int row,
     final V out)
   {
@@ -140,24 +147,28 @@ public final class PMatrixHeapArrayM3x3D<T0, T1>
     out.set3D(x, y, z);
   }
 
-  @Override public double getR0C2D()
+  @Override
+  public double getR0C2D()
   {
     return this.elements[0][2];
   }
 
-  @Override public void setR0C2D(final double x)
+  @Override
+  public void setR0C2D(final double x)
   {
     this.elements[0][2] = x;
   }
 
-  @Override public void setRowWith3D(
+  @Override
+  public void setRowWith3D(
     final int row,
     final VectorReadable3DType v)
   {
     this.setRowWith3DUnsafe(row, v);
   }
 
-  @Override public void setRowWith3DUnsafe(
+  @Override
+  public void setRowWith3DUnsafe(
     final int row,
     final VectorReadable3DType v)
   {
@@ -166,54 +177,64 @@ public final class PMatrixHeapArrayM3x3D<T0, T1>
     this.elements[row][2] = v.getZD();
   }
 
-  @Override public double getR1C2D()
+  @Override
+  public double getR1C2D()
   {
     return this.elements[1][2];
   }
 
-  @Override public void setR1C2D(final double x)
+  @Override
+  public void setR1C2D(final double x)
   {
     this.elements[1][2] = x;
   }
 
-  @Override public double getR2C0D()
+  @Override
+  public double getR2C0D()
   {
     return this.elements[2][0];
   }
 
-  @Override public void setR2C0D(final double x)
+  @Override
+  public void setR2C0D(final double x)
   {
     this.elements[2][0] = x;
   }
 
-  @Override public double getR2C1D()
+  @Override
+  public double getR2C1D()
   {
     return this.elements[2][1];
   }
 
-  @Override public void setR2C1D(final double x)
+  @Override
+  public void setR2C1D(final double x)
   {
     this.elements[2][1] = x;
   }
 
-  @Override public double getR2C2D()
+  @Override
+  public double getR2C2D()
   {
     return this.elements[2][2];
   }
 
-  @Override public void setR2C2D(final double x)
+  @Override
+  public void setR2C2D(final double x)
   {
     this.elements[2][2] = x;
   }
 
-  @Override public <V extends VectorWritable2DType> void getRow2D(
+  @Override
+  public <V extends VectorWritable2DType> void getRow2D(
     final int row,
     final V out)
   {
     this.getRow2DUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
+  @Override
+  public <V extends VectorWritable2DType> void getRow2DUnsafe(
     final int row,
     final V out)
   {
@@ -222,24 +243,28 @@ public final class PMatrixHeapArrayM3x3D<T0, T1>
     out.set2D(x, y);
   }
 
-  @Override public double getR0C0D()
+  @Override
+  public double getR0C0D()
   {
     return this.elements[0][0];
   }
 
-  @Override public void setR0C0D(final double x)
+  @Override
+  public void setR0C0D(final double x)
   {
     this.elements[0][0] = x;
   }
 
-  @Override public void setRowWith2D(
+  @Override
+  public void setRowWith2D(
     final int row,
     final VectorReadable2DType v)
   {
     this.setRowWith2DUnsafe(row, v);
   }
 
-  @Override public void setRowWith2DUnsafe(
+  @Override
+  public void setRowWith2DUnsafe(
     final int row,
     final VectorReadable2DType v)
   {
@@ -247,32 +272,38 @@ public final class PMatrixHeapArrayM3x3D<T0, T1>
     this.elements[row][1] = v.getYD();
   }
 
-  @Override public double getR1C0D()
+  @Override
+  public double getR1C0D()
   {
     return this.elements[1][0];
   }
 
-  @Override public void setR1C0D(final double x)
+  @Override
+  public void setR1C0D(final double x)
   {
     this.elements[1][0] = x;
   }
 
-  @Override public double getR0C1D()
+  @Override
+  public double getR0C1D()
   {
     return this.elements[0][1];
   }
 
-  @Override public void setR0C1D(final double x)
+  @Override
+  public void setR0C1D(final double x)
   {
     this.elements[0][1] = x;
   }
 
-  @Override public double getR1C1D()
+  @Override
+  public double getR1C1D()
   {
     return this.elements[1][1];
   }
 
-  @Override public void setR1C1D(final double x)
+  @Override
+  public void setR1C1D(final double x)
   {
     this.elements[1][1] = x;
   }

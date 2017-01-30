@@ -1330,7 +1330,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorM3F v_got = new VectorM3F();
     final VectorReadable3FType v_exp = new VectorM3F(0.0f, 0.0f, -1.0f);
 
-    MatrixM3x3F.makeRotation(0.0, Matrix3x3FContract.AXIS_X, m);
+    MatrixM3x3F.makeRotation(0.0, AXIS_X, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1356,7 +1356,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorM3F v_got = new VectorM3F();
     final VectorReadable3FType v_exp = new VectorM3F(0.0f, 0.0f, -1.0f);
 
-    MatrixM3x3F.makeRotation(0.0, Matrix3x3FContract.AXIS_Y, m);
+    MatrixM3x3F.makeRotation(0.0, AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1382,7 +1382,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorM3F v_got = new VectorM3F();
     final VectorReadable3FType v_exp = new VectorM3F(0.0f, 0.0f, -1.0f);
 
-    MatrixM3x3F.makeRotation(0.0, Matrix3x3FContract.AXIS_Z, m);
+    MatrixM3x3F.makeRotation(0.0, AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1420,7 +1420,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       0.0f, 6.1232339957367E-17f, 1.0f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(90.0), Matrix3x3FContract.AXIS_X, m);
+      Math.toRadians(90.0), AXIS_X, m);
     
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
@@ -1464,7 +1464,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       -1.0f, 0.0f, -6.1232339957367E-17f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(90.0), Matrix3x3FContract.AXIS_Y, m);
+      Math.toRadians(90.0), AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1500,7 +1500,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       -1.0f, 6.123233995736766E-17f, 0.0f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(90.0), Matrix3x3FContract.AXIS_Z, m);
+      Math.toRadians(90.0), AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1543,7 +1543,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       0.0f, 6.1232339957367E-17f, -1.0f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(-90.0), Matrix3x3FContract.AXIS_X, m);
+      Math.toRadians(-90.0), AXIS_X, m);
     
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
@@ -1587,7 +1587,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       1.0f, 0.0f, -6.1232339957367E-17f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(-90.0), Matrix3x3FContract.AXIS_Y, m);
+      Math.toRadians(-90.0), AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1623,7 +1623,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       1.0f, 6.123233995736766E-17f, 0.0f);
 
     MatrixM3x3F.makeRotation(
-      Math.toRadians(-90.0), Matrix3x3FContract.AXIS_Z, m);
+      Math.toRadians(-90.0), AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
     
@@ -1648,7 +1648,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     {
       final T r = this.newMatrix();
       MatrixM3x3F.makeRotation(
-        Math.toRadians(45.0), Matrix3x3FContract.AXIS_X, r);
+        Math.toRadians(45.0), AXIS_X, r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
@@ -1668,7 +1668,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     {
       final T r = this.newMatrix();
       MatrixM3x3F.makeRotation(
-        Math.toRadians(45.0), Matrix3x3FContract.AXIS_Y, r);
+        Math.toRadians(45.0), AXIS_Y, r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
@@ -1688,7 +1688,7 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     {
       final T r = this.newMatrix();
       MatrixM3x3F.makeRotation(
-        Math.toRadians(45.0), Matrix3x3FContract.AXIS_Z, r);
+        Math.toRadians(45.0), AXIS_Z, r);
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 

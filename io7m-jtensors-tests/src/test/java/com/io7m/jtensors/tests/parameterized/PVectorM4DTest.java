@@ -69,7 +69,7 @@ public final class PVectorM4DTest<T>
 
   @Override protected Logger logger()
   {
-    return PVectorM4DTest.LOG;
+    return LOG;
   }
 
   @Override protected PVectorM4D<T> newVectorM4D()
@@ -122,7 +122,7 @@ public final class PVectorM4DTest<T>
     final SortedMap<String, Class<?>> interfaces =
       TestUtilities.getInterfaces(v.getClass());
     for (final String k : interfaces.keySet()) {
-      PVectorM4DTest.LOG.debug(
+      LOG.debug(
         "{} implements {}", PVectorM4D.class, k);
     }
 

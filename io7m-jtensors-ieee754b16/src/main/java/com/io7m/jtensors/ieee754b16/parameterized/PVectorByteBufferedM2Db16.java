@@ -125,7 +125,7 @@ public final class PVectorByteBufferedM2Db16<T> extends ByteBuffered
   {
     final char k = Binary16.packDouble(x);
     this.buffer.putChar(
-      PVectorByteBufferedM2Db16.getByteOffsetForIndex(o, i), k);
+      getByteOffsetForIndex(o, i), k);
   }
 
   private double getAtOffsetAndIndex(
@@ -133,7 +133,7 @@ public final class PVectorByteBufferedM2Db16<T> extends ByteBuffered
     final int i)
   {
     final char k = this.buffer.getChar(
-      PVectorByteBufferedM2Db16.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
     return Binary16.unpackDouble(k);
   }
 

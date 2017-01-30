@@ -26,11 +26,13 @@ import net.jcip.annotations.Immutable;
  * @since 7.0.0
  */
 
-@EqualityStructural @Immutable public final class MatrixI2x2F
+@EqualityStructural
+@Immutable
+public final class MatrixI2x2F
   implements MatrixReadable2x2FType
 {
-  private static final float[][]   IDENTITY  = MatrixI2x2F.makeIdentity();
-  private static final MatrixI2x2F IDENTITYM = MatrixI2x2F.makeIdentityM();
+  private static final float[][] IDENTITY = makeIdentity();
+  private static final MatrixI2x2F IDENTITYM = makeIdentityM();
   private final float[][] elements;
 
   private MatrixI2x2F(
@@ -45,7 +47,7 @@ import net.jcip.annotations.Immutable;
 
   public static MatrixI2x2F identity()
   {
-    return MatrixI2x2F.IDENTITYM;
+    return IDENTITYM;
   }
 
   private static float[][] makeIdentity()
@@ -65,7 +67,7 @@ import net.jcip.annotations.Immutable;
 
   private static MatrixI2x2F makeIdentityM()
   {
-    return new MatrixI2x2F(MatrixI2x2F.IDENTITY);
+    return new MatrixI2x2F(IDENTITY);
   }
 
   /**
@@ -114,7 +116,8 @@ import net.jcip.annotations.Immutable;
     return new MatrixI2x2F(e);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -130,14 +133,16 @@ import net.jcip.annotations.Immutable;
     return MatrixM2x2F.compareElements(this, other);
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2F(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2F(
     final int row,
     final V out)
   {
     this.getRow2FUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2FUnsafe(
     final int row,
     final V out)
   {
@@ -145,22 +150,26 @@ import net.jcip.annotations.Immutable;
       this.elements[row][0], this.elements[row][1]);
   }
 
-  @Override public float getR0C0F()
+  @Override
+  public float getR0C0F()
   {
     return this.elements[0][0];
   }
 
-  @Override public float getR1C0F()
+  @Override
+  public float getR1C0F()
   {
     return this.elements[1][0];
   }
 
-  @Override public float getR0C1F()
+  @Override
+  public float getR0C1F()
   {
     return this.elements[0][1];
   }
 
-  @Override public float getR1C1F()
+  @Override
+  public float getR1C1F()
   {
     return this.elements[1][1];
   }
@@ -172,14 +181,16 @@ import net.jcip.annotations.Immutable;
    * @return The value at the given row and column
    */
 
-  @Override public float getRowColumnF(
+  @Override
+  public float getRowColumnF(
     final int row,
     final int col)
   {
     return this.elements[row][col];
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     return MatrixM2x2F.hashElements(this);
   }
@@ -200,7 +211,8 @@ import net.jcip.annotations.Immutable;
     m.setR1C1F(this.getR1C1F());
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
     MatrixM2x2F.showElements(this, builder);

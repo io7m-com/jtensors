@@ -35,7 +35,8 @@ import com.io7m.junreachable.UnreachableCodeException;
  * @since 7.0.0
  */
 
-@SuppressWarnings("unchecked") public final class PMatrixM4x4D
+@SuppressWarnings("unchecked")
+public final class PMatrixM4x4D
 {
   private PMatrixM4x4D()
   {
@@ -414,7 +415,7 @@ import com.io7m.junreachable.UnreachableCodeException;
     final PMatrixReadable4x4DType<T0, T1> m,
     final MOUT out)
   {
-    return PMatrixM4x4D.invertActual(m, context.m3a, context.m4a, out);
+    return invertActual(m, context.m3a, context.m4a, out);
   }
 
   /**
@@ -602,7 +603,7 @@ import com.io7m.junreachable.UnreachableCodeException;
     final PVectorReadable4DType<T0> v,
     final V out)
   {
-    return PMatrixM4x4D.multiplyVector4DActual(
+    return multiplyVector4DActual(
       m, v, context.v4a, context.v4b, out);
   }
 
@@ -649,12 +650,12 @@ import com.io7m.junreachable.UnreachableCodeException;
     private final Matrix3x3DType m3a = MatrixHeapArrayM3x3D.newMatrix();
     private final Matrix4x4DType m4a = MatrixHeapArrayM4x4D.newMatrix();
     private final Matrix4x4DType m4b = MatrixHeapArrayM4x4D.newMatrix();
-    private final VectorM3D      v3a = new VectorM3D();
-    private final VectorM3D      v3b = new VectorM3D();
-    private final VectorM3D      v3c = new VectorM3D();
-    private final VectorM3D      v3d = new VectorM3D();
-    private final VectorM4D      v4a = new VectorM4D();
-    private final VectorM4D      v4b = new VectorM4D();
+    private final VectorM3D v3a = new VectorM3D();
+    private final VectorM3D v3b = new VectorM3D();
+    private final VectorM3D v3c = new VectorM3D();
+    private final VectorM3D v3d = new VectorM3D();
+    private final VectorM4D v4a = new VectorM4D();
+    private final VectorM4D v4b = new VectorM4D();
 
     /**
      * Construct a new context.

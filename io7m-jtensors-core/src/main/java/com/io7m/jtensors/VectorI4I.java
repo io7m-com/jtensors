@@ -27,7 +27,8 @@ import net.jcip.annotations.Immutable;
  * multiple threads. </p>
  */
 
-@Immutable public final class VectorI4I implements VectorReadable4IType
+@Immutable
+public final class VectorI4I implements VectorReadable4IType
 {
   /**
    * The zero vector.
@@ -337,7 +338,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4IType v1)
     throws ArithmeticException
   {
-    return VectorI4I.magnitude(VectorI4I.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -397,9 +398,9 @@ import net.jcip.annotations.Immutable;
     final double alpha)
     throws ArithmeticException
   {
-    final VectorI4I w0 = VectorI4I.scale(v0, 1.0 - alpha);
-    final VectorI4I w1 = VectorI4I.scale(v1, alpha);
-    return VectorI4I.add(w0, w1);
+    final VectorI4I w0 = scale(v0, 1.0 - alpha);
+    final VectorI4I w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -420,7 +421,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4IType v)
     throws ArithmeticException
   {
-    return Cast.castToInt(Math.sqrt((double) VectorI4I.magnitudeSquared(v)));
+    return Cast.castToInt(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -439,7 +440,7 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4IType v)
     throws ArithmeticException
   {
-    return VectorI4I.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -461,10 +462,10 @@ import net.jcip.annotations.Immutable;
     final VectorReadable4IType q)
     throws ArithmeticException
   {
-    final int dot = VectorI4I.dotProduct(p, q);
-    final int qms = VectorI4I.magnitudeSquared(q);
+    final int dot = dotProduct(p, q);
+    final int qms = magnitudeSquared(q);
     final int s = dot / qms;
-    return VectorI4I.scale(p, (double) s);
+    return scale(p, (double) s);
   }
 
   /**
@@ -515,7 +516,8 @@ import net.jcip.annotations.Immutable;
     return new VectorI4I(x, y, z, w);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -540,27 +542,32 @@ import net.jcip.annotations.Immutable;
     return this.w == other.w;
   }
 
-  @Override public int getWI()
+  @Override
+  public int getWI()
   {
     return this.w;
   }
 
-  @Override public int getXI()
+  @Override
+  public int getXI()
   {
     return this.x;
   }
 
-  @Override public int getYI()
+  @Override
+  public int getYI()
   {
     return this.y;
   }
 
-  @Override public int getZI()
+  @Override
+  public int getZI()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -571,7 +578,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorI4I ");

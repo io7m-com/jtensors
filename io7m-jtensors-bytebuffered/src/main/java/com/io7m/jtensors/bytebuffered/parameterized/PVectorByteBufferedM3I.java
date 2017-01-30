@@ -132,7 +132,7 @@ public final class PVectorByteBufferedM3I<T> extends ByteBuffered
     final int i,
     final int x)
   {
-    this.buffer.putInt(PVectorByteBufferedM3I.getByteOffsetForIndex(o, i), x);
+    this.buffer.putInt(getByteOffsetForIndex(o, i), x);
   }
 
   private int getAtOffsetAndIndex(
@@ -140,7 +140,7 @@ public final class PVectorByteBufferedM3I<T> extends ByteBuffered
     final int i)
   {
     return this.buffer.getInt(
-      PVectorByteBufferedM3I.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public int getYI()

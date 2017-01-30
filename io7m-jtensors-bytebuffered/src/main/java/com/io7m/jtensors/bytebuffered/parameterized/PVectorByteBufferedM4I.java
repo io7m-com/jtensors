@@ -143,7 +143,7 @@ public final class PVectorByteBufferedM4I<T> extends ByteBuffered implements PVe
     final int i,
     final int x)
   {
-    this.buffer.putInt(PVectorByteBufferedM4I.getByteOffsetForIndex(o, i), x);
+    this.buffer.putInt(getByteOffsetForIndex(o, i), x);
   }
 
   private int getAtOffsetAndIndex(
@@ -151,7 +151,7 @@ public final class PVectorByteBufferedM4I<T> extends ByteBuffered implements PVe
     final int i)
   {
     return this.buffer.getInt(
-      PVectorByteBufferedM4I.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public int getYI()

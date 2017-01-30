@@ -42,12 +42,12 @@ public final class MatrixDirectM4x4F implements MatrixDirect4x4FType
     VIEW_ROWS = 4;
     VIEW_COLS = 4;
     VIEW_ELEMENT_SIZE = 4;
-    VIEW_ELEMENTS = MatrixDirectM4x4F.VIEW_ROWS * MatrixDirectM4x4F.VIEW_COLS;
+    VIEW_ELEMENTS = VIEW_ROWS * VIEW_COLS;
     VIEW_BYTES =
-      MatrixDirectM4x4F.VIEW_ELEMENTS * MatrixDirectM4x4F.VIEW_ELEMENT_SIZE;
+      VIEW_ELEMENTS * VIEW_ELEMENT_SIZE;
   }
 
-  private final ByteBuffer  data;
+  private final ByteBuffer data;
   private final FloatBuffer view;
 
   private MatrixDirectM4x4F(final @Nullable MatrixReadable4x4FType m)
@@ -56,7 +56,7 @@ public final class MatrixDirectM4x4F implements MatrixDirect4x4FType
     assert order != null;
 
     final ByteBuffer b =
-      ByteBuffer.allocateDirect(MatrixDirectM4x4F.VIEW_BYTES);
+      ByteBuffer.allocateDirect(VIEW_BYTES);
     b.order(order);
 
     final FloatBuffer v = b.asFloatBuffer();
@@ -97,10 +97,10 @@ public final class MatrixDirectM4x4F implements MatrixDirect4x4FType
   private static int columnCheck(
     final int column)
   {
-    if ((column < 0) || (column >= MatrixDirectM4x4F.VIEW_COLS)) {
+    if ((column < 0) || (column >= VIEW_COLS)) {
       throw new IndexOutOfBoundsException(
         "column must be in the range 0 <= row < "
-        + MatrixDirectM4x4F.VIEW_COLS);
+          + VIEW_COLS);
     }
     return column;
   }
@@ -109,8 +109,8 @@ public final class MatrixDirectM4x4F implements MatrixDirect4x4FType
     final int row,
     final int column)
   {
-    return MatrixDirectM4x4F.indexUnsafe(
-      MatrixDirectM4x4F.rowCheck(row), MatrixDirectM4x4F.columnCheck(column));
+    return indexUnsafe(
+      rowCheck(row), columnCheck(column));
   }
 
   /**
@@ -126,20 +126,21 @@ public final class MatrixDirectM4x4F implements MatrixDirect4x4FType
     final int row,
     final int column)
   {
-    return (column * MatrixDirectM4x4F.VIEW_COLS) + row;
+    return (column * VIEW_COLS) + row;
   }
 
   private static int rowCheck(
     final int row)
   {
-    if ((row < 0) || (row >= MatrixDirectM4x4F.VIEW_COLS)) {
+    if ((row < 0) || (row >= VIEW_COLS)) {
       throw new IndexOutOfBoundsException(
-        "row must be in the range 0 <= row < " + MatrixDirectM4x4F.VIEW_COLS);
+        "row must be in the range 0 <= row < " + VIEW_COLS);
     }
     return row;
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -156,333 +157,386 @@ public final class MatrixDirectM4x4F implements MatrixDirect4x4FType
     return MatrixM4x4F.compareElements(this, other);
   }
 
-  @Override public FloatBuffer getDirectFloatBuffer()
+  @Override
+  public FloatBuffer getDirectFloatBuffer()
   {
     return this.view;
   }
 
-  @Override public <V extends VectorWritable4FType> void getRow4F(
+  @Override
+  public <V extends VectorWritable4FType> void getRow4F(
     final int row,
     final V out)
   {
-    MatrixDirectM4x4F.rowCheck(row);
+    rowCheck(row);
     this.getRow4FUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable4FType> void getRow4FUnsafe(
+  @Override
+  public <V extends VectorWritable4FType> void getRow4FUnsafe(
     final int row,
     final V out)
   {
-    final float x = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 0));
-    final float y = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 1));
-    final float z = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 2));
-    final float w = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 3));
+    final float x = this.view.get(indexUnsafe(row, 0));
+    final float y = this.view.get(indexUnsafe(row, 1));
+    final float z = this.view.get(indexUnsafe(row, 2));
+    final float w = this.view.get(indexUnsafe(row, 3));
     out.set4F(x, y, z, w);
   }
 
-  @Override public float getR0C3F()
+  @Override
+  public float getR0C3F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(0, 3));
+    return this.view.get(indexUnsafe(0, 3));
   }
 
-  @Override public void setR0C3F(final float x)
+  @Override
+  public void setR0C3F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(0, 3), x);
+    this.view.put(indexUnsafe(0, 3), x);
   }
 
-  @Override public void setRowWith4F(
+  @Override
+  public void setRowWith4F(
     final int row,
     final VectorReadable4FType v)
   {
-    MatrixDirectM4x4F.rowCheck(row);
+    rowCheck(row);
     this.setRowWith4FUnsafe(row, v);
   }
 
-  @Override public void setRowWith4FUnsafe(
+  @Override
+  public void setRowWith4FUnsafe(
     final int row,
     final VectorReadable4FType v)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(row, 0), v.getXF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(row, 1), v.getYF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(row, 2), v.getZF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(row, 3), v.getWF());
+    this.view.put(indexUnsafe(row, 0), v.getXF());
+    this.view.put(indexUnsafe(row, 1), v.getYF());
+    this.view.put(indexUnsafe(row, 2), v.getZF());
+    this.view.put(indexUnsafe(row, 3), v.getWF());
   }
 
-  @Override public void setRow0With4F(final VectorReadable4FType v)
+  @Override
+  public void setRow0With4F(final VectorReadable4FType v)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(0, 0), v.getXF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(0, 1), v.getYF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(0, 2), v.getZF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(0, 3), v.getWF());
+    this.view.put(indexUnsafe(0, 0), v.getXF());
+    this.view.put(indexUnsafe(0, 1), v.getYF());
+    this.view.put(indexUnsafe(0, 2), v.getZF());
+    this.view.put(indexUnsafe(0, 3), v.getWF());
   }
 
-  @Override public void setRow1With4F(final VectorReadable4FType v)
+  @Override
+  public void setRow1With4F(final VectorReadable4FType v)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(1, 0), v.getXF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(1, 1), v.getYF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(1, 2), v.getZF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(1, 3), v.getWF());
+    this.view.put(indexUnsafe(1, 0), v.getXF());
+    this.view.put(indexUnsafe(1, 1), v.getYF());
+    this.view.put(indexUnsafe(1, 2), v.getZF());
+    this.view.put(indexUnsafe(1, 3), v.getWF());
   }
 
-  @Override public void setRow2With4F(final VectorReadable4FType v)
+  @Override
+  public void setRow2With4F(final VectorReadable4FType v)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(2, 0), v.getXF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(2, 1), v.getYF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(2, 2), v.getZF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(2, 3), v.getWF());
+    this.view.put(indexUnsafe(2, 0), v.getXF());
+    this.view.put(indexUnsafe(2, 1), v.getYF());
+    this.view.put(indexUnsafe(2, 2), v.getZF());
+    this.view.put(indexUnsafe(2, 3), v.getWF());
   }
 
-  @Override public void setRow3With4F(final VectorReadable4FType v)
+  @Override
+  public void setRow3With4F(final VectorReadable4FType v)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(3, 0), v.getXF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(3, 1), v.getYF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(3, 2), v.getZF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(3, 3), v.getWF());
+    this.view.put(indexUnsafe(3, 0), v.getXF());
+    this.view.put(indexUnsafe(3, 1), v.getYF());
+    this.view.put(indexUnsafe(3, 2), v.getZF());
+    this.view.put(indexUnsafe(3, 3), v.getWF());
   }
 
-  @Override public float getR1C3F()
+  @Override
+  public float getR1C3F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(1, 3));
+    return this.view.get(indexUnsafe(1, 3));
   }
 
-  @Override public void setR1C3F(final float x)
+  @Override
+  public void setR1C3F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(1, 3), x);
+    this.view.put(indexUnsafe(1, 3), x);
   }
 
-  @Override public float getR2C3F()
+  @Override
+  public float getR2C3F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(2, 3));
+    return this.view.get(indexUnsafe(2, 3));
   }
 
-  @Override public void setR2C3F(final float x)
+  @Override
+  public void setR2C3F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(2, 3), x);
+    this.view.put(indexUnsafe(2, 3), x);
   }
 
-  @Override public float getR3C0F()
+  @Override
+  public float getR3C0F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(3, 0));
+    return this.view.get(indexUnsafe(3, 0));
   }
 
-  @Override public void setR3C0F(final float x)
+  @Override
+  public void setR3C0F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(3, 0), x);
+    this.view.put(indexUnsafe(3, 0), x);
   }
 
-  @Override public float getR3C1F()
+  @Override
+  public float getR3C1F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(3, 1));
+    return this.view.get(indexUnsafe(3, 1));
   }
 
-  @Override public void setR3C1F(final float x)
+  @Override
+  public void setR3C1F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(3, 1), x);
+    this.view.put(indexUnsafe(3, 1), x);
   }
 
-  @Override public float getR3C2F()
+  @Override
+  public float getR3C2F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(3, 2));
+    return this.view.get(indexUnsafe(3, 2));
   }
 
-  @Override public void setR3C2F(final float x)
+  @Override
+  public void setR3C2F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(3, 2), x);
+    this.view.put(indexUnsafe(3, 2), x);
   }
 
-  @Override public float getR3C3F()
+  @Override
+  public float getR3C3F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(3, 3));
+    return this.view.get(indexUnsafe(3, 3));
   }
 
-  @Override public void setR3C3F(final float x)
+  @Override
+  public void setR3C3F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(3, 3), x);
+    this.view.put(indexUnsafe(3, 3), x);
   }
 
-  @Override public float getRowColumnF(
+  @Override
+  public float getRowColumnF(
     final int row,
     final int column)
   {
-    return this.view.get(MatrixDirectM4x4F.indexChecked(row, column));
+    return this.view.get(indexChecked(row, column));
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     return MatrixM4x4F.hashElements(this);
   }
 
-  @Override public void setRowColumnF(
+  @Override
+  public void setRowColumnF(
     final int row,
     final int column,
     final float value)
   {
-    this.view.put(MatrixDirectM4x4F.indexChecked(row, column), value);
+    this.view.put(indexChecked(row, column), value);
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
     MatrixM4x4F.showElements(this, builder);
     return builder.toString();
   }
 
-  @Override public <V extends VectorWritable3FType> void getRow3F(
+  @Override
+  public <V extends VectorWritable3FType> void getRow3F(
     final int row,
     final V out)
   {
-    MatrixDirectM4x4F.rowCheck(row);
+    rowCheck(row);
     this.getRow3FUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable3FType> void getRow3FUnsafe(
+  @Override
+  public <V extends VectorWritable3FType> void getRow3FUnsafe(
     final int row,
     final V out)
   {
-    final float x = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 0));
-    final float y = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 1));
-    final float z = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 2));
+    final float x = this.view.get(indexUnsafe(row, 0));
+    final float y = this.view.get(indexUnsafe(row, 1));
+    final float z = this.view.get(indexUnsafe(row, 2));
     out.set3F(x, y, z);
   }
 
-  @Override public float getR0C2F()
+  @Override
+  public float getR0C2F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(0, 2));
+    return this.view.get(indexUnsafe(0, 2));
   }
 
-  @Override public void setR0C2F(final float x)
+  @Override
+  public void setR0C2F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(0, 2), x);
+    this.view.put(indexUnsafe(0, 2), x);
   }
 
-  @Override public void setRowWith3F(
+  @Override
+  public void setRowWith3F(
     final int row,
     final VectorReadable3FType v)
   {
-    MatrixDirectM4x4F.rowCheck(row);
+    rowCheck(row);
     this.setRowWith3FUnsafe(row, v);
   }
 
-  @Override public void setRowWith3FUnsafe(
+  @Override
+  public void setRowWith3FUnsafe(
     final int row,
     final VectorReadable3FType v)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(row, 0), v.getXF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(row, 1), v.getYF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(row, 2), v.getZF());
+    this.view.put(indexUnsafe(row, 0), v.getXF());
+    this.view.put(indexUnsafe(row, 1), v.getYF());
+    this.view.put(indexUnsafe(row, 2), v.getZF());
   }
 
-  @Override public float getR1C2F()
+  @Override
+  public float getR1C2F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(1, 2));
+    return this.view.get(indexUnsafe(1, 2));
   }
 
-  @Override public void setR1C2F(final float x)
+  @Override
+  public void setR1C2F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(1, 2), x);
+    this.view.put(indexUnsafe(1, 2), x);
   }
 
-  @Override public float getR2C0F()
+  @Override
+  public float getR2C0F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(2, 0));
+    return this.view.get(indexUnsafe(2, 0));
   }
 
-  @Override public void setR2C0F(final float x)
+  @Override
+  public void setR2C0F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(2, 0), x);
+    this.view.put(indexUnsafe(2, 0), x);
   }
 
-  @Override public float getR2C1F()
+  @Override
+  public float getR2C1F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(2, 1));
+    return this.view.get(indexUnsafe(2, 1));
   }
 
-  @Override public void setR2C1F(final float x)
+  @Override
+  public void setR2C1F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(2, 1), x);
+    this.view.put(indexUnsafe(2, 1), x);
   }
 
-  @Override public float getR2C2F()
+  @Override
+  public float getR2C2F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(2, 2));
+    return this.view.get(indexUnsafe(2, 2));
   }
 
-  @Override public void setR2C2F(final float x)
+  @Override
+  public void setR2C2F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(2, 2), x);
+    this.view.put(indexUnsafe(2, 2), x);
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2F(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2F(
     final int row,
     final V out)
   {
-    MatrixDirectM4x4F.rowCheck(row);
+    rowCheck(row);
     this.getRow2FUnsafe(row, out);
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2FUnsafe(
     final int row,
     final V out)
   {
-    final float x = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 0));
-    final float y = this.view.get(MatrixDirectM4x4F.indexUnsafe(row, 1));
+    final float x = this.view.get(indexUnsafe(row, 0));
+    final float y = this.view.get(indexUnsafe(row, 1));
     out.set2F(x, y);
   }
 
-  @Override public float getR0C0F()
+  @Override
+  public float getR0C0F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(0, 0));
+    return this.view.get(indexUnsafe(0, 0));
   }
 
-  @Override public void setR0C0F(final float x)
+  @Override
+  public void setR0C0F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(0, 0), x);
+    this.view.put(indexUnsafe(0, 0), x);
   }
 
-  @Override public void setRowWith2F(
+  @Override
+  public void setRowWith2F(
     final int row,
     final VectorReadable2FType v)
   {
-    MatrixDirectM4x4F.rowCheck(row);
+    rowCheck(row);
     this.setRowWith2FUnsafe(row, v);
   }
 
-  @Override public void setRowWith2FUnsafe(
+  @Override
+  public void setRowWith2FUnsafe(
     final int row,
     final VectorReadable2FType v)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(row, 0), v.getXF());
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(row, 1), v.getYF());
+    this.view.put(indexUnsafe(row, 0), v.getXF());
+    this.view.put(indexUnsafe(row, 1), v.getYF());
   }
 
-  @Override public float getR1C0F()
+  @Override
+  public float getR1C0F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(1, 0));
+    return this.view.get(indexUnsafe(1, 0));
   }
 
-  @Override public void setR1C0F(final float x)
+  @Override
+  public void setR1C0F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(1, 0), x);
+    this.view.put(indexUnsafe(1, 0), x);
   }
 
-  @Override public float getR0C1F()
+  @Override
+  public float getR0C1F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(0, 1));
+    return this.view.get(indexUnsafe(0, 1));
   }
 
-  @Override public void setR0C1F(final float x)
+  @Override
+  public void setR0C1F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(0, 1), x);
+    this.view.put(indexUnsafe(0, 1), x);
   }
 
-  @Override public float getR1C1F()
+  @Override
+  public float getR1C1F()
   {
-    return this.view.get(MatrixDirectM4x4F.indexUnsafe(1, 1));
+    return this.view.get(indexUnsafe(1, 1));
   }
 
-  @Override public void setR1C1F(final float x)
+  @Override
+  public void setR1C1F(final float x)
   {
-    this.view.put(MatrixDirectM4x4F.indexUnsafe(1, 1), x);
+    this.view.put(indexUnsafe(1, 1), x);
   }
 
 }

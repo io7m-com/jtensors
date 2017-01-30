@@ -71,14 +71,14 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long y0 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long z0 = PVectorI3LTest.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
       final PVectorI3L<T> v0 = new PVectorI3L<T>(x0, y0, z0);
 
-      final long x1 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long y1 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long z1 = PVectorI3LTest.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
       final PVectorI3L<T> v1 = new PVectorI3L<T>(x1, y1, z1);
 
       final PVectorI3L<T> vr0 = PVectorI3L.add(v0, v1);
@@ -93,17 +93,17 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long y0 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long z0 = PVectorI3LTest.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
       final PVectorI3L<T> v0 = new PVectorI3L<T>(x0, y0, z0);
 
-      final long x1 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long y1 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long z1 = PVectorI3LTest.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
       final PVectorI3L<T> v1 = new PVectorI3L<T>(x1, y1, z1);
 
-      final long r = PVectorI3LTest.randomPositiveSmallNumber();
+      final long r = randomPositiveSmallNumber();
 
       final PVectorI3L<T> vr0 = PVectorI3L.addScaled(v0, v1, r);
 
@@ -136,14 +136,14 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long max_x = PVectorI3LTest.randomNegativeNumber();
-      final long max_y = PVectorI3LTest.randomNegativeNumber();
-      final long max_z = PVectorI3LTest.randomNegativeNumber();
+      final long max_x = randomNegativeNumber();
+      final long max_y = randomNegativeNumber();
+      final long max_z = randomNegativeNumber();
       final PVectorI3L<T> maximum = new PVectorI3L<T>(max_x, max_y, max_z);
 
-      final long x = PVectorI3LTest.randomNegativeNumber();
-      final long y = PVectorI3LTest.randomNegativeNumber();
-      final long z = PVectorI3LTest.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
       final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clampMaximumByPVector(v, maximum);
@@ -158,14 +158,14 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long min_x = PVectorI3LTest.randomPositiveNumber();
-      final long min_y = PVectorI3LTest.randomPositiveNumber();
-      final long min_z = PVectorI3LTest.randomPositiveNumber();
+      final long min_x = randomPositiveNumber();
+      final long min_y = randomPositiveNumber();
+      final long min_z = randomPositiveNumber();
       final PVectorI3L<T> minimum = new PVectorI3L<T>(min_x, min_y, min_z);
 
-      final long x = PVectorI3LTest.randomNegativeNumber();
-      final long y = PVectorI3LTest.randomNegativeNumber();
-      final long z = PVectorI3LTest.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
       final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clampMinimumByPVector(v, minimum);
@@ -180,19 +180,19 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long min_x = PVectorI3LTest.randomNegativeNumber();
-      final long min_y = PVectorI3LTest.randomNegativeNumber();
-      final long min_z = PVectorI3LTest.randomNegativeNumber();
+      final long min_x = randomNegativeNumber();
+      final long min_y = randomNegativeNumber();
+      final long min_z = randomNegativeNumber();
       final PVectorI3L<T> minimum = new PVectorI3L<T>(min_x, min_y, min_z);
 
-      final long max_x = PVectorI3LTest.randomPositiveNumber();
-      final long max_y = PVectorI3LTest.randomPositiveNumber();
-      final long max_z = PVectorI3LTest.randomPositiveNumber();
+      final long max_x = randomPositiveNumber();
+      final long max_y = randomPositiveNumber();
+      final long max_z = randomPositiveNumber();
       final PVectorI3L<T> maximum = new PVectorI3L<T>(max_x, max_y, max_z);
 
-      final long x = PVectorI3LTest.randomNegativeNumber();
-      final long y = PVectorI3LTest.randomPositiveNumber();
-      final long z = PVectorI3LTest.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clampByPVector(v, minimum, maximum);
@@ -210,11 +210,11 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long maximum = PVectorI3LTest.randomNegativeNumber();
+      final long maximum = randomNegativeNumber();
 
-      final long x = PVectorI3LTest.randomPositiveNumber();
-      final long y = PVectorI3LTest.randomPositiveNumber();
-      final long z = PVectorI3LTest.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clampMaximum(v, maximum);
@@ -229,11 +229,11 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long minimum = PVectorI3LTest.randomPositiveNumber();
+      final long minimum = randomPositiveNumber();
 
-      final long x = PVectorI3LTest.randomNegativeNumber();
-      final long y = PVectorI3LTest.randomNegativeNumber();
-      final long z = PVectorI3LTest.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
+      final long z = randomNegativeNumber();
       final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clampMinimum(v, minimum);
@@ -248,12 +248,12 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long minimum = PVectorI3LTest.randomNegativeNumber();
-      final long maximum = PVectorI3LTest.randomPositiveNumber();
+      final long minimum = randomNegativeNumber();
+      final long maximum = randomPositiveNumber();
 
-      final long x = PVectorI3LTest.randomNegativeNumber();
-      final long y = PVectorI3LTest.randomPositiveNumber();
-      final long z = PVectorI3LTest.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clamp(v, minimum, maximum);
@@ -308,14 +308,14 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long y0 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long z0 = PVectorI3LTest.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
+      final long z0 = randomPositiveSmallNumber();
       final PVectorReadable3LType<T> v0 = new PVectorI3L<T>(x0, y0, z0);
 
-      final long x1 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long y1 = PVectorI3LTest.randomPositiveSmallNumber();
-      final long z1 = PVectorI3LTest.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
+      final long z1 = randomPositiveSmallNumber();
       final PVectorReadable3LType<T> v1 = new PVectorI3L<T>(x1, y1, z1);
 
       Assert.assertTrue(PVectorI3L.distance(v0, v1) >= 0);
@@ -565,14 +565,14 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = PVectorI3LTest.randomPositiveNumber();
-      final long y0 = PVectorI3LTest.randomPositiveNumber();
-      final long z0 = PVectorI3LTest.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
       final PVectorI3L<T> v0 = new PVectorI3L<T>(x0, y0, z0);
 
-      final long x1 = PVectorI3LTest.randomPositiveNumber();
-      final long y1 = PVectorI3LTest.randomPositiveNumber();
-      final long z1 = PVectorI3LTest.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
       final PVectorI3L<T> v1 = new PVectorI3L<T>(x1, y1, z1);
 
       final PVectorI3L<T> vr0 = PVectorI3L.interpolateLinear(v0, v1, 0);
@@ -592,9 +592,9 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = PVectorI3LTest.randomPositiveSmallNumber();
-      final long y = PVectorI3LTest.randomPositiveSmallNumber();
-      final long z = PVectorI3LTest.randomPositiveSmallNumber();
+      final long x = randomPositiveSmallNumber();
+      final long y = randomPositiveSmallNumber();
+      final long z = randomPositiveSmallNumber();
       final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final long m = PVectorI3L.magnitude(v);
@@ -678,9 +678,9 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = PVectorI3LTest.randomPositiveNumber();
-      final long y = PVectorI3LTest.randomPositiveNumber();
-      final long z = PVectorI3LTest.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final PVectorI3L<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.scale(v, 1);
@@ -695,9 +695,9 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x = PVectorI3LTest.randomPositiveNumber();
-      final long y = PVectorI3LTest.randomPositiveNumber();
-      final long z = PVectorI3LTest.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
+      final long z = randomPositiveNumber();
       final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.scale(v, 0);
@@ -718,14 +718,14 @@ import org.junit.Test;
   {
     for (long index = 0; index
                          < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final long x0 = PVectorI3LTest.randomPositiveNumber();
-      final long y0 = PVectorI3LTest.randomPositiveNumber();
-      final long z0 = PVectorI3LTest.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
+      final long z0 = randomPositiveNumber();
       final PVectorI3L<T> v0 = new PVectorI3L<T>(x0, y0, z0);
 
-      final long x1 = PVectorI3LTest.randomPositiveNumber();
-      final long y1 = PVectorI3LTest.randomPositiveNumber();
-      final long z1 = PVectorI3LTest.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
+      final long z1 = randomPositiveNumber();
       final PVectorI3L<T> v1 = new PVectorI3L<T>(x1, y1, z1);
 
       final PVectorI3L<T> vr0 = PVectorI3L.subtract(v0, v1);

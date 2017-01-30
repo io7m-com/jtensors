@@ -149,8 +149,8 @@ public final class MatrixByteBufferedM2x2D extends ByteBuffered implements Matri
     final int col,
     final double x)
   {
-    final int i = MatrixByteBufferedM2x2D.getByteOffsetForIndex(
-      o, MatrixByteBufferedM2x2D.indexUnsafe(row, col));
+    final int i = getByteOffsetForIndex(
+      o, indexUnsafe(row, col));
     this.buffer.putDouble(i, x);
   }
 
@@ -160,8 +160,8 @@ public final class MatrixByteBufferedM2x2D extends ByteBuffered implements Matri
     final int col)
   {
     return this.buffer.getDouble(
-      MatrixByteBufferedM2x2D.getByteOffsetForIndex(
-        o, MatrixByteBufferedM2x2D.indexUnsafe(row, col)));
+      getByteOffsetForIndex(
+        o, indexUnsafe(row, col)));
   }
 
   @Override public int hashCode()
@@ -190,7 +190,7 @@ public final class MatrixByteBufferedM2x2D extends ByteBuffered implements Matri
     final int row,
     final V out)
   {
-    this.getRow2DUnsafe(MatrixByteBufferedM2x2D.checkRow(row), out);
+    this.getRow2DUnsafe(checkRow(row), out);
   }
 
   @Override public <V extends VectorWritable2DType> void getRow2DUnsafe(
@@ -247,8 +247,8 @@ public final class MatrixByteBufferedM2x2D extends ByteBuffered implements Matri
     final int row,
     final int column)
   {
-    MatrixByteBufferedM2x2D.checkRow(row);
-    MatrixByteBufferedM2x2D.checkColumn(column);
+    checkRow(row);
+    checkColumn(column);
     return this.getAtOffsetAndRowColumn(super.getIndex(), row, column);
   }
 
@@ -256,7 +256,7 @@ public final class MatrixByteBufferedM2x2D extends ByteBuffered implements Matri
     final int row,
     final VectorReadable2DType v)
   {
-    MatrixByteBufferedM2x2D.checkRow(row);
+    checkRow(row);
     this.setRowWith2DUnsafe(row, v);
   }
 
@@ -274,8 +274,8 @@ public final class MatrixByteBufferedM2x2D extends ByteBuffered implements Matri
     final int column,
     final double value)
   {
-    MatrixByteBufferedM2x2D.checkRow(row);
-    MatrixByteBufferedM2x2D.checkColumn(column);
+    checkRow(row);
+    checkColumn(column);
     this.setAtOffsetAndRowColumn(super.getIndex(), row, column, value);
   }
 }

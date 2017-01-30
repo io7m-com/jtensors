@@ -2584,7 +2584,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorM4F v_got = new VectorM4F();
     final VectorReadable4FType v_exp = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
 
-    MatrixM4x4F.makeRotation(0.0, Matrix4x4FContract.AXIS_X, m);
+    MatrixM4x4F.makeRotation(0.0, AXIS_X, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2610,7 +2610,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorM4F v_got = new VectorM4F();
     final VectorReadable4FType v_exp = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
 
-    MatrixM4x4F.makeRotation(0.0, Matrix4x4FContract.AXIS_Y, m);
+    MatrixM4x4F.makeRotation(0.0, AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2636,7 +2636,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorM4F v_got = new VectorM4F();
     final VectorReadable4FType v_exp = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
 
-    MatrixM4x4F.makeRotation(0.0, Matrix4x4FContract.AXIS_Z, m);
+    MatrixM4x4F.makeRotation(0.0, AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2674,7 +2674,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       new VectorM4F(0.0F, 6.1232339957367E-17f, 1.0F, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(90.0), Matrix4x4FContract.AXIS_X, m);
+      Math.toRadians(90.0), AXIS_X, m);
     
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
@@ -2718,7 +2718,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       new VectorM4F(-1.0F, 0.0F, -6.1232339957367E-17f, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(90.0), Matrix4x4FContract.AXIS_Y, m);
+      Math.toRadians(90.0), AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2754,7 +2754,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       new VectorM4F(-1.0F, 6.123233995736766E-17f, 0.0F, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(90.0), Matrix4x4FContract.AXIS_Z, m);
+      Math.toRadians(90.0), AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2797,7 +2797,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       new VectorM4F(0.0F, 6.1232339957367E-17f, -1.0F, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(-90.0), Matrix4x4FContract.AXIS_X, m);
+      Math.toRadians(-90.0), AXIS_X, m);
     
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
@@ -2841,7 +2841,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       new VectorM4F(1.0F, 0.0F, -6.1232339957367E-17f, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(-90.0), Matrix4x4FContract.AXIS_Y, m);
+      Math.toRadians(-90.0), AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2877,7 +2877,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       new VectorM4F(1.0F, 6.123233995736766E-17f, 0.0F, 1.0F);
 
     MatrixM4x4F.makeRotation(
-      Math.toRadians(-90.0), Matrix4x4FContract.AXIS_Z, m);
+      Math.toRadians(-90.0), AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
     
@@ -2901,7 +2901,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     {
       final T r = this.newMatrix();
       MatrixM4x4F.makeRotation(
-        Math.toRadians(45.0), Matrix4x4FContract.AXIS_Y, r);
+        Math.toRadians(45.0), AXIS_Y, r);
 
       this.checkDirectBufferInvariants(r);
 
@@ -2921,7 +2921,7 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     {
       final T r = this.newMatrix();
       MatrixM4x4F.makeRotation(
-        Math.toRadians(45.0), Matrix4x4FContract.AXIS_Z, r);
+        Math.toRadians(45.0), AXIS_Z, r);
 
       this.checkDirectBufferInvariants(r);
 

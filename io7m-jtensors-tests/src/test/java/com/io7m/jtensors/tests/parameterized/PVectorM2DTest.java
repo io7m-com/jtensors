@@ -57,7 +57,7 @@ public final class PVectorM2DTest<T>
 
   @Override protected Logger logger()
   {
-    return PVectorM2DTest.LOG;
+    return LOG;
   }
 
   @Override protected PVectorM2D<T> newVectorM2D(final PVectorM2D<T> v)
@@ -96,7 +96,7 @@ public final class PVectorM2DTest<T>
     final SortedMap<String, Class<?>> interfaces =
       TestUtilities.getInterfaces(v.getClass());
     for (final String k : interfaces.keySet()) {
-      PVectorM2DTest.LOG.debug(
+      LOG.debug(
         "{} implements {}", PVectorM2D.class, k);
     }
 

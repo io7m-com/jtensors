@@ -910,6 +910,42 @@ public final class QuaternionM4F implements Quaternion4FType
     return subtract(q0, q1, q0);
   }
 
+  /**
+   * Determine the axis-angle representation of the given quaternion.
+   *
+   * @param q   The input quaternion
+   * @param out The output vector that will contain the axis
+   * @param <V> The precise type of output vector
+   *
+   * @return The angle
+   */
+
+  public static <V extends VectorWritable3FType> double toAxisAngle(
+    final QuaternionReadable4FType q,
+    final V out)
+  {
+    final float rx;
+    final float ry;
+    final float rz;
+    final double angle;
+
+    final double mag_s = magnitudeSquared(q);
+    if (mag_s != 0.0) {
+      angle = 2.0 * StrictMath.acos(q.getWF());
+      rx = q.getXF();
+      ry = q.getYF();
+      rz = q.getZF();
+    } else {
+      angle = 0.0;
+      rx = 1.0f;
+      ry = 0.0f;
+      rz = 0.0f;
+    }
+
+    VectorM3F.normalize(new VectorM3F(rx, ry, rz), out);
+    return angle;
+  }
+
   @Override
   public void copyFrom2F(
     final VectorReadable2FType in_v)
@@ -1046,42 +1082,6 @@ public final class QuaternionM4F implements Quaternion4FType
     this.y = in_y;
     this.z = in_z;
     this.w = in_w;
-  }
-
-  /**
-   * Determine the axis-angle representation of the given quaternion.
-   *
-   * @param q   The input quaternion
-   * @param out The output vector that will contain the axis
-   * @param <V> The precise type of output vector
-   *
-   * @return The angle
-   */
-
-  public static <V extends VectorWritable3FType> double toAxisAngle(
-    final QuaternionReadable4FType q,
-    final V out)
-  {
-    final float rx;
-    final float ry;
-    final float rz;
-    final double angle;
-
-    final double mag_s = magnitudeSquared(q);
-    if (mag_s != 0.0) {
-      angle = 2.0 * StrictMath.acos(q.getWF());
-      rx = q.getXF();
-      ry = q.getYF();
-      rz = q.getZF();
-    } else {
-      angle = 0.0;
-      rx = 1.0f;
-      ry = 0.0f;
-      rz = 0.0f;
-    }
-
-    VectorM3F.normalize(new VectorM3F(rx, ry, rz), out);
-    return angle;
   }
 
   @Override

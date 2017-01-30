@@ -131,7 +131,7 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
     final int i,
     final long x)
   {
-    this.buffer.putLong(PVectorByteBufferedM3L.getByteOffsetForIndex(o, i), x);
+    this.buffer.putLong(getByteOffsetForIndex(o, i), x);
   }
 
   private long getAtOffsetAndIndex(
@@ -139,7 +139,7 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
     final int i)
   {
     return this.buffer.getLong(
-      PVectorByteBufferedM3L.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public long getYL()

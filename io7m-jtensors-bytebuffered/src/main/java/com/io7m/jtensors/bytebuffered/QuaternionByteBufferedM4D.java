@@ -136,7 +136,7 @@ public final class QuaternionByteBufferedM4D extends ByteBuffered
     final double x)
   {
     this.buffer.putDouble(
-      QuaternionByteBufferedM4D.getByteOffsetForIndex(o, i), x);
+      getByteOffsetForIndex(o, i), x);
   }
 
   private double getAtOffsetAndIndex(
@@ -144,7 +144,7 @@ public final class QuaternionByteBufferedM4D extends ByteBuffered
     final int i)
   {
     return this.buffer.getDouble(
-      QuaternionByteBufferedM4D.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public double getYD()

@@ -145,7 +145,7 @@ public final class PVectorByteBufferedM4D<T> extends ByteBuffered
     final double x)
   {
     this.buffer.putDouble(
-      PVectorByteBufferedM4D.getByteOffsetForIndex(o, i), x);
+      getByteOffsetForIndex(o, i), x);
   }
 
   private double getAtOffsetAndIndex(
@@ -153,7 +153,7 @@ public final class PVectorByteBufferedM4D<T> extends ByteBuffered
     final int i)
   {
     return this.buffer.getDouble(
-      PVectorByteBufferedM4D.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public double getYD()

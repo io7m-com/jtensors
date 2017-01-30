@@ -116,7 +116,7 @@ public final class VectorM2L implements Vector2LType
     final V v)
     throws ArithmeticException
   {
-    return VectorM2L.absolute(v, v);
+    return absolute(v, v);
   }
 
   /**
@@ -166,7 +166,7 @@ public final class VectorM2L implements Vector2LType
     final VectorReadable2LType v1)
     throws ArithmeticException
   {
-    return VectorM2L.add(v0, v1, v0);
+    return add(v0, v1, v0);
   }
 
   /**
@@ -224,7 +224,7 @@ public final class VectorM2L implements Vector2LType
     final double r)
     throws ArithmeticException
   {
-    return VectorM2L.addScaled(v0, v1, r, v0);
+    return addScaled(v0, v1, r, v0);
   }
 
   /**
@@ -240,9 +240,9 @@ public final class VectorM2L implements Vector2LType
     final VectorReadable2LType v0,
     final VectorReadable2LType v1)
   {
-    final double m0 = (double) VectorM2L.magnitude(v0);
-    final double m1 = (double) VectorM2L.magnitude(v1);
-    return Math.acos((double) VectorM2L.dotProduct(v0, v1) / (m0 * m1));
+    final double m0 = (double) magnitude(v0);
+    final double m1 = (double) magnitude(v1);
+    return Math.acos((double) dotProduct(v0, v1) / (m0 * m1));
   }
 
   /**
@@ -320,7 +320,7 @@ public final class VectorM2L implements Vector2LType
     final VectorReadable2LType minimum,
     final VectorReadable2LType maximum)
   {
-    return VectorM2L.clampByVector(v, minimum, maximum, v);
+    return clampByVector(v, minimum, maximum, v);
   }
 
   /**
@@ -342,7 +342,7 @@ public final class VectorM2L implements Vector2LType
     final long minimum,
     final long maximum)
   {
-    return VectorM2L.clamp(v, minimum, maximum, v);
+    return clamp(v, minimum, maximum, v);
   }
 
   /**
@@ -411,7 +411,7 @@ public final class VectorM2L implements Vector2LType
     final V v,
     final VectorReadable2LType maximum)
   {
-    return VectorM2L.clampMaximumByVector(v, maximum, v);
+    return clampMaximumByVector(v, maximum, v);
   }
 
   /**
@@ -431,7 +431,7 @@ public final class VectorM2L implements Vector2LType
     final V v,
     final long maximum)
   {
-    return VectorM2L.clampMaximum(v, maximum, v);
+    return clampMaximum(v, maximum, v);
   }
 
   /**
@@ -500,7 +500,7 @@ public final class VectorM2L implements Vector2LType
     final V v,
     final VectorReadable2LType minimum)
   {
-    return VectorM2L.clampMinimumByVector(v, minimum, v);
+    return clampMinimumByVector(v, minimum, v);
   }
 
   /**
@@ -520,7 +520,7 @@ public final class VectorM2L implements Vector2LType
     final V v,
     final long minimum)
   {
-    return VectorM2L.clampMinimum(v, minimum, v);
+    return clampMinimum(v, minimum, v);
   }
 
   /**
@@ -562,7 +562,7 @@ public final class VectorM2L implements Vector2LType
     final VectorReadable2LType v1)
     throws ArithmeticException
   {
-    return VectorM2L.magnitude(VectorM2L.subtract(v0, v1, c.v2a));
+    return magnitude(subtract(v0, v1, c.v2a));
   }
 
   /**
@@ -619,9 +619,9 @@ public final class VectorM2L implements Vector2LType
     final V r)
     throws ArithmeticException
   {
-    VectorM2L.scale(v0, 1.0 - alpha, c.v2a);
-    VectorM2L.scale(v1, alpha, c.v2b);
-    return VectorM2L.add(c.v2a, c.v2b, r);
+    scale(v0, 1.0 - alpha, c.v2a);
+    scale(v1, alpha, c.v2b);
+    return add(c.v2a, c.v2b, r);
   }
 
   /**
@@ -641,7 +641,7 @@ public final class VectorM2L implements Vector2LType
     final VectorReadable2LType v)
     throws ArithmeticException
   {
-    return Cast.castToLong(Math.sqrt((double) VectorM2L.magnitudeSquared(v)));
+    return Cast.castToLong(Math.sqrt((double) magnitudeSquared(v)));
   }
 
   /**
@@ -659,7 +659,7 @@ public final class VectorM2L implements Vector2LType
     final VectorReadable2LType v)
     throws ArithmeticException
   {
-    return VectorM2L.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -683,11 +683,11 @@ public final class VectorM2L implements Vector2LType
     final V r)
     throws ArithmeticException
   {
-    final long dot = VectorM2L.dotProduct(p, q);
-    final long qms = VectorM2L.magnitudeSquared(q);
+    final long dot = dotProduct(p, q);
+    final long qms = magnitudeSquared(q);
     final long s = dot / qms;
 
-    return VectorM2L.scale(p, (double) s, r);
+    return scale(p, (double) s, r);
   }
 
   /**
@@ -737,7 +737,7 @@ public final class VectorM2L implements Vector2LType
     final long r)
     throws ArithmeticException
   {
-    return VectorM2L.scale(v, (double) r, v);
+    return scale(v, (double) r, v);
   }
 
   /**
@@ -787,16 +787,18 @@ public final class VectorM2L implements Vector2LType
     final VectorReadable2LType v1)
     throws ArithmeticException
   {
-    return VectorM2L.subtract(v0, v1, v0);
+    return subtract(v0, v1, v0);
   }
 
-  @Override public void copyFrom2L(
+  @Override
+  public void copyFrom2L(
     final VectorReadable2LType in_v)
   {
-    VectorM2L.copy(in_v, this);
+    copy(in_v, this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -815,29 +817,34 @@ public final class VectorM2L implements Vector2LType
     return this.y == other.y;
   }
 
-  @Override public long getXL()
+  @Override
+  public long getXL()
   {
     return this.x;
   }
 
-  @Override public void setXL(
+  @Override
+  public void setXL(
     final long in_x)
   {
     this.x = in_x;
   }
 
-  @Override public long getYL()
+  @Override
+  public long getYL()
   {
     return this.y;
   }
 
-  @Override public void setYL(
+  @Override
+  public void setYL(
     final long in_y)
   {
     this.y = in_y;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final long prime = 31L;
     long result = 1L;
@@ -846,7 +853,8 @@ public final class VectorM2L implements Vector2LType
     return (int) result;
   }
 
-  @Override public void set2L(
+  @Override
+  public void set2L(
     final long in_x,
     final long in_y)
   {
@@ -854,7 +862,8 @@ public final class VectorM2L implements Vector2LType
     this.y = in_y;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[VectorM2L ");

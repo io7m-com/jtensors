@@ -31,7 +31,8 @@ import net.jcip.annotations.Immutable;
  * @param <T> A phantom type parameter.
  */
 
-@Immutable public final class PVectorI2D<T> implements PVectorReadable2DType<T>
+@Immutable
+public final class PVectorI2D<T> implements PVectorReadable2DType<T>
 {
   private final static PVectorI2D<?> ZERO = new PVectorI2D<Float>(0.0, 0.0);
   /**
@@ -135,7 +136,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable2DType<T> v1,
     final double r)
   {
-    return PVectorI2D.add(v0, PVectorI2D.scale(v1, r));
+    return add(v0, scale(v1, r));
   }
 
   /**
@@ -180,10 +181,10 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable2DType<T> v0,
     final PVectorReadable2DType<T> v1)
   {
-    final double m0 = PVectorI2D.magnitude(v0);
-    final double m1 = PVectorI2D.magnitude(v1);
+    final double m0 = magnitude(v0);
+    final double m1 = magnitude(v1);
     final double dp =
-      Math.min(Math.max(-1.0, PVectorI2D.dotProduct(v0, v1)), 1.0);
+      Math.min(Math.max(-1.0, dotProduct(v0, v1)), 1.0);
     final double f = m0 * m1;
     final double r = dp / f;
     return Math.acos(r);
@@ -332,7 +333,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable2DType<T> v0,
     final PVectorReadable2DType<T> v1)
   {
-    return PVectorI2D.magnitude(PVectorI2D.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -377,9 +378,9 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable2DType<T> v1,
     final double alpha)
   {
-    final PVectorI2D<T> w0 = PVectorI2D.scale(v0, 1.0 - alpha);
-    final PVectorI2D<T> w1 = PVectorI2D.scale(v1, alpha);
-    return PVectorI2D.add(w0, w1);
+    final PVectorI2D<T> w0 = scale(v0, 1.0 - alpha);
+    final PVectorI2D<T> w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -396,7 +397,7 @@ import net.jcip.annotations.Immutable;
   public static <T> double magnitude(
     final PVectorReadable2DType<T> v)
   {
-    return Math.sqrt(PVectorI2D.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -411,7 +412,7 @@ import net.jcip.annotations.Immutable;
   public static <T> double magnitudeSquared(
     final PVectorReadable2DType<T> v)
   {
-    return PVectorI2D.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -428,11 +429,11 @@ import net.jcip.annotations.Immutable;
   public static <T> PVectorI2D<T> normalize(
     final PVectorReadable2DType<T> v)
   {
-    final double m = PVectorI2D.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double sq = Math.sqrt(m);
       final double r = 1.0 / sq;
-      return PVectorI2D.scale(v, r);
+      return scale(v, r);
     }
     return new PVectorI2D<T>(v);
   }
@@ -455,11 +456,11 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable2DType<T> v0,
     final PVectorReadable2DType<T> v1)
   {
-    final PVectorI2D<T> v0n = PVectorI2D.normalize(v0);
+    final PVectorI2D<T> v0n = normalize(v0);
     final PVectorI2D<T> projection =
-      PVectorI2D.scale(v0n, PVectorI2D.dotProduct(v1, v0n));
+      scale(v0n, dotProduct(v1, v0n));
     final PVectorI2D<T> vr =
-      PVectorI2D.normalize(PVectorI2D.subtract(v1, projection));
+      normalize(subtract(v1, projection));
     return Pair.pair(v0n, vr);
   }
 
@@ -478,10 +479,10 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable2DType<T> p,
     final PVectorReadable2DType<T> q)
   {
-    final double dot = PVectorI2D.dotProduct(p, q);
-    final double qms = PVectorI2D.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
-    return PVectorI2D.scale(p, s);
+    return scale(p, s);
   }
 
   /**
@@ -524,12 +525,14 @@ import net.jcip.annotations.Immutable;
    * @return The zero vector.
    */
 
-  @SuppressWarnings("unchecked") public static <T> PVectorI2D<T> zero()
+  @SuppressWarnings("unchecked")
+  public static <T> PVectorI2D<T> zero()
   {
-    return (PVectorI2D<T>) PVectorI2D.ZERO;
+    return (PVectorI2D<T>) ZERO;
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -549,17 +552,20 @@ import net.jcip.annotations.Immutable;
     return Double.doubleToLongBits(this.y) == Double.doubleToLongBits(other.y);
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -571,7 +577,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorI2D ");

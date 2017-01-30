@@ -27,17 +27,17 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
 {
   public static int randomNegativeNumber()
   {
-    return (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+    return (int) (getRandom() * (double) Integer.MIN_VALUE);
   }
 
   public static int randomPositiveNumber()
   {
-    return (int) (PVectorM4IContract.getRandom() * (double) Integer.MAX_VALUE);
+    return (int) (getRandom() * (double) Integer.MAX_VALUE);
   }
 
   public static int randomPositiveSmallNumber()
   {
-    return (int) (PVectorM4IContract.getRandom() * (double) (1 << 14));
+    return (int) (getRandom() * (double) (1 << 14));
   }
 
   protected static double getRandom()
@@ -59,13 +59,13 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x =
-        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+        (int) (getRandom() * (double) Integer.MIN_VALUE);
       final int y =
-        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+        (int) (getRandom() * (double) Integer.MIN_VALUE);
       final int z =
-        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+        (int) (getRandom() * (double) Integer.MIN_VALUE);
       final int w =
-        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+        (int) (getRandom() * (double) Integer.MIN_VALUE);
       final V v = this.newVectorM4I(x, y, z, w);
 
       final V vr = this.newVectorM4I();
@@ -82,13 +82,13 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x =
-        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+        (int) (getRandom() * (double) Integer.MIN_VALUE);
       final int y =
-        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+        (int) (getRandom() * (double) Integer.MIN_VALUE);
       final int z =
-        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+        (int) (getRandom() * (double) Integer.MIN_VALUE);
       final int w =
-        (int) (PVectorM4IContract.getRandom() * (double) Integer.MIN_VALUE);
+        (int) (getRandom() * (double) Integer.MIN_VALUE);
       final V v = this.newVectorM4I(x, y, z, w);
 
       PVectorM4I.absoluteInPlace(v);
@@ -103,16 +103,16 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int y0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int z0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int w0 = PVectorM4IContract.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
+      final int z0 = randomPositiveSmallNumber();
+      final int w0 = randomPositiveSmallNumber();
       final V v0 = this.newVectorM4I(x0, y0, z0, w0);
 
-      final int x1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int y1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int z1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int w1 = PVectorM4IContract.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
+      final int z1 = randomPositiveSmallNumber();
+      final int w1 = randomPositiveSmallNumber();
       final V v1 = this.newVectorM4I(x1, y1, z1, w1);
 
       final V vr0 = this.newVectorM4I();
@@ -193,19 +193,19 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int y0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int z0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int w0 = PVectorM4IContract.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
+      final int z0 = randomPositiveSmallNumber();
+      final int w0 = randomPositiveSmallNumber();
       final V v0 = this.newVectorM4I(x0, y0, z0, w0);
 
-      final int x1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int y1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int z1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int w1 = PVectorM4IContract.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
+      final int z1 = randomPositiveSmallNumber();
+      final int w1 = randomPositiveSmallNumber();
       final V v1 = this.newVectorM4I(x1, y1, z1, w1);
 
-      final int r = PVectorM4IContract.randomPositiveSmallNumber();
+      final int r = randomPositiveSmallNumber();
 
       final V vr0 = this.newVectorM4I();
       PVectorM4I.addScaled(v0, v1, (double) r, vr0);
@@ -261,16 +261,16 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testClampByPVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int max_x = PVectorM4IContract.randomNegativeNumber();
-      final int max_y = PVectorM4IContract.randomNegativeNumber();
-      final int max_z = PVectorM4IContract.randomNegativeNumber();
-      final int max_w = PVectorM4IContract.randomNegativeNumber();
+      final int max_x = randomNegativeNumber();
+      final int max_y = randomNegativeNumber();
+      final int max_z = randomNegativeNumber();
+      final int max_w = randomNegativeNumber();
       final V maximum = this.newVectorM4I(max_x, max_y, max_z, max_w);
 
-      final int x = PVectorM4IContract.randomNegativeNumber();
-      final int y = PVectorM4IContract.randomNegativeNumber();
-      final int z = PVectorM4IContract.randomNegativeNumber();
-      final int w = PVectorM4IContract.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final int z = randomNegativeNumber();
+      final int w = randomNegativeNumber();
       final V v = this.newVectorM4I(x, y, z, w);
 
       final V vr = this.newVectorM4I();
@@ -296,16 +296,16 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testClampByPVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = PVectorM4IContract.randomPositiveNumber();
-      final int min_y = PVectorM4IContract.randomPositiveNumber();
-      final int min_z = PVectorM4IContract.randomPositiveNumber();
-      final int min_w = PVectorM4IContract.randomPositiveNumber();
+      final int min_x = randomPositiveNumber();
+      final int min_y = randomPositiveNumber();
+      final int min_z = randomPositiveNumber();
+      final int min_w = randomPositiveNumber();
       final V minimum = this.newVectorM4I(min_x, min_y, min_z, min_w);
 
-      final int x = PVectorM4IContract.randomNegativeNumber();
-      final int y = PVectorM4IContract.randomNegativeNumber();
-      final int z = PVectorM4IContract.randomNegativeNumber();
-      final int w = PVectorM4IContract.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final int z = randomNegativeNumber();
+      final int w = randomNegativeNumber();
       final V v = this.newVectorM4I(x, y, z, w);
 
       final V vr = this.newVectorM4I();
@@ -331,22 +331,22 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testClampByPVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int min_x = PVectorM4IContract.randomNegativeNumber();
-      final int min_y = PVectorM4IContract.randomNegativeNumber();
-      final int min_z = PVectorM4IContract.randomNegativeNumber();
-      final int min_w = PVectorM4IContract.randomNegativeNumber();
+      final int min_x = randomNegativeNumber();
+      final int min_y = randomNegativeNumber();
+      final int min_z = randomNegativeNumber();
+      final int min_w = randomNegativeNumber();
       final V minimum = this.newVectorM4I(min_x, min_y, min_z, min_w);
 
-      final int max_x = PVectorM4IContract.randomPositiveNumber();
-      final int max_y = PVectorM4IContract.randomPositiveNumber();
-      final int max_z = PVectorM4IContract.randomPositiveNumber();
-      final int max_w = PVectorM4IContract.randomPositiveNumber();
+      final int max_x = randomPositiveNumber();
+      final int max_y = randomPositiveNumber();
+      final int max_z = randomPositiveNumber();
+      final int max_w = randomPositiveNumber();
       final V maximum = this.newVectorM4I(max_x, max_y, max_z, max_w);
 
-      final int x = PVectorM4IContract.randomNegativeNumber();
-      final int y = PVectorM4IContract.randomPositiveNumber();
-      final int z = PVectorM4IContract.randomPositiveNumber();
-      final int w = PVectorM4IContract.randomPositiveNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
+      final int w = randomPositiveNumber();
       final V v = this.newVectorM4I(x, y, z, w);
 
       final V vr = this.newVectorM4I();
@@ -380,12 +380,12 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int maximum = PVectorM4IContract.randomNegativeNumber();
+      final int maximum = randomNegativeNumber();
 
-      final int x = PVectorM4IContract.randomPositiveNumber();
-      final int y = PVectorM4IContract.randomPositiveNumber();
-      final int z = PVectorM4IContract.randomPositiveNumber();
-      final int w = PVectorM4IContract.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
+      final int w = randomPositiveNumber();
       final V v = this.newVectorM4I(x, y, z, w);
 
       final V vr = this.newVectorM4I();
@@ -409,12 +409,12 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = PVectorM4IContract.randomPositiveNumber();
+      final int minimum = randomPositiveNumber();
 
-      final int x = PVectorM4IContract.randomNegativeNumber();
-      final int y = PVectorM4IContract.randomNegativeNumber();
-      final int z = PVectorM4IContract.randomNegativeNumber();
-      final int w = PVectorM4IContract.randomNegativeNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomNegativeNumber();
+      final int z = randomNegativeNumber();
+      final int w = randomNegativeNumber();
       final V v = this.newVectorM4I(x, y, z, w);
 
       final V vr = this.newVectorM4I();
@@ -438,13 +438,13 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int minimum = PVectorM4IContract.randomNegativeNumber();
-      final int maximum = PVectorM4IContract.randomPositiveNumber();
+      final int minimum = randomNegativeNumber();
+      final int maximum = randomPositiveNumber();
 
-      final int x = PVectorM4IContract.randomNegativeNumber();
-      final int y = PVectorM4IContract.randomPositiveNumber();
-      final int z = PVectorM4IContract.randomPositiveNumber();
-      final int w = PVectorM4IContract.randomPositiveNumber();
+      final int x = randomNegativeNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
+      final int w = randomPositiveNumber();
       final V v = this.newVectorM4I(x, y, z, w);
 
       final V vr = this.newVectorM4I();
@@ -495,10 +495,10 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testCopy2Correct()
   {
     final V v0 = this.newVectorM4I(
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE));
+      (int) (getRandom() * Integer.MAX_VALUE),
+      (int) (getRandom() * Integer.MAX_VALUE),
+      (int) (getRandom() * Integer.MAX_VALUE),
+      (int) (getRandom() * Integer.MAX_VALUE));
     final V v1 = this.newVectorM4I();
     final V v2 = this.newVectorM4I();
 
@@ -520,10 +520,10 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testCopy3Correct()
   {
     final V v0 = this.newVectorM4I(
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE));
+      (int) (getRandom() * Integer.MAX_VALUE),
+      (int) (getRandom() * Integer.MAX_VALUE),
+      (int) (getRandom() * Integer.MAX_VALUE),
+      (int) (getRandom() * Integer.MAX_VALUE));
     final V v1 = this.newVectorM4I();
     final V v2 = this.newVectorM4I();
 
@@ -545,10 +545,10 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testCopy4Correct()
   {
     final V v0 = this.newVectorM4I(
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE),
-      (int) (PVectorM4IContract.getRandom() * Integer.MAX_VALUE));
+      (int) (getRandom() * Integer.MAX_VALUE),
+      (int) (getRandom() * Integer.MAX_VALUE),
+      (int) (getRandom() * Integer.MAX_VALUE),
+      (int) (getRandom() * Integer.MAX_VALUE));
     final V v1 = this.newVectorM4I();
     final V v2 = this.newVectorM4I();
 
@@ -585,16 +585,16 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   {
     final PVectorM4I.ContextPVM4I c = new PVectorM4I.ContextPVM4I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int y0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int z0 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int w0 = PVectorM4IContract.randomPositiveSmallNumber();
+      final int x0 = randomPositiveSmallNumber();
+      final int y0 = randomPositiveSmallNumber();
+      final int z0 = randomPositiveSmallNumber();
+      final int w0 = randomPositiveSmallNumber();
       final V v0 = this.newVectorM4I(x0, y0, z0, w0);
 
-      final int x1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int y1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int z1 = PVectorM4IContract.randomPositiveSmallNumber();
-      final int w1 = PVectorM4IContract.randomPositiveSmallNumber();
+      final int x1 = randomPositiveSmallNumber();
+      final int y1 = randomPositiveSmallNumber();
+      final int z1 = randomPositiveSmallNumber();
+      final int w1 = randomPositiveSmallNumber();
       final V v1 = this.newVectorM4I(x1, y1, z1, w1);
 
       Assert.assertTrue(PVectorM4I.distance(c, v0, v1) >= 0);
@@ -645,10 +645,10 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max = 1000;
-      final int x = (int) (PVectorM4IContract.getRandom() * (double) max);
-      final int y = (int) (PVectorM4IContract.getRandom() * (double) max);
-      final int z = (int) (PVectorM4IContract.getRandom() * (double) max);
-      final int w = (int) (PVectorM4IContract.getRandom() * (double) max);
+      final int x = (int) (getRandom() * (double) max);
+      final int y = (int) (getRandom() * (double) max);
+      final int z = (int) (getRandom() * (double) max);
+      final int w = (int) (getRandom() * (double) max);
       final V q = this.newVectorM4I(x, y, z, w);
 
       final double ms = (double) PVectorM4I.magnitudeSquared(q);
@@ -665,10 +665,10 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max = 1000;
-      final int x = (int) (PVectorM4IContract.getRandom() * (double) max);
-      final int y = (int) (PVectorM4IContract.getRandom() * (double) max);
-      final int z = (int) (PVectorM4IContract.getRandom() * (double) max);
-      final int w = (int) (PVectorM4IContract.getRandom() * (double) max);
+      final int x = (int) (getRandom() * (double) max);
+      final int y = (int) (getRandom() * (double) max);
+      final int z = (int) (getRandom() * (double) max);
+      final int w = (int) (getRandom() * (double) max);
       final V q = this.newVectorM4I(x, y, z, w);
       final double dp = (double) PVectorM4I.dotProduct(q, q);
 
@@ -725,7 +725,7 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
 
   @Test public final void testEqualsNotEqualCorrect()
   {
-    final int x = (int) (PVectorM4IContract.getRandom() * 1000.0);
+    final int x = (int) (getRandom() * 1000.0);
     final int y = x + 1;
     final int z = y + 1;
     final int w = z + 1;
@@ -867,16 +867,16 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   {
     final PVectorM4I.ContextPVM4I c = new PVectorM4I.ContextPVM4I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorM4IContract.randomPositiveNumber();
-      final int y0 = PVectorM4IContract.randomPositiveNumber();
-      final int z0 = PVectorM4IContract.randomPositiveNumber();
-      final int w0 = PVectorM4IContract.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
+      final int z0 = randomPositiveNumber();
+      final int w0 = randomPositiveNumber();
       final V v0 = this.newVectorM4I(x0, y0, z0, w0);
 
-      final int x1 = PVectorM4IContract.randomPositiveNumber();
-      final int y1 = PVectorM4IContract.randomPositiveNumber();
-      final int z1 = PVectorM4IContract.randomPositiveNumber();
-      final int w1 = PVectorM4IContract.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
+      final int z1 = randomPositiveNumber();
+      final int w1 = randomPositiveNumber();
       final V v1 = this.newVectorM4I(x1, y1, z1, w1);
 
       final V vr0 = this.newVectorM4I();
@@ -899,10 +899,10 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = PVectorM4IContract.randomPositiveSmallNumber();
-      final int y = PVectorM4IContract.randomPositiveSmallNumber();
-      final int z = PVectorM4IContract.randomPositiveSmallNumber();
-      final int w = PVectorM4IContract.randomPositiveSmallNumber();
+      final int x = randomPositiveSmallNumber();
+      final int y = randomPositiveSmallNumber();
+      final int z = randomPositiveSmallNumber();
+      final int w = randomPositiveSmallNumber();
       final V v = this.newVectorM4I(x, y, z, w);
 
       final int m = PVectorM4I.magnitude(v);
@@ -1033,10 +1033,10 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = PVectorM4IContract.randomPositiveNumber();
-      final int y = PVectorM4IContract.randomPositiveNumber();
-      final int z = PVectorM4IContract.randomPositiveNumber();
-      final int w = PVectorM4IContract.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
+      final int w = randomPositiveNumber();
       final V v = this.newVectorM4I(x, y, z, w);
 
       final V vr = this.newVectorM4I();
@@ -1067,10 +1067,10 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x = PVectorM4IContract.randomPositiveNumber();
-      final int y = PVectorM4IContract.randomPositiveNumber();
-      final int z = PVectorM4IContract.randomPositiveNumber();
-      final int w = PVectorM4IContract.randomPositiveNumber();
+      final int x = randomPositiveNumber();
+      final int y = randomPositiveNumber();
+      final int z = randomPositiveNumber();
+      final int w = randomPositiveNumber();
       final V v = this.newVectorM4I(x, y, z, w);
 
       final V vr = this.newVectorM4I();
@@ -1102,16 +1102,16 @@ public abstract class PVectorM4IContract<T, V extends PVector4IType<T>>
   @Test public final void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final int x0 = PVectorM4IContract.randomPositiveNumber();
-      final int y0 = PVectorM4IContract.randomPositiveNumber();
-      final int z0 = PVectorM4IContract.randomPositiveNumber();
-      final int w0 = PVectorM4IContract.randomPositiveNumber();
+      final int x0 = randomPositiveNumber();
+      final int y0 = randomPositiveNumber();
+      final int z0 = randomPositiveNumber();
+      final int w0 = randomPositiveNumber();
       final V v0 = this.newVectorM4I(x0, y0, z0, w0);
 
-      final int x1 = PVectorM4IContract.randomPositiveNumber();
-      final int y1 = PVectorM4IContract.randomPositiveNumber();
-      final int z1 = PVectorM4IContract.randomPositiveNumber();
-      final int w1 = PVectorM4IContract.randomPositiveNumber();
+      final int x1 = randomPositiveNumber();
+      final int y1 = randomPositiveNumber();
+      final int z1 = randomPositiveNumber();
+      final int w1 = randomPositiveNumber();
       final V v1 = this.newVectorM4I(x1, y1, z1, w1);
 
       final V vr0 = this.newVectorM4I();

@@ -123,7 +123,7 @@ public final class VectorByteBufferedM3F extends ByteBuffered implements VectorB
     final int i,
     final float x)
   {
-    this.buffer.putFloat(VectorByteBufferedM3F.getByteOffsetForIndex(o, i), x);
+    this.buffer.putFloat(getByteOffsetForIndex(o, i), x);
   }
 
   private float getAtOffsetAndIndex(
@@ -131,7 +131,7 @@ public final class VectorByteBufferedM3F extends ByteBuffered implements VectorB
     final int i)
   {
     return this.buffer.getFloat(
-      VectorByteBufferedM3F.getByteOffsetForIndex(o, i));
+      getByteOffsetForIndex(o, i));
   }
 
   @Override public float getYF()

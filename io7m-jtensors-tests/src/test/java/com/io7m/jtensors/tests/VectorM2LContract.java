@@ -57,8 +57,8 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM2LContract.randomNegativeNumber();
-      final long y = VectorM2LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
       final T v = this.newVectorM2L(x, y);
 
       final T vr = this.newVectorM2L();
@@ -108,12 +108,12 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM2LContract.randomPositiveSmallNumber();
-      final long y0 = VectorM2LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM2L(x0, y0);
 
-      final long x1 = VectorM2LContract.randomPositiveSmallNumber();
-      final long y1 = VectorM2LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM2L(x1, y1);
 
       final T vr0 = this.newVectorM2L();
@@ -180,15 +180,15 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM2LContract.randomPositiveSmallNumber();
-      final long y0 = VectorM2LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM2L(x0, y0);
 
-      final long x1 = VectorM2LContract.randomPositiveSmallNumber();
-      final long y1 = VectorM2LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM2L(x1, y1);
 
-      final long r = VectorM2LContract.randomPositiveSmallNumber();
+      final long r = randomPositiveSmallNumber();
 
       final T vr0 = this.newVectorM2L();
       VectorM2L.addScaled(v0, v1, (double) r, vr0);
@@ -280,12 +280,12 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long max_x = VectorM2LContract.randomNegativeNumber();
-      final long max_y = VectorM2LContract.randomNegativeNumber();
+      final long max_x = randomNegativeNumber();
+      final long max_y = randomNegativeNumber();
       final T maximum = this.newVectorM2L(max_x, max_y);
 
-      final long x = VectorM2LContract.randomNegativeNumber();
-      final long y = VectorM2LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
       final T v = this.newVectorM2L(x, y);
 
       final T vr = this.newVectorM2L();
@@ -311,12 +311,12 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long min_x = VectorM2LContract.randomPositiveNumber();
-      final long min_y = VectorM2LContract.randomPositiveNumber();
+      final long min_x = randomPositiveNumber();
+      final long min_y = randomPositiveNumber();
       final T minimum = this.newVectorM2L(min_x, min_y);
 
-      final long x = VectorM2LContract.randomNegativeNumber();
-      final long y = VectorM2LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
       final T v = this.newVectorM2L(x, y);
 
       final T vr = this.newVectorM2L();
@@ -342,16 +342,16 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long min_x = VectorM2LContract.randomNegativeNumber();
-      final long min_y = VectorM2LContract.randomNegativeNumber();
+      final long min_x = randomNegativeNumber();
+      final long min_y = randomNegativeNumber();
       final T minimum = this.newVectorM2L(min_x, min_y);
 
-      final long max_x = VectorM2LContract.randomPositiveNumber();
-      final long max_y = VectorM2LContract.randomPositiveNumber();
+      final long max_x = randomPositiveNumber();
+      final long max_y = randomPositiveNumber();
       final T maximum = this.newVectorM2L(max_x, max_y);
 
-      final long x = VectorM2LContract.randomNegativeNumber();
-      final long y = VectorM2LContract.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
       final T v = this.newVectorM2L(x, y);
 
       final T vr = this.newVectorM2L();
@@ -381,10 +381,10 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long maximum = VectorM2LContract.randomNegativeNumber();
+      final long maximum = randomNegativeNumber();
 
-      final long x = VectorM2LContract.randomPositiveNumber();
-      final long y = VectorM2LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
       final T v = this.newVectorM2L(x, y);
 
       final T vr = this.newVectorM2L();
@@ -406,10 +406,10 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long minimum = VectorM2LContract.randomPositiveNumber();
+      final long minimum = randomPositiveNumber();
 
-      final long x = VectorM2LContract.randomNegativeNumber();
-      final long y = VectorM2LContract.randomNegativeNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomNegativeNumber();
       final T v = this.newVectorM2L(x, y);
 
       final T vr = this.newVectorM2L();
@@ -431,11 +431,11 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long minimum = VectorM2LContract.randomNegativeNumber();
-      final long maximum = VectorM2LContract.randomPositiveNumber();
+      final long minimum = randomNegativeNumber();
+      final long maximum = randomPositiveNumber();
 
-      final long x = VectorM2LContract.randomNegativeNumber();
-      final long y = VectorM2LContract.randomPositiveNumber();
+      final long x = randomNegativeNumber();
+      final long y = randomPositiveNumber();
       final T v = this.newVectorM2L(x, y);
 
       final T vr = this.newVectorM2L();
@@ -474,8 +474,8 @@ public abstract class VectorM2LContract<T extends Vector2LType>
   @Test public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM2L(
-      VectorM2LContract.getRandomLargePositive(),
-      VectorM2LContract.getRandomLargePositive());
+      getRandomLargePositive(),
+      getRandomLargePositive());
     final T v1 = this.newVectorM2L();
 
     v1.copyFrom2L(v0);
@@ -503,12 +503,12 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM2LContract.randomPositiveSmallNumber();
-      final long y0 = VectorM2LContract.randomPositiveSmallNumber();
+      final long x0 = randomPositiveSmallNumber();
+      final long y0 = randomPositiveSmallNumber();
       final T v0 = this.newVectorM2L(x0, y0);
 
-      final long x1 = VectorM2LContract.randomPositiveSmallNumber();
-      final long y1 = VectorM2LContract.randomPositiveSmallNumber();
+      final long x1 = randomPositiveSmallNumber();
+      final long y1 = randomPositiveSmallNumber();
       final T v1 = this.newVectorM2L(x1, y1);
 
       Assert.assertTrue(VectorM2L.distance(c, v0, v1) >= 0L);
@@ -704,12 +704,12 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM2LContract.randomPositiveNumber();
-      final long y0 = VectorM2LContract.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
       final T v0 = this.newVectorM2L(x0, y0);
 
-      final long x1 = VectorM2LContract.randomPositiveNumber();
-      final long y1 = VectorM2LContract.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
       final T v1 = this.newVectorM2L(x1, y1);
 
       final T vr0 = this.newVectorM2L();
@@ -730,8 +730,8 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM2LContract.randomPositiveSmallNumber();
-      final long y = VectorM2LContract.randomPositiveSmallNumber();
+      final long x = randomPositiveSmallNumber();
+      final long y = randomPositiveSmallNumber();
       final T v = this.newVectorM2L(x, y);
 
       final long m = VectorM2L.magnitude(v);
@@ -854,8 +854,8 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM2LContract.randomPositiveNumber();
-      final long y = VectorM2LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
       final T v = this.newVectorM2L(x, y);
 
       final T vr = this.newVectorM2L();
@@ -882,8 +882,8 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x = VectorM2LContract.randomPositiveNumber();
-      final long y = VectorM2LContract.randomPositiveNumber();
+      final long x = randomPositiveNumber();
+      final long y = randomPositiveNumber();
       final T v = this.newVectorM2L(x, y);
 
       final T vr = this.newVectorM2L();
@@ -913,12 +913,12 @@ public abstract class VectorM2LContract<T extends Vector2LType>
     for (long index = 0L; index
                           < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
-      final long x0 = VectorM2LContract.randomPositiveNumber();
-      final long y0 = VectorM2LContract.randomPositiveNumber();
+      final long x0 = randomPositiveNumber();
+      final long y0 = randomPositiveNumber();
       final T v0 = this.newVectorM2L(x0, y0);
 
-      final long x1 = VectorM2LContract.randomPositiveNumber();
-      final long y1 = VectorM2LContract.randomPositiveNumber();
+      final long x1 = randomPositiveNumber();
+      final long y1 = randomPositiveNumber();
       final T v1 = this.newVectorM2L(x1, y1);
 
       final T vr0 = this.newVectorM2L();

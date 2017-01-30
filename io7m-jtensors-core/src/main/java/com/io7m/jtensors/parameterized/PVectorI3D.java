@@ -31,7 +31,8 @@ import net.jcip.annotations.Immutable;
  * @param <T> A phantom type parameter.
  */
 
-@Immutable public final class PVectorI3D<T> implements PVectorReadable3DType<T>
+@Immutable
+public final class PVectorI3D<T> implements PVectorReadable3DType<T>
 {
   /**
    * The zero vector.
@@ -141,7 +142,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3DType<T> v1,
     final double r)
   {
-    return PVectorI3D.add(v0, PVectorI3D.scale(v1, r));
+    return add(v0, scale(v1, r));
   }
 
   /**
@@ -345,7 +346,7 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3DType<T> v0,
     final PVectorReadable3DType<T> v1)
   {
-    return PVectorI3D.magnitude(PVectorI3D.subtract(v0, v1));
+    return magnitude(subtract(v0, v1));
   }
 
   /**
@@ -391,9 +392,9 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3DType<T> v1,
     final double alpha)
   {
-    final PVectorI3D<T> w0 = PVectorI3D.scale(v0, 1.0 - alpha);
-    final PVectorI3D<T> w1 = PVectorI3D.scale(v1, alpha);
-    return PVectorI3D.add(w0, w1);
+    final PVectorI3D<T> w0 = scale(v0, 1.0 - alpha);
+    final PVectorI3D<T> w1 = scale(v1, alpha);
+    return add(w0, w1);
   }
 
   /**
@@ -410,7 +411,7 @@ import net.jcip.annotations.Immutable;
   public static <T> double magnitude(
     final PVectorReadable3DType<T> v)
   {
-    return Math.sqrt(PVectorI3D.magnitudeSquared(v));
+    return Math.sqrt(magnitudeSquared(v));
   }
 
   /**
@@ -425,7 +426,7 @@ import net.jcip.annotations.Immutable;
   public static <T> double magnitudeSquared(
     final PVectorReadable3DType<T> v)
   {
-    return PVectorI3D.dotProduct(v, v);
+    return dotProduct(v, v);
   }
 
   /**
@@ -442,10 +443,10 @@ import net.jcip.annotations.Immutable;
   public static <T> PVectorI3D<T> normalize(
     final PVectorReadable3DType<T> v)
   {
-    final double m = PVectorI3D.magnitudeSquared(v);
+    final double m = magnitudeSquared(v);
     if (m > 0.0) {
       final double reciprocal = 1.0 / Math.sqrt(m);
-      return PVectorI3D.scale(v, reciprocal);
+      return scale(v, reciprocal);
     }
     return new PVectorI3D<T>(v);
   }
@@ -468,11 +469,11 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3DType<T> v0,
     final PVectorReadable3DType<T> v1)
   {
-    final PVectorI3D<T> v0n = PVectorI3D.normalize(v0);
+    final PVectorI3D<T> v0n = normalize(v0);
     final PVectorI3D<T> projection =
-      PVectorI3D.scale(v0n, PVectorI3D.dotProduct(v1, v0n));
+      scale(v0n, dotProduct(v1, v0n));
     final PVectorI3D<T> vr =
-      PVectorI3D.normalize(PVectorI3D.subtract(v1, projection));
+      normalize(subtract(v1, projection));
     return Pair.pair(v0n, vr);
   }
 
@@ -491,10 +492,10 @@ import net.jcip.annotations.Immutable;
     final PVectorReadable3DType<T> p,
     final PVectorReadable3DType<T> q)
   {
-    final double dot = PVectorI3D.dotProduct(p, q);
-    final double qms = PVectorI3D.magnitudeSquared(q);
+    final double dot = dotProduct(p, q);
+    final double qms = magnitudeSquared(q);
     final double s = dot / qms;
-    return PVectorI3D.scale(p, s);
+    return scale(p, s);
   }
 
   /**
@@ -540,12 +541,14 @@ import net.jcip.annotations.Immutable;
    * @return The zero vector.
    */
 
-  @SuppressWarnings("unchecked") public static <T> PVectorI3D<T> zero()
+  @SuppressWarnings("unchecked")
+  public static <T> PVectorI3D<T> zero()
   {
-    return (PVectorI3D<T>) PVectorI3D.ZERO;
+    return (PVectorI3D<T>) ZERO;
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -567,22 +570,26 @@ import net.jcip.annotations.Immutable;
     return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.x;
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.y;
   }
 
-  @Override public double getZD()
+  @Override
+  public double getZD()
   {
     return this.z;
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -596,7 +603,8 @@ import net.jcip.annotations.Immutable;
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder();
     builder.append("[PVectorI3D ");
