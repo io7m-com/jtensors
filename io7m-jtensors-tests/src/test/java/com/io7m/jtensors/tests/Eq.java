@@ -23,10 +23,10 @@ package com.io7m.jtensors.tests;
 public final class Eq
 {
   /**
-   * The smallest delta for double precision values.
+   * A small delta for double precision values.
    */
 
-  public static final double DELTA_D_SMALL = 0.000000000001;
+  public static final double DELTA_D_SMALL = 0.0000001;
 
   /**
    * The smallest delta for single precision values.
