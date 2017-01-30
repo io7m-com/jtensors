@@ -1402,10 +1402,10 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     final VectorM3D v_got = new VectorM3D();
     final VectorReadable3DType v_in = new VectorM3D(0.0, 1.0, 0.0);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
     final VectorReadable3DType v_exp = new VectorM3D(0.0, 6.1232339957367E-17, 1.0);
@@ -1445,10 +1445,10 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     final VectorM3D v_got = new VectorM3D();
     final VectorReadable3DType v_in = new VectorM3D(0.0, 0.0, -1.0);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
     final VectorReadable3DType v_exp = new VectorM3D(-1.0, 0.0, -6.1232339957367E-17);
@@ -1522,10 +1522,10 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     final VectorM3D v_got = new VectorM3D();
     final VectorReadable3DType v_in = new VectorM3D(0.0, 1.0, 0.0);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
     final VectorReadable3DType v_exp = new VectorM3D(0.0, 6.1232339957367E-17, -1.0);
@@ -1565,10 +1565,10 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     final VectorM3D v_got = new VectorM3D();
     final VectorReadable3DType v_in = new VectorM3D(0.0, 0.0, -1.0);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
     final VectorReadable3DType v_exp = new VectorM3D(1.0, 0.0, -6.1232339957367E-17);

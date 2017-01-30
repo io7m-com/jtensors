@@ -58,16 +58,16 @@ public final class PMatrixM4x4F
 
     final double d_inv = 1.0 / d;
 
-    /**
-     * This code is based on the Laplace Expansion theorem. Essentially, the
-     * inverse of the matrix is calculated by taking the determinants of 3x3
-     * sub-matrices of the original matrix. The sub-matrices are created by
-     * removing a specific row and column to leave 9 (possibly non-adjacent)
-     * cells, which are then placed in a 3x3 matrix.
-     *
-     * This implementation was derived from the paper "The Laplace Expansion
-     * Theorem: Computing the Determinants and Inverses of Matrices" by David
-     * Eberly.
+    /*
+      This code is based on the Laplace Expansion theorem. Essentially, the
+      inverse of the matrix is calculated by taking the determinants of 3x3
+      sub-matrices of the original matrix. The sub-matrices are created by
+      removing a specific row and column to leave 9 (possibly non-adjacent)
+      cells, which are then placed in a 3x3 matrix.
+
+      This implementation was derived from the paper "The Laplace Expansion
+      Theorem: Computing the Determinants and Inverses of Matrices" by David
+      Eberly.
      */
 
     final double r0c0;
@@ -362,9 +362,9 @@ public final class PMatrixM4x4F
       r3c3 = MatrixM3x3F.determinant(m3);
     }
 
-    /**
-     * Divide sub-matrix determinants by the determinant of the original
-     * matrix and transpose.
+    /*
+      Divide sub-matrix determinants by the determinant of the original
+      matrix and transpose.
      */
 
     temp.setR0C0F((float) (r0c0 * d_inv));

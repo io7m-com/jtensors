@@ -23,8 +23,8 @@ package com.io7m.jtensors.tests.parameterized;
 public abstract class PVectorI3Contract
 {
   /**
-   * <code>∀v. w = absolute(v) → w.x = abs(v.x) ∧ w.y = abs(v.y) ∧ w.z =
-   * abs(v.z)</code>
+   * {@code ∀v. w = absolute(v) → w.x = abs(v.x) ∧ w.y = abs(v.y) ∧ w.z =
+   * abs(v.z)}
    */
 
   public abstract void testAbsolute();
@@ -48,7 +48,7 @@ public abstract class PVectorI3Contract
   public abstract void testAlmostEqualNot();
 
   /**
-   * <code>∀v r s. v ≃ r ∧ r ≃ s → v ≃ s</code>
+   * {@code ∀v r s. v ≃ r ∧ r ≃ s → v ≃ s}
    */
 
   public abstract void testAlmostEqualTransitive();
@@ -78,8 +78,8 @@ public abstract class PVectorI3Contract
   public abstract void testCopy();
 
   /**
-   * <p> <code>∀v u. dotProduct(crossProduct(v, u), v) = 0 ∧
-   * dotProduct(crossProduct(v, u), u) = 0</code> </p>
+   * <p> {@code ∀v u. dotProduct(crossProduct(v, u), v) = 0 ∧
+   * dotProduct(crossProduct(v, u), u) = 0} </p>
    */
 
   public abstract void testCrossProductPerpendicular();
@@ -95,7 +95,7 @@ public abstract class PVectorI3Contract
   public abstract void testDistanceOrdering();
 
   /**
-   * The <code>dotProduct</code> function gives expected results.
+   * The {@code dotProduct} function gives expected results.
    */
 
   public abstract void testDotProduct();
@@ -103,13 +103,13 @@ public abstract class PVectorI3Contract
   public abstract void testDotProductPerpendicular();
 
   /**
-   * <code>∀v. dotProduct(v, v) = 1</code>
+   * {@code ∀v. dotProduct(v, v) = 1}
    */
 
   public abstract void testDotProductSelf();
 
   /**
-   * <code>∀v. dotProduct(v, v) = magnitude(v)²</code>
+   * {@code ∀v. dotProduct(v, v) = magnitude(v)²}
    */
 
   public abstract void testDotProductSelfMagnitudeSquared();
@@ -141,7 +141,7 @@ public abstract class PVectorI3Contract
   public abstract void testInitializeReadable();
 
   /**
-   * <p> <code>∀v r s. interpolateLinear(v, r, 1.0) = r</code> </p> <p> <code>∀v
+   * <p> {@code ∀v r s. interpolateLinear(v, r, 1.0) = r} </p> <p> <code>∀v
    * r s. interpolateLinear(v, r, 0.0) = v</code> </p>
    */
 
@@ -154,19 +154,19 @@ public abstract class PVectorI3Contract
   public abstract void testMagnitudeNonzero();
 
   /**
-   * <p> <code>∀v. magnitude(normalize(v)) = 1</code> </p>
+   * <p> {@code ∀v. magnitude(normalize(v)) = 1} </p>
    */
 
   public abstract void testMagnitudeNormal();
 
   /**
-   * <p> <code>magnitude(normalize((0,0,0)) = 0</code> </p>
+   * <p> {@code magnitude(normalize((0,0,0)) = 0} </p>
    */
 
   public abstract void testMagnitudeNormalizeZero();
 
   /**
-   * <p> <code>magnitude((1,0,0)) = 1</code> </p>
+   * <p> {@code magnitude((1,0,0)) = 1} </p>
    */
 
   public abstract void testMagnitudeOne();
@@ -178,7 +178,7 @@ public abstract class PVectorI3Contract
   public abstract void testMagnitudeSimple();
 
   /**
-   * <p> <code>magnitude((0,0,0)) = 0</code> </p>
+   * <p> {@code magnitude((0,0,0)) = 0} </p>
    */
 
   public abstract void testMagnitudeZero();
@@ -205,13 +205,13 @@ public abstract class PVectorI3Contract
   public abstract void testProjectionPerpendicularZero();
 
   /**
-   * <p> <code>∀v. scale(v, 1) = v</code> </p>
+   * <p> {@code ∀v. scale(v, 1) = v} </p>
    */
 
   public abstract void testScaleOne();
 
   /**
-   * <p> <code>∀v. scale(v, 0) = (0,0,0)</code> </p>
+   * <p> {@code ∀v. scale(v, 0) = (0,0,0)} </p>
    */
 
   public abstract void testScaleZero();

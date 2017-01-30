@@ -1410,10 +1410,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorM3F v_got = new VectorM3F();
     final VectorReadable3FType v_in = new VectorM3F(0.0f, 1.0f, 0.0f);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
     final VectorReadable3FType v_exp = new VectorM3F(
@@ -1454,10 +1454,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorM3F v_got = new VectorM3F();
     final VectorReadable3FType v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
     final VectorReadable3FType v_exp = new VectorM3F(
@@ -1533,10 +1533,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorM3F v_got = new VectorM3F();
     final VectorReadable3FType v_in = new VectorM3F(0.0f, 1.0f, 0.0f);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
     final VectorReadable3FType v_exp = new VectorM3F(
@@ -1577,10 +1577,10 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorM3F v_got = new VectorM3F();
     final VectorReadable3FType v_in = new VectorM3F(0.0f, 0.0f, -1.0f);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
     final VectorReadable3FType v_exp = new VectorM3F(

@@ -414,16 +414,16 @@ public final class MatrixM4x4F
 
     final double d_inv = 1.0 / d;
 
-    /**
-     * This code is based on the Laplace Expansion theorem. Essentially, the
-     * inverse of the matrix is calculated by taking the determinants of 3x3
-     * sub-matrices of the original matrix. The sub-matrices are created by
-     * removing a specific row and column to leave 9 (possibly non-adjacent)
-     * cells, which are then placed in a 3x3 matrix.
-     *
-     * This implementation was derived from the paper "The Laplace Expansion
-     * Theorem: Computing the Determinants and Inverses of Matrices" by David
-     * Eberly.
+    /*
+      This code is based on the Laplace Expansion theorem. Essentially, the
+      inverse of the matrix is calculated by taking the determinants of 3x3
+      sub-matrices of the original matrix. The sub-matrices are created by
+      removing a specific row and column to leave 9 (possibly non-adjacent)
+      cells, which are then placed in a 3x3 matrix.
+
+      This implementation was derived from the paper "The Laplace Expansion
+      Theorem: Computing the Determinants and Inverses of Matrices" by David
+      Eberly.
      */
 
     final double r0c0;
@@ -718,9 +718,9 @@ public final class MatrixM4x4F
       r3c3 = MatrixM3x3F.determinant(m3);
     }
 
-    /**
-     * Divide sub-matrix determinants by the determinant of the original
-     * matrix and transpose.
+    /*
+      Divide sub-matrix determinants by the determinant of the original
+      matrix and transpose.
      */
 
     temp.setR0C0F((float) (r0c0 * d_inv));
@@ -832,8 +832,8 @@ public final class MatrixM4x4F
     setIdentity(translation);
     setIdentity(out_matrix);
 
-    /**
-     * Calculate "forward" vector
+    /*
+      Calculate "forward" vector
      */
 
     forward.set3F(
@@ -842,21 +842,21 @@ public final class MatrixM4x4F
       target.getZF() - origin.getZF());
     VectorM3F.normalizeInPlace(forward);
 
-    /**
-     * Calculate "side" vector
+    /*
+      Calculate "side" vector
      */
 
     VectorM3F.crossProduct(forward, up, side);
     VectorM3F.normalizeInPlace(side);
 
-    /**
-     * Calculate new "up" vector
+    /*
+      Calculate new "up" vector
      */
 
     VectorM3F.crossProduct(side, forward, new_up);
 
-    /**
-     * Calculate rotation matrix
+    /*
+      Calculate rotation matrix
      */
 
     rotation.setR0C0F(side.getXF());
@@ -869,15 +869,15 @@ public final class MatrixM4x4F
     rotation.setR2C1F(-forward.getYF());
     rotation.setR2C2F(-forward.getZF());
 
-    /**
-     * Calculate camera translation matrix
+    /*
+      Calculate camera translation matrix
      */
 
     move.set3F(-origin.getXF(), -origin.getYF(), -origin.getZF());
     makeTranslation3F(move, translation);
 
-    /**
-     * Produce output matrix
+    /*
+      Produce output matrix
      */
 
     multiply(rotation, translation, out_matrix);

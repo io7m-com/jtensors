@@ -1578,8 +1578,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 0));
@@ -1603,8 +1603,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 3));
@@ -1614,8 +1614,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 0));
@@ -1645,8 +1645,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(0, 0));
@@ -1670,8 +1670,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 3));
@@ -1681,8 +1681,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 0));
@@ -1712,8 +1712,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 0));
@@ -1737,8 +1737,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 3));
@@ -1748,8 +1748,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 0));
@@ -1779,8 +1779,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.getRowColumnD(0, 0));
@@ -1804,8 +1804,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     eq = AlmostEqualDouble.almostEqual(ec, -1.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(0, 3));
@@ -1815,8 +1815,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 0));
@@ -1848,8 +1848,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(0, 0));
@@ -1873,8 +1873,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     eq = AlmostEqualDouble.almostEqual(ec, 1.0, m.getRowColumnD(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, -20.0, m.getRowColumnD(0, 3));
@@ -1884,8 +1884,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     eq = AlmostEqualDouble.almostEqual(ec, -40.0, m.getRowColumnD(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualDouble.almostEqual(ec, 0.0, m.getRowColumnD(3, 0));
@@ -2340,10 +2340,10 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     final VectorM4D v_got = new VectorM4D();
     final VectorReadable4DType v_in = new VectorM4D(0.0, 1.0, 0.0, 1.0);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
     final VectorReadable3DType v_exp = new VectorM4D(0.0, 6.1232339957367E-17, 1.0, 1.0);
@@ -2383,10 +2383,10 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     final VectorM4D v_got = new VectorM4D();
     final VectorReadable4DType v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
     final VectorReadable3DType v_exp = new VectorM4D(-1.0, 0.0, -6.1232339957367E-17, 1.0);
@@ -2461,10 +2461,10 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     final VectorM4D v_got = new VectorM4D();
     final VectorReadable4DType v_in = new VectorM4D(0.0, 1.0, 0.0, 1.0);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
     final VectorReadable3DType v_exp = new VectorM4D(0.0, 6.1232339957367E-17, -1.0, 1.0);
@@ -2504,10 +2504,10 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     final VectorM4D v_got = new VectorM4D();
     final VectorReadable4DType v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
     final VectorReadable3DType v_exp = new VectorM4D(1.0, 0.0, -6.1232339957367E-17, 1.0);

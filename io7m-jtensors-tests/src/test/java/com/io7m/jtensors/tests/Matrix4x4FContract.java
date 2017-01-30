@@ -1887,8 +1887,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 0));
@@ -1912,8 +1912,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 3));
@@ -1923,8 +1923,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(3, 0));
@@ -1954,8 +1954,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.getRowColumnF(0, 0));
@@ -1979,8 +1979,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.getRowColumnF(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 3));
@@ -1990,8 +1990,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(3, 0));
@@ -2021,8 +2021,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 0));
@@ -2046,8 +2046,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 3));
@@ -2057,8 +2057,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(3, 0));
@@ -2088,8 +2088,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, -1.0f, m.getRowColumnF(0, 0));
@@ -2113,8 +2113,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, -1.0f, m.getRowColumnF(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(0, 3));
@@ -2124,8 +2124,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(3, 0));
@@ -2157,8 +2157,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     boolean eq = false;
 
-    /**
-     * Rotation components
+    /*
+      Rotation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.getRowColumnF(0, 0));
@@ -2182,8 +2182,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, 1.0f, m.getRowColumnF(2, 2));
     Assert.assertTrue(eq);
 
-    /**
-     * Translation components
+    /*
+      Translation components
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, -20.0f, m.getRowColumnF(0, 3));
@@ -2193,8 +2193,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     eq = AlmostEqualFloat.almostEqual(ec, -40.0f, m.getRowColumnF(2, 3));
     Assert.assertTrue(eq);
 
-    /**
-     * Etc
+    /*
+      Etc
      */
 
     eq = AlmostEqualFloat.almostEqual(ec, 0.0f, m.getRowColumnF(3, 0));
@@ -2667,10 +2667,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorM4F v_got = new VectorM4F();
     final VectorReadable4FType v_in = new VectorM4F(0.0F, 1.0F, 0.0F, 1.0F);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
     final VectorReadable3FType v_exp =
@@ -2711,10 +2711,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorM4F v_got = new VectorM4F();
     final VectorReadable4FType v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
     final VectorReadable3FType v_exp =
@@ -2790,10 +2790,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorM4F v_got = new VectorM4F();
     final VectorReadable4FType v_in = new VectorM4F(0.0F, 1.0F, 0.0F, 1.0F);
 
-    /**
-     * XXX: Strange Y value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of Z is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Y value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of Z is the only
+      significant element, anyway.
      */
 
     final VectorReadable3FType v_exp =
@@ -2834,10 +2834,10 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorM4F v_got = new VectorM4F();
     final VectorReadable4FType v_in = new VectorM4F(0.0F, 0.0F, -1.0F, 1.0F);
 
-    /**
-     * XXX: Strange Z value due to floating point imprecision, with no good
-     * way to compare it to 0 with an epsilon. The value of X is the only
-     * significant element, anyway.
+    /*
+      XXX: Strange Z value due to floating point imprecision, with no good
+      way to compare it to 0 with an epsilon. The value of X is the only
+      significant element, anyway.
      */
 
     final VectorReadable3FType v_exp =

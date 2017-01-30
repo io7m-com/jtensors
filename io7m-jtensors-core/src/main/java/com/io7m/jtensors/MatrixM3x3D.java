@@ -469,8 +469,8 @@ public final class MatrixM3x3D
 
     setIdentity(out_matrix);
 
-    /**
-     * Calculate "forward" vector
+    /*
+      Calculate "forward" vector
      */
 
     forward.set3D(
@@ -479,21 +479,21 @@ public final class MatrixM3x3D
       target.getZD() - origin.getZD());
     VectorM3D.normalizeInPlace(forward);
 
-    /**
-     * Calculate "side" vector
+    /*
+      Calculate "side" vector
      */
 
     VectorM3D.crossProduct(forward, up, side);
     VectorM3D.normalizeInPlace(side);
 
-    /**
-     * Calculate new "up" vector
+    /*
+      Calculate new "up" vector
      */
 
     VectorM3D.crossProduct(side, forward, new_up);
 
-    /**
-     * Calculate rotation matrix
+    /*
+      Calculate rotation matrix
      */
 
     out_matrix.setR0C0D(side.getXD());
@@ -506,8 +506,8 @@ public final class MatrixM3x3D
     out_matrix.setR2C1D(-forward.getYD());
     out_matrix.setR2C2D(-forward.getZD());
 
-    /**
-     * Calculate camera translation matrix
+    /*
+      Calculate camera translation matrix
      */
 
     out_translation.set3D(-origin.getXD(), -origin.getYD(), -origin.getZD());
