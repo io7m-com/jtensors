@@ -77,6 +77,7 @@ import com.io7m.jtensors.parameterized.PVectorM4L;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -86,7 +87,7 @@ import java.util.Set;
     final Class<?> c)
     throws Exception
   {
-    final Set<String> names = new HashSet<String>();
+    final Collection<String> names = new HashSet<String>();
     final HashSet<String> collisions = new HashSet<String>();
 
     for (final Field n : c.getDeclaredFields()) {

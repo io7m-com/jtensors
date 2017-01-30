@@ -771,8 +771,8 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       final double target_z = (getRandom() * 100.0)
         - (getRandom() * 100.0);
 
-      final VectorI3D origin = new VectorI3D(origin_x, origin_y, origin_z);
-      final VectorI3D target = new VectorI3D(target_x, target_y, target_z);
+      final VectorReadable3DType origin = new VectorI3D(origin_x, origin_y, origin_z);
+      final VectorReadable3DType target = new VectorI3D(target_x, target_y, target_z);
 
       MatrixM4x4D.lookAt(
         mc, origin, target, AXIS_Y, ml);
@@ -892,7 +892,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final VectorI3D axis_r =
+      final VectorReadable3DType axis_r =
         new VectorI3D(getRandom(), getRandom(), getRandom());
       final VectorI3D axis_n =
         VectorI3D.normalize(axis_r);
@@ -910,7 +910,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   }
 
   private void checkAxisAngle(
-    final VectorI3D expected_axis,
+    final VectorReadable3DType expected_axis,
     final double expected_angle,
     final T q)
   {
@@ -943,7 +943,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
-    final VectorI3D axis = new VectorI3D(1.0, 0.0, 0.0);
+    final VectorReadable3DType axis = new VectorI3D(1.0, 0.0, 0.0);
     final T q = this.newQuaternion();
     final double angle = Math.toRadians(45.0);
     final T r = QuaternionM4D.makeFromAxisAngle(c, axis, angle, q);
@@ -968,7 +968,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
-    final VectorI3D axis = new VectorI3D(1.0, 0.0, 0.0);
+    final VectorReadable3DType axis = new VectorI3D(1.0, 0.0, 0.0);
     final T q = this.newQuaternion();
     final double angle = Math.toRadians(90.0);
     final T r = QuaternionM4D.makeFromAxisAngle(c, axis, angle, q);
@@ -993,7 +993,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     final T q = this.newQuaternion();
     final double angle = Math.toRadians(45.0);
     final T r = QuaternionM4D.makeFromAxisAngle(c, axis, angle, q);
@@ -1018,7 +1018,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     final T q = this.newQuaternion();
     final double angle = Math.toRadians(90.0);
     final T r = QuaternionM4D.makeFromAxisAngle(c, axis, angle, q);
@@ -1043,7 +1043,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
-    final VectorI3D axis = new VectorI3D(0.0, 0.0, 1.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 0.0, 1.0);
     final T q = this.newQuaternion();
     final double angle = Math.toRadians(45.0);
     final T r = QuaternionM4D.makeFromAxisAngle(c, axis, angle, q);
@@ -1068,7 +1068,7 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
-    final VectorI3D axis = new VectorI3D(0.0, 0.0, 1.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 0.0, 1.0);
     final T q = this.newQuaternion();
     final double angle = Math.toRadians(90.0);
     final T r = QuaternionM4D.makeFromAxisAngle(c, axis, angle, q);
@@ -1573,8 +1573,8 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   public final void testMultiply()
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
-    final VectorI3D axis_x = new VectorI3D(1.0, 0.0, 0.0);
-    final VectorI3D axis_y = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType axis_x = new VectorI3D(1.0, 0.0, 0.0);
+    final VectorReadable3DType axis_y = new VectorI3D(0.0, 1.0, 0.0);
     final T qx = this.newQuaternion();
     final T qxr =
       QuaternionM4D.makeFromAxisAngle(c, axis_x, Math.toRadians(45.0), qx);
@@ -1613,8 +1613,8 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
-    final VectorI3D axis_x = new VectorI3D(1.0, 0.0, 0.0);
-    final VectorI3D axis_y = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType axis_x = new VectorI3D(1.0, 0.0, 0.0);
+    final VectorReadable3DType axis_y = new VectorI3D(0.0, 1.0, 0.0);
 
     final T qx = this.newQuaternion();
     QuaternionM4D.makeFromAxisAngle(
@@ -1650,9 +1650,9 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
-    final VectorI3D axis_x = new VectorI3D(1.0, 0.0, 0.0);
-    final VectorI3D axis_y = new VectorI3D(0.0, 1.0, 0.0);
-    final VectorI3D axis_z = new VectorI3D(0.0, 0.0, 1.0);
+    final VectorReadable3DType axis_x = new VectorI3D(1.0, 0.0, 0.0);
+    final VectorReadable3DType axis_y = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType axis_z = new VectorI3D(0.0, 0.0, 1.0);
 
     final T qx = this.newQuaternion();
     QuaternionM4D.makeFromAxisAngle(c, axis_x, Math.toRadians(45.0), qx);
@@ -1690,9 +1690,9 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
-    final VectorI3D axis_x = new VectorI3D(1.0, 0.0, 0.0);
-    final VectorI3D axis_y = new VectorI3D(0.0, 1.0, 0.0);
-    final VectorI3D axis_z = new VectorI3D(0.0, 0.0, 1.0);
+    final VectorReadable3DType axis_x = new VectorI3D(1.0, 0.0, 0.0);
+    final VectorReadable3DType axis_y = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType axis_z = new VectorI3D(0.0, 0.0, 1.0);
 
     final T qx = this.newQuaternion();
     QuaternionM4D.makeFromAxisAngle(c, axis_x, Math.toRadians(45.0), qx);

@@ -23,6 +23,7 @@ import com.io7m.jtensors.MatrixReadable3x3FType;
 import com.io7m.jtensors.VectorI4F;
 import com.io7m.jtensors.VectorM2F;
 import com.io7m.jtensors.VectorM3F;
+import com.io7m.jtensors.VectorReadable3FType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -42,9 +43,9 @@ public abstract class MatrixReadable3x3FContract<T extends
 
   @Test public final void testGetCorrect()
   {
-    final VectorI4F c0 = new VectorI4F(1.0f, 10.0f, 100.0f, 1000.0f);
-    final VectorI4F c1 = new VectorI4F(2.0f, 20.0f, 200.0f, 2000.0f);
-    final VectorI4F c2 = new VectorI4F(3.0f, 30.0f, 300.0f, 3000.0f);
+    final VectorReadable3FType c0 = new VectorI4F(1.0f, 10.0f, 100.0f, 1000.0f);
+    final VectorReadable3FType c1 = new VectorI4F(2.0f, 20.0f, 200.0f, 2000.0f);
+    final VectorReadable3FType c2 = new VectorI4F(3.0f, 30.0f, 300.0f, 3000.0f);
     final MatrixI3x3F m0 = MatrixI3x3F.newFromColumns(c0, c1, c2);
 
     final T mr = this.newMatrixFrom(m0);
@@ -79,9 +80,9 @@ public abstract class MatrixReadable3x3FContract<T extends
 
   @Test public final void testGetRow3Correct()
   {
-    final VectorI4F c0 = new VectorI4F(1.0f, 10.0f, 100.0f, 1000.0f);
-    final VectorI4F c1 = new VectorI4F(2.0f, 20.0f, 200.0f, 2000.0f);
-    final VectorI4F c2 = new VectorI4F(3.0f, 30.0f, 300.0f, 3000.0f);
+    final VectorReadable3FType c0 = new VectorI4F(1.0f, 10.0f, 100.0f, 1000.0f);
+    final VectorReadable3FType c1 = new VectorI4F(2.0f, 20.0f, 200.0f, 2000.0f);
+    final VectorReadable3FType c2 = new VectorI4F(3.0f, 30.0f, 300.0f, 3000.0f);
     final MatrixI3x3F m0 = MatrixI3x3F.newFromColumns(c0, c1, c2);
 
     final T mr = this.newMatrixFrom(m0);
@@ -145,11 +146,11 @@ public abstract class MatrixReadable3x3FContract<T extends
 
   @Test public final void testGetRow2Correct()
   {
-    final VectorI4F c0 = new VectorI4F(
+    final VectorReadable3FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
-    final VectorI4F c1 = new VectorI4F(
+    final VectorReadable3FType c1 = new VectorI4F(
       2.0f, 20.0f, 200.0f, 2000.0f);
-    final VectorI4F c2 = new VectorI4F(
+    final VectorReadable3FType c2 = new VectorI4F(
       3.0f, 30.0f, 300.0f, 3000.0f);
     final MatrixI3x3F m0 = MatrixI3x3F.newFromColumns(c0, c1, c2);
 

@@ -25,9 +25,11 @@ import com.io7m.jtensors.MatrixHeapArrayM4x4F;
 import com.io7m.jtensors.MatrixM3x3F;
 import com.io7m.jtensors.MatrixM4x4F;
 import com.io7m.jtensors.QuaternionI4F;
+import com.io7m.jtensors.QuaternionReadable4FType;
 import com.io7m.jtensors.VectorI3F;
 import com.io7m.jtensors.VectorM3F;
 import com.io7m.jtensors.VectorReadable3FType;
+import com.io7m.jtensors.VectorReadable4FType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -84,74 +86,74 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final float q = w + 1.0f;
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(q, y, z, w);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(q, y, z, w);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(x, q, z, w);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(x, q, z, w);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(x, y, q, w);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(x, y, q, w);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(x, y, z, q);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(x, y, z, q);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(q, q, z, w);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(q, q, z, w);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(q, y, q, w);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(q, y, q, w);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(q, y, z, q);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(q, y, z, q);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(q, q, q, w);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(q, q, q, w);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(q, q, z, q);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(q, q, z, q);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(q, q, q, q);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(q, q, q, q);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(x, q, q, q);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(x, q, q, q);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final QuaternionI4F m0 = new QuaternionI4F(x, y, z, w);
-      final QuaternionI4F m1 = new QuaternionI4F(x, y, q, q);
+      final QuaternionReadable4FType m0 = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType m1 = new QuaternionI4F(x, y, q, q);
       Assert.assertFalse(QuaternionI4F.almostEqual(ec, m0, m1));
     }
   }
@@ -166,9 +168,9 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final float y0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
       final float z0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
       final float w0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final QuaternionI4F v0 = new QuaternionI4F(x0, y0, z0, w0);
-      final QuaternionI4F v1 = new QuaternionI4F(x0, y0, z0, w0);
-      final QuaternionI4F v2 = new QuaternionI4F(x0, y0, z0, w0);
+      final QuaternionReadable4FType v0 = new QuaternionI4F(x0, y0, z0, w0);
+      final QuaternionReadable4FType v1 = new QuaternionI4F(x0, y0, z0, w0);
+      final QuaternionReadable4FType v2 = new QuaternionI4F(x0, y0, z0, w0);
 
       Assert.assertTrue(QuaternionI4F.almostEqual(ec, v0, v1));
       Assert.assertTrue(QuaternionI4F.almostEqual(ec, v1, v2));
@@ -178,7 +180,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testCheckInterface()
   {
-    final QuaternionI4F v = new QuaternionI4F(3.0f, 5.0f, 7.0f, 11.0f);
+    final VectorReadable4FType v = new QuaternionI4F(3.0f, 5.0f, 7.0f, 11.0f);
 
     Assert.assertEquals(v.getXF(), v.getXF(), 0.0);
     Assert.assertEquals(v.getYF(), v.getYF(), 0.0);
@@ -191,8 +193,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
 
-    final QuaternionI4F e = new QuaternionI4F(-1.0f, -2.0f, -3.0f, 4.0f);
-    final QuaternionI4F q = new QuaternionI4F(1.0f, 2.0f, 3.0f, 4.0f);
+    final QuaternionReadable4FType e = new QuaternionI4F(-1.0f, -2.0f, -3.0f, 4.0f);
+    final QuaternionReadable4FType q = new QuaternionI4F(1.0f, 2.0f, 3.0f, 4.0f);
     final QuaternionI4F r = QuaternionI4F.conjugate(q);
     final boolean t = QuaternionI4F.almostEqual(context, e, r);
 
@@ -222,7 +224,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
   {
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
-    final QuaternionI4F v = new QuaternionI4F();
+    final QuaternionReadable4FType v = new QuaternionI4F();
     QuaternionI4F.almostEqual(context, v, QuaternionI4F.IDENTITY);
   }
 
@@ -291,7 +293,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final float y = (float) this.getRandom();
       final float z = (float) this.getRandom();
       final float w = (float) this.getRandom();
-      final QuaternionI4F q = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType q = new QuaternionI4F(x, y, z, w);
 
       final double ms = (double) QuaternionI4F.magnitudeSquared(q);
       final double dp = (double) QuaternionI4F.dotProduct(q, q);
@@ -447,7 +449,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
   @Override @Test public final void testInitializeReadable()
   {
     final QuaternionI4F v0 = new QuaternionI4F(1.0f, 2.0f, 3.0f, 4.0f);
-    final QuaternionI4F v1 = new QuaternionI4F(v0);
+    final VectorReadable4FType v1 = new QuaternionI4F(v0);
 
     Assert.assertEquals(v1.getXF(), v0.getXF(), 0.0);
     Assert.assertEquals(v1.getYF(), v0.getYF(), 0.0);
@@ -465,13 +467,13 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final float y0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
       final float z0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
       final float w0 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final QuaternionI4F v0 = new QuaternionI4F(x0, y0, z0, w0);
+      final QuaternionReadable4FType v0 = new QuaternionI4F(x0, y0, z0, w0);
 
       final float x1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
       final float y1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
       final float z1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
       final float w1 = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final QuaternionI4F v1 = new QuaternionI4F(x1, y1, z1, w1);
+      final QuaternionReadable4FType v1 = new QuaternionI4F(x1, y1, z1, w1);
 
       Assert.assertTrue(
         QuaternionI4F.almostEqual(
@@ -557,8 +559,8 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final float target_z =
         (float) ((this.getRandom() * 100.0) - (this.getRandom() * 100.0));
 
-      final VectorI3F origin = new VectorI3F(origin_x, origin_y, origin_z);
-      final VectorI3F target = new VectorI3F(target_x, target_y, target_z);
+      final VectorReadable3FType origin = new VectorI3F(origin_x, origin_y, origin_z);
+      final VectorReadable3FType target = new VectorI3F(target_x, target_y, target_z);
 
       MatrixM4x4F.lookAt(
         mc, origin, target, QuaternionI4FTest.AXIS_Y, ml);
@@ -587,7 +589,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
         (float) (1.0 + (this.getRandom() * (double) Float.MAX_VALUE));
       final float w =
         (float) (1.0 + (this.getRandom() * (double) Float.MAX_VALUE));
-      final QuaternionI4F v = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType v = new QuaternionI4F(x, y, z, w);
 
       final double m = (double) QuaternionI4F.magnitude(v);
       Assert.assertTrue(m > 0.0);
@@ -602,7 +604,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final float y = (float) (1.0 + (this.getRandom() * (double) max));
       final float z = (float) (1.0 + (this.getRandom() * (double) max));
       final float w = (float) (1.0 + (this.getRandom() * (double) max));
-      final QuaternionI4F v = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType v = new QuaternionI4F(x, y, z, w);
 
       final QuaternionI4F vr = QuaternionI4F.normalize(v);
       Assert.assertNotSame(v, vr);
@@ -614,7 +616,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMagnitudeNormalizeZero()
   {
-    final QuaternionI4F v = new QuaternionI4F(0.0f, 0.0f, 0.0f, 0.0f);
+    final QuaternionReadable4FType v = new QuaternionI4F(0.0f, 0.0f, 0.0f, 0.0f);
     final QuaternionI4F vr = QuaternionI4F.normalize(v);
     final double m = (double) QuaternionI4F.magnitude(vr);
     Assert.assertEquals(0.0, m, Eq.DELTA_D_SMALL);
@@ -622,14 +624,14 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMagnitudeOne()
   {
-    final QuaternionI4F v = new QuaternionI4F(1.0f, 0.0f, 0.0f, 0.0f);
+    final QuaternionReadable4FType v = new QuaternionI4F(1.0f, 0.0f, 0.0f, 0.0f);
     final double m = (double) QuaternionI4F.magnitude(v);
     Assert.assertEquals(1.0, m, Eq.DELTA_D_SMALL);
   }
 
   @Override @Test public final void testMagnitudeSimple()
   {
-    final QuaternionI4F v = new QuaternionI4F(8.0f, 0.0f, 0.0f, 0.0f);
+    final QuaternionReadable4FType v = new QuaternionI4F(8.0f, 0.0f, 0.0f, 0.0f);
 
     {
       final double p = (double) QuaternionI4F.dotProduct(v, v);
@@ -643,7 +645,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMagnitudeZero()
   {
-    final QuaternionI4F v = new QuaternionI4F(0.0f, 0.0f, 0.0f, 0.0f);
+    final QuaternionReadable4FType v = new QuaternionI4F(0.0f, 0.0f, 0.0f, 0.0f);
     final double m = (double) QuaternionI4F.magnitude(v);
     Assert.assertEquals(0.0, m, Eq.DELTA_D_SMALL);
   }
@@ -651,7 +653,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
   @Override @Test public final void testMakeAxisAngleNormal()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final VectorI3F axis_r = new VectorI3F(
+      final VectorReadable3FType axis_r = new VectorI3F(
         (float) this.getRandom(),
         (float) this.getRandom(),
         (float) this.getRandom());
@@ -968,7 +970,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMakeMatrix3x3_Identity()
   {
-    final QuaternionI4F q = new QuaternionI4F();
+    final QuaternionReadable4FType q = new QuaternionI4F();
     final Matrix3x3FType m = MatrixHeapArrayM3x3F.newMatrix();
 
     QuaternionI4F.makeRotationMatrix3x3(q, m);
@@ -1114,7 +1116,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testMakeMatrix4x4_Identity()
   {
-    final QuaternionI4F q = new QuaternionI4F();
+    final QuaternionReadable4FType q = new QuaternionI4F();
     final Matrix4x4FType m = MatrixHeapArrayM4x4F.newMatrix();
 
     QuaternionI4F.makeRotationMatrix4x4(q, m);
@@ -1244,9 +1246,9 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final double y = (this.getRandom() * 2.0) - this.getRandom();
       final double z = (this.getRandom() * 2.0) - this.getRandom();
       final double w = (this.getRandom() * 2.0) - this.getRandom();
-      final QuaternionI4F qi =
+      final QuaternionReadable4FType qi =
         new QuaternionI4F((float) x, (float) y, (float) z, (float) w);
-      final QuaternionI4F qn =
+      final QuaternionReadable4FType qn =
         new QuaternionI4F((float) -x, (float) -y, (float) -z, (float) -w);
       final QuaternionI4F qr = QuaternionI4F.negate(qi);
 
@@ -1260,11 +1262,11 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
 
-    final QuaternionI4F qi = new QuaternionI4F(1.0F, 2.0F, 3.0F, 4.0F);
-    final QuaternionI4F qnx = new QuaternionI4F(-1.0F, 2.0F, 3.0F, 4.0F);
-    final QuaternionI4F qny = new QuaternionI4F(-1.0F, -2.0F, 3.0F, 4.0F);
-    final QuaternionI4F qnz = new QuaternionI4F(-1.0F, -2.0F, -3.0F, 4.0F);
-    final QuaternionI4F qnw = new QuaternionI4F(-1.0F, -2.0F, -3.0F, -4.0F);
+    final QuaternionReadable4FType qi = new QuaternionI4F(1.0F, 2.0F, 3.0F, 4.0F);
+    final QuaternionReadable4FType qnx = new QuaternionI4F(-1.0F, 2.0F, 3.0F, 4.0F);
+    final QuaternionReadable4FType qny = new QuaternionI4F(-1.0F, -2.0F, 3.0F, 4.0F);
+    final QuaternionReadable4FType qnz = new QuaternionI4F(-1.0F, -2.0F, -3.0F, 4.0F);
+    final QuaternionReadable4FType qnw = new QuaternionI4F(-1.0F, -2.0F, -3.0F, -4.0F);
 
     Assert.assertFalse(QuaternionI4F.isNegationOf(context, qi, qi));
     Assert.assertFalse(QuaternionI4F.isNegationOf(context, qi, qnx));
@@ -1279,7 +1281,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
 
   @Override @Test public final void testNormalizeSimple()
   {
-    final QuaternionI4F v0 = new QuaternionI4F(8.0f, 0.0f, 0.0f, 0.0f);
+    final QuaternionReadable4FType v0 = new QuaternionI4F(8.0f, 0.0f, 0.0f, 0.0f);
     final QuaternionI4F vr = QuaternionI4F.normalize(v0);
     final float m = QuaternionI4F.magnitude(vr);
     Assert.assertEquals(1.0f, m, 0.0);
@@ -1290,7 +1292,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final QuaternionI4F q = new QuaternionI4F(0.0F, 0.0F, 0.0F, 0.0F);
+    final QuaternionReadable4FType q = new QuaternionI4F(0.0F, 0.0F, 0.0F, 0.0F);
     final QuaternionI4F qr = QuaternionI4F.normalize(q);
 
     Assert.assertEquals(qr.getXF(), 0.0F, Eq.DELTA_F_SMALL);
@@ -1330,7 +1332,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final float y = (float) (this.getRandom() * (double) Float.MAX_VALUE);
       final float z = (float) (this.getRandom() * (double) Float.MAX_VALUE);
       final float w = (float) (this.getRandom() * (double) Float.MAX_VALUE);
-      final QuaternionI4F v = new QuaternionI4F(x, y, z, w);
+      final QuaternionReadable4FType v = new QuaternionI4F(x, y, z, w);
 
       final QuaternionI4F vr = QuaternionI4F.scale(v, 0.0f);
 

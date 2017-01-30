@@ -19,6 +19,7 @@ package com.io7m.jtensors.tests;
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorI4D;
+import com.io7m.jtensors.VectorReadable4DType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -138,74 +139,74 @@ public class VectorI4DTest extends VectorI4Contract
     final double q = w + 1.0;
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(q, y, z, w);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(q, y, z, w);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(x, q, z, w);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(x, q, z, w);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(x, y, q, w);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(x, y, q, w);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(x, y, z, q);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(x, y, z, q);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(q, q, z, w);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(q, q, z, w);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(q, y, q, w);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(q, y, q, w);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(q, y, z, q);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(q, y, z, q);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(q, q, q, w);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(q, q, q, w);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(q, q, z, q);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(q, q, z, q);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(q, q, q, q);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(q, q, q, q);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(x, q, q, q);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(x, q, q, q);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4D m0 = new VectorI4D(x, y, z, w);
-      final VectorI4D m1 = new VectorI4D(x, y, q, q);
+      final VectorReadable4DType m0 = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType m1 = new VectorI4D(x, y, q, q);
       Assert.assertFalse(VectorI4D.almostEqual(ec, m0, m1));
     }
   }
@@ -220,9 +221,9 @@ public class VectorI4DTest extends VectorI4Contract
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
       final double w0 = Math.random() * Double.MAX_VALUE;
-      final VectorI4D v0 = new VectorI4D(x0, y0, z0, w0);
-      final VectorI4D v1 = new VectorI4D(x0, y0, z0, w0);
-      final VectorI4D v2 = new VectorI4D(x0, y0, z0, w0);
+      final VectorReadable4DType v0 = new VectorI4D(x0, y0, z0, w0);
+      final VectorReadable4DType v1 = new VectorI4D(x0, y0, z0, w0);
+      final VectorReadable4DType v2 = new VectorI4D(x0, y0, z0, w0);
 
       Assert.assertTrue(VectorI4D.almostEqual(ec, v0, v1));
       Assert.assertTrue(VectorI4D.almostEqual(ec, v1, v2));
@@ -232,7 +233,7 @@ public class VectorI4DTest extends VectorI4Contract
 
   @Override @Test public void testCheckInterface()
   {
-    final VectorI4D v = new VectorI4D(3.0, 5.0, 7.0, 11.0);
+    final VectorReadable4DType v = new VectorI4D(3.0, 5.0, 7.0, 11.0);
 
     Assert.assertTrue(v.getXD() == v.getXD());
     Assert.assertTrue(v.getYD() == v.getYD());
@@ -253,7 +254,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
       final double w = Math.random() * Double.MIN_VALUE;
-      final VectorI4D v = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType v = new VectorI4D(x, y, z, w);
 
       Assert.assertTrue(
         VectorI4D.clampMaximumByVector(v, maximum).getXD()
@@ -283,7 +284,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
       final double w = Math.random() * Double.MIN_VALUE;
-      final VectorI4D v = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType v = new VectorI4D(x, y, z, w);
 
       Assert.assertTrue(
         VectorI4D.clampMinimumByVector(v, minimum).getXD()
@@ -319,7 +320,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MAX_VALUE;
       final double w = Math.random() * Double.MAX_VALUE;
-      final VectorI4D v = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType v = new VectorI4D(x, y, z, w);
 
       Assert.assertTrue(
         VectorI4D.clampByVector(v, minimum, maximum).getXD()
@@ -357,7 +358,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MAX_VALUE;
       final double w = Math.random() * Double.MAX_VALUE;
-      final VectorI4D v = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType v = new VectorI4D(x, y, z, w);
 
       Assert.assertTrue(VectorI4D.clampMaximum(v, maximum).getXD() <= maximum);
       Assert.assertTrue(VectorI4D.clampMaximum(v, maximum).getYD() <= maximum);
@@ -375,7 +376,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double y = Math.random() * Double.MIN_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
       final double w = Math.random() * Double.MIN_VALUE;
-      final VectorI4D v = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType v = new VectorI4D(x, y, z, w);
 
       Assert.assertTrue(VectorI4D.clampMinimum(v, minimum).getXD() >= minimum);
       Assert.assertTrue(VectorI4D.clampMinimum(v, minimum).getYD() >= minimum);
@@ -394,7 +395,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MIN_VALUE;
       final double w = Math.random() * Double.MIN_VALUE;
-      final VectorI4D v = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType v = new VectorI4D(x, y, z, w);
 
       Assert.assertTrue(
         VectorI4D.clamp(v, minimum, maximum).getXD()
@@ -434,7 +435,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double z = Math.random() * Double.MIN_VALUE;
       final double w = Math.random() * Double.MIN_VALUE;
       final VectorI4D v = new VectorI4D(x, y, z, w);
-      final VectorI4D vc = new VectorI4D(v);
+      final VectorReadable4DType vc = new VectorI4D(v);
 
       Assert.assertTrue(VectorI4D.almostEqual(ec, v, vc));
     }
@@ -445,7 +446,7 @@ public class VectorI4DTest extends VectorI4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI4D v = new VectorI4D();
+    final VectorReadable4DType v = new VectorI4D();
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getXD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), 0.0));
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getZD(), 0.0));
@@ -457,8 +458,8 @@ public class VectorI4DTest extends VectorI4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI4D v0 = new VectorI4D(0.0, 1.0, 0.0, 0.0);
-    final VectorI4D v1 = new VectorI4D(0.0, 0.0, 0.0, 0.0);
+    final VectorReadable4DType v0 = new VectorI4D(0.0, 1.0, 0.0, 0.0);
+    final VectorReadable4DType v1 = new VectorI4D(0.0, 0.0, 0.0, 0.0);
 
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
@@ -472,13 +473,13 @@ public class VectorI4DTest extends VectorI4Contract
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
       final double w0 = Math.random() * Double.MAX_VALUE;
-      final VectorI4D v0 = new VectorI4D(x0, y0, z0, w0);
+      final VectorReadable4DType v0 = new VectorI4D(x0, y0, z0, w0);
 
       final double x1 = Math.random() * Double.MAX_VALUE;
       final double y1 = Math.random() * Double.MAX_VALUE;
       final double z1 = Math.random() * Double.MAX_VALUE;
       final double w1 = Math.random() * Double.MAX_VALUE;
-      final VectorI4D v1 = new VectorI4D(x1, y1, z1, w1);
+      final VectorReadable4DType v1 = new VectorI4D(x1, y1, z1, w1);
 
       Assert.assertTrue(VectorI4D.distance(v0, v1) >= 0.0);
     }
@@ -523,14 +524,14 @@ public class VectorI4DTest extends VectorI4Contract
 
   @Override @Test public void testDotProductPerpendicular()
   {
-    final VectorI4D vpx = new VectorI4D(1.0f, 0.0f, 0.0f, 0.0f);
-    final VectorI4D vmx = new VectorI4D(-1.0f, 0.0f, 0.0f, 0.0f);
+    final VectorReadable4DType vpx = new VectorI4D(1.0f, 0.0f, 0.0f, 0.0f);
+    final VectorReadable4DType vmx = new VectorI4D(-1.0f, 0.0f, 0.0f, 0.0f);
 
-    final VectorI4D vpy = new VectorI4D(0.0f, 1.0f, 0.0f, 0.0f);
-    final VectorI4D vmy = new VectorI4D(0.0f, -1.0f, 0.0f, 0.0f);
+    final VectorReadable4DType vpy = new VectorI4D(0.0f, 1.0f, 0.0f, 0.0f);
+    final VectorReadable4DType vmy = new VectorI4D(0.0f, -1.0f, 0.0f, 0.0f);
 
-    final VectorI4D vpz = new VectorI4D(0.0f, 0.0f, 1.0f, 0.0f);
-    final VectorI4D vmz = new VectorI4D(0.0f, 0.0f, -1.0f, 0.0f);
+    final VectorReadable4DType vpz = new VectorI4D(0.0f, 0.0f, 1.0f, 0.0f);
+    final VectorReadable4DType vmz = new VectorI4D(0.0f, 0.0f, -1.0f, 0.0f);
 
     Assert.assertTrue(VectorI4D.dotProduct(vpx, vpy) == 0.0);
     Assert.assertTrue(VectorI4D.dotProduct(vpy, vpz) == 0.0);
@@ -548,7 +549,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double y = Math.random();
       final double z = Math.random();
       final double w = Math.random();
-      final VectorI4D q = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType q = new VectorI4D(x, y, z, w);
       final double dp = VectorI4D.dotProduct(q, q);
 
       
@@ -568,7 +569,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double y = Math.random();
       final double z = Math.random();
       final double w = Math.random();
-      final VectorI4D q = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType q = new VectorI4D(x, y, z, w);
 
       final double ms = VectorI4D.magnitudeSquared(q);
       final double dp = VectorI4D.dotProduct(q, q);
@@ -733,7 +734,7 @@ public class VectorI4DTest extends VectorI4Contract
   @Override @Test public void testInitializeReadable()
   {
     final VectorI4D v0 = new VectorI4D(1.0f, 2.0f, 3.0f, 4.0f);
-    final VectorI4D v1 = new VectorI4D(v0);
+    final VectorReadable4DType v1 = new VectorI4D(v0);
 
     Assert.assertTrue(v0.getXD() == v1.getXD());
     Assert.assertTrue(v0.getYD() == v1.getYD());
@@ -751,13 +752,13 @@ public class VectorI4DTest extends VectorI4Contract
       final double y0 = Math.random() * Double.MAX_VALUE;
       final double z0 = Math.random() * Double.MAX_VALUE;
       final double w0 = Math.random() * Double.MAX_VALUE;
-      final VectorI4D v0 = new VectorI4D(x0, y0, z0, w0);
+      final VectorReadable4DType v0 = new VectorI4D(x0, y0, z0, w0);
 
       final double x1 = Math.random() * Double.MAX_VALUE;
       final double y1 = Math.random() * Double.MAX_VALUE;
       final double z1 = Math.random() * Double.MAX_VALUE;
       final double w1 = Math.random() * Double.MAX_VALUE;
-      final VectorI4D v1 = new VectorI4D(x1, y1, z1, w1);
+      final VectorReadable4DType v1 = new VectorI4D(x1, y1, z1, w1);
 
       Assert.assertTrue(
         VectorI4D.almostEqual(
@@ -775,7 +776,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double y = 1.0 + (Math.random() * Double.MAX_VALUE);
       final double z = 1.0 + (Math.random() * Double.MAX_VALUE);
       final double w = 1.0 + (Math.random() * Double.MAX_VALUE);
-      final VectorI4D v = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType v = new VectorI4D(x, y, z, w);
 
       final double m = VectorI4D.magnitude(v);
       Assert.assertTrue(m > 0.0);
@@ -792,7 +793,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double y = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
       final double z = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
       final double w = Math.random() * (Math.sqrt(Double.MAX_VALUE) / 2);
-      final VectorI4D v = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType v = new VectorI4D(x, y, z, w);
 
       final VectorI4D vr = VectorI4D.normalize(v);
       Assert.assertNotSame(v, vr);
@@ -807,7 +808,7 @@ public class VectorI4DTest extends VectorI4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI4D v = new VectorI4D(0.0, 0.0, 0.0, 0.0);
+    final VectorReadable4DType v = new VectorI4D(0.0, 0.0, 0.0, 0.0);
     final VectorI4D vr = VectorI4D.normalize(v);
     final double m = VectorI4D.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
@@ -818,14 +819,14 @@ public class VectorI4DTest extends VectorI4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI4D v = new VectorI4D(1.0, 0.0, 0.0, 0.0);
+    final VectorReadable4DType v = new VectorI4D(1.0, 0.0, 0.0, 0.0);
     final double m = VectorI4D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final VectorI4D v = new VectorI4D(8.0, 0.0, 0.0, 0.0);
+    final VectorReadable4DType v = new VectorI4D(8.0, 0.0, 0.0, 0.0);
 
     {
       final double p = VectorI4D.dotProduct(v, v);
@@ -842,14 +843,14 @@ public class VectorI4DTest extends VectorI4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI4D v = new VectorI4D(0.0, 0.0, 0.0, 0.0);
+    final VectorReadable4DType v = new VectorI4D(0.0, 0.0, 0.0, 0.0);
     final double m = VectorI4D.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
   @Override @Test public void testNormalizeSimple()
   {
-    final VectorI4D v0 = new VectorI4D(8.0, 0.0, 0.0, 0.0);
+    final VectorReadable4DType v0 = new VectorI4D(8.0, 0.0, 0.0, 0.0);
     final VectorI4D vr = VectorI4D.normalize(v0);
     final double m = VectorI4D.magnitude(vr);
     Assert.assertTrue(m == 1.0);
@@ -860,7 +861,7 @@ public class VectorI4DTest extends VectorI4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI4D q = new VectorI4D(0, 0, 0, 0);
+    final VectorReadable4DType q = new VectorI4D(0, 0, 0, 0);
     final VectorI4D qr = VectorI4D.normalize(q);
 
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.getXD()));
@@ -871,8 +872,8 @@ public class VectorI4DTest extends VectorI4Contract
 
   @Override @Test public void testOrthonormalize()
   {
-    final VectorI4D v0 = new VectorI4D(0, 1, 0, 0);
-    final VectorI4D v1 = new VectorI4D(0.5, 0.5, 0, 0);
+    final VectorReadable4DType v0 = new VectorI4D(0, 1, 0, 0);
+    final VectorReadable4DType v1 = new VectorI4D(0.5, 0.5, 0, 0);
     final Pair<VectorI4D, VectorI4D> on = VectorI4D.orthoNormalize(v0, v1);
 
     Assert.assertEquals(v0, on.getLeft());
@@ -882,15 +883,15 @@ public class VectorI4DTest extends VectorI4Contract
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final VectorI4D p = new VectorI4D(1.0, 0.0, 0.0, 0.0);
-      final VectorI4D q = new VectorI4D(0.0, 1.0, 0.0, 0.0);
+      final VectorReadable4DType p = new VectorI4D(1.0, 0.0, 0.0, 0.0);
+      final VectorReadable4DType q = new VectorI4D(0.0, 1.0, 0.0, 0.0);
       final VectorI4D r = VectorI4D.projection(p, q);
       Assert.assertTrue(VectorI4D.magnitude(r) == 0.0);
     }
 
     {
-      final VectorI4D p = new VectorI4D(-1.0, 0.0, 0.0, 0.0);
-      final VectorI4D q = new VectorI4D(0.0, 1.0, 0.0, 0.0);
+      final VectorReadable4DType p = new VectorI4D(-1.0, 0.0, 0.0, 0.0);
+      final VectorReadable4DType q = new VectorI4D(0.0, 1.0, 0.0, 0.0);
       final VectorI4D r = VectorI4D.projection(p, q);
       Assert.assertTrue(VectorI4D.magnitude(r) == 0.0);
     }
@@ -935,7 +936,7 @@ public class VectorI4DTest extends VectorI4Contract
       final double y = Math.random() * Double.MAX_VALUE;
       final double z = Math.random() * Double.MAX_VALUE;
       final double w = Math.random() * Double.MAX_VALUE;
-      final VectorI4D v = new VectorI4D(x, y, z, w);
+      final VectorReadable4DType v = new VectorI4D(x, y, z, w);
 
       final VectorI4D vr = VectorI4D.scale(v, 0.0);
 

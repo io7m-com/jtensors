@@ -20,6 +20,7 @@ import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorI2F;
+import com.io7m.jtensors.VectorReadable2FType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,7 +34,7 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI2F v = new VectorI2F(x, y);
+      final VectorReadable2FType v = new VectorI2F(x, y);
 
       final VectorI2F vr = VectorI2F.absolute(v);
 
@@ -55,11 +56,11 @@ public class VectorI2FTest extends VectorI2Contract
       final float max = 10000.0f;
       final float x0 = (float) (Math.random() * max);
       final float y0 = (float) (Math.random() * max);
-      final VectorI2F v0 = new VectorI2F(x0, y0);
+      final VectorReadable2FType v0 = new VectorI2F(x0, y0);
 
       final float x1 = (float) (Math.random() * max);
       final float y1 = (float) (Math.random() * max);
-      final VectorI2F v1 = new VectorI2F(x1, y1);
+      final VectorReadable2FType v1 = new VectorI2F(x1, y1);
 
       final VectorI2F vr = VectorI2F.add(v0, v1);
 
@@ -81,11 +82,11 @@ public class VectorI2FTest extends VectorI2Contract
       final float max = 10000.0f;
       final float x0 = (float) (Math.random() * max);
       final float y0 = (float) (Math.random() * max);
-      final VectorI2F v0 = new VectorI2F(x0, y0);
+      final VectorReadable2FType v0 = new VectorI2F(x0, y0);
 
       final float x1 = (float) (Math.random() * max);
       final float y1 = (float) (Math.random() * max);
-      final VectorI2F v1 = new VectorI2F(x1, y1);
+      final VectorReadable2FType v1 = new VectorI2F(x1, y1);
 
       final float r = (float) (Math.random() * 100.0f);
       final VectorI2F vr = VectorI2F.addScaled(v0, v1, r);
@@ -110,20 +111,20 @@ public class VectorI2FTest extends VectorI2Contract
     final float q = z + 1.0f;
 
     {
-      final VectorI2F m0 = new VectorI2F(x, y);
-      final VectorI2F m1 = new VectorI2F(q, y);
+      final VectorReadable2FType m0 = new VectorI2F(x, y);
+      final VectorReadable2FType m1 = new VectorI2F(q, y);
       Assert.assertFalse(VectorI2F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI2F m0 = new VectorI2F(x, y);
-      final VectorI2F m1 = new VectorI2F(x, q);
+      final VectorReadable2FType m0 = new VectorI2F(x, y);
+      final VectorReadable2FType m1 = new VectorI2F(x, q);
       Assert.assertFalse(VectorI2F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI2F m0 = new VectorI2F(x, y);
-      final VectorI2F m1 = new VectorI2F(q, q);
+      final VectorReadable2FType m0 = new VectorI2F(x, y);
+      final VectorReadable2FType m1 = new VectorI2F(q, q);
       Assert.assertFalse(VectorI2F.almostEqual(ec, m0, m1));
     }
   }
@@ -136,9 +137,9 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v0 = new VectorI2F(x0, y0);
-      final VectorI2F v1 = new VectorI2F(x0, y0);
-      final VectorI2F v2 = new VectorI2F(x0, y0);
+      final VectorReadable2FType v0 = new VectorI2F(x0, y0);
+      final VectorReadable2FType v1 = new VectorI2F(x0, y0);
+      final VectorReadable2FType v2 = new VectorI2F(x0, y0);
 
       Assert.assertTrue(VectorI2F.almostEqual(ec, v0, v1));
       Assert.assertTrue(VectorI2F.almostEqual(ec, v1, v2));
@@ -186,7 +187,7 @@ public class VectorI2FTest extends VectorI2Contract
 
   @Override @Test public void testCheckInterface()
   {
-    final VectorI2F v = new VectorI2F(3.0f, 5.0f);
+    final VectorReadable2FType v = new VectorI2F(3.0f, 5.0f);
 
     Assert.assertTrue(v.getXF() == v.getXF());
     Assert.assertTrue(v.getYF() == v.getYF());
@@ -197,11 +198,11 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max_x = (float) (Math.random() * Float.MIN_VALUE);
       final float max_y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI2F maximum = new VectorI2F(max_x, max_y);
+      final VectorReadable2FType maximum = new VectorI2F(max_x, max_y);
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI2F v = new VectorI2F(x, y);
+      final VectorReadable2FType v = new VectorI2F(x, y);
 
       Assert.assertTrue(
         VectorI2F.clampMaximumByVector(v, maximum).getXF()
@@ -217,11 +218,11 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (Math.random() * Float.MAX_VALUE);
       final float min_y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F minimum = new VectorI2F(min_x, min_y);
+      final VectorReadable2FType minimum = new VectorI2F(min_x, min_y);
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI2F v = new VectorI2F(x, y);
+      final VectorReadable2FType v = new VectorI2F(x, y);
 
       Assert.assertTrue(
         VectorI2F.clampMinimumByVector(v, minimum).getXF()
@@ -237,15 +238,15 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (Math.random() * Float.MIN_VALUE);
       final float min_y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI2F minimum = new VectorI2F(min_x, min_y);
+      final VectorReadable2FType minimum = new VectorI2F(min_x, min_y);
 
       final float max_x = (float) (Math.random() * Float.MAX_VALUE);
       final float max_y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F maximum = new VectorI2F(max_x, max_y);
+      final VectorReadable2FType maximum = new VectorI2F(max_x, max_y);
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v = new VectorI2F(x, y);
+      final VectorReadable2FType v = new VectorI2F(x, y);
 
       Assert.assertTrue(
         VectorI2F.clampByVector(v, minimum, maximum).getXF()
@@ -269,7 +270,7 @@ public class VectorI2FTest extends VectorI2Contract
 
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v = new VectorI2F(x, y);
+      final VectorReadable2FType v = new VectorI2F(x, y);
 
       Assert.assertTrue(VectorI2F.clampMaximum(v, maximum).getXF() <= maximum);
       Assert.assertTrue(VectorI2F.clampMaximum(v, maximum).getYF() <= maximum);
@@ -283,7 +284,7 @@ public class VectorI2FTest extends VectorI2Contract
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI2F v = new VectorI2F(x, y);
+      final VectorReadable2FType v = new VectorI2F(x, y);
 
       Assert.assertTrue(VectorI2F.clampMinimum(v, minimum).getXF() >= minimum);
       Assert.assertTrue(VectorI2F.clampMinimum(v, minimum).getYF() >= minimum);
@@ -298,7 +299,7 @@ public class VectorI2FTest extends VectorI2Contract
 
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v = new VectorI2F(x, y);
+      final VectorReadable2FType v = new VectorI2F(x, y);
 
       Assert.assertTrue(
         VectorI2F.clamp(v, minimum, maximum).getXF()
@@ -325,7 +326,7 @@ public class VectorI2FTest extends VectorI2Contract
       final float y = (float) Math.random();
 
       final VectorI2F v0 = new VectorI2F(x, y);
-      final VectorI2F v1 = new VectorI2F(v0);
+      final VectorReadable2FType v1 = new VectorI2F(v0);
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.getXF(), x));
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1.getYF(), y));
@@ -337,7 +338,7 @@ public class VectorI2FTest extends VectorI2Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final VectorI2F v = new VectorI2F();
+    final VectorReadable2FType v = new VectorI2F();
     Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.getXF(), 0.0f));
     Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, v.getYF(), 0.0f));
   }
@@ -347,8 +348,8 @@ public class VectorI2FTest extends VectorI2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI2F v0 = new VectorI2F(0.0f, 1.0f);
-    final VectorI2F v1 = new VectorI2F(0.0f, 0.0f);
+    final VectorReadable2FType v0 = new VectorI2F(0.0f, 1.0f);
+    final VectorReadable2FType v1 = new VectorI2F(0.0f, 0.0f);
 
     Assert.assertTrue(
       AlmostEqualDouble.almostEqual(
@@ -360,11 +361,11 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v0 = new VectorI2F(x0, y0);
+      final VectorReadable2FType v0 = new VectorI2F(x0, y0);
 
       final float x1 = (float) (Math.random() * Float.MAX_VALUE);
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v1 = new VectorI2F(x1, y1);
+      final VectorReadable2FType v1 = new VectorI2F(x1, y1);
 
       Assert.assertTrue(VectorI2F.distance(v0, v1) >= 0.0f);
     }
@@ -372,8 +373,8 @@ public class VectorI2FTest extends VectorI2Contract
 
   @Override @Test public void testDotProduct()
   {
-    final VectorI2F v0 = new VectorI2F(10.0f, 10.0f);
-    final VectorI2F v1 = new VectorI2F(10.0f, 10.0f);
+    final VectorReadable2FType v0 = new VectorI2F(10.0f, 10.0f);
+    final VectorReadable2FType v1 = new VectorI2F(10.0f, 10.0f);
 
     {
       final double p = VectorI2F.dotProduct(v0, v1);
@@ -401,11 +402,11 @@ public class VectorI2FTest extends VectorI2Contract
 
   @Override @Test public void testDotProductPerpendicular()
   {
-    final VectorI2F vpx = new VectorI2F(1.0f, 0.0f);
-    final VectorI2F vmx = new VectorI2F(-1.0f, 0.0f);
+    final VectorReadable2FType vpx = new VectorI2F(1.0f, 0.0f);
+    final VectorReadable2FType vmx = new VectorI2F(-1.0f, 0.0f);
 
-    final VectorI2F vpy = new VectorI2F(0.0f, 1.0f);
-    final VectorI2F vmy = new VectorI2F(0.0f, -1.0f);
+    final VectorReadable2FType vpy = new VectorI2F(0.0f, 1.0f);
+    final VectorReadable2FType vmy = new VectorI2F(0.0f, -1.0f);
 
     Assert.assertTrue(VectorI2F.dotProduct(vpx, vpy) == 0.0f);
     Assert.assertTrue(VectorI2F.dotProduct(vmx, vmy) == 0.0f);
@@ -419,7 +420,7 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) Math.random();
       final float y = (float) Math.random();
-      final VectorI2F q = new VectorI2F(x, y);
+      final VectorReadable2FType q = new VectorI2F(x, y);
       final double dp = VectorI2F.dotProduct(q, q);
 
       
@@ -437,7 +438,7 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) Math.random();
       final float y = (float) Math.random();
-      final VectorI2F q = new VectorI2F(x, y);
+      final VectorReadable2FType q = new VectorI2F(x, y);
 
       final double ms = VectorI2F.magnitudeSquared(q);
       final double dp = VectorI2F.dotProduct(q, q);
@@ -572,7 +573,7 @@ public class VectorI2FTest extends VectorI2Contract
   @Override @Test public void testInitializeReadable()
   {
     final VectorI2F v0 = new VectorI2F(1.0f, 2.0f);
-    final VectorI2F v1 = new VectorI2F(v0);
+    final VectorReadable2FType v1 = new VectorI2F(v0);
 
     Assert.assertTrue(v0.getXF() == v1.getXF());
     Assert.assertTrue(v0.getYF() == v1.getYF());
@@ -586,11 +587,11 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v0 = new VectorI2F(x0, y0);
+      final VectorReadable2FType v0 = new VectorI2F(x0, y0);
 
       final float x1 = (float) (Math.random() * Float.MAX_VALUE);
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v1 = new VectorI2F(x1, y1);
+      final VectorReadable2FType v1 = new VectorI2F(x1, y1);
 
       Assert.assertTrue(
         VectorI2F.almostEqual(
@@ -606,7 +607,7 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (1.0 + (Math.random() * Float.MAX_VALUE));
       final float y = (float) (1.0 + (Math.random() * Float.MAX_VALUE));
-      final VectorI2F v = new VectorI2F(x, y);
+      final VectorReadable2FType v = new VectorI2F(x, y);
 
       final double m = VectorI2F.magnitude(v);
       Assert.assertTrue(m > 0.0);
@@ -621,7 +622,7 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) Math.random();
       final float y = (float) Math.random();
-      final VectorI2F v = new VectorI2F(x, y);
+      final VectorReadable2FType v = new VectorI2F(x, y);
 
       final VectorI2F vr = VectorI2F.normalize(v);
       Assert.assertNotSame(v, vr);
@@ -642,7 +643,7 @@ public class VectorI2FTest extends VectorI2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI2F v = new VectorI2F(0.0f, 0.0f);
+    final VectorReadable2FType v = new VectorI2F(0.0f, 0.0f);
     final VectorI2F vr = VectorI2F.normalize(v);
     final double m = VectorI2F.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
@@ -653,14 +654,14 @@ public class VectorI2FTest extends VectorI2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI2F v = new VectorI2F(1.0f, 0.0f);
+    final VectorReadable2FType v = new VectorI2F(1.0f, 0.0f);
     final double m = VectorI2F.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final VectorI2F v = new VectorI2F(8.0f, 0.0f);
+    final VectorReadable2FType v = new VectorI2F(8.0f, 0.0f);
 
     {
       final double p = VectorI2F.dotProduct(v, v);
@@ -677,7 +678,7 @@ public class VectorI2FTest extends VectorI2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI2F v = new VectorI2F(0.0f, 0.0f);
+    final VectorReadable2FType v = new VectorI2F(0.0f, 0.0f);
     final double m = VectorI2F.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
@@ -687,7 +688,7 @@ public class VectorI2FTest extends VectorI2Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI2F v0 = new VectorI2F(8.0f, 0.0f);
+    final VectorReadable2FType v0 = new VectorI2F(8.0f, 0.0f);
     final double dp = VectorI2F.dotProduct(v0, v0);
     final double ms = VectorI2F.magnitudeSquared(v0);
     final double mss = Math.sqrt(ms);
@@ -713,7 +714,7 @@ public class VectorI2FTest extends VectorI2Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final VectorI2F q = new VectorI2F(0, 0);
+    final VectorReadable2FType q = new VectorI2F(0, 0);
     final VectorI2F qr = VectorI2F.normalize(q);
 
     Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0, qr.getXF()));
@@ -722,8 +723,8 @@ public class VectorI2FTest extends VectorI2Contract
 
   @Override @Test public void testOrthonormalize()
   {
-    final VectorI2F v0 = new VectorI2F(0, 1);
-    final VectorI2F v1 = new VectorI2F(0.5f, 0.5f);
+    final VectorReadable2FType v0 = new VectorI2F(0, 1);
+    final VectorReadable2FType v1 = new VectorI2F(0.5f, 0.5f);
     final Pair<VectorI2F, VectorI2F> on = VectorI2F.orthoNormalize(v0, v1);
 
     Assert.assertEquals(v0, on.getLeft());
@@ -733,15 +734,15 @@ public class VectorI2FTest extends VectorI2Contract
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final VectorI2F p = new VectorI2F(1.0f, 0.0f);
-      final VectorI2F q = new VectorI2F(0.0f, 1.0f);
+      final VectorReadable2FType p = new VectorI2F(1.0f, 0.0f);
+      final VectorReadable2FType q = new VectorI2F(0.0f, 1.0f);
       final VectorI2F r = VectorI2F.projection(p, q);
       Assert.assertTrue(VectorI2F.magnitude(r) == 0.0f);
     }
 
     {
-      final VectorI2F p = new VectorI2F(-1.0f, 0.0f);
-      final VectorI2F q = new VectorI2F(0.0f, 1.0f);
+      final VectorReadable2FType p = new VectorI2F(-1.0f, 0.0f);
+      final VectorReadable2FType q = new VectorI2F(0.0f, 1.0f);
       final VectorI2F r = VectorI2F.projection(p, q);
       Assert.assertTrue(VectorI2F.magnitude(r) == 0.0f);
     }
@@ -755,7 +756,7 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v = new VectorI2F(x, y);
+      final VectorReadable2FType v = new VectorI2F(x, y);
 
       final VectorI2F vr = VectorI2F.scale(v, 1.0f);
 
@@ -776,7 +777,7 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v = new VectorI2F(x, y);
+      final VectorReadable2FType v = new VectorI2F(x, y);
 
       final VectorI2F vr = VectorI2F.scale(v, 0.0f);
 
@@ -799,11 +800,11 @@ public class VectorI2FTest extends VectorI2Contract
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v0 = new VectorI2F(x0, y0);
+      final VectorReadable2FType v0 = new VectorI2F(x0, y0);
 
       final float x1 = (float) (Math.random() * Float.MAX_VALUE);
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI2F v1 = new VectorI2F(x1, y1);
+      final VectorReadable2FType v1 = new VectorI2F(x1, y1);
 
       final VectorI2F vr = VectorI2F.subtract(v0, v1);
 

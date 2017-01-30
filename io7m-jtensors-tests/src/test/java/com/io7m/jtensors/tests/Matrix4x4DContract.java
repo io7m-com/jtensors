@@ -30,7 +30,11 @@ import com.io7m.jtensors.VectorI3I;
 import com.io7m.jtensors.VectorI4D;
 import com.io7m.jtensors.VectorM3D;
 import com.io7m.jtensors.VectorM4D;
+import com.io7m.jtensors.VectorReadable2DType;
+import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3DType;
+import com.io7m.jtensors.VectorReadable3IType;
+import com.io7m.jtensors.VectorReadable4DType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -1562,9 +1566,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
     final T m = this.newMatrix();
-    final VectorI3D origin = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D target = new VectorI3D(-1.0, 0.0, 0.0);
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType origin = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorReadable3DType target = new VectorI3D(-1.0, 0.0, 0.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     MatrixM4x4D.lookAt(mc, origin, target, axis, m);
 
     
@@ -1629,9 +1633,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
     final T m = this.newMatrix();
-    final VectorI3D origin = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D target = new VectorI3D(0.0, 0.0, -1.0);
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType origin = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorReadable3DType target = new VectorI3D(0.0, 0.0, -1.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     MatrixM4x4D.lookAt(mc, origin, target, axis, m);
 
     
@@ -1696,9 +1700,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
     final T m = this.newMatrix();
-    final VectorI3D origin = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D target = new VectorI3D(1.0, 0.0, 0.0);
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType origin = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorReadable3DType target = new VectorI3D(1.0, 0.0, 0.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     MatrixM4x4D.lookAt(mc, origin, target, axis, m);
 
     
@@ -1763,9 +1767,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
     final T m = this.newMatrix();
-    final VectorI3D origin = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D target = new VectorI3D(0.0, 0.0, 1.0);
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType origin = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorReadable3DType target = new VectorI3D(0.0, 0.0, 1.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     MatrixM4x4D.lookAt(mc, origin, target, axis, m);
 
     
@@ -1830,11 +1834,11 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
     final T m = this.newMatrix();
-    final VectorI3D origin = new VectorI3D(
+    final VectorReadable3DType origin = new VectorI3D(
       (double) (20 + 0), (double) (30 + 0), (double) (40 + 0));
-    final VectorI3D target = new VectorI3D(
+    final VectorReadable3DType target = new VectorI3D(
       (double) (20 + 0), (double) (30 + 0), (double) (40 + -1));
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     MatrixM4x4D.lookAt(mc, origin, target, axis, m);
 
     
@@ -2071,7 +2075,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     m0.setR3C2D(15.0);
     m0.setR3C3D(16.0);
 
-    final VectorI4D v = new VectorI4D(1.0, 2.0, 3.0, 4.0);
+    final VectorReadable4DType v = new VectorI4D(1.0, 2.0, 3.0, 4.0);
     final VectorM4D out = new VectorM4D();
 
     final VectorM4D r = MatrixM4x4D.multiplyVector4D(c, m0, v, out);
@@ -2106,7 +2110,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
     m0.setR3C2D(15.0);
     m0.setR3C3D(16.0);
 
-    final VectorI4D v = new VectorI4D(1.0, 2.0, 3.0, 4.0);
+    final VectorReadable4DType v = new VectorI4D(1.0, 2.0, 3.0, 4.0);
     final VectorM4D out = new VectorM4D();
     final MatrixM4x4D.ContextMM4D context = new MatrixM4x4D.ContextMM4D();
 
@@ -2250,9 +2254,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
       TestUtilities.getDoubleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM4D v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
+    final VectorReadable4DType v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
     final VectorM4D v_got = new VectorM4D();
-    final VectorM4D v_exp = new VectorM4D(0.0, 0.0, -1.0, 1.0);
+    final VectorReadable4DType v_exp = new VectorM4D(0.0, 0.0, -1.0, 1.0);
 
     MatrixM4x4D.makeRotation(0.0, Matrix4x4DContract.AXIS_X, m);
     MatrixM4x4D.multiplyVector4D(c, m, v_in, v_got);
@@ -2276,9 +2280,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
       TestUtilities.getDoubleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM4D v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
+    final VectorReadable4DType v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
     final VectorM4D v_got = new VectorM4D();
-    final VectorM4D v_exp = new VectorM4D(0.0, 0.0, -1.0, 1.0);
+    final VectorReadable4DType v_exp = new VectorM4D(0.0, 0.0, -1.0, 1.0);
 
     MatrixM4x4D.makeRotation(0.0, Matrix4x4DContract.AXIS_Y, m);
     MatrixM4x4D.multiplyVector4D(c, m, v_in, v_got);
@@ -2302,9 +2306,9 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
       TestUtilities.getDoubleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM4D v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
+    final VectorReadable4DType v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
     final VectorM4D v_got = new VectorM4D();
-    final VectorM4D v_exp = new VectorM4D(0.0, 0.0, -1.0, 1.0);
+    final VectorReadable4DType v_exp = new VectorM4D(0.0, 0.0, -1.0, 1.0);
 
     MatrixM4x4D.makeRotation(0.0, Matrix4x4DContract.AXIS_Z, m);
     MatrixM4x4D.multiplyVector4D(c, m, v_in, v_got);
@@ -2332,7 +2336,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final T m = this.newMatrix();
     final VectorM4D v_got = new VectorM4D();
-    final VectorM4D v_in = new VectorM4D(0.0, 1.0, 0.0, 1.0);
+    final VectorReadable4DType v_in = new VectorM4D(0.0, 1.0, 0.0, 1.0);
 
     /**
      * XXX: Strange Y value due to floating point imprecision, with no good
@@ -2340,7 +2344,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
      * significant element, anyway.
      */
 
-    final VectorM4D v_exp = new VectorM4D(0.0, 6.1232339957367E-17, 1.0, 1.0);
+    final VectorReadable3DType v_exp = new VectorM4D(0.0, 6.1232339957367E-17, 1.0, 1.0);
 
     MatrixM4x4D.makeRotation(
       Math.toRadians(90.0), Matrix4x4DContract.AXIS_X, m);
@@ -2375,7 +2379,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final T m = this.newMatrix();
     final VectorM4D v_got = new VectorM4D();
-    final VectorM4D v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
+    final VectorReadable4DType v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
 
     /**
      * XXX: Strange Z value due to floating point imprecision, with no good
@@ -2383,7 +2387,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
      * significant element, anyway.
      */
 
-    final VectorM4D v_exp = new VectorM4D(-1.0, 0.0, -6.1232339957367E-17, 1.0);
+    final VectorReadable3DType v_exp = new VectorM4D(-1.0, 0.0, -6.1232339957367E-17, 1.0);
 
     MatrixM4x4D.makeRotation(
       Math.toRadians(90.0), Matrix4x4DContract.AXIS_Y, m);
@@ -2417,8 +2421,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final T m = this.newMatrix();
     final VectorM4D v_got = new VectorM4D();
-    final VectorM4D v_in = new VectorM4D(0.0, 1.0, 0.0, 1.0);
-    final VectorM4D v_exp =
+    final VectorReadable4DType v_in = new VectorM4D(0.0, 1.0, 0.0, 1.0);
+    final VectorReadable3DType v_exp =
       new VectorM4D(-1.0, 6.123233995736766E-17, 0.0, 1.0);
 
     MatrixM4x4D.makeRotation(
@@ -2453,7 +2457,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final T m = this.newMatrix();
     final VectorM4D v_got = new VectorM4D();
-    final VectorM4D v_in = new VectorM4D(0.0, 1.0, 0.0, 1.0);
+    final VectorReadable4DType v_in = new VectorM4D(0.0, 1.0, 0.0, 1.0);
 
     /**
      * XXX: Strange Y value due to floating point imprecision, with no good
@@ -2461,7 +2465,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
      * significant element, anyway.
      */
 
-    final VectorM4D v_exp = new VectorM4D(0.0, 6.1232339957367E-17, -1.0, 1.0);
+    final VectorReadable3DType v_exp = new VectorM4D(0.0, 6.1232339957367E-17, -1.0, 1.0);
 
     MatrixM4x4D.makeRotation(
       Math.toRadians(-90.0), Matrix4x4DContract.AXIS_X, m);
@@ -2496,7 +2500,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final T m = this.newMatrix();
     final VectorM4D v_got = new VectorM4D();
-    final VectorM4D v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
+    final VectorReadable4DType v_in = new VectorM4D(0.0, 0.0, -1.0, 1.0);
 
     /**
      * XXX: Strange Z value due to floating point imprecision, with no good
@@ -2504,7 +2508,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
      * significant element, anyway.
      */
 
-    final VectorM4D v_exp = new VectorM4D(1.0, 0.0, -6.1232339957367E-17, 1.0);
+    final VectorReadable3DType v_exp = new VectorM4D(1.0, 0.0, -6.1232339957367E-17, 1.0);
 
     MatrixM4x4D.makeRotation(
       Math.toRadians(-90.0), Matrix4x4DContract.AXIS_Y, m);
@@ -2538,8 +2542,8 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final T m = this.newMatrix();
     final VectorM4D v_got = new VectorM4D();
-    final VectorM4D v_in = new VectorM4D(0.0, 1.0, 0.0, 1.0);
-    final VectorM4D v_exp = new VectorM4D(1.0, 6.123233995736766E-17, 0.0, 1.0);
+    final VectorReadable4DType v_in = new VectorM4D(0.0, 1.0, 0.0, 1.0);
+    final VectorReadable3DType v_exp = new VectorM4D(1.0, 6.123233995736766E-17, 0.0, 1.0);
 
     MatrixM4x4D.makeRotation(
       Math.toRadians(-90.0), Matrix4x4DContract.AXIS_Z, m);
@@ -3446,10 +3450,10 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
 
     final Matrix3x3DType m3 = MatrixHeapArrayM3x3D.newMatrix();
     final T m4 = this.newMatrix();
-    final VectorI3D v = new VectorI3D(3.0, 7.0, 0.0);
-    final VectorM3D v3i = new VectorM3D(1.0, 1.0, 1.0);
+    final VectorReadable3DType v = new VectorI3D(3.0, 7.0, 0.0);
+    final VectorReadable3DType v3i = new VectorM3D(1.0, 1.0, 1.0);
     final VectorM3D v3o = new VectorM3D();
-    final VectorM4D w3i = new VectorM4D(1.0, 1.0, 1.0, 1.0);
+    final VectorReadable4DType w3i = new VectorM4D(1.0, 1.0, 1.0, 1.0);
     final VectorM4D w3o = new VectorM4D();
 
     MatrixM3x3D.makeTranslation2D(v, m3);
@@ -3469,7 +3473,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
   @Test public final void testTranslationMakeEquivalent2Integer()
   {
     final T m = this.newMatrix();
-    final VectorI2I v = new VectorI2I(1, 2);
+    final VectorReadable2IType v = new VectorI2I(1, 2);
 
     {
       final T r = this.newMatrix();
@@ -3510,7 +3514,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
   @Test public final void testTranslationMakeEquivalent3Integer()
   {
     final T m = this.newMatrix();
-    final VectorI3I v = new VectorI3I(1, 2, 3);
+    final VectorReadable3IType v = new VectorI3I(1, 2, 3);
 
     {
       final T r = this.newMatrix();
@@ -3549,7 +3553,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
   @Test public final void testTranslationMakeEquivalent2Real()
   {
     final T m = this.newMatrix();
-    final VectorI2D v = new VectorI2D(1.0, 2.0);
+    final VectorReadable2DType v = new VectorI2D(1.0, 2.0);
 
     {
       final T r = this.newMatrix();
@@ -3588,7 +3592,7 @@ public abstract class Matrix4x4DContract<T extends Matrix4x4DType>
   @Test public final void testTranslationMakeEquivalent3Real()
   {
     final T m = this.newMatrix();
-    final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
+    final VectorReadable3DType v = new VectorI3D(1.0, 2.0, 3.0);
 
     {
       final T r = this.newMatrix();

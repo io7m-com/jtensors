@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
+import com.io7m.jtensors.MatrixDirectDType;
 import com.io7m.jtensors.parameterized.PMatrix4x4DType;
 import com.io7m.jtensors.parameterized.PMatrixDirect4x4DType;
 import com.io7m.jtensors.parameterized.PMatrixDirectM4x4D;
@@ -73,7 +74,7 @@ public final class PMatrixDirectM4x4DTest<T0, T1, T2>
   @Override protected void checkDirectBufferInvariantsUntyped(
     final PMatrix4x4DType<?, ?> m)
   {
-    final PMatrixDirect4x4DType<?, ?> mx = (PMatrixDirect4x4DType<?, ?>) m;
+    final MatrixDirectDType mx = (PMatrixDirect4x4DType<?, ?>) m;
     Assert.assertEquals(0L, (long) mx.getDirectDoubleBuffer().position());
   }
 }

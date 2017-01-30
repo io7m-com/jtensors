@@ -28,6 +28,7 @@ import com.io7m.jtensors.parameterized.PMatrixM3x3F;
 import com.io7m.jtensors.parameterized.PMatrixReadable3x3FType;
 import com.io7m.jtensors.parameterized.PVectorI3F;
 import com.io7m.jtensors.parameterized.PVectorM3F;
+import com.io7m.jtensors.parameterized.PVectorReadable3FType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -475,7 +476,7 @@ public abstract class PMatrix3x3FContract<T0, T1, T2,
 
     this.checkDirectBufferInvariants(m0);
 
-    final PVectorI3F<T0> v = new PVectorI3F<T0>(1.0f, 2.0f, 3.0f);
+    final PVectorReadable3FType<T0> v = new PVectorI3F<T0>(1.0f, 2.0f, 3.0f);
     final PVectorM3F<T1> out = new PVectorM3F<T1>();
 
     final PVectorM3F<T1> r = PMatrixM3x3F.multiplyVector3F(c, m0, v, out);

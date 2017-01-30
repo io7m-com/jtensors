@@ -20,6 +20,7 @@ import com.io7m.jtensors.Matrix4x4FType;
 import com.io7m.jtensors.MatrixHeapArrayM4x4F;
 import com.io7m.jtensors.VectorI4F;
 import com.io7m.jtensors.VectorM4F;
+import com.io7m.jtensors.VectorReadable4FType;
 import com.io7m.jtensors.parameterized.PMatrix4x4FType;
 import com.io7m.jtensors.parameterized.PMatrixHeapArrayM4x4F;
 import com.io7m.jtensors.parameterized.PMatrixI4x4F;
@@ -99,13 +100,13 @@ public final class PMatrixI4x4FTest<T0, T1>
 
     final PMatrixI4x4F<T0, T1> im0 = PMatrixI4x4F.newFromReadableUntyped(m0);
 
-    final VectorI4F column_0 = new VectorI4F(
+    final VectorReadable4FType column_0 = new VectorI4F(
       0.0f, 0.1f, 0.2f, 0.3f);
-    final VectorI4F column_1 = new VectorI4F(
+    final VectorReadable4FType column_1 = new VectorI4F(
       10.0f, 10.1f, 10.2f, 10.3f);
-    final VectorI4F column_2 = new VectorI4F(
+    final VectorReadable4FType column_2 = new VectorI4F(
       20.0f, 20.1f, 20.2f, 20.3f);
-    final VectorI4F column_3 = new VectorI4F(
+    final VectorReadable4FType column_3 = new VectorI4F(
       30.0f, 30.1f, 30.2f, 30.3f);
 
     final PMatrixI4x4F<T0, T1> im1 =

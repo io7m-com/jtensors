@@ -28,6 +28,7 @@ import com.io7m.jtensors.parameterized.PMatrixM4x4D;
 import com.io7m.jtensors.parameterized.PMatrixReadable4x4DType;
 import com.io7m.jtensors.parameterized.PVectorI4D;
 import com.io7m.jtensors.parameterized.PVectorM4D;
+import com.io7m.jtensors.parameterized.PVectorReadable4DType;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
@@ -773,7 +774,7 @@ public abstract class PMatrix4x4DContract<T0, T1, T2,
     m0.setR3C2D(15.0);
     m0.setR3C3D(16.0);
 
-    final PVectorI4D<T0> v = new PVectorI4D<T0>(1.0, 2.0, 3.0, 4.0);
+    final PVectorReadable4DType<T0> v = new PVectorI4D<T0>(1.0, 2.0, 3.0, 4.0);
     final PVectorM4D<T1> out = new PVectorM4D<T1>();
     final PVectorM4D<T1> r = PMatrixM4x4D.multiplyVector4D(c, m0, v, out);
     Assert.assertSame(out, r);

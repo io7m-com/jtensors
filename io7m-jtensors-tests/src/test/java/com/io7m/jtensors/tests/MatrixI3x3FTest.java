@@ -22,6 +22,7 @@ import com.io7m.jtensors.MatrixI3x3F;
 import com.io7m.jtensors.MatrixReadable3x3FType;
 import com.io7m.jtensors.VectorI3F;
 import com.io7m.jtensors.VectorM3F;
+import com.io7m.jtensors.VectorReadable3FType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -88,9 +89,9 @@ public final class MatrixI3x3FTest
 
     final MatrixI3x3F im0 = MatrixI3x3F.newFromReadable(m0);
 
-    final VectorI3F column_0 = new VectorI3F(0.0f, 0.1f, 0.2f);
-    final VectorI3F column_1 = new VectorI3F(10.0f, 10.1f, 10.2f);
-    final VectorI3F column_2 = new VectorI3F(20.0f, 20.1f, 20.2f);
+    final VectorReadable3FType column_0 = new VectorI3F(0.0f, 0.1f, 0.2f);
+    final VectorReadable3FType column_1 = new VectorI3F(10.0f, 10.1f, 10.2f);
+    final VectorReadable3FType column_2 = new VectorI3F(20.0f, 20.1f, 20.2f);
 
     final MatrixI3x3F im1 =
       MatrixI3x3F.newFromColumns(column_0, column_1, column_2);

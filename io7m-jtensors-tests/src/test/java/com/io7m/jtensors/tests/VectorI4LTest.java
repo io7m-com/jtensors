@@ -18,6 +18,7 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.VectorI4L;
+import com.io7m.jtensors.VectorReadable4LType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -121,7 +122,7 @@ public class VectorI4LTest extends VectorI4Contract
 
   @Override @Test public void testCheckInterface()
   {
-    final VectorI4L v = new VectorI4L(3, 5, 7, 11);
+    final VectorReadable4LType v = new VectorI4L(3, 5, 7, 11);
 
     Assert.assertTrue(v.getXL() == v.getXL());
     Assert.assertTrue(v.getYL() == v.getYL());
@@ -143,7 +144,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = VectorI4LTest.randomNegativeNumber();
       final long z = VectorI4LTest.randomNegativeNumber();
       final long w = VectorI4LTest.randomNegativeNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clampMaximumByVector(v, maximum);
 
@@ -168,7 +169,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = VectorI4LTest.randomNegativeNumber();
       final long z = VectorI4LTest.randomNegativeNumber();
       final long w = VectorI4LTest.randomNegativeNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clampMinimumByVector(v, minimum);
 
@@ -199,7 +200,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = VectorI4LTest.randomPositiveNumber();
       final long z = VectorI4LTest.randomPositiveNumber();
       final long w = VectorI4LTest.randomPositiveNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clampByVector(v, minimum, maximum);
 
@@ -224,7 +225,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = VectorI4LTest.randomPositiveNumber();
       final long z = VectorI4LTest.randomPositiveNumber();
       final long w = VectorI4LTest.randomPositiveNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clampMaximum(v, maximum);
 
@@ -245,7 +246,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = VectorI4LTest.randomNegativeNumber();
       final long z = VectorI4LTest.randomNegativeNumber();
       final long w = VectorI4LTest.randomNegativeNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clampMinimum(v, minimum);
 
@@ -267,7 +268,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = VectorI4LTest.randomPositiveNumber();
       final long z = VectorI4LTest.randomPositiveNumber();
       final long w = VectorI4LTest.randomPositiveNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.clamp(v, minimum, maximum);
 
@@ -312,8 +313,8 @@ public class VectorI4LTest extends VectorI4Contract
 
   @Override @Test public void testDistance()
   {
-    final VectorI4L v0 = new VectorI4L(0, 1, 0, 0);
-    final VectorI4L v1 = new VectorI4L(0, 0, 0, 0);
+    final VectorReadable4LType v0 = new VectorI4L(0, 1, 0, 0);
+    final VectorReadable4LType v1 = new VectorI4L(0, 0, 0, 0);
     Assert.assertTrue(VectorI4L.distance(v0, v1) == 1);
   }
 
@@ -325,13 +326,13 @@ public class VectorI4LTest extends VectorI4Contract
       final long y0 = VectorI4LTest.randomPositiveSmallNumber();
       final long z0 = VectorI4LTest.randomPositiveSmallNumber();
       final long w0 = VectorI4LTest.randomPositiveSmallNumber();
-      final VectorI4L v0 = new VectorI4L(x0, y0, z0, w0);
+      final VectorReadable4LType v0 = new VectorI4L(x0, y0, z0, w0);
 
       final long x1 = VectorI4LTest.randomPositiveSmallNumber();
       final long y1 = VectorI4LTest.randomPositiveSmallNumber();
       final long z1 = VectorI4LTest.randomPositiveSmallNumber();
       final long w1 = VectorI4LTest.randomPositiveSmallNumber();
-      final VectorI4L v1 = new VectorI4L(x1, y1, z1, w1);
+      final VectorReadable4LType v1 = new VectorI4L(x1, y1, z1, w1);
 
       Assert.assertTrue(VectorI4L.distance(v0, v1) >= 0);
     }
@@ -386,7 +387,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = (long) (Math.random() * max);
       final long z = (long) (Math.random() * max);
       final long w = (long) (Math.random() * max);
-      final VectorI4L q = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType q = new VectorI4L(x, y, z, w);
 
       final double ms = VectorI4L.magnitudeSquared(q);
       final double dp = VectorI4L.dotProduct(q, q);
@@ -411,7 +412,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = (long) (Math.random() * max);
       final long z = (long) (Math.random() * max);
       final long w = (long) (Math.random() * max);
-      final VectorI4L q = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType q = new VectorI4L(x, y, z, w);
       final double dp = VectorI4L.dotProduct(q, q);
 
       
@@ -596,7 +597,7 @@ public class VectorI4LTest extends VectorI4Contract
   @Override @Test public void testInitializeReadable()
   {
     final VectorI4L v0 = new VectorI4L(1, 2, 3, 4);
-    final VectorI4L v1 = new VectorI4L(v0);
+    final VectorReadable4LType v1 = new VectorI4L(v0);
 
     Assert.assertTrue(v0.getXL() == v1.getXL());
     Assert.assertTrue(v0.getYL() == v1.getYL());
@@ -643,7 +644,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = VectorI4LTest.randomPositiveSmallNumber();
       final long z = VectorI4LTest.randomPositiveSmallNumber();
       final long w = VectorI4LTest.randomPositiveSmallNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final long m = VectorI4L.magnitude(v);
       Assert.assertTrue(m >= 1);
@@ -662,14 +663,14 @@ public class VectorI4LTest extends VectorI4Contract
 
   @Override @Test public void testMagnitudeOne()
   {
-    final VectorI4L v = new VectorI4L(1, 0, 0, 0);
+    final VectorReadable4LType v = new VectorI4L(1, 0, 0, 0);
     final long m = VectorI4L.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final VectorI4L v = new VectorI4L(8, 0, 0, 0);
+    final VectorReadable4LType v = new VectorI4L(8, 0, 0, 0);
 
     {
       final long p = VectorI4L.dotProduct(v, v);
@@ -683,7 +684,7 @@ public class VectorI4LTest extends VectorI4Contract
 
   @Override @Test public void testMagnitudeZero()
   {
-    final VectorI4L v = new VectorI4L(0, 0, 0, 0);
+    final VectorReadable4LType v = new VectorI4L(0, 0, 0, 0);
     final long m = VectorI4L.magnitude(v);
     Assert.assertTrue(m == 0);
   }
@@ -706,16 +707,16 @@ public class VectorI4LTest extends VectorI4Contract
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final VectorI4L p = new VectorI4L(1, 0, 0, 1);
-      final VectorI4L q = new VectorI4L(0, 1, 0, 1);
+      final VectorReadable4LType p = new VectorI4L(1, 0, 0, 1);
+      final VectorReadable4LType q = new VectorI4L(0, 1, 0, 1);
       final VectorI4L u = VectorI4L.projection(p, q);
 
       Assert.assertTrue(VectorI4L.magnitude(u) == 0);
     }
 
     {
-      final VectorI4L p = new VectorI4L(-1, 0, 0, 1);
-      final VectorI4L q = new VectorI4L(0, 1, 0, 1);
+      final VectorReadable4LType p = new VectorI4L(-1, 0, 0, 1);
+      final VectorReadable4LType q = new VectorI4L(0, 1, 0, 1);
       final VectorI4L u = VectorI4L.projection(p, q);
 
       Assert.assertTrue(VectorI4L.magnitude(u) == 0);
@@ -749,7 +750,7 @@ public class VectorI4LTest extends VectorI4Contract
       final long y = VectorI4LTest.randomPositiveNumber();
       final long z = VectorI4LTest.randomPositiveNumber();
       final long w = VectorI4LTest.randomPositiveNumber();
-      final VectorI4L v = new VectorI4L(x, y, z, w);
+      final VectorReadable4LType v = new VectorI4L(x, y, z, w);
 
       final VectorI4L vr = VectorI4L.scale(v, 0);
 

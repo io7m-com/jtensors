@@ -58,6 +58,7 @@ import org.junit.Test;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 @SuppressWarnings("static-method") public final class APICompleteness
@@ -67,8 +68,8 @@ import java.util.Map.Entry;
     final Class<?> c)
   {
 
-    final HashMap<String, Method> methods = APICompleteness.getMethods(c);
-    final HashMap<String, Method> baseline_methods =
+    final Map<String, Method> methods = APICompleteness.getMethods(c);
+    final Map<String, Method> baseline_methods =
       APICompleteness.getMethods(c_base);
 
     for (final Entry<String, Method> e : baseline_methods.entrySet()) {
@@ -196,7 +197,7 @@ import java.util.Map.Entry;
     return name.replace('D', 'F').replaceAll("double", "float");
   }
 
-  private static HashMap<String, Method> getMethods(
+  private static Map<String, Method> getMethods(
     final Class<?> c)
   {
     final HashMap<String, Method> methods = new HashMap<String, Method>();

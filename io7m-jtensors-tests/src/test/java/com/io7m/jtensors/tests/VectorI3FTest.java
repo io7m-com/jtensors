@@ -21,6 +21,7 @@ import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorI3F;
+import com.io7m.jtensors.VectorReadable3FType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -121,68 +122,68 @@ public class VectorI3FTest extends VectorI3Contract
     final float q = w + 1.0f;
 
     {
-      final VectorI3F m0 = new VectorI3F(x, y, z);
-      final VectorI3F m1 = new VectorI3F(q, y, z);
+      final VectorReadable3FType m0 = new VectorI3F(x, y, z);
+      final VectorReadable3FType m1 = new VectorI3F(q, y, z);
       Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3F m0 = new VectorI3F(x, y, z);
-      final VectorI3F m1 = new VectorI3F(x, q, z);
+      final VectorReadable3FType m0 = new VectorI3F(x, y, z);
+      final VectorReadable3FType m1 = new VectorI3F(x, q, z);
       Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3F m0 = new VectorI3F(x, y, z);
-      final VectorI3F m1 = new VectorI3F(x, y, q);
+      final VectorReadable3FType m0 = new VectorI3F(x, y, z);
+      final VectorReadable3FType m1 = new VectorI3F(x, y, q);
       Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3F m0 = new VectorI3F(x, y, z);
-      final VectorI3F m1 = new VectorI3F(q, q, z);
+      final VectorReadable3FType m0 = new VectorI3F(x, y, z);
+      final VectorReadable3FType m1 = new VectorI3F(q, q, z);
       Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3F m0 = new VectorI3F(x, y, z);
-      final VectorI3F m1 = new VectorI3F(q, y, q);
+      final VectorReadable3FType m0 = new VectorI3F(x, y, z);
+      final VectorReadable3FType m1 = new VectorI3F(q, y, q);
       Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3F m0 = new VectorI3F(x, y, z);
-      final VectorI3F m1 = new VectorI3F(q, y, z);
+      final VectorReadable3FType m0 = new VectorI3F(x, y, z);
+      final VectorReadable3FType m1 = new VectorI3F(q, y, z);
       Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3F m0 = new VectorI3F(x, y, z);
-      final VectorI3F m1 = new VectorI3F(q, q, q);
+      final VectorReadable3FType m0 = new VectorI3F(x, y, z);
+      final VectorReadable3FType m1 = new VectorI3F(q, q, q);
       Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3F m0 = new VectorI3F(x, y, z);
-      final VectorI3F m1 = new VectorI3F(q, q, z);
+      final VectorReadable3FType m0 = new VectorI3F(x, y, z);
+      final VectorReadable3FType m1 = new VectorI3F(q, q, z);
       Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3F m0 = new VectorI3F(x, y, z);
-      final VectorI3F m1 = new VectorI3F(q, q, q);
+      final VectorReadable3FType m0 = new VectorI3F(x, y, z);
+      final VectorReadable3FType m1 = new VectorI3F(q, q, q);
       Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3F m0 = new VectorI3F(x, y, z);
-      final VectorI3F m1 = new VectorI3F(x, q, q);
+      final VectorReadable3FType m0 = new VectorI3F(x, y, z);
+      final VectorReadable3FType m1 = new VectorI3F(x, q, q);
       Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI3F m0 = new VectorI3F(x, y, z);
-      final VectorI3F m1 = new VectorI3F(x, y, q);
+      final VectorReadable3FType m0 = new VectorI3F(x, y, z);
+      final VectorReadable3FType m1 = new VectorI3F(x, y, q);
       Assert.assertFalse(VectorI3F.almostEqual(ec, m0, m1));
     }
   }
@@ -196,9 +197,9 @@ public class VectorI3FTest extends VectorI3Contract
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI3F v0 = new VectorI3F(x0, y0, z0);
-      final VectorI3F v1 = new VectorI3F(x0, y0, z0);
-      final VectorI3F v2 = new VectorI3F(x0, y0, z0);
+      final VectorReadable3FType v0 = new VectorI3F(x0, y0, z0);
+      final VectorReadable3FType v1 = new VectorI3F(x0, y0, z0);
+      final VectorReadable3FType v2 = new VectorI3F(x0, y0, z0);
 
       Assert.assertTrue(VectorI3F.almostEqual(ec, v0, v1));
       Assert.assertTrue(VectorI3F.almostEqual(ec, v1, v2));
@@ -208,7 +209,7 @@ public class VectorI3FTest extends VectorI3Contract
 
   @Override @Test public void testCheckInterface()
   {
-    final VectorI3F v = new VectorI3F(3.0f, 5.0f, 7.0f);
+    final VectorReadable3FType v = new VectorI3F(3.0f, 5.0f, 7.0f);
 
     Assert.assertTrue(v.getXF() == v.getXF());
     Assert.assertTrue(v.getYF() == v.getYF());
@@ -226,7 +227,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI3F v = new VectorI3F(x, y, z);
+      final VectorReadable3FType v = new VectorI3F(x, y, z);
 
       Assert.assertTrue(
         VectorI3F.clampMaximumByVector(v, maximum).getXF()
@@ -251,7 +252,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI3F v = new VectorI3F(x, y, z);
+      final VectorReadable3FType v = new VectorI3F(x, y, z);
 
       Assert.assertTrue(
         VectorI3F.clampMinimumByVector(v, minimum).getXF()
@@ -281,7 +282,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI3F v = new VectorI3F(x, y, z);
+      final VectorReadable3FType v = new VectorI3F(x, y, z);
 
       Assert.assertTrue(
         VectorI3F.clampByVector(v, minimum, maximum).getXF()
@@ -312,7 +313,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI3F v = new VectorI3F(x, y, z);
+      final VectorReadable3FType v = new VectorI3F(x, y, z);
 
       Assert.assertTrue(VectorI3F.clampMaximum(v, maximum).getXF() <= maximum);
       Assert.assertTrue(VectorI3F.clampMaximum(v, maximum).getYF() <= maximum);
@@ -328,7 +329,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI3F v = new VectorI3F(x, y, z);
+      final VectorReadable3FType v = new VectorI3F(x, y, z);
 
       Assert.assertTrue(VectorI3F.clampMinimum(v, minimum).getXF() >= minimum);
       Assert.assertTrue(VectorI3F.clampMinimum(v, minimum).getYF() >= minimum);
@@ -345,7 +346,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI3F v = new VectorI3F(x, y, z);
+      final VectorReadable3FType v = new VectorI3F(x, y, z);
 
       Assert.assertTrue(
         VectorI3F.clamp(v, minimum, maximum).getXF()
@@ -378,7 +379,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final VectorI3F v = new VectorI3F(x, y, z);
-      final VectorI3F vc = new VectorI3F(v);
+      final VectorReadable3FType vc = new VectorI3F(v);
 
       Assert.assertTrue(VectorI3F.almostEqual(ec, v, vc));
     }
@@ -423,14 +424,14 @@ public class VectorI3FTest extends VectorI3Contract
   {
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
-    final VectorI3F v = new VectorI3F();
+    final VectorReadable3FType v = new VectorI3F();
     VectorI3F.almostEqual(context, v, new VectorI3F(0, 0, 0));
   }
 
   @Override @Test public void testDistance()
   {
-    final VectorI3F v0 = new VectorI3F(0.0f, 1.0f, 0.0f);
-    final VectorI3F v1 = new VectorI3F(0.0f, 0.0f, 0.0f);
+    final VectorReadable3FType v0 = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType v1 = new VectorI3F(0.0f, 0.0f, 0.0f);
 
     final ContextRelative context = new AlmostEqualFloat.ContextRelative();
     Assert.assertTrue(
@@ -444,12 +445,12 @@ public class VectorI3FTest extends VectorI3Contract
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI3F v0 = new VectorI3F(x0, y0, z0);
+      final VectorReadable3FType v0 = new VectorI3F(x0, y0, z0);
 
       final float x1 = (float) (Math.random() * Float.MAX_VALUE);
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
       final float z1 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI3F v1 = new VectorI3F(x1, y1, z1);
+      final VectorReadable3FType v1 = new VectorI3F(x1, y1, z1);
 
       Assert.assertTrue(VectorI3F.distance(v0, v1) >= 0.0);
     }
@@ -490,14 +491,14 @@ public class VectorI3FTest extends VectorI3Contract
 
   @Override @Test public void testDotProductPerpendicular()
   {
-    final VectorI3F vpx = new VectorI3F(1.0f, 0.0f, 0.0f);
-    final VectorI3F vmx = new VectorI3F(-1.0f, 0.0f, 0.0f);
+    final VectorReadable3FType vpx = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorReadable3FType vmx = new VectorI3F(-1.0f, 0.0f, 0.0f);
 
-    final VectorI3F vpy = new VectorI3F(0.0f, 1.0f, 0.0f);
-    final VectorI3F vmy = new VectorI3F(0.0f, -1.0f, 0.0f);
+    final VectorReadable3FType vpy = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType vmy = new VectorI3F(0.0f, -1.0f, 0.0f);
 
-    final VectorI3F vpz = new VectorI3F(0.0f, 0.0f, 1.0f);
-    final VectorI3F vmz = new VectorI3F(0.0f, 0.0f, -1.0f);
+    final VectorReadable3FType vpz = new VectorI3F(0.0f, 0.0f, 1.0f);
+    final VectorReadable3FType vmz = new VectorI3F(0.0f, 0.0f, -1.0f);
 
     Assert.assertTrue(VectorI3F.dotProduct(vpx, vpy) == 0.0);
     Assert.assertTrue(VectorI3F.dotProduct(vpy, vpz) == 0.0);
@@ -514,7 +515,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float x = (float) Math.random();
       final float y = (float) Math.random();
       final float z = (float) Math.random();
-      final VectorI3F q = new VectorI3F(x, y, z);
+      final VectorReadable3FType q = new VectorI3F(x, y, z);
       final double dp = VectorI3F.dotProduct(q, q);
 
       
@@ -533,7 +534,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float x = (float) Math.random();
       final float y = (float) Math.random();
       final float z = (float) Math.random();
-      final VectorI3F q = new VectorI3F(x, y, z);
+      final VectorReadable3FType q = new VectorI3F(x, y, z);
 
       final double ms = VectorI3F.magnitudeSquared(q);
       final double dp = VectorI3F.dotProduct(q, q);
@@ -679,7 +680,7 @@ public class VectorI3FTest extends VectorI3Contract
   @Override @Test public void testInitializeReadable()
   {
     final VectorI3F v0 = new VectorI3F(1.0f, 2.0f, 3.0f);
-    final VectorI3F v1 = new VectorI3F(v0);
+    final VectorReadable3FType v1 = new VectorI3F(v0);
 
     Assert.assertTrue(v0.getXF() == v1.getXF());
     Assert.assertTrue(v0.getYF() == v1.getYF());
@@ -695,12 +696,12 @@ public class VectorI3FTest extends VectorI3Contract
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI3F v0 = new VectorI3F(x0, y0, z0);
+      final VectorReadable3FType v0 = new VectorI3F(x0, y0, z0);
 
       final float x1 = (float) (Math.random() * Float.MAX_VALUE);
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
       final float z1 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI3F v1 = new VectorI3F(x1, y1, z1);
+      final VectorReadable3FType v1 = new VectorI3F(x1, y1, z1);
 
       Assert.assertTrue(
         VectorI3F.almostEqual(
@@ -717,7 +718,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float x = (float) (1.0f + (Math.random() * Float.MAX_VALUE));
       final float y = (float) (1.0f + (Math.random() * Float.MAX_VALUE));
       final float z = (float) (1.0f + (Math.random() * Float.MAX_VALUE));
-      final VectorI3F v = new VectorI3F(x, y, z);
+      final VectorReadable3FType v = new VectorI3F(x, y, z);
 
       final double m = VectorI3F.magnitude(v);
       Assert.assertTrue(m > 0.0f);
@@ -734,7 +735,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float x = (float) (1.0f + (Math.random() * max));
       final float y = (float) (1.0f + (Math.random() * max));
       final float z = (float) (1.0f + (Math.random() * max));
-      final VectorI3F v = new VectorI3F(x, y, z);
+      final VectorReadable3FType v = new VectorI3F(x, y, z);
 
       final VectorI3F vr = VectorI3F.normalize(v);
       Assert.assertNotSame(v, vr);
@@ -754,7 +755,7 @@ public class VectorI3FTest extends VectorI3Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI3F v = new VectorI3F(0.0f, 0.0f, 0.0f);
+    final VectorReadable3FType v = new VectorI3F(0.0f, 0.0f, 0.0f);
     final VectorI3F vr = VectorI3F.normalize(v);
     final double m = VectorI3F.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
@@ -765,14 +766,14 @@ public class VectorI3FTest extends VectorI3Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI3F v = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorReadable3FType v = new VectorI3F(1.0f, 0.0f, 0.0f);
     final double m = VectorI3F.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final VectorI3F v = new VectorI3F(8.0f, 0.0f, 0.0f);
+    final VectorReadable3FType v = new VectorI3F(8.0f, 0.0f, 0.0f);
 
     {
       final double p = VectorI3F.dotProduct(v, v);
@@ -789,14 +790,14 @@ public class VectorI3FTest extends VectorI3Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI3F v = new VectorI3F(0.0f, 0.0f, 0.0f);
+    final VectorReadable3FType v = new VectorI3F(0.0f, 0.0f, 0.0f);
     final double m = VectorI3F.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
   @Override @Test public void testNormalizeSimple()
   {
-    final VectorI3F v0 = new VectorI3F(8.0f, 0.0f, 0.0f);
+    final VectorReadable3FType v0 = new VectorI3F(8.0f, 0.0f, 0.0f);
     final VectorI3F vr = VectorI3F.normalize(v0);
     final float m = VectorI3F.magnitude(vr);
     Assert.assertTrue(m == 1.0);
@@ -807,14 +808,14 @@ public class VectorI3FTest extends VectorI3Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final VectorI3F v0 = new VectorI3F(0.0f, 0.0f, 0.0f);
+    final VectorReadable3FType v0 = new VectorI3F(0.0f, 0.0f, 0.0f);
     VectorI3F.almostEqual(ec, VectorI3F.normalize(v0), v0);
   }
 
   @Override @Test public void testOrthonormalize()
   {
-    final VectorI3F v0 = new VectorI3F(0, 1, 0);
-    final VectorI3F v1 = new VectorI3F(0.5f, 0.5f, 0);
+    final VectorReadable3FType v0 = new VectorI3F(0, 1, 0);
+    final VectorReadable3FType v1 = new VectorI3F(0.5f, 0.5f, 0);
     final Pair<VectorI3F, VectorI3F> on = VectorI3F.orthoNormalize(v0, v1);
 
     Assert.assertEquals(v0, on.getLeft());
@@ -824,15 +825,15 @@ public class VectorI3FTest extends VectorI3Contract
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final VectorI3F p = new VectorI3F(1.0f, 0.0f, 0.0f);
-      final VectorI3F q = new VectorI3F(0.0f, 1.0f, 0.0f);
+      final VectorReadable3FType p = new VectorI3F(1.0f, 0.0f, 0.0f);
+      final VectorReadable3FType q = new VectorI3F(0.0f, 1.0f, 0.0f);
       final VectorI3F r = VectorI3F.projection(p, q);
       Assert.assertTrue(VectorI3F.magnitude(r) == 0.0);
     }
 
     {
-      final VectorI3F p = new VectorI3F(-1.0f, 0.0f, 0.0f);
-      final VectorI3F q = new VectorI3F(0.0f, 1.0f, 0.0f);
+      final VectorReadable3FType p = new VectorI3F(-1.0f, 0.0f, 0.0f);
+      final VectorReadable3FType q = new VectorI3F(0.0f, 1.0f, 0.0f);
       final VectorI3F r = VectorI3F.projection(p, q);
       Assert.assertTrue(VectorI3F.magnitude(r) == 0.0);
     }
@@ -872,7 +873,7 @@ public class VectorI3FTest extends VectorI3Contract
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI3F v = new VectorI3F(x, y, z);
+      final VectorReadable3FType v = new VectorI3F(x, y, z);
 
       final VectorI3F vr = VectorI3F.scale(v, 0.0f);
 

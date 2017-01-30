@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors.tests.parameterized;
 
+import com.io7m.jtensors.MatrixDirectFType;
 import com.io7m.jtensors.parameterized.PMatrixDirect3x3FType;
 import com.io7m.jtensors.parameterized.PMatrixDirectM3x3F;
 import com.io7m.jtensors.parameterized.PMatrixReadable3x3FType;
@@ -66,7 +67,7 @@ public final class PMatrixDirectM3x3FTest<T0, T1, T2>
   @Override protected void checkDirectBufferInvariantsWildcard(
     final PMatrixReadable3x3FType<?, ?> m)
   {
-    final PMatrixDirect3x3FType<?, ?> mx = (PMatrixDirect3x3FType<?, ?>) m;
+    final MatrixDirectFType mx = (PMatrixDirect3x3FType<?, ?>) m;
     Assert.assertEquals(0L, (long) mx.getDirectFloatBuffer().position());
   }
 

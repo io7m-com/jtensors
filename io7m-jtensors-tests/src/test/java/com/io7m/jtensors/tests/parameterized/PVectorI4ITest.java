@@ -17,7 +17,9 @@
 package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jequality.AlmostEqualDouble;
+import com.io7m.jtensors.VectorReadable4IType;
 import com.io7m.jtensors.parameterized.PVectorI4I;
+import com.io7m.jtensors.parameterized.PVectorReadable4IType;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
@@ -129,7 +131,7 @@ import org.junit.Test;
 
   @Override @Test public void testCheckInterface()
   {
-    final PVectorI4I<T> v = new PVectorI4I<T>(3, 5, 7, 11);
+    final VectorReadable4IType v = new PVectorI4I<T>(3, 5, 7, 11);
 
     Assert.assertTrue(v.getXI() == v.getXI());
     Assert.assertTrue(v.getYI() == v.getYI());
@@ -151,7 +153,7 @@ import org.junit.Test;
       final int y = PVectorI4ITest.randomNegativeNumber();
       final int z = PVectorI4ITest.randomNegativeNumber();
       final int w = PVectorI4ITest.randomNegativeNumber();
-      final PVectorI4I<T> v = new PVectorI4I<T>(x, y, z, w);
+      final PVectorReadable4IType<T> v = new PVectorI4I<T>(x, y, z, w);
 
       final PVectorI4I<T> vr = PVectorI4I.clampMaximumByPVector(v, maximum);
 
@@ -176,7 +178,7 @@ import org.junit.Test;
       final int y = PVectorI4ITest.randomNegativeNumber();
       final int z = PVectorI4ITest.randomNegativeNumber();
       final int w = PVectorI4ITest.randomNegativeNumber();
-      final PVectorI4I<T> v = new PVectorI4I<T>(x, y, z, w);
+      final PVectorReadable4IType<T> v = new PVectorI4I<T>(x, y, z, w);
 
       final PVectorI4I<T> vr = PVectorI4I.clampMinimumByPVector(v, minimum);
 
@@ -208,7 +210,7 @@ import org.junit.Test;
       final int y = PVectorI4ITest.randomPositiveNumber();
       final int z = PVectorI4ITest.randomPositiveNumber();
       final int w = PVectorI4ITest.randomPositiveNumber();
-      final PVectorI4I<T> v = new PVectorI4I<T>(x, y, z, w);
+      final PVectorReadable4IType<T> v = new PVectorI4I<T>(x, y, z, w);
 
       final PVectorI4I<T> vr = PVectorI4I.clampByPVector(v, minimum, maximum);
 
@@ -232,7 +234,7 @@ import org.junit.Test;
       final int y = PVectorI4ITest.randomPositiveNumber();
       final int z = PVectorI4ITest.randomPositiveNumber();
       final int w = PVectorI4ITest.randomPositiveNumber();
-      final PVectorI4I<T> v = new PVectorI4I<T>(x, y, z, w);
+      final PVectorReadable4IType<T> v = new PVectorI4I<T>(x, y, z, w);
 
       final PVectorI4I<T> vr = PVectorI4I.clampMaximum(v, maximum);
 
@@ -252,7 +254,7 @@ import org.junit.Test;
       final int y = PVectorI4ITest.randomNegativeNumber();
       final int z = PVectorI4ITest.randomNegativeNumber();
       final int w = PVectorI4ITest.randomNegativeNumber();
-      final PVectorI4I<T> v = new PVectorI4I<T>(x, y, z, w);
+      final PVectorReadable4IType<T> v = new PVectorI4I<T>(x, y, z, w);
 
       final PVectorI4I<T> vr = PVectorI4I.clampMinimum(v, minimum);
 
@@ -273,7 +275,7 @@ import org.junit.Test;
       final int y = PVectorI4ITest.randomPositiveNumber();
       final int z = PVectorI4ITest.randomPositiveNumber();
       final int w = PVectorI4ITest.randomPositiveNumber();
-      final PVectorI4I<T> v = new PVectorI4I<T>(x, y, z, w);
+      final PVectorReadable4IType<T> v = new PVectorI4I<T>(x, y, z, w);
 
       final PVectorI4I<T> vr = PVectorI4I.clamp(v, minimum, maximum);
 
@@ -319,8 +321,8 @@ import org.junit.Test;
 
   @Override @Test public void testDistance()
   {
-    final PVectorI4I<T> v0 = new PVectorI4I<T>(0, 1, 0, 0);
-    final PVectorI4I<T> v1 = new PVectorI4I<T>(0, 0, 0, 0);
+    final PVectorReadable4IType<T> v0 = new PVectorI4I<T>(0, 1, 0, 0);
+    final PVectorReadable4IType<T> v1 = new PVectorI4I<T>(0, 0, 0, 0);
     Assert.assertTrue(PVectorI4I.distance(v0, v1) == 1);
   }
 
@@ -331,13 +333,13 @@ import org.junit.Test;
       final int y0 = PVectorI4ITest.randomPositiveSmallNumber();
       final int z0 = PVectorI4ITest.randomPositiveSmallNumber();
       final int w0 = PVectorI4ITest.randomPositiveSmallNumber();
-      final PVectorI4I<T> v0 = new PVectorI4I<T>(x0, y0, z0, w0);
+      final PVectorReadable4IType<T> v0 = new PVectorI4I<T>(x0, y0, z0, w0);
 
       final int x1 = PVectorI4ITest.randomPositiveSmallNumber();
       final int y1 = PVectorI4ITest.randomPositiveSmallNumber();
       final int z1 = PVectorI4ITest.randomPositiveSmallNumber();
       final int w1 = PVectorI4ITest.randomPositiveSmallNumber();
-      final PVectorI4I<T> v1 = new PVectorI4I<T>(x1, y1, z1, w1);
+      final PVectorReadable4IType<T> v1 = new PVectorI4I<T>(x1, y1, z1, w1);
 
       Assert.assertTrue(PVectorI4I.distance(v0, v1) >= 0);
     }
@@ -391,7 +393,7 @@ import org.junit.Test;
       final int y = (int) (Math.random() * max);
       final int z = (int) (Math.random() * max);
       final int w = (int) (Math.random() * max);
-      final PVectorI4I<T> q = new PVectorI4I<T>(x, y, z, w);
+      final PVectorReadable4IType<T> q = new PVectorI4I<T>(x, y, z, w);
 
       final double ms = PVectorI4I.magnitudeSquared(q);
       final double dp = PVectorI4I.dotProduct(q, q);
@@ -411,7 +413,7 @@ import org.junit.Test;
       final int y = (int) (Math.random() * max);
       final int z = (int) (Math.random() * max);
       final int w = (int) (Math.random() * max);
-      final PVectorI4I<T> q = new PVectorI4I<T>(x, y, z, w);
+      final PVectorReadable4IType<T> q = new PVectorI4I<T>(x, y, z, w);
       final double dp = PVectorI4I.dotProduct(q, q);
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
@@ -593,7 +595,7 @@ import org.junit.Test;
   @Override @Test public void testInitializeReadable()
   {
     final PVectorI4I<T> v0 = new PVectorI4I<T>(1, 2, 3, 4);
-    final PVectorI4I<T> v1 = new PVectorI4I<T>(v0);
+    final VectorReadable4IType v1 = new PVectorI4I<T>(v0);
 
     Assert.assertTrue(v0.getXI() == v1.getXI());
     Assert.assertTrue(v0.getYI() == v1.getYI());
@@ -638,7 +640,7 @@ import org.junit.Test;
       final int y = PVectorI4ITest.randomPositiveSmallNumber();
       final int z = PVectorI4ITest.randomPositiveSmallNumber();
       final int w = PVectorI4ITest.randomPositiveSmallNumber();
-      final PVectorI4I<T> v = new PVectorI4I<T>(x, y, z, w);
+      final PVectorReadable4IType<T> v = new PVectorI4I<T>(x, y, z, w);
 
       final int m = PVectorI4I.magnitude(v);
       Assert.assertTrue(m >= 1);
@@ -657,14 +659,14 @@ import org.junit.Test;
 
   @Override @Test public void testMagnitudeOne()
   {
-    final PVectorI4I<T> v = new PVectorI4I<T>(1, 0, 0, 0);
+    final PVectorReadable4IType<T> v = new PVectorI4I<T>(1, 0, 0, 0);
     final int m = PVectorI4I.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final PVectorI4I<T> v = new PVectorI4I<T>(8, 0, 0, 0);
+    final PVectorReadable4IType<T> v = new PVectorI4I<T>(8, 0, 0, 0);
 
     {
       final int p = PVectorI4I.dotProduct(v, v);
@@ -678,7 +680,7 @@ import org.junit.Test;
 
   @Override @Test public void testMagnitudeZero()
   {
-    final PVectorI4I<T> v = new PVectorI4I<T>(0, 0, 0, 0);
+    final PVectorReadable4IType<T> v = new PVectorI4I<T>(0, 0, 0, 0);
     final int m = PVectorI4I.magnitude(v);
     Assert.assertTrue(m == 0);
   }
@@ -701,16 +703,16 @@ import org.junit.Test;
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final PVectorI4I<T> p = new PVectorI4I<T>(1, 0, 0, 1);
-      final PVectorI4I<T> q = new PVectorI4I<T>(0, 1, 0, 1);
+      final PVectorReadable4IType<T> p = new PVectorI4I<T>(1, 0, 0, 1);
+      final PVectorReadable4IType<T> q = new PVectorI4I<T>(0, 1, 0, 1);
       final PVectorI4I<T> u = PVectorI4I.projection(p, q);
 
       Assert.assertTrue(PVectorI4I.magnitude(u) == 0);
     }
 
     {
-      final PVectorI4I<T> p = new PVectorI4I<T>(-1, 0, 0, 1);
-      final PVectorI4I<T> q = new PVectorI4I<T>(0, 1, 0, 1);
+      final PVectorReadable4IType<T> p = new PVectorI4I<T>(-1, 0, 0, 1);
+      final PVectorReadable4IType<T> q = new PVectorI4I<T>(0, 1, 0, 1);
       final PVectorI4I<T> u = PVectorI4I.projection(p, q);
 
       Assert.assertTrue(PVectorI4I.magnitude(u) == 0);
@@ -742,7 +744,7 @@ import org.junit.Test;
       final int y = PVectorI4ITest.randomPositiveNumber();
       final int z = PVectorI4ITest.randomPositiveNumber();
       final int w = PVectorI4ITest.randomPositiveNumber();
-      final PVectorI4I<T> v = new PVectorI4I<T>(x, y, z, w);
+      final PVectorReadable4IType<T> v = new PVectorI4I<T>(x, y, z, w);
 
       final PVectorI4I<T> vr = PVectorI4I.scale(v, 0);
 

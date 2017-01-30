@@ -21,6 +21,7 @@ import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
 import com.io7m.jfunctional.Pair;
 import com.io7m.jtensors.VectorI4F;
+import com.io7m.jtensors.VectorReadable4FType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -166,74 +167,74 @@ public class VectorI4FTest extends VectorI4Contract
     final float q = w + 1.0f;
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(q, y, z, w);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(q, y, z, w);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(x, q, z, w);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(x, q, z, w);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(x, y, q, w);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(x, y, q, w);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(x, y, z, q);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(x, y, z, q);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(q, q, z, w);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(q, q, z, w);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(q, y, q, w);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(q, y, q, w);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(q, y, z, q);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(q, y, z, q);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(q, q, q, w);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(q, q, q, w);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(q, q, z, q);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(q, q, z, q);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(q, q, q, q);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(q, q, q, q);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(x, q, q, q);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(x, q, q, q);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
 
     {
-      final VectorI4F m0 = new VectorI4F(x, y, z, w);
-      final VectorI4F m1 = new VectorI4F(x, y, q, q);
+      final VectorReadable4FType m0 = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType m1 = new VectorI4F(x, y, q, q);
       Assert.assertFalse(VectorI4F.almostEqual(ec, m0, m1));
     }
   }
@@ -248,9 +249,9 @@ public class VectorI4FTest extends VectorI4Contract
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
       final float w0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI4F v0 = new VectorI4F(x0, y0, z0, w0);
-      final VectorI4F v1 = new VectorI4F(x0, y0, z0, w0);
-      final VectorI4F v2 = new VectorI4F(x0, y0, z0, w0);
+      final VectorReadable4FType v0 = new VectorI4F(x0, y0, z0, w0);
+      final VectorReadable4FType v1 = new VectorI4F(x0, y0, z0, w0);
+      final VectorReadable4FType v2 = new VectorI4F(x0, y0, z0, w0);
 
       Assert.assertTrue(VectorI4F.almostEqual(ec, v0, v1));
       Assert.assertTrue(VectorI4F.almostEqual(ec, v1, v2));
@@ -260,7 +261,7 @@ public class VectorI4FTest extends VectorI4Contract
 
   @Override @Test public void testCheckInterface()
   {
-    final VectorI4F v = new VectorI4F(3.0f, 5.0f, 7.0f, 11.0f);
+    final VectorReadable4FType v = new VectorI4F(3.0f, 5.0f, 7.0f, 11.0f);
 
     Assert.assertTrue(v.getXF() == v.getXF());
     Assert.assertTrue(v.getYF() == v.getYF());
@@ -281,7 +282,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final float w = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI4F v = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType v = new VectorI4F(x, y, z, w);
 
       Assert.assertTrue(
         VectorI4F.clampMaximumByVector(v, maximum).getXF()
@@ -311,7 +312,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final float w = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI4F v = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType v = new VectorI4F(x, y, z, w);
 
       Assert.assertTrue(
         VectorI4F.clampMinimumByVector(v, minimum).getXF()
@@ -347,7 +348,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
       final float w = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI4F v = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType v = new VectorI4F(x, y, z, w);
 
       Assert.assertTrue(
         VectorI4F.clampByVector(v, minimum, maximum).getXF()
@@ -385,7 +386,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
       final float w = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI4F v = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType v = new VectorI4F(x, y, z, w);
 
       Assert.assertTrue(VectorI4F.clampMaximum(v, maximum).getXF() <= maximum);
       Assert.assertTrue(VectorI4F.clampMaximum(v, maximum).getYF() <= maximum);
@@ -403,7 +404,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final float w = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI4F v = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType v = new VectorI4F(x, y, z, w);
 
       Assert.assertTrue(VectorI4F.clampMinimum(v, minimum).getXF() >= minimum);
       Assert.assertTrue(VectorI4F.clampMinimum(v, minimum).getYF() >= minimum);
@@ -422,7 +423,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final float w = (float) (Math.random() * Float.MIN_VALUE);
-      final VectorI4F v = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType v = new VectorI4F(x, y, z, w);
 
       Assert.assertTrue(
         VectorI4F.clamp(v, minimum, maximum).getXF()
@@ -462,7 +463,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final float w = (float) (Math.random() * Float.MIN_VALUE);
       final VectorI4F v = new VectorI4F(x, y, z, w);
-      final VectorI4F vc = new VectorI4F(v);
+      final VectorReadable4FType vc = new VectorI4F(v);
 
       Assert.assertTrue(VectorI4F.almostEqual(ec, v, vc));
     }
@@ -472,14 +473,14 @@ public class VectorI4FTest extends VectorI4Contract
   {
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
-    final VectorI4F v = new VectorI4F();
+    final VectorReadable4FType v = new VectorI4F();
     VectorI4F.almostEqual(context, v, new VectorI4F(0, 0, 0, 1));
   }
 
   @Override @Test public void testDistance()
   {
-    final VectorI4F v0 = new VectorI4F(0.0f, 1.0f, 0.0f, 0.0f);
-    final VectorI4F v1 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
+    final VectorReadable4FType v0 = new VectorI4F(0.0f, 1.0f, 0.0f, 0.0f);
+    final VectorReadable4FType v1 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
 
     final ContextRelative context = new AlmostEqualFloat.ContextRelative();
     Assert.assertTrue(
@@ -494,13 +495,13 @@ public class VectorI4FTest extends VectorI4Contract
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
       final float w0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI4F v0 = new VectorI4F(x0, y0, z0, w0);
+      final VectorReadable4FType v0 = new VectorI4F(x0, y0, z0, w0);
 
       final float x1 = (float) (Math.random() * Float.MAX_VALUE);
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
       final float z1 = (float) (Math.random() * Float.MAX_VALUE);
       final float w1 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI4F v1 = new VectorI4F(x1, y1, z1, w1);
+      final VectorReadable4FType v1 = new VectorI4F(x1, y1, z1, w1);
 
       Assert.assertTrue(VectorI4F.distance(v0, v1) >= 0.0);
     }
@@ -545,14 +546,14 @@ public class VectorI4FTest extends VectorI4Contract
 
   @Override @Test public void testDotProductPerpendicular()
   {
-    final VectorI4F vpx = new VectorI4F(1.0f, 0.0f, 0.0f, 0.0f);
-    final VectorI4F vmx = new VectorI4F(-1.0f, 0.0f, 0.0f, 0.0f);
+    final VectorReadable4FType vpx = new VectorI4F(1.0f, 0.0f, 0.0f, 0.0f);
+    final VectorReadable4FType vmx = new VectorI4F(-1.0f, 0.0f, 0.0f, 0.0f);
 
-    final VectorI4F vpy = new VectorI4F(0.0f, 1.0f, 0.0f, 0.0f);
-    final VectorI4F vmy = new VectorI4F(0.0f, -1.0f, 0.0f, 0.0f);
+    final VectorReadable4FType vpy = new VectorI4F(0.0f, 1.0f, 0.0f, 0.0f);
+    final VectorReadable4FType vmy = new VectorI4F(0.0f, -1.0f, 0.0f, 0.0f);
 
-    final VectorI4F vpz = new VectorI4F(0.0f, 0.0f, 1.0f, 0.0f);
-    final VectorI4F vmz = new VectorI4F(0.0f, 0.0f, -1.0f, 0.0f);
+    final VectorReadable4FType vpz = new VectorI4F(0.0f, 0.0f, 1.0f, 0.0f);
+    final VectorReadable4FType vmz = new VectorI4F(0.0f, 0.0f, -1.0f, 0.0f);
 
     Assert.assertTrue(VectorI4F.dotProduct(vpx, vpy) == 0.0);
     Assert.assertTrue(VectorI4F.dotProduct(vpy, vpz) == 0.0);
@@ -570,7 +571,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float y = (float) Math.random();
       final float z = (float) Math.random();
       final float w = (float) Math.random();
-      final VectorI4F q = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType q = new VectorI4F(x, y, z, w);
       final double dp = VectorI4F.dotProduct(q, q);
 
       
@@ -590,7 +591,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float y = (float) Math.random();
       final float z = (float) Math.random();
       final float w = (float) Math.random();
-      final VectorI4F q = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType q = new VectorI4F(x, y, z, w);
 
       final double ms = VectorI4F.magnitudeSquared(q);
       final double dp = VectorI4F.dotProduct(q, q);
@@ -750,7 +751,7 @@ public class VectorI4FTest extends VectorI4Contract
   @Override @Test public void testInitializeReadable()
   {
     final VectorI4F v0 = new VectorI4F(1.0f, 2.0f, 3.0f, 4.0f);
-    final VectorI4F v1 = new VectorI4F(v0);
+    final VectorReadable4FType v1 = new VectorI4F(v0);
 
     Assert.assertTrue(v0.getXF() == v1.getXF());
     Assert.assertTrue(v0.getYF() == v1.getYF());
@@ -768,13 +769,13 @@ public class VectorI4FTest extends VectorI4Contract
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
       final float w0 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI4F v0 = new VectorI4F(x0, y0, z0, w0);
+      final VectorReadable4FType v0 = new VectorI4F(x0, y0, z0, w0);
 
       final float x1 = (float) (Math.random() * Float.MAX_VALUE);
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
       final float z1 = (float) (Math.random() * Float.MAX_VALUE);
       final float w1 = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI4F v1 = new VectorI4F(x1, y1, z1, w1);
+      final VectorReadable4FType v1 = new VectorI4F(x1, y1, z1, w1);
 
       Assert.assertTrue(
         VectorI4F.almostEqual(
@@ -792,7 +793,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float y = (float) (1.0f + (Math.random() * Float.MAX_VALUE));
       final float z = (float) (1.0f + (Math.random() * Float.MAX_VALUE));
       final float w = (float) (1.0f + (Math.random() * Float.MAX_VALUE));
-      final VectorI4F v = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType v = new VectorI4F(x, y, z, w);
 
       final double m = VectorI4F.magnitude(v);
       Assert.assertTrue(m > 0.0f);
@@ -810,7 +811,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float y = (float) (1.0f + (Math.random() * max));
       final float z = (float) (1.0f + (Math.random() * max));
       final float w = (float) (1.0f + (Math.random() * max));
-      final VectorI4F v = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType v = new VectorI4F(x, y, z, w);
 
       final VectorI4F vr = VectorI4F.normalize(v);
       Assert.assertNotSame(v, vr);
@@ -830,7 +831,7 @@ public class VectorI4FTest extends VectorI4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI4F v = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
+    final VectorReadable4FType v = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
     final VectorI4F vr = VectorI4F.normalize(v);
     final double m = VectorI4F.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
@@ -841,14 +842,14 @@ public class VectorI4FTest extends VectorI4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI4F v = new VectorI4F(1.0f, 0.0f, 0.0f, 0.0f);
+    final VectorReadable4FType v = new VectorI4F(1.0f, 0.0f, 0.0f, 0.0f);
     final double m = VectorI4F.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final VectorI4F v = new VectorI4F(8.0f, 0.0f, 0.0f, 0.0f);
+    final VectorReadable4FType v = new VectorI4F(8.0f, 0.0f, 0.0f, 0.0f);
 
     {
       final double p = VectorI4F.dotProduct(v, v);
@@ -865,14 +866,14 @@ public class VectorI4FTest extends VectorI4Contract
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final VectorI4F v = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
+    final VectorReadable4FType v = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
     final double m = VectorI4F.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
   @Override @Test public void testNormalizeSimple()
   {
-    final VectorI4F v0 = new VectorI4F(8.0f, 0.0f, 0.0f, 0.0f);
+    final VectorReadable4FType v0 = new VectorI4F(8.0f, 0.0f, 0.0f, 0.0f);
     final VectorI4F vr = VectorI4F.normalize(v0);
     final float m = VectorI4F.magnitude(vr);
     Assert.assertTrue(m == 1.0);
@@ -883,14 +884,14 @@ public class VectorI4FTest extends VectorI4Contract
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final VectorI4F v0 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
+    final VectorReadable4FType v0 = new VectorI4F(0.0f, 0.0f, 0.0f, 0.0f);
     VectorI4F.almostEqual(ec, VectorI4F.normalize(v0), v0);
   }
 
   @Override @Test public void testOrthonormalize()
   {
-    final VectorI4F v0 = new VectorI4F(0, 1, 0, 0);
-    final VectorI4F v1 = new VectorI4F(0.5f, 0.5f, 0, 0);
+    final VectorReadable4FType v0 = new VectorI4F(0, 1, 0, 0);
+    final VectorReadable4FType v1 = new VectorI4F(0.5f, 0.5f, 0, 0);
     final Pair<VectorI4F, VectorI4F> on = VectorI4F.orthoNormalize(v0, v1);
 
     Assert.assertEquals(v0, on.getLeft());
@@ -900,15 +901,15 @@ public class VectorI4FTest extends VectorI4Contract
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final VectorI4F p = new VectorI4F(1.0f, 0.0f, 0.0f, 0.0f);
-      final VectorI4F q = new VectorI4F(0.0f, 1.0f, 0.0f, 0.0f);
+      final VectorReadable4FType p = new VectorI4F(1.0f, 0.0f, 0.0f, 0.0f);
+      final VectorReadable4FType q = new VectorI4F(0.0f, 1.0f, 0.0f, 0.0f);
       final VectorI4F r = VectorI4F.projection(p, q);
       Assert.assertTrue(VectorI4F.magnitude(r) == 0.0);
     }
 
     {
-      final VectorI4F p = new VectorI4F(-1.0f, 0.0f, 0.0f, 0.0f);
-      final VectorI4F q = new VectorI4F(0.0f, 1.0f, 0.0f, 0.0f);
+      final VectorReadable4FType p = new VectorI4F(-1.0f, 0.0f, 0.0f, 0.0f);
+      final VectorReadable4FType q = new VectorI4F(0.0f, 1.0f, 0.0f, 0.0f);
       final VectorI4F r = VectorI4F.projection(p, q);
       Assert.assertTrue(VectorI4F.magnitude(r) == 0.0);
     }
@@ -953,7 +954,7 @@ public class VectorI4FTest extends VectorI4Contract
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
       final float w = (float) (Math.random() * Float.MAX_VALUE);
-      final VectorI4F v = new VectorI4F(x, y, z, w);
+      final VectorReadable4FType v = new VectorI4F(x, y, z, w);
 
       final VectorI4F vr = VectorI4F.scale(v, 0.0f);
 

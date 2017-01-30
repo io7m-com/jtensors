@@ -20,6 +20,7 @@ import com.io7m.jtensors.Matrix2x2FType;
 import com.io7m.jtensors.MatrixM2x2F;
 import com.io7m.jtensors.VectorI2F;
 import com.io7m.jtensors.VectorM2F;
+import com.io7m.jtensors.VectorReadable2FType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -562,7 +563,7 @@ public abstract class Matrix2x2FContract<T extends Matrix2x2FType>
     m0.setR1C0F(3.0f);
     m0.setR1C1F(4.0f);
 
-    final VectorI2F v = new VectorI2F(1.0f, 2.0f);
+    final VectorReadable2FType v = new VectorI2F(1.0f, 2.0f);
     final VectorM2F out = new VectorM2F();
 
     final VectorM2F r = MatrixM2x2F.multiplyVector2F(c, m0, v, out);

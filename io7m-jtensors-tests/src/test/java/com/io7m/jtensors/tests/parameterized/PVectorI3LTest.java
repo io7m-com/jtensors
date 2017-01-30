@@ -17,7 +17,9 @@
 package com.io7m.jtensors.tests.parameterized;
 
 import com.io7m.jequality.AlmostEqualDouble;
+import com.io7m.jtensors.VectorReadable3LType;
 import com.io7m.jtensors.parameterized.PVectorI3L;
+import com.io7m.jtensors.parameterized.PVectorReadable3LType;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
@@ -123,7 +125,7 @@ import org.junit.Test;
 
   @Override @Test public void testCheckInterface()
   {
-    final PVectorI3L<T> v = new PVectorI3L<T>(3, 5, 7);
+    final VectorReadable3LType v = new PVectorI3L<T>(3, 5, 7);
 
     Assert.assertTrue(v.getXL() == v.getXL());
     Assert.assertTrue(v.getYL() == v.getYL());
@@ -142,7 +144,7 @@ import org.junit.Test;
       final long x = PVectorI3LTest.randomNegativeNumber();
       final long y = PVectorI3LTest.randomNegativeNumber();
       final long z = PVectorI3LTest.randomNegativeNumber();
-      final PVectorI3L<T> v = new PVectorI3L<T>(x, y, z);
+      final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clampMaximumByPVector(v, maximum);
 
@@ -164,7 +166,7 @@ import org.junit.Test;
       final long x = PVectorI3LTest.randomNegativeNumber();
       final long y = PVectorI3LTest.randomNegativeNumber();
       final long z = PVectorI3LTest.randomNegativeNumber();
-      final PVectorI3L<T> v = new PVectorI3L<T>(x, y, z);
+      final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clampMinimumByPVector(v, minimum);
 
@@ -191,7 +193,7 @@ import org.junit.Test;
       final long x = PVectorI3LTest.randomNegativeNumber();
       final long y = PVectorI3LTest.randomPositiveNumber();
       final long z = PVectorI3LTest.randomPositiveNumber();
-      final PVectorI3L<T> v = new PVectorI3L<T>(x, y, z);
+      final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clampByPVector(v, minimum, maximum);
 
@@ -213,7 +215,7 @@ import org.junit.Test;
       final long x = PVectorI3LTest.randomPositiveNumber();
       final long y = PVectorI3LTest.randomPositiveNumber();
       final long z = PVectorI3LTest.randomPositiveNumber();
-      final PVectorI3L<T> v = new PVectorI3L<T>(x, y, z);
+      final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clampMaximum(v, maximum);
 
@@ -232,7 +234,7 @@ import org.junit.Test;
       final long x = PVectorI3LTest.randomNegativeNumber();
       final long y = PVectorI3LTest.randomNegativeNumber();
       final long z = PVectorI3LTest.randomNegativeNumber();
-      final PVectorI3L<T> v = new PVectorI3L<T>(x, y, z);
+      final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clampMinimum(v, minimum);
 
@@ -252,7 +254,7 @@ import org.junit.Test;
       final long x = PVectorI3LTest.randomNegativeNumber();
       final long y = PVectorI3LTest.randomPositiveNumber();
       final long z = PVectorI3LTest.randomPositiveNumber();
-      final PVectorI3L<T> v = new PVectorI3L<T>(x, y, z);
+      final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.clamp(v, minimum, maximum);
 
@@ -297,8 +299,8 @@ import org.junit.Test;
 
   @Override @Test public void testDistance()
   {
-    final PVectorI3L<T> v0 = new PVectorI3L<T>(0, 1, 0);
-    final PVectorI3L<T> v1 = new PVectorI3L<T>(0, 0, 0);
+    final PVectorReadable3LType<T> v0 = new PVectorI3L<T>(0, 1, 0);
+    final PVectorReadable3LType<T> v1 = new PVectorI3L<T>(0, 0, 0);
     Assert.assertTrue(PVectorI3L.distance(v0, v1) == 1);
   }
 
@@ -309,12 +311,12 @@ import org.junit.Test;
       final long x0 = PVectorI3LTest.randomPositiveSmallNumber();
       final long y0 = PVectorI3LTest.randomPositiveSmallNumber();
       final long z0 = PVectorI3LTest.randomPositiveSmallNumber();
-      final PVectorI3L<T> v0 = new PVectorI3L<T>(x0, y0, z0);
+      final PVectorReadable3LType<T> v0 = new PVectorI3L<T>(x0, y0, z0);
 
       final long x1 = PVectorI3LTest.randomPositiveSmallNumber();
       final long y1 = PVectorI3LTest.randomPositiveSmallNumber();
       final long z1 = PVectorI3LTest.randomPositiveSmallNumber();
-      final PVectorI3L<T> v1 = new PVectorI3L<T>(x1, y1, z1);
+      final PVectorReadable3LType<T> v1 = new PVectorI3L<T>(x1, y1, z1);
 
       Assert.assertTrue(PVectorI3L.distance(v0, v1) >= 0);
     }
@@ -364,7 +366,7 @@ import org.junit.Test;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
       final long z = (long) (Math.random() * max);
-      final PVectorI3L<T> q = new PVectorI3L<T>(x, y, z);
+      final PVectorReadable3LType<T> q = new PVectorI3L<T>(x, y, z);
 
       final double ms = PVectorI3L.magnitudeSquared(q);
       final double dp = PVectorI3L.dotProduct(q, q);
@@ -384,7 +386,7 @@ import org.junit.Test;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
       final long z = (long) (Math.random() * max);
-      final PVectorI3L<T> q = new PVectorI3L<T>(x, y, z);
+      final PVectorReadable3LType<T> q = new PVectorI3L<T>(x, y, z);
       final double dp = PVectorI3L.dotProduct(q, q);
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
@@ -552,7 +554,7 @@ import org.junit.Test;
   @Override @Test public void testInitializeReadable()
   {
     final PVectorI3L<T> v0 = new PVectorI3L<T>(1, 2, 3);
-    final PVectorI3L<T> v1 = new PVectorI3L<T>(v0);
+    final VectorReadable3LType v1 = new PVectorI3L<T>(v0);
 
     Assert.assertTrue(v0.getXL() == v1.getXL());
     Assert.assertTrue(v0.getYL() == v1.getYL());
@@ -593,7 +595,7 @@ import org.junit.Test;
       final long x = PVectorI3LTest.randomPositiveSmallNumber();
       final long y = PVectorI3LTest.randomPositiveSmallNumber();
       final long z = PVectorI3LTest.randomPositiveSmallNumber();
-      final PVectorI3L<T> v = new PVectorI3L<T>(x, y, z);
+      final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final long m = PVectorI3L.magnitude(v);
       Assert.assertTrue(m >= 1);
@@ -612,14 +614,14 @@ import org.junit.Test;
 
   @Override @Test public void testMagnitudeOne()
   {
-    final PVectorI3L<T> v = new PVectorI3L<T>(1, 0, 0);
+    final PVectorReadable3LType<T> v = new PVectorI3L<T>(1, 0, 0);
     final long m = PVectorI3L.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final PVectorI3L<T> v = new PVectorI3L<T>(8, 0, 0);
+    final PVectorReadable3LType<T> v = new PVectorI3L<T>(8, 0, 0);
 
     {
       final long p = PVectorI3L.dotProduct(v, v);
@@ -633,7 +635,7 @@ import org.junit.Test;
 
   @Override @Test public void testMagnitudeZero()
   {
-    final PVectorI3L<T> v = new PVectorI3L<T>(0, 0, 0);
+    final PVectorReadable3LType<T> v = new PVectorI3L<T>(0, 0, 0);
     final long m = PVectorI3L.magnitude(v);
     Assert.assertTrue(m == 0);
   }
@@ -656,16 +658,16 @@ import org.junit.Test;
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final PVectorI3L<T> p = new PVectorI3L<T>(1, 0, 0);
-      final PVectorI3L<T> q = new PVectorI3L<T>(0, 1, 0);
+      final PVectorReadable3LType<T> p = new PVectorI3L<T>(1, 0, 0);
+      final PVectorReadable3LType<T> q = new PVectorI3L<T>(0, 1, 0);
       final PVectorI3L<T> u = PVectorI3L.projection(p, q);
 
       Assert.assertTrue(PVectorI3L.magnitude(u) == 0);
     }
 
     {
-      final PVectorI3L<T> p = new PVectorI3L<T>(-1, 0, 0);
-      final PVectorI3L<T> q = new PVectorI3L<T>(0, 1, 0);
+      final PVectorReadable3LType<T> p = new PVectorI3L<T>(-1, 0, 0);
+      final PVectorReadable3LType<T> q = new PVectorI3L<T>(0, 1, 0);
       final PVectorI3L<T> u = PVectorI3L.projection(p, q);
 
       Assert.assertTrue(PVectorI3L.magnitude(u) == 0);
@@ -696,7 +698,7 @@ import org.junit.Test;
       final long x = PVectorI3LTest.randomPositiveNumber();
       final long y = PVectorI3LTest.randomPositiveNumber();
       final long z = PVectorI3LTest.randomPositiveNumber();
-      final PVectorI3L<T> v = new PVectorI3L<T>(x, y, z);
+      final PVectorReadable3LType<T> v = new PVectorI3L<T>(x, y, z);
 
       final PVectorI3L<T> vr = PVectorI3L.scale(v, 0);
 

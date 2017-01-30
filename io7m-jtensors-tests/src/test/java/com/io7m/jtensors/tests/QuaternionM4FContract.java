@@ -63,7 +63,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   protected abstract T newQuaternion(final T v);
 
   private void checkAxisAngle(
-    final VectorI3F expected_axis,
+    final VectorReadable3FType expected_axis,
     final double expected_angle,
     final T q)
   {
@@ -763,8 +763,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       final float target_z =
         (float) ((this.getRandom() * 100.0) - (this.getRandom() * 100.0));
 
-      final VectorI3F origin = new VectorI3F(origin_x, origin_y, origin_z);
-      final VectorI3F target = new VectorI3F(target_x, target_y, target_z);
+      final VectorReadable3FType origin = new VectorI3F(origin_x, origin_y, origin_z);
+      final VectorReadable3FType target = new VectorI3F(target_x, target_y, target_z);
 
       MatrixM4x4F.lookAt(
         mc, origin, target, QuaternionM4FContract.AXIS_Y, ml);
@@ -877,7 +877,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   public final void testMakeAxisAngleNormal()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
-      final VectorI3F axis_r = new VectorI3F(
+      final VectorReadable3FType axis_r = new VectorI3F(
         (float) this.getRandom(),
         (float) this.getRandom(),
         (float) this.getRandom());
@@ -897,7 +897,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   @Test
   public final void testMakeAxisAngleX_45()
   {
-    final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorReadable3FType axis = new VectorI3F(1.0f, 0.0f, 0.0f);
     final T q = this.newQuaternion();
     final double angle = Math.toRadians(45.0);
     final T r = QuaternionM4F.makeFromAxisAngle(axis, angle, q);
@@ -920,7 +920,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   @Test
   public final void testMakeAxisAngleX_90()
   {
-    final VectorI3F axis = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorReadable3FType axis = new VectorI3F(1.0f, 0.0f, 0.0f);
     final T q = this.newQuaternion();
     final T r = QuaternionM4F.makeFromAxisAngle(
       axis, Math.toRadians(90.0), q);
@@ -941,7 +941,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   @Test
   public final void testMakeAxisAngleY_45()
   {
-    final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     final T q = this.newQuaternion();
     final double angle = Math.toRadians(45.0);
     final T r = QuaternionM4F.makeFromAxisAngle(axis, angle, q);
@@ -964,7 +964,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   @Test
   public final void testMakeAxisAngleY_90()
   {
-    final VectorI3F axis = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     final T q = this.newQuaternion();
     final double angle = Math.toRadians(90.0);
     final T r = QuaternionM4F.makeFromAxisAngle(axis, angle, q);
@@ -987,7 +987,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   @Test
   public final void testMakeAxisAngleZ_45()
   {
-    final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
+    final VectorReadable3FType axis = new VectorI3F(0.0f, 0.0f, 1.0f);
     final T q = this.newQuaternion();
     final double angle = Math.toRadians(45.0);
     final T r = QuaternionM4F.makeFromAxisAngle(axis, angle, q);
@@ -1010,7 +1010,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   @Test
   public final void testMakeAxisAngleZ_90()
   {
-    final VectorI3F axis = new VectorI3F(0.0f, 0.0f, 1.0f);
+    final VectorReadable3FType axis = new VectorI3F(0.0f, 0.0f, 1.0f);
     final T q = this.newQuaternion();
     final double angle = Math.toRadians(90.0);
     final T r = QuaternionM4F.makeFromAxisAngle(axis, angle, q);
@@ -1489,8 +1489,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   @Test
   public final void testMultiply()
   {
-    final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
-    final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorReadable3FType axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
     final T qx = this.newQuaternion();
     final T qxr =
       QuaternionM4F.makeFromAxisAngle(axis_x, Math.toRadians(45.0), qx);
@@ -1524,8 +1524,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   @Test
   public final void testMultiplyInPlace()
   {
-    final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
-    final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorReadable3FType axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
 
     final T qx = this.newQuaternion();
     QuaternionM4F.makeFromAxisAngle(axis_x, Math.toRadians(45.0), qx);
@@ -1556,9 +1556,9 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   @Test
   public final void testMultiplyInPlaceOther()
   {
-    final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
-    final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
-    final VectorI3F axis_z = new VectorI3F(0.0f, 0.0f, 1.0f);
+    final VectorReadable3FType axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorReadable3FType axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType axis_z = new VectorI3F(0.0f, 0.0f, 1.0f);
 
     final T qx = this.newQuaternion();
     QuaternionM4F.makeFromAxisAngle(axis_x, Math.toRadians(45.0), qx);
@@ -1593,9 +1593,9 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   @Test
   public final void testMultiplyOther()
   {
-    final VectorI3F axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
-    final VectorI3F axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
-    final VectorI3F axis_z = new VectorI3F(0.0f, 0.0f, 1.0f);
+    final VectorReadable3FType axis_x = new VectorI3F(1.0f, 0.0f, 0.0f);
+    final VectorReadable3FType axis_y = new VectorI3F(0.0f, 1.0f, 0.0f);
+    final VectorReadable3FType axis_z = new VectorI3F(0.0f, 0.0f, 1.0f);
 
     final T qx = this.newQuaternion();
     QuaternionM4F.makeFromAxisAngle(axis_x, Math.toRadians(45.0), qx);

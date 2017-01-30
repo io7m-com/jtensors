@@ -20,6 +20,7 @@ import com.io7m.jtensors.Matrix3x3DType;
 import com.io7m.jtensors.MatrixHeapArrayM3x3D;
 import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorM3D;
+import com.io7m.jtensors.VectorReadable3DType;
 import com.io7m.jtensors.parameterized.PMatrix3x3DType;
 import com.io7m.jtensors.parameterized.PMatrixHeapArrayM3x3D;
 import com.io7m.jtensors.parameterized.PMatrixI3x3D;
@@ -88,9 +89,9 @@ public final class PMatrixI3x3DTest<T0, T1>
 
     final PMatrixI3x3D<T0, T1> im0 = PMatrixI3x3D.newFromReadableUntyped(m0);
 
-    final VectorI3D column_0 = new VectorI3D(0.0, 0.1, 0.2);
-    final VectorI3D column_1 = new VectorI3D(10.0, 10.1, 10.2);
-    final VectorI3D column_2 = new VectorI3D(20.0, 20.1, 20.2);
+    final VectorReadable3DType column_0 = new VectorI3D(0.0, 0.1, 0.2);
+    final VectorReadable3DType column_1 = new VectorI3D(10.0, 10.1, 10.2);
+    final VectorReadable3DType column_2 = new VectorI3D(20.0, 20.1, 20.2);
 
     final PMatrixI3x3D<T0, T1> im1 =
       PMatrixI3x3D.newFromColumns(column_0, column_1, column_2);

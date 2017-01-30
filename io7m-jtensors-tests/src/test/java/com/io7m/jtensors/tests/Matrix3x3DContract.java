@@ -24,6 +24,8 @@ import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorM2D;
 import com.io7m.jtensors.VectorM2I;
 import com.io7m.jtensors.VectorM3D;
+import com.io7m.jtensors.VectorReadable2DType;
+import com.io7m.jtensors.VectorReadable2IType;
 import com.io7m.jtensors.VectorReadable3DType;
 import org.junit.Assert;
 import org.junit.Test;
@@ -763,9 +765,9 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     final MatrixM3x3D.ContextMM3D mc = new MatrixM3x3D.ContextMM3D();
     final T m = this.newMatrix();
     final VectorM3D t = new VectorM3D();
-    final VectorI3D origin = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D target = new VectorI3D(-1.0, 0.0, 0.0);
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType origin = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorReadable3DType target = new VectorI3D(-1.0, 0.0, 0.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     MatrixM3x3D.lookAt(mc, origin, target, axis, m, t);
 
     
@@ -812,9 +814,9 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     final MatrixM3x3D.ContextMM3D mc = new MatrixM3x3D.ContextMM3D();
     final T m = this.newMatrix();
     final VectorM3D t = new VectorM3D();
-    final VectorI3D origin = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D target = new VectorI3D(0.0, 0.0, -1.0);
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType origin = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorReadable3DType target = new VectorI3D(0.0, 0.0, -1.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     MatrixM3x3D.lookAt(mc, origin, target, axis, m, t);
 
     
@@ -861,9 +863,9 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     final MatrixM3x3D.ContextMM3D mc = new MatrixM3x3D.ContextMM3D();
     final T m = this.newMatrix();
     final VectorM3D t = new VectorM3D();
-    final VectorI3D origin = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D target = new VectorI3D(1.0, 0.0, 0.0);
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType origin = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorReadable3DType target = new VectorI3D(1.0, 0.0, 0.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     MatrixM3x3D.lookAt(mc, origin, target, axis, m, t);
 
     
@@ -910,9 +912,9 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     final MatrixM3x3D.ContextMM3D mc = new MatrixM3x3D.ContextMM3D();
     final T m = this.newMatrix();
     final VectorM3D t = new VectorM3D();
-    final VectorI3D origin = new VectorI3D(0.0, 0.0, 0.0);
-    final VectorI3D target = new VectorI3D(0.0, 0.0, 1.0);
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType origin = new VectorI3D(0.0, 0.0, 0.0);
+    final VectorReadable3DType target = new VectorI3D(0.0, 0.0, 1.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     MatrixM3x3D.lookAt(mc, origin, target, axis, m, t);
 
     
@@ -959,11 +961,11 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
     final MatrixM3x3D.ContextMM3D mc = new MatrixM3x3D.ContextMM3D();
     final T m = this.newMatrix();
     final VectorM3D t = new VectorM3D();
-    final VectorI3D origin = new VectorI3D(
+    final VectorReadable3DType origin = new VectorI3D(
       (double) (20 + 0), (double) (30 + 0), (double) (40 + 0));
-    final VectorI3D target = new VectorI3D(
+    final VectorReadable3DType target = new VectorI3D(
       (double) (20 + 0), (double) (30 + 0), (double) (40 + -1));
-    final VectorI3D axis = new VectorI3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     MatrixM3x3D.lookAt(mc, origin, target, axis, m, t);
 
     
@@ -1170,7 +1172,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
 
     this.checkDirectBufferInvariants(m0);
 
-    final VectorI3D v = new VectorI3D(1.0, 2.0, 3.0);
+    final VectorReadable3DType v = new VectorI3D(1.0, 2.0, 3.0);
     final VectorM3D out = new VectorM3D();
 
     final VectorM3D r = MatrixM3x3D.multiplyVector3D(c, m0, v, out);
@@ -1316,9 +1318,9 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
       TestUtilities.getDoubleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM3D v_in = new VectorM3D(0.0, 0.0, -1.0);
+    final VectorReadable3DType v_in = new VectorM3D(0.0, 0.0, -1.0);
     final VectorM3D v_got = new VectorM3D();
-    final VectorM3D v_exp = new VectorM3D(0.0, 0.0, -1.0);
+    final VectorReadable3DType v_exp = new VectorM3D(0.0, 0.0, -1.0);
 
     MatrixM3x3D.makeRotation(0.0, Matrix3x3DContract.AXIS_X, m);
     MatrixM3x3D.multiplyVector3D(c, m, v_in, v_got);
@@ -1342,9 +1344,9 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
       TestUtilities.getDoubleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM3D v_in = new VectorM3D(0.0, 0.0, -1.0);
+    final VectorReadable3DType v_in = new VectorM3D(0.0, 0.0, -1.0);
     final VectorM3D v_got = new VectorM3D();
-    final VectorM3D v_exp = new VectorM3D(0.0, 0.0, -1.0);
+    final VectorReadable3DType v_exp = new VectorM3D(0.0, 0.0, -1.0);
 
     MatrixM3x3D.makeRotation(0.0, Matrix3x3DContract.AXIS_Y, m);
     MatrixM3x3D.multiplyVector3D(c, m, v_in, v_got);
@@ -1368,9 +1370,9 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
       TestUtilities.getDoubleEqualityContext();
 
     final T m = this.newMatrix();
-    final VectorM3D v_in = new VectorM3D(0.0, 0.0, -1.0);
+    final VectorReadable3DType v_in = new VectorM3D(0.0, 0.0, -1.0);
     final VectorM3D v_got = new VectorM3D();
-    final VectorM3D v_exp = new VectorM3D(0.0, 0.0, -1.0);
+    final VectorReadable3DType v_exp = new VectorM3D(0.0, 0.0, -1.0);
 
     MatrixM3x3D.makeRotation(0.0, Matrix3x3DContract.AXIS_Z, m);
     MatrixM3x3D.multiplyVector3D(c, m, v_in, v_got);
@@ -1398,7 +1400,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
 
     final T m = this.newMatrix();
     final VectorM3D v_got = new VectorM3D();
-    final VectorM3D v_in = new VectorM3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType v_in = new VectorM3D(0.0, 1.0, 0.0);
 
     /**
      * XXX: Strange Y value due to floating point imprecision, with no good
@@ -1406,7 +1408,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
      * significant element, anyway.
      */
 
-    final VectorM3D v_exp = new VectorM3D(0.0, 6.1232339957367E-17, 1.0);
+    final VectorReadable3DType v_exp = new VectorM3D(0.0, 6.1232339957367E-17, 1.0);
 
     MatrixM3x3D.makeRotation(
       Math.toRadians(90.0), Matrix3x3DContract.AXIS_X, m);
@@ -1441,7 +1443,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
 
     final T m = this.newMatrix();
     final VectorM3D v_got = new VectorM3D();
-    final VectorM3D v_in = new VectorM3D(0.0, 0.0, -1.0);
+    final VectorReadable3DType v_in = new VectorM3D(0.0, 0.0, -1.0);
 
     /**
      * XXX: Strange Z value due to floating point imprecision, with no good
@@ -1449,7 +1451,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
      * significant element, anyway.
      */
 
-    final VectorM3D v_exp = new VectorM3D(-1.0, 0.0, -6.1232339957367E-17);
+    final VectorReadable3DType v_exp = new VectorM3D(-1.0, 0.0, -6.1232339957367E-17);
 
     MatrixM3x3D.makeRotation(
       Math.toRadians(90.0), Matrix3x3DContract.AXIS_Y, m);
@@ -1483,8 +1485,8 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
 
     final T m = this.newMatrix();
     final VectorM3D v_got = new VectorM3D();
-    final VectorM3D v_in = new VectorM3D(0.0, 1.0, 0.0);
-    final VectorM3D v_exp = new VectorM3D(-1.0, 6.123233995736766E-17, 0.0);
+    final VectorReadable3DType v_in = new VectorM3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType v_exp = new VectorM3D(-1.0, 6.123233995736766E-17, 0.0);
 
     MatrixM3x3D.makeRotation(
       Math.toRadians(90.0), Matrix3x3DContract.AXIS_Z, m);
@@ -1518,7 +1520,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
 
     final T m = this.newMatrix();
     final VectorM3D v_got = new VectorM3D();
-    final VectorM3D v_in = new VectorM3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType v_in = new VectorM3D(0.0, 1.0, 0.0);
 
     /**
      * XXX: Strange Y value due to floating point imprecision, with no good
@@ -1526,7 +1528,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
      * significant element, anyway.
      */
 
-    final VectorM3D v_exp = new VectorM3D(0.0, 6.1232339957367E-17, -1.0);
+    final VectorReadable3DType v_exp = new VectorM3D(0.0, 6.1232339957367E-17, -1.0);
 
     MatrixM3x3D.makeRotation(
       Math.toRadians(-90.0), Matrix3x3DContract.AXIS_X, m);
@@ -1561,7 +1563,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
 
     final T m = this.newMatrix();
     final VectorM3D v_got = new VectorM3D();
-    final VectorM3D v_in = new VectorM3D(0.0, 0.0, -1.0);
+    final VectorReadable3DType v_in = new VectorM3D(0.0, 0.0, -1.0);
 
     /**
      * XXX: Strange Z value due to floating point imprecision, with no good
@@ -1569,7 +1571,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
      * significant element, anyway.
      */
 
-    final VectorM3D v_exp = new VectorM3D(1.0, 0.0, -6.1232339957367E-17);
+    final VectorReadable3DType v_exp = new VectorM3D(1.0, 0.0, -6.1232339957367E-17);
 
     MatrixM3x3D.makeRotation(
       Math.toRadians(-90.0), Matrix3x3DContract.AXIS_Y, m);
@@ -1603,8 +1605,8 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
 
     final T m = this.newMatrix();
     final VectorM3D v_got = new VectorM3D();
-    final VectorM3D v_in = new VectorM3D(0.0, 1.0, 0.0);
-    final VectorM3D v_exp = new VectorM3D(1.0, 6.123233995736766E-17, 0.0);
+    final VectorReadable3DType v_in = new VectorM3D(0.0, 1.0, 0.0);
+    final VectorReadable3DType v_exp = new VectorM3D(1.0, 6.123233995736766E-17, 0.0);
 
     MatrixM3x3D.makeRotation(
       Math.toRadians(-90.0), Matrix3x3DContract.AXIS_Z, m);
@@ -2041,7 +2043,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
   {
     final T m = this.newMatrix();
 
-    final VectorM2D v = new VectorM2D(0.0, 0.0);
+    final VectorReadable2DType v = new VectorM2D(0.0, 0.0);
 
     MatrixM3x3D.makeTranslation2D(v, m);
     this.checkDirectBufferInvariants(m);
@@ -2069,7 +2071,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
   {
     final T m = this.newMatrix();
 
-    final VectorM2D v = new VectorM2D(3.0, 7.0);
+    final VectorReadable2DType v = new VectorM2D(3.0, 7.0);
 
     MatrixM3x3D.makeTranslation2D(v, m);
     this.checkDirectBufferInvariants(m);
@@ -2097,7 +2099,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
   {
     final T m = this.newMatrix();
 
-    final VectorM2I v = new VectorM2I(0, 0);
+    final VectorReadable2IType v = new VectorM2I(0, 0);
 
     MatrixM3x3D.makeTranslation2I(v, m);
     this.checkDirectBufferInvariants(m);
@@ -2125,7 +2127,7 @@ public abstract class Matrix3x3DContract<T extends Matrix3x3DType>
   {
     final T m = this.newMatrix();
 
-    final VectorM2I v = new VectorM2I(3, 7);
+    final VectorReadable2IType v = new VectorM2I(3, 7);
 
     MatrixM3x3D.makeTranslation2I(v, m);
     this.checkDirectBufferInvariants(m);

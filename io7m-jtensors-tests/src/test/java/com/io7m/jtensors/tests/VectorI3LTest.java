@@ -18,6 +18,7 @@ package com.io7m.jtensors.tests;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.VectorI3L;
+import com.io7m.jtensors.VectorReadable3LType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -113,7 +114,7 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testCheckInterface()
   {
-    final VectorI3L v = new VectorI3L(3, 5, 7);
+    final VectorReadable3LType v = new VectorI3L(3, 5, 7);
 
     Assert.assertTrue(v.getXL() == v.getXL());
     Assert.assertTrue(v.getYL() == v.getYL());
@@ -132,7 +133,7 @@ public class VectorI3LTest extends VectorI3Contract
       final long x = VectorI3LTest.randomNegativeNumber();
       final long y = VectorI3LTest.randomNegativeNumber();
       final long z = VectorI3LTest.randomNegativeNumber();
-      final VectorI3L v = new VectorI3L(x, y, z);
+      final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clampMaximumByVector(v, maximum);
 
@@ -154,7 +155,7 @@ public class VectorI3LTest extends VectorI3Contract
       final long x = VectorI3LTest.randomNegativeNumber();
       final long y = VectorI3LTest.randomNegativeNumber();
       final long z = VectorI3LTest.randomNegativeNumber();
-      final VectorI3L v = new VectorI3L(x, y, z);
+      final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clampMinimumByVector(v, minimum);
 
@@ -181,7 +182,7 @@ public class VectorI3LTest extends VectorI3Contract
       final long x = VectorI3LTest.randomNegativeNumber();
       final long y = VectorI3LTest.randomPositiveNumber();
       final long z = VectorI3LTest.randomPositiveNumber();
-      final VectorI3L v = new VectorI3L(x, y, z);
+      final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clampByVector(v, minimum, maximum);
 
@@ -203,7 +204,7 @@ public class VectorI3LTest extends VectorI3Contract
       final long x = VectorI3LTest.randomPositiveNumber();
       final long y = VectorI3LTest.randomPositiveNumber();
       final long z = VectorI3LTest.randomPositiveNumber();
-      final VectorI3L v = new VectorI3L(x, y, z);
+      final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clampMaximum(v, maximum);
 
@@ -222,7 +223,7 @@ public class VectorI3LTest extends VectorI3Contract
       final long x = VectorI3LTest.randomNegativeNumber();
       final long y = VectorI3LTest.randomNegativeNumber();
       final long z = VectorI3LTest.randomNegativeNumber();
-      final VectorI3L v = new VectorI3L(x, y, z);
+      final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clampMinimum(v, minimum);
 
@@ -242,7 +243,7 @@ public class VectorI3LTest extends VectorI3Contract
       final long x = VectorI3LTest.randomNegativeNumber();
       final long y = VectorI3LTest.randomPositiveNumber();
       final long z = VectorI3LTest.randomPositiveNumber();
-      final VectorI3L v = new VectorI3L(x, y, z);
+      final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.clamp(v, minimum, maximum);
 
@@ -287,8 +288,8 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testDistance()
   {
-    final VectorI3L v0 = new VectorI3L(0, 1, 0);
-    final VectorI3L v1 = new VectorI3L(0, 0, 0);
+    final VectorReadable3LType v0 = new VectorI3L(0, 1, 0);
+    final VectorReadable3LType v1 = new VectorI3L(0, 0, 0);
     Assert.assertTrue(VectorI3L.distance(v0, v1) == 1);
   }
 
@@ -299,12 +300,12 @@ public class VectorI3LTest extends VectorI3Contract
       final long x0 = VectorI3LTest.randomPositiveSmallNumber();
       final long y0 = VectorI3LTest.randomPositiveSmallNumber();
       final long z0 = VectorI3LTest.randomPositiveSmallNumber();
-      final VectorI3L v0 = new VectorI3L(x0, y0, z0);
+      final VectorReadable3LType v0 = new VectorI3L(x0, y0, z0);
 
       final long x1 = VectorI3LTest.randomPositiveSmallNumber();
       final long y1 = VectorI3LTest.randomPositiveSmallNumber();
       final long z1 = VectorI3LTest.randomPositiveSmallNumber();
-      final VectorI3L v1 = new VectorI3L(x1, y1, z1);
+      final VectorReadable3LType v1 = new VectorI3L(x1, y1, z1);
 
       Assert.assertTrue(VectorI3L.distance(v0, v1) >= 0);
     }
@@ -354,7 +355,7 @@ public class VectorI3LTest extends VectorI3Contract
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
       final long z = (long) (Math.random() * max);
-      final VectorI3L q = new VectorI3L(x, y, z);
+      final VectorReadable3LType q = new VectorI3L(x, y, z);
 
       final double ms = VectorI3L.magnitudeSquared(q);
       final double dp = VectorI3L.dotProduct(q, q);
@@ -378,7 +379,7 @@ public class VectorI3LTest extends VectorI3Contract
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
       final long z = (long) (Math.random() * max);
-      final VectorI3L q = new VectorI3L(x, y, z);
+      final VectorReadable3LType q = new VectorI3L(x, y, z);
       final double dp = VectorI3L.dotProduct(q, q);
 
       
@@ -549,7 +550,7 @@ public class VectorI3LTest extends VectorI3Contract
   @Override @Test public void testInitializeReadable()
   {
     final VectorI3L v0 = new VectorI3L(1, 2, 3);
-    final VectorI3L v1 = new VectorI3L(v0);
+    final VectorReadable3LType v1 = new VectorI3L(v0);
 
     Assert.assertTrue(v0.getXL() == v1.getXL());
     Assert.assertTrue(v0.getYL() == v1.getYL());
@@ -590,7 +591,7 @@ public class VectorI3LTest extends VectorI3Contract
       final long x = VectorI3LTest.randomPositiveSmallNumber();
       final long y = VectorI3LTest.randomPositiveSmallNumber();
       final long z = VectorI3LTest.randomPositiveSmallNumber();
-      final VectorI3L v = new VectorI3L(x, y, z);
+      final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final long m = VectorI3L.magnitude(v);
       Assert.assertTrue(m >= 1);
@@ -609,14 +610,14 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testMagnitudeOne()
   {
-    final VectorI3L v = new VectorI3L(1, 0, 0);
+    final VectorReadable3LType v = new VectorI3L(1, 0, 0);
     final long m = VectorI3L.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final VectorI3L v = new VectorI3L(8, 0, 0);
+    final VectorReadable3LType v = new VectorI3L(8, 0, 0);
 
     {
       final long p = VectorI3L.dotProduct(v, v);
@@ -630,7 +631,7 @@ public class VectorI3LTest extends VectorI3Contract
 
   @Override @Test public void testMagnitudeZero()
   {
-    final VectorI3L v = new VectorI3L(0, 0, 0);
+    final VectorReadable3LType v = new VectorI3L(0, 0, 0);
     final long m = VectorI3L.magnitude(v);
     Assert.assertTrue(m == 0);
   }
@@ -653,16 +654,16 @@ public class VectorI3LTest extends VectorI3Contract
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final VectorI3L p = new VectorI3L(1, 0, 0);
-      final VectorI3L q = new VectorI3L(0, 1, 0);
+      final VectorReadable3LType p = new VectorI3L(1, 0, 0);
+      final VectorReadable3LType q = new VectorI3L(0, 1, 0);
       final VectorI3L u = VectorI3L.projection(p, q);
 
       Assert.assertTrue(VectorI3L.magnitude(u) == 0);
     }
 
     {
-      final VectorI3L p = new VectorI3L(-1, 0, 0);
-      final VectorI3L q = new VectorI3L(0, 1, 0);
+      final VectorReadable3LType p = new VectorI3L(-1, 0, 0);
+      final VectorReadable3LType q = new VectorI3L(0, 1, 0);
       final VectorI3L u = VectorI3L.projection(p, q);
 
       Assert.assertTrue(VectorI3L.magnitude(u) == 0);
@@ -693,7 +694,7 @@ public class VectorI3LTest extends VectorI3Contract
       final long x = VectorI3LTest.randomPositiveNumber();
       final long y = VectorI3LTest.randomPositiveNumber();
       final long z = VectorI3LTest.randomPositiveNumber();
-      final VectorI3L v = new VectorI3L(x, y, z);
+      final VectorReadable3LType v = new VectorI3L(x, y, z);
 
       final VectorI3L vr = VectorI3L.scale(v, 0);
 

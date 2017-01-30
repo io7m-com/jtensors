@@ -20,7 +20,9 @@ import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
 import com.io7m.jfunctional.Pair;
+import com.io7m.jtensors.VectorReadable3FType;
 import com.io7m.jtensors.parameterized.PVectorI3F;
+import com.io7m.jtensors.parameterized.PVectorReadable3FType;
 import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
@@ -130,68 +132,68 @@ import org.junit.Test;
     final float q = w + 1.0f;
 
     {
-      final PVectorI3F<T> m0 = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> m1 = new PVectorI3F<T>(q, y, z);
+      final PVectorReadable3FType<T> m0 = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> m1 = new PVectorI3F<T>(q, y, z);
       Assert.assertFalse(PVectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3F<T> m0 = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> m1 = new PVectorI3F<T>(x, q, z);
+      final PVectorReadable3FType<T> m0 = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> m1 = new PVectorI3F<T>(x, q, z);
       Assert.assertFalse(PVectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3F<T> m0 = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> m1 = new PVectorI3F<T>(x, y, q);
+      final PVectorReadable3FType<T> m0 = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> m1 = new PVectorI3F<T>(x, y, q);
       Assert.assertFalse(PVectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3F<T> m0 = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> m1 = new PVectorI3F<T>(q, q, z);
+      final PVectorReadable3FType<T> m0 = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> m1 = new PVectorI3F<T>(q, q, z);
       Assert.assertFalse(PVectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3F<T> m0 = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> m1 = new PVectorI3F<T>(q, y, q);
+      final PVectorReadable3FType<T> m0 = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> m1 = new PVectorI3F<T>(q, y, q);
       Assert.assertFalse(PVectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3F<T> m0 = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> m1 = new PVectorI3F<T>(q, y, z);
+      final PVectorReadable3FType<T> m0 = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> m1 = new PVectorI3F<T>(q, y, z);
       Assert.assertFalse(PVectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3F<T> m0 = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> m1 = new PVectorI3F<T>(q, q, q);
+      final PVectorReadable3FType<T> m0 = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> m1 = new PVectorI3F<T>(q, q, q);
       Assert.assertFalse(PVectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3F<T> m0 = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> m1 = new PVectorI3F<T>(q, q, z);
+      final PVectorReadable3FType<T> m0 = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> m1 = new PVectorI3F<T>(q, q, z);
       Assert.assertFalse(PVectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3F<T> m0 = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> m1 = new PVectorI3F<T>(q, q, q);
+      final PVectorReadable3FType<T> m0 = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> m1 = new PVectorI3F<T>(q, q, q);
       Assert.assertFalse(PVectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3F<T> m0 = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> m1 = new PVectorI3F<T>(x, q, q);
+      final PVectorReadable3FType<T> m0 = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> m1 = new PVectorI3F<T>(x, q, q);
       Assert.assertFalse(PVectorI3F.almostEqual(ec, m0, m1));
     }
 
     {
-      final PVectorI3F<T> m0 = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> m1 = new PVectorI3F<T>(x, y, q);
+      final PVectorReadable3FType<T> m0 = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> m1 = new PVectorI3F<T>(x, y, q);
       Assert.assertFalse(PVectorI3F.almostEqual(ec, m0, m1));
     }
   }
@@ -205,9 +207,9 @@ import org.junit.Test;
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI3F<T> v0 = new PVectorI3F<T>(x0, y0, z0);
-      final PVectorI3F<T> v1 = new PVectorI3F<T>(x0, y0, z0);
-      final PVectorI3F<T> v2 = new PVectorI3F<T>(x0, y0, z0);
+      final PVectorReadable3FType<T> v0 = new PVectorI3F<T>(x0, y0, z0);
+      final PVectorReadable3FType<T> v1 = new PVectorI3F<T>(x0, y0, z0);
+      final PVectorReadable3FType<T> v2 = new PVectorI3F<T>(x0, y0, z0);
 
       Assert.assertTrue(PVectorI3F.almostEqual(ec, v0, v1));
       Assert.assertTrue(PVectorI3F.almostEqual(ec, v1, v2));
@@ -217,7 +219,7 @@ import org.junit.Test;
 
   @Override @Test public void testCheckInterface()
   {
-    final PVectorI3F<T> v = new PVectorI3F<T>(3.0f, 5.0f, 7.0f);
+    final VectorReadable3FType v = new PVectorI3F<T>(3.0f, 5.0f, 7.0f);
 
     Assert.assertTrue(v.getXF() == v.getXF());
     Assert.assertTrue(v.getYF() == v.getYF());
@@ -235,7 +237,7 @@ import org.junit.Test;
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
-      final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> v = new PVectorI3F<T>(x, y, z);
 
       Assert.assertTrue(
         PVectorI3F.clampMaximumByPVector(v, maximum).getXF()
@@ -260,7 +262,7 @@ import org.junit.Test;
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
-      final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> v = new PVectorI3F<T>(x, y, z);
 
       Assert.assertTrue(
         PVectorI3F.clampMinimumByPVector(v, minimum).getXF()
@@ -290,7 +292,7 @@ import org.junit.Test;
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> v = new PVectorI3F<T>(x, y, z);
 
       Assert.assertTrue(
         PVectorI3F.clampByPVector(v, minimum, maximum).getXF()
@@ -321,7 +323,7 @@ import org.junit.Test;
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> v = new PVectorI3F<T>(x, y, z);
 
       Assert.assertTrue(PVectorI3F.clampMaximum(v, maximum).getXF() <= maximum);
       Assert.assertTrue(PVectorI3F.clampMaximum(v, maximum).getYF() <= maximum);
@@ -337,7 +339,7 @@ import org.junit.Test;
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
-      final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> v = new PVectorI3F<T>(x, y, z);
 
       Assert.assertTrue(PVectorI3F.clampMinimum(v, minimum).getXF() >= minimum);
       Assert.assertTrue(PVectorI3F.clampMinimum(v, minimum).getYF() >= minimum);
@@ -354,7 +356,7 @@ import org.junit.Test;
       final float x = (float) (Math.random() * Float.MIN_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
-      final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> v = new PVectorI3F<T>(x, y, z);
 
       Assert.assertTrue(
         PVectorI3F.clamp(v, minimum, maximum).getXF() <= maximum);
@@ -381,7 +383,7 @@ import org.junit.Test;
       final float y = (float) (Math.random() * Float.MIN_VALUE);
       final float z = (float) (Math.random() * Float.MIN_VALUE);
       final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
-      final PVectorI3F<T> vc = new PVectorI3F<T>(v);
+      final PVectorReadable3FType<T> vc = new PVectorI3F<T>(v);
 
       Assert.assertTrue(PVectorI3F.almostEqual(ec, v, vc));
     }
@@ -420,14 +422,14 @@ import org.junit.Test;
   {
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
-    final PVectorI3F<T> v = new PVectorI3F<T>();
+    final PVectorReadable3FType<T> v = new PVectorI3F<T>();
     PVectorI3F.almostEqual(context, v, new PVectorI3F<T>(0, 0, 0));
   }
 
   @Override @Test public void testDistance()
   {
-    final PVectorI3F<T> v0 = new PVectorI3F<T>(0.0f, 1.0f, 0.0f);
-    final PVectorI3F<T> v1 = new PVectorI3F<T>(0.0f, 0.0f, 0.0f);
+    final PVectorReadable3FType<T> v0 = new PVectorI3F<T>(0.0f, 1.0f, 0.0f);
+    final PVectorReadable3FType<T> v1 = new PVectorI3F<T>(0.0f, 0.0f, 0.0f);
 
     final ContextRelative context = new AlmostEqualFloat.ContextRelative();
     Assert.assertTrue(
@@ -441,12 +443,12 @@ import org.junit.Test;
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI3F<T> v0 = new PVectorI3F<T>(x0, y0, z0);
+      final PVectorReadable3FType<T> v0 = new PVectorI3F<T>(x0, y0, z0);
 
       final float x1 = (float) (Math.random() * Float.MAX_VALUE);
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
       final float z1 = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI3F<T> v1 = new PVectorI3F<T>(x1, y1, z1);
+      final PVectorReadable3FType<T> v1 = new PVectorI3F<T>(x1, y1, z1);
 
       Assert.assertTrue(PVectorI3F.distance(v0, v1) >= 0.0);
     }
@@ -487,14 +489,14 @@ import org.junit.Test;
 
   @Override @Test public void testDotProductPerpendicular()
   {
-    final PVectorI3F<T> vpx = new PVectorI3F<T>(1.0f, 0.0f, 0.0f);
-    final PVectorI3F<T> vmx = new PVectorI3F<T>(-1.0f, 0.0f, 0.0f);
+    final PVectorReadable3FType<T> vpx = new PVectorI3F<T>(1.0f, 0.0f, 0.0f);
+    final PVectorReadable3FType<T> vmx = new PVectorI3F<T>(-1.0f, 0.0f, 0.0f);
 
-    final PVectorI3F<T> vpy = new PVectorI3F<T>(0.0f, 1.0f, 0.0f);
-    final PVectorI3F<T> vmy = new PVectorI3F<T>(0.0f, -1.0f, 0.0f);
+    final PVectorReadable3FType<T> vpy = new PVectorI3F<T>(0.0f, 1.0f, 0.0f);
+    final PVectorReadable3FType<T> vmy = new PVectorI3F<T>(0.0f, -1.0f, 0.0f);
 
-    final PVectorI3F<T> vpz = new PVectorI3F<T>(0.0f, 0.0f, 1.0f);
-    final PVectorI3F<T> vmz = new PVectorI3F<T>(0.0f, 0.0f, -1.0f);
+    final PVectorReadable3FType<T> vpz = new PVectorI3F<T>(0.0f, 0.0f, 1.0f);
+    final PVectorReadable3FType<T> vmz = new PVectorI3F<T>(0.0f, 0.0f, -1.0f);
 
     Assert.assertTrue(PVectorI3F.dotProduct(vpx, vpy) == 0.0);
     Assert.assertTrue(PVectorI3F.dotProduct(vpy, vpz) == 0.0);
@@ -511,7 +513,7 @@ import org.junit.Test;
       final float x = (float) Math.random();
       final float y = (float) Math.random();
       final float z = (float) Math.random();
-      final PVectorI3F<T> q = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> q = new PVectorI3F<T>(x, y, z);
       final double dp = PVectorI3F.dotProduct(q, q);
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
@@ -527,7 +529,7 @@ import org.junit.Test;
       final float x = (float) Math.random();
       final float y = (float) Math.random();
       final float z = (float) Math.random();
-      final PVectorI3F<T> q = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> q = new PVectorI3F<T>(x, y, z);
 
       final double ms = PVectorI3F.magnitudeSquared(q);
       final double dp = PVectorI3F.dotProduct(q, q);
@@ -669,7 +671,7 @@ import org.junit.Test;
   @Override @Test public void testInitializeReadable()
   {
     final PVectorI3F<T> v0 = new PVectorI3F<T>(1.0f, 2.0f, 3.0f);
-    final PVectorI3F<T> v1 = new PVectorI3F<T>(v0);
+    final VectorReadable3FType v1 = new PVectorI3F<T>(v0);
 
     Assert.assertTrue(v0.getXF() == v1.getXF());
     Assert.assertTrue(v0.getYF() == v1.getYF());
@@ -685,12 +687,12 @@ import org.junit.Test;
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
       final float y0 = (float) (Math.random() * Float.MAX_VALUE);
       final float z0 = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI3F<T> v0 = new PVectorI3F<T>(x0, y0, z0);
+      final PVectorReadable3FType<T> v0 = new PVectorI3F<T>(x0, y0, z0);
 
       final float x1 = (float) (Math.random() * Float.MAX_VALUE);
       final float y1 = (float) (Math.random() * Float.MAX_VALUE);
       final float z1 = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI3F<T> v1 = new PVectorI3F<T>(x1, y1, z1);
+      final PVectorReadable3FType<T> v1 = new PVectorI3F<T>(x1, y1, z1);
 
       Assert.assertTrue(
         PVectorI3F.almostEqual(
@@ -707,7 +709,7 @@ import org.junit.Test;
       final float x = (float) (1.0f + (Math.random() * Float.MAX_VALUE));
       final float y = (float) (1.0f + (Math.random() * Float.MAX_VALUE));
       final float z = (float) (1.0f + (Math.random() * Float.MAX_VALUE));
-      final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> v = new PVectorI3F<T>(x, y, z);
 
       final double m = PVectorI3F.magnitude(v);
       Assert.assertTrue(m > 0.0f);
@@ -724,7 +726,7 @@ import org.junit.Test;
       final float x = (float) (1.0f + (Math.random() * max));
       final float y = (float) (1.0f + (Math.random() * max));
       final float z = (float) (1.0f + (Math.random() * max));
-      final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> v = new PVectorI3F<T>(x, y, z);
 
       final PVectorI3F<T> vr = PVectorI3F.normalize(v);
       Assert.assertNotSame(v, vr);
@@ -740,7 +742,7 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI3F<T> v = new PVectorI3F<T>(0.0f, 0.0f, 0.0f);
+    final PVectorReadable3FType<T> v = new PVectorI3F<T>(0.0f, 0.0f, 0.0f);
     final PVectorI3F<T> vr = PVectorI3F.normalize(v);
     final double m = PVectorI3F.magnitude(vr);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
@@ -751,14 +753,14 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI3F<T> v = new PVectorI3F<T>(1.0f, 0.0f, 0.0f);
+    final PVectorReadable3FType<T> v = new PVectorI3F<T>(1.0f, 0.0f, 0.0f);
     final double m = PVectorI3F.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
   @Override @Test public void testMagnitudeSimple()
   {
-    final PVectorI3F<T> v = new PVectorI3F<T>(8.0f, 0.0f, 0.0f);
+    final PVectorReadable3FType<T> v = new PVectorI3F<T>(8.0f, 0.0f, 0.0f);
 
     {
       final double p = PVectorI3F.dotProduct(v, v);
@@ -775,14 +777,14 @@ import org.junit.Test;
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
-    final PVectorI3F<T> v = new PVectorI3F<T>(0.0f, 0.0f, 0.0f);
+    final PVectorReadable3FType<T> v = new PVectorI3F<T>(0.0f, 0.0f, 0.0f);
     final double m = PVectorI3F.magnitude(v);
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
   @Override @Test public void testNormalizeSimple()
   {
-    final PVectorI3F<T> v0 = new PVectorI3F<T>(8.0f, 0.0f, 0.0f);
+    final PVectorReadable3FType<T> v0 = new PVectorI3F<T>(8.0f, 0.0f, 0.0f);
     final PVectorI3F<T> vr = PVectorI3F.normalize(v0);
     final float m = PVectorI3F.magnitude(vr);
     Assert.assertTrue(m == 1.0);
@@ -793,14 +795,14 @@ import org.junit.Test;
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
 
-    final PVectorI3F<T> v0 = new PVectorI3F<T>(0.0f, 0.0f, 0.0f);
+    final PVectorReadable3FType<T> v0 = new PVectorI3F<T>(0.0f, 0.0f, 0.0f);
     PVectorI3F.almostEqual(ec, PVectorI3F.normalize(v0), v0);
   }
 
   @Override @Test public void testOrthonormalize()
   {
-    final PVectorI3F<T> v0 = new PVectorI3F<T>(0, 1, 0);
-    final PVectorI3F<T> v1 = new PVectorI3F<T>(0.5f, 0.5f, 0);
+    final PVectorReadable3FType<T> v0 = new PVectorI3F<T>(0, 1, 0);
+    final PVectorReadable3FType<T> v1 = new PVectorI3F<T>(0.5f, 0.5f, 0);
     final Pair<PVectorI3F<T>, PVectorI3F<T>> on =
       PVectorI3F.orthoNormalize(v0, v1);
 
@@ -811,15 +813,15 @@ import org.junit.Test;
   @Override @Test public void testProjectionPerpendicularZero()
   {
     {
-      final PVectorI3F<T> p = new PVectorI3F<T>(1.0f, 0.0f, 0.0f);
-      final PVectorI3F<T> q = new PVectorI3F<T>(0.0f, 1.0f, 0.0f);
+      final PVectorReadable3FType<T> p = new PVectorI3F<T>(1.0f, 0.0f, 0.0f);
+      final PVectorReadable3FType<T> q = new PVectorI3F<T>(0.0f, 1.0f, 0.0f);
       final PVectorI3F<T> r = PVectorI3F.projection(p, q);
       Assert.assertTrue(PVectorI3F.magnitude(r) == 0.0);
     }
 
     {
-      final PVectorI3F<T> p = new PVectorI3F<T>(-1.0f, 0.0f, 0.0f);
-      final PVectorI3F<T> q = new PVectorI3F<T>(0.0f, 1.0f, 0.0f);
+      final PVectorReadable3FType<T> p = new PVectorI3F<T>(-1.0f, 0.0f, 0.0f);
+      final PVectorReadable3FType<T> q = new PVectorI3F<T>(0.0f, 1.0f, 0.0f);
       final PVectorI3F<T> r = PVectorI3F.projection(p, q);
       Assert.assertTrue(PVectorI3F.magnitude(r) == 0.0);
     }
@@ -859,7 +861,7 @@ import org.junit.Test;
       final float x = (float) (Math.random() * Float.MAX_VALUE);
       final float y = (float) (Math.random() * Float.MAX_VALUE);
       final float z = (float) (Math.random() * Float.MAX_VALUE);
-      final PVectorI3F<T> v = new PVectorI3F<T>(x, y, z);
+      final PVectorReadable3FType<T> v = new PVectorI3F<T>(x, y, z);
 
       final PVectorI3F<T> vr = PVectorI3F.scale(v, 0.0f);
 
