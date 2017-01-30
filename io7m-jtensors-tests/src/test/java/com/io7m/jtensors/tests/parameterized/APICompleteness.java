@@ -109,7 +109,7 @@ import java.util.Map.Entry;
 
   private static void checkPVector2()
   {
-    final Class<?> classes[] = {
+    final Class<?>[] classes = {
       PVectorM2F.class,
       PVectorM2I.class,
       PVectorI2D.class,
@@ -120,7 +120,7 @@ import java.util.Map.Entry;
       VectorM2I.class,
       VectorI2D.class,
       VectorI2F.class,
-      VectorI2I.class };
+      VectorI2I.class};
 
     for (final Class<?> c : classes) {
       APICompleteness.checkAgainst(PVectorM2D.class, c);
@@ -130,7 +130,7 @@ import java.util.Map.Entry;
   private static void checkPVector3()
   {
     {
-      final Class<?> classes[] = {
+      final Class<?>[] classes = {
         PVectorM3F.class,
         PVectorM3I.class,
         PVectorI3D.class,
@@ -141,7 +141,7 @@ import java.util.Map.Entry;
         VectorM3I.class,
         VectorI3D.class,
         VectorI3F.class,
-        VectorI3I.class };
+        VectorI3I.class};
 
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(PVectorM3D.class, c);
@@ -149,7 +149,7 @@ import java.util.Map.Entry;
     }
 
     {
-      final Class<?> classes[] = { PVectorI3F.class, PVectorI3I.class };
+      final Class<?>[] classes = {PVectorI3F.class, PVectorI3I.class};
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(PVectorI3D.class, c);
       }
@@ -159,7 +159,7 @@ import java.util.Map.Entry;
   private static void checkPVector4()
   {
     {
-      final Class<?> classes[] = {
+      final Class<?>[] classes = {
         PVectorM4F.class,
         PVectorM4I.class,
         PVectorI4D.class,
@@ -170,7 +170,7 @@ import java.util.Map.Entry;
         VectorM4I.class,
         VectorI4D.class,
         VectorI4F.class,
-        VectorI4I.class };
+        VectorI4I.class};
 
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(PVectorM4D.class, c);
@@ -178,7 +178,7 @@ import java.util.Map.Entry;
     }
 
     {
-      final Class<?> classes[] = { PVectorI4F.class, PVectorI4I.class };
+      final Class<?>[] classes = {PVectorI4F.class, PVectorI4I.class};
       for (final Class<?> c : classes) {
         APICompleteness.checkAgainst(PVectorI4D.class, c);
       }
@@ -218,7 +218,7 @@ import java.util.Map.Entry;
 
   private static void checkPMatrix4F()
   {
-    final Class<?> classes[] = { MatrixM4x4F.class };
+    final Class<?>[] classes = {MatrixM4x4F.class};
     for (final Class<?> c : classes) {
       APICompleteness.checkAgainst(PMatrixM4x4F.class, c);
     }
@@ -226,7 +226,7 @@ import java.util.Map.Entry;
 
   private static void checkPMatrix4D()
   {
-    final Class<?> classes[] = { MatrixM4x4D.class };
+    final Class<?>[] classes = {MatrixM4x4D.class};
     for (final Class<?> c : classes) {
       APICompleteness.checkAgainst(PMatrixM4x4D.class, c);
     }
