@@ -28,7 +28,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class VectorByteBufferedM3ITest
   extends VectorByteBufferedM3IContract<VectorByteBuffered3IType>
 {
-  @Override protected VectorByteBuffered3IType newVectorM3I(
+  @Override
+  protected VectorByteBuffered3IType newVectorM3I(
     final int x,
     final int y,
     final int z)
@@ -40,7 +41,8 @@ public final class VectorByteBufferedM3ITest
     return v;
   }
 
-  @Override protected VectorByteBuffered3IType newVectorM3I()
+  @Override
+  protected VectorByteBuffered3IType newVectorM3I()
   {
     final ByteBuffer buf = ByteBuffer.allocate(3 * 4);
     final VectorByteBuffered3IType v =
@@ -49,7 +51,8 @@ public final class VectorByteBufferedM3ITest
     return v;
   }
 
-  @Override protected VectorByteBuffered3IType newVectorM3I(
+  @Override
+  protected VectorByteBuffered3IType newVectorM3I(
     final VectorByteBuffered3IType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(3 * 4);
@@ -59,7 +62,8 @@ public final class VectorByteBufferedM3ITest
     return vr;
   }
 
-  @Override protected VectorByteBuffered3IType newVectorM3IAtIndexFromSize(
+  @Override
+  protected VectorByteBuffered3IType newVectorM3IAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -67,7 +71,8 @@ public final class VectorByteBufferedM3ITest
     return VectorByteBufferedM3I.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected VectorByteBuffered3IType newVectorM3IWithBaseOffset(
+  @Override
+  protected VectorByteBuffered3IType newVectorM3IWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -77,7 +82,8 @@ public final class VectorByteBufferedM3ITest
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(3 * 4);
     b.order(ByteOrder.BIG_ENDIAN);

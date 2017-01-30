@@ -28,27 +28,32 @@ public final class VectorM4DTest extends VectorM4DContract<VectorM4D>
     LOG = LoggerFactory.getLogger(VectorM4DTest.class);
   }
 
-  @Override protected double delta()
+  @Override
+  protected double delta()
   {
     return 0.0000000000001;
   }
 
-  @Override protected double randomLargeNegative()
+  @Override
+  protected double randomLargeNegative()
   {
     return Math.random() * -100000000.0;
   }
 
-  @Override protected double randomLargePositive()
+  @Override
+  protected double randomLargePositive()
   {
     return Math.random() * 100000000.0;
   }
 
-  @Override protected Logger logger()
+  @Override
+  protected Logger logger()
   {
     return LOG;
   }
 
-  @Override protected VectorM4D newVectorM4D(
+  @Override
+  protected VectorM4D newVectorM4D(
     final double x,
     final double y,
     final double z,
@@ -57,12 +62,14 @@ public final class VectorM4DTest extends VectorM4DContract<VectorM4D>
     return new VectorM4D(x, y, z, w);
   }
 
-  @Override protected VectorM4D newVectorM4D()
+  @Override
+  protected VectorM4D newVectorM4D()
   {
     return new VectorM4D();
   }
 
-  @Override protected VectorM4D newVectorM4DFrom(final VectorM4D v)
+  @Override
+  protected VectorM4D newVectorM4DFrom(final VectorM4D v)
   {
     return new VectorM4D(v);
   }

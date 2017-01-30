@@ -28,7 +28,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class VectorByteBufferedM2LTest
   extends VectorByteBufferedM2LContract<VectorByteBuffered2LType>
 {
-  @Override protected VectorByteBuffered2LType newVectorM2L(
+  @Override
+  protected VectorByteBuffered2LType newVectorM2L(
     final long x,
     final long y)
   {
@@ -39,7 +40,8 @@ public final class VectorByteBufferedM2LTest
     return v;
   }
 
-  @Override protected VectorByteBuffered2LType newVectorM2L()
+  @Override
+  protected VectorByteBuffered2LType newVectorM2L()
   {
     final ByteBuffer buf = ByteBuffer.allocate(2 * 8);
     final VectorByteBuffered2LType v =
@@ -48,7 +50,8 @@ public final class VectorByteBufferedM2LTest
     return v;
   }
 
-  @Override protected VectorByteBuffered2LType newVectorM2L(
+  @Override
+  protected VectorByteBuffered2LType newVectorM2L(
     final VectorByteBuffered2LType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(2 * 8);
@@ -58,7 +61,8 @@ public final class VectorByteBufferedM2LTest
     return vr;
   }
 
-  @Override protected VectorByteBuffered2LType newVectorM2LAtIndexFromSize(
+  @Override
+  protected VectorByteBuffered2LType newVectorM2LAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -66,7 +70,8 @@ public final class VectorByteBufferedM2LTest
     return VectorByteBufferedM2L.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected VectorByteBuffered2LType newVectorM2LWithBaseOffset(
+  @Override
+  protected VectorByteBuffered2LType newVectorM2LWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -76,7 +81,8 @@ public final class VectorByteBufferedM2LTest
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(2 * 8);
     b.order(ByteOrder.BIG_ENDIAN);

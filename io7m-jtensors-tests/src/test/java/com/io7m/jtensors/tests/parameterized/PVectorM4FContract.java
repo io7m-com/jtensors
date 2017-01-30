@@ -27,6 +27,11 @@ import org.junit.Test;
 
 public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 {
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
+
   protected abstract V newVectorM4F(
     final float x,
     final float y,
@@ -38,7 +43,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
 
   protected abstract V newVectorM4F();
 
-  @Test public final void testAbsolute()
+  @Test
+  public final void testAbsolute()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -68,7 +74,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testAbsoluteMutation()
+  @Test
+  public final void testAbsoluteMutation()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -102,7 +109,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testAdd()
+  @Test
+  public final void testAdd()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -161,7 +169,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testAddMutation()
+  @Test
+  public final void testAddMutation()
   {
     final V out = this.newVectorM4F();
     final V v0 = this.newVectorM4F(1.0f, 1.0f, 1.0f, 1.0f);
@@ -213,7 +222,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals(1.0, (double) v1.getWF(), 0.0);
   }
 
-  @Test public final void testAddScaled()
+  @Test
+  public final void testAddScaled()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -274,7 +284,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testAlmostEqualNot()
+  @Test
+  public final void testAlmostEqualNot()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -358,7 +369,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testAlmostEqualTransitive()
+  @Test
+  public final void testAlmostEqualTransitive()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -378,7 +390,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testCheckInterface()
+  @Test
+  public final void testCheckInterface()
   {
     final V v = this.newVectorM4F(3.0f, 5.0f, 7.0f, 11.0f);
 
@@ -388,7 +401,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals((double) v.getWF(), (double) v.getWF(), 0.0);
   }
 
-  @Test public final void testClampByPVectorMaximumOrdering()
+  @Test
+  public final void testClampByPVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max_x = (float) (getRandom() * (double) Float.MIN_VALUE);
@@ -425,7 +439,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testClampByPVectorMinimumOrdering()
+  @Test
+  public final void testClampByPVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (getRandom() * (double) Float.MAX_VALUE);
@@ -462,7 +477,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testClampByPVectorOrdering()
+  @Test
+  public final void testClampByPVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (getRandom() * (double) Float.MIN_VALUE);
@@ -513,7 +529,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testClampMaximumOrdering()
+  @Test
+  public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float maximum =
@@ -543,7 +560,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testClampMinimumOrdering()
+  @Test
+  public final void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum =
@@ -573,7 +591,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testClampOrdering()
+  @Test
+  public final void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum =
@@ -614,7 +633,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final V vb = this.newVectorM4F(5.0F, 6.0F, 7.0F, 8.0F);
     final V va = this.newVectorM4F(1.0F, 2.0F, 3.0F, 4.0F);
@@ -632,7 +652,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals((double) vb.getWF(), (double) va.getWF(), 0.0);
   }
 
-  @Test public final void testCopy2Correct()
+  @Test
+  public final void testCopy2Correct()
   {
     final V v0 = this.newVectorM4F(
       (float) getRandom() * Float.MAX_VALUE,
@@ -657,7 +678,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals(1.0F, v2.getWF(), 0.0f);
   }
 
-  @Test public final void testCopy3Correct()
+  @Test
+  public final void testCopy3Correct()
   {
     final V v0 = this.newVectorM4F(
       (float) getRandom() * Float.MAX_VALUE,
@@ -682,7 +704,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals(1.0f, v2.getWF(), 0.0f);
   }
 
-  @Test public final void testCopy4Correct()
+  @Test
+  public final void testCopy4Correct()
   {
     final V v0 = this.newVectorM4F(
       (float) getRandom() * Float.MAX_VALUE,
@@ -707,7 +730,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals(v0.getWF(), v2.getWF(), 0.0f);
   }
 
-  @Test public final void testDefault0001()
+  @Test
+  public final void testDefault0001()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -716,7 +740,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
         ec, this.newVectorM4F(), this.newVectorM4F(0.0F, 0.0F, 0.0F, 1.0F)));
   }
 
-  @Test public final void testDistance()
+  @Test
+  public final void testDistance()
   {
     final PVectorM4F.ContextPVM4F c = new PVectorM4F.ContextPVM4F();
     final V v0 = this.newVectorM4F(0.0f, 1.0f, 0.0f, 0.0f);
@@ -727,7 +752,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
         context, PVectorM4F.distance(c, v0, v1), 1.0));
   }
 
-  @Test public final void testDistanceOrdering()
+  @Test
+  public final void testDistanceOrdering()
   {
     final PVectorM4F.ContextPVM4F c = new PVectorM4F.ContextPVM4F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
@@ -747,7 +773,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testDotProduct()
+  @Test
+  public final void testDotProduct()
   {
     final V v0 = this.newVectorM4F(10.0f, 10.0f, 10.0f, 10.0f);
     final V v1 = this.newVectorM4F(10.0f, 10.0f, 10.0f, 10.0f);
@@ -784,7 +811,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testDotProductPerpendicular()
+  @Test
+  public final void testDotProductPerpendicular()
   {
     final V vpx = this.newVectorM4F(1.0f, 0.0f, 0.0f, 0.0f);
     final V vmx = this.newVectorM4F(-1.0f, 0.0f, 0.0f, 0.0f);
@@ -801,7 +829,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals(0.0, PVectorM4F.dotProduct(vmy, vmz), 0.0);
   }
 
-  @Test public final void testDotProductSelf()
+  @Test
+  public final void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -818,7 +847,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testDotProductSelfMagnitudeSquared()
+  @Test
+  public final void testDotProductSelfMagnitudeSquared()
   {
     final V v0 = this.newVectorM4F(10.0f, 10.0f, 10.0f, 10.0f);
 
@@ -841,7 +871,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testEqualsCorrect()
+  @Test
+  public final void testEqualsCorrect()
   {
     {
       final V m0 = this.newVectorM4F();
@@ -865,7 +896,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testEqualsNotEqualCorrect()
+  @Test
+  public final void testEqualsNotEqualCorrect()
   {
     final float x = (float) getRandom();
     final float y = x + 1.0f;
@@ -956,19 +988,16 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  protected static double getRandom()
-  {
-    return Math.random();
-  }
-
-  @Test public final void testHashCodeEqualsCorrect()
+  @Test
+  public final void testHashCodeEqualsCorrect()
   {
     final V m0 = this.newVectorM4F();
     final V m1 = this.newVectorM4F();
     Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Test public final void testHashCodeNotEqualCorrect()
+  @Test
+  public final void testHashCodeNotEqualCorrect()
   {
     {
       final V m0 = this.newVectorM4F();
@@ -1003,7 +1032,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testInitializeReadable()
+  @Test
+  public final void testInitializeReadable()
   {
     final V v0 = this.newVectorM4F(1.0f, 2.0f, 3.0f, 4.0f);
     final V v1 = this.newVectorM4FFrom(v0);
@@ -1014,7 +1044,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals((double) v1.getWF(), (double) v0.getWF(), 0.0);
   }
 
-  @Test public final void testInterpolateLinearLimits()
+  @Test
+  public final void testInterpolateLinearLimits()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1066,7 +1097,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testMagnitudeNonzero()
+  @Test
+  public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (getRandom() * (double) Float.MAX_VALUE);
@@ -1080,7 +1112,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testMagnitudeNormal()
+  @Test
+  public final void testMagnitudeNormal()
   {
     final AlmostEqualDouble.ContextRelative context_d =
       TestUtilities.getDoubleEqualityContext6dp();
@@ -1088,16 +1121,16 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x =
         (float) (getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
-                                     / 2.0));
+          / 2.0));
       final float y =
         (float) (getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
-                                     / 2.0));
+          / 2.0));
       final float z =
         (float) (getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
-                                     / 2.0));
+          / 2.0));
       final float w =
         (float) (getRandom() * (Math.sqrt((double) Float.MAX_VALUE)
-                                     / 2.0));
+          / 2.0));
       final V v = this.newVectorM4F(x, y, z, w);
 
       final V vr = this.newVectorM4F();
@@ -1110,7 +1143,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testMagnitudeNormalizeZero()
+  @Test
+  public final void testMagnitudeNormalizeZero()
   {
     final V v = this.newVectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final V vr = PVectorM4F.normalizeInPlace(v);
@@ -1119,7 +1153,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
-  @Test public final void testMagnitudeOne()
+  @Test
+  public final void testMagnitudeOne()
   {
     final V v = this.newVectorM4F(1.0f, 0.0f, 0.0f, 0.0f);
     final double m = PVectorM4F.magnitude(v);
@@ -1127,7 +1162,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 1.0));
   }
 
-  @Test public final void testMagnitudeSimple()
+  @Test
+  public final void testMagnitudeSimple()
   {
     final V v = this.newVectorM4F(8.0f, 0.0f, 0.0f, 0.0f);
 
@@ -1141,7 +1177,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testMagnitudeZero()
+  @Test
+  public final void testMagnitudeZero()
   {
     final V v = this.newVectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
     final double m = PVectorM4F.magnitude(v);
@@ -1149,7 +1186,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
-  @Test public final void testNormalizeSimple()
+  @Test
+  public final void testNormalizeSimple()
   {
     final V v0 = this.newVectorM4F(8.0f, 0.0f, 0.0f, 0.0f);
     final V out = this.newVectorM4F();
@@ -1162,7 +1200,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals(1.0, m, 0.0);
   }
 
-  @Test public final void testNormalizeZero()
+  @Test
+  public final void testNormalizeZero()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1177,7 +1216,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0.0F, qr.getWF()));
   }
 
-  @Test public final void testOrthonormalize()
+  @Test
+  public final void testOrthonormalize()
   {
     final PVectorM4F.ContextPVM4F c = new PVectorM4F.ContextPVM4F();
     final V v0 = this.newVectorM4F(0.0F, 1.0F, 0.0F, 0.0F);
@@ -1191,7 +1231,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals(this.newVectorM4F(1.0F, 0.0F, 0.0F, 0.0F), v1_out);
   }
 
-  @Test public final void testOrthonormalizeMutation()
+  @Test
+  public final void testOrthonormalizeMutation()
   {
     final PVectorM4F.ContextPVM4F c = new PVectorM4F.ContextPVM4F();
     final V v0 = this.newVectorM4F(0.0f, 1.0f, 0.0f, 0.0f);
@@ -1203,7 +1244,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals(this.newVectorM4F(1.0F, 0.0F, 0.0F, 0.0F), v1);
   }
 
-  @Test public final void testProjectionPerpendicularZero()
+  @Test
+  public final void testProjectionPerpendicularZero()
   {
     {
       final V p = this.newVectorM4F(1.0f, 0.0f, 0.0f, 0.0f);
@@ -1226,7 +1268,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testScaleMutation()
+  @Test
+  public final void testScaleMutation()
   {
     final V out = this.newVectorM4F();
     final V v0 = this.newVectorM4F(1.0f, 1.0f, 1.0f, 1.0f);
@@ -1267,7 +1310,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     Assert.assertEquals(2.0, (double) v0.getWF(), 0.0);
   }
 
-  @Test public final void testScaleOne()
+  @Test
+  public final void testScaleOne()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1308,7 +1352,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testScaleZero()
+  @Test
+  public final void testScaleZero()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1340,13 +1385,15 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final V v = this.newVectorM4F(1.0f, 2.0f, 3.0f, 4.0f);
     Assert.assertTrue(v.toString().endsWith("1.0 2.0 3.0 4.0]"));
   }
 
-  @Test public final void testSubtract()
+  @Test
+  public final void testSubtract()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1403,7 +1450,8 @@ public abstract class PVectorM4FContract<T, V extends PVector4FType<T>>
     }
   }
 
-  @Test public final void testSubtractMutation()
+  @Test
+  public final void testSubtractMutation()
   {
     final V out = this.newVectorM4F();
     final V v0 = this.newVectorM4F(1.0f, 1.0f, 1.0f, 1.0f);

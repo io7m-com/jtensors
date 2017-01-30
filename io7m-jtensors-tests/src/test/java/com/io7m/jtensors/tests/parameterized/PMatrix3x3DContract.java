@@ -34,11 +34,11 @@ import org.junit.Test;
 
 //@formatter:off
 public abstract class PMatrix3x3DContract<T0, T1, T2,
-  T           extends PMatrix3x3DType<T0, T1>,
-  TMULTRIGHT  extends PMatrix3x3DType<T0, T1>,
-  TMULTLEFT   extends PMatrix3x3DType<T1, T2>,
+  T extends PMatrix3x3DType<T0, T1>,
+  TMULTRIGHT extends PMatrix3x3DType<T0, T1>,
+  TMULTLEFT extends PMatrix3x3DType<T1, T2>,
   TMULTRESULT extends PMatrix3x3DType<T0, T2>,
-  TINVERSE    extends PMatrix3x3DType<T1, T0>>
+  TINVERSE extends PMatrix3x3DType<T1, T0>>
   extends PMatrixReadable3x3DContract<T0, T1, T>
 {
   //@formatter:on
@@ -50,7 +50,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
   private static final VectorReadable3DType AXIS_Z = new VectorI3D(
     0.0, 0.0, 1.0);
 
-  @Override protected abstract T newMatrix();
+  @Override
+  protected abstract T newMatrix();
 
   protected abstract TMULTLEFT newMatrixMultLeft();
 
@@ -156,13 +157,15 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testEqualsCase0()
+  @Test
+  public final void testEqualsCase0()
   {
     final T m0 = this.newMatrix();
     Assert.assertTrue(m0.equals(m0));
   }
 
-  @Test public final void testEqualsCase1()
+  @Test
+  public final void testEqualsCase1()
   {
     final T m0 = this.newMatrix();
     this.checkDirectBufferInvariantsGeneric(m0);
@@ -170,7 +173,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsGeneric(m0);
   }
 
-  @Test public final void testEqualsCase2()
+  @Test
+  public final void testEqualsCase2()
   {
     final T m0 = this.newMatrix();
     this.checkDirectBufferInvariantsGeneric(m0);
@@ -178,7 +182,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsGeneric(m0);
   }
 
-  @Test public final void testEqualsCase3()
+  @Test
+  public final void testEqualsCase3()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -187,7 +192,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsGeneric(m1);
   }
 
-  @Test public final void testEqualsNeqExhaustive()
+  @Test
+  public final void testEqualsNeqExhaustive()
   {
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
@@ -201,7 +207,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testHashcodeNeqExhaustive()
+  @Test
+  public final void testHashcodeNeqExhaustive()
   {
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
@@ -221,7 +228,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testInitializationFrom()
+  @Test
+  public final void testInitializationFrom()
   {
     final T m0 = this.newMatrix();
 
@@ -260,7 +268,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsGeneric(m1);
   }
 
-  @Test public final void testInitializationIdentity()
+  @Test
+  public final void testInitializationIdentity()
   {
     final T m = this.newMatrix();
 
@@ -279,7 +288,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsGeneric(m);
   }
 
-  @Test public final void testInvertIdentity()
+  @Test
+  public final void testInvertIdentity()
   {
     final PMatrixM3x3D.ContextPM3D s = new PMatrixM3x3D.ContextPM3D();
     final T m0 = this.newMatrix();
@@ -311,7 +321,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testInvertSimpleND()
+  @Test
+  public final void testInvertSimpleND()
   {
     final PMatrixM3x3D.ContextPM3D c = new PMatrixM3x3D.ContextPM3D();
     final T m0 = this.newMatrix();
@@ -355,7 +366,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testInvertZeroND()
+  @Test
+  public final void testInvertZeroND()
   {
     final PMatrixM3x3D.ContextPM3D c = new PMatrixM3x3D.ContextPM3D();
     final T m0 = this.newMatrix();
@@ -369,7 +381,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testMultiplyIdentity()
+  @Test
+  public final void testMultiplyIdentity()
   {
     final TMULTLEFT m0 = this.newMatrixMultLeft();
     final TMULTRIGHT m1 = this.newMatrixMultRight();
@@ -391,7 +404,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsWildcard(mr);
   }
 
-  @Test public final void testMultiplySimple()
+  @Test
+  public final void testMultiplySimple()
   {
     final TMULTLEFT m0 = this.newMatrixMultLeft();
 
@@ -438,7 +452,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsWildcard(mr);
   }
 
-  @Test public final void testMultiplyVectorSimple()
+  @Test
+  public final void testMultiplyVectorSimple()
   {
     final PMatrixM3x3D.ContextPM3D c = new PMatrixM3x3D.ContextPM3D();
     final T m0 = this.newMatrix();
@@ -470,7 +485,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsGeneric(m0);
   }
 
-  @Test public final void testMultiplyZero()
+  @Test
+  public final void testMultiplyZero()
   {
     final TMULTLEFT m0 = this.newMatrixMultLeft();
     final TMULTRIGHT m1 = this.newMatrixMultRight();
@@ -528,7 +544,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     m.getRowColumnD(3, 0);
   }
 
-  @Test public final void testRow3D()
+  @Test
+  public final void testRow3D()
   {
     final T m = this.newMatrix();
     final VectorM3D v = new VectorM3D();
@@ -607,7 +624,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testSetGetIdentity()
+  @Test
+  public final void testSetGetIdentity()
   {
     final T m = this.newMatrix();
 
@@ -676,7 +694,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsGeneric(m);
   }
 
-  @Test public final void testSetGetInterfaceIdentity()
+  @Test
+  public final void testSetGetInterfaceIdentity()
   {
     final T m = this.newMatrix();
 
@@ -710,7 +729,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsGeneric(m);
   }
 
-  @Test public final void testRowSet3Get3()
+  @Test
+  public final void testRowSet3Get3()
   {
     final T m = this.newMatrix();
     final VectorM3D v = new VectorM3D(0.0, 0.0, 0.0);
@@ -741,7 +761,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
 
   protected abstract void checkDirectBufferInvariantsGeneric(final T m);
 
-  @Test public final void testRowSet3Get3Unsafe()
+  @Test
+  public final void testRowSet3Get3Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM3D v = new VectorM3D(0.0, 0.0, 0.0);
@@ -770,7 +791,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsGeneric(m);
   }
 
-  @Test public final void testRowSet2Get2()
+  @Test
+  public final void testRowSet2Get2()
   {
     final T m = this.newMatrix();
     final VectorM2D v = new VectorM2D(0.0, 0.0);
@@ -796,7 +818,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsGeneric(m);
   }
 
-  @Test public final void testRowSet2Get2Unsafe()
+  @Test
+  public final void testRowSet2Get2Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM2D v = new VectorM2D(0.0, 0.0);
@@ -822,7 +845,8 @@ public abstract class PMatrix3x3DContract<T0, T1, T2,
     this.checkDirectBufferInvariantsGeneric(m);
   }
 
-  @Test public final void testCopyTyped()
+  @Test
+  public final void testCopyTyped()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();

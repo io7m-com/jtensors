@@ -38,7 +38,8 @@ public final class OrthonormalizedI3FTest
   @Rule public PercentagePassRule percent =
     new PercentagePassRule(TestUtilities.TEST_RANDOM_ITERATIONS);
 
-  @Test public void testAlreadyOrthonormal0()
+  @Test
+  public void testAlreadyOrthonormal0()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -64,7 +65,9 @@ public final class OrthonormalizedI3FTest
     }
   }
 
-  @Test @PercentagePassing public void testAlwaysOrthnormal()
+  @Test
+  @PercentagePassing
+  public void testAlwaysOrthnormal()
   {
     final float max = 10000.0f;
 
@@ -116,7 +119,8 @@ public final class OrthonormalizedI3FTest
     Assert.assertEquals(0.0f, v1_dot_v2, 0.00005f);
   }
 
-  @Test public void testEquals()
+  @Test
+  public void testEquals()
   {
     final VectorI3F v0 = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F v1 = new VectorI3F(0.0f, 1.0f, 0.0f);
@@ -140,7 +144,8 @@ public final class OrthonormalizedI3FTest
     Assert.assertTrue(o0.equals(o1));
   }
 
-  @Test public void testHashcode()
+  @Test
+  public void testHashcode()
   {
     final VectorI3F v0 = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F v1 = new VectorI3F(0.0f, 1.0f, 0.0f);
@@ -162,7 +167,8 @@ public final class OrthonormalizedI3FTest
     Assert.assertTrue(o0.hashCode() == (o1.hashCode()));
   }
 
-  @Test public void testToString()
+  @Test
+  public void testToString()
   {
     final VectorI3F v0 = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorI3F v1 = new VectorI3F(0.0f, 1.0f, 0.0f);

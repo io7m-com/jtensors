@@ -39,7 +39,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * @param <T> A phantom type parameter
  */
 
-public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVectorByteBuffered3LType<T>
+public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements
+  PVectorByteBuffered3LType<T>
 {
   private final ByteBuffer buffer;
 
@@ -106,22 +107,26 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
-  @Override public long getZL()
+  @Override
+  public long getZL()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 2);
   }
 
-  @Override public void setZL(final long z)
+  @Override
+  public void setZL(final long z)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 2, z);
   }
 
-  @Override public long getXL()
+  @Override
+  public long getXL()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
-  @Override public void setXL(final long x)
+  @Override
+  public void setXL(final long x)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
@@ -142,17 +147,20 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
       getByteOffsetForIndex(o, i));
   }
 
-  @Override public long getYL()
+  @Override
+  public long getYL()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
-  @Override public void setYL(final long y)
+  @Override
+  public void setYL(final long y)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
-  @Override public void copyFrom3L(final VectorReadable3LType in_v)
+  @Override
+  public void copyFrom3L(final VectorReadable3LType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXL());
@@ -160,7 +168,8 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
     this.setAtOffsetAndIndex(o, 2, in_v.getZL());
   }
 
-  @Override public void set3L(
+  @Override
+  public void set3L(
     final long x,
     final long y,
     final long z)
@@ -171,14 +180,16 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
     this.setAtOffsetAndIndex(o, 2, z);
   }
 
-  @Override public void copyFrom2L(final VectorReadable2LType in_v)
+  @Override
+  public void copyFrom2L(final VectorReadable2LType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXL());
     this.setAtOffsetAndIndex(o, 1, in_v.getYL());
   }
 
-  @Override public void set2L(
+  @Override
+  public void set2L(
     final long x,
     final long y)
   {
@@ -187,7 +198,8 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
     this.setAtOffsetAndIndex(o, 1, y);
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final long prime = 31L;
     long result = 1L;
@@ -197,7 +209,8 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
     return (int) result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(128);
     builder.append("[PVectorByteBufferedM3L ");
@@ -211,7 +224,8 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
     return NullCheck.notNull(r);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -227,7 +241,8 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
     return this.getXL() == other.getXL() && this.getYL() == other.getYL() && this.getZL() == other.getZL();
   }
 
-  @Override public void copyFromTyped3L(final PVectorReadable3LType<T> in_v)
+  @Override
+  public void copyFromTyped3L(final PVectorReadable3LType<T> in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXL());
@@ -235,7 +250,8 @@ public final class PVectorByteBufferedM3L<T> extends ByteBuffered implements PVe
     this.setAtOffsetAndIndex(o, 2, in_v.getZL());
   }
 
-  @Override public void copyFromTyped2L(final PVectorReadable2LType<T> in_v)
+  @Override
+  public void copyFromTyped2L(final PVectorReadable2LType<T> in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXL());

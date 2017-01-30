@@ -30,7 +30,8 @@ public final class QuaternionByteBufferedM4DTest
   extends QuaternionM4DContract<Quaternion4DType>
 {
 
-  @Override protected Quaternion4DType newQuaternion()
+  @Override
+  protected Quaternion4DType newQuaternion()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final Quaternion4DType v =
@@ -39,7 +40,8 @@ public final class QuaternionByteBufferedM4DTest
     return v;
   }
 
-  @Override protected Quaternion4DType newQuaternion(
+  @Override
+  protected Quaternion4DType newQuaternion(
     final double x,
     final double y,
     final double z,
@@ -52,7 +54,8 @@ public final class QuaternionByteBufferedM4DTest
     return v;
   }
 
-  @Override protected Quaternion4DType newQuaternion(final Quaternion4DType v)
+  @Override
+  protected Quaternion4DType newQuaternion(final Quaternion4DType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final Quaternion4DType vr =
@@ -61,7 +64,8 @@ public final class QuaternionByteBufferedM4DTest
     return vr;
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(4 * 8);
     b.order(ByteOrder.BIG_ENDIAN);

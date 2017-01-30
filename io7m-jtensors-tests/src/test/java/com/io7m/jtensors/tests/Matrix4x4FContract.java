@@ -196,7 +196,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testTranslationMakeEquivalent2Integer()
+  @Test
+  public final void testTranslationMakeEquivalent2Integer()
   {
     final T m = this.newMatrix();
     final VectorReadable2IType v = new VectorI2I(1, 2);
@@ -235,7 +236,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testRowSet3Get3()
+  @Test
+  public final void testRowSet3Get3()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
@@ -275,7 +277,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet3Get3Unsafe()
+  @Test
+  public final void testRowSet3Get3Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
@@ -315,7 +318,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet2Get2()
+  @Test
+  public final void testRowSet2Get2()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
@@ -355,7 +359,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet2Get2Unsafe()
+  @Test
+  public final void testRowSet2Get2Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
@@ -395,7 +400,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testTranslationMakeEquivalent2Real()
+  @Test
+  public final void testTranslationMakeEquivalent2Real()
   {
     final T m = this.newMatrix();
     final VectorReadable2FType v = new VectorI2F(1.0f, 2.0f);
@@ -434,7 +440,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testAdd()
+  @Test
+  public final void testAdd()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -478,7 +485,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
   @Override
   protected abstract void checkDirectBufferInvariants(final T m0);
 
-  @Test public final void testAddMutate()
+  @Test
+  public final void testAddMutate()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -513,7 +521,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(mr);
   }
 
-  @Test public final void testAddRowScaled()
+  @Test
+  public final void testAddRowScaled()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -589,7 +598,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m1);
   }
 
-  @Test public final void testAddRowScaledContextEquivalent()
+  @Test
+  public final void testAddRowScaledContextEquivalent()
   {
     final MatrixM4x4F.ContextMM4F context = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -685,7 +695,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     MatrixM4x4F.addRowScaledInPlace(s, m, 0, 0, -1, 1.0);
   }
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -745,14 +756,16 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m1);
   }
 
-  @Test public final void testDeterminantIdentity()
+  @Test
+  public final void testDeterminantIdentity()
   {
     final T m = this.newMatrix();
     Assert.assertEquals(1.0, MatrixM4x4F.determinant(m), 0.0);
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testDeterminantOther()
+  @Test
+  public final void testDeterminantOther()
   {
     final T m = this.newMatrix();
 
@@ -765,7 +778,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testDeterminantScale()
+  @Test
+  public final void testDeterminantScale()
   {
     final T m = this.newMatrix();
 
@@ -776,7 +790,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testDeterminantScaleNegative()
+  @Test
+  public final void testDeterminantScaleNegative()
   {
     final T m = this.newMatrix();
 
@@ -787,7 +802,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testDeterminantZero()
+  @Test
+  public final void testDeterminantZero()
   {
     final T m = this.newMatrix();
     this.checkDirectBufferInvariants(m);
@@ -797,7 +813,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testEqualsCorrect()
+  @Test
+  public final void testEqualsCorrect()
   {
     {
       final T m0 = this.newMatrix();
@@ -826,7 +843,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testEqualsNotEqualsCorrect()
+  @Test
+  public final void testEqualsNotEqualsCorrect()
   {
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -844,7 +862,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testExchangeRows()
+  @Test
+  public final void testExchangeRows()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -962,7 +981,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     MatrixM4x4F.exchangeRowsInPlace(s, m, 0, -1);
   }
 
-  @Test public final void testExchangeRowsContextEquivalent()
+  @Test
+  public final void testExchangeRowsContextEquivalent()
   {
     final MatrixM4x4F.ContextMM4F context = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -1048,7 +1068,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m1);
   }
 
-  @Test public final void testInitializationFrom()
+  @Test
+  public final void testInitializationFrom()
   {
     final T m0 = this.newMatrix();
 
@@ -1103,7 +1124,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m1);
   }
 
-  @Test public final void testInitializationIdentity()
+  @Test
+  public final void testInitializationIdentity()
   {
     final T m = this.newMatrix();
 
@@ -1130,7 +1152,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testInvertIdentity()
+  @Test
+  public final void testInvertIdentity()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -1205,7 +1228,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testInvertIdentityContextEquivalent()
+  @Test
+  public final void testInvertIdentityContextEquivalent()
   {
     final MatrixM4x4F.ContextMM4F context = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -1280,7 +1304,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testInvertSimple()
+  @Test
+  public final void testInvertSimple()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -1375,7 +1400,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testInvertSimple2()
+  @Test
+  public final void testInvertSimple2()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final AlmostEqualFloat.ContextRelative context_f =
@@ -1414,12 +1440,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(rm);
 
-      
-      
-      
-      
-      
-      
 
       eq = AlmostEqualFloat.almostEqual(
         context_f, rm.getRowColumnF(0, 0), -0.09375f);
@@ -1487,12 +1507,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(rm);
 
-      
-      
-      
-      
-      
-      
 
       eq =
         AlmostEqualFloat.almostEqual(context_f, rm.getRowColumnF(0, 0), 1.0f);
@@ -1552,7 +1566,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testInvertSimple2ContextEquivalent()
+  @Test
+  public final void testInvertSimple2ContextEquivalent()
   {
     final AlmostEqualFloat.ContextRelative context_f =
       TestUtilities.getSingleEqualityContext3dp();
@@ -1591,12 +1606,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(rm);
 
-      
-      
-      
-      
-      
-      
 
       eq = AlmostEqualFloat.almostEqual(
         context_f, rm.getRowColumnF(0, 0), -0.09375f);
@@ -1664,12 +1673,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       this.checkDirectBufferInvariants(m1);
       this.checkDirectBufferInvariants(rm);
 
-      
-      
-      
-      
-      
-      
 
       eq =
         AlmostEqualFloat.almostEqual(context_f, rm.getRowColumnF(0, 0), 1.0f);
@@ -1729,7 +1732,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testInvertSimpleContextEquivalent()
+  @Test
+  public final void testInvertSimpleContextEquivalent()
   {
     final MatrixM4x4F.ContextMM4F context = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -1824,7 +1828,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testInvertZero()
+  @Test
+  public final void testInvertZero()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -1847,7 +1852,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testInvertZeroContextEquivalent()
+  @Test
+  public final void testInvertZeroContextEquivalent()
   {
     final MatrixM4x4F.ContextMM4F context = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -1870,7 +1876,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testLookAt_NoTranslation_NegativeX_AroundY()
+  @Test
+  public final void testLookAt_NoTranslation_NegativeX_AroundY()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1882,8 +1889,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorReadable3FType axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
-    
-    
 
     boolean eq = false;
 
@@ -1937,7 +1942,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testLookAt_NoTranslation_NegativeZ_AroundY()
+  @Test
+  public final void testLookAt_NoTranslation_NegativeZ_AroundY()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1949,8 +1955,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorReadable3FType axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
-    
-    
 
     boolean eq = false;
 
@@ -2004,7 +2008,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testLookAt_NoTranslation_PositiveX_AroundY()
+  @Test
+  public final void testLookAt_NoTranslation_PositiveX_AroundY()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -2016,8 +2021,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorReadable3FType axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
-    
-    
 
     boolean eq = false;
 
@@ -2071,7 +2074,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testLookAt_NoTranslation_PositiveZ_AroundY()
+  @Test
+  public final void testLookAt_NoTranslation_PositiveZ_AroundY()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -2083,8 +2087,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorReadable3FType axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
-    
-    
 
     boolean eq = false;
 
@@ -2138,7 +2140,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testLookAt_Translation102030_NegativeZ_AroundY()
+  @Test
+  public final void testLookAt_Translation102030_NegativeZ_AroundY()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -2152,8 +2155,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     final VectorReadable3FType axis = new VectorI3F(0.0F, 1.0F, 0.0F);
     MatrixM4x4F.lookAt(mc, origin, target, axis, m);
 
-    
-    
 
     boolean eq = false;
 
@@ -2207,7 +2208,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testMultiplyIdentity()
+  @Test
+  public final void testMultiplyIdentity()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -2230,7 +2232,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testMultiplyMutateIdentity()
+  @Test
+  public final void testMultiplyMutateIdentity()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -2259,7 +2262,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testMultiplyMutateSimple()
+  @Test
+  public final void testMultiplyMutateSimple()
   {
     final T m0 = this.newMatrix();
 
@@ -2310,7 +2314,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(r);
   }
 
-  @Test public final void testMultiplySimple()
+  @Test
+  public final void testMultiplySimple()
   {
     final T m0 = this.newMatrix();
 
@@ -2367,7 +2372,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(mr);
   }
 
-  @Test public final void testMultiplyVectorSimple()
+  @Test
+  public final void testMultiplyVectorSimple()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -2407,7 +2413,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m0);
   }
 
-  @Test public void testMultiplyVectorSimpleContextEquivalent()
+  @Test
+  public void testMultiplyVectorSimpleContextEquivalent()
   {
     final T m0 = this.newMatrix();
 
@@ -2447,7 +2454,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m0);
   }
 
-  @Test public final void testMultiplyZero()
+  @Test
+  public final void testMultiplyZero()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -2509,7 +2517,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
    * All rotation matrices have a determinant of 1.0 and are orthogonal.
    */
 
-  @Test public final void testRotateDeterminantOrthogonal()
+  @Test
+  public final void testRotateDeterminantOrthogonal()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -2541,13 +2550,11 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       }
       VectorM3F.normalizeInPlace(axis);
 
-      
-      
 
       MatrixM4x4F.makeRotation((double) angle, axis, m);
 
       final double det = MatrixM4x4F.determinant(m);
-      
+
 
       AlmostEqualDouble.almostEqual(context, det, 1.0);
 
@@ -2560,15 +2567,12 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
           final float my = mt.getRowColumnF(row, col);
           final boolean eq = AlmostEqualFloat.almostEqual(context_f, mx, my);
 
-          
-          
-          
 
           Assert.assertTrue(eq);
         }
       }
 
-      
+
     }
   }
 
@@ -2576,7 +2580,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
    * A rotation of 0 degrees around the X axis has no effect.
    */
 
-  @Test public final void testRotateVector0X()
+  @Test
+  public final void testRotateVector0X()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final AlmostEqualFloat.ContextRelative ec =
@@ -2590,10 +2595,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     MatrixM4x4F.makeRotation(0.0, AXIS_X, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    
-    
-    
-    
 
     Assert.assertTrue(VectorM4F.almostEqual(ec, v_exp, v_got));
   }
@@ -2602,7 +2603,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
    * A rotation of 0 degrees around the Y axis has no effect.
    */
 
-  @Test public final void testRotateVector0Y()
+  @Test
+  public final void testRotateVector0Y()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final AlmostEqualFloat.ContextRelative ec =
@@ -2616,10 +2618,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     MatrixM4x4F.makeRotation(0.0, AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    
-    
-    
-    
 
     Assert.assertTrue(VectorM4F.almostEqual(ec, v_exp, v_got));
   }
@@ -2628,7 +2626,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
    * A rotation of 0 degrees around the Z axis has no effect.
    */
 
-  @Test public final void testRotateVector0Z()
+  @Test
+  public final void testRotateVector0Z()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final AlmostEqualFloat.ContextRelative ec =
@@ -2642,10 +2641,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     MatrixM4x4F.makeRotation(0.0, AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    
-    
-    
-    
 
     Assert.assertTrue(VectorM4F.almostEqual(ec, v_exp, v_got));
   }
@@ -2655,7 +2650,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
    * counter-clockwise rotation of the vector.
    */
 
-  @Test public final void testRotateVector90X()
+  @Test
+  public final void testRotateVector90X()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final AlmostEqualFloat.ContextRelative context =
@@ -2678,13 +2674,9 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     MatrixM4x4F.makeRotation(
       Math.toRadians(90.0), AXIS_X, m);
-    
+
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2699,7 +2691,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
    * counter-clockwise rotation of the vector.
    */
 
-  @Test public final void testRotateVector90Y()
+  @Test
+  public final void testRotateVector90Y()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final AlmostEqualFloat.ContextRelative context =
@@ -2724,10 +2717,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       Math.toRadians(90.0), AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2742,7 +2731,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
    * counter-clockwise rotation of the vector.
    */
 
-  @Test public final void testRotateVector90Z()
+  @Test
+  public final void testRotateVector90Z()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final AlmostEqualFloat.ContextRelative context =
@@ -2760,10 +2750,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       Math.toRadians(90.0), AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2778,7 +2764,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
    * rotation of the vector.
    */
 
-  @Test public final void testRotateVectorMinus90X()
+  @Test
+  public final void testRotateVectorMinus90X()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final AlmostEqualFloat.ContextRelative context =
@@ -2801,13 +2788,9 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
     MatrixM4x4F.makeRotation(
       Math.toRadians(-90.0), AXIS_X, m);
-    
+
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2822,7 +2805,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
    * rotation of the vector.
    */
 
-  @Test public final void testRotateVectorMinus90Y()
+  @Test
+  public final void testRotateVectorMinus90Y()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final AlmostEqualFloat.ContextRelative context =
@@ -2847,10 +2831,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       Math.toRadians(-90.0), AXIS_Y, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2865,7 +2845,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
    * rotation of the vector.
    */
 
-  @Test public final void testRotateVectorMinus90Z()
+  @Test
+  public final void testRotateVectorMinus90Z()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final AlmostEqualFloat.ContextRelative context =
@@ -2883,10 +2864,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
       Math.toRadians(-90.0), AXIS_Z, m);
     MatrixM4x4F.multiplyVector4F(s, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -2896,7 +2873,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testRotateYMakeEquivalent()
+  @Test
+  public final void testRotateYMakeEquivalent()
   {
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
@@ -2908,7 +2886,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
       this.checkDirectBufferInvariants(r);
 
-      
 
       this.isRotationMatrixY(context, r);
 
@@ -2916,7 +2893,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testRotateZMakeEquivalent()
+  @Test
+  public final void testRotateZMakeEquivalent()
   {
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
@@ -2928,7 +2906,6 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
 
       this.checkDirectBufferInvariants(r);
 
-      
 
       this.isRotationMatrixZ(context, r);
 
@@ -2936,7 +2913,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testRow4()
+  @Test
+  public final void testRow4()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F();
@@ -3013,7 +2991,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     m.getRow3F(-1, new VectorM4F());
   }
 
-  @Test public final void testScale()
+  @Test
+  public final void testScale()
   {
     final T m0 = this.newMatrix();
     final T mr = this.newMatrix();
@@ -3047,7 +3026,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(mr);
   }
 
-  @Test public final void testScaleMutate()
+  @Test
+  public final void testScaleMutate()
   {
     final T m = this.newMatrix();
 
@@ -3076,7 +3056,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(mr);
   }
 
-  @Test public final void testScaleRow()
+  @Test
+  public final void testScaleRow()
   {
     final MatrixM4x4F.ContextMM4F s = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -3171,7 +3152,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m1);
   }
 
-  @Test public final void testScaleRowContextEquivalent()
+  @Test
+  public final void testScaleRowContextEquivalent()
   {
     final MatrixM4x4F.ContextMM4F context = new MatrixM4x4F.ContextMM4F();
     final T m0 = this.newMatrix();
@@ -3300,7 +3282,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     MatrixM4x4F.scaleRow(s, m, -1, 1.0, r);
   }
 
-  @Test public final void testSetGetIdentity()
+  @Test
+  public final void testSetGetIdentity()
   {
     final T m = this.newMatrix();
 
@@ -3439,7 +3422,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testSetGetInterfaceIdentity()
+  @Test
+  public final void testSetGetInterfaceIdentity()
   {
     final T m = this.newMatrix();
 
@@ -3484,7 +3468,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testSetIdentity()
+  @Test
+  public final void testSetIdentity()
   {
     final T m = this.newMatrix();
 
@@ -3499,14 +3484,16 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testTrace()
+  @Test
+  public final void testTrace()
   {
     final T m = this.newMatrix();
     final double t = MatrixM4x4F.trace(m);
     Assert.assertEquals(t, 4.0, 0.0);
   }
 
-  @Test public final void testTranslate3_4_Equivalent()
+  @Test
+  public final void testTranslate3_4_Equivalent()
   {
     final MatrixM3x3F.ContextMM3F s3 = new MatrixM3x3F.ContextMM3F();
     final MatrixM4x4F.ContextMM4F s4 = new MatrixM4x4F.ContextMM4F();
@@ -3528,7 +3515,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     Assert.assertEquals((double) w3o.getYF(), (double) v3o.getYF(), 0.0);
   }
 
-  @Test public final void testTranslationMakeEquivalent3Integer()
+  @Test
+  public final void testTranslationMakeEquivalent3Integer()
   {
     final T m = this.newMatrix();
     final VectorReadable3IType v = new VectorI3I(1, 2, 3);
@@ -3569,7 +3557,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testTranslationMakeEquivalent3Real()
+  @Test
+  public final void testTranslationMakeEquivalent3Real()
   {
     final T m = this.newMatrix();
     final VectorReadable3FType v = new VectorI3F(1.0f, 2.0f, 3.0f);
@@ -3610,7 +3599,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     }
   }
 
-  @Test public final void testTranspose()
+  @Test
+  public final void testTranspose()
   {
     final T m = this.newMatrix();
     final T r = this.newMatrix();
@@ -3676,7 +3666,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(r);
   }
 
-  @Test public final void testTransposeMutate()
+  @Test
+  public final void testTransposeMutate()
   {
     final T m = this.newMatrix();
 
@@ -3724,7 +3715,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(r);
   }
 
-  @Test public final void testZero()
+  @Test
+  public final void testZero()
   {
     final T m = this.newMatrix();
     MatrixM4x4F.setZero(m);
@@ -3740,7 +3732,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSetGet4()
+  @Test
+  public final void testRowSetGet4()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F();
@@ -3780,7 +3773,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSetGet4Static()
+  @Test
+  public final void testRowSetGet4Static()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F();
@@ -3820,7 +3814,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet4Get3()
+  @Test
+  public final void testRowSet4Get3()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
@@ -3860,7 +3855,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet4Get3Unsafe()
+  @Test
+  public final void testRowSet4Get3Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
@@ -3900,7 +3896,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet4Get2()
+  @Test
+  public final void testRowSet4Get2()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);
@@ -3940,7 +3937,8 @@ public abstract class Matrix4x4FContract<T extends Matrix4x4FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet4Get2Unsafe()
+  @Test
+  public final void testRowSet4Get2Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(0.0f, 0.0f, 0.0f, 0.0f);

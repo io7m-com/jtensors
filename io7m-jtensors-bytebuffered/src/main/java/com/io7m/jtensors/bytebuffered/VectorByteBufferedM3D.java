@@ -33,7 +33,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM3D extends ByteBuffered implements VectorByteBuffered3DType
+public final class VectorByteBufferedM3D extends ByteBuffered implements
+  VectorByteBuffered3DType
 {
   private final ByteBuffer buffer;
 
@@ -98,22 +99,26 @@ public final class VectorByteBufferedM3D extends ByteBuffered implements VectorB
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
-  @Override public double getZD()
+  @Override
+  public double getZD()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 2);
   }
 
-  @Override public void setZD(final double z)
+  @Override
+  public void setZD(final double z)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 2, z);
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
-  @Override public void setXD(final double x)
+  @Override
+  public void setXD(final double x)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
@@ -134,17 +139,20 @@ public final class VectorByteBufferedM3D extends ByteBuffered implements VectorB
       getByteOffsetForIndex(o, i));
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
-  @Override public void setYD(final double y)
+  @Override
+  public void setYD(final double y)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
-  @Override public void copyFrom3D(final VectorReadable3DType in_v)
+  @Override
+  public void copyFrom3D(final VectorReadable3DType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXD());
@@ -152,7 +160,8 @@ public final class VectorByteBufferedM3D extends ByteBuffered implements VectorB
     this.setAtOffsetAndIndex(o, 2, in_v.getZD());
   }
 
-  @Override public void set3D(
+  @Override
+  public void set3D(
     final double x,
     final double y,
     final double z)
@@ -163,14 +172,16 @@ public final class VectorByteBufferedM3D extends ByteBuffered implements VectorB
     this.setAtOffsetAndIndex(o, 2, z);
   }
 
-  @Override public void copyFrom2D(final VectorReadable2DType in_v)
+  @Override
+  public void copyFrom2D(final VectorReadable2DType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXD());
     this.setAtOffsetAndIndex(o, 1, in_v.getYD());
   }
 
-  @Override public void set2D(
+  @Override
+  public void set2D(
     final double x,
     final double y)
   {
@@ -179,7 +190,8 @@ public final class VectorByteBufferedM3D extends ByteBuffered implements VectorB
     this.setAtOffsetAndIndex(o, 1, y);
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -193,7 +205,8 @@ public final class VectorByteBufferedM3D extends ByteBuffered implements VectorB
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(128);
     builder.append("[VectorByteBufferedM3D ");
@@ -207,7 +220,8 @@ public final class VectorByteBufferedM3D extends ByteBuffered implements VectorB
     return NullCheck.notNull(r);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {

@@ -32,7 +32,8 @@ public abstract class MatrixByteBuffered2x2FContract<T extends
     AtomicLong base,
     int offset);
 
-  @Test public final void testByteOffsetSetGetIdentity()
+  @Test
+  public final void testByteOffsetSetGetIdentity()
   {
     final T v = this.newMatrix();
     v.setByteOffset(23L);
@@ -46,7 +47,8 @@ public abstract class MatrixByteBuffered2x2FContract<T extends
     v.setByteOffset((long) Integer.MAX_VALUE);
   }
 
-  @Test public final void testByteBaseOffsetSetGetIdentity()
+  @Test
+  public final void testByteBaseOffsetSetGetIdentity()
   {
     final AtomicLong base = new AtomicLong(0L);
     final T v = this.newMatrixWithBaseOffset(1000, base, 0);
@@ -54,7 +56,8 @@ public abstract class MatrixByteBuffered2x2FContract<T extends
     Assert.assertEquals(23L, v.getByteOffset());
   }
 
-  @Test public final void testByteBaseOffsetSetGetIdentity100()
+  @Test
+  public final void testByteBaseOffsetSetGetIdentity100()
   {
     final AtomicLong base = new AtomicLong(0L);
     final T v = this.newMatrixWithBaseOffset(1000, base, 100);

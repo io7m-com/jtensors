@@ -38,7 +38,8 @@ public abstract class MatrixReadable4x4FContract<T extends
 
   protected abstract void checkDirectBufferInvariants(T m);
 
-  @Test public final void testHashcodeNeqExhaustive()
+  @Test
+  public final void testHashcodeNeqExhaustive()
   {
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -59,7 +60,8 @@ public abstract class MatrixReadable4x4FContract<T extends
    * Test that single-element retrievals are correct.
    */
 
-  @Test public final void testGetCorrect()
+  @Test
+  public final void testGetCorrect()
   {
     final VectorReadable4FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
@@ -117,7 +119,8 @@ public abstract class MatrixReadable4x4FContract<T extends
    * Test that row retrievals are correct.
    */
 
-  @Test public final void testGetRow4Correct()
+  @Test
+  public final void testGetRow4Correct()
   {
     final VectorReadable4FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
@@ -212,7 +215,8 @@ public abstract class MatrixReadable4x4FContract<T extends
    * Test that row retrievals are correct.
    */
 
-  @Test public final void testGetRow3Correct()
+  @Test
+  public final void testGetRow3Correct()
   {
     final VectorReadable4FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
@@ -299,7 +303,8 @@ public abstract class MatrixReadable4x4FContract<T extends
    * Test that row retrievals are correct.
    */
 
-  @Test public final void testGetRow2Correct()
+  @Test
+  public final void testGetRow2Correct()
   {
     final VectorReadable4FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
@@ -374,7 +379,8 @@ public abstract class MatrixReadable4x4FContract<T extends
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();

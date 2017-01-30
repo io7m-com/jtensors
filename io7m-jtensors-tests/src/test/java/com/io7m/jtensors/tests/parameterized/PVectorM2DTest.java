@@ -40,44 +40,52 @@ public final class PVectorM2DTest<T>
     LOG = LoggerFactory.getLogger(PVectorM2DTest.class);
   }
 
-  @Override protected double delta()
+  @Override
+  protected double delta()
   {
     return 0.0000000000001;
   }
 
-  @Override protected double randomLargeNegative()
+  @Override
+  protected double randomLargeNegative()
   {
     return Math.random() * -100000000.0;
   }
 
-  @Override protected double randomLargePositive()
+  @Override
+  protected double randomLargePositive()
   {
     return Math.random() * 100000000.0;
   }
 
-  @Override protected Logger logger()
+  @Override
+  protected Logger logger()
   {
     return LOG;
   }
 
-  @Override protected PVectorM2D<T> newVectorM2D(final PVectorM2D<T> v)
+  @Override
+  protected PVectorM2D<T> newVectorM2D(final PVectorM2D<T> v)
   {
     return new PVectorM2D<T>(v);
   }
 
-  @Override protected PVectorM2D<T> newVectorM2D()
+  @Override
+  protected PVectorM2D<T> newVectorM2D()
   {
     return new PVectorM2D<T>();
   }
 
-  @Override protected PVectorM2D<T> newVectorM2D(
+  @Override
+  protected PVectorM2D<T> newVectorM2D(
     final double x1,
     final double y1)
   {
     return new PVectorM2D<T>(x1, y1);
   }
 
-  @Test public void testHierarchy()
+  @Test
+  public void testHierarchy()
   {
     final PVectorM2D<?> v = new PVectorM2D<Object>();
 

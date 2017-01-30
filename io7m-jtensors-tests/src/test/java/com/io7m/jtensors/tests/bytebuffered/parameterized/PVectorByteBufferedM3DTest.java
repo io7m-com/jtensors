@@ -36,27 +36,32 @@ public final class PVectorByteBufferedM3DTest<T>
     LOG = LoggerFactory.getLogger(PVectorByteBufferedM3DTest.class);
   }
 
-  @Override protected double delta()
+  @Override
+  protected double delta()
   {
     return 0.0000000000001;
   }
 
-  @Override protected double randomLargeNegative()
+  @Override
+  protected double randomLargeNegative()
   {
     return Math.random() * -1000000.0;
   }
 
-  @Override protected double randomLargePositive()
+  @Override
+  protected double randomLargePositive()
   {
     return Math.random() * 1000000.0;
   }
 
-  @Override protected Logger logger()
+  @Override
+  protected Logger logger()
   {
     return LOG;
   }
 
-  @Override protected PVectorByteBuffered3DType<T> newVectorM3D(
+  @Override
+  protected PVectorByteBuffered3DType<T> newVectorM3D(
     final double x,
     final double y,
     final double z)
@@ -68,7 +73,8 @@ public final class PVectorByteBufferedM3DTest<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered3DType<T> newVectorM3D()
+  @Override
+  protected PVectorByteBuffered3DType<T> newVectorM3D()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered3DType<T> v =
@@ -77,7 +83,8 @@ public final class PVectorByteBufferedM3DTest<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered3DType<T> newVectorM3D(
+  @Override
+  protected PVectorByteBuffered3DType<T> newVectorM3D(
     final PVectorByteBuffered3DType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
@@ -87,7 +94,8 @@ public final class PVectorByteBufferedM3DTest<T>
     return vr;
   }
 
-  @Override protected PVectorByteBuffered3DType<T> newVectorM3DAtIndexFromSize(
+  @Override
+  protected PVectorByteBuffered3DType<T> newVectorM3DAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -95,7 +103,8 @@ public final class PVectorByteBufferedM3DTest<T>
     return PVectorByteBufferedM3D.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected PVectorByteBuffered3DType<T> newVectorM3DWithBaseOffset(
+  @Override
+  protected PVectorByteBuffered3DType<T> newVectorM3DWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -105,7 +114,8 @@ public final class PVectorByteBufferedM3DTest<T>
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(3 * 8);
     b.order(ByteOrder.BIG_ENDIAN);

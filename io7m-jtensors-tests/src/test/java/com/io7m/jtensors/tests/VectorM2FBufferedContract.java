@@ -124,7 +124,8 @@ public abstract class VectorM2FBufferedContract<T extends Vector2FType>
     v.copyFrom2F(new VectorI2F(23.0f, 23.0f));
   }
 
-  @Test public final void testCopyFrom2FIdentity()
+  @Test
+  public final void testCopyFrom2FIdentity()
   {
     final Vector2FType v = this.newVectorM2FAtIndexFromSize(
       100L, 0L);
@@ -134,7 +135,8 @@ public abstract class VectorM2FBufferedContract<T extends Vector2FType>
     Assert.assertEquals(24.0, (double) v.getYF(), 0.0);
   }
 
-  @Test public final void testSet2FIdentity()
+  @Test
+  public final void testSet2FIdentity()
   {
     final Vector2FType v = this.newVectorM2FAtIndexFromSize(
       100L, 0L);

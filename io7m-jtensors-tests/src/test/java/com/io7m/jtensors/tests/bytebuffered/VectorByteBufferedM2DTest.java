@@ -36,27 +36,32 @@ public final class VectorByteBufferedM2DTest
     LOG = LoggerFactory.getLogger(VectorByteBufferedM2DTest.class);
   }
 
-  @Override protected double delta()
+  @Override
+  protected double delta()
   {
     return 0.0000000000001;
   }
 
-  @Override protected double randomLargeNegative()
+  @Override
+  protected double randomLargeNegative()
   {
     return Math.random() * -100000000.0;
   }
 
-  @Override protected double randomLargePositive()
+  @Override
+  protected double randomLargePositive()
   {
     return Math.random() * 100000000.0;
   }
 
-  @Override protected Logger logger()
+  @Override
+  protected Logger logger()
   {
     return LOG;
   }
 
-  @Override protected VectorByteBuffered2DType newVectorM2D(
+  @Override
+  protected VectorByteBuffered2DType newVectorM2D(
     final double x,
     final double y)
   {
@@ -67,7 +72,8 @@ public final class VectorByteBufferedM2DTest
     return v;
   }
 
-  @Override protected VectorByteBuffered2DType newVectorM2D()
+  @Override
+  protected VectorByteBuffered2DType newVectorM2D()
   {
     final ByteBuffer buf = ByteBuffer.allocate(2 * 8);
     final VectorByteBuffered2DType v =
@@ -76,7 +82,8 @@ public final class VectorByteBufferedM2DTest
     return v;
   }
 
-  @Override protected VectorByteBuffered2DType newVectorM2D(
+  @Override
+  protected VectorByteBuffered2DType newVectorM2D(
     final VectorByteBuffered2DType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(2 * 8);
@@ -86,7 +93,8 @@ public final class VectorByteBufferedM2DTest
     return vr;
   }
 
-  @Override protected VectorByteBuffered2DType newVectorM2DAtIndexFromSize(
+  @Override
+  protected VectorByteBuffered2DType newVectorM2DAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -94,7 +102,8 @@ public final class VectorByteBufferedM2DTest
     return VectorByteBufferedM2D.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected VectorByteBuffered2DType newVectorM2DWithBaseOffset(
+  @Override
+  protected VectorByteBuffered2DType newVectorM2DWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -104,7 +113,8 @@ public final class VectorByteBufferedM2DTest
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(2 * 8);
     b.order(ByteOrder.BIG_ENDIAN);

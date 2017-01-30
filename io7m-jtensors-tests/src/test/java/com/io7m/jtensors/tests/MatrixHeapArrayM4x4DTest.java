@@ -23,18 +23,21 @@ import com.io7m.jtensors.MatrixReadable4x4DType;
 public final class MatrixHeapArrayM4x4DTest
   extends Matrix4x4DContract<Matrix4x4DType>
 {
-  @Override protected Matrix4x4DType newMatrix()
+  @Override
+  protected Matrix4x4DType newMatrix()
   {
     return MatrixHeapArrayM4x4D.newMatrix();
   }
 
-  @Override protected Matrix4x4DType newMatrixFrom(
+  @Override
+  protected Matrix4x4DType newMatrixFrom(
     final MatrixReadable4x4DType source)
   {
     return MatrixHeapArrayM4x4D.newMatrixFrom(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(final Matrix4x4DType m)
+  @Override
+  protected void checkDirectBufferInvariants(final Matrix4x4DType m)
   {
     // Nothing required
   }

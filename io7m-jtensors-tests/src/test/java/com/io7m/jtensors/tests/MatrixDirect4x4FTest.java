@@ -24,12 +24,14 @@ import org.junit.Assert;
 public final class MatrixDirect4x4FTest
   extends MatrixDirect4x4FContract<MatrixDirect4x4FType>
 {
-  @Override protected MatrixDirect4x4FType newMatrix()
+  @Override
+  protected MatrixDirect4x4FType newMatrix()
   {
     return MatrixDirectM4x4F.newMatrix();
   }
 
-  @Override protected MatrixDirect4x4FType newMatrixFrom(
+  @Override
+  protected MatrixDirect4x4FType newMatrixFrom(
     final MatrixReadable4x4FType source)
   {
     return MatrixDirectM4x4F.newMatrixFrom(source);

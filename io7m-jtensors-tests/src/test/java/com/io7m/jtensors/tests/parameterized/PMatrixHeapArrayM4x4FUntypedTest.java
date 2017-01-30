@@ -25,12 +25,14 @@ import com.io7m.jtensors.tests.Matrix4x4FContract;
 public final class PMatrixHeapArrayM4x4FUntypedTest<T0, T1>
   extends Matrix4x4FContract<PMatrix4x4FType<T0, T1>>
 {
-  @Override protected PMatrix4x4FType<T0, T1> newMatrix()
+  @Override
+  protected PMatrix4x4FType<T0, T1> newMatrix()
   {
     return PMatrixHeapArrayM4x4F.newMatrix();
   }
 
-  @Override protected PMatrix4x4FType<T0, T1> newMatrixFrom(
+  @Override
+  protected PMatrix4x4FType<T0, T1> newMatrixFrom(
     final MatrixReadable4x4FType m)
   {
     final PMatrix4x4FType<T0, T1> r = PMatrixHeapArrayM4x4F.newMatrix();

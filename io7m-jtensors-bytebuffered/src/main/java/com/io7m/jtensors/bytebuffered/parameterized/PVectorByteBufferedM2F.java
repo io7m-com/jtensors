@@ -105,12 +105,14 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
-  @Override public float getXF()
+  @Override
+  public float getXF()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
-  @Override public void setXF(final float x)
+  @Override
+  public void setXF(final float x)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
@@ -131,24 +133,28 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
       getByteOffsetForIndex(o, i));
   }
 
-  @Override public float getYF()
+  @Override
+  public float getYF()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
-  @Override public void setYF(final float y)
+  @Override
+  public void setYF(final float y)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
-  @Override public void copyFrom2F(final VectorReadable2FType in_v)
+  @Override
+  public void copyFrom2F(final VectorReadable2FType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXF());
     this.setAtOffsetAndIndex(o, 1, in_v.getYF());
   }
 
-  @Override public void set2F(
+  @Override
+  public void set2F(
     final float x,
     final float y)
   {
@@ -157,7 +163,8 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
     this.setAtOffsetAndIndex(o, 1, y);
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -169,7 +176,8 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(128);
     builder.append("[PVectorByteBufferedM2F ");
@@ -181,7 +189,8 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
     return NullCheck.notNull(r);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -198,7 +207,8 @@ public final class PVectorByteBufferedM2F<T> extends ByteBuffered
       this.getYF()) == Float.floatToIntBits(other.getYF());
   }
 
-  @Override public void copyFromTyped2F(final PVectorReadable2FType<T> in_v)
+  @Override
+  public void copyFromTyped2F(final PVectorReadable2FType<T> in_v)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 0, in_v.getXF());
     this.setAtOffsetAndIndex(super.getIndex(), 1, in_v.getYF());

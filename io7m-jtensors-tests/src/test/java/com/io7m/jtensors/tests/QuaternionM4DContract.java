@@ -26,7 +26,6 @@ import com.io7m.jtensors.MatrixM3x3D;
 import com.io7m.jtensors.MatrixM4x4D;
 import com.io7m.jtensors.Quaternion4DType;
 import com.io7m.jtensors.QuaternionM4D;
-import com.io7m.jtensors.QuaternionReadable4DType;
 import com.io7m.jtensors.VectorI3D;
 import com.io7m.jtensors.VectorM3D;
 import com.io7m.jtensors.VectorReadable3DType;
@@ -38,17 +37,16 @@ import org.slf4j.LoggerFactory;
 public abstract class QuaternionM4DContract<T extends Quaternion4DType>
 {
   private static final Logger LOG;
-
-  static {
-    LOG = LoggerFactory.getLogger(QuaternionM4DContract.class);
-  }
-
   private static final VectorReadable3DType AXIS_X =
     new VectorI3D(1.0, 0.0, 0.0);
   private static final VectorReadable3DType AXIS_Y =
     new VectorI3D(0.0, 1.0, 0.0);
   private static final VectorReadable3DType AXIS_Z =
     new VectorI3D(0.0, 0.0, 1.0);
+
+  static {
+    LOG = LoggerFactory.getLogger(QuaternionM4DContract.class);
+  }
 
   protected static double getRandom()
   {
@@ -737,7 +735,8 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
     }
   }
 
-  @Test public final void testInterpolateSphericalLinearNegated()
+  @Test
+  public final void testInterpolateSphericalLinearNegated()
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
 
@@ -772,7 +771,8 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       QuaternionM4D.almostEqual(context, r1, v1));
   }
 
-  @Test public final void testInterpolateSphericalLinearCodirectional()
+  @Test
+  public final void testInterpolateSphericalLinearCodirectional()
   {
     final QuaternionM4D.ContextQM4D c = new QuaternionM4D.ContextQM4D();
     final ContextRelative context = TestUtilities.getDoubleEqualityContext();
@@ -883,8 +883,14 @@ public abstract class QuaternionM4DContract<T extends Quaternion4DType>
       final double target_z = (getRandom() * 100.0)
         - (getRandom() * 100.0);
 
-      final VectorReadable3DType origin = new VectorI3D(origin_x, origin_y, origin_z);
-      final VectorReadable3DType target = new VectorI3D(target_x, target_y, target_z);
+      final VectorReadable3DType origin = new VectorI3D(
+        origin_x,
+        origin_y,
+        origin_z);
+      final VectorReadable3DType target = new VectorI3D(
+        target_x,
+        target_y,
+        target_z);
 
       MatrixM4x4D.lookAt(
         mc, origin, target, AXIS_Y, ml);

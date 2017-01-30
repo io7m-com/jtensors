@@ -24,7 +24,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
 
-@SuppressWarnings("static-method") public class PVectorI3ITest<T>
+@SuppressWarnings("static-method")
+public class PVectorI3ITest<T>
   extends PVectorI3Contract
 {
   public static int randomNegativeNumber()
@@ -42,7 +43,8 @@ import org.junit.Test;
     return (int) (Math.random() * (1 << 14));
   }
 
-  @Test public void testZero()
+  @Test
+  public void testZero()
   {
     final PVectorI3I<Object> z = PVectorI3I.zero();
     Assert.assertEquals(0, z.getXI());
@@ -50,7 +52,9 @@ import org.junit.Test;
     Assert.assertEquals(0, z.getZI());
   }
 
-  @Override @Test public void testAbsolute()
+  @Override
+  @Test
+  public void testAbsolute()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = (int) (Math.random() * Integer.MIN_VALUE);
@@ -66,7 +70,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testAdd()
+  @Override
+  @Test
+  public void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveSmallNumber();
@@ -87,7 +93,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testAddScaled()
+  @Override
+  @Test
+  public void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveSmallNumber();
@@ -110,17 +118,23 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+  @Override
+  @Test
+  public void testAlmostEqualNot()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+  @Override
+  @Test
+  public void testAlmostEqualTransitive()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testCheckInterface()
+  @Override
+  @Test
+  public void testCheckInterface()
   {
     final VectorReadable3IType v = new PVectorI3I<T>(3, 5, 7);
 
@@ -129,7 +143,9 @@ import org.junit.Test;
     Assert.assertTrue(v.getZI() == v.getZI());
   }
 
-  @Override @Test public void testClampByPVectorMaximumOrdering()
+  @Override
+  @Test
+  public void testClampByPVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max_x = randomNegativeNumber();
@@ -150,7 +166,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampByPVectorMinimumOrdering()
+  @Override
+  @Test
+  public void testClampByPVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = randomPositiveNumber();
@@ -171,7 +189,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampByPVectorOrdering()
+  @Override
+  @Test
+  public void testClampByPVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = randomNegativeNumber();
@@ -200,7 +220,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+  @Override
+  @Test
+  public void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int maximum = randomNegativeNumber();
@@ -218,7 +240,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+  @Override
+  @Test
+  public void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = randomPositiveNumber();
@@ -236,7 +260,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampOrdering()
+  @Override
+  @Test
+  public void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = randomNegativeNumber();
@@ -258,7 +284,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testCopy()
+  @Override
+  @Test
+  public void testCopy()
   {
     final PVectorI3I<T> vb = new PVectorI3I<T>(5, 6, 7);
     final PVectorI3I<T> va = new PVectorI3I<T>(1, 2, 3);
@@ -278,24 +306,30 @@ import org.junit.Test;
     Assert.assertFalse(vc.getZI() == vb.getZI());
   }
 
-  @Override public void testCrossProductPerpendicular()
+  @Override
+  public void testCrossProductPerpendicular()
   {
     // Not applicable.
   }
 
-  @Override public void testDefault000()
+  @Override
+  public void testDefault000()
   {
     Assert.assertTrue(new PVectorI3I<T>().equals(new PVectorI3I<T>(0, 0, 0)));
   }
 
-  @Override @Test public void testDistance()
+  @Override
+  @Test
+  public void testDistance()
   {
     final PVectorReadable3IType<T> v0 = new PVectorI3I<T>(0, 1, 0);
     final PVectorReadable3IType<T> v1 = new PVectorI3I<T>(0, 0, 0);
     Assert.assertTrue(PVectorI3I.distance(v0, v1) == 1);
   }
 
-  @Override @Test public void testDistanceOrdering()
+  @Override
+  @Test
+  public void testDistanceOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveSmallNumber();
@@ -312,7 +346,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDotProduct()
+  @Override
+  @Test
+  public void testDotProduct()
   {
     final PVectorI3I<T> v0 = new PVectorI3I<T>(10, 10, 10);
     final PVectorI3I<T> v1 = new PVectorI3I<T>(10, 10, 10);
@@ -345,7 +381,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+  @Override
+  @Test
+  public void testDotProductPerpendicular()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -364,7 +402,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDotProductSelf()
+  @Override
+  @Test
+  public void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -381,7 +421,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  @Override
+  @Test
+  public void testDotProductSelfMagnitudeSquared()
   {
     final PVectorI3I<T> v0 = new PVectorI3I<T>(10, 10, 10);
 
@@ -402,7 +444,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+  @Override
+  @Test
+  public void testEqualsCorrect()
   {
     {
       final PVectorI3I<T> m0 = new PVectorI3I<T>();
@@ -426,7 +470,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+  @Override
+  @Test
+  public void testEqualsNotEqualCorrect()
   {
     final int x = (int) (Math.random() * 1000);
     final int y = x + 1;
@@ -511,14 +557,18 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+  @Override
+  @Test
+  public void testHashCodeEqualsCorrect()
   {
     final PVectorI3I<T> m0 = new PVectorI3I<T>();
     final PVectorI3I<T> m1 = new PVectorI3I<T>();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+  @Override
+  @Test
+  public void testHashCodeNotEqualCorrect()
   {
     {
       final PVectorI3I<T> m0 = new PVectorI3I<T>(23, 0, 0);
@@ -539,7 +589,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+  @Override
+  @Test
+  public void testInitializeReadable()
   {
     final PVectorI3I<T> v0 = new PVectorI3I<T>(1, 2, 3);
     final VectorReadable3IType v1 = new PVectorI3I<T>(v0);
@@ -549,7 +601,9 @@ import org.junit.Test;
     Assert.assertTrue(v0.getZI() == v1.getZI());
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+  @Override
+  @Test
+  public void testInterpolateLinearLimits()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveNumber();
@@ -575,7 +629,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+  @Override
+  @Test
+  public void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = randomPositiveSmallNumber();
@@ -588,24 +644,32 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+  @Override
+  @Test
+  public void testMagnitudeNormal()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+  @Override
+  @Test
+  public void testMagnitudeNormalizeZero()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeOne()
+  @Override
+  @Test
+  public void testMagnitudeOne()
   {
     final PVectorReadable3IType<T> v = new PVectorI3I<T>(1, 0, 0);
     final int m = PVectorI3I.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
-  @Override @Test public void testMagnitudeSimple()
+  @Override
+  @Test
+  public void testMagnitudeSimple()
   {
     final PVectorReadable3IType<T> v = new PVectorI3I<T>(8, 0, 0);
 
@@ -619,29 +683,39 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+  @Override
+  @Test
+  public void testMagnitudeZero()
   {
     final PVectorReadable3IType<T> v = new PVectorI3I<T>(0, 0, 0);
     final int m = PVectorI3I.magnitude(v);
     Assert.assertTrue(m == 0);
   }
 
-  @Override @Test public void testNormalizeSimple()
+  @Override
+  @Test
+  public void testNormalizeSimple()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testNormalizeZero()
+  @Override
+  @Test
+  public void testNormalizeZero()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testOrthonormalize()
+  @Override
+  @Test
+  public void testOrthonormalize()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+  @Override
+  @Test
+  public void testProjectionPerpendicularZero()
   {
     {
       final PVectorReadable3IType<T> p = new PVectorI3I<T>(1, 0, 0);
@@ -660,7 +734,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testScaleOne()
+  @Override
+  @Test
+  public void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = randomPositiveNumber();
@@ -676,7 +752,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testScaleZero()
+  @Override
+  @Test
+  public void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = randomPositiveNumber();
@@ -692,13 +770,17 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testString()
+  @Override
+  @Test
+  public void testString()
   {
     final PVectorI3I<T> v = new PVectorI3I<T>(1, 2, 3);
     Assert.assertTrue("[PVectorI3I 1 2 3]".equals(v.toString()));
   }
 
-  @Override @Test public void testSubtract()
+  @Override
+  @Test
+  public void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveNumber();

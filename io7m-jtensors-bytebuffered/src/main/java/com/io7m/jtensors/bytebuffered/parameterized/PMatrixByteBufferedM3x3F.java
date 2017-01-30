@@ -151,7 +151,8 @@ public final class PMatrixByteBufferedM3x3F<T0, T1> extends ByteBuffered
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
     MatrixM3x3F.showElements(this, builder);
@@ -179,12 +180,14 @@ public final class PMatrixByteBufferedM3x3F<T0, T1> extends ByteBuffered
         o, indexUnsafe(row, col)));
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     return MatrixM3x3F.hashElements(this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -202,14 +205,16 @@ public final class PMatrixByteBufferedM3x3F<T0, T1> extends ByteBuffered
     return MatrixM3x3F.compareElements(this, other);
   }
 
-  @Override public <V extends VectorWritable3FType> void getRow3F(
+  @Override
+  public <V extends VectorWritable3FType> void getRow3F(
     final int row,
     final V out)
   {
     this.getRow3FUnsafe(checkRow(row), out);
   }
 
-  @Override public <V extends VectorWritable3FType> void getRow3FUnsafe(
+  @Override
+  public <V extends VectorWritable3FType> void getRow3FUnsafe(
     final int row,
     final V out)
   {
@@ -220,64 +225,76 @@ public final class PMatrixByteBufferedM3x3F<T0, T1> extends ByteBuffered
       this.getAtOffsetAndRowColumn(o, row, 2));
   }
 
-  @Override public float getR0C2F()
+  @Override
+  public float getR0C2F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 0, 2);
   }
 
-  @Override public void setR0C2F(final float x)
+  @Override
+  public void setR0C2F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 0, 2, x);
   }
 
-  @Override public float getR1C2F()
+  @Override
+  public float getR1C2F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 1, 2);
   }
 
-  @Override public void setR1C2F(final float x)
+  @Override
+  public void setR1C2F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 1, 2, x);
   }
 
-  @Override public float getR2C0F()
+  @Override
+  public float getR2C0F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 2, 0);
   }
 
-  @Override public void setR2C0F(final float x)
+  @Override
+  public void setR2C0F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 2, 0, x);
   }
 
-  @Override public float getR2C1F()
+  @Override
+  public float getR2C1F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 2, 1);
   }
 
-  @Override public void setR2C1F(final float x)
+  @Override
+  public void setR2C1F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 2, 1, x);
   }
 
-  @Override public float getR2C2F()
+  @Override
+  public float getR2C2F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 2, 2);
   }
 
-  @Override public void setR2C2F(final float x)
+  @Override
+  public void setR2C2F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 2, 2, x);
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2F(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2F(
     final int row,
     final V out)
   {
     this.getRow2FUnsafe(checkRow(row), out);
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2FUnsafe(
     final int row,
     final V out)
   {
@@ -287,47 +304,56 @@ public final class PMatrixByteBufferedM3x3F<T0, T1> extends ByteBuffered
       this.getAtOffsetAndRowColumn(o, row, 1));
   }
 
-  @Override public float getR0C0F()
+  @Override
+  public float getR0C0F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 0, 0);
   }
 
-  @Override public void setR0C0F(final float x)
+  @Override
+  public void setR0C0F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 0, 0, x);
   }
 
-  @Override public float getR1C0F()
+  @Override
+  public float getR1C0F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 1, 0);
   }
 
-  @Override public void setR1C0F(final float x)
+  @Override
+  public void setR1C0F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 1, 0, x);
   }
 
-  @Override public float getR0C1F()
+  @Override
+  public float getR0C1F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 0, 1);
   }
 
-  @Override public void setR0C1F(final float x)
+  @Override
+  public void setR0C1F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 0, 1, x);
   }
 
-  @Override public float getR1C1F()
+  @Override
+  public float getR1C1F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 1, 1);
   }
 
-  @Override public void setR1C1F(final float x)
+  @Override
+  public void setR1C1F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 1, 1, x);
   }
 
-  @Override public float getRowColumnF(
+  @Override
+  public float getRowColumnF(
     final int row,
     final int column)
   {
@@ -336,7 +362,8 @@ public final class PMatrixByteBufferedM3x3F<T0, T1> extends ByteBuffered
     return this.getAtOffsetAndRowColumn(super.getIndex(), row, column);
   }
 
-  @Override public void setRowWith3F(
+  @Override
+  public void setRowWith3F(
     final int row,
     final VectorReadable3FType v)
   {
@@ -344,7 +371,8 @@ public final class PMatrixByteBufferedM3x3F<T0, T1> extends ByteBuffered
     this.setRowWith3FUnsafe(row, v);
   }
 
-  @Override public void setRowWith3FUnsafe(
+  @Override
+  public void setRowWith3FUnsafe(
     final int row,
     final VectorReadable3FType v)
   {
@@ -354,7 +382,8 @@ public final class PMatrixByteBufferedM3x3F<T0, T1> extends ByteBuffered
     this.setAtOffsetAndRowColumn(o, row, 2, v.getZF());
   }
 
-  @Override public void setRowWith2F(
+  @Override
+  public void setRowWith2F(
     final int row,
     final VectorReadable2FType v)
   {
@@ -362,7 +391,8 @@ public final class PMatrixByteBufferedM3x3F<T0, T1> extends ByteBuffered
     this.setRowWith2FUnsafe(row, v);
   }
 
-  @Override public void setRowWith2FUnsafe(
+  @Override
+  public void setRowWith2FUnsafe(
     final int row,
     final VectorReadable2FType v)
   {
@@ -371,7 +401,8 @@ public final class PMatrixByteBufferedM3x3F<T0, T1> extends ByteBuffered
     this.setAtOffsetAndRowColumn(o, row, 1, v.getYF());
   }
 
-  @Override public void setRowColumnF(
+  @Override
+  public void setRowColumnF(
     final int row,
     final int column,
     final float value)

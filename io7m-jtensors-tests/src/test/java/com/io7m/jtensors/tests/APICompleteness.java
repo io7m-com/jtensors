@@ -92,10 +92,10 @@ public final class APICompleteness
 
       System.out.println(
         c_name
-        + ": extra method "
-        + m_name
-        + " not in base "
-        + c_base.getName());
+          + ": extra method "
+          + m_name
+          + " not in base "
+          + c_base.getName());
     }
 
     System.out.println("--");
@@ -222,7 +222,8 @@ public final class APICompleteness
     return methods;
   }
 
-  @SuppressWarnings("static-method") @Test
+  @SuppressWarnings("static-method")
+  @Test
   public void testQuaternionCompleteness()
   {
     checkQuaternionM4();

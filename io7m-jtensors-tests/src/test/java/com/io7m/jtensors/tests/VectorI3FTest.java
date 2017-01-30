@@ -28,7 +28,9 @@ import org.junit.Test;
 public class VectorI3FTest extends VectorI3Contract
 {
 
-  @Override @Test public void testAbsolute()
+  @Override
+  @Test
+  public void testAbsolute()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -53,7 +55,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testAdd()
+  @Override
+  @Test
+  public void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -81,7 +85,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testAddScaled()
+  @Override
+  @Test
+  public void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -110,7 +116,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+  @Override
+  @Test
+  public void testAlmostEqualNot()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -188,7 +196,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+  @Override
+  @Test
+  public void testAlmostEqualTransitive()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -207,7 +217,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testCheckInterface()
+  @Override
+  @Test
+  public void testCheckInterface()
   {
     final VectorReadable3FType v = new VectorI3F(3.0f, 5.0f, 7.0f);
 
@@ -216,7 +228,9 @@ public class VectorI3FTest extends VectorI3Contract
     Assert.assertTrue(v.getZF() == v.getZF());
   }
 
-  @Override @Test public void testClampByVectorMaximumOrdering()
+  @Override
+  @Test
+  public void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max_x = (float) (Math.random() * Float.MIN_VALUE);
@@ -231,17 +245,19 @@ public class VectorI3FTest extends VectorI3Contract
 
       Assert.assertTrue(
         VectorI3F.clampMaximumByVector(v, maximum).getXF()
-        <= maximum.getXF());
+          <= maximum.getXF());
       Assert.assertTrue(
         VectorI3F.clampMaximumByVector(v, maximum).getYF()
-        <= maximum.getYF());
+          <= maximum.getYF());
       Assert.assertTrue(
         VectorI3F.clampMaximumByVector(v, maximum).getZF()
-        <= maximum.getZF());
+          <= maximum.getZF());
     }
   }
 
-  @Override @Test public void testClampByVectorMinimumOrdering()
+  @Override
+  @Test
+  public void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (Math.random() * Float.MAX_VALUE);
@@ -256,17 +272,19 @@ public class VectorI3FTest extends VectorI3Contract
 
       Assert.assertTrue(
         VectorI3F.clampMinimumByVector(v, minimum).getXF()
-        >= minimum.getXF());
+          >= minimum.getXF());
       Assert.assertTrue(
         VectorI3F.clampMinimumByVector(v, minimum).getYF()
-        >= minimum.getYF());
+          >= minimum.getYF());
       Assert.assertTrue(
         VectorI3F.clampMinimumByVector(v, minimum).getZF()
-        >= minimum.getZF());
+          >= minimum.getZF());
     }
   }
 
-  @Override @Test public void testClampByVectorOrdering()
+  @Override
+  @Test
+  public void testClampByVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = (float) (Math.random() * Float.MIN_VALUE);
@@ -286,26 +304,28 @@ public class VectorI3FTest extends VectorI3Contract
 
       Assert.assertTrue(
         VectorI3F.clampByVector(v, minimum, maximum).getXF()
-        <= maximum.getXF());
+          <= maximum.getXF());
       Assert.assertTrue(
         VectorI3F.clampByVector(v, minimum, maximum).getXF()
-        >= minimum.getXF());
+          >= minimum.getXF());
       Assert.assertTrue(
         VectorI3F.clampByVector(v, minimum, maximum).getYF()
-        <= maximum.getYF());
+          <= maximum.getYF());
       Assert.assertTrue(
         VectorI3F.clampByVector(v, minimum, maximum).getYF()
-        >= minimum.getYF());
+          >= minimum.getYF());
       Assert.assertTrue(
         VectorI3F.clampByVector(v, minimum, maximum).getZF()
-        <= maximum.getZF());
+          <= maximum.getZF());
       Assert.assertTrue(
         VectorI3F.clampByVector(v, minimum, maximum).getZF()
-        >= minimum.getZF());
+          >= minimum.getZF());
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+  @Override
+  @Test
+  public void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float maximum = (float) (Math.random() * Float.MIN_VALUE);
@@ -321,7 +341,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+  @Override
+  @Test
+  public void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = (float) (Math.random() * Float.MAX_VALUE);
@@ -337,7 +359,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testClampOrdering()
+  @Override
+  @Test
+  public void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = (float) (Math.random() * Float.MIN_VALUE);
@@ -350,26 +374,28 @@ public class VectorI3FTest extends VectorI3Contract
 
       Assert.assertTrue(
         VectorI3F.clamp(v, minimum, maximum).getXF()
-        <= maximum);
+          <= maximum);
       Assert.assertTrue(
         VectorI3F.clamp(v, minimum, maximum).getXF()
-        >= minimum);
+          >= minimum);
       Assert.assertTrue(
         VectorI3F.clamp(v, minimum, maximum).getYF()
-        <= maximum);
+          <= maximum);
       Assert.assertTrue(
         VectorI3F.clamp(v, minimum, maximum).getYF()
-        >= minimum);
+          >= minimum);
       Assert.assertTrue(
         VectorI3F.clamp(v, minimum, maximum).getZF()
-        <= maximum);
+          <= maximum);
       Assert.assertTrue(
         VectorI3F.clamp(v, minimum, maximum).getZF()
-        >= minimum);
+          >= minimum);
     }
   }
 
-  @Override @Test public void testCopy()
+  @Override
+  @Test
+  public void testCopy()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -385,7 +411,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testCrossProductPerpendicular()
+  @Override
+  @Test
+  public void testCrossProductPerpendicular()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext3dp();
@@ -406,21 +434,15 @@ public class VectorI3FTest extends VectorI3Contract
       final double dp0 = VectorI3F.dotProduct(v0, vr);
       final double dp1 = VectorI3F.dotProduct(v1, vr);
 
-      
-      
-      
-      
-      
-      
-      
-      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp0, 0.0));
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp1, 0.0));
     }
   }
 
-  @Override @Test public void testDefault000()
+  @Override
+  @Test
+  public void testDefault000()
   {
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
@@ -428,7 +450,9 @@ public class VectorI3FTest extends VectorI3Contract
     VectorI3F.almostEqual(context, v, new VectorI3F(0, 0, 0));
   }
 
-  @Override @Test public void testDistance()
+  @Override
+  @Test
+  public void testDistance()
   {
     final VectorReadable3FType v0 = new VectorI3F(0.0f, 1.0f, 0.0f);
     final VectorReadable3FType v1 = new VectorI3F(0.0f, 0.0f, 0.0f);
@@ -439,7 +463,9 @@ public class VectorI3FTest extends VectorI3Contract
         context, VectorI3F.distance(v0, v1), 1.0f));
   }
 
-  @Override @Test public void testDistanceOrdering()
+  @Override
+  @Test
+  public void testDistanceOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);
@@ -456,7 +482,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testDotProduct()
+  @Override
+  @Test
+  public void testDotProduct()
   {
     final VectorI3F v0 = new VectorI3F(10.0f, 10.0f, 10.0f);
     final VectorI3F v1 = new VectorI3F(10.0f, 10.0f, 10.0f);
@@ -489,7 +517,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+  @Override
+  @Test
+  public void testDotProductPerpendicular()
   {
     final VectorReadable3FType vpx = new VectorI3F(1.0f, 0.0f, 0.0f);
     final VectorReadable3FType vmx = new VectorI3F(-1.0f, 0.0f, 0.0f);
@@ -506,7 +536,9 @@ public class VectorI3FTest extends VectorI3Contract
     Assert.assertTrue(VectorI3F.dotProduct(vmy, vmz) == 0.0);
   }
 
-  @Override @Test public void testDotProductSelf()
+  @Override
+  @Test
+  public void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -518,14 +550,14 @@ public class VectorI3FTest extends VectorI3Contract
       final VectorReadable3FType q = new VectorI3F(x, y, z);
       final double dp = VectorI3F.dotProduct(q, q);
 
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  @Override
+  @Test
+  public void testDotProductSelfMagnitudeSquared()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -539,15 +571,14 @@ public class VectorI3FTest extends VectorI3Contract
       final double ms = VectorI3F.magnitudeSquared(q);
       final double dp = VectorI3F.dotProduct(q, q);
 
-      
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+  @Override
+  @Test
+  public void testEqualsCorrect()
   {
     final VectorI3F v0 = new VectorI3F(0.0f, 0.0f, 0.0f);
     final VectorI3F v1 = new VectorI3F(0.0f, 0.0f, 0.0f);
@@ -564,7 +595,9 @@ public class VectorI3FTest extends VectorI3Contract
     Assert.assertTrue(v0.equals(v1));
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+  @Override
+  @Test
+  public void testEqualsNotEqualCorrect()
   {
     final float x = (float) Math.random();
     final float y = x + 1.0f;
@@ -649,14 +682,18 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+  @Override
+  @Test
+  public void testHashCodeEqualsCorrect()
   {
     final VectorI3F m0 = new VectorI3F();
     final VectorI3F m1 = new VectorI3F();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+  @Override
+  @Test
+  public void testHashCodeNotEqualCorrect()
   {
     {
       final VectorI3F m0 = new VectorI3F(23, 0, 0);
@@ -677,7 +714,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+  @Override
+  @Test
+  public void testInitializeReadable()
   {
     final VectorI3F v0 = new VectorI3F(1.0f, 2.0f, 3.0f);
     final VectorReadable3FType v1 = new VectorI3F(v0);
@@ -687,7 +726,9 @@ public class VectorI3FTest extends VectorI3Contract
     Assert.assertTrue(v0.getZF() == v1.getZF());
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+  @Override
+  @Test
+  public void testInterpolateLinearLimits()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -712,7 +753,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+  @Override
+  @Test
+  public void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (1.0f + (Math.random() * Float.MAX_VALUE));
@@ -725,7 +768,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+  @Override
+  @Test
+  public void testMagnitudeNormal()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext6dp();
@@ -742,15 +787,14 @@ public class VectorI3FTest extends VectorI3Contract
 
       final double m = VectorI3F.magnitude(vr);
 
-      
-      
-      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
     }
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+  @Override
+  @Test
+  public void testMagnitudeNormalizeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -761,7 +805,9 @@ public class VectorI3FTest extends VectorI3Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testMagnitudeOne()
+  @Override
+  @Test
+  public void testMagnitudeOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -771,7 +817,9 @@ public class VectorI3FTest extends VectorI3Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
-  @Override @Test public void testMagnitudeSimple()
+  @Override
+  @Test
+  public void testMagnitudeSimple()
   {
     final VectorReadable3FType v = new VectorI3F(8.0f, 0.0f, 0.0f);
 
@@ -785,7 +833,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+  @Override
+  @Test
+  public void testMagnitudeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -795,7 +845,9 @@ public class VectorI3FTest extends VectorI3Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testNormalizeSimple()
+  @Override
+  @Test
+  public void testNormalizeSimple()
   {
     final VectorReadable3FType v0 = new VectorI3F(8.0f, 0.0f, 0.0f);
     final VectorI3F vr = VectorI3F.normalize(v0);
@@ -803,7 +855,9 @@ public class VectorI3FTest extends VectorI3Contract
     Assert.assertTrue(m == 1.0);
   }
 
-  @Override @Test public void testNormalizeZero()
+  @Override
+  @Test
+  public void testNormalizeZero()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -812,7 +866,9 @@ public class VectorI3FTest extends VectorI3Contract
     VectorI3F.almostEqual(ec, VectorI3F.normalize(v0), v0);
   }
 
-  @Override @Test public void testOrthonormalize()
+  @Override
+  @Test
+  public void testOrthonormalize()
   {
     final VectorReadable3FType v0 = new VectorI3F(0, 1, 0);
     final VectorReadable3FType v1 = new VectorI3F(0.5f, 0.5f, 0);
@@ -822,7 +878,9 @@ public class VectorI3FTest extends VectorI3Contract
     Assert.assertEquals(new VectorI3F(1, 0, 0), on.getRight());
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+  @Override
+  @Test
+  public void testProjectionPerpendicularZero()
   {
     {
       final VectorReadable3FType p = new VectorI3F(1.0f, 0.0f, 0.0f);
@@ -839,7 +897,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testScaleOne()
+  @Override
+  @Test
+  public void testScaleOne()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -864,7 +924,9 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testScaleZero()
+  @Override
+  @Test
+  public void testScaleZero()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -883,13 +945,17 @@ public class VectorI3FTest extends VectorI3Contract
     }
   }
 
-  @Override @Test public void testString()
+  @Override
+  @Test
+  public void testString()
   {
     final VectorI3F v = new VectorI3F(0.0f, 1.0f, 2.0f);
     Assert.assertTrue("[VectorI3F 0.0 1.0 2.0]".equals(v.toString()));
   }
 
-  @Override @Test public void testSubtract()
+  @Override
+  @Test
+  public void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (Math.random() * Float.MAX_VALUE);

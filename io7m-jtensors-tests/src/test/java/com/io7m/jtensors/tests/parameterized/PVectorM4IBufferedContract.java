@@ -252,7 +252,8 @@ public abstract class PVectorM4IBufferedContract<T, V extends PVector4IType<T>>
     v.copyFrom2I(new VectorI4I(23, 23, 23, 23));
   }
 
-  @Test public final void testCopyFrom4IIdentity()
+  @Test
+  public final void testCopyFrom4IIdentity()
   {
     final PVector4IType<T> v = this.newVectorM4IAtIndexFromSize(
       100L, 0L);
@@ -264,7 +265,8 @@ public abstract class PVectorM4IBufferedContract<T, V extends PVector4IType<T>>
     Assert.assertEquals(26L, (long) v.getWI());
   }
 
-  @Test public final void testCopyFrom3IIdentity()
+  @Test
+  public final void testCopyFrom3IIdentity()
   {
     final PVector4IType<T> v = this.newVectorM4IAtIndexFromSize(
       100L, 0L);
@@ -275,7 +277,8 @@ public abstract class PVectorM4IBufferedContract<T, V extends PVector4IType<T>>
     Assert.assertEquals(25L, (long) v.getZI());
   }
 
-  @Test public final void testCopyFrom2LIdentity()
+  @Test
+  public final void testCopyFrom2LIdentity()
   {
     final PVector4IType<T> v = this.newVectorM4IAtIndexFromSize(
       100L, 0L);
@@ -285,7 +288,8 @@ public abstract class PVectorM4IBufferedContract<T, V extends PVector4IType<T>>
     Assert.assertEquals(24L, (long) v.getYI());
   }
 
-  @Test public final void testSet4IIdentity()
+  @Test
+  public final void testSet4IIdentity()
   {
     final PVector4IType<T> v = this.newVectorM4IAtIndexFromSize(
       100L, 0L);
@@ -297,7 +301,8 @@ public abstract class PVectorM4IBufferedContract<T, V extends PVector4IType<T>>
     Assert.assertEquals(26L, (long) v.getWI());
   }
 
-  @Test public final void testSet3IIdentity()
+  @Test
+  public final void testSet3IIdentity()
   {
     final PVector4IType<T> v = this.newVectorM4IAtIndexFromSize(
       100L, 0L);
@@ -308,7 +313,8 @@ public abstract class PVectorM4IBufferedContract<T, V extends PVector4IType<T>>
     Assert.assertEquals(25L, (long) v.getZI());
   }
 
-  @Test public final void testSet2LIdentity()
+  @Test
+  public final void testSet2LIdentity()
   {
     final PVector4IType<T> v = this.newVectorM4IAtIndexFromSize(
       100L, 0L);

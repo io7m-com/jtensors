@@ -46,37 +46,44 @@ public final class PVectorM3DTest<T>
     LOG = LoggerFactory.getLogger(PVectorM3DTest.class);
   }
 
-  @Override protected double delta()
+  @Override
+  protected double delta()
   {
     return 0.0000000000001;
   }
 
-  @Override protected double randomLargeNegative()
+  @Override
+  protected double randomLargeNegative()
   {
     return Math.random() * -1000000.0;
   }
 
-  @Override protected double randomLargePositive()
+  @Override
+  protected double randomLargePositive()
   {
     return Math.random() * 1000000.0;
   }
 
-  @Override protected Logger logger()
+  @Override
+  protected Logger logger()
   {
     return LOG;
   }
 
-  @Override protected PVectorM3D<T> newVectorM3D(final PVectorM3D<T> v)
+  @Override
+  protected PVectorM3D<T> newVectorM3D(final PVectorM3D<T> v)
   {
     return new PVectorM3D<T>(v);
   }
 
-  @Override protected PVectorM3D<T> newVectorM3D()
+  @Override
+  protected PVectorM3D<T> newVectorM3D()
   {
     return new PVectorM3D<T>();
   }
 
-  @Override protected PVectorM3D<T> newVectorM3D(
+  @Override
+  protected PVectorM3D<T> newVectorM3D(
     final double x,
     final double y,
     final double z)
@@ -84,7 +91,8 @@ public final class PVectorM3DTest<T>
     return new PVectorM3D<T>(x, y, z);
   }
 
-  @Test public void testHierarchy()
+  @Test
+  public void testHierarchy()
   {
     final PVectorM3D<?> v = new PVectorM3D<Object>();
 

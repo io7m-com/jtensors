@@ -24,7 +24,9 @@ import org.junit.Test;
 
 public class OrthonormalizedI3DTest
 {
-  @SuppressWarnings("static-method") @Test public void testAlreadyOrthonormal0()
+  @SuppressWarnings("static-method")
+  @Test
+  public void testAlreadyOrthonormal0()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -50,7 +52,9 @@ public class OrthonormalizedI3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testAlwaysOrthnormal()
+  @SuppressWarnings("static-method")
+  @Test
+  public void testAlwaysOrthnormal()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -107,7 +111,9 @@ public class OrthonormalizedI3DTest
     }
   }
 
-  @SuppressWarnings("static-method") @Test public void testEquals()
+  @SuppressWarnings("static-method")
+  @Test
+  public void testEquals()
   {
     final VectorI3D v0 = new VectorI3D(1.0, 0.0, 0.0);
     final VectorI3D v1 = new VectorI3D(0.0, 1.0, 0.0);
@@ -131,7 +137,9 @@ public class OrthonormalizedI3DTest
     Assert.assertTrue(o0.equals(o1));
   }
 
-  @SuppressWarnings("static-method") @Test public void testHashcode()
+  @SuppressWarnings("static-method")
+  @Test
+  public void testHashcode()
   {
     final VectorI3D v0 = new VectorI3D(1.0, 0.0, 0.0);
     final VectorI3D v1 = new VectorI3D(0.0, 1.0, 0.0);
@@ -153,7 +161,9 @@ public class OrthonormalizedI3DTest
     Assert.assertTrue(o0.hashCode() == (o1.hashCode()));
   }
 
-  @SuppressWarnings("static-method") @Test public void testToString()
+  @SuppressWarnings("static-method")
+  @Test
+  public void testToString()
   {
     final VectorI3D v0 = new VectorI3D(1.0, 0.0, 0.0);
     final VectorI3D v1 = new VectorI3D(0.0, 1.0, 0.0);

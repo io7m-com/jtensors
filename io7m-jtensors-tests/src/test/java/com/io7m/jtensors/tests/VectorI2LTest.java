@@ -39,10 +39,12 @@ public class VectorI2LTest extends VectorI2Contract
     return (long) (Math.random() * (1 << 14));
   }
 
-  @Override @Test public void testAbsolute()
+  @Override
+  @Test
+  public void testAbsolute()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = (long) (Math.random() * Long.MIN_VALUE);
       final long y = (long) (Math.random() * Long.MIN_VALUE);
       final VectorReadable2LType v = new VectorI2L(x, y);
@@ -54,10 +56,12 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testAdd()
+  @Override
+  @Test
+  public void testAdd()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = randomPositiveSmallNumber();
       final long y0 = randomPositiveSmallNumber();
       final VectorReadable2LType v0 = new VectorI2L(x0, y0);
@@ -73,10 +77,12 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testAddScaled()
+  @Override
+  @Test
+  public void testAddScaled()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = randomPositiveSmallNumber();
       final long y0 = randomPositiveSmallNumber();
       final VectorReadable2LType v0 = new VectorI2L(x0, y0);
@@ -94,17 +100,23 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+  @Override
+  @Test
+  public void testAlmostEqualNot()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+  @Override
+  @Test
+  public void testAlmostEqualTransitive()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testAngle()
+  @Override
+  @Test
+  public void testAngle()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext3dp();
@@ -114,9 +126,6 @@ public class VectorI2LTest extends VectorI2Contract
       final VectorReadable2LType v1 = new VectorI2L(1, 0);
       final double angle = VectorI2L.angle(v0, v1);
 
-      
-      
-      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, angle, 0.0));
     }
@@ -128,9 +137,6 @@ public class VectorI2LTest extends VectorI2Contract
       final VectorReadable2LType v1 = new VectorI2L(y, -x);
       final double angle = VectorI2L.angle(v0, v1);
 
-      
-      
-      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -144,9 +150,6 @@ public class VectorI2LTest extends VectorI2Contract
       final VectorReadable2LType v1 = new VectorI2L(-y, x);
       final double angle = VectorI2L.angle(v0, v1);
 
-      
-      
-      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -154,7 +157,9 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testCheckInterface()
+  @Override
+  @Test
+  public void testCheckInterface()
   {
     final VectorReadable2LType v = new VectorI2L(3, 5);
 
@@ -162,10 +167,12 @@ public class VectorI2LTest extends VectorI2Contract
     Assert.assertTrue(v.getYL() == v.getYL());
   }
 
-  @Override @Test public void testClampByVectorMaximumOrdering()
+  @Override
+  @Test
+  public void testClampByVectorMaximumOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max_x = randomNegativeNumber();
       final long max_y = randomNegativeNumber();
       final VectorReadable2LType maximum = new VectorI2L(max_x, max_y);
@@ -181,10 +188,12 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampByVectorMinimumOrdering()
+  @Override
+  @Test
+  public void testClampByVectorMinimumOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long min_x = randomPositiveNumber();
       final long min_y = randomPositiveNumber();
       final VectorReadable2LType minimum = new VectorI2L(min_x, min_y);
@@ -200,10 +209,12 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampByVectorOrdering()
+  @Override
+  @Test
+  public void testClampByVectorOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long min_x = randomNegativeNumber();
       final long min_y = randomNegativeNumber();
       final VectorReadable2LType minimum = new VectorI2L(min_x, min_y);
@@ -225,10 +236,12 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+  @Override
+  @Test
+  public void testClampMaximumOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long maximum = randomNegativeNumber();
 
       final long x = randomPositiveNumber();
@@ -242,10 +255,12 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+  @Override
+  @Test
+  public void testClampMinimumOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long minimum = randomPositiveNumber();
 
       final long x = randomNegativeNumber();
@@ -259,10 +274,12 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampOrdering()
+  @Override
+  @Test
+  public void testClampOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long minimum = randomNegativeNumber();
       final long maximum = randomPositiveNumber();
 
@@ -279,7 +296,9 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testCopy()
+  @Override
+  @Test
+  public void testCopy()
   {
     final VectorReadable2LType vb = new VectorI2L(5, 6);
     final VectorI2L va = new VectorI2L(1, 2);
@@ -296,22 +315,28 @@ public class VectorI2LTest extends VectorI2Contract
     Assert.assertFalse(vc.getYL() == vb.getYL());
   }
 
-  @Override @Test public void testDefault00()
+  @Override
+  @Test
+  public void testDefault00()
   {
     Assert.assertTrue(new VectorI2L().equals(new VectorI2L(0, 0)));
   }
 
-  @Override @Test public void testDistance()
+  @Override
+  @Test
+  public void testDistance()
   {
     final VectorReadable2LType v0 = new VectorI2L(0, 1);
     final VectorReadable2LType v1 = new VectorI2L(0, 0);
     Assert.assertTrue(VectorI2L.distance(v0, v1) == 1);
   }
 
-  @Override @Test public void testDistanceOrdering()
+  @Override
+  @Test
+  public void testDistanceOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = randomPositiveSmallNumber();
       final long y0 = randomPositiveSmallNumber();
       final VectorReadable2LType v0 = new VectorI2L(x0, y0);
@@ -324,7 +349,9 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testDotProduct()
+  @Override
+  @Test
+  public void testDotProduct()
   {
     final VectorReadable2LType v0 = new VectorI2L(10, 10);
     final VectorReadable2LType v1 = new VectorI2L(10, 10);
@@ -353,13 +380,15 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+  @Override
+  @Test
+  public void testDotProductPerpendicular()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max = 1000;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
@@ -368,35 +397,34 @@ public class VectorI2LTest extends VectorI2Contract
       final double ms = VectorI2L.magnitudeSquared(q);
       final double dp = VectorI2L.dotProduct(q, q);
 
-      
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
   }
 
-  @Override @Test public void testDotProductSelf()
+  @Override
+  @Test
+  public void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max = 1000;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
       final VectorReadable2LType q = new VectorI2L(x, y);
       final double dp = VectorI2L.dotProduct(q, q);
 
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  @Override
+  @Test
+  public void testDotProductSelfMagnitudeSquared()
   {
     final VectorReadable2LType v0 = new VectorI2L(10, 10);
 
@@ -415,7 +443,9 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+  @Override
+  @Test
+  public void testEqualsCorrect()
   {
     {
       final VectorI2L m0 = new VectorI2L();
@@ -439,7 +469,9 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+  @Override
+  @Test
+  public void testEqualsNotEqualCorrect()
   {
     final long x = (long) (Math.random() * 1000);
     final long y = x + 1;
@@ -476,14 +508,18 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+  @Override
+  @Test
+  public void testHashCodeEqualsCorrect()
   {
     final VectorI2L m0 = new VectorI2L();
     final VectorI2L m1 = new VectorI2L();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+  @Override
+  @Test
+  public void testHashCodeNotEqualCorrect()
   {
     {
       final VectorI2L m0 = new VectorI2L(23, 0);
@@ -498,7 +534,9 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+  @Override
+  @Test
+  public void testInitializeReadable()
   {
     final VectorI2L v0 = new VectorI2L(1, 2);
     final VectorReadable2LType v1 = new VectorI2L(v0);
@@ -507,10 +545,12 @@ public class VectorI2LTest extends VectorI2Contract
     Assert.assertTrue(v0.getYL() == v1.getYL());
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+  @Override
+  @Test
+  public void testInterpolateLinearLimits()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = randomPositiveNumber();
       final long y0 = randomPositiveNumber();
       final VectorReadable2LType v0 = new VectorI2L(x0, y0);
@@ -530,10 +570,12 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+  @Override
+  @Test
+  public void testMagnitudeNonzero()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = randomPositiveSmallNumber();
       final long y = randomPositiveSmallNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
@@ -543,24 +585,32 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+  @Override
+  @Test
+  public void testMagnitudeNormal()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+  @Override
+  @Test
+  public void testMagnitudeNormalizeZero()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeOne()
+  @Override
+  @Test
+  public void testMagnitudeOne()
   {
     final VectorReadable2LType v = new VectorI2L(1, 0);
     final long m = VectorI2L.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
-  @Override @Test public void testMagnitudeSimple()
+  @Override
+  @Test
+  public void testMagnitudeSimple()
   {
     final VectorReadable2LType v = new VectorI2L(8, 0);
 
@@ -574,29 +624,39 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+  @Override
+  @Test
+  public void testMagnitudeZero()
   {
     final VectorReadable2LType v = new VectorI2L(0, 0);
     final long m = VectorI2L.magnitude(v);
     Assert.assertTrue(m == 0);
   }
 
-  @Override @Test public void testNormalizeSimple()
+  @Override
+  @Test
+  public void testNormalizeSimple()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testNormalizeZero()
+  @Override
+  @Test
+  public void testNormalizeZero()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testOrthonormalize()
+  @Override
+  @Test
+  public void testOrthonormalize()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+  @Override
+  @Test
+  public void testProjectionPerpendicularZero()
   {
     {
       final VectorReadable2LType p = new VectorI2L(1, 0);
@@ -615,10 +675,12 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testScaleOne()
+  @Override
+  @Test
+  public void testScaleOne()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = randomPositiveNumber();
       final long y = randomPositiveNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
@@ -630,10 +692,12 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testScaleZero()
+  @Override
+  @Test
+  public void testScaleZero()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = randomPositiveNumber();
       final long y = randomPositiveNumber();
       final VectorReadable2LType v = new VectorI2L(x, y);
@@ -645,16 +709,20 @@ public class VectorI2LTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testString()
+  @Override
+  @Test
+  public void testString()
   {
     final VectorI2L v = new VectorI2L(1, 2);
     Assert.assertTrue("[VectorI2L 1 2]".equals(v.toString()));
   }
 
-  @Override @Test public void testSubtract()
+  @Override
+  @Test
+  public void testSubtract()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = randomPositiveNumber();
       final long y0 = randomPositiveNumber();
       final VectorReadable2LType v0 = new VectorI2L(x0, y0);

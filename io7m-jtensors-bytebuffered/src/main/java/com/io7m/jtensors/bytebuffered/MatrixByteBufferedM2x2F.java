@@ -34,7 +34,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * without explicit synchronization. </p>
  */
 
-public final class MatrixByteBufferedM2x2F extends ByteBuffered implements MatrixByteBuffered2x2FType
+public final class MatrixByteBufferedM2x2F extends ByteBuffered implements
+  MatrixByteBuffered2x2FType
 {
   private final ByteBuffer buffer;
 
@@ -136,7 +137,8 @@ public final class MatrixByteBufferedM2x2F extends ByteBuffered implements Matri
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(512);
     MatrixM2x2F.showElements(this, builder);
@@ -164,12 +166,14 @@ public final class MatrixByteBufferedM2x2F extends ByteBuffered implements Matri
         o, indexUnsafe(row, col)));
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     return MatrixM2x2F.hashElements(this);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -186,14 +190,16 @@ public final class MatrixByteBufferedM2x2F extends ByteBuffered implements Matri
     return MatrixM2x2F.compareElements(this, other);
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2F(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2F(
     final int row,
     final V out)
   {
     this.getRow2FUnsafe(checkRow(row), out);
   }
 
-  @Override public <V extends VectorWritable2FType> void getRow2FUnsafe(
+  @Override
+  public <V extends VectorWritable2FType> void getRow2FUnsafe(
     final int row,
     final V out)
   {
@@ -203,47 +209,56 @@ public final class MatrixByteBufferedM2x2F extends ByteBuffered implements Matri
       this.getAtOffsetAndRowColumn(o, row, 1));
   }
 
-  @Override public float getR0C0F()
+  @Override
+  public float getR0C0F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 0, 0);
   }
 
-  @Override public void setR0C0F(final float x)
+  @Override
+  public void setR0C0F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 0, 0, x);
   }
 
-  @Override public float getR1C0F()
+  @Override
+  public float getR1C0F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 1, 0);
   }
 
-  @Override public void setR1C0F(final float x)
+  @Override
+  public void setR1C0F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 1, 0, x);
   }
 
-  @Override public float getR0C1F()
+  @Override
+  public float getR0C1F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 0, 1);
   }
 
-  @Override public void setR0C1F(final float x)
+  @Override
+  public void setR0C1F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 0, 1, x);
   }
 
-  @Override public float getR1C1F()
+  @Override
+  public float getR1C1F()
   {
     return this.getAtOffsetAndRowColumn(super.getIndex(), 1, 1);
   }
 
-  @Override public void setR1C1F(final float x)
+  @Override
+  public void setR1C1F(final float x)
   {
     this.setAtOffsetAndRowColumn(super.getIndex(), 1, 1, x);
   }
 
-  @Override public float getRowColumnF(
+  @Override
+  public float getRowColumnF(
     final int row,
     final int column)
   {
@@ -252,7 +267,8 @@ public final class MatrixByteBufferedM2x2F extends ByteBuffered implements Matri
     return this.getAtOffsetAndRowColumn(super.getIndex(), row, column);
   }
 
-  @Override public void setRowWith2F(
+  @Override
+  public void setRowWith2F(
     final int row,
     final VectorReadable2FType v)
   {
@@ -260,7 +276,8 @@ public final class MatrixByteBufferedM2x2F extends ByteBuffered implements Matri
     this.setRowWith2FUnsafe(row, v);
   }
 
-  @Override public void setRowWith2FUnsafe(
+  @Override
+  public void setRowWith2FUnsafe(
     final int row,
     final VectorReadable2FType v)
   {
@@ -269,7 +286,8 @@ public final class MatrixByteBufferedM2x2F extends ByteBuffered implements Matri
     this.setAtOffsetAndRowColumn(o, row, 1, v.getYF());
   }
 
-  @Override public void setRowColumnF(
+  @Override
+  public void setRowColumnF(
     final int row,
     final int column,
     final float value)

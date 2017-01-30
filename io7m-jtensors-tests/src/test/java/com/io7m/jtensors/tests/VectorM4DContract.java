@@ -32,7 +32,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
   @Rule public PercentagePassRule percent =
     new PercentagePassRule(TestUtilities.TEST_RANDOM_ITERATIONS);
 
-  @Test @PercentagePassing public final void testAbsolute()
+  @Test
+  @PercentagePassing
+  public final void testAbsolute()
   {
     final double x = this.randomLargeNegative();
     final double y = this.randomLargeNegative();
@@ -49,7 +51,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(Math.abs(v.getWD()), vr.getWD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testAbsoluteMutation()
+  @Test
+  @PercentagePassing
+  public final void testAbsoluteMutation()
   {
     final double x = this.randomLargeNegative();
     final double y = this.randomLargeNegative();
@@ -80,7 +84,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
 
   protected abstract T newVectorM4DFrom(T v);
 
-  @Test @PercentagePassing public final void testAdd()
+  @Test
+  @PercentagePassing
+  public final void testAdd()
   {
     final double x0 = this.randomLargePositive();
     final double y0 = this.randomLargePositive();
@@ -121,7 +127,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test public final void testAddMutation()
+  @Test
+  public final void testAddMutation()
   {
     final T out = this.newVectorM4D();
     final T v0 = this.newVectorM4D(1.0, 1.0, 1.0, 1.0);
@@ -174,7 +181,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(1.0, v1.getWD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testAddScaled()
+  @Test
+  @PercentagePassing
+  public final void testAddScaled()
   {
     final double x0 = this.randomLargePositive();
     final double y0 = this.randomLargePositive();
@@ -228,7 +237,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test public final void testAlmostEqualNot()
+  @Test
+  public final void testAlmostEqualNot()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -312,7 +322,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test @PercentagePassing public final void testAlmostEqualTransitive()
+  @Test
+  @PercentagePassing
+  public final void testAlmostEqualTransitive()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -330,7 +342,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertTrue(VectorM4D.almostEqual(ec, v0, v2));
   }
 
-  @Test public final void testCheckInterface()
+  @Test
+  public final void testCheckInterface()
   {
     final T v = this.newVectorM4D(3.0, 5.0, 7.0, 11.0);
 
@@ -340,7 +353,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(v.getWD(), v.getWD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testClampByVectorMaximumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampByVectorMaximumOrdering()
   {
     final double max_x = this.randomLargeNegative();
     final double max_y = this.randomLargeNegative();
@@ -373,7 +388,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test @PercentagePassing public final void testClampByVectorMinimumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampByVectorMinimumOrdering()
   {
     final double min_x = this.randomLargePositive();
     final double min_y = this.randomLargePositive();
@@ -406,7 +423,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test @PercentagePassing public final void testClampByVectorOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampByVectorOrdering()
   {
     final double min_x = this.randomLargeNegative();
     final double min_y = this.randomLargeNegative();
@@ -453,7 +472,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test @PercentagePassing public final void testClampMaximumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampMaximumOrdering()
   {
     final double maximum = this.randomLargeNegative();
 
@@ -480,7 +501,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test @PercentagePassing public final void testClampMinimumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampMinimumOrdering()
   {
     final double minimum = this.randomLargePositive();
 
@@ -507,7 +530,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test @PercentagePassing public final void testClampOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampOrdering()
   {
     final double minimum = this.randomLargeNegative();
     final double maximum = this.randomLargePositive();
@@ -544,15 +569,24 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final T vb = this.newVectorM4D(5.0, 6.0, 7.0, 8.0);
     final T va = this.newVectorM4D(1.0, 2.0, 3.0, 4.0);
 
-    Assert.assertNotEquals(Double.valueOf(vb.getXD()), Double.valueOf(va.getXD()));
-    Assert.assertNotEquals(Double.valueOf(vb.getYD()), Double.valueOf(va.getYD()));
-    Assert.assertNotEquals(Double.valueOf(vb.getZD()), Double.valueOf(va.getZD()));
-    Assert.assertNotEquals(Double.valueOf(vb.getWD()), Double.valueOf(va.getWD()));
+    Assert.assertNotEquals(
+      Double.valueOf(vb.getXD()),
+      Double.valueOf(va.getXD()));
+    Assert.assertNotEquals(
+      Double.valueOf(vb.getYD()),
+      Double.valueOf(va.getYD()));
+    Assert.assertNotEquals(
+      Double.valueOf(vb.getZD()),
+      Double.valueOf(va.getZD()));
+    Assert.assertNotEquals(
+      Double.valueOf(vb.getWD()),
+      Double.valueOf(va.getWD()));
 
     VectorM4D.copy(va, vb);
 
@@ -562,7 +596,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(vb.getWD(), va.getWD(), this.delta());
   }
 
-  @Test public final void testCopy2Correct()
+  @Test
+  public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM4D(
       this.randomLargePositive(),
@@ -579,7 +614,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(1.0, v1.getWD(), this.delta());
   }
 
-  @Test public final void testCopy3Correct()
+  @Test
+  public final void testCopy3Correct()
   {
     final T v0 = this.newVectorM4D(
       this.randomLargePositive(),
@@ -596,7 +632,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(v0.getWD(), v1.getWD(), this.delta());
   }
 
-  @Test public final void testCopy4Correct()
+  @Test
+  public final void testCopy4Correct()
   {
     final T v0 = this.newVectorM4D(
       this.randomLargePositive(),
@@ -613,7 +650,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(1.0, v1.getWD(), this.delta());
   }
 
-  @Test public final void testDefault0001()
+  @Test
+  public final void testDefault0001()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -622,7 +660,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
         ec, this.newVectorM4D(), this.newVectorM4D(0.0, 0.0, 0.0, 1.0)));
   }
 
-  @Test public final void testDistance()
+  @Test
+  public final void testDistance()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -635,7 +674,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
         ec, VectorM4D.distance(c, v0, v1), 1.0));
   }
 
-  @Test @PercentagePassing public final void testDistanceOrdering()
+  @Test
+  @PercentagePassing
+  public final void testDistanceOrdering()
   {
     final VectorM4D.ContextVM4D c = new VectorM4D.ContextVM4D();
 
@@ -656,7 +697,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertTrue(d >= 0.0);
   }
 
-  @Test public final void testDotProduct()
+  @Test
+  public final void testDotProduct()
   {
     final T v0 = this.newVectorM4D(10.0, 10.0, 10.0, 10.0);
     final T v1 = this.newVectorM4D(10.0, 10.0, 10.0, 10.0);
@@ -693,7 +735,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test public final void testDotProductPerpendicular()
+  @Test
+  public final void testDotProductPerpendicular()
   {
     final T vpx = this.newVectorM4D(1.0, 0.0, 0.0, 0.0);
     final T vmx = this.newVectorM4D(-1.0, 0.0, 0.0, 0.0);
@@ -710,7 +753,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(0.0, VectorM4D.dotProduct(vmy, vmz), this.delta());
   }
 
-  @Test @PercentagePassing
+  @Test
+  @PercentagePassing
   public final void testDotProductSelfMagnitudeSquared()
   {
     final double x = this.randomLargePositive();
@@ -730,7 +774,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(ms, dp, this.delta());
   }
 
-  @Test public final void testEqualsCorrect()
+  @Test
+  public final void testEqualsCorrect()
   {
     {
       final T m0 = this.newVectorM4D();
@@ -754,7 +799,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test public final void testEqualsNotEqualCorrect()
+  @Test
+  public final void testEqualsNotEqualCorrect()
   {
     final double x = this.randomLargePositive();
     final double y = x + 1.0;
@@ -845,14 +891,16 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test public final void testHashCodeEqualsCorrect()
+  @Test
+  public final void testHashCodeEqualsCorrect()
   {
     final T m0 = this.newVectorM4D();
     final T m1 = this.newVectorM4D();
     Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Test public final void testHashCodeNotEqualCorrect()
+  @Test
+  public final void testHashCodeNotEqualCorrect()
   {
     {
       final T m0 = this.newVectorM4D();
@@ -883,7 +931,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test public final void testInitializeReadable()
+  @Test
+  public final void testInitializeReadable()
   {
     final T v0 = this.newVectorM4D(1.0, 2.0, 3.0, 4.0);
     final T v1 = this.newVectorM4DFrom(v0);
@@ -894,7 +943,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(v1.getWD(), v0.getWD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testInterpolateLinearLimits()
+  @Test
+  @PercentagePassing
+  public final void testInterpolateLinearLimits()
   {
     final VectorM4D.ContextVM4D c = new VectorM4D.ContextVM4D();
 
@@ -926,7 +977,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(v1.getWD(), vr1.getWD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testMagnitudeNonzero()
+  @Test
+  @PercentagePassing
+  public final void testMagnitudeNonzero()
   {
     final double x = 1.0 + (this.randomLargePositive());
     final double y = 1.0 + (this.randomLargePositive());
@@ -938,7 +991,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertTrue(m > 0.0);
   }
 
-  @Test @PercentagePassing public final void testMagnitudeNormal()
+  @Test
+  @PercentagePassing
+  public final void testMagnitudeNormal()
   {
     final double x = this.randomLargePositive();
     final double y = this.randomLargePositive();
@@ -955,7 +1010,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(1.0, m, this.delta());
   }
 
-  @Test public final void testMagnitudeNormalizeZero()
+  @Test
+  public final void testMagnitudeNormalizeZero()
   {
     final T v = this.newVectorM4D(0.0, 0.0, 0.0, 0.0);
     final T vr = VectorM4D.normalizeInPlace(v);
@@ -963,14 +1019,16 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(m, 0.0, this.delta());
   }
 
-  @Test public final void testMagnitudeOne()
+  @Test
+  public final void testMagnitudeOne()
   {
     final T v = this.newVectorM4D(1.0, 0.0, 0.0, 0.0);
     final double m = VectorM4D.magnitude(v);
     Assert.assertEquals(m, 1.0, this.delta());
   }
 
-  @Test public final void testMagnitudeSimple()
+  @Test
+  public final void testMagnitudeSimple()
   {
     final T v = this.newVectorM4D(8.0, 0.0, 0.0, 0.0);
 
@@ -984,14 +1042,16 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test public final void testMagnitudeZero()
+  @Test
+  public final void testMagnitudeZero()
   {
     final T v = this.newVectorM4D(0.0, 0.0, 0.0, 0.0);
     final double m = VectorM4D.magnitude(v);
     Assert.assertEquals(m, 0.0, this.delta());
   }
 
-  @Test public final void testNormalizeSimple()
+  @Test
+  public final void testNormalizeSimple()
   {
     final T v0 = this.newVectorM4D(8.0, 0.0, 0.0, 0.0);
     final T out = this.newVectorM4D();
@@ -1003,7 +1063,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(1.0, m, this.delta());
   }
 
-  @Test public final void testNormalizeZero()
+  @Test
+  public final void testNormalizeZero()
   {
     final T qr = this.newVectorM4D();
     final T q = this.newVectorM4D(0.0, 0.0, 0.0, 0.0);
@@ -1015,7 +1076,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(0.0, qr.getWD(), this.delta());
   }
 
-  @Test public final void testOrthonormalize()
+  @Test
+  public final void testOrthonormalize()
   {
     final VectorM4D.ContextVM4D c = new VectorM4D.ContextVM4D();
     final T v0 = this.newVectorM4D(0.0, 1.0, 0.0, 0.0);
@@ -1036,7 +1098,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(0.0, v1_out.getWD(), this.delta());
   }
 
-  @Test public final void testOrthonormalizeMutation()
+  @Test
+  public final void testOrthonormalizeMutation()
   {
     final VectorM4D.ContextVM4D c = new VectorM4D.ContextVM4D();
     final T v0 = this.newVectorM4D(0.0, 1.0, 0.0, 0.0);
@@ -1055,7 +1118,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(0.0, v1.getWD(), this.delta());
   }
 
-  @Test public final void testProjectionPerpendicularZero()
+  @Test
+  public final void testProjectionPerpendicularZero()
   {
     {
       final T p = this.newVectorM4D(1.0, 0.0, 0.0, 0.0);
@@ -1078,7 +1142,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test public final void testScaleMutation()
+  @Test
+  public final void testScaleMutation()
   {
     final T out = this.newVectorM4D();
     final T v0 = this.newVectorM4D(1.0, 1.0, 1.0, 1.0);
@@ -1117,7 +1182,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     Assert.assertEquals(2.0, v0.getWD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testScaleOne()
+  @Test
+  @PercentagePassing
+  public final void testScaleOne()
   {
     final double x = this.randomLargePositive();
     final double y = this.randomLargePositive();
@@ -1149,7 +1216,9 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test @PercentagePassing public final void testScaleZero()
+  @Test
+  @PercentagePassing
+  public final void testScaleZero()
   {
     final double x = this.randomLargePositive();
     final double y = this.randomLargePositive();
@@ -1176,13 +1245,16 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final T v = this.newVectorM4D(1.0, 2.0, 3.0, 4.0);
     Assert.assertTrue(v.toString().endsWith("1.0 2.0 3.0 4.0]"));
   }
 
-  @Test @PercentagePassing public final void testSubtract()
+  @Test
+  @PercentagePassing
+  public final void testSubtract()
   {
     final double x0 = this.randomLargePositive();
     final double y0 = this.randomLargePositive();
@@ -1220,7 +1292,8 @@ public abstract class VectorM4DContract<T extends Vector4DType>
     }
   }
 
-  @Test public final void testSubtractMutation()
+  @Test
+  public final void testSubtractMutation()
   {
     final T out = this.newVectorM4D();
     final T v0 = this.newVectorM4D(1.0, 1.0, 1.0, 1.0);

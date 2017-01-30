@@ -37,9 +37,10 @@ public final class PMatrixByteBufferedM3x3FTest<T0, T1, T2>
   PMatrixByteBuffered3x3FType<T0, T2>,
   PMatrixByteBuffered3x3FType<T1, T0>>
 {
-    //@formatter:on
+  //@formatter:on
 
-  @Override protected PMatrixByteBuffered3x3FType<T0, T1> newMatrixAtIndexFromSize(
+  @Override
+  protected PMatrixByteBuffered3x3FType<T0, T1> newMatrixAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -49,7 +50,8 @@ public final class PMatrixByteBufferedM3x3FTest<T0, T1, T2>
     return mr;
   }
 
-  @Override protected PMatrixByteBuffered3x3FType<T0, T1> newMatrix()
+  @Override
+  protected PMatrixByteBuffered3x3FType<T0, T1> newMatrix()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
     final PMatrixByteBuffered3x3FType<T0, T1> mr =
@@ -58,7 +60,8 @@ public final class PMatrixByteBufferedM3x3FTest<T0, T1, T2>
     return mr;
   }
 
-  @Override protected PMatrixByteBuffered3x3FType<T1, T2> newMatrixMultLeft()
+  @Override
+  protected PMatrixByteBuffered3x3FType<T1, T2> newMatrixMultLeft()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
     final PMatrixByteBuffered3x3FType<T1, T2> mr =
@@ -67,7 +70,8 @@ public final class PMatrixByteBufferedM3x3FTest<T0, T1, T2>
     return mr;
   }
 
-  @Override protected PMatrixByteBuffered3x3FType<T0, T1> newMatrixMultRight()
+  @Override
+  protected PMatrixByteBuffered3x3FType<T0, T1> newMatrixMultRight()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
     final PMatrixByteBuffered3x3FType<T0, T1> mr =
@@ -76,7 +80,8 @@ public final class PMatrixByteBufferedM3x3FTest<T0, T1, T2>
     return mr;
   }
 
-  @Override protected PMatrixByteBuffered3x3FType<T0, T2> newMatrixMultResult()
+  @Override
+  protected PMatrixByteBuffered3x3FType<T0, T2> newMatrixMultResult()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
     final PMatrixByteBuffered3x3FType<T0, T2> mr =
@@ -85,7 +90,8 @@ public final class PMatrixByteBufferedM3x3FTest<T0, T1, T2>
     return mr;
   }
 
-  @Override protected PMatrixByteBuffered3x3FType<T1, T0> newMatrixInverse()
+  @Override
+  protected PMatrixByteBuffered3x3FType<T1, T0> newMatrixInverse()
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
     final PMatrixByteBuffered3x3FType<T1, T0> mr =
@@ -94,7 +100,8 @@ public final class PMatrixByteBufferedM3x3FTest<T0, T1, T2>
     return mr;
   }
 
-  @Override protected PMatrixByteBuffered3x3FType<T0, T1> newMatrixFrom(
+  @Override
+  protected PMatrixByteBuffered3x3FType<T0, T1> newMatrixFrom(
     final PMatrixReadable3x3FType<T0, T1> m)
   {
     final ByteBuffer b = ByteBuffer.allocate(300);
@@ -110,7 +117,8 @@ public final class PMatrixByteBufferedM3x3FTest<T0, T1, T2>
     // Nothing
   }
 
-  @Override protected void checkDirectBufferInvariantsWildcard(
+  @Override
+  protected void checkDirectBufferInvariantsWildcard(
     final PMatrixReadable3x3FType<?, ?> m)
   {
     // Nothing
@@ -127,7 +135,8 @@ public final class PMatrixByteBufferedM3x3FTest<T0, T1, T2>
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(9 * 4);
     b.order(ByteOrder.BIG_ENDIAN);

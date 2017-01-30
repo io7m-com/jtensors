@@ -26,7 +26,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class QuaternionByteBufferedM4FVectorTest
   extends VectorByteBufferedM4FContract<QuaternionByteBuffered4FType>
 {
-  @Override protected Vector4FType newVectorM4FAtIndexFromSize(
+  @Override
+  protected Vector4FType newVectorM4FAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -36,7 +37,8 @@ public final class QuaternionByteBufferedM4FVectorTest
     return vr;
   }
 
-  @Override protected QuaternionByteBuffered4FType newVectorM4F(
+  @Override
+  protected QuaternionByteBuffered4FType newVectorM4F(
     final float x,
     final float y,
     final float z,
@@ -49,7 +51,8 @@ public final class QuaternionByteBufferedM4FVectorTest
     return vr;
   }
 
-  @Override protected QuaternionByteBuffered4FType newVectorM4F()
+  @Override
+  protected QuaternionByteBuffered4FType newVectorM4F()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final QuaternionByteBuffered4FType vr =
@@ -58,7 +61,8 @@ public final class QuaternionByteBufferedM4FVectorTest
     return vr;
   }
 
-  @Override protected QuaternionByteBuffered4FType newVectorM4FFrom(
+  @Override
+  protected QuaternionByteBuffered4FType newVectorM4FFrom(
     final QuaternionByteBuffered4FType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
@@ -68,7 +72,8 @@ public final class QuaternionByteBufferedM4FVectorTest
     return vr;
   }
 
-  @Override protected QuaternionByteBuffered4FType newVectorM4FWithBaseOffset(
+  @Override
+  protected QuaternionByteBuffered4FType newVectorM4FWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)

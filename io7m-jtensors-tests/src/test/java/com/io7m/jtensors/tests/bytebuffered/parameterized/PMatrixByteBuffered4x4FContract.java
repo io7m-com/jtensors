@@ -28,20 +28,20 @@ public abstract class PMatrixByteBuffered4x4FContract<
   T0,
   T1,
   T2,
-  T           extends PMatrixByteBuffered4x4FType<T0, T1>,
-  TMULTRIGHT  extends PMatrixByteBuffered4x4FType<T0, T1>,
-  TMULTLEFT   extends PMatrixByteBuffered4x4FType<T1, T2>,
+  T extends PMatrixByteBuffered4x4FType<T0, T1>,
+  TMULTRIGHT extends PMatrixByteBuffered4x4FType<T0, T1>,
+  TMULTLEFT extends PMatrixByteBuffered4x4FType<T1, T2>,
   TMULTRESULT extends PMatrixByteBuffered4x4FType<T0, T2>,
-  TINVERSE    extends PMatrixByteBuffered4x4FType<T1, T0>>
+  TINVERSE extends PMatrixByteBuffered4x4FType<T1, T0>>
   extends PMatrix4x4FBufferedContract<
-    T0,
-    T1,
-    T2,
-    T,
-    TMULTRIGHT,
-    TMULTLEFT,
-    TMULTRESULT,
-    TINVERSE>
+  T0,
+  T1,
+  T2,
+  T,
+  TMULTRIGHT,
+  TMULTLEFT,
+  TMULTRESULT,
+  TINVERSE>
 {
   //@formatter:on
 
@@ -50,7 +50,8 @@ public abstract class PMatrixByteBuffered4x4FContract<
     AtomicLong base,
     int offset);
 
-  @Test public final void testByteOffsetSetGetIdentity()
+  @Test
+  public final void testByteOffsetSetGetIdentity()
   {
     final T v = this.newMatrix();
     v.setByteOffset(23L);
@@ -64,7 +65,8 @@ public abstract class PMatrixByteBuffered4x4FContract<
     v.setByteOffset((long) Integer.MAX_VALUE);
   }
 
-  @Test public final void testByteBaseOffsetSetGetIdentity()
+  @Test
+  public final void testByteBaseOffsetSetGetIdentity()
   {
     final AtomicLong base = new AtomicLong(0L);
     final T v = this.newMatrixWithBaseOffset(1000, base, 0);
@@ -72,7 +74,8 @@ public abstract class PMatrixByteBuffered4x4FContract<
     Assert.assertEquals(23L, v.getByteOffset());
   }
 
-  @Test public final void testByteBaseOffsetSetGetIdentity100()
+  @Test
+  public final void testByteBaseOffsetSetGetIdentity100()
   {
     final AtomicLong base = new AtomicLong(0L);
     final T v = this.newMatrixWithBaseOffset(1000, base, 100);

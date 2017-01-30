@@ -139,7 +139,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testAdd()
+  @Test
+  public final void testAdd()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -165,7 +166,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
   }
 
-  @Test public final void testAddMutate()
+  @Test
+  public final void testAddMutate()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -199,7 +201,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(mr);
   }
 
-  @Test public final void testAddRowScaled()
+  @Test
+  public final void testAddRowScaled()
   {
     final MatrixM3x3F.ContextMM3F s = new MatrixM3x3F.ContextMM3F();
     final T m0 = this.newMatrix();
@@ -305,7 +308,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     MatrixM3x3F.addRowScaledInPlace(s, m, 0, 0, -1, 1.0);
   }
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -346,14 +350,16 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m1);
   }
 
-  @Test public final void testDeterminantIdentity()
+  @Test
+  public final void testDeterminantIdentity()
   {
     final T m = this.newMatrix();
     Assert.assertEquals(1.0, MatrixM3x3F.determinant(m), 0.0);
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testDeterminantOther()
+  @Test
+  public final void testDeterminantOther()
   {
     final T m = this.newMatrix();
 
@@ -366,7 +372,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testDeterminantScale()
+  @Test
+  public final void testDeterminantScale()
   {
     final T m = this.newMatrix();
 
@@ -377,7 +384,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testDeterminantScaleNegative()
+  @Test
+  public final void testDeterminantScaleNegative()
   {
     final T m = this.newMatrix();
 
@@ -387,7 +395,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testDeterminantZero()
+  @Test
+  public final void testDeterminantZero()
   {
     final T m = this.newMatrix();
     MatrixM3x3F.setZero(m);
@@ -396,13 +405,15 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testEqualsCase0()
+  @Test
+  public final void testEqualsCase0()
   {
     final T m0 = this.newMatrix();
     Assert.assertTrue(m0.equals(m0));
   }
 
-  @Test public final void testEqualsCase1()
+  @Test
+  public final void testEqualsCase1()
   {
     final T m0 = this.newMatrix();
     this.checkDirectBufferInvariants(m0);
@@ -410,7 +421,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m0);
   }
 
-  @Test public final void testEqualsCase2()
+  @Test
+  public final void testEqualsCase2()
   {
     final T m0 = this.newMatrix();
     this.checkDirectBufferInvariants(m0);
@@ -418,7 +430,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m0);
   }
 
-  @Test public final void testEqualsCase3()
+  @Test
+  public final void testEqualsCase3()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -428,7 +441,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m1);
   }
 
-  @Test public final void testEqualsNeqExhaustive()
+  @Test
+  public final void testEqualsNeqExhaustive()
   {
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
@@ -442,7 +456,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
   }
 
-  @Test public final void testExchangeRows()
+  @Test
+  public final void testExchangeRows()
   {
     final MatrixM3x3F.ContextMM3F s = new MatrixM3x3F.ContextMM3F();
     final T m0 = this.newMatrix();
@@ -536,7 +551,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     MatrixM3x3F.exchangeRowsInPlace(s, m, 0, -1);
   }
 
-  @Test public final void testHashcodeNeqExhaustive()
+  @Test
+  public final void testHashcodeNeqExhaustive()
   {
     for (int row = 0; row < 3; ++row) {
       for (int col = 0; col < 3; ++col) {
@@ -556,7 +572,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
   }
 
-  @Test public final void testInitializationFrom()
+  @Test
+  public final void testInitializationFrom()
   {
     final T m0 = this.newMatrix();
 
@@ -595,7 +612,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m1);
   }
 
-  @Test public final void testInitializationIdentity()
+  @Test
+  public final void testInitializationIdentity()
   {
     final T m = this.newMatrix();
 
@@ -614,7 +632,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testInvertInPlaceIdentity()
+  @Test
+  public final void testInvertInPlaceIdentity()
   {
     final MatrixM3x3F.ContextMM3F s = new MatrixM3x3F.ContextMM3F();
     final T m0 = this.newMatrix();
@@ -673,7 +692,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
   }
 
-  @Test public final void testInvertSimpleNF()
+  @Test
+  public final void testInvertSimpleNF()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final T m0 = this.newMatrix();
@@ -744,7 +764,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
   }
 
-  @Test public final void testInvertZeroNF()
+  @Test
+  public final void testInvertZeroNF()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final T m0 = this.newMatrix();
@@ -763,7 +784,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
   }
 
-  @Test public final void testLookAt_NoTranslation_NegativeX_AroundY()
+  @Test
+  public final void testLookAt_NoTranslation_NegativeX_AroundY()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -776,10 +798,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
-    
-    
-    
-    
 
     boolean eq = false;
 
@@ -812,7 +830,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testLookAt_NoTranslation_NegativeZ_AroundY()
+  @Test
+  public final void testLookAt_NoTranslation_NegativeZ_AroundY()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -825,10 +844,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
-    
-    
-    
-    
 
     boolean eq = false;
 
@@ -861,7 +876,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testLookAt_NoTranslation_PositiveX_AroundY()
+  @Test
+  public final void testLookAt_NoTranslation_PositiveX_AroundY()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -874,10 +890,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
-    
-    
-    
-    
 
     boolean eq = false;
 
@@ -910,7 +922,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testLookAt_NoTranslation_PositiveZ_AroundY()
+  @Test
+  public final void testLookAt_NoTranslation_PositiveZ_AroundY()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -923,10 +936,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
-    
-    
-    
-    
 
     boolean eq = false;
 
@@ -959,7 +968,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testLookAt_Translation102030_NegativeZ_AroundY()
+  @Test
+  public final void testLookAt_Translation102030_NegativeZ_AroundY()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -974,10 +984,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     final VectorReadable3FType axis = new VectorI3F(0.0f, 1.0f, 0.0f);
     MatrixM3x3F.lookAt(mc, origin, target, axis, m, t);
 
-    
-    
-    
-    
 
     boolean eq = false;
 
@@ -1010,7 +1016,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testMultiplyIdentity()
+  @Test
+  public final void testMultiplyIdentity()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -1034,7 +1041,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(mr);
   }
 
-  @Test public final void testMultiplyMutateIdentity()
+  @Test
+  public final void testMultiplyMutateIdentity()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -1070,7 +1078,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(r);
   }
 
-  @Test public final void testMultiplyMutateSimple()
+  @Test
+  public final void testMultiplyMutateSimple()
   {
     final T m0 = this.newMatrix();
 
@@ -1113,7 +1122,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(r);
   }
 
-  @Test public final void testMultiplySimple()
+  @Test
+  public final void testMultiplySimple()
   {
     final T m0 = this.newMatrix();
 
@@ -1159,7 +1169,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(mr);
   }
 
-  @Test public final void testMultiplyVectorSimple()
+  @Test
+  public final void testMultiplyVectorSimple()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final T m0 = this.newMatrix();
@@ -1191,7 +1202,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m0);
   }
 
-  @Test public final void testMultiplyZero()
+  @Test
+  public final void testMultiplyZero()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -1253,7 +1265,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
    * All rotation matrices have a determinant of 1.0 and are orthogonal.
    */
 
-  @Test public final void testRotateDeterminantOrthogonal()
+  @Test
+  public final void testRotateDeterminantOrthogonal()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final AlmostEqualFloat.ContextRelative context =
@@ -1283,13 +1296,11 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       }
       VectorM3F.normalizeInPlace(axis);
 
-      
-      
 
       MatrixM3x3F.makeRotation(angle, axis, m);
 
       final double det = MatrixM3x3F.determinant(m);
-      
+
 
       AlmostEqualFloat.almostEqual(context, (float) det, 1.0f);
 
@@ -1303,15 +1314,12 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
           final boolean eq =
             AlmostEqualFloat.almostEqual(context, (float) mx, (float) my);
 
-          
-          
-          
 
           Assert.assertTrue(eq);
         }
       }
 
-      
+
     }
   }
 
@@ -1319,7 +1327,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
    * A rotation of 0 degrees around the X axis has no effect.
    */
 
-  @Test public final void testRotateVector0X()
+  @Test
+  public final void testRotateVector0X()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final AlmostEqualFloat.ContextRelative ec =
@@ -1333,10 +1342,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     MatrixM3x3F.makeRotation(0.0, AXIS_X, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    
-    
-    
-    
 
     Assert.assertTrue(VectorM3F.almostEqual(ec, v_exp, v_got));
   }
@@ -1345,7 +1350,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
    * A rotation of 0 degrees around the Y axis has no effect.
    */
 
-  @Test public final void testRotateVector0Y()
+  @Test
+  public final void testRotateVector0Y()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final AlmostEqualFloat.ContextRelative ec =
@@ -1359,10 +1365,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     MatrixM3x3F.makeRotation(0.0, AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    
-    
-    
-    
 
     Assert.assertTrue(VectorM3F.almostEqual(ec, v_exp, v_got));
   }
@@ -1371,7 +1373,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
    * A rotation of 0 degrees around the Z axis has no effect.
    */
 
-  @Test public final void testRotateVector0Z()
+  @Test
+  public final void testRotateVector0Z()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final AlmostEqualFloat.ContextRelative ec =
@@ -1385,10 +1388,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     MatrixM3x3F.makeRotation(0.0, AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    
-    
-    
-    
 
     Assert.assertTrue(VectorM3F.almostEqual(ec, v_exp, v_got));
   }
@@ -1398,7 +1397,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
    * counter-clockwise rotation of the vector.
    */
 
-  @Test public final void testRotateVector90X()
+  @Test
+  public final void testRotateVector90X()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final AlmostEqualFloat.ContextRelative context =
@@ -1421,13 +1421,9 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
 
     MatrixM3x3F.makeRotation(
       Math.toRadians(90.0), AXIS_X, m);
-    
+
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1442,7 +1438,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
    * counter-clockwise rotation of the vector.
    */
 
-  @Test public final void testRotateVector90Y()
+  @Test
+  public final void testRotateVector90Y()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final AlmostEqualFloat.ContextRelative context =
@@ -1467,10 +1464,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       Math.toRadians(90.0), AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1485,7 +1478,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
    * counter-clockwise rotation of the vector.
    */
 
-  @Test public final void testRotateVector90Z()
+  @Test
+  public final void testRotateVector90Z()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final AlmostEqualFloat.ContextRelative context =
@@ -1503,10 +1497,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       Math.toRadians(90.0), AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1521,7 +1511,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
    * rotation of the vector.
    */
 
-  @Test public final void testRotateVectorMinus90X()
+  @Test
+  public final void testRotateVectorMinus90X()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final AlmostEqualFloat.ContextRelative context =
@@ -1544,13 +1535,9 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
 
     MatrixM3x3F.makeRotation(
       Math.toRadians(-90.0), AXIS_X, m);
-    
+
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1565,7 +1552,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
    * rotation of the vector.
    */
 
-  @Test public final void testRotateVectorMinus90Y()
+  @Test
+  public final void testRotateVectorMinus90Y()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final AlmostEqualFloat.ContextRelative context =
@@ -1590,10 +1578,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       Math.toRadians(-90.0), AXIS_Y, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1608,7 +1592,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
    * rotation of the vector.
    */
 
-  @Test public final void testRotateVectorMinus90Z()
+  @Test
+  public final void testRotateVectorMinus90Z()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final AlmostEqualFloat.ContextRelative context =
@@ -1626,10 +1611,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       Math.toRadians(-90.0), AXIS_Z, m);
     MatrixM3x3F.multiplyVector3F(c, m, v_in, v_got);
 
-    
-    
-    
-    
 
     eq = AlmostEqualFloat.almostEqual(context, v_exp.getXF(), v_got.getXF());
     Assert.assertTrue(eq);
@@ -1639,7 +1620,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     Assert.assertTrue(eq);
   }
 
-  @Test public final void testRotateXMakeEquivalent()
+  @Test
+  public final void testRotateXMakeEquivalent()
   {
 
     final AlmostEqualFloat.ContextRelative context_d =
@@ -1652,7 +1634,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
-      
 
       this.isRotationMatrixX(context_d, r);
 
@@ -1660,7 +1641,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
   }
 
-  @Test public final void testRotateYMakeEquivalent()
+  @Test
+  public final void testRotateYMakeEquivalent()
   {
     final AlmostEqualFloat.ContextRelative context =
       TestUtilities.getSingleEqualityContext();
@@ -1672,7 +1654,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
-      
 
       this.isRotationMatrixY(context, r);
 
@@ -1680,7 +1661,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
   }
 
-  @Test public final void testRotateZMakeEquivalent()
+  @Test
+  public final void testRotateZMakeEquivalent()
   {
     final AlmostEqualFloat.ContextRelative context_d =
       TestUtilities.getSingleEqualityContext();
@@ -1692,7 +1674,6 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
       this.checkDirectBufferInvariants(r);
       Assert.assertEquals(1.0, MatrixM3x3F.determinant(r), 0.000001);
 
-      
 
       this.isRotationMatrixZ(context_d, r);
 
@@ -1700,7 +1681,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
   }
 
-  @Test public final void testRow3F()
+  @Test
+  public final void testRow3F()
   {
     final T m = this.newMatrix();
     final VectorM3F v = new VectorM3F();
@@ -1753,7 +1735,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     m.getRow2F(-1, new VectorM3F());
   }
 
-  @Test public final void testScale()
+  @Test
+  public final void testScale()
   {
     final T m0 = this.newMatrix();
     final T mr = this.newMatrix();
@@ -1784,7 +1767,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(mr);
   }
 
-  @Test public final void testScaleMutate()
+  @Test
+  public final void testScaleMutate()
   {
     final T m = this.newMatrix();
 
@@ -1813,7 +1797,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(mr);
   }
 
-  @Test public final void testScaleRow()
+  @Test
+  public final void testScaleRow()
   {
     final MatrixM3x3F.ContextMM3F c = new MatrixM3x3F.ContextMM3F();
     final T m0 = this.newMatrix();
@@ -1938,7 +1923,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     }
   }
 
-  @Test public final void testSetGetIdentity()
+  @Test
+  public final void testSetGetIdentity()
   {
     final T m = this.newMatrix();
 
@@ -2007,7 +1993,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testSetGetInterfaceIdentity()
+  @Test
+  public final void testSetGetInterfaceIdentity()
   {
     final T m = this.newMatrix();
 
@@ -2041,13 +2028,15 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testTraceIdentity()
+  @Test
+  public final void testTraceIdentity()
   {
     final T m = this.newMatrix();
     Assert.assertEquals(3.0, MatrixM3x3F.trace(m), 0.0);
   }
 
-  @Test public final void testTranslate2FMakeIdentity()
+  @Test
+  public final void testTranslate2FMakeIdentity()
   {
     final T m = this.newMatrix();
 
@@ -2075,7 +2064,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testTranslate2FMakeSimple()
+  @Test
+  public final void testTranslate2FMakeSimple()
   {
     final T m = this.newMatrix();
 
@@ -2103,7 +2093,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testTranslate2IMakeIdentity()
+  @Test
+  public final void testTranslate2IMakeIdentity()
   {
     final T m = this.newMatrix();
 
@@ -2131,7 +2122,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testTranslate2IMakeSimple()
+  @Test
+  public final void testTranslate2IMakeSimple()
   {
     final T m = this.newMatrix();
 
@@ -2159,7 +2151,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testTranspose()
+  @Test
+  public final void testTranspose()
   {
     final T m = this.newMatrix();
     final T r = this.newMatrix();
@@ -2226,7 +2219,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(r);
   }
 
-  @Test public final void testTransposeMutate()
+  @Test
+  public final void testTransposeMutate()
   {
     final T m = this.newMatrix();
 
@@ -2263,7 +2257,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     Assert.assertEquals(10.0, (double) r.getRowColumnF(2, 2), 0.0);
   }
 
-  @Test public final void testZero()
+  @Test
+  public final void testZero()
   {
     final T m = this.newMatrix();
     MatrixM3x3F.setZero(m);
@@ -2279,7 +2274,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet3Get3()
+  @Test
+  public final void testRowSet3Get3()
   {
     final T m = this.newMatrix();
     final VectorM3F v = new VectorM3F(0.0f, 0.0f, 0.0f);
@@ -2311,7 +2307,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
   @Override
   protected abstract void checkDirectBufferInvariants(final T m);
 
-  @Test public final void testRowSet3Get3Unsafe()
+  @Test
+  public final void testRowSet3Get3Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM3F v = new VectorM3F(0.0f, 0.0f, 0.0f);
@@ -2340,7 +2337,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet2Get2()
+  @Test
+  public final void testRowSet2Get2()
   {
     final T m = this.newMatrix();
     final VectorM2F v = new VectorM2F(0.0f, 0.0f);
@@ -2366,7 +2364,8 @@ public abstract class Matrix3x3FContract<T extends Matrix3x3FType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet2Get2Unsafe()
+  @Test
+  public final void testRowSet2Get2Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM2F v = new VectorM2F(0.0f, 0.0f);

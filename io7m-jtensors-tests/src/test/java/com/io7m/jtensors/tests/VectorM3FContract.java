@@ -51,7 +51,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     final float y,
     final float z);
 
-  @Test public final void testAbsolute()
+  @Test
+  public final void testAbsolute()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -77,7 +78,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testAbsoluteMutation()
+  @Test
+  public final void testAbsoluteMutation()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -106,7 +108,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testAdd()
+  @Test
+  public final void testAdd()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -156,7 +159,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testAddMutation()
+  @Test
+  public final void testAddMutation()
   {
     final T out = this.newVectorM3F();
     final T v0 = this.newVectorM3F(1.0f, 1.0f, 1.0f);
@@ -201,7 +205,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertEquals(1.0, (double) v1.getZF(), 0.0);
   }
 
-  @Test public final void testAddScaled()
+  @Test
+  public final void testAddScaled()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -253,7 +258,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testAlmostEqualNot()
+  @Test
+  public final void testAlmostEqualNot()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -331,7 +337,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testAlmostEqualTransitive()
+  @Test
+  public final void testAlmostEqualTransitive()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -350,7 +357,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testCheckInterface()
+  @Test
+  public final void testCheckInterface()
   {
     final T v = this.newVectorM3F(3.0f, 5.0f, 7.0f);
 
@@ -359,7 +367,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertEquals((double) v.getZF(), (double) v.getZF(), 0.0);
   }
 
-  @Test public final void testClampByVectorMaximumOrdering()
+  @Test
+  public final void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max_x = getSmallRandom();
@@ -392,7 +401,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testClampByVectorMinimumOrdering()
+  @Test
+  public final void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = getLargeRandom();
@@ -425,7 +435,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testClampByVectorOrdering()
+  @Test
+  public final void testClampByVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = getSmallRandom();
@@ -471,7 +482,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testClampMaximumOrdering()
+  @Test
+  public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float maximum = getSmallRandom();
@@ -497,7 +509,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testClampMinimumOrdering()
+  @Test
+  public final void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = getLargeRandom();
@@ -523,7 +536,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testClampOrdering()
+  @Test
+  public final void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = getSmallRandom();
@@ -557,7 +571,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final T vb = this.newVectorM3F(5.0F, 6.0F, 7.0F);
     final T va = this.newVectorM3F(1.0F, 2.0F, 3.0F);
@@ -573,7 +588,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertEquals((double) vb.getZF(), (double) va.getZF(), 0.0);
   }
 
-  @Test public final void testCopy2Correct()
+  @Test
+  public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM3F(
       getLargeRandom(),
@@ -588,7 +604,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertEquals(0.0F, v1.getZF(), 0.0f);
   }
 
-  @Test public final void testCopy3Correct()
+  @Test
+  public final void testCopy3Correct()
   {
     final T v0 = this.newVectorM3F(
       getLargeRandom(),
@@ -603,7 +620,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertEquals(v0.getZF(), v1.getZF(), 0.0f);
   }
 
-  @Test public final void testCrossProductPerpendicular()
+  @Test
+  public final void testCrossProductPerpendicular()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext3dp();
@@ -628,21 +646,14 @@ public abstract class VectorM3FContract<T extends Vector3FType>
       final double dp0 = VectorM3F.dotProduct(v0, vr);
       final double dp1 = VectorM3F.dotProduct(v1, vr);
 
-      
-      
-      
-      
-      
-      
-      
-      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp0, 0.0));
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, dp1, 0.0));
     }
   }
 
-  @Test public final void testDefault000()
+  @Test
+  public final void testDefault000()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -651,7 +662,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
         ec, this.newVectorM3F(), this.newVectorM3F(0.0F, 0.0F, 0.0F)));
   }
 
-  @Test public final void testDistance()
+  @Test
+  public final void testDistance()
   {
     final VectorM3F.ContextVM3F c = new VectorM3F.ContextVM3F();
     final T v0 = this.newVectorM3F(0.0f, 1.0f, 0.0f);
@@ -663,7 +675,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
         context, VectorM3F.distance(c, v0, v1), 1.0));
   }
 
-  @Test public final void testDistanceOrdering()
+  @Test
+  public final void testDistanceOrdering()
   {
     final VectorM3F.ContextVM3F c = new VectorM3F.ContextVM3F();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
@@ -681,7 +694,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testDotProduct()
+  @Test
+  public final void testDotProduct()
   {
     final T v0 = this.newVectorM3F(10.0f, 10.0f, 10.0f);
     final T v1 = this.newVectorM3F(10.0f, 10.0f, 10.0f);
@@ -714,7 +728,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testDotProductPerpendicular()
+  @Test
+  public final void testDotProductPerpendicular()
   {
     final T vpx = this.newVectorM3F(1.0f, 0.0f, 0.0f);
     final T vmx = this.newVectorM3F(-1.0f, 0.0f, 0.0f);
@@ -731,7 +746,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertEquals(0.0, VectorM3F.dotProduct(vmy, vmz), 0.0);
   }
 
-  @Test public final void testDotProductSelf()
+  @Test
+  public final void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -743,14 +759,13 @@ public abstract class VectorM3FContract<T extends Vector3FType>
       final T q = this.newVectorM3F(x, y, z);
       final double dp = VectorM3F.dotProduct(q, q);
 
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
 
-  @Test public final void testDotProductSelfMagnitudeSquared()
+  @Test
+  public final void testDotProductSelfMagnitudeSquared()
   {
     final T v0 = this.newVectorM3F(10.0f, 10.0f, 10.0f);
 
@@ -771,7 +786,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testEqualsCorrect()
+  @Test
+  public final void testEqualsCorrect()
   {
     {
       final T m0 = this.newVectorM3F();
@@ -795,7 +811,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testEqualsNotEqualCorrect()
+  @Test
+  public final void testEqualsNotEqualCorrect()
   {
     final float x = (float) getRandom();
     final float y = x + 1.0f;
@@ -880,14 +897,16 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testHashCodeEqualsCorrect()
+  @Test
+  public final void testHashCodeEqualsCorrect()
   {
     final T m0 = this.newVectorM3F();
     final T m1 = this.newVectorM3F();
     Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Test public final void testHashCodeNotEqualCorrect()
+  @Test
+  public final void testHashCodeNotEqualCorrect()
   {
     {
       final T m0 = this.newVectorM3F();
@@ -914,7 +933,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testInitializeReadable()
+  @Test
+  public final void testInitializeReadable()
   {
     final T v0 = this.newVectorM3F(1.0f, 2.0f, 3.0f);
     final T v1 = this.newVectorM3F(v0);
@@ -924,7 +944,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertEquals((double) v1.getZF(), (double) v0.getZF(), 0.0);
   }
 
-  @Test public final void testInterpolateLinearLimits()
+  @Test
+  public final void testInterpolateLinearLimits()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -968,7 +989,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testMagnitudeNonzero()
+  @Test
+  public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = getLargeRandom();
@@ -981,18 +1003,19 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testMagnitudeNormal()
+  @Test
+  public final void testMagnitudeNormal()
   {
     final AlmostEqualDouble.ContextRelative context_d =
       TestUtilities.getDoubleEqualityContext6dp();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = (float) (getRandom()
-                               * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
+        * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
       final float y = (float) (getRandom()
-                               * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
+        * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
       final float z = (float) (getRandom()
-                               * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
+        * (Math.sqrt((double) Float.MAX_VALUE) / 2.0));
       final T v = this.newVectorM3F(x, y, z);
 
       final T vr = this.newVectorM3F();
@@ -1001,12 +1024,13 @@ public abstract class VectorM3FContract<T extends Vector3FType>
 
       final double m = (double) VectorM3F.magnitude(vr);
 
-      
+
       Assert.assertTrue(AlmostEqualDouble.almostEqual(context_d, m, 1.0));
     }
   }
 
-  @Test public final void testMagnitudeNormalizeZero()
+  @Test
+  public final void testMagnitudeNormalizeZero()
   {
     final T v = this.newVectorM3F(0.0f, 0.0f, 0.0f);
     final T vr = VectorM3F.normalizeInPlace(v);
@@ -1016,7 +1040,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
-  @Test public final void testMagnitudeOne()
+  @Test
+  public final void testMagnitudeOne()
   {
     final T v = this.newVectorM3F(1.0f, 0.0f, 0.0f);
     final double m = (double) VectorM3F.magnitude(v);
@@ -1025,7 +1050,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 1.0));
   }
 
-  @Test public final void testMagnitudeSimple()
+  @Test
+  public final void testMagnitudeSimple()
   {
     final T v = this.newVectorM3F(8.0f, 0.0f, 0.0f);
 
@@ -1039,7 +1065,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testMagnitudeZero()
+  @Test
+  public final void testMagnitudeZero()
   {
     final T v = this.newVectorM3F(0.0f, 0.0f, 0.0f);
     final double m = (double) VectorM3F.magnitude(v);
@@ -1048,7 +1075,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertTrue(AlmostEqualDouble.almostEqual(context, m, 0.0));
   }
 
-  @Test public final void testNormalizeSimple()
+  @Test
+  public final void testNormalizeSimple()
   {
     final T v0 = this.newVectorM3F(8.0f, 0.0f, 0.0f);
     final T out = this.newVectorM3F();
@@ -1061,7 +1089,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertEquals(1.0, m, 0.0);
   }
 
-  @Test public final void testNormalizeZero()
+  @Test
+  public final void testNormalizeZero()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1075,7 +1104,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0.0F, qr.getZF()));
   }
 
-  @Test public final void testOrthonormalize()
+  @Test
+  public final void testOrthonormalize()
   {
     final VectorM3F.ContextVM3F c = new VectorM3F.ContextVM3F();
     final T v0 = this.newVectorM3F(0.0F, 1.0F, 0.0F);
@@ -1089,7 +1119,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertEquals(this.newVectorM3F(1.0F, 0.0F, 0.0F), v1_out);
   }
 
-  @Test public final void testOrthonormalizeMutation()
+  @Test
+  public final void testOrthonormalizeMutation()
   {
     final VectorM3F.ContextVM3F c = new VectorM3F.ContextVM3F();
     final T v0 = this.newVectorM3F(0.0f, 1.0f, 0.0f);
@@ -1101,7 +1132,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertEquals(this.newVectorM3F(1.0F, 0.0F, 0.0F), v1);
   }
 
-  @Test public final void testProjectionPerpendicularZero()
+  @Test
+  public final void testProjectionPerpendicularZero()
   {
     {
       final T p = this.newVectorM3F(1.0f, 0.0f, 0.0f);
@@ -1124,7 +1156,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testScaleMutation()
+  @Test
+  public final void testScaleMutation()
   {
     final T out = this.newVectorM3F();
     final T v0 = this.newVectorM3F(1.0f, 1.0f, 1.0f);
@@ -1159,7 +1192,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     Assert.assertEquals(2.0, (double) v0.getZF(), 0.0);
   }
 
-  @Test public final void testScaleOne()
+  @Test
+  public final void testScaleOne()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1198,7 +1232,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testScaleZero()
+  @Test
+  public final void testScaleZero()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1234,13 +1269,15 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final T v = this.newVectorM3F(1.0f, 2.0f, 3.0f);
     Assert.assertTrue(v.toString().endsWith("1.0 2.0 3.0]"));
   }
 
-  @Test public final void testSubtract()
+  @Test
+  public final void testSubtract()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1288,7 +1325,8 @@ public abstract class VectorM3FContract<T extends Vector3FType>
     }
   }
 
-  @Test public final void testSubtractMutation()
+  @Test
+  public final void testSubtractMutation()
   {
     final T out = this.newVectorM3F();
     final T v0 = this.newVectorM3F(1.0f, 1.0f, 1.0f);

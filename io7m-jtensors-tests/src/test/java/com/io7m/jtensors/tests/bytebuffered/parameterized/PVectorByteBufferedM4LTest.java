@@ -28,7 +28,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class PVectorByteBufferedM4LTest<T>
   extends PVectorByteBufferedM4LContract<T, PVectorByteBuffered4LType<T>>
 {
-  @Override protected PVectorByteBuffered4LType<T> newVectorM4L(
+  @Override
+  protected PVectorByteBuffered4LType<T> newVectorM4L(
     final long x,
     final long y,
     final long z,
@@ -41,7 +42,8 @@ public final class PVectorByteBufferedM4LTest<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered4LType<T> newVectorM4L()
+  @Override
+  protected PVectorByteBuffered4LType<T> newVectorM4L()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered4LType<T> v =
@@ -50,7 +52,8 @@ public final class PVectorByteBufferedM4LTest<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered4LType<T> newVectorM4LFrom(
+  @Override
+  protected PVectorByteBuffered4LType<T> newVectorM4LFrom(
     final PVectorByteBuffered4LType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
@@ -60,7 +63,8 @@ public final class PVectorByteBufferedM4LTest<T>
     return vr;
   }
 
-  @Override protected PVectorByteBuffered4LType<T> newVectorM4LAtIndexFromSize(
+  @Override
+  protected PVectorByteBuffered4LType<T> newVectorM4LAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -68,7 +72,8 @@ public final class PVectorByteBufferedM4LTest<T>
     return PVectorByteBufferedM4L.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected PVectorByteBuffered4LType<T> newVectorM4LWithBaseOffset(
+  @Override
+  protected PVectorByteBuffered4LType<T> newVectorM4LWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -78,7 +83,8 @@ public final class PVectorByteBufferedM4LTest<T>
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(4 * 8);
     b.order(ByteOrder.BIG_ENDIAN);

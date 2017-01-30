@@ -29,7 +29,8 @@ public abstract class MatrixDirect2x2FContract<T extends MatrixDirect2x2FType>
   @Override
   protected abstract T newMatrix();
 
-  @Test public final void testBufferEndianness()
+  @Test
+  public final void testBufferEndianness()
   {
     final T m = this.newMatrix();
     final FloatBuffer b = m.getDirectFloatBuffer();
@@ -37,7 +38,8 @@ public abstract class MatrixDirect2x2FContract<T extends MatrixDirect2x2FType>
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
   }
 
-  @Test public void testStorage()
+  @Test
+  public void testStorage()
   {
     final T m = this.newMatrix();
 

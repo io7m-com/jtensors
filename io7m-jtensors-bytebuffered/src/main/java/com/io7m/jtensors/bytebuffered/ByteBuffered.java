@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public abstract class ByteBuffered implements ByteBufferedType
 {
   private final AtomicLong base;
-  private final int        offset;
+  private final int offset;
 
   protected ByteBuffered(
     final AtomicLong in_base,
@@ -37,12 +37,14 @@ public abstract class ByteBuffered implements ByteBufferedType
     this.offset = in_offset;
   }
 
-  @Override public final long getByteOffset()
+  @Override
+  public final long getByteOffset()
   {
     return this.base.get() + (long) this.offset;
   }
 
-  @Override public final void setByteOffset(final long b)
+  @Override
+  public final void setByteOffset(final long b)
   {
     ByteBufferRanges.checkByteOffset(b + (long) this.getOffset());
     this.setBase(b);

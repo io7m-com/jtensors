@@ -46,7 +46,8 @@ public final class PVectorM3LTest<T>
     LOG = LoggerFactory.getLogger(PVectorM3LTest.class);
   }
 
-  @Override protected PVectorM3L<T> newVectorM3L(
+  @Override
+  protected PVectorM3L<T> newVectorM3L(
     final long x,
     final long y,
     final long z)
@@ -54,17 +55,20 @@ public final class PVectorM3LTest<T>
     return new PVectorM3L<T>(x, y, z);
   }
 
-  @Override protected PVectorM3L<T> newVectorM3L()
+  @Override
+  protected PVectorM3L<T> newVectorM3L()
   {
     return new PVectorM3L<T>();
   }
 
-  @Override protected PVectorM3L<T> newVectorM3LFrom(final PVectorM3L<T> v)
+  @Override
+  protected PVectorM3L<T> newVectorM3LFrom(final PVectorM3L<T> v)
   {
     return new PVectorM3L<T>(v);
   }
 
-  @Test public void testHierarchy()
+  @Test
+  public void testHierarchy()
   {
     final PVectorM3L<?> v = new PVectorM3L<Object>();
 

@@ -30,7 +30,8 @@ public abstract class VectorDContract
 
   protected abstract Logger logger();
 
-  @Test public final void testConstants()
+  @Test
+  public final void testConstants()
   {
     Assert.assertTrue(this.delta() >= 0.0);
     Assert.assertTrue(this.delta() <= 1.0);

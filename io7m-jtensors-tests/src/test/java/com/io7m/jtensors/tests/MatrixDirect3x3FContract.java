@@ -29,7 +29,8 @@ public abstract class MatrixDirect3x3FContract<T extends MatrixDirect3x3FType>
   @Override
   protected abstract T newMatrix();
 
-  @Test public final void testBufferEndianness()
+  @Test
+  public final void testBufferEndianness()
   {
     final T m = this.newMatrix();
     final FloatBuffer b = m.getDirectFloatBuffer();
@@ -37,7 +38,8 @@ public abstract class MatrixDirect3x3FContract<T extends MatrixDirect3x3FType>
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
   }
 
-  @Test public final void testStorage()
+  @Test
+  public final void testStorage()
   {
     final T m = this.newMatrix();
 

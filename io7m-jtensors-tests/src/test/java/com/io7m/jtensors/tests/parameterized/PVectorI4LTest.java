@@ -24,7 +24,8 @@ import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
 
-@SuppressWarnings("static-method") public class PVectorI4LTest<T>
+@SuppressWarnings("static-method")
+public class PVectorI4LTest<T>
   extends PVectorI4Contract
 {
   public static long randomNegativeNumber()
@@ -42,7 +43,8 @@ import org.junit.Test;
     return (long) (Math.random() * (1 << 14));
   }
 
-  @Test public void testZero()
+  @Test
+  public void testZero()
   {
     final PVectorI4L<Object> z = PVectorI4L.zero();
     Assert.assertEquals(0, z.getXL());
@@ -51,10 +53,12 @@ import org.junit.Test;
     Assert.assertEquals(0, z.getWL());
   }
 
-  @Override @Test public void testAbsolute()
+  @Override
+  @Test
+  public void testAbsolute()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = (long) (Math.random() * Long.MIN_VALUE);
       final long y = (long) (Math.random() * Long.MIN_VALUE);
       final long z = (long) (Math.random() * Long.MIN_VALUE);
@@ -70,10 +74,12 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testAdd()
+  @Override
+  @Test
+  public void testAdd()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = randomPositiveSmallNumber();
       final long y0 = randomPositiveSmallNumber();
       final long z0 = randomPositiveSmallNumber();
@@ -95,10 +101,12 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testAddScaled()
+  @Override
+  @Test
+  public void testAddScaled()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = randomPositiveSmallNumber();
       final long y0 = randomPositiveSmallNumber();
       final long z0 = randomPositiveSmallNumber();
@@ -122,17 +130,23 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+  @Override
+  @Test
+  public void testAlmostEqualNot()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+  @Override
+  @Test
+  public void testAlmostEqualTransitive()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testCheckInterface()
+  @Override
+  @Test
+  public void testCheckInterface()
   {
     final VectorReadable4LType v = new PVectorI4L<T>(3, 5, 7, 11);
 
@@ -142,10 +156,12 @@ import org.junit.Test;
     Assert.assertTrue(v.getWL() == v.getWL());
   }
 
-  @Override @Test public void testClampByPVectorMaximumOrdering()
+  @Override
+  @Test
+  public void testClampByPVectorMaximumOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max_x = randomNegativeNumber();
       final long max_y = randomNegativeNumber();
       final long max_z = randomNegativeNumber();
@@ -168,10 +184,12 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampByPVectorMinimumOrdering()
+  @Override
+  @Test
+  public void testClampByPVectorMinimumOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long min_x = randomPositiveNumber();
       final long min_y = randomPositiveNumber();
       final long min_z = randomPositiveNumber();
@@ -194,10 +212,12 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampByPVectorOrdering()
+  @Override
+  @Test
+  public void testClampByPVectorOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long min_x = randomNegativeNumber();
       final long min_y = randomNegativeNumber();
       final long min_z = randomNegativeNumber();
@@ -231,10 +251,12 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+  @Override
+  @Test
+  public void testClampMaximumOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long maximum = randomNegativeNumber();
 
       final long x = randomPositiveNumber();
@@ -252,10 +274,12 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+  @Override
+  @Test
+  public void testClampMinimumOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long minimum = randomPositiveNumber();
 
       final long x = randomNegativeNumber();
@@ -273,10 +297,12 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampOrdering()
+  @Override
+  @Test
+  public void testClampOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long minimum = randomNegativeNumber();
       final long maximum = randomPositiveNumber();
 
@@ -299,7 +325,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testCopy()
+  @Override
+  @Test
+  public void testCopy()
   {
     final PVectorI4L<T> vb = new PVectorI4L<T>(5, 6, 7, 8);
     final PVectorI4L<T> va = new PVectorI4L<T>(1, 2, 3, 4);
@@ -322,23 +350,29 @@ import org.junit.Test;
     Assert.assertFalse(vc.getWL() == vb.getWL());
   }
 
-  @Override @Test public void testDefault0001()
+  @Override
+  @Test
+  public void testDefault0001()
   {
     Assert.assertTrue(
       new PVectorI4L<T>().equals(new PVectorI4L<T>(0, 0, 0, 1)));
   }
 
-  @Override @Test public void testDistance()
+  @Override
+  @Test
+  public void testDistance()
   {
     final PVectorReadable4LType<T> v0 = new PVectorI4L<T>(0, 1, 0, 0);
     final PVectorReadable4LType<T> v1 = new PVectorI4L<T>(0, 0, 0, 0);
     Assert.assertTrue(PVectorI4L.distance(v0, v1) == 1);
   }
 
-  @Override @Test public void testDistanceOrdering()
+  @Override
+  @Test
+  public void testDistanceOrdering()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = randomPositiveSmallNumber();
       final long y0 = randomPositiveSmallNumber();
       final long z0 = randomPositiveSmallNumber();
@@ -355,7 +389,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDotProduct()
+  @Override
+  @Test
+  public void testDotProduct()
   {
     final PVectorI4L<T> v0 = new PVectorI4L<T>(10, 10, 10, 10);
     final PVectorI4L<T> v1 = new PVectorI4L<T>(10, 10, 10, 10);
@@ -392,13 +428,15 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+  @Override
+  @Test
+  public void testDotProductPerpendicular()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max = 1000;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
@@ -413,13 +451,15 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDotProductSelf()
+  @Override
+  @Test
+  public void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long max = 1000;
       final long x = (long) (Math.random() * max);
       final long y = (long) (Math.random() * max);
@@ -432,7 +472,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  @Override
+  @Test
+  public void testDotProductSelfMagnitudeSquared()
   {
     final PVectorI4L<T> v0 = new PVectorI4L<T>(10, 10, 10, 10);
 
@@ -455,7 +497,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+  @Override
+  @Test
+  public void testEqualsCorrect()
   {
     {
       final PVectorI4L<T> m0 = new PVectorI4L<T>();
@@ -479,7 +523,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+  @Override
+  @Test
+  public void testEqualsNotEqualCorrect()
   {
     final long x = (long) (Math.random() * 1000);
     final long y = x + 1;
@@ -570,14 +616,18 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+  @Override
+  @Test
+  public void testHashCodeEqualsCorrect()
   {
     final PVectorI4L<T> m0 = new PVectorI4L<T>();
     final PVectorI4L<T> m1 = new PVectorI4L<T>();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+  @Override
+  @Test
+  public void testHashCodeNotEqualCorrect()
   {
     {
       final PVectorI4L<T> m0 = new PVectorI4L<T>(23, 0, 0, 0);
@@ -604,7 +654,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+  @Override
+  @Test
+  public void testInitializeReadable()
   {
     final PVectorI4L<T> v0 = new PVectorI4L<T>(1, 2, 3, 4);
     final VectorReadable4LType v1 = new PVectorI4L<T>(v0);
@@ -615,10 +667,12 @@ import org.junit.Test;
     Assert.assertTrue(v0.getWL() == v1.getWL());
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+  @Override
+  @Test
+  public void testInterpolateLinearLimits()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = randomPositiveNumber();
       final long y0 = randomPositiveNumber();
       final long z0 = randomPositiveNumber();
@@ -646,10 +700,12 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+  @Override
+  @Test
+  public void testMagnitudeNonzero()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = randomPositiveSmallNumber();
       final long y = randomPositiveSmallNumber();
       final long z = randomPositiveSmallNumber();
@@ -661,24 +717,32 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+  @Override
+  @Test
+  public void testMagnitudeNormal()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+  @Override
+  @Test
+  public void testMagnitudeNormalizeZero()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeOne()
+  @Override
+  @Test
+  public void testMagnitudeOne()
   {
     final PVectorReadable4LType<T> v = new PVectorI4L<T>(1, 0, 0, 0);
     final long m = PVectorI4L.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
-  @Override @Test public void testMagnitudeSimple()
+  @Override
+  @Test
+  public void testMagnitudeSimple()
   {
     final PVectorReadable4LType<T> v = new PVectorI4L<T>(8, 0, 0, 0);
 
@@ -692,29 +756,39 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+  @Override
+  @Test
+  public void testMagnitudeZero()
   {
     final PVectorReadable4LType<T> v = new PVectorI4L<T>(0, 0, 0, 0);
     final long m = PVectorI4L.magnitude(v);
     Assert.assertTrue(m == 0);
   }
 
-  @Override @Test public void testNormalizeSimple()
+  @Override
+  @Test
+  public void testNormalizeSimple()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testNormalizeZero()
+  @Override
+  @Test
+  public void testNormalizeZero()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testOrthonormalize()
+  @Override
+  @Test
+  public void testOrthonormalize()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+  @Override
+  @Test
+  public void testProjectionPerpendicularZero()
   {
     {
       final PVectorReadable4LType<T> p = new PVectorI4L<T>(1, 0, 0, 1);
@@ -733,10 +807,12 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testScaleOne()
+  @Override
+  @Test
+  public void testScaleOne()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = randomPositiveNumber();
       final long y = randomPositiveNumber();
       final long z = randomPositiveNumber();
@@ -752,10 +828,12 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testScaleZero()
+  @Override
+  @Test
+  public void testScaleZero()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x = randomPositiveNumber();
       final long y = randomPositiveNumber();
       final long z = randomPositiveNumber();
@@ -771,16 +849,20 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testString()
+  @Override
+  @Test
+  public void testString()
   {
     final PVectorI4L<T> v = new PVectorI4L<T>(1, 2, 3, 4);
     Assert.assertTrue("[PVectorI4L 1 2 3 4]".equals(v.toString()));
   }
 
-  @Override @Test public void testSubtract()
+  @Override
+  @Test
+  public void testSubtract()
   {
     for (long index = 0; index
-                         < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final long x0 = randomPositiveNumber();
       final long y0 = randomPositiveNumber();
       final long z0 = randomPositiveNumber();

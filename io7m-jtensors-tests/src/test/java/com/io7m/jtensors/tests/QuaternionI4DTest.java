@@ -39,11 +39,6 @@ import org.slf4j.LoggerFactory;
 public class QuaternionI4DTest extends QuaternionI4Contract
 {
   private static final Logger LOG;
-
-  static {
-    LOG = LoggerFactory.getLogger(QuaternionI4DTest.class);
-  }
-
   private static final VectorReadable3DType AXIS_X = new VectorI3D(
     1.0, 0.0, 0.0);
   private static final VectorReadable3DType AXIS_Y = new VectorI3D(
@@ -51,7 +46,18 @@ public class QuaternionI4DTest extends QuaternionI4Contract
   private static final VectorReadable3DType AXIS_Z = new VectorI3D(
     0.0, 0.0, 1.0);
 
-  @Override @Test public final void testAdd()
+  static {
+    LOG = LoggerFactory.getLogger(QuaternionI4DTest.class);
+  }
+
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
+
+  @Override
+  @Test
+  public final void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double max = 10000.0;
@@ -69,14 +75,28 @@ public class QuaternionI4DTest extends QuaternionI4Contract
 
       final QuaternionI4D vr = QuaternionI4D.add(v0, v1);
 
-      Assert.assertEquals(v0.getXD() + v1.getXD(), vr.getXD(), Eq.DELTA_D_SMALL);
-      Assert.assertEquals(v0.getYD() + v1.getYD(), vr.getYD(), Eq.DELTA_D_SMALL);
-      Assert.assertEquals(v0.getZD() + v1.getZD(), vr.getZD(), Eq.DELTA_D_SMALL);
-      Assert.assertEquals(v0.getWD() + v1.getWD(), vr.getWD(), Eq.DELTA_D_SMALL);
+      Assert.assertEquals(
+        v0.getXD() + v1.getXD(),
+        vr.getXD(),
+        Eq.DELTA_D_SMALL);
+      Assert.assertEquals(
+        v0.getYD() + v1.getYD(),
+        vr.getYD(),
+        Eq.DELTA_D_SMALL);
+      Assert.assertEquals(
+        v0.getZD() + v1.getZD(),
+        vr.getZD(),
+        Eq.DELTA_D_SMALL);
+      Assert.assertEquals(
+        v0.getWD() + v1.getWD(),
+        vr.getWD(),
+        Eq.DELTA_D_SMALL);
     }
   }
 
-  @Override @Test public final void testAlmostEqualNot()
+  @Override
+  @Test
+  public final void testAlmostEqualNot()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -160,7 +180,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testAlmostEqualTransitive()
+  @Override
+  @Test
+  public final void testAlmostEqualTransitive()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -180,7 +202,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testCheckInterface()
+  @Override
+  @Test
+  public final void testCheckInterface()
   {
     final VectorReadable4DType v = new QuaternionI4D(3.0, 5.0, 7.0, 11.0);
 
@@ -190,7 +214,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(v.getWD(), v.getWD(), 0.0);
   }
 
-  @Override @Test public final void testConjugate()
+  @Override
+  @Test
+  public final void testConjugate()
   {
     final ContextRelative context = TestUtilities.getDoubleEqualityContext();
 
@@ -202,7 +228,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertTrue(t);
   }
 
-  @Override @Test public final void testConjugateInvertible()
+  @Override
+  @Test
+  public final void testConjugateInvertible()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = (getRandom() * 200.0) - 100.0;
@@ -221,14 +249,18 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testDefault0001()
+  @Override
+  @Test
+  public final void testDefault0001()
   {
     final ContextRelative context = TestUtilities.getDoubleEqualityContext();
     final QuaternionReadable4DType v = new QuaternionI4D();
     QuaternionI4D.almostEqual(context, v, QuaternionI4D.IDENTITY);
   }
 
-  @Override @Test public final void testDotProduct()
+  @Override
+  @Test
+  public final void testDotProduct()
   {
     final QuaternionI4D v0 = new QuaternionI4D(10.0, 10.0, 10.0, 10.0);
     final QuaternionI4D v1 = new QuaternionI4D(10.0, 10.0, 10.0, 10.0);
@@ -265,7 +297,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testDotProductSelf()
+  @Override
+  @Test
+  public final void testDotProductSelf()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = getRandom();
@@ -280,7 +314,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testDotProductSelfMagnitudeSquared()
+  @Override
+  @Test
+  public final void testDotProductSelfMagnitudeSquared()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = getRandom();
@@ -296,7 +332,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testEqualsCorrect()
+  @Override
+  @Test
+  public final void testEqualsCorrect()
   {
     final QuaternionI4D v0 = new QuaternionI4D(0.0, 0.0, 0.0, 0.0);
     final QuaternionI4D v1 = new QuaternionI4D(0.0, 0.0, 0.0, 0.0);
@@ -315,7 +353,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertTrue(v0.equals(v1));
   }
 
-  @Override @Test public final void testEqualsNotEqualCorrect()
+  @Override
+  @Test
+  public final void testEqualsNotEqualCorrect()
   {
     final double x = getRandom();
     final double y = x + 1.0;
@@ -406,14 +446,18 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testHashCodeEqualsCorrect()
+  @Override
+  @Test
+  public final void testHashCodeEqualsCorrect()
   {
     final QuaternionI4D m0 = new QuaternionI4D();
     final QuaternionI4D m1 = new QuaternionI4D();
     Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Override @Test public final void testHashCodeNotEqualCorrect()
+  @Override
+  @Test
+  public final void testHashCodeNotEqualCorrect()
   {
     {
       final QuaternionI4D m0 = new QuaternionI4D(23.0, 0.0, 0.0, 1.0);
@@ -440,7 +484,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testInitializeReadable()
+  @Override
+  @Test
+  public final void testInitializeReadable()
   {
     final QuaternionI4D v0 = new QuaternionI4D(1.0, 2.0, 3.0, 4.0);
     final VectorReadable4DType v1 = new QuaternionI4D(v0);
@@ -451,7 +497,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(v1.getWD(), v0.getWD(), 0.0);
   }
 
-  @Override @Test public final void testInterpolateLinearLimits()
+  @Override
+  @Test
+  public final void testInterpolateLinearLimits()
   {
     final ContextRelative context = TestUtilities.getDoubleEqualityContext();
 
@@ -477,7 +525,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testInterpolateSphericalLinearLimits()
+  @Override
+  @Test
+  public final void testInterpolateSphericalLinearLimits()
   {
     final ContextRelative context = TestUtilities.getDoubleEqualityContext();
 
@@ -509,7 +559,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testInterpolateSphericalLinearNegated()
+  @Override
+  @Test
+  public final void testInterpolateSphericalLinearNegated()
   {
     final AlmostEqualDouble.ContextRelative context =
       TestUtilities.getDoubleEqualityContext();
@@ -538,7 +590,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
       QuaternionI4D.almostEqual(context, r1, QuaternionI4D.negate(v1)));
   }
 
-  @Override @Test public final void testInterpolateSphericalLinearCodirectional()
+  @Override
+  @Test
+  public final void testInterpolateSphericalLinearCodirectional()
   {
     final ContextRelative context = TestUtilities.getDoubleEqualityContext();
 
@@ -569,7 +623,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testLookAtConsistent_Origin_NegativeX()
+  @Override
+  @Test
+  public final void testLookAtConsistent_Origin_NegativeX()
   {
     final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
     final QuaternionI4D.Context qc = new QuaternionI4D.Context();
@@ -594,7 +650,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testLookAtConsistent_Origin_PositiveX()
+  @Override
+  @Test
+  public final void testLookAtConsistent_Origin_PositiveX()
   {
     final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
     final QuaternionI4D.Context qc = new QuaternionI4D.Context();
@@ -619,7 +677,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testLookAtMatrixEquivalentAxisY()
+  @Override
+  @Test
+  public final void testLookAtMatrixEquivalentAxisY()
   {
     final QuaternionI4D.Context qc = new QuaternionI4D.Context();
     final MatrixM4x4D.ContextMM4D mc = new MatrixM4x4D.ContextMM4D();
@@ -642,8 +702,14 @@ public class QuaternionI4DTest extends QuaternionI4Contract
       final double target_z =
         (getRandom() * 100.0) - (getRandom() * 100.0);
 
-      final VectorReadable3DType origin = new VectorI3D(origin_x, origin_y, origin_z);
-      final VectorReadable3DType target = new VectorI3D(target_x, target_y, target_z);
+      final VectorReadable3DType origin = new VectorI3D(
+        origin_x,
+        origin_y,
+        origin_z);
+      final VectorReadable3DType target = new VectorI3D(
+        target_x,
+        target_y,
+        target_z);
 
       MatrixM4x4D.lookAt(
         mc, origin, target, AXIS_Y, ml);
@@ -661,12 +727,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  protected static double getRandom()
-  {
-    return Math.random();
-  }
-
-  @Override @Test public final void testMagnitudeNonzero()
+  @Override
+  @Test
+  public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = 1.0 + (getRandom() * Double.MAX_VALUE);
@@ -680,7 +743,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMagnitudeNormal()
+  @Override
+  @Test
+  public final void testMagnitudeNormal()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = getRandom() * (Math.sqrt(Double.MAX_VALUE) / 2.0);
@@ -697,7 +762,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMagnitudeNormalizeZero()
+  @Override
+  @Test
+  public final void testMagnitudeNormalizeZero()
   {
     final VectorReadable4DType v = new VectorI4D(0.0, 0.0, 0.0, 0.0);
     final VectorI4D vr = VectorI4D.normalize(v);
@@ -705,7 +772,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(0.0, m, Eq.DELTA_D_SMALL);
   }
 
-  @Override @Test public final void testMagnitudeOne()
+  @Override
+  @Test
+  public final void testMagnitudeOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -715,7 +784,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(1.0, m, Eq.DELTA_D_SMALL);
   }
 
-  @Override @Test public final void testMagnitudeSimple()
+  @Override
+  @Test
+  public final void testMagnitudeSimple()
   {
     final VectorReadable4DType v = new VectorI4D(8.0, 0.0, 0.0, 0.0);
 
@@ -729,7 +800,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMagnitudeZero()
+  @Override
+  @Test
+  public final void testMagnitudeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -739,7 +812,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(0.0, m, Eq.DELTA_D_SMALL);
   }
 
-  @Override @Test public final void testMakeAxisAngleNormal()
+  @Override
+  @Test
+  public final void testMakeAxisAngleNormal()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final VectorReadable3DType axis_r =
@@ -753,7 +828,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeAxisAngleX_45()
+  @Override
+  @Test
+  public final void testMakeAxisAngleX_45()
   {
     final VectorReadable3DType axis = new VectorI3D(1.0, 0.0, 0.0);
     final QuaternionI4D q =
@@ -771,7 +848,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(0.9238795325112867, q.getWD(), Eq.DELTA_D_SMALL);
   }
 
-  @Override @Test public final void testMakeAxisAngleX_90()
+  @Override
+  @Test
+  public final void testMakeAxisAngleX_90()
   {
     final VectorReadable3DType axis = new VectorI3D(1.0, 0.0, 0.0);
     final QuaternionI4D q =
@@ -789,7 +868,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(0.7071067811865475, q.getWD(), Eq.DELTA_D_SMALL);
   }
 
-  @Override @Test public final void testMakeAxisAngleY_45()
+  @Override
+  @Test
+  public final void testMakeAxisAngleY_45()
   {
     final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     final QuaternionI4D q =
@@ -807,7 +888,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(0.9238795325112867, q.getWD(), Eq.DELTA_D_SMALL);
   }
 
-  @Override @Test public final void testMakeAxisAngleY_90()
+  @Override
+  @Test
+  public final void testMakeAxisAngleY_90()
   {
     final VectorReadable3DType axis = new VectorI3D(0.0, 1.0, 0.0);
     final QuaternionI4D q =
@@ -825,7 +908,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(0.7071067811865475, q.getWD(), Eq.DELTA_D_SMALL);
   }
 
-  @Override @Test public final void testMakeAxisAngleZ_45()
+  @Override
+  @Test
+  public final void testMakeAxisAngleZ_45()
   {
     final VectorReadable3DType axis = new VectorI3D(0.0, 0.0, 1.0);
     final QuaternionI4D q =
@@ -843,7 +928,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(0.9238795325112867, q.getWD(), Eq.DELTA_D_SMALL);
   }
 
-  @Override @Test public final void testMakeAxisAngleZ_90()
+  @Override
+  @Test
+  public final void testMakeAxisAngleZ_90()
   {
     final VectorReadable3DType axis = new VectorI3D(0.0, 0.0, 1.0);
     final QuaternionI4D q =
@@ -861,7 +948,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(0.7071067811865475, q.getWD(), Eq.DELTA_D_SMALL);
   }
 
-  @Override @Test public final void testMakeFromMatrix3x3Exhaustive()
+  @Override
+  @Test
+  public final void testMakeFromMatrix3x3Exhaustive()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
     final Matrix3x3DType m = MatrixHeapArrayM3x3D.newMatrix();
@@ -921,7 +1010,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeFromMatrix4x4Exhaustive()
+  @Override
+  @Test
+  public final void testMakeFromMatrix4x4Exhaustive()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
     final Matrix4x4DType m = MatrixHeapArrayM4x4D.newMatrix();
@@ -981,7 +1072,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix3x3_45X()
+  @Override
+  @Test
+  public final void testMakeMatrix3x3_45X()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1004,7 +1097,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix3x3_45Y()
+  @Override
+  @Test
+  public final void testMakeMatrix3x3_45Y()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1027,7 +1122,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix3x3_45Z()
+  @Override
+  @Test
+  public final void testMakeMatrix3x3_45Z()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1050,7 +1147,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix3x3_Identity()
+  @Override
+  @Test
+  public final void testMakeMatrix3x3_Identity()
   {
     final QuaternionReadable4DType q = new QuaternionI4D();
     final Matrix3x3DType m = MatrixHeapArrayM3x3D.newMatrix();
@@ -1070,7 +1169,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(m.getRowColumnD(2, 2), 1.0, 0.0);
   }
 
-  @Override @Test public final void testMakeMatrix3x3_Minus45X()
+  @Override
+  @Test
+  public final void testMakeMatrix3x3_Minus45X()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1093,7 +1194,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix3x3_Minus45Y()
+  @Override
+  @Test
+  public final void testMakeMatrix3x3_Minus45Y()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1116,7 +1219,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix3x3_Minus45Z()
+  @Override
+  @Test
+  public final void testMakeMatrix3x3_Minus45Z()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1139,7 +1244,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix4x4_45X()
+  @Override
+  @Test
+  public final void testMakeMatrix4x4_45X()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1162,7 +1269,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix4x4_45Y()
+  @Override
+  @Test
+  public final void testMakeMatrix4x4_45Y()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1185,7 +1294,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix4x4_45Z()
+  @Override
+  @Test
+  public final void testMakeMatrix4x4_45Z()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1208,7 +1319,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix4x4_Identity()
+  @Override
+  @Test
+  public final void testMakeMatrix4x4_Identity()
   {
     final QuaternionReadable4DType q = new QuaternionI4D();
     final Matrix4x4DType m = MatrixHeapArrayM4x4D.newMatrix();
@@ -1236,7 +1349,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(m.getRowColumnD(3, 3), 1.0, 0.0);
   }
 
-  @Override @Test public final void testMakeMatrix4x4_Minus45X()
+  @Override
+  @Test
+  public final void testMakeMatrix4x4_Minus45X()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1259,7 +1374,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix4x4_Minus45Y()
+  @Override
+  @Test
+  public final void testMakeMatrix4x4_Minus45Y()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1282,7 +1399,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMakeMatrix4x4_Minus45Z()
+  @Override
+  @Test
+  public final void testMakeMatrix4x4_Minus45Z()
   {
     final ContextRelative context_d = TestUtilities.getDoubleEqualityContext();
 
@@ -1305,7 +1424,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testMultiply()
+  @Override
+  @Test
+  public final void testMultiply()
   {
     final VectorReadable3DType axis_x = new VectorI3D(1.0, 0.0, 0.0);
     final VectorReadable3DType axis_y = new VectorI3D(0.0, 1.0, 0.0);
@@ -1334,7 +1455,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(0.8535533905932737, qr.getWD(), Eq.DELTA_D_SMALL);
   }
 
-  @Override @Test public final void testNegation()
+  @Override
+  @Test
+  public final void testNegation()
   {
     final ContextRelative context = TestUtilities.getDoubleEqualityContext();
 
@@ -1352,15 +1475,29 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testNegationCases()
+  @Override
+  @Test
+  public final void testNegationCases()
   {
     final ContextRelative context = TestUtilities.getDoubleEqualityContext();
 
     final QuaternionReadable4DType qi = new QuaternionI4D(1.0, 2.0, 3.0, 4.0);
     final QuaternionReadable4DType qnx = new QuaternionI4D(-1.0, 2.0, 3.0, 4.0);
-    final QuaternionReadable4DType qny = new QuaternionI4D(-1.0, -2.0, 3.0, 4.0);
-    final QuaternionReadable4DType qnz = new QuaternionI4D(-1.0, -2.0, -3.0, 4.0);
-    final QuaternionReadable4DType qnw = new QuaternionI4D(-1.0, -2.0, -3.0, -4.0);
+    final QuaternionReadable4DType qny = new QuaternionI4D(
+      -1.0,
+      -2.0,
+      3.0,
+      4.0);
+    final QuaternionReadable4DType qnz = new QuaternionI4D(
+      -1.0,
+      -2.0,
+      -3.0,
+      4.0);
+    final QuaternionReadable4DType qnw = new QuaternionI4D(
+      -1.0,
+      -2.0,
+      -3.0,
+      -4.0);
 
     Assert.assertFalse(QuaternionI4D.isNegationOf(context, qi, qi));
     Assert.assertFalse(QuaternionI4D.isNegationOf(context, qi, qnx));
@@ -1373,7 +1510,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertTrue(QuaternionI4D.almostEqual(context, qi, qnwn));
   }
 
-  @Override @Test public final void testNormalizeSimple()
+  @Override
+  @Test
+  public final void testNormalizeSimple()
   {
     final QuaternionReadable4DType v0 = new QuaternionI4D(8.0, 0.0, 0.0, 0.0);
     final QuaternionI4D vr = QuaternionI4D.normalize(v0);
@@ -1381,7 +1520,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(1.0, m, 0.0);
   }
 
-  @Override @Test public final void testNormalizeZero()
+  @Override
+  @Test
+  public final void testNormalizeZero()
   {
     final QuaternionReadable4DType q = new QuaternionI4D(0.0, 0.0, 0.0, 0.0);
     final QuaternionI4D qr = QuaternionI4D.normalize(q);
@@ -1392,7 +1533,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     Assert.assertEquals(qr.getWD(), 0.0, Eq.DELTA_D_SMALL);
   }
 
-  @Override @Test public final void testScaleOne()
+  @Override
+  @Test
+  public final void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = getRandom() * Double.MAX_VALUE;
@@ -1410,7 +1553,9 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testScaleZero()
+  @Override
+  @Test
+  public final void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = getRandom() * Double.MAX_VALUE;
@@ -1428,13 +1573,17 @@ public class QuaternionI4DTest extends QuaternionI4Contract
     }
   }
 
-  @Override @Test public final void testString()
+  @Override
+  @Test
+  public final void testString()
   {
     final QuaternionI4D v = new QuaternionI4D(0.0, 1.0, 2.0, 3.0);
     Assert.assertTrue("[QuaternionI4D 0.0 1.0 2.0 3.0]".equals(v.toString()));
   }
 
-  @Override @Test public final void testSubtract()
+  @Override
+  @Test
+  public final void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = getRandom() * Double.MAX_VALUE;
@@ -1451,10 +1600,22 @@ public class QuaternionI4DTest extends QuaternionI4Contract
 
       final QuaternionI4D vr = QuaternionI4D.subtract(v0, v1);
 
-      Assert.assertEquals(v0.getXD() - v1.getXD(), vr.getXD(), Eq.DELTA_D_SMALL);
-      Assert.assertEquals(v0.getYD() - v1.getYD(), vr.getYD(), Eq.DELTA_D_SMALL);
-      Assert.assertEquals(v0.getZD() - v1.getZD(), vr.getZD(), Eq.DELTA_D_SMALL);
-      Assert.assertEquals(v0.getWD() - v1.getWD(), vr.getWD(), Eq.DELTA_D_SMALL);
+      Assert.assertEquals(
+        v0.getXD() - v1.getXD(),
+        vr.getXD(),
+        Eq.DELTA_D_SMALL);
+      Assert.assertEquals(
+        v0.getYD() - v1.getYD(),
+        vr.getYD(),
+        Eq.DELTA_D_SMALL);
+      Assert.assertEquals(
+        v0.getZD() - v1.getZD(),
+        vr.getZD(),
+        Eq.DELTA_D_SMALL);
+      Assert.assertEquals(
+        v0.getWD() - v1.getWD(),
+        vr.getWD(),
+        Eq.DELTA_D_SMALL);
     }
   }
 }

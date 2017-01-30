@@ -29,46 +29,54 @@ public final class PMatrixHeapArrayM4x4DTest<T0, T1, T2>
   PMatrix4x4DType<T0, T2>,
   PMatrix4x4DType<T1, T0>>
 {
-    //@formatter:on
+  //@formatter:on
 
-  @Override protected PMatrix4x4DType<T0, T1> newMatrix()
+  @Override
+  protected PMatrix4x4DType<T0, T1> newMatrix()
   {
     return PMatrixHeapArrayM4x4D.newMatrix();
   }
 
-  @Override protected PMatrix4x4DType<T1, T2> newMatrixMultLeft()
+  @Override
+  protected PMatrix4x4DType<T1, T2> newMatrixMultLeft()
   {
     return PMatrixHeapArrayM4x4D.newMatrix();
   }
 
-  @Override protected PMatrix4x4DType<T0, T1> newMatrixMultRight()
+  @Override
+  protected PMatrix4x4DType<T0, T1> newMatrixMultRight()
   {
     return PMatrixHeapArrayM4x4D.newMatrix();
   }
 
-  @Override protected PMatrix4x4DType<T0, T2> newMatrixMultResult()
+  @Override
+  protected PMatrix4x4DType<T0, T2> newMatrixMultResult()
   {
     return PMatrixHeapArrayM4x4D.newMatrix();
   }
 
-  @Override protected PMatrix4x4DType<T1, T0> newMatrixInverse()
+  @Override
+  protected PMatrix4x4DType<T1, T0> newMatrixInverse()
   {
     return PMatrixHeapArrayM4x4D.newMatrix();
   }
 
-  @Override protected PMatrix4x4DType<T0, T1> newMatrixFrom(
+  @Override
+  protected PMatrix4x4DType<T0, T1> newMatrixFrom(
     final PMatrixReadable4x4DType<T0, T1> m)
   {
     return PMatrixHeapArrayM4x4D.newMatrixFrom(m);
   }
 
-  @Override protected void checkDirectBufferInvariantsGeneric(
+  @Override
+  protected void checkDirectBufferInvariantsGeneric(
     final PMatrix4x4DType<T0, T1> m)
   {
     // Nothing
   }
 
-  @Override protected void checkDirectBufferInvariantsUntyped(
+  @Override
+  protected void checkDirectBufferInvariantsUntyped(
     final PMatrix4x4DType<?, ?> m)
   {
     // Nothing

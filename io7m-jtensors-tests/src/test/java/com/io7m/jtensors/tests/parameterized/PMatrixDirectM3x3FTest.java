@@ -31,47 +31,55 @@ public final class PMatrixDirectM3x3FTest<T0, T1, T2>
   PMatrixDirect3x3FType<T0, T2>,
   PMatrixDirect3x3FType<T1, T0>>
 {
-    //@formatter:on
+  //@formatter:on
 
-  @Override protected PMatrixDirect3x3FType<T0, T1> newMatrix()
+  @Override
+  protected PMatrixDirect3x3FType<T0, T1> newMatrix()
   {
     return PMatrixDirectM3x3F.newMatrix();
   }
 
-  @Override protected PMatrixDirect3x3FType<T1, T2> newMatrixMultLeft()
+  @Override
+  protected PMatrixDirect3x3FType<T1, T2> newMatrixMultLeft()
   {
     return PMatrixDirectM3x3F.newMatrix();
   }
 
-  @Override protected PMatrixDirect3x3FType<T0, T1> newMatrixMultRight()
+  @Override
+  protected PMatrixDirect3x3FType<T0, T1> newMatrixMultRight()
   {
     return PMatrixDirectM3x3F.newMatrix();
   }
 
-  @Override protected PMatrixDirect3x3FType<T0, T2> newMatrixMultResult()
+  @Override
+  protected PMatrixDirect3x3FType<T0, T2> newMatrixMultResult()
   {
     return PMatrixDirectM3x3F.newMatrix();
   }
 
-  @Override protected PMatrixDirect3x3FType<T1, T0> newMatrixInverse()
+  @Override
+  protected PMatrixDirect3x3FType<T1, T0> newMatrixInverse()
   {
     return PMatrixDirectM3x3F.newMatrix();
   }
 
-  @Override protected PMatrixDirect3x3FType<T0, T1> newMatrixFrom(
+  @Override
+  protected PMatrixDirect3x3FType<T0, T1> newMatrixFrom(
     final PMatrixReadable3x3FType<T0, T1> m)
   {
     return PMatrixDirectM3x3F.newMatrixFrom(m);
   }
 
-  @Override protected void checkDirectBufferInvariantsWildcard(
+  @Override
+  protected void checkDirectBufferInvariantsWildcard(
     final PMatrixReadable3x3FType<?, ?> m)
   {
     final MatrixDirectFType mx = (PMatrixDirect3x3FType<?, ?>) m;
     Assert.assertEquals(0L, (long) mx.getDirectFloatBuffer().position());
   }
 
-  @Override protected void checkDirectBufferInvariants(
+  @Override
+  protected void checkDirectBufferInvariants(
     final PMatrixDirect3x3FType<T0, T1> m)
   {
     Assert.assertEquals(0L, (long) m.getDirectFloatBuffer().position());

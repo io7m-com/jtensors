@@ -27,7 +27,8 @@ import org.junit.Test;
 public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
   extends MatrixReadable2x2DContract<T>
 {
-  @Test public final void testAdd()
+  @Test
+  public final void testAdd()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -56,7 +57,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
   @Override
   protected abstract void checkDirectBufferInvariants(final T mk);
 
-  @Test public final void testAddMutate()
+  @Test
+  public final void testAddMutate()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -81,7 +83,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
-  @Test public final void testAddRowScaled()
+  @Test
+  public final void testAddRowScaled()
   {
     final MatrixM2x2D.ContextMM2D c = new MatrixM2x2D.ContextMM2D();
     final T m0 = this.newMatrix();
@@ -160,7 +163,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     MatrixM2x2D.addRowScaledInPlace(c, m, 0, 0, -1, 1.0);
   }
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -181,13 +185,15 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     Assert.assertEquals(5.0, m1.getR1C1D(), 0.0);
   }
 
-  @Test public final void testDeterminantIdentity()
+  @Test
+  public final void testDeterminantIdentity()
   {
     final T m = this.newMatrix();
     Assert.assertEquals(1.0, MatrixM2x2D.determinant(m), 0.0);
   }
 
-  @Test public final void testDeterminantOther()
+  @Test
+  public final void testDeterminantOther()
   {
     final T m = this.newMatrix();
 
@@ -197,7 +203,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     Assert.assertEquals(4.0, MatrixM2x2D.determinant(m), 0.0);
   }
 
-  @Test public final void testDeterminantScale()
+  @Test
+  public final void testDeterminantScale()
   {
     final T m = this.newMatrix();
 
@@ -206,7 +213,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     Assert.assertEquals(2.0, MatrixM2x2D.determinant(m), 0.0);
   }
 
-  @Test public final void testDeterminantScaleNegative()
+  @Test
+  public final void testDeterminantScaleNegative()
   {
     final T m = this.newMatrix();
 
@@ -215,32 +223,37 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     Assert.assertEquals(-2.0, MatrixM2x2D.determinant(m), 0.0);
   }
 
-  @Test public final void testDeterminantZero()
+  @Test
+  public final void testDeterminantZero()
   {
     final T m = this.newMatrix();
     MatrixM2x2D.setZero(m);
     Assert.assertEquals(0.0, MatrixM2x2D.determinant(m), 0.0);
   }
 
-  @Test public final void testEqualsCase0()
+  @Test
+  public final void testEqualsCase0()
   {
     final T m0 = this.newMatrix();
     Assert.assertTrue(m0.equals(m0));
   }
 
-  @Test public final void testEqualsCase1()
+  @Test
+  public final void testEqualsCase1()
   {
     final T m0 = this.newMatrix();
     Assert.assertFalse(m0.equals(null));
   }
 
-  @Test public final void testEqualsCase2()
+  @Test
+  public final void testEqualsCase2()
   {
     final T m0 = this.newMatrix();
     Assert.assertFalse(m0.equals(Integer.valueOf(23)));
   }
 
-  @Test public final void testEqualsCase3()
+  @Test
+  public final void testEqualsCase3()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -250,7 +263,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     this.checkDirectBufferInvariants(m1);
   }
 
-  @Test public final void testEqualsNeqExhaustive()
+  @Test
+  public final void testEqualsNeqExhaustive()
   {
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
@@ -263,7 +277,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
-  @Test public final void testExchangeRows()
+  @Test
+  public final void testExchangeRows()
   {
     final MatrixM2x2D.ContextMM2D c = new MatrixM2x2D.ContextMM2D();
     final T m0 = this.newMatrix();
@@ -328,7 +343,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     MatrixM2x2D.exchangeRowsInPlace(c, m, 0, -1);
   }
 
-  @Test public final void testHashcodeNeqExhaustive()
+  @Test
+  public final void testHashcodeNeqExhaustive()
   {
     for (int row = 0; row < 2; ++row) {
       for (int col = 0; col < 2; ++col) {
@@ -342,7 +358,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
-  @Test public final void testInitializationFrom()
+  @Test
+  public final void testInitializationFrom()
   {
     final T m0 = this.newMatrix();
 
@@ -363,7 +380,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     Assert.assertEquals(13.0, m1.getR1C1D(), 0.0);
   }
 
-  @Test public final void testInitializationIdentity()
+  @Test
+  public final void testInitializationIdentity()
   {
     final T m = this.newMatrix();
 
@@ -374,7 +392,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     Assert.assertEquals(1.0, m.getR1C1D(), 0.0);
   }
 
-  @Test public final void testInvertIdentity()
+  @Test
+  public final void testInvertIdentity()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -406,7 +425,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
-  @Test public final void testInvertSimple()
+  @Test
+  public final void testInvertSimple()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -444,7 +464,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
-  @Test public final void testInvertZero()
+  @Test
+  public final void testInvertZero()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -463,7 +484,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
-  @Test public final void testMultiplyIdentity()
+  @Test
+  public final void testMultiplyIdentity()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -482,7 +504,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
-  @Test public final void testMultiplyMutateIdentity()
+  @Test
+  public final void testMultiplyMutateIdentity()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -506,7 +529,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
-  @Test public final void testMultiplyMutateSimple()
+  @Test
+  public final void testMultiplyMutateSimple()
   {
     final T m0 = this.newMatrix();
 
@@ -528,7 +552,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     this.checkDirectBufferInvariants(r);
   }
 
-  @Test public final void testMultiplySimple()
+  @Test
+  public final void testMultiplySimple()
   {
     final T m0 = this.newMatrix();
 
@@ -552,7 +577,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     this.checkDirectBufferInvariants(r);
   }
 
-  @Test public final void testMultiplyVectorSimpleND()
+  @Test
+  public final void testMultiplyVectorSimpleND()
   {
     final MatrixM2x2D.ContextMM2D c = new MatrixM2x2D.ContextMM2D();
     final T m0 = this.newMatrix();
@@ -572,7 +598,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     Assert.assertEquals(11.0, out.getYD(), 0.0);
   }
 
-  @Test public final void testMultiplyZero()
+  @Test
+  public final void testMultiplyZero()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -619,7 +646,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     m.getRowColumnD(2, 0);
   }
 
-  @Test public final void testRow()
+  @Test
+  public final void testRow()
   {
     final T m = this.newMatrix();
     final VectorM2D v = new VectorM2D();
@@ -647,7 +675,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     m.getRow2D(-1, new VectorM2D());
   }
 
-  @Test public final void testScale()
+  @Test
+  public final void testScale()
   {
     final T m0 = this.newMatrix();
     final T mr = this.newMatrix();
@@ -670,7 +699,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
-  @Test public final void testScaleMutate()
+  @Test
+  public final void testScaleMutate()
   {
     final T m = this.newMatrix();
 
@@ -694,7 +724,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     this.checkDirectBufferInvariants(mr);
   }
 
-  @Test public final void testScaleRow()
+  @Test
+  public final void testScaleRow()
   {
     final MatrixM2x2D.ContextMM2D c = new MatrixM2x2D.ContextMM2D();
     final T m0 = this.newMatrix();
@@ -787,7 +818,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     }
   }
 
-  @Test public final void testSetGetIdentity()
+  @Test
+  public final void testSetGetIdentity()
   {
     final T m = this.newMatrix();
 
@@ -824,7 +856,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testSetInterfaceGetIdentity()
+  @Test
+  public final void testSetInterfaceGetIdentity()
   {
     final T m = this.newMatrix();
 
@@ -841,7 +874,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testSetGetInterfaceIdentity()
+  @Test
+  public final void testSetGetInterfaceIdentity()
   {
     final T m = this.newMatrix();
 
@@ -858,13 +892,15 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testTrace()
+  @Test
+  public final void testTrace()
   {
     final T m = this.newMatrix();
     Assert.assertEquals(MatrixM2x2D.trace(m), 2.0, 0.0);
   }
 
-  @Test public final void testTranspose()
+  @Test
+  public final void testTranspose()
   {
     final T m = this.newMatrix();
     final T r = this.newMatrix();
@@ -894,7 +930,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     this.checkDirectBufferInvariants(r);
   }
 
-  @Test public final void testTransposeMutate()
+  @Test
+  public final void testTransposeMutate()
   {
     final T m = this.newMatrix();
 
@@ -915,7 +952,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     Assert.assertEquals(5.0, r.getR1C1D(), 0.0);
   }
 
-  @Test public final void testZero()
+  @Test
+  public final void testZero()
   {
     final T m = this.newMatrix();
     MatrixM2x2D.setZero(m);
@@ -929,7 +967,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet2Get2()
+  @Test
+  public final void testRowSet2Get2()
   {
     final T m = this.newMatrix();
     final VectorM2D v = new VectorM2D(0.0, 0.0);
@@ -949,7 +988,8 @@ public abstract class Matrix2x2DContract<T extends Matrix2x2DType>
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet2Get2Unsafe()
+  @Test
+  public final void testRowSet2Get2Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM2D v = new VectorM2D(0.0, 0.0);

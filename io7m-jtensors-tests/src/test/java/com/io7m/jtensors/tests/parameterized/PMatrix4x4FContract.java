@@ -35,11 +35,11 @@ import org.junit.Test;
 
 //@formatter:off
 public abstract class PMatrix4x4FContract<T0, T1, T2,
-  T           extends PMatrix4x4FType<T0, T1>,
-  TMULTRIGHT  extends PMatrix4x4FType<T0, T1>,
-  TMULTLEFT   extends PMatrix4x4FType<T1, T2>,
+  T extends PMatrix4x4FType<T0, T1>,
+  TMULTRIGHT extends PMatrix4x4FType<T0, T1>,
+  TMULTLEFT extends PMatrix4x4FType<T1, T2>,
   TMULTRESULT extends PMatrix4x4FType<T0, T2>,
-  TINVERSE    extends PMatrix4x4FType<T1, T0>>
+  TINVERSE extends PMatrix4x4FType<T1, T0>>
   extends PMatrixReadable4x4FContract<T0, T1, T>
 {
   //@formatter:on
@@ -51,7 +51,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
   private static final VectorReadable3FType AXIS_Z = new VectorI3F(
     0.0f, 0.0f, 1.0f);
 
-  @Override protected abstract T newMatrix();
+  @Override
+  protected abstract T newMatrix();
 
   protected abstract TMULTLEFT newMatrixMultLeft();
 
@@ -67,7 +68,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
   protected abstract void checkDirectBufferInvariantsUntyped(
     final PMatrix4x4FType<?, ?> m);
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();
@@ -127,7 +129,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m1);
   }
 
-  @Test public final void testEqualsCorrect()
+  @Test
+  public final void testEqualsCorrect()
   {
     {
       final T m0 = this.newMatrix();
@@ -155,7 +158,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testEqualsNotEqualsCorrect()
+  @Test
+  public final void testEqualsNotEqualsCorrect()
   {
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -173,7 +177,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testInitializationFrom()
+  @Test
+  public final void testInitializationFrom()
   {
     final T m0 = this.newMatrix();
 
@@ -228,7 +233,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m1);
   }
 
-  @Test public final void testInitializationIdentity()
+  @Test
+  public final void testInitializationIdentity()
   {
     final T m = this.newMatrix();
 
@@ -255,7 +261,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testInvertIdentity()
+  @Test
+  public final void testInvertIdentity()
   {
     final PMatrixM4x4F.ContextPM4F c = new PMatrixM4x4F.ContextPM4F();
     final T m0 = this.newMatrix();
@@ -295,7 +302,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testInvertIdentityContextEquivalent()
+  @Test
+  public final void testInvertIdentityContextEquivalent()
   {
     final PMatrixM4x4F.ContextPM4F context = new PMatrixM4x4F.ContextPM4F();
     final T m0 = this.newMatrix();
@@ -335,7 +343,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testInvertSimple()
+  @Test
+  public final void testInvertSimple()
   {
     final PMatrixM4x4F.ContextPM4F c = new PMatrixM4x4F.ContextPM4F();
     final T m0 = this.newMatrix();
@@ -395,7 +404,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testInvertSimple2()
+  @Test
+  public final void testInvertSimple2()
   {
     final PMatrixM4x4F.ContextPM4F c = new PMatrixM4x4F.ContextPM4F();
     final AlmostEqualDouble.ContextRelative context_d =
@@ -491,7 +501,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testInvertSimple2ContextEquivalent()
+  @Test
+  public final void testInvertSimple2ContextEquivalent()
   {
     final AlmostEqualDouble.ContextRelative context_d =
       TestUtilities.getDoubleEqualityContext3dp();
@@ -587,7 +598,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testInvertSimpleContextEquivalent()
+  @Test
+  public final void testInvertSimpleContextEquivalent()
   {
     final PMatrixM4x4F.ContextPM4F context = new PMatrixM4x4F.ContextPM4F();
     final T m0 = this.newMatrix();
@@ -647,7 +659,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testInvertZero()
+  @Test
+  public final void testInvertZero()
   {
     final PMatrixM4x4F.ContextPM4F c = new PMatrixM4x4F.ContextPM4F();
     final T m0 = this.newMatrix();
@@ -661,7 +674,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testInvertZeroContextEquivalent()
+  @Test
+  public final void testInvertZeroContextEquivalent()
   {
     final PMatrixM4x4F.ContextPM4F context = new PMatrixM4x4F.ContextPM4F();
     final T m0 = this.newMatrix();
@@ -677,7 +691,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testMultiplyIdentity()
+  @Test
+  public final void testMultiplyIdentity()
   {
     final TMULTLEFT m0 = this.newMatrixMultLeft();
     final TMULTRIGHT m1 = this.newMatrixMultRight();
@@ -702,7 +717,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testMultiplySimple()
+  @Test
+  public final void testMultiplySimple()
   {
     final TMULTLEFT m0 = this.newMatrixMultLeft();
 
@@ -756,7 +772,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariantsUntyped(mr);
   }
 
-  @Test public final void testMultiplyVectorSimple()
+  @Test
+  public final void testMultiplyVectorSimple()
   {
     final PMatrixM4x4F.ContextPM4F c = new PMatrixM4x4F.ContextPM4F();
     final T m0 = this.newMatrix();
@@ -792,7 +809,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     Assert.assertEquals(150.0, (double) out.getWF(), 0.0);
   }
 
-  @Test public final void testMultiplyZero()
+  @Test
+  public final void testMultiplyZero()
   {
     final TMULTLEFT m0 = this.newMatrixMultLeft();
     final TMULTRIGHT m1 = this.newMatrixMultRight();
@@ -818,7 +836,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariantsUntyped(mr);
   }
 
-  @Test public final void testRow4()
+  @Test
+  public final void testRow4()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F();
@@ -853,7 +872,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSetGet4()
+  @Test
+  public final void testRowSetGet4()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F();
@@ -899,7 +919,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSetGet4Static()
+  @Test
+  public final void testRowSetGet4Static()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F();
@@ -945,7 +966,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet4Get3()
+  @Test
+  public final void testRowSet4Get3()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(
@@ -992,7 +1014,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet4Get3Unsafe()
+  @Test
+  public final void testRowSet4Get3Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(
@@ -1039,7 +1062,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet4Get2()
+  @Test
+  public final void testRowSet4Get2()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(
@@ -1086,7 +1110,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet4Get2Unsafe()
+  @Test
+  public final void testRowSet4Get2Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(
@@ -1175,7 +1200,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     m.getRow2F(-1, new VectorM3F());
   }
 
-  @Test public final void testSetGetIdentity()
+  @Test
+  public final void testSetGetIdentity()
   {
     final T m = this.newMatrix();
 
@@ -1314,7 +1340,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     }
   }
 
-  @Test public final void testSetGetInterfaceIdentity()
+  @Test
+  public final void testSetGetInterfaceIdentity()
   {
     final T m = this.newMatrix();
 
@@ -1359,7 +1386,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet3Get3()
+  @Test
+  public final void testRowSet3Get3()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(
@@ -1406,7 +1434,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet3Get3Unsafe()
+  @Test
+  public final void testRowSet3Get3Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(
@@ -1453,7 +1482,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet2Get2()
+  @Test
+  public final void testRowSet2Get2()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(
@@ -1500,7 +1530,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testRowSet2Get2Unsafe()
+  @Test
+  public final void testRowSet2Get2Unsafe()
   {
     final T m = this.newMatrix();
     final VectorM4F v = new VectorM4F(
@@ -1547,7 +1578,8 @@ public abstract class PMatrix4x4FContract<T0, T1, T2,
     this.checkDirectBufferInvariants(m);
   }
 
-  @Test public final void testCopyTyped()
+  @Test
+  public final void testCopyTyped()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();

@@ -49,7 +49,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     final float x,
     final float y);
 
-  @Test public final void testAbsolute()
+  @Test
+  public final void testAbsolute()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -85,7 +86,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testAbsoluteMutation()
+  @Test
+  public final void testAbsoluteMutation()
   {
     final T out = this.newVectorM2F();
     final T v = this.newVectorM2F(-1.0f, -1.0f);
@@ -109,7 +111,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals(1.0, (double) out.getYF(), 0.0);
   }
 
-  @Test public final void testAdd()
+  @Test
+  public final void testAdd()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -149,7 +152,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testAddMutation()
+  @Test
+  public final void testAddMutation()
   {
     final T out = this.newVectorM2F();
     final T v0 = this.newVectorM2F(1.0f, 1.0f);
@@ -185,7 +189,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals(1.0, (double) v1.getYF(), 0.0);
   }
 
-  @Test public final void testAddScaled()
+  @Test
+  public final void testAddScaled()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -227,7 +232,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testAlmostEqualNot()
+  @Test
+  public final void testAlmostEqualNot()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -275,7 +281,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testAlmostEqualTransitive()
+  @Test
+  public final void testAlmostEqualTransitive()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -293,7 +300,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testAngle()
+  @Test
+  public final void testAngle()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext3dp();
@@ -307,9 +315,6 @@ public abstract class VectorM2FContract<T extends Vector2FType>
       VectorM2F.normalizeInPlace(v1);
       final double angle = VectorM2F.angle(v0, v1);
 
-      
-      
-      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, angle, 0.0));
     }
@@ -323,9 +328,6 @@ public abstract class VectorM2FContract<T extends Vector2FType>
       VectorM2F.normalizeInPlace(v1);
       final double angle = VectorM2F.angle(v0, v1);
 
-      
-      
-      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -341,9 +343,6 @@ public abstract class VectorM2FContract<T extends Vector2FType>
       VectorM2F.normalizeInPlace(v1);
       final double angle = VectorM2F.angle(v0, v1);
 
-      
-      
-      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -351,7 +350,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testCheckInterface()
+  @Test
+  public final void testCheckInterface()
   {
     final T v = this.newVectorM2F(3.0f, 5.0f);
 
@@ -359,7 +359,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals((double) v.getYF(), (double) v.getYF(), 0.0);
   }
 
-  @Test public final void testClampByVectorMaximumOrdering()
+  @Test
+  public final void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float max_x = getRandomLargeNegative();
@@ -388,7 +389,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testClampByVectorMinimumOrdering()
+  @Test
+  public final void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = getRandomLargePositive();
@@ -417,7 +419,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testClampByVectorOrdering()
+  @Test
+  public final void testClampByVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float min_x = getRandomLargeNegative();
@@ -454,7 +457,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testClampMaximumOrdering()
+  @Test
+  public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float maximum = getRandomLargeNegative();
@@ -477,7 +481,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testClampMinimumOrdering()
+  @Test
+  public final void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = getRandomLargePositive();
@@ -500,7 +505,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testClampOrdering()
+  @Test
+  public final void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float minimum = getRandomLargeNegative();
@@ -529,7 +535,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final T vb = this.newVectorM2F(5.0F, 6.0F);
     final T va = this.newVectorM2F(1.0F, 2.0F);
@@ -543,7 +550,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals((double) vb.getYF(), (double) va.getYF(), 0.0);
   }
 
-  @Test public final void testCopy2Correct()
+  @Test
+  public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM2F(
       getRandomLargePositive(),
@@ -556,7 +564,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals(v0.getYF(), v1.getYF(), 0.0f);
   }
 
-  @Test public final void testDefault00()
+  @Test
+  public final void testDefault00()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -565,7 +574,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
         ec, this.newVectorM2F(), this.newVectorM2F(0.0F, 0.0F)));
   }
 
-  @Test public final void testDistance()
+  @Test
+  public final void testDistance()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -578,7 +588,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
         ec, VectorM2F.distance(c, v0, v1), 1.0));
   }
 
-  @Test public final void testDistanceOrdering()
+  @Test
+  public final void testDistanceOrdering()
   {
     final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
 
@@ -595,7 +606,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testDotProduct()
+  @Test
+  public final void testDotProduct()
   {
     final T v0 = this.newVectorM2F(10.0f, 10.0f);
     final T v1 = this.newVectorM2F(10.0f, 10.0f);
@@ -624,7 +636,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testDotProductPerpendicular()
+  @Test
+  public final void testDotProductPerpendicular()
   {
     final T vpx = this.newVectorM2F(1.0f, 0.0f);
     final T vmx = this.newVectorM2F(-1.0f, 0.0f);
@@ -636,7 +649,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals(0.0, (double) VectorM2F.dotProduct(vmx, vmy), 0.0);
   }
 
-  @Test public final void testDotProductSelf()
+  @Test
+  public final void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -647,14 +661,13 @@ public abstract class VectorM2FContract<T extends Vector2FType>
       final T q = this.newVectorM2F(x, y);
       final float dp = VectorM2F.dotProduct(q, q);
 
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, (double) dp);
     }
   }
 
-  @Test public final void testDotProductSelfMagnitudeSquared()
+  @Test
+  public final void testDotProductSelfMagnitudeSquared()
   {
     final T v0 = this.newVectorM2F(10.0f, 10.0f);
 
@@ -673,7 +686,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testEqualsCorrect()
+  @Test
+  public final void testEqualsCorrect()
   {
     {
       final T m0 = this.newVectorM2F();
@@ -697,7 +711,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testEqualsNotEqualCorrect()
+  @Test
+  public final void testEqualsNotEqualCorrect()
   {
     final float x = (float) getRandom();
     final float y = x + 1.0f;
@@ -752,14 +767,16 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testHashCodeEqualsCorrect()
+  @Test
+  public final void testHashCodeEqualsCorrect()
   {
     final T m0 = this.newVectorM2F();
     final T m1 = this.newVectorM2F();
     Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Test public final void testHashCodeNotEqualCorrect()
+  @Test
+  public final void testHashCodeNotEqualCorrect()
   {
     {
       final T m0 = this.newVectorM2F();
@@ -776,7 +793,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testInitializeReadable()
+  @Test
+  public final void testInitializeReadable()
   {
     final T v0 = this.newVectorM2F(1.0f, 2.0f);
     final T v1 = this.newVectorM2F(v0);
@@ -785,7 +803,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals((double) v1.getYF(), (double) v0.getYF(), 0.0);
   }
 
-  @Test public final void testInterpolateLinearLimits()
+  @Test
+  public final void testInterpolateLinearLimits()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -820,7 +839,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testMagnitudeNonzero()
+  @Test
+  public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x = getRandomLargePositive();
@@ -832,7 +852,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testMagnitudeNormal()
+  @Test
+  public final void testMagnitudeNormal()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext6dp();
@@ -849,15 +870,13 @@ public abstract class VectorM2FContract<T extends Vector2FType>
 
       final double m = VectorM2F.magnitude(vr);
 
-      
-      
-      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
     }
   }
 
-  @Test public final void testMagnitudeNormalizeZero()
+  @Test
+  public final void testMagnitudeNormalizeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -868,7 +887,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Test public final void testMagnitudeOne()
+  @Test
+  public final void testMagnitudeOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -878,7 +898,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
-  @Test public final void testMagnitudeSimple()
+  @Test
+  public final void testMagnitudeSimple()
   {
     final T v = this.newVectorM2F(8.0f, 0.0f);
 
@@ -892,7 +913,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testMagnitudeZero()
+  @Test
+  public final void testMagnitudeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -902,7 +924,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Test public final void testNormalizeSimple()
+  @Test
+  public final void testNormalizeSimple()
   {
     final T v0 = this.newVectorM2F(8.0f, 0.0f);
     final T out = this.newVectorM2F();
@@ -915,7 +938,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals(1.0, m, 0.0);
   }
 
-  @Test public final void testNormalizeZero()
+  @Test
+  public final void testNormalizeZero()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -928,7 +952,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertTrue(AlmostEqualFloat.almostEqual(ec, 0.0F, qr.getYF()));
   }
 
-  @Test public final void testOrthonormalize()
+  @Test
+  public final void testOrthonormalize()
   {
     final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
     final T v0 = this.newVectorM2F(0.0F, 1.0F);
@@ -943,7 +968,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals(this.newVectorM2F(1.0F, 0.0F), v1_out);
   }
 
-  @Test public final void testOrthonormalizeMutation()
+  @Test
+  public final void testOrthonormalizeMutation()
   {
     final VectorM2F.ContextVM2F c = new VectorM2F.ContextVM2F();
     final T v0 = this.newVectorM2F(0f, 1f);
@@ -955,7 +981,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals(this.newVectorM2F(1.0F, 0.0F), v1);
   }
 
-  @Test public final void testProjectionPerpendicularZero()
+  @Test
+  public final void testProjectionPerpendicularZero()
   {
     {
       final T p = this.newVectorM2F(1.0f, 0.0f);
@@ -978,7 +1005,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testScaleMutation()
+  @Test
+  public final void testScaleMutation()
   {
     final T out = this.newVectorM2F();
     final T v0 = this.newVectorM2F(1.0f, 1.0f);
@@ -1007,7 +1035,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     Assert.assertEquals(2.0, (double) v0.getYF(), 0.0);
   }
 
-  @Test public final void testScaleOne()
+  @Test
+  public final void testScaleOne()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1040,7 +1069,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testScaleZero()
+  @Test
+  public final void testScaleZero()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1071,13 +1101,15 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final T v = this.newVectorM2F(0.0f, 1.0f);
     Assert.assertTrue(v.toString().endsWith("0.0 1.0]"));
   }
 
-  @Test public final void testSubtract()
+  @Test
+  public final void testSubtract()
   {
     final AlmostEqualFloat.ContextRelative ec =
       TestUtilities.getSingleEqualityContext();
@@ -1116,7 +1148,8 @@ public abstract class VectorM2FContract<T extends Vector2FType>
     }
   }
 
-  @Test public final void testSubtractMutation()
+  @Test
+  public final void testSubtractMutation()
   {
     final T out = this.newVectorM2F();
     final T v0 = this.newVectorM2F(1.0f, 1.0f);

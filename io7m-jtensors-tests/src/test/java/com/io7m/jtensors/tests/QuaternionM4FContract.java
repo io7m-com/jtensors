@@ -38,17 +38,21 @@ import org.slf4j.LoggerFactory;
 public abstract class QuaternionM4FContract<T extends Quaternion4FType>
 {
   private static final Logger LOG;
-
-  static {
-    LOG = LoggerFactory.getLogger(QuaternionM4FContract.class);
-  }
-
   private static final VectorReadable3FType AXIS_X = new VectorI3F(
     1.0F, 0.0F, 0.0F);
   private static final VectorReadable3FType AXIS_Y = new VectorI3F(
     0.0F, 1.0F, 0.0F);
   private static final VectorReadable3FType AXIS_Z = new VectorI3F(
     0.0F, 0.0F, 1.0F);
+
+  static {
+    LOG = LoggerFactory.getLogger(QuaternionM4FContract.class);
+  }
+
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
 
   protected abstract T newQuaternion();
 
@@ -78,7 +82,9 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       "axis result:    {}", result_axis);
 
     Assert.assertEquals(
-      1.0, (double) VectorM3F.magnitude(result_axis), (double) Eq.DELTA_F_SMALL);
+      1.0,
+      (double) VectorM3F.magnitude(result_axis),
+      (double) Eq.DELTA_F_SMALL);
     Assert.assertEquals(
       expected_angle, result_angle, 0.0005);
     Assert.assertEquals(
@@ -720,7 +726,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     }
   }
 
-  @Test public final void testInterpolateSphericalLinearNegated()
+  @Test
+  public final void testInterpolateSphericalLinearNegated()
   {
     final QuaternionM4F.ContextQM4F c = new QuaternionM4F.ContextQM4F();
 
@@ -755,7 +762,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       QuaternionM4F.almostEqual(context, r1, v1));
   }
 
-  @Test public final void testInterpolateSphericalLinearCodirectional()
+  @Test
+  public final void testInterpolateSphericalLinearCodirectional()
   {
     final QuaternionM4F.ContextQM4F c = new QuaternionM4F.ContextQM4F();
     final AlmostEqualFloat.ContextRelative context =
@@ -778,19 +786,24 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       QuaternionM4F.interpolateSphericalLinear(c, v0, v1, alpha, vr0);
       QuaternionM4F.interpolateLinear(c, v0, v1, (double) alpha, vr1);
 
-      LOG.debug("spherical {} {} {} -> {}", v0, v0, Double.valueOf((double) alpha), vr0);
-      LOG.debug("linear    {} {} {} -> {}", v0, v0, Double.valueOf((double) alpha), vr1);
+      LOG.debug(
+        "spherical {} {} {} -> {}",
+        v0,
+        v0,
+        Double.valueOf((double) alpha),
+        vr0);
+      LOG.debug(
+        "linear    {} {} {} -> {}",
+        v0,
+        v0,
+        Double.valueOf((double) alpha),
+        vr1);
 
       Assert.assertTrue(
         QuaternionM4F.almostEqual(context, vr0, v0));
       Assert.assertTrue(
         QuaternionM4F.almostEqual(context, vr1, v1));
     }
-  }
-
-  protected static double getRandom()
-  {
-    return Math.random();
   }
 
   @Test
@@ -872,8 +885,14 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       final float target_z =
         (float) ((getRandom() * 100.0) - (getRandom() * 100.0));
 
-      final VectorReadable3FType origin = new VectorI3F(origin_x, origin_y, origin_z);
-      final VectorReadable3FType target = new VectorI3F(target_x, target_y, target_z);
+      final VectorReadable3FType origin = new VectorI3F(
+        origin_x,
+        origin_y,
+        origin_z);
+      final VectorReadable3FType target = new VectorI3F(
+        target_x,
+        target_y,
+        target_z);
 
       MatrixM4x4F.lookAt(
         mc, origin, target, AXIS_Y, ml);

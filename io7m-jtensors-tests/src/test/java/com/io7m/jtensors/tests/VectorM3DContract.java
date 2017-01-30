@@ -25,7 +25,8 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 
-public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDContract
+public abstract class VectorM3DContract<T extends Vector3DType> extends
+  VectorDContract
 {
   @Rule public final PercentagePassRule percent =
     new PercentagePassRule(TestUtilities.TEST_RANDOM_ITERATIONS);
@@ -39,7 +40,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
 
   protected abstract T newVectorM3D();
 
-  @Test @PercentagePassing public final void testAbsolute()
+  @Test
+  @PercentagePassing
+  public final void testAbsolute()
   {
     final double x = this.randomLargeNegative();
     final double y = this.randomLargeNegative();
@@ -54,7 +57,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(Math.abs(v.getZD()), vr.getZD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testAbsoluteMutation()
+  @Test
+  @PercentagePassing
+  public final void testAbsoluteMutation()
   {
     final double x = this.randomLargeNegative();
     final double y = this.randomLargeNegative();
@@ -72,7 +77,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(Math.abs(orig_z), v.getZD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testAdd()
+  @Test
+  @PercentagePassing
+  public final void testAdd()
   {
     final double x0 = this.randomLargePositive();
     final double y0 = this.randomLargePositive();
@@ -125,7 +132,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testAddMutation()
+  @Test
+  public final void testAddMutation()
   {
     final T out = this.newVectorM3D();
     final T v0 = this.newVectorM3D(1.0, 1.0, 1.0);
@@ -170,7 +178,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(1.0, v1.getZD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testAddScaled()
+  @Test
+  @PercentagePassing
+  public final void testAddScaled()
   {
     final double x0 = this.randomLargePositive();
     final double y0 = this.randomLargePositive();
@@ -209,7 +219,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testAlmostEqualNot()
+  @Test
+  public final void testAlmostEqualNot()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -287,7 +298,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test @PercentagePassing public final void testAlmostEqualTransitive()
+  @Test
+  @PercentagePassing
+  public final void testAlmostEqualTransitive()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -304,7 +317,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertTrue(VectorM3D.almostEqual(ec, v0, v2));
   }
 
-  @Test public final void testCheckInterface()
+  @Test
+  public final void testCheckInterface()
   {
     final T v = this.newVectorM3D(3.0, 5.0, 7.0);
 
@@ -313,7 +327,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(v.getZD(), v.getZD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testClampByVectorMaximumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampByVectorMaximumOrdering()
   {
     final double max_x = this.randomLargeNegative();
     final double max_y = this.randomLargeNegative();
@@ -344,7 +360,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test @PercentagePassing public final void testClampByVectorMinimumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampByVectorMinimumOrdering()
   {
     final double min_x = this.randomLargePositive();
     final double min_y = this.randomLargePositive();
@@ -375,7 +393,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test @PercentagePassing public final void testClampByVectorOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampByVectorOrdering()
   {
     final double min_x = this.randomLargeNegative();
     final double min_y = this.randomLargeNegative();
@@ -419,7 +439,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test @PercentagePassing public final void testClampMaximumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampMaximumOrdering()
   {
     final double maximum = this.randomLargeNegative();
 
@@ -431,9 +453,6 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     final T vr = this.newVectorM3D();
     VectorM3D.clampMaximum(v, maximum, vr);
 
-    
-    
-    
 
     Assert.assertEquals(maximum, vr.getXD(), this.delta());
     Assert.assertEquals(maximum, vr.getYD(), this.delta());
@@ -447,7 +466,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test @PercentagePassing public final void testClampMinimumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampMinimumOrdering()
   {
     final double minimum = this.randomLargePositive();
 
@@ -459,9 +480,6 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     final T vr = this.newVectorM3D();
     VectorM3D.clampMinimum(v, minimum, vr);
 
-    
-    
-    
 
     Assert.assertEquals(minimum, vr.getXD(), this.delta());
     Assert.assertEquals(minimum, vr.getYD(), this.delta());
@@ -475,7 +493,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test @PercentagePassing public final void testClampOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampOrdering()
   {
     final double minimum = this.randomLargeNegative();
     final double maximum = this.randomLargePositive();
@@ -507,7 +527,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final T vb = this.newVectorM3D(5.0, 6.0, 7.0);
     final T va = this.newVectorM3D(1.0, 2.0, 3.0);
@@ -523,7 +544,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(vb.getZD(), va.getZD(), this.delta());
   }
 
-  @Test public final void testCopy2Correct()
+  @Test
+  public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM3D(
       this.randomLargePositive(),
@@ -538,7 +560,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(0.0, v1.getZD(), this.delta());
   }
 
-  @Test public final void testCopy3Correct()
+  @Test
+  public final void testCopy3Correct()
   {
     final T v0 = this.newVectorM3D(
       this.randomLargePositive(),
@@ -553,7 +576,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(v0.getZD(), v1.getZD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testCrossProductPerpendicular()
+  @Test
+  @PercentagePassing
+  public final void testCrossProductPerpendicular()
   {
     final double x0 = this.randomLargePositive();
     final double y0 = this.randomLargePositive();
@@ -574,17 +599,13 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     final double dp0 = VectorM3D.dotProduct(v0, vr);
     final double dp1 = VectorM3D.dotProduct(v1, vr);
 
-    
-    
-    
-    
-    
 
     Assert.assertEquals(0.0, dp0, this.delta());
     Assert.assertEquals(0.0, dp1, this.delta());
   }
 
-  @Test public final void testDefault000()
+  @Test
+  public final void testDefault000()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -593,7 +614,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
         ec, this.newVectorM3D(), this.newVectorM3D(0.0, 0.0, 0.0)));
   }
 
-  @Test public final void testDistance()
+  @Test
+  public final void testDistance()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -606,7 +628,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
         ec, VectorM3D.distance(c, v0, v1), 1.0));
   }
 
-  @Test @PercentagePassing public final void testDistanceOrdering()
+  @Test
+  @PercentagePassing
+  public final void testDistanceOrdering()
   {
     final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
     final double x0 = this.randomLargePositive();
@@ -622,7 +646,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertTrue(VectorM3D.distance(c, v0, v1) >= 0.0);
   }
 
-  @Test public final void testDotProduct()
+  @Test
+  public final void testDotProduct()
   {
     final T v0 = this.newVectorM3D(10.0, 10.0, 10.0);
     final T v1 = this.newVectorM3D(10.0, 10.0, 10.0);
@@ -655,7 +680,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testDotProductPerpendicular()
+  @Test
+  public final void testDotProductPerpendicular()
   {
     final T vpx = this.newVectorM3D(1.0, 0.0, 0.0);
     final T vmx = this.newVectorM3D(-1.0, 0.0, 0.0);
@@ -672,7 +698,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(0.0, VectorM3D.dotProduct(vmy, vmz), this.delta());
   }
 
-  @Test @PercentagePassing public final void testDotProductSelf()
+  @Test
+  @PercentagePassing
+  public final void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -683,13 +711,12 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     final T q = this.newVectorM3D(x, y, z);
     final double dp = VectorM3D.dotProduct(q, q);
 
-    
-    
 
     AlmostEqualDouble.almostEqual(ec, 1.0, dp);
   }
 
-  @Test public final void testDotProductSelfMagnitudeSquared()
+  @Test
+  public final void testDotProductSelfMagnitudeSquared()
   {
     final T v0 = this.newVectorM3D(10.0, 10.0, 10.0);
 
@@ -710,7 +737,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testEqualsCorrect()
+  @Test
+  public final void testEqualsCorrect()
   {
     {
       final T m0 = this.newVectorM3D();
@@ -734,7 +762,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testEqualsNotEqualCorrect()
+  @Test
+  public final void testEqualsNotEqualCorrect()
   {
     final double x = this.randomLargePositive();
     final double y = x + 1.0;
@@ -819,14 +848,16 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testHashCodeEqualsCorrect()
+  @Test
+  public final void testHashCodeEqualsCorrect()
   {
     final T m0 = this.newVectorM3D();
     final T m1 = this.newVectorM3D();
     Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Test public final void testHashCodeNotEqualCorrect()
+  @Test
+  public final void testHashCodeNotEqualCorrect()
   {
     {
       final T m0 = this.newVectorM3D();
@@ -853,7 +884,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testInitializeReadable()
+  @Test
+  public final void testInitializeReadable()
   {
     final T v0 = this.newVectorM3D(1.0, 2.0, 3.0);
     final T v1 = this.newVectorM3D(v0);
@@ -863,7 +895,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(v1.getZD(), v0.getZD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testInterpolateLinearLimits()
+  @Test
+  @PercentagePassing
+  public final void testInterpolateLinearLimits()
   {
     final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
 
@@ -891,7 +925,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(v1.getZD(), vr1.getZD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testMagnitudeNonzero()
+  @Test
+  @PercentagePassing
+  public final void testMagnitudeNonzero()
   {
     final double x = 1.0 + this.randomLargePositive();
     final double y = 1.0 + this.randomLargePositive();
@@ -899,12 +935,14 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     final T v = this.newVectorM3D(x, y, z);
 
     final double m = VectorM3D.magnitude(v);
-    
-    
+
+
     Assert.assertTrue(m >= 1.0);
   }
 
-  @Test @PercentagePassing public final void testMagnitudeNormal()
+  @Test
+  @PercentagePassing
+  public final void testMagnitudeNormal()
   {
     final double x = this.randomLargePositive();
     final double y = this.randomLargePositive();
@@ -917,13 +955,12 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
 
     final double m = VectorM3D.magnitude(vr);
 
-    
-    
-    
+
     Assert.assertEquals(1.0, m, this.delta());
   }
 
-  @Test public final void testMagnitudeNormalizeZero()
+  @Test
+  public final void testMagnitudeNormalizeZero()
   {
     final T v = this.newVectorM3D(0.0, 0.0, 0.0);
     final T vr = VectorM3D.normalizeInPlace(v);
@@ -931,14 +968,16 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(0.0, m, this.delta());
   }
 
-  @Test public final void testMagnitudeOne()
+  @Test
+  public final void testMagnitudeOne()
   {
     final T v = this.newVectorM3D(1.0, 0.0, 0.0);
     final double m = VectorM3D.magnitude(v);
     Assert.assertEquals(1.0, m, this.delta());
   }
 
-  @Test public final void testMagnitudeSimple()
+  @Test
+  public final void testMagnitudeSimple()
   {
     final T v = this.newVectorM3D(8.0, 0.0, 0.0);
 
@@ -952,14 +991,16 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testMagnitudeZero()
+  @Test
+  public final void testMagnitudeZero()
   {
     final T v = this.newVectorM3D(0.0, 0.0, 0.0);
     final double m = VectorM3D.magnitude(v);
     Assert.assertEquals(0.0, m, this.delta());
   }
 
-  @Test public final void testNormalizeSimple()
+  @Test
+  public final void testNormalizeSimple()
   {
     final T v0 = this.newVectorM3D(8.0, 0.0, 0.0);
     final T out = this.newVectorM3D();
@@ -972,7 +1013,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(1.0, m, this.delta());
   }
 
-  @Test public final void testNormalizeZero()
+  @Test
+  public final void testNormalizeZero()
   {
     final T qr = this.newVectorM3D();
     final T q = this.newVectorM3D(0.0, 0.0, 0.0);
@@ -983,7 +1025,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(0.0, qr.getZD(), this.delta());
   }
 
-  @Test public final void testOrthonormalize()
+  @Test
+  public final void testOrthonormalize()
   {
     final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
     final T v0 = this.newVectorM3D(0.0, 1.0, 0.0);
@@ -997,7 +1040,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(this.newVectorM3D(1.0, 0.0, 0.0), v1_out);
   }
 
-  @Test public final void testOrthonormalizeMutation()
+  @Test
+  public final void testOrthonormalizeMutation()
   {
     final VectorM3D.ContextVM3D c = new VectorM3D.ContextVM3D();
     final T v0 = this.newVectorM3D(0.0, 1.0, 0.0);
@@ -1009,7 +1053,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(this.newVectorM3D(1.0, 0.0, 0.0), v1);
   }
 
-  @Test public final void testProjectionPerpendicularZero()
+  @Test
+  public final void testProjectionPerpendicularZero()
   {
     {
       final T p = this.newVectorM3D(1.0, 0.0, 0.0);
@@ -1032,7 +1077,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testScaleMutation()
+  @Test
+  public final void testScaleMutation()
   {
     final T out = this.newVectorM3D();
     final T v0 = this.newVectorM3D(1.0, 1.0, 1.0);
@@ -1067,7 +1113,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     Assert.assertEquals(2.0, v0.getZD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testScaleOne()
+  @Test
+  @PercentagePassing
+  public final void testScaleOne()
   {
     final double x = this.randomLargePositive();
     final double y = this.randomLargePositive();
@@ -1095,7 +1143,9 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test @PercentagePassing public final void testScaleZero()
+  @Test
+  @PercentagePassing
+  public final void testScaleZero()
   {
     final double x = this.randomLargePositive();
     final double y = this.randomLargePositive();
@@ -1119,13 +1169,16 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final T v = this.newVectorM3D(1.0, 2.0, 3.0);
     Assert.assertTrue(v.toString().endsWith("1.0 2.0 3.0]"));
   }
 
-  @Test @PercentagePassing public final void testSubtract()
+  @Test
+  @PercentagePassing
+  public final void testSubtract()
   {
     final double x0 = this.randomLargePositive();
     final double y0 = this.randomLargePositive();
@@ -1178,7 +1231,8 @@ public abstract class VectorM3DContract<T extends Vector3DType> extends VectorDC
     }
   }
 
-  @Test public final void testSubtractMutation()
+  @Test
+  public final void testSubtractMutation()
   {
     final T out = this.newVectorM3D();
     final T v0 = this.newVectorM3D(1.0, 1.0, 1.0);

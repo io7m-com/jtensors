@@ -252,7 +252,8 @@ public abstract class PVectorM4LBufferedContract<T, V extends PVector4LType<T>>
     v.copyFrom2L(new VectorI4L(23L, 23L, 23L, 23L));
   }
 
-  @Test public final void testCopyFrom4LIdentity()
+  @Test
+  public final void testCopyFrom4LIdentity()
   {
     final PVector4LType<T> v = this.newVectorM4LAtIndexFromSize(
       100L, 0L);
@@ -264,7 +265,8 @@ public abstract class PVectorM4LBufferedContract<T, V extends PVector4LType<T>>
     Assert.assertEquals(26L, v.getWL());
   }
 
-  @Test public final void testCopyFrom3LIdentity()
+  @Test
+  public final void testCopyFrom3LIdentity()
   {
     final PVector4LType<T> v = this.newVectorM4LAtIndexFromSize(
       100L, 0L);
@@ -275,7 +277,8 @@ public abstract class PVectorM4LBufferedContract<T, V extends PVector4LType<T>>
     Assert.assertEquals(25L, v.getZL());
   }
 
-  @Test public final void testCopyFrom2LIdentity()
+  @Test
+  public final void testCopyFrom2LIdentity()
   {
     final PVector4LType<T> v = this.newVectorM4LAtIndexFromSize(
       100L, 0L);
@@ -285,7 +288,8 @@ public abstract class PVectorM4LBufferedContract<T, V extends PVector4LType<T>>
     Assert.assertEquals(24L, v.getYL());
   }
 
-  @Test public final void testSet4LIdentity()
+  @Test
+  public final void testSet4LIdentity()
   {
     final PVector4LType<T> v = this.newVectorM4LAtIndexFromSize(
       100L, 0L);
@@ -297,7 +301,8 @@ public abstract class PVectorM4LBufferedContract<T, V extends PVector4LType<T>>
     Assert.assertEquals(26L, v.getWL());
   }
 
-  @Test public final void testSet3LIdentity()
+  @Test
+  public final void testSet3LIdentity()
   {
     final PVector4LType<T> v = this.newVectorM4LAtIndexFromSize(
       100L, 0L);
@@ -308,7 +313,8 @@ public abstract class PVectorM4LBufferedContract<T, V extends PVector4LType<T>>
     Assert.assertEquals(25L, v.getZL());
   }
 
-  @Test public final void testSet2LIdentity()
+  @Test
+  public final void testSet2LIdentity()
   {
     final PVector4LType<T> v = this.newVectorM4LAtIndexFromSize(
       100L, 0L);

@@ -24,7 +24,9 @@ public final class PercentagePassTest
 {
   @Rule public PercentagePassRule percent = new PercentagePassRule(1000);
 
-  @Test @PercentagePassing(passPercent = 50.0) public void testOne()
+  @Test
+  @PercentagePassing(passPercent = 50.0)
+  public void testOne()
   {
     System.out.println("Testing");
 

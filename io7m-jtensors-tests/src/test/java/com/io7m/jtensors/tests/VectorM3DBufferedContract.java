@@ -188,7 +188,8 @@ public abstract class VectorM3DBufferedContract<T extends Vector3DType>
     v.copyFrom2D(new VectorI3D(23.0, 23.0, 23.0));
   }
 
-  @Test public final void testCopyFrom3DIdentity()
+  @Test
+  public final void testCopyFrom3DIdentity()
   {
     final Vector3DType v = this.newVectorM3DAtIndexFromSize(
       100L, 0L);
@@ -199,7 +200,8 @@ public abstract class VectorM3DBufferedContract<T extends Vector3DType>
     Assert.assertEquals(25.0, v.getZD(), 0.0);
   }
 
-  @Test public final void testCopyFrom2DIdentity()
+  @Test
+  public final void testCopyFrom2DIdentity()
   {
     final Vector3DType v = this.newVectorM3DAtIndexFromSize(
       100L, 0L);
@@ -209,7 +211,8 @@ public abstract class VectorM3DBufferedContract<T extends Vector3DType>
     Assert.assertEquals(24.0, v.getYD(), 0.0);
   }
 
-  @Test public final void testSet3DIdentity()
+  @Test
+  public final void testSet3DIdentity()
   {
     final Vector3DType v = this.newVectorM3DAtIndexFromSize(
       100L, 0L);
@@ -220,7 +223,8 @@ public abstract class VectorM3DBufferedContract<T extends Vector3DType>
     Assert.assertEquals(25.0, v.getZD(), 0.0);
   }
 
-  @Test public final void testSet2DIdentity()
+  @Test
+  public final void testSet2DIdentity()
   {
     final Vector3DType v = this.newVectorM3DAtIndexFromSize(
       100L, 0L);

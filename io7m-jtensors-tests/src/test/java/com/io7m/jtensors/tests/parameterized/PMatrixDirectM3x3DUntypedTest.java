@@ -25,18 +25,21 @@ import org.junit.Assert;
 public final class PMatrixDirectM3x3DUntypedTest<T0, T1>
   extends MatrixDirect3x3DContract<PMatrixDirect3x3DType<T0, T1>>
 {
-  @Override protected PMatrixDirect3x3DType<T0, T1> newMatrix()
+  @Override
+  protected PMatrixDirect3x3DType<T0, T1> newMatrix()
   {
     return PMatrixDirectM3x3D.newMatrix();
   }
 
-  @Override protected PMatrixDirect3x3DType<T0, T1> newMatrixFrom(
+  @Override
+  protected PMatrixDirect3x3DType<T0, T1> newMatrixFrom(
     final MatrixReadable3x3DType source)
   {
     return PMatrixDirectM3x3D.newMatrixFromUntyped(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(
+  @Override
+  protected void checkDirectBufferInvariants(
     final PMatrixDirect3x3DType<T0, T1> m)
   {
     Assert.assertEquals(0L, (long) m.getDirectDoubleBuffer().position());

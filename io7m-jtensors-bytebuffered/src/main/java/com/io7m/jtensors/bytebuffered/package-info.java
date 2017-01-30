@@ -18,5 +18,6 @@
  * {@link java.nio.ByteBuffer} backed tensors.
  */
 
-@com.io7m.jnull.NonNullByDefault package com.io7m.jtensors.bytebuffered;
+@com.io7m.jnull.NonNullByDefault
+package com.io7m.jtensors.bytebuffered;
 

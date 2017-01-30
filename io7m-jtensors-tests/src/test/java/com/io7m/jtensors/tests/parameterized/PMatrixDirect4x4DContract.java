@@ -28,11 +28,11 @@ public abstract class PMatrixDirect4x4DContract<
   T0,
   T1,
   T2,
-  T           extends PMatrixDirect4x4DType<T0, T1>,
-  TMULTRIGHT  extends PMatrixDirect4x4DType<T0, T1>,
-  TMULTLEFT   extends PMatrixDirect4x4DType<T1, T2>,
+  T extends PMatrixDirect4x4DType<T0, T1>,
+  TMULTRIGHT extends PMatrixDirect4x4DType<T0, T1>,
+  TMULTLEFT extends PMatrixDirect4x4DType<T1, T2>,
   TMULTRESULT extends PMatrixDirect4x4DType<T0, T2>,
-  TINVERSE    extends PMatrixDirect4x4DType<T1, T0>>
+  TINVERSE extends PMatrixDirect4x4DType<T1, T0>>
   extends PMatrix4x4DContract<
   T0,
   T1,
@@ -48,7 +48,8 @@ public abstract class PMatrixDirect4x4DContract<
   @Override
   protected abstract T newMatrix();
 
-  @Test public final void testBufferEndianness()
+  @Test
+  public final void testBufferEndianness()
   {
     final T m = this.newMatrix();
     final DoubleBuffer b = m.getDirectDoubleBuffer();
@@ -56,7 +57,8 @@ public abstract class PMatrixDirect4x4DContract<
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
   }
 
-  @Test public final void testStorage()
+  @Test
+  public final void testStorage()
   {
     final T m = this.newMatrix();
 

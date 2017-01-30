@@ -20,17 +20,20 @@ import com.io7m.jtensors.VectorM2F;
 
 public final class VectorM2FTest extends VectorM2FContract<VectorM2F>
 {
-  @Override protected VectorM2F newVectorM2F(final VectorM2F v)
+  @Override
+  protected VectorM2F newVectorM2F(final VectorM2F v)
   {
     return new VectorM2F(v);
   }
 
-  @Override protected VectorM2F newVectorM2F()
+  @Override
+  protected VectorM2F newVectorM2F()
   {
     return new VectorM2F();
   }
 
-  @Override protected VectorM2F newVectorM2F(
+  @Override
+  protected VectorM2F newVectorM2F(
     final float x,
     final float y)
   {

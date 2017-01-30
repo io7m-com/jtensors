@@ -100,32 +100,38 @@ public final class VectorByteBufferedM4I extends ByteBuffered
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
-  @Override public int getWI()
+  @Override
+  public int getWI()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 3);
   }
 
-  @Override public void setWI(final int w)
+  @Override
+  public void setWI(final int w)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 3, w);
   }
 
-  @Override public int getZI()
+  @Override
+  public int getZI()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 2);
   }
 
-  @Override public void setZI(final int z)
+  @Override
+  public void setZI(final int z)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 2, z);
   }
 
-  @Override public int getXI()
+  @Override
+  public int getXI()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
-  @Override public void setXI(final int x)
+  @Override
+  public void setXI(final int x)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
@@ -146,17 +152,20 @@ public final class VectorByteBufferedM4I extends ByteBuffered
       getByteOffsetForIndex(o, i));
   }
 
-  @Override public int getYI()
+  @Override
+  public int getYI()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
-  @Override public void setYI(final int y)
+  @Override
+  public void setYI(final int y)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
-  @Override public void copyFrom4I(final VectorReadable4IType in_v)
+  @Override
+  public void copyFrom4I(final VectorReadable4IType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXI());
@@ -165,7 +174,8 @@ public final class VectorByteBufferedM4I extends ByteBuffered
     this.setAtOffsetAndIndex(o, 3, in_v.getWI());
   }
 
-  @Override public void set4I(
+  @Override
+  public void set4I(
     final int x,
     final int y,
     final int z,
@@ -178,7 +188,8 @@ public final class VectorByteBufferedM4I extends ByteBuffered
     this.setAtOffsetAndIndex(o, 3, w);
   }
 
-  @Override public void copyFrom3I(final VectorReadable3IType in_v)
+  @Override
+  public void copyFrom3I(final VectorReadable3IType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXI());
@@ -186,7 +197,8 @@ public final class VectorByteBufferedM4I extends ByteBuffered
     this.setAtOffsetAndIndex(o, 2, in_v.getZI());
   }
 
-  @Override public void set3I(
+  @Override
+  public void set3I(
     final int x,
     final int y,
     final int z)
@@ -197,14 +209,16 @@ public final class VectorByteBufferedM4I extends ByteBuffered
     this.setAtOffsetAndIndex(o, 2, z);
   }
 
-  @Override public void copyFrom2I(final VectorReadable2IType in_v)
+  @Override
+  public void copyFrom2I(final VectorReadable2IType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXI());
     this.setAtOffsetAndIndex(o, 1, in_v.getYI());
   }
 
-  @Override public void set2I(
+  @Override
+  public void set2I(
     final int x,
     final int y)
   {
@@ -213,7 +227,8 @@ public final class VectorByteBufferedM4I extends ByteBuffered
     this.setAtOffsetAndIndex(o, 1, y);
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -224,7 +239,8 @@ public final class VectorByteBufferedM4I extends ByteBuffered
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(128);
     builder.append("[VectorByteBufferedM4I ");
@@ -240,7 +256,8 @@ public final class VectorByteBufferedM4I extends ByteBuffered
     return NullCheck.notNull(r);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {

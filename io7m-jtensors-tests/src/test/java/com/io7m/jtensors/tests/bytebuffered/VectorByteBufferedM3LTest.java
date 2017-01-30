@@ -28,7 +28,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class VectorByteBufferedM3LTest
   extends VectorByteBufferedM3LContract<VectorByteBuffered3LType>
 {
-  @Override protected VectorByteBuffered3LType newVectorM3L(
+  @Override
+  protected VectorByteBuffered3LType newVectorM3L(
     final long x,
     final long y,
     final long z)
@@ -40,7 +41,8 @@ public final class VectorByteBufferedM3LTest
     return v;
   }
 
-  @Override protected VectorByteBuffered3LType newVectorM3L()
+  @Override
+  protected VectorByteBuffered3LType newVectorM3L()
   {
     final ByteBuffer buf = ByteBuffer.allocate(3 * 8);
     final VectorByteBuffered3LType v =
@@ -49,7 +51,8 @@ public final class VectorByteBufferedM3LTest
     return v;
   }
 
-  @Override protected VectorByteBuffered3LType newVectorM3L(
+  @Override
+  protected VectorByteBuffered3LType newVectorM3L(
     final VectorByteBuffered3LType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(3 * 8);
@@ -59,7 +62,8 @@ public final class VectorByteBufferedM3LTest
     return vr;
   }
 
-  @Override protected VectorByteBuffered3LType newVectorM3LAtIndexFromSize(
+  @Override
+  protected VectorByteBuffered3LType newVectorM3LAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -67,7 +71,8 @@ public final class VectorByteBufferedM3LTest
     return VectorByteBufferedM3L.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected VectorByteBuffered3LType newVectorM3LWithBaseOffset(
+  @Override
+  protected VectorByteBuffered3LType newVectorM3LWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -77,7 +82,8 @@ public final class VectorByteBufferedM3LTest
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(3 * 8);
     b.order(ByteOrder.BIG_ENDIAN);

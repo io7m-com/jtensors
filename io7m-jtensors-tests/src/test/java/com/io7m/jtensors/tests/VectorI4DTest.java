@@ -25,7 +25,9 @@ import org.junit.Test;
 
 public class VectorI4DTest extends VectorI4Contract
 {
-  @Override @Test public void testAbsolute()
+  @Override
+  @Test
+  public void testAbsolute()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -54,7 +56,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testAdd()
+  @Override
+  @Test
+  public void testAdd()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -90,7 +94,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testAddScaled()
+  @Override
+  @Test
+  public void testAddScaled()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -127,7 +133,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+  @Override
+  @Test
+  public void testAlmostEqualNot()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -211,7 +219,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+  @Override
+  @Test
+  public void testAlmostEqualTransitive()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -231,7 +241,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testCheckInterface()
+  @Override
+  @Test
+  public void testCheckInterface()
   {
     final VectorReadable4DType v = new VectorI4D(3.0, 5.0, 7.0, 11.0);
 
@@ -241,7 +253,9 @@ public class VectorI4DTest extends VectorI4Contract
     Assert.assertTrue(v.getWD() == v.getWD());
   }
 
-  @Override @Test public void testClampByVectorMaximumOrdering()
+  @Override
+  @Test
+  public void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double max_x = Math.random() * Double.MIN_VALUE;
@@ -258,20 +272,22 @@ public class VectorI4DTest extends VectorI4Contract
 
       Assert.assertTrue(
         VectorI4D.clampMaximumByVector(v, maximum).getXD()
-        <= maximum.getXD());
+          <= maximum.getXD());
       Assert.assertTrue(
         VectorI4D.clampMaximumByVector(v, maximum).getYD()
-        <= maximum.getYD());
+          <= maximum.getYD());
       Assert.assertTrue(
         VectorI4D.clampMaximumByVector(v, maximum).getZD()
-        <= maximum.getZD());
+          <= maximum.getZD());
       Assert.assertTrue(
         VectorI4D.clampMaximumByVector(v, maximum).getWD()
-        <= maximum.getWD());
+          <= maximum.getWD());
     }
   }
 
-  @Override @Test public void testClampByVectorMinimumOrdering()
+  @Override
+  @Test
+  public void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MAX_VALUE;
@@ -288,20 +304,22 @@ public class VectorI4DTest extends VectorI4Contract
 
       Assert.assertTrue(
         VectorI4D.clampMinimumByVector(v, minimum).getXD()
-        >= minimum.getXD());
+          >= minimum.getXD());
       Assert.assertTrue(
         VectorI4D.clampMinimumByVector(v, minimum).getYD()
-        >= minimum.getYD());
+          >= minimum.getYD());
       Assert.assertTrue(
         VectorI4D.clampMinimumByVector(v, minimum).getZD()
-        >= minimum.getZD());
+          >= minimum.getZD());
       Assert.assertTrue(
         VectorI4D.clampMinimumByVector(v, minimum).getWD()
-        >= minimum.getWD());
+          >= minimum.getWD());
     }
   }
 
-  @Override @Test public void testClampByVectorOrdering()
+  @Override
+  @Test
+  public void testClampByVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MIN_VALUE;
@@ -324,32 +342,34 @@ public class VectorI4DTest extends VectorI4Contract
 
       Assert.assertTrue(
         VectorI4D.clampByVector(v, minimum, maximum).getXD()
-        <= maximum.getXD());
+          <= maximum.getXD());
       Assert.assertTrue(
         VectorI4D.clampByVector(v, minimum, maximum).getXD()
-        >= minimum.getXD());
+          >= minimum.getXD());
       Assert.assertTrue(
         VectorI4D.clampByVector(v, minimum, maximum).getYD()
-        <= maximum.getYD());
+          <= maximum.getYD());
       Assert.assertTrue(
         VectorI4D.clampByVector(v, minimum, maximum).getYD()
-        >= minimum.getYD());
+          >= minimum.getYD());
       Assert.assertTrue(
         VectorI4D.clampByVector(v, minimum, maximum).getZD()
-        <= maximum.getZD());
+          <= maximum.getZD());
       Assert.assertTrue(
         VectorI4D.clampByVector(v, minimum, maximum).getZD()
-        >= minimum.getZD());
+          >= minimum.getZD());
       Assert.assertTrue(
         VectorI4D.clampByVector(v, minimum, maximum).getWD()
-        <= maximum.getWD());
+          <= maximum.getWD());
       Assert.assertTrue(
         VectorI4D.clampByVector(v, minimum, maximum).getWD()
-        >= minimum.getWD());
+          >= minimum.getWD());
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+  @Override
+  @Test
+  public void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double maximum = Math.random() * Double.MIN_VALUE;
@@ -367,7 +387,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+  @Override
+  @Test
+  public void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double minimum = Math.random() * Double.MAX_VALUE;
@@ -385,7 +407,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testClampOrdering()
+  @Override
+  @Test
+  public void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double minimum = Math.random() * Double.MIN_VALUE;
@@ -399,32 +423,34 @@ public class VectorI4DTest extends VectorI4Contract
 
       Assert.assertTrue(
         VectorI4D.clamp(v, minimum, maximum).getXD()
-        <= maximum);
+          <= maximum);
       Assert.assertTrue(
         VectorI4D.clamp(v, minimum, maximum).getXD()
-        >= minimum);
+          >= minimum);
       Assert.assertTrue(
         VectorI4D.clamp(v, minimum, maximum).getYD()
-        <= maximum);
+          <= maximum);
       Assert.assertTrue(
         VectorI4D.clamp(v, minimum, maximum).getYD()
-        >= minimum);
+          >= minimum);
       Assert.assertTrue(
         VectorI4D.clamp(v, minimum, maximum).getZD()
-        <= maximum);
+          <= maximum);
       Assert.assertTrue(
         VectorI4D.clamp(v, minimum, maximum).getZD()
-        >= minimum);
+          >= minimum);
       Assert.assertTrue(
         VectorI4D.clamp(v, minimum, maximum).getWD()
-        <= maximum);
+          <= maximum);
       Assert.assertTrue(
         VectorI4D.clamp(v, minimum, maximum).getWD()
-        >= minimum);
+          >= minimum);
     }
   }
 
-  @Override @Test public void testCopy()
+  @Override
+  @Test
+  public void testCopy()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -441,7 +467,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testDefault0001()
+  @Override
+  @Test
+  public void testDefault0001()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -453,7 +481,9 @@ public class VectorI4DTest extends VectorI4Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getWD(), 1.0));
   }
 
-  @Override @Test public void testDistance()
+  @Override
+  @Test
+  public void testDistance()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -466,7 +496,9 @@ public class VectorI4DTest extends VectorI4Contract
         ec, VectorI4D.distance(v0, v1), 1.0));
   }
 
-  @Override @Test public void testDistanceOrdering()
+  @Override
+  @Test
+  public void testDistanceOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -485,7 +517,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testDotProduct()
+  @Override
+  @Test
+  public void testDotProduct()
   {
     final VectorI4D v0 = new VectorI4D(10.0, 10.0, 10.0, 10.0);
     final VectorI4D v1 = new VectorI4D(10.0, 10.0, 10.0, 10.0);
@@ -522,7 +556,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+  @Override
+  @Test
+  public void testDotProductPerpendicular()
   {
     final VectorReadable4DType vpx = new VectorI4D(1.0f, 0.0f, 0.0f, 0.0f);
     final VectorReadable4DType vmx = new VectorI4D(-1.0f, 0.0f, 0.0f, 0.0f);
@@ -539,7 +575,9 @@ public class VectorI4DTest extends VectorI4Contract
     Assert.assertTrue(VectorI4D.dotProduct(vmy, vmz) == 0.0);
   }
 
-  @Override @Test public void testDotProductSelf()
+  @Override
+  @Test
+  public void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -552,14 +590,14 @@ public class VectorI4DTest extends VectorI4Contract
       final VectorReadable4DType q = new VectorI4D(x, y, z, w);
       final double dp = VectorI4D.dotProduct(q, q);
 
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  @Override
+  @Test
+  public void testDotProductSelfMagnitudeSquared()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -574,15 +612,14 @@ public class VectorI4DTest extends VectorI4Contract
       final double ms = VectorI4D.magnitudeSquared(q);
       final double dp = VectorI4D.dotProduct(q, q);
 
-      
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+  @Override
+  @Test
+  public void testEqualsCorrect()
   {
     {
       final VectorI4D m0 = new VectorI4D();
@@ -606,7 +643,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+  @Override
+  @Test
+  public void testEqualsNotEqualCorrect()
   {
     final double x = Math.random();
     final double y = x + 1.0;
@@ -697,14 +736,18 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+  @Override
+  @Test
+  public void testHashCodeEqualsCorrect()
   {
     final VectorI4D m0 = new VectorI4D();
     final VectorI4D m1 = new VectorI4D();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+  @Override
+  @Test
+  public void testHashCodeNotEqualCorrect()
   {
     {
       final VectorI4D m0 = new VectorI4D(23, 0, 0, 1);
@@ -731,7 +774,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+  @Override
+  @Test
+  public void testInitializeReadable()
   {
     final VectorI4D v0 = new VectorI4D(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorReadable4DType v1 = new VectorI4D(v0);
@@ -742,7 +787,9 @@ public class VectorI4DTest extends VectorI4Contract
     Assert.assertTrue(v0.getWD() == v1.getWD());
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+  @Override
+  @Test
+  public void testInterpolateLinearLimits()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -769,7 +816,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+  @Override
+  @Test
+  public void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = 1.0 + (Math.random() * Double.MAX_VALUE);
@@ -783,7 +832,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+  @Override
+  @Test
+  public void testMagnitudeNormal()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -803,7 +854,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+  @Override
+  @Test
+  public void testMagnitudeNormalizeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -814,7 +867,9 @@ public class VectorI4DTest extends VectorI4Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testMagnitudeOne()
+  @Override
+  @Test
+  public void testMagnitudeOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -824,7 +879,9 @@ public class VectorI4DTest extends VectorI4Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
-  @Override @Test public void testMagnitudeSimple()
+  @Override
+  @Test
+  public void testMagnitudeSimple()
   {
     final VectorReadable4DType v = new VectorI4D(8.0, 0.0, 0.0, 0.0);
 
@@ -838,7 +895,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+  @Override
+  @Test
+  public void testMagnitudeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -848,7 +907,9 @@ public class VectorI4DTest extends VectorI4Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testNormalizeSimple()
+  @Override
+  @Test
+  public void testNormalizeSimple()
   {
     final VectorReadable4DType v0 = new VectorI4D(8.0, 0.0, 0.0, 0.0);
     final VectorI4D vr = VectorI4D.normalize(v0);
@@ -856,7 +917,9 @@ public class VectorI4DTest extends VectorI4Contract
     Assert.assertTrue(m == 1.0);
   }
 
-  @Override @Test public void testNormalizeZero()
+  @Override
+  @Test
+  public void testNormalizeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -870,7 +933,9 @@ public class VectorI4DTest extends VectorI4Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.getWD()));
   }
 
-  @Override @Test public void testOrthonormalize()
+  @Override
+  @Test
+  public void testOrthonormalize()
   {
     final VectorReadable4DType v0 = new VectorI4D(0, 1, 0, 0);
     final VectorReadable4DType v1 = new VectorI4D(0.5, 0.5, 0, 0);
@@ -880,7 +945,9 @@ public class VectorI4DTest extends VectorI4Contract
     Assert.assertEquals(new VectorI4D(1, 0, 0, 0), on.getRight());
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+  @Override
+  @Test
+  public void testProjectionPerpendicularZero()
   {
     {
       final VectorReadable4DType p = new VectorI4D(1.0, 0.0, 0.0, 0.0);
@@ -897,7 +964,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testScaleOne()
+  @Override
+  @Test
+  public void testScaleOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -926,7 +995,9 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testScaleZero()
+  @Override
+  @Test
+  public void testScaleZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -947,13 +1018,17 @@ public class VectorI4DTest extends VectorI4Contract
     }
   }
 
-  @Override @Test public void testString()
+  @Override
+  @Test
+  public void testString()
   {
     final VectorI4D v = new VectorI4D(0.0, 1.0, 2.0, 3.0);
     Assert.assertTrue("[VectorI4D 0.0 1.0 2.0 3.0]".equals(v.toString()));
   }
 
-  @Override @Test public void testSubtract()
+  @Override
+  @Test
+  public void testSubtract()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();

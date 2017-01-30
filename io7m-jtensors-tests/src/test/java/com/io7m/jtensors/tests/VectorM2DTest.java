@@ -28,37 +28,44 @@ public final class VectorM2DTest extends VectorM2DContract<VectorM2D>
     LOG = LoggerFactory.getLogger(VectorM2DTest.class);
   }
 
-  @Override protected double delta()
+  @Override
+  protected double delta()
   {
     return 0.0000000000001;
   }
 
-  @Override protected double randomLargeNegative()
+  @Override
+  protected double randomLargeNegative()
   {
     return Math.random() * -100000000.0;
   }
 
-  @Override protected double randomLargePositive()
+  @Override
+  protected double randomLargePositive()
   {
     return Math.random() * 100000000.0;
   }
 
-  @Override protected Logger logger()
+  @Override
+  protected Logger logger()
   {
     return LOG;
   }
 
-  @Override protected VectorM2D newVectorM2D(final VectorM2D v)
+  @Override
+  protected VectorM2D newVectorM2D(final VectorM2D v)
   {
     return new VectorM2D(v);
   }
 
-  @Override protected VectorM2D newVectorM2D()
+  @Override
+  protected VectorM2D newVectorM2D()
   {
     return new VectorM2D();
   }
 
-  @Override protected VectorM2D newVectorM2D(
+  @Override
+  protected VectorM2D newVectorM2D(
     final double x,
     final double y)
   {

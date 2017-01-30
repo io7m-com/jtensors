@@ -28,7 +28,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class PVectorByteBufferedM3FTest<T>
   extends PVectorByteBufferedM3FContract<T, PVectorByteBuffered3FType<T>>
 {
-  @Override protected PVectorByteBuffered3FType<T> newVectorM3F(
+  @Override
+  protected PVectorByteBuffered3FType<T> newVectorM3F(
     final float x,
     final float y,
     final float z)
@@ -40,7 +41,8 @@ public final class PVectorByteBufferedM3FTest<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered3FType<T> newVectorM3F()
+  @Override
+  protected PVectorByteBuffered3FType<T> newVectorM3F()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered3FType<T> v =
@@ -49,7 +51,8 @@ public final class PVectorByteBufferedM3FTest<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered3FType<T> newVectorM3F(
+  @Override
+  protected PVectorByteBuffered3FType<T> newVectorM3F(
     final PVectorByteBuffered3FType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
@@ -59,7 +62,8 @@ public final class PVectorByteBufferedM3FTest<T>
     return vr;
   }
 
-  @Override protected PVectorByteBuffered3FType<T> newVectorM3FAtIndexFromSize(
+  @Override
+  protected PVectorByteBuffered3FType<T> newVectorM3FAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -67,7 +71,8 @@ public final class PVectorByteBufferedM3FTest<T>
     return PVectorByteBufferedM3F.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected PVectorByteBuffered3FType<T> newVectorM3FWithBaseOffset(
+  @Override
+  protected PVectorByteBuffered3FType<T> newVectorM3FWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -77,7 +82,8 @@ public final class PVectorByteBufferedM3FTest<T>
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(3 * 4);
     b.order(ByteOrder.BIG_ENDIAN);

@@ -188,7 +188,8 @@ public abstract class VectorM3FBufferedContract<T extends Vector3FType>
     v.copyFrom2F(new VectorI3F(23.0f, 23.0f, 23.0f));
   }
 
-  @Test public final void testCopyFrom3FIdentity()
+  @Test
+  public final void testCopyFrom3FIdentity()
   {
     final Vector3FType v = this.newVectorM3FAtIndexFromSize(
       100L, 0L);
@@ -199,7 +200,8 @@ public abstract class VectorM3FBufferedContract<T extends Vector3FType>
     Assert.assertEquals(25.0, (double) v.getZF(), 0.0);
   }
 
-  @Test public final void testCopyFrom2DIdentity()
+  @Test
+  public final void testCopyFrom2DIdentity()
   {
     final Vector3FType v = this.newVectorM3FAtIndexFromSize(
       100L, 0L);
@@ -209,7 +211,8 @@ public abstract class VectorM3FBufferedContract<T extends Vector3FType>
     Assert.assertEquals(24.0, (double) v.getYF(), 0.0);
   }
 
-  @Test public final void testSet3FIdentity()
+  @Test
+  public final void testSet3FIdentity()
   {
     final Vector3FType v = this.newVectorM3FAtIndexFromSize(
       100L, 0L);
@@ -220,7 +223,8 @@ public abstract class VectorM3FBufferedContract<T extends Vector3FType>
     Assert.assertEquals(25.0, (double) v.getZF(), 0.0);
   }
 
-  @Test public final void testSet2DIdentity()
+  @Test
+  public final void testSet2DIdentity()
   {
     final Vector3FType v = this.newVectorM3FAtIndexFromSize(
       100L, 0L);

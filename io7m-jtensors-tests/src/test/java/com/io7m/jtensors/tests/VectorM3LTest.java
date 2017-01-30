@@ -20,7 +20,8 @@ import com.io7m.jtensors.VectorM3L;
 
 public final class VectorM3LTest extends VectorM3LContract<VectorM3L>
 {
-  @Override protected VectorM3L newVectorM3L(
+  @Override
+  protected VectorM3L newVectorM3L(
     final long x,
     final long y,
     final long z)
@@ -28,12 +29,14 @@ public final class VectorM3LTest extends VectorM3LContract<VectorM3L>
     return new VectorM3L(x, y, z);
   }
 
-  @Override protected VectorM3L newVectorM3L()
+  @Override
+  protected VectorM3L newVectorM3L()
   {
     return new VectorM3L();
   }
 
-  @Override protected VectorM3L newVectorM3L(final VectorM3L v)
+  @Override
+  protected VectorM3L newVectorM3L(final VectorM3L v)
   {
     return new VectorM3L(v);
   }

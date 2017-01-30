@@ -62,27 +62,32 @@ public final class VectorByteBufferedM4Db16Test
     LOG = LoggerFactory.getLogger(VectorByteBufferedM4Db16Test.class);
   }
 
-  @Override protected double delta()
+  @Override
+  protected double delta()
   {
     return 0.5;
   }
 
-  @Override protected double randomLargeNegative()
+  @Override
+  protected double randomLargeNegative()
   {
     return Math.random() * -20.0;
   }
 
-  @Override protected double randomLargePositive()
+  @Override
+  protected double randomLargePositive()
   {
     return Math.random() * 20.0;
   }
 
-  @Override protected Logger logger()
+  @Override
+  protected Logger logger()
   {
     return LOG;
   }
 
-  @Override protected VectorByteBuffered4DType newVectorM4D(
+  @Override
+  protected VectorByteBuffered4DType newVectorM4D(
     final double x,
     final double y,
     final double z,
@@ -95,7 +100,8 @@ public final class VectorByteBufferedM4Db16Test
     return v;
   }
 
-  @Override protected VectorByteBuffered4DType newVectorM4D()
+  @Override
+  protected VectorByteBuffered4DType newVectorM4D()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final VectorByteBuffered4DType v =
@@ -104,7 +110,8 @@ public final class VectorByteBufferedM4Db16Test
     return v;
   }
 
-  @Override protected VectorByteBuffered4DType newVectorM4DFrom(
+  @Override
+  protected VectorByteBuffered4DType newVectorM4DFrom(
     final VectorByteBuffered4DType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
@@ -114,7 +121,8 @@ public final class VectorByteBufferedM4Db16Test
     return vr;
   }
 
-  @Override protected VectorByteBuffered4DType newVectorM4DAtIndexFromSize(
+  @Override
+  protected VectorByteBuffered4DType newVectorM4DAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -122,7 +130,8 @@ public final class VectorByteBufferedM4Db16Test
     return VectorByteBufferedM4Db16.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected VectorByteBuffered4DType newVectorM4DWithBaseOffset(
+  @Override
+  protected VectorByteBuffered4DType newVectorM4DWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -132,7 +141,8 @@ public final class VectorByteBufferedM4Db16Test
       buf, base, offset);
   }
 
-  @Test public void testHierarchy()
+  @Test
+  public void testHierarchy()
   {
     final ByteBuffer buf = ByteBuffer.allocate(6);
     final VectorByteBuffered4Db16Type v =

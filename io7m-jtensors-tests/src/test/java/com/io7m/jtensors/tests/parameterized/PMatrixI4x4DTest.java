@@ -32,7 +32,8 @@ public final class PMatrixI4x4DTest<T0, T1>
   extends PMatrixReadable4x4DContract<T0, T1, PMatrixI4x4D<T0, T1>>
 {
 
-  @Test public void testEquals()
+  @Test
+  public void testEquals()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
 
@@ -72,7 +73,8 @@ public final class PMatrixI4x4DTest<T0, T1>
     Assert.assertFalse(im0.equals(im2));
   }
 
-  @Test public void testFromColumns()
+  @Test
+  public void testFromColumns()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
 
@@ -109,7 +111,8 @@ public final class PMatrixI4x4DTest<T0, T1>
     Assert.assertEquals(im0, im1);
   }
 
-  @Test public void testFromRows()
+  @Test
+  public void testFromRows()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
 
@@ -162,7 +165,8 @@ public final class PMatrixI4x4DTest<T0, T1>
     Assert.assertEquals(30.3, row.getWD(), 0.0);
   }
 
-  @Test public void testIdentity()
+  @Test
+  public void testIdentity()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
     final PMatrixI4x4D<T0, T1> im0 = PMatrixI4x4D.identity();
@@ -170,7 +174,8 @@ public final class PMatrixI4x4DTest<T0, T1>
     Assert.assertEquals(im1, im0);
   }
 
-  @Test public void testMakeMatrix4x4DUntyped()
+  @Test
+  public void testMakeMatrix4x4DUntyped()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
     final Matrix4x4DType m1 = MatrixHeapArrayM4x4D.newMatrix();
@@ -188,7 +193,8 @@ public final class PMatrixI4x4DTest<T0, T1>
     Assert.assertEquals(m0, m1);
   }
 
-  @Test public void testMakeMatrix4x4D()
+  @Test
+  public void testMakeMatrix4x4D()
   {
     final PMatrix4x4DType<T0, T1> m0 = PMatrixHeapArrayM4x4D.newMatrix();
     final PMatrix4x4DType<T0, T1> m1 = PMatrixHeapArrayM4x4D.newMatrix();
@@ -206,7 +212,8 @@ public final class PMatrixI4x4DTest<T0, T1>
     Assert.assertEquals(m0, m1);
   }
 
-  @Test public void testToString()
+  @Test
+  public void testToString()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
     final Matrix4x4DType m1 = MatrixHeapArrayM4x4D.newMatrix();
@@ -225,18 +232,21 @@ public final class PMatrixI4x4DTest<T0, T1>
     Assert.assertEquals(im0.toString(), im1.toString());
   }
 
-  @Override protected PMatrixI4x4D<T0, T1> newMatrix()
+  @Override
+  protected PMatrixI4x4D<T0, T1> newMatrix()
   {
     return PMatrixI4x4D.identity();
   }
 
-  @Override protected PMatrixI4x4D<T0, T1> newMatrixFrom(
+  @Override
+  protected PMatrixI4x4D<T0, T1> newMatrixFrom(
     final PMatrixReadable4x4DType<T0, T1> source)
   {
     return PMatrixI4x4D.newFromReadable(source);
   }
 
-  @Override protected void checkDirectBufferInvariantsGeneric(
+  @Override
+  protected void checkDirectBufferInvariantsGeneric(
     final PMatrixI4x4D<T0, T1> m)
   {
     // Nothing required

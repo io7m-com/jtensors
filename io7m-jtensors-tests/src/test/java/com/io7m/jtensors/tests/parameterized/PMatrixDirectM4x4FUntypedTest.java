@@ -25,18 +25,21 @@ import org.junit.Assert;
 public final class PMatrixDirectM4x4FUntypedTest<T0, T1>
   extends MatrixDirect4x4FContract<PMatrixDirect4x4FType<T0, T1>>
 {
-  @Override protected PMatrixDirect4x4FType<T0, T1> newMatrix()
+  @Override
+  protected PMatrixDirect4x4FType<T0, T1> newMatrix()
   {
     return PMatrixDirectM4x4F.newMatrix();
   }
 
-  @Override protected PMatrixDirect4x4FType<T0, T1> newMatrixFrom(
+  @Override
+  protected PMatrixDirect4x4FType<T0, T1> newMatrixFrom(
     final MatrixReadable4x4FType source)
   {
     return PMatrixDirectM4x4F.newMatrixFromUntyped(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(
+  @Override
+  protected void checkDirectBufferInvariants(
     final PMatrixDirect4x4FType<T0, T1> m)
   {
     Assert.assertEquals(0L, (long) m.getDirectFloatBuffer().position());

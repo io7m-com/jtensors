@@ -25,12 +25,14 @@ import com.io7m.jtensors.tests.Matrix3x3DContract;
 public final class PMatrixHeapArrayM3x3DUntypedTest<T0, T1>
   extends Matrix3x3DContract<PMatrix3x3DType<T0, T1>>
 {
-  @Override protected PMatrix3x3DType<T0, T1> newMatrix()
+  @Override
+  protected PMatrix3x3DType<T0, T1> newMatrix()
   {
     return PMatrixHeapArrayM3x3D.newMatrix();
   }
 
-  @Override protected PMatrix3x3DType<T0, T1> newMatrixFrom(
+  @Override
+  protected PMatrix3x3DType<T0, T1> newMatrixFrom(
     final MatrixReadable3x3DType m)
   {
     final PMatrix3x3DType<T0, T1> r = PMatrixHeapArrayM3x3D.newMatrix();

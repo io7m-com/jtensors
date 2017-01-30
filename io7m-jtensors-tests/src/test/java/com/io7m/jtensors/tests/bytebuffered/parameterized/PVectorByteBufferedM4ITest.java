@@ -28,7 +28,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class PVectorByteBufferedM4ITest<T>
   extends PVectorByteBufferedM4IContract<T, PVectorByteBuffered4IType<T>>
 {
-  @Override protected PVectorByteBuffered4IType<T> newVectorM4I(
+  @Override
+  protected PVectorByteBuffered4IType<T> newVectorM4I(
     final int x,
     final int y,
     final int z,
@@ -41,7 +42,8 @@ public final class PVectorByteBufferedM4ITest<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered4IType<T> newVectorM4I()
+  @Override
+  protected PVectorByteBuffered4IType<T> newVectorM4I()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered4IType<T> v =
@@ -50,7 +52,8 @@ public final class PVectorByteBufferedM4ITest<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered4IType<T> newVectorM4IFrom(
+  @Override
+  protected PVectorByteBuffered4IType<T> newVectorM4IFrom(
     final PVectorByteBuffered4IType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
@@ -60,7 +63,8 @@ public final class PVectorByteBufferedM4ITest<T>
     return vr;
   }
 
-  @Override protected PVectorByteBuffered4IType<T> newVectorM4IAtIndexFromSize(
+  @Override
+  protected PVectorByteBuffered4IType<T> newVectorM4IAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -68,7 +72,8 @@ public final class PVectorByteBufferedM4ITest<T>
     return PVectorByteBufferedM4I.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected PVectorByteBuffered4IType<T> newVectorM4IWithBaseOffset(
+  @Override
+  protected PVectorByteBuffered4IType<T> newVectorM4IWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -78,7 +83,8 @@ public final class PVectorByteBufferedM4ITest<T>
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(4 * 4);
     b.order(ByteOrder.BIG_ENDIAN);

@@ -124,7 +124,8 @@ public abstract class PVectorM2IBufferedContract<T, V extends PVector2IType<T>>
     v.copyFrom2I(new VectorI2I(23, 23));
   }
 
-  @Test public final void testCopyFrom2IIdentity()
+  @Test
+  public final void testCopyFrom2IIdentity()
   {
     final PVector2IType<T> v = this.newVectorM2IAtIndexFromSize(
       100L, 0L);
@@ -134,7 +135,8 @@ public abstract class PVectorM2IBufferedContract<T, V extends PVector2IType<T>>
     Assert.assertEquals(24L, (long) v.getYI());
   }
 
-  @Test public final void testSet2IIdentity()
+  @Test
+  public final void testSet2IIdentity()
   {
     final PVector2IType<T> v = this.newVectorM2IAtIndexFromSize(
       100L, 0L);

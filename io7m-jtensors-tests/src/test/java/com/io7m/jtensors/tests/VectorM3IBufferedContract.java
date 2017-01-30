@@ -188,7 +188,8 @@ public abstract class VectorM3IBufferedContract<T extends Vector3IType>
     v.copyFrom2I(new VectorI3I(23, 23, 23));
   }
 
-  @Test public final void testCopyFrom3IIdentity()
+  @Test
+  public final void testCopyFrom3IIdentity()
   {
     final Vector3IType v = this.newVectorM3IAtIndexFromSize(
       100L, 0L);
@@ -199,7 +200,8 @@ public abstract class VectorM3IBufferedContract<T extends Vector3IType>
     Assert.assertEquals(25L, (long) v.getZI());
   }
 
-  @Test public final void testCopyFrom2IIdentity()
+  @Test
+  public final void testCopyFrom2IIdentity()
   {
     final Vector3IType v = this.newVectorM3IAtIndexFromSize(
       100L, 0L);
@@ -209,7 +211,8 @@ public abstract class VectorM3IBufferedContract<T extends Vector3IType>
     Assert.assertEquals(24L, (long) v.getYI());
   }
 
-  @Test public final void testSet3IIdentity()
+  @Test
+  public final void testSet3IIdentity()
   {
     final Vector3IType v = this.newVectorM3IAtIndexFromSize(
       100L, 0L);
@@ -220,7 +223,8 @@ public abstract class VectorM3IBufferedContract<T extends Vector3IType>
     Assert.assertEquals(25L, (long) v.getZI());
   }
 
-  @Test public final void testSet2IIdentity()
+  @Test
+  public final void testSet2IIdentity()
   {
     final Vector3IType v = this.newVectorM3IAtIndexFromSize(
       100L, 0L);
