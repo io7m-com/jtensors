@@ -548,7 +548,7 @@ public class QuaternionI4FTest extends QuaternionI4Contract
   public final void testInterpolateSphericalLinearLimits()
   {
     final AlmostEqualFloat.ContextRelative context =
-      TestUtilities.getSingleEqualityContext();
+      TestUtilities.getSingleEqualityContext4dp();
 
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final float x0 = (float) (getRandom() * 10000.0);
@@ -568,13 +568,19 @@ public class QuaternionI4FTest extends QuaternionI4Contract
       final QuaternionI4F r1 =
         QuaternionI4F.interpolateSphericalLinear(v0, v1, 1.0f);
 
-      LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(0.0), r0);
-      LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(1.0), r1);
+      final QuaternionI4F v0n = QuaternionI4F.normalize(v0);
+      final QuaternionI4F v1n = QuaternionI4F.normalize(v1);
 
-      Assert.assertTrue(
-        QuaternionI4F.almostEqual(context, r0, QuaternionI4F.normalize(v0)));
-      Assert.assertTrue(
-        QuaternionI4F.almostEqual(context, r1, QuaternionI4F.normalize(v1)));
+      LOG.debug("v0:  {}", v0);
+      LOG.debug("v1:  {}", v1);
+      LOG.debug("v0n: {}", v0n);
+      LOG.debug("v1n: {}", v1n);
+      LOG.debug("r0:  {}", r0);
+      LOG.debug("r1:  {}", r1);
+      LOG.debug("--");
+
+      Assert.assertTrue(QuaternionI4F.almostEqual(context, r0, v0n));
+      Assert.assertTrue(QuaternionI4F.almostEqual(context, r1, v1n));
     }
   }
 
