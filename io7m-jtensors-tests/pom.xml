@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>io7m-jtensors</artifactId>
-    <version>7.0.0-beta0012</version>
+    <version>7.0.0</version>
   </parent>
   <artifactId>io7m-jtensors-tests</artifactId>
 
