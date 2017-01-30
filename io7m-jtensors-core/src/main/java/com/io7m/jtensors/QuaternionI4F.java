@@ -20,7 +20,6 @@ import com.io7m.jequality.AlmostEqualFloat;
 import com.io7m.jequality.AlmostEqualFloat.ContextRelative;
 import com.io7m.jequality.annotations.EqualityStructural;
 import com.io7m.jnull.Nullable;
-import com.io7m.junreachable.UnreachableCodeException;
 import net.jcip.annotations.Immutable;
 
 /**
