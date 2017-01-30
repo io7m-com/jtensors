@@ -22,17 +22,20 @@ import com.io7m.jtensors.tests.VectorM3FContract;
 public final class PVectorM3FUntypedTest<T>
   extends VectorM3FContract<PVectorM3F<T>>
 {
-  @Override protected PVectorM3F<T> newVectorM3F(final PVectorM3F<T> v0)
+  @Override
+  protected PVectorM3F<T> newVectorM3F(final PVectorM3F<T> v0)
   {
     return new PVectorM3F<T>(v0);
   }
 
-  @Override protected PVectorM3F<T> newVectorM3F()
+  @Override
+  protected PVectorM3F<T> newVectorM3F()
   {
     return new PVectorM3F<T>();
   }
 
-  @Override protected PVectorM3F<T> newVectorM3F(
+  @Override
+  protected PVectorM3F<T> newVectorM3F(
     final float x,
     final float y,
     final float z)

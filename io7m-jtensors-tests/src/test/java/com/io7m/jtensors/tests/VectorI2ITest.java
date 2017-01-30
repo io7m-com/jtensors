@@ -39,7 +39,9 @@ public class VectorI2ITest extends VectorI2Contract
     return (int) (Math.random() * (1 << 14));
   }
 
-  @Override @Test public void testAbsolute()
+  @Override
+  @Test
+  public void testAbsolute()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = (int) (Math.random() * Integer.MIN_VALUE);
@@ -53,7 +55,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testAdd()
+  @Override
+  @Test
+  public void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveSmallNumber();
@@ -71,7 +75,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testAddScaled()
+  @Override
+  @Test
+  public void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveSmallNumber();
@@ -91,17 +97,23 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+  @Override
+  @Test
+  public void testAlmostEqualNot()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+  @Override
+  @Test
+  public void testAlmostEqualTransitive()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testAngle()
+  @Override
+  @Test
+  public void testAngle()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext3dp();
@@ -111,9 +123,6 @@ public class VectorI2ITest extends VectorI2Contract
       final VectorReadable2IType v1 = new VectorI2I(1, 0);
       final double angle = VectorI2I.angle(v0, v1);
 
-      
-      
-      
 
       Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, angle, 0.0));
     }
@@ -125,9 +134,6 @@ public class VectorI2ITest extends VectorI2Contract
       final VectorReadable2IType v1 = new VectorI2I(y, -x);
       final double angle = VectorI2I.angle(v0, v1);
 
-      
-      
-      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -141,9 +147,6 @@ public class VectorI2ITest extends VectorI2Contract
       final VectorReadable2IType v1 = new VectorI2I(-y, x);
       final double angle = VectorI2I.angle(v0, v1);
 
-      
-      
-      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -151,7 +154,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testCheckInterface()
+  @Override
+  @Test
+  public void testCheckInterface()
   {
     final VectorReadable2IType v = new VectorI2I(3, 5);
 
@@ -159,7 +164,9 @@ public class VectorI2ITest extends VectorI2Contract
     Assert.assertTrue(v.getYI() == v.getYI());
   }
 
-  @Override @Test public void testClampByVectorMaximumOrdering()
+  @Override
+  @Test
+  public void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max_x = randomNegativeNumber();
@@ -177,7 +184,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampByVectorMinimumOrdering()
+  @Override
+  @Test
+  public void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = randomPositiveNumber();
@@ -195,7 +204,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampByVectorOrdering()
+  @Override
+  @Test
+  public void testClampByVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = randomNegativeNumber();
@@ -219,7 +230,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+  @Override
+  @Test
+  public void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int maximum = randomNegativeNumber();
@@ -235,7 +248,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+  @Override
+  @Test
+  public void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = randomPositiveNumber();
@@ -251,7 +266,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampOrdering()
+  @Override
+  @Test
+  public void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = randomNegativeNumber();
@@ -270,7 +287,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testCopy()
+  @Override
+  @Test
+  public void testCopy()
   {
     final VectorReadable2IType vb = new VectorI2I(5, 6);
     final VectorI2I va = new VectorI2I(1, 2);
@@ -287,19 +306,25 @@ public class VectorI2ITest extends VectorI2Contract
     Assert.assertFalse(vc.getYI() == vb.getYI());
   }
 
-  @Override @Test public void testDefault00()
+  @Override
+  @Test
+  public void testDefault00()
   {
     Assert.assertTrue(new VectorI2I().equals(new VectorI2I(0, 0)));
   }
 
-  @Override @Test public void testDistance()
+  @Override
+  @Test
+  public void testDistance()
   {
     final VectorReadable2IType v0 = new VectorI2I(0, 1);
     final VectorReadable2IType v1 = new VectorI2I(0, 0);
     Assert.assertTrue(VectorI2I.distance(v0, v1) == 1);
   }
 
-  @Override @Test public void testDistanceOrdering()
+  @Override
+  @Test
+  public void testDistanceOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveSmallNumber();
@@ -314,7 +339,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testDotProduct()
+  @Override
+  @Test
+  public void testDotProduct()
   {
     final VectorReadable2IType v0 = new VectorI2I(10, 10);
     final VectorReadable2IType v1 = new VectorI2I(10, 10);
@@ -343,7 +370,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+  @Override
+  @Test
+  public void testDotProductPerpendicular()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -357,15 +386,14 @@ public class VectorI2ITest extends VectorI2Contract
       final double ms = VectorI2I.magnitudeSquared(q);
       final double dp = VectorI2I.dotProduct(q, q);
 
-      
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
   }
 
-  @Override @Test public void testDotProductSelf()
+  @Override
+  @Test
+  public void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -377,14 +405,14 @@ public class VectorI2ITest extends VectorI2Contract
       final VectorReadable2IType q = new VectorI2I(x, y);
       final double dp = VectorI2I.dotProduct(q, q);
 
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  @Override
+  @Test
+  public void testDotProductSelfMagnitudeSquared()
   {
     final VectorReadable2IType v0 = new VectorI2I(10, 10);
 
@@ -403,7 +431,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+  @Override
+  @Test
+  public void testEqualsCorrect()
   {
     {
       final VectorI2I m0 = new VectorI2I();
@@ -427,7 +457,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+  @Override
+  @Test
+  public void testEqualsNotEqualCorrect()
   {
     final int x = (int) (Math.random() * 1000);
     final int y = x + 1;
@@ -464,14 +496,18 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+  @Override
+  @Test
+  public void testHashCodeEqualsCorrect()
   {
     final VectorI2I m0 = new VectorI2I();
     final VectorI2I m1 = new VectorI2I();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+  @Override
+  @Test
+  public void testHashCodeNotEqualCorrect()
   {
     {
       final VectorI2I m0 = new VectorI2I(23, 0);
@@ -486,7 +522,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+  @Override
+  @Test
+  public void testInitializeReadable()
   {
     final VectorI2I v0 = new VectorI2I(1, 2);
     final VectorReadable2IType v1 = new VectorI2I(v0);
@@ -495,7 +533,9 @@ public class VectorI2ITest extends VectorI2Contract
     Assert.assertTrue(v0.getYI() == v1.getYI());
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+  @Override
+  @Test
+  public void testInterpolateLinearLimits()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveNumber();
@@ -517,7 +557,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+  @Override
+  @Test
+  public void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = randomPositiveSmallNumber();
@@ -529,24 +571,32 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+  @Override
+  @Test
+  public void testMagnitudeNormal()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+  @Override
+  @Test
+  public void testMagnitudeNormalizeZero()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testMagnitudeOne()
+  @Override
+  @Test
+  public void testMagnitudeOne()
   {
     final VectorReadable2IType v = new VectorI2I(1, 0);
     final int m = VectorI2I.magnitude(v);
     Assert.assertTrue(m == 1);
   }
 
-  @Override @Test public void testMagnitudeSimple()
+  @Override
+  @Test
+  public void testMagnitudeSimple()
   {
     final VectorReadable2IType v = new VectorI2I(8, 0);
 
@@ -560,29 +610,39 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+  @Override
+  @Test
+  public void testMagnitudeZero()
   {
     final VectorReadable2IType v = new VectorI2I(0, 0);
     final int m = VectorI2I.magnitude(v);
     Assert.assertTrue(m == 0);
   }
 
-  @Override @Test public void testNormalizeSimple()
+  @Override
+  @Test
+  public void testNormalizeSimple()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testNormalizeZero()
+  @Override
+  @Test
+  public void testNormalizeZero()
   {
     // Not supported by integer vectors
   }
 
-  @Override @Test public void testOrthonormalize()
+  @Override
+  @Test
+  public void testOrthonormalize()
   {
     // Not applicable to integer vectors
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+  @Override
+  @Test
+  public void testProjectionPerpendicularZero()
   {
     {
       final VectorReadable2IType p = new VectorI2I(1, 0);
@@ -601,7 +661,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testScaleOne()
+  @Override
+  @Test
+  public void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = randomPositiveNumber();
@@ -615,7 +677,9 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testScaleZero()
+  @Override
+  @Test
+  public void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = randomPositiveNumber();
@@ -629,13 +693,17 @@ public class VectorI2ITest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testString()
+  @Override
+  @Test
+  public void testString()
   {
     final VectorI2I v = new VectorI2I(1, 2);
     Assert.assertTrue("[VectorI2I 1 2]".equals(v.toString()));
   }
 
-  @Override @Test public void testSubtract()
+  @Override
+  @Test
+  public void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveNumber();

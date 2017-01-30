@@ -22,19 +22,22 @@ import com.io7m.jtensors.tests.VectorM2FContract;
 public final class PVectorM2FUntypedTest<T>
   extends VectorM2FContract<PVectorM2F<T>>
 {
-  @Override protected PVectorM2F<T> newVectorM2F(final PVectorM2F<T> v0)
+  @Override
+  protected PVectorM2F<T> newVectorM2F(final PVectorM2F<T> v0)
   {
     return new PVectorM2F<T>(v0);
   }
 
-  @Override protected PVectorM2F<T> newVectorM2F(
+  @Override
+  protected PVectorM2F<T> newVectorM2F(
     final float x1,
     final float y1)
   {
     return new PVectorM2F<T>(x1, y1);
   }
 
-  @Override protected PVectorM2F<T> newVectorM2F()
+  @Override
+  protected PVectorM2F<T> newVectorM2F()
   {
     return new PVectorM2F<T>();
   }

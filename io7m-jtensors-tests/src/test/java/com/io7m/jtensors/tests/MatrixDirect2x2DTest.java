@@ -24,12 +24,14 @@ import org.junit.Assert;
 public final class MatrixDirect2x2DTest
   extends MatrixDirect2x2DContract<MatrixDirect2x2DType>
 {
-  @Override protected MatrixDirect2x2DType newMatrix()
+  @Override
+  protected MatrixDirect2x2DType newMatrix()
   {
     return MatrixDirectM2x2D.newMatrix();
   }
 
-  @Override protected MatrixDirect2x2DType newMatrixFrom(
+  @Override
+  protected MatrixDirect2x2DType newMatrixFrom(
     final MatrixReadable2x2DType source)
   {
     return MatrixDirectM2x2D.newMatrixFrom(source);

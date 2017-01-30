@@ -28,7 +28,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class PVectorByteBufferedM3ITest<T>
   extends PVectorByteBufferedM3IContract<T, PVectorByteBuffered3IType<T>>
 {
-  @Override protected PVectorByteBuffered3IType<T> newVectorM3I(
+  @Override
+  protected PVectorByteBuffered3IType<T> newVectorM3I(
     final int x,
     final int y,
     final int z)
@@ -40,7 +41,8 @@ public final class PVectorByteBufferedM3ITest<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered3IType<T> newVectorM3I()
+  @Override
+  protected PVectorByteBuffered3IType<T> newVectorM3I()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered3IType<T> v =
@@ -49,7 +51,8 @@ public final class PVectorByteBufferedM3ITest<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered3IType<T> newVectorM3I(
+  @Override
+  protected PVectorByteBuffered3IType<T> newVectorM3I(
     final PVectorByteBuffered3IType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
@@ -59,7 +62,8 @@ public final class PVectorByteBufferedM3ITest<T>
     return vr;
   }
 
-  @Override protected PVectorByteBuffered3IType<T> newVectorM3IAtIndexFromSize(
+  @Override
+  protected PVectorByteBuffered3IType<T> newVectorM3IAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -67,7 +71,8 @@ public final class PVectorByteBufferedM3ITest<T>
     return PVectorByteBufferedM3I.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected PVectorByteBuffered3IType<T> newVectorM3IWithBaseOffset(
+  @Override
+  protected PVectorByteBuffered3IType<T> newVectorM3IWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -77,7 +82,8 @@ public final class PVectorByteBufferedM3ITest<T>
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(3 * 4);
     b.order(ByteOrder.BIG_ENDIAN);

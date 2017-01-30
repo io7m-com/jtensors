@@ -21,12 +21,14 @@ import com.io7m.jtensors.QuaternionM4D;
 public final class QuaternionM4DTest
   extends QuaternionM4DContract<QuaternionM4D>
 {
-  @Override protected QuaternionM4D newQuaternion()
+  @Override
+  protected QuaternionM4D newQuaternion()
   {
     return new QuaternionM4D();
   }
 
-  @Override protected QuaternionM4D newQuaternion(
+  @Override
+  protected QuaternionM4D newQuaternion(
     final double x,
     final double y,
     final double z,
@@ -35,7 +37,8 @@ public final class QuaternionM4DTest
     return new QuaternionM4D(x, y, z, w);
   }
 
-  @Override protected QuaternionM4D newQuaternion(final QuaternionM4D v)
+  @Override
+  protected QuaternionM4D newQuaternion(final QuaternionM4D v)
   {
     return new QuaternionM4D(v);
   }

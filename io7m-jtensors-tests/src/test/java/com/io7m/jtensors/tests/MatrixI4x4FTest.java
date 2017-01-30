@@ -29,7 +29,8 @@ import org.junit.Test;
 public final class MatrixI4x4FTest
   extends MatrixReadable4x4FContract<MatrixI4x4F>
 {
-  @Test public void testEquals()
+  @Test
+  public void testEquals()
   {
     final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
@@ -71,7 +72,8 @@ public final class MatrixI4x4FTest
     Assert.assertFalse(im0.equals(im2));
   }
 
-  @Test public void testFromColumns()
+  @Test
+  public void testFromColumns()
   {
     final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
@@ -98,9 +100,21 @@ public final class MatrixI4x4FTest
     final MatrixI4x4F im0 = MatrixI4x4F.newFromReadable(m0);
 
     final VectorReadable4FType column_0 = new VectorI4F(0.0f, 0.1f, 0.2f, 0.3f);
-    final VectorReadable4FType column_1 = new VectorI4F(10.0f, 10.1f, 10.2f, 10.3f);
-    final VectorReadable4FType column_2 = new VectorI4F(20.0f, 20.1f, 20.2f, 20.3f);
-    final VectorReadable4FType column_3 = new VectorI4F(30.0f, 30.1f, 30.2f, 30.3f);
+    final VectorReadable4FType column_1 = new VectorI4F(
+      10.0f,
+      10.1f,
+      10.2f,
+      10.3f);
+    final VectorReadable4FType column_2 = new VectorI4F(
+      20.0f,
+      20.1f,
+      20.2f,
+      20.3f);
+    final VectorReadable4FType column_3 = new VectorI4F(
+      30.0f,
+      30.1f,
+      30.2f,
+      30.3f);
 
     final MatrixI4x4F im1 =
       MatrixI4x4F.newFromColumns(column_0, column_1, column_2, column_3);
@@ -108,7 +122,8 @@ public final class MatrixI4x4FTest
     Assert.assertEquals(im0, im1);
   }
 
-  @Test public void testFromRows()
+  @Test
+  public void testFromRows()
   {
     final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
 
@@ -161,7 +176,8 @@ public final class MatrixI4x4FTest
     Assert.assertEquals(30.3, (double) row.getWF(), 0.000001);
   }
 
-  @Test public void testIdentity()
+  @Test
+  public void testIdentity()
   {
     final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
     final MatrixI4x4F im0 = MatrixI4x4F.identity();
@@ -169,7 +185,8 @@ public final class MatrixI4x4FTest
     Assert.assertEquals(im1, im0);
   }
 
-  @Test public void testMakeMatrix4x4F()
+  @Test
+  public void testMakeMatrix4x4F()
   {
     final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
     final Matrix4x4FType m1 = MatrixHeapArrayM4x4F.newMatrix();
@@ -187,7 +204,8 @@ public final class MatrixI4x4FTest
     Assert.assertEquals(m0, m1);
   }
 
-  @Test public void testToString()
+  @Test
+  public void testToString()
   {
     final Matrix4x4FType m0 = MatrixHeapArrayM4x4F.newMatrix();
     final Matrix4x4FType m1 = MatrixHeapArrayM4x4F.newMatrix();
@@ -206,7 +224,8 @@ public final class MatrixI4x4FTest
     Assert.assertEquals(im0.toString(), im1.toString());
   }
 
-  @Override protected MatrixI4x4F newMatrix()
+  @Override
+  protected MatrixI4x4F newMatrix()
   {
     return MatrixI4x4F.identity();
   }
@@ -217,7 +236,8 @@ public final class MatrixI4x4FTest
     return MatrixI4x4F.newFromReadable(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(final MatrixI4x4F m)
+  @Override
+  protected void checkDirectBufferInvariants(final MatrixI4x4F m)
   {
     // Nothing required
   }

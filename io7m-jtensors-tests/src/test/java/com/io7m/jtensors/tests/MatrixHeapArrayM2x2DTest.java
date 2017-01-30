@@ -23,18 +23,21 @@ import com.io7m.jtensors.MatrixReadable2x2DType;
 public final class MatrixHeapArrayM2x2DTest
   extends Matrix2x2DContract<Matrix2x2DType>
 {
-  @Override protected Matrix2x2DType newMatrix()
+  @Override
+  protected Matrix2x2DType newMatrix()
   {
     return MatrixHeapArrayM2x2D.newMatrix();
   }
 
-  @Override protected Matrix2x2DType newMatrixFrom(
+  @Override
+  protected Matrix2x2DType newMatrixFrom(
     final MatrixReadable2x2DType source)
   {
     return MatrixHeapArrayM2x2D.newMatrixFrom(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(final Matrix2x2DType m)
+  @Override
+  protected void checkDirectBufferInvariants(final Matrix2x2DType m)
   {
     // Nothing required
   }

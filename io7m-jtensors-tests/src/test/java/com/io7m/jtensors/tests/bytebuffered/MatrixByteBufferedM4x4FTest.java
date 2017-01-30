@@ -30,7 +30,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class MatrixByteBufferedM4x4FTest
   extends MatrixByteBuffered4x4FContract<MatrixByteBuffered4x4FType>
 {
-  @Override protected MatrixByteBuffered4x4FType newMatrix()
+  @Override
+  protected MatrixByteBuffered4x4FType newMatrix()
   {
     final ByteBuffer buf = ByteBuffer.allocate(200);
     final MatrixByteBuffered4x4FType mr =
@@ -39,7 +40,8 @@ public final class MatrixByteBufferedM4x4FTest
     return mr;
   }
 
-  @Override protected MatrixByteBuffered4x4FType newMatrixFrom(
+  @Override
+  protected MatrixByteBuffered4x4FType newMatrixFrom(
     final MatrixReadable4x4FType m)
   {
     final ByteBuffer buf = ByteBuffer.allocate(200);
@@ -55,7 +57,8 @@ public final class MatrixByteBufferedM4x4FTest
     // Nothing required
   }
 
-  @Override protected MatrixByteBuffered4x4FType newMatrixAtIndexFromSize(
+  @Override
+  protected MatrixByteBuffered4x4FType newMatrixAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -65,7 +68,8 @@ public final class MatrixByteBufferedM4x4FTest
     return mr;
   }
 
-  @Override protected MatrixByteBuffered4x4FType newMatrixWithBaseOffset(
+  @Override
+  protected MatrixByteBuffered4x4FType newMatrixWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -75,7 +79,8 @@ public final class MatrixByteBufferedM4x4FTest
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(16 * 4);
     b.order(ByteOrder.BIG_ENDIAN);

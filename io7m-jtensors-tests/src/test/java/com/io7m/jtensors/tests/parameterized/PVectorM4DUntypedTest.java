@@ -30,37 +30,44 @@ public final class PVectorM4DUntypedTest<T>
     LOG = LoggerFactory.getLogger(PVectorM4DUntypedTest.class);
   }
 
-  @Override protected double delta()
+  @Override
+  protected double delta()
   {
     return 0.0000000000001;
   }
 
-  @Override protected double randomLargeNegative()
+  @Override
+  protected double randomLargeNegative()
   {
     return Math.random() * -100000000.0;
   }
 
-  @Override protected double randomLargePositive()
+  @Override
+  protected double randomLargePositive()
   {
     return Math.random() * 100000000.0;
   }
 
-  @Override protected Logger logger()
+  @Override
+  protected Logger logger()
   {
     return LOG;
   }
 
-  @Override protected PVectorM4D<T> newVectorM4D()
+  @Override
+  protected PVectorM4D<T> newVectorM4D()
   {
     return new PVectorM4D<T>();
   }
 
-  @Override protected PVectorM4D<T> newVectorM4DFrom(final PVectorM4D<T> v)
+  @Override
+  protected PVectorM4D<T> newVectorM4DFrom(final PVectorM4D<T> v)
   {
     return new PVectorM4D<T>(v);
   }
 
-  @Override protected PVectorM4D<T> newVectorM4D(
+  @Override
+  protected PVectorM4D<T> newVectorM4D(
     final double x,
     final double y,
     final double z,

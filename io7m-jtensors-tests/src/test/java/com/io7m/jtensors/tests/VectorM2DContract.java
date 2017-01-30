@@ -39,7 +39,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     final double x,
     final double y);
 
-  @Test @PercentagePassing public final void testAbsolute()
+  @Test
+  @PercentagePassing
+  public final void testAbsolute()
   {
     final double x = this.randomLargeNegative();
     final double y = this.randomLargeNegative();
@@ -62,7 +64,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test @PercentagePassing public final void testAbsoluteMutation()
+  @Test
+  @PercentagePassing
+  public final void testAbsoluteMutation()
   {
     final double x = this.randomLargeNegative();
     final double y = this.randomLargeNegative();
@@ -77,7 +81,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(Math.abs(orig_y), v.getYD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testAdd()
+  @Test
+  @PercentagePassing
+  public final void testAdd()
   {
     final double x0 = this.randomLargePositive();
     final double y0 = this.randomLargePositive();
@@ -103,7 +109,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testAddMutation()
+  @Test
+  public final void testAddMutation()
   {
     final T out = this.newVectorM2D();
     final T v0 = this.newVectorM2D(1.0, 1.0);
@@ -139,7 +146,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(1.0, v1.getYD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testAddScaled()
+  @Test
+  @PercentagePassing
+  public final void testAddScaled()
   {
     final double x0 = this.randomLargePositive();
     final double y0 = this.randomLargePositive();
@@ -169,7 +178,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testAlmostEqualNot()
+  @Test
+  public final void testAlmostEqualNot()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -217,7 +227,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test @PercentagePassing public final void testAlmostEqualTransitive()
+  @Test
+  @PercentagePassing
+  public final void testAlmostEqualTransitive()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -233,7 +245,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertTrue(VectorM2D.almostEqual(ec, v0, v2));
   }
 
-  @Test @PercentagePassing public final void testAngle()
+  @Test
+  @PercentagePassing
+  public final void testAngle()
   {
     {
       final double x = this.randomLargePositive();
@@ -260,7 +274,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testCheckInterface()
+  @Test
+  public final void testCheckInterface()
   {
     final T v = this.newVectorM2D(3.0, 5.0);
 
@@ -268,7 +283,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(v.getYD(), v.getYD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testClampByVectorMaximumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampByVectorMaximumOrdering()
   {
     final double max_x = this.randomLargeNegative();
     final double max_y = this.randomLargeNegative();
@@ -295,7 +312,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test @PercentagePassing public final void testClampByVectorMinimumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampByVectorMinimumOrdering()
   {
     final double min_x = this.randomLargePositive();
     final double min_y = this.randomLargePositive();
@@ -322,7 +341,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test @PercentagePassing public final void testClampByVectorOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampByVectorOrdering()
   {
     final double min_x = this.randomLargeNegative();
     final double min_y = this.randomLargeNegative();
@@ -357,7 +378,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test @PercentagePassing public final void testClampMaximumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampMaximumOrdering()
   {
     final double maximum = this.randomLargeNegative();
 
@@ -378,7 +401,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test @PercentagePassing public final void testClampMinimumOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampMinimumOrdering()
   {
     final double minimum = this.randomLargePositive();
 
@@ -399,7 +424,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test @PercentagePassing public final void testClampOrdering()
+  @Test
+  @PercentagePassing
+  public final void testClampOrdering()
   {
     final double minimum = this.randomLargeNegative();
     final double maximum = this.randomLargePositive();
@@ -426,7 +453,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final T vb = this.newVectorM2D(5.0, 6.0);
     final T va = this.newVectorM2D(1.0, 2.0);
@@ -440,7 +468,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(vb.getYD(), va.getYD(), this.delta());
   }
 
-  @Test public final void testCopy2Correct()
+  @Test
+  public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM2D(
       this.randomLargePositive(), this.randomLargePositive());
@@ -452,7 +481,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(v0.getYD(), v1.getYD(), this.delta());
   }
 
-  @Test public final void testDefault00()
+  @Test
+  public final void testDefault00()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -461,7 +491,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
         ec, this.newVectorM2D(), this.newVectorM2D(0.0, 0.0)));
   }
 
-  @Test public final void testDistance()
+  @Test
+  public final void testDistance()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -474,7 +505,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
         ec, VectorM2D.distance(c, v0, v1), 1.0));
   }
 
-  @Test @PercentagePassing public final void testDistanceOrdering()
+  @Test
+  @PercentagePassing
+  public final void testDistanceOrdering()
   {
     final VectorM2D.ContextVM2D c = new VectorM2D.ContextVM2D();
 
@@ -489,7 +522,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertTrue(VectorM2D.distance(c, v0, v1) >= 0.0);
   }
 
-  @Test public final void testDotProduct()
+  @Test
+  public final void testDotProduct()
   {
     final T v0 = this.newVectorM2D(10.0, 10.0);
     final T v1 = this.newVectorM2D(10.0, 10.0);
@@ -518,7 +552,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testDotProductPerpendicular()
+  @Test
+  public final void testDotProductPerpendicular()
   {
     final T vpx = this.newVectorM2D(1.0, 0.0);
     final T vmx = this.newVectorM2D(-1.0, 0.0);
@@ -530,7 +565,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(0.0, VectorM2D.dotProduct(vmx, vmy), this.delta());
   }
 
-  @Test public final void testDotProductSelfMagnitudeSquared()
+  @Test
+  public final void testDotProductSelfMagnitudeSquared()
   {
     final T v0 = this.newVectorM2D(10.0, 10.0);
 
@@ -549,7 +585,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testEqualsCorrect()
+  @Test
+  public final void testEqualsCorrect()
   {
     {
       final T m0 = this.newVectorM2D();
@@ -573,7 +610,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testEqualsNotEqualCorrect()
+  @Test
+  public final void testEqualsNotEqualCorrect()
   {
     final double x = this.randomLargePositive();
     final double y = x + 1.0;
@@ -628,14 +666,16 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testHashCodeEqualsCorrect()
+  @Test
+  public final void testHashCodeEqualsCorrect()
   {
     final T m0 = this.newVectorM2D();
     final T m1 = this.newVectorM2D();
     Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Test public final void testHashCodeNotEqualCorrect()
+  @Test
+  public final void testHashCodeNotEqualCorrect()
   {
     {
       final T m0 = this.newVectorM2D();
@@ -652,7 +692,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testInitializeReadable()
+  @Test
+  public final void testInitializeReadable()
   {
     final T v0 = this.newVectorM2D(1.0, 2.0);
     final T v1 = this.newVectorM2D(v0);
@@ -661,7 +702,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(v1.getYD(), v0.getYD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testInterpolateLinearLimits()
+  @Test
+  @PercentagePassing
+  public final void testInterpolateLinearLimits()
   {
     final VectorM2D.ContextVM2D c = new VectorM2D.ContextVM2D();
 
@@ -684,7 +727,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(v1.getYD(), vr1.getYD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testMagnitudeNonzero()
+  @Test
+  @PercentagePassing
+  public final void testMagnitudeNonzero()
   {
     final double x = this.randomLargePositive();
     final double y = this.randomLargePositive();
@@ -695,7 +740,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertTrue(m > 0.0);
   }
 
-  @Test @PercentagePassing public final void testMagnitudeNormal()
+  @Test
+  @PercentagePassing
+  public final void testMagnitudeNormal()
   {
     final double x = this.randomLargePositive();
     final double y = this.randomLargePositive();
@@ -709,7 +756,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(m, 1.0, this.delta());
   }
 
-  @Test public final void testMagnitudeNormalizeZero()
+  @Test
+  public final void testMagnitudeNormalizeZero()
   {
     final T v = this.newVectorM2D(0.0, 0.0);
     final T vr = VectorM2D.normalizeInPlace(v);
@@ -717,14 +765,16 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(m, 0.0, this.delta());
   }
 
-  @Test public final void testMagnitudeOne()
+  @Test
+  public final void testMagnitudeOne()
   {
     final T v = this.newVectorM2D(1.0, 0.0);
     final double m = VectorM2D.magnitude(v);
     Assert.assertEquals(m, 1.0, this.delta());
   }
 
-  @Test public final void testMagnitudeSimple()
+  @Test
+  public final void testMagnitudeSimple()
   {
     final T v = this.newVectorM2D(8.0, 0.0);
 
@@ -738,14 +788,16 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testMagnitudeZero()
+  @Test
+  public final void testMagnitudeZero()
   {
     final T v = this.newVectorM2D(0.0, 0.0);
     final double m = VectorM2D.magnitude(v);
     Assert.assertEquals(m, 0.0, this.delta());
   }
 
-  @Test public final void testNormalizeSimple()
+  @Test
+  public final void testNormalizeSimple()
   {
     final T v0 = this.newVectorM2D(8.0, 0.0);
     final T out = this.newVectorM2D();
@@ -758,7 +810,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(1.0, m, this.delta());
   }
 
-  @Test public final void testNormalizeZero()
+  @Test
+  public final void testNormalizeZero()
   {
     final T qr = this.newVectorM2D();
     final T q = this.newVectorM2D(0.0, 0.0);
@@ -768,7 +821,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(0.0, qr.getYD(), this.delta());
   }
 
-  @Test public final void testOrthonormalize()
+  @Test
+  public final void testOrthonormalize()
   {
     final T v0 = this.newVectorM2D(0.0, 1.0);
     final T v1 = this.newVectorM2D(0.5, 0.5);
@@ -782,7 +836,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(this.newVectorM2D(1.0, 0.0), v1_out);
   }
 
-  @Test public final void testOrthonormalizeMutation()
+  @Test
+  public final void testOrthonormalizeMutation()
   {
     final T v0 = this.newVectorM2D(0, 1);
     final T v1 = this.newVectorM2D(0.5, 0.5);
@@ -794,7 +849,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(this.newVectorM2D(1.0, 0.0), v1);
   }
 
-  @Test public final void testProjectionPerpendicularZero()
+  @Test
+  public final void testProjectionPerpendicularZero()
   {
     {
       final T p = this.newVectorM2D(1.0, 0.0);
@@ -817,7 +873,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testScaleMutation()
+  @Test
+  public final void testScaleMutation()
   {
     final T out = this.newVectorM2D();
     final T v0 = this.newVectorM2D(1.0, 1.0);
@@ -846,7 +903,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     Assert.assertEquals(2.0, v0.getYD(), this.delta());
   }
 
-  @Test @PercentagePassing public final void testScaleOne()
+  @Test
+  @PercentagePassing
+  public final void testScaleOne()
   {
     final double x = this.randomLargePositive();
     final double y = this.randomLargePositive();
@@ -870,7 +929,9 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test @PercentagePassing public final void testScaleZero()
+  @Test
+  @PercentagePassing
+  public final void testScaleZero()
   {
     final double x = this.randomLargePositive();
     final double y = this.randomLargePositive();
@@ -891,13 +952,16 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final T v = this.newVectorM2D(0.0, 1.0);
     Assert.assertTrue(v.toString().endsWith("0.0 1.0]"));
   }
 
-  @Test @PercentagePassing public final void testSubtract()
+  @Test
+  @PercentagePassing
+  public final void testSubtract()
   {
     final double x0 = this.randomLargePositive();
     final double y0 = this.randomLargePositive();
@@ -923,7 +987,8 @@ public abstract class VectorM2DContract<T extends Vector2DType>
     }
   }
 
-  @Test public final void testSubtractMutation()
+  @Test
+  public final void testSubtractMutation()
   {
     final T out = this.newVectorM2D();
     final T v0 = this.newVectorM2D(1.0, 1.0);

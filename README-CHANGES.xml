@@ -4,6 +4,18 @@
 
   <c:release c:ticket-system="com.github.io7m.jtensors">
     <c:date>2017-01-30</c:date>
+    <c:version>7.1.0</c:version>
+
+    <c:item>
+      <c:date>2017-01-30</c:date>
+      <c:type-code-new/>
+      <c:ticket>11</c:ticket>
+      <c:summary>Add spherical linear interpolation for quaternions.</c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release c:ticket-system="com.github.io7m.jtensors">
+    <c:date>2017-01-30</c:date>
     <c:version>7.0.0</c:version>
     <c:item>
       <c:date>2016-11-24</c:date>

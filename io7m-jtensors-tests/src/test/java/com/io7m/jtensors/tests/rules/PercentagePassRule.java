@@ -45,7 +45,8 @@ public final class PercentagePassRule implements TestRule
     }
   }
 
-  @Override public Statement apply(
+  @Override
+  public Statement apply(
     final Statement statement,
     final Description description)
   {
@@ -60,9 +61,9 @@ public final class PercentagePassRule implements TestRule
 
   private static final class PercentagePassStatement extends Statement
   {
-    private final int         iterations;
-    private final Statement   statement;
-    private final double      target_percent;
+    private final int iterations;
+    private final Statement statement;
+    private final double target_percent;
     private final Description description;
 
     private PercentagePassStatement(
@@ -77,7 +78,8 @@ public final class PercentagePassRule implements TestRule
       this.target_percent = in_percent;
     }
 
-    @Override public void evaluate()
+    @Override
+    public void evaluate()
       throws Throwable
     {
       int pass = 0;

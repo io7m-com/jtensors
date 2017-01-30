@@ -19,5 +19,6 @@
  * 754</b> {@code binary16} values.
  */
 
-@com.io7m.jnull.NonNullByDefault package com.io7m.jtensors.ieee754b16;
+@com.io7m.jnull.NonNullByDefault
+package com.io7m.jtensors.ieee754b16;
 

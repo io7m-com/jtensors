@@ -35,8 +35,7 @@ import com.io7m.jtensors.parameterized.PVector2DType;
 import com.io7m.jtensors.parameterized.PVectorReadable2DType;
 import com.io7m.jtensors.parameterized.PVectorWritable2DType;
 import com.io7m.jtensors.tests.TestUtilities;
-import com.io7m.jtensors.tests.bytebuffered.parameterized
-  .PVectorByteBufferedM2DContract;
+import com.io7m.jtensors.tests.bytebuffered.parameterized.PVectorByteBufferedM2DContract;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -55,27 +54,32 @@ public final class PVectorByteBufferedM2Db16Test<T>
     LOG = LoggerFactory.getLogger(PVectorByteBufferedM2Db16Test.class);
   }
 
-  @Override protected double delta()
+  @Override
+  protected double delta()
   {
     return 0.5;
   }
 
-  @Override protected double randomLargeNegative()
+  @Override
+  protected double randomLargeNegative()
   {
     return Math.random() * -20.0;
   }
 
-  @Override protected double randomLargePositive()
+  @Override
+  protected double randomLargePositive()
   {
     return Math.random() * 20.0;
   }
 
-  @Override protected Logger logger()
+  @Override
+  protected Logger logger()
   {
     return LOG;
   }
 
-  @Override protected PVectorByteBuffered2DType<T> newVectorM2D(
+  @Override
+  protected PVectorByteBuffered2DType<T> newVectorM2D(
     final double x,
     final double y)
   {
@@ -86,7 +90,8 @@ public final class PVectorByteBufferedM2Db16Test<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered2DType<T> newVectorM2D()
+  @Override
+  protected PVectorByteBuffered2DType<T> newVectorM2D()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered2DType<T> v =
@@ -95,7 +100,8 @@ public final class PVectorByteBufferedM2Db16Test<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered2DType<T> newVectorM2D(
+  @Override
+  protected PVectorByteBuffered2DType<T> newVectorM2D(
     final PVectorByteBuffered2DType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
@@ -105,7 +111,8 @@ public final class PVectorByteBufferedM2Db16Test<T>
     return vr;
   }
 
-  @Override protected PVectorByteBuffered2DType<T> newVectorM2DAtIndexFromSize(
+  @Override
+  protected PVectorByteBuffered2DType<T> newVectorM2DAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -113,7 +120,8 @@ public final class PVectorByteBufferedM2Db16Test<T>
     return PVectorByteBufferedM2Db16.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected PVectorByteBuffered2DType<T> newVectorM2DWithBaseOffset(
+  @Override
+  protected PVectorByteBuffered2DType<T> newVectorM2DWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -123,7 +131,8 @@ public final class PVectorByteBufferedM2Db16Test<T>
       buf, base, offset);
   }
 
-  @Test public void testHierarchy()
+  @Test
+  public void testHierarchy()
   {
     final ByteBuffer buf = ByteBuffer.allocate(6);
     final PVectorByteBuffered2Db16Type<?> v =

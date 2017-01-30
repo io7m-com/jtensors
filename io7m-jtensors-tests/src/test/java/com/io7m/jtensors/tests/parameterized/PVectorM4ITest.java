@@ -52,7 +52,8 @@ public final class PVectorM4ITest<T>
     LOG = LoggerFactory.getLogger(PVectorM4ITest.class);
   }
 
-  @Override protected PVectorM4I<T> newVectorM4I(
+  @Override
+  protected PVectorM4I<T> newVectorM4I(
     final int x,
     final int y,
     final int z,
@@ -61,17 +62,20 @@ public final class PVectorM4ITest<T>
     return new PVectorM4I<T>(x, y, z, w);
   }
 
-  @Override protected PVectorM4I<T> newVectorM4I()
+  @Override
+  protected PVectorM4I<T> newVectorM4I()
   {
     return new PVectorM4I<T>();
   }
 
-  @Override protected PVectorM4I<T> newVectorM4IFrom(final PVectorM4I<T> v)
+  @Override
+  protected PVectorM4I<T> newVectorM4IFrom(final PVectorM4I<T> v)
   {
     return new PVectorM4I<T>(v);
   }
 
-  @Test public void testHierarchy()
+  @Test
+  public void testHierarchy()
   {
     final PVectorM4I<?> v = new PVectorM4I<Object>();
 

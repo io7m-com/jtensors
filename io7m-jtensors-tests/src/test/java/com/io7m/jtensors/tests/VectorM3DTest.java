@@ -28,32 +28,38 @@ public final class VectorM3DTest extends VectorM3DContract<VectorM3D>
     LOG = LoggerFactory.getLogger(VectorM3DTest.class);
   }
 
-  @Override protected double delta()
+  @Override
+  protected double delta()
   {
     return 0.0000000000001;
   }
 
-  @Override protected double randomLargeNegative()
+  @Override
+  protected double randomLargeNegative()
   {
     return Math.random() * -100000000.0;
   }
 
-  @Override protected double randomLargePositive()
+  @Override
+  protected double randomLargePositive()
   {
     return Math.random() * 100000000.0;
   }
 
-  @Override protected Logger logger()
+  @Override
+  protected Logger logger()
   {
     return LOG;
   }
 
-  @Override protected VectorM3D newVectorM3D(final VectorM3D v0)
+  @Override
+  protected VectorM3D newVectorM3D(final VectorM3D v0)
   {
     return new VectorM3D(v0);
   }
 
-  @Override protected VectorM3D newVectorM3D(
+  @Override
+  protected VectorM3D newVectorM3D(
     final double x,
     final double y,
     final double z)
@@ -61,7 +67,8 @@ public final class VectorM3DTest extends VectorM3DContract<VectorM3D>
     return new VectorM3D(x, y, z);
   }
 
-  @Override protected VectorM3D newVectorM3D()
+  @Override
+  protected VectorM3D newVectorM3D()
   {
     return new VectorM3D();
   }

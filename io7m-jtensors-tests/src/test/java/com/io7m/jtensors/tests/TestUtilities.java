@@ -68,6 +68,15 @@ public final class TestUtilities
     return context;
   }
 
+  public static AlmostEqualFloat.ContextRelative getSingleEqualityContext4dp()
+  {
+    final AlmostEqualFloat.ContextRelative context =
+      new AlmostEqualFloat.ContextRelative();
+    context.setMaxAbsoluteDifference(0.0001f);
+    context.setMaxRelativeDifference(0.0001f);
+    return context;
+  }
+
   public static AlmostEqualFloat.ContextRelative getSingleEqualityContext2dp()
   {
     final AlmostEqualFloat.ContextRelative context =

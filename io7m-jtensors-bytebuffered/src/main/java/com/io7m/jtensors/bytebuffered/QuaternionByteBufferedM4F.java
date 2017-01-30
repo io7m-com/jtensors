@@ -100,32 +100,38 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
-  @Override public float getWF()
+  @Override
+  public float getWF()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 3);
   }
 
-  @Override public void setWF(final float w)
+  @Override
+  public void setWF(final float w)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 3, w);
   }
 
-  @Override public float getZF()
+  @Override
+  public float getZF()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 2);
   }
 
-  @Override public void setZF(final float z)
+  @Override
+  public void setZF(final float z)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 2, z);
   }
 
-  @Override public float getXF()
+  @Override
+  public float getXF()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
-  @Override public void setXF(final float x)
+  @Override
+  public void setXF(final float x)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
@@ -147,17 +153,20 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
       getByteOffsetForIndex(o, i));
   }
 
-  @Override public float getYF()
+  @Override
+  public float getYF()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
-  @Override public void setYF(final float y)
+  @Override
+  public void setYF(final float y)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
-  @Override public void copyFrom4F(final VectorReadable4FType in_v)
+  @Override
+  public void copyFrom4F(final VectorReadable4FType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXF());
@@ -166,7 +175,8 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     this.setAtOffsetAndIndex(o, 3, in_v.getWF());
   }
 
-  @Override public void set4F(
+  @Override
+  public void set4F(
     final float x,
     final float y,
     final float z,
@@ -179,7 +189,8 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     this.setAtOffsetAndIndex(o, 3, w);
   }
 
-  @Override public void copyFrom3F(final VectorReadable3FType in_v)
+  @Override
+  public void copyFrom3F(final VectorReadable3FType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXF());
@@ -187,7 +198,8 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     this.setAtOffsetAndIndex(o, 2, in_v.getZF());
   }
 
-  @Override public void set3F(
+  @Override
+  public void set3F(
     final float x,
     final float y,
     final float z)
@@ -198,14 +210,16 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     this.setAtOffsetAndIndex(o, 2, z);
   }
 
-  @Override public void copyFrom2F(final VectorReadable2FType in_v)
+  @Override
+  public void copyFrom2F(final VectorReadable2FType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXF());
     this.setAtOffsetAndIndex(o, 1, in_v.getYF());
   }
 
-  @Override public void set2F(
+  @Override
+  public void set2F(
     final float x,
     final float y)
   {
@@ -214,7 +228,8 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     this.setAtOffsetAndIndex(o, 1, y);
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -230,7 +245,8 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(128);
     builder.append("[QuaternionByteBufferedM4F ");
@@ -246,7 +262,8 @@ public final class QuaternionByteBufferedM4F extends ByteBuffered
     return NullCheck.notNull(r);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {

@@ -25,7 +25,9 @@ import org.junit.Test;
 
 public class VectorI2DTest extends VectorI2Contract
 {
-  @Override @Test public void testAbsolute()
+  @Override
+  @Test
+  public void testAbsolute()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -46,7 +48,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testAdd()
+  @Override
+  @Test
+  public void testAdd()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -72,7 +76,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testAddScaled()
+  @Override
+  @Test
+  public void testAddScaled()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -99,7 +105,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+  @Override
+  @Test
+  public void testAlmostEqualNot()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -140,7 +148,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+  @Override
+  @Test
+  public void testAlmostEqualTransitive()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -158,7 +168,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testAngle()
+  @Override
+  @Test
+  public void testAngle()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext3dp();
@@ -170,9 +182,6 @@ public class VectorI2DTest extends VectorI2Contract
       final VectorI2D v1 = VectorI2D.normalize(new VectorI2D(y, -x));
       final double angle = VectorI2D.angle(v0, v1);
 
-      
-      
-      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -186,9 +195,6 @@ public class VectorI2DTest extends VectorI2Contract
       final VectorI2D v1 = VectorI2D.normalize(new VectorI2D(-y, x));
       final double angle = VectorI2D.angle(v0, v1);
 
-      
-      
-      
 
       Assert.assertTrue(
         AlmostEqualDouble.almostEqual(
@@ -196,7 +202,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testCheckInterface()
+  @Override
+  @Test
+  public void testCheckInterface()
   {
     final VectorReadable2DType v = new VectorI2D(3.0, 5.0);
 
@@ -204,7 +212,9 @@ public class VectorI2DTest extends VectorI2Contract
     Assert.assertTrue(v.getYD() == v.getYD());
   }
 
-  @Override @Test public void testClampByVectorMaximumOrdering()
+  @Override
+  @Test
+  public void testClampByVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double max_x = Math.random() * Double.MIN_VALUE;
@@ -217,14 +227,16 @@ public class VectorI2DTest extends VectorI2Contract
 
       Assert.assertTrue(
         VectorI2D.clampMaximumByVector(v, maximum).getXD()
-        <= maximum.getXD());
+          <= maximum.getXD());
       Assert.assertTrue(
         VectorI2D.clampMaximumByVector(v, maximum).getYD()
-        <= maximum.getYD());
+          <= maximum.getYD());
     }
   }
 
-  @Override @Test public void testClampByVectorMinimumOrdering()
+  @Override
+  @Test
+  public void testClampByVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MAX_VALUE;
@@ -237,14 +249,16 @@ public class VectorI2DTest extends VectorI2Contract
 
       Assert.assertTrue(
         VectorI2D.clampMinimumByVector(v, minimum).getXD()
-        >= minimum.getXD());
+          >= minimum.getXD());
       Assert.assertTrue(
         VectorI2D.clampMinimumByVector(v, minimum).getYD()
-        >= minimum.getYD());
+          >= minimum.getYD());
     }
   }
 
-  @Override @Test public void testClampByVectorOrdering()
+  @Override
+  @Test
+  public void testClampByVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MIN_VALUE;
@@ -261,20 +275,22 @@ public class VectorI2DTest extends VectorI2Contract
 
       Assert.assertTrue(
         VectorI2D.clampByVector(v, minimum, maximum).getXD()
-        <= maximum.getXD());
+          <= maximum.getXD());
       Assert.assertTrue(
         VectorI2D.clampByVector(v, minimum, maximum).getXD()
-        >= minimum.getXD());
+          >= minimum.getXD());
       Assert.assertTrue(
         VectorI2D.clampByVector(v, minimum, maximum).getYD()
-        <= maximum.getYD());
+          <= maximum.getYD());
       Assert.assertTrue(
         VectorI2D.clampByVector(v, minimum, maximum).getYD()
-        >= minimum.getYD());
+          >= minimum.getYD());
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+  @Override
+  @Test
+  public void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double maximum = Math.random() * Double.MIN_VALUE;
@@ -288,7 +304,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+  @Override
+  @Test
+  public void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double minimum = Math.random() * Double.MAX_VALUE;
@@ -302,7 +320,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testClampOrdering()
+  @Override
+  @Test
+  public void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double minimum = Math.random() * Double.MIN_VALUE;
@@ -314,20 +334,22 @@ public class VectorI2DTest extends VectorI2Contract
 
       Assert.assertTrue(
         VectorI2D.clamp(v, minimum, maximum).getXD()
-        <= maximum);
+          <= maximum);
       Assert.assertTrue(
         VectorI2D.clamp(v, minimum, maximum).getXD()
-        >= minimum);
+          >= minimum);
       Assert.assertTrue(
         VectorI2D.clamp(v, minimum, maximum).getYD()
-        <= maximum);
+          <= maximum);
       Assert.assertTrue(
         VectorI2D.clamp(v, minimum, maximum).getYD()
-        >= minimum);
+          >= minimum);
     }
   }
 
-  @Override @Test public void testCopy()
+  @Override
+  @Test
+  public void testCopy()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -344,7 +366,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testDefault00()
+  @Override
+  @Test
+  public void testDefault00()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -354,7 +378,9 @@ public class VectorI2DTest extends VectorI2Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getYD(), 0.0));
   }
 
-  @Override @Test public void testDistance()
+  @Override
+  @Test
+  public void testDistance()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -367,7 +393,9 @@ public class VectorI2DTest extends VectorI2Contract
         ec, VectorI2D.distance(v0, v1), 1.0));
   }
 
-  @Override @Test public void testDistanceOrdering()
+  @Override
+  @Test
+  public void testDistanceOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -382,7 +410,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testDotProduct()
+  @Override
+  @Test
+  public void testDotProduct()
   {
     final VectorReadable2DType v0 = new VectorI2D(10.0, 10.0);
     final VectorReadable2DType v1 = new VectorI2D(10.0, 10.0);
@@ -411,7 +441,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+  @Override
+  @Test
+  public void testDotProductPerpendicular()
   {
     final VectorReadable2DType vpx = new VectorI2D(1.0f, 0.0f);
     final VectorReadable2DType vmx = new VectorI2D(-1.0f, 0.0f);
@@ -423,7 +455,9 @@ public class VectorI2DTest extends VectorI2Contract
     Assert.assertTrue(VectorI2D.dotProduct(vmx, vmy) == 0.0);
   }
 
-  @Override @Test public void testDotProductSelf()
+  @Override
+  @Test
+  public void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -434,14 +468,14 @@ public class VectorI2DTest extends VectorI2Contract
       final VectorReadable2DType q = new VectorI2D(x, y);
       final double dp = VectorI2D.dotProduct(q, q);
 
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  @Override
+  @Test
+  public void testDotProductSelfMagnitudeSquared()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -454,15 +488,14 @@ public class VectorI2DTest extends VectorI2Contract
       final double ms = VectorI2D.magnitudeSquared(q);
       final double dp = VectorI2D.dotProduct(q, q);
 
-      
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+  @Override
+  @Test
+  public void testEqualsCorrect()
   {
     {
       final VectorI2D m0 = new VectorI2D();
@@ -486,7 +519,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+  @Override
+  @Test
+  public void testEqualsNotEqualCorrect()
   {
     final double x = Math.random();
     final double y = x + 1.0;
@@ -559,14 +594,18 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+  @Override
+  @Test
+  public void testHashCodeEqualsCorrect()
   {
     final VectorI2D m0 = new VectorI2D();
     final VectorI2D m1 = new VectorI2D();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+  @Override
+  @Test
+  public void testHashCodeNotEqualCorrect()
   {
     {
       final VectorI2D m0 = new VectorI2D(23, 0);
@@ -581,7 +620,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+  @Override
+  @Test
+  public void testInitializeReadable()
   {
     final VectorI2D v0 = new VectorI2D(1.0f, 2.0f);
     final VectorReadable2DType v1 = new VectorI2D(v0);
@@ -590,7 +631,9 @@ public class VectorI2DTest extends VectorI2Contract
     Assert.assertTrue(v0.getYD() == v1.getYD());
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+  @Override
+  @Test
+  public void testInterpolateLinearLimits()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -613,7 +656,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+  @Override
+  @Test
+  public void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = 1.0 + (Math.random() * Double.MAX_VALUE);
@@ -625,7 +670,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+  @Override
+  @Test
+  public void testMagnitudeNormal()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -643,7 +690,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+  @Override
+  @Test
+  public void testMagnitudeNormalizeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -654,7 +703,9 @@ public class VectorI2DTest extends VectorI2Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testMagnitudeOne()
+  @Override
+  @Test
+  public void testMagnitudeOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -664,7 +715,9 @@ public class VectorI2DTest extends VectorI2Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
-  @Override @Test public void testMagnitudeSimple()
+  @Override
+  @Test
+  public void testMagnitudeSimple()
   {
     final VectorReadable2DType v = new VectorI2D(8.0, 0.0);
 
@@ -678,7 +731,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+  @Override
+  @Test
+  public void testMagnitudeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -688,7 +743,9 @@ public class VectorI2DTest extends VectorI2Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testNormalizeSimple()
+  @Override
+  @Test
+  public void testNormalizeSimple()
   {
     final VectorReadable2DType v0 = new VectorI2D(8.0, 0.0);
     final VectorI2D vr = VectorI2D.normalize(v0);
@@ -696,7 +753,9 @@ public class VectorI2DTest extends VectorI2Contract
     Assert.assertTrue(m == 1.0);
   }
 
-  @Override @Test public void testNormalizeZero()
+  @Override
+  @Test
+  public void testNormalizeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -708,7 +767,9 @@ public class VectorI2DTest extends VectorI2Contract
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.getYD()));
   }
 
-  @Override @Test public void testOrthonormalize()
+  @Override
+  @Test
+  public void testOrthonormalize()
   {
     final VectorReadable2DType v0 = new VectorI2D(0, 1);
     final VectorReadable2DType v1 = new VectorI2D(0.5, 0.5);
@@ -718,7 +779,9 @@ public class VectorI2DTest extends VectorI2Contract
     Assert.assertEquals(new VectorI2D(1, 0), on.getRight());
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+  @Override
+  @Test
+  public void testProjectionPerpendicularZero()
   {
     {
       final VectorReadable2DType p = new VectorI2D(1.0, 0.0);
@@ -735,7 +798,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testScaleOne()
+  @Override
+  @Test
+  public void testScaleOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -756,7 +821,9 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testScaleZero()
+  @Override
+  @Test
+  public void testScaleZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -773,13 +840,17 @@ public class VectorI2DTest extends VectorI2Contract
     }
   }
 
-  @Override @Test public void testString()
+  @Override
+  @Test
+  public void testString()
   {
     final VectorI2D v = new VectorI2D(0.0, 1.0);
     Assert.assertTrue("[VectorI2D 0.0 1.0]".equals(v.toString()));
   }
 
-  @Override @Test public void testSubtract()
+  @Override
+  @Test
+  public void testSubtract()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();

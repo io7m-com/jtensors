@@ -258,6 +258,78 @@ public final class QuaternionM4F implements Quaternion4FType
   }
 
   /**
+   * Linearly interpolate between {@code q0} and {@code q1} by the amount {@code
+   * alpha}, such that:
+   *
+   * <ul> <li>{@code interpolateSphericalLinear(q0, q1, 0.0, r) -> r = q0}</li>
+   * <li>{@code interpolateSphericalLinear(q0, q1, 1.0, r) -> r = q1}</li>
+   * </ul>
+   *
+   * <p>Note that unlike simple linear interpolation, this function is
+   * guaranteed to return a normalized quaternion.</p>
+   *
+   * @param c     Preallocated storage
+   * @param q0    The left input quaternion
+   * @param q1    The right input quaternion
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}
+   * @param r     The output quaternion
+   * @param <Q>   The precise type of quaternion
+   *
+   * @return A spherical-linearly interpolated quaternion between {@code q0} and
+   * {@code q1}
+   */
+
+  public static <Q extends QuaternionWritable4FType> Q interpolateSphericalLinear(
+    final ContextQM4F c,
+    final QuaternionReadable4FType q0,
+    final QuaternionReadable4FType q1,
+    final float alpha,
+    final Q r)
+  {
+    final QuaternionM4F q0n = normalize(q0, c.qa);
+    final QuaternionM4F q1n = normalize(q1, c.qb);
+
+    /*
+     * Calculate the dot product to determine if the quaternions are nearly
+     * codirectional. If they are, fall back to simple linear interpolation.
+     */
+
+    double dot = dotProduct(q0n, q1n);
+    final float threshold = 0.9995f;
+    if (dot > threshold) {
+      interpolateLinear(c, q0n, q1n, alpha, c.qc);
+      normalize(c.qc, r);
+      return r;
+    }
+
+    /*
+     * If the dot product is negative, the quaternions are separated by more
+     * than 180° and a spherical linear interpolation wouldn't result in the
+     * shortest path. By negating one quaternion, the shortest path is obtained.
+     */
+
+    if (dot < 0.0) {
+      negateInPlace(q1n);
+      dot = -dot;
+    }
+
+    dot = Math.max(-1.0, Math.min(dot, 1.0));
+    final double theta_0 = StrictMath.acos(dot);
+
+    final QuaternionM4F q2n = c.qc;
+    scale(q0n, dot, q2n);
+    subtract(q1n, q2n, q2n);
+    normalizeInPlace(q2n);
+
+    final double theta = theta_0 * alpha;
+    scale(q0n, StrictMath.cos(theta), c.qd);
+    scale(q2n, StrictMath.sin(theta), q2n);
+
+    add(c.qd, q2n, r);
+    return r;
+  }
+
+  /**
    * Return {@code true} iff {@code qa} is the negation of {@code qb}.
    *
    * <p> Each element is compared with {@link AlmostEqualFloat#almostEqual
@@ -1126,6 +1198,8 @@ public final class QuaternionM4F implements Quaternion4FType
     private final VectorM3F v3a = new VectorM3F();
     private final QuaternionM4F qa = new QuaternionM4F();
     private final QuaternionM4F qb = new QuaternionM4F();
+    private final QuaternionM4F qc = new QuaternionM4F();
+    private final QuaternionM4F qd = new QuaternionM4F();
 
     /**
      * Construct a new context.

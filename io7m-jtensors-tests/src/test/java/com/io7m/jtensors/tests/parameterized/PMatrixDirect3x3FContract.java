@@ -28,11 +28,11 @@ public abstract class PMatrixDirect3x3FContract<
   T0,
   T1,
   T2,
-  T           extends PMatrixDirect3x3FType<T0, T1>,
-  TMULTRIGHT  extends PMatrixDirect3x3FType<T0, T1>,
-  TMULTLEFT   extends PMatrixDirect3x3FType<T1, T2>,
+  T extends PMatrixDirect3x3FType<T0, T1>,
+  TMULTRIGHT extends PMatrixDirect3x3FType<T0, T1>,
+  TMULTLEFT extends PMatrixDirect3x3FType<T1, T2>,
   TMULTRESULT extends PMatrixDirect3x3FType<T0, T2>,
-  TINVERSE    extends PMatrixDirect3x3FType<T1, T0>>
+  TINVERSE extends PMatrixDirect3x3FType<T1, T0>>
   extends PMatrix3x3FContract<
   T0,
   T1,
@@ -48,7 +48,8 @@ public abstract class PMatrixDirect3x3FContract<
   @Override
   protected abstract T newMatrix();
 
-  @Test public final void testBufferEndianness()
+  @Test
+  public final void testBufferEndianness()
   {
     final T m = this.newMatrix();
     final FloatBuffer b = m.getDirectFloatBuffer();
@@ -56,7 +57,8 @@ public abstract class PMatrixDirect3x3FContract<
     Assert.assertEquals(ByteOrder.nativeOrder(), b.order());
   }
 
-  @Test public final void testStorage()
+  @Test
+  public final void testStorage()
   {
     final T m = this.newMatrix();
 

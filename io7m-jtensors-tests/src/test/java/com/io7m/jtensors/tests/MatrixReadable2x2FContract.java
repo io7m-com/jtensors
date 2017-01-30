@@ -40,7 +40,8 @@ public abstract class MatrixReadable2x2FContract<T extends
    * Test that single-element retrievals are correct.
    */
 
-  @Test public final void testGetCorrect()
+  @Test
+  public final void testGetCorrect()
   {
     final VectorReadable2FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
@@ -66,7 +67,8 @@ public abstract class MatrixReadable2x2FContract<T extends
    * Test that row retrievals are correct.
    */
 
-  @Test public final void testGetRow2Correct()
+  @Test
+  public final void testGetRow2Correct()
   {
     final VectorReadable2FType c0 = new VectorI4F(
       1.0f, 10.0f, 100.0f, 1000.0f);
@@ -111,7 +113,8 @@ public abstract class MatrixReadable2x2FContract<T extends
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();

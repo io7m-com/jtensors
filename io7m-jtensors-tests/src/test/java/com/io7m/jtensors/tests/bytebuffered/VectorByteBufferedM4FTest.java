@@ -28,7 +28,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class VectorByteBufferedM4FTest
   extends VectorByteBufferedM4FContract<VectorByteBuffered4FType>
 {
-  @Override protected VectorByteBuffered4FType newVectorM4F(
+  @Override
+  protected VectorByteBuffered4FType newVectorM4F(
     final float x,
     final float y,
     final float z,
@@ -41,7 +42,8 @@ public final class VectorByteBufferedM4FTest
     return v;
   }
 
-  @Override protected VectorByteBuffered4FType newVectorM4F()
+  @Override
+  protected VectorByteBuffered4FType newVectorM4F()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final VectorByteBuffered4FType v =
@@ -50,7 +52,8 @@ public final class VectorByteBufferedM4FTest
     return v;
   }
 
-  @Override protected VectorByteBuffered4FType newVectorM4FFrom(
+  @Override
+  protected VectorByteBuffered4FType newVectorM4FFrom(
     final VectorByteBuffered4FType v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
@@ -60,7 +63,8 @@ public final class VectorByteBufferedM4FTest
     return vr;
   }
 
-  @Override protected VectorByteBuffered4FType newVectorM4FAtIndexFromSize(
+  @Override
+  protected VectorByteBuffered4FType newVectorM4FAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -68,7 +72,8 @@ public final class VectorByteBufferedM4FTest
     return VectorByteBufferedM4F.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected VectorByteBuffered4FType newVectorM4FWithBaseOffset(
+  @Override
+  protected VectorByteBuffered4FType newVectorM4FWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -78,7 +83,8 @@ public final class VectorByteBufferedM4FTest
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(4 * 4);
     b.order(ByteOrder.BIG_ENDIAN);

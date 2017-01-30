@@ -22,7 +22,8 @@ import com.io7m.jtensors.tests.VectorM4LContract;
 public final class PVectorM4LUntypedTest<T>
   extends VectorM4LContract<PVectorM4L<T>>
 {
-  @Override protected PVectorM4L<T> newVectorM4L(
+  @Override
+  protected PVectorM4L<T> newVectorM4L(
     final long x,
     final long y,
     final long z,
@@ -31,12 +32,14 @@ public final class PVectorM4LUntypedTest<T>
     return new PVectorM4L<T>(x, y, z, w);
   }
 
-  @Override protected PVectorM4L<T> newVectorM4LFrom(final PVectorM4L<T> v0)
+  @Override
+  protected PVectorM4L<T> newVectorM4LFrom(final PVectorM4L<T> v0)
   {
     return new PVectorM4L<T>(v0);
   }
 
-  @Override protected PVectorM4L<T> newVectorM4L()
+  @Override
+  protected PVectorM4L<T> newVectorM4L()
   {
     return new PVectorM4L<T>();
   }

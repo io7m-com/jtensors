@@ -124,7 +124,8 @@ public abstract class VectorM2LBufferedContract<T extends Vector2LType>
     v.copyFrom2L(new VectorI2L(22L, 23L));
   }
 
-  @Test public final void testCopyFrom2LIdentity()
+  @Test
+  public final void testCopyFrom2LIdentity()
   {
     final Vector2LType v = this.newVectorM2LAtIndexFromSize(
       100L, 0L);
@@ -134,7 +135,8 @@ public abstract class VectorM2LBufferedContract<T extends Vector2LType>
     Assert.assertEquals(23L, v.getYL());
   }
 
-  @Test public final void testSet2LIdentity()
+  @Test
+  public final void testSet2LIdentity()
   {
     final Vector2LType v = this.newVectorM2LAtIndexFromSize(
       100L, 0L);

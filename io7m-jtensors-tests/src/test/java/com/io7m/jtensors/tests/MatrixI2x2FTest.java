@@ -25,9 +25,11 @@ import com.io7m.jtensors.VectorReadable2FType;
 import org.junit.Assert;
 import org.junit.Test;
 
-@SuppressWarnings("static-method") public final class MatrixI2x2FTest
+@SuppressWarnings("static-method")
+public final class MatrixI2x2FTest
 {
-  @Test public void testEquals()
+  @Test
+  public void testEquals()
   {
     final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
 
@@ -67,7 +69,8 @@ import org.junit.Test;
     Assert.assertFalse(im0.equals(im2));
   }
 
-  @Test public void testFromColumns()
+  @Test
+  public void testFromColumns()
   {
     final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
 
@@ -87,7 +90,8 @@ import org.junit.Test;
     Assert.assertEquals(im0, im1);
   }
 
-  @Test public void testFromRows()
+  @Test
+  public void testFromRows()
   {
     final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
 
@@ -110,7 +114,8 @@ import org.junit.Test;
     Assert.assertEquals(10.1f, row.getYF(), 0.0);
   }
 
-  @Test public void testIdentity()
+  @Test
+  public void testIdentity()
   {
     final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
     final MatrixI2x2F im0 = MatrixI2x2F.identity();
@@ -118,7 +123,8 @@ import org.junit.Test;
     Assert.assertEquals(im1, im0);
   }
 
-  @Test public void testMakeMatrix2x2F()
+  @Test
+  public void testMakeMatrix2x2F()
   {
     final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
     final Matrix2x2FType m1 = MatrixHeapArrayM2x2F.newMatrix();
@@ -136,7 +142,8 @@ import org.junit.Test;
     Assert.assertEquals(m0, m1);
   }
 
-  @Test public void testToString()
+  @Test
+  public void testToString()
   {
     final Matrix2x2FType m0 = MatrixHeapArrayM2x2F.newMatrix();
     final Matrix2x2FType m1 = MatrixHeapArrayM2x2F.newMatrix();

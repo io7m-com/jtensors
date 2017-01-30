@@ -40,24 +40,28 @@ public final class PVectorM2ITest<T>
     LOG = LoggerFactory.getLogger(PVectorM2ITest.class);
   }
 
-  @Override protected PVectorM2I<T> newVectorM2I(
+  @Override
+  protected PVectorM2I<T> newVectorM2I(
     final int x,
     final int y)
   {
     return new PVectorM2I<T>(x, y);
   }
 
-  @Override protected PVectorM2I<T> newVectorM2I()
+  @Override
+  protected PVectorM2I<T> newVectorM2I()
   {
     return new PVectorM2I<T>();
   }
 
-  @Override protected PVectorM2I<T> newVectorM2I(final PVectorM2I<T> v)
+  @Override
+  protected PVectorM2I<T> newVectorM2I(final PVectorM2I<T> v)
   {
     return new PVectorM2I<T>(v);
   }
 
-  @Test public void testHierarchy()
+  @Test
+  public void testHierarchy()
   {
     final PVectorM2I<?> v = new PVectorM2I<Object>();
 

@@ -108,12 +108,14 @@ public final class PVectorByteBufferedM2Db16<T> extends ByteBuffered
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
-  @Override public void setXD(final double x)
+  @Override
+  public void setXD(final double x)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
@@ -137,24 +139,28 @@ public final class PVectorByteBufferedM2Db16<T> extends ByteBuffered
     return Binary16.unpackDouble(k);
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
-  @Override public void setYD(final double y)
+  @Override
+  public void setYD(final double y)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
-  @Override public void copyFrom2D(final VectorReadable2DType in_v)
+  @Override
+  public void copyFrom2D(final VectorReadable2DType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXD());
     this.setAtOffsetAndIndex(o, 1, in_v.getYD());
   }
 
-  @Override public void set2D(
+  @Override
+  public void set2D(
     final double x,
     final double y)
   {
@@ -163,7 +169,8 @@ public final class PVectorByteBufferedM2Db16<T> extends ByteBuffered
     this.setAtOffsetAndIndex(o, 1, y);
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -175,7 +182,8 @@ public final class PVectorByteBufferedM2Db16<T> extends ByteBuffered
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(128);
     builder.append("[PVectorByteBufferedM2Db16 ");
@@ -187,7 +195,8 @@ public final class PVectorByteBufferedM2Db16<T> extends ByteBuffered
     return NullCheck.notNull(r);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -206,10 +215,11 @@ public final class PVectorByteBufferedM2Db16<T> extends ByteBuffered
     final double ox = other.getXD();
     final double oy = other.getYD();
     return Double.doubleToLongBits(tx) == Double.doubleToLongBits(ox)
-           && Double.doubleToLongBits(ty) == Double.doubleToLongBits(oy);
+      && Double.doubleToLongBits(ty) == Double.doubleToLongBits(oy);
   }
 
-  @Override public void copyFromTyped2D(final PVectorReadable2DType<T> in_v)
+  @Override
+  public void copyFromTyped2D(final PVectorReadable2DType<T> in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXD());

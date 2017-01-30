@@ -61,7 +61,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-@SuppressWarnings("static-method") public final class APICompleteness
+@SuppressWarnings("static-method")
+public final class APICompleteness
 {
   private static void checkAgainst(
     final Class<?> c_base,
@@ -99,10 +100,10 @@ import java.util.Map.Entry;
 
       System.out.println(
         c_name
-        + ": extra method "
-        + m_name
-        + " not in base "
-        + c_base.getName());
+          + ": extra method "
+          + m_name
+          + " not in base "
+          + c_base.getName());
     }
 
   }
@@ -232,13 +233,15 @@ import java.util.Map.Entry;
     }
   }
 
-  @Test public void testMatrixCompleteness()
+  @Test
+  public void testMatrixCompleteness()
   {
     checkPMatrix4F();
     checkPMatrix4D();
   }
 
-  @Test public void testVectorCompleteness()
+  @Test
+  public void testVectorCompleteness()
   {
     checkPVector4();
     checkPVector3();

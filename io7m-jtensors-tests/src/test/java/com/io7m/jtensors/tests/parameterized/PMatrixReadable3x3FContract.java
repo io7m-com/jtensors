@@ -42,7 +42,8 @@ public abstract class PMatrixReadable3x3FContract<T0, T1, T extends
    * Test that single-element retrievals are correct.
    */
 
-  @Test public final void testGetCorrect()
+  @Test
+  public final void testGetCorrect()
   {
     final VectorReadable3FType c0 = new VectorI4F(1.0f, 10.0f, 100.0f, 1000.0f);
     final VectorReadable3FType c1 = new VectorI4F(2.0f, 20.0f, 200.0f, 2000.0f);
@@ -79,7 +80,8 @@ public abstract class PMatrixReadable3x3FContract<T0, T1, T extends
    * Test that row retrievals are correct.
    */
 
-  @Test public final void testGetRow3Correct()
+  @Test
+  public final void testGetRow3Correct()
   {
     final VectorReadable3FType c0 = new VectorI4F(1.0f, 10.0f, 100.0f, 1000.0f);
     final VectorReadable3FType c1 = new VectorI4F(2.0f, 20.0f, 200.0f, 2000.0f);
@@ -145,7 +147,8 @@ public abstract class PMatrixReadable3x3FContract<T0, T1, T extends
    * Test that row retrievals are correct.
    */
 
-  @Test public final void testGetRow2Correct()
+  @Test
+  public final void testGetRow2Correct()
   {
     final VectorReadable3FType c0 = new VectorI4F(1.0f, 10.0f, 100.0f, 1000.0f);
     final VectorReadable3FType c1 = new VectorI4F(2.0f, 20.0f, 200.0f, 2000.0f);
@@ -201,7 +204,8 @@ public abstract class PMatrixReadable3x3FContract<T0, T1, T extends
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();

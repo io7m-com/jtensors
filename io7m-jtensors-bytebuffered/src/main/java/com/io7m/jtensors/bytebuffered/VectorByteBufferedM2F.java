@@ -32,7 +32,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * without explicit synchronization. </p>
  */
 
-public final class VectorByteBufferedM2F extends ByteBuffered implements VectorByteBuffered2FType
+public final class VectorByteBufferedM2F extends ByteBuffered implements
+  VectorByteBuffered2FType
 {
   private final ByteBuffer buffer;
 
@@ -97,12 +98,14 @@ public final class VectorByteBufferedM2F extends ByteBuffered implements VectorB
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
-  @Override public float getXF()
+  @Override
+  public float getXF()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
-  @Override public void setXF(final float x)
+  @Override
+  public void setXF(final float x)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
@@ -123,24 +126,28 @@ public final class VectorByteBufferedM2F extends ByteBuffered implements VectorB
       getByteOffsetForIndex(o, i));
   }
 
-  @Override public float getYF()
+  @Override
+  public float getYF()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
-  @Override public void setYF(final float y)
+  @Override
+  public void setYF(final float y)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
-  @Override public void copyFrom2F(final VectorReadable2FType in_v)
+  @Override
+  public void copyFrom2F(final VectorReadable2FType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXF());
     this.setAtOffsetAndIndex(o, 1, in_v.getYF());
   }
 
-  @Override public void set2F(
+  @Override
+  public void set2F(
     final float x,
     final float y)
   {
@@ -149,7 +156,8 @@ public final class VectorByteBufferedM2F extends ByteBuffered implements VectorB
     this.setAtOffsetAndIndex(o, 1, y);
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -161,7 +169,8 @@ public final class VectorByteBufferedM2F extends ByteBuffered implements VectorB
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(128);
     builder.append("[VectorByteBufferedM2F ");
@@ -173,7 +182,8 @@ public final class VectorByteBufferedM2F extends ByteBuffered implements VectorB
     return NullCheck.notNull(r);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {

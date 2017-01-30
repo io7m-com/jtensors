@@ -36,7 +36,8 @@ public final class PVectorByteBufferedM4DTest<T>
     LOG = LoggerFactory.getLogger(PVectorByteBufferedM4DTest.class);
   }
 
-  @Override protected PVectorByteBuffered4DType<T> newVectorM4D(
+  @Override
+  protected PVectorByteBuffered4DType<T> newVectorM4D(
     final double x,
     final double y,
     final double z,
@@ -49,27 +50,32 @@ public final class PVectorByteBufferedM4DTest<T>
     return v;
   }
 
-  @Override protected double delta()
+  @Override
+  protected double delta()
   {
     return 0.0000000000001;
   }
 
-  @Override protected double randomLargeNegative()
+  @Override
+  protected double randomLargeNegative()
   {
     return Math.random() * -1000000.0;
   }
 
-  @Override protected double randomLargePositive()
+  @Override
+  protected double randomLargePositive()
   {
     return Math.random() * 1000000.0;
   }
 
-  @Override protected Logger logger()
+  @Override
+  protected Logger logger()
   {
     return LOG;
   }
 
-  @Override protected PVectorByteBuffered4DType<T> newVectorM4D()
+  @Override
+  protected PVectorByteBuffered4DType<T> newVectorM4D()
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
     final PVectorByteBuffered4DType<T> v =
@@ -78,7 +84,8 @@ public final class PVectorByteBufferedM4DTest<T>
     return v;
   }
 
-  @Override protected PVectorByteBuffered4DType<T> newVectorM4DFrom(
+  @Override
+  protected PVectorByteBuffered4DType<T> newVectorM4DFrom(
     final PVectorByteBuffered4DType<T> v)
   {
     final ByteBuffer buf = ByteBuffer.allocate(100);
@@ -88,7 +95,8 @@ public final class PVectorByteBufferedM4DTest<T>
     return vr;
   }
 
-  @Override protected PVectorByteBuffered4DType<T> newPVectorM4DAtIndexFromSize(
+  @Override
+  protected PVectorByteBuffered4DType<T> newPVectorM4DAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -96,7 +104,8 @@ public final class PVectorByteBufferedM4DTest<T>
     return PVectorByteBufferedM4D.newVectorFromByteBuffer(buf, offset);
   }
 
-  @Override protected PVectorByteBuffered4DType<T> newVectorM4DWithBaseOffset(
+  @Override
+  protected PVectorByteBuffered4DType<T> newVectorM4DWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -106,7 +115,8 @@ public final class PVectorByteBufferedM4DTest<T>
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(4 * 8);
     b.order(ByteOrder.BIG_ENDIAN);

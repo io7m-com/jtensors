@@ -30,7 +30,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class MatrixByteBufferedM3x3DTest
   extends MatrixByteBuffered3x3DContract<MatrixByteBuffered3x3DType>
 {
-  @Override protected MatrixByteBuffered3x3DType newMatrix()
+  @Override
+  protected MatrixByteBuffered3x3DType newMatrix()
   {
     final ByteBuffer buf = ByteBuffer.allocate(200);
     final MatrixByteBuffered3x3DType mr =
@@ -39,7 +40,8 @@ public final class MatrixByteBufferedM3x3DTest
     return mr;
   }
 
-  @Override protected MatrixByteBuffered3x3DType newMatrixFrom(
+  @Override
+  protected MatrixByteBuffered3x3DType newMatrixFrom(
     final MatrixReadable3x3DType m)
   {
     final ByteBuffer buf = ByteBuffer.allocate(200);
@@ -55,7 +57,8 @@ public final class MatrixByteBufferedM3x3DTest
     // Nothing required
   }
 
-  @Override protected MatrixByteBuffered3x3DType newMatrixAtIndexFromSize(
+  @Override
+  protected MatrixByteBuffered3x3DType newMatrixAtIndexFromSize(
     final long size,
     final long offset)
   {
@@ -65,7 +68,8 @@ public final class MatrixByteBufferedM3x3DTest
     return mr;
   }
 
-  @Override protected MatrixByteBuffered3x3DType newMatrixWithBaseOffset(
+  @Override
+  protected MatrixByteBuffered3x3DType newMatrixWithBaseOffset(
     final int size,
     final AtomicLong base,
     final int offset)
@@ -75,7 +79,8 @@ public final class MatrixByteBufferedM3x3DTest
       buf, base, offset);
   }
 
-  @Test public void testImplementationSpecificMemoryLayout0()
+  @Test
+  public void testImplementationSpecificMemoryLayout0()
   {
     final ByteBuffer b = ByteBuffer.allocate(9 * 8);
     b.order(ByteOrder.BIG_ENDIAN);

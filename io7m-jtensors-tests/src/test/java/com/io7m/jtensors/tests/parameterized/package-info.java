@@ -14,5 +14,6 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-@com.io7m.jnull.NullableByDefault package com.io7m.jtensors.tests.parameterized;
+@com.io7m.jnull.NullableByDefault
+package com.io7m.jtensors.tests.parameterized;
 

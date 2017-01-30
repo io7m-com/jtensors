@@ -25,10 +25,12 @@ import com.io7m.jtensors.tests.TestUtilities;
 import org.junit.Assert;
 import org.junit.Test;
 
-@SuppressWarnings("static-method") public class PVectorI4DTest<T>
+@SuppressWarnings("static-method")
+public class PVectorI4DTest<T>
   extends PVectorI4Contract
 {
-  @Test public void testZero()
+  @Test
+  public void testZero()
   {
     final PVectorI4D<Object> z = PVectorI4D.zero();
     Assert.assertEquals(0.0, z.getXD(), 0.0);
@@ -37,7 +39,9 @@ import org.junit.Test;
     Assert.assertEquals(0.0, z.getWD(), 0.0);
   }
 
-  @Override @Test public void testAbsolute()
+  @Override
+  @Test
+  public void testAbsolute()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -66,7 +70,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testAdd()
+  @Override
+  @Test
+  public void testAdd()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -102,7 +108,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testAddScaled()
+  @Override
+  @Test
+  public void testAddScaled()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -139,7 +147,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testAlmostEqualNot()
+  @Override
+  @Test
+  public void testAlmostEqualNot()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -223,7 +233,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testAlmostEqualTransitive()
+  @Override
+  @Test
+  public void testAlmostEqualTransitive()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -243,7 +255,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testCheckInterface()
+  @Override
+  @Test
+  public void testCheckInterface()
   {
     final VectorReadable4DType v = new PVectorI4D<T>(3.0, 5.0, 7.0, 11.0);
 
@@ -253,7 +267,9 @@ import org.junit.Test;
     Assert.assertTrue(v.getWD() == v.getWD());
   }
 
-  @Override @Test public void testClampByPVectorMaximumOrdering()
+  @Override
+  @Test
+  public void testClampByPVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double max_x = Math.random() * Double.MIN_VALUE;
@@ -271,20 +287,22 @@ import org.junit.Test;
 
       Assert.assertTrue(
         PVectorI4D.clampMaximumByPVector(v, maximum).getXD()
-        <= maximum.getXD());
+          <= maximum.getXD());
       Assert.assertTrue(
         PVectorI4D.clampMaximumByPVector(v, maximum).getYD()
-        <= maximum.getYD());
+          <= maximum.getYD());
       Assert.assertTrue(
         PVectorI4D.clampMaximumByPVector(v, maximum).getZD()
-        <= maximum.getZD());
+          <= maximum.getZD());
       Assert.assertTrue(
         PVectorI4D.clampMaximumByPVector(v, maximum).getWD()
-        <= maximum.getWD());
+          <= maximum.getWD());
     }
   }
 
-  @Override @Test public void testClampByPVectorMinimumOrdering()
+  @Override
+  @Test
+  public void testClampByPVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MAX_VALUE;
@@ -302,20 +320,22 @@ import org.junit.Test;
 
       Assert.assertTrue(
         PVectorI4D.clampMinimumByPVector(v, minimum).getXD()
-        >= minimum.getXD());
+          >= minimum.getXD());
       Assert.assertTrue(
         PVectorI4D.clampMinimumByPVector(v, minimum).getYD()
-        >= minimum.getYD());
+          >= minimum.getYD());
       Assert.assertTrue(
         PVectorI4D.clampMinimumByPVector(v, minimum).getZD()
-        >= minimum.getZD());
+          >= minimum.getZD());
       Assert.assertTrue(
         PVectorI4D.clampMinimumByPVector(v, minimum).getWD()
-        >= minimum.getWD());
+          >= minimum.getWD());
     }
   }
 
-  @Override @Test public void testClampByPVectorOrdering()
+  @Override
+  @Test
+  public void testClampByPVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double min_x = Math.random() * Double.MIN_VALUE;
@@ -340,32 +360,34 @@ import org.junit.Test;
 
       Assert.assertTrue(
         PVectorI4D.clampByPVector(v, minimum, maximum).getXD()
-        <= maximum.getXD());
+          <= maximum.getXD());
       Assert.assertTrue(
         PVectorI4D.clampByPVector(v, minimum, maximum).getXD()
-        >= minimum.getXD());
+          >= minimum.getXD());
       Assert.assertTrue(
         PVectorI4D.clampByPVector(v, minimum, maximum).getYD()
-        <= maximum.getYD());
+          <= maximum.getYD());
       Assert.assertTrue(
         PVectorI4D.clampByPVector(v, minimum, maximum).getYD()
-        >= minimum.getYD());
+          >= minimum.getYD());
       Assert.assertTrue(
         PVectorI4D.clampByPVector(v, minimum, maximum).getZD()
-        <= maximum.getZD());
+          <= maximum.getZD());
       Assert.assertTrue(
         PVectorI4D.clampByPVector(v, minimum, maximum).getZD()
-        >= minimum.getZD());
+          >= minimum.getZD());
       Assert.assertTrue(
         PVectorI4D.clampByPVector(v, minimum, maximum).getWD()
-        <= maximum.getWD());
+          <= maximum.getWD());
       Assert.assertTrue(
         PVectorI4D.clampByPVector(v, minimum, maximum).getWD()
-        >= minimum.getWD());
+          >= minimum.getWD());
     }
   }
 
-  @Override @Test public void testClampMaximumOrdering()
+  @Override
+  @Test
+  public void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double maximum = Math.random() * Double.MIN_VALUE;
@@ -383,7 +405,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampMinimumOrdering()
+  @Override
+  @Test
+  public void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double minimum = Math.random() * Double.MAX_VALUE;
@@ -401,7 +425,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testClampOrdering()
+  @Override
+  @Test
+  public void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double minimum = Math.random() * Double.MIN_VALUE;
@@ -432,7 +458,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testCopy()
+  @Override
+  @Test
+  public void testCopy()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -449,7 +477,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDefault0001()
+  @Override
+  @Test
+  public void testDefault0001()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -461,7 +491,9 @@ import org.junit.Test;
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v.getWD(), 1.0));
   }
 
-  @Override @Test public void testDistance()
+  @Override
+  @Test
+  public void testDistance()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -474,7 +506,9 @@ import org.junit.Test;
         ec, PVectorI4D.distance(v0, v1), 1.0));
   }
 
-  @Override @Test public void testDistanceOrdering()
+  @Override
+  @Test
+  public void testDistanceOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x0 = Math.random() * Double.MAX_VALUE;
@@ -493,7 +527,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDotProduct()
+  @Override
+  @Test
+  public void testDotProduct()
   {
     final PVectorI4D<T> v0 = new PVectorI4D<T>(10.0, 10.0, 10.0, 10.0);
     final PVectorI4D<T> v1 = new PVectorI4D<T>(10.0, 10.0, 10.0, 10.0);
@@ -530,16 +566,42 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDotProductPerpendicular()
+  @Override
+  @Test
+  public void testDotProductPerpendicular()
   {
-    final PVectorReadable4DType<T> vpx = new PVectorI4D<T>(1.0f, 0.0f, 0.0f, 0.0f);
-    final PVectorReadable4DType<T> vmx = new PVectorI4D<T>(-1.0f, 0.0f, 0.0f, 0.0f);
+    final PVectorReadable4DType<T> vpx = new PVectorI4D<T>(
+      1.0f,
+      0.0f,
+      0.0f,
+      0.0f);
+    final PVectorReadable4DType<T> vmx = new PVectorI4D<T>(
+      -1.0f,
+      0.0f,
+      0.0f,
+      0.0f);
 
-    final PVectorReadable4DType<T> vpy = new PVectorI4D<T>(0.0f, 1.0f, 0.0f, 0.0f);
-    final PVectorReadable4DType<T> vmy = new PVectorI4D<T>(0.0f, -1.0f, 0.0f, 0.0f);
+    final PVectorReadable4DType<T> vpy = new PVectorI4D<T>(
+      0.0f,
+      1.0f,
+      0.0f,
+      0.0f);
+    final PVectorReadable4DType<T> vmy = new PVectorI4D<T>(
+      0.0f,
+      -1.0f,
+      0.0f,
+      0.0f);
 
-    final PVectorReadable4DType<T> vpz = new PVectorI4D<T>(0.0f, 0.0f, 1.0f, 0.0f);
-    final PVectorReadable4DType<T> vmz = new PVectorI4D<T>(0.0f, 0.0f, -1.0f, 0.0f);
+    final PVectorReadable4DType<T> vpz = new PVectorI4D<T>(
+      0.0f,
+      0.0f,
+      1.0f,
+      0.0f);
+    final PVectorReadable4DType<T> vmz = new PVectorI4D<T>(
+      0.0f,
+      0.0f,
+      -1.0f,
+      0.0f);
 
     Assert.assertTrue(PVectorI4D.dotProduct(vpx, vpy) == 0.0);
     Assert.assertTrue(PVectorI4D.dotProduct(vpy, vpz) == 0.0);
@@ -547,7 +609,9 @@ import org.junit.Test;
     Assert.assertTrue(PVectorI4D.dotProduct(vmy, vmz) == 0.0);
   }
 
-  @Override @Test public void testDotProductSelf()
+  @Override
+  @Test
+  public void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -564,7 +628,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testDotProductSelfMagnitudeSquared()
+  @Override
+  @Test
+  public void testDotProductSelfMagnitudeSquared()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -583,7 +649,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testEqualsCorrect()
+  @Override
+  @Test
+  public void testEqualsCorrect()
   {
     {
       final PVectorI4D<T> m0 = new PVectorI4D<T>();
@@ -607,7 +675,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testEqualsNotEqualCorrect()
+  @Override
+  @Test
+  public void testEqualsNotEqualCorrect()
   {
     final double x = Math.random();
     final double y = x + 1.0;
@@ -698,14 +768,18 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testHashCodeEqualsCorrect()
+  @Override
+  @Test
+  public void testHashCodeEqualsCorrect()
   {
     final PVectorI4D<T> m0 = new PVectorI4D<T>();
     final PVectorI4D<T> m1 = new PVectorI4D<T>();
     Assert.assertEquals(m0.hashCode(), m1.hashCode());
   }
 
-  @Override @Test public void testHashCodeNotEqualCorrect()
+  @Override
+  @Test
+  public void testHashCodeNotEqualCorrect()
   {
     {
       final PVectorI4D<T> m0 = new PVectorI4D<T>(23, 0, 0, 1);
@@ -732,7 +806,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testInitializeReadable()
+  @Override
+  @Test
+  public void testInitializeReadable()
   {
     final PVectorI4D<T> v0 = new PVectorI4D<T>(1.0f, 2.0f, 3.0f, 4.0f);
     final VectorReadable4DType v1 = new PVectorI4D<T>(v0);
@@ -743,7 +819,9 @@ import org.junit.Test;
     Assert.assertTrue(v0.getWD() == v1.getWD());
   }
 
-  @Override @Test public void testInterpolateLinearLimits()
+  @Override
+  @Test
+  public void testInterpolateLinearLimits()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -770,7 +848,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testMagnitudeNonzero()
+  @Override
+  @Test
+  public void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final double x = 1.0 + (Math.random() * Double.MAX_VALUE);
@@ -784,7 +864,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testMagnitudeNormal()
+  @Override
+  @Test
+  public void testMagnitudeNormal()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -804,7 +886,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testMagnitudeNormalizeZero()
+  @Override
+  @Test
+  public void testMagnitudeNormalizeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -815,7 +899,9 @@ import org.junit.Test;
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testMagnitudeOne()
+  @Override
+  @Test
+  public void testMagnitudeOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -825,7 +911,9 @@ import org.junit.Test;
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 1.0));
   }
 
-  @Override @Test public void testMagnitudeSimple()
+  @Override
+  @Test
+  public void testMagnitudeSimple()
   {
     final PVectorReadable4DType<T> v = new PVectorI4D<T>(8.0, 0.0, 0.0, 0.0);
 
@@ -839,7 +927,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testMagnitudeZero()
+  @Override
+  @Test
+  public void testMagnitudeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -849,7 +939,9 @@ import org.junit.Test;
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, m, 0.0));
   }
 
-  @Override @Test public void testNormalizeSimple()
+  @Override
+  @Test
+  public void testNormalizeSimple()
   {
     final PVectorReadable4DType<T> v0 = new PVectorI4D<T>(8.0, 0.0, 0.0, 0.0);
     final PVectorI4D<T> vr = PVectorI4D.normalize(v0);
@@ -857,7 +949,9 @@ import org.junit.Test;
     Assert.assertTrue(m == 1.0);
   }
 
-  @Override @Test public void testNormalizeZero()
+  @Override
+  @Test
+  public void testNormalizeZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -871,7 +965,9 @@ import org.junit.Test;
     Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, 0, qr.getWD()));
   }
 
-  @Override @Test public void testOrthonormalize()
+  @Override
+  @Test
+  public void testOrthonormalize()
   {
     final PVectorReadable4DType<T> v0 = new PVectorI4D<T>(0, 1, 0, 0);
     final PVectorReadable4DType<T> v1 = new PVectorI4D<T>(0.5, 0.5, 0, 0);
@@ -882,7 +978,9 @@ import org.junit.Test;
     Assert.assertEquals(new PVectorI4D<T>(1, 0, 0, 0), on.getRight());
   }
 
-  @Override @Test public void testProjectionPerpendicularZero()
+  @Override
+  @Test
+  public void testProjectionPerpendicularZero()
   {
     {
       final PVectorReadable4DType<T> p = new PVectorI4D<T>(1.0, 0.0, 0.0, 0.0);
@@ -899,7 +997,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testScaleOne()
+  @Override
+  @Test
+  public void testScaleOne()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -928,7 +1028,9 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testScaleZero()
+  @Override
+  @Test
+  public void testScaleZero()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -949,13 +1051,17 @@ import org.junit.Test;
     }
   }
 
-  @Override @Test public void testString()
+  @Override
+  @Test
+  public void testString()
   {
     final PVectorI4D<T> v = new PVectorI4D<T>(0.0, 1.0, 2.0, 3.0);
     Assert.assertTrue("[PVectorI4D 0.0 1.0 2.0 3.0]".equals(v.toString()));
   }
 
-  @Override @Test public void testSubtract()
+  @Override
+  @Test
+  public void testSubtract()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();

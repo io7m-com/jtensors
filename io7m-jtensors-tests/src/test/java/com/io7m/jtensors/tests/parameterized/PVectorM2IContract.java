@@ -59,7 +59,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
 
   protected abstract V newVectorM2I(V v);
 
-  @Test public final void testAbsolute()
+  @Test
+  public final void testAbsolute()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = randomNegativeNumber();
@@ -84,7 +85,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testAbsoluteMutation()
+  @Test
+  public final void testAbsoluteMutation()
   {
     final V out = this.newVectorM2I();
     final V v = this.newVectorM2I(-1, -1);
@@ -108,7 +110,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     Assert.assertEquals(1L, (long) out.getYI());
   }
 
-  @Test public final void testAdd()
+  @Test
+  public final void testAdd()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveSmallNumber();
@@ -136,7 +139,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testAddMutation()
+  @Test
+  public final void testAddMutation()
   {
     final V out = this.newVectorM2I();
     final V v0 = this.newVectorM2I(1, 1);
@@ -178,7 +182,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     Assert.assertEquals(1L, (long) v1.getYI());
   }
 
-  @Test public final void testAddScaled()
+  @Test
+  public final void testAddScaled()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveSmallNumber();
@@ -212,17 +217,20 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testAlmostEqualNot()
+  @Test
+  public final void testAlmostEqualNot()
   {
     // Not supported by integer vectors
   }
 
-  @Test public final void testAlmostEqualTransitive()
+  @Test
+  public final void testAlmostEqualTransitive()
   {
     // Not supported by integer vectors
   }
 
-  @Test public final void testAngle()
+  @Test
+  public final void testAngle()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext3dp();
@@ -260,7 +268,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testCheckInterface()
+  @Test
+  public final void testCheckInterface()
   {
     final V v = this.newVectorM2I(3, 5);
 
@@ -268,7 +277,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     Assert.assertEquals((long) v.getYI(), (long) v.getYI());
   }
 
-  @Test public final void testClampByPVectorMaximumOrdering()
+  @Test
+  public final void testClampByPVectorMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int max_x = randomNegativeNumber();
@@ -297,7 +307,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testClampByPVectorMinimumOrdering()
+  @Test
+  public final void testClampByPVectorMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = randomPositiveNumber();
@@ -326,7 +337,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testClampByPVectorOrdering()
+  @Test
+  public final void testClampByPVectorOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int min_x = randomNegativeNumber();
@@ -363,7 +375,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testClampMaximumOrdering()
+  @Test
+  public final void testClampMaximumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int maximum = randomNegativeNumber();
@@ -386,7 +399,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testClampMinimumOrdering()
+  @Test
+  public final void testClampMinimumOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = randomPositiveNumber();
@@ -409,7 +423,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testClampOrdering()
+  @Test
+  public final void testClampOrdering()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int minimum = randomNegativeNumber();
@@ -438,7 +453,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final V vb = this.newVectorM2I(5, 6);
     final V va = this.newVectorM2I(1, 2);
@@ -452,7 +468,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     Assert.assertEquals((long) vb.getYI(), (long) va.getYI());
   }
 
-  @Test public final void testCopy2Correct()
+  @Test
+  public final void testCopy2Correct()
   {
     final V v0 = this.newVectorM2I(
       getRandomLargePositive(),
@@ -471,12 +488,14 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     Assert.assertEquals((long) v0.getYI(), (long) v2.getYI());
   }
 
-  @Test public final void testDefault00()
+  @Test
+  public final void testDefault00()
   {
     Assert.assertTrue(this.newVectorM2I().equals(this.newVectorM2I(0, 0)));
   }
 
-  @Test public final void testDistance()
+  @Test
+  public final void testDistance()
   {
     final PVectorM2I.ContextPVM2I c = new PVectorM2I.ContextPVM2I();
     final V v0 = this.newVectorM2I(0, 1);
@@ -484,7 +503,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     Assert.assertEquals(1L, PVectorM2I.distance(c, v0, v1));
   }
 
-  @Test public final void testDistanceOrdering()
+  @Test
+  public final void testDistanceOrdering()
   {
     final PVectorM2I.ContextPVM2I c = new PVectorM2I.ContextPVM2I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
@@ -500,7 +520,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testDotProduct()
+  @Test
+  public final void testDotProduct()
   {
     final V v0 = this.newVectorM2I(10, 10);
     final V v1 = this.newVectorM2I(10, 10);
@@ -529,7 +550,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testDotProductPerpendicular()
+  @Test
+  public final void testDotProductPerpendicular()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -547,7 +569,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testDotProductSelf()
+  @Test
+  public final void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
@@ -563,7 +586,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testDotProductSelfMagnitudeSquared()
+  @Test
+  public final void testDotProductSelfMagnitudeSquared()
   {
     final V v0 = this.newVectorM2I(10, 10);
 
@@ -582,7 +606,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testEqualsCorrect()
+  @Test
+  public final void testEqualsCorrect()
   {
     {
       final V m0 = this.newVectorM2I();
@@ -606,7 +631,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testEqualsNotEqualCorrect()
+  @Test
+  public final void testEqualsNotEqualCorrect()
   {
     final int x = (int) (getRandom() * 1000.0);
     final int y = x + 1;
@@ -639,14 +665,16 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testHashCodeEqualsCorrect()
+  @Test
+  public final void testHashCodeEqualsCorrect()
   {
     final V m0 = this.newVectorM2I();
     final V m1 = this.newVectorM2I();
     Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Test public final void testHashCodeNotEqualCorrect()
+  @Test
+  public final void testHashCodeNotEqualCorrect()
   {
     {
       final V m0 = this.newVectorM2I();
@@ -663,7 +691,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testInitializeReadable()
+  @Test
+  public final void testInitializeReadable()
   {
     final V v0 = this.newVectorM2I(1, 2);
     final V v1 = this.newVectorM2I(v0);
@@ -672,7 +701,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     Assert.assertEquals((long) v1.getYI(), (long) v0.getYI());
   }
 
-  @Test public final void testInterpolateLinearLimits()
+  @Test
+  public final void testInterpolateLinearLimits()
   {
     final PVectorM2I.ContextPVM2I c = new PVectorM2I.ContextPVM2I();
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
@@ -697,7 +727,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testMagnitudeNonzero()
+  @Test
+  public final void testMagnitudeNonzero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = randomPositiveSmallNumber();
@@ -709,24 +740,28 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testMagnitudeNormal()
+  @Test
+  public final void testMagnitudeNormal()
   {
     // Not applicable to integer vectors
   }
 
-  @Test public final void testMagnitudeNormalizeZero()
+  @Test
+  public final void testMagnitudeNormalizeZero()
   {
     // Not applicable to integer vectors
   }
 
-  @Test public final void testMagnitudeOne()
+  @Test
+  public final void testMagnitudeOne()
   {
     final V v = this.newVectorM2I(1, 0);
     final int m = PVectorM2I.magnitude(v);
     Assert.assertEquals(1L, (long) m);
   }
 
-  @Test public final void testMagnitudeSimple()
+  @Test
+  public final void testMagnitudeSimple()
   {
     final V v = this.newVectorM2I(8, 0);
 
@@ -740,34 +775,40 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testMagnitudeZero()
+  @Test
+  public final void testMagnitudeZero()
   {
     final V v = this.newVectorM2I(0, 0);
     final int m = PVectorM2I.magnitude(v);
     Assert.assertEquals(0L, (long) m);
   }
 
-  @Test public final void testNormalizeSimple()
+  @Test
+  public final void testNormalizeSimple()
   {
     // Not applicable to integer vectors
   }
 
-  @Test public final void testNormalizeZero()
+  @Test
+  public final void testNormalizeZero()
   {
     // Not supported by integer vectors
   }
 
-  @Test public final void testOrthonormalize()
+  @Test
+  public final void testOrthonormalize()
   {
     // Not applicable to integer vectors
   }
 
-  @Test public final void testOrthonormalizeMutation()
+  @Test
+  public final void testOrthonormalizeMutation()
   {
     // Not applicable to integer vectors
   }
 
-  @Test public final void testProjectionPerpendicularZero()
+  @Test
+  public final void testProjectionPerpendicularZero()
   {
     {
       final V p = this.newVectorM2I(1, 0);
@@ -790,7 +831,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testScaleMutation()
+  @Test
+  public final void testScaleMutation()
   {
     final V out = this.newVectorM2I();
     final V v0 = this.newVectorM2I(1, 1);
@@ -819,7 +861,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     Assert.assertEquals(2L, (long) v0.getYI());
   }
 
-  @Test public final void testScaleOne()
+  @Test
+  public final void testScaleOne()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = randomPositiveNumber();
@@ -845,7 +888,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testScaleZero()
+  @Test
+  public final void testScaleZero()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x = randomPositiveNumber();
@@ -868,13 +912,15 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final V v = this.newVectorM2I(1, 2);
     Assert.assertTrue(v.toString().endsWith("1 2]"));
   }
 
-  @Test public final void testSubtract()
+  @Test
+  public final void testSubtract()
   {
     for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
       final int x0 = randomPositiveNumber();
@@ -902,7 +948,8 @@ public abstract class PVectorM2IContract<T, V extends PVector2IType<T>>
     }
   }
 
-  @Test public final void testSubtractMutation()
+  @Test
+  public final void testSubtractMutation()
   {
     final V out = this.newVectorM2I();
     final V v0 = this.newVectorM2I(1, 1);

@@ -31,7 +31,8 @@ import org.junit.Test;
 public final class PMatrixI3x3DTest<T0, T1>
   extends PMatrixReadable3x3DContract<T0, T1, PMatrixI3x3D<T0, T1>>
 {
-  @Test public void testEquals()
+  @Test
+  public void testEquals()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
 
@@ -71,7 +72,8 @@ public final class PMatrixI3x3DTest<T0, T1>
     Assert.assertFalse(im0.equals(im2));
   }
 
-  @Test public void testFromColumns()
+  @Test
+  public void testFromColumns()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
 
@@ -99,7 +101,8 @@ public final class PMatrixI3x3DTest<T0, T1>
     Assert.assertEquals(im0, im1);
   }
 
-  @Test public void testFromRows()
+  @Test
+  public void testFromRows()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
 
@@ -135,7 +138,8 @@ public final class PMatrixI3x3DTest<T0, T1>
     Assert.assertEquals(20.2, row.getZD(), 0.0);
   }
 
-  @Test public void testIdentity()
+  @Test
+  public void testIdentity()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
     final PMatrixI3x3D<T0, T1> im0 = PMatrixI3x3D.identity();
@@ -143,7 +147,8 @@ public final class PMatrixI3x3DTest<T0, T1>
     Assert.assertEquals(im1, im0);
   }
 
-  @Test public void testMakeMatrix3x3DUntyped()
+  @Test
+  public void testMakeMatrix3x3DUntyped()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
     final Matrix3x3DType m1 = MatrixHeapArrayM3x3D.newMatrix();
@@ -161,7 +166,8 @@ public final class PMatrixI3x3DTest<T0, T1>
     Assert.assertEquals(m0, m1);
   }
 
-  @Test public void testMakeMatrix3x3D()
+  @Test
+  public void testMakeMatrix3x3D()
   {
     final PMatrix3x3DType<T0, T1> m0 = PMatrixHeapArrayM3x3D.newMatrix();
     final PMatrix3x3DType<T0, T1> m1 = PMatrixHeapArrayM3x3D.newMatrix();
@@ -179,7 +185,8 @@ public final class PMatrixI3x3DTest<T0, T1>
     Assert.assertEquals(m0, m1);
   }
 
-  @Test public void testToString()
+  @Test
+  public void testToString()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
     final Matrix3x3DType m1 = MatrixHeapArrayM3x3D.newMatrix();
@@ -198,18 +205,21 @@ public final class PMatrixI3x3DTest<T0, T1>
     Assert.assertEquals(im1.toString(), im0.toString());
   }
 
-  @Override protected PMatrixI3x3D<T0, T1> newMatrix()
+  @Override
+  protected PMatrixI3x3D<T0, T1> newMatrix()
   {
     return PMatrixI3x3D.identity();
   }
 
-  @Override protected PMatrixI3x3D<T0, T1> newMatrixFrom(
+  @Override
+  protected PMatrixI3x3D<T0, T1> newMatrixFrom(
     final PMatrixReadable3x3DType<T0, T1> source)
   {
     return PMatrixI3x3D.newFromReadable(source);
   }
 
-  @Override protected void checkDirectBufferInvariantsWildcard(
+  @Override
+  protected void checkDirectBufferInvariantsWildcard(
     final PMatrixReadable3x3DType<?, ?> m)
   {
     // Nothing required

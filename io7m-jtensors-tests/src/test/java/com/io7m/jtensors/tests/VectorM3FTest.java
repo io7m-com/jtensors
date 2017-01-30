@@ -20,17 +20,20 @@ import com.io7m.jtensors.VectorM3F;
 
 public final class VectorM3FTest extends VectorM3FContract<VectorM3F>
 {
-  @Override protected VectorM3F newVectorM3F(final VectorM3F v0)
+  @Override
+  protected VectorM3F newVectorM3F(final VectorM3F v0)
   {
     return new VectorM3F(v0);
   }
 
-  @Override protected VectorM3F newVectorM3F()
+  @Override
+  protected VectorM3F newVectorM3F()
   {
     return new VectorM3F();
   }
 
-  @Override protected VectorM3F newVectorM3F(
+  @Override
+  protected VectorM3F newVectorM3F(
     final float x,
     final float y,
     final float z)

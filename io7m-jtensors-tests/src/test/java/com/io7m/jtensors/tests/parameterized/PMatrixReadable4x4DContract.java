@@ -38,7 +38,8 @@ public abstract class PMatrixReadable4x4DContract<T0, T1, T extends
 
   protected abstract void checkDirectBufferInvariantsGeneric(T m);
 
-  @Test public final void testHashcodeNeqExhaustive()
+  @Test
+  public final void testHashcodeNeqExhaustive()
   {
     for (int row = 0; row < 4; ++row) {
       for (int col = 0; col < 4; ++col) {
@@ -60,7 +61,8 @@ public abstract class PMatrixReadable4x4DContract<T0, T1, T extends
    * Test that single-element retrievals are correct.
    */
 
-  @Test public final void testGetCorrect()
+  @Test
+  public final void testGetCorrect()
   {
     final VectorReadable4DType c0 = new VectorI4D(1.0, 10.0, 100.0, 1000.0);
     final VectorReadable4DType c1 = new VectorI4D(2.0, 20.0, 200.0, 2000.0);
@@ -114,7 +116,8 @@ public abstract class PMatrixReadable4x4DContract<T0, T1, T extends
    * Test that row retrievals are correct.
    */
 
-  @Test public final void testGetRow4Correct()
+  @Test
+  public final void testGetRow4Correct()
   {
     final VectorReadable4DType c0 = new VectorI4D(1.0, 10.0, 100.0, 1000.0);
     final VectorReadable4DType c1 = new VectorI4D(2.0, 20.0, 200.0, 2000.0);
@@ -205,7 +208,8 @@ public abstract class PMatrixReadable4x4DContract<T0, T1, T extends
    * Test that row retrievals are correct.
    */
 
-  @Test public final void testGetRow3Correct()
+  @Test
+  public final void testGetRow3Correct()
   {
     final VectorReadable4DType c0 = new VectorI4D(1.0, 10.0, 100.0, 1000.0);
     final VectorReadable4DType c1 = new VectorI4D(2.0, 20.0, 200.0, 2000.0);
@@ -288,7 +292,8 @@ public abstract class PMatrixReadable4x4DContract<T0, T1, T extends
    * Test that row retrievals are correct.
    */
 
-  @Test public final void testGetRow2Correct()
+  @Test
+  public final void testGetRow2Correct()
   {
     final VectorReadable4DType c0 = new VectorI4D(1.0, 10.0, 100.0, 1000.0);
     final VectorReadable4DType c1 = new VectorI4D(2.0, 20.0, 200.0, 2000.0);
@@ -359,7 +364,8 @@ public abstract class PMatrixReadable4x4DContract<T0, T1, T extends
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();

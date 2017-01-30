@@ -20,7 +20,8 @@ import com.io7m.jtensors.VectorM4L;
 
 public final class VectorM4LTest extends VectorM4LContract<VectorM4L>
 {
-  @Override protected VectorM4L newVectorM4L(
+  @Override
+  protected VectorM4L newVectorM4L(
     final long x,
     final long y,
     final long z,
@@ -29,12 +30,14 @@ public final class VectorM4LTest extends VectorM4LContract<VectorM4L>
     return new VectorM4L(x, y, z, w);
   }
 
-  @Override protected VectorM4L newVectorM4LFrom(final VectorM4L v0)
+  @Override
+  protected VectorM4L newVectorM4LFrom(final VectorM4L v0)
   {
     return new VectorM4L(v0);
   }
 
-  @Override protected VectorM4L newVectorM4L()
+  @Override
+  protected VectorM4L newVectorM4L()
   {
     return new VectorM4L();
   }

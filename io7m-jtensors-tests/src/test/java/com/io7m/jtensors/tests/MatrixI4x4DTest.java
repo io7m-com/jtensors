@@ -29,23 +29,27 @@ import org.junit.Test;
 public final class MatrixI4x4DTest
   extends MatrixReadable4x4DContract<MatrixI4x4D>
 {
-  @Override protected MatrixI4x4D newMatrix()
+  @Override
+  protected MatrixI4x4D newMatrix()
   {
     return MatrixI4x4D.identity();
   }
 
-  @Override protected MatrixI4x4D newMatrixFrom(
+  @Override
+  protected MatrixI4x4D newMatrixFrom(
     final MatrixReadable4x4DType source)
   {
     return MatrixI4x4D.newFromReadable(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(final MatrixI4x4D m)
+  @Override
+  protected void checkDirectBufferInvariants(final MatrixI4x4D m)
   {
     // Nothing necessary
   }
 
-  @Test public void testEquals()
+  @Test
+  public void testEquals()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
 
@@ -85,7 +89,8 @@ public final class MatrixI4x4DTest
     Assert.assertFalse(im0.equals(im2));
   }
 
-  @Test public void testFromColumns()
+  @Test
+  public void testFromColumns()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
 
@@ -122,7 +127,8 @@ public final class MatrixI4x4DTest
     Assert.assertEquals(im0, im1);
   }
 
-  @Test public void testFromRows()
+  @Test
+  public void testFromRows()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
 
@@ -175,7 +181,8 @@ public final class MatrixI4x4DTest
     Assert.assertEquals(30.3, row.getWD(), 0.0);
   }
 
-  @Test public void testIdentity()
+  @Test
+  public void testIdentity()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
     final MatrixI4x4D im0 = MatrixI4x4D.identity();
@@ -183,7 +190,8 @@ public final class MatrixI4x4DTest
     Assert.assertEquals(im1, im0);
   }
 
-  @Test public void testMakeMatrix4x4D()
+  @Test
+  public void testMakeMatrix4x4D()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
     final Matrix4x4DType m1 = MatrixHeapArrayM4x4D.newMatrix();
@@ -201,7 +209,8 @@ public final class MatrixI4x4DTest
     Assert.assertEquals(m0, m1);
   }
 
-  @Test public void testToString()
+  @Test
+  public void testToString()
   {
     final Matrix4x4DType m0 = MatrixHeapArrayM4x4D.newMatrix();
     final Matrix4x4DType m1 = MatrixHeapArrayM4x4D.newMatrix();

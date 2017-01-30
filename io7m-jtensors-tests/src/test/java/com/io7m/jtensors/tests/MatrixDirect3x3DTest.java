@@ -24,12 +24,14 @@ import org.junit.Assert;
 public final class MatrixDirect3x3DTest
   extends MatrixDirect3x3DContract<MatrixDirect3x3DType>
 {
-  @Override protected MatrixDirect3x3DType newMatrix()
+  @Override
+  protected MatrixDirect3x3DType newMatrix()
   {
     return MatrixDirectM3x3D.newMatrix();
   }
 
-  @Override protected MatrixDirect3x3DType newMatrixFrom(
+  @Override
+  protected MatrixDirect3x3DType newMatrixFrom(
     final MatrixReadable3x3DType source)
   {
     return MatrixDirectM3x3D.newMatrixFrom(source);

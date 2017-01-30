@@ -23,18 +23,21 @@ import com.io7m.jtensors.MatrixReadable3x3FType;
 public final class MatrixHeapArrayM3x3FTest
   extends Matrix3x3FContract<Matrix3x3FType>
 {
-  @Override protected Matrix3x3FType newMatrix()
+  @Override
+  protected Matrix3x3FType newMatrix()
   {
     return MatrixHeapArrayM3x3F.newMatrix();
   }
 
-  @Override protected Matrix3x3FType newMatrixFrom(
+  @Override
+  protected Matrix3x3FType newMatrixFrom(
     final MatrixReadable3x3FType source)
   {
     return MatrixHeapArrayM3x3F.newMatrixFrom(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(final Matrix3x3FType m)
+  @Override
+  protected void checkDirectBufferInvariants(final Matrix3x3FType m)
   {
     // Nothing required
   }

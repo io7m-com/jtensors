@@ -27,7 +27,8 @@ public abstract class Matrix3x3FBufferedContract<T extends Matrix3x3FType>
     long size,
     long offset);
 
-  @Test public final void testHugeIndexGet()
+  @Test
+  public final void testHugeIndexGet()
   {
     final T v = this.newMatrixAtIndexFromSize(
       200L, (long) Integer.MAX_VALUE);
@@ -46,7 +47,8 @@ public abstract class Matrix3x3FBufferedContract<T extends Matrix3x3FType>
     Assert.assertEquals(9L, (long) errors);
   }
 
-  @Test public final void testHugeIndexSet()
+  @Test
+  public final void testHugeIndexSet()
   {
     final T v = this.newMatrixAtIndexFromSize(
       200L, (long) Integer.MAX_VALUE);
@@ -65,7 +67,8 @@ public abstract class Matrix3x3FBufferedContract<T extends Matrix3x3FType>
     Assert.assertEquals(9L, (long) errors);
   }
 
-  @Test public final void testOutOfBoundsIndexGet()
+  @Test
+  public final void testOutOfBoundsIndexGet()
   {
     final T v = this.newMatrixAtIndexFromSize(
       200L, 200L);
@@ -84,7 +87,8 @@ public abstract class Matrix3x3FBufferedContract<T extends Matrix3x3FType>
     Assert.assertEquals(9L, (long) errors);
   }
 
-  @Test public final void testOutOfBoundsIndexSet()
+  @Test
+  public final void testOutOfBoundsIndexSet()
   {
     final T v = this.newMatrixAtIndexFromSize(
       200L, 200L);

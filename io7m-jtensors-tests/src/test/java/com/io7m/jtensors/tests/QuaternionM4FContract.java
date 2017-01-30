@@ -38,17 +38,21 @@ import org.slf4j.LoggerFactory;
 public abstract class QuaternionM4FContract<T extends Quaternion4FType>
 {
   private static final Logger LOG;
-
-  static {
-    LOG = LoggerFactory.getLogger(QuaternionM4FContract.class);
-  }
-
   private static final VectorReadable3FType AXIS_X = new VectorI3F(
     1.0F, 0.0F, 0.0F);
   private static final VectorReadable3FType AXIS_Y = new VectorI3F(
     0.0F, 1.0F, 0.0F);
   private static final VectorReadable3FType AXIS_Z = new VectorI3F(
     0.0F, 0.0F, 1.0F);
+
+  static {
+    LOG = LoggerFactory.getLogger(QuaternionM4FContract.class);
+  }
+
+  protected static double getRandom()
+  {
+    return Math.random();
+  }
 
   protected abstract T newQuaternion();
 
@@ -78,7 +82,9 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       "axis result:    {}", result_axis);
 
     Assert.assertEquals(
-      1.0, VectorM3F.magnitude(result_axis), Eq.DELTA_F_SMALL);
+      1.0,
+      (double) VectorM3F.magnitude(result_axis),
+      (double) Eq.DELTA_F_SMALL);
     Assert.assertEquals(
       expected_angle, result_angle, 0.0005);
     Assert.assertEquals(
@@ -505,7 +511,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       QuaternionM4D.normalizeInPlace(q);
 
       final double dp = QuaternionM4D.dotProduct(q, q);
-      Assert.assertEquals(dp, 1.0, Eq.DELTA_F_SMALL);
+      Assert.assertEquals(dp, 1.0, (double) Eq.DELTA_F_SMALL);
     }
   }
 
@@ -677,9 +683,127 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     }
   }
 
-  protected static double getRandom()
+  @Test
+  public final void testInterpolateSphericalLinearLimits()
   {
-    return Math.random();
+    final QuaternionM4F.ContextQM4F c = new QuaternionM4F.ContextQM4F();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float x0 = (float) (getRandom() * 100000.0);
+      final float y0 = (float) (getRandom() * 100000.0);
+      final float z0 = (float) (getRandom() * 100000.0);
+      final float w0 = (float) (getRandom() * 100000.0);
+      final T v0 = this.newQuaternion(x0, y0, z0, w0);
+
+      final float x1 = (float) (getRandom() * 100000.0);
+      final float y1 = (float) (getRandom() * 100000.0);
+      final float z1 = (float) (getRandom() * 100000.0);
+      final float w1 = (float) (getRandom() * 100000.0);
+      final T v1 = this.newQuaternion(x1, y1, z1, w1);
+
+      final T vr0 = this.newQuaternion();
+      final T vr1 = this.newQuaternion();
+      QuaternionM4F.interpolateSphericalLinear(c, v0, v1, 0.0f, vr0);
+      QuaternionM4F.interpolateSphericalLinear(c, v0, v1, 1.0f, vr1);
+
+      LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(0.0), vr0);
+      LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(1.0), vr1);
+
+      final T v0n = this.newQuaternion(v0);
+      QuaternionM4F.normalizeInPlace(v0n);
+      final T v1n = this.newQuaternion(v1);
+      QuaternionM4F.normalizeInPlace(v1n);
+
+      Assert.assertEquals(vr0.getXF(), v0n.getXF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(vr0.getYF(), v0n.getYF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(vr0.getZF(), v0n.getZF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(vr0.getWF(), v0n.getWF(), Eq.DELTA_F_SMALL);
+
+      Assert.assertEquals(vr1.getXF(), v1n.getXF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(vr1.getYF(), v1n.getYF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(vr1.getZF(), v1n.getZF(), Eq.DELTA_F_SMALL);
+      Assert.assertEquals(vr1.getWF(), v1n.getWF(), Eq.DELTA_F_SMALL);
+    }
+  }
+
+  @Test
+  public final void testInterpolateSphericalLinearNegated()
+  {
+    final QuaternionM4F.ContextQM4F c = new QuaternionM4F.ContextQM4F();
+
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    final VectorI3F axis0 =
+      VectorI3F.normalize(new VectorI3F(0.0F, 1.0F, 0.0F));
+
+    final T v0 = this.newQuaternion();
+    final T v1 = this.newQuaternion();
+
+    QuaternionM4F.makeFromAxisAngle(axis0, 0.0, v0);
+    QuaternionM4F.makeFromAxisAngle(axis0, Math.toRadians(181.0), v1);
+
+    Assert.assertTrue(QuaternionM4F.dotProduct(v0, v1) < 0.0);
+
+    final T r0 = this.newQuaternion();
+    final T r1 = this.newQuaternion();
+
+    QuaternionM4F.interpolateSphericalLinear(c, v0, v1, 0.0f, r0);
+    QuaternionM4F.interpolateSphericalLinear(c, v0, v1, 1.0f, r1);
+
+    LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(0.0), r0);
+    LOG.debug("spherical {} {} {} -> {}", v0, v1, Double.valueOf(1.0), r1);
+
+    Assert.assertTrue(
+      QuaternionM4F.almostEqual(context, r0, v0));
+
+    QuaternionM4F.negateInPlace(v1);
+    Assert.assertTrue(
+      QuaternionM4F.almostEqual(context, r1, v1));
+  }
+
+  @Test
+  public final void testInterpolateSphericalLinearCodirectional()
+  {
+    final QuaternionM4F.ContextQM4F c = new QuaternionM4F.ContextQM4F();
+    final AlmostEqualFloat.ContextRelative context =
+      TestUtilities.getSingleEqualityContext();
+
+    for (int index = 0; index < TestUtilities.TEST_RANDOM_ITERATIONS; ++index) {
+      final float x0 = (float) (getRandom() * 100000.0);
+      final float y0 = (float) (getRandom() * 100000.0);
+      final float z0 = (float) (getRandom() * 100000.0);
+      final float w0 = (float) (getRandom() * 100000.0);
+      final T v0 = this.newQuaternion(x0, y0, z0, w0);
+      QuaternionM4F.normalizeInPlace(v0);
+      final T v1 = this.newQuaternion(v0);
+      QuaternionM4F.normalizeInPlace(v1);
+
+      final float alpha = (float) getRandom();
+
+      final T vr0 = this.newQuaternion();
+      final T vr1 = this.newQuaternion();
+      QuaternionM4F.interpolateSphericalLinear(c, v0, v1, alpha, vr0);
+      QuaternionM4F.interpolateLinear(c, v0, v1, (double) alpha, vr1);
+
+      LOG.debug(
+        "spherical {} {} {} -> {}",
+        v0,
+        v0,
+        Double.valueOf((double) alpha),
+        vr0);
+      LOG.debug(
+        "linear    {} {} {} -> {}",
+        v0,
+        v0,
+        Double.valueOf((double) alpha),
+        vr1);
+
+      Assert.assertTrue(
+        QuaternionM4F.almostEqual(context, vr0, v0));
+      Assert.assertTrue(
+        QuaternionM4F.almostEqual(context, vr1, v1));
+    }
   }
 
   @Test
@@ -761,8 +885,14 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       final float target_z =
         (float) ((getRandom() * 100.0) - (getRandom() * 100.0));
 
-      final VectorReadable3FType origin = new VectorI3F(origin_x, origin_y, origin_z);
-      final VectorReadable3FType target = new VectorI3F(target_x, target_y, target_z);
+      final VectorReadable3FType origin = new VectorI3F(
+        origin_x,
+        origin_y,
+        origin_z);
+      final VectorReadable3FType target = new VectorI3F(
+        target_x,
+        target_y,
+        target_z);
 
       MatrixM4x4F.lookAt(
         mc, origin, target, AXIS_Y, ml);
@@ -774,7 +904,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
         for (int col = 0; col < 3; ++col) {
           final float x = ml.getRowColumnF(row, col);
           final float y = mq.getRowColumnF(row, col);
-          Assert.assertEquals(y, x, 0.00001);
+          Assert.assertEquals((double) y, (double) x, 0.00001);
         }
       }
     }
@@ -814,7 +944,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       Assert.assertNotSame(v, vr);
 
       final double m = QuaternionM4F.magnitude(vr);
-      Assert.assertEquals(1.0, m, Eq.DELTA_F_SMALL);
+      Assert.assertEquals(1.0, m, (double) Eq.DELTA_F_SMALL);
     }
   }
 
@@ -824,7 +954,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     final T v = this.newQuaternion(0.0f, 0.0f, 0.0f, 0.0f);
     final T vr = QuaternionM4F.normalizeInPlace(v);
     final double m = QuaternionM4F.magnitude(vr);
-    Assert.assertEquals(0.0, m, Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.0, m, (double) Eq.DELTA_F_SMALL);
   }
 
   @Test
@@ -832,7 +962,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   {
     final T v = this.newQuaternion(1.0f, 0.0f, 0.0f, 0.0f);
     final double m = QuaternionM4F.magnitude(v);
-    Assert.assertEquals(1.0, m, Eq.DELTA_F_SMALL);
+    Assert.assertEquals(1.0, m, (double) Eq.DELTA_F_SMALL);
   }
 
   @Test
@@ -855,7 +985,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
   {
     final T v = this.newQuaternion(0.0f, 0.0f, 0.0f, 0.0f);
     final double m = QuaternionM4F.magnitude(v);
-    Assert.assertEquals(0.0, m, Eq.DELTA_F_SMALL);
+    Assert.assertEquals(0.0, m, (double) Eq.DELTA_F_SMALL);
   }
 
   @Test
@@ -866,9 +996,9 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
     final double angle = QuaternionM4F.toAxisAngle(q, out);
 
     Assert.assertEquals(0.0, angle, 0.0);
-    Assert.assertEquals(1.0, out.getXF(), 0.0);
-    Assert.assertEquals(0.0, out.getYF(), 0.0);
-    Assert.assertEquals(0.0, out.getZF(), 0.0);
+    Assert.assertEquals(1.0, (double) out.getXF(), 0.0);
+    Assert.assertEquals(0.0, (double) out.getYF(), 0.0);
+    Assert.assertEquals(0.0, (double) out.getZF(), 0.0);
   }
 
   @Test
@@ -886,7 +1016,7 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
       QuaternionM4F.makeFromAxisAngle(axis_n, angle, q);
 
       final double m = QuaternionM4F.magnitude(q);
-      Assert.assertEquals(1.0, m, Eq.DELTA_F_SMALL);
+      Assert.assertEquals(1.0, m, (double) Eq.DELTA_F_SMALL);
 
       this.checkAxisAngle(axis_n, angle, q);
     }
@@ -1068,8 +1198,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
        * The resulting quaternions are unit quaternions.
        */
 
-      Assert.assertEquals(1.0, mag_qfm, Eq.DELTA_F_SMALL);
-      Assert.assertEquals(1.0, mag_qaa, Eq.DELTA_F_SMALL);
+      Assert.assertEquals(1.0, mag_qfm, (double) Eq.DELTA_F_SMALL);
+      Assert.assertEquals(1.0, mag_qaa, (double) Eq.DELTA_F_SMALL);
 
       /*
        * The resulting quaternions match.
@@ -1133,8 +1263,8 @@ public abstract class QuaternionM4FContract<T extends Quaternion4FType>
        * The resulting quaternions are unit quaternions.
        */
 
-      Assert.assertEquals(1.0, mag_qfm, Eq.DELTA_F_SMALL);
-      Assert.assertEquals(1.0, mag_qaa, Eq.DELTA_F_SMALL);
+      Assert.assertEquals(1.0, mag_qfm, (double) Eq.DELTA_F_SMALL);
+      Assert.assertEquals(1.0, mag_qaa, (double) Eq.DELTA_F_SMALL);
 
       /*
        * The resulting quaternions match.

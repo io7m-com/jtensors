@@ -25,11 +25,11 @@ public abstract class PMatrix4x4DBufferedContract<
   T0,
   T1,
   T2,
-  T           extends PMatrix4x4DType<T0, T1>,
-  TMULTRIGHT  extends PMatrix4x4DType<T0, T1>,
-  TMULTLEFT   extends PMatrix4x4DType<T1, T2>,
+  T extends PMatrix4x4DType<T0, T1>,
+  TMULTRIGHT extends PMatrix4x4DType<T0, T1>,
+  TMULTLEFT extends PMatrix4x4DType<T1, T2>,
   TMULTRESULT extends PMatrix4x4DType<T0, T2>,
-  TINVERSE    extends PMatrix4x4DType<T1, T0>>
+  TINVERSE extends PMatrix4x4DType<T1, T0>>
   extends PMatrix4x4DContract<
   T0,
   T1,
@@ -46,7 +46,8 @@ public abstract class PMatrix4x4DBufferedContract<
     long size,
     long offset);
 
-  @Test public final void testHugeIndexGet()
+  @Test
+  public final void testHugeIndexGet()
   {
     final T v = this.newMatrixAtIndexFromSize(
       200L, (long) Integer.MAX_VALUE);
@@ -65,7 +66,8 @@ public abstract class PMatrix4x4DBufferedContract<
     Assert.assertEquals(16L, (long) errors);
   }
 
-  @Test public final void testHugeIndexSet()
+  @Test
+  public final void testHugeIndexSet()
   {
     final T v = this.newMatrixAtIndexFromSize(
       200L, (long) Integer.MAX_VALUE);
@@ -84,7 +86,8 @@ public abstract class PMatrix4x4DBufferedContract<
     Assert.assertEquals(16L, (long) errors);
   }
 
-  @Test public final void testOutOfBoundsIndexGet()
+  @Test
+  public final void testOutOfBoundsIndexGet()
   {
     final T v = this.newMatrixAtIndexFromSize(
       200L, 200L);
@@ -103,7 +106,8 @@ public abstract class PMatrix4x4DBufferedContract<
     Assert.assertEquals(16L, (long) errors);
   }
 
-  @Test public final void testOutOfBoundsIndexSet()
+  @Test
+  public final void testOutOfBoundsIndexSet()
   {
     final T v = this.newMatrixAtIndexFromSize(
       200L, 200L);

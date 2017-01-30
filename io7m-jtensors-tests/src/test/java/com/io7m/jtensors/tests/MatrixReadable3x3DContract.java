@@ -41,7 +41,8 @@ public abstract class MatrixReadable3x3DContract<T extends
    * Test that single-element retrievals are correct.
    */
 
-  @Test public final void testGetCorrect()
+  @Test
+  public final void testGetCorrect()
   {
     final VectorReadable3DType c0 = new VectorI4D(1.0, 10.0, 100.0, 1000.0);
     final VectorReadable3DType c1 = new VectorI4D(2.0, 20.0, 200.0, 2000.0);
@@ -78,7 +79,8 @@ public abstract class MatrixReadable3x3DContract<T extends
    * Test that row retrievals are correct.
    */
 
-  @Test public final void testGetRow3Correct()
+  @Test
+  public final void testGetRow3Correct()
   {
     final VectorReadable3DType c0 = new VectorI4D(1.0, 10.0, 100.0, 1000.0);
     final VectorReadable3DType c1 = new VectorI4D(2.0, 20.0, 200.0, 2000.0);
@@ -144,7 +146,8 @@ public abstract class MatrixReadable3x3DContract<T extends
    * Test that row retrievals are correct.
    */
 
-  @Test public final void testGetRow2Correct()
+  @Test
+  public final void testGetRow2Correct()
   {
     final VectorReadable3DType c0 = new VectorI4D(1.0, 10.0, 100.0, 1000.0);
     final VectorReadable3DType c1 = new VectorI4D(2.0, 20.0, 200.0, 2000.0);
@@ -200,7 +203,8 @@ public abstract class MatrixReadable3x3DContract<T extends
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final T m0 = this.newMatrix();
     final T m1 = this.newMatrix();

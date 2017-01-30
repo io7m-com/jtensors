@@ -29,7 +29,8 @@ import org.junit.Test;
 public final class MatrixI3x3DTest
   extends MatrixReadable3x3DContract<MatrixI3x3D>
 {
-  @Test public void testEquals()
+  @Test
+  public void testEquals()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
 
@@ -69,7 +70,8 @@ public final class MatrixI3x3DTest
     Assert.assertFalse(im0.equals(im2));
   }
 
-  @Test public void testFromColumns()
+  @Test
+  public void testFromColumns()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
 
@@ -97,7 +99,8 @@ public final class MatrixI3x3DTest
     Assert.assertEquals(im0, im1);
   }
 
-  @Test public void testFromRows()
+  @Test
+  public void testFromRows()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
 
@@ -133,7 +136,8 @@ public final class MatrixI3x3DTest
     Assert.assertEquals(20.2f, row.getZD(), 0.0);
   }
 
-  @Test public void testIdentity()
+  @Test
+  public void testIdentity()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
     final MatrixI3x3D im0 = MatrixI3x3D.identity();
@@ -141,7 +145,8 @@ public final class MatrixI3x3DTest
     Assert.assertEquals(im1, im0);
   }
 
-  @Test public void testMakeMatrix3x3D()
+  @Test
+  public void testMakeMatrix3x3D()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
     final Matrix3x3DType m1 = MatrixHeapArrayM3x3D.newMatrix();
@@ -159,7 +164,8 @@ public final class MatrixI3x3DTest
     Assert.assertEquals(m0, m1);
   }
 
-  @Test public void testToString()
+  @Test
+  public void testToString()
   {
     final Matrix3x3DType m0 = MatrixHeapArrayM3x3D.newMatrix();
     final Matrix3x3DType m1 = MatrixHeapArrayM3x3D.newMatrix();
@@ -178,7 +184,8 @@ public final class MatrixI3x3DTest
     Assert.assertEquals(im1.toString(), im0.toString());
   }
 
-  @Override protected MatrixI3x3D newMatrix()
+  @Override
+  protected MatrixI3x3D newMatrix()
   {
     return MatrixI3x3D.identity();
   }
@@ -189,7 +196,8 @@ public final class MatrixI3x3DTest
     return MatrixI3x3D.newFromReadable(source);
   }
 
-  @Override protected void checkDirectBufferInvariants(final MatrixI3x3D m)
+  @Override
+  protected void checkDirectBufferInvariants(final MatrixI3x3D m)
   {
     // Nothing required
   }

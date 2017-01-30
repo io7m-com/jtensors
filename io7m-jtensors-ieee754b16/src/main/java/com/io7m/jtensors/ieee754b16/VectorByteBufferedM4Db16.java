@@ -104,32 +104,38 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
     return (int) ByteBufferRanges.checkByteOffset(b);
   }
 
-  @Override public double getWD()
+  @Override
+  public double getWD()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 3);
   }
 
-  @Override public void setWD(final double w)
+  @Override
+  public void setWD(final double w)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 3, w);
   }
 
-  @Override public double getZD()
+  @Override
+  public double getZD()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 2);
   }
 
-  @Override public void setZD(final double z)
+  @Override
+  public void setZD(final double z)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 2, z);
   }
 
-  @Override public double getXD()
+  @Override
+  public double getXD()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 0);
   }
 
-  @Override public void setXD(final double x)
+  @Override
+  public void setXD(final double x)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 0, x);
   }
@@ -153,17 +159,20 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
     return Binary16.unpackDouble(k);
   }
 
-  @Override public double getYD()
+  @Override
+  public double getYD()
   {
     return this.getAtOffsetAndIndex(super.getIndex(), 1);
   }
 
-  @Override public void setYD(final double y)
+  @Override
+  public void setYD(final double y)
   {
     this.setAtOffsetAndIndex(super.getIndex(), 1, y);
   }
 
-  @Override public void copyFrom4D(final VectorReadable4DType in_v)
+  @Override
+  public void copyFrom4D(final VectorReadable4DType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXD());
@@ -172,7 +181,8 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
     this.setAtOffsetAndIndex(o, 3, in_v.getWD());
   }
 
-  @Override public void set4D(
+  @Override
+  public void set4D(
     final double x,
     final double y,
     final double z,
@@ -185,7 +195,8 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
     this.setAtOffsetAndIndex(o, 3, w);
   }
 
-  @Override public void copyFrom3D(final VectorReadable3DType in_v)
+  @Override
+  public void copyFrom3D(final VectorReadable3DType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXD());
@@ -193,7 +204,8 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
     this.setAtOffsetAndIndex(o, 2, in_v.getZD());
   }
 
-  @Override public void set3D(
+  @Override
+  public void set3D(
     final double x,
     final double y,
     final double z)
@@ -204,14 +216,16 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
     this.setAtOffsetAndIndex(o, 2, z);
   }
 
-  @Override public void copyFrom2D(final VectorReadable2DType in_v)
+  @Override
+  public void copyFrom2D(final VectorReadable2DType in_v)
   {
     final long o = super.getIndex();
     this.setAtOffsetAndIndex(o, 0, in_v.getXD());
     this.setAtOffsetAndIndex(o, 1, in_v.getYD());
   }
 
-  @Override public void set2D(
+  @Override
+  public void set2D(
     final double x,
     final double y)
   {
@@ -220,7 +234,8 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
     this.setAtOffsetAndIndex(o, 1, y);
   }
 
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     final int prime = 31;
     int result = 1;
@@ -236,7 +251,8 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
     return result;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     final StringBuilder builder = new StringBuilder(128);
     builder.append("[VectorByteBufferedM4Db16 ");
@@ -252,7 +268,8 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
     return NullCheck.notNull(r);
   }
 
-  @Override public boolean equals(
+  @Override
+  public boolean equals(
     final @Nullable Object obj)
   {
     if (this == obj) {
@@ -274,8 +291,8 @@ public final class VectorByteBufferedM4Db16 extends ByteBuffered
     final double oy = other.getYD();
     final double oz = other.getZD();
     return Double.doubleToLongBits(tw) == Double.doubleToLongBits(ow)
-           && Double.doubleToLongBits(tx) == Double.doubleToLongBits(ox)
-           && Double.doubleToLongBits(ty) == Double.doubleToLongBits(oy)
-           && Double.doubleToLongBits(tz) == Double.doubleToLongBits(oz);
+      && Double.doubleToLongBits(tx) == Double.doubleToLongBits(ox)
+      && Double.doubleToLongBits(ty) == Double.doubleToLongBits(oy)
+      && Double.doubleToLongBits(tz) == Double.doubleToLongBits(oz);
   }
 }

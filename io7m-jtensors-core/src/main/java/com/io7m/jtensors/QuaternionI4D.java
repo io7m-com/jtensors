@@ -205,6 +205,64 @@ public final class QuaternionI4D implements QuaternionReadable4DType
   }
 
   /**
+   * Interpolate between {@code q0} and {@code q1}, using <i>spherical linear
+   * interpolation</i>, by the amount {@code alpha}, such that:
+   *
+   * <ul> <li>{@code interpolateSphericalLinear(q0, q1, 0.0) = normalize(q0)}</li>
+   * <li>{@code interpolateSphericalLinear(q0, q1, 1.0) = normalize(q1)}</li> </ul>
+   *
+   * <p>Note that unlike simple linear interpolation, this function is guaranteed
+   * to return a normalized quaternion.</p>
+   *
+   * @param q0    The left input quaternion
+   * @param q1    The right input quaternion
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}
+   *
+   * @return A spherical-linearly interpolated quaternion between {@code q0} and
+   * {@code q1}
+   */
+
+  public static QuaternionI4D interpolateSphericalLinear(
+    final QuaternionReadable4DType q0,
+    final QuaternionReadable4DType q1,
+    final double alpha)
+  {
+    final QuaternionI4D q0n = normalize(q0);
+    QuaternionI4D q1n = normalize(q1);
+
+    /*
+     * Calculate the dot product to determine if the quaternions are nearly
+     * codirectional. If they are, fall back to simple linear interpolation.
+     */
+
+    double dot = dotProduct(q0n, q1n);
+    final double threshold = 0.9995;
+    if (dot > threshold) {
+      return normalize(interpolateLinear(q0n, q1n, alpha));
+    }
+
+    /*
+     * If the dot product is negative, the quaternions are separated by more
+     * than 180° and a spherical linear interpolation wouldn't result in the
+     * shortest path. By negating one quaternion, the shortest path is obtained.
+     */
+
+    if (dot < 0.0) {
+      q1n = negate(q1n);
+      dot = -dot;
+    }
+
+    dot = Math.max(-1.0, Math.min(dot, 1.0));
+    final double theta_0 = StrictMath.acos(dot);
+    final double theta = theta_0 * alpha;
+
+    final QuaternionI4D q2 = normalize(subtract(q1n, scale(q0n, dot)));
+    final QuaternionI4D r0 = scale(q0n, StrictMath.cos(theta));
+    final QuaternionI4D r1 = scale(q2, StrictMath.sin(theta));
+    return add(r0, r1);
+  }
+
+  /**
    * <p> Return {@code true} iff {@code qa} is the negation of {@code qb}. </p>
    *
    * <p> Each element is compared with {@link AlmostEqualDouble#almostEqual

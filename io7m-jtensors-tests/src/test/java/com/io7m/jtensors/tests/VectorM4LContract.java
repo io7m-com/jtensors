@@ -44,10 +44,16 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     return (long) (Math.random() * (double) Long.MIN_VALUE);
   }
 
-  @Test public final void testAbsolute()
+  protected static long getRandomLarge()
+  {
+    return (long) Math.random() * Long.MAX_VALUE;
+  }
+
+  @Test
+  public final void testAbsolute()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x = getRandomSmall();
       final long y = getRandomSmall();
@@ -75,10 +81,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
 
   protected abstract T newVectorM4L();
 
-  @Test public final void testAbsoluteMutation()
+  @Test
+  public final void testAbsoluteMutation()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x = getRandomSmall();
       final long y = getRandomSmall();
@@ -95,10 +102,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testAdd()
+  @Test
+  public final void testAdd()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x0 = randomPositiveSmallNumber();
       final long y0 = randomPositiveSmallNumber();
@@ -135,7 +143,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testAddMutation()
+  @Test
+  public final void testAddMutation()
   {
     final T out = this.newVectorM4L();
     final T v0 = this.newVectorM4L(1L, 1L, 1L, 1L);
@@ -187,10 +196,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     Assert.assertEquals(1L, v1.getWL());
   }
 
-  @Test public final void testAddScaled()
+  @Test
+  public final void testAddScaled()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x0 = randomPositiveSmallNumber();
       final long y0 = randomPositiveSmallNumber();
@@ -229,17 +239,20 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testAlmostEqualNot()
+  @Test
+  public final void testAlmostEqualNot()
   {
     // Not supported by integer vectors
   }
 
-  @Test public final void testAlmostEqualTransitive()
+  @Test
+  public final void testAlmostEqualTransitive()
   {
     // Not supported by integer vectors
   }
 
-  @Test public final void testCheckInterface()
+  @Test
+  public final void testCheckInterface()
   {
     final T v = this.newVectorM4L(3L, 5L, 7L, 11L);
 
@@ -249,10 +262,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     Assert.assertEquals(v.getWL(), v.getWL());
   }
 
-  @Test public final void testClampByVectorMaximumOrdering()
+  @Test
+  public final void testClampByVectorMaximumOrdering()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long max_x = randomNegativeNumber();
       final long max_y = randomNegativeNumber();
@@ -286,10 +300,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testClampByVectorMinimumOrdering()
+  @Test
+  public final void testClampByVectorMinimumOrdering()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long min_x = randomPositiveNumber();
       final long min_y = randomPositiveNumber();
@@ -323,10 +338,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testClampByVectorOrdering()
+  @Test
+  public final void testClampByVectorOrdering()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long min_x = randomNegativeNumber();
       final long min_y = randomNegativeNumber();
@@ -374,10 +390,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testClampMaximumOrdering()
+  @Test
+  public final void testClampMaximumOrdering()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long maximum = randomNegativeNumber();
 
@@ -405,10 +422,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testClampMinimumOrdering()
+  @Test
+  public final void testClampMinimumOrdering()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long minimum = randomPositiveNumber();
 
@@ -436,10 +454,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testClampOrdering()
+  @Test
+  public final void testClampOrdering()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long minimum = randomNegativeNumber();
       final long maximum = randomPositiveNumber();
@@ -477,7 +496,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testCopy()
+  @Test
+  public final void testCopy()
   {
     final T vb = this.newVectorM4L(5L, 6L, 7L, 8L);
     final T va = this.newVectorM4L(1L, 2L, 3L, 4L);
@@ -495,7 +515,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     Assert.assertEquals(vb.getWL(), va.getWL());
   }
 
-  @Test public final void testCopy2Correct()
+  @Test
+  public final void testCopy2Correct()
   {
     final T v0 = this.newVectorM4L(
       getRandomLarge(),
@@ -512,7 +533,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     Assert.assertEquals(1L, v1.getWL());
   }
 
-  @Test public final void testCopy3Correct()
+  @Test
+  public final void testCopy3Correct()
   {
     final T v0 = this.newVectorM4L(
       getRandomLarge(),
@@ -529,7 +551,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     Assert.assertEquals(v0.getWL(), v1.getWL());
   }
 
-  @Test public final void testCopy4Correct()
+  @Test
+  public final void testCopy4Correct()
   {
     final T v0 = this.newVectorM4L(
       getRandomLarge(),
@@ -546,18 +569,15 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     Assert.assertEquals(1L, v1.getWL());
   }
 
-  protected static long getRandomLarge()
-  {
-    return (long) Math.random() * Long.MAX_VALUE;
-  }
-
-  @Test public final void testDefault0001()
+  @Test
+  public final void testDefault0001()
   {
     Assert.assertTrue(
       this.newVectorM4L().equals(this.newVectorM4L(0L, 0L, 0L, 1L)));
   }
 
-  @Test public final void testDistance()
+  @Test
+  public final void testDistance()
   {
     final VectorM4L.ContextVM4L c = new VectorM4L.ContextVM4L();
     final T v0 = this.newVectorM4L(0L, 1L, 0L, 0L);
@@ -565,11 +585,12 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     Assert.assertEquals(1L, VectorM4L.distance(c, v0, v1));
   }
 
-  @Test public final void testDistanceOrdering()
+  @Test
+  public final void testDistanceOrdering()
   {
     final VectorM4L.ContextVM4L c = new VectorM4L.ContextVM4L();
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x0 = randomPositiveSmallNumber();
       final long y0 = randomPositiveSmallNumber();
@@ -587,7 +608,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testDotProduct()
+  @Test
+  public final void testDotProduct()
   {
     final T v0 = this.newVectorM4L(10L, 10L, 10L, 10L);
     final T v1 = this.newVectorM4L(10L, 10L, 10L, 10L);
@@ -624,13 +646,14 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testDotProductPerpendicular()
+  @Test
+  public final void testDotProductPerpendicular()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long max = 1000L;
       final long x = (long) (Math.random() * (double) max);
@@ -642,21 +665,19 @@ public abstract class VectorM4LContract<T extends Vector4LType>
       final double ms = (double) VectorM4L.magnitudeSquared(q);
       final double dp = (double) VectorM4L.dotProduct(q, q);
 
-      
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, ms, dp);
     }
   }
 
-  @Test public final void testDotProductSelf()
+  @Test
+  public final void testDotProductSelf()
   {
     final AlmostEqualDouble.ContextRelative ec =
       TestUtilities.getDoubleEqualityContext();
 
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long max = 1000L;
       final long x = (long) (Math.random() * (double) max);
@@ -666,14 +687,13 @@ public abstract class VectorM4LContract<T extends Vector4LType>
       final T q = this.newVectorM4L(x, y, z, w);
       final double dp = (double) VectorM4L.dotProduct(q, q);
 
-      
-      
 
       AlmostEqualDouble.almostEqual(ec, 1.0, dp);
     }
   }
 
-  @Test public final void testDotProductSelfMagnitudeSquared()
+  @Test
+  public final void testDotProductSelfMagnitudeSquared()
   {
     final T v0 = this.newVectorM4L(10L, 10L, 10L, 10L);
 
@@ -696,7 +716,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testEqualsCorrect()
+  @Test
+  public final void testEqualsCorrect()
   {
     {
       final T m0 = this.newVectorM4L();
@@ -720,7 +741,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testEqualsNotEqualCorrect()
+  @Test
+  public final void testEqualsNotEqualCorrect()
   {
     final long x = (long) (Math.random() * 1000.0);
     final long y = x + 1L;
@@ -811,14 +833,16 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testHashCodeEqualsCorrect()
+  @Test
+  public final void testHashCodeEqualsCorrect()
   {
     final T m0 = this.newVectorM4L();
     final T m1 = this.newVectorM4L();
     Assert.assertEquals((long) m0.hashCode(), (long) m1.hashCode());
   }
 
-  @Test public final void testHashCodeNotEqualCorrect()
+  @Test
+  public final void testHashCodeNotEqualCorrect()
   {
     {
       final T m0 = this.newVectorM4L();
@@ -849,7 +873,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testInitializeReadable()
+  @Test
+  public final void testInitializeReadable()
   {
     final T v0 = this.newVectorM4L(1L, 2L, 3L, 4L);
     final T v1 = this.newVectorM4LFrom(v0);
@@ -860,11 +885,12 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     Assert.assertEquals(v1.getWL(), v0.getWL());
   }
 
-  @Test public final void testInterpolateLinearLimits()
+  @Test
+  public final void testInterpolateLinearLimits()
   {
     final VectorM4L.ContextVM4L c = new VectorM4L.ContextVM4L();
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x0 = randomPositiveNumber();
       final long y0 = randomPositiveNumber();
@@ -895,10 +921,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testMagnitudeNonzero()
+  @Test
+  public final void testMagnitudeNonzero()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x = randomPositiveSmallNumber();
       final long y = randomPositiveSmallNumber();
@@ -911,24 +938,28 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testMagnitudeNormal()
+  @Test
+  public final void testMagnitudeNormal()
   {
     // Not applicable to integer vectors
   }
 
-  @Test public final void testMagnitudeNormalizeZero()
+  @Test
+  public final void testMagnitudeNormalizeZero()
   {
     // Not applicable to integer vectors
   }
 
-  @Test public final void testMagnitudeOne()
+  @Test
+  public final void testMagnitudeOne()
   {
     final T v = this.newVectorM4L(1L, 0L, 0L, 0L);
     final long m = VectorM4L.magnitude(v);
     Assert.assertEquals(1L, m);
   }
 
-  @Test public final void testMagnitudeSimple()
+  @Test
+  public final void testMagnitudeSimple()
   {
     final T v = this.newVectorM4L(8L, 0L, 0L, 0L);
 
@@ -942,34 +973,40 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testMagnitudeZero()
+  @Test
+  public final void testMagnitudeZero()
   {
     final T v = this.newVectorM4L(0L, 0L, 0L, 0L);
     final long m = VectorM4L.magnitude(v);
     Assert.assertEquals(0L, m);
   }
 
-  @Test public final void testNormalizeSimple()
+  @Test
+  public final void testNormalizeSimple()
   {
     // Not applicable to integer vectors
   }
 
-  @Test public final void testNormalizeZero()
+  @Test
+  public final void testNormalizeZero()
   {
     // Not supported by integer vectors
   }
 
-  @Test public final void testOrthonormalize()
+  @Test
+  public final void testOrthonormalize()
   {
     // Not applicable to integer vectors
   }
 
-  @Test public final void testOrthonormalizeMutation()
+  @Test
+  public final void testOrthonormalizeMutation()
   {
     // Not applicable to integer vectors
   }
 
-  @Test public final void testProjectionPerpendicularZero()
+  @Test
+  public final void testProjectionPerpendicularZero()
   {
     {
       final T p = this.newVectorM4L(1L, 0L, 0L, 0L);
@@ -992,7 +1029,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testScaleMutation()
+  @Test
+  public final void testScaleMutation()
   {
     final T out = this.newVectorM4L();
     final T v0 = this.newVectorM4L(1L, 1L, 1L, 1L);
@@ -1031,10 +1069,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     Assert.assertEquals(2L, v0.getWL());
   }
 
-  @Test public final void testScaleOne()
+  @Test
+  public final void testScaleOne()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x = randomPositiveNumber();
       final long y = randomPositiveNumber();
@@ -1067,10 +1106,11 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testScaleZero()
+  @Test
+  public final void testScaleZero()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x = randomPositiveNumber();
       final long y = randomPositiveNumber();
@@ -1098,16 +1138,18 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testString()
+  @Test
+  public final void testString()
   {
     final T v = this.newVectorM4L(1L, 2L, 3L, 4L);
     Assert.assertTrue(v.toString().endsWith("1 2 3 4]"));
   }
 
-  @Test public final void testSubtract()
+  @Test
+  public final void testSubtract()
   {
     for (long index = 0L; index
-                          < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
+      < (long) TestUtilities.TEST_RANDOM_ITERATIONS;
          ++index) {
       final long x0 = randomPositiveNumber();
       final long y0 = randomPositiveNumber();
@@ -1144,7 +1186,8 @@ public abstract class VectorM4LContract<T extends Vector4LType>
     }
   }
 
-  @Test public final void testSubtractMutation()
+  @Test
+  public final void testSubtractMutation()
   {
     final T out = this.newVectorM4L();
     final T v0 = this.newVectorM4L(1L, 1L, 1L, 1L);

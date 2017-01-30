@@ -29,46 +29,54 @@ public final class PMatrixHeapArrayM3x3DTest<T0, T1, T2>
   PMatrix3x3DType<T0, T2>,
   PMatrix3x3DType<T1, T0>>
 {
-    //@formatter:on
+  //@formatter:on
 
-  @Override protected PMatrix3x3DType<T0, T1> newMatrix()
+  @Override
+  protected PMatrix3x3DType<T0, T1> newMatrix()
   {
     return PMatrixHeapArrayM3x3D.newMatrix();
   }
 
-  @Override protected PMatrix3x3DType<T1, T2> newMatrixMultLeft()
+  @Override
+  protected PMatrix3x3DType<T1, T2> newMatrixMultLeft()
   {
     return PMatrixHeapArrayM3x3D.newMatrix();
   }
 
-  @Override protected PMatrix3x3DType<T0, T1> newMatrixMultRight()
+  @Override
+  protected PMatrix3x3DType<T0, T1> newMatrixMultRight()
   {
     return PMatrixHeapArrayM3x3D.newMatrix();
   }
 
-  @Override protected PMatrix3x3DType<T0, T2> newMatrixMultResult()
+  @Override
+  protected PMatrix3x3DType<T0, T2> newMatrixMultResult()
   {
     return PMatrixHeapArrayM3x3D.newMatrix();
   }
 
-  @Override protected PMatrix3x3DType<T1, T0> newMatrixInverse()
+  @Override
+  protected PMatrix3x3DType<T1, T0> newMatrixInverse()
   {
     return PMatrixHeapArrayM3x3D.newMatrix();
   }
 
-  @Override protected PMatrix3x3DType<T0, T1> newMatrixFrom(
+  @Override
+  protected PMatrix3x3DType<T0, T1> newMatrixFrom(
     final PMatrixReadable3x3DType<T0, T1> m)
   {
     return PMatrixHeapArrayM3x3D.newMatrixFrom(m);
   }
 
-  @Override protected void checkDirectBufferInvariantsWildcard(
+  @Override
+  protected void checkDirectBufferInvariantsWildcard(
     final PMatrixReadable3x3DType<?, ?> m)
   {
     // Nothing
   }
 
-  @Override protected void checkDirectBufferInvariantsGeneric(
+  @Override
+  protected void checkDirectBufferInvariantsGeneric(
     final PMatrix3x3DType<T0, T1> m)
   {
     // Nothing

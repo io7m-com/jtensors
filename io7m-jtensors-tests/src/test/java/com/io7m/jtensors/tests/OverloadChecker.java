@@ -80,7 +80,8 @@ import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.HashSet;
 
-@SuppressWarnings("static-method") public final class OverloadChecker
+@SuppressWarnings("static-method")
+public final class OverloadChecker
 {
   public static void checkOverloading(
     final Class<?> c)
@@ -106,349 +107,407 @@ import java.util.HashSet;
     }
   }
 
-  @Test public void testMatrixM2x2D()
+  @Test
+  public void testMatrixM2x2D()
     throws Exception
   {
     checkOverloading(MatrixM2x2D.class);
   }
 
-  @Test public void testMatrixM2x2F()
+  @Test
+  public void testMatrixM2x2F()
     throws Exception
   {
     checkOverloading(MatrixM2x2F.class);
   }
 
-  @Test public void testMatrixM3x3D()
+  @Test
+  public void testMatrixM3x3D()
     throws Exception
   {
     checkOverloading(MatrixM3x3D.class);
   }
 
-  @Test public void testMatrixM3x3F()
+  @Test
+  public void testMatrixM3x3F()
     throws Exception
   {
     checkOverloading(MatrixM3x3F.class);
   }
 
-  @Test public void testMatrixM4x4D()
+  @Test
+  public void testMatrixM4x4D()
     throws Exception
   {
     checkOverloading(MatrixM4x4D.class);
   }
 
-  @Test public void testMatrixM4x4F()
+  @Test
+  public void testMatrixM4x4F()
     throws Exception
   {
     checkOverloading(MatrixM4x4F.class);
   }
 
-  @Test public void testPMatrixM3x3D()
+  @Test
+  public void testPMatrixM3x3D()
     throws Exception
   {
     checkOverloading(PMatrixM3x3D.class);
   }
 
-  @Test public void testPMatrixM3x3F()
+  @Test
+  public void testPMatrixM3x3F()
     throws Exception
   {
     checkOverloading(PMatrixM3x3F.class);
   }
 
-  @Test public void testPMatrixM4x4D()
+  @Test
+  public void testPMatrixM4x4D()
     throws Exception
   {
     checkOverloading(PMatrixM4x4D.class);
   }
 
-  @Test public void testPMatrixM4x4F()
+  @Test
+  public void testPMatrixM4x4F()
     throws Exception
   {
     checkOverloading(PMatrixM4x4F.class);
   }
 
-  @Test public void testPVectorI2D()
+  @Test
+  public void testPVectorI2D()
     throws Exception
   {
     checkOverloading(PVectorI2D.class);
   }
 
-  @Test public void testPVectorI2F()
+  @Test
+  public void testPVectorI2F()
     throws Exception
   {
     checkOverloading(PVectorI2F.class);
   }
 
-  @Test public void testPVectorI2I()
+  @Test
+  public void testPVectorI2I()
     throws Exception
   {
     checkOverloading(PVectorI2I.class);
   }
 
-  @Test public void testPVectorI2L()
+  @Test
+  public void testPVectorI2L()
     throws Exception
   {
     checkOverloading(PVectorI2L.class);
   }
 
-  @Test public void testPVectorI3D()
+  @Test
+  public void testPVectorI3D()
     throws Exception
   {
     checkOverloading(PVectorI3D.class);
   }
 
-  @Test public void testPVectorI3F()
+  @Test
+  public void testPVectorI3F()
     throws Exception
   {
     checkOverloading(PVectorI3F.class);
   }
 
-  @Test public void testPVectorI3I()
+  @Test
+  public void testPVectorI3I()
     throws Exception
   {
     checkOverloading(PVectorI3I.class);
   }
 
-  @Test public void testPVectorI3L()
+  @Test
+  public void testPVectorI3L()
     throws Exception
   {
     checkOverloading(PVectorI3L.class);
   }
 
-  @Test public void testPVectorI4D()
+  @Test
+  public void testPVectorI4D()
     throws Exception
   {
     checkOverloading(PVectorI4D.class);
   }
 
-  @Test public void testPVectorI4F()
+  @Test
+  public void testPVectorI4F()
     throws Exception
   {
     checkOverloading(PVectorI4F.class);
   }
 
-  @Test public void testPVectorI4I()
+  @Test
+  public void testPVectorI4I()
     throws Exception
   {
     checkOverloading(PVectorI4I.class);
   }
 
-  @Test public void testPVectorI4L()
+  @Test
+  public void testPVectorI4L()
     throws Exception
   {
     checkOverloading(PVectorI4L.class);
   }
 
-  @Test public void testPVectorM2D()
+  @Test
+  public void testPVectorM2D()
     throws Exception
   {
     checkOverloading(PVectorM2D.class);
   }
 
-  @Test public void testPVectorM2F()
+  @Test
+  public void testPVectorM2F()
     throws Exception
   {
     checkOverloading(PVectorM2F.class);
   }
 
-  @Test public void testPVectorM2I()
+  @Test
+  public void testPVectorM2I()
     throws Exception
   {
     checkOverloading(PVectorM2I.class);
   }
 
-  @Test public void testPVectorM2L()
+  @Test
+  public void testPVectorM2L()
     throws Exception
   {
     checkOverloading(PVectorM2L.class);
   }
 
-  @Test public void testPVectorM3D()
+  @Test
+  public void testPVectorM3D()
     throws Exception
   {
     checkOverloading(PVectorM3D.class);
   }
 
-  @Test public void testPVectorM3F()
+  @Test
+  public void testPVectorM3F()
     throws Exception
   {
     checkOverloading(PVectorM3F.class);
   }
 
-  @Test public void testPVectorM3I()
+  @Test
+  public void testPVectorM3I()
     throws Exception
   {
     checkOverloading(PVectorM3I.class);
   }
 
-  @Test public void testPVectorM3L()
+  @Test
+  public void testPVectorM3L()
     throws Exception
   {
     checkOverloading(PVectorM3L.class);
   }
 
-  @Test public void testPVectorM4D()
+  @Test
+  public void testPVectorM4D()
     throws Exception
   {
     checkOverloading(PVectorM4D.class);
   }
 
-  @Test public void testPVectorM4F()
+  @Test
+  public void testPVectorM4F()
     throws Exception
   {
     checkOverloading(PVectorM4F.class);
   }
 
-  @Test public void testPVectorM4I()
+  @Test
+  public void testPVectorM4I()
     throws Exception
   {
     checkOverloading(PVectorM4I.class);
   }
 
-  @Test public void testPVectorM4L()
+  @Test
+  public void testPVectorM4L()
     throws Exception
   {
     checkOverloading(PVectorM4L.class);
   }
 
-  @Test public void testVectorI2D()
+  @Test
+  public void testVectorI2D()
     throws Exception
   {
     checkOverloading(VectorI2D.class);
   }
 
-  @Test public void testVectorI2F()
+  @Test
+  public void testVectorI2F()
     throws Exception
   {
     checkOverloading(VectorI2F.class);
   }
 
-  @Test public void testVectorI2I()
+  @Test
+  public void testVectorI2I()
     throws Exception
   {
     checkOverloading(VectorI2I.class);
   }
 
-  @Test public void testVectorI2L()
+  @Test
+  public void testVectorI2L()
     throws Exception
   {
     checkOverloading(VectorI2L.class);
   }
 
-  @Test public void testVectorI3D()
+  @Test
+  public void testVectorI3D()
     throws Exception
   {
     checkOverloading(VectorI3D.class);
   }
 
-  @Test public void testVectorI3F()
+  @Test
+  public void testVectorI3F()
     throws Exception
   {
     checkOverloading(VectorI3F.class);
   }
 
-  @Test public void testVectorI3I()
+  @Test
+  public void testVectorI3I()
     throws Exception
   {
     checkOverloading(VectorI3I.class);
   }
 
-  @Test public void testVectorI3L()
+  @Test
+  public void testVectorI3L()
     throws Exception
   {
     checkOverloading(VectorI3L.class);
   }
 
-  @Test public void testVectorI4D()
+  @Test
+  public void testVectorI4D()
     throws Exception
   {
     checkOverloading(VectorI4D.class);
   }
 
-  @Test public void testVectorI4F()
+  @Test
+  public void testVectorI4F()
     throws Exception
   {
     checkOverloading(VectorI4F.class);
   }
 
-  @Test public void testVectorI4I()
+  @Test
+  public void testVectorI4I()
     throws Exception
   {
     checkOverloading(VectorI4I.class);
   }
 
-  @Test public void testVectorI4L()
+  @Test
+  public void testVectorI4L()
     throws Exception
   {
     checkOverloading(VectorI4L.class);
   }
 
-  @Test public void testVectorM2D()
+  @Test
+  public void testVectorM2D()
     throws Exception
   {
     checkOverloading(VectorM2D.class);
   }
 
-  @Test public void testVectorM2F()
+  @Test
+  public void testVectorM2F()
     throws Exception
   {
     checkOverloading(VectorM2F.class);
   }
 
-  @Test public void testVectorM2I()
+  @Test
+  public void testVectorM2I()
     throws Exception
   {
     checkOverloading(VectorM2I.class);
   }
 
-  @Test public void testVectorM2L()
+  @Test
+  public void testVectorM2L()
     throws Exception
   {
     checkOverloading(VectorM2L.class);
   }
 
-  @Test public void testVectorM3D()
+  @Test
+  public void testVectorM3D()
     throws Exception
   {
     checkOverloading(VectorM3D.class);
   }
 
-  @Test public void testVectorM3F()
+  @Test
+  public void testVectorM3F()
     throws Exception
   {
     checkOverloading(VectorM3F.class);
   }
 
-  @Test public void testVectorM3I()
+  @Test
+  public void testVectorM3I()
     throws Exception
   {
     checkOverloading(VectorM3I.class);
   }
 
-  @Test public void testVectorM3L()
+  @Test
+  public void testVectorM3L()
     throws Exception
   {
     checkOverloading(VectorM3L.class);
   }
 
-  @Test public void testVectorM4D()
+  @Test
+  public void testVectorM4D()
     throws Exception
   {
     checkOverloading(VectorM4D.class);
   }
 
-  @Test public void testVectorM4F()
+  @Test
+  public void testVectorM4F()
     throws Exception
   {
     checkOverloading(VectorM4F.class);
   }
 
-  @Test public void testVectorM4I()
+  @Test
+  public void testVectorM4I()
     throws Exception
   {
     checkOverloading(VectorM4I.class);
   }
 
-  @Test public void testVectorM4L()
+  @Test
+  public void testVectorM4L()
     throws Exception
   {
     checkOverloading(VectorM4L.class);

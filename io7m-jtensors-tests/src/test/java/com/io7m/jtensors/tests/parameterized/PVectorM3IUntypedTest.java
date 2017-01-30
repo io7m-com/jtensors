@@ -22,7 +22,8 @@ import com.io7m.jtensors.tests.VectorM3IContract;
 public final class PVectorM3IUntypedTest<T>
   extends VectorM3IContract<PVectorM3I<T>>
 {
-  @Override protected PVectorM3I<T> newVectorM3I(
+  @Override
+  protected PVectorM3I<T> newVectorM3I(
     final int x,
     final int y,
     final int z)
@@ -30,12 +31,14 @@ public final class PVectorM3IUntypedTest<T>
     return new PVectorM3I<T>(x, y, z);
   }
 
-  @Override protected PVectorM3I<T> newVectorM3I()
+  @Override
+  protected PVectorM3I<T> newVectorM3I()
   {
     return new PVectorM3I<T>();
   }
 
-  @Override protected PVectorM3I<T> newVectorM3I(final PVectorM3I<T> v)
+  @Override
+  protected PVectorM3I<T> newVectorM3I(final PVectorM3I<T> v)
   {
     return new PVectorM3I<T>(v);
   }

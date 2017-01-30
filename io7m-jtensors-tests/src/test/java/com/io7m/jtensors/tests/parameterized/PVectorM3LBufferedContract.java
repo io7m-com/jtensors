@@ -188,7 +188,8 @@ public abstract class PVectorM3LBufferedContract<T, V extends PVector3LType<T>>
     v.copyFrom2L(new VectorI3L(23L, 23L, 23L));
   }
 
-  @Test public final void testCopyFrom3LIdentity()
+  @Test
+  public final void testCopyFrom3LIdentity()
   {
     final PVector3LType<T> v = this.newVectorM3LAtIndexFromSize(
       100L, 0L);
@@ -199,7 +200,8 @@ public abstract class PVectorM3LBufferedContract<T, V extends PVector3LType<T>>
     Assert.assertEquals(25L, v.getZL());
   }
 
-  @Test public final void testCopyFrom2LIdentity()
+  @Test
+  public final void testCopyFrom2LIdentity()
   {
     final PVector3LType<T> v = this.newVectorM3LAtIndexFromSize(
       100L, 0L);
@@ -209,7 +211,8 @@ public abstract class PVectorM3LBufferedContract<T, V extends PVector3LType<T>>
     Assert.assertEquals(24L, v.getYL());
   }
 
-  @Test public final void testSet3LIdentity()
+  @Test
+  public final void testSet3LIdentity()
   {
     final PVector3LType<T> v = this.newVectorM3LAtIndexFromSize(
       100L, 0L);
@@ -220,7 +223,8 @@ public abstract class PVectorM3LBufferedContract<T, V extends PVector3LType<T>>
     Assert.assertEquals(25L, v.getZL());
   }
 
-  @Test public final void testSet2LIdentity()
+  @Test
+  public final void testSet2LIdentity()
   {
     final PVector3LType<T> v = this.newVectorM3LAtIndexFromSize(
       100L, 0L);
