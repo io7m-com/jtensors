@@ -29,6 +29,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <siteReposDirectory>com/io7m/jtensors</siteReposDirectory>
     <siteDocumentationDirectory>com/io7m/jtensors/io7m-jtensors-documentation</siteDocumentationDirectory>
+    <com.io7m.jtensors.previousVersion>7.0.0</com.io7m.jtensors.previousVersion>
   </properties>
 
   <licenses>
@@ -274,6 +275,11 @@
           <version>3.2.0</version>
           <extensions>true</extensions>
         </plugin>
+        <plugin>
+          <groupId>com.github.siom79.japicmp</groupId>
+          <artifactId>japicmp-maven-plugin</artifactId>
+          <version>0.9.4</version>
+        </plugin>
 
         <!-- Require JDK >= 1.6 -->
         <plugin>
@@ -442,6 +448,41 @@
             <Sealed>true</Sealed>
           </instructions>
         </configuration>
+      </plugin>
+
+      <!-- Verify API compatibility -->
+      <plugin>
+        <groupId>com.github.siom79.japicmp</groupId>
+        <artifactId>japicmp-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>cmp</goal>
+            </goals>
+            <configuration>
+              <oldVersion>
+                <dependency>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>${project.artifactId}</artifactId>
+                  <version>${com.io7m.jtensors.previousVersion}</version>
+                  <type>jar</type>
+                </dependency>
+              </oldVersion>
+              <newVersion>
+                <file>
+                  <path>${project.build.directory}/${project.artifactId}-${project.version}.jar</path>
+                </file>
+              </newVersion>
+              <parameter>
+                <breakBuildOnModifications>false</breakBuildOnModifications>
+                <breakBuildOnBinaryIncompatibleModifications>true</breakBuildOnBinaryIncompatibleModifications>
+                <breakBuildOnSourceIncompatibleModifications>true</breakBuildOnSourceIncompatibleModifications>
+                <breakBuildBasedOnSemanticVersioning>true</breakBuildBasedOnSemanticVersioning>
+              </parameter>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
