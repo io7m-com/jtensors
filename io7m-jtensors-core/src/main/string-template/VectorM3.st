@@ -1,4 +1,4 @@
-VectorM4(
+VectorM3(
   scalarType,
   scalarTypeSuffix,
   scalarLargeType,
@@ -8,15 +8,18 @@ VectorM4(
   scalarScaleType,
   className,
   classBaseType,
-  classReadableName4,
   classReadableName3,
   classReadableName2,
   classWritableName,
   opClass,
   since,
   hasPartialArithmetic,
+  hasDeprecatedMagnitude,
+  scalarDeprecatedMagnitudeType,
   hasDeprecatedScale,
   scalarDeprecatedScaleType,
+  hasDeprecatedClamp,
+  scalarDeprecatedClampType,
   hasApproximateEquality,
   approximateEqualityType,
   hasFloatingPoint) ::= <<
@@ -42,7 +45,7 @@ import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
 
 /**
- * \<p\>A four-dimensional mutable vector type with {@code <scalarType>} elements.\</p\>
+ * \<p\>A three-dimensional mutable vector type with {@code <scalarType>} elements.\</p\>
  *
  * \<p\>
  * Values of this type cannot be accessed safely from multiple threads without
@@ -54,7 +57,6 @@ import com.io7m.jnull.Nullable;
 
 public final class <className> implements <classBaseType>
 {
-  private <scalarType> w = <opClass>.one();
   private <scalarType> x;
   private <scalarType> y;
   private <scalarType> z;
@@ -74,19 +76,16 @@ public final class <className> implements <classBaseType>
    * @param in_x The {@code x} value
    * @param in_y The {@code y} value
    * @param in_z The {@code z} value
-   * @param in_w The {@code w} value
    */
 
   public <className>(
     final <scalarType> in_x,
     final <scalarType> in_y,
-    final <scalarType> in_z,
-    final <scalarType> in_w)
+    final <scalarType> in_z)
   {
     this.x = in_x;
     this.y = in_y;
     this.z = in_z;
-    this.w = in_w;
   }
 
   /**
@@ -96,12 +95,11 @@ public final class <className> implements <classBaseType>
    */
 
   public <className>(
-    final <classReadableName4> in_v)
+    final <classReadableName3> in_v)
   {
     this.x = in_v.getX<scalarTypeSuffix>();
     this.y = in_v.getY<scalarTypeSuffix>();
     this.z = in_v.getZ<scalarTypeSuffix>();
-    this.w = in_v.getW<scalarTypeSuffix>();
   }
 
   /**
@@ -112,7 +110,7 @@ public final class <className> implements <classBaseType>
    * @param out The output vector
    * @param \<V\> The precise type of vector
    *
-   * @return {@code (abs v.x, abs v.y, abs v.z, abs.w)}
+   * @return {@code (abs v.x, abs v.y, abs v.z)}
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
@@ -120,15 +118,14 @@ public final class <className> implements <classBaseType>
    */
 
   public static \<V extends <classWritableName>\> V absolute(
-    final <classReadableName4> v,
+    final <classReadableName3> v,
     final V out)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     final <scalarType> x = <opClass>.absolute(v.getX<scalarTypeSuffix>());
     final <scalarType> y = <opClass>.absolute(v.getY<scalarTypeSuffix>());
     final <scalarType> z = <opClass>.absolute(v.getZ<scalarTypeSuffix>());
-    final <scalarType> w = <opClass>.absolute(v.getW<scalarTypeSuffix>());
-    out.set4<scalarTypeSuffix>(x, y, z, w);
+    out.set3<scalarTypeSuffix>(x, y, z);
     return out;
   }
 
@@ -139,14 +136,14 @@ public final class <className> implements <classBaseType>
    * @param v   The input vector
    * @param \<V\> The precise type of vector
    *
-   * @return {@code (abs v.x, abs v.y, abs v.z, abs.w)}
+   * @return {@code (abs v.x, abs v.y, abs v.z)}
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
    * <endif>
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   absoluteInPlace(
     final V v)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
@@ -171,8 +168,8 @@ public final class <className> implements <classBaseType>
 
   public static boolean almostEqual(
     final <approximateEqualityType>.ContextRelative context,
-    final <classReadableName4> va,
-    final <classReadableName4> vb)
+    final <classReadableName3> va,
+    final <classReadableName3> vb)
   {
     final boolean xs =
       <approximateEqualityType>.almostEqual(context, va.getX<scalarTypeSuffix>(), vb.getX<scalarTypeSuffix>());
@@ -180,9 +177,7 @@ public final class <className> implements <classBaseType>
       <approximateEqualityType>.almostEqual(context, va.getY<scalarTypeSuffix>(), vb.getY<scalarTypeSuffix>());
     final boolean zs =
       <approximateEqualityType>.almostEqual(context, va.getZ<scalarTypeSuffix>(), vb.getZ<scalarTypeSuffix>());
-    final boolean ws =
-      <approximateEqualityType>.almostEqual(context, va.getW<scalarTypeSuffix>(), vb.getW<scalarTypeSuffix>());
-    return xs && ys && zs && ws;
+    return xs && ys && zs;
   }
   <endif>
 
@@ -195,7 +190,7 @@ public final class <className> implements <classBaseType>
    * @param out The output vector
    * @param \<V\> The precise type of vector
    *
-   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)}
+   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)}
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
@@ -203,16 +198,15 @@ public final class <className> implements <classBaseType>
    */
 
   public static \<V extends <classWritableName>\> V add(
-    final <classReadableName4> v0,
-    final <classReadableName4> v1,
+    final <classReadableName3> v0,
+    final <classReadableName3> v1,
     final V out)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     final <scalarType> x = <opClass>.add(v0.getX<scalarTypeSuffix>(), v1.getX<scalarTypeSuffix>());
     final <scalarType> y = <opClass>.add(v0.getY<scalarTypeSuffix>(), v1.getY<scalarTypeSuffix>());
     final <scalarType> z = <opClass>.add(v0.getZ<scalarTypeSuffix>(), v1.getZ<scalarTypeSuffix>());
-    final <scalarType> w = <opClass>.add(v0.getW<scalarTypeSuffix>(), v1.getW<scalarTypeSuffix>());
-    out.set4<scalarTypeSuffix>(x, y, z, w);
+    out.set3<scalarTypeSuffix>(x, y, z);
     return out;
   }
 
@@ -224,17 +218,17 @@ public final class <className> implements <classBaseType>
    * @param v1  The right input vector
    * @param \<V\> The precise type of vector
    *
-   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)}
+   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z)}
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
    * <endif>
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   addInPlace(
     final V v0,
-    final <classReadableName4> v1)
+    final <classReadableName3> v1)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     return add(v0, v1, v0);
@@ -251,8 +245,7 @@ public final class <className> implements <classBaseType>
    * @param r   The scaling value
    * @param \<V\> The precise type of vector
    *
-   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r),
-   * v0.w + (v1.w * r))}
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))}
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
@@ -260,8 +253,8 @@ public final class <className> implements <classBaseType>
    */
 
   public static \<V extends <classWritableName>\> V addScaled(
-    final <classReadableName4> v0,
-    final <classReadableName4> v1,
+    final <classReadableName3> v0,
+    final <classReadableName3> v1,
     final double r,
     final V out)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
@@ -269,12 +262,10 @@ public final class <className> implements <classBaseType>
     final <scalarType> mx = <opClass>.multiplyReal(v1.getX<scalarTypeSuffix>(), r);
     final <scalarType> my = <opClass>.multiplyReal(v1.getY<scalarTypeSuffix>(), r);
     final <scalarType> mz = <opClass>.multiplyReal(v1.getZ<scalarTypeSuffix>(), r);
-    final <scalarType> mw = <opClass>.multiplyReal(v1.getW<scalarTypeSuffix>(), r);
     final <scalarType> x = <opClass>.add(v0.getX<scalarTypeSuffix>(), mx);
     final <scalarType> y = <opClass>.add(v0.getY<scalarTypeSuffix>(), my);
     final <scalarType> z = <opClass>.add(v0.getZ<scalarTypeSuffix>(), mz);
-    final <scalarType> w = <opClass>.add(v0.getW<scalarTypeSuffix>(), mw);
-    out.set4<scalarTypeSuffix>(x, y, z, w);
+    out.set3<scalarTypeSuffix>(x, y, z);
     return out;
   }
 
@@ -288,18 +279,17 @@ public final class <className> implements <classBaseType>
    * @param r   The scaling value
    * @param \<V\> The precise type of vector
    *
-   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r),
-   * v0.w + (v1.w * r))}
+   * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r))}
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
    * <endif>
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   addScaledInPlace(
     final V v0,
-    final <classReadableName4> v1,
+    final <classReadableName3> v1,
     final double r)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
@@ -321,7 +311,7 @@ public final class <className> implements <classBaseType>
    */
 
   public static \<V extends <classWritableName>\> V clamp(
-    final <classReadableName4> v,
+    final <classReadableName3> v,
     final <scalarClampBoundType> minimum,
     final <scalarClampBoundType> maximum,
     final V out)
@@ -329,10 +319,40 @@ public final class <className> implements <classBaseType>
     final <scalarType> x = <opClass>.minimum(<opClass>.maximum(v.getX<scalarTypeSuffix>(), minimum), maximum);
     final <scalarType> y = <opClass>.minimum(<opClass>.maximum(v.getY<scalarTypeSuffix>(), minimum), maximum);
     final <scalarType> z = <opClass>.minimum(<opClass>.maximum(v.getZ<scalarTypeSuffix>(), minimum), maximum);
-    final <scalarType> w = <opClass>.minimum(<opClass>.maximum(v.getW<scalarTypeSuffix>(), minimum), maximum);
-    out.set4<scalarTypeSuffix>(x, y, z, w);
+    out.set3<scalarTypeSuffix>(x, y, z);
     return out;
   }
+
+  <if(hasDeprecatedClamp)>
+  /**
+   * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
+   * maximum]} inclusive, saving the result to {@code out}.
+   *
+   * @param v       The input vector
+   * @param minimum The minimum allowed value
+   * @param maximum The maximum allowed value
+   * @param out     The output vector
+   * @param \<V\>     The precise type of vector
+   * @deprecated Use the {@code clamp} method with the {@code <scalarClampBoundType>}-typed bounds.
+   *
+   * @return A vector with both elements equal to at most {@code maximum} and at
+   * least {@code minimum}
+   */
+
+  @Deprecated
+  public static \<V extends <classWritableName>\> V clamp(
+    final <classReadableName3> v,
+    final <scalarDeprecatedClampType> minimum,
+    final <scalarDeprecatedClampType> maximum,
+    final V out)
+  {
+    final <scalarType> x = <opClass>.minimum(<opClass>.maximum(v.getX<scalarTypeSuffix>(), minimum), maximum);
+    final <scalarType> y = <opClass>.minimum(<opClass>.maximum(v.getY<scalarTypeSuffix>(), minimum), maximum);
+    final <scalarType> z = <opClass>.minimum(<opClass>.maximum(v.getZ<scalarTypeSuffix>(), minimum), maximum);
+    out.set3<scalarTypeSuffix>(x, y, z);
+    return out;
+  }
+  <endif>
 
   /**
    * Clamp the elements of the vector {@code v} to the inclusive range given by
@@ -345,15 +365,13 @@ public final class <className> implements <classBaseType>
    * @param out     The output vector
    * @param \<V>     The precise type of vector
    *
-   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y,
-   * minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w,
-   * minimum.w), maximum.w))}
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))}
    */
 
   public static \<V extends <classWritableName>\> V clampByVector(
-    final <classReadableName4> v,
-    final <classReadableName4> minimum,
-    final <classReadableName4> maximum,
+    final <classReadableName3> v,
+    final <classReadableName3> minimum,
+    final <classReadableName3> maximum,
     final V out)
   {
     final <scalarType> x =
@@ -362,9 +380,7 @@ public final class <className> implements <classBaseType>
       <opClass>.minimum(<opClass>.maximum(v.getY<scalarTypeSuffix>(), minimum.getY<scalarTypeSuffix>()), maximum.getY<scalarTypeSuffix>());
     final <scalarType> z =
       <opClass>.minimum(<opClass>.maximum(v.getZ<scalarTypeSuffix>(), minimum.getZ<scalarTypeSuffix>()), maximum.getZ<scalarTypeSuffix>());
-    final <scalarType> w =
-      <opClass>.minimum(<opClass>.maximum(v.getW<scalarTypeSuffix>(), minimum.getW<scalarTypeSuffix>()), maximum.getW<scalarTypeSuffix>());
-    out.set4<scalarTypeSuffix>(x, y, z, w);
+    out.set3<scalarTypeSuffix>(x, y, z);
     return out;
   }
 
@@ -378,16 +394,14 @@ public final class <className> implements <classBaseType>
    * @param maximum The vector containing the maximum acceptable values
    * @param \<V>     The precise type of vector
    *
-   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y,
-   * minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z), min(max(v.w,
-   * minimum.w), maximum.w))}
+   * @return {@code (min(max(v.x, minimum.x), maximum.x), min(max(v.y, minimum.y), maximum.y), min(max(v.z, minimum.z), maximum.z))}
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   clampByVectorInPlace(
     final V v,
-    final <classReadableName4> minimum,
-    final <classReadableName4> maximum)
+    final <classReadableName3> minimum,
+    final <classReadableName3> maximum)
   {
     return clampByVector(v, minimum, maximum, v);
   }
@@ -405,7 +419,7 @@ public final class <className> implements <classBaseType>
    * least {@code minimum}, in {@code v}
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   clampInPlace(
     final V v,
     final <scalarType> minimum,
@@ -427,15 +441,14 @@ public final class <className> implements <classBaseType>
    */
 
   public static \<V extends <classWritableName>\> V clampMaximum(
-    final <classReadableName4> v,
+    final <classReadableName3> v,
     final <scalarType> maximum,
     final V out)
   {
     final <scalarType> x = <opClass>.minimum(v.getX<scalarTypeSuffix>(), maximum);
     final <scalarType> y = <opClass>.minimum(v.getY<scalarTypeSuffix>(), maximum);
     final <scalarType> z = <opClass>.minimum(v.getZ<scalarTypeSuffix>(), maximum);
-    final <scalarType> w = <opClass>.minimum(v.getW<scalarTypeSuffix>(), maximum);
-    out.set4<scalarTypeSuffix>(x, y, z, w);
+    out.set3<scalarTypeSuffix>(x, y, z);
     return out;
   }
 
@@ -449,20 +462,18 @@ public final class <className> implements <classBaseType>
    * @param out     The output vector
    * @param \<V>     The precise type of vector
    *
-   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z,
-   * maximum.z), min(v.w, maximum.w))}
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))}
    */
 
   public static \<V extends <classWritableName>\> V clampMaximumByVector(
-    final <classReadableName4> v,
-    final <classReadableName4> maximum,
+    final <classReadableName3> v,
+    final <classReadableName3> maximum,
     final V out)
   {
     final <scalarType> x = <opClass>.minimum(v.getX<scalarTypeSuffix>(), maximum.getX<scalarTypeSuffix>());
     final <scalarType> y = <opClass>.minimum(v.getY<scalarTypeSuffix>(), maximum.getY<scalarTypeSuffix>());
     final <scalarType> z = <opClass>.minimum(v.getZ<scalarTypeSuffix>(), maximum.getZ<scalarTypeSuffix>());
-    final <scalarType> w = <opClass>.minimum(v.getW<scalarTypeSuffix>(), maximum.getW<scalarTypeSuffix>());
-    out.set4<scalarTypeSuffix>(x, y, z, w);
+    out.set3<scalarTypeSuffix>(x, y, z);
     return out;
   }
 
@@ -475,14 +486,13 @@ public final class <className> implements <classBaseType>
    * @param maximum The vector containing the maximum acceptable values
    * @param \<V>     The precise type of vector
    *
-   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z,
-   * maximum.z), min(v.w, maximum.w))}
+   * @return {@code (min(v.x, maximum.x), min(v.y, maximum.y), min(v.z, maximum.z))}
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   clampMaximumByVectorInPlace(
     final V v,
-    final <classReadableName4> maximum)
+    final <classReadableName3> maximum)
   {
     return clampMaximumByVector(v, maximum, v);
   }
@@ -495,11 +505,10 @@ public final class <className> implements <classBaseType>
    * @param maximum The maximum allowed value
    * @param \<V>     The precise type of vector
    *
-   * @return A vector with both elements equal to at most {@code maximum} , in
-   * {@code v}
+   * @return A vector with both elements equal to at most {@code maximum}, in {@code v}
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   clampMaximumInPlace(
     final V v,
     final <scalarType> maximum)
@@ -520,15 +529,14 @@ public final class <className> implements <classBaseType>
    */
 
   public static \<V extends <classWritableName>\> V clampMinimum(
-    final <classReadableName4> v,
+    final <classReadableName3> v,
     final <scalarType> minimum,
     final V out)
   {
     final <scalarType> x = <opClass>.maximum(v.getX<scalarTypeSuffix>(), minimum);
     final <scalarType> y = <opClass>.maximum(v.getY<scalarTypeSuffix>(), minimum);
     final <scalarType> z = <opClass>.maximum(v.getZ<scalarTypeSuffix>(), minimum);
-    final <scalarType> w = <opClass>.maximum(v.getW<scalarTypeSuffix>(), minimum);
-    out.set4<scalarTypeSuffix>(x, y, z, w);
+    out.set3<scalarTypeSuffix>(x, y, z);
     return out;
   }
 
@@ -542,20 +550,18 @@ public final class <className> implements <classBaseType>
    * @param minimum The vector containing the minimum acceptable values
    * @param \<V>     The precise type of vector
    *
-   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
-   * minimum.z), max(v.w, minimum.w))}
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))}
    */
 
   public static \<V extends <classWritableName>\> V clampMinimumByVector(
-    final <classReadableName4> v,
-    final <classReadableName4> minimum,
+    final <classReadableName3> v,
+    final <classReadableName3> minimum,
     final V out)
   {
     final <scalarType> x = <opClass>.maximum(v.getX<scalarTypeSuffix>(), minimum.getX<scalarTypeSuffix>());
     final <scalarType> y = <opClass>.maximum(v.getY<scalarTypeSuffix>(), minimum.getY<scalarTypeSuffix>());
     final <scalarType> z = <opClass>.maximum(v.getZ<scalarTypeSuffix>(), minimum.getZ<scalarTypeSuffix>());
-    final <scalarType> w = <opClass>.maximum(v.getW<scalarTypeSuffix>(), minimum.getW<scalarTypeSuffix>());
-    out.set4<scalarTypeSuffix>(x, y, z, w);
+    out.set3<scalarTypeSuffix>(x, y, z);
     return out;
   }
 
@@ -568,14 +574,13 @@ public final class <className> implements <classBaseType>
    * @param minimum The vector containing the minimum acceptable values
    * @param \<V>     The precise type of vector
    *
-   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z,
-   * minimum.z), max(v.w, minimum.w))} , in {@code v}
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y), max(v.z, minimum.z))} , in {@code v}
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   clampMinimumByVectorInPlace(
     final V v,
-    final <classReadableName4> minimum)
+    final <classReadableName3> minimum)
   {
     return clampMinimumByVector(v, minimum, v);
   }
@@ -592,7 +597,7 @@ public final class <className> implements <classBaseType>
    * {@code v}.
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   clampMinimumInPlace(
     final V v,
     final <scalarType> minimum)
@@ -612,16 +617,41 @@ public final class <className> implements <classBaseType>
    */
 
   public static \<T extends <classWritableName>\> T copy(
-    final <classReadableName4> input,
+    final <classReadableName3> input,
     final T output)
   {
-    output.set4<scalarTypeSuffix>(
+    output.set3<scalarTypeSuffix>(
       input.getX<scalarTypeSuffix>(),
       input.getY<scalarTypeSuffix>(),
-      input.getZ<scalarTypeSuffix>(),
-      input.getW<scalarTypeSuffix>());
+      input.getZ<scalarTypeSuffix>());
     return output;
   }
+
+  <if(hasFloatingPoint)>
+  /**
+   * Return a vector perpendicular to both {@code v0} and {@code v1} , saving
+   * the result in {@code out}.
+   *
+   * @param v0  The left input vector.
+   * @param v1  The right input vector.
+   * @param out The output vector.
+   * @param \<V\> The precise type of vector
+   *
+   * @return out
+   */
+
+  public static \<V extends <classWritableName>\> V crossProduct(
+    final <classReadableName3> v0,
+    final <classReadableName3> v1,
+    final V out)
+  {
+    final <scalarType> x = (v0.getY<scalarTypeSuffix>() * v1.getZ<scalarTypeSuffix>()) - (v0.getZ<scalarTypeSuffix>() * v1.getY<scalarTypeSuffix>());
+    final <scalarType> y = (v0.getZ<scalarTypeSuffix>() * v1.getX<scalarTypeSuffix>()) - (v0.getX<scalarTypeSuffix>() * v1.getZ<scalarTypeSuffix>());
+    final <scalarType> z = (v0.getX<scalarTypeSuffix>() * v1.getY<scalarTypeSuffix>()) - (v0.getY<scalarTypeSuffix>() * v1.getX<scalarTypeSuffix>());
+    out.set3<scalarTypeSuffix>(x, y, z);
+    return out;
+  }
+  <endif>
 
   /**
    * Calculate the distance between the two vectors {@code v0} and {@code v1}.
@@ -638,9 +668,9 @@ public final class <className> implements <classBaseType>
    */
 
   public static <scalarDistanceType> distance(
-    final ContextVM4<scalarTypeSuffix> c,
-    final <classReadableName4> v0,
-    final <classReadableName4> v1)
+    final ContextVM3<scalarTypeSuffix> c,
+    final <classReadableName3> v0,
+    final <classReadableName3> v1)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     return magnitude(subtract(v0, v1, c.v2a));
@@ -660,15 +690,14 @@ public final class <className> implements <classBaseType>
    */
 
   public static <scalarDotType> dotProduct(
-    final <classReadableName4> v0,
-    final <classReadableName4> v1)
+    final <classReadableName3> v0,
+    final <classReadableName3> v1)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     final <scalarLargeType> mx = <opClass>.multiply(v0.getX<scalarTypeSuffix>(), v1.getX<scalarTypeSuffix>());
     final <scalarLargeType> my = <opClass>.multiply(v0.getY<scalarTypeSuffix>(), v1.getY<scalarTypeSuffix>());
     final <scalarLargeType> mz = <opClass>.multiply(v0.getZ<scalarTypeSuffix>(), v1.getZ<scalarTypeSuffix>());
-    final <scalarLargeType> mw = <opClass>.multiply(v0.getW<scalarTypeSuffix>(), v1.getW<scalarTypeSuffix>());
-    return <opClass>.castLargeToDot(<opClass>.addLarge(<opClass>.addLarge(<opClass>.addLarge(mx, my), mz), mw));
+    return <opClass>.castLargeToDot(<opClass>.addLarge(<opClass>.addLarge(mx, my), mz));
   }
 
   /**
@@ -690,17 +719,23 @@ public final class <className> implements <classBaseType>
    * @param r     The result vector.
    * @param \<V\>   The precise type of vector
    *
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an
+   *                             overflow or underflow
+   * <endif>
+   *
    * @return {@code r}
    *
    * @since 7.0.0
    */
 
   public static \<V extends <classWritableName>\> V interpolateLinear(
-    final ContextVM4<scalarTypeSuffix> c,
-    final <classReadableName4> v0,
-    final <classReadableName4> v1,
+    final ContextVM3<scalarTypeSuffix> c,
+    final <classReadableName3> v0,
+    final <classReadableName3> v1,
     final double alpha,
     final V r)
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     scale(v0, 1.0 - alpha, c.v2a);
     scale(v1, alpha, c.v2b);
@@ -715,17 +750,26 @@ public final class <className> implements <classBaseType>
    * @param v The input vector
    *
    * @return The magnitude of the input vector
+   *
+   * <if(hasDeprecatedMagnitude)>@deprecated Inconsistent API: to be replaced!<endif>
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
    * <endif>
    */
 
-  public static <scalarDistanceType> magnitude(
-    final <classReadableName4> v)
+  <if(hasDeprecatedMagnitude)>@Deprecated<endif>
+  public static
+  <if(hasDeprecatedMagnitude)>
+    <scalarDeprecatedMagnitudeType>
+  <else>
+    <scalarDistanceType>
+  <endif>
+  magnitude(
+    final <classReadableName3> v)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
-    return <opClass>.squareRoot(magnitudeSquared(v));
+    return <if(hasDeprecatedMagnitude)>(<scalarDeprecatedMagnitudeType>)<endif> <opClass>.squareRoot(magnitudeSquared(v));
   }
 
   /**
@@ -741,7 +785,7 @@ public final class <className> implements <classBaseType>
    */
 
   public static <scalarDistanceType> magnitudeSquared(
-    final <classReadableName4> v)
+    final <classReadableName3> v)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     return <opClass>.castLargeToDistance(dotProduct(v, v));
@@ -761,7 +805,7 @@ public final class <className> implements <classBaseType>
    */
 
   public static \<V extends <classWritableName>\> V normalize(
-    final <classReadableName4> v,
+    final <classReadableName3> v,
     final V out)
   {
     final <scalarLargeType> m = magnitudeSquared(v);
@@ -769,11 +813,10 @@ public final class <className> implements <classBaseType>
       final <scalarLargeType> reciprocal = 1.0 / Math.sqrt(m);
       return scale(v, reciprocal, out);
     }
-    out.set4<scalarTypeSuffix>(
+    out.set3<scalarTypeSuffix>(
       v.getX<scalarTypeSuffix>(),
       v.getY<scalarTypeSuffix>(),
-      v.getZ<scalarTypeSuffix>(),
-      v.getW<scalarTypeSuffix>());
+      v.getZ<scalarTypeSuffix>());
     return out;
   }
 
@@ -788,7 +831,7 @@ public final class <className> implements <classBaseType>
    * @return v
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   normalizeInPlace(
     final V v)
   {
@@ -810,18 +853,19 @@ public final class <className> implements <classBaseType>
    * @since 7.0.0
    */
 
-  public static \<V extends <classReadableName4>, U extends <classWritableName>\> void orthoNormalize(
-    final ContextVM4<scalarTypeSuffix> c,
-    final <classReadableName4> v0,
+  public static \<V extends <classReadableName3>, U extends <classWritableName>\>
+  void orthoNormalize(
+    final ContextVM3<scalarTypeSuffix> c,
+    final <classReadableName3> v0,
     final U v0_out,
-    final <classReadableName4> v1,
+    final <classReadableName3> v1,
     final U v1_out)
   {
     normalize(v0, c.v2a);
     scale(c.v2a, dotProduct(v1, c.v2a), c.v2b);
     normalizeInPlace(subtract(v1, c.v2b, c.v2c));
-    v0_out.copyFrom4<scalarTypeSuffix>(c.v2a);
-    v1_out.copyFrom4<scalarTypeSuffix>(c.v2c);
+    v0_out.copyFrom3<scalarTypeSuffix>(c.v2a);
+    v1_out.copyFrom3<scalarTypeSuffix>(c.v2c);
   }
 
   /**
@@ -838,10 +882,10 @@ public final class <className> implements <classBaseType>
    */
 
   public static
-    \<V extends <classWritableName> & <classReadableName4>,
-      W extends <classWritableName> & <classReadableName4>\>
+    \<V extends <classWritableName> & <classReadableName3>,
+      W extends <classWritableName> & <classReadableName3>\>
   void orthoNormalizeInPlace(
-    final ContextVM4<scalarTypeSuffix> c,
+    final ContextVM3<scalarTypeSuffix> c,
     final V v0,
     final W v1)
   {
@@ -869,8 +913,8 @@ public final class <className> implements <classBaseType>
    */
 
   public static \<V extends <classWritableName>\> V projection(
-    final <classReadableName4> p,
-    final <classReadableName4> q,
+    final <classReadableName3> p,
+    final <classReadableName3> q,
     final V r)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
@@ -890,7 +934,7 @@ public final class <className> implements <classBaseType>
    * @param out The output vector
    * @param \<V\> The precise type of vector
    *
-   * @return {@code (v.x * r, v.y * r, v.z * r, v.w * r)}
+   * @return {@code (v.x * r, v.y * r, v.z * r)}
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
@@ -898,7 +942,7 @@ public final class <className> implements <classBaseType>
    */
 
   public static \<V extends <classWritableName>\> V scale(
-    final <classReadableName4> v,
+    final <classReadableName3> v,
     final <scalarScaleType> r,
     final V out)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
@@ -906,8 +950,7 @@ public final class <className> implements <classBaseType>
     final <scalarType> mx = <opClass>.multiplyReal(v.getX<scalarTypeSuffix>(), r);
     final <scalarType> my = <opClass>.multiplyReal(v.getY<scalarTypeSuffix>(), r);
     final <scalarType> mz = <opClass>.multiplyReal(v.getZ<scalarTypeSuffix>(), r);
-    final <scalarType> mw = <opClass>.multiplyReal(v.getW<scalarTypeSuffix>(), r);
-    out.set4<scalarTypeSuffix>(mx, my, mz, mw);
+    out.set3<scalarTypeSuffix>(mx, my, mz);
     return out;
   }
 
@@ -919,14 +962,14 @@ public final class <className> implements <classBaseType>
    * @param r   The scaling value
    * @param \<V\> The precise type of vector
    *
-   * @return {@code (v.x * r, v.y * r, v.z * r, v.w * r)}
+   * @return {@code (v.x * r, v.y * r, v.z * r)}
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
    * <endif>
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   scaleInPlace(
     final V v,
     final <scalarScaleType> r)
@@ -945,7 +988,7 @@ public final class <className> implements <classBaseType>
    * @param \<V\> The precise type of vector
    *
    * @deprecated Use the {@code scaleInPlace} method with the {@code <scalarScaleType>}-type parameter
-   * @return {@code (v.x * r, v.y * r, v.z * r, v.w * r)}
+   * @return {@code (v.x * r, v.y * r, v.z * r)}
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
@@ -953,7 +996,7 @@ public final class <className> implements <classBaseType>
    */
 
   @Deprecated
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   scaleInPlace(
     final V v,
     final <scalarDeprecatedScaleType> r)
@@ -972,7 +1015,7 @@ public final class <className> implements <classBaseType>
    * @param out The output vector
    * @param \<V\> The precise type of vector
    *
-   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)}
+   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)}
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
@@ -980,16 +1023,15 @@ public final class <className> implements <classBaseType>
    */
 
   public static \<V extends <classWritableName>\> V subtract(
-    final <classReadableName4> v0,
-    final <classReadableName4> v1,
+    final <classReadableName3> v0,
+    final <classReadableName3> v1,
     final V out)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     final <scalarType> mx = <opClass>.subtract(v0.getX<scalarTypeSuffix>(), v1.getX<scalarTypeSuffix>());
     final <scalarType> my = <opClass>.subtract(v0.getY<scalarTypeSuffix>(), v1.getY<scalarTypeSuffix>());
     final <scalarType> mz = <opClass>.subtract(v0.getZ<scalarTypeSuffix>(), v1.getZ<scalarTypeSuffix>());
-    final <scalarType> mw = <opClass>.subtract(v0.getW<scalarTypeSuffix>(), v1.getW<scalarTypeSuffix>());
-    out.set4<scalarTypeSuffix>(mx, my, mz, mw);
+    out.set3<scalarTypeSuffix>(mx, my, mz);
     return out;
   }
 
@@ -1001,17 +1043,17 @@ public final class <className> implements <classBaseType>
    * @param v1  The right input vector
    * @param \<V\> The precise type of vector
    *
-   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)}
+   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z)}
    * <if(hasPartialArithmetic)>
    * @throws ArithmeticException Iff an internal arithmetic operation causes an
    *                             overflow or underflow
    * <endif>
    */
 
-  public static \<V extends <classWritableName> & <classReadableName4>\> V
+  public static \<V extends <classWritableName> & <classReadableName3>\> V
   subtractInPlace(
     final V v0,
-    final <classReadableName4> v1)
+    final <classReadableName3> v1)
     <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     return subtract(v0, v1, v0);
@@ -1035,16 +1077,6 @@ public final class <className> implements <classBaseType>
   }
 
   @Override
-  public void copyFrom4<scalarTypeSuffix>(
-    final <classReadableName4> in_v)
-  {
-    this.x = in_v.getX<scalarTypeSuffix>();
-    this.y = in_v.getY<scalarTypeSuffix>();
-    this.z = in_v.getZ<scalarTypeSuffix>();
-    this.w = in_v.getW<scalarTypeSuffix>();
-  }
-
-  @Override
   public boolean equals(
     final @Nullable Object obj)
   {
@@ -1058,23 +1090,9 @@ public final class <className> implements <classBaseType>
       return false;
     }
     final <className> other = (<className>) obj;
-    return <opClass>.scalarEquals(this.w, other.w)
-        && <opClass>.scalarEquals(this.x, other.x)
+    return <opClass>.scalarEquals(this.x, other.x)
         && <opClass>.scalarEquals(this.y, other.y)
         && <opClass>.scalarEquals(this.z, other.z);
-  }
-
-  @Override
-  public <scalarType> getW<scalarTypeSuffix>()
-  {
-    return this.w;
-  }
-
-  @Override
-  public void setW<scalarTypeSuffix>(
-    final <scalarType> in_w)
-  {
-    this.w = in_w;
   }
 
   @Override
@@ -1119,7 +1137,7 @@ public final class <className> implements <classBaseType>
   @Override
   public int hashCode()
   {
-    return <opClass>.hash4(this.w, this.x, this.y, this.z);
+    return <opClass>.hash3(this.x, this.y, this.z);
   }
 
   @Override
@@ -1143,19 +1161,6 @@ public final class <className> implements <classBaseType>
   }
 
   @Override
-  public void set4<scalarTypeSuffix>(
-    final <scalarType> in_x,
-    final <scalarType> in_y,
-    final <scalarType> in_z,
-    final <scalarType> in_w)
-  {
-    this.x = in_x;
-    this.y = in_y;
-    this.z = in_z;
-    this.w = in_w;
-  }
-
-  @Override
   public String toString()
   {
     final StringBuilder builder = new StringBuilder();
@@ -1165,8 +1170,6 @@ public final class <className> implements <classBaseType>
     builder.append(this.y);
     builder.append(" ");
     builder.append(this.z);
-    builder.append(" ");
-    builder.append(this.w);
     builder.append("]");
     final String r = builder.toString();
     return NullCheck.notNull(r);
@@ -1179,7 +1182,7 @@ public final class <className> implements <classBaseType>
    * @since 7.0.0
    */
 
-  public static final class ContextVM4<scalarTypeSuffix>
+  public static final class ContextVM3<scalarTypeSuffix>
   {
     private final <className> v2a;
     private final <className> v2b;
@@ -1189,7 +1192,7 @@ public final class <className> implements <classBaseType>
      * Construct preallocated storage.
      */
 
-    public ContextVM4<scalarTypeSuffix>()
+    public ContextVM3<scalarTypeSuffix>()
     {
       this.v2a = new <className>();
       this.v2b = new <className>();

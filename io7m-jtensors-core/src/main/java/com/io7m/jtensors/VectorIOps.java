@@ -108,6 +108,30 @@ final class VectorIOps
     return (int) result;
   }
 
+  static int hash3(
+    final int x,
+    final int y,
+    final int z)
+  {
+    final long prime = 31L;
+    long result = 1L;
+    result = (prime * result) + x;
+    result = (prime * result) + y;
+    result = (prime * result) + z;
+    return (int) result;
+  }
+
+  static int hash2(
+    final int x,
+    final int y)
+  {
+    final long prime = 31L;
+    long result = 1L;
+    result = (prime * result) + x;
+    result = (prime * result) + y;
+    return (int) result;
+  }
+
   static int squareRoot(
     final long i)
   {

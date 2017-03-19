@@ -16,7 +16,6 @@
 
 package com.io7m.jtensors;
 
-import com.io7m.jintegers.CheckedMath;
 import com.io7m.junreachable.UnreachableCodeException;
 
 final class VectorDOps
@@ -99,16 +98,44 @@ final class VectorDOps
     final double y,
     final double z)
   {
-    final int prime = 31;
+    long temp = Double.doubleToLongBits(w);
     int result = 1;
-    long temp;
-    temp = Double.doubleToLongBits(w);
+    final int prime = 31;
     result = (prime * result) + (int) (temp ^ (temp >>> 32));
     temp = Double.doubleToLongBits(x);
     result = (prime * result) + (int) (temp ^ (temp >>> 32));
     temp = Double.doubleToLongBits(y);
     result = (prime * result) + (int) (temp ^ (temp >>> 32));
     temp = Double.doubleToLongBits(z);
+    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    return result;
+  }
+
+  static int hash3(
+    final double x,
+    final double y,
+    final double z)
+  {
+    long temp = Double.doubleToLongBits(x);
+    int result = 1;
+    final int prime = 31;
+    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(y);
+    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(z);
+    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    return result;
+  }
+
+  static int hash2(
+    final double x,
+    final double y)
+  {
+    long temp = Double.doubleToLongBits(x);
+    int result = 1;
+    final int prime = 31;
+    result = (prime * result) + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(y);
     result = (prime * result) + (int) (temp ^ (temp >>> 32));
     return result;
   }

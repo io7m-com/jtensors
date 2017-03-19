@@ -107,6 +107,30 @@ final class VectorFOps
     return result;
   }
 
+  static int hash3(
+    final float x,
+    final float y,
+    final float z)
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result) + Float.floatToIntBits(x);
+    result = (prime * result) + Float.floatToIntBits(y);
+    result = (prime * result) + Float.floatToIntBits(z);
+    return result;
+  }
+
+  static int hash2(
+    final float x,
+    final float y)
+  {
+    final int prime = 31;
+    int result = 1;
+    result = (prime * result) + Float.floatToIntBits(x);
+    result = (prime * result) + Float.floatToIntBits(y);
+    return result;
+  }
+
   static double squareRoot(
     final double value)
   {

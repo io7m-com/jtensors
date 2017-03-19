@@ -108,6 +108,30 @@ final class VectorLOps
     return (int) result;
   }
 
+  static int hash3(
+    final long x,
+    final long y,
+    final long z)
+  {
+    final long prime = 31L;
+    long result = 1L;
+    result = (prime * result) + x;
+    result = (prime * result) + y;
+    result = (prime * result) + z;
+    return (int) result;
+  }
+
+  static int hash2(
+    final long x,
+    final long y)
+  {
+    final long prime = 31L;
+    long result = 1L;
+    result = (prime * result) + x;
+    result = (prime * result) + y;
+    return (int) result;
+  }
+
   static long squareRoot(
     final long value)
   {
