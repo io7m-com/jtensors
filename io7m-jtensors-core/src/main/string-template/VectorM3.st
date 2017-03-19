@@ -62,7 +62,7 @@ public final class <className> implements <classBaseType>
   private <scalarType> z;
 
   /**
-   * Default constructor, initializing the vector with values {@code [0, 0, 0, 1]}.
+   * Default constructor, initializing the vector with values {@code [0, 0, 0]}.
    */
 
   public <className>()
