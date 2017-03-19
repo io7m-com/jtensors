@@ -7,7 +7,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>io7m-jtensors</artifactId>
-  <version>7.1.1-SNAPSHOT</version>
+  <version>7.2.0-SNAPSHOT</version>
 
   <packaging>pom</packaging>
   <name>io7m-jtensors</name>
@@ -281,6 +281,11 @@
           <artifactId>japicmp-maven-plugin</artifactId>
           <version>${io7m.japicmp.version}</version>
         </plugin>
+        <plugin>
+          <groupId>com.webguys</groupId>
+          <artifactId>string-template-maven-plugin</artifactId>
+          <version>1.1</version>
+        </plugin>
 
         <!-- Require JDK >= 1.6 -->
         <plugin>
@@ -476,9 +481,6 @@
                 </file>
               </newVersion>
               <parameter>
-                <breakBuildOnModifications>false</breakBuildOnModifications>
-                <breakBuildOnBinaryIncompatibleModifications>true</breakBuildOnBinaryIncompatibleModifications>
-                <breakBuildOnSourceIncompatibleModifications>true</breakBuildOnSourceIncompatibleModifications>
                 <breakBuildBasedOnSemanticVersioning>true</breakBuildBasedOnSemanticVersioning>
               </parameter>
             </configuration>
