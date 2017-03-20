@@ -509,6 +509,49 @@
               </templates>
             </configuration>
           </execution>
+
+          <!-- Parameterized Vector4 types -->
+
+          <execution>
+            <id>generate-vector-P4L</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVectorM4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/parameterized/PVectorM4L.java</target>
+                  <properties>
+                    <scalarType>long</scalarType>
+                    <scalarTypeSuffix>L</scalarTypeSuffix>
+                    <scalarLargeType>long</scalarLargeType>
+                    <scalarDotType>long</scalarDotType>
+                    <scalarClampBoundType>long</scalarClampBoundType>
+                    <scalarDistanceType>long</scalarDistanceType>
+                    <scalarScaleType>double</scalarScaleType>
+                    <scalarDeprecatedScaleType>long</scalarDeprecatedScaleType>
+                    <hasDeprecatedScale>true</hasDeprecatedScale>
+                    <hasPartialArithmetic>true</hasPartialArithmetic>
+                    <approximateEqualityType>none</approximateEqualityType>
+                    <className>PVectorM4L</className>
+                    <classBaseType>PVector4LType</classBaseType>
+                    <classReadableName4>PVectorReadable4LType</classReadableName4>
+                    <classReadableUnparameterizedName4>com.io7m.jtensors.VectorReadable4LType</classReadableUnparameterizedName4>
+                    <classReadableName3>PVectorReadable3LType</classReadableName3>
+                    <classReadableUnparameterizedName3>com.io7m.jtensors.VectorReadable3LType</classReadableUnparameterizedName3>
+                    <classReadableName2>PVectorReadable2LType</classReadableName2>
+                    <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2LType</classReadableUnparameterizedName2>
+                    <classWritableName>PVectorWritable4LType</classWritableName>
+                    <opClass>PVectorLOps</opClass>
+                    <since>5.3.0</since>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 
