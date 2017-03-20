@@ -115,6 +115,28 @@
           <feedAuthorName>io7m release robot</feedAuthorName>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>com.github.siom79.japicmp</groupId>
+        <artifactId>japicmp-maven-plugin</artifactId>
+        <configuration>
+          <oldVersion>
+            <dependency>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>${project.artifactId}</artifactId>
+              <version>${com.io7m.jtensors.previousVersion}</version>
+              <type>jar</type>
+            </dependency>
+          </oldVersion>
+          <newVersion>
+            <file>
+              <path>${project.build.directory}/${project.artifactId}-${project.version}.jar</path>
+            </file>
+          </newVersion>
+          <parameter>
+            <onlyModified>true</onlyModified>
+          </parameter>
+        </configuration>
+      </plugin>
     </plugins>
   </reporting>
 
@@ -482,6 +504,7 @@
                 </file>
               </newVersion>
               <parameter>
+                <onlyModified>true</onlyModified>
                 <breakBuildBasedOnSemanticVersioning>true</breakBuildBasedOnSemanticVersioning>
               </parameter>
             </configuration>

@@ -634,6 +634,47 @@
               </templates>
             </configuration>
           </execution>
+
+          <execution>
+            <id>generate-vector-P4F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVectorM4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/parameterized/PVectorM4F.java</target>
+                  <properties>
+                    <scalarType>float</scalarType>
+                    <scalarTypeSuffix>F</scalarTypeSuffix>
+                    <scalarLargeType>double</scalarLargeType>
+                    <scalarDotType>double</scalarDotType>
+                    <scalarClampBoundType>double</scalarClampBoundType>
+                    <scalarScaleType>double</scalarScaleType>
+                    <scalarDistanceType>double</scalarDistanceType>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                    <hasApproximateEquality>true</hasApproximateEquality>
+                    <scalarDeprecatedScaleType>none</scalarDeprecatedScaleType>
+                    <approximateEqualityType>com.io7m.jequality.AlmostEqualFloat</approximateEqualityType>
+                    <className>PVectorM4F</className>
+                    <classBaseType>PVector4FType</classBaseType>
+                    <classReadableName4>PVectorReadable4FType</classReadableName4>
+                    <classReadableUnparameterizedName4>com.io7m.jtensors.VectorReadable4FType</classReadableUnparameterizedName4>
+                    <classReadableName3>PVectorReadable3FType</classReadableName3>
+                    <classReadableUnparameterizedName3>com.io7m.jtensors.VectorReadable3FType</classReadableUnparameterizedName3>
+                    <classReadableName2>PVectorReadable2FType</classReadableName2>
+                    <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2FType</classReadableUnparameterizedName2>
+                    <classWritableName>PVectorWritable4FType</classWritableName>
+                    <opClass>PVectorFOps</opClass>
+                    <since>7.0.0</since>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 
