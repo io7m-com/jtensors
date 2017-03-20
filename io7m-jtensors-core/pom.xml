@@ -546,7 +546,48 @@
                     <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2LType</classReadableUnparameterizedName2>
                     <classWritableName>PVectorWritable4LType</classWritableName>
                     <opClass>PVectorLOps</opClass>
-                    <since>5.3.0</since>
+                    <since>7.0.0</since>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>generate-vector-P4I</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVectorM4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/parameterized/PVectorM4I.java</target>
+                  <properties>
+                    <scalarType>int</scalarType>
+                    <scalarTypeSuffix>I</scalarTypeSuffix>
+                    <scalarLargeType>int</scalarLargeType>
+                    <scalarDotType>int</scalarDotType>
+                    <scalarClampBoundType>int</scalarClampBoundType>
+                    <scalarDistanceType>int</scalarDistanceType>
+                    <scalarScaleType>double</scalarScaleType>
+                    <scalarDeprecatedScaleType>int</scalarDeprecatedScaleType>
+                    <hasDeprecatedScale>true</hasDeprecatedScale>
+                    <hasPartialArithmetic>true</hasPartialArithmetic>
+                    <approximateEqualityType>none</approximateEqualityType>
+                    <className>PVectorM4I</className>
+                    <classBaseType>PVector4IType</classBaseType>
+                    <classReadableName4>PVectorReadable4IType</classReadableName4>
+                    <classReadableUnparameterizedName4>com.io7m.jtensors.VectorReadable4IType</classReadableUnparameterizedName4>
+                    <classReadableName3>PVectorReadable3IType</classReadableName3>
+                    <classReadableUnparameterizedName3>com.io7m.jtensors.VectorReadable3IType</classReadableUnparameterizedName3>
+                    <classReadableName2>PVectorReadable2IType</classReadableName2>
+                    <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2IType</classReadableUnparameterizedName2>
+                    <classWritableName>PVectorWritable4IType</classWritableName>
+                    <opClass>PVectorIOps</opClass>
+                    <since>7.0.0</since>
                   </properties>
                 </template>
               </templates>
