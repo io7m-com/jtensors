@@ -593,6 +593,47 @@
               </templates>
             </configuration>
           </execution>
+
+          <execution>
+            <id>generate-vector-P4D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVectorM4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/parameterized/PVectorM4D.java</target>
+                  <properties>
+                    <scalarType>double</scalarType>
+                    <scalarTypeSuffix>D</scalarTypeSuffix>
+                    <scalarLargeType>double</scalarLargeType>
+                    <scalarDotType>double</scalarDotType>
+                    <scalarClampBoundType>double</scalarClampBoundType>
+                    <scalarDistanceType>double</scalarDistanceType>
+                    <scalarScaleType>double</scalarScaleType>
+                    <scalarDeprecatedScaleType>double</scalarDeprecatedScaleType>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                    <hasApproximateEquality>true</hasApproximateEquality>
+                    <approximateEqualityType>com.io7m.jequality.AlmostEqualDouble</approximateEqualityType>
+                    <className>PVectorM4D</className>
+                    <classBaseType>PVector4DType</classBaseType>
+                    <classReadableName4>PVectorReadable4DType</classReadableName4>
+                    <classReadableUnparameterizedName4>com.io7m.jtensors.VectorReadable4DType</classReadableUnparameterizedName4>
+                    <classReadableName3>PVectorReadable3DType</classReadableName3>
+                    <classReadableUnparameterizedName3>com.io7m.jtensors.VectorReadable3DType</classReadableUnparameterizedName3>
+                    <classReadableName2>PVectorReadable2DType</classReadableName2>
+                    <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2DType</classReadableUnparameterizedName2>
+                    <classWritableName>PVectorWritable4DType</classWritableName>
+                    <opClass>PVectorDOps</opClass>
+                    <since>7.0.0</since>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 
