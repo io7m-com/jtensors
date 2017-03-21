@@ -64,9 +64,9 @@ final class PVectorFOps
 
   static float subtractScale(
     final float value0,
-    final float value1)
+    final double value1)
   {
-    return value0 - value1;
+    return (float) (value0 - value1);
   }
 
   static float multiply(

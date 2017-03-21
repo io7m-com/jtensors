@@ -580,7 +580,7 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * @param minimum The vector containing the minimum acceptable values
    * @param \<V>     The precise type of vector
    * @param \<T\> A phantom type parameter
-   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y))} , in {@code v}
+   * @return {@code (max(v.x, minimum.x), max(v.y, minimum.y))}, in {@code v}
    */
 
   public static \<T, V extends <classWritableName>\<T\> & <classReadableName2>\<T\>\> V

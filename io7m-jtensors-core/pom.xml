@@ -1254,6 +1254,74 @@
               </templates>
             </configuration>
           </execution>
+
+          <execution>
+            <id>generate-vector-PI2D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVectorI2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/parameterized/PVectorI2D.java</target>
+                  <properties>
+                    <scalarType>double</scalarType>
+                    <scalarTypeSuffix>D</scalarTypeSuffix>
+                    <scalarScaleType>double</scalarScaleType>
+                    <scalarDistanceType>double</scalarDistanceType>
+                    <scalarDotType>double</scalarDotType>
+                    <hasApproximateEquality>true</hasApproximateEquality>
+                    <approximateEqualityType>com.io7m.jequality.AlmostEqualDouble</approximateEqualityType>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                    <className>PVectorI2D</className>
+                    <classBaseType>PVectorReadable2DType</classBaseType>
+                    <classReadableName2>PVectorReadable2DType</classReadableName2>
+                    <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2DType</classReadableUnparameterizedName2>
+                    <opClass>PVectorDOps</opClass>
+                    <since>7.0.0</since>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>generate-vector-PI2F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVectorI2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/parameterized/PVectorI2F.java</target>
+                  <properties>
+                    <scalarType>float</scalarType>
+                    <scalarTypeSuffix>F</scalarTypeSuffix>
+                    <scalarScaleType>double</scalarScaleType>
+                    <scalarDistanceType>double</scalarDistanceType>
+                    <scalarDotType>double</scalarDotType>
+                    <hasDeprecatedDot>true</hasDeprecatedDot>
+                    <scalarDeprecatedDotType>float</scalarDeprecatedDotType>
+                    <hasApproximateEquality>true</hasApproximateEquality>
+                    <approximateEqualityType>com.io7m.jequality.AlmostEqualFloat</approximateEqualityType>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                    <className>PVectorI2F</className>
+                    <classBaseType>PVectorReadable2FType</classBaseType>
+                    <classReadableName2>PVectorReadable2FType</classReadableName2>
+                    <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2FType</classReadableUnparameterizedName2>
+                    <opClass>PVectorFOps</opClass>
+                    <since>7.0.0</since>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 
