@@ -52,10 +52,10 @@
         <artifactId>string-template-maven-plugin</artifactId>
         <executions>
 
-          <!-- Unparameterized Vector4 types -->
+          <!-- Unparameterized mutable vector types -->
 
           <execution>
-            <id>generate-vector-4L</id>
+            <id>generate-vector-M4L</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -93,7 +93,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-4I</id>
+            <id>generate-vector-M4I</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -131,7 +131,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-4D</id>
+            <id>generate-vector-M4D</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -169,7 +169,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-4F</id>
+            <id>generate-vector-M4F</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -206,10 +206,8 @@
             </configuration>
           </execution>
 
-          <!-- Unparameterized Vector3 types -->
-
           <execution>
-            <id>generate-vector-3L</id>
+            <id>generate-vector-M3L</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -246,7 +244,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-3I</id>
+            <id>generate-vector-M3I</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -283,7 +281,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-3D</id>
+            <id>generate-vector-M3D</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -320,7 +318,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-3F</id>
+            <id>generate-vector-M3F</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -360,10 +358,8 @@
             </configuration>
           </execution>
 
-          <!-- Unparameterized Vector2 types -->
-
           <execution>
-            <id>generate-vector-2L</id>
+            <id>generate-vector-M2L</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -399,7 +395,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-2I</id>
+            <id>generate-vector-M2I</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -435,7 +431,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-2D</id>
+            <id>generate-vector-M2D</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -471,7 +467,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-2F</id>
+            <id>generate-vector-M2F</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -510,10 +506,10 @@
             </configuration>
           </execution>
 
-          <!-- Parameterized Vector4 types -->
+          <!-- Parameterized mutable vector types -->
 
           <execution>
-            <id>generate-vector-P4L</id>
+            <id>generate-vector-PM4L</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -554,7 +550,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-P4I</id>
+            <id>generate-vector-PM4I</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -595,7 +591,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-P4D</id>
+            <id>generate-vector-PM4D</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -636,7 +632,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-P4F</id>
+            <id>generate-vector-PM4F</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -677,7 +673,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-P3L</id>
+            <id>generate-vector-PM3L</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -716,7 +712,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-P3I</id>
+            <id>generate-vector-PM3I</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -755,7 +751,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-P3D</id>
+            <id>generate-vector-PM3D</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -793,7 +789,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-P3F</id>
+            <id>generate-vector-PM3F</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -836,7 +832,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-P2L</id>
+            <id>generate-vector-PM2L</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -873,7 +869,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-P2I</id>
+            <id>generate-vector-PM2I</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -912,7 +908,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-P2D</id>
+            <id>generate-vector-PM2D</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -948,7 +944,7 @@
           </execution>
 
           <execution>
-            <id>generate-vector-P2F</id>
+            <id>generate-vector-PM2F</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -988,6 +984,42 @@
               </templates>
             </configuration>
           </execution>
+
+          <!-- Parameterized immutable vector types -->
+
+          <execution>
+            <id>generate-vector-PI4L</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVectorI4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/parameterized/PVectorI4L.java</target>
+                  <properties>
+                    <scalarType>long</scalarType>
+                    <scalarTypeSuffix>L</scalarTypeSuffix>
+                    <hasPartialArithmetic>true</hasPartialArithmetic>
+                    <approximateEqualityType>none</approximateEqualityType>
+                    <className>PVectorI4L</className>
+                    <classBaseType>PVectorReadable4LType</classBaseType>
+                    <classReadableName4>PVectorReadable4LType</classReadableName4>
+                    <classReadableUnparameterizedName4>com.io7m.jtensors.VectorReadable4LType</classReadableUnparameterizedName4>
+                    <classReadableName3>PVectorReadable3LType</classReadableName3>
+                    <classReadableUnparameterizedName3>com.io7m.jtensors.VectorReadable3LType</classReadableUnparameterizedName3>
+                    <classReadableName2>PVectorReadable2LType</classReadableName2>
+                    <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2LType</classReadableUnparameterizedName2>
+                    <opClass>PVectorLOps</opClass>
+                    <since>7.0.0</since>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
         </executions>
       </plugin>
 
