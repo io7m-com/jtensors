@@ -30,6 +30,11 @@ final class PVectorFOps
     return 1.0f;
   }
 
+  static float zero()
+  {
+    return 0.0f;
+  }
+
   static float absolute(
     final float value)
   {
@@ -57,11 +62,25 @@ final class PVectorFOps
     return value0 - value1;
   }
 
+  static float subtractScale(
+    final float value0,
+    final float value1)
+  {
+    return value0 - value1;
+  }
+
   static float multiply(
     final float value0,
     final float value1)
   {
     return value0 * value1;
+  }
+
+  static float divide(
+    final float value0,
+    final float value1)
+  {
+    return value0 / value1;
   }
 
   static float multiplyReal(

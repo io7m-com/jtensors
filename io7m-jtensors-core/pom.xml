@@ -1002,6 +1002,7 @@
                   <properties>
                     <scalarType>long</scalarType>
                     <scalarTypeSuffix>L</scalarTypeSuffix>
+                    <scalarScaleType>double</scalarScaleType>
                     <hasPartialArithmetic>true</hasPartialArithmetic>
                     <approximateEqualityType>none</approximateEqualityType>
                     <className>PVectorI4L</className>
@@ -1013,6 +1014,110 @@
                     <classReadableName2>PVectorReadable2LType</classReadableName2>
                     <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2LType</classReadableUnparameterizedName2>
                     <opClass>PVectorLOps</opClass>
+                    <since>7.0.0</since>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>generate-vector-PI4I</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVectorI4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/parameterized/PVectorI4I.java</target>
+                  <properties>
+                    <scalarType>int</scalarType>
+                    <scalarTypeSuffix>I</scalarTypeSuffix>
+                    <scalarScaleType>double</scalarScaleType>
+                    <hasPartialArithmetic>true</hasPartialArithmetic>
+                    <approximateEqualityType>none</approximateEqualityType>
+                    <className>PVectorI4I</className>
+                    <classBaseType>PVectorReadable4IType</classBaseType>
+                    <classReadableName4>PVectorReadable4IType</classReadableName4>
+                    <classReadableUnparameterizedName4>com.io7m.jtensors.VectorReadable4IType</classReadableUnparameterizedName4>
+                    <classReadableName3>PVectorReadable3IType</classReadableName3>
+                    <classReadableUnparameterizedName3>com.io7m.jtensors.VectorReadable3IType</classReadableUnparameterizedName3>
+                    <classReadableName2>PVectorReadable2IType</classReadableName2>
+                    <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2IType</classReadableUnparameterizedName2>
+                    <opClass>PVectorIOps</opClass>
+                    <since>7.0.0</since>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>generate-vector-PI4D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVectorI4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/parameterized/PVectorI4D.java</target>
+                  <properties>
+                    <scalarType>double</scalarType>
+                    <scalarTypeSuffix>D</scalarTypeSuffix>
+                    <scalarScaleType>double</scalarScaleType>
+                    <hasApproximateEquality>true</hasApproximateEquality>
+                    <approximateEqualityType>com.io7m.jequality.AlmostEqualDouble</approximateEqualityType>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                    <className>PVectorI4D</className>
+                    <classBaseType>PVectorReadable4DType</classBaseType>
+                    <classReadableName4>PVectorReadable4DType</classReadableName4>
+                    <classReadableUnparameterizedName4>com.io7m.jtensors.VectorReadable4DType</classReadableUnparameterizedName4>
+                    <classReadableName3>PVectorReadable3DType</classReadableName3>
+                    <classReadableUnparameterizedName3>com.io7m.jtensors.VectorReadable3DType</classReadableUnparameterizedName3>
+                    <classReadableName2>PVectorReadable2DType</classReadableName2>
+                    <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2DType</classReadableUnparameterizedName2>
+                    <opClass>PVectorDOps</opClass>
+                    <since>7.0.0</since>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>generate-vector-PI4F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVectorI4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/parameterized/PVectorI4F.java</target>
+                  <properties>
+                    <scalarType>float</scalarType>
+                    <scalarTypeSuffix>F</scalarTypeSuffix>
+                    <scalarScaleType>float</scalarScaleType>
+                    <hasApproximateEquality>true</hasApproximateEquality>
+                    <approximateEqualityType>com.io7m.jequality.AlmostEqualFloat</approximateEqualityType>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                    <className>PVectorI4F</className>
+                    <classBaseType>PVectorReadable4FType</classBaseType>
+                    <classReadableName4>PVectorReadable4FType</classReadableName4>
+                    <classReadableUnparameterizedName4>com.io7m.jtensors.VectorReadable4FType</classReadableUnparameterizedName4>
+                    <classReadableName3>PVectorReadable3FType</classReadableName3>
+                    <classReadableUnparameterizedName3>com.io7m.jtensors.VectorReadable3FType</classReadableUnparameterizedName3>
+                    <classReadableName2>PVectorReadable2FType</classReadableName2>
+                    <classReadableUnparameterizedName2>com.io7m.jtensors.VectorReadable2FType</classReadableUnparameterizedName2>
+                    <opClass>PVectorFOps</opClass>
                     <since>7.0.0</since>
                   </properties>
                 </template>

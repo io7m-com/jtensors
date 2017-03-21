@@ -1,6 +1,7 @@
 PVectorI4(
   scalarType,
   scalarTypeSuffix,
+  scalarScaleType,
   className,
   classBaseType,
   classReadableName4,
@@ -39,7 +40,7 @@ import com.io7m.jnull.Nullable;
 import net.jcip.annotations.Immutable;
 
 /**
- * \<p\>A four-dimensional immutable vector type with {@code double} elements.\</p\>
+ * \<p\>A four-dimensional immutable vector type with {@code <scalarType>} elements.\</p\>
  *
  * \<p\>Values of this type are immutable and can therefore be safely accessed from multiple threads.\</p\>
  *
@@ -55,7 +56,7 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * The zero vector.
    */
 
-  private static final <className>\<?\> ZERO = new <className>(0L, 0L, 0L, 0L);
+  private static final <className>\<?\> ZERO = new <className>(<opClass>.zero(), <opClass>.zero(), <opClass>.zero(), <opClass>.zero());
 
   private final <scalarType> w;
   private final <scalarType> x;
@@ -68,10 +69,10 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
 
   public <className>()
   {
-    this.x = 0L;
-    this.y = 0L;
-    this.z = 0L;
-    this.w = 1L;
+    this.x = <opClass>.zero();
+    this.y = <opClass>.zero();
+    this.z = <opClass>.zero();
+    this.w = <opClass>.one();
   }
 
   /**
@@ -122,19 +123,21 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
     return (<className>\<T\>) ZERO;
   }
 
-/**
+  /**
    * Calculate the absolute values of the elements in vector {@code v}.
    *
    * @param v The input vector
    * @param \<T\> A phantom type parameter.
    * @return {@code (abs v.x, abs v.y, abs v.z, abs.w)}
    *
-   * @throws ArithmeticException Iff an internal arithmetic operation causes an integer overflow
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an overflow or underflow
+   * <endif>
    */
 
   public static \<T\> <className>\<T\> absolute(
     final <classReadableName4>\<T\> v)
-    throws ArithmeticException
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     final <scalarType> x = <opClass>.absolute(v.getX<scalarTypeSuffix>());
     final <scalarType> y = <opClass>.absolute(v.getY<scalarTypeSuffix>());
@@ -151,13 +154,15 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * @param \<T\> A phantom type parameter.
    * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w)}
    *
-   * @throws ArithmeticException Iff an internal arithmetic operation causes an integer overflow
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an overflow or underflow
+   * <endif>
    */
 
   public static \<T\> <className>\<T\> add(
     final <classReadableName4>\<T\> v0,
     final <classReadableName4>\<T\> v1)
-    throws ArithmeticException
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     final <scalarType> x = <opClass>.add(v0.getX<scalarTypeSuffix>(), v1.getX<scalarTypeSuffix>());
     final <scalarType> y = <opClass>.add(v0.getY<scalarTypeSuffix>(), v1.getY<scalarTypeSuffix>());
@@ -176,14 +181,16 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * @param \<T\> A phantom type parameter.
    * @return {@code (v0.x + (v1.x * r), v0.y + (v1.y * r), v0.z + (v1.z * r), v0.w + (v1.w * r))}
    *
-   * @throws ArithmeticException Iff an internal arithmetic operation causes an integer overflow
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an overflow or underflow
+   * <endif>
    */
 
   public static \<T\> <className>\<T\> addScaled(
     final <classReadableName4>\<T\> v0,
     final <classReadableName4>\<T\> v1,
-    final double r)
-    throws ArithmeticException
+    final <scalarScaleType> r)
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     final <scalarType> mx = <opClass>.multiplyReal(v1.getX<scalarTypeSuffix>(), r);
     final <scalarType> my = <opClass>.multiplyReal(v1.getY<scalarTypeSuffix>(), r);
@@ -196,6 +203,39 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
     return new <className>(x, y, z, w);
   }
 
+  <if(hasApproximateEquality)>
+  /**
+   * Determine whether or not the vectors {@code va} and {@code vb} are equal to
+   * within the degree of error given in {@code context}.
+   *
+   * @param context The equality context
+   * @param va      The left input vector
+   * @param vb      The right input vector
+   * @param \<T\>     A phantom type parameter.
+   *
+   * @return {@code true} iff the vectors are almost equal.
+   *
+   * @see <approximateEqualityType>
+   * @since 7.0.0
+   */
+
+  public static \<T\> boolean almostEqual(
+    final <approximateEqualityType>.ContextRelative context,
+    final <classReadableName4>\<T\> va,
+    final <classReadableName4>\<T\> vb)
+  {
+    final boolean xs =
+      <approximateEqualityType>.almostEqual(context, va.getX<scalarTypeSuffix>(), vb.getX<scalarTypeSuffix>());
+    final boolean ys =
+      <approximateEqualityType>.almostEqual(context, va.getY<scalarTypeSuffix>(), vb.getY<scalarTypeSuffix>());
+    final boolean zs =
+      <approximateEqualityType>.almostEqual(context, va.getZ<scalarTypeSuffix>(), vb.getZ<scalarTypeSuffix>());
+    final boolean ws =
+      <approximateEqualityType>.almostEqual(context, va.getW<scalarTypeSuffix>(), vb.getW<scalarTypeSuffix>());
+    return xs && ys && zs && ws;
+  }
+  <endif>
+
   /**
    * Clamp the elements of the vector {@code v} to the range {@code [minimum ..
    * maximum]} inclusive.
@@ -204,8 +244,7 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * @param minimum The minimum allowed value
    * @param maximum The maximum allowed value
    * @param \<T\> A phantom type parameter.
-   * @return A vector with both elements equal to at most {@code maximum} and at
-   * least {@code minimum}
+   * @return A vector with both elements equal to at most {@code maximum} and at least {@code minimum}
    */
 
   public static \<T\> <className>\<T\> clamp(
@@ -339,13 +378,15 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * @param \<T\> A phantom type parameter.
    * @return The distance between the two vectors.
    *
-   * @throws ArithmeticException Iff an internal arithmetic operation causes an integer overflow
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an overflow or underflow
+   * <endif>
    */
 
-  public static \<T\> long distance(
+  public static \<T\> <scalarType> distance(
     final <classReadableName4>\<T\> v0,
     final <classReadableName4>\<T\> v1)
-    throws ArithmeticException
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     return magnitude(subtract(v0, v1));
   }
@@ -358,20 +399,22 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * @param \<T\> A phantom type parameter.
    * @return The scalar product of the two vectors
    *
-   * @throws ArithmeticException Iff an internal arithmetic operation causes an integer overflow
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an overflow or underflow
+   * <endif>
    */
 
-  public static \<T\> long dotProduct(
+  public static \<T\> <scalarType> dotProduct(
     final <classReadableName4>\<T\> v0,
     final <classReadableName4>\<T\> v1)
-    throws ArithmeticException
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     final <scalarType> mx = <opClass>.multiply(v0.getX<scalarTypeSuffix>(), v1.getX<scalarTypeSuffix>());
     final <scalarType> my = <opClass>.multiply(v0.getY<scalarTypeSuffix>(), v1.getY<scalarTypeSuffix>());
     final <scalarType> mz = <opClass>.multiply(v0.getZ<scalarTypeSuffix>(), v1.getZ<scalarTypeSuffix>());
     final <scalarType> mw = <opClass>.multiply(v0.getW<scalarTypeSuffix>(), v1.getW<scalarTypeSuffix>());
 
-    long k;
+    <scalarType> k;
     k = <opClass>.add(mx, my);
     k = <opClass>.add(k, mz);
     k = <opClass>.add(k, mw);
@@ -396,16 +439,18 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * @param \<T\> A phantom type parameter.
    * @return {@code (1 - alpha) * v0 + alpha * v1}
    *
-   * @throws ArithmeticException Iff an internal arithmetic operation causes an integer overflow
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an overflow or underflow
+   * <endif>
    */
 
   public static \<T\> <className>\<T\> interpolateLinear(
     final <classReadableName4>\<T\> v0,
     final <classReadableName4>\<T\> v1,
-    final double alpha)
-    throws ArithmeticException
+    final <scalarScaleType> alpha)
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
-    final <className> w0 = scale(v0, 1.0 - alpha);
+    final <className> w0 = scale(v0, <opClass>.subtractScale(<opClass>.one(), alpha));
     final <className> w1 = scale(v1, alpha);
     return add(w0, w1);
   }
@@ -419,14 +464,16 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * @param \<T\> A phantom type parameter.
    * @return The magnitude of the input vector
    *
-   * @throws ArithmeticException Iff an internal arithmetic operation causes an integer overflow
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an overflow or underflow
+   * <endif>
    */
 
-  public static \<T\> long magnitude(
+  public static \<T\> <scalarType> magnitude(
     final <classReadableName4>\<T\> v)
-    throws ArithmeticException
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
-    return Cast.castToLong(Math.sqrt((double) magnitudeSquared(v)));
+    return (<scalarType>) <opClass>.squareRoot(magnitudeSquared(v));
   }
 
   /**
@@ -436,37 +483,86 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * @param \<T\> A phantom type parameter.
    * @return The squared magnitude of the input vector
    *
-   * @throws ArithmeticException Iff an internal arithmetic operation causes an integer overflow
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an overflow or underflow
+   * <endif>
    */
 
-  public static \<T\> long magnitudeSquared(
+  public static \<T\> <scalarType> magnitudeSquared(
     final <classReadableName4>\<T\> v)
-    throws ArithmeticException
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     return dotProduct(v, v);
   }
 
+  <if(hasFloatingPoint)>
   /**
-   * Calculate the projection of the vector {@code p} onto the vector {@code
-   * q}.
+   * Normalize the vector {@code v}, preserving its direction but reducing it to
+   * unit length.
+   *
+   * @param v   The input vector
+   * @param \<T\> A phantom type parameter.
+   *
+   * @return A vector with the same orientation as {@code v} but with magnitude equal to {@code 1.0}
+   */
+
+  public static \<T\> <className>\<T\> normalize(
+    final <classReadableName4>\<T\> v)
+  {
+    final <scalarType> m = magnitudeSquared(v);
+    if (m > 0.0F) {
+      final <scalarType> reciprocal = <opClass>.divide(<opClass>.one(), (<scalarType>) <opClass>.squareRoot(m));
+      return scale(v, reciprocal);
+    }
+    return new <className>\<T\>(v);
+  }
+
+  /**
+   * \<p\>Orthonormalize and return the vectors {@code v0} and {@code v1}.\</p\>
+   * \<p\>See \<a href="http://en.wikipedia.org/wiki/Gram-Schmidt_process">GSP\</a\>\</p\>
+   *
+   * @param v0  The left vector
+   * @param v1  The right vector
+   * @param \<T\> A phantom type parameter.
+   *
+   * @return A pair {@code (v0, v1)}, orthonormalized.
+   *
+   * @since 7.0.0
+   */
+
+  public static \<T\> Pair\<<className>\<T>, <className>\<T>\> orthoNormalize(
+    final <classReadableName4>\<T\> v0,
+    final <classReadableName4>\<T\> v1)
+  {
+    final <className>\<T> v0n = normalize(v0);
+    final <className>\<T> projection = scale(v0n, dotProduct(v1, v0n));
+    final <className>\<T> vr = normalize(subtract(v1, projection));
+    return Pair.pair(v0n, vr);
+  }
+  <endif>
+
+  /**
+   * Calculate the projection of the vector {@code p} onto the vector {@code q}.
    *
    * @param p The left vector
    * @param q The right vector
    * @param \<T\> A phantom type parameter.
    * @return {@code ((dotProduct p q) / magnitudeSquared q) * q}
    *
-   * @throws ArithmeticException Iff an internal arithmetic operation causes an integer overflow
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an overflow or underflow
+   * <endif>
    */
 
   public static \<T\> <className>\<T\> projection(
     final <classReadableName4>\<T\> p,
     final <classReadableName4>\<T\> q)
-    throws ArithmeticException
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     final <scalarType> dot = dotProduct(p, q);
     final <scalarType> qms = magnitudeSquared(q);
-    final <scalarType> s = dot / qms;
-    return scale(p, (double) s);
+    final <scalarType> s = <opClass>.divide(dot, qms);
+    return scale(p, (<scalarScaleType>) s);
   }
 
   /**
@@ -477,13 +573,15 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * @param \<T\> A phantom type parameter.
    * @return {@code (v.x * r, v.y * r, v.z * r, vw * r)}
    *
-   * @throws ArithmeticException Iff an internal arithmetic operation causes an integer overflow
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an overflow or underflow
+   * <endif>
    */
 
   public static \<T\> <className>\<T\> scale(
     final <classReadableName4>\<T\> v,
-    final double r)
-    throws ArithmeticException
+    final <scalarScaleType> r)
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     final <scalarType> mx = <opClass>.multiplyReal(v.getX<scalarTypeSuffix>(), r);
     final <scalarType> my = <opClass>.multiplyReal(v.getY<scalarTypeSuffix>(), r);
@@ -500,13 +598,15 @@ public final class <className>\<T\> implements <classBaseType>\<T\>
    * @param \<T\> A phantom type parameter.
    * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w)}
    *
-   * @throws ArithmeticException Iff an internal arithmetic operation causes an integer overflow
+   * <if(hasPartialArithmetic)>
+   * @throws ArithmeticException Iff an internal arithmetic operation causes an overflow or underflow
+   * <endif>
    */
 
   public static \<T\> <className>\<T\> subtract(
     final <classReadableName4>\<T\> v0,
     final <classReadableName4>\<T\> v1)
-    throws ArithmeticException
+    <if(hasPartialArithmetic)>throws ArithmeticException<endif>
   {
     final <scalarType> x = <opClass>.subtract(v0.getX<scalarTypeSuffix>(), v1.getX<scalarTypeSuffix>());
     final <scalarType> y = <opClass>.subtract(v0.getY<scalarTypeSuffix>(), v1.getY<scalarTypeSuffix>());

@@ -30,6 +30,11 @@ final class PVectorDOps
     return 1.0;
   }
 
+  static double zero()
+  {
+    return 0.0;
+  }
+
   static double absolute(
     final double value)
   {
@@ -57,11 +62,25 @@ final class PVectorDOps
     return value0 - value1;
   }
 
+  static double subtractScale(
+    final double value0,
+    final double value1)
+  {
+    return value0 - value1;
+  }
+
   static double multiply(
     final double value0,
     final double value1)
   {
     return value0 * value1;
+  }
+
+  static double divide(
+    final double value0,
+    final double value1)
+  {
+    return value0 / value1;
   }
 
   static double multiplyReal(

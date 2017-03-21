@@ -31,6 +31,11 @@ final class PVectorLOps
     return 1L;
   }
 
+  static long zero()
+  {
+    return 0L;
+  }
+
   static long absolute(
     final long value)
   {
@@ -65,11 +70,25 @@ final class PVectorLOps
     return CheckedMath.multiply(value0, value1);
   }
 
+  public static long divide(
+    final long value0,
+    final long value1)
+  {
+    return CheckedMath.divide(value0, value1);
+  }
+
   static long multiplyReal(
     final long value0,
     final double value1)
   {
     return CheckedMath.multiply(value0, value1);
+  }
+
+  static double subtractScale(
+    final long value0,
+    final double value1)
+  {
+    return (double) value0 - value1;
   }
 
   static long minimum(

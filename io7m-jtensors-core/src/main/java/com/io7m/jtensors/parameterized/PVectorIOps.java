@@ -31,6 +31,11 @@ final class PVectorIOps
     return 1;
   }
 
+  static int zero()
+  {
+    return 0;
+  }
+
   static int absolute(
     final int value)
   {
@@ -58,11 +63,25 @@ final class PVectorIOps
     return CheckedMath.subtract(value0, value1);
   }
 
+  static double subtractScale(
+    final int value0,
+    final double value1)
+  {
+    return (double) value0 - value1;
+  }
+
   static int multiply(
     final int value0,
     final int value1)
   {
     return CheckedMath.multiply(value0, value1);
+  }
+
+  public static int divide(
+    final int value0,
+    final int value1)
+  {
+    return CheckedMath.divide(value0, value1);
   }
 
   static int multiplyReal(
