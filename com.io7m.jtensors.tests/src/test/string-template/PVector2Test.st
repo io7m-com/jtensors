@@ -129,6 +129,25 @@ public final class <className>
   }
 
   @Test
+  public void testAbsolute()
+  {
+    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+
+    QuickCheck.forAll(
+      gen,
+      new AbstractCharacteristic\<<vectorType>\<Object\>>()
+      {
+        @Override
+        protected void doSpecify(final <vectorType>\<Object> v0)
+        {
+          final <vectorType>\<Object> v1 = <opClass>.absolute(v0);
+          <testOpClass>.checkAlmostEquals(<testOpClass>.absolute(v0.x()), v1.x());
+          <testOpClass>.checkAlmostEquals(<testOpClass>.absolute(v0.y()), v1.y());
+        }
+    });
+  }
+
+  @Test
   public void testAdd()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
@@ -169,6 +188,201 @@ public final class <className>
             <testOpClass>.add(v0.x(), <testOpClass>.multiply(v1.x(), r)), v2.x());
           <testOpClass>.checkAlmostEquals(
             <testOpClass>.add(v0.y(), <testOpClass>.multiply(v1.y(), r)), v2.y());
+        }
+    });
+  }
+
+  @Test
+  public void testDotProductSelfMagnitudeSquared()
+  {
+    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+
+    QuickCheck.forAll(
+      gen,
+      new AbstractCharacteristic\<<vectorType>\<Object\>>()
+      {
+        @Override
+        protected void doSpecify(final <vectorType>\<Object> v0)
+        {
+          <testOpClass>.checkAlmostEquals(
+            <opClass>.magnitudeSquared(v0),
+            <opClass>.dotProduct(v0, v0));
+        }
+    });
+  }
+
+  @Test
+  public void testInterpolateLinearLimits()
+  {
+    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+
+    QuickCheck.forAll(
+      gen,
+      new AbstractCharacteristic\<<vectorType>\<Object\>>()
+      {
+        @Override
+        protected void doSpecify(final <vectorType>\<Object> v0)
+        {
+          final <vectorType>\<Object> v1 = gen.next();
+
+          final <vectorType>\<Object> v2 =
+            <opClass>.interpolateLinear(v0, v1, <testOpClass>.constant("0"));
+
+          <testOpClass>.checkAlmostEquals(v0.x(), v2.x());
+          <testOpClass>.checkAlmostEquals(v0.y(), v2.y());
+
+          final <vectorType>\<Object> v3 =
+            <opClass>.interpolateLinear(v0, v1, <testOpClass>.constant("1"));
+
+          <testOpClass>.checkAlmostEquals(v1.x(), v3.x());
+          <testOpClass>.checkAlmostEquals(v1.y(), v3.y());
+        }
+    });
+  }
+
+  @Test
+  public void testMagnitudeSquaredZero()
+  {
+    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+
+    QuickCheck.forAll(
+      gen,
+      new AbstractCharacteristic\<<vectorType>\<Object\>>()
+      {
+        @Override
+        protected void doSpecify(final <vectorType>\<Object> v0)
+        {
+          <testOpClass>.checkAlmostEquals(
+            <testOpClass>.constant("0"),
+            <opClass>.magnitudeSquared(<opClass>.zero()));
+        }
+    });
+  }
+
+  @Test
+  public void testMagnitudeZero()
+  {
+    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+
+    QuickCheck.forAll(
+      gen,
+      new AbstractCharacteristic\<<vectorType>\<Object\>>()
+      {
+        @Override
+        protected void doSpecify(final <vectorType>\<Object> v0)
+        {
+          <testOpClass>.checkAlmostEquals(
+            <testOpClass>.constant("0"),
+            <opClass>.magnitude(<opClass>.zero()));
+        }
+    });
+  }
+
+  @Test
+  public void testNormalizeZero()
+  {
+    Assert.assertEquals(<opClass>.zero(), <opClass>.normalize(<opClass>.zero()));
+  }
+
+  @Test
+  public void testMagnitudeNormalizeOne()
+  {
+    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+
+    QuickCheck.forAll(
+      gen,
+      new AbstractCharacteristic\<<vectorType>\<Object\>>()
+      {
+        @Override
+        protected void doSpecify(final <vectorType>\<Object> v0)
+        {
+          final <vectorType>\<Object> vn = <opClass>.normalize(v0);
+          if (<testOpClass>.compare(<opClass>.magnitude(v0), <testOpClass>.constant("0")) > 0) {
+            <testOpClass>.checkAlmostEquals(
+              <testOpClass>.constant("1"),
+              <opClass>.magnitude(vn));
+          } else {
+            Assert.assertEquals(v0, vn);
+          }
+        }
+    });
+  }
+
+  @Test
+  public void testScale()
+  {
+    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+
+    QuickCheck.forAll(
+      gen,
+      new AbstractCharacteristic\<<vectorType>\<Object\>>()
+      {
+        @Override
+        protected void doSpecify(final <vectorType>\<Object> v0)
+        {
+          final <scalarType> r = gen.next().x();
+
+          final <vectorType>\<Object> v2 = <opClass>.scale(v0, r);
+          <testOpClass>.checkAlmostEquals(<testOpClass>.multiply(v0.x(), r), v2.x());
+          <testOpClass>.checkAlmostEquals(<testOpClass>.multiply(v0.y(), r), v2.y());
+        }
+    });
+  }
+
+  @Test
+  public void testScaleZero()
+  {
+    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+
+    QuickCheck.forAll(
+      gen,
+      new AbstractCharacteristic\<<vectorType>\<Object\>>()
+      {
+        @Override
+        protected void doSpecify(final <vectorType>\<Object> v0)
+        {
+          final <vectorType>\<Object> v1 = <opClass>.scale(v0, <testOpClass>.constant("0"));
+          <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.x());
+          <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.y());
+        }
+    });
+  }
+
+  @Test
+  public void testScaleOne()
+  {
+    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+
+    QuickCheck.forAll(
+      gen,
+      new AbstractCharacteristic\<<vectorType>\<Object\>>()
+      {
+        @Override
+        protected void doSpecify(final <vectorType>\<Object> v0)
+        {
+          final <vectorType>\<Object> v1 = <opClass>.scale(v0, <testOpClass>.constant("1"));
+          Assert.assertEquals(v0, v1);
+        }
+    });
+  }
+
+  @Test
+  public void testSubtract()
+  {
+    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+
+    QuickCheck.forAll(
+      gen,
+      new AbstractCharacteristic\<<vectorType>\<Object\>>()
+      {
+        @Override
+        protected void doSpecify(final <vectorType>\<Object> v0)
+        {
+          final <vectorType>\<Object> v1 = gen.next();
+
+          final <vectorType>\<Object> v2 = <opClass>.subtract(v0, v1);
+          <testOpClass>.checkAlmostEquals(<testOpClass>.subtract(v0.x(), v1.x()), v2.x());
+          <testOpClass>.checkAlmostEquals(<testOpClass>.subtract(v0.y(), v1.y()), v2.y());
         }
     });
   }

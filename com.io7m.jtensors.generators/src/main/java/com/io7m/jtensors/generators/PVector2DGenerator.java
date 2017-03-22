@@ -41,7 +41,10 @@ public final class PVector2DGenerator<T> implements Generator<PVector2D<T>>
 
   public static <T> Generator<PVector2D<T>> create()
   {
-    return new PVector2DGenerator<T>(PrimitiveGenerators.doubles());
+    return new PVector2DGenerator<>(PrimitiveGenerators.doubles(
+      -1.0e128,
+      1.0e128
+    ));
   }
 
   /**

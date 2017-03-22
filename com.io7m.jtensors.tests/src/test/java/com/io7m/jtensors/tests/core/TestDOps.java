@@ -37,13 +37,19 @@ public final class TestDOps
     final double x,
     final double y)
   {
-    Assert.assertEquals(x, y, 0.0);
+    Assert.assertEquals(x, y, 1.0e-10);
   }
 
   public static double constant(
     final String text)
   {
     return Double.parseDouble(text);
+  }
+
+  public static double absolute(
+    final double x)
+  {
+    return Math.abs(x);
   }
 
   public static double add(
@@ -58,5 +64,19 @@ public final class TestDOps
     final double y)
   {
     return x * y;
+  }
+
+  public static double subtract(
+    final double x,
+    final double y)
+  {
+    return x - y;
+  }
+
+  public static int compare(
+    final double x,
+    final double y)
+  {
+    return Double.compare(x, y);
   }
 }

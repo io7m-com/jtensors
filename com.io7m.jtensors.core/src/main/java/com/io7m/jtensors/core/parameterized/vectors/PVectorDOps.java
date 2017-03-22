@@ -25,6 +25,12 @@ final class PVectorDOps
     throw new UnreachableCodeException();
   }
 
+  static double absolute(
+    final double value0)
+  {
+    return Math.abs(value0);
+  }
+
   static double add(
     final double value0,
     final double value1)
@@ -32,10 +38,47 @@ final class PVectorDOps
     return value0 + value1;
   }
 
+  static double subtract(
+    final double value0,
+    final double value1)
+  {
+    return value0 - value1;
+  }
+
   static double multiply(
     final double value0,
     final double value1)
   {
     return value0 * value1;
+  }
+
+  static double divide(
+    final double value0,
+    final double value1)
+  {
+    return value0 / value1;
+  }
+
+  static double zero()
+  {
+    return 0.0;
+  }
+
+  static double one()
+  {
+    return 1.0;
+  }
+
+  static int compare(
+    final double value0,
+    final double value1)
+  {
+    return Double.compare(value0, value1);
+  }
+
+  static double squareRoot(
+    final double v)
+  {
+    return Math.sqrt(v);
   }
 }

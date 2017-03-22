@@ -34,9 +34,33 @@ import com.io7m.junreachable.UnreachableCodeException;
 
 public final class <className>\<T>
 {
+  private static final <vectorType>\<?> ZERO;
+
+  static {
+    final <scalarType> z = <opClass>.zero();
+    ZERO = <vectorType>.of(z, z, z);
+  }
+
   private <className>()
   {
     throw new UnreachableCodeException();
+  }
+
+  /**
+   * Calculate the absolute of {@code v0}.
+   *
+   * @return {@code (abs v0.x, abs v0.y, abs v0.z) }
+   * @param \<T> A phantom type parameter
+   * @param v0 The vector
+   */
+
+  public static \<T> <vectorType>\<T> absolute(
+    final <vectorType>\<T> v0)
+  {
+    return <vectorType>.of(
+      <opClass>.absolute(v0.x()),
+      <opClass>.absolute(v0.y()),
+      <opClass>.absolute(v0.z()));
   }
 
   /**
@@ -74,11 +98,153 @@ public final class <className>\<T>
     final <vectorType>\<T> v1,
     final <scalarType> r)
   {
+    return add(v0, scale(v1, r));
+  }
+
+  /**
+   * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
+   *
+   * @param \<T> A phantom type parameter
+   * @param v0 The left vector
+   * @param v1 The right vector
+   * @return The scalar product of the two vectors
+   */
+
+  public static \<T> <scalarType> dotProduct(
+    final <vectorType>\<T> v0,
+    final <vectorType>\<T> v1)
+  {
+    final <scalarType> x = <opClass>.multiply(v0.x(), v1.x());
+    final <scalarType> y = <opClass>.multiply(v0.y(), v1.y());
+    final <scalarType> z = <opClass>.multiply(v0.z(), v1.z());
+    return <opClass>.add(x, <opClass>.add(y, z));
+  }
+
+  /**
+   * \<p>Linearly interpolate between {@code v0} and {@code v1} by the amount {@code alpha}.\</p>
+   *
+   * \<p>The {@code alpha} parameter controls the degree of interpolation, such that:\</p>
+   *
+   * \<ul>
+   *   \<li>{@code interpolateLinear(v0, v1, 0.0) = v0}\</li>
+   *   \<li>{@code interpolateLinear(v0, v1, 1.0) = v1}\</li>
+   * \</ul>
+   *
+   * @param v0    The left input vector
+   * @param v1    The right input vector
+   * @param alpha The interpolation value in the range {@code [0, 1]}
+   *
+   * @return {@code ((1 - alpha) * v0) + (alpha * v1)}
+   */
+
+  public static \<T> <vectorType>\<T> interpolateLinear(
+    final <vectorType>\<T> v0,
+    final <vectorType>\<T> v1,
+    final <scalarType> alpha)
+  {
+    final <vectorType>\<T> v0_r = scale(v0, <opClass>.subtract(<opClass>.one(), alpha));
+    final <vectorType>\<T> v1_r = scale(v1, alpha);
+    return add(v0_r, v1_r);
+  }
+
+  /**
+   * Calculate the squared magnitude of the vector {@code v0}.
+   *
+   * @param \<T> A phantom type parameter
+   * @param v0 The vector
+   * @return The squared magnitude of the vector
+   */
+
+  public static \<T> <scalarType> magnitudeSquared(
+    final <vectorType>\<T> v0)
+  {
+    return dotProduct(v0, v0);
+  }
+
+  /**
+   * Calculate the magnitude of the vector {@code v0}.
+   *
+   * @param \<T> A phantom type parameter
+   * @param v0 The vector
+   * @return The magnitude of the vector
+   */
+
+  public static \<T> <scalarType> magnitude(
+    final <vectorType>\<T> v0)
+  {
+    return <opClass>.squareRoot(magnitudeSquared(v0));
+  }
+
+  /**
+   * \<p>Normalize the vector {@code v0}.\</p>
+   * \<p>If the magnitude of the vector is zero, the function returns {@code v0}.\</p>
+   * @param \<T> A phantom type parameter
+   * @param v0 The vector
+   * @return A normalized copy of {@code v0}
+   */
+
+  public static \<T> <vectorType>\<T> normalize(
+    final <vectorType>\<T> v0)
+  {
+    final <scalarType> m = magnitudeSquared(v0);
+    if (<opClass>.compare(m, <opClass>.zero()) > 0) {
+      final <scalarType> reciprocal =
+        <opClass>.divide(<opClass>.one(), <opClass>.squareRoot(m));
+      return scale(v0, reciprocal);
+    }
+
+    return v0;
+  }
+
+  /**
+   * Scale {@code v0} by {@code r}.
+   *
+   * @return {@code (v0.x * r, v0.y * r, v0.z * r) }
+   * @param \<T> A phantom type parameter
+   * @param v0 The left vector
+   * @param r The scaling value
+   */
+
+  public static \<T> <vectorType>\<T> scale(
+    final <vectorType>\<T> v0,
+    final <scalarType> r)
+  {
     return <vectorType>.of(
-      <opClass>.add(v0.x(), <opClass>.multiply(v1.x(), r)),
-      <opClass>.add(v0.y(), <opClass>.multiply(v1.y(), r)),
-      <opClass>.add(v0.z(), <opClass>.multiply(v1.z(), r))
-    );
+      <opClass>.multiply(v0.x(), r),
+      <opClass>.multiply(v0.y(), r),
+      <opClass>.multiply(v0.z(), r));
+  }
+
+  /**
+   * Subtract {@code v1} from {@code v0}.
+   *
+   * @return {@code (v0.x - v1.x, v0.y - v0.y, v0.z - v1.z) }
+   * @param \<T> A phantom type parameter
+   * @param v0 The left vector
+   * @param v1 The right vector
+   */
+
+  public static \<T> <vectorType>\<T> subtract(
+    final <vectorType>\<T> v0,
+    final <vectorType>\<T> v1)
+  {
+    return <vectorType>.of(
+      <opClass>.subtract(v0.x(), v1.x()),
+      <opClass>.subtract(v0.y(), v1.y()),
+      <opClass>.subtract(v0.z(), v1.z()));
+  }
+
+  /**
+   * The zero vector.
+   *
+   * @return {@code (0, 0, 0) }
+   * @param \<T> A phantom type parameter
+   */
+
+  @SuppressWarnings("unchecked")
+  public static \<T> <vectorType>\<T> zero()
+  {
+    return (<vectorType>\<T>) ZERO;
   }
 }
 >>
