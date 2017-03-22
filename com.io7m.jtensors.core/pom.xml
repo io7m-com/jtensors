@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.io7m.jtensors</groupId>
+    <artifactId>com.io7m.jtensors</artifactId>
+    <version>8.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>com.io7m.jtensors.core</artifactId>
+  <packaging>bundle</packaging>
+
+  <name>com.io7m.jtensors.core</name>
+  <description>Vector/matrix math package (Core)</description>
+  <url>http://io7m.github.io/jtensors/</url>
+
+  <scm>
+    <url>${project.parent.scm.url}</url>
+    <connection>${project.parent.scm.connection}</connection>
+    <developerConnection>${project.parent.scm.developerConnection}</developerConnection>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.io7m.jnull</groupId>
+      <artifactId>io7m-jnull-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.io7m.junreachable</groupId>
+      <artifactId>io7m-junreachable-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.immutables</groupId>
+      <artifactId>value</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+
+      <!-- Generate sources -->
+      <plugin>
+        <groupId>com.webguys</groupId>
+        <artifactId>string-template-maven-plugin</artifactId>
+        <executions>
+
+          <!-- Parameterized types -->
+          <execution>
+            <id>generate-P4D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/parameterized/vectors/PVectors4D.java</target>
+                  <properties>
+                    <className>PVectors4D</className>
+                    <vectorType>PVector4D</vectorType>
+                    <vectorComponentType>double</vectorComponentType>
+                    <scalarType>double</scalarType>
+                    <opClass>PVectorDOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-P3D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector3</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/parameterized/vectors/PVectors3D.java</target>
+                  <properties>
+                    <className>PVectors3D</className>
+                    <vectorType>PVector3D</vectorType>
+                    <vectorComponentType>double</vectorComponentType>
+                    <scalarType>double</scalarType>
+                    <opClass>PVectorDOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-P2D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/parameterized/vectors/PVectors2D.java</target>
+                  <properties>
+                    <className>PVectors2D</className>
+                    <vectorType>PVector2D</vectorType>
+                    <vectorComponentType>double</vectorComponentType>
+                    <scalarType>double</scalarType>
+                    <opClass>PVectorDOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Check style -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+
+      <!-- Produce OSGi bundle -->
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Export-Package>
+              com.io7m.jtensors.core,
+              com.io7m.jtensors.core.parameterized,
+              com.io7m.jtensors.core.parameterized.matrices,
+              com.io7m.jtensors.core.parameterized.vectors,
+              com.io7m.jtensors.core.unparameterized,
+              com.io7m.jtensors.core.unparameterized.matrices,
+              com.io7m.jtensors.core.unparameterized.vectors
+            </Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
