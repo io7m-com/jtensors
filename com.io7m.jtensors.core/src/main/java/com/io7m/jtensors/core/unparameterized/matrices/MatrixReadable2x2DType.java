@@ -18,11 +18,13 @@ package com.io7m.jtensors.core.unparameterized.matrices;
 
 import org.immutables.value.Value;
 
+import static java.lang.Integer.valueOf;
+
 /**
  * The type of 2x2 {@code double}-typed matrices.
  */
 
-public interface MatrixReadable2x2DType
+public interface MatrixReadable2x2DType extends MatrixReadableDType
 {
   /**
    * @return The value at row 0 column 0
@@ -51,4 +53,45 @@ public interface MatrixReadable2x2DType
 
   @Value.Parameter(order = 3)
   double r1c1();
+
+  @Override
+  default double rowColumn(
+    final int row,
+    final int column)
+  {
+    switch (row) {
+      case 0: {
+        switch (column) {
+          case 0: {
+            return this.r0c0();
+          }
+          case 1: {
+            return this.r0c1();
+          }
+          default: {
+            throw new IndexOutOfBoundsException(String.format(
+              "Column %d must be in the range [0, 1]", valueOf(column)));
+          }
+        }
+      }
+      case 1: {
+        switch (column) {
+          case 0: {
+            return this.r1c0();
+          }
+          case 1: {
+            return this.r1c1();
+          }
+          default: {
+            throw new IndexOutOfBoundsException(String.format(
+              "Column %d must be in the range [0, 1]", valueOf(column)));
+          }
+        }
+      }
+      default: {
+        throw new IndexOutOfBoundsException(String.format(
+          "Row %d must be in the range [0, 1]", valueOf(row)));
+      }
+    }
+  }
 }

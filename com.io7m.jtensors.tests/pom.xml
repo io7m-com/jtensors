@@ -55,8 +55,7 @@
         <artifactId>string-template-maven-plugin</artifactId>
         <executions>
 
-          <!-- Parameterized types -->
-
+          <!-- Parameterized vector types -->
           <!-- Double -->
           <execution>
             <id>generate-P4D</id>
@@ -389,6 +388,33 @@
                     <generatorType>com.io7m.jtensors.generators.PVector2IGenerator</generatorType>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectors2I</opClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestIOps</testOpClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <!-- Parameterized matrix types -->
+          <!-- Double -->
+          <execution>
+            <id>generate-M4x4D</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PMatrix4x4Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/parameterized/matrices/PMatrix4x4DTest.java</target>
+                  <properties>
+                    <className>PMatrix4x4DTest</className>
+                    <matrixType>com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D</matrixType>
+                    <matrixComponentType>double</matrixComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrices4x4D</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
                   </properties>
                 </template>
               </templates>

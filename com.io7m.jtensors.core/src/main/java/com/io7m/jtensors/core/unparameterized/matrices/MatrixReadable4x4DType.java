@@ -18,6 +18,8 @@ package com.io7m.jtensors.core.unparameterized.matrices;
 
 import org.immutables.value.Value;
 
+import static java.lang.Integer.valueOf;
+
 /**
  * The type of 4x4 {@code double}-typed matrices.
  */
@@ -108,4 +110,97 @@ public interface MatrixReadable4x4DType extends MatrixReadable3x3DType
 
   @Value.Parameter(order = 15)
   double r3c3();
+
+  @Override
+  default double rowColumn(
+    final int row,
+    final int column)
+  {
+    switch (row) {
+      case 0: {
+        switch (column) {
+          case 0: {
+            return this.r0c0();
+          }
+          case 1: {
+            return this.r0c1();
+          }
+          case 2: {
+            return this.r0c2();
+          }
+          case 3: {
+            return this.r0c3();
+          }
+          default: {
+            throw new IndexOutOfBoundsException(String.format(
+              "Column %d must be in the range [0, 3]", valueOf(column)));
+          }
+        }
+      }
+      case 1: {
+        switch (column) {
+          case 0: {
+            return this.r1c0();
+          }
+          case 1: {
+            return this.r1c1();
+          }
+          case 2: {
+            return this.r1c2();
+          }
+          case 3: {
+            return this.r1c3();
+          }
+          default: {
+            throw new IndexOutOfBoundsException(String.format(
+              "Column %d must be in the range [0, 3]", valueOf(column)));
+          }
+        }
+      }
+      case 2: {
+        switch (column) {
+          case 0: {
+            return this.r2c0();
+          }
+          case 1: {
+            return this.r2c1();
+          }
+          case 2: {
+            return this.r2c2();
+          }
+          case 3: {
+            return this.r2c3();
+          }
+          default: {
+            throw new IndexOutOfBoundsException(String.format(
+              "Column %d must be in the range [0, 3]", valueOf(column)));
+          }
+        }
+      }
+      case 3: {
+        switch (column) {
+          case 0: {
+            return this.r3c0();
+          }
+          case 1: {
+            return this.r3c1();
+          }
+          case 2: {
+            return this.r3c2();
+          }
+          case 3: {
+            return this.r3c3();
+          }
+          default: {
+            throw new IndexOutOfBoundsException(String.format(
+              "Column %d must be in the range [0, 3]", valueOf(column)));
+          }
+        }
+      }
+      default: {
+        throw new IndexOutOfBoundsException(String.format(
+          "Row %d must be in the range [0, 3]", valueOf(row)));
+      }
+    }
+  }
 }

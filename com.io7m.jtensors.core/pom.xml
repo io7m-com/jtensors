@@ -51,7 +51,7 @@
         <artifactId>string-template-maven-plugin</artifactId>
         <executions>
 
-          <!-- Parameterized types -->
+          <!-- Parameterized vector types -->
           <!-- Doubles -->
           <execution>
             <id>generate-P4D</id>
@@ -348,6 +348,31 @@
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
                     <opClass>PVectorIOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <!-- Parameterized matrix types -->
+          <!-- Doubles -->
+          <execution>
+            <id>generate-M4x4D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PMatrix4x4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/parameterized/matrices/PMatrices4x4D.java</target>
+                  <properties>
+                    <className>PMatrices4x4D</className>
+                    <matrixType>PMatrix4x4D</matrixType>
+                    <matrixComponentType>double</matrixComponentType>
+                    <opClass>PMatrixDOps</opClass>
                   </properties>
                 </template>
               </templates>
