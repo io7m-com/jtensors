@@ -1,9 +1,10 @@
 PVector3Test(
   className,
   vectorType,
+  vectorComponentType,
   vectorReadable3Type,
   vectorReadable2Type,
-  scalarType,
+  scalarRealType,
   generatorType,
   testOpClass,
   opClass) ::= <<
@@ -167,9 +168,14 @@ public final class <className>
         protected void doSpecify(final <vectorType>\<Object> v0)
         {
           final <vectorType>\<Object> v1 = <opClass>.absolute(v0);
-          <testOpClass>.checkAlmostEquals(<testOpClass>.absolute(v0.x()), v1.x());
-          <testOpClass>.checkAlmostEquals(<testOpClass>.absolute(v0.y()), v1.y());
-          <testOpClass>.checkAlmostEquals(<testOpClass>.absolute(v0.z()), v1.z());
+
+          <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.absolute(v0.x());
+          <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.absolute(v0.y());
+          <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.absolute(v0.z());
+
+          <testOpClass>.checkAlmostEquals(ex, v1.x());
+          <testOpClass>.checkAlmostEquals(ey, v1.y());
+          <testOpClass>.checkAlmostEquals(ez, v1.z());
         }
     });
   }
@@ -188,10 +194,14 @@ public final class <className>
         {
           final <vectorType>\<Object> v1 = gen.next();
 
+          <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), v1.x());
+          <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), v1.y());
+          <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.add(v0.z(), v1.z());
+
           final <vectorType>\<Object> v2 = <opClass>.add(v0, v1);
-          <testOpClass>.checkAlmostEquals(<testOpClass>.add(v0.x(), v1.x()), v2.x());
-          <testOpClass>.checkAlmostEquals(<testOpClass>.add(v0.y(), v1.y()), v2.y());
-          <testOpClass>.checkAlmostEquals(<testOpClass>.add(v0.z(), v1.z()), v2.z());
+          <testOpClass>.checkAlmostEquals(ex, v2.x());
+          <testOpClass>.checkAlmostEquals(ey, v2.y());
+          <testOpClass>.checkAlmostEquals(ez, v2.z());
         }
     });
   }
@@ -209,15 +219,20 @@ public final class <className>
         protected void doSpecify(final <vectorType>\<Object> v0)
         {
           final <vectorType>\<Object> v1 = gen.next();
-          final <scalarType> r = gen.next().x();
+          final <scalarRealType> r = gen.next().x();
+
+          <vectorComponentType> mx = (<vectorComponentType>) <testOpClass>.multiply(v1.x(), r);
+          <vectorComponentType> my = (<vectorComponentType>) <testOpClass>.multiply(v1.y(), r);
+          <vectorComponentType> mz = (<vectorComponentType>) <testOpClass>.multiply(v1.z(), r);
+
+          <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), mx);
+          <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), my);
+          <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.add(v0.z(), mz);
 
           final <vectorType>\<Object> v2 = <opClass>.addScaled(v0, v1, r);
-          <testOpClass>.checkAlmostEquals(
-            <testOpClass>.add(v0.x(), <testOpClass>.multiply(v1.x(), r)), v2.x());
-          <testOpClass>.checkAlmostEquals(
-            <testOpClass>.add(v0.y(), <testOpClass>.multiply(v1.y(), r)), v2.y());
-          <testOpClass>.checkAlmostEquals(
-            <testOpClass>.add(v0.z(), <testOpClass>.multiply(v1.z(), r)), v2.z());
+          <testOpClass>.checkAlmostEquals(ex, v2.x());
+          <testOpClass>.checkAlmostEquals(ey, v2.y());
+          <testOpClass>.checkAlmostEquals(ez, v2.z());
         }
     });
   }
@@ -352,12 +367,16 @@ public final class <className>
         @Override
         protected void doSpecify(final <vectorType>\<Object> v0)
         {
-          final <scalarType> r = gen.next().x();
+          final <scalarRealType> r = gen.next().x();
+
+          <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.multiply(v0.x(), r);
+          <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.multiply(v0.y(), r);
+          <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.multiply(v0.z(), r);
 
           final <vectorType>\<Object> v2 = <opClass>.scale(v0, r);
-          <testOpClass>.checkAlmostEquals(<testOpClass>.multiply(v0.x(), r), v2.x());
-          <testOpClass>.checkAlmostEquals(<testOpClass>.multiply(v0.y(), r), v2.y());
-          <testOpClass>.checkAlmostEquals(<testOpClass>.multiply(v0.z(), r), v2.z());
+          <testOpClass>.checkAlmostEquals(ex, v2.x());
+          <testOpClass>.checkAlmostEquals(ey, v2.y());
+          <testOpClass>.checkAlmostEquals(ez, v2.z());
         }
     });
   }
@@ -414,10 +433,14 @@ public final class <className>
         {
           final <vectorType>\<Object> v1 = gen.next();
 
+          <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.subtract(v0.x(), v1.x());
+          <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.subtract(v0.y(), v1.y());
+          <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.subtract(v0.z(), v1.z());
+
           final <vectorType>\<Object> v2 = <opClass>.subtract(v0, v1);
-          <testOpClass>.checkAlmostEquals(<testOpClass>.subtract(v0.x(), v1.x()), v2.x());
-          <testOpClass>.checkAlmostEquals(<testOpClass>.subtract(v0.y(), v1.y()), v2.y());
-          <testOpClass>.checkAlmostEquals(<testOpClass>.subtract(v0.z(), v1.z()), v2.z());
+          <testOpClass>.checkAlmostEquals(ex, v2.x());
+          <testOpClass>.checkAlmostEquals(ey, v2.y());
+          <testOpClass>.checkAlmostEquals(ez, v2.z());
         }
     });
   }

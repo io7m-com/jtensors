@@ -52,6 +52,7 @@
         <executions>
 
           <!-- Parameterized types -->
+          <!-- Doubles -->
           <execution>
             <id>generate-P4D</id>
             <phase>generate-sources</phase>
@@ -68,7 +69,7 @@
                     <className>PVectors4D</className>
                     <vectorType>PVector4D</vectorType>
                     <vectorComponentType>double</vectorComponentType>
-                    <scalarType>double</scalarType>
+                    <scalarRealType>double</scalarRealType>
                     <opClass>PVectorDOps</opClass>
                   </properties>
                 </template>
@@ -91,7 +92,7 @@
                     <className>PVectors3D</className>
                     <vectorType>PVector3D</vectorType>
                     <vectorComponentType>double</vectorComponentType>
-                    <scalarType>double</scalarType>
+                    <scalarRealType>double</scalarRealType>
                     <opClass>PVectorDOps</opClass>
                   </properties>
                 </template>
@@ -114,8 +115,79 @@
                     <className>PVectors2D</className>
                     <vectorType>PVector2D</vectorType>
                     <vectorComponentType>double</vectorComponentType>
-                    <scalarType>double</scalarType>
+                    <scalarRealType>double</scalarRealType>
                     <opClass>PVectorDOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <!-- Floats -->
+          <execution>
+            <id>generate-P4F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/parameterized/vectors/PVectors4F.java</target>
+                  <properties>
+                    <className>PVectors4F</className>
+                    <vectorType>PVector4F</vectorType>
+                    <vectorComponentType>float</vectorComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <opClass>PVectorFOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-P3F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector3</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/parameterized/vectors/PVectors3F.java</target>
+                  <properties>
+                    <className>PVectors3F</className>
+                    <vectorType>PVector3F</vectorType>
+                    <vectorComponentType>float</vectorComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <opClass>PVectorFOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-P2F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/parameterized/vectors/PVectors2F.java</target>
+                  <properties>
+                    <className>PVectors2F</className>
+                    <vectorType>PVector2F</vectorType>
+                    <vectorComponentType>float</vectorComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <opClass>PVectorFOps</opClass>
                   </properties>
                 </template>
               </templates>

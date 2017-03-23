@@ -17,8 +17,11 @@
 package com.io7m.jtensors.tests.core;
 
 import com.io7m.jtensors.core.parameterized.vectors.PVectors2D;
+import com.io7m.jtensors.core.parameterized.vectors.PVectors2F;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors3D;
+import com.io7m.jtensors.core.parameterized.vectors.PVectors3F;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors4D;
+import com.io7m.jtensors.core.parameterized.vectors.PVectors4F;
 import com.io7m.junreachable.UnreachableCodeException;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -55,6 +58,15 @@ public final class UnreachableTest
   }
 
   @Test
+  public void testPVectorFOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.parameterized.vectors.PVectorFOps");
+    Assert.fail();
+  }
+
+  @Test
   public void testPVectors4D()
     throws Throwable
   {
@@ -75,6 +87,30 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors2D.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPVectors4F()
+    throws Throwable
+  {
+    this.checkUnreachable(PVectors4F.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPVectors3F()
+    throws Throwable
+  {
+    this.checkUnreachable(PVectors3F.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPVectors2F()
+    throws Throwable
+  {
+    this.checkUnreachable(PVectors2F.class);
     Assert.fail();
   }
 

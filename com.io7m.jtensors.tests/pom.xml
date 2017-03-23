@@ -52,6 +52,7 @@
         <executions>
 
           <!-- Parameterized types -->
+          <!-- Double -->
           <execution>
             <id>generate-P4D</id>
             <phase>generate-test-sources</phase>
@@ -67,7 +68,8 @@
                   <properties>
                     <className>PVectors4DTest</className>
                     <vectorType>com.io7m.jtensors.core.parameterized.vectors.PVector4D</vectorType>
-                    <scalarType>double</scalarType>
+                    <vectorComponentType>double</vectorComponentType>
+                    <scalarRealType>double</scalarRealType>
                     <vectorReadable4Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4DType</vectorReadable4Type>
                     <vectorReadable3Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3DType</vectorReadable3Type>
                     <vectorReadable2Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType</vectorReadable2Type>
@@ -94,7 +96,8 @@
                   <properties>
                     <className>PVectors3DTest</className>
                     <vectorType>com.io7m.jtensors.core.parameterized.vectors.PVector3D</vectorType>
-                    <scalarType>double</scalarType>
+                    <vectorComponentType>double</vectorComponentType>
+                    <scalarRealType>double</scalarRealType>
                     <vectorReadable3Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3DType</vectorReadable3Type>
                     <vectorReadable2Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType</vectorReadable2Type>
                     <generatorType>com.io7m.jtensors.generators.PVector3DGenerator</generatorType>
@@ -120,11 +123,95 @@
                   <properties>
                     <className>PVectors2DTest</className>
                     <vectorType>com.io7m.jtensors.core.parameterized.vectors.PVector2D</vectorType>
-                    <scalarType>double</scalarType>
+                    <vectorComponentType>double</vectorComponentType>
+                    <scalarRealType>double</scalarRealType>
                     <vectorReadable2Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType</vectorReadable2Type>
                     <generatorType>com.io7m.jtensors.generators.PVector2DGenerator</generatorType>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectors2D</opClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <!-- Float -->
+          <execution>
+            <id>generate-P4F</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PVector4Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/parameterized/vectors/PVectors4FTest.java</target>
+                  <properties>
+                    <className>PVectors4FTest</className>
+                    <vectorType>com.io7m.jtensors.core.parameterized.vectors.PVector4F</vectorType>
+                    <vectorComponentType>float</vectorComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <vectorReadable4Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4FType</vectorReadable4Type>
+                    <vectorReadable3Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3FType</vectorReadable3Type>
+                    <vectorReadable2Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2FType</vectorReadable2Type>
+                    <generatorType>com.io7m.jtensors.generators.PVector4FGenerator</generatorType>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectors4F</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-P3F</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PVector3Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/parameterized/vectors/PVectors3FTest.java</target>
+                  <properties>
+                    <className>PVectors3FTest</className>
+                    <vectorType>com.io7m.jtensors.core.parameterized.vectors.PVector3F</vectorType>
+                    <vectorComponentType>float</vectorComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <vectorReadable3Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3FType</vectorReadable3Type>
+                    <vectorReadable2Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2FType</vectorReadable2Type>
+                    <generatorType>com.io7m.jtensors.generators.PVector3FGenerator</generatorType>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectors3F</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-P2F</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PVector2Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/parameterized/vectors/PVectors2FTest.java</target>
+                  <properties>
+                    <className>PVectors2FTest</className>
+                    <vectorType>com.io7m.jtensors.core.parameterized.vectors.PVector2F</vectorType>
+                    <vectorComponentType>float</vectorComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <vectorReadable2Type>com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2FType</vectorReadable2Type>
+                    <generatorType>com.io7m.jtensors.generators.PVector2FGenerator</generatorType>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectors2F</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
                   </properties>
                 </template>
               </templates>

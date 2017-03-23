@@ -2,7 +2,7 @@ PVector3(
   className,
   vectorType,
   vectorComponentType,
-  scalarType,
+  scalarRealType,
   opClass) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
@@ -37,7 +37,7 @@ public final class <className>\<T>
   private static final <vectorType>\<?> ZERO;
 
   static {
-    final <scalarType> z = <opClass>.zero();
+    final <vectorComponentType> z = (<vectorComponentType>) <opClass>.zero();
     ZERO = <vectorType>.of(z, z, z);
   }
 
@@ -58,9 +58,9 @@ public final class <className>\<T>
     final <vectorType>\<T> v0)
   {
     return <vectorType>.of(
-      <opClass>.absolute(v0.x()),
-      <opClass>.absolute(v0.y()),
-      <opClass>.absolute(v0.z()));
+      (<vectorComponentType>) <opClass>.absolute(v0.x()),
+      (<vectorComponentType>) <opClass>.absolute(v0.y()),
+      (<vectorComponentType>) <opClass>.absolute(v0.z()));
   }
 
   /**
@@ -77,9 +77,9 @@ public final class <className>\<T>
     final <vectorType>\<T> v1)
   {
     return <vectorType>.of(
-      <opClass>.add(v0.x(), v1.x()),
-      <opClass>.add(v0.y(), v1.y()),
-      <opClass>.add(v0.z(), v1.z())
+      (<vectorComponentType>) <opClass>.add(v0.x(), v1.x()),
+      (<vectorComponentType>) <opClass>.add(v0.y(), v1.y()),
+      (<vectorComponentType>) <opClass>.add(v0.z(), v1.z())
     );
   }
 
@@ -96,7 +96,7 @@ public final class <className>\<T>
   public static \<T> <vectorType>\<T> addScaled(
     final <vectorType>\<T> v0,
     final <vectorType>\<T> v1,
-    final <scalarType> r)
+    final <scalarRealType> r)
   {
     return add(v0, scale(v1, r));
   }
@@ -110,13 +110,13 @@ public final class <className>\<T>
    * @return The scalar product of the two vectors
    */
 
-  public static \<T> <scalarType> dotProduct(
+  public static \<T> <scalarRealType> dotProduct(
     final <vectorType>\<T> v0,
     final <vectorType>\<T> v1)
   {
-    final <scalarType> x = <opClass>.multiply(v0.x(), v1.x());
-    final <scalarType> y = <opClass>.multiply(v0.y(), v1.y());
-    final <scalarType> z = <opClass>.multiply(v0.z(), v1.z());
+    final <scalarRealType> x = <opClass>.multiply(v0.x(), v1.x());
+    final <scalarRealType> y = <opClass>.multiply(v0.y(), v1.y());
+    final <scalarRealType> z = <opClass>.multiply(v0.z(), v1.z());
     return <opClass>.add(x, <opClass>.add(y, z));
   }
 
@@ -140,7 +140,7 @@ public final class <className>\<T>
   public static \<T> <vectorType>\<T> interpolateLinear(
     final <vectorType>\<T> v0,
     final <vectorType>\<T> v1,
-    final <scalarType> alpha)
+    final <scalarRealType> alpha)
   {
     final <vectorType>\<T> v0_r = scale(v0, <opClass>.subtract(<opClass>.one(), alpha));
     final <vectorType>\<T> v1_r = scale(v1, alpha);
@@ -155,7 +155,7 @@ public final class <className>\<T>
    * @return The squared magnitude of the vector
    */
 
-  public static \<T> <scalarType> magnitudeSquared(
+  public static \<T> <scalarRealType> magnitudeSquared(
     final <vectorType>\<T> v0)
   {
     return dotProduct(v0, v0);
@@ -169,7 +169,7 @@ public final class <className>\<T>
    * @return The magnitude of the vector
    */
 
-  public static \<T> <scalarType> magnitude(
+  public static \<T> <scalarRealType> magnitude(
     final <vectorType>\<T> v0)
   {
     return <opClass>.squareRoot(magnitudeSquared(v0));
@@ -186,9 +186,9 @@ public final class <className>\<T>
   public static \<T> <vectorType>\<T> normalize(
     final <vectorType>\<T> v0)
   {
-    final <scalarType> m = magnitudeSquared(v0);
+    final <scalarRealType> m = magnitudeSquared(v0);
     if (<opClass>.compare(m, <opClass>.zero()) > 0) {
-      final <scalarType> reciprocal =
+      final <scalarRealType> reciprocal =
         <opClass>.divide(<opClass>.one(), <opClass>.squareRoot(m));
       return scale(v0, reciprocal);
     }
@@ -207,12 +207,12 @@ public final class <className>\<T>
 
   public static \<T> <vectorType>\<T> scale(
     final <vectorType>\<T> v0,
-    final <scalarType> r)
+    final <scalarRealType> r)
   {
     return <vectorType>.of(
-      <opClass>.multiply(v0.x(), r),
-      <opClass>.multiply(v0.y(), r),
-      <opClass>.multiply(v0.z(), r));
+      (<vectorComponentType>) <opClass>.multiply(v0.x(), r),
+      (<vectorComponentType>) <opClass>.multiply(v0.y(), r),
+      (<vectorComponentType>) <opClass>.multiply(v0.z(), r));
   }
 
   /**
@@ -229,9 +229,9 @@ public final class <className>\<T>
     final <vectorType>\<T> v1)
   {
     return <vectorType>.of(
-      <opClass>.subtract(v0.x(), v1.x()),
-      <opClass>.subtract(v0.y(), v1.y()),
-      <opClass>.subtract(v0.z(), v1.z()));
+      (<vectorComponentType>) <opClass>.subtract(v0.x(), v1.x()),
+      (<vectorComponentType>) <opClass>.subtract(v0.y(), v1.y()),
+      (<vectorComponentType>) <opClass>.subtract(v0.z(), v1.z()));
   }
 
   /**
