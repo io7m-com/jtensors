@@ -2,6 +2,7 @@ PMatrix4x4Test(
   className,
   matrixType,
   matrixComponentType,
+  generatorType,
   scalarRealType,
   testOpClass,
   opClass) ::= <<
@@ -140,6 +141,27 @@ public final class <className>
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), m.rowColumn(3, 1));
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), m.rowColumn(3, 2));
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), m.rowColumn(3, 3));
+  }
+
+  @Test
+  @PercentagePassing
+  public void testAdd()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m0 = gen.next();
+    final <matrixType>\<Object> m1 = gen.next();
+    final <matrixType>\<Object> m2 = <opClass>.add(m0, m1);
+
+    for (int row = 0; row \< 4; ++row) {
+      for (int column = 0; column \< 4; ++column) {
+        <matrixComponentType> m0_v = m0.rowColumn(row, column);
+        <matrixComponentType> m1_v = m1.rowColumn(row, column);
+        <matrixComponentType> e = <testOpClass>.add(m0_v, m1_v);
+        <matrixComponentType> r = m2.rowColumn(row, column);
+        <testOpClass>.checkAlmostEquals(e, r);
+      }
+    }
   }
 
   @Test
