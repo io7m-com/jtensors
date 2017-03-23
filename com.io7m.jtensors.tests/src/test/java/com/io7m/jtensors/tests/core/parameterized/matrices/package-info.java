@@ -15,8 +15,8 @@
  */
 
 /**
- * Tests for vectors.
+ * Tests for matrices.
  */
 
-package com.io7m.jtensors.tests.core.parameterized.vectors;
+package com.io7m.jtensors.tests.core.parameterized.matrices;
 

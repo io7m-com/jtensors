@@ -21,7 +21,7 @@ PMatrix4x4Test(
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.tests.core.parameterized.matrixs;
+package com.io7m.jtensors.tests.core.parameterized.matrices;
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.junreachable.UnreachableCodeException;
@@ -143,7 +143,7 @@ public final class <className>
   }
 
   @Test
-  public void testRowOutOfRange0()
+  public void testRowOutOfRangeM1_0()
   {
     final <matrixType>\<Object> m = <opClass>.identity();
 
@@ -152,7 +152,34 @@ public final class <className>
   }
 
   @Test
-  public void testRowOutOfRange1()
+  public void testRowOutOfRangeM1_1()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(-1, 1);
+  }
+
+  @Test
+  public void testRowOutOfRangeM1_2()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(-1, 2);
+  }
+
+  @Test
+  public void testRowOutOfRangeM1_3()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(-1, 3);
+  }
+
+  @Test
+  public void testRowOutOfRange4_0()
   {
     final <matrixType>\<Object> m = <opClass>.identity();
 
@@ -161,7 +188,34 @@ public final class <className>
   }
 
   @Test
-  public void testColumnOutOfRange0()
+  public void testRowOutOfRange4_1()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(4, 1);
+  }
+
+  @Test
+  public void testRowOutOfRange4_2()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(4, 2);
+  }
+
+  @Test
+  public void testRowOutOfRange4_3()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(4, 3);
+  }
+
+  @Test
+  public void testColumnOutOfRange0_M1()
   {
     final <matrixType>\<Object> m = <opClass>.identity();
 
@@ -170,12 +224,66 @@ public final class <className>
   }
 
   @Test
-  public void testColumnOutOfRange1()
+  public void testColumnOutOfRange1_M1()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(1, -1);
+  }
+
+  @Test
+  public void testColumnOutOfRange2_M1()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(2, -1);
+  }
+
+  @Test
+  public void testColumnOutOfRange3_M1()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(3, -1);
+  }
+
+  @Test
+  public void testColumnOutOfRange0_4()
   {
     final <matrixType>\<Object> m = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     m.rowColumn(0, 4);
+  }
+
+  @Test
+  public void testColumnOutOfRange1_4()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(1, 4);
+  }
+
+  @Test
+  public void testColumnOutOfRange2_4()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(2, 4);
+  }
+
+  @Test
+  public void testColumnOutOfRange3_4()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    m.rowColumn(3, 4);
   }
 }
 >>

@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors.tests.core;
 
+import com.io7m.jtensors.core.parameterized.matrices.PMatrices4x4D;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors2D;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors2F;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors2I;
@@ -87,6 +88,15 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.parameterized.vectors.PVectorLOps");
+    Assert.fail();
+  }
+
+  @Test
+  public void testPMatrixDOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.parameterized.matrices.PMatrixDOps");
     Assert.fail();
   }
 
@@ -183,6 +193,14 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors2I.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPMatrices4x4D()
+    throws Throwable
+  {
+    this.checkUnreachable(PMatrices4x4D.class);
     Assert.fail();
   }
 
