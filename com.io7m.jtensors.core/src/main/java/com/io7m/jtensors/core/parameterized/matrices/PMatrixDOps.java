@@ -32,6 +32,20 @@ final class PMatrixDOps
     return value0 + value1;
   }
 
+  static double subtract(
+    final double value0,
+    final double value1)
+  {
+    return value0 - value1;
+  }
+
+  static double multiply(
+    final double value0,
+    final double value1)
+  {
+    return value0 * value1;
+  }
+
   static double zero()
   {
     return 0.0;

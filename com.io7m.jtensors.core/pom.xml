@@ -372,6 +372,7 @@
                     <className>PMatrices4x4D</className>
                     <matrixType>PMatrix4x4D</matrixType>
                     <matrixComponentType>double</matrixComponentType>
+                    <scalarRealType>double</scalarRealType>
                     <opClass>PMatrixDOps</opClass>
                   </properties>
                 </template>

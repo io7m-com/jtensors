@@ -165,6 +165,47 @@ public final class <className>
   }
 
   @Test
+  @PercentagePassing
+  public void testSubtract()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m0 = gen.next();
+    final <matrixType>\<Object> m1 = gen.next();
+    final <matrixType>\<Object> m2 = <opClass>.subtract(m0, m1);
+
+    for (int row = 0; row \< 4; ++row) {
+      for (int column = 0; column \< 4; ++column) {
+        <matrixComponentType> m0_v = m0.rowColumn(row, column);
+        <matrixComponentType> m1_v = m1.rowColumn(row, column);
+        <matrixComponentType> e = <testOpClass>.subtract(m0_v, m1_v);
+        <matrixComponentType> r = m2.rowColumn(row, column);
+        <testOpClass>.checkAlmostEquals(e, r);
+      }
+    }
+  }
+
+  @Test
+  @PercentagePassing
+  public void testScale()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <scalarRealType> s = gen.next().r0c0();
+    final <matrixType>\<Object> mr = <opClass>.scale(m, s);
+
+    for (int row = 0; row \< 4; ++row) {
+      for (int column = 0; column \< 4; ++column) {
+        <matrixComponentType> m_v = m.rowColumn(row, column);
+        <matrixComponentType> e = <testOpClass>.multiplyReal(m_v, s);
+        <matrixComponentType> r = mr.rowColumn(row, column);
+        <testOpClass>.checkAlmostEquals(e, r);
+      }
+    }
+  }
+
+  @Test
   public void testRowOutOfRangeM1_0()
   {
     final <matrixType>\<Object> m = <opClass>.identity();
