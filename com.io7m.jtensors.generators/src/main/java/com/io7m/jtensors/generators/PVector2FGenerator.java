@@ -32,6 +32,18 @@ public final class PVector2FGenerator<T> implements Generator<PVector2F<T>>
   private final Generator<Double> gen;
 
   /**
+   * Construct a generator.
+   *
+   * @param in_gen A component generator
+   */
+
+  public PVector2FGenerator(
+    final Generator<Double> in_gen)
+  {
+    this.gen = NullCheck.notNull(in_gen, "Generator");
+  }
+
+  /**
    * Create a generator initialized with a default component generator.
    *
    * @param <T> A phantom type parameter
@@ -45,18 +57,6 @@ public final class PVector2FGenerator<T> implements Generator<PVector2F<T>>
       -1.0e32,
       1.0e32
     ));
-  }
-
-  /**
-   * Construct a generator.
-   *
-   * @param in_gen A component generator
-   */
-
-  public PVector2FGenerator(
-    final Generator<Double> in_gen)
-  {
-    this.gen = NullCheck.notNull(in_gen, "Generator");
   }
 
   @Override

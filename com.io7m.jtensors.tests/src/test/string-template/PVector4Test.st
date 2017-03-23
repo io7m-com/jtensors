@@ -8,7 +8,8 @@ PVector4Test(
   scalarRealType,
   generatorType,
   testOpClass,
-  opClass) ::= <<
+  opClass,
+  hasFloatingPoint) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
  *
@@ -37,6 +38,9 @@ import org.junit.Test;
 import org.junit.Assert;
 import org.junit.rules.ExpectedException;
 import org.junit.Rule;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.jtensors.tests.rules.PercentagePassing;
+import com.io7m.jtensors.tests.TestUtilities;
 
 /**
  * \<p>Unit tests for {@link <vectorType>} values.\</p>
@@ -47,6 +51,9 @@ import org.junit.Rule;
 public final class <className>
 {
   @Rule public final ExpectedException expected = ExpectedException.none();
+
+  @Rule public PercentagePassRule percent =
+    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
 
   @Test
   public void testEqualsHashCodeToString()
@@ -189,206 +196,143 @@ public final class <className>
   }
 
   @Test
+  @PercentagePassing
   public void testAbsolute()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
 
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          final <vectorType>\<Object> v1 = <opClass>.absolute(v0);
+    final <vectorType>\<Object> v0 = gen.next();
+    final <vectorType>\<Object> v1 = <opClass>.absolute(v0);
 
-          <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.absolute(v0.x());
-          <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.absolute(v0.y());
-          <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.absolute(v0.z());
-          <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.absolute(v0.w());
+    <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.absolute(v0.x());
+    <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.absolute(v0.y());
+    <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.absolute(v0.z());
+    <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.absolute(v0.w());
 
-          <testOpClass>.checkAlmostEquals(ex, v1.x());
-          <testOpClass>.checkAlmostEquals(ey, v1.y());
-          <testOpClass>.checkAlmostEquals(ez, v1.z());
-          <testOpClass>.checkAlmostEquals(ew, v1.w());
-        }
-    });
+    <testOpClass>.checkAlmostEquals(ex, v1.x());
+    <testOpClass>.checkAlmostEquals(ey, v1.y());
+    <testOpClass>.checkAlmostEquals(ez, v1.z());
+    <testOpClass>.checkAlmostEquals(ew, v1.w());
   }
 
   @Test
+  @PercentagePassing
   public void testAdd()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+    final <vectorType>\<Object> v0 = gen.next();
+    final <vectorType>\<Object> v1 = gen.next();
 
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          final <vectorType>\<Object> v1 = gen.next();
+    <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), v1.x());
+    <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), v1.y());
+    <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.add(v0.z(), v1.z());
+    <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.add(v0.w(), v1.w());
 
-          <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), v1.x());
-          <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), v1.y());
-          <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.add(v0.z(), v1.z());
-          <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.add(v0.w(), v1.w());
-
-          final <vectorType>\<Object> v2 = <opClass>.add(v0, v1);
-          <testOpClass>.checkAlmostEquals(ex, v2.x());
-          <testOpClass>.checkAlmostEquals(ey, v2.y());
-          <testOpClass>.checkAlmostEquals(ez, v2.z());
-          <testOpClass>.checkAlmostEquals(ew, v2.w());
-        }
-    });
+    final <vectorType>\<Object> v2 = <opClass>.add(v0, v1);
+    <testOpClass>.checkAlmostEquals(ex, v2.x());
+    <testOpClass>.checkAlmostEquals(ey, v2.y());
+    <testOpClass>.checkAlmostEquals(ez, v2.z());
+    <testOpClass>.checkAlmostEquals(ew, v2.w());
   }
 
   @Test
+  @PercentagePassing
   public void testAddScaled()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
 
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          final <vectorType>\<Object> v1 = gen.next();
-          final <scalarRealType> r = gen.next().x();
+    final <vectorType>\<Object> v0 = gen.next();
+    final <vectorType>\<Object> v1 = gen.next();
+    final <scalarRealType> r = gen.next().x();
 
-          <vectorComponentType> mx = (<vectorComponentType>) <testOpClass>.multiply(v1.x(), r);
-          <vectorComponentType> my = (<vectorComponentType>) <testOpClass>.multiply(v1.y(), r);
-          <vectorComponentType> mz = (<vectorComponentType>) <testOpClass>.multiply(v1.z(), r);
-          <vectorComponentType> mw = (<vectorComponentType>) <testOpClass>.multiply(v1.w(), r);
+    <vectorComponentType> mx = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.x(), r);
+    <vectorComponentType> my = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.y(), r);
+    <vectorComponentType> mz = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.z(), r);
+    <vectorComponentType> mw = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.w(), r);
 
-          <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), mx);
-          <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), my);
-          <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.add(v0.z(), mz);
-          <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.add(v0.w(), mw);
+    <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), mx);
+    <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), my);
+    <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.add(v0.z(), mz);
+    <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.add(v0.w(), mw);
 
-          final <vectorType>\<Object> v2 = <opClass>.addScaled(v0, v1, r);
-          <testOpClass>.checkAlmostEquals(ex, v2.x());
-          <testOpClass>.checkAlmostEquals(ey, v2.y());
-          <testOpClass>.checkAlmostEquals(ez, v2.z());
-          <testOpClass>.checkAlmostEquals(ew, v2.w());
-        }
-    });
+    final <vectorType>\<Object> v2 = <opClass>.addScaled(v0, v1, r);
+    <testOpClass>.checkAlmostEquals(ex, v2.x());
+    <testOpClass>.checkAlmostEquals(ey, v2.y());
+    <testOpClass>.checkAlmostEquals(ez, v2.z());
+    <testOpClass>.checkAlmostEquals(ew, v2.w());
   }
 
   @Test
+  @PercentagePassing(passPercent = 85.0)
   public void testDotProductSelfMagnitudeSquared()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
 
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          <testOpClass>.checkAlmostEquals(
-            <opClass>.magnitudeSquared(v0),
-            <opClass>.dotProduct(v0, v0));
-        }
-    });
+    final <vectorType>\<Object> v0 = gen.next();
+
+    <testOpClass>.checkAlmostEquals(
+      <opClass>.magnitudeSquared(v0),
+      <opClass>.dotProduct(v0, v0));
   }
 
   @Test
+  @PercentagePassing
   public void testInterpolateLinearLimits()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
 
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          final <vectorType>\<Object> v1 = gen.next();
+    final <vectorType>\<Object> v0 = gen.next();
+    final <vectorType>\<Object> v1 = gen.next();
 
-          final <vectorType>\<Object> v2 =
-            <opClass>.interpolateLinear(v0, v1, <testOpClass>.constant("0"));
+    final <vectorType>\<Object> v2 =
+      <opClass>.interpolateLinear(v0, v1, <testOpClass>.constant("0"));
 
-          <testOpClass>.checkAlmostEquals(v0.x(), v2.x());
-          <testOpClass>.checkAlmostEquals(v0.y(), v2.y());
-          <testOpClass>.checkAlmostEquals(v0.z(), v2.z());
-          <testOpClass>.checkAlmostEquals(v0.w(), v2.w());
+    <testOpClass>.checkAlmostEquals(v0.x(), v2.x());
+    <testOpClass>.checkAlmostEquals(v0.y(), v2.y());
+    <testOpClass>.checkAlmostEquals(v0.z(), v2.z());
+    <testOpClass>.checkAlmostEquals(v0.w(), v2.w());
 
-          final <vectorType>\<Object> v3 =
-            <opClass>.interpolateLinear(v0, v1, <testOpClass>.constant("1"));
+    final <vectorType>\<Object> v3 =
+      <opClass>.interpolateLinear(v0, v1, <testOpClass>.constant("1"));
 
-          <testOpClass>.checkAlmostEquals(v1.x(), v3.x());
-          <testOpClass>.checkAlmostEquals(v1.y(), v3.y());
-          <testOpClass>.checkAlmostEquals(v1.z(), v3.z());
-          <testOpClass>.checkAlmostEquals(v1.w(), v3.w());
-        }
-    });
+    <testOpClass>.checkAlmostEquals(v1.x(), v3.x());
+    <testOpClass>.checkAlmostEquals(v1.y(), v3.y());
+    <testOpClass>.checkAlmostEquals(v1.z(), v3.z());
+    <testOpClass>.checkAlmostEquals(v1.w(), v3.w());
   }
 
   @Test
   public void testMagnitudeSquaredZero()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
-
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          <testOpClass>.checkAlmostEquals(
-            <testOpClass>.constant("0"),
-            <opClass>.magnitudeSquared(<opClass>.zero()));
-        }
-    });
+    <testOpClass>.checkAlmostEquals(
+      <testOpClass>.constant("0"),
+      <opClass>.magnitudeSquared(<opClass>.zero()));
   }
 
   @Test
   public void testMagnitudeZero()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
-
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          <testOpClass>.checkAlmostEquals(
-            <testOpClass>.constant("0"),
-            <opClass>.magnitude(<opClass>.zero()));
-        }
-    });
+    <testOpClass>.checkAlmostEquals(
+      <testOpClass>.constant("0"),
+      <opClass>.magnitude(<opClass>.zero()));
   }
 
+  <if(hasFloatingPoint)>
   @Test
+  @PercentagePassing
   public void testMagnitudeNormalizeOne()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
 
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          final <vectorType>\<Object> vn = <opClass>.normalize(v0);
-          if (<testOpClass>.compare(<opClass>.magnitude(v0), <testOpClass>.constant("0")) > 0) {
-            <testOpClass>.checkAlmostEquals(
-              <testOpClass>.constant("1"),
-              <opClass>.magnitude(vn));
-          } else {
-            Assert.assertEquals(v0, vn);
-          }
-        }
-    });
+    final <vectorType>\<Object> v0 = gen.next();
+    final <vectorType>\<Object> vn = <opClass>.normalize(v0);
+    final <scalarRealType> m = <opClass>.magnitude(vn);
+
+    if (<testOpClass>.compareReal(m, <testOpClass>.constant("0")) > 0) {
+      <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), m);
+    } else {
+      Assert.assertEquals(v0, vn);
+    }
   }
 
   @Test
@@ -396,100 +340,73 @@ public final class <className>
   {
     Assert.assertEquals(<opClass>.zero(), <opClass>.normalize(<opClass>.zero()));
   }
+  <endif>
 
   @Test
+  @PercentagePassing
   public void testScale()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
 
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          final <scalarRealType> r = gen.next().x();
+    final <vectorType>\<Object> v0 = gen.next();
+    final <scalarRealType> r = gen.next().x();
 
-          <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.multiply(v0.x(), r);
-          <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.multiply(v0.y(), r);
-          <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.multiply(v0.z(), r);
-          <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.multiply(v0.w(), r);
+    <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.x(), r);
+    <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.y(), r);
+    <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.z(), r);
+    <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.w(), r);
 
-          final <vectorType>\<Object> v2 = <opClass>.scale(v0, r);
-          <testOpClass>.checkAlmostEquals(ex, v2.x());
-          <testOpClass>.checkAlmostEquals(ey, v2.y());
-          <testOpClass>.checkAlmostEquals(ez, v2.z());
-          <testOpClass>.checkAlmostEquals(ew, v2.w());
-        }
-    });
+    final <vectorType>\<Object> v2 = <opClass>.scale(v0, r);
+    <testOpClass>.checkAlmostEquals(ex, v2.x());
+    <testOpClass>.checkAlmostEquals(ey, v2.y());
+    <testOpClass>.checkAlmostEquals(ez, v2.z());
+    <testOpClass>.checkAlmostEquals(ew, v2.w());
   }
 
   @Test
+  @PercentagePassing
   public void testScaleZero()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
 
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          final <vectorType>\<Object> v1 = <opClass>.scale(v0, <testOpClass>.constant("0"));
-          <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.x());
-          <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.y());
-          <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.z());
-          <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.w());
-        }
-    });
+    final <vectorType>\<Object> v0 = gen.next();
+    final <vectorType>\<Object> v1 = <opClass>.scale(v0, <testOpClass>.constant("0"));
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.x());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.y());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.z());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.w());
   }
 
   @Test
+  @PercentagePassing
   public void testScaleOne()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
 
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          final <vectorType>\<Object> v1 = <opClass>.scale(v0, <testOpClass>.constant("1"));
-          Assert.assertEquals(v0, v1);
-        }
-    });
+    final <vectorType>\<Object> v0 = gen.next();
+    final <vectorType>\<Object> v1 = <opClass>.scale(v0, <testOpClass>.constant("1"));
+    Assert.assertEquals(v0, v1);
   }
 
   @Test
+  @PercentagePassing
   public void testSubtract()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
 
-    QuickCheck.forAll(
-      gen,
-      new AbstractCharacteristic\<<vectorType>\<Object\>>()
-      {
-        @Override
-        protected void doSpecify(final <vectorType>\<Object> v0)
-        {
-          final <vectorType>\<Object> v1 = gen.next();
+    final <vectorType>\<Object> v0 = gen.next();
+    final <vectorType>\<Object> v1 = gen.next();
 
-          <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.subtract(v0.x(), v1.x());
-          <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.subtract(v0.y(), v1.y());
-          <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.subtract(v0.z(), v1.z());
-          <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.subtract(v0.w(), v1.w());
+    <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.subtract(v0.x(), v1.x());
+    <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.subtract(v0.y(), v1.y());
+    <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.subtract(v0.z(), v1.z());
+    <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.subtract(v0.w(), v1.w());
 
-          final <vectorType>\<Object> v2 = <opClass>.subtract(v0, v1);
-          <testOpClass>.checkAlmostEquals(ex, v2.x());
-          <testOpClass>.checkAlmostEquals(ey, v2.y());
-          <testOpClass>.checkAlmostEquals(ez, v2.z());
-          <testOpClass>.checkAlmostEquals(ew, v2.w());
-        }
-    });
+    final <vectorType>\<Object> v2 = <opClass>.subtract(v0, v1);
+    <testOpClass>.checkAlmostEquals(ex, v2.x());
+    <testOpClass>.checkAlmostEquals(ey, v2.y());
+    <testOpClass>.checkAlmostEquals(ez, v2.z());
+    <testOpClass>.checkAlmostEquals(ew, v2.w());
   }
 }
 >>

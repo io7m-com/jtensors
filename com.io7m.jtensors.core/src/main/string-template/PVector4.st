@@ -2,8 +2,10 @@ PVector4(
   className,
   vectorType,
   vectorComponentType,
+  scalarLargeType,
   scalarRealType,
-  opClass) ::= <<
+  opClass,
+  hasFloatingPoint) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
  *
@@ -111,15 +113,15 @@ public final class <className>\<T>
    * @return The scalar product of the two vectors
    */
 
-  public static \<T> <scalarRealType> dotProduct(
+  public static \<T> <scalarLargeType> dotProduct(
     final <vectorType>\<T> v0,
     final <vectorType>\<T> v1)
   {
-    final <scalarRealType> x = <opClass>.multiply(v0.x(), v1.x());
-    final <scalarRealType> y = <opClass>.multiply(v0.y(), v1.y());
-    final <scalarRealType> z = <opClass>.multiply(v0.z(), v1.z());
-    final <scalarRealType> w = <opClass>.multiply(v0.w(), v1.w());
-    return <opClass>.add(x, <opClass>.add(y, <opClass>.add(z, w)));
+    final <scalarLargeType> x = <opClass>.multiplyLarge(v0.x(), v1.x());
+    final <scalarLargeType> y = <opClass>.multiplyLarge(v0.y(), v1.y());
+    final <scalarLargeType> z = <opClass>.multiplyLarge(v0.z(), v1.z());
+    final <scalarLargeType> w = <opClass>.multiplyLarge(v0.w(), v1.w());
+    return <opClass>.addLarge(x, <opClass>.addLarge(y, <opClass>.addLarge(z, w)));
   }
 
   /**
@@ -144,7 +146,7 @@ public final class <className>\<T>
     final <vectorType>\<T> v1,
     final <scalarRealType> alpha)
   {
-    final <vectorType>\<T> v0_r = scale(v0, <opClass>.subtract(<opClass>.one(), alpha));
+    final <vectorType>\<T> v0_r = scale(v0, <opClass>.subtractReal(<opClass>.one(), alpha));
     final <vectorType>\<T> v1_r = scale(v1, alpha);
     return add(v0_r, v1_r);
   }
@@ -157,7 +159,7 @@ public final class <className>\<T>
    * @return The squared magnitude of the vector
    */
 
-  public static \<T> <scalarRealType> magnitudeSquared(
+  public static \<T> <scalarLargeType> magnitudeSquared(
     final <vectorType>\<T> v0)
   {
     return dotProduct(v0, v0);
@@ -174,9 +176,10 @@ public final class <className>\<T>
   public static \<T> <scalarRealType> magnitude(
     final <vectorType>\<T> v0)
   {
-    return <opClass>.squareRoot(magnitudeSquared(v0));
+    return <opClass>.squareRootLarge(magnitudeSquared(v0));
   }
 
+  <if(hasFloatingPoint)>
   /**
    * \<p>Normalize the vector {@code v0}.\</p>
    * \<p>If the magnitude of the vector is zero, the function returns {@code v0}.\</p>
@@ -188,15 +191,16 @@ public final class <className>\<T>
   public static \<T> <vectorType>\<T> normalize(
     final <vectorType>\<T> v0)
   {
-    final <scalarRealType> m = magnitudeSquared(v0);
-    if (<opClass>.compare(m, <opClass>.zero()) > 0) {
+    final <scalarLargeType> m = magnitudeSquared(v0);
+    if (<opClass>.compareLarge(m, <opClass>.zero()) > 0) {
       final <scalarRealType> reciprocal =
-        <opClass>.divide(<opClass>.one(), <opClass>.squareRoot(m));
+        <opClass>.divideReal(<opClass>.one(), <opClass>.squareRootLarge(m));
       return scale(v0, reciprocal);
     }
 
     return v0;
   }
+  <endif>
 
   /**
    * Scale {@code v0} by {@code r}.
@@ -212,10 +216,10 @@ public final class <className>\<T>
     final <scalarRealType> r)
   {
     return <vectorType>.of(
-      (<vectorComponentType>) <opClass>.multiply(v0.x(), r),
-      (<vectorComponentType>) <opClass>.multiply(v0.y(), r),
-      (<vectorComponentType>) <opClass>.multiply(v0.z(), r),
-      (<vectorComponentType>) <opClass>.multiply(v0.w(), r));
+      (<vectorComponentType>) <opClass>.multiplyReal(v0.x(), r),
+      (<vectorComponentType>) <opClass>.multiplyReal(v0.y(), r),
+      (<vectorComponentType>) <opClass>.multiplyReal(v0.z(), r),
+      (<vectorComponentType>) <opClass>.multiplyReal(v0.w(), r));
   }
 
   /**

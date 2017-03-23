@@ -18,10 +18,16 @@ package com.io7m.jtensors.tests.core;
 
 import com.io7m.jtensors.core.parameterized.vectors.PVectors2D;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors2F;
+import com.io7m.jtensors.core.parameterized.vectors.PVectors2I;
+import com.io7m.jtensors.core.parameterized.vectors.PVectors2L;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors3D;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors3F;
+import com.io7m.jtensors.core.parameterized.vectors.PVectors3I;
+import com.io7m.jtensors.core.parameterized.vectors.PVectors3L;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors4D;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors4F;
+import com.io7m.jtensors.core.parameterized.vectors.PVectors4I;
+import com.io7m.jtensors.core.parameterized.vectors.PVectors4L;
 import com.io7m.junreachable.UnreachableCodeException;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -63,6 +69,24 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.parameterized.vectors.PVectorFOps");
+    Assert.fail();
+  }
+
+  @Test
+  public void testPVectorIOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.parameterized.vectors.PVectorIOps");
+    Assert.fail();
+  }
+
+  @Test
+  public void testPVectorLOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.parameterized.vectors.PVectorLOps");
     Assert.fail();
   }
 
@@ -111,6 +135,54 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors2F.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPVectors4L()
+    throws Throwable
+  {
+    this.checkUnreachable(PVectors4L.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPVectors3L()
+    throws Throwable
+  {
+    this.checkUnreachable(PVectors3L.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPVectors2L()
+    throws Throwable
+  {
+    this.checkUnreachable(PVectors2L.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPVectors4I()
+    throws Throwable
+  {
+    this.checkUnreachable(PVectors4I.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPVectors3I()
+    throws Throwable
+  {
+    this.checkUnreachable(PVectors3I.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPVectors2I()
+    throws Throwable
+  {
+    this.checkUnreachable(PVectors2I.class);
     Assert.fail();
   }
 

@@ -38,6 +38,13 @@ final class PVectorFOps
     return (value0 + value1);
   }
 
+  static double addLarge(
+    final double value0,
+    final double value1)
+  {
+    return (value0 + value1);
+  }
+
   static double subtract(
     final double value0,
     final double value1)
@@ -45,14 +52,28 @@ final class PVectorFOps
     return value0 - value1;
   }
 
-  static double multiply(
+  static double subtractReal(
+    final double value0,
+    final double value1)
+  {
+    return value0 - value1;
+  }
+
+  static double multiplyLarge(
     final double value0,
     final double value1)
   {
     return value0 * value1;
   }
 
-  static double divide(
+  static double multiplyReal(
+    final double value0,
+    final double value1)
+  {
+    return value0 * value1;
+  }
+
+  static double divideReal(
     final double value0,
     final double value1)
   {
@@ -69,14 +90,14 @@ final class PVectorFOps
     return 1.0;
   }
 
-  static int compare(
+  static int compareLarge(
     final double value0,
     final double value1)
   {
     return Double.compare(value0, value1);
   }
 
-  static double squareRoot(
+  static double squareRootLarge(
     final double v)
   {
     return Math.sqrt(v);

@@ -66,6 +66,13 @@ public final class TestFOps
     return x * y;
   }
 
+  public static double multiplyReal(
+    final double x,
+    final double y)
+  {
+    return x * y;
+  }
+
   public static double subtract(
     final double x,
     final double y)
@@ -73,7 +80,7 @@ public final class TestFOps
     return x - y;
   }
 
-  public static int compare(
+  public static int compareReal(
     final double x,
     final double y)
   {
