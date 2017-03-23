@@ -53,6 +53,12 @@ public final class TestLOps
     return Long.parseLong(text);
   }
 
+  public static double realConstant(
+    final String text)
+  {
+    return Double.parseDouble(text);
+  }
+
   public static long absolute(
     final long x)
   {

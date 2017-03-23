@@ -46,6 +46,12 @@ public final class TestFOps
     return Float.parseFloat(text);
   }
 
+  public static double realConstant(
+    final String text)
+  {
+    return Double.parseDouble(text);
+  }
+
   public static double absolute(
     final double x)
   {

@@ -66,6 +66,13 @@ final class PVectorLOps
     return (long) ((double) value0 * value1);
   }
 
+  static double multiplyRealReal(
+    final double value0,
+    final double value1)
+  {
+    return value0 * value1;
+  }
+
   static long multiplyLarge(
     final long value0,
     final long value1)
@@ -87,5 +94,26 @@ final class PVectorLOps
     final long v)
   {
     return Math.sqrt((double) v);
+  }
+
+  static double clampReal(
+    final double value,
+    final double low,
+    final double high)
+  {
+    return Math.min(high, Math.max(value, low));
+  }
+
+  static double arcCosine(
+    final double r)
+  {
+    return StrictMath.acos(r);
+  }
+
+  static double divideRealReal(
+    final double value0,
+    final double value1)
+  {
+    return value0 / value1;
   }
 }

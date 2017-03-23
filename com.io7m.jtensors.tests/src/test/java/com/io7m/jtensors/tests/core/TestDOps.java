@@ -46,6 +46,12 @@ public final class TestDOps
     return Double.parseDouble(text);
   }
 
+  public static double realConstant(
+    final String text)
+  {
+    return Double.parseDouble(text);
+  }
+
   public static double absolute(
     final double x)
   {

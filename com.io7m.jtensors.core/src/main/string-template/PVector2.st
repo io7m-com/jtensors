@@ -102,6 +102,29 @@ public final class <className>\<T>
   }
 
   /**
+   * Calculate the angle between the vectors {@code v0} and {@code v1} in
+   * radians.
+   *
+   * @param v0 The left input vector
+   * @param v1 The right input vector
+   * @param \<T> A phantom type parameter
+   * @return The angle between the two vectors, in radians.
+   */
+
+  public static \<T> <scalarRealType> angle(
+    final <vectorType>\<T> v0,
+    final <vectorType>\<T> v1)
+  {
+    final <scalarRealType> m0 = magnitude(v0);
+    final <scalarRealType> m1 = magnitude(v1);
+    final <scalarRealType> dp_raw = dotProduct(v0, v1);
+    final <scalarRealType> dp = <opClass>.clampReal(dp_raw, -1.0, 1.0);
+    final <scalarRealType> f = <opClass>.multiplyRealReal(m0, m1);
+    final <scalarRealType> r = <opClass>.divideRealReal(dp, f);
+    return <opClass>.arcCosine(r);
+  }
+
+  /**
    * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
    *
    * @param \<T> A phantom type parameter

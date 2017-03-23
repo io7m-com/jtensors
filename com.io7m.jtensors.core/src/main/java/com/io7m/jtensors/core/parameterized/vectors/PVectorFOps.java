@@ -73,7 +73,21 @@ final class PVectorFOps
     return value0 * value1;
   }
 
+  static double multiplyRealReal(
+    final double value0,
+    final double value1)
+  {
+    return value0 * value1;
+  }
+
   static double divideReal(
+    final double value0,
+    final double value1)
+  {
+    return value0 / value1;
+  }
+
+  static double divideRealReal(
     final double value0,
     final double value1)
   {
@@ -101,5 +115,19 @@ final class PVectorFOps
     final double v)
   {
     return Math.sqrt(v);
+  }
+
+  static double clampReal(
+    final double value,
+    final double low,
+    final double high)
+  {
+    return Math.min(high, Math.max(value, low));
+  }
+
+  static double arcCosine(
+    final double r)
+  {
+    return StrictMath.acos(r);
   }
 }

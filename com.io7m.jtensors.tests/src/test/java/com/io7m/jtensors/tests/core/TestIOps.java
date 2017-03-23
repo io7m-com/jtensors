@@ -53,6 +53,12 @@ public final class TestIOps
     return Integer.parseInt(text);
   }
 
+  public static double realConstant(
+    final String text)
+  {
+    return Double.parseDouble(text);
+  }
+
   public static int absolute(
     final int x)
   {

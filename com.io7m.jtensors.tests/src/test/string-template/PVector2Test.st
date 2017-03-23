@@ -190,6 +190,20 @@ public final class <className>
   }
 
   @Test
+  @PercentagePassing
+  public void testAngle()
+  {
+    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+    final <vectorType>\<Object> v0 = gen.next();
+    final <vectorType>\<Object> v1 = gen.next();
+
+    <scalarRealType> r = <opClass>.angle(v0, v1);
+
+    Assert.assertTrue(<testOpClass>.compareReal(r, <testOpClass>.realConstant("0.0")) \>= 0);
+    Assert.assertTrue(<testOpClass>.compareReal(r, <testOpClass>.realConstant("6.283185")) \<= 0);
+  }
+
+  @Test
   @PercentagePassing(passPercent = 85.0)
   public void testDotProductSelfMagnitudeSquared()
   {
