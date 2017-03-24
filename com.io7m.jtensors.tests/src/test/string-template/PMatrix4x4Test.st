@@ -206,6 +206,366 @@ public final class <className>
   }
 
   @Test
+  @PercentagePassing
+  public void testWithColumn0()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <matrixType>\<Object> mr =
+      <opClass>.withColumn(
+        m,
+        0,
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("2"),
+        <testOpClass>.constant("3"));
+
+    <testOpClass>.checkEquals(<testOpClass>.constant("0"), mr.r0c0());
+    <testOpClass>.checkAlmostEquals(m.r0c1(), mr.r0c1());
+    <testOpClass>.checkAlmostEquals(m.r0c2(), mr.r0c2());
+    <testOpClass>.checkAlmostEquals(m.r0c3(), mr.r0c3());
+
+    <testOpClass>.checkEquals(<testOpClass>.constant("1"), mr.r1c0());
+    <testOpClass>.checkAlmostEquals(m.r1c1(), mr.r1c1());
+    <testOpClass>.checkAlmostEquals(m.r1c2(), mr.r1c2());
+    <testOpClass>.checkAlmostEquals(m.r1c3(), mr.r1c3());
+
+    <testOpClass>.checkEquals(<testOpClass>.constant("2"), mr.r2c0());
+    <testOpClass>.checkAlmostEquals(m.r2c1(), mr.r2c1());
+    <testOpClass>.checkAlmostEquals(m.r2c2(), mr.r2c2());
+    <testOpClass>.checkAlmostEquals(m.r2c3(), mr.r2c3());
+
+    <testOpClass>.checkEquals(<testOpClass>.constant("3"), mr.r3c0());
+    <testOpClass>.checkAlmostEquals(m.r3c1(), mr.r3c1());
+    <testOpClass>.checkAlmostEquals(m.r3c2(), mr.r3c2());
+    <testOpClass>.checkAlmostEquals(m.r3c3(), mr.r3c3());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testWithColumn1()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <matrixType>\<Object> mr =
+      <opClass>.withColumn(
+        m,
+        1,
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("2"),
+        <testOpClass>.constant("3"));
+
+    <testOpClass>.checkAlmostEquals(m.r0c0(), mr.r0c0());
+    <testOpClass>.checkEquals(<testOpClass>.constant("0"), mr.r0c1());
+    <testOpClass>.checkAlmostEquals(m.r0c2(), mr.r0c2());
+    <testOpClass>.checkAlmostEquals(m.r0c3(), mr.r0c3());
+
+    <testOpClass>.checkAlmostEquals(m.r1c0(), mr.r1c0());
+    <testOpClass>.checkEquals(<testOpClass>.constant("1"), mr.r1c1());
+    <testOpClass>.checkAlmostEquals(m.r1c2(), mr.r1c2());
+    <testOpClass>.checkAlmostEquals(m.r1c3(), mr.r1c3());
+
+    <testOpClass>.checkAlmostEquals(m.r2c0(), mr.r2c0());
+    <testOpClass>.checkEquals(<testOpClass>.constant("2"), mr.r2c1());
+    <testOpClass>.checkAlmostEquals(m.r2c2(), mr.r2c2());
+    <testOpClass>.checkAlmostEquals(m.r2c3(), mr.r2c3());
+
+    <testOpClass>.checkAlmostEquals(m.r3c0(), mr.r3c0());
+    <testOpClass>.checkEquals(<testOpClass>.constant("3"), mr.r3c1());
+    <testOpClass>.checkAlmostEquals(m.r3c2(), mr.r3c2());
+    <testOpClass>.checkAlmostEquals(m.r3c3(), mr.r3c3());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testWithColumn2()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <matrixType>\<Object> mr =
+      <opClass>.withColumn(
+        m,
+        2,
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("2"),
+        <testOpClass>.constant("3"));
+
+    <testOpClass>.checkAlmostEquals(m.r0c0(), mr.r0c0());
+    <testOpClass>.checkAlmostEquals(m.r0c1(), mr.r0c1());
+    <testOpClass>.checkEquals(<testOpClass>.constant("0"), mr.r0c2());
+    <testOpClass>.checkAlmostEquals(m.r0c3(), mr.r0c3());
+
+    <testOpClass>.checkAlmostEquals(m.r1c0(), mr.r1c0());
+    <testOpClass>.checkAlmostEquals(m.r1c1(), mr.r1c1());
+    <testOpClass>.checkEquals(<testOpClass>.constant("1"), mr.r1c2());
+    <testOpClass>.checkAlmostEquals(m.r1c3(), mr.r1c3());
+
+    <testOpClass>.checkAlmostEquals(m.r2c0(), mr.r2c0());
+    <testOpClass>.checkAlmostEquals(m.r2c1(), mr.r2c1());
+    <testOpClass>.checkEquals(<testOpClass>.constant("2"), mr.r2c2());
+    <testOpClass>.checkAlmostEquals(m.r2c3(), mr.r2c3());
+
+    <testOpClass>.checkAlmostEquals(m.r3c0(), mr.r3c0());
+    <testOpClass>.checkAlmostEquals(m.r3c1(), mr.r3c1());
+    <testOpClass>.checkEquals(<testOpClass>.constant("3"), mr.r3c2());
+    <testOpClass>.checkAlmostEquals(m.r3c3(), mr.r3c3());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testWithColumn3()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <matrixType>\<Object> mr =
+      <opClass>.withColumn(
+        m,
+        3,
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("2"),
+        <testOpClass>.constant("3"));
+
+    <testOpClass>.checkAlmostEquals(m.r0c0(), mr.r0c0());
+    <testOpClass>.checkAlmostEquals(m.r0c1(), mr.r0c1());
+    <testOpClass>.checkAlmostEquals(m.r0c2(), mr.r0c2());
+    <testOpClass>.checkEquals(<testOpClass>.constant("0"), mr.r0c3());
+
+    <testOpClass>.checkAlmostEquals(m.r1c0(), mr.r1c0());
+    <testOpClass>.checkAlmostEquals(m.r1c1(), mr.r1c1());
+    <testOpClass>.checkAlmostEquals(m.r1c2(), mr.r1c2());
+    <testOpClass>.checkEquals(<testOpClass>.constant("1"), mr.r1c3());
+
+    <testOpClass>.checkAlmostEquals(m.r2c0(), mr.r2c0());
+    <testOpClass>.checkAlmostEquals(m.r2c1(), mr.r2c1());
+    <testOpClass>.checkAlmostEquals(m.r2c2(), mr.r2c2());
+    <testOpClass>.checkEquals(<testOpClass>.constant("2"), mr.r2c3());
+
+    <testOpClass>.checkAlmostEquals(m.r3c0(), mr.r3c0());
+    <testOpClass>.checkAlmostEquals(m.r3c1(), mr.r3c1());
+    <testOpClass>.checkAlmostEquals(m.r3c2(), mr.r3c2());
+    <testOpClass>.checkEquals(<testOpClass>.constant("3"), mr.r3c3());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testWithColumnM1()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    <opClass>.withColumn(
+      m,
+      -1,
+      <testOpClass>.constant("0"),
+      <testOpClass>.constant("1"),
+      <testOpClass>.constant("2"),
+      <testOpClass>.constant("3"));
+  }
+
+  @Test
+  @PercentagePassing
+  public void testWithColumn4()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    <opClass>.withColumn(
+      m,
+      4,
+      <testOpClass>.constant("0"),
+      <testOpClass>.constant("1"),
+      <testOpClass>.constant("2"),
+      <testOpClass>.constant("3"));
+  }
+
+  @Test
+  @PercentagePassing
+  public void testWithRow0()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <matrixType>\<Object> mr =
+      <opClass>.withRow(
+        m,
+        0,
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("2"),
+        <testOpClass>.constant("3"));
+
+    <testOpClass>.checkEquals(<testOpClass>.constant("0"), mr.r0c0());
+    <testOpClass>.checkEquals(<testOpClass>.constant("1"), mr.r0c1());
+    <testOpClass>.checkEquals(<testOpClass>.constant("2"), mr.r0c2());
+    <testOpClass>.checkEquals(<testOpClass>.constant("3"), mr.r0c3());
+
+    <testOpClass>.checkAlmostEquals(m.r1c0(), mr.r1c0());
+    <testOpClass>.checkAlmostEquals(m.r1c1(), mr.r1c1());
+    <testOpClass>.checkAlmostEquals(m.r1c2(), mr.r1c2());
+    <testOpClass>.checkAlmostEquals(m.r1c3(), mr.r1c3());
+
+    <testOpClass>.checkAlmostEquals(m.r2c0(), mr.r2c0());
+    <testOpClass>.checkAlmostEquals(m.r2c1(), mr.r2c1());
+    <testOpClass>.checkAlmostEquals(m.r2c2(), mr.r2c2());
+    <testOpClass>.checkAlmostEquals(m.r2c3(), mr.r2c3());
+
+    <testOpClass>.checkAlmostEquals(m.r3c0(), mr.r3c0());
+    <testOpClass>.checkAlmostEquals(m.r3c1(), mr.r3c1());
+    <testOpClass>.checkAlmostEquals(m.r3c2(), mr.r3c2());
+    <testOpClass>.checkAlmostEquals(m.r3c3(), mr.r3c3());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testWithRow1()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <matrixType>\<Object> mr =
+      <opClass>.withRow(
+        m,
+        1,
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("2"),
+        <testOpClass>.constant("3"));
+
+    <testOpClass>.checkEquals(mr.r0c0(), mr.r0c0());
+    <testOpClass>.checkEquals(mr.r0c1(), mr.r0c1());
+    <testOpClass>.checkEquals(mr.r0c2(), mr.r0c2());
+    <testOpClass>.checkEquals(mr.r0c3(), mr.r0c3());
+
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), mr.r1c0());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), mr.r1c1());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("2"), mr.r1c2());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("3"), mr.r1c3());
+
+    <testOpClass>.checkAlmostEquals(m.r2c0(), mr.r2c0());
+    <testOpClass>.checkAlmostEquals(m.r2c1(), mr.r2c1());
+    <testOpClass>.checkAlmostEquals(m.r2c2(), mr.r2c2());
+    <testOpClass>.checkAlmostEquals(m.r2c3(), mr.r2c3());
+
+    <testOpClass>.checkAlmostEquals(m.r3c0(), mr.r3c0());
+    <testOpClass>.checkAlmostEquals(m.r3c1(), mr.r3c1());
+    <testOpClass>.checkAlmostEquals(m.r3c2(), mr.r3c2());
+    <testOpClass>.checkAlmostEquals(m.r3c3(), mr.r3c3());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testWithRow2()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <matrixType>\<Object> mr =
+      <opClass>.withRow(
+        m,
+        2,
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("2"),
+        <testOpClass>.constant("3"));
+
+    <testOpClass>.checkEquals(mr.r0c0(), mr.r0c0());
+    <testOpClass>.checkEquals(mr.r0c1(), mr.r0c1());
+    <testOpClass>.checkEquals(mr.r0c2(), mr.r0c2());
+    <testOpClass>.checkEquals(mr.r0c3(), mr.r0c3());
+
+    <testOpClass>.checkAlmostEquals(m.r1c0(), mr.r1c0());
+    <testOpClass>.checkAlmostEquals(m.r1c1(), mr.r1c1());
+    <testOpClass>.checkAlmostEquals(m.r1c2(), mr.r1c2());
+    <testOpClass>.checkAlmostEquals(m.r1c3(), mr.r1c3());
+
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), mr.r2c0());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), mr.r2c1());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("2"), mr.r2c2());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("3"), mr.r2c3());
+
+    <testOpClass>.checkAlmostEquals(m.r3c0(), mr.r3c0());
+    <testOpClass>.checkAlmostEquals(m.r3c1(), mr.r3c1());
+    <testOpClass>.checkAlmostEquals(m.r3c2(), mr.r3c2());
+    <testOpClass>.checkAlmostEquals(m.r3c3(), mr.r3c3());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testWithRow3()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <matrixType>\<Object> mr =
+      <opClass>.withRow(
+        m,
+        3,
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("2"),
+        <testOpClass>.constant("3"));
+
+    <testOpClass>.checkEquals(mr.r0c0(), mr.r0c0());
+    <testOpClass>.checkEquals(mr.r0c1(), mr.r0c1());
+    <testOpClass>.checkEquals(mr.r0c2(), mr.r0c2());
+    <testOpClass>.checkEquals(mr.r0c3(), mr.r0c3());
+
+    <testOpClass>.checkAlmostEquals(m.r1c0(), mr.r1c0());
+    <testOpClass>.checkAlmostEquals(m.r1c1(), mr.r1c1());
+    <testOpClass>.checkAlmostEquals(m.r1c2(), mr.r1c2());
+    <testOpClass>.checkAlmostEquals(m.r1c3(), mr.r1c3());
+
+    <testOpClass>.checkAlmostEquals(m.r2c0(), mr.r2c0());
+    <testOpClass>.checkAlmostEquals(m.r2c1(), mr.r2c1());
+    <testOpClass>.checkAlmostEquals(m.r2c2(), mr.r2c2());
+    <testOpClass>.checkAlmostEquals(m.r2c3(), mr.r2c3());
+
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), mr.r3c0());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), mr.r3c1());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("2"), mr.r3c2());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("3"), mr.r3c3());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testWithRowM1()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    <opClass>.withRow(
+      m,
+      -1,
+      <testOpClass>.constant("0"),
+      <testOpClass>.constant("1"),
+      <testOpClass>.constant("2"),
+      <testOpClass>.constant("3"));
+  }
+
+  @Test
+  @PercentagePassing
+  public void testWithRow4()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    this.expected.expect(IndexOutOfBoundsException.class);
+    <opClass>.withRow(
+      m,
+      4,
+      <testOpClass>.constant("0"),
+      <testOpClass>.constant("1"),
+      <testOpClass>.constant("2"),
+      <testOpClass>.constant("3"));
+  }
+
+  @Test
   public void testRowOutOfRangeM1_0()
   {
     final <matrixType>\<Object> m = <opClass>.identity();
