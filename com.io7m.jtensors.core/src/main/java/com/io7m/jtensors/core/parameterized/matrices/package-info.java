@@ -15,7 +15,7 @@
  */
 
 /**
- * Unparameterized matrix types.
+ * Parameterized matrix types.
  */
 
 @com.io7m.jnull.NonNullByDefault
