@@ -108,7 +108,7 @@ public final class <className>
   public static \<A, B> <scalarRealType> determinant(
     final <matrixType>\<A, B> m)
   {
-    return <opClass>.determinant(
+    return <opClass>.determinant4x4(
       m.r0c0(),
       m.r0c1(),
       m.r0c2(),

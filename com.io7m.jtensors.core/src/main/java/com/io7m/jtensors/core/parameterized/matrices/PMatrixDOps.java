@@ -56,7 +56,7 @@ final class PMatrixDOps
     return 1.0;
   }
 
-  static double determinant(
+  static double determinant4x4(
     final double r0c0,
     final double r1c0,
     final double r2c0,
