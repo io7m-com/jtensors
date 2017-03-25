@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors.core.parameterized.matrices;
 
+import com.io7m.junreachable.UnimplementedCodeException;
 import com.io7m.junreachable.UnreachableCodeException;
 
 final class PMatrixDOps
@@ -56,22 +57,36 @@ final class PMatrixDOps
     return 1.0;
   }
 
+  static double determinant3x3(
+    final double r0c0,
+    final double r0c1,
+    final double r0c2,
+    final double r1c0,
+    final double r1c1,
+    final double r1c2,
+    final double r2c0,
+    final double r2c1,
+    final double r2c2)
+  {
+    throw new UnimplementedCodeException();
+  }
+
   static double determinant4x4(
     final double r0c0,
-    final double r1c0,
-    final double r2c0,
-    final double r3c0,
     final double r0c1,
-    final double r1c1,
-    final double r2c1,
-    final double r3c1,
     final double r0c2,
-    final double r1c2,
-    final double r2c2,
-    final double r3c2,
     final double r0c3,
+    final double r1c0,
+    final double r1c1,
+    final double r1c2,
     final double r1c3,
+    final double r2c0,
+    final double r2c1,
+    final double r2c2,
     final double r2c3,
+    final double r3c0,
+    final double r3c1,
+    final double r3c2,
     final double r3c3)
   {
     double sum = 0.0;
