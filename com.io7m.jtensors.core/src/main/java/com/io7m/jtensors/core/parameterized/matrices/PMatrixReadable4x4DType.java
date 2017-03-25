@@ -21,10 +21,11 @@ import com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable4x4DType;
 /**
  * The type of 4x4 {@code double}-typed matrices.
  *
- * @param <T> A phantom type parameter
+ * @param <A> A phantom type parameter (possibly representing a source coordinate system)
+ * @param <B> A phantom type parameter (possibly representing a target coordinate system)
  */
 
-public interface PMatrixReadable4x4DType<T> extends MatrixReadable4x4DType
+public interface PMatrixReadable4x4DType<A, B> extends MatrixReadable4x4DType
 {
   // No extra methods
 }

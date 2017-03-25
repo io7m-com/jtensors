@@ -24,10 +24,13 @@ import net.java.quickcheck.generator.PrimitiveGenerators;
 /**
  * A matrix generator.
  *
- * @param <T>
+ * @param <A> A phantom type parameter (possibly representing a source
+ *            coordinate system)
+ * @param <B> A phantom type parameter (possibly representing a target
+ *            coordinate system)
  */
 
-public final class PMatrix4x4DGenerator<T> implements Generator<PMatrix4x4D<T>>
+public final class PMatrix4x4DGenerator<A, B> implements Generator<PMatrix4x4D<A, B>>
 {
   private final Generator<Double> gen;
 
@@ -46,12 +49,15 @@ public final class PMatrix4x4DGenerator<T> implements Generator<PMatrix4x4D<T>>
   /**
    * Create a generator initialized with a default component generator.
    *
-   * @param <T> A phantom type parameter
+   * @param <A> A phantom type parameter (possibly representing a source
+   *            coordinate system)
+   * @param <B> A phantom type parameter (possibly representing a target
+   *            coordinate system)
    *
    * @return A generator
    */
 
-  public static <T> Generator<PMatrix4x4D<T>> create()
+  public static <A, B> Generator<PMatrix4x4D<A, B>> create()
   {
     return new PMatrix4x4DGenerator<>(PrimitiveGenerators.doubles(
       -1.0e128,
@@ -63,12 +69,15 @@ public final class PMatrix4x4DGenerator<T> implements Generator<PMatrix4x4D<T>>
    * Create a generator initialized with a default component generator that only
    * produces values in the range {@code [-1.0, 1.0]}.
    *
-   * @param <T> A phantom type parameter
+   * @param <A> A phantom type parameter (possibly representing a source
+   *            coordinate system)
+   * @param <B> A phantom type parameter (possibly representing a target
+   *            coordinate system)
    *
    * @return A generator
    */
 
-  public static <T> Generator<PMatrix4x4D<T>> createNormal()
+  public static <A, B> Generator<PMatrix4x4D<A, B>> createNormal()
   {
     return new PMatrix4x4DGenerator<>(PrimitiveGenerators.doubles(
       -1.0,
@@ -77,7 +86,7 @@ public final class PMatrix4x4DGenerator<T> implements Generator<PMatrix4x4D<T>>
   }
 
   @Override
-  public PMatrix4x4D<T> next()
+  public PMatrix4x4D<A, B> next()
   {
     return PMatrix4x4D.of(
       this.gen.next().doubleValue(),

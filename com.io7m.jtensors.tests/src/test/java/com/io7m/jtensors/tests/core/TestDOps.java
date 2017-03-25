@@ -16,14 +16,80 @@
 
 package com.io7m.jtensors.tests.core;
 
+import com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D;
 import com.io7m.junreachable.UnreachableCodeException;
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 
 public final class TestDOps
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(TestDOps.class);
+  }
+
   private TestDOps()
   {
     throw new UnreachableCodeException();
+  }
+
+  public static <T> void checkObjectEquals(
+    final T x,
+    final T y)
+  {
+    if (!Objects.equals(x, y)) {
+      LOG.error("expected: {}", x);
+      LOG.error("received: {}", y);
+    }
+
+    Assert.assertEquals(x, y);
+  }
+
+  public static <T> void checkObjectNotEquals(
+    final T x,
+    final T y)
+  {
+    if (Objects.equals(x, y)) {
+      LOG.error("expected: {}", x);
+      LOG.error("received: {}", y);
+    }
+
+    Assert.assertNotEquals(x, y);
+  }
+
+  public static void checkAlmostEqualsMatrix(
+    final PMatrix4x4D<?, ?> m0,
+    final PMatrix4x4D<?, ?> m1)
+  {
+    try {
+      Assert.assertEquals(m0.r0c0(), m1.r0c0(), 1.0e-10);
+      Assert.assertEquals(m0.r0c1(), m1.r0c1(), 1.0e-10);
+      Assert.assertEquals(m0.r0c2(), m1.r0c2(), 1.0e-10);
+      Assert.assertEquals(m0.r0c3(), m1.r0c3(), 1.0e-10);
+
+      Assert.assertEquals(m0.r1c0(), m1.r1c0(), 1.0e-10);
+      Assert.assertEquals(m0.r1c1(), m1.r1c1(), 1.0e-10);
+      Assert.assertEquals(m0.r1c2(), m1.r1c2(), 1.0e-10);
+      Assert.assertEquals(m0.r1c3(), m1.r1c3(), 1.0e-10);
+
+      Assert.assertEquals(m0.r2c0(), m1.r2c0(), 1.0e-10);
+      Assert.assertEquals(m0.r2c1(), m1.r2c1(), 1.0e-10);
+      Assert.assertEquals(m0.r2c2(), m1.r2c2(), 1.0e-10);
+      Assert.assertEquals(m0.r2c3(), m1.r2c3(), 1.0e-10);
+
+      Assert.assertEquals(m0.r3c0(), m1.r3c0(), 1.0e-10);
+      Assert.assertEquals(m0.r3c1(), m1.r3c1(), 1.0e-10);
+      Assert.assertEquals(m0.r3c2(), m1.r3c2(), 1.0e-10);
+      Assert.assertEquals(m0.r3c3(), m1.r3c3(), 1.0e-10);
+    } catch (final AssertionError e) {
+      LOG.error("expected: {}", m0);
+      LOG.error("received: {}", m1);
+      throw e;
+    }
   }
 
   public static void checkEquals(

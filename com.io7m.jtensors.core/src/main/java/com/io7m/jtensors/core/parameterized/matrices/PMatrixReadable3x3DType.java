@@ -21,10 +21,11 @@ import com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable3x3DType;
 /**
  * The type of 3x3 {@code double}-typed matrices.
  *
- * @param <T> A phantom type parameter
+ * @param <A> A phantom type parameter (possibly representing a source coordinate system)
+ * @param <B> A phantom type parameter (possibly representing a target coordinate system)
  */
 
-public interface PMatrixReadable3x3DType<T> extends MatrixReadable3x3DType
+public interface PMatrixReadable3x3DType<A, B> extends MatrixReadable3x3DType
 {
   // No extra methods
 }

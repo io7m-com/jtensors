@@ -28,14 +28,13 @@ import com.io7m.junreachable.UnreachableCodeException;
 /**
  * \<p>Functions over {@link <matrixType>} values.\</p>
  *
- * @param \<T> A phantom type parameter
  * @since 8.0.0
  */
 
-public final class <className>\<T>
+public final class <className>
 {
-  private static final <matrixType>\<?> ZERO;
-  private static final <matrixType>\<?> IDENTITY;
+  private static final <matrixType>\<?, ?> ZERO;
+  private static final <matrixType>\<?, ?> IDENTITY;
 
   static {
     final <matrixComponentType> z = (<matrixComponentType>) <opClass>.zero();
@@ -66,12 +65,17 @@ public final class <className>\<T>
    * @return {@code m0 + m1}
    * @param m0 The left matrix
    * @param m1 The right matrix
-   * @param \<T> A phantom type parameter
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * @param \<C> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<D> A phantom type parameter (possibly representing a target coordinate system)
+   * @param \<E> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<F> A phantom type parameter (possibly representing a target coordinate system)
    */
 
-  public static \<T> <matrixType>\<T> add(
-    final <matrixType>\<T> m0,
-    final <matrixType>\<T> m1)
+  public static \<A, B, C, D, E, F> <matrixType>\<E, F> add(
+    final <matrixType>\<A, B> m0,
+    final <matrixType>\<C, D> m1)
   {
     return <matrixType>.of(
       <opClass>.add(m0.r0c0(), m1.r0c0()),
@@ -97,11 +101,12 @@ public final class <className>\<T>
    * Calculate the determinant of the matrix {@code m}.
    * @return The determinant of {@code m}
    * @param m The matrix
-   * @param \<T> A phantom type parameter
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
    */
 
-  public static \<T> <scalarRealType> determinant(
-    final <matrixType>\<T> m)
+  public static \<A, B> <scalarRealType> determinant(
+    final <matrixType>\<A, B> m)
   {
     return <opClass>.determinant(
       m.r0c0(),
@@ -124,15 +129,182 @@ public final class <className>\<T>
   }
 
   /**
+   * Multiply the matrices {@code m0} and {@code m1}.
+   * @return {@code m0 * m1}
+   * @param m0 The left matrix
+   * @param m1 The right matrix
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * @param \<C> A phantom type parameter (possibly representing a source coordinate system)
+   */
+
+  public static \<A, B, C> <matrixType>\<A, C> multiply(
+    final <matrixType>\<B, C> m0,
+    final <matrixType>\<A, B> m1)
+  {
+    final <scalarRealType> m0_r0c0 = m0.r0c0();
+    final <scalarRealType> m0_r0c1 = m0.r0c1();
+    final <scalarRealType> m0_r0c2 = m0.r0c2();
+    final <scalarRealType> m0_r0c3 = m0.r0c3();
+    final <scalarRealType> m0_r1c0 = m0.r1c0();
+    final <scalarRealType> m0_r1c1 = m0.r1c1();
+    final <scalarRealType> m0_r1c2 = m0.r1c2();
+    final <scalarRealType> m0_r1c3 = m0.r1c3();
+    final <scalarRealType> m0_r2c0 = m0.r2c0();
+    final <scalarRealType> m0_r2c1 = m0.r2c1();
+    final <scalarRealType> m0_r2c2 = m0.r2c2();
+    final <scalarRealType> m0_r2c3 = m0.r2c3();
+    final <scalarRealType> m0_r3c0 = m0.r3c0();
+    final <scalarRealType> m0_r3c1 = m0.r3c1();
+    final <scalarRealType> m0_r3c2 = m0.r3c2();
+    final <scalarRealType> m0_r3c3 = m0.r3c3();
+
+    final <scalarRealType> m1_r0c0 = m1.r0c0();
+    final <scalarRealType> m1_r0c1 = m1.r0c1();
+    final <scalarRealType> m1_r0c2 = m1.r0c2();
+    final <scalarRealType> m1_r0c3 = m1.r0c3();
+    final <scalarRealType> m1_r1c0 = m1.r1c0();
+    final <scalarRealType> m1_r1c1 = m1.r1c1();
+    final <scalarRealType> m1_r1c2 = m1.r1c2();
+    final <scalarRealType> m1_r1c3 = m1.r1c3();
+    final <scalarRealType> m1_r2c0 = m1.r2c0();
+    final <scalarRealType> m1_r2c1 = m1.r2c1();
+    final <scalarRealType> m1_r2c2 = m1.r2c2();
+    final <scalarRealType> m1_r2c3 = m1.r2c3();
+    final <scalarRealType> m1_r3c0 = m1.r3c0();
+    final <scalarRealType> m1_r3c1 = m1.r3c1();
+    final <scalarRealType> m1_r3c2 = m1.r3c2();
+    final <scalarRealType> m1_r3c3 = m1.r3c3();
+
+    final <scalarRealType> r0c0 =
+        <opClass>.multiply(m0_r0c0, m1_r0c0)
+      + <opClass>.multiply(m0_r0c1, m1_r1c0)
+      + <opClass>.multiply(m0_r0c2, m1_r2c0)
+      + <opClass>.multiply(m0_r0c3, m1_r3c0);
+
+    final <scalarRealType> r1c0 =
+        <opClass>.multiply(m0_r1c0, m1_r0c0)
+      + <opClass>.multiply(m0_r1c1, m1_r1c0)
+      + <opClass>.multiply(m0_r1c2, m1_r2c0)
+      + <opClass>.multiply(m0_r1c3, m1_r3c0);
+
+    final <scalarRealType> r2c0 =
+        <opClass>.multiply(m0_r2c0, m1_r0c0)
+      + <opClass>.multiply(m0_r2c1, m1_r1c0)
+      + <opClass>.multiply(m0_r2c2, m1_r2c0)
+      + <opClass>.multiply(m0_r2c3, m1_r3c0);
+
+    final <scalarRealType> r3c0 =
+        <opClass>.multiply(m0_r3c0, m1_r0c0)
+      + <opClass>.multiply(m0_r3c1, m1_r1c0)
+      + <opClass>.multiply(m0_r3c2, m1_r2c0)
+      + <opClass>.multiply(m0_r3c3, m1_r3c0);
+
+    final <scalarRealType> r0c1 =
+        <opClass>.multiply(m0_r0c0, m1_r0c1)
+      + <opClass>.multiply(m0_r0c1, m1_r1c1)
+      + <opClass>.multiply(m0_r0c2, m1_r2c1)
+      + <opClass>.multiply(m0_r0c3, m1_r3c1);
+
+    final <scalarRealType> r1c1 =
+        <opClass>.multiply(m0_r1c0, m1_r0c1)
+      + <opClass>.multiply(m0_r1c1, m1_r1c1)
+      + <opClass>.multiply(m0_r1c2, m1_r2c1)
+      + <opClass>.multiply(m0_r1c3, m1_r3c1);
+
+    final <scalarRealType> r2c1 =
+        <opClass>.multiply(m0_r2c0, m1_r0c1)
+      + <opClass>.multiply(m0_r2c1, m1_r1c1)
+      + <opClass>.multiply(m0_r2c2, m1_r2c1)
+      + <opClass>.multiply(m0_r2c3, m1_r3c1);
+
+    final <scalarRealType> r3c1 =
+        <opClass>.multiply(m0_r3c0, m1_r0c1)
+      + <opClass>.multiply(m0_r3c1, m1_r1c1)
+      + <opClass>.multiply(m0_r3c2, m1_r2c1)
+      + <opClass>.multiply(m0_r3c3, m1_r3c1);
+
+    final <scalarRealType> r0c2 =
+        <opClass>.multiply(m0_r0c0, m1_r0c2)
+      + <opClass>.multiply(m0_r0c1, m1_r1c2)
+      + <opClass>.multiply(m0_r0c2, m1_r2c2)
+      + <opClass>.multiply(m0_r0c3, m1_r3c2);
+
+    final <scalarRealType> r1c2 =
+        <opClass>.multiply(m0_r1c0, m1_r0c2)
+      + <opClass>.multiply(m0_r1c1, m1_r1c2)
+      + <opClass>.multiply(m0_r1c2, m1_r2c2)
+      + <opClass>.multiply(m0_r1c3, m1_r3c2);
+
+    final <scalarRealType> r2c2 =
+        <opClass>.multiply(m0_r2c0, m1_r0c2)
+      + <opClass>.multiply(m0_r2c1, m1_r1c2)
+      + <opClass>.multiply(m0_r2c2, m1_r2c2)
+      + <opClass>.multiply(m0_r2c3, m1_r3c2);
+
+    final <scalarRealType> r3c2 =
+        <opClass>.multiply(m0_r3c0, m1_r0c2)
+      + <opClass>.multiply(m0_r3c1, m1_r1c2)
+      + <opClass>.multiply(m0_r3c2, m1_r2c2)
+      + <opClass>.multiply(m0_r3c3, m1_r3c2);
+
+    final <scalarRealType> r0c3 =
+        <opClass>.multiply(m0_r0c0, m1_r0c3)
+      + <opClass>.multiply(m0_r0c1, m1_r1c3)
+      + <opClass>.multiply(m0_r0c2, m1_r2c3)
+      + <opClass>.multiply(m0_r0c3, m1_r3c3);
+
+    final <scalarRealType> r1c3 =
+        <opClass>.multiply(m0_r1c0, m1_r0c3)
+      + <opClass>.multiply(m0_r1c1, m1_r1c3)
+      + <opClass>.multiply(m0_r1c2, m1_r2c3)
+      + <opClass>.multiply(m0_r1c3, m1_r3c3);
+
+    final <scalarRealType> r2c3 =
+        <opClass>.multiply(m0_r2c0, m1_r0c3)
+      + <opClass>.multiply(m0_r2c1, m1_r1c3)
+      + <opClass>.multiply(m0_r2c2, m1_r2c3)
+      + <opClass>.multiply(m0_r2c3, m1_r3c3);
+
+    final <scalarRealType> r3c3 =
+        <opClass>.multiply(m0_r3c0, m1_r0c3)
+      + <opClass>.multiply(m0_r3c1, m1_r1c3)
+      + <opClass>.multiply(m0_r3c2, m1_r2c3)
+      + <opClass>.multiply(m0_r3c3, m1_r3c3);
+
+    return <matrixType>.of(
+      r0c0,
+      r0c1,
+      r0c2,
+      r0c3,
+      r1c0,
+      r1c1,
+      r1c2,
+      r1c3,
+      r2c0,
+      r2c1,
+      r2c2,
+      r2c3,
+      r3c0,
+      r3c1,
+      r3c2,
+      r3c3
+    );
+  }
+
+  /**
    * Scale the matrix {@code m} by {@code r}.
    * @return {@code m * r}
    * @param m The matrix
    * @param r The scale factor
-   * @param \<T> A phantom type parameter
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * @param \<C> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<D> A phantom type parameter (possibly representing a target coordinate system)
    */
 
-  public static \<T> <matrixType>\<T> scale(
-    final <matrixType>\<T> m,
+  public static \<A, B, C, D> <matrixType>\<C, D> scale(
+    final <matrixType>\<A, B> m,
     final <scalarRealType> r)
   {
     return <matrixType>.of(
@@ -160,12 +332,17 @@ public final class <className>\<T>
    * @return {@code m0 - m1}
    * @param m0 The left matrix
    * @param m1 The right matrix
-   * @param \<T> A phantom type parameter
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * @param \<C> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<D> A phantom type parameter (possibly representing a target coordinate system)
+   * @param \<E> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<F> A phantom type parameter (possibly representing a target coordinate system)
    */
 
-  public static \<T> <matrixType>\<T> subtract(
-    final <matrixType>\<T> m0,
-    final <matrixType>\<T> m1)
+  public static \<A, B, C, D, E, F> <matrixType>\<E, F> subtract(
+    final <matrixType>\<A, B> m0,
+    final <matrixType>\<C, D> m1)
   {
     return <matrixType>.of(
       <opClass>.subtract(m0.r0c0(), m1.r0c0()),
@@ -193,11 +370,12 @@ public final class <className>\<T>
    *
    * @param m The matrix
    * @return The trace of the matrix
-   * @param \<T> A phantom type parameter
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
    */
 
-  public static \<T> <scalarRealType> trace(
-    final <matrixType>\<T> m)
+  public static \<A, B> <scalarRealType> trace(
+    final <matrixType>\<A, B> m)
   {
     return <opClass>.add(m.r0c0(), <opClass>.add(m.r1c1(), <opClass>.add(m.r2c2(), m.r3c3())));
   }
@@ -206,11 +384,12 @@ public final class <className>\<T>
    * Calculate the transpose of the matrix {@code m}.
    * @return The transpose of {@code m}
    * @param m The matrix
-   * @param \<T> A phantom type parameter
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
    */
 
-  public static \<T> <matrixType>\<T> transpose(
-    final <matrixType>\<T> m)
+  public static \<A, B> <matrixType>\<A, B> transpose(
+    final <matrixType>\<A, B> m)
   {
     return <matrixType>.of(
       m.r0c0(),
@@ -232,8 +411,8 @@ public final class <className>\<T>
     );
   }
 
-  private static \<T> <matrixType>\<T> withColumn0(
-    final <matrixType>\<T> m,
+  private static \<A, B> <matrixType>\<A, B> withColumn0(
+    final <matrixType>\<A, B> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
     final <matrixComponentType> r2,
@@ -262,8 +441,8 @@ public final class <className>\<T>
     );
   }
 
-  private static \<T> <matrixType>\<T> withColumn1(
-    final <matrixType>\<T> m,
+  private static \<A, B> <matrixType>\<A, B> withColumn1(
+    final <matrixType>\<A, B> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
     final <matrixComponentType> r2,
@@ -292,8 +471,8 @@ public final class <className>\<T>
     );
   }
 
-  private static \<T> <matrixType>\<T> withColumn2(
-    final <matrixType>\<T> m,
+  private static \<A, B> <matrixType>\<A, B> withColumn2(
+    final <matrixType>\<A, B> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
     final <matrixComponentType> r2,
@@ -322,8 +501,8 @@ public final class <className>\<T>
     );
   }
 
-  private static \<T> <matrixType>\<T> withColumn3(
-    final <matrixType>\<T> m,
+  private static \<A, B> <matrixType>\<A, B> withColumn3(
+    final <matrixType>\<A, B> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
     final <matrixComponentType> r2,
@@ -357,15 +536,16 @@ public final class <className>\<T>
    * @return A matrix with the given row
    * @param m The matrix
    * @param column The column index in the range {@code [0, 3]}
-   * @param \<T> A phantom type parameter
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
    * @param r0 The value of row 0 in the column
    * @param r1 The value of row 1 in the column
    * @param r2 The value of row 2 in the column
    * @param r3 The value of row 3 in the column
    */
 
-  public static \<T> <matrixType>\<T> withColumn(
-    final <matrixType>\<T> m,
+  public static \<A, B> <matrixType>\<A, B> withColumn(
+    final <matrixType>\<A, B> m,
     final int column,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
@@ -396,8 +576,8 @@ public final class <className>\<T>
     }
   }
 
-  private static \<T> <matrixType>\<T> withRow0(
-    final <matrixType>\<T> m,
+  private static \<A, B> <matrixType>\<A, B> withRow0(
+    final <matrixType>\<A, B> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
     final <matrixComponentType> c2,
@@ -423,8 +603,8 @@ public final class <className>\<T>
     );
   }
 
-  private static \<T> <matrixType>\<T> withRow1(
-    final <matrixType>\<T> m,
+  private static \<A, B> <matrixType>\<A, B> withRow1(
+    final <matrixType>\<A, B> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
     final <matrixComponentType> c2,
@@ -450,8 +630,8 @@ public final class <className>\<T>
     );
   }
 
-  private static \<T> <matrixType>\<T> withRow2(
-    final <matrixType>\<T> m,
+  private static \<A, B> <matrixType>\<A, B> withRow2(
+    final <matrixType>\<A, B> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
     final <matrixComponentType> c2,
@@ -477,8 +657,8 @@ public final class <className>\<T>
     );
   }
 
-  private static \<T> <matrixType>\<T> withRow3(
-    final <matrixType>\<T> m,
+  private static \<A, B> <matrixType>\<A, B> withRow3(
+    final <matrixType>\<A, B> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
     final <matrixComponentType> c2,
@@ -513,11 +693,12 @@ public final class <className>\<T>
    * @param c1 The value of column 1 in the row
    * @param c2 The value of column 2 in the row
    * @param c3 The value of column 3 in the row
-   * @param \<T> A phantom type parameter
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
    */
 
-  public static \<T> <matrixType>\<T> withRow(
-    final <matrixType>\<T> m,
+  public static \<A, B> <matrixType>\<A, B> withRow(
+    final <matrixType>\<A, B> m,
     final int row,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
@@ -552,26 +733,28 @@ public final class <className>\<T>
    * The zero matrix.
    *
    * @return A matrix with all zero components
-   * @param \<T> A phantom type parameter
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
    */
 
   @SuppressWarnings("unchecked")
-  public static \<T> <matrixType>\<T> zero()
+  public static \<A, B> <matrixType>\<A, B> zero()
   {
-    return (<matrixType>\<T>) ZERO;
+    return (<matrixType>\<A, B>) ZERO;
   }
 
   /**
    * The identity matrix.
    *
    * @return A matrix with all diagonal components set to 1 and all other components set to 0.
-   * @param \<T> A phantom type parameter
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
    */
 
   @SuppressWarnings("unchecked")
-  public static \<T> <matrixType>\<T> identity()
+  public static \<A, B> <matrixType>\<A, B> identity()
   {
-    return (<matrixType>\<T>) IDENTITY;
+    return (<matrixType>\<A, B>) IDENTITY;
   }
 }
 >>

@@ -23,13 +23,14 @@ import org.immutables.value.Value;
 /**
  * The type of 4x4 {@code double}-typed matrices.
  *
- * @param <T> A phantom type parameter
+ * @param <A> A phantom type parameter (possibly representing a source coordinate system)
+ * @param <B> A phantom type parameter (possibly representing a target coordinate system)
  */
 
 @JTensorsImmutableStyleType
 @Value.Immutable
-public interface PMatrix4x4DType<T>
-  extends PMatrixReadable4x4DType<T>, MatrixComputationalType
+public interface PMatrix4x4DType<A, B>
+  extends PMatrixReadable4x4DType<A, B>, MatrixComputationalType
 {
   /**
    * @return The value at row 0 column 0

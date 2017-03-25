@@ -21,10 +21,11 @@ import com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable2x2DType;
 /**
  * The type of 2x2 {@code double}-typed matrices.
  *
- * @param <T> A phantom type parameter
+ * @param <A> A phantom type parameter (possibly representing a source coordinate system)
+ * @param <B> A phantom type parameter (possibly representing a target coordinate system)
  */
 
-public interface PMatrixReadable2x2DType<T> extends MatrixReadable2x2DType
+public interface PMatrixReadable2x2DType<A, B> extends MatrixReadable2x2DType
 {
   // No extra methods
 }
