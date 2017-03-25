@@ -92,4 +92,11 @@ public final class TestDOps
   {
     return Double.compare(x, y);
   }
+
+  public static double pow(
+    final double s,
+    final double e)
+  {
+    return StrictMath.pow(s, e);
+  }
 }

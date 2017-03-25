@@ -59,6 +59,23 @@ public final class PMatrix3x3DGenerator<T> implements Generator<PMatrix3x3D<T>>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that only
+   * produces values in the range {@code [-1.0, 1.0]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PMatrix3x3D<T>> createNormal()
+  {
+    return new PMatrix3x3DGenerator<>(PrimitiveGenerators.doubles(
+      -1.0,
+      1.0
+    ));
+  }
+
   @Override
   public PMatrix3x3D<T> next()
   {

@@ -52,6 +52,219 @@ public final class <className>
     new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
 
   @Test
+  @PercentagePassing
+  public void testEqualsHashCodeToString()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m0 = gen.next();
+    final <matrixType>\<Object> m1 = gen.next();
+    final <matrixType>\<Object> m2 = <matrixType>.builder().from(m0).build();
+
+    Assert.assertEquals(m0, m0);
+    Assert.assertEquals(m0, m2);
+    Assert.assertEquals(m0.hashCode(), m0.hashCode());
+    Assert.assertEquals(m0.hashCode(), m2.hashCode());
+    Assert.assertEquals(m0.toString(), m0.toString());
+    Assert.assertEquals(m0.toString(), m2.toString());
+    Assert.assertNotEquals(m0, null);
+    Assert.assertNotEquals(m0, Integer.valueOf(23));
+
+    Assert.assertNotEquals(m0, m1);
+    Assert.assertNotEquals(m0.hashCode(), m1.hashCode());
+    Assert.assertNotEquals(m0.toString(), m1.toString());
+  }
+
+  /**
+   * determinant(identity()) == 1.0
+   */
+
+  @Test
+  public void testDeterminantIdentity()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    <testOpClass>.checkEquals(<testOpClass>.constant("1"), <opClass>.determinant(m));
+  }
+
+  /**
+   * determinant(zero()) == 0.0
+   */
+
+  @Test
+  public void testDeterminantZero()
+  {
+    final <matrixType>\<Object> m = <opClass>.zero();
+
+    <testOpClass>.checkEquals(<testOpClass>.constant("0"), <opClass>.determinant(m));
+  }
+
+  @Test
+  public void testDeterminantScale()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    final <matrixType>\<Object> mr =
+      <matrixType>.builder()
+      .from(m).setR0c0(<testOpClass>.constant("2"))
+      .build();
+
+    <testOpClass>.checkEquals(<testOpClass>.constant("2"), <opClass>.determinant(mr));
+  }
+
+  @Test
+  public void testDeterminantScaleNegative()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    final <matrixType>\<Object> mr =
+      <matrixType>.builder()
+      .from(m).setR0c0(<testOpClass>.constant("-2"))
+      .build();
+
+    <testOpClass>.checkEquals(<testOpClass>.constant("-2"), <opClass>.determinant(mr));
+  }
+
+  /**
+   * ∀ m s. s⁴ * determinant(m) == determinant(scale(m, s))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testDeterminantScaleExponent()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <scalarRealType> s = gen.next().r0c0();
+
+    <testOpClass>.checkEquals(
+      <testOpClass>.multiply(<testOpClass>.pow(s, <testOpClass>.constant("4")), <opClass>.determinant(m)),
+      <opClass>.determinant(<opClass>.scale(m, s)));
+  }
+
+  /**
+   * ∀ m. determinant(m) == determinant(transpose(m))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testDeterminantTranspose()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <matrixType>\<Object> mt = <opClass>.transpose(m);
+
+    <testOpClass>.checkEquals(<opClass>.determinant(m), <opClass>.determinant(mt));
+  }
+
+  /**
+   * ∀ m. m == transpose(transpose(m))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testTransposeTranspose()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m0 = gen.next();
+    final <matrixType>\<Object> m1 = <opClass>.transpose(<opClass>.transpose(m0));
+
+    Assert.assertEquals(m0, m1);
+  }
+
+  /**
+   * ∀ m n. transpose(add(m, n)) == add(transpose(m), transpose(n))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testTransposeAdd()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m0 = gen.next();
+    final <matrixType>\<Object> m1 = gen.next();
+
+    final <matrixType>\<Object> mr0 =
+      <opClass>.transpose(<opClass>.add(m0, m1));
+    final <matrixType>\<Object> mr1 =
+      <opClass>.add(<opClass>.transpose(m0), <opClass>.transpose(m1));
+
+    Assert.assertEquals(mr0, mr1);
+  }
+
+  /**
+   * trace(identity()) == 4.0
+   */
+
+  @Test
+  public void testTraceIdentity()
+  {
+    final <matrixType>\<Object> m = <opClass>.identity();
+
+    <testOpClass>.checkEquals(<testOpClass>.constant("4"), <opClass>.trace(m));
+  }
+
+  /**
+   * ∀ m n. trace(add(m, n)) == trace(m) + trace(n)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testTraceAdd()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.createNormal();
+
+    final <matrixType>\<Object> m0 = gen.next();
+    final <matrixType>\<Object> m1 = gen.next();
+
+    final <scalarRealType> mr0 =
+      <opClass>.trace(<opClass>.add(m0, m1));
+    final <scalarRealType> mr1 =
+      <testOpClass>.add(<opClass>.trace(m0), <opClass>.trace(m1));
+
+    <testOpClass>.checkAlmostEquals(mr0, mr1);
+  }
+
+  /**
+   * ∀ m. trace(m) == trace(transpose(m))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testTraceTranspose()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.create();
+
+    final <matrixType>\<Object> m = gen.next();
+
+    <testOpClass>.checkEquals(
+      <opClass>.trace(m),
+      <opClass>.trace(<opClass>.transpose(m)));
+  }
+
+  /**
+   * ∀ m s. s * trace(m) == trace(scale(m, s))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testTraceScale()
+  {
+    final Generator\<<matrixType>\<Object\>> gen = <generatorType>.createNormal();
+
+    final <matrixType>\<Object> m = gen.next();
+    final <scalarRealType> s = gen.next().r0c0();
+
+    <testOpClass>.checkAlmostEquals(
+      <testOpClass>.multiply(s, <opClass>.trace(m)),
+      <opClass>.trace(<opClass>.scale(m, s)));
+  }
+
+  @Test
   public void testZero()
   {
     final <matrixType>\<Object> m = <opClass>.zero();

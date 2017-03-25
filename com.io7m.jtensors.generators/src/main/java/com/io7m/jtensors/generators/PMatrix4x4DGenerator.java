@@ -59,6 +59,23 @@ public final class PMatrix4x4DGenerator<T> implements Generator<PMatrix4x4D<T>>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that only
+   * produces values in the range {@code [-1.0, 1.0]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PMatrix4x4D<T>> createNormal()
+  {
+    return new PMatrix4x4DGenerator<>(PrimitiveGenerators.doubles(
+      -1.0,
+      1.0
+    ));
+  }
+
   @Override
   public PMatrix4x4D<T> next()
   {

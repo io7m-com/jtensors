@@ -94,6 +94,36 @@ public final class <className>\<T>
   }
 
   /**
+   * Calculate the determinant of the matrix {@code m}.
+   * @return The determinant of {@code m}
+   * @param m The matrix
+   * @param \<T> A phantom type parameter
+   */
+
+  public static \<T> <scalarRealType> determinant(
+    final <matrixType>\<T> m)
+  {
+    return <opClass>.determinant(
+      m.r0c0(),
+      m.r0c1(),
+      m.r0c2(),
+      m.r0c3(),
+      m.r1c0(),
+      m.r1c1(),
+      m.r1c2(),
+      m.r1c3(),
+      m.r2c0(),
+      m.r2c1(),
+      m.r2c2(),
+      m.r2c3(),
+      m.r3c0(),
+      m.r3c1(),
+      m.r3c2(),
+      m.r3c3()
+    );
+  }
+
+  /**
    * Scale the matrix {@code m} by {@code r}.
    * @return {@code m * r}
    * @param m The matrix
@@ -154,6 +184,51 @@ public final class <className>\<T>
       <opClass>.subtract(m0.r3c1(), m1.r3c1()),
       <opClass>.subtract(m0.r3c2(), m1.r3c2()),
       <opClass>.subtract(m0.r3c3(), m1.r3c3())
+    );
+  }
+
+  /**
+   * Return the trace of the matrix {@code m}. The trace is defined as the sum
+   * of the diagonal elements of the matrix.
+   *
+   * @param m The matrix
+   * @return The trace of the matrix
+   * @param \<T> A phantom type parameter
+   */
+
+  public static \<T> <scalarRealType> trace(
+    final <matrixType>\<T> m)
+  {
+    return <opClass>.add(m.r0c0(), <opClass>.add(m.r1c1(), <opClass>.add(m.r2c2(), m.r3c3())));
+  }
+
+  /**
+   * Calculate the transpose of the matrix {@code m}.
+   * @return The transpose of {@code m}
+   * @param m The matrix
+   * @param \<T> A phantom type parameter
+   */
+
+  public static \<T> <matrixType>\<T> transpose(
+    final <matrixType>\<T> m)
+  {
+    return <matrixType>.of(
+      m.r0c0(),
+      m.r1c0(),
+      m.r2c0(),
+      m.r3c0(),
+      m.r0c1(),
+      m.r1c1(),
+      m.r2c1(),
+      m.r3c1(),
+      m.r0c2(),
+      m.r1c2(),
+      m.r2c2(),
+      m.r3c2(),
+      m.r0c3(),
+      m.r1c3(),
+      m.r2c3(),
+      m.r3c3()
     );
   }
 

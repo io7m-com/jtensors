@@ -263,7 +263,7 @@ public final class <className>
   }
 
   @Test
-  @PercentagePassing(passPercent = 85.0)
+  @PercentagePassing(passPercent = 84.0)
   public void testDotProductSelfMagnitudeSquared()
   {
     final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();

@@ -55,4 +55,57 @@ final class PMatrixDOps
   {
     return 1.0;
   }
+
+  static double determinant(
+    final double r0c0,
+    final double r1c0,
+    final double r2c0,
+    final double r3c0,
+    final double r0c1,
+    final double r1c1,
+    final double r2c1,
+    final double r3c1,
+    final double r0c2,
+    final double r1c2,
+    final double r2c2,
+    final double r3c2,
+    final double r0c3,
+    final double r1c3,
+    final double r2c3,
+    final double r3c3)
+  {
+    double sum = 0.0;
+
+    sum += r0c0 * r1c1 * r2c2 * r3c3;
+    sum -= r0c0 * r1c1 * r2c3 * r3c2;
+    sum += r0c0 * r1c2 * r2c3 * r3c1;
+    sum -= r0c0 * r1c2 * r2c1 * r3c3;
+
+    sum += r0c0 * r1c3 * r2c1 * r3c2;
+    sum -= r0c0 * r1c3 * r2c2 * r3c1;
+    sum -= r0c1 * r1c2 * r2c3 * r3c0;
+    sum += r0c1 * r1c2 * r2c0 * r3c3;
+
+    sum -= r0c1 * r1c3 * r2c0 * r3c2;
+    sum += r0c1 * r1c3 * r2c2 * r3c0;
+    sum -= r0c1 * r1c0 * r2c2 * r3c3;
+    sum += r0c1 * r1c0 * r2c3 * r3c2;
+
+    sum += r0c2 * r1c3 * r2c0 * r3c1;
+    sum -= r0c2 * r1c3 * r2c1 * r3c0;
+    sum += r0c2 * r1c0 * r2c1 * r3c3;
+    sum -= r0c2 * r1c0 * r2c3 * r3c1;
+
+    sum += r0c2 * r1c1 * r2c3 * r3c0;
+    sum -= r0c2 * r1c1 * r2c0 * r3c3;
+    sum -= r0c3 * r1c0 * r2c1 * r3c2;
+    sum += r0c3 * r1c0 * r2c2 * r3c1;
+
+    sum -= r0c3 * r1c1 * r2c2 * r3c0;
+    sum += r0c3 * r1c1 * r2c0 * r3c2;
+    sum -= r0c3 * r1c2 * r2c0 * r3c1;
+    sum += r0c3 * r1c2 * r2c1 * r3c0;
+
+    return sum;
+  }
 }
