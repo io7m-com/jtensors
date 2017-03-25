@@ -25,6 +25,8 @@ package com.io7m.jtensors.core.parameterized.matrices;
 import com.io7m.jnull.NullCheck;
 import com.io7m.junreachable.UnreachableCodeException;
 
+import java.util.Optional;
+
 /**
  * \<p>Functions over {@link <matrixType>} values.\</p>
  *
@@ -126,6 +128,349 @@ public final class <className>
       m.r3c2(),
       m.r3c3()
     );
+  }
+
+  /**
+   * Calculate the inverse of the matrix {@code m}.
+   * @return The inverse of {@code m}, or nothing if no inverse exists
+   * @param m The matrix
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   */
+
+  public static \<A, B> Optional\<<matrixType>\<B, A\>> invert(
+    final <matrixType>\<A, B> m)
+  {
+    final <scalarRealType> d = determinant(m);
+
+    if (<opClass>.compare(d, <opClass>.zero()) == 0) {
+      return Optional.empty();
+    }
+
+    final <scalarRealType> d_inv = <opClass>.divide(<opClass>.one(), d);
+
+    /*
+     * This code is based on the Laplace Expansion theorem. Essentially, the
+     * inverse of the matrix is calculated by taking the determinants of 3x3
+     * sub-matrices of the original matrix. The sub-matrices are created by
+     * removing a specific row and column to leave 9 (possibly non-adjacent)
+     * cells, which are then placed in a 3x3 matrix.
+     *
+     * This implementation was derived from the paper "The Laplace Expansion
+     * Theorem: Computing the Determinants and Inverses of Matrices" by David
+     * Eberly.
+     */
+
+    final <scalarRealType> r0c0;
+    final <scalarRealType> r0c1;
+    final <scalarRealType> r0c2;
+    final <scalarRealType> r0c3;
+
+    final <scalarRealType> r1c0;
+    final <scalarRealType> r1c1;
+    final <scalarRealType> r1c2;
+    final <scalarRealType> r1c3;
+
+    final <scalarRealType> r2c0;
+    final <scalarRealType> r2c1;
+    final <scalarRealType> r2c2;
+    final <scalarRealType> r2c3;
+
+    final <scalarRealType> r3c0;
+    final <scalarRealType> r3c1;
+    final <scalarRealType> r3c2;
+    final <scalarRealType> r3c3;
+
+    {
+      // Sub-matrix obtained by removing m[0, 0]
+      // 1 = (-1) ^ (0 + 0)
+
+      r0c0 = <opClass>.determinant3x3(
+        m.r1c1(),
+        m.r1c2(),
+        m.r1c3(),
+        m.r2c1(),
+        m.r2c2(),
+        m.r2c3(),
+        m.r3c1(),
+        m.r3c2(),
+        m.r3c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[0, 1]
+      // -1 = (-1) ^ (0 + 1)
+
+      r0c1 = -<opClass>.determinant3x3(
+        m.r1c0(),
+        m.r1c2(),
+        m.r1c3(),
+        m.r2c0(),
+        m.r2c2(),
+        m.r2c3(),
+        m.r3c0(),
+        m.r3c2(),
+        m.r3c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[0, 2]
+      // 1 = (-1) ^ (0 + 2)
+
+      r0c2 = <opClass>.determinant3x3(
+        m.r1c0(),
+        m.r1c1(),
+        m.r1c3(),
+        m.r2c0(),
+        m.r2c1(),
+        m.r2c3(),
+        m.r3c0(),
+        m.r3c1(),
+        m.r3c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[0, 3]
+      // -1 = (-1) ^ (0 + 3)
+
+      r0c3 = -<opClass>.determinant3x3(
+        m.r1c0(),
+        m.r1c1(),
+        m.r1c2(),
+        m.r2c0(),
+        m.r2c1(),
+        m.r2c2(),
+        m.r3c0(),
+        m.r3c1(),
+        m.r3c2()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[1, 0]
+      // -1 = (-1) ^ (1 + 0)
+
+      r1c0 = -<opClass>.determinant3x3(
+        m.r0c1(),
+        m.r0c2(),
+        m.r0c3(),
+        m.r2c1(),
+        m.r2c2(),
+        m.r2c3(),
+        m.r3c1(),
+        m.r3c2(),
+        m.r3c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[1, 1]
+      // 1 = (-1) ^ (1 + 1)
+
+      r1c1 = <opClass>.determinant3x3(
+        m.r0c0(),
+        m.r0c2(),
+        m.r0c3(),
+        m.r2c0(),
+        m.r2c2(),
+        m.r2c3(),
+        m.r3c0(),
+        m.r3c2(),
+        m.r3c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[1, 2]
+      // -1 = (-1) ^ (1 + 2)
+
+      r1c2 = -<opClass>.determinant3x3(
+        m.r0c0(),
+        m.r0c1(),
+        m.r0c3(),
+        m.r2c0(),
+        m.r2c1(),
+        m.r2c3(),
+        m.r3c0(),
+        m.r3c1(),
+        m.r3c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[1, 3]
+      // 1 = (-1) ^ (1 + 3)
+
+      r1c3 = <opClass>.determinant3x3(
+        m.r0c0(),
+        m.r0c1(),
+        m.r0c2(),
+        m.r2c0(),
+        m.r2c1(),
+        m.r2c2(),
+        m.r3c0(),
+        m.r3c1(),
+        m.r3c2()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[2, 0]
+      // 1 = (-1) ^ (2 + 0)
+
+      r2c0 = <opClass>.determinant3x3(
+        m.r0c1(),
+        m.r0c2(),
+        m.r0c3(),
+        m.r1c1(),
+        m.r1c2(),
+        m.r1c3(),
+        m.r3c1(),
+        m.r3c2(),
+        m.r3c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[2, 1]
+      // -1 = (-1) ^ (2 + 1)
+
+      r2c1 = -<opClass>.determinant3x3(
+        m.r0c0(),
+        m.r0c2(),
+        m.r0c3(),
+        m.r1c0(),
+        m.r1c2(),
+        m.r1c3(),
+        m.r3c0(),
+        m.r3c2(),
+        m.r3c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[2, 2]
+      // 1 = (-1) ^ (2 + 2)
+
+      r2c2 = <opClass>.determinant3x3(
+        m.r0c0(),
+        m.r0c1(),
+        m.r0c3(),
+        m.r1c0(),
+        m.r1c1(),
+        m.r1c3(),
+        m.r3c0(),
+        m.r3c1(),
+        m.r3c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[2, 3]
+      // -1 = (-1) ^ (2 + 3)
+
+      r2c3 = -<opClass>.determinant3x3(
+        m.r0c0(),
+        m.r0c1(),
+        m.r0c2(),
+        m.r1c0(),
+        m.r1c1(),
+        m.r1c2(),
+        m.r3c0(),
+        m.r3c1(),
+        m.r3c2()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[3, 0]
+      // -1 = (-1) ^ (3 + 0)
+
+      r3c0 = -<opClass>.determinant3x3(
+        m.r0c1(),
+        m.r0c2(),
+        m.r0c3(),
+        m.r1c1(),
+        m.r1c2(),
+        m.r1c3(),
+        m.r2c1(),
+        m.r2c2(),
+        m.r2c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[3, 1]
+      // 1 = (-1) ^ (3 + 1)
+
+      r3c1 = <opClass>.determinant3x3(
+        m.r0c0(),
+        m.r0c2(),
+        m.r0c3(),
+        m.r1c0(),
+        m.r1c2(),
+        m.r1c3(),
+        m.r2c0(),
+        m.r2c2(),
+        m.r2c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[3, 2]
+      // -1 = (-1) ^ (3 + 2)
+
+      r3c2 = -<opClass>.determinant3x3(
+        m.r0c0(),
+        m.r0c1(),
+        m.r0c3(),
+        m.r1c0(),
+        m.r1c1(),
+        m.r1c3(),
+        m.r2c0(),
+        m.r2c1(),
+        m.r2c3()
+      );
+    }
+
+    {
+      // Sub-matrix obtained by removing m[3, 3]
+      // 1 = (-1) ^ (3 + 3)
+
+      r3c3 = <opClass>.determinant3x3(
+        m.r0c0(),
+        m.r0c1(),
+        m.r0c2(),
+        m.r1c0(),
+        m.r1c1(),
+        m.r1c2(),
+        m.r2c0(),
+        m.r2c1(),
+        m.r2c2()
+      );
+    }
+
+    return Optional.of(transpose(<matrixType>.of(
+      r0c0 * d_inv,
+      r0c1 * d_inv,
+      r0c2 * d_inv,
+      r0c3 * d_inv,
+      r1c0 * d_inv,
+      r1c1 * d_inv,
+      r1c2 * d_inv,
+      r1c3 * d_inv,
+      r2c0 * d_inv,
+      r2c1 * d_inv,
+      r2c2 * d_inv,
+      r2c3 * d_inv,
+      r3c0 * d_inv,
+      r3c1 * d_inv,
+      r3c2 * d_inv,
+      r3c3 * d_inv
+    )));
   }
 
   /**

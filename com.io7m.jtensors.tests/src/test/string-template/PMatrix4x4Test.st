@@ -25,18 +25,19 @@ PMatrix4x4Test(
 package com.io7m.jtensors.tests.core.parameterized.matrices;
 
 import com.io7m.jnull.NullCheck;
+import com.io7m.jtensors.tests.TestUtilities;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.jtensors.tests.rules.PercentagePassing;
 import com.io7m.junreachable.UnreachableCodeException;
-
+import java.util.Optional;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.QuickCheck;
 import net.java.quickcheck.characteristic.AbstractCharacteristic;
-import org.junit.Test;
 import org.junit.Assert;
-import org.junit.rules.ExpectedException;
+import org.junit.Assume;
 import org.junit.Rule;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
-import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * \<p>Unit tests for {@link <matrixType>} values.\</p>
@@ -177,6 +178,107 @@ public final class <className>
   }
 
   /**
+   * invert(zero()) == empty()
+   */
+
+  @Test
+  public void testInvertZero()
+  {
+    Assert.assertFalse(<opClass>.invert(<opClass>.zero()).isPresent());
+  }
+
+  /**
+   * invert(identity()) == Optional.of(identity())
+   */
+
+  @Test
+  public void testInvertIdentity()
+  {
+    <testOpClass>.checkAlmostEqualsMatrix(
+      <opClass>.identity(),
+      <opClass>.invert(<opClass>.identity()).get()
+    );
+  }
+
+  /**
+   * ∀ a b. invert(multiply(a, b)) == multiply(invert(a), invert(b))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testInvertProduct()
+  {
+    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
+    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType>\<Object, Object> b = gen.next();
+
+    final Optional\<<matrixType>\<Object, Object>\> mr0_opt =
+      <opClass>.invert(<opClass>.multiply(a, b));
+    final Optional\<<matrixType>\<Object, Object>\> mr1_opt =
+      <opClass>.invert(a).flatMap(ia -> {
+        return <opClass>.invert(b).map(ib -> {
+          return <opClass>.multiply(ib, ia);
+        });
+      });
+
+    Assert.assertTrue(mr0_opt.isPresent());
+    Assert.assertTrue(mr1_opt.isPresent());
+
+    final <matrixType>\<Object, Object> mr0 = mr0_opt.get();
+    final <matrixType>\<Object, Object> mr1 = mr1_opt.get();
+
+    <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
+  }
+
+  /**
+   * ∀ a. multiply(a, invert(a)) == identity()
+   */
+
+  @Test
+  @PercentagePassing
+  public void testInvertMultiplyIdentity()
+  {
+    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
+    final <matrixType>\<Object, Object> a = gen.next();
+
+    final Optional\<<matrixType>\<Object, Object>\> mr0_opt =
+      <opClass>.invert(a).map(aa -> {
+        return <opClass>.multiply(a, aa);
+      });
+
+    Assert.assertTrue(mr0_opt.isPresent());
+
+    final <matrixType>\<Object, Object> mr0 = mr0_opt.get();
+    <testOpClass>.checkAlmostEqualsMatrix(<opClass>.identity(), mr0);
+  }
+
+  /**
+   * ∀ a. transpose(invert(a)) == invert(transpose(a))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testInvertTranspose()
+  {
+    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
+    final <matrixType>\<Object, Object> a = gen.next();
+
+    final Optional\<<matrixType>\<Object, Object>\> mr0_opt =
+      <opClass>.invert(a).map(aa -> {
+        return <opClass>.transpose(aa);
+      });
+    final Optional\<<matrixType>\<Object, Object>\> mr1_opt =
+      <opClass>.invert(<opClass>.transpose(a));
+
+    Assert.assertTrue(mr0_opt.isPresent());
+    Assert.assertTrue(mr1_opt.isPresent());
+
+    final <matrixType>\<Object, Object> mr0 = mr0_opt.get();
+    final <matrixType>\<Object, Object> mr1 = mr1_opt.get();
+    <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
+  }
+
+  /**
    * ∀ a. multiply(a, identity()) == a
    */
 
@@ -303,6 +405,50 @@ public final class <className>
       <opClass>.multiply(<opClass>.add(b, c), a);
     final <matrixType>\<Object, Object> mr1 =
       <opClass>.add(<opClass>.multiply(b, a), <opClass>.multiply(c, a));
+
+    <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
+  }
+
+  /**
+   * ∀ a b s. scale(multiply(a, b), s) == multiply(scale(a, s), b)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testMultiplyScale0()
+  {
+    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
+    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType>\<Object, Object> b = gen.next();
+    final <matrixType>\<Object, Object> c = gen.next();
+    final <scalarRealType> s = gen.next().r0c0();
+
+    final <matrixType>\<Object, Object> mr0 =
+      <opClass>.scale(<opClass>.multiply(a, b), s);
+    final <matrixType>\<Object, Object> mr1 =
+      <opClass>.multiply(<opClass>.scale(a, s), b);
+
+    <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
+  }
+
+  /**
+   * ∀ a b s. multiply(scale(a, s), b) == multiply(a, scale(b, s))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testMultiplyScale1()
+  {
+    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
+    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType>\<Object, Object> b = gen.next();
+    final <matrixType>\<Object, Object> c = gen.next();
+    final <scalarRealType> s = gen.next().r0c0();
+
+    final <matrixType>\<Object, Object> mr0 =
+      <opClass>.multiply(<opClass>.scale(a, s), b);
+    final <matrixType>\<Object, Object> mr1 =
+      <opClass>.multiply(a, <opClass>.scale(b, s));
 
     <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
   }
