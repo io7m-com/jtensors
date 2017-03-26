@@ -144,6 +144,25 @@ public final class <className>
   }
 
   /**
+   * ∀ a. determinant(invert(a)) == 1 / determinant(a)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testDeterminantInverse()
+  {
+    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final <matrixType>\<Object, Object> a = gen.next();
+
+    final double mr0 =
+      <opClass>.determinant(<opClass>.invert(a).get());
+    final double mr1 =
+      <testOpClass>.divide(<testOpClass>.constant("1"), <opClass>.determinant(a));
+
+    <testOpClass>.checkAlmostEquals(mr0, mr1);
+  }
+
+  /**
    * ∀ a s. s⁴ * determinant(a) == determinant(scale(a, s))
    */
 

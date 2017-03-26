@@ -131,6 +131,13 @@ public final class TestDOps
     return x + y;
   }
 
+  public static double divide(
+    final double x,
+    final double y)
+  {
+    return x / y;
+  }
+
   public static double multiply(
     final double x,
     final double y)
