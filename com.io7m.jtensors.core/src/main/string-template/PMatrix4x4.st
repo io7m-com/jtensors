@@ -2,6 +2,8 @@ PMatrix4x4(
   className,
   matrixType,
   matrixComponentType,
+  vectorRowType,
+  vectorColumnType,
   scalarRealType,
   opClass) ::= <<
 /*
@@ -634,6 +636,80 @@ public final class <className>
       r3c1,
       r3c2,
       r3c3
+    );
+  }
+
+  /**
+   * Construct a matrix from the column vectors {@code (c0, c1, c2, c3)}.
+   * @return A constructed matrix
+   * @param c0 The column 0
+   * @param c1 The column 1
+   * @param c2 The column 2
+   * @param c3 The column 3
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   */
+
+  public static \<A, B> <matrixType>\<A, B> ofColumns(
+    final <vectorColumnType> c0,
+    final <vectorColumnType> c1,
+    final <vectorColumnType> c2,
+    final <vectorColumnType> c3)
+  {
+    return <matrixType>.of(
+      c0.x(),
+      c1.x(),
+      c2.x(),
+      c3.x(),
+      c0.y(),
+      c1.y(),
+      c2.y(),
+      c3.y(),
+      c0.z(),
+      c1.z(),
+      c2.z(),
+      c3.z(),
+      c0.w(),
+      c1.w(),
+      c2.w(),
+      c3.w()
+    );
+  }
+
+  /**
+   * Construct a matrix from the row vectors {@code (r0, r1, r2, r3)}.
+   * @return A constructed matrix
+   * @param r0 The row 0
+   * @param r1 The row 1
+   * @param r2 The row 2
+   * @param r3 The row 3
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   */
+
+  public static \<A, B> <matrixType>\<A, B> ofRows(
+    final <vectorColumnType> r0,
+    final <vectorColumnType> r1,
+    final <vectorColumnType> r2,
+    final <vectorColumnType> r3)
+  {
+    return <matrixType>.of(
+      r0.x(),
+      r0.y(),
+      r0.z(),
+      r0.w(),
+      r1.x(),
+      r1.y(),
+      r1.z(),
+      r1.w(),
+      r2.x(),
+      r2.y(),
+      r2.z(),
+      r2.w(),
+      r3.x(),
+      r3.y(),
+      r3.z(),
+      r3.w()
     );
   }
 

@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors.core.unparameterized.matrices;
 
+import com.io7m.jtensors.core.unparameterized.vectors.Vector3D;
 import org.immutables.value.Value;
 
 import static java.lang.Integer.valueOf;
@@ -24,13 +25,19 @@ import static java.lang.Integer.valueOf;
  * The type of 3x3 {@code double}-typed matrices.
  */
 
-public interface MatrixReadable3x3DType extends MatrixReadable2x2DType
+public interface MatrixReadable3x3DType extends MatrixReadableDType
 {
-  @Override
+  /**
+   * @return The value at row 0 column 0
+   */
+
   @Value.Parameter(order = 0)
   double r0c0();
 
-  @Override
+  /**
+   * @return The value at row 0 column 1
+   */
+
   @Value.Parameter(order = 1)
   double r0c1();
 
@@ -41,11 +48,17 @@ public interface MatrixReadable3x3DType extends MatrixReadable2x2DType
   @Value.Parameter(order = 2)
   double r0c2();
 
-  @Override
+  /**
+   * @return The value at row 1 column 0
+   */
+
   @Value.Parameter(order = 3)
   double r1c0();
 
-  @Override
+  /**
+   * @return The value at row 1 column 1
+   */
+
   @Value.Parameter(order = 4)
   double r1c1();
 
@@ -76,6 +89,66 @@ public interface MatrixReadable3x3DType extends MatrixReadable2x2DType
 
   @Value.Parameter(order = 8)
   double r2c2();
+
+  /**
+   * @return Row 0 of the matrix
+   */
+
+  @Value.Lazy
+  default Vector3D row0()
+  {
+    return Vector3D.of(this.r0c0(), this.r0c1(), this.r0c2());
+  }
+
+  /**
+   * @return Row 1 of the matrix
+   */
+
+  @Value.Lazy
+  default Vector3D row1()
+  {
+    return Vector3D.of(this.r1c0(), this.r1c1(), this.r1c2());
+  }
+
+  /**
+   * @return Row 2 of the matrix
+   */
+
+  @Value.Lazy
+  default Vector3D row2()
+  {
+    return Vector3D.of(this.r2c0(), this.r2c1(), this.r2c2());
+  }
+
+  /**
+   * @return Column 0 of the matrix
+   */
+
+  @Value.Lazy
+  default Vector3D column0()
+  {
+    return Vector3D.of(this.r0c0(), this.r1c0(), this.r2c0());
+  }
+
+  /**
+   * @return Column 1 of the matrix
+   */
+
+  @Value.Lazy
+  default Vector3D column1()
+  {
+    return Vector3D.of(this.r0c1(), this.r1c1(), this.r2c1());
+  }
+
+  /**
+   * @return Column 2 of the matrix
+   */
+
+  @Value.Lazy
+  default Vector3D column2()
+  {
+    return Vector3D.of(this.r0c2(), this.r1c2(), this.r2c2());
+  }
 
   @Override
   default double rowColumn(

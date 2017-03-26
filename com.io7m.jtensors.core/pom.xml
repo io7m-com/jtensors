@@ -372,6 +372,8 @@
                     <className>PMatrices4x4D</className>
                     <matrixType>PMatrix4x4D</matrixType>
                     <matrixComponentType>double</matrixComponentType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnType>
                     <scalarRealType>double</scalarRealType>
                     <opClass>PMatrixDOps</opClass>
                   </properties>

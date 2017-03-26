@@ -414,6 +414,8 @@
                     <matrixComponentType>double</matrixComponentType>
                     <scalarRealType>double</scalarRealType>
                     <generatorType>com.io7m.jtensors.generators.PMatrix4x4DGenerator</generatorType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnType>
                     <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrices4x4D</opClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
                   </properties>
