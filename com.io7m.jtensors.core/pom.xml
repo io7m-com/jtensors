@@ -71,7 +71,7 @@
                     <vectorComponentType>double</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorDOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorDOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
                   </properties>
                 </template>
@@ -96,7 +96,7 @@
                     <vectorComponentType>double</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorDOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorDOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
                   </properties>
                 </template>
@@ -121,7 +121,7 @@
                     <vectorComponentType>double</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorDOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorDOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
                   </properties>
                 </template>
@@ -148,7 +148,7 @@
                     <vectorComponentType>float</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorFOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorFOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
                   </properties>
                 </template>
@@ -173,7 +173,7 @@
                     <vectorComponentType>float</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorFOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorFOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
                   </properties>
                 </template>
@@ -198,7 +198,7 @@
                     <vectorComponentType>float</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorFOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorFOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
                   </properties>
                 </template>
@@ -225,7 +225,7 @@
                     <vectorComponentType>long</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorLOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorLOps</opClass>
                   </properties>
                 </template>
               </templates>
@@ -249,7 +249,7 @@
                     <vectorComponentType>long</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorLOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorLOps</opClass>
                   </properties>
                 </template>
               </templates>
@@ -273,7 +273,7 @@
                     <vectorComponentType>long</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorLOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorLOps</opClass>
                   </properties>
                 </template>
               </templates>
@@ -299,7 +299,7 @@
                     <vectorComponentType>int</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorIOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorIOps</opClass>
                   </properties>
                 </template>
               </templates>
@@ -323,7 +323,7 @@
                     <vectorComponentType>int</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorIOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorIOps</opClass>
                   </properties>
                 </template>
               </templates>
@@ -347,7 +347,7 @@
                     <vectorComponentType>int</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PVectorIOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorIOps</opClass>
                   </properties>
                 </template>
               </templates>
@@ -357,7 +357,7 @@
           <!-- Parameterized matrix types -->
           <!-- Doubles -->
           <execution>
-            <id>generate-M4x4D</id>
+            <id>generate-PM4x4D</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>render</goal>
@@ -374,8 +374,37 @@
                     <matrixComponentType>double</matrixComponentType>
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnType>
+                    <hasGeneric>true</hasGeneric>
                     <scalarRealType>double</scalarRealType>
-                    <opClass>PMatrixDOps</opClass>
+                    <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrixDOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <!-- Unparameterized matrix types -->
+          <!-- Doubles -->
+          <execution>
+            <id>generate-M4x4D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PMatrix4x4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/matrices/Matrices4x4D.java</target>
+                  <properties>
+                    <className>Matrices4x4D</className>
+                    <matrixType>Matrix4x4D</matrixType>
+                    <matrixComponentType>double</matrixComponentType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnType>
+                    <scalarRealType>double</scalarRealType>
+                    <opClass>com.io7m.jtensors.core.unparameterized.matrices.MatrixDOps</opClass>
                   </properties>
                 </template>
               </templates>

@@ -5,6 +5,7 @@ PMatrix4x4(
   vectorRowType,
   vectorColumnType,
   scalarRealType,
+  hasGeneric,
   opClass) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
@@ -22,7 +23,11 @@ PMatrix4x4(
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+<if(hasGeneric)>
 package com.io7m.jtensors.core.parameterized.matrices;
+<else>
+package com.io7m.jtensors.core.unparameterized.matrices;
+<endif>
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.junreachable.UnreachableCodeException;
@@ -37,8 +42,8 @@ import java.util.Optional;
 
 public final class <className>
 {
-  private static final <matrixType>\<?, ?> ZERO;
-  private static final <matrixType>\<?, ?> IDENTITY;
+  private static final <matrixType><if(hasGeneric)>\<?, ?><endif> ZERO;
+  private static final <matrixType><if(hasGeneric)>\<?, ?><endif> IDENTITY;
 
   static {
     final <matrixComponentType> z = (<matrixComponentType>) <opClass>.zero();
@@ -69,17 +74,29 @@ public final class <className>
    * @return {@code m0 + m1}
    * @param m0 The left matrix
    * @param m1 The right matrix
+   *
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
    * @param \<C> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<D> A phantom type parameter (possibly representing a target coordinate system)
    * @param \<E> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<F> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    */
 
-  public static \<A, B, C, D, E, F> <matrixType>\<E, F> add(
+  public static
+  <if(hasGeneric)>
+  \<A, B, C, D, E, F> <matrixType>\<E, F>
+  add(
     final <matrixType>\<A, B> m0,
     final <matrixType>\<C, D> m1)
+  <else>
+  <matrixType>
+  add(
+    final <matrixType> m0,
+    final <matrixType> m1)
+  <endif>
   {
     return <matrixType>.of(
       <opClass>.add(m0.r0c0(), m1.r0c0()),
@@ -105,12 +122,22 @@ public final class <className>
    * Calculate the determinant of the matrix {@code m}.
    * @return The determinant of {@code m}
    * @param m The matrix
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    */
 
-  public static \<A, B> <scalarRealType> determinant(
+  public static
+  <if(hasGeneric)>
+  \<A, B> <scalarRealType>
+  determinant(
     final <matrixType>\<A, B> m)
+  <else>
+  <scalarRealType>
+  determinant(
+    final <matrixType> m)
+  <endif>
   {
     return <opClass>.determinant4x4(
       m.r0c0(),
@@ -136,12 +163,22 @@ public final class <className>
    * Calculate the inverse of the matrix {@code m}.
    * @return The inverse of {@code m}, or nothing if no inverse exists
    * @param m The matrix
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    */
 
-  public static \<A, B> Optional\<<matrixType>\<B, A\>> invert(
+  public static
+  <if(hasGeneric)>
+  \<A, B> Optional\<<matrixType>\<B, A\>>
+  invert(
     final <matrixType>\<A, B> m)
+  <else>
+  Optional\<<matrixType\>>
+  invert(
+    final <matrixType> m)
+  <endif>
   {
     final <scalarRealType> d = determinant(m);
 
@@ -480,14 +517,25 @@ public final class <className>
    * @return {@code m0 * m1}
    * @param m0 The left matrix
    * @param m1 The right matrix
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
    * @param \<C> A phantom type parameter (possibly representing a source coordinate system)
+   * <endif>
    */
 
-  public static \<A, B, C> <matrixType>\<A, C> multiply(
+  public static
+  <if(hasGeneric)>
+  \<A, B, C> <matrixType>\<A, C>
+  multiply(
     final <matrixType>\<B, C> m0,
     final <matrixType>\<A, B> m1)
+  <else>
+  <matrixType>
+  multiply(
+    final <matrixType> m0,
+    final <matrixType> m1)
+  <endif>
   {
     final <scalarRealType> m0_r0c0 = m0.r0c0();
     final <scalarRealType> m0_r0c1 = m0.r0c1();
@@ -646,11 +694,20 @@ public final class <className>
    * @param c1 The column 1
    * @param c2 The column 2
    * @param c3 The column 3
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * @param \<C> A phantom type parameter (possibly representing a source coordinate system)
+   * <endif>
    */
 
-  public static \<A, B> <matrixType>\<A, B> ofColumns(
+  public static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  <else>
+  <matrixType>
+  <endif>
+  ofColumns(
     final <vectorColumnType> c0,
     final <vectorColumnType> c1,
     final <vectorColumnType> c2,
@@ -683,11 +740,19 @@ public final class <className>
    * @param r1 The row 1
    * @param r2 The row 2
    * @param r3 The row 3
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    */
 
-  public static \<A, B> <matrixType>\<A, B> ofRows(
+  public static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  <else>
+  <matrixType>
+  <endif>
+  ofRows(
     final <vectorColumnType> r0,
     final <vectorColumnType> r1,
     final <vectorColumnType> r2,
@@ -718,15 +783,26 @@ public final class <className>
    * @return {@code m * r}
    * @param m The matrix
    * @param r The scale factor
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
    * @param \<C> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<D> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    */
 
-  public static \<A, B, C, D> <matrixType>\<C, D> scale(
+  public static
+  <if(hasGeneric)>
+  \<A, B, C, D> <matrixType>\<C, D>
+  scale(
     final <matrixType>\<A, B> m,
     final <scalarRealType> r)
+  <else>
+  <matrixType>
+  scale(
+    final <matrixType> m,
+    final <scalarRealType> r)
+  <endif>
   {
     return <matrixType>.of(
       <opClass>.multiply(m.r0c0(), r),
@@ -753,17 +829,28 @@ public final class <className>
    * @return {@code m0 - m1}
    * @param m0 The left matrix
    * @param m1 The right matrix
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
    * @param \<C> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<D> A phantom type parameter (possibly representing a target coordinate system)
    * @param \<E> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<F> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    */
 
-  public static \<A, B, C, D, E, F> <matrixType>\<E, F> subtract(
+  public static
+  <if(hasGeneric)>
+  \<A, B, C, D, E, F> <matrixType>\<E, F>
+  subtract(
     final <matrixType>\<A, B> m0,
     final <matrixType>\<C, D> m1)
+  <else>
+  <matrixType>
+  subtract(
+    final <matrixType> m0,
+    final <matrixType> m1)
+  <endif>
   {
     return <matrixType>.of(
       <opClass>.subtract(m0.r0c0(), m1.r0c0()),
@@ -791,12 +878,22 @@ public final class <className>
    *
    * @param m The matrix
    * @return The trace of the matrix
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    */
 
-  public static \<A, B> <scalarRealType> trace(
+  public static
+  <if(hasGeneric)>
+  \<A, B> <scalarRealType>
+  trace(
     final <matrixType>\<A, B> m)
+  <else>
+  <scalarRealType>
+  trace(
+    final <matrixType> m)
+  <endif>
   {
     return <opClass>.add(m.r0c0(), <opClass>.add(m.r1c1(), <opClass>.add(m.r2c2(), m.r3c3())));
   }
@@ -805,12 +902,22 @@ public final class <className>
    * Calculate the transpose of the matrix {@code m}.
    * @return The transpose of {@code m}
    * @param m The matrix
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    */
 
-  public static \<A, B> <matrixType>\<A, B> transpose(
+  public static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  transpose(
     final <matrixType>\<A, B> m)
+  <else>
+  <matrixType>
+  transpose(
+    final <matrixType> m)
+  <endif>
   {
     return <matrixType>.of(
       m.r0c0(),
@@ -832,12 +939,24 @@ public final class <className>
     );
   }
 
-  private static \<A, B> <matrixType>\<A, B> withColumn0(
+  private static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  withColumn0(
     final <matrixType>\<A, B> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
     final <matrixComponentType> r2,
     final <matrixComponentType> r3)
+  <else>
+  <matrixType>
+  withColumn0(
+    final <matrixType> m,
+    final <matrixComponentType> r0,
+    final <matrixComponentType> r1,
+    final <matrixComponentType> r2,
+    final <matrixComponentType> r3)
+  <endif>
   {
     return <matrixType>.of(
       r0,
@@ -862,12 +981,24 @@ public final class <className>
     );
   }
 
-  private static \<A, B> <matrixType>\<A, B> withColumn1(
+  private static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  withColumn1(
     final <matrixType>\<A, B> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
     final <matrixComponentType> r2,
     final <matrixComponentType> r3)
+  <else>
+  <matrixType>
+  withColumn1(
+    final <matrixType> m,
+    final <matrixComponentType> r0,
+    final <matrixComponentType> r1,
+    final <matrixComponentType> r2,
+    final <matrixComponentType> r3)
+  <endif>
   {
     return <matrixType>.of(
       m.r0c0(),
@@ -892,12 +1023,24 @@ public final class <className>
     );
   }
 
-  private static \<A, B> <matrixType>\<A, B> withColumn2(
+  private static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  withColumn2(
     final <matrixType>\<A, B> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
     final <matrixComponentType> r2,
     final <matrixComponentType> r3)
+  <else>
+  <matrixType>
+  withColumn2(
+    final <matrixType> m,
+    final <matrixComponentType> r0,
+    final <matrixComponentType> r1,
+    final <matrixComponentType> r2,
+    final <matrixComponentType> r3)
+  <endif>
   {
     return <matrixType>.of(
       m.r0c0(),
@@ -922,12 +1065,24 @@ public final class <className>
     );
   }
 
-  private static \<A, B> <matrixType>\<A, B> withColumn3(
+  private static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  withColumn3(
     final <matrixType>\<A, B> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
     final <matrixComponentType> r2,
     final <matrixComponentType> r3)
+  <else>
+  <matrixType>
+  withColumn3(
+    final <matrixType> m,
+    final <matrixComponentType> r0,
+    final <matrixComponentType> r1,
+    final <matrixComponentType> r2,
+    final <matrixComponentType> r3)
+  <endif>
   {
     return <matrixType>.of(
       m.r0c0(),
@@ -957,21 +1112,36 @@ public final class <className>
    * @return A matrix with the given row
    * @param m The matrix
    * @param column The column index in the range {@code [0, 3]}
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    * @param r0 The value of row 0 in the column
    * @param r1 The value of row 1 in the column
    * @param r2 The value of row 2 in the column
    * @param r3 The value of row 3 in the column
    */
 
-  public static \<A, B> <matrixType>\<A, B> withColumn(
+  public static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  withColumn(
     final <matrixType>\<A, B> m,
     final int column,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
     final <matrixComponentType> r2,
     final <matrixComponentType> r3)
+  <else>
+  <matrixType>
+  withColumn(
+    final <matrixType> m,
+    final int column,
+    final <matrixComponentType> r0,
+    final <matrixComponentType> r1,
+    final <matrixComponentType> r2,
+    final <matrixComponentType> r3)
+  <endif>
   {
     switch (column) {
       case 0:
@@ -997,12 +1167,24 @@ public final class <className>
     }
   }
 
-  private static \<A, B> <matrixType>\<A, B> withRow0(
+  private static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  withRow0(
     final <matrixType>\<A, B> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
     final <matrixComponentType> c2,
     final <matrixComponentType> c3)
+  <else>
+  <matrixType>
+  withRow0(
+    final <matrixType> m,
+    final <matrixComponentType> c0,
+    final <matrixComponentType> c1,
+    final <matrixComponentType> c2,
+    final <matrixComponentType> c3)
+  <endif>
   {
     return <matrixType>.of(
       c0,
@@ -1024,12 +1206,24 @@ public final class <className>
     );
   }
 
-  private static \<A, B> <matrixType>\<A, B> withRow1(
+  private static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  withRow1(
     final <matrixType>\<A, B> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
     final <matrixComponentType> c2,
     final <matrixComponentType> c3)
+  <else>
+  <matrixType>
+  withRow1(
+    final <matrixType> m,
+    final <matrixComponentType> c0,
+    final <matrixComponentType> c1,
+    final <matrixComponentType> c2,
+    final <matrixComponentType> c3)
+  <endif>
   {
     return <matrixType>.of(
       m.r0c0(),
@@ -1051,12 +1245,24 @@ public final class <className>
     );
   }
 
-  private static \<A, B> <matrixType>\<A, B> withRow2(
+  private static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  withRow2(
     final <matrixType>\<A, B> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
     final <matrixComponentType> c2,
     final <matrixComponentType> c3)
+  <else>
+  <matrixType>
+  withRow2(
+    final <matrixType> m,
+    final <matrixComponentType> c0,
+    final <matrixComponentType> c1,
+    final <matrixComponentType> c2,
+    final <matrixComponentType> c3)
+  <endif>
   {
     return <matrixType>.of(
       m.r0c0(),
@@ -1078,12 +1284,24 @@ public final class <className>
     );
   }
 
-  private static \<A, B> <matrixType>\<A, B> withRow3(
+  private static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  withRow3(
     final <matrixType>\<A, B> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
     final <matrixComponentType> c2,
     final <matrixComponentType> c3)
+  <else>
+  <matrixType>
+  withRow3(
+    final <matrixType> m,
+    final <matrixComponentType> c0,
+    final <matrixComponentType> c1,
+    final <matrixComponentType> c2,
+    final <matrixComponentType> c3)
+  <endif>
   {
     return <matrixType>.of(
       m.r0c0(),
@@ -1114,17 +1332,32 @@ public final class <className>
    * @param c1 The value of column 1 in the row
    * @param c2 The value of column 2 in the row
    * @param c3 The value of column 3 in the row
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    */
 
-  public static \<A, B> <matrixType>\<A, B> withRow(
+  public static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  withRow(
     final <matrixType>\<A, B> m,
     final int row,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
     final <matrixComponentType> c2,
     final <matrixComponentType> c3)
+  <else>
+  <matrixType>
+  withRow(
+    final <matrixType> m,
+    final int row,
+    final <matrixComponentType> c0,
+    final <matrixComponentType> c1,
+    final <matrixComponentType> c2,
+    final <matrixComponentType> c3)
+  <endif>
   {
     switch (row) {
       case 0:
@@ -1154,28 +1387,48 @@ public final class <className>
    * The zero matrix.
    *
    * @return A matrix with all zero components
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    */
 
+  <if(hasGeneric)>
   @SuppressWarnings("unchecked")
   public static \<A, B> <matrixType>\<A, B> zero()
   {
     return (<matrixType>\<A, B>) ZERO;
   }
+  <else>
+  public static <matrixType> zero()
+  {
+    return ZERO;
+  }
+  <endif>
 
   /**
    * The identity matrix.
    *
    * @return A matrix with all diagonal components set to 1 and all other components set to 0.
+   * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
    */
 
+  <if(hasGeneric)>
   @SuppressWarnings("unchecked")
   public static \<A, B> <matrixType>\<A, B> identity()
   {
     return (<matrixType>\<A, B>) IDENTITY;
   }
+  <else>
+  @SuppressWarnings("unchecked")
+  public static <matrixType> identity()
+  {
+    return IDENTITY;
+  }
+  <endif>
+
 }
 >>

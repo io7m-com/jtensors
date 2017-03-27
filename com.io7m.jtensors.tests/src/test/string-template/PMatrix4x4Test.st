@@ -7,7 +7,8 @@ PMatrix4x4Test(
   generatorType,
   scalarRealType,
   testOpClass,
-  opClass) ::= <<
+  opClass,
+  hasGeneric) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
  *
@@ -24,7 +25,11 @@ PMatrix4x4Test(
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+<if(hasGeneric)>
 package com.io7m.jtensors.tests.core.parameterized.matrices;
+<else>
+package com.io7m.jtensors.tests.core.unparameterized.matrices;
+<endif>
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.jtensors.tests.TestUtilities;
@@ -54,6 +59,18 @@ public final class <className>
   @Rule public PercentagePassRule percent =
     new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
 
+  private static Generator\<<matrixType>\> createGenerator()
+  {
+    final Object o_gen = <generatorType>.create();
+    return (Generator\<<matrixType>\>) o_gen;
+  }
+
+  private static Generator\<<matrixType>\> createGeneratorNormal()
+  {
+    final Object o_gen = <generatorType>.createNormal();
+    return (Generator\<<matrixType>\>) o_gen;
+  }
+
   @Test
   public void testBuilderUnspecified()
   {
@@ -65,11 +82,11 @@ public final class <className>
   @PercentagePassing
   public void testEqualsHashCodeToString()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
-    final <matrixType>\<Object, Object> c = <matrixType>.builder().from(a).build();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
+    final <matrixType> c = <matrixType>.builder().from(a).build();
 
     <testOpClass>.checkObjectEquals(a, a);
     <testOpClass>.checkObjectEquals(a, c);
@@ -92,7 +109,7 @@ public final class <className>
   @Test
   public void testDeterminantIdentity()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), <opClass>.determinant(a));
   }
@@ -104,7 +121,7 @@ public final class <className>
   @Test
   public void testDeterminantZero()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.zero();
+    final <matrixType> a = <opClass>.zero();
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), <opClass>.determinant(a));
   }
@@ -112,9 +129,9 @@ public final class <className>
   @Test
   public void testDeterminantScale()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
-    final <matrixType>\<Object, Object> mr =
+    final <matrixType> mr =
       <matrixType>.builder()
       .from(a).setR0c0(<testOpClass>.constant("2"))
       .build();
@@ -125,9 +142,9 @@ public final class <className>
   @Test
   public void testDeterminantScaleNegative()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
-    final <matrixType>\<Object, Object> mr =
+    final <matrixType> mr =
       <matrixType>.builder()
       .from(a).setR0c0(<testOpClass>.constant("-2"))
       .build();
@@ -143,9 +160,9 @@ public final class <className>
   @PercentagePassing
   public void testDeterminantProduct()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
+    final Generator\<<matrixType>\> gen = createGenerator();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
 
     <testOpClass>.checkAlmostEquals(
       <opClass>.determinant(<opClass>.multiply(a, b)),
@@ -160,11 +177,13 @@ public final class <className>
   @PercentagePassing
   public void testDeterminantInverse()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
-    final <matrixType>\<Object, Object> a = gen.next();
+    final Generator\<<matrixType>\> gen = createGenerator();
+    final <matrixType> a = gen.next();
 
+    final Optional\<<matrixType>\> ia =
+      <opClass>.invert(a);
     final double mr0 =
-      <opClass>.determinant(<opClass>.invert(a).get());
+      <opClass>.determinant(ia.get());
     final double mr1 =
       <testOpClass>.divide(<testOpClass>.constant("1"), <opClass>.determinant(a));
 
@@ -179,9 +198,9 @@ public final class <className>
   @PercentagePassing
   public void testDeterminantScaleExponent()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
     final <scalarRealType> s = gen.next().r0c0();
 
     <testOpClass>.checkEquals(
@@ -197,10 +216,10 @@ public final class <className>
   @PercentagePassing
   public void testDeterminantTranspose()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> mt = <opClass>.transpose(a);
+    final <matrixType> a = gen.next();
+    final <matrixType> mt = <opClass>.transpose(a);
 
     <testOpClass>.checkEquals(<opClass>.determinant(a), <opClass>.determinant(mt));
   }
@@ -209,10 +228,10 @@ public final class <className>
   @PercentagePassing
   public void testOfColumns()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b =
+    final <matrixType> a = gen.next();
+    final <matrixType> b =
       <opClass>.ofColumns(a.column0(), a.column1(), a.column2(), a.column3());
 
     <testOpClass>.checkAlmostEqualsMatrix(a, b);
@@ -222,10 +241,10 @@ public final class <className>
   @PercentagePassing
   public void testOfRows()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b =
+    final <matrixType> a = gen.next();
+    final <matrixType> b =
       <opClass>.ofRows(a.row0(), a.row1(), a.row2(), a.row3());
 
     <testOpClass>.checkAlmostEqualsMatrix(a, b);
@@ -255,31 +274,29 @@ public final class <className>
   }
 
   /**
-   * ∀ a b. invert(multiply(a, b)) == multiply(invert(a), invert(b))
+   * ∀ a b. invert(multiply(a, b)) == multiply(invert(b), invert(a))
    */
 
   @Test
   @PercentagePassing
   public void testInvertProduct()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
 
-    final Optional\<<matrixType>\<Object, Object>\> mr0_opt =
-      <opClass>.invert(<opClass>.multiply(a, b));
-    final Optional\<<matrixType>\<Object, Object>\> mr1_opt =
-      <opClass>.invert(a).flatMap(ia -> {
-        return <opClass>.invert(b).map(ib -> {
-          return <opClass>.multiply(ib, ia);
-        });
-      });
+    final <matrixType> ab =
+      <opClass>.multiply(a, b);
+    final Optional\<<matrixType>\> mr0_opt =
+      <opClass>.invert(ab);
 
-    Assert.assertTrue(mr0_opt.isPresent());
-    Assert.assertTrue(mr1_opt.isPresent());
+    final Optional\<<matrixType>\> ia_opt = <opClass>.invert(a);
+    final Optional\<<matrixType>\> ib_opt = <opClass>.invert(b);
+    final <matrixType> ia = ia_opt.get();
+    final <matrixType> ib = ib_opt.get();
 
-    final <matrixType>\<Object, Object> mr0 = mr0_opt.get();
-    final <matrixType>\<Object, Object> mr1 = mr1_opt.get();
+    final <matrixType> mr1 = <opClass>.multiply(ib, ia);
+    final <matrixType> mr0 = mr0_opt.get();
 
     <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
   }
@@ -292,17 +309,11 @@ public final class <className>
   @PercentagePassing
   public void testInvertMultiplyIdentity()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
-
-    final Optional\<<matrixType>\<Object, Object>\> mr0_opt =
-      <opClass>.invert(a).map(aa -> {
-        return <opClass>.multiply(a, aa);
-      });
-
-    Assert.assertTrue(mr0_opt.isPresent());
-
-    final <matrixType>\<Object, Object> mr0 = mr0_opt.get();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
+    final Optional\<<matrixType>\> ia_opt = <opClass>.invert(a);
+    final <matrixType> ia = ia_opt.get();
+    final <matrixType> mr0 = <opClass>.multiply(a, ia);
     <testOpClass>.checkAlmostEqualsMatrix(<opClass>.identity(), mr0);
   }
 
@@ -314,21 +325,17 @@ public final class <className>
   @PercentagePassing
   public void testInvertTranspose()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
 
-    final Optional\<<matrixType>\<Object, Object>\> mr0_opt =
-      <opClass>.invert(a).map(aa -> {
-        return <opClass>.transpose(aa);
-      });
-    final Optional\<<matrixType>\<Object, Object>\> mr1_opt =
-      <opClass>.invert(<opClass>.transpose(a));
+    final Optional\<<matrixType>\> ia_opt = <opClass>.invert(a);
+    final <matrixType> ia = ia_opt.get();
+    final <matrixType> mr0 = <opClass>.transpose(ia);
 
-    Assert.assertTrue(mr0_opt.isPresent());
-    Assert.assertTrue(mr1_opt.isPresent());
+    final <matrixType> a_tr = <opClass>.transpose(a);
+    final Optional\<<matrixType>\> mr1_opt = <opClass>.invert(a_tr);
+    final <matrixType> mr1 = mr1_opt.get();
 
-    final <matrixType>\<Object, Object> mr0 = mr0_opt.get();
-    final <matrixType>\<Object, Object> mr1 = mr1_opt.get();
     <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
   }
 
@@ -340,10 +347,10 @@ public final class <className>
   @PercentagePassing
   public void testMultiplyIdentity0()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
 
-    final <matrixType>\<Object, Object> mr0 =
+    final <matrixType> mr0 =
       <opClass>.multiply(a, <opClass>.identity());
 
     <testOpClass>.checkAlmostEqualsMatrix(a, mr0);
@@ -357,10 +364,10 @@ public final class <className>
   @PercentagePassing
   public void testMultiplyIdentity1()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
 
-    final <matrixType>\<Object, Object> mr0 =
+    final <matrixType> mr0 =
       <opClass>.multiply(<opClass>.identity(), a);
 
     <testOpClass>.checkAlmostEqualsMatrix(a, mr0);
@@ -374,10 +381,10 @@ public final class <className>
   @PercentagePassing
   public void testMultiplyZero0()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
 
-    final <matrixType>\<Object, Object> mr0 =
+    final <matrixType> mr0 =
       <opClass>.multiply(a, <opClass>.zero());
 
     <testOpClass>.checkAlmostEqualsMatrix(<opClass>.zero(), mr0);
@@ -391,10 +398,10 @@ public final class <className>
   @PercentagePassing
   public void testMultiplyZero1()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
 
-    final <matrixType>\<Object, Object> mr0 =
+    final <matrixType> mr0 =
       <opClass>.multiply(<opClass>.zero(), a);
 
     <testOpClass>.checkAlmostEqualsMatrix(<opClass>.zero(), mr0);
@@ -408,14 +415,14 @@ public final class <className>
   @PercentagePassing
   public void testMultiplyAssociative()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
-    final <matrixType>\<Object, Object> c = gen.next();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
+    final <matrixType> c = gen.next();
 
-    final <matrixType>\<Object, Object> mr0 =
+    final <matrixType> mr0 =
       <opClass>.multiply(a, <opClass>.multiply(b, c));
-    final <matrixType>\<Object, Object> mr1 =
+    final <matrixType> mr1 =
       <opClass>.multiply(<opClass>.multiply(a, b), c);
 
     <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
@@ -429,14 +436,14 @@ public final class <className>
   @PercentagePassing
   public void testMultiplyAddDistributive0()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
-    final <matrixType>\<Object, Object> c = gen.next();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
+    final <matrixType> c = gen.next();
 
-    final <matrixType>\<Object, Object> mr0 =
+    final <matrixType> mr0 =
       <opClass>.multiply(a, <opClass>.add(b, c));
-    final <matrixType>\<Object, Object> mr1 =
+    final <matrixType> mr1 =
       <opClass>.add(<opClass>.multiply(a, b), <opClass>.multiply(a, c));
 
     <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
@@ -450,14 +457,14 @@ public final class <className>
   @PercentagePassing
   public void testMultiplyAddDistributive1()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
-    final <matrixType>\<Object, Object> c = gen.next();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
+    final <matrixType> c = gen.next();
 
-    final <matrixType>\<Object, Object> mr0 =
+    final <matrixType> mr0 =
       <opClass>.multiply(<opClass>.add(b, c), a);
-    final <matrixType>\<Object, Object> mr1 =
+    final <matrixType> mr1 =
       <opClass>.add(<opClass>.multiply(b, a), <opClass>.multiply(c, a));
 
     <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
@@ -471,15 +478,15 @@ public final class <className>
   @PercentagePassing
   public void testMultiplyScale0()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
-    final <matrixType>\<Object, Object> c = gen.next();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
+    final <matrixType> c = gen.next();
     final <scalarRealType> s = gen.next().r0c0();
 
-    final <matrixType>\<Object, Object> mr0 =
+    final <matrixType> mr0 =
       <opClass>.scale(<opClass>.multiply(a, b), s);
-    final <matrixType>\<Object, Object> mr1 =
+    final <matrixType> mr1 =
       <opClass>.multiply(<opClass>.scale(a, s), b);
 
     <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
@@ -493,15 +500,15 @@ public final class <className>
   @PercentagePassing
   public void testMultiplyScale1()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
-    final <matrixType>\<Object, Object> c = gen.next();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
+    final <matrixType> c = gen.next();
     final <scalarRealType> s = gen.next().r0c0();
 
-    final <matrixType>\<Object, Object> mr0 =
+    final <matrixType> mr0 =
       <opClass>.multiply(<opClass>.scale(a, s), b);
-    final <matrixType>\<Object, Object> mr1 =
+    final <matrixType> mr1 =
       <opClass>.multiply(a, <opClass>.scale(b, s));
 
     <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
@@ -515,10 +522,10 @@ public final class <className>
   @PercentagePassing
   public void testTransposeTranspose()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = <opClass>.transpose(<opClass>.transpose(a));
+    final <matrixType> a = gen.next();
+    final <matrixType> b = <opClass>.transpose(<opClass>.transpose(a));
 
     <testOpClass>.checkObjectEquals(a, b);
   }
@@ -531,14 +538,14 @@ public final class <className>
   @PercentagePassing
   public void testTransposeAdd()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
 
-    final <matrixType>\<Object, Object> mr0 =
+    final <matrixType> mr0 =
       <opClass>.transpose(<opClass>.add(a, b));
-    final <matrixType>\<Object, Object> mr1 =
+    final <matrixType> mr1 =
       <opClass>.add(<opClass>.transpose(a), <opClass>.transpose(b));
 
     <testOpClass>.checkObjectEquals(mr0, mr1);
@@ -552,13 +559,13 @@ public final class <className>
   @PercentagePassing
   public void testTransposeProduct()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
+    final Generator\<<matrixType>\> gen = createGenerator();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
 
-    final <matrixType>\<Object, Object> mr0 =
+    final <matrixType> mr0 =
       <opClass>.transpose(<opClass>.multiply(a, b));
-    final <matrixType>\<Object, Object> mr1 =
+    final <matrixType> mr1 =
       <opClass>.multiply(<opClass>.transpose(b), <opClass>.transpose(a));
 
     <testOpClass>.checkObjectEquals(mr0, mr1);
@@ -571,7 +578,7 @@ public final class <className>
   @Test
   public void testTraceIdentity()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     <testOpClass>.checkEquals(<testOpClass>.constant("4"), <opClass>.trace(a));
   }
@@ -584,10 +591,10 @@ public final class <className>
   @PercentagePassing
   public void testTraceAdd()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
 
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
 
     final <scalarRealType> mr0 =
       <opClass>.trace(<opClass>.add(a, b));
@@ -605,10 +612,10 @@ public final class <className>
   @PercentagePassing
   public void testTraceProduct()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
 
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
 
     final <scalarRealType> mr0 =
       <opClass>.trace(<opClass>.multiply(a, b));
@@ -626,9 +633,9 @@ public final class <className>
   @PercentagePassing
   public void testTraceTranspose()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
 
     <testOpClass>.checkEquals(
       <opClass>.trace(a),
@@ -643,9 +650,9 @@ public final class <className>
   @PercentagePassing
   public void testTraceScale()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.createNormal();
+    final Generator\<<matrixType>\> gen = createGeneratorNormal();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
     final <scalarRealType> s = gen.next().r0c0();
 
     <testOpClass>.checkAlmostEquals(
@@ -656,7 +663,7 @@ public final class <className>
   @Test
   public void testZero()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.zero();
+    final <matrixType> a = <opClass>.zero();
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r0c0());
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r0c1());
@@ -702,7 +709,7 @@ public final class <className>
   @Test
   public void testIdentity()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), a.r0c0());
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r0c1());
@@ -749,11 +756,11 @@ public final class <className>
   @PercentagePassing
   public void testAdd()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
-    final <matrixType>\<Object, Object> c = <opClass>.add(a, b);
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
+    final <matrixType> c = <opClass>.add(a, b);
 
     for (int row = 0; row \< 4; ++row) {
       for (int column = 0; column \< 4; ++column) {
@@ -770,11 +777,11 @@ public final class <className>
   @PercentagePassing
   public void testSubtract()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
-    final <matrixType>\<Object, Object> b = gen.next();
-    final <matrixType>\<Object, Object> c = <opClass>.subtract(a, b);
+    final <matrixType> a = gen.next();
+    final <matrixType> b = gen.next();
+    final <matrixType> c = <opClass>.subtract(a, b);
 
     for (int row = 0; row \< 4; ++row) {
       for (int column = 0; column \< 4; ++column) {
@@ -791,11 +798,11 @@ public final class <className>
   @PercentagePassing
   public void testScale()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
     final <scalarRealType> s = gen.next().r0c0();
-    final <matrixType>\<Object, Object> mr = <opClass>.scale(a, s);
+    final <matrixType> mr = <opClass>.scale(a, s);
 
     for (int row = 0; row \< 4; ++row) {
       for (int column = 0; column \< 4; ++column) {
@@ -811,9 +818,9 @@ public final class <className>
   @PercentagePassing
   public void testRowColumnAccess()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
 
     {
       final <vectorRowType> row0 = a.row0();
@@ -923,9 +930,9 @@ public final class <className>
   @PercentagePassing
   public void testWithColumn0()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
 
     {
       final <vectorRowType> row0 = a.row0();
@@ -977,7 +984,7 @@ public final class <className>
       <testOpClass>.checkAlmostEquals(a.r3c3(), column3.w());
     }
 
-    final <matrixType>\<Object, Object> mr =
+    final <matrixType> mr =
       <opClass>.withColumn(
         a,
         0,
@@ -1061,9 +1068,9 @@ public final class <className>
   @PercentagePassing
   public void testWithColumn1()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
 
     {
       final <vectorRowType> row0 = a.row0();
@@ -1115,7 +1122,7 @@ public final class <className>
       <testOpClass>.checkAlmostEquals(a.r3c3(), column3.w());
     }
 
-    final <matrixType>\<Object, Object> mr =
+    final <matrixType> mr =
       <opClass>.withColumn(
         a,
         1,
@@ -1199,9 +1206,9 @@ public final class <className>
   @PercentagePassing
   public void testWithColumn2()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
 
     {
       final <vectorRowType> row0 = a.row0();
@@ -1253,7 +1260,7 @@ public final class <className>
       <testOpClass>.checkAlmostEquals(a.r3c3(), column3.w());
     }
 
-    final <matrixType>\<Object, Object> mr =
+    final <matrixType> mr =
       <opClass>.withColumn(
         a,
         2,
@@ -1337,9 +1344,9 @@ public final class <className>
   @PercentagePassing
   public void testWithColumn3()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
 
     {
       final <vectorRowType> row0 = a.row0();
@@ -1391,7 +1398,7 @@ public final class <className>
       <testOpClass>.checkAlmostEquals(a.r3c3(), column3.w());
     }
 
-    final <matrixType>\<Object, Object> mr =
+    final <matrixType> mr =
       <opClass>.withColumn(
         a,
         3,
@@ -1475,7 +1482,7 @@ public final class <className>
   @PercentagePassing
   public void testWithColumnM1()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     <opClass>.withColumn(
@@ -1491,7 +1498,7 @@ public final class <className>
   @PercentagePassing
   public void testWithColumn4()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     <opClass>.withColumn(
@@ -1507,9 +1514,9 @@ public final class <className>
   @PercentagePassing
   public void testWithRow0()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
 
     {
       final <vectorRowType> row0 = a.row0();
@@ -1561,7 +1568,7 @@ public final class <className>
       <testOpClass>.checkAlmostEquals(a.r3c3(), column3.w());
     }
 
-    final <matrixType>\<Object, Object> mr =
+    final <matrixType> mr =
       <opClass>.withRow(
         a,
         0,
@@ -1595,9 +1602,9 @@ public final class <className>
   @PercentagePassing
   public void testWithRow1()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
 
     {
       final <vectorRowType> row0 = a.row0();
@@ -1649,7 +1656,7 @@ public final class <className>
       <testOpClass>.checkAlmostEquals(a.r3c3(), column3.w());
     }
 
-    final <matrixType>\<Object, Object> mr =
+    final <matrixType> mr =
       <opClass>.withRow(
         a,
         1,
@@ -1683,9 +1690,9 @@ public final class <className>
   @PercentagePassing
   public void testWithRow2()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
 
     {
       final <vectorRowType> row0 = a.row0();
@@ -1737,7 +1744,7 @@ public final class <className>
       <testOpClass>.checkAlmostEquals(a.r3c3(), column3.w());
     }
 
-    final <matrixType>\<Object, Object> mr =
+    final <matrixType> mr =
       <opClass>.withRow(
         a,
         2,
@@ -1771,9 +1778,9 @@ public final class <className>
   @PercentagePassing
   public void testWithRow3()
   {
-    final Generator\<<matrixType>\<Object, Object\>> gen = <generatorType>.create();
+    final Generator\<<matrixType>\> gen = createGenerator();
 
-    final <matrixType>\<Object, Object> a = gen.next();
+    final <matrixType> a = gen.next();
 
     {
       final <vectorRowType> row0 = a.row0();
@@ -1825,7 +1832,7 @@ public final class <className>
       <testOpClass>.checkAlmostEquals(a.r3c3(), column3.w());
     }
 
-    final <matrixType>\<Object, Object> mr =
+    final <matrixType> mr =
       <opClass>.withRow(
         a,
         3,
@@ -1859,7 +1866,7 @@ public final class <className>
   @PercentagePassing
   public void testWithRowM1()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     <opClass>.withRow(
@@ -1875,7 +1882,7 @@ public final class <className>
   @PercentagePassing
   public void testWithRow4()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     <opClass>.withRow(
@@ -1890,7 +1897,7 @@ public final class <className>
   @Test
   public void testRowOutOfRangeM1_0()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(-1, 0);
@@ -1899,7 +1906,7 @@ public final class <className>
   @Test
   public void testRowOutOfRangeM1_1()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(-1, 1);
@@ -1908,7 +1915,7 @@ public final class <className>
   @Test
   public void testRowOutOfRangeM1_2()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(-1, 2);
@@ -1917,7 +1924,7 @@ public final class <className>
   @Test
   public void testRowOutOfRangeM1_3()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(-1, 3);
@@ -1926,7 +1933,7 @@ public final class <className>
   @Test
   public void testRowOutOfRange4_0()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(4, 0);
@@ -1935,7 +1942,7 @@ public final class <className>
   @Test
   public void testRowOutOfRange4_1()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(4, 1);
@@ -1944,7 +1951,7 @@ public final class <className>
   @Test
   public void testRowOutOfRange4_2()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(4, 2);
@@ -1953,7 +1960,7 @@ public final class <className>
   @Test
   public void testRowOutOfRange4_3()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(4, 3);
@@ -1962,7 +1969,7 @@ public final class <className>
   @Test
   public void testColumnOutOfRange0_M1()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(0, -1);
@@ -1971,7 +1978,7 @@ public final class <className>
   @Test
   public void testColumnOutOfRange1_M1()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(1, -1);
@@ -1980,7 +1987,7 @@ public final class <className>
   @Test
   public void testColumnOutOfRange2_M1()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(2, -1);
@@ -1989,7 +1996,7 @@ public final class <className>
   @Test
   public void testColumnOutOfRange3_M1()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(3, -1);
@@ -1998,7 +2005,7 @@ public final class <className>
   @Test
   public void testColumnOutOfRange0_4()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(0, 4);
@@ -2007,7 +2014,7 @@ public final class <className>
   @Test
   public void testColumnOutOfRange1_4()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(1, 4);
@@ -2016,7 +2023,7 @@ public final class <className>
   @Test
   public void testColumnOutOfRange2_4()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(2, 4);
@@ -2025,7 +2032,7 @@ public final class <className>
   @Test
   public void testColumnOutOfRange3_4()
   {
-    final <matrixType>\<Object, Object> a = <opClass>.identity();
+    final <matrixType> a = <opClass>.identity();
 
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(3, 4);

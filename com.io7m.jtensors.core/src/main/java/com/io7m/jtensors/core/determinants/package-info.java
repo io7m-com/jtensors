@@ -14,20 +14,10 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.core.parameterized.matrices;
-
-import com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable2x2DType;
-
 /**
- * The type of 2x2 {@code double}-typed matrices.
- *
- * @param <A> A phantom type parameter (possibly representing a source
- *            coordinate system)
- * @param <B> A phantom type parameter (possibly representing a target
- *            coordinate system)
+ * Functions for calculating determinants.
  */
 
-public interface PMatrixReadable2x2DType<A, B> extends MatrixReadable2x2DType
-{
-  // No extra methods
-}
+@com.io7m.jnull.NonNullByDefault
+package com.io7m.jtensors.core.determinants;
+

@@ -397,7 +397,7 @@
           <!-- Parameterized matrix types -->
           <!-- Double -->
           <execution>
-            <id>generate-M4x4D</id>
+            <id>generate-PM4x4D</id>
             <phase>generate-test-sources</phase>
             <goals>
               <goal>render</goal>
@@ -417,6 +417,37 @@
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnType>
                     <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrices4x4D</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
+                    <hasGeneric>true</hasGeneric>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <!-- Unparameterized matrix types -->
+          <!-- Double -->
+          <execution>
+            <id>generate-M4x4D</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PMatrix4x4Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/unparameterized/matrices/Matrix4x4DTest.java</target>
+                  <properties>
+                    <className>Matrix4x4DTest</className>
+                    <matrixType>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D</matrixType>
+                    <matrixComponentType>double</matrixComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <generatorType>com.io7m.jtensors.generators.Matrix4x4DGenerator</generatorType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnType>
+                    <opClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4D</opClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
                   </properties>
                 </template>

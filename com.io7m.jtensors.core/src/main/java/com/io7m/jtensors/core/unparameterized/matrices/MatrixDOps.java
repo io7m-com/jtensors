@@ -14,14 +14,14 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.core.parameterized.matrices;
+package com.io7m.jtensors.core.unparameterized.matrices;
 
 import com.io7m.jtensors.core.determinants.Determinants;
 import com.io7m.junreachable.UnreachableCodeException;
 
-final class PMatrixDOps
+final class MatrixDOps
 {
-  private PMatrixDOps()
+  private MatrixDOps()
   {
     throw new UnreachableCodeException();
   }
