@@ -38,13 +38,6 @@ final class VectorLOps
     return Math.addExact(value0, value1);
   }
 
-  static long addLarge(
-    final long value0,
-    final long value1)
-  {
-    return Math.addExact(value0, value1);
-  }
-
   static long subtract(
     final long value0,
     final long value1)
@@ -71,13 +64,6 @@ final class VectorLOps
     final double value1)
   {
     return value0 * value1;
-  }
-
-  static long multiplyLarge(
-    final long value0,
-    final long value1)
-  {
-    return Math.multiplyExact(value0, value1);
   }
 
   static long zero()

@@ -38,13 +38,6 @@ final class PVectorFOps
     return (value0 + value1);
   }
 
-  static double addLarge(
-    final double value0,
-    final double value1)
-  {
-    return (value0 + value1);
-  }
-
   static double subtract(
     final double value0,
     final double value1)
@@ -57,13 +50,6 @@ final class PVectorFOps
     final double value1)
   {
     return value0 - value1;
-  }
-
-  static double multiplyLarge(
-    final double value0,
-    final double value1)
-  {
-    return value0 * value1;
   }
 
   static double multiplyReal(

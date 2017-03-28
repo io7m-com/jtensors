@@ -38,13 +38,6 @@ final class PVectorIOps
     return Math.addExact(value0, value1);
   }
 
-  static long addLarge(
-    final long x,
-    final long y)
-  {
-    return Math.addExact(x, y);
-  }
-
   static int subtract(
     final int value0,
     final int value1)
@@ -71,13 +64,6 @@ final class PVectorIOps
     final double value1)
   {
     return value0 * value1;
-  }
-
-  static long multiplyLarge(
-    final int value0,
-    final int value1)
-  {
-    return (long) value0 * (long) value1;
   }
 
   static int zero()
