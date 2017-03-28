@@ -53,25 +53,31 @@ public final class <className>
   @Rule public PercentagePassRule percent =
     new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
 
+  private static Generator\<<vectorType>\> createGenerator()
+  {
+    final Object o_gen = <generatorType>.create();
+    return (Generator\<<vectorType>\>) o_gen;
+  }
+
   @Test
   public void testEqualsHashCodeToString()
   {
-    final <vectorType>\<Object> v0 =
+    final <vectorType> v0 =
       <vectorType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"));
 
-    final <vectorType>\<Object> v1 =
+    final <vectorType> v1 =
       <vectorType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"));
 
-    final <vectorType>\<Object> v2 =
+    final <vectorType> v2 =
       <vectorType>.of(
         <testOpClass>.constant("10"),
         <testOpClass>.constant("1"));
 
-    final <vectorType>\<Object> v3 =
+    final <vectorType> v3 =
       <vectorType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("11"));
@@ -98,7 +104,7 @@ public final class <className>
   @Test
   public void testBuilder()
   {
-    final <vectorType>\<Object> v0 =
+    final <vectorType> v0 =
       <vectorType>.builder()
       .setX(<testOpClass>.constant("0"))
       .setY(<testOpClass>.constant("1"))
@@ -108,7 +114,7 @@ public final class <className>
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), v0.y());
 
     {
-      final <vectorType>\<Object> v1 =
+      final <vectorType> v1 =
         <vectorType>.builder()
         .from(v0)
         .build();
@@ -116,7 +122,7 @@ public final class <className>
     }
 
     {
-      final <vectorType>\<Object> v1 =
+      final <vectorType> v1 =
         <vectorType>.builder()
         .from((<vectorReadable2Type>) v0)
         .build();
@@ -129,7 +135,7 @@ public final class <className>
   {
     this.expected.expect(IllegalStateException.class);
 
-    final <vectorType>\<Object> v0 =
+    final <vectorType> v0 =
       <vectorType>.builder()
       .build();
 
@@ -140,10 +146,10 @@ public final class <className>
   @PercentagePassing
   public void testAbsolute()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+    final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType>\<Object> v0 = gen.next();
-    final <vectorType>\<Object> v1 = <opClass>.absolute(v0);
+    final <vectorType> v0 = gen.next();
+    final <vectorType> v1 = <opClass>.absolute(v0);
 
     <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.absolute(v0.x());
     <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.absolute(v0.y());
@@ -156,14 +162,14 @@ public final class <className>
   @PercentagePassing
   public void testAdd()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
-    final <vectorType>\<Object> v0 = gen.next();
-    final <vectorType>\<Object> v1 = gen.next();
+    final Generator\<<vectorType>\> gen = createGenerator();
+    final <vectorType> v0 = gen.next();
+    final <vectorType> v1 = gen.next();
 
     <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), v1.x());
     <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), v1.y());
 
-    final <vectorType>\<Object> v2 = <opClass>.add(v0, v1);
+    final <vectorType> v2 = <opClass>.add(v0, v1);
     <testOpClass>.checkAlmostEquals(ex, v2.x());
     <testOpClass>.checkAlmostEquals(ey, v2.y());
   }
@@ -172,10 +178,10 @@ public final class <className>
   @PercentagePassing
   public void testAddScaled()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+    final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType>\<Object> v0 = gen.next();
-    final <vectorType>\<Object> v1 = gen.next();
+    final <vectorType> v0 = gen.next();
+    final <vectorType> v1 = gen.next();
     final <scalarRealType> r = gen.next().x();
 
     <vectorComponentType> mx = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.x(), r);
@@ -184,7 +190,7 @@ public final class <className>
     <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), mx);
     <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), my);
 
-    final <vectorType>\<Object> v2 = <opClass>.addScaled(v0, v1, r);
+    final <vectorType> v2 = <opClass>.addScaled(v0, v1, r);
     <testOpClass>.checkAlmostEquals(ex, v2.x());
     <testOpClass>.checkAlmostEquals(ey, v2.y());
   }
@@ -193,9 +199,9 @@ public final class <className>
   @PercentagePassing
   public void testAngle()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
-    final <vectorType>\<Object> v0 = gen.next();
-    final <vectorType>\<Object> v1 = gen.next();
+    final Generator\<<vectorType>\> gen = createGenerator();
+    final <vectorType> v0 = gen.next();
+    final <vectorType> v1 = gen.next();
 
     <scalarRealType> r = <opClass>.angle(v0, v1);
 
@@ -207,9 +213,9 @@ public final class <className>
   @PercentagePassing(passPercent = 80.0)
   public void testDotProductSelfMagnitudeSquared()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+    final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType>\<Object> v0 = gen.next();
+    final <vectorType> v0 = gen.next();
 
     <testOpClass>.checkAlmostEquals(
       <opClass>.magnitudeSquared(v0),
@@ -220,18 +226,18 @@ public final class <className>
   @PercentagePassing
   public void testInterpolateLinearLimits()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+    final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType>\<Object> v0 = gen.next();
-    final <vectorType>\<Object> v1 = gen.next();
+    final <vectorType> v0 = gen.next();
+    final <vectorType> v1 = gen.next();
 
-    final <vectorType>\<Object> v2 =
+    final <vectorType> v2 =
       <opClass>.interpolateLinear(v0, v1, <testOpClass>.constant("0"));
 
     <testOpClass>.checkAlmostEquals(v0.x(), v2.x());
     <testOpClass>.checkAlmostEquals(v0.y(), v2.y());
 
-    final <vectorType>\<Object> v3 =
+    final <vectorType> v3 =
       <opClass>.interpolateLinear(v0, v1, <testOpClass>.constant("1"));
 
     <testOpClass>.checkAlmostEquals(v1.x(), v3.x());
@@ -265,10 +271,10 @@ public final class <className>
   @PercentagePassing
   public void testMagnitudeNormalizeOne()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+    final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType>\<Object> v0 = gen.next();
-    final <vectorType>\<Object> vn = <opClass>.normalize(v0);
+    final <vectorType> v0 = gen.next();
+    final <vectorType> vn = <opClass>.normalize(v0);
     final <scalarRealType> m = <opClass>.magnitude(vn);
 
     if (<testOpClass>.compareReal(m, <testOpClass>.constant("0")) > 0) {
@@ -283,15 +289,15 @@ public final class <className>
   @PercentagePassing
   public void testScale()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+    final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType>\<Object> v0 = gen.next();
+    final <vectorType> v0 = gen.next();
     final <scalarRealType> r = gen.next().x();
 
     <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.x(), r);
     <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.y(), r);
 
-    final <vectorType>\<Object> v2 = <opClass>.scale(v0, r);
+    final <vectorType> v2 = <opClass>.scale(v0, r);
     <testOpClass>.checkAlmostEquals(ex, v2.x());
     <testOpClass>.checkAlmostEquals(ey, v2.y());
   }
@@ -300,10 +306,10 @@ public final class <className>
   @PercentagePassing
   public void testScaleZero()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+    final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType>\<Object> v0 = gen.next();
-    final <vectorType>\<Object> v1 = <opClass>.scale(v0, <testOpClass>.constant("0"));
+    final <vectorType> v0 = gen.next();
+    final <vectorType> v1 = <opClass>.scale(v0, <testOpClass>.constant("0"));
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.x());
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.y());
   }
@@ -312,10 +318,10 @@ public final class <className>
   @PercentagePassing
   public void testScaleOne()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+    final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType>\<Object> v0 = gen.next();
-    final <vectorType>\<Object> v1 = <opClass>.scale(v0, <testOpClass>.constant("1"));
+    final <vectorType> v0 = gen.next();
+    final <vectorType> v1 = <opClass>.scale(v0, <testOpClass>.constant("1"));
     Assert.assertEquals(v0, v1);
   }
 
@@ -323,15 +329,15 @@ public final class <className>
   @PercentagePassing
   public void testSubtract()
   {
-    final Generator\<<vectorType>\<Object\>> gen = <generatorType>.create();
+    final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType>\<Object> v0 = gen.next();
-    final <vectorType>\<Object> v1 = gen.next();
+    final <vectorType> v0 = gen.next();
+    final <vectorType> v1 = gen.next();
 
     <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.subtract(v0.x(), v1.x());
     <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.subtract(v0.y(), v1.y());
 
-    final <vectorType>\<Object> v2 = <opClass>.subtract(v0, v1);
+    final <vectorType> v2 = <opClass>.subtract(v0, v1);
     <testOpClass>.checkAlmostEquals(ex, v2.x());
     <testOpClass>.checkAlmostEquals(ey, v2.y());
   }

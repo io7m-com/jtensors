@@ -6,7 +6,8 @@ PVector2(
   scalarRealType,
   opClass,
   dotProductClass,
-  hasFloatingPoint) ::= <<
+  hasFloatingPoint,
+  hasGeneric) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
  *
@@ -23,7 +24,11 @@ PVector2(
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+<if(hasGeneric)>
 package com.io7m.jtensors.core.parameterized.vectors;
+<else>
+package com.io7m.jtensors.core.unparameterized.vectors;
+<endif>
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.junreachable.UnreachableCodeException;
@@ -34,13 +39,12 @@ import com.io7m.junreachable.UnreachableCodeException;
  * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed
  * for the derivations of most of the code in this class (ISBN: 1-58450-277-0).
  * \</p>
- * @param \<T> A phantom type parameter
  * @since 8.0.0
  */
 
-public final class <className>\<T>
+public final class <className>
 {
-  private static final <vectorType>\<?> ZERO;
+  private static final <vectorType><if(hasGeneric)>\<?><endif> ZERO;
 
   static {
     final <vectorComponentType> z = (<vectorComponentType>) <opClass>.zero();
@@ -56,12 +60,22 @@ public final class <className>\<T>
    * Calculate the absolute of {@code v0}.
    *
    * @return {@code (abs v0.x, abs v0.y) }
+   * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
+   * <endif>
    * @param v0 The vector
    */
 
-  public static \<T> <vectorType>\<T> absolute(
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T>
+  absolute(
     final <vectorType>\<T> v0)
+  <else>
+  <vectorType>
+  absolute(
+    final <vectorType> v0)
+  <endif>
   {
     return <vectorType>.of(
       (<vectorComponentType>) <opClass>.absolute(v0.x()),
@@ -72,14 +86,23 @@ public final class <className>\<T>
    * Add {@code v0} to {@code v1}.
    *
    * @return {@code (v0.x + v1.x, v0.y + v0.y) }
+   * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
+   * <endif>
    * @param v0 The left vector
    * @param v1 The right vector
    */
 
-  public static \<T> <vectorType>\<T> add(
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T> add(
     final <vectorType>\<T> v0,
     final <vectorType>\<T> v1)
+  <else>
+  <vectorType> add(
+    final <vectorType> v0,
+    final <vectorType> v1)
+  <endif>
   {
     return <vectorType>.of(
       (<vectorComponentType>) <opClass>.add(v0.x(), v1.x()),
@@ -91,16 +114,28 @@ public final class <className>\<T>
    * Add {@code v0} to {@code v1 * r}.
    *
    * @return {@code (v0.x + (v1.x * r), v0.y + (v0.y * r)) }
+   * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
+   * <endif>
    * @param v0 The left vector
    * @param v1 The right vector
    * @param r The scaling value
    */
 
-  public static \<T> <vectorType>\<T> addScaled(
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T>
+  addScaled(
     final <vectorType>\<T> v0,
     final <vectorType>\<T> v1,
     final <scalarRealType> r)
+  <else>
+  <vectorType>
+  addScaled(
+    final <vectorType> v0,
+    final <vectorType> v1,
+    final <scalarRealType> r)
+  <endif>
   {
     return add(v0, scale(v1, r));
   }
@@ -111,13 +146,22 @@ public final class <className>\<T>
    *
    * @param v0 The left input vector
    * @param v1 The right input vector
+   * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
+   * <endif>
    * @return The angle between the two vectors, in radians.
    */
 
-  public static \<T> <scalarRealType> angle(
+  public static
+  <if(hasGeneric)>
+  \<T> <scalarRealType> angle(
     final <vectorType>\<T> v0,
     final <vectorType>\<T> v1)
+  <else>
+  <scalarRealType> angle(
+    final <vectorType> v0,
+    final <vectorType> v1)
+  <endif>
   {
     final <scalarRealType> m0 = magnitude(v0);
     final <scalarRealType> m1 = magnitude(v1);
@@ -131,15 +175,26 @@ public final class <className>\<T>
   /**
    * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
    *
+   * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
+   * <endif>
    * @param v0 The left vector
    * @param v1 The right vector
    * @return The scalar product of the two vectors
    */
 
-  public static \<T> <scalarLargeType> dotProduct(
+  public static
+  <if(hasGeneric)>
+  \<T> <scalarLargeType>
+  dotProduct(
     final <vectorType>\<T> v0,
     final <vectorType>\<T> v1)
+  <else>
+  <scalarLargeType>
+  dotProduct(
+    final <vectorType> v0,
+    final <vectorType> v1)
+  <endif>
   {
     return <dotProductClass>.dotProduct2(
       v0.x(), v0.y(),
@@ -159,30 +214,54 @@ public final class <className>\<T>
    * @param v0    The left input vector
    * @param v1    The right input vector
    * @param alpha The interpolation value in the range {@code [0, 1]}
-   *
+   * <if(hasGeneric)>
+   * @param \<T> A phantom type parameter
+   * <endif>
    * @return {@code ((1 - alpha) * v0) + (alpha * v1)}
    */
 
-  public static \<T> <vectorType>\<T> interpolateLinear(
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T>
+  interpolateLinear(
     final <vectorType>\<T> v0,
     final <vectorType>\<T> v1,
     final <scalarRealType> alpha)
+  <else>
+  <vectorType>
+  interpolateLinear(
+    final <vectorType> v0,
+    final <vectorType> v1,
+    final <scalarRealType> alpha)
+  <endif>
   {
-    final <vectorType>\<T> v0_r = scale(v0, <opClass>.subtractReal(<opClass>.one(), alpha));
-    final <vectorType>\<T> v1_r = scale(v1, alpha);
+    final <vectorType><if(hasGeneric)>\<T><endif> v0_r =
+      scale(v0, <opClass>.subtractReal(<opClass>.one(), alpha));
+    final <vectorType><if(hasGeneric)>\<T><endif> v1_r =
+      scale(v1, alpha);
     return add(v0_r, v1_r);
   }
 
   /**
    * Calculate the squared magnitude of the vector {@code v0}.
    *
+   * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
+   * <endif>
    * @param v0 The vector
    * @return The squared magnitude of the vector
    */
 
-  public static \<T> <scalarLargeType> magnitudeSquared(
+  public static
+  <if(hasGeneric)>
+  \<T> <scalarLargeType>
+  magnitudeSquared(
     final <vectorType>\<T> v0)
+  <else>
+  <scalarLargeType>
+  magnitudeSquared(
+    final <vectorType> v0)
+  <endif>
   {
     return dotProduct(v0, v0);
   }
@@ -190,13 +269,23 @@ public final class <className>\<T>
   /**
    * Calculate the magnitude of the vector {@code v0}.
    *
+   * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
+   * <endif>
    * @param v0 The vector
    * @return The magnitude of the vector
    */
 
-  public static \<T> <scalarRealType> magnitude(
+  public static
+  <if(hasGeneric)>
+  \<T> <scalarRealType>
+  magnitude(
     final <vectorType>\<T> v0)
+  <else>
+  <scalarRealType>
+  magnitude(
+    final <vectorType> v0)
+  <endif>
   {
     return <opClass>.squareRootLarge(magnitudeSquared(v0));
   }
@@ -205,13 +294,23 @@ public final class <className>\<T>
   /**
    * \<p>Normalize the vector {@code v0}.\</p>
    * \<p>If the magnitude of the vector is zero, the function returns {@code v0}.\</p>
+   * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
+   * <endif>
    * @param v0 The vector
    * @return A normalized copy of {@code v0}
    */
 
-  public static \<T> <vectorType>\<T> normalize(
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T>
+  normalize(
     final <vectorType>\<T> v0)
+  <else>
+  <vectorType>
+  normalize(
+    final <vectorType> v0)
+  <endif>
   {
     final <scalarLargeType> m = magnitudeSquared(v0);
     if (<opClass>.compareLarge(m, <opClass>.zero()) > 0) {
@@ -228,14 +327,25 @@ public final class <className>\<T>
    * Scale {@code v0} by {@code r}.
    *
    * @return {@code (v0.x * r, v0.y * r) }
+   * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
+   * <endif>
    * @param v0 The left vector
    * @param r The scaling value
    */
 
-  public static \<T> <vectorType>\<T> scale(
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T>
+  scale(
     final <vectorType>\<T> v0,
     final <scalarRealType> r)
+  <else>
+  <vectorType>
+  scale(
+    final <vectorType> v0,
+    final <scalarRealType> r)
+  <endif>
   {
     return <vectorType>.of(
       (<vectorComponentType>) <opClass>.multiplyReal(v0.x(), r),
@@ -246,14 +356,25 @@ public final class <className>\<T>
    * Subtract {@code v1} from {@code v0}.
    *
    * @return {@code (v0.x - v1.x, v0.y - v0.y) }
+   * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
+   * <endif>
    * @param v0 The left vector
    * @param v1 The right vector
    */
 
-  public static \<T> <vectorType>\<T> subtract(
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T>
+  subtract(
     final <vectorType>\<T> v0,
     final <vectorType>\<T> v1)
+  <else>
+  <vectorType>
+  subtract(
+    final <vectorType> v0,
+    final <vectorType> v1)
+  <endif>
   {
     return <vectorType>.of(
       (<vectorComponentType>) <opClass>.subtract(v0.x(), v1.x()),
@@ -264,13 +385,22 @@ public final class <className>\<T>
    * The zero vector.
    *
    * @return {@code (0, 0) }
+   * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
+   * <endif>
    */
 
+  <if(hasGeneric)>
   @SuppressWarnings("unchecked")
   public static \<T> <vectorType>\<T> zero()
   {
     return (<vectorType>\<T>) ZERO;
   }
+  <else>
+  public static <vectorType> zero()
+  {
+    return (<vectorType>) ZERO;
+  }
+  <endif>
 }
 >>

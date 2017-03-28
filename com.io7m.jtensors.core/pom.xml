@@ -74,6 +74,7 @@
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorDOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
+                    <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
               </templates>
@@ -100,6 +101,7 @@
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorDOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
+                    <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
               </templates>
@@ -126,6 +128,7 @@
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorDOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
+                    <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
               </templates>
@@ -154,6 +157,7 @@
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorFOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
+                    <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
               </templates>
@@ -180,6 +184,7 @@
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorFOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
+                    <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
               </templates>
@@ -206,6 +211,7 @@
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorFOps</opClass>
                     <hasFloatingPoint>true</hasFloatingPoint>
+                    <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
               </templates>
@@ -233,6 +239,7 @@
                     <scalarRealType>double</scalarRealType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsLong</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorLOps</opClass>
+                    <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
               </templates>
@@ -258,6 +265,7 @@
                     <scalarRealType>double</scalarRealType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsLong</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorLOps</opClass>
+                    <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
               </templates>
@@ -283,6 +291,7 @@
                     <scalarRealType>double</scalarRealType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsLong</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorLOps</opClass>
+                    <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
               </templates>
@@ -310,6 +319,7 @@
                     <scalarRealType>double</scalarRealType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsInt</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorIOps</opClass>
+                    <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
               </templates>
@@ -335,6 +345,7 @@
                     <scalarRealType>double</scalarRealType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsInt</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorIOps</opClass>
+                    <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
               </templates>
@@ -360,6 +371,322 @@
                     <scalarRealType>double</scalarRealType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsInt</dotProductClass>
                     <opClass>com.io7m.jtensors.core.parameterized.vectors.PVectorIOps</opClass>
+                    <hasGeneric>true</hasGeneric>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <!-- Unparameterized vector types -->
+          <!-- Doubles -->
+          <execution>
+            <id>generate-4D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors4D.java</target>
+                  <properties>
+                    <className>Vectors4D</className>
+                    <vectorType>Vector4D</vectorType>
+                    <vectorComponentType>double</vectorComponentType>
+                    <scalarLargeType>double</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorDOps</opClass>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-3D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector3</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors3D.java</target>
+                  <properties>
+                    <className>Vectors3D</className>
+                    <vectorType>Vector3D</vectorType>
+                    <vectorComponentType>double</vectorComponentType>
+                    <scalarLargeType>double</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorDOps</opClass>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-2D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors2D.java</target>
+                  <properties>
+                    <className>Vectors2D</className>
+                    <vectorType>Vector2D</vectorType>
+                    <vectorComponentType>double</vectorComponentType>
+                    <scalarLargeType>double</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorDOps</opClass>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <!-- Floats -->
+          <execution>
+            <id>generate-4F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors4F.java</target>
+                  <properties>
+                    <className>Vectors4F</className>
+                    <vectorType>Vector4F</vectorType>
+                    <vectorComponentType>float</vectorComponentType>
+                    <scalarLargeType>double</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorFOps</opClass>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-3F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector3</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors3F.java</target>
+                  <properties>
+                    <className>Vectors3F</className>
+                    <vectorType>Vector3F</vectorType>
+                    <vectorComponentType>float</vectorComponentType>
+                    <scalarLargeType>double</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorFOps</opClass>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-2F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors2F.java</target>
+                  <properties>
+                    <className>Vectors2F</className>
+                    <vectorType>Vector2F</vectorType>
+                    <vectorComponentType>float</vectorComponentType>
+                    <scalarLargeType>double</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorFOps</opClass>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <!-- Longs -->
+          <execution>
+            <id>generate-4L</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors4L.java</target>
+                  <properties>
+                    <className>Vectors4L</className>
+                    <vectorType>Vector4L</vectorType>
+                    <vectorComponentType>long</vectorComponentType>
+                    <scalarLargeType>long</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsLong</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorLOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-3L</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector3</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors3L.java</target>
+                  <properties>
+                    <className>Vectors3L</className>
+                    <vectorType>Vector3L</vectorType>
+                    <vectorComponentType>long</vectorComponentType>
+                    <scalarLargeType>long</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsLong</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorLOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-2L</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors2L.java</target>
+                  <properties>
+                    <className>Vectors2L</className>
+                    <vectorType>Vector2L</vectorType>
+                    <vectorComponentType>long</vectorComponentType>
+                    <scalarLargeType>long</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsLong</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorLOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+
+          <!-- Ints -->
+          <execution>
+            <id>generate-4I</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors4I.java</target>
+                  <properties>
+                    <className>Vectors4I</className>
+                    <vectorType>Vector4I</vectorType>
+                    <vectorComponentType>int</vectorComponentType>
+                    <scalarLargeType>long</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsInt</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorIOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-3I</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector3</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors3I.java</target>
+                  <properties>
+                    <className>Vectors3I</className>
+                    <vectorType>Vector3I</vectorType>
+                    <vectorComponentType>int</vectorComponentType>
+                    <scalarLargeType>long</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsInt</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorIOps</opClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-2I</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PVector2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/vectors/Vectors2I.java</target>
+                  <properties>
+                    <className>Vectors2I</className>
+                    <vectorType>Vector2I</vectorType>
+                    <vectorComponentType>int</vectorComponentType>
+                    <scalarLargeType>long</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsInt</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.unparameterized.vectors.VectorIOps</opClass>
                   </properties>
                 </template>
               </templates>

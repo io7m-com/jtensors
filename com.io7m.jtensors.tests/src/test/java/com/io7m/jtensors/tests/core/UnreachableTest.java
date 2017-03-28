@@ -34,6 +34,18 @@ import com.io7m.jtensors.core.parameterized.vectors.PVectors4F;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors4I;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors4L;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4D;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors2D;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors2F;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors2I;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors2L;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors3D;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors3F;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors3I;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors3L;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors4D;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors4F;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors4I;
+import com.io7m.jtensors.core.unparameterized.vectors.Vectors4L;
 import com.io7m.junreachable.UnreachableCodeException;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -64,7 +76,8 @@ public final class UnreachableTest
   public void testPVectorDOps()
     throws Throwable
   {
-    this.checkUnreachableByName("com.io7m.jtensors.core.parameterized.vectors.PVectorDOps");
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.parameterized.vectors.PVectorDOps");
     Assert.fail();
   }
 
@@ -72,7 +85,8 @@ public final class UnreachableTest
   public void testPVectorFOps()
     throws Throwable
   {
-    this.checkUnreachableByName("com.io7m.jtensors.core.parameterized.vectors.PVectorFOps");
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.parameterized.vectors.PVectorFOps");
     Assert.fail();
   }
 
@@ -80,7 +94,8 @@ public final class UnreachableTest
   public void testPVectorIOps()
     throws Throwable
   {
-    this.checkUnreachableByName("com.io7m.jtensors.core.parameterized.vectors.PVectorIOps");
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.parameterized.vectors.PVectorIOps");
     Assert.fail();
   }
 
@@ -88,7 +103,8 @@ public final class UnreachableTest
   public void testPVectorLOps()
     throws Throwable
   {
-    this.checkUnreachableByName("com.io7m.jtensors.core.parameterized.vectors.PVectorLOps");
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.parameterized.vectors.PVectorLOps");
     Assert.fail();
   }
 
@@ -96,7 +112,8 @@ public final class UnreachableTest
   public void testPMatrixDOps()
     throws Throwable
   {
-    this.checkUnreachableByName("com.io7m.jtensors.core.parameterized.matrices.PMatrixDOps");
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.parameterized.matrices.PMatrixDOps");
     Assert.fail();
   }
 
@@ -104,7 +121,8 @@ public final class UnreachableTest
   public void testMatrixDOps()
     throws Throwable
   {
-    this.checkUnreachableByName("com.io7m.jtensors.core.unparameterized.matrices.MatrixDOps");
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.unparameterized.matrices.MatrixDOps");
     Assert.fail();
   }
 
@@ -251,6 +269,104 @@ public final class UnreachableTest
     this.checkUnreachable(DotProductsLong.class);
     Assert.fail();
   }
+
+
+  @Test
+  public void testVectors4D()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors4D.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectors3D()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors3D.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectors2D()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors2D.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectors4F()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors4F.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectors3F()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors3F.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectors2F()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors2F.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectors4L()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors4L.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectors3L()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors3L.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectors2L()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors2L.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectors4I()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors4I.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectors3I()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors3I.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectors2I()
+    throws Throwable
+  {
+    this.checkUnreachable(Vectors2I.class);
+    Assert.fail();
+  }
+
 
   private void checkUnreachableByName(
     final String c)
