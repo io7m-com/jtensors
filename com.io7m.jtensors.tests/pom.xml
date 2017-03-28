@@ -416,6 +416,9 @@
                     <generatorType>com.io7m.jtensors.generators.PMatrix4x4DGenerator</generatorType>
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.parameterized.vectors.PVector4D</vectorColumnGenericType>
+                    <vectorGeneratorType>com.io7m.jtensors.generators.Vector4DGenerator</vectorGeneratorType>
+                    <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector4DGenerator</vectorGenericGeneratorType>
                     <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrices4x4D</opClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
                     <hasGeneric>true</hasGeneric>
@@ -447,6 +450,9 @@
                     <generatorType>com.io7m.jtensors.generators.Matrix4x4DGenerator</generatorType>
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnGenericType>
+                    <vectorGeneratorType>com.io7m.jtensors.generators.Vector4DGenerator</vectorGeneratorType>
+                    <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector4DGenerator</vectorGenericGeneratorType>
                     <opClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4D</opClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
                   </properties>

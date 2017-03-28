@@ -17,6 +17,9 @@
 package com.io7m.jtensors.tests.core;
 
 import com.io7m.jtensors.core.determinants.Determinants;
+import com.io7m.jtensors.core.dotproducts.DotProductsDouble;
+import com.io7m.jtensors.core.dotproducts.DotProductsInt;
+import com.io7m.jtensors.core.dotproducts.DotProductsLong;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrices4x4D;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors2D;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors2F;
@@ -218,10 +221,34 @@ public final class UnreachableTest
   }
 
   @Test
-  public void testUnreachable()
+  public void testDeterminants()
     throws Throwable
   {
     this.checkUnreachable(Determinants.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testDotProductsDouble()
+    throws Throwable
+  {
+    this.checkUnreachable(DotProductsDouble.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testDotProductsInt()
+    throws Throwable
+  {
+    this.checkUnreachable(DotProductsInt.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testDotProductsLong()
+    throws Throwable
+  {
+    this.checkUnreachable(DotProductsLong.class);
     Assert.fail();
   }
 

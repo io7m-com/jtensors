@@ -5,6 +5,7 @@ PVector4(
   scalarLargeType,
   scalarRealType,
   opClass,
+  dotProductClass,
   hasFloatingPoint) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
@@ -29,7 +30,10 @@ import com.io7m.junreachable.UnreachableCodeException;
 
 /**
  * \<p>Functions over {@link <vectorType>} values.\</p>
- *
+ * \<p>
+ * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed
+ * for the derivations of most of the code in this class (ISBN: 1-58450-277-0).
+ * \</p>
  * @param \<T> A phantom type parameter
  * @since 8.0.0
  */
@@ -117,11 +121,9 @@ public final class <className>\<T>
     final <vectorType>\<T> v0,
     final <vectorType>\<T> v1)
   {
-    final <scalarLargeType> x = <opClass>.multiplyLarge(v0.x(), v1.x());
-    final <scalarLargeType> y = <opClass>.multiplyLarge(v0.y(), v1.y());
-    final <scalarLargeType> z = <opClass>.multiplyLarge(v0.z(), v1.z());
-    final <scalarLargeType> w = <opClass>.multiplyLarge(v0.w(), v1.w());
-    return <opClass>.addLarge(x, <opClass>.addLarge(y, <opClass>.addLarge(z, w)));
+    return <dotProductClass>.dotProduct4(
+      v0.x(), v0.y(), v0.z(), v0.w(),
+      v1.x(), v1.y(), v1.z(), v1.w());
   }
 
   /**

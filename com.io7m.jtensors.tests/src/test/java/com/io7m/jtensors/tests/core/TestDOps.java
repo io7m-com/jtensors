@@ -17,7 +17,9 @@
 package com.io7m.jtensors.tests.core;
 
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D;
+import com.io7m.jtensors.core.parameterized.vectors.PVector4D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
+import com.io7m.jtensors.core.unparameterized.vectors.Vector4D;
 import com.io7m.junreachable.UnreachableCodeException;
 import org.junit.Assert;
 import org.slf4j.Logger;
@@ -120,6 +122,38 @@ public final class TestDOps
     } catch (final AssertionError e) {
       LOG.error("expected: {}", m0);
       LOG.error("received: {}", m1);
+      throw e;
+    }
+  }
+
+  public static void checkAlmostEqualsVector(
+    final PVector4D<?> v0,
+    final PVector4D<?> v1)
+  {
+    try {
+      Assert.assertEquals(v0.x(), v1.x(), 1.0e-10);
+      Assert.assertEquals(v0.y(), v1.y(), 1.0e-10);
+      Assert.assertEquals(v0.z(), v1.z(), 1.0e-10);
+      Assert.assertEquals(v0.w(), v1.w(), 1.0e-10);
+    } catch (final AssertionError e) {
+      LOG.error("expected: {}", v0);
+      LOG.error("received: {}", v1);
+      throw e;
+    }
+  }
+
+  public static void checkAlmostEqualsVector(
+    final Vector4D v0,
+    final Vector4D v1)
+  {
+    try {
+      Assert.assertEquals(v0.x(), v1.x(), 1.0e-10);
+      Assert.assertEquals(v0.y(), v1.y(), 1.0e-10);
+      Assert.assertEquals(v0.z(), v1.z(), 1.0e-10);
+      Assert.assertEquals(v0.w(), v1.w(), 1.0e-10);
+    } catch (final AssertionError e) {
+      LOG.error("expected: {}", v0);
+      LOG.error("received: {}", v1);
       throw e;
     }
   }

@@ -4,7 +4,9 @@ PMatrix4x4(
   matrixComponentType,
   vectorRowType,
   vectorColumnType,
+  vectorColumnGenericType,
   scalarRealType,
+  dotProductClass,
   hasGeneric,
   opClass) ::= <<
 /*
@@ -31,12 +33,16 @@ package com.io7m.jtensors.core.unparameterized.matrices;
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.junreachable.UnreachableCodeException;
+import com.io7m.junreachable.UnimplementedCodeException;
 
 import java.util.Optional;
 
 /**
  * \<p>Functions over {@link <matrixType>} values.\</p>
- *
+ * \<p>
+ * See "Mathematics for 3D Game Programming and Computer Graphics" 2nd Ed
+ * for the derivations of most of the code in this class (ISBN: 1-58450-277-0).
+ * \</p>
  * @since 8.0.0
  */
 
@@ -687,6 +693,85 @@ public final class <className>
     );
   }
 
+  <if(hasGeneric)>
+  /**
+   * \<p>Multiply the vector {@code v} by the matrix {@code m}.\</p>
+   * \<p>This is \<i>post multiplication\</i>.\</p>
+   * @return {@code m * v}
+   * @param m The matrix
+   * @param v The vector
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   */
+
+  public static \<A, B> <vectorColumnGenericType>\<B>
+  multiplyVectorPost(
+    final <matrixType>\<A, B> m,
+    final <vectorColumnGenericType>\<A> v)
+  {
+    final <scalarRealType> vx = v.x();
+    final <scalarRealType> vy = v.y();
+    final <scalarRealType> vz = v.z();
+    final <scalarRealType> vw = v.w();
+
+    final <scalarRealType> x =
+      <dotProductClass>.dotProduct4(
+        m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
+        vx, vy, vz, vw);
+    final <scalarRealType> y =
+      <dotProductClass>.dotProduct4(
+        m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
+        vx, vy, vz, vw);
+    final <scalarRealType> z =
+      <dotProductClass>.dotProduct4(
+        m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
+        vx, vy, vz, vw);
+    final <scalarRealType> w =
+      <dotProductClass>.dotProduct4(
+        m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3(),
+        vx, vy, vz, vw);
+
+    return <vectorColumnGenericType>.of(x, y, z, w);
+  }
+  <endif>
+
+  /**
+   * \<p>Multiply the vector {@code v} by the matrix {@code m}.\</p>
+   * \<p>This is \<i>post multiplication\</i>.\</p>
+   * @return {@code m * v}
+   * @param m The matrix
+   * @param v The vector
+   */
+
+  public static <vectorColumnType> multiplyVectorPost(
+    final <matrixType> m,
+    final <vectorColumnType> v)
+  {
+    final <scalarRealType> vx = v.x();
+    final <scalarRealType> vy = v.y();
+    final <scalarRealType> vz = v.z();
+    final <scalarRealType> vw = v.w();
+
+    final <scalarRealType> x =
+      <dotProductClass>.dotProduct4(
+        m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
+        vx, vy, vz, vw);
+    final <scalarRealType> y =
+      <dotProductClass>.dotProduct4(
+        m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
+        vx, vy, vz, vw);
+    final <scalarRealType> z =
+      <dotProductClass>.dotProduct4(
+        m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
+        vx, vy, vz, vw);
+    final <scalarRealType> w =
+      <dotProductClass>.dotProduct4(
+        m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3(),
+        vx, vy, vz, vw);
+
+    return <vectorColumnType>.of(x, y, z, w);
+  }
+
   /**
    * Construct a matrix from the column vectors {@code (c0, c1, c2, c3)}.
    * @return A constructed matrix
@@ -697,7 +782,6 @@ public final class <className>
    * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
-   * @param \<C> A phantom type parameter (possibly representing a source coordinate system)
    * <endif>
    */
 
@@ -775,6 +859,74 @@ public final class <className>
       r3.y(),
       r3.z(),
       r3.w()
+    );
+  }
+
+  /**
+   * Construct a matrix that will scale by {@code (x, y, z)}.
+   * @return A constructed matrix
+   * @param x The X scaling value
+   * @param y The Y scaling value
+   * @param z The Z scaling value
+   * <if(hasGeneric)>
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
+   */
+
+  public static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  <else>
+  <matrixType>
+  <endif>
+  ofScale(
+    final <scalarRealType> x,
+    final <scalarRealType> y,
+    final <scalarRealType> z)
+  {
+    final <scalarRealType> o = <opClass>.zero();
+    final <scalarRealType> s = <opClass>.one();
+
+    return <matrixType>.of(
+      x, o, o, o,
+      o, y, o, o,
+      o, o, z, o,
+      o, o, o, s
+    );
+  }
+
+  /**
+   * Construct a matrix that will translate by {@code (x, y, z)}.
+   * @return A constructed matrix
+   * @param x The X scaling value
+   * @param y The Y scaling value
+   * @param z The Z scaling value
+   * <if(hasGeneric)>
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
+   */
+
+  public static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  <else>
+  <matrixType>
+  <endif>
+  ofTranslation(
+    final <scalarRealType> x,
+    final <scalarRealType> y,
+    final <scalarRealType> z)
+  {
+    final <scalarRealType> o = <opClass>.zero();
+    final <scalarRealType> s = <opClass>.one();
+
+    return <matrixType>.of(
+      s, o, o, x,
+      o, s, o, y,
+      o, o, s, z,
+      o, o, o, s
     );
   }
 

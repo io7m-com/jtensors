@@ -17,17 +17,15 @@
 package com.io7m.jtensors.generators;
 
 import com.io7m.jnull.NullCheck;
-import com.io7m.jtensors.core.parameterized.vectors.PVector4D;
+import com.io7m.jtensors.core.unparameterized.vectors.Vector4D;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.generator.PrimitiveGenerators;
 
 /**
  * A vector generator.
- *
- * @param <T>
  */
 
-public final class PVector4DGenerator<T> implements Generator<PVector4D<T>>
+public final class Vector4DGenerator implements Generator<Vector4D>
 {
   private final Generator<Double> gen;
 
@@ -37,7 +35,7 @@ public final class PVector4DGenerator<T> implements Generator<PVector4D<T>>
    * @param in_gen A component generator
    */
 
-  public PVector4DGenerator(
+  public Vector4DGenerator(
     final Generator<Double> in_gen)
   {
     this.gen = NullCheck.notNull(in_gen, "Generator");
@@ -46,14 +44,12 @@ public final class PVector4DGenerator<T> implements Generator<PVector4D<T>>
   /**
    * Create a generator initialized with a default component generator.
    *
-   * @param <T> A phantom type parameter
-   *
    * @return A generator
    */
 
-  public static <T> Generator<PVector4D<T>> create()
+  public static Generator<Vector4D> create()
   {
-    return new PVector4DGenerator<>(PrimitiveGenerators.doubles(
+    return new Vector4DGenerator(PrimitiveGenerators.doubles(
       -1.0e128,
       1.0e128
     ));
@@ -68,18 +64,18 @@ public final class PVector4DGenerator<T> implements Generator<PVector4D<T>>
    * @return A generator
    */
 
-  public static <T> Generator<PVector4D<T>> createNormal()
+  public static <T> Generator<Vector4D> createNormal()
   {
-    return new PVector4DGenerator<>(PrimitiveGenerators.doubles(
+    return new Vector4DGenerator(PrimitiveGenerators.doubles(
       -1.0,
       1.0
     ));
   }
 
   @Override
-  public PVector4D<T> next()
+  public Vector4D next()
   {
-    return PVector4D.of(
+    return Vector4D.of(
       this.gen.next().doubleValue(),
       this.gen.next().doubleValue(),
       this.gen.next().doubleValue(),

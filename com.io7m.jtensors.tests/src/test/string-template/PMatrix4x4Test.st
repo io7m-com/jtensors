@@ -4,6 +4,9 @@ PMatrix4x4Test(
   matrixComponentType,
   vectorRowType,
   vectorColumnType,
+  vectorColumnGenericType,
+  vectorGeneratorType,
+  vectorGenericGeneratorType,
   generatorType,
   scalarRealType,
   testOpClass,
@@ -69,6 +72,18 @@ public final class <className>
   {
     final Object o_gen = <generatorType>.createNormal();
     return (Generator\<<matrixType>\>) o_gen;
+  }
+
+  private static Generator\<<vectorColumnGenericType>\> createGeneratorVectorGenericNormal()
+  {
+    final Object o_gen = <vectorGenericGeneratorType>.createNormal();
+    return (Generator\<<vectorColumnGenericType>\>) o_gen;
+  }
+
+  private static Generator\<<vectorColumnType>\> createGeneratorVectorNormal()
+  {
+    final Object o_gen = <vectorGeneratorType>.createNormal();
+    return (Generator\<<vectorColumnType>\>) o_gen;
   }
 
   @Test
@@ -512,6 +527,206 @@ public final class <className>
       <opClass>.multiply(a, <opClass>.scale(b, s));
 
     <testOpClass>.checkAlmostEqualsMatrix(mr0, mr1);
+  }
+
+  /**
+   * ∀ v. multiplyVectorPost(identity(), v) == v
+   */
+
+  @Test
+  @PercentagePassing
+  public void testMultiplyVectorPostIdentity()
+  {
+    {
+      final Generator\<<vectorColumnType>\> gen = createGeneratorVectorNormal();
+      final <vectorColumnType> v = gen.next();
+
+      final <vectorColumnType> vr0 =
+        <opClass>.multiplyVectorPost(<opClass>.identity(), v);
+
+      <testOpClass>.checkAlmostEqualsVector(v, vr0);
+    }
+
+    <if(hasGeneric)>
+    {
+      final Generator\<<vectorColumnGenericType>\> gen = createGeneratorVectorGenericNormal();
+      final <vectorColumnGenericType> v = gen.next();
+
+      final <vectorColumnGenericType> vr0 =
+        <opClass>.multiplyVectorPost(<opClass>.identity(), v);
+
+      <testOpClass>.checkAlmostEqualsVector(v, vr0);
+    }
+    <endif>
+  }
+
+  /**
+   * ∀ a v. multiplyVectorPost(invert(a), multiplyVectorPost(a, v)) == v
+   */
+
+  @Test
+  @PercentagePassing
+  public void testMultiplyVectorPostIdentityInverse()
+  {
+    final Generator\<<matrixType>\> m_gen = createGeneratorNormal();
+    final <matrixType> a = m_gen.next();
+    final Optional\<<matrixType>\> ia_opt = <opClass>.invert(a);
+    final <matrixType> ia = ia_opt.get();
+
+    final Generator\<<vectorColumnType>\> v_gen = createGeneratorVectorNormal();
+    final <vectorColumnType> v = v_gen.next();
+
+    {
+      final <vectorColumnType> vr0 =
+        <opClass>.multiplyVectorPost(ia, <opClass>.multiplyVectorPost(a, v));
+      <testOpClass>.checkAlmostEqualsVector(v, vr0);
+    }
+
+    <if(hasGeneric)>
+    {
+      final <vectorColumnGenericType> vg =
+        <vectorColumnGenericType>.of(v.x(), v.y(), v.z(), v.w());
+      final <vectorColumnGenericType> vr0 =
+        <opClass>.multiplyVectorPost(ia, <opClass>.multiplyVectorPost(a, vg));
+      <testOpClass>.checkAlmostEqualsVector(vg, vr0);
+    }
+    <endif>
+  }
+
+  /**
+   * ∀ x y z v. multiplyVectorPost(ofScale(x, y, z), v) == (x, y, z, 1) * v
+   */
+
+  @Test
+  @PercentagePassing
+  public void testMultiplyVectorPostScale()
+  {
+    final Generator\<<vectorColumnType>\> gen = createGeneratorVectorNormal();
+    final <vectorColumnType> vs = gen.next();
+    final <vectorColumnType> v = gen.next();
+
+    final <matrixType> m =
+      <opClass>.ofScale(vs.x(), vs.y(), vs.z());
+
+    {
+      final <vectorColumnType> vr = <opClass>.multiplyVectorPost(m, v);
+      final <scalarRealType> rx = <testOpClass>.multiply(vs.x(), v.x());
+      final <scalarRealType> ry = <testOpClass>.multiply(vs.y(), v.y());
+      final <scalarRealType> rz = <testOpClass>.multiply(vs.z(), v.z());
+      final <scalarRealType> rw = v.w();
+      <testOpClass>.checkAlmostEquals(rx, vr.x());
+      <testOpClass>.checkAlmostEquals(ry, vr.y());
+      <testOpClass>.checkAlmostEquals(rz, vr.z());
+      <testOpClass>.checkAlmostEquals(rw, vr.w());
+    }
+
+    <if(hasGeneric)>
+    {
+      final <vectorColumnGenericType> vg =
+        <vectorColumnGenericType>.of(v.x(), v.y(), v.z(), v.w());
+
+      final <vectorColumnGenericType> vr = <opClass>.multiplyVectorPost(m, vg);
+      final <scalarRealType> rx = <testOpClass>.multiply(vs.x(), v.x());
+      final <scalarRealType> ry = <testOpClass>.multiply(vs.y(), v.y());
+      final <scalarRealType> rz = <testOpClass>.multiply(vs.z(), v.z());
+      final <scalarRealType> rw = v.w();
+      <testOpClass>.checkAlmostEquals(rx, vr.x());
+      <testOpClass>.checkAlmostEquals(ry, vr.y());
+      <testOpClass>.checkAlmostEquals(rz, vr.z());
+      <testOpClass>.checkAlmostEquals(rw, vr.w());
+    }
+    <endif>
+  }
+
+  /**
+   * ∀ v. multiplyVectorPost(ofScale(1, 1, 1), v) == v
+   */
+
+  @Test
+  @PercentagePassing
+  public void testMultiplyVectorPostScaleOne()
+  {
+    final Generator\<<vectorColumnType>\> gen = createGeneratorVectorNormal();
+    final <vectorColumnType> v = gen.next();
+
+    final <matrixType> m = <opClass>.ofScale(
+      <testOpClass>.constant("1"),
+      <testOpClass>.constant("1"),
+      <testOpClass>.constant("1"));
+
+    {
+      final <vectorColumnType> vr = <opClass>.multiplyVectorPost(m, v);
+      <testOpClass>.checkAlmostEqualsVector(v, vr);
+    }
+
+    <if(hasGeneric)>
+    {
+      final <vectorColumnGenericType> vg =
+        <vectorColumnGenericType>.of(v.x(), v.y(), v.z(), v.w());
+      final <vectorColumnGenericType> vr =
+        <opClass>.multiplyVectorPost(m, vg);
+      <testOpClass>.checkAlmostEqualsVector(vg, vr);
+    }
+    <endif>
+  }
+
+  /**
+   * ∀ x y z v. multiplyVectorPost(ofTranslation(x, y, z), (0, 0, 0, 1)) == (x, y, z, 1)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testMultiplyVectorPostTranslate()
+  {
+    final Generator\<<vectorColumnType>\> gen = createGeneratorVectorNormal();
+    final <vectorColumnType> vs = gen.next();
+
+    final <matrixType> m =
+      <opClass>.ofTranslation(vs.x(), vs.y(), vs.z());
+
+    {
+      final <vectorColumnType> vr =
+        <opClass>.multiplyVectorPost(
+          m,
+          <vectorColumnType>.of(
+            <testOpClass>.constant("0"),
+            <testOpClass>.constant("0"),
+            <testOpClass>.constant("0"),
+            <testOpClass>.constant("1")
+          ));
+
+      final <scalarRealType> rx = vs.x();
+      final <scalarRealType> ry = vs.y();
+      final <scalarRealType> rz = vs.z();
+      final <scalarRealType> rw = <testOpClass>.constant("1");
+      <testOpClass>.checkAlmostEquals(rx, vr.x());
+      <testOpClass>.checkAlmostEquals(ry, vr.y());
+      <testOpClass>.checkAlmostEquals(rz, vr.z());
+      <testOpClass>.checkAlmostEquals(rw, vr.w());
+    }
+
+    <if(hasGeneric)>
+    {
+      final <vectorColumnGenericType> vr =
+        <opClass>.multiplyVectorPost(
+          m,
+          <vectorColumnGenericType>.of(
+            <testOpClass>.constant("0"),
+            <testOpClass>.constant("0"),
+            <testOpClass>.constant("0"),
+            <testOpClass>.constant("1")
+          ));
+
+      final <scalarRealType> rx = vs.x();
+      final <scalarRealType> ry = vs.y();
+      final <scalarRealType> rz = vs.z();
+      final <scalarRealType> rw = <testOpClass>.constant("1");
+      <testOpClass>.checkAlmostEquals(rx, vr.x());
+      <testOpClass>.checkAlmostEquals(ry, vr.y());
+      <testOpClass>.checkAlmostEquals(rz, vr.z());
+      <testOpClass>.checkAlmostEquals(rw, vr.w());
+    }
+    <endif>
   }
 
   /**
