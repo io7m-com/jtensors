@@ -760,6 +760,7 @@
                     <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector4DGenerator</vectorGenericGeneratorType>
                     <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrices4x4D</opClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
+                    <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors4D</vectorOpClass>
                     <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
@@ -794,6 +795,7 @@
                     <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector4DGenerator</vectorGenericGeneratorType>
                     <opClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4D</opClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
+                    <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors4D</vectorOpClass>
                   </properties>
                 </template>
               </templates>

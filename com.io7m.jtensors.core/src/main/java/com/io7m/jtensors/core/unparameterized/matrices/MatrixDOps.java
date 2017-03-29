@@ -71,6 +71,18 @@ final class MatrixDOps
     return 1.0;
   }
 
+  static double sine(
+    final double a)
+  {
+    return StrictMath.sin(a);
+  }
+
+  static double cosine(
+    final double a)
+  {
+    return StrictMath.cos(a);
+  }
+
   static double determinant3x3(
     final double r0c0,
     final double r0c1,

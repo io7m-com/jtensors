@@ -931,6 +931,87 @@ public final class <className>
   }
 
   /**
+   * Construct a matrix that will rotate by {@code angle} radians around the axis {@code (x, y, z)}.
+   * @return A constructed matrix
+   * @param angle The angle in radians
+   * @param axis_x The X axis value
+   * @param axis_y The Y axis value
+   * @param axis_z The Z axis value
+   * <if(hasGeneric)>
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * <endif>
+   */
+
+  public static
+  <if(hasGeneric)>
+  \<A, B> <matrixType>\<A, B>
+  <else>
+  <matrixType>
+  <endif>
+  ofRotation(
+    final <scalarRealType> angle,
+    final <scalarRealType> axis_x,
+    final <scalarRealType> axis_y,
+    final <scalarRealType> axis_z)
+  {
+    final <scalarRealType> s = <opClass>.sine(angle);
+    final <scalarRealType> c = <opClass>.cosine(angle);
+    final <scalarRealType> t = <opClass>.subtract(<opClass>.one(), c);
+
+    final <scalarRealType> tx_sq = <opClass>.multiply(t, <opClass>.multiply(axis_x, axis_x));
+    final <scalarRealType> ty_sq = <opClass>.multiply(t, <opClass>.multiply(axis_y, axis_y));
+    final <scalarRealType> tz_sq = <opClass>.multiply(t, <opClass>.multiply(axis_z, axis_z));
+
+    final <scalarRealType> txy = <opClass>.multiply(t, <opClass>.multiply(axis_x, axis_y));
+    final <scalarRealType> txz = <opClass>.multiply(t, <opClass>.multiply(axis_x, axis_z));
+    final <scalarRealType> tyz = <opClass>.multiply(t, <opClass>.multiply(axis_y, axis_z));
+
+    final <scalarRealType> sx = <opClass>.multiply(s, axis_x);
+    final <scalarRealType> sy = <opClass>.multiply(s, axis_y);
+    final <scalarRealType> sz = <opClass>.multiply(s, axis_z);
+
+    final <scalarRealType> r0c0 = <opClass>.add(tx_sq, c);
+    final <scalarRealType> r0c1 = <opClass>.subtract(txy, sz);
+    final <scalarRealType> r0c2 = <opClass>.add(txz, sy);
+    final <scalarRealType> r0c3 = <opClass>.zero();
+
+    final <scalarRealType> r1c0 = <opClass>.add(txy, sz);
+    final <scalarRealType> r1c1 = <opClass>.add(ty_sq, c);
+    final <scalarRealType> r1c2 = <opClass>.subtract(tyz, sx);
+    final <scalarRealType> r1c3 = <opClass>.zero();
+
+    final <scalarRealType> r2c0 = <opClass>.subtract(txz, sy);
+    final <scalarRealType> r2c1 = <opClass>.add(tyz, sx);
+    final <scalarRealType> r2c2 = <opClass>.add(tz_sq, c);
+    final <scalarRealType> r2c3 = <opClass>.zero();
+
+    final <scalarRealType> r3c0 = <opClass>.zero();
+    final <scalarRealType> r3c1 = <opClass>.zero();
+    final <scalarRealType> r3c2 = <opClass>.zero();
+    final <scalarRealType> r3c3 = <opClass>.one();
+
+    return <matrixType>.of(
+      r0c0,
+      r0c1,
+      r0c2,
+      r0c3,
+      r1c0,
+      r1c1,
+      r1c2,
+      r1c3,
+      r2c0,
+      r2c1,
+      r2c2,
+      r2c3,
+      r3c0,
+      r3c1,
+      r3c2,
+      r3c3
+    );
+  }
+
+  /**
    * Scale the matrix {@code m} by {@code r}.
    * @return {@code m * r}
    * @param m The matrix

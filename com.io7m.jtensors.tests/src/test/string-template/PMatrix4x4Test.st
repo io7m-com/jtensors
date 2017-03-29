@@ -11,6 +11,7 @@ PMatrix4x4Test(
   scalarRealType,
   testOpClass,
   opClass,
+  vectorOpClass,
   hasGeneric) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
@@ -263,6 +264,50 @@ public final class <className>
       <opClass>.ofRows(a.row0(), a.row1(), a.row2(), a.row3());
 
     <testOpClass>.checkAlmostEqualsMatrix(a, b);
+  }
+
+  /**
+   * ∀ v x y z. multiplyVectorPost(ofRotation(0, x, y, z), v) == v
+   *
+   * Rotating a vector by 0 radians around any axis has no effect.
+   */
+
+  @Test
+  @PercentagePassing
+  public void testOfRotationZero()
+  {
+    final Generator\<<matrixType>\> gen =
+      createGeneratorNormal();
+
+    final <matrixType> k = gen.next();
+
+    final <vectorColumnType> v =
+      <vectorColumnType>.of(
+        k.r3c0(),
+        k.r3c1(),
+        k.r3c1(),
+        <testOpClass>.constant("1"));
+
+    final <vectorColumnType> axis =
+      <vectorOpClass>.normalize(
+        <vectorColumnType>.of(
+          k.r0c0(),
+          k.r1c1(),
+          k.r2c2(),
+          <testOpClass>.constant("1")));
+
+    final <matrixType> a = <opClass>.ofRotation(
+      <testOpClass>.constant("0"),
+      axis.x(),
+      axis.y(),
+      axis.z()
+    );
+
+    {
+      final <vectorColumnType> vr =
+        <opClass>.multiplyVectorPost(a, v);
+      <testOpClass>.checkAlmostEqualsVector(v, vr);
+    }
   }
 
   /**
