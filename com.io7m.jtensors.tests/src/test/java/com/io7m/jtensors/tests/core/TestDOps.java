@@ -158,6 +158,12 @@ public final class TestDOps
     }
   }
 
+  public static double radiansOfDegrees(
+    final String text)
+  {
+    return Math.toRadians(Double.parseDouble(text));
+  }
+
   public static void checkEquals(
     final double x,
     final double y)

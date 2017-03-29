@@ -311,6 +311,276 @@ public final class <className>
   }
 
   /**
+   * A 90 degree rotation around the X axis yields a counter-clockwise rotation
+   * around the X axis (when looking towards negative infinity on the axis).
+   */
+
+  @Test
+  public void testOfRotation90X()
+  {
+    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("90");
+
+    final <vectorColumnType> v_axis =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"));
+
+    final <vectorColumnType> v_in =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"));
+
+    final <vectorColumnType> v_expected =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("1"));
+
+    final <matrixType> a =
+      <opClass>.ofRotation(
+        r,
+        v_axis.x(),
+        v_axis.y(),
+        v_axis.z());
+
+    {
+      final <vectorColumnType> v_result =
+        <opClass>.multiplyVectorPost(a, v_in);
+      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
+    }
+  }
+
+  /**
+   * A 90 degree rotation around the Y axis yields a counter-clockwise rotation
+   * around the Y axis (when looking towards negative infinity on the axis).
+   */
+
+  @Test
+  public void testOfRotation90Y()
+  {
+    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("90");
+
+    final <vectorColumnType> v_axis =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"));
+
+    final <vectorColumnType> v_in =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("-1"),
+        <testOpClass>.constant("1"));
+
+    final <vectorColumnType> v_expected =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("-1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"));
+
+    final <matrixType> a =
+      <opClass>.ofRotation(
+        r,
+        v_axis.x(),
+        v_axis.y(),
+        v_axis.z());
+
+    {
+      final <vectorColumnType> v_result =
+        <opClass>.multiplyVectorPost(a, v_in);
+      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
+    }
+  }
+
+  /**
+   * A 90 degree rotation around the Z axis yields a counter-clockwise rotation
+   * around the Z axis (when looking towards negative infinity on the axis).
+   */
+
+  @Test
+  public void testOfRotation90Z()
+  {
+    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("90");
+
+    final <vectorColumnType> v_axis =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"));
+
+    final <vectorColumnType> v_in =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"));
+
+    final <vectorColumnType> v_expected =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("-1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"));
+
+    final <matrixType> a =
+      <opClass>.ofRotation(
+        r,
+        v_axis.x(),
+        v_axis.y(),
+        v_axis.z());
+
+    {
+      final <vectorColumnType> v_result =
+        <opClass>.multiplyVectorPost(a, v_in);
+      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
+    }
+  }
+
+  /**
+   * A -90 degree rotation around the X axis yields a clockwise rotation
+   * around the X axis (when looking towards negative infinity on the axis).
+   */
+
+  @Test
+  public void testOfRotationM90X()
+  {
+    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("-90");
+
+    final <vectorColumnType> v_axis =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"));
+
+    final <vectorColumnType> v_in =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"));
+
+    final <vectorColumnType> v_expected =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("-1"),
+        <testOpClass>.constant("1"));
+
+    final <matrixType> a =
+      <opClass>.ofRotation(
+        r,
+        v_axis.x(),
+        v_axis.y(),
+        v_axis.z());
+
+    {
+      final <vectorColumnType> v_result =
+        <opClass>.multiplyVectorPost(a, v_in);
+      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
+    }
+  }
+
+  /**
+   * A -90 degree rotation around the Y axis yields a clockwise rotation
+   * around the Y axis (when looking towards negative infinity on the axis).
+   */
+
+  @Test
+  public void testOfRotationM90Y()
+  {
+    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("-90");
+
+    final <vectorColumnType> v_axis =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"));
+
+    final <vectorColumnType> v_in =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("-1"),
+        <testOpClass>.constant("1"));
+
+    final <vectorColumnType> v_expected =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"));
+
+    final <matrixType> a =
+      <opClass>.ofRotation(
+        r,
+        v_axis.x(),
+        v_axis.y(),
+        v_axis.z());
+
+    {
+      final <vectorColumnType> v_result =
+        <opClass>.multiplyVectorPost(a, v_in);
+      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
+    }
+  }
+
+  /**
+   * A -90 degree rotation around the Z axis yields a clockwise rotation
+   * around the Z axis (when looking towards negative infinity on the axis).
+   */
+
+  @Test
+  public void testOfRotationM90Z()
+  {
+    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("-90");
+
+    final <vectorColumnType> v_axis =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"));
+
+    final <vectorColumnType> v_in =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"));
+
+    final <vectorColumnType> v_expected =
+      <vectorColumnType>.of(
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"));
+
+    final <matrixType> a =
+      <opClass>.ofRotation(
+        r,
+        v_axis.x(),
+        v_axis.y(),
+        v_axis.z());
+
+    {
+      final <vectorColumnType> v_result =
+        <opClass>.multiplyVectorPost(a, v_in);
+      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
+    }
+  }
+
+  /**
    * invert(zero()) == empty()
    */
 

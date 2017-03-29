@@ -40,6 +40,12 @@ public final class TestFOps
     Assert.assertEquals(x, y, 1.0e-6);
   }
 
+  public static float radiansOfDegrees(
+    final String text)
+  {
+    return (float) Math.toRadians(Double.parseDouble(text));
+  }
+
   public static float constant(
     final String text)
   {
