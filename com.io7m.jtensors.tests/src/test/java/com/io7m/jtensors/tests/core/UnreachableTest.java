@@ -406,10 +406,28 @@ public final class UnreachableTest
   }
 
   @Test
+  public void testQuaternionDOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.quaternions.QuaternionDOps");
+    Assert.fail();
+  }
+
+  @Test
   public void testQuaternions4D()
     throws Throwable
   {
     this.checkUnreachable(Quaternions4D.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testQuaternionFOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.quaternions.QuaternionFOps");
     Assert.fail();
   }
 
