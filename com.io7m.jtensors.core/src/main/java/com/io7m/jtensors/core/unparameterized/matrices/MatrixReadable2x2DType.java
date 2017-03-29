@@ -55,46 +55,6 @@ public interface MatrixReadable2x2DType extends MatrixReadableDType
   @Value.Parameter(order = 3)
   double r1c1();
 
-  /**
-   * @return Row 0 of the matrix
-   */
-
-  @Value.Lazy
-  default Vector2D row0()
-  {
-    return Vector2D.of(this.r0c0(), this.r0c1());
-  }
-
-  /**
-   * @return Row 1 of the matrix
-   */
-
-  @Value.Lazy
-  default Vector2D row1()
-  {
-    return Vector2D.of(this.r1c0(), this.r1c1());
-  }
-
-  /**
-   * @return Column 0 of the matrix
-   */
-
-  @Value.Lazy
-  default Vector2D column0()
-  {
-    return Vector2D.of(this.r0c0(), this.r1c0());
-  }
-
-  /**
-   * @return Column 1 of the matrix
-   */
-
-  @Value.Lazy
-  default Vector2D column1()
-  {
-    return Vector2D.of(this.r0c1(), this.r1c1());
-  }
-
   @Override
   default double rowColumn(
     final int row,

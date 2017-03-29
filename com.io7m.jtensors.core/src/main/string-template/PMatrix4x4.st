@@ -1012,6 +1012,142 @@ public final class <className>
   }
 
   /**
+   * @return Row 0 of the matrix
+   * @param m The matrix
+   * <if(hasGeneric)>
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a source coordinate system)
+   * <endif>
+   */
+
+  public static
+  <if(hasGeneric)>\<A, B> <vectorRowType> row0(final <matrixType>\<A, B> m)
+  <else>                  <vectorRowType> row0(final <matrixType> m)
+  <endif>
+  {
+    return <vectorRowType>.of(m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3());
+  }
+
+  /**
+   * @return Row 1 of the matrix
+   * @param m The matrix
+   * <if(hasGeneric)>
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a source coordinate system)
+   * <endif>
+   */
+
+  public static
+  <if(hasGeneric)>\<A, B> <vectorRowType> row1(final <matrixType>\<A, B> m)
+  <else>                  <vectorRowType> row1(final <matrixType> m)
+  <endif>
+  {
+    return <vectorRowType>.of(m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3());
+  }
+
+  /**
+   * @return Row 2 of the matrix
+   * @param m The matrix
+   * <if(hasGeneric)>
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a source coordinate system)
+   * <endif>
+   */
+
+  public static
+  <if(hasGeneric)>\<A, B> <vectorRowType> row2(final <matrixType>\<A, B> m)
+  <else>                  <vectorRowType> row2(final <matrixType> m)
+  <endif>
+  {
+    return <vectorRowType>.of(m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3());
+  }
+
+  /**
+   * @return Row 3 of the matrix
+   * @param m The matrix
+   * <if(hasGeneric)>
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a source coordinate system)
+   * <endif>
+   */
+
+  public static
+  <if(hasGeneric)>\<A, B> <vectorRowType> row3(final <matrixType>\<A, B> m)
+  <else>                  <vectorRowType> row3(final <matrixType> m)
+  <endif>
+  {
+    return <vectorRowType>.of(m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3());
+  }
+
+  /**
+   * @return Column 0 of the matrix
+   * @param m The matrix
+   * <if(hasGeneric)>
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a source coordinate system)
+   * <endif>
+   */
+
+  public static
+  <if(hasGeneric)>\<A, B> <vectorColumnType> column0(final <matrixType>\<A, B> m)
+  <else>                  <vectorColumnType> column0(final <matrixType> m)
+  <endif>
+  {
+    return <vectorColumnType>.of(m.r0c0(), m.r1c0(), m.r2c0(), m.r3c0());
+  }
+
+  /**
+   * @return Column 1 of the matrix
+   * @param m The matrix
+   * <if(hasGeneric)>
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a source coordinate system)
+   * <endif>
+   */
+
+  public static
+  <if(hasGeneric)>\<A, B> <vectorColumnType> column1(final <matrixType>\<A, B> m)
+  <else>                  <vectorColumnType> column1(final <matrixType> m)
+  <endif>
+  {
+    return <vectorColumnType>.of(m.r0c1(), m.r1c1(), m.r2c1(), m.r3c1());
+  }
+
+  /**
+   * @return Column 2 of the matrix
+   * @param m The matrix
+   * <if(hasGeneric)>
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a source coordinate system)
+   * <endif>
+   */
+
+  public static
+  <if(hasGeneric)>\<A, B> <vectorColumnType> column2(final <matrixType>\<A, B> m)
+  <else>                  <vectorColumnType> column2(final <matrixType> m)
+  <endif>
+  {
+    return <vectorColumnType>.of(m.r0c2(), m.r1c2(), m.r2c2(), m.r3c2());
+  }
+
+  /**
+   * @return Column 3 of the matrix
+   * @param m The matrix
+   * <if(hasGeneric)>
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a source coordinate system)
+   * <endif>
+   */
+
+  public static
+  <if(hasGeneric)>\<A, B> <vectorColumnType> column3(final <matrixType>\<A, B> m)
+  <else>                  <vectorColumnType> column3(final <matrixType> m)
+  <endif>
+  {
+    return <vectorColumnType>.of(m.r0c3(), m.r1c3(), m.r2c3(), m.r3c3());
+  }
+
+  /**
    * Scale the matrix {@code m} by {@code r}.
    * @return {@code m * r}
    * @param m The matrix
