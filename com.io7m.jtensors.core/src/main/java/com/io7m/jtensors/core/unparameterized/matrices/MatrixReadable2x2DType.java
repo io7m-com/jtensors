@@ -16,7 +16,6 @@
 
 package com.io7m.jtensors.core.unparameterized.matrices;
 
-import com.io7m.jtensors.core.unparameterized.vectors.Vector2D;
 import org.immutables.value.Value;
 
 import static java.lang.Integer.valueOf;
