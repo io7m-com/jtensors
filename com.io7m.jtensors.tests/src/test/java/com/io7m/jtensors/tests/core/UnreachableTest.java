@@ -33,6 +33,8 @@ import com.io7m.jtensors.core.parameterized.vectors.PVectors4D;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors4F;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors4I;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors4L;
+import com.io7m.jtensors.core.quaternions.Quaternions4D;
+import com.io7m.jtensors.core.quaternions.Quaternions4F;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vectors2D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vectors2F;
@@ -400,6 +402,22 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.unparameterized.vectors.VectorLOps");
+    Assert.fail();
+  }
+
+  @Test
+  public void testQuaternions4D()
+    throws Throwable
+  {
+    this.checkUnreachable(Quaternions4D.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testQuaternions4F()
+    throws Throwable
+  {
+    this.checkUnreachable(Quaternions4F.class);
     Assert.fail();
   }
 

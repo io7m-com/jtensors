@@ -753,6 +753,60 @@
               </templates>
             </configuration>
           </execution>
+
+          <!-- Quaternions -->
+          <execution>
+            <id>generate-Q4D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>Quaternion4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/quaternions/Quaternions4D.java</target>
+                  <properties>
+                    <className>Quaternions4D</className>
+                    <quaternionType>Quaternion4D</quaternionType>
+                    <quaternionComponentType>double</quaternionComponentType>
+                    <scalarLargeType>double</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.quaternions.QuaternionDOps</opClass>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-Q4F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>Quaternion4</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/quaternions/Quaternions4F.java</target>
+                  <properties>
+                    <className>Quaternions4F</className>
+                    <quaternionType>Quaternion4F</quaternionType>
+                    <quaternionComponentType>float</quaternionComponentType>
+                    <scalarLargeType>double</scalarLargeType>
+                    <scalarRealType>double</scalarRealType>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                    <opClass>com.io7m.jtensors.core.quaternions.QuaternionFOps</opClass>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 

@@ -801,6 +801,60 @@
               </templates>
             </configuration>
           </execution>
+
+          <!-- Quaternion types -->
+          <execution>
+            <id>generate-Q4D</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>Quaternion4Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/quaternions/Quaternions4DTest.java</target>
+                  <properties>
+                    <className>Quaternions4DTest</className>
+                    <quaternionType>com.io7m.jtensors.core.quaternions.Quaternion4D</quaternionType>
+                    <quaternionComponentType>double</quaternionComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <generatorType>com.io7m.jtensors.generators.Quaternion4DGenerator</generatorType>
+                    <opClass>com.io7m.jtensors.core.quaternions.Quaternions4D</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-Q4F</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>Quaternion4Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/quaternions/Quaternions4FTest.java</target>
+                  <properties>
+                    <className>Quaternions4FTest</className>
+                    <quaternionType>com.io7m.jtensors.core.quaternions.Quaternion4F</quaternionType>
+                    <quaternionComponentType>float</quaternionComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <generatorType>com.io7m.jtensors.generators.Quaternion4FGenerator</generatorType>
+                    <opClass>com.io7m.jtensors.core.quaternions.Quaternions4F</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
+                    <hasFloatingPoint>true</hasFloatingPoint>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 
