@@ -367,6 +367,41 @@ public final class UnreachableTest
     Assert.fail();
   }
 
+  @Test
+  public void testVectorDOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.unparameterized.vectors.VectorDOps");
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectorFOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.unparameterized.vectors.VectorFOps");
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectorIOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.unparameterized.vectors.VectorIOps");
+    Assert.fail();
+  }
+
+  @Test
+  public void testVectorLOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.unparameterized.vectors.VectorLOps");
+    Assert.fail();
+  }
 
   private void checkUnreachableByName(
     final String c)
