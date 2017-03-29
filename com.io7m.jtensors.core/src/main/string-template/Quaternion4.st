@@ -317,6 +317,36 @@ public final class <className>
   }
 
   /**
+   * Calculate a quaternion that represents a rotation of {@code r} radians
+   * around the axis {@code (axis_x, axis_y, axis_z)}.
+   *
+   * @param r The rotation in radians
+   * @param axis_x The X component of the axis
+   * @param axis_y The Y component of the axis
+   * @param axis_z The Z component of the axis
+   * @return A quaternion
+   */
+
+  public static <quaternionType> ofAxisAngle(
+    final <scalarRealType> axis_x,
+    final <scalarRealType> axis_y,
+    final <scalarRealType> axis_z,
+    final <scalarRealType> angle)
+  {
+    final <scalarRealType> angle_r = <opClass>.multiplyReal(angle, <opClass>.zeroPointFive());
+    final <scalarRealType> sa = <opClass>.sine(angle_r);
+    final <scalarRealType> x = <opClass>.multiplyReal(axis_x, sa);
+    final <scalarRealType> y = <opClass>.multiplyReal(axis_y, sa);
+    final <scalarRealType> z = <opClass>.multiplyReal(axis_z, sa);
+    final <scalarRealType> w = <opClass>.cosine(angle_r);
+    return <quaternionType>.of(
+      (<quaternionComponentType>) x,
+      (<quaternionComponentType>) y,
+      (<quaternionComponentType>) z,
+      (<quaternionComponentType>) w);
+  }
+
+  /**
    * Scale {@code q0} by {@code r}.
    *
    * @return {@code (q0.x * r, q0.y * r, q0.z * r, q0.w * r) }

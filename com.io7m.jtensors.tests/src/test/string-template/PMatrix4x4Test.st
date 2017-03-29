@@ -267,7 +267,7 @@ public final class <className>
   }
 
   /**
-   * ∀ v x y z. multiplyVectorPost(ofRotation(0, x, y, z), v) == v
+   * ∀ v x y z. multiplyVectorPost(ofRotation(x, y, z, 0), v) == v
    *
    * Rotating a vector by 0 radians around any axis has no effect.
    */
@@ -297,10 +297,10 @@ public final class <className>
           <testOpClass>.constant("1")));
 
     final <matrixType> a = <opClass>.ofRotation(
-      <testOpClass>.constant("0"),
       axis.x(),
       axis.y(),
-      axis.z()
+      axis.z(),
+      <testOpClass>.constant("0")
     );
 
     {
@@ -343,10 +343,10 @@ public final class <className>
 
     final <matrixType> a =
       <opClass>.ofRotation(
-        r,
         v_axis.x(),
         v_axis.y(),
-        v_axis.z());
+        v_axis.z(),
+        r);
 
     {
       final <vectorColumnType> v_result =
@@ -388,10 +388,10 @@ public final class <className>
 
     final <matrixType> a =
       <opClass>.ofRotation(
-        r,
         v_axis.x(),
         v_axis.y(),
-        v_axis.z());
+        v_axis.z(),
+        r);
 
     {
       final <vectorColumnType> v_result =
@@ -433,10 +433,10 @@ public final class <className>
 
     final <matrixType> a =
       <opClass>.ofRotation(
-        r,
         v_axis.x(),
         v_axis.y(),
-        v_axis.z());
+        v_axis.z(),
+        r);
 
     {
       final <vectorColumnType> v_result =
@@ -478,10 +478,10 @@ public final class <className>
 
     final <matrixType> a =
       <opClass>.ofRotation(
-        r,
         v_axis.x(),
         v_axis.y(),
-        v_axis.z());
+        v_axis.z(),
+        r);
 
     {
       final <vectorColumnType> v_result =
@@ -523,10 +523,10 @@ public final class <className>
 
     final <matrixType> a =
       <opClass>.ofRotation(
-        r,
         v_axis.x(),
         v_axis.y(),
-        v_axis.z());
+        v_axis.z(),
+        r);
 
     {
       final <vectorColumnType> v_result =
@@ -568,10 +568,10 @@ public final class <className>
 
     final <matrixType> a =
       <opClass>.ofRotation(
-        r,
         v_axis.x(),
         v_axis.y(),
-        v_axis.z());
+        v_axis.z(),
+        r);
 
     {
       final <vectorColumnType> v_result =

@@ -406,6 +406,161 @@ public final class <className>
     Assert.assertEquals(<opClass>.zero(), <opClass>.normalize(<opClass>.zero()));
   }
 
+  /**
+   * ∀ q0 x y z. normalize(ofAxisAngle(x, y, z, 0)) == (0, 0, 0, 1)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testOfAxisAngleIdentity()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 =
+      <opClass>.normalize(gen.next());
+    final <quaternionType> q1 =
+      <opClass>.normalize(
+        <opClass>.ofAxisAngle(
+          q0.x(), q0.y(), q0.z(), <testOpClass>.constant("0")));
+
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), q1.x());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), q1.y());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), q1.z());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), q1.w());
+  }
+
+  @Test
+  public void testMakeAxisAngleX_45()
+  {
+    final <quaternionType> q =
+      <opClass>.ofAxisAngle(
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.radiansOfDegrees("45.0"));
+
+    /*
+     * Values obtained by checking against the results produced by Blender.
+     *
+     * @see http://blender.org
+     */
+
+    <testOpClass>.checkAlmostEquals(0.3826834323650898, q.x());
+    <testOpClass>.checkAlmostEquals(0.0f,               q.y());
+    <testOpClass>.checkAlmostEquals(0.0f,               q.z());
+    <testOpClass>.checkAlmostEquals(0.9238795325112867, q.w());
+  }
+
+  @Test
+  public void testMakeAxisAngleX_90()
+  {
+    final <quaternionType> q =
+      <opClass>.ofAxisAngle(
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.radiansOfDegrees("90.0"));
+
+    /*
+     * Values obtained by checking against the results produced by Blender.
+     *
+     * @see http://blender.org
+     */
+
+    <testOpClass>.checkAlmostEquals(0.7071067811865475, q.x());
+    <testOpClass>.checkAlmostEquals(0.0,                q.y());
+    <testOpClass>.checkAlmostEquals(0.0,                q.z());
+    <testOpClass>.checkAlmostEquals(0.7071067811865475, q.w());
+  }
+
+  @Test
+  public void testMakeAxisAngleY_45()
+  {
+    final <quaternionType> q =
+      <opClass>.ofAxisAngle(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.radiansOfDegrees("45.0"));
+
+    /*
+     * Values obtained by checking against the results produced by Blender.
+     *
+     * @see http://blender.org
+     */
+
+    <testOpClass>.checkAlmostEquals(0.0,                q.x());
+    <testOpClass>.checkAlmostEquals(0.3826834323650898, q.y());
+    <testOpClass>.checkAlmostEquals(0.0,                q.z());
+    <testOpClass>.checkAlmostEquals(0.9238795325112867, q.w());
+  }
+
+  @Test
+  public void testMakeAxisAngleY_90()
+  {
+    final <quaternionType> q =
+      <opClass>.ofAxisAngle(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.radiansOfDegrees("90.0"));
+
+    /*
+     * Values obtained by checking against the results produced by Blender.
+     *
+     * @see http://blender.org
+     */
+
+    <testOpClass>.checkAlmostEquals(0.0,                q.x());
+    <testOpClass>.checkAlmostEquals(0.7071067811865475, q.y());
+    <testOpClass>.checkAlmostEquals(0.0,                q.z());
+    <testOpClass>.checkAlmostEquals(0.7071067811865475, q.w());
+  }
+
+  @Test
+  public void testMakeAxisAngleZ_45()
+  {
+    final <quaternionType> q =
+      <opClass>.ofAxisAngle(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.radiansOfDegrees("45.0"));
+
+    /*
+     * Values obtained by checking against the results produced by Blender.
+     *
+     * @see http://blender.org
+     */
+
+    <testOpClass>.checkAlmostEquals(0.0,                q.x());
+    <testOpClass>.checkAlmostEquals(0.0,                q.y());
+    <testOpClass>.checkAlmostEquals(0.3826834323650898, q.z());
+    <testOpClass>.checkAlmostEquals(0.9238795325112867, q.w());
+  }
+
+  @Test
+  public void testMakeAxisAngleZ_90()
+  {
+    final <quaternionType> q =
+      <opClass>.ofAxisAngle(
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"),
+        <testOpClass>.radiansOfDegrees("90.0"));
+
+    /*
+     * Values obtained by checking against the results produced by Blender.
+     *
+     * @see http://blender.org
+     */
+
+    <testOpClass>.checkAlmostEquals(0.0,                q.x());
+    <testOpClass>.checkAlmostEquals(0.0,                q.y());
+    <testOpClass>.checkAlmostEquals(0.7071067811865475, q.z());
+    <testOpClass>.checkAlmostEquals(0.7071067811865475, q.w());
+  }
+
   @Test
   @PercentagePassing
   public void testScale()

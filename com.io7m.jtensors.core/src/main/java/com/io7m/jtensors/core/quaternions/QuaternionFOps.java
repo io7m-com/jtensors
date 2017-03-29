@@ -25,12 +25,6 @@ final class QuaternionFOps
     throw new UnreachableCodeException();
   }
 
-  static double absolute(
-    final double value0)
-  {
-    return Math.abs(value0);
-  }
-
   static double add(
     final double value0,
     final double value1)
@@ -65,21 +59,7 @@ final class QuaternionFOps
     return value0 * value1;
   }
 
-  static double multiplyRealReal(
-    final double value0,
-    final double value1)
-  {
-    return value0 * value1;
-  }
-
   static double divideReal(
-    final double value0,
-    final double value1)
-  {
-    return value0 / value1;
-  }
-
-  static double divideRealReal(
     final double value0,
     final double value1)
   {
@@ -89,6 +69,11 @@ final class QuaternionFOps
   static double zero()
   {
     return 0.0;
+  }
+
+  static double zeroPointFive()
+  {
+    return 0.5;
   }
 
   static double one()
@@ -109,17 +94,15 @@ final class QuaternionFOps
     return Math.sqrt(v);
   }
 
-  static double clampReal(
-    final double value,
-    final double low,
-    final double high)
-  {
-    return Math.min(high, Math.max(value, low));
-  }
-
-  static double arcCosine(
+  static double sine(
     final double r)
   {
-    return StrictMath.acos(r);
+    return StrictMath.sin(r);
+  }
+
+  static double cosine(
+    final double r)
+  {
+    return StrictMath.cos(r);
   }
 }

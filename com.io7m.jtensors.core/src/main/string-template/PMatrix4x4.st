@@ -950,10 +950,10 @@ public final class <className>
   <matrixType>
   <endif>
   ofRotation(
-    final <scalarRealType> angle,
     final <scalarRealType> axis_x,
     final <scalarRealType> axis_y,
-    final <scalarRealType> axis_z)
+    final <scalarRealType> axis_z,
+    final <scalarRealType> angle)
   {
     final <scalarRealType> s = <opClass>.sine(angle);
     final <scalarRealType> c = <opClass>.cosine(angle);
