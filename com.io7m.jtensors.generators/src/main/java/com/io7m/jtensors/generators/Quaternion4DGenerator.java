@@ -18,7 +18,6 @@ package com.io7m.jtensors.generators;
 
 import com.io7m.jnull.NullCheck;
 import com.io7m.jtensors.core.quaternions.Quaternion4D;
-import com.io7m.jtensors.core.unparameterized.vectors.Vector4D;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.generator.PrimitiveGenerators;
 
