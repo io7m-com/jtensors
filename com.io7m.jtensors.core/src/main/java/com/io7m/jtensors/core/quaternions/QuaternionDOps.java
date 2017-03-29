@@ -38,6 +38,12 @@ final class QuaternionDOps
     return value0 + value1;
   }
 
+  static double negate(
+    final double value)
+  {
+    return -value;
+  }
+
   static double subtract(
     final double value0,
     final double value1)

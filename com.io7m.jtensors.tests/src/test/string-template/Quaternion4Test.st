@@ -5,8 +5,7 @@ Quaternion4Test(
   scalarRealType,
   generatorType,
   testOpClass,
-  opClass,
-  hasFloatingPoint) ::= <<
+  opClass) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
  *
@@ -61,21 +60,21 @@ public final class <className>
   @Test
   public void testEqualsHashCodeToString()
   {
-    final <quaternionType> v0 =
+    final <quaternionType> q0 =
       <quaternionType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
         <testOpClass>.constant("2"),
         <testOpClass>.constant("3"));
 
-    final <quaternionType> v1 =
+    final <quaternionType> q1 =
       <quaternionType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
         <testOpClass>.constant("2"),
         <testOpClass>.constant("3"));
 
-    final <quaternionType> v2 =
+    final <quaternionType> q2 =
       <quaternionType>.of(
         <testOpClass>.constant("10"),
         <testOpClass>.constant("1"),
@@ -103,37 +102,37 @@ public final class <className>
         <testOpClass>.constant("2"),
         <testOpClass>.constant("13"));
 
-    Assert.assertEquals(v0, v0);
-    Assert.assertEquals(v0, v1);
-    Assert.assertNotEquals(v0, v2);
-    Assert.assertNotEquals(v0, v3);
-    Assert.assertNotEquals(v0, v4);
-    Assert.assertNotEquals(v0, v5);
-    Assert.assertNotEquals(v0, null);
-    Assert.assertNotEquals(v0, Integer.valueOf(23));
+    Assert.assertEquals(q0, q0);
+    Assert.assertEquals(q0, q1);
+    Assert.assertNotEquals(q0, q2);
+    Assert.assertNotEquals(q0, v3);
+    Assert.assertNotEquals(q0, v4);
+    Assert.assertNotEquals(q0, v5);
+    Assert.assertNotEquals(q0, null);
+    Assert.assertNotEquals(q0, Integer.valueOf(23));
 
-    Assert.assertEquals(v0.toString(), v1.toString());
-    Assert.assertNotEquals(v0.toString(), v2.toString());
-    Assert.assertNotEquals(v0.toString(), v3.toString());
-    Assert.assertNotEquals(v0.toString(), v4.toString());
-    Assert.assertNotEquals(v0.toString(), v5.toString());
+    Assert.assertEquals(q0.toString(), q1.toString());
+    Assert.assertNotEquals(q0.toString(), q2.toString());
+    Assert.assertNotEquals(q0.toString(), v3.toString());
+    Assert.assertNotEquals(q0.toString(), v4.toString());
+    Assert.assertNotEquals(q0.toString(), v5.toString());
 
-    Assert.assertEquals(v0.hashCode(), v1.hashCode());
-    Assert.assertNotEquals(v0.hashCode(), v2.hashCode());
-    Assert.assertNotEquals(v0.hashCode(), v3.hashCode());
-    Assert.assertNotEquals(v0.hashCode(), v4.hashCode());
-    Assert.assertNotEquals(v0.hashCode(), v5.hashCode());
+    Assert.assertEquals(q0.hashCode(), q1.hashCode());
+    Assert.assertNotEquals(q0.hashCode(), q2.hashCode());
+    Assert.assertNotEquals(q0.hashCode(), v3.hashCode());
+    Assert.assertNotEquals(q0.hashCode(), v4.hashCode());
+    Assert.assertNotEquals(q0.hashCode(), v5.hashCode());
 
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), v0.x());
-    <testOpClass>.checkEquals(<testOpClass>.constant("1"), v0.y());
-    <testOpClass>.checkEquals(<testOpClass>.constant("2"), v0.z());
-    <testOpClass>.checkEquals(<testOpClass>.constant("3"), v0.w());
+    <testOpClass>.checkEquals(<testOpClass>.constant("0"), q0.x());
+    <testOpClass>.checkEquals(<testOpClass>.constant("1"), q0.y());
+    <testOpClass>.checkEquals(<testOpClass>.constant("2"), q0.z());
+    <testOpClass>.checkEquals(<testOpClass>.constant("3"), q0.w());
   }
 
   @Test
   public void testBuilder()
   {
-    final <quaternionType> v0 =
+    final <quaternionType> q0 =
       <quaternionType>.builder()
       .setX(<testOpClass>.constant("0"))
       .setY(<testOpClass>.constant("1"))
@@ -141,17 +140,17 @@ public final class <className>
       .setW(<testOpClass>.constant("3"))
       .build();
 
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), v0.x());
-    <testOpClass>.checkEquals(<testOpClass>.constant("1"), v0.y());
-    <testOpClass>.checkEquals(<testOpClass>.constant("2"), v0.z());
-    <testOpClass>.checkEquals(<testOpClass>.constant("3"), v0.w());
+    <testOpClass>.checkEquals(<testOpClass>.constant("0"), q0.x());
+    <testOpClass>.checkEquals(<testOpClass>.constant("1"), q0.y());
+    <testOpClass>.checkEquals(<testOpClass>.constant("2"), q0.z());
+    <testOpClass>.checkEquals(<testOpClass>.constant("3"), q0.w());
 
     {
-      final <quaternionType> v1 =
+      final <quaternionType> q1 =
         <quaternionType>.builder()
-        .from(v0)
+        .from(q0)
         .build();
-      Assert.assertEquals(v0, v1);
+      Assert.assertEquals(q0, q1);
     }
   }
 
@@ -160,7 +159,7 @@ public final class <className>
   {
     this.expected.expect(IllegalStateException.class);
 
-    final <quaternionType> v0 =
+    final <quaternionType> q0 =
       <quaternionType>.builder()
       .build();
 
@@ -172,19 +171,200 @@ public final class <className>
   public void testAdd()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
-    final <quaternionType> v0 = gen.next();
-    final <quaternionType> v1 = gen.next();
+    final <quaternionType> q0 = gen.next();
+    final <quaternionType> q1 = gen.next();
 
-    <quaternionComponentType> ex = (<quaternionComponentType>) <testOpClass>.add(v0.x(), v1.x());
-    <quaternionComponentType> ey = (<quaternionComponentType>) <testOpClass>.add(v0.y(), v1.y());
-    <quaternionComponentType> ez = (<quaternionComponentType>) <testOpClass>.add(v0.z(), v1.z());
-    <quaternionComponentType> ew = (<quaternionComponentType>) <testOpClass>.add(v0.w(), v1.w());
+    <quaternionComponentType> ex = (<quaternionComponentType>) <testOpClass>.add(q0.x(), q1.x());
+    <quaternionComponentType> ey = (<quaternionComponentType>) <testOpClass>.add(q0.y(), q1.y());
+    <quaternionComponentType> ez = (<quaternionComponentType>) <testOpClass>.add(q0.z(), q1.z());
+    <quaternionComponentType> ew = (<quaternionComponentType>) <testOpClass>.add(q0.w(), q1.w());
 
-    final <quaternionType> v2 = <opClass>.add(v0, v1);
-    <testOpClass>.checkAlmostEquals(ex, v2.x());
-    <testOpClass>.checkAlmostEquals(ey, v2.y());
-    <testOpClass>.checkAlmostEquals(ez, v2.z());
-    <testOpClass>.checkAlmostEquals(ew, v2.w());
+    final <quaternionType> q2 = <opClass>.add(q0, q1);
+    <testOpClass>.checkAlmostEquals(ex, q2.x());
+    <testOpClass>.checkAlmostEquals(ey, q2.y());
+    <testOpClass>.checkAlmostEquals(ez, q2.z());
+    <testOpClass>.checkAlmostEquals(ew, q2.w());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testConjugate()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+    final <quaternionType> q0 = gen.next();
+
+    final <quaternionType> q1 = <opClass>.conjugate(q0);
+    <testOpClass>.checkAlmostEquals(<testOpClass>.negate(q0.x()), q1.x());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.negate(q0.y()), q1.y());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.negate(q0.z()), q1.z());
+    <testOpClass>.checkAlmostEquals(q0.w(), q1.w());
+
+    final <quaternionType> q2 = <opClass>.conjugate(q1);
+    <testOpClass>.checkAlmostEquals(q0.x(), q2.x());
+    <testOpClass>.checkAlmostEquals(q0.y(), q2.y());
+    <testOpClass>.checkAlmostEquals(q0.z(), q2.z());
+    <testOpClass>.checkAlmostEquals(q0.w(), q2.w());
+  }
+
+  @Test
+  @PercentagePassing(passPercent = 80.0)
+  public void testDotProductSelfMagnitudeSquared()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = gen.next();
+
+    <testOpClass>.checkAlmostEquals(
+      <opClass>.magnitudeSquared(q0),
+      <opClass>.dotProduct(q0, q0));
+  }
+
+  @Test
+  @PercentagePassing
+  public void testInterpolateLinearLimits()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = gen.next();
+    final <quaternionType> q1 = gen.next();
+
+    final <quaternionType> q2 =
+      <opClass>.interpolateLinear(q0, q1, <testOpClass>.constant("0"));
+
+    <testOpClass>.checkAlmostEquals(q0.x(), q2.x());
+    <testOpClass>.checkAlmostEquals(q0.y(), q2.y());
+    <testOpClass>.checkAlmostEquals(q0.z(), q2.z());
+    <testOpClass>.checkAlmostEquals(q0.w(), q2.w());
+
+    final <quaternionType> v3 =
+      <opClass>.interpolateLinear(q0, q1, <testOpClass>.constant("1"));
+
+    <testOpClass>.checkAlmostEquals(q1.x(), v3.x());
+    <testOpClass>.checkAlmostEquals(q1.y(), v3.y());
+    <testOpClass>.checkAlmostEquals(q1.z(), v3.z());
+    <testOpClass>.checkAlmostEquals(q1.w(), v3.w());
+  }
+
+  @Test
+  public void testMagnitudeSquaredZero()
+  {
+    <testOpClass>.checkAlmostEquals(
+      <testOpClass>.constant("0"),
+      <opClass>.magnitudeSquared(<opClass>.zero()));
+  }
+
+  @Test
+  public void testMagnitudeZero()
+  {
+    <testOpClass>.checkAlmostEquals(
+      <testOpClass>.constant("0"),
+      <opClass>.magnitude(<opClass>.zero()));
+  }
+
+  @Test
+  public void testMagnitudeSquaredIdentity()
+  {
+    <testOpClass>.checkAlmostEquals(
+      <testOpClass>.constant("1"),
+      <opClass>.magnitudeSquared(<opClass>.identity()));
+  }
+
+  @Test
+  public void testMagnitudeIdentity()
+  {
+    <testOpClass>.checkAlmostEquals(
+      <testOpClass>.constant("1"),
+      <opClass>.magnitude(<opClass>.identity()));
+  }
+
+  @Test
+  @PercentagePassing
+  public void testMagnitudeNormalizeOne()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = gen.next();
+    final <quaternionType> vn = <opClass>.normalize(q0);
+    final <scalarRealType> m = <opClass>.magnitude(vn);
+
+    if (<testOpClass>.compareReal(m, <testOpClass>.constant("0")) > 0) {
+      <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), m);
+    } else {
+      Assert.assertEquals(q0, vn);
+    }
+  }
+
+  @Test
+  public void testNormalizeZero()
+  {
+    Assert.assertEquals(<opClass>.zero(), <opClass>.normalize(<opClass>.zero()));
+  }
+
+  @Test
+  @PercentagePassing
+  public void testScale()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = gen.next();
+    final <scalarRealType> r = gen.next().x();
+
+    <quaternionComponentType> ex = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.x(), r);
+    <quaternionComponentType> ey = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.y(), r);
+    <quaternionComponentType> ez = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.z(), r);
+    <quaternionComponentType> ew = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.w(), r);
+
+    final <quaternionType> q2 = <opClass>.scale(q0, r);
+    <testOpClass>.checkAlmostEquals(ex, q2.x());
+    <testOpClass>.checkAlmostEquals(ey, q2.y());
+    <testOpClass>.checkAlmostEquals(ez, q2.z());
+    <testOpClass>.checkAlmostEquals(ew, q2.w());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testScaleZero()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = gen.next();
+    final <quaternionType> q1 = <opClass>.scale(q0, <testOpClass>.constant("0"));
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), q1.x());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), q1.y());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), q1.z());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), q1.w());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testScaleOne()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = gen.next();
+    final <quaternionType> q1 = <opClass>.scale(q0, <testOpClass>.constant("1"));
+    Assert.assertEquals(q0, q1);
+  }
+
+  @Test
+  @PercentagePassing
+  public void testSubtract()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = gen.next();
+    final <quaternionType> q1 = gen.next();
+
+    <quaternionComponentType> ex = (<quaternionComponentType>) <testOpClass>.subtract(q0.x(), q1.x());
+    <quaternionComponentType> ey = (<quaternionComponentType>) <testOpClass>.subtract(q0.y(), q1.y());
+    <quaternionComponentType> ez = (<quaternionComponentType>) <testOpClass>.subtract(q0.z(), q1.z());
+    <quaternionComponentType> ew = (<quaternionComponentType>) <testOpClass>.subtract(q0.w(), q1.w());
+
+    final <quaternionType> q2 = <opClass>.subtract(q0, q1);
+    <testOpClass>.checkAlmostEquals(ex, q2.x());
+    <testOpClass>.checkAlmostEquals(ey, q2.y());
+    <testOpClass>.checkAlmostEquals(ez, q2.z());
+    <testOpClass>.checkAlmostEquals(ew, q2.w());
   }
 }
 >>

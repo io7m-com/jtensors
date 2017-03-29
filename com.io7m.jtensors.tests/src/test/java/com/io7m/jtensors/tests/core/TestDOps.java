@@ -196,6 +196,12 @@ public final class TestDOps
     return Math.abs(x);
   }
 
+  public static double negate(
+    final double x)
+  {
+    return -x;
+  }
+
   public static double add(
     final double x,
     final double y)

@@ -775,7 +775,6 @@
                     <scalarRealType>double</scalarRealType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
                     <opClass>com.io7m.jtensors.core.quaternions.QuaternionDOps</opClass>
-                    <hasFloatingPoint>true</hasFloatingPoint>
                   </properties>
                 </template>
               </templates>
@@ -801,7 +800,6 @@
                     <scalarRealType>double</scalarRealType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
                     <opClass>com.io7m.jtensors.core.quaternions.QuaternionFOps</opClass>
-                    <hasFloatingPoint>true</hasFloatingPoint>
                   </properties>
                 </template>
               </templates>
