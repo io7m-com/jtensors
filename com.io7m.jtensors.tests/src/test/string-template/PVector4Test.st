@@ -61,6 +61,12 @@ public final class <className>
     return (Generator\<<vectorType>\>) o_gen;
   }
 
+  private static Generator\<<vectorType>\> createGeneratorSmall()
+  {
+    final Object o_gen = <generatorType>.createSmall();
+    return (Generator\<<vectorType>\>) o_gen;
+  }
+
   @Test
   public void testEqualsHashCodeToString()
   {
@@ -239,6 +245,70 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(ey, v2.y());
     <testOpClass>.checkAlmostEquals(ez, v2.z());
     <testOpClass>.checkAlmostEquals(ew, v2.w());
+  }
+
+  /**
+   * ∀ v0 v1 v2. add(add(v0, v1), v2) == add(v0, add(v1, v2))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testAddAssociative()
+  {
+    final Generator\<<vectorType>\> gen = createGeneratorSmall();
+
+    final <vectorType> v0 = gen.next();
+    final <vectorType> v1 = gen.next();
+    final <vectorType> v2 = gen.next();
+
+    final <vectorType> vr0 = <opClass>.add(<opClass>.add(v0, v1), v2);
+    final <vectorType> vr1 = <opClass>.add(v0, <opClass>.add(v1, v2));
+
+    <testOpClass>.checkAlmostEqualsVague(vr0.x(), vr1.x());
+    <testOpClass>.checkAlmostEqualsVague(vr0.y(), vr1.y());
+    <testOpClass>.checkAlmostEqualsVague(vr0.z(), vr1.z());
+    <testOpClass>.checkAlmostEqualsVague(vr0.w(), vr1.w());
+  }
+
+  /**
+   * ∀ v0 v1. add(v0, v1) == add(v1, v0)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testAddCommutative()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> v0 = gen.next();
+    final <vectorType> v1 = gen.next();
+
+    final <vectorType> vr0 = <opClass>.add(v0, v1);
+    final <vectorType> vr1 = <opClass>.add(v1, v0);
+
+    <testOpClass>.checkAlmostEquals(vr0.x(), vr1.x());
+    <testOpClass>.checkAlmostEquals(vr0.y(), vr1.y());
+    <testOpClass>.checkAlmostEquals(vr0.z(), vr1.z());
+    <testOpClass>.checkAlmostEquals(vr0.w(), vr1.w());
+  }
+
+  /**
+   * ∀ v0. add(v0, negate(v0)) == (0, 0, 0, 0)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testAddNegationZero()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> v0 = gen.next();
+    final <vectorType> vr0 = <opClass>.add(v0, <opClass>.negate(v0));
+
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), vr0.x());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), vr0.y());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), vr0.z());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), vr0.w());
   }
 
   @Test

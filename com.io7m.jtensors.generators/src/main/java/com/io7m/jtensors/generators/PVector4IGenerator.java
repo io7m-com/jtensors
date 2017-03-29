@@ -59,6 +59,23 @@ public final class PVector4IGenerator<T> implements Generator<PVector4I<T>>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-128, 128]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector4I<T>> createSmall()
+  {
+    return new PVector4IGenerator<>(PrimitiveGenerators.integers(
+      -128,
+      128
+    ));
+  }
+
   @Override
   public PVector4I<T> next()
   {

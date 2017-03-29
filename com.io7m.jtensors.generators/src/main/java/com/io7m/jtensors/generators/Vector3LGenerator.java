@@ -55,6 +55,21 @@ public final class Vector3LGenerator implements Generator<Vector3L>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-65536, 65536]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector3L> createSmall()
+  {
+    return new Vector3LGenerator(PrimitiveGenerators.longs(
+      -65536L,
+      65536L
+    ));
+  }
+
   @Override
   public Vector3L next()
   {

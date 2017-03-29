@@ -38,6 +38,12 @@ final class PVectorDOps
     return value0 + value1;
   }
 
+  static double negate(
+    final double value0)
+  {
+    return -value0;
+  }
+
   static double subtract(
     final double value0,
     final double value1)

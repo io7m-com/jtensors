@@ -47,6 +47,13 @@ public final class TestIOps
     Assert.assertEquals(x, y, 1.0e-10);
   }
 
+  public static void checkAlmostEqualsVague(
+    final double x,
+    final double y)
+  {
+    Assert.assertEquals(x, y, 1.0e-10);
+  }
+
   public static int constant(
     final String text)
   {

@@ -44,6 +44,23 @@ public final class PVector2DGenerator<T> implements Generator<PVector2D<T>>
   }
 
   /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-(2 ^ 16), 2 ^ 16]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector2D<T>> createSmall()
+  {
+    return new PVector2DGenerator<>(PrimitiveGenerators.doubles(
+      -65536.0,
+      65536.0
+    ));
+  }
+
+  /**
    * Create a generator initialized with a default component generator.
    *
    * @param <T> A phantom type parameter

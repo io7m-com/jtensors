@@ -38,6 +38,12 @@ final class VectorIOps
     return Math.addExact(value0, value1);
   }
 
+  static int negate(
+    final int value0)
+  {
+    return -value0;
+  }
+
   static int subtract(
     final int value0,
     final int value1)

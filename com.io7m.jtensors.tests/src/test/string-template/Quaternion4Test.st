@@ -186,6 +186,70 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(ew, q2.w());
   }
 
+  /**
+   * ∀ q0 q1 q2. add(add(q0, q1), q2) == add(q0, add(q1, q2))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testAddAssociative()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = gen.next();
+    final <quaternionType> q1 = gen.next();
+    final <quaternionType> q2 = gen.next();
+
+    final <quaternionType> qr0 = <opClass>.add(<opClass>.add(q0, q1), q2);
+    final <quaternionType> qr1 = <opClass>.add(q0, <opClass>.add(q1, q2));
+
+    <testOpClass>.checkAlmostEquals(qr0.x(), qr1.x());
+    <testOpClass>.checkAlmostEquals(qr0.y(), qr1.y());
+    <testOpClass>.checkAlmostEquals(qr0.z(), qr1.z());
+    <testOpClass>.checkAlmostEquals(qr0.w(), qr1.w());
+  }
+
+  /**
+   * ∀ q0 q1. add(q0, q1) == add(q1, q0)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testAddCommutative()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = gen.next();
+    final <quaternionType> q1 = gen.next();
+
+    final <quaternionType> qr0 = <opClass>.add(q0, q1);
+    final <quaternionType> qr1 = <opClass>.add(q1, q0);
+
+    <testOpClass>.checkAlmostEquals(qr0.x(), qr1.x());
+    <testOpClass>.checkAlmostEquals(qr0.y(), qr1.y());
+    <testOpClass>.checkAlmostEquals(qr0.z(), qr1.z());
+    <testOpClass>.checkAlmostEquals(qr0.w(), qr1.w());
+  }
+
+  /**
+   * ∀ q0. add(q0, negate(q0)) == (0, 0, 0, 0)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testAddNegationZero()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = gen.next();
+    final <quaternionType> qr0 = <opClass>.add(q0, <opClass>.negate(q0));
+
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.x());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.y());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.z());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.w());
+  }
+
   @Test
   @PercentagePassing
   public void testConjugate()
@@ -292,6 +356,48 @@ public final class <className>
     } else {
       Assert.assertEquals(q0, vn);
     }
+  }
+
+  /**
+   * ∀ q0 q1 q2. multiply(multiply(q0, q1), q2) == multiply(q0, multiply(q1, q2))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testMultiplyAssociative()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = gen.next();
+    final <quaternionType> q1 = gen.next();
+    final <quaternionType> q2 = gen.next();
+
+    final <quaternionType> qr0 = <opClass>.multiply(<opClass>.multiply(q0, q1), q2);
+    final <quaternionType> qr1 = <opClass>.multiply(q0, <opClass>.multiply(q1, q2));
+
+    <testOpClass>.checkAlmostEquals(qr0.x(), qr1.x());
+    <testOpClass>.checkAlmostEquals(qr0.y(), qr1.y());
+    <testOpClass>.checkAlmostEquals(qr0.z(), qr1.z());
+    <testOpClass>.checkAlmostEquals(qr0.w(), qr1.w());
+  }
+
+  /**
+   * ∀ q0. multiply(q0, conjugate(q0)) == (0, 0, 0, 1)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testMultiplyConjugateIdentity()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = <opClass>.normalize(gen.next());
+    final <quaternionType> qr0 = <opClass>.normalize(<opClass>.multiply(q0, <opClass>.conjugate(q0)));
+
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.x());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.y());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.z());
+    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), qr0.w());
   }
 
   @Test

@@ -174,6 +174,112 @@ public final class <className>
   }
 
   /**
+   * \<p>Multiply the quaternion {@code q0} by the quaternion {@code q1}.\</p>
+   *
+   * \<p>Note that this operation is not commutative.\</p>
+   *
+   * \<p>The function is most often used to concatenate quaternions to combine
+   * rotations. As an example, assuming that:\</p>
+   *
+   * \<ul>
+   *    \<li>{@code qx} represents some rotation around the X axis\</li>
+   *    \<li>{@code qy} represents some rotation around the Y axis\</li>
+   *    \<li>{@code qz} represents some rotation around the Z axis\</li>
+   * \</ul>
+   *
+   * \<p>The following code produces a quaternion {@code qr1} that represents a
+   * rotation around the X axis, followed by a rotation around the Y axis,
+   * followed by a rotation around the Z axis:\</p>
+   *
+   * {@code qr0 = multiply(qy, qx); qr1 = multiply(qz, qy); }
+   *
+   * @param q0 The left input quaternion
+   * @param q1 The right input quaternion
+   * @return The multiplication of the input quaternions
+   */
+
+  public static <quaternionType> multiply(
+    final <quaternionType> q0,
+    final <quaternionType> q1)
+  {
+    final <scalarRealType> q0_x = q0.x();
+    final <scalarRealType> q0_y = q0.y();
+    final <scalarRealType> q0_z = q0.z();
+    final <scalarRealType> q0_w = q0.w();
+
+    final <scalarRealType> q1_x = q1.x();
+    final <scalarRealType> q1_y = q1.y();
+    final <scalarRealType> q1_z = q1.z();
+    final <scalarRealType> q1_w = q1.w();
+
+    final <scalarRealType> q0_w_q1_x =
+      <opClass>.multiplyReal(q0_w, q1_x);
+    final <scalarRealType> q0_x_q1_w =
+      <opClass>.multiplyReal(q0_x, q1_w);
+    final <scalarRealType> q0_y_q1_z =
+      <opClass>.multiplyReal(q0_y, q1_z);
+    final <scalarRealType> q0_z_q1_y =
+      <opClass>.multiplyReal(q0_z, q1_y);
+    final <scalarRealType> rx =
+      <opClass>.subtract(
+        <opClass>.add(
+          <opClass>.add(q0_w_q1_x, q0_x_q1_w),
+          q0_y_q1_z),
+        q0_z_q1_y);
+
+    final <scalarRealType> q0_w_q1_y =
+      <opClass>.multiplyReal(q0_w, q1_y);
+    final <scalarRealType> q0_x_q1_z =
+      <opClass>.multiplyReal(q0_x, q1_z);
+    final <scalarRealType> q0_y_q1_w =
+      <opClass>.multiplyReal(q0_y, q1_w);
+    final <scalarRealType> q0_z_q1_x =
+      <opClass>.multiplyReal(q0_z, q1_x);
+    final <scalarRealType> ry =
+      <opClass>.add(
+        <opClass>.subtract(q0_w_q1_y, q0_x_q1_z),
+        <opClass>.add(q0_y_q1_w, q0_z_q1_x));
+
+    final <scalarRealType> q0_w_q1_z =
+      <opClass>.multiplyReal(q0_w, q1_z);
+    final <scalarRealType> q0_x_q1_y =
+      <opClass>.multiplyReal(q0_x, q1_y);
+    final <scalarRealType> q0_y_q1_x =
+      <opClass>.multiplyReal(q0_y, q1_x);
+    final <scalarRealType> q0_z_q1_w =
+      <opClass>.multiplyReal(q0_z, q1_w);
+    final <scalarRealType> rz =
+      <opClass>.add(
+        <opClass>.subtract(
+          <opClass>.add(q0_w_q1_z, q0_x_q1_y),
+          q0_y_q1_x),
+        q0_z_q1_w);
+
+    final <scalarRealType> q0_w_q1_w =
+      <opClass>.multiplyReal(q0_w, q1_w);
+    final <scalarRealType> q0_x_q1_x =
+      <opClass>.multiplyReal(q0_x, q1_x);
+    final <scalarRealType> q0_y_q1_y =
+      <opClass>.multiplyReal(q0_y, q1_y);
+    final <scalarRealType> q0_z_q1_z =
+      <opClass>.multiplyReal(q0_z, q1_z);
+    final <scalarRealType> rw =
+      <opClass>.subtract(
+        <opClass>.subtract(
+          <opClass>.subtract(
+            q0_w_q1_w,
+            q0_x_q1_x),
+          q0_y_q1_y),
+        q0_z_q1_z);
+
+    return <quaternionType>.of(
+      (<quaternionComponentType>) rx,
+      (<quaternionComponentType>) ry,
+      (<quaternionComponentType>) rz,
+      (<quaternionComponentType>) rw);
+  }
+
+  /**
    * \<p>Normalize the quaternion {@code q0}.\</p>
    * \<p>If the magnitude of the quaternion is zero, the function returns {@code q0}.\</p>
    * @param q0 The quaternion
@@ -191,6 +297,23 @@ public final class <className>
     }
 
     return q0;
+  }
+
+  /**
+   * Calculate the negation of the input quaternion {@code q}.
+   *
+   * @param q The input quaternion
+   * @return The negation of the input quaternion
+   */
+
+  public static <quaternionType> negate(
+    final <quaternionType> q)
+  {
+    return <quaternionType>.of(
+      (<quaternionComponentType>) <opClass>.negate(q.x()),
+      (<quaternionComponentType>) <opClass>.negate(q.y()),
+      (<quaternionComponentType>) <opClass>.negate(q.z()),
+      (<quaternionComponentType>) <opClass>.negate(q.w()));
   }
 
   /**

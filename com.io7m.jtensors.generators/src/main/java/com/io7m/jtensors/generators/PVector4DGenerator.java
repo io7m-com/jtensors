@@ -61,6 +61,23 @@ public final class PVector4DGenerator<T> implements Generator<PVector4D<T>>
 
   /**
    * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-(2 ^ 16), 2 ^ 16]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector4D<T>> createSmall()
+  {
+    return new PVector4DGenerator<>(PrimitiveGenerators.doubles(
+      -65536.0,
+      65536.0
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
    * produces values in the range {@code [-1.0, 1.0]}.
    *
    * @param <T> A phantom type parameter

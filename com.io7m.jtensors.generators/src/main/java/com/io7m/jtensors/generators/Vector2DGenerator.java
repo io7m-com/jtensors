@@ -55,6 +55,21 @@ public final class Vector2DGenerator implements Generator<Vector2D>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-65536.0, 65536.0]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector2D> createSmall()
+  {
+    return new Vector2DGenerator(PrimitiveGenerators.doubles(
+      -65536.0,
+      65536.0
+    ));
+  }
+
   @Override
   public Vector2D next()
   {

@@ -40,6 +40,13 @@ public final class TestFOps
     Assert.assertEquals(x, y, 1.0e-6);
   }
 
+  public static void checkAlmostEqualsVague(
+    final double x,
+    final double y)
+  {
+    Assert.assertEquals(x, y, 0.1);
+  }
+
   public static float radiansOfDegrees(
     final String text)
   {

@@ -55,6 +55,21 @@ public final class Vector3IGenerator implements Generator<Vector3I>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-128, 128]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector3I> createSmall()
+  {
+    return new Vector3IGenerator(PrimitiveGenerators.integers(
+      -128,
+      128
+    ));
+  }
+
   @Override
   public Vector3I next()
   {

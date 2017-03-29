@@ -57,6 +57,23 @@ public final class Vector4DGenerator implements Generator<Vector4D>
 
   /**
    * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-65536.0, 65536.0]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<Vector4D> createSmall()
+  {
+    return new Vector4DGenerator(PrimitiveGenerators.doubles(
+      -65536.0,
+      65536.0
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
    * produces values in the range {@code [-1.0, 1.0]}.
    *
    * @param <T> A phantom type parameter

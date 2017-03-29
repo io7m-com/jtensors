@@ -178,6 +178,13 @@ public final class TestDOps
     Assert.assertEquals(x, y, 1.0e-10);
   }
 
+  public static void checkAlmostEqualsVague(
+    final double x,
+    final double y)
+  {
+    Assert.assertEquals(x, y, 1.0e-10);
+  }
+
   public static double constant(
     final String text)
   {

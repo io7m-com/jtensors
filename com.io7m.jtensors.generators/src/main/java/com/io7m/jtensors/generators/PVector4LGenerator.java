@@ -59,6 +59,23 @@ public final class PVector4LGenerator<T> implements Generator<PVector4L<T>>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-65536, 65536]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector4L<T>> createSmall()
+  {
+    return new PVector4LGenerator<>(PrimitiveGenerators.longs(
+      -65536L,
+      65536L
+    ));
+  }
+
   @Override
   public PVector4L<T> next()
   {

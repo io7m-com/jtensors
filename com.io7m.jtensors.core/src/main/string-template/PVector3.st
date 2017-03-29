@@ -260,6 +260,31 @@ public final class <className>
     return <opClass>.squareRootLarge(magnitudeSquared(v0));
   }
 
+  /**
+   * Calculate the negation of {@code v}.
+   *
+   * @return {@code (-v.x, -v.y, -v.z) }
+   * <if(hasGeneric)>
+   * @param \<T> A phantom type parameter
+   * <endif>
+   * @param v The vector
+   */
+
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T> negate(
+    final <vectorType>\<T> v)
+  <else>
+  <vectorType> negate(
+    final <vectorType> v)
+  <endif>
+  {
+    return <vectorType>.of(
+      (<vectorComponentType>) <opClass>.negate(v.x()),
+      (<vectorComponentType>) <opClass>.negate(v.y()),
+      (<vectorComponentType>) <opClass>.negate(v.z()));
+  }
+
   <if(hasFloatingPoint)>
   /**
    * \<p>Normalize the vector {@code v0}.\</p>

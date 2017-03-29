@@ -55,6 +55,21 @@ public final class Vector2IGenerator implements Generator<Vector2I>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-128, 128]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector2I> createSmall()
+  {
+    return new Vector2IGenerator(PrimitiveGenerators.integers(
+      -128,
+      128
+    ));
+  }
+
   @Override
   public Vector2I next()
   {

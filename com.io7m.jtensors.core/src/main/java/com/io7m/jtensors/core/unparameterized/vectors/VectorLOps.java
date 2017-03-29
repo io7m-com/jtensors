@@ -38,6 +38,12 @@ final class VectorLOps
     return Math.addExact(value0, value1);
   }
 
+  static long negate(
+    final long value0)
+  {
+    return -value0;
+  }
+
   static long subtract(
     final long value0,
     final long value1)
