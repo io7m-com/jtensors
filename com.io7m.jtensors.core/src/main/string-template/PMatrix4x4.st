@@ -146,23 +146,10 @@ public final class <className>
   <endif>
   {
     return <opClass>.determinant4x4(
-      m.r0c0(),
-      m.r0c1(),
-      m.r0c2(),
-      m.r0c3(),
-      m.r1c0(),
-      m.r1c1(),
-      m.r1c2(),
-      m.r1c3(),
-      m.r2c0(),
-      m.r2c1(),
-      m.r2c2(),
-      m.r2c3(),
-      m.r3c0(),
-      m.r3c1(),
-      m.r3c2(),
-      m.r3c3()
-    );
+      m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
+      m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
+      m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
+      m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3());
   }
 
   /**
@@ -499,23 +486,10 @@ public final class <className>
     }
 
     return Optional.of(transpose(<matrixType>.of(
-      r0c0 * d_inv,
-      r0c1 * d_inv,
-      r0c2 * d_inv,
-      r0c3 * d_inv,
-      r1c0 * d_inv,
-      r1c1 * d_inv,
-      r1c2 * d_inv,
-      r1c3 * d_inv,
-      r2c0 * d_inv,
-      r2c1 * d_inv,
-      r2c2 * d_inv,
-      r2c3 * d_inv,
-      r3c0 * d_inv,
-      r3c1 * d_inv,
-      r3c2 * d_inv,
-      r3c3 * d_inv
-    )));
+      r0c0 * d_inv, r0c1 * d_inv, r0c2 * d_inv, r0c3 * d_inv,
+      r1c0 * d_inv, r1c1 * d_inv, r1c2 * d_inv, r1c3 * d_inv,
+      r2c0 * d_inv, r2c1 * d_inv, r2c2 * d_inv, r2c3 * d_inv,
+      r3c0 * d_inv, r3c1 * d_inv, r3c2 * d_inv, r3c3 * d_inv)));
   }
 
   /**
@@ -674,23 +648,10 @@ public final class <className>
       + <opClass>.multiply(m0_r3c3, m1_r3c3);
 
     return <matrixType>.of(
-      r0c0,
-      r0c1,
-      r0c2,
-      r0c3,
-      r1c0,
-      r1c1,
-      r1c2,
-      r1c3,
-      r2c0,
-      r2c1,
-      r2c2,
-      r2c3,
-      r3c0,
-      r3c1,
-      r3c2,
-      r3c3
-    );
+      r0c0, r0c1, r0c2, r0c3,
+      r1c0, r1c1, r1c2, r1c3,
+      r2c0, r2c1, r2c2, r2c3,
+      r3c0, r3c1, r3c2, r3c3);
   }
 
   <if(hasGeneric)>
@@ -798,23 +759,10 @@ public final class <className>
     final <vectorColumnType> c3)
   {
     return <matrixType>.of(
-      c0.x(),
-      c1.x(),
-      c2.x(),
-      c3.x(),
-      c0.y(),
-      c1.y(),
-      c2.y(),
-      c3.y(),
-      c0.z(),
-      c1.z(),
-      c2.z(),
-      c3.z(),
-      c0.w(),
-      c1.w(),
-      c2.w(),
-      c3.w()
-    );
+      c0.x(), c1.x(), c2.x(), c3.x(),
+      c0.y(), c1.y(), c2.y(), c3.y(),
+      c0.z(), c1.z(), c2.z(), c3.z(),
+      c0.w(), c1.w(), c2.w(), c3.w());
   }
 
   /**
@@ -843,23 +791,10 @@ public final class <className>
     final <vectorColumnType> r3)
   {
     return <matrixType>.of(
-      r0.x(),
-      r0.y(),
-      r0.z(),
-      r0.w(),
-      r1.x(),
-      r1.y(),
-      r1.z(),
-      r1.w(),
-      r2.x(),
-      r2.y(),
-      r2.z(),
-      r2.w(),
-      r3.x(),
-      r3.y(),
-      r3.z(),
-      r3.w()
-    );
+      r0.x(), r0.y(), r0.z(), r0.w(),
+      r1.x(), r1.y(), r1.z(), r1.w(),
+      r2.x(), r2.y(), r2.z(), r2.w(),
+      r3.x(), r3.y(), r3.z(), r3.w());
   }
 
   /**
@@ -992,22 +927,10 @@ public final class <className>
     final <scalarRealType> r3c3 = <opClass>.one();
 
     return <matrixType>.of(
-      r0c0,
-      r0c1,
-      r0c2,
-      r0c3,
-      r1c0,
-      r1c1,
-      r1c2,
-      r1c3,
-      r2c0,
-      r2c1,
-      r2c2,
-      r2c3,
-      r3c0,
-      r3c1,
-      r3c2,
-      r3c3
+      r0c0, r0c1, r0c2, r0c3,
+      r1c0, r1c1, r1c2, r1c3,
+      r2c0, r2c1, r2c2, r2c3,
+      r3c0, r3c1, r3c2, r3c3
     );
   }
 
@@ -1289,23 +1212,10 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(),
-      m.r1c0(),
-      m.r2c0(),
-      m.r3c0(),
-      m.r0c1(),
-      m.r1c1(),
-      m.r2c1(),
-      m.r3c1(),
-      m.r0c2(),
-      m.r1c2(),
-      m.r2c2(),
-      m.r3c2(),
-      m.r0c3(),
-      m.r1c3(),
-      m.r2c3(),
-      m.r3c3()
-    );
+      m.r0c0(), m.r1c0(), m.r2c0(), m.r3c0(),
+      m.r0c1(), m.r1c1(), m.r2c1(), m.r3c1(),
+      m.r0c2(), m.r1c2(), m.r2c2(), m.r3c2(),
+      m.r0c3(), m.r1c3(), m.r2c3(), m.r3c3());
   }
 
   private static
@@ -1328,26 +1238,10 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      r0,
-      m.r0c1(),
-      m.r0c2(),
-      m.r0c3(),
-
-      r1,
-      m.r1c1(),
-      m.r1c2(),
-      m.r1c3(),
-
-      r2,
-      m.r2c1(),
-      m.r2c2(),
-      m.r2c3(),
-
-      r3,
-      m.r3c1(),
-      m.r3c2(),
-      m.r3c3()
-    );
+      r0, m.r0c1(), m.r0c2(), m.r0c3(),
+      r1, m.r1c1(), m.r1c2(), m.r1c3(),
+      r2, m.r2c1(), m.r2c2(), m.r2c3(),
+      r3, m.r3c1(), m.r3c2(), m.r3c3());
   }
 
   private static
@@ -1370,26 +1264,10 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(),
-      r0,
-      m.r0c2(),
-      m.r0c3(),
-
-      m.r1c0(),
-      r1,
-      m.r1c2(),
-      m.r1c3(),
-
-      m.r2c0(),
-      r2,
-      m.r2c2(),
-      m.r2c3(),
-
-      m.r3c0(),
-      r3,
-      m.r3c2(),
-      m.r3c3()
-    );
+      m.r0c0(), r0, m.r0c2(), m.r0c3(),
+      m.r1c0(), r1, m.r1c2(), m.r1c3(),
+      m.r2c0(), r2, m.r2c2(), m.r2c3(),
+      m.r3c0(), r3, m.r3c2(), m.r3c3());
   }
 
   private static
@@ -1412,26 +1290,10 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(),
-      m.r0c1(),
-      r0,
-      m.r0c3(),
-
-      m.r1c0(),
-      m.r1c1(),
-      r1,
-      m.r1c3(),
-
-      m.r2c0(),
-      m.r2c1(),
-      r2,
-      m.r2c3(),
-
-      m.r3c0(),
-      m.r3c1(),
-      r3,
-      m.r3c3()
-    );
+      m.r0c0(), m.r0c1(), r0, m.r0c3(),
+      m.r1c0(), m.r1c1(), r1, m.r1c3(),
+      m.r2c0(), m.r2c1(), r2, m.r2c3(),
+      m.r3c0(), m.r3c1(), r3, m.r3c3());
   }
 
   private static
@@ -1454,26 +1316,10 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(),
-      m.r0c1(),
-      m.r0c2(),
-      r0,
-
-      m.r1c0(),
-      m.r1c1(),
-      m.r1c2(),
-      r1,
-
-      m.r2c0(),
-      m.r2c1(),
-      m.r2c2(),
-      r2,
-
-      m.r3c0(),
-      m.r3c1(),
-      m.r3c2(),
-      r3
-    );
+      m.r0c0(), m.r0c1(), m.r0c2(), r0,
+      m.r1c0(), m.r1c1(), m.r1c2(), r1,
+      m.r2c0(), m.r2c1(), m.r2c2(), r2,
+      m.r3c0(), m.r3c1(), m.r3c2(), r3);
   }
 
   /**
@@ -1556,23 +1402,10 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      c0,
-      c1,
-      c2,
-      c3,
-      m.r1c0(),
-      m.r1c1(),
-      m.r1c2(),
-      m.r1c3(),
-      m.r2c0(),
-      m.r2c1(),
-      m.r2c2(),
-      m.r2c3(),
-      m.r3c0(),
-      m.r3c1(),
-      m.r3c2(),
-      m.r3c3()
-    );
+      c0,       c1,       c2,       c3,
+      m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
+      m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
+      m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3());
   }
 
   private static
@@ -1595,23 +1428,10 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(),
-      m.r0c1(),
-      m.r0c2(),
-      m.r0c3(),
-      c0,
-      c1,
-      c2,
-      c3,
-      m.r2c0(),
-      m.r2c1(),
-      m.r2c2(),
-      m.r2c3(),
-      m.r3c0(),
-      m.r3c1(),
-      m.r3c2(),
-      m.r3c3()
-    );
+      m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
+      c0,       c1,       c2,       c3,
+      m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
+      m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3());
   }
 
   private static
@@ -1634,23 +1454,10 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(),
-      m.r0c1(),
-      m.r0c2(),
-      m.r0c3(),
-      m.r1c0(),
-      m.r1c1(),
-      m.r1c2(),
-      m.r1c3(),
-      c0,
-      c1,
-      c2,
-      c3,
-      m.r3c0(),
-      m.r3c1(),
-      m.r3c2(),
-      m.r3c3()
-    );
+      m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
+      m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
+      c0,       c1,       c2,       c3,
+      m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3());
   }
 
   private static
@@ -1673,23 +1480,10 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(),
-      m.r0c1(),
-      m.r0c2(),
-      m.r0c3(),
-      m.r1c0(),
-      m.r1c1(),
-      m.r1c2(),
-      m.r1c3(),
-      m.r2c0(),
-      m.r2c1(),
-      m.r2c2(),
-      m.r2c3(),
-      c0,
-      c1,
-      c2,
-      c3
-    );
+      m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
+      m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
+      m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
+      c0,       c1,       c2,       c3);
   }
 
   /**
