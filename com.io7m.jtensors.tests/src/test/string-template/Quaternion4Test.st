@@ -7,6 +7,7 @@ Quaternion4Test(
   testOpClass,
   matrix4x4Type,
   matrix4x4OpClass,
+  matrix4x4GeneratorType,
   vector3Type,
   vector3GeneratorType,
   vector3OpClass,
@@ -66,6 +67,12 @@ public final class <className>
   {
     final Object o_gen = <vector3GeneratorType>.create();
     return (Generator\<<vector3Type>\>) o_gen;
+  }
+
+  private static Generator\<<matrix4x4Type>\> createMatrix4x4Generator()
+  {
+    final Object o_gen = <matrix4x4GeneratorType>.createOrthogonal();
+    return (Generator\<<matrix4x4Type>\>) o_gen;
   }
 
   @Test
@@ -687,6 +694,51 @@ public final class <className>
       <matrix4x4OpClass>.transpose(m_a);
 
     <testOpClass>.checkAlmostEqualsMatrix(m_at, m_ai);
+  }
+
+  /**
+   * ∀ x y z a. ofMatrix4x4(Matrix.ofAxisAngle(ofAxisAngle(x, y, z, a))) ≅ ofAxisAngle(x, y, z, a)
+   *
+   * Where m ≅ n can mean that m is the negation of n.
+   */
+
+  @Test
+  @PercentagePassing
+  public void testOfMatrix4x4()
+  {
+    final Generator\<<vector3Type>\> gen = createVector3Generator();
+    final <vector3Type> axis = <vector3OpClass>.normalize(gen.next());
+    final <scalarRealType> angle = gen.next().x();
+
+    final <quaternionType> q0 =
+      <opClass>.ofAxisAngle(axis.x(), axis.y(), axis.z(), angle);
+    final <matrix4x4Type> m0 =
+      <matrix4x4OpClass>.ofAxisAngle(axis.x(), axis.y(), axis.z(), angle);
+    final <quaternionType> q1 =
+      <opClass>.ofMatrix4x4(m0);
+
+    if (<opClass>.isNegationOf(<testOpClass>::almostEquals, q0, q1)) {
+      return;
+    }
+
+    <testOpClass>.checkAlmostEquals(q0.x(), q1.x());
+    <testOpClass>.checkAlmostEquals(q0.y(), q1.y());
+    <testOpClass>.checkAlmostEquals(q0.z(), q1.z());
+    <testOpClass>.checkAlmostEquals(q0.w(), q1.w());
+  }
+
+  /**
+   * ∀ q. isNegationOf(negate(q), q) == true
+   */
+
+  @Test
+  @PercentagePassing
+  public void testIsNegationOfNegated()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+    final <quaternionType> q0 = gen.next();
+    final <quaternionType> q1 = <opClass>.negate(q0);
+    Assert.assertTrue(<opClass>.isNegationOf((x,y) -> <testOpClass>.almostEquals(x, y), q0, q1));
   }
 }
 >>

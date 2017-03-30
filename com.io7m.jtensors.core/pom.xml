@@ -774,8 +774,8 @@
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
                     <matrix4x4Type>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D</matrix4x4Type>
+                    <matrix4x4ComponentType>double</matrix4x4ComponentType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
-                    <opClass>com.io7m.jtensors.core.quaternions.QuaternionDOps</opClass>
                   </properties>
                 </template>
               </templates>
@@ -800,8 +800,8 @@
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
                     <matrix4x4Type>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D</matrix4x4Type>
+                    <matrix4x4ComponentType>double</matrix4x4ComponentType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
-                    <opClass>com.io7m.jtensors.core.quaternions.QuaternionFOps</opClass>
                   </properties>
                 </template>
               </templates>

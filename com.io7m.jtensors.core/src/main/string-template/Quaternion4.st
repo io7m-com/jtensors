@@ -5,7 +5,7 @@ Quaternion4(
   scalarLargeType,
   scalarRealType,
   matrix4x4Type,
-  opClass,
+  matrix4x4ComponentType,
   dotProductClass) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
@@ -43,8 +43,8 @@ public final class <className>
   private static final <quaternionType> IDENTITY;
 
   static {
-    final <quaternionComponentType> z = (<quaternionComponentType>) <opClass>.zero();
-    final <quaternionComponentType> s = (<quaternionComponentType>) <opClass>.one();
+    final <quaternionComponentType> z = (<quaternionComponentType>) 0.0;
+    final <quaternionComponentType> s = (<quaternionComponentType>) 1.0;
     ZERO = <quaternionType>.of(z, z, z, z);
     IDENTITY = <quaternionType>.of(z, z, z, s);
   }
@@ -68,10 +68,10 @@ public final class <className>
     final <quaternionType> q1)
   {
     return <quaternionType>.of(
-      (<quaternionComponentType>) <opClass>.add(q0.x(), q1.x()),
-      (<quaternionComponentType>) <opClass>.add(q0.y(), q1.y()),
-      (<quaternionComponentType>) <opClass>.add(q0.z(), q1.z()),
-      (<quaternionComponentType>) <opClass>.add(q0.w(), q1.w()));
+      (<quaternionComponentType>) q0.x() + q1.x(),
+      (<quaternionComponentType>) q0.y() + q1.y(),
+      (<quaternionComponentType>) q0.z() + q1.z(),
+      (<quaternionComponentType>) q0.w() + q1.w());
   }
 
   /**
@@ -85,9 +85,9 @@ public final class <className>
     final <quaternionType> q)
   {
     return <quaternionType>.of(
-      (<quaternionComponentType>) <opClass>.negate(q.x()),
-      (<quaternionComponentType>) <opClass>.negate(q.y()),
-      (<quaternionComponentType>) <opClass>.negate(q.z()),
+      (<quaternionComponentType>) -q.x(),
+      (<quaternionComponentType>) -q.y(),
+      (<quaternionComponentType>) -q.z(),
       (<quaternionComponentType>) q.w());
   }
 
@@ -141,11 +141,58 @@ public final class <className>
     final <quaternionType> q1,
     final <scalarRealType> alpha)
   {
-    final <quaternionType> q0_r =
-      scale(q0, <opClass>.subtract(<opClass>.one(), alpha));
-    final <quaternionType> q1_r =
-      scale(q1, alpha);
+    final <quaternionType> q0_r = scale(q0, 1.0 - alpha);
+    final <quaternionType> q1_r = scale(q1, alpha);
     return add(q0_r, q1_r);
+  }
+
+  /**
+   * The type of comparison functions for values of type {@code <quaternionType>}.
+   */
+
+  public interface ComponentComparatorType
+  {
+    /**
+     * @param x The left value
+     * @param y The right value
+     * @return {@code true} iff {@code x ≅ y}
+     */
+
+    boolean equals(
+      <scalarRealType> x,
+      <scalarRealType> y);
+  }
+
+  /**
+   * \<p>Return {@code true} iff {@code qa} is the negation of {@code qb}.\</p>
+   *
+   * @param qa The left quaternion
+   * @param qb The right quaternion
+   *
+   * @return {@code true} iff {@code qa} is the negation of {@code qb}
+   */
+
+  public static boolean isNegationOf(
+    final ComponentComparatorType c,
+    final <quaternionType> qa,
+    final <quaternionType> qb)
+  {
+    final <scalarLargeType> xa = qa.x();
+    final <scalarLargeType> ya = qa.y();
+    final <scalarLargeType> za = qa.z();
+    final <scalarLargeType> wa = qa.w();
+
+    final <scalarLargeType> xb = -qb.x();
+    final <scalarLargeType> yb = -qb.y();
+    final <scalarLargeType> zb = -qb.z();
+    final <scalarLargeType> wb = -qb.w();
+
+    final boolean xs = c.equals(xa, xb);
+    final boolean ys = c.equals(ya, yb);
+    final boolean zs = c.equals(za, zb);
+    final boolean ws = c.equals(wa, wb);
+
+    return xs && ys && zs && ws;
   }
 
   /**
@@ -171,7 +218,7 @@ public final class <className>
   public static <scalarRealType> magnitude(
     final <quaternionType> q0)
   {
-    return <opClass>.squareRootLarge(magnitudeSquared(q0));
+    return Math.sqrt(magnitudeSquared(q0));
   }
 
   /**
@@ -203,75 +250,23 @@ public final class <className>
     final <quaternionType> q0,
     final <quaternionType> q1)
   {
-    final <scalarRealType> q0_x = q0.x();
-    final <scalarRealType> q0_y = q0.y();
-    final <scalarRealType> q0_z = q0.z();
-    final <scalarRealType> q0_w = q0.w();
+    final <scalarLargeType> q0_w = q0.w();
+    final <scalarLargeType> q1_x = q1.x();
+    final <scalarLargeType> q0_x = q0.x();
+    final <scalarLargeType> q1_w = q1.w();
+    final <scalarLargeType> q0_y = q0.y();
+    final <scalarLargeType> q0_z = q0.z();
+    final <scalarLargeType> q1_y = q1.y();
+    final <scalarLargeType> q1_z = q1.z();
 
-    final <scalarRealType> q1_x = q1.x();
-    final <scalarRealType> q1_y = q1.y();
-    final <scalarRealType> q1_z = q1.z();
-    final <scalarRealType> q1_w = q1.w();
-
-    final <scalarRealType> q0_w_q1_x =
-      <opClass>.multiply(q0_w, q1_x);
-    final <scalarRealType> q0_x_q1_w =
-      <opClass>.multiply(q0_x, q1_w);
-    final <scalarRealType> q0_y_q1_z =
-      <opClass>.multiply(q0_y, q1_z);
-    final <scalarRealType> q0_z_q1_y =
-      <opClass>.multiply(q0_z, q1_y);
-    final <scalarRealType> rx =
-      <opClass>.subtract(
-        <opClass>.add(
-          <opClass>.add(q0_w_q1_x, q0_x_q1_w),
-          q0_y_q1_z),
-        q0_z_q1_y);
-
-    final <scalarRealType> q0_w_q1_y =
-      <opClass>.multiply(q0_w, q1_y);
-    final <scalarRealType> q0_x_q1_z =
-      <opClass>.multiply(q0_x, q1_z);
-    final <scalarRealType> q0_y_q1_w =
-      <opClass>.multiply(q0_y, q1_w);
-    final <scalarRealType> q0_z_q1_x =
-      <opClass>.multiply(q0_z, q1_x);
-    final <scalarRealType> ry =
-      <opClass>.add(
-        <opClass>.subtract(q0_w_q1_y, q0_x_q1_z),
-        <opClass>.add(q0_y_q1_w, q0_z_q1_x));
-
-    final <scalarRealType> q0_w_q1_z =
-      <opClass>.multiply(q0_w, q1_z);
-    final <scalarRealType> q0_x_q1_y =
-      <opClass>.multiply(q0_x, q1_y);
-    final <scalarRealType> q0_y_q1_x =
-      <opClass>.multiply(q0_y, q1_x);
-    final <scalarRealType> q0_z_q1_w =
-      <opClass>.multiply(q0_z, q1_w);
-    final <scalarRealType> rz =
-      <opClass>.add(
-        <opClass>.subtract(
-          <opClass>.add(q0_w_q1_z, q0_x_q1_y),
-          q0_y_q1_x),
-        q0_z_q1_w);
-
-    final <scalarRealType> q0_w_q1_w =
-      <opClass>.multiply(q0_w, q1_w);
-    final <scalarRealType> q0_x_q1_x =
-      <opClass>.multiply(q0_x, q1_x);
-    final <scalarRealType> q0_y_q1_y =
-      <opClass>.multiply(q0_y, q1_y);
-    final <scalarRealType> q0_z_q1_z =
-      <opClass>.multiply(q0_z, q1_z);
-    final <scalarRealType> rw =
-      <opClass>.subtract(
-        <opClass>.subtract(
-          <opClass>.subtract(
-            q0_w_q1_w,
-            q0_x_q1_x),
-          q0_y_q1_y),
-        q0_z_q1_z);
+    final <scalarLargeType> rx =
+      ((q0_w * q1_x) + (q0_x * q1_w) + (q0_y * q1_z)) - (q0_z * q1_y);
+    final <scalarLargeType> ry =
+      ((q0_w * q1_y) - (q0_x * q1_z)) + (q0_y * q1_w) + (q0_z * q1_x);
+    final <scalarLargeType> rz =
+      (((q0_w * q1_z) + (q0_x * q1_y)) - (q0_y * q1_x)) + (q0_z * q1_w);
+    final <scalarLargeType> rw =
+      (q0_w * q1_w) - (q0_x * q1_x) - (q0_y * q1_y) - (q0_z * q1_z);
 
     return <quaternionType>.of(
       (<quaternionComponentType>) rx,
@@ -291,9 +286,8 @@ public final class <className>
     final <quaternionType> q0)
   {
     final <scalarLargeType> m = magnitudeSquared(q0);
-    if (<opClass>.compareLarge(m, <opClass>.zero()) > 0) {
-      final <scalarRealType> reciprocal =
-        <opClass>.divide(<opClass>.one(), <opClass>.squareRootLarge(m));
+    if (m > 0.0) {
+      final <scalarRealType> reciprocal = 1.0 / Math.sqrt(m);
       return scale(q0, reciprocal);
     }
 
@@ -311,10 +305,10 @@ public final class <className>
     final <quaternionType> q)
   {
     return <quaternionType>.of(
-      (<quaternionComponentType>) <opClass>.negate(q.x()),
-      (<quaternionComponentType>) <opClass>.negate(q.y()),
-      (<quaternionComponentType>) <opClass>.negate(q.z()),
-      (<quaternionComponentType>) <opClass>.negate(q.w()));
+      (<quaternionComponentType>) -q.x(),
+      (<quaternionComponentType>) -q.y(),
+      (<quaternionComponentType>) -q.z(),
+      (<quaternionComponentType>) -q.w());
   }
 
   /**
@@ -334,12 +328,81 @@ public final class <className>
     final <scalarRealType> axis_z,
     final <scalarRealType> angle)
   {
-    final <scalarRealType> angle_r = <opClass>.multiply(angle, <opClass>.zeroPointFive());
-    final <scalarRealType> sa = <opClass>.sine(angle_r);
-    final <scalarRealType> x = <opClass>.multiply(axis_x, sa);
-    final <scalarRealType> y = <opClass>.multiply(axis_y, sa);
-    final <scalarRealType> z = <opClass>.multiply(axis_z, sa);
-    final <scalarRealType> w = <opClass>.cosine(angle_r);
+    final <scalarRealType> angle_r = angle * 0.5;
+    final <scalarRealType> sa = Math.sin(angle_r);
+    final <scalarRealType> x = axis_x * sa;
+    final <scalarRealType> y = axis_y * sa;
+    final <scalarRealType> z = axis_z * sa;
+    final <scalarRealType> w = Math.cos(angle_r);
+    return <quaternionType>.of(
+      (<quaternionComponentType>) x,
+      (<quaternionComponentType>) y,
+      (<quaternionComponentType>) z,
+      (<quaternionComponentType>) w);
+  }
+
+  /**
+   * Calculate a quaternion that represents the rotation given by the matrix {@code m}.
+   *
+   * @param m The matrix
+   * @return A quaternion
+   */
+
+  public static <quaternionType> ofMatrix4x4(
+    final <matrix4x4Type> m)
+  {
+    final <scalarRealType> m_r0c0 = m.r0c0();
+    final <scalarRealType> m_r0c1 = m.r0c1();
+    final <scalarRealType> m_r0c2 = m.r0c2();
+    final <scalarRealType> m_r1c0 = m.r1c0();
+    final <scalarRealType> m_r1c1 = m.r1c1();
+    final <scalarRealType> m_r1c2 = m.r1c2();
+    final <scalarRealType> m_r2c0 = m.r2c0();
+    final <scalarRealType> m_r2c1 = m.r2c1();
+    final <scalarRealType> m_r2c2 = m.r2c2();
+
+    /*
+     * Explicitly ignore the bottom right element of the matrix, as this
+     * affects the magnitude of the created quaternion.
+     */
+
+    final <scalarRealType> trace = m_r0c0 + m_r1c1 + m_r2c2;
+
+    final <scalarRealType> x;
+    final <scalarRealType> y;
+    final <scalarRealType> z;
+    final <scalarRealType> w;
+
+    if (trace > 0.0) {
+      // S = 4 * qw
+      final double s = Math.sqrt(trace + 1.0) * 2.0;
+      w = 0.25 * s;
+      x = (m_r2c1 - m_r1c2) / s;
+      y = (m_r0c2 - m_r2c0) / s;
+      z = (m_r1c0 - m_r0c1) / s;
+    } else if ((m_r0c0 > m_r1c1) && (m_r0c0 > m_r2c2)) {
+      // S = 4 * qx
+      final double s = Math.sqrt((1.0 + m_r0c0) - m_r1c1 - m_r2c2) * 2.0;
+      w = (m_r2c1 - m_r1c2) / s;
+      x = 0.25 * s;
+      y = (m_r0c1 + m_r1c0) / s;
+      z = (m_r0c2 + m_r2c0) / s;
+    } else if (m_r1c1 > m_r2c2) {
+      // S = 4 * qy
+      final double s = Math.sqrt((1.0 + m_r1c1) - m_r0c0 - m_r2c2) * 2.0;
+      w = (m_r0c2 - m_r2c0) / s;
+      x = (m_r0c1 + m_r1c0) / s;
+      y = 0.25 * s;
+      z = (m_r1c2 + m_r2c1) / s;
+    } else {
+      // S = 4 * qz
+      final double s = Math.sqrt((1.0 + m_r2c2) - m_r0c0 - m_r1c1) * 2.0;
+      w = (m_r1c0 - m_r0c1) / s;
+      x = (m_r0c2 + m_r2c0) / s;
+      y = (m_r1c2 + m_r2c1) / s;
+      z = 0.25 * s;
+    }
+
     return <quaternionType>.of(
       (<quaternionComponentType>) x,
       (<quaternionComponentType>) y,
@@ -361,10 +424,10 @@ public final class <className>
     final <scalarRealType> r)
   {
     return <quaternionType>.of(
-      (<quaternionComponentType>) <opClass>.multiply(q0.x(), r),
-      (<quaternionComponentType>) <opClass>.multiply(q0.y(), r),
-      (<quaternionComponentType>) <opClass>.multiply(q0.z(), r),
-      (<quaternionComponentType>) <opClass>.multiply(q0.w(), r));
+      (<quaternionComponentType>) (q0.x() * r),
+      (<quaternionComponentType>) (q0.y() * r),
+      (<quaternionComponentType>) (q0.z() * r),
+      (<quaternionComponentType>) (q0.w() * r));
   }
 
   /**
@@ -381,10 +444,10 @@ public final class <className>
     final <quaternionType> q1)
   {
     return <quaternionType>.of(
-      (<quaternionComponentType>) <opClass>.subtract(q0.x(), q1.x()),
-      (<quaternionComponentType>) <opClass>.subtract(q0.y(), q1.y()),
-      (<quaternionComponentType>) <opClass>.subtract(q0.z(), q1.z()),
-      (<quaternionComponentType>) <opClass>.subtract(q0.w(), q1.w()));
+      (<quaternionComponentType>) (q0.x() - q1.x()),
+      (<quaternionComponentType>) (q0.y() - q1.y()),
+      (<quaternionComponentType>) (q0.z() - q1.z()),
+      (<quaternionComponentType>) (q0.w() - q1.w()));
   }
 
   /**
@@ -397,57 +460,41 @@ public final class <className>
   public static <matrix4x4Type> toMatrix4x4(
     final <quaternionType> q)
   {
-    final <scalarRealType> zero = <opClass>.zero();
-    final <scalarRealType> one = <opClass>.one();
-    final <scalarRealType> two = <opClass>.two();
+    final <scalarRealType> xx = q.x() * q.x();
+    final <scalarRealType> xy = q.x() * q.y();
+    final <scalarRealType> xz = q.x() * q.z();
+    final <scalarRealType> yy = q.y() * q.y();
+    final <scalarRealType> yz = q.y() * q.z();
+    final <scalarRealType> zz = q.z() * q.z();
+    final <scalarRealType> wx = q.w() * q.x();
+    final <scalarRealType> wy = q.w() * q.y();
+    final <scalarRealType> wz = q.w() * q.z();
 
-    final <scalarRealType> xx = <opClass>.multiply(q.x(), q.x());
-    final <scalarRealType> xy = <opClass>.multiply(q.x(), q.y());
-    final <scalarRealType> xz = <opClass>.multiply(q.x(), q.z());
-    final <scalarRealType> yy = <opClass>.multiply(q.y(), q.y());
-    final <scalarRealType> yz = <opClass>.multiply(q.y(), q.z());
-    final <scalarRealType> zz = <opClass>.multiply(q.z(), q.z());
-    final <scalarRealType> wx = <opClass>.multiply(q.w(), q.x());
-    final <scalarRealType> wy = <opClass>.multiply(q.w(), q.y());
-    final <scalarRealType> wz = <opClass>.multiply(q.w(), q.z());
+    final <scalarRealType> r0c0 = 1.0 - (2.0 * yy) - (2.0 * zz);
+    final <scalarRealType> r0c1 = (2.0 * xy) - (2.0 * wz);
+    final <scalarRealType> r0c2 = (2.0 * xz) + (2.0 * wy);
+    final <scalarRealType> r0c3 = 0.0;
 
-    final <scalarRealType> r0c0 =
-      <opClass>.subtract(<opClass>.subtract(one, <opClass>.multiply(two, yy)), <opClass>.multiply(two, zz));
-    final <scalarRealType> r0c1 =
-      <opClass>.subtract(<opClass>.multiply(two, xy), <opClass>.multiply(two, wz));
-    final <scalarRealType> r0c2 =
-      <opClass>.add(<opClass>.multiply(two, xz), <opClass>.multiply(two, wy));
-    final <scalarRealType> r0c3 =
-      zero;
+    final <scalarRealType> r1c0 = (2.0 * xy) + (2.0 * wz);
+    final <scalarRealType> r1c1 = 1.0 - (2.0 * xx) - (2.0 * zz);
+    final <scalarRealType> r1c2 = (2.0 * yz) - (2.0 * wx);
+    final <scalarRealType> r1c3 = 0.0;
 
-    final <scalarRealType> r1c0 =
-      <opClass>.add(<opClass>.multiply(two, xy), <opClass>.multiply(two, wz));
-    final <scalarRealType> r1c1 =
-      <opClass>.subtract(<opClass>.subtract(one, <opClass>.multiply(two, xx)), <opClass>.multiply(two, zz));
-    final <scalarRealType> r1c2 =
-      <opClass>.subtract(<opClass>.multiply(two, yz), <opClass>.multiply(two, wx));
-    final <scalarRealType> r1c3 =
-      zero;
+    final <scalarRealType> r2c0 = (2.0 * xz) - (2.0 * wy);
+    final <scalarRealType> r2c1 = (2.0 * yz) + (2.0 * wx);
+    final <scalarRealType> r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
+    final <scalarRealType> r2c3 = 0.0;
 
-    final <scalarRealType> r2c0 =
-      <opClass>.subtract(<opClass>.multiply(two, xz), <opClass>.multiply(two, wy));
-    final <scalarRealType> r2c1 =
-      <opClass>.add(<opClass>.multiply(two, yz), <opClass>.multiply(two, wx));
-    final <scalarRealType> r2c2 =
-      <opClass>.subtract(<opClass>.subtract(one, <opClass>.multiply(two, xx)), <opClass>.multiply(2.0, yy));
-    final <scalarRealType> r2c3 =
-      zero;
-
-    final <scalarRealType> r3c0 = zero;
-    final <scalarRealType> r3c1 = zero;
-    final <scalarRealType> r3c2 = zero;
-    final <scalarRealType> r3c3 = one;
+    final <scalarRealType> r3c0 = 0.0;
+    final <scalarRealType> r3c1 = 0.0;
+    final <scalarRealType> r3c2 = 0.0;
+    final <scalarRealType> r3c3 = 1.0;
 
     return <matrix4x4Type>.of(
-      r0c0, r0c1, r0c2, r0c3,
-      r1c0, r1c1, r1c2, r1c3,
-      r2c0, r2c1, r2c2, r2c3,
-      r3c0, r3c1, r3c2, r3c3);
+      (<matrix4x4ComponentType>) r0c0, (<matrix4x4ComponentType>) r0c1, (<matrix4x4ComponentType>) r0c2, (<matrix4x4ComponentType>) r0c3,
+      (<matrix4x4ComponentType>) r1c0, (<matrix4x4ComponentType>) r1c1, (<matrix4x4ComponentType>) r1c2, (<matrix4x4ComponentType>) r1c3,
+      (<matrix4x4ComponentType>) r2c0, (<matrix4x4ComponentType>) r2c1, (<matrix4x4ComponentType>) r2c2, (<matrix4x4ComponentType>) r2c3,
+      (<matrix4x4ComponentType>) r3c0, (<matrix4x4ComponentType>) r3c1, (<matrix4x4ComponentType>) r3c2, (<matrix4x4ComponentType>) r3c3);
   }
 
   /**

@@ -87,6 +87,28 @@ public final class TestFOps
     }
   }
 
+  private static boolean doubleIsDifferent(
+    final double d1,
+    final double d2,
+    final double delta) {
+
+    if (Double.compare(d1, d2) == 0) {
+      return false;
+    }
+    if ((Math.abs(d1 - d2) <= delta)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  public static boolean almostEquals(
+    final double x,
+    final double y)
+  {
+    return !doubleIsDifferent(x, y, 1.0e-10);
+  }
+
   public static float radiansOfDegrees(
     final String text)
   {

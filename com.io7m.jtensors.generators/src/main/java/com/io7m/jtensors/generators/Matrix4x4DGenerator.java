@@ -70,6 +70,44 @@ public final class Matrix4x4DGenerator implements Generator<Matrix4x4D>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that only
+   * produces orthogonal matrices.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Matrix4x4D> createOrthogonal()
+  {
+    return () -> {
+      final double r0c0 = 1.0;
+      final double r0c1 = 0.0;
+      final double r0c2 = 0.0;
+      final double r0c3 = Math.random();
+
+      final double r1c0 = 0.0;
+      final double r1c1 = 1.0;
+      final double r1c2 = 0.0;
+      final double r1c3 = Math.random();
+
+      final double r2c0 = 0.0;
+      final double r2c1 = 0.0;
+      final double r2c2 = 1.0;
+      final double r2c3 = Math.random();
+
+      final double r3c0 = 0.0;
+      final double r3c1 = 0.0;
+      final double r3c2 = 0.0;
+      final double r3c3 = 1.0;
+
+      return Matrix4x4D.of(
+        r0c0, r0c1, r0c2, r0c3,
+        r1c0, r1c1, r1c2, r1c3,
+        r2c0, r2c1, r2c2, r2c3,
+        r3c0, r3c1, r3c2, r3c3);
+    };
+  }
+
   @Override
   public Matrix4x4D next()
   {
