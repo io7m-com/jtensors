@@ -30,18 +30,18 @@ Quaternion4Test(
 package com.io7m.jtensors.tests.core.parameterized.vectors;
 
 import com.io7m.jnull.NullCheck;
+import com.io7m.jtensors.tests.TestUtilities;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.jtensors.tests.rules.PercentagePassing;
 import com.io7m.junreachable.UnreachableCodeException;
-
+import java.util.Optional;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.QuickCheck;
 import net.java.quickcheck.characteristic.AbstractCharacteristic;
-import org.junit.Test;
 import org.junit.Assert;
-import org.junit.rules.ExpectedException;
 import org.junit.Rule;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
-import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * \<p>Unit tests for {@link <quaternionType>} values.\</p>
@@ -664,6 +664,29 @@ public final class <className>
       <matrix4x4OpClass>.ofAxisAngle(v_axis.x(), v_axis.y(), v_axis.z(), angle);
 
     <testOpClass>.checkAlmostEqualsMatrix(m_o, m_a);
+  }
+
+  @Test
+  @PercentagePassing
+  public void testToMatrix4x4OfAxisAngleOrthogonal()
+  {
+    final Generator\<<vector3Type>\> gen = createVector3Generator();
+    final <vector3Type> v_axis = <vector3OpClass>.normalize(gen.next());
+    final <scalarRealType> angle = gen.next().x();
+
+    final <quaternionType> q =
+      <opClass>.ofAxisAngle(v_axis.x(), v_axis.y(), v_axis.z(), angle);
+    final <matrix4x4Type> m_a =
+      <opClass>.toMatrix4x4(q);
+
+    final Optional\<<matrix4x4Type>\> m_ai_opt =
+      <matrix4x4OpClass>.invert(m_a);
+    final <matrix4x4Type> m_ai =
+      m_ai_opt.get();
+    final <matrix4x4Type> m_at =
+      <matrix4x4OpClass>.transpose(m_a);
+
+    <testOpClass>.checkAlmostEqualsMatrix(m_at, m_ai);
   }
 }
 >>
