@@ -949,7 +949,7 @@ public final class <className>
   <else>
   <matrixType>
   <endif>
-  ofRotation(
+  ofAxisAngle(
     final <scalarRealType> axis_x,
     final <scalarRealType> axis_y,
     final <scalarRealType> axis_z,

@@ -822,6 +822,11 @@
                     <scalarRealType>double</scalarRealType>
                     <generatorType>com.io7m.jtensors.generators.Quaternion4DGenerator</generatorType>
                     <opClass>com.io7m.jtensors.core.quaternions.Quaternions4D</opClass>
+                    <matrix4x4Type>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D</matrix4x4Type>
+                    <matrix4x4OpClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4D</matrix4x4OpClass>
+                    <vector3Type>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vector3Type>
+                    <vector3GeneratorType>com.io7m.jtensors.generators.Vector3DGenerator</vector3GeneratorType>
+                    <vector3OpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors3D</vector3OpClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
                   </properties>
                 </template>
@@ -847,6 +852,11 @@
                     <scalarRealType>double</scalarRealType>
                     <generatorType>com.io7m.jtensors.generators.Quaternion4FGenerator</generatorType>
                     <opClass>com.io7m.jtensors.core.quaternions.Quaternions4F</opClass>
+                    <matrix4x4Type>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D</matrix4x4Type>
+                    <matrix4x4OpClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4D</matrix4x4OpClass>
+                    <vector3Type>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vector3Type>
+                    <vector3GeneratorType>com.io7m.jtensors.generators.Vector3DGenerator</vector3GeneratorType>
+                    <vector3OpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors3D</vector3OpClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
                   </properties>
                 </template>

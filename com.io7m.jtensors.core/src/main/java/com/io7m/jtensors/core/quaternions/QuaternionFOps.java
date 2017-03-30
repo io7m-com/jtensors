@@ -45,21 +45,14 @@ final class QuaternionFOps
     return value0 - value1;
   }
 
-  static double subtractReal(
-    final double value0,
-    final double value1)
-  {
-    return value0 - value1;
-  }
-
-  static double multiplyReal(
+  static double multiply(
     final double value0,
     final double value1)
   {
     return value0 * value1;
   }
 
-  static double divideReal(
+  static double divide(
     final double value0,
     final double value1)
   {
@@ -79,6 +72,11 @@ final class QuaternionFOps
   static double one()
   {
     return 1.0;
+  }
+
+  static double two()
+  {
+    return 2.0;
   }
 
   static int compareLarge(

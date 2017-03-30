@@ -4,6 +4,7 @@ Quaternion4(
   quaternionComponentType,
   scalarLargeType,
   scalarRealType,
+  matrix4x4Type,
   opClass,
   dotProductClass) ::= <<
 /*
@@ -141,7 +142,7 @@ public final class <className>
     final <scalarRealType> alpha)
   {
     final <quaternionType> q0_r =
-      scale(q0, <opClass>.subtractReal(<opClass>.one(), alpha));
+      scale(q0, <opClass>.subtract(<opClass>.one(), alpha));
     final <quaternionType> q1_r =
       scale(q1, alpha);
     return add(q0_r, q1_r);
@@ -213,13 +214,13 @@ public final class <className>
     final <scalarRealType> q1_w = q1.w();
 
     final <scalarRealType> q0_w_q1_x =
-      <opClass>.multiplyReal(q0_w, q1_x);
+      <opClass>.multiply(q0_w, q1_x);
     final <scalarRealType> q0_x_q1_w =
-      <opClass>.multiplyReal(q0_x, q1_w);
+      <opClass>.multiply(q0_x, q1_w);
     final <scalarRealType> q0_y_q1_z =
-      <opClass>.multiplyReal(q0_y, q1_z);
+      <opClass>.multiply(q0_y, q1_z);
     final <scalarRealType> q0_z_q1_y =
-      <opClass>.multiplyReal(q0_z, q1_y);
+      <opClass>.multiply(q0_z, q1_y);
     final <scalarRealType> rx =
       <opClass>.subtract(
         <opClass>.add(
@@ -228,26 +229,26 @@ public final class <className>
         q0_z_q1_y);
 
     final <scalarRealType> q0_w_q1_y =
-      <opClass>.multiplyReal(q0_w, q1_y);
+      <opClass>.multiply(q0_w, q1_y);
     final <scalarRealType> q0_x_q1_z =
-      <opClass>.multiplyReal(q0_x, q1_z);
+      <opClass>.multiply(q0_x, q1_z);
     final <scalarRealType> q0_y_q1_w =
-      <opClass>.multiplyReal(q0_y, q1_w);
+      <opClass>.multiply(q0_y, q1_w);
     final <scalarRealType> q0_z_q1_x =
-      <opClass>.multiplyReal(q0_z, q1_x);
+      <opClass>.multiply(q0_z, q1_x);
     final <scalarRealType> ry =
       <opClass>.add(
         <opClass>.subtract(q0_w_q1_y, q0_x_q1_z),
         <opClass>.add(q0_y_q1_w, q0_z_q1_x));
 
     final <scalarRealType> q0_w_q1_z =
-      <opClass>.multiplyReal(q0_w, q1_z);
+      <opClass>.multiply(q0_w, q1_z);
     final <scalarRealType> q0_x_q1_y =
-      <opClass>.multiplyReal(q0_x, q1_y);
+      <opClass>.multiply(q0_x, q1_y);
     final <scalarRealType> q0_y_q1_x =
-      <opClass>.multiplyReal(q0_y, q1_x);
+      <opClass>.multiply(q0_y, q1_x);
     final <scalarRealType> q0_z_q1_w =
-      <opClass>.multiplyReal(q0_z, q1_w);
+      <opClass>.multiply(q0_z, q1_w);
     final <scalarRealType> rz =
       <opClass>.add(
         <opClass>.subtract(
@@ -256,13 +257,13 @@ public final class <className>
         q0_z_q1_w);
 
     final <scalarRealType> q0_w_q1_w =
-      <opClass>.multiplyReal(q0_w, q1_w);
+      <opClass>.multiply(q0_w, q1_w);
     final <scalarRealType> q0_x_q1_x =
-      <opClass>.multiplyReal(q0_x, q1_x);
+      <opClass>.multiply(q0_x, q1_x);
     final <scalarRealType> q0_y_q1_y =
-      <opClass>.multiplyReal(q0_y, q1_y);
+      <opClass>.multiply(q0_y, q1_y);
     final <scalarRealType> q0_z_q1_z =
-      <opClass>.multiplyReal(q0_z, q1_z);
+      <opClass>.multiply(q0_z, q1_z);
     final <scalarRealType> rw =
       <opClass>.subtract(
         <opClass>.subtract(
@@ -292,7 +293,7 @@ public final class <className>
     final <scalarLargeType> m = magnitudeSquared(q0);
     if (<opClass>.compareLarge(m, <opClass>.zero()) > 0) {
       final <scalarRealType> reciprocal =
-        <opClass>.divideReal(<opClass>.one(), <opClass>.squareRootLarge(m));
+        <opClass>.divide(<opClass>.one(), <opClass>.squareRootLarge(m));
       return scale(q0, reciprocal);
     }
 
@@ -333,11 +334,11 @@ public final class <className>
     final <scalarRealType> axis_z,
     final <scalarRealType> angle)
   {
-    final <scalarRealType> angle_r = <opClass>.multiplyReal(angle, <opClass>.zeroPointFive());
+    final <scalarRealType> angle_r = <opClass>.multiply(angle, <opClass>.zeroPointFive());
     final <scalarRealType> sa = <opClass>.sine(angle_r);
-    final <scalarRealType> x = <opClass>.multiplyReal(axis_x, sa);
-    final <scalarRealType> y = <opClass>.multiplyReal(axis_y, sa);
-    final <scalarRealType> z = <opClass>.multiplyReal(axis_z, sa);
+    final <scalarRealType> x = <opClass>.multiply(axis_x, sa);
+    final <scalarRealType> y = <opClass>.multiply(axis_y, sa);
+    final <scalarRealType> z = <opClass>.multiply(axis_z, sa);
     final <scalarRealType> w = <opClass>.cosine(angle_r);
     return <quaternionType>.of(
       (<quaternionComponentType>) x,
@@ -360,10 +361,10 @@ public final class <className>
     final <scalarRealType> r)
   {
     return <quaternionType>.of(
-      (<quaternionComponentType>) <opClass>.multiplyReal(q0.x(), r),
-      (<quaternionComponentType>) <opClass>.multiplyReal(q0.y(), r),
-      (<quaternionComponentType>) <opClass>.multiplyReal(q0.z(), r),
-      (<quaternionComponentType>) <opClass>.multiplyReal(q0.w(), r));
+      (<quaternionComponentType>) <opClass>.multiply(q0.x(), r),
+      (<quaternionComponentType>) <opClass>.multiply(q0.y(), r),
+      (<quaternionComponentType>) <opClass>.multiply(q0.z(), r),
+      (<quaternionComponentType>) <opClass>.multiply(q0.w(), r));
   }
 
   /**
@@ -384,6 +385,69 @@ public final class <className>
       (<quaternionComponentType>) <opClass>.subtract(q0.y(), q1.y()),
       (<quaternionComponentType>) <opClass>.subtract(q0.z(), q1.z()),
       (<quaternionComponentType>) <opClass>.subtract(q0.w(), q1.w()));
+  }
+
+  /**
+   * Create a 4x4 matrix from the quaternion {@code q}.
+   *
+   * @return A matrix based on q
+   * @param q The quaternion
+   */
+
+  public static <matrix4x4Type> toMatrix4x4(
+    final <quaternionType> q)
+  {
+    final <scalarRealType> zero = <opClass>.zero();
+    final <scalarRealType> one = <opClass>.one();
+    final <scalarRealType> two = <opClass>.two();
+
+    final <scalarRealType> xx = <opClass>.multiply(q.x(), q.x());
+    final <scalarRealType> xy = <opClass>.multiply(q.x(), q.y());
+    final <scalarRealType> xz = <opClass>.multiply(q.x(), q.z());
+    final <scalarRealType> yy = <opClass>.multiply(q.y(), q.y());
+    final <scalarRealType> yz = <opClass>.multiply(q.y(), q.z());
+    final <scalarRealType> zz = <opClass>.multiply(q.z(), q.z());
+    final <scalarRealType> wx = <opClass>.multiply(q.w(), q.x());
+    final <scalarRealType> wy = <opClass>.multiply(q.w(), q.y());
+    final <scalarRealType> wz = <opClass>.multiply(q.w(), q.z());
+
+    final <scalarRealType> r0c0 =
+      <opClass>.subtract(<opClass>.subtract(one, <opClass>.multiply(two, yy)), <opClass>.multiply(two, zz));
+    final <scalarRealType> r0c1 =
+      <opClass>.subtract(<opClass>.multiply(two, xy), <opClass>.multiply(two, wz));
+    final <scalarRealType> r0c2 =
+      <opClass>.add(<opClass>.multiply(two, xz), <opClass>.multiply(two, wy));
+    final <scalarRealType> r0c3 =
+      zero;
+
+    final <scalarRealType> r1c0 =
+      <opClass>.add(<opClass>.multiply(two, xy), <opClass>.multiply(two, wz));
+    final <scalarRealType> r1c1 =
+      <opClass>.subtract(<opClass>.subtract(one, <opClass>.multiply(two, xx)), <opClass>.multiply(two, zz));
+    final <scalarRealType> r1c2 =
+      <opClass>.subtract(<opClass>.multiply(two, yz), <opClass>.multiply(two, wx));
+    final <scalarRealType> r1c3 =
+      zero;
+
+    final <scalarRealType> r2c0 =
+      <opClass>.subtract(<opClass>.multiply(two, xz), <opClass>.multiply(two, wy));
+    final <scalarRealType> r2c1 =
+      <opClass>.add(<opClass>.multiply(two, yz), <opClass>.multiply(two, wx));
+    final <scalarRealType> r2c2 =
+      <opClass>.subtract(<opClass>.subtract(one, <opClass>.multiply(two, xx)), <opClass>.multiply(2.0, yy));
+    final <scalarRealType> r2c3 =
+      zero;
+
+    final <scalarRealType> r3c0 = zero;
+    final <scalarRealType> r3c1 = zero;
+    final <scalarRealType> r3c2 = zero;
+    final <scalarRealType> r3c3 = one;
+
+    return <matrix4x4Type>.of(
+      r0c0, r0c1, r0c2, r0c3,
+      r1c0, r1c1, r1c2, r1c3,
+      r2c0, r2c1, r2c2, r2c3,
+      r3c0, r3c1, r3c2, r3c3);
   }
 
   /**

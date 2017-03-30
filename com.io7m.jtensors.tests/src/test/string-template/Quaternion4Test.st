@@ -5,6 +5,11 @@ Quaternion4Test(
   scalarRealType,
   generatorType,
   testOpClass,
+  matrix4x4Type,
+  matrix4x4OpClass,
+  vector3Type,
+  vector3GeneratorType,
+  vector3OpClass,
   opClass) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
@@ -55,6 +60,12 @@ public final class <className>
   {
     final Object o_gen = <generatorType>.create();
     return (Generator\<<quaternionType>\>) o_gen;
+  }
+
+  private static Generator\<<vector3Type>\> createVector3Generator()
+  {
+    final Object o_gen = <vector3GeneratorType>.create();
+    return (Generator\<<vector3Type>\>) o_gen;
   }
 
   @Test
@@ -626,6 +637,33 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(ey, q2.y());
     <testOpClass>.checkAlmostEquals(ez, q2.z());
     <testOpClass>.checkAlmostEquals(ew, q2.w());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testToMatrix4x4Identity()
+  {
+    final <quaternionType> q = <opClass>.identity();
+    final <matrix4x4Type> m = <opClass>.toMatrix4x4(q);
+    <testOpClass>.checkAlmostEqualsMatrix(<matrix4x4OpClass>.identity(), m);
+  }
+
+  @Test
+  @PercentagePassing
+  public void testToMatrix4x4OfAxisAngleEquivalent()
+  {
+    final Generator\<<vector3Type>\> gen = createVector3Generator();
+    final <vector3Type> v_axis = <vector3OpClass>.normalize(gen.next());
+    final <scalarRealType> angle = gen.next().x();
+
+    final <quaternionType> q =
+      <opClass>.ofAxisAngle(v_axis.x(), v_axis.y(), v_axis.z(), angle);
+    final <matrix4x4Type> m_a =
+      <opClass>.toMatrix4x4(q);
+    final <matrix4x4Type> m_o =
+      <matrix4x4OpClass>.ofAxisAngle(v_axis.x(), v_axis.y(), v_axis.z(), angle);
+
+    <testOpClass>.checkAlmostEqualsMatrix(m_o, m_a);
   }
 }
 >>

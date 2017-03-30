@@ -267,14 +267,14 @@ public final class <className>
   }
 
   /**
-   * ∀ v x y z. multiplyVectorPost(ofRotation(x, y, z, 0), v) == v
+   * ∀ v x y z. multiplyVectorPost(ofAxisAngle(x, y, z, 0), v) == v
    *
    * Rotating a vector by 0 radians around any axis has no effect.
    */
 
   @Test
   @PercentagePassing
-  public void testOfRotationZero()
+  public void testOfAxisAngleZero()
   {
     final Generator\<<matrixType>\> gen =
       createGeneratorNormal();
@@ -296,7 +296,7 @@ public final class <className>
           k.r2c2(),
           <testOpClass>.constant("1")));
 
-    final <matrixType> a = <opClass>.ofRotation(
+    final <matrixType> a = <opClass>.ofAxisAngle(
       axis.x(),
       axis.y(),
       axis.z(),
@@ -316,7 +316,7 @@ public final class <className>
    */
 
   @Test
-  public void testOfRotation90X()
+  public void testOfAxisAngle90X()
   {
     final <scalarRealType> r = <testOpClass>.radiansOfDegrees("90");
 
@@ -342,7 +342,7 @@ public final class <className>
         <testOpClass>.constant("1"));
 
     final <matrixType> a =
-      <opClass>.ofRotation(
+      <opClass>.ofAxisAngle(
         v_axis.x(),
         v_axis.y(),
         v_axis.z(),
@@ -361,7 +361,7 @@ public final class <className>
    */
 
   @Test
-  public void testOfRotation90Y()
+  public void testOfAxisAngle90Y()
   {
     final <scalarRealType> r = <testOpClass>.radiansOfDegrees("90");
 
@@ -387,7 +387,7 @@ public final class <className>
         <testOpClass>.constant("1"));
 
     final <matrixType> a =
-      <opClass>.ofRotation(
+      <opClass>.ofAxisAngle(
         v_axis.x(),
         v_axis.y(),
         v_axis.z(),
@@ -406,7 +406,7 @@ public final class <className>
    */
 
   @Test
-  public void testOfRotation90Z()
+  public void testOfAxisAngle90Z()
   {
     final <scalarRealType> r = <testOpClass>.radiansOfDegrees("90");
 
@@ -432,7 +432,7 @@ public final class <className>
         <testOpClass>.constant("1"));
 
     final <matrixType> a =
-      <opClass>.ofRotation(
+      <opClass>.ofAxisAngle(
         v_axis.x(),
         v_axis.y(),
         v_axis.z(),
@@ -451,7 +451,7 @@ public final class <className>
    */
 
   @Test
-  public void testOfRotationM90X()
+  public void testOfAxisAngleM90X()
   {
     final <scalarRealType> r = <testOpClass>.radiansOfDegrees("-90");
 
@@ -477,7 +477,7 @@ public final class <className>
         <testOpClass>.constant("1"));
 
     final <matrixType> a =
-      <opClass>.ofRotation(
+      <opClass>.ofAxisAngle(
         v_axis.x(),
         v_axis.y(),
         v_axis.z(),
@@ -496,7 +496,7 @@ public final class <className>
    */
 
   @Test
-  public void testOfRotationM90Y()
+  public void testOfAxisAngleM90Y()
   {
     final <scalarRealType> r = <testOpClass>.radiansOfDegrees("-90");
 
@@ -522,7 +522,7 @@ public final class <className>
         <testOpClass>.constant("1"));
 
     final <matrixType> a =
-      <opClass>.ofRotation(
+      <opClass>.ofAxisAngle(
         v_axis.x(),
         v_axis.y(),
         v_axis.z(),
@@ -541,7 +541,7 @@ public final class <className>
    */
 
   @Test
-  public void testOfRotationM90Z()
+  public void testOfAxisAngleM90Z()
   {
     final <scalarRealType> r = <testOpClass>.radiansOfDegrees("-90");
 
@@ -567,7 +567,7 @@ public final class <className>
         <testOpClass>.constant("1"));
 
     final <matrixType> a =
-      <opClass>.ofRotation(
+      <opClass>.ofAxisAngle(
         v_axis.x(),
         v_axis.y(),
         v_axis.z(),

@@ -16,11 +16,20 @@
 
 package com.io7m.jtensors.tests.core;
 
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
 import com.io7m.junreachable.UnreachableCodeException;
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class TestFOps
 {
+  private static final Logger LOG;
+
+  static {
+    LOG = LoggerFactory.getLogger(TestFOps.class);
+  }
+
   private TestFOps()
   {
     throw new UnreachableCodeException();
@@ -45,6 +54,37 @@ public final class TestFOps
     final double y)
   {
     Assert.assertEquals(x, y, 0.1);
+  }
+
+  public static void checkAlmostEqualsMatrix(
+    final Matrix4x4D m0,
+    final Matrix4x4D m1)
+  {
+    try {
+      Assert.assertEquals(m0.r0c0(), m1.r0c0(), 1.0e-6);
+      Assert.assertEquals(m0.r0c1(), m1.r0c1(), 1.0e-6);
+      Assert.assertEquals(m0.r0c2(), m1.r0c2(), 1.0e-6);
+      Assert.assertEquals(m0.r0c3(), m1.r0c3(), 1.0e-6);
+
+      Assert.assertEquals(m0.r1c0(), m1.r1c0(), 1.0e-6);
+      Assert.assertEquals(m0.r1c1(), m1.r1c1(), 1.0e-6);
+      Assert.assertEquals(m0.r1c2(), m1.r1c2(), 1.0e-6);
+      Assert.assertEquals(m0.r1c3(), m1.r1c3(), 1.0e-6);
+
+      Assert.assertEquals(m0.r2c0(), m1.r2c0(), 1.0e-6);
+      Assert.assertEquals(m0.r2c1(), m1.r2c1(), 1.0e-6);
+      Assert.assertEquals(m0.r2c2(), m1.r2c2(), 1.0e-6);
+      Assert.assertEquals(m0.r2c3(), m1.r2c3(), 1.0e-6);
+
+      Assert.assertEquals(m0.r3c0(), m1.r3c0(), 1.0e-6);
+      Assert.assertEquals(m0.r3c1(), m1.r3c1(), 1.0e-6);
+      Assert.assertEquals(m0.r3c2(), m1.r3c2(), 1.0e-6);
+      Assert.assertEquals(m0.r3c3(), m1.r3c3(), 1.0e-6);
+    } catch (final AssertionError e) {
+      LOG.error("expected: {}", m0);
+      LOG.error("received: {}", m1);
+      throw e;
+    }
   }
 
   public static float radiansOfDegrees(
