@@ -17,15 +17,15 @@
 package com.io7m.jtensors.generators;
 
 import com.io7m.jnull.NullCheck;
-import com.io7m.jtensors.core.unparameterized.vectors.Vector4F;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.generator.PrimitiveGenerators;
 
 /**
- * A vector generator.
+ * A matrix generator.
  */
 
-public final class Vector4FGenerator implements Generator<Vector4F>
+public final class Matrix2x2FGenerator implements Generator<Matrix2x2D>
 {
   private final Generator<Double> gen;
 
@@ -35,7 +35,7 @@ public final class Vector4FGenerator implements Generator<Vector4F>
    * @param in_gen A component generator
    */
 
-  public Vector4FGenerator(
+  public Matrix2x2FGenerator(
     final Generator<Double> in_gen)
   {
     this.gen = NullCheck.notNull(in_gen, "Generator");
@@ -47,51 +47,36 @@ public final class Vector4FGenerator implements Generator<Vector4F>
    * @return A generator
    */
 
-  public static Generator<Vector4F> create()
+  public static Generator<Matrix2x2D> create()
   {
-    return new Vector4FGenerator(PrimitiveGenerators.doubles(
-      -1.0e32,
-      1.0e32
+    return new Matrix2x2FGenerator(PrimitiveGenerators.doubles(
+      -1.0e128,
+      1.0e128
     ));
   }
 
   /**
-   * Create a generator initialized with a default component generator that
-   * produces values in the range {@code [-65536.0, 65536.0]}.
-   *
-   * @return A generator
-   */
-
-  public static Generator<Vector4F> createSmall()
-  {
-    return new Vector4FGenerator(PrimitiveGenerators.doubles(
-      -65536.0,
-      65536.0
-    ));
-  }
-
-  /**
-   * Create a generator initialized with a default component generator that
+   * Create a generator initialized with a default component generator that only
    * produces values in the range {@code [-1.0, 1.0]}.
    *
    * @return A generator
    */
 
-  public static Generator<Vector4F> createNormal()
+  public static Generator<Matrix2x2D> createNormal()
   {
-    return new Vector4FGenerator(PrimitiveGenerators.doubles(
+    return new Matrix2x2FGenerator(PrimitiveGenerators.doubles(
       -1.0,
       1.0
     ));
   }
 
   @Override
-  public Vector4F next()
+  public Matrix2x2D next()
   {
-    return Vector4F.of(
-      this.gen.next().floatValue(),
-      this.gen.next().floatValue(),
-      this.gen.next().floatValue(),
-      this.gen.next().floatValue());
+    return Matrix2x2D.of(
+      this.gen.next().doubleValue(),
+      this.gen.next().doubleValue(),
+      this.gen.next().doubleValue(),
+      this.gen.next().doubleValue());
   }
 }

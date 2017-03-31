@@ -734,7 +734,6 @@
           </execution>
 
           <!-- Parameterized matrix types -->
-          <!-- Double -->
           <execution>
             <id>generate-PM4x4D</id>
             <phase>generate-test-sources</phase>
@@ -799,9 +798,72 @@
               </templates>
             </configuration>
           </execution>
+          <execution>
+            <id>generate-PM4x4F</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PMatrix4x4Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/parameterized/matrices/PMatrix4x4FTest.java</target>
+                  <properties>
+                    <className>PMatrix4x4FTest</className>
+                    <matrixType>com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F</matrixType>
+                    <matrixComponentType>float</matrixComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <generatorType>com.io7m.jtensors.generators.PMatrix4x4FGenerator</generatorType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4F</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4F</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.parameterized.vectors.PVector4F</vectorColumnGenericType>
+                    <vectorGeneratorType>com.io7m.jtensors.generators.Vector4FGenerator</vectorGeneratorType>
+                    <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector4FGenerator</vectorGenericGeneratorType>
+                    <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrices4x4F</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
+                    <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors4F</vectorOpClass>
+                    <hasGeneric>true</hasGeneric>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-PM3x3F</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PMatrix3x3Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/parameterized/matrices/PMatrix3x3FTest.java</target>
+                  <properties>
+                    <className>PMatrix3x3FTest</className>
+                    <matrixType>com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F</matrixType>
+                    <matrixComponentType>float</matrixComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <generatorType>com.io7m.jtensors.generators.PMatrix3x3FGenerator</generatorType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector3F</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector3F</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.parameterized.vectors.PVector3F</vectorColumnGenericType>
+                    <vectorGeneratorType>com.io7m.jtensors.generators.Vector3FGenerator</vectorGeneratorType>
+                    <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector3FGenerator</vectorGenericGeneratorType>
+                    <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrices3x3F</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
+                    <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors3F</vectorOpClass>
+                    <hasGeneric>true</hasGeneric>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
 
           <!-- Unparameterized matrix types -->
-          <!-- Double -->
           <execution>
             <id>generate-M4x4D</id>
             <phase>generate-test-sources</phase>
@@ -859,6 +921,68 @@
                     <opClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices3x3D</opClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
                     <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors3D</vectorOpClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-M4x4F</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PMatrix4x4Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/unparameterized/matrices/Matrix4x4FTest.java</target>
+                  <properties>
+                    <className>Matrix4x4FTest</className>
+                    <matrixType>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F</matrixType>
+                    <matrixComponentType>float</matrixComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <generatorType>com.io7m.jtensors.generators.Matrix4x4FGenerator</generatorType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4F</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4F</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.unparameterized.vectors.Vector4F</vectorColumnGenericType>
+                    <vectorGeneratorType>com.io7m.jtensors.generators.Vector4FGenerator</vectorGeneratorType>
+                    <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector4FGenerator</vectorGenericGeneratorType>
+                    <opClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4F</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
+                    <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors4F</vectorOpClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-M3x3F</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PMatrix3x3Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/unparameterized/matrices/Matrix3x3FTest.java</target>
+                  <properties>
+                    <className>Matrix3x3FTest</className>
+                    <matrixType>com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F</matrixType>
+                    <matrixComponentType>float</matrixComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <generatorType>com.io7m.jtensors.generators.Matrix3x3FGenerator</generatorType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector3F</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector3F</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.unparameterized.vectors.Vector3F</vectorColumnGenericType>
+                    <vectorGeneratorType>com.io7m.jtensors.generators.Vector3FGenerator</vectorGeneratorType>
+                    <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector3FGenerator</vectorGenericGeneratorType>
+                    <opClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices3x3F</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
+                    <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors3F</vectorOpClass>
                   </properties>
                 </template>
               </templates>

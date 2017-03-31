@@ -114,7 +114,6 @@ public final class <className>
     <testOpClass>.checkObjectNotEquals(a, Integer.valueOf(23));
 
     <testOpClass>.checkObjectNotEquals(a, b);
-    <testOpClass>.checkObjectNotEquals(a.hashCode(), b.hashCode());
     <testOpClass>.checkObjectNotEquals(a.toString(), b.toString());
   }
 
@@ -608,7 +607,7 @@ public final class <className>
    */
 
   @Test
-  @PercentagePassing
+  @PercentagePassing(passPercent = 95)
   public void testInvertProduct()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -636,7 +635,7 @@ public final class <className>
    */
 
   @Test
-  @PercentagePassing
+  @PercentagePassing(passPercent = 95)
   public void testInvertMultiplyIdentity()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -880,7 +879,7 @@ public final class <className>
    */
 
   @Test
-  @PercentagePassing
+  @PercentagePassing(passPercent = 95)
   public void testMultiplyVectorPostIdentityInverse()
   {
     final Generator\<<matrixType>\> m_gen = createGeneratorNormal();
@@ -1296,7 +1295,7 @@ public final class <className>
       for (int column = 0; column \< 4; ++column) {
         <matrixComponentType> m0_v = a.rowColumn(row, column);
         <matrixComponentType> m1_v = b.rowColumn(row, column);
-        <matrixComponentType> e = <testOpClass>.add(m0_v, m1_v);
+        <matrixComponentType> e = (<matrixComponentType>) <testOpClass>.add(m0_v, m1_v);
         <matrixComponentType> r = c.rowColumn(row, column);
         <testOpClass>.checkAlmostEquals(e, r);
       }
@@ -1317,7 +1316,7 @@ public final class <className>
       for (int column = 0; column \< 4; ++column) {
         <matrixComponentType> m0_v = a.rowColumn(row, column);
         <matrixComponentType> m1_v = b.rowColumn(row, column);
-        <matrixComponentType> e = <testOpClass>.subtract(m0_v, m1_v);
+        <matrixComponentType> e = (<matrixComponentType>) <testOpClass>.subtract(m0_v, m1_v);
         <matrixComponentType> r = c.rowColumn(row, column);
         <testOpClass>.checkAlmostEquals(e, r);
       }
@@ -1337,7 +1336,7 @@ public final class <className>
     for (int row = 0; row \< 4; ++row) {
       for (int column = 0; column \< 4; ++column) {
         <matrixComponentType> m_v = a.rowColumn(row, column);
-        <matrixComponentType> e = <testOpClass>.multiplyReal(m_v, s);
+        <matrixComponentType> e = (<matrixComponentType>) <testOpClass>.multiplyReal(m_v, s);
         <matrixComponentType> r = mr.rowColumn(row, column);
         <testOpClass>.checkAlmostEquals(e, r);
       }

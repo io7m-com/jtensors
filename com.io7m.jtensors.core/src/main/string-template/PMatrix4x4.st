@@ -105,22 +105,22 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      (m0.r0c0() + m1.r0c0()),
-      (m0.r0c1() + m1.r0c1()),
-      (m0.r0c2() + m1.r0c2()),
-      (m0.r0c3() + m1.r0c3()),
-      (m0.r1c0() + m1.r1c0()),
-      (m0.r1c1() + m1.r1c1()),
-      (m0.r1c2() + m1.r1c2()),
-      (m0.r1c3() + m1.r1c3()),
-      (m0.r2c0() + m1.r2c0()),
-      (m0.r2c1() + m1.r2c1()),
-      (m0.r2c2() + m1.r2c2()),
-      (m0.r2c3() + m1.r2c3()),
-      (m0.r3c0() + m1.r3c0()),
-      (m0.r3c1() + m1.r3c1()),
-      (m0.r3c2() + m1.r3c2()),
-      (m0.r3c3() + m1.r3c3())
+      (<matrixComponentType>) (m0.r0c0() + m1.r0c0()),
+      (<matrixComponentType>) (m0.r0c1() + m1.r0c1()),
+      (<matrixComponentType>) (m0.r0c2() + m1.r0c2()),
+      (<matrixComponentType>) (m0.r0c3() + m1.r0c3()),
+      (<matrixComponentType>) (m0.r1c0() + m1.r1c0()),
+      (<matrixComponentType>) (m0.r1c1() + m1.r1c1()),
+      (<matrixComponentType>) (m0.r1c2() + m1.r1c2()),
+      (<matrixComponentType>) (m0.r1c3() + m1.r1c3()),
+      (<matrixComponentType>) (m0.r2c0() + m1.r2c0()),
+      (<matrixComponentType>) (m0.r2c1() + m1.r2c1()),
+      (<matrixComponentType>) (m0.r2c2() + m1.r2c2()),
+      (<matrixComponentType>) (m0.r2c3() + m1.r2c3()),
+      (<matrixComponentType>) (m0.r3c0() + m1.r3c0()),
+      (<matrixComponentType>) (m0.r3c1() + m1.r3c1()),
+      (<matrixComponentType>) (m0.r3c2() + m1.r3c2()),
+      (<matrixComponentType>) (m0.r3c3() + m1.r3c3())
     );
   }
 
@@ -486,10 +486,10 @@ public final class <className>
     }
 
     return Optional.of(transpose(<matrixType>.of(
-      r0c0 * d_inv, r0c1 * d_inv, r0c2 * d_inv, r0c3 * d_inv,
-      r1c0 * d_inv, r1c1 * d_inv, r1c2 * d_inv, r1c3 * d_inv,
-      r2c0 * d_inv, r2c1 * d_inv, r2c2 * d_inv, r2c3 * d_inv,
-      r3c0 * d_inv, r3c1 * d_inv, r3c2 * d_inv, r3c3 * d_inv)));
+      (<matrixComponentType>) (r0c0 * d_inv), (<matrixComponentType>) (r0c1 * d_inv), (<matrixComponentType>) (r0c2 * d_inv), (<matrixComponentType>) (r0c3 * d_inv),
+      (<matrixComponentType>) (r1c0 * d_inv), (<matrixComponentType>) (r1c1 * d_inv), (<matrixComponentType>) (r1c2 * d_inv), (<matrixComponentType>) (r1c3 * d_inv),
+      (<matrixComponentType>) (r2c0 * d_inv), (<matrixComponentType>) (r2c1 * d_inv), (<matrixComponentType>) (r2c2 * d_inv), (<matrixComponentType>) (r2c3 * d_inv),
+      (<matrixComponentType>) (r3c0 * d_inv), (<matrixComponentType>) (r3c1 * d_inv), (<matrixComponentType>) (r3c2 * d_inv), (<matrixComponentType>) (r3c3 * d_inv))));
   }
 
   /**
@@ -648,10 +648,10 @@ public final class <className>
       + (m0_r3c3 * m1_r3c3);
 
     return <matrixType>.of(
-      r0c0, r0c1, r0c2, r0c3,
-      r1c0, r1c1, r1c2, r1c3,
-      r2c0, r2c1, r2c2, r2c3,
-      r3c0, r3c1, r3c2, r3c3);
+      (<matrixComponentType>) r0c0, (<matrixComponentType>) r0c1, (<matrixComponentType>) r0c2, (<matrixComponentType>) r0c3,
+      (<matrixComponentType>) r1c0, (<matrixComponentType>) r1c1, (<matrixComponentType>) r1c2, (<matrixComponentType>) r1c3,
+      (<matrixComponentType>) r2c0, (<matrixComponentType>) r2c1, (<matrixComponentType>) r2c2, (<matrixComponentType>) r2c3,
+      (<matrixComponentType>) r3c0, (<matrixComponentType>) r3c1, (<matrixComponentType>) r3c2, (<matrixComponentType>) r3c3);
   }
 
   <if(hasGeneric)>
@@ -692,7 +692,11 @@ public final class <className>
         m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3(),
         vx, vy, vz, vw);
 
-    return <vectorColumnGenericType>.of(x, y, z, w);
+    return <vectorColumnGenericType>.of(
+      (<matrixComponentType>) x,
+      (<matrixComponentType>) y,
+      (<matrixComponentType>) z,
+      (<matrixComponentType>) w);
   }
   <endif>
 
@@ -730,7 +734,11 @@ public final class <className>
         m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3(),
         vx, vy, vz, vw);
 
-    return <vectorColumnType>.of(x, y, z, w);
+    return <vectorColumnType>.of(
+      (<matrixComponentType>) x,
+      (<matrixComponentType>) y,
+      (<matrixComponentType>) z,
+      (<matrixComponentType>) w);
   }
 
   /**
@@ -820,13 +828,13 @@ public final class <className>
     final <scalarRealType> y,
     final <scalarRealType> z)
   {
-    final <scalarRealType> o = <opClass>.zero();
-    final <scalarRealType> s = <opClass>.one();
+    final <matrixComponentType> o = (<matrixComponentType>) <opClass>.zero();
+    final <matrixComponentType> s = (<matrixComponentType>) <opClass>.one();
 
     return <matrixType>.of(
-      x, o, o, o,
-      o, y, o, o,
-      o, o, z, o,
+      (<matrixComponentType>) x, o, o, o,
+      o, (<matrixComponentType>) y, o, o,
+      o, o, (<matrixComponentType>) z, o,
       o, o, o, s
     );
   }
@@ -854,13 +862,13 @@ public final class <className>
     final <scalarRealType> y,
     final <scalarRealType> z)
   {
-    final <scalarRealType> o = <opClass>.zero();
-    final <scalarRealType> s = <opClass>.one();
+    final <matrixComponentType> o = (<matrixComponentType>) <opClass>.zero();
+    final <matrixComponentType> s = (<matrixComponentType>) <opClass>.one();
 
     return <matrixType>.of(
-      s, o, o, x,
-      o, s, o, y,
-      o, o, s, z,
+      s, o, o, (<matrixComponentType>) x,
+      o, s, o, (<matrixComponentType>) y,
+      o, o, s, (<matrixComponentType>) z,
       o, o, o, s
     );
   }
@@ -927,10 +935,10 @@ public final class <className>
     final <scalarRealType> r3c3 = <opClass>.one();
 
     return <matrixType>.of(
-      r0c0, r0c1, r0c2, r0c3,
-      r1c0, r1c1, r1c2, r1c3,
-      r2c0, r2c1, r2c2, r2c3,
-      r3c0, r3c1, r3c2, r3c3
+      (<matrixComponentType>) r0c0, (<matrixComponentType>) r0c1, (<matrixComponentType>) r0c2, (<matrixComponentType>) r0c3,
+      (<matrixComponentType>) r1c0, (<matrixComponentType>) r1c1, (<matrixComponentType>) r1c2, (<matrixComponentType>) r1c3,
+      (<matrixComponentType>) r2c0, (<matrixComponentType>) r2c1, (<matrixComponentType>) r2c2, (<matrixComponentType>) r2c3,
+      (<matrixComponentType>) r3c0, (<matrixComponentType>) r3c1, (<matrixComponentType>) r3c2, (<matrixComponentType>) r3c3
     );
   }
 
@@ -1097,22 +1105,22 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      (m.r0c0() * r),
-      (m.r0c1() * r),
-      (m.r0c2() * r),
-      (m.r0c3() * r),
-      (m.r1c0() * r),
-      (m.r1c1() * r),
-      (m.r1c2() * r),
-      (m.r1c3() * r),
-      (m.r2c0() * r),
-      (m.r2c1() * r),
-      (m.r2c2() * r),
-      (m.r2c3() * r),
-      (m.r3c0() * r),
-      (m.r3c1() * r),
-      (m.r3c2() * r),
-      (m.r3c3() * r)
+      (<matrixComponentType>) (m.r0c0() * r),
+      (<matrixComponentType>) (m.r0c1() * r),
+      (<matrixComponentType>) (m.r0c2() * r),
+      (<matrixComponentType>) (m.r0c3() * r),
+      (<matrixComponentType>) (m.r1c0() * r),
+      (<matrixComponentType>) (m.r1c1() * r),
+      (<matrixComponentType>) (m.r1c2() * r),
+      (<matrixComponentType>) (m.r1c3() * r),
+      (<matrixComponentType>) (m.r2c0() * r),
+      (<matrixComponentType>) (m.r2c1() * r),
+      (<matrixComponentType>) (m.r2c2() * r),
+      (<matrixComponentType>) (m.r2c3() * r),
+      (<matrixComponentType>) (m.r3c0() * r),
+      (<matrixComponentType>) (m.r3c1() * r),
+      (<matrixComponentType>) (m.r3c2() * r),
+      (<matrixComponentType>) (m.r3c3() * r)
     );
   }
 
@@ -1145,22 +1153,22 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      (m0.r0c0() - m1.r0c0()),
-      (m0.r0c1() - m1.r0c1()),
-      (m0.r0c2() - m1.r0c2()),
-      (m0.r0c3() - m1.r0c3()),
-      (m0.r1c0() - m1.r1c0()),
-      (m0.r1c1() - m1.r1c1()),
-      (m0.r1c2() - m1.r1c2()),
-      (m0.r1c3() - m1.r1c3()),
-      (m0.r2c0() - m1.r2c0()),
-      (m0.r2c1() - m1.r2c1()),
-      (m0.r2c2() - m1.r2c2()),
-      (m0.r2c3() - m1.r2c3()),
-      (m0.r3c0() - m1.r3c0()),
-      (m0.r3c1() - m1.r3c1()),
-      (m0.r3c2() - m1.r3c2()),
-      (m0.r3c3() - m1.r3c3())
+      (<matrixComponentType>) (m0.r0c0() - m1.r0c0()),
+      (<matrixComponentType>) (m0.r0c1() - m1.r0c1()),
+      (<matrixComponentType>) (m0.r0c2() - m1.r0c2()),
+      (<matrixComponentType>) (m0.r0c3() - m1.r0c3()),
+      (<matrixComponentType>) (m0.r1c0() - m1.r1c0()),
+      (<matrixComponentType>) (m0.r1c1() - m1.r1c1()),
+      (<matrixComponentType>) (m0.r1c2() - m1.r1c2()),
+      (<matrixComponentType>) (m0.r1c3() - m1.r1c3()),
+      (<matrixComponentType>) (m0.r2c0() - m1.r2c0()),
+      (<matrixComponentType>) (m0.r2c1() - m1.r2c1()),
+      (<matrixComponentType>) (m0.r2c2() - m1.r2c2()),
+      (<matrixComponentType>) (m0.r2c3() - m1.r2c3()),
+      (<matrixComponentType>) (m0.r3c0() - m1.r3c0()),
+      (<matrixComponentType>) (m0.r3c1() - m1.r3c1()),
+      (<matrixComponentType>) (m0.r3c2() - m1.r3c2()),
+      (<matrixComponentType>) (m0.r3c3() - m1.r3c3())
     );
   }
 

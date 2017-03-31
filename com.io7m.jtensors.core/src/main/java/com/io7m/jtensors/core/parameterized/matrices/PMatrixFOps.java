@@ -19,9 +19,9 @@ package com.io7m.jtensors.core.parameterized.matrices;
 import com.io7m.jtensors.core.determinants.Determinants;
 import com.io7m.junreachable.UnreachableCodeException;
 
-final class PMatrixDOps
+final class PMatrixFOps
 {
-  private PMatrixDOps()
+  private PMatrixFOps()
   {
     throw new UnreachableCodeException();
   }

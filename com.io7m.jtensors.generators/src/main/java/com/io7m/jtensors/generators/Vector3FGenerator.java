@@ -70,6 +70,21 @@ public final class Vector3FGenerator implements Generator<Vector3F>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-1.0, 1.0]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector3F> createNormal()
+  {
+    return new Vector3FGenerator(PrimitiveGenerators.doubles(
+      -1.0,
+      1.0
+    ));
+  }
+
   @Override
   public Vector3F next()
   {
