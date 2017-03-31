@@ -1,4 +1,4 @@
-PMatrix4x4(
+PMatrix3x3(
   className,
   matrixType,
   matrixComponentType,
@@ -57,17 +57,15 @@ public final class <className>
 
     ZERO =
       <matrixType>.of(
-        z, z, z, z,
-        z, z, z, z,
-        z, z, z, z,
-        z, z, z, z);
+        z, z, z,
+        z, z, z,
+        z, z, z);
 
     IDENTITY =
       <matrixType>.of(
-        s, z, z, z,
-        z, s, z, z,
-        z, z, s, z,
-        z, z, z, s);
+        s, z, z,
+        z, s, z,
+        z, z, s);
   }
 
   private <className>()
@@ -108,19 +106,12 @@ public final class <className>
       (m0.r0c0() + m1.r0c0()),
       (m0.r0c1() + m1.r0c1()),
       (m0.r0c2() + m1.r0c2()),
-      (m0.r0c3() + m1.r0c3()),
       (m0.r1c0() + m1.r1c0()),
       (m0.r1c1() + m1.r1c1()),
       (m0.r1c2() + m1.r1c2()),
-      (m0.r1c3() + m1.r1c3()),
       (m0.r2c0() + m1.r2c0()),
       (m0.r2c1() + m1.r2c1()),
-      (m0.r2c2() + m1.r2c2()),
-      (m0.r2c3() + m1.r2c3()),
-      (m0.r3c0() + m1.r3c0()),
-      (m0.r3c1() + m1.r3c1()),
-      (m0.r3c2() + m1.r3c2()),
-      (m0.r3c3() + m1.r3c3())
+      (m0.r2c2() + m1.r2c2())
     );
   }
 
@@ -145,11 +136,10 @@ public final class <className>
     final <matrixType> m)
   <endif>
   {
-    return <opClass>.determinant4x4(
-      m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
-      m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
-      m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
-      m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3());
+    return <opClass>.determinant3x3(
+      m.r0c0(), m.r0c1(), m.r0c2(),
+      m.r1c0(), m.r1c1(), m.r1c2(),
+      m.r2c0(), m.r2c1(), m.r2c2());
   }
 
   /**
@@ -181,315 +171,43 @@ public final class <className>
 
     final <scalarRealType> d_inv = <opClass>.one() / d;
 
-    /*
-     * This code is based on the Laplace Expansion theorem. Essentially, the
-     * inverse of the matrix is calculated by taking the determinants of 3x3
-     * sub-matrices of the original matrix. The sub-matrices are created by
-     * removing a specific row and column to leave 9 (possibly non-adjacent)
-     * cells, which are then placed in a 3x3 matrix.
-     *
-     * This implementation was derived from the paper "The Laplace Expansion
-     * Theorem: Computing the Determinants and Inverses of Matrices" by David
-     * Eberly.
-     */
+    final <scalarRealType> orig_r0c0 = m.r0c0();
+    final <scalarRealType> orig_r0c1 = m.r0c1();
+    final <scalarRealType> orig_r0c2 = m.r0c2();
 
-    final <scalarRealType> r0c0;
-    final <scalarRealType> r0c1;
-    final <scalarRealType> r0c2;
-    final <scalarRealType> r0c3;
+    final <scalarRealType> orig_r1c0 = m.r1c0();
+    final <scalarRealType> orig_r1c1 = m.r1c1();
+    final <scalarRealType> orig_r1c2 = m.r1c2();
 
-    final <scalarRealType> r1c0;
-    final <scalarRealType> r1c1;
-    final <scalarRealType> r1c2;
-    final <scalarRealType> r1c3;
+    final <scalarRealType> orig_r2c0 = m.r2c0();
+    final <scalarRealType> orig_r2c1 = m.r2c1();
+    final <scalarRealType> orig_r2c2 = m.r2c2();
 
-    final <scalarRealType> r2c0;
-    final <scalarRealType> r2c1;
-    final <scalarRealType> r2c2;
-    final <scalarRealType> r2c3;
+    final <scalarRealType> r0c0 =
+      (orig_r1c1 * orig_r2c2) - (orig_r1c2 * orig_r2c1);
+    final <scalarRealType> r0c1 =
+      (orig_r0c2 * orig_r2c1) - (orig_r0c1 * orig_r2c2);
+    final <scalarRealType> r0c2 =
+      (orig_r0c1 * orig_r1c2) - (orig_r0c2 * orig_r1c1);
 
-    final <scalarRealType> r3c0;
-    final <scalarRealType> r3c1;
-    final <scalarRealType> r3c2;
-    final <scalarRealType> r3c3;
+    final <scalarRealType> r1c0 =
+      (orig_r1c2 * orig_r2c0) - (orig_r1c0 * orig_r2c2);
+    final <scalarRealType> r1c1 =
+      (orig_r0c0 * orig_r2c2) - (orig_r0c2 * orig_r2c0);
+    final <scalarRealType> r1c2 =
+      (orig_r0c2 * orig_r1c0) - (orig_r0c0 * orig_r1c2);
 
-    {
-      // Sub-matrix obtained by removing m[0, 0]
-      // 1 = (-1) ^ (0 + 0)
+    final <scalarRealType> r2c0 =
+      (orig_r1c0 * orig_r2c1) - (orig_r1c1 * orig_r2c0);
+    final <scalarRealType> r2c1 =
+      (orig_r0c1 * orig_r2c0) - (orig_r0c0 * orig_r2c1);
+    final <scalarRealType> r2c2 =
+      (orig_r0c0 * orig_r1c1) - (orig_r0c1 * orig_r1c0);
 
-      r0c0 = <opClass>.determinant3x3(
-        m.r1c1(),
-        m.r1c2(),
-        m.r1c3(),
-        m.r2c1(),
-        m.r2c2(),
-        m.r2c3(),
-        m.r3c1(),
-        m.r3c2(),
-        m.r3c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[0, 1]
-      // -1 = (-1) ^ (0 + 1)
-
-      r0c1 = -<opClass>.determinant3x3(
-        m.r1c0(),
-        m.r1c2(),
-        m.r1c3(),
-        m.r2c0(),
-        m.r2c2(),
-        m.r2c3(),
-        m.r3c0(),
-        m.r3c2(),
-        m.r3c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[0, 2]
-      // 1 = (-1) ^ (0 + 2)
-
-      r0c2 = <opClass>.determinant3x3(
-        m.r1c0(),
-        m.r1c1(),
-        m.r1c3(),
-        m.r2c0(),
-        m.r2c1(),
-        m.r2c3(),
-        m.r3c0(),
-        m.r3c1(),
-        m.r3c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[0, 3]
-      // -1 = (-1) ^ (0 + 3)
-
-      r0c3 = -<opClass>.determinant3x3(
-        m.r1c0(),
-        m.r1c1(),
-        m.r1c2(),
-        m.r2c0(),
-        m.r2c1(),
-        m.r2c2(),
-        m.r3c0(),
-        m.r3c1(),
-        m.r3c2()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[1, 0]
-      // -1 = (-1) ^ (1 + 0)
-
-      r1c0 = -<opClass>.determinant3x3(
-        m.r0c1(),
-        m.r0c2(),
-        m.r0c3(),
-        m.r2c1(),
-        m.r2c2(),
-        m.r2c3(),
-        m.r3c1(),
-        m.r3c2(),
-        m.r3c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[1, 1]
-      // 1 = (-1) ^ (1 + 1)
-
-      r1c1 = <opClass>.determinant3x3(
-        m.r0c0(),
-        m.r0c2(),
-        m.r0c3(),
-        m.r2c0(),
-        m.r2c2(),
-        m.r2c3(),
-        m.r3c0(),
-        m.r3c2(),
-        m.r3c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[1, 2]
-      // -1 = (-1) ^ (1 + 2)
-
-      r1c2 = -<opClass>.determinant3x3(
-        m.r0c0(),
-        m.r0c1(),
-        m.r0c3(),
-        m.r2c0(),
-        m.r2c1(),
-        m.r2c3(),
-        m.r3c0(),
-        m.r3c1(),
-        m.r3c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[1, 3]
-      // 1 = (-1) ^ (1 + 3)
-
-      r1c3 = <opClass>.determinant3x3(
-        m.r0c0(),
-        m.r0c1(),
-        m.r0c2(),
-        m.r2c0(),
-        m.r2c1(),
-        m.r2c2(),
-        m.r3c0(),
-        m.r3c1(),
-        m.r3c2()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[2, 0]
-      // 1 = (-1) ^ (2 + 0)
-
-      r2c0 = <opClass>.determinant3x3(
-        m.r0c1(),
-        m.r0c2(),
-        m.r0c3(),
-        m.r1c1(),
-        m.r1c2(),
-        m.r1c3(),
-        m.r3c1(),
-        m.r3c2(),
-        m.r3c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[2, 1]
-      // -1 = (-1) ^ (2 + 1)
-
-      r2c1 = -<opClass>.determinant3x3(
-        m.r0c0(),
-        m.r0c2(),
-        m.r0c3(),
-        m.r1c0(),
-        m.r1c2(),
-        m.r1c3(),
-        m.r3c0(),
-        m.r3c2(),
-        m.r3c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[2, 2]
-      // 1 = (-1) ^ (2 + 2)
-
-      r2c2 = <opClass>.determinant3x3(
-        m.r0c0(),
-        m.r0c1(),
-        m.r0c3(),
-        m.r1c0(),
-        m.r1c1(),
-        m.r1c3(),
-        m.r3c0(),
-        m.r3c1(),
-        m.r3c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[2, 3]
-      // -1 = (-1) ^ (2 + 3)
-
-      r2c3 = -<opClass>.determinant3x3(
-        m.r0c0(),
-        m.r0c1(),
-        m.r0c2(),
-        m.r1c0(),
-        m.r1c1(),
-        m.r1c2(),
-        m.r3c0(),
-        m.r3c1(),
-        m.r3c2()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[3, 0]
-      // -1 = (-1) ^ (3 + 0)
-
-      r3c0 = -<opClass>.determinant3x3(
-        m.r0c1(),
-        m.r0c2(),
-        m.r0c3(),
-        m.r1c1(),
-        m.r1c2(),
-        m.r1c3(),
-        m.r2c1(),
-        m.r2c2(),
-        m.r2c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[3, 1]
-      // 1 = (-1) ^ (3 + 1)
-
-      r3c1 = <opClass>.determinant3x3(
-        m.r0c0(),
-        m.r0c2(),
-        m.r0c3(),
-        m.r1c0(),
-        m.r1c2(),
-        m.r1c3(),
-        m.r2c0(),
-        m.r2c2(),
-        m.r2c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[3, 2]
-      // -1 = (-1) ^ (3 + 2)
-
-      r3c2 = -<opClass>.determinant3x3(
-        m.r0c0(),
-        m.r0c1(),
-        m.r0c3(),
-        m.r1c0(),
-        m.r1c1(),
-        m.r1c3(),
-        m.r2c0(),
-        m.r2c1(),
-        m.r2c3()
-      );
-    }
-
-    {
-      // Sub-matrix obtained by removing m[3, 3]
-      // 1 = (-1) ^ (3 + 3)
-
-      r3c3 = <opClass>.determinant3x3(
-        m.r0c0(),
-        m.r0c1(),
-        m.r0c2(),
-        m.r1c0(),
-        m.r1c1(),
-        m.r1c2(),
-        m.r2c0(),
-        m.r2c1(),
-        m.r2c2()
-      );
-    }
-
-    return Optional.of(transpose(<matrixType>.of(
-      r0c0 * d_inv, r0c1 * d_inv, r0c2 * d_inv, r0c3 * d_inv,
-      r1c0 * d_inv, r1c1 * d_inv, r1c2 * d_inv, r1c3 * d_inv,
-      r2c0 * d_inv, r2c1 * d_inv, r2c2 * d_inv, r2c3 * d_inv,
-      r3c0 * d_inv, r3c1 * d_inv, r3c2 * d_inv, r3c3 * d_inv)));
+    return Optional.of(scale(<matrixType>.of(
+      r0c0, r0c1, r0c2,
+      r1c0, r1c1, r1c2,
+      r2c0, r2c1, r2c2), d_inv));
   }
 
   /**
@@ -520,138 +238,72 @@ public final class <className>
     final <scalarRealType> m0_r0c0 = m0.r0c0();
     final <scalarRealType> m0_r0c1 = m0.r0c1();
     final <scalarRealType> m0_r0c2 = m0.r0c2();
-    final <scalarRealType> m0_r0c3 = m0.r0c3();
     final <scalarRealType> m0_r1c0 = m0.r1c0();
     final <scalarRealType> m0_r1c1 = m0.r1c1();
     final <scalarRealType> m0_r1c2 = m0.r1c2();
-    final <scalarRealType> m0_r1c3 = m0.r1c3();
     final <scalarRealType> m0_r2c0 = m0.r2c0();
     final <scalarRealType> m0_r2c1 = m0.r2c1();
     final <scalarRealType> m0_r2c2 = m0.r2c2();
-    final <scalarRealType> m0_r2c3 = m0.r2c3();
-    final <scalarRealType> m0_r3c0 = m0.r3c0();
-    final <scalarRealType> m0_r3c1 = m0.r3c1();
-    final <scalarRealType> m0_r3c2 = m0.r3c2();
-    final <scalarRealType> m0_r3c3 = m0.r3c3();
 
     final <scalarRealType> m1_r0c0 = m1.r0c0();
     final <scalarRealType> m1_r0c1 = m1.r0c1();
     final <scalarRealType> m1_r0c2 = m1.r0c2();
-    final <scalarRealType> m1_r0c3 = m1.r0c3();
     final <scalarRealType> m1_r1c0 = m1.r1c0();
     final <scalarRealType> m1_r1c1 = m1.r1c1();
     final <scalarRealType> m1_r1c2 = m1.r1c2();
-    final <scalarRealType> m1_r1c3 = m1.r1c3();
     final <scalarRealType> m1_r2c0 = m1.r2c0();
     final <scalarRealType> m1_r2c1 = m1.r2c1();
     final <scalarRealType> m1_r2c2 = m1.r2c2();
-    final <scalarRealType> m1_r2c3 = m1.r2c3();
-    final <scalarRealType> m1_r3c0 = m1.r3c0();
-    final <scalarRealType> m1_r3c1 = m1.r3c1();
-    final <scalarRealType> m1_r3c2 = m1.r3c2();
-    final <scalarRealType> m1_r3c3 = m1.r3c3();
 
     final <scalarRealType> r0c0 =
         (m0_r0c0 * m1_r0c0)
       + (m0_r0c1 * m1_r1c0)
-      + (m0_r0c2 * m1_r2c0)
-      + (m0_r0c3 * m1_r3c0);
+      + (m0_r0c2 * m1_r2c0);
 
     final <scalarRealType> r1c0 =
         (m0_r1c0 * m1_r0c0)
       + (m0_r1c1 * m1_r1c0)
-      + (m0_r1c2 * m1_r2c0)
-      + (m0_r1c3 * m1_r3c0);
+      + (m0_r1c2 * m1_r2c0);
 
     final <scalarRealType> r2c0 =
         (m0_r2c0 * m1_r0c0)
       + (m0_r2c1 * m1_r1c0)
-      + (m0_r2c2 * m1_r2c0)
-      + (m0_r2c3 * m1_r3c0);
-
-    final <scalarRealType> r3c0 =
-        (m0_r3c0 * m1_r0c0)
-      + (m0_r3c1 * m1_r1c0)
-      + (m0_r3c2 * m1_r2c0)
-      + (m0_r3c3 * m1_r3c0);
+      + (m0_r2c2 * m1_r2c0);
 
     final <scalarRealType> r0c1 =
         (m0_r0c0 * m1_r0c1)
       + (m0_r0c1 * m1_r1c1)
-      + (m0_r0c2 * m1_r2c1)
-      + (m0_r0c3 * m1_r3c1);
+      + (m0_r0c2 * m1_r2c1);
 
     final <scalarRealType> r1c1 =
         (m0_r1c0 * m1_r0c1)
       + (m0_r1c1 * m1_r1c1)
-      + (m0_r1c2 * m1_r2c1)
-      + (m0_r1c3 * m1_r3c1);
+      + (m0_r1c2 * m1_r2c1);
 
     final <scalarRealType> r2c1 =
         (m0_r2c0 * m1_r0c1)
       + (m0_r2c1 * m1_r1c1)
-      + (m0_r2c2 * m1_r2c1)
-      + (m0_r2c3 * m1_r3c1);
-
-    final <scalarRealType> r3c1 =
-        (m0_r3c0 * m1_r0c1)
-      + (m0_r3c1 * m1_r1c1)
-      + (m0_r3c2 * m1_r2c1)
-      + (m0_r3c3 * m1_r3c1);
+      + (m0_r2c2 * m1_r2c1);
 
     final <scalarRealType> r0c2 =
         (m0_r0c0 * m1_r0c2)
       + (m0_r0c1 * m1_r1c2)
-      + (m0_r0c2 * m1_r2c2)
-      + (m0_r0c3 * m1_r3c2);
+      + (m0_r0c2 * m1_r2c2);
 
     final <scalarRealType> r1c2 =
         (m0_r1c0 * m1_r0c2)
       + (m0_r1c1 * m1_r1c2)
-      + (m0_r1c2 * m1_r2c2)
-      + (m0_r1c3 * m1_r3c2);
+      + (m0_r1c2 * m1_r2c2);
 
     final <scalarRealType> r2c2 =
         (m0_r2c0 * m1_r0c2)
       + (m0_r2c1 * m1_r1c2)
-      + (m0_r2c2 * m1_r2c2)
-      + (m0_r2c3 * m1_r3c2);
-
-    final <scalarRealType> r3c2 =
-        (m0_r3c0 * m1_r0c2)
-      + (m0_r3c1 * m1_r1c2)
-      + (m0_r3c2 * m1_r2c2)
-      + (m0_r3c3 * m1_r3c2);
-
-    final <scalarRealType> r0c3 =
-        (m0_r0c0 * m1_r0c3)
-      + (m0_r0c1 * m1_r1c3)
-      + (m0_r0c2 * m1_r2c3)
-      + (m0_r0c3 * m1_r3c3);
-
-    final <scalarRealType> r1c3 =
-        (m0_r1c0 * m1_r0c3)
-      + (m0_r1c1 * m1_r1c3)
-      + (m0_r1c2 * m1_r2c3)
-      + (m0_r1c3 * m1_r3c3);
-
-    final <scalarRealType> r2c3 =
-        (m0_r2c0 * m1_r0c3)
-      + (m0_r2c1 * m1_r1c3)
-      + (m0_r2c2 * m1_r2c3)
-      + (m0_r2c3 * m1_r3c3);
-
-    final <scalarRealType> r3c3 =
-        (m0_r3c0 * m1_r0c3)
-      + (m0_r3c1 * m1_r1c3)
-      + (m0_r3c2 * m1_r2c3)
-      + (m0_r3c3 * m1_r3c3);
+      + (m0_r2c2 * m1_r2c2);
 
     return <matrixType>.of(
-      r0c0, r0c1, r0c2, r0c3,
-      r1c0, r1c1, r1c2, r1c3,
-      r2c0, r2c1, r2c2, r2c3,
-      r3c0, r3c1, r3c2, r3c3);
+      r0c0, r0c1, r0c2,
+      r1c0, r1c1, r1c2,
+      r2c0, r2c1, r2c2);
   }
 
   <if(hasGeneric)>
@@ -673,26 +325,21 @@ public final class <className>
     final <scalarRealType> vx = v.x();
     final <scalarRealType> vy = v.y();
     final <scalarRealType> vz = v.z();
-    final <scalarRealType> vw = v.w();
 
     final <scalarRealType> x =
-      <dotProductClass>.dotProduct4(
-        m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
-        vx, vy, vz, vw);
+      <dotProductClass>.dotProduct3(
+        m.r0c0(), m.r0c1(), m.r0c2(),
+        vx, vy, vz);
     final <scalarRealType> y =
-      <dotProductClass>.dotProduct4(
-        m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
-        vx, vy, vz, vw);
+      <dotProductClass>.dotProduct3(
+        m.r1c0(), m.r1c1(), m.r1c2(),
+        vx, vy, vz);
     final <scalarRealType> z =
-      <dotProductClass>.dotProduct4(
-        m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
-        vx, vy, vz, vw);
-    final <scalarRealType> w =
-      <dotProductClass>.dotProduct4(
-        m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3(),
-        vx, vy, vz, vw);
+      <dotProductClass>.dotProduct3(
+        m.r2c0(), m.r2c1(), m.r2c2(),
+        vx, vy, vz);
 
-    return <vectorColumnGenericType>.of(x, y, z, w);
+    return <vectorColumnGenericType>.of(x, y, z);
   }
   <endif>
 
@@ -711,35 +358,29 @@ public final class <className>
     final <scalarRealType> vx = v.x();
     final <scalarRealType> vy = v.y();
     final <scalarRealType> vz = v.z();
-    final <scalarRealType> vw = v.w();
 
     final <scalarRealType> x =
-      <dotProductClass>.dotProduct4(
-        m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
-        vx, vy, vz, vw);
+      <dotProductClass>.dotProduct3(
+        m.r0c0(), m.r0c1(), m.r0c2(),
+        vx, vy, vz);
     final <scalarRealType> y =
-      <dotProductClass>.dotProduct4(
-        m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
-        vx, vy, vz, vw);
+      <dotProductClass>.dotProduct3(
+        m.r1c0(), m.r1c1(), m.r1c2(),
+        vx, vy, vz);
     final <scalarRealType> z =
-      <dotProductClass>.dotProduct4(
-        m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
-        vx, vy, vz, vw);
-    final <scalarRealType> w =
-      <dotProductClass>.dotProduct4(
-        m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3(),
-        vx, vy, vz, vw);
+      <dotProductClass>.dotProduct3(
+        m.r2c0(), m.r2c1(), m.r2c2(),
+        vx, vy, vz);
 
-    return <vectorColumnType>.of(x, y, z, w);
+    return <vectorColumnType>.of(x, y, z);
   }
 
   /**
-   * Construct a matrix from the column vectors {@code (c0, c1, c2, c3)}.
+   * Construct a matrix from the column vectors {@code (c0, c1, c2)}.
    * @return A constructed matrix
    * @param c0 The column 0
    * @param c1 The column 1
    * @param c2 The column 2
-   * @param c3 The column 3
    * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
@@ -755,14 +396,12 @@ public final class <className>
   ofColumns(
     final <vectorColumnType> c0,
     final <vectorColumnType> c1,
-    final <vectorColumnType> c2,
-    final <vectorColumnType> c3)
+    final <vectorColumnType> c2)
   {
     return <matrixType>.of(
-      c0.x(), c1.x(), c2.x(), c3.x(),
-      c0.y(), c1.y(), c2.y(), c3.y(),
-      c0.z(), c1.z(), c2.z(), c3.z(),
-      c0.w(), c1.w(), c2.w(), c3.w());
+      c0.x(), c1.x(), c2.x(),
+      c0.y(), c1.y(), c2.y(),
+      c0.z(), c1.z(), c2.z());
   }
 
   /**
@@ -771,7 +410,6 @@ public final class <className>
    * @param r0 The row 0
    * @param r1 The row 1
    * @param r2 The row 2
-   * @param r3 The row 3
    * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
@@ -787,14 +425,12 @@ public final class <className>
   ofRows(
     final <vectorColumnType> r0,
     final <vectorColumnType> r1,
-    final <vectorColumnType> r2,
-    final <vectorColumnType> r3)
+    final <vectorColumnType> r2)
   {
     return <matrixType>.of(
-      r0.x(), r0.y(), r0.z(), r0.w(),
-      r1.x(), r1.y(), r1.z(), r1.w(),
-      r2.x(), r2.y(), r2.z(), r2.w(),
-      r3.x(), r3.y(), r3.z(), r3.w());
+      r0.x(), r0.y(), r0.z(),
+      r1.x(), r1.y(), r1.z(),
+      r2.x(), r2.y(), r2.z());
   }
 
   /**
@@ -824,45 +460,9 @@ public final class <className>
     final <scalarRealType> s = <opClass>.one();
 
     return <matrixType>.of(
-      x, o, o, o,
-      o, y, o, o,
-      o, o, z, o,
-      o, o, o, s
-    );
-  }
-
-  /**
-   * Construct a matrix that will translate by {@code (x, y, z)}.
-   * @return A constructed matrix
-   * @param x The X scaling value
-   * @param y The Y scaling value
-   * @param z The Z scaling value
-   * <if(hasGeneric)>
-   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
-   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
-   * <endif>
-   */
-
-  public static
-  <if(hasGeneric)>
-  \<A, B> <matrixType>\<A, B>
-  <else>
-  <matrixType>
-  <endif>
-  ofTranslation(
-    final <scalarRealType> x,
-    final <scalarRealType> y,
-    final <scalarRealType> z)
-  {
-    final <scalarRealType> o = <opClass>.zero();
-    final <scalarRealType> s = <opClass>.one();
-
-    return <matrixType>.of(
-      s, o, o, x,
-      o, s, o, y,
-      o, o, s, z,
-      o, o, o, s
-    );
+      x, o, o,
+      o, y, o,
+      o, o, z);
   }
 
   /**
@@ -909,29 +509,19 @@ public final class <className>
     final <scalarRealType> r0c0 = tx_sq + c;
     final <scalarRealType> r0c1 = txy - sz;
     final <scalarRealType> r0c2 = txz + sy;
-    final <scalarRealType> r0c3 = <opClass>.zero();
 
     final <scalarRealType> r1c0 = txy + sz;
     final <scalarRealType> r1c1 = ty_sq + c;
     final <scalarRealType> r1c2 = tyz - sx;
-    final <scalarRealType> r1c3 = <opClass>.zero();
 
     final <scalarRealType> r2c0 = txz - sy;
     final <scalarRealType> r2c1 = tyz + sx;
     final <scalarRealType> r2c2 = tz_sq + c;
-    final <scalarRealType> r2c3 = <opClass>.zero();
-
-    final <scalarRealType> r3c0 = <opClass>.zero();
-    final <scalarRealType> r3c1 = <opClass>.zero();
-    final <scalarRealType> r3c2 = <opClass>.zero();
-    final <scalarRealType> r3c3 = <opClass>.one();
 
     return <matrixType>.of(
-      r0c0, r0c1, r0c2, r0c3,
-      r1c0, r1c1, r1c2, r1c3,
-      r2c0, r2c1, r2c2, r2c3,
-      r3c0, r3c1, r3c2, r3c3
-    );
+      r0c0, r0c1, r0c2,
+      r1c0, r1c1, r1c2,
+      r2c0, r2c1, r2c2);
   }
 
   /**
@@ -948,7 +538,7 @@ public final class <className>
   <else>                  <vectorRowType> row0(final <matrixType> m)
   <endif>
   {
-    return <vectorRowType>.of(m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3());
+    return <vectorRowType>.of(m.r0c0(), m.r0c1(), m.r0c2());
   }
 
   /**
@@ -965,7 +555,7 @@ public final class <className>
   <else>                  <vectorRowType> row1(final <matrixType> m)
   <endif>
   {
-    return <vectorRowType>.of(m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3());
+    return <vectorRowType>.of(m.r1c0(), m.r1c1(), m.r1c2());
   }
 
   /**
@@ -982,24 +572,7 @@ public final class <className>
   <else>                  <vectorRowType> row2(final <matrixType> m)
   <endif>
   {
-    return <vectorRowType>.of(m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3());
-  }
-
-  /**
-   * @return Row 3 of the matrix
-   * @param m The matrix
-   * <if(hasGeneric)>
-   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
-   * @param \<B> A phantom type parameter (possibly representing a source coordinate system)
-   * <endif>
-   */
-
-  public static
-  <if(hasGeneric)>\<A, B> <vectorRowType> row3(final <matrixType>\<A, B> m)
-  <else>                  <vectorRowType> row3(final <matrixType> m)
-  <endif>
-  {
-    return <vectorRowType>.of(m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3());
+    return <vectorRowType>.of(m.r2c0(), m.r2c1(), m.r2c2());
   }
 
   /**
@@ -1016,7 +589,7 @@ public final class <className>
   <else>                  <vectorColumnType> column0(final <matrixType> m)
   <endif>
   {
-    return <vectorColumnType>.of(m.r0c0(), m.r1c0(), m.r2c0(), m.r3c0());
+    return <vectorColumnType>.of(m.r0c0(), m.r1c0(), m.r2c0());
   }
 
   /**
@@ -1033,7 +606,7 @@ public final class <className>
   <else>                  <vectorColumnType> column1(final <matrixType> m)
   <endif>
   {
-    return <vectorColumnType>.of(m.r0c1(), m.r1c1(), m.r2c1(), m.r3c1());
+    return <vectorColumnType>.of(m.r0c1(), m.r1c1(), m.r2c1());
   }
 
   /**
@@ -1050,24 +623,7 @@ public final class <className>
   <else>                  <vectorColumnType> column2(final <matrixType> m)
   <endif>
   {
-    return <vectorColumnType>.of(m.r0c2(), m.r1c2(), m.r2c2(), m.r3c2());
-  }
-
-  /**
-   * @return Column 3 of the matrix
-   * @param m The matrix
-   * <if(hasGeneric)>
-   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
-   * @param \<B> A phantom type parameter (possibly representing a source coordinate system)
-   * <endif>
-   */
-
-  public static
-  <if(hasGeneric)>\<A, B> <vectorColumnType> column3(final <matrixType>\<A, B> m)
-  <else>                  <vectorColumnType> column3(final <matrixType> m)
-  <endif>
-  {
-    return <vectorColumnType>.of(m.r0c3(), m.r1c3(), m.r2c3(), m.r3c3());
+    return <vectorColumnType>.of(m.r0c2(), m.r1c2(), m.r2c2());
   }
 
   /**
@@ -1100,19 +656,12 @@ public final class <className>
       (m.r0c0() * r),
       (m.r0c1() * r),
       (m.r0c2() * r),
-      (m.r0c3() * r),
       (m.r1c0() * r),
       (m.r1c1() * r),
       (m.r1c2() * r),
-      (m.r1c3() * r),
       (m.r2c0() * r),
       (m.r2c1() * r),
-      (m.r2c2() * r),
-      (m.r2c3() * r),
-      (m.r3c0() * r),
-      (m.r3c1() * r),
-      (m.r3c2() * r),
-      (m.r3c3() * r)
+      (m.r2c2() * r)
     );
   }
 
@@ -1148,19 +697,12 @@ public final class <className>
       (m0.r0c0() - m1.r0c0()),
       (m0.r0c1() - m1.r0c1()),
       (m0.r0c2() - m1.r0c2()),
-      (m0.r0c3() - m1.r0c3()),
       (m0.r1c0() - m1.r1c0()),
       (m0.r1c1() - m1.r1c1()),
       (m0.r1c2() - m1.r1c2()),
-      (m0.r1c3() - m1.r1c3()),
       (m0.r2c0() - m1.r2c0()),
       (m0.r2c1() - m1.r2c1()),
-      (m0.r2c2() - m1.r2c2()),
-      (m0.r2c3() - m1.r2c3()),
-      (m0.r3c0() - m1.r3c0()),
-      (m0.r3c1() - m1.r3c1()),
-      (m0.r3c2() - m1.r3c2()),
-      (m0.r3c3() - m1.r3c3())
+      (m0.r2c2() - m1.r2c2())
     );
   }
 
@@ -1187,7 +729,7 @@ public final class <className>
     final <matrixType> m)
   <endif>
   {
-    return m.r0c0() + (m.r1c1() + (m.r2c2() + m.r3c3()));
+    return m.r0c0() + (m.r1c1() + m.r2c2());
   }
 
   /**
@@ -1212,10 +754,9 @@ public final class <className>
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(), m.r1c0(), m.r2c0(), m.r3c0(),
-      m.r0c1(), m.r1c1(), m.r2c1(), m.r3c1(),
-      m.r0c2(), m.r1c2(), m.r2c2(), m.r3c2(),
-      m.r0c3(), m.r1c3(), m.r2c3(), m.r3c3());
+      m.r0c0(), m.r1c0(), m.r2c0(),
+      m.r0c1(), m.r1c1(), m.r2c1(),
+      m.r0c2(), m.r1c2(), m.r2c2());
   }
 
   private static
@@ -1225,23 +766,20 @@ public final class <className>
     final <matrixType>\<A, B> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
-    final <matrixComponentType> r2,
-    final <matrixComponentType> r3)
+    final <matrixComponentType> r2)
   <else>
   <matrixType>
   withColumn0(
     final <matrixType> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
-    final <matrixComponentType> r2,
-    final <matrixComponentType> r3)
+    final <matrixComponentType> r2)
   <endif>
   {
     return <matrixType>.of(
-      r0, m.r0c1(), m.r0c2(), m.r0c3(),
-      r1, m.r1c1(), m.r1c2(), m.r1c3(),
-      r2, m.r2c1(), m.r2c2(), m.r2c3(),
-      r3, m.r3c1(), m.r3c2(), m.r3c3());
+      r0, m.r0c1(), m.r0c2(),
+      r1, m.r1c1(), m.r1c2(),
+      r2, m.r2c1(), m.r2c2());
   }
 
   private static
@@ -1251,23 +789,20 @@ public final class <className>
     final <matrixType>\<A, B> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
-    final <matrixComponentType> r2,
-    final <matrixComponentType> r3)
+    final <matrixComponentType> r2)
   <else>
   <matrixType>
   withColumn1(
     final <matrixType> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
-    final <matrixComponentType> r2,
-    final <matrixComponentType> r3)
+    final <matrixComponentType> r2)
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(), r0, m.r0c2(), m.r0c3(),
-      m.r1c0(), r1, m.r1c2(), m.r1c3(),
-      m.r2c0(), r2, m.r2c2(), m.r2c3(),
-      m.r3c0(), r3, m.r3c2(), m.r3c3());
+      m.r0c0(), r0, m.r0c2(),
+      m.r1c0(), r1, m.r1c2(),
+      m.r2c0(), r2, m.r2c2());
   }
 
   private static
@@ -1277,56 +812,27 @@ public final class <className>
     final <matrixType>\<A, B> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
-    final <matrixComponentType> r2,
-    final <matrixComponentType> r3)
+    final <matrixComponentType> r2)
   <else>
   <matrixType>
   withColumn2(
     final <matrixType> m,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
-    final <matrixComponentType> r2,
-    final <matrixComponentType> r3)
+    final <matrixComponentType> r2)
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(), m.r0c1(), r0, m.r0c3(),
-      m.r1c0(), m.r1c1(), r1, m.r1c3(),
-      m.r2c0(), m.r2c1(), r2, m.r2c3(),
-      m.r3c0(), m.r3c1(), r3, m.r3c3());
-  }
-
-  private static
-  <if(hasGeneric)>
-  \<A, B> <matrixType>\<A, B>
-  withColumn3(
-    final <matrixType>\<A, B> m,
-    final <matrixComponentType> r0,
-    final <matrixComponentType> r1,
-    final <matrixComponentType> r2,
-    final <matrixComponentType> r3)
-  <else>
-  <matrixType>
-  withColumn3(
-    final <matrixType> m,
-    final <matrixComponentType> r0,
-    final <matrixComponentType> r1,
-    final <matrixComponentType> r2,
-    final <matrixComponentType> r3)
-  <endif>
-  {
-    return <matrixType>.of(
-      m.r0c0(), m.r0c1(), m.r0c2(), r0,
-      m.r1c0(), m.r1c1(), m.r1c2(), r1,
-      m.r2c0(), m.r2c1(), m.r2c2(), r2,
-      m.r3c0(), m.r3c1(), m.r3c2(), r3);
+      m.r0c0(), m.r0c1(), r0,
+      m.r1c0(), m.r1c1(), r1,
+      m.r2c0(), m.r2c1(), r2);
   }
 
   /**
-   * Set the column {@code column} of {@code m} to {@code (r0, r1, r2, r3)}.
+   * Set the column {@code column} of {@code m} to {@code (r0, r1, r2)}.
    * @return A matrix with the given row
    * @param m The matrix
-   * @param column The column index in the range {@code [0, 3]}
+   * @param column The column index in the range {@code [0, 2]}
    * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
@@ -1334,7 +840,6 @@ public final class <className>
    * @param r0 The value of row 0 in the column
    * @param r1 The value of row 1 in the column
    * @param r2 The value of row 2 in the column
-   * @param r3 The value of row 3 in the column
    */
 
   public static
@@ -1345,8 +850,7 @@ public final class <className>
     final int column,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
-    final <matrixComponentType> r2,
-    final <matrixComponentType> r3)
+    final <matrixComponentType> r2)
   <else>
   <matrixType>
   withColumn(
@@ -1354,30 +858,25 @@ public final class <className>
     final int column,
     final <matrixComponentType> r0,
     final <matrixComponentType> r1,
-    final <matrixComponentType> r2,
-    final <matrixComponentType> r3)
+    final <matrixComponentType> r2)
   <endif>
   {
     switch (column) {
       case 0:
       {
-        return withColumn0(m, r0, r1, r2, r3);
+        return withColumn0(m, r0, r1, r2);
       }
       case 1:
       {
-        return withColumn1(m, r0, r1, r2, r3);
+        return withColumn1(m, r0, r1, r2);
       }
       case 2:
       {
-        return withColumn2(m, r0, r1, r2, r3);
-      }
-      case 3:
-      {
-        return withColumn3(m, r0, r1, r2, r3);
+        return withColumn2(m, r0, r1, r2);
       }
       default: {
         throw new IndexOutOfBoundsException(String.format(
-          "Column %d must be in the range [0, 3]", Integer.valueOf(column)));
+          "Column %d must be in the range [0, 2]", Integer.valueOf(column)));
       }
     }
   }
@@ -1389,23 +888,20 @@ public final class <className>
     final <matrixType>\<A, B> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
-    final <matrixComponentType> c2,
-    final <matrixComponentType> c3)
+    final <matrixComponentType> c2)
   <else>
   <matrixType>
   withRow0(
     final <matrixType> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
-    final <matrixComponentType> c2,
-    final <matrixComponentType> c3)
+    final <matrixComponentType> c2)
   <endif>
   {
     return <matrixType>.of(
-      c0,       c1,       c2,       c3,
-      m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
-      m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
-      m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3());
+      c0,       c1,       c2,
+      m.r1c0(), m.r1c1(), m.r1c2(),
+      m.r2c0(), m.r2c1(), m.r2c2());
   }
 
   private static
@@ -1415,23 +911,20 @@ public final class <className>
     final <matrixType>\<A, B> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
-    final <matrixComponentType> c2,
-    final <matrixComponentType> c3)
+    final <matrixComponentType> c2)
   <else>
   <matrixType>
   withRow1(
     final <matrixType> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
-    final <matrixComponentType> c2,
-    final <matrixComponentType> c3)
+    final <matrixComponentType> c2)
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
-      c0,       c1,       c2,       c3,
-      m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
-      m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3());
+      m.r0c0(), m.r0c1(), m.r0c2(),
+      c0,       c1,       c2,
+      m.r2c0(), m.r2c1(), m.r2c2());
   }
 
   private static
@@ -1441,60 +934,30 @@ public final class <className>
     final <matrixType>\<A, B> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
-    final <matrixComponentType> c2,
-    final <matrixComponentType> c3)
+    final <matrixComponentType> c2)
   <else>
   <matrixType>
   withRow2(
     final <matrixType> m,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
-    final <matrixComponentType> c2,
-    final <matrixComponentType> c3)
+    final <matrixComponentType> c2)
   <endif>
   {
     return <matrixType>.of(
-      m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
-      m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
-      c0,       c1,       c2,       c3,
-      m.r3c0(), m.r3c1(), m.r3c2(), m.r3c3());
-  }
-
-  private static
-  <if(hasGeneric)>
-  \<A, B> <matrixType>\<A, B>
-  withRow3(
-    final <matrixType>\<A, B> m,
-    final <matrixComponentType> c0,
-    final <matrixComponentType> c1,
-    final <matrixComponentType> c2,
-    final <matrixComponentType> c3)
-  <else>
-  <matrixType>
-  withRow3(
-    final <matrixType> m,
-    final <matrixComponentType> c0,
-    final <matrixComponentType> c1,
-    final <matrixComponentType> c2,
-    final <matrixComponentType> c3)
-  <endif>
-  {
-    return <matrixType>.of(
-      m.r0c0(), m.r0c1(), m.r0c2(), m.r0c3(),
-      m.r1c0(), m.r1c1(), m.r1c2(), m.r1c3(),
-      m.r2c0(), m.r2c1(), m.r2c2(), m.r2c3(),
-      c0,       c1,       c2,       c3);
+      m.r0c0(), m.r0c1(), m.r0c2(),
+      m.r1c0(), m.r1c1(), m.r1c2(),
+      c0,       c1,       c2);
   }
 
   /**
-   * Set the row {@code row} of {@code m} to {@code (c0, c1, c2, c3)}.
+   * Set the row {@code row} of {@code m} to {@code (c0, c1, c2)}.
    * @return A matrix with the given row
    * @param m The matrix
-   * @param row The row index in the range {@code [0, 3]}
+   * @param row The row index in the range {@code [0, 2]}
    * @param c0 The value of column 0 in the row
    * @param c1 The value of column 1 in the row
    * @param c2 The value of column 2 in the row
-   * @param c3 The value of column 3 in the row
    * <if(hasGeneric)>
    * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
    * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
@@ -1509,8 +972,7 @@ public final class <className>
     final int row,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
-    final <matrixComponentType> c2,
-    final <matrixComponentType> c3)
+    final <matrixComponentType> c2)
   <else>
   <matrixType>
   withRow(
@@ -1518,30 +980,25 @@ public final class <className>
     final int row,
     final <matrixComponentType> c0,
     final <matrixComponentType> c1,
-    final <matrixComponentType> c2,
-    final <matrixComponentType> c3)
+    final <matrixComponentType> c2)
   <endif>
   {
     switch (row) {
       case 0:
       {
-        return withRow0(m, c0, c1, c2, c3);
+        return withRow0(m, c0, c1, c2);
       }
       case 1:
       {
-        return withRow1(m, c0, c1, c2, c3);
+        return withRow1(m, c0, c1, c2);
       }
       case 2:
       {
-        return withRow2(m, c0, c1, c2, c3);
-      }
-      case 3:
-      {
-        return withRow3(m, c0, c1, c2, c3);
+        return withRow2(m, c0, c1, c2);
       }
       default: {
         throw new IndexOutOfBoundsException(String.format(
-          "Row %d must be in the range [0, 3]", Integer.valueOf(row)));
+          "Row %d must be in the range [0, 2]", Integer.valueOf(row)));
       }
     }
   }

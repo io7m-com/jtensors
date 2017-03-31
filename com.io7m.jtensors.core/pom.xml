@@ -723,6 +723,34 @@
               </templates>
             </configuration>
           </execution>
+          <execution>
+            <id>generate-PM3x3D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PMatrix3x3</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/parameterized/matrices/PMatrices3x3D.java</target>
+                  <properties>
+                    <className>PMatrices3x3D</className>
+                    <matrixType>PMatrix3x3D</matrixType>
+                    <matrixComponentType>double</matrixComponentType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.parameterized.vectors.PVector3D</vectorColumnGenericType>
+                    <hasGeneric>true</hasGeneric>
+                    <scalarRealType>double</scalarRealType>
+                    <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrixDOps</opClass>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
 
           <!-- Unparameterized matrix types -->
           <!-- Doubles -->
@@ -745,6 +773,33 @@
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnType>
                     <vectorColumnGenericType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnGenericType>
+                    <scalarRealType>double</scalarRealType>
+                    <opClass>com.io7m.jtensors.core.unparameterized.matrices.MatrixDOps</opClass>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-M3x3D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PMatrix3x3</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/matrices/Matrices3x3D.java</target>
+                  <properties>
+                    <className>Matrices3x3D</className>
+                    <matrixType>Matrix3x3D</matrixType>
+                    <matrixComponentType>double</matrixComponentType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorColumnGenericType>
                     <scalarRealType>double</scalarRealType>
                     <opClass>com.io7m.jtensors.core.unparameterized.matrices.MatrixDOps</opClass>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>

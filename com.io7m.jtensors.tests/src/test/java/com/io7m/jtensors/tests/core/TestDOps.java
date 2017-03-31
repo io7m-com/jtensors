@@ -16,9 +16,13 @@
 
 package com.io7m.jtensors.tests.core;
 
+import com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D;
+import com.io7m.jtensors.core.parameterized.vectors.PVector3D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector4D;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
+import com.io7m.jtensors.core.unparameterized.vectors.Vector3D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector4D;
 import com.io7m.junreachable.UnreachableCodeException;
 import org.junit.Assert;
@@ -126,6 +130,52 @@ public final class TestDOps
     }
   }
 
+  public static void checkAlmostEqualsMatrix(
+    final PMatrix3x3D<?, ?> m0,
+    final PMatrix3x3D<?, ?> m1)
+  {
+    try {
+      Assert.assertEquals(m0.r0c0(), m1.r0c0(), 1.0e-10);
+      Assert.assertEquals(m0.r0c1(), m1.r0c1(), 1.0e-10);
+      Assert.assertEquals(m0.r0c2(), m1.r0c2(), 1.0e-10);
+
+      Assert.assertEquals(m0.r1c0(), m1.r1c0(), 1.0e-10);
+      Assert.assertEquals(m0.r1c1(), m1.r1c1(), 1.0e-10);
+      Assert.assertEquals(m0.r1c2(), m1.r1c2(), 1.0e-10);
+
+      Assert.assertEquals(m0.r2c0(), m1.r2c0(), 1.0e-10);
+      Assert.assertEquals(m0.r2c1(), m1.r2c1(), 1.0e-10);
+      Assert.assertEquals(m0.r2c2(), m1.r2c2(), 1.0e-10);
+    } catch (final AssertionError e) {
+      LOG.error("expected: {}", m0);
+      LOG.error("received: {}", m1);
+      throw e;
+    }
+  }
+
+  public static void checkAlmostEqualsMatrix(
+    final Matrix3x3D m0,
+    final Matrix3x3D m1)
+  {
+    try {
+      Assert.assertEquals(m0.r0c0(), m1.r0c0(), 1.0e-10);
+      Assert.assertEquals(m0.r0c1(), m1.r0c1(), 1.0e-10);
+      Assert.assertEquals(m0.r0c2(), m1.r0c2(), 1.0e-10);
+
+      Assert.assertEquals(m0.r1c0(), m1.r1c0(), 1.0e-10);
+      Assert.assertEquals(m0.r1c1(), m1.r1c1(), 1.0e-10);
+      Assert.assertEquals(m0.r1c2(), m1.r1c2(), 1.0e-10);
+
+      Assert.assertEquals(m0.r2c0(), m1.r2c0(), 1.0e-10);
+      Assert.assertEquals(m0.r2c1(), m1.r2c1(), 1.0e-10);
+      Assert.assertEquals(m0.r2c2(), m1.r2c2(), 1.0e-10);
+    } catch (final AssertionError e) {
+      LOG.error("expected: {}", m0);
+      LOG.error("received: {}", m1);
+      throw e;
+    }
+  }
+
   public static void checkAlmostEqualsVector(
     final PVector4D<?> v0,
     final PVector4D<?> v1)
@@ -158,10 +208,41 @@ public final class TestDOps
     }
   }
 
+  public static void checkAlmostEqualsVector(
+    final PVector3D<?> v0,
+    final PVector3D<?> v1)
+  {
+    try {
+      Assert.assertEquals(v0.x(), v1.x(), 1.0e-10);
+      Assert.assertEquals(v0.y(), v1.y(), 1.0e-10);
+      Assert.assertEquals(v0.z(), v1.z(), 1.0e-10);
+    } catch (final AssertionError e) {
+      LOG.error("expected: {}", v0);
+      LOG.error("received: {}", v1);
+      throw e;
+    }
+  }
+
+  public static void checkAlmostEqualsVector(
+    final Vector3D v0,
+    final Vector3D v1)
+  {
+    try {
+      Assert.assertEquals(v0.x(), v1.x(), 1.0e-10);
+      Assert.assertEquals(v0.y(), v1.y(), 1.0e-10);
+      Assert.assertEquals(v0.z(), v1.z(), 1.0e-10);
+    } catch (final AssertionError e) {
+      LOG.error("expected: {}", v0);
+      LOG.error("received: {}", v1);
+      throw e;
+    }
+  }
+
   private static boolean doubleIsDifferent(
     final double d1,
     final double d2,
-    final double delta) {
+    final double delta)
+  {
 
     if (Double.compare(d1, d2) == 0) {
       return false;

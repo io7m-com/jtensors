@@ -76,6 +76,23 @@ public final class PVector3DGenerator<T> implements Generator<PVector3D<T>>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-1.0, 1.0]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector3D<T>> createNormal()
+  {
+    return new PVector3DGenerator<>(PrimitiveGenerators.doubles(
+      -1.0,
+      1.0
+    ));
+  }
+
   @Override
   public PVector3D<T> next()
   {
