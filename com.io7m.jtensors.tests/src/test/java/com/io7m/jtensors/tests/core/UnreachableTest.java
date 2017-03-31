@@ -120,11 +120,29 @@ public final class UnreachableTest
   }
 
   @Test
+  public void testPMatrixFOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.parameterized.matrices.PMatrixFOps");
+    Assert.fail();
+  }
+
+  @Test
   public void testMatrixDOps()
     throws Throwable
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.unparameterized.matrices.MatrixDOps");
+    Assert.fail();
+  }
+
+  @Test
+  public void testMatrixFOps()
+    throws Throwable
+  {
+    this.checkUnreachableByName(
+      "com.io7m.jtensors.core.unparameterized.matrices.MatrixFOps");
     Assert.fail();
   }
 
