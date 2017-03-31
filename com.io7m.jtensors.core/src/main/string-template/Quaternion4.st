@@ -326,9 +326,9 @@ public final class <className>
     final <scalarRealType> axis_x,
     final <scalarRealType> axis_y,
     final <scalarRealType> axis_z,
-    final <scalarRealType> angle)
+    final <scalarRealType> r)
   {
-    final <scalarRealType> angle_r = angle * 0.5;
+    final <scalarRealType> angle_r = r * 0.5;
     final <scalarRealType> sa = Math.sin(angle_r);
     final <scalarRealType> x = axis_x * sa;
     final <scalarRealType> y = axis_y * sa;
