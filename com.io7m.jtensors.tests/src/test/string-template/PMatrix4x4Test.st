@@ -607,7 +607,7 @@ public final class <className>
    */
 
   @Test
-  @PercentagePassing(passPercent = 95)
+  @PercentagePassing(passPercent = 93)
   public void testInvertProduct()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
