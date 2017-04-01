@@ -20,6 +20,10 @@ import com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage4x4Typ
 import com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4s32;
 import com.io7m.jtensors.tests.core.TestDOps;
 import com.io7m.jtensors.tests.storage.api.PMatrixStorage4x4Contract;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.nio.ByteBuffer;
 
 public final class PMatrixByteBuffered4x4s32Test
   extends PMatrixStorage4x4Contract
@@ -36,5 +40,14 @@ public final class PMatrixByteBuffered4x4s32Test
   protected PMatrixStorage4x4Type<Object, Object> createIdentity()
   {
     return PMatrixByteBuffered4x4s32.createHeap();
+  }
+
+  @Test
+  public void testByteBufferIdentity()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(1024);
+    Assert.assertEquals(
+      b,
+      PMatrixByteBuffered4x4s32.createWith(b).byteBuffer());
   }
 }

@@ -23,6 +23,10 @@ import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloati
 import com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3s64;
 import com.io7m.jtensors.tests.core.TestDOps;
 import com.io7m.jtensors.tests.storage.api.PVectorStorage3Contract;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.nio.ByteBuffer;
 
 public final class PVectorByteBufferedFloating3s64Test extends
   PVectorStorage3Contract
@@ -67,5 +71,14 @@ public final class PVectorByteBufferedFloating3s64Test extends
     final double z)
   {
     return PVectorByteBufferedFloating3s64.createHeap();
+  }
+
+  @Test
+  public void testByteBufferIdentity()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(1024);
+    Assert.assertEquals(
+      b,
+      PVectorByteBufferedFloating3s64.createWith(b).byteBuffer());
   }
 }

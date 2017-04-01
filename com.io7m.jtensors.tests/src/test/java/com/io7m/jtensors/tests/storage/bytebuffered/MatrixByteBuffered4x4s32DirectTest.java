@@ -20,6 +20,10 @@ import com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage4x4Ty
 import com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4s32;
 import com.io7m.jtensors.tests.core.TestDOps;
 import com.io7m.jtensors.tests.storage.api.MatrixStorage4x4Contract;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.nio.ByteBuffer;
 
 public final class MatrixByteBuffered4x4s32DirectTest
   extends MatrixStorage4x4Contract
@@ -35,5 +39,12 @@ public final class MatrixByteBuffered4x4s32DirectTest
   protected MatrixStorage4x4Type createIdentity()
   {
     return MatrixByteBuffered4x4s32.createDirect();
+  }
+
+  @Test
+  public void testByteBufferIdentity()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(1024);
+    Assert.assertEquals(b, MatrixByteBuffered4x4s32.createWith(b).byteBuffer());
   }
 }

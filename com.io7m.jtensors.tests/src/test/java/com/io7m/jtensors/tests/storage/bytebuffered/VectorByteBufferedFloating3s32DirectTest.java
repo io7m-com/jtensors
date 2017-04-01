@@ -21,6 +21,10 @@ import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloati
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3s32;
 import com.io7m.jtensors.tests.core.TestFOps;
 import com.io7m.jtensors.tests.storage.api.VectorStorage3Contract;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedFloating3s32DirectTest
   extends VectorStorage3Contract
@@ -48,5 +52,14 @@ public final class VectorByteBufferedFloating3s32DirectTest
     final double z)
   {
     return VectorByteBufferedFloating3s32.createDirect();
+  }
+
+  @Test
+  public void testByteBufferIdentity()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(1024);
+    Assert.assertEquals(
+      b,
+      VectorByteBufferedFloating3s32.createWith(b).byteBuffer());
   }
 }

@@ -20,6 +20,10 @@ import com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage3x3Typ
 import com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3s32;
 import com.io7m.jtensors.tests.core.TestDOps;
 import com.io7m.jtensors.tests.storage.api.PMatrixStorage3x3Contract;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.nio.ByteBuffer;
 
 public final class PMatrixByteBuffered3x3s32Test
   extends PMatrixStorage3x3Contract
@@ -36,5 +40,14 @@ public final class PMatrixByteBuffered3x3s32Test
   protected PMatrixStorage3x3Type<Object, Object> createIdentity()
   {
     return PMatrixByteBuffered3x3s32.createHeap();
+  }
+
+  @Test
+  public void testByteBufferIdentity()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(1024);
+    Assert.assertEquals(
+      b,
+      PMatrixByteBuffered3x3s32.createWith(b).byteBuffer());
   }
 }

@@ -20,6 +20,10 @@ import com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage2x2Ty
 import com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2s64;
 import com.io7m.jtensors.tests.core.TestDOps;
 import com.io7m.jtensors.tests.storage.api.MatrixStorage2x2Contract;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.nio.ByteBuffer;
 
 public final class MatrixByteBuffered2x2s64DirectTest
   extends MatrixStorage2x2Contract
@@ -36,5 +40,12 @@ public final class MatrixByteBuffered2x2s64DirectTest
   protected MatrixStorage2x2Type createIdentity()
   {
     return MatrixByteBuffered2x2s64.createDirect();
+  }
+
+  @Test
+  public void testByteBufferIdentity()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(1024);
+    Assert.assertEquals(b, MatrixByteBuffered2x2s64.createWith(b).byteBuffer());
   }
 }

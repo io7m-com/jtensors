@@ -20,6 +20,10 @@ import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloati
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2s32;
 import com.io7m.jtensors.tests.core.TestFOps;
 import com.io7m.jtensors.tests.storage.api.VectorStorage2Contract;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedFloating2s32DirectTest extends
   VectorStorage2Contract
@@ -38,5 +42,14 @@ public final class VectorByteBufferedFloating2s32DirectTest extends
     final double y)
   {
     return VectorByteBufferedFloating2s32.createDirect();
+  }
+
+  @Test
+  public void testByteBufferIdentity()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(1024);
+    Assert.assertEquals(
+      b,
+      VectorByteBufferedFloating2s32.createWith(b).byteBuffer());
   }
 }

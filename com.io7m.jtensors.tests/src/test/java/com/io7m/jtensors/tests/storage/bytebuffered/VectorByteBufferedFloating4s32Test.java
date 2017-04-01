@@ -22,6 +22,10 @@ import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloati
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4s32;
 import com.io7m.jtensors.tests.core.TestFOps;
 import com.io7m.jtensors.tests.storage.api.VectorStorage4Contract;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedFloating4s32Test extends
   VectorStorage4Contract
@@ -59,5 +63,14 @@ public final class VectorByteBufferedFloating4s32Test extends
     final double z)
   {
     return VectorByteBufferedFloating4s32.createHeap();
+  }
+
+  @Test
+  public void testByteBufferIdentity()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(1024);
+    Assert.assertEquals(
+      b,
+      VectorByteBufferedFloating4s32.createWith(b).byteBuffer());
   }
 }

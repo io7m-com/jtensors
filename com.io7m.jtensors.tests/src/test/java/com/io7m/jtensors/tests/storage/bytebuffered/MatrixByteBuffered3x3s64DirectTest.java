@@ -20,6 +20,10 @@ import com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Ty
 import com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3s64;
 import com.io7m.jtensors.tests.core.TestDOps;
 import com.io7m.jtensors.tests.storage.api.MatrixStorage3x3Contract;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.nio.ByteBuffer;
 
 public final class MatrixByteBuffered3x3s64DirectTest
   extends MatrixStorage3x3Contract
@@ -35,5 +39,12 @@ public final class MatrixByteBuffered3x3s64DirectTest
   protected MatrixStorage3x3Type createIdentity()
   {
     return MatrixByteBuffered3x3s64.createDirect();
+  }
+
+  @Test
+  public void testByteBufferIdentity()
+  {
+    final ByteBuffer b = ByteBuffer.allocate(1024);
+    Assert.assertEquals(b, MatrixByteBuffered3x3s64.createWith(b).byteBuffer());
   }
 }
