@@ -17,38 +17,62 @@
 package com.io7m.jtensors.storage.bytebuffered;
 
 import com.io7m.jnull.NullCheck;
-import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.DoubleBuffer;
 
 /**
  * <p>A storage vector.</p>
  * <p>Storage component type: {@code double}</p>
  * <p>Storage component count: {@code 3}</p>
+ *
+ * @param <T> A phantom type parameter
  */
 
 public final class PVectorByteBufferedFloating3s64<T>
-  implements PVectorStorageFloating3Type<T>
+  implements PVectorByteBufferedFloating3Type<T>
 {
+  private final DoubleBuffer view;
   private final ByteBuffer buffer;
 
   private PVectorByteBufferedFloating3s64(
     final ByteBuffer in_buffer)
   {
     this.buffer = NullCheck.notNull(in_buffer, "Buffer");
+    this.view = this.buffer.asDoubleBuffer();
   }
 
-  public static <T> PVectorStorageFloating3Type<T> createHeap()
+  /**
+   * @param <T> A phantom type parameter
+   *
+   * @return A heap-backed vector in native byte order
+   */
+
+  public static <T> PVectorByteBufferedFloating3Type<T> createHeap()
   {
-    return createWith(ByteBuffer.allocate(3 * 8));
+    return createWith(ByteBuffer.allocate(3 * 8).order(ByteOrder.nativeOrder()));
   }
 
-  public static <T> PVectorStorageFloating3Type<T> createDirect()
+  /**
+   * @param <T> A phantom type parameter
+   *
+   * @return A direct-memory-backed vector in native byte order
+   */
+
+  public static <T> PVectorByteBufferedFloating3Type<T> createDirect()
   {
-    return createWith(ByteBuffer.allocateDirect(3 * 8));
+    return createWith(ByteBuffer.allocateDirect(3 * 8).order(ByteOrder.nativeOrder()));
   }
 
-  public static <T> PVectorStorageFloating3Type<T> createWith(
+  /**
+   * @param <T> A phantom type parameter
+   * @param b   A byte buffer
+   *
+   * @return A vector backed by the given byte buffer
+   */
+
+  public static <T> PVectorByteBufferedFloating3Type<T> createWith(
     final ByteBuffer b)
   {
     return new PVectorByteBufferedFloating3s64<>(b);
@@ -57,36 +81,42 @@ public final class PVectorByteBufferedFloating3s64<T>
   @Override
   public double x()
   {
-    return this.buffer.getDouble(0);
+    return this.view.get(0);
   }
 
   @Override
   public double y()
   {
-    return this.buffer.getDouble(8);
+    return this.view.get(1);
   }
 
   @Override
   public double z()
   {
-    return this.buffer.getDouble(16);
+    return this.view.get(2);
   }
 
   @Override
   public void setX(final double x)
   {
-    this.buffer.putDouble(0, x);
+    this.view.put(0, x);
   }
 
   @Override
   public void setY(final double y)
   {
-    this.buffer.putDouble(8, y);
+    this.view.put(1, y);
   }
 
   @Override
   public void setZ(final double z)
   {
-    this.buffer.putDouble(16, z);
+    this.view.put(2, z);
+  }
+
+  @Override
+  public ByteBuffer byteBuffer()
+  {
+    return this.buffer;
   }
 }

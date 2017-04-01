@@ -17,38 +17,62 @@
 package com.io7m.jtensors.storage.bytebuffered;
 
 import com.io7m.jnull.NullCheck;
-import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating4Type;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 
 /**
  * <p>A storage vector.</p>
  * <p>Storage component type: {@code float}</p>
  * <p>Storage component count: {@code 4}</p>
+ *
+ * @param <T> A phantom type parameter
  */
 
 public final class PVectorByteBufferedFloating4s32<T>
-  implements PVectorStorageFloating4Type<T>
+  implements PVectorByteBufferedFloating4Type<T>
 {
+  private final FloatBuffer view;
   private final ByteBuffer buffer;
 
   private PVectorByteBufferedFloating4s32(
     final ByteBuffer in_buffer)
   {
     this.buffer = NullCheck.notNull(in_buffer, "Buffer");
+    this.view = this.buffer.asFloatBuffer();
   }
 
-  public static <T> PVectorStorageFloating4Type<T> createHeap()
+  /**
+   * @param <T> A phantom type parameter
+   *
+   * @return A heap-backed vector in native byte order
+   */
+
+  public static <T> PVectorByteBufferedFloating4Type<T> createHeap()
   {
-    return createWith(ByteBuffer.allocate(4 * 4));
+    return createWith(ByteBuffer.allocate(4 * 4).order(ByteOrder.nativeOrder()));
   }
 
-  public static <T> PVectorStorageFloating4Type<T> createDirect()
+  /**
+   * @param <T> A phantom type parameter
+   *
+   * @return A direct-memory-backed vector in native byte order
+   */
+
+  public static <T> PVectorByteBufferedFloating4Type<T> createDirect()
   {
-    return createWith(ByteBuffer.allocateDirect(4 * 4));
+    return createWith(ByteBuffer.allocateDirect(4 * 4).order(ByteOrder.nativeOrder()));
   }
 
-  public static <T> PVectorStorageFloating4Type<T> createWith(
+  /**
+   * @param <T> A phantom type parameter
+   * @param b   A byte buffer
+   *
+   * @return A vector backed by the given byte buffer
+   */
+
+  public static <T> PVectorByteBufferedFloating4Type<T> createWith(
     final ByteBuffer b)
   {
     return new PVectorByteBufferedFloating4s32<>(b);
@@ -57,48 +81,54 @@ public final class PVectorByteBufferedFloating4s32<T>
   @Override
   public double x()
   {
-    return (double) this.buffer.getFloat(0);
+    return (double) this.view.get(0);
   }
 
   @Override
   public double y()
   {
-    return (double) this.buffer.getFloat(4);
+    return (double) this.view.get(1);
   }
 
   @Override
   public double z()
   {
-    return (double) this.buffer.getFloat(8);
+    return (double) this.view.get(2);
   }
 
   @Override
   public double w()
   {
-    return (double) this.buffer.getFloat(12);
+    return (double) this.view.get(3);
   }
 
   @Override
   public void setX(final double x)
   {
-    this.buffer.putFloat(0, (float) x);
+    this.view.put(0, (float) x);
   }
 
   @Override
   public void setY(final double y)
   {
-    this.buffer.putFloat(4, (float) y);
+    this.view.put(1, (float) y);
   }
 
   @Override
   public void setZ(final double z)
   {
-    this.buffer.putFloat(8, (float) z);
+    this.view.put(2, (float) z);
   }
 
   @Override
   public void setW(final double w)
   {
-    this.buffer.putFloat(12, (float) w);
+    this.view.put(3, (float) w);
+  }
+
+  @Override
+  public ByteBuffer byteBuffer()
+  {
+    return this.buffer;
   }
 }

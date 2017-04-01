@@ -17,9 +17,10 @@
 package com.io7m.jtensors.storage.bytebuffered;
 
 import com.io7m.jnull.NullCheck;
-import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 
 /**
  * <p>A storage vector.</p>
@@ -28,27 +29,43 @@ import java.nio.ByteBuffer;
  */
 
 public final class VectorByteBufferedFloating2s32
-  implements VectorStorageFloating2Type
+  implements VectorByteBufferedFloating2Type
 {
+  private final FloatBuffer view;
   private final ByteBuffer buffer;
 
   private VectorByteBufferedFloating2s32(
     final ByteBuffer in_buffer)
   {
     this.buffer = NullCheck.notNull(in_buffer, "Buffer");
+    this.view = this.buffer.asFloatBuffer();
   }
 
-  public static VectorStorageFloating2Type createHeap()
+  /**
+   * @return A heap-backed vector in native byte order
+   */
+
+  public static VectorByteBufferedFloating2Type createHeap()
   {
-    return createWith(ByteBuffer.allocate(2 * 4));
+    return createWith(ByteBuffer.allocate(2 * 4).order(ByteOrder.nativeOrder()));
   }
 
-  public static VectorStorageFloating2Type createDirect()
+  /**
+   * @return A direct-memory-backed vector in native byte order
+   */
+
+  public static VectorByteBufferedFloating2Type createDirect()
   {
-    return createWith(ByteBuffer.allocateDirect(2 * 4));
+    return createWith(ByteBuffer.allocateDirect(2 * 4).order(ByteOrder.nativeOrder()));
   }
 
-  public static VectorStorageFloating2Type createWith(
+  /**
+   * @param b A byte buffer
+   *
+   * @return A vector backed by the given byte buffer
+   */
+
+  public static VectorByteBufferedFloating2Type createWith(
     final ByteBuffer b)
   {
     return new VectorByteBufferedFloating2s32(b);
@@ -57,24 +74,30 @@ public final class VectorByteBufferedFloating2s32
   @Override
   public double x()
   {
-    return (double) this.buffer.getFloat(0);
+    return (double) this.view.get(0);
   }
 
   @Override
   public double y()
   {
-    return (double) this.buffer.getFloat(4);
+    return (double) this.view.get(1);
   }
 
   @Override
   public void setX(final double x)
   {
-    this.buffer.putFloat(0, (float) x);
+    this.view.put(0, (float) x);
   }
 
   @Override
   public void setY(final double y)
   {
-    this.buffer.putFloat(4, (float) y);
+    this.view.put(1, (float) y);
+  }
+
+  @Override
+  public ByteBuffer byteBuffer()
+  {
+    return this.buffer;
   }
 }

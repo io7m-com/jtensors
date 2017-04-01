@@ -17,9 +17,10 @@
 package com.io7m.jtensors.storage.bytebuffered;
 
 import com.io7m.jnull.NullCheck;
-import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 
 /**
  * <p>A storage vector.</p>
@@ -28,27 +29,43 @@ import java.nio.ByteBuffer;
  */
 
 public final class VectorByteBufferedFloating4s32
-  implements VectorStorageFloating4Type
+  implements VectorByteBufferedFloating4Type
 {
+  private final FloatBuffer view;
   private final ByteBuffer buffer;
 
   private VectorByteBufferedFloating4s32(
     final ByteBuffer in_buffer)
   {
     this.buffer = NullCheck.notNull(in_buffer, "Buffer");
+    this.view = this.buffer.asFloatBuffer();
   }
 
-  public static VectorStorageFloating4Type createHeap()
+  /**
+   * @return A heap-backed vector in native byte order
+   */
+
+  public static VectorByteBufferedFloating4Type createHeap()
   {
-    return createWith(ByteBuffer.allocate(4 * 4));
+    return createWith(ByteBuffer.allocate(4 * 4).order(ByteOrder.nativeOrder()));
   }
 
-  public static VectorStorageFloating4Type createDirect()
+  /**
+   * @return A direct-memory-backed vector in native byte order
+   */
+
+  public static VectorByteBufferedFloating4Type createDirect()
   {
-    return createWith(ByteBuffer.allocateDirect(4 * 4));
+    return createWith(ByteBuffer.allocateDirect(4 * 4).order(ByteOrder.nativeOrder()));
   }
 
-  public static VectorStorageFloating4Type createWith(
+  /**
+   * @param b A byte buffer
+   *
+   * @return A vector backed by the given byte buffer
+   */
+
+  public static VectorByteBufferedFloating4Type createWith(
     final ByteBuffer b)
   {
     return new VectorByteBufferedFloating4s32(b);
@@ -57,48 +74,54 @@ public final class VectorByteBufferedFloating4s32
   @Override
   public double x()
   {
-    return (double) this.buffer.getFloat(0);
+    return (double) this.view.get(0);
   }
 
   @Override
   public double y()
   {
-    return (double) this.buffer.getFloat(4);
+    return (double) this.view.get(1);
   }
 
   @Override
   public double z()
   {
-    return (double) this.buffer.getFloat(8);
+    return (double) this.view.get(2);
   }
 
   @Override
   public double w()
   {
-    return (double) this.buffer.getFloat(12);
+    return (double) this.view.get(3);
   }
 
   @Override
   public void setX(final double x)
   {
-    this.buffer.putFloat(0, (float) x);
+    this.view.put(0, (float) x);
   }
 
   @Override
   public void setY(final double y)
   {
-    this.buffer.putFloat(4, (float) y);
+    this.view.put(1, (float) y);
   }
 
   @Override
   public void setZ(final double z)
   {
-    this.buffer.putFloat(8, (float) z);
+    this.view.put(2, (float) z);
   }
 
   @Override
   public void setW(final double w)
   {
-    this.buffer.putFloat(12, (float) w);
+    this.view.put(3, (float) w);
+  }
+
+  @Override
+  public ByteBuffer byteBuffer()
+  {
+    return this.buffer;
   }
 }
