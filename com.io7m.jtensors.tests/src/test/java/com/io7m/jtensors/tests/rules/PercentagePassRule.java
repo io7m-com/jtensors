@@ -94,7 +94,7 @@ public final class PercentagePassRule implements TestRule
             Integer.valueOf(index));
           ++pass;
         } catch (final Throwable e) {
-          LOG.warn(
+          LOG.error(
             "{} [{}]: failed: ",
             this.description.getDisplayName(),
             Integer.valueOf(index),

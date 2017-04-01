@@ -48,6 +48,17 @@ final class MatrixFOps
     return StrictMath.cos(a);
   }
 
+  static double determinant2x2(
+    final double r0c0,
+    final double r0c1,
+    final double r1c0,
+    final double r1c1)
+  {
+    return Determinants.determinant2x2(
+      r0c0, r0c1,
+      r1c0, r1c1);
+  }
+
   static double determinant3x3(
     final double r0c0,
     final double r0c1,

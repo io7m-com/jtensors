@@ -50,8 +50,8 @@ public final class Matrix2x2DGenerator implements Generator<Matrix2x2D>
   public static Generator<Matrix2x2D> create()
   {
     return new Matrix2x2DGenerator(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_LARGE_DOUBLE_UPPER
     ));
   }
 
@@ -65,8 +65,8 @@ public final class Matrix2x2DGenerator implements Generator<Matrix2x2D>
   public static Generator<Matrix2x2D> createNormal()
   {
     return new Matrix2x2DGenerator(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_UPPER
     ));
   }
 

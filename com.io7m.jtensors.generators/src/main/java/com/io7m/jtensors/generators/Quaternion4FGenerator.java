@@ -53,8 +53,8 @@ public final class Quaternion4FGenerator implements Generator<Quaternion4F>
   public static <T> Generator<Quaternion4F> create()
   {
     return new Quaternion4FGenerator(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_FLOAT_LOWER,
+      GeneratorConstants.BOUND_NORMAL_FLOAT_UPPER
     ));
   }
 

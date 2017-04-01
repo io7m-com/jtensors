@@ -50,8 +50,8 @@ public final class Vector2DGenerator implements Generator<Vector2D>
   public static Generator<Vector2D> create()
   {
     return new Vector2DGenerator(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_LARGE_DOUBLE_UPPER
     ));
   }
 
@@ -65,8 +65,23 @@ public final class Vector2DGenerator implements Generator<Vector2D>
   public static Generator<Vector2D> createSmall()
   {
     return new Vector2DGenerator(PrimitiveGenerators.doubles(
-      -65536.0,
-      65536.0
+      GeneratorConstants.BOUND_SMALL_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_SMALL_DOUBLE_UPPER
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-1.0, 1.0]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector2D> createNormal()
+  {
+    return new Vector2DGenerator(PrimitiveGenerators.doubles(
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_UPPER
     ));
   }
 

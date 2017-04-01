@@ -52,7 +52,6 @@
         <executions>
 
           <!-- Parameterized vector types -->
-          <!-- Doubles -->
           <execution>
             <id>generate-P4D</id>
             <phase>generate-sources</phase>
@@ -135,7 +134,6 @@
             </configuration>
           </execution>
 
-          <!-- Floats -->
           <execution>
             <id>generate-P4F</id>
             <phase>generate-sources</phase>
@@ -218,7 +216,6 @@
             </configuration>
           </execution>
 
-          <!-- Longs -->
           <execution>
             <id>generate-P4L</id>
             <phase>generate-sources</phase>
@@ -298,7 +295,6 @@
             </configuration>
           </execution>
 
-          <!-- Ints -->
           <execution>
             <id>generate-P4I</id>
             <phase>generate-sources</phase>
@@ -379,7 +375,6 @@
           </execution>
 
           <!-- Unparameterized vector types -->
-          <!-- Doubles -->
           <execution>
             <id>generate-4D</id>
             <phase>generate-sources</phase>
@@ -459,7 +454,6 @@
             </configuration>
           </execution>
 
-          <!-- Floats -->
           <execution>
             <id>generate-4F</id>
             <phase>generate-sources</phase>
@@ -539,7 +533,6 @@
             </configuration>
           </execution>
 
-          <!-- Longs -->
           <execution>
             <id>generate-4L</id>
             <phase>generate-sources</phase>
@@ -616,7 +609,6 @@
             </configuration>
           </execution>
 
-          <!-- Ints -->
           <execution>
             <id>generate-4I</id>
             <phase>generate-sources</phase>
@@ -694,7 +686,6 @@
           </execution>
 
           <!-- Parameterized matrix types -->
-          <!-- Doubles -->
           <execution>
             <id>generate-PM4x4D</id>
             <phase>generate-sources</phase>
@@ -742,6 +733,34 @@
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorColumnType>
                     <vectorColumnGenericType>com.io7m.jtensors.core.parameterized.vectors.PVector3D</vectorColumnGenericType>
+                    <hasGeneric>true</hasGeneric>
+                    <scalarRealType>double</scalarRealType>
+                    <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrixDOps</opClass>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-PM2x2D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PMatrix2x2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/parameterized/matrices/PMatrices2x2D.java</target>
+                  <properties>
+                    <className>PMatrices2x2D</className>
+                    <matrixType>PMatrix2x2D</matrixType>
+                    <matrixComponentType>double</matrixComponentType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.parameterized.vectors.PVector2D</vectorColumnGenericType>
                     <hasGeneric>true</hasGeneric>
                     <scalarRealType>double</scalarRealType>
                     <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrixDOps</opClass>
@@ -807,9 +826,36 @@
               </templates>
             </configuration>
           </execution>
+          <execution>
+            <id>generate-PM2x2F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PMatrix2x2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/parameterized/matrices/PMatrices2x2F.java</target>
+                  <properties>
+                    <className>PMatrices2x2F</className>
+                    <matrixType>PMatrix2x2F</matrixType>
+                    <matrixComponentType>float</matrixComponentType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.parameterized.vectors.PVector2F</vectorColumnGenericType>
+                    <hasGeneric>true</hasGeneric>
+                    <scalarRealType>double</scalarRealType>
+                    <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrixFOps</opClass>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
 
           <!-- Unparameterized matrix types -->
-          <!-- Doubles -->
           <execution>
             <id>generate-M4x4D</id>
             <phase>generate-sources</phase>
@@ -856,6 +902,33 @@
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorColumnType>
                     <vectorColumnGenericType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorColumnGenericType>
+                    <scalarRealType>double</scalarRealType>
+                    <opClass>com.io7m.jtensors.core.unparameterized.matrices.MatrixDOps</opClass>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-M2x2D</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PMatrix2x2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/matrices/Matrices2x2D.java</target>
+                  <properties>
+                    <className>Matrices2x2D</className>
+                    <matrixType>Matrix2x2D</matrixType>
+                    <matrixComponentType>double</matrixComponentType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorColumnGenericType>
                     <scalarRealType>double</scalarRealType>
                     <opClass>com.io7m.jtensors.core.unparameterized.matrices.MatrixDOps</opClass>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
@@ -918,6 +991,33 @@
               </templates>
             </configuration>
           </execution>
+          <execution>
+            <id>generate-M2x2F</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/main/string-template</directory>
+                  <name>PMatrix2x2</name>
+                  <target>${project.build.directory}/generated-sources/string-template/com/io7m/jtensors/core/unparameterized/matrices/Matrices2x2F.java</target>
+                  <properties>
+                    <className>Matrices2x2F</className>
+                    <matrixType>Matrix2x2F</matrixType>
+                    <matrixComponentType>float</matrixComponentType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorColumnGenericType>
+                    <scalarRealType>double</scalarRealType>
+                    <opClass>com.io7m.jtensors.core.unparameterized.matrices.MatrixFOps</opClass>
+                    <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
 
           <!-- Quaternions -->
           <execution>
@@ -964,8 +1064,8 @@
                     <quaternionComponentType>float</quaternionComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
-                    <matrix4x4Type>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D</matrix4x4Type>
-                    <matrix4x4ComponentType>double</matrix4x4ComponentType>
+                    <matrix4x4Type>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F</matrix4x4Type>
+                    <matrix4x4ComponentType>float</matrix4x4ComponentType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
                   </properties>
                 </template>

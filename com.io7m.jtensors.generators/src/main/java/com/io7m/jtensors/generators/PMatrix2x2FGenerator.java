@@ -60,8 +60,8 @@ public final class PMatrix2x2FGenerator<A, B> implements Generator<PMatrix2x2F<A
   public static <A, B> Generator<PMatrix2x2F<A, B>> create()
   {
     return new PMatrix2x2FGenerator<>(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_FLOAT_LOWER,
+      GeneratorConstants.BOUND_LARGE_FLOAT_UPPER
     ));
   }
 
@@ -80,8 +80,8 @@ public final class PMatrix2x2FGenerator<A, B> implements Generator<PMatrix2x2F<A
   public static <A, B> Generator<PMatrix2x2F<A, B>> createNormal()
   {
     return new PMatrix2x2FGenerator<>(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_FLOAT_LOWER,
+      GeneratorConstants.BOUND_NORMAL_FLOAT_UPPER
     ));
   }
 

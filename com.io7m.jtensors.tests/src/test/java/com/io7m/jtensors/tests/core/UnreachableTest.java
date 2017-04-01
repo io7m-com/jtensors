@@ -20,7 +20,12 @@ import com.io7m.jtensors.core.determinants.Determinants;
 import com.io7m.jtensors.core.dotproducts.DotProductsDouble;
 import com.io7m.jtensors.core.dotproducts.DotProductsInt;
 import com.io7m.jtensors.core.dotproducts.DotProductsLong;
+import com.io7m.jtensors.core.parameterized.matrices.PMatrices2x2D;
+import com.io7m.jtensors.core.parameterized.matrices.PMatrices2x2F;
+import com.io7m.jtensors.core.parameterized.matrices.PMatrices3x3D;
+import com.io7m.jtensors.core.parameterized.matrices.PMatrices3x3F;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrices4x4D;
+import com.io7m.jtensors.core.parameterized.matrices.PMatrices4x4F;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors2D;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors2F;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors2I;
@@ -35,7 +40,12 @@ import com.io7m.jtensors.core.parameterized.vectors.PVectors4I;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors4L;
 import com.io7m.jtensors.core.quaternions.Quaternions4D;
 import com.io7m.jtensors.core.quaternions.Quaternions4F;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrices2x2D;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrices2x2F;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrices3x3D;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrices3x3F;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4D;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4F;
 import com.io7m.jtensors.core.unparameterized.vectors.Vectors2D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vectors2F;
 import com.io7m.jtensors.core.unparameterized.vectors.Vectors2I;
@@ -251,10 +261,90 @@ public final class UnreachableTest
   }
 
   @Test
+  public void testPMatrices3x3D()
+    throws Throwable
+  {
+    this.checkUnreachable(PMatrices3x3D.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPMatrices2x2D()
+    throws Throwable
+  {
+    this.checkUnreachable(PMatrices2x2D.class);
+    Assert.fail();
+  }
+
+  @Test
   public void testMatrices4x4D()
     throws Throwable
   {
     this.checkUnreachable(Matrices4x4D.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testMatrices3x3D()
+    throws Throwable
+  {
+    this.checkUnreachable(Matrices3x3D.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testMatrices2x2D()
+    throws Throwable
+  {
+    this.checkUnreachable(Matrices2x2D.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPMatrices4x4F()
+    throws Throwable
+  {
+    this.checkUnreachable(PMatrices4x4F.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPMatrices3x3F()
+    throws Throwable
+  {
+    this.checkUnreachable(PMatrices3x3F.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPMatrices2x2F()
+    throws Throwable
+  {
+    this.checkUnreachable(PMatrices2x2F.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testMatrices4x4F()
+    throws Throwable
+  {
+    this.checkUnreachable(Matrices4x4F.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testMatrices3x3F()
+    throws Throwable
+  {
+    this.checkUnreachable(Matrices3x3F.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testMatrices2x2F()
+    throws Throwable
+  {
+    this.checkUnreachable(Matrices2x2F.class);
     Assert.fail();
   }
 

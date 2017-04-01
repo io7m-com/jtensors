@@ -50,8 +50,8 @@ public final class Matrix3x3DGenerator implements Generator<Matrix3x3D>
   public static Generator<Matrix3x3D> create()
   {
     return new Matrix3x3DGenerator(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_LARGE_DOUBLE_UPPER
     ));
   }
 
@@ -65,8 +65,8 @@ public final class Matrix3x3DGenerator implements Generator<Matrix3x3D>
   public static Generator<Matrix3x3D> createNormal()
   {
     return new Matrix3x3DGenerator(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_UPPER
     ));
   }
 

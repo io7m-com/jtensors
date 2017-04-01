@@ -1,4 +1,4 @@
-PMatrix3x3Test(
+PMatrix2x2Test(
   className,
   matrixType,
   matrixComponentType,
@@ -46,6 +46,7 @@ import net.java.quickcheck.QuickCheck;
 import net.java.quickcheck.characteristic.AbstractCharacteristic;
 import org.junit.Assert;
 import org.junit.Assume;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -179,9 +180,12 @@ public final class <className>
     final <matrixType> a = gen.next();
     final <matrixType> b = gen.next();
 
-    <testOpClass>.checkAlmostEquals(
-      <opClass>.determinant(<opClass>.multiply(a, b)),
-      <testOpClass>.multiply(<opClass>.determinant(a), <opClass>.determinant(b)));
+    final <scalarRealType> exp_det =
+      <opClass>.determinant(<opClass>.multiply(a, b));
+    final <scalarRealType> rec_det =
+      <testOpClass>.multiply(<opClass>.determinant(a), <opClass>.determinant(b));
+
+    <testOpClass>.checkAlmostEqualsVague(exp_det, rec_det);
   }
 
   /**
@@ -206,7 +210,7 @@ public final class <className>
   }
 
   /**
-   * ∀ a s. s³ * determinant(a) == determinant(scale(a, s))
+   * ∀ a s. s² * determinant(a) == determinant(scale(a, s))
    */
 
   @Test
@@ -219,13 +223,13 @@ public final class <className>
     final <scalarRealType> s = gen.next().r0c0();
 
     final <scalarRealType> exp_s =
-      <testOpClass>.pow(s, <testOpClass>.constant("3"));
+      <testOpClass>.pow(s, <testOpClass>.constant("2"));
     final <scalarRealType> exp_det =
       <testOpClass>.multiply(exp_s, <opClass>.determinant(a));
     final <scalarRealType> rec_det =
       <opClass>.determinant(<opClass>.scale(a, s));
 
-    <testOpClass>.checkAlmostEquals(exp_det, rec_det);
+    <testOpClass>.checkAlmostEqualsVague(exp_det, rec_det);
   }
 
   /**
@@ -241,9 +245,7 @@ public final class <className>
     final <matrixType> a = gen.next();
     final <matrixType> mt = <opClass>.transpose(a);
 
-    <testOpClass>.checkAlmostEquals(
-      <opClass>.determinant(a),
-      <opClass>.determinant(mt));
+    <testOpClass>.checkEquals(<opClass>.determinant(a), <opClass>.determinant(mt));
   }
 
   @Test
@@ -254,7 +256,7 @@ public final class <className>
 
     final <matrixType> a = gen.next();
     final <matrixType> b =
-      <opClass>.ofColumns(<opClass>.column0(a), <opClass>.column1(a), <opClass>.column2(a));
+      <opClass>.ofColumns(<opClass>.column0(a), <opClass>.column1(a));
 
     <testOpClass>.checkAlmostEqualsMatrix(a, b);
   }
@@ -267,303 +269,9 @@ public final class <className>
 
     final <matrixType> a = gen.next();
     final <matrixType> b =
-      <opClass>.ofRows(<opClass>.row0(a), <opClass>.row1(a), <opClass>.row2(a));
+      <opClass>.ofRows(<opClass>.row0(a), <opClass>.row1(a));
 
     <testOpClass>.checkAlmostEqualsMatrix(a, b);
-  }
-
-  /**
-   * ∀ v x y z. multiplyVectorPost(ofAxisAngle(x, y, z, 0), v) == v
-   *
-   * Rotating a vector by 0 radians around any axis has no effect.
-   */
-
-  @Test
-  @PercentagePassing
-  public void testOfAxisAngleZero()
-  {
-    final Generator\<<matrixType>\> gen =
-      createGeneratorNormal();
-
-    final <matrixType> k = gen.next();
-
-    final <vectorColumnType> v =
-      <vectorColumnType>.of(
-        k.r2c0(),
-        k.r2c1(),
-        k.r2c2());
-
-    final <vectorColumnType> axis =
-      <vectorOpClass>.normalize(
-        <vectorColumnType>.of(
-          k.r0c0(),
-          k.r1c1(),
-          k.r2c2()));
-
-    final <matrixType> a = <opClass>.ofAxisAngle(
-      axis.x(),
-      axis.y(),
-      axis.z(),
-      <testOpClass>.constant("0")
-    );
-
-    {
-      final <vectorColumnType> vr =
-        <opClass>.multiplyVectorPost(a, v);
-      <testOpClass>.checkAlmostEqualsVector(v, vr);
-    }
-  }
-
-  /**
-   * A 90 degree rotation around the X axis yields a counter-clockwise rotation
-   * around the X axis (when looking towards negative infinity on the axis).
-   */
-
-  @Test
-  public void testOfAxisAngle90X()
-  {
-    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("90");
-
-    final <vectorColumnType> v_axis =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"));
-
-    final <vectorColumnType> v_in =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("0"));
-
-    final <vectorColumnType> v_expected =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"));
-
-    final <matrixType> a =
-      <opClass>.ofAxisAngle(
-        v_axis.x(),
-        v_axis.y(),
-        v_axis.z(),
-        r);
-
-    {
-      final <vectorColumnType> v_result =
-        <opClass>.multiplyVectorPost(a, v_in);
-      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
-    }
-  }
-
-  /**
-   * A 90 degree rotation around the Y axis yields a counter-clockwise rotation
-   * around the Y axis (when looking towards negative infinity on the axis).
-   */
-
-  @Test
-  public void testOfAxisAngle90Y()
-  {
-    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("90");
-
-    final <vectorColumnType> v_axis =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("0"));
-
-    final <vectorColumnType> v_in =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("-1"));
-
-    final <vectorColumnType> v_expected =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("-1"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"));
-
-    final <matrixType> a =
-      <opClass>.ofAxisAngle(
-        v_axis.x(),
-        v_axis.y(),
-        v_axis.z(),
-        r);
-
-    {
-      final <vectorColumnType> v_result =
-        <opClass>.multiplyVectorPost(a, v_in);
-      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
-    }
-  }
-
-  /**
-   * A 90 degree rotation around the Z axis yields a counter-clockwise rotation
-   * around the Z axis (when looking towards negative infinity on the axis).
-   */
-
-  @Test
-  public void testOfAxisAngle90Z()
-  {
-    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("90");
-
-    final <vectorColumnType> v_axis =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"));
-
-    final <vectorColumnType> v_in =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("0"));
-
-    final <vectorColumnType> v_expected =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("-1"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"));
-
-    final <matrixType> a =
-      <opClass>.ofAxisAngle(
-        v_axis.x(),
-        v_axis.y(),
-        v_axis.z(),
-        r);
-
-    {
-      final <vectorColumnType> v_result =
-        <opClass>.multiplyVectorPost(a, v_in);
-      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
-    }
-  }
-
-  /**
-   * A -90 degree rotation around the X axis yields a clockwise rotation
-   * around the X axis (when looking towards negative infinity on the axis).
-   */
-
-  @Test
-  public void testOfAxisAngleM90X()
-  {
-    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("-90");
-
-    final <vectorColumnType> v_axis =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"));
-
-    final <vectorColumnType> v_in =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("0"));
-
-    final <vectorColumnType> v_expected =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("-1"));
-
-    final <matrixType> a =
-      <opClass>.ofAxisAngle(
-        v_axis.x(),
-        v_axis.y(),
-        v_axis.z(),
-        r);
-
-    {
-      final <vectorColumnType> v_result =
-        <opClass>.multiplyVectorPost(a, v_in);
-      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
-    }
-  }
-
-  /**
-   * A -90 degree rotation around the Y axis yields a clockwise rotation
-   * around the Y axis (when looking towards negative infinity on the axis).
-   */
-
-  @Test
-  public void testOfAxisAngleM90Y()
-  {
-    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("-90");
-
-    final <vectorColumnType> v_axis =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("0"));
-
-    final <vectorColumnType> v_in =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("-1"));
-
-    final <vectorColumnType> v_expected =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"));
-
-    final <matrixType> a =
-      <opClass>.ofAxisAngle(
-        v_axis.x(),
-        v_axis.y(),
-        v_axis.z(),
-        r);
-
-    {
-      final <vectorColumnType> v_result =
-        <opClass>.multiplyVectorPost(a, v_in);
-      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
-    }
-  }
-
-  /**
-   * A -90 degree rotation around the Z axis yields a clockwise rotation
-   * around the Z axis (when looking towards negative infinity on the axis).
-   */
-
-  @Test
-  public void testOfAxisAngleM90Z()
-  {
-    final <scalarRealType> r = <testOpClass>.radiansOfDegrees("-90");
-
-    final <vectorColumnType> v_axis =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"));
-
-    final <vectorColumnType> v_in =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("0"));
-
-    final <vectorColumnType> v_expected =
-      <vectorColumnType>.of(
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("0"));
-
-    final <matrixType> a =
-      <opClass>.ofAxisAngle(
-        v_axis.x(),
-        v_axis.y(),
-        v_axis.z(),
-        r);
-
-    {
-      final <vectorColumnType> v_result =
-        <opClass>.multiplyVectorPost(a, v_in);
-      <testOpClass>.checkAlmostEqualsVector(v_expected, v_result);
-    }
   }
 
   /**
@@ -886,7 +594,7 @@ public final class <className>
     <if(hasGeneric)>
     {
       final <vectorColumnGenericType> vg =
-        <vectorColumnGenericType>.of(v.x(), v.y(), v.z());
+        <vectorColumnGenericType>.of(v.x(), v.y());
       final <vectorColumnGenericType> vr0 =
         <opClass>.multiplyVectorPost(ia, <opClass>.multiplyVectorPost(a, vg));
       <testOpClass>.checkAlmostEqualsVector(vg, vr0);
@@ -895,7 +603,7 @@ public final class <className>
   }
 
   /**
-   * ∀ x y z v. multiplyVectorPost(ofScale(x, y, z), v) == (x, y, z, 1) * v
+   * ∀ x y v. multiplyVectorPost(ofScale(x, y), v) == (x, y) * v
    */
 
   @Test
@@ -907,36 +615,32 @@ public final class <className>
     final <vectorColumnType> v = gen.next();
 
     final <matrixType> m =
-      <opClass>.ofScale(vs.x(), vs.y(), vs.z());
+      <opClass>.ofScale(vs.x(), vs.y());
 
     {
       final <vectorColumnType> vr = <opClass>.multiplyVectorPost(m, v);
       final <scalarRealType> rx = <testOpClass>.multiply(vs.x(), v.x());
       final <scalarRealType> ry = <testOpClass>.multiply(vs.y(), v.y());
-      final <scalarRealType> rz = <testOpClass>.multiply(vs.z(), v.z());
       <testOpClass>.checkAlmostEquals(rx, vr.x());
       <testOpClass>.checkAlmostEquals(ry, vr.y());
-      <testOpClass>.checkAlmostEquals(rz, vr.z());
     }
 
     <if(hasGeneric)>
     {
       final <vectorColumnGenericType> vg =
-        <vectorColumnGenericType>.of(v.x(), v.y(), v.z());
+        <vectorColumnGenericType>.of(v.x(), v.y());
 
       final <vectorColumnGenericType> vr = <opClass>.multiplyVectorPost(m, vg);
       final <scalarRealType> rx = <testOpClass>.multiply(vs.x(), v.x());
       final <scalarRealType> ry = <testOpClass>.multiply(vs.y(), v.y());
-      final <scalarRealType> rz = <testOpClass>.multiply(vs.z(), v.z());
       <testOpClass>.checkAlmostEquals(rx, vr.x());
       <testOpClass>.checkAlmostEquals(ry, vr.y());
-      <testOpClass>.checkAlmostEquals(rz, vr.z());
     }
     <endif>
   }
 
   /**
-   * ∀ v. multiplyVectorPost(ofScale(1, 1, 1), v) == v
+   * ∀ v. multiplyVectorPost(ofScale(1, 1), v) == v
    */
 
   @Test
@@ -948,7 +652,6 @@ public final class <className>
 
     final <matrixType> m = <opClass>.ofScale(
       <testOpClass>.constant("1"),
-      <testOpClass>.constant("1"),
       <testOpClass>.constant("1"));
 
     {
@@ -959,7 +662,7 @@ public final class <className>
     <if(hasGeneric)>
     {
       final <vectorColumnGenericType> vg =
-        <vectorColumnGenericType>.of(v.x(), v.y(), v.z());
+        <vectorColumnGenericType>.of(v.x(), v.y());
       final <vectorColumnGenericType> vr =
         <opClass>.multiplyVectorPost(m, vg);
       <testOpClass>.checkAlmostEqualsVector(vg, vr);
@@ -1025,7 +728,7 @@ public final class <className>
   }
 
   /**
-   * trace(identity()) == 3.0
+   * trace(identity()) == 2.0
    */
 
   @Test
@@ -1033,7 +736,7 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    <testOpClass>.checkEquals(<testOpClass>.constant("3"), <opClass>.trace(a));
+    <testOpClass>.checkEquals(<testOpClass>.constant("2"), <opClass>.trace(a));
   }
 
   /**
@@ -1120,27 +823,15 @@ public final class <className>
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r0c0());
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r0c1());
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r0c2());
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r1c0());
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r1c1());
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r1c2());
-
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r2c0());
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r2c1());
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r2c2());
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(0, 0));
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(0, 1));
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(0, 2));
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(1, 0));
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(1, 1));
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(1, 2));
-
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(2, 0));
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(2, 1));
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(2, 2));
   }
 
   @Test
@@ -1150,27 +841,15 @@ public final class <className>
 
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), a.r0c0());
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r0c1());
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r0c2());
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r1c0());
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), a.r1c1());
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r1c2());
-
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r2c0());
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.r2c1());
-    <testOpClass>.checkEquals(<testOpClass>.constant("1"), a.r2c2());
 
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), a.rowColumn(0, 0));
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(0, 1));
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(0, 2));
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(1, 0));
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), a.rowColumn(1, 1));
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(1, 2));
-
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(2, 0));
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), a.rowColumn(2, 1));
-    <testOpClass>.checkEquals(<testOpClass>.constant("1"), a.rowColumn(2, 2));
   }
 
   @Test
@@ -1183,8 +862,8 @@ public final class <className>
     final <matrixType> b = gen.next();
     final <matrixType> c = <opClass>.add(a, b);
 
-    for (int row = 0; row \< 3; ++row) {
-      for (int column = 0; column \< 3; ++column) {
+    for (int row = 0; row \< 2; ++row) {
+      for (int column = 0; column \< 2; ++column) {
         <matrixComponentType> m0_v = a.rowColumn(row, column);
         <matrixComponentType> m1_v = b.rowColumn(row, column);
         <matrixComponentType> e = (<matrixComponentType>) <testOpClass>.add(m0_v, m1_v);
@@ -1204,8 +883,8 @@ public final class <className>
     final <matrixType> b = gen.next();
     final <matrixType> c = <opClass>.subtract(a, b);
 
-    for (int row = 0; row \< 3; ++row) {
-      for (int column = 0; column \< 3; ++column) {
+    for (int row = 0; row \< 2; ++row) {
+      for (int column = 0; column \< 2; ++column) {
         <matrixComponentType> m0_v = a.rowColumn(row, column);
         <matrixComponentType> m1_v = b.rowColumn(row, column);
         <matrixComponentType> e = (<matrixComponentType>) <testOpClass>.subtract(m0_v, m1_v);
@@ -1225,8 +904,8 @@ public final class <className>
     final <scalarRealType> s = gen.next().r0c0();
     final <matrixType> mr = <opClass>.scale(a, s);
 
-    for (int row = 0; row \< 3; ++row) {
-      for (int column = 0; column \< 3; ++column) {
+    for (int row = 0; row \< 2; ++row) {
+      for (int column = 0; column \< 2; ++column) {
         <matrixComponentType> m_v = a.rowColumn(row, column);
         <matrixComponentType> e = (<matrixComponentType>) <testOpClass>.multiplyReal(m_v, s);
         <matrixComponentType> r = mr.rowColumn(row, column);
@@ -1247,32 +926,18 @@ public final class <className>
       final <vectorRowType> row0 = <opClass>.row0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), row0.x());
       <testOpClass>.checkAlmostEquals(a.r0c1(), row0.y());
-      <testOpClass>.checkAlmostEquals(a.r0c2(), row0.z());
 
       final <vectorRowType> row1 = <opClass>.row1(a);
       <testOpClass>.checkAlmostEquals(a.r1c0(), row1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), row1.y());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), row1.z());
-
-      final <vectorRowType> row2 = <opClass>.row2(a);
-      <testOpClass>.checkAlmostEquals(a.r2c0(), row2.x());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), row2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), row2.z());
 
       final <vectorColumnType> column0 = <opClass>.column0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), column0.x());
       <testOpClass>.checkAlmostEquals(a.r1c0(), column0.y());
-      <testOpClass>.checkAlmostEquals(a.r2c0(), column0.z());
 
       final <vectorColumnType> column1 = <opClass>.column1(a);
       <testOpClass>.checkAlmostEquals(a.r0c1(), column1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), column1.y());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), column1.z());
-
-      final <vectorColumnType> column2 = <opClass>.column2(a);
-      <testOpClass>.checkAlmostEquals(a.r0c2(), column2.x());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), column2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), column2.z());
     }
 
     // Perform the retrievals again to exercise the code paths of
@@ -1282,32 +947,18 @@ public final class <className>
       final <vectorRowType> row0 = <opClass>.row0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), row0.x());
       <testOpClass>.checkAlmostEquals(a.r0c1(), row0.y());
-      <testOpClass>.checkAlmostEquals(a.r0c2(), row0.z());
 
       final <vectorRowType> row1 = <opClass>.row1(a);
       <testOpClass>.checkAlmostEquals(a.r1c0(), row1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), row1.y());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), row1.z());
-
-      final <vectorRowType> row2 = <opClass>.row2(a);
-      <testOpClass>.checkAlmostEquals(a.r2c0(), row2.x());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), row2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), row2.z());
 
       final <vectorColumnType> column0 = <opClass>.column0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), column0.x());
       <testOpClass>.checkAlmostEquals(a.r1c0(), column0.y());
-      <testOpClass>.checkAlmostEquals(a.r2c0(), column0.z());
 
       final <vectorColumnType> column1 = <opClass>.column1(a);
       <testOpClass>.checkAlmostEquals(a.r0c1(), column1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), column1.y());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), column1.z());
-
-      final <vectorColumnType> column2 = <opClass>.column2(a);
-      <testOpClass>.checkAlmostEquals(a.r0c2(), column2.x());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), column2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), column2.z());
     }
   }
 
@@ -1323,32 +974,18 @@ public final class <className>
       final <vectorRowType> row0 = <opClass>.row0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), row0.x());
       <testOpClass>.checkAlmostEquals(a.r0c1(), row0.y());
-      <testOpClass>.checkAlmostEquals(a.r0c2(), row0.z());
 
       final <vectorRowType> row1 = <opClass>.row1(a);
       <testOpClass>.checkAlmostEquals(a.r1c0(), row1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), row1.y());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), row1.z());
-
-      final <vectorRowType> row2 = <opClass>.row2(a);
-      <testOpClass>.checkAlmostEquals(a.r2c0(), row2.x());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), row2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), row2.z());
 
       final <vectorColumnType> column0 = <opClass>.column0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), column0.x());
       <testOpClass>.checkAlmostEquals(a.r1c0(), column0.y());
-      <testOpClass>.checkAlmostEquals(a.r2c0(), column0.z());
 
       final <vectorColumnType> column1 = <opClass>.column1(a);
       <testOpClass>.checkAlmostEquals(a.r0c1(), column1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), column1.y());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), column1.z());
-
-      final <vectorColumnType> column2 = <opClass>.column2(a);
-      <testOpClass>.checkAlmostEquals(a.r0c2(), column2.x());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), column2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), column2.z());
     }
 
     final <matrixType> mr =
@@ -1356,51 +993,30 @@ public final class <className>
         a,
         0,
         <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("2"));
+        <testOpClass>.constant("1"));
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), mr.r0c0());
     <testOpClass>.checkAlmostEquals(a.r0c1(), mr.r0c1());
-    <testOpClass>.checkAlmostEquals(a.r0c2(), mr.r0c2());
 
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), mr.r1c0());
     <testOpClass>.checkAlmostEquals(a.r1c1(), mr.r1c1());
-    <testOpClass>.checkAlmostEquals(a.r1c2(), mr.r1c2());
-
-    <testOpClass>.checkEquals(<testOpClass>.constant("2"), mr.r2c0());
-    <testOpClass>.checkAlmostEquals(a.r2c1(), mr.r2c1());
-    <testOpClass>.checkAlmostEquals(a.r2c2(), mr.r2c2());
 
     {
       final <vectorRowType> row0 = <opClass>.row0(mr);
       <testOpClass>.checkAlmostEquals(mr.r0c0(), row0.x());
       <testOpClass>.checkAlmostEquals(mr.r0c1(), row0.y());
-      <testOpClass>.checkAlmostEquals(mr.r0c2(), row0.z());
 
       final <vectorRowType> row1 = <opClass>.row1(mr);
       <testOpClass>.checkAlmostEquals(mr.r1c0(), row1.x());
       <testOpClass>.checkAlmostEquals(mr.r1c1(), row1.y());
-      <testOpClass>.checkAlmostEquals(mr.r1c2(), row1.z());
-
-      final <vectorRowType> row2 = <opClass>.row2(mr);
-      <testOpClass>.checkAlmostEquals(mr.r2c0(), row2.x());
-      <testOpClass>.checkAlmostEquals(mr.r2c1(), row2.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c2(), row2.z());
 
       final <vectorColumnType> column0 = <opClass>.column0(mr);
       <testOpClass>.checkAlmostEquals(mr.r0c0(), column0.x());
       <testOpClass>.checkAlmostEquals(mr.r1c0(), column0.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c0(), column0.z());
 
       final <vectorColumnType> column1 = <opClass>.column1(mr);
       <testOpClass>.checkAlmostEquals(mr.r0c1(), column1.x());
       <testOpClass>.checkAlmostEquals(mr.r1c1(), column1.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c1(), column1.z());
-
-      final <vectorColumnType> column2 = <opClass>.column2(mr);
-      <testOpClass>.checkAlmostEquals(mr.r0c2(), column2.x());
-      <testOpClass>.checkAlmostEquals(mr.r1c2(), column2.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c2(), column2.z());
     }
   }
 
@@ -1416,32 +1032,18 @@ public final class <className>
       final <vectorRowType> row0 = <opClass>.row0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), row0.x());
       <testOpClass>.checkAlmostEquals(a.r0c1(), row0.y());
-      <testOpClass>.checkAlmostEquals(a.r0c2(), row0.z());
 
       final <vectorRowType> row1 = <opClass>.row1(a);
       <testOpClass>.checkAlmostEquals(a.r1c0(), row1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), row1.y());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), row1.z());
-
-      final <vectorRowType> row2 = <opClass>.row2(a);
-      <testOpClass>.checkAlmostEquals(a.r2c0(), row2.x());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), row2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), row2.z());
 
       final <vectorColumnType> column0 = <opClass>.column0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), column0.x());
       <testOpClass>.checkAlmostEquals(a.r1c0(), column0.y());
-      <testOpClass>.checkAlmostEquals(a.r2c0(), column0.z());
 
       final <vectorColumnType> column1 = <opClass>.column1(a);
       <testOpClass>.checkAlmostEquals(a.r0c1(), column1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), column1.y());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), column1.z());
-
-      final <vectorColumnType> column2 = <opClass>.column2(a);
-      <testOpClass>.checkAlmostEquals(a.r0c2(), column2.x());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), column2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), column2.z());
     }
 
     final <matrixType> mr =
@@ -1449,144 +1051,30 @@ public final class <className>
         a,
         1,
         <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("2"));
+        <testOpClass>.constant("1"));
 
     <testOpClass>.checkAlmostEquals(a.r0c0(), mr.r0c0());
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), mr.r0c1());
-    <testOpClass>.checkAlmostEquals(a.r0c2(), mr.r0c2());
 
     <testOpClass>.checkAlmostEquals(a.r1c0(), mr.r1c0());
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), mr.r1c1());
-    <testOpClass>.checkAlmostEquals(a.r1c2(), mr.r1c2());
-
-    <testOpClass>.checkAlmostEquals(a.r2c0(), mr.r2c0());
-    <testOpClass>.checkEquals(<testOpClass>.constant("2"), mr.r2c1());
-    <testOpClass>.checkAlmostEquals(a.r2c2(), mr.r2c2());
 
     {
       final <vectorRowType> row0 = <opClass>.row0(mr);
       <testOpClass>.checkAlmostEquals(mr.r0c0(), row0.x());
       <testOpClass>.checkAlmostEquals(mr.r0c1(), row0.y());
-      <testOpClass>.checkAlmostEquals(mr.r0c2(), row0.z());
 
       final <vectorRowType> row1 = <opClass>.row1(mr);
       <testOpClass>.checkAlmostEquals(mr.r1c0(), row1.x());
       <testOpClass>.checkAlmostEquals(mr.r1c1(), row1.y());
-      <testOpClass>.checkAlmostEquals(mr.r1c2(), row1.z());
-
-      final <vectorRowType> row2 = <opClass>.row2(mr);
-      <testOpClass>.checkAlmostEquals(mr.r2c0(), row2.x());
-      <testOpClass>.checkAlmostEquals(mr.r2c1(), row2.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c2(), row2.z());
 
       final <vectorColumnType> column0 = <opClass>.column0(mr);
       <testOpClass>.checkAlmostEquals(mr.r0c0(), column0.x());
       <testOpClass>.checkAlmostEquals(mr.r1c0(), column0.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c0(), column0.z());
 
       final <vectorColumnType> column1 = <opClass>.column1(mr);
       <testOpClass>.checkAlmostEquals(mr.r0c1(), column1.x());
       <testOpClass>.checkAlmostEquals(mr.r1c1(), column1.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c1(), column1.z());
-
-      final <vectorColumnType> column2 = <opClass>.column2(mr);
-      <testOpClass>.checkAlmostEquals(mr.r0c2(), column2.x());
-      <testOpClass>.checkAlmostEquals(mr.r1c2(), column2.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c2(), column2.z());
-    }
-  }
-
-  @Test
-  @PercentagePassing
-  public void testWithColumn2()
-  {
-    final Generator\<<matrixType>\> gen = createGenerator();
-
-    final <matrixType> a = gen.next();
-
-    {
-      final <vectorRowType> row0 = <opClass>.row0(a);
-      <testOpClass>.checkAlmostEquals(a.r0c0(), row0.x());
-      <testOpClass>.checkAlmostEquals(a.r0c1(), row0.y());
-      <testOpClass>.checkAlmostEquals(a.r0c2(), row0.z());
-
-      final <vectorRowType> row1 = <opClass>.row1(a);
-      <testOpClass>.checkAlmostEquals(a.r1c0(), row1.x());
-      <testOpClass>.checkAlmostEquals(a.r1c1(), row1.y());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), row1.z());
-
-      final <vectorRowType> row2 = <opClass>.row2(a);
-      <testOpClass>.checkAlmostEquals(a.r2c0(), row2.x());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), row2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), row2.z());
-
-      final <vectorColumnType> column0 = <opClass>.column0(a);
-      <testOpClass>.checkAlmostEquals(a.r0c0(), column0.x());
-      <testOpClass>.checkAlmostEquals(a.r1c0(), column0.y());
-      <testOpClass>.checkAlmostEquals(a.r2c0(), column0.z());
-
-      final <vectorColumnType> column1 = <opClass>.column1(a);
-      <testOpClass>.checkAlmostEquals(a.r0c1(), column1.x());
-      <testOpClass>.checkAlmostEquals(a.r1c1(), column1.y());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), column1.z());
-
-      final <vectorColumnType> column2 = <opClass>.column2(a);
-      <testOpClass>.checkAlmostEquals(a.r0c2(), column2.x());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), column2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), column2.z());
-    }
-
-    final <matrixType> mr =
-      <opClass>.withColumn(
-        a,
-        2,
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("2"));
-
-    <testOpClass>.checkAlmostEquals(a.r0c0(), mr.r0c0());
-    <testOpClass>.checkAlmostEquals(a.r0c1(), mr.r0c1());
-    <testOpClass>.checkEquals(<testOpClass>.constant("0"), mr.r0c2());
-
-    <testOpClass>.checkAlmostEquals(a.r1c0(), mr.r1c0());
-    <testOpClass>.checkAlmostEquals(a.r1c1(), mr.r1c1());
-    <testOpClass>.checkEquals(<testOpClass>.constant("1"), mr.r1c2());
-
-    <testOpClass>.checkAlmostEquals(a.r2c0(), mr.r2c0());
-    <testOpClass>.checkAlmostEquals(a.r2c1(), mr.r2c1());
-    <testOpClass>.checkEquals(<testOpClass>.constant("2"), mr.r2c2());
-
-    {
-      final <vectorRowType> row0 = <opClass>.row0(mr);
-      <testOpClass>.checkAlmostEquals(mr.r0c0(), row0.x());
-      <testOpClass>.checkAlmostEquals(mr.r0c1(), row0.y());
-      <testOpClass>.checkAlmostEquals(mr.r0c2(), row0.z());
-
-      final <vectorRowType> row1 = <opClass>.row1(mr);
-      <testOpClass>.checkAlmostEquals(mr.r1c0(), row1.x());
-      <testOpClass>.checkAlmostEquals(mr.r1c1(), row1.y());
-      <testOpClass>.checkAlmostEquals(mr.r1c2(), row1.z());
-
-      final <vectorRowType> row2 = <opClass>.row2(mr);
-      <testOpClass>.checkAlmostEquals(mr.r2c0(), row2.x());
-      <testOpClass>.checkAlmostEquals(mr.r2c1(), row2.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c2(), row2.z());
-
-      final <vectorColumnType> column0 = <opClass>.column0(mr);
-      <testOpClass>.checkAlmostEquals(mr.r0c0(), column0.x());
-      <testOpClass>.checkAlmostEquals(mr.r1c0(), column0.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c0(), column0.z());
-
-      final <vectorColumnType> column1 = <opClass>.column1(mr);
-      <testOpClass>.checkAlmostEquals(mr.r0c1(), column1.x());
-      <testOpClass>.checkAlmostEquals(mr.r1c1(), column1.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c1(), column1.z());
-
-      final <vectorColumnType> column2 = <opClass>.column2(mr);
-      <testOpClass>.checkAlmostEquals(mr.r0c2(), column2.x());
-      <testOpClass>.checkAlmostEquals(mr.r1c2(), column2.y());
-      <testOpClass>.checkAlmostEquals(mr.r2c2(), column2.z());
     }
   }
 
@@ -1601,8 +1089,7 @@ public final class <className>
       a,
       -1,
       <testOpClass>.constant("0"),
-      <testOpClass>.constant("1"),
-      <testOpClass>.constant("2"));
+      <testOpClass>.constant("1"));
   }
 
   @Test
@@ -1616,8 +1103,7 @@ public final class <className>
       a,
       3,
       <testOpClass>.constant("0"),
-      <testOpClass>.constant("1"),
-      <testOpClass>.constant("2"));
+      <testOpClass>.constant("1"));
   }
 
   @Test
@@ -1632,32 +1118,18 @@ public final class <className>
       final <vectorRowType> row0 = <opClass>.row0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), row0.x());
       <testOpClass>.checkAlmostEquals(a.r0c1(), row0.y());
-      <testOpClass>.checkAlmostEquals(a.r0c2(), row0.z());
 
       final <vectorRowType> row1 = <opClass>.row1(a);
       <testOpClass>.checkAlmostEquals(a.r1c0(), row1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), row1.y());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), row1.z());
-
-      final <vectorRowType> row2 = <opClass>.row2(a);
-      <testOpClass>.checkAlmostEquals(a.r2c0(), row2.x());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), row2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), row2.z());
 
       final <vectorColumnType> column0 = <opClass>.column0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), column0.x());
       <testOpClass>.checkAlmostEquals(a.r1c0(), column0.y());
-      <testOpClass>.checkAlmostEquals(a.r2c0(), column0.z());
 
       final <vectorColumnType> column1 = <opClass>.column1(a);
       <testOpClass>.checkAlmostEquals(a.r0c1(), column1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), column1.y());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), column1.z());
-
-      final <vectorColumnType> column2 = <opClass>.column2(a);
-      <testOpClass>.checkAlmostEquals(a.r0c2(), column2.x());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), column2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), column2.z());
     }
 
     final <matrixType> mr =
@@ -1665,20 +1137,13 @@ public final class <className>
         a,
         0,
         <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("2"));
+        <testOpClass>.constant("1"));
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), mr.r0c0());
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), mr.r0c1());
-    <testOpClass>.checkEquals(<testOpClass>.constant("2"), mr.r0c2());
 
     <testOpClass>.checkAlmostEquals(a.r1c0(), mr.r1c0());
     <testOpClass>.checkAlmostEquals(a.r1c1(), mr.r1c1());
-    <testOpClass>.checkAlmostEquals(a.r1c2(), mr.r1c2());
-
-    <testOpClass>.checkAlmostEquals(a.r2c0(), mr.r2c0());
-    <testOpClass>.checkAlmostEquals(a.r2c1(), mr.r2c1());
-    <testOpClass>.checkAlmostEquals(a.r2c2(), mr.r2c2());
   }
 
   @Test
@@ -1693,32 +1158,18 @@ public final class <className>
       final <vectorRowType> row0 = <opClass>.row0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), row0.x());
       <testOpClass>.checkAlmostEquals(a.r0c1(), row0.y());
-      <testOpClass>.checkAlmostEquals(a.r0c2(), row0.z());
 
       final <vectorRowType> row1 = <opClass>.row1(a);
       <testOpClass>.checkAlmostEquals(a.r1c0(), row1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), row1.y());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), row1.z());
-
-      final <vectorRowType> row2 = <opClass>.row2(a);
-      <testOpClass>.checkAlmostEquals(a.r2c0(), row2.x());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), row2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), row2.z());
 
       final <vectorColumnType> column0 = <opClass>.column0(a);
       <testOpClass>.checkAlmostEquals(a.r0c0(), column0.x());
       <testOpClass>.checkAlmostEquals(a.r1c0(), column0.y());
-      <testOpClass>.checkAlmostEquals(a.r2c0(), column0.z());
 
       final <vectorColumnType> column1 = <opClass>.column1(a);
       <testOpClass>.checkAlmostEquals(a.r0c1(), column1.x());
       <testOpClass>.checkAlmostEquals(a.r1c1(), column1.y());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), column1.z());
-
-      final <vectorColumnType> column2 = <opClass>.column2(a);
-      <testOpClass>.checkAlmostEquals(a.r0c2(), column2.x());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), column2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), column2.z());
     }
 
     final <matrixType> mr =
@@ -1726,81 +1177,13 @@ public final class <className>
         a,
         1,
         <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("2"));
+        <testOpClass>.constant("1"));
 
     <testOpClass>.checkEquals(mr.r0c0(), mr.r0c0());
     <testOpClass>.checkEquals(mr.r0c1(), mr.r0c1());
-    <testOpClass>.checkEquals(mr.r0c2(), mr.r0c2());
 
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), mr.r1c0());
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), mr.r1c1());
-    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("2"), mr.r1c2());
-
-    <testOpClass>.checkAlmostEquals(a.r2c0(), mr.r2c0());
-    <testOpClass>.checkAlmostEquals(a.r2c1(), mr.r2c1());
-    <testOpClass>.checkAlmostEquals(a.r2c2(), mr.r2c2());
-  }
-
-  @Test
-  @PercentagePassing
-  public void testWithRow2()
-  {
-    final Generator\<<matrixType>\> gen = createGenerator();
-
-    final <matrixType> a = gen.next();
-
-    {
-      final <vectorRowType> row0 = <opClass>.row0(a);
-      <testOpClass>.checkAlmostEquals(a.r0c0(), row0.x());
-      <testOpClass>.checkAlmostEquals(a.r0c1(), row0.y());
-      <testOpClass>.checkAlmostEquals(a.r0c2(), row0.z());
-
-      final <vectorRowType> row1 = <opClass>.row1(a);
-      <testOpClass>.checkAlmostEquals(a.r1c0(), row1.x());
-      <testOpClass>.checkAlmostEquals(a.r1c1(), row1.y());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), row1.z());
-
-      final <vectorRowType> row2 = <opClass>.row2(a);
-      <testOpClass>.checkAlmostEquals(a.r2c0(), row2.x());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), row2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), row2.z());
-
-      final <vectorColumnType> column0 = <opClass>.column0(a);
-      <testOpClass>.checkAlmostEquals(a.r0c0(), column0.x());
-      <testOpClass>.checkAlmostEquals(a.r1c0(), column0.y());
-      <testOpClass>.checkAlmostEquals(a.r2c0(), column0.z());
-
-      final <vectorColumnType> column1 = <opClass>.column1(a);
-      <testOpClass>.checkAlmostEquals(a.r0c1(), column1.x());
-      <testOpClass>.checkAlmostEquals(a.r1c1(), column1.y());
-      <testOpClass>.checkAlmostEquals(a.r2c1(), column1.z());
-
-      final <vectorColumnType> column2 = <opClass>.column2(a);
-      <testOpClass>.checkAlmostEquals(a.r0c2(), column2.x());
-      <testOpClass>.checkAlmostEquals(a.r1c2(), column2.y());
-      <testOpClass>.checkAlmostEquals(a.r2c2(), column2.z());
-    }
-
-    final <matrixType> mr =
-      <opClass>.withRow(
-        a,
-        2,
-        <testOpClass>.constant("0"),
-        <testOpClass>.constant("1"),
-        <testOpClass>.constant("2"));
-
-    <testOpClass>.checkEquals(mr.r0c0(), mr.r0c0());
-    <testOpClass>.checkEquals(mr.r0c1(), mr.r0c1());
-    <testOpClass>.checkEquals(mr.r0c2(), mr.r0c2());
-
-    <testOpClass>.checkAlmostEquals(a.r1c0(), mr.r1c0());
-    <testOpClass>.checkAlmostEquals(a.r1c1(), mr.r1c1());
-    <testOpClass>.checkAlmostEquals(a.r1c2(), mr.r1c2());
-
-    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), mr.r2c0());
-    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), mr.r2c1());
-    <testOpClass>.checkAlmostEquals(<testOpClass>.constant("2"), mr.r2c2());
   }
 
   @Test
@@ -1814,23 +1197,7 @@ public final class <className>
       a,
       -1,
       <testOpClass>.constant("0"),
-      <testOpClass>.constant("1"),
-      <testOpClass>.constant("2"));
-  }
-
-  @Test
-  @PercentagePassing
-  public void testWithRow3()
-  {
-    final <matrixType> a = <opClass>.identity();
-
-    this.expected.expect(IndexOutOfBoundsException.class);
-    <opClass>.withRow(
-      a,
-      3,
-      <testOpClass>.constant("0"),
-      <testOpClass>.constant("1"),
-      <testOpClass>.constant("2"));
+      <testOpClass>.constant("1"));
   }
 
   @Test

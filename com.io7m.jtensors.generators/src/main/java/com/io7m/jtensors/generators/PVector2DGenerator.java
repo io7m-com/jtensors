@@ -55,8 +55,8 @@ public final class PVector2DGenerator<T> implements Generator<PVector2D<T>>
   public static <T> Generator<PVector2D<T>> createSmall()
   {
     return new PVector2DGenerator<>(PrimitiveGenerators.doubles(
-      -65536.0,
-      65536.0
+      GeneratorConstants.BOUND_SMALL_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_SMALL_DOUBLE_UPPER
     ));
   }
 
@@ -71,8 +71,25 @@ public final class PVector2DGenerator<T> implements Generator<PVector2D<T>>
   public static <T> Generator<PVector2D<T>> create()
   {
     return new PVector2DGenerator<>(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_LARGE_DOUBLE_UPPER
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-1, 1]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector2D<T>> createNormal()
+  {
+    return new PVector2DGenerator<>(PrimitiveGenerators.doubles(
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_UPPER
     ));
   }
 

@@ -54,8 +54,8 @@ public final class PVector2FGenerator<T> implements Generator<PVector2F<T>>
   public static <T> Generator<PVector2F<T>> create()
   {
     return new PVector2FGenerator<>(PrimitiveGenerators.doubles(
-      -1.0e32,
-      1.0e32
+      GeneratorConstants.BOUND_LARGE_FLOAT_LOWER,
+      GeneratorConstants.BOUND_LARGE_FLOAT_UPPER
     ));
   }
 
@@ -71,8 +71,25 @@ public final class PVector2FGenerator<T> implements Generator<PVector2F<T>>
   public static <T> Generator<PVector2F<T>> createSmall()
   {
     return new PVector2FGenerator<>(PrimitiveGenerators.doubles(
-      -65536.0,
-      65536.0
+      GeneratorConstants.BOUND_SMALL_FLOAT_LOWER,
+      GeneratorConstants.BOUND_SMALL_FLOAT_UPPER
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-1.0, 1.0]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector2F<T>> createNormal()
+  {
+    return new PVector2FGenerator<>(PrimitiveGenerators.doubles(
+      GeneratorConstants.BOUND_NORMAL_FLOAT_LOWER,
+      GeneratorConstants.BOUND_NORMAL_FLOAT_UPPER
     ));
   }
 

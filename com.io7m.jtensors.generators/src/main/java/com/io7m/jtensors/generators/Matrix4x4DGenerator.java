@@ -50,8 +50,8 @@ public final class Matrix4x4DGenerator implements Generator<Matrix4x4D>
   public static Generator<Matrix4x4D> create()
   {
     return new Matrix4x4DGenerator(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_LARGE_DOUBLE_UPPER
     ));
   }
 
@@ -65,8 +65,8 @@ public final class Matrix4x4DGenerator implements Generator<Matrix4x4D>
   public static Generator<Matrix4x4D> createNormal()
   {
     return new Matrix4x4DGenerator(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_UPPER
     ));
   }
 

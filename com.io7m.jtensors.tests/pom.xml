@@ -38,12 +38,32 @@
     </dependency>
 
     <dependency>
+      <groupId>com.io7m.jnull</groupId>
+      <artifactId>io7m-jnull-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.io7m.junreachable</groupId>
+      <artifactId>io7m-junreachable-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.io7m.jequality</groupId>
+      <artifactId>io7m-jequality-core</artifactId>
+    </dependency>
+    <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.java.quickcheck</groupId>
+      <artifactId>quickcheck</artifactId>
     </dependency>
   </dependencies>
 
@@ -799,6 +819,38 @@
             </configuration>
           </execution>
           <execution>
+            <id>generate-PM2x2D</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PMatrix2x2Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/parameterized/matrices/PMatrix2x2DTest.java</target>
+                  <properties>
+                    <className>PMatrix2x2DTest</className>
+                    <matrixType>com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D</matrixType>
+                    <matrixComponentType>double</matrixComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <generatorType>com.io7m.jtensors.generators.PMatrix2x2DGenerator</generatorType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.parameterized.vectors.PVector2D</vectorColumnGenericType>
+                    <vectorGeneratorType>com.io7m.jtensors.generators.Vector2DGenerator</vectorGeneratorType>
+                    <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector2DGenerator</vectorGenericGeneratorType>
+                    <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrices2x2D</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
+                    <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors2D</vectorOpClass>
+                    <hasGeneric>true</hasGeneric>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
             <id>generate-PM4x4F</id>
             <phase>generate-test-sources</phase>
             <goals>
@@ -856,6 +908,38 @@
                     <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrices3x3F</opClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
                     <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors3F</vectorOpClass>
+                    <hasGeneric>true</hasGeneric>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
+            <id>generate-PM2x2F</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PMatrix2x2Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/parameterized/matrices/PMatrix2x2FTest.java</target>
+                  <properties>
+                    <className>PMatrix2x2FTest</className>
+                    <matrixType>com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F</matrixType>
+                    <matrixComponentType>float</matrixComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <generatorType>com.io7m.jtensors.generators.PMatrix2x2FGenerator</generatorType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.parameterized.vectors.PVector2F</vectorColumnGenericType>
+                    <vectorGeneratorType>com.io7m.jtensors.generators.Vector2FGenerator</vectorGeneratorType>
+                    <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector2FGenerator</vectorGenericGeneratorType>
+                    <opClass>com.io7m.jtensors.core.parameterized.matrices.PMatrices2x2F</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
+                    <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors2F</vectorOpClass>
                     <hasGeneric>true</hasGeneric>
                   </properties>
                 </template>
@@ -927,6 +1011,37 @@
             </configuration>
           </execution>
           <execution>
+            <id>generate-M2x2D</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PMatrix2x2Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/unparameterized/matrices/Matrix2x2DTest.java</target>
+                  <properties>
+                    <className>Matrix2x2DTest</className>
+                    <matrixType>com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D</matrixType>
+                    <matrixComponentType>double</matrixComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <generatorType>com.io7m.jtensors.generators.Matrix2x2DGenerator</generatorType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorColumnGenericType>
+                    <vectorGeneratorType>com.io7m.jtensors.generators.Vector2DGenerator</vectorGeneratorType>
+                    <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector2DGenerator</vectorGenericGeneratorType>
+                    <opClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices2x2D</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestDOps</testOpClass>
+                    <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors2D</vectorOpClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
+          <execution>
             <id>generate-M4x4F</id>
             <phase>generate-test-sources</phase>
             <goals>
@@ -988,6 +1103,37 @@
               </templates>
             </configuration>
           </execution>
+          <execution>
+            <id>generate-M2x2F</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>render</goal>
+            </goals>
+            <configuration>
+              <templates>
+                <template>
+                  <directory>src/test/string-template</directory>
+                  <name>PMatrix2x2Test</name>
+                  <target>${project.build.directory}/generated-test-sources/string-template/com/io7m/jtensors/tests/core/unparameterized/matrices/Matrix2x2FTest.java</target>
+                  <properties>
+                    <className>Matrix2x2FTest</className>
+                    <matrixType>com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F</matrixType>
+                    <matrixComponentType>float</matrixComponentType>
+                    <scalarRealType>double</scalarRealType>
+                    <generatorType>com.io7m.jtensors.generators.Matrix2x2FGenerator</generatorType>
+                    <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorRowType>
+                    <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorColumnType>
+                    <vectorColumnGenericType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorColumnGenericType>
+                    <vectorGeneratorType>com.io7m.jtensors.generators.Vector2FGenerator</vectorGeneratorType>
+                    <vectorGenericGeneratorType>com.io7m.jtensors.generators.PVector2FGenerator</vectorGenericGeneratorType>
+                    <opClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices2x2F</opClass>
+                    <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
+                    <vectorOpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors2F</vectorOpClass>
+                  </properties>
+                </template>
+              </templates>
+            </configuration>
+          </execution>
 
           <!-- Quaternion types -->
           <execution>
@@ -1040,12 +1186,12 @@
                     <scalarRealType>double</scalarRealType>
                     <generatorType>com.io7m.jtensors.generators.Quaternion4FGenerator</generatorType>
                     <opClass>com.io7m.jtensors.core.quaternions.Quaternions4F</opClass>
-                    <matrix4x4Type>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D</matrix4x4Type>
-                    <matrix4x4OpClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4D</matrix4x4OpClass>
-                    <matrix4x4GeneratorType>com.io7m.jtensors.generators.Matrix4x4DGenerator</matrix4x4GeneratorType>
-                    <vector3Type>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vector3Type>
-                    <vector3GeneratorType>com.io7m.jtensors.generators.Vector3DGenerator</vector3GeneratorType>
-                    <vector3OpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors3D</vector3OpClass>
+                    <matrix4x4Type>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F</matrix4x4Type>
+                    <matrix4x4OpClass>com.io7m.jtensors.core.unparameterized.matrices.Matrices4x4F</matrix4x4OpClass>
+                    <matrix4x4GeneratorType>com.io7m.jtensors.generators.Matrix4x4FGenerator</matrix4x4GeneratorType>
+                    <vector3Type>com.io7m.jtensors.core.unparameterized.vectors.Vector3F</vector3Type>
+                    <vector3GeneratorType>com.io7m.jtensors.generators.Vector3FGenerator</vector3GeneratorType>
+                    <vector3OpClass>com.io7m.jtensors.core.unparameterized.vectors.Vectors3F</vector3OpClass>
                     <testOpClass>com.io7m.jtensors.tests.core.TestFOps</testOpClass>
                   </properties>
                 </template>

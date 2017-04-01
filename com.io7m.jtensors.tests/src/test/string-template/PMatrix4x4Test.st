@@ -218,9 +218,12 @@ public final class <className>
     final <matrixType> a = gen.next();
     final <scalarRealType> s = gen.next().r0c0();
 
-    <testOpClass>.checkEquals(
-      <testOpClass>.multiply(<testOpClass>.pow(s, <testOpClass>.constant("4")), <opClass>.determinant(a)),
-      <opClass>.determinant(<opClass>.scale(a, s)));
+    final <scalarRealType> exp_det =
+      <testOpClass>.multiply(<testOpClass>.pow(s, <testOpClass>.constant("4")), <opClass>.determinant(a));
+    final <scalarRealType> rec_det =
+      <opClass>.determinant(<opClass>.scale(a, s));
+
+    <testOpClass>.checkAlmostEquals(exp_det, rec_det);
   }
 
   /**
@@ -236,7 +239,9 @@ public final class <className>
     final <matrixType> a = gen.next();
     final <matrixType> mt = <opClass>.transpose(a);
 
-    <testOpClass>.checkEquals(<opClass>.determinant(a), <opClass>.determinant(mt));
+    <testOpClass>.checkAlmostEquals(
+      <opClass>.determinant(a),
+      <opClass>.determinant(mt));
   }
 
   @Test
@@ -607,7 +612,7 @@ public final class <className>
    */
 
   @Test
-  @PercentagePassing(passPercent = 93)
+  @PercentagePassing
   public void testInvertProduct()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -635,7 +640,7 @@ public final class <className>
    */
 
   @Test
-  @PercentagePassing(passPercent = 95)
+  @PercentagePassing
   public void testInvertMultiplyIdentity()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -879,7 +884,7 @@ public final class <className>
    */
 
   @Test
-  @PercentagePassing(passPercent = 95)
+  @PercentagePassing
   public void testMultiplyVectorPostIdentityInverse()
   {
     final Generator\<<matrixType>\> m_gen = createGeneratorNormal();

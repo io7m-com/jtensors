@@ -50,8 +50,8 @@ public final class Matrix3x3FGenerator implements Generator<Matrix3x3F>
   public static Generator<Matrix3x3F> create()
   {
     return new Matrix3x3FGenerator(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_FLOAT_LOWER,
+      GeneratorConstants.BOUND_LARGE_FLOAT_UPPER
     ));
   }
 
@@ -65,8 +65,8 @@ public final class Matrix3x3FGenerator implements Generator<Matrix3x3F>
   public static Generator<Matrix3x3F> createNormal()
   {
     return new Matrix3x3FGenerator(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_FLOAT_LOWER,
+      GeneratorConstants.BOUND_NORMAL_FLOAT_UPPER
     ));
   }
 

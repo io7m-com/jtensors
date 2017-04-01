@@ -30,6 +30,26 @@ public final class Determinants
   }
 
   /**
+   * Calculate the determinant of the given 2x2 matrix values.
+   *
+   * @param r0c0 The value at row 0 column 0
+   * @param r0c1 The value at row 0 column 1
+   * @param r1c0 The value at row 1 column 0
+   * @param r1c1 The value at row 1 column 1
+   *
+   * @return The determinant
+   */
+
+  public static double determinant2x2(
+    final double r0c0,
+    final double r0c1,
+    final double r1c0,
+    final double r1c1)
+  {
+    return (r0c0 * r1c1) - (r0c1 * r1c0);
+  }
+
+  /**
    * Calculate the determinant of the given 3x3 matrix values.
    *
    * @param r0c0 The value at row 0 column 0

@@ -50,8 +50,8 @@ public final class Vector3DGenerator implements Generator<Vector3D>
   public static Generator<Vector3D> create()
   {
     return new Vector3DGenerator(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_LARGE_DOUBLE_UPPER
     ));
   }
 
@@ -65,8 +65,8 @@ public final class Vector3DGenerator implements Generator<Vector3D>
   public static Generator<Vector3D> createSmall()
   {
     return new Vector3DGenerator(PrimitiveGenerators.doubles(
-      -65536.0,
-      65536.0
+      GeneratorConstants.BOUND_SMALL_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_SMALL_DOUBLE_UPPER
     ));
   }
 
@@ -80,8 +80,8 @@ public final class Vector3DGenerator implements Generator<Vector3D>
   public static Generator<Vector3D> createNormal()
   {
     return new Vector3DGenerator(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_UPPER
     ));
   }
 

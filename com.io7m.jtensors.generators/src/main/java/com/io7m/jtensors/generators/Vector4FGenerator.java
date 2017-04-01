@@ -50,8 +50,8 @@ public final class Vector4FGenerator implements Generator<Vector4F>
   public static Generator<Vector4F> create()
   {
     return new Vector4FGenerator(PrimitiveGenerators.doubles(
-      -1.0e32,
-      1.0e32
+      GeneratorConstants.BOUND_LARGE_FLOAT_LOWER,
+      GeneratorConstants.BOUND_LARGE_FLOAT_UPPER
     ));
   }
 
@@ -65,8 +65,8 @@ public final class Vector4FGenerator implements Generator<Vector4F>
   public static Generator<Vector4F> createSmall()
   {
     return new Vector4FGenerator(PrimitiveGenerators.doubles(
-      -65536.0,
-      65536.0
+      GeneratorConstants.BOUND_SMALL_FLOAT_LOWER,
+      GeneratorConstants.BOUND_SMALL_FLOAT_UPPER
     ));
   }
 
@@ -80,8 +80,8 @@ public final class Vector4FGenerator implements Generator<Vector4F>
   public static Generator<Vector4F> createNormal()
   {
     return new Vector4FGenerator(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_FLOAT_LOWER,
+      GeneratorConstants.BOUND_NORMAL_FLOAT_UPPER
     ));
   }
 

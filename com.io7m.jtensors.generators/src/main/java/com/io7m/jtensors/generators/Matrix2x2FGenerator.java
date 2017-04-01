@@ -17,7 +17,7 @@
 package com.io7m.jtensors.generators;
 
 import com.io7m.jnull.NullCheck;
-import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.generator.PrimitiveGenerators;
 
@@ -25,7 +25,7 @@ import net.java.quickcheck.generator.PrimitiveGenerators;
  * A matrix generator.
  */
 
-public final class Matrix2x2FGenerator implements Generator<Matrix2x2D>
+public final class Matrix2x2FGenerator implements Generator<Matrix2x2F>
 {
   private final Generator<Double> gen;
 
@@ -47,11 +47,11 @@ public final class Matrix2x2FGenerator implements Generator<Matrix2x2D>
    * @return A generator
    */
 
-  public static Generator<Matrix2x2D> create()
+  public static Generator<Matrix2x2F> create()
   {
     return new Matrix2x2FGenerator(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_FLOAT_LOWER,
+      GeneratorConstants.BOUND_LARGE_FLOAT_UPPER
     ));
   }
 
@@ -62,21 +62,21 @@ public final class Matrix2x2FGenerator implements Generator<Matrix2x2D>
    * @return A generator
    */
 
-  public static Generator<Matrix2x2D> createNormal()
+  public static Generator<Matrix2x2F> createNormal()
   {
     return new Matrix2x2FGenerator(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_FLOAT_LOWER,
+      GeneratorConstants.BOUND_NORMAL_FLOAT_UPPER
     ));
   }
 
   @Override
-  public Matrix2x2D next()
+  public Matrix2x2F next()
   {
-    return Matrix2x2D.of(
-      this.gen.next().doubleValue(),
-      this.gen.next().doubleValue(),
-      this.gen.next().doubleValue(),
-      this.gen.next().doubleValue());
+    return Matrix2x2F.of(
+      this.gen.next().floatValue(),
+      this.gen.next().floatValue(),
+      this.gen.next().floatValue(),
+      this.gen.next().floatValue());
   }
 }

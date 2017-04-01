@@ -54,8 +54,8 @@ public final class PVector4DGenerator<T> implements Generator<PVector4D<T>>
   public static <T> Generator<PVector4D<T>> create()
   {
     return new PVector4DGenerator<>(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_LARGE_DOUBLE_UPPER
     ));
   }
 
@@ -71,8 +71,8 @@ public final class PVector4DGenerator<T> implements Generator<PVector4D<T>>
   public static <T> Generator<PVector4D<T>> createSmall()
   {
     return new PVector4DGenerator<>(PrimitiveGenerators.doubles(
-      -65536.0,
-      65536.0
+      GeneratorConstants.BOUND_SMALL_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_SMALL_DOUBLE_UPPER
     ));
   }
 
@@ -88,8 +88,8 @@ public final class PVector4DGenerator<T> implements Generator<PVector4D<T>>
   public static <T> Generator<PVector4D<T>> createNormal()
   {
     return new PVector4DGenerator<>(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_LOWER,
+      GeneratorConstants.BOUND_NORMAL_DOUBLE_UPPER
     ));
   }
 

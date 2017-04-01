@@ -98,6 +98,11 @@
         <artifactId>io7m-junreachable-core</artifactId>
         <version>[1.0.0, 2.0.0)</version>
       </dependency>
+      <dependency>
+        <groupId>com.io7m.jequality</groupId>
+        <artifactId>io7m-jequality-core</artifactId>
+        <version>[1.0.0, 2.0.0)</version>
+      </dependency>
 
       <dependency>
         <groupId>org.immutables</groupId>
@@ -110,6 +115,11 @@
         <version>1.1.8</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>[1.7.22, 1.8)</version>
+      </dependency>
       <dependency>
         <groupId>net.java.quickcheck</groupId>
         <artifactId>quickcheck</artifactId>

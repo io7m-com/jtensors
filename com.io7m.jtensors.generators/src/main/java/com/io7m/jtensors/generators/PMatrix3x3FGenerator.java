@@ -60,8 +60,8 @@ public final class PMatrix3x3FGenerator<A, B> implements Generator<PMatrix3x3F<A
   public static <A, B> Generator<PMatrix3x3F<A, B>> create()
   {
     return new PMatrix3x3FGenerator<>(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_FLOAT_LOWER,
+      GeneratorConstants.BOUND_LARGE_FLOAT_UPPER
     ));
   }
 
@@ -80,8 +80,8 @@ public final class PMatrix3x3FGenerator<A, B> implements Generator<PMatrix3x3F<A
   public static <A, B> Generator<PMatrix3x3F<A, B>> createNormal()
   {
     return new PMatrix3x3FGenerator<>(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_FLOAT_LOWER,
+      GeneratorConstants.BOUND_NORMAL_FLOAT_UPPER
     ));
   }
 

@@ -60,8 +60,8 @@ public final class PMatrix4x4FGenerator<A, B> implements Generator<PMatrix4x4F<A
   public static <A, B> Generator<PMatrix4x4F<A, B>> create()
   {
     return new PMatrix4x4FGenerator<>(PrimitiveGenerators.doubles(
-      -1.0e128,
-      1.0e128
+      GeneratorConstants.BOUND_LARGE_FLOAT_LOWER,
+      GeneratorConstants.BOUND_LARGE_FLOAT_UPPER
     ));
   }
 
@@ -80,8 +80,8 @@ public final class PMatrix4x4FGenerator<A, B> implements Generator<PMatrix4x4F<A
   public static <A, B> Generator<PMatrix4x4F<A, B>> createNormal()
   {
     return new PMatrix4x4FGenerator<>(PrimitiveGenerators.doubles(
-      -1.0,
-      1.0
+      GeneratorConstants.BOUND_NORMAL_FLOAT_LOWER,
+      GeneratorConstants.BOUND_NORMAL_FLOAT_UPPER
     ));
   }
 
