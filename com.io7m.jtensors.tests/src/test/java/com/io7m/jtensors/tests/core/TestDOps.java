@@ -18,14 +18,12 @@ package com.io7m.jtensors.tests.core;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D;
-import com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector2D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector3D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector4D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D;
-import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2D;

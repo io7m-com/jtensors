@@ -16,11 +16,8 @@
 
 package com.io7m.jtensors.tests.core.parameterized.vectors;
 
-import com.io7m.jtensors.core.parameterized.vectors.PVector2D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector2F;
-import com.io7m.jtensors.core.parameterized.vectors.PVector3D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector3F;
-import com.io7m.jtensors.core.parameterized.vectors.PVector4D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector4F;
 import org.junit.Assert;
 import org.junit.Rule;

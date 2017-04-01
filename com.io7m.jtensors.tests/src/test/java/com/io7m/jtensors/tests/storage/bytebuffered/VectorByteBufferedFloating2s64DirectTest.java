@@ -14,13 +14,29 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jtensors.core;
+package com.io7m.jtensors.tests.storage.bytebuffered;
 
-/**
- * The type of vectors intended for storage.
- */
+import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type;
+import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2s64;
+import com.io7m.jtensors.tests.core.TestDOps;
+import com.io7m.jtensors.tests.storage.api.VectorStorage2Contract;
 
-public interface VectorStorageType
+public final class VectorByteBufferedFloating2s64DirectTest extends
+  VectorStorage2Contract
 {
-  // No extra methods
+  @Override
+  protected void checkAlmostEqual(
+    final double a,
+    final double b)
+  {
+    TestDOps.checkAlmostEquals(a, b);
+  }
+
+  @Override
+  protected VectorStorageFloating2Type createWith2(
+    final double x,
+    final double y)
+  {
+    return VectorByteBufferedFloating2s64.createDirect();
+  }
 }
