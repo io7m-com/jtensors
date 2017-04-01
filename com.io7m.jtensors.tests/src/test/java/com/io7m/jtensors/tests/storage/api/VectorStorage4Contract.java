@@ -21,7 +21,6 @@ import com.io7m.jtensors.core.unparameterized.vectors.Vector4F;
 import com.io7m.jtensors.generators.Vector4DGenerator;
 import com.io7m.jtensors.generators.Vector4FGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type;
-import com.io7m.jtensors.tests.core.TestDOps;
 import net.java.quickcheck.Generator;
 import org.junit.Test;
 
@@ -40,12 +39,12 @@ public abstract class VectorStorage4Contract extends VectorStorage3Contract
 
   private Generator<Vector4D> createGenerator4D()
   {
-    return Vector4DGenerator.create();
+    return Vector4DGenerator.createNormal();
   }
 
   private Generator<Vector4F> createGenerator4F()
   {
-    return Vector4FGenerator.create();
+    return Vector4FGenerator.createNormal();
   }
 
   @Test

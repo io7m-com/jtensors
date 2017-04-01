@@ -94,7 +94,7 @@ public final class PMatrixByteBuffered2x2s32<A, B>
     return new PMatrixByteBuffered2x2s32<>(b);
   }
 
-  private static int indexUnsafe(
+  private static int index(
     final int row,
     final int column)
   {
@@ -104,69 +104,69 @@ public final class PMatrixByteBuffered2x2s32<A, B>
   @Override
   public double r0c0()
   {
-    return (double) this.view.get(indexUnsafe(0, 0));
+    return (double) this.view.get(index(0, 0));
   }
 
   @Override
   public double r0c1()
   {
-    return (double) this.view.get(indexUnsafe(0, 1));
+    return (double) this.view.get(index(0, 1));
   }
 
   @Override
   public double r1c0()
   {
-    return (double) this.view.get(indexUnsafe(1, 0));
+    return (double) this.view.get(index(1, 0));
   }
 
   @Override
   public double r1c1()
   {
-    return (double) this.view.get(indexUnsafe(1, 1));
+    return (double) this.view.get(index(1, 1));
   }
 
   @Override
   public void setMatrix2x2D(
     final Matrix2x2D m)
   {
-    this.view.put(indexUnsafe(0, 0), (float) m.r0c0());
-    this.view.put(indexUnsafe(0, 1), (float) m.r0c1());
+    this.view.put(index(0, 0), (float) m.r0c0());
+    this.view.put(index(0, 1), (float) m.r0c1());
 
-    this.view.put(indexUnsafe(1, 0), (float) m.r1c0());
-    this.view.put(indexUnsafe(1, 1), (float) m.r1c1());
+    this.view.put(index(1, 0), (float) m.r1c0());
+    this.view.put(index(1, 1), (float) m.r1c1());
   }
 
   @Override
   public void setMatrix2x2F(
     final Matrix2x2F m)
   {
-    this.view.put(indexUnsafe(0, 0), m.r0c0());
-    this.view.put(indexUnsafe(0, 1), m.r0c1());
+    this.view.put(index(0, 0), m.r0c0());
+    this.view.put(index(0, 1), m.r0c1());
 
-    this.view.put(indexUnsafe(1, 0), m.r1c0());
-    this.view.put(indexUnsafe(1, 1), m.r1c1());
+    this.view.put(index(1, 0), m.r1c0());
+    this.view.put(index(1, 1), m.r1c1());
   }
 
   @Override
   public void setPMatrix2x2D(
     final PMatrix2x2D<A, B> m)
   {
-    this.view.put(indexUnsafe(0, 0), (float) m.r0c0());
-    this.view.put(indexUnsafe(0, 1), (float) m.r0c1());
+    this.view.put(index(0, 0), (float) m.r0c0());
+    this.view.put(index(0, 1), (float) m.r0c1());
 
-    this.view.put(indexUnsafe(1, 0), (float) m.r1c0());
-    this.view.put(indexUnsafe(1, 1), (float) m.r1c1());
+    this.view.put(index(1, 0), (float) m.r1c0());
+    this.view.put(index(1, 1), (float) m.r1c1());
   }
 
   @Override
   public void setPMatrix2x2F(
     final PMatrix2x2F<A, B> m)
   {
-    this.view.put(indexUnsafe(0, 0), m.r0c0());
-    this.view.put(indexUnsafe(0, 1), m.r0c1());
+    this.view.put(index(0, 0), m.r0c0());
+    this.view.put(index(0, 1), m.r0c1());
 
-    this.view.put(indexUnsafe(1, 0), m.r1c0());
-    this.view.put(indexUnsafe(1, 1), m.r1c1());
+    this.view.put(index(1, 0), m.r1c0());
+    this.view.put(index(1, 1), m.r1c1());
   }
 
   @Override

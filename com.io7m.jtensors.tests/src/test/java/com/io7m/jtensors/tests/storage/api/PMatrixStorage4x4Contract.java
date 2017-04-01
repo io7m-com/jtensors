@@ -26,17 +26,17 @@ import org.junit.Test;
 
 public abstract class PMatrixStorage4x4Contract extends MatrixStorage4x4Contract
 {
-  protected abstract PMatrixStorage4x4Type<Object, Object> createIdentity();
-
   private static Generator<PMatrix4x4D<Object, Object>> createGeneratorP4x4D()
   {
-    return PMatrix4x4DGenerator.create();
+    return PMatrix4x4DGenerator.createNormal();
   }
 
   private static Generator<PMatrix4x4F<Object, Object>> createGeneratorP4x4F()
   {
-    return PMatrix4x4FGenerator.create();
+    return PMatrix4x4FGenerator.createNormal();
   }
+
+  protected abstract PMatrixStorage4x4Type<Object, Object> createIdentity();
 
   @Test
   public final void testGetSetPV4D()

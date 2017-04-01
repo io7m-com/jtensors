@@ -26,21 +26,21 @@ import org.junit.Test;
 
 public abstract class MatrixStorage4x4Contract
 {
+  private static Generator<Matrix4x4D> createGeneratorP4x4D()
+  {
+    return Matrix4x4DGenerator.createNormal();
+  }
+
+  private static Generator<Matrix4x4F> createGeneratorP4x4F()
+  {
+    return Matrix4x4FGenerator.createNormal();
+  }
+
   protected abstract void checkAlmostEqual(
     double a,
     double b);
 
   protected abstract MatrixStorage4x4Type createIdentity();
-
-  private static Generator<Matrix4x4D> createGeneratorP4x4D()
-  {
-    return Matrix4x4DGenerator.create();
-  }
-
-  private static Generator<Matrix4x4F> createGeneratorP4x4F()
-  {
-    return Matrix4x4FGenerator.create();
-  }
 
   @Test
   public final void testGetSetV4D()
@@ -52,12 +52,12 @@ public abstract class MatrixStorage4x4Contract
 
     for (int row = 0; row < 4; ++row) {
       for (int column = 0; column < 4; ++column) {
-        this.checkAlmostEqual(
-          m.rowColumn(row, column),
-          sv.rowColumn(row, column));
+        final double exp = m.rowColumn(row, column);
+        final double rec = sv.rowColumn(row, column);
+        this.checkAlmostEqual(exp, rec);
       }
     }
-    
+
     this.checkAlmostEqual(m.r0c0(), sv.r0c0());
     this.checkAlmostEqual(m.r0c1(), sv.r0c1());
     this.checkAlmostEqual(m.r0c2(), sv.r0c2());

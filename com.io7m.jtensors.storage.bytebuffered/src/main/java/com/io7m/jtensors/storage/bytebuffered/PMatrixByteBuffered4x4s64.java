@@ -94,7 +94,7 @@ public final class PMatrixByteBuffered4x4s64<A, B>
     return new PMatrixByteBuffered4x4s64<>(b);
   }
 
-  private static int indexUnsafe(
+  private static int index(
     final int row,
     final int column)
   {
@@ -104,197 +104,197 @@ public final class PMatrixByteBuffered4x4s64<A, B>
   @Override
   public double r0c0()
   {
-    return this.view.get(indexUnsafe(0, 0));
+    return this.view.get(index(0, 0));
   }
 
   @Override
   public double r0c1()
   {
-    return this.view.get(indexUnsafe(0, 1));
+    return this.view.get(index(0, 1));
   }
 
   @Override
   public double r0c2()
   {
-    return this.view.get(indexUnsafe(0, 2));
+    return this.view.get(index(0, 2));
   }
 
   @Override
   public double r0c3()
   {
-    return this.view.get(indexUnsafe(0, 3));
+    return this.view.get(index(0, 3));
   }
 
   @Override
   public double r1c0()
   {
-    return this.view.get(indexUnsafe(1, 0));
+    return this.view.get(index(1, 0));
   }
 
   @Override
   public double r1c1()
   {
-    return this.view.get(indexUnsafe(1, 1));
+    return this.view.get(index(1, 1));
   }
 
   @Override
   public double r1c2()
   {
-    return this.view.get(indexUnsafe(1, 2));
+    return this.view.get(index(1, 2));
   }
 
   @Override
   public double r1c3()
   {
-    return this.view.get(indexUnsafe(1, 3));
+    return this.view.get(index(1, 3));
   }
 
   @Override
   public double r2c0()
   {
-    return this.view.get(indexUnsafe(2, 0));
+    return this.view.get(index(2, 0));
   }
 
   @Override
   public double r2c1()
   {
-    return this.view.get(indexUnsafe(2, 1));
+    return this.view.get(index(2, 1));
   }
 
   @Override
   public double r2c2()
   {
-    return this.view.get(indexUnsafe(2, 2));
+    return this.view.get(index(2, 2));
   }
 
   @Override
   public double r2c3()
   {
-    return this.view.get(indexUnsafe(2, 3));
+    return this.view.get(index(2, 3));
   }
 
   @Override
   public double r3c0()
   {
-    return this.view.get(indexUnsafe(3, 0));
+    return this.view.get(index(3, 0));
   }
 
   @Override
   public double r3c1()
   {
-    return this.view.get(indexUnsafe(3, 1));
+    return this.view.get(index(3, 1));
   }
 
   @Override
   public double r3c2()
   {
-    return this.view.get(indexUnsafe(3, 2));
+    return this.view.get(index(3, 2));
   }
 
   @Override
   public double r3c3()
   {
-    return this.view.get(indexUnsafe(3, 3));
+    return this.view.get(index(3, 3));
   }
 
   @Override
   public void setMatrix4x4D(
     final Matrix4x4D m)
   {
-    this.view.put(indexUnsafe(0, 0), m.r0c0());
-    this.view.put(indexUnsafe(0, 1), m.r0c1());
-    this.view.put(indexUnsafe(0, 2), m.r0c2());
-    this.view.put(indexUnsafe(0, 3), m.r0c3());
+    this.view.put(index(0, 0), m.r0c0());
+    this.view.put(index(0, 1), m.r0c1());
+    this.view.put(index(0, 2), m.r0c2());
+    this.view.put(index(0, 3), m.r0c3());
 
-    this.view.put(indexUnsafe(1, 0), m.r1c0());
-    this.view.put(indexUnsafe(1, 1), m.r1c1());
-    this.view.put(indexUnsafe(1, 2), m.r1c2());
-    this.view.put(indexUnsafe(1, 3), m.r1c3());
+    this.view.put(index(1, 0), m.r1c0());
+    this.view.put(index(1, 1), m.r1c1());
+    this.view.put(index(1, 2), m.r1c2());
+    this.view.put(index(1, 3), m.r1c3());
 
-    this.view.put(indexUnsafe(2, 0), m.r2c0());
-    this.view.put(indexUnsafe(2, 1), m.r2c1());
-    this.view.put(indexUnsafe(2, 2), m.r2c2());
-    this.view.put(indexUnsafe(2, 3), m.r2c3());
+    this.view.put(index(2, 0), m.r2c0());
+    this.view.put(index(2, 1), m.r2c1());
+    this.view.put(index(2, 2), m.r2c2());
+    this.view.put(index(2, 3), m.r2c3());
 
-    this.view.put(indexUnsafe(3, 0), m.r3c0());
-    this.view.put(indexUnsafe(3, 1), m.r3c1());
-    this.view.put(indexUnsafe(3, 2), m.r3c2());
-    this.view.put(indexUnsafe(3, 3), m.r3c3());
+    this.view.put(index(3, 0), m.r3c0());
+    this.view.put(index(3, 1), m.r3c1());
+    this.view.put(index(3, 2), m.r3c2());
+    this.view.put(index(3, 3), m.r3c3());
   }
 
   @Override
   public void setMatrix4x4F(
     final Matrix4x4F m)
   {
-    this.view.put(indexUnsafe(0, 0), (double) m.r0c0());
-    this.view.put(indexUnsafe(0, 1), (double) m.r0c1());
-    this.view.put(indexUnsafe(0, 2), (double) m.r0c2());
-    this.view.put(indexUnsafe(0, 3), (double) m.r0c3());
+    this.view.put(index(0, 0), (double) m.r0c0());
+    this.view.put(index(0, 1), (double) m.r0c1());
+    this.view.put(index(0, 2), (double) m.r0c2());
+    this.view.put(index(0, 3), (double) m.r0c3());
 
-    this.view.put(indexUnsafe(1, 0), (double) m.r1c0());
-    this.view.put(indexUnsafe(1, 1), (double) m.r1c1());
-    this.view.put(indexUnsafe(1, 2), (double) m.r1c2());
-    this.view.put(indexUnsafe(1, 3), (double) m.r1c3());
+    this.view.put(index(1, 0), (double) m.r1c0());
+    this.view.put(index(1, 1), (double) m.r1c1());
+    this.view.put(index(1, 2), (double) m.r1c2());
+    this.view.put(index(1, 3), (double) m.r1c3());
 
-    this.view.put(indexUnsafe(2, 0), (double) m.r2c0());
-    this.view.put(indexUnsafe(2, 1), (double) m.r2c1());
-    this.view.put(indexUnsafe(2, 2), (double) m.r2c2());
-    this.view.put(indexUnsafe(2, 3), (double) m.r2c3());
+    this.view.put(index(2, 0), (double) m.r2c0());
+    this.view.put(index(2, 1), (double) m.r2c1());
+    this.view.put(index(2, 2), (double) m.r2c2());
+    this.view.put(index(2, 3), (double) m.r2c3());
 
-    this.view.put(indexUnsafe(3, 0), (double) m.r3c0());
-    this.view.put(indexUnsafe(3, 1), (double) m.r3c1());
-    this.view.put(indexUnsafe(3, 2), (double) m.r3c2());
-    this.view.put(indexUnsafe(3, 3), (double) m.r3c3());
+    this.view.put(index(3, 0), (double) m.r3c0());
+    this.view.put(index(3, 1), (double) m.r3c1());
+    this.view.put(index(3, 2), (double) m.r3c2());
+    this.view.put(index(3, 3), (double) m.r3c3());
   }
 
   @Override
   public void setPMatrix4x4D(
     final PMatrix4x4D<A, B> m)
   {
-    this.view.put(indexUnsafe(0, 0), m.r0c0());
-    this.view.put(indexUnsafe(0, 1), m.r0c1());
-    this.view.put(indexUnsafe(0, 2), m.r0c2());
-    this.view.put(indexUnsafe(0, 3), m.r0c3());
+    this.view.put(index(0, 0), m.r0c0());
+    this.view.put(index(0, 1), m.r0c1());
+    this.view.put(index(0, 2), m.r0c2());
+    this.view.put(index(0, 3), m.r0c3());
 
-    this.view.put(indexUnsafe(1, 0), m.r1c0());
-    this.view.put(indexUnsafe(1, 1), m.r1c1());
-    this.view.put(indexUnsafe(1, 2), m.r1c2());
-    this.view.put(indexUnsafe(1, 3), m.r1c3());
+    this.view.put(index(1, 0), m.r1c0());
+    this.view.put(index(1, 1), m.r1c1());
+    this.view.put(index(1, 2), m.r1c2());
+    this.view.put(index(1, 3), m.r1c3());
 
-    this.view.put(indexUnsafe(2, 0), m.r2c0());
-    this.view.put(indexUnsafe(2, 1), m.r2c1());
-    this.view.put(indexUnsafe(2, 2), m.r2c2());
-    this.view.put(indexUnsafe(2, 3), m.r2c3());
+    this.view.put(index(2, 0), m.r2c0());
+    this.view.put(index(2, 1), m.r2c1());
+    this.view.put(index(2, 2), m.r2c2());
+    this.view.put(index(2, 3), m.r2c3());
 
-    this.view.put(indexUnsafe(3, 0), m.r3c0());
-    this.view.put(indexUnsafe(3, 1), m.r3c1());
-    this.view.put(indexUnsafe(3, 2), m.r3c2());
-    this.view.put(indexUnsafe(3, 3), m.r3c3());
+    this.view.put(index(3, 0), m.r3c0());
+    this.view.put(index(3, 1), m.r3c1());
+    this.view.put(index(3, 2), m.r3c2());
+    this.view.put(index(3, 3), m.r3c3());
   }
 
   @Override
   public void setPMatrix4x4F(
     final PMatrix4x4F<A, B> m)
   {
-    this.view.put(indexUnsafe(0, 0), (double) m.r0c0());
-    this.view.put(indexUnsafe(0, 1), (double) m.r0c1());
-    this.view.put(indexUnsafe(0, 2), (double) m.r0c2());
-    this.view.put(indexUnsafe(0, 3), (double) m.r0c3());
+    this.view.put(index(0, 0), (double) m.r0c0());
+    this.view.put(index(0, 1), (double) m.r0c1());
+    this.view.put(index(0, 2), (double) m.r0c2());
+    this.view.put(index(0, 3), (double) m.r0c3());
 
-    this.view.put(indexUnsafe(1, 0), (double) m.r1c0());
-    this.view.put(indexUnsafe(1, 1), (double) m.r1c1());
-    this.view.put(indexUnsafe(1, 2), (double) m.r1c2());
-    this.view.put(indexUnsafe(1, 3), (double) m.r1c3());
+    this.view.put(index(1, 0), (double) m.r1c0());
+    this.view.put(index(1, 1), (double) m.r1c1());
+    this.view.put(index(1, 2), (double) m.r1c2());
+    this.view.put(index(1, 3), (double) m.r1c3());
 
-    this.view.put(indexUnsafe(2, 0), (double) m.r2c0());
-    this.view.put(indexUnsafe(2, 1), (double) m.r2c1());
-    this.view.put(indexUnsafe(2, 2), (double) m.r2c2());
-    this.view.put(indexUnsafe(2, 3), (double) m.r2c3());
+    this.view.put(index(2, 0), (double) m.r2c0());
+    this.view.put(index(2, 1), (double) m.r2c1());
+    this.view.put(index(2, 2), (double) m.r2c2());
+    this.view.put(index(2, 3), (double) m.r2c3());
 
-    this.view.put(indexUnsafe(3, 0), (double) m.r3c0());
-    this.view.put(indexUnsafe(3, 1), (double) m.r3c1());
-    this.view.put(indexUnsafe(3, 2), (double) m.r3c2());
-    this.view.put(indexUnsafe(3, 3), (double) m.r3c3());
+    this.view.put(index(3, 0), (double) m.r3c0());
+    this.view.put(index(3, 1), (double) m.r3c1());
+    this.view.put(index(3, 2), (double) m.r3c2());
+    this.view.put(index(3, 3), (double) m.r3c3());
   }
 
   @Override

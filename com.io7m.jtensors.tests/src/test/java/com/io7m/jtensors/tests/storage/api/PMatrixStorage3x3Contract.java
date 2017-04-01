@@ -26,17 +26,17 @@ import org.junit.Test;
 
 public abstract class PMatrixStorage3x3Contract extends MatrixStorage3x3Contract
 {
-  protected abstract PMatrixStorage3x3Type<Object, Object> createIdentity();
-
   private static Generator<PMatrix3x3D<Object, Object>> createGeneratorP3x3D()
   {
-    return PMatrix3x3DGenerator.create();
+    return PMatrix3x3DGenerator.createNormal();
   }
 
   private static Generator<PMatrix3x3F<Object, Object>> createGeneratorP3x3F()
   {
-    return PMatrix3x3FGenerator.create();
+    return PMatrix3x3FGenerator.createNormal();
   }
+
+  protected abstract PMatrixStorage3x3Type<Object, Object> createIdentity();
 
   @Test
   public final void testGetSetPV3D()

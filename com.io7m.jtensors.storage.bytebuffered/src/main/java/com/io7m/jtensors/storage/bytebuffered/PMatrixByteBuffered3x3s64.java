@@ -94,7 +94,7 @@ public final class PMatrixByteBuffered3x3s64<A, B>
     return new PMatrixByteBuffered3x3s64<>(b);
   }
 
-  private static int indexUnsafe(
+  private static int index(
     final int row,
     final int column)
   {
@@ -104,123 +104,123 @@ public final class PMatrixByteBuffered3x3s64<A, B>
   @Override
   public double r0c0()
   {
-    return this.view.get(indexUnsafe(0, 0));
+    return this.view.get(index(0, 0));
   }
 
   @Override
   public double r0c1()
   {
-    return this.view.get(indexUnsafe(0, 1));
+    return this.view.get(index(0, 1));
   }
 
   @Override
   public double r0c2()
   {
-    return this.view.get(indexUnsafe(0, 2));
+    return this.view.get(index(0, 2));
   }
 
   @Override
   public double r1c0()
   {
-    return this.view.get(indexUnsafe(1, 0));
+    return this.view.get(index(1, 0));
   }
 
   @Override
   public double r1c1()
   {
-    return this.view.get(indexUnsafe(1, 1));
+    return this.view.get(index(1, 1));
   }
 
   @Override
   public double r1c2()
   {
-    return this.view.get(indexUnsafe(1, 2));
+    return this.view.get(index(1, 2));
   }
 
   @Override
   public double r2c0()
   {
-    return this.view.get(indexUnsafe(2, 0));
+    return this.view.get(index(2, 0));
   }
 
   @Override
   public double r2c1()
   {
-    return this.view.get(indexUnsafe(2, 1));
+    return this.view.get(index(2, 1));
   }
 
   @Override
   public double r2c2()
   {
-    return this.view.get(indexUnsafe(2, 2));
+    return this.view.get(index(2, 2));
   }
 
   @Override
   public void setMatrix3x3D(
     final Matrix3x3D m)
   {
-    this.view.put(indexUnsafe(0, 0), m.r0c0());
-    this.view.put(indexUnsafe(0, 1), m.r0c1());
-    this.view.put(indexUnsafe(0, 2), m.r0c2());
+    this.view.put(index(0, 0), m.r0c0());
+    this.view.put(index(0, 1), m.r0c1());
+    this.view.put(index(0, 2), m.r0c2());
 
-    this.view.put(indexUnsafe(1, 0), m.r1c0());
-    this.view.put(indexUnsafe(1, 1), m.r1c1());
-    this.view.put(indexUnsafe(1, 2), m.r1c2());
+    this.view.put(index(1, 0), m.r1c0());
+    this.view.put(index(1, 1), m.r1c1());
+    this.view.put(index(1, 2), m.r1c2());
 
-    this.view.put(indexUnsafe(2, 0), m.r2c0());
-    this.view.put(indexUnsafe(2, 1), m.r2c1());
-    this.view.put(indexUnsafe(2, 2), m.r2c2());
+    this.view.put(index(2, 0), m.r2c0());
+    this.view.put(index(2, 1), m.r2c1());
+    this.view.put(index(2, 2), m.r2c2());
   }
 
   @Override
   public void setMatrix3x3F(
     final Matrix3x3F m)
   {
-    this.view.put(indexUnsafe(0, 0), (double) m.r0c0());
-    this.view.put(indexUnsafe(0, 1), (double) m.r0c1());
-    this.view.put(indexUnsafe(0, 2), (double) m.r0c2());
+    this.view.put(index(0, 0), (double) m.r0c0());
+    this.view.put(index(0, 1), (double) m.r0c1());
+    this.view.put(index(0, 2), (double) m.r0c2());
 
-    this.view.put(indexUnsafe(1, 0), (double) m.r1c0());
-    this.view.put(indexUnsafe(1, 1), (double) m.r1c1());
-    this.view.put(indexUnsafe(1, 2), (double) m.r1c2());
+    this.view.put(index(1, 0), (double) m.r1c0());
+    this.view.put(index(1, 1), (double) m.r1c1());
+    this.view.put(index(1, 2), (double) m.r1c2());
 
-    this.view.put(indexUnsafe(2, 0), (double) m.r2c0());
-    this.view.put(indexUnsafe(2, 1), (double) m.r2c1());
-    this.view.put(indexUnsafe(2, 2), (double) m.r2c2());
+    this.view.put(index(2, 0), (double) m.r2c0());
+    this.view.put(index(2, 1), (double) m.r2c1());
+    this.view.put(index(2, 2), (double) m.r2c2());
   }
 
   @Override
   public void setPMatrix3x3D(
     final PMatrix3x3D<A, B> m)
   {
-    this.view.put(indexUnsafe(0, 0), m.r0c0());
-    this.view.put(indexUnsafe(0, 1), m.r0c1());
-    this.view.put(indexUnsafe(0, 2), m.r0c2());
+    this.view.put(index(0, 0), m.r0c0());
+    this.view.put(index(0, 1), m.r0c1());
+    this.view.put(index(0, 2), m.r0c2());
 
-    this.view.put(indexUnsafe(1, 0), m.r1c0());
-    this.view.put(indexUnsafe(1, 1), m.r1c1());
-    this.view.put(indexUnsafe(1, 2), m.r1c2());
+    this.view.put(index(1, 0), m.r1c0());
+    this.view.put(index(1, 1), m.r1c1());
+    this.view.put(index(1, 2), m.r1c2());
 
-    this.view.put(indexUnsafe(2, 0), m.r2c0());
-    this.view.put(indexUnsafe(2, 1), m.r2c1());
-    this.view.put(indexUnsafe(2, 2), m.r2c2());
+    this.view.put(index(2, 0), m.r2c0());
+    this.view.put(index(2, 1), m.r2c1());
+    this.view.put(index(2, 2), m.r2c2());
   }
 
   @Override
   public void setPMatrix3x3F(
     final PMatrix3x3F<A, B> m)
   {
-    this.view.put(indexUnsafe(0, 0), (double) m.r0c0());
-    this.view.put(indexUnsafe(0, 1), (double) m.r0c1());
-    this.view.put(indexUnsafe(0, 2), (double) m.r0c2());
+    this.view.put(index(0, 0), (double) m.r0c0());
+    this.view.put(index(0, 1), (double) m.r0c1());
+    this.view.put(index(0, 2), (double) m.r0c2());
 
-    this.view.put(indexUnsafe(1, 0), (double) m.r1c0());
-    this.view.put(indexUnsafe(1, 1), (double) m.r1c1());
-    this.view.put(indexUnsafe(1, 2), (double) m.r1c2());
+    this.view.put(index(1, 0), (double) m.r1c0());
+    this.view.put(index(1, 1), (double) m.r1c1());
+    this.view.put(index(1, 2), (double) m.r1c2());
 
-    this.view.put(indexUnsafe(2, 0), (double) m.r2c0());
-    this.view.put(indexUnsafe(2, 1), (double) m.r2c1());
-    this.view.put(indexUnsafe(2, 2), (double) m.r2c2());
+    this.view.put(index(2, 0), (double) m.r2c0());
+    this.view.put(index(2, 1), (double) m.r2c1());
+    this.view.put(index(2, 2), (double) m.r2c2());
   }
 
   @Override

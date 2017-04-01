@@ -21,7 +21,6 @@ import com.io7m.jtensors.core.parameterized.vectors.PVector2F;
 import com.io7m.jtensors.generators.PVector2DGenerator;
 import com.io7m.jtensors.generators.PVector2FGenerator;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type;
-import com.io7m.jtensors.tests.core.TestDOps;
 import net.java.quickcheck.Generator;
 import org.junit.Test;
 
@@ -38,12 +37,12 @@ public abstract class PVectorStorage2Contract extends VectorStorage2Contract
 
   private Generator<PVector2D<Object>> createGeneratorP2D()
   {
-    return PVector2DGenerator.create();
+    return PVector2DGenerator.createNormal();
   }
 
   private Generator<PVector2F<Object>> createGeneratorP2F()
   {
-    return PVector2FGenerator.create();
+    return PVector2FGenerator.createNormal();
   }
 
   @Test

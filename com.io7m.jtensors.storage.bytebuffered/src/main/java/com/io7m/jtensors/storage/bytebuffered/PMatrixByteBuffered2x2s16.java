@@ -16,6 +16,8 @@
 
 package com.io7m.jtensors.storage.bytebuffered;
 
+
+import com.io7m.ieee754b16.Binary16;
 import com.io7m.jnull.NullCheck;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F;
@@ -24,11 +26,11 @@ import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
+import java.nio.CharBuffer;
 
 /**
  * <p>A storage matrix.</p>
- * <p>Storage component type: {@code double}</p>
+ * <p>Storage component type: {@code binary16}</p>
  * <p>Storage component count: {@code 2x2}</p>
  *
  * @param <A> A phantom type parameter (possibly representing a source
@@ -37,17 +39,17 @@ import java.nio.DoubleBuffer;
  *            coordinate system)
  */
 
-public final class PMatrixByteBuffered2x2s64<A, B>
-  implements PMatrixByteBuffered2x2Type<A, B>
+public final class PMatrixByteBuffered2x2s16<A, B> implements
+  PMatrixByteBuffered2x2Type<A, B>
 {
-  private final DoubleBuffer view;
+  private final CharBuffer view;
   private final ByteBuffer buffer;
 
-  private PMatrixByteBuffered2x2s64(
+  private PMatrixByteBuffered2x2s16(
     final ByteBuffer bb)
   {
     this.buffer = NullCheck.notNull(bb, "Buffer");
-    this.view = this.buffer.asDoubleBuffer();
+    this.view = this.buffer.asCharBuffer();
   }
 
   /**
@@ -61,7 +63,7 @@ public final class PMatrixByteBuffered2x2s64<A, B>
 
   public static <A, B> PMatrixByteBuffered2x2Type<A, B> createHeap()
   {
-    return createWith(ByteBuffer.allocate((2 * 2) * 8).order(ByteOrder.nativeOrder()));
+    return createWith(ByteBuffer.allocate((2 * 2) * 2).order(ByteOrder.nativeOrder()));
   }
 
   /**
@@ -75,7 +77,7 @@ public final class PMatrixByteBuffered2x2s64<A, B>
 
   public static <A, B> PMatrixByteBuffered2x2Type<A, B> createDirect()
   {
-    return createWith(ByteBuffer.allocateDirect((2 * 2) * 8).order(ByteOrder.nativeOrder()));
+    return createWith(ByteBuffer.allocateDirect((2 * 2) * 2).order(ByteOrder.nativeOrder()));
   }
 
   /**
@@ -91,7 +93,7 @@ public final class PMatrixByteBuffered2x2s64<A, B>
   public static <A, B> PMatrixByteBuffered2x2Type<A, B> createWith(
     final ByteBuffer b)
   {
-    return new PMatrixByteBuffered2x2s64<>(b);
+    return new PMatrixByteBuffered2x2s16<>(b);
   }
 
   private static int index(
@@ -104,69 +106,69 @@ public final class PMatrixByteBuffered2x2s64<A, B>
   @Override
   public double r0c0()
   {
-    return this.view.get(index(0, 0));
+    return Binary16.unpackDouble(this.view.get(index(0, 0)));
   }
 
   @Override
   public double r0c1()
   {
-    return this.view.get(index(0, 1));
+    return Binary16.unpackDouble(this.view.get(index(0, 1)));
   }
 
   @Override
   public double r1c0()
   {
-    return this.view.get(index(1, 0));
+    return Binary16.unpackDouble(this.view.get(index(1, 0)));
   }
 
   @Override
   public double r1c1()
   {
-    return this.view.get(index(1, 1));
+    return Binary16.unpackDouble(this.view.get(index(1, 1)));
   }
 
   @Override
   public void setMatrix2x2D(
     final Matrix2x2D m)
   {
-    this.view.put(index(0, 0), m.r0c0());
-    this.view.put(index(0, 1), m.r0c1());
+    this.view.put(index(0, 0), Binary16.packDouble(m.r0c0()));
+    this.view.put(index(0, 1), Binary16.packDouble(m.r0c1()));
 
-    this.view.put(index(1, 0), m.r1c0());
-    this.view.put(index(1, 1), m.r1c1());
+    this.view.put(index(1, 0), Binary16.packDouble(m.r1c0()));
+    this.view.put(index(1, 1), Binary16.packDouble(m.r1c1()));
   }
 
   @Override
   public void setMatrix2x2F(
     final Matrix2x2F m)
   {
-    this.view.put(index(0, 0), (double) m.r0c0());
-    this.view.put(index(0, 1), (double) m.r0c1());
+    this.view.put(index(0, 0), Binary16.packDouble(m.r0c0()));
+    this.view.put(index(0, 1), Binary16.packDouble(m.r0c1()));
 
-    this.view.put(index(1, 0), (double) m.r1c0());
-    this.view.put(index(1, 1), (double) m.r1c1());
+    this.view.put(index(1, 0), Binary16.packDouble(m.r1c0()));
+    this.view.put(index(1, 1), Binary16.packDouble(m.r1c1()));
   }
 
   @Override
   public void setPMatrix2x2D(
     final PMatrix2x2D<A, B> m)
   {
-    this.view.put(index(0, 0), m.r0c0());
-    this.view.put(index(0, 1), m.r0c1());
+    this.view.put(index(0, 0), Binary16.packDouble(m.r0c0()));
+    this.view.put(index(0, 1), Binary16.packDouble(m.r0c1()));
 
-    this.view.put(index(1, 0), m.r1c0());
-    this.view.put(index(1, 1), m.r1c1());
+    this.view.put(index(1, 0), Binary16.packDouble(m.r1c0()));
+    this.view.put(index(1, 1), Binary16.packDouble(m.r1c1()));
   }
 
   @Override
   public void setPMatrix2x2F(
     final PMatrix2x2F<A, B> m)
   {
-    this.view.put(index(0, 0), (double) m.r0c0());
-    this.view.put(index(0, 1), (double) m.r0c1());
+    this.view.put(index(0, 0), Binary16.packDouble(m.r0c0()));
+    this.view.put(index(0, 1), Binary16.packDouble(m.r0c1()));
 
-    this.view.put(index(1, 0), (double) m.r1c0());
-    this.view.put(index(1, 1), (double) m.r1c1());
+    this.view.put(index(1, 0), Binary16.packDouble(m.r1c0()));
+    this.view.put(index(1, 1), Binary16.packDouble(m.r1c1()));
   }
 
   @Override

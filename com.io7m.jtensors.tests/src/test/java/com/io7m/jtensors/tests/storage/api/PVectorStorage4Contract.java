@@ -31,7 +31,6 @@ import com.io7m.jtensors.generators.PVector4FGenerator;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating4Type;
-import com.io7m.jtensors.tests.core.TestDOps;
 import net.java.quickcheck.Generator;
 import org.junit.Test;
 
@@ -50,12 +49,12 @@ public abstract class PVectorStorage4Contract extends VectorStorage4Contract
 
   private Generator<PVector4D<Object>> createGeneratorP4D()
   {
-    return PVector4DGenerator.create();
+    return PVector4DGenerator.createNormal();
   }
 
   private Generator<PVector4F<Object>> createGeneratorP4F()
   {
-    return PVector4FGenerator.create();
+    return PVector4FGenerator.createNormal();
   }
 
   protected abstract PVectorStorageFloating3Type<Object> createWithP3(
@@ -70,12 +69,12 @@ public abstract class PVectorStorage4Contract extends VectorStorage4Contract
 
   private Generator<PVector3D<Object>> createGeneratorP3D()
   {
-    return PVector3DGenerator.create();
+    return PVector3DGenerator.createNormal();
   }
 
   private Generator<PVector3F<Object>> createGeneratorP3F()
   {
-    return PVector3FGenerator.create();
+    return PVector3FGenerator.createNormal();
   }
 
   protected abstract PVectorStorageFloating2Type<Object> createWithP2(
@@ -89,12 +88,12 @@ public abstract class PVectorStorage4Contract extends VectorStorage4Contract
 
   private Generator<PVector2D<Object>> createGeneratorP2D()
   {
-    return PVector2DGenerator.create();
+    return PVector2DGenerator.createNormal();
   }
 
   private Generator<PVector2F<Object>> createGeneratorP2F()
   {
-    return PVector2FGenerator.create();
+    return PVector2FGenerator.createNormal();
   }
 
   @Test

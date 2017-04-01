@@ -26,21 +26,21 @@ import org.junit.Test;
 
 public abstract class MatrixStorage3x3Contract
 {
+  private static Generator<Matrix3x3D> createGeneratorP3x3D()
+  {
+    return Matrix3x3DGenerator.createNormal();
+  }
+
+  private static Generator<Matrix3x3F> createGeneratorP3x3F()
+  {
+    return Matrix3x3FGenerator.createNormal();
+  }
+
   protected abstract void checkAlmostEqual(
     double a,
     double b);
 
   protected abstract MatrixStorage3x3Type createIdentity();
-
-  private static Generator<Matrix3x3D> createGeneratorP3x3D()
-  {
-    return Matrix3x3DGenerator.create();
-  }
-
-  private static Generator<Matrix3x3F> createGeneratorP3x3F()
-  {
-    return Matrix3x3FGenerator.create();
-  }
 
   @Test
   public final void testGetSetV3D()

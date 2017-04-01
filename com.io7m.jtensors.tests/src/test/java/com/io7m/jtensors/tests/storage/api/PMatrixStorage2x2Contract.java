@@ -26,17 +26,17 @@ import org.junit.Test;
 
 public abstract class PMatrixStorage2x2Contract extends MatrixStorage2x2Contract
 {
-  protected abstract PMatrixStorage2x2Type<Object, Object> createIdentity();
-
   private static Generator<PMatrix2x2D<Object, Object>> createGeneratorP2x2D()
   {
-    return PMatrix2x2DGenerator.create();
+    return PMatrix2x2DGenerator.createNormal();
   }
 
   private static Generator<PMatrix2x2F<Object, Object>> createGeneratorP2x2F()
   {
-    return PMatrix2x2FGenerator.create();
+    return PMatrix2x2FGenerator.createNormal();
   }
+
+  protected abstract PMatrixStorage2x2Type<Object, Object> createIdentity();
 
   @Test
   public final void testGetSetPV2D()

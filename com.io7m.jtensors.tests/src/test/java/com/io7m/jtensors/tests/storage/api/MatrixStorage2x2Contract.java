@@ -26,21 +26,21 @@ import org.junit.Test;
 
 public abstract class MatrixStorage2x2Contract
 {
+  private static Generator<Matrix2x2D> createGeneratorP2x2D()
+  {
+    return Matrix2x2DGenerator.createNormal();
+  }
+
+  private static Generator<Matrix2x2F> createGeneratorP2x2F()
+  {
+    return Matrix2x2FGenerator.createNormal();
+  }
+
   protected abstract void checkAlmostEqual(
     double a,
     double b);
 
   protected abstract MatrixStorage2x2Type createIdentity();
-
-  private static Generator<Matrix2x2D> createGeneratorP2x2D()
-  {
-    return Matrix2x2DGenerator.create();
-  }
-
-  private static Generator<Matrix2x2F> createGeneratorP2x2F()
-  {
-    return Matrix2x2FGenerator.create();
-  }
 
   @Test
   public final void testGetSetV2D()
