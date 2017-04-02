@@ -289,7 +289,7 @@ public final class <className>
   }
 
   @Test
-  @PercentagePassing(passPercent = 80.0)
+  @PercentagePassing
   public void testDotProductSelfMagnitudeSquared()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
