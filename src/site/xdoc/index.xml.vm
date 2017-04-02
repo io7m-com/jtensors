@@ -5,7 +5,7 @@
   xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
   <properties>
-    <title>io7m-jtensors</title>
+    <title>jtensors</title>
   </properties>
 
   <body>
@@ -23,20 +23,11 @@
       <ul>
         <li>2D, 3D, and 4D immutable vector types in <tt>float</tt> and <tt>double</tt> versions.</li>
         <li>2D, 3D, and 4D immutable vector types in <tt>int</tt> and <tt>long</tt> versions.</li>
-        <li>2D, 3D, and 4D mutable vector types in <tt>float</tt> and <tt>double</tt> versions.</li>
-        <li>2D, 3D, and 4D mutable vector types in <tt>int</tt> and <tt>long</tt> versions.</li>
         <li>4D immutable quaternion types in <tt>float</tt> and <tt>double</tt> versions.</li>
-        <li>4D mutable quaternion types in <tt>float</tt> and <tt>double</tt> versions.</li>
         <li>2x2, 3x3, and 4x4 mutable matrix types in <tt>float</tt> and <tt>double</tt> versions.</li>
-        <li>Packed vectors/matrices: Operate on matrices and vectors that are packed into a large shared ByteBuffer.</li>
-        <li>Simple heap-backed vectors/matrices: For when a simple Java 2D array is good enough.</li>
-        <li>Direct-memory-backed matrix types in column-major order for efficient interfacing with OpenGL and native code.</li>
-        <li>Heavily partitioned by interfaces: Write code that is generalized over matrix/vector representations. Easily wrap third-party vector libraries for uniformity!</li>
-        <li>Memory efficient: All functions that require extra temporary memory take programmer-provided constant-sized temporary storage, reusable per-thread for the lifetime of the program - all code paths for mutable types are allocation-free.</li>
         <li>Phantom-typed variants of all types for statically distinguishing between semantically different but otherwise type-compatible vectors and matrices.</li>
-        <li>Support for packed IEEE 764 binary16 vectors </li>
         <li>Fully documented (Javadoc).</li>
-        <li>Massive battery of tests for checking the behaviour of matrix/vector implementations: Ensure your own implementations are correct with ease!</li>
+        <li>Massive battery of tests for checking the behaviour of matrix/vector implementations.</li>
         <li>100% automated unit test coverage.</li>
         <li><a href="https://www.osgi.org/">OSGi</a>-ready.</li>
         <li>ISC license.</li>
