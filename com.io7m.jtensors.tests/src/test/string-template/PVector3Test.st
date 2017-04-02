@@ -295,6 +295,99 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(ez, v2.z());
   }
 
+  /**
+   * ∀ a b. crossProduct(a, b) == crossProduct(negate(b), a)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testCrossProductAnticommutative()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> a = gen.next();
+    final <vectorType> b = gen.next();
+
+    final <vectorType> vr0 = <opClass>.crossProduct(a, b);
+    final <vectorType> vr1 = <opClass>.crossProduct(<opClass>.negate(b), a);
+
+    <testOpClass>.checkAlmostEquals(vr0.x(), vr1.x());
+    <testOpClass>.checkAlmostEquals(vr0.y(), vr1.y());
+    <testOpClass>.checkAlmostEquals(vr0.z(), vr1.z());
+  }
+
+  /**
+   * ∀ a b c. crossProduct(a, add(b, c)) == add(crossProduct(a, b), crossProduct(a, c))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testCrossProductDistributive()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> a = gen.next();
+    final <vectorType> b = gen.next();
+    final <vectorType> c = gen.next();
+
+    final <vectorType> vr0 =
+      <opClass>.crossProduct(a, <opClass>.add(b, c));
+    final <vectorType> vr1 =
+      <opClass>.add(<opClass>.crossProduct(a, b), <opClass>.crossProduct(a, c));
+
+    <testOpClass>.checkAlmostEquals(vr0.x(), vr1.x());
+    <testOpClass>.checkAlmostEquals(vr0.y(), vr1.y());
+    <testOpClass>.checkAlmostEquals(vr0.z(), vr1.z());
+  }
+
+  /**
+   * ∀ a b c. crossProduct(scale(a, c), b) == scale(crossProduct(a, b), c)
+   */
+
+  @Test
+  @PercentagePassing
+  public void testCrossProductScale0()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> a = gen.next();
+    final <vectorType> b = gen.next();
+    final <scalarRealType> c = Math.random();
+
+    final <vectorType> vr0 =
+      <opClass>.crossProduct(<opClass>.scale(a, c), b);
+    final <vectorType> vr1 =
+      <opClass>.scale(<opClass>.crossProduct(a, b), c);
+
+    <testOpClass>.checkAlmostEquals(vr0.x(), vr1.x());
+    <testOpClass>.checkAlmostEquals(vr0.y(), vr1.y());
+    <testOpClass>.checkAlmostEquals(vr0.z(), vr1.z());
+  }
+
+  /**
+   * ∀ a b c. scale(crossProduct(a, b), c) == crossProduct(a, scale(b, c))
+   */
+
+  @Test
+  @PercentagePassing
+  public void testCrossProductScale1()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> a = gen.next();
+    final <vectorType> b = gen.next();
+    final <scalarRealType> c = Math.random();
+
+    final <vectorType> vr0 =
+      <opClass>.scale(<opClass>.crossProduct(a, b), c);
+    final <vectorType> vr1 =
+      <opClass>.crossProduct(a, <opClass>.scale(b, c));
+
+    <testOpClass>.checkAlmostEquals(vr0.x(), vr1.x());
+    <testOpClass>.checkAlmostEquals(vr0.y(), vr1.y());
+    <testOpClass>.checkAlmostEquals(vr0.z(), vr1.z());
+  }
+
   @Test
   @PercentagePassing(passPercent = 80.0)
   public void testDotProductSelfMagnitudeSquared()

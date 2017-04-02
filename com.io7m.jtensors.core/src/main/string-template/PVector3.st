@@ -143,6 +143,49 @@ public final class <className>
   }
 
   /**
+   * Calculate the cross product of the vectors {@code v0} and {@code v1}.
+   *
+   * <if(hasGeneric)>
+   * @param \<T> A phantom type parameter
+   * <endif>
+   * @param v0 The left vector
+   * @param v1 The right vector
+   * @return The cross product of the two vectors
+   */
+
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T>
+  crossProduct(
+    final <vectorType>\<T> v0,
+    final <vectorType>\<T> v1)
+  <else>
+  <vectorType>
+  crossProduct(
+    final <vectorType> v0,
+    final <vectorType> v1)
+  <endif>
+  {
+    final <scalarRealType> x =
+      <opClass>.subtractReal(
+        <opClass>.multiplyReal(v0.y(), v1.z()),
+        <opClass>.multiplyReal(v0.z(), v1.y()));
+    final <scalarRealType> y =
+      <opClass>.subtractReal(
+        <opClass>.multiplyReal(v0.z(), v1.x()),
+        <opClass>.multiplyReal(v0.x(), v1.z()));
+    final <scalarRealType> z =
+      <opClass>.subtractReal(
+        <opClass>.multiplyReal(v0.x(), v1.y()),
+        <opClass>.multiplyReal(v0.y(), v1.x()));
+
+    return <vectorType>.of(
+      (<vectorComponentType>) x,
+      (<vectorComponentType>) y,
+      (<vectorComponentType>) z);
+  }
+
+  /**
    * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
    *
    * <if(hasGeneric)>

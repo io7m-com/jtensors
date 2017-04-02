@@ -16,11 +16,30 @@
 
 package com.io7m.jtensors.tests.core;
 
+import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.junreachable.UnreachableCodeException;
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class TestLOps
 {
+  private static final Logger LOG;
+  private static final AlmostEqualDouble.ContextRelative ALMOST_EQUAL_LARGE;
+  private static final AlmostEqualDouble.ContextRelative ALMOST_EQUAL_VAGUE;
+
+  static {
+    LOG = LoggerFactory.getLogger(TestLOps.class);
+
+    ALMOST_EQUAL_LARGE = new AlmostEqualDouble.ContextRelative();
+    ALMOST_EQUAL_LARGE.setMaxAbsoluteDifference(0.000001);
+    ALMOST_EQUAL_LARGE.setMaxRelativeDifference(0.000001);
+
+    ALMOST_EQUAL_VAGUE = new AlmostEqualDouble.ContextRelative();
+    ALMOST_EQUAL_VAGUE.setMaxAbsoluteDifference(0.000001);
+    ALMOST_EQUAL_VAGUE.setMaxRelativeDifference(0.000001);
+  }
+
   private TestLOps()
   {
     throw new UnreachableCodeException();
@@ -37,21 +56,44 @@ public final class TestLOps
     final long x,
     final long y)
   {
-    Assert.assertEquals(x, y);
+    final double dx = (double) x;
+    final double dy = (double) y;
+    final double diff = Math.abs(dx - dy);
+    final double thresh = Math.abs(dx + dy) * 0.0029;
+
+    if (diff > thresh) {
+      throw new AssertionError(
+        String.format(
+          "Expected: <%f> Received: <%f>",
+          Double.valueOf((double) x),
+          Double.valueOf((double) y)));
+    }
   }
 
   public static void checkAlmostEquals(
     final double x,
     final double y)
   {
-    Assert.assertEquals(x, y, 1.0e-10);
+    if (!AlmostEqualDouble.almostEqual(ALMOST_EQUAL_LARGE, x, y)) {
+      throw new AssertionError(
+        String.format(
+          "Expected: <%f> Received: <%f>",
+          Double.valueOf(x),
+          Double.valueOf(y)));
+    }
   }
 
   public static void checkAlmostEqualsVague(
     final double x,
     final double y)
   {
-    Assert.assertEquals(x, y, 1.0e-10);
+    if (!AlmostEqualDouble.almostEqual(ALMOST_EQUAL_VAGUE, x, y)) {
+      throw new AssertionError(
+        String.format(
+          "Expected: <%f> Received: <%f>",
+          Double.valueOf(x),
+          Double.valueOf(y)));
+    }
   }
 
   public static long constant(

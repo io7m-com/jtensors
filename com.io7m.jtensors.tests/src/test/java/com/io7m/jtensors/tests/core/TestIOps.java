@@ -37,7 +37,18 @@ public final class TestIOps
     final long x,
     final long y)
   {
-    Assert.assertEquals(x, y);
+    final double dx = (double) x;
+    final double dy = (double) y;
+    final double diff = Math.abs(dx - dy);
+    final double thresh = Math.abs(dx + dy);
+
+    if (diff > thresh) {
+      throw new AssertionError(
+        String.format(
+          "Expected: <%f> Received: <%f>",
+          Double.valueOf((double) x),
+          Double.valueOf((double) y)));
+    }
   }
 
   public static void checkAlmostEquals(
