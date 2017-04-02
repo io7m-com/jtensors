@@ -19,6 +19,11 @@
   <description>Vector/matrix math package (Documentation)</description>
   <url>http://io7m.github.io/jtensors/</url>
 
+  <properties>
+    <io7m.api.previousArtifactId>io7m-jtensors-documentation</io7m.api.previousArtifactId>
+    <mdep.analyze.skip>true</mdep.analyze.skip>
+  </properties>
+
   <scm>
     <url>${project.parent.scm.url}</url>
     <connection>${project.parent.scm.connection}</connection>

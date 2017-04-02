@@ -20,7 +20,7 @@
   <url>http://io7m.github.io/jtensors/</url>
 
   <properties>
-    <japicmp.skip>true</japicmp.skip>
+    <io7m.api.japicmp.skip>true</io7m.api.japicmp.skip>
   </properties>
 
   <scm>

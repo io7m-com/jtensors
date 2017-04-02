@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.io7m.primogenitor</groupId>
     <artifactId>com.io7m.primogenitor</artifactId>
-    <version>0.0.6</version>
+    <version>1.0.1</version>
   </parent>
 
   <groupId>com.io7m.jtensors</groupId>
