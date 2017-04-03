@@ -274,6 +274,72 @@ public final class <className>
   }
 
   @Test
+  public void testClampMinimum()
+  {
+    final <vectorType> v = <vectorType>.of(
+      <testOpClass>.constant("0"),
+      <testOpClass>.constant("1"));
+
+    final <vectorType> v_min = <vectorType>.of(
+      <testOpClass>.constant("10"),
+      <testOpClass>.constant("11"));
+
+    final <vectorType> v_max = <vectorType>.of(
+      <testOpClass>.constant("110"),
+      <testOpClass>.constant("111"));
+
+    final <vectorType> vr =
+      <opClass>.clamp(v, v_min, v_max);
+
+    <testOpClass>.checkEquals(v_min.x(), vr.x());
+    <testOpClass>.checkEquals(v_min.y(), vr.y());
+  }
+
+  @Test
+  public void testClampMaximum()
+  {
+    final <vectorType> v = <vectorType>.of(
+      <testOpClass>.constant("1110"),
+      <testOpClass>.constant("1111"));
+
+    final <vectorType> v_min = <vectorType>.of(
+      <testOpClass>.constant("10"),
+      <testOpClass>.constant("11"));
+
+    final <vectorType> v_max = <vectorType>.of(
+      <testOpClass>.constant("110"),
+      <testOpClass>.constant("111"));
+
+    final <vectorType> vr =
+      <opClass>.clamp(v, v_min, v_max);
+
+    <testOpClass>.checkEquals(v_max.x(), vr.x());
+    <testOpClass>.checkEquals(v_max.y(), vr.y());
+  }
+
+  @Test
+  public void testClampMixed()
+  {
+    final <vectorType> v = <vectorType>.of(
+      <testOpClass>.constant("1110"),
+      <testOpClass>.constant("1"));
+
+    final <vectorType> v_min = <vectorType>.of(
+      <testOpClass>.constant("10"),
+      <testOpClass>.constant("11"));
+
+    final <vectorType> v_max = <vectorType>.of(
+      <testOpClass>.constant("110"),
+      <testOpClass>.constant("111"));
+
+    final <vectorType> vr =
+      <opClass>.clamp(v, v_min, v_max);
+
+    <testOpClass>.checkEquals(v_max.x(), vr.x());
+    <testOpClass>.checkEquals(v_min.y(), vr.y());
+  }
+
+  @Test
   @PercentagePassing
   public void testDotProductSelfMagnitudeSquared()
   {

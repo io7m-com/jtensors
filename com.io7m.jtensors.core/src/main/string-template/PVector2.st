@@ -173,6 +173,42 @@ public final class <className>
   }
 
   /**
+   * Clamp the values in {@code v} by {@code v_min} and {@code v_max}.
+   *
+   * @return {@code (max(min(v.x, v_max.x()), v_min.x()),
+   *                 max(min(v.y, v_max.y()), v_min.y())) }
+   * <if(hasGeneric)>
+   * @param \<T> A phantom type parameter
+   * <endif>
+   * @param v The source vector
+   * @param v_min The minimum vector
+   * @param v_max The maximum vector
+   */
+
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T>
+  clamp(
+    final <vectorType>\<T> v,
+    final <vectorType>\<T> v_min,
+    final <vectorType>\<T> v_max)
+  <else>
+  <vectorType>
+  clamp(
+    final <vectorType> v,
+    final <vectorType> v_min,
+    final <vectorType> v_max)
+  <endif>
+  {
+    final <scalarRealType> x = <opClass>.clamp(v.x(), v_min.x(), v_max.x());
+    final <scalarRealType> y = <opClass>.clamp(v.y(), v_min.y(), v_max.y());
+
+    return <vectorType>.of(
+      (<vectorComponentType>) x,
+      (<vectorComponentType>) y);
+  }
+
+  /**
    * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
    *
    * <if(hasGeneric)>

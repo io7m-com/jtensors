@@ -72,6 +72,14 @@ final class VectorIOps
     return value0 * value1;
   }
 
+  static int clamp(
+    final int x,
+    final int min,
+    final int max)
+  {
+    return Math.min(Math.max(x, min), max);
+  }
+
   static int zero()
   {
     return 0;

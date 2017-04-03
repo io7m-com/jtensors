@@ -339,7 +339,97 @@ public final class <className>
   }
 
   @Test
-  @PercentagePassing(passPercent = 80.0)
+  public void testClampMinimum()
+  {
+    final <vectorType> v = <vectorType>.of(
+      <testOpClass>.constant("0"),
+      <testOpClass>.constant("1"),
+      <testOpClass>.constant("2"),
+      <testOpClass>.constant("3"));
+
+    final <vectorType> v_min = <vectorType>.of(
+      <testOpClass>.constant("10"),
+      <testOpClass>.constant("11"),
+      <testOpClass>.constant("12"),
+      <testOpClass>.constant("13"));
+
+    final <vectorType> v_max = <vectorType>.of(
+      <testOpClass>.constant("110"),
+      <testOpClass>.constant("111"),
+      <testOpClass>.constant("112"),
+      <testOpClass>.constant("113"));
+
+    final <vectorType> vr =
+      <opClass>.clamp(v, v_min, v_max);
+
+    <testOpClass>.checkEquals(v_min.x(), vr.x());
+    <testOpClass>.checkEquals(v_min.y(), vr.y());
+    <testOpClass>.checkEquals(v_min.z(), vr.z());
+    <testOpClass>.checkEquals(v_min.w(), vr.w());
+  }
+
+  @Test
+  public void testClampMaximum()
+  {
+    final <vectorType> v = <vectorType>.of(
+      <testOpClass>.constant("1110"),
+      <testOpClass>.constant("1111"),
+      <testOpClass>.constant("1112"),
+      <testOpClass>.constant("1113"));
+
+    final <vectorType> v_min = <vectorType>.of(
+      <testOpClass>.constant("10"),
+      <testOpClass>.constant("11"),
+      <testOpClass>.constant("12"),
+      <testOpClass>.constant("13"));
+
+    final <vectorType> v_max = <vectorType>.of(
+      <testOpClass>.constant("110"),
+      <testOpClass>.constant("111"),
+      <testOpClass>.constant("112"),
+      <testOpClass>.constant("113"));
+
+    final <vectorType> vr =
+      <opClass>.clamp(v, v_min, v_max);
+
+    <testOpClass>.checkEquals(v_max.x(), vr.x());
+    <testOpClass>.checkEquals(v_max.y(), vr.y());
+    <testOpClass>.checkEquals(v_max.z(), vr.z());
+    <testOpClass>.checkEquals(v_max.w(), vr.w());
+  }
+
+  @Test
+  public void testClampMixed()
+  {
+    final <vectorType> v = <vectorType>.of(
+      <testOpClass>.constant("1110"),
+      <testOpClass>.constant("1"),
+      <testOpClass>.constant("1112"),
+      <testOpClass>.constant("3"));
+
+    final <vectorType> v_min = <vectorType>.of(
+      <testOpClass>.constant("10"),
+      <testOpClass>.constant("11"),
+      <testOpClass>.constant("12"),
+      <testOpClass>.constant("13"));
+
+    final <vectorType> v_max = <vectorType>.of(
+      <testOpClass>.constant("110"),
+      <testOpClass>.constant("111"),
+      <testOpClass>.constant("112"),
+      <testOpClass>.constant("113"));
+
+    final <vectorType> vr =
+      <opClass>.clamp(v, v_min, v_max);
+
+    <testOpClass>.checkEquals(v_max.x(), vr.x());
+    <testOpClass>.checkEquals(v_min.y(), vr.y());
+    <testOpClass>.checkEquals(v_max.z(), vr.z());
+    <testOpClass>.checkEquals(v_min.w(), vr.w());
+  }
+
+  @Test
+  @PercentagePassing
   public void testDotProductSelfMagnitudeSquared()
   {
     final Generator\<<vectorType>\> gen = createGenerator();

@@ -72,6 +72,14 @@ final class PVectorLOps
     return value0 * value1;
   }
 
+  static long clamp(
+    final long x,
+    final long min,
+    final long max)
+  {
+    return Math.min(Math.max(x, min), max);
+  }
+
   static long zero()
   {
     return 0L;

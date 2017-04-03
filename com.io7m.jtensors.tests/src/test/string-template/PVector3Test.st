@@ -295,6 +295,84 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(ez, v2.z());
   }
 
+  @Test
+  public void testClampMinimum()
+  {
+    final <vectorType> v = <vectorType>.of(
+      <testOpClass>.constant("0"),
+      <testOpClass>.constant("1"),
+      <testOpClass>.constant("2"));
+
+    final <vectorType> v_min = <vectorType>.of(
+      <testOpClass>.constant("10"),
+      <testOpClass>.constant("11"),
+      <testOpClass>.constant("12"));
+
+    final <vectorType> v_max = <vectorType>.of(
+      <testOpClass>.constant("110"),
+      <testOpClass>.constant("111"),
+      <testOpClass>.constant("112"));
+
+    final <vectorType> vr =
+      <opClass>.clamp(v, v_min, v_max);
+
+    <testOpClass>.checkEquals(v_min.x(), vr.x());
+    <testOpClass>.checkEquals(v_min.y(), vr.y());
+    <testOpClass>.checkEquals(v_min.z(), vr.z());
+  }
+
+  @Test
+  public void testClampMaximum()
+  {
+    final <vectorType> v = <vectorType>.of(
+      <testOpClass>.constant("1110"),
+      <testOpClass>.constant("1111"),
+      <testOpClass>.constant("1112"));
+
+    final <vectorType> v_min = <vectorType>.of(
+      <testOpClass>.constant("10"),
+      <testOpClass>.constant("11"),
+      <testOpClass>.constant("12"));
+
+    final <vectorType> v_max = <vectorType>.of(
+      <testOpClass>.constant("110"),
+      <testOpClass>.constant("111"),
+      <testOpClass>.constant("112"));
+
+    final <vectorType> vr =
+      <opClass>.clamp(v, v_min, v_max);
+
+    <testOpClass>.checkEquals(v_max.x(), vr.x());
+    <testOpClass>.checkEquals(v_max.y(), vr.y());
+    <testOpClass>.checkEquals(v_max.z(), vr.z());
+  }
+
+  @Test
+  public void testClampMixed()
+  {
+    final <vectorType> v = <vectorType>.of(
+      <testOpClass>.constant("1110"),
+      <testOpClass>.constant("1"),
+      <testOpClass>.constant("1112"));
+
+    final <vectorType> v_min = <vectorType>.of(
+      <testOpClass>.constant("10"),
+      <testOpClass>.constant("11"),
+      <testOpClass>.constant("12"));
+
+    final <vectorType> v_max = <vectorType>.of(
+      <testOpClass>.constant("110"),
+      <testOpClass>.constant("111"),
+      <testOpClass>.constant("112"));
+
+    final <vectorType> vr =
+      <opClass>.clamp(v, v_min, v_max);
+
+    <testOpClass>.checkEquals(v_max.x(), vr.x());
+    <testOpClass>.checkEquals(v_min.y(), vr.y());
+    <testOpClass>.checkEquals(v_max.z(), vr.z());
+  }
+
   /**
    * ∀ a b. crossProduct(a, b) == crossProduct(negate(b), a)
    */

@@ -86,6 +86,14 @@ final class VectorDOps
     return value0 / value1;
   }
 
+  static double clamp(
+    final double x,
+    final double min,
+    final double max)
+  {
+    return Math.min(Math.max(x, min), max);
+  }
+
   static double zero()
   {
     return 0.0;
