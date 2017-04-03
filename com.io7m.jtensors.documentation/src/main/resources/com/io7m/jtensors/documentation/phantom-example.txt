@@ -1,0 +1,17 @@
+interface WorldSpace { }
+interface ViewSpace { }
+interface ObjectSpace { }
+
+PMatrix4x4D<ObjectSpace, WorldSpace> matrix_model;
+PMatrix4x4D<WorldSpace, ViewSpace> matrix_view;
+PMatrix4x4D<ObjectSpace, ViewSpace> matrix_modelview;
+
+// Correct!
+matrix_modelview = PMatrices4x4D.multiply (matrix_view, matrix_model);
+
+// Correct!
+Optional<PMatrix4x4D<ViewSpace, WorldSpace>> matrix_view_inverse =
+  PMatrices4x4D.invert(matrix_view);
+
+// Compilation error: The resulting matrix would be of type PMatrix4x4D<ViewSpace, ObjectSpace>
+// matrix_modelview = PMatrices4x4D.multiply (matrix_model, matrix_view);

@@ -1,0 +1,15 @@
+[section [title Quaternions] [id conventions.quaternions]]
+[paragraph]
+The [term [type package] ${project.parent.name}] package provides quaternions
+with single-precision [term [type type] "(float)"] elements, and double-precision
+[term [type type] "(double)"] elements. The package unambiguously identifies
+the quaternion types by using the following naming conventions for the types
+"(given as a simple EBNF grammar)":
+
+[paragraph]
+The available quaternion types include:
+
+[formal-item [title Quaternion types] [id conventions.quaternions.available]]
+[list-unordered
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/quaternions/Quaternion4D.html"] Quaternion4D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/quaternions/Quaternion4F.html"] Quaternion4F]]]

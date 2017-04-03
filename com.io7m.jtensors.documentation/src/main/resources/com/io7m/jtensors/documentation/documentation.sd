@@ -1,3 +1,4 @@
 [document [title ${project.parent.name} ${project.version} Documentation]
-  [import "pkg.sdi"]]
-
+  [import "pkg.sdi"]
+  [import "conventions.sd"]
+  [import "api.sdi"]]

@@ -1,0 +1,79 @@
+[section [title Vectors] [id conventions.vectors]]
+
+[subsection [title Computation Types] [id conventions.vectors.computation_types]]
+[paragraph]
+The [term [type package] ${project.parent.name}] package provides
+[term [type term] computation] vectors with
+single-precision  [term [type type] "(float)"] elements, double-precision
+[term [type type] "(double)"] elements, integer [term [type type] "(int)"],
+and long integer [term [type type] "(long)"] elements. Each vector type is
+available in two, three, and four element  versions.
+The package unambiguously identifies the vector types by using the following
+naming conventions for the types "(given as a simple EBNF grammar)":
+
+[formal-item [title Vector type naming] [id conventions.vectors.naming]]
+[verbatim [include "vectors.ebnf"]]
+
+[paragraph]
+Computation vectors are always immutable and are defined in such a way
+to allow the Java virtual machine to efficiently inline all vector method calls
+and to eliminate the allocations of intermediate vectors via
+[term [type term] escape analysis].
+
+[paragraph]
+The available vector types include:
+
+[formal-item [title Vector types] [id conventions.vectors.available]]
+[list-unordered
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2D.html"] Vector2D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3D.html"] Vector3D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4D.html"] Vector4D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2F.html"] Vector2F]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3F.html"] Vector3F]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4F.html"] Vector4F]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2I.html"] Vector2I]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3I.html"] Vector3I]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4I.html"] Vector4I]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2L.html"] Vector2L]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3L.html"] Vector3L]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4L.html"] Vector4L]]
+
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2D.html"] PVector2D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3D.html"] PVector3D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4D.html"] PVector4D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2F.html"] PVector2F]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3F.html"] PVector3F]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4F.html"] PVector4F]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2I.html"] PVector2I]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3I.html"] PVector3I]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4I.html"] PVector4I]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2L.html"] PVector2L]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3L.html"] PVector3L]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4L.html"] PVector4L]]]
+
+[subsection [title Storage Types] [id conventions.vectors.storage_types]]
+[paragraph]
+The [term [type package] ${project.parent.name}] package provides mutable
+[term [type term] storage] vectors. A [term [type term] storage] vector is
+a mutable vector upon which only very simple [term [type term] get] and
+[term [type term] set] operations are defined. The intention is to allow
+all intermediate computations to be written with immutable
+[link [target conventions.vectors.computation_types] computation] vectors,
+with the final results of those computations being written to
+storage vectors in order to, for example, be passed directly to native code
+without requiring copying.
+
+[paragraph]
+To enumerate the available storage vector types, see the API documentation
+for the [link-ext [target "apidocs/com/io7m/jtensors/storage/api/VectorStorageType.html"] VectorStorageType]
+interface.
+
+[subsection [title Phantom Types] [id conventions.vectors.phantom]]
+[paragraph]
+The [term [type package] ${project.parent.name}] package also provides copies
+of the existing vector types indexed by a phantom type parameter in order to
+allow the programmer to make semantically distinct values type-incompatible
+[footnote-ref conventions.vectors.phantom.article].
+
+[footnote [id conventions.vectors.phantom.article]]
+See [link-ext [target "http://io7m.com/documents/tt1-pt/"] "http://io7m.com/documents/tt1-pt/"].
