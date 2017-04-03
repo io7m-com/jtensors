@@ -121,8 +121,8 @@ public final class <className>
   }
 
   /**
-   * Linearly interpolate between {@code q0} and {@code q1} by the amount {@code
-   * alpha}, such that:
+   * \<p>Linearly interpolate between {@code q0} and {@code q1} by the amount
+   * {@code alpha}, such that:\</p>
    *
    * \<ul>
    *    \<li>{@code interpolateLinear(q0, q1, 0.0) = q0}\</li>
@@ -144,6 +144,66 @@ public final class <className>
     final <quaternionType> q0_r = scale(q0, 1.0 - alpha);
     final <quaternionType> q1_r = scale(q1, alpha);
     return add(q0_r, q1_r);
+  }
+
+  /**
+   * \<p>Interpolate between {@code q0} and {@code q1}, using \<i>spherical
+   * linear interpolation\</i>, by the amount {@code alpha}, such that:\</p>
+   *
+   * \<ul>
+   *   \<li>{@code interpolateSphericalLinear(q0, q1, 0.0) = normalize(q0)}\</li>
+   *   \<li>{@code interpolateSphericalLinear(q0, q1, 1.0) = normalize(q1)}\</li>
+   * \</ul>
+   *
+   * \<p>Note that unlike simple linear interpolation, this function is guaranteed
+   * to return a normalized quaternion.\</p>
+   *
+   * @param q0    The left input quaternion
+   * @param q1    The right input quaternion
+   * @param alpha The interpolation value, between {@code 0.0} and {@code 1.0}
+   *
+   * @return A spherical-linearly interpolated quaternion between {@code q0} and
+   * {@code q1}
+   */
+
+  public static <quaternionType> interpolateSphericalLinear(
+    final <quaternionType> q0,
+    final <quaternionType> q1,
+    final <scalarRealType> alpha)
+  {
+    final <quaternionType> q0n = normalize(q0);
+    <quaternionType> q1n = normalize(q1);
+
+    /*
+     * Calculate the dot product to determine if the quaternions are nearly
+     * codirectional. If they are, fall back to simple linear interpolation.
+     */
+
+    <scalarRealType> dot = dotProduct(q0n, q1n);
+    final <scalarRealType> threshold = 0.9995;
+    if (dot > threshold) {
+      return normalize(interpolateLinear(q0n, q1n, alpha));
+    }
+
+    /*
+     * If the dot product is negative, the quaternions are separated by more
+     * than 180° and a spherical linear interpolation wouldn't result in the
+     * shortest path. By negating one quaternion, the shortest path is obtained.
+     */
+
+    if (dot \< 0.0) {
+      q1n = negate(q1n);
+      dot = -dot;
+    }
+
+    dot = Math.max(-1.0, Math.min(dot, 1.0));
+    final <scalarRealType> theta_0 = StrictMath.acos(dot);
+    final <scalarRealType> theta = theta_0 * alpha;
+
+    final <quaternionType> q2 = normalize(subtract(q1n, scale(q0n, dot)));
+    final <quaternionType> r0 = scale(q0n, StrictMath.cos(theta));
+    final <quaternionType> r1 = scale(q2, StrictMath.sin(theta));
+    return add(r0, r1);
   }
 
   /**

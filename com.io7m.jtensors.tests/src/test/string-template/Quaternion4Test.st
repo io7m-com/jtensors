@@ -313,18 +313,48 @@ public final class <className>
     final <quaternionType> q2 =
       <opClass>.interpolateLinear(q0, q1, <testOpClass>.constant("0"));
 
+    final <quaternionType> q3 =
+      <opClass>.interpolateLinear(q0, q1, <testOpClass>.constant("1"));
+
     <testOpClass>.checkAlmostEquals(q0.x(), q2.x());
     <testOpClass>.checkAlmostEquals(q0.y(), q2.y());
     <testOpClass>.checkAlmostEquals(q0.z(), q2.z());
     <testOpClass>.checkAlmostEquals(q0.w(), q2.w());
 
-    final <quaternionType> v3 =
-      <opClass>.interpolateLinear(q0, q1, <testOpClass>.constant("1"));
+    <testOpClass>.checkAlmostEquals(q1.x(), q3.x());
+    <testOpClass>.checkAlmostEquals(q1.y(), q3.y());
+    <testOpClass>.checkAlmostEquals(q1.z(), q3.z());
+    <testOpClass>.checkAlmostEquals(q1.w(), q3.w());
+  }
 
-    <testOpClass>.checkAlmostEquals(q1.x(), v3.x());
-    <testOpClass>.checkAlmostEquals(q1.y(), v3.y());
-    <testOpClass>.checkAlmostEquals(q1.z(), v3.z());
-    <testOpClass>.checkAlmostEquals(q1.w(), v3.w());
+  @Test
+  @PercentagePassing
+  public void testInterpolateLinearSphericalLimits()
+  {
+    final Generator\<<quaternionType>\> gen = createGenerator();
+
+    final <quaternionType> q0 = <opClass>.normalize(gen.next());
+    final <quaternionType> q1 = <opClass>.normalize(gen.next());
+
+    final <quaternionType> q2 =
+      <opClass>.interpolateSphericalLinear(q0, q1, <testOpClass>.constant("0"));
+
+    final <quaternionType> q3 =
+      <opClass>.interpolateSphericalLinear(q0, q1, <testOpClass>.constant("1"));
+
+    if (!<opClass>.isNegationOf(<testOpClass>::almostEquals, q0, q2)) {
+      <testOpClass>.checkAlmostEquals(q0.x(), q2.x());
+      <testOpClass>.checkAlmostEquals(q0.y(), q2.y());
+      <testOpClass>.checkAlmostEquals(q0.z(), q2.z());
+      <testOpClass>.checkAlmostEquals(q0.w(), q2.w());
+    }
+
+    if (!<opClass>.isNegationOf(<testOpClass>::almostEquals, q1, q3)) {
+      <testOpClass>.checkAlmostEquals(q1.x(), q3.x());
+      <testOpClass>.checkAlmostEquals(q1.y(), q3.y());
+      <testOpClass>.checkAlmostEquals(q1.z(), q3.z());
+      <testOpClass>.checkAlmostEquals(q1.w(), q3.w());
+    }
   }
 
   @Test
