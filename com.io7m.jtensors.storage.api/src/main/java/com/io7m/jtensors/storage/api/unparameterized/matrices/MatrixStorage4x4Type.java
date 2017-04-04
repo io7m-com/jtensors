@@ -31,7 +31,7 @@ public interface MatrixStorage4x4Type
   /**
    * Set the components from the given matrix.
    *
-   * @param m The source vector
+   * @param m The source matrix
    */
 
   void setMatrix4x4D(
@@ -40,9 +40,9 @@ public interface MatrixStorage4x4Type
   /**
    * Set the components from the given matrix.
    *
-   * @param v The source vector
+   * @param m The source matrix
    */
 
   void setMatrix4x4F(
-    final Matrix4x4F v);
+    final Matrix4x4F m);
 }

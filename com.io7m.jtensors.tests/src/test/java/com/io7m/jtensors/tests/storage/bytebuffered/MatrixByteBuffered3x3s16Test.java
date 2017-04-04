@@ -16,35 +16,55 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F;
+import com.io7m.jtensors.generators.Matrix3x3DGenerator;
+import com.io7m.jtensors.generators.Matrix3x3FGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type;
+import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
 import com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3s16;
+import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestB16Ops;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
 import com.io7m.jtensors.tests.storage.api.MatrixStorage3x3Contract;
-import org.junit.Assert;
-import org.junit.Test;
+import net.java.quickcheck.Generator;
+import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class MatrixByteBuffered3x3s16Test
   extends MatrixStorage3x3Contract
 {
+  @Rule public final PercentagePassRule percent =
+    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
+
   @Override
-  protected void checkAlmostEqual(
-    final double a,
-    final double b)
+  protected MatrixStorage3x3Type create(
+    final int offset)
   {
-    TestB16Ops.checkAlmostEquals(a, b);
+    return MatrixByteBuffered3x3s16.createWithBase(
+      ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
+      ByteBufferOffsetMutable.create(),
+      offset);
   }
 
-  protected MatrixStorage3x3Type createIdentity()
+  @Override
+  protected Generator<Matrix3x3D> createGenerator3x3D()
   {
-    return MatrixByteBuffered3x3s16.createHeap();
+    return Matrix3x3DGenerator.createNormal();
   }
 
-  @Test
-  public void testByteBufferIdentity()
+  @Override
+  protected Generator<Matrix3x3F> createGenerator3x3F()
   {
-    final ByteBuffer b = ByteBuffer.allocate(1024);
-    Assert.assertEquals(b, MatrixByteBuffered3x3s16.createWith(b).byteBuffer());
+    return Matrix3x3FGenerator.createNormal();
+  }
+
+  @Override
+  protected void checkAlmostEquals(
+    final double x,
+    final double y)
+  {
+    TestB16Ops.checkAlmostEquals(x, y);
   }
 }

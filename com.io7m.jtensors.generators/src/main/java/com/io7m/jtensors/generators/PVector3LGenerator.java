@@ -76,6 +76,75 @@ public final class PVector3LGenerator<T> implements Generator<PVector3L<T>>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-9223372036854775808,
+   * 9223372036854775807]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector3L<T>> create64()
+  {
+    return new PVector3LGenerator<>(PrimitiveGenerators.longs(
+      -9223372036854775808L,
+      -9223372036854775807L
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-2147483648, 2147483647]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector3L<T>> create32()
+  {
+    return new PVector3LGenerator<>(PrimitiveGenerators.longs(
+      -2147483648L,
+      -2147483647L
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-32768, 32767]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector3L<T>> create16()
+  {
+    return new PVector3LGenerator<>(PrimitiveGenerators.longs(
+      -32768L,
+      32767L
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-128, 127]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector3L<T>> create8()
+  {
+    return new PVector3LGenerator<>(PrimitiveGenerators.longs(
+      -128L,
+      127L
+    ));
+  }
+
   @Override
   public PVector3L<T> next()
   {

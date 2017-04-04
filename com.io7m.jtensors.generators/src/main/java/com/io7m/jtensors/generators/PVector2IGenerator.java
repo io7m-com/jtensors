@@ -76,6 +76,57 @@ public final class PVector2IGenerator<T> implements Generator<PVector2I<T>>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-2147483648, 2147483647]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector2I<T>> create32()
+  {
+    return new PVector2IGenerator<>(PrimitiveGenerators.integers(
+      -2147483648,
+      -2147483647
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-32768, 32767]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector2I<T>> create16()
+  {
+    return new PVector2IGenerator<>(PrimitiveGenerators.integers(
+      -32768,
+      32767
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-128, 127]}.
+   *
+   * @param <T> A phantom type parameter
+   *
+   * @return A generator
+   */
+
+  public static <T> Generator<PVector2I<T>> create8()
+  {
+    return new PVector2IGenerator<>(PrimitiveGenerators.integers(
+      -128,
+      127
+    ));
+  }
+
   @Override
   public PVector2I<T> next()
   {

@@ -16,19 +16,17 @@
 
 package com.io7m.jtensors.storage.bytebuffered;
 
-import com.io7m.jnull.NullCheck;
+
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
 
 /**
  * <p>A storage matrix.</p>
- * <p>Storage component type: {@code float}</p>
+ * <p>Storage component type: {@code double}</p>
  * <p>Storage component count: {@code 3x3}</p>
  *
  * @param <A> A phantom type parameter (possibly representing a source
@@ -38,194 +36,161 @@ import java.nio.FloatBuffer;
  */
 
 public final class PMatrixByteBuffered3x3s32<A, B>
+  extends TensorByteBufferedFloating32
   implements PMatrixByteBuffered3x3Type<A, B>
 {
-  private final FloatBuffer view;
-  private final ByteBuffer buffer;
-
   private PMatrixByteBuffered3x3s32(
-    final ByteBuffer bb)
+    final ByteBuffer in_buffer,
+    final ByteBufferOffsetMutable in_base,
+    final int in_offset)
   {
-    this.buffer = NullCheck.notNull(bb, "Buffer");
-    this.view = this.buffer.asFloatBuffer();
+    super(in_buffer, in_base, in_offset);
   }
 
   /**
-   * @param <A> A phantom type parameter (possibly representing a source
-   *            coordinate system)
-   * @param <B> A phantom type parameter (possibly representing a target
-   *            coordinate system)
+   * <p>Return a new vector that is backed by the given byte buffer {@code
+   * b}</p>
    *
-   * @return A heap-backed matrix in native byte order
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param <A>    A phantom type parameter (possibly representing a source
+   *               coordinate system)
+   * @param <B>    A phantom type parameter (possibly representing a target
+   *               coordinate system)
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered vector
    */
 
-  public static <A, B> PMatrixByteBuffered3x3Type<A, B> createHeap()
+  public static <A, B> PMatrixByteBuffered3x3Type<A, B> createWithBase(
+    final ByteBuffer b,
+    final ByteBufferOffsetMutable base,
+    final int offset)
   {
-    return createWith(ByteBuffer.allocate((3 * 3) * 4).order(ByteOrder.nativeOrder()));
-  }
-
-  /**
-   * @param <A> A phantom type parameter (possibly representing a source
-   *            coordinate system)
-   * @param <B> A phantom type parameter (possibly representing a target
-   *            coordinate system)
-   *
-   * @return A direct-memory matrix in native byte order
-   */
-
-  public static <A, B> PMatrixByteBuffered3x3Type<A, B> createDirect()
-  {
-    return createWith(ByteBuffer.allocateDirect((3 * 3) * 4).order(ByteOrder.nativeOrder()));
-  }
-
-  /**
-   * @param <A> A phantom type parameter (possibly representing a source
-   *            coordinate system)
-   * @param <B> A phantom type parameter (possibly representing a target
-   *            coordinate system)
-   * @param b   A byte buffer
-   *
-   * @return A matrix backed by the given byte buffer
-   */
-
-  public static <A, B> PMatrixByteBuffered3x3Type<A, B> createWith(
-    final ByteBuffer b)
-  {
-    return new PMatrixByteBuffered3x3s32<>(b);
-  }
-
-  private static int index(
-    final int row,
-    final int column)
-  {
-    return (column * 3) + row;
+    return new PMatrixByteBuffered3x3s32<>(b, base, offset);
   }
 
   @Override
   public double r0c0()
   {
-    return (double) this.view.get(index(0, 0));
+    return this.getValue(ColumnMajor.index3x3(0, 0));
   }
 
   @Override
   public double r0c1()
   {
-    return (double) this.view.get(index(0, 1));
+    return this.getValue(ColumnMajor.index3x3(0, 1));
   }
 
   @Override
   public double r0c2()
   {
-    return (double) this.view.get(index(0, 2));
+    return this.getValue(ColumnMajor.index3x3(0, 2));
   }
 
   @Override
   public double r1c0()
   {
-    return (double) this.view.get(index(1, 0));
+    return this.getValue(ColumnMajor.index3x3(1, 0));
   }
 
   @Override
   public double r1c1()
   {
-    return (double) this.view.get(index(1, 1));
+    return this.getValue(ColumnMajor.index3x3(1, 1));
   }
 
   @Override
   public double r1c2()
   {
-    return (double) this.view.get(index(1, 2));
+    return this.getValue(ColumnMajor.index3x3(1, 2));
   }
 
   @Override
   public double r2c0()
   {
-    return (double) this.view.get(index(2, 0));
+    return this.getValue(ColumnMajor.index3x3(2, 0));
   }
 
   @Override
   public double r2c1()
   {
-    return (double) this.view.get(index(2, 1));
+    return this.getValue(ColumnMajor.index3x3(2, 1));
   }
 
   @Override
   public double r2c2()
   {
-    return (double) this.view.get(index(2, 2));
+    return this.getValue(ColumnMajor.index3x3(2, 2));
   }
 
   @Override
-  public void setMatrix3x3D(
-    final Matrix3x3D m)
+  public void setPMatrix3x3D(final PMatrix3x3D<A, B> m)
   {
-    this.view.put(index(0, 0), (float) m.r0c0());
-    this.view.put(index(0, 1), (float) m.r0c1());
-    this.view.put(index(0, 2), (float) m.r0c2());
+    this.putValue(ColumnMajor.index3x3(0, 0), m.r0c0());
+    this.putValue(ColumnMajor.index3x3(0, 1), m.r0c1());
+    this.putValue(ColumnMajor.index3x3(0, 2), m.r0c2());
 
-    this.view.put(index(1, 0), (float) m.r1c0());
-    this.view.put(index(1, 1), (float) m.r1c1());
-    this.view.put(index(1, 2), (float) m.r1c2());
+    this.putValue(ColumnMajor.index3x3(1, 0), m.r1c0());
+    this.putValue(ColumnMajor.index3x3(1, 1), m.r1c1());
+    this.putValue(ColumnMajor.index3x3(1, 2), m.r1c2());
 
-    this.view.put(index(2, 0), (float) m.r2c0());
-    this.view.put(index(2, 1), (float) m.r2c1());
-    this.view.put(index(2, 2), (float) m.r2c2());
+    this.putValue(ColumnMajor.index3x3(2, 0), m.r2c0());
+    this.putValue(ColumnMajor.index3x3(2, 1), m.r2c1());
+    this.putValue(ColumnMajor.index3x3(2, 2), m.r2c2());
   }
 
   @Override
-  public void setMatrix3x3F(
-    final Matrix3x3F m)
+  public void setPMatrix3x3F(final PMatrix3x3F<A, B> m)
   {
-    this.view.put(index(0, 0), m.r0c0());
-    this.view.put(index(0, 1), m.r0c1());
-    this.view.put(index(0, 2), m.r0c2());
+    this.putValue(ColumnMajor.index3x3(0, 0), (double) m.r0c0());
+    this.putValue(ColumnMajor.index3x3(0, 1), (double) m.r0c1());
+    this.putValue(ColumnMajor.index3x3(0, 2), (double) m.r0c2());
 
-    this.view.put(index(1, 0), m.r1c0());
-    this.view.put(index(1, 1), m.r1c1());
-    this.view.put(index(1, 2), m.r1c2());
+    this.putValue(ColumnMajor.index3x3(1, 0), (double) m.r1c0());
+    this.putValue(ColumnMajor.index3x3(1, 1), (double) m.r1c1());
+    this.putValue(ColumnMajor.index3x3(1, 2), (double) m.r1c2());
 
-    this.view.put(index(2, 0), m.r2c0());
-    this.view.put(index(2, 1), m.r2c1());
-    this.view.put(index(2, 2), m.r2c2());
+    this.putValue(ColumnMajor.index3x3(2, 0), (double) m.r2c0());
+    this.putValue(ColumnMajor.index3x3(2, 1), (double) m.r2c1());
+    this.putValue(ColumnMajor.index3x3(2, 2), (double) m.r2c2());
   }
 
   @Override
-  public void setPMatrix3x3D(
-    final PMatrix3x3D<A, B> m)
+  public void setMatrix3x3D(final Matrix3x3D m)
   {
-    this.view.put(index(0, 0), (float) m.r0c0());
-    this.view.put(index(0, 1), (float) m.r0c1());
-    this.view.put(index(0, 2), (float) m.r0c2());
+    this.putValue(ColumnMajor.index3x3(0, 0), m.r0c0());
+    this.putValue(ColumnMajor.index3x3(0, 1), m.r0c1());
+    this.putValue(ColumnMajor.index3x3(0, 2), m.r0c2());
 
-    this.view.put(index(1, 0), (float) m.r1c0());
-    this.view.put(index(1, 1), (float) m.r1c1());
-    this.view.put(index(1, 2), (float) m.r1c2());
+    this.putValue(ColumnMajor.index3x3(1, 0), m.r1c0());
+    this.putValue(ColumnMajor.index3x3(1, 1), m.r1c1());
+    this.putValue(ColumnMajor.index3x3(1, 2), m.r1c2());
 
-    this.view.put(index(2, 0), (float) m.r2c0());
-    this.view.put(index(2, 1), (float) m.r2c1());
-    this.view.put(index(2, 2), (float) m.r2c2());
+    this.putValue(ColumnMajor.index3x3(2, 0), m.r2c0());
+    this.putValue(ColumnMajor.index3x3(2, 1), m.r2c1());
+    this.putValue(ColumnMajor.index3x3(2, 2), m.r2c2());
   }
 
   @Override
-  public void setPMatrix3x3F(
-    final PMatrix3x3F<A, B> m)
+  public void setMatrix3x3F(final Matrix3x3F m)
   {
-    this.view.put(index(0, 0), m.r0c0());
-    this.view.put(index(0, 1), m.r0c1());
-    this.view.put(index(0, 2), m.r0c2());
+    this.putValue(ColumnMajor.index3x3(0, 0), (double) m.r0c0());
+    this.putValue(ColumnMajor.index3x3(0, 1), (double) m.r0c1());
+    this.putValue(ColumnMajor.index3x3(0, 2), (double) m.r0c2());
 
-    this.view.put(index(1, 0), m.r1c0());
-    this.view.put(index(1, 1), m.r1c1());
-    this.view.put(index(1, 2), m.r1c2());
+    this.putValue(ColumnMajor.index3x3(1, 0), (double) m.r1c0());
+    this.putValue(ColumnMajor.index3x3(1, 1), (double) m.r1c1());
+    this.putValue(ColumnMajor.index3x3(1, 2), (double) m.r1c2());
 
-    this.view.put(index(2, 0), m.r2c0());
-    this.view.put(index(2, 1), m.r2c1());
-    this.view.put(index(2, 2), m.r2c2());
-  }
-
-  @Override
-  public ByteBuffer byteBuffer()
-  {
-    return this.buffer;
+    this.putValue(ColumnMajor.index3x3(2, 0), (double) m.r2c0());
+    this.putValue(ColumnMajor.index3x3(2, 1), (double) m.r2c1());
+    this.putValue(ColumnMajor.index3x3(2, 2), (double) m.r2c2());
   }
 }

@@ -16,14 +16,10 @@
 
 package com.io7m.jtensors.storage.bytebuffered;
 
-import com.io7m.ieee754b16.Binary16;
-import com.io7m.jnull.NullCheck;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.CharBuffer;
 
 /**
  * <p>A storage matrix.</p>
@@ -31,104 +27,84 @@ import java.nio.CharBuffer;
  * <p>Storage component count: {@code 2x2}</p>
  */
 
-public final class MatrixByteBuffered2x2s16 implements MatrixByteBuffered2x2Type
+public final class MatrixByteBuffered2x2s16
+  extends TensorByteBufferedFloating16
+  implements MatrixByteBuffered2x2Type
 {
-  private final CharBuffer view;
-  private final ByteBuffer buffer;
-
   private MatrixByteBuffered2x2s16(
-    final ByteBuffer bb)
+    final ByteBuffer in_buffer,
+    final ByteBufferOffsetMutable in_base,
+    final int in_offset)
   {
-    this.buffer = NullCheck.notNull(bb, "Buffer");
-    this.view = this.buffer.asCharBuffer();
+    super(in_buffer, in_base, in_offset);
   }
 
   /**
-   * @return A heap-backed matrix in native byte order
-   */
-
-  public static MatrixByteBuffered2x2Type createHeap()
-  {
-    return createWith(ByteBuffer.allocate((2 * 2) * 2).order(ByteOrder.nativeOrder()));
-  }
-
-  /**
-   * @return A direct-memory matrix in native byte order
-   */
-
-  public static MatrixByteBuffered2x2Type createDirect()
-  {
-    return createWith(ByteBuffer.allocateDirect((2 * 2) * 2).order(ByteOrder.nativeOrder()));
-  }
-
-  /**
-   * @param b A byte buffer
+   * <p>Return a new vector that is backed by the given byte buffer {@code
+   * b}</p>
    *
-   * @return A matrix backed by the given byte buffer
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered vector
    */
 
-  public static MatrixByteBuffered2x2Type createWith(
-    final ByteBuffer b)
+  public static MatrixByteBuffered2x2Type createWithBase(
+    final ByteBuffer b,
+    final ByteBufferOffsetMutable base,
+    final int offset)
   {
-    return new MatrixByteBuffered2x2s16(b);
-  }
-
-  private static int index(
-    final int row,
-    final int column)
-  {
-    return (column * 2) + row;
+    return new MatrixByteBuffered2x2s16(b, base, offset);
   }
 
   @Override
   public double r0c0()
   {
-    return Binary16.unpackDouble(this.view.get(index(0, 0)));
+    return this.getValue(ColumnMajor.index2x2(0, 0));
   }
 
   @Override
   public double r0c1()
   {
-    return Binary16.unpackDouble(this.view.get(index(0, 1)));
+    return this.getValue(ColumnMajor.index2x2(0, 1));
   }
 
   @Override
   public double r1c0()
   {
-    return Binary16.unpackDouble(this.view.get(index(1, 0)));
+    return this.getValue(ColumnMajor.index2x2(1, 0));
   }
 
   @Override
   public double r1c1()
   {
-    return Binary16.unpackDouble(this.view.get(index(1, 1)));
+    return this.getValue(ColumnMajor.index2x2(1, 1));
   }
 
   @Override
-  public void setMatrix2x2D(
-    final Matrix2x2D m)
+  public void setMatrix2x2D(final Matrix2x2D m)
   {
-    this.view.put(index(0, 0), Binary16.packDouble(m.r0c0()));
-    this.view.put(index(0, 1), Binary16.packDouble(m.r0c1()));
+    this.putValue(ColumnMajor.index2x2(0, 0), m.r0c0());
+    this.putValue(ColumnMajor.index2x2(0, 1), m.r0c1());
 
-    this.view.put(index(1, 0), Binary16.packDouble(m.r1c0()));
-    this.view.put(index(1, 1), Binary16.packDouble(m.r1c1()));
+    this.putValue(ColumnMajor.index2x2(1, 0), m.r1c0());
+    this.putValue(ColumnMajor.index2x2(1, 1), m.r1c1());
   }
 
   @Override
-  public void setMatrix2x2F(
-    final Matrix2x2F m)
+  public void setMatrix2x2F(final Matrix2x2F m)
   {
-    this.view.put(index(0, 0), Binary16.packDouble(m.r0c0()));
-    this.view.put(index(0, 1), Binary16.packDouble(m.r0c1()));
+    this.putValue(ColumnMajor.index2x2(0, 0), (double) m.r0c0());
+    this.putValue(ColumnMajor.index2x2(0, 1), (double) m.r0c1());
 
-    this.view.put(index(1, 0), Binary16.packDouble(m.r1c0()));
-    this.view.put(index(1, 1), Binary16.packDouble(m.r1c1()));
-  }
-
-  @Override
-  public ByteBuffer byteBuffer()
-  {
-    return this.buffer;
+    this.putValue(ColumnMajor.index2x2(1, 0), (double) m.r1c0());
+    this.putValue(ColumnMajor.index2x2(1, 1), (double) m.r1c1());
   }
 }

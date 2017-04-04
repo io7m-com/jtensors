@@ -16,11 +16,7 @@
 
 package com.io7m.jtensors.storage.bytebuffered;
 
-import com.io7m.jnull.NullCheck;
-
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
 
 /**
  * <p>A storage vector.</p>
@@ -31,92 +27,76 @@ import java.nio.DoubleBuffer;
  */
 
 public final class PVectorByteBufferedFloating3s64<T>
+  extends TensorByteBufferedFloating64
   implements PVectorByteBufferedFloating3Type<T>
 {
-  private final DoubleBuffer view;
-  private final ByteBuffer buffer;
-
   private PVectorByteBufferedFloating3s64(
-    final ByteBuffer in_buffer)
+    final ByteBuffer in_buffer,
+    final ByteBufferOffsetMutable in_base,
+    final int in_offset)
   {
-    this.buffer = NullCheck.notNull(in_buffer, "Buffer");
-    this.view = this.buffer.asDoubleBuffer();
+    super(in_buffer, in_base, in_offset);
   }
 
   /**
-   * @param <T> A phantom type parameter
+   * <p>Return a new vector that is backed by the given byte buffer {@code
+   * b}</p>
    *
-   * @return A heap-backed vector in native byte order
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param <T>    A phantom type parameter
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered vector
    */
 
-  public static <T> PVectorByteBufferedFloating3Type<T> createHeap()
+  public static <T> PVectorByteBufferedFloating3Type<T> createWithBase(
+    final ByteBuffer b,
+    final ByteBufferOffsetMutable base,
+    final int offset)
   {
-    return createWith(ByteBuffer.allocate(3 * 8).order(ByteOrder.nativeOrder()));
-  }
-
-  /**
-   * @param <T> A phantom type parameter
-   *
-   * @return A direct-memory-backed vector in native byte order
-   */
-
-  public static <T> PVectorByteBufferedFloating3Type<T> createDirect()
-  {
-    return createWith(ByteBuffer.allocateDirect(3 * 8).order(ByteOrder.nativeOrder()));
-  }
-
-  /**
-   * @param <T> A phantom type parameter
-   * @param b   A byte buffer
-   *
-   * @return A vector backed by the given byte buffer
-   */
-
-  public static <T> PVectorByteBufferedFloating3Type<T> createWith(
-    final ByteBuffer b)
-  {
-    return new PVectorByteBufferedFloating3s64<>(b);
+    return new PVectorByteBufferedFloating3s64<>(b, base, offset);
   }
 
   @Override
   public double x()
   {
-    return this.view.get(0);
+    return this.getValue(0);
   }
 
   @Override
   public double y()
   {
-    return this.view.get(1);
+    return this.getValue(1);
   }
 
   @Override
   public double z()
   {
-    return this.view.get(2);
+    return this.getValue(2);
   }
 
   @Override
   public void setX(final double x)
   {
-    this.view.put(0, x);
+    this.putValue(0, x);
   }
 
   @Override
   public void setY(final double y)
   {
-    this.view.put(1, y);
+    this.putValue(1, y);
   }
 
   @Override
   public void setZ(final double z)
   {
-    this.view.put(2, z);
-  }
-
-  @Override
-  public ByteBuffer byteBuffer()
-  {
-    return this.buffer;
+    this.putValue(2, z);
   }
 }

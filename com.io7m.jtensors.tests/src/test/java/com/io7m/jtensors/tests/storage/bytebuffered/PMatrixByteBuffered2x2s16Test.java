@@ -16,38 +16,72 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
+
+import com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D;
+import com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F;
+import com.io7m.jtensors.generators.Matrix2x2DGenerator;
+import com.io7m.jtensors.generators.Matrix2x2FGenerator;
+import com.io7m.jtensors.generators.PMatrix2x2DGenerator;
+import com.io7m.jtensors.generators.PMatrix2x2FGenerator;
 import com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage2x2Type;
+import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
 import com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2s16;
+import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestB16Ops;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
 import com.io7m.jtensors.tests.storage.api.PMatrixStorage2x2Contract;
-import org.junit.Assert;
-import org.junit.Test;
+import net.java.quickcheck.Generator;
+import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class PMatrixByteBuffered2x2s16Test
   extends PMatrixStorage2x2Contract
 {
+  @Rule public final PercentagePassRule percent =
+    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
+
   @Override
-  protected void checkAlmostEqual(
-    final double a,
-    final double b)
+  protected PMatrixStorage2x2Type<Object, Object> create(
+    final int offset)
   {
-    TestB16Ops.checkAlmostEquals(a, b);
+    return PMatrixByteBuffered2x2s16.createWithBase(
+      ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
+      ByteBufferOffsetMutable.create(),
+      offset);
   }
 
   @Override
-  protected PMatrixStorage2x2Type<Object, Object> createIdentity()
+  protected Generator<PMatrix2x2D<Object, Object>> createGeneratorP2x2D()
   {
-    return PMatrixByteBuffered2x2s16.createHeap();
+    return PMatrix2x2DGenerator.createNormal();
   }
 
-  @Test
-  public void testByteBufferIdentity()
+  @Override
+  protected Generator<PMatrix2x2F<Object, Object>> createGeneratorP2x2F()
   {
-    final ByteBuffer b = ByteBuffer.allocate(1024);
-    Assert.assertEquals(
-      b,
-      PMatrixByteBuffered2x2s16.createWith(b).byteBuffer());
+    return PMatrix2x2FGenerator.createNormal();
+  }
+
+  @Override
+  protected Generator<Matrix2x2D> createGenerator2x2D()
+  {
+    return Matrix2x2DGenerator.createNormal();
+  }
+
+  @Override
+  protected Generator<Matrix2x2F> createGenerator2x2F()
+  {
+    return Matrix2x2FGenerator.createNormal();
+  }
+
+  @Override
+  protected void checkAlmostEquals(
+    final double x,
+    final double y)
+  {
+    TestB16Ops.checkAlmostEquals(x, y);
   }
 }

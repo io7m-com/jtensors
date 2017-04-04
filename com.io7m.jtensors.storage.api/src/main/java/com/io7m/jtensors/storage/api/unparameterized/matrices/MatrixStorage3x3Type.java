@@ -31,7 +31,7 @@ public interface MatrixStorage3x3Type
   /**
    * Set the components from the given matrix.
    *
-   * @param m The source vector
+   * @param m The source matrix
    */
 
   void setMatrix3x3D(
@@ -40,9 +40,9 @@ public interface MatrixStorage3x3Type
   /**
    * Set the components from the given matrix.
    *
-   * @param v The source vector
+   * @param m The source matrix
    */
 
   void setMatrix3x3F(
-    final Matrix3x3F v);
+    final Matrix3x3F m);
 }

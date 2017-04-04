@@ -31,8 +31,8 @@
     <!-- Required to use the SuppressionCommentFilter above -->
     <module name="FileContentsHolder"/>
 
-    <module name="AbstractClassName"/>
     <!--
+    <module name="AbstractClassName"/>
     <module name="AnnotationUseStyle"/>
     -->
 

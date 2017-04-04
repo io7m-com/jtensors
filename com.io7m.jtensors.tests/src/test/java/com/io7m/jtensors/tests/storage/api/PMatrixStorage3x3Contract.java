@@ -18,81 +18,118 @@ package com.io7m.jtensors.tests.storage.api;
 
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F;
-import com.io7m.jtensors.generators.PMatrix3x3DGenerator;
-import com.io7m.jtensors.generators.PMatrix3x3FGenerator;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F;
 import com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage3x3Type;
+import com.io7m.jtensors.tests.rules.PercentagePassing;
 import net.java.quickcheck.Generator;
 import org.junit.Test;
 
-public abstract class PMatrixStorage3x3Contract extends MatrixStorage3x3Contract
+public abstract class PMatrixStorage3x3Contract
 {
-  private static Generator<PMatrix3x3D<Object, Object>> createGeneratorP3x3D()
-  {
-    return PMatrix3x3DGenerator.createNormal();
-  }
+  protected abstract PMatrixStorage3x3Type<Object, Object> create(int offset);
 
-  private static Generator<PMatrix3x3F<Object, Object>> createGeneratorP3x3F()
-  {
-    return PMatrix3x3FGenerator.createNormal();
-  }
+  protected abstract Generator<PMatrix3x3D<Object, Object>> createGeneratorP3x3D();
 
-  protected abstract PMatrixStorage3x3Type<Object, Object> createIdentity();
+  protected abstract Generator<PMatrix3x3F<Object, Object>> createGeneratorP3x3F();
+
+  protected abstract Generator<Matrix3x3D> createGenerator3x3D();
+
+  protected abstract Generator<Matrix3x3F> createGenerator3x3F();
+
+  protected abstract void checkAlmostEquals(
+    double x,
+    double y);
 
   @Test
-  public final void testGetSetPV3D()
+  @PercentagePassing
+  public final void testGetSetP3x3D()
   {
-    final Generator<PMatrix3x3D<Object, Object>> gen = createGeneratorP3x3D();
-    final PMatrix3x3D<Object, Object> m = gen.next();
-    final PMatrixStorage3x3Type<Object, Object> sv = this.createIdentity();
-    sv.setPMatrix3x3D(m);
+    final Generator<PMatrix3x3D<Object, Object>> gen = this.createGeneratorP3x3D();
+    final PMatrix3x3D<Object, Object> v = gen.next();
 
-    for (int row = 0; row < 3; ++row) {
-      for (int column = 0; column < 3; ++column) {
-        this.checkAlmostEqual(
-          m.rowColumn(row, column),
-          sv.rowColumn(row, column));
-      }
-    }
+    final PMatrixStorage3x3Type<Object, Object> sv = this.create(0);
+    sv.setPMatrix3x3D(v);
 
-    this.checkAlmostEqual(m.r0c0(), sv.r0c0());
-    this.checkAlmostEqual(m.r0c1(), sv.r0c1());
-    this.checkAlmostEqual(m.r0c2(), sv.r0c2());
+    this.checkAlmostEquals(v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals(v.r0c1(), sv.r0c1());
+    this.checkAlmostEquals(v.r0c2(), sv.r0c2());
 
-    this.checkAlmostEqual(m.r1c0(), sv.r1c0());
-    this.checkAlmostEqual(m.r1c1(), sv.r1c1());
-    this.checkAlmostEqual(m.r1c2(), sv.r1c2());
+    this.checkAlmostEquals(v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals(v.r1c1(), sv.r1c1());
+    this.checkAlmostEquals(v.r1c2(), sv.r1c2());
 
-    this.checkAlmostEqual(m.r2c0(), sv.r2c0());
-    this.checkAlmostEqual(m.r2c1(), sv.r2c1());
-    this.checkAlmostEqual(m.r2c2(), sv.r2c2());
+    this.checkAlmostEquals(v.r2c0(), sv.r2c0());
+    this.checkAlmostEquals(v.r2c1(), sv.r2c1());
+    this.checkAlmostEquals(v.r2c2(), sv.r2c2());
   }
 
   @Test
-  public final void testGetSetPV3F()
+  @PercentagePassing
+  public final void testGetSetP3x3F()
   {
-    final Generator<PMatrix3x3F<Object, Object>> gen = createGeneratorP3x3F();
-    final PMatrix3x3F<Object, Object> m = gen.next();
-    final PMatrixStorage3x3Type<Object, Object> sv = this.createIdentity();
-    sv.setPMatrix3x3F(m);
+    final Generator<PMatrix3x3F<Object, Object>> gen = this.createGeneratorP3x3F();
+    final PMatrix3x3F<Object, Object> v = gen.next();
 
-    for (int row = 0; row < 3; ++row) {
-      for (int column = 0; column < 3; ++column) {
-        this.checkAlmostEqual(
-          (double) m.rowColumn(row, column),
-          sv.rowColumn(row, column));
-      }
-    }
+    final PMatrixStorage3x3Type<Object, Object> sv = this.create(0);
+    sv.setPMatrix3x3F(v);
 
-    this.checkAlmostEqual((double) m.r0c0(), sv.r0c0());
-    this.checkAlmostEqual((double) m.r0c1(), sv.r0c1());
-    this.checkAlmostEqual((double) m.r0c2(), sv.r0c2());
+    this.checkAlmostEquals((double) v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals((double) v.r0c1(), sv.r0c1());
+    this.checkAlmostEquals((double) v.r0c2(), sv.r0c2());
 
-    this.checkAlmostEqual((double) m.r1c0(), sv.r1c0());
-    this.checkAlmostEqual((double) m.r1c1(), sv.r1c1());
-    this.checkAlmostEqual((double) m.r1c2(), sv.r1c2());
+    this.checkAlmostEquals((double) v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals((double) v.r1c1(), sv.r1c1());
+    this.checkAlmostEquals((double) v.r1c2(), sv.r1c2());
 
-    this.checkAlmostEqual((double) m.r2c0(), sv.r2c0());
-    this.checkAlmostEqual((double) m.r2c1(), sv.r2c1());
-    this.checkAlmostEqual((double) m.r2c2(), sv.r2c2());
+    this.checkAlmostEquals((double) v.r2c0(), sv.r2c0());
+    this.checkAlmostEquals((double) v.r2c1(), sv.r2c1());
+    this.checkAlmostEquals((double) v.r2c2(), sv.r2c2());
+  }
+
+  @Test
+  @PercentagePassing
+  public final void testGetSet3x3D()
+  {
+    final Generator<Matrix3x3D> gen = this.createGenerator3x3D();
+    final Matrix3x3D v = gen.next();
+
+    final PMatrixStorage3x3Type<Object, Object> sv = this.create(0);
+    sv.setMatrix3x3D(v);
+
+    this.checkAlmostEquals(v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals(v.r0c1(), sv.r0c1());
+    this.checkAlmostEquals(v.r0c2(), sv.r0c2());
+
+    this.checkAlmostEquals(v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals(v.r1c1(), sv.r1c1());
+    this.checkAlmostEquals(v.r1c2(), sv.r1c2());
+
+    this.checkAlmostEquals(v.r2c0(), sv.r2c0());
+    this.checkAlmostEquals(v.r2c1(), sv.r2c1());
+    this.checkAlmostEquals(v.r2c2(), sv.r2c2());
+  }
+
+  @Test
+  @PercentagePassing
+  public final void testGetSet3x3F()
+  {
+    final Generator<Matrix3x3F> gen = this.createGenerator3x3F();
+    final Matrix3x3F v = gen.next();
+
+    final PMatrixStorage3x3Type<Object, Object> sv = this.create(0);
+    sv.setMatrix3x3F(v);
+
+    this.checkAlmostEquals((double) v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals((double) v.r0c1(), sv.r0c1());
+    this.checkAlmostEquals((double) v.r0c2(), sv.r0c2());
+
+    this.checkAlmostEquals((double) v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals((double) v.r1c1(), sv.r1c1());
+    this.checkAlmostEquals((double) v.r1c2(), sv.r1c2());
+
+    this.checkAlmostEquals((double) v.r2c0(), sv.r2c0());
+    this.checkAlmostEquals((double) v.r2c1(), sv.r2c1());
+    this.checkAlmostEquals((double) v.r2c2(), sv.r2c2());
   }
 }

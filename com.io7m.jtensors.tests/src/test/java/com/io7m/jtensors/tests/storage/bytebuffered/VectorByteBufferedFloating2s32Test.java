@@ -16,40 +16,55 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
+import com.io7m.jtensors.core.unparameterized.vectors.Vector2D;
+import com.io7m.jtensors.core.unparameterized.vectors.Vector2F;
+import com.io7m.jtensors.generators.Vector2DGenerator;
+import com.io7m.jtensors.generators.Vector2FGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type;
+import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2s32;
+import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestFOps;
-import com.io7m.jtensors.tests.storage.api.VectorStorage2Contract;
-import org.junit.Assert;
-import org.junit.Test;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.jtensors.tests.storage.api.VectorStorageFloating2Contract;
+import net.java.quickcheck.Generator;
+import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
-public final class VectorByteBufferedFloating2s32Test extends
-  VectorStorage2Contract
+public final class VectorByteBufferedFloating2s32Test
+  extends VectorStorageFloating2Contract
 {
+  @Rule public final PercentagePassRule percent =
+    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
+
   @Override
-  protected void checkAlmostEqual(
-    final double a,
-    final double b)
+  protected VectorStorageFloating2Type create(
+    final int offset)
   {
-    TestFOps.checkAlmostEquals(a, b);
+    return VectorByteBufferedFloating2s32.createWithBase(
+      ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
+      ByteBufferOffsetMutable.create(),
+      offset);
   }
 
   @Override
-  protected VectorStorageFloating2Type createWith2(
+  protected Generator<Vector2D> createGenerator2D()
+  {
+    return Vector2DGenerator.createNormal();
+  }
+
+  @Override
+  protected Generator<Vector2F> createGenerator2F()
+  {
+    return Vector2FGenerator.createNormal();
+  }
+
+  @Override
+  protected void checkAlmostEquals(
     final double x,
     final double y)
   {
-    return VectorByteBufferedFloating2s32.createHeap();
-  }
-
-  @Test
-  public void testByteBufferIdentity()
-  {
-    final ByteBuffer b = ByteBuffer.allocate(1024);
-    Assert.assertEquals(
-      b,
-      VectorByteBufferedFloating2s32.createWith(b).byteBuffer());
+    TestFOps.checkAlmostEquals(x, y);
   }
 }

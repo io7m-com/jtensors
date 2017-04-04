@@ -31,7 +31,7 @@ public interface MatrixStorage2x2Type
   /**
    * Set the components from the given matrix.
    *
-   * @param m The source vector
+   * @param m The source matrix
    */
 
   void setMatrix2x2D(
@@ -40,9 +40,9 @@ public interface MatrixStorage2x2Type
   /**
    * Set the components from the given matrix.
    *
-   * @param v The source vector
+   * @param m The source matrix
    */
 
   void setMatrix2x2F(
-    final Matrix2x2F v);
+    final Matrix2x2F m);
 }

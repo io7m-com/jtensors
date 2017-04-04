@@ -16,14 +16,10 @@
 
 package com.io7m.jtensors.storage.bytebuffered;
 
-import com.io7m.ieee754b16.Binary16;
-import com.io7m.jnull.NullCheck;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.CharBuffer;
 
 /**
  * <p>A storage matrix.</p>
@@ -31,204 +27,184 @@ import java.nio.CharBuffer;
  * <p>Storage component count: {@code 4x4}</p>
  */
 
-public final class MatrixByteBuffered4x4s16 implements MatrixByteBuffered4x4Type
+public final class MatrixByteBuffered4x4s16
+  extends TensorByteBufferedFloating16
+  implements MatrixByteBuffered4x4Type
 {
-  private final CharBuffer view;
-  private final ByteBuffer buffer;
-
   private MatrixByteBuffered4x4s16(
-    final ByteBuffer bb)
+    final ByteBuffer in_buffer,
+    final ByteBufferOffsetMutable in_base,
+    final int in_offset)
   {
-    this.buffer = NullCheck.notNull(bb, "Buffer");
-    this.view = this.buffer.asCharBuffer();
+    super(in_buffer, in_base, in_offset);
   }
 
   /**
-   * @return A heap-backed matrix in native byte order
-   */
-
-  public static MatrixByteBuffered4x4Type createHeap()
-  {
-    return createWith(ByteBuffer.allocate((4 * 4) * 2).order(ByteOrder.nativeOrder()));
-  }
-
-  /**
-   * @return A direct-memory matrix in native byte order
-   */
-
-  public static MatrixByteBuffered4x4Type createDirect()
-  {
-    return createWith(ByteBuffer.allocateDirect((4 * 4) * 2).order(ByteOrder.nativeOrder()));
-  }
-
-  /**
-   * @param b A byte buffer
+   * <p>Return a new vector that is backed by the given byte buffer {@code
+   * b}</p>
    *
-   * @return A matrix backed by the given byte buffer
+   * <p>The data for the instance will be taken from the data at the current
+   * value of {@code base.get() + offset}, each time a field is requested or
+   * set.</p>
+   *
+   * <p>No initialization of the data is performed.</p>
+   *
+   * @param b      The byte buffer
+   * @param base   The base address
+   * @param offset A constant offset
+   *
+   * @return A new buffered vector
    */
 
-  public static MatrixByteBuffered4x4Type createWith(
-    final ByteBuffer b)
+  public static MatrixByteBuffered4x4Type createWithBase(
+    final ByteBuffer b,
+    final ByteBufferOffsetMutable base,
+    final int offset)
   {
-    return new MatrixByteBuffered4x4s16(b);
-  }
-
-  private static int indexUnsafe(
-    final int row,
-    final int column)
-  {
-    return (column * 4) + row;
+    return new MatrixByteBuffered4x4s16(b, base, offset);
   }
 
   @Override
   public double r0c0()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(0, 0)));
+    return this.getValue(ColumnMajor.index4x4(0, 0));
   }
 
   @Override
   public double r0c1()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(0, 1)));
+    return this.getValue(ColumnMajor.index4x4(0, 1));
   }
 
   @Override
   public double r0c2()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(0, 2)));
+    return this.getValue(ColumnMajor.index4x4(0, 2));
   }
 
   @Override
   public double r0c3()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(0, 3)));
+    return this.getValue(ColumnMajor.index4x4(0, 3));
   }
 
   @Override
   public double r1c0()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(1, 0)));
+    return this.getValue(ColumnMajor.index4x4(1, 0));
   }
 
   @Override
   public double r1c1()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(1, 1)));
+    return this.getValue(ColumnMajor.index4x4(1, 1));
   }
 
   @Override
   public double r1c2()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(1, 2)));
+    return this.getValue(ColumnMajor.index4x4(1, 2));
   }
 
   @Override
   public double r1c3()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(1, 3)));
+    return this.getValue(ColumnMajor.index4x4(1, 3));
   }
 
   @Override
   public double r2c0()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(2, 0)));
+    return this.getValue(ColumnMajor.index4x4(2, 0));
   }
 
   @Override
   public double r2c1()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(2, 1)));
+    return this.getValue(ColumnMajor.index4x4(2, 1));
   }
 
   @Override
   public double r2c2()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(2, 2)));
+    return this.getValue(ColumnMajor.index4x4(2, 2));
   }
 
   @Override
   public double r2c3()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(2, 3)));
+    return this.getValue(ColumnMajor.index4x4(2, 3));
   }
 
   @Override
   public double r3c0()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(3, 0)));
+    return this.getValue(ColumnMajor.index4x4(3, 0));
   }
 
   @Override
   public double r3c1()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(3, 1)));
+    return this.getValue(ColumnMajor.index4x4(3, 1));
   }
 
   @Override
   public double r3c2()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(3, 2)));
+    return this.getValue(ColumnMajor.index4x4(3, 2));
   }
 
   @Override
   public double r3c3()
   {
-    return Binary16.unpackDouble(this.view.get(indexUnsafe(3, 3)));
+    return this.getValue(ColumnMajor.index4x4(3, 3));
   }
 
   @Override
-  public void setMatrix4x4D(
-    final Matrix4x4D m)
+  public void setMatrix4x4D(final Matrix4x4D m)
   {
-    this.view.put(indexUnsafe(0, 0), Binary16.packDouble(m.r0c0()));
-    this.view.put(indexUnsafe(0, 1), Binary16.packDouble(m.r0c1()));
-    this.view.put(indexUnsafe(0, 2), Binary16.packDouble(m.r0c2()));
-    this.view.put(indexUnsafe(0, 3), Binary16.packDouble(m.r0c3()));
+    this.putValue(ColumnMajor.index4x4(0, 0), m.r0c0());
+    this.putValue(ColumnMajor.index4x4(0, 1), m.r0c1());
+    this.putValue(ColumnMajor.index4x4(0, 2), m.r0c2());
+    this.putValue(ColumnMajor.index4x4(0, 3), m.r0c3());
 
-    this.view.put(indexUnsafe(1, 0), Binary16.packDouble(m.r1c0()));
-    this.view.put(indexUnsafe(1, 1), Binary16.packDouble(m.r1c1()));
-    this.view.put(indexUnsafe(1, 2), Binary16.packDouble(m.r1c2()));
-    this.view.put(indexUnsafe(1, 3), Binary16.packDouble(m.r1c3()));
+    this.putValue(ColumnMajor.index4x4(1, 0), m.r1c0());
+    this.putValue(ColumnMajor.index4x4(1, 1), m.r1c1());
+    this.putValue(ColumnMajor.index4x4(1, 2), m.r1c2());
+    this.putValue(ColumnMajor.index4x4(1, 3), m.r1c3());
 
-    this.view.put(indexUnsafe(2, 0), Binary16.packDouble(m.r2c0()));
-    this.view.put(indexUnsafe(2, 1), Binary16.packDouble(m.r2c1()));
-    this.view.put(indexUnsafe(2, 2), Binary16.packDouble(m.r2c2()));
-    this.view.put(indexUnsafe(2, 3), Binary16.packDouble(m.r2c3()));
+    this.putValue(ColumnMajor.index4x4(2, 0), m.r2c0());
+    this.putValue(ColumnMajor.index4x4(2, 1), m.r2c1());
+    this.putValue(ColumnMajor.index4x4(2, 2), m.r2c2());
+    this.putValue(ColumnMajor.index4x4(2, 3), m.r2c3());
 
-    this.view.put(indexUnsafe(3, 0), Binary16.packDouble(m.r3c0()));
-    this.view.put(indexUnsafe(3, 1), Binary16.packDouble(m.r3c1()));
-    this.view.put(indexUnsafe(3, 2), Binary16.packDouble(m.r3c2()));
-    this.view.put(indexUnsafe(3, 3), Binary16.packDouble(m.r3c3()));
+    this.putValue(ColumnMajor.index4x4(3, 0), m.r3c0());
+    this.putValue(ColumnMajor.index4x4(3, 1), m.r3c1());
+    this.putValue(ColumnMajor.index4x4(3, 2), m.r3c2());
+    this.putValue(ColumnMajor.index4x4(3, 3), m.r3c3());
   }
 
   @Override
-  public void setMatrix4x4F(
-    final Matrix4x4F m)
+  public void setMatrix4x4F(final Matrix4x4F m)
   {
-    this.view.put(indexUnsafe(0, 0), Binary16.packDouble(m.r0c0()));
-    this.view.put(indexUnsafe(0, 1), Binary16.packDouble(m.r0c1()));
-    this.view.put(indexUnsafe(0, 2), Binary16.packDouble(m.r0c2()));
-    this.view.put(indexUnsafe(0, 3), Binary16.packDouble(m.r0c3()));
+    this.putValue(ColumnMajor.index4x4(0, 0), (double) m.r0c0());
+    this.putValue(ColumnMajor.index4x4(0, 1), (double) m.r0c1());
+    this.putValue(ColumnMajor.index4x4(0, 2), (double) m.r0c2());
+    this.putValue(ColumnMajor.index4x4(0, 3), (double) m.r0c3());
 
-    this.view.put(indexUnsafe(1, 0), Binary16.packDouble(m.r1c0()));
-    this.view.put(indexUnsafe(1, 1), Binary16.packDouble(m.r1c1()));
-    this.view.put(indexUnsafe(1, 2), Binary16.packDouble(m.r1c2()));
-    this.view.put(indexUnsafe(1, 3), Binary16.packDouble(m.r1c3()));
+    this.putValue(ColumnMajor.index4x4(1, 0), (double) m.r1c0());
+    this.putValue(ColumnMajor.index4x4(1, 1), (double) m.r1c1());
+    this.putValue(ColumnMajor.index4x4(1, 2), (double) m.r1c2());
+    this.putValue(ColumnMajor.index4x4(1, 3), (double) m.r1c3());
 
-    this.view.put(indexUnsafe(2, 0), Binary16.packDouble(m.r2c0()));
-    this.view.put(indexUnsafe(2, 1), Binary16.packDouble(m.r2c1()));
-    this.view.put(indexUnsafe(2, 2), Binary16.packDouble(m.r2c2()));
-    this.view.put(indexUnsafe(2, 3), Binary16.packDouble(m.r2c3()));
+    this.putValue(ColumnMajor.index4x4(2, 0), (double) m.r2c0());
+    this.putValue(ColumnMajor.index4x4(2, 1), (double) m.r2c1());
+    this.putValue(ColumnMajor.index4x4(2, 2), (double) m.r2c2());
+    this.putValue(ColumnMajor.index4x4(2, 3), (double) m.r2c3());
 
-    this.view.put(indexUnsafe(3, 0), Binary16.packDouble(m.r3c0()));
-    this.view.put(indexUnsafe(3, 1), Binary16.packDouble(m.r3c1()));
-    this.view.put(indexUnsafe(3, 2), Binary16.packDouble(m.r3c2()));
-    this.view.put(indexUnsafe(3, 3), Binary16.packDouble(m.r3c3()));
-  }
-
-  @Override
-  public ByteBuffer byteBuffer()
-  {
-    return this.buffer;
+    this.putValue(ColumnMajor.index4x4(3, 0), (double) m.r3c0());
+    this.putValue(ColumnMajor.index4x4(3, 1), (double) m.r3c1());
+    this.putValue(ColumnMajor.index4x4(3, 2), (double) m.r3c2());
+    this.putValue(ColumnMajor.index4x4(3, 3), (double) m.r3c3());
   }
 }

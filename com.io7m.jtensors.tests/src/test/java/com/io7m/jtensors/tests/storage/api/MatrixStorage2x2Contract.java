@@ -16,75 +16,57 @@
 
 package com.io7m.jtensors.tests.storage.api;
 
+
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F;
-import com.io7m.jtensors.generators.Matrix2x2DGenerator;
-import com.io7m.jtensors.generators.Matrix2x2FGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage2x2Type;
+import com.io7m.jtensors.tests.rules.PercentagePassing;
 import net.java.quickcheck.Generator;
 import org.junit.Test;
 
 public abstract class MatrixStorage2x2Contract
 {
-  private static Generator<Matrix2x2D> createGeneratorP2x2D()
-  {
-    return Matrix2x2DGenerator.createNormal();
-  }
+  protected abstract MatrixStorage2x2Type create(int offset);
 
-  private static Generator<Matrix2x2F> createGeneratorP2x2F()
-  {
-    return Matrix2x2FGenerator.createNormal();
-  }
+  protected abstract Generator<Matrix2x2D> createGenerator2x2D();
 
-  protected abstract void checkAlmostEqual(
-    double a,
-    double b);
+  protected abstract Generator<Matrix2x2F> createGenerator2x2F();
 
-  protected abstract MatrixStorage2x2Type createIdentity();
+  protected abstract void checkAlmostEquals(
+    double x,
+    double y);
 
   @Test
-  public final void testGetSetV2D()
+  @PercentagePassing
+  public final void testGetSet2x2D()
   {
-    final Generator<Matrix2x2D> gen = createGeneratorP2x2D();
-    final Matrix2x2D m = gen.next();
-    final MatrixStorage2x2Type sv = this.createIdentity();
-    sv.setMatrix2x2D(m);
+    final Generator<Matrix2x2D> gen = this.createGenerator2x2D();
+    final Matrix2x2D v = gen.next();
 
-    for (int row = 0; row < 2; ++row) {
-      for (int column = 0; column < 2; ++column) {
-        this.checkAlmostEqual(
-          m.rowColumn(row, column),
-          sv.rowColumn(row, column));
-      }
-    }
+    final MatrixStorage2x2Type sv = this.create(0);
+    sv.setMatrix2x2D(v);
 
-    this.checkAlmostEqual(m.r0c0(), sv.r0c0());
-    this.checkAlmostEqual(m.r0c1(), sv.r0c1());
+    this.checkAlmostEquals(v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals(v.r0c1(), sv.r0c1());
 
-    this.checkAlmostEqual(m.r1c0(), sv.r1c0());
-    this.checkAlmostEqual(m.r1c1(), sv.r1c1());
+    this.checkAlmostEquals(v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals(v.r1c1(), sv.r1c1());
   }
 
   @Test
-  public final void testGetSetV2F()
+  @PercentagePassing
+  public final void testGetSet2x2F()
   {
-    final Generator<Matrix2x2F> gen = createGeneratorP2x2F();
-    final Matrix2x2F m = gen.next();
-    final MatrixStorage2x2Type sv = this.createIdentity();
-    sv.setMatrix2x2F(m);
+    final Generator<Matrix2x2F> gen = this.createGenerator2x2F();
+    final Matrix2x2F v = gen.next();
 
-    for (int row = 0; row < 2; ++row) {
-      for (int column = 0; column < 2; ++column) {
-        this.checkAlmostEqual(
-          (double) m.rowColumn(row, column),
-          sv.rowColumn(row, column));
-      }
-    }
+    final MatrixStorage2x2Type sv = this.create(0);
+    sv.setMatrix2x2F(v);
 
-    this.checkAlmostEqual((double) m.r0c0(), sv.r0c0());
-    this.checkAlmostEqual((double) m.r0c1(), sv.r0c1());
+    this.checkAlmostEquals((double) v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals((double) v.r0c1(), sv.r0c1());
 
-    this.checkAlmostEqual((double) m.r1c0(), sv.r1c0());
-    this.checkAlmostEqual((double) m.r1c1(), sv.r1c1());
+    this.checkAlmostEquals((double) v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals((double) v.r1c1(), sv.r1c1());
   }
 }

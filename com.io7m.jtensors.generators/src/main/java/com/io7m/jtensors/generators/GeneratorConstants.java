@@ -20,32 +20,21 @@ import com.io7m.junreachable.UnreachableCodeException;
 
 final class GeneratorConstants
 {
+  static final double BOUND_LARGE_DOUBLE_UPPER = 1_000_000.0;
+  static final double BOUND_LARGE_DOUBLE_LOWER = -1_000_000.0;
+  static final double BOUND_SMALL_DOUBLE_UPPER = 1_000.0;
+  static final double BOUND_SMALL_DOUBLE_LOWER = -1_000.0;
+  static final double BOUND_NORMAL_DOUBLE_UPPER = 1.0;
+  static final double BOUND_NORMAL_DOUBLE_LOWER = -1.0;
+  static final double BOUND_LARGE_FLOAT_UPPER = 1_000_000.0;
+  static final double BOUND_LARGE_FLOAT_LOWER = -1_000_000.0;
+  static final double BOUND_SMALL_FLOAT_UPPER = 1_000.0;
+  static final double BOUND_SMALL_FLOAT_LOWER = -1_000.0;
+  static final double BOUND_NORMAL_FLOAT_UPPER = 1.0;
+  static final double BOUND_NORMAL_FLOAT_LOWER = -1.0;
+
   private GeneratorConstants()
   {
     throw new UnreachableCodeException();
   }
-
-  static final double BOUND_LARGE_DOUBLE_UPPER = 1_000_000.0;
-
-  static final double BOUND_LARGE_DOUBLE_LOWER = -1_000_000.0;
-
-  static final double BOUND_SMALL_DOUBLE_UPPER = 1_000.0;
-
-  static final double BOUND_SMALL_DOUBLE_LOWER = -1_000.0;
-
-  static final double BOUND_NORMAL_DOUBLE_UPPER = 1.0;
-
-  static final double BOUND_NORMAL_DOUBLE_LOWER = -1.0;
-
-  static final double BOUND_LARGE_FLOAT_UPPER = 1_000_000.0;
-
-  static final double BOUND_LARGE_FLOAT_LOWER = -1_000_000.0;
-
-  static final double BOUND_SMALL_FLOAT_UPPER = 1_000.0;
-
-  static final double BOUND_SMALL_FLOAT_LOWER = -1_000.0;
-
-  static final double BOUND_NORMAL_FLOAT_UPPER = 1.0;
-
-  static final double BOUND_NORMAL_FLOAT_LOWER = -1.0;
 }

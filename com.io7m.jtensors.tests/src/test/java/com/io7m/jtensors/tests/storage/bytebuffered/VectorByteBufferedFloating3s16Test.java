@@ -16,50 +16,55 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
-import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type;
+import com.io7m.jtensors.core.unparameterized.vectors.Vector3D;
+import com.io7m.jtensors.core.unparameterized.vectors.Vector3F;
+import com.io7m.jtensors.generators.Vector3DGenerator;
+import com.io7m.jtensors.generators.Vector3FGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type;
+import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3s16;
+import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestB16Ops;
-import com.io7m.jtensors.tests.storage.api.VectorStorage3Contract;
-import org.junit.Assert;
-import org.junit.Test;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.jtensors.tests.storage.api.VectorStorageFloating3Contract;
+import net.java.quickcheck.Generator;
+import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedFloating3s16Test
-  extends VectorStorage3Contract
+  extends VectorStorageFloating3Contract
 {
+  @Rule public final PercentagePassRule percent =
+    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
+
   @Override
-  protected void checkAlmostEqual(
-    final double a,
-    final double b)
+  protected VectorStorageFloating3Type create(
+    final int offset)
   {
-    TestB16Ops.checkAlmostEquals(a, b);
+    return VectorByteBufferedFloating3s16.createWithBase(
+      ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
+      ByteBufferOffsetMutable.create(),
+      offset);
   }
 
   @Override
-  protected VectorStorageFloating2Type createWith2(
+  protected Generator<Vector3D> createGenerator3D()
+  {
+    return Vector3DGenerator.createNormal();
+  }
+
+  @Override
+  protected Generator<Vector3F> createGenerator3F()
+  {
+    return Vector3FGenerator.createNormal();
+  }
+
+  @Override
+  protected void checkAlmostEquals(
     final double x,
     final double y)
   {
-    return VectorByteBufferedFloating3s16.createHeap();
-  }
-
-  @Override
-  protected VectorStorageFloating3Type createWith3(
-    final double x,
-    final double y,
-    final double z)
-  {
-    return VectorByteBufferedFloating3s16.createHeap();
-  }
-
-  @Test
-  public void testByteBufferIdentity()
-  {
-    final ByteBuffer b = ByteBuffer.allocate(1024);
-    Assert.assertEquals(
-      b,
-      VectorByteBufferedFloating3s16.createWith(b).byteBuffer());
+    TestB16Ops.checkAlmostEquals(x, y);
   }
 }

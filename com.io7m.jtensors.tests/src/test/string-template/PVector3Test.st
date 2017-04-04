@@ -399,7 +399,7 @@ public final class <className>
    */
 
   @Test
-  @PercentagePassing
+  @PercentagePassing(passPercent = 97)
   public void testCrossProductDistributive()
   {
     final Generator\<<vectorType>\> gen = createGenerator();

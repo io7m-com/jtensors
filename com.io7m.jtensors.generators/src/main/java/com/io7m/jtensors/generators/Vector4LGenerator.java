@@ -70,6 +70,67 @@ public final class Vector4LGenerator implements Generator<Vector4L>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-9223372036854775808,
+   * 9223372036854775807]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector4L> create64()
+  {
+    return new Vector4LGenerator(PrimitiveGenerators.longs(
+      -9223372036854775808L,
+      -9223372036854775807L
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-2147483648, 2147483647]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector4L> create32()
+  {
+    return new Vector4LGenerator(PrimitiveGenerators.longs(
+      -2147483648L,
+      -2147483647L
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-32768, 32767]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector4L> create16()
+  {
+    return new Vector4LGenerator(PrimitiveGenerators.longs(
+      -32768L,
+      32767L
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-128, 127]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector4L> create8()
+  {
+    return new Vector4LGenerator(PrimitiveGenerators.longs(
+      -128L,
+      127L
+    ));
+  }
+
   @Override
   public Vector4L next()
   {

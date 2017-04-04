@@ -29,4 +29,16 @@ public interface TensorByteBufferedType
    */
 
   ByteBuffer byteBuffer();
+
+  /**
+   * @return The byte offset of the current tensor
+   */
+
+  long byteOffset();
+
+  /**
+   * @return A constant offset added to {@link #byteOffset()}.
+   */
+
+  int offset();
 }

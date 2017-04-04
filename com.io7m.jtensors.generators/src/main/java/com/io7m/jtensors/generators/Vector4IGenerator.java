@@ -70,6 +70,51 @@ public final class Vector4IGenerator implements Generator<Vector4I>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-2147483648, 2147483647]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector4I> create32()
+  {
+    return new Vector4IGenerator(PrimitiveGenerators.integers(
+      -2147483648,
+      -2147483647
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-32768, 32767]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector4I> create16()
+  {
+    return new Vector4IGenerator(PrimitiveGenerators.integers(
+      -32768,
+      32767
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-128, 127]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector4I> create8()
+  {
+    return new Vector4IGenerator(PrimitiveGenerators.integers(
+      -128,
+      127
+    ));
+  }
+
   @Override
   public Vector4I next()
   {

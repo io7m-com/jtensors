@@ -16,38 +16,72 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
+
+import com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D;
+import com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F;
+import com.io7m.jtensors.generators.Matrix3x3DGenerator;
+import com.io7m.jtensors.generators.Matrix3x3FGenerator;
+import com.io7m.jtensors.generators.PMatrix3x3DGenerator;
+import com.io7m.jtensors.generators.PMatrix3x3FGenerator;
 import com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage3x3Type;
+import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
 import com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3s32;
-import com.io7m.jtensors.tests.core.TestDOps;
+import com.io7m.jtensors.tests.TestUtilities;
+import com.io7m.jtensors.tests.core.TestFOps;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
 import com.io7m.jtensors.tests.storage.api.PMatrixStorage3x3Contract;
-import org.junit.Assert;
-import org.junit.Test;
+import net.java.quickcheck.Generator;
+import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class PMatrixByteBuffered3x3s32Test
   extends PMatrixStorage3x3Contract
 {
+  @Rule public final PercentagePassRule percent =
+    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
+
   @Override
-  protected void checkAlmostEqual(
-    final double a,
-    final double b)
+  protected PMatrixStorage3x3Type<Object, Object> create(
+    final int offset)
   {
-    TestDOps.checkAlmostEquals(a, b);
+    return PMatrixByteBuffered3x3s32.createWithBase(
+      ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
+      ByteBufferOffsetMutable.create(),
+      offset);
   }
 
   @Override
-  protected PMatrixStorage3x3Type<Object, Object> createIdentity()
+  protected Generator<PMatrix3x3D<Object, Object>> createGeneratorP3x3D()
   {
-    return PMatrixByteBuffered3x3s32.createHeap();
+    return PMatrix3x3DGenerator.createNormal();
   }
 
-  @Test
-  public void testByteBufferIdentity()
+  @Override
+  protected Generator<PMatrix3x3F<Object, Object>> createGeneratorP3x3F()
   {
-    final ByteBuffer b = ByteBuffer.allocate(1024);
-    Assert.assertEquals(
-      b,
-      PMatrixByteBuffered3x3s32.createWith(b).byteBuffer());
+    return PMatrix3x3FGenerator.createNormal();
+  }
+
+  @Override
+  protected Generator<Matrix3x3D> createGenerator3x3D()
+  {
+    return Matrix3x3DGenerator.createNormal();
+  }
+
+  @Override
+  protected Generator<Matrix3x3F> createGenerator3x3F()
+  {
+    return Matrix3x3FGenerator.createNormal();
+  }
+
+  @Override
+  protected void checkAlmostEquals(
+    final double x,
+    final double y)
+  {
+    TestFOps.checkAlmostEquals(x, y);
   }
 }

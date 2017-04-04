@@ -16,38 +16,72 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
+
+import com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D;
+import com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
+import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F;
+import com.io7m.jtensors.generators.Matrix4x4DGenerator;
+import com.io7m.jtensors.generators.Matrix4x4FGenerator;
+import com.io7m.jtensors.generators.PMatrix4x4DGenerator;
+import com.io7m.jtensors.generators.PMatrix4x4FGenerator;
 import com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage4x4Type;
+import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
 import com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4s64;
+import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestDOps;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
 import com.io7m.jtensors.tests.storage.api.PMatrixStorage4x4Contract;
-import org.junit.Assert;
-import org.junit.Test;
+import net.java.quickcheck.Generator;
+import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class PMatrixByteBuffered4x4s64Test
   extends PMatrixStorage4x4Contract
 {
+  @Rule public final PercentagePassRule percent =
+    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
+
   @Override
-  protected void checkAlmostEqual(
-    final double a,
-    final double b)
+  protected PMatrixStorage4x4Type<Object, Object> create(
+    final int offset)
   {
-    TestDOps.checkAlmostEquals(a, b);
+    return PMatrixByteBuffered4x4s64.createWithBase(
+      ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
+      ByteBufferOffsetMutable.create(),
+      offset);
   }
 
   @Override
-  protected PMatrixStorage4x4Type<Object, Object> createIdentity()
+  protected Generator<PMatrix4x4D<Object, Object>> createGeneratorP4x4D()
   {
-    return PMatrixByteBuffered4x4s64.createHeap();
+    return PMatrix4x4DGenerator.createNormal();
   }
 
-  @Test
-  public void testByteBufferIdentity()
+  @Override
+  protected Generator<PMatrix4x4F<Object, Object>> createGeneratorP4x4F()
   {
-    final ByteBuffer b = ByteBuffer.allocate(1024);
-    Assert.assertEquals(
-      b,
-      PMatrixByteBuffered4x4s64.createWith(b).byteBuffer());
+    return PMatrix4x4FGenerator.createNormal();
+  }
+
+  @Override
+  protected Generator<Matrix4x4D> createGenerator4x4D()
+  {
+    return Matrix4x4DGenerator.createNormal();
+  }
+
+  @Override
+  protected Generator<Matrix4x4F> createGenerator4x4F()
+  {
+    return Matrix4x4FGenerator.createNormal();
+  }
+
+  @Override
+  protected void checkAlmostEquals(
+    final double x,
+    final double y)
+  {
+    TestDOps.checkAlmostEquals(x, y);
   }
 }

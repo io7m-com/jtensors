@@ -70,6 +70,51 @@ public final class Vector3IGenerator implements Generator<Vector3I>
     ));
   }
 
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-2147483648, 2147483647]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector3I> create32()
+  {
+    return new Vector3IGenerator(PrimitiveGenerators.integers(
+      -2147483648,
+      -2147483647
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-32768, 32767]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector3I> create16()
+  {
+    return new Vector3IGenerator(PrimitiveGenerators.integers(
+      -32768,
+      32767
+    ));
+  }
+
+  /**
+   * Create a generator initialized with a default component generator that
+   * produces values in the range {@code [-128, 127]}.
+   *
+   * @return A generator
+   */
+
+  public static Generator<Vector3I> create8()
+  {
+    return new Vector3IGenerator(PrimitiveGenerators.integers(
+      -128,
+      127
+    ));
+  }
+
   @Override
   public Vector3I next()
   {

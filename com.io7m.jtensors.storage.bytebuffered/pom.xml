@@ -48,8 +48,18 @@
       <artifactId>io7m-jnull-core</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.io7m.junreachable</groupId>
+      <artifactId>io7m-junreachable-core</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.io7m.ieee754b16</groupId>
       <artifactId>io7m-ieee754b16-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.immutables</groupId>
+      <artifactId>value</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

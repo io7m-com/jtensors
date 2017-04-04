@@ -16,69 +16,55 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
-import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type;
+import com.io7m.jtensors.core.parameterized.vectors.PVector3D;
+import com.io7m.jtensors.core.parameterized.vectors.PVector3F;
+import com.io7m.jtensors.generators.PVector3DGenerator;
+import com.io7m.jtensors.generators.PVector3FGenerator;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type;
-import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type;
-import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type;
+import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
 import com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3s32;
+import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestFOps;
-import com.io7m.jtensors.tests.storage.api.PVectorStorage3Contract;
-import org.junit.Assert;
-import org.junit.Test;
+import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.jtensors.tests.storage.api.PVectorStorageFloating3Contract;
+import net.java.quickcheck.Generator;
+import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
-public final class PVectorByteBufferedFloating3s32Test extends
-  PVectorStorage3Contract
+public final class PVectorByteBufferedFloating3s32Test
+  extends PVectorStorageFloating3Contract
 {
+  @Rule public final PercentagePassRule percent =
+    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
+
   @Override
-  protected void checkAlmostEqual(
-    final double a,
-    final double b)
+  protected PVectorStorageFloating3Type<Object> create(
+    final int offset)
   {
-    TestFOps.checkAlmostEquals(a, b);
+    return PVectorByteBufferedFloating3s32.createWithBase(
+      ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
+      ByteBufferOffsetMutable.create(),
+      offset);
   }
 
   @Override
-  protected PVectorStorageFloating3Type<Object> createWithP3(
-    final double x,
-    final double y,
-    final double z)
+  protected Generator<PVector3D<Object>> createGenerator3D()
   {
-    return PVectorByteBufferedFloating3s32.createHeap();
+    return PVector3DGenerator.createNormal();
   }
 
   @Override
-  protected PVectorStorageFloating2Type<Object> createWithP2(
+  protected Generator<PVector3F<Object>> createGenerator3F()
+  {
+    return PVector3FGenerator.createNormal();
+  }
+
+  @Override
+  protected void checkAlmostEquals(
     final double x,
     final double y)
   {
-    return PVectorByteBufferedFloating3s32.createHeap();
-  }
-
-  @Override
-  protected VectorStorageFloating2Type createWith2(
-    final double x,
-    final double y)
-  {
-    return PVectorByteBufferedFloating3s32.createHeap();
-  }
-
-  @Override
-  protected VectorStorageFloating3Type createWith3(
-    final double x,
-    final double y,
-    final double z)
-  {
-    return PVectorByteBufferedFloating3s32.createHeap();
-  }
-
-  @Test
-  public void testByteBufferIdentity()
-  {
-    final ByteBuffer b = ByteBuffer.allocate(1024);
-    Assert.assertEquals(
-      b,
-      PVectorByteBufferedFloating3s32.createWith(b).byteBuffer());
+    TestFOps.checkAlmostEquals(x, y);
   }
 }
