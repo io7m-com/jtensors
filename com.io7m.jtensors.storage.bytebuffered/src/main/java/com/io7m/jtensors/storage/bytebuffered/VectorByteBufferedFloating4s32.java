@@ -16,6 +16,8 @@
 
 package com.io7m.jtensors.storage.bytebuffered;
 
+import com.io7m.mutable.numbers.core.MutableLongType;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -30,7 +32,7 @@ public final class VectorByteBufferedFloating4s32
 {
   private VectorByteBufferedFloating4s32(
     final ByteBuffer in_buffer,
-    final ByteBufferOffsetMutable in_base,
+    final MutableLongType in_base,
     final int in_offset)
   {
     super(in_buffer, in_base, in_offset);
@@ -55,10 +57,16 @@ public final class VectorByteBufferedFloating4s32
 
   public static VectorByteBufferedFloating4Type createWithBase(
     final ByteBuffer b,
-    final ByteBufferOffsetMutable base,
+    final MutableLongType base,
     final int offset)
   {
     return new VectorByteBufferedFloating4s32(b, base, offset);
+  }
+
+  @Override
+  protected int componentCount()
+  {
+    return 4;
   }
 
   @Override

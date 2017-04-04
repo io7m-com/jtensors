@@ -43,6 +43,6 @@ final class ColumnMajor
     final int row,
     final int column)
   {
-    return (column * 3) + row;
+    return (column * 2) + row;
   }
 }

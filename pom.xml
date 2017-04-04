@@ -110,6 +110,11 @@
         <artifactId>io7m-ieee754b16-core</artifactId>
         <version>[1.0.0, 2.0.0)</version>
       </dependency>
+      <dependency>
+        <groupId>com.io7m.mutable.numbers</groupId>
+        <artifactId>com.io7m.mutable.numbers.core</artifactId>
+        <version>0.0.1</version>
+      </dependency>
 
       <dependency>
         <groupId>org.immutables</groupId>

@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors.storage.bytebuffered;
 
+import com.io7m.mutable.numbers.core.MutableLongType;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F;
 
@@ -33,7 +34,7 @@ public final class MatrixByteBuffered3x3s16
 {
   private MatrixByteBuffered3x3s16(
     final ByteBuffer in_buffer,
-    final ByteBufferOffsetMutable in_base,
+    final MutableLongType in_base,
     final int in_offset)
   {
     super(in_buffer, in_base, in_offset);
@@ -58,10 +59,16 @@ public final class MatrixByteBuffered3x3s16
 
   public static MatrixByteBuffered3x3Type createWithBase(
     final ByteBuffer b,
-    final ByteBufferOffsetMutable base,
+    final MutableLongType base,
     final int offset)
   {
     return new MatrixByteBuffered3x3s16(b, base, offset);
+  }
+
+  @Override
+  protected int componentCount()
+  {
+    return 3 * 3;
   }
 
   @Override

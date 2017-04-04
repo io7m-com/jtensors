@@ -17,6 +17,7 @@
 package com.io7m.jtensors.storage.bytebuffered;
 
 
+import com.io7m.mutable.numbers.core.MutableLongType;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
@@ -41,7 +42,7 @@ public final class PMatrixByteBuffered4x4s16<A, B>
 {
   private PMatrixByteBuffered4x4s16(
     final ByteBuffer in_buffer,
-    final ByteBufferOffsetMutable in_base,
+    final MutableLongType in_base,
     final int in_offset)
   {
     super(in_buffer, in_base, in_offset);
@@ -70,10 +71,16 @@ public final class PMatrixByteBuffered4x4s16<A, B>
 
   public static <A, B> PMatrixByteBuffered4x4Type<A, B> createWithBase(
     final ByteBuffer b,
-    final ByteBufferOffsetMutable base,
+    final MutableLongType base,
     final int offset)
   {
     return new PMatrixByteBuffered4x4s16<>(b, base, offset);
+  }
+
+  @Override
+  protected int componentCount()
+  {
+    return 4 * 4;
   }
 
   @Override

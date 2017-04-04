@@ -16,24 +16,24 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
+import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.parameterized.vectors.PVector2D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector2F;
 import com.io7m.jtensors.generators.PVector2DGenerator;
 import com.io7m.jtensors.generators.PVector2FGenerator;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type;
-import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
+import com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2Type;
 import com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2s16;
 import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestB16Ops;
 import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.storage.api.PVectorStorageFloating2Contract;
 import net.java.quickcheck.Generator;
 import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class PVectorByteBufferedFloating2s16Test
-  extends PVectorStorageFloating2Contract
+  extends PVectorByteBufferedFloating2Contract
 {
   @Rule public final PercentagePassRule percent =
     new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
@@ -42,9 +42,17 @@ public final class PVectorByteBufferedFloating2s16Test
   protected PVectorStorageFloating2Type<Object> create(
     final int offset)
   {
+    return this.create(MutableLong.create(), offset);
+  }
+
+  @Override
+  protected PVectorByteBufferedFloating2Type<Object> create(
+    final MutableLong base,
+    final int offset)
+  {
     return PVectorByteBufferedFloating2s16.createWithBase(
       ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
-      ByteBufferOffsetMutable.create(),
+      base,
       offset);
   }
 
@@ -67,4 +75,6 @@ public final class PVectorByteBufferedFloating2s16Test
   {
     TestB16Ops.checkAlmostEquals(x, y);
   }
+
+
 }

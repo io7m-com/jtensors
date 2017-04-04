@@ -16,13 +16,15 @@
 
 package com.io7m.jtensors.storage.bytebuffered;
 
+import com.io7m.mutable.numbers.core.MutableLongType;
+
 import java.nio.ByteBuffer;
 
 abstract class TensorByteBufferedFloating64 extends TensorByteBuffered
 {
   TensorByteBufferedFloating64(
     final ByteBuffer in_buffer,
-    final ByteBufferOffsetMutable in_base,
+    final MutableLongType in_base,
     final int in_offset)
   {
     super(in_buffer, in_base, in_offset);

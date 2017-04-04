@@ -17,6 +17,7 @@
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
 
+import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D;
@@ -26,19 +27,18 @@ import com.io7m.jtensors.generators.Matrix3x3FGenerator;
 import com.io7m.jtensors.generators.PMatrix3x3DGenerator;
 import com.io7m.jtensors.generators.PMatrix3x3FGenerator;
 import com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage3x3Type;
-import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
+import com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3Type;
 import com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3s16;
 import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestB16Ops;
 import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.storage.api.PMatrixStorage3x3Contract;
 import net.java.quickcheck.Generator;
 import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class PMatrixByteBuffered3x3s16Test
-  extends PMatrixStorage3x3Contract
+  extends PMatrixByteBuffered3x3Contract
 {
   @Rule public final PercentagePassRule percent =
     new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
@@ -47,9 +47,17 @@ public final class PMatrixByteBuffered3x3s16Test
   protected PMatrixStorage3x3Type<Object, Object> create(
     final int offset)
   {
+    return this.create(MutableLong.create(), offset);
+  }
+
+  @Override
+  protected PMatrixByteBuffered3x3Type<Object, Object> create(
+    final MutableLong base,
+    final int offset)
+  {
     return PMatrixByteBuffered3x3s16.createWithBase(
       ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
-      ByteBufferOffsetMutable.create(),
+      base,
       offset);
   }
 

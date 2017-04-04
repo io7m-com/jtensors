@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors.storage.bytebuffered;
 
+import com.io7m.mutable.numbers.core.MutableLongType;
 import com.io7m.jnull.NullCheck;
 
 import java.nio.ByteBuffer;
@@ -27,12 +28,12 @@ import java.nio.ByteBuffer;
 abstract class TensorByteBuffered implements TensorByteBufferedType
 {
   private final ByteBuffer buffer;
-  private final ByteBufferOffsetMutable base;
+  private final MutableLongType base;
   private final int offset;
 
   protected TensorByteBuffered(
     final ByteBuffer in_buffer,
-    final ByteBufferOffsetMutable in_base,
+    final MutableLongType in_base,
     final int in_offset)
   {
     this.buffer = NullCheck.notNull(in_buffer, "Buffer");
@@ -50,7 +51,7 @@ abstract class TensorByteBuffered implements TensorByteBufferedType
   public final long byteOffset()
   {
     return Math.addExact(
-      this.base.offset(),
+      this.base.value(),
       Integer.toUnsignedLong(this.offset()));
   }
 
@@ -62,12 +63,21 @@ abstract class TensorByteBuffered implements TensorByteBufferedType
 
   protected abstract int componentBytes();
 
+  protected abstract int componentCount();
+
+  @Override
+  public final int sizeBytes()
+  {
+    return Math.multiplyExact(this.componentCount(), this.componentBytes());
+  }
+
   protected final int byteOffsetForIndex(
     final int component_index)
   {
-    return Math.toIntExact(
-      Math.addExact(
-        this.byteOffset(),
-        (long) Math.multiplyExact(component_index, this.componentBytes())));
+    final int size_components =
+      Math.multiplyExact(component_index, this.componentBytes());
+    final long base_offset =
+      this.byteOffset();
+    return Math.toIntExact(Math.addExact(base_offset, size_components));
   }
 }

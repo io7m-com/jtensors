@@ -16,6 +16,8 @@
 
 package com.io7m.jtensors.storage.bytebuffered;
 
+import com.io7m.mutable.numbers.core.MutableLongType;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -32,7 +34,7 @@ public final class PVectorByteBufferedFloating2s32<T>
 {
   private PVectorByteBufferedFloating2s32(
     final ByteBuffer in_buffer,
-    final ByteBufferOffsetMutable in_base,
+    final MutableLongType in_base,
     final int in_offset)
   {
     super(in_buffer, in_base, in_offset);
@@ -58,10 +60,16 @@ public final class PVectorByteBufferedFloating2s32<T>
 
   public static <T> PVectorByteBufferedFloating2Type<T> createWithBase(
     final ByteBuffer b,
-    final ByteBufferOffsetMutable base,
+    final MutableLongType base,
     final int offset)
   {
     return new PVectorByteBufferedFloating2s32<>(b, base, offset);
+  }
+
+  @Override
+  protected int componentCount()
+  {
+    return 2;
   }
 
   @Override

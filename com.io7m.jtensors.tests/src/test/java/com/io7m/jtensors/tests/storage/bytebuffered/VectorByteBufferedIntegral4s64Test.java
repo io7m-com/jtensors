@@ -16,24 +16,24 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
+import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector4I;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector4L;
 import com.io7m.jtensors.generators.Vector4IGenerator;
 import com.io7m.jtensors.generators.Vector4LGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral4Type;
-import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
+import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type;
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4s64;
 import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestLOps;
 import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.storage.api.VectorStorageIntegral4Contract;
 import net.java.quickcheck.Generator;
 import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedIntegral4s64Test
-  extends VectorStorageIntegral4Contract
+  extends VectorByteBufferedIntegral4Contract
 {
   @Rule public final PercentagePassRule percent =
     new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
@@ -42,9 +42,17 @@ public final class VectorByteBufferedIntegral4s64Test
   protected VectorStorageIntegral4Type create(
     final int offset)
   {
+    return this.create(MutableLong.create(), offset);
+  }
+
+  @Override
+  protected VectorByteBufferedIntegral4Type create(
+    final MutableLong base,
+    final int offset)
+  {
     return VectorByteBufferedIntegral4s64.createWithBase(
       ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
-      ByteBufferOffsetMutable.create(),
+      base,
       offset);
   }
 
@@ -67,4 +75,6 @@ public final class VectorByteBufferedIntegral4s64Test
   {
     TestLOps.checkEquals(x, y);
   }
+
+
 }

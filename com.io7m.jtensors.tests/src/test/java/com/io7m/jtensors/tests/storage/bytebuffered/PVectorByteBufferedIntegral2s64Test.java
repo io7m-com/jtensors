@@ -17,36 +17,44 @@
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
 
+import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.parameterized.vectors.PVector2I;
 import com.io7m.jtensors.core.parameterized.vectors.PVector2L;
 import com.io7m.jtensors.generators.PVector2IGenerator;
 import com.io7m.jtensors.generators.PVector2LGenerator;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type;
-import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
+import com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type;
 import com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2s64;
 import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestLOps;
 import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.storage.api.PVectorStorageIntegral2Contract;
 import net.java.quickcheck.Generator;
 import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class PVectorByteBufferedIntegral2s64Test
-  extends PVectorStorageIntegral2Contract
+  extends PVectorByteBufferedIntegral2Contract
 {
   @Rule public final PercentagePassRule percent =
     new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
 
   @Override
-  protected PVectorStorageIntegral2Type<Object> create(
+  protected PVectorByteBufferedIntegral2Type<Object> create(
+    final MutableLong base,
     final int offset)
   {
     return PVectorByteBufferedIntegral2s64.createWithBase(
       ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
-      ByteBufferOffsetMutable.create(),
+      base,
       offset);
+  }
+
+  @Override
+  protected PVectorStorageIntegral2Type<Object> create(
+    final int offset)
+  {
+    return this.create(MutableLong.create(), offset);
   }
 
   @Override

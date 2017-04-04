@@ -20,7 +20,7 @@ import com.io7m.junreachable.UnreachableCodeException;
 
 final class BufferSizes
 {
-  static int BUFFER_SIZE_DEFAULT = 1024;
+  static int BUFFER_SIZE_DEFAULT = 8192;
 
   private BufferSizes()
   {

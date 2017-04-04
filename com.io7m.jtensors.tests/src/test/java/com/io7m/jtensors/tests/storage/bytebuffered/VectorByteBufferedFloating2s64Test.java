@@ -16,24 +16,24 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
+import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2F;
 import com.io7m.jtensors.generators.Vector2DGenerator;
 import com.io7m.jtensors.generators.Vector2FGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type;
-import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
+import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type;
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2s64;
 import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestDOps;
 import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.storage.api.VectorStorageFloating2Contract;
 import net.java.quickcheck.Generator;
 import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedFloating2s64Test
-  extends VectorStorageFloating2Contract
+  extends VectorByteBufferedFloating2Contract
 {
   @Rule public final PercentagePassRule percent =
     new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
@@ -42,9 +42,17 @@ public final class VectorByteBufferedFloating2s64Test
   protected VectorStorageFloating2Type create(
     final int offset)
   {
+    return this.create(MutableLong.create(), offset);
+  }
+
+  @Override
+  protected VectorByteBufferedFloating2Type create(
+    final MutableLong base,
+    final int offset)
+  {
     return VectorByteBufferedFloating2s64.createWithBase(
       ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
-      ByteBufferOffsetMutable.create(),
+      base,
       offset);
   }
 

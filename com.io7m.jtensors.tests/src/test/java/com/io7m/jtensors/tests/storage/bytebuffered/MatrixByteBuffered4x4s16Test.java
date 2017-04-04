@@ -16,24 +16,24 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
+import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F;
 import com.io7m.jtensors.generators.Matrix4x4DGenerator;
 import com.io7m.jtensors.generators.Matrix4x4FGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage4x4Type;
-import com.io7m.jtensors.storage.bytebuffered.ByteBufferOffsetMutable;
+import com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type;
 import com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4s16;
 import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestB16Ops;
 import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.storage.api.MatrixStorage4x4Contract;
 import net.java.quickcheck.Generator;
 import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class MatrixByteBuffered4x4s16Test
-  extends MatrixStorage4x4Contract
+  extends MatrixByteBuffered4x4Contract
 {
   @Rule public final PercentagePassRule percent =
     new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
@@ -42,9 +42,17 @@ public final class MatrixByteBuffered4x4s16Test
   protected MatrixStorage4x4Type create(
     final int offset)
   {
+    return this.create(MutableLong.create(), offset);
+  }
+
+  @Override
+  protected MatrixByteBuffered4x4Type create(
+    final MutableLong base,
+    final int offset)
+  {
     return MatrixByteBuffered4x4s16.createWithBase(
       ByteBuffer.allocate(BufferSizes.BUFFER_SIZE_DEFAULT),
-      ByteBufferOffsetMutable.create(),
+      base,
       offset);
   }
 

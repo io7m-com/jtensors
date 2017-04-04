@@ -41,4 +41,10 @@ public interface TensorByteBufferedType
    */
 
   int offset();
+
+  /**
+   * @return The size of a single tensor in bytes
+   */
+
+  int sizeBytes();
 }
