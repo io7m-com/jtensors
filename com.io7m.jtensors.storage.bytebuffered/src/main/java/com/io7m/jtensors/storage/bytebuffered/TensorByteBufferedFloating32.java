@@ -41,7 +41,8 @@ abstract class TensorByteBufferedFloating32 extends TensorByteBuffered
     final double value)
   {
     final int offset = this.byteOffsetForIndex(component_index);
-    this.byteBuffer().putFloat(offset, (float) value);
+    final float target = (float) value;
+    this.byteBuffer().putFloat(offset, target);
   }
 
   final double getValue(

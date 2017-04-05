@@ -42,13 +42,15 @@ abstract class TensorByteBufferedFloating16 extends TensorByteBuffered
     final double value)
   {
     final int offset = this.byteOffsetForIndex(component_index);
-    this.byteBuffer().putChar(offset, Binary16.packDouble(value));
+    final char target = Binary16.packDouble(value);
+    this.byteBuffer().putChar(offset, target);
   }
 
   final double getValue(
     final int i)
   {
     final int offset = this.byteOffsetForIndex(i);
-    return Binary16.unpackDouble(this.byteBuffer().getChar(offset));
+    final char source = this.byteBuffer().getChar(offset);
+    return Binary16.unpackDouble(source);
   }
 }
