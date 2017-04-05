@@ -25,6 +25,7 @@
     <module>com.io7m.jtensors.generators</module>
     <module>com.io7m.jtensors.storage.api</module>
     <module>com.io7m.jtensors.storage.bytebuffered</module>
+    <module>com.io7m.jtensors.storage.heap</module>
     <module>com.io7m.jtensors.tests</module>
   </modules>
 
