@@ -97,22 +97,22 @@
     <dependencies>
       <dependency>
         <groupId>com.io7m.jnull</groupId>
-        <artifactId>io7m-jnull-core</artifactId>
+        <artifactId>com.io7m.jnull.core</artifactId>
         <version>[1.0.0, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.junreachable</groupId>
-        <artifactId>io7m-junreachable-core</artifactId>
+        <artifactId>com.io7m.junreachable.core</artifactId>
         <version>[1.0.0, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.jequality</groupId>
-        <artifactId>io7m-jequality-core</artifactId>
+        <artifactId>com.io7m.jequality.core</artifactId>
         <version>[1.0.0, 2.0.0)</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.ieee754b16</groupId>
-        <artifactId>io7m-ieee754b16-core</artifactId>
+        <artifactId>com.io7m.ieee754b16.core</artifactId>
         <version>[1.0.0, 2.0.0)</version>
       </dependency>
       <dependency>
