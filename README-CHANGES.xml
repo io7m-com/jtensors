@@ -9,7 +9,7 @@
     <c:item>
       <c:date>2017-03-22</c:date>
       <c:type-code-change/>
-      <c:summary>Complete rewrite.</c:summary>
+      <c:summary>Complete rewrite. See japicmp report for changes.</c:summary>
     </c:item>
   </c:release>
 
