@@ -1,0 +1,814 @@
+Comparing source compatibility of /home/someone/git/com.github/io7m/jtensors/com.io7m.jtensors.generators/target/com.io7m.jtensors.generators-8.0.0-beta0001.jar against /home/someone/.m2/repository/com/io7m/jtensors/io7m-jtensors-generators/7.1.0/io7m-jtensors-generators-7.1.0.jar
+WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses and interfaces that could not be found on the classpath are ignored. Hence changes caused by these superclasses and interfaces are not reflected in the output.
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Matrix2x2DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Matrix2x2DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Matrix2x2FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Matrix2x2FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Matrix3x3DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Matrix3x3DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Matrix3x3FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Matrix3x3FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Matrix4x4DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Matrix4x4DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createOrthogonal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Matrix4x4FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Matrix4x4FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createOrthogonal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixDirectM2x2DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM2x2DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM2x2DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixDirect2x2DType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixDirectM2x2FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM2x2FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM2x2FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixDirect2x2FType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixDirectM3x3DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM3x3DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM3x3DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixDirect3x3DType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixDirectM3x3FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM3x3FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM3x3FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixDirect3x3FType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixDirectM4x4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM4x4DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM4x4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixDirect4x4DType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixDirectM4x4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM4x4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixDirectM4x4FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixDirect4x4FType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixHeapArrayM2x2DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM2x2DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM2x2DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.Matrix2x2DType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixHeapArrayM2x2FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM2x2FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM2x2FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.Matrix2x2FType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixHeapArrayM3x3DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM3x3DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM3x3DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.Matrix3x3DType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixHeapArrayM3x3FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM3x3FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM3x3FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.Matrix3x3FType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixHeapArrayM4x4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM4x4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM4x4DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.Matrix4x4DType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixHeapArrayM4x4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM4x4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixHeapArrayM4x4FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.Matrix4x4FType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixI2x2DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI2x2DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI2x2DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixI2x2D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixI2x2FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI2x2FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI2x2FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixI2x2F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixI3x3DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI3x3DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI3x3DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixI3x3D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixI3x3FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI3x3FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI3x3FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixI3x3F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixI4x4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI4x4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI4x4DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixI4x4D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.MatrixI4x4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI4x4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) MatrixI4x4FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.MatrixI4x4F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixDirectM3x3DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixDirectM3x3DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixDirectM3x3DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrixDirect3x3DType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixDirectM3x3FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixDirectM3x3FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixDirectM3x3FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrixDirect3x3FType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixDirectM4x4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixDirectM4x4DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixDirectM4x4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrixDirect4x4DType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixDirectM4x4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixDirectM4x4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixDirectM4x4FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrixDirect4x4FType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixHeapArrayM3x3DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixHeapArrayM3x3DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixHeapArrayM3x3DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrix3x3DType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixHeapArrayM3x3FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixHeapArrayM3x3FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixHeapArrayM3x3FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrix3x3FType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixHeapArrayM4x4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixHeapArrayM4x4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixHeapArrayM4x4DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrix4x4DType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixHeapArrayM4x4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixHeapArrayM4x4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixHeapArrayM4x4FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrix4x4FType next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixI3x3DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixI3x3DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixI3x3DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrixI3x3D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixI3x3FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixI3x3FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixI3x3FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrixI3x3F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixI4x4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixI4x4DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixI4x4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrixI4x4D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PMatrixI4x4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixI4x4FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PMatrixI4x4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PMatrixI4x4F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI2DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI2DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI2DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI2D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI2FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI2FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI2FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI2F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI2IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI2IGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI2IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI2I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI2LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI2LGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI2LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI2L next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI3DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI3DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI3DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI3D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI3FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI3FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI3FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI3F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI3IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI3IGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI3IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI3I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI3LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI3LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI3LGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI3L next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI4DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI4D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI4FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI4F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI4IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI4IGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI4IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI4I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorI4LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI4LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorI4LGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorI4L next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM2DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM2DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM2DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM2D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM2FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM2FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM2FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM2F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM2IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM2IGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM2IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM2I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM2LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM2LGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM2LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM2L next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM3DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM3DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM3DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM3D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM3FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM3FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM3FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM3F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM3IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM3IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM3IGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM3I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM3LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM3LGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM3LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM3L next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM4DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM4D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM4FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM4F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM4IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM4IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM4IGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM4I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.parameterized.PVectorM4LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM4LGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) PVectorM4LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.parameterized.PVectorM4L next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PMatrix2x2DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PMatrix2x2DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PMatrix2x2FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PMatrix2x2FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PMatrix3x3DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PMatrix3x3DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PMatrix3x3FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PMatrix3x3FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PMatrix4x4DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PMatrix4x4DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PMatrix4x4FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PMatrix4x4FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector2DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector2DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector2FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector2FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector2IGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector2IGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2I next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector2LGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector2LGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create64()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2L next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector3DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector3DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector3FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector3FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector3IGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector3IGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3I next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector3LGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector3LGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create64()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3L next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector4DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector4DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector4FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector4FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector4IGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector4IGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4I next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.PVector4LGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) PVector4LGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create64()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4L next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Quaternion4DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Quaternion4DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.quaternions.Quaternion4D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Quaternion4FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Quaternion4FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.quaternions.Quaternion4F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.QuaternionI4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) QuaternionI4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) QuaternionI4DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.QuaternionI4D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.QuaternionI4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) QuaternionI4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) QuaternionI4FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.QuaternionI4F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.QuaternionM4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) QuaternionM4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) QuaternionM4DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.QuaternionM4D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.QuaternionM4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) QuaternionM4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) QuaternionM4FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.QuaternionM4F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector2DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector2DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector2D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector2FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector2FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector2F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector2IGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector2IGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector2I next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector2LGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector2LGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create64()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector2L next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector3DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector3DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector3D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector3FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector3FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector3F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector3IGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector3IGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector3I next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector3LGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector3LGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create64()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector3L next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector4DGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector4DGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector4D next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector4FGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector4FGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createNormal()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector4F next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector4IGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector4IGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector4I next()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Vector4LGenerator  (not serializable)
+	+++  NEW INTERFACE: net.java.quickcheck.Generator
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW CONSTRUCTOR: PUBLIC(+) Vector4LGenerator(net.java.quickcheck.Generator)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create16()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create32()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create64()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator create8()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) net.java.quickcheck.Generator createSmall()
+	+++  NEW METHOD: PUBLIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector4L next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI2DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI2DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI2DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI2D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI2FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI2FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI2FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI2F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI2IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI2IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI2IGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI2I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI2LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI2LGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI2LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI2L next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI3DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI3DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI3DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI3D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI3FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI3FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI3FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI3F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI3IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI3IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI3IGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI3I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI3LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI3LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI3LGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI3L next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI4DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI4D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI4FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI4F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI4IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI4IGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI4IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI4I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorI4LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI4LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorI4LGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorI4L next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM2DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM2DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM2DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM2D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM2FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM2FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM2FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM2F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM2IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM2IGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM2IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM2I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM2LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM2LGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM2LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM2L next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM3DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM3DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM3DGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM3D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM3FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM3FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM3FGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM3F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM3IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM3IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM3IGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM3I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM3LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM3LGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM3LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM3L next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM4DGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM4DGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM4DGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM4D next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM4FGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM4FGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM4FGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM4F next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM4IGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM4IGenerator()
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM4IGenerator(net.java.quickcheck.Generator)
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM4I next()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.generators.VectorM4LGenerator  (not serializable)
+	---! REMOVED INTERFACE: net.java.quickcheck.Generator
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM4LGenerator(net.java.quickcheck.Generator)
+	---! REMOVED CONSTRUCTOR: PUBLIC(-) VectorM4LGenerator()
+	---! REMOVED METHOD: PUBLIC(-) com.io7m.jtensors.VectorM4L next()

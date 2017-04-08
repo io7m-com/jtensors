@@ -1,0 +1,435 @@
+/*
+ * Main page structure.
+ */
+
+.st300_body
+{
+  max-width: 60em;
+}
+
+.st300_contents
+{
+  margin-left: 0;
+  padding-left: 0;
+}
+
+/*
+ * Generic table-of-contents items.
+ */
+
+.st300_contents_item
+{
+  list-style: none;
+}
+.st300_contents_item1
+{
+
+}
+.st300_contents_item2
+{
+  padding-left: 2.0em;
+}
+.st300_contents_item3
+{
+  padding-left: 2.0em;
+}
+
+.st300_contents_item_section
+{
+
+}
+.st300_contents_item_part
+{
+
+}
+.st300_contents_item_subsection
+{
+
+}
+
+/*
+ * Navigation bar.
+ */
+
+.st300_navbar
+{
+  font-size: 75%;
+}
+.st300_navbar_top
+{
+  margin-top:    1.3em;
+  margin-bottom: 1.0em;
+}
+.st300_navbar_bottom
+{
+  margin-top: 1.0em;
+}
+.st300_navbar_table
+{
+  margin-bottom: 0.0em;
+  width:         100%;
+}
+.st300_navbar_prev_file_cell
+{
+  text-align: left;
+  width: 33%;
+}
+.st300_navbar_up_file_cell
+{
+  text-align: center;
+  width: 33%;
+}
+.st300_navbar_next_file_cell
+{
+  text-align: right;
+  width: 33%;
+}
+.st300_navbar_prev_title_cell
+{
+  text-align: left;
+  width: 33%;
+}
+.st300_navbar_up_title_cell
+{
+  text-align: center;
+  width: 33%;
+}
+.st300_navbar_next_title_cell
+{
+  text-align: right;
+  width: 33%;
+}
+.st300_navbar_top hr
+{
+  margin-top: 1.0em;
+}
+.st300_navbar_bottom hr
+{
+  margin-bottom: 1.0em;
+}
+
+.st300_navbar_top .st300_navbar_prev_title_cell,
+.st300_navbar_top .st300_navbar_next_title_cell,
+.st300_navbar_top .st300_navbar_up_title_cell
+{
+  vertical-align: top;
+}
+
+.st300_navbar_bottom .st300_navbar_prev_title_cell,
+.st300_navbar_bottom .st300_navbar_next_title_cell,
+.st300_navbar_bottom .st300_navbar_up_title_cell
+{
+  vertical-align: bottom;
+}
+
+/*
+ * Element: document-contents
+ */
+
+.st300_document_contents
+{
+  margin-left: 6.2em;
+}
+
+/*
+ * Element: document-title
+ */
+
+.st300_document_title
+{
+  margin-top:    1.2em;
+  margin-left:   5.2em;
+  margin-bottom: 0.7em;
+  font-size:     120%;
+}
+
+/*
+ * Element: footnote
+ */
+
+.st300_footnotes
+{
+
+}
+.st300_footnotes hr
+{
+  margin-bottom: 1.4em;
+}
+.st300_footnote_id
+{
+  float:       left;
+  font-size:   80%;
+  margin-top:  0.25em;
+  margin-left: 0.15em;
+}
+.st300_footnote_body
+{
+  margin-left:    6.2em;
+  margin-bottom:  1.4em;
+  line-height:    1.4em;
+}
+.st300_footnote_reference
+{
+
+}
+
+/*
+ * Element: formal-item
+ */
+
+.st300_formal_item
+{
+  margin-left:    6.2em;
+  margin-bottom:  1.4em;
+  overflow:       auto;
+}
+
+/*
+ * Element: formal-item-title
+ */
+
+.st300_formal_item_title
+{
+  font-weight:   bold;
+  margin-bottom: 1.0em;
+}
+.st300_formal_item_title_number
+{
+
+}
+
+/*
+ * Element: image
+ */
+
+.st300_image
+{
+
+}
+
+/*
+ * Element: link
+ */
+
+.st300_link
+{
+
+}
+
+/*
+ * Element: link-external
+ */
+
+.st300_link_external
+{
+
+}
+
+/*
+ * Element: list-item
+ */
+
+.st300_list_item
+{
+  padding-top:    1em;
+  padding-bottom: 0em;
+}
+
+/*
+ * Element: list-ordered
+ */
+
+.st300_list_ordered
+{
+
+}
+
+.st300_formal_item .st300_list_ordered
+{
+  padding-right: 2em;
+}
+
+/*
+ * Element: list-unordered
+ */
+
+.st300_list_unordered
+{
+
+}
+
+/*
+ * Element: paragraph
+ */
+
+.st300_paragraph_container
+{
+
+}
+
+.st300_paragraph
+{
+  margin-left:    6.2em;
+  margin-bottom:  1.4em;
+  line-height:    1.4em;
+}
+
+.st300_paragraph_number
+{
+  float:       left;
+  font-size:   90%;
+  margin-top:  0.05em;
+  margin-left: 0.15em;
+}
+
+/*
+ * Element: part
+ */
+
+.st300_part_container
+{
+
+}
+
+.st300_part
+{
+  margin-bottom: 1.0em;
+}
+
+.st300_part_title
+{
+  margin-left:   5.2em;
+  margin-bottom: 0.7em;
+  font-size:     120%;
+}
+
+.st300_part_title_number
+{
+  float:       left;
+  font-size:   120%;
+}
+
+.st300_part_contents_outer
+{
+  margin-left: 6.2em;
+}
+.st300_part_contents
+{
+
+}
+
+/*
+ * Element: section
+ */
+
+.st300_section_container
+{
+
+}
+
+.st300_section
+{
+  margin-bottom: 1.0em;
+}
+
+.st300_section_contents_outer
+{
+  margin-left: 6.2em;
+}
+
+.st300_section_contents
+{
+
+}
+
+.st300_section_title
+{
+  margin-left:   5.2em;
+  margin-bottom: 0.7em;
+  font-size:     120%;
+}
+.st300_section_title_number
+{
+  float:       left;
+  font-size:   120%;
+}
+
+/*
+ * Element: subsection
+ */
+
+.st300_subsection_container
+{
+
+}
+
+.st300_subsection
+{
+  margin-bottom: 1.8em;
+}
+
+.st300_subsection_title
+{
+  margin-left:   6.2em;
+  margin-bottom: 1.0em;
+  font-size:     100%;
+}
+
+.st300_subsection_title_number
+{
+  float:       left;
+  font-size:   100%;
+}
+
+/*
+ * Element: table
+ */
+
+.st300_table
+{
+  padding-top: 1.0em;
+}
+
+.st300_table_cell
+{
+
+}
+
+.st300_table_column_name
+{
+
+}
+
+.st300_table_head
+{
+
+}
+
+.st300_table_head
+{
+
+}
+
+.st300_table_row
+{
+
+}
+
+/*
+ * Element: term
+ */
+
+.st300_term
+{
+
+}
+
+/*
+ * Element: verbatim
+ */
+
+.st300_verbatim
+{
+
+}
+

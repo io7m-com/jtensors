@@ -1,0 +1,441 @@
+/*
+ * Main body structure.
+ */
+
+.st300_body
+{
+  font-family: serif;
+  text-align:  justify;
+}
+
+.st300_hr
+{
+  height:           1px;
+  border:           0;
+  color:            #ccc;
+  background-color: #ccc;
+}
+
+/*
+ * Navigation bar.
+ */
+
+.st300_navbar
+{
+  font-family: sans-serif;
+}
+.st300_navbar_table
+{
+
+}
+.st300_navbar_table td
+{
+  border: 0;
+}
+.st300_navbar_prev_file_cell
+{
+
+}
+.st300_navbar_up_file_cell
+{
+
+}
+.st300_navbar_next_file_cell
+{
+
+}
+.st300_navbar_prev_title_cell
+{
+
+}
+.st300_navbar_up_title_cell
+{
+
+}
+.st300_navbar_next_title_cell
+{
+
+}
+
+/*
+ * Generic table-of-contents items.
+ */
+
+.st300_contents_item
+{
+
+}
+.st300_contents_item1
+{
+
+}
+.st300_contents_item2
+{
+
+}
+.st300_contents_item3
+{
+
+}
+.st300_contents_item4
+{
+
+}
+
+.st300_contents_item_section
+{
+
+}
+.st300_contents_item_part
+{
+
+}
+.st300_contents_item_subsection
+{
+
+}
+
+/*
+ * Element: document-contents
+ */
+
+.st300_document_contents
+{
+  font-family: sans-serif;
+}
+
+/*
+ * Element: document-title
+ */
+
+.st300_document_title
+{
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+/*
+ * Element: footnote
+ */
+
+.st300_footnotes
+{
+
+}
+.st300_footnotes hr
+{
+  height:           1px;
+  border:           0;
+  color:            #ccc;
+  background-color: #ccc;
+}
+.st300_footnote_id
+{
+
+}
+.st300_footnote_body
+{
+
+}
+.st300_footnote_reference
+{
+  font-family: monospace;
+}
+
+/*
+ * Element: formal-item
+ */
+
+.st300_formal_item
+{
+  border:           1px solid #ccc;
+  padding-top:      1.0em;
+  padding-left:     1.0em;
+  padding-bottom:   1.0em;
+  padding-right:    1.0em;
+}
+
+/*
+ * Element: formal-item-list
+ */
+
+.st300_formal_item_list
+{
+
+}
+.st300_formal_item_list_title
+{
+  font-weight: bold;
+}
+.st300_formal_item_list_item
+{
+
+}
+
+/*
+ * Element: formal-item-title
+ */
+
+.st300_formal_item_title
+{
+
+}
+
+/*
+ * Element: image
+ */
+
+.st300_image
+{
+
+}
+
+/*
+ * Element: link
+ */
+
+.st300_link
+{
+
+}
+.st300_link img
+{
+
+}
+
+/*
+ * Element: link-external
+ */
+
+.st300_link_external
+{
+
+}
+.st300_link_external img
+{
+  border: transparent;
+}
+
+/*
+ * Element: list-item
+ */
+
+.st300_list_item
+{
+
+}
+
+/*
+ * Element: list-ordered
+ */
+
+.st300_list_ordered
+{
+
+}
+
+/*
+ * Element: list-unordered
+ */
+
+.st300_list_unordered
+{
+
+}
+
+/*
+ * Element: paragraph
+ */
+
+.st300_paragraph_container
+{
+
+}
+.st300_paragraph
+{
+
+}
+.st300_paragraph_number
+{
+
+}
+
+/*
+ * Element: part
+ */
+
+.st300_part_container
+{
+
+}
+.st300_part
+{
+
+}
+
+/*
+ * Element: part-title
+ */
+
+.st300_part_title,
+.st300_part_title_number
+{
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+/*
+ * Element: part-contents
+ */
+
+.st300_part_contents
+{
+  font-family: sans-serif;
+}
+
+/*
+ * Element: part-title
+ */
+
+.st300_part_title
+{
+
+}
+
+/*
+ * Element: section
+ */
+
+.st300_section_container
+{
+
+}
+.st300_section
+{
+
+}
+
+/*
+ * Element: section-contents
+ */
+
+.st300_section_contents
+{
+  font-family: sans-serif;
+}
+
+/*
+ * Element: section-title
+ */
+
+.st300_section_title
+{
+  font-family: sans-serif;
+  font-weight: bold;
+}
+.st300_section_title_number
+{
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+/*
+ * Element: subsection
+ */
+
+.st300_subsection_container
+{
+
+}
+.st300_subsection
+{
+
+}
+
+/*
+ * Element: subsection-title
+ */
+
+.st300_subsection_title
+{
+  font-family: sans-serif;
+  font-weight: bold;
+}
+.st300_subsection_title_number
+{
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+/*
+ * Element: table
+ */
+
+.st300_table
+{
+
+}
+
+/*
+ * Element: table-cell
+ */
+
+.st300_table_cell
+{
+
+}
+
+/*
+ * Element: table-column-name
+ */
+
+.st300_table_column_name
+{
+
+}
+
+/*
+ * Element: table-head
+ */
+
+.st300_table_head
+{
+
+}
+
+/*
+ * Element: table-head
+ */
+
+.st300_table_head
+{
+
+}
+
+/*
+ * Element: table-row
+ */
+
+.st300_table_row
+{
+
+}
+
+/*
+ * Element: term
+ */
+
+.st300_term
+{
+
+}
+
+/*
+ * Element: verbatim
+ */
+
+.st300_verbatim
+{
+
+}
+

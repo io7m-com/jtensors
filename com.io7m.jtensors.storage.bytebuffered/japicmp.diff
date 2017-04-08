@@ -1,0 +1,2501 @@
+Comparing source compatibility of /home/someone/git/com.github/io7m/jtensors/com.io7m.jtensors.storage.bytebuffered/target/com.io7m.jtensors.storage.bytebuffered-8.0.0-beta0001.jar against /home/someone/.m2/repository/com/io7m/jtensors/io7m-jtensors-bytebuffered/7.1.0/io7m-jtensors-bytebuffered-7.1.0.jar
+WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses and interfaces that could not be found on the classpath are ignored. Hence changes caused by these superclasses and interfaces are not reflected in the output.
+---! REMOVED CLASS: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.ByteBuffered  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.ByteBufferedType
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED CONSTRUCTOR: PROTECTED(-) ByteBuffered(java.util.concurrent.atomic.AtomicLong, int)
+	---  REMOVED METHOD: PUBLIC(-) FINAL(-) long getByteOffset()
+	---! REMOVED METHOD: PROTECTED(-) FINAL(-) long getIndex()
+	---! REMOVED METHOD: PROTECTED(-) FINAL(-) int getOffset()
+	---! REMOVED METHOD: PROTECTED(-) FINAL(-) void setBase(long)
+	---  REMOVED METHOD: PUBLIC(-) FINAL(-) void setByteOffset(long)
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.ByteBufferedType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED METHOD: PUBLIC(-) ABSTRACT(-) long getByteOffset()
+	---! REMOVED METHOD: PUBLIC(-) ABSTRACT(-) void setByteOffset(long)
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.ByteBufferRanges  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) long checkByteOffset(long)
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered2x2DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered2x2FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered4x4DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered4x4FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.MatrixByteBufferedM2x2D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.MatrixByteBuffered2x2DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getR0C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR0C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C1D()
+	---! REMOVED METHOD: PUBLIC(-) void getRow2D(int, com.io7m.jtensors.VectorWritable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow2DUnsafe(int, com.io7m.jtensors.VectorWritable2DType)
+	---! REMOVED METHOD: PUBLIC(-) double getRowColumnD(int, int)
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered2x2DType newMatrixFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered2x2DType newMatrixFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setRowColumnD(int, int, double)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2D(int, com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2DUnsafe(int, com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.MatrixByteBufferedM2x2F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.MatrixByteBuffered2x2FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getR0C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR0C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C1F()
+	---! REMOVED METHOD: PUBLIC(-) void getRow2F(int, com.io7m.jtensors.VectorWritable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow2FUnsafe(int, com.io7m.jtensors.VectorWritable2FType)
+	---! REMOVED METHOD: PUBLIC(-) float getRowColumnF(int, int)
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered2x2FType newMatrixFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered2x2FType newMatrixFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setRowColumnF(int, int, float)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2F(int, com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2FUnsafe(int, com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.MatrixByteBufferedM3x3D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getR0C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR0C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR0C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C2D()
+	---! REMOVED METHOD: PUBLIC(-) void getRow2D(int, com.io7m.jtensors.VectorWritable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow2DUnsafe(int, com.io7m.jtensors.VectorWritable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3D(int, com.io7m.jtensors.VectorWritable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3DUnsafe(int, com.io7m.jtensors.VectorWritable3DType)
+	---! REMOVED METHOD: PUBLIC(-) double getRowColumnD(int, int)
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3DType newMatrixFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3DType newMatrixFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setRowColumnD(int, int, double)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2D(int, com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2DUnsafe(int, com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3D(int, com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3DUnsafe(int, com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.MatrixByteBufferedM3x3F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getR0C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR0C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR0C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C2F()
+	---! REMOVED METHOD: PUBLIC(-) void getRow2F(int, com.io7m.jtensors.VectorWritable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow2FUnsafe(int, com.io7m.jtensors.VectorWritable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3F(int, com.io7m.jtensors.VectorWritable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3FUnsafe(int, com.io7m.jtensors.VectorWritable3FType)
+	---! REMOVED METHOD: PUBLIC(-) float getRowColumnF(int, int)
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3FType newMatrixFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered3x3FType newMatrixFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setRowColumnF(int, int, float)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2F(int, com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2FUnsafe(int, com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3F(int, com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3FUnsafe(int, com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.MatrixByteBufferedM4x4D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.MatrixByteBuffered4x4DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getR0C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR0C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR0C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR0C3D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C3D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C3D()
+	---! REMOVED METHOD: PUBLIC(-) double getR3C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR3C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR3C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR3C3D()
+	---! REMOVED METHOD: PUBLIC(-) void getRow2D(int, com.io7m.jtensors.VectorWritable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow2DUnsafe(int, com.io7m.jtensors.VectorWritable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3D(int, com.io7m.jtensors.VectorWritable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3DUnsafe(int, com.io7m.jtensors.VectorWritable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow4D(int, com.io7m.jtensors.VectorWritable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow4DUnsafe(int, com.io7m.jtensors.VectorWritable4DType)
+	---! REMOVED METHOD: PUBLIC(-) double getRowColumnD(int, int)
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered4x4DType newMatrixFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered4x4DType newMatrixFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C3D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C3D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C3D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C3D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setRow0With4D(com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow1With4D(com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow2With4D(com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow3With4D(com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowColumnD(int, int, double)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2D(int, com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2DUnsafe(int, com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3D(int, com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3DUnsafe(int, com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith4D(int, com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith4DUnsafe(int, com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.MatrixByteBufferedM4x4F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.MatrixByteBuffered4x4FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getR0C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR0C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR0C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR0C3F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C3F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C3F()
+	---! REMOVED METHOD: PUBLIC(-) float getR3C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR3C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR3C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR3C3F()
+	---! REMOVED METHOD: PUBLIC(-) void getRow2F(int, com.io7m.jtensors.VectorWritable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow2FUnsafe(int, com.io7m.jtensors.VectorWritable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3F(int, com.io7m.jtensors.VectorWritable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3FUnsafe(int, com.io7m.jtensors.VectorWritable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow4F(int, com.io7m.jtensors.VectorWritable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow4FUnsafe(int, com.io7m.jtensors.VectorWritable4FType)
+	---! REMOVED METHOD: PUBLIC(-) float getRowColumnF(int, int)
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered4x4FType newMatrixFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.MatrixByteBuffered4x4FType newMatrixFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C3F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C3F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C3F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C3F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setRow0With4F(com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow1With4F(com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow2With4F(com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow3With4F(com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowColumnF(int, int, float)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2F(int, com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2FUnsafe(int, com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3F(int, com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3FUnsafe(int, com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith4F(int, com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith4FUnsafe(int, com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered3x3DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered3x3FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered4x4DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered4x4FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBufferedM3x3D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered3x3DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getR0C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR0C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR0C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C2D()
+	---! REMOVED METHOD: PUBLIC(-) void getRow2D(int, com.io7m.jtensors.VectorWritable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow2DUnsafe(int, com.io7m.jtensors.VectorWritable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3D(int, com.io7m.jtensors.VectorWritable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3DUnsafe(int, com.io7m.jtensors.VectorWritable3DType)
+	---! REMOVED METHOD: PUBLIC(-) double getRowColumnD(int, int)
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered3x3DType newMatrixFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered3x3DType newMatrixFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setRowColumnD(int, int, double)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2D(int, com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2DUnsafe(int, com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3D(int, com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3DUnsafe(int, com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBufferedM3x3F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered3x3FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getR0C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR0C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR0C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C2F()
+	---! REMOVED METHOD: PUBLIC(-) void getRow2F(int, com.io7m.jtensors.VectorWritable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow2FUnsafe(int, com.io7m.jtensors.VectorWritable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3F(int, com.io7m.jtensors.VectorWritable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3FUnsafe(int, com.io7m.jtensors.VectorWritable3FType)
+	---! REMOVED METHOD: PUBLIC(-) float getRowColumnF(int, int)
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered3x3FType newMatrixFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered3x3FType newMatrixFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setRowColumnF(int, int, float)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2F(int, com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2FUnsafe(int, com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3F(int, com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3FUnsafe(int, com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBufferedM4x4D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered4x4DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getR0C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR0C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR0C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR0C3D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR1C3D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR2C3D()
+	---! REMOVED METHOD: PUBLIC(-) double getR3C0D()
+	---! REMOVED METHOD: PUBLIC(-) double getR3C1D()
+	---! REMOVED METHOD: PUBLIC(-) double getR3C2D()
+	---! REMOVED METHOD: PUBLIC(-) double getR3C3D()
+	---! REMOVED METHOD: PUBLIC(-) void getRow2D(int, com.io7m.jtensors.VectorWritable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow2DUnsafe(int, com.io7m.jtensors.VectorWritable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3D(int, com.io7m.jtensors.VectorWritable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3DUnsafe(int, com.io7m.jtensors.VectorWritable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow4D(int, com.io7m.jtensors.VectorWritable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow4DUnsafe(int, com.io7m.jtensors.VectorWritable4DType)
+	---! REMOVED METHOD: PUBLIC(-) double getRowColumnD(int, int)
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered4x4DType newMatrixFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered4x4DType newMatrixFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C3D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C3D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C3D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C0D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C1D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C2D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C3D(double)
+	---! REMOVED METHOD: PUBLIC(-) void setRow0With4D(com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow1With4D(com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow2With4D(com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow3With4D(com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowColumnD(int, int, double)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2D(int, com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2DUnsafe(int, com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3D(int, com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3DUnsafe(int, com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith4D(int, com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith4DUnsafe(int, com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBufferedM4x4F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered4x4FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getR0C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR0C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR0C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR0C3F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR1C3F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR2C3F()
+	---! REMOVED METHOD: PUBLIC(-) float getR3C0F()
+	---! REMOVED METHOD: PUBLIC(-) float getR3C1F()
+	---! REMOVED METHOD: PUBLIC(-) float getR3C2F()
+	---! REMOVED METHOD: PUBLIC(-) float getR3C3F()
+	---! REMOVED METHOD: PUBLIC(-) void getRow2F(int, com.io7m.jtensors.VectorWritable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow2FUnsafe(int, com.io7m.jtensors.VectorWritable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3F(int, com.io7m.jtensors.VectorWritable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow3FUnsafe(int, com.io7m.jtensors.VectorWritable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow4F(int, com.io7m.jtensors.VectorWritable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void getRow4FUnsafe(int, com.io7m.jtensors.VectorWritable4FType)
+	---! REMOVED METHOD: PUBLIC(-) float getRowColumnF(int, int)
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered4x4FType newMatrixFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PMatrixByteBuffered4x4FType newMatrixFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR0C3F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR1C3F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR2C3F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C0F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C1F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C2F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setR3C3F(float)
+	---! REMOVED METHOD: PUBLIC(-) void setRow0With4F(com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow1With4F(com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow2With4F(com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRow3With4F(com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowColumnF(int, int, float)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2F(int, com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith2FUnsafe(int, com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3F(int, com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith3FUnsafe(int, com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith4F(int, com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void setRowWith4FUnsafe(int, com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2IType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2LType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3IType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3LType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4IType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4LType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM2D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2D(com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2D(com.io7m.jtensors.parameterized.PVectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getXD()
+	---! REMOVED METHOD: PUBLIC(-) double getYD()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2DType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2D(double, double)
+	---! REMOVED METHOD: PUBLIC(-) void setXD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setYD(double)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM2F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2F(com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2F(com.io7m.jtensors.parameterized.PVectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getXF()
+	---! REMOVED METHOD: PUBLIC(-) float getYF()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2FType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2FType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2F(float, float)
+	---! REMOVED METHOD: PUBLIC(-) void setXF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setYF(float)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM2I  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2IType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2I(com.io7m.jtensors.VectorReadable2IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2I(com.io7m.jtensors.parameterized.PVectorReadable2IType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) int getXI()
+	---! REMOVED METHOD: PUBLIC(-) int getYI()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2IType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2IType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2I(int, int)
+	---! REMOVED METHOD: PUBLIC(-) void setXI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setYI(int)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM2L  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2LType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2L(com.io7m.jtensors.VectorReadable2LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2L(com.io7m.jtensors.parameterized.PVectorReadable2LType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) long getXL()
+	---! REMOVED METHOD: PUBLIC(-) long getYL()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2LType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered2LType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2L(long, long)
+	---! REMOVED METHOD: PUBLIC(-) void setXL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setYL(long)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM3D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2D(com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3D(com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2D(com.io7m.jtensors.parameterized.PVectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped3D(com.io7m.jtensors.parameterized.PVectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getXD()
+	---! REMOVED METHOD: PUBLIC(-) double getYD()
+	---! REMOVED METHOD: PUBLIC(-) double getZD()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3DType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3DType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2D(double, double)
+	---! REMOVED METHOD: PUBLIC(-) void set3D(double, double, double)
+	---! REMOVED METHOD: PUBLIC(-) void setXD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setYD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setZD(double)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM3F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2F(com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3F(com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2F(com.io7m.jtensors.parameterized.PVectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped3F(com.io7m.jtensors.parameterized.PVectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getXF()
+	---! REMOVED METHOD: PUBLIC(-) float getYF()
+	---! REMOVED METHOD: PUBLIC(-) float getZF()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3FType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3FType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2F(float, float)
+	---! REMOVED METHOD: PUBLIC(-) void set3F(float, float, float)
+	---! REMOVED METHOD: PUBLIC(-) void setXF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setYF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setZF(float)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM3I  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3IType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2I(com.io7m.jtensors.VectorReadable2IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3I(com.io7m.jtensors.VectorReadable3IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2I(com.io7m.jtensors.parameterized.PVectorReadable2IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped3I(com.io7m.jtensors.parameterized.PVectorReadable3IType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) int getXI()
+	---! REMOVED METHOD: PUBLIC(-) int getYI()
+	---! REMOVED METHOD: PUBLIC(-) int getZI()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3IType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3IType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2I(int, int)
+	---! REMOVED METHOD: PUBLIC(-) void set3I(int, int, int)
+	---! REMOVED METHOD: PUBLIC(-) void setXI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setYI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setZI(int)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM3L  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3LType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2L(com.io7m.jtensors.VectorReadable2LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3L(com.io7m.jtensors.VectorReadable3LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2L(com.io7m.jtensors.parameterized.PVectorReadable2LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped3L(com.io7m.jtensors.parameterized.PVectorReadable3LType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) long getXL()
+	---! REMOVED METHOD: PUBLIC(-) long getYL()
+	---! REMOVED METHOD: PUBLIC(-) long getZL()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3LType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered3LType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2L(long, long)
+	---! REMOVED METHOD: PUBLIC(-) void set3L(long, long, long)
+	---! REMOVED METHOD: PUBLIC(-) void setXL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setYL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setZL(long)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM4D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2D(com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3D(com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom4D(com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2D(com.io7m.jtensors.parameterized.PVectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped3D(com.io7m.jtensors.parameterized.PVectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped4D(com.io7m.jtensors.parameterized.PVectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getWD()
+	---! REMOVED METHOD: PUBLIC(-) double getXD()
+	---! REMOVED METHOD: PUBLIC(-) double getYD()
+	---! REMOVED METHOD: PUBLIC(-) double getZD()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4DType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4DType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2D(double, double)
+	---! REMOVED METHOD: PUBLIC(-) void set3D(double, double, double)
+	---! REMOVED METHOD: PUBLIC(-) void set4D(double, double, double, double)
+	---! REMOVED METHOD: PUBLIC(-) void setWD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setXD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setYD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setZD(double)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM4F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2F(com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3F(com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom4F(com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2F(com.io7m.jtensors.parameterized.PVectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped3F(com.io7m.jtensors.parameterized.PVectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped4F(com.io7m.jtensors.parameterized.PVectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getWF()
+	---! REMOVED METHOD: PUBLIC(-) float getXF()
+	---! REMOVED METHOD: PUBLIC(-) float getYF()
+	---! REMOVED METHOD: PUBLIC(-) float getZF()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4FType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4FType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2F(float, float)
+	---! REMOVED METHOD: PUBLIC(-) void set3F(float, float, float)
+	---! REMOVED METHOD: PUBLIC(-) void set4F(float, float, float, float)
+	---! REMOVED METHOD: PUBLIC(-) void setWF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setXF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setYF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setZF(float)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM4I  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4IType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2I(com.io7m.jtensors.VectorReadable2IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3I(com.io7m.jtensors.VectorReadable3IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom4I(com.io7m.jtensors.VectorReadable4IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2I(com.io7m.jtensors.parameterized.PVectorReadable2IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped3I(com.io7m.jtensors.parameterized.PVectorReadable3IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped4I(com.io7m.jtensors.parameterized.PVectorReadable4IType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) int getWI()
+	---! REMOVED METHOD: PUBLIC(-) int getXI()
+	---! REMOVED METHOD: PUBLIC(-) int getYI()
+	---! REMOVED METHOD: PUBLIC(-) int getZI()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4IType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4IType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2I(int, int)
+	---! REMOVED METHOD: PUBLIC(-) void set3I(int, int, int)
+	---! REMOVED METHOD: PUBLIC(-) void set4I(int, int, int, int)
+	---! REMOVED METHOD: PUBLIC(-) void setWI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setXI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setYI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setZI(int)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBufferedM4L  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4LType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2L(com.io7m.jtensors.VectorReadable2LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3L(com.io7m.jtensors.VectorReadable3LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom4L(com.io7m.jtensors.VectorReadable4LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped2L(com.io7m.jtensors.parameterized.PVectorReadable2LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped3L(com.io7m.jtensors.parameterized.PVectorReadable3LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFromTyped4L(com.io7m.jtensors.parameterized.PVectorReadable4LType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) long getWL()
+	---! REMOVED METHOD: PUBLIC(-) long getXL()
+	---! REMOVED METHOD: PUBLIC(-) long getYL()
+	---! REMOVED METHOD: PUBLIC(-) long getZL()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4LType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.parameterized.PVectorByteBuffered4LType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2L(long, long)
+	---! REMOVED METHOD: PUBLIC(-) void set3L(long, long, long)
+	---! REMOVED METHOD: PUBLIC(-) void set4L(long, long, long, long)
+	---! REMOVED METHOD: PUBLIC(-) void setWL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setXL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setYL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setZL(long)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.QuaternionByteBufferedM4D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2D(com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3D(com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom4D(com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getWD()
+	---! REMOVED METHOD: PUBLIC(-) double getXD()
+	---! REMOVED METHOD: PUBLIC(-) double getYD()
+	---! REMOVED METHOD: PUBLIC(-) double getZD()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4DType newQuaternionFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4DType newQuaternionFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2D(double, double)
+	---! REMOVED METHOD: PUBLIC(-) void set3D(double, double, double)
+	---! REMOVED METHOD: PUBLIC(-) void set4D(double, double, double, double)
+	---! REMOVED METHOD: PUBLIC(-) void setWD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setXD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setYD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setZD(double)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.QuaternionByteBufferedM4F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2F(com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3F(com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom4F(com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getWF()
+	---! REMOVED METHOD: PUBLIC(-) float getXF()
+	---! REMOVED METHOD: PUBLIC(-) float getYF()
+	---! REMOVED METHOD: PUBLIC(-) float getZF()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4FType newQuaternionFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.QuaternionByteBuffered4FType newQuaternionFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2F(float, float)
+	---! REMOVED METHOD: PUBLIC(-) void set3F(float, float, float)
+	---! REMOVED METHOD: PUBLIC(-) void set4F(float, float, float, float)
+	---! REMOVED METHOD: PUBLIC(-) void setWF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setXF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setYF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setZF(float)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2IType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2LType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3IType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3LType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4DType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4FType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4IType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED INTERFACE: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4LType  (not serializable)
+	---! REMOVED SUPERCLASS: java.lang.Object
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM2D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered2DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2D(com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getXD()
+	---! REMOVED METHOD: PUBLIC(-) double getYD()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2DType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2DType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2D(double, double)
+	---! REMOVED METHOD: PUBLIC(-) void setXD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setYD(double)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM2F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered2FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2F(com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getXF()
+	---! REMOVED METHOD: PUBLIC(-) float getYF()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2FType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2FType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2F(float, float)
+	---! REMOVED METHOD: PUBLIC(-) void setXF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setYF(float)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM2I  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered2IType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2I(com.io7m.jtensors.VectorReadable2IType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) int getXI()
+	---! REMOVED METHOD: PUBLIC(-) int getYI()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2IType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2IType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2I(int, int)
+	---! REMOVED METHOD: PUBLIC(-) void setXI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setYI(int)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM2L  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered2LType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2L(com.io7m.jtensors.VectorReadable2LType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) long getXL()
+	---! REMOVED METHOD: PUBLIC(-) long getYL()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2LType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered2LType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2L(long, long)
+	---! REMOVED METHOD: PUBLIC(-) void setXL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setYL(long)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM3D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered3DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2D(com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3D(com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getXD()
+	---! REMOVED METHOD: PUBLIC(-) double getYD()
+	---! REMOVED METHOD: PUBLIC(-) double getZD()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3DType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3DType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2D(double, double)
+	---! REMOVED METHOD: PUBLIC(-) void set3D(double, double, double)
+	---! REMOVED METHOD: PUBLIC(-) void setXD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setYD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setZD(double)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM3F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered3FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2F(com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3F(com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getXF()
+	---! REMOVED METHOD: PUBLIC(-) float getYF()
+	---! REMOVED METHOD: PUBLIC(-) float getZF()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3FType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3FType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2F(float, float)
+	---! REMOVED METHOD: PUBLIC(-) void set3F(float, float, float)
+	---! REMOVED METHOD: PUBLIC(-) void setXF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setYF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setZF(float)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM3I  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered3IType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2I(com.io7m.jtensors.VectorReadable2IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3I(com.io7m.jtensors.VectorReadable3IType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) int getXI()
+	---! REMOVED METHOD: PUBLIC(-) int getYI()
+	---! REMOVED METHOD: PUBLIC(-) int getZI()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3IType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3IType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2I(int, int)
+	---! REMOVED METHOD: PUBLIC(-) void set3I(int, int, int)
+	---! REMOVED METHOD: PUBLIC(-) void setXI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setYI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setZI(int)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM3L  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered3LType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2L(com.io7m.jtensors.VectorReadable2LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3L(com.io7m.jtensors.VectorReadable3LType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) long getXL()
+	---! REMOVED METHOD: PUBLIC(-) long getYL()
+	---! REMOVED METHOD: PUBLIC(-) long getZL()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3LType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered3LType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2L(long, long)
+	---! REMOVED METHOD: PUBLIC(-) void set3L(long, long, long)
+	---! REMOVED METHOD: PUBLIC(-) void setXL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setYL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setZL(long)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM4D  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered4DType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2D(com.io7m.jtensors.VectorReadable2DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3D(com.io7m.jtensors.VectorReadable3DType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom4D(com.io7m.jtensors.VectorReadable4DType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) double getWD()
+	---! REMOVED METHOD: PUBLIC(-) double getXD()
+	---! REMOVED METHOD: PUBLIC(-) double getYD()
+	---! REMOVED METHOD: PUBLIC(-) double getZD()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4DType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4DType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2D(double, double)
+	---! REMOVED METHOD: PUBLIC(-) void set3D(double, double, double)
+	---! REMOVED METHOD: PUBLIC(-) void set4D(double, double, double, double)
+	---! REMOVED METHOD: PUBLIC(-) void setWD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setXD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setYD(double)
+	---! REMOVED METHOD: PUBLIC(-) void setZD(double)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM4F  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered4FType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2F(com.io7m.jtensors.VectorReadable2FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3F(com.io7m.jtensors.VectorReadable3FType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom4F(com.io7m.jtensors.VectorReadable4FType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) float getWF()
+	---! REMOVED METHOD: PUBLIC(-) float getXF()
+	---! REMOVED METHOD: PUBLIC(-) float getYF()
+	---! REMOVED METHOD: PUBLIC(-) float getZF()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4FType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4FType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2F(float, float)
+	---! REMOVED METHOD: PUBLIC(-) void set3F(float, float, float)
+	---! REMOVED METHOD: PUBLIC(-) void set4F(float, float, float, float)
+	---! REMOVED METHOD: PUBLIC(-) void setWF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setXF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setYF(float)
+	---! REMOVED METHOD: PUBLIC(-) void setZF(float)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM4I  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered4IType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2I(com.io7m.jtensors.VectorReadable2IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3I(com.io7m.jtensors.VectorReadable3IType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom4I(com.io7m.jtensors.VectorReadable4IType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) int getWI()
+	---! REMOVED METHOD: PUBLIC(-) int getXI()
+	---! REMOVED METHOD: PUBLIC(-) int getYI()
+	---! REMOVED METHOD: PUBLIC(-) int getZI()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4IType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4IType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2I(int, int)
+	---! REMOVED METHOD: PUBLIC(-) void set3I(int, int, int)
+	---! REMOVED METHOD: PUBLIC(-) void set4I(int, int, int, int)
+	---! REMOVED METHOD: PUBLIC(-) void setWI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setXI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setYI(int)
+	---! REMOVED METHOD: PUBLIC(-) void setZI(int)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
+---! REMOVED CLASS: PUBLIC(-) FINAL(-) com.io7m.jtensors.bytebuffered.VectorByteBufferedM4L  (not serializable)
+	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.VectorByteBuffered4LType
+	---! REMOVED SUPERCLASS: com.io7m.jtensors.bytebuffered.ByteBuffered
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom2L(com.io7m.jtensors.VectorReadable2LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom3L(com.io7m.jtensors.VectorReadable3LType)
+	---! REMOVED METHOD: PUBLIC(-) void copyFrom4L(com.io7m.jtensors.VectorReadable4LType)
+	---! REMOVED METHOD: PUBLIC(-) boolean equals(java.lang.Object)
+	---! REMOVED METHOD: PUBLIC(-) long getWL()
+	---! REMOVED METHOD: PUBLIC(-) long getXL()
+	---! REMOVED METHOD: PUBLIC(-) long getYL()
+	---! REMOVED METHOD: PUBLIC(-) long getZL()
+	---! REMOVED METHOD: PUBLIC(-) int hashCode()
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4LType newVectorFromByteBuffer(java.nio.ByteBuffer, long)
+	---! REMOVED METHOD: PUBLIC(-) STATIC(-) com.io7m.jtensors.bytebuffered.VectorByteBuffered4LType newVectorFromByteBufferAndBase(java.nio.ByteBuffer, java.util.concurrent.atomic.AtomicLong, int)
+	---! REMOVED METHOD: PUBLIC(-) void set2L(long, long)
+	---! REMOVED METHOD: PUBLIC(-) void set3L(long, long, long)
+	---! REMOVED METHOD: PUBLIC(-) void set4L(long, long, long, long)
+	---! REMOVED METHOD: PUBLIC(-) void setWL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setXL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setYL(long)
+	---! REMOVED METHOD: PUBLIC(-) void setZL(long)
+	---! REMOVED METHOD: PUBLIC(-) java.lang.String toString()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2D(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2F(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2D(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2F(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2D(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2F(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F)
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3D(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3F(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3D(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3F(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3D(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3F(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F)
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r0c3()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c3()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c3()
+	+++  NEW METHOD: PUBLIC(+) double r3c0()
+	+++  NEW METHOD: PUBLIC(+) double r3c1()
+	+++  NEW METHOD: PUBLIC(+) double r3c2()
+	+++  NEW METHOD: PUBLIC(+) double r3c3()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4D(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4F(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r0c3()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c3()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c3()
+	+++  NEW METHOD: PUBLIC(+) double r3c0()
+	+++  NEW METHOD: PUBLIC(+) double r3c1()
+	+++  NEW METHOD: PUBLIC(+) double r3c2()
+	+++  NEW METHOD: PUBLIC(+) double r3c3()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4D(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4F(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r0c3()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c3()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c3()
+	+++  NEW METHOD: PUBLIC(+) double r3c0()
+	+++  NEW METHOD: PUBLIC(+) double r3c1()
+	+++  NEW METHOD: PUBLIC(+) double r3c2()
+	+++  NEW METHOD: PUBLIC(+) double r3c3()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4D(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4F(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F)
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2D(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2F(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix2x2D(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix2x2F(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2D(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2F(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix2x2D(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix2x2F(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2D(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix2x2F(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix2x2D(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix2x2F(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F)
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable2x2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage2x2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage3x3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3D(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3F(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix3x3D(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix3x3F(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage3x3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3D(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3F(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix3x3D(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix3x3F(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage3x3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3D(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix3x3F(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix3x3D(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix3x3F(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F)
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable3x3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage3x3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r0c3()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c3()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c3()
+	+++  NEW METHOD: PUBLIC(+) double r3c0()
+	+++  NEW METHOD: PUBLIC(+) double r3c1()
+	+++  NEW METHOD: PUBLIC(+) double r3c2()
+	+++  NEW METHOD: PUBLIC(+) double r3c3()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4D(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4F(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix4x4D(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix4x4F(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r0c3()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c3()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c3()
+	+++  NEW METHOD: PUBLIC(+) double r3c0()
+	+++  NEW METHOD: PUBLIC(+) double r3c1()
+	+++  NEW METHOD: PUBLIC(+) double r3c2()
+	+++  NEW METHOD: PUBLIC(+) double r3c3()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4D(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4F(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix4x4D(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix4x4F(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F)
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) double r0c0()
+	+++  NEW METHOD: PUBLIC(+) double r0c1()
+	+++  NEW METHOD: PUBLIC(+) double r0c2()
+	+++  NEW METHOD: PUBLIC(+) double r0c3()
+	+++  NEW METHOD: PUBLIC(+) double r1c0()
+	+++  NEW METHOD: PUBLIC(+) double r1c1()
+	+++  NEW METHOD: PUBLIC(+) double r1c2()
+	+++  NEW METHOD: PUBLIC(+) double r1c3()
+	+++  NEW METHOD: PUBLIC(+) double r2c0()
+	+++  NEW METHOD: PUBLIC(+) double r2c1()
+	+++  NEW METHOD: PUBLIC(+) double r2c2()
+	+++  NEW METHOD: PUBLIC(+) double r2c3()
+	+++  NEW METHOD: PUBLIC(+) double r3c0()
+	+++  NEW METHOD: PUBLIC(+) double r3c1()
+	+++  NEW METHOD: PUBLIC(+) double r3c2()
+	+++  NEW METHOD: PUBLIC(+) double r3c3()
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4D(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) void setMatrix4x4F(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix4x4D(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) void setPMatrix4x4F(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F)
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.MatrixByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.matrices.PMatrixReadable4x4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.matrices.MatrixReadableDType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage4x4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4DType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(double)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double w()
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4DType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(double)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double w()
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4DType
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(double)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double w()
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4DType
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2s8  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3s8  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral4Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(long)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long w()
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral4Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(long)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long w()
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral4Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(long)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long w()
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4s8  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral4Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(long)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long w()
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral4Type
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType  (not serializable)
+	+++  NEW SUPERCLASS: java.lang.Object
+	+++  NEW METHOD: PUBLIC(+) ABSTRACT(+) java.nio.ByteBuffer byteBuffer()
+	+++  NEW METHOD: PUBLIC(+) ABSTRACT(+) long byteOffset()
+	+++  NEW METHOD: PUBLIC(+) ABSTRACT(+) int offset()
+	+++  NEW METHOD: PUBLIC(+) ABSTRACT(+) int sizeBytes()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(double)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double w()
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(double)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double w()
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(double)
+	+++  NEW METHOD: PUBLIC(+) void setX(double)
+	+++  NEW METHOD: PUBLIC(+) void setY(double)
+	+++  NEW METHOD: PUBLIC(+) void setZ(double)
+	+++  NEW METHOD: PUBLIC(+) double w()
+	+++  NEW METHOD: PUBLIC(+) double x()
+	+++  NEW METHOD: PUBLIC(+) double y()
+	+++  NEW METHOD: PUBLIC(+) double z()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4DType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2s8  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3s8  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4s16  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(long)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long w()
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4s32  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(long)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long w()
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4s64  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(long)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long w()
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4s8  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
+	+++  NEW METHOD: PROTECTED(+) int componentCount()
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) void setW(long)
+	+++  NEW METHOD: PUBLIC(+) void setX(long)
+	+++  NEW METHOD: PUBLIC(+) void setY(long)
+	+++  NEW METHOD: PUBLIC(+) void setZ(long)
+	+++  NEW METHOD: PUBLIC(+) long w()
+	+++  NEW METHOD: PUBLIC(+) long x()
+	+++  NEW METHOD: PUBLIC(+) long y()
+	+++  NEW METHOD: PUBLIC(+) long z()
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral4Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable4LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2LType
+	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable3LType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.VectorStorageType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
+	+++  NEW SUPERCLASS: java.lang.Object
++++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedType  (not serializable)
+	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedType
+	+++  NEW SUPERCLASS: java.lang.Object
