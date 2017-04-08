@@ -1,0 +1,4 @@
+[part [title API] [id api]]
+[section [title JavaDoc] [id api.javadoc]]
+[paragraph]
+API documentation for the package is provided via the included [link-ext [target "apidocs"] Javadoc].

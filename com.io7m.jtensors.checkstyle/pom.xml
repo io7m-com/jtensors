@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.io7m.jtensors</groupId>
+    <artifactId>com.io7m.jtensors</artifactId>
+    <version>8.0.0-beta0001</version>
+  </parent>
+
+  <artifactId>com.io7m.jtensors.checkstyle</artifactId>
+  <packaging>jar</packaging>
+
+  <name>com.io7m.jtensors.checkstyle</name>
+  <description>Vector/matrix math package (Checkstyle policy)</description>
+  <url>http://io7m.github.io/jtensors/</url>
+
+  <properties>
+    <io7m.api.previousArtifactId>io7m-jtensors-checkstyle</io7m.api.previousArtifactId>
+  </properties>
+
+  <scm>
+    <url>${project.parent.scm.url}</url>
+    <connection>${project.parent.scm.connection}</connection>
+    <developerConnection>${project.parent.scm.developerConnection}</developerConnection>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.io7m.jnull</groupId>
+      <artifactId>com.io7m.jnull.core</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>

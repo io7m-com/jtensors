@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.io7m.jtensors</groupId>
+    <artifactId>com.io7m.jtensors</artifactId>
+    <version>8.0.0-beta0001</version>
+  </parent>
+
+  <artifactId>com.io7m.jtensors.storage.bytebuffered</artifactId>
+  <packaging>bundle</packaging>
+
+  <name>com.io7m.jtensors.storage.bytebuffered</name>
+  <description>Vector/matrix math package (ByteBuffered tensor storage implementations)
+  </description>
+  <url>http://io7m.github.io/jtensors/</url>
+
+  <properties>
+    <io7m.api.previousArtifactId>io7m-jtensors-bytebuffered</io7m.api.previousArtifactId>
+  </properties>
+
+  <scm>
+    <url>${project.parent.scm.url}</url>
+    <connection>${project.parent.scm.connection}</connection>
+    <developerConnection>${project.parent.scm.developerConnection}
+    </developerConnection>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>com.io7m.jtensors.core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>com.io7m.jtensors.storage.api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.io7m.mutable.numbers</groupId>
+      <artifactId>com.io7m.mutable.numbers.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.io7m.jnull</groupId>
+      <artifactId>com.io7m.jnull.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.io7m.junreachable</groupId>
+      <artifactId>com.io7m.junreachable.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.io7m.ieee754b16</groupId>
+      <artifactId>com.io7m.ieee754b16.core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.immutables</groupId>
+      <artifactId>value</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Check style -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+
+      <!-- Produce OSGi bundle -->
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Export-Package>
+              com.io7m.jtensors.storage.bytebuffered
+            </Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+
+      <!-- Ignore dependencies that bytecode analysis gets wrong. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <configuration>
+          <failOnWarning>true</failOnWarning>
+          <ignoredUnusedDeclaredDependencies>
+            <ignoredUnusedDeclaredDependency>org.immutables:value:*</ignoredUnusedDeclaredDependency>
+          </ignoredUnusedDeclaredDependencies>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
