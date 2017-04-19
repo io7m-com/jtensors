@@ -1,4 +1,4 @@
-Comparing source compatibility of /home/someone/git/com.github/io7m/jtensors/com.io7m.jtensors.core/target/com.io7m.jtensors.core-8.0.0-beta0001.jar against /home/someone/.m2/repository/com/io7m/jtensors/io7m-jtensors-core/7.1.0/io7m-jtensors-core-7.1.0.jar
+Comparing source compatibility of /home/someone/git/com.github/io7m/jtensors/com.io7m.jtensors.core/target/com.io7m.jtensors.core-8.0.0-beta0003.jar against /home/someone/.m2/repository/com/io7m/jtensors/io7m-jtensors-core/7.1.0/io7m-jtensors-core-7.1.0.jar
 WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses and interfaces that could not be found on the classpath are ignored. Hence changes caused by these superclasses and interfaces are not reflected in the output.
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.determinants.Determinants  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -47,6 +47,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector2D row1(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D scale(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D subtract(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D, com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D toParameterized(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D toUnparameterized(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) double trace(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D transpose(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D withColumn(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D, int, double, double)
@@ -70,6 +72,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector2F row1(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F scale(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F subtract(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F, com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F toParameterized(com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F toUnparameterized(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) double trace(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F transpose(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F withColumn(com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F, int, float, float)
@@ -96,6 +100,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector3D row2(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D scale(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D subtract(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D, com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D toParameterized(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D toUnparameterized(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) double trace(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D transpose(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D withColumn(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D, int, double, double, double)
@@ -122,6 +128,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector3F row2(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F scale(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F subtract(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F, com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F toParameterized(com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F toUnparameterized(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) double trace(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F transpose(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F withColumn(com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F, int, float, float, float)
@@ -151,6 +159,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector4D row3(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D scale(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D subtract(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D, com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D toParameterized(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D toUnparameterized(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) double trace(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D transpose(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D withColumn(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D, int, double, double, double, double)
@@ -180,6 +190,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector4F row3(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F scale(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F subtract(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F, com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F toParameterized(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F toUnparameterized(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) double trace(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F transpose(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F withColumn(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F, int, float, float, float, float)
@@ -1016,6 +1028,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2D normalize(com.io7m.jtensors.core.parameterized.vectors.PVector2D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2D scale(com.io7m.jtensors.core.parameterized.vectors.PVector2D, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2D subtract(com.io7m.jtensors.core.parameterized.vectors.PVector2D, com.io7m.jtensors.core.parameterized.vectors.PVector2D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2D toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector2D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector2D toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector2D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2D zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.parameterized.vectors.PVectors2F  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1032,6 +1046,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2F normalize(com.io7m.jtensors.core.parameterized.vectors.PVector2F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2F scale(com.io7m.jtensors.core.parameterized.vectors.PVector2F, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2F subtract(com.io7m.jtensors.core.parameterized.vectors.PVector2F, com.io7m.jtensors.core.parameterized.vectors.PVector2F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2F toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector2F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector2F toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector2F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2F zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.parameterized.vectors.PVectors2I  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1047,6 +1063,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2I negate(com.io7m.jtensors.core.parameterized.vectors.PVector2I)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2I scale(com.io7m.jtensors.core.parameterized.vectors.PVector2I, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2I subtract(com.io7m.jtensors.core.parameterized.vectors.PVector2I, com.io7m.jtensors.core.parameterized.vectors.PVector2I)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2I toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector2I)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector2I toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector2I)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2I zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.parameterized.vectors.PVectors2L  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1062,6 +1080,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2L negate(com.io7m.jtensors.core.parameterized.vectors.PVector2L)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2L scale(com.io7m.jtensors.core.parameterized.vectors.PVector2L, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2L subtract(com.io7m.jtensors.core.parameterized.vectors.PVector2L, com.io7m.jtensors.core.parameterized.vectors.PVector2L)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2L toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector2L)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector2L toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector2L)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector2L zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.parameterized.vectors.PVectors3D  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1078,6 +1098,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3D normalize(com.io7m.jtensors.core.parameterized.vectors.PVector3D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3D scale(com.io7m.jtensors.core.parameterized.vectors.PVector3D, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3D subtract(com.io7m.jtensors.core.parameterized.vectors.PVector3D, com.io7m.jtensors.core.parameterized.vectors.PVector3D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3D toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector3D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector3D toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector3D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3D zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.parameterized.vectors.PVectors3F  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1094,6 +1116,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3F normalize(com.io7m.jtensors.core.parameterized.vectors.PVector3F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3F scale(com.io7m.jtensors.core.parameterized.vectors.PVector3F, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3F subtract(com.io7m.jtensors.core.parameterized.vectors.PVector3F, com.io7m.jtensors.core.parameterized.vectors.PVector3F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3F toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector3F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector3F toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector3F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3F zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.parameterized.vectors.PVectors3I  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1109,6 +1133,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3I negate(com.io7m.jtensors.core.parameterized.vectors.PVector3I)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3I scale(com.io7m.jtensors.core.parameterized.vectors.PVector3I, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3I subtract(com.io7m.jtensors.core.parameterized.vectors.PVector3I, com.io7m.jtensors.core.parameterized.vectors.PVector3I)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3I toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector3I)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector3I toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector3I)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3I zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.parameterized.vectors.PVectors3L  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1124,6 +1150,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3L negate(com.io7m.jtensors.core.parameterized.vectors.PVector3L)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3L scale(com.io7m.jtensors.core.parameterized.vectors.PVector3L, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3L subtract(com.io7m.jtensors.core.parameterized.vectors.PVector3L, com.io7m.jtensors.core.parameterized.vectors.PVector3L)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3L toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector3L)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector3L toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector3L)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector3L zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.parameterized.vectors.PVectors4D  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1139,6 +1167,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4D normalize(com.io7m.jtensors.core.parameterized.vectors.PVector4D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4D scale(com.io7m.jtensors.core.parameterized.vectors.PVector4D, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4D subtract(com.io7m.jtensors.core.parameterized.vectors.PVector4D, com.io7m.jtensors.core.parameterized.vectors.PVector4D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4D toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector4D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector4D toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector4D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4D zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.parameterized.vectors.PVectors4F  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1154,6 +1184,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4F normalize(com.io7m.jtensors.core.parameterized.vectors.PVector4F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4F scale(com.io7m.jtensors.core.parameterized.vectors.PVector4F, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4F subtract(com.io7m.jtensors.core.parameterized.vectors.PVector4F, com.io7m.jtensors.core.parameterized.vectors.PVector4F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4F toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector4F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector4F toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector4F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4F zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.parameterized.vectors.PVectors4I  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1168,6 +1200,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4I negate(com.io7m.jtensors.core.parameterized.vectors.PVector4I)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4I scale(com.io7m.jtensors.core.parameterized.vectors.PVector4I, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4I subtract(com.io7m.jtensors.core.parameterized.vectors.PVector4I, com.io7m.jtensors.core.parameterized.vectors.PVector4I)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4I toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector4I)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector4I toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector4I)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4I zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.parameterized.vectors.PVectors4L  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1182,6 +1216,8 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4L negate(com.io7m.jtensors.core.parameterized.vectors.PVector4L)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4L scale(com.io7m.jtensors.core.parameterized.vectors.PVector4L, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4L subtract(com.io7m.jtensors.core.parameterized.vectors.PVector4L, com.io7m.jtensors.core.parameterized.vectors.PVector4L)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4L toParameterized(com.io7m.jtensors.core.unparameterized.vectors.Vector4L)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.vectors.Vector4L toUnparameterized(com.io7m.jtensors.core.parameterized.vectors.PVector4L)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.vectors.PVector4L zero()
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.quaternions.Quaternion4D  (not serializable)
 	+++  NEW INTERFACE: com.io7m.jtensors.core.quaternions.QuaternionReadable4DType
