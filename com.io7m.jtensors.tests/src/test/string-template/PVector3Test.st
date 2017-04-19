@@ -1,6 +1,7 @@
 PVector3Test(
   className,
   vectorType,
+  vectorConversionType,
   vectorComponentType,
   vectorReadable3Type,
   vectorReadable2Type,
@@ -8,6 +9,7 @@ PVector3Test(
   generatorType,
   testOpClass,
   opClass,
+  hasGeneric,
   hasFloatingPoint) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
@@ -605,5 +607,23 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(ey, v2.y());
     <testOpClass>.checkAlmostEquals(ez, v2.z());
   }
+
+  <if(hasGeneric)>
+  @Test
+  @PercentagePassing
+  public void testConversionsParameterized()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> a = gen.next();
+    final <vectorConversionType> b = <opClass>.toUnparameterized(a);
+    final <vectorType> c = <opClass>.toParameterized(b);
+
+    Assert.assertEquals(a.x(), b.x());
+    Assert.assertEquals(a.y(), b.y());
+    Assert.assertEquals(a.z(), b.z());
+    Assert.assertEquals(a, c);
+  }
+  <endif>
 }
 >>
