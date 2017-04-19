@@ -58,7 +58,7 @@ public final class PVectorByteBufferedFloating4s16<T>
    * @return A new buffered vector
    */
 
-  public static <T> PVectorByteBufferedFloating4Type<T> createWithBase(
+  public static <T> PVectorByteBufferedFloating4s16<T> createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)

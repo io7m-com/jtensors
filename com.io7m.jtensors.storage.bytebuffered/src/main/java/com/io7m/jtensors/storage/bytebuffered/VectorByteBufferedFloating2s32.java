@@ -55,7 +55,7 @@ public final class VectorByteBufferedFloating2s32
    * @return A new buffered vector
    */
 
-  public static VectorByteBufferedFloating2Type createWithBase(
+  public static VectorByteBufferedFloating2s32 createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)

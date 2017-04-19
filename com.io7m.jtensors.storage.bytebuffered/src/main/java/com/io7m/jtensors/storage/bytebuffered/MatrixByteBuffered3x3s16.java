@@ -57,7 +57,7 @@ public final class MatrixByteBuffered3x3s16
    * @return A new buffered vector
    */
 
-  public static MatrixByteBuffered3x3Type createWithBase(
+  public static MatrixByteBuffered3x3s16 createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)

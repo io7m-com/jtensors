@@ -69,7 +69,7 @@ public final class PMatrixByteBuffered4x4s32<A, B>
    * @return A new buffered vector
    */
 
-  public static <A, B> PMatrixByteBuffered4x4Type<A, B> createWithBase(
+  public static <A, B> PMatrixByteBuffered4x4s32<A, B> createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)

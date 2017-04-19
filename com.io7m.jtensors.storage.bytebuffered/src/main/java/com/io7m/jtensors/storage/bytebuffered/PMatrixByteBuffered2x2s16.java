@@ -69,7 +69,7 @@ public final class PMatrixByteBuffered2x2s16<A, B>
    * @return A new buffered vector
    */
 
-  public static <A, B> PMatrixByteBuffered2x2Type<A, B> createWithBase(
+  public static <A, B> PMatrixByteBuffered2x2s16<A, B> createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)

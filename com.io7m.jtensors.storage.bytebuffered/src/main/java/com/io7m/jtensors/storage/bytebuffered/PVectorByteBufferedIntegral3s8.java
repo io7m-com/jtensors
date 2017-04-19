@@ -58,7 +58,7 @@ public final class PVectorByteBufferedIntegral3s8<T>
    * @return A new buffered vector
    */
 
-  public static <T> PVectorByteBufferedIntegral3Type<T> createWithBase(
+  public static <T> PVectorByteBufferedIntegral3s8<T> createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)

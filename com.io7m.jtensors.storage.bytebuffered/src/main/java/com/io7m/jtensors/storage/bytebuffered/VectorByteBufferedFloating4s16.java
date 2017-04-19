@@ -55,7 +55,7 @@ public final class VectorByteBufferedFloating4s16
    * @return A new buffered vector
    */
 
-  public static VectorByteBufferedFloating4Type createWithBase(
+  public static VectorByteBufferedFloating4s16 createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)

@@ -57,7 +57,7 @@ public final class MatrixByteBuffered2x2s16
    * @return A new buffered vector
    */
 
-  public static MatrixByteBuffered2x2Type createWithBase(
+  public static MatrixByteBuffered2x2s16 createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)

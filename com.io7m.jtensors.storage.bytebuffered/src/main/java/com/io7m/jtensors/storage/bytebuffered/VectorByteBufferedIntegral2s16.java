@@ -55,7 +55,7 @@ public final class VectorByteBufferedIntegral2s16
    * @return A new buffered vector
    */
 
-  public static VectorByteBufferedIntegral2Type createWithBase(
+  public static VectorByteBufferedIntegral2s16 createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)

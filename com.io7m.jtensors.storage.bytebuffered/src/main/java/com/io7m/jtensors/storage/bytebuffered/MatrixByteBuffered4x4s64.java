@@ -57,7 +57,7 @@ public final class MatrixByteBuffered4x4s64
    * @return A new buffered vector
    */
 
-  public static MatrixByteBuffered4x4Type createWithBase(
+  public static MatrixByteBuffered4x4s64 createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)
