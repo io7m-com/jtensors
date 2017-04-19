@@ -793,6 +793,7 @@
                   <properties>
                     <className>PMatrix4x4DTest</className>
                     <matrixType>com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D</matrixConversionType>
                     <matrixComponentType>double</matrixComponentType>
                     <scalarRealType>double</scalarRealType>
                     <generatorType>com.io7m.jtensors.generators.PMatrix4x4DGenerator</generatorType>
@@ -825,6 +826,7 @@
                   <properties>
                     <className>PMatrix3x3DTest</className>
                     <matrixType>com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3D</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D</matrixConversionType>
                     <matrixComponentType>double</matrixComponentType>
                     <scalarRealType>double</scalarRealType>
                     <generatorType>com.io7m.jtensors.generators.PMatrix3x3DGenerator</generatorType>
@@ -857,6 +859,7 @@
                   <properties>
                     <className>PMatrix2x2DTest</className>
                     <matrixType>com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2D</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D</matrixConversionType>
                     <matrixComponentType>double</matrixComponentType>
                     <scalarRealType>double</scalarRealType>
                     <generatorType>com.io7m.jtensors.generators.PMatrix2x2DGenerator</generatorType>
@@ -889,6 +892,7 @@
                   <properties>
                     <className>PMatrix4x4FTest</className>
                     <matrixType>com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F</matrixConversionType>
                     <matrixComponentType>float</matrixComponentType>
                     <scalarRealType>double</scalarRealType>
                     <generatorType>com.io7m.jtensors.generators.PMatrix4x4FGenerator</generatorType>
@@ -921,6 +925,7 @@
                   <properties>
                     <className>PMatrix3x3FTest</className>
                     <matrixType>com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F</matrixConversionType>
                     <matrixComponentType>float</matrixComponentType>
                     <scalarRealType>double</scalarRealType>
                     <generatorType>com.io7m.jtensors.generators.PMatrix3x3FGenerator</generatorType>
@@ -953,6 +958,7 @@
                   <properties>
                     <className>PMatrix2x2FTest</className>
                     <matrixType>com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F</matrixConversionType>
                     <matrixComponentType>float</matrixComponentType>
                     <scalarRealType>double</scalarRealType>
                     <generatorType>com.io7m.jtensors.generators.PMatrix2x2FGenerator</generatorType>
