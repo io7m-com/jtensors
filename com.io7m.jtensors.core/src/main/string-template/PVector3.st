@@ -1,6 +1,7 @@
 PVector3(
   className,
   vectorType,
+  vectorConversionType,
   vectorComponentType,
   scalarLargeType,
   scalarRealType,
@@ -479,6 +480,32 @@ public final class <className>
   public static <vectorType> zero()
   {
     return (<vectorType>) ZERO;
+  }
+  <endif>
+
+  <if(hasGeneric)>
+  /**
+   * @param v The input vector
+   * @param \<A> A phantom type parameter (possibly representing a coordinate system)
+   * @return A vector equal to {@code m} but without type parameters
+   */
+
+  public static \<A> <vectorConversionType> toUnparameterized(
+    final <vectorType>\<A> v)
+  {
+    return <vectorConversionType>.of(v.x(), v.y(), v.z());
+  }
+
+  /**
+   * @param v The input vector
+   * @param \<A> A phantom type parameter (possibly representing a coordinate system)
+   * @return A vector equal to {@code v} with type parameters
+   */
+
+  public static \<A> <vectorType>\<A> toParameterized(
+    final <vectorConversionType> v)
+  {
+    return <vectorType>.of(v.x(), v.y(), v.z());
   }
   <endif>
 }

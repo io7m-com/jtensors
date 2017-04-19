@@ -72,6 +72,7 @@
                   <properties>
                     <className>PVectors4D</className>
                     <vectorType>PVector4D</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorConversionType>
                     <vectorComponentType>double</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
@@ -99,6 +100,7 @@
                   <properties>
                     <className>PVectors3D</className>
                     <vectorType>PVector3D</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorConversionType>
                     <vectorComponentType>double</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
@@ -126,6 +128,7 @@
                   <properties>
                     <className>PVectors2D</className>
                     <vectorType>PVector2D</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorConversionType>
                     <vectorComponentType>double</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
@@ -154,6 +157,7 @@
                   <properties>
                     <className>PVectors4F</className>
                     <vectorType>PVector4F</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector4F</vectorConversionType>
                     <vectorComponentType>float</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
@@ -181,6 +185,7 @@
                   <properties>
                     <className>PVectors3F</className>
                     <vectorType>PVector3F</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector3F</vectorConversionType>
                     <vectorComponentType>float</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
@@ -208,6 +213,7 @@
                   <properties>
                     <className>PVectors2F</className>
                     <vectorType>PVector2F</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorConversionType>
                     <vectorComponentType>float</vectorComponentType>
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
@@ -236,6 +242,7 @@
                   <properties>
                     <className>PVectors4L</className>
                     <vectorType>PVector4L</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector4L</vectorConversionType>
                     <vectorComponentType>long</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
@@ -262,6 +269,7 @@
                   <properties>
                     <className>PVectors3L</className>
                     <vectorType>PVector3L</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector3L</vectorConversionType>
                     <vectorComponentType>long</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
@@ -288,6 +296,7 @@
                   <properties>
                     <className>PVectors2L</className>
                     <vectorType>PVector2L</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector2L</vectorConversionType>
                     <vectorComponentType>long</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
@@ -315,6 +324,7 @@
                   <properties>
                     <className>PVectors4I</className>
                     <vectorType>PVector4I</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector4I</vectorConversionType>
                     <vectorComponentType>int</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
@@ -341,6 +351,7 @@
                   <properties>
                     <className>PVectors3I</className>
                     <vectorType>PVector3I</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector3I</vectorConversionType>
                     <vectorComponentType>int</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
@@ -367,6 +378,7 @@
                   <properties>
                     <className>PVectors2I</className>
                     <vectorType>PVector2I</vectorType>
+                    <vectorConversionType>com.io7m.jtensors.core.unparameterized.vectors.Vector2I</vectorConversionType>
                     <vectorComponentType>int</vectorComponentType>
                     <scalarLargeType>long</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
