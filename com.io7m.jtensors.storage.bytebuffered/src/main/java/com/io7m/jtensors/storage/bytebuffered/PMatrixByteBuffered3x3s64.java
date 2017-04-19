@@ -69,7 +69,7 @@ public final class PMatrixByteBuffered3x3s64<A, B>
    * @return A new buffered vector
    */
 
-  public static <A, B> PMatrixByteBuffered3x3Type<A, B> createWithBase(
+  public static <A, B> PMatrixByteBuffered3x3s64<A, B> createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)

@@ -55,7 +55,7 @@ public final class VectorByteBufferedIntegral4s8
    * @return A new buffered vector
    */
 
-  public static VectorByteBufferedIntegral4Type createWithBase(
+  public static VectorByteBufferedIntegral4s8 createWithBase(
     final ByteBuffer b,
     final MutableLongType base,
     final int offset)
