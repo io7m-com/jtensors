@@ -1,6 +1,7 @@
 PMatrix3x3Test(
   className,
   matrixType,
+  matrixConversionType,
   matrixComponentType,
   vectorRowType,
   vectorColumnType,
@@ -1949,5 +1950,31 @@ public final class <className>
     this.expected.expect(IndexOutOfBoundsException.class);
     a.rowColumn(2, 3);
   }
+
+  <if(hasGeneric)>
+  @Test
+  @PercentagePassing
+  public void testConversionsParameterized()
+  {
+    final Generator\<<matrixType>\> gen = createGenerator();
+    final <matrixType> a = gen.next();
+    final <matrixConversionType> b = <opClass>.toUnparameterized(a);
+
+    <testOpClass>.checkEquals(a.r0c0(), b.r0c0());
+    <testOpClass>.checkEquals(a.r0c1(), b.r0c1());
+    <testOpClass>.checkEquals(a.r0c2(), b.r0c2());
+
+    <testOpClass>.checkEquals(a.r1c0(), b.r1c0());
+    <testOpClass>.checkEquals(a.r1c1(), b.r1c1());
+    <testOpClass>.checkEquals(a.r1c2(), b.r1c2());
+
+    <testOpClass>.checkEquals(a.r2c0(), b.r2c0());
+    <testOpClass>.checkEquals(a.r2c1(), b.r2c1());
+    <testOpClass>.checkEquals(a.r2c2(), b.r2c2());
+
+    final <matrixType> c = <opClass>.toParameterized(b);
+    Assert.assertEquals(a, c);
+  }
+  <endif>
 }
 >>

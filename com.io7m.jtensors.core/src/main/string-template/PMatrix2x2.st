@@ -8,7 +8,8 @@ PMatrix2x2(
   scalarRealType,
   dotProductClass,
   hasGeneric,
-  opClass) ::= <<
+  opClass,
+  matrixConversionType) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
  *
@@ -773,6 +774,38 @@ public final class <className>
   public static <matrixType> identity()
   {
     return IDENTITY;
+  }
+  <endif>
+
+  <if(hasGeneric)>
+  /**
+   * @param m The input matrix
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * @return A matrix equal to {@code m} but without type parameters
+   */
+
+  public static \<A, B> <matrixConversionType> toUnparameterized(
+    final <matrixType>\<A, B> m)
+  {
+    return <matrixConversionType>.of(
+      m.r0c0(), m.r0c1(),
+      m.r1c0(), m.r1c1());
+  }
+
+  /**
+   * @param m The input matrix
+   * @param \<A> A phantom type parameter (possibly representing a source coordinate system)
+   * @param \<B> A phantom type parameter (possibly representing a target coordinate system)
+   * @return A matrix equal to {@code m} with type parameters
+   */
+
+  public static \<A, B> <matrixType>\<A, B> toParameterized(
+    final <matrixConversionType> m)
+  {
+    return <matrixType>.of(
+      m.r0c0(), m.r0c1(),
+      m.r1c0(), m.r1c1());
   }
   <endif>
 

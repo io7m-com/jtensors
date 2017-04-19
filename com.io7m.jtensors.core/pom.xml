@@ -9,7 +9,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>com.io7m.jtensors</artifactId>
-    <version>8.0.0-beta0001</version>
+    <version>8.0.0-beta0002</version>
   </parent>
 
   <artifactId>com.io7m.jtensors.core</artifactId>
@@ -706,6 +706,7 @@
                   <properties>
                     <className>PMatrices4x4D</className>
                     <matrixType>PMatrix4x4D</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D</matrixConversionType>
                     <matrixComponentType>double</matrixComponentType>
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4D</vectorColumnType>
@@ -734,6 +735,7 @@
                   <properties>
                     <className>PMatrices3x3D</className>
                     <matrixType>PMatrix3x3D</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D</matrixConversionType>
                     <matrixComponentType>double</matrixComponentType>
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector3D</vectorColumnType>
@@ -762,6 +764,7 @@
                   <properties>
                     <className>PMatrices2x2D</className>
                     <matrixType>PMatrix2x2D</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D</matrixConversionType>
                     <matrixComponentType>double</matrixComponentType>
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector2D</vectorColumnType>
@@ -790,6 +793,7 @@
                   <properties>
                     <className>PMatrices4x4F</className>
                     <matrixType>PMatrix4x4F</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F</matrixConversionType>
                     <matrixComponentType>float</matrixComponentType>
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector4F</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector4F</vectorColumnType>
@@ -818,6 +822,7 @@
                   <properties>
                     <className>PMatrices3x3F</className>
                     <matrixType>PMatrix3x3F</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F</matrixConversionType>
                     <matrixComponentType>float</matrixComponentType>
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector3F</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector3F</vectorColumnType>
@@ -846,6 +851,7 @@
                   <properties>
                     <className>PMatrices2x2F</className>
                     <matrixType>PMatrix2x2F</matrixType>
+                    <matrixConversionType>com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F</matrixConversionType>
                     <matrixComponentType>float</matrixComponentType>
                     <vectorRowType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorRowType>
                     <vectorColumnType>com.io7m.jtensors.core.unparameterized.vectors.Vector2F</vectorColumnType>
