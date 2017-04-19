@@ -1,4 +1,4 @@
-Comparing source compatibility of /home/someone/git/com.github/io7m/jtensors/com.io7m.jtensors.storage.bytebuffered/target/com.io7m.jtensors.storage.bytebuffered-8.0.0-beta0003.jar against /home/someone/.m2/repository/com/io7m/jtensors/io7m-jtensors-bytebuffered/7.1.0/io7m-jtensors-bytebuffered-7.1.0.jar
+Comparing source compatibility of /home/someone/git/com.github/io7m/jtensors/com.io7m.jtensors.storage.bytebuffered/target/com.io7m.jtensors.storage.bytebuffered-8.0.0-beta0004.jar against /home/someone/.m2/repository/com/io7m/jtensors/io7m-jtensors-bytebuffered/7.1.0/io7m-jtensors-bytebuffered-7.1.0.jar
 WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses and interfaces that could not be found on the classpath are ignored. Hence changes caused by these superclasses and interfaces are not reflected in the output.
 ---! REMOVED CLASS: PUBLIC(-) ABSTRACT(-) com.io7m.jtensors.bytebuffered.ByteBuffered  (not serializable)
 	---! REMOVED INTERFACE: com.io7m.jtensors.bytebuffered.ByteBufferedType
@@ -1018,7 +1018,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r1c0()
@@ -1035,7 +1035,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r1c0()
@@ -1052,7 +1052,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r1c0()
@@ -1077,7 +1077,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1099,7 +1099,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1121,7 +1121,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1151,7 +1151,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1180,7 +1180,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1209,7 +1209,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1251,7 +1251,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r1c0()
@@ -1272,7 +1272,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r1c0()
@@ -1293,7 +1293,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered2x2s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r1c0()
@@ -1324,7 +1324,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1350,7 +1350,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1376,7 +1376,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage3x3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered3x3s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1412,7 +1412,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1445,7 +1445,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1478,7 +1478,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.MatrixStorageType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) double r0c0()
 	+++  NEW METHOD: PUBLIC(+) double r0c1()
 	+++  NEW METHOD: PUBLIC(+) double r0c2()
@@ -1520,7 +1520,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) double x()
@@ -1536,7 +1536,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) double x()
@@ -1552,7 +1552,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.core.unparameterized.vectors.VectorReadable2DType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating2s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) double x()
@@ -1581,7 +1581,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) void setZ(double)
@@ -1603,7 +1603,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) void setZ(double)
@@ -1625,7 +1625,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating3s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) void setZ(double)
@@ -1664,7 +1664,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4DType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(double)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
@@ -1692,7 +1692,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4DType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(double)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
@@ -1720,7 +1720,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.core.parameterized.vectors.PVectorReadable4DType
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedFloating4s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(double)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
@@ -1757,7 +1757,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) long x()
@@ -1773,7 +1773,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) long x()
@@ -1789,7 +1789,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) long x()
@@ -1805,7 +1805,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2s8 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) long x()
@@ -1834,7 +1834,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) void setZ(long)
@@ -1856,7 +1856,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) void setZ(long)
@@ -1878,7 +1878,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) void setZ(long)
@@ -1900,7 +1900,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral3s8 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) void setZ(long)
@@ -1939,7 +1939,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral4Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(long)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
@@ -1967,7 +1967,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral4Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(long)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
@@ -1995,7 +1995,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral4Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(long)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
@@ -2023,7 +2023,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral4Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4s8 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(long)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
@@ -2064,7 +2064,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) double x()
@@ -2078,7 +2078,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) double x()
@@ -2092,7 +2092,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) double x()
@@ -2116,7 +2116,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) void setZ(double)
@@ -2135,7 +2135,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) void setZ(double)
@@ -2154,7 +2154,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
 	+++  NEW METHOD: PUBLIC(+) void setZ(double)
@@ -2184,7 +2184,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(double)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
@@ -2206,7 +2206,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(double)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
@@ -2228,7 +2228,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating3Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedFloating64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(double)
 	+++  NEW METHOD: PUBLIC(+) void setX(double)
 	+++  NEW METHOD: PUBLIC(+) void setY(double)
@@ -2257,7 +2257,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) long x()
@@ -2271,7 +2271,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) long x()
@@ -2285,7 +2285,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) long x()
@@ -2299,7 +2299,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2s8 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) long x()
@@ -2323,7 +2323,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) void setZ(long)
@@ -2342,7 +2342,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) void setZ(long)
@@ -2361,7 +2361,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) void setZ(long)
@@ -2380,7 +2380,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral3s8 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
 	+++  NEW METHOD: PUBLIC(+) void setZ(long)
@@ -2410,7 +2410,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral16
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4s16 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(long)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
@@ -2432,7 +2432,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral32
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4s32 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(long)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
@@ -2454,7 +2454,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral64
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4s64 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(long)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)
@@ -2476,7 +2476,7 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW INTERFACE: com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type
 	+++  NEW SUPERCLASS: com.io7m.jtensors.storage.bytebuffered.TensorByteBufferedIntegral8
 	+++  NEW METHOD: PROTECTED(+) int componentCount()
-	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4s8 createWithBase(java.nio.ByteBuffer, com.io7m.mutable.numbers.core.MutableLongType, int)
 	+++  NEW METHOD: PUBLIC(+) void setW(long)
 	+++  NEW METHOD: PUBLIC(+) void setX(long)
 	+++  NEW METHOD: PUBLIC(+) void setY(long)

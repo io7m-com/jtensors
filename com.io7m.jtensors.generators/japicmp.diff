@@ -1,4 +1,4 @@
-Comparing source compatibility of /home/someone/git/com.github/io7m/jtensors/com.io7m.jtensors.generators/target/com.io7m.jtensors.generators-8.0.0-beta0003.jar against /home/someone/.m2/repository/com/io7m/jtensors/io7m-jtensors-generators/7.1.0/io7m-jtensors-generators-7.1.0.jar
+Comparing source compatibility of /home/someone/git/com.github/io7m/jtensors/com.io7m.jtensors.generators/target/com.io7m.jtensors.generators-8.0.0-beta0004.jar against /home/someone/.m2/repository/com/io7m/jtensors/io7m-jtensors-generators/7.1.0/io7m-jtensors-generators-7.1.0.jar
 WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses and interfaces that could not be found on the classpath are ignored. Hence changes caused by these superclasses and interfaces are not reflected in the output.
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.generators.Matrix2x2DGenerator  (not serializable)
 	+++  NEW INTERFACE: net.java.quickcheck.Generator
