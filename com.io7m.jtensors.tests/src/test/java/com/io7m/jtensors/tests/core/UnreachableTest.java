@@ -20,6 +20,8 @@ import com.io7m.jtensors.core.determinants.Determinants;
 import com.io7m.jtensors.core.dotproducts.DotProductsDouble;
 import com.io7m.jtensors.core.dotproducts.DotProductsInt;
 import com.io7m.jtensors.core.dotproducts.DotProductsLong;
+import com.io7m.jtensors.orthonormalization.Orthonormalization;
+import com.io7m.jtensors.orthonormalization.POrthonormalization;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrices2x2D;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrices2x2F;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrices3x3D;
@@ -153,6 +155,22 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.unparameterized.matrices.MatrixFOps");
+    Assert.fail();
+  }
+
+  @Test
+  public void testOrthonormalization()
+    throws Throwable
+  {
+    this.checkUnreachable(Orthonormalization.class);
+    Assert.fail();
+  }
+
+  @Test
+  public void testPOrthonormalization()
+    throws Throwable
+  {
+    this.checkUnreachable(POrthonormalization.class);
     Assert.fail();
   }
 

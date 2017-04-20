@@ -11,7 +11,7 @@
 
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>com.io7m.jtensors</artifactId>
-  <version>8.0.0-beta0004</version>
+  <version>8.0.0-beta0005</version>
   <packaging>pom</packaging>
 
   <name>com.io7m.jtensors</name>
@@ -23,6 +23,7 @@
     <module>com.io7m.jtensors.core</module>
     <module>com.io7m.jtensors.documentation</module>
     <module>com.io7m.jtensors.generators</module>
+    <module>com.io7m.jtensors.orthonormalization</module>
     <module>com.io7m.jtensors.storage.api</module>
     <module>com.io7m.jtensors.storage.bytebuffered</module>
     <module>com.io7m.jtensors.storage.heap</module>
