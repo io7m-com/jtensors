@@ -38,6 +38,11 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>com.io7m.jtensors.orthonormalization</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>com.io7m.jtensors.generators</artifactId>
       <version>${project.version}</version>
     </dependency>

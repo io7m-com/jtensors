@@ -23,6 +23,7 @@
     <module>com.io7m.jtensors.core</module>
     <module>com.io7m.jtensors.documentation</module>
     <module>com.io7m.jtensors.generators</module>
+    <module>com.io7m.jtensors.orthonormalization</module>
     <module>com.io7m.jtensors.storage.api</module>
     <module>com.io7m.jtensors.storage.bytebuffered</module>
     <module>com.io7m.jtensors.storage.heap</module>
