@@ -1,4 +1,4 @@
-com.io7m.jtensors 8.0.0-beta0004 Documentation
+com.io7m.jtensors 8.0.0-beta0005 Documentation
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Contents
