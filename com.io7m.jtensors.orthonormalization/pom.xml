@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.io7m.jtensors</groupId>
+    <artifactId>com.io7m.jtensors</artifactId>
+    <version>8.0.0-beta0005</version>
+  </parent>
+
+  <artifactId>com.io7m.jtensors.orthonormalization</artifactId>
+  <packaging>bundle</packaging>
+
+  <name>com.io7m.jtensors.orthonormalization</name>
+  <description>Vector/matrix math package (Orthonormalization)</description>
+  <url>http://io7m.github.io/jtensors/</url>
+
+  <properties>
+    <io7m.api.japicmp.skip>true</io7m.api.japicmp.skip>
+    <io7m.javadoc.docLint/>
+  </properties>
+
+  <scm>
+    <url>${project.parent.scm.url}</url>
+    <connection>${project.parent.scm.connection}</connection>
+    <developerConnection>${project.parent.scm.developerConnection}</developerConnection>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>com.io7m.jtensors.core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.io7m.jnull</groupId>
+      <artifactId>com.io7m.jnull.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.io7m.junreachable</groupId>
+      <artifactId>com.io7m.junreachable.core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.immutables</groupId>
+      <artifactId>value</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Check style -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+
+      <!-- Produce OSGi bundle -->
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Export-Package>
+              com.io7m.jtensors.orthonormalization
+            </Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
