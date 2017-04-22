@@ -6,6 +6,7 @@ Quaternion4(
   scalarRealType,
   matrix4x4Type,
   matrix4x4ComponentType,
+  matrix4x4ParameterizedType,
   dotProductClass) ::= <<
 /*
  * Copyright © 2017 \<code@io7m.com\> http://io7m.com
@@ -471,6 +472,77 @@ public final class <className>
   }
 
   /**
+   * Calculate a quaternion that represents the rotation given by the matrix {@code m}.
+   *
+   * @param \<A> A phantom type parameter, possibly representing a source coordinate system
+   * @param \<B> A phantom type parameter, possibly representing a target coordinate system
+   * @param m The matrix
+   * @return A quaternion
+   */
+
+  public static \<A, B> <quaternionType> ofPMatrix4x4(
+    final <matrix4x4ParameterizedType>\<A, B> m)
+  {
+    final <scalarRealType> m_r0c0 = m.r0c0();
+    final <scalarRealType> m_r0c1 = m.r0c1();
+    final <scalarRealType> m_r0c2 = m.r0c2();
+    final <scalarRealType> m_r1c0 = m.r1c0();
+    final <scalarRealType> m_r1c1 = m.r1c1();
+    final <scalarRealType> m_r1c2 = m.r1c2();
+    final <scalarRealType> m_r2c0 = m.r2c0();
+    final <scalarRealType> m_r2c1 = m.r2c1();
+    final <scalarRealType> m_r2c2 = m.r2c2();
+
+    /*
+     * Explicitly ignore the bottom right element of the matrix, as this
+     * affects the magnitude of the created quaternion.
+     */
+
+    final <scalarRealType> trace = m_r0c0 + m_r1c1 + m_r2c2;
+
+    final <scalarRealType> x;
+    final <scalarRealType> y;
+    final <scalarRealType> z;
+    final <scalarRealType> w;
+
+    if (trace > 0.0) {
+      // S = 4 * qw
+      final double s = Math.sqrt(trace + 1.0) * 2.0;
+      w = 0.25 * s;
+      x = (m_r2c1 - m_r1c2) / s;
+      y = (m_r0c2 - m_r2c0) / s;
+      z = (m_r1c0 - m_r0c1) / s;
+    } else if ((m_r0c0 > m_r1c1) && (m_r0c0 > m_r2c2)) {
+      // S = 4 * qx
+      final double s = Math.sqrt((1.0 + m_r0c0) - m_r1c1 - m_r2c2) * 2.0;
+      w = (m_r2c1 - m_r1c2) / s;
+      x = 0.25 * s;
+      y = (m_r0c1 + m_r1c0) / s;
+      z = (m_r0c2 + m_r2c0) / s;
+    } else if (m_r1c1 > m_r2c2) {
+      // S = 4 * qy
+      final double s = Math.sqrt((1.0 + m_r1c1) - m_r0c0 - m_r2c2) * 2.0;
+      w = (m_r0c2 - m_r2c0) / s;
+      x = (m_r0c1 + m_r1c0) / s;
+      y = 0.25 * s;
+      z = (m_r1c2 + m_r2c1) / s;
+    } else {
+      // S = 4 * qz
+      final double s = Math.sqrt((1.0 + m_r2c2) - m_r0c0 - m_r1c1) * 2.0;
+      w = (m_r1c0 - m_r0c1) / s;
+      x = (m_r0c2 + m_r2c0) / s;
+      y = (m_r1c2 + m_r2c1) / s;
+      z = 0.25 * s;
+    }
+
+    return <quaternionType>.of(
+      (<quaternionComponentType>) x,
+      (<quaternionComponentType>) y,
+      (<quaternionComponentType>) z,
+      (<quaternionComponentType>) w);
+  }
+
+  /**
    * Scale {@code q0} by {@code r}.
    *
    * @return {@code (q0.x * r, q0.y * r, q0.z * r, q0.w * r) }
@@ -551,6 +623,55 @@ public final class <className>
     final <scalarRealType> r3c3 = 1.0;
 
     return <matrix4x4Type>.of(
+      (<matrix4x4ComponentType>) r0c0, (<matrix4x4ComponentType>) r0c1, (<matrix4x4ComponentType>) r0c2, (<matrix4x4ComponentType>) r0c3,
+      (<matrix4x4ComponentType>) r1c0, (<matrix4x4ComponentType>) r1c1, (<matrix4x4ComponentType>) r1c2, (<matrix4x4ComponentType>) r1c3,
+      (<matrix4x4ComponentType>) r2c0, (<matrix4x4ComponentType>) r2c1, (<matrix4x4ComponentType>) r2c2, (<matrix4x4ComponentType>) r2c3,
+      (<matrix4x4ComponentType>) r3c0, (<matrix4x4ComponentType>) r3c1, (<matrix4x4ComponentType>) r3c2, (<matrix4x4ComponentType>) r3c3);
+  }
+
+  /**
+   * Create a 4x4 matrix from the quaternion {@code q}.
+   *
+   * @param \<A> A phantom type parameter, possibly representing a source coordinate system
+   * @param \<B> A phantom type parameter, possibly representing a target coordinate system
+   * @return A matrix based on q
+   * @param q The quaternion
+   */
+
+  public static \<A, B> <matrix4x4ParameterizedType>\<A, B> toPMatrix4x4(
+    final <quaternionType> q)
+  {
+    final <scalarRealType> xx = q.x() * q.x();
+    final <scalarRealType> xy = q.x() * q.y();
+    final <scalarRealType> xz = q.x() * q.z();
+    final <scalarRealType> yy = q.y() * q.y();
+    final <scalarRealType> yz = q.y() * q.z();
+    final <scalarRealType> zz = q.z() * q.z();
+    final <scalarRealType> wx = q.w() * q.x();
+    final <scalarRealType> wy = q.w() * q.y();
+    final <scalarRealType> wz = q.w() * q.z();
+
+    final <scalarRealType> r0c0 = 1.0 - (2.0 * yy) - (2.0 * zz);
+    final <scalarRealType> r0c1 = (2.0 * xy) - (2.0 * wz);
+    final <scalarRealType> r0c2 = (2.0 * xz) + (2.0 * wy);
+    final <scalarRealType> r0c3 = 0.0;
+
+    final <scalarRealType> r1c0 = (2.0 * xy) + (2.0 * wz);
+    final <scalarRealType> r1c1 = 1.0 - (2.0 * xx) - (2.0 * zz);
+    final <scalarRealType> r1c2 = (2.0 * yz) - (2.0 * wx);
+    final <scalarRealType> r1c3 = 0.0;
+
+    final <scalarRealType> r2c0 = (2.0 * xz) - (2.0 * wy);
+    final <scalarRealType> r2c1 = (2.0 * yz) + (2.0 * wx);
+    final <scalarRealType> r2c2 = 1.0 - (2.0 * xx) - (2.0 * yy);
+    final <scalarRealType> r2c3 = 0.0;
+
+    final <scalarRealType> r3c0 = 0.0;
+    final <scalarRealType> r3c1 = 0.0;
+    final <scalarRealType> r3c2 = 0.0;
+    final <scalarRealType> r3c3 = 1.0;
+
+    return <matrix4x4ParameterizedType>.of(
       (<matrix4x4ComponentType>) r0c0, (<matrix4x4ComponentType>) r0c1, (<matrix4x4ComponentType>) r0c2, (<matrix4x4ComponentType>) r0c3,
       (<matrix4x4ComponentType>) r1c0, (<matrix4x4ComponentType>) r1c1, (<matrix4x4ComponentType>) r1c2, (<matrix4x4ComponentType>) r1c3,
       (<matrix4x4ComponentType>) r2c0, (<matrix4x4ComponentType>) r2c1, (<matrix4x4ComponentType>) r2c2, (<matrix4x4ComponentType>) r2c3,

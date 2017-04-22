@@ -8,6 +8,8 @@ Quaternion4Test(
   matrix4x4Type,
   matrix4x4OpClass,
   matrix4x4GeneratorType,
+  matrix4x4ParameterizedOpClass,
+  matrix4x4ParameterizedType,
   vector3Type,
   vector3GeneratorType,
   vector3OpClass,
@@ -726,6 +728,56 @@ public final class <className>
     <testOpClass>.checkAlmostEqualsMatrix(m_at, m_ai);
   }
 
+  @Test
+  @PercentagePassing
+  public void testToPMatrix4x4Identity()
+  {
+    final <quaternionType> q = <opClass>.identity();
+    final <matrix4x4ParameterizedType> m = <opClass>.toPMatrix4x4(q);
+    <testOpClass>.checkAlmostEqualsMatrix(<matrix4x4ParameterizedOpClass>.identity(), m);
+  }
+
+  @Test
+  @PercentagePassing
+  public void testToPMatrix4x4OfAxisAngleEquivalent()
+  {
+    final Generator\<<vector3Type>\> gen = createVector3Generator();
+    final <vector3Type> v_axis = <vector3OpClass>.normalize(gen.next());
+    final <scalarRealType> angle = gen.next().x();
+
+    final <quaternionType> q =
+      <opClass>.ofAxisAngle(v_axis.x(), v_axis.y(), v_axis.z(), angle);
+    final <matrix4x4ParameterizedType> m_a =
+      <opClass>.toPMatrix4x4(q);
+    final <matrix4x4ParameterizedType> m_o =
+      <matrix4x4ParameterizedOpClass>.ofAxisAngle(v_axis.x(), v_axis.y(), v_axis.z(), angle);
+
+    <testOpClass>.checkAlmostEqualsMatrix(m_o, m_a);
+  }
+
+  @Test
+  @PercentagePassing
+  public void testToPMatrix4x4OfAxisAngleOrthogonal()
+  {
+    final Generator\<<vector3Type>\> gen = createVector3Generator();
+    final <vector3Type> v_axis = <vector3OpClass>.normalize(gen.next());
+    final <scalarRealType> angle = gen.next().x();
+
+    final <quaternionType> q =
+      <opClass>.ofAxisAngle(v_axis.x(), v_axis.y(), v_axis.z(), angle);
+    final <matrix4x4ParameterizedType> m_a =
+      <opClass>.toPMatrix4x4(q);
+
+    final Optional\<<matrix4x4ParameterizedType>\> m_ai_opt =
+      <matrix4x4ParameterizedOpClass>.invert(m_a);
+    final <matrix4x4ParameterizedType> m_ai =
+      m_ai_opt.get();
+    final <matrix4x4ParameterizedType> m_at =
+      <matrix4x4ParameterizedOpClass>.transpose(m_a);
+
+    <testOpClass>.checkAlmostEqualsMatrix(m_at, m_ai);
+  }
+
   /**
    * ∀ x y z a. ofMatrix4x4(Matrix.ofAxisAngle(ofAxisAngle(x, y, z, a))) ≅ ofAxisAngle(x, y, z, a)
    *
@@ -746,6 +798,37 @@ public final class <className>
       <matrix4x4OpClass>.ofAxisAngle(axis.x(), axis.y(), axis.z(), angle);
     final <quaternionType> q1 =
       <opClass>.ofMatrix4x4(m0);
+
+    if (<opClass>.isNegationOf(<testOpClass>::almostEquals, q0, q1)) {
+      return;
+    }
+
+    <testOpClass>.checkAlmostEquals(q0.x(), q1.x());
+    <testOpClass>.checkAlmostEquals(q0.y(), q1.y());
+    <testOpClass>.checkAlmostEquals(q0.z(), q1.z());
+    <testOpClass>.checkAlmostEquals(q0.w(), q1.w());
+  }
+
+  /**
+   * ∀ x y z a. ofMatrix4x4(PMatrix.ofAxisAngle(ofAxisAngle(x, y, z, a))) ≅ ofAxisAngle(x, y, z, a)
+   *
+   * Where m ≅ n can mean that m is the negation of n.
+   */
+
+  @Test
+  @PercentagePassing
+  public void testOfPMatrix4x4()
+  {
+    final Generator\<<vector3Type>\> gen = createVector3Generator();
+    final <vector3Type> axis = <vector3OpClass>.normalize(gen.next());
+    final <scalarRealType> angle = gen.next().x();
+
+    final <quaternionType> q0 =
+      <opClass>.ofAxisAngle(axis.x(), axis.y(), axis.z(), angle);
+    final <matrix4x4ParameterizedType> m0 =
+      <matrix4x4ParameterizedOpClass>.ofAxisAngle(axis.x(), axis.y(), axis.z(), angle);
+    final <quaternionType> q1 =
+      <opClass>.ofPMatrix4x4(m0);
 
     if (<opClass>.isNegationOf(<testOpClass>::almostEquals, q0, q1)) {
       return;
