@@ -1062,6 +1062,7 @@
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
                     <matrix4x4Type>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D</matrix4x4Type>
+                    <matrix4x4ParameterizedType>com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D</matrix4x4ParameterizedType>
                     <matrix4x4ComponentType>double</matrix4x4ComponentType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
                   </properties>
@@ -1088,6 +1089,7 @@
                     <scalarLargeType>double</scalarLargeType>
                     <scalarRealType>double</scalarRealType>
                     <matrix4x4Type>com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F</matrix4x4Type>
+                    <matrix4x4ParameterizedType>com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F</matrix4x4ParameterizedType>
                     <matrix4x4ComponentType>float</matrix4x4ComponentType>
                     <dotProductClass>com.io7m.jtensors.core.dotproducts.DotProductsDouble</dotProductClass>
                   </properties>
