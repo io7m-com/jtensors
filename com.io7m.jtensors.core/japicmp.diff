@@ -1,4 +1,4 @@
-Comparing source compatibility of /home/someone/git/com.github/io7m/jtensors/com.io7m.jtensors.core/target/com.io7m.jtensors.core-8.0.0-beta0005.jar against /home/someone/.m2/repository/com/io7m/jtensors/io7m-jtensors-core/7.1.0/io7m-jtensors-core-7.1.0.jar
+Comparing source compatibility of /home/someone/git/com.github/io7m/jtensors/com.io7m.jtensors.core/target/com.io7m.jtensors.core-8.0.0-beta0006.jar against /home/someone/.m2/repository/com/io7m/jtensors/io7m-jtensors-core/7.1.0/io7m-jtensors-core-7.1.0.jar
 WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses and interfaces that could not be found on the classpath are ignored. Hence changes caused by these superclasses and interfaces are not reflected in the output.
 +++  NEW CLASS: PUBLIC(+) FINAL(+) com.io7m.jtensors.core.determinants.Determinants  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1305,9 +1305,11 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4D normalize(com.io7m.jtensors.core.quaternions.Quaternion4D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4D ofAxisAngle(double, double, double, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4D ofMatrix4x4(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4D ofPMatrix4x4(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4D scale(com.io7m.jtensors.core.quaternions.Quaternion4D, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4D subtract(com.io7m.jtensors.core.quaternions.Quaternion4D, com.io7m.jtensors.core.quaternions.Quaternion4D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D toMatrix4x4(com.io7m.jtensors.core.quaternions.Quaternion4D)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D toPMatrix4x4(com.io7m.jtensors.core.quaternions.Quaternion4D)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4D zero()
 +++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternions4D$ComponentComparatorType  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
@@ -1328,9 +1330,11 @@ WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses 
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4F normalize(com.io7m.jtensors.core.quaternions.Quaternion4F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4F ofAxisAngle(double, double, double, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4F ofMatrix4x4(com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4F ofPMatrix4x4(com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4F scale(com.io7m.jtensors.core.quaternions.Quaternion4F, double)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4F subtract(com.io7m.jtensors.core.quaternions.Quaternion4F, com.io7m.jtensors.core.quaternions.Quaternion4F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F toMatrix4x4(com.io7m.jtensors.core.quaternions.Quaternion4F)
+	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F toPMatrix4x4(com.io7m.jtensors.core.quaternions.Quaternion4F)
 	+++  NEW METHOD: PUBLIC(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternion4F zero()
 +++  NEW INTERFACE: PUBLIC(+) ABSTRACT(+) STATIC(+) com.io7m.jtensors.core.quaternions.Quaternions4F$ComponentComparatorType  (not serializable)
 	+++  NEW SUPERCLASS: java.lang.Object
