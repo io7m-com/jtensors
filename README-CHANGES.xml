@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <c:changelog xmlns:c="http://schemas.io7m.com/changelog/2.0.0">
-  <c:project>jtensors</c:project>
+  <c:project>com.io7m.jtensors</c:project>
 
   <c:release c:ticket-system="com.github.io7m.jtensors">
     <c:date>2017-04-24</c:date>
