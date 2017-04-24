@@ -3,7 +3,7 @@
   <c:project>jtensors</c:project>
 
   <c:release c:ticket-system="com.github.io7m.jtensors">
-    <c:date>2017-03-22</c:date>
+    <c:date>2017-04-24</c:date>
     <c:version>8.0.0</c:version>
 
     <c:item>
