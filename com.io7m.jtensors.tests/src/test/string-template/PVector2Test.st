@@ -343,6 +343,19 @@ public final class <className>
 
   @Test
   @PercentagePassing
+  public void testDistanceZero()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> v0 = gen.next();
+
+    <testOpClass>.checkAlmostEquals(
+      <testOpClass>.constant("0"),
+      <opClass>.distance(v0, v0));
+  }
+
+  @Test
+  @PercentagePassing
   public void testDotProductSelfMagnitudeSquared()
   {
     final Generator\<<vectorType>\> gen = createGenerator();

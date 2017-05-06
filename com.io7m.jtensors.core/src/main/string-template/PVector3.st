@@ -226,6 +226,31 @@ public final class <className>
   }
 
   /**
+   * Calculate the distance between {@code v0} and {@code v1}.
+   *
+   * @return The distance between {@code v0} and {@code v1}.
+   * <if(hasGeneric)>
+   * @param \<T> A phantom type parameter
+   * <endif>
+   * @param v0 The left vector
+   * @param v1 The right vector
+   */
+
+  public static
+  <if(hasGeneric)>
+  \<T> <scalarLargeType> distance(
+    final <vectorType>\<T> v0,
+    final <vectorType>\<T> v1)
+  <else>
+  <scalarLargeType> distance(
+    final <vectorType> v0,
+    final <vectorType> v1)
+  <endif>
+  {
+    return (<scalarLargeType>) magnitude(subtract(v0, v1));
+  }
+
+  /**
    * Calculate the scalar product of the vectors {@code v0} and {@code v1}.
    *
    * <if(hasGeneric)>
