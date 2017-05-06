@@ -20,10 +20,6 @@
   </description>
   <url>http://io7m.github.io/jtensors/</url>
 
-  <properties>
-    <io7m.api.japicmp.skip>true</io7m.api.japicmp.skip>
-  </properties>
-
   <scm>
     <url>${project.parent.scm.url}</url>
     <connection>${project.parent.scm.connection}</connection>

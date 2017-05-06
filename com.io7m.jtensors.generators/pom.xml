@@ -19,10 +19,6 @@
   <description>Vector/matrix math package (QuickCheck generators)</description>
   <url>http://io7m.github.io/jtensors/</url>
 
-  <properties>
-    <io7m.api.previousArtifactId>io7m-jtensors-generators</io7m.api.previousArtifactId>
-  </properties>
-
   <scm>
     <url>${project.parent.scm.url}</url>
     <connection>${project.parent.scm.connection}</connection>

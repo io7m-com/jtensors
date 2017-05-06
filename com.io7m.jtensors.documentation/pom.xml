@@ -20,7 +20,6 @@
   <url>http://io7m.github.io/jtensors/</url>
 
   <properties>
-    <io7m.api.previousArtifactId>io7m-jtensors-documentation</io7m.api.previousArtifactId>
     <mdep.analyze.skip>true</mdep.analyze.skip>
   </properties>
 

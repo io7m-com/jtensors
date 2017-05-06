@@ -19,11 +19,6 @@
   <description>Vector/matrix math package (Core)</description>
   <url>http://io7m.github.io/jtensors/</url>
 
-  <properties>
-    <io7m.api.previousArtifactId>io7m-jtensors-core</io7m.api.previousArtifactId>
-    <io7m.javadoc.docLint/>
-  </properties>
-
   <scm>
     <url>${project.parent.scm.url}</url>
     <connection>${project.parent.scm.connection}</connection>
