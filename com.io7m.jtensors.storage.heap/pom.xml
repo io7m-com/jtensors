@@ -9,7 +9,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>com.io7m.jtensors</artifactId>
-    <version>8.0.0</version>
+    <version>8.1.0</version>
   </parent>
 
   <artifactId>com.io7m.jtensors.storage.heap</artifactId>
@@ -19,10 +19,6 @@
   <description>Vector/matrix math package (Heap-based tensor storage implementations)
   </description>
   <url>http://io7m.github.io/jtensors/</url>
-
-  <properties>
-    <io7m.api.japicmp.skip>true</io7m.api.japicmp.skip>
-  </properties>
 
   <scm>
     <url>${project.parent.scm.url}</url>
