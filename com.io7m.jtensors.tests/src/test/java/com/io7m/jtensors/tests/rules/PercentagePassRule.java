@@ -74,8 +74,10 @@ public final class PercentagePassRule implements TestRule
       final double in_percent)
     {
       this.iterations = in_iterations;
-      this.statement = NullCheck.notNull(in_statement);
-      this.description = NullCheck.notNull(in_description);
+      this.statement =
+        NullCheck.notNull(in_statement, "Statement");
+      this.description =
+        NullCheck.notNull(in_description, "Description");
       this.target_percent = in_percent;
     }
 

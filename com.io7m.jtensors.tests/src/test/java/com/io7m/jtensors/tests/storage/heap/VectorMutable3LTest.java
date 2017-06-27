@@ -22,7 +22,6 @@ import com.io7m.jtensors.generators.Vector3IGenerator;
 import com.io7m.jtensors.generators.Vector3LGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral3Type;
 import com.io7m.jtensors.storage.heap.VectorMutable3L;
-import com.io7m.jtensors.storage.heap.VectorMutable3L;
 import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestLOps;
 import com.io7m.jtensors.tests.rules.PercentagePassRule;

@@ -37,7 +37,7 @@ abstract class TensorByteBuffered implements TensorByteBufferedType
     final int in_offset)
   {
     this.buffer = NullCheck.notNull(in_buffer, "Buffer");
-    this.base = NullCheck.notNull(in_base);
+    this.base = NullCheck.notNull(in_base, "Base");
     this.offset = in_offset;
   }
 

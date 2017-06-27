@@ -17,8 +17,6 @@
 package com.io7m.jtensors.tests.orthonormalization;
 
 import com.io7m.jequality.AlmostEqualDouble;
-import com.io7m.jtensors.orthonormalization.Orthonormalization;
-import com.io7m.jtensors.orthonormalization.Orthonormalized3D;
 import com.io7m.jtensors.orthonormalization.POrthonormalization;
 import com.io7m.jtensors.orthonormalization.POrthonormalized3D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector3D;

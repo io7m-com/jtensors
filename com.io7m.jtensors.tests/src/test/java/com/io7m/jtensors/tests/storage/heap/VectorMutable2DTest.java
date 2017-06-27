@@ -22,7 +22,6 @@ import com.io7m.jtensors.generators.Vector2DGenerator;
 import com.io7m.jtensors.generators.Vector2FGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type;
 import com.io7m.jtensors.storage.heap.VectorMutable2D;
-import com.io7m.jtensors.storage.heap.VectorMutable2D;
 import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestDOps;
 import com.io7m.jtensors.tests.rules.PercentagePassRule;
