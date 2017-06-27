@@ -3,6 +3,18 @@
   <c:project>com.io7m.jtensors</c:project>
 
   <c:release c:ticket-system="com.github.io7m.jtensors">
+    <c:date>2017-06-27</c:date>
+    <c:version>8.2.0</c:version>
+
+    <c:item>
+      <c:date>2017-06-27</c:date>
+      <c:type-code-new/>
+      <c:ticket>22</c:ticket>
+      <c:summary>Add bilinear interpolation methods.</c:summary>
+    </c:item>
+  </c:release>
+
+  <c:release c:ticket-system="com.github.io7m.jtensors">
     <c:date>2017-05-06</c:date>
     <c:version>8.1.0</c:version>
 
