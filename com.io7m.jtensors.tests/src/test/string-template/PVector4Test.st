@@ -483,6 +483,138 @@ public final class <className>
   }
 
   @Test
+  @PercentagePassing
+  public void testInterpolateBilinearLimitsX0Y0()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> x0y0 = gen.next();
+    final <vectorType> x1y0 = gen.next();
+    final <vectorType> x0y1 = gen.next();
+    final <vectorType> x1y1 = gen.next();
+
+    final <vectorType> r =
+      <opClass>.interpolateBilinear(
+        x0y0,
+        x1y0,
+        x0y1,
+        x1y1,
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("0"));
+
+    System.out.println("--");
+    System.out.println("x0y0:     " + x0y0);
+    System.out.println("x0y1:     " + x0y1);
+    System.out.println("x1y0:     " + x1y0);
+    System.out.println("x1y1:     " + x1y1);
+    System.out.println("r (x0y0): " + r);
+
+    <testOpClass>.checkAlmostEquals(x0y0.x(), r.x());
+    <testOpClass>.checkAlmostEquals(x0y0.y(), r.y());
+    <testOpClass>.checkAlmostEquals(x0y0.z(), r.z());
+    <testOpClass>.checkAlmostEquals(x0y0.w(), r.w());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testInterpolateBilinearLimitsX1Y0()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> x0y0 = gen.next();
+    final <vectorType> x1y0 = gen.next();
+    final <vectorType> x0y1 = gen.next();
+    final <vectorType> x1y1 = gen.next();
+
+    final <vectorType> r =
+      <opClass>.interpolateBilinear(
+        x0y0,
+        x1y0,
+        x0y1,
+        x1y1,
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("0"));
+
+    System.out.println("--");
+    System.out.println("x0y0:     " + x0y0);
+    System.out.println("x0y1:     " + x0y1);
+    System.out.println("x1y0:     " + x1y0);
+    System.out.println("x1y1:     " + x1y1);
+    System.out.println("r (x1y0): " + r);
+
+    <testOpClass>.checkAlmostEquals(x1y0.x(), r.x());
+    <testOpClass>.checkAlmostEquals(x1y0.y(), r.y());
+    <testOpClass>.checkAlmostEquals(x1y0.z(), r.z());
+    <testOpClass>.checkAlmostEquals(x1y0.w(), r.w());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testInterpolateBilinearLimitsX0Y1()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> x0y0 = gen.next();
+    final <vectorType> x1y0 = gen.next();
+    final <vectorType> x0y1 = gen.next();
+    final <vectorType> x1y1 = gen.next();
+
+    final <vectorType> r =
+      <opClass>.interpolateBilinear(
+        x0y0,
+        x1y0,
+        x0y1,
+        x1y1,
+        <testOpClass>.constant("0"),
+        <testOpClass>.constant("1"));
+
+    System.out.println("--");
+    System.out.println("x0y0:     " + x0y0);
+    System.out.println("x0y1:     " + x0y1);
+    System.out.println("x1y0:     " + x1y0);
+    System.out.println("x1y1:     " + x1y1);
+    System.out.println("r (x0y1): " + r);
+
+    <testOpClass>.checkAlmostEquals(x0y1.x(), r.x());
+    <testOpClass>.checkAlmostEquals(x0y1.y(), r.y());
+    <testOpClass>.checkAlmostEquals(x0y1.z(), r.z());
+    <testOpClass>.checkAlmostEquals(x0y1.w(), r.w());
+  }
+
+  @Test
+  @PercentagePassing
+  public void testInterpolateBilinearLimitsX1Y1()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final <vectorType> x0y0 = gen.next();
+    final <vectorType> x1y0 = gen.next();
+    final <vectorType> x0y1 = gen.next();
+    final <vectorType> x1y1 = gen.next();
+
+    final <vectorType> r =
+      <opClass>.interpolateBilinear(
+        x0y0,
+        x1y0,
+        x0y1,
+        x1y1,
+        <testOpClass>.constant("1"),
+        <testOpClass>.constant("1"));
+
+    System.out.println("--");
+    System.out.println("x0y0:     " + x0y0);
+    System.out.println("x0y1:     " + x0y1);
+    System.out.println("x1y0:     " + x1y0);
+    System.out.println("x1y1:     " + x1y1);
+    System.out.println("r (x1y1): " + r);
+
+    <testOpClass>.checkAlmostEquals(x1y1.x(), r.x());
+    <testOpClass>.checkAlmostEquals(x1y1.y(), r.y());
+    <testOpClass>.checkAlmostEquals(x1y1.z(), r.z());
+    <testOpClass>.checkAlmostEquals(x1y1.w(), r.w());
+  }
+
+  @Test
   public void testMagnitudeSquaredZero()
   {
     <testOpClass>.checkAlmostEquals(
