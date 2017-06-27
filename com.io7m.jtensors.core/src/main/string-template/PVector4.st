@@ -282,6 +282,58 @@ public final class <className>
   }
 
   /**
+   * \<p>Bilinearly interpolate between {@code x0y0}, {@code x1y0}, {@code x0y1}, {@code x1y1}.\</p>
+   *
+   * \<p>The {@code px} and {@code py} parameters control the degree of interpolation, such that:\</p>
+   *
+   * \<ul>
+   *   \<li>{@code interpolateBilinear(x0y0, x1y0, x0y1, x1y1, 0.0, 0.0) = x0y0}\</li>
+   *   \<li>{@code interpolateBilinear(x0y0, x1y0, x0y1, x1y1, 1.0, 0.0) = x1y0}\</li>
+   *   \<li>{@code interpolateBilinear(x0y0, x1y0, x0y1, x1y1, 0.0, 1.0) = x0y1}\</li>
+   *   \<li>{@code interpolateBilinear(x0y0, x1y0, x0y1, x1y1, 1.0, 1.0) = x1y1}\</li>
+   * \</ul>
+   *
+   * @param x0y0 The top left input vector
+   * @param x1y0 The top right input vector
+   * @param x0y1 The bottom left input vector
+   * @param x1y1 The bottom right input vector
+   * @param px   The X interpolation value in the range {@code [0, 1]}
+   * @param py   The Y interpolation value in the range {@code [0, 1]}
+   * <if(hasGeneric)>
+   * @param \<T> A phantom type parameter
+   * <endif>
+   * @return The bilinearly interpolated value
+   */
+
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T>
+  interpolateBilinear(
+    final <vectorType>\<T> x0y0,
+    final <vectorType>\<T> x1y0,
+    final <vectorType>\<T> x0y1,
+    final <vectorType>\<T> x1y1,
+    final <scalarRealType> px,
+    final <scalarRealType> py)
+  <else>
+  <vectorType>
+  interpolateBilinear(
+    final <vectorType> x0y0,
+    final <vectorType> x1y0,
+    final <vectorType> x0y1,
+    final <vectorType> x1y1,
+    final <scalarRealType> px,
+    final <scalarRealType> py)
+  <endif>
+  {
+    final <vectorType><if(hasGeneric)>\<T><endif> temp_0 =
+      interpolateLinear(x0y0, x1y0, px);
+    final <vectorType><if(hasGeneric)>\<T><endif> temp_1 =
+      interpolateLinear(x0y1, x1y1, px);
+    return interpolateLinear(temp_0, temp_1, py);
+  }
+
+  /**
    * Calculate the squared magnitude of the vector {@code v0}.
    *
    * <if(hasGeneric)>
