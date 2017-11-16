@@ -10,27 +10,11 @@
 
   <body>
     <subsection name="jtensors">
-      <p>
-        The <var>jtensors</var> package package implements a set of vector and matrix types,
-        intended for use in computer graphics software.
-      </p>
-      <p>
-        See <a href="http://mathfor3dgameprogramming.com">Mathematics for 3D Game
-        Programming and Computer Graphics</a>.
-      </p>
+
     </subsection>
     <subsection name="features">
       <ul>
-        <li>2D, 3D, and 4D immutable vector types in <tt>float</tt> and <tt>double</tt> versions.</li>
-        <li>2D, 3D, and 4D immutable vector types in <tt>int</tt> and <tt>long</tt> versions.</li>
-        <li>4D immutable quaternion types in <tt>float</tt> and <tt>double</tt> versions.</li>
-        <li>2x2, 3x3, and 4x4 mutable matrix types in <tt>float</tt> and <tt>double</tt> versions.</li>
-        <li>Phantom-typed variants of all types for statically distinguishing between semantically different but otherwise type-compatible vectors and matrices.</li>
-        <li>Fully documented (Javadoc).</li>
-        <li>Massive battery of tests for checking the behaviour of matrix/vector implementations.</li>
-        <li>100% automated unit test coverage.</li>
-        <li><a href="https://www.osgi.org/">OSGi</a>-ready.</li>
-        <li>ISC license.</li>
+
       </ul>
     </subsection>
   </body>

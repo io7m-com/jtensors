@@ -17,7 +17,7 @@
 package com.io7m.jtensors.storage.bytebuffered;
 
 import com.io7m.mutable.numbers.core.MutableLongType;
-import com.io7m.jnull.NullCheck;
+import java.util.Objects;
 
 import java.nio.ByteBuffer;
 
@@ -36,8 +36,8 @@ abstract class TensorByteBuffered implements TensorByteBufferedType
     final MutableLongType in_base,
     final int in_offset)
   {
-    this.buffer = NullCheck.notNull(in_buffer, "Buffer");
-    this.base = NullCheck.notNull(in_base, "Base");
+    this.buffer = Objects.requireNonNull(in_buffer, "Buffer");
+    this.base = Objects.requireNonNull(in_base, "Base");
     this.offset = in_offset;
   }
 

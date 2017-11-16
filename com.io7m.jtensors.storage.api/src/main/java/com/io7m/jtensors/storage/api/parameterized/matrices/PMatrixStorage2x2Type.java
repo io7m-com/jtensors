@@ -40,7 +40,7 @@ public interface PMatrixStorage2x2Type<A, B>
    */
 
   void setPMatrix2x2D(
-    final PMatrix2x2D<A, B> m);
+    PMatrix2x2D<A, B> m);
 
   /**
    * Set the components from the given matrix.
@@ -49,5 +49,5 @@ public interface PMatrixStorage2x2Type<A, B>
    */
 
   void setPMatrix2x2F(
-    final PMatrix2x2F<A, B> m);
+    PMatrix2x2F<A, B> m);
 }

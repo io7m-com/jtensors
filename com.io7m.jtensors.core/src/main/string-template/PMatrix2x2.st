@@ -32,7 +32,7 @@ package com.io7m.jtensors.core.parameterized.matrices;
 package com.io7m.jtensors.core.unparameterized.matrices;
 <endif>
 
-import com.io7m.jnull.NullCheck;
+import java.util.Objects;
 import com.io7m.junreachable.UnreachableCodeException;
 import com.io7m.junreachable.UnimplementedCodeException;
 

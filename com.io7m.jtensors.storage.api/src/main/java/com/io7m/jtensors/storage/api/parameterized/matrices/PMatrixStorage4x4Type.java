@@ -40,7 +40,7 @@ public interface PMatrixStorage4x4Type<A, B>
    */
 
   void setPMatrix4x4D(
-    final PMatrix4x4D<A, B> m);
+    PMatrix4x4D<A, B> m);
 
   /**
    * Set the components from the given matrix.
@@ -49,5 +49,5 @@ public interface PMatrixStorage4x4Type<A, B>
    */
 
   void setPMatrix4x4F(
-    final PMatrix4x4F<A, B> m);
+    PMatrix4x4F<A, B> m);
 }

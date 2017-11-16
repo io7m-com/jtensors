@@ -35,7 +35,7 @@ public interface MatrixStorage4x4Type
    */
 
   void setMatrix4x4D(
-    final Matrix4x4D m);
+    Matrix4x4D m);
 
   /**
    * Set the components from the given matrix.
@@ -44,5 +44,5 @@ public interface MatrixStorage4x4Type
    */
 
   void setMatrix4x4F(
-    final Matrix4x4F m);
+    Matrix4x4F m);
 }

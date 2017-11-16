@@ -23,12 +23,6 @@
     <mdep.analyze.skip>true</mdep.analyze.skip>
   </properties>
 
-  <scm>
-    <url>${project.parent.scm.url}</url>
-    <connection>${project.parent.scm.connection}</connection>
-    <developerConnection>${project.parent.scm.developerConnection}</developerConnection>
-  </scm>
-
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -64,10 +58,6 @@
     <dependency>
       <groupId>com.io7m.mutable.numbers</groupId>
       <artifactId>com.io7m.mutable.numbers.core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.io7m.jnull</groupId>
-      <artifactId>com.io7m.jnull.core</artifactId>
     </dependency>
     <dependency>
       <groupId>com.io7m.junreachable</groupId>
@@ -1275,6 +1265,12 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- Determine test coverage -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

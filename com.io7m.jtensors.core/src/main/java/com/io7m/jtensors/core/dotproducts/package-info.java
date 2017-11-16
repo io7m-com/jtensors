@@ -18,6 +18,5 @@
  * Functions for calculating dot products.
  */
 
-@com.io7m.jnull.NonNullByDefault
 package com.io7m.jtensors.core.dotproducts;
 

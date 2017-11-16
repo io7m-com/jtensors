@@ -1,691 +1,216 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<c:changelog xmlns:c="http://schemas.io7m.com/changelog/2.0.0">
-  <c:project>com.io7m.jtensors</c:project>
-
-  <c:release c:ticket-system="com.github.io7m.jtensors">
-    <c:date>2017-06-27</c:date>
-    <c:version>8.2.0</c:version>
-
-    <c:item>
-      <c:date>2017-06-27</c:date>
-      <c:type-code-new/>
-      <c:ticket>22</c:ticket>
-      <c:summary>Add bilinear interpolation methods.</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.github.io7m.jtensors">
-    <c:date>2017-05-06</c:date>
-    <c:version>8.1.0</c:version>
-
-    <c:item>
-      <c:date>2017-05-06</c:date>
-      <c:type-code-new/>
-      <c:summary>Add vector distance methods.</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.github.io7m.jtensors">
-    <c:date>2017-04-24</c:date>
-    <c:version>8.0.0</c:version>
-
-    <c:item>
-      <c:date>2017-03-22</c:date>
-      <c:type-code-change/>
-      <c:summary>Complete rewrite. See japicmp report for changes.</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.github.io7m.jtensors">
-    <c:date>2017-03-20</c:date>
-    <c:version>7.2.0</c:version>
-
-    <c:item>
-      <c:date>2017-03-20</c:date>
-      <c:type-code-new/>
-      <c:summary>Switch to generating sources. This adds deprecations to various methods (see the japicmp report).</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2017-03-01</c:date>
-      <c:type-code-fix/>
-      <c:summary>Use the japicmp-maven-plugin to enforce semantic versioning for future releases.</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.github.io7m.jtensors">
-    <c:date>2017-01-30</c:date>
-    <c:version>7.1.0</c:version>
-
-    <c:item>
-      <c:date>2017-01-30</c:date>
-      <c:type-code-new/>
-      <c:ticket>11</c:ticket>
-      <c:summary>Add spherical linear interpolation for quaternions.</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.github.io7m.jtensors">
-    <c:date>2017-01-30</c:date>
-    <c:version>7.0.0</c:version>
-    <c:item>
-      <c:date>2016-11-24</c:date>
-      <c:type-code-new/>
-      <c:summary>Add quickcheck generators.</c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2016-10-04</c:date>
-      <c:type-code-new/>
-      <c:ticket>8</c:ticket>
-      <c:summary>Add functions to convert quaternions to axis/angle representations.</c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2016-08-04</c:date>
-      <c:type-code-fix/>
-      <c:summary>The packaged jar is now an OSGi bundle.</c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2016-08-04</c:date>
-      <c:type-code-change/>
-      <c:summary>The package will no longer compile on JDK 6 due to Checkstyle, but the compiled code is still JDK 6 compatible.</c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2015-09-27</c:date>
-      <c:type-code-new/>
-      <c:summary>
-        Add heap-array allocated matrix types.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2015-09-27</c:date>
-      <c:type-code-new/>
-      <c:summary>
-        Add buffered vector and matrix types for addressing values that are packed inside large shared ByteBuffers.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2015-09-06</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        Rename all Context* types to behave more pleasantly with unqualified imports.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2015-09-05</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        All vector functions that allocated temporary objects now take re-usable preallocated
-        Context values in the same manner as matrix functions.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2015-09-05</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        Replace most direct uses of mutable vector types with generics and interfaces. This allows
-        for code sharing between a selection of new vector types.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2014-11-29</c:date>
-      <c:type-code-new/>
-      <c:summary>
-        Add explicitly type-indexed vectors (PVector*).
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2014-11-29</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        Make all types final again, undoing the change made in 5.1.0 to support type indices.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2014-11-30</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        Remove get() methods from matrix types and only allow element access via the MatrixReadable* interfaces.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2014-11-30</c:date>
-      <c:type-code-fix/>
-      <c:summary>
-        Improve formatting of matrix toString() methods slightly.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2014-11-30</c:date>
-      <c:type-code-fix/>
-      <c:summary>
-        Remove floatBuffer() and doubleBuffer() methods and only allow access to buffers via the new MatrixDirectBuffered* interfaces.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2014-12-03</c:date>
-      <c:type-code-fix/>
-      <c:summary>
-        Correct javadoc comments to pass Java 8's new Javadoc doclint.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2014-12-04</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        Remove Matrix*.translate* functions due to questions of correctness. Use r = Matrix*.makeTranslation* and multiply m * r instead.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2014-12-04</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        Remove imperative Matrix*.rotate* functions to reduce the size of the API. Use r = Matrix*.makeRotation* and multiply m * r instead.
-      </c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.github.io7m.jtensors">
-    <c:date>2015-08-29</c:date>
-    <c:version>6.0.2</c:version>
-
-    <c:item>
-      <c:date>2015-08-29</c:date>
-      <c:type-code-fix/>
-      <c:summary>
-        Migrate to GitHub.
-      </c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2015-08-29</c:date>
-      <c:type-code-fix/>
-      <c:summary>
-        Fix JavaDoc to cope with Java 8's doclint.
-      </c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2014-10-12</c:date>
-    <c:version>6.0.1</c:version>
-
-    <c:item>
-      <c:date>2014-10-12</c:date>
-      <c:type-code-fix/>
-      <c:summary>
-        Correct dependencies: 6.0.0 was accidentally released with pre-release version dependencies (all of which are binary compatible with the current versions).
-      </c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2014-10-11</c:date>
-    <c:version>6.0.0</c:version>
-
-    <c:item>
-      <c:date>2014-04-24</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        Break dependency on jaux. Now depends on jnull, jfunctional, jequality, jintegers.
-      </c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2014-04-24</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        Make *Unsafe vector functions that were accidentally public, private.
-      </c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2014-04-24</c:date>
-      <c:type-code-new/>
-      <c:summary>
-        Add VectorWritable* types.
-      </c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2014-04-24</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        Break package up into standard core and documentation packages.
-      </c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2014-04-24</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        Make vector fields private. Replace field access with getters and setters.
-      </c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2014-01-04</c:date>
-    <c:version>5.3.1</c:version>
-
-    <c:item>
-      <c:date>2014-01-04</c:date>
-      <c:type-code-new/>
-      <c:summary>
-        Use jaux (3.0.0, 4.0.0] and jsr305 2.0.2.
-      </c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2013-10-27</c:date>
-    <c:version>5.3.0</c:version>
-
-    <c:item>
-      <c:date>2013-10-27</c:date>
-      <c:type-code-new/>
-      <c:summary>
-        Add long integer vectors.
-      </c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2013-08-17</c:date>
-    <c:version>5.2.1</c:version>
-
-    <c:item>
-      <c:date>2013-08-17</c:date>
-      <c:type-code-fix/>
-      <c:summary>
-        Make the Orthonormalized structures take readable vectors.
-      </c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2013-08-17</c:date>
-    <c:version>5.2.0</c:version>
-
-    <c:item>
-      <c:date>2013-08-17</c:date>
-      <c:type-code-new/>
-      <c:summary>
-        Add three-vector orthonormalization (OrthonormalizedI3D, OrthonormalizedI3F).
-      </c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2013-08-17</c:date>
-      <c:type-code-fix/>
-      <c:summary>
-        Correct the type of VectorI*.ZERO - do not use the less-specific "Readable" type.
-      </c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2013-08-17</c:date>
-      <c:type-code-fix/>
-      <c:ticket>3b145b9693</c:ticket>
-      <c:summary>
-        Correct documentation for vector subtraction.
-      </c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2013-07-11</c:date>
-    <c:version>5.1.0</c:version>
-
-    <c:item>
-      <c:date>2013-07-11</c:date>
-      <c:type-code-change/>
-      <c:summary>
-        All vector, matrix, and quaternion types are
-        now non-final (however all methods are still final). This
-        is to make it possible to make semantically distinct values
-        type-incompatible via subclassing and/or the addition of phantom
-        type parameters. See documentation.
-      </c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-12-22</c:date>
-    <c:version>5.0.0</c:version>
-
-    <c:item>
-      <c:date>2012-12-22</c:date>
-      <c:type-code-new/>
-      <c:summary>Add all missing Vector* functions - VectorM* and VectorI* now have feature parity</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-21</c:date>
-      <c:type-code-change/>
-      <c:summary>Massive overhaul of test suite</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-18</c:date>
-      <c:type-code-change/>
-      <c:summary>All approximatelyEqual* functions have been removed; use almostEqual instead as it gives far more accurate results</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-18</c:date>
-      <c:type-code-change/>
-      <c:summary>MatrixReadable* functions renamed to make the row types explicit</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-18</c:date>
-      <c:type-code-change/>
-      <c:summary>Most quaternion functions that took or returned single precision floats now take/return double precision values</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-18</c:date>
-      <c:type-code-change/>
-      <c:summary>Quaternion*.makeRotationMatrix() renamed to makeRotationMatrix4x4 and added 3x3 variant</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-17</c:date>
-      <c:type-code-change/>
-      <c:summary>All single precision matrix and vector types now use double precision calculations internally for increased accuracy. Most functions that took floats as arguments now take doubles. The vectors and matrices are still using single precision float storage, so this should not break any existing code.</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-17</c:date>
-      <c:type-code-new/>
-      <c:summary>Add row fetching methods to all MatrixReadable* interfaces</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-16</c:date>
-      <c:type-code-new/>
-      <c:summary>Vastly improve documentation. Document all notational, semantic, and storage conventions.</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-16</c:date>
-      <c:type-code-change/>
-      <c:summary>Switch to using a consistent right-handed coordinate system throughout the package. This is a non backwards-compatible change.</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-16</c:date>
-      <c:type-code-new/>
-      <c:summary>Add Matrix*.lookAt()</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-15</c:date>
-      <c:type-code-new/>
-      <c:summary>Add Matrix3x3*.rotate() and makeRotation()</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-15</c:date>
-      <c:type-code-new/>
-      <c:summary>Add Quaternion*.lookAt()</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-15</c:date>
-      <c:type-code-new/>
-      <c:summary>Add Quaternion*.makeFromMatrix()</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-15</c:date>
-      <c:type-code-new/>
-      <c:summary>Add Matrix*.trace()</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-14</c:date>
-      <c:type-code-new/>
-      <c:summary>Add Vector*.orthoNormalize()</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-12-09</c:date>
-      <c:type-code-change/>
-      <c:summary>Modify the type of QuaternionM4{D,F}.copy() to allow any readable quaternion, as opposed to only QuaternionM4{F,D}. This change does not affect backwards-compatibility as it is simply a generalization of the type in question and cannot break existing programs.</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-11-24</c:date>
-    <c:version>4.1.0</c:version>
-
-    <c:item>
-      <c:date>2012-11-24</c:date>
-      <c:type-code-fix/>
-      <c:summary>Make every matrix operation rewind the buffer that backs the matrix. This was a problem revealed by the API change in 4.0.0</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-11-24</c:date>
-    <c:version>4.0.0</c:version>
-
-    <c:item>
-      <c:date>2012-11-24</c:date>
-      <c:type-code-fix/>
-      <c:summary>Fix serious API mistake: The JRE will allocate new read-only buffers with asReadOnlyBuffer(). The floatBuffer() and doubleBuffer() methods of matrices no longer guarantee read-only semantics, as this requires expensive reallocations.</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-11-10</c:date>
-    <c:version>3.0.0</c:version>
-
-    <c:item>
-      <c:date>2012-11-10</c:date>
-      <c:type-code-new/>
-      <c:summary>Add Quaternion classes for 3D rotations</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-11-10</c:date>
-      <c:type-code-fix/>
-      <c:summary>Remove all @Deprecated methods from 2.3.0</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-11-09</c:date>
-      <c:type-code-fix/>
-      <c:summary>Large javadoc updates and increased use of JSR 305 annotations (@Nonnull)</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-11-09</c:date>
-      <c:type-code-new/>
-      <c:summary>All classes now provide a hashCode() and equals() implementation. This may break code that assumes java.lang.Object()'s hashCode() or equals() method is used, but should give more consistent behaviour with regards to the contents of vectors and matrices.</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-11-09</c:date>
-    <c:version>2.3.0</c:version>
-
-    <c:item>
-      <c:date>2012-11-09</c:date>
-      <c:type-code-fix/>
-      <c:summary>Use io7m-jaux 2.3.0</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-10-21</c:date>
-      <c:type-code-fix/>
-      <c:summary>Use JSR 305 annotations to document concurrency properties</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-08-08</c:date>
-      <c:type-code-fix/>
-      <c:summary>Change method names for consistency, deprecate old names (does not break compatibility)</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-08-07</c:date>
-      <c:type-code-new/>
-      <c:summary>Add MatrixReadable* interfaces</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-07-27</c:date>
-      <c:type-code-fix/>
-      <c:summary>Update saxon-plugin to 1.1.0 to correct documentation builds on Windows</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-07-23</c:date>
-    <c:version>2.2.0</c:version>
-
-    <c:item>
-      <c:date>2012-07-23</c:date>
-      <c:type-code-fix/>
-      <c:summary>Update all POM plugins to the latest versions</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-07-23</c:date>
-      <c:type-code-fix/>
-      <c:summary>Improve documentation</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-07-15</c:date>
-      <c:type-code-fix/>
-      <c:summary>Add missing documentation CSS</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-07-14</c:date>
-    <c:version>2.1.0</c:version>
-
-    <c:item>
-      <c:date>2012-07-14</c:date>
-      <c:type-code-new/>
-      <c:summary>Produce documentation with Maven</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-07-14</c:date>
-      <c:type-code-fix/>
-      <c:summary>Make dependencies more honest: The package only depends on jsr305, not all of findbugs</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-06-19</c:date>
-    <c:version>2.0.0</c:version>
-
-    <c:item>
-      <c:date>2012-06-19</c:date>
-      <c:type-code-new/>
-      <c:summary>Switch to maven for builds</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-05-12</c:date>
-      <c:type-code-new/>
-      <c:summary>ApproximatelyEqual* moved to io7m-jaux</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-05-05</c:date>
-      <c:type-code-new/>
-      <c:summary>VectorI*.zero renamed to ZERO and implemented by all vector types</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-05-05</c:date>
-      <c:type-code-fix/>
-      <c:summary>MatrixM4x4D.multiply -> MatrixM4x4D.multiplyVector4DWithContext</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-05-05</c:date>
-      <c:type-code-fix/>
-      <c:summary>MatrixM4x4D.multiply -> MatrixM4x4D.multiplyVector4D</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-05-05</c:date>
-      <c:type-code-new/>
-      <c:summary>Increase test coverage for integer vectors</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-05-05</c:date>
-      <c:type-code-new/>
-      <c:summary>Add Matrix3x3* makeTranslation functions</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-04-20</c:date>
-      <c:type-code-new/>
-      <c:summary>Add integer vector methods for Matrix4x4*</c:summary>
-    </c:item>
-
-    <c:item>
-      <c:date>2012-04-20</c:date>
-      <c:type-code-fix/>
-      <c:summary>Rename methods to indicate the type of vectors used, removing ambiguity. All VectorReadable* interfaces are affected, as well as Matrix* methods that previously specified a type name.</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-03-15</c:date>
-    <c:version>1.0.1</c:version>
-    <c:item>
-      <c:date>2012-03-15</c:date>
-      <c:type-code-fix/>
-      <c:summary>Correct build.xml to produce a jar file with the right version</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-03-15</c:date>
-    <c:version>1.0.0</c:version>
-    <c:item>
-      <c:date>2012-03-06</c:date>
-      <c:type-code-fix/>
-      <c:summary>Depend on jexternals for eclipse users</c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2012-02-11</c:date>
-      <c:type-code-fix/>
-      <c:summary>MatrixM3x3F allocated too many bytes (wasted memory)</c:summary>
-    </c:item>
-    <c:item>
-      <c:date>2012-02-08</c:date>
-      <c:type-code-new/>
-      <c:summary>Add SunOS supported</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:release c:ticket-system="com.io7m.fossil.jtensors">
-    <c:date>2012-02-06</c:date>
-    <c:version>0.2.0</c:version>
-    <c:item>
-      <c:date>2012-02-06</c:date>
-      <c:type-code-new/>
-      <c:summary>Initial version</c:summary>
-    </c:item>
-  </c:release>
-
-  <c:ticket-system xml:id="com.github.io7m.jtensors">
-    <c:ticket-url>http://github.com/io7m/jtensors/issues/</c:ticket-url>
-  </c:ticket-system>
-
-  <c:ticket-system xml:id="com.io7m.fossil.jtensors">
-    <c:ticket-url>http://fossil.io7m.com/repo.cgi/io7m-jtensors/tktview?name=</c:ticket-url>
-  </c:ticket-system>
-
+<c:changelog xmlns:c="urn:com.io7m.changelog:4.0" project="com.io7m.jtensors">
+  <c:releases>
+    <c:release date="2012-02-06T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="0.2.0">
+      <c:changes>
+        <c:change date="2012-02-06T00:00:00+00:00" summary="Initial version"/>
+      </c:changes>
+    </c:release>
+    <c:release date="2012-03-15T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="1.0.0">
+      <c:changes>
+        <c:change date="2012-03-06T00:00:00+00:00" summary="Depend on jexternals for eclipse users"/>
+        <c:change date="2012-02-11T00:00:00+00:00" summary="MatrixM3x3F allocated too many bytes (wasted memory)"/>
+        <c:change date="2012-02-08T00:00:00+00:00" summary="Add SunOS supported"/>
+      </c:changes>
+    </c:release>
+    <c:release date="2012-03-15T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="1.0.1">
+      <c:changes>
+        <c:change date="2012-03-15T00:00:00+00:00" summary="Correct build.xml to produce a jar file with the right version"/>
+      </c:changes>
+    </c:release>
+    <c:release date="2012-06-19T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="2.0.0">
+      <c:changes>
+        <c:change date="2012-06-19T00:00:00+00:00" summary="Switch to maven for builds"/>
+        <c:change date="2012-05-12T00:00:00+00:00" summary="ApproximatelyEqual* moved to io7m-jaux"/>
+        <c:change date="2012-05-05T00:00:00+00:00" summary="VectorI*.zero renamed to ZERO and implemented by all vector types"/>
+        <c:change date="2012-05-05T00:00:00+00:00" summary="MatrixM4x4D.multiply -&gt; MatrixM4x4D.multiplyVector4DWithContext"/>
+        <c:change date="2012-05-05T00:00:00+00:00" summary="MatrixM4x4D.multiply -&gt; MatrixM4x4D.multiplyVector4D"/>
+        <c:change date="2012-05-05T00:00:00+00:00" summary="Increase test coverage for integer vectors"/>
+        <c:change date="2012-05-05T00:00:00+00:00" summary="Add Matrix3x3* makeTranslation functions"/>
+        <c:change date="2012-04-20T00:00:00+00:00" summary="Add integer vector methods for Matrix4x4*"/>
+        <c:change date="2012-04-20T00:00:00+00:00" summary="Rename methods to indicate the type of vectors used, removing ambiguity. All VectorReadable* interfaces are affected, as well as Matrix* methods that previously specified a type name."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2012-07-14T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="2.1.0">
+      <c:changes>
+        <c:change date="2012-07-14T00:00:00+00:00" summary="Produce documentation with Maven"/>
+        <c:change date="2012-07-14T00:00:00+00:00" summary="Make dependencies more honest: The package only depends on jsr305, not all of findbugs"/>
+      </c:changes>
+    </c:release>
+    <c:release date="2012-07-23T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="2.2.0">
+      <c:changes>
+        <c:change date="2012-07-23T00:00:00+00:00" summary="Update all POM plugins to the latest versions"/>
+        <c:change date="2012-07-23T00:00:00+00:00" summary="Improve documentation"/>
+        <c:change date="2012-07-15T00:00:00+00:00" summary="Add missing documentation CSS"/>
+      </c:changes>
+    </c:release>
+    <c:release date="2012-11-09T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="2.3.0">
+      <c:changes>
+        <c:change date="2012-11-09T00:00:00+00:00" summary="Use io7m-jaux 2.3.0"/>
+        <c:change date="2012-10-21T00:00:00+00:00" summary="Use JSR 305 annotations to document concurrency properties"/>
+        <c:change date="2012-08-08T00:00:00+00:00" summary="Change method names for consistency, deprecate old names (does not break compatibility)"/>
+        <c:change date="2012-08-07T00:00:00+00:00" summary="Add MatrixReadable* interfaces"/>
+        <c:change date="2012-07-27T00:00:00+00:00" summary="Update saxon-plugin to 1.1.0 to correct documentation builds on Windows"/>
+      </c:changes>
+    </c:release>
+    <c:release date="2012-11-10T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="3.0.0">
+      <c:changes>
+        <c:change date="2012-11-10T00:00:00+00:00" summary="Add Quaternion classes for 3D rotations"/>
+        <c:change date="2012-11-10T00:00:00+00:00" summary="Remove all @Deprecated methods from 2.3.0"/>
+        <c:change date="2012-11-09T00:00:00+00:00" summary="Large javadoc updates and increased use of JSR 305 annotations (@Nonnull)"/>
+        <c:change date="2012-11-09T00:00:00+00:00" summary="All classes now provide a hashCode() and equals() implementation. This may break code that assumes java.lang.Object()'s hashCode() or equals() method is used, but should give more consistent behaviour with regards to the contents of vectors and matrices."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2012-11-24T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="4.0.0">
+      <c:changes>
+        <c:change date="2012-11-24T00:00:00+00:00" summary="Fix serious API mistake: The JRE will allocate new read-only buffers with asReadOnlyBuffer(). The floatBuffer() and doubleBuffer() methods of matrices no longer guarantee read-only semantics, as this requires expensive reallocations."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2012-11-24T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="4.1.0">
+      <c:changes>
+        <c:change date="2012-11-24T00:00:00+00:00" summary="Make every matrix operation rewind the buffer that backs the matrix. This was a problem revealed by the API change in 4.0.0"/>
+      </c:changes>
+    </c:release>
+    <c:release date="2012-12-22T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="5.0.0">
+      <c:changes>
+        <c:change date="2012-12-22T00:00:00+00:00" summary="Add all missing Vector* functions - VectorM* and VectorI* now have feature parity"/>
+        <c:change compatible="false" date="2012-12-21T00:00:00+00:00" summary="Massive overhaul of test suite"/>
+        <c:change compatible="false" date="2012-12-18T00:00:00+00:00" summary="All approximatelyEqual* functions have been removed; use almostEqual instead as it gives far more accurate results"/>
+        <c:change compatible="false" date="2012-12-18T00:00:00+00:00" summary="MatrixReadable* functions renamed to make the row types explicit"/>
+        <c:change compatible="false" date="2012-12-18T00:00:00+00:00" summary="Most quaternion functions that took or returned single precision floats now take/return double precision values"/>
+        <c:change compatible="false" date="2012-12-18T00:00:00+00:00" summary="Quaternion*.makeRotationMatrix() renamed to makeRotationMatrix4x4 and added 3x3 variant"/>
+        <c:change compatible="false" date="2012-12-17T00:00:00+00:00" summary="All single precision matrix and vector types now use double precision calculations internally for increased accuracy. Most functions that took floats as arguments now take doubles. The vectors and matrices are still using single precision float storage, so this should not break any existing code."/>
+        <c:change date="2012-12-17T00:00:00+00:00" summary="Add row fetching methods to all MatrixReadable* interfaces"/>
+        <c:change date="2012-12-16T00:00:00+00:00" summary="Vastly improve documentation. Document all notational, semantic, and storage conventions."/>
+        <c:change compatible="false" date="2012-12-16T00:00:00+00:00" summary="Switch to using a consistent right-handed coordinate system throughout the package. This is a non backwards-compatible change."/>
+        <c:change date="2012-12-16T00:00:00+00:00" summary="Add Matrix*.lookAt()"/>
+        <c:change date="2012-12-15T00:00:00+00:00" summary="Add Matrix3x3*.rotate() and makeRotation()"/>
+        <c:change date="2012-12-15T00:00:00+00:00" summary="Add Quaternion*.lookAt()"/>
+        <c:change date="2012-12-15T00:00:00+00:00" summary="Add Quaternion*.makeFromMatrix()"/>
+        <c:change date="2012-12-15T00:00:00+00:00" summary="Add Matrix*.trace()"/>
+        <c:change date="2012-12-14T00:00:00+00:00" summary="Add Vector*.orthoNormalize()"/>
+        <c:change compatible="false" date="2012-12-09T00:00:00+00:00" summary="Modify the type of QuaternionM4{D,F}.copy() to allow any readable quaternion, as opposed to only QuaternionM4{F,D}. This change does not affect backwards-compatibility as it is simply a generalization of the type in question and cannot break existing programs."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2013-07-11T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="5.1.0">
+      <c:changes>
+        <c:change compatible="false" date="2013-07-11T00:00:00+00:00" summary="All vector, matrix, and quaternion types are now non-final (however all methods are still final). This is to make it possible to make semantically distinct values type-incompatible via subclassing and/or the addition of phantom type parameters. See documentation."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2013-08-17T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="5.2.0">
+      <c:changes>
+        <c:change date="2013-08-17T00:00:00+00:00" summary="Add three-vector orthonormalization (OrthonormalizedI3D, OrthonormalizedI3F)."/>
+        <c:change date="2013-08-17T00:00:00+00:00" summary="Correct the type of VectorI*.ZERO - do not use the less-specific &quot;Readable&quot; type."/>
+        <c:change date="2013-08-17T00:00:00+00:00" summary="Correct documentation for vector subtraction.">
+          <c:tickets>
+            <c:ticket id="3b145b9693"/>
+          </c:tickets>
+        </c:change>
+      </c:changes>
+    </c:release>
+    <c:release date="2013-08-17T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="5.2.1">
+      <c:changes>
+        <c:change date="2013-08-17T00:00:00+00:00" summary="Make the Orthonormalized structures take readable vectors."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2013-10-27T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="5.3.0">
+      <c:changes>
+        <c:change date="2013-10-27T00:00:00+00:00" summary="Add long integer vectors."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2014-01-04T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="5.3.1">
+      <c:changes>
+        <c:change date="2014-01-04T00:00:00+00:00" summary="Use jaux (3.0.0, 4.0.0] and jsr305 2.0.2."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2014-10-11T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="6.0.0">
+      <c:changes>
+        <c:change compatible="false" date="2014-04-24T00:00:00+00:00" summary="Break dependency on jaux. Now depends on jnull, jfunctional, jequality, jintegers."/>
+        <c:change compatible="false" date="2014-04-24T00:00:00+00:00" summary="Make *Unsafe vector functions that were accidentally public, private."/>
+        <c:change date="2014-04-24T00:00:00+00:00" summary="Add VectorWritable* types."/>
+        <c:change compatible="false" date="2014-04-24T00:00:00+00:00" summary="Break package up into standard core and documentation packages."/>
+        <c:change compatible="false" date="2014-04-24T00:00:00+00:00" summary="Make vector fields private. Replace field access with getters and setters."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2014-10-12T00:00:00+00:00" ticket-system="com.io7m.fossil.jtensors" version="6.0.1">
+      <c:changes>
+        <c:change date="2014-10-12T00:00:00+00:00" summary="Correct dependencies: 6.0.0 was accidentally released with pre-release version dependencies (all of which are binary compatible with the current versions)."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2015-08-29T00:00:00+00:00" ticket-system="com.github.io7m.jtensors" version="6.0.2">
+      <c:changes>
+        <c:change date="2015-08-29T00:00:00+00:00" summary="Migrate to GitHub."/>
+        <c:change date="2015-08-29T00:00:00+00:00" summary="Fix JavaDoc to cope with Java 8's doclint."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2017-01-30T00:00:00+00:00" ticket-system="com.github.io7m.jtensors" version="7.0.0">
+      <c:changes>
+        <c:change date="2016-11-24T00:00:00+00:00" summary="Add quickcheck generators."/>
+        <c:change date="2016-10-04T00:00:00+00:00" summary="Add functions to convert quaternions to axis/angle representations.">
+          <c:tickets>
+            <c:ticket id="8"/>
+          </c:tickets>
+        </c:change>
+        <c:change date="2016-08-04T00:00:00+00:00" summary="The packaged jar is now an OSGi bundle."/>
+        <c:change compatible="false" date="2016-08-04T00:00:00+00:00" summary="The package will no longer compile on JDK 6 due to Checkstyle, but the compiled code is still JDK 6 compatible."/>
+        <c:change date="2015-09-27T00:00:00+00:00" summary="Add heap-array allocated matrix types."/>
+        <c:change date="2015-09-27T00:00:00+00:00" summary="Add buffered vector and matrix types for addressing values that are packed inside large shared ByteBuffers."/>
+        <c:change compatible="false" date="2015-09-06T00:00:00+00:00" summary="Rename all Context* types to behave more pleasantly with unqualified imports."/>
+        <c:change compatible="false" date="2015-09-05T00:00:00+00:00" summary="All vector functions that allocated temporary objects now take re-usable preallocated Context values in the same manner as matrix functions."/>
+        <c:change compatible="false" date="2015-09-05T00:00:00+00:00" summary="Replace most direct uses of mutable vector types with generics and interfaces. This allows for code sharing between a selection of new vector types."/>
+        <c:change date="2014-11-29T00:00:00+00:00" summary="Add explicitly type-indexed vectors (PVector*)."/>
+        <c:change compatible="false" date="2014-11-29T00:00:00+00:00" summary="Make all types final again, undoing the change made in 5.1.0 to support type indices."/>
+        <c:change compatible="false" date="2014-11-30T00:00:00+00:00" summary="Remove get() methods from matrix types and only allow element access via the MatrixReadable* interfaces."/>
+        <c:change date="2014-11-30T00:00:00+00:00" summary="Improve formatting of matrix toString() methods slightly."/>
+        <c:change date="2014-11-30T00:00:00+00:00" summary="Remove floatBuffer() and doubleBuffer() methods and only allow access to buffers via the new MatrixDirectBuffered* interfaces."/>
+        <c:change date="2014-12-03T00:00:00+00:00" summary="Correct javadoc comments to pass Java 8's new Javadoc doclint."/>
+        <c:change compatible="false" date="2014-12-04T00:00:00+00:00" summary="Remove Matrix*.translate* functions due to questions of correctness. Use r = Matrix*.makeTranslation* and multiply m * r instead."/>
+        <c:change compatible="false" date="2014-12-04T00:00:00+00:00" summary="Remove imperative Matrix*.rotate* functions to reduce the size of the API. Use r = Matrix*.makeRotation* and multiply m * r instead."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2017-01-30T00:00:00+00:00" ticket-system="com.github.io7m.jtensors" version="7.1.0">
+      <c:changes>
+        <c:change date="2017-01-30T00:00:00+00:00" summary="Add spherical linear interpolation for quaternions.">
+          <c:tickets>
+            <c:ticket id="11"/>
+          </c:tickets>
+        </c:change>
+      </c:changes>
+    </c:release>
+    <c:release date="2017-03-20T00:00:00+00:00" ticket-system="com.github.io7m.jtensors" version="7.2.0">
+      <c:changes>
+        <c:change date="2017-03-20T00:00:00+00:00" summary="Switch to generating sources. This adds deprecations to various methods (see the japicmp report)."/>
+        <c:change date="2017-03-01T00:00:00+00:00" summary="Use the japicmp-maven-plugin to enforce semantic versioning for future releases."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2017-04-24T00:00:00+00:00" ticket-system="com.github.io7m.jtensors" version="8.0.0">
+      <c:changes>
+        <c:change compatible="false" date="2017-03-22T00:00:00+00:00" summary="Complete rewrite. See japicmp report for changes."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2017-05-06T00:00:00+00:00" ticket-system="com.github.io7m.jtensors" version="8.1.0">
+      <c:changes>
+        <c:change date="2017-05-06T00:00:00+00:00" summary="Add vector distance methods."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2017-06-27T00:00:00+00:00" ticket-system="com.github.io7m.jtensors" version="8.2.0">
+      <c:changes>
+        <c:change date="2017-06-27T00:00:00+00:00" summary="Add bilinear interpolation methods.">
+          <c:tickets>
+            <c:ticket id="22"/>
+          </c:tickets>
+        </c:change>
+      </c:changes>
+    </c:release>
+    <c:release date="2017-11-16T21:07:29+00:00" ticket-system="com.github.io7m.jtensors" version="9.0.0">
+      <c:changes>
+        <c:change compatible="false" date="2017-11-16T00:00:00+00:00" summary="All modules are now Java 9 modules. JDK 9 is now required."/>
+        <c:change compatible="false" date="2017-11-16T21:07:29+00:00" summary="Removed dependency on com.io7m.jnull."/>
+      </c:changes>
+    </c:release>
+  </c:releases>
+  <c:ticket-systems>
+    <c:ticket-system default="true" id="com.github.io7m.jtensors" url="http://github.com/io7m/jtensors/issues/"/>
+    <c:ticket-system default="false" id="com.io7m.fossil.jtensors" url="http://fossil.io7m.com/repo.cgi/io7m-jtensors/tktview?name="/>
+  </c:ticket-systems>
 </c:changelog>

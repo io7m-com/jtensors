@@ -26,7 +26,7 @@ Quaternion4(
 
 package com.io7m.jtensors.core.quaternions;
 
-import com.io7m.jnull.NullCheck;
+import java.util.Objects;
 import com.io7m.junreachable.UnreachableCodeException;
 
 /**

@@ -18,6 +18,5 @@
  * Functions for orthonormalizing sets of vectors.
  */
 
-@com.io7m.jnull.NonNullByDefault
 package com.io7m.jtensors.orthonormalization;
 

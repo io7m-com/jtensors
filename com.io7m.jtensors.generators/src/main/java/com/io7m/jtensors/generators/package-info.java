@@ -18,6 +18,5 @@
  * QuickCheck generators.
  */
 
-@com.io7m.jnull.NonNullByDefault
 package com.io7m.jtensors.generators;
 

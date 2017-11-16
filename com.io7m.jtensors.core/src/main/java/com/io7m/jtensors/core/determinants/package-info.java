@@ -18,6 +18,5 @@
  * Functions for calculating determinants.
  */
 
-@com.io7m.jnull.NonNullByDefault
 package com.io7m.jtensors.core.determinants;
 

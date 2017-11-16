@@ -40,7 +40,7 @@ public interface PMatrixStorage3x3Type<A, B>
    */
 
   void setPMatrix3x3D(
-    final PMatrix3x3D<A, B> m);
+    PMatrix3x3D<A, B> m);
 
   /**
    * Set the components from the given matrix.
@@ -49,5 +49,5 @@ public interface PMatrixStorage3x3Type<A, B>
    */
 
   void setPMatrix3x3F(
-    final PMatrix3x3F<A, B> m);
+    PMatrix3x3F<A, B> m);
 }

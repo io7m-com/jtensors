@@ -18,6 +18,5 @@
  * Parameterized vector types.
  */
 
-@com.io7m.jnull.NonNullByDefault
 package com.io7m.jtensors.core.parameterized.vectors;
 

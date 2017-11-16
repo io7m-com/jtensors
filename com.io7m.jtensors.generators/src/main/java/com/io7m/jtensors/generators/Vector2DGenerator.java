@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.generators;
 
-import com.io7m.jnull.NullCheck;
+import java.util.Objects;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2D;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.generator.PrimitiveGenerators;
@@ -38,7 +38,7 @@ public final class Vector2DGenerator implements Generator<Vector2D>
   public Vector2DGenerator(
     final Generator<Double> in_gen)
   {
-    this.gen = NullCheck.notNull(in_gen, "Generator");
+    this.gen = Objects.requireNonNull(in_gen, "Generator");
   }
 
   /**

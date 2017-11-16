@@ -20,13 +20,6 @@
   </description>
   <url>http://io7m.github.io/jtensors/</url>
 
-  <scm>
-    <url>${project.parent.scm.url}</url>
-    <connection>${project.parent.scm.connection}</connection>
-    <developerConnection>${project.parent.scm.developerConnection}
-    </developerConnection>
-  </scm>
-
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -42,10 +35,6 @@
     <dependency>
       <groupId>com.io7m.mutable.numbers</groupId>
       <artifactId>com.io7m.mutable.numbers.core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.io7m.jnull</groupId>
-      <artifactId>com.io7m.jnull.core</artifactId>
     </dependency>
     <dependency>
       <groupId>com.io7m.junreachable</groupId>
