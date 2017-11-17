@@ -9,7 +9,7 @@
   <parent>
     <groupId>com.io7m.primogenitor</groupId>
     <artifactId>com.io7m.primogenitor</artifactId>
-    <version>2.0.0-beta0016</version>
+    <version>2.0.0-beta0017</version>
   </parent>
 
   <groupId>com.io7m.jtensors</groupId>
