@@ -3,8 +3,8 @@
 <div xmlns="http://www.w3.org/1999/xhtml">
   <h3>User documentation</h3>
   <ul>
-    <li><a href="/documentation/index-m.xhtml">XHTML - one page per section</a></li>
-    <li><a href="/documentation/index.xhtml">XHTML - single page</a></li>
-    <li><a href="/documentation/main.txt">UTF-8 plain text</a></li>
+    <li><a href="documentation/index-m.xhtml">XHTML - one page per section</a></li>
+    <li><a href="documentation/index.xhtml">XHTML - single page</a></li>
+    <li><a href="documentation/main.txt">UTF-8 plain text</a></li>
   </ul>
 </div>

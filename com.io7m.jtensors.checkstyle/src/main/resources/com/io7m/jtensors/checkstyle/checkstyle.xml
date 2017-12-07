@@ -6,6 +6,11 @@
 <module name="Checker">
   <property name="severity" value="error"/>
 
+  <!-- Exclude module-info.java files from processing -->
+  <module name="BeforeExecutionExclusionFileFilter">
+    <property name="fileNamePattern" value="module\-info\.java$"/>
+  </module>
+
   <module name="TreeWalker">
 
     <!-- Allow control of Javadoc checks with CHECKSTYLE_JAVADOC:ON and CHECKSTYLE_JAVADOC:OFF -->
