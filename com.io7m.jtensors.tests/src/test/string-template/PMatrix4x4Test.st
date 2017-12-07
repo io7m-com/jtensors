@@ -36,7 +36,7 @@ package com.io7m.jtensors.tests.core.parameterized.matrices;
 package com.io7m.jtensors.tests.core.unparameterized.matrices;
 <endif>
 
-import com.io7m.jnull.NullCheck;
+import java.util.Objects;
 import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.rules.PercentagePassRule;
 import com.io7m.jtensors.tests.rules.PercentagePassing;

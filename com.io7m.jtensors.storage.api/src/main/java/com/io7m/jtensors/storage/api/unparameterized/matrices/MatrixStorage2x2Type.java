@@ -35,7 +35,7 @@ public interface MatrixStorage2x2Type
    */
 
   void setMatrix2x2D(
-    final Matrix2x2D m);
+    Matrix2x2D m);
 
   /**
    * Set the components from the given matrix.
@@ -44,5 +44,5 @@ public interface MatrixStorage2x2Type
    */
 
   void setMatrix2x2F(
-    final Matrix2x2F m);
+    Matrix2x2F m);
 }

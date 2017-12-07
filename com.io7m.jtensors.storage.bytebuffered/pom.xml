@@ -9,7 +9,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>com.io7m.jtensors</artifactId>
-    <version>8.2.0</version>
+    <version>9.0.0</version>
   </parent>
 
   <artifactId>com.io7m.jtensors.storage.bytebuffered</artifactId>
@@ -19,13 +19,6 @@
   <description>Vector/matrix math package (ByteBuffered tensor storage implementations)
   </description>
   <url>http://io7m.github.io/jtensors/</url>
-
-  <scm>
-    <url>${project.parent.scm.url}</url>
-    <connection>${project.parent.scm.connection}</connection>
-    <developerConnection>${project.parent.scm.developerConnection}
-    </developerConnection>
-  </scm>
 
   <dependencies>
     <dependency>
@@ -42,10 +35,6 @@
     <dependency>
       <groupId>com.io7m.mutable.numbers</groupId>
       <artifactId>com.io7m.mutable.numbers.core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.io7m.jnull</groupId>
-      <artifactId>com.io7m.jnull.core</artifactId>
     </dependency>
     <dependency>
       <groupId>com.io7m.junreachable</groupId>

@@ -20,6 +20,6 @@
  * @see java.nio.ByteBuffer
  */
 
-@com.io7m.jnull.NonNullByDefault
+
 package com.io7m.jtensors.storage.bytebuffered;
 

@@ -31,7 +31,7 @@ package com.io7m.jtensors.core.parameterized.vectors;
 package com.io7m.jtensors.core.unparameterized.vectors;
 <endif>
 
-import com.io7m.jnull.NullCheck;
+import java.util.Objects;
 import com.io7m.junreachable.UnreachableCodeException;
 
 /**

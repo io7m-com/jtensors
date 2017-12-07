@@ -18,6 +18,6 @@
  * Unparameterized matrix storage types.
  */
 
-@com.io7m.jnull.NonNullByDefault
+
 package com.io7m.jtensors.storage.api.unparameterized.matrices;
 

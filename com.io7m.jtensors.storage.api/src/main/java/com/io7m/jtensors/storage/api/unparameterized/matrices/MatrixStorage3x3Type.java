@@ -35,7 +35,7 @@ public interface MatrixStorage3x3Type
    */
 
   void setMatrix3x3D(
-    final Matrix3x3D m);
+    Matrix3x3D m);
 
   /**
    * Set the components from the given matrix.
@@ -44,5 +44,5 @@ public interface MatrixStorage3x3Type
    */
 
   void setMatrix3x3F(
-    final Matrix3x3F m);
+    Matrix3x3F m);
 }

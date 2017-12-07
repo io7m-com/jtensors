@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.generators;
 
-import com.io7m.jnull.NullCheck;
+import java.util.Objects;
 import com.io7m.jtensors.core.parameterized.vectors.PVector2L;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.generator.PrimitiveGenerators;
@@ -40,7 +40,7 @@ public final class PVector2LGenerator<T> implements Generator<PVector2L<T>>
   public PVector2LGenerator(
     final Generator<Long> in_gen)
   {
-    this.gen = NullCheck.notNull(in_gen, "Generator");
+    this.gen = Objects.requireNonNull(in_gen, "Generator");
   }
 
   /**

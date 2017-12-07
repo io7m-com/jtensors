@@ -29,7 +29,7 @@ PVector3Test(
 
 package com.io7m.jtensors.tests.core.parameterized.vectors;
 
-import com.io7m.jnull.NullCheck;
+import java.util.Objects;
 import com.io7m.junreachable.UnreachableCodeException;
 
 import net.java.quickcheck.Generator;

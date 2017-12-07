@@ -18,5 +18,4 @@
  * Checkstyle policy.
  */
 
-@com.io7m.jnull.NonNullByDefault package com.io7m.jtensors.checkstyle;
-
+package com.io7m.jtensors.checkstyle;

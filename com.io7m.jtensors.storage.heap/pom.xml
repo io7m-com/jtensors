@@ -9,7 +9,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>com.io7m.jtensors</artifactId>
-    <version>8.2.0</version>
+    <version>9.0.0</version>
   </parent>
 
   <artifactId>com.io7m.jtensors.storage.heap</artifactId>
@@ -20,23 +20,11 @@
   </description>
   <url>http://io7m.github.io/jtensors/</url>
 
-  <scm>
-    <url>${project.parent.scm.url}</url>
-    <connection>${project.parent.scm.connection}</connection>
-    <developerConnection>${project.parent.scm.developerConnection}
-    </developerConnection>
-  </scm>
-
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>com.io7m.jtensors.storage.api</artifactId>
       <version>${project.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.io7m.jnull</groupId>
-      <artifactId>com.io7m.jnull.core</artifactId>
     </dependency>
   </dependencies>
 

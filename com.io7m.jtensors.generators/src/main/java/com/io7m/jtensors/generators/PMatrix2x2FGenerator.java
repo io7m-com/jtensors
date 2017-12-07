@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.generators;
 
-import com.io7m.jnull.NullCheck;
+import java.util.Objects;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.generator.PrimitiveGenerators;
@@ -43,7 +43,7 @@ public final class PMatrix2x2FGenerator<A, B> implements Generator<PMatrix2x2F<A
   public PMatrix2x2FGenerator(
     final Generator<Double> in_gen)
   {
-    this.gen = NullCheck.notNull(in_gen, "Generator");
+    this.gen = Objects.requireNonNull(in_gen, "Generator");
   }
 
   /**

@@ -18,6 +18,6 @@
  * Tensor storage API.
  */
 
-@com.io7m.jnull.NonNullByDefault
+
 package com.io7m.jtensors.storage.api;
 
