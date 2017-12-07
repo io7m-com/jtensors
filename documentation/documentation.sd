@@ -1,0 +1,4 @@
+[document [title com.io7m.jtensors 9.0.0 Documentation]
+  [import "pkg.sdi"]
+  [import "conventions.sd"]
+  [import "api.sdi"]]

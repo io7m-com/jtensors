@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:feed xmlns:a="http://www.w3.org/2005/Atom">
+  <a:author>
+    <a:name>minisite</a:name>
+    <a:email>contact@io7m.com</a:email>
+  </a:author>
+  <a:id>http://github.com/io7m/jtensors/releases.atom</a:id>
+  <a:title>com.io7m.jtensors Releases</a:title>
+  <a:updated>2017-12-07T16:17:30+00:00</a:updated>
+  <a:entry>
+    <a:id>9.0.0</a:id>
+    <a:updated>2017-11-16T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 9.0.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 9.0.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>8.2.0</a:id>
+    <a:updated>2017-06-27T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 8.2.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 8.2.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>8.1.0</a:id>
+    <a:updated>2017-05-06T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 8.1.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 8.1.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>8.0.0</a:id>
+    <a:updated>2017-04-24T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 8.0.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 8.0.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>7.2.0</a:id>
+    <a:updated>2017-03-20T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 7.2.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 7.2.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>7.1.0</a:id>
+    <a:updated>2017-01-30T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 7.1.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 7.1.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>7.0.0</a:id>
+    <a:updated>2017-01-30T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 7.0.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 7.0.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>6.0.2</a:id>
+    <a:updated>2015-08-29T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 6.0.2 released</a:title>
+    <a:content type="text">com.io7m.jtensors 6.0.2 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>6.0.1</a:id>
+    <a:updated>2014-10-12T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 6.0.1 released</a:title>
+    <a:content type="text">com.io7m.jtensors 6.0.1 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>6.0.0</a:id>
+    <a:updated>2014-10-11T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 6.0.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 6.0.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>5.3.1</a:id>
+    <a:updated>2014-01-04T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 5.3.1 released</a:title>
+    <a:content type="text">com.io7m.jtensors 5.3.1 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>5.3.0</a:id>
+    <a:updated>2013-10-27T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 5.3.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 5.3.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>5.2.1</a:id>
+    <a:updated>2013-08-17T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 5.2.1 released</a:title>
+    <a:content type="text">com.io7m.jtensors 5.2.1 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>5.2.0</a:id>
+    <a:updated>2013-08-17T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 5.2.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 5.2.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>5.1.0</a:id>
+    <a:updated>2013-07-11T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 5.1.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 5.1.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>5.0.0</a:id>
+    <a:updated>2012-12-22T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 5.0.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 5.0.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>4.1.0</a:id>
+    <a:updated>2012-11-24T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 4.1.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 4.1.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>4.0.0</a:id>
+    <a:updated>2012-11-24T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 4.0.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 4.0.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>3.0.0</a:id>
+    <a:updated>2012-11-10T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 3.0.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 3.0.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>2.3.0</a:id>
+    <a:updated>2012-11-09T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 2.3.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 2.3.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>2.2.0</a:id>
+    <a:updated>2012-07-23T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 2.2.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 2.2.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>2.1.0</a:id>
+    <a:updated>2012-07-14T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 2.1.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 2.1.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>2.0.0</a:id>
+    <a:updated>2012-06-19T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 2.0.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 2.0.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>1.0.1</a:id>
+    <a:updated>2012-03-15T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 1.0.1 released</a:title>
+    <a:content type="text">com.io7m.jtensors 1.0.1 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>1.0.0</a:id>
+    <a:updated>2012-03-15T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 1.0.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 1.0.0 released</a:content>
+  </a:entry>
+  <a:entry>
+    <a:id>0.2.0</a:id>
+    <a:updated>2012-02-06T00:00:00+00:00</a:updated>
+    <a:title>com.io7m.jtensors 0.2.0 released</a:title>
+    <a:content type="text">com.io7m.jtensors 0.2.0 released</a:content>
+  </a:entry>
+</a:feed>

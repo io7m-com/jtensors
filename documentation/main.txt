@@ -1,0 +1,414 @@
+com.io7m.jtensors 9.0.0 Documentation
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Contents
+  ─────────────────────────────────────────────────────────────────────────────
+  1 Package Information ................................................... pkg
+    1.1 Orientation ........................................... pkg.orientation
+    1.2 Installation .............................................. pkg.install
+    1.3 Platform Specific Issues ................................. pkg.platform
+    1.4 License ................................................... pkg.license
+  2 Conventions ................................................... conventions
+    2.1 Vectors ........................................... conventions.vectors
+    2.2 Matrices ......................................... conventions.matrices
+    2.3 Quaternions ................................... conventions.quaternions
+  3 API ................................................................... api
+    3.1 JavaDoc ................................................... api.javadoc
+
+
+1 Package Information [id: pkg]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Contents
+  ─────────────────────────────────────────────────────────────────────────────
+  1.1 Orientation ............................................. pkg.orientation
+    1.1.1 Overview ................................... pkg.orientation.overview
+    1.1.2 Efficiency ............................... pkg.orientation.efficiency
+    1.1.3 Correctness ............................. pkg.orientation.correctness
+  1.2 Installation ................................................ pkg.install
+    1.2.1 Source compilation ............................... pkg.install.source
+    1.2.2 Maven ............................................. pkg.install.maven
+  1.3 Platform Specific Issues ................................... pkg.platform
+  1.4 License ..................................................... pkg.license
+
+
+1.1 Orientation [id: pkg.orientation]
+
+1.1.1 Overview [id: pkg.orientation.overview]
+
+1     The com.io7m.jtensors package implements a set of efficient vector,
+      matrix, and quaternion classes intended for use in computer graphics
+      applications.
+
+1.1.2 Efficiency [id: pkg.orientation.efficiency]
+
+1     The package uses simple and efficient algorithms for all operations. The
+      design of the package distinguishes between computation and storage
+      tensors. This allows code that computes with vectors to consist entirely
+      of static, monomorphic method calls - the type of code that produces the
+      best results under Java virtual machines that use JIT compilation.
+
+2     The package also provides storage tensors that are backed by direct
+      memory, allowing for zero-copy sharing of structures with native code.
+
+1.1.3 Correctness [id: pkg.orientation.correctness]
+
+1     The package includes a large battery of automated tests that attempt to
+      verify the correctness of the included implementations. As of the time of
+      writing, the tests manage 100% coverage for all code.
+
+1.2 Installation [id: pkg.install]
+
+1.2.1 Source compilation [id: pkg.install.source]
+
+1     The project can be compiled and installed with Maven [url:
+      http://maven.apache.org]:
+
+2     $ mvn -C clean install
+
+1.2.2 Maven [id: pkg.install.maven]
+
+1     Regular releases are made to the Central Repository [url:
+      http://search.maven.org/#search%7Cga%7C1%7Ccom.io7m.jtensors].
+
+2     All io7m.com [url: http://io7m.com] packages use Semantic Versioning [0],
+      which implies that it is always safe to use version ranges with an
+      exclusive upper bound equal to the next major version - the API of the
+      package will not change in a backwards-incompatible manner before the
+      next major version.
+
+1.3 Platform Specific Issues [id: pkg.platform]
+
+1     There are no known platform-specific issues.
+
+1.4 License [id: pkg.license]
+
+1     All files distributed with the com.io7m.jtensors package are placed under
+      the following license:
+
+      1.4.2.2 License
+      ───────────────
+
+      Copyright © 2017 <code@io7m.com> http://io7m.com
+
+      Permission to use, copy, modify, and/or distribute this software for any
+      purpose with or without fee is hereby granted, provided that the above
+      copyright notice and this permission notice appear in all copies.
+
+      THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+      WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+      MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+      ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+      WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+      ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+      OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+
+2 Conventions [id: conventions]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Contents
+  ─────────────────────────────────────────────────────────────────────────────
+  2.1 Vectors ............................................. conventions.vectors
+    2.1.1 Computation Types ............. conventions.vectors.computation_types
+    2.1.2 Storage Types ..................... conventions.vectors.storage_types
+    2.1.3 Phantom Types ........................... conventions.vectors.phantom
+  2.2 Matrices ........................................... conventions.matrices
+    2.2.1 Computation Types ............ conventions.matrices.computation_types
+    2.2.2 Storage Types .................... conventions.matrices.storage_types
+    2.2.3 Phantom Types .......................... conventions.matrices.phantom
+  2.3 Quaternions ..................................... conventions.quaternions
+
+
+2.1 Vectors [id: conventions.vectors]
+
+2.1.1 Computation Types [id: conventions.vectors.computation_types]
+
+1     The com.io7m.jtensors package provides computation vectors with
+      single-precision (float) elements, double-precision (double) elements,
+      integer (int), and long integer (long) elements. Each vector type is
+      available in two, three, and four element versions. The package
+      unambiguously identifies the vector types by using the following naming
+      conventions for the types (given as a simple EBNF grammar) :
+
+      2.1.1.2 Vector type naming
+      ──────────────────────────
+
+      prefix       = "Vector" | "PVector" ;
+      size         = "2" | "3" | "4" ;
+      element_type = "I" | "L" | "F" | "D" ;
+      type         = prefix , size , element_type ;
+
+
+
+3     Computation vectors are always immutable and are defined in such a way to
+      allow the Java virtual machine to efficiently inline all vector method
+      calls and to eliminate the allocations of intermediate vectors via escape
+      analysis.
+
+4     The available vector types include:
+
+      2.1.1.5 Vector types
+      ────────────────────
+
+      • Vector2D [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2D.html]
+      • Vector3D [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3D.html]
+      • Vector4D [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4D.html]
+      • Vector2F [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2F.html]
+      • Vector3F [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3F.html]
+      • Vector4F [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4F.html]
+      • Vector2I [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2I.html]
+      • Vector3I [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3I.html]
+      • Vector4I [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4I.html]
+      • Vector2L [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2L.html]
+      • Vector3L [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3L.html]
+      • Vector4L [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4L.html]
+      • PVector2D [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2D.html]
+      • PVector3D [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3D.html]
+      • PVector4D [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4D.html]
+      • PVector2F [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2F.html]
+      • PVector3F [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3F.html]
+      • PVector4F [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4F.html]
+      • PVector2I [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2I.html]
+      • PVector3I [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3I.html]
+      • PVector4I [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4I.html]
+      • PVector2L [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2L.html]
+      • PVector3L [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3L.html]
+      • PVector4L [url:
+        apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4L.html]
+
+
+
+2.1.2 Storage Types [id: conventions.vectors.storage_types]
+
+1     The com.io7m.jtensors package provides mutable storage vectors. A storage
+      vector is a mutable vector upon which only very simple get and set
+      operations are defined. The intention is to allow all intermediate
+      computations to be written with immutable computation [ref:
+      conventions.vectors.computation_types] vectors, with the final results of
+      those computations being written to storage vectors in order to, for
+      example, be passed directly to native code without requiring copying.
+
+2     To enumerate the available storage vector types, see the API
+      documentation for the VectorStorageType [url:
+      apidocs/com/io7m/jtensors/storage/api/VectorStorageType.html] interface.
+
+2.1.3 Phantom Types [id: conventions.vectors.phantom]
+
+1     The com.io7m.jtensors package also provides copies of the existing vector
+      types indexed by a phantom type parameter in order to allow the
+      programmer to make semantically distinct values type-incompatible [1].
+
+2.2 Matrices [id: conventions.matrices]
+
+2.2.1 Computation Types [id: conventions.matrices.computation_types]
+
+1     The com.io7m.jtensors package provides square computation matrices with
+      single-precision (float) elements, and double-precision (double)
+      elements. Each matrix type is available in 2x2, 3x3, and 4x4 versions.
+      The package unambiguously identifies the matrix types by using the
+      following naming conventions for the types
+      (given as a simple EBNF grammar) :
+
+      2.2.1.2 Matrix type naming
+      ──────────────────────────
+
+      prefix       = "Matrix" | "PMatrix"
+      size         = "2x2" | "3x3" | "4x4" ;
+      element_type = "F" | "D" ;
+      type         = prefix , size , element_type ;
+
+
+3     Computation matrices are always immutable and are defined in such a way
+      to allow the Java virtual machine to efficiently inline all matrix method
+      calls and to eliminate the allocations of intermediate matrices via
+      escape analysis.
+
+4     The available matrix types include:
+
+      2.2.1.5 Matrix types
+      ────────────────────
+
+      • Matrix2x2D [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix2D.html]
+      • Matrix3x3D [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix3D.html]
+      • Matrix4x4D [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix4D.html]
+      • Matrix2x2F [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix2F.html]
+      • Matrix3x3F [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix3F.html]
+      • Matrix4x4F [url:
+        apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix4F.html]
+      • PMatrix2x2D [url:
+        apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix2D.html]
+      • PMatrix3x3D [url:
+        apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix3D.html]
+      • PMatrix4x4D [url:
+        apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix4D.html]
+      • PMatrix2x2F [url:
+        apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix2F.html]
+      • PMatrix3x3F [url:
+        apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix3F.html]
+      • PMatrix4x4F [url:
+        apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix4F.html]
+
+
+
+2.2.2 Storage Types [id: conventions.matrices.storage_types]
+
+1     The com.io7m.jtensors package provides mutable storage matrices. A
+      storage matrix is a mutable matrix upon which only very simple get and
+      set operations are defined. The intention is to allow all intermediate
+      computations to be written with immutable computation [ref:
+      conventions.matrices.computation_types] matrices, with the final results
+      of those computations being written to storage matrices in order to, for
+      example, be passed directly to native code without requiring copying.
+
+2     To enumerate the available storage matrix types, see the API
+      documentation for the MatrixStorageType [url:
+      apidocs/com/io7m/jtensors/storage/api/MatrixStorageType.html] interface.
+
+3     Matrix data is stored in column-major format [2], in whatever is the
+      platform's native byte order. For an m x m square matrix, assuming that
+      each element of the matrix uses n bytes, the first byte of the element at
+      row r and column c (assuming 0 <= r < m and 0 <= c < m) can be found by
+      (c * m * n) + (r * n).
+
+      2.2.2.4 Column-major storage memory layout
+      ──────────────────────────────────────────
+
+      [image: images/memory.png] (Column-major storage memory layout)
+
+
+5     So, the element at row 0, column 0 would be stored in bytes [0 .. 3]. The
+      element at row 1, column 0 would be stored in bytes [4 .. 7]. The element
+      at row 0, column 1 would be stored in bytes [16 .. 19], and so on.
+
+2.2.3 Phantom Types [id: conventions.matrices.phantom]
+
+1     As with the vector types, the com.io7m.jtensors package provides copies
+      of all of the existing matrix types indexed by a pair of phantom type
+      parameters.
+
+2     Conceptually, a matrix can be considered as storing a transform from
+      coordinate space T0 to space T1. For a 4x4 matrix in the
+      com.io7m.jtensors package, this is denoted by the type
+      PMatrix4x4D<T0,T1>. It then follows that when matrices are concatenated
+      via multiplications, their type parameters are translated accordingly.
+      For example, a matrix PMatrix4x4D<T0,T1> multiplied by a matrix
+      PMatrix4x4D<T1,T2> results in a matrix of type PMatrix4x4D<T0,T2>.
+      Inverting a matrix results in a matrix that represents the inverse of the
+      original transform that the matrix represented. For example, inverting a
+      matrix of type PMatrix4x4D<T0,T1> results in a matrix of type
+      PMatrix4x4D<T1,T0>.
+
+3     Type parameters are also translated across multiplications by vectors. A
+      multiplication of a vector of type PVector4D<T0> by a matrix of type
+      PMatrix4x4D<T0,T1> results in a vector of type PVector4D<T1>.
+
+4     Being able to track the types of transforms at this level of detail is
+      invaluable when using systems such as OpenGL, where accidentally mixing
+      up matrices tends to result in visual anomalies that can be extremely
+      hard to track down. By explicitly denoting coordinate spaces with empty
+      types, it's possible to statically prevent all bugs involving
+      accidentally mixing up matrices. It's also possible to prevent the
+      incorrect construction of matrices [3]. Additionally, with each matrix
+      labelled by the type of transform it represents, code becomes
+      self-documenting.
+
+      2.2.3.5 Static tracking of transforms
+      ─────────────────────────────────────
+
+      interface WorldSpace { }
+      interface ViewSpace { }
+      interface ObjectSpace { }
+
+      PMatrix4x4D<ObjectSpace, WorldSpace> matrix_model;
+      PMatrix4x4D<WorldSpace, ViewSpace> matrix_view;
+      PMatrix4x4D<ObjectSpace, ViewSpace> matrix_modelview;
+
+      // Correct!
+      matrix_modelview = PMatrices4x4D.multiply (matrix_view, matrix_model);
+
+      // Correct!
+      Optional<PMatrix4x4D<ViewSpace, WorldSpace>> matrix_view_inverse =
+        PMatrices4x4D.invert(matrix_view);
+
+      // Compilation error: The resulting matrix would be of type PMatrix4x4D<ViewSpace, ObjectSpace>
+      // matrix_modelview = PMatrices4x4D.multiply (matrix_model, matrix_view);
+
+
+
+2.3 Quaternions [id: conventions.quaternions]
+
+1     The com.io7m.jtensors package provides quaternions with single-precision
+      (float) elements, and double-precision (double) elements. The package
+      unambiguously identifies the quaternion types by using the following
+      naming conventions for the types (given as a simple EBNF grammar) :
+
+2     The available quaternion types include:
+
+      2.3.3.3 Quaternion types
+      ────────────────────────
+
+      • Quaternion4D [url:
+        apidocs/com/io7m/jtensors/core/quaternions/Quaternion4D.html]
+      • Quaternion4F [url:
+        apidocs/com/io7m/jtensors/core/quaternions/Quaternion4F.html]
+
+
+
+3 API [id: api]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Contents
+  ─────────────────────────────────────────────────────────────────────────────
+  3.1 JavaDoc ..................................................... api.javadoc
+
+
+3.1 JavaDoc [id: api.javadoc]
+
+1     API documentation for the package is provided via the included Javadoc
+      [url: apidocs].
+
+
+Footnotes
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[0]   http://semver.org [url: http://semver.org]
+
+[1]   See http://io7m.com/documents/tt1-pt/ [url:
+      http://io7m.com/documents/tt1-pt/].
+
+[2]   The convention used by most programs using the OpenGL [url:
+      http://opengl.org] API.
+
+[3]   It is common for people to make mistakes with matrix multiplication: The
+      order of matrices is effectively the reverse of the order in which the
+      transforms will be applied.
+
