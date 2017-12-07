@@ -1,4 +1,0 @@
-prefix       = "Vector" | "PVector" ;
-size         = "2" | "3" | "4" ;
-element_type = "I" | "L" | "F" | "D" ;
-type         = prefix , size , element_type ;

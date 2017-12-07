@@ -1,4 +1,0 @@
-prefix       = "Matrix" | "PMatrix"
-size         = "2x2" | "3x3" | "4x4" ;
-element_type = "F" | "D" ;
-type         = prefix , size , element_type ;

@@ -1,2 +1,0 @@
-element_type = "F" | "D" ;
-type         = "Quaternion4" , element_type ;
