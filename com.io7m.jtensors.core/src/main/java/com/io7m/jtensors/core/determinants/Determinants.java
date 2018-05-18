@@ -106,6 +106,7 @@ public final class Determinants
    * @return The determinant
    */
 
+  // CHECKSTYLE:OFF
   public static double determinant4x4(
     final double r0c0,
     final double r0c1,
@@ -123,6 +124,7 @@ public final class Determinants
     final double r3c1,
     final double r3c2,
     final double r3c3)
+  // CHECKSTYLE:ON
   {
     double sum = 0.0;
 

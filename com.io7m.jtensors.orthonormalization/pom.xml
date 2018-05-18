@@ -13,7 +13,7 @@
   </parent>
 
   <artifactId>com.io7m.jtensors.orthonormalization</artifactId>
-  <packaging>bundle</packaging>
+  <packaging>jar</packaging>
 
   <name>com.io7m.jtensors.orthonormalization</name>
   <description>Vector/matrix math package (Orthonormalization)</description>
@@ -46,32 +46,27 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
       </plugin>
 
-      <!-- Process annotations -->
+      <!-- Analyze semantic versioning -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <annotationProcessorPaths>
-            <dependency>
-              <groupId>org.immutables</groupId>
-              <artifactId>value</artifactId>
-              <version>${io7m.org.immutables.version}</version>
-            </dependency>
-          </annotationProcessorPaths>
-        </configuration>
+        <groupId>biz.aQute.bnd</groupId>
+        <artifactId>bnd-baseline-maven-plugin</artifactId>
       </plugin>
 
-      <!-- Produce OSGi bundle -->
+      <!-- Spot bugs -->
       <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <extensions>true</extensions>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+      </plugin>
+
+      <!-- Produce OSGi manifest -->
+      <plugin>
+        <groupId>biz.aQute.bnd</groupId>
+        <artifactId>bnd-maven-plugin</artifactId>
         <configuration>
-          <instructions>
-            <Export-Package>
+          <bnd><![CDATA[
+            Export-Package: \
               com.io7m.jtensors.orthonormalization
-            </Export-Package>
-          </instructions>
+]]></bnd>
         </configuration>
       </plugin>
     </plugins>

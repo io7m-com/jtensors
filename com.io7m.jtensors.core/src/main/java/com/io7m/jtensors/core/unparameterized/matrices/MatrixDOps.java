@@ -65,6 +65,7 @@ final class MatrixDOps
       r2c0, r2c1, r2c2);
   }
 
+  // CHECKSTYLE:OFF
   static double determinant4x4(
     final double r0c0,
     final double r0c1,
@@ -82,6 +83,7 @@ final class MatrixDOps
     final double r3c1,
     final double r3c2,
     final double r3c3)
+  // CHECKSTYLE:ON
   {
     return Determinants.determinant4x4(
       r0c0, r0c1, r0c2, r0c3,
