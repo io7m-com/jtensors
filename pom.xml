@@ -9,7 +9,7 @@
   <parent>
     <groupId>com.io7m.primogenitor</groupId>
     <artifactId>com.io7m.primogenitor</artifactId>
-    <version>3.0.0-beta0002</version>
+    <version>3.0.0-beta0003</version>
   </parent>
 
   <groupId>com.io7m.jtensors</groupId>
@@ -187,7 +187,7 @@
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
           <configuration>
-            <excludeFilterFile>${project.parent.basedir}/spotbugs-filter.xml</excludeFilterFile>
+            <excludeFilterFile>spotbugs-filter.xml</excludeFilterFile>
           </configuration>
         </plugin>
       </plugins>

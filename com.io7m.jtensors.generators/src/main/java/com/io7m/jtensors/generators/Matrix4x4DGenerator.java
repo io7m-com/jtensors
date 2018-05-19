@@ -16,6 +16,7 @@
 
 package com.io7m.jtensors.generators;
 
+import java.security.SecureRandom;
 import java.util.Objects;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
 import net.java.quickcheck.Generator;
@@ -80,20 +81,22 @@ public final class Matrix4x4DGenerator implements Generator<Matrix4x4D>
   public static Generator<Matrix4x4D> createOrthogonal()
   {
     return () -> {
+      final SecureRandom rng = new SecureRandom();
+
       final double r0c0 = 1.0;
       final double r0c1 = 0.0;
       final double r0c2 = 0.0;
-      final double r0c3 = Math.random();
+      final double r0c3 = rng.nextDouble();
 
       final double r1c0 = 0.0;
       final double r1c1 = 1.0;
       final double r1c2 = 0.0;
-      final double r1c3 = Math.random();
+      final double r1c3 = rng.nextDouble();
 
       final double r2c0 = 0.0;
       final double r2c1 = 0.0;
       final double r2c2 = 1.0;
-      final double r2c3 = Math.random();
+      final double r2c3 = rng.nextDouble();
 
       final double r3c0 = 0.0;
       final double r3c1 = 0.0;
