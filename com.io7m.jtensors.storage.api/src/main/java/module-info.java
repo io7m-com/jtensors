@@ -21,7 +21,8 @@
 module com.io7m.jtensors.storage.api
 {
   requires com.io7m.junreachable.core;
-  requires com.io7m.jtensors.core;
+
+  requires transitive com.io7m.jtensors.core;
 
   exports com.io7m.jtensors.storage.api;
   exports com.io7m.jtensors.storage.api.parameterized.matrices;

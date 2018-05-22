@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.core.parameterized.matrices;
 
-import com.io7m.jtensors.core.JTensorsImmutableStyleType;
+import com.io7m.immutables.styles.ImmutablesStyleType;
 import com.io7m.jtensors.core.MatrixComputationalType;
 import org.immutables.value.Value;
 
@@ -29,7 +29,7 @@ import org.immutables.value.Value;
  *            coordinate system)
  */
 
-@JTensorsImmutableStyleType
+@ImmutablesStyleType
 @Value.Immutable
 public interface PMatrix2x2DType<A, B>
   extends PMatrixReadable2x2DType<A, B>, MatrixComputationalType

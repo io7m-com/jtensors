@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.core.unparameterized.matrices;
 
-import com.io7m.jtensors.core.JTensorsImmutableStyleType;
+import com.io7m.immutables.styles.ImmutablesStyleType;
 import com.io7m.jtensors.core.MatrixComputationalType;
 import org.immutables.value.Value;
 
@@ -24,7 +24,7 @@ import org.immutables.value.Value;
  * The type of 3x3 {@code double}-typed matrices.
  */
 
-@JTensorsImmutableStyleType
+@ImmutablesStyleType
 @Value.Immutable
 public interface Matrix3x3DType
   extends MatrixReadable3x3DType, MatrixComputationalType

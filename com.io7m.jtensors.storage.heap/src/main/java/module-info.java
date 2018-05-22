@@ -21,8 +21,9 @@
 module com.io7m.jtensors.storage.heap
 {
   requires com.io7m.junreachable.core;
-  requires com.io7m.jtensors.core;
-  requires com.io7m.jtensors.storage.api;
+
+  requires transitive com.io7m.jtensors.core;
+  requires transitive com.io7m.jtensors.storage.api;
 
   exports com.io7m.jtensors.storage.heap;
 }

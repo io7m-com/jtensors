@@ -14,7 +14,7 @@
 
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>com.io7m.jtensors</artifactId>
-  <version>9.0.0</version>
+  <version>10.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>com.io7m.jtensors</name>
@@ -33,8 +33,8 @@
   </modules>
 
   <properties>
-    <io7m.api.previousVersion>8.0.0</io7m.api.previousVersion>
-    <io7m.org.immutables.version>2.6.0-alpha3</io7m.org.immutables.version>
+    <io7m.api.previousVersion>9.0.0</io7m.api.previousVersion>
+    <io7m.org.immutables.version>2.6.0</io7m.org.immutables.version>
   </properties>
 
   <inceptionYear>2011</inceptionYear>
@@ -118,6 +118,11 @@
         <groupId>org.immutables</groupId>
         <artifactId>value</artifactId>
         <version>${io7m.org.immutables.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.io7m.immutables.style</groupId>
+        <artifactId>com.io7m.immutables.style</artifactId>
+        <version>0.0.1</version>
       </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>

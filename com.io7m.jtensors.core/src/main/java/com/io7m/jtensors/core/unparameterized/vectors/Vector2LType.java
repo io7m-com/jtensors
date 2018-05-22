@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.core.unparameterized.vectors;
 
-import com.io7m.jtensors.core.JTensorsImmutableStyleType;
+import com.io7m.immutables.styles.ImmutablesStyleType;
 import com.io7m.jtensors.core.VectorComputationalType;
 import org.immutables.value.Value;
 
@@ -24,7 +24,7 @@ import org.immutables.value.Value;
  * The type of 2D {@code long}-typed vectors.
  */
 
-@JTensorsImmutableStyleType
+@ImmutablesStyleType
 @Value.Immutable
 public interface Vector2LType
   extends VectorReadable2LType, VectorComputationalType

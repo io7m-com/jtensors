@@ -20,13 +20,12 @@
 
 module com.io7m.jtensors.storage.bytebuffered
 {
-  requires static org.immutables.value;
-
-  requires com.io7m.mutable.numbers.core;
   requires com.io7m.ieee754b16.core;
   requires com.io7m.junreachable.core;
-  requires com.io7m.jtensors.core;
-  requires com.io7m.jtensors.storage.api;
+
+  requires transitive com.io7m.mutable.numbers.core;
+  requires transitive com.io7m.jtensors.core;
+  requires transitive com.io7m.jtensors.storage.api;
 
   exports com.io7m.jtensors.storage.bytebuffered;
 }

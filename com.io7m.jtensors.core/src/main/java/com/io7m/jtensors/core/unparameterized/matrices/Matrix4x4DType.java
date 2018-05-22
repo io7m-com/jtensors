@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.core.unparameterized.matrices;
 
-import com.io7m.jtensors.core.JTensorsImmutableStyleType;
+import com.io7m.immutables.styles.ImmutablesStyleType;
 import com.io7m.jtensors.core.MatrixComputationalType;
 import org.immutables.value.Value;
 
@@ -24,7 +24,7 @@ import org.immutables.value.Value;
  * The type of 4x4 {@code double}-typed matrices.
  */
 
-@JTensorsImmutableStyleType
+@ImmutablesStyleType
 @Value.Immutable
 public interface Matrix4x4DType
   extends MatrixReadable4x4DType, MatrixComputationalType

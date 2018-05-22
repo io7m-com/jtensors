@@ -9,7 +9,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>com.io7m.jtensors</artifactId>
-    <version>9.0.0</version>
+    <version>10.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>com.io7m.jtensors.documentation</artifactId>
@@ -58,6 +58,11 @@
     <dependency>
       <groupId>org.immutables</groupId>
       <artifactId>value</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.io7m.immutables.style</groupId>
+      <artifactId>com.io7m.immutables.style</artifactId>
       <scope>provided</scope>
     </dependency>
   </dependencies>
