@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.io7m.primogenitor</groupId>
     <artifactId>com.io7m.primogenitor.full</artifactId>
-    <version>3.1.0</version>
+    <version>5.0.0</version>
   </parent>
 
   <groupId>com.io7m.jtensors</groupId>
@@ -30,6 +30,7 @@
   </modules>
 
   <properties>
+    <com.codacy.id>ef32f8e67cf14526b0ec1cb994ba562d</com.codacy.id>
     <io7m.api.previousVersion>9.0.0</io7m.api.previousVersion>
     <io7m.org.immutables.version>2.6.0</io7m.org.immutables.version>
   </properties>
@@ -111,6 +112,11 @@
         <version>2.0.0</version>
       </dependency>
 
+      <dependency>
+        <groupId>com.io7m.primogenitor</groupId>
+        <artifactId>com.io7m.primogenitor.support</artifactId>
+        <version>5.0.0</version>
+      </dependency>
       <dependency>
         <groupId>org.immutables</groupId>
         <artifactId>value</artifactId>
