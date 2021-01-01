@@ -42,7 +42,7 @@
 
       <!-- Generate sources -->
       <plugin>
-        <groupId>com.webguys</groupId>
+        <groupId>com.io7m.stmp</groupId>
         <artifactId>string-template-maven-plugin</artifactId>
         <executions>
 
