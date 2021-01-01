@@ -20,6 +20,9 @@
 
 module com.io7m.jtensors.storage.api
 {
+  requires static org.osgi.annotation.bundle;
+  requires static org.osgi.annotation.versioning;
+
   requires com.io7m.junreachable.core;
 
   requires transitive com.io7m.jtensors.core;

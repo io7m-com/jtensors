@@ -18,6 +18,9 @@
  * Parameterized vector storage types.
  */
 
-
+@Export
+@Version("10.0.0")
 package com.io7m.jtensors.storage.api.parameterized.vectors;
 
+import org.osgi.annotation.bundle.Export;
+import org.osgi.annotation.versioning.Version;

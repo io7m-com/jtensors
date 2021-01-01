@@ -33,6 +33,16 @@
     </dependency>
 
     <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.annotation.bundle</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.annotation.versioning</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>com.io7m.mutable.numbers</groupId>
       <artifactId>com.io7m.mutable.numbers.core</artifactId>
     </dependency>
@@ -48,36 +58,6 @@
 
   <build>
     <plugins>
-      <!-- Check style -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-      </plugin>
-
-      <!-- Analyze semantic versioning -->
-      <plugin>
-        <groupId>biz.aQute.bnd</groupId>
-        <artifactId>bnd-baseline-maven-plugin</artifactId>
-      </plugin>
-
-      <!-- Spot bugs -->
-      <plugin>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-      </plugin>
-
-      <!-- Produce OSGi manifest -->
-      <plugin>
-        <groupId>biz.aQute.bnd</groupId>
-        <artifactId>bnd-maven-plugin</artifactId>
-        <configuration>
-          <bnd><![CDATA[
-            Export-Package: \
-              com.io7m.jtensors.storage.bytebuffered
-]]></bnd>
-        </configuration>
-      </plugin>
-
       <!-- Ignore dependencies that bytecode analysis gets wrong. -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

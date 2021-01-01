@@ -271,7 +271,7 @@ public final class <className>
 
     <scalarRealType> r = <opClass>.angle(v0, v1);
 
-    Assert.assertTrue(<testOpClass>.compareReal(r, <testOpClass>.realConstant("0.0")) \>= 0);
+    Assert.assertTrue(<testOpClass>.compareReal(r, <testOpClass>.realConstant("0.0")) >= 0);
     Assert.assertTrue(<testOpClass>.compareReal(r, <testOpClass>.realConstant("6.283185")) \<= 0);
   }
 

@@ -20,6 +20,9 @@
 
 module com.io7m.jtensors.storage.bytebuffered
 {
+  requires static org.osgi.annotation.versioning;
+  requires static org.osgi.annotation.bundle;
+
   requires com.io7m.ieee754b16.core;
   requires com.io7m.junreachable.core;
 

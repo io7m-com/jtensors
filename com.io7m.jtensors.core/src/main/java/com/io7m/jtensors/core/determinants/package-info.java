@@ -18,5 +18,9 @@
  * Functions for calculating determinants.
  */
 
+@Export
+@Version("10.0.0")
 package com.io7m.jtensors.core.determinants;
 
+import org.osgi.annotation.bundle.Export;
+import org.osgi.annotation.versioning.Version;

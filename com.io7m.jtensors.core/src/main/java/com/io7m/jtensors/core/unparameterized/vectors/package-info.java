@@ -18,5 +18,9 @@
  * Unparameterized vector types.
  */
 
+@Export
+@Version("10.0.0")
 package com.io7m.jtensors.core.unparameterized.vectors;
 
+import org.osgi.annotation.bundle.Export;
+import org.osgi.annotation.versioning.Version;

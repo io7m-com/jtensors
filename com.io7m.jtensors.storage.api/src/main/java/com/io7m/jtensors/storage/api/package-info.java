@@ -18,6 +18,9 @@
  * Tensor storage API.
  */
 
-
+@Export
+@Version("10.0.0")
 package com.io7m.jtensors.storage.api;
 
+import org.osgi.annotation.bundle.Export;
+import org.osgi.annotation.versioning.Version;
