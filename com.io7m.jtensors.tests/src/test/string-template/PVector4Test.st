@@ -63,42 +63,42 @@ public final class <className>
   @Test
   public void testEqualsHashCodeToString()
   {
-    final <vectorType> v0 =
+    var v0 =
       <vectorType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
         <testOpClass>.constant("2"),
         <testOpClass>.constant("3"));
 
-    final <vectorType> v1 =
+    var v1 =
       <vectorType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
         <testOpClass>.constant("2"),
         <testOpClass>.constant("3"));
 
-    final <vectorType> v2 =
+    var v2 =
       <vectorType>.of(
         <testOpClass>.constant("10"),
         <testOpClass>.constant("1"),
         <testOpClass>.constant("2"),
         <testOpClass>.constant("3"));
 
-    final <vectorType> v3 =
+    var v3 =
       <vectorType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("11"),
         <testOpClass>.constant("2"),
         <testOpClass>.constant("3"));
 
-    final <vectorType> v4 =
+    var v4 =
       <vectorType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
         <testOpClass>.constant("12"),
         <testOpClass>.constant("3"));
 
-    final <vectorType> v5 =
+    var v5 =
       <vectorType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
@@ -135,7 +135,7 @@ public final class <className>
   @Test
   public void testBuilder()
   {
-    final <vectorType> v0 =
+    var v0 =
       <vectorType>.builder()
       .setX(<testOpClass>.constant("0"))
       .setY(<testOpClass>.constant("1"))
@@ -149,7 +149,7 @@ public final class <className>
     <testOpClass>.checkEquals(<testOpClass>.constant("3"), v0.w());
 
     {
-      final <vectorType> v1 =
+      var v1 =
         <vectorType>.builder()
         .from(v0)
         .build();
@@ -157,7 +157,7 @@ public final class <className>
     }
 
     {
-      final <vectorType> v1 =
+      var v1 =
         <vectorType>.builder()
         .setX(<testOpClass>.constant("0"))
         .setY(<testOpClass>.constant("1"))
@@ -169,7 +169,7 @@ public final class <className>
     }
 
     {
-      final <vectorType> v1 =
+      var v1 =
         <vectorType>.builder()
         .setW(<testOpClass>.constant("3"))
         .from((<vectorReadable3Type>) v0)
@@ -178,7 +178,7 @@ public final class <className>
     }
 
     {
-      final <vectorType> v1 =
+      var v1 =
         <vectorType>.builder()
         .setZ(<testOpClass>.constant("2"))
         .setW(<testOpClass>.constant("3"))
@@ -192,7 +192,7 @@ public final class <className>
   public void testBuilderFailure()
   {
     Assertions.assertThrows(IllegalStateException.class, () -> {
-         final <vectorType> v0 =
+         var v0 =
            <vectorType>.builder()
            .build();
     });
@@ -203,13 +203,13 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
-    final <vectorType> v1 = <opClass>.absolute(v0);
+    var v0 = gen.next();
+    var v1 = <opClass>.absolute(v0);
 
-    <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.absolute(v0.x());
-    <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.absolute(v0.y());
-    <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.absolute(v0.z());
-    <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.absolute(v0.w());
+    var ex = (<vectorComponentType>) <testOpClass>.absolute(v0.x());
+    var ey = (<vectorComponentType>) <testOpClass>.absolute(v0.y());
+    var ez = (<vectorComponentType>) <testOpClass>.absolute(v0.z());
+    var ew = (<vectorComponentType>) <testOpClass>.absolute(v0.w());
 
     <testOpClass>.checkAlmostEquals(ex, v1.x());
     <testOpClass>.checkAlmostEquals(ey, v1.y());
@@ -221,15 +221,15 @@ public final class <className>
   public void testAdd()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
-    final <vectorType> v0 = gen.next();
-    final <vectorType> v1 = gen.next();
+    var v0 = gen.next();
+    var v1 = gen.next();
 
-    <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), v1.x());
-    <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), v1.y());
-    <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.add(v0.z(), v1.z());
-    <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.add(v0.w(), v1.w());
+    var ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), v1.x());
+    var ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), v1.y());
+    var ez = (<vectorComponentType>) <testOpClass>.add(v0.z(), v1.z());
+    var ew = (<vectorComponentType>) <testOpClass>.add(v0.w(), v1.w());
 
-    final <vectorType> v2 = <opClass>.add(v0, v1);
+    var v2 = <opClass>.add(v0, v1);
     <testOpClass>.checkAlmostEquals(ex, v2.x());
     <testOpClass>.checkAlmostEquals(ey, v2.y());
     <testOpClass>.checkAlmostEquals(ez, v2.z());
@@ -245,12 +245,12 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGeneratorSmall();
 
-    final <vectorType> v0 = gen.next();
-    final <vectorType> v1 = gen.next();
-    final <vectorType> v2 = gen.next();
+    var v0 = gen.next();
+    var v1 = gen.next();
+    var v2 = gen.next();
 
-    final <vectorType> vr0 = <opClass>.add(<opClass>.add(v0, v1), v2);
-    final <vectorType> vr1 = <opClass>.add(v0, <opClass>.add(v1, v2));
+    var vr0 = <opClass>.add(<opClass>.add(v0, v1), v2);
+    var vr1 = <opClass>.add(v0, <opClass>.add(v1, v2));
 
     <testOpClass>.checkAlmostEqualsVague(vr0.x(), vr1.x());
     <testOpClass>.checkAlmostEqualsVague(vr0.y(), vr1.y());
@@ -267,11 +267,11 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
-    final <vectorType> v1 = gen.next();
+    var v0 = gen.next();
+    var v1 = gen.next();
 
-    final <vectorType> vr0 = <opClass>.add(v0, v1);
-    final <vectorType> vr1 = <opClass>.add(v1, v0);
+    var vr0 = <opClass>.add(v0, v1);
+    var vr1 = <opClass>.add(v1, v0);
 
     <testOpClass>.checkAlmostEquals(vr0.x(), vr1.x());
     <testOpClass>.checkAlmostEquals(vr0.y(), vr1.y());
@@ -288,8 +288,8 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
-    final <vectorType> vr0 = <opClass>.add(v0, <opClass>.negate(v0));
+    var v0 = gen.next();
+    var vr0 = <opClass>.add(v0, <opClass>.negate(v0));
 
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), vr0.x());
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), vr0.y());
@@ -302,21 +302,21 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
-    final <vectorType> v1 = gen.next();
-    final <scalarRealType> r = gen.next().x();
+    var v0 = gen.next();
+    var v1 = gen.next();
+    var r = gen.next().x();
 
-    <vectorComponentType> mx = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.x(), r);
-    <vectorComponentType> my = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.y(), r);
-    <vectorComponentType> mz = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.z(), r);
-    <vectorComponentType> mw = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.w(), r);
+    var mx = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.x(), r);
+    var my = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.y(), r);
+    var mz = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.z(), r);
+    var mw = (<vectorComponentType>) <testOpClass>.multiplyReal(v1.w(), r);
 
-    <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), mx);
-    <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), my);
-    <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.add(v0.z(), mz);
-    <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.add(v0.w(), mw);
+    var ex = (<vectorComponentType>) <testOpClass>.add(v0.x(), mx);
+    var ey = (<vectorComponentType>) <testOpClass>.add(v0.y(), my);
+    var ez = (<vectorComponentType>) <testOpClass>.add(v0.z(), mz);
+    var ew = (<vectorComponentType>) <testOpClass>.add(v0.w(), mw);
 
-    final <vectorType> v2 = <opClass>.addScaled(v0, v1, r);
+    var v2 = <opClass>.addScaled(v0, v1, r);
     <testOpClass>.checkAlmostEquals(ex, v2.x());
     <testOpClass>.checkAlmostEquals(ey, v2.y());
     <testOpClass>.checkAlmostEquals(ez, v2.z());
@@ -326,25 +326,25 @@ public final class <className>
   @Test
   public void testClampMinimum()
   {
-    final <vectorType> v = <vectorType>.of(
+    var v = <vectorType>.of(
       <testOpClass>.constant("0"),
       <testOpClass>.constant("1"),
       <testOpClass>.constant("2"),
       <testOpClass>.constant("3"));
 
-    final <vectorType> v_min = <vectorType>.of(
+    var v_min = <vectorType>.of(
       <testOpClass>.constant("10"),
       <testOpClass>.constant("11"),
       <testOpClass>.constant("12"),
       <testOpClass>.constant("13"));
 
-    final <vectorType> v_max = <vectorType>.of(
+    var v_max = <vectorType>.of(
       <testOpClass>.constant("110"),
       <testOpClass>.constant("111"),
       <testOpClass>.constant("112"),
       <testOpClass>.constant("113"));
 
-    final <vectorType> vr =
+    var vr =
       <opClass>.clamp(v, v_min, v_max);
 
     <testOpClass>.checkEquals(v_min.x(), vr.x());
@@ -356,25 +356,25 @@ public final class <className>
   @Test
   public void testClampMaximum()
   {
-    final <vectorType> v = <vectorType>.of(
+    var v = <vectorType>.of(
       <testOpClass>.constant("1110"),
       <testOpClass>.constant("1111"),
       <testOpClass>.constant("1112"),
       <testOpClass>.constant("1113"));
 
-    final <vectorType> v_min = <vectorType>.of(
+    var v_min = <vectorType>.of(
       <testOpClass>.constant("10"),
       <testOpClass>.constant("11"),
       <testOpClass>.constant("12"),
       <testOpClass>.constant("13"));
 
-    final <vectorType> v_max = <vectorType>.of(
+    var v_max = <vectorType>.of(
       <testOpClass>.constant("110"),
       <testOpClass>.constant("111"),
       <testOpClass>.constant("112"),
       <testOpClass>.constant("113"));
 
-    final <vectorType> vr =
+    var vr =
       <opClass>.clamp(v, v_min, v_max);
 
     <testOpClass>.checkEquals(v_max.x(), vr.x());
@@ -386,25 +386,25 @@ public final class <className>
   @Test
   public void testClampMixed()
   {
-    final <vectorType> v = <vectorType>.of(
+    var v = <vectorType>.of(
       <testOpClass>.constant("1110"),
       <testOpClass>.constant("1"),
       <testOpClass>.constant("1112"),
       <testOpClass>.constant("3"));
 
-    final <vectorType> v_min = <vectorType>.of(
+    var v_min = <vectorType>.of(
       <testOpClass>.constant("10"),
       <testOpClass>.constant("11"),
       <testOpClass>.constant("12"),
       <testOpClass>.constant("13"));
 
-    final <vectorType> v_max = <vectorType>.of(
+    var v_max = <vectorType>.of(
       <testOpClass>.constant("110"),
       <testOpClass>.constant("111"),
       <testOpClass>.constant("112"),
       <testOpClass>.constant("113"));
 
-    final <vectorType> vr =
+    var vr =
       <opClass>.clamp(v, v_min, v_max);
 
     <testOpClass>.checkEquals(v_max.x(), vr.x());
@@ -418,7 +418,7 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
+    var v0 = gen.next();
 
     <testOpClass>.checkAlmostEquals(
       <testOpClass>.constant("0"),
@@ -430,7 +430,7 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
+    var v0 = gen.next();
 
     <testOpClass>.checkAlmostEquals(
       <opClass>.magnitudeSquared(v0),
@@ -442,10 +442,10 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
-    final <vectorType> v1 = gen.next();
+    var v0 = gen.next();
+    var v1 = gen.next();
 
-    final <vectorType> v2 =
+    var v2 =
       <opClass>.interpolateLinear(v0, v1, <testOpClass>.constant("0"));
 
     <testOpClass>.checkAlmostEquals(v0.x(), v2.x());
@@ -453,7 +453,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(v0.z(), v2.z());
     <testOpClass>.checkAlmostEquals(v0.w(), v2.w());
 
-    final <vectorType> v3 =
+    var v3 =
       <opClass>.interpolateLinear(v0, v1, <testOpClass>.constant("1"));
 
     <testOpClass>.checkAlmostEquals(v1.x(), v3.x());
@@ -467,12 +467,12 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> x0y0 = gen.next();
-    final <vectorType> x1y0 = gen.next();
-    final <vectorType> x0y1 = gen.next();
-    final <vectorType> x1y1 = gen.next();
+    var x0y0 = gen.next();
+    var x1y0 = gen.next();
+    var x0y1 = gen.next();
+    var x1y1 = gen.next();
 
-    final <vectorType> r =
+    var r =
       <opClass>.interpolateBilinear(
         x0y0,
         x1y0,
@@ -499,12 +499,12 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> x0y0 = gen.next();
-    final <vectorType> x1y0 = gen.next();
-    final <vectorType> x0y1 = gen.next();
-    final <vectorType> x1y1 = gen.next();
+    var x0y0 = gen.next();
+    var x1y0 = gen.next();
+    var x0y1 = gen.next();
+    var x1y1 = gen.next();
 
-    final <vectorType> r =
+    var r =
       <opClass>.interpolateBilinear(
         x0y0,
         x1y0,
@@ -531,12 +531,12 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> x0y0 = gen.next();
-    final <vectorType> x1y0 = gen.next();
-    final <vectorType> x0y1 = gen.next();
-    final <vectorType> x1y1 = gen.next();
+    var x0y0 = gen.next();
+    var x1y0 = gen.next();
+    var x0y1 = gen.next();
+    var x1y1 = gen.next();
 
-    final <vectorType> r =
+    var r =
       <opClass>.interpolateBilinear(
         x0y0,
         x1y0,
@@ -563,12 +563,12 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> x0y0 = gen.next();
-    final <vectorType> x1y0 = gen.next();
-    final <vectorType> x0y1 = gen.next();
-    final <vectorType> x1y1 = gen.next();
+    var x0y0 = gen.next();
+    var x1y0 = gen.next();
+    var x0y1 = gen.next();
+    var x1y1 = gen.next();
 
-    final <vectorType> r =
+    var r =
       <opClass>.interpolateBilinear(
         x0y0,
         x1y0,
@@ -612,9 +612,9 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
-    final <vectorType> vn = <opClass>.normalize(v0);
-    final <scalarRealType> m = <opClass>.magnitude(vn);
+    var v0 = gen.next();
+    var vn = <opClass>.normalize(v0);
+    var m = <opClass>.magnitude(vn);
 
     if (<testOpClass>.compareReal(m, <testOpClass>.constant("0")) > 0) {
       <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), m);
@@ -635,15 +635,15 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
-    final <scalarRealType> r = gen.next().x();
+    var v0 = gen.next();
+    var r = gen.next().x();
 
-    <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.x(), r);
-    <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.y(), r);
-    <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.z(), r);
-    <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.w(), r);
+    var ex = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.x(), r);
+    var ey = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.y(), r);
+    var ez = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.z(), r);
+    var ew = (<vectorComponentType>) <testOpClass>.multiplyReal(v0.w(), r);
 
-    final <vectorType> v2 = <opClass>.scale(v0, r);
+    var v2 = <opClass>.scale(v0, r);
     <testOpClass>.checkAlmostEquals(ex, v2.x());
     <testOpClass>.checkAlmostEquals(ey, v2.y());
     <testOpClass>.checkAlmostEquals(ez, v2.z());
@@ -655,8 +655,8 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
-    final <vectorType> v1 = <opClass>.scale(v0, <testOpClass>.constant("0"));
+    var v0 = gen.next();
+    var v1 = <opClass>.scale(v0, <testOpClass>.constant("0"));
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.x());
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.y());
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.z());
@@ -668,8 +668,8 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
-    final <vectorType> v1 = <opClass>.scale(v0, <testOpClass>.constant("1"));
+    var v0 = gen.next();
+    var v1 = <opClass>.scale(v0, <testOpClass>.constant("1"));
     Assertions.assertEquals(v0, v1);
   }
 
@@ -678,15 +678,15 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> v0 = gen.next();
-    final <vectorType> v1 = gen.next();
+    var v0 = gen.next();
+    var v1 = gen.next();
 
-    <vectorComponentType> ex = (<vectorComponentType>) <testOpClass>.subtract(v0.x(), v1.x());
-    <vectorComponentType> ey = (<vectorComponentType>) <testOpClass>.subtract(v0.y(), v1.y());
-    <vectorComponentType> ez = (<vectorComponentType>) <testOpClass>.subtract(v0.z(), v1.z());
-    <vectorComponentType> ew = (<vectorComponentType>) <testOpClass>.subtract(v0.w(), v1.w());
+    var ex = (<vectorComponentType>) <testOpClass>.subtract(v0.x(), v1.x());
+    var ey = (<vectorComponentType>) <testOpClass>.subtract(v0.y(), v1.y());
+    var ez = (<vectorComponentType>) <testOpClass>.subtract(v0.z(), v1.z());
+    var ew = (<vectorComponentType>) <testOpClass>.subtract(v0.w(), v1.w());
 
-    final <vectorType> v2 = <opClass>.subtract(v0, v1);
+    var v2 = <opClass>.subtract(v0, v1);
     <testOpClass>.checkAlmostEquals(ex, v2.x());
     <testOpClass>.checkAlmostEquals(ey, v2.y());
     <testOpClass>.checkAlmostEquals(ez, v2.z());
@@ -699,9 +699,9 @@ public final class <className>
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
-    final <vectorType> a = gen.next();
+    var a = gen.next();
     final <vectorConversionType> b = <opClass>.toUnparameterized(a);
-    final <vectorType> c = <opClass>.toParameterized(b);
+    var c = <opClass>.toParameterized(b);
 
     Assertions.assertEquals(a.x(), b.x());
     Assertions.assertEquals(a.y(), b.y());

@@ -72,42 +72,42 @@ public final class <className>
   @Test
   public void testEqualsHashCodeToString()
   {
-    final <quaternionType> q0 =
+    final var q0 =
       <quaternionType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
         <testOpClass>.constant("2"),
         <testOpClass>.constant("3"));
 
-    final <quaternionType> q1 =
+    final var q1 =
       <quaternionType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
         <testOpClass>.constant("2"),
         <testOpClass>.constant("3"));
 
-    final <quaternionType> q2 =
+    final var q2 =
       <quaternionType>.of(
         <testOpClass>.constant("10"),
         <testOpClass>.constant("1"),
         <testOpClass>.constant("2"),
         <testOpClass>.constant("3"));
 
-    final <quaternionType> v3 =
+    final var v3 =
       <quaternionType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("11"),
         <testOpClass>.constant("2"),
         <testOpClass>.constant("3"));
 
-    final <quaternionType> v4 =
+    final var v4 =
       <quaternionType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
         <testOpClass>.constant("12"),
         <testOpClass>.constant("3"));
 
-    final <quaternionType> v5 =
+    final var v5 =
       <quaternionType>.of(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
@@ -144,7 +144,7 @@ public final class <className>
   @Test
   public void testBuilder()
   {
-    final <quaternionType> q0 =
+    final var q0 =
       <quaternionType>.builder()
       .setX(<testOpClass>.constant("0"))
       .setY(<testOpClass>.constant("1"))
@@ -158,7 +158,7 @@ public final class <className>
     <testOpClass>.checkEquals(<testOpClass>.constant("3"), q0.w());
 
     {
-      final <quaternionType> q1 =
+      final var q1 =
         <quaternionType>.builder()
         .from(q0)
         .build();
@@ -170,7 +170,7 @@ public final class <className>
   public void testBuilderFailure()
   {
     Assertions.assertThrows(IllegalStateException.class, () -> {
-        final <quaternionType> q0 =
+        final var q0 =
           <quaternionType>.builder()
           .build();
     });
@@ -180,15 +180,15 @@ public final class <className>
   public void testAdd()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
-    final <quaternionType> q0 = gen.next();
-    final <quaternionType> q1 = gen.next();
+    final var q0 = gen.next();
+    final var q1 = gen.next();
 
-    <quaternionComponentType> ex = (<quaternionComponentType>) <testOpClass>.add(q0.x(), q1.x());
-    <quaternionComponentType> ey = (<quaternionComponentType>) <testOpClass>.add(q0.y(), q1.y());
-    <quaternionComponentType> ez = (<quaternionComponentType>) <testOpClass>.add(q0.z(), q1.z());
-    <quaternionComponentType> ew = (<quaternionComponentType>) <testOpClass>.add(q0.w(), q1.w());
+    var ex = (<quaternionComponentType>) <testOpClass>.add(q0.x(), q1.x());
+    var ey = (<quaternionComponentType>) <testOpClass>.add(q0.y(), q1.y());
+    var ez = (<quaternionComponentType>) <testOpClass>.add(q0.z(), q1.z());
+    var ew = (<quaternionComponentType>) <testOpClass>.add(q0.w(), q1.w());
 
-    final <quaternionType> q2 = <opClass>.add(q0, q1);
+    final var q2 = <opClass>.add(q0, q1);
     <testOpClass>.checkAlmostEquals(ex, q2.x());
     <testOpClass>.checkAlmostEquals(ey, q2.y());
     <testOpClass>.checkAlmostEquals(ez, q2.z());
@@ -204,12 +204,12 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = gen.next();
-    final <quaternionType> q1 = gen.next();
-    final <quaternionType> q2 = gen.next();
+    final var q0 = gen.next();
+    final var q1 = gen.next();
+    final var q2 = gen.next();
 
-    final <quaternionType> qr0 = <opClass>.add(<opClass>.add(q0, q1), q2);
-    final <quaternionType> qr1 = <opClass>.add(q0, <opClass>.add(q1, q2));
+    final var qr0 = <opClass>.add(<opClass>.add(q0, q1), q2);
+    final var qr1 = <opClass>.add(q0, <opClass>.add(q1, q2));
 
     <testOpClass>.checkAlmostEquals(qr0.x(), qr1.x());
     <testOpClass>.checkAlmostEquals(qr0.y(), qr1.y());
@@ -226,11 +226,11 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = gen.next();
-    final <quaternionType> q1 = gen.next();
+    final var q0 = gen.next();
+    final var q1 = gen.next();
 
-    final <quaternionType> qr0 = <opClass>.add(q0, q1);
-    final <quaternionType> qr1 = <opClass>.add(q1, q0);
+    final var qr0 = <opClass>.add(q0, q1);
+    final var qr1 = <opClass>.add(q1, q0);
 
     <testOpClass>.checkAlmostEquals(qr0.x(), qr1.x());
     <testOpClass>.checkAlmostEquals(qr0.y(), qr1.y());
@@ -247,8 +247,8 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = gen.next();
-    final <quaternionType> qr0 = <opClass>.add(q0, <opClass>.negate(q0));
+    final var q0 = gen.next();
+    final var qr0 = <opClass>.add(q0, <opClass>.negate(q0));
 
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.x());
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.y());
@@ -260,15 +260,15 @@ public final class <className>
   public void testConjugate()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
-    final <quaternionType> q0 = gen.next();
+    final var q0 = gen.next();
 
-    final <quaternionType> q1 = <opClass>.conjugate(q0);
+    final var q1 = <opClass>.conjugate(q0);
     <testOpClass>.checkAlmostEquals(<testOpClass>.negate(q0.x()), q1.x());
     <testOpClass>.checkAlmostEquals(<testOpClass>.negate(q0.y()), q1.y());
     <testOpClass>.checkAlmostEquals(<testOpClass>.negate(q0.z()), q1.z());
     <testOpClass>.checkAlmostEquals(q0.w(), q1.w());
 
-    final <quaternionType> q2 = <opClass>.conjugate(q1);
+    final var q2 = <opClass>.conjugate(q1);
     <testOpClass>.checkAlmostEquals(q0.x(), q2.x());
     <testOpClass>.checkAlmostEquals(q0.y(), q2.y());
     <testOpClass>.checkAlmostEquals(q0.z(), q2.z());
@@ -280,7 +280,7 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = gen.next();
+    final var q0 = gen.next();
 
     <testOpClass>.checkAlmostEquals(
       <opClass>.magnitudeSquared(q0),
@@ -292,13 +292,13 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = gen.next();
-    final <quaternionType> q1 = gen.next();
+    final var q0 = gen.next();
+    final var q1 = gen.next();
 
-    final <quaternionType> q2 =
+    final var q2 =
       <opClass>.interpolateLinear(q0, q1, <testOpClass>.constant("0"));
 
-    final <quaternionType> q3 =
+    final var q3 =
       <opClass>.interpolateLinear(q0, q1, <testOpClass>.constant("1"));
 
     <testOpClass>.checkAlmostEquals(q0.x(), q2.x());
@@ -317,13 +317,13 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = <opClass>.normalize(gen.next());
-    final <quaternionType> q1 = <opClass>.normalize(gen.next());
+    final var q0 = <opClass>.normalize(gen.next());
+    final var q1 = <opClass>.normalize(gen.next());
 
-    final <quaternionType> q2 =
+    final var q2 =
       <opClass>.interpolateSphericalLinear(q0, q1, <testOpClass>.constant("0"));
 
-    final <quaternionType> q3 =
+    final var q3 =
       <opClass>.interpolateSphericalLinear(q0, q1, <testOpClass>.constant("1"));
 
     if (!<opClass>.isNegationOf(<testOpClass>::almostEquals, q0, q2)) {
@@ -378,8 +378,8 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = gen.next();
-    final <quaternionType> vn = <opClass>.normalize(q0);
+    final var q0 = gen.next();
+    final var vn = <opClass>.normalize(q0);
     final <scalarRealType> m = <opClass>.magnitude(vn);
 
     if (<testOpClass>.compareReal(m, <testOpClass>.constant("0")) > 0) {
@@ -398,12 +398,12 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = gen.next();
-    final <quaternionType> q1 = gen.next();
-    final <quaternionType> q2 = gen.next();
+    final var q0 = gen.next();
+    final var q1 = gen.next();
+    final var q2 = gen.next();
 
-    final <quaternionType> qr0 = <opClass>.multiply(<opClass>.multiply(q0, q1), q2);
-    final <quaternionType> qr1 = <opClass>.multiply(q0, <opClass>.multiply(q1, q2));
+    final var qr0 = <opClass>.multiply(<opClass>.multiply(q0, q1), q2);
+    final var qr1 = <opClass>.multiply(q0, <opClass>.multiply(q1, q2));
 
     <testOpClass>.checkAlmostEquals(qr0.x(), qr1.x());
     <testOpClass>.checkAlmostEquals(qr0.y(), qr1.y());
@@ -420,8 +420,8 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = <opClass>.normalize(gen.next());
-    final <quaternionType> qr0 = <opClass>.normalize(<opClass>.multiply(q0, <opClass>.conjugate(q0)));
+    final var q0 = <opClass>.normalize(gen.next());
+    final var qr0 = <opClass>.normalize(<opClass>.multiply(q0, <opClass>.conjugate(q0)));
 
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.x());
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.y());
@@ -444,9 +444,9 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 =
+    final var q0 =
       <opClass>.normalize(gen.next());
-    final <quaternionType> q1 =
+    final var q1 =
       <opClass>.normalize(
         <opClass>.ofAxisAngle(
           q0.x(), q0.y(), q0.z(), <testOpClass>.constant("0")));
@@ -460,7 +460,7 @@ public final class <className>
   @Test
   public void testMakeAxisAngleX_45()
   {
-    final <quaternionType> q =
+    final var q =
       <opClass>.ofAxisAngle(
         <testOpClass>.constant("1"),
         <testOpClass>.constant("0"),
@@ -482,7 +482,7 @@ public final class <className>
   @Test
   public void testMakeAxisAngleX_90()
   {
-    final <quaternionType> q =
+    final var q =
       <opClass>.ofAxisAngle(
         <testOpClass>.constant("1"),
         <testOpClass>.constant("0"),
@@ -504,7 +504,7 @@ public final class <className>
   @Test
   public void testMakeAxisAngleY_45()
   {
-    final <quaternionType> q =
+    final var q =
       <opClass>.ofAxisAngle(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
@@ -526,7 +526,7 @@ public final class <className>
   @Test
   public void testMakeAxisAngleY_90()
   {
-    final <quaternionType> q =
+    final var q =
       <opClass>.ofAxisAngle(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("1"),
@@ -548,7 +548,7 @@ public final class <className>
   @Test
   public void testMakeAxisAngleZ_45()
   {
-    final <quaternionType> q =
+    final var q =
       <opClass>.ofAxisAngle(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("0"),
@@ -570,7 +570,7 @@ public final class <className>
   @Test
   public void testMakeAxisAngleZ_90()
   {
-    final <quaternionType> q =
+    final var q =
       <opClass>.ofAxisAngle(
         <testOpClass>.constant("0"),
         <testOpClass>.constant("0"),
@@ -594,15 +594,15 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = gen.next();
+    final var q0 = gen.next();
     final <scalarRealType> r = gen.next().x();
 
-    <quaternionComponentType> ex = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.x(), r);
-    <quaternionComponentType> ey = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.y(), r);
-    <quaternionComponentType> ez = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.z(), r);
-    <quaternionComponentType> ew = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.w(), r);
+    var ex = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.x(), r);
+    var ey = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.y(), r);
+    var ez = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.z(), r);
+    var ew = (<quaternionComponentType>) <testOpClass>.multiplyReal(q0.w(), r);
 
-    final <quaternionType> q2 = <opClass>.scale(q0, r);
+    final var q2 = <opClass>.scale(q0, r);
     <testOpClass>.checkAlmostEquals(ex, q2.x());
     <testOpClass>.checkAlmostEquals(ey, q2.y());
     <testOpClass>.checkAlmostEquals(ez, q2.z());
@@ -614,8 +614,8 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = gen.next();
-    final <quaternionType> q1 = <opClass>.scale(q0, <testOpClass>.constant("0"));
+    final var q0 = gen.next();
+    final var q1 = <opClass>.scale(q0, <testOpClass>.constant("0"));
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), q1.x());
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), q1.y());
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), q1.z());
@@ -627,8 +627,8 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = gen.next();
-    final <quaternionType> q1 = <opClass>.scale(q0, <testOpClass>.constant("1"));
+    final var q0 = gen.next();
+    final var q1 = <opClass>.scale(q0, <testOpClass>.constant("1"));
     Assertions.assertEquals(q0, q1);
   }
 
@@ -637,15 +637,15 @@ public final class <className>
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
-    final <quaternionType> q0 = gen.next();
-    final <quaternionType> q1 = gen.next();
+    final var q0 = gen.next();
+    final var q1 = gen.next();
 
-    <quaternionComponentType> ex = (<quaternionComponentType>) <testOpClass>.subtract(q0.x(), q1.x());
-    <quaternionComponentType> ey = (<quaternionComponentType>) <testOpClass>.subtract(q0.y(), q1.y());
-    <quaternionComponentType> ez = (<quaternionComponentType>) <testOpClass>.subtract(q0.z(), q1.z());
-    <quaternionComponentType> ew = (<quaternionComponentType>) <testOpClass>.subtract(q0.w(), q1.w());
+    var ex = (<quaternionComponentType>) <testOpClass>.subtract(q0.x(), q1.x());
+    var ey = (<quaternionComponentType>) <testOpClass>.subtract(q0.y(), q1.y());
+    var ez = (<quaternionComponentType>) <testOpClass>.subtract(q0.z(), q1.z());
+    var ew = (<quaternionComponentType>) <testOpClass>.subtract(q0.w(), q1.w());
 
-    final <quaternionType> q2 = <opClass>.subtract(q0, q1);
+    final var q2 = <opClass>.subtract(q0, q1);
     <testOpClass>.checkAlmostEquals(ex, q2.x());
     <testOpClass>.checkAlmostEquals(ey, q2.y());
     <testOpClass>.checkAlmostEquals(ez, q2.z());
@@ -655,7 +655,7 @@ public final class <className>
   @PercentPassing
   public void testToMatrix4x4Identity()
   {
-    final <quaternionType> q = <opClass>.identity();
+    final var q = <opClass>.identity();
     final <matrix4x4Type> m = <opClass>.toMatrix4x4(q);
     <testOpClass>.checkAlmostEqualsMatrix(<matrix4x4OpClass>.identity(), m);
   }
@@ -667,7 +667,7 @@ public final class <className>
     final <vector3Type> v_axis = <vector3OpClass>.normalize(gen.next());
     final <scalarRealType> angle = gen.next().x();
 
-    final <quaternionType> q =
+    final var q =
       <opClass>.ofAxisAngle(v_axis.x(), v_axis.y(), v_axis.z(), angle);
     final <matrix4x4Type> m_a =
       <opClass>.toMatrix4x4(q);
@@ -684,7 +684,7 @@ public final class <className>
     final <vector3Type> v_axis = <vector3OpClass>.normalize(gen.next());
     final <scalarRealType> angle = gen.next().x();
 
-    final <quaternionType> q =
+    final var q =
       <opClass>.ofAxisAngle(v_axis.x(), v_axis.y(), v_axis.z(), angle);
     final <matrix4x4Type> m_a =
       <opClass>.toMatrix4x4(q);
@@ -702,7 +702,7 @@ public final class <className>
   @PercentPassing
   public void testToPMatrix4x4Identity()
   {
-    final <quaternionType> q = <opClass>.identity();
+    final var q = <opClass>.identity();
     final <matrix4x4ParameterizedType> m = <opClass>.toPMatrix4x4(q);
     <testOpClass>.checkAlmostEqualsMatrix(<matrix4x4ParameterizedOpClass>.identity(), m);
   }
@@ -714,7 +714,7 @@ public final class <className>
     final <vector3Type> v_axis = <vector3OpClass>.normalize(gen.next());
     final <scalarRealType> angle = gen.next().x();
 
-    final <quaternionType> q =
+    final var q =
       <opClass>.ofAxisAngle(v_axis.x(), v_axis.y(), v_axis.z(), angle);
     final <matrix4x4ParameterizedType> m_a =
       <opClass>.toPMatrix4x4(q);
@@ -731,7 +731,7 @@ public final class <className>
     final <vector3Type> v_axis = <vector3OpClass>.normalize(gen.next());
     final <scalarRealType> angle = gen.next().x();
 
-    final <quaternionType> q =
+    final var q =
       <opClass>.ofAxisAngle(v_axis.x(), v_axis.y(), v_axis.z(), angle);
     final <matrix4x4ParameterizedType> m_a =
       <opClass>.toPMatrix4x4(q);
@@ -759,11 +759,11 @@ public final class <className>
     final <vector3Type> axis = <vector3OpClass>.normalize(gen.next());
     final <scalarRealType> angle = gen.next().x();
 
-    final <quaternionType> q0 =
+    final var q0 =
       <opClass>.ofAxisAngle(axis.x(), axis.y(), axis.z(), angle);
     final <matrix4x4Type> m0 =
       <matrix4x4OpClass>.ofAxisAngle(axis.x(), axis.y(), axis.z(), angle);
-    final <quaternionType> q1 =
+    final var q1 =
       <opClass>.ofMatrix4x4(m0);
 
     if (<opClass>.isNegationOf(<testOpClass>::almostEquals, q0, q1)) {
@@ -789,11 +789,11 @@ public final class <className>
     final <vector3Type> axis = <vector3OpClass>.normalize(gen.next());
     final <scalarRealType> angle = gen.next().x();
 
-    final <quaternionType> q0 =
+    final var q0 =
       <opClass>.ofAxisAngle(axis.x(), axis.y(), axis.z(), angle);
     final <matrix4x4ParameterizedType> m0 =
       <matrix4x4ParameterizedOpClass>.ofAxisAngle(axis.x(), axis.y(), axis.z(), angle);
-    final <quaternionType> q1 =
+    final var q1 =
       <opClass>.ofPMatrix4x4(m0);
 
     if (<opClass>.isNegationOf(<testOpClass>::almostEquals, q0, q1)) {
@@ -814,8 +814,8 @@ public final class <className>
   public void testIsNegationOfNegated()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
-    final <quaternionType> q0 = gen.next();
-    final <quaternionType> q1 = <opClass>.negate(q0);
+    final var q0 = gen.next();
+    final var q1 = <opClass>.negate(q0);
     Assertions.assertTrue(<opClass>.isNegationOf((x,y) -> <testOpClass>.almostEquals(x, y), q0, q1));
   }
 }
