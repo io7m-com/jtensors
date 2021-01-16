@@ -504,7 +504,7 @@ public final class <className>
   /**
    * Subtract {@code v1} from {@code v0}.
    *
-   * @return {@code (v0.x - v1.x, v0.y - v0.y, v0.z - v1.z, v0.w - v1.w) }
+   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w) }
    * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
    * <endif>
