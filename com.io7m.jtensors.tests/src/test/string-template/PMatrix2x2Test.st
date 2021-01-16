@@ -1284,6 +1284,33 @@ public final class <className>
     });
   }
 
+  @PercentPassing
+  public void testWithers()
+  {
+    final Generator\<<matrixType>\> gen = createGenerator();
+
+    final var m0 = gen.next();
+    final var m1 = gen.next();
+    final var m2 = m0
+      .withR0c0(m1.r0c0())
+      .withR0c1(m1.r0c1())
+      .withR1c0(m1.r1c0())
+      .withR1c1(m1.r1c1())
+      ;
+
+    Assertions.assertEquals(m1, m2);
+  }
+
+  @PercentPassing
+  public void testCopyOf()
+  {
+    final Generator\<<matrixType>\> gen = createGenerator();
+
+    final var v0 = gen.next();
+    final var v1 = <matrixType>.copyOf(v0);
+    Assertions.assertEquals(v0, v1);
+  }
+
   <if(hasGeneric)>
   @PercentPassing
   public void testConversionsParameterized()

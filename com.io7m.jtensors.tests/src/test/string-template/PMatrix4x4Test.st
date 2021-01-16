@@ -2538,6 +2538,55 @@ public final class <className>
     });
   }
 
+  @PercentPassing
+  public void testWithers()
+  {
+    final Generator\<<matrixType>\> gen = createGenerator();
+
+    final var m0 = gen.next();
+    final var m1 = gen.next();
+    final var m2 = m0
+      .withR0c0(m1.r0c0())
+      .withR0c1(m1.r0c1())
+      .withR0c2(m1.r0c2())
+      .withR0c3(m1.r0c3())
+      .withR1c0(m1.r1c0())
+      .withR1c1(m1.r1c1())
+      .withR1c2(m1.r1c2())
+      .withR1c3(m1.r1c3())
+      .withR2c0(m1.r2c0())
+      .withR2c1(m1.r2c1())
+      .withR2c2(m1.r2c2())
+      .withR2c3(m1.r2c3())
+      .withR3c0(m1.r3c0())
+      .withR3c1(m1.r3c1())
+      .withR3c2(m1.r3c2())
+      .withR3c3(m1.r3c3())
+      ;
+
+    Assertions.assertEquals(m1, m2);
+  }
+
+  @PercentPassing
+  public void testCopyOf()
+  {
+    final Generator\<<matrixType>\> gen = createGenerator();
+
+    final var v0 = gen.next();
+    final var v1 = <matrixType>.copyOf(v0);
+    Assertions.assertEquals(v0, v1);
+  }
+
+  @PercentPassing
+  public void testBuilderFrom()
+  {
+    final Generator\<<matrixType>\> gen = createGenerator();
+
+    final var v0 = gen.next();
+    final var v1 = <matrixType>.builder().from(v0).build();
+    Assertions.assertEquals(v0, v1);
+  }
+
   <if(hasGeneric)>
   @PercentPassing
   public void testConversionsParameterized()

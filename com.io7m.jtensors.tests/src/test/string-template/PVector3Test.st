@@ -716,6 +716,27 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(ez, v2.z());
   }
 
+  @PercentPassing
+  public void testWithXYZ()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final var v0 = gen.next();
+    final var v1 = gen.next();
+    final var v2 = v0.withX(v1.x()).withY(v1.y()).withZ(v1.z());
+    Assertions.assertEquals(v1, v2);
+  }
+
+  @PercentPassing
+  public void testCopyOf()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    final var v0 = gen.next();
+    final var v1 = <vectorType>.copyOf(v0);
+    Assertions.assertEquals(v0, v1);
+  }
+
   <if(hasGeneric)>
   @PercentPassing
   public void testConversionsParameterized()
