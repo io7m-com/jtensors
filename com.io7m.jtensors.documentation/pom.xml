@@ -9,7 +9,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>com.io7m.jtensors</artifactId>
-    <version>10.0.0-SNAPSHOT</version>
+    <version>10.0.0</version>
   </parent>
 
   <artifactId>com.io7m.jtensors.documentation</artifactId>
@@ -17,7 +17,7 @@
 
   <name>com.io7m.jtensors.documentation</name>
   <description>Vector/matrix math package (Documentation)</description>
-  <url>http://io7m.github.io/jtensors/</url>
+  <url>https://www.github.com/io7m/jtensors/</url>
 
   <properties>
     <mdep.analyze.skip>true</mdep.analyze.skip>
