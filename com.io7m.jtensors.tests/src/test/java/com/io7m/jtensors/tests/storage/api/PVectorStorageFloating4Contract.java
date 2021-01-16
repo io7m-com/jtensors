@@ -20,9 +20,8 @@ package com.io7m.jtensors.tests.storage.api;
 import com.io7m.jtensors.core.parameterized.vectors.PVector4D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector4F;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating4Type;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
+import com.io7m.percentpass.extension.PercentPassing;
 import net.java.quickcheck.Generator;
-import org.junit.Test;
 
 public abstract class PVectorStorageFloating4Contract
 {
@@ -36,8 +35,8 @@ public abstract class PVectorStorageFloating4Contract
     double x,
     double y);
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet4()
   {
     final Generator<PVector4D<Object>> gen = this.createGenerator4D();
@@ -52,8 +51,8 @@ public abstract class PVectorStorageFloating4Contract
     this.checkAlmostEquals(v.w(), sv.w());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet4D()
   {
     final Generator<PVector4D<Object>> gen = this.createGenerator4D();
@@ -68,8 +67,8 @@ public abstract class PVectorStorageFloating4Contract
     this.checkAlmostEquals(v.w(), sv.w());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet4F()
   {
     final Generator<PVector4F<Object>> gen = this.createGenerator4F();

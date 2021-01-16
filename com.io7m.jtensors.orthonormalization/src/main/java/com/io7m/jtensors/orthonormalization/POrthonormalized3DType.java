@@ -16,7 +16,7 @@
 
 package com.io7m.jtensors.orthonormalization;
 
-import com.io7m.jtensors.core.JTensorsImmutableStyleType;
+import com.io7m.immutables.styles.ImmutablesStyleType;
 import com.io7m.jtensors.core.parameterized.vectors.PVector3D;
 import org.immutables.value.Value;
 
@@ -26,7 +26,7 @@ import org.immutables.value.Value;
  * @param <T> A phantom type parameter
  */
 
-@JTensorsImmutableStyleType
+@ImmutablesStyleType
 @Value.Immutable
 public interface POrthonormalized3DType<T>
 {

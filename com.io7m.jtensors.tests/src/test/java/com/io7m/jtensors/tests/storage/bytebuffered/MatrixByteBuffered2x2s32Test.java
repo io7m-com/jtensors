@@ -16,7 +16,6 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
-import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F;
 import com.io7m.jtensors.generators.Matrix2x2DGenerator;
@@ -24,19 +23,15 @@ import com.io7m.jtensors.generators.Matrix2x2FGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.matrices.MatrixStorage2x2Type;
 import com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2Type;
 import com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered2x2s32;
-import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestFOps;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.mutable.numbers.core.MutableLong;
 import net.java.quickcheck.Generator;
-import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class MatrixByteBuffered2x2s32Test
   extends MatrixByteBuffered2x2Contract
 {
-  @Rule public final PercentagePassRule percent =
-    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
 
   @Override
   protected MatrixStorage2x2Type create(

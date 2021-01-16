@@ -17,7 +17,6 @@
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
 
-import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.parameterized.vectors.PVector4I;
 import com.io7m.jtensors.core.parameterized.vectors.PVector4L;
 import com.io7m.jtensors.generators.PVector4IGenerator;
@@ -25,19 +24,15 @@ import com.io7m.jtensors.generators.PVector4LGenerator;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral4Type;
 import com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4Type;
 import com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral4s8;
-import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestLOps;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.mutable.numbers.core.MutableLong;
 import net.java.quickcheck.Generator;
-import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class PVectorByteBufferedIntegral4s8Test
   extends PVectorByteBufferedIntegral4Contract
 {
-  @Rule public final PercentagePassRule percent =
-    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
 
   @Override
   protected PVectorStorageIntegral4Type<Object> create(

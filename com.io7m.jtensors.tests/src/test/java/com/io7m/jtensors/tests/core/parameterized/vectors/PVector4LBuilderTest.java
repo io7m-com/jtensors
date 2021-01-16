@@ -19,15 +19,11 @@ package com.io7m.jtensors.tests.core.parameterized.vectors;
 import com.io7m.jtensors.core.parameterized.vectors.PVector2L;
 import com.io7m.jtensors.core.parameterized.vectors.PVector3L;
 import com.io7m.jtensors.core.parameterized.vectors.PVector4L;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public final class PVector4LBuilderTest
 {
-  @Rule public ExpectedException expected = ExpectedException.none();
-
   @Test
   public void testBuilder2L()
   {
@@ -37,21 +33,20 @@ public final class PVector4LBuilderTest
         .setZ(2L)
         .setW(3L)
         .build();
-    Assert.assertEquals(0L, v.x());
-    Assert.assertEquals(1L, v.y());
-    Assert.assertEquals(2L, v.z());
-    Assert.assertEquals(3L, v.w());
+    Assertions.assertEquals(0L, v.x());
+    Assertions.assertEquals(1L, v.y());
+    Assertions.assertEquals(2L, v.z());
+    Assertions.assertEquals(3L, v.w());
   }
 
   @Test
   public void testBuilder2LMissing()
   {
-    this.expected.expect(IllegalStateException.class);
-
-    PVector4L.builder()
-      .from(PVector2L.of(0L, 1L))
-      .build();
-    Assert.fail();
+    Assertions.assertThrows(IllegalStateException.class, () -> {
+      PVector4L.builder()
+        .from(PVector2L.of(0L, 1L))
+        .build();
+    });
   }
 
   @Test
@@ -62,21 +57,20 @@ public final class PVector4LBuilderTest
         .from(PVector3L.of(0L, 1L, 2L))
         .setW(3L)
         .build();
-    Assert.assertEquals(0L, v.x());
-    Assert.assertEquals(1L, v.y());
-    Assert.assertEquals(2L, v.z());
-    Assert.assertEquals(3L, v.w());
+    Assertions.assertEquals(0L, v.x());
+    Assertions.assertEquals(1L, v.y());
+    Assertions.assertEquals(2L, v.z());
+    Assertions.assertEquals(3L, v.w());
   }
 
   @Test
   public void testBuilder3LMissing()
   {
-    this.expected.expect(IllegalStateException.class);
-
-    PVector4L.builder()
-      .from(PVector3L.of(0L, 1L, 2L))
-      .build();
-    Assert.fail();
+    Assertions.assertThrows(IllegalStateException.class, () -> {
+      PVector4L.builder()
+        .from(PVector3L.of(0L, 1L, 2L))
+        .build();
+    });
   }
 
   @Test
@@ -86,9 +80,9 @@ public final class PVector4LBuilderTest
       PVector4L.builder()
         .from(PVector4L.of(0L, 1L, 2L, 3L))
         .build();
-    Assert.assertEquals(0L, v.x());
-    Assert.assertEquals(1L, v.y());
-    Assert.assertEquals(2L, v.z());
-    Assert.assertEquals(3L, v.w());
+    Assertions.assertEquals(0L, v.x());
+    Assertions.assertEquals(1L, v.y());
+    Assertions.assertEquals(2L, v.z());
+    Assertions.assertEquals(3L, v.w());
   }
 }

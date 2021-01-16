@@ -22,21 +22,15 @@ import com.io7m.jtensors.generators.PVector2IGenerator;
 import com.io7m.jtensors.generators.PVector2LGenerator;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral2Type;
 import com.io7m.jtensors.storage.heap.PVectorMutable2L;
-import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestLOps;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
 import com.io7m.jtensors.tests.storage.api.PVectorStorageIntegral2Contract;
 import net.java.quickcheck.Generator;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public final class PVectorMutable2LTest
   extends PVectorStorageIntegral2Contract
 {
-  @Rule public final PercentagePassRule percent =
-    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
-
   @Override
   protected PVectorStorageIntegral2Type<Object> create(
     final int offset)
@@ -72,20 +66,20 @@ public final class PVectorMutable2LTest
     final PVectorMutable2L<Object> v0_x = new PVectorMutable2L<>();
     final PVectorMutable2L<Object> v0_y = new PVectorMutable2L<>();
 
-    Assert.assertEquals(v0, v0);
-    Assert.assertEquals(v0, v1);
-    Assert.assertEquals(v0.toString(), v1.toString());
-    Assert.assertEquals((long) v0.hashCode(), (long) v1.hashCode());
+    Assertions.assertEquals(v0, v0);
+    Assertions.assertEquals(v0, v1);
+    Assertions.assertEquals(v0.toString(), v1.toString());
+    Assertions.assertEquals(v0.hashCode(), v1.hashCode());
 
     v0_x.setX(2L);
     v0_y.setY(3L);
 
-    Assert.assertNotEquals(v0, v0_x);
-    Assert.assertNotEquals(v0, v0_y);
+    Assertions.assertNotEquals(v0, v0_x);
+    Assertions.assertNotEquals(v0, v0_y);
 
-    Assert.assertNotEquals(v0.toString(), v0_x.toString());
-    Assert.assertNotEquals(v0.toString(), v0_y.toString());
-    Assert.assertNotEquals(v0, Integer.valueOf(22));
-    Assert.assertNotEquals(v0, null);
+    Assertions.assertNotEquals(v0.toString(), v0_x.toString());
+    Assertions.assertNotEquals(v0.toString(), v0_y.toString());
+    Assertions.assertNotEquals(v0, Integer.valueOf(22));
+    Assertions.assertNotEquals(v0, null);
   }
 }

@@ -16,7 +16,6 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
-import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2I;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2L;
 import com.io7m.jtensors.generators.Vector2IGenerator;
@@ -24,19 +23,15 @@ import com.io7m.jtensors.generators.Vector2LGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type;
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2Type;
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral2s64;
-import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestLOps;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.mutable.numbers.core.MutableLong;
 import net.java.quickcheck.Generator;
-import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedIntegral2s64Test
   extends VectorByteBufferedIntegral2Contract
 {
-  @Rule public final PercentagePassRule percent =
-    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
 
   @Override
   protected VectorStorageIntegral2Type create(

@@ -17,7 +17,7 @@
 package com.io7m.jtensors.tests.core;
 
 import com.io7m.junreachable.UnreachableCodeException;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 public final class TestIOps
 {
@@ -30,7 +30,7 @@ public final class TestIOps
     final long x,
     final long y)
   {
-    Assert.assertEquals(x, y);
+    Assertions.assertEquals(x, y);
   }
 
   public static void checkAlmostEquals(
@@ -55,14 +55,14 @@ public final class TestIOps
     final double x,
     final double y)
   {
-    Assert.assertEquals(x, y, 1.0e-10);
+    Assertions.assertEquals(x, y, 1.0e-10);
   }
 
   public static void checkAlmostEqualsVague(
     final double x,
     final double y)
   {
-    Assert.assertEquals(x, y, 1.0e-10);
+    Assertions.assertEquals(x, y, 1.0e-10);
   }
 
   public static int constant(

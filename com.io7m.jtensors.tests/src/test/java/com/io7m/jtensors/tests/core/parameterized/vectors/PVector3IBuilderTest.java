@@ -18,15 +18,11 @@ package com.io7m.jtensors.tests.core.parameterized.vectors;
 
 import com.io7m.jtensors.core.parameterized.vectors.PVector2I;
 import com.io7m.jtensors.core.parameterized.vectors.PVector3I;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public final class PVector3IBuilderTest
 {
-  @Rule public ExpectedException expected = ExpectedException.none();
-
   @Test
   public void testBuilder2I()
   {
@@ -35,20 +31,19 @@ public final class PVector3IBuilderTest
         .from(PVector2I.of(0, 1))
         .setZ(2)
         .build();
-    Assert.assertEquals(0L, (long) v.x());
-    Assert.assertEquals(1L, (long) v.y());
-    Assert.assertEquals(2L, (long) v.z());
+    Assertions.assertEquals(0L, v.x());
+    Assertions.assertEquals(1L, v.y());
+    Assertions.assertEquals(2L, v.z());
   }
 
   @Test
   public void testBuilder2IMissing()
   {
-    this.expected.expect(IllegalStateException.class);
-
-    PVector3I.builder()
-      .from(PVector2I.of(0, 1))
-      .build();
-    Assert.fail();
+    Assertions.assertThrows(IllegalStateException.class, () -> {
+      PVector3I.builder()
+        .from(PVector2I.of(0, 1))
+        .build();
+    });
   }
 
   @Test
@@ -58,8 +53,8 @@ public final class PVector3IBuilderTest
       PVector3I.builder()
         .from(PVector3I.of(0, 1, 2))
         .build();
-    Assert.assertEquals(0L, (long) v.x());
-    Assert.assertEquals(1L, (long) v.y());
-    Assert.assertEquals(2L, (long) v.z());
+    Assertions.assertEquals(0L, v.x());
+    Assertions.assertEquals(1L, v.y());
+    Assertions.assertEquals(2L, v.z());
   }
 }

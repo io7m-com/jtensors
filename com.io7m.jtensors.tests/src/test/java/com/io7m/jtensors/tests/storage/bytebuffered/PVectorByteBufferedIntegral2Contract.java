@@ -16,18 +16,18 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
-import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2L;
 import com.io7m.jtensors.storage.bytebuffered.PVectorByteBufferedIntegral2Type;
 import com.io7m.jtensors.tests.storage.api.PVectorStorageIntegral2Contract;
-import org.junit.Test;
+import com.io7m.mutable.numbers.core.MutableLong;
+import org.junit.jupiter.api.Test;
 
 public abstract class PVectorByteBufferedIntegral2Contract
   extends PVectorStorageIntegral2Contract
 {
   protected abstract PVectorByteBufferedIntegral2Type<Object> create(
-    final MutableLong base,
-    final int offset);
+    MutableLong base,
+    int offset);
 
   @Test
   public final void testGetSetRange()
@@ -42,7 +42,7 @@ public abstract class PVectorByteBufferedIntegral2Contract
       this.checkEquals(1L, m.y());
     }
 
-    base.setValue((long) m.sizeBytes());
+    base.setValue(m.sizeBytes());
 
     {
       this.checkEquals(0L, m.x());

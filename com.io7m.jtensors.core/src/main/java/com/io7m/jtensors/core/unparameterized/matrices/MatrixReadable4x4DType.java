@@ -145,88 +145,132 @@ public interface MatrixReadable4x4DType extends MatrixReadableDType
   {
     switch (row) {
       case 0: {
-        switch (column) {
-          case 0: {
-            return this.r0c0();
-          }
-          case 1: {
-            return this.r0c1();
-          }
-          case 2: {
-            return this.r0c2();
-          }
-          case 3: {
-            return this.r0c3();
-          }
-          default: {
-            throw new IndexOutOfBoundsException(String.format(
-              "Column %d must be in the range [0, 3]", valueOf(column)));
-          }
-        }
+        return rowColumnRow0(column);
       }
       case 1: {
-        switch (column) {
-          case 0: {
-            return this.r1c0();
-          }
-          case 1: {
-            return this.r1c1();
-          }
-          case 2: {
-            return this.r1c2();
-          }
-          case 3: {
-            return this.r1c3();
-          }
-          default: {
-            throw new IndexOutOfBoundsException(String.format(
-              "Column %d must be in the range [0, 3]", valueOf(column)));
-          }
-        }
+        return rowColumnRow1(column);
       }
       case 2: {
-        switch (column) {
-          case 0: {
-            return this.r2c0();
-          }
-          case 1: {
-            return this.r2c1();
-          }
-          case 2: {
-            return this.r2c2();
-          }
-          case 3: {
-            return this.r2c3();
-          }
-          default: {
-            throw new IndexOutOfBoundsException(String.format(
-              "Column %d must be in the range [0, 3]", valueOf(column)));
-          }
-        }
+        return rowColumnRow2(column);
       }
       case 3: {
-        switch (column) {
-          case 0: {
-            return this.r3c0();
-          }
-          case 1: {
-            return this.r3c1();
-          }
-          case 2: {
-            return this.r3c2();
-          }
-          case 3: {
-            return this.r3c3();
-          }
-          default: {
-            throw new IndexOutOfBoundsException(String.format(
-              "Column %d must be in the range [0, 3]", valueOf(column)));
-          }
-        }
+        return rowColumnRow3(column);
       }
       default: {
         throw new IndexOutOfBoundsException(String.format(
           "Row %d must be in the range [0, 3]", valueOf(row)));
+      }
+    }
+  }
+
+  /**
+   * Fetch row 3 column {@code column}
+   * @param column The column index
+   * @return The value at the row/column
+   */
+
+  private double rowColumnRow3(int column)
+  {
+    switch (column) {
+      case 0: {
+        return this.r3c0();
+      }
+      case 1: {
+        return this.r3c1();
+      }
+      case 2: {
+        return this.r3c2();
+      }
+      case 3: {
+        return this.r3c3();
+      }
+      default: {
+        throw new IndexOutOfBoundsException(String.format(
+          "Column %d must be in the range [0, 3]", valueOf(column)));
+      }
+    }
+  }
+
+  /**
+   * Fetch row 2 column {@code column}
+   * @param column The column index
+   * @return The value at the row/column
+   */
+
+  private double rowColumnRow2(int column)
+  {
+    switch (column) {
+      case 0: {
+        return this.r2c0();
+      }
+      case 1: {
+        return this.r2c1();
+      }
+      case 2: {
+        return this.r2c2();
+      }
+      case 3: {
+        return this.r2c3();
+      }
+      default: {
+        throw new IndexOutOfBoundsException(String.format(
+          "Column %d must be in the range [0, 3]", valueOf(column)));
+      }
+    }
+  }
+
+  /**
+   * Fetch row 1 column {@code column}
+   * @param column The column index
+   * @return The value at the row/column
+   */
+
+  private double rowColumnRow1(int column)
+  {
+    switch (column) {
+      case 0: {
+        return this.r1c0();
+      }
+      case 1: {
+        return this.r1c1();
+      }
+      case 2: {
+        return this.r1c2();
+      }
+      case 3: {
+        return this.r1c3();
+      }
+      default: {
+        throw new IndexOutOfBoundsException(String.format(
+          "Column %d must be in the range [0, 3]", valueOf(column)));
+      }
+    }
+  }
+
+  /**
+   * Fetch row 0 column {@code column}
+   * @param column The column index
+   * @return The value at the row/column
+   */
+
+  private double rowColumnRow0(int column)
+  {
+    switch (column) {
+      case 0: {
+        return this.r0c0();
+      }
+      case 1: {
+        return this.r0c1();
+      }
+      case 2: {
+        return this.r0c2();
+      }
+      case 3: {
+        return this.r0c3();
+      }
+      default: {
+        throw new IndexOutOfBoundsException(String.format(
+          "Column %d must be in the range [0, 3]", valueOf(column)));
       }
     }
   }

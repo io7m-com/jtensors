@@ -88,7 +88,7 @@ public final class <className>
   /**
    * Add {@code v0} to {@code v1}.
    *
-   * @return {@code (v0.x + v1.x, v0.y + v0.y, v0.z + v1.z, v0.w + v1.w) }
+   * @return {@code (v0.x + v1.x, v0.y + v1.y, v0.z + v1.z, v0.w + v1.w) }
    * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
    * <endif>
@@ -112,6 +112,36 @@ public final class <className>
       (<vectorComponentType>) <opClass>.add(v0.y(), v1.y()),
       (<vectorComponentType>) <opClass>.add(v0.z(), v1.z()),
       (<vectorComponentType>) <opClass>.add(v0.w(), v1.w()));
+  }
+
+  /**
+   * Multiply {@code v0} by {@code v1}.
+   *
+   * @return {@code (v0.x * v1.x, v0.y * v1.y, v0.z * v1.z, v0.w * v1.w) }
+   * <if(hasGeneric)>
+   * @param \<T> A phantom type parameter
+   * <endif>
+   * @param v0 The left vector
+   * @param v1 The right vector
+   * @since 10.0.0
+   */
+
+  public static
+  <if(hasGeneric)>
+  \<T> <vectorType>\<T> multiply(
+    final <vectorType>\<T> v0,
+    final <vectorType>\<T> v1)
+  <else>
+  <vectorType> multiply(
+    final <vectorType> v0,
+    final <vectorType> v1)
+  <endif>
+  {
+    return <vectorType>.of(
+      (<vectorComponentType>) <opClass>.multiply(v0.x(), v1.x()),
+      (<vectorComponentType>) <opClass>.multiply(v0.y(), v1.y()),
+      (<vectorComponentType>) <opClass>.multiply(v0.z(), v1.z()),
+      (<vectorComponentType>) <opClass>.multiply(v0.w(), v1.w()));
   }
 
   /**
@@ -474,7 +504,7 @@ public final class <className>
   /**
    * Subtract {@code v1} from {@code v0}.
    *
-   * @return {@code (v0.x - v1.x, v0.y - v0.y, v0.z - v1.z, v0.w - v1.w) }
+   * @return {@code (v0.x - v1.x, v0.y - v1.y, v0.z - v1.z, v0.w - v1.w) }
    * <if(hasGeneric)>
    * @param \<T> A phantom type parameter
    * <endif>

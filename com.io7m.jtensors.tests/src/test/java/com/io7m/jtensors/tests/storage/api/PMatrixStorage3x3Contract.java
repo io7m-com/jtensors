@@ -21,9 +21,8 @@ import com.io7m.jtensors.core.parameterized.matrices.PMatrix3x3F;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3F;
 import com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage3x3Type;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
+import com.io7m.percentpass.extension.PercentPassing;
 import net.java.quickcheck.Generator;
-import org.junit.Test;
 
 public abstract class PMatrixStorage3x3Contract
 {
@@ -41,8 +40,7 @@ public abstract class PMatrixStorage3x3Contract
     double x,
     double y);
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSetP3x3D()
   {
     final Generator<PMatrix3x3D<Object, Object>> gen = this.createGeneratorP3x3D();
@@ -64,8 +62,7 @@ public abstract class PMatrixStorage3x3Contract
     this.checkAlmostEquals(v.r2c2(), sv.r2c2());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSetP3x3F()
   {
     final Generator<PMatrix3x3F<Object, Object>> gen = this.createGeneratorP3x3F();
@@ -74,21 +71,20 @@ public abstract class PMatrixStorage3x3Contract
     final PMatrixStorage3x3Type<Object, Object> sv = this.create(0);
     sv.setPMatrix3x3F(v);
 
-    this.checkAlmostEquals((double) v.r0c0(), sv.r0c0());
-    this.checkAlmostEquals((double) v.r0c1(), sv.r0c1());
-    this.checkAlmostEquals((double) v.r0c2(), sv.r0c2());
+    this.checkAlmostEquals(v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals(v.r0c1(), sv.r0c1());
+    this.checkAlmostEquals(v.r0c2(), sv.r0c2());
 
-    this.checkAlmostEquals((double) v.r1c0(), sv.r1c0());
-    this.checkAlmostEquals((double) v.r1c1(), sv.r1c1());
-    this.checkAlmostEquals((double) v.r1c2(), sv.r1c2());
+    this.checkAlmostEquals(v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals(v.r1c1(), sv.r1c1());
+    this.checkAlmostEquals(v.r1c2(), sv.r1c2());
 
-    this.checkAlmostEquals((double) v.r2c0(), sv.r2c0());
-    this.checkAlmostEquals((double) v.r2c1(), sv.r2c1());
-    this.checkAlmostEquals((double) v.r2c2(), sv.r2c2());
+    this.checkAlmostEquals(v.r2c0(), sv.r2c0());
+    this.checkAlmostEquals(v.r2c1(), sv.r2c1());
+    this.checkAlmostEquals(v.r2c2(), sv.r2c2());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSet3x3D()
   {
     final Generator<Matrix3x3D> gen = this.createGenerator3x3D();
@@ -110,8 +106,7 @@ public abstract class PMatrixStorage3x3Contract
     this.checkAlmostEquals(v.r2c2(), sv.r2c2());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSet3x3F()
   {
     final Generator<Matrix3x3F> gen = this.createGenerator3x3F();
@@ -120,16 +115,16 @@ public abstract class PMatrixStorage3x3Contract
     final PMatrixStorage3x3Type<Object, Object> sv = this.create(0);
     sv.setMatrix3x3F(v);
 
-    this.checkAlmostEquals((double) v.r0c0(), sv.r0c0());
-    this.checkAlmostEquals((double) v.r0c1(), sv.r0c1());
-    this.checkAlmostEquals((double) v.r0c2(), sv.r0c2());
+    this.checkAlmostEquals(v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals(v.r0c1(), sv.r0c1());
+    this.checkAlmostEquals(v.r0c2(), sv.r0c2());
 
-    this.checkAlmostEquals((double) v.r1c0(), sv.r1c0());
-    this.checkAlmostEquals((double) v.r1c1(), sv.r1c1());
-    this.checkAlmostEquals((double) v.r1c2(), sv.r1c2());
+    this.checkAlmostEquals(v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals(v.r1c1(), sv.r1c1());
+    this.checkAlmostEquals(v.r1c2(), sv.r1c2());
 
-    this.checkAlmostEquals((double) v.r2c0(), sv.r2c0());
-    this.checkAlmostEquals((double) v.r2c1(), sv.r2c1());
-    this.checkAlmostEquals((double) v.r2c2(), sv.r2c2());
+    this.checkAlmostEquals(v.r2c0(), sv.r2c0());
+    this.checkAlmostEquals(v.r2c1(), sv.r2c1());
+    this.checkAlmostEquals(v.r2c2(), sv.r2c2());
   }
 }

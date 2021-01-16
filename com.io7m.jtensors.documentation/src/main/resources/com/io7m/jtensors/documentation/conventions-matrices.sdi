@@ -24,20 +24,19 @@ The available matrix types include:
 
 [formal-item [title Matrix types] [id conventions.matrices.available]]
 [list-unordered
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix2D.html"] Matrix2x2D]]
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix3D.html"] Matrix3x3D]]
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix4D.html"] Matrix4x4D]]
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix2F.html"] Matrix2x2F]]
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix3F.html"] Matrix3x3F]]
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix4F.html"] Matrix4x4F]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix2x2D.html"] Matrix2x2D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix3x3D.html"] Matrix3x3D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix4x4D.html"] Matrix4x4D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix2x2F.html"] Matrix2x2F]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix3x3F.html"] Matrix3x3F]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/unparameterized/matrices/Matrix4x4F.html"] Matrix4x4F]]
 
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix2D.html"] PMatrix2x2D]]
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix3D.html"] PMatrix3x3D]]
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix4D.html"] PMatrix4x4D]]
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix2F.html"] PMatrix2x2F]]
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix3F.html"] PMatrix3x3F]]
-  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix4F.html"] PMatrix4x4F]]]
-
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix2x2D.html"] PMatrix2x2D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix3x3D.html"] PMatrix3x3D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix4x4D.html"] PMatrix4x4D]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix2x2F.html"] PMatrix2x2F]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix3x3F.html"] PMatrix3x3F]]
+  [item [link-ext [target "apidocs/com/io7m/jtensors/core/parameterized/matrices/PMatrix4x4F.html"] PMatrix4x4F]]]
 
 [subsection [title Storage Types] [id conventions.matrices.storage_types]]
 [paragraph]

@@ -18,6 +18,9 @@
  * Unparameterized matrix storage types.
  */
 
-
+@Export
+@Version("10.0.0")
 package com.io7m.jtensors.storage.api.unparameterized.matrices;
 
+import org.osgi.annotation.bundle.Export;
+import org.osgi.annotation.versioning.Version;

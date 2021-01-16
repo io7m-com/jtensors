@@ -17,19 +17,14 @@
 package com.io7m.jtensors.tests.orthonormalization;
 
 import com.io7m.jequality.AlmostEqualDouble;
-import com.io7m.jtensors.orthonormalization.POrthonormalization;
-import com.io7m.jtensors.orthonormalization.POrthonormalized3D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector3D;
 import com.io7m.jtensors.core.parameterized.vectors.PVectors3D;
 import com.io7m.jtensors.generators.PVector3DGenerator;
-import com.io7m.jtensors.tests.TestUtilities;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
+import com.io7m.jtensors.orthonormalization.POrthonormalization;
+import com.io7m.jtensors.orthonormalization.POrthonormalized3D;
+import com.io7m.percentpass.extension.PercentPassing;
 import net.java.quickcheck.Generator;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Assertions;
 
 /**
  * Test orthonormalization.
@@ -37,18 +32,12 @@ import org.junit.rules.ExpectedException;
 
 public final class POrthonormalization3DTest
 {
-  @Rule public final ExpectedException expected = ExpectedException.none();
-
-  @Rule public PercentagePassRule percent =
-    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
-
   private static Generator<PVector3D> createGeneratorSmall()
   {
     return (Generator<PVector3D>) (Object) PVector3DGenerator.createSmall();
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testOrtho3D()
   {
     final AlmostEqualDouble.ContextRelative ec =
@@ -86,12 +75,12 @@ public final class POrthonormalization3DTest
     System.err.println("o.v1 dot o.v2   : " + v1_dot_v2);
     System.err.println("--");
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0m, 1.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1m, 1.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v2m, 1.0));
+    Assertions.assertTrue(AlmostEqualDouble.almostEqual(ec, v0m, 1.0));
+    Assertions.assertTrue(AlmostEqualDouble.almostEqual(ec, v1m, 1.0));
+    Assertions.assertTrue(AlmostEqualDouble.almostEqual(ec, v2m, 1.0));
 
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0_dot_v1, 0.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v0_dot_v2, 0.0));
-    Assert.assertTrue(AlmostEqualDouble.almostEqual(ec, v1_dot_v2, 0.0));
+    Assertions.assertTrue(AlmostEqualDouble.almostEqual(ec, v0_dot_v1, 0.0));
+    Assertions.assertTrue(AlmostEqualDouble.almostEqual(ec, v0_dot_v2, 0.0));
+    Assertions.assertTrue(AlmostEqualDouble.almostEqual(ec, v1_dot_v2, 0.0));
   }
 }

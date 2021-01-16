@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter xmlns="https://github.com/spotbugs/filter/3.0.0">
+  <Match>
+    <Or>
+      <Class name="~com\.io7m\.jtensors\.core\.unparameterized\.vectors\.Vector.*Builder"/>
+      <Class name="~com\.io7m\.jtensors\.core\.parameterized\.vectors\.PVector.*Builder"/>
+      <Class name="~com\.io7m\.jtensors\.core\.unparameterized\.matrices\.Matrix.*Builder"/>
+      <Class name="~com\.io7m\.jtensors\.core\.parameterized\.matrices\.PMatrix.*Builder"/>
+      <Class name="~com\.io7m\.jtensors\.core\.quaternions\.Quaternion.*Builder"/>
+      <And>
+        <Class name="~com\.io7m\.jtensors\.core\.parameterized\.matrices\.PMatrices.*"/>
+        <Method name="ofScale"/>
+      </And>
+      <And>
+        <Class name="~com\.io7m\.jtensors\.core\.unparameterized\.matrices\.Matrices.*"/>
+        <Method name="ofScale"/>
+      </And>
+    </Or>
+    <Bug pattern="DLS_DEAD_LOCAL_STORE" />
+  </Match>
+
+  <Match>
+    <And>
+      <Or>
+        <Class name="~com\.io7m\.jtensors\.core\.unparameterized\.vectors\.Vector.*Builder"/>
+        <Class name="~com\.io7m\.jtensors\.core\.parameterized\.vectors\.PVector.*Builder"/>
+        <Class name="~com\.io7m\.jtensors\.core\.unparameterized\.matrices\.Matrix.*Builder"/>
+        <Class name="~com\.io7m\.jtensors\.core\.parameterized\.matrices\.PMatrix.*Builder"/>
+        <Class name="~com\.io7m\.jtensors\.core\.quaternions\.Quaternion.*Builder"/>
+      </Or>
+      <Method name="from"/>
+    </And>
+
+    <Bug pattern="ITC_INHERITANCE_TYPE_CHECKING" />
+  </Match>
+
+  <Match>
+    <Or>
+      <Package name="com.io7m.jtensors.core.parameterized.matrices"/>
+      <Package name="com.io7m.jtensors.core.parameterized.vectors"/>
+      <Package name="com.io7m.jtensors.core.unparameterized.matrices"/>
+      <Package name="com.io7m.jtensors.core.unparameterized.vectors"/>
+    </Or>
+    <Bug pattern="FE_FLOATING_POINT_EQUALITY" />
+  </Match>
+
+  <Match>
+    <Method name="hashCode"/>
+    <Bug pattern="USBR_UNNECESSARY_STORE_BEFORE_RETURN"/>
+  </Match>
+
+  <Match>
+    <Or>
+      <Bug pattern="OCP_OVERLY_CONCRETE_PARAMETER"/>
+      <Bug pattern="OPM_OVERLY_PERMISSIVE_METHOD"/>
+      <Bug pattern="CE_CLASS_ENVY"/>
+      <Bug pattern="MRC_METHOD_RETURNS_CONSTANT"/>
+      <Bug pattern="PRMC_POSSIBLY_REDUNDANT_METHOD_CALLS"/>
+      <Bug pattern="IMC_IMMATURE_CLASS_NO_TOSTRING"/>
+      <Bug pattern="UMTP_UNBOUND_METHOD_TEMPLATE_PARAMETER"/>
+      <Bug pattern="UPM_UNCALLED_PRIVATE_METHOD"/>
+    </Or>
+  </Match>
+
+</FindBugsFilter>

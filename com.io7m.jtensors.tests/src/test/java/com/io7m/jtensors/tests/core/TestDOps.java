@@ -30,7 +30,7 @@ import com.io7m.jtensors.core.unparameterized.vectors.Vector2D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector3D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector4D;
 import com.io7m.junreachable.UnreachableCodeException;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,7 +68,7 @@ public final class TestDOps
       LOG.warn("received: {}", y);
     }
 
-    Assert.assertEquals(x, y);
+    Assertions.assertEquals(x, y);
   }
 
   public static <T> void checkObjectNotEquals(
@@ -80,7 +80,7 @@ public final class TestDOps
       LOG.warn("received: {}", y);
     }
 
-    Assert.assertNotEquals(x, y);
+    Assertions.assertNotEquals(x, y);
   }
 
   public static void checkAlmostEqualsMatrix(
@@ -332,7 +332,7 @@ public final class TestDOps
     final double x,
     final double y)
   {
-    Assert.assertEquals(x, y, 0.0);
+    Assertions.assertEquals(x, y, 0.0);
   }
 
   public static void checkAlmostEquals(

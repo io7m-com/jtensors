@@ -19,76 +19,73 @@ package com.io7m.jtensors.tests.core.parameterized.vectors;
 import com.io7m.jtensors.core.parameterized.vectors.PVector2D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector3D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector4D;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import com.io7m.jtensors.core.parameterized.vectors.PVectors4D;
+import com.io7m.jtensors.core.unparameterized.vectors.Vector4D;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public final class PVector4DBuilderTest
 {
-  @Rule public ExpectedException expected = ExpectedException.none();
-
   @Test
   public void testBuilder2D()
   {
-    final PVector4D<Object> v =
+    final var v =
       PVector4D.builder()
         .from(PVector2D.of(0.0, 1.0))
         .setZ(2.0)
         .setW(3.0)
         .build();
-    Assert.assertEquals(0.0, v.x(), 0.0);
-    Assert.assertEquals(1.0, v.y(), 0.0);
-    Assert.assertEquals(2.0, v.z(), 0.0);
-    Assert.assertEquals(3.0, v.w(), 0.0);
+    Assertions.assertEquals(0.0, v.x(), 0.0);
+    Assertions.assertEquals(1.0, v.y(), 0.0);
+    Assertions.assertEquals(2.0, v.z(), 0.0);
+    Assertions.assertEquals(3.0, v.w(), 0.0);
   }
 
   @Test
   public void testBuilder2DMissing()
   {
-    this.expected.expect(IllegalStateException.class);
-
-    PVector4D.builder()
-      .from(PVector2D.of(0.0, 1.0))
-      .build();
-    Assert.fail();
+    Assertions.assertThrows(IllegalStateException.class, () -> {
+      PVector4D.builder()
+        .from(PVector2D.of(0.0, 1.0))
+        .build();
+    });
   }
 
   @Test
   public void testBuilder3D()
   {
-    final PVector4D<Object> v =
+    final var v =
       PVector4D.builder()
         .from(PVector3D.of(0.0, 1.0, 2.0))
         .setW(3.0)
         .build();
-    Assert.assertEquals(0.0, v.x(), 0.0);
-    Assert.assertEquals(1.0, v.y(), 0.0);
-    Assert.assertEquals(2.0, v.z(), 0.0);
-    Assert.assertEquals(3.0, v.w(), 0.0);
+    Assertions.assertEquals(0.0, v.x(), 0.0);
+    Assertions.assertEquals(1.0, v.y(), 0.0);
+    Assertions.assertEquals(2.0, v.z(), 0.0);
+    Assertions.assertEquals(3.0, v.w(), 0.0);
   }
 
   @Test
   public void testBuilder3DMissing()
   {
-    this.expected.expect(IllegalStateException.class);
-
-    PVector4D.builder()
-      .from(PVector3D.of(0.0, 1.0, 2.0))
-      .build();
-    Assert.fail();
+    Assertions.assertThrows(IllegalStateException.class, () -> {
+      PVector4D.builder()
+        .from(PVector3D.of(0.0, 1.0, 2.0))
+        .build();
+      Assertions.fail();
+    });
   }
 
   @Test
   public void testBuilder4D()
   {
-    final PVector4D<Object> v =
+    final var v =
       PVector4D.builder()
         .from(PVector4D.of(0.0, 1.0, 2.0, 3.0))
         .build();
-    Assert.assertEquals(0.0, v.x(), 0.0);
-    Assert.assertEquals(1.0, v.y(), 0.0);
-    Assert.assertEquals(2.0, v.z(), 0.0);
-    Assert.assertEquals(3.0, v.w(), 0.0);
+    Assertions.assertEquals(0.0, v.x(), 0.0);
+    Assertions.assertEquals(1.0, v.y(), 0.0);
+    Assertions.assertEquals(2.0, v.z(), 0.0);
+    Assertions.assertEquals(3.0, v.w(), 0.0);
   }
 }

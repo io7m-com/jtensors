@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
 
-  <appender
-    name="STDERR"
-    class="ch.qos.logback.core.ConsoleAppender">
+  <appender name="STDERR"
+            class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
       <pattern>%level %logger{128}: %msg%n</pattern>
     </encoder>

@@ -19,9 +19,8 @@ package com.io7m.jtensors.tests.storage.api;
 import com.io7m.jtensors.core.parameterized.vectors.PVector4I;
 import com.io7m.jtensors.core.parameterized.vectors.PVector4L;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageIntegral4Type;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
+import com.io7m.percentpass.extension.PercentPassing;
 import net.java.quickcheck.Generator;
-import org.junit.Test;
 
 public abstract class PVectorStorageIntegral4Contract
 {
@@ -35,8 +34,8 @@ public abstract class PVectorStorageIntegral4Contract
     long x,
     long y);
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet4()
   {
     final Generator<PVector4L<Object>> gen = this.createGenerator4L();
@@ -51,8 +50,8 @@ public abstract class PVectorStorageIntegral4Contract
     this.checkEquals(v.w(), sv.w());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet4L()
   {
     final Generator<PVector4L<Object>> gen = this.createGenerator4L();
@@ -67,8 +66,8 @@ public abstract class PVectorStorageIntegral4Contract
     this.checkEquals(v.w(), sv.w());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet4I()
   {
     final Generator<PVector4I<Object>> gen = this.createGenerator4I();

@@ -19,9 +19,8 @@ package com.io7m.jtensors.tests.storage.api;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2F;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating2Type;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
+import com.io7m.percentpass.extension.PercentPassing;
 import net.java.quickcheck.Generator;
-import org.junit.Test;
 
 public abstract class VectorStorageFloating2Contract
 {
@@ -35,8 +34,8 @@ public abstract class VectorStorageFloating2Contract
     double x,
     double y);
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet2()
   {
     final Generator<Vector2D> gen = this.createGenerator2D();
@@ -49,8 +48,8 @@ public abstract class VectorStorageFloating2Contract
     this.checkAlmostEquals(v.y(), sv.y());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet2D()
   {
     final Generator<Vector2D> gen = this.createGenerator2D();
@@ -63,8 +62,8 @@ public abstract class VectorStorageFloating2Contract
     this.checkAlmostEquals(v.y(), sv.y());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet2F()
   {
     final Generator<Vector2F> gen = this.createGenerator2F();

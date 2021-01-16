@@ -18,5 +18,9 @@
  * Functions for orthonormalizing sets of vectors.
  */
 
+@Export
+@Version("10.0.0")
 package com.io7m.jtensors.orthonormalization;
 
+import org.osgi.annotation.bundle.Export;
+import org.osgi.annotation.versioning.Version;

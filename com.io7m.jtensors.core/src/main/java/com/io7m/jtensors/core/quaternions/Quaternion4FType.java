@@ -16,14 +16,14 @@
 
 package com.io7m.jtensors.core.quaternions;
 
-import com.io7m.jtensors.core.JTensorsImmutableStyleType;
+import com.io7m.immutables.styles.ImmutablesStyleType;
 import org.immutables.value.Value;
 
 /**
  * The type of 4D {@code float}-typed quaternions.
  */
 
-@JTensorsImmutableStyleType
+@ImmutablesStyleType
 @Value.Immutable
 public interface Quaternion4FType
   extends QuaternionReadable4FType

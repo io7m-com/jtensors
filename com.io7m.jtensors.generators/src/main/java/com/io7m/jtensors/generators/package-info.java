@@ -18,5 +18,9 @@
  * QuickCheck generators.
  */
 
+@Export
+@Version("10.0.0")
 package com.io7m.jtensors.generators;
 
+import org.osgi.annotation.bundle.Export;
+import org.osgi.annotation.versioning.Version;

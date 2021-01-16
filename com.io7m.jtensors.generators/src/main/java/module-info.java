@@ -20,6 +20,9 @@
 
 module com.io7m.jtensors.generators
 {
+  requires static org.osgi.annotation.versioning;
+  requires static org.osgi.annotation.bundle;
+
   requires com.io7m.junreachable.core;
   requires com.io7m.jtensors.core;
   requires quickcheck;

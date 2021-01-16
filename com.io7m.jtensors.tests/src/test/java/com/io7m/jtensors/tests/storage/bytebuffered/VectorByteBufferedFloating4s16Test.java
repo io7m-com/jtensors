@@ -16,7 +16,6 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
-import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector4D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector4F;
 import com.io7m.jtensors.generators.Vector4DGenerator;
@@ -24,19 +23,15 @@ import com.io7m.jtensors.generators.Vector4FGenerator;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type;
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4Type;
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating4s16;
-import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestB16Ops;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.mutable.numbers.core.MutableLong;
 import net.java.quickcheck.Generator;
-import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class VectorByteBufferedFloating4s16Test
   extends VectorByteBufferedFloating4Contract
 {
-  @Rule public final PercentagePassRule percent =
-    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
 
   @Override
   protected VectorStorageFloating4Type create(

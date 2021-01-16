@@ -21,9 +21,8 @@ import com.io7m.jtensors.core.parameterized.matrices.PMatrix2x2F;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix2x2F;
 import com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage2x2Type;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
+import com.io7m.percentpass.extension.PercentPassing;
 import net.java.quickcheck.Generator;
-import org.junit.Test;
 
 public abstract class PMatrixStorage2x2Contract
 {
@@ -41,8 +40,7 @@ public abstract class PMatrixStorage2x2Contract
     double x,
     double y);
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSetP2x2D()
   {
     final Generator<PMatrix2x2D<Object, Object>> gen = this.createGeneratorP2x2D();
@@ -58,8 +56,7 @@ public abstract class PMatrixStorage2x2Contract
     this.checkAlmostEquals(v.r1c1(), sv.r1c1());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSetP2x2F()
   {
     final Generator<PMatrix2x2F<Object, Object>> gen = this.createGeneratorP2x2F();
@@ -68,15 +65,14 @@ public abstract class PMatrixStorage2x2Contract
     final PMatrixStorage2x2Type<Object, Object> sv = this.create(0);
     sv.setPMatrix2x2F(v);
 
-    this.checkAlmostEquals((double) v.r0c0(), sv.r0c0());
-    this.checkAlmostEquals((double) v.r0c1(), sv.r0c1());
+    this.checkAlmostEquals(v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals(v.r0c1(), sv.r0c1());
 
-    this.checkAlmostEquals((double) v.r1c0(), sv.r1c0());
-    this.checkAlmostEquals((double) v.r1c1(), sv.r1c1());
+    this.checkAlmostEquals(v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals(v.r1c1(), sv.r1c1());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSet2x2D()
   {
     final Generator<Matrix2x2D> gen = this.createGenerator2x2D();
@@ -92,8 +88,7 @@ public abstract class PMatrixStorage2x2Contract
     this.checkAlmostEquals(v.r1c1(), sv.r1c1());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSet2x2F()
   {
     final Generator<Matrix2x2F> gen = this.createGenerator2x2F();
@@ -102,10 +97,10 @@ public abstract class PMatrixStorage2x2Contract
     final PMatrixStorage2x2Type<Object, Object> sv = this.create(0);
     sv.setMatrix2x2F(v);
 
-    this.checkAlmostEquals((double) v.r0c0(), sv.r0c0());
-    this.checkAlmostEquals((double) v.r0c1(), sv.r0c1());
+    this.checkAlmostEquals(v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals(v.r0c1(), sv.r0c1());
 
-    this.checkAlmostEquals((double) v.r1c0(), sv.r1c0());
-    this.checkAlmostEquals((double) v.r1c1(), sv.r1c1());
+    this.checkAlmostEquals(v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals(v.r1c1(), sv.r1c1());
   }
 }

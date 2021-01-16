@@ -17,7 +17,6 @@
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
 
-import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4D;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
@@ -29,19 +28,15 @@ import com.io7m.jtensors.generators.PMatrix4x4FGenerator;
 import com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage4x4Type;
 import com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4Type;
 import com.io7m.jtensors.storage.bytebuffered.PMatrixByteBuffered4x4s32;
-import com.io7m.jtensors.tests.TestUtilities;
 import com.io7m.jtensors.tests.core.TestFOps;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
+import com.io7m.mutable.numbers.core.MutableLong;
 import net.java.quickcheck.Generator;
-import org.junit.Rule;
 
 import java.nio.ByteBuffer;
 
 public final class PMatrixByteBuffered4x4s32Test
   extends PMatrixByteBuffered4x4Contract
 {
-  @Rule public final PercentagePassRule percent =
-    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
 
   @Override
   protected PMatrixStorage4x4Type<Object, Object> create(

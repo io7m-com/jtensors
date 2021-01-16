@@ -58,6 +58,13 @@ final class PVectorDOps
     return value0 - value1;
   }
 
+  static double multiply(
+    final double value0,
+    final double value1)
+  {
+    return value0 * value1;
+  }
+
   static double multiplyReal(
     final double value0,
     final double value1)
