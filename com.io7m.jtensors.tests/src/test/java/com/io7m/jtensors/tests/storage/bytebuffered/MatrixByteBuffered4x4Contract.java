@@ -16,18 +16,18 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
-import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
 import com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered4x4Type;
 import com.io7m.jtensors.tests.storage.api.MatrixStorage4x4Contract;
-import org.junit.Test;
+import com.io7m.mutable.numbers.core.MutableLong;
+import org.junit.jupiter.api.Test;
 
 public abstract class MatrixByteBuffered4x4Contract extends
   MatrixStorage4x4Contract
 {
   protected abstract MatrixByteBuffered4x4Type create(
-    final MutableLong base,
-    final int offset);
+    MutableLong base,
+    int offset);
 
   @Test
   public final void testGetSetRange()
@@ -45,13 +45,13 @@ public abstract class MatrixByteBuffered4x4Contract extends
       int index = 0;
       for (int row = 0; row < 4; ++row) {
         for (int column = 0; column < 4; ++column) {
-          this.checkAlmostEquals((double) index, m.rowColumn(row, column));
+          this.checkAlmostEquals(index, m.rowColumn(row, column));
           ++index;
         }
       }
     }
 
-    base.setValue((long) m.sizeBytes());
+    base.setValue(m.sizeBytes());
 
     {
       for (int row = 0; row < 4; ++row) {
@@ -71,7 +71,7 @@ public abstract class MatrixByteBuffered4x4Contract extends
       int index = 0;
       for (int row = 0; row < 4; ++row) {
         for (int column = 0; column < 4; ++column) {
-          this.checkAlmostEquals((double) index, m.rowColumn(row, column));
+          this.checkAlmostEquals(index, m.rowColumn(row, column));
           ++index;
         }
       }
@@ -83,7 +83,7 @@ public abstract class MatrixByteBuffered4x4Contract extends
       int index = 0;
       for (int row = 0; row < 4; ++row) {
         for (int column = 0; column < 4; ++column) {
-          this.checkAlmostEquals((double) index, m.rowColumn(row, column));
+          this.checkAlmostEquals(index, m.rowColumn(row, column));
           ++index;
         }
       }

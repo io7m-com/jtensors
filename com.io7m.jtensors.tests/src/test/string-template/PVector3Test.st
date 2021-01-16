@@ -35,13 +35,9 @@ import com.io7m.junreachable.UnreachableCodeException;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.QuickCheck;
 import net.java.quickcheck.characteristic.AbstractCharacteristic;
-import org.junit.Test;
-import org.junit.Assert;
-import org.junit.rules.ExpectedException;
-import org.junit.Rule;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
-import com.io7m.jtensors.tests.TestUtilities;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import com.io7m.percentpass.extension.PercentPassing;
 
 /**
  * \<p>Unit tests for {@link <vectorType>} values.\</p>
@@ -51,11 +47,6 @@ import com.io7m.jtensors.tests.TestUtilities;
 
 public final class <className>
 {
-  @Rule public final ExpectedException expected = ExpectedException.none();
-
-  @Rule public PercentagePassRule percent =
-    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
-
   private static Generator\<<vectorType>\> createGenerator()
   {
     final Object o_gen = <generatorType>.create();
@@ -101,23 +92,23 @@ public final class <className>
         <testOpClass>.constant("1"),
         <testOpClass>.constant("12"));
 
-    Assert.assertEquals(v0, v0);
-    Assert.assertEquals(v0, v1);
-    Assert.assertNotEquals(v0, v2);
-    Assert.assertNotEquals(v0, v3);
-    Assert.assertNotEquals(v0, v4);
-    Assert.assertNotEquals(v0, null);
-    Assert.assertNotEquals(v0, Integer.valueOf(23));
+    Assertions.assertEquals(v0, v0);
+    Assertions.assertEquals(v0, v1);
+    Assertions.assertNotEquals(v0, v2);
+    Assertions.assertNotEquals(v0, v3);
+    Assertions.assertNotEquals(v0, v4);
+    Assertions.assertNotEquals(v0, null);
+    Assertions.assertNotEquals(v0, Integer.valueOf(23));
 
-    Assert.assertEquals(v0.toString(), v1.toString());
-    Assert.assertNotEquals(v0.toString(), v2.toString());
-    Assert.assertNotEquals(v0.toString(), v3.toString());
-    Assert.assertNotEquals(v0.toString(), v4.toString());
+    Assertions.assertEquals(v0.toString(), v1.toString());
+    Assertions.assertNotEquals(v0.toString(), v2.toString());
+    Assertions.assertNotEquals(v0.toString(), v3.toString());
+    Assertions.assertNotEquals(v0.toString(), v4.toString());
 
-    Assert.assertEquals(v0.hashCode(), v1.hashCode());
-    Assert.assertNotEquals(v0.hashCode(), v2.hashCode());
-    Assert.assertNotEquals(v0.hashCode(), v3.hashCode());
-    Assert.assertNotEquals(v0.hashCode(), v4.hashCode());
+    Assertions.assertEquals(v0.hashCode(), v1.hashCode());
+    Assertions.assertNotEquals(v0.hashCode(), v2.hashCode());
+    Assertions.assertNotEquals(v0.hashCode(), v3.hashCode());
+    Assertions.assertNotEquals(v0.hashCode(), v4.hashCode());
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), v0.x());
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), v0.y());
@@ -143,7 +134,7 @@ public final class <className>
         <vectorType>.builder()
         .from(v0)
         .build();
-      Assert.assertEquals(v0, v1);
+      Assertions.assertEquals(v0, v1);
     }
 
     {
@@ -151,7 +142,7 @@ public final class <className>
         <vectorType>.builder()
         .from((<vectorReadable3Type>) v0)
         .build();
-      Assert.assertEquals(v0, v1);
+      Assertions.assertEquals(v0, v1);
     }
 
     {
@@ -160,24 +151,21 @@ public final class <className>
         .setZ(<testOpClass>.constant("2"))
         .from((<vectorReadable2Type>) v0)
         .build();
-      Assert.assertEquals(v0, v1);
+      Assertions.assertEquals(v0, v1);
     }
   }
 
   @Test
   public void testBuilderFailure()
   {
-    this.expected.expect(IllegalStateException.class);
-
-    final <vectorType> v0 =
-      <vectorType>.builder()
-      .build();
-
-    Assert.fail();
+    Assertions.assertThrows(IllegalStateException.class, () -> {
+        final <vectorType> v0 =
+          <vectorType>.builder()
+          .build();
+    });
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testAbsolute()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -194,8 +182,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(ez, v1.z());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testAdd()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -216,8 +203,7 @@ public final class <className>
    * ∀ v0 v1 v2. add(add(v0, v1), v2) == add(v0, add(v1, v2))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testAddAssociative()
   {
     final Generator\<<vectorType>\> gen = createGeneratorSmall();
@@ -238,8 +224,7 @@ public final class <className>
    * ∀ v0 v1. add(v0, v1) == add(v1, v0)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testAddCommutative()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -259,8 +244,7 @@ public final class <className>
    * ∀ v0. add(v0, negate(v0)) == (0, 0, 0)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testAddNegationZero()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -273,8 +257,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), vr0.z());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testAddScaled()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -379,8 +362,7 @@ public final class <className>
    * ∀ a b. crossProduct(a, b) == crossProduct(negate(b), a)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testCrossProductAnticommutative()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -400,8 +382,7 @@ public final class <className>
    * ∀ a b c. crossProduct(a, add(b, c)) == add(crossProduct(a, b), crossProduct(a, c))
    */
 
-  @Test
-  @PercentagePassing(passPercent = 97)
+  @PercentPassing(passPercent = 97)
   public void testCrossProductDistributive()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -424,8 +405,7 @@ public final class <className>
    * ∀ a b c. crossProduct(scale(a, c), b) == scale(crossProduct(a, b), c)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testCrossProductScale0()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -448,8 +428,7 @@ public final class <className>
    * ∀ a b c. scale(crossProduct(a, b), c) == crossProduct(a, scale(b, c))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testCrossProductScale1()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -468,8 +447,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(vr0.z(), vr1.z());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testDistanceZero()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -481,8 +459,7 @@ public final class <className>
       <opClass>.distance(v0, v0));
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testDotProductSelfMagnitudeSquared()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -494,8 +471,7 @@ public final class <className>
       <opClass>.dotProduct(v0, v0));
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testInterpolateLinearLimits()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -518,8 +494,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(v1.z(), v3.z());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testInterpolateBilinearLimitsX0Y0()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -550,8 +525,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(x0y0.z(), r.z());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testInterpolateBilinearLimitsX1Y0()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -582,8 +556,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(x1y0.z(), r.z());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testInterpolateBilinearLimitsX0Y1()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -614,8 +587,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(x0y1.z(), r.z());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testInterpolateBilinearLimitsX1Y1()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -666,11 +638,10 @@ public final class <className>
   @Test
   public void testNormalizeZero()
   {
-    Assert.assertEquals(<opClass>.zero(), <opClass>.normalize(<opClass>.zero()));
+    Assertions.assertEquals(<opClass>.zero(), <opClass>.normalize(<opClass>.zero()));
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMagnitudeNormalizeOne()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -682,13 +653,12 @@ public final class <className>
     if (<testOpClass>.compareReal(m, <testOpClass>.constant("0")) > 0) {
       <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), m);
     } else {
-      Assert.assertEquals(v0, vn);
+      Assertions.assertEquals(v0, vn);
     }
   }
   <endif>
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testScale()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -706,8 +676,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(ez, v2.z());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testScaleZero()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -719,19 +688,17 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), v1.z());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testScaleOne()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
 
     final <vectorType> v0 = gen.next();
     final <vectorType> v1 = <opClass>.scale(v0, <testOpClass>.constant("1"));
-    Assert.assertEquals(v0, v1);
+    Assertions.assertEquals(v0, v1);
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testSubtract()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -750,8 +717,7 @@ public final class <className>
   }
 
   <if(hasGeneric)>
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testConversionsParameterized()
   {
     final Generator\<<vectorType>\> gen = createGenerator();
@@ -760,10 +726,10 @@ public final class <className>
     final <vectorConversionType> b = <opClass>.toUnparameterized(a);
     final <vectorType> c = <opClass>.toParameterized(b);
 
-    Assert.assertEquals(a.x(), b.x());
-    Assert.assertEquals(a.y(), b.y());
-    Assert.assertEquals(a.z(), b.z());
-    Assert.assertEquals(a, c);
+    Assertions.assertEquals(a.x(), b.x());
+    Assertions.assertEquals(a.y(), b.y());
+    Assertions.assertEquals(a.z(), b.z());
+    Assertions.assertEquals(a, c);
   }
   <endif>
 }

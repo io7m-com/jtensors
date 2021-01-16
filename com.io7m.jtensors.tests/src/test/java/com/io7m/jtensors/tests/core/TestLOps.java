@@ -18,7 +18,7 @@ package com.io7m.jtensors.tests.core;
 
 import com.io7m.jequality.AlmostEqualDouble;
 import com.io7m.junreachable.UnreachableCodeException;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +49,7 @@ public final class TestLOps
     final long x,
     final long y)
   {
-    Assert.assertEquals(x, y);
+    Assertions.assertEquals(x, y);
   }
 
   public static void checkAlmostEquals(

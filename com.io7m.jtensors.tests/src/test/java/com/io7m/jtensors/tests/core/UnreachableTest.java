@@ -20,8 +20,6 @@ import com.io7m.jtensors.core.determinants.Determinants;
 import com.io7m.jtensors.core.dotproducts.DotProductsDouble;
 import com.io7m.jtensors.core.dotproducts.DotProductsInt;
 import com.io7m.jtensors.core.dotproducts.DotProductsLong;
-import com.io7m.jtensors.orthonormalization.Orthonormalization;
-import com.io7m.jtensors.orthonormalization.POrthonormalization;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrices2x2D;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrices2x2F;
 import com.io7m.jtensors.core.parameterized.matrices.PMatrices3x3D;
@@ -60,19 +58,17 @@ import com.io7m.jtensors.core.unparameterized.vectors.Vectors4D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vectors4F;
 import com.io7m.jtensors.core.unparameterized.vectors.Vectors4I;
 import com.io7m.jtensors.core.unparameterized.vectors.Vectors4L;
+import com.io7m.jtensors.orthonormalization.Orthonormalization;
+import com.io7m.jtensors.orthonormalization.POrthonormalization;
 import com.io7m.junreachable.UnreachableCodeException;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public final class UnreachableTest
 {
-  @Rule public final ExpectedException expected = ExpectedException.none();
-
   private static void callPrivate(
     final Class<?> c)
     throws Throwable
@@ -92,7 +88,6 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.parameterized.vectors.PVectorDOps");
-    Assert.fail();
   }
 
   @Test
@@ -101,7 +96,7 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.parameterized.vectors.PVectorFOps");
-    Assert.fail();
+
   }
 
   @Test
@@ -110,7 +105,7 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.parameterized.vectors.PVectorIOps");
-    Assert.fail();
+
   }
 
   @Test
@@ -119,7 +114,7 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.parameterized.vectors.PVectorLOps");
-    Assert.fail();
+
   }
 
   @Test
@@ -128,7 +123,7 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.parameterized.matrices.PMatrixDOps");
-    Assert.fail();
+
   }
 
   @Test
@@ -137,7 +132,7 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.parameterized.matrices.PMatrixFOps");
-    Assert.fail();
+
   }
 
   @Test
@@ -146,7 +141,7 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.unparameterized.matrices.MatrixDOps");
-    Assert.fail();
+
   }
 
   @Test
@@ -155,7 +150,7 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.unparameterized.matrices.MatrixFOps");
-    Assert.fail();
+
   }
 
   @Test
@@ -163,7 +158,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Orthonormalization.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -171,7 +166,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(POrthonormalization.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -179,7 +174,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors4D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -187,7 +182,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors3D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -195,7 +190,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors2D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -203,7 +198,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors4F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -211,7 +206,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors3F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -219,7 +214,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors2F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -227,7 +222,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors4L.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -235,7 +230,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors3L.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -243,7 +238,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors2L.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -251,7 +246,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors4I.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -259,7 +254,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors3I.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -267,7 +262,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PVectors2I.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -275,7 +270,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PMatrices4x4D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -283,7 +278,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PMatrices3x3D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -291,7 +286,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PMatrices2x2D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -299,7 +294,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Matrices4x4D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -307,7 +302,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Matrices3x3D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -315,7 +310,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Matrices2x2D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -323,7 +318,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PMatrices4x4F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -331,7 +326,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PMatrices3x3F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -339,7 +334,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(PMatrices2x2F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -347,7 +342,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Matrices4x4F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -355,7 +350,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Matrices3x3F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -363,7 +358,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Matrices2x2F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -371,7 +366,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Determinants.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -379,7 +374,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(DotProductsDouble.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -387,7 +382,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(DotProductsInt.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -395,7 +390,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(DotProductsLong.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -403,7 +398,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors4D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -411,7 +406,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors3D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -419,7 +414,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors2D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -427,7 +422,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors4F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -435,7 +430,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors3F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -443,7 +438,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors2F.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -451,7 +446,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors4L.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -459,7 +454,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors3L.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -467,7 +462,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors2L.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -475,7 +470,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors4I.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -483,7 +478,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors3I.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -491,7 +486,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Vectors2I.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -500,7 +495,7 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.unparameterized.vectors.VectorDOps");
-    Assert.fail();
+
   }
 
   @Test
@@ -509,7 +504,7 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.unparameterized.vectors.VectorFOps");
-    Assert.fail();
+
   }
 
   @Test
@@ -518,7 +513,7 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.unparameterized.vectors.VectorIOps");
-    Assert.fail();
+
   }
 
   @Test
@@ -527,7 +522,6 @@ public final class UnreachableTest
   {
     this.checkUnreachableByName(
       "com.io7m.jtensors.core.unparameterized.vectors.VectorLOps");
-    Assert.fail();
   }
 
   @Test
@@ -535,7 +529,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Quaternions4D.class);
-    Assert.fail();
+
   }
 
   @Test
@@ -543,7 +537,7 @@ public final class UnreachableTest
     throws Throwable
   {
     this.checkUnreachable(Quaternions4F.class);
-    Assert.fail();
+
   }
 
   private void checkUnreachableByName(
@@ -558,7 +552,8 @@ public final class UnreachableTest
     final Class<?> c)
     throws Throwable
   {
-    this.expected.expect(UnreachableCodeException.class);
-    callPrivate(c);
+    Assertions.assertThrows(UnreachableCodeException.class, () -> {
+      callPrivate(c);
+    });
   }
 }

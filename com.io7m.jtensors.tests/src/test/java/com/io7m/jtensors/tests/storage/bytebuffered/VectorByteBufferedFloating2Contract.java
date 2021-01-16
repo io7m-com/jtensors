@@ -16,18 +16,18 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
-import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2D;
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating2Type;
 import com.io7m.jtensors.tests.storage.api.VectorStorageFloating2Contract;
-import org.junit.Test;
+import com.io7m.mutable.numbers.core.MutableLong;
+import org.junit.jupiter.api.Test;
 
 public abstract class VectorByteBufferedFloating2Contract
   extends VectorStorageFloating2Contract
 {
   protected abstract VectorByteBufferedFloating2Type create(
-    final MutableLong base,
-    final int offset);
+    MutableLong base,
+    int offset);
 
   @Test
   public final void testGetSetRange()
@@ -42,7 +42,7 @@ public abstract class VectorByteBufferedFloating2Contract
       this.checkAlmostEquals(1.0, m.y());
     }
 
-    base.setValue((long) m.sizeBytes());
+    base.setValue(m.sizeBytes());
 
     {
       this.checkAlmostEquals(0.0, m.x());

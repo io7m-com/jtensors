@@ -208,8 +208,14 @@
         <c:change compatible="false" date="2017-11-16T00:00:00+00:00" summary="Removed dependency on com.io7m.jnull."/>
       </c:changes>
     </c:release>
-    <c:release date="2021-01-13T10:31:10+00:00" is-open="true" ticket-system="com.github.io7m.jtensors" version="10.0.0">
-      <c:changes/>
+    <c:release date="2021-01-16T17:08:22+00:00" is-open="true" ticket-system="com.github.io7m.jtensors" version="10.0.0">
+      <c:changes>
+        <c:change date="2021-01-16T17:08:22+00:00" summary="Migrate to JUnit 5">
+          <c:tickets>
+            <c:ticket id="25"/>
+          </c:tickets>
+        </c:change>
+      </c:changes>
     </c:release>
   </c:releases>
   <c:ticket-systems>

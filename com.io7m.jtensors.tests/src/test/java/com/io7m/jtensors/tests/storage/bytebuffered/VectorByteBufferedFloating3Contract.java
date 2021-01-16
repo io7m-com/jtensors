@@ -16,18 +16,18 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
-import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector3D;
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedFloating3Type;
 import com.io7m.jtensors.tests.storage.api.VectorStorageFloating3Contract;
-import org.junit.Test;
+import com.io7m.mutable.numbers.core.MutableLong;
+import org.junit.jupiter.api.Test;
 
 public abstract class VectorByteBufferedFloating3Contract
   extends VectorStorageFloating3Contract
 {
   protected abstract VectorByteBufferedFloating3Type create(
-    final MutableLong base,
-    final int offset);
+    MutableLong base,
+    int offset);
 
   @Test
   public final void testGetSetRange()
@@ -43,7 +43,7 @@ public abstract class VectorByteBufferedFloating3Contract
       this.checkAlmostEquals(2.0, m.z());
     }
 
-    base.setValue((long) m.sizeBytes());
+    base.setValue(m.sizeBytes());
 
     {
       this.checkAlmostEquals(0.0, m.x());

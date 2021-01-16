@@ -34,17 +34,14 @@ package com.io7m.jtensors.tests.core.parameterized.vectors;
 
 import java.util.Objects;
 import com.io7m.jtensors.tests.TestUtilities;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
 import com.io7m.junreachable.UnreachableCodeException;
 import java.util.Optional;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.QuickCheck;
 import net.java.quickcheck.characteristic.AbstractCharacteristic;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import com.io7m.percentpass.extension.PercentPassing;
 
 /**
  * \<p>Unit tests for {@link <quaternionType>} values.\</p>
@@ -54,11 +51,6 @@ import org.junit.rules.ExpectedException;
 
 public final class <className>
 {
-  @Rule public final ExpectedException expected = ExpectedException.none();
-
-  @Rule public PercentagePassRule percent =
-    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
-
   private static Generator\<<quaternionType>\> createGenerator()
   {
     final Object o_gen = <generatorType>.create();
@@ -122,26 +114,26 @@ public final class <className>
         <testOpClass>.constant("2"),
         <testOpClass>.constant("13"));
 
-    Assert.assertEquals(q0, q0);
-    Assert.assertEquals(q0, q1);
-    Assert.assertNotEquals(q0, q2);
-    Assert.assertNotEquals(q0, v3);
-    Assert.assertNotEquals(q0, v4);
-    Assert.assertNotEquals(q0, v5);
-    Assert.assertNotEquals(q0, null);
-    Assert.assertNotEquals(q0, Integer.valueOf(23));
+    Assertions.assertEquals(q0, q0);
+    Assertions.assertEquals(q0, q1);
+    Assertions.assertNotEquals(q0, q2);
+    Assertions.assertNotEquals(q0, v3);
+    Assertions.assertNotEquals(q0, v4);
+    Assertions.assertNotEquals(q0, v5);
+    Assertions.assertNotEquals(q0, null);
+    Assertions.assertNotEquals(q0, Integer.valueOf(23));
 
-    Assert.assertEquals(q0.toString(), q1.toString());
-    Assert.assertNotEquals(q0.toString(), q2.toString());
-    Assert.assertNotEquals(q0.toString(), v3.toString());
-    Assert.assertNotEquals(q0.toString(), v4.toString());
-    Assert.assertNotEquals(q0.toString(), v5.toString());
+    Assertions.assertEquals(q0.toString(), q1.toString());
+    Assertions.assertNotEquals(q0.toString(), q2.toString());
+    Assertions.assertNotEquals(q0.toString(), v3.toString());
+    Assertions.assertNotEquals(q0.toString(), v4.toString());
+    Assertions.assertNotEquals(q0.toString(), v5.toString());
 
-    Assert.assertEquals(q0.hashCode(), q1.hashCode());
-    Assert.assertNotEquals(q0.hashCode(), q2.hashCode());
-    Assert.assertNotEquals(q0.hashCode(), v3.hashCode());
-    Assert.assertNotEquals(q0.hashCode(), v4.hashCode());
-    Assert.assertNotEquals(q0.hashCode(), v5.hashCode());
+    Assertions.assertEquals(q0.hashCode(), q1.hashCode());
+    Assertions.assertNotEquals(q0.hashCode(), q2.hashCode());
+    Assertions.assertNotEquals(q0.hashCode(), v3.hashCode());
+    Assertions.assertNotEquals(q0.hashCode(), v4.hashCode());
+    Assertions.assertNotEquals(q0.hashCode(), v5.hashCode());
 
     <testOpClass>.checkEquals(<testOpClass>.constant("0"), q0.x());
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), q0.y());
@@ -170,24 +162,21 @@ public final class <className>
         <quaternionType>.builder()
         .from(q0)
         .build();
-      Assert.assertEquals(q0, q1);
+      Assertions.assertEquals(q0, q1);
     }
   }
 
   @Test
   public void testBuilderFailure()
   {
-    this.expected.expect(IllegalStateException.class);
-
-    final <quaternionType> q0 =
-      <quaternionType>.builder()
-      .build();
-
-    Assert.fail();
+    Assertions.assertThrows(IllegalStateException.class, () -> {
+        final <quaternionType> q0 =
+          <quaternionType>.builder()
+          .build();
+    });
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testAdd()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -210,8 +199,7 @@ public final class <className>
    * ∀ q0 q1 q2. add(add(q0, q1), q2) == add(q0, add(q1, q2))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testAddAssociative()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -233,8 +221,7 @@ public final class <className>
    * ∀ q0 q1. add(q0, q1) == add(q1, q0)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testAddCommutative()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -255,8 +242,7 @@ public final class <className>
    * ∀ q0. add(q0, negate(q0)) == (0, 0, 0, 0)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testAddNegationZero()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -270,8 +256,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), qr0.w());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testConjugate()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -290,8 +275,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(q0.w(), q2.w());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testDotProductSelfMagnitudeSquared()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -303,8 +287,7 @@ public final class <className>
       <opClass>.dotProduct(q0, q0));
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testInterpolateLinearLimits()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -329,8 +312,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(q1.w(), q3.w());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testInterpolateLinearSphericalLimits()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -391,8 +373,7 @@ public final class <className>
       <opClass>.magnitude(<opClass>.identity()));
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMagnitudeNormalizeOne()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -404,7 +385,7 @@ public final class <className>
     if (<testOpClass>.compareReal(m, <testOpClass>.constant("0")) > 0) {
       <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), m);
     } else {
-      Assert.assertEquals(q0, vn);
+      Assertions.assertEquals(q0, vn);
     }
   }
 
@@ -412,8 +393,7 @@ public final class <className>
    * ∀ q0 q1 q2. multiply(multiply(q0, q1), q2) == multiply(q0, multiply(q1, q2))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyAssociative()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -435,8 +415,7 @@ public final class <className>
    * ∀ q0. multiply(q0, conjugate(q0)) == (0, 0, 0, 1)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyConjugateIdentity()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -453,15 +432,14 @@ public final class <className>
   @Test
   public void testNormalizeZero()
   {
-    Assert.assertEquals(<opClass>.zero(), <opClass>.normalize(<opClass>.zero()));
+    Assertions.assertEquals(<opClass>.zero(), <opClass>.normalize(<opClass>.zero()));
   }
 
   /**
    * ∀ q0 x y z. normalize(ofAxisAngle(x, y, z, 0)) == (0, 0, 0, 1)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testOfAxisAngleIdentity()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -611,8 +589,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(0.7071067811865475, q.w());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testScale()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -632,8 +609,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(ew, q2.w());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testScaleZero()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -646,19 +622,17 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("0"), q1.w());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testScaleOne()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
 
     final <quaternionType> q0 = gen.next();
     final <quaternionType> q1 = <opClass>.scale(q0, <testOpClass>.constant("1"));
-    Assert.assertEquals(q0, q1);
+    Assertions.assertEquals(q0, q1);
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testSubtract()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
@@ -678,8 +652,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(ew, q2.w());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testToMatrix4x4Identity()
   {
     final <quaternionType> q = <opClass>.identity();
@@ -687,8 +660,7 @@ public final class <className>
     <testOpClass>.checkAlmostEqualsMatrix(<matrix4x4OpClass>.identity(), m);
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testToMatrix4x4OfAxisAngleEquivalent()
   {
     final Generator\<<vector3Type>\> gen = createVector3Generator();
@@ -705,8 +677,7 @@ public final class <className>
     <testOpClass>.checkAlmostEqualsMatrix(m_o, m_a);
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testToMatrix4x4OfAxisAngleOrthogonal()
   {
     final Generator\<<vector3Type>\> gen = createVector3Generator();
@@ -728,8 +699,7 @@ public final class <className>
     <testOpClass>.checkAlmostEqualsMatrix(m_at, m_ai);
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testToPMatrix4x4Identity()
   {
     final <quaternionType> q = <opClass>.identity();
@@ -737,8 +707,7 @@ public final class <className>
     <testOpClass>.checkAlmostEqualsMatrix(<matrix4x4ParameterizedOpClass>.identity(), m);
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testToPMatrix4x4OfAxisAngleEquivalent()
   {
     final Generator\<<vector3Type>\> gen = createVector3Generator();
@@ -755,8 +724,7 @@ public final class <className>
     <testOpClass>.checkAlmostEqualsMatrix(m_o, m_a);
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testToPMatrix4x4OfAxisAngleOrthogonal()
   {
     final Generator\<<vector3Type>\> gen = createVector3Generator();
@@ -784,8 +752,7 @@ public final class <className>
    * Where m ≅ n can mean that m is the negation of n.
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testOfMatrix4x4()
   {
     final Generator\<<vector3Type>\> gen = createVector3Generator();
@@ -815,8 +782,7 @@ public final class <className>
    * Where m ≅ n can mean that m is the negation of n.
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testOfPMatrix4x4()
   {
     final Generator\<<vector3Type>\> gen = createVector3Generator();
@@ -844,14 +810,13 @@ public final class <className>
    * ∀ q. isNegationOf(negate(q), q) == true
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testIsNegationOfNegated()
   {
     final Generator\<<quaternionType>\> gen = createGenerator();
     final <quaternionType> q0 = gen.next();
     final <quaternionType> q1 = <opClass>.negate(q0);
-    Assert.assertTrue(<opClass>.isNegationOf((x,y) -> <testOpClass>.almostEquals(x, y), q0, q1));
+    Assertions.assertTrue(<opClass>.isNegationOf((x,y) -> <testOpClass>.almostEquals(x, y), q0, q1));
   }
 }
 >>

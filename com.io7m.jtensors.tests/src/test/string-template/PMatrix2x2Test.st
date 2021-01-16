@@ -38,19 +38,14 @@ package com.io7m.jtensors.tests.core.unparameterized.matrices;
 
 import java.util.Objects;
 import com.io7m.jtensors.tests.TestUtilities;
-import com.io7m.jtensors.tests.rules.PercentagePassRule;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
 import com.io7m.junreachable.UnreachableCodeException;
 import java.util.Optional;
 import net.java.quickcheck.Generator;
 import net.java.quickcheck.QuickCheck;
 import net.java.quickcheck.characteristic.AbstractCharacteristic;
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import com.io7m.percentpass.extension.PercentPassing;
 
 /**
  * \<p>Unit tests for {@link <matrixType>} values.\</p>
@@ -60,11 +55,6 @@ import org.junit.rules.ExpectedException;
 
 public final class <className>
 {
-  @Rule public final ExpectedException expected = ExpectedException.none();
-
-  @Rule public PercentagePassRule percent =
-    new PercentagePassRule(TestUtilities.TEST_ITERATIONS);
-
   private static Generator\<<matrixType>\> createGenerator()
   {
     final Object o_gen = <generatorType>.create();
@@ -92,12 +82,12 @@ public final class <className>
   @Test
   public void testBuilderUnspecified()
   {
-    this.expected.expect(IllegalStateException.class);
-    <matrixType>.builder().build();
+    Assertions.assertThrows(IllegalStateException.class, () -> {
+      <matrixType>.builder().build();
+    });
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testEqualsHashCodeToString()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -173,8 +163,7 @@ public final class <className>
    * ∀ a b. determinant(multiply(a, b)) == determinant(a) * determinant(b)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testDeterminantProduct()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -193,8 +182,7 @@ public final class <className>
    * ∀ a. determinant(invert(a)) == 1 / determinant(a)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testDeterminantInverse()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -214,8 +202,7 @@ public final class <className>
    * ∀ a s. s² * determinant(a) == determinant(scale(a, s))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testDeterminantScaleExponent()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -237,8 +224,7 @@ public final class <className>
    * ∀ a. determinant(a) == determinant(transpose(a))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testDeterminantTranspose()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -249,8 +235,7 @@ public final class <className>
     <testOpClass>.checkEquals(<opClass>.determinant(a), <opClass>.determinant(mt));
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testOfColumns()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -262,8 +247,7 @@ public final class <className>
     <testOpClass>.checkAlmostEqualsMatrix(a, b);
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testOfRows()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -282,7 +266,7 @@ public final class <className>
   @Test
   public void testInvertZero()
   {
-    Assert.assertFalse(<opClass>.invert(<opClass>.zero()).isPresent());
+    Assertions.assertFalse(<opClass>.invert(<opClass>.zero()).isPresent());
   }
 
   /**
@@ -302,8 +286,7 @@ public final class <className>
    * ∀ a b. invert(multiply(a, b)) == multiply(invert(b), invert(a))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testInvertProduct()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -330,8 +313,7 @@ public final class <className>
    * ∀ a. multiply(a, invert(a)) == identity()
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testInvertMultiplyIdentity()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -346,8 +328,7 @@ public final class <className>
    * ∀ a. transpose(invert(a)) == invert(transpose(a))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testInvertTranspose()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -368,8 +349,7 @@ public final class <className>
    * ∀ a. multiply(a, identity()) == a
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyIdentity0()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -385,8 +365,7 @@ public final class <className>
    * ∀ a. multiply(identity(), a) == a
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyIdentity1()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -402,8 +381,7 @@ public final class <className>
    * ∀ a. multiply(a, zero()) == zero()
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyZero0()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -419,8 +397,7 @@ public final class <className>
    * ∀ a. multiply(zero(), a) == zero()
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyZero1()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -436,8 +413,7 @@ public final class <className>
    * ∀ a b c. multiply(a, multiply(b, c)) == multiply(multiply(a, b), c)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyAssociative()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -457,8 +433,7 @@ public final class <className>
    * ∀ a b c. multiply(a, add(b, c)) == add(multiply(a, b), multiply(a, c))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyAddDistributive0()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -478,8 +453,7 @@ public final class <className>
    * ∀ a b c. multiply(add(b, c), a) == add(multiply(b, a), multiply(c, a))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyAddDistributive1()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -499,8 +473,7 @@ public final class <className>
    * ∀ a b s. scale(multiply(a, b), s) == multiply(scale(a, s), b)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyScale0()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -521,8 +494,7 @@ public final class <className>
    * ∀ a b s. multiply(scale(a, s), b) == multiply(a, scale(b, s))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyScale1()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -543,8 +515,7 @@ public final class <className>
    * ∀ v. multiplyVectorPost(identity(), v) == v
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyVectorPostIdentity()
   {
     {
@@ -574,8 +545,7 @@ public final class <className>
    * ∀ a v. multiplyVectorPost(invert(a), multiplyVectorPost(a, v)) == v
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyVectorPostIdentityInverse()
   {
     final Generator\<<matrixType>\> m_gen = createGeneratorNormal();
@@ -607,8 +577,7 @@ public final class <className>
    * ∀ x y v. multiplyVectorPost(ofScale(x, y), v) == (x, y) * v
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyVectorPostScale()
   {
     final Generator\<<vectorColumnType>\> gen = createGeneratorVectorNormal();
@@ -644,8 +613,7 @@ public final class <className>
    * ∀ v. multiplyVectorPost(ofScale(1, 1), v) == v
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testMultiplyVectorPostScaleOne()
   {
     final Generator\<<vectorColumnType>\> gen = createGeneratorVectorNormal();
@@ -675,8 +643,7 @@ public final class <className>
    * ∀ a. a == transpose(transpose(a))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testTransposeTranspose()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -691,8 +658,7 @@ public final class <className>
    * ∀ a b. transpose(add(a, b)) == add(transpose(a), transpose(b))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testTransposeAdd()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -712,8 +678,7 @@ public final class <className>
    * ∀ a b. transpose(multiply(a, b)) == multiply(transpose(b), transpose(a))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testTransposeProduct()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -744,8 +709,7 @@ public final class <className>
    * ∀ a b. trace(add(a, b)) == trace(a) + trace(b)
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testTraceAdd()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -765,8 +729,7 @@ public final class <className>
    * ∀ a b. trace(multiply(a, b)) == trace(multiply(b, a))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testTraceProduct()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -786,8 +749,7 @@ public final class <className>
    * ∀ a. trace(a) == trace(transpose(a))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testTraceTranspose()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -803,8 +765,7 @@ public final class <className>
    * ∀ a s. s * trace(a) == trace(scale(a, s))
    */
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testTraceScale()
   {
     final Generator\<<matrixType>\> gen = createGeneratorNormal();
@@ -853,8 +814,7 @@ public final class <className>
     <testOpClass>.checkEquals(<testOpClass>.constant("1"), a.rowColumn(1, 1));
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testAdd()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -874,8 +834,7 @@ public final class <className>
     }
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testSubtract()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -895,8 +854,7 @@ public final class <className>
     }
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testScale()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -915,8 +873,7 @@ public final class <className>
     }
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testRowColumnAccess()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -963,8 +920,7 @@ public final class <className>
     }
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testWithColumn0()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -1021,8 +977,7 @@ public final class <className>
     }
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testWithColumn1()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -1079,36 +1034,35 @@ public final class <className>
     }
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testWithColumnM1()
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
     <opClass>.withColumn(
       a,
       -1,
       <testOpClass>.constant("0"),
       <testOpClass>.constant("1"));
+    });
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testWithColumn3()
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
     <opClass>.withColumn(
       a,
       3,
       <testOpClass>.constant("0"),
       <testOpClass>.constant("1"));
+      });
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testWithRow0()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -1147,8 +1101,7 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(a.r1c1(), mr.r1c1());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testWithRow1()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -1187,18 +1140,18 @@ public final class <className>
     <testOpClass>.checkAlmostEquals(<testOpClass>.constant("1"), mr.r1c1());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testWithRowM1()
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
     <opClass>.withRow(
       a,
       -1,
       <testOpClass>.constant("0"),
       <testOpClass>.constant("1"));
+    });
   }
 
   @Test
@@ -1206,8 +1159,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(-1, 0);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(-1, 0);
+    });
   }
 
   @Test
@@ -1215,8 +1169,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(-1, 1);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(-1, 1);
+    });
   }
 
   @Test
@@ -1224,8 +1179,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(-1, 2);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(-1, 2);
+    });
   }
 
   @Test
@@ -1233,8 +1189,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(-1, 3);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(-1, 3);
+    });
   }
 
   @Test
@@ -1242,8 +1199,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(3, 0);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(3, 0);
+    });
   }
 
   @Test
@@ -1251,8 +1209,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(3, 1);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(3, 1);
+    });
   }
 
   @Test
@@ -1260,8 +1219,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(3, 2);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(3, 2);
+    });
   }
 
   @Test
@@ -1269,8 +1229,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(0, -1);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(0, -1);
+    });
   }
 
   @Test
@@ -1278,8 +1239,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(1, -1);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(1, -1);
+    });
   }
 
   @Test
@@ -1287,8 +1249,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(2, -1);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(2, -1);
+    });
   }
 
   @Test
@@ -1296,8 +1259,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(0, 3);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(0, 3);
+    });
   }
 
   @Test
@@ -1305,8 +1269,9 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(1, 3);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(1, 3);
+    });
   }
 
   @Test
@@ -1314,13 +1279,13 @@ public final class <className>
   {
     final <matrixType> a = <opClass>.identity();
 
-    this.expected.expect(IndexOutOfBoundsException.class);
-    a.rowColumn(2, 3);
+    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+      a.rowColumn(2, 3);
+    });
   }
 
   <if(hasGeneric)>
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public void testConversionsParameterized()
   {
     final Generator\<<matrixType>\> gen = createGenerator();
@@ -1334,7 +1299,7 @@ public final class <className>
     <testOpClass>.checkEquals(a.r1c1(), b.r1c1());
 
     final <matrixType> c = <opClass>.toParameterized(b);
-    Assert.assertEquals(a, c);
+    Assertions.assertEquals(a, c);
   }
   <endif>
 }

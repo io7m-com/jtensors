@@ -19,9 +19,8 @@ package com.io7m.jtensors.tests.storage.api;
 import com.io7m.jtensors.core.parameterized.vectors.PVector3D;
 import com.io7m.jtensors.core.parameterized.vectors.PVector3F;
 import com.io7m.jtensors.storage.api.parameterized.vectors.PVectorStorageFloating3Type;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
+import com.io7m.percentpass.extension.PercentPassing;
 import net.java.quickcheck.Generator;
-import org.junit.Test;
 
 public abstract class PVectorStorageFloating3Contract
 {
@@ -35,8 +34,8 @@ public abstract class PVectorStorageFloating3Contract
     double x,
     double y);
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet3()
   {
     final Generator<PVector3D<Object>> gen = this.createGenerator3D();
@@ -50,8 +49,8 @@ public abstract class PVectorStorageFloating3Contract
     this.checkAlmostEquals(v.z(), sv.z());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet3D()
   {
     final Generator<PVector3D<Object>> gen = this.createGenerator3D();
@@ -65,8 +64,8 @@ public abstract class PVectorStorageFloating3Contract
     this.checkAlmostEquals(v.z(), sv.z());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet3F()
   {
     final Generator<PVector3F<Object>> gen = this.createGenerator3F();

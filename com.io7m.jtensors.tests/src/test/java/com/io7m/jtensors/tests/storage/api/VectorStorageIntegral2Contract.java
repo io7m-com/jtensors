@@ -19,9 +19,8 @@ package com.io7m.jtensors.tests.storage.api;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2I;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector2L;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageIntegral2Type;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
+import com.io7m.percentpass.extension.PercentPassing;
 import net.java.quickcheck.Generator;
-import org.junit.Test;
 
 public abstract class VectorStorageIntegral2Contract
 {
@@ -35,8 +34,8 @@ public abstract class VectorStorageIntegral2Contract
     long x,
     long y);
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet2()
   {
     final Generator<Vector2L> gen = this.createGenerator2L();
@@ -49,8 +48,8 @@ public abstract class VectorStorageIntegral2Contract
     this.checkEquals(v.y(), sv.y());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet2L()
   {
     final Generator<Vector2L> gen = this.createGenerator2L();
@@ -63,8 +62,8 @@ public abstract class VectorStorageIntegral2Contract
     this.checkEquals(v.y(), sv.y());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet2I()
   {
     final Generator<Vector2I> gen = this.createGenerator2I();

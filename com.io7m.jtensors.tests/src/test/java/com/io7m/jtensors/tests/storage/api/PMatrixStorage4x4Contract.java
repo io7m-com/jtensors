@@ -21,9 +21,8 @@ import com.io7m.jtensors.core.parameterized.matrices.PMatrix4x4F;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4D;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix4x4F;
 import com.io7m.jtensors.storage.api.parameterized.matrices.PMatrixStorage4x4Type;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
+import com.io7m.percentpass.extension.PercentPassing;
 import net.java.quickcheck.Generator;
-import org.junit.Test;
 
 public abstract class PMatrixStorage4x4Contract
 {
@@ -41,8 +40,7 @@ public abstract class PMatrixStorage4x4Contract
     double x,
     double y);
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSetP4x4D()
   {
     final Generator<PMatrix4x4D<Object, Object>> gen = this.createGeneratorP4x4D();
@@ -72,8 +70,7 @@ public abstract class PMatrixStorage4x4Contract
     this.checkAlmostEquals(v.r3c3(), sv.r3c3());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSetP4x4F()
   {
     final Generator<PMatrix4x4F<Object, Object>> gen = this.createGeneratorP4x4F();
@@ -82,29 +79,28 @@ public abstract class PMatrixStorage4x4Contract
     final PMatrixStorage4x4Type<Object, Object> sv = this.create(0);
     sv.setPMatrix4x4F(v);
 
-    this.checkAlmostEquals((double) v.r0c0(), sv.r0c0());
-    this.checkAlmostEquals((double) v.r0c1(), sv.r0c1());
-    this.checkAlmostEquals((double) v.r0c2(), sv.r0c2());
-    this.checkAlmostEquals((double) v.r0c3(), sv.r0c3());
+    this.checkAlmostEquals(v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals(v.r0c1(), sv.r0c1());
+    this.checkAlmostEquals(v.r0c2(), sv.r0c2());
+    this.checkAlmostEquals(v.r0c3(), sv.r0c3());
 
-    this.checkAlmostEquals((double) v.r1c0(), sv.r1c0());
-    this.checkAlmostEquals((double) v.r1c1(), sv.r1c1());
-    this.checkAlmostEquals((double) v.r1c2(), sv.r1c2());
-    this.checkAlmostEquals((double) v.r1c3(), sv.r1c3());
+    this.checkAlmostEquals(v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals(v.r1c1(), sv.r1c1());
+    this.checkAlmostEquals(v.r1c2(), sv.r1c2());
+    this.checkAlmostEquals(v.r1c3(), sv.r1c3());
 
-    this.checkAlmostEquals((double) v.r2c0(), sv.r2c0());
-    this.checkAlmostEquals((double) v.r2c1(), sv.r2c1());
-    this.checkAlmostEquals((double) v.r2c2(), sv.r2c2());
-    this.checkAlmostEquals((double) v.r2c3(), sv.r2c3());
+    this.checkAlmostEquals(v.r2c0(), sv.r2c0());
+    this.checkAlmostEquals(v.r2c1(), sv.r2c1());
+    this.checkAlmostEquals(v.r2c2(), sv.r2c2());
+    this.checkAlmostEquals(v.r2c3(), sv.r2c3());
 
-    this.checkAlmostEquals((double) v.r3c0(), sv.r3c0());
-    this.checkAlmostEquals((double) v.r3c1(), sv.r3c1());
-    this.checkAlmostEquals((double) v.r3c2(), sv.r3c2());
-    this.checkAlmostEquals((double) v.r3c3(), sv.r3c3());
+    this.checkAlmostEquals(v.r3c0(), sv.r3c0());
+    this.checkAlmostEquals(v.r3c1(), sv.r3c1());
+    this.checkAlmostEquals(v.r3c2(), sv.r3c2());
+    this.checkAlmostEquals(v.r3c3(), sv.r3c3());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSet4x4D()
   {
     final Generator<Matrix4x4D> gen = this.createGenerator4x4D();
@@ -134,8 +130,7 @@ public abstract class PMatrixStorage4x4Contract
     this.checkAlmostEquals(v.r3c3(), sv.r3c3());
   }
 
-  @Test
-  @PercentagePassing
+  @PercentPassing
   public final void testGetSet4x4F()
   {
     final Generator<Matrix4x4F> gen = this.createGenerator4x4F();
@@ -144,24 +139,24 @@ public abstract class PMatrixStorage4x4Contract
     final PMatrixStorage4x4Type<Object, Object> sv = this.create(0);
     sv.setMatrix4x4F(v);
 
-    this.checkAlmostEquals((double) v.r0c0(), sv.r0c0());
-    this.checkAlmostEquals((double) v.r0c1(), sv.r0c1());
-    this.checkAlmostEquals((double) v.r0c2(), sv.r0c2());
-    this.checkAlmostEquals((double) v.r0c3(), sv.r0c3());
+    this.checkAlmostEquals(v.r0c0(), sv.r0c0());
+    this.checkAlmostEquals(v.r0c1(), sv.r0c1());
+    this.checkAlmostEquals(v.r0c2(), sv.r0c2());
+    this.checkAlmostEquals(v.r0c3(), sv.r0c3());
 
-    this.checkAlmostEquals((double) v.r1c0(), sv.r1c0());
-    this.checkAlmostEquals((double) v.r1c1(), sv.r1c1());
-    this.checkAlmostEquals((double) v.r1c2(), sv.r1c2());
-    this.checkAlmostEquals((double) v.r1c3(), sv.r1c3());
+    this.checkAlmostEquals(v.r1c0(), sv.r1c0());
+    this.checkAlmostEquals(v.r1c1(), sv.r1c1());
+    this.checkAlmostEquals(v.r1c2(), sv.r1c2());
+    this.checkAlmostEquals(v.r1c3(), sv.r1c3());
 
-    this.checkAlmostEquals((double) v.r2c0(), sv.r2c0());
-    this.checkAlmostEquals((double) v.r2c1(), sv.r2c1());
-    this.checkAlmostEquals((double) v.r2c2(), sv.r2c2());
-    this.checkAlmostEquals((double) v.r2c3(), sv.r2c3());
+    this.checkAlmostEquals(v.r2c0(), sv.r2c0());
+    this.checkAlmostEquals(v.r2c1(), sv.r2c1());
+    this.checkAlmostEquals(v.r2c2(), sv.r2c2());
+    this.checkAlmostEquals(v.r2c3(), sv.r2c3());
 
-    this.checkAlmostEquals((double) v.r3c0(), sv.r3c0());
-    this.checkAlmostEquals((double) v.r3c1(), sv.r3c1());
-    this.checkAlmostEquals((double) v.r3c2(), sv.r3c2());
-    this.checkAlmostEquals((double) v.r3c3(), sv.r3c3());
+    this.checkAlmostEquals(v.r3c0(), sv.r3c0());
+    this.checkAlmostEquals(v.r3c1(), sv.r3c1());
+    this.checkAlmostEquals(v.r3c2(), sv.r3c2());
+    this.checkAlmostEquals(v.r3c3(), sv.r3c3());
   }
 }

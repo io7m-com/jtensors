@@ -16,18 +16,18 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
-import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.matrices.Matrix3x3D;
 import com.io7m.jtensors.storage.bytebuffered.MatrixByteBuffered3x3Type;
 import com.io7m.jtensors.tests.storage.api.MatrixStorage3x3Contract;
-import org.junit.Test;
+import com.io7m.mutable.numbers.core.MutableLong;
+import org.junit.jupiter.api.Test;
 
 public abstract class MatrixByteBuffered3x3Contract extends
   MatrixStorage3x3Contract
 {
   protected abstract MatrixByteBuffered3x3Type create(
-    final MutableLong base,
-    final int offset);
+    MutableLong base,
+    int offset);
 
   @Test
   public final void testGetSetRange()
@@ -44,13 +44,13 @@ public abstract class MatrixByteBuffered3x3Contract extends
       int index = 0;
       for (int row = 0; row < 3; ++row) {
         for (int column = 0; column < 3; ++column) {
-          this.checkAlmostEquals((double) index, m.rowColumn(row, column));
+          this.checkAlmostEquals(index, m.rowColumn(row, column));
           ++index;
         }
       }
     }
 
-    base.setValue((long) m.sizeBytes());
+    base.setValue(m.sizeBytes());
 
     {
       for (int row = 0; row < 3; ++row) {
@@ -69,7 +69,7 @@ public abstract class MatrixByteBuffered3x3Contract extends
       int index = 0;
       for (int row = 0; row < 3; ++row) {
         for (int column = 0; column < 3; ++column) {
-          this.checkAlmostEquals((double) index, m.rowColumn(row, column));
+          this.checkAlmostEquals(index, m.rowColumn(row, column));
           ++index;
         }
       }
@@ -81,7 +81,7 @@ public abstract class MatrixByteBuffered3x3Contract extends
       int index = 0;
       for (int row = 0; row < 3; ++row) {
         for (int column = 0; column < 3; ++column) {
-          this.checkAlmostEquals((double) index, m.rowColumn(row, column));
+          this.checkAlmostEquals(index, m.rowColumn(row, column));
           ++index;
         }
       }

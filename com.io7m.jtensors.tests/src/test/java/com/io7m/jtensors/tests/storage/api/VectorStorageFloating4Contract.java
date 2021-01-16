@@ -19,9 +19,8 @@ package com.io7m.jtensors.tests.storage.api;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector4D;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector4F;
 import com.io7m.jtensors.storage.api.unparameterized.vectors.VectorStorageFloating4Type;
-import com.io7m.jtensors.tests.rules.PercentagePassing;
+import com.io7m.percentpass.extension.PercentPassing;
 import net.java.quickcheck.Generator;
-import org.junit.Test;
 
 public abstract class VectorStorageFloating4Contract
 {
@@ -35,8 +34,8 @@ public abstract class VectorStorageFloating4Contract
     double x,
     double y);
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet4()
   {
     final Generator<Vector4D> gen = this.createGenerator4D();
@@ -51,8 +50,8 @@ public abstract class VectorStorageFloating4Contract
     this.checkAlmostEquals(v.w(), sv.w());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet4D()
   {
     final Generator<Vector4D> gen = this.createGenerator4D();
@@ -67,8 +66,8 @@ public abstract class VectorStorageFloating4Contract
     this.checkAlmostEquals(v.w(), sv.w());
   }
 
-  @Test
-  @PercentagePassing
+
+  @PercentPassing
   public final void testGetSet4F()
   {
     final Generator<Vector4F> gen = this.createGenerator4F();

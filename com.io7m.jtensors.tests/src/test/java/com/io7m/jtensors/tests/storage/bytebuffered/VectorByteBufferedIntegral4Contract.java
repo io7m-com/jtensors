@@ -16,18 +16,18 @@
 
 package com.io7m.jtensors.tests.storage.bytebuffered;
 
-import com.io7m.mutable.numbers.core.MutableLong;
 import com.io7m.jtensors.core.unparameterized.vectors.Vector4L;
 import com.io7m.jtensors.storage.bytebuffered.VectorByteBufferedIntegral4Type;
 import com.io7m.jtensors.tests.storage.api.VectorStorageIntegral4Contract;
-import org.junit.Test;
+import com.io7m.mutable.numbers.core.MutableLong;
+import org.junit.jupiter.api.Test;
 
 public abstract class VectorByteBufferedIntegral4Contract
   extends VectorStorageIntegral4Contract
 {
   protected abstract VectorByteBufferedIntegral4Type create(
-    final MutableLong base,
-    final int offset);
+    MutableLong base,
+    int offset);
 
   @Test
   public final void testGetSetRange()
@@ -44,7 +44,7 @@ public abstract class VectorByteBufferedIntegral4Contract
       this.checkEquals(3L, m.w());
     }
 
-    base.setValue((long) m.sizeBytes());
+    base.setValue(m.sizeBytes());
 
     {
       this.checkEquals(0L, m.x());
