@@ -58,6 +58,13 @@ final class PVectorLOps
     return value0 - value1;
   }
 
+  static long multiply(
+    final long value0,
+    final long value1)
+  {
+    return value0 * value1;
+  }
+
   static long multiplyReal(
     final long value0,
     final double value1)

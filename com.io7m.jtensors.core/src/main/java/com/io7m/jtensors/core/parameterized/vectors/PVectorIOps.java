@@ -58,6 +58,13 @@ final class PVectorIOps
     return value0 - value1;
   }
 
+  static int multiply(
+    final int value0,
+    final int value1)
+  {
+    return value0 * value1;
+  }
+
   static int multiplyReal(
     final int value0,
     final double value1)

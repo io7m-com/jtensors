@@ -737,6 +737,24 @@ public final class <className>
     Assertions.assertEquals(v0, v1);
   }
 
+  @PercentPassing
+  public void testMultiply()
+  {
+    final Generator\<<vectorType>\> gen = createGenerator();
+
+    var v0 = gen.next();
+    var v1 = gen.next();
+
+    var ex = (<vectorComponentType>) <testOpClass>.multiply(v0.x(), v1.x());
+    var ey = (<vectorComponentType>) <testOpClass>.multiply(v0.y(), v1.y());
+    var ez = (<vectorComponentType>) <testOpClass>.multiply(v0.z(), v1.z());
+
+    var v2 = <opClass>.multiply(v0, v1);
+    <testOpClass>.checkAlmostEquals(ex, v2.x());
+    <testOpClass>.checkAlmostEquals(ey, v2.y());
+    <testOpClass>.checkAlmostEquals(ez, v2.z());
+  }
+
   <if(hasGeneric)>
   @PercentPassing
   public void testConversionsParameterized()
