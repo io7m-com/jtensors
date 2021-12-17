@@ -27,12 +27,14 @@
     <module>com.io7m.jtensors.storage.bytebuffered</module>
     <module>com.io7m.jtensors.storage.heap</module>
     <module>com.io7m.jtensors.tests</module>
+    <module>com.io7m.jtensors.benchmarking</module>
   </modules>
 
   <properties>
     <io7m.api.previousVersion>10.0.0</io7m.api.previousVersion>
     <io7m.org.immutables.version>2.8.8</io7m.org.immutables.version>
     <junit.version>5.7.0</junit.version>
+    <jmh.version>1.33</jmh.version>
   </properties>
 
   <inceptionYear>2011</inceptionYear>
@@ -168,6 +170,12 @@
         <groupId>net.java.quickcheck</groupId>
         <artifactId>quickcheck</artifactId>
         <version>0.6</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-core</artifactId>
+        <version>${jmh.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
