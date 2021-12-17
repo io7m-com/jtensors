@@ -21,6 +21,7 @@
 
   <properties>
     <checkstyle.skip>true</checkstyle.skip>
+    <bnd.baseline.skip>true</bnd.baseline.skip>
   </properties>
 
   <dependencies>
