@@ -76,4 +76,4 @@ allow the programmer to make semantically distinct values type-incompatible
 [footnote-ref conventions.vectors.phantom.article].
 
 [footnote [id conventions.vectors.phantom.article]]
-See [link-ext [target "http://io7m.com/documents/tt1-pt/"] "http://io7m.com/documents/tt1-pt/"].
+See [link-ext [target "https://www.io7m.com/documents/tt1-pt/"] "https://www.io7m.com/documents/tt1-pt/"].
