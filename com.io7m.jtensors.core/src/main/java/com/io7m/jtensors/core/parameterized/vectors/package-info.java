@@ -19,7 +19,7 @@
  */
 
 @Export
-@Version("10.0.0")
+@Version("10.1.0")
 package com.io7m.jtensors.core.parameterized.vectors;
 
 import org.osgi.annotation.bundle.Export;
