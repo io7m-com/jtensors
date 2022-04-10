@@ -32,9 +32,9 @@
 
   <properties>
     <io7m.api.previousVersion>10.0.0</io7m.api.previousVersion>
-    <io7m.org.immutables.version>2.8.8</io7m.org.immutables.version>
-    <junit.version>5.7.0</junit.version>
-    <jmh.version>1.33</jmh.version>
+    <io7m.org.immutables.version>2.9.0</io7m.org.immutables.version>
+    <junit.version>5.8.2</junit.version>
+    <jmh.version>1.35</jmh.version>
   </properties>
 
   <inceptionYear>2011</inceptionYear>
