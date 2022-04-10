@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -17,7 +18,7 @@
 
   <name>com.io7m.jtensors.documentation</name>
   <description>Vector/matrix math package (Documentation)</description>
-  <url>https://www.github.com/io7m/jtensors/</url>
+  <url>https://www.io7m.com/software/jtensors</url>
 
   <properties>
     <mdep.analyze.skip>true</mdep.analyze.skip>

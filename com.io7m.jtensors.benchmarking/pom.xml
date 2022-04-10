@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
@@ -17,7 +18,7 @@
 
   <name>com.io7m.jtensors.benchmarking</name>
   <description>Vector/matrix math package (Benchmarking)</description>
-  <url>https://www.github.com/io7m/jtensors/</url>
+  <url>https://www.io7m.com/software/jtensors</url>
 
   <properties>
     <checkstyle.skip>true</checkstyle.skip>
