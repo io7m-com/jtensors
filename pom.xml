@@ -35,16 +35,16 @@
 
   <properties>
     <io7m.api.previousVersion>10.0.0</io7m.api.previousVersion>
-    <io7m.org.immutables.version>2.9.0</io7m.org.immutables.version>
-    <junit.version>5.8.2</junit.version>
-    <jmh.version>1.35</jmh.version>
+    <io7m.org.immutables.version>2.9.3</io7m.org.immutables.version>
+    <junit.version>5.9.3</junit.version>
+    <jmh.version>1.36</jmh.version>
   </properties>
 
   <inceptionYear>2011</inceptionYear>
 
   <licenses>
     <license>
-      <name>ISC License</name>
+      <name>ISC</name>
       <url>https://www.io7m.com/license/isc.txt</url>
     </license>
   </licenses>
@@ -135,7 +135,7 @@
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.4.1</version>
+        <version>1.4.7</version>
       </dependency>
       <dependency>
         <groupId>org.osgi</groupId>
@@ -167,7 +167,7 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>2.0.1</version>
+        <version>2.0.7</version>
       </dependency>
       <dependency>
         <groupId>net.java.quickcheck</groupId>
