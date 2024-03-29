@@ -2,10 +2,10 @@ jtensors
 ===
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.io7m.jtensors/com.io7m.jtensors.svg?style=flat-square)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.io7m.jtensors%22)
-[![Maven Central (snapshot)](https://img.shields.io/nexus/s/https/s01.oss.sonatype.org/com.io7m.jtensors/com.io7m.jtensors.svg?style=flat-square)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/io7m/jtensors/)
+[![Maven Central (snapshot)](https://img.shields.io/nexus/s/com.io7m.jtensors/com.io7m.jtensors?server=https%3A%2F%2Fs01.oss.sonatype.org&style=flat-square)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/io7m/jtensors/)
 [![Codecov](https://img.shields.io/codecov/c/github/io7m/jtensors.svg?style=flat-square)](https://codecov.io/gh/io7m/jtensors)
 
-![jtensors](./src/site/resources/jtensors.jpg?raw=true)
+![com.io7m.jtensors](./src/site/resources/jtensors.jpg?raw=true)
 
 | JVM | Platform | Status |
 |-----|----------|--------|
