@@ -51,9 +51,9 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/io7m/jtensors</url>
-    <connection>scm:git:https://github.com/io7m/jtensors</connection>
-    <developerConnection>scm:git:https://github.com/io7m/jtensors</developerConnection>
+    <url>https://www.github.com/io7m-com/jtensors</url>
+    <connection>scm:git:https://www.github.com/io7m-com/jtensors</connection>
+    <developerConnection>scm:git:https://www.github.com/io7m-com/jtensors</developerConnection>
   </scm>
 
   <developers>
@@ -66,7 +66,7 @@
   </developers>
 
   <issueManagement>
-    <url>https://github.com/io7m/jtensors/issues</url>
+    <url>https://www.github.com/io7m-com/jtensors/issues</url>
     <system>GitHub Issues</system>
   </issueManagement>
 

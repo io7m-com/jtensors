@@ -225,7 +225,7 @@
     </c:release>
   </c:releases>
   <c:ticket-systems>
-    <c:ticket-system default="true" id="com.github.io7m.jtensors" url="http://github.com/io7m/jtensors/issues/"/>
+    <c:ticket-system default="true" id="com.github.io7m.jtensors" url="http://www.github.com/io7m-com/jtensors/issues/"/>
     <c:ticket-system default="false" id="com.io7m.fossil.jtensors" url="http://fossil.io7m.com/repo.cgi/io7m-jtensors/tktview?name="/>
   </c:ticket-systems>
 </c:changelog>
