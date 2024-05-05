@@ -11,3 +11,4 @@ bin
 out
 pom.xml.versionsBackup
 target
+.run

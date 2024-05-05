@@ -13,3 +13,28 @@ jtensors
 | OpenJDK (Temurin) LTS | Linux | [![Build (OpenJDK (Temurin) LTS, Linux)](https://img.shields.io/github/actions/workflow/status/io7m-com/jtensors/main.linux.temurin.lts.yml)](https://www.github.com/io7m-com/jtensors/actions?query=workflow%3Amain.linux.temurin.lts)|
 | OpenJDK (Temurin) Current | Windows | [![Build (OpenJDK (Temurin) Current, Windows)](https://img.shields.io/github/actions/workflow/status/io7m-com/jtensors/main.windows.temurin.current.yml)](https://www.github.com/io7m-com/jtensors/actions?query=workflow%3Amain.windows.temurin.current)|
 | OpenJDK (Temurin) LTS | Windows | [![Build (OpenJDK (Temurin) LTS, Windows)](https://img.shields.io/github/actions/workflow/status/io7m-com/jtensors/main.windows.temurin.lts.yml)](https://www.github.com/io7m-com/jtensors/actions?query=workflow%3Amain.windows.temurin.lts)|
+
+## jtensors
+
+The `jtensors` package package implements a set of vector and matrix types,
+intended for use in computer graphics software.
+
+## Features
+
+* 2D, 3D, and 4D immutable vector types in `float` and `double` versions.
+* 2D, 3D, and 4D immutable vector types in `int` and `long` versions.
+* 4D immutable quaternion types in `float` and `double` versions.
+* 2x2, 3x3, and 4x4 mutable matrix types in `float` and `double` versions.
+* Phantom-typed variants of all types for statically distinguishing between
+  semantically different but otherwise type-compatible vectors and matrices.
+* Fully documented (Javadoc).
+* Massive battery of tests for checking the behaviour of matrix/vector implementations.
+* 100% automated unit test coverage.
+* [OSGi-ready](https://www.osgi.org/)
+* [JPMS-ready](https://en.wikipedia.org/wiki/Java_Platform_Module_System)
+* ISC license.
+
+## Usage
+
+See the [documentation](https://www.io7m.com/software/jtensors).
+
