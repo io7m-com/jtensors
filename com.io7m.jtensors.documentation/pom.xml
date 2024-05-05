@@ -145,50 +145,34 @@
         </executions>
       </plugin>
 
-      <!-- Produce documentation -->
+      <!-- Generate documentation in various formats. -->
       <plugin>
-        <groupId>com.io7m.kstructural</groupId>
-        <artifactId>io7m-kstructural-maven-plugin</artifactId>
+        <groupId>com.io7m.xstructural</groupId>
+        <artifactId>com.io7m.xstructural.maven_plugin</artifactId>
+        <version>${com.io7m.xstructural.version}</version>
         <executions>
           <execution>
-            <id>exec-multi</id>
+            <id>xhtml-single</id>
+            <phase>package</phase>
             <goals>
-              <goal>compileXHTML</goal>
+              <goal>xhtml-single</goal>
             </goals>
-            <phase>process-resources</phase>
             <configuration>
-              <documentFile>${project.build.directory}/documentation/documentation.sd</documentFile>
-              <outputDirectory>${project.build.directory}/documentation/</outputDirectory>
-              <pagination>XHTML_MULTI_PAGE</pagination>
-              <cssExtraStyles>
-                <param>documentation.css</param>
-              </cssExtraStyles>
+              <brandingFile>${project.build.directory}/documentation/brand.xml</brandingFile>
+              <sourceFile>${project.build.directory}/documentation/main.xml</sourceFile>
+              <outputDirectory>${project.build.directory}/documentation</outputDirectory>
             </configuration>
           </execution>
           <execution>
-            <id>exec-single</id>
+            <id>xhtml-multi</id>
+            <phase>package</phase>
             <goals>
-              <goal>compileXHTML</goal>
+              <goal>xhtml-multi</goal>
             </goals>
-            <phase>process-resources</phase>
             <configuration>
-              <documentFile>${project.build.directory}/documentation/documentation.sd</documentFile>
-              <outputDirectory>${project.build.directory}/documentation/</outputDirectory>
-              <pagination>XHTML_SINGLE_PAGE</pagination>
-              <cssExtraStyles>
-                <param>documentation.css</param>
-              </cssExtraStyles>
-            </configuration>
-          </execution>
-          <execution>
-            <id>exec-plain</id>
-            <goals>
-              <goal>compilePlain</goal>
-            </goals>
-            <phase>process-resources</phase>
-            <configuration>
-              <documentFile>${project.build.directory}/documentation/documentation.sd</documentFile>
-              <outputDirectory>${project.build.directory}/documentation/</outputDirectory>
+              <brandingFile>${project.build.directory}/documentation/brand.xml</brandingFile>
+              <sourceFile>${project.build.directory}/documentation/main.xml</sourceFile>
+              <outputDirectory>${project.build.directory}/documentation</outputDirectory>
             </configuration>
           </execution>
         </executions>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Section xmlns="urn:com.io7m.structural:8:0"
+         id="437fe9d0-39c7-55bd-b12d-95025991cc4a"
+         title="API">
+
+  <Subsection id="139c23ed-988c-55f2-8916-c824339d97ed"
+           title="JavaDoc">
+    <Paragraph>
+      API documentation for the package is provided via the included
+      <LinkExternal target="apidocs">Javadoc</LinkExternal>.
+    </Paragraph>
+  </Subsection>
+
+</Section>

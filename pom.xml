@@ -34,8 +34,14 @@
   </modules>
 
   <properties>
+    <!-- Configuration. -->
     <io7m.api.previousVersion>10.0.0</io7m.api.previousVersion>
     <io7m.java.targetJavaVersion>21</io7m.java.targetJavaVersion>
+
+    <!-- io7m dependencies. -->
+    <com.io7m.xstructural.version>1.8.0</com.io7m.xstructural.version>
+
+    <!-- Third-party dependencies. -->
     <io7m.org.immutables.version>2.10.1</io7m.org.immutables.version>
     <jmh.version>1.37</jmh.version>
     <junit.version>5.10.2</junit.version>
@@ -88,7 +94,7 @@
 
   <ciManagement>
     <system>GitHub Actions</system>
-    <url>https://github.com/jtensors/actions</url>
+    <url>https://www.github.com/io7m-com/jtensors/actions</url>
   </ciManagement>
 
   <prerequisites>
@@ -200,13 +206,6 @@
               </dependency>
             </annotationProcessorPaths>
           </configuration>
-        </plugin>
-
-        <!-- KStructural Maven Plugin -->
-        <plugin>
-          <groupId>com.io7m.kstructural</groupId>
-          <artifactId>io7m-kstructural-maven-plugin</artifactId>
-          <version>0.3.1</version>
         </plugin>
 
         <!--

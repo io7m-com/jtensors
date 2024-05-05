@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Section xmlns="urn:com.io7m.structural:8:0"
+         id="361634cb-7318-5e78-abcb-28c89d0f0924"
+         title="Vectors">
+
+  <Subsection id="2c74cadb-5390-547e-a620-247466a59427"
+              title="Computation Types">
+    <Paragraph>
+      The <Term type="package">${project.parent.name}</Term> package provides
+      <Term type="term">computation</Term>
+      vectors with single-precision
+      <Term type="type">(float)</Term>
+      elements, double-precision
+      <Term type="type">(double)</Term>
+      elements, integer
+      <Term type="type">(int)</Term>, and long integer
+      <Term type="type">(long)</Term>
+      elements. Each vector type is available in two, three, and four element versions. The package unambiguously
+      identifies the vector types by using the following naming conventions for the types (given as a simple EBNF
+      grammar) :
+    </Paragraph>
+
+    <FormalItem id="b44939b9-eaae-563a-903e-1e83c3389765"
+                title="Vector type naming">
+      <Verbatim>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                    href="vectors.ebnf"
+                    parse="text"/>
+      </Verbatim>
+    </FormalItem>
+
+    <Paragraph>
+      Computation vectors are always immutable and are defined in such a way to allow the Java virtual machine to
+      efficiently inline all vector method calls and to eliminate the allocations of intermediate vectors via
+      <Term type="term">escape analysis</Term>.
+    </Paragraph>
+
+    <Paragraph>
+      The available vector types include:
+    </Paragraph>
+
+    <FormalItem id="208ff836-d9c3-59cd-8c82-1abf83dbfe80"
+                title="Vector types">
+      <ListUnordered>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2D.html">Vector2D
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3D.html">Vector3D
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4D.html">Vector4D
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2F.html">Vector2F
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3F.html">Vector3F
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4F.html">Vector4F
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2I.html">Vector2I
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3I.html">Vector3I
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4I.html">Vector4I
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector2L.html">Vector2L
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector3L.html">Vector3L
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/unparameterized/vectors/Vector4L.html">Vector4L
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2D.html">PVector2D
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3D.html">PVector3D
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4D.html">PVector4D
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2F.html">PVector2F
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3F.html">PVector3F
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4F.html">PVector4F
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2I.html">PVector2I
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3I.html">PVector3I
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4I.html">PVector4I
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector2L.html">PVector2L
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector3L.html">PVector3L
+          </LinkExternal>
+        </Item>
+        <Item>
+          <LinkExternal target="apidocs/com/io7m/jtensors/core/parameterized/vectors/PVector4L.html">PVector4L
+          </LinkExternal>
+        </Item>
+      </ListUnordered>
+    </FormalItem>
+  </Subsection>
+
+  <Subsection id="0d8ec141-f650-5169-bc5a-83d2dd699725"
+              title="Storage Types">
+    <Paragraph>
+      The <Term type="package">${project.parent.name}</Term> package provides mutable
+      <Term type="term">storage</Term>
+      vectors. A <Term type="term">storage</Term> vector is a mutable vector upon which only very simple
+      <Term type="term">get</Term>
+      and <Term type="term">set</Term> operations are defined. The intention is to allow all intermediate computations
+      to be written with immutable
+      <Link target="2c74cadb-5390-547e-a620-247466a59427">computation</Link>
+      vectors, with the final results of those computations being written to storage vectors in order to, for example,
+      be passed directly to native code without requiring copying.
+    </Paragraph>
+    <Paragraph>
+      To enumerate the available storage vector types, see the API documentation for the
+      <LinkExternal target="apidocs/com/io7m/jtensors/storage/api/VectorStorageType.html">VectorStorageType
+      </LinkExternal>
+      interface.
+    </Paragraph>
+  </Subsection>
+
+  <Subsection id="ec8fd2e6-22b9-5878-97a8-8bd4eb791213"
+              title="Phantom Types">
+    <Paragraph>The <Term type="package">${project.parent.name}</Term> package also provides copies of the existing
+      vector types indexed by a phantom type parameter in order to allow the programmer to make semantically distinct
+      values type-incompatible<LinkFootnote target="bb0c6192-92e2-52ee-878f-00960504cf1c"/>.
+    </Paragraph>
+
+  </Subsection>
+
+  <Footnote id="bb0c6192-92e2-52ee-878f-00960504cf1c">
+    See
+    <LinkExternal target="https://www.io7m.com/documents/tt1-pt/">https://www.io7m.com/documents/tt1-pt/</LinkExternal>.
+  </Footnote>
+
+</Section>

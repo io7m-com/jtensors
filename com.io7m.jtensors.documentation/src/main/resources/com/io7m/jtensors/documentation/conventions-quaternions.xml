@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Section xmlns="urn:com.io7m.structural:8:0"
+         id="d333efb7-02c5-5e21-80f6-48768324eaf3"
+         title="Quaternions">
+
+  <Paragraph>
+    The <Term type="package">${project.parent.name}</Term> package provides quaternions with single-precision <Term type="type">
+    (float)
+  </Term> elements, and double-precision
+    <Term type="type">(double)</Term>
+    elements. The package unambiguously identifies the quaternion types by using the following naming conventions for
+    the types (given as a simple EBNF grammar) :
+  </Paragraph>
+
+  <Paragraph>
+    The available quaternion types include:
+  </Paragraph>
+
+  <FormalItem id="af083315-1aee-5cb1-b3a2-3f5a89fe95f3"
+              title="Quaternion types">
+    <ListUnordered>
+      <Item>
+        <LinkExternal target="apidocs/com/io7m/jtensors/core/quaternions/Quaternion4D.html">Quaternion4D</LinkExternal>
+      </Item>
+      <Item>
+        <LinkExternal target="apidocs/com/io7m/jtensors/core/quaternions/Quaternion4F.html">Quaternion4F</LinkExternal>
+      </Item>
+    </ListUnordered>
+  </FormalItem>
+
+</Section>

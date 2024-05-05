@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Section xmlns="urn:com.io7m.structural:8:0"
+         id="ccd36f55-aef5-5887-bcd1-d47327990eca"
+         title="Package Information">
+
+  <Subsection id="648d645c-e252-5b1b-a374-fe3468f8baeb"
+              title="Orientation">
+
+    <Subsection id="35925743-17b9-533b-9da6-c7561e7054c4"
+                title="Overview">
+      <Paragraph>
+        The <Term type="package">${project.parent.name}</Term> package implements a set of efficient vector, matrix, and
+        quaternion classes intended for use in computer graphics applications.
+      </Paragraph>
+    </Subsection>
+
+    <Subsection id="b497d252-5a58-5813-bc71-085a2166ee02"
+                title="Efficiency">
+      <Paragraph>
+        The package uses simple and efficient algorithms for all operations. The design of the package distinguishes
+        between <Term type="term">computation</Term> and <Term type="term">storage</Term> tensors. This allows code that
+        computes with vectors to consist entirely of <Term type="term">static</Term>,
+        <Term type="term">monomorphic</Term>
+        method calls - the type of code that produces the best results under Java virtual machines that use JIT
+        compilation.
+      </Paragraph>
+      <Paragraph>
+        The package also provides <Term type="term">storage</Term> tensors that are backed by direct memory, allowing
+        for zero-copy sharing of structures with native code.
+      </Paragraph>
+    </Subsection>
+
+    <Subsection id="6176a94c-c74a-52e0-bfe7-6023f276f8d8"
+                title="Correctness">
+      <Paragraph>
+        The package includes a large battery of automated tests that attempt to verify the correctness of the included
+        implementations. As of the time of writing, the tests manage 100% coverage for all code.
+      </Paragraph>
+    </Subsection>
+  </Subsection>
+
+  <Subsection id="ff0ab824-a24d-5cbb-97c3-3459e8cb2ce6"
+              title="Installation">
+    <Subsection id="e606e24c-4e83-526a-a767-9645709ae05d"
+                title="Source compilation">
+      <Paragraph>
+        The project can be compiled and installed with
+        <LinkExternal target="https://maven.apache.org">Maven</LinkExternal>:
+      </Paragraph>
+      <FormalItem title="Compilation">
+        <Verbatim type="example">$ mvn -C clean install</Verbatim>
+      </FormalItem>
+    </Subsection>
+
+    <Subsection id="b26dfd98-0037-56d4-a0d8-8105a6a4e8f7"
+                title="Maven">
+      <Paragraph>
+        Regular releases are made to
+        <LinkExternal target="https://central.sonatype.com">Maven Central</LinkExternal>.
+      </Paragraph>
+      <Paragraph>
+        All <LinkExternal target="https://www.io7m.com">io7m.com</LinkExternal> packages use Semantic Versioning
+        <LinkFootnote target="0d7b40a2-77f6-5f87-8737-3246351af953"/>, which implies that it is always safe to use
+        version ranges with an exclusive upper bound equal to the next major version - the API of the package will not
+        change in a backwards-incompatible manner before the next major version.
+      </Paragraph>
+    </Subsection>
+  </Subsection>
+
+  <Subsection id="95030ed1-f75e-5407-9d07-29d84cc093fb"
+              title="Platform Specific Issues">
+    <Paragraph>
+      There are no known platform-specific issues.
+    </Paragraph>
+  </Subsection>
+
+  <Subsection id="9172eb13-f49a-5d26-8122-5dbc06b04472"
+              title="License">
+    <Paragraph>
+      All files distributed with the <Term type="package">${project.parent.name}</Term> package are placed under the
+      following license:
+    </Paragraph>
+    <FormalItem title="License">
+      <Verbatim type="license"><![CDATA[Copyright © 2023 Mark Raynsford <code@io7m.com> https://www.io7m.com
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+]]></Verbatim>
+    </FormalItem>
+  </Subsection>
+
+  <Footnote id="0d7b40a2-77f6-5f87-8737-3246351af953">
+    <LinkExternal target="https://semver.org">https://semver.org</LinkExternal>
+  </Footnote>
+
+</Section>
