@@ -12,3 +12,5 @@ out
 pom.xml.versionsBackup
 target
 .run
+.jqwik-database
+dependency-reduced-pom.xml
