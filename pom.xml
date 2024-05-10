@@ -36,7 +36,7 @@
   <properties>
     <!-- Configuration. -->
     <io7m.api.previousVersion>10.0.0</io7m.api.previousVersion>
-    <io7m.java.targetJavaVersion>11</io7m.java.targetJavaVersion>
+    <io7m.java.targetJavaVersion>17</io7m.java.targetJavaVersion>
 
     <!-- io7m dependencies. -->
     <com.io7m.xstructural.version>1.8.1</com.io7m.xstructural.version>
