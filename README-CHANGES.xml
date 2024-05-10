@@ -223,9 +223,10 @@
         <c:change compatible="false" date="2021-01-16T00:00:00+00:00" summary="Require JDK 11 and Java 11 at run-time"/>
       </c:changes>
     </c:release>
-    <c:release date="2024-05-10T13:09:24+00:00" is-open="true" ticket-system="com.github.io7m.jtensors" version="10.1.0">
+    <c:release date="2024-05-10T13:10:33+00:00" is-open="true" ticket-system="com.github.io7m.jtensors" version="11.0.0">
       <c:changes>
-        <c:change date="2024-05-10T13:09:24+00:00" summary="Move to new organization."/>
+        <c:change date="2024-05-10T00:00:00+00:00" summary="Move to new organization."/>
+        <c:change compatible="false" date="2024-05-10T13:10:33+00:00" summary="Require JDK 17."/>
       </c:changes>
     </c:release>
   </c:releases>
