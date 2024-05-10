@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 <code@io7m.com> http://io7m.com
+ * Copyright © 2017 Mark Raynsford <code@io7m.com> https://www.io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -19,7 +19,7 @@
  */
 
 @Export
-@Version("10.0.0")
+@Version("10.1.0")
 package com.io7m.jtensors.core.parameterized.vectors;
 
 import org.osgi.annotation.bundle.Export;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Section xmlns="urn:com.io7m.structural:8:0"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         id="58aa2248-b9b8-5a71-890c-3f92993503af"
+         title="Conventions">
+
+  <xi:include href="conventions-vectors.xml"/>
+  <xi:include href="conventions-matrices.xml"/>
+  <xi:include href="conventions-quaternions.xml"/>
+
+</Section>

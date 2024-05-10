@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
@@ -9,7 +10,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>com.io7m.jtensors</artifactId>
-    <version>10.0.0</version>
+    <version>11.0.0</version>
   </parent>
 
   <artifactId>com.io7m.jtensors.storage.bytebuffered</artifactId>
@@ -18,7 +19,7 @@
   <name>com.io7m.jtensors.storage.bytebuffered</name>
   <description>Vector/matrix math package (ByteBuffered tensor storage implementations)
   </description>
-  <url>https://www.github.com/io7m/jtensors/</url>
+  <url>https://www.io7m.com/software/jtensors</url>
 
   <dependencies>
     <dependency>

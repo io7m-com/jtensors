@@ -208,7 +208,7 @@
         <c:change compatible="false" date="2017-11-16T00:00:00+00:00" summary="Removed dependency on com.io7m.jnull."/>
       </c:changes>
     </c:release>
-    <c:release date="2021-01-16T18:07:15+00:00" is-open="true" ticket-system="com.github.io7m.jtensors" version="10.0.0">
+    <c:release date="2024-05-10T00:00:00+00:00" is-open="false" ticket-system="com.github.io7m.jtensors" version="10.0.0">
       <c:changes>
         <c:change date="2021-01-16T00:00:00+00:00" summary="Migrate to JUnit 5">
           <c:tickets>
@@ -220,12 +220,24 @@
             <c:ticket id="24"/>
           </c:tickets>
         </c:change>
-        <c:change compatible="false" date="2021-01-16T18:07:15+00:00" summary="Require JDK 11 and Java 11 at run-time"/>
+        <c:change compatible="false" date="2021-01-16T00:00:00+00:00" summary="Require JDK 11 and Java 11 at run-time"/>
+      </c:changes>
+    </c:release>
+    <c:release date="2024-05-10T13:15:01+00:00" is-open="false" ticket-system="com.github.io7m.jtensors" version="11.0.0">
+      <c:changes>
+        <c:change date="2024-04-19T00:00:00+00:00" summary="Update org.immutables:value:2.10.0 → 2.10.1."/>
+        <c:change date="2024-04-19T00:00:00+00:00" summary="Update junit.version:5.10.1 → 5.10.2."/>
+        <c:change date="2024-04-19T00:00:00+00:00" summary="Update org.slf4j:slf4j-api:2.0.10 → 2.0.13."/>
+        <c:change date="2024-04-19T00:00:00+00:00" summary="Update ch.qos.logback:logback-classic:1.4.14 → 1.5.6."/>
+        <c:change date="2024-05-08T00:00:00+00:00" summary="Update com.io7m.jequality:com.io7m.jequality.core:3.0.0 → 3.0.1."/>
+        <c:change date="2024-05-08T00:00:00+00:00" summary="Update com.io7m.ieee754b16:com.io7m.ieee754b16.core:3.0.0 → 3.0.1."/>
+        <c:change date="2024-05-10T00:00:00+00:00" summary="Move to new organization."/>
+        <c:change compatible="false" date="2024-05-10T00:00:00+00:00" summary="Require JDK 17."/>
       </c:changes>
     </c:release>
   </c:releases>
   <c:ticket-systems>
-    <c:ticket-system default="true" id="com.github.io7m.jtensors" url="http://github.com/io7m/jtensors/issues/"/>
+    <c:ticket-system default="true" id="com.github.io7m.jtensors" url="http://www.github.com/io7m-com/jtensors/issues/"/>
     <c:ticket-system default="false" id="com.io7m.fossil.jtensors" url="http://fossil.io7m.com/repo.cgi/io7m-jtensors/tktview?name="/>
   </c:ticket-systems>
 </c:changelog>

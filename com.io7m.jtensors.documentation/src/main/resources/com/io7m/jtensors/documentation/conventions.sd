@@ -1,4 +1,0 @@
-[part [title Conventions] [id conventions]
-  [import "conventions-vectors.sdi"]
-  [import "conventions-matrices.sdi"]
-  [import "conventions-quaternions.sdi"]]

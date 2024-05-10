@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -9,7 +10,7 @@
   <parent>
     <groupId>com.io7m.jtensors</groupId>
     <artifactId>com.io7m.jtensors</artifactId>
-    <version>10.0.0</version>
+    <version>11.0.0</version>
   </parent>
 
   <artifactId>com.io7m.jtensors.documentation</artifactId>
@@ -17,7 +18,7 @@
 
   <name>com.io7m.jtensors.documentation</name>
   <description>Vector/matrix math package (Documentation)</description>
-  <url>https://www.github.com/io7m/jtensors/</url>
+  <url>https://www.io7m.com/software/jtensors</url>
 
   <properties>
     <mdep.analyze.skip>true</mdep.analyze.skip>
@@ -144,50 +145,34 @@
         </executions>
       </plugin>
 
-      <!-- Produce documentation -->
+      <!-- Generate documentation in various formats. -->
       <plugin>
-        <groupId>com.io7m.kstructural</groupId>
-        <artifactId>io7m-kstructural-maven-plugin</artifactId>
+        <groupId>com.io7m.xstructural</groupId>
+        <artifactId>com.io7m.xstructural.maven_plugin</artifactId>
+        <version>${com.io7m.xstructural.version}</version>
         <executions>
           <execution>
-            <id>exec-multi</id>
+            <id>xhtml-single</id>
+            <phase>package</phase>
             <goals>
-              <goal>compileXHTML</goal>
+              <goal>xhtml-single</goal>
             </goals>
-            <phase>process-resources</phase>
             <configuration>
-              <documentFile>${project.build.directory}/documentation/documentation.sd</documentFile>
-              <outputDirectory>${project.build.directory}/documentation/</outputDirectory>
-              <pagination>XHTML_MULTI_PAGE</pagination>
-              <cssExtraStyles>
-                <param>documentation.css</param>
-              </cssExtraStyles>
+              <brandingFile>${project.build.directory}/documentation/brand.xml</brandingFile>
+              <sourceFile>${project.build.directory}/documentation/main.xml</sourceFile>
+              <outputDirectory>${project.build.directory}/documentation</outputDirectory>
             </configuration>
           </execution>
           <execution>
-            <id>exec-single</id>
+            <id>xhtml-multi</id>
+            <phase>package</phase>
             <goals>
-              <goal>compileXHTML</goal>
+              <goal>xhtml-multi</goal>
             </goals>
-            <phase>process-resources</phase>
             <configuration>
-              <documentFile>${project.build.directory}/documentation/documentation.sd</documentFile>
-              <outputDirectory>${project.build.directory}/documentation/</outputDirectory>
-              <pagination>XHTML_SINGLE_PAGE</pagination>
-              <cssExtraStyles>
-                <param>documentation.css</param>
-              </cssExtraStyles>
-            </configuration>
-          </execution>
-          <execution>
-            <id>exec-plain</id>
-            <goals>
-              <goal>compilePlain</goal>
-            </goals>
-            <phase>process-resources</phase>
-            <configuration>
-              <documentFile>${project.build.directory}/documentation/documentation.sd</documentFile>
-              <outputDirectory>${project.build.directory}/documentation/</outputDirectory>
+              <brandingFile>${project.build.directory}/documentation/brand.xml</brandingFile>
+              <sourceFile>${project.build.directory}/documentation/main.xml</sourceFile>
+              <outputDirectory>${project.build.directory}/documentation</outputDirectory>
             </configuration>
           </execution>
         </executions>
