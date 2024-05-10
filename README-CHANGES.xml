@@ -208,7 +208,7 @@
         <c:change compatible="false" date="2017-11-16T00:00:00+00:00" summary="Removed dependency on com.io7m.jnull."/>
       </c:changes>
     </c:release>
-    <c:release date="2021-01-16T18:07:15+00:00" is-open="true" ticket-system="com.github.io7m.jtensors" version="10.0.0">
+    <c:release date="2024-05-10T00:00:00+00:00" is-open="false" ticket-system="com.github.io7m.jtensors" version="10.0.0">
       <c:changes>
         <c:change date="2021-01-16T00:00:00+00:00" summary="Migrate to JUnit 5">
           <c:tickets>
@@ -220,7 +220,12 @@
             <c:ticket id="24"/>
           </c:tickets>
         </c:change>
-        <c:change compatible="false" date="2021-01-16T18:07:15+00:00" summary="Require JDK 11 and Java 11 at run-time"/>
+        <c:change compatible="false" date="2021-01-16T00:00:00+00:00" summary="Require JDK 11 and Java 11 at run-time"/>
+      </c:changes>
+    </c:release>
+    <c:release date="2024-05-10T13:09:24+00:00" is-open="true" ticket-system="com.github.io7m.jtensors" version="10.1.0">
+      <c:changes>
+        <c:change date="2024-05-10T13:09:24+00:00" summary="Move to new organization."/>
       </c:changes>
     </c:release>
   </c:releases>

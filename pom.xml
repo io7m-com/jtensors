@@ -14,7 +14,7 @@
 
   <groupId>com.io7m.jtensors</groupId>
   <artifactId>com.io7m.jtensors</artifactId>
-  <version>11.0.0-SNAPSHOT</version>
+  <version>10.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>com.io7m.jtensors</name>
@@ -36,7 +36,7 @@
   <properties>
     <!-- Configuration. -->
     <io7m.api.previousVersion>10.0.0</io7m.api.previousVersion>
-    <io7m.java.targetJavaVersion>21</io7m.java.targetJavaVersion>
+    <io7m.java.targetJavaVersion>11</io7m.java.targetJavaVersion>
 
     <!-- io7m dependencies. -->
     <com.io7m.xstructural.version>1.8.1</com.io7m.xstructural.version>
