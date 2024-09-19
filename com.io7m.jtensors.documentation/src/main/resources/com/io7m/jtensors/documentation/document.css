@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Mark Raynsford <code@io7m.com> https://www.io7m.com
+ * Copyright © 2024 Mark Raynsford <code@io7m.com> https://www.io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,47 +16,68 @@
 
 .brandingContainer
 {
-  margin: 1em;
+  margin-top:    1em;
+  margin-bottom: 2em;
+  font-size:     80%;
 }
 
 .branding
 {
   font-family: monospace;
-  font-size:   80%;
 }
 
 .command,
 .constant,
 .element,
+.element,
 .expression,
 .file,
+.function,
+.language,
 .package,
 .parameter,
-.term
+.parameterType,
+.parameterValue,
+.statement,
+.type,
+.variable
 {
   font-family: monospace;
 }
 
-.genericTable
+.term,
+.emphasis
+{
+  font-style: italic;
+}
+
+.genericTable,
+.valueTable,
+.parameterTable
 {
   border:          1px solid #dddddd;
-  width:           100%;
   border-collapse: collapse;
 }
-.genericTable th
+.genericTable th,
+.valueTable th,
+.parameterTable th
 {
   border:     1px solid #dddddd;
   text-align: left;
   font-size:  var(--stFontSize);
   padding:    0.5em;
 }
-.genericTable td
+.genericTable td,
+.valueTable td,
+.parameterTable td
 {
   border:    1px solid #dddddd;
   font-size: var(--stFontSize);
   padding:   0.5em;
 }
-.genericTable td:nth-child(1)
+.genericTable td:nth-child(1),
+.valueTable td:nth-child(1),
+.parameterTable td:nth-child(1)
 {
   width: 12em;
 }
