@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Mark Raynsford <code@io7m.com> https://www.io7m.com
+ * Copyright © 2024 Mark Raynsford <code@io7m.com> https://www.io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -15,22 +15,28 @@
  */
 
 /**
- * Vector/matrix math package (Orthonormalization)
+ * Test suite.
  */
 
-module com.io7m.jtensors.orthonormalization
+open module com.io7m.jtensors.tests
 {
-  requires static com.io7m.immutables.style;
-  requires static org.immutables.value;
-  requires static org.osgi.annotation.bundle;
-  requires static org.osgi.annotation.versioning;
-
+  requires com.io7m.jequality.core;
+  requires com.io7m.jtensors.core;
+  requires com.io7m.jtensors.generators;
+  requires com.io7m.jtensors.orthonormalization;
+  requires com.io7m.jtensors.storage.api;
+  requires com.io7m.jtensors.storage.bytebuffered;
+  requires com.io7m.jtensors.storage.heap;
   requires com.io7m.junreachable.core;
+  requires com.io7m.percentpass.extension;
+  requires org.slf4j;
+  requires quickcheck;
 
-  requires transitive com.io7m.jtensors.core;
+  requires org.junit.jupiter.api;
+  requires org.junit.jupiter.engine;
+  requires org.junit.platform.commons;
+  requires org.junit.platform.engine;
+  requires org.junit.platform.launcher;
 
-  exports com.io7m.jtensors.orthonormalization;
-
-  opens com.io7m.jtensors.orthonormalization
-    to com.io7m.jtensors.tests;
+  exports com.io7m.jtensors.tests;
 }

@@ -35,4 +35,21 @@ module com.io7m.jtensors.core
   exports com.io7m.jtensors.core.unparameterized.matrices;
   exports com.io7m.jtensors.core.unparameterized.vectors;
   exports com.io7m.jtensors.core;
+
+  opens com.io7m.jtensors.core.determinants
+    to com.io7m.jtensors.tests;
+  opens com.io7m.jtensors.core.dotproducts
+    to com.io7m.jtensors.tests;
+  opens com.io7m.jtensors.core.parameterized.matrices
+    to com.io7m.jtensors.tests;
+  opens com.io7m.jtensors.core.parameterized.vectors
+    to com.io7m.jtensors.tests;
+  opens com.io7m.jtensors.core.quaternions
+    to com.io7m.jtensors.tests;
+  opens com.io7m.jtensors.core.unparameterized.matrices
+    to com.io7m.jtensors.tests;
+  opens com.io7m.jtensors.core.unparameterized.vectors
+    to com.io7m.jtensors.tests;
+  opens com.io7m.jtensors.core
+    to com.io7m.jtensors.tests;
 }
