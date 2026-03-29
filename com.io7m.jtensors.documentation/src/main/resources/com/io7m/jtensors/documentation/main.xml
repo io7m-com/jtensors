@@ -17,6 +17,7 @@
     <MetaProperty name="com.io7m.xstructural.epub.cover">documentation.jpg</MetaProperty>
     <MetaProperty name="com.io7m.xstructural.web.branding.header">brand.xml</MetaProperty>
     <MetaProperty name="com.io7m.xstructural.web.branding.footer">brand.xml</MetaProperty>
+    <MetaProperty name="com.io7m.xstructural.web.cover">bookBanner.jpg</MetaProperty>
   </Metadata>
 
   <xi:include href="pkg.xml"/>
