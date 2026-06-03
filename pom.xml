@@ -39,7 +39,7 @@
     <io7m.java.targetJavaVersion>17</io7m.java.targetJavaVersion>
 
     <!-- io7m dependencies. -->
-    <com.io7m.xstructural.version>2.0.1</com.io7m.xstructural.version>
+    <com.io7m.xstructural.version>2.1.0</com.io7m.xstructural.version>
 
     <!-- Third-party dependencies. -->
     <io7m.org.immutables.version>2.12.1</io7m.org.immutables.version>
